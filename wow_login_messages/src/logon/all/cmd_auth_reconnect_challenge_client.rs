@@ -6,9 +6,10 @@ use crate::logon::all::Version;
 use crate::ClientMessage;
 use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_RECONNECT_CHALLENGE_Client {
@@ -28,6 +29,49 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
 impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
     pub const GAME_NAME_VALUE: u32 = 0x576f57;
 
+}
+
+impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes())?;
+
+        // protocol_version: u8
+        w.write_all(&self.protocol_version.to_le_bytes())?;
+
+        // size: u16
+        w.write_all(&((self.size() - 3) as u16).to_le_bytes())?;
+
+        // game_name: u32
+        w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes())?;
+
+        // version: Version
+        w.write_all(&self.version.as_bytes()?)?;
+
+        // platform: Platform
+        w.write_all(&(self.platform.as_int() as u32).to_le_bytes())?;
+
+        // os: Os
+        w.write_all(&(self.os.as_int() as u32).to_le_bytes())?;
+
+        // locale: Locale
+        w.write_all(&(self.locale.as_int() as u32).to_le_bytes())?;
+
+        // utc_timezone_offset: u32
+        w.write_all(&self.utc_timezone_offset.to_le_bytes())?;
+
+        // client_ip_address: u32_be
+        w.write_all(&self.client_ip_address.to_be_bytes())?;
+
+        // account_name_length: u8
+        w.write_all(&(self.account_name.len() as u8).to_le_bytes())?;
+
+        // account_name: String[account_name_length]
+        w.write_all(self.account_name.as_bytes())?;
+
+        Ok(w)
+    }
 }
 
 impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
@@ -85,43 +129,8 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes())?;
-
-        // protocol_version: u8
-        w.write_all(&self.protocol_version.to_le_bytes())?;
-
-        // size: u16
-        w.write_all(&((self.size() - 3) as u16).to_le_bytes())?;
-
-        // game_name: u32
-        w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes())?;
-
-        // version: Version
-        w.write_all(&self.version.as_bytes()?)?;
-
-        // platform: Platform
-        w.write_all(&(self.platform.as_int() as u32).to_le_bytes())?;
-
-        // os: Os
-        w.write_all(&(self.os.as_int() as u32).to_le_bytes())?;
-
-        // locale: Locale
-        w.write_all(&(self.locale.as_int() as u32).to_le_bytes())?;
-
-        // utc_timezone_offset: u32
-        w.write_all(&self.utc_timezone_offset.to_le_bytes())?;
-
-        // client_ip_address: u32_be
-        w.write_all(&self.client_ip_address.to_be_bytes())?;
-
-        // account_name_length: u8
-        w.write_all(&(self.account_name.len() as u8).to_le_bytes())?;
-
-        // account_name: String[account_name_length]
-        w.write_all(self.account_name.as_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -199,43 +208,8 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // protocol_version: u8
-            w.write_all(&self.protocol_version.to_le_bytes()).await?;
-
-            // size: u16
-            w.write_all(&((self.size() - 3) as u16).to_le_bytes()).await?;
-
-            // game_name: u32
-            w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
-
-            // version: Version
-            w.write_all(&self.version.as_bytes()?).await?;
-
-            // platform: Platform
-            w.write_all(&(self.platform.as_int() as u32).to_le_bytes()).await?;
-
-            // os: Os
-            w.write_all(&(self.os.as_int() as u32).to_le_bytes()).await?;
-
-            // locale: Locale
-            w.write_all(&(self.locale.as_int() as u32).to_le_bytes()).await?;
-
-            // utc_timezone_offset: u32
-            w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
-
-            // client_ip_address: u32_be
-            w.write_all(&self.client_ip_address.to_be_bytes()).await?;
-
-            // account_name_length: u8
-            w.write_all(&(self.account_name.len() as u8).to_le_bytes()).await?;
-
-            // account_name: String[account_name_length]
-            w.write_all(self.account_name.as_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -314,43 +288,8 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // protocol_version: u8
-            w.write_all(&self.protocol_version.to_le_bytes()).await?;
-
-            // size: u16
-            w.write_all(&((self.size() - 3) as u16).to_le_bytes()).await?;
-
-            // game_name: u32
-            w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
-
-            // version: Version
-            w.write_all(&self.version.as_bytes()?).await?;
-
-            // platform: Platform
-            w.write_all(&(self.platform.as_int() as u32).to_le_bytes()).await?;
-
-            // os: Os
-            w.write_all(&(self.os.as_int() as u32).to_le_bytes()).await?;
-
-            // locale: Locale
-            w.write_all(&(self.locale.as_int() as u32).to_le_bytes()).await?;
-
-            // utc_timezone_offset: u32
-            w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
-
-            // client_ip_address: u32_be
-            w.write_all(&self.client_ip_address.to_be_bytes()).await?;
-
-            // account_name_length: u8
-            w.write_all(&(self.account_name.len() as u8).to_le_bytes()).await?;
-
-            // account_name: String[account_name_length]
-            w.write_all(self.account_name.as_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

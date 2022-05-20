@@ -280,8 +280,9 @@ pub fn common_impls_world(
 }
 
 pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
-    s.impl_readable_and_writable(
+    s.impl_read_write_non_trait(
         format!("{t}OpcodeMessage", t = ty),
+        format!("{t}OpcodeMessageError", t = ty),
         |s, it| {
             s.wln(format!("let opcode = {t}Opcode::{prefix}read(r){postfix}?;", t = ty, prefix = it.prefix(), postfix = it.postfix()));
 
@@ -298,18 +299,15 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                 }
             });
         },
-        |s, it| {
+        |s, _it| {
             s.bodyn("match self", |s| {
                 for e in v {
                     s.wln(format!(
-                        "Self::{enum_name}(e) => e.{prefix}write(w){postfix}?,",
+                        "Self::{enum_name}(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,",
                         enum_name = get_enumerator_name(e.name()),
-                        prefix = it.prefix(), postfix = it.postfix(),
                     ));
                 }
             });
-
-            s.wln("Ok(())");
         },
     );
 }
@@ -549,8 +547,9 @@ pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
         });
     });
 
-    s.impl_readable_and_writable(
+    s.impl_read_write_non_trait(
         &format!("{t}Opcode", t = ty),
+        &format!("{t}OpcodeError", t = ty),
         |s, it| {
             s.wln(format!(
                 "let opcode = crate::util::{prefix}read_u8_le(r){postfix}?;\n",
@@ -577,13 +576,8 @@ pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
                 ));
             });
         },
-        |s, it| {
-            s.wln(format!(
-                "crate::util::{prefix}write_u8_le(w, self.as_u8()){postfix}?;",
-                prefix = it.prefix(),
-                postfix = it.postfix()
-            ));
-            s.wln("Ok(())");
+        |s, _it| {
+            s.wln("std::io::Write::write_all(&mut w, &self.as_u8().to_le_bytes())?;");
         },
     );
 

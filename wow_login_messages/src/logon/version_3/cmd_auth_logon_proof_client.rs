@@ -4,9 +4,10 @@ use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
 use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client {
@@ -20,6 +21,61 @@ pub struct CMD_AUTH_LOGON_PROOF_Client {
 impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     const OPCODE: u8 = 0x01;
 }
+impl CMD_AUTH_LOGON_PROOF_Client {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes())?;
+
+        // client_public_key: u8[32]
+        for i in self.client_public_key.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        // client_proof: u8[20]
+        for i in self.client_proof.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        // crc_hash: u8[20]
+        for i in self.crc_hash.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        // number_of_telemetry_keys: u8
+        w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes())?;
+
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        for i in self.telemetry_keys.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // security_flag: SecurityFlag
+        w.write_all(&(self.security_flag.as_int() as u8).to_le_bytes())?;
+
+        match &self.security_flag {
+            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
+            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
+                pin_hash,
+                pin_salt,
+            } => {
+                // pin_salt: u8[16]
+                for i in pin_salt.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+                // pin_hash: u8[20]
+                for i in pin_hash.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+            }
+        }
+
+        Ok(w)
+    }
+}
+
 impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
     type Error = CMD_AUTH_LOGON_PROOF_ClientError;
 
@@ -78,55 +134,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes())?;
-
-        // client_public_key: u8[32]
-        for i in self.client_public_key.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // client_proof: u8[20]
-        for i in self.client_proof.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // crc_hash: u8[20]
-        for i in self.crc_hash.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // number_of_telemetry_keys: u8
-        w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes())?;
-
-        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-        for i in self.telemetry_keys.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // security_flag: SecurityFlag
-        w.write_all(&(self.security_flag.as_int() as u8).to_le_bytes())?;
-
-        match &self.security_flag {
-            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
-            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                pin_hash,
-                pin_salt,
-            } => {
-                // pin_salt: u8[16]
-                for i in pin_salt.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-                // pin_hash: u8[20]
-                for i in pin_hash.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-            }
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -207,55 +216,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // client_public_key: u8[32]
-            for i in self.client_public_key.iter() {
-                w.write_all(&i.to_le_bytes()).await?;
-            }
-
-            // client_proof: u8[20]
-            for i in self.client_proof.iter() {
-                w.write_all(&i.to_le_bytes()).await?;
-            }
-
-            // crc_hash: u8[20]
-            for i in self.crc_hash.iter() {
-                w.write_all(&i.to_le_bytes()).await?;
-            }
-
-            // number_of_telemetry_keys: u8
-            w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
-
-            // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-            for i in self.telemetry_keys.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // security_flag: SecurityFlag
-            w.write_all(&(self.security_flag.as_int() as u8).to_le_bytes()).await?;
-
-            match &self.security_flag {
-                CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
-                CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                    pin_hash,
-                    pin_salt,
-                } => {
-                    // pin_salt: u8[16]
-                    for i in pin_salt.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // pin_hash: u8[20]
-                    for i in pin_hash.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                }
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -337,55 +299,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // client_public_key: u8[32]
-            for i in self.client_public_key.iter() {
-                w.write_all(&i.to_le_bytes()).await?;
-            }
-
-            // client_proof: u8[20]
-            for i in self.client_proof.iter() {
-                w.write_all(&i.to_le_bytes()).await?;
-            }
-
-            // crc_hash: u8[20]
-            for i in self.crc_hash.iter() {
-                w.write_all(&i.to_le_bytes()).await?;
-            }
-
-            // number_of_telemetry_keys: u8
-            w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
-
-            // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-            for i in self.telemetry_keys.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // security_flag: SecurityFlag
-            w.write_all(&(self.security_flag.as_int() as u8).to_le_bytes()).await?;
-
-            match &self.security_flag {
-                CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
-                CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                    pin_hash,
-                    pin_salt,
-                } => {
-                    // pin_salt: u8[16]
-                    for i in pin_salt.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // pin_hash: u8[20]
-                    for i in pin_hash.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                }
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

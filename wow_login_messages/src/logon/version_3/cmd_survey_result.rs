@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
 use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_SURVEY_RESULT {
@@ -16,6 +17,30 @@ pub struct CMD_SURVEY_RESULT {
 impl ClientMessage for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 0x04;
 }
+impl CMD_SURVEY_RESULT {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes())?;
+
+        // survey_id: u32
+        w.write_all(&self.survey_id.to_le_bytes())?;
+
+        // error: u8
+        w.write_all(&self.error.to_le_bytes())?;
+
+        // compressed_data_length: u16
+        w.write_all(&(self.data.len() as u16).to_le_bytes())?;
+
+        // data: u8[compressed_data_length]
+        for i in self.data.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        Ok(w)
+    }
+}
+
 impl ReadableAndWritable for CMD_SURVEY_RESULT {
     type Error = std::io::Error;
 
@@ -45,24 +70,8 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes())?;
-
-        // survey_id: u32
-        w.write_all(&self.survey_id.to_le_bytes())?;
-
-        // error: u8
-        w.write_all(&self.error.to_le_bytes())?;
-
-        // compressed_data_length: u16
-        w.write_all(&(self.data.len() as u16).to_le_bytes())?;
-
-        // data: u8[compressed_data_length]
-        for i in self.data.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -114,24 +123,8 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // survey_id: u32
-            w.write_all(&self.survey_id.to_le_bytes()).await?;
-
-            // error: u8
-            w.write_all(&self.error.to_le_bytes()).await?;
-
-            // compressed_data_length: u16
-            w.write_all(&(self.data.len() as u16).to_le_bytes()).await?;
-
-            // data: u8[compressed_data_length]
-            for i in self.data.iter() {
-                w.write_all(&i.to_le_bytes()).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -184,24 +177,8 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // survey_id: u32
-            w.write_all(&self.survey_id.to_le_bytes()).await?;
-
-            // error: u8
-            w.write_all(&self.error.to_le_bytes()).await?;
-
-            // compressed_data_length: u16
-            w.write_all(&(self.data.len() as u16).to_le_bytes()).await?;
-
-            // data: u8[compressed_data_length]
-            for i in self.data.iter() {
-                w.write_all(&i.to_le_bytes()).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

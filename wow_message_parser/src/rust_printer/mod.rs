@@ -463,6 +463,8 @@ impl Writer {
         read_function: F,
         write_function: F2,
     ) {
+        self.write_as_bytes(&type_name, write_function);
+
         self.open_curly(format!(
             "impl ReadableAndWritable for {}",
             type_name.as_ref()
@@ -484,7 +486,7 @@ impl Writer {
 
             self.print_write_decl(it, "");
 
-            write_function(self, it);
+            self.call_as_bytes(it);
 
             if it.is_async() {
                 self.closing_curly_with(")"); // Box::pin
@@ -494,24 +496,6 @@ impl Writer {
         }
 
         self.closing_curly_newline(); // impl
-    }
-
-    pub fn impl_readable_and_writable<
-        S: AsRef<str>,
-        F: Fn(&mut Self, ImplType),
-        F2: Fn(&mut Self, ImplType),
-    >(
-        &mut self,
-        type_name: S,
-        read_function: F,
-        write_function: F2,
-    ) {
-        self.impl_read_and_writable_with_error(
-            type_name.as_ref(),
-            format!("{t}Error", t = type_name.as_ref()),
-            read_function,
-            write_function,
-        );
     }
 
     pub fn funcn_const<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(

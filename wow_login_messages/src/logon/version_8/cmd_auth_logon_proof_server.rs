@@ -4,9 +4,10 @@ use crate::logon::version_8::{LoginResult, LoginResultError};
 use crate::ServerMessage;
 use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Server {
@@ -21,61 +22,9 @@ impl CMD_AUTH_LOGON_PROOF_Server {
 
 }
 
-impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
-    type Error = CMD_AUTH_LOGON_PROOF_ServerError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // login_result: LoginResult
-        let login_result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
-
-        let login_result_if = match login_result {
-            LoginResult::SUCCESS => {
-                // server_proof: u8[20]
-                let mut server_proof = [0_u8; 20];
-                r.read_exact(&mut server_proof)?;
-
-                // account_flag: AccountFlag
-                let account_flag = AccountFlag::new(crate::util::read_u32_le(r)?);
-
-                // hardware_survey_id: u32
-                let hardware_survey_id = crate::util::read_u32_le(r)?;
-
-                // unknown_flags: u16
-                let unknown_flags = crate::util::read_u16_le(r)?;
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                    account_flag,
-                    hardware_survey_id,
-                    server_proof,
-                    unknown_flags,
-                }
-            }
-            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
-            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1,
-            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED,
-            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
-            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
-            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE,
-            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
-            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
-            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID,
-            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
-            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER,
-            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED,
-            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS,
-            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY,
-            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL,
-            LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED,
-        };
-
-        Ok(Self {
-            login_result: login_result_if,
-        })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+impl CMD_AUTH_LOGON_PROOF_Server {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -202,7 +151,67 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
             }
         }
 
-        Ok(())
+        Ok(w)
+    }
+}
+
+impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
+    type Error = CMD_AUTH_LOGON_PROOF_ServerError;
+
+    #[cfg(feature = "sync")]
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // login_result: LoginResult
+        let login_result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
+
+        let login_result_if = match login_result {
+            LoginResult::SUCCESS => {
+                // server_proof: u8[20]
+                let mut server_proof = [0_u8; 20];
+                r.read_exact(&mut server_proof)?;
+
+                // account_flag: AccountFlag
+                let account_flag = AccountFlag::new(crate::util::read_u32_le(r)?);
+
+                // hardware_survey_id: u32
+                let hardware_survey_id = crate::util::read_u32_le(r)?;
+
+                // unknown_flags: u16
+                let unknown_flags = crate::util::read_u16_le(r)?;
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+                    account_flag,
+                    hardware_survey_id,
+                    server_proof,
+                    unknown_flags,
+                }
+            }
+            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
+            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1,
+            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED,
+            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
+            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE,
+            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
+            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
+            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID,
+            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
+            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER,
+            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED,
+            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS,
+            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY,
+            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL,
+            LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED,
+        };
+
+        Ok(Self {
+            login_result: login_result_if,
+        })
+    }
+
+    #[cfg(feature = "sync")]
+    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -280,133 +289,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // login_result: LoginResult
-            w.write_all(&(self.login_result.as_int() as u8).to_le_bytes()).await?;
-
-            match &self.login_result {
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                    account_flag,
-                    hardware_survey_id,
-                    server_proof,
-                    unknown_flags,
-                } => {
-                    // server_proof: u8[20]
-                    for i in server_proof.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // account_flag: AccountFlag
-                    w.write_all(&(account_flag.as_int() as u32).to_le_bytes()).await?;
-
-                    // hardware_survey_id: u32
-                    w.write_all(&hardware_survey_id.to_le_bytes()).await?;
-
-                    // unknown_flags: u16
-                    w.write_all(&unknown_flags.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -485,133 +369,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // login_result: LoginResult
-            w.write_all(&(self.login_result.as_int() as u8).to_le_bytes()).await?;
-
-            match &self.login_result {
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                    account_flag,
-                    hardware_survey_id,
-                    server_proof,
-                    unknown_flags,
-                } => {
-                    // server_proof: u8[20]
-                    for i in server_proof.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // account_flag: AccountFlag
-                    w.write_all(&(account_flag.as_int() as u32).to_le_bytes()).await?;
-
-                    // hardware_survey_id: u32
-                    w.write_all(&hardware_survey_id.to_le_bytes()).await?;
-
-                    // unknown_flags: u16
-                    w.write_all(&unknown_flags.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
-                } => {
-                    // padding: u16
-                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-                }
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

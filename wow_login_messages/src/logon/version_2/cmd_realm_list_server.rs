@@ -3,9 +3,10 @@ use crate::logon::version_2::{Realm, RealmError};
 use crate::ServerMessage;
 use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_REALM_LIST_Server {
@@ -20,6 +21,33 @@ impl CMD_REALM_LIST_Server {
 
     pub const FOOTER_PADDING_VALUE: u16 = 0x00;
 
+}
+
+impl CMD_REALM_LIST_Server {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes())?;
+
+        // size: u16
+        w.write_all(&((self.size() - 2) as u16).to_le_bytes())?;
+
+        // header_padding: u32
+        w.write_all(&Self::HEADER_PADDING_VALUE.to_le_bytes())?;
+
+        // number_of_realms: u8
+        w.write_all(&(self.realms.len() as u8).to_le_bytes())?;
+
+        // realms: Realm[number_of_realms]
+        for i in self.realms.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // footer_padding: u16
+        w.write_all(&Self::FOOTER_PADDING_VALUE.to_le_bytes())?;
+
+        Ok(w)
+    }
 }
 
 impl ReadableAndWritable for CMD_REALM_LIST_Server {
@@ -55,27 +83,8 @@ impl ReadableAndWritable for CMD_REALM_LIST_Server {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes())?;
-
-        // size: u16
-        w.write_all(&((self.size() - 2) as u16).to_le_bytes())?;
-
-        // header_padding: u32
-        w.write_all(&Self::HEADER_PADDING_VALUE.to_le_bytes())?;
-
-        // number_of_realms: u8
-        w.write_all(&(self.realms.len() as u8).to_le_bytes())?;
-
-        // realms: Realm[number_of_realms]
-        for i in self.realms.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // footer_padding: u16
-        w.write_all(&Self::FOOTER_PADDING_VALUE.to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -131,27 +140,8 @@ impl ReadableAndWritable for CMD_REALM_LIST_Server {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // size: u16
-            w.write_all(&((self.size() - 2) as u16).to_le_bytes()).await?;
-
-            // header_padding: u32
-            w.write_all(&Self::HEADER_PADDING_VALUE.to_le_bytes()).await?;
-
-            // number_of_realms: u8
-            w.write_all(&(self.realms.len() as u8).to_le_bytes()).await?;
-
-            // realms: Realm[number_of_realms]
-            for i in self.realms.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // footer_padding: u16
-            w.write_all(&Self::FOOTER_PADDING_VALUE.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -208,27 +198,8 @@ impl ReadableAndWritable for CMD_REALM_LIST_Server {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // size: u16
-            w.write_all(&((self.size() - 2) as u16).to_le_bytes()).await?;
-
-            // header_padding: u32
-            w.write_all(&Self::HEADER_PADDING_VALUE.to_le_bytes()).await?;
-
-            // number_of_realms: u8
-            w.write_all(&(self.realms.len() as u8).to_le_bytes()).await?;
-
-            // realms: Realm[number_of_realms]
-            for i in self.realms.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // footer_padding: u16
-            w.write_all(&Self::FOOTER_PADDING_VALUE.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

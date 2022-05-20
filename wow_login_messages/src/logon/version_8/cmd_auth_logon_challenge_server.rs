@@ -4,9 +4,10 @@ use crate::logon::version_8::{SecurityFlag};
 use crate::ServerMessage;
 use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -19,6 +20,119 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
     pub const PROTOCOL_VERSION_VALUE: u8 = 0x00;
 
+}
+
+impl CMD_AUTH_LOGON_CHALLENGE_Server {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes())?;
+
+        // protocol_version: u8
+        w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes())?;
+
+        // login_result: LoginResult
+        w.write_all(&(self.login_result.as_int() as u8).to_le_bytes())?;
+
+        match &self.login_result {
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+                crc_salt,
+                generator,
+                large_safe_prime,
+                salt,
+                security_flag,
+                server_public_key,
+            } => {
+                // server_public_key: u8[32]
+                for i in server_public_key.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+                // generator_length: u8
+                w.write_all(&(generator.len() as u8).to_le_bytes())?;
+
+                // generator: u8[generator_length]
+                for i in generator.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+                // large_safe_prime_length: u8
+                w.write_all(&(large_safe_prime.len() as u8).to_le_bytes())?;
+
+                // large_safe_prime: u8[large_safe_prime_length]
+                for i in large_safe_prime.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+                // salt: u8[32]
+                for i in salt.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+                // crc_salt: u8[16]
+                for i in crc_salt.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+                // security_flag: SecurityFlag
+                w.write_all(&(security_flag.as_int() as u8).to_le_bytes())?;
+
+                if let Some(if_statement) = &security_flag.pin {
+                    // pin_grid_seed: u32
+                    w.write_all(&if_statement.pin_grid_seed.to_le_bytes())?;
+
+                    // pin_salt: u8[16]
+                    for i in if_statement.pin_salt.iter() {
+                        w.write_all(&i.to_le_bytes())?;
+                    }
+
+                }
+
+                if let Some(if_statement) = &security_flag.unknown0 {
+                    // unknown0: u8
+                    w.write_all(&if_statement.unknown0.to_le_bytes())?;
+
+                    // unknown1: u8
+                    w.write_all(&if_statement.unknown1.to_le_bytes())?;
+
+                    // unknown2: u8
+                    w.write_all(&if_statement.unknown2.to_le_bytes())?;
+
+                    // unknown3: u8
+                    w.write_all(&if_statement.unknown3.to_le_bytes())?;
+
+                    // unknown4: u64
+                    w.write_all(&if_statement.unknown4.to_le_bytes())?;
+
+                }
+
+                if let Some(if_statement) = &security_flag.authenticator {
+                    // unknown5: u8
+                    w.write_all(&if_statement.unknown5.to_le_bytes())?;
+
+                }
+
+            }
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED => {}
+        }
+
+        Ok(w)
+    }
 }
 
 impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -166,113 +280,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes())?;
-
-        // protocol_version: u8
-        w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes())?;
-
-        // login_result: LoginResult
-        w.write_all(&(self.login_result.as_int() as u8).to_le_bytes())?;
-
-        match &self.login_result {
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                crc_salt,
-                generator,
-                large_safe_prime,
-                salt,
-                security_flag,
-                server_public_key,
-            } => {
-                // server_public_key: u8[32]
-                for i in server_public_key.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-                // generator_length: u8
-                w.write_all(&(generator.len() as u8).to_le_bytes())?;
-
-                // generator: u8[generator_length]
-                for i in generator.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-                // large_safe_prime_length: u8
-                w.write_all(&(large_safe_prime.len() as u8).to_le_bytes())?;
-
-                // large_safe_prime: u8[large_safe_prime_length]
-                for i in large_safe_prime.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-                // salt: u8[32]
-                for i in salt.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-                // crc_salt: u8[16]
-                for i in crc_salt.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-                // security_flag: SecurityFlag
-                w.write_all(&(security_flag.as_int() as u8).to_le_bytes())?;
-
-                if let Some(if_statement) = &security_flag.pin {
-                    // pin_grid_seed: u32
-                    w.write_all(&if_statement.pin_grid_seed.to_le_bytes())?;
-
-                    // pin_salt: u8[16]
-                    for i in if_statement.pin_salt.iter() {
-                        w.write_all(&i.to_le_bytes())?;
-                    }
-
-                }
-
-                if let Some(if_statement) = &security_flag.unknown0 {
-                    // unknown0: u8
-                    w.write_all(&if_statement.unknown0.to_le_bytes())?;
-
-                    // unknown1: u8
-                    w.write_all(&if_statement.unknown1.to_le_bytes())?;
-
-                    // unknown2: u8
-                    w.write_all(&if_statement.unknown2.to_le_bytes())?;
-
-                    // unknown3: u8
-                    w.write_all(&if_statement.unknown3.to_le_bytes())?;
-
-                    // unknown4: u64
-                    w.write_all(&if_statement.unknown4.to_le_bytes())?;
-
-                }
-
-                if let Some(if_statement) = &security_flag.authenticator {
-                    // unknown5: u8
-                    w.write_all(&if_statement.unknown5.to_le_bytes())?;
-
-                }
-
-            }
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED => {}
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -440,113 +449,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // protocol_version: u8
-            w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes()).await?;
-
-            // login_result: LoginResult
-            w.write_all(&(self.login_result.as_int() as u8).to_le_bytes()).await?;
-
-            match &self.login_result {
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                    crc_salt,
-                    generator,
-                    large_safe_prime,
-                    salt,
-                    security_flag,
-                    server_public_key,
-                } => {
-                    // server_public_key: u8[32]
-                    for i in server_public_key.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // generator_length: u8
-                    w.write_all(&(generator.len() as u8).to_le_bytes()).await?;
-
-                    // generator: u8[generator_length]
-                    for i in generator.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // large_safe_prime_length: u8
-                    w.write_all(&(large_safe_prime.len() as u8).to_le_bytes()).await?;
-
-                    // large_safe_prime: u8[large_safe_prime_length]
-                    for i in large_safe_prime.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // salt: u8[32]
-                    for i in salt.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // crc_salt: u8[16]
-                    for i in crc_salt.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // security_flag: SecurityFlag
-                    w.write_all(&(security_flag.as_int() as u8).to_le_bytes()).await?;
-
-                    if let Some(if_statement) = &security_flag.pin {
-                        // pin_grid_seed: u32
-                        w.write_all(&if_statement.pin_grid_seed.to_le_bytes()).await?;
-
-                        // pin_salt: u8[16]
-                        for i in if_statement.pin_salt.iter() {
-                            w.write_all(&i.to_le_bytes()).await?;
-                        }
-
-                    }
-
-                    if let Some(if_statement) = &security_flag.unknown0 {
-                        // unknown0: u8
-                        w.write_all(&if_statement.unknown0.to_le_bytes()).await?;
-
-                        // unknown1: u8
-                        w.write_all(&if_statement.unknown1.to_le_bytes()).await?;
-
-                        // unknown2: u8
-                        w.write_all(&if_statement.unknown2.to_le_bytes()).await?;
-
-                        // unknown3: u8
-                        w.write_all(&if_statement.unknown3.to_le_bytes()).await?;
-
-                        // unknown4: u64
-                        w.write_all(&if_statement.unknown4.to_le_bytes()).await?;
-
-                    }
-
-                    if let Some(if_statement) = &security_flag.authenticator {
-                        // unknown5: u8
-                        w.write_all(&if_statement.unknown5.to_le_bytes()).await?;
-
-                    }
-
-                }
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED => {}
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -715,113 +619,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // opcode: u8
-            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
-
-            // protocol_version: u8
-            w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes()).await?;
-
-            // login_result: LoginResult
-            w.write_all(&(self.login_result.as_int() as u8).to_le_bytes()).await?;
-
-            match &self.login_result {
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                    crc_salt,
-                    generator,
-                    large_safe_prime,
-                    salt,
-                    security_flag,
-                    server_public_key,
-                } => {
-                    // server_public_key: u8[32]
-                    for i in server_public_key.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // generator_length: u8
-                    w.write_all(&(generator.len() as u8).to_le_bytes()).await?;
-
-                    // generator: u8[generator_length]
-                    for i in generator.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // large_safe_prime_length: u8
-                    w.write_all(&(large_safe_prime.len() as u8).to_le_bytes()).await?;
-
-                    // large_safe_prime: u8[large_safe_prime_length]
-                    for i in large_safe_prime.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // salt: u8[32]
-                    for i in salt.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // crc_salt: u8[16]
-                    for i in crc_salt.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                    // security_flag: SecurityFlag
-                    w.write_all(&(security_flag.as_int() as u8).to_le_bytes()).await?;
-
-                    if let Some(if_statement) = &security_flag.pin {
-                        // pin_grid_seed: u32
-                        w.write_all(&if_statement.pin_grid_seed.to_le_bytes()).await?;
-
-                        // pin_salt: u8[16]
-                        for i in if_statement.pin_salt.iter() {
-                            w.write_all(&i.to_le_bytes()).await?;
-                        }
-
-                    }
-
-                    if let Some(if_statement) = &security_flag.unknown0 {
-                        // unknown0: u8
-                        w.write_all(&if_statement.unknown0.to_le_bytes()).await?;
-
-                        // unknown1: u8
-                        w.write_all(&if_statement.unknown1.to_le_bytes()).await?;
-
-                        // unknown2: u8
-                        w.write_all(&if_statement.unknown2.to_le_bytes()).await?;
-
-                        // unknown3: u8
-                        w.write_all(&if_statement.unknown3.to_le_bytes()).await?;
-
-                        // unknown4: u64
-                        w.write_all(&if_statement.unknown4.to_le_bytes()).await?;
-
-                    }
-
-                    if let Some(if_statement) = &security_flag.authenticator {
-                        // unknown5: u8
-                        w.write_all(&if_statement.unknown5.to_le_bytes()).await?;
-
-                    }
-
-                }
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED => {}
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
