@@ -141,6 +141,7 @@ fn world_common_impls_read_write(
 ) {
     s.newline();
 
+    s.wln(it.cfg());
     s.open_curly(format!(
         "pub {func}fn {prefix}read_unencrypted<R: {read}>(r: &mut R) -> std::result::Result<Self, {error_ty}>",
         prefix = it.prefix(),
@@ -185,6 +186,7 @@ fn world_common_impls_read_write(
 
     s.closing_curly();
 
+    s.wln(it.cfg());
     s.open_curly(
         format!("pub {func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, {error_ty}>",
             func = it.func(),
