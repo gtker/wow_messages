@@ -20,7 +20,7 @@ impl ServerMessageWrite for SMSG_ATTACKERSTATEUPDATE {}
 
 impl SMSG_ATTACKERSTATEUPDATE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(26);
+        let mut w = Vec::with_capacity(self.size());
         // hit_info: u32
         w.write_all(&self.hit_info.to_le_bytes())?;
 

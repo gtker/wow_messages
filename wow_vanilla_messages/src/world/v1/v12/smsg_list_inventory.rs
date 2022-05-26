@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_LIST_INVENTORY {}
 
 impl SMSG_LIST_INVENTORY {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(7177);
+        let mut w = Vec::with_capacity(self.size());
         // vendor: Guid
         w.write_all(&self.vendor.guid().to_le_bytes())?;
 

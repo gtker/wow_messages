@@ -17,7 +17,7 @@ impl ServerMessageWrite for SMSG_MAIL_LIST_RESULT {}
 
 impl SMSG_MAIL_LIST_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(84481);
+        let mut w = Vec::with_capacity(self.size());
         // amount_of_mails: u8
         w.write_all(&(self.mails.len() as u8).to_le_bytes())?;
 

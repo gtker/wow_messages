@@ -16,7 +16,7 @@ impl ClientMessageWrite for CMSG_WHOIS {}
 
 impl CMSG_WHOIS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(256);
+        let mut w = Vec::with_capacity(self.size());
         // character: CString
         w.write_all(self.character.as_bytes())?;
         // Null terminator

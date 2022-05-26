@@ -23,7 +23,7 @@ impl ServerMessageWrite for SMSG_MONSTER_MOVE_TRANSPORT {}
 
 impl SMSG_MONSTER_MOVE_TRANSPORT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(26);
+        let mut w = Vec::with_capacity(self.size());
         // transport: PackedGuid
         w.write_all(&self.transport.packed_guid())?;
 

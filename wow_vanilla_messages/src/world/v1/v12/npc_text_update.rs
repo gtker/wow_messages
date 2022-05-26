@@ -17,7 +17,7 @@ pub struct NpcTextUpdate {
 
 impl NpcTextUpdate {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(544);
+        let mut w = Vec::with_capacity(self.size());
         // probability: f32
         w.write_all(&self.probability.to_le_bytes())?;
 

@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_FORCE_RUN_SPEED_CHANGE {}
 
 impl SMSG_FORCE_RUN_SPEED_CHANGE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(17);
+        let mut w = Vec::with_capacity(self.size());
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 

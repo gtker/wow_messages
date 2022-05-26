@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_CHANNEL_LIST {}
 
 impl SMSG_CHANNEL_LIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(38654705925);
+        let mut w = Vec::with_capacity(self.size());
         // channel_name: CString
         w.write_all(self.channel_name.as_bytes())?;
         // Null terminator

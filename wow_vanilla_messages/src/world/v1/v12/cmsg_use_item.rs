@@ -20,7 +20,7 @@ impl ClientMessageWrite for CMSG_USE_ITEM {}
 
 impl CMSG_USE_ITEM {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(357);
+        let mut w = Vec::with_capacity(self.size());
         // bag_index: u8
         w.write_all(&self.bag_index.to_le_bytes())?;
 

@@ -20,7 +20,7 @@ impl ServerMessageWrite for SMSG_CAST_RESULT {}
 
 impl SMSG_CAST_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(18);
+        let mut w = Vec::with_capacity(self.size());
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 

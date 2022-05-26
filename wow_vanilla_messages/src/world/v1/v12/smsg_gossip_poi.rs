@@ -21,7 +21,7 @@ impl ServerMessageWrite for SMSG_GOSSIP_POI {}
 
 impl SMSG_GOSSIP_POI {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(276);
+        let mut w = Vec::with_capacity(self.size());
         // flags: u32
         w.write_all(&self.flags.to_le_bytes())?;
 

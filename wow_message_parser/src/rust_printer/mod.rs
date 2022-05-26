@@ -331,10 +331,7 @@ impl Writer {
                 ));
                 self.wln("let mut w = array_w.as_mut_slice();");
             } else {
-                self.wln(format!(
-                    "let mut w = Vec::with_capacity({});",
-                    sizes.maximum()
-                ));
+                self.wln(format!("let mut w = Vec::with_capacity(self.size());",));
             }
         } else {
             self.wln("let mut w = Vec::with_capacity(8000);");

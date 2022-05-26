@@ -22,7 +22,7 @@ impl ServerMessageWrite for SMSG_GOSSIP_MESSAGE {}
 
 impl SMSG_GOSSIP_MESSAGE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(1176821039124);
+        let mut w = Vec::with_capacity(self.size());
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

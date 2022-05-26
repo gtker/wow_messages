@@ -22,7 +22,7 @@ impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(68719476744);
+        let mut w = Vec::with_capacity(self.size());
         // amount_of_carriers: u32
         w.write_all(&Self::AMOUNT_OF_CARRIERS_VALUE.to_le_bytes())?;
 

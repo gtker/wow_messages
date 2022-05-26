@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_DISPEL_FAILED {}
 
 impl SMSG_DISPEL_FAILED {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(65551);
+        let mut w = Vec::with_capacity(self.size());
         // caster_guid: Guid
         w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 

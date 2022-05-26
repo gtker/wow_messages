@@ -16,7 +16,7 @@ impl ClientMessageWrite for CMSG_GUILD_LEADER {}
 
 impl CMSG_GUILD_LEADER {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(256);
+        let mut w = Vec::with_capacity(self.size());
         // new_guild_leader_name: CString
         w.write_all(self.new_guild_leader_name.as_bytes())?;
         // Null terminator

@@ -21,7 +21,7 @@ impl ServerMessageWrite for SMSG_TRAINER_LIST {}
 
 impl SMSG_TRAINER_LIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(163208757520);
+        let mut w = Vec::with_capacity(self.size());
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

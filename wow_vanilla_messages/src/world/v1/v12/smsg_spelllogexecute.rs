@@ -20,7 +20,7 @@ impl ServerMessageWrite for SMSG_SPELLLOGEXECUTE {}
 
 impl SMSG_SPELLLOGEXECUTE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(120259084305);
+        let mut w = Vec::with_capacity(self.size());
         // caster: PackedGuid
         w.write_all(&self.caster.packed_guid())?;
 

@@ -25,7 +25,7 @@ pub struct Realm {
 
 impl Realm {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(527);
+        let mut w = Vec::with_capacity(self.size());
         // realm_type: RealmType
         w.write_all(&(self.realm_type.as_int() as u8).to_le_bytes())?;
 

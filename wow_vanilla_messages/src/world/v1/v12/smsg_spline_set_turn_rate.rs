@@ -18,7 +18,7 @@ impl ServerMessageWrite for SMSG_SPLINE_SET_TURN_RATE {}
 
 impl SMSG_SPLINE_SET_TURN_RATE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(13);
+        let mut w = Vec::with_capacity(self.size());
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 

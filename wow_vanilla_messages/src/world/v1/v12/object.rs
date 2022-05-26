@@ -17,7 +17,7 @@ pub struct Object {
 
 impl Object {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(51539609180);
+        let mut w = Vec::with_capacity(self.size());
         // update_type: UpdateType
         w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 

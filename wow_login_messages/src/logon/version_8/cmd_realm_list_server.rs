@@ -25,7 +25,7 @@ impl CMD_REALM_LIST_Server {
 
 impl CMD_REALM_LIST_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(34537483);
+        let mut w = Vec::with_capacity(self.size());
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 

@@ -16,7 +16,7 @@ impl ClientMessageWrite for CMSG_GROUP_INVITE {}
 
 impl CMSG_GROUP_INVITE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(256);
+        let mut w = Vec::with_capacity(self.size());
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator

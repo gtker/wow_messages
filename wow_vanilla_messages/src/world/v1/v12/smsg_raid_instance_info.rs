@@ -17,7 +17,7 @@ impl ServerMessageWrite for SMSG_RAID_INSTANCE_INFO {}
 
 impl SMSG_RAID_INSTANCE_INFO {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(51539607556);
+        let mut w = Vec::with_capacity(self.size());
         // amount_of_raid_infos: u32
         w.write_all(&(self.raid_infos.len() as u32).to_le_bytes())?;
 

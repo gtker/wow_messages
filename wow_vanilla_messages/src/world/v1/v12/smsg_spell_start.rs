@@ -24,7 +24,7 @@ impl ServerMessageWrite for SMSG_SPELL_START {}
 
 impl SMSG_SPELL_START {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(390);
+        let mut w = Vec::with_capacity(self.size());
         // cast_item: PackedGuid
         w.write_all(&self.cast_item.packed_guid())?;
 

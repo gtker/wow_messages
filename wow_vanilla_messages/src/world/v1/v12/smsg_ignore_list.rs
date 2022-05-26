@@ -16,7 +16,7 @@ impl ServerMessageWrite for SMSG_IGNORE_LIST {}
 
 impl SMSG_IGNORE_LIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(2049);
+        let mut w = Vec::with_capacity(self.size());
         // amount_of_ignored: u8
         w.write_all(&(self.ignored.len() as u8).to_le_bytes())?;
 

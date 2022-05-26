@@ -19,7 +19,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
 }
 impl CMD_SURVEY_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(65544);
+        let mut w = Vec::with_capacity(self.size());
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 

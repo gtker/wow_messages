@@ -20,7 +20,7 @@ impl ServerMessageWrite for MSG_LIST_STABLED_PETS_Server {}
 
 impl MSG_LIST_STABLED_PETS_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(69898);
+        let mut w = Vec::with_capacity(self.size());
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 

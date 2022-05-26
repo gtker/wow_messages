@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_SPELL_COOLDOWN {}
 
 impl SMSG_SPELL_COOLDOWN {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(65543);
+        let mut w = Vec::with_capacity(self.size());
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

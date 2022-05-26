@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_DEFENSE_MESSAGE {}
 
 impl SMSG_DEFENSE_MESSAGE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(264);
+        let mut w = Vec::with_capacity(self.size());
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 

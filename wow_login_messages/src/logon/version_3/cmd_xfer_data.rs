@@ -17,7 +17,7 @@ impl ServerMessage for CMD_XFER_DATA {
 }
 impl CMD_XFER_DATA {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(65539);
+        let mut w = Vec::with_capacity(self.size());
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 

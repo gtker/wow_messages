@@ -18,7 +18,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 }
 impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(26);
+        let mut w = Vec::with_capacity(self.size());
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 

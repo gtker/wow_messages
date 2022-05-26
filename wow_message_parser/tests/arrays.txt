@@ -24,7 +24,7 @@ pub struct Arrays {
 
 impl Arrays {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(222247);
+        let mut w = Vec::with_capacity(self.size());
         // index: u8
         w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes())?;
 

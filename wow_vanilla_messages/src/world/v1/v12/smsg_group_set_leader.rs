@@ -16,7 +16,7 @@ impl ServerMessageWrite for SMSG_GROUP_SET_LEADER {}
 
 impl SMSG_GROUP_SET_LEADER {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(256);
+        let mut w = Vec::with_capacity(self.size());
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator

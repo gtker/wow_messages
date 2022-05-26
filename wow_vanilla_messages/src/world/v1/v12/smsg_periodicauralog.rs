@@ -21,7 +21,7 @@ impl ServerMessageWrite for SMSG_PERIODICAURALOG {}
 
 impl SMSG_PERIODICAURALOG {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(73014444058);
+        let mut w = Vec::with_capacity(self.size());
         // target: PackedGuid
         w.write_all(&self.target.packed_guid())?;
 

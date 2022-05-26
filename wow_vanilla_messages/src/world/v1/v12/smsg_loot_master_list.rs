@@ -17,7 +17,7 @@ impl ServerMessageWrite for SMSG_LOOT_MASTER_LIST {}
 
 impl SMSG_LOOT_MASTER_LIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(2049);
+        let mut w = Vec::with_capacity(self.size());
         // amount_of_players: u8
         w.write_all(&(self.guids.len() as u8).to_le_bytes())?;
 

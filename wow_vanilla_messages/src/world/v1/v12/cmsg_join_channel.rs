@@ -17,7 +17,7 @@ impl ClientMessageWrite for CMSG_JOIN_CHANNEL {}
 
 impl CMSG_JOIN_CHANNEL {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(512);
+        let mut w = Vec::with_capacity(self.size());
         // channel_name: CString
         w.write_all(self.channel_name.as_bytes())?;
         // Null terminator

@@ -118,14 +118,14 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
     .unwrap();
 
     SMSG_TUTORIAL_FLAGS {
-        tutorial_data0: 0xFF,
-        tutorial_data1: 0xFF,
-        tutorial_data2: 0xFF,
-        tutorial_data3: 0xFF,
-        tutorial_data4: 0xFF,
-        tutorial_data5: 0xFF,
-        tutorial_data6: 0xFF,
-        tutorial_data7: 0xFF,
+        tutorial_data0: 0xFFFFFFFF,
+        tutorial_data1: 0xFFFFFFFF,
+        tutorial_data2: 0xFFFFFFFF,
+        tutorial_data3: 0xFFFFFFFF,
+        tutorial_data4: 0xFFFFFFFF,
+        tutorial_data5: 0xFFFFFFFF,
+        tutorial_data6: 0xFFFFFFFF,
+        tutorial_data7: 0xFFFFFFFF,
     }
     .tokio_write_encrypted_server(&mut stream, &mut encryption)
     .await
@@ -165,7 +165,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
                 movement2: MovementBlock {
                     update_flag: update_flag,
                 },
-                object_type: Default::default(),
+                object_type: ObjectType::PLAYER,
             },
         }],
     }

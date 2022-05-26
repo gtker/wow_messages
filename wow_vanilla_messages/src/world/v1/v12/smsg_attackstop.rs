@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_ATTACKSTOP {}
 
 impl SMSG_ATTACKSTOP {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(22);
+        let mut w = Vec::with_capacity(self.size());
         // player: PackedGuid
         w.write_all(&self.player.packed_guid())?;
 

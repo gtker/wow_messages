@@ -29,7 +29,7 @@ impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_DETAILS {}
 
 impl SMSG_QUESTGIVER_QUEST_DETAILS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(103079215908);
+        let mut w = Vec::with_capacity(self.size());
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

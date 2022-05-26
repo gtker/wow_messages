@@ -19,7 +19,7 @@ impl ClientMessageWrite for CMSG_MESSAGECHAT {}
 
 impl CMSG_MESSAGECHAT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(517);
+        let mut w = Vec::with_capacity(self.size());
         // chat_type: ChatType
         w.write_all(&(self.chat_type.as_int() as u32).to_le_bytes())?;
 

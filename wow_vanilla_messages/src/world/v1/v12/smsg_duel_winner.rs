@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_DUEL_WINNER {}
 
 impl SMSG_DUEL_WINNER {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(513);
+        let mut w = Vec::with_capacity(self.size());
         // reason: DuelWinnerReason
         w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
 

@@ -18,7 +18,7 @@ impl ServerMessageWrite for SMSG_AUCTION_LIST_RESULT {}
 
 impl SMSG_AUCTION_LIST_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(274877906952);
+        let mut w = Vec::with_capacity(self.size());
         // count: u32
         w.write_all(&(self.auctions.len() as u32).to_le_bytes())?;
 

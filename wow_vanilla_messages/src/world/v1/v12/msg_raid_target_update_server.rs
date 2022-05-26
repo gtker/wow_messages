@@ -18,7 +18,7 @@ impl ServerMessageWrite for MSG_RAID_TARGET_UPDATE_Server {}
 
 impl MSG_RAID_TARGET_UPDATE_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(73);
+        let mut w = Vec::with_capacity(self.size());
         // update_type: RaidTargetUpdateType
         w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 

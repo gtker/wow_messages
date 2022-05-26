@@ -17,7 +17,7 @@ impl ClientMessageWrite for CMSG_MOVE_FALL_RESET {}
 
 impl CMSG_MOVE_FALL_RESET {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(81);
+        let mut w = Vec::with_capacity(self.size());
         // info: MovementInfo
         w.write_all(&self.info.as_bytes()?)?;
 

@@ -17,7 +17,7 @@ pub struct Friend {
 
 impl Friend {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(18);
+        let mut w = Vec::with_capacity(self.size());
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

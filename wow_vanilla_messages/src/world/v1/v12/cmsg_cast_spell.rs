@@ -18,7 +18,7 @@ impl ClientMessageWrite for CMSG_CAST_SPELL {}
 
 impl CMSG_CAST_SPELL {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(358);
+        let mut w = Vec::with_capacity(self.size());
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 

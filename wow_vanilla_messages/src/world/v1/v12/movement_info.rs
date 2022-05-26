@@ -20,7 +20,7 @@ pub struct MovementInfo {
 
 impl MovementInfo {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(81);
+        let mut w = Vec::with_capacity(self.size());
         // flags: MovementFlags
         w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
 

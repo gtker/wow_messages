@@ -15,7 +15,7 @@ pub struct EnumIfElseIfNested {
 
 impl EnumIfElseIfNested {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(3);
+        let mut w = Vec::with_capacity(self.size());
         // e: SimpleEnum
         w.write_all(&(self.e.as_int() as u8).to_le_bytes())?;
 

@@ -20,7 +20,7 @@ impl ServerMessageWrite for SMSG_INITIAL_SPELLS {}
 
 impl SMSG_INITIAL_SPELLS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(1179653);
+        let mut w = Vec::with_capacity(self.size());
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 

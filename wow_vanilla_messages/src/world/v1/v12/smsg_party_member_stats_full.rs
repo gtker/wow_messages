@@ -23,7 +23,7 @@ impl ServerMessageWrite for SMSG_PARTY_MEMBER_STATS_FULL {}
 
 impl SMSG_PARTY_MEMBER_STATS_FULL {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(564);
+        let mut w = Vec::with_capacity(self.size());
         // player: PackedGuid
         w.write_all(&self.player.packed_guid())?;
 

@@ -21,7 +21,7 @@ impl ServerMessageWrite for SMSG_SPELLLOGMISS {}
 
 impl SMSG_SPELLLOGMISS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(51539607569);
+        let mut w = Vec::with_capacity(self.size());
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 

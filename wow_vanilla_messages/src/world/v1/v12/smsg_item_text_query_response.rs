@@ -17,7 +17,7 @@ impl ServerMessageWrite for SMSG_ITEM_TEXT_QUERY_RESPONSE {}
 
 impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(260);
+        let mut w = Vec::with_capacity(self.size());
         // item_text_id: u32
         w.write_all(&self.item_text_id.to_le_bytes())?;
 

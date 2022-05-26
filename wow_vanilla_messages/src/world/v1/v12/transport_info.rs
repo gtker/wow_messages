@@ -18,7 +18,7 @@ pub struct TransportInfo {
 
 impl TransportInfo {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(29);
+        let mut w = Vec::with_capacity(self.size());
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 

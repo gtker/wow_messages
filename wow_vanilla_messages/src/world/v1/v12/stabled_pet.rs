@@ -17,7 +17,7 @@ pub struct StabledPet {
 
 impl StabledPet {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(273);
+        let mut w = Vec::with_capacity(self.size());
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
 

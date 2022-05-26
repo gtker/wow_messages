@@ -18,7 +18,7 @@ impl ClientMessageWrite for CMSG_GUILD_RANK {}
 
 impl CMSG_GUILD_RANK {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(264);
+        let mut w = Vec::with_capacity(self.size());
         // rank_id: u32
         w.write_all(&self.rank_id.to_le_bytes())?;
 

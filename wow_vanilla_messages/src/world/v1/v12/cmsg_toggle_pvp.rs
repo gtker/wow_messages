@@ -16,7 +16,7 @@ impl ClientMessageWrite for CMSG_TOGGLE_PVP {}
 
 impl CMSG_TOGGLE_PVP {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(1);
+        let mut w = Vec::with_capacity(self.size());
         // optional set
         if let Some(v) = &self.set {
             // enable_pvp: u8

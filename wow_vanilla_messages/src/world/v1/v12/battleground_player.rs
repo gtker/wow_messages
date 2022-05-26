@@ -20,7 +20,7 @@ pub struct BattlegroundPlayer {
 
 impl BattlegroundPlayer {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(17179869213);
+        let mut w = Vec::with_capacity(self.size());
         // player: Guid
         w.write_all(&self.player.guid().to_le_bytes())?;
 

@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_NPC_TEXT_UPDATE {}
 
 impl SMSG_NPC_TEXT_UPDATE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4360);
+        let mut w = Vec::with_capacity(self.size());
         // text_id: u32
         w.write_all(&self.text_id.to_le_bytes())?;
 

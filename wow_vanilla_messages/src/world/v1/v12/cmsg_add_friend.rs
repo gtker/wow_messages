@@ -16,7 +16,7 @@ impl ClientMessageWrite for CMSG_ADD_FRIEND {}
 
 impl CMSG_ADD_FRIEND {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(256);
+        let mut w = Vec::with_capacity(self.size());
         // friend_name: CString
         w.write_all(self.friend_name.as_bytes())?;
         // Null terminator
