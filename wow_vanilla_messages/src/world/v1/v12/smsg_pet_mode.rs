@@ -44,6 +44,25 @@ impl SMSG_PET_MODE {
 }
 
 impl ServerMessage for SMSG_PET_MODE {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(12);
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        // react_state: PetReactState
+        w.write_all(&(self.react_state.as_int() as u8).to_le_bytes())?;
+
+        // command_state: PetCommandState
+        w.write_all(&(self.command_state.as_int() as u8).to_le_bytes())?;
+
+        // unknown1: u8
+        w.write_all(&self.unknown1.to_le_bytes())?;
+
+        // pet_enabled: u8
+        w.write_all(&self.pet_enabled.to_le_bytes())?;
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x017a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -76,12 +95,6 @@ impl ServerMessage for SMSG_PET_MODE {
             unknown1,
             pet_enabled,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -122,25 +135,6 @@ impl ServerMessage for SMSG_PET_MODE {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -176,25 +170,6 @@ impl ServerMessage for SMSG_PET_MODE {
                 unknown1,
                 pet_enabled,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

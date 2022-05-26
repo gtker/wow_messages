@@ -48,6 +48,34 @@ impl SMSG_LOG_XPGAIN {
 }
 
 impl ServerMessage for SMSG_LOG_XPGAIN {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // target_guid: Guid
+        w.write_all(&self.target_guid.guid().to_le_bytes())?;
+
+        // total_exp: u32
+        w.write_all(&self.total_exp.to_le_bytes())?;
+
+        // exp_type: ExperienceAwardType
+        w.write_all(&(self.exp_type.as_int() as u8).to_le_bytes())?;
+
+        match &self.exp_type {
+            SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
+            SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
+                exp_group_bonus,
+                experience_without_rested,
+            } => {
+                // experience_without_rested: u32
+                w.write_all(&experience_without_rested.to_le_bytes())?;
+
+                // exp_group_bonus: f32
+                w.write_all(&exp_group_bonus.to_le_bytes())?;
+
+            }
+        }
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x01d0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -87,12 +115,6 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
             total_exp,
             exp_type: exp_type_if,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -140,25 +162,6 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -201,25 +204,6 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
                 total_exp,
                 exp_type: exp_type_if,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

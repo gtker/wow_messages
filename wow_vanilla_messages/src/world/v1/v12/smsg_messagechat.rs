@@ -373,6 +373,355 @@ impl SMSG_MESSAGECHAT {
 }
 
 impl ServerMessage for SMSG_MESSAGECHAT {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // chat_type: ChatType
+        w.write_all(&(self.chat_type.as_int() as u8).to_le_bytes())?;
+
+        // language: Language
+        w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
+
+        match &self.chat_type {
+            SMSG_MESSAGECHATChatType::SAY {
+                sender_guid1,
+                sender_guid2,
+            } => {
+                // sender_guid1: Guid
+                w.write_all(&sender_guid1.guid().to_le_bytes())?;
+
+                // sender_guid2: Guid
+                w.write_all(&sender_guid2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::PARTY {
+                sender_guid1,
+                sender_guid2,
+            } => {
+                // sender_guid1: Guid
+                w.write_all(&sender_guid1.guid().to_le_bytes())?;
+
+                // sender_guid2: Guid
+                w.write_all(&sender_guid2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::GUILD {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::OFFICER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::YELL {
+                sender_guid1,
+                sender_guid2,
+            } => {
+                // sender_guid1: Guid
+                w.write_all(&sender_guid1.guid().to_le_bytes())?;
+
+                // sender_guid2: Guid
+                w.write_all(&sender_guid2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::WHISPER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::WHISPER_INFORM {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::EMOTE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::TEXT_EMOTE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::SYSTEM {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_SAY {
+                sender_guid3,
+                sender_name,
+                sender_name_length,
+                target_guid,
+            } => {
+                // sender_guid3: Guid
+                w.write_all(&sender_guid3.guid().to_le_bytes())?;
+
+                // sender_name_length: u32
+                w.write_all(&sender_name_length.to_le_bytes())?;
+
+                // sender_name: CString
+                w.write_all(sender_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // target_guid: Guid
+                w.write_all(&target_guid.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_YELL {
+                sender_guid3,
+                sender_name,
+                sender_name_length,
+                target_guid,
+            } => {
+                // sender_guid3: Guid
+                w.write_all(&sender_guid3.guid().to_le_bytes())?;
+
+                // sender_name_length: u32
+                w.write_all(&sender_name_length.to_le_bytes())?;
+
+                // sender_name: CString
+                w.write_all(sender_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // target_guid: Guid
+                w.write_all(&target_guid.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
+                monster_guid,
+                monster_name,
+                name_length,
+            } => {
+                // name_length: u32
+                w.write_all(&name_length.to_le_bytes())?;
+
+                // monster_name: CString
+                w.write_all(monster_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // monster_guid: Guid
+                w.write_all(&monster_guid.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL {
+                channel_name,
+                player_guid,
+                player_rank,
+            } => {
+                // channel_name: CString
+                w.write_all(channel_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // player_rank: u32
+                w.write_all(&player_rank.to_le_bytes())?;
+
+                // player_guid: Guid
+                w.write_all(&player_guid.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_JOIN {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_LEAVE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_LIST {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_NOTICE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::AFK {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::DND {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::IGNORED {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::SKILL {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::LOOT {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
+                monster_guid,
+                monster_name,
+                name_length,
+            } => {
+                // name_length: u32
+                w.write_all(&name_length.to_le_bytes())?;
+
+                // monster_name: CString
+                w.write_all(monster_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // monster_guid: Guid
+                w.write_all(&monster_guid.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_LEADER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_WARNING {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
+                monster_guid,
+                monster_name,
+                name_length,
+            } => {
+                // name_length: u32
+                w.write_all(&name_length.to_le_bytes())?;
+
+                // monster_name: CString
+                w.write_all(monster_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // monster_guid: Guid
+                w.write_all(&monster_guid.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::BATTLEGROUND {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+
+            }
+        }
+
+        // message_length: u32
+        w.write_all(&self.message_length.to_le_bytes())?;
+
+        // message: CString
+        w.write_all(self.message.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // tag: PlayerChatTag
+        w.write_all(&(self.tag.as_int() as u8).to_le_bytes())?;
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x0096;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -763,12 +1112,6 @@ impl ServerMessage for SMSG_MESSAGECHAT {
             message,
             tag,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -1167,25 +1510,6 @@ impl ServerMessage for SMSG_MESSAGECHAT {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -1579,25 +1903,6 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 message,
                 tag,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

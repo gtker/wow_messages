@@ -46,6 +46,28 @@ impl SMSG_START_MIRROR_TIMER {
 }
 
 impl ServerMessage for SMSG_START_MIRROR_TIMER {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(21);
+        // timer: TimerType
+        w.write_all(&(self.timer.as_int() as u32).to_le_bytes())?;
+
+        // time_remaining: u32
+        w.write_all(&self.time_remaining.to_le_bytes())?;
+
+        // duration: u32
+        w.write_all(&self.duration.to_le_bytes())?;
+
+        // scale: u32
+        w.write_all(&self.scale.to_le_bytes())?;
+
+        // is_frozen: u8
+        w.write_all(&self.is_frozen.to_le_bytes())?;
+
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x01d9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -82,12 +104,6 @@ impl ServerMessage for SMSG_START_MIRROR_TIMER {
             is_frozen,
             id,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -132,25 +148,6 @@ impl ServerMessage for SMSG_START_MIRROR_TIMER {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -190,25 +187,6 @@ impl ServerMessage for SMSG_START_MIRROR_TIMER {
                 is_frozen,
                 id,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

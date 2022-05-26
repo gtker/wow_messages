@@ -85,6 +85,72 @@ impl SMSG_TRADE_STATUS {
 }
 
 impl ServerMessage for SMSG_TRADE_STATUS {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // status: TradeStatus
+        w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
+
+        match &self.status {
+            SMSG_TRADE_STATUSTradeStatus::BUSY => {}
+            SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
+                unknown1,
+            } => {
+                // unknown1: Guid
+                w.write_all(&unknown1.guid().to_le_bytes())?;
+
+            }
+            SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}
+            SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED => {}
+            SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT => {}
+            SMSG_TRADE_STATUSTradeStatus::BUSY_2 => {}
+            SMSG_TRADE_STATUSTradeStatus::NO_TARGET => {}
+            SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE => {}
+            SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE => {}
+            SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED => {}
+            SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR => {}
+            SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => {}
+            SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
+                inventory_result,
+                item_limit_category_id,
+                target_error,
+            } => {
+                // inventory_result: InventoryResult
+                w.write_all(&(inventory_result.as_int() as u32).to_le_bytes())?;
+
+                // target_error: u8
+                w.write_all(&target_error.to_le_bytes())?;
+
+                // item_limit_category_id: u32
+                w.write_all(&item_limit_category_id.to_le_bytes())?;
+
+            }
+            SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13 => {}
+            SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU => {}
+            SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED => {}
+            SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED => {}
+            SMSG_TRADE_STATUSTradeStatus::YOU_DEAD => {}
+            SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD => {}
+            SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT => {}
+            SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT => {}
+            SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT => {}
+            SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED {
+                slot,
+            } => {
+                // slot: u8
+                w.write_all(&slot.to_le_bytes())?;
+
+            }
+            SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST {
+                slot,
+            } => {
+                // slot: u8
+                w.write_all(&slot.to_le_bytes())?;
+
+            }
+        }
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x0120;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -164,12 +230,6 @@ impl ServerMessage for SMSG_TRADE_STATUS {
         Ok(Self {
             status: status_if,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -257,25 +317,6 @@ impl ServerMessage for SMSG_TRADE_STATUS {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -358,25 +399,6 @@ impl ServerMessage for SMSG_TRADE_STATUS {
             Ok(Self {
                 status: status_if,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

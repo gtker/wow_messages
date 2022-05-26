@@ -3,19 +3,53 @@ use std::pin::Pin;
 use wow_srp::header_crypto::Encrypter;
 
 const SERVER_OPCODE_LENGTH: u16 = 2;
+const SERVER_HEADER_LENGTH: u16 = 4;
 const CLIENT_OPCODE_LENGTH: u16 = 4;
+const CLIENT_HEADER_LENGTH: u16 = 6;
+
+fn get_unencrypted_server(opcode: u16, size: u16, mut bytes: Vec<u8>) -> Vec<u8> {
+    let mut v = Vec::with_capacity((size + SERVER_HEADER_LENGTH) as usize);
+
+    crate::util::write_u16_be(&mut v, size + SERVER_OPCODE_LENGTH).unwrap();
+    crate::util::write_u16_le(&mut v, opcode).unwrap();
+
+    v.append(&mut bytes);
+
+    v
+}
+
+fn get_encrypted_server(
+    opcode: u16,
+    size: u16,
+    mut bytes: Vec<u8>,
+    e: &mut impl Encrypter,
+) -> Vec<u8> {
+    let mut v = Vec::with_capacity((size + SERVER_HEADER_LENGTH) as usize);
+
+    v.extend_from_slice(&e.encrypt_server_header(size + SERVER_OPCODE_LENGTH, opcode));
+
+    v.append(&mut bytes);
+    v
+}
 
 pub trait ServerMessage: Sized {
+    const OPCODE: u16;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16;
+
+    type Error;
+
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>;
+
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
-        crate::util::write_u16_be(
-            w,
-            self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
-        )?;
-        crate::util::write_u16_le(w, Self::OPCODE)?;
+        let v = get_unencrypted_server(
+            Self::OPCODE,
+            self.size_without_size_or_opcode_fields(),
+            self.as_bytes()?,
+        );
 
-        self.write_body(w)?;
-        Ok(())
+        w.write_all(&v)
     }
 
     #[cfg(feature = "sync")]
@@ -24,14 +58,14 @@ pub trait ServerMessage: Sized {
         w: &mut W,
         e: &mut E,
     ) -> Result<(), std::io::Error> {
-        e.write_encrypted_server_header(
-            w,
-            self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
+        let v = get_encrypted_server(
             Self::OPCODE,
-        )?;
+            self.size_without_size_or_opcode_fields(),
+            self.as_bytes()?,
+            e,
+        );
 
-        self.write_body(w)?;
-        Ok(())
+        w.write_all(&v)
     }
 
     #[cfg(feature = "tokio")]
@@ -46,15 +80,13 @@ pub trait ServerMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            crate::util::tokio_write_u16_be(
-                w,
-                self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
-            )
-            .await?;
-            crate::util::tokio_write_u16_le(w, Self::OPCODE).await?;
+            let v = get_unencrypted_server(
+                Self::OPCODE,
+                self.size_without_size_or_opcode_fields(),
+                self.as_bytes()?,
+            );
 
-            self.tokio_write_body(w).await?;
-            Ok(())
+            w.write_all(&v).await
         })
     }
 
@@ -73,14 +105,14 @@ pub trait ServerMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let header = e.encrypt_server_header(
-                self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
+            let v = get_encrypted_server(
                 Self::OPCODE,
+                self.size_without_size_or_opcode_fields(),
+                self.as_bytes()?,
+                e,
             );
-            w.write_all(&header).await;
 
-            self.tokio_write_body(w).await?;
-            Ok(())
+            w.write_all(&v).await
         })
     }
 
@@ -96,15 +128,13 @@ pub trait ServerMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            crate::util::astd_write_u16_be(
-                w,
-                self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
-            )
-            .await?;
-            crate::util::astd_write_u16_le(w, Self::OPCODE).await?;
+            let v = get_unencrypted_server(
+                Self::OPCODE,
+                self.size_without_size_or_opcode_fields(),
+                self.as_bytes()?,
+            );
 
-            self.astd_write_body(w).await?;
-            Ok(())
+            w.write_all(&v).await
         })
     }
 
@@ -123,28 +153,19 @@ pub trait ServerMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let header = e.encrypt_server_header(
-                self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
+            let v = get_encrypted_server(
                 Self::OPCODE,
+                self.size_without_size_or_opcode_fields(),
+                self.as_bytes()?,
+                e,
             );
-            w.write_all(&header);
 
-            self.astd_write_body(w).await?;
-            Ok(())
+            w.write_all(&v).await
         })
     }
 
-    const OPCODE: u16;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16;
-
-    type Error;
-
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> Result<Self, Self::Error>;
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
@@ -156,17 +177,6 @@ pub trait ServerMessage: Sized {
         'life0: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
-    where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait;
-
     #[cfg(feature = "tokio")]
     fn tokio_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -176,30 +186,26 @@ pub trait ServerMessage: Sized {
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
         'life0: 'async_trait,
         Self: 'async_trait;
-
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
-    where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait;
 }
 
 pub trait ClientMessage: Sized {
+    const OPCODE: u16;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16;
+
+    type Error;
+
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>;
+
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
-        crate::util::write_u16_be(
-            w,
-            (self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH),
-        )?;
-        crate::util::write_u32_le(w, Self::OPCODE as u32)?;
+        let v = get_unencrypted_client(
+            Self::OPCODE,
+            self.size_without_size_or_opcode_fields(),
+            self.as_bytes()?,
+        );
 
-        self.write_body(w)?;
-        Ok(())
+        w.write_all(&v)
     }
 
     #[cfg(feature = "sync")]
@@ -208,14 +214,14 @@ pub trait ClientMessage: Sized {
         w: &mut W,
         e: &mut E,
     ) -> Result<(), std::io::Error> {
-        e.write_encrypted_client_header(
-            w,
-            (self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH),
-            Self::OPCODE as u32,
-        )?;
+        let v = get_encrypted_client(
+            Self::OPCODE,
+            self.size_without_size_or_opcode_fields(),
+            self.as_bytes()?,
+            e,
+        );
 
-        self.write_body(w)?;
-        Ok(())
+        w.write_all(&v)
     }
 
     #[cfg(feature = "tokio")]
@@ -230,15 +236,13 @@ pub trait ClientMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            crate::util::tokio_write_u16_be(
-                w,
-                self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH,
-            )
-            .await?;
-            crate::util::tokio_write_u32_le(w, Self::OPCODE as u32).await?;
+            let v = get_unencrypted_client(
+                Self::OPCODE,
+                self.size_without_size_or_opcode_fields(),
+                self.as_bytes()?,
+            );
 
-            self.tokio_write_body(w).await?;
-            Ok(())
+            w.write_all(&v).await
         })
     }
 
@@ -257,14 +261,14 @@ pub trait ClientMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let header = e.encrypt_client_header(
-                self.size_without_size_or_opcode_fields() + 4,
-                Self::OPCODE as u32,
+            let v = get_encrypted_client(
+                Self::OPCODE,
+                self.size_without_size_or_opcode_fields(),
+                self.as_bytes()?,
+                e,
             );
-            w.write_all(&header);
 
-            self.tokio_write_body(w).await?;
-            Ok(())
+            w.write_all(&v).await
         })
     }
 
@@ -280,15 +284,13 @@ pub trait ClientMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            crate::util::astd_write_u16_be(
-                w,
-                self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH,
-            )
-            .await?;
-            crate::util::astd_write_u32_le(w, Self::OPCODE as u32).await?;
+            let v = get_unencrypted_client(
+                Self::OPCODE,
+                self.size_without_size_or_opcode_fields(),
+                self.as_bytes()?,
+            );
 
-            self.astd_write_body(w).await?;
-            Ok(())
+            w.write_all(&v).await
         })
     }
 
@@ -307,28 +309,19 @@ pub trait ClientMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let header = e.encrypt_client_header(
-                self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH,
-                Self::OPCODE as u32,
+            let v = get_encrypted_client(
+                Self::OPCODE,
+                self.size_without_size_or_opcode_fields(),
+                self.as_bytes()?,
+                e,
             );
-            w.write_all(&header);
 
-            self.astd_write_body(w).await?;
-            Ok(())
+            w.write_all(&v).await
         })
     }
 
-    const OPCODE: u16;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16;
-
-    type Error;
-
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> Result<Self, Self::Error>;
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
@@ -340,17 +333,6 @@ pub trait ClientMessage: Sized {
         'life0: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
-    where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait;
-
     #[cfg(feature = "tokio")]
     fn tokio_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -360,15 +342,29 @@ pub trait ClientMessage: Sized {
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
         'life0: 'async_trait,
         Self: 'async_trait;
+}
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
-    where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait;
+fn get_unencrypted_client(opcode: u16, size: u16, mut bytes: Vec<u8>) -> Vec<u8> {
+    let mut v = Vec::with_capacity((size + CLIENT_HEADER_LENGTH) as usize);
+
+    crate::util::write_u16_be(&mut v, size + CLIENT_OPCODE_LENGTH).unwrap();
+    crate::util::write_u32_le(&mut v, opcode as u32).unwrap();
+
+    v.append(&mut bytes);
+
+    v
+}
+
+fn get_encrypted_client(
+    opcode: u16,
+    size: u16,
+    mut bytes: Vec<u8>,
+    e: &mut impl Encrypter,
+) -> Vec<u8> {
+    let mut v = Vec::with_capacity((size + CLIENT_HEADER_LENGTH) as usize);
+
+    v.extend_from_slice(&e.encrypt_client_header(size + CLIENT_OPCODE_LENGTH, opcode as u32));
+
+    v.append(&mut bytes);
+    v
 }

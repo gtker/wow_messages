@@ -94,6 +94,66 @@ impl CMSG_PETITION_BUY {
 }
 
 impl ClientMessage for CMSG_PETITION_BUY {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // npc: Guid
+        w.write_all(&self.npc.guid().to_le_bytes())?;
+
+        // skip1: u32
+        w.write_all(&self.skip1.to_le_bytes())?;
+
+        // skip2: Guid
+        w.write_all(&self.skip2.guid().to_le_bytes())?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // skip3: u32
+        w.write_all(&self.skip3.to_le_bytes())?;
+
+        // skip4: u32
+        w.write_all(&self.skip4.to_le_bytes())?;
+
+        // skip5: u32
+        w.write_all(&self.skip5.to_le_bytes())?;
+
+        // skip6: u32
+        w.write_all(&self.skip6.to_le_bytes())?;
+
+        // skip7: u32
+        w.write_all(&self.skip7.to_le_bytes())?;
+
+        // skip8: u32
+        w.write_all(&self.skip8.to_le_bytes())?;
+
+        // skip9: u32
+        w.write_all(&self.skip9.to_le_bytes())?;
+
+        // skip10: u32
+        w.write_all(&self.skip10.to_le_bytes())?;
+
+        // skip11: u32
+        w.write_all(&self.skip11.to_le_bytes())?;
+
+        // skip12: u32
+        w.write_all(&self.skip12.to_le_bytes())?;
+
+        // skip13: u16
+        w.write_all(&self.skip13.to_le_bytes())?;
+
+        // skip14: u8
+        w.write_all(&self.skip14.to_le_bytes())?;
+
+        // index: u32
+        w.write_all(&self.index.to_le_bytes())?;
+
+        // skip15: u32
+        w.write_all(&self.skip15.to_le_bytes())?;
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x01bd;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -179,12 +239,6 @@ impl ClientMessage for CMSG_PETITION_BUY {
             index,
             skip15,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -278,25 +332,6 @@ impl ClientMessage for CMSG_PETITION_BUY {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -385,25 +420,6 @@ impl ClientMessage for CMSG_PETITION_BUY {
                 index,
                 skip15,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

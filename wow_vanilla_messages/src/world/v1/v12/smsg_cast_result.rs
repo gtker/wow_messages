@@ -216,6 +216,202 @@ impl SMSG_CAST_RESULT {
 }
 
 impl ServerMessage for SMSG_CAST_RESULT {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes())?;
+
+        // result: SimpleSpellCastResult
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
+
+        match &self.result {
+            SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS {
+                reason,
+            } => {
+                // reason: CastFailureReason
+                w.write_all(&(reason.as_int() as u8).to_le_bytes())?;
+
+                match &reason {
+                    SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT => {}
+                    SMSG_CAST_RESULTCastFailureReason::ALREADY_AT_FULL_HEALTH => {}
+                    SMSG_CAST_RESULTCastFailureReason::ALREADY_AT_FULL_POWER => {}
+                    SMSG_CAST_RESULTCastFailureReason::ALREADY_BEING_TAMED => {}
+                    SMSG_CAST_RESULTCastFailureReason::ALREADY_HAVE_CHARM => {}
+                    SMSG_CAST_RESULTCastFailureReason::ALREADY_HAVE_SUMMON => {}
+                    SMSG_CAST_RESULTCastFailureReason::ALREADY_OPEN => {}
+                    SMSG_CAST_RESULTCastFailureReason::AURA_BOUNCED => {}
+                    SMSG_CAST_RESULTCastFailureReason::AUTOTRACK_INTERRUPTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::BAD_IMPLICIT_TARGETS => {}
+                    SMSG_CAST_RESULTCastFailureReason::BAD_TARGETS => {}
+                    SMSG_CAST_RESULTCastFailureReason::CANT_BE_CHARMED => {}
+                    SMSG_CAST_RESULTCastFailureReason::CANT_BE_DISENCHANTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::CANT_BE_PROSPECTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::CANT_CAST_ON_TAPPED => {}
+                    SMSG_CAST_RESULTCastFailureReason::CANT_DUEL_WHILE_INVISIBLE => {}
+                    SMSG_CAST_RESULTCastFailureReason::CANT_DUEL_WHILE_STEALTHED => {}
+                    SMSG_CAST_RESULTCastFailureReason::CANT_STEALTH => {}
+                    SMSG_CAST_RESULTCastFailureReason::CASTER_AURASTATE => {}
+                    SMSG_CAST_RESULTCastFailureReason::CASTER_DEAD => {}
+                    SMSG_CAST_RESULTCastFailureReason::CHARMED => {}
+                    SMSG_CAST_RESULTCastFailureReason::CHEST_IN_USE => {}
+                    SMSG_CAST_RESULTCastFailureReason::CONFUSED => {}
+                    SMSG_CAST_RESULTCastFailureReason::DONT_REPORT => {}
+                    SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM => {}
+                    SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS {
+                        equipped_item_class,
+                        equipped_item_inventory_type_mask,
+                        equipped_item_subclass_mask,
+                    } => {
+                        // equipped_item_class: u32
+                        w.write_all(&equipped_item_class.to_le_bytes())?;
+
+                        // equipped_item_subclass_mask: u32
+                        w.write_all(&equipped_item_subclass_mask.to_le_bytes())?;
+
+                        // equipped_item_inventory_type_mask: u32
+                        w.write_all(&equipped_item_inventory_type_mask.to_le_bytes())?;
+
+                    }
+                    SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND => {}
+                    SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS_OFFHAND => {}
+                    SMSG_CAST_RESULTCastFailureReason::ERROR => {}
+                    SMSG_CAST_RESULTCastFailureReason::FIZZLE => {}
+                    SMSG_CAST_RESULTCastFailureReason::FLEEING => {}
+                    SMSG_CAST_RESULTCastFailureReason::FOOD_LOWLEVEL => {}
+                    SMSG_CAST_RESULTCastFailureReason::HIGHLEVEL => {}
+                    SMSG_CAST_RESULTCastFailureReason::HUNGER_SATIATED => {}
+                    SMSG_CAST_RESULTCastFailureReason::IMMUNE => {}
+                    SMSG_CAST_RESULTCastFailureReason::INTERRUPTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::INTERRUPTED_COMBAT => {}
+                    SMSG_CAST_RESULTCastFailureReason::ITEM_ALREADY_ENCHANTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::ITEM_GONE => {}
+                    SMSG_CAST_RESULTCastFailureReason::ITEM_NOT_FOUND => {}
+                    SMSG_CAST_RESULTCastFailureReason::ITEM_NOT_READY => {}
+                    SMSG_CAST_RESULTCastFailureReason::LEVEL_REQUIREMENT => {}
+                    SMSG_CAST_RESULTCastFailureReason::LINE_OF_SIGHT => {}
+                    SMSG_CAST_RESULTCastFailureReason::LOWLEVEL => {}
+                    SMSG_CAST_RESULTCastFailureReason::LOW_CASTLEVEL => {}
+                    SMSG_CAST_RESULTCastFailureReason::MAINHAND_EMPTY => {}
+                    SMSG_CAST_RESULTCastFailureReason::MOVING => {}
+                    SMSG_CAST_RESULTCastFailureReason::NEED_AMMO => {}
+                    SMSG_CAST_RESULTCastFailureReason::NEED_AMMO_POUCH => {}
+                    SMSG_CAST_RESULTCastFailureReason::NEED_EXOTIC_AMMO => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOPATH => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_BEHIND => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_FISHABLE => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_HERE => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_INFRONT => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_IN_CONTROL => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_KNOWN => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_MOUNTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_ON_TAXI => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_ON_TRANSPORT => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_READY => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_SHAPESHIFT => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_STANDING => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_TRADEABLE => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_TRADING => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_UNSHEATHED => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_WHILE_GHOST => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_AMMO => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_CHARGES_REMAIN => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_CHAMPION => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_COMBO_POINTS => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_DUELING => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_ENDURANCE => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_FISH => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_ITEMS_WHILE_SHAPESHIFTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_MOUNTS_ALLOWED => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_PET => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_POWER => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOTHING_TO_DISPEL => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOTHING_TO_STEAL => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_ABOVEWATER => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_DAYTIME => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_INDOORS => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_MOUNTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_NIGHTTIME => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_OUTDOORS => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_SHAPESHIFT => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_STEALTHED => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_UNDERWATER => {}
+                    SMSG_CAST_RESULTCastFailureReason::OUT_OF_RANGE => {}
+                    SMSG_CAST_RESULTCastFailureReason::PACIFIED => {}
+                    SMSG_CAST_RESULTCastFailureReason::POSSESSED => {}
+                    SMSG_CAST_RESULTCastFailureReason::REAGENTS => {}
+                    SMSG_CAST_RESULTCastFailureReason::REQUIRES_AREA {
+                        area,
+                    } => {
+                        // area: Area
+                        w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+
+                    }
+                    SMSG_CAST_RESULTCastFailureReason::REQUIRES_SPELL_FOCUS {
+                        required_spell_focus,
+                    } => {
+                        // required_spell_focus: u32
+                        w.write_all(&required_spell_focus.to_le_bytes())?;
+
+                    }
+                    SMSG_CAST_RESULTCastFailureReason::ROOTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::SILENCED => {}
+                    SMSG_CAST_RESULTCastFailureReason::SPELL_IN_PROGRESS => {}
+                    SMSG_CAST_RESULTCastFailureReason::SPELL_LEARNED => {}
+                    SMSG_CAST_RESULTCastFailureReason::SPELL_UNAVAILABLE => {}
+                    SMSG_CAST_RESULTCastFailureReason::STUNNED => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGETS_DEAD => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_AFFECTING_COMBAT => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_AURASTATE => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_DUELING => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_ENEMY => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_ENRAGED => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_FRIENDLY => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_IN_COMBAT => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_IS_PLAYER => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_DEAD => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_IN_PARTY => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_LOOTED => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_PLAYER => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_NO_POCKETS => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_NO_WEAPONS => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_UNSKINNABLE => {}
+                    SMSG_CAST_RESULTCastFailureReason::THIRST_SATIATED => {}
+                    SMSG_CAST_RESULTCastFailureReason::TOO_CLOSE => {}
+                    SMSG_CAST_RESULTCastFailureReason::TOO_MANY_OF_ITEM => {}
+                    SMSG_CAST_RESULTCastFailureReason::TOTEMS => {}
+                    SMSG_CAST_RESULTCastFailureReason::TRAINING_POINTS => {}
+                    SMSG_CAST_RESULTCastFailureReason::TRY_AGAIN => {}
+                    SMSG_CAST_RESULTCastFailureReason::UNIT_NOT_BEHIND => {}
+                    SMSG_CAST_RESULTCastFailureReason::UNIT_NOT_INFRONT => {}
+                    SMSG_CAST_RESULTCastFailureReason::WRONG_PET_FOOD => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_WHILE_FATIGUED => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_IN_INSTANCE => {}
+                    SMSG_CAST_RESULTCastFailureReason::NOT_WHILE_TRADING => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_IN_RAID => {}
+                    SMSG_CAST_RESULTCastFailureReason::DISENCHANT_WHILE_LOOTING => {}
+                    SMSG_CAST_RESULTCastFailureReason::PROSPECT_WHILE_LOOTING => {}
+                    SMSG_CAST_RESULTCastFailureReason::PROSPECT_NEED_MORE => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_FREEFORALL => {}
+                    SMSG_CAST_RESULTCastFailureReason::NO_EDIBLE_CORPSES => {}
+                    SMSG_CAST_RESULTCastFailureReason::ONLY_BATTLEGROUNDS => {}
+                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_GHOST => {}
+                    SMSG_CAST_RESULTCastFailureReason::TOO_MANY_SKILLS => {}
+                    SMSG_CAST_RESULTCastFailureReason::TRANSFORM_UNUSABLE => {}
+                    SMSG_CAST_RESULTCastFailureReason::WRONG_WEATHER => {}
+                    SMSG_CAST_RESULTCastFailureReason::DAMAGE_IMMUNE => {}
+                    SMSG_CAST_RESULTCastFailureReason::PREVENTED_BY_MECHANIC => {}
+                    SMSG_CAST_RESULTCastFailureReason::PLAY_TIME => {}
+                    SMSG_CAST_RESULTCastFailureReason::REPUTATION => {}
+                    SMSG_CAST_RESULTCastFailureReason::MIN_SKILL => {}
+                    SMSG_CAST_RESULTCastFailureReason::UNKNOWN => {}
+                }
+
+            }
+            SMSG_CAST_RESULTSimpleSpellCastResult::FAILURE => {}
+        }
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x0130;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -426,12 +622,6 @@ impl ServerMessage for SMSG_CAST_RESULT {
             spell,
             result: result_if,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -650,25 +840,6 @@ impl ServerMessage for SMSG_CAST_RESULT {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -882,25 +1053,6 @@ impl ServerMessage for SMSG_CAST_RESULT {
                 spell,
                 result: result_if,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

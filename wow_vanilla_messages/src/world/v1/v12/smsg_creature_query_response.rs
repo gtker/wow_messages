@@ -80,6 +80,69 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // creature_entry: u32
+        w.write_all(&self.creature_entry.to_le_bytes())?;
+
+        // optional found
+        if let Some(v) = &self.found {
+            // name1: CString
+            w.write_all(v.name1.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // name2: CString
+            w.write_all(v.name2.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // name3: CString
+            w.write_all(v.name3.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // name4: CString
+            w.write_all(v.name4.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // sub_name: CString
+            w.write_all(v.sub_name.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // type_flags: u32
+            w.write_all(&v.type_flags.to_le_bytes())?;
+
+            // creature_type: u32
+            w.write_all(&v.creature_type.to_le_bytes())?;
+
+            // creature_family: u32
+            w.write_all(&v.creature_family.to_le_bytes())?;
+
+            // creature_rank: u32
+            w.write_all(&v.creature_rank.to_le_bytes())?;
+
+            // unknown0: u32
+            w.write_all(&v.unknown0.to_le_bytes())?;
+
+            // spell_data_id: u32
+            w.write_all(&v.spell_data_id.to_le_bytes())?;
+
+            // display_id: u32
+            w.write_all(&v.display_id.to_le_bytes())?;
+
+            // civilian: u8
+            w.write_all(&v.civilian.to_le_bytes())?;
+
+            // racial_leader: u8
+            w.write_all(&v.racial_leader.to_le_bytes())?;
+
+        }
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x0061;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -170,12 +233,6 @@ impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
             creature_entry,
             found,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -274,25 +331,6 @@ impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -386,25 +424,6 @@ impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
                 creature_entry,
                 found,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

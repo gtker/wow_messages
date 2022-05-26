@@ -70,6 +70,49 @@ impl CMSG_SEND_MAIL {
 }
 
 impl ClientMessage for CMSG_SEND_MAIL {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // mailbox: Guid
+        w.write_all(&self.mailbox.guid().to_le_bytes())?;
+
+        // receiver: CString
+        w.write_all(self.receiver.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // subject: CString
+        w.write_all(self.subject.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // body: CString
+        w.write_all(self.body.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes())?;
+
+        // unknown2: u32
+        w.write_all(&self.unknown2.to_le_bytes())?;
+
+        // item: Guid
+        w.write_all(&self.item.guid().to_le_bytes())?;
+
+        // money: u32
+        w.write_all(&self.money.to_le_bytes())?;
+
+        // cash_on_delivery_amount: u32
+        w.write_all(&self.cash_on_delivery_amount.to_le_bytes())?;
+
+        // unknown3: u32
+        w.write_all(&self.unknown3.to_le_bytes())?;
+
+        // unknown4: u32
+        w.write_all(&self.unknown4.to_le_bytes())?;
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x0238;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -129,12 +172,6 @@ impl ClientMessage for CMSG_SEND_MAIL {
             unknown3,
             unknown4,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -202,25 +239,6 @@ impl ClientMessage for CMSG_SEND_MAIL {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -283,25 +301,6 @@ impl ClientMessage for CMSG_SEND_MAIL {
                 unknown3,
                 unknown4,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

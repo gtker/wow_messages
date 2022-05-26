@@ -141,6 +141,7 @@ impl Writer {
         error_name: impl AsRef<str>,
         opcode: u16,
         trait_to_impl: impl AsRef<str>,
+        write_function: impl Fn(&mut Self, ImplType),
         read_function: impl Fn(&mut Self, ImplType),
         sizes: Option<Sizes>,
     ) {
@@ -149,6 +150,8 @@ impl Writer {
             trait_to_impl.as_ref(),
             type_name.as_ref()
         ));
+
+        self.write_as_bytes_trait(write_function, sizes);
 
         self.wln(format!("const OPCODE: u16 = {:#06x};", opcode));
 
@@ -173,15 +176,6 @@ impl Writer {
             self.print_read_decl(it, "_body");
 
             read_function(self, it);
-
-            if it.is_async() {
-                self.closing_curly_with(")"); // Box::pin
-            }
-            self.closing_curly_newline();
-
-            self.print_write_decl(it, "_body");
-
-            self.call_as_bytes(it);
 
             if it.is_async() {
                 self.closing_curly_with(")"); // Box::pin
@@ -299,6 +293,33 @@ impl Writer {
             "w.write_all(&inner){postfix}",
             postfix = it.postfix()
         ));
+    }
+
+    pub fn write_as_bytes_trait(
+        &mut self,
+        write_function: impl Fn(&mut Self, ImplType),
+        sizes: Option<Sizes>,
+    ) {
+        self.open_curly("fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>");
+
+        if let Some(sizes) = sizes {
+            if sizes.is_constant() {
+                self.wln(format!(
+                    "let mut w = Vec::with_capacity({});",
+                    sizes.maximum()
+                ));
+            } else {
+                self.wln("let mut w = Vec::with_capacity(self.size());");
+            }
+        } else {
+            self.wln("let mut w = Vec::with_capacity(8000);");
+        }
+
+        write_function(self, ImplType::Std);
+
+        self.wln("Ok(w)");
+
+        self.closing_curly();
     }
 
     pub fn write_as_bytes(

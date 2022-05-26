@@ -92,6 +92,65 @@ impl SMSG_PETITION_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // petition_guid: Guid
+        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
+
+        // charter_owner: Guid
+        w.write_all(&self.charter_owner.guid().to_le_bytes())?;
+
+        // guild_name: CString
+        w.write_all(self.guild_name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // body_text: CString
+        w.write_all(self.body_text.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // unknown_flags: u32
+        w.write_all(&self.unknown_flags.to_le_bytes())?;
+
+        // minimum_signatures: u32
+        w.write_all(&self.minimum_signatures.to_le_bytes())?;
+
+        // maximum_signatures: u32
+        w.write_all(&self.maximum_signatures.to_le_bytes())?;
+
+        // deadline: u32
+        w.write_all(&self.deadline.to_le_bytes())?;
+
+        // issue_date: u32
+        w.write_all(&self.issue_date.to_le_bytes())?;
+
+        // allowed_guild_id: u32
+        w.write_all(&self.allowed_guild_id.to_le_bytes())?;
+
+        // allowed_classes: u32
+        w.write_all(&self.allowed_classes.to_le_bytes())?;
+
+        // allowed_races: u32
+        w.write_all(&self.allowed_races.to_le_bytes())?;
+
+        // allowed_genders: u16
+        w.write_all(&self.allowed_genders.to_le_bytes())?;
+
+        // allowed_minimum_level: u32
+        w.write_all(&self.allowed_minimum_level.to_le_bytes())?;
+
+        // allowed_maximum_level: u32
+        w.write_all(&self.allowed_maximum_level.to_le_bytes())?;
+
+        // todo_amount_of_signers: u32
+        w.write_all(&self.todo_amount_of_signers.to_le_bytes())?;
+
+        // number_of_choices: u32
+        w.write_all(&self.number_of_choices.to_le_bytes())?;
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x01c7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -174,12 +233,6 @@ impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
             todo_amount_of_signers,
             number_of_choices,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -270,25 +323,6 @@ impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -374,25 +408,6 @@ impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
                 todo_amount_of_signers,
                 number_of_choices,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

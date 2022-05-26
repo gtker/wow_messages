@@ -87,6 +87,64 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
 }
 
 impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes())?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // details: CString
+        w.write_all(self.details.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // objectives: CString
+        w.write_all(self.objectives.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // auto_finish: u32
+        w.write_all(&self.auto_finish.to_le_bytes())?;
+
+        // amount_of_choice_item_rewards: u32
+        w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes())?;
+
+        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
+        for i in self.choice_item_rewards.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // amount_of_item_rewards: u32
+        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes())?;
+
+        // item_rewards: QuestItemReward[amount_of_item_rewards]
+        for i in self.item_rewards.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // money_reward: u32
+        w.write_all(&self.money_reward.to_le_bytes())?;
+
+        // reward_spell: u32
+        w.write_all(&self.reward_spell.to_le_bytes())?;
+
+        // amount_of_emotes: u32
+        w.write_all(&(self.emotes.len() as u32).to_le_bytes())?;
+
+        // emotes: QuestDetailsEmote[amount_of_emotes]
+        for i in self.emotes.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x0188;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -164,12 +222,6 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
             reward_spell,
             emotes,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -255,25 +307,6 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -354,25 +387,6 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
                 reward_spell,
                 emotes,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

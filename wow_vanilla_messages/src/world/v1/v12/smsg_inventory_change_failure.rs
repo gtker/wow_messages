@@ -2020,6 +2020,2009 @@ impl SMSG_INVENTORY_CHANGE_FAILURE {
 }
 
 impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // result: InventoryResult
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
+
+        match &self.result {
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::OK => {}
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_LEVEL_I {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+                required_level,
+            } => {
+                // required_level: u32
+                w.write_all(&required_level.to_le_bytes())?;
+
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_SKILL {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_DOESNT_GO_TO_SLOT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAG_FULL {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NONEMPTY_BAG_OVER_OTHER_BAG {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_TRADE_EQUIP_BAGS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ONLY_AMMO_CAN_GO_HERE {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NO_REQUIRED_PROFICIENCY {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NO_EQUIPMENT_SLOT_AVAILABLE {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::YOU_CAN_NEVER_USE_THAT_ITEM {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::YOU_CAN_NEVER_USE_THAT_ITEM2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NO_EQUIPMENT_SLOT_AVAILABLE2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_WITH_TWOHANDED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_DUAL_WIELD {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_DOESNT_GO_INTO_BAG {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_DOESNT_GO_INTO_BAG2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_CARRY_MORE_OF_THIS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NO_EQUIPMENT_SLOT_AVAILABLE3 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_CANT_STACK {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_CANT_BE_EQUIPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEMS_CANT_BE_SWAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::SLOT_IS_EMPTY {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_NOT_FOUND {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_DROP_SOULBOUND {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::OUT_OF_RANGE {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::TRIED_TO_SPLIT_MORE_THAN_COUNT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::COULDNT_SPLIT_ITEMS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::MISSING_REAGENT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NOT_ENOUGH_MONEY {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NOT_A_BAG {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CAN_ONLY_DO_WITH_EMPTY_BAGS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::DONT_OWN_THAT_ITEM {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CAN_EQUIP_ONLY1_QUIVER {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::MUST_PURCHASE_THAT_BAG_SLOT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::TOO_FAR_AWAY_FROM_BANK {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_LOCKED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::YOU_ARE_STUNNED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::YOU_ARE_DEAD {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_DO_RIGHT_NOW {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::INT_BAG_ERROR {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CAN_EQUIP_ONLY1_BOLT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CAN_EQUIP_ONLY1_AMMOPOUCH {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::STACKABLE_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::EQUIPPED_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::WRAPPED_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BOUND_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::UNIQUE_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAGS_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ALREADY_LOOTED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::INVENTORY_FULL {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BANK_FULL {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_IS_CURRENTLY_SOLD_OUT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAG_FULL3 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_NOT_FOUND2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_CANT_STACK2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAG_FULL4 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_SOLD_OUT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::OBJECT_IS_BUSY {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NONE {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NOT_IN_COMBAT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NOT_WHILE_DISARMED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAG_FULL6 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_RANK {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_REPUTATION {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::TOO_MANY_SPECIAL_BAGS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::LOOT_CANT_LOOT_THAT_NOW {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+        }
+
+        match &self.result {
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::OK => {}
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_LEVEL_I {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+                required_level,
+            } => {
+                // required_level: u32
+                w.write_all(&required_level.to_le_bytes())?;
+
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_SKILL {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_DOESNT_GO_TO_SLOT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAG_FULL {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NONEMPTY_BAG_OVER_OTHER_BAG {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_TRADE_EQUIP_BAGS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ONLY_AMMO_CAN_GO_HERE {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NO_REQUIRED_PROFICIENCY {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NO_EQUIPMENT_SLOT_AVAILABLE {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::YOU_CAN_NEVER_USE_THAT_ITEM {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::YOU_CAN_NEVER_USE_THAT_ITEM2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NO_EQUIPMENT_SLOT_AVAILABLE2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_WITH_TWOHANDED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_DUAL_WIELD {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_DOESNT_GO_INTO_BAG {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_DOESNT_GO_INTO_BAG2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_CARRY_MORE_OF_THIS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NO_EQUIPMENT_SLOT_AVAILABLE3 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_CANT_STACK {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_CANT_BE_EQUIPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEMS_CANT_BE_SWAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::SLOT_IS_EMPTY {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_NOT_FOUND {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_DROP_SOULBOUND {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::OUT_OF_RANGE {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::TRIED_TO_SPLIT_MORE_THAN_COUNT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::COULDNT_SPLIT_ITEMS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::MISSING_REAGENT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NOT_ENOUGH_MONEY {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NOT_A_BAG {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CAN_ONLY_DO_WITH_EMPTY_BAGS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::DONT_OWN_THAT_ITEM {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CAN_EQUIP_ONLY1_QUIVER {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::MUST_PURCHASE_THAT_BAG_SLOT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::TOO_FAR_AWAY_FROM_BANK {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_LOCKED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::YOU_ARE_STUNNED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::YOU_ARE_DEAD {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_DO_RIGHT_NOW {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::INT_BAG_ERROR {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CAN_EQUIP_ONLY1_BOLT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CAN_EQUIP_ONLY1_AMMOPOUCH {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::STACKABLE_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::EQUIPPED_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::WRAPPED_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BOUND_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::UNIQUE_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAGS_CANT_BE_WRAPPED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ALREADY_LOOTED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::INVENTORY_FULL {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BANK_FULL {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_IS_CURRENTLY_SOLD_OUT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAG_FULL3 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_NOT_FOUND2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_CANT_STACK2 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAG_FULL4 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::ITEM_SOLD_OUT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::OBJECT_IS_BUSY {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NONE {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NOT_IN_COMBAT {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::NOT_WHILE_DISARMED {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::BAG_FULL6 {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_RANK {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::CANT_EQUIP_REPUTATION {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::TOO_MANY_SPECIAL_BAGS {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::LOOT_CANT_LOOT_THAT_NOW {
+                bag_type_subclass,
+                item1_guid,
+                item2_guid,
+            } => {
+                // item1_guid: u64
+                w.write_all(&item1_guid.to_le_bytes())?;
+
+                // item2_guid: u64
+                w.write_all(&item2_guid.to_le_bytes())?;
+
+                // bag_type_subclass: u8
+                w.write_all(&bag_type_subclass.to_le_bytes())?;
+
+            }
+        }
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x0112;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -4164,12 +6167,6 @@ impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
         Ok(Self {
             result: result_if,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -6322,25 +8319,6 @@ impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -8488,25 +10466,6 @@ impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
             Ok(Self {
                 result: result_if,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

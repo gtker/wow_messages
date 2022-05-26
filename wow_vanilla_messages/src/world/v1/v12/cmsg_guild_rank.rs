@@ -33,6 +33,21 @@ impl CMSG_GUILD_RANK {
 }
 
 impl ClientMessage for CMSG_GUILD_RANK {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // rank_id: u32
+        w.write_all(&self.rank_id.to_le_bytes())?;
+
+        // rights: u32
+        w.write_all(&self.rights.to_le_bytes())?;
+
+        // rank_name: CString
+        w.write_all(self.rank_name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x0231;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -58,12 +73,6 @@ impl ClientMessage for CMSG_GUILD_RANK {
             rights,
             rank_name,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -97,25 +106,6 @@ impl ClientMessage for CMSG_GUILD_RANK {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -144,25 +134,6 @@ impl ClientMessage for CMSG_GUILD_RANK {
                 rights,
                 rank_name,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 

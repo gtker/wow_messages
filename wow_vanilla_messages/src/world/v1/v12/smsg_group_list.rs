@@ -59,6 +59,40 @@ impl SMSG_GROUP_LIST {
 }
 
 impl ServerMessage for SMSG_GROUP_LIST {
+    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(self.size());
+        // group_type: GroupType
+        w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
+
+        // own_flags: u8
+        w.write_all(&self.own_flags.to_le_bytes())?;
+
+        // amount_of_members: u32
+        w.write_all(&(self.members.len() as u32).to_le_bytes())?;
+
+        // members: GroupListMember[amount_of_members]
+        for i in self.members.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // leader: Guid
+        w.write_all(&self.leader.guid().to_le_bytes())?;
+
+        // optional group_not_empty
+        if let Some(v) = &self.group_not_empty {
+            // loot_setting: GroupLootSetting
+            w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes())?;
+
+            // master_loot: Guid
+            w.write_all(&v.master_loot.guid().to_le_bytes())?;
+
+            // loot_threshold: ItemQuality
+            w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes())?;
+
+        }
+
+        Ok(w)
+    }
     const OPCODE: u16 = 0x007d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -122,12 +156,6 @@ impl ServerMessage for SMSG_GROUP_LIST {
             leader,
             group_not_empty,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -199,25 +227,6 @@ impl ServerMessage for SMSG_GROUP_LIST {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -284,25 +293,6 @@ impl ServerMessage for SMSG_GROUP_LIST {
                 leader,
                 group_not_empty,
             })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
         })
     }
 
