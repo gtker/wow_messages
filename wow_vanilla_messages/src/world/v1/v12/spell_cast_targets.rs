@@ -102,7 +102,6 @@ impl SpellCastTargets {
 }
 
 impl SpellCastTargets {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::read_u16_le(r)?);

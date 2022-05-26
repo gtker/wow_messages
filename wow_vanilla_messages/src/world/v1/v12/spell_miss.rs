@@ -27,7 +27,6 @@ impl SpellMiss {
 }
 
 impl SpellMiss {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // target_guid: Guid
         let target_guid = Guid::read(r)?;

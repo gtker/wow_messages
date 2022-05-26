@@ -27,7 +27,6 @@ impl SimpleIfFlag {
 }
 
 impl SimpleIfFlag {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // flag: SimpleFlag
         let flag = SimpleFlag::new(crate::util::read_u8_le(r)?);

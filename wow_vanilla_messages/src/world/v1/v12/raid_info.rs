@@ -30,7 +30,6 @@ impl RaidInfo {
 }
 
 impl RaidInfo {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;

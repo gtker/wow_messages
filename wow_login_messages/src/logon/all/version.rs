@@ -33,7 +33,6 @@ impl Version {
 }
 
 impl Version {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // major: u8
         let major = crate::util::read_u8_le(r)?;

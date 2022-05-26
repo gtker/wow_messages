@@ -79,7 +79,6 @@ impl MovementInfo {
 }
 
 impl MovementInfo {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // flags: MovementFlags
         let flags = MovementFlags::new(crate::util::read_u32_le(r)?);

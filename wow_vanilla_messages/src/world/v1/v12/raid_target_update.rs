@@ -27,7 +27,6 @@ impl RaidTargetUpdate {
 }
 
 impl RaidTargetUpdate {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // index: RaidTargetIndex
         let index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;

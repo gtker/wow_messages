@@ -29,7 +29,6 @@ impl Vector3d {
 }
 
 impl Vector3d {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // x: f32
         let x = crate::util::read_f32_le(r)?;

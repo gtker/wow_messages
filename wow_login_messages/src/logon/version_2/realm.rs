@@ -56,7 +56,6 @@ impl Realm {
 }
 
 impl Realm {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // realm_type: RealmType
         let realm_type: RealmType = (crate::util::read_u32_le(r)? as u8).try_into()?;

@@ -37,7 +37,6 @@ impl EnumOutsideOfIf {
 }
 
 impl EnumOutsideOfIf {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // t: TEnum
         let t: TEnum = crate::util::read_u8_le(r)?.try_into()?;

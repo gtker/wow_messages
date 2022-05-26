@@ -114,7 +114,6 @@ impl Object {
 }
 
 impl Object {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // update_type: UpdateType
         let update_type: UpdateType = crate::util::read_u8_le(r)?.try_into()?;

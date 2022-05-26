@@ -39,7 +39,6 @@ impl NpcTextUpdate {
 }
 
 impl NpcTextUpdate {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // probability: f32
         let probability = crate::util::read_f32_le(r)?;

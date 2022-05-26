@@ -33,7 +33,6 @@ impl ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    #[cfg(feature = "sync")]
     pub fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
         let opcode = crate::util::read_u8_le(r)?;
         match opcode {
@@ -140,7 +139,6 @@ impl ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    #[cfg(feature = "sync")]
     pub fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
         let opcode = crate::util::read_u8_le(r)?;
         match opcode {

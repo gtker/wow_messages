@@ -26,7 +26,6 @@ impl CharacterGear {
 }
 
 impl CharacterGear {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // equipment_display_id: u32
         let equipment_display_id = crate::util::read_u32_le(r)?;

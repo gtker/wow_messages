@@ -25,7 +25,6 @@ impl GmSurveyQuestion {
 }
 
 impl GmSurveyQuestion {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // question_id: u32
         let question_id = crate::util::read_u32_le(r)?;

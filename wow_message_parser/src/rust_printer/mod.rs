@@ -338,7 +338,9 @@ impl Writer {
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
         for it in ImplType::types() {
-            self.wln(it.cfg());
+            if it.is_async() {
+                self.wln(it.cfg());
+            }
             self.open_curly(format!(
                 "{visibility} {func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, {error}>",
                 prefix = it.prefix(),

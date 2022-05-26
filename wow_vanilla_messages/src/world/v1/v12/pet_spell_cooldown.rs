@@ -33,7 +33,6 @@ impl PetSpellCooldown {
 }
 
 impl PetSpellCooldown {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // spell_id: u16
         let spell_id = crate::util::read_u16_le(r)?;

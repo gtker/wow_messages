@@ -38,7 +38,6 @@ impl EnumIfElseIfNested {
 }
 
 impl EnumIfElseIfNested {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // e: SimpleEnum
         let e: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;

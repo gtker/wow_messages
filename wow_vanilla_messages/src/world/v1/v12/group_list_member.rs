@@ -31,7 +31,6 @@ impl GroupListMember {
 }
 
 impl GroupListMember {
-    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
