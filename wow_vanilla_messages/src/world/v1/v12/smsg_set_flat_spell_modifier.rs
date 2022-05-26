@@ -53,7 +53,6 @@ impl ServerMessage for SMSG_SET_FLAT_SPELL_MODIFIER {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // eff: u8
         let eff = crate::util::read_u8_le(r)?;
@@ -68,66 +67,6 @@ impl ServerMessage for SMSG_SET_FLAT_SPELL_MODIFIER {
             eff,
             op,
             value,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // eff: u8
-            let eff = crate::util::tokio_read_u8_le(r).await?;
-
-            // op: u8
-            let op = crate::util::tokio_read_u8_le(r).await?;
-
-            // value: u32
-            let value = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                eff,
-                op,
-                value,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // eff: u8
-            let eff = crate::util::astd_read_u8_le(r).await?;
-
-            // op: u8
-            let op = crate::util::astd_read_u8_le(r).await?;
-
-            // value: u32
-            let value = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                eff,
-                op,
-                value,
-            })
         })
     }
 

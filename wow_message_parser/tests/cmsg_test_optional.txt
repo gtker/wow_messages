@@ -63,7 +63,6 @@ impl ClientMessage for CMSG_TEST_OPTIONAL {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // c_string: CString
         let c_string = crate::util::read_c_string_to_vec(r)?;
@@ -93,96 +92,6 @@ impl ClientMessage for CMSG_TEST_OPTIONAL {
             c_string,
             b_u8,
             server,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // c_string: CString
-            let c_string = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let c_string = String::from_utf8(c_string)?;
-
-            // b_u8: u8
-            let b_u8 = crate::util::tokio_read_u8_le(r).await?;
-
-            // optional server
-            let current_size = {
-                0
-                + c_string.len() + 1 // c_string: CString
-                + 1 // b_u8: u8
-            };
-            let server = if current_size < body_size as usize {
-                // optional_u8: u8
-                let optional_u8 = crate::util::tokio_read_u8_le(r).await?;
-
-                Some(CMSG_TEST_OPTIONALserver {
-                    optional_u8,
-                })
-            } else {
-                None
-            };
-
-            Ok(Self {
-                c_string,
-                b_u8,
-                server,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // c_string: CString
-            let c_string = crate::util::astd_read_c_string_to_vec(r).await?;
-            let c_string = String::from_utf8(c_string)?;
-
-            // b_u8: u8
-            let b_u8 = crate::util::astd_read_u8_le(r).await?;
-
-            // optional server
-            let current_size = {
-                0
-                + c_string.len() + 1 // c_string: CString
-                + 1 // b_u8: u8
-            };
-            let server = if current_size < body_size as usize {
-                // optional_u8: u8
-                let optional_u8 = crate::util::astd_read_u8_le(r).await?;
-
-                Some(CMSG_TEST_OPTIONALserver {
-                    optional_u8,
-                })
-            } else {
-                None
-            };
-
-            Ok(Self {
-                c_string,
-                b_u8,
-                server,
-            })
         })
     }
 

@@ -48,7 +48,6 @@ impl ServerMessage for SMSG_FRIEND_LIST {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount_of_friends: u8
         let amount_of_friends = crate::util::read_u8_le(r)?;
@@ -61,62 +60,6 @@ impl ServerMessage for SMSG_FRIEND_LIST {
 
         Ok(Self {
             friends,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_friends: u8
-            let amount_of_friends = crate::util::tokio_read_u8_le(r).await?;
-
-            // friends: Friend[amount_of_friends]
-            let mut friends = Vec::with_capacity(amount_of_friends as usize);
-            for i in 0..amount_of_friends {
-                friends.push(Friend::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                friends,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_friends: u8
-            let amount_of_friends = crate::util::astd_read_u8_le(r).await?;
-
-            // friends: Friend[amount_of_friends]
-            let mut friends = Vec::with_capacity(amount_of_friends as usize);
-            for i in 0..amount_of_friends {
-                friends.push(Friend::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                friends,
-            })
         })
     }
 

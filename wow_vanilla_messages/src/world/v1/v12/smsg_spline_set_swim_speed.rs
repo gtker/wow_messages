@@ -45,7 +45,6 @@ impl ServerMessage for SMSG_SPLINE_SET_SWIM_SPEED {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
@@ -55,56 +54,6 @@ impl ServerMessage for SMSG_SPLINE_SET_SWIM_SPEED {
         Ok(Self {
             guid,
             speed,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: PackedGuid
-            let guid = Guid::tokio_read_packed(r).await?;
-
-            // speed: f32
-            let speed = crate::util::tokio_read_f32_le(r).await?;
-            Ok(Self {
-                guid,
-                speed,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: PackedGuid
-            let guid = Guid::astd_read_packed(r).await?;
-
-            // speed: f32
-            let speed = crate::util::astd_read_f32_le(r).await?;
-            Ok(Self {
-                guid,
-                speed,
-            })
         })
     }
 

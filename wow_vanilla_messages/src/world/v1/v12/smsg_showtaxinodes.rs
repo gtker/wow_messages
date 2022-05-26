@@ -63,7 +63,6 @@ impl ServerMessage for SMSG_SHOWTAXINODES {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
@@ -91,92 +90,6 @@ impl ServerMessage for SMSG_SHOWTAXINODES {
             guid,
             nearest_node,
             nodes,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // unknown1: u32
-            let unknown1 = crate::util::tokio_read_u32_le(r).await?;
-
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            // nearest_node: u32
-            let nearest_node = crate::util::tokio_read_u32_le(r).await?;
-
-            // nodes: u32[-]
-            let mut current_size = {
-                4 // unknown1: u32
-                + 8 // guid: Guid
-                + 4 // nearest_node: u32
-            };
-            let mut nodes = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                nodes.push(crate::util::tokio_read_u32_le(r).await?);
-                current_size += 1;
-            }
-
-            Ok(Self {
-                unknown1,
-                guid,
-                nearest_node,
-                nodes,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // unknown1: u32
-            let unknown1 = crate::util::astd_read_u32_le(r).await?;
-
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            // nearest_node: u32
-            let nearest_node = crate::util::astd_read_u32_le(r).await?;
-
-            // nodes: u32[-]
-            let mut current_size = {
-                4 // unknown1: u32
-                + 8 // guid: Guid
-                + 4 // nearest_node: u32
-            };
-            let mut nodes = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                nodes.push(crate::util::astd_read_u32_le(r).await?);
-                current_size += 1;
-            }
-
-            Ok(Self {
-                unknown1,
-                guid,
-                nearest_node,
-                nodes,
-            })
         })
     }
 

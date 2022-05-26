@@ -70,7 +70,6 @@ impl ServerMessage for SMSG_SPELLLOGMISS {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // id: u32
         let id = crate::util::read_u32_le(r)?;
@@ -95,86 +94,6 @@ impl ServerMessage for SMSG_SPELLLOGMISS {
             caster_guid,
             unknown1,
             targets,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // id: u32
-            let id = crate::util::tokio_read_u32_le(r).await?;
-
-            // caster_guid: Guid
-            let caster_guid = Guid::tokio_read(r).await?;
-
-            // unknown1: u8
-            let unknown1 = crate::util::tokio_read_u8_le(r).await?;
-
-            // amount_of_targets: u32
-            let amount_of_targets = crate::util::tokio_read_u32_le(r).await?;
-
-            // targets: SpellMiss[amount_of_targets]
-            let mut targets = Vec::with_capacity(amount_of_targets as usize);
-            for i in 0..amount_of_targets {
-                targets.push(SpellMiss::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                id,
-                caster_guid,
-                unknown1,
-                targets,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // id: u32
-            let id = crate::util::astd_read_u32_le(r).await?;
-
-            // caster_guid: Guid
-            let caster_guid = Guid::astd_read(r).await?;
-
-            // unknown1: u8
-            let unknown1 = crate::util::astd_read_u8_le(r).await?;
-
-            // amount_of_targets: u32
-            let amount_of_targets = crate::util::astd_read_u32_le(r).await?;
-
-            // targets: SpellMiss[amount_of_targets]
-            let mut targets = Vec::with_capacity(amount_of_targets as usize);
-            for i in 0..amount_of_targets {
-                targets.push(SpellMiss::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                id,
-                caster_guid,
-                unknown1,
-                targets,
-            })
         })
     }
 

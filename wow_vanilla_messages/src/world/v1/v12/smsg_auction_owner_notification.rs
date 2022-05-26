@@ -75,7 +75,6 @@ impl ServerMessage for SMSG_AUCTION_OWNER_NOTIFICATION {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // auction_id: u32
         let auction_id = crate::util::read_u32_le(r)?;
@@ -102,90 +101,6 @@ impl ServerMessage for SMSG_AUCTION_OWNER_NOTIFICATION {
             bidder,
             item_entry,
             item_random_property_id,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // auction_id: u32
-            let auction_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // bid: u32
-            let bid = crate::util::tokio_read_u32_le(r).await?;
-
-            // auction_out_bid: u32
-            let auction_out_bid = crate::util::tokio_read_u32_le(r).await?;
-
-            // bidder: Guid
-            let bidder = Guid::tokio_read(r).await?;
-
-            // item_entry: u32
-            let item_entry = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                auction_id,
-                bid,
-                auction_out_bid,
-                bidder,
-                item_entry,
-                item_random_property_id,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // auction_id: u32
-            let auction_id = crate::util::astd_read_u32_le(r).await?;
-
-            // bid: u32
-            let bid = crate::util::astd_read_u32_le(r).await?;
-
-            // auction_out_bid: u32
-            let auction_out_bid = crate::util::astd_read_u32_le(r).await?;
-
-            // bidder: Guid
-            let bidder = Guid::astd_read(r).await?;
-
-            // item_entry: u32
-            let item_entry = crate::util::astd_read_u32_le(r).await?;
-
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                auction_id,
-                bid,
-                auction_out_bid,
-                bidder,
-                item_entry,
-                item_random_property_id,
-            })
         })
     }
 

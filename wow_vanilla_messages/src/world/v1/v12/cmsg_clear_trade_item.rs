@@ -39,57 +39,12 @@ impl ClientMessage for CMSG_CLEAR_TRADE_ITEM {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // trade_slot: u8
         let trade_slot = crate::util::read_u8_le(r)?;
 
         Ok(Self {
             trade_slot,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // trade_slot: u8
-            let trade_slot = crate::util::tokio_read_u8_le(r).await?;
-
-            Ok(Self {
-                trade_slot,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // trade_slot: u8
-            let trade_slot = crate::util::astd_read_u8_le(r).await?;
-
-            Ok(Self {
-                trade_slot,
-            })
         })
     }
 

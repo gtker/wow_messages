@@ -55,7 +55,6 @@ impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // count: u32
         let count = crate::util::read_u32_le(r)?;
@@ -72,70 +71,6 @@ impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {
         Ok(Self {
             auctions,
             total_amount_of_auctions,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // count: u32
-            let count = crate::util::tokio_read_u32_le(r).await?;
-
-            // auctions: AuctionListItem[count]
-            let mut auctions = Vec::with_capacity(count as usize);
-            for i in 0..count {
-                auctions.push(AuctionListItem::tokio_read(r).await?);
-            }
-
-            // total_amount_of_auctions: u32
-            let total_amount_of_auctions = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                auctions,
-                total_amount_of_auctions,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // count: u32
-            let count = crate::util::astd_read_u32_le(r).await?;
-
-            // auctions: AuctionListItem[count]
-            let mut auctions = Vec::with_capacity(count as usize);
-            for i in 0..count {
-                auctions.push(AuctionListItem::astd_read(r).await?);
-            }
-
-            // total_amount_of_auctions: u32
-            let total_amount_of_auctions = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                auctions,
-                total_amount_of_auctions,
-            })
         })
     }
 

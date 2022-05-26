@@ -75,7 +75,6 @@ impl ServerMessage for SMSG_START_MIRROR_TIMER {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // timer: TimerType
         let timer: TimerType = crate::util::read_u32_le(r)?.try_into()?;
@@ -102,90 +101,6 @@ impl ServerMessage for SMSG_START_MIRROR_TIMER {
             scale,
             is_frozen,
             id,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // timer: TimerType
-            let timer: TimerType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-            // time_remaining: u32
-            let time_remaining = crate::util::tokio_read_u32_le(r).await?;
-
-            // duration: u32
-            let duration = crate::util::tokio_read_u32_le(r).await?;
-
-            // scale: u32
-            let scale = crate::util::tokio_read_u32_le(r).await?;
-
-            // is_frozen: u8
-            let is_frozen = crate::util::tokio_read_u8_le(r).await?;
-
-            // id: u32
-            let id = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                timer,
-                time_remaining,
-                duration,
-                scale,
-                is_frozen,
-                id,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // timer: TimerType
-            let timer: TimerType = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-            // time_remaining: u32
-            let time_remaining = crate::util::astd_read_u32_le(r).await?;
-
-            // duration: u32
-            let duration = crate::util::astd_read_u32_le(r).await?;
-
-            // scale: u32
-            let scale = crate::util::astd_read_u32_le(r).await?;
-
-            // is_frozen: u8
-            let is_frozen = crate::util::astd_read_u8_le(r).await?;
-
-            // id: u32
-            let id = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                timer,
-                time_remaining,
-                duration,
-                scale,
-                is_frozen,
-                id,
-            })
         })
     }
 

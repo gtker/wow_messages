@@ -52,7 +52,6 @@ impl ServerMessage for SMSG_ATTACKSTOP {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // player: PackedGuid
         let player = Guid::read_packed(r)?;
@@ -67,66 +66,6 @@ impl ServerMessage for SMSG_ATTACKSTOP {
             player,
             enemy,
             unknown1,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // player: PackedGuid
-            let player = Guid::tokio_read_packed(r).await?;
-
-            // enemy: PackedGuid
-            let enemy = Guid::tokio_read_packed(r).await?;
-
-            // unknown1: u32
-            let unknown1 = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                player,
-                enemy,
-                unknown1,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // player: PackedGuid
-            let player = Guid::astd_read_packed(r).await?;
-
-            // enemy: PackedGuid
-            let enemy = Guid::astd_read_packed(r).await?;
-
-            // unknown1: u32
-            let unknown1 = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                player,
-                enemy,
-                unknown1,
-            })
         })
     }
 

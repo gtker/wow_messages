@@ -56,7 +56,6 @@ impl ServerMessage for SMSG_NPC_TEXT_UPDATE {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // text_id: u32
         let text_id = crate::util::read_u32_le(r)?;
@@ -74,72 +73,6 @@ impl ServerMessage for SMSG_NPC_TEXT_UPDATE {
             text_id,
             probability,
             texts,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // text_id: u32
-            let text_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // probability: f32
-            let probability = crate::util::tokio_read_f32_le(r).await?;
-            // texts: NpcTextUpdate[8]
-            let mut texts = Vec::with_capacity(8 as usize);
-            for i in 0..8 {
-                texts.push(NpcTextUpdate::tokio_read(r).await?);
-            }
-            let texts = texts.try_into().unwrap();
-
-            Ok(Self {
-                text_id,
-                probability,
-                texts,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // text_id: u32
-            let text_id = crate::util::astd_read_u32_le(r).await?;
-
-            // probability: f32
-            let probability = crate::util::astd_read_f32_le(r).await?;
-            // texts: NpcTextUpdate[8]
-            let mut texts = Vec::with_capacity(8 as usize);
-            for i in 0..8 {
-                texts.push(NpcTextUpdate::astd_read(r).await?);
-            }
-            let texts = texts.try_into().unwrap();
-
-            Ok(Self {
-                text_id,
-                probability,
-                texts,
-            })
         })
     }
 

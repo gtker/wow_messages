@@ -45,7 +45,6 @@ impl ClientMessage for CMSG_TOGGLE_PVP {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // optional set
         let current_size = {
@@ -64,74 +63,6 @@ impl ClientMessage for CMSG_TOGGLE_PVP {
 
         Ok(Self {
             set,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // optional set
-            let current_size = {
-                0
-            };
-            let set = if current_size < body_size as usize {
-                // enable_pvp: u8
-                let enable_pvp = crate::util::tokio_read_u8_le(r).await?;
-
-                Some(CMSG_TOGGLE_PVPset {
-                    enable_pvp,
-                })
-            } else {
-                None
-            };
-
-            Ok(Self {
-                set,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // optional set
-            let current_size = {
-                0
-            };
-            let set = if current_size < body_size as usize {
-                // enable_pvp: u8
-                let enable_pvp = crate::util::astd_read_u8_le(r).await?;
-
-                Some(CMSG_TOGGLE_PVPset {
-                    enable_pvp,
-                })
-            } else {
-                None
-            };
-
-            Ok(Self {
-                set,
-            })
         })
     }
 

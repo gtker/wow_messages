@@ -61,7 +61,6 @@ impl ServerMessage for SMSG_BUY_ITEM {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -80,74 +79,6 @@ impl ServerMessage for SMSG_BUY_ITEM {
             vendor_slot,
             amount_for_sale,
             amount_bought,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            // vendor_slot: u32
-            let vendor_slot = crate::util::tokio_read_u32_le(r).await?;
-
-            // amount_for_sale: u32
-            let amount_for_sale = crate::util::tokio_read_u32_le(r).await?;
-
-            // amount_bought: u32
-            let amount_bought = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                guid,
-                vendor_slot,
-                amount_for_sale,
-                amount_bought,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            // vendor_slot: u32
-            let vendor_slot = crate::util::astd_read_u32_le(r).await?;
-
-            // amount_for_sale: u32
-            let amount_for_sale = crate::util::astd_read_u32_le(r).await?;
-
-            // amount_bought: u32
-            let amount_bought = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                guid,
-                vendor_slot,
-                amount_for_sale,
-                amount_bought,
-            })
         })
     }
 

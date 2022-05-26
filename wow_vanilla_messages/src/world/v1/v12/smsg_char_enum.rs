@@ -48,7 +48,6 @@ impl ServerMessage for SMSG_CHAR_ENUM {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount_of_characters: u8
         let amount_of_characters = crate::util::read_u8_le(r)?;
@@ -61,62 +60,6 @@ impl ServerMessage for SMSG_CHAR_ENUM {
 
         Ok(Self {
             characters,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_characters: u8
-            let amount_of_characters = crate::util::tokio_read_u8_le(r).await?;
-
-            // characters: Character[amount_of_characters]
-            let mut characters = Vec::with_capacity(amount_of_characters as usize);
-            for i in 0..amount_of_characters {
-                characters.push(Character::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                characters,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_characters: u8
-            let amount_of_characters = crate::util::astd_read_u8_le(r).await?;
-
-            // characters: Character[amount_of_characters]
-            let mut characters = Vec::with_capacity(amount_of_characters as usize);
-            for i in 0..amount_of_characters {
-                characters.push(Character::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                characters,
-            })
         })
     }
 

@@ -73,7 +73,6 @@ impl ServerMessage for SMSG_INITIAL_SPELLS {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
@@ -100,90 +99,6 @@ impl ServerMessage for SMSG_INITIAL_SPELLS {
             unknown1,
             initial_spells,
             cooldowns,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // unknown1: u8
-            let unknown1 = crate::util::tokio_read_u8_le(r).await?;
-
-            // spell_count: u16
-            let spell_count = crate::util::tokio_read_u16_le(r).await?;
-
-            // initial_spells: InitialSpell[spell_count]
-            let mut initial_spells = Vec::with_capacity(spell_count as usize);
-            for i in 0..spell_count {
-                initial_spells.push(InitialSpell::tokio_read(r).await?);
-            }
-
-            // cooldown_count: u16
-            let cooldown_count = crate::util::tokio_read_u16_le(r).await?;
-
-            // cooldowns: CooldownSpell[cooldown_count]
-            let mut cooldowns = Vec::with_capacity(cooldown_count as usize);
-            for i in 0..cooldown_count {
-                cooldowns.push(CooldownSpell::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                unknown1,
-                initial_spells,
-                cooldowns,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // unknown1: u8
-            let unknown1 = crate::util::astd_read_u8_le(r).await?;
-
-            // spell_count: u16
-            let spell_count = crate::util::astd_read_u16_le(r).await?;
-
-            // initial_spells: InitialSpell[spell_count]
-            let mut initial_spells = Vec::with_capacity(spell_count as usize);
-            for i in 0..spell_count {
-                initial_spells.push(InitialSpell::astd_read(r).await?);
-            }
-
-            // cooldown_count: u16
-            let cooldown_count = crate::util::astd_read_u16_le(r).await?;
-
-            // cooldowns: CooldownSpell[cooldown_count]
-            let mut cooldowns = Vec::with_capacity(cooldown_count as usize);
-            for i in 0..cooldown_count {
-                cooldowns.push(CooldownSpell::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                unknown1,
-                initial_spells,
-                cooldowns,
-            })
         })
     }
 

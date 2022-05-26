@@ -172,16 +172,13 @@ impl Writer {
         ));
         self.newline();
 
-        for it in ImplType::types() {
-            self.print_read_decl(it, "_body");
+        self.open_curly(
+                "fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error>",
+            );
 
-            read_function(self, it);
+        read_function(self, ImplType::Std);
 
-            if it.is_async() {
-                self.closing_curly_with(")"); // Box::pin
-            }
-            self.closing_curly_newline();
-        }
+        self.closing_curly_newline();
 
         self.closing_curly_newline(); // impl
     }

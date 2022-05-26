@@ -56,7 +56,6 @@ impl ServerMessage for SMSG_DISPEL_FAILED {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // caster_guid: Guid
         let caster_guid = Guid::read(r)?;
@@ -79,82 +78,6 @@ impl ServerMessage for SMSG_DISPEL_FAILED {
             caster_guid,
             target_guid,
             spells,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // caster_guid: Guid
-            let caster_guid = Guid::tokio_read(r).await?;
-
-            // target_guid: Guid
-            let target_guid = Guid::tokio_read(r).await?;
-
-            // spells: u32[-]
-            let mut current_size = {
-                8 // caster_guid: Guid
-                + 8 // target_guid: Guid
-            };
-            let mut spells = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                spells.push(crate::util::tokio_read_u32_le(r).await?);
-                current_size += 1;
-            }
-
-            Ok(Self {
-                caster_guid,
-                target_guid,
-                spells,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // caster_guid: Guid
-            let caster_guid = Guid::astd_read(r).await?;
-
-            // target_guid: Guid
-            let target_guid = Guid::astd_read(r).await?;
-
-            // spells: u32[-]
-            let mut current_size = {
-                8 // caster_guid: Guid
-                + 8 // target_guid: Guid
-            };
-            let mut spells = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                spells.push(crate::util::astd_read_u32_le(r).await?);
-                current_size += 1;
-            }
-
-            Ok(Self {
-                caster_guid,
-                target_guid,
-                spells,
-            })
         })
     }
 

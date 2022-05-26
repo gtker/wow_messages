@@ -63,7 +63,6 @@ impl ServerMessage for SMSG_SPELLLOGEXECUTE {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // caster: PackedGuid
         let caster = Guid::read_packed(r)?;
@@ -84,78 +83,6 @@ impl ServerMessage for SMSG_SPELLLOGEXECUTE {
             caster,
             spell,
             logs,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // caster: PackedGuid
-            let caster = Guid::tokio_read_packed(r).await?;
-
-            // spell: u32
-            let spell = crate::util::tokio_read_u32_le(r).await?;
-
-            // amount_of_effects: u32
-            let amount_of_effects = crate::util::tokio_read_u32_le(r).await?;
-
-            // logs: SpellLog[amount_of_effects]
-            let mut logs = Vec::with_capacity(amount_of_effects as usize);
-            for i in 0..amount_of_effects {
-                logs.push(SpellLog::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                caster,
-                spell,
-                logs,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // caster: PackedGuid
-            let caster = Guid::astd_read_packed(r).await?;
-
-            // spell: u32
-            let spell = crate::util::astd_read_u32_le(r).await?;
-
-            // amount_of_effects: u32
-            let amount_of_effects = crate::util::astd_read_u32_le(r).await?;
-
-            // logs: SpellLog[amount_of_effects]
-            let mut logs = Vec::with_capacity(amount_of_effects as usize);
-            for i in 0..amount_of_effects {
-                logs.push(SpellLog::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                caster,
-                spell,
-                logs,
-            })
         })
     }
 

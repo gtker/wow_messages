@@ -46,7 +46,6 @@ impl ServerMessage for SMSG_LOGIN_SETTIMESPEED {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // secs_to_time_bit_field: u32
         let secs_to_time_bit_field = crate::util::read_u32_le(r)?;
@@ -56,56 +55,6 @@ impl ServerMessage for SMSG_LOGIN_SETTIMESPEED {
         Ok(Self {
             secs_to_time_bit_field,
             game_speed,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // secs_to_time_bit_field: u32
-            let secs_to_time_bit_field = crate::util::tokio_read_u32_le(r).await?;
-
-            // game_speed: f32
-            let game_speed = crate::util::tokio_read_f32_le(r).await?;
-            Ok(Self {
-                secs_to_time_bit_field,
-                game_speed,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // secs_to_time_bit_field: u32
-            let secs_to_time_bit_field = crate::util::astd_read_u32_le(r).await?;
-
-            // game_speed: f32
-            let game_speed = crate::util::astd_read_f32_le(r).await?;
-            Ok(Self {
-                secs_to_time_bit_field,
-                game_speed,
-            })
         })
     }
 

@@ -47,7 +47,6 @@ impl ServerMessage for SMSG_PET_UNLEARN_CONFIRM {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // pet_guid: Guid
         let pet_guid = Guid::read(r)?;
@@ -58,58 +57,6 @@ impl ServerMessage for SMSG_PET_UNLEARN_CONFIRM {
         Ok(Self {
             pet_guid,
             talent_reset_cost,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // pet_guid: Guid
-            let pet_guid = Guid::tokio_read(r).await?;
-
-            // talent_reset_cost: u32
-            let talent_reset_cost = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                pet_guid,
-                talent_reset_cost,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // pet_guid: Guid
-            let pet_guid = Guid::astd_read(r).await?;
-
-            // talent_reset_cost: u32
-            let talent_reset_cost = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                pet_guid,
-                talent_reset_cost,
-            })
         })
     }
 

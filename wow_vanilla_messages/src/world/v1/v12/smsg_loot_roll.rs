@@ -90,7 +90,6 @@ impl ServerMessage for SMSG_LOOT_ROLL {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // creature_guid: Guid
         let creature_guid = Guid::read(r)?;
@@ -125,106 +124,6 @@ impl ServerMessage for SMSG_LOOT_ROLL {
             item_random_property_id,
             roll_number,
             vote,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // creature_guid: Guid
-            let creature_guid = Guid::tokio_read(r).await?;
-
-            // loot_slot: u32
-            let loot_slot = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_guid: Guid
-            let item_guid = Guid::tokio_read(r).await?;
-
-            // item_id: u32
-            let item_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_random_suffix: u32
-            let item_random_suffix = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // roll_number: u8
-            let roll_number = crate::util::tokio_read_u8_le(r).await?;
-
-            // vote: RollVote
-            let vote: RollVote = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            Ok(Self {
-                creature_guid,
-                loot_slot,
-                item_guid,
-                item_id,
-                item_random_suffix,
-                item_random_property_id,
-                roll_number,
-                vote,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // creature_guid: Guid
-            let creature_guid = Guid::astd_read(r).await?;
-
-            // loot_slot: u32
-            let loot_slot = crate::util::astd_read_u32_le(r).await?;
-
-            // item_guid: Guid
-            let item_guid = Guid::astd_read(r).await?;
-
-            // item_id: u32
-            let item_id = crate::util::astd_read_u32_le(r).await?;
-
-            // item_random_suffix: u32
-            let item_random_suffix = crate::util::astd_read_u32_le(r).await?;
-
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::astd_read_u32_le(r).await?;
-
-            // roll_number: u8
-            let roll_number = crate::util::astd_read_u8_le(r).await?;
-
-            // vote: RollVote
-            let vote: RollVote = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            Ok(Self {
-                creature_guid,
-                loot_slot,
-                item_guid,
-                item_id,
-                item_random_suffix,
-                item_random_property_id,
-                roll_number,
-                vote,
-            })
         })
     }
 

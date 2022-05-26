@@ -48,7 +48,6 @@ impl ServerMessage for SMSG_SET_FORCED_REACTIONS {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount_of_reactions: u32
         let amount_of_reactions = crate::util::read_u32_le(r)?;
@@ -61,62 +60,6 @@ impl ServerMessage for SMSG_SET_FORCED_REACTIONS {
 
         Ok(Self {
             reactions,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_reactions: u32
-            let amount_of_reactions = crate::util::tokio_read_u32_le(r).await?;
-
-            // reactions: ForcedReaction[amount_of_reactions]
-            let mut reactions = Vec::with_capacity(amount_of_reactions as usize);
-            for i in 0..amount_of_reactions {
-                reactions.push(ForcedReaction::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                reactions,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_reactions: u32
-            let amount_of_reactions = crate::util::astd_read_u32_le(r).await?;
-
-            // reactions: ForcedReaction[amount_of_reactions]
-            let mut reactions = Vec::with_capacity(amount_of_reactions as usize);
-            for i in 0..amount_of_reactions {
-                reactions.push(ForcedReaction::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                reactions,
-            })
         })
     }
 

@@ -82,7 +82,6 @@ impl ServerMessage for SMSG_RESISTLOG {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid1: Guid
         let guid1 = Guid::read(r)?;
@@ -111,94 +110,6 @@ impl ServerMessage for SMSG_RESISTLOG {
             unknown3,
             unknown4,
             unknown5,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid1: Guid
-            let guid1 = Guid::tokio_read(r).await?;
-
-            // guid2: Guid
-            let guid2 = Guid::tokio_read(r).await?;
-
-            // unknown1: u32
-            let unknown1 = crate::util::tokio_read_u32_le(r).await?;
-
-            // unknown2: f32
-            let unknown2 = crate::util::tokio_read_f32_le(r).await?;
-            // unknown3: f32
-            let unknown3 = crate::util::tokio_read_f32_le(r).await?;
-            // unknown4: u32
-            let unknown4 = crate::util::tokio_read_u32_le(r).await?;
-
-            // unknown5: u32
-            let unknown5 = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                guid1,
-                guid2,
-                unknown1,
-                unknown2,
-                unknown3,
-                unknown4,
-                unknown5,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid1: Guid
-            let guid1 = Guid::astd_read(r).await?;
-
-            // guid2: Guid
-            let guid2 = Guid::astd_read(r).await?;
-
-            // unknown1: u32
-            let unknown1 = crate::util::astd_read_u32_le(r).await?;
-
-            // unknown2: f32
-            let unknown2 = crate::util::astd_read_f32_le(r).await?;
-            // unknown3: f32
-            let unknown3 = crate::util::astd_read_f32_le(r).await?;
-            // unknown4: u32
-            let unknown4 = crate::util::astd_read_u32_le(r).await?;
-
-            // unknown5: u32
-            let unknown5 = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                guid1,
-                guid2,
-                unknown1,
-                unknown2,
-                unknown3,
-                unknown4,
-                unknown5,
-            })
         })
     }
 

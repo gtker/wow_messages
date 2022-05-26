@@ -62,7 +62,6 @@ impl ServerMessage for SMSG_SPELLDISPELLOG {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // victim: Guid
         let victim = Guid::read(r)?;
@@ -83,78 +82,6 @@ impl ServerMessage for SMSG_SPELLDISPELLOG {
             victim,
             caster,
             spells,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // victim: Guid
-            let victim = Guid::tokio_read(r).await?;
-
-            // caster: Guid
-            let caster = Guid::tokio_read(r).await?;
-
-            // amount_of_spells: u32
-            let amount_of_spells = crate::util::tokio_read_u32_le(r).await?;
-
-            // spells: u32[amount_of_spells]
-            let mut spells = Vec::with_capacity(amount_of_spells as usize);
-            for i in 0..amount_of_spells {
-                spells.push(crate::util::tokio_read_u32_le(r).await?);
-            }
-
-            Ok(Self {
-                victim,
-                caster,
-                spells,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // victim: Guid
-            let victim = Guid::astd_read(r).await?;
-
-            // caster: Guid
-            let caster = Guid::astd_read(r).await?;
-
-            // amount_of_spells: u32
-            let amount_of_spells = crate::util::astd_read_u32_le(r).await?;
-
-            // spells: u32[amount_of_spells]
-            let mut spells = Vec::with_capacity(amount_of_spells as usize);
-            for i in 0..amount_of_spells {
-                spells.push(crate::util::astd_read_u32_le(r).await?);
-            }
-
-            Ok(Self {
-                victim,
-                caster,
-                spells,
-            })
         })
     }
 

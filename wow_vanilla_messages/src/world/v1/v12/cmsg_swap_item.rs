@@ -60,7 +60,6 @@ impl ClientMessage for CMSG_SWAP_ITEM {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // destination_bag: u8
         let destination_bag = crate::util::read_u8_le(r)?;
@@ -79,74 +78,6 @@ impl ClientMessage for CMSG_SWAP_ITEM {
             destionation_slot,
             source_bag,
             source_slot,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // destination_bag: u8
-            let destination_bag = crate::util::tokio_read_u8_le(r).await?;
-
-            // destionation_slot: u8
-            let destionation_slot = crate::util::tokio_read_u8_le(r).await?;
-
-            // source_bag: u8
-            let source_bag = crate::util::tokio_read_u8_le(r).await?;
-
-            // source_slot: u8
-            let source_slot = crate::util::tokio_read_u8_le(r).await?;
-
-            Ok(Self {
-                destination_bag,
-                destionation_slot,
-                source_bag,
-                source_slot,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // destination_bag: u8
-            let destination_bag = crate::util::astd_read_u8_le(r).await?;
-
-            // destionation_slot: u8
-            let destionation_slot = crate::util::astd_read_u8_le(r).await?;
-
-            // source_bag: u8
-            let source_bag = crate::util::astd_read_u8_le(r).await?;
-
-            // source_slot: u8
-            let source_slot = crate::util::astd_read_u8_le(r).await?;
-
-            Ok(Self {
-                destination_bag,
-                destionation_slot,
-                source_bag,
-                source_slot,
-            })
         })
     }
 

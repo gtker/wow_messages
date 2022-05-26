@@ -45,7 +45,6 @@ impl ClientMessage for CMSG_CAST_SPELL {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // spell: u32
         let spell = crate::util::read_u32_le(r)?;
@@ -56,58 +55,6 @@ impl ClientMessage for CMSG_CAST_SPELL {
         Ok(Self {
             spell,
             targets,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell: u32
-            let spell = crate::util::tokio_read_u32_le(r).await?;
-
-            // targets: SpellCastTargets
-            let targets = SpellCastTargets::tokio_read(r).await?;
-
-            Ok(Self {
-                spell,
-                targets,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell: u32
-            let spell = crate::util::astd_read_u32_le(r).await?;
-
-            // targets: SpellCastTargets
-            let targets = SpellCastTargets::astd_read(r).await?;
-
-            Ok(Self {
-                spell,
-                targets,
-            })
         })
     }
 

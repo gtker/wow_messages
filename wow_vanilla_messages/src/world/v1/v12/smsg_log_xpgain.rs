@@ -83,7 +83,6 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // target_guid: Guid
         let target_guid = Guid::read(r)?;
@@ -113,96 +112,6 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
             target_guid,
             total_exp,
             exp_type: exp_type_if,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // target_guid: Guid
-            let target_guid = Guid::tokio_read(r).await?;
-
-            // total_exp: u32
-            let total_exp = crate::util::tokio_read_u32_le(r).await?;
-
-            // exp_type: ExperienceAwardType
-            let exp_type: ExperienceAwardType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            let exp_type_if = match exp_type {
-                ExperienceAwardType::KILL => SMSG_LOG_XPGAINExperienceAwardType::KILL,
-                ExperienceAwardType::NON_KILL => {
-                    // experience_without_rested: u32
-                    let experience_without_rested = crate::util::tokio_read_u32_le(r).await?;
-
-                    // exp_group_bonus: f32
-                    let exp_group_bonus = crate::util::tokio_read_f32_le(r).await?;
-                    SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
-                        exp_group_bonus,
-                        experience_without_rested,
-                    }
-                }
-            };
-
-            Ok(Self {
-                target_guid,
-                total_exp,
-                exp_type: exp_type_if,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // target_guid: Guid
-            let target_guid = Guid::astd_read(r).await?;
-
-            // total_exp: u32
-            let total_exp = crate::util::astd_read_u32_le(r).await?;
-
-            // exp_type: ExperienceAwardType
-            let exp_type: ExperienceAwardType = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            let exp_type_if = match exp_type {
-                ExperienceAwardType::KILL => SMSG_LOG_XPGAINExperienceAwardType::KILL,
-                ExperienceAwardType::NON_KILL => {
-                    // experience_without_rested: u32
-                    let experience_without_rested = crate::util::astd_read_u32_le(r).await?;
-
-                    // exp_group_bonus: f32
-                    let exp_group_bonus = crate::util::astd_read_f32_le(r).await?;
-                    SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
-                        exp_group_bonus,
-                        experience_without_rested,
-                    }
-                }
-            };
-
-            Ok(Self {
-                target_guid,
-                total_exp,
-                exp_type: exp_type_if,
-            })
         })
     }
 

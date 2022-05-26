@@ -79,7 +79,6 @@ impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // self_player: u8
         let self_player = crate::util::read_u8_le(r)?;
@@ -109,96 +108,6 @@ impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
             money_in_trade,
             spell_on_lowest_slot,
             trade_slots,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // self_player: u8
-            let self_player = crate::util::tokio_read_u8_le(r).await?;
-
-            // trade_slot_count1: u32
-            let trade_slot_count1 = crate::util::tokio_read_u32_le(r).await?;
-
-            // trade_slot_count2: u32
-            let trade_slot_count2 = crate::util::tokio_read_u32_le(r).await?;
-
-            // money_in_trade: u32
-            let money_in_trade = crate::util::tokio_read_u32_le(r).await?;
-
-            // spell_on_lowest_slot: u32
-            let spell_on_lowest_slot = crate::util::tokio_read_u32_le(r).await?;
-
-            // trade_slots: TradeSlot[7]
-            let mut trade_slots = [TradeSlot::default(); 7];
-            for i in 0..7 {
-                trade_slots[i] = TradeSlot::tokio_read(r).await?;
-            }
-
-            Ok(Self {
-                self_player,
-                trade_slot_count1,
-                trade_slot_count2,
-                money_in_trade,
-                spell_on_lowest_slot,
-                trade_slots,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // self_player: u8
-            let self_player = crate::util::astd_read_u8_le(r).await?;
-
-            // trade_slot_count1: u32
-            let trade_slot_count1 = crate::util::astd_read_u32_le(r).await?;
-
-            // trade_slot_count2: u32
-            let trade_slot_count2 = crate::util::astd_read_u32_le(r).await?;
-
-            // money_in_trade: u32
-            let money_in_trade = crate::util::astd_read_u32_le(r).await?;
-
-            // spell_on_lowest_slot: u32
-            let spell_on_lowest_slot = crate::util::astd_read_u32_le(r).await?;
-
-            // trade_slots: TradeSlot[7]
-            let mut trade_slots = [TradeSlot::default(); 7];
-            for i in 0..7 {
-                trade_slots[i] = TradeSlot::astd_read(r).await?;
-            }
-
-            Ok(Self {
-                self_player,
-                trade_slot_count1,
-                trade_slot_count2,
-                money_in_trade,
-                spell_on_lowest_slot,
-                trade_slots,
-            })
         })
     }
 

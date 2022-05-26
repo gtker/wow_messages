@@ -64,7 +64,6 @@ impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -94,96 +93,6 @@ impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
             guid,
             gossip_list_id,
             unknown,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            // gossip_list_id: u32
-            let gossip_list_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // optional unknown
-            let current_size = {
-                0
-                + 8 // guid: Guid
-                + 4 // gossip_list_id: u32
-            };
-            let unknown = if current_size < body_size as usize {
-                // code: CString
-                let code = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let code = String::from_utf8(code)?;
-
-                Some(CMSG_GOSSIP_SELECT_OPTIONunknown {
-                    code,
-                })
-            } else {
-                None
-            };
-
-            Ok(Self {
-                guid,
-                gossip_list_id,
-                unknown,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            // gossip_list_id: u32
-            let gossip_list_id = crate::util::astd_read_u32_le(r).await?;
-
-            // optional unknown
-            let current_size = {
-                0
-                + 8 // guid: Guid
-                + 4 // gossip_list_id: u32
-            };
-            let unknown = if current_size < body_size as usize {
-                // code: CString
-                let code = crate::util::astd_read_c_string_to_vec(r).await?;
-                let code = String::from_utf8(code)?;
-
-                Some(CMSG_GOSSIP_SELECT_OPTIONunknown {
-                    code,
-                })
-            } else {
-                None
-            };
-
-            Ok(Self {
-                guid,
-                gossip_list_id,
-                unknown,
-            })
         })
     }
 

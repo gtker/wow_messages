@@ -93,7 +93,6 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // result: CorpseQueryResult
         let result: CorpseQueryResult = crate::util::read_u8_le(r)?.try_into()?;
@@ -125,100 +124,6 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
 
         Ok(Self {
             result: result_if,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // result: CorpseQueryResult
-            let result: CorpseQueryResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            let result_if = match result {
-                CorpseQueryResult::NOT_FOUND => MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND,
-                CorpseQueryResult::FOUND => {
-                    // map: Map
-                    let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-                    // position_x: f32
-                    let position_x = crate::util::tokio_read_f32_le(r).await?;
-                    // position_y: f32
-                    let position_y = crate::util::tokio_read_f32_le(r).await?;
-                    // position_z: f32
-                    let position_z = crate::util::tokio_read_f32_le(r).await?;
-                    // corpse_map: Map
-                    let corpse_map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-                    MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
-                        corpse_map,
-                        map,
-                        position_x,
-                        position_y,
-                        position_z,
-                    }
-                }
-            };
-
-            Ok(Self {
-                result: result_if,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // result: CorpseQueryResult
-            let result: CorpseQueryResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            let result_if = match result {
-                CorpseQueryResult::NOT_FOUND => MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND,
-                CorpseQueryResult::FOUND => {
-                    // map: Map
-                    let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-                    // position_x: f32
-                    let position_x = crate::util::astd_read_f32_le(r).await?;
-                    // position_y: f32
-                    let position_y = crate::util::astd_read_f32_le(r).await?;
-                    // position_z: f32
-                    let position_z = crate::util::astd_read_f32_le(r).await?;
-                    // corpse_map: Map
-                    let corpse_map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-                    MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
-                        corpse_map,
-                        map,
-                        position_x,
-                        position_y,
-                        position_z,
-                    }
-                }
-            };
-
-            Ok(Self {
-                result: result_if,
-            })
         })
     }
 

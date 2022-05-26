@@ -81,7 +81,6 @@ impl ServerMessage for SMSG_GOSSIP_MESSAGE {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -112,98 +111,6 @@ impl ServerMessage for SMSG_GOSSIP_MESSAGE {
             title_text_id,
             gossips,
             quests,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            // title_text_id: u32
-            let title_text_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // amount_of_gossip_items: u32
-            let amount_of_gossip_items = crate::util::tokio_read_u32_le(r).await?;
-
-            // gossips: GossipItem[amount_of_gossip_items]
-            let mut gossips = Vec::with_capacity(amount_of_gossip_items as usize);
-            for i in 0..amount_of_gossip_items {
-                gossips.push(GossipItem::tokio_read(r).await?);
-            }
-
-            // amount_of_quests: u32
-            let amount_of_quests = crate::util::tokio_read_u32_le(r).await?;
-
-            // quests: QuestItem[amount_of_quests]
-            let mut quests = Vec::with_capacity(amount_of_quests as usize);
-            for i in 0..amount_of_quests {
-                quests.push(QuestItem::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                guid,
-                title_text_id,
-                gossips,
-                quests,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            // title_text_id: u32
-            let title_text_id = crate::util::astd_read_u32_le(r).await?;
-
-            // amount_of_gossip_items: u32
-            let amount_of_gossip_items = crate::util::astd_read_u32_le(r).await?;
-
-            // gossips: GossipItem[amount_of_gossip_items]
-            let mut gossips = Vec::with_capacity(amount_of_gossip_items as usize);
-            for i in 0..amount_of_gossip_items {
-                gossips.push(GossipItem::astd_read(r).await?);
-            }
-
-            // amount_of_quests: u32
-            let amount_of_quests = crate::util::astd_read_u32_le(r).await?;
-
-            // quests: QuestItem[amount_of_quests]
-            let mut quests = Vec::with_capacity(amount_of_quests as usize);
-            for i in 0..amount_of_quests {
-                quests.push(QuestItem::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                guid,
-                title_text_id,
-                gossips,
-                quests,
-            })
         })
     }
 

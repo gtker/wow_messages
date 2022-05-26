@@ -107,7 +107,6 @@ impl ClientMessage for CMSG_CHAR_CREATE {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
@@ -151,124 +150,6 @@ impl ClientMessage for CMSG_CHAR_CREATE {
             haircolor,
             facialhair,
             outfit_id,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
-
-            // race: Race
-            let race: Race = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            // class: Class
-            let class: Class = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            // gender: Gender
-            let gender: Gender = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            // skin: u8
-            let skin = crate::util::tokio_read_u8_le(r).await?;
-
-            // face: u8
-            let face = crate::util::tokio_read_u8_le(r).await?;
-
-            // hairstyle: u8
-            let hairstyle = crate::util::tokio_read_u8_le(r).await?;
-
-            // haircolor: u8
-            let haircolor = crate::util::tokio_read_u8_le(r).await?;
-
-            // facialhair: u8
-            let facialhair = crate::util::tokio_read_u8_le(r).await?;
-
-            // outfit_id: u8
-            let outfit_id = crate::util::tokio_read_u8_le(r).await?;
-
-            Ok(Self {
-                name,
-                race,
-                class,
-                gender,
-                skin,
-                face,
-                hairstyle,
-                haircolor,
-                facialhair,
-                outfit_id,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            let name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
-
-            // race: Race
-            let race: Race = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            // class: Class
-            let class: Class = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            // gender: Gender
-            let gender: Gender = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            // skin: u8
-            let skin = crate::util::astd_read_u8_le(r).await?;
-
-            // face: u8
-            let face = crate::util::astd_read_u8_le(r).await?;
-
-            // hairstyle: u8
-            let hairstyle = crate::util::astd_read_u8_le(r).await?;
-
-            // haircolor: u8
-            let haircolor = crate::util::astd_read_u8_le(r).await?;
-
-            // facialhair: u8
-            let facialhair = crate::util::astd_read_u8_le(r).await?;
-
-            // outfit_id: u8
-            let outfit_id = crate::util::astd_read_u8_le(r).await?;
-
-            Ok(Self {
-                name,
-                race,
-                class,
-                gender,
-                skin,
-                face,
-                hairstyle,
-                haircolor,
-                facialhair,
-                outfit_id,
-            })
         })
     }
 

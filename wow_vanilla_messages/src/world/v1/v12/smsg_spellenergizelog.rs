@@ -67,7 +67,6 @@ impl ServerMessage for SMSG_SPELLENERGIZELOG {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // victim_guid: PackedGuid
         let victim_guid = Guid::read_packed(r)?;
@@ -90,82 +89,6 @@ impl ServerMessage for SMSG_SPELLENERGIZELOG {
             spell,
             power,
             damage,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // victim_guid: PackedGuid
-            let victim_guid = Guid::tokio_read_packed(r).await?;
-
-            // caster_guid: PackedGuid
-            let caster_guid = Guid::tokio_read_packed(r).await?;
-
-            // spell: u32
-            let spell = crate::util::tokio_read_u32_le(r).await?;
-
-            // power: PowerType
-            let power: PowerType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-            // damage: u32
-            let damage = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                victim_guid,
-                caster_guid,
-                spell,
-                power,
-                damage,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // victim_guid: PackedGuid
-            let victim_guid = Guid::astd_read_packed(r).await?;
-
-            // caster_guid: PackedGuid
-            let caster_guid = Guid::astd_read_packed(r).await?;
-
-            // spell: u32
-            let spell = crate::util::astd_read_u32_le(r).await?;
-
-            // power: PowerType
-            let power: PowerType = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-            // damage: u32
-            let damage = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                victim_guid,
-                caster_guid,
-                spell,
-                power,
-                damage,
-            })
         })
     }
 

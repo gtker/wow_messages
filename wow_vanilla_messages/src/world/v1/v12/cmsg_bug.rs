@@ -73,7 +73,6 @@ impl ClientMessage for CMSG_BUG {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // suggestion: u32
         let suggestion = crate::util::read_u32_le(r)?;
@@ -98,86 +97,6 @@ impl ClientMessage for CMSG_BUG {
             content,
             type_length,
             bug_type,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // suggestion: u32
-            let suggestion = crate::util::tokio_read_u32_le(r).await?;
-
-            // content_length: u32
-            let content_length = crate::util::tokio_read_u32_le(r).await?;
-
-            // content: CString
-            let content = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let content = String::from_utf8(content)?;
-
-            // type_length: u32
-            let type_length = crate::util::tokio_read_u32_le(r).await?;
-
-            // bug_type: CString
-            let bug_type = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let bug_type = String::from_utf8(bug_type)?;
-
-            Ok(Self {
-                suggestion,
-                content_length,
-                content,
-                type_length,
-                bug_type,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // suggestion: u32
-            let suggestion = crate::util::astd_read_u32_le(r).await?;
-
-            // content_length: u32
-            let content_length = crate::util::astd_read_u32_le(r).await?;
-
-            // content: CString
-            let content = crate::util::astd_read_c_string_to_vec(r).await?;
-            let content = String::from_utf8(content)?;
-
-            // type_length: u32
-            let type_length = crate::util::astd_read_u32_le(r).await?;
-
-            // bug_type: CString
-            let bug_type = crate::util::astd_read_c_string_to_vec(r).await?;
-            let bug_type = String::from_utf8(bug_type)?;
-
-            Ok(Self {
-                suggestion,
-                content_length,
-                content,
-                type_length,
-                bug_type,
-            })
         })
     }
 

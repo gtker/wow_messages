@@ -77,7 +77,6 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // update_type: RaidTargetUpdateType
         let update_type: RaidTargetUpdateType = crate::util::read_u8_le(r)?.try_into()?;
@@ -107,96 +106,6 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
 
         Ok(Self {
             update_type: update_type_if,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_type: RaidTargetUpdateType
-            let update_type: RaidTargetUpdateType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            let update_type_if = match update_type {
-                RaidTargetUpdateType::PARTIAL => {
-                    // raid_target: RaidTargetUpdate
-                    let raid_target = RaidTargetUpdate::tokio_read(r).await?;
-
-                    MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
-                        raid_target,
-                    }
-                }
-                RaidTargetUpdateType::FULL => {
-                    // raid_targets: RaidTargetUpdate[8]
-                    let mut raid_targets = Vec::with_capacity(8 as usize);
-                    for i in 0..8 {
-                        raid_targets.push(RaidTargetUpdate::tokio_read(r).await?);
-                    }
-                    let raid_targets = raid_targets.try_into().unwrap();
-
-                    MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
-                        raid_targets,
-                    }
-                }
-            };
-
-            Ok(Self {
-                update_type: update_type_if,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_type: RaidTargetUpdateType
-            let update_type: RaidTargetUpdateType = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            let update_type_if = match update_type {
-                RaidTargetUpdateType::PARTIAL => {
-                    // raid_target: RaidTargetUpdate
-                    let raid_target = RaidTargetUpdate::astd_read(r).await?;
-
-                    MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
-                        raid_target,
-                    }
-                }
-                RaidTargetUpdateType::FULL => {
-                    // raid_targets: RaidTargetUpdate[8]
-                    let mut raid_targets = Vec::with_capacity(8 as usize);
-                    for i in 0..8 {
-                        raid_targets.push(RaidTargetUpdate::astd_read(r).await?);
-                    }
-                    let raid_targets = raid_targets.try_into().unwrap();
-
-                    MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
-                        raid_targets,
-                    }
-                }
-            };
-
-            Ok(Self {
-                update_type: update_type_if,
-            })
         })
     }
 

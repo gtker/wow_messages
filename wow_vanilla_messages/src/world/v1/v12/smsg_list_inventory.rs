@@ -56,7 +56,6 @@ impl ServerMessage for SMSG_LIST_INVENTORY {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // vendor: Guid
         let vendor = Guid::read(r)?;
@@ -73,70 +72,6 @@ impl ServerMessage for SMSG_LIST_INVENTORY {
         Ok(Self {
             vendor,
             items,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // vendor: Guid
-            let vendor = Guid::tokio_read(r).await?;
-
-            // amount_of_items: u8
-            let amount_of_items = crate::util::tokio_read_u8_le(r).await?;
-
-            // items: ListInventoryItem[amount_of_items]
-            let mut items = Vec::with_capacity(amount_of_items as usize);
-            for i in 0..amount_of_items {
-                items.push(ListInventoryItem::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                vendor,
-                items,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // vendor: Guid
-            let vendor = Guid::astd_read(r).await?;
-
-            // amount_of_items: u8
-            let amount_of_items = crate::util::astd_read_u8_le(r).await?;
-
-            // items: ListInventoryItem[amount_of_items]
-            let mut items = Vec::with_capacity(amount_of_items as usize);
-            for i in 0..amount_of_items {
-                items.push(ListInventoryItem::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                vendor,
-                items,
-            })
         })
     }
 

@@ -81,7 +81,6 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // npc: Guid
         let npc = Guid::read(r)?;
@@ -111,96 +110,6 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {
             emote_delay,
             emote,
             quest_items,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // npc: Guid
-            let npc = Guid::tokio_read(r).await?;
-
-            // title: CString
-            let title = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let title = String::from_utf8(title)?;
-
-            // emote_delay: u32
-            let emote_delay = crate::util::tokio_read_u32_le(r).await?;
-
-            // emote: u32
-            let emote = crate::util::tokio_read_u32_le(r).await?;
-
-            // amount_of_entries: u8
-            let amount_of_entries = crate::util::tokio_read_u8_le(r).await?;
-
-            // quest_items: QuestItem[amount_of_entries]
-            let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
-            for i in 0..amount_of_entries {
-                quest_items.push(QuestItem::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                npc,
-                title,
-                emote_delay,
-                emote,
-                quest_items,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // npc: Guid
-            let npc = Guid::astd_read(r).await?;
-
-            // title: CString
-            let title = crate::util::astd_read_c_string_to_vec(r).await?;
-            let title = String::from_utf8(title)?;
-
-            // emote_delay: u32
-            let emote_delay = crate::util::astd_read_u32_le(r).await?;
-
-            // emote: u32
-            let emote = crate::util::astd_read_u32_le(r).await?;
-
-            // amount_of_entries: u8
-            let amount_of_entries = crate::util::astd_read_u8_le(r).await?;
-
-            // quest_items: QuestItem[amount_of_entries]
-            let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
-            for i in 0..amount_of_entries {
-                quest_items.push(QuestItem::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                npc,
-                title,
-                emote_delay,
-                emote,
-                quest_items,
-            })
         })
     }
 

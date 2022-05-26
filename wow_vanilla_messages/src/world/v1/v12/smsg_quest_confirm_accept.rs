@@ -56,7 +56,6 @@ impl ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // quest_id: u32
         let quest_id = crate::util::read_u32_le(r)?;
@@ -72,68 +71,6 @@ impl ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {
             quest_id,
             quest_title,
             guid,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // quest_id: u32
-            let quest_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // quest_title: CString
-            let quest_title = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let quest_title = String::from_utf8(quest_title)?;
-
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            Ok(Self {
-                quest_id,
-                quest_title,
-                guid,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // quest_id: u32
-            let quest_id = crate::util::astd_read_u32_le(r).await?;
-
-            // quest_title: CString
-            let quest_title = crate::util::astd_read_c_string_to_vec(r).await?;
-            let quest_title = String::from_utf8(quest_title)?;
-
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            Ok(Self {
-                quest_id,
-                quest_title,
-                guid,
-            })
         })
     }
 

@@ -52,7 +52,6 @@ impl ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // player_name: CString
         let player_name = crate::util::read_c_string_to_vec(r)?;
@@ -65,62 +64,6 @@ impl ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {
         Ok(Self {
             player_name,
             note,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // player_name: CString
-            let player_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let player_name = String::from_utf8(player_name)?;
-
-            // note: CString
-            let note = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let note = String::from_utf8(note)?;
-
-            Ok(Self {
-                player_name,
-                note,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // player_name: CString
-            let player_name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let player_name = String::from_utf8(player_name)?;
-
-            // note: CString
-            let note = crate::util::astd_read_c_string_to_vec(r).await?;
-            let note = String::from_utf8(note)?;
-
-            Ok(Self {
-                player_name,
-                note,
-            })
         })
     }
 

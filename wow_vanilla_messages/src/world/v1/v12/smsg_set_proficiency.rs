@@ -47,7 +47,6 @@ impl ServerMessage for SMSG_SET_PROFICIENCY {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // class: ItemClass
         let class: ItemClass = crate::util::read_u8_le(r)?.try_into()?;
@@ -58,58 +57,6 @@ impl ServerMessage for SMSG_SET_PROFICIENCY {
         Ok(Self {
             class,
             item_sub_class_mask,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // class: ItemClass
-            let class: ItemClass = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            // item_sub_class_mask: u32
-            let item_sub_class_mask = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                class,
-                item_sub_class_mask,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // class: ItemClass
-            let class: ItemClass = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            // item_sub_class_mask: u32
-            let item_sub_class_mask = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                class,
-                item_sub_class_mask,
-            })
         })
     }
 

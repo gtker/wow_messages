@@ -68,7 +68,6 @@ impl ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // quest_id: u32
         let quest_id = crate::util::read_u32_le(r)?;
@@ -91,82 +90,6 @@ impl ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {
             kill_count,
             required_kill_count,
             guid,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // quest_id: u32
-            let quest_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // create_id: u32
-            let create_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // kill_count: u32
-            let kill_count = crate::util::tokio_read_u32_le(r).await?;
-
-            // required_kill_count: u32
-            let required_kill_count = crate::util::tokio_read_u32_le(r).await?;
-
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            Ok(Self {
-                quest_id,
-                create_id,
-                kill_count,
-                required_kill_count,
-                guid,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // quest_id: u32
-            let quest_id = crate::util::astd_read_u32_le(r).await?;
-
-            // create_id: u32
-            let create_id = crate::util::astd_read_u32_le(r).await?;
-
-            // kill_count: u32
-            let kill_count = crate::util::astd_read_u32_le(r).await?;
-
-            // required_kill_count: u32
-            let required_kill_count = crate::util::astd_read_u32_le(r).await?;
-
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            Ok(Self {
-                quest_id,
-                create_id,
-                kill_count,
-                required_kill_count,
-                guid,
-            })
         })
     }
 

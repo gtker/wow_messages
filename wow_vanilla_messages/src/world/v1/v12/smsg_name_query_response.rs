@@ -84,7 +84,6 @@ impl ServerMessage for SMSG_NAME_QUERY_RESPONSE {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -113,94 +112,6 @@ impl ServerMessage for SMSG_NAME_QUERY_RESPONSE {
             race,
             gender,
             class,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            // character_name: CString
-            let character_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let character_name = String::from_utf8(character_name)?;
-
-            // realm_name: CString
-            let realm_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let realm_name = String::from_utf8(realm_name)?;
-
-            // race: Race
-            let race: Race = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
-
-            // gender: Gender
-            let gender: Gender = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
-
-            // class: Class
-            let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
-
-            Ok(Self {
-                guid,
-                character_name,
-                realm_name,
-                race,
-                gender,
-                class,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            // character_name: CString
-            let character_name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let character_name = String::from_utf8(character_name)?;
-
-            // realm_name: CString
-            let realm_name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let realm_name = String::from_utf8(realm_name)?;
-
-            // race: Race
-            let race: Race = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
-
-            // gender: Gender
-            let gender: Gender = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
-
-            // class: Class
-            let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
-
-            Ok(Self {
-                guid,
-                character_name,
-                realm_name,
-                race,
-                gender,
-                class,
-            })
         })
     }
 

@@ -60,7 +60,6 @@ impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // survey_id: u32
         let survey_id = crate::util::read_u32_le(r)?;
@@ -80,76 +79,6 @@ impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
             survey_id,
             questions,
             answer_comment,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // survey_id: u32
-            let survey_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // questions: GmSurveyQuestion[10]
-            let mut questions = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                questions.push(GmSurveyQuestion::tokio_read(r).await?);
-            }
-            let questions = questions.try_into().unwrap();
-
-            // answer_comment: CString
-            let answer_comment = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let answer_comment = String::from_utf8(answer_comment)?;
-
-            Ok(Self {
-                survey_id,
-                questions,
-                answer_comment,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // survey_id: u32
-            let survey_id = crate::util::astd_read_u32_le(r).await?;
-
-            // questions: GmSurveyQuestion[10]
-            let mut questions = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                questions.push(GmSurveyQuestion::astd_read(r).await?);
-            }
-            let questions = questions.try_into().unwrap();
-
-            // answer_comment: CString
-            let answer_comment = crate::util::astd_read_c_string_to_vec(r).await?;
-            let answer_comment = String::from_utf8(answer_comment)?;
-
-            Ok(Self {
-                survey_id,
-                questions,
-                answer_comment,
-            })
         })
     }
 

@@ -57,7 +57,6 @@ impl ServerMessage for SMSG_GUILD_EVENT {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // event: GuildEvent
         let event: GuildEvent = crate::util::read_u8_le(r)?.try_into()?;
@@ -75,72 +74,6 @@ impl ServerMessage for SMSG_GUILD_EVENT {
         Ok(Self {
             event,
             event_descriptions,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // event: GuildEvent
-            let event: GuildEvent = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            // amount_of_events: u8
-            let amount_of_events = crate::util::tokio_read_u8_le(r).await?;
-
-            // event_descriptions: CString[amount_of_events]
-            let mut event_descriptions = Vec::with_capacity(amount_of_events as usize);
-            for i in 0..amount_of_events {
-                let s = crate::util::tokio_read_c_string_to_vec(r).await?;
-                event_descriptions.push(String::from_utf8(s)?);
-            }
-
-            Ok(Self {
-                event,
-                event_descriptions,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // event: GuildEvent
-            let event: GuildEvent = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            // amount_of_events: u8
-            let amount_of_events = crate::util::astd_read_u8_le(r).await?;
-
-            // event_descriptions: CString[amount_of_events]
-            let mut event_descriptions = Vec::with_capacity(amount_of_events as usize);
-            for i in 0..amount_of_events {
-                let s = crate::util::astd_read_c_string_to_vec(r).await?;
-                event_descriptions.push(String::from_utf8(s)?);
-            }
-
-            Ok(Self {
-                event,
-                event_descriptions,
-            })
         })
     }
 

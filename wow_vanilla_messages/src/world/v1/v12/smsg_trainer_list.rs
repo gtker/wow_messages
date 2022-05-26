@@ -74,7 +74,6 @@ impl ServerMessage for SMSG_TRAINER_LIST {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -100,88 +99,6 @@ impl ServerMessage for SMSG_TRAINER_LIST {
             trainer_type,
             spells,
             greeting,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            // trainer_type: u32
-            let trainer_type = crate::util::tokio_read_u32_le(r).await?;
-
-            // amount_of_spells: u32
-            let amount_of_spells = crate::util::tokio_read_u32_le(r).await?;
-
-            // spells: TrainerSpell[amount_of_spells]
-            let mut spells = Vec::with_capacity(amount_of_spells as usize);
-            for i in 0..amount_of_spells {
-                spells.push(TrainerSpell::tokio_read(r).await?);
-            }
-
-            // greeting: CString
-            let greeting = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let greeting = String::from_utf8(greeting)?;
-
-            Ok(Self {
-                guid,
-                trainer_type,
-                spells,
-                greeting,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            // trainer_type: u32
-            let trainer_type = crate::util::astd_read_u32_le(r).await?;
-
-            // amount_of_spells: u32
-            let amount_of_spells = crate::util::astd_read_u32_le(r).await?;
-
-            // spells: TrainerSpell[amount_of_spells]
-            let mut spells = Vec::with_capacity(amount_of_spells as usize);
-            for i in 0..amount_of_spells {
-                spells.push(TrainerSpell::astd_read(r).await?);
-            }
-
-            // greeting: CString
-            let greeting = crate::util::astd_read_c_string_to_vec(r).await?;
-            let greeting = String::from_utf8(greeting)?;
-
-            Ok(Self {
-                guid,
-                trainer_type,
-                spells,
-                greeting,
-            })
         })
     }
 

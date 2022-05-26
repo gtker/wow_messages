@@ -41,7 +41,6 @@ impl ClientMessage for CMSG_GUILD_INVITE {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // invited_player: CString
         let invited_player = crate::util::read_c_string_to_vec(r)?;
@@ -49,52 +48,6 @@ impl ClientMessage for CMSG_GUILD_INVITE {
 
         Ok(Self {
             invited_player,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // invited_player: CString
-            let invited_player = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let invited_player = String::from_utf8(invited_player)?;
-
-            Ok(Self {
-                invited_player,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // invited_player: CString
-            let invited_player = crate::util::astd_read_c_string_to_vec(r).await?;
-            let invited_player = String::from_utf8(invited_player)?;
-
-            Ok(Self {
-                invited_player,
-            })
         })
     }
 

@@ -76,7 +76,6 @@ impl ServerMessage for SMSG_GOSSIP_POI {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // flags: u32
         let flags = crate::util::read_u32_le(r)?;
@@ -102,88 +101,6 @@ impl ServerMessage for SMSG_GOSSIP_POI {
             icon,
             data,
             location_name,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: u32
-            let flags = crate::util::tokio_read_u32_le(r).await?;
-
-            // position_x: f32
-            let position_x = crate::util::tokio_read_f32_le(r).await?;
-            // position_y: f32
-            let position_y = crate::util::tokio_read_f32_le(r).await?;
-            // icon: u32
-            let icon = crate::util::tokio_read_u32_le(r).await?;
-
-            // data: u32
-            let data = crate::util::tokio_read_u32_le(r).await?;
-
-            // location_name: CString
-            let location_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let location_name = String::from_utf8(location_name)?;
-
-            Ok(Self {
-                flags,
-                position_x,
-                position_y,
-                icon,
-                data,
-                location_name,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: u32
-            let flags = crate::util::astd_read_u32_le(r).await?;
-
-            // position_x: f32
-            let position_x = crate::util::astd_read_f32_le(r).await?;
-            // position_y: f32
-            let position_y = crate::util::astd_read_f32_le(r).await?;
-            // icon: u32
-            let icon = crate::util::astd_read_u32_le(r).await?;
-
-            // data: u32
-            let data = crate::util::astd_read_u32_le(r).await?;
-
-            // location_name: CString
-            let location_name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let location_name = String::from_utf8(location_name)?;
-
-            Ok(Self {
-                flags,
-                position_x,
-                position_y,
-                icon,
-                data,
-                location_name,
-            })
         })
     }
 

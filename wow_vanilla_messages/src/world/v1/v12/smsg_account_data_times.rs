@@ -43,7 +43,6 @@ impl ServerMessage for SMSG_ACCOUNT_DATA_TIMES {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // data: u32[32]
         let mut data = [u32::default(); 32];
@@ -53,56 +52,6 @@ impl ServerMessage for SMSG_ACCOUNT_DATA_TIMES {
 
         Ok(Self {
             data,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // data: u32[32]
-            let mut data = [u32::default(); 32];
-            for i in 0..32 {
-                data[i] = crate::util::tokio_read_u32_le(r).await?;
-            }
-
-            Ok(Self {
-                data,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // data: u32[32]
-            let mut data = [u32::default(); 32];
-            for i in 0..32 {
-                data[i] = crate::util::astd_read_u32_le(r).await?;
-            }
-
-            Ok(Self {
-                data,
-            })
         })
     }
 

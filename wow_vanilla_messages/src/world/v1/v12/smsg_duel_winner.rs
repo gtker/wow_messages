@@ -60,7 +60,6 @@ impl ServerMessage for SMSG_DUEL_WINNER {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // reason: DuelWinnerReason
         let reason: DuelWinnerReason = crate::util::read_u8_le(r)?.try_into()?;
@@ -77,70 +76,6 @@ impl ServerMessage for SMSG_DUEL_WINNER {
             reason,
             opponent_name,
             initiator_name,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // reason: DuelWinnerReason
-            let reason: DuelWinnerReason = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            // opponent_name: CString
-            let opponent_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let opponent_name = String::from_utf8(opponent_name)?;
-
-            // initiator_name: CString
-            let initiator_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let initiator_name = String::from_utf8(initiator_name)?;
-
-            Ok(Self {
-                reason,
-                opponent_name,
-                initiator_name,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // reason: DuelWinnerReason
-            let reason: DuelWinnerReason = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            // opponent_name: CString
-            let opponent_name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let opponent_name = String::from_utf8(opponent_name)?;
-
-            // initiator_name: CString
-            let initiator_name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let initiator_name = String::from_utf8(initiator_name)?;
-
-            Ok(Self {
-                reason,
-                opponent_name,
-                initiator_name,
-            })
         })
     }
 

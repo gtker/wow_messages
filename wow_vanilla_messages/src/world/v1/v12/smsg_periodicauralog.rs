@@ -70,7 +70,6 @@ impl ServerMessage for SMSG_PERIODICAURALOG {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // target: PackedGuid
         let target = Guid::read_packed(r)?;
@@ -95,86 +94,6 @@ impl ServerMessage for SMSG_PERIODICAURALOG {
             caster,
             spell,
             auras,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // target: PackedGuid
-            let target = Guid::tokio_read_packed(r).await?;
-
-            // caster: PackedGuid
-            let caster = Guid::tokio_read_packed(r).await?;
-
-            // spell: u32
-            let spell = crate::util::tokio_read_u32_le(r).await?;
-
-            // amount_of_auras: u32
-            let amount_of_auras = crate::util::tokio_read_u32_le(r).await?;
-
-            // auras: AuraLog[amount_of_auras]
-            let mut auras = Vec::with_capacity(amount_of_auras as usize);
-            for i in 0..amount_of_auras {
-                auras.push(AuraLog::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                target,
-                caster,
-                spell,
-                auras,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // target: PackedGuid
-            let target = Guid::astd_read_packed(r).await?;
-
-            // caster: PackedGuid
-            let caster = Guid::astd_read_packed(r).await?;
-
-            // spell: u32
-            let spell = crate::util::astd_read_u32_le(r).await?;
-
-            // amount_of_auras: u32
-            let amount_of_auras = crate::util::astd_read_u32_le(r).await?;
-
-            // auras: AuraLog[amount_of_auras]
-            let mut auras = Vec::with_capacity(amount_of_auras as usize);
-            for i in 0..amount_of_auras {
-                auras.push(AuraLog::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                target,
-                caster,
-                spell,
-                auras,
-            })
         })
     }
 

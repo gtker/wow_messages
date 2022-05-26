@@ -70,7 +70,6 @@ impl ServerMessage for SMSG_RESURRECT_REQUEST {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -94,84 +93,6 @@ impl ServerMessage for SMSG_RESURRECT_REQUEST {
             name,
             caster_is_spirit_healer,
             respect_resurrection_timer,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            // name_length: u32
-            let name_length = crate::util::tokio_read_u32_le(r).await?;
-
-            // name: CString
-            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
-
-            // caster_is_spirit_healer: u8
-            let caster_is_spirit_healer = crate::util::tokio_read_u8_le(r).await?;
-
-            // respect_resurrection_timer: u8
-            let respect_resurrection_timer = crate::util::tokio_read_u8_le(r).await?;
-
-            Ok(Self {
-                guid,
-                name_length,
-                name,
-                caster_is_spirit_healer,
-                respect_resurrection_timer,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            // name_length: u32
-            let name_length = crate::util::astd_read_u32_le(r).await?;
-
-            // name: CString
-            let name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
-
-            // caster_is_spirit_healer: u8
-            let caster_is_spirit_healer = crate::util::astd_read_u8_le(r).await?;
-
-            // respect_resurrection_timer: u8
-            let respect_resurrection_timer = crate::util::astd_read_u8_le(r).await?;
-
-            Ok(Self {
-                guid,
-                name_length,
-                name,
-                caster_is_spirit_healer,
-                respect_resurrection_timer,
-            })
         })
     }
 

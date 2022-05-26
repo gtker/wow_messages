@@ -56,7 +56,6 @@ impl ClientMessage for CMSG_LOOT_METHOD {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // loot_setting: GroupLootSetting
         let loot_setting: GroupLootSetting = (crate::util::read_u32_le(r)? as u8).try_into()?;
@@ -71,66 +70,6 @@ impl ClientMessage for CMSG_LOOT_METHOD {
             loot_setting,
             loot_master,
             loot_threshold,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // loot_setting: GroupLootSetting
-            let loot_setting: GroupLootSetting = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
-
-            // loot_master: Guid
-            let loot_master = Guid::tokio_read(r).await?;
-
-            // loot_threshold: ItemQuality
-            let loot_threshold: ItemQuality = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
-
-            Ok(Self {
-                loot_setting,
-                loot_master,
-                loot_threshold,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // loot_setting: GroupLootSetting
-            let loot_setting: GroupLootSetting = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
-
-            // loot_master: Guid
-            let loot_master = Guid::astd_read(r).await?;
-
-            // loot_threshold: ItemQuality
-            let loot_threshold: ItemQuality = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
-
-            Ok(Self {
-                loot_setting,
-                loot_master,
-                loot_threshold,
-            })
         })
     }
 

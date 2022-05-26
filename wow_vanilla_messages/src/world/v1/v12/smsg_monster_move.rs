@@ -74,7 +74,6 @@ impl ServerMessage for SMSG_MONSTER_MOVE {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
@@ -98,84 +97,6 @@ impl ServerMessage for SMSG_MONSTER_MOVE {
             position_z,
             spline_id,
             move_type,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: PackedGuid
-            let guid = Guid::tokio_read_packed(r).await?;
-
-            // position_x: f32
-            let position_x = crate::util::tokio_read_f32_le(r).await?;
-            // position_y: f32
-            let position_y = crate::util::tokio_read_f32_le(r).await?;
-            // position_z: f32
-            let position_z = crate::util::tokio_read_f32_le(r).await?;
-            // spline_id: u32
-            let spline_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // move_type: MonsterMoveType
-            let move_type: MonsterMoveType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-            Ok(Self {
-                guid,
-                position_x,
-                position_y,
-                position_z,
-                spline_id,
-                move_type,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: PackedGuid
-            let guid = Guid::astd_read_packed(r).await?;
-
-            // position_x: f32
-            let position_x = crate::util::astd_read_f32_le(r).await?;
-            // position_y: f32
-            let position_y = crate::util::astd_read_f32_le(r).await?;
-            // position_z: f32
-            let position_z = crate::util::astd_read_f32_le(r).await?;
-            // spline_id: u32
-            let spline_id = crate::util::astd_read_u32_le(r).await?;
-
-            // move_type: MonsterMoveType
-            let move_type: MonsterMoveType = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-            Ok(Self {
-                guid,
-                position_x,
-                position_y,
-                position_z,
-                spline_id,
-                move_type,
-            })
         })
     }
 

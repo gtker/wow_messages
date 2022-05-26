@@ -96,7 +96,6 @@ impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // id: u32
         let id = crate::util::read_u32_le(r)?;
@@ -137,118 +136,6 @@ impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
             border_style,
             border_color,
             background_color,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // id: u32
-            let id = crate::util::tokio_read_u32_le(r).await?;
-
-            // name: CString
-            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
-
-            // rank_names: CString[10]
-            let mut rank_names = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                let s = crate::util::tokio_read_c_string_to_vec(r).await?;
-                rank_names[i] = String::from_utf8(s)?;
-            }
-            let rank_names = rank_names.try_into().unwrap();
-
-            // emblem_style: u32
-            let emblem_style = crate::util::tokio_read_u32_le(r).await?;
-
-            // emblem_color: u32
-            let emblem_color = crate::util::tokio_read_u32_le(r).await?;
-
-            // border_style: u32
-            let border_style = crate::util::tokio_read_u32_le(r).await?;
-
-            // border_color: u32
-            let border_color = crate::util::tokio_read_u32_le(r).await?;
-
-            // background_color: u32
-            let background_color = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                id,
-                name,
-                rank_names,
-                emblem_style,
-                emblem_color,
-                border_style,
-                border_color,
-                background_color,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // id: u32
-            let id = crate::util::astd_read_u32_le(r).await?;
-
-            // name: CString
-            let name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
-
-            // rank_names: CString[10]
-            let mut rank_names = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                let s = crate::util::astd_read_c_string_to_vec(r).await?;
-                rank_names[i] = String::from_utf8(s)?;
-            }
-            let rank_names = rank_names.try_into().unwrap();
-
-            // emblem_style: u32
-            let emblem_style = crate::util::astd_read_u32_le(r).await?;
-
-            // emblem_color: u32
-            let emblem_color = crate::util::astd_read_u32_le(r).await?;
-
-            // border_style: u32
-            let border_style = crate::util::astd_read_u32_le(r).await?;
-
-            // border_color: u32
-            let border_color = crate::util::astd_read_u32_le(r).await?;
-
-            // background_color: u32
-            let background_color = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                id,
-                name,
-                rank_names,
-                emblem_style,
-                emblem_color,
-                border_style,
-                border_color,
-                background_color,
-            })
         })
     }
 

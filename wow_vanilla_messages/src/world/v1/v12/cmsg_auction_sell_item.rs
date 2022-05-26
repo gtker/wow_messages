@@ -75,7 +75,6 @@ impl ClientMessage for CMSG_AUCTION_SELL_ITEM {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // auctioneer_guid: Guid
         let auctioneer_guid = Guid::read(r)?;
@@ -102,90 +101,6 @@ impl ClientMessage for CMSG_AUCTION_SELL_ITEM {
             starting_bid,
             buyout,
             auction_duration_in_minutes,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // auctioneer_guid: Guid
-            let auctioneer_guid = Guid::tokio_read(r).await?;
-
-            // object_guid: Guid
-            let object_guid = Guid::tokio_read(r).await?;
-
-            // stack_size: u32
-            let stack_size = crate::util::tokio_read_u32_le(r).await?;
-
-            // starting_bid: u32
-            let starting_bid = crate::util::tokio_read_u32_le(r).await?;
-
-            // buyout: u32
-            let buyout = crate::util::tokio_read_u32_le(r).await?;
-
-            // auction_duration_in_minutes: u32
-            let auction_duration_in_minutes = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                auctioneer_guid,
-                object_guid,
-                stack_size,
-                starting_bid,
-                buyout,
-                auction_duration_in_minutes,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // auctioneer_guid: Guid
-            let auctioneer_guid = Guid::astd_read(r).await?;
-
-            // object_guid: Guid
-            let object_guid = Guid::astd_read(r).await?;
-
-            // stack_size: u32
-            let stack_size = crate::util::astd_read_u32_le(r).await?;
-
-            // starting_bid: u32
-            let starting_bid = crate::util::astd_read_u32_le(r).await?;
-
-            // buyout: u32
-            let buyout = crate::util::astd_read_u32_le(r).await?;
-
-            // auction_duration_in_minutes: u32
-            let auction_duration_in_minutes = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                auctioneer_guid,
-                object_guid,
-                stack_size,
-                starting_bid,
-                buyout,
-                auction_duration_in_minutes,
-            })
         })
     }
 

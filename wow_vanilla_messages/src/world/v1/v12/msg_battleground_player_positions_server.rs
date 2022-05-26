@@ -59,7 +59,6 @@ impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount_of_carriers: u32
         let _amount_of_carriers = crate::util::read_u32_le(r)?;
@@ -76,70 +75,6 @@ impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         Ok(Self {
             flag_carriers,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_carriers: u32
-            let _amount_of_carriers = crate::util::tokio_read_u32_le(r).await?;
-            // amount_of_carriers is expected to always be 0 (0)
-
-            // amount_of_flag_carriers: u32
-            let amount_of_flag_carriers = crate::util::tokio_read_u32_le(r).await?;
-
-            // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
-            let mut flag_carriers = Vec::with_capacity(amount_of_flag_carriers as usize);
-            for i in 0..amount_of_flag_carriers {
-                flag_carriers.push(BattlegroundPlayerPosition::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                flag_carriers,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_carriers: u32
-            let _amount_of_carriers = crate::util::astd_read_u32_le(r).await?;
-            // amount_of_carriers is expected to always be 0 (0)
-
-            // amount_of_flag_carriers: u32
-            let amount_of_flag_carriers = crate::util::astd_read_u32_le(r).await?;
-
-            // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
-            let mut flag_carriers = Vec::with_capacity(amount_of_flag_carriers as usize);
-            for i in 0..amount_of_flag_carriers {
-                flag_carriers.push(BattlegroundPlayerPosition::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                flag_carriers,
-            })
         })
     }
 

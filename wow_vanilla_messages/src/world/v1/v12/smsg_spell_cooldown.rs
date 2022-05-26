@@ -50,7 +50,6 @@ impl ServerMessage for SMSG_SPELL_COOLDOWN {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -68,72 +67,6 @@ impl ServerMessage for SMSG_SPELL_COOLDOWN {
         Ok(Self {
             guid,
             cooldowns,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            // cooldowns: SpellCooldownStatus[-]
-            let mut current_size = {
-                8 // guid: Guid
-            };
-            let mut cooldowns = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                cooldowns.push(SpellCooldownStatus::tokio_read(r).await?);
-                current_size += 1;
-            }
-
-            Ok(Self {
-                guid,
-                cooldowns,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            // cooldowns: SpellCooldownStatus[-]
-            let mut current_size = {
-                8 // guid: Guid
-            };
-            let mut cooldowns = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                cooldowns.push(SpellCooldownStatus::astd_read(r).await?);
-                current_size += 1;
-            }
-
-            Ok(Self {
-                guid,
-                cooldowns,
-            })
         })
     }
 

@@ -75,7 +75,6 @@ impl ServerMessage for SMSG_LOOT_START_ROLL {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // creature_guid: Guid
         let creature_guid = Guid::read(r)?;
@@ -102,90 +101,6 @@ impl ServerMessage for SMSG_LOOT_START_ROLL {
             item_random_suffix,
             item_random_property_id,
             countdown_time,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // creature_guid: Guid
-            let creature_guid = Guid::tokio_read(r).await?;
-
-            // loot_slot: u32
-            let loot_slot = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_id: u32
-            let item_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_random_suffix: u32
-            let item_random_suffix = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // countdown_time: u32
-            let countdown_time = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                creature_guid,
-                loot_slot,
-                item_id,
-                item_random_suffix,
-                item_random_property_id,
-                countdown_time,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // creature_guid: Guid
-            let creature_guid = Guid::astd_read(r).await?;
-
-            // loot_slot: u32
-            let loot_slot = crate::util::astd_read_u32_le(r).await?;
-
-            // item_id: u32
-            let item_id = crate::util::astd_read_u32_le(r).await?;
-
-            // item_random_suffix: u32
-            let item_random_suffix = crate::util::astd_read_u32_le(r).await?;
-
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::astd_read_u32_le(r).await?;
-
-            // countdown_time: u32
-            let countdown_time = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                creature_guid,
-                loot_slot,
-                item_id,
-                item_random_suffix,
-                item_random_property_id,
-                countdown_time,
-            })
         })
     }
 

@@ -56,7 +56,6 @@ impl ServerMessage for SMSG_PETITION_SHOWLIST {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // npc: Guid
         let npc = Guid::read(r)?;
@@ -73,70 +72,6 @@ impl ServerMessage for SMSG_PETITION_SHOWLIST {
         Ok(Self {
             npc,
             petitions,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // npc: Guid
-            let npc = Guid::tokio_read(r).await?;
-
-            // amount_of_petitions: u8
-            let amount_of_petitions = crate::util::tokio_read_u8_le(r).await?;
-
-            // petitions: PetitionShowlist[amount_of_petitions]
-            let mut petitions = Vec::with_capacity(amount_of_petitions as usize);
-            for i in 0..amount_of_petitions {
-                petitions.push(PetitionShowlist::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                npc,
-                petitions,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // npc: Guid
-            let npc = Guid::astd_read(r).await?;
-
-            // amount_of_petitions: u8
-            let amount_of_petitions = crate::util::astd_read_u8_le(r).await?;
-
-            // petitions: PetitionShowlist[amount_of_petitions]
-            let mut petitions = Vec::with_capacity(amount_of_petitions as usize);
-            for i in 0..amount_of_petitions {
-                petitions.push(PetitionShowlist::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                npc,
-                petitions,
-            })
         })
     }
 

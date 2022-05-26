@@ -116,7 +116,6 @@ impl ServerMessage for SMSG_GMTICKET_GETTICKET {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // status: GmTicketStatus
         let status: GmTicketStatus = crate::util::read_u32_le(r)?.try_into()?;
@@ -158,120 +157,6 @@ impl ServerMessage for SMSG_GMTICKET_GETTICKET {
 
         Ok(Self {
             status: status_if,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // status: GmTicketStatus
-            let status: GmTicketStatus = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-            let status_if = match status {
-                GmTicketStatus::DBERROR => SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR,
-                GmTicketStatus::HASTEXT => {
-                    // text: CString
-                    let text = crate::util::tokio_read_c_string_to_vec(r).await?;
-                    let text = String::from_utf8(text)?;
-
-                    // ticket_type: GmTicketType
-                    let ticket_type: GmTicketType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-                    // days_since_ticket_creation: f32
-                    let days_since_ticket_creation = crate::util::tokio_read_f32_le(r).await?;
-                    // days_since_oldest_ticket_creation: f32
-                    let days_since_oldest_ticket_creation = crate::util::tokio_read_f32_le(r).await?;
-                    // days_since_last_updated: f32
-                    let days_since_last_updated = crate::util::tokio_read_f32_le(r).await?;
-                    // escalation_status: GmTicketEscalationStatus
-                    let escalation_status: GmTicketEscalationStatus = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-                    // read_by_gm: u8
-                    let read_by_gm = crate::util::tokio_read_u8_le(r).await?;
-
-                    SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                        days_since_last_updated,
-                        days_since_oldest_ticket_creation,
-                        days_since_ticket_creation,
-                        escalation_status,
-                        read_by_gm,
-                        text,
-                        ticket_type,
-                    }
-                }
-                GmTicketStatus::DEFAULT => SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT,
-            };
-
-            Ok(Self {
-                status: status_if,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // status: GmTicketStatus
-            let status: GmTicketStatus = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-            let status_if = match status {
-                GmTicketStatus::DBERROR => SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR,
-                GmTicketStatus::HASTEXT => {
-                    // text: CString
-                    let text = crate::util::astd_read_c_string_to_vec(r).await?;
-                    let text = String::from_utf8(text)?;
-
-                    // ticket_type: GmTicketType
-                    let ticket_type: GmTicketType = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-                    // days_since_ticket_creation: f32
-                    let days_since_ticket_creation = crate::util::astd_read_f32_le(r).await?;
-                    // days_since_oldest_ticket_creation: f32
-                    let days_since_oldest_ticket_creation = crate::util::astd_read_f32_le(r).await?;
-                    // days_since_last_updated: f32
-                    let days_since_last_updated = crate::util::astd_read_f32_le(r).await?;
-                    // escalation_status: GmTicketEscalationStatus
-                    let escalation_status: GmTicketEscalationStatus = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-                    // read_by_gm: u8
-                    let read_by_gm = crate::util::astd_read_u8_le(r).await?;
-
-                    SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                        days_since_last_updated,
-                        days_since_oldest_ticket_creation,
-                        days_since_ticket_creation,
-                        escalation_status,
-                        read_by_gm,
-                        text,
-                        ticket_type,
-                    }
-                }
-                GmTicketStatus::DEFAULT => SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT,
-            };
-
-            Ok(Self {
-                status: status_if,
-            })
         })
     }
 

@@ -62,7 +62,6 @@ impl ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // auctioneer: Guid
         let auctioneer = Guid::read(r)?;
@@ -83,78 +82,6 @@ impl ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {
             auctioneer,
             start_from_page,
             outbid_item_ids,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // auctioneer: Guid
-            let auctioneer = Guid::tokio_read(r).await?;
-
-            // start_from_page: u32
-            let start_from_page = crate::util::tokio_read_u32_le(r).await?;
-
-            // amount_of_outbidded_items: u32
-            let amount_of_outbidded_items = crate::util::tokio_read_u32_le(r).await?;
-
-            // outbid_item_ids: u32[amount_of_outbidded_items]
-            let mut outbid_item_ids = Vec::with_capacity(amount_of_outbidded_items as usize);
-            for i in 0..amount_of_outbidded_items {
-                outbid_item_ids.push(crate::util::tokio_read_u32_le(r).await?);
-            }
-
-            Ok(Self {
-                auctioneer,
-                start_from_page,
-                outbid_item_ids,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // auctioneer: Guid
-            let auctioneer = Guid::astd_read(r).await?;
-
-            // start_from_page: u32
-            let start_from_page = crate::util::astd_read_u32_le(r).await?;
-
-            // amount_of_outbidded_items: u32
-            let amount_of_outbidded_items = crate::util::astd_read_u32_le(r).await?;
-
-            // outbid_item_ids: u32[amount_of_outbidded_items]
-            let mut outbid_item_ids = Vec::with_capacity(amount_of_outbidded_items as usize);
-            for i in 0..amount_of_outbidded_items {
-                outbid_item_ids.push(crate::util::astd_read_u32_le(r).await?);
-            }
-
-            Ok(Self {
-                auctioneer,
-                start_from_page,
-                outbid_item_ids,
-            })
         })
     }
 

@@ -46,7 +46,6 @@ impl ServerMessage for SMSG_SUPERCEDED_SPELL {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // new_spell_id: u16
         let new_spell_id = crate::util::read_u16_le(r)?;
@@ -57,58 +56,6 @@ impl ServerMessage for SMSG_SUPERCEDED_SPELL {
         Ok(Self {
             new_spell_id,
             old_spell_id,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // new_spell_id: u16
-            let new_spell_id = crate::util::tokio_read_u16_le(r).await?;
-
-            // old_spell_id: u16
-            let old_spell_id = crate::util::tokio_read_u16_le(r).await?;
-
-            Ok(Self {
-                new_spell_id,
-                old_spell_id,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // new_spell_id: u16
-            let new_spell_id = crate::util::astd_read_u16_le(r).await?;
-
-            // old_spell_id: u16
-            let old_spell_id = crate::util::astd_read_u16_le(r).await?;
-
-            Ok(Self {
-                new_spell_id,
-                old_spell_id,
-            })
         })
     }
 

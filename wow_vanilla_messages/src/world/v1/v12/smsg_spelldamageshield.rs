@@ -62,7 +62,6 @@ impl ServerMessage for SMSG_SPELLDAMAGESHIELD {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // victim_guid: Guid
         let victim_guid = Guid::read(r)?;
@@ -81,74 +80,6 @@ impl ServerMessage for SMSG_SPELLDAMAGESHIELD {
             caster_guid,
             damage,
             school,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // victim_guid: Guid
-            let victim_guid = Guid::tokio_read(r).await?;
-
-            // caster_guid: Guid
-            let caster_guid = Guid::tokio_read(r).await?;
-
-            // damage: u32
-            let damage = crate::util::tokio_read_u32_le(r).await?;
-
-            // school: SpellSchool
-            let school: SpellSchool = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
-
-            Ok(Self {
-                victim_guid,
-                caster_guid,
-                damage,
-                school,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // victim_guid: Guid
-            let victim_guid = Guid::astd_read(r).await?;
-
-            // caster_guid: Guid
-            let caster_guid = Guid::astd_read(r).await?;
-
-            // damage: u32
-            let damage = crate::util::astd_read_u32_le(r).await?;
-
-            // school: SpellSchool
-            let school: SpellSchool = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
-
-            Ok(Self {
-                victim_guid,
-                caster_guid,
-                damage,
-                school,
-            })
         })
     }
 

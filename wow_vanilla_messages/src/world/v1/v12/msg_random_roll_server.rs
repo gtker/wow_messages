@@ -61,7 +61,6 @@ impl ServerMessage for MSG_RANDOM_ROLL_Server {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // minimum: u32
         let minimum = crate::util::read_u32_le(r)?;
@@ -80,74 +79,6 @@ impl ServerMessage for MSG_RANDOM_ROLL_Server {
             maximum,
             actual_roll,
             guid,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // minimum: u32
-            let minimum = crate::util::tokio_read_u32_le(r).await?;
-
-            // maximum: u32
-            let maximum = crate::util::tokio_read_u32_le(r).await?;
-
-            // actual_roll: u32
-            let actual_roll = crate::util::tokio_read_u32_le(r).await?;
-
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            Ok(Self {
-                minimum,
-                maximum,
-                actual_roll,
-                guid,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // minimum: u32
-            let minimum = crate::util::astd_read_u32_le(r).await?;
-
-            // maximum: u32
-            let maximum = crate::util::astd_read_u32_le(r).await?;
-
-            // actual_roll: u32
-            let actual_roll = crate::util::astd_read_u32_le(r).await?;
-
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            Ok(Self {
-                minimum,
-                maximum,
-                actual_roll,
-                guid,
-            })
         })
     }
 

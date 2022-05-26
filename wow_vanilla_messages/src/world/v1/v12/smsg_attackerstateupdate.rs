@@ -59,7 +59,6 @@ impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // hit_info: u32
         let hit_info = crate::util::read_u32_le(r)?;
@@ -78,74 +77,6 @@ impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {
             attacker,
             target,
             total_damage,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // hit_info: u32
-            let hit_info = crate::util::tokio_read_u32_le(r).await?;
-
-            // attacker: PackedGuid
-            let attacker = Guid::tokio_read_packed(r).await?;
-
-            // target: PackedGuid
-            let target = Guid::tokio_read_packed(r).await?;
-
-            // total_damage: u32
-            let total_damage = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                hit_info,
-                attacker,
-                target,
-                total_damage,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // hit_info: u32
-            let hit_info = crate::util::astd_read_u32_le(r).await?;
-
-            // attacker: PackedGuid
-            let attacker = Guid::astd_read_packed(r).await?;
-
-            // target: PackedGuid
-            let target = Guid::astd_read_packed(r).await?;
-
-            // total_damage: u32
-            let total_damage = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                hit_info,
-                attacker,
-                target,
-                total_damage,
-            })
         })
     }
 

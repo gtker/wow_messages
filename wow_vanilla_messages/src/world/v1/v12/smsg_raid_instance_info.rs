@@ -48,7 +48,6 @@ impl ServerMessage for SMSG_RAID_INSTANCE_INFO {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount_of_raid_infos: u32
         let amount_of_raid_infos = crate::util::read_u32_le(r)?;
@@ -61,62 +60,6 @@ impl ServerMessage for SMSG_RAID_INSTANCE_INFO {
 
         Ok(Self {
             raid_infos,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_raid_infos: u32
-            let amount_of_raid_infos = crate::util::tokio_read_u32_le(r).await?;
-
-            // raid_infos: RaidInfo[amount_of_raid_infos]
-            let mut raid_infos = Vec::with_capacity(amount_of_raid_infos as usize);
-            for i in 0..amount_of_raid_infos {
-                raid_infos.push(RaidInfo::tokio_read(r).await?);
-            }
-
-            Ok(Self {
-                raid_infos,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // amount_of_raid_infos: u32
-            let amount_of_raid_infos = crate::util::astd_read_u32_le(r).await?;
-
-            // raid_infos: RaidInfo[amount_of_raid_infos]
-            let mut raid_infos = Vec::with_capacity(amount_of_raid_infos as usize);
-            for i in 0..amount_of_raid_infos {
-                raid_infos.push(RaidInfo::astd_read(r).await?);
-            }
-
-            Ok(Self {
-                raid_infos,
-            })
         })
     }
 

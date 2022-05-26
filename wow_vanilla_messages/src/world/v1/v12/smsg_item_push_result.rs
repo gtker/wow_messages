@@ -106,7 +106,6 @@ impl ServerMessage for SMSG_ITEM_PUSH_RESULT {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -149,122 +148,6 @@ impl ServerMessage for SMSG_ITEM_PUSH_RESULT {
             item_suffix_factor,
             item_random_property_id,
             item_count,
-        })
-    }
-
-    #[cfg(feature = "tokio")]
-    fn tokio_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
-
-            // source: NewItemSource
-            let source: NewItemSource = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-            // creation_type: NewItemCreationType
-            let creation_type: NewItemCreationType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-            // alert_chat: NewItemChatAlert
-            let alert_chat: NewItemChatAlert = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-            // bag_slot: u8
-            let bag_slot = crate::util::tokio_read_u8_le(r).await?;
-
-            // item_slot: u32
-            let item_slot = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_id: u32
-            let item_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_suffix_factor: u32
-            let item_suffix_factor = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::tokio_read_u32_le(r).await?;
-
-            // item_count: u32
-            let item_count = crate::util::tokio_read_u32_le(r).await?;
-
-            Ok(Self {
-                guid,
-                source,
-                creation_type,
-                alert_chat,
-                bag_slot,
-                item_slot,
-                item_id,
-                item_suffix_factor,
-                item_random_property_id,
-                item_count,
-            })
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    fn astd_read_body<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-        body_size: u32,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
-
-            // source: NewItemSource
-            let source: NewItemSource = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-            // creation_type: NewItemCreationType
-            let creation_type: NewItemCreationType = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-            // alert_chat: NewItemChatAlert
-            let alert_chat: NewItemChatAlert = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-            // bag_slot: u8
-            let bag_slot = crate::util::astd_read_u8_le(r).await?;
-
-            // item_slot: u32
-            let item_slot = crate::util::astd_read_u32_le(r).await?;
-
-            // item_id: u32
-            let item_id = crate::util::astd_read_u32_le(r).await?;
-
-            // item_suffix_factor: u32
-            let item_suffix_factor = crate::util::astd_read_u32_le(r).await?;
-
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::astd_read_u32_le(r).await?;
-
-            // item_count: u32
-            let item_count = crate::util::astd_read_u32_le(r).await?;
-
-            Ok(Self {
-                guid,
-                source,
-                creation_type,
-                alert_chat,
-                bag_slot,
-                item_slot,
-                item_id,
-                item_suffix_factor,
-                item_random_property_id,
-                item_count,
-            })
         })
     }
 
