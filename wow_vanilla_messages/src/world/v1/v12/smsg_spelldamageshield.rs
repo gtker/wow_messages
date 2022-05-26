@@ -18,24 +18,6 @@ pub struct SMSG_SPELLDAMAGESHIELD {
     pub school: SpellSchool,
 }
 
-impl SMSG_SPELLDAMAGESHIELD {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // victim_guid: Guid
-        w.write_all(&self.victim_guid.guid().to_le_bytes())?;
-
-        // caster_guid: Guid
-        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
-
-        // damage: u32
-        w.write_all(&self.damage.to_le_bytes())?;
-
-        // school: SpellSchool
-        w.write_all(&(self.school.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELLDAMAGESHIELD {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // victim_guid: Guid

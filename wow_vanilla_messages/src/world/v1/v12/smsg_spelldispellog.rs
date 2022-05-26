@@ -15,26 +15,6 @@ pub struct SMSG_SPELLDISPELLOG {
     pub spells: Vec<u32>,
 }
 
-impl SMSG_SPELLDISPELLOG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // victim: Guid
-        w.write_all(&self.victim.guid().to_le_bytes())?;
-
-        // caster: Guid
-        w.write_all(&self.caster.guid().to_le_bytes())?;
-
-        // amount_of_spells: u32
-        w.write_all(&(self.spells.len() as u32).to_le_bytes())?;
-
-        // spells: u32[amount_of_spells]
-        for i in self.spells.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELLDISPELLOG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // victim: Guid

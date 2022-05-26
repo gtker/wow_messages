@@ -16,18 +16,6 @@ pub struct SMSG_EMOTE {
     pub guid: Guid,
 }
 
-impl SMSG_EMOTE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // emote: Emote
-        w.write_all(&(self.emote.as_int() as u32).to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_EMOTE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // emote: Emote

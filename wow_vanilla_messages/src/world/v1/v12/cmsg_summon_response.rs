@@ -14,15 +14,6 @@ pub struct CMSG_SUMMON_RESPONSE {
     pub summoner_guid: Guid,
 }
 
-impl CMSG_SUMMON_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // summoner_guid: Guid
-        w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_SUMMON_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // summoner_guid: Guid

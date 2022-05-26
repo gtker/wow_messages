@@ -15,26 +15,6 @@ pub struct SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub targets: Vec<Guid>,
 }
 
-impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // caster: Guid
-        w.write_all(&self.caster.guid().to_le_bytes())?;
-
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // amount_of_targets: u32
-        w.write_all(&(self.targets.len() as u32).to_le_bytes())?;
-
-        // targets: Guid[amount_of_targets]
-        for i in self.targets.iter() {
-            w.write_all(&i.guid().to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster: Guid

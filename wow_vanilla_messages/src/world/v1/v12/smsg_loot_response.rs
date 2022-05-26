@@ -16,18 +16,6 @@ pub struct SMSG_LOOT_RESPONSE {
     pub loot_method: LootMethod,
 }
 
-impl SMSG_LOOT_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // loot_method: LootMethod
-        w.write_all(&(self.loot_method.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOOT_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

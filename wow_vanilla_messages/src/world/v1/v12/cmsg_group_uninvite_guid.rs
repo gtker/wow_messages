@@ -14,15 +14,6 @@ pub struct CMSG_GROUP_UNINVITE_GUID {
     pub guid: Guid,
 }
 
-impl CMSG_GROUP_UNINVITE_GUID {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GROUP_UNINVITE_GUID {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

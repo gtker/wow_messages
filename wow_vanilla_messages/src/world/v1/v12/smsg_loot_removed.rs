@@ -13,15 +13,6 @@ pub struct SMSG_LOOT_REMOVED {
     pub slot: u8,
 }
 
-impl SMSG_LOOT_REMOVED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // slot: u8
-        w.write_all(&self.slot.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOOT_REMOVED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // slot: u8

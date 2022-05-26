@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_FISH_NOT_HOOKED {
 }
 
-impl SMSG_FISH_NOT_HOOKED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_FISH_NOT_HOOKED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

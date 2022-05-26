@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_QUERY_TIME {
 }
 
-impl CMSG_QUERY_TIME {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_QUERY_TIME {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

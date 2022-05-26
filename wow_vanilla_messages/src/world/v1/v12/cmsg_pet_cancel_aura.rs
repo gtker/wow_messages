@@ -15,18 +15,6 @@ pub struct CMSG_PET_CANCEL_AURA {
     pub id: u32,
 }
 
-impl CMSG_PET_CANCEL_AURA {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PET_CANCEL_AURA {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

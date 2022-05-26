@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_GMTICKET_SYSTEMSTATUS {
 }
 
-impl CMSG_GMTICKET_SYSTEMSTATUS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GMTICKET_SYSTEMSTATUS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

@@ -15,23 +15,6 @@ pub struct SMSG_DISPEL_FAILED {
     pub spells: Vec<u32>,
 }
 
-impl SMSG_DISPEL_FAILED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // caster_guid: Guid
-        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
-
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
-
-        // spells: u32[-]
-        for i in self.spells.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_DISPEL_FAILED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster_guid: Guid

@@ -15,18 +15,6 @@ pub struct CMSG_PETITION_QUERY {
     pub petition_guid: Guid,
 }
 
-impl CMSG_PETITION_QUERY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guild_guid: u32
-        w.write_all(&self.guild_guid.to_le_bytes())?;
-
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PETITION_QUERY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_guid: u32

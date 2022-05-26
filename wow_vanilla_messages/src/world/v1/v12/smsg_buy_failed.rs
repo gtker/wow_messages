@@ -17,21 +17,6 @@ pub struct SMSG_BUY_FAILED {
     pub result: BuyResult,
 }
 
-impl SMSG_BUY_FAILED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // result: BuyResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_BUY_FAILED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

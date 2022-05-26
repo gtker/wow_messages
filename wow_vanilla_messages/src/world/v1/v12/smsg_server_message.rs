@@ -14,20 +14,6 @@ pub struct SMSG_SERVER_MESSAGE {
     pub message: String,
 }
 
-impl SMSG_SERVER_MESSAGE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // message_type: ServerMessageType
-        w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
-
-        // message: CString
-        w.write_all(self.message.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SERVER_MESSAGE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message_type: ServerMessageType

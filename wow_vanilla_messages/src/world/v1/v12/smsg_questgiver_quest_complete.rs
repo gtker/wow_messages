@@ -17,32 +17,6 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub item_rewards: Vec<QuestItemReward>,
 }
 
-impl SMSG_QUESTGIVER_QUEST_COMPLETE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // unknown: u32
-        w.write_all(&self.unknown.to_le_bytes())?;
-
-        // experience_reward: u32
-        w.write_all(&self.experience_reward.to_le_bytes())?;
-
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
-
-        // amount_of_item_rewards: u32
-        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes())?;
-
-        // item_rewards: QuestItemReward[amount_of_item_rewards]
-        for i in self.item_rewards.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_QUESTGIVER_QUEST_COMPLETE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32

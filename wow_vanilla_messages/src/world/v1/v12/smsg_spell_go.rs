@@ -22,52 +22,6 @@ pub struct SMSG_SPELL_GO {
     pub targets: SpellCastTargets,
 }
 
-impl SMSG_SPELL_GO {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // cast_item: PackedGuid
-        w.write_all(&self.cast_item.packed_guid())?;
-
-        // caster: PackedGuid
-        w.write_all(&self.caster.packed_guid())?;
-
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // flags: CastFlags
-        w.write_all(&(self.flags.as_int() as u16).to_le_bytes())?;
-
-        // amount_of_hits: u8
-        w.write_all(&(self.hits.len() as u8).to_le_bytes())?;
-
-        // hits: Guid[amount_of_hits]
-        for i in self.hits.iter() {
-            w.write_all(&i.guid().to_le_bytes())?;
-        }
-
-        // amount_of_misses: u8
-        w.write_all(&(self.misses.len() as u8).to_le_bytes())?;
-
-        // misses: SpellMiss[amount_of_misses]
-        for i in self.misses.iter() {
-            i.as_bytes(w)?;
-        }
-
-        // targets: SpellCastTargets
-        &self.targets.as_bytes(w)?;;
-
-        if let Some(if_statement) = &self.flags.ammo {
-            // ammo_display_id: u32
-            w.write_all(&if_statement.ammo_display_id.to_le_bytes())?;
-
-            // ammo_inventory_type: u32
-            w.write_all(&if_statement.ammo_inventory_type.to_le_bytes())?;
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELL_GO {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // cast_item: PackedGuid

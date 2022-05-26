@@ -18,34 +18,6 @@ pub struct SMSG_QUESTGIVER_QUEST_LIST {
     pub quest_items: Vec<QuestItem>,
 }
 
-impl SMSG_QUESTGIVER_QUEST_LIST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc: Guid
-        w.write_all(&self.npc.guid().to_le_bytes())?;
-
-        // title: CString
-        w.write_all(self.title.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // emote_delay: u32
-        w.write_all(&self.emote_delay.to_le_bytes())?;
-
-        // emote: u32
-        w.write_all(&self.emote.to_le_bytes())?;
-
-        // amount_of_entries: u8
-        w.write_all(&(self.quest_items.len() as u8).to_le_bytes())?;
-
-        // quest_items: QuestItem[amount_of_entries]
-        for i in self.quest_items.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid

@@ -17,32 +17,6 @@ pub struct SMSG_GUILD_INFO {
     pub amount_of_accounts_in_guild: u32,
 }
 
-impl SMSG_GUILD_INFO {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guild_name: CString
-        w.write_all(self.guild_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // created_day: u32
-        w.write_all(&self.created_day.to_le_bytes())?;
-
-        // created_month: u32
-        w.write_all(&self.created_month.to_le_bytes())?;
-
-        // created_year: u32
-        w.write_all(&self.created_year.to_le_bytes())?;
-
-        // amount_of_characters_in_guild: u32
-        w.write_all(&self.amount_of_characters_in_guild.to_le_bytes())?;
-
-        // amount_of_accounts_in_guild: u32
-        w.write_all(&self.amount_of_accounts_in_guild.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GUILD_INFO {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_name: CString

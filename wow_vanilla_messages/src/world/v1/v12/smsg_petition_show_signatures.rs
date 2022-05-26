@@ -17,24 +17,6 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
     pub amount_of_signatures: u8,
 }
 
-impl SMSG_PETITION_SHOW_SIGNATURES {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // item_guid: Guid
-        w.write_all(&self.item_guid.guid().to_le_bytes())?;
-
-        // owner_guid: Guid
-        w.write_all(&self.owner_guid.guid().to_le_bytes())?;
-
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
-
-        // amount_of_signatures: u8
-        w.write_all(&self.amount_of_signatures.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_guid: Guid

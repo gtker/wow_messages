@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_GROUP_DECLINE {
 }
 
-impl CMSG_GROUP_DECLINE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GROUP_DECLINE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

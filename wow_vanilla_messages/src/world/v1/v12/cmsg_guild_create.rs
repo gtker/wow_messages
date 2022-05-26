@@ -12,17 +12,6 @@ pub struct CMSG_GUILD_CREATE {
     pub guild_name: String,
 }
 
-impl CMSG_GUILD_CREATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guild_name: CString
-        w.write_all(self.guild_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GUILD_CREATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_name: CString

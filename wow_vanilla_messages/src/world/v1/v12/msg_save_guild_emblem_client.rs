@@ -19,30 +19,6 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Client {
     pub background_color: u32,
 }
 
-impl MSG_SAVE_GUILD_EMBLEM_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // vendor: Guid
-        w.write_all(&self.vendor.guid().to_le_bytes())?;
-
-        // emblem_style: u32
-        w.write_all(&self.emblem_style.to_le_bytes())?;
-
-        // emblem_color: u32
-        w.write_all(&self.emblem_color.to_le_bytes())?;
-
-        // border_style: u32
-        w.write_all(&self.border_style.to_le_bytes())?;
-
-        // border_color: u32
-        w.write_all(&self.border_color.to_le_bytes())?;
-
-        // background_color: u32
-        w.write_all(&self.background_color.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor: Guid

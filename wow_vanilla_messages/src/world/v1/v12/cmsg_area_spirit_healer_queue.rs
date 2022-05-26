@@ -14,15 +14,6 @@ pub struct CMSG_AREA_SPIRIT_HEALER_QUEUE {
     pub guid: Guid,
 }
 
-impl CMSG_AREA_SPIRIT_HEALER_QUEUE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_AREA_SPIRIT_HEALER_QUEUE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

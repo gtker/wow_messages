@@ -14,15 +14,6 @@ pub struct CMSG_GOSSIP_HELLO {
     pub guid: Guid,
 }
 
-impl CMSG_GOSSIP_HELLO {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GOSSIP_HELLO {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

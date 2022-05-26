@@ -15,18 +15,6 @@ pub struct CMSG_PETITION_SIGN {
     pub unknown1: u8,
 }
 
-impl CMSG_PETITION_SIGN {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
-
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PETITION_SIGN {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition_guid: Guid

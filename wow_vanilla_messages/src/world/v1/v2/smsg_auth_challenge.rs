@@ -13,15 +13,6 @@ pub struct SMSG_AUTH_CHALLENGE {
     pub server_seed: u32,
 }
 
-impl SMSG_AUTH_CHALLENGE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // server_seed: u32
-        w.write_all(&self.server_seed.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_AUTH_CHALLENGE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // server_seed: u32

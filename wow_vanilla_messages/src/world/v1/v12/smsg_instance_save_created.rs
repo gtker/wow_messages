@@ -13,15 +13,6 @@ pub struct SMSG_INSTANCE_SAVE_CREATED {
     pub unknown: u32,
 }
 
-impl SMSG_INSTANCE_SAVE_CREATED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // unknown: u32
-        w.write_all(&self.unknown.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_INSTANCE_SAVE_CREATED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown: u32

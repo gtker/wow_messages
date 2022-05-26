@@ -13,15 +13,6 @@ pub struct SMSG_QUERY_TIME_RESPONSE {
     pub time: u32,
 }
 
-impl SMSG_QUERY_TIME_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // time: u32
-        w.write_all(&self.time.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_QUERY_TIME_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // time: u32

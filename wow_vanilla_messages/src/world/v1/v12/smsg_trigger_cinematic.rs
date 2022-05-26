@@ -14,15 +14,6 @@ pub struct SMSG_TRIGGER_CINEMATIC {
     pub cinematic_sequence_id: CinematicSequenceId,
 }
 
-impl SMSG_TRIGGER_CINEMATIC {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // cinematic_sequence_id: CinematicSequenceId
-        w.write_all(&(self.cinematic_sequence_id.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_TRIGGER_CINEMATIC {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // cinematic_sequence_id: CinematicSequenceId

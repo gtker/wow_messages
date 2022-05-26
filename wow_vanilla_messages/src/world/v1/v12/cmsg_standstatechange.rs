@@ -14,15 +14,6 @@ pub struct CMSG_STANDSTATECHANGE {
     pub animation_state: UnitStandState,
 }
 
-impl CMSG_STANDSTATECHANGE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // animation_state: UnitStandState
-        w.write_all(&(self.animation_state.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_STANDSTATECHANGE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // animation_state: UnitStandState

@@ -13,15 +13,6 @@ pub struct SMSG_DUEL_COUNTDOWN {
     pub time_in_seconds: u32,
 }
 
-impl SMSG_DUEL_COUNTDOWN {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // time_in_seconds: u32
-        w.write_all(&self.time_in_seconds.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_DUEL_COUNTDOWN {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // time_in_seconds: u32

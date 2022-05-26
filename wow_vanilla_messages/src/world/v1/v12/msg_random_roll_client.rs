@@ -14,18 +14,6 @@ pub struct MSG_RANDOM_ROLL_Client {
     pub maximum: u32,
 }
 
-impl MSG_RANDOM_ROLL_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // minimum: u32
-        w.write_all(&self.minimum.to_le_bytes())?;
-
-        // maximum: u32
-        w.write_all(&self.maximum.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_RANDOM_ROLL_Client {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // minimum: u32

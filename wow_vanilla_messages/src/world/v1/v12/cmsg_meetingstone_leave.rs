@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_MEETINGSTONE_LEAVE {
 }
 
-impl CMSG_MEETINGSTONE_LEAVE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_MEETINGSTONE_LEAVE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

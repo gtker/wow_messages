@@ -16,31 +16,6 @@ pub struct CMSG_PET_SET_ACTION {
     pub extra: Option<CMSG_PET_SET_ACTIONextra>,
 }
 
-impl CMSG_PET_SET_ACTION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // position1: u32
-        w.write_all(&self.position1.to_le_bytes())?;
-
-        // data1: u32
-        w.write_all(&self.data1.to_le_bytes())?;
-
-        // optional extra
-        if let Some(v) = &self.extra {
-            // position2: u32
-            w.write_all(&v.position2.to_le_bytes())?;
-
-            // data2: u32
-            w.write_all(&v.data2.to_le_bytes())?;
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PET_SET_ACTION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

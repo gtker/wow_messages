@@ -13,15 +13,6 @@ pub struct CMSG_TUTORIAL_FLAG {
     pub tutorial_flag: u32,
 }
 
-impl CMSG_TUTORIAL_FLAG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // tutorial_flag: u32
-        w.write_all(&self.tutorial_flag.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_TUTORIAL_FLAG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // tutorial_flag: u32

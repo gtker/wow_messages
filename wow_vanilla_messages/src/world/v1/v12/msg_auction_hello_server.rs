@@ -15,18 +15,6 @@ pub struct MSG_AUCTION_HELLO_Server {
     pub auction_house_id: u32,
 }
 
-impl MSG_AUCTION_HELLO_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // auctioneer: Guid
-        w.write_all(&self.auctioneer.guid().to_le_bytes())?;
-
-        // auction_house_id: u32
-        w.write_all(&self.auction_house_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_AUCTION_HELLO_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer: Guid

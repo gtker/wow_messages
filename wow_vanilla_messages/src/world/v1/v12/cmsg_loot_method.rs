@@ -18,21 +18,6 @@ pub struct CMSG_LOOT_METHOD {
     pub loot_threshold: ItemQuality,
 }
 
-impl CMSG_LOOT_METHOD {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // loot_setting: GroupLootSetting
-        w.write_all(&(self.loot_setting.as_int() as u32).to_le_bytes())?;
-
-        // loot_master: Guid
-        w.write_all(&self.loot_master.guid().to_le_bytes())?;
-
-        // loot_threshold: ItemQuality
-        w.write_all(&(self.loot_threshold.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_LOOT_METHOD {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // loot_setting: GroupLootSetting

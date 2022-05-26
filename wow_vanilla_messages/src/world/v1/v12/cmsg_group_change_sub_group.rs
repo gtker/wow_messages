@@ -13,20 +13,6 @@ pub struct CMSG_GROUP_CHANGE_SUB_GROUP {
     pub group_number: u8,
 }
 
-impl CMSG_GROUP_CHANGE_SUB_GROUP {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // group_number: u8
-        w.write_all(&self.group_number.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString

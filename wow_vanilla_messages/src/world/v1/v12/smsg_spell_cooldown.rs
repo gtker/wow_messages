@@ -15,20 +15,6 @@ pub struct SMSG_SPELL_COOLDOWN {
     pub cooldowns: Vec<SpellCooldownStatus>,
 }
 
-impl SMSG_SPELL_COOLDOWN {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // cooldowns: SpellCooldownStatus[-]
-        for i in self.cooldowns.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELL_COOLDOWN {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

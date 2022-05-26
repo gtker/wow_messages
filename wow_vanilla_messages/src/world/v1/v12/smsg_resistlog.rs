@@ -20,33 +20,6 @@ pub struct SMSG_RESISTLOG {
     pub unknown5: u32,
 }
 
-impl SMSG_RESISTLOG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid1: Guid
-        w.write_all(&self.guid1.guid().to_le_bytes())?;
-
-        // guid2: Guid
-        w.write_all(&self.guid2.guid().to_le_bytes())?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // unknown2: f32
-        w.write_all(&self.unknown2.to_le_bytes())?;
-
-        // unknown3: f32
-        w.write_all(&self.unknown3.to_le_bytes())?;
-
-        // unknown4: u32
-        w.write_all(&self.unknown4.to_le_bytes())?;
-
-        // unknown5: u32
-        w.write_all(&self.unknown5.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_RESISTLOG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid1: Guid

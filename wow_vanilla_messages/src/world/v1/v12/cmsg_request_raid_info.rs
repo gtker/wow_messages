@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_REQUEST_RAID_INFO {
 }
 
-impl CMSG_REQUEST_RAID_INFO {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_REQUEST_RAID_INFO {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

@@ -15,18 +15,6 @@ pub struct CMSG_GROUP_ASSISTANT_LEADER {
     pub set_assistant: u8,
 }
 
-impl CMSG_GROUP_ASSISTANT_LEADER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // set_assistant: u8
-        w.write_all(&self.set_assistant.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GROUP_ASSISTANT_LEADER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

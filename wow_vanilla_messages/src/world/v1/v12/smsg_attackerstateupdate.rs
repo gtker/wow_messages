@@ -16,24 +16,6 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
     pub total_damage: u32,
 }
 
-impl SMSG_ATTACKERSTATEUPDATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // hit_info: u32
-        w.write_all(&self.hit_info.to_le_bytes())?;
-
-        // attacker: PackedGuid
-        w.write_all(&self.attacker.packed_guid())?;
-
-        // target: PackedGuid
-        w.write_all(&self.target.packed_guid())?;
-
-        // total_damage: u32
-        w.write_all(&self.total_damage.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // hit_info: u32

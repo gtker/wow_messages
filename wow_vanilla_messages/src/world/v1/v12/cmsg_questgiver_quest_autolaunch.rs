@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
 }
 
-impl CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

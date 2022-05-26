@@ -15,18 +15,6 @@ pub struct MSG_TALENT_WIPE_CONFIRM_Server {
     pub cost_in_copper: u32,
 }
 
-impl MSG_TALENT_WIPE_CONFIRM_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // wiping_npc: Guid
-        w.write_all(&self.wiping_npc.guid().to_le_bytes())?;
-
-        // cost_in_copper: u32
-        w.write_all(&self.cost_in_copper.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // wiping_npc: Guid

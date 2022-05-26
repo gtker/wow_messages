@@ -13,15 +13,6 @@ pub struct SMSG_REMOVED_SPELL {
     pub spell_id: u16,
 }
 
-impl SMSG_REMOVED_SPELL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // spell_id: u16
-        w.write_all(&self.spell_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_REMOVED_SPELL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell_id: u16

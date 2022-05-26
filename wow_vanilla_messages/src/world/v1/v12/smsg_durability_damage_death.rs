@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_DURABILITY_DAMAGE_DEATH {
 }
 
-impl SMSG_DURABILITY_DAMAGE_DEATH {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_DURABILITY_DAMAGE_DEATH {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

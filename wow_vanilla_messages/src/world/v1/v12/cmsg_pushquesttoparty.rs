@@ -13,15 +13,6 @@ pub struct CMSG_PUSHQUESTTOPARTY {
     pub quest_id: u32,
 }
 
-impl CMSG_PUSHQUESTTOPARTY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PUSHQUESTTOPARTY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32

@@ -23,51 +23,6 @@ pub struct CMSG_SEND_MAIL {
     pub unknown4: u32,
 }
 
-impl CMSG_SEND_MAIL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // mailbox: Guid
-        w.write_all(&self.mailbox.guid().to_le_bytes())?;
-
-        // receiver: CString
-        w.write_all(self.receiver.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // subject: CString
-        w.write_all(self.subject.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // body: CString
-        w.write_all(self.body.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes())?;
-
-        // item: Guid
-        w.write_all(&self.item.guid().to_le_bytes())?;
-
-        // money: u32
-        w.write_all(&self.money.to_le_bytes())?;
-
-        // cash_on_delivery_amount: u32
-        w.write_all(&self.cash_on_delivery_amount.to_le_bytes())?;
-
-        // unknown3: u32
-        w.write_all(&self.unknown3.to_le_bytes())?;
-
-        // unknown4: u32
-        w.write_all(&self.unknown4.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_SEND_MAIL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // mailbox: Guid

@@ -12,20 +12,6 @@ pub struct SMSG_IGNORE_LIST {
     pub ignored: Vec<u64>,
 }
 
-impl SMSG_IGNORE_LIST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // amount_of_ignored: u8
-        w.write_all(&(self.ignored.len() as u8).to_le_bytes())?;
-
-        // ignored: u64[amount_of_ignored]
-        for i in self.ignored.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_IGNORE_LIST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_ignored: u8

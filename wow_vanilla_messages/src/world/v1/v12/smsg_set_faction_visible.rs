@@ -13,15 +13,6 @@ pub struct SMSG_SET_FACTION_VISIBLE {
     pub reputation_list_id: u32,
 }
 
-impl SMSG_SET_FACTION_VISIBLE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // reputation_list_id: u32
-        w.write_all(&self.reputation_list_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SET_FACTION_VISIBLE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reputation_list_id: u32

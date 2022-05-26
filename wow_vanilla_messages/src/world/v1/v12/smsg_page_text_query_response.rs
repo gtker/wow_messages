@@ -14,23 +14,6 @@ pub struct SMSG_PAGE_TEXT_QUERY_RESPONSE {
     pub next_page_id: u32,
 }
 
-impl SMSG_PAGE_TEXT_QUERY_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // page_id: u32
-        w.write_all(&self.page_id.to_le_bytes())?;
-
-        // text: CString
-        w.write_all(self.text.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // next_page_id: u32
-        w.write_all(&self.next_page_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // page_id: u32

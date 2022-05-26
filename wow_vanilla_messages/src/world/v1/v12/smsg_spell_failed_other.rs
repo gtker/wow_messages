@@ -15,18 +15,6 @@ pub struct SMSG_SPELL_FAILED_OTHER {
     pub id: u32,
 }
 
-impl SMSG_SPELL_FAILED_OTHER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // caster_guid: Guid
-        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
-
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELL_FAILED_OTHER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster_guid: Guid

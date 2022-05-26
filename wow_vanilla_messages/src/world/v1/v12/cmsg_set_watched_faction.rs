@@ -13,15 +13,6 @@ pub struct CMSG_SET_WATCHED_FACTION {
     pub reputation_id: u32,
 }
 
-impl CMSG_SET_WATCHED_FACTION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // reputation_id: u32
-        w.write_all(&self.reputation_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_SET_WATCHED_FACTION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reputation_id: u32

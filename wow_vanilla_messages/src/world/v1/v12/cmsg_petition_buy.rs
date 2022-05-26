@@ -30,68 +30,6 @@ pub struct CMSG_PETITION_BUY {
     pub skip15: u32,
 }
 
-impl CMSG_PETITION_BUY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc: Guid
-        w.write_all(&self.npc.guid().to_le_bytes())?;
-
-        // skip1: u32
-        w.write_all(&self.skip1.to_le_bytes())?;
-
-        // skip2: Guid
-        w.write_all(&self.skip2.guid().to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // skip3: u32
-        w.write_all(&self.skip3.to_le_bytes())?;
-
-        // skip4: u32
-        w.write_all(&self.skip4.to_le_bytes())?;
-
-        // skip5: u32
-        w.write_all(&self.skip5.to_le_bytes())?;
-
-        // skip6: u32
-        w.write_all(&self.skip6.to_le_bytes())?;
-
-        // skip7: u32
-        w.write_all(&self.skip7.to_le_bytes())?;
-
-        // skip8: u32
-        w.write_all(&self.skip8.to_le_bytes())?;
-
-        // skip9: u32
-        w.write_all(&self.skip9.to_le_bytes())?;
-
-        // skip10: u32
-        w.write_all(&self.skip10.to_le_bytes())?;
-
-        // skip11: u32
-        w.write_all(&self.skip11.to_le_bytes())?;
-
-        // skip12: u32
-        w.write_all(&self.skip12.to_le_bytes())?;
-
-        // skip13: u16
-        w.write_all(&self.skip13.to_le_bytes())?;
-
-        // skip14: u8
-        w.write_all(&self.skip14.to_le_bytes())?;
-
-        // index: u32
-        w.write_all(&self.index.to_le_bytes())?;
-
-        // skip15: u32
-        w.write_all(&self.skip15.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PETITION_BUY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid

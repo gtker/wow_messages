@@ -14,15 +14,6 @@ pub struct CMSG_TURN_IN_PETITION {
     pub petition_guid: Guid,
 }
 
-impl CMSG_TURN_IN_PETITION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_TURN_IN_PETITION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition_guid: Guid

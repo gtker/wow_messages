@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_FEIGN_DEATH_RESISTED {
 }
 
-impl SMSG_FEIGN_DEATH_RESISTED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_FEIGN_DEATH_RESISTED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

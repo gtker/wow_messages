@@ -19,30 +19,6 @@ pub struct SMSG_START_MIRROR_TIMER {
     pub id: u32,
 }
 
-impl SMSG_START_MIRROR_TIMER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // timer: TimerType
-        w.write_all(&(self.timer.as_int() as u32).to_le_bytes())?;
-
-        // time_remaining: u32
-        w.write_all(&self.time_remaining.to_le_bytes())?;
-
-        // duration: u32
-        w.write_all(&self.duration.to_le_bytes())?;
-
-        // scale: u32
-        w.write_all(&self.scale.to_le_bytes())?;
-
-        // is_frozen: u8
-        w.write_all(&self.is_frozen.to_le_bytes())?;
-
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_START_MIRROR_TIMER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // timer: TimerType

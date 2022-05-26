@@ -18,27 +18,6 @@ pub struct SMSG_SPELLENERGIZELOG {
     pub damage: u32,
 }
 
-impl SMSG_SPELLENERGIZELOG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // victim_guid: PackedGuid
-        w.write_all(&self.victim_guid.packed_guid())?;
-
-        // caster_guid: PackedGuid
-        w.write_all(&self.caster_guid.packed_guid())?;
-
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // power: PowerType
-        w.write_all(&(self.power.as_int() as u32).to_le_bytes())?;
-
-        // damage: u32
-        w.write_all(&self.damage.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELLENERGIZELOG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // victim_guid: PackedGuid

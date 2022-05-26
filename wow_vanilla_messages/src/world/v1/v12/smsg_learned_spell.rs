@@ -13,15 +13,6 @@ pub struct SMSG_LEARNED_SPELL {
     pub id: u32,
 }
 
-impl SMSG_LEARNED_SPELL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LEARNED_SPELL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32

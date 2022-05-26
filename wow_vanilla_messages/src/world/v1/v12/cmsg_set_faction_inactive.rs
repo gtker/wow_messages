@@ -14,18 +14,6 @@ pub struct CMSG_SET_FACTION_INACTIVE {
     pub inactive: u8,
 }
 
-impl CMSG_SET_FACTION_INACTIVE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // reputation_list_id: u32
-        w.write_all(&self.reputation_list_id.to_le_bytes())?;
-
-        // inactive: u8
-        w.write_all(&self.inactive.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_SET_FACTION_INACTIVE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reputation_list_id: u32

@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_SELF_RES {
 }
 
-impl CMSG_SELF_RES {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_SELF_RES {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

@@ -13,15 +13,6 @@ pub struct SMSG_UPDATE_INSTANCE_OWNERSHIP {
     pub has_been_saved: u32,
 }
 
-impl SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // has_been_saved: u32
-        w.write_all(&self.has_been_saved.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // has_been_saved: u32

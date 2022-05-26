@@ -13,15 +13,6 @@ pub struct SMSG_SPLINE_MOVE_LAND_WALK {
     pub guid: Guid,
 }
 
-impl SMSG_SPLINE_MOVE_LAND_WALK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPLINE_MOVE_LAND_WALK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid

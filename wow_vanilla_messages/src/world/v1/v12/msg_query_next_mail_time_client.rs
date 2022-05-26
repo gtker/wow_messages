@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct MSG_QUERY_NEXT_MAIL_TIME_Client {
 }
 
-impl MSG_QUERY_NEXT_MAIL_TIME_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_QUERY_NEXT_MAIL_TIME_Client {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

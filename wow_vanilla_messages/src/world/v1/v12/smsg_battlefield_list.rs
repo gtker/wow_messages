@@ -19,35 +19,6 @@ pub struct SMSG_BATTLEFIELD_LIST {
     pub battlegrounds: Vec<u32>,
 }
 
-impl SMSG_BATTLEFIELD_LIST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // battlemaster: Guid
-        w.write_all(&self.battlemaster.guid().to_le_bytes())?;
-
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes())?;
-
-        // unknown3: u8
-        w.write_all(&self.unknown3.to_le_bytes())?;
-
-        // number_of_battlegrounds: u32
-        w.write_all(&(self.battlegrounds.len() as u32).to_le_bytes())?;
-
-        // battlegrounds: u32[number_of_battlegrounds]
-        for i in self.battlegrounds.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_BATTLEFIELD_LIST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // battlemaster: Guid

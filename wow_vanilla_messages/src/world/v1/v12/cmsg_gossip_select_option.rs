@@ -15,27 +15,6 @@ pub struct CMSG_GOSSIP_SELECT_OPTION {
     pub unknown: Option<CMSG_GOSSIP_SELECT_OPTIONunknown>,
 }
 
-impl CMSG_GOSSIP_SELECT_OPTION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // gossip_list_id: u32
-        w.write_all(&self.gossip_list_id.to_le_bytes())?;
-
-        // optional unknown
-        if let Some(v) = &self.unknown {
-            // code: CString
-            w.write_all(v.code.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

@@ -13,20 +13,6 @@ pub struct SMSG_ITEM_TEXT_QUERY_RESPONSE {
     pub text: String,
 }
 
-impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // item_text_id: u32
-        w.write_all(&self.item_text_id.to_le_bytes())?;
-
-        // text: CString
-        w.write_all(self.text.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_text_id: u32

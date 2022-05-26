@@ -14,15 +14,6 @@ pub struct SMSG_GMTICKET_CREATE {
     pub response: GmTicketResponse,
 }
 
-impl SMSG_GMTICKET_CREATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // response: GmTicketResponse
-        w.write_all(&(self.response.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GMTICKET_CREATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // response: GmTicketResponse

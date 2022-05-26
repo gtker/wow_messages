@@ -14,15 +14,6 @@ pub struct CMSG_GAMEOBJ_USE {
     pub guid: Guid,
 }
 
-impl CMSG_GAMEOBJ_USE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GAMEOBJ_USE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

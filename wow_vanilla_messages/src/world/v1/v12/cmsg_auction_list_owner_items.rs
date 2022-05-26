@@ -15,18 +15,6 @@ pub struct CMSG_AUCTION_LIST_OWNER_ITEMS {
     pub list_from: u32,
 }
 
-impl CMSG_AUCTION_LIST_OWNER_ITEMS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // auctioneer_guid: Guid
-        w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
-
-        // list_from: u32
-        w.write_all(&self.list_from.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_AUCTION_LIST_OWNER_ITEMS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid

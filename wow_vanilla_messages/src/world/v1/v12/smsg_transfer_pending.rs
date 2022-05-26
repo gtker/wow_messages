@@ -14,25 +14,6 @@ pub struct SMSG_TRANSFER_PENDING {
     pub has_transport: Option<SMSG_TRANSFER_PENDINGhas_transport>,
 }
 
-impl SMSG_TRANSFER_PENDING {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // optional has_transport
-        if let Some(v) = &self.has_transport {
-            // transport: u32
-            w.write_all(&v.transport.to_le_bytes())?;
-
-            // transport_map: Map
-            w.write_all(&(v.transport_map.as_int() as u32).to_le_bytes())?;
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_TRANSFER_PENDING {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map

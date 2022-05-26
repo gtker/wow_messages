@@ -13,22 +13,6 @@ pub struct CMSG_CHANNEL_SET_OWNER {
     pub new_owner: String,
 }
 
-impl CMSG_CHANNEL_SET_OWNER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // channel_name: CString
-        w.write_all(self.channel_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // new_owner: CString
-        w.write_all(self.new_owner.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_CHANNEL_SET_OWNER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // channel_name: CString

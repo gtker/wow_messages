@@ -15,26 +15,6 @@ pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
     pub outbid_item_ids: Vec<u32>,
 }
 
-impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // auctioneer: Guid
-        w.write_all(&self.auctioneer.guid().to_le_bytes())?;
-
-        // start_from_page: u32
-        w.write_all(&self.start_from_page.to_le_bytes())?;
-
-        // amount_of_outbidded_items: u32
-        w.write_all(&(self.outbid_item_ids.len() as u32).to_le_bytes())?;
-
-        // outbid_item_ids: u32[amount_of_outbidded_items]
-        for i in self.outbid_item_ids.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer: Guid

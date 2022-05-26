@@ -15,18 +15,6 @@ pub struct CMSG_MOVE_TIME_SKIPPED {
     pub lag: u32,
 }
 
-impl CMSG_MOVE_TIME_SKIPPED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // lag: u32
-        w.write_all(&self.lag.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_MOVE_TIME_SKIPPED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

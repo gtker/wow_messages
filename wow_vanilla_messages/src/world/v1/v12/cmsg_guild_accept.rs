@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_GUILD_ACCEPT {
 }
 
-impl CMSG_GUILD_ACCEPT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GUILD_ACCEPT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

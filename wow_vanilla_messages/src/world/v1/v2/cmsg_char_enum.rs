@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_CHAR_ENUM {
 }
 
-impl CMSG_CHAR_ENUM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_CHAR_ENUM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

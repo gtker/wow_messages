@@ -14,15 +14,6 @@ pub struct SMSG_PET_ACTION_FEEDBACK {
     pub feedback: PetFeedback,
 }
 
-impl SMSG_PET_ACTION_FEEDBACK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // feedback: PetFeedback
-        w.write_all(&(self.feedback.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PET_ACTION_FEEDBACK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // feedback: PetFeedback

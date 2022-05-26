@@ -15,18 +15,6 @@ pub struct CMSG_NPC_TEXT_QUERY {
     pub guid: Guid,
 }
 
-impl CMSG_NPC_TEXT_QUERY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // text_id: u32
-        w.write_all(&self.text_id.to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_NPC_TEXT_QUERY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // text_id: u32

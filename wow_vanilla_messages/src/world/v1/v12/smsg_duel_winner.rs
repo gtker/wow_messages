@@ -15,25 +15,6 @@ pub struct SMSG_DUEL_WINNER {
     pub initiator_name: String,
 }
 
-impl SMSG_DUEL_WINNER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // reason: DuelWinnerReason
-        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
-
-        // opponent_name: CString
-        w.write_all(self.opponent_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // initiator_name: CString
-        w.write_all(self.initiator_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_DUEL_WINNER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: DuelWinnerReason

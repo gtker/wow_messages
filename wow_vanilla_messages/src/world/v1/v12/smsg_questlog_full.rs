@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_QUESTLOG_FULL {
 }
 
-impl SMSG_QUESTLOG_FULL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_QUESTLOG_FULL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

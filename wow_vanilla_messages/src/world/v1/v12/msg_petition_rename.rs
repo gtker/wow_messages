@@ -14,20 +14,6 @@ pub struct MSG_PETITION_RENAME {
     pub new_name: String,
 }
 
-impl MSG_PETITION_RENAME {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
-
-        // new_name: CString
-        w.write_all(self.new_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_PETITION_RENAME {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition_guid: Guid

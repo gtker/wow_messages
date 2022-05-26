@@ -19,41 +19,6 @@ pub struct SMSG_GUILD_QUERY_RESPONSE {
     pub background_color: u32,
 }
 
-impl SMSG_GUILD_QUERY_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // rank_names: CString[10]
-        for i in self.rank_names.iter() {
-            w.write_all(&i.as_bytes())?;
-            w.write_all(&[0])?;
-        }
-
-        // emblem_style: u32
-        w.write_all(&self.emblem_style.to_le_bytes())?;
-
-        // emblem_color: u32
-        w.write_all(&self.emblem_color.to_le_bytes())?;
-
-        // border_style: u32
-        w.write_all(&self.border_style.to_le_bytes())?;
-
-        // border_color: u32
-        w.write_all(&self.border_color.to_le_bytes())?;
-
-        // background_color: u32
-        w.write_all(&self.background_color.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32

@@ -21,34 +21,6 @@ pub struct SMSG_NAME_QUERY_RESPONSE {
     pub class: Class,
 }
 
-impl SMSG_NAME_QUERY_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // character_name: CString
-        w.write_all(self.character_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // realm_name: CString
-        w.write_all(self.realm_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // race: Race
-        w.write_all(&(self.race.as_int() as u32).to_le_bytes())?;
-
-        // gender: Gender
-        w.write_all(&(self.gender.as_int() as u32).to_le_bytes())?;
-
-        // class: Class
-        w.write_all(&(self.class.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_NAME_QUERY_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

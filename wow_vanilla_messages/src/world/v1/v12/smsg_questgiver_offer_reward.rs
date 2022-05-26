@@ -25,64 +25,6 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     pub reward_spell_cast: u32,
 }
 
-impl SMSG_QUESTGIVER_OFFER_REWARD {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc: Guid
-        w.write_all(&self.npc.guid().to_le_bytes())?;
-
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // title: CString
-        w.write_all(self.title.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // offer_reward_text: CString
-        w.write_all(self.offer_reward_text.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // enable_next: u32
-        w.write_all(&self.enable_next.to_le_bytes())?;
-
-        // amount_of_emotes: u32
-        w.write_all(&(self.emotes.len() as u32).to_le_bytes())?;
-
-        // emotes: NpcTextUpdateEmote[amount_of_emotes]
-        for i in self.emotes.iter() {
-            i.as_bytes(w)?;
-        }
-
-        // amount_of_choice_item_rewards: u32
-        w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes())?;
-
-        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
-        for i in self.choice_item_rewards.iter() {
-            i.as_bytes(w)?;
-        }
-
-        // amount_of_item_rewards: u32
-        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes())?;
-
-        // item_rewards: QuestItemReward[amount_of_item_rewards]
-        for i in self.item_rewards.iter() {
-            i.as_bytes(w)?;
-        }
-
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
-
-        // reward_spell: u32
-        w.write_all(&self.reward_spell.to_le_bytes())?;
-
-        // reward_spell_cast: u32
-        w.write_all(&self.reward_spell_cast.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_QUESTGIVER_OFFER_REWARD {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid

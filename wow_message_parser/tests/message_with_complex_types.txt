@@ -17,21 +17,6 @@ pub struct MessageWithComplexTypes {
     pub simple_struct: StructWithAllBuiltInTypes,
 }
 
-impl MessageWithComplexTypes {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // simple_enum: SimpleEnum
-        w.write_all(&(self.simple_enum.as_int() as u8).to_le_bytes())?;
-
-        // simple_flag: SimpleFlag
-        w.write_all(&(self.simple_flag.as_int() as u8).to_le_bytes())?;
-
-        // simple_struct: StructWithAllBuiltInTypes
-        &self.simple_struct.as_bytes(w)?;;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MessageWithComplexTypes {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // simple_enum: SimpleEnum

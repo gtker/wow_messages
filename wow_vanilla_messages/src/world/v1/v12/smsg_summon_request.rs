@@ -16,21 +16,6 @@ pub struct SMSG_SUMMON_REQUEST {
     pub auto_decline_time_in_msecs: u32,
 }
 
-impl SMSG_SUMMON_REQUEST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // summoner_guid: Guid
-        w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
-
-        // zone_id: u32
-        w.write_all(&self.zone_id.to_le_bytes())?;
-
-        // auto_decline_time_in_msecs: u32
-        w.write_all(&self.auto_decline_time_in_msecs.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SUMMON_REQUEST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // summoner_guid: Guid

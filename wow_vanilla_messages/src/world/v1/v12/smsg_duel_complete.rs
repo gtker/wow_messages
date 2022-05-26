@@ -13,15 +13,6 @@ pub struct SMSG_DUEL_COMPLETE {
     pub ended_without_interruption: u8,
 }
 
-impl SMSG_DUEL_COMPLETE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // ended_without_interruption: u8
-        w.write_all(&self.ended_without_interruption.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_DUEL_COMPLETE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // ended_without_interruption: u8

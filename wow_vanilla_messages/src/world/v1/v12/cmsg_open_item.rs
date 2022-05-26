@@ -14,18 +14,6 @@ pub struct CMSG_OPEN_ITEM {
     pub slot: u8,
 }
 
-impl CMSG_OPEN_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // bag_index: u8
-        w.write_all(&self.bag_index.to_le_bytes())?;
-
-        // slot: u8
-        w.write_all(&self.slot.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_OPEN_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag_index: u8

@@ -13,15 +13,6 @@ pub struct SMSG_PLAY_MUSIC {
     pub sound_id: u32,
 }
 
-impl SMSG_PLAY_MUSIC {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // sound_id: u32
-        w.write_all(&self.sound_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PLAY_MUSIC {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sound_id: u32

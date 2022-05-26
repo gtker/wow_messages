@@ -18,27 +18,6 @@ pub struct SMSG_LOGIN_VERIFY_WORLD {
     pub orientation: f32,
 }
 
-impl SMSG_LOGIN_VERIFY_WORLD {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map

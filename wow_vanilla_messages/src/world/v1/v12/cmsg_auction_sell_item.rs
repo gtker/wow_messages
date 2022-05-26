@@ -19,30 +19,6 @@ pub struct CMSG_AUCTION_SELL_ITEM {
     pub auction_duration_in_minutes: u32,
 }
 
-impl CMSG_AUCTION_SELL_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // auctioneer_guid: Guid
-        w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
-
-        // object_guid: Guid
-        w.write_all(&self.object_guid.guid().to_le_bytes())?;
-
-        // stack_size: u32
-        w.write_all(&self.stack_size.to_le_bytes())?;
-
-        // starting_bid: u32
-        w.write_all(&self.starting_bid.to_le_bytes())?;
-
-        // buyout: u32
-        w.write_all(&self.buyout.to_le_bytes())?;
-
-        // auction_duration_in_minutes: u32
-        w.write_all(&self.auction_duration_in_minutes.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_AUCTION_SELL_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid

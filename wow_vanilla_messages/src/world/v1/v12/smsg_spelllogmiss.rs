@@ -17,29 +17,6 @@ pub struct SMSG_SPELLLOGMISS {
     pub targets: Vec<SpellMiss>,
 }
 
-impl SMSG_SPELLLOGMISS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // caster_guid: Guid
-        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
-
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // amount_of_targets: u32
-        w.write_all(&(self.targets.len() as u32).to_le_bytes())?;
-
-        // targets: SpellMiss[amount_of_targets]
-        for i in self.targets.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELLLOGMISS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32

@@ -14,15 +14,6 @@ pub struct SMSG_BINDER_CONFIRM {
     pub guid: Guid,
 }
 
-impl SMSG_BINDER_CONFIRM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_BINDER_CONFIRM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_ATTACKSTOP {
 }
 
-impl CMSG_ATTACKSTOP {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_ATTACKSTOP {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

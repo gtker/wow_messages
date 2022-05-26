@@ -16,21 +16,6 @@ pub struct CMSG_PET_ACTION {
     pub target_guid: Guid,
 }
 
-impl CMSG_PET_ACTION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // pet_guid: Guid
-        w.write_all(&self.pet_guid.guid().to_le_bytes())?;
-
-        // data: u32
-        w.write_all(&self.data.to_le_bytes())?;
-
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PET_ACTION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_guid: Guid

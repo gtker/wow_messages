@@ -15,18 +15,6 @@ pub struct SMSG_PET_UNLEARN_CONFIRM {
     pub talent_reset_cost: u32,
 }
 
-impl SMSG_PET_UNLEARN_CONFIRM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // pet_guid: Guid
-        w.write_all(&self.pet_guid.guid().to_le_bytes())?;
-
-        // talent_reset_cost: u32
-        w.write_all(&self.talent_reset_cost.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PET_UNLEARN_CONFIRM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_guid: Guid

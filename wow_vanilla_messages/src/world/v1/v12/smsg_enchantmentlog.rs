@@ -18,27 +18,6 @@ pub struct SMSG_ENCHANTMENTLOG {
     pub unknown1: u8,
 }
 
-impl SMSG_ENCHANTMENTLOG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
-
-        // caster_guid: Guid
-        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
-
-        // item: u32
-        w.write_all(&self.item.to_le_bytes())?;
-
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_ENCHANTMENTLOG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_guid: Guid

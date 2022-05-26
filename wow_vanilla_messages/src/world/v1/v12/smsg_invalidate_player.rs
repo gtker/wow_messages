@@ -14,15 +14,6 @@ pub struct SMSG_INVALIDATE_PLAYER {
     pub guid: Guid,
 }
 
-impl SMSG_INVALIDATE_PLAYER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_INVALIDATE_PLAYER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

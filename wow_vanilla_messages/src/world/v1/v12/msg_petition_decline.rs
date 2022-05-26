@@ -14,15 +14,6 @@ pub struct MSG_PETITION_DECLINE {
     pub petition: Guid,
 }
 
-impl MSG_PETITION_DECLINE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // petition: Guid
-        w.write_all(&self.petition.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_PETITION_DECLINE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition: Guid

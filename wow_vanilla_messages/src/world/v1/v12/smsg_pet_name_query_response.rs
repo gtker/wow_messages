@@ -14,23 +14,6 @@ pub struct SMSG_PET_NAME_QUERY_RESPONSE {
     pub pet_name_timestamp: u32,
 }
 
-impl SMSG_PET_NAME_QUERY_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // pet_number: u32
-        w.write_all(&self.pet_number.to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // pet_name_timestamp: u32
-        w.write_all(&self.pet_name_timestamp.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_number: u32

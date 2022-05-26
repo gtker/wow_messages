@@ -15,23 +15,6 @@ pub struct SMSG_NPC_TEXT_UPDATE {
     pub texts: [NpcTextUpdate; 8],
 }
 
-impl SMSG_NPC_TEXT_UPDATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // text_id: u32
-        w.write_all(&self.text_id.to_le_bytes())?;
-
-        // probability: f32
-        w.write_all(&self.probability.to_le_bytes())?;
-
-        // texts: NpcTextUpdate[8]
-        for i in self.texts.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_NPC_TEXT_UPDATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // text_id: u32

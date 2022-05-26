@@ -14,15 +14,6 @@ pub struct CMSG_GROUP_SET_LEADER {
     pub guid: Guid,
 }
 
-impl CMSG_GROUP_SET_LEADER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GROUP_SET_LEADER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

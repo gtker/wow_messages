@@ -15,18 +15,6 @@ pub struct SMSG_EXPLORATION_EXPERIENCE {
     pub experience: u32,
 }
 
-impl SMSG_EXPLORATION_EXPERIENCE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
-
-        // experience: u32
-        w.write_all(&self.experience.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_EXPLORATION_EXPERIENCE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // area: Area

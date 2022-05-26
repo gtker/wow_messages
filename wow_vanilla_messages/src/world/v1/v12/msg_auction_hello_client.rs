@@ -14,15 +14,6 @@ pub struct MSG_AUCTION_HELLO_Client {
     pub auctioneer: Guid,
 }
 
-impl MSG_AUCTION_HELLO_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // auctioneer: Guid
-        w.write_all(&self.auctioneer.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_AUCTION_HELLO_Client {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer: Guid

@@ -18,24 +18,6 @@ pub struct SMSG_PROCRESIST {
     pub log_format: LogFormat,
 }
 
-impl SMSG_PROCRESIST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
-
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // log_format: LogFormat
-        w.write_all(&(self.log_format.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PROCRESIST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

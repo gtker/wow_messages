@@ -16,18 +16,6 @@ pub struct SMSG_INSTANCE_RESET_FAILED {
     pub map: Map,
 }
 
-impl SMSG_INSTANCE_RESET_FAILED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // reason: InstanceResetFailedReason
-        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
-
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_INSTANCE_RESET_FAILED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: InstanceResetFailedReason

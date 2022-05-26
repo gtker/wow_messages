@@ -16,24 +16,6 @@ pub struct CMSG_WRAP_ITEM {
     pub item_slot: u8,
 }
 
-impl CMSG_WRAP_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // gift_bag_index: u8
-        w.write_all(&self.gift_bag_index.to_le_bytes())?;
-
-        // gift_slot: u8
-        w.write_all(&self.gift_slot.to_le_bytes())?;
-
-        // item_bag_index: u8
-        w.write_all(&self.item_bag_index.to_le_bytes())?;
-
-        // item_slot: u8
-        w.write_all(&self.item_slot.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_WRAP_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // gift_bag_index: u8

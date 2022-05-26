@@ -17,24 +17,6 @@ pub struct SMSG_SPELLORDAMAGE_IMMUNE {
     pub unknown1: u8,
 }
 
-impl SMSG_SPELLORDAMAGE_IMMUNE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // caster_guid: Guid
-        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
-
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
-
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster_guid: Guid

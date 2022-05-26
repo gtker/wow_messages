@@ -13,22 +13,6 @@ pub struct SMSG_GUILD_INVITE {
     pub guild_name: String,
 }
 
-impl SMSG_GUILD_INVITE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // player_name: CString
-        w.write_all(self.player_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // guild_name: CString
-        w.write_all(self.guild_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GUILD_INVITE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_name: CString

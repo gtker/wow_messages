@@ -18,29 +18,6 @@ pub struct SMSG_TEXT_EMOTE {
     pub name: String,
 }
 
-impl SMSG_TEXT_EMOTE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // text_emote: u32
-        w.write_all(&self.text_emote.to_le_bytes())?;
-
-        // emote: Emote
-        w.write_all(&(self.emote.as_int() as u32).to_le_bytes())?;
-
-        // name_length: u32
-        w.write_all(&self.name_length.to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_TEXT_EMOTE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

@@ -14,24 +14,6 @@ pub struct SMSG_GUILD_EVENT {
     pub event_descriptions: Vec<String>,
 }
 
-impl SMSG_GUILD_EVENT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // event: GuildEvent
-        w.write_all(&(self.event.as_int() as u8).to_le_bytes())?;
-
-        // amount_of_events: u8
-        w.write_all(&(self.event_descriptions.len() as u8).to_le_bytes())?;
-
-        // event_descriptions: CString[amount_of_events]
-        for i in self.event_descriptions.iter() {
-            w.write_all(&i.as_bytes())?;
-            w.write_all(&[0])?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GUILD_EVENT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // event: GuildEvent

@@ -14,15 +14,6 @@ pub struct SMSG_GROUP_JOINED_BATTLEGROUND {
     pub id: BgTypeId,
 }
 
-impl SMSG_GROUP_JOINED_BATTLEGROUND {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // id: BgTypeId
-        w.write_all(&(self.id.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GROUP_JOINED_BATTLEGROUND {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: BgTypeId

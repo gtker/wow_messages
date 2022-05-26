@@ -12,21 +12,6 @@ pub struct SMSG_EXPECTED_SPAM_RECORDS {
     pub records: Vec<String>,
 }
 
-impl SMSG_EXPECTED_SPAM_RECORDS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // amount_of_records: u32
-        w.write_all(&(self.records.len() as u32).to_le_bytes())?;
-
-        // records: CString[amount_of_records]
-        for i in self.records.iter() {
-            w.write_all(&i.as_bytes())?;
-            w.write_all(&[0])?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_EXPECTED_SPAM_RECORDS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_records: u32

@@ -15,21 +15,6 @@ pub struct CMSG_ITEM_TEXT_QUERY {
     pub unknown1: u32,
 }
 
-impl CMSG_ITEM_TEXT_QUERY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // item_text_id: u32
-        w.write_all(&self.item_text_id.to_le_bytes())?;
-
-        // mail_id: u32
-        w.write_all(&self.mail_id.to_le_bytes())?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_ITEM_TEXT_QUERY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_text_id: u32

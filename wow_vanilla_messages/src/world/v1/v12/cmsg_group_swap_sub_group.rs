@@ -13,22 +13,6 @@ pub struct CMSG_GROUP_SWAP_SUB_GROUP {
     pub swap_with_name: String,
 }
 
-impl CMSG_GROUP_SWAP_SUB_GROUP {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // swap_with_name: CString
-        w.write_all(self.swap_with_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GROUP_SWAP_SUB_GROUP {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString

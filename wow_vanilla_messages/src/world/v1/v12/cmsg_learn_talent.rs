@@ -14,18 +14,6 @@ pub struct CMSG_LEARN_TALENT {
     pub requested_rank: u32,
 }
 
-impl CMSG_LEARN_TALENT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // talent_id: u32
-        w.write_all(&self.talent_id.to_le_bytes())?;
-
-        // requested_rank: u32
-        w.write_all(&self.requested_rank.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_LEARN_TALENT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // talent_id: u32

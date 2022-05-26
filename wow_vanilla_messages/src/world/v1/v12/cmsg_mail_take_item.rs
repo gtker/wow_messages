@@ -15,18 +15,6 @@ pub struct CMSG_MAIL_TAKE_ITEM {
     pub mail_id: u32,
 }
 
-impl CMSG_MAIL_TAKE_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // mailbox_guid: Guid
-        w.write_all(&self.mailbox_guid.guid().to_le_bytes())?;
-
-        // mail_id: u32
-        w.write_all(&self.mail_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_MAIL_TAKE_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // mailbox_guid: Guid

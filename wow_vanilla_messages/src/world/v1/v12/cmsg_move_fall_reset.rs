@@ -13,15 +13,6 @@ pub struct CMSG_MOVE_FALL_RESET {
     pub info: MovementInfo,
 }
 
-impl CMSG_MOVE_FALL_RESET {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // info: MovementInfo
-        &self.info.as_bytes(w)?;;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_MOVE_FALL_RESET {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo

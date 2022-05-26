@@ -14,15 +14,6 @@ pub struct SMSG_PET_TAME_FAILURE {
     pub reason: PetTameFailureReason,
 }
 
-impl SMSG_PET_TAME_FAILURE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // reason: PetTameFailureReason
-        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PET_TAME_FAILURE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: PetTameFailureReason

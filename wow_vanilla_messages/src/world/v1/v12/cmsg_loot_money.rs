@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_LOOT_MONEY {
 }
 
-impl CMSG_LOOT_MONEY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_LOOT_MONEY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

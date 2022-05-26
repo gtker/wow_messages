@@ -13,17 +13,6 @@ pub struct SMSG_ACTION_BUTTONS {
     pub data: [u32; 120],
 }
 
-impl SMSG_ACTION_BUTTONS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // data: u32[120]
-        for i in self.data.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_ACTION_BUTTONS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // data: u32[120]

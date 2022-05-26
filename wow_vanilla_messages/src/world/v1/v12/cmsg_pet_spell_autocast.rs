@@ -16,21 +16,6 @@ pub struct CMSG_PET_SPELL_AUTOCAST {
     pub enabled: u8,
 }
 
-impl CMSG_PET_SPELL_AUTOCAST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // enabled: u8
-        w.write_all(&self.enabled.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PET_SPELL_AUTOCAST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

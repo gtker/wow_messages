@@ -14,18 +14,6 @@ pub struct SMSG_LOGIN_SETTIMESPEED {
     pub game_speed: f32,
 }
 
-impl SMSG_LOGIN_SETTIMESPEED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // secs_to_time_bit_field: u32
-        w.write_all(&self.secs_to_time_bit_field.to_le_bytes())?;
-
-        // game_speed: f32
-        w.write_all(&self.game_speed.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOGIN_SETTIMESPEED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // secs_to_time_bit_field: u32

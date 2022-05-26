@@ -12,17 +12,6 @@ pub struct SMSG_GROUP_DECLINE {
     pub name: String,
 }
 
-impl SMSG_GROUP_DECLINE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GROUP_DECLINE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString

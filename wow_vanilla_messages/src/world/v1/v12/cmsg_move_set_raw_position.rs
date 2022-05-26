@@ -16,24 +16,6 @@ pub struct CMSG_MOVE_SET_RAW_POSITION {
     pub orientation: f32,
 }
 
-impl CMSG_MOVE_SET_RAW_POSITION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_MOVE_SET_RAW_POSITION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // position_x: f32

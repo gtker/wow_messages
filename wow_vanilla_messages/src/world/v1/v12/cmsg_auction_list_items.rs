@@ -22,44 +22,6 @@ pub struct CMSG_AUCTION_LIST_ITEMS {
     pub usable: u8,
 }
 
-impl CMSG_AUCTION_LIST_ITEMS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // auctioneer_guid: Guid
-        w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
-
-        // list_start_item: u32
-        w.write_all(&self.list_start_item.to_le_bytes())?;
-
-        // searched_name: CString
-        w.write_all(self.searched_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // minimum_level: u8
-        w.write_all(&self.minimum_level.to_le_bytes())?;
-
-        // maximum_level: u8
-        w.write_all(&self.maximum_level.to_le_bytes())?;
-
-        // auction_slot_id: u32
-        w.write_all(&self.auction_slot_id.to_le_bytes())?;
-
-        // auction_main_category: u32
-        w.write_all(&self.auction_main_category.to_le_bytes())?;
-
-        // auction_sub_category: u32
-        w.write_all(&self.auction_sub_category.to_le_bytes())?;
-
-        // auction_quality: u32
-        w.write_all(&self.auction_quality.to_le_bytes())?;
-
-        // usable: u8
-        w.write_all(&self.usable.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_AUCTION_LIST_ITEMS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid

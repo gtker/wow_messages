@@ -14,15 +14,6 @@ pub struct CMSG_DEL_FRIEND {
     pub guid: Guid,
 }
 
-impl CMSG_DEL_FRIEND {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_DEL_FRIEND {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

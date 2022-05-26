@@ -12,19 +12,6 @@ pub struct CMSG_TOGGLE_PVP {
     pub set: Option<CMSG_TOGGLE_PVPset>,
 }
 
-impl CMSG_TOGGLE_PVP {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // optional set
-        if let Some(v) = &self.set {
-            // enable_pvp: u8
-            w.write_all(&v.enable_pvp.to_le_bytes())?;
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_TOGGLE_PVP {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional set

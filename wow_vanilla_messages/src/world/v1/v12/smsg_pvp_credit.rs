@@ -17,21 +17,6 @@ pub struct SMSG_PVP_CREDIT {
     pub rank: PvpRank,
 }
 
-impl SMSG_PVP_CREDIT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // honor_points: u32
-        w.write_all(&self.honor_points.to_le_bytes())?;
-
-        // victim: Guid
-        w.write_all(&self.victim.guid().to_le_bytes())?;
-
-        // rank: PvpRank
-        w.write_all(&(self.rank.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PVP_CREDIT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // honor_points: u32

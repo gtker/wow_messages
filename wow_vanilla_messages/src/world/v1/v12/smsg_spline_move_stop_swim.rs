@@ -13,15 +13,6 @@ pub struct SMSG_SPLINE_MOVE_STOP_SWIM {
     pub guid: Guid,
 }
 
-impl SMSG_SPLINE_MOVE_STOP_SWIM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPLINE_MOVE_STOP_SWIM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid

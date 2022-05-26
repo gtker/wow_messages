@@ -15,21 +15,6 @@ pub struct SMSG_ATTACKSTOP {
     pub unknown1: u32,
 }
 
-impl SMSG_ATTACKSTOP {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // player: PackedGuid
-        w.write_all(&self.player.packed_guid())?;
-
-        // enemy: PackedGuid
-        w.write_all(&self.enemy.packed_guid())?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_ATTACKSTOP {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player: PackedGuid

@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_GROUP_DESTROYED {
 }
 
-impl SMSG_GROUP_DESTROYED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GROUP_DESTROYED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

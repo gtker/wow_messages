@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct MSG_MOVE_WORLDPORT_ACK {
 }
 
-impl MSG_MOVE_WORLDPORT_ACK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_MOVE_WORLDPORT_ACK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

@@ -13,15 +13,6 @@ pub struct CMSG_ZONEUPDATE {
     pub zone_id: u32,
 }
 
-impl CMSG_ZONEUPDATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // zone_id: u32
-        w.write_all(&self.zone_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_ZONEUPDATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // zone_id: u32

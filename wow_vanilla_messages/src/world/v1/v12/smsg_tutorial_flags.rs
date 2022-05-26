@@ -20,36 +20,6 @@ pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data7: u32,
 }
 
-impl SMSG_TUTORIAL_FLAGS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // tutorial_data0: u32
-        w.write_all(&self.tutorial_data0.to_le_bytes())?;
-
-        // tutorial_data1: u32
-        w.write_all(&self.tutorial_data1.to_le_bytes())?;
-
-        // tutorial_data2: u32
-        w.write_all(&self.tutorial_data2.to_le_bytes())?;
-
-        // tutorial_data3: u32
-        w.write_all(&self.tutorial_data3.to_le_bytes())?;
-
-        // tutorial_data4: u32
-        w.write_all(&self.tutorial_data4.to_le_bytes())?;
-
-        // tutorial_data5: u32
-        w.write_all(&self.tutorial_data5.to_le_bytes())?;
-
-        // tutorial_data6: u32
-        w.write_all(&self.tutorial_data6.to_le_bytes())?;
-
-        // tutorial_data7: u32
-        w.write_all(&self.tutorial_data7.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_TUTORIAL_FLAGS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // tutorial_data0: u32

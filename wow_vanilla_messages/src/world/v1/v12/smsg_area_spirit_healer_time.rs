@@ -15,18 +15,6 @@ pub struct SMSG_AREA_SPIRIT_HEALER_TIME {
     pub next_resurrect_time: u32,
 }
 
-impl SMSG_AREA_SPIRIT_HEALER_TIME {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // next_resurrect_time: u32
-        w.write_all(&self.next_resurrect_time.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_AREA_SPIRIT_HEALER_TIME {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

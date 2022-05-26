@@ -14,15 +14,6 @@ pub struct SMSG_TURN_IN_PETITION_RESULTS {
     pub result: PetitionTurnInResult,
 }
 
-impl SMSG_TURN_IN_PETITION_RESULTS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // result: PetitionTurnInResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_TURN_IN_PETITION_RESULTS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: PetitionTurnInResult

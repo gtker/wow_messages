@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_CANCEL_GROWTH_AURA {
 }
 
-impl CMSG_CANCEL_GROWTH_AURA {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_CANCEL_GROWTH_AURA {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

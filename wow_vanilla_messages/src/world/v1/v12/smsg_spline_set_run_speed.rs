@@ -14,18 +14,6 @@ pub struct SMSG_SPLINE_SET_RUN_SPEED {
     pub speed: f32,
 }
 
-impl SMSG_SPLINE_SET_RUN_SPEED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
-
-        // speed: f32
-        w.write_all(&self.speed.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid

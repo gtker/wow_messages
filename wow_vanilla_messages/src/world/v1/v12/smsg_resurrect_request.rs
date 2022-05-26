@@ -17,29 +17,6 @@ pub struct SMSG_RESURRECT_REQUEST {
     pub respect_resurrection_timer: u8,
 }
 
-impl SMSG_RESURRECT_REQUEST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // name_length: u32
-        w.write_all(&self.name_length.to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // caster_is_spirit_healer: u8
-        w.write_all(&self.caster_is_spirit_healer.to_le_bytes())?;
-
-        // respect_resurrection_timer: u8
-        w.write_all(&self.respect_resurrection_timer.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_RESURRECT_REQUEST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

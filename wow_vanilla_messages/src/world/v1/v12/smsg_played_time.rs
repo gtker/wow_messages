@@ -14,18 +14,6 @@ pub struct SMSG_PLAYED_TIME {
     pub level_played_time: u32,
 }
 
-impl SMSG_PLAYED_TIME {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // total_played_time: u32
-        w.write_all(&self.total_played_time.to_le_bytes())?;
-
-        // level_played_time: u32
-        w.write_all(&self.level_played_time.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PLAYED_TIME {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // total_played_time: u32

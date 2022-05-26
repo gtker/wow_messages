@@ -15,18 +15,6 @@ pub struct SMSG_COOLDOWN_EVENT {
     pub guid: Guid,
 }
 
-impl SMSG_COOLDOWN_EVENT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_COOLDOWN_EVENT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32

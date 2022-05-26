@@ -19,30 +19,6 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT {
     pub move_type: MonsterMoveType,
 }
 
-impl SMSG_MONSTER_MOVE_TRANSPORT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // transport: PackedGuid
-        w.write_all(&self.transport.packed_guid())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
-
-        // spline_id: u32
-        w.write_all(&self.spline_id.to_le_bytes())?;
-
-        // move_type: MonsterMoveType
-        w.write_all(&(self.move_type.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // transport: PackedGuid

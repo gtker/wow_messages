@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_TUTORIAL_CLEAR {
 }
 
-impl CMSG_TUTORIAL_CLEAR {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_TUTORIAL_CLEAR {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

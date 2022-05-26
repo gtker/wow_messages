@@ -16,24 +16,6 @@ pub struct CMSG_USE_ITEM {
     pub targets: SpellCastTargets,
 }
 
-impl CMSG_USE_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // bag_index: u8
-        w.write_all(&self.bag_index.to_le_bytes())?;
-
-        // bag_slot: u8
-        w.write_all(&self.bag_slot.to_le_bytes())?;
-
-        // spell_index: u8
-        w.write_all(&self.spell_index.to_le_bytes())?;
-
-        // targets: SpellCastTargets
-        &self.targets.as_bytes(w)?;;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_USE_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag_index: u8

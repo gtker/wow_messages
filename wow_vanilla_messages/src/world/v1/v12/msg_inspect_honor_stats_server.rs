@@ -30,60 +30,6 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
     pub rank_progress_bar: u8,
 }
 
-impl MSG_INSPECT_HONOR_STATS_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // highest_rank: PvpRank
-        w.write_all(&(self.highest_rank.as_int() as u8).to_le_bytes())?;
-
-        // today_honorable_and_dishonorable: u32
-        w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes())?;
-
-        // yesterday_honorable: u16
-        w.write_all(&self.yesterday_honorable.to_le_bytes())?;
-
-        // unknown1: u16
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // last_week_honorable: u16
-        w.write_all(&self.last_week_honorable.to_le_bytes())?;
-
-        // unknown2: u16
-        w.write_all(&self.unknown2.to_le_bytes())?;
-
-        // this_week_honorable: u16
-        w.write_all(&self.this_week_honorable.to_le_bytes())?;
-
-        // unknown3: u16
-        w.write_all(&self.unknown3.to_le_bytes())?;
-
-        // lifetime_honorable: u32
-        w.write_all(&self.lifetime_honorable.to_le_bytes())?;
-
-        // lifetime_dishonorable: u32
-        w.write_all(&self.lifetime_dishonorable.to_le_bytes())?;
-
-        // yesterday_honor: u32
-        w.write_all(&self.yesterday_honor.to_le_bytes())?;
-
-        // last_week_honor: u32
-        w.write_all(&self.last_week_honor.to_le_bytes())?;
-
-        // this_week_honor: u32
-        w.write_all(&self.this_week_honor.to_le_bytes())?;
-
-        // last_week_standing: PvpRank
-        w.write_all(&(self.last_week_standing.as_int() as u32).to_le_bytes())?;
-
-        // rank_progress_bar: u8
-        w.write_all(&self.rank_progress_bar.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

@@ -18,30 +18,6 @@ pub struct SMSG_MOVE_KNOCK_BACK {
     pub vertical_speed: f32,
 }
 
-impl SMSG_MOVE_KNOCK_BACK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
-
-        // movement_counter: u32
-        w.write_all(&self.movement_counter.to_le_bytes())?;
-
-        // v_cos: f32
-        w.write_all(&self.v_cos.to_le_bytes())?;
-
-        // v_sin: f32
-        w.write_all(&self.v_sin.to_le_bytes())?;
-
-        // horizontal_speed: f32
-        w.write_all(&self.horizontal_speed.to_le_bytes())?;
-
-        // vertical_speed: f32
-        w.write_all(&self.vertical_speed.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_MOVE_KNOCK_BACK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid

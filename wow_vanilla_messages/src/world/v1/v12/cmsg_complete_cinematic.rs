@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_COMPLETE_CINEMATIC {
 }
 
-impl CMSG_COMPLETE_CINEMATIC {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_COMPLETE_CINEMATIC {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

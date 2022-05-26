@@ -13,20 +13,6 @@ pub struct SMSG_MAIL_LIST_RESULT {
     pub mails: Vec<Mail>,
 }
 
-impl SMSG_MAIL_LIST_RESULT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // amount_of_mails: u8
-        w.write_all(&(self.mails.len() as u8).to_le_bytes())?;
-
-        // mails: Mail[amount_of_mails]
-        for i in self.mails.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_MAIL_LIST_RESULT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_mails: u8

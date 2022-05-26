@@ -13,22 +13,6 @@ pub struct CMSG_JOIN_CHANNEL {
     pub channel_password: String,
 }
 
-impl CMSG_JOIN_CHANNEL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // channel_name: CString
-        w.write_all(self.channel_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // channel_password: CString
-        w.write_all(self.channel_password.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_JOIN_CHANNEL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // channel_name: CString

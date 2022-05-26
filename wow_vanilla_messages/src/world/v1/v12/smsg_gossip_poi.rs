@@ -17,32 +17,6 @@ pub struct SMSG_GOSSIP_POI {
     pub location_name: String,
 }
 
-impl SMSG_GOSSIP_POI {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // flags: u32
-        w.write_all(&self.flags.to_le_bytes())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // icon: u32
-        w.write_all(&self.icon.to_le_bytes())?;
-
-        // data: u32
-        w.write_all(&self.data.to_le_bytes())?;
-
-        // location_name: CString
-        w.write_all(self.location_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GOSSIP_POI {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // flags: u32

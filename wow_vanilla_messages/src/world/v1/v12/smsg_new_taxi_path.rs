@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_NEW_TAXI_PATH {
 }
 
-impl SMSG_NEW_TAXI_PATH {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_NEW_TAXI_PATH {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

@@ -15,18 +15,6 @@ pub struct SMSG_TRAINER_BUY_SUCCEEDED {
     pub id: u32,
 }
 
-impl SMSG_TRAINER_BUY_SUCCEEDED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_TRAINER_BUY_SUCCEEDED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

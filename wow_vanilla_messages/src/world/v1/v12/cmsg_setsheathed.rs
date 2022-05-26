@@ -14,15 +14,6 @@ pub struct CMSG_SETSHEATHED {
     pub sheathed: SheathState,
 }
 
-impl CMSG_SETSHEATHED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // sheathed: SheathState
-        w.write_all(&(self.sheathed.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_SETSHEATHED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sheathed: SheathState

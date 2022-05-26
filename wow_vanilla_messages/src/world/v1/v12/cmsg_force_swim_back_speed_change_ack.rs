@@ -17,24 +17,6 @@ pub struct CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
     pub new_speed: f32,
 }
 
-impl CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // counter: u32
-        w.write_all(&self.counter.to_le_bytes())?;
-
-        // movement_info: MovementInfo
-        &self.movement_info.as_bytes(w)?;;
-
-        // new_speed: f32
-        w.write_all(&self.new_speed.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

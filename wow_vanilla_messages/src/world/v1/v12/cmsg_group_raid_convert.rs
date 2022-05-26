@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_GROUP_RAID_CONVERT {
 }
 
-impl CMSG_GROUP_RAID_CONVERT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GROUP_RAID_CONVERT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

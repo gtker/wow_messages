@@ -16,21 +16,6 @@ pub struct MSG_MINIMAP_PING_Server {
     pub position_y: f32,
 }
 
-impl MSG_MINIMAP_PING_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_MINIMAP_PING_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

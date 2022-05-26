@@ -23,48 +23,6 @@ pub struct SMSG_PET_SPELLS {
     pub cooldowns: Vec<PetSpellCooldown>,
 }
 
-impl SMSG_PET_SPELLS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // pet: Guid
-        w.write_all(&self.pet.guid().to_le_bytes())?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // react: PetReactState
-        w.write_all(&(self.react.as_int() as u8).to_le_bytes())?;
-
-        // command: PetCommandState
-        w.write_all(&(self.command.as_int() as u8).to_le_bytes())?;
-
-        // unknown2: u16
-        w.write_all(&self.unknown2.to_le_bytes())?;
-
-        // action_bars: u32[10]
-        for i in self.action_bars.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // amount_of_spells: u8
-        w.write_all(&(self.spells.len() as u8).to_le_bytes())?;
-
-        // spells: u32[amount_of_spells]
-        for i in self.spells.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // amount_of_cooldowns: u8
-        w.write_all(&(self.cooldowns.len() as u8).to_le_bytes())?;
-
-        // cooldowns: PetSpellCooldown[amount_of_cooldowns]
-        for i in self.cooldowns.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PET_SPELLS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet: Guid

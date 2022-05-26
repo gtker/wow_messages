@@ -20,66 +20,6 @@ pub struct CMSG_GMTICKET_CREATE {
     pub reserved_for_future_use: String,
 }
 
-impl CMSG_GMTICKET_CREATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // category: GmTicketType
-        w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
-
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
-
-        // message: CString
-        w.write_all(self.message.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // reserved_for_future_use: CString
-        w.write_all(self.reserved_for_future_use.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        match &self.category {
-            CMSG_GMTICKET_CREATEGmTicketType::STUCK => {}
-            CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
-                chat_data_line_count,
-                chat_data_size_uncompressed,
-                compressed_chat_data,
-            } => {
-                // chat_data_line_count: u32
-                w.write_all(&chat_data_line_count.to_le_bytes())?;
-
-                // chat_data_size_uncompressed: u32
-                w.write_all(&chat_data_size_uncompressed.to_le_bytes())?;
-
-                // compressed_chat_data: u8[-]
-                for i in compressed_chat_data.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-            }
-            CMSG_GMTICKET_CREATEGmTicketType::GUILD => {}
-            CMSG_GMTICKET_CREATEGmTicketType::ITEM => {}
-            CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL => {}
-            CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP => {}
-            CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC => {}
-            CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL => {}
-            CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING => {}
-            CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => {}
-        }
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GMTICKET_CREATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // category: GmTicketType

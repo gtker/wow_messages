@@ -13,15 +13,6 @@ pub struct SMSG_LOOT_MONEY_NOTIFY {
     pub amount: u32,
 }
 
-impl SMSG_LOOT_MONEY_NOTIFY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // amount: u32
-        w.write_all(&self.amount.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOOT_MONEY_NOTIFY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount: u32

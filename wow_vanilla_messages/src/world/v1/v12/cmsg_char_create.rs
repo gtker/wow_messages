@@ -24,44 +24,6 @@ pub struct CMSG_CHAR_CREATE {
     pub outfit_id: u8,
 }
 
-impl CMSG_CHAR_CREATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
-
-        // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
-
-        // gender: Gender
-        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
-
-        // skin: u8
-        w.write_all(&self.skin.to_le_bytes())?;
-
-        // face: u8
-        w.write_all(&self.face.to_le_bytes())?;
-
-        // hairstyle: u8
-        w.write_all(&self.hairstyle.to_le_bytes())?;
-
-        // haircolor: u8
-        w.write_all(&self.haircolor.to_le_bytes())?;
-
-        // facialhair: u8
-        w.write_all(&self.facialhair.to_le_bytes())?;
-
-        // outfit_id: u8
-        w.write_all(&self.outfit_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_CHAR_CREATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString

@@ -16,21 +16,6 @@ pub struct CMSG_ACTIVATETAXIEXPRESS {
     pub node_count: u32,
 }
 
-impl CMSG_ACTIVATETAXIEXPRESS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // total_cost: u32
-        w.write_all(&self.total_cost.to_le_bytes())?;
-
-        // node_count: u32
-        w.write_all(&self.node_count.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_ACTIVATETAXIEXPRESS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_MOUNTSPECIAL_ANIM {
 }
 
-impl CMSG_MOUNTSPECIAL_ANIM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_MOUNTSPECIAL_ANIM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

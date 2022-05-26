@@ -12,17 +12,6 @@ pub struct SMSG_NOTIFICATION {
     pub notification: String,
 }
 
-impl SMSG_NOTIFICATION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // notification: CString
-        w.write_all(self.notification.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_NOTIFICATION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // notification: CString

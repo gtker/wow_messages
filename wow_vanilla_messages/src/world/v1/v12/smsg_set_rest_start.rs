@@ -13,15 +13,6 @@ pub struct SMSG_SET_REST_START {
     pub unknown1: u32,
 }
 
-impl SMSG_SET_REST_START {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SET_REST_START {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u32

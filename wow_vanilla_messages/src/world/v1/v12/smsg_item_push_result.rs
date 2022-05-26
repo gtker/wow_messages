@@ -26,42 +26,6 @@ pub struct SMSG_ITEM_PUSH_RESULT {
     pub item_count: u32,
 }
 
-impl SMSG_ITEM_PUSH_RESULT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // source: NewItemSource
-        w.write_all(&(self.source.as_int() as u32).to_le_bytes())?;
-
-        // creation_type: NewItemCreationType
-        w.write_all(&(self.creation_type.as_int() as u32).to_le_bytes())?;
-
-        // alert_chat: NewItemChatAlert
-        w.write_all(&(self.alert_chat.as_int() as u32).to_le_bytes())?;
-
-        // bag_slot: u8
-        w.write_all(&self.bag_slot.to_le_bytes())?;
-
-        // item_slot: u32
-        w.write_all(&self.item_slot.to_le_bytes())?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes())?;
-
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
-
-        // item_count: u32
-        w.write_all(&self.item_count.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_ITEM_PUSH_RESULT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

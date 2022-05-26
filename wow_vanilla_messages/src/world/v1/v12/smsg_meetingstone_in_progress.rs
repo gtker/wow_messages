@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_MEETINGSTONE_IN_PROGRESS {
 }
 
-impl SMSG_MEETINGSTONE_IN_PROGRESS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_MEETINGSTONE_IN_PROGRESS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

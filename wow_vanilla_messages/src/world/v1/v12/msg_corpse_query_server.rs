@@ -14,42 +14,6 @@ pub struct MSG_CORPSE_QUERY_Server {
     pub result: MSG_CORPSE_QUERY_ServerCorpseQueryResult,
 }
 
-impl MSG_CORPSE_QUERY_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // result: CorpseQueryResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
-
-        match &self.result {
-            MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
-            MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
-                corpse_map,
-                map,
-                position_x,
-                position_y,
-                position_z,
-            } => {
-                // map: Map
-                w.write_all(&(map.as_int() as u32).to_le_bytes())?;
-
-                // position_x: f32
-                w.write_all(&position_x.to_le_bytes())?;
-
-                // position_y: f32
-                w.write_all(&position_y.to_le_bytes())?;
-
-                // position_z: f32
-                w.write_all(&position_z.to_le_bytes())?;
-
-                // corpse_map: Map
-                w.write_all(&(corpse_map.as_int() as u32).to_le_bytes())?;
-
-            }
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_CORPSE_QUERY_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: CorpseQueryResult

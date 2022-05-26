@@ -14,18 +14,6 @@ pub struct SMSG_MOVE_LAND_WALK {
     pub counter: u32,
 }
 
-impl SMSG_MOVE_LAND_WALK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
-
-        // counter: u32
-        w.write_all(&self.counter.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_MOVE_LAND_WALK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid

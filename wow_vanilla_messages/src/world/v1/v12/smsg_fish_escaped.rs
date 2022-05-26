@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_FISH_ESCAPED {
 }
 
-impl SMSG_FISH_ESCAPED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_FISH_ESCAPED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

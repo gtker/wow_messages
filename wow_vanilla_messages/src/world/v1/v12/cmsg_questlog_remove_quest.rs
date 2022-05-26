@@ -13,15 +13,6 @@ pub struct CMSG_QUESTLOG_REMOVE_QUEST {
     pub slot: u8,
 }
 
-impl CMSG_QUESTLOG_REMOVE_QUEST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // slot: u8
-        w.write_all(&self.slot.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_QUESTLOG_REMOVE_QUEST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // slot: u8

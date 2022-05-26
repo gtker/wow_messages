@@ -12,17 +12,6 @@ pub struct CMSG_GUILD_LEADER {
     pub new_guild_leader_name: String,
 }
 
-impl CMSG_GUILD_LEADER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // new_guild_leader_name: CString
-        w.write_all(self.new_guild_leader_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GUILD_LEADER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // new_guild_leader_name: CString

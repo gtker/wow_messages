@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_DUEL_INBOUNDS {
 }
 
-impl SMSG_DUEL_INBOUNDS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_DUEL_INBOUNDS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

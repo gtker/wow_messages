@@ -14,18 +14,6 @@ pub struct SMSG_CLIENT_CONTROL_UPDATE {
     pub allow_movement: u8,
 }
 
-impl SMSG_CLIENT_CONTROL_UPDATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
-
-        // allow_movement: u8
-        w.write_all(&self.allow_movement.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid

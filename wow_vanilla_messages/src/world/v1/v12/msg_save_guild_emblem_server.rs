@@ -14,15 +14,6 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Server {
     pub result: GuildEmblemResult,
 }
 
-impl MSG_SAVE_GUILD_EMBLEM_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // result: GuildEmblemResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: GuildEmblemResult

@@ -13,15 +13,6 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
     pub unread_mails: f32,
 }
 
-impl MSG_QUERY_NEXT_MAIL_TIME_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // unread_mails: f32
-        w.write_all(&self.unread_mails.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unread_mails: f32

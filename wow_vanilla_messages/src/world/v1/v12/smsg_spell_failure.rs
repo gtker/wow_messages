@@ -17,21 +17,6 @@ pub struct SMSG_SPELL_FAILURE {
     pub result: SpellCastResult,
 }
 
-impl SMSG_SPELL_FAILURE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // result: SpellCastResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELL_FAILURE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

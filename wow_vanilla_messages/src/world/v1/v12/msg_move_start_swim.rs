@@ -13,15 +13,6 @@ pub struct MSG_MOVE_START_SWIM {
     pub info: MovementInfo,
 }
 
-impl MSG_MOVE_START_SWIM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // info: MovementInfo
-        &self.info.as_bytes(w)?;;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_MOVE_START_SWIM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo

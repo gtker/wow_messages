@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_CANCEL_TRADE {
 }
 
-impl CMSG_CANCEL_TRADE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_CANCEL_TRADE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

@@ -13,20 +13,6 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
     pub message: String,
 }
 
-impl SMSG_AREA_TRIGGER_MESSAGE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // length: u32
-        w.write_all(&self.length.to_le_bytes())?;
-
-        // message: CString
-        w.write_all(self.message.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // length: u32

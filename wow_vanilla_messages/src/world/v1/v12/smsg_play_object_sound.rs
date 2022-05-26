@@ -15,18 +15,6 @@ pub struct SMSG_PLAY_OBJECT_SOUND {
     pub guid: Guid,
 }
 
-impl SMSG_PLAY_OBJECT_SOUND {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // sound_id: u32
-        w.write_all(&self.sound_id.to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PLAY_OBJECT_SOUND {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sound_id: u32

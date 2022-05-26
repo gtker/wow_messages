@@ -14,18 +14,6 @@ pub struct CMSG_AUTOBANK_ITEM {
     pub slot_index: u8,
 }
 
-impl CMSG_AUTOBANK_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // bag_index: u8
-        w.write_all(&self.bag_index.to_le_bytes())?;
-
-        // slot_index: u8
-        w.write_all(&self.slot_index.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_AUTOBANK_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag_index: u8

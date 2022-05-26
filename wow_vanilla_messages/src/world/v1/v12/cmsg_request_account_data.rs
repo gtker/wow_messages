@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_REQUEST_ACCOUNT_DATA {
 }
 
-impl CMSG_REQUEST_ACCOUNT_DATA {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

@@ -18,30 +18,6 @@ pub struct CMSG_DESTROYITEM {
     pub unknown3: u8,
 }
 
-impl CMSG_DESTROYITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // bag: u8
-        w.write_all(&self.bag.to_le_bytes())?;
-
-        // slot: u8
-        w.write_all(&self.slot.to_le_bytes())?;
-
-        // amount: u8
-        w.write_all(&self.amount.to_le_bytes())?;
-
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // unknown2: u8
-        w.write_all(&self.unknown2.to_le_bytes())?;
-
-        // unknown3: u8
-        w.write_all(&self.unknown3.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_DESTROYITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag: u8

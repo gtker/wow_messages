@@ -22,36 +22,6 @@ pub struct SMSG_LOOT_ROLL_WON {
     pub vote: RollVote,
 }
 
-impl SMSG_LOOT_ROLL_WON {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // looted_target_guid: Guid
-        w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
-
-        // loot_slot: u32
-        w.write_all(&self.loot_slot.to_le_bytes())?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // item_random_suffix: u32
-        w.write_all(&self.item_random_suffix.to_le_bytes())?;
-
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
-
-        // winning_player_guid: Guid
-        w.write_all(&self.winning_player_guid.guid().to_le_bytes())?;
-
-        // winning_roll: u8
-        w.write_all(&self.winning_roll.to_le_bytes())?;
-
-        // vote: RollVote
-        w.write_all(&(self.vote.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOOT_ROLL_WON {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // looted_target_guid: Guid

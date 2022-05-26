@@ -24,48 +24,6 @@ pub struct SMSG_LEVELUP_INFO {
     pub spirit: u32,
 }
 
-impl SMSG_LEVELUP_INFO {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // new_level: u32
-        w.write_all(&self.new_level.to_le_bytes())?;
-
-        // health: u32
-        w.write_all(&self.health.to_le_bytes())?;
-
-        // mana: u32
-        w.write_all(&self.mana.to_le_bytes())?;
-
-        // rage: u32
-        w.write_all(&self.rage.to_le_bytes())?;
-
-        // focus: u32
-        w.write_all(&self.focus.to_le_bytes())?;
-
-        // energy: u32
-        w.write_all(&self.energy.to_le_bytes())?;
-
-        // happiness: u32
-        w.write_all(&self.happiness.to_le_bytes())?;
-
-        // strength: u32
-        w.write_all(&self.strength.to_le_bytes())?;
-
-        // agility: u32
-        w.write_all(&self.agility.to_le_bytes())?;
-
-        // stamina: u32
-        w.write_all(&self.stamina.to_le_bytes())?;
-
-        // intellect: u32
-        w.write_all(&self.intellect.to_le_bytes())?;
-
-        // spirit: u32
-        w.write_all(&self.spirit.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LEVELUP_INFO {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // new_level: u32

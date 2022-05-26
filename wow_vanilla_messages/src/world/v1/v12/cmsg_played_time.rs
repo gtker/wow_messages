@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_PLAYED_TIME {
 }
 
-impl CMSG_PLAYED_TIME {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PLAYED_TIME {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

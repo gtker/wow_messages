@@ -19,51 +19,6 @@ pub struct CMSG_WHO {
     pub search_strings: Vec<String>,
 }
 
-impl CMSG_WHO {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // minimum_level: u32
-        w.write_all(&self.minimum_level.to_le_bytes())?;
-
-        // maximum_level: u32
-        w.write_all(&self.maximum_level.to_le_bytes())?;
-
-        // player_name: CString
-        w.write_all(self.player_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // guild_name: CString
-        w.write_all(self.guild_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // race_mask: u32
-        w.write_all(&self.race_mask.to_le_bytes())?;
-
-        // class_mask: u32
-        w.write_all(&self.class_mask.to_le_bytes())?;
-
-        // amount_of_zones: u32
-        w.write_all(&(self.zones.len() as u32).to_le_bytes())?;
-
-        // zones: u32[amount_of_zones]
-        for i in self.zones.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // amount_of_strings: u32
-        w.write_all(&(self.search_strings.len() as u32).to_le_bytes())?;
-
-        // search_strings: CString[amount_of_strings]
-        for i in self.search_strings.iter() {
-            w.write_all(&i.as_bytes())?;
-            w.write_all(&[0])?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_WHO {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // minimum_level: u32

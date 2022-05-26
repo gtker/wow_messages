@@ -16,26 +16,6 @@ pub struct SMSG_SHOWTAXINODES {
     pub nodes: Vec<u32>,
 }
 
-impl SMSG_SHOWTAXINODES {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // nearest_node: u32
-        w.write_all(&self.nearest_node.to_le_bytes())?;
-
-        // nodes: u32[-]
-        for i in self.nodes.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SHOWTAXINODES {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u32

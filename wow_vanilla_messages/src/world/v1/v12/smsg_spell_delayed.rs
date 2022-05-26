@@ -15,18 +15,6 @@ pub struct SMSG_SPELL_DELAYED {
     pub delay_time: u32,
 }
 
-impl SMSG_SPELL_DELAYED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // delay_time: u32
-        w.write_all(&self.delay_time.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELL_DELAYED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

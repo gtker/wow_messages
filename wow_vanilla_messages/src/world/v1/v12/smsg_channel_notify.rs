@@ -14,20 +14,6 @@ pub struct SMSG_CHANNEL_NOTIFY {
     pub channel_name: String,
 }
 
-impl SMSG_CHANNEL_NOTIFY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // notify_type: ChatNotify
-        w.write_all(&(self.notify_type.as_int() as u8).to_le_bytes())?;
-
-        // channel_name: CString
-        w.write_all(self.channel_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_CHANNEL_NOTIFY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // notify_type: ChatNotify

@@ -15,21 +15,6 @@ pub struct SMSG_FORCE_RUN_SPEED_CHANGE {
     pub speed: f32,
 }
 
-impl SMSG_FORCE_RUN_SPEED_CHANGE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
-
-        // move_event: u32
-        w.write_all(&self.move_event.to_le_bytes())?;
-
-        // speed: f32
-        w.write_all(&self.speed.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid

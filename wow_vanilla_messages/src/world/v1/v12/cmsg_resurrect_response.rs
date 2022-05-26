@@ -15,18 +15,6 @@ pub struct CMSG_RESURRECT_RESPONSE {
     pub status: u8,
 }
 
-impl CMSG_RESURRECT_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // status: u8
-        w.write_all(&self.status.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_RESURRECT_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

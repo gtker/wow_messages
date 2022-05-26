@@ -21,21 +21,6 @@ impl SMSG_TRANSFER_ABORTED {
 
 }
 
-impl SMSG_TRANSFER_ABORTED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // reason: TransferAbortReason
-        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
-
-        // padding: u8
-        w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_TRANSFER_ABORTED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map

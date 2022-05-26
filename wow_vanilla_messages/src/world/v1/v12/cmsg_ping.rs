@@ -14,18 +14,6 @@ pub struct CMSG_PING {
     pub round_time_in_ms: u32,
 }
 
-impl CMSG_PING {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // sequence_id: u32
-        w.write_all(&self.sequence_id.to_le_bytes())?;
-
-        // round_time_in_ms: u32
-        w.write_all(&self.round_time_in_ms.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PING {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sequence_id: u32

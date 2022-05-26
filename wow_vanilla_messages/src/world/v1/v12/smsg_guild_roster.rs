@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_GUILD_ROSTER {
 }
 
-impl SMSG_GUILD_ROSTER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GUILD_ROSTER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

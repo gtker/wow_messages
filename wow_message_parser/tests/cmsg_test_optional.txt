@@ -14,27 +14,6 @@ pub struct CMSG_TEST_OPTIONAL {
     pub server: Option<CMSG_TEST_OPTIONALserver>,
 }
 
-impl CMSG_TEST_OPTIONAL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // c_string: CString
-        w.write_all(self.c_string.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // b_u8: u8
-        w.write_all(&self.b_u8.to_le_bytes())?;
-
-        // optional server
-        if let Some(v) = &self.server {
-            // optional_u8: u8
-            w.write_all(&v.optional_u8.to_le_bytes())?;
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_TEST_OPTIONAL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // c_string: CString

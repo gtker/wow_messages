@@ -13,17 +13,6 @@ pub struct SMSG_ACCOUNT_DATA_TIMES {
     pub data: [u32; 32],
 }
 
-impl SMSG_ACCOUNT_DATA_TIMES {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // data: u32[32]
-        for i in self.data.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_ACCOUNT_DATA_TIMES {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // data: u32[32]

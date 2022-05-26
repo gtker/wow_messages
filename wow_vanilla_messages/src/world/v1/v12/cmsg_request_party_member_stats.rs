@@ -14,15 +14,6 @@ pub struct CMSG_REQUEST_PARTY_MEMBER_STATS {
     pub guid: Guid,
 }
 
-impl CMSG_REQUEST_PARTY_MEMBER_STATS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_REQUEST_PARTY_MEMBER_STATS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

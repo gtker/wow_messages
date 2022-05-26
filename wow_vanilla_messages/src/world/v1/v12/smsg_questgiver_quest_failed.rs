@@ -15,18 +15,6 @@ pub struct SMSG_QUESTGIVER_QUEST_FAILED {
     pub reason: QuestFailedReason,
 }
 
-impl SMSG_QUESTGIVER_QUEST_FAILED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // reason: QuestFailedReason
-        w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_QUESTGIVER_QUEST_FAILED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32

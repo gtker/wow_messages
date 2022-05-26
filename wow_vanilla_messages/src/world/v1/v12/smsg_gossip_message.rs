@@ -18,34 +18,6 @@ pub struct SMSG_GOSSIP_MESSAGE {
     pub quests: Vec<QuestItem>,
 }
 
-impl SMSG_GOSSIP_MESSAGE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // title_text_id: u32
-        w.write_all(&self.title_text_id.to_le_bytes())?;
-
-        // amount_of_gossip_items: u32
-        w.write_all(&(self.gossips.len() as u32).to_le_bytes())?;
-
-        // gossips: GossipItem[amount_of_gossip_items]
-        for i in self.gossips.iter() {
-            i.as_bytes(w)?;
-        }
-
-        // amount_of_quests: u32
-        w.write_all(&(self.quests.len() as u32).to_le_bytes())?;
-
-        // quests: QuestItem[amount_of_quests]
-        for i in self.quests.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GOSSIP_MESSAGE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

@@ -15,21 +15,6 @@ pub struct CMSG_LEAVE_BATTLEFIELD {
     pub unknown2: u16,
 }
 
-impl CMSG_LEAVE_BATTLEFIELD {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // battle_ground_type_id: u8
-        w.write_all(&self.battle_ground_type_id.to_le_bytes())?;
-
-        // unknown2: u16
-        w.write_all(&self.unknown2.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_LEAVE_BATTLEFIELD {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u8

@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_QUESTGIVER_CANCEL {
 }
 
-impl CMSG_QUESTGIVER_CANCEL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_QUESTGIVER_CANCEL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

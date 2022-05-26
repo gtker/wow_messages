@@ -19,30 +19,6 @@ pub struct SMSG_AUCTION_OWNER_NOTIFICATION {
     pub item_random_property_id: u32,
 }
 
-impl SMSG_AUCTION_OWNER_NOTIFICATION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // auction_id: u32
-        w.write_all(&self.auction_id.to_le_bytes())?;
-
-        // bid: u32
-        w.write_all(&self.bid.to_le_bytes())?;
-
-        // auction_out_bid: u32
-        w.write_all(&self.auction_out_bid.to_le_bytes())?;
-
-        // bidder: Guid
-        w.write_all(&self.bidder.guid().to_le_bytes())?;
-
-        // item_entry: u32
-        w.write_all(&self.item_entry.to_le_bytes())?;
-
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_AUCTION_OWNER_NOTIFICATION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auction_id: u32

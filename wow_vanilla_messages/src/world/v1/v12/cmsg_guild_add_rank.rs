@@ -12,17 +12,6 @@ pub struct CMSG_GUILD_ADD_RANK {
     pub rank_name: String,
 }
 
-impl CMSG_GUILD_ADD_RANK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // rank_name: CString
-        w.write_all(self.rank_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GUILD_ADD_RANK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // rank_name: CString

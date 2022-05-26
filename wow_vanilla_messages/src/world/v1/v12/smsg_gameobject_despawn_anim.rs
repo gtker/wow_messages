@@ -14,15 +14,6 @@ pub struct SMSG_GAMEOBJECT_DESPAWN_ANIM {
     pub guid: Guid,
 }
 
-impl SMSG_GAMEOBJECT_DESPAWN_ANIM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GAMEOBJECT_DESPAWN_ANIM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

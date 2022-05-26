@@ -15,18 +15,6 @@ pub struct CMSG_QUESTGIVER_QUERY_QUEST {
     pub quest_id: u32,
 }
 
-impl CMSG_QUESTGIVER_QUERY_QUEST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_QUESTGIVER_QUERY_QUEST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

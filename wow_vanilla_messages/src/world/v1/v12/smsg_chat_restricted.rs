@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_CHAT_RESTRICTED {
 }
 
-impl SMSG_CHAT_RESTRICTED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_CHAT_RESTRICTED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_GUILD_DEL_RANK {
 }
 
-impl CMSG_GUILD_DEL_RANK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GUILD_DEL_RANK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

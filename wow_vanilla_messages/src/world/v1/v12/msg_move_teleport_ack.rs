@@ -16,21 +16,6 @@ pub struct MSG_MOVE_TELEPORT_ACK {
     pub time_in_msecs: u32,
 }
 
-impl MSG_MOVE_TELEPORT_ACK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // movement_counter: u32
-        w.write_all(&self.movement_counter.to_le_bytes())?;
-
-        // time_in_msecs: u32
-        w.write_all(&self.time_in_msecs.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_MOVE_TELEPORT_ACK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

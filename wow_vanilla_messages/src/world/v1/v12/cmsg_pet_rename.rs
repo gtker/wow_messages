@@ -14,20 +14,6 @@ pub struct CMSG_PET_RENAME {
     pub name: String,
 }
 
-impl CMSG_PET_RENAME {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // pet_guid: Guid
-        w.write_all(&self.pet_guid.guid().to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PET_RENAME {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_guid: Guid

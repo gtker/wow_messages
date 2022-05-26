@@ -14,15 +14,6 @@ pub struct MSG_TALENT_WIPE_CONFIRM_Client {
     pub wiping_npc: Guid,
 }
 
-impl MSG_TALENT_WIPE_CONFIRM_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // wiping_npc: Guid
-        w.write_all(&self.wiping_npc.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_TALENT_WIPE_CONFIRM_Client {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // wiping_npc: Guid

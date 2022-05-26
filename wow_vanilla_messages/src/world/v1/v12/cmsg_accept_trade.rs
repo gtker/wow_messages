@@ -13,15 +13,6 @@ pub struct CMSG_ACCEPT_TRADE {
     pub unknown1: u32,
 }
 
-impl CMSG_ACCEPT_TRADE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_ACCEPT_TRADE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u32

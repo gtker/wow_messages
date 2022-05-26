@@ -13,15 +13,6 @@ pub struct MSG_MOVE_FALL_LAND {
     pub info: MovementInfo,
 }
 
-impl MSG_MOVE_FALL_LAND {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // info: MovementInfo
-        &self.info.as_bytes(w)?;;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_MOVE_FALL_LAND {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo

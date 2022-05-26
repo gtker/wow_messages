@@ -16,21 +16,6 @@ pub struct CMSG_AUCTION_PLACE_BID {
     pub price: u32,
 }
 
-impl CMSG_AUCTION_PLACE_BID {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // auctioneer_guid: Guid
-        w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
-
-        // auction_id: u32
-        w.write_all(&self.auction_id.to_le_bytes())?;
-
-        // price: u32
-        w.write_all(&self.price.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_AUCTION_PLACE_BID {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid

@@ -14,15 +14,6 @@ pub struct SMSG_INSTANCE_RESET {
     pub map: Map,
 }
 
-impl SMSG_INSTANCE_RESET {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_INSTANCE_RESET {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map

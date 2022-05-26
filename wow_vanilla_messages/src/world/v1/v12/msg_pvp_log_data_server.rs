@@ -16,34 +16,6 @@ pub struct MSG_PVP_LOG_DATA_Server {
     pub players: Vec<BattlegroundPlayer>,
 }
 
-impl MSG_PVP_LOG_DATA_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // status: BattlegroundEndStatus
-        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
-
-        match &self.status {
-            MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED => {}
-            MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
-                winner,
-            } => {
-                // winner: BattlegroundWinner
-                w.write_all(&(winner.as_int() as u8).to_le_bytes())?;
-
-            }
-        }
-
-        // amount_of_players: u32
-        w.write_all(&(self.players.len() as u32).to_le_bytes())?;
-
-        // players: BattlegroundPlayer[amount_of_players]
-        for i in self.players.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_PVP_LOG_DATA_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // status: BattlegroundEndStatus

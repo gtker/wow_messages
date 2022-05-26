@@ -14,15 +14,6 @@ pub struct CMSG_BATTLEFIELD_JOIN {
     pub map: Map,
 }
 
-impl CMSG_BATTLEFIELD_JOIN {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_BATTLEFIELD_JOIN {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map

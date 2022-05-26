@@ -15,18 +15,6 @@ pub struct CMSG_CREATURE_QUERY {
     pub guid: Guid,
 }
 
-impl CMSG_CREATURE_QUERY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // creature: u32
-        w.write_all(&self.creature.to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_CREATURE_QUERY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // creature: u32

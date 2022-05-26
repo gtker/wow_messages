@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_LOGOUT_CANCEL_ACK {
 }
 
-impl SMSG_LOGOUT_CANCEL_ACK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOGOUT_CANCEL_ACK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

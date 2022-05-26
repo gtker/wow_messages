@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_ATTACKSWING_DEADTARGET {
 }
 
-impl SMSG_ATTACKSWING_DEADTARGET {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_ATTACKSWING_DEADTARGET {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

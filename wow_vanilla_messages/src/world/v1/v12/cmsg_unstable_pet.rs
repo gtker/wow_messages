@@ -15,18 +15,6 @@ pub struct CMSG_UNSTABLE_PET {
     pub pet_number: u32,
 }
 
-impl CMSG_UNSTABLE_PET {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc_guid: Guid
-        w.write_all(&self.npc_guid.guid().to_le_bytes())?;
-
-        // pet_number: u32
-        w.write_all(&self.pet_number.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_UNSTABLE_PET {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc_guid: Guid

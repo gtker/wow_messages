@@ -15,18 +15,6 @@ pub struct CMSG_PET_NAME_QUERY {
     pub guid: Guid,
 }
 
-impl CMSG_PET_NAME_QUERY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // pet_number: u32
-        w.write_all(&self.pet_number.to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_PET_NAME_QUERY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_number: u32

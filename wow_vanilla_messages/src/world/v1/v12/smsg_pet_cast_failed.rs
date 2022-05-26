@@ -16,21 +16,6 @@ pub struct SMSG_PET_CAST_FAILED {
     pub result: SpellCastResult,
 }
 
-impl SMSG_PET_CAST_FAILED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // result: SpellCastResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PET_CAST_FAILED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32

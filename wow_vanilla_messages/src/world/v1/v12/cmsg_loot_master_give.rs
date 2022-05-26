@@ -16,21 +16,6 @@ pub struct CMSG_LOOT_MASTER_GIVE {
     pub target_player_guid: Guid,
 }
 
-impl CMSG_LOOT_MASTER_GIVE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // loot_guid: Guid
-        w.write_all(&self.loot_guid.guid().to_le_bytes())?;
-
-        // slot_id: u8
-        w.write_all(&self.slot_id.to_le_bytes())?;
-
-        // target_player_guid: Guid
-        w.write_all(&self.target_player_guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_LOOT_MASTER_GIVE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // loot_guid: Guid

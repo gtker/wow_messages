@@ -16,24 +16,6 @@ pub struct CMSG_SWAP_ITEM {
     pub source_slot: u8,
 }
 
-impl CMSG_SWAP_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // destination_bag: u8
-        w.write_all(&self.destination_bag.to_le_bytes())?;
-
-        // destionation_slot: u8
-        w.write_all(&self.destionation_slot.to_le_bytes())?;
-
-        // source_bag: u8
-        w.write_all(&self.source_bag.to_le_bytes())?;
-
-        // source_slot: u8
-        w.write_all(&self.source_slot.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_SWAP_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // destination_bag: u8

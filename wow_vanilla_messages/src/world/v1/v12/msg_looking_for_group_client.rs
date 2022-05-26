@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct MSG_LOOKING_FOR_GROUP_Client {
 }
 
-impl MSG_LOOKING_FOR_GROUP_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_LOOKING_FOR_GROUP_Client {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

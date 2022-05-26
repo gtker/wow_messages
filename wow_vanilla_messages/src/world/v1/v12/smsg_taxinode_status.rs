@@ -15,18 +15,6 @@ pub struct SMSG_TAXINODE_STATUS {
     pub taxi_mask_node_known: u8,
 }
 
-impl SMSG_TAXINODE_STATUS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // taxi_mask_node_known: u8
-        w.write_all(&self.taxi_mask_node_known.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_TAXINODE_STATUS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

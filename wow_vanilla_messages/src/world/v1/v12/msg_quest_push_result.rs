@@ -16,18 +16,6 @@ pub struct MSG_QUEST_PUSH_RESULT {
     pub message: QuestPartyMessage,
 }
 
-impl MSG_QUEST_PUSH_RESULT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // message: QuestPartyMessage
-        w.write_all(&(self.message.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_QUEST_PUSH_RESULT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

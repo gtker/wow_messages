@@ -13,15 +13,6 @@ pub struct CMSG_AUTOSTORE_LOOT_ITEM {
     pub item_slot: u8,
 }
 
-impl CMSG_AUTOSTORE_LOOT_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // item_slot: u8
-        w.write_all(&self.item_slot.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_AUTOSTORE_LOOT_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_slot: u8

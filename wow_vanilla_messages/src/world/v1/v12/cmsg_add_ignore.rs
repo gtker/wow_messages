@@ -12,17 +12,6 @@ pub struct CMSG_ADD_IGNORE {
     pub ignore_name: String,
 }
 
-impl CMSG_ADD_IGNORE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // ignore_name: CString
-        w.write_all(self.ignore_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_ADD_IGNORE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // ignore_name: CString

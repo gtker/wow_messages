@@ -25,48 +25,6 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub extend_flag: u8,
 }
 
-impl SMSG_SPELLNONMELEEDAMAGELOG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // target: PackedGuid
-        w.write_all(&self.target.packed_guid())?;
-
-        // attacker: PackedGuid
-        w.write_all(&self.attacker.packed_guid())?;
-
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // damage: u32
-        w.write_all(&self.damage.to_le_bytes())?;
-
-        // school: SpellSchool
-        w.write_all(&(self.school.as_int() as u8).to_le_bytes())?;
-
-        // absorbed_damage: u32
-        w.write_all(&self.absorbed_damage.to_le_bytes())?;
-
-        // resisted: u32
-        w.write_all(&self.resisted.to_le_bytes())?;
-
-        // periodic_log: u8
-        w.write_all(&self.periodic_log.to_le_bytes())?;
-
-        // unused: u8
-        w.write_all(&self.unused.to_le_bytes())?;
-
-        // blocked: u32
-        w.write_all(&self.blocked.to_le_bytes())?;
-
-        // hit_info: u32
-        w.write_all(&self.hit_info.to_le_bytes())?;
-
-        // extend_flag: u8
-        w.write_all(&self.extend_flag.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target: PackedGuid

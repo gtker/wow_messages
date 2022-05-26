@@ -14,25 +14,6 @@ pub struct CMSG_TEST_ENDLESS_U8 {
     pub endless: Vec<u8>,
 }
 
-impl CMSG_TEST_ENDLESS_U8 {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // c_string: CString
-        w.write_all(self.c_string.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // b_u8: u8
-        w.write_all(&self.b_u8.to_le_bytes())?;
-
-        // endless: u8[-]
-        for i in self.endless.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_TEST_ENDLESS_U8 {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // c_string: CString

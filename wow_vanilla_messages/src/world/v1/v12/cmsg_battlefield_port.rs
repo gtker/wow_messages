@@ -16,18 +16,6 @@ pub struct CMSG_BATTLEFIELD_PORT {
     pub action: BattlefieldPortAction,
 }
 
-impl CMSG_BATTLEFIELD_PORT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // action: BattlefieldPortAction
-        w.write_all(&(self.action.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_BATTLEFIELD_PORT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map

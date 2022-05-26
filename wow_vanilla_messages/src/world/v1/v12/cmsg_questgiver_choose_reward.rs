@@ -16,21 +16,6 @@ pub struct CMSG_QUESTGIVER_CHOOSE_REWARD {
     pub reward: u32,
 }
 
-impl CMSG_QUESTGIVER_CHOOSE_REWARD {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // reward: u32
-        w.write_all(&self.reward.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_QUESTGIVER_CHOOSE_REWARD {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

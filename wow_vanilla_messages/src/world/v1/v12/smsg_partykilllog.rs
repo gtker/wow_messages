@@ -15,18 +15,6 @@ pub struct SMSG_PARTYKILLLOG {
     pub victim: Guid,
 }
 
-impl SMSG_PARTYKILLLOG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // player_with_killing_blow: Guid
-        w.write_all(&self.player_with_killing_blow.guid().to_le_bytes())?;
-
-        // victim: Guid
-        w.write_all(&self.victim.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PARTYKILLLOG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_with_killing_blow: Guid

@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_NEXT_CINEMATIC_CAMERA {
 }
 
-impl CMSG_NEXT_CINEMATIC_CAMERA {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_NEXT_CINEMATIC_CAMERA {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

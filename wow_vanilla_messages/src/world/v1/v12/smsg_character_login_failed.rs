@@ -14,15 +14,6 @@ pub struct SMSG_CHARACTER_LOGIN_FAILED {
     pub result: WorldResult,
 }
 
-impl SMSG_CHARACTER_LOGIN_FAILED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: WorldResult

@@ -13,15 +13,6 @@ pub struct CMSG_GUILD_QUERY {
     pub guild_id: u32,
 }
 
-impl CMSG_GUILD_QUERY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guild_id: u32
-        w.write_all(&self.guild_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GUILD_QUERY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_id: u32

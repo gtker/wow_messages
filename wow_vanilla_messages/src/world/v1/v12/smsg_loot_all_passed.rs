@@ -18,27 +18,6 @@ pub struct SMSG_LOOT_ALL_PASSED {
     pub item_random_suffix_id: u32,
 }
 
-impl SMSG_LOOT_ALL_PASSED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // looted_target_guid: Guid
-        w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
-
-        // loot_slot: u32
-        w.write_all(&self.loot_slot.to_le_bytes())?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
-
-        // item_random_suffix_id: u32
-        w.write_all(&self.item_random_suffix_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOOT_ALL_PASSED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // looted_target_guid: Guid

@@ -14,15 +14,6 @@ pub struct MSG_LIST_STABLED_PETS_Client {
     pub npc: Guid,
 }
 
-impl MSG_LIST_STABLED_PETS_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc: Guid
-        w.write_all(&self.npc.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_LIST_STABLED_PETS_Client {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid

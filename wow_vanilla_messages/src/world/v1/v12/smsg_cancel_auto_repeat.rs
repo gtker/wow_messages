@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_CANCEL_AUTO_REPEAT {
 }
 
-impl SMSG_CANCEL_AUTO_REPEAT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_CANCEL_AUTO_REPEAT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

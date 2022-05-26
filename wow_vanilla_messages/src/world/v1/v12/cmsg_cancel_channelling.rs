@@ -13,15 +13,6 @@ pub struct CMSG_CANCEL_CHANNELLING {
     pub id: u32,
 }
 
-impl CMSG_CANCEL_CHANNELLING {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_CANCEL_CHANNELLING {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32

@@ -17,24 +17,6 @@ pub struct CMSG_MOVE_HOVER_ACK {
     pub is_applied: u32,
 }
 
-impl CMSG_MOVE_HOVER_ACK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // counter: u32
-        w.write_all(&self.counter.to_le_bytes())?;
-
-        // movement_info: MovementInfo
-        &self.movement_info.as_bytes(w)?;;
-
-        // is_applied: u32
-        w.write_all(&self.is_applied.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_MOVE_HOVER_ACK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

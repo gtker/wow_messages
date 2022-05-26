@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_PLAYER_SKINNED {
 }
 
-impl SMSG_PLAYER_SKINNED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PLAYER_SKINNED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

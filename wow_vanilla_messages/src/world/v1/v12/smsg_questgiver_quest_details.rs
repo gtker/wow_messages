@@ -25,66 +25,6 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub emotes: Vec<QuestDetailsEmote>,
 }
 
-impl SMSG_QUESTGIVER_QUEST_DETAILS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // title: CString
-        w.write_all(self.title.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // details: CString
-        w.write_all(self.details.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // objectives: CString
-        w.write_all(self.objectives.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // auto_finish: u32
-        w.write_all(&self.auto_finish.to_le_bytes())?;
-
-        // amount_of_choice_item_rewards: u32
-        w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes())?;
-
-        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
-        for i in self.choice_item_rewards.iter() {
-            i.as_bytes(w)?;
-        }
-
-        // amount_of_item_rewards: u32
-        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes())?;
-
-        // item_rewards: QuestItemReward[amount_of_item_rewards]
-        for i in self.item_rewards.iter() {
-            i.as_bytes(w)?;
-        }
-
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
-
-        // reward_spell: u32
-        w.write_all(&self.reward_spell.to_le_bytes())?;
-
-        // amount_of_emotes: u32
-        w.write_all(&(self.emotes.len() as u32).to_le_bytes())?;
-
-        // emotes: QuestDetailsEmote[amount_of_emotes]
-        for i in self.emotes.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

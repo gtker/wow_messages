@@ -17,27 +17,6 @@ pub struct SMSG_SPELLHEALLOG {
     pub critical: u8,
 }
 
-impl SMSG_SPELLHEALLOG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // victim_guid: PackedGuid
-        w.write_all(&self.victim_guid.packed_guid())?;
-
-        // caster_guid: PackedGuid
-        w.write_all(&self.caster_guid.packed_guid())?;
-
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // damage: u32
-        w.write_all(&self.damage.to_le_bytes())?;
-
-        // critical: u8
-        w.write_all(&self.critical.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELLHEALLOG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // victim_guid: PackedGuid

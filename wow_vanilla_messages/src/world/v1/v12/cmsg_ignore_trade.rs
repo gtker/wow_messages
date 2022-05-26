@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_IGNORE_TRADE {
 }
 
-impl CMSG_IGNORE_TRADE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_IGNORE_TRADE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

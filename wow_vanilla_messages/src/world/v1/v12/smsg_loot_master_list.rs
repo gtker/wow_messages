@@ -13,20 +13,6 @@ pub struct SMSG_LOOT_MASTER_LIST {
     pub guids: Vec<Guid>,
 }
 
-impl SMSG_LOOT_MASTER_LIST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // amount_of_players: u8
-        w.write_all(&(self.guids.len() as u8).to_le_bytes())?;
-
-        // guids: Guid[amount_of_players]
-        for i in self.guids.iter() {
-            w.write_all(&i.guid().to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOOT_MASTER_LIST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_players: u8

@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct MSG_PVP_LOG_DATA_Client {
 }
 
-impl MSG_PVP_LOG_DATA_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_PVP_LOG_DATA_Client {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

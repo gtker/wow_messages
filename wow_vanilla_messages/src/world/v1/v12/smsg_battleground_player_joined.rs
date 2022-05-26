@@ -14,15 +14,6 @@ pub struct SMSG_BATTLEGROUND_PLAYER_JOINED {
     pub player_guid: Guid,
 }
 
-impl SMSG_BATTLEGROUND_PLAYER_JOINED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // player_guid: Guid
-        w.write_all(&self.player_guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_guid: Guid

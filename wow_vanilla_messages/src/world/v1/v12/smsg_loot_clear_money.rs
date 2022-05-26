@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_LOOT_CLEAR_MONEY {
 }
 
-impl SMSG_LOOT_CLEAR_MONEY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOOT_CLEAR_MONEY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

@@ -13,20 +13,6 @@ pub struct SMSG_SET_FACTION_STANDING {
     pub factions: Vec<Faction>,
 }
 
-impl SMSG_SET_FACTION_STANDING {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // amount_of_factions: u32
-        w.write_all(&(self.factions.len() as u32).to_le_bytes())?;
-
-        // factions: Faction[amount_of_factions]
-        for i in self.factions.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SET_FACTION_STANDING {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_factions: u32

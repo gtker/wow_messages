@@ -15,18 +15,6 @@ pub struct CMSG_STABLE_SWAP_PET {
     pub pet_slot: u32,
 }
 
-impl CMSG_STABLE_SWAP_PET {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc: Guid
-        w.write_all(&self.npc.guid().to_le_bytes())?;
-
-        // pet_slot: u32
-        w.write_all(&self.pet_slot.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_STABLE_SWAP_PET {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid

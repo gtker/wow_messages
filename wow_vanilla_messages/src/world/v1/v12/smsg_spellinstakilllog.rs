@@ -15,18 +15,6 @@ pub struct SMSG_SPELLINSTAKILLLOG {
     pub spell: u32,
 }
 
-impl SMSG_SPELLINSTAKILLLOG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
-
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_SPELLINSTAKILLLOG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_guid: Guid

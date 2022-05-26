@@ -14,18 +14,6 @@ pub struct SMSG_UPDATE_AURA_DURATION {
     pub aura_duration: u32,
 }
 
-impl SMSG_UPDATE_AURA_DURATION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // aura_slot: u8
-        w.write_all(&self.aura_slot.to_le_bytes())?;
-
-        // aura_duration: u32
-        w.write_all(&self.aura_duration.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_UPDATE_AURA_DURATION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // aura_slot: u8

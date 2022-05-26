@@ -17,24 +17,6 @@ pub struct CMSG_MOVE_FEATHER_FALL_ACK {
     pub apply: u32,
 }
 
-impl CMSG_MOVE_FEATHER_FALL_ACK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // movement_counter: u32
-        w.write_all(&self.movement_counter.to_le_bytes())?;
-
-        // movement_info: MovementInfo
-        &self.movement_info.as_bytes(w)?;;
-
-        // apply: u32
-        w.write_all(&self.apply.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_MOVE_FEATHER_FALL_ACK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

@@ -16,21 +16,6 @@ pub struct CMSG_SELL_ITEM {
     pub amount: u8,
 }
 
-impl CMSG_SELL_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // vendor_guid: Guid
-        w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
-
-        // item_guid: Guid
-        w.write_all(&self.item_guid.guid().to_le_bytes())?;
-
-        // amount: u8
-        w.write_all(&self.amount.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_SELL_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor_guid: Guid

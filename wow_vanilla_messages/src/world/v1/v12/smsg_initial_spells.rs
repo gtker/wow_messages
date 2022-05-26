@@ -16,31 +16,6 @@ pub struct SMSG_INITIAL_SPELLS {
     pub cooldowns: Vec<CooldownSpell>,
 }
 
-impl SMSG_INITIAL_SPELLS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // spell_count: u16
-        w.write_all(&(self.initial_spells.len() as u16).to_le_bytes())?;
-
-        // initial_spells: InitialSpell[spell_count]
-        for i in self.initial_spells.iter() {
-            i.as_bytes(w)?;
-        }
-
-        // cooldown_count: u16
-        w.write_all(&(self.cooldowns.len() as u16).to_le_bytes())?;
-
-        // cooldowns: CooldownSpell[cooldown_count]
-        for i in self.cooldowns.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_INITIAL_SPELLS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u8

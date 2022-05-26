@@ -18,27 +18,6 @@ pub struct SMSG_QUESTUPDATE_ADD_KILL {
     pub guid: Guid,
 }
 
-impl SMSG_QUESTUPDATE_ADD_KILL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // create_id: u32
-        w.write_all(&self.create_id.to_le_bytes())?;
-
-        // kill_count: u32
-        w.write_all(&self.kill_count.to_le_bytes())?;
-
-        // required_kill_count: u32
-        w.write_all(&self.required_kill_count.to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32

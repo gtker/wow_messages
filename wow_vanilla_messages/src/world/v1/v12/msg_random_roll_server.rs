@@ -17,24 +17,6 @@ pub struct MSG_RANDOM_ROLL_Server {
     pub guid: Guid,
 }
 
-impl MSG_RANDOM_ROLL_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // minimum: u32
-        w.write_all(&self.minimum.to_le_bytes())?;
-
-        // maximum: u32
-        w.write_all(&self.maximum.to_le_bytes())?;
-
-        // actual_roll: u32
-        w.write_all(&self.actual_roll.to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_RANDOM_ROLL_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // minimum: u32

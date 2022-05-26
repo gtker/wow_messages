@@ -19,30 +19,6 @@ pub struct SMSG_LOOT_START_ROLL {
     pub countdown_time: u32,
 }
 
-impl SMSG_LOOT_START_ROLL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // creature_guid: Guid
-        w.write_all(&self.creature_guid.guid().to_le_bytes())?;
-
-        // loot_slot: u32
-        w.write_all(&self.loot_slot.to_le_bytes())?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // item_random_suffix: u32
-        w.write_all(&self.item_random_suffix.to_le_bytes())?;
-
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
-
-        // countdown_time: u32
-        w.write_all(&self.countdown_time.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOOT_START_ROLL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // creature_guid: Guid

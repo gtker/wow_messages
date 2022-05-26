@@ -16,36 +16,6 @@ pub struct SMSG_LOG_XPGAIN {
     pub exp_type: SMSG_LOG_XPGAINExperienceAwardType,
 }
 
-impl SMSG_LOG_XPGAIN {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
-
-        // total_exp: u32
-        w.write_all(&self.total_exp.to_le_bytes())?;
-
-        // exp_type: ExperienceAwardType
-        w.write_all(&(self.exp_type.as_int() as u8).to_le_bytes())?;
-
-        match &self.exp_type {
-            SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
-            SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
-                exp_group_bonus,
-                experience_without_rested,
-            } => {
-                // experience_without_rested: u32
-                w.write_all(&experience_without_rested.to_le_bytes())?;
-
-                // exp_group_bonus: f32
-                w.write_all(&exp_group_bonus.to_le_bytes())?;
-
-            }
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LOG_XPGAIN {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_guid: Guid

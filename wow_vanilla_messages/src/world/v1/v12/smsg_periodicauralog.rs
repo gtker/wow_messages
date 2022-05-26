@@ -17,29 +17,6 @@ pub struct SMSG_PERIODICAURALOG {
     pub auras: Vec<AuraLog>,
 }
 
-impl SMSG_PERIODICAURALOG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // target: PackedGuid
-        w.write_all(&self.target.packed_guid())?;
-
-        // caster: PackedGuid
-        w.write_all(&self.caster.packed_guid())?;
-
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // amount_of_auras: u32
-        w.write_all(&(self.auras.len() as u32).to_le_bytes())?;
-
-        // auras: AuraLog[amount_of_auras]
-        for i in self.auras.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PERIODICAURALOG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target: PackedGuid

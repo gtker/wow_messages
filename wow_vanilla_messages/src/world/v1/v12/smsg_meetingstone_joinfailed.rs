@@ -14,15 +14,6 @@ pub struct SMSG_MEETINGSTONE_JOINFAILED {
     pub reason: MeetingStoneFailure,
 }
 
-impl SMSG_MEETINGSTONE_JOINFAILED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // reason: MeetingStoneFailure
-        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_MEETINGSTONE_JOINFAILED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: MeetingStoneFailure

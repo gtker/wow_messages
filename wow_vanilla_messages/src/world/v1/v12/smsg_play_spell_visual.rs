@@ -15,18 +15,6 @@ pub struct SMSG_PLAY_SPELL_VISUAL {
     pub spell_art_kit: u32,
 }
 
-impl SMSG_PLAY_SPELL_VISUAL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // spell_art_kit: u32
-        w.write_all(&self.spell_art_kit.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PLAY_SPELL_VISUAL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid

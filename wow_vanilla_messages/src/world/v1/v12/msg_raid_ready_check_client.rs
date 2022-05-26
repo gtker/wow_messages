@@ -12,19 +12,6 @@ pub struct MSG_RAID_READY_CHECK_Client {
     pub answer: Option<MSG_RAID_READY_CHECK_Clientanswer>,
 }
 
-impl MSG_RAID_READY_CHECK_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // optional answer
-        if let Some(v) = &self.answer {
-            // state: u8
-            w.write_all(&v.state.to_le_bytes())?;
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for MSG_RAID_READY_CHECK_Client {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional answer

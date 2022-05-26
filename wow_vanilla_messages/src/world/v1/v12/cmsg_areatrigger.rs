@@ -13,15 +13,6 @@ pub struct CMSG_AREATRIGGER {
     pub trigger_id: u32,
 }
 
-impl CMSG_AREATRIGGER {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // trigger_id: u32
-        w.write_all(&self.trigger_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_AREATRIGGER {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // trigger_id: u32

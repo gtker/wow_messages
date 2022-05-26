@@ -13,15 +13,6 @@ pub struct MSG_LOOKING_FOR_GROUP_Server {
     pub unknown1: u32,
 }
 
-impl MSG_LOOKING_FOR_GROUP_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_LOOKING_FOR_GROUP_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u32

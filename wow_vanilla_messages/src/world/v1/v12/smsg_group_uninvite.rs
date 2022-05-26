@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_GROUP_UNINVITE {
 }
 
-impl SMSG_GROUP_UNINVITE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GROUP_UNINVITE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

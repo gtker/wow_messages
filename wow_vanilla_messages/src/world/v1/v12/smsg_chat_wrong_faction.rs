@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_CHAT_WRONG_FACTION {
 }
 
-impl SMSG_CHAT_WRONG_FACTION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_CHAT_WRONG_FACTION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

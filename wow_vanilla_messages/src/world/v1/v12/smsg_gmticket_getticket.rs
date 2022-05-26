@@ -15,53 +15,6 @@ pub struct SMSG_GMTICKET_GETTICKET {
     pub status: SMSG_GMTICKET_GETTICKETGmTicketStatus,
 }
 
-impl SMSG_GMTICKET_GETTICKET {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // status: GmTicketStatus
-        w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
-
-        match &self.status {
-            SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
-            SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                days_since_last_updated,
-                days_since_oldest_ticket_creation,
-                days_since_ticket_creation,
-                escalation_status,
-                read_by_gm,
-                text,
-                ticket_type,
-            } => {
-                // text: CString
-                w.write_all(text.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // ticket_type: GmTicketType
-                w.write_all(&(ticket_type.as_int() as u8).to_le_bytes())?;
-
-                // days_since_ticket_creation: f32
-                w.write_all(&days_since_ticket_creation.to_le_bytes())?;
-
-                // days_since_oldest_ticket_creation: f32
-                w.write_all(&days_since_oldest_ticket_creation.to_le_bytes())?;
-
-                // days_since_last_updated: f32
-                w.write_all(&days_since_last_updated.to_le_bytes())?;
-
-                // escalation_status: GmTicketEscalationStatus
-                w.write_all(&(escalation_status.as_int() as u8).to_le_bytes())?;
-
-                // read_by_gm: u8
-                w.write_all(&read_by_gm.to_le_bytes())?;
-
-            }
-            SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT => {}
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GMTICKET_GETTICKET {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // status: GmTicketStatus

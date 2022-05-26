@@ -21,42 +21,6 @@ pub struct SMSG_GROUP_LIST {
     pub group_not_empty: Option<SMSG_GROUP_LISTgroup_not_empty>,
 }
 
-impl SMSG_GROUP_LIST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // group_type: GroupType
-        w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
-
-        // own_flags: u8
-        w.write_all(&self.own_flags.to_le_bytes())?;
-
-        // amount_of_members: u32
-        w.write_all(&(self.members.len() as u32).to_le_bytes())?;
-
-        // members: GroupListMember[amount_of_members]
-        for i in self.members.iter() {
-            i.as_bytes(w)?;
-        }
-
-        // leader: Guid
-        w.write_all(&self.leader.guid().to_le_bytes())?;
-
-        // optional group_not_empty
-        if let Some(v) = &self.group_not_empty {
-            // loot_setting: GroupLootSetting
-            w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes())?;
-
-            // master_loot: Guid
-            w.write_all(&v.master_loot.guid().to_le_bytes())?;
-
-            // loot_threshold: ItemQuality
-            w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes())?;
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GROUP_LIST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // group_type: GroupType

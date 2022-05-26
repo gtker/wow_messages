@@ -16,18 +16,6 @@ pub struct SMSG_MEETINGSTONE_SETQUEUE {
     pub status: MeetingStoneStatus,
 }
 
-impl SMSG_MEETINGSTONE_SETQUEUE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
-
-        // status: MeetingStoneStatus
-        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // area: Area

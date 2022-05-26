@@ -16,23 +16,6 @@ pub struct SMSG_PARTY_COMMAND_RESULT {
     pub result: PartyResult,
 }
 
-impl SMSG_PARTY_COMMAND_RESULT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // operation: PartyOperation
-        w.write_all(&(self.operation.as_int() as u32).to_le_bytes())?;
-
-        // member: CString
-        w.write_all(self.member.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // result: PartyResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PARTY_COMMAND_RESULT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // operation: PartyOperation

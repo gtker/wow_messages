@@ -14,15 +14,6 @@ pub struct SMSG_CHAR_CREATE {
     pub result: WorldResult,
 }
 
-impl SMSG_CHAR_CREATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_CHAR_CREATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: WorldResult

@@ -17,24 +17,6 @@ pub struct SMSG_ITEM_ENCHANT_TIME_UPDATE {
     pub player_guid: Guid,
 }
 
-impl SMSG_ITEM_ENCHANT_TIME_UPDATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // item_guid: Guid
-        w.write_all(&self.item_guid.guid().to_le_bytes())?;
-
-        // slot: u32
-        w.write_all(&self.slot.to_le_bytes())?;
-
-        // duration: u32
-        w.write_all(&self.duration.to_le_bytes())?;
-
-        // player_guid: Guid
-        w.write_all(&self.player_guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_ITEM_ENCHANT_TIME_UPDATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_guid: Guid

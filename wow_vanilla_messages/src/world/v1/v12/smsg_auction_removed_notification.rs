@@ -15,21 +15,6 @@ pub struct SMSG_AUCTION_REMOVED_NOTIFICATION {
     pub random_property_id: u32,
 }
 
-impl SMSG_AUCTION_REMOVED_NOTIFICATION {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // item_template: u32
-        w.write_all(&self.item_template.to_le_bytes())?;
-
-        // random_property_id: u32
-        w.write_all(&self.random_property_id.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_id: u32

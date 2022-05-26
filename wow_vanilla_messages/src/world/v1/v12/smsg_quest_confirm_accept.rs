@@ -15,23 +15,6 @@ pub struct SMSG_QUEST_CONFIRM_ACCEPT {
     pub guid: Guid,
 }
 
-impl SMSG_QUEST_CONFIRM_ACCEPT {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // quest_title: CString
-        w.write_all(self.quest_title.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32

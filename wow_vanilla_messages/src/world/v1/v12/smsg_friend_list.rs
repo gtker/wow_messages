@@ -13,20 +13,6 @@ pub struct SMSG_FRIEND_LIST {
     pub friends: Vec<Friend>,
 }
 
-impl SMSG_FRIEND_LIST {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // amount_of_friends: u8
-        w.write_all(&(self.friends.len() as u8).to_le_bytes())?;
-
-        // friends: Friend[amount_of_friends]
-        for i in self.friends.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_FRIEND_LIST {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_friends: u8

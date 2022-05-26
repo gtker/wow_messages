@@ -15,23 +15,6 @@ pub struct SMSG_LIST_INVENTORY {
     pub items: Vec<ListInventoryItem>,
 }
 
-impl SMSG_LIST_INVENTORY {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // vendor: Guid
-        w.write_all(&self.vendor.guid().to_le_bytes())?;
-
-        // amount_of_items: u8
-        w.write_all(&(self.items.len() as u8).to_le_bytes())?;
-
-        // items: ListInventoryItem[amount_of_items]
-        for i in self.items.iter() {
-            i.as_bytes(w)?;
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_LIST_INVENTORY {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor: Guid

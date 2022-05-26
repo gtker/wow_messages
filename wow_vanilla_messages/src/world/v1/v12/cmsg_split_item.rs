@@ -17,27 +17,6 @@ pub struct CMSG_SPLIT_ITEM {
     pub amount: u8,
 }
 
-impl CMSG_SPLIT_ITEM {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // source_bag: u8
-        w.write_all(&self.source_bag.to_le_bytes())?;
-
-        // source_slot: u8
-        w.write_all(&self.source_slot.to_le_bytes())?;
-
-        // destination_bag: u8
-        w.write_all(&self.destination_bag.to_le_bytes())?;
-
-        // destination_slot: u8
-        w.write_all(&self.destination_slot.to_le_bytes())?;
-
-        // amount: u8
-        w.write_all(&self.amount.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_SPLIT_ITEM {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // source_bag: u8

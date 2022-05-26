@@ -13,22 +13,6 @@ pub struct MSG_RAID_READY_CHECK_Server {
     pub state_check: Option<MSG_RAID_READY_CHECK_Serverstate_check>,
 }
 
-impl MSG_RAID_READY_CHECK_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // optional state_check
-        if let Some(v) = &self.state_check {
-            // guid: Guid
-            w.write_all(&v.guid.guid().to_le_bytes())?;
-
-            // state: u8
-            w.write_all(&v.state.to_le_bytes())?;
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for MSG_RAID_READY_CHECK_Server {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional state_check

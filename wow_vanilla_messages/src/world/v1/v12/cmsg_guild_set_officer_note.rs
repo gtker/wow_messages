@@ -13,22 +13,6 @@ pub struct CMSG_GUILD_SET_OFFICER_NOTE {
     pub note: String,
 }
 
-impl CMSG_GUILD_SET_OFFICER_NOTE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // player_name: CString
-        w.write_all(self.player_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // note: CString
-        w.write_all(self.note.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_name: CString

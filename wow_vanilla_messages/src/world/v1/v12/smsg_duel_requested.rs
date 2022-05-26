@@ -15,18 +15,6 @@ pub struct SMSG_DUEL_REQUESTED {
     pub target_guid: Guid,
 }
 
-impl SMSG_DUEL_REQUESTED {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // initiator_guid: Guid
-        w.write_all(&self.initiator_guid.guid().to_le_bytes())?;
-
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_DUEL_REQUESTED {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // initiator_guid: Guid

@@ -13,55 +13,6 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE {
     pub found: Option<SMSG_GAMEOBJECT_QUERY_RESPONSEfound>,
 }
 
-impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // entry_id: u32
-        w.write_all(&self.entry_id.to_le_bytes())?;
-
-        // optional found
-        if let Some(v) = &self.found {
-            // info_type: u32
-            w.write_all(&v.info_type.to_le_bytes())?;
-
-            // display_id: u32
-            w.write_all(&v.display_id.to_le_bytes())?;
-
-            // name1: CString
-            w.write_all(v.name1.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name2: CString
-            w.write_all(v.name2.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name3: CString
-            w.write_all(v.name3.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name4: CString
-            w.write_all(v.name4.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name5: CString
-            w.write_all(v.name5.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // raw_data: u32[6]
-            for i in v.raw_data.iter() {
-                w.write_all(&i.to_le_bytes())?;
-            }
-
-        }
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // entry_id: u32

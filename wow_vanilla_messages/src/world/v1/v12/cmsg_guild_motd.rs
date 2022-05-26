@@ -12,17 +12,6 @@ pub struct CMSG_GUILD_MOTD {
     pub message_of_the_day: String,
 }
 
-impl CMSG_GUILD_MOTD {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // message_of_the_day: CString
-        w.write_all(self.message_of_the_day.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_GUILD_MOTD {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message_of_the_day: CString

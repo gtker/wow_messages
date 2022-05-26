@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct SMSG_GOSSIP_COMPLETE {
 }
 
-impl SMSG_GOSSIP_COMPLETE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GOSSIP_COMPLETE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

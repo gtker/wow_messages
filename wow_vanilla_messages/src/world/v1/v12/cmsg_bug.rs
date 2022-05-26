@@ -16,31 +16,6 @@ pub struct CMSG_BUG {
     pub bug_type: String,
 }
 
-impl CMSG_BUG {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // suggestion: u32
-        w.write_all(&self.suggestion.to_le_bytes())?;
-
-        // content_length: u32
-        w.write_all(&self.content_length.to_le_bytes())?;
-
-        // content: CString
-        w.write_all(self.content.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // type_length: u32
-        w.write_all(&self.type_length.to_le_bytes())?;
-
-        // bug_type: CString
-        w.write_all(self.bug_type.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_BUG {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // suggestion: u32

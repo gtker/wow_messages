@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_LOGOUT_CANCEL {
 }
 
-impl CMSG_LOGOUT_CANCEL {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_LOGOUT_CANCEL {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

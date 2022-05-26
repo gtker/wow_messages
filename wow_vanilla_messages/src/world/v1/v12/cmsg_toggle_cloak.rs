@@ -12,12 +12,6 @@ use std::io::Write;
 pub struct CMSG_TOGGLE_CLOAK {
 }
 
-impl CMSG_TOGGLE_CLOAK {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_TOGGLE_CLOAK {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())

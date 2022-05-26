@@ -14,15 +14,6 @@ pub struct SMSG_GM_TICKET_STATUS_UPDATE {
     pub response: GmTicketStatusResponse,
 }
 
-impl SMSG_GM_TICKET_STATUS_UPDATE {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // response: GmTicketStatusResponse
-        w.write_all(&(self.response.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_GM_TICKET_STATUS_UPDATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // response: GmTicketStatusResponse

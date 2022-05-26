@@ -72,10 +72,6 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 );
             };
 
-            s.write_as_bytes(e.name(), |s, it| {
-                print_write::print_write(s, e, o, it.prefix(), it.postfix());
-            });
-
             match e.container_type() {
                 ContainerType::CMsg(_) => bind(s, CLIENT_MESSAGE_TRAIT_NAME),
                 ContainerType::SMsg(_) => bind(s, SERVER_MESSAGE_TRAIT_NAME),

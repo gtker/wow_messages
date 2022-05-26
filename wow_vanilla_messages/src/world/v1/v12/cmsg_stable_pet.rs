@@ -14,15 +14,6 @@ pub struct CMSG_STABLE_PET {
     pub npc_guid: Guid,
 }
 
-impl CMSG_STABLE_PET {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc_guid: Guid
-        w.write_all(&self.npc_guid.guid().to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ClientMessage for CMSG_STABLE_PET {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc_guid: Guid

@@ -17,21 +17,6 @@ pub struct SMSG_PETITION_SIGN_RESULTS {
     pub result: PetitionResult,
 }
 
-impl SMSG_PETITION_SIGN_RESULTS {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
-
-        // owner_guid: Guid
-        w.write_all(&self.owner_guid.guid().to_le_bytes())?;
-
-        // result: PetitionResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
 impl ServerMessage for SMSG_PETITION_SIGN_RESULTS {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition_guid: Guid
