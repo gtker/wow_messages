@@ -66,7 +66,7 @@ impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
         20
     }
 
-    type Error = SMSG_LOGIN_VERIFY_WORLDError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -158,33 +158,5 @@ impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
         })
     }
 
-}
-
-#[derive(Debug)]
-pub enum SMSG_LOGIN_VERIFY_WORLDError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for SMSG_LOGIN_VERIFY_WORLDError {}
-impl std::fmt::Display for SMSG_LOGIN_VERIFY_WORLDError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_LOGIN_VERIFY_WORLDError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SMSG_LOGIN_VERIFY_WORLDError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
 }
 

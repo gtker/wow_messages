@@ -75,7 +75,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     const OPCODE: u8 = 1;
 
-    type Error = CMD_AUTH_LOGON_PROOF_ClientError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
@@ -313,34 +313,6 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         + 1 // number_of_telemetry_keys: u8
         + self.telemetry_keys.len() * 30 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         + self.security_flag.size() // security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag
-    }
-}
-
-#[derive(Debug)]
-pub enum CMD_AUTH_LOGON_PROOF_ClientError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for CMD_AUTH_LOGON_PROOF_ClientError {}
-impl std::fmt::Display for CMD_AUTH_LOGON_PROOF_ClientError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMD_AUTH_LOGON_PROOF_ClientError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for CMD_AUTH_LOGON_PROOF_ClientError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
     }
 }
 

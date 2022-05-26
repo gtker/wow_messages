@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Friend, FriendError};
+use crate::world::v1::v12::Friend;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -46,7 +46,7 @@ impl ServerMessage for SMSG_FRIEND_LIST {
         self.size() as u16
     }
 
-    type Error = SMSG_FRIEND_LISTError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -127,34 +127,6 @@ impl SMSG_FRIEND_LIST {
         0
         + 1 // amount_of_friends: u8
         + self.friends.iter().fold(0, |acc, x| acc + x.size()) // friends: Friend[amount_of_friends]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_FRIEND_LISTError {
-    Io(std::io::Error),
-    Friend(FriendError),
-}
-
-impl std::error::Error for SMSG_FRIEND_LISTError {}
-impl std::fmt::Display for SMSG_FRIEND_LISTError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Friend(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_FRIEND_LISTError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<FriendError> for SMSG_FRIEND_LISTError {
-    fn from(e: FriendError) -> Self {
-        Self::Friend(e)
     }
 }
 

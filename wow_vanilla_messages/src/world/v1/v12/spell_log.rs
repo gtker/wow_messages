@@ -323,7 +323,7 @@ impl SpellLog {
 
 impl SpellLog {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, SpellLogError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // effect: SpellEffect
         let effect: SpellEffect = crate::util::read_u32_le(r)?.try_into()?;
 
@@ -649,7 +649,7 @@ impl SpellLog {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellLogError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // effect: SpellEffect
         let effect: SpellEffect = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
@@ -975,7 +975,7 @@ impl SpellLog {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellLogError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // effect: SpellEffect
         let effect: SpellEffect = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
@@ -1307,34 +1307,6 @@ impl SpellLog {
         0
         + self.effect.size() // effect: SpellLogSpellEffect
         + 4 // amount_of_logs: u32
-    }
-}
-
-#[derive(Debug)]
-pub enum SpellLogError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for SpellLogError {}
-impl std::fmt::Display for SpellLogError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SpellLogError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SpellLogError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
     }
 }
 

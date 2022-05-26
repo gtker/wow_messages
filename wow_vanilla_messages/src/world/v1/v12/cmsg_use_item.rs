@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
+use crate::world::v1::v12::SpellCastTargets;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -57,7 +57,7 @@ impl ClientMessage for CMSG_USE_ITEM {
         self.size() as u16
     }
 
-    type Error = CMSG_USE_ITEMError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -158,34 +158,6 @@ impl CMSG_USE_ITEM {
         + 1 // bag_slot: u8
         + 1 // spell_index: u8
         + self.targets.size() // targets: SpellCastTargets
-    }
-}
-
-#[derive(Debug)]
-pub enum CMSG_USE_ITEMError {
-    Io(std::io::Error),
-    SpellCastTargets(SpellCastTargetsError),
-}
-
-impl std::error::Error for CMSG_USE_ITEMError {}
-impl std::fmt::Display for CMSG_USE_ITEMError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::SpellCastTargets(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMSG_USE_ITEMError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<SpellCastTargetsError> for CMSG_USE_ITEMError {
-    fn from(e: SpellCastTargetsError) -> Self {
-        Self::SpellCastTargets(e)
     }
 }
 

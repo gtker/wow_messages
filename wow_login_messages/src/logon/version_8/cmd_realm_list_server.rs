@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::logon::version_8::{Realm, RealmError};
+use crate::logon::version_8::Realm;
 use crate::ServerMessage;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -49,7 +49,7 @@ impl CMD_REALM_LIST_Server {
 impl ServerMessage for CMD_REALM_LIST_Server {
     const OPCODE: u8 = 16;
 
-    type Error = CMD_REALM_LIST_ServerError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
@@ -211,34 +211,6 @@ impl CMD_REALM_LIST_Server {
         + 2 // number_of_realms: u16
         + self.realms.iter().fold(0, |acc, x| acc + x.size()) // realms: Realm[number_of_realms]
         + 2 // footer_padding: u16
-    }
-}
-
-#[derive(Debug)]
-pub enum CMD_REALM_LIST_ServerError {
-    Io(std::io::Error),
-    Realm(RealmError),
-}
-
-impl std::error::Error for CMD_REALM_LIST_ServerError {}
-impl std::fmt::Display for CMD_REALM_LIST_ServerError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Realm(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMD_REALM_LIST_ServerError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<RealmError> for CMD_REALM_LIST_ServerError {
-    fn from(e: RealmError) -> Self {
-        Self::Realm(e)
     }
 }
 

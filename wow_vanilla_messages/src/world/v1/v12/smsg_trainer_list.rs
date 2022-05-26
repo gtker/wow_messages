@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{TrainerSpell, TrainerSpellError};
+use crate::world::v1::v12::TrainerSpell;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -72,7 +72,7 @@ impl ServerMessage for SMSG_TRAINER_LIST {
         self.size() as u16
     }
 
-    type Error = SMSG_TRAINER_LISTError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -195,42 +195,6 @@ impl SMSG_TRAINER_LIST {
         + 4 // amount_of_spells: u32
         + self.spells.len() * 38 // spells: TrainerSpell[amount_of_spells]
         + self.greeting.len() + 1 // greeting: CString
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_TRAINER_LISTError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-    TrainerSpell(TrainerSpellError),
-}
-
-impl std::error::Error for SMSG_TRAINER_LISTError {}
-impl std::fmt::Display for SMSG_TRAINER_LISTError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-            Self::TrainerSpell(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_TRAINER_LISTError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for SMSG_TRAINER_LISTError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
-    }
-}
-
-impl From<TrainerSpellError> for SMSG_TRAINER_LISTError {
-    fn from(e: TrainerSpellError) -> Self {
-        Self::TrainerSpell(e)
     }
 }
 

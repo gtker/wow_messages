@@ -118,7 +118,7 @@ impl ClientMessage for CMSG_SEND_MAIL {
         self.size() as u16
     }
 
-    type Error = CMSG_SEND_MAILError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -319,34 +319,6 @@ impl CMSG_SEND_MAIL {
         + 4 // cash_on_delivery_amount: u32
         + 4 // unknown3: u32
         + 4 // unknown4: u32
-    }
-}
-
-#[derive(Debug)]
-pub enum CMSG_SEND_MAILError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for CMSG_SEND_MAILError {}
-impl std::fmt::Display for CMSG_SEND_MAILError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMSG_SEND_MAILError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for CMSG_SEND_MAILError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

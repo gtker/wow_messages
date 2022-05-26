@@ -33,7 +33,7 @@ impl GroupListMember {
 
 impl GroupListMember {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
         let name = String::from_utf8(name)?;
@@ -52,7 +52,7 @@ impl GroupListMember {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = crate::util::tokio_read_c_string_to_vec(r).await?;
         let name = String::from_utf8(name)?;
@@ -71,7 +71,7 @@ impl GroupListMember {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = crate::util::astd_read_c_string_to_vec(r).await?;
         let name = String::from_utf8(name)?;
@@ -97,34 +97,6 @@ impl GroupListMember {
         + self.name.len() + 1 // name: CString
         + 8 // guid: Guid
         + 1 // is_online: u8
-    }
-}
-
-#[derive(Debug)]
-pub enum GroupListMemberError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for GroupListMemberError {}
-impl std::fmt::Display for GroupListMemberError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for GroupListMemberError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for GroupListMemberError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

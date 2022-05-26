@@ -30,7 +30,7 @@ impl RaidTargetUpdate {
 
 impl RaidTargetUpdate {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, RaidTargetUpdateError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // index: RaidTargetIndex
         let index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -44,7 +44,7 @@ impl RaidTargetUpdate {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RaidTargetUpdateError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // index: RaidTargetIndex
         let index: RaidTargetIndex = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
@@ -58,7 +58,7 @@ impl RaidTargetUpdate {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RaidTargetUpdateError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // index: RaidTargetIndex
         let index: RaidTargetIndex = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
@@ -71,33 +71,5 @@ impl RaidTargetUpdate {
         })
     }
 
-}
-
-#[derive(Debug)]
-pub enum RaidTargetUpdateError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for RaidTargetUpdateError {}
-impl std::fmt::Display for RaidTargetUpdateError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for RaidTargetUpdateError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for RaidTargetUpdateError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
 }
 

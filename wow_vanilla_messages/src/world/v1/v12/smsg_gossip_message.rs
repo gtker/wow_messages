@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::GossipItem;
-use crate::world::v1::v12::{QuestItem, QuestItemError};
+use crate::world::v1::v12::QuestItem;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -79,7 +79,7 @@ impl ServerMessage for SMSG_GOSSIP_MESSAGE {
         self.size() as u16
     }
 
-    type Error = SMSG_GOSSIP_MESSAGEError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -218,34 +218,6 @@ impl SMSG_GOSSIP_MESSAGE {
         + self.gossips.len() * 6 // gossips: GossipItem[amount_of_gossip_items]
         + 4 // amount_of_quests: u32
         + self.quests.iter().fold(0, |acc, x| acc + x.size()) // quests: QuestItem[amount_of_quests]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_GOSSIP_MESSAGEError {
-    Io(std::io::Error),
-    QuestItem(QuestItemError),
-}
-
-impl std::error::Error for SMSG_GOSSIP_MESSAGEError {}
-impl std::fmt::Display for SMSG_GOSSIP_MESSAGEError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::QuestItem(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_GOSSIP_MESSAGEError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<QuestItemError> for SMSG_GOSSIP_MESSAGEError {
-    fn from(e: QuestItemError) -> Self {
-        Self::QuestItem(e)
     }
 }
 

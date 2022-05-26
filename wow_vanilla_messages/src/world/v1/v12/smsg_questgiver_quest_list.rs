@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{QuestItem, QuestItemError};
+use crate::world::v1::v12::QuestItem;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -79,7 +79,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {
         self.size() as u16
     }
 
-    type Error = SMSG_QUESTGIVER_QUEST_LISTError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -215,42 +215,6 @@ impl SMSG_QUESTGIVER_QUEST_LIST {
         + 4 // emote: u32
         + 1 // amount_of_entries: u8
         + self.quest_items.iter().fold(0, |acc, x| acc + x.size()) // quest_items: QuestItem[amount_of_entries]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_QUESTGIVER_QUEST_LISTError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-    QuestItem(QuestItemError),
-}
-
-impl std::error::Error for SMSG_QUESTGIVER_QUEST_LISTError {}
-impl std::fmt::Display for SMSG_QUESTGIVER_QUEST_LISTError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-            Self::QuestItem(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_QUESTGIVER_QUEST_LISTError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for SMSG_QUESTGIVER_QUEST_LISTError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
-    }
-}
-
-impl From<QuestItemError> for SMSG_QUESTGIVER_QUEST_LISTError {
-    fn from(e: QuestItemError) -> Self {
-        Self::QuestItem(e)
     }
 }
 

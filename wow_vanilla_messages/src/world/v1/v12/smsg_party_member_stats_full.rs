@@ -274,7 +274,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
         self.size() as u16
     }
 
-    type Error = SMSG_PARTY_MEMBER_STATS_FULLError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -1078,42 +1078,6 @@ impl SMSG_PARTY_MEMBER_STATS_FULL {
         0
         + self.player.size() // player: Guid
         + self.mask.size() // mask: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_PARTY_MEMBER_STATS_FULLError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for SMSG_PARTY_MEMBER_STATS_FULLError {}
-impl std::fmt::Display for SMSG_PARTY_MEMBER_STATS_FULLError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_PARTY_MEMBER_STATS_FULLError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SMSG_PARTY_MEMBER_STATS_FULLError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for SMSG_PARTY_MEMBER_STATS_FULLError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

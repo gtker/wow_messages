@@ -73,7 +73,7 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
         28
     }
 
-    type Error = CMSG_WORLD_TELEPORTError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -177,34 +177,6 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
         })
     }
 
-}
-
-#[derive(Debug)]
-pub enum CMSG_WORLD_TELEPORTError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for CMSG_WORLD_TELEPORTError {}
-impl std::fmt::Display for CMSG_WORLD_TELEPORTError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMSG_WORLD_TELEPORTError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for CMSG_WORLD_TELEPORTError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
 }
 
 #[cfg(test)]

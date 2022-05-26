@@ -53,7 +53,7 @@ impl BattlegroundPlayer {
 
 impl BattlegroundPlayer {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, BattlegroundPlayerError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // player: Guid
         let player = Guid::read(r)?;
 
@@ -93,7 +93,7 @@ impl BattlegroundPlayer {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, BattlegroundPlayerError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // player: Guid
         let player = Guid::tokio_read(r).await?;
 
@@ -133,7 +133,7 @@ impl BattlegroundPlayer {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, BattlegroundPlayerError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // player: Guid
         let player = Guid::astd_read(r).await?;
 
@@ -185,34 +185,6 @@ impl BattlegroundPlayer {
         + 4 // bonus_honor: u32
         + 4 // amount_of_extra_fields: u32
         + self.fields.len() * core::mem::size_of::<u32>() // fields: u32[amount_of_extra_fields]
-    }
-}
-
-#[derive(Debug)]
-pub enum BattlegroundPlayerError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for BattlegroundPlayerError {}
-impl std::fmt::Display for BattlegroundPlayerError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for BattlegroundPlayerError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for BattlegroundPlayerError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
     }
 }
 

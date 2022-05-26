@@ -104,7 +104,7 @@ impl SpellCastTargets {
 
 impl SpellCastTargets {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::read_u16_le(r)?);
 
@@ -272,7 +272,7 @@ impl SpellCastTargets {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::tokio_read_u16_le(r).await?);
 
@@ -440,7 +440,7 @@ impl SpellCastTargets {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::astd_read_u16_le(r).await?);
 
@@ -613,34 +613,6 @@ impl SpellCastTargets {
     pub fn size(&self) -> usize {
         0
         + self.target_flags.size() // target_flags: SpellCastTargetsSpellCastTargetFlags
-    }
-}
-
-#[derive(Debug)]
-pub enum SpellCastTargetsError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for SpellCastTargetsError {}
-impl std::fmt::Display for SpellCastTargetsError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SpellCastTargetsError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for SpellCastTargetsError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

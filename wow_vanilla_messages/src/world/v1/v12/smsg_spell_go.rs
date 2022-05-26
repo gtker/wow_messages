@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::CastFlags;
-use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
-use crate::world::v1::v12::{SpellMiss, SpellMissError};
+use crate::world::v1::v12::SpellCastTargets;
+use crate::world::v1::v12::SpellMiss;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,7 +119,7 @@ impl ServerMessage for SMSG_SPELL_GO {
         self.size() as u16
     }
 
-    type Error = SMSG_SPELL_GOError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -360,42 +360,6 @@ impl SMSG_SPELL_GO {
         + 1 // amount_of_misses: u8
         + self.misses.len() * 12 // misses: SpellMiss[amount_of_misses]
         + self.targets.size() // targets: SpellCastTargets
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_SPELL_GOError {
-    Io(std::io::Error),
-    SpellCastTargets(SpellCastTargetsError),
-    SpellMiss(SpellMissError),
-}
-
-impl std::error::Error for SMSG_SPELL_GOError {}
-impl std::fmt::Display for SMSG_SPELL_GOError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::SpellCastTargets(i) => i.fmt(f),
-            Self::SpellMiss(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_SPELL_GOError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<SpellCastTargetsError> for SMSG_SPELL_GOError {
-    fn from(e: SpellCastTargetsError) -> Self {
-        Self::SpellCastTargets(e)
-    }
-}
-
-impl From<SpellMissError> for SMSG_SPELL_GOError {
-    fn from(e: SpellMissError) -> Self {
-        Self::SpellMiss(e)
     }
 }
 

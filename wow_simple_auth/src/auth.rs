@@ -18,12 +18,10 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
         Ok(o) => o,
         Err(e) => {
             match e {
-                InitialOpcodeError::Io(_) => {}
                 InitialOpcodeError::InvalidOpcode(o) => {
                     println!("Got invalid opcode {}", o);
                 }
-                InitialOpcodeError::CMD_AUTH_LOGON_CHALLENGE(_) => {}
-                InitialOpcodeError::CMD_AUTH_RECONNECT_CHALLENGE(_) => {}
+                _ => panic!(),
             }
             return;
         }

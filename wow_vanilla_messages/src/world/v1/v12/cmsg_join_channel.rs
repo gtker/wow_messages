@@ -50,7 +50,7 @@ impl ClientMessage for CMSG_JOIN_CHANNEL {
         self.size() as u16
     }
 
-    type Error = CMSG_JOIN_CHANNELError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -131,34 +131,6 @@ impl CMSG_JOIN_CHANNEL {
         0
         + self.channel_name.len() + 1 // channel_name: CString
         + self.channel_password.len() + 1 // channel_password: CString
-    }
-}
-
-#[derive(Debug)]
-pub enum CMSG_JOIN_CHANNELError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for CMSG_JOIN_CHANNELError {}
-impl std::fmt::Display for CMSG_JOIN_CHANNELError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMSG_JOIN_CHANNELError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for CMSG_JOIN_CHANNELError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

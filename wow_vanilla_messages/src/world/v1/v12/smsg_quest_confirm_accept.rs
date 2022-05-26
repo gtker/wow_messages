@@ -54,7 +54,7 @@ impl ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {
         self.size() as u16
     }
 
-    type Error = SMSG_QUEST_CONFIRM_ACCEPTError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -145,34 +145,6 @@ impl SMSG_QUEST_CONFIRM_ACCEPT {
         + 4 // quest_id: u32
         + self.quest_title.len() + 1 // quest_title: CString
         + 8 // guid: Guid
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_QUEST_CONFIRM_ACCEPTError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for SMSG_QUEST_CONFIRM_ACCEPTError {}
-impl std::fmt::Display for SMSG_QUEST_CONFIRM_ACCEPTError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_QUEST_CONFIRM_ACCEPTError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for SMSG_QUEST_CONFIRM_ACCEPTError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

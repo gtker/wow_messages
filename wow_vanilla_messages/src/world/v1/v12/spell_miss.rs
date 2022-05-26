@@ -30,7 +30,7 @@ impl SpellMiss {
 
 impl SpellMiss {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, SpellMissError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // target_guid: Guid
         let target_guid = Guid::read(r)?;
 
@@ -44,7 +44,7 @@ impl SpellMiss {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellMissError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // target_guid: Guid
         let target_guid = Guid::tokio_read(r).await?;
 
@@ -58,7 +58,7 @@ impl SpellMiss {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellMissError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // target_guid: Guid
         let target_guid = Guid::astd_read(r).await?;
 
@@ -71,33 +71,5 @@ impl SpellMiss {
         })
     }
 
-}
-
-#[derive(Debug)]
-pub enum SpellMissError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for SpellMissError {}
-impl std::fmt::Display for SpellMissError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SpellMissError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SpellMissError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
 }
 

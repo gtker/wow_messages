@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{SpellLog, SpellLogError};
+use crate::world::v1::v12::SpellLog;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -61,7 +61,7 @@ impl ServerMessage for SMSG_SPELLLOGEXECUTE {
         self.size() as u16
     }
 
-    type Error = SMSG_SPELLLOGEXECUTEError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -168,34 +168,6 @@ impl SMSG_SPELLLOGEXECUTE {
         + 4 // spell: u32
         + 4 // amount_of_effects: u32
         + self.logs.iter().fold(0, |acc, x| acc + x.size()) // logs: SpellLog[amount_of_effects]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_SPELLLOGEXECUTEError {
-    Io(std::io::Error),
-    SpellLog(SpellLogError),
-}
-
-impl std::error::Error for SMSG_SPELLLOGEXECUTEError {}
-impl std::fmt::Display for SMSG_SPELLLOGEXECUTEError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::SpellLog(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_SPELLLOGEXECUTEError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<SpellLogError> for SMSG_SPELLLOGEXECUTEError {
-    fn from(e: SpellLogError) -> Self {
-        Self::SpellLog(e)
     }
 }
 

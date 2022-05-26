@@ -74,7 +74,7 @@ impl ServerMessage for SMSG_GOSSIP_POI {
         self.size() as u16
     }
 
-    type Error = SMSG_GOSSIP_POIError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -198,34 +198,6 @@ impl SMSG_GOSSIP_POI {
         + 4 // icon: u32
         + 4 // data: u32
         + self.location_name.len() + 1 // location_name: CString
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_GOSSIP_POIError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for SMSG_GOSSIP_POIError {}
-impl std::fmt::Display for SMSG_GOSSIP_POIError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_GOSSIP_POIError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for SMSG_GOSSIP_POIError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

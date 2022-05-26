@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{SpellMiss, SpellMissError};
+use crate::world::v1::v12::SpellMiss;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -68,7 +68,7 @@ impl ServerMessage for SMSG_SPELLLOGMISS {
         self.size() as u16
     }
 
-    type Error = SMSG_SPELLLOGMISSError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -188,34 +188,6 @@ impl SMSG_SPELLLOGMISS {
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32
         + self.targets.len() * 12 // targets: SpellMiss[amount_of_targets]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_SPELLLOGMISSError {
-    Io(std::io::Error),
-    SpellMiss(SpellMissError),
-}
-
-impl std::error::Error for SMSG_SPELLLOGMISSError {}
-impl std::fmt::Display for SMSG_SPELLLOGMISSError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::SpellMiss(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_SPELLLOGMISSError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<SpellMissError> for SMSG_SPELLLOGMISSError {
-    fn from(e: SpellMissError) -> Self {
-        Self::SpellMiss(e)
     }
 }
 

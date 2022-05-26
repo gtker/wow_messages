@@ -71,7 +71,7 @@ impl StructWithAllBuiltInTypes {
 
 impl StructWithAllBuiltInTypes {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, StructWithAllBuiltInTypesError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // basic8: u8
         let basic8 = crate::util::read_u8_le(r)?;
 
@@ -126,7 +126,7 @@ impl StructWithAllBuiltInTypes {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, StructWithAllBuiltInTypesError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // basic8: u8
         let basic8 = crate::util::tokio_read_u8_le(r).await?;
 
@@ -181,7 +181,7 @@ impl StructWithAllBuiltInTypes {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, StructWithAllBuiltInTypesError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // basic8: u8
         let basic8 = crate::util::astd_read_u8_le(r).await?;
 
@@ -253,34 +253,6 @@ impl StructWithAllBuiltInTypes {
         + 8 // decimal64_be: f64_be
         + self.simple_cstring.len() + 1 // simple_cstring: CString
         + self.simple_string.len() // simple_string: String
-    }
-}
-
-#[derive(Debug)]
-pub enum StructWithAllBuiltInTypesError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for StructWithAllBuiltInTypesError {}
-impl std::fmt::Display for StructWithAllBuiltInTypesError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for StructWithAllBuiltInTypesError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for StructWithAllBuiltInTypesError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

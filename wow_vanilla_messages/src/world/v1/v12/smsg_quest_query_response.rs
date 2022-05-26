@@ -253,7 +253,7 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
         self.size() as u16
     }
 
-    type Error = SMSG_QUEST_QUERY_RESPONSEError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -710,34 +710,6 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + self.end_text.len() + 1 // end_text: CString
         + 4 * 16 // objectives: QuestObjective[4]
         + self.objective_texts.iter().fold(0, |acc, x| acc + x.len() + 1) // objective_texts: CString[4]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_QUEST_QUERY_RESPONSEError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for SMSG_QUEST_QUERY_RESPONSEError {}
-impl std::fmt::Display for SMSG_QUEST_QUERY_RESPONSEError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_QUEST_QUERY_RESPONSEError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for SMSG_QUEST_QUERY_RESPONSEError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

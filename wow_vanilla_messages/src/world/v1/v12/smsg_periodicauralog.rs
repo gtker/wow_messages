@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{AuraLog, AuraLogError};
+use crate::world::v1::v12::AuraLog;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -68,7 +68,7 @@ impl ServerMessage for SMSG_PERIODICAURALOG {
         self.size() as u16
     }
 
-    type Error = SMSG_PERIODICAURALOGError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -188,34 +188,6 @@ impl SMSG_PERIODICAURALOG {
         + 4 // spell: u32
         + 4 // amount_of_auras: u32
         + self.auras.iter().fold(0, |acc, x| acc + x.size()) // auras: AuraLog[amount_of_auras]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_PERIODICAURALOGError {
-    Io(std::io::Error),
-    AuraLog(AuraLogError),
-}
-
-impl std::error::Error for SMSG_PERIODICAURALOGError {}
-impl std::fmt::Display for SMSG_PERIODICAURALOGError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::AuraLog(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_PERIODICAURALOGError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<AuraLogError> for SMSG_PERIODICAURALOGError {
-    fn from(e: AuraLogError) -> Self {
-        Self::AuraLog(e)
     }
 }
 

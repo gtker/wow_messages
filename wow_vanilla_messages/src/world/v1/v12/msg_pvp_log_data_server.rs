@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::BattlegroundEndStatus;
-use crate::world::v1::v12::{BattlegroundPlayer, BattlegroundPlayerError};
+use crate::world::v1::v12::BattlegroundPlayer;
 use crate::world::v1::v12::BattlegroundWinner;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -77,7 +77,7 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
         self.size() as u16
     }
 
-    type Error = MSG_PVP_LOG_DATA_ServerError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -207,42 +207,6 @@ impl MSG_PVP_LOG_DATA_Server {
         + self.status.size() // status: MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus
         + 4 // amount_of_players: u32
         + self.players.iter().fold(0, |acc, x| acc + x.size()) // players: BattlegroundPlayer[amount_of_players]
-    }
-}
-
-#[derive(Debug)]
-pub enum MSG_PVP_LOG_DATA_ServerError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-    BattlegroundPlayer(BattlegroundPlayerError),
-}
-
-impl std::error::Error for MSG_PVP_LOG_DATA_ServerError {}
-impl std::fmt::Display for MSG_PVP_LOG_DATA_ServerError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-            Self::BattlegroundPlayer(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for MSG_PVP_LOG_DATA_ServerError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for MSG_PVP_LOG_DATA_ServerError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
-}
-
-impl From<BattlegroundPlayerError> for MSG_PVP_LOG_DATA_ServerError {
-    fn from(e: BattlegroundPlayerError) -> Self {
-        Self::BattlegroundPlayer(e)
     }
 }
 

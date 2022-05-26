@@ -85,6 +85,8 @@ impl ClientOpcodeMessage {
 pub enum ClientOpcodeMessageError {
     Io(std::io::Error),
     InvalidOpcode(u32),
+    String(std::string::FromUtf8Error),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for ClientOpcodeMessageError {}
@@ -92,6 +94,8 @@ impl std::fmt::Display for ClientOpcodeMessageError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
+            Self::String(i) => i.fmt(f),
+            Self::Enum(i) => i.fmt(f),
             Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode received for ClientMessage: '{}'", i)),
         }
     }
@@ -103,8 +107,18 @@ impl From<std::io::Error> for ClientOpcodeMessageError {
     }
 }
 
+impl From<crate::errors::ParseError> for ClientOpcodeMessageError {
+    fn from(e: crate::errors::ParseError) -> Self {
+        match e {
+            crate::errors::ParseError::Io(i) => Self::Io(i),
+            crate::errors::ParseError::Enum(i) => Self::Enum(i),
+            crate::errors::ParseError::String(i) => Self::String(i),
+        }
+    }
+}
+
 use crate::world::v1::v2::SMSG_AUTH_CHALLENGE;
-use crate::world::v1::v2::{SMSG_AUTH_RESPONSE, SMSG_AUTH_RESPONSEError};
+use crate::world::v1::v2::SMSG_AUTH_RESPONSE;
 
 #[derive(Debug)]
 pub enum ServerOpcodeMessage {
@@ -191,7 +205,8 @@ impl ServerOpcodeMessage {
 pub enum ServerOpcodeMessageError {
     Io(std::io::Error),
     InvalidOpcode(u16),
-    SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSEError),
+    String(std::string::FromUtf8Error),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for ServerOpcodeMessageError {}
@@ -199,8 +214,9 @@ impl std::fmt::Display for ServerOpcodeMessageError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
+            Self::String(i) => i.fmt(f),
+            Self::Enum(i) => i.fmt(f),
             Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode received for ServerMessage: '{}'", i)),
-            Self::SMSG_AUTH_RESPONSE(i) => i.fmt(f),
         }
     }
 }
@@ -211,11 +227,12 @@ impl From<std::io::Error> for ServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_AUTH_RESPONSEError> for ServerOpcodeMessageError {
-    fn from(e: SMSG_AUTH_RESPONSEError) -> Self {
+impl From<crate::errors::ParseError> for ServerOpcodeMessageError {
+    fn from(e: crate::errors::ParseError) -> Self {
         match e {
-            SMSG_AUTH_RESPONSEError::Io(i) => Self::Io(i),
-            _ => Self::SMSG_AUTH_RESPONSE(e),
+            crate::errors::ParseError::Io(i) => Self::Io(i),
+            crate::errors::ParseError::Enum(i) => Self::Enum(i),
+            crate::errors::ParseError::String(i) => Self::String(i),
         }
     }
 }

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{StabledPet, StabledPetError};
+use crate::world::v1::v12::StabledPet;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -61,7 +61,7 @@ impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
         self.size() as u16
     }
 
-    type Error = MSG_LIST_STABLED_PETS_ServerError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -168,34 +168,6 @@ impl MSG_LIST_STABLED_PETS_Server {
         + 1 // amount_of_pets: u8
         + 1 // stable_slots: u8
         + self.pets.iter().fold(0, |acc, x| acc + x.size()) // pets: StabledPet[amount_of_pets]
-    }
-}
-
-#[derive(Debug)]
-pub enum MSG_LIST_STABLED_PETS_ServerError {
-    Io(std::io::Error),
-    StabledPet(StabledPetError),
-}
-
-impl std::error::Error for MSG_LIST_STABLED_PETS_ServerError {}
-impl std::fmt::Display for MSG_LIST_STABLED_PETS_ServerError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::StabledPet(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for MSG_LIST_STABLED_PETS_ServerError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<StabledPetError> for MSG_LIST_STABLED_PETS_ServerError {
-    fn from(e: StabledPetError) -> Self {
-        Self::StabledPet(e)
     }
 }
 

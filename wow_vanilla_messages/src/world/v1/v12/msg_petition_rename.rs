@@ -47,7 +47,7 @@ impl ClientMessage for MSG_PETITION_RENAME {
         self.size() as u16
     }
 
-    type Error = MSG_PETITION_RENAMEError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -138,7 +138,7 @@ impl ServerMessage for MSG_PETITION_RENAME {
         self.size() as u16
     }
 
-    type Error = MSG_PETITION_RENAMEError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -216,34 +216,6 @@ impl MSG_PETITION_RENAME {
         0
         + 8 // petition_guid: Guid
         + self.new_name.len() + 1 // new_name: CString
-    }
-}
-
-#[derive(Debug)]
-pub enum MSG_PETITION_RENAMEError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for MSG_PETITION_RENAMEError {}
-impl std::fmt::Display for MSG_PETITION_RENAMEError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for MSG_PETITION_RENAMEError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for MSG_PETITION_RENAMEError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

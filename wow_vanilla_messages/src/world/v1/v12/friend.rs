@@ -94,7 +94,7 @@ impl Friend {
 
 impl Friend {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, FriendError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::read(r)?;
 
@@ -176,7 +176,7 @@ impl Friend {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, FriendError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::tokio_read(r).await?;
 
@@ -258,7 +258,7 @@ impl Friend {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, FriendError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::astd_read(r).await?;
 
@@ -346,34 +346,6 @@ impl Friend {
         0
         + 8 // guid: Guid
         + self.status.size() // status: FriendFriendStatus
-    }
-}
-
-#[derive(Debug)]
-pub enum FriendError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for FriendError {}
-impl std::fmt::Display for FriendError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for FriendError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for FriendError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
     }
 }
 

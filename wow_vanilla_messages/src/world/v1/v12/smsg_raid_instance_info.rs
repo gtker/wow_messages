@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{RaidInfo, RaidInfoError};
+use crate::world::v1::v12::RaidInfo;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -46,7 +46,7 @@ impl ServerMessage for SMSG_RAID_INSTANCE_INFO {
         self.size() as u16
     }
 
-    type Error = SMSG_RAID_INSTANCE_INFOError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -127,34 +127,6 @@ impl SMSG_RAID_INSTANCE_INFO {
         0
         + 4 // amount_of_raid_infos: u32
         + self.raid_infos.len() * 12 // raid_infos: RaidInfo[amount_of_raid_infos]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_RAID_INSTANCE_INFOError {
-    Io(std::io::Error),
-    RaidInfo(RaidInfoError),
-}
-
-impl std::error::Error for SMSG_RAID_INSTANCE_INFOError {}
-impl std::fmt::Display for SMSG_RAID_INSTANCE_INFOError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::RaidInfo(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_RAID_INSTANCE_INFOError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<RaidInfoError> for SMSG_RAID_INSTANCE_INFOError {
-    fn from(e: RaidInfoError) -> Self {
-        Self::RaidInfo(e)
     }
 }
 

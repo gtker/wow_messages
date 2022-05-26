@@ -2,7 +2,7 @@ use crate::container::{Container, ContainerType, StructMember};
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArraySize, ArrayType, ObjectType};
+use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::{Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME};
 use crate::wowm_printer::get_struct_wowm_definition;
 
@@ -19,8 +19,6 @@ pub fn print_struct(e: &Container, o: &Objects) -> Writer {
     print_declaration(&mut s, e);
 
     print_common_impls::print_common_impls(&mut s, e, o);
-
-    print_errors(&mut s, e, o);
 
     print_new_types::print_new_types(&mut s, e);
 
@@ -51,30 +49,11 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     for name in e.get_types_needing_import() {
         let module_name = get_import_path(o.get_tags_of_object(name, e.tags()));
 
-        match o.get_object_type_of(name, e.tags()) {
-            ObjectType::Flag | ObjectType::Enum => {
-                s.wln(format!(
-                    "use {module_name}::{name};",
-                    module_name = module_name,
-                    name = name,
-                ));
-            }
-            _ => {
-                if o.object_has_only_io_errors(name, e.tags()) {
-                    s.wln(format!(
-                        "use {module_name}::{name};",
-                        module_name = module_name,
-                        name = name,
-                    ));
-                } else {
-                    s.wln(format!(
-                        "use {module_name}::{{{name}, {name}Error}};",
-                        module_name = module_name,
-                        name = name,
-                    ));
-                }
-            }
-        }
+        s.wln(format!(
+            "use {module_name}::{name};",
+            module_name = module_name,
+            name = name,
+        ));
     }
 
     match e.container_type() {
@@ -174,132 +153,4 @@ fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
         },
         e.file_info(),
     );
-}
-
-fn print_errors(s: &mut Writer, e: &Container, o: &Objects) {
-    if e.only_has_io_errors() {
-        return;
-    }
-
-    print_general_error(s, e, o);
-}
-
-fn print_general_error(s: &mut Writer, e: &Container, o: &Objects) {
-    s.wln("#[derive(Debug)]");
-    s.new_enum("pub", format!("{name}Error", name = e.name()), |s| {
-        s.wln("Io(std::io::Error),");
-        if e.contains_string_or_cstring() {
-            s.wln("String(std::string::FromUtf8Error),");
-        }
-        if e.needs_enum_error(o, e.tags()) {
-            s.wln("Enum(crate::errors::EnumError),");
-        }
-
-        for t in e.get_types_needing_errors(o, e.tags()) {
-            match o.get_object_type_of(t, e.tags()) {
-                ObjectType::Flag | ObjectType::Enum => {}
-                _ => {
-                    s.wln(format!("{name}({name}Error),", name = t));
-                }
-            }
-        }
-    });
-
-    print_display_for_general_error(s, e, o);
-    print_from_general_error(s, e, o);
-}
-
-fn print_display_for_general_error(s: &mut Writer, e: &Container, o: &Objects) {
-    s.wln(format!(
-        "impl std::error::Error for {name}Error {{}}",
-        name = e.name()
-    ));
-
-    s.bodyn(
-        format!("impl std::fmt::Display for {name}Error", name = e.name()),
-        |s| {
-            s.body(
-                "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
-                |s| {
-                    s.body("match self", |s| {
-                        s.wln("Self::Io(i) => i.fmt(f),");
-
-                        if e.contains_string_or_cstring() {
-                            s.wln("Self::String(i) => i.fmt(f),");
-                        }
-
-                        if e.needs_enum_error(o, e.tags()) {
-                            s.wln("Self::Enum(e) => e.fmt(f),");
-                        }
-
-                        for t in e.get_types_needing_errors(o, e.tags()) {
-                            match o.get_object_type_of(t, e.tags()) {
-                                ObjectType::Flag => {}
-                                _ => {
-                                    s.wln(format!("Self::{name}(i) => i.fmt(f),", name = t));
-                                }
-                            }
-                        }
-                    });
-                },
-            );
-        },
-    );
-}
-
-fn print_from_general_error(s: &mut Writer, e: &Container, o: &Objects) {
-    s.bodyn(
-        format!("impl From<std::io::Error> for {name}Error", name = e.name()),
-        |s| {
-            s.body("fn from(e : std::io::Error) -> Self", |s| {
-                s.wln("Self::Io(e)");
-            });
-        },
-    );
-
-    if e.needs_enum_error(o, e.tags()) {
-        s.bodyn(
-            format!(
-                "impl From<crate::errors::EnumError> for {name}Error",
-                name = e.name()
-            ),
-            |s| {
-                s.body("fn from(e: crate::errors::EnumError) -> Self", |s| {
-                    s.wln("Self::Enum(e)");
-                });
-            },
-        );
-    }
-
-    if e.contains_string_or_cstring() {
-        s.bodyn(
-            format!(
-                "impl From<std::string::FromUtf8Error> for {name}Error",
-                name = e.name()
-            ),
-            |s| {
-                s.body("fn from(e: std::string::FromUtf8Error) -> Self", |s| {
-                    s.wln("Self::String(e)");
-                });
-            },
-        );
-    }
-
-    for t in e.get_types_needing_errors(o, e.tags()) {
-        s.bodyn(
-            format!(
-                "impl From<{from_name}Error> for {name}Error",
-                name = e.name(),
-                from_name = t
-            ),
-            |s| {
-                s.body(
-                    format!("fn from(e: {from_name}Error) -> Self", from_name = t),
-                    |s| {
-                        s.wln(format!("Self::{from_name}(e)", from_name = t));
-                    },
-                );
-            },
-        );
-    }
 }

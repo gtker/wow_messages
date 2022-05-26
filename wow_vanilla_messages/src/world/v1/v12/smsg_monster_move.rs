@@ -72,7 +72,7 @@ impl ServerMessage for SMSG_MONSTER_MOVE {
         self.size() as u16
     }
 
-    type Error = SMSG_MONSTER_MOVEError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -190,34 +190,6 @@ impl SMSG_MONSTER_MOVE {
         + 4 // position_z: f32
         + 4 // spline_id: u32
         + 1 // move_type: MonsterMoveType
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_MONSTER_MOVEError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for SMSG_MONSTER_MOVEError {}
-impl std::fmt::Display for SMSG_MONSTER_MOVEError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_MONSTER_MOVEError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SMSG_MONSTER_MOVEError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
     }
 }
 

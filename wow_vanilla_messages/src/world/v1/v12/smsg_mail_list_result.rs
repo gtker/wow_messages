@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Mail, MailError};
+use crate::world::v1::v12::Mail;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -46,7 +46,7 @@ impl ServerMessage for SMSG_MAIL_LIST_RESULT {
         self.size() as u16
     }
 
-    type Error = SMSG_MAIL_LIST_RESULTError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -127,34 +127,6 @@ impl SMSG_MAIL_LIST_RESULT {
         0
         + 1 // amount_of_mails: u8
         + self.mails.iter().fold(0, |acc, x| acc + x.size()) // mails: Mail[amount_of_mails]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_MAIL_LIST_RESULTError {
-    Io(std::io::Error),
-    Mail(MailError),
-}
-
-impl std::error::Error for SMSG_MAIL_LIST_RESULTError {}
-impl std::fmt::Display for SMSG_MAIL_LIST_RESULTError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Mail(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_MAIL_LIST_RESULTError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<MailError> for SMSG_MAIL_LIST_RESULTError {
-    fn from(e: MailError) -> Self {
-        Self::Mail(e)
     }
 }
 

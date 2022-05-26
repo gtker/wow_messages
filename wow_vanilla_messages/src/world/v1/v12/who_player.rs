@@ -52,7 +52,7 @@ impl WhoPlayer {
 
 impl WhoPlayer {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, WhoPlayerError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
         let name = String::from_utf8(name)?;
@@ -88,7 +88,7 @@ impl WhoPlayer {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, WhoPlayerError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = crate::util::tokio_read_c_string_to_vec(r).await?;
         let name = String::from_utf8(name)?;
@@ -124,7 +124,7 @@ impl WhoPlayer {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, WhoPlayerError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = crate::util::astd_read_c_string_to_vec(r).await?;
         let name = String::from_utf8(name)?;
@@ -171,42 +171,6 @@ impl WhoPlayer {
         + 1 // race: Race
         + 4 // zone_id: u32
         + 4 // party_status: u32
-    }
-}
-
-#[derive(Debug)]
-pub enum WhoPlayerError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for WhoPlayerError {}
-impl std::fmt::Display for WhoPlayerError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for WhoPlayerError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for WhoPlayerError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for WhoPlayerError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

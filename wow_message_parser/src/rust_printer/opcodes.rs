@@ -29,7 +29,7 @@ pub fn print_world_opcodes(
 
     common_impls_world(&mut s, v, ty, container_type);
 
-    print_error(&mut s, v, ty, int_ty);
+    print_error(&mut s, ty, int_ty);
 
     s
 }
@@ -52,7 +52,7 @@ pub fn print_login_opcodes(
 
     common_impls_login(&mut s, v, ty);
 
-    print_error(&mut s, v, ty, int_ty);
+    print_error(&mut s, ty, int_ty);
 
     s
 }
@@ -95,19 +95,11 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
         }
 
         let module_name = get_import_path(e.tags());
-        if e.only_has_io_errors() {
-            s.wln(format!(
-                "use {module_name}::{name};",
-                module_name = module_name,
-                name = e.name(),
-            ));
-        } else {
-            s.wln(format!(
-                "use {module_name}::{{{name}, {name}Error}};",
-                module_name = module_name,
-                name = e.name(),
-            ));
-        }
+        s.wln(format!(
+            "use {module_name}::{name};",
+            module_name = module_name,
+            name = e.name(),
+        ));
     }
 
     s.newline();
@@ -307,22 +299,13 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
     );
 }
 
-pub fn print_error(s: &mut Writer, v: &[&Container], ty: &str, int_ty: &str) {
+pub fn print_error(s: &mut Writer, ty: &str, int_ty: &str) {
     s.wln("#[derive(Debug)]");
     s.new_enum("pub", format!("{t}OpcodeMessageError", t = ty), |s| {
         s.wln("Io(std::io::Error),");
         s.wln(format!("InvalidOpcode({int_ty}),", int_ty = int_ty));
-        for e in v {
-            if e.only_has_io_errors() {
-                continue;
-            }
-
-            s.wln(format!(
-                "{enum_name}({name}Error),",
-                enum_name = get_enumerator_name(e.name()),
-                name = e.name()
-            ));
-        }
+        s.wln("String(std::string::FromUtf8Error),");
+        s.wln("Enum(crate::errors::EnumError),");
     });
 
     s.wln(format!(
@@ -334,14 +317,9 @@ pub fn print_error(s: &mut Writer, v: &[&Container], ty: &str, int_ty: &str) {
         s.body("fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result", |s| {
             s.body("match self", |s| {
                 s.wln("Self::Io(i) => i.fmt(f),");
+                s.wln("Self::String(i) => i.fmt(f),");
+                s.wln("Self::Enum(i) => i.fmt(f),");
                 s.wln(format!(r#"Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode received for {ty}Message: '{{}}'", i)),"#, ty = ty));
-                for e in v {
-                    if e.only_has_io_errors() {
-                        continue;
-                    }
-
-                    s.wln(format!("Self::{enum_name}(i) => i.fmt(f),", enum_name = get_enumerator_name(e.name())));
-                }
             });
 
         });
@@ -355,28 +333,17 @@ pub fn print_error(s: &mut Writer, v: &[&Container], ty: &str, int_ty: &str) {
         },
     );
 
-    for e in v {
-        if e.only_has_io_errors() {
-            continue;
-        }
-
-        s.impl_from(
-            format!("{}Error", e.name()),
-            format!("{t}OpcodeMessageError", t = ty),
-            |s| {
-                s.body("match e", |s| {
-                    s.wln(format!(
-                        "{name}Error::Io(i) => Self::Io(i),",
-                        name = e.name()
-                    ));
-                    s.wln(format!(
-                        "_ => Self::{enum_name}(e),",
-                        enum_name = get_enumerator_name(e.name())
-                    ));
-                });
-            },
-        );
-    }
+    s.impl_from(
+        "crate::errors::ParseError",
+        format!("{t}OpcodeMessageError", t = ty),
+        |s| {
+            s.body("match e", |s| {
+                s.wln("crate::errors::ParseError::Io(i) => Self::Io(i),");
+                s.wln("crate::errors::ParseError::Enum(i) => Self::Enum(i),");
+                s.wln("crate::errors::ParseError::String(i) => Self::String(i),");
+            });
+        },
+    );
 }
 
 pub fn get_enumerator_name(name: &str) -> String {

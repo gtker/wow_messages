@@ -103,7 +103,7 @@ impl ClientMessage for CMSG_AUCTION_LIST_ITEMS {
         self.size() as u16
     }
 
-    type Error = CMSG_AUCTION_LIST_ITEMSError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -285,34 +285,6 @@ impl CMSG_AUCTION_LIST_ITEMS {
         + 4 // auction_sub_category: u32
         + 4 // auction_quality: u32
         + 1 // usable: u8
-    }
-}
-
-#[derive(Debug)]
-pub enum CMSG_AUCTION_LIST_ITEMSError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for CMSG_AUCTION_LIST_ITEMSError {}
-impl std::fmt::Display for CMSG_AUCTION_LIST_ITEMSError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMSG_AUCTION_LIST_ITEMSError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for CMSG_AUCTION_LIST_ITEMSError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

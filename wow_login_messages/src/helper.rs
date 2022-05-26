@@ -8,13 +8,13 @@
 //! [`expect_client_message`] and [`expect_server_message`]
 //! are used when you're expecting exactly one specific message and all others are invalid.
 //!
-use crate::logon::all::{CMD_AUTH_LOGON_CHALLENGE_Client, CMD_AUTH_LOGON_CHALLENGE_ClientError};
-use crate::logon::all::{
-    CMD_AUTH_RECONNECT_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_ClientError,
-};
+use crate::errors::{EnumError, ParseError};
+use crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client;
+use crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client;
 use crate::util::read_u8_le;
 use crate::{ClientMessage, ServerMessage};
 use std::fmt::{Display, Formatter};
+use std::string::FromUtf8Error;
 
 /// Read a complete message _from_ the **client** or return an error otherwise.
 ///
@@ -246,16 +246,16 @@ pub enum InitialOpcode {
 pub enum InitialOpcodeError {
     Io(std::io::Error),
     InvalidOpcode(u8),
-    CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_ClientError),
-    CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_ClientError),
+    String(std::string::FromUtf8Error),
+    Enum(crate::errors::EnumError),
 }
 impl Display for InitialOpcodeError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::InvalidOpcode(i) => f.write_fmt(format_args!("opcode that is not CMD_AUTH_LOGON_CHALLENGE or CMD_AUTH_RECONNECT_CHALLENGE received: '{}'", i)),
-            Self::CMD_AUTH_LOGON_CHALLENGE(i) => i.fmt(f),
-            Self::CMD_AUTH_RECONNECT_CHALLENGE(i) => i.fmt(f),
+            InitialOpcodeError::String(i) => i.fmt(f),
+            InitialOpcodeError::Enum(i) => i.fmt(f),
         }
     }
 }
@@ -267,14 +267,24 @@ impl From<std::io::Error> for InitialOpcodeError {
     }
 }
 
-impl From<CMD_AUTH_LOGON_CHALLENGE_ClientError> for InitialOpcodeError {
-    fn from(e: CMD_AUTH_LOGON_CHALLENGE_ClientError) -> Self {
-        Self::CMD_AUTH_LOGON_CHALLENGE(e)
+impl From<std::string::FromUtf8Error> for InitialOpcodeError {
+    fn from(e: FromUtf8Error) -> Self {
+        Self::String(e)
     }
 }
 
-impl From<CMD_AUTH_RECONNECT_CHALLENGE_ClientError> for InitialOpcodeError {
-    fn from(e: CMD_AUTH_RECONNECT_CHALLENGE_ClientError) -> Self {
-        Self::CMD_AUTH_RECONNECT_CHALLENGE(e)
+impl From<crate::errors::EnumError> for InitialOpcodeError {
+    fn from(e: EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
+impl From<ParseError> for InitialOpcodeError {
+    fn from(e: ParseError) -> Self {
+        match e {
+            ParseError::Io(i) => Self::Io(i),
+            ParseError::Enum(i) => Self::Enum(i),
+            ParseError::String(i) => Self::String(i),
+        }
     }
 }

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Object, ObjectError};
+use crate::world::v1::v12::Object;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -53,7 +53,7 @@ impl ClientMessage for SMSG_UPDATE_OBJECT {
         self.size() as u16
     }
 
-    type Error = SMSG_UPDATE_OBJECTError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -147,34 +147,6 @@ impl SMSG_UPDATE_OBJECT {
         + 4 // amount_of_objects: u32
         + 1 // has_transport: u8
         + self.objects.iter().fold(0, |acc, x| acc + x.size()) // objects: Object[amount_of_objects]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_UPDATE_OBJECTError {
-    Io(std::io::Error),
-    Object(ObjectError),
-}
-
-impl std::error::Error for SMSG_UPDATE_OBJECTError {}
-impl std::fmt::Display for SMSG_UPDATE_OBJECTError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Object(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_UPDATE_OBJECTError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<ObjectError> for SMSG_UPDATE_OBJECTError {
-    fn from(e: ObjectError) -> Self {
-        Self::Object(e)
     }
 }
 

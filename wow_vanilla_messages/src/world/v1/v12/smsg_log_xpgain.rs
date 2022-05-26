@@ -81,7 +81,7 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
         self.size() as u16
     }
 
-    type Error = SMSG_LOG_XPGAINError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -214,34 +214,6 @@ impl SMSG_LOG_XPGAIN {
         + 8 // target_guid: Guid
         + 4 // total_exp: u32
         + self.exp_type.size() // exp_type: SMSG_LOG_XPGAINExperienceAwardType
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_LOG_XPGAINError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for SMSG_LOG_XPGAINError {}
-impl std::fmt::Display for SMSG_LOG_XPGAINError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_LOG_XPGAINError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SMSG_LOG_XPGAINError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
     }
 }
 

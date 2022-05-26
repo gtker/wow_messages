@@ -4266,7 +4266,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
         self.size() as u16
     }
 
-    type Error = SMSG_BATTLEFIELD_STATUSError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -11190,34 +11190,6 @@ impl SMSG_BATTLEFIELD_STATUS {
         0
         + 4 // queue_slot: u32
         + self.map.size() // map: SMSG_BATTLEFIELD_STATUSMap
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_BATTLEFIELD_STATUSError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for SMSG_BATTLEFIELD_STATUSError {}
-impl std::fmt::Display for SMSG_BATTLEFIELD_STATUSError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_BATTLEFIELD_STATUSError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SMSG_BATTLEFIELD_STATUSError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
     }
 }
 

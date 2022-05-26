@@ -144,7 +144,7 @@ impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {
         47
     }
 
-    type Error = MSG_INSPECT_HONOR_STATS_ServerError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -380,33 +380,5 @@ impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {
         })
     }
 
-}
-
-#[derive(Debug)]
-pub enum MSG_INSPECT_HONOR_STATS_ServerError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for MSG_INSPECT_HONOR_STATS_ServerError {}
-impl std::fmt::Display for MSG_INSPECT_HONOR_STATS_ServerError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for MSG_INSPECT_HONOR_STATS_ServerError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for MSG_INSPECT_HONOR_STATS_ServerError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
 }
 

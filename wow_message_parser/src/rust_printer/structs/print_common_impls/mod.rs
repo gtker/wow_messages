@@ -12,8 +12,8 @@ pub mod print_write;
 pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_world_message_headers_and_constants(s, e);
     let error_ty = match e.only_has_io_errors() {
-        true => "std::io::Error".to_string(),
-        false => format!("{}Error", e.name()),
+        true => "std::io::Error",
+        false => "crate::errors::ParseError",
     };
 
     match e.container_type() {

@@ -417,7 +417,7 @@ impl ServerMessage for SMSG_CAST_RESULT {
         self.size() as u16
     }
 
-    type Error = SMSG_CAST_RESULTError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -1062,34 +1062,6 @@ impl SMSG_CAST_RESULT {
         0
         + 4 // spell: u32
         + self.result.size() // result: SMSG_CAST_RESULTSimpleSpellCastResult
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_CAST_RESULTError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for SMSG_CAST_RESULTError {}
-impl std::fmt::Display for SMSG_CAST_RESULTError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_CAST_RESULTError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SMSG_CAST_RESULTError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
     }
 }
 

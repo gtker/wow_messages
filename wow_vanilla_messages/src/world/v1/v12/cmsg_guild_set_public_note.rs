@@ -50,7 +50,7 @@ impl ClientMessage for CMSG_GUILD_SET_PUBLIC_NOTE {
         self.size() as u16
     }
 
-    type Error = CMSG_GUILD_SET_PUBLIC_NOTEError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -131,34 +131,6 @@ impl CMSG_GUILD_SET_PUBLIC_NOTE {
         0
         + self.player_name.len() + 1 // player_name: CString
         + self.note.len() + 1 // note: CString
-    }
-}
-
-#[derive(Debug)]
-pub enum CMSG_GUILD_SET_PUBLIC_NOTEError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for CMSG_GUILD_SET_PUBLIC_NOTEError {}
-impl std::fmt::Display for CMSG_GUILD_SET_PUBLIC_NOTEError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMSG_GUILD_SET_PUBLIC_NOTEError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for CMSG_GUILD_SET_PUBLIC_NOTEError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

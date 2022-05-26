@@ -3,11 +3,11 @@ use crate::{ServerMessage, ClientMessage};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
-use crate::logon::version_8::{CMD_AUTH_LOGON_CHALLENGE_Server, CMD_AUTH_LOGON_CHALLENGE_ServerError};
-use crate::logon::version_8::{CMD_AUTH_LOGON_PROOF_Server, CMD_AUTH_LOGON_PROOF_ServerError};
-use crate::logon::version_8::{CMD_AUTH_RECONNECT_CHALLENGE_Server, CMD_AUTH_RECONNECT_CHALLENGE_ServerError};
-use crate::logon::version_8::{CMD_AUTH_RECONNECT_PROOF_Server, CMD_AUTH_RECONNECT_PROOF_ServerError};
-use crate::logon::version_8::{CMD_REALM_LIST_Server, CMD_REALM_LIST_ServerError};
+use crate::logon::version_8::CMD_AUTH_LOGON_CHALLENGE_Server;
+use crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server;
+use crate::logon::version_8::CMD_AUTH_RECONNECT_CHALLENGE_Server;
+use crate::logon::version_8::CMD_AUTH_RECONNECT_PROOF_Server;
+use crate::logon::version_8::CMD_REALM_LIST_Server;
 
 #[derive(Debug)]
 pub enum ServerOpcodeMessage {
@@ -79,11 +79,8 @@ impl ServerOpcodeMessage {
 pub enum ServerOpcodeMessageError {
     Io(std::io::Error),
     InvalidOpcode(u8),
-    CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_ServerError),
-    CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_ServerError),
-    CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_ServerError),
-    CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_ServerError),
-    CMD_REALM_LIST(CMD_REALM_LIST_ServerError),
+    String(std::string::FromUtf8Error),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for ServerOpcodeMessageError {}
@@ -91,12 +88,9 @@ impl std::fmt::Display for ServerOpcodeMessageError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
+            Self::String(i) => i.fmt(f),
+            Self::Enum(i) => i.fmt(f),
             Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode received for ServerMessage: '{}'", i)),
-            Self::CMD_AUTH_LOGON_CHALLENGE(i) => i.fmt(f),
-            Self::CMD_AUTH_LOGON_PROOF(i) => i.fmt(f),
-            Self::CMD_AUTH_RECONNECT_CHALLENGE(i) => i.fmt(f),
-            Self::CMD_AUTH_RECONNECT_PROOF(i) => i.fmt(f),
-            Self::CMD_REALM_LIST(i) => i.fmt(f),
         }
     }
 }
@@ -107,54 +101,19 @@ impl From<std::io::Error> for ServerOpcodeMessageError {
     }
 }
 
-impl From<CMD_AUTH_LOGON_CHALLENGE_ServerError> for ServerOpcodeMessageError {
-    fn from(e: CMD_AUTH_LOGON_CHALLENGE_ServerError) -> Self {
+impl From<crate::errors::ParseError> for ServerOpcodeMessageError {
+    fn from(e: crate::errors::ParseError) -> Self {
         match e {
-            CMD_AUTH_LOGON_CHALLENGE_ServerError::Io(i) => Self::Io(i),
-            _ => Self::CMD_AUTH_LOGON_CHALLENGE(e),
+            crate::errors::ParseError::Io(i) => Self::Io(i),
+            crate::errors::ParseError::Enum(i) => Self::Enum(i),
+            crate::errors::ParseError::String(i) => Self::String(i),
         }
     }
 }
 
-impl From<CMD_AUTH_LOGON_PROOF_ServerError> for ServerOpcodeMessageError {
-    fn from(e: CMD_AUTH_LOGON_PROOF_ServerError) -> Self {
-        match e {
-            CMD_AUTH_LOGON_PROOF_ServerError::Io(i) => Self::Io(i),
-            _ => Self::CMD_AUTH_LOGON_PROOF(e),
-        }
-    }
-}
-
-impl From<CMD_AUTH_RECONNECT_CHALLENGE_ServerError> for ServerOpcodeMessageError {
-    fn from(e: CMD_AUTH_RECONNECT_CHALLENGE_ServerError) -> Self {
-        match e {
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerError::Io(i) => Self::Io(i),
-            _ => Self::CMD_AUTH_RECONNECT_CHALLENGE(e),
-        }
-    }
-}
-
-impl From<CMD_AUTH_RECONNECT_PROOF_ServerError> for ServerOpcodeMessageError {
-    fn from(e: CMD_AUTH_RECONNECT_PROOF_ServerError) -> Self {
-        match e {
-            CMD_AUTH_RECONNECT_PROOF_ServerError::Io(i) => Self::Io(i),
-            _ => Self::CMD_AUTH_RECONNECT_PROOF(e),
-        }
-    }
-}
-
-impl From<CMD_REALM_LIST_ServerError> for ServerOpcodeMessageError {
-    fn from(e: CMD_REALM_LIST_ServerError) -> Self {
-        match e {
-            CMD_REALM_LIST_ServerError::Io(i) => Self::Io(i),
-            _ => Self::CMD_REALM_LIST(e),
-        }
-    }
-}
-
-use crate::logon::all::{CMD_AUTH_LOGON_CHALLENGE_Client, CMD_AUTH_LOGON_CHALLENGE_ClientError};
+use crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client;
 use crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Client;
-use crate::logon::all::{CMD_AUTH_RECONNECT_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_ClientError};
+use crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client;
 use crate::logon::version_2::CMD_AUTH_RECONNECT_PROOF_Client;
 use crate::logon::version_2::CMD_REALM_LIST_Client;
 
@@ -228,8 +187,8 @@ impl ClientOpcodeMessage {
 pub enum ClientOpcodeMessageError {
     Io(std::io::Error),
     InvalidOpcode(u8),
-    CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_ClientError),
-    CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_ClientError),
+    String(std::string::FromUtf8Error),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for ClientOpcodeMessageError {}
@@ -237,9 +196,9 @@ impl std::fmt::Display for ClientOpcodeMessageError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
+            Self::String(i) => i.fmt(f),
+            Self::Enum(i) => i.fmt(f),
             Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode received for ClientMessage: '{}'", i)),
-            Self::CMD_AUTH_LOGON_CHALLENGE(i) => i.fmt(f),
-            Self::CMD_AUTH_RECONNECT_CHALLENGE(i) => i.fmt(f),
         }
     }
 }
@@ -250,20 +209,12 @@ impl From<std::io::Error> for ClientOpcodeMessageError {
     }
 }
 
-impl From<CMD_AUTH_LOGON_CHALLENGE_ClientError> for ClientOpcodeMessageError {
-    fn from(e: CMD_AUTH_LOGON_CHALLENGE_ClientError) -> Self {
+impl From<crate::errors::ParseError> for ClientOpcodeMessageError {
+    fn from(e: crate::errors::ParseError) -> Self {
         match e {
-            CMD_AUTH_LOGON_CHALLENGE_ClientError::Io(i) => Self::Io(i),
-            _ => Self::CMD_AUTH_LOGON_CHALLENGE(e),
-        }
-    }
-}
-
-impl From<CMD_AUTH_RECONNECT_CHALLENGE_ClientError> for ClientOpcodeMessageError {
-    fn from(e: CMD_AUTH_RECONNECT_CHALLENGE_ClientError) -> Self {
-        match e {
-            CMD_AUTH_RECONNECT_CHALLENGE_ClientError::Io(i) => Self::Io(i),
-            _ => Self::CMD_AUTH_RECONNECT_CHALLENGE(e),
+            crate::errors::ParseError::Io(i) => Self::Io(i),
+            crate::errors::ParseError::Enum(i) => Self::Enum(i),
+            crate::errors::ParseError::String(i) => Self::String(i),
         }
     }
 }

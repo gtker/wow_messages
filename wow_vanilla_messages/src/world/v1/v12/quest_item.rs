@@ -36,7 +36,7 @@ impl QuestItem {
 
 impl QuestItem {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, QuestItemError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // quest_id: u32
         let quest_id = crate::util::read_u32_le(r)?;
 
@@ -59,7 +59,7 @@ impl QuestItem {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, QuestItemError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // quest_id: u32
         let quest_id = crate::util::tokio_read_u32_le(r).await?;
 
@@ -82,7 +82,7 @@ impl QuestItem {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, QuestItemError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // quest_id: u32
         let quest_id = crate::util::astd_read_u32_le(r).await?;
 
@@ -113,34 +113,6 @@ impl QuestItem {
         + 4 // quest_icon: u32
         + 4 // level: u32
         + self.title.len() + 1 // title: CString
-    }
-}
-
-#[derive(Debug)]
-pub enum QuestItemError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for QuestItemError {}
-impl std::fmt::Display for QuestItemError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for QuestItemError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for QuestItemError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

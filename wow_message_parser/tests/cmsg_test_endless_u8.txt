@@ -57,7 +57,7 @@ impl ClientMessage for CMSG_TEST_ENDLESS_U8 {
         self.size() as u16
     }
 
-    type Error = CMSG_TEST_ENDLESS_U8Error;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -172,34 +172,6 @@ impl CMSG_TEST_ENDLESS_U8 {
         + self.c_string.len() + 1 // c_string: CString
         + 1 // b_u8: u8
         + self.endless.len() * core::mem::size_of::<u8>() // endless: u8[-]
-    }
-}
-
-#[derive(Debug)]
-pub enum CMSG_TEST_ENDLESS_U8Error {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for CMSG_TEST_ENDLESS_U8Error {}
-impl std::fmt::Display for CMSG_TEST_ENDLESS_U8Error {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMSG_TEST_ENDLESS_U8Error {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for CMSG_TEST_ENDLESS_U8Error {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

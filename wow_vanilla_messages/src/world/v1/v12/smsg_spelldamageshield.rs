@@ -60,7 +60,7 @@ impl ServerMessage for SMSG_SPELLDAMAGESHIELD {
         21
     }
 
-    type Error = SMSG_SPELLDAMAGESHIELDError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -152,33 +152,5 @@ impl ServerMessage for SMSG_SPELLDAMAGESHIELD {
         })
     }
 
-}
-
-#[derive(Debug)]
-pub enum SMSG_SPELLDAMAGESHIELDError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-}
-
-impl std::error::Error for SMSG_SPELLDAMAGESHIELDError {}
-impl std::fmt::Display for SMSG_SPELLDAMAGESHIELDError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_SPELLDAMAGESHIELDError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SMSG_SPELLDAMAGESHIELDError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
 }
 

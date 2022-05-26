@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{WhoPlayer, WhoPlayerError};
+use crate::world::v1::v12::WhoPlayer;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -53,7 +53,7 @@ impl ServerMessage for SMSG_WHO {
         self.size() as u16
     }
 
-    type Error = SMSG_WHOError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -147,34 +147,6 @@ impl SMSG_WHO {
         + 4 // listed_players: u32
         + 4 // online_players: u32
         + self.players.iter().fold(0, |acc, x| acc + x.size()) // players: WhoPlayer[listed_players]
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_WHOError {
-    Io(std::io::Error),
-    WhoPlayer(WhoPlayerError),
-}
-
-impl std::error::Error for SMSG_WHOError {}
-impl std::fmt::Display for SMSG_WHOError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::WhoPlayer(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_WHOError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<WhoPlayerError> for SMSG_WHOError {
-    fn from(e: WhoPlayerError) -> Self {
-        Self::WhoPlayer(e)
     }
 }
 

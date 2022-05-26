@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{GroupListMember, GroupListMemberError};
+use crate::world::v1::v12::GroupListMember;
 use crate::world::v1::v12::GroupLootSetting;
 use crate::world::v1::v12::GroupType;
 use crate::world::v1::v12::ItemQuality;
@@ -98,7 +98,7 @@ impl ServerMessage for SMSG_GROUP_LIST {
         self.size() as u16
     }
 
-    type Error = SMSG_GROUP_LISTError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -313,42 +313,6 @@ impl SMSG_GROUP_LIST {
         } else {
             0
         }
-    }
-}
-
-#[derive(Debug)]
-pub enum SMSG_GROUP_LISTError {
-    Io(std::io::Error),
-    Enum(crate::errors::EnumError),
-    GroupListMember(GroupListMemberError),
-}
-
-impl std::error::Error for SMSG_GROUP_LISTError {}
-impl std::fmt::Display for SMSG_GROUP_LISTError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-            Self::GroupListMember(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for SMSG_GROUP_LISTError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for SMSG_GROUP_LISTError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
-}
-
-impl From<GroupListMemberError> for SMSG_GROUP_LISTError {
-    fn from(e: GroupListMemberError) -> Self {
-        Self::GroupListMember(e)
     }
 }
 

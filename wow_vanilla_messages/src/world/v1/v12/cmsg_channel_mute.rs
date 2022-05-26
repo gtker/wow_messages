@@ -50,7 +50,7 @@ impl ClientMessage for CMSG_CHANNEL_MUTE {
         self.size() as u16
     }
 
-    type Error = CMSG_CHANNEL_MUTEError;
+    type Error = crate::errors::ParseError;
 
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -131,34 +131,6 @@ impl CMSG_CHANNEL_MUTE {
         0
         + self.channel_name.len() + 1 // channel_name: CString
         + self.player_name.len() + 1 // player_name: CString
-    }
-}
-
-#[derive(Debug)]
-pub enum CMSG_CHANNEL_MUTEError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-}
-
-impl std::error::Error for CMSG_CHANNEL_MUTEError {}
-impl std::fmt::Display for CMSG_CHANNEL_MUTEError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CMSG_CHANNEL_MUTEError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for CMSG_CHANNEL_MUTEError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
     }
 }
 

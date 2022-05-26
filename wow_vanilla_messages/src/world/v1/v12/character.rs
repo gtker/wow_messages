@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::Area;
 use crate::world::v1::v12::CharacterFlags;
-use crate::world::v1::v12::{CharacterGear, CharacterGearError};
+use crate::world::v1::v12::CharacterGear;
 use crate::world::v1::v12::Class;
 use crate::world::v1::v12::Gender;
 use crate::world::v1::v12::Map;
@@ -135,7 +135,7 @@ impl Character {
 
 impl Character {
     #[cfg(feature = "sync")]
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, CharacterError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::read(r)?;
 
@@ -243,7 +243,7 @@ impl Character {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CharacterError> {
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::tokio_read(r).await?;
 
@@ -351,7 +351,7 @@ impl Character {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CharacterError> {
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::astd_read(r).await?;
 
@@ -488,50 +488,6 @@ impl Character {
         + 19 * 5 // equipment: CharacterGear[19]
         + 4 // first_bag_display_id: u32
         + 1 // first_bag_inventory_id: u8
-    }
-}
-
-#[derive(Debug)]
-pub enum CharacterError {
-    Io(std::io::Error),
-    String(std::string::FromUtf8Error),
-    Enum(crate::errors::EnumError),
-    CharacterGear(CharacterGearError),
-}
-
-impl std::error::Error for CharacterError {}
-impl std::fmt::Display for CharacterError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::String(i) => i.fmt(f),
-            Self::Enum(e) => e.fmt(f),
-            Self::CharacterGear(i) => i.fmt(f),
-        }
-    }
-}
-
-impl From<std::io::Error> for CharacterError {
-    fn from(e : std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for CharacterError {
-    fn from(e: crate::errors::EnumError) -> Self {
-        Self::Enum(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for CharacterError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
-    }
-}
-
-impl From<CharacterGearError> for CharacterError {
-    fn from(e: CharacterGearError) -> Self {
-        Self::CharacterGear(e)
     }
 }
 
