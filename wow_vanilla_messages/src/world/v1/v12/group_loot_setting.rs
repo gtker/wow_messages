@@ -45,7 +45,7 @@ impl std::fmt::Display for GroupLootSetting {
 }
 
 impl TryFrom<u8> for GroupLootSetting {
-    type Error = GroupLootSettingError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::FREE_FOR_ALL),
@@ -53,26 +53,8 @@ impl TryFrom<u8> for GroupLootSetting {
             2 => Ok(Self::MASTER_LOOT),
             3 => Ok(Self::GROUP_LOOT),
             4 => Ok(Self::NEED_BEFORE_GREED),
-            _ => Err(GroupLootSettingError::new(value))
+            v => Err(crate::errors::EnumError::new("GroupLootSetting", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GroupLootSettingError {
-    pub value: u8,
-}
-
-impl GroupLootSettingError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GroupLootSettingError {}
-impl std::fmt::Display for GroupLootSettingError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'GroupLootSetting': '{}'", self.value))
     }
 }
 

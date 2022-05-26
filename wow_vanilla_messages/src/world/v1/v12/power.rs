@@ -51,7 +51,7 @@ impl std::fmt::Display for Power {
 }
 
 impl TryFrom<u8> for Power {
-    type Error = PowerError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::MANA),
@@ -61,26 +61,8 @@ impl TryFrom<u8> for Power {
             4 => Ok(Self::HAPPINESS),
             5 => Ok(Self::MAX_POWERS),
             127 => Ok(Self::ALL),
-            _ => Err(PowerError::new(value))
+            v => Err(crate::errors::EnumError::new("Power", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PowerError {
-    pub value: u8,
-}
-
-impl PowerError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PowerError {}
-impl std::fmt::Display for PowerError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'Power': '{}'", self.value))
     }
 }
 

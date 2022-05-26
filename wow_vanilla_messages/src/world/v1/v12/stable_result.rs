@@ -45,7 +45,7 @@ impl std::fmt::Display for StableResult {
 }
 
 impl TryFrom<u8> for StableResult {
-    type Error = StableResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::ERR_MONEY),
@@ -53,26 +53,8 @@ impl TryFrom<u8> for StableResult {
             8 => Ok(Self::SUCCESS_STABLE),
             9 => Ok(Self::SUCCESS_UNSTABLE),
             10 => Ok(Self::SUCCESS_BUY_SLOT),
-            _ => Err(StableResultError::new(value))
+            v => Err(crate::errors::EnumError::new("StableResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct StableResultError {
-    pub value: u8,
-}
-
-impl StableResultError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for StableResultError {}
-impl std::fmt::Display for StableResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'StableResult': '{}'", self.value))
     }
 }
 

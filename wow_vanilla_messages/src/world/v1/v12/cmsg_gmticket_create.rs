@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{GmTicketType, GmTicketTypeError};
-use crate::world::v1::v12::{Map, MapError};
+use crate::world::v1::v12::GmTicketType;
+use crate::world::v1::v12::Map;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -412,8 +412,7 @@ impl CMSG_GMTICKET_CREATE {
 pub enum CMSG_GMTICKET_CREATEError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    GmTicketType(GmTicketTypeError),
-    Map(MapError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMSG_GMTICKET_CREATEError {}
@@ -422,8 +421,7 @@ impl std::fmt::Display for CMSG_GMTICKET_CREATEError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::GmTicketType(i) => i.fmt(f),
-            Self::Map(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -434,21 +432,15 @@ impl From<std::io::Error> for CMSG_GMTICKET_CREATEError {
     }
 }
 
+impl From<crate::errors::EnumError> for CMSG_GMTICKET_CREATEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<std::string::FromUtf8Error> for CMSG_GMTICKET_CREATEError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
-    }
-}
-
-impl From<GmTicketTypeError> for CMSG_GMTICKET_CREATEError {
-    fn from(e: GmTicketTypeError) -> Self {
-        Self::GmTicketType(e)
-    }
-}
-
-impl From<MapError> for CMSG_GMTICKET_CREATEError {
-    fn from(e: MapError) -> Self {
-        Self::Map(e)
     }
 }
 

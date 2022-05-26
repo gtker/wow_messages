@@ -276,7 +276,7 @@ impl std::fmt::Display for WorldResult {
 }
 
 impl TryFrom<u32> for WorldResult {
-    type Error = WorldResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::RESPONSE_SUCCESS),
@@ -361,26 +361,8 @@ impl TryFrom<u32> for WorldResult {
             79 => Ok(Self::CHAR_NAME_INVALID_SPACE),
             80 => Ok(Self::CHAR_NAME_SUCCESS),
             81 => Ok(Self::CHAR_NAME_FAILURE),
-            _ => Err(WorldResultError::new(value))
+            v => Err(crate::errors::EnumError::new("WorldResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct WorldResultError {
-    pub value: u32,
-}
-
-impl WorldResultError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for WorldResultError {}
-impl std::fmt::Display for WorldResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'WorldResult': '{}'", self.value))
     }
 }
 

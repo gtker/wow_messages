@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{InventoryType, InventoryTypeError};
+use crate::world::v1::v12::InventoryType;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -75,7 +75,7 @@ impl CharacterGear {
 #[derive(Debug)]
 pub enum CharacterGearError {
     Io(std::io::Error),
-    InventoryType(InventoryTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CharacterGearError {}
@@ -83,7 +83,7 @@ impl std::fmt::Display for CharacterGearError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::InventoryType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -94,9 +94,9 @@ impl From<std::io::Error> for CharacterGearError {
     }
 }
 
-impl From<InventoryTypeError> for CharacterGearError {
-    fn from(e: InventoryTypeError) -> Self {
-        Self::InventoryType(e)
+impl From<crate::errors::EnumError> for CharacterGearError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

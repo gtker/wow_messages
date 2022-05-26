@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{PetCommandState, PetCommandStateError};
-use crate::world::v1::v12::{PetReactState, PetReactStateError};
+use crate::world::v1::v12::PetCommandState;
+use crate::world::v1::v12::PetReactState;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -177,8 +177,7 @@ impl ServerMessage for SMSG_PET_MODE {
 #[derive(Debug)]
 pub enum SMSG_PET_MODEError {
     Io(std::io::Error),
-    PetCommandState(PetCommandStateError),
-    PetReactState(PetReactStateError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_PET_MODEError {}
@@ -186,8 +185,7 @@ impl std::fmt::Display for SMSG_PET_MODEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::PetCommandState(i) => i.fmt(f),
-            Self::PetReactState(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -198,15 +196,9 @@ impl From<std::io::Error> for SMSG_PET_MODEError {
     }
 }
 
-impl From<PetCommandStateError> for SMSG_PET_MODEError {
-    fn from(e: PetCommandStateError) -> Self {
-        Self::PetCommandState(e)
-    }
-}
-
-impl From<PetReactStateError> for SMSG_PET_MODEError {
-    fn from(e: PetReactStateError) -> Self {
-        Self::PetReactState(e)
+impl From<crate::errors::EnumError> for SMSG_PET_MODEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

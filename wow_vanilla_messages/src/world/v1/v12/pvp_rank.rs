@@ -90,7 +90,7 @@ impl std::fmt::Display for PvpRank {
 }
 
 impl TryFrom<u8> for PvpRank {
-    type Error = PvpRankError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NO_RANK),
@@ -113,26 +113,8 @@ impl TryFrom<u8> for PvpRank {
             17 => Ok(Self::RANK13),
             18 => Ok(Self::RANK14),
             19 => Ok(Self::FACTION_LEADER),
-            _ => Err(PvpRankError::new(value))
+            v => Err(crate::errors::EnumError::new("PvpRank", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PvpRankError {
-    pub value: u8,
-}
-
-impl PvpRankError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PvpRankError {}
-impl std::fmt::Display for PvpRankError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'PvpRank': '{}'", self.value))
     }
 }
 

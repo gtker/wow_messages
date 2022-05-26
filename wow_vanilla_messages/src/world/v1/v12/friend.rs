@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{Area, AreaError};
-use crate::world::v1::v12::{Class, ClassError};
-use crate::world::v1::v12::{FriendStatus, FriendStatusError};
+use crate::world::v1::v12::Area;
+use crate::world::v1::v12::Class;
+use crate::world::v1::v12::FriendStatus;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -352,9 +352,7 @@ impl Friend {
 #[derive(Debug)]
 pub enum FriendError {
     Io(std::io::Error),
-    Area(AreaError),
-    Class(ClassError),
-    FriendStatus(FriendStatusError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for FriendError {}
@@ -362,9 +360,7 @@ impl std::fmt::Display for FriendError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Area(i) => i.fmt(f),
-            Self::Class(i) => i.fmt(f),
-            Self::FriendStatus(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -375,21 +371,9 @@ impl From<std::io::Error> for FriendError {
     }
 }
 
-impl From<AreaError> for FriendError {
-    fn from(e: AreaError) -> Self {
-        Self::Area(e)
-    }
-}
-
-impl From<ClassError> for FriendError {
-    fn from(e: ClassError) -> Self {
-        Self::Class(e)
-    }
-}
-
-impl From<FriendStatusError> for FriendError {
-    fn from(e: FriendStatusError) -> Self {
-        Self::FriendStatus(e)
+impl From<crate::errors::EnumError> for FriendError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

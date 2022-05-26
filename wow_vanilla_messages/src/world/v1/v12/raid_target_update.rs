@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{RaidTargetIndex, RaidTargetIndexError};
+use crate::world::v1::v12::RaidTargetIndex;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -76,7 +76,7 @@ impl RaidTargetUpdate {
 #[derive(Debug)]
 pub enum RaidTargetUpdateError {
     Io(std::io::Error),
-    RaidTargetIndex(RaidTargetIndexError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for RaidTargetUpdateError {}
@@ -84,7 +84,7 @@ impl std::fmt::Display for RaidTargetUpdateError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::RaidTargetIndex(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -95,9 +95,9 @@ impl From<std::io::Error> for RaidTargetUpdateError {
     }
 }
 
-impl From<RaidTargetIndexError> for RaidTargetUpdateError {
-    fn from(e: RaidTargetIndexError) -> Self {
-        Self::RaidTargetIndex(e)
+impl From<crate::errors::EnumError> for RaidTargetUpdateError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

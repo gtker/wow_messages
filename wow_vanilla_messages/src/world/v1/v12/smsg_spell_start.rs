@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{CastFlags};
+use crate::world::v1::v12::CastFlags;
 use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;

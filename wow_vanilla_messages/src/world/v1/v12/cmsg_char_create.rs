@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Class, ClassError};
-use crate::world::v1::v12::{Gender, GenderError};
-use crate::world::v1::v12::{Race, RaceError};
+use crate::world::v1::v12::Class;
+use crate::world::v1::v12::Gender;
+use crate::world::v1::v12::Race;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -294,9 +294,7 @@ impl CMSG_CHAR_CREATE {
 pub enum CMSG_CHAR_CREATEError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    Class(ClassError),
-    Gender(GenderError),
-    Race(RaceError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMSG_CHAR_CREATEError {}
@@ -305,9 +303,7 @@ impl std::fmt::Display for CMSG_CHAR_CREATEError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::Class(i) => i.fmt(f),
-            Self::Gender(i) => i.fmt(f),
-            Self::Race(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -318,27 +314,15 @@ impl From<std::io::Error> for CMSG_CHAR_CREATEError {
     }
 }
 
+impl From<crate::errors::EnumError> for CMSG_CHAR_CREATEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<std::string::FromUtf8Error> for CMSG_CHAR_CREATEError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
-    }
-}
-
-impl From<ClassError> for CMSG_CHAR_CREATEError {
-    fn from(e: ClassError) -> Self {
-        Self::Class(e)
-    }
-}
-
-impl From<GenderError> for CMSG_CHAR_CREATEError {
-    fn from(e: GenderError) -> Self {
-        Self::Gender(e)
-    }
-}
-
-impl From<RaceError> for CMSG_CHAR_CREATEError {
-    fn from(e: RaceError) -> Self {
-        Self::Race(e)
     }
 }
 

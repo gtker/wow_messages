@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{DuelWinnerReason, DuelWinnerReasonError};
+use crate::world::v1::v12::DuelWinnerReason;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -159,7 +159,7 @@ impl SMSG_DUEL_WINNER {
 pub enum SMSG_DUEL_WINNERError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    DuelWinnerReason(DuelWinnerReasonError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_DUEL_WINNERError {}
@@ -168,7 +168,7 @@ impl std::fmt::Display for SMSG_DUEL_WINNERError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::DuelWinnerReason(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -179,15 +179,15 @@ impl From<std::io::Error> for SMSG_DUEL_WINNERError {
     }
 }
 
-impl From<std::string::FromUtf8Error> for SMSG_DUEL_WINNERError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
+impl From<crate::errors::EnumError> for SMSG_DUEL_WINNERError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 
-impl From<DuelWinnerReasonError> for SMSG_DUEL_WINNERError {
-    fn from(e: DuelWinnerReasonError) -> Self {
-        Self::DuelWinnerReason(e)
+impl From<std::string::FromUtf8Error> for SMSG_DUEL_WINNERError {
+    fn from(e: std::string::FromUtf8Error) -> Self {
+        Self::String(e)
     }
 }
 

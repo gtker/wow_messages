@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{QuestFailedReason, QuestFailedReasonError};
+use crate::world::v1::v12::QuestFailedReason;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_INVALID {
 #[derive(Debug)]
 pub enum SMSG_QUESTGIVER_QUEST_INVALIDError {
     Io(std::io::Error),
-    QuestFailedReason(QuestFailedReasonError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_QUESTGIVER_QUEST_INVALIDError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_QUESTGIVER_QUEST_INVALIDError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::QuestFailedReason(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_QUESTGIVER_QUEST_INVALIDError {
     }
 }
 
-impl From<QuestFailedReasonError> for SMSG_QUESTGIVER_QUEST_INVALIDError {
-    fn from(e: QuestFailedReasonError) -> Self {
-        Self::QuestFailedReason(e)
+impl From<crate::errors::EnumError> for SMSG_QUESTGIVER_QUEST_INVALIDError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Map, MapError};
+use crate::world::v1::v12::Map;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -91,7 +91,7 @@ impl RaidInfo {
 #[derive(Debug)]
 pub enum RaidInfoError {
     Io(std::io::Error),
-    Map(MapError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for RaidInfoError {}
@@ -99,7 +99,7 @@ impl std::fmt::Display for RaidInfoError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Map(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -110,9 +110,9 @@ impl From<std::io::Error> for RaidInfoError {
     }
 }
 
-impl From<MapError> for RaidInfoError {
-    fn from(e: MapError) -> Self {
-        Self::Map(e)
+impl From<crate::errors::EnumError> for RaidInfoError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

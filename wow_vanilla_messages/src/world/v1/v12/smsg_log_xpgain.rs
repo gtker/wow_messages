@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{ExperienceAwardType, ExperienceAwardTypeError};
+use crate::world::v1::v12::ExperienceAwardType;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -220,7 +220,7 @@ impl SMSG_LOG_XPGAIN {
 #[derive(Debug)]
 pub enum SMSG_LOG_XPGAINError {
     Io(std::io::Error),
-    ExperienceAwardType(ExperienceAwardTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_LOG_XPGAINError {}
@@ -228,7 +228,7 @@ impl std::fmt::Display for SMSG_LOG_XPGAINError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::ExperienceAwardType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -239,9 +239,9 @@ impl From<std::io::Error> for SMSG_LOG_XPGAINError {
     }
 }
 
-impl From<ExperienceAwardTypeError> for SMSG_LOG_XPGAINError {
-    fn from(e: ExperienceAwardTypeError) -> Self {
-        Self::ExperienceAwardType(e)
+impl From<crate::errors::EnumError> for SMSG_LOG_XPGAINError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

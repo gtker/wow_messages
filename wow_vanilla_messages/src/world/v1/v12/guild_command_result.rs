@@ -78,7 +78,7 @@ impl std::fmt::Display for GuildCommandResult {
 }
 
 impl TryFrom<u8> for GuildCommandResult {
-    type Error = GuildCommandResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::PLAYER_NO_MORE_IN_GUILD),
@@ -97,26 +97,8 @@ impl TryFrom<u8> for GuildCommandResult {
             12 => Ok(Self::GUILD_NOT_ALLIED),
             13 => Ok(Self::GUILD_RANK_TOO_HIGH_S),
             14 => Ok(Self::GUILD_RANK_TOO_LOW_S),
-            _ => Err(GuildCommandResultError::new(value))
+            v => Err(crate::errors::EnumError::new("GuildCommandResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GuildCommandResultError {
-    pub value: u8,
-}
-
-impl GuildCommandResultError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GuildCommandResultError {}
-impl std::fmt::Display for GuildCommandResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'GuildCommandResult': '{}'", self.value))
     }
 }
 

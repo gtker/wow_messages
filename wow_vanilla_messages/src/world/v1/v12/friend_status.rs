@@ -45,7 +45,7 @@ impl std::fmt::Display for FriendStatus {
 }
 
 impl TryFrom<u8> for FriendStatus {
-    type Error = FriendStatusError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::OFFLINE),
@@ -53,26 +53,8 @@ impl TryFrom<u8> for FriendStatus {
             2 => Ok(Self::AFK),
             3 => Ok(Self::UNKNOWN3),
             4 => Ok(Self::DND),
-            _ => Err(FriendStatusError::new(value))
+            v => Err(crate::errors::EnumError::new("FriendStatus", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct FriendStatusError {
-    pub value: u8,
-}
-
-impl FriendStatusError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for FriendStatusError {}
-impl std::fmt::Display for FriendStatusError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'FriendStatus': '{}'", self.value))
     }
 }
 

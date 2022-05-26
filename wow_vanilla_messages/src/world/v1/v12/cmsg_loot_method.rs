@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{GroupLootSetting, GroupLootSettingError};
-use crate::world::v1::v12::{ItemQuality, ItemQualityError};
+use crate::world::v1::v12::GroupLootSetting;
+use crate::world::v1::v12::ItemQuality;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -139,8 +139,7 @@ impl ClientMessage for CMSG_LOOT_METHOD {
 #[derive(Debug)]
 pub enum CMSG_LOOT_METHODError {
     Io(std::io::Error),
-    GroupLootSetting(GroupLootSettingError),
-    ItemQuality(ItemQualityError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMSG_LOOT_METHODError {}
@@ -148,8 +147,7 @@ impl std::fmt::Display for CMSG_LOOT_METHODError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::GroupLootSetting(i) => i.fmt(f),
-            Self::ItemQuality(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -160,15 +158,9 @@ impl From<std::io::Error> for CMSG_LOOT_METHODError {
     }
 }
 
-impl From<GroupLootSettingError> for CMSG_LOOT_METHODError {
-    fn from(e: GroupLootSettingError) -> Self {
-        Self::GroupLootSetting(e)
-    }
-}
-
-impl From<ItemQualityError> for CMSG_LOOT_METHODError {
-    fn from(e: ItemQualityError) -> Self {
-        Self::ItemQuality(e)
+impl From<crate::errors::EnumError> for CMSG_LOOT_METHODError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

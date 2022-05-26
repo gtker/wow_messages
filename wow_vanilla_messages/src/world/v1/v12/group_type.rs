@@ -36,31 +36,13 @@ impl std::fmt::Display for GroupType {
 }
 
 impl TryFrom<u8> for GroupType {
-    type Error = GroupTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NORMAL),
             1 => Ok(Self::RAID),
-            _ => Err(GroupTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("GroupType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GroupTypeError {
-    pub value: u8,
-}
-
-impl GroupTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GroupTypeError {}
-impl std::fmt::Display for GroupTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'GroupType': '{}'", self.value))
     }
 }
 

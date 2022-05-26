@@ -39,32 +39,14 @@ impl std::fmt::Display for BattlegroundWinner {
 }
 
 impl TryFrom<u8> for BattlegroundWinner {
-    type Error = BattlegroundWinnerError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::HORDE),
             1 => Ok(Self::ALLIANCE),
             2 => Ok(Self::NONE),
-            _ => Err(BattlegroundWinnerError::new(value))
+            v => Err(crate::errors::EnumError::new("BattlegroundWinner", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct BattlegroundWinnerError {
-    pub value: u8,
-}
-
-impl BattlegroundWinnerError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for BattlegroundWinnerError {}
-impl std::fmt::Display for BattlegroundWinnerError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'BattlegroundWinner': '{}'", self.value))
     }
 }
 

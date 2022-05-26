@@ -39,32 +39,14 @@ impl std::fmt::Display for GmTicketStatus {
 }
 
 impl TryFrom<u32> for GmTicketStatus {
-    type Error = GmTicketStatusError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::DBERROR),
             6 => Ok(Self::HASTEXT),
             10 => Ok(Self::DEFAULT),
-            _ => Err(GmTicketStatusError::new(value))
+            v => Err(crate::errors::EnumError::new("GmTicketStatus", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GmTicketStatusError {
-    pub value: u32,
-}
-
-impl GmTicketStatusError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GmTicketStatusError {}
-impl std::fmt::Display for GmTicketStatusError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'GmTicketStatus': '{}'", self.value))
     }
 }
 

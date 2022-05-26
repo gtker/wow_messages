@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `unknown5` for `CMD_AUTH_LOGON_CHALLENGE_Server` is no longer constantly set to 1. For data that is not 100% known it is better for the emulators themselves to experiment and constantly set values.
 * BREAKING: `read_expect_*_login_message`s have been renamed to `expect_*_message` for brevity.
 `Login` has been removed from the names of types in `helper` as well.
+* BREAKING: Added a single `EnumError` type instead of a separate type for every single enum.
 
 ### Deprecated
 

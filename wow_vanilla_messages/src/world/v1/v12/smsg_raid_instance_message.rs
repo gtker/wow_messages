@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Map, MapError};
-use crate::world::v1::v12::{RaidInstanceMessage, RaidInstanceMessageError};
+use crate::world::v1::v12::Map;
+use crate::world::v1::v12::RaidInstanceMessage;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -138,8 +138,7 @@ impl ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {
 #[derive(Debug)]
 pub enum SMSG_RAID_INSTANCE_MESSAGEError {
     Io(std::io::Error),
-    Map(MapError),
-    RaidInstanceMessage(RaidInstanceMessageError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_RAID_INSTANCE_MESSAGEError {}
@@ -147,8 +146,7 @@ impl std::fmt::Display for SMSG_RAID_INSTANCE_MESSAGEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Map(i) => i.fmt(f),
-            Self::RaidInstanceMessage(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -159,15 +157,9 @@ impl From<std::io::Error> for SMSG_RAID_INSTANCE_MESSAGEError {
     }
 }
 
-impl From<MapError> for SMSG_RAID_INSTANCE_MESSAGEError {
-    fn from(e: MapError) -> Self {
-        Self::Map(e)
-    }
-}
-
-impl From<RaidInstanceMessageError> for SMSG_RAID_INSTANCE_MESSAGEError {
-    fn from(e: RaidInstanceMessageError) -> Self {
-        Self::RaidInstanceMessage(e)
+impl From<crate::errors::EnumError> for SMSG_RAID_INSTANCE_MESSAGEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

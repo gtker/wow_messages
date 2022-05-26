@@ -36,31 +36,13 @@ impl std::fmt::Display for BattlefieldPortAction {
 }
 
 impl TryFrom<u8> for BattlefieldPortAction {
-    type Error = BattlefieldPortActionError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::LEAVE_QUEUE),
             1 => Ok(Self::ENTER_BATTLE),
-            _ => Err(BattlefieldPortActionError::new(value))
+            v => Err(crate::errors::EnumError::new("BattlefieldPortAction", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct BattlefieldPortActionError {
-    pub value: u8,
-}
-
-impl BattlefieldPortActionError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for BattlefieldPortActionError {}
-impl std::fmt::Display for BattlefieldPortActionError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'BattlefieldPortAction': '{}'", self.value))
     }
 }
 

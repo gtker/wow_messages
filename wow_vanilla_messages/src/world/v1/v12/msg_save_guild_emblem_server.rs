@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{GuildEmblemResult, GuildEmblemResultError};
+use crate::world::v1::v12::GuildEmblemResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {
 #[derive(Debug)]
 pub enum MSG_SAVE_GUILD_EMBLEM_ServerError {
     Io(std::io::Error),
-    GuildEmblemResult(GuildEmblemResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for MSG_SAVE_GUILD_EMBLEM_ServerError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for MSG_SAVE_GUILD_EMBLEM_ServerError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::GuildEmblemResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for MSG_SAVE_GUILD_EMBLEM_ServerError {
     }
 }
 
-impl From<GuildEmblemResultError> for MSG_SAVE_GUILD_EMBLEM_ServerError {
-    fn from(e: GuildEmblemResultError) -> Self {
-        Self::GuildEmblemResult(e)
+impl From<crate::errors::EnumError> for MSG_SAVE_GUILD_EMBLEM_ServerError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

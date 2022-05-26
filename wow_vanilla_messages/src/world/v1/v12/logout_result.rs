@@ -42,33 +42,15 @@ impl std::fmt::Display for LogoutResult {
 }
 
 impl TryFrom<u32> for LogoutResult {
-    type Error = LogoutResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::SUCCESS),
             1 => Ok(Self::FAILURE_IN_COMBAT),
             2 => Ok(Self::FAILURE_FROZEN_BY_GM),
             3 => Ok(Self::FAILURE_JUMPING_OR_FALLING),
-            _ => Err(LogoutResultError::new(value))
+            v => Err(crate::errors::EnumError::new("LogoutResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct LogoutResultError {
-    pub value: u32,
-}
-
-impl LogoutResultError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for LogoutResultError {}
-impl std::fmt::Display for LogoutResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'LogoutResult': '{}'", self.value))
     }
 }
 

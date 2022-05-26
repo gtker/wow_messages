@@ -75,7 +75,7 @@ impl std::fmt::Display for Language {
 }
 
 impl TryFrom<u32> for Language {
-    type Error = LanguageError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::UNIVERSAL),
@@ -93,26 +93,8 @@ impl TryFrom<u32> for Language {
             14 => Ok(Self::TROLL),
             33 => Ok(Self::GUTTERSPEAK),
             4294967295 => Ok(Self::ADDON),
-            _ => Err(LanguageError::new(value))
+            v => Err(crate::errors::EnumError::new("Language", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct LanguageError {
-    pub value: u32,
-}
-
-impl LanguageError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for LanguageError {}
-impl std::fmt::Display for LanguageError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'Language': '{}'", self.value))
     }
 }
 

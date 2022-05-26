@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{LogFormat, LogFormatError};
+use crate::world::v1::v12::LogFormat;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -157,7 +157,7 @@ impl ServerMessage for SMSG_PROCRESIST {
 #[derive(Debug)]
 pub enum SMSG_PROCRESISTError {
     Io(std::io::Error),
-    LogFormat(LogFormatError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_PROCRESISTError {}
@@ -165,7 +165,7 @@ impl std::fmt::Display for SMSG_PROCRESISTError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::LogFormat(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -176,9 +176,9 @@ impl From<std::io::Error> for SMSG_PROCRESISTError {
     }
 }
 
-impl From<LogFormatError> for SMSG_PROCRESISTError {
-    fn from(e: LogFormatError) -> Self {
-        Self::LogFormat(e)
+impl From<crate::errors::EnumError> for SMSG_PROCRESISTError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

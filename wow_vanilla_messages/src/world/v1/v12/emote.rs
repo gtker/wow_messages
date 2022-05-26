@@ -381,7 +381,7 @@ impl std::fmt::Display for Emote {
 }
 
 impl TryFrom<u32> for Emote {
-    type Error = EmoteError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::ONESHOT_NONE),
@@ -501,26 +501,8 @@ impl TryFrom<u32> for Emote {
             415 => Ok(Self::STATE_SIT_CHAIR_MED),
             422 => Ok(Self::STATE_SPELLEFFECT_HOLD),
             423 => Ok(Self::STATE_EAT_NO_SHEATHE),
-            _ => Err(EmoteError::new(value))
+            v => Err(crate::errors::EnumError::new("Emote", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct EmoteError {
-    pub value: u32,
-}
-
-impl EmoteError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for EmoteError {}
-impl std::fmt::Display for EmoteError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'Emote': '{}'", self.value))
     }
 }
 

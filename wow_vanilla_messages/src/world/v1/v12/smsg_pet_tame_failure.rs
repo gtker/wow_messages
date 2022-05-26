@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{PetTameFailureReason, PetTameFailureReasonError};
+use crate::world::v1::v12::PetTameFailureReason;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_PET_TAME_FAILURE {
 #[derive(Debug)]
 pub enum SMSG_PET_TAME_FAILUREError {
     Io(std::io::Error),
-    PetTameFailureReason(PetTameFailureReasonError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_PET_TAME_FAILUREError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_PET_TAME_FAILUREError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::PetTameFailureReason(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_PET_TAME_FAILUREError {
     }
 }
 
-impl From<PetTameFailureReasonError> for SMSG_PET_TAME_FAILUREError {
-    fn from(e: PetTameFailureReasonError) -> Self {
-        Self::PetTameFailureReason(e)
+impl From<crate::errors::EnumError> for SMSG_PET_TAME_FAILUREError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

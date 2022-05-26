@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Area, AreaError};
-use crate::world::v1::v12::{MeetingStoneStatus, MeetingStoneStatusError};
+use crate::world::v1::v12::Area;
+use crate::world::v1::v12::MeetingStoneStatus;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,8 +119,7 @@ impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {
 #[derive(Debug)]
 pub enum SMSG_MEETINGSTONE_SETQUEUEError {
     Io(std::io::Error),
-    Area(AreaError),
-    MeetingStoneStatus(MeetingStoneStatusError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_MEETINGSTONE_SETQUEUEError {}
@@ -128,8 +127,7 @@ impl std::fmt::Display for SMSG_MEETINGSTONE_SETQUEUEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Area(i) => i.fmt(f),
-            Self::MeetingStoneStatus(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -140,15 +138,9 @@ impl From<std::io::Error> for SMSG_MEETINGSTONE_SETQUEUEError {
     }
 }
 
-impl From<AreaError> for SMSG_MEETINGSTONE_SETQUEUEError {
-    fn from(e: AreaError) -> Self {
-        Self::Area(e)
-    }
-}
-
-impl From<MeetingStoneStatusError> for SMSG_MEETINGSTONE_SETQUEUEError {
-    fn from(e: MeetingStoneStatusError) -> Self {
-        Self::MeetingStoneStatus(e)
+impl From<crate::errors::EnumError> for SMSG_MEETINGSTONE_SETQUEUEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

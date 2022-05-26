@@ -81,7 +81,7 @@ impl std::fmt::Display for LoginResult {
 }
 
 impl TryFrom<u8> for LoginResult {
-    type Error = LoginResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::SUCCESS),
@@ -101,26 +101,8 @@ impl TryFrom<u8> for LoginResult {
             14 => Ok(Self::SUCCESS_SURVEY),
             15 => Ok(Self::FAIL_PARENTALCONTROL),
             16 => Ok(Self::FAIL_LOCKED_ENFORCED),
-            _ => Err(LoginResultError::new(value))
+            v => Err(crate::errors::EnumError::new("LoginResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct LoginResultError {
-    pub value: u8,
-}
-
-impl LoginResultError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for LoginResultError {}
-impl std::fmt::Display for LoginResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'LoginResult': '{}'", self.value))
     }
 }
 

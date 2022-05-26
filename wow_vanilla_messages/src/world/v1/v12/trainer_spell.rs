@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{TrainerSpellState, TrainerSpellStateError};
+use crate::world::v1::v12::TrainerSpellState;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -219,7 +219,7 @@ impl TrainerSpell {
 #[derive(Debug)]
 pub enum TrainerSpellError {
     Io(std::io::Error),
-    TrainerSpellState(TrainerSpellStateError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for TrainerSpellError {}
@@ -227,7 +227,7 @@ impl std::fmt::Display for TrainerSpellError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::TrainerSpellState(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -238,9 +238,9 @@ impl From<std::io::Error> for TrainerSpellError {
     }
 }
 
-impl From<TrainerSpellStateError> for TrainerSpellError {
-    fn from(e: TrainerSpellStateError) -> Self {
-        Self::TrainerSpellState(e)
+impl From<crate::errors::EnumError> for TrainerSpellError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

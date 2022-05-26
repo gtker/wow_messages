@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Map, MapError};
+use crate::world::v1::v12::Map;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_INSTANCE_RESET {
 #[derive(Debug)]
 pub enum SMSG_INSTANCE_RESETError {
     Io(std::io::Error),
-    Map(MapError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_INSTANCE_RESETError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_INSTANCE_RESETError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Map(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_INSTANCE_RESETError {
     }
 }
 
-impl From<MapError> for SMSG_INSTANCE_RESETError {
-    fn from(e: MapError) -> Self {
-        Self::Map(e)
+impl From<crate::errors::EnumError> for SMSG_INSTANCE_RESETError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

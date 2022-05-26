@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{SpellSchool, SpellSchoolError};
+use crate::world::v1::v12::SpellSchool;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -157,7 +157,7 @@ impl ServerMessage for SMSG_SPELLDAMAGESHIELD {
 #[derive(Debug)]
 pub enum SMSG_SPELLDAMAGESHIELDError {
     Io(std::io::Error),
-    SpellSchool(SpellSchoolError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_SPELLDAMAGESHIELDError {}
@@ -165,7 +165,7 @@ impl std::fmt::Display for SMSG_SPELLDAMAGESHIELDError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::SpellSchool(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -176,9 +176,9 @@ impl From<std::io::Error> for SMSG_SPELLDAMAGESHIELDError {
     }
 }
 
-impl From<SpellSchoolError> for SMSG_SPELLDAMAGESHIELDError {
-    fn from(e: SpellSchoolError) -> Self {
-        Self::SpellSchool(e)
+impl From<crate::errors::EnumError> for SMSG_SPELLDAMAGESHIELDError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

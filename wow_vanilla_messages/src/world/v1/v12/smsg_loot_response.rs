@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{LootMethod, LootMethodError};
+use crate::world::v1::v12::LootMethod;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,7 +119,7 @@ impl ServerMessage for SMSG_LOOT_RESPONSE {
 #[derive(Debug)]
 pub enum SMSG_LOOT_RESPONSEError {
     Io(std::io::Error),
-    LootMethod(LootMethodError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_LOOT_RESPONSEError {}
@@ -127,7 +127,7 @@ impl std::fmt::Display for SMSG_LOOT_RESPONSEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::LootMethod(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -138,9 +138,9 @@ impl From<std::io::Error> for SMSG_LOOT_RESPONSEError {
     }
 }
 
-impl From<LootMethodError> for SMSG_LOOT_RESPONSEError {
-    fn from(e: LootMethodError) -> Self {
-        Self::LootMethod(e)
+impl From<crate::errors::EnumError> for SMSG_LOOT_RESPONSEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

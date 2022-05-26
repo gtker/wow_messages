@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Class, ClassError};
-use crate::world::v1::v12::{Race, RaceError};
+use crate::world::v1::v12::Class;
+use crate::world::v1::v12::Race;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -178,8 +178,7 @@ impl WhoPlayer {
 pub enum WhoPlayerError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    Class(ClassError),
-    Race(RaceError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for WhoPlayerError {}
@@ -188,8 +187,7 @@ impl std::fmt::Display for WhoPlayerError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::Class(i) => i.fmt(f),
-            Self::Race(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -200,21 +198,15 @@ impl From<std::io::Error> for WhoPlayerError {
     }
 }
 
+impl From<crate::errors::EnumError> for WhoPlayerError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<std::string::FromUtf8Error> for WhoPlayerError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
-    }
-}
-
-impl From<ClassError> for WhoPlayerError {
-    fn from(e: ClassError) -> Self {
-        Self::Class(e)
-    }
-}
-
-impl From<RaceError> for WhoPlayerError {
-    fn from(e: RaceError) -> Self {
-        Self::Race(e)
     }
 }
 

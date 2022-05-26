@@ -72,7 +72,7 @@ impl std::fmt::Display for GuildEvent {
 }
 
 impl TryFrom<u8> for GuildEvent {
-    type Error = GuildEventError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::PROMOTION),
@@ -89,26 +89,8 @@ impl TryFrom<u8> for GuildEvent {
             11 => Ok(Self::ROSTER_UPDATE),
             12 => Ok(Self::SIGNED_ON),
             13 => Ok(Self::SIGNED_OFF),
-            _ => Err(GuildEventError::new(value))
+            v => Err(crate::errors::EnumError::new("GuildEvent", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GuildEventError {
-    pub value: u8,
-}
-
-impl GuildEventError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GuildEventError {}
-impl std::fmt::Display for GuildEventError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'GuildEvent': '{}'", self.value))
     }
 }
 

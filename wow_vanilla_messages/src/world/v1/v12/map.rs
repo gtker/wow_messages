@@ -162,7 +162,7 @@ impl std::fmt::Display for Map {
 }
 
 impl TryFrom<u32> for Map {
-    type Error = MapError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::EASTERN_KINGDOMS),
@@ -209,26 +209,8 @@ impl TryFrom<u32> for Map {
             529 => Ok(Self::ARATHI_BASIN),
             531 => Ok(Self::AHN_QIRAJ_TEMPLE),
             533 => Ok(Self::NAXXRAMAS),
-            _ => Err(MapError::new(value))
+            v => Err(crate::errors::EnumError::new("Map", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct MapError {
-    pub value: u32,
-}
-
-impl MapError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for MapError {}
-impl std::fmt::Display for MapError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'Map': '{}'", self.value))
     }
 }
 

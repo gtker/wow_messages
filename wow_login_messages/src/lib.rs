@@ -104,6 +104,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+pub mod errors;
 pub mod helper;
 pub(crate) mod logon;
 pub(crate) mod util;

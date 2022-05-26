@@ -468,7 +468,7 @@ impl std::fmt::Display for CastFailureReason {
 }
 
 impl TryFrom<u8> for CastFailureReason {
-    type Error = CastFailureReasonError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::AFFECTING_COMBAT),
@@ -617,26 +617,8 @@ impl TryFrom<u8> for CastFailureReason {
             143 => Ok(Self::REPUTATION),
             144 => Ok(Self::MIN_SKILL),
             145 => Ok(Self::UNKNOWN),
-            _ => Err(CastFailureReasonError::new(value))
+            v => Err(crate::errors::EnumError::new("CastFailureReason", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct CastFailureReasonError {
-    pub value: u8,
-}
-
-impl CastFailureReasonError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for CastFailureReasonError {}
-impl std::fmt::Display for CastFailureReasonError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'CastFailureReason': '{}'", self.value))
     }
 }
 

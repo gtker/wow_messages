@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{StableResult, StableResultError};
+use crate::world::v1::v12::StableResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_STABLE_RESULT {
 #[derive(Debug)]
 pub enum SMSG_STABLE_RESULTError {
     Io(std::io::Error),
-    StableResult(StableResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_STABLE_RESULTError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_STABLE_RESULTError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::StableResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_STABLE_RESULTError {
     }
 }
 
-impl From<StableResultError> for SMSG_STABLE_RESULTError {
-    fn from(e: StableResultError) -> Self {
-        Self::StableResult(e)
+impl From<crate::errors::EnumError> for SMSG_STABLE_RESULTError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

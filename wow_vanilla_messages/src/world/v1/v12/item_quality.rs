@@ -51,7 +51,7 @@ impl std::fmt::Display for ItemQuality {
 }
 
 impl TryFrom<u8> for ItemQuality {
-    type Error = ItemQualityError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::POOR),
@@ -61,26 +61,8 @@ impl TryFrom<u8> for ItemQuality {
             4 => Ok(Self::EPIC),
             5 => Ok(Self::LEGENDARY),
             6 => Ok(Self::ARTIFACT),
-            _ => Err(ItemQualityError::new(value))
+            v => Err(crate::errors::EnumError::new("ItemQuality", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct ItemQualityError {
-    pub value: u8,
-}
-
-impl ItemQualityError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for ItemQualityError {}
-impl std::fmt::Display for ItemQualityError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'ItemQuality': '{}'", self.value))
     }
 }
 

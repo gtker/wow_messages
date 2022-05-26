@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{InventoryResult, InventoryResultError};
-use crate::world::v1::v12::{TradeStatus, TradeStatusError};
+use crate::world::v1::v12::InventoryResult;
+use crate::world::v1::v12::TradeStatus;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -413,8 +413,7 @@ impl SMSG_TRADE_STATUS {
 #[derive(Debug)]
 pub enum SMSG_TRADE_STATUSError {
     Io(std::io::Error),
-    InventoryResult(InventoryResultError),
-    TradeStatus(TradeStatusError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_TRADE_STATUSError {}
@@ -422,8 +421,7 @@ impl std::fmt::Display for SMSG_TRADE_STATUSError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::InventoryResult(i) => i.fmt(f),
-            Self::TradeStatus(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -434,15 +432,9 @@ impl From<std::io::Error> for SMSG_TRADE_STATUSError {
     }
 }
 
-impl From<InventoryResultError> for SMSG_TRADE_STATUSError {
-    fn from(e: InventoryResultError) -> Self {
-        Self::InventoryResult(e)
-    }
-}
-
-impl From<TradeStatusError> for SMSG_TRADE_STATUSError {
-    fn from(e: TradeStatusError) -> Self {
-        Self::TradeStatus(e)
+impl From<crate::errors::EnumError> for SMSG_TRADE_STATUSError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

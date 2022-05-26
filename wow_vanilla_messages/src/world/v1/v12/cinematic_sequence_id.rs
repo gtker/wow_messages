@@ -57,7 +57,7 @@ impl std::fmt::Display for CinematicSequenceId {
 }
 
 impl TryFrom<u32> for CinematicSequenceId {
-    type Error = CinematicSequenceIdError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             81 => Ok(Self::HUMAN),
@@ -69,26 +69,8 @@ impl TryFrom<u32> for CinematicSequenceId {
             101 => Ok(Self::GNOME),
             121 => Ok(Self::TROLL),
             0 => Ok(Self::GOBLIN),
-            _ => Err(CinematicSequenceIdError::new(value))
+            v => Err(crate::errors::EnumError::new("CinematicSequenceId", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct CinematicSequenceIdError {
-    pub value: u32,
-}
-
-impl CinematicSequenceIdError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for CinematicSequenceIdError {}
-impl std::fmt::Display for CinematicSequenceIdError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'CinematicSequenceId': '{}'", self.value))
     }
 }
 

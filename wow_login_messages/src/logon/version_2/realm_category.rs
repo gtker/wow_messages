@@ -45,7 +45,7 @@ impl std::fmt::Display for RealmCategory {
 }
 
 impl TryFrom<u8> for RealmCategory {
-    type Error = RealmCategoryError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::DEFAULT),
@@ -53,26 +53,8 @@ impl TryFrom<u8> for RealmCategory {
             2 => Ok(Self::TWO),
             3 => Ok(Self::THREE),
             5 => Ok(Self::FIVE),
-            _ => Err(RealmCategoryError::new(value))
+            v => Err(crate::errors::EnumError::new("RealmCategory", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct RealmCategoryError {
-    pub value: u8,
-}
-
-impl RealmCategoryError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for RealmCategoryError {}
-impl std::fmt::Display for RealmCategoryError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'RealmCategory': '{}'", self.value))
     }
 }
 

@@ -48,7 +48,7 @@ impl std::fmt::Display for SellItemResult {
 }
 
 impl TryFrom<u8> for SellItemResult {
-    type Error = SellItemResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::CANT_FIND_ITEM),
@@ -57,26 +57,8 @@ impl TryFrom<u8> for SellItemResult {
             4 => Ok(Self::YOU_DONT_OWN_THAT_ITEM),
             5 => Ok(Self::UNK),
             6 => Ok(Self::ONLY_EMPTY_BAG),
-            _ => Err(SellItemResultError::new(value))
+            v => Err(crate::errors::EnumError::new("SellItemResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct SellItemResultError {
-    pub value: u8,
-}
-
-impl SellItemResultError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for SellItemResultError {}
-impl std::fmt::Display for SellItemResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'SellItemResult': '{}'", self.value))
     }
 }
 

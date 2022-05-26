@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{PvpRank, PvpRankError};
+use crate::world::v1::v12::PvpRank;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -385,7 +385,7 @@ impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {
 #[derive(Debug)]
 pub enum MSG_INSPECT_HONOR_STATS_ServerError {
     Io(std::io::Error),
-    PvpRank(PvpRankError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for MSG_INSPECT_HONOR_STATS_ServerError {}
@@ -393,7 +393,7 @@ impl std::fmt::Display for MSG_INSPECT_HONOR_STATS_ServerError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::PvpRank(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -404,9 +404,9 @@ impl From<std::io::Error> for MSG_INSPECT_HONOR_STATS_ServerError {
     }
 }
 
-impl From<PvpRankError> for MSG_INSPECT_HONOR_STATS_ServerError {
-    fn from(e: PvpRankError) -> Self {
-        Self::PvpRank(e)
+impl From<crate::errors::EnumError> for MSG_INSPECT_HONOR_STATS_ServerError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

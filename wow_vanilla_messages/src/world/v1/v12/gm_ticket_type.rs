@@ -60,7 +60,7 @@ impl std::fmt::Display for GmTicketType {
 }
 
 impl TryFrom<u8> for GmTicketType {
-    type Error = GmTicketTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::STUCK),
@@ -73,26 +73,8 @@ impl TryFrom<u8> for GmTicketType {
             8 => Ok(Self::TECHNICAL),
             9 => Ok(Self::ACCOUNT_BILLING),
             10 => Ok(Self::CHARACTER),
-            _ => Err(GmTicketTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("GmTicketType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GmTicketTypeError {
-    pub value: u8,
-}
-
-impl GmTicketTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GmTicketTypeError {}
-impl std::fmt::Display for GmTicketTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'GmTicketType': '{}'", self.value))
     }
 }
 

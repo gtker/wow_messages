@@ -51,7 +51,7 @@ impl std::fmt::Display for GmTicketResponse {
 }
 
 impl TryFrom<u32> for GmTicketResponse {
-    type Error = GmTicketResponseError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NOT_EXIST),
@@ -61,26 +61,8 @@ impl TryFrom<u32> for GmTicketResponse {
             4 => Ok(Self::UPDATE_SUCCESS),
             5 => Ok(Self::UPDATE_ERROR),
             9 => Ok(Self::TICKET_DELETED),
-            _ => Err(GmTicketResponseError::new(value))
+            v => Err(crate::errors::EnumError::new("GmTicketResponse", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GmTicketResponseError {
-    pub value: u32,
-}
-
-impl GmTicketResponseError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GmTicketResponseError {}
-impl std::fmt::Display for GmTicketResponseError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'GmTicketResponse': '{}'", self.value))
     }
 }
 

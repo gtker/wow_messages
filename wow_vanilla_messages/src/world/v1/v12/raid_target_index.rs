@@ -60,7 +60,7 @@ impl std::fmt::Display for RaidTargetIndex {
 }
 
 impl TryFrom<u8> for RaidTargetIndex {
-    type Error = RaidTargetIndexError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::UNKNOWN0),
@@ -73,26 +73,8 @@ impl TryFrom<u8> for RaidTargetIndex {
             7 => Ok(Self::UNKNOWN7),
             8 => Ok(Self::UNKNOWN8),
             255 => Ok(Self::REQUEST_ICONS),
-            _ => Err(RaidTargetIndexError::new(value))
+            v => Err(crate::errors::EnumError::new("RaidTargetIndex", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct RaidTargetIndexError {
-    pub value: u8,
-}
-
-impl RaidTargetIndexError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for RaidTargetIndexError {}
-impl std::fmt::Display for RaidTargetIndexError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'RaidTargetIndex': '{}'", self.value))
     }
 }
 

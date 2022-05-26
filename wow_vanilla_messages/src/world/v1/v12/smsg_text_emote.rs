@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{Emote, EmoteError};
+use crate::world::v1::v12::Emote;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -193,7 +193,7 @@ impl SMSG_TEXT_EMOTE {
 pub enum SMSG_TEXT_EMOTEError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    Emote(EmoteError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_TEXT_EMOTEError {}
@@ -202,7 +202,7 @@ impl std::fmt::Display for SMSG_TEXT_EMOTEError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::Emote(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -213,15 +213,15 @@ impl From<std::io::Error> for SMSG_TEXT_EMOTEError {
     }
 }
 
-impl From<std::string::FromUtf8Error> for SMSG_TEXT_EMOTEError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
+impl From<crate::errors::EnumError> for SMSG_TEXT_EMOTEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 
-impl From<EmoteError> for SMSG_TEXT_EMOTEError {
-    fn from(e: EmoteError) -> Self {
-        Self::Emote(e)
+impl From<std::string::FromUtf8Error> for SMSG_TEXT_EMOTEError {
+    fn from(e: std::string::FromUtf8Error) -> Self {
+        Self::String(e)
     }
 }
 

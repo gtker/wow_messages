@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{MeetingStoneFailure, MeetingStoneFailureError};
+use crate::world::v1::v12::MeetingStoneFailure;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_MEETINGSTONE_JOINFAILED {
 #[derive(Debug)]
 pub enum SMSG_MEETINGSTONE_JOINFAILEDError {
     Io(std::io::Error),
-    MeetingStoneFailure(MeetingStoneFailureError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_MEETINGSTONE_JOINFAILEDError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_MEETINGSTONE_JOINFAILEDError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::MeetingStoneFailure(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_MEETINGSTONE_JOINFAILEDError {
     }
 }
 
-impl From<MeetingStoneFailureError> for SMSG_MEETINGSTONE_JOINFAILEDError {
-    fn from(e: MeetingStoneFailureError) -> Self {
-        Self::MeetingStoneFailure(e)
+impl From<crate::errors::EnumError> for SMSG_MEETINGSTONE_JOINFAILEDError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

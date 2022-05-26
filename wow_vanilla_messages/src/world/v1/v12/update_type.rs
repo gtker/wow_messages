@@ -48,7 +48,7 @@ impl std::fmt::Display for UpdateType {
 }
 
 impl TryFrom<u8> for UpdateType {
-    type Error = UpdateTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::VALUES),
@@ -57,26 +57,8 @@ impl TryFrom<u8> for UpdateType {
             3 => Ok(Self::CREATE_OBJECT2),
             4 => Ok(Self::OUT_OF_RANGE_OBJECTS),
             5 => Ok(Self::NEAR_OBJECTS),
-            _ => Err(UpdateTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("UpdateType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct UpdateTypeError {
-    pub value: u8,
-}
-
-impl UpdateTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for UpdateTypeError {}
-impl std::fmt::Display for UpdateTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'UpdateType': '{}'", self.value))
     }
 }
 

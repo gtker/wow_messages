@@ -36,31 +36,13 @@ impl std::fmt::Display for ExperienceAwardType {
 }
 
 impl TryFrom<u8> for ExperienceAwardType {
-    type Error = ExperienceAwardTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::KILL),
             1 => Ok(Self::NON_KILL),
-            _ => Err(ExperienceAwardTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("ExperienceAwardType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct ExperienceAwardTypeError {
-    pub value: u8,
-}
-
-impl ExperienceAwardTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for ExperienceAwardTypeError {}
-impl std::fmt::Display for ExperienceAwardTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'ExperienceAwardType': '{}'", self.value))
     }
 }
 

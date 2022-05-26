@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{SpellCastResult, SpellCastResultError};
+use crate::world::v1::v12::SpellCastResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -137,7 +137,7 @@ impl ServerMessage for SMSG_PET_CAST_FAILED {
 #[derive(Debug)]
 pub enum SMSG_PET_CAST_FAILEDError {
     Io(std::io::Error),
-    SpellCastResult(SpellCastResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_PET_CAST_FAILEDError {}
@@ -145,7 +145,7 @@ impl std::fmt::Display for SMSG_PET_CAST_FAILEDError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::SpellCastResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -156,9 +156,9 @@ impl From<std::io::Error> for SMSG_PET_CAST_FAILEDError {
     }
 }
 
-impl From<SpellCastResultError> for SMSG_PET_CAST_FAILEDError {
-    fn from(e: SpellCastResultError) -> Self {
-        Self::SpellCastResult(e)
+impl From<crate::errors::EnumError> for SMSG_PET_CAST_FAILEDError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

@@ -60,7 +60,7 @@ impl std::fmt::Display for QuestFailedReason {
 }
 
 impl TryFrom<u32> for QuestFailedReason {
-    type Error = QuestFailedReasonError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::DONT_HAVE_REQ),
@@ -73,26 +73,8 @@ impl TryFrom<u32> for QuestFailedReason {
             17 => Ok(Self::QUEST_FAILED_DUPLICATE_ITEM),
             20 => Ok(Self::QUEST_FAILED_MISSING_ITEMS),
             22 => Ok(Self::QUEST_FAILED_NOT_ENOUGH_MONEY),
-            _ => Err(QuestFailedReasonError::new(value))
+            v => Err(crate::errors::EnumError::new("QuestFailedReason", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct QuestFailedReasonError {
-    pub value: u32,
-}
-
-impl QuestFailedReasonError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for QuestFailedReasonError {}
-impl std::fmt::Display for QuestFailedReasonError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'QuestFailedReason': '{}'", self.value))
     }
 }
 

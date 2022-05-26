@@ -36,31 +36,13 @@ impl std::fmt::Display for NewItemCreationType {
 }
 
 impl TryFrom<u32> for NewItemCreationType {
-    type Error = NewItemCreationTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::RECEIVED),
             1 => Ok(Self::CREATED),
-            _ => Err(NewItemCreationTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("NewItemCreationType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct NewItemCreationTypeError {
-    pub value: u32,
-}
-
-impl NewItemCreationTypeError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for NewItemCreationTypeError {}
-impl std::fmt::Display for NewItemCreationTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'NewItemCreationType': '{}'", self.value))
     }
 }
 

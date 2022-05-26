@@ -39,32 +39,14 @@ impl std::fmt::Display for SheathState {
 }
 
 impl TryFrom<u8> for SheathState {
-    type Error = SheathStateError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::UNARMED),
             1 => Ok(Self::MELEE),
             2 => Ok(Self::RANGED),
-            _ => Err(SheathStateError::new(value))
+            v => Err(crate::errors::EnumError::new("SheathState", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct SheathStateError {
-    pub value: u8,
-}
-
-impl SheathStateError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for SheathStateError {}
-impl std::fmt::Display for SheathStateError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'SheathState': '{}'", self.value))
     }
 }
 

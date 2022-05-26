@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Area, AreaError};
-use crate::world::v1::v12::{CastFailureReason, CastFailureReasonError};
-use crate::world::v1::v12::{SimpleSpellCastResult, SimpleSpellCastResultError};
+use crate::world::v1::v12::Area;
+use crate::world::v1::v12::CastFailureReason;
+use crate::world::v1::v12::SimpleSpellCastResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -1068,9 +1068,7 @@ impl SMSG_CAST_RESULT {
 #[derive(Debug)]
 pub enum SMSG_CAST_RESULTError {
     Io(std::io::Error),
-    Area(AreaError),
-    CastFailureReason(CastFailureReasonError),
-    SimpleSpellCastResult(SimpleSpellCastResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_CAST_RESULTError {}
@@ -1078,9 +1076,7 @@ impl std::fmt::Display for SMSG_CAST_RESULTError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Area(i) => i.fmt(f),
-            Self::CastFailureReason(i) => i.fmt(f),
-            Self::SimpleSpellCastResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -1091,21 +1087,9 @@ impl From<std::io::Error> for SMSG_CAST_RESULTError {
     }
 }
 
-impl From<AreaError> for SMSG_CAST_RESULTError {
-    fn from(e: AreaError) -> Self {
-        Self::Area(e)
-    }
-}
-
-impl From<CastFailureReasonError> for SMSG_CAST_RESULTError {
-    fn from(e: CastFailureReasonError) -> Self {
-        Self::CastFailureReason(e)
-    }
-}
-
-impl From<SimpleSpellCastResultError> for SMSG_CAST_RESULTError {
-    fn from(e: SimpleSpellCastResultError) -> Self {
-        Self::SimpleSpellCastResult(e)
+impl From<crate::errors::EnumError> for SMSG_CAST_RESULTError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

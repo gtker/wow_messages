@@ -39,32 +39,14 @@ impl std::fmt::Display for TrainerSpellState {
 }
 
 impl TryFrom<u8> for TrainerSpellState {
-    type Error = TrainerSpellStateError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::GREEN),
             1 => Ok(Self::RED),
             2 => Ok(Self::GRAY),
-            _ => Err(TrainerSpellStateError::new(value))
+            v => Err(crate::errors::EnumError::new("TrainerSpellState", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct TrainerSpellStateError {
-    pub value: u8,
-}
-
-impl TrainerSpellStateError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for TrainerSpellStateError {}
-impl std::fmt::Display for TrainerSpellStateError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'TrainerSpellState': '{}'", self.value))
     }
 }
 

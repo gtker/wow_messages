@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{BuybackSlot, BuybackSlotError};
+use crate::world::v1::v12::BuybackSlot;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,7 +119,7 @@ impl ClientMessage for CMSG_BUYBACK_ITEM {
 #[derive(Debug)]
 pub enum CMSG_BUYBACK_ITEMError {
     Io(std::io::Error),
-    BuybackSlot(BuybackSlotError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMSG_BUYBACK_ITEMError {}
@@ -127,7 +127,7 @@ impl std::fmt::Display for CMSG_BUYBACK_ITEMError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::BuybackSlot(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -138,9 +138,9 @@ impl From<std::io::Error> for CMSG_BUYBACK_ITEMError {
     }
 }
 
-impl From<BuybackSlotError> for CMSG_BUYBACK_ITEMError {
-    fn from(e: BuybackSlotError) -> Self {
-        Self::BuybackSlot(e)
+impl From<crate::errors::EnumError> for CMSG_BUYBACK_ITEMError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

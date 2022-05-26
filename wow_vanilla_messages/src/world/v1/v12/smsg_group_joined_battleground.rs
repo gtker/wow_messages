@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{BgTypeId, BgTypeIdError};
+use crate::world::v1::v12::BgTypeId;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_GROUP_JOINED_BATTLEGROUND {
 #[derive(Debug)]
 pub enum SMSG_GROUP_JOINED_BATTLEGROUNDError {
     Io(std::io::Error),
-    BgTypeId(BgTypeIdError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_GROUP_JOINED_BATTLEGROUNDError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_GROUP_JOINED_BATTLEGROUNDError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::BgTypeId(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_GROUP_JOINED_BATTLEGROUNDError {
     }
 }
 
-impl From<BgTypeIdError> for SMSG_GROUP_JOINED_BATTLEGROUNDError {
-    fn from(e: BgTypeIdError) -> Self {
-        Self::BgTypeId(e)
+impl From<crate::errors::EnumError> for SMSG_GROUP_JOINED_BATTLEGROUNDError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

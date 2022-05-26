@@ -48,7 +48,7 @@ impl std::fmt::Display for GuildEmblemResult {
 }
 
 impl TryFrom<u32> for GuildEmblemResult {
-    type Error = GuildEmblemResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::SUCCESS),
@@ -57,26 +57,8 @@ impl TryFrom<u32> for GuildEmblemResult {
             3 => Ok(Self::NOT_GUILD_MASTER),
             4 => Ok(Self::NOT_ENOUGH_MONEY),
             5 => Ok(Self::NO_MESSAGE),
-            _ => Err(GuildEmblemResultError::new(value))
+            v => Err(crate::errors::EnumError::new("GuildEmblemResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GuildEmblemResultError {
-    pub value: u32,
-}
-
-impl GuildEmblemResultError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GuildEmblemResultError {}
-impl std::fmt::Display for GuildEmblemResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'GuildEmblemResult': '{}'", self.value))
     }
 }
 

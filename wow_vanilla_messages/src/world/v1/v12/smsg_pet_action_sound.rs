@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{PetTalkReason, PetTalkReasonError};
+use crate::world::v1::v12::PetTalkReason;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,7 +119,7 @@ impl ServerMessage for SMSG_PET_ACTION_SOUND {
 #[derive(Debug)]
 pub enum SMSG_PET_ACTION_SOUNDError {
     Io(std::io::Error),
-    PetTalkReason(PetTalkReasonError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_PET_ACTION_SOUNDError {}
@@ -127,7 +127,7 @@ impl std::fmt::Display for SMSG_PET_ACTION_SOUNDError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::PetTalkReason(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -138,9 +138,9 @@ impl From<std::io::Error> for SMSG_PET_ACTION_SOUNDError {
     }
 }
 
-impl From<PetTalkReasonError> for SMSG_PET_ACTION_SOUNDError {
-    fn from(e: PetTalkReasonError) -> Self {
-        Self::PetTalkReason(e)
+impl From<crate::errors::EnumError> for SMSG_PET_ACTION_SOUNDError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

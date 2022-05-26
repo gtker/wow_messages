@@ -69,7 +69,7 @@ impl std::fmt::Display for BuybackSlot {
 }
 
 impl TryFrom<u32> for BuybackSlot {
-    type Error = BuybackSlotError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             69 => Ok(Self::SLOT1),
@@ -85,26 +85,8 @@ impl TryFrom<u32> for BuybackSlot {
             79 => Ok(Self::SLOT11),
             80 => Ok(Self::SLOT12),
             81 => Ok(Self::SLOT13),
-            _ => Err(BuybackSlotError::new(value))
+            v => Err(crate::errors::EnumError::new("BuybackSlot", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct BuybackSlotError {
-    pub value: u32,
-}
-
-impl BuybackSlotError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for BuybackSlotError {}
-impl std::fmt::Display for BuybackSlotError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'BuybackSlot': '{}'", self.value))
     }
 }
 

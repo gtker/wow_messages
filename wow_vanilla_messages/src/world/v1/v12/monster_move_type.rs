@@ -45,7 +45,7 @@ impl std::fmt::Display for MonsterMoveType {
 }
 
 impl TryFrom<u8> for MonsterMoveType {
-    type Error = MonsterMoveTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NORMAL),
@@ -53,26 +53,8 @@ impl TryFrom<u8> for MonsterMoveType {
             2 => Ok(Self::FACING_SPOT),
             3 => Ok(Self::FACING_TARGET),
             4 => Ok(Self::FACING_ANGLE),
-            _ => Err(MonsterMoveTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("MonsterMoveType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct MonsterMoveTypeError {
-    pub value: u8,
-}
-
-impl MonsterMoveTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for MonsterMoveTypeError {}
-impl std::fmt::Display for MonsterMoveTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'MonsterMoveType': '{}'", self.value))
     }
 }
 

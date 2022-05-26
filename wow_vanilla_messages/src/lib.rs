@@ -9,6 +9,7 @@ use std::io::{Error, Read, Write};
 
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
+mod errors;
 pub mod helper;
 mod traits;
 pub(crate) mod util;

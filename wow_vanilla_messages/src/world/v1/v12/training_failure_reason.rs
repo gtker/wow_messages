@@ -39,32 +39,14 @@ impl std::fmt::Display for TrainingFailureReason {
 }
 
 impl TryFrom<u32> for TrainingFailureReason {
-    type Error = TrainingFailureReasonError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::UNAVAILABLE),
             1 => Ok(Self::NOT_ENOUGH_MONEY),
             2 => Ok(Self::NOT_ENOUGH_SKILL),
-            _ => Err(TrainingFailureReasonError::new(value))
+            v => Err(crate::errors::EnumError::new("TrainingFailureReason", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct TrainingFailureReasonError {
-    pub value: u32,
-}
-
-impl TrainingFailureReasonError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for TrainingFailureReasonError {}
-impl std::fmt::Display for TrainingFailureReasonError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'TrainingFailureReason': '{}'", self.value))
     }
 }
 

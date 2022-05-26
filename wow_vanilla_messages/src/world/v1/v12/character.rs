@@ -1,12 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{Area, AreaError};
-use crate::world::v1::v12::{CharacterFlags};
+use crate::world::v1::v12::Area;
+use crate::world::v1::v12::CharacterFlags;
 use crate::world::v1::v12::{CharacterGear, CharacterGearError};
-use crate::world::v1::v12::{Class, ClassError};
-use crate::world::v1::v12::{Gender, GenderError};
-use crate::world::v1::v12::{Map, MapError};
-use crate::world::v1::v12::{Race, RaceError};
+use crate::world::v1::v12::Class;
+use crate::world::v1::v12::Gender;
+use crate::world::v1::v12::Map;
+use crate::world::v1::v12::Race;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -495,12 +495,8 @@ impl Character {
 pub enum CharacterError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    Area(AreaError),
+    Enum(crate::errors::EnumError),
     CharacterGear(CharacterGearError),
-    Class(ClassError),
-    Gender(GenderError),
-    Map(MapError),
-    Race(RaceError),
 }
 
 impl std::error::Error for CharacterError {}
@@ -509,12 +505,8 @@ impl std::fmt::Display for CharacterError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::Area(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
             Self::CharacterGear(i) => i.fmt(f),
-            Self::Class(i) => i.fmt(f),
-            Self::Gender(i) => i.fmt(f),
-            Self::Map(i) => i.fmt(f),
-            Self::Race(i) => i.fmt(f),
         }
     }
 }
@@ -525,45 +517,21 @@ impl From<std::io::Error> for CharacterError {
     }
 }
 
+impl From<crate::errors::EnumError> for CharacterError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<std::string::FromUtf8Error> for CharacterError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
     }
 }
 
-impl From<AreaError> for CharacterError {
-    fn from(e: AreaError) -> Self {
-        Self::Area(e)
-    }
-}
-
 impl From<CharacterGearError> for CharacterError {
     fn from(e: CharacterGearError) -> Self {
         Self::CharacterGear(e)
-    }
-}
-
-impl From<ClassError> for CharacterError {
-    fn from(e: ClassError) -> Self {
-        Self::Class(e)
-    }
-}
-
-impl From<GenderError> for CharacterError {
-    fn from(e: GenderError) -> Self {
-        Self::Gender(e)
-    }
-}
-
-impl From<MapError> for CharacterError {
-    fn from(e: MapError) -> Self {
-        Self::Map(e)
-    }
-}
-
-impl From<RaceError> for CharacterError {
-    fn from(e: RaceError) -> Self {
-        Self::Race(e)
     }
 }
 

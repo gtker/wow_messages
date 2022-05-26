@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{GmTicketStatusResponse, GmTicketStatusResponseError};
+use crate::world::v1::v12::GmTicketStatusResponse;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_GM_TICKET_STATUS_UPDATE {
 #[derive(Debug)]
 pub enum SMSG_GM_TICKET_STATUS_UPDATEError {
     Io(std::io::Error),
-    GmTicketStatusResponse(GmTicketStatusResponseError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_GM_TICKET_STATUS_UPDATEError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_GM_TICKET_STATUS_UPDATEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::GmTicketStatusResponse(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_GM_TICKET_STATUS_UPDATEError {
     }
 }
 
-impl From<GmTicketStatusResponseError> for SMSG_GM_TICKET_STATUS_UPDATEError {
-    fn from(e: GmTicketStatusResponseError) -> Self {
-        Self::GmTicketStatusResponse(e)
+impl From<crate::errors::EnumError> for SMSG_GM_TICKET_STATUS_UPDATEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

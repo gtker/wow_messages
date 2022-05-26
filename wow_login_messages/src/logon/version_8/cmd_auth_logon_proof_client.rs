@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::logon::version_8::{SecurityFlag};
+use crate::logon::version_8::SecurityFlag;
 use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
 #[cfg(feature = "tokio")]

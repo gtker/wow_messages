@@ -54,7 +54,7 @@ impl std::fmt::Display for ObjectType {
 }
 
 impl TryFrom<u8> for ObjectType {
-    type Error = ObjectTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::OBJECT),
@@ -65,26 +65,8 @@ impl TryFrom<u8> for ObjectType {
             5 => Ok(Self::GAME_OBJECT),
             6 => Ok(Self::DYNAMIC_OBJECT),
             7 => Ok(Self::CORPSE),
-            _ => Err(ObjectTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("ObjectType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct ObjectTypeError {
-    pub value: u8,
-}
-
-impl ObjectTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for ObjectTypeError {}
-impl std::fmt::Display for ObjectTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'ObjectType': '{}'", self.value))
     }
 }
 

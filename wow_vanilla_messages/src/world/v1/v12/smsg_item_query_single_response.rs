@@ -1,12 +1,12 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Area, AreaError};
-use crate::world::v1::v12::{InventoryType, InventoryTypeError};
-use crate::world::v1::v12::{ItemClass, ItemClassError};
+use crate::world::v1::v12::Area;
+use crate::world::v1::v12::InventoryType;
+use crate::world::v1::v12::ItemClass;
 use crate::world::v1::v12::ItemDamageType;
-use crate::world::v1::v12::{ItemQuality, ItemQualityError};
+use crate::world::v1::v12::ItemQuality;
 use crate::world::v1::v12::ItemSpells;
 use crate::world::v1::v12::ItemStat;
-use crate::world::v1::v12::{Map, MapError};
+use crate::world::v1::v12::Map;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -1284,11 +1284,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 pub enum SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    Area(AreaError),
-    InventoryType(InventoryTypeError),
-    ItemClass(ItemClassError),
-    ItemQuality(ItemQualityError),
-    Map(MapError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {}
@@ -1297,11 +1293,7 @@ impl std::fmt::Display for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::Area(i) => i.fmt(f),
-            Self::InventoryType(i) => i.fmt(f),
-            Self::ItemClass(i) => i.fmt(f),
-            Self::ItemQuality(i) => i.fmt(f),
-            Self::Map(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -1312,39 +1304,15 @@ impl From<std::io::Error> for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
     }
 }
 
+impl From<crate::errors::EnumError> for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<std::string::FromUtf8Error> for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
-    }
-}
-
-impl From<AreaError> for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
-    fn from(e: AreaError) -> Self {
-        Self::Area(e)
-    }
-}
-
-impl From<InventoryTypeError> for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
-    fn from(e: InventoryTypeError) -> Self {
-        Self::InventoryType(e)
-    }
-}
-
-impl From<ItemClassError> for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
-    fn from(e: ItemClassError) -> Self {
-        Self::ItemClass(e)
-    }
-}
-
-impl From<ItemQualityError> for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
-    fn from(e: ItemQualityError) -> Self {
-        Self::ItemQuality(e)
-    }
-}
-
-impl From<MapError> for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
-    fn from(e: MapError) -> Self {
-        Self::Map(e)
     }
 }
 

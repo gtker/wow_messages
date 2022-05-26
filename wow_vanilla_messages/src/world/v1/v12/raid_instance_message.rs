@@ -42,33 +42,15 @@ impl std::fmt::Display for RaidInstanceMessage {
 }
 
 impl TryFrom<u32> for RaidInstanceMessage {
-    type Error = RaidInstanceMessageError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::WARNING_HOURS),
             2 => Ok(Self::WARNING_MIN),
             3 => Ok(Self::WARNING_MIN_SOON),
             4 => Ok(Self::WELCOME),
-            _ => Err(RaidInstanceMessageError::new(value))
+            v => Err(crate::errors::EnumError::new("RaidInstanceMessage", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct RaidInstanceMessageError {
-    pub value: u32,
-}
-
-impl RaidInstanceMessageError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for RaidInstanceMessageError {}
-impl std::fmt::Display for RaidInstanceMessageError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'RaidInstanceMessage': '{}'", self.value))
     }
 }
 

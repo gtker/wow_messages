@@ -45,7 +45,7 @@ impl std::fmt::Display for MailType {
 }
 
 impl TryFrom<u8> for MailType {
-    type Error = MailTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NORMAL),
@@ -53,26 +53,8 @@ impl TryFrom<u8> for MailType {
             3 => Ok(Self::CREATURE),
             4 => Ok(Self::GAMEOBJECT),
             5 => Ok(Self::ITEM),
-            _ => Err(MailTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("MailType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct MailTypeError {
-    pub value: u8,
-}
-
-impl MailTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for MailTypeError {}
-impl std::fmt::Display for MailTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'MailType': '{}'", self.value))
     }
 }
 

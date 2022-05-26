@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{NewItemChatAlert, NewItemChatAlertError};
-use crate::world::v1::v12::{NewItemCreationType, NewItemCreationTypeError};
-use crate::world::v1::v12::{NewItemSource, NewItemSourceError};
+use crate::world::v1::v12::NewItemChatAlert;
+use crate::world::v1::v12::NewItemCreationType;
+use crate::world::v1::v12::NewItemSource;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -273,9 +273,7 @@ impl ServerMessage for SMSG_ITEM_PUSH_RESULT {
 #[derive(Debug)]
 pub enum SMSG_ITEM_PUSH_RESULTError {
     Io(std::io::Error),
-    NewItemChatAlert(NewItemChatAlertError),
-    NewItemCreationType(NewItemCreationTypeError),
-    NewItemSource(NewItemSourceError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_ITEM_PUSH_RESULTError {}
@@ -283,9 +281,7 @@ impl std::fmt::Display for SMSG_ITEM_PUSH_RESULTError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::NewItemChatAlert(i) => i.fmt(f),
-            Self::NewItemCreationType(i) => i.fmt(f),
-            Self::NewItemSource(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -296,21 +292,9 @@ impl From<std::io::Error> for SMSG_ITEM_PUSH_RESULTError {
     }
 }
 
-impl From<NewItemChatAlertError> for SMSG_ITEM_PUSH_RESULTError {
-    fn from(e: NewItemChatAlertError) -> Self {
-        Self::NewItemChatAlert(e)
-    }
-}
-
-impl From<NewItemCreationTypeError> for SMSG_ITEM_PUSH_RESULTError {
-    fn from(e: NewItemCreationTypeError) -> Self {
-        Self::NewItemCreationType(e)
-    }
-}
-
-impl From<NewItemSourceError> for SMSG_ITEM_PUSH_RESULTError {
-    fn from(e: NewItemSourceError) -> Self {
-        Self::NewItemSource(e)
+impl From<crate::errors::EnumError> for SMSG_ITEM_PUSH_RESULTError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

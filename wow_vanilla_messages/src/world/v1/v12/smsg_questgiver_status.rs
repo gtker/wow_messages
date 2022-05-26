@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{QuestGiverStatus, QuestGiverStatusError};
+use crate::world::v1::v12::QuestGiverStatus;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,7 +119,7 @@ impl ServerMessage for SMSG_QUESTGIVER_STATUS {
 #[derive(Debug)]
 pub enum SMSG_QUESTGIVER_STATUSError {
     Io(std::io::Error),
-    QuestGiverStatus(QuestGiverStatusError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_QUESTGIVER_STATUSError {}
@@ -127,7 +127,7 @@ impl std::fmt::Display for SMSG_QUESTGIVER_STATUSError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::QuestGiverStatus(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -138,9 +138,9 @@ impl From<std::io::Error> for SMSG_QUESTGIVER_STATUSError {
     }
 }
 
-impl From<QuestGiverStatusError> for SMSG_QUESTGIVER_STATUSError {
-    fn from(e: QuestGiverStatusError) -> Self {
-        Self::QuestGiverStatus(e)
+impl From<crate::errors::EnumError> for SMSG_QUESTGIVER_STATUSError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

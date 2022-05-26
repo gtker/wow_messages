@@ -45,7 +45,7 @@ impl std::fmt::Display for BgTypeId {
 }
 
 impl TryFrom<u32> for BgTypeId {
-    type Error = BgTypeIdError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NOT_ELIGIBLE),
@@ -53,26 +53,8 @@ impl TryFrom<u32> for BgTypeId {
             2 => Ok(Self::QUEUED_FOR_WSG),
             3 => Ok(Self::QUEUED_FOR_AB),
             4294967294 => Ok(Self::REMOVE_FROM_QUEUE),
-            _ => Err(BgTypeIdError::new(value))
+            v => Err(crate::errors::EnumError::new("BgTypeId", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct BgTypeIdError {
-    pub value: u32,
-}
-
-impl BgTypeIdError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for BgTypeIdError {}
-impl std::fmt::Display for BgTypeIdError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'BgTypeId': '{}'", self.value))
     }
 }
 

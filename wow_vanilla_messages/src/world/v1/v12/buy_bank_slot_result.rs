@@ -42,33 +42,15 @@ impl std::fmt::Display for BuyBankSlotResult {
 }
 
 impl TryFrom<u32> for BuyBankSlotResult {
-    type Error = BuyBankSlotResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::FAILED_TOO_MANY),
             1 => Ok(Self::INSUFFICIENT_FUNDS),
             2 => Ok(Self::NOTBANKER),
             3 => Ok(Self::OK),
-            _ => Err(BuyBankSlotResultError::new(value))
+            v => Err(crate::errors::EnumError::new("BuyBankSlotResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct BuyBankSlotResultError {
-    pub value: u32,
-}
-
-impl BuyBankSlotResultError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for BuyBankSlotResultError {}
-impl std::fmt::Display for BuyBankSlotResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'BuyBankSlotResult': '{}'", self.value))
     }
 }
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{CorpseQueryResult, CorpseQueryResultError};
-use crate::world::v1::v12::{Map, MapError};
+use crate::world::v1::v12::CorpseQueryResult;
+use crate::world::v1::v12::Map;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -234,8 +234,7 @@ impl MSG_CORPSE_QUERY_Server {
 #[derive(Debug)]
 pub enum MSG_CORPSE_QUERY_ServerError {
     Io(std::io::Error),
-    CorpseQueryResult(CorpseQueryResultError),
-    Map(MapError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for MSG_CORPSE_QUERY_ServerError {}
@@ -243,8 +242,7 @@ impl std::fmt::Display for MSG_CORPSE_QUERY_ServerError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::CorpseQueryResult(i) => i.fmt(f),
-            Self::Map(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -255,15 +253,9 @@ impl From<std::io::Error> for MSG_CORPSE_QUERY_ServerError {
     }
 }
 
-impl From<CorpseQueryResultError> for MSG_CORPSE_QUERY_ServerError {
-    fn from(e: CorpseQueryResultError) -> Self {
-        Self::CorpseQueryResult(e)
-    }
-}
-
-impl From<MapError> for MSG_CORPSE_QUERY_ServerError {
-    fn from(e: MapError) -> Self {
-        Self::Map(e)
+impl From<crate::errors::EnumError> for MSG_CORPSE_QUERY_ServerError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

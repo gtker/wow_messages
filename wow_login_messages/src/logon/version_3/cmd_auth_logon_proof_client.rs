@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::logon::version_3::{SecurityFlag, SecurityFlagError};
+use crate::logon::version_3::SecurityFlag;
 use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
 #[cfg(feature = "tokio")]
@@ -319,7 +319,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 #[derive(Debug)]
 pub enum CMD_AUTH_LOGON_PROOF_ClientError {
     Io(std::io::Error),
-    SecurityFlag(SecurityFlagError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMD_AUTH_LOGON_PROOF_ClientError {}
@@ -327,7 +327,7 @@ impl std::fmt::Display for CMD_AUTH_LOGON_PROOF_ClientError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::SecurityFlag(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -338,9 +338,9 @@ impl From<std::io::Error> for CMD_AUTH_LOGON_PROOF_ClientError {
     }
 }
 
-impl From<SecurityFlagError> for CMD_AUTH_LOGON_PROOF_ClientError {
-    fn from(e: SecurityFlagError) -> Self {
-        Self::SecurityFlag(e)
+impl From<crate::errors::EnumError> for CMD_AUTH_LOGON_PROOF_ClientError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

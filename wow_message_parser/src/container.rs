@@ -261,7 +261,7 @@ impl Container {
             return false;
         }
 
-        for t in &self.get_types_needing_errors() {
+        for t in &self.get_types_needing_import() {
             match o.get_object_type_of(t, self.tags()) {
                 ObjectType::Flag => {}
                 ObjectType::Struct => {
@@ -702,10 +702,20 @@ impl Container {
         false
     }
 
-    pub fn get_types_needing_errors(&self) -> Vec<&str> {
+    pub fn get_types_needing_errors(&self, o: &Objects, tags: &Tags) -> Vec<&str> {
         self.get_types_needing_import()
+            .into_iter()
+            .filter(|t| {
+                !o.object_has_only_io_errors(t, tags)
+                    && !matches!(
+                        o.get_object_type_of(t, tags),
+                        ObjectType::Flag | ObjectType::Enum
+                    )
+            })
+            .collect()
     }
 
+    // TODO Use all_definitions
     fn look_for_strings(&self, m: &StructMember) -> bool {
         match m {
             StructMember::Definition(d) => match d.ty() {
@@ -741,6 +751,63 @@ impl Container {
             match self.look_for_strings(m) {
                 true => return true,
                 false => {}
+            }
+        }
+
+        false
+    }
+
+    fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
+        fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
+            match m {
+                StructMember::Definition(d) => v.push(d),
+                StructMember::IfStatement(statement) => {
+                    for m in statement.all_members() {
+                        inner(m, v);
+                    }
+                }
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        inner(m, v);
+                    }
+                }
+            }
+        }
+
+        let mut v = Vec::new();
+
+        for m in self.fields() {
+            inner(m, &mut v);
+        }
+
+        v
+    }
+
+    pub fn needs_enum_error(&self, o: &Objects, tags: &Tags) -> bool {
+        for d in self.all_definitions() {
+            match d.ty() {
+                Type::Identifier { s, .. } => match o.get_object_type_of(s, tags) {
+                    ObjectType::Enum => match o.get_definer(s, tags).self_value().is_none() {
+                        true => return true,
+                        false => {}
+                    },
+                    _ => {}
+                },
+                _ => {}
+            }
+        }
+
+        false
+    }
+
+    pub fn contains_enum(&self, o: &Objects, tags: &Tags) -> bool {
+        for d in self.all_definitions() {
+            match d.ty() {
+                Type::Identifier { s, .. } => match o.get_object_type_of(s, tags) {
+                    ObjectType::Enum => return true,
+                    _ => {}
+                },
+                _ => {}
             }
         }
 

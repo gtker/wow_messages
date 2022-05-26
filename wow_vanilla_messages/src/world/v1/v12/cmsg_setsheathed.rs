@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{SheathState, SheathStateError};
+use crate::world::v1::v12::SheathState;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ClientMessage for CMSG_SETSHEATHED {
 #[derive(Debug)]
 pub enum CMSG_SETSHEATHEDError {
     Io(std::io::Error),
-    SheathState(SheathStateError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMSG_SETSHEATHEDError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for CMSG_SETSHEATHEDError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::SheathState(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for CMSG_SETSHEATHEDError {
     }
 }
 
-impl From<SheathStateError> for CMSG_SETSHEATHEDError {
-    fn from(e: SheathStateError) -> Self {
-        Self::SheathState(e)
+impl From<crate::errors::EnumError> for CMSG_SETSHEATHEDError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

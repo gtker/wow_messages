@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{WeatherChangeType, WeatherChangeTypeError};
-use crate::world::v1::v12::{WeatherType, WeatherTypeError};
+use crate::world::v1::v12::WeatherChangeType;
+use crate::world::v1::v12::WeatherType;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -154,8 +154,7 @@ impl ServerMessage for SMSG_WEATHER {
 #[derive(Debug)]
 pub enum SMSG_WEATHERError {
     Io(std::io::Error),
-    WeatherChangeType(WeatherChangeTypeError),
-    WeatherType(WeatherTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_WEATHERError {}
@@ -163,8 +162,7 @@ impl std::fmt::Display for SMSG_WEATHERError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::WeatherChangeType(i) => i.fmt(f),
-            Self::WeatherType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -175,15 +173,9 @@ impl From<std::io::Error> for SMSG_WEATHERError {
     }
 }
 
-impl From<WeatherChangeTypeError> for SMSG_WEATHERError {
-    fn from(e: WeatherChangeTypeError) -> Self {
-        Self::WeatherChangeType(e)
-    }
-}
-
-impl From<WeatherTypeError> for SMSG_WEATHERError {
-    fn from(e: WeatherTypeError) -> Self {
-        Self::WeatherType(e)
+impl From<crate::errors::EnumError> for SMSG_WEATHERError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

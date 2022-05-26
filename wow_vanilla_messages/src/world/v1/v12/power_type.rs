@@ -48,7 +48,7 @@ impl std::fmt::Display for PowerType {
 }
 
 impl TryFrom<u32> for PowerType {
-    type Error = PowerTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::MANA),
@@ -57,26 +57,8 @@ impl TryFrom<u32> for PowerType {
             3 => Ok(Self::ENERGY),
             4 => Ok(Self::HAPPINESS),
             4294967294 => Ok(Self::HEALTH),
-            _ => Err(PowerTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("PowerType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PowerTypeError {
-    pub value: u32,
-}
-
-impl PowerTypeError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PowerTypeError {}
-impl std::fmt::Display for PowerTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'PowerType': '{}'", self.value))
     }
 }
 

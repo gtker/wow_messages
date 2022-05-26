@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{TEnum, TEnumError};
+use crate::world::v1::v12::TEnum;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -318,7 +318,7 @@ impl IfEdgeCases {
 #[derive(Debug)]
 pub enum IfEdgeCasesError {
     Io(std::io::Error),
-    TEnum(TEnumError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for IfEdgeCasesError {}
@@ -326,7 +326,7 @@ impl std::fmt::Display for IfEdgeCasesError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::TEnum(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -337,9 +337,9 @@ impl From<std::io::Error> for IfEdgeCasesError {
     }
 }
 
-impl From<TEnumError> for IfEdgeCasesError {
-    fn from(e: TEnumError) -> Self {
-        Self::TEnum(e)
+impl From<crate::errors::EnumError> for IfEdgeCasesError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

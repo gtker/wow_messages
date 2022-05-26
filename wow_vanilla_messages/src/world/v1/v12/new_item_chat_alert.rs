@@ -36,31 +36,13 @@ impl std::fmt::Display for NewItemChatAlert {
 }
 
 impl TryFrom<u32> for NewItemChatAlert {
-    type Error = NewItemChatAlertError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::DO_NOT_SHOW),
             1 => Ok(Self::SHOW),
-            _ => Err(NewItemChatAlertError::new(value))
+            v => Err(crate::errors::EnumError::new("NewItemChatAlert", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct NewItemChatAlertError {
-    pub value: u32,
-}
-
-impl NewItemChatAlertError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for NewItemChatAlertError {}
-impl std::fmt::Display for NewItemChatAlertError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'NewItemChatAlert': '{}'", self.value))
     }
 }
 

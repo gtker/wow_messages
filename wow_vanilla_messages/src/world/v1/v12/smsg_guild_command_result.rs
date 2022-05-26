@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{GuildCommand, GuildCommandError};
-use crate::world::v1::v12::{GuildCommandResult, GuildCommandResultError};
+use crate::world::v1::v12::GuildCommand;
+use crate::world::v1::v12::GuildCommandResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -153,8 +153,7 @@ impl SMSG_GUILD_COMMAND_RESULT {
 pub enum SMSG_GUILD_COMMAND_RESULTError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    GuildCommand(GuildCommandError),
-    GuildCommandResult(GuildCommandResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_GUILD_COMMAND_RESULTError {}
@@ -163,8 +162,7 @@ impl std::fmt::Display for SMSG_GUILD_COMMAND_RESULTError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::GuildCommand(i) => i.fmt(f),
-            Self::GuildCommandResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -175,21 +173,15 @@ impl From<std::io::Error> for SMSG_GUILD_COMMAND_RESULTError {
     }
 }
 
+impl From<crate::errors::EnumError> for SMSG_GUILD_COMMAND_RESULTError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<std::string::FromUtf8Error> for SMSG_GUILD_COMMAND_RESULTError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
-    }
-}
-
-impl From<GuildCommandError> for SMSG_GUILD_COMMAND_RESULTError {
-    fn from(e: GuildCommandError) -> Self {
-        Self::GuildCommand(e)
-    }
-}
-
-impl From<GuildCommandResultError> for SMSG_GUILD_COMMAND_RESULTError {
-    fn from(e: GuildCommandResultError) -> Self {
-        Self::GuildCommandResult(e)
     }
 }
 

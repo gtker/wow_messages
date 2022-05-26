@@ -68,11 +68,11 @@ impl Objects {
         }
     }
 
-    pub fn get_object_type_of(&self, variable_name: &str, finder_tags: &Tags) -> ObjectType {
+    pub fn get_object_type_of(&self, type_name: &str, finder_tags: &Tags) -> ObjectType {
         if self
             .enums
             .iter()
-            .any(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
+            .any(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
         {
             return ObjectType::Enum;
         }
@@ -80,7 +80,7 @@ impl Objects {
         if self
             .flags
             .iter()
-            .any(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
+            .any(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
         {
             return ObjectType::Flag;
         }
@@ -88,14 +88,14 @@ impl Objects {
         if self
             .structs
             .iter()
-            .any(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
+            .any(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
         {
             return ObjectType::Struct;
         }
 
         panic!(
             "unable to find variable name: '{}' with tags: '{:#?}'",
-            variable_name, finder_tags
+            type_name, finder_tags
         );
     }
 

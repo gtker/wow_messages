@@ -2,8 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::UpdateMask;
 use crate::world::v1::v12::MovementBlock;
-use crate::world::v1::v12::{ObjectType, ObjectTypeError};
-use crate::world::v1::v12::{UpdateType, UpdateTypeError};
+use crate::world::v1::v12::ObjectType;
+use crate::world::v1::v12::UpdateType;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -448,8 +448,7 @@ impl Object {
 #[derive(Debug)]
 pub enum ObjectError {
     Io(std::io::Error),
-    ObjectType(ObjectTypeError),
-    UpdateType(UpdateTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for ObjectError {}
@@ -457,8 +456,7 @@ impl std::fmt::Display for ObjectError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::ObjectType(i) => i.fmt(f),
-            Self::UpdateType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -469,15 +467,9 @@ impl From<std::io::Error> for ObjectError {
     }
 }
 
-impl From<ObjectTypeError> for ObjectError {
-    fn from(e: ObjectTypeError) -> Self {
-        Self::ObjectType(e)
-    }
-}
-
-impl From<UpdateTypeError> for ObjectError {
-    fn from(e: UpdateTypeError) -> Self {
-        Self::UpdateType(e)
+impl From<crate::errors::EnumError> for ObjectError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

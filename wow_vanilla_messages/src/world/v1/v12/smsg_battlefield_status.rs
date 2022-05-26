@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Map, MapError};
-use crate::world::v1::v12::{StatusId, StatusIdError};
+use crate::world::v1::v12::Map;
+use crate::world::v1::v12::StatusId;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -11196,8 +11196,7 @@ impl SMSG_BATTLEFIELD_STATUS {
 #[derive(Debug)]
 pub enum SMSG_BATTLEFIELD_STATUSError {
     Io(std::io::Error),
-    Map(MapError),
-    StatusId(StatusIdError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_BATTLEFIELD_STATUSError {}
@@ -11205,8 +11204,7 @@ impl std::fmt::Display for SMSG_BATTLEFIELD_STATUSError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Map(i) => i.fmt(f),
-            Self::StatusId(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -11217,15 +11215,9 @@ impl From<std::io::Error> for SMSG_BATTLEFIELD_STATUSError {
     }
 }
 
-impl From<MapError> for SMSG_BATTLEFIELD_STATUSError {
-    fn from(e: MapError) -> Self {
-        Self::Map(e)
-    }
-}
-
-impl From<StatusIdError> for SMSG_BATTLEFIELD_STATUSError {
-    fn from(e: StatusIdError) -> Self {
-        Self::StatusId(e)
+impl From<crate::errors::EnumError> for SMSG_BATTLEFIELD_STATUSError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

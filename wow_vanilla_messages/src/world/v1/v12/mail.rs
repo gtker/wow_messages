@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{MailType, MailTypeError};
+use crate::world::v1::v12::MailType;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -514,7 +514,7 @@ impl Mail {
 pub enum MailError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    MailType(MailTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for MailError {}
@@ -523,7 +523,7 @@ impl std::fmt::Display for MailError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::MailType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -534,15 +534,15 @@ impl From<std::io::Error> for MailError {
     }
 }
 
-impl From<std::string::FromUtf8Error> for MailError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
+impl From<crate::errors::EnumError> for MailError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 
-impl From<MailTypeError> for MailError {
-    fn from(e: MailTypeError) -> Self {
-        Self::MailType(e)
+impl From<std::string::FromUtf8Error> for MailError {
+    fn from(e: std::string::FromUtf8Error) -> Self {
+        Self::String(e)
     }
 }
 

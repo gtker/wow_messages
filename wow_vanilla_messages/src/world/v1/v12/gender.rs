@@ -39,32 +39,14 @@ impl std::fmt::Display for Gender {
 }
 
 impl TryFrom<u8> for Gender {
-    type Error = GenderError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::MALE),
             1 => Ok(Self::FEMALE),
             2 => Ok(Self::NONE),
-            _ => Err(GenderError::new(value))
+            v => Err(crate::errors::EnumError::new("Gender", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GenderError {
-    pub value: u8,
-}
-
-impl GenderError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GenderError {}
-impl std::fmt::Display for GenderError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'Gender': '{}'", self.value))
     }
 }
 

@@ -36,31 +36,13 @@ impl std::fmt::Display for LogFormat {
 }
 
 impl TryFrom<u8> for LogFormat {
-    type Error = LogFormatError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::DEFAULT),
             1 => Ok(Self::DEBUG),
-            _ => Err(LogFormatError::new(value))
+            v => Err(crate::errors::EnumError::new("LogFormat", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct LogFormatError {
-    pub value: u8,
-}
-
-impl LogFormatError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for LogFormatError {}
-impl std::fmt::Display for LogFormatError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'LogFormat': '{}'", self.value))
     }
 }
 

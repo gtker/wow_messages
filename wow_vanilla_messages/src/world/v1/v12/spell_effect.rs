@@ -414,7 +414,7 @@ impl std::fmt::Display for SpellEffect {
 }
 
 impl TryFrom<u32> for SpellEffect {
-    type Error = SpellEffectError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NONE),
@@ -545,26 +545,8 @@ impl TryFrom<u32> for SpellEffect {
             125 => Ok(Self::MODIFY_THREAT_PERCENT),
             126 => Ok(Self::UNKNOWN126),
             127 => Ok(Self::UNKNOWN127),
-            _ => Err(SpellEffectError::new(value))
+            v => Err(crate::errors::EnumError::new("SpellEffect", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct SpellEffectError {
-    pub value: u32,
-}
-
-impl SpellEffectError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for SpellEffectError {}
-impl std::fmt::Display for SpellEffectError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'SpellEffect': '{}'", self.value))
     }
 }
 

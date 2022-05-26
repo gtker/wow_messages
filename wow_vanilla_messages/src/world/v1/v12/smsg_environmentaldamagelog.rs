@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{EnvironmentalDamageType, EnvironmentalDamageTypeError};
+use crate::world::v1::v12::EnvironmentalDamageType;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -176,7 +176,7 @@ impl ServerMessage for SMSG_ENVIRONMENTALDAMAGELOG {
 #[derive(Debug)]
 pub enum SMSG_ENVIRONMENTALDAMAGELOGError {
     Io(std::io::Error),
-    EnvironmentalDamageType(EnvironmentalDamageTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_ENVIRONMENTALDAMAGELOGError {}
@@ -184,7 +184,7 @@ impl std::fmt::Display for SMSG_ENVIRONMENTALDAMAGELOGError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::EnvironmentalDamageType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -195,9 +195,9 @@ impl From<std::io::Error> for SMSG_ENVIRONMENTALDAMAGELOGError {
     }
 }
 
-impl From<EnvironmentalDamageTypeError> for SMSG_ENVIRONMENTALDAMAGELOGError {
-    fn from(e: EnvironmentalDamageTypeError) -> Self {
-        Self::EnvironmentalDamageType(e)
+impl From<crate::errors::EnumError> for SMSG_ENVIRONMENTALDAMAGELOGError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

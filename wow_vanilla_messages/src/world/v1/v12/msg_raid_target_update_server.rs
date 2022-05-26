@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{RaidTargetUpdate, RaidTargetUpdateError};
-use crate::world::v1::v12::{RaidTargetUpdateType, RaidTargetUpdateTypeError};
+use crate::world::v1::v12::RaidTargetUpdateType;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -212,8 +212,8 @@ impl MSG_RAID_TARGET_UPDATE_Server {
 #[derive(Debug)]
 pub enum MSG_RAID_TARGET_UPDATE_ServerError {
     Io(std::io::Error),
+    Enum(crate::errors::EnumError),
     RaidTargetUpdate(RaidTargetUpdateError),
-    RaidTargetUpdateType(RaidTargetUpdateTypeError),
 }
 
 impl std::error::Error for MSG_RAID_TARGET_UPDATE_ServerError {}
@@ -221,8 +221,8 @@ impl std::fmt::Display for MSG_RAID_TARGET_UPDATE_ServerError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
             Self::RaidTargetUpdate(i) => i.fmt(f),
-            Self::RaidTargetUpdateType(i) => i.fmt(f),
         }
     }
 }
@@ -233,15 +233,15 @@ impl From<std::io::Error> for MSG_RAID_TARGET_UPDATE_ServerError {
     }
 }
 
-impl From<RaidTargetUpdateError> for MSG_RAID_TARGET_UPDATE_ServerError {
-    fn from(e: RaidTargetUpdateError) -> Self {
-        Self::RaidTargetUpdate(e)
+impl From<crate::errors::EnumError> for MSG_RAID_TARGET_UPDATE_ServerError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 
-impl From<RaidTargetUpdateTypeError> for MSG_RAID_TARGET_UPDATE_ServerError {
-    fn from(e: RaidTargetUpdateTypeError) -> Self {
-        Self::RaidTargetUpdateType(e)
+impl From<RaidTargetUpdateError> for MSG_RAID_TARGET_UPDATE_ServerError {
+    fn from(e: RaidTargetUpdateError) -> Self {
+        Self::RaidTargetUpdate(e)
     }
 }
 

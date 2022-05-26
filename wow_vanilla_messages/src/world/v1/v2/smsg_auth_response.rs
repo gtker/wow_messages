@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v2::{WorldResult, WorldResultError};
+use crate::world::v1::v2::WorldResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -635,7 +635,7 @@ impl SMSG_AUTH_RESPONSE {
 #[derive(Debug)]
 pub enum SMSG_AUTH_RESPONSEError {
     Io(std::io::Error),
-    WorldResult(WorldResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_AUTH_RESPONSEError {}
@@ -643,7 +643,7 @@ impl std::fmt::Display for SMSG_AUTH_RESPONSEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::WorldResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -654,9 +654,9 @@ impl From<std::io::Error> for SMSG_AUTH_RESPONSEError {
     }
 }
 
-impl From<WorldResultError> for SMSG_AUTH_RESPONSEError {
-    fn from(e: WorldResultError) -> Self {
-        Self::WorldResult(e)
+impl From<crate::errors::EnumError> for SMSG_AUTH_RESPONSEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

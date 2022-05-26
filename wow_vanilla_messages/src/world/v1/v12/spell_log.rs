@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{SpellEffect, SpellEffectError};
+use crate::world::v1::v12::SpellEffect;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -1313,7 +1313,7 @@ impl SpellLog {
 #[derive(Debug)]
 pub enum SpellLogError {
     Io(std::io::Error),
-    SpellEffect(SpellEffectError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SpellLogError {}
@@ -1321,7 +1321,7 @@ impl std::fmt::Display for SpellLogError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::SpellEffect(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -1332,9 +1332,9 @@ impl From<std::io::Error> for SpellLogError {
     }
 }
 
-impl From<SpellEffectError> for SpellLogError {
-    fn from(e: SpellEffectError) -> Self {
-        Self::SpellEffect(e)
+impl From<crate::errors::EnumError> for SpellLogError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

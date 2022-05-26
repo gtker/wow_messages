@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{QuestPartyMessage, QuestPartyMessageError};
+use crate::world::v1::v12::QuestPartyMessage;
 use crate::{ClientMessage, ServerMessage};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -205,7 +205,7 @@ impl ServerMessage for MSG_QUEST_PUSH_RESULT {
 #[derive(Debug)]
 pub enum MSG_QUEST_PUSH_RESULTError {
     Io(std::io::Error),
-    QuestPartyMessage(QuestPartyMessageError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for MSG_QUEST_PUSH_RESULTError {}
@@ -213,7 +213,7 @@ impl std::fmt::Display for MSG_QUEST_PUSH_RESULTError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::QuestPartyMessage(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -224,9 +224,9 @@ impl From<std::io::Error> for MSG_QUEST_PUSH_RESULTError {
     }
 }
 
-impl From<QuestPartyMessageError> for MSG_QUEST_PUSH_RESULTError {
-    fn from(e: QuestPartyMessageError) -> Self {
-        Self::QuestPartyMessage(e)
+impl From<crate::errors::EnumError> for MSG_QUEST_PUSH_RESULTError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

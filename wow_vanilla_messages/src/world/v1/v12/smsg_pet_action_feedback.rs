@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{PetFeedback, PetFeedbackError};
+use crate::world::v1::v12::PetFeedback;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_PET_ACTION_FEEDBACK {
 #[derive(Debug)]
 pub enum SMSG_PET_ACTION_FEEDBACKError {
     Io(std::io::Error),
-    PetFeedback(PetFeedbackError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_PET_ACTION_FEEDBACKError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_PET_ACTION_FEEDBACKError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::PetFeedback(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_PET_ACTION_FEEDBACKError {
     }
 }
 
-impl From<PetFeedbackError> for SMSG_PET_ACTION_FEEDBACKError {
-    fn from(e: PetFeedbackError) -> Self {
-        Self::PetFeedback(e)
+impl From<crate::errors::EnumError> for SMSG_PET_ACTION_FEEDBACKError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{PowerType, PowerTypeError};
+use crate::world::v1::v12::PowerType;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -185,7 +185,7 @@ impl SMSG_SPELLENERGIZELOG {
 #[derive(Debug)]
 pub enum SMSG_SPELLENERGIZELOGError {
     Io(std::io::Error),
-    PowerType(PowerTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_SPELLENERGIZELOGError {}
@@ -193,7 +193,7 @@ impl std::fmt::Display for SMSG_SPELLENERGIZELOGError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::PowerType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -204,9 +204,9 @@ impl From<std::io::Error> for SMSG_SPELLENERGIZELOGError {
     }
 }
 
-impl From<PowerTypeError> for SMSG_SPELLENERGIZELOGError {
-    fn from(e: PowerTypeError) -> Self {
-        Self::PowerType(e)
+impl From<crate::errors::EnumError> for SMSG_SPELLENERGIZELOGError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

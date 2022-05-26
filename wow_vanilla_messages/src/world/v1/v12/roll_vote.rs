@@ -39,32 +39,14 @@ impl std::fmt::Display for RollVote {
 }
 
 impl TryFrom<u8> for RollVote {
-    type Error = RollVoteError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::PASS),
             1 => Ok(Self::NEED),
             2 => Ok(Self::GREED),
-            _ => Err(RollVoteError::new(value))
+            v => Err(crate::errors::EnumError::new("RollVote", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct RollVoteError {
-    pub value: u8,
-}
-
-impl RollVoteError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for RollVoteError {}
-impl std::fmt::Display for RollVoteError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'RollVote': '{}'", self.value))
     }
 }
 

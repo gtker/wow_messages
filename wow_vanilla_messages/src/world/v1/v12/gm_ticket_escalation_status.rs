@@ -39,32 +39,14 @@ impl std::fmt::Display for GmTicketEscalationStatus {
 }
 
 impl TryFrom<u8> for GmTicketEscalationStatus {
-    type Error = GmTicketEscalationStatusError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED),
             1 => Ok(Self::GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED),
             2 => Ok(Self::GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED),
-            _ => Err(GmTicketEscalationStatusError::new(value))
+            v => Err(crate::errors::EnumError::new("GmTicketEscalationStatus", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct GmTicketEscalationStatusError {
-    pub value: u8,
-}
-
-impl GmTicketEscalationStatusError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for GmTicketEscalationStatusError {}
-impl std::fmt::Display for GmTicketEscalationStatusError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'GmTicketEscalationStatus': '{}'", self.value))
     }
 }
 

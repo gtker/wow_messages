@@ -36,31 +36,13 @@ impl std::fmt::Display for CorpseQueryResult {
 }
 
 impl TryFrom<u8> for CorpseQueryResult {
-    type Error = CorpseQueryResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NOT_FOUND),
             1 => Ok(Self::FOUND),
-            _ => Err(CorpseQueryResultError::new(value))
+            v => Err(crate::errors::EnumError::new("CorpseQueryResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct CorpseQueryResultError {
-    pub value: u8,
-}
-
-impl CorpseQueryResultError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for CorpseQueryResultError {}
-impl std::fmt::Display for CorpseQueryResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'CorpseQueryResult': '{}'", self.value))
     }
 }
 

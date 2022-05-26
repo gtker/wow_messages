@@ -114,7 +114,7 @@ impl std::fmt::Display for InventoryType {
 }
 
 impl TryFrom<u8> for InventoryType {
-    type Error = InventoryTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NON_EQUIP),
@@ -145,26 +145,8 @@ impl TryFrom<u8> for InventoryType {
             25 => Ok(Self::THROWN),
             26 => Ok(Self::RANGED_RIGHT),
             27 => Ok(Self::QUIVER),
-            _ => Err(InventoryTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("InventoryType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct InventoryTypeError {
-    pub value: u8,
-}
-
-impl InventoryTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for InventoryTypeError {}
-impl std::fmt::Display for InventoryTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'InventoryType': '{}'", self.value))
     }
 }
 

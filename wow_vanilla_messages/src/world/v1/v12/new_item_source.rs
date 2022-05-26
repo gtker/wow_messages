@@ -36,31 +36,13 @@ impl std::fmt::Display for NewItemSource {
 }
 
 impl TryFrom<u32> for NewItemSource {
-    type Error = NewItemSourceError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::LOOTED),
             1 => Ok(Self::FROM_NPC),
-            _ => Err(NewItemSourceError::new(value))
+            v => Err(crate::errors::EnumError::new("NewItemSource", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct NewItemSourceError {
-    pub value: u32,
-}
-
-impl NewItemSourceError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for NewItemSourceError {}
-impl std::fmt::Display for NewItemSourceError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'NewItemSource': '{}'", self.value))
     }
 }
 

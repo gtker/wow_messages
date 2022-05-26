@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{UnitStandState, UnitStandStateError};
+use crate::world::v1::v12::UnitStandState;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ClientMessage for CMSG_STANDSTATECHANGE {
 #[derive(Debug)]
 pub enum CMSG_STANDSTATECHANGEError {
     Io(std::io::Error),
-    UnitStandState(UnitStandStateError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMSG_STANDSTATECHANGEError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for CMSG_STANDSTATECHANGEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::UnitStandState(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for CMSG_STANDSTATECHANGEError {
     }
 }
 
-impl From<UnitStandStateError> for CMSG_STANDSTATECHANGEError {
-    fn from(e: UnitStandStateError) -> Self {
-        Self::UnitStandState(e)
+impl From<crate::errors::EnumError> for CMSG_STANDSTATECHANGEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

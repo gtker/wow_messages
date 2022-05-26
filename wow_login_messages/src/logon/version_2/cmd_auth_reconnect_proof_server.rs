@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::logon::version_2::{LoginResult, LoginResultError};
+use crate::logon::version_2::LoginResult;
 use crate::ServerMessage;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -133,7 +133,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
 #[derive(Debug)]
 pub enum CMD_AUTH_RECONNECT_PROOF_ServerError {
     Io(std::io::Error),
-    LoginResult(LoginResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMD_AUTH_RECONNECT_PROOF_ServerError {}
@@ -141,7 +141,7 @@ impl std::fmt::Display for CMD_AUTH_RECONNECT_PROOF_ServerError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::LoginResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -152,9 +152,9 @@ impl From<std::io::Error> for CMD_AUTH_RECONNECT_PROOF_ServerError {
     }
 }
 
-impl From<LoginResultError> for CMD_AUTH_RECONNECT_PROOF_ServerError {
-    fn from(e: LoginResultError) -> Self {
-        Self::LoginResult(e)
+impl From<crate::errors::EnumError> for CMD_AUTH_RECONNECT_PROOF_ServerError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

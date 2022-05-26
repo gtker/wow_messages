@@ -36,31 +36,13 @@ impl std::fmt::Display for PartyOperation {
 }
 
 impl TryFrom<u8> for PartyOperation {
-    type Error = PartyOperationError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::INVITE),
             2 => Ok(Self::LEAVE),
-            _ => Err(PartyOperationError::new(value))
+            v => Err(crate::errors::EnumError::new("PartyOperation", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PartyOperationError {
-    pub value: u8,
-}
-
-impl PartyOperationError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PartyOperationError {}
-impl std::fmt::Display for PartyOperationError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'PartyOperation': '{}'", self.value))
     }
 }
 

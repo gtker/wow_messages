@@ -42,33 +42,15 @@ impl std::fmt::Display for RealmType {
 }
 
 impl TryFrom<u8> for RealmType {
-    type Error = RealmTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::PLAYER_VS_ENVIRONMENT),
             1 => Ok(Self::PLAYER_VS_PLAYER),
             6 => Ok(Self::ROLEPLAYING),
             8 => Ok(Self::ROLEPLAYING_PLAYER_VS_PLAYER),
-            _ => Err(RealmTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("RealmType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct RealmTypeError {
-    pub value: u8,
-}
-
-impl RealmTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for RealmTypeError {}
-impl std::fmt::Display for RealmTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'RealmType': '{}'", self.value))
     }
 }
 

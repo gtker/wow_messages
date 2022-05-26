@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Map, MapError};
+use crate::world::v1::v12::Map;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -182,7 +182,7 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
 #[derive(Debug)]
 pub enum CMSG_WORLD_TELEPORTError {
     Io(std::io::Error),
-    Map(MapError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMSG_WORLD_TELEPORTError {}
@@ -190,7 +190,7 @@ impl std::fmt::Display for CMSG_WORLD_TELEPORTError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Map(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -201,9 +201,9 @@ impl From<std::io::Error> for CMSG_WORLD_TELEPORTError {
     }
 }
 
-impl From<MapError> for CMSG_WORLD_TELEPORTError {
-    fn from(e: MapError) -> Self {
-        Self::Map(e)
+impl From<crate::errors::EnumError> for CMSG_WORLD_TELEPORTError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

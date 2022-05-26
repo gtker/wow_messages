@@ -51,7 +51,7 @@ impl std::fmt::Display for SpellSchool {
 }
 
 impl TryFrom<u8> for SpellSchool {
-    type Error = SpellSchoolError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NORMAL),
@@ -61,26 +61,8 @@ impl TryFrom<u8> for SpellSchool {
             4 => Ok(Self::FROST),
             5 => Ok(Self::SHADOW),
             6 => Ok(Self::ARCANE),
-            _ => Err(SpellSchoolError::new(value))
+            v => Err(crate::errors::EnumError::new("SpellSchool", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct SpellSchoolError {
-    pub value: u8,
-}
-
-impl SpellSchoolError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for SpellSchoolError {}
-impl std::fmt::Display for SpellSchoolError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'SpellSchool': '{}'", self.value))
     }
 }
 

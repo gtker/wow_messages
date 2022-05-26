@@ -606,7 +606,7 @@ impl std::fmt::Display for AuraType {
 }
 
 impl TryFrom<u32> for AuraType {
-    type Error = AuraTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NONE),
@@ -801,26 +801,8 @@ impl TryFrom<u32> for AuraType {
             189 => Ok(Self::MOD_RATING),
             190 => Ok(Self::MOD_FACTION_REPUTATION_GAIN),
             191 => Ok(Self::USE_NORMAL_MOVEMENT_SPEED),
-            _ => Err(AuraTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("AuraType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct AuraTypeError {
-    pub value: u32,
-}
-
-impl AuraTypeError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for AuraTypeError {}
-impl std::fmt::Display for AuraTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'AuraType': '{}'", self.value))
     }
 }
 

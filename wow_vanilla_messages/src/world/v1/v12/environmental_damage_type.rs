@@ -48,7 +48,7 @@ impl std::fmt::Display for EnvironmentalDamageType {
 }
 
 impl TryFrom<u32> for EnvironmentalDamageType {
-    type Error = EnvironmentalDamageTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::EXHAUSTED),
@@ -57,26 +57,8 @@ impl TryFrom<u32> for EnvironmentalDamageType {
             3 => Ok(Self::LAVA),
             4 => Ok(Self::SLIME),
             5 => Ok(Self::FIRE),
-            _ => Err(EnvironmentalDamageTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("EnvironmentalDamageType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct EnvironmentalDamageTypeError {
-    pub value: u32,
-}
-
-impl EnvironmentalDamageTypeError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for EnvironmentalDamageTypeError {}
-impl std::fmt::Display for EnvironmentalDamageTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'EnvironmentalDamageType': '{}'", self.value))
     }
 }
 

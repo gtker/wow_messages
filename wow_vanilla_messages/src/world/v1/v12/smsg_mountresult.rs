@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{MountResult, MountResultError};
+use crate::world::v1::v12::MountResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_MOUNTRESULT {
 #[derive(Debug)]
 pub enum SMSG_MOUNTRESULTError {
     Io(std::io::Error),
-    MountResult(MountResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_MOUNTRESULTError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_MOUNTRESULTError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::MountResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_MOUNTRESULTError {
     }
 }
 
-impl From<MountResultError> for SMSG_MOUNTRESULTError {
-    fn from(e: MountResultError) -> Self {
-        Self::MountResult(e)
+impl From<crate::errors::EnumError> for SMSG_MOUNTRESULTError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

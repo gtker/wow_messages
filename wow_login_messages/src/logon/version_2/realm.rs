@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::Population;
-use crate::logon::version_2::{RealmCategory, RealmCategoryError};
-use crate::logon::version_2::{RealmFlag};
-use crate::logon::version_2::{RealmType, RealmTypeError};
+use crate::logon::version_2::RealmCategory;
+use crate::logon::version_2::RealmFlag;
+use crate::logon::version_2::RealmType;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -197,8 +197,7 @@ impl Realm {
 pub enum RealmError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    RealmCategory(RealmCategoryError),
-    RealmType(RealmTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for RealmError {}
@@ -207,8 +206,7 @@ impl std::fmt::Display for RealmError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::RealmCategory(i) => i.fmt(f),
-            Self::RealmType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -219,21 +217,15 @@ impl From<std::io::Error> for RealmError {
     }
 }
 
+impl From<crate::errors::EnumError> for RealmError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<std::string::FromUtf8Error> for RealmError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
-    }
-}
-
-impl From<RealmCategoryError> for RealmError {
-    fn from(e: RealmCategoryError) -> Self {
-        Self::RealmCategory(e)
-    }
-}
-
-impl From<RealmTypeError> for RealmError {
-    fn from(e: RealmTypeError) -> Self {
-        Self::RealmType(e)
     }
 }
 

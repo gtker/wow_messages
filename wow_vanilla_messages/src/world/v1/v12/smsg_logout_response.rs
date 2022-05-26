@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{LogoutResult, LogoutResultError};
-use crate::world::v1::v12::{LogoutSpeed, LogoutSpeedError};
+use crate::world::v1::v12::LogoutResult;
+use crate::world::v1::v12::LogoutSpeed;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,8 +119,7 @@ impl ServerMessage for SMSG_LOGOUT_RESPONSE {
 #[derive(Debug)]
 pub enum SMSG_LOGOUT_RESPONSEError {
     Io(std::io::Error),
-    LogoutResult(LogoutResultError),
-    LogoutSpeed(LogoutSpeedError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_LOGOUT_RESPONSEError {}
@@ -128,8 +127,7 @@ impl std::fmt::Display for SMSG_LOGOUT_RESPONSEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::LogoutResult(i) => i.fmt(f),
-            Self::LogoutSpeed(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -140,15 +138,9 @@ impl From<std::io::Error> for SMSG_LOGOUT_RESPONSEError {
     }
 }
 
-impl From<LogoutResultError> for SMSG_LOGOUT_RESPONSEError {
-    fn from(e: LogoutResultError) -> Self {
-        Self::LogoutResult(e)
-    }
-}
-
-impl From<LogoutSpeedError> for SMSG_LOGOUT_RESPONSEError {
-    fn from(e: LogoutSpeedError) -> Self {
-        Self::LogoutSpeed(e)
+impl From<crate::errors::EnumError> for SMSG_LOGOUT_RESPONSEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

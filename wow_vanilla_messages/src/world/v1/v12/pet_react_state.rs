@@ -39,32 +39,14 @@ impl std::fmt::Display for PetReactState {
 }
 
 impl TryFrom<u8> for PetReactState {
-    type Error = PetReactStateError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::PASSIVE),
             1 => Ok(Self::DEFENSIVE),
             2 => Ok(Self::AGGRESSIVE),
-            _ => Err(PetReactStateError::new(value))
+            v => Err(crate::errors::EnumError::new("PetReactState", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PetReactStateError {
-    pub value: u8,
-}
-
-impl PetReactStateError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PetReactStateError {}
-impl std::fmt::Display for PetReactStateError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'PetReactState': '{}'", self.value))
     }
 }
 

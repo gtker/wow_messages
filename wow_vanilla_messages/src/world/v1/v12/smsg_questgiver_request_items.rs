@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{QuestCompletable, QuestCompletableError};
+use crate::world::v1::v12::QuestCompletable;
 use crate::world::v1::v12::QuestItemRequirement;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -390,7 +390,7 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
 pub enum SMSG_QUESTGIVER_REQUEST_ITEMSError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    QuestCompletable(QuestCompletableError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_QUESTGIVER_REQUEST_ITEMSError {}
@@ -399,7 +399,7 @@ impl std::fmt::Display for SMSG_QUESTGIVER_REQUEST_ITEMSError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::QuestCompletable(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -410,15 +410,15 @@ impl From<std::io::Error> for SMSG_QUESTGIVER_REQUEST_ITEMSError {
     }
 }
 
-impl From<std::string::FromUtf8Error> for SMSG_QUESTGIVER_REQUEST_ITEMSError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
+impl From<crate::errors::EnumError> for SMSG_QUESTGIVER_REQUEST_ITEMSError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 
-impl From<QuestCompletableError> for SMSG_QUESTGIVER_REQUEST_ITEMSError {
-    fn from(e: QuestCompletableError) -> Self {
-        Self::QuestCompletable(e)
+impl From<std::string::FromUtf8Error> for SMSG_QUESTGIVER_REQUEST_ITEMSError {
+    fn from(e: std::string::FromUtf8Error) -> Self {
+        Self::String(e)
     }
 }
 

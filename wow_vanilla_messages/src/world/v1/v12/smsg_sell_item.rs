@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{SellItemResult, SellItemResultError};
+use crate::world::v1::v12::SellItemResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -138,7 +138,7 @@ impl ServerMessage for SMSG_SELL_ITEM {
 #[derive(Debug)]
 pub enum SMSG_SELL_ITEMError {
     Io(std::io::Error),
-    SellItemResult(SellItemResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_SELL_ITEMError {}
@@ -146,7 +146,7 @@ impl std::fmt::Display for SMSG_SELL_ITEMError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::SellItemResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -157,9 +157,9 @@ impl From<std::io::Error> for SMSG_SELL_ITEMError {
     }
 }
 
-impl From<SellItemResultError> for SMSG_SELL_ITEMError {
-    fn from(e: SellItemResultError) -> Self {
-        Self::SellItemResult(e)
+impl From<crate::errors::EnumError> for SMSG_SELL_ITEMError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

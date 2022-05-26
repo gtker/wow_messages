@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{FriendResult, FriendResultError};
+use crate::world::v1::v12::FriendResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,7 +119,7 @@ impl ServerMessage for SMSG_FRIEND_STATUS {
 #[derive(Debug)]
 pub enum SMSG_FRIEND_STATUSError {
     Io(std::io::Error),
-    FriendResult(FriendResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_FRIEND_STATUSError {}
@@ -127,7 +127,7 @@ impl std::fmt::Display for SMSG_FRIEND_STATUSError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::FriendResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -138,9 +138,9 @@ impl From<std::io::Error> for SMSG_FRIEND_STATUSError {
     }
 }
 
-impl From<FriendResultError> for SMSG_FRIEND_STATUSError {
-    fn from(e: FriendResultError) -> Self {
-        Self::FriendResult(e)
+impl From<crate::errors::EnumError> for SMSG_FRIEND_STATUSError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

@@ -39,32 +39,14 @@ impl std::fmt::Display for MeetingStoneFailure {
 }
 
 impl TryFrom<u8> for MeetingStoneFailure {
-    type Error = MeetingStoneFailureError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::MEETINGSTONE_FAIL_PARTYLEADER),
             2 => Ok(Self::MEETINGSTONE_FAIL_FULL_GROUP),
             3 => Ok(Self::MEETINGSTONE_FAIL_RAID_GROUP),
-            _ => Err(MeetingStoneFailureError::new(value))
+            v => Err(crate::errors::EnumError::new("MeetingStoneFailure", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct MeetingStoneFailureError {
-    pub value: u8,
-}
-
-impl MeetingStoneFailureError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for MeetingStoneFailureError {}
-impl std::fmt::Display for MeetingStoneFailureError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'MeetingStoneFailure': '{}'", self.value))
     }
 }
 

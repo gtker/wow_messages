@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{InventoryResult, InventoryResultError};
+use crate::world::v1::v12::InventoryResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -10480,7 +10480,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE {
 #[derive(Debug)]
 pub enum SMSG_INVENTORY_CHANGE_FAILUREError {
     Io(std::io::Error),
-    InventoryResult(InventoryResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_INVENTORY_CHANGE_FAILUREError {}
@@ -10488,7 +10488,7 @@ impl std::fmt::Display for SMSG_INVENTORY_CHANGE_FAILUREError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::InventoryResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -10499,9 +10499,9 @@ impl From<std::io::Error> for SMSG_INVENTORY_CHANGE_FAILUREError {
     }
 }
 
-impl From<InventoryResultError> for SMSG_INVENTORY_CHANGE_FAILUREError {
-    fn from(e: InventoryResultError) -> Self {
-        Self::InventoryResult(e)
+impl From<crate::errors::EnumError> for SMSG_INVENTORY_CHANGE_FAILUREError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

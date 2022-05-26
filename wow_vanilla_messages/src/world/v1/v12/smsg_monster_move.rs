@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{MonsterMoveType, MonsterMoveTypeError};
+use crate::world::v1::v12::MonsterMoveType;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -196,7 +196,7 @@ impl SMSG_MONSTER_MOVE {
 #[derive(Debug)]
 pub enum SMSG_MONSTER_MOVEError {
     Io(std::io::Error),
-    MonsterMoveType(MonsterMoveTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_MONSTER_MOVEError {}
@@ -204,7 +204,7 @@ impl std::fmt::Display for SMSG_MONSTER_MOVEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::MonsterMoveType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -215,9 +215,9 @@ impl From<std::io::Error> for SMSG_MONSTER_MOVEError {
     }
 }
 
-impl From<MonsterMoveTypeError> for SMSG_MONSTER_MOVEError {
-    fn from(e: MonsterMoveTypeError) -> Self {
-        Self::MonsterMoveType(e)
+impl From<crate::errors::EnumError> for SMSG_MONSTER_MOVEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

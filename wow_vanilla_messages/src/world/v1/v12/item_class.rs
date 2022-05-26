@@ -78,7 +78,7 @@ impl std::fmt::Display for ItemClass {
 }
 
 impl TryFrom<u8> for ItemClass {
-    type Error = ItemClassError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::CONSUMABLE),
@@ -97,26 +97,8 @@ impl TryFrom<u8> for ItemClass {
             13 => Ok(Self::KEY),
             14 => Ok(Self::RESERVED_4),
             15 => Ok(Self::MISC),
-            _ => Err(ItemClassError::new(value))
+            v => Err(crate::errors::EnumError::new("ItemClass", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct ItemClassError {
-    pub value: u8,
-}
-
-impl ItemClassError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for ItemClassError {}
-impl std::fmt::Display for ItemClassError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'ItemClass': '{}'", self.value))
     }
 }
 

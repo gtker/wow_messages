@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{TimerType, TimerTypeError};
+use crate::world::v1::v12::TimerType;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_STOP_MIRROR_TIMER {
 #[derive(Debug)]
 pub enum SMSG_STOP_MIRROR_TIMERError {
     Io(std::io::Error),
-    TimerType(TimerTypeError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_STOP_MIRROR_TIMERError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_STOP_MIRROR_TIMERError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::TimerType(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_STOP_MIRROR_TIMERError {
     }
 }
 
-impl From<TimerTypeError> for SMSG_STOP_MIRROR_TIMERError {
-    fn from(e: TimerTypeError) -> Self {
-        Self::TimerType(e)
+impl From<crate::errors::EnumError> for SMSG_STOP_MIRROR_TIMERError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

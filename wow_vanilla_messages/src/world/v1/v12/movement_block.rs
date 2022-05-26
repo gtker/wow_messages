@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{MovementFlags};
-use crate::world::v1::v12::{SplineFlag};
+use crate::world::v1::v12::MovementFlags;
+use crate::world::v1::v12::SplineFlag;
 use crate::world::v1::v12::TransportInfo;
-use crate::world::v1::v12::{UpdateFlag};
+use crate::world::v1::v12::UpdateFlag;
 use crate::world::v1::v12::Vector3d;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;

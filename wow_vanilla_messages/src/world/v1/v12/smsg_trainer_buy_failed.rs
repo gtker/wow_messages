@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{TrainingFailureReason, TrainingFailureReasonError};
+use crate::world::v1::v12::TrainingFailureReason;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -138,7 +138,7 @@ impl ServerMessage for SMSG_TRAINER_BUY_FAILED {
 #[derive(Debug)]
 pub enum SMSG_TRAINER_BUY_FAILEDError {
     Io(std::io::Error),
-    TrainingFailureReason(TrainingFailureReasonError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_TRAINER_BUY_FAILEDError {}
@@ -146,7 +146,7 @@ impl std::fmt::Display for SMSG_TRAINER_BUY_FAILEDError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::TrainingFailureReason(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -157,9 +157,9 @@ impl From<std::io::Error> for SMSG_TRAINER_BUY_FAILEDError {
     }
 }
 
-impl From<TrainingFailureReasonError> for SMSG_TRAINER_BUY_FAILEDError {
-    fn from(e: TrainingFailureReasonError) -> Self {
-        Self::TrainingFailureReason(e)
+impl From<crate::errors::EnumError> for SMSG_TRAINER_BUY_FAILEDError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

@@ -231,7 +231,7 @@ impl std::fmt::Display for InventoryResult {
 }
 
 impl TryFrom<u8> for InventoryResult {
-    type Error = InventoryResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::OK),
@@ -301,26 +301,8 @@ impl TryFrom<u8> for InventoryResult {
             64 => Ok(Self::CANT_EQUIP_REPUTATION),
             65 => Ok(Self::TOO_MANY_SPECIAL_BAGS),
             66 => Ok(Self::LOOT_CANT_LOOT_THAT_NOW),
-            _ => Err(InventoryResultError::new(value))
+            v => Err(crate::errors::EnumError::new("InventoryResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct InventoryResultError {
-    pub value: u8,
-}
-
-impl InventoryResultError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for InventoryResultError {}
-impl std::fmt::Display for InventoryResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'InventoryResult': '{}'", self.value))
     }
 }
 

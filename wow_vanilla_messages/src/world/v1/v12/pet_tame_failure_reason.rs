@@ -66,7 +66,7 @@ impl std::fmt::Display for PetTameFailureReason {
 }
 
 impl TryFrom<u8> for PetTameFailureReason {
-    type Error = PetTameFailureReasonError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::INVALIDCREATURE),
@@ -81,26 +81,8 @@ impl TryFrom<u8> for PetTameFailureReason {
             10 => Ok(Self::DEAD),
             11 => Ok(Self::NOTDEAD),
             12 => Ok(Self::UNKNOWNERROR),
-            _ => Err(PetTameFailureReasonError::new(value))
+            v => Err(crate::errors::EnumError::new("PetTameFailureReason", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PetTameFailureReasonError {
-    pub value: u8,
-}
-
-impl PetTameFailureReasonError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PetTameFailureReasonError {}
-impl std::fmt::Display for PetTameFailureReasonError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'PetTameFailureReason': '{}'", self.value))
     }
 }
 

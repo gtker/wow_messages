@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{SpellMissInfo, SpellMissInfoError};
+use crate::world::v1::v12::SpellMissInfo;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -76,7 +76,7 @@ impl SpellMiss {
 #[derive(Debug)]
 pub enum SpellMissError {
     Io(std::io::Error),
-    SpellMissInfo(SpellMissInfoError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SpellMissError {}
@@ -84,7 +84,7 @@ impl std::fmt::Display for SpellMissError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::SpellMissInfo(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -95,9 +95,9 @@ impl From<std::io::Error> for SpellMissError {
     }
 }
 
-impl From<SpellMissInfoError> for SpellMissError {
-    fn from(e: SpellMissInfoError) -> Self {
-        Self::SpellMissInfo(e)
+impl From<crate::errors::EnumError> for SpellMissError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

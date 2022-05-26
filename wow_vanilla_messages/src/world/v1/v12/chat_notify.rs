@@ -126,7 +126,7 @@ impl std::fmt::Display for ChatNotify {
 }
 
 impl TryFrom<u8> for ChatNotify {
-    type Error = ChatNotifyError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::JOINED_NOTICE),
@@ -161,26 +161,8 @@ impl TryFrom<u8> for ChatNotify {
             29 => Ok(Self::PLAYER_INVITED_NOTICE),
             30 => Ok(Self::PLAYER_INVITE_BANNED_NOTICE),
             31 => Ok(Self::THROTTLED_NOTICE),
-            _ => Err(ChatNotifyError::new(value))
+            v => Err(crate::errors::EnumError::new("ChatNotify", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct ChatNotifyError {
-    pub value: u8,
-}
-
-impl ChatNotifyError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for ChatNotifyError {}
-impl std::fmt::Display for ChatNotifyError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'ChatNotify': '{}'", self.value))
     }
 }
 

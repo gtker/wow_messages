@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{Emote, EmoteError};
+use crate::world::v1::v12::Emote;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,7 +119,7 @@ impl ServerMessage for SMSG_EMOTE {
 #[derive(Debug)]
 pub enum SMSG_EMOTEError {
     Io(std::io::Error),
-    Emote(EmoteError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_EMOTEError {}
@@ -127,7 +127,7 @@ impl std::fmt::Display for SMSG_EMOTEError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Emote(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -138,9 +138,9 @@ impl From<std::io::Error> for SMSG_EMOTEError {
     }
 }
 
-impl From<EmoteError> for SMSG_EMOTEError {
-    fn from(e: EmoteError) -> Self {
-        Self::Emote(e)
+impl From<crate::errors::EnumError> for SMSG_EMOTEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

@@ -36,31 +36,13 @@ impl std::fmt::Display for SecurityFlag {
 }
 
 impl TryFrom<u8> for SecurityFlag {
-    type Error = SecurityFlagError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NONE),
             1 => Ok(Self::PIN),
-            _ => Err(SecurityFlagError::new(value))
+            v => Err(crate::errors::EnumError::new("SecurityFlag", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct SecurityFlagError {
-    pub value: u8,
-}
-
-impl SecurityFlagError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for SecurityFlagError {}
-impl std::fmt::Display for SecurityFlagError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'SecurityFlag': '{}'", self.value))
     }
 }
 

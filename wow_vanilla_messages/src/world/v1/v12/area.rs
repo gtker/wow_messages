@@ -3273,7 +3273,7 @@ impl std::fmt::Display for Area {
 }
 
 impl TryFrom<u32> for Area {
-    type Error = AreaError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::DUN_MOROGH),
@@ -4357,26 +4357,8 @@ impl TryFrom<u32> for Area {
             3459 => Ok(Self::CITY),
             3478 => Ok(Self::GATES_OF_AHN_QIRAJ),
             3486 => Ok(Self::RAVENHOLDT_MANOR),
-            _ => Err(AreaError::new(value))
+            v => Err(crate::errors::EnumError::new("Area", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct AreaError {
-    pub value: u32,
-}
-
-impl AreaError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for AreaError {}
-impl std::fmt::Display for AreaError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'Area': '{}'", self.value))
     }
 }
 

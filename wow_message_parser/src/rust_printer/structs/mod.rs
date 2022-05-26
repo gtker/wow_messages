@@ -52,9 +52,9 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
         let module_name = get_import_path(o.get_tags_of_object(name, e.tags()));
 
         match o.get_object_type_of(name, e.tags()) {
-            ObjectType::Flag => {
+            ObjectType::Flag | ObjectType::Enum => {
                 s.wln(format!(
-                    "use {module_name}::{{{name}}};",
+                    "use {module_name}::{name};",
                     module_name = module_name,
                     name = name,
                 ));
@@ -191,14 +191,13 @@ fn print_general_error(s: &mut Writer, e: &Container, o: &Objects) {
         if e.contains_string_or_cstring() {
             s.wln("String(std::string::FromUtf8Error),");
         }
+        if e.needs_enum_error(o, e.tags()) {
+            s.wln("Enum(crate::errors::EnumError),");
+        }
 
-        for t in e.get_types_needing_errors() {
-            if o.object_has_only_io_errors(t, e.tags()) {
-                continue;
-            }
-
+        for t in e.get_types_needing_errors(o, e.tags()) {
             match o.get_object_type_of(t, e.tags()) {
-                ObjectType::Flag => {}
+                ObjectType::Flag | ObjectType::Enum => {}
                 _ => {
                     s.wln(format!("{name}({name}Error),", name = t));
                 }
@@ -229,11 +228,11 @@ fn print_display_for_general_error(s: &mut Writer, e: &Container, o: &Objects) {
                             s.wln("Self::String(i) => i.fmt(f),");
                         }
 
-                        for t in e.get_types_needing_errors() {
-                            if o.object_has_only_io_errors(t, e.tags()) {
-                                continue;
-                            }
+                        if e.needs_enum_error(o, e.tags()) {
+                            s.wln("Self::Enum(e) => e.fmt(f),");
+                        }
 
+                        for t in e.get_types_needing_errors(o, e.tags()) {
                             match o.get_object_type_of(t, e.tags()) {
                                 ObjectType::Flag => {}
                                 _ => {
@@ -258,6 +257,20 @@ fn print_from_general_error(s: &mut Writer, e: &Container, o: &Objects) {
         },
     );
 
+    if e.needs_enum_error(o, e.tags()) {
+        s.bodyn(
+            format!(
+                "impl From<crate::errors::EnumError> for {name}Error",
+                name = e.name()
+            ),
+            |s| {
+                s.body("fn from(e: crate::errors::EnumError) -> Self", |s| {
+                    s.wln("Self::Enum(e)");
+                });
+            },
+        );
+    }
+
     if e.contains_string_or_cstring() {
         s.bodyn(
             format!(
@@ -272,15 +285,7 @@ fn print_from_general_error(s: &mut Writer, e: &Container, o: &Objects) {
         );
     }
 
-    for t in e.get_types_needing_errors() {
-        if o.object_has_only_io_errors(t, e.tags()) {
-            continue;
-        }
-
-        if o.get_object_type_of(t, e.tags()) == ObjectType::Flag {
-            continue;
-        }
-
+    for t in e.get_types_needing_errors(o, e.tags()) {
         s.bodyn(
             format!(
                 "impl From<{from_name}Error> for {name}Error",

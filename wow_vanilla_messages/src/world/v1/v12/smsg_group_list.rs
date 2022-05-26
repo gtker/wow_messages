@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{GroupListMember, GroupListMemberError};
-use crate::world::v1::v12::{GroupLootSetting, GroupLootSettingError};
-use crate::world::v1::v12::{GroupType, GroupTypeError};
-use crate::world::v1::v12::{ItemQuality, ItemQualityError};
+use crate::world::v1::v12::GroupLootSetting;
+use crate::world::v1::v12::GroupType;
+use crate::world::v1::v12::ItemQuality;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -319,10 +319,8 @@ impl SMSG_GROUP_LIST {
 #[derive(Debug)]
 pub enum SMSG_GROUP_LISTError {
     Io(std::io::Error),
+    Enum(crate::errors::EnumError),
     GroupListMember(GroupListMemberError),
-    GroupLootSetting(GroupLootSettingError),
-    GroupType(GroupTypeError),
-    ItemQuality(ItemQualityError),
 }
 
 impl std::error::Error for SMSG_GROUP_LISTError {}
@@ -330,10 +328,8 @@ impl std::fmt::Display for SMSG_GROUP_LISTError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
             Self::GroupListMember(i) => i.fmt(f),
-            Self::GroupLootSetting(i) => i.fmt(f),
-            Self::GroupType(i) => i.fmt(f),
-            Self::ItemQuality(i) => i.fmt(f),
         }
     }
 }
@@ -344,27 +340,15 @@ impl From<std::io::Error> for SMSG_GROUP_LISTError {
     }
 }
 
+impl From<crate::errors::EnumError> for SMSG_GROUP_LISTError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<GroupListMemberError> for SMSG_GROUP_LISTError {
     fn from(e: GroupListMemberError) -> Self {
         Self::GroupListMember(e)
-    }
-}
-
-impl From<GroupLootSettingError> for SMSG_GROUP_LISTError {
-    fn from(e: GroupLootSettingError) -> Self {
-        Self::GroupLootSetting(e)
-    }
-}
-
-impl From<GroupTypeError> for SMSG_GROUP_LISTError {
-    fn from(e: GroupTypeError) -> Self {
-        Self::GroupType(e)
-    }
-}
-
-impl From<ItemQualityError> for SMSG_GROUP_LISTError {
-    fn from(e: ItemQualityError) -> Self {
-        Self::ItemQuality(e)
     }
 }
 

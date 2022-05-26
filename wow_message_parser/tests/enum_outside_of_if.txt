@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{NestedEnum, NestedEnumError};
-use crate::world::v1::v12::{TEnum, TEnumError};
+use crate::world::v1::v12::NestedEnum;
+use crate::world::v1::v12::TEnum;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -126,8 +126,7 @@ impl EnumOutsideOfIf {
 #[derive(Debug)]
 pub enum EnumOutsideOfIfError {
     Io(std::io::Error),
-    NestedEnum(NestedEnumError),
-    TEnum(TEnumError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for EnumOutsideOfIfError {}
@@ -135,8 +134,7 @@ impl std::fmt::Display for EnumOutsideOfIfError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::NestedEnum(i) => i.fmt(f),
-            Self::TEnum(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -147,15 +145,9 @@ impl From<std::io::Error> for EnumOutsideOfIfError {
     }
 }
 
-impl From<NestedEnumError> for EnumOutsideOfIfError {
-    fn from(e: NestedEnumError) -> Self {
-        Self::NestedEnum(e)
-    }
-}
-
-impl From<TEnumError> for EnumOutsideOfIfError {
-    fn from(e: TEnumError) -> Self {
-        Self::TEnum(e)
+impl From<crate::errors::EnumError> for EnumOutsideOfIfError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

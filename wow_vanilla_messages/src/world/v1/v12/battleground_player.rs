@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{PvpRank, PvpRankError};
+use crate::world::v1::v12::PvpRank;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -191,7 +191,7 @@ impl BattlegroundPlayer {
 #[derive(Debug)]
 pub enum BattlegroundPlayerError {
     Io(std::io::Error),
-    PvpRank(PvpRankError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for BattlegroundPlayerError {}
@@ -199,7 +199,7 @@ impl std::fmt::Display for BattlegroundPlayerError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::PvpRank(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -210,9 +210,9 @@ impl From<std::io::Error> for BattlegroundPlayerError {
     }
 }
 
-impl From<PvpRankError> for BattlegroundPlayerError {
-    fn from(e: PvpRankError) -> Self {
-        Self::PvpRank(e)
+impl From<crate::errors::EnumError> for BattlegroundPlayerError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

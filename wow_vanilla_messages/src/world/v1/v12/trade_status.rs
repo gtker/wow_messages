@@ -102,7 +102,7 @@ impl std::fmt::Display for TradeStatus {
 }
 
 impl TryFrom<u32> for TradeStatus {
-    type Error = TradeStatusError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::BUSY),
@@ -129,26 +129,8 @@ impl TryFrom<u32> for TradeStatus {
             21 => Ok(Self::TRIAL_ACCOUNT),
             22 => Ok(Self::ONLY_CONJURED),
             23 => Ok(Self::NOT_ON_TAPLIST),
-            _ => Err(TradeStatusError::new(value))
+            v => Err(crate::errors::EnumError::new("TradeStatus", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct TradeStatusError {
-    pub value: u32,
-}
-
-impl TradeStatusError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for TradeStatusError {}
-impl std::fmt::Display for TradeStatusError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'TradeStatus': '{}'", self.value))
     }
 }
 

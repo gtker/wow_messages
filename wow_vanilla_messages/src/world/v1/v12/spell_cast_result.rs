@@ -453,7 +453,7 @@ impl std::fmt::Display for SpellCastResult {
 }
 
 impl TryFrom<u8> for SpellCastResult {
-    type Error = SpellCastResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::AFFECTING_COMBAT),
@@ -597,26 +597,8 @@ impl TryFrom<u8> for SpellCastResult {
             143 => Ok(Self::REPUTATION),
             144 => Ok(Self::MIN_SKILL),
             145 => Ok(Self::UNKNOWN),
-            _ => Err(SpellCastResultError::new(value))
+            v => Err(crate::errors::EnumError::new("SpellCastResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct SpellCastResultError {
-    pub value: u8,
-}
-
-impl SpellCastResultError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for SpellCastResultError {}
-impl std::fmt::Display for SpellCastResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'SpellCastResult': '{}'", self.value))
     }
 }
 

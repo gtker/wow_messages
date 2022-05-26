@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{PetitionTurnInResult, PetitionTurnInResultError};
+use crate::world::v1::v12::PetitionTurnInResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_TURN_IN_PETITION_RESULTS {
 #[derive(Debug)]
 pub enum SMSG_TURN_IN_PETITION_RESULTSError {
     Io(std::io::Error),
-    PetitionTurnInResult(PetitionTurnInResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_TURN_IN_PETITION_RESULTSError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_TURN_IN_PETITION_RESULTSError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::PetitionTurnInResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_TURN_IN_PETITION_RESULTSError {
     }
 }
 
-impl From<PetitionTurnInResultError> for SMSG_TURN_IN_PETITION_RESULTSError {
-    fn from(e: PetitionTurnInResultError) -> Self {
-        Self::PetitionTurnInResult(e)
+impl From<crate::errors::EnumError> for SMSG_TURN_IN_PETITION_RESULTSError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

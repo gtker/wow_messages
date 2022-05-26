@@ -135,7 +135,7 @@ impl std::fmt::Display for ChatType {
 }
 
 impl TryFrom<u8> for ChatType {
-    type Error = ChatTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::SAY),
@@ -173,26 +173,8 @@ impl TryFrom<u8> for ChatType {
             90 => Ok(Self::RAID_BOSS_EMOTE),
             92 => Ok(Self::BATTLEGROUND),
             93 => Ok(Self::BATTLEGROUND_LEADER),
-            _ => Err(ChatTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("ChatType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct ChatTypeError {
-    pub value: u8,
-}
-
-impl ChatTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for ChatTypeError {}
-impl std::fmt::Display for ChatTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'ChatType': '{}'", self.value))
     }
 }
 

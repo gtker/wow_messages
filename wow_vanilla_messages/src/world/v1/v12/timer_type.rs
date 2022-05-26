@@ -42,33 +42,15 @@ impl std::fmt::Display for TimerType {
 }
 
 impl TryFrom<u32> for TimerType {
-    type Error = TimerTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::FATIGUE),
             1 => Ok(Self::BREATH),
             2 => Ok(Self::FEIGNDEATH),
             3 => Ok(Self::ENVIRONMENTAL),
-            _ => Err(TimerTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("TimerType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct TimerTypeError {
-    pub value: u32,
-}
-
-impl TimerTypeError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for TimerTypeError {}
-impl std::fmt::Display for TimerTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'TimerType': '{}'", self.value))
     }
 }
 

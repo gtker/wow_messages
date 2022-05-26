@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{RaidGroupError, RaidGroupErrorError};
+use crate::world::v1::v12::RaidGroupError;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -118,7 +118,7 @@ impl ServerMessage for SMSG_RAID_GROUP_ONLY {
 #[derive(Debug)]
 pub enum SMSG_RAID_GROUP_ONLYError {
     Io(std::io::Error),
-    RaidGroupError(RaidGroupErrorError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_RAID_GROUP_ONLYError {}
@@ -126,7 +126,7 @@ impl std::fmt::Display for SMSG_RAID_GROUP_ONLYError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::RaidGroupError(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -137,9 +137,9 @@ impl From<std::io::Error> for SMSG_RAID_GROUP_ONLYError {
     }
 }
 
-impl From<RaidGroupErrorError> for SMSG_RAID_GROUP_ONLYError {
-    fn from(e: RaidGroupErrorError) -> Self {
-        Self::RaidGroupError(e)
+impl From<crate::errors::EnumError> for SMSG_RAID_GROUP_ONLYError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

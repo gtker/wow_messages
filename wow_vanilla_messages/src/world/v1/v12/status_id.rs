@@ -45,7 +45,7 @@ impl std::fmt::Display for StatusId {
 }
 
 impl TryFrom<u8> for StatusId {
-    type Error = StatusIdError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NONE),
@@ -53,26 +53,8 @@ impl TryFrom<u8> for StatusId {
             2 => Ok(Self::WAIT_JOIN),
             3 => Ok(Self::IN_PROGRESS),
             4 => Ok(Self::WAIT_LEAVE),
-            _ => Err(StatusIdError::new(value))
+            v => Err(crate::errors::EnumError::new("StatusId", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct StatusIdError {
-    pub value: u8,
-}
-
-impl StatusIdError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for StatusIdError {}
-impl std::fmt::Display for StatusIdError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'StatusId': '{}'", self.value))
     }
 }
 

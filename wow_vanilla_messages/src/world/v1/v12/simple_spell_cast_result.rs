@@ -36,31 +36,13 @@ impl std::fmt::Display for SimpleSpellCastResult {
 }
 
 impl TryFrom<u8> for SimpleSpellCastResult {
-    type Error = SimpleSpellCastResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::SUCCESS),
             2 => Ok(Self::FAILURE),
-            _ => Err(SimpleSpellCastResultError::new(value))
+            v => Err(crate::errors::EnumError::new("SimpleSpellCastResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct SimpleSpellCastResultError {
-    pub value: u8,
-}
-
-impl SimpleSpellCastResultError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for SimpleSpellCastResultError {}
-impl std::fmt::Display for SimpleSpellCastResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'SimpleSpellCastResult': '{}'", self.value))
     }
 }
 

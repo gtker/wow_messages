@@ -36,31 +36,13 @@ impl std::fmt::Display for LogoutSpeed {
 }
 
 impl TryFrom<u8> for LogoutSpeed {
-    type Error = LogoutSpeedError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::DELAYED),
             1 => Ok(Self::INSTANT),
-            _ => Err(LogoutSpeedError::new(value))
+            v => Err(crate::errors::EnumError::new("LogoutSpeed", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct LogoutSpeedError {
-    pub value: u8,
-}
-
-impl LogoutSpeedError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for LogoutSpeedError {}
-impl std::fmt::Display for LogoutSpeedError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'LogoutSpeed': '{}'", self.value))
     }
 }
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{CinematicSequenceId, CinematicSequenceIdError};
+use crate::world::v1::v12::CinematicSequenceId;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_TRIGGER_CINEMATIC {
 #[derive(Debug)]
 pub enum SMSG_TRIGGER_CINEMATICError {
     Io(std::io::Error),
-    CinematicSequenceId(CinematicSequenceIdError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_TRIGGER_CINEMATICError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_TRIGGER_CINEMATICError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::CinematicSequenceId(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_TRIGGER_CINEMATICError {
     }
 }
 
-impl From<CinematicSequenceIdError> for SMSG_TRIGGER_CINEMATICError {
-    fn from(e: CinematicSequenceIdError) -> Self {
-        Self::CinematicSequenceId(e)
+impl From<crate::errors::EnumError> for SMSG_TRIGGER_CINEMATICError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

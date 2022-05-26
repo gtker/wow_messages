@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{SimpleEnum, SimpleEnumError};
-use crate::world::v1::v12::{SimpleFlag};
+use crate::world::v1::v12::SimpleEnum;
+use crate::world::v1::v12::SimpleFlag;
 use crate::world::v1::v12::{StructWithAllBuiltInTypes, StructWithAllBuiltInTypesError};
 use crate::{ClientMessage, ServerMessage};
 use wow_srp::header_crypto::Encrypter;
@@ -247,7 +247,7 @@ impl MessageWithComplexTypes {
 #[derive(Debug)]
 pub enum MessageWithComplexTypesError {
     Io(std::io::Error),
-    SimpleEnum(SimpleEnumError),
+    Enum(crate::errors::EnumError),
     StructWithAllBuiltInTypes(StructWithAllBuiltInTypesError),
 }
 
@@ -256,7 +256,7 @@ impl std::fmt::Display for MessageWithComplexTypesError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::SimpleEnum(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
             Self::StructWithAllBuiltInTypes(i) => i.fmt(f),
         }
     }
@@ -268,9 +268,9 @@ impl From<std::io::Error> for MessageWithComplexTypesError {
     }
 }
 
-impl From<SimpleEnumError> for MessageWithComplexTypesError {
-    fn from(e: SimpleEnumError) -> Self {
-        Self::SimpleEnum(e)
+impl From<crate::errors::EnumError> for MessageWithComplexTypesError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

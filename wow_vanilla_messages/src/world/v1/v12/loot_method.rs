@@ -54,7 +54,7 @@ impl std::fmt::Display for LootMethod {
 }
 
 impl TryFrom<u8> for LootMethod {
-    type Error = LootMethodError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::CORPSE),
@@ -65,26 +65,8 @@ impl TryFrom<u8> for LootMethod {
             20 => Ok(Self::FISHINGHOLE),
             21 => Ok(Self::FISHING_FAIL),
             22 => Ok(Self::INSIGNIA),
-            _ => Err(LootMethodError::new(value))
+            v => Err(crate::errors::EnumError::new("LootMethod", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct LootMethodError {
-    pub value: u8,
-}
-
-impl LootMethodError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for LootMethodError {}
-impl std::fmt::Display for LootMethodError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'LootMethod': '{}'", self.value))
     }
 }
 

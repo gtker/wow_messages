@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v2::{WorldResult, WorldResultError};
+use crate::world::v1::v2::WorldResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -591,7 +591,7 @@ impl SMSG_CHAR_RENAME {
 pub enum SMSG_CHAR_RENAMEError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    WorldResult(WorldResultError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_CHAR_RENAMEError {}
@@ -600,7 +600,7 @@ impl std::fmt::Display for SMSG_CHAR_RENAMEError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::WorldResult(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -611,15 +611,15 @@ impl From<std::io::Error> for SMSG_CHAR_RENAMEError {
     }
 }
 
-impl From<std::string::FromUtf8Error> for SMSG_CHAR_RENAMEError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
+impl From<crate::errors::EnumError> for SMSG_CHAR_RENAMEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 
-impl From<WorldResultError> for SMSG_CHAR_RENAMEError {
-    fn from(e: WorldResultError) -> Self {
-        Self::WorldResult(e)
+impl From<std::string::FromUtf8Error> for SMSG_CHAR_RENAMEError {
+    fn from(e: std::string::FromUtf8Error) -> Self {
+        Self::String(e)
     }
 }
 

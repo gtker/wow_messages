@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{ItemClass, ItemClassError};
+use crate::world::v1::v12::ItemClass;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -118,7 +118,7 @@ impl ServerMessage for SMSG_SET_PROFICIENCY {
 #[derive(Debug)]
 pub enum SMSG_SET_PROFICIENCYError {
     Io(std::io::Error),
-    ItemClass(ItemClassError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_SET_PROFICIENCYError {}
@@ -126,7 +126,7 @@ impl std::fmt::Display for SMSG_SET_PROFICIENCYError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::ItemClass(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -137,9 +137,9 @@ impl From<std::io::Error> for SMSG_SET_PROFICIENCYError {
     }
 }
 
-impl From<ItemClassError> for SMSG_SET_PROFICIENCYError {
-    fn from(e: ItemClassError) -> Self {
-        Self::ItemClass(e)
+impl From<crate::errors::EnumError> for SMSG_SET_PROFICIENCYError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{SimpleFlag};
-use crate::world::v1::v12::{UpdateFlag};
+use crate::world::v1::v12::SimpleFlag;
+use crate::world::v1::v12::UpdateFlag;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]

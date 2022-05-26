@@ -42,33 +42,15 @@ impl std::fmt::Display for PetFeedback {
 }
 
 impl TryFrom<u8> for PetFeedback {
-    type Error = PetFeedbackError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::PET_DEAD),
             2 => Ok(Self::NOTHING_TO_EAT),
             3 => Ok(Self::CANT_ATTACK_TARGET),
             4 => Ok(Self::NO_PATH_TO),
-            _ => Err(PetFeedbackError::new(value))
+            v => Err(crate::errors::EnumError::new("PetFeedback", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PetFeedbackError {
-    pub value: u8,
-}
-
-impl PetFeedbackError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PetFeedbackError {}
-impl std::fmt::Display for PetFeedbackError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'PetFeedback': '{}'", self.value))
     }
 }
 

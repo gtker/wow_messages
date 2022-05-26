@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{ActivateTaxiReply, ActivateTaxiReplyError};
+use crate::world::v1::v12::ActivateTaxiReply;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -99,7 +99,7 @@ impl ServerMessage for SMSG_ACTIVATETAXIREPLY {
 #[derive(Debug)]
 pub enum SMSG_ACTIVATETAXIREPLYError {
     Io(std::io::Error),
-    ActivateTaxiReply(ActivateTaxiReplyError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_ACTIVATETAXIREPLYError {}
@@ -107,7 +107,7 @@ impl std::fmt::Display for SMSG_ACTIVATETAXIREPLYError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::ActivateTaxiReply(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -118,9 +118,9 @@ impl From<std::io::Error> for SMSG_ACTIVATETAXIREPLYError {
     }
 }
 
-impl From<ActivateTaxiReplyError> for SMSG_ACTIVATETAXIREPLYError {
-    fn from(e: ActivateTaxiReplyError) -> Self {
-        Self::ActivateTaxiReply(e)
+impl From<crate::errors::EnumError> for SMSG_ACTIVATETAXIREPLYError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

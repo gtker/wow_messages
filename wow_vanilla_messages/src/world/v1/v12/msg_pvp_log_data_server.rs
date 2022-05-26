@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{BattlegroundEndStatus, BattlegroundEndStatusError};
+use crate::world::v1::v12::BattlegroundEndStatus;
 use crate::world::v1::v12::{BattlegroundPlayer, BattlegroundPlayerError};
-use crate::world::v1::v12::{BattlegroundWinner, BattlegroundWinnerError};
+use crate::world::v1::v12::BattlegroundWinner;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -213,9 +213,8 @@ impl MSG_PVP_LOG_DATA_Server {
 #[derive(Debug)]
 pub enum MSG_PVP_LOG_DATA_ServerError {
     Io(std::io::Error),
-    BattlegroundEndStatus(BattlegroundEndStatusError),
+    Enum(crate::errors::EnumError),
     BattlegroundPlayer(BattlegroundPlayerError),
-    BattlegroundWinner(BattlegroundWinnerError),
 }
 
 impl std::error::Error for MSG_PVP_LOG_DATA_ServerError {}
@@ -223,9 +222,8 @@ impl std::fmt::Display for MSG_PVP_LOG_DATA_ServerError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::BattlegroundEndStatus(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
             Self::BattlegroundPlayer(i) => i.fmt(f),
-            Self::BattlegroundWinner(i) => i.fmt(f),
         }
     }
 }
@@ -236,21 +234,15 @@ impl From<std::io::Error> for MSG_PVP_LOG_DATA_ServerError {
     }
 }
 
-impl From<BattlegroundEndStatusError> for MSG_PVP_LOG_DATA_ServerError {
-    fn from(e: BattlegroundEndStatusError) -> Self {
-        Self::BattlegroundEndStatus(e)
+impl From<crate::errors::EnumError> for MSG_PVP_LOG_DATA_ServerError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 
 impl From<BattlegroundPlayerError> for MSG_PVP_LOG_DATA_ServerError {
     fn from(e: BattlegroundPlayerError) -> Self {
         Self::BattlegroundPlayer(e)
-    }
-}
-
-impl From<BattlegroundWinnerError> for MSG_PVP_LOG_DATA_ServerError {
-    fn from(e: BattlegroundWinnerError) -> Self {
-        Self::BattlegroundWinner(e)
     }
 }
 

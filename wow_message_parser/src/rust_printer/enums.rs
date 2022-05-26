@@ -19,8 +19,6 @@ pub fn print_enum(e: &Definer) -> Writer {
 
     print_from_or_try_from(&mut s, e);
 
-    print_errors(&mut s, e);
-
     s
 }
 
@@ -140,7 +138,7 @@ fn print_from_or_try_from(s: &mut Writer, e: &Definer) {
 
 fn print_try_from(s: &mut Writer, e: &Definer) {
     s.impl_for(format!("TryFrom<{}>", e.ty().rust_str()), e.name(), |s| {
-        s.wln(format!("type Error = {}Error;", e.name()));
+        s.wln("type Error = crate::errors::EnumError;");
 
         s.body(
             format!(
@@ -157,7 +155,10 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                         ));
                     }
 
-                    s.wln(format!("_ => Err({}Error::new(value))", e.name()));
+                    s.wln(format!(
+                        "v => Err(crate::errors::EnumError::new(\"{}\", v as u32),)",
+                        e.name()
+                    ));
                 });
             },
         );
@@ -186,41 +187,4 @@ fn print_from(s: &mut Writer, e: &Definer) {
             },
         );
     });
-}
-
-fn print_errors(s: &mut Writer, e: &Definer) {
-    if e.self_value().is_some() {
-        return;
-    }
-
-    s.wln("#[derive(Debug)]");
-    s.new_struct(format!("{}Error", e.name()), |s| {
-        s.wln(format!("pub value: {},", e.ty().rust_str()));
-    });
-
-    s.bodyn(format!("impl {}Error", e.name()), |s| {
-        s.body(
-            format!("pub const fn new(value: {}) -> Self", e.ty().rust_str()),
-            |s| {
-                s.wln("Self { value }");
-            },
-        );
-    });
-
-    s.wln(format!("impl std::error::Error for {}Error {{}}", e.name()));
-
-    s.impl_for(
-        "std::fmt::Display",format!("{}Error", e.name()),
-        |s| {
-            s.body(
-                "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
-                |s| {
-                    s.wln(format!(
-                        r#"f.write_fmt(format_args!("invalid value for enum '{}': '{{}}'", self.value))"#,
-                        e.name()
-                    ));
-                },
-            );
-        },
-    );
 }

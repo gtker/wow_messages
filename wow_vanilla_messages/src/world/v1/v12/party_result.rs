@@ -57,7 +57,7 @@ impl std::fmt::Display for PartyResult {
 }
 
 impl TryFrom<u8> for PartyResult {
-    type Error = PartyResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::SUCCESS),
@@ -69,26 +69,8 @@ impl TryFrom<u8> for PartyResult {
             6 => Ok(Self::NOT_LEADER),
             7 => Ok(Self::PLAYER_WRONG_FACTION),
             8 => Ok(Self::IGNORING_YOU),
-            _ => Err(PartyResultError::new(value))
+            v => Err(crate::errors::EnumError::new("PartyResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PartyResultError {
-    pub value: u8,
-}
-
-impl PartyResultError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PartyResultError {}
-impl std::fmt::Display for PartyResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'PartyResult': '{}'", self.value))
     }
 }
 

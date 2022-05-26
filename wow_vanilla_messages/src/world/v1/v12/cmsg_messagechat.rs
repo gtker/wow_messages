@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{ChatType, ChatTypeError};
-use crate::world::v1::v12::{Language, LanguageError};
+use crate::world::v1::v12::ChatType;
+use crate::world::v1::v12::Language;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -970,8 +970,7 @@ impl CMSG_MESSAGECHAT {
 pub enum CMSG_MESSAGECHATError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    ChatType(ChatTypeError),
-    Language(LanguageError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMSG_MESSAGECHATError {}
@@ -980,8 +979,7 @@ impl std::fmt::Display for CMSG_MESSAGECHATError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::ChatType(i) => i.fmt(f),
-            Self::Language(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -992,21 +990,15 @@ impl From<std::io::Error> for CMSG_MESSAGECHATError {
     }
 }
 
+impl From<crate::errors::EnumError> for CMSG_MESSAGECHATError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<std::string::FromUtf8Error> for CMSG_MESSAGECHATError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
-    }
-}
-
-impl From<ChatTypeError> for CMSG_MESSAGECHATError {
-    fn from(e: ChatTypeError) -> Self {
-        Self::ChatType(e)
-    }
-}
-
-impl From<LanguageError> for CMSG_MESSAGECHATError {
-    fn from(e: LanguageError) -> Self {
-        Self::Language(e)
     }
 }
 

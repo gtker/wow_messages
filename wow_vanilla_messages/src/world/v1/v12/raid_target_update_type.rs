@@ -36,31 +36,13 @@ impl std::fmt::Display for RaidTargetUpdateType {
 }
 
 impl TryFrom<u8> for RaidTargetUpdateType {
-    type Error = RaidTargetUpdateTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::PARTIAL),
             1 => Ok(Self::FULL),
-            _ => Err(RaidTargetUpdateTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("RaidTargetUpdateType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct RaidTargetUpdateTypeError {
-    pub value: u8,
-}
-
-impl RaidTargetUpdateTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for RaidTargetUpdateTypeError {}
-impl std::fmt::Display for RaidTargetUpdateTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'RaidTargetUpdateType': '{}'", self.value))
     }
 }
 

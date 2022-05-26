@@ -63,7 +63,7 @@ impl std::fmt::Display for MountResult {
 }
 
 impl TryFrom<u32> for MountResult {
-    type Error = MountResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::INVALIDMOUNTEE),
@@ -77,26 +77,8 @@ impl TryFrom<u32> for MountResult {
             8 => Ok(Self::SHAPESHIFTED),
             9 => Ok(Self::FORCEDDISMOUNT),
             10 => Ok(Self::OK),
-            _ => Err(MountResultError::new(value))
+            v => Err(crate::errors::EnumError::new("MountResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct MountResultError {
-    pub value: u32,
-}
-
-impl MountResultError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for MountResultError {}
-impl std::fmt::Display for MountResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'MountResult': '{}'", self.value))
     }
 }
 

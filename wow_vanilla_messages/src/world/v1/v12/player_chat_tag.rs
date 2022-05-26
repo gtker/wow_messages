@@ -42,33 +42,15 @@ impl std::fmt::Display for PlayerChatTag {
 }
 
 impl TryFrom<u8> for PlayerChatTag {
-    type Error = PlayerChatTagError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NONE),
             1 => Ok(Self::AFK),
             2 => Ok(Self::DND),
             3 => Ok(Self::GM),
-            _ => Err(PlayerChatTagError::new(value))
+            v => Err(crate::errors::EnumError::new("PlayerChatTag", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PlayerChatTagError {
-    pub value: u8,
-}
-
-impl PlayerChatTagError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PlayerChatTagError {}
-impl std::fmt::Display for PlayerChatTagError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'PlayerChatTag': '{}'", self.value))
     }
 }
 

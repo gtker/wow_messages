@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{RollVote, RollVoteError};
+use crate::world::v1::v12::RollVote;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -138,7 +138,7 @@ impl ClientMessage for CMSG_LOOT_ROLL {
 #[derive(Debug)]
 pub enum CMSG_LOOT_ROLLError {
     Io(std::io::Error),
-    RollVote(RollVoteError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for CMSG_LOOT_ROLLError {}
@@ -146,7 +146,7 @@ impl std::fmt::Display for CMSG_LOOT_ROLLError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::RollVote(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -157,9 +157,9 @@ impl From<std::io::Error> for CMSG_LOOT_ROLLError {
     }
 }
 
-impl From<RollVoteError> for CMSG_LOOT_ROLLError {
-    fn from(e: RollVoteError) -> Self {
-        Self::RollVote(e)
+impl From<crate::errors::EnumError> for CMSG_LOOT_ROLLError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

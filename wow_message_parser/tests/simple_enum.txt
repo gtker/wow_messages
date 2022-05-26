@@ -39,32 +39,14 @@ impl std::fmt::Display for SimpleEnum {
 }
 
 impl TryFrom<u8> for SimpleEnum {
-    type Error = SimpleEnumError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::ZERO),
             1 => Ok(Self::ONE),
             2 => Ok(Self::TWO),
-            _ => Err(SimpleEnumError::new(value))
+            v => Err(crate::errors::EnumError::new("SimpleEnum", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct SimpleEnumError {
-    pub value: u8,
-}
-
-impl SimpleEnumError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for SimpleEnumError {}
-impl std::fmt::Display for SimpleEnumError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'SimpleEnum': '{}'", self.value))
     }
 }
 

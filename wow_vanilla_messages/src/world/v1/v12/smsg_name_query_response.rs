@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{Class, ClassError};
-use crate::world::v1::v12::{Gender, GenderError};
-use crate::world::v1::v12::{Race, RaceError};
+use crate::world::v1::v12::Class;
+use crate::world::v1::v12::Gender;
+use crate::world::v1::v12::Race;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -222,9 +222,7 @@ impl SMSG_NAME_QUERY_RESPONSE {
 pub enum SMSG_NAME_QUERY_RESPONSEError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    Class(ClassError),
-    Gender(GenderError),
-    Race(RaceError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_NAME_QUERY_RESPONSEError {}
@@ -233,9 +231,7 @@ impl std::fmt::Display for SMSG_NAME_QUERY_RESPONSEError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::Class(i) => i.fmt(f),
-            Self::Gender(i) => i.fmt(f),
-            Self::Race(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -246,27 +242,15 @@ impl From<std::io::Error> for SMSG_NAME_QUERY_RESPONSEError {
     }
 }
 
+impl From<crate::errors::EnumError> for SMSG_NAME_QUERY_RESPONSEError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
+    }
+}
+
 impl From<std::string::FromUtf8Error> for SMSG_NAME_QUERY_RESPONSEError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
-    }
-}
-
-impl From<ClassError> for SMSG_NAME_QUERY_RESPONSEError {
-    fn from(e: ClassError) -> Self {
-        Self::Class(e)
-    }
-}
-
-impl From<GenderError> for SMSG_NAME_QUERY_RESPONSEError {
-    fn from(e: GenderError) -> Self {
-        Self::Gender(e)
-    }
-}
-
-impl From<RaceError> for SMSG_NAME_QUERY_RESPONSEError {
-    fn from(e: RaceError) -> Self {
-        Self::Race(e)
     }
 }
 

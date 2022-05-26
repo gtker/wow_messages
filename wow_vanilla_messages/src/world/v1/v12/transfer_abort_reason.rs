@@ -45,7 +45,7 @@ impl std::fmt::Display for TransferAbortReason {
 }
 
 impl TryFrom<u8> for TransferAbortReason {
-    type Error = TransferAbortReasonError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NONE),
@@ -53,26 +53,8 @@ impl TryFrom<u8> for TransferAbortReason {
             2 => Ok(Self::NOT_FOUND),
             3 => Ok(Self::TOO_MANY_INSTANCES),
             5 => Ok(Self::ZONE_IS_IN_COMBAT),
-            _ => Err(TransferAbortReasonError::new(value))
+            v => Err(crate::errors::EnumError::new("TransferAbortReason", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct TransferAbortReasonError {
-    pub value: u8,
-}
-
-impl TransferAbortReasonError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for TransferAbortReasonError {}
-impl std::fmt::Display for TransferAbortReasonError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'TransferAbortReason': '{}'", self.value))
     }
 }
 

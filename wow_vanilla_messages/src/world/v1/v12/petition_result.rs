@@ -48,7 +48,7 @@ impl std::fmt::Display for PetitionResult {
 }
 
 impl TryFrom<u32> for PetitionResult {
-    type Error = PetitionResultError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::OK),
@@ -57,26 +57,8 @@ impl TryFrom<u32> for PetitionResult {
             3 => Ok(Self::CANT_SIGN_OWN),
             4 => Ok(Self::NEED_MORE),
             5 => Ok(Self::NOT_SERVER),
-            _ => Err(PetitionResultError::new(value))
+            v => Err(crate::errors::EnumError::new("PetitionResult", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct PetitionResultError {
-    pub value: u32,
-}
-
-impl PetitionResultError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for PetitionResultError {}
-impl std::fmt::Display for PetitionResultError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'PetitionResult': '{}'", self.value))
     }
 }
 

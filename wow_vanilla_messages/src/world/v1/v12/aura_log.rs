@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{AuraType, AuraTypeError};
-use crate::world::v1::v12::{SpellSchool, SpellSchoolError};
+use crate::world::v1::v12::AuraType;
+use crate::world::v1::v12::SpellSchool;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -1191,8 +1191,7 @@ impl AuraLog {
 #[derive(Debug)]
 pub enum AuraLogError {
     Io(std::io::Error),
-    AuraType(AuraTypeError),
-    SpellSchool(SpellSchoolError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for AuraLogError {}
@@ -1200,8 +1199,7 @@ impl std::fmt::Display for AuraLogError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::AuraType(i) => i.fmt(f),
-            Self::SpellSchool(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -1212,15 +1210,9 @@ impl From<std::io::Error> for AuraLogError {
     }
 }
 
-impl From<AuraTypeError> for AuraLogError {
-    fn from(e: AuraTypeError) -> Self {
-        Self::AuraType(e)
-    }
-}
-
-impl From<SpellSchoolError> for AuraLogError {
-    fn from(e: SpellSchoolError) -> Self {
-        Self::SpellSchool(e)
+impl From<crate::errors::EnumError> for AuraLogError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

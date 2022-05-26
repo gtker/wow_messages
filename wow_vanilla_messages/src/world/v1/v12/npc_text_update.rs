@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{Language, LanguageError};
+use crate::world::v1::v12::Language;
 use crate::world::v1::v12::NpcTextUpdateEmote;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -146,7 +146,7 @@ impl NpcTextUpdate {
 pub enum NpcTextUpdateError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
-    Language(LanguageError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for NpcTextUpdateError {}
@@ -155,7 +155,7 @@ impl std::fmt::Display for NpcTextUpdateError {
         match self {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
-            Self::Language(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -166,15 +166,15 @@ impl From<std::io::Error> for NpcTextUpdateError {
     }
 }
 
-impl From<std::string::FromUtf8Error> for NpcTextUpdateError {
-    fn from(e: std::string::FromUtf8Error) -> Self {
-        Self::String(e)
+impl From<crate::errors::EnumError> for NpcTextUpdateError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 
-impl From<LanguageError> for NpcTextUpdateError {
-    fn from(e: LanguageError) -> Self {
-        Self::Language(e)
+impl From<std::string::FromUtf8Error> for NpcTextUpdateError {
+    fn from(e: std::string::FromUtf8Error) -> Self {
+        Self::String(e)
     }
 }
 

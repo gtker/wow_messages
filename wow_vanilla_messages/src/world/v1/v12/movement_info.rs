@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::v1::v12::{MovementFlags};
+use crate::world::v1::v12::MovementFlags;
 use crate::world::v1::v12::TransportInfo;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;

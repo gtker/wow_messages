@@ -45,7 +45,7 @@ impl std::fmt::Display for ServerMessageType {
 }
 
 impl TryFrom<u32> for ServerMessageType {
-    type Error = ServerMessageTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::SHUTDOWN_TIME),
@@ -53,26 +53,8 @@ impl TryFrom<u32> for ServerMessageType {
             3 => Ok(Self::CUSTOM),
             4 => Ok(Self::SHUTDOWN_CANCELLED),
             5 => Ok(Self::RESTART_CANCELLED),
-            _ => Err(ServerMessageTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("ServerMessageType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct ServerMessageTypeError {
-    pub value: u32,
-}
-
-impl ServerMessageTypeError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for ServerMessageTypeError {}
-impl std::fmt::Display for ServerMessageTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'ServerMessageType': '{}'", self.value))
     }
 }
 

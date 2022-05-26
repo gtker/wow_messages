@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{Area, AreaError};
+use crate::world::v1::v12::Area;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -119,7 +119,7 @@ impl ServerMessage for SMSG_PLAYERBOUND {
 #[derive(Debug)]
 pub enum SMSG_PLAYERBOUNDError {
     Io(std::io::Error),
-    Area(AreaError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for SMSG_PLAYERBOUNDError {}
@@ -127,7 +127,7 @@ impl std::fmt::Display for SMSG_PLAYERBOUNDError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::Area(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -138,9 +138,9 @@ impl From<std::io::Error> for SMSG_PLAYERBOUNDError {
     }
 }
 
-impl From<AreaError> for SMSG_PLAYERBOUNDError {
-    fn from(e: AreaError) -> Self {
-        Self::Area(e)
+impl From<crate::errors::EnumError> for SMSG_PLAYERBOUNDError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 

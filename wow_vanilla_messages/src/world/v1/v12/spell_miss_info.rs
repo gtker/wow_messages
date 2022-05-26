@@ -66,7 +66,7 @@ impl std::fmt::Display for SpellMissInfo {
 }
 
 impl TryFrom<u32> for SpellMissInfo {
-    type Error = SpellMissInfoError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NONE),
@@ -81,26 +81,8 @@ impl TryFrom<u32> for SpellMissInfo {
             9 => Ok(Self::DEFLECT),
             10 => Ok(Self::ABSORB),
             11 => Ok(Self::REFLECT),
-            _ => Err(SpellMissInfoError::new(value))
+            v => Err(crate::errors::EnumError::new("SpellMissInfo", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct SpellMissInfoError {
-    pub value: u32,
-}
-
-impl SpellMissInfoError {
-    pub const fn new(value: u32) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for SpellMissInfoError {}
-impl std::fmt::Display for SpellMissInfoError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'SpellMissInfo': '{}'", self.value))
     }
 }
 

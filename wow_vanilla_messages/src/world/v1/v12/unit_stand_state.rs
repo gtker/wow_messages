@@ -60,7 +60,7 @@ impl std::fmt::Display for UnitStandState {
 }
 
 impl TryFrom<u8> for UnitStandState {
-    type Error = UnitStandStateError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::STAND),
@@ -73,26 +73,8 @@ impl TryFrom<u8> for UnitStandState {
             7 => Ok(Self::DEAD),
             8 => Ok(Self::KNEEL),
             9 => Ok(Self::CUSTOM),
-            _ => Err(UnitStandStateError::new(value))
+            v => Err(crate::errors::EnumError::new("UnitStandState", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct UnitStandStateError {
-    pub value: u8,
-}
-
-impl UnitStandStateError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for UnitStandStateError {}
-impl std::fmt::Display for UnitStandStateError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'UnitStandState': '{}'", self.value))
     }
 }
 

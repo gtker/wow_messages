@@ -54,7 +54,7 @@ impl std::fmt::Display for QuestGiverStatus {
 }
 
 impl TryFrom<u8> for QuestGiverStatus {
-    type Error = QuestGiverStatusError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::NONE),
@@ -65,26 +65,8 @@ impl TryFrom<u8> for QuestGiverStatus {
             5 => Ok(Self::AVAILABLE),
             6 => Ok(Self::REWARD_OLD),
             7 => Ok(Self::REWARD2),
-            _ => Err(QuestGiverStatusError::new(value))
+            v => Err(crate::errors::EnumError::new("QuestGiverStatus", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct QuestGiverStatusError {
-    pub value: u8,
-}
-
-impl QuestGiverStatusError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for QuestGiverStatusError {}
-impl std::fmt::Display for QuestGiverStatusError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'QuestGiverStatus': '{}'", self.value))
     }
 }
 

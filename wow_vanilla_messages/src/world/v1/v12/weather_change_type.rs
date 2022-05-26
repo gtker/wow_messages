@@ -36,31 +36,13 @@ impl std::fmt::Display for WeatherChangeType {
 }
 
 impl TryFrom<u8> for WeatherChangeType {
-    type Error = WeatherChangeTypeError;
+    type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::SMOOTH),
             1 => Ok(Self::INSTANT),
-            _ => Err(WeatherChangeTypeError::new(value))
+            v => Err(crate::errors::EnumError::new("WeatherChangeType", v as u32),)
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct WeatherChangeTypeError {
-    pub value: u8,
-}
-
-impl WeatherChangeTypeError {
-    pub const fn new(value: u8) -> Self {
-        Self { value }
-    }
-}
-
-impl std::error::Error for WeatherChangeTypeError {}
-impl std::fmt::Display for WeatherChangeTypeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("invalid value for enum 'WeatherChangeType': '{}'", self.value))
     }
 }
 

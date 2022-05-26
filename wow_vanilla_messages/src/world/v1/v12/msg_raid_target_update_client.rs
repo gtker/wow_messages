@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::v1::v12::{RaidTargetIndex, RaidTargetIndexError};
+use crate::world::v1::v12::RaidTargetIndex;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -467,7 +467,7 @@ impl MSG_RAID_TARGET_UPDATE_Client {
 #[derive(Debug)]
 pub enum MSG_RAID_TARGET_UPDATE_ClientError {
     Io(std::io::Error),
-    RaidTargetIndex(RaidTargetIndexError),
+    Enum(crate::errors::EnumError),
 }
 
 impl std::error::Error for MSG_RAID_TARGET_UPDATE_ClientError {}
@@ -475,7 +475,7 @@ impl std::fmt::Display for MSG_RAID_TARGET_UPDATE_ClientError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::RaidTargetIndex(i) => i.fmt(f),
+            Self::Enum(e) => e.fmt(f),
         }
     }
 }
@@ -486,9 +486,9 @@ impl From<std::io::Error> for MSG_RAID_TARGET_UPDATE_ClientError {
     }
 }
 
-impl From<RaidTargetIndexError> for MSG_RAID_TARGET_UPDATE_ClientError {
-    fn from(e: RaidTargetIndexError) -> Self {
-        Self::RaidTargetIndex(e)
+impl From<crate::errors::EnumError> for MSG_RAID_TARGET_UPDATE_ClientError {
+    fn from(e: crate::errors::EnumError) -> Self {
+        Self::Enum(e)
     }
 }
 
