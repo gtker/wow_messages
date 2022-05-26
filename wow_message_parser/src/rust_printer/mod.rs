@@ -424,25 +424,26 @@ impl Writer {
         )
     }
 
-    pub fn impl_read_and_writable_with_error<
-        S: AsRef<str>,
-        S1: AsRef<str>,
-        F: Fn(&mut Self, ImplType),
-        F2: Fn(&mut Self, ImplType),
-    >(
+    pub fn impl_read_and_writable_with_error(
         &mut self,
-        type_name: S,
-        error_name: S1,
-        read_function: F,
-        write_function: F2,
+        type_name: impl AsRef<str>,
+        error_name: impl AsRef<str>,
+        opcode: u16,
+        trait_to_impl: impl AsRef<str>,
+        read_function: impl Fn(&mut Self, ImplType),
+        write_function: impl Fn(&mut Self, ImplType),
         sizes: Option<Sizes>,
     ) {
         self.write_as_bytes(&type_name, write_function, sizes);
 
         self.open_curly(format!(
-            "impl ReadableAndWritable for {}",
-            type_name.as_ref()
+            "impl {} for {}",
+            trait_to_impl.as_ref(),
+            type_name.as_ref(),
         ));
+        self.wln(format!("const OPCODE: u8 = {};", opcode));
+        self.newline();
+
         self.wln(format!(
             "type Error = {err_ty};",
             err_ty = error_name.as_ref()

@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -16,9 +15,6 @@ pub struct CMD_AUTH_LOGON_PROOF_Client {
     pub telemetry_keys: Vec<TelemetryKey>,
 }
 
-impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
-    const OPCODE: u8 = 0x01;
-}
 impl CMD_AUTH_LOGON_PROOF_Client {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Vec::with_capacity(self.size());
@@ -52,7 +48,9 @@ impl CMD_AUTH_LOGON_PROOF_Client {
     }
 }
 
-impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
+impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
+    const OPCODE: u8 = 1;
+
     type Error = std::io::Error;
 
     #[cfg(feature = "sync")]

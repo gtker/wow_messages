@@ -13,7 +13,7 @@ use crate::logon::all::{
     CMD_AUTH_RECONNECT_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_ClientError,
 };
 use crate::util::read_u8_le;
-use crate::{ClientMessage, ReadableAndWritable, ServerMessage};
+use crate::{ClientMessage, ServerMessage};
 use std::fmt::{Display, Formatter};
 #[cfg(feature = "sync")]
 use std::io::Read;

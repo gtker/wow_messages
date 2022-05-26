@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -12,9 +11,6 @@ use std::io::Write;
 pub struct CMD_REALM_LIST_Client {
 }
 
-impl ClientMessage for CMD_REALM_LIST_Client {
-    const OPCODE: u8 = 0x10;
-}
 impl CMD_REALM_LIST_Client {
     pub const PADDING_VALUE: u32 = 0x00;
 
@@ -34,7 +30,9 @@ impl CMD_REALM_LIST_Client {
     }
 }
 
-impl ReadableAndWritable for CMD_REALM_LIST_Client {
+impl ClientMessage for CMD_REALM_LIST_Client {
+    const OPCODE: u8 = 16;
+
     type Error = std::io::Error;
 
     #[cfg(feature = "sync")]

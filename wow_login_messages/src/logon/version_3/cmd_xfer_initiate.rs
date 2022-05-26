@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ServerMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -12,9 +11,6 @@ use std::io::Write;
 pub struct CMD_XFER_INITIATE {
 }
 
-impl ServerMessage for CMD_XFER_INITIATE {
-    const OPCODE: u8 = 0x30;
-}
 impl CMD_XFER_INITIATE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
         let mut array_w = [0u8; 1];
@@ -26,7 +22,9 @@ impl CMD_XFER_INITIATE {
     }
 }
 
-impl ReadableAndWritable for CMD_XFER_INITIATE {
+impl ServerMessage for CMD_XFER_INITIATE {
+    const OPCODE: u8 = 48;
+
     type Error = std::io::Error;
 
     #[cfg(feature = "sync")]

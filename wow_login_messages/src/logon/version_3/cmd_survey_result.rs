@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -14,9 +13,6 @@ pub struct CMD_SURVEY_RESULT {
     pub data: Vec<u8>,
 }
 
-impl ClientMessage for CMD_SURVEY_RESULT {
-    const OPCODE: u8 = 0x04;
-}
 impl CMD_SURVEY_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Vec::with_capacity(self.size());
@@ -41,7 +37,9 @@ impl CMD_SURVEY_RESULT {
     }
 }
 
-impl ReadableAndWritable for CMD_SURVEY_RESULT {
+impl ClientMessage for CMD_SURVEY_RESULT {
+    const OPCODE: u8 = 4;
+
     type Error = std::io::Error;
 
     #[cfg(feature = "sync")]

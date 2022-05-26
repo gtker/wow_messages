@@ -33,14 +33,22 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 Some(e.sizes(o)),
             );
         }
-        ContainerType::CLogin(_) | ContainerType::SLogin(_) => {
+        ContainerType::CLogin(opcode) | ContainerType::SLogin(opcode) => {
             let mut sizes = e.sizes(o);
             let opcode_size = 1;
             sizes.inc_both(opcode_size);
 
+            let trait_to_impl = match e.container_type() {
+                ContainerType::CLogin(_) => CLIENT_MESSAGE_TRAIT_NAME,
+                ContainerType::SLogin(_) => SERVER_MESSAGE_TRAIT_NAME,
+                _ => unreachable!(),
+            };
+
             s.impl_read_and_writable_with_error(
                 e.name(),
                 &error_ty,
+                opcode,
+                trait_to_impl,
                 |s, it| {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
@@ -101,7 +109,6 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
     };
 
     match e.container_type() {
-        ContainerType::Struct => {}
         ContainerType::CMsg(_) => {
             empty_impl(s, WORLD_CLIENT_HEADER_TRAIT_NAME);
         }
@@ -112,22 +119,7 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
             empty_impl(s, WORLD_CLIENT_HEADER_TRAIT_NAME);
             empty_impl(s, WORLD_SERVER_HEADER_TRAIT_NAME);
         }
-        ContainerType::CLogin(v) => {
-            s.body(
-                format!("impl {} for {}", LOGIN_CLIENT_MESSAGE_TRAIT_NAME, e.name()),
-                |s| {
-                    s.wln(format!("const OPCODE: u8 = {:#04x};", v));
-                },
-            );
-        }
-        ContainerType::SLogin(v) => {
-            s.body(
-                format!("impl {} for {}", LOGIN_SERVER_MESSAGE_TRAIT_NAME, e.name()),
-                |s| {
-                    s.wln(format!("const OPCODE: u8 = {:#04x};", v));
-                },
-            );
-        }
+        _ => {}
     }
 
     if e.any_fields_have_constant_value() {

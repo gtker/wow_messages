@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::{Realm, RealmError};
 use crate::ServerMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -13,9 +12,6 @@ pub struct CMD_REALM_LIST_Server {
     pub realms: Vec<Realm>,
 }
 
-impl ServerMessage for CMD_REALM_LIST_Server {
-    const OPCODE: u8 = 0x10;
-}
 impl CMD_REALM_LIST_Server {
     pub const HEADER_PADDING_VALUE: u32 = 0x00;
 
@@ -50,7 +46,9 @@ impl CMD_REALM_LIST_Server {
     }
 }
 
-impl ReadableAndWritable for CMD_REALM_LIST_Server {
+impl ServerMessage for CMD_REALM_LIST_Server {
+    const OPCODE: u8 = 16;
+
     type Error = CMD_REALM_LIST_ServerError;
 
     #[cfg(feature = "sync")]

@@ -4,7 +4,6 @@ use crate::logon::all::Os;
 use crate::logon::all::Platform;
 use crate::logon::all::Version;
 use crate::ClientMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -23,9 +22,6 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
     pub account_name: String,
 }
 
-impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
-    const OPCODE: u8 = 0x00;
-}
 impl CMD_AUTH_LOGON_CHALLENGE_Client {
     pub const GAME_NAME_VALUE: u32 = 0x576f57;
 
@@ -74,7 +70,9 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
     }
 }
 
-impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
+impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
+    const OPCODE: u8 = 0;
+
     type Error = CMD_AUTH_LOGON_CHALLENGE_ClientError;
 
     #[cfg(feature = "sync")]

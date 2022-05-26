@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::{LoginResult, LoginResultError};
 use crate::ServerMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -14,9 +13,6 @@ pub struct CMD_AUTH_RECONNECT_PROOF_Server {
     pub result: LoginResult,
 }
 
-impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
-    const OPCODE: u8 = 0x03;
-}
 impl CMD_AUTH_RECONNECT_PROOF_Server {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 2], std::io::Error> {
         let mut array_w = [0u8; 2];
@@ -31,7 +27,9 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
     }
 }
 
-impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
+impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
+    const OPCODE: u8 = 3;
+
     type Error = CMD_AUTH_RECONNECT_PROOF_ServerError;
 
     #[cfg(feature = "sync")]

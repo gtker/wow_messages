@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -15,9 +14,6 @@ pub struct CMD_AUTH_RECONNECT_PROOF_Client {
     pub client_checksum: [u8; 20],
 }
 
-impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
-    const OPCODE: u8 = 0x03;
-}
 impl CMD_AUTH_RECONNECT_PROOF_Client {
     pub const KEY_COUNT_VALUE: u8 = 0x00;
 
@@ -52,7 +48,9 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
     }
 }
 
-impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Client {
+impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
+    const OPCODE: u8 = 3;
+
     type Error = std::io::Error;
 
     #[cfg(feature = "sync")]

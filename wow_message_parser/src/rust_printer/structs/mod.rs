@@ -83,11 +83,9 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     match e.container_type() {
         ContainerType::CLogin(_) => {
             s.wln(format!("use crate::{};", LOGIN_CLIENT_MESSAGE_TRAIT_NAME));
-            s.wln("use crate::ReadableAndWritable;");
         }
         ContainerType::SLogin(_) => {
             s.wln(format!("use crate::{};", LOGIN_SERVER_MESSAGE_TRAIT_NAME));
-            s.wln("use crate::ReadableAndWritable;");
         }
         ContainerType::SMsg(_) => {
             s.wln(format!(

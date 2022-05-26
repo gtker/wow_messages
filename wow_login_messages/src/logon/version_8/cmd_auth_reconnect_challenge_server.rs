@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::logon::version_8::{LoginResult, LoginResultError};
 use crate::ServerMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -13,9 +12,6 @@ pub struct CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult,
 }
 
-impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
-    const OPCODE: u8 = 0x02;
-}
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Vec::with_capacity(self.size());
@@ -63,7 +59,9 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     }
 }
 
-impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Server {
+impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
+    const OPCODE: u8 = 2;
+
     type Error = CMD_AUTH_RECONNECT_CHALLENGE_ServerError;
 
     #[cfg(feature = "sync")]

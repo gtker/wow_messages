@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::{LoginResult, LoginResultError};
 use crate::logon::version_3::{SecurityFlag, SecurityFlagError};
 use crate::ServerMessage;
-use crate::ReadableAndWritable;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -14,9 +13,6 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_Server {
     pub login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult,
 }
 
-impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
-    const OPCODE: u8 = 0x00;
-}
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
     pub const PROTOCOL_VERSION_VALUE: u8 = 0x00;
 
@@ -116,7 +112,9 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
     }
 }
 
-impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
+impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
+    const OPCODE: u8 = 0;
+
     type Error = CMD_AUTH_LOGON_CHALLENGE_ServerError;
 
     #[cfg(feature = "sync")]
