@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::v1::v12::{ChatType, ChatTypeError};
 use crate::world::v1::v12::{Language, LanguageError};
 use crate::world::v1::v12::{PlayerChatTag, PlayerChatTagError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -20,7 +20,7 @@ pub struct SMSG_MESSAGECHAT {
     pub tag: PlayerChatTag,
 }
 
-impl ServerMessageWrite for SMSG_MESSAGECHAT {}
+impl ServerMessage for SMSG_MESSAGECHAT {}
 
 impl SMSG_MESSAGECHAT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

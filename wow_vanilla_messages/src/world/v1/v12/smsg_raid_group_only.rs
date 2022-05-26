@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{RaidGroupError, RaidGroupErrorError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_RAID_GROUP_ONLY {
     pub error: RaidGroupError,
 }
 
-impl ServerMessageWrite for SMSG_RAID_GROUP_ONLY {}
+impl ServerMessage for SMSG_RAID_GROUP_ONLY {}
 
 impl SMSG_RAID_GROUP_ONLY {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {

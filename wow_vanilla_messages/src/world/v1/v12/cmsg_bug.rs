@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct CMSG_BUG {
     pub bug_type: String,
 }
 
-impl ClientMessageWrite for CMSG_BUG {}
+impl ClientMessage for CMSG_BUG {}
 
 impl CMSG_BUG {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

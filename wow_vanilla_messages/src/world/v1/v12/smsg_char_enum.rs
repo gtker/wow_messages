@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Character, CharacterError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_CHAR_ENUM {
     pub characters: Vec<Character>,
 }
 
-impl ServerMessageWrite for SMSG_CHAR_ENUM {}
+impl ServerMessage for SMSG_CHAR_ENUM {}
 
 impl SMSG_CHAR_ENUM {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

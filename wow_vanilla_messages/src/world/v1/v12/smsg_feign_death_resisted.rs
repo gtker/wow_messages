@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ use std::io::Write;
 pub struct SMSG_FEIGN_DEATH_RESISTED {
 }
 
-impl ServerMessageWrite for SMSG_FEIGN_DEATH_RESISTED {}
+impl ServerMessage for SMSG_FEIGN_DEATH_RESISTED {}
 
 impl SMSG_FEIGN_DEATH_RESISTED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {

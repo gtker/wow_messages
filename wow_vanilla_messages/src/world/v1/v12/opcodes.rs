@@ -1,5 +1,5 @@
 use crate::MessageBody;
-use crate::{ServerMessageWrite, ClientMessageWrite};
+use crate::{ServerMessage, ClientMessage};
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
 #[cfg(feature = "tokio")]

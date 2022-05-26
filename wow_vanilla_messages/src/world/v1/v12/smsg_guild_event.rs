@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{GuildEvent, GuildEventError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_GUILD_EVENT {
     pub event_descriptions: Vec<String>,
 }
 
-impl ServerMessageWrite for SMSG_GUILD_EVENT {}
+impl ServerMessage for SMSG_GUILD_EVENT {}
 
 impl SMSG_GUILD_EVENT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

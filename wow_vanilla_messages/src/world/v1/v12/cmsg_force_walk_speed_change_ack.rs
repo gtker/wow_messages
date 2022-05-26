@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::MovementInfo;
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,7 +17,7 @@ pub struct CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
     pub new_speed: f32,
 }
 
-impl ClientMessageWrite for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {}
+impl ClientMessage for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {}
 
 impl CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

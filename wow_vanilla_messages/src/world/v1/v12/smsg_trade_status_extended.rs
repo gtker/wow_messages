@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::TradeSlot;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -19,7 +19,7 @@ pub struct SMSG_TRADE_STATUS_EXTENDED {
     pub trade_slots: [TradeSlot; 7],
 }
 
-impl ServerMessageWrite for SMSG_TRADE_STATUS_EXTENDED {}
+impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {}
 
 impl SMSG_TRADE_STATUS_EXTENDED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 444], std::io::Error> {

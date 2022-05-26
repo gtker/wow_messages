@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_ACTION_BUTTONS {
     pub data: [u32; 120],
 }
 
-impl ServerMessageWrite for SMSG_ACTION_BUTTONS {}
+impl ServerMessage for SMSG_ACTION_BUTTONS {}
 
 impl SMSG_ACTION_BUTTONS {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 480], std::io::Error> {

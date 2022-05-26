@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::{TransferAbortReason, TransferAbortReasonError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct SMSG_TRANSFER_ABORTED {
     pub reason: TransferAbortReason,
 }
 
-impl ServerMessageWrite for SMSG_TRANSFER_ABORTED {}
+impl ServerMessage for SMSG_TRANSFER_ABORTED {}
 
 impl SMSG_TRANSFER_ABORTED {
     pub const PADDING_VALUE: u8 = 0x00;

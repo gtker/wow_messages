@@ -3,10 +3,7 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
-use crate::rust_printer::{
-    Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
-    WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
-};
+use crate::rust_printer::{Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME};
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
 pub mod print_read;
@@ -110,14 +107,14 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
 
     match e.container_type() {
         ContainerType::CMsg(_) => {
-            empty_impl(s, WORLD_CLIENT_HEADER_TRAIT_NAME);
+            empty_impl(s, CLIENT_MESSAGE_TRAIT_NAME);
         }
         ContainerType::SMsg(_) => {
-            empty_impl(s, WORLD_SERVER_HEADER_TRAIT_NAME);
+            empty_impl(s, SERVER_MESSAGE_TRAIT_NAME);
         }
         ContainerType::Msg(_) => {
-            empty_impl(s, WORLD_CLIENT_HEADER_TRAIT_NAME);
-            empty_impl(s, WORLD_SERVER_HEADER_TRAIT_NAME);
+            empty_impl(s, CLIENT_MESSAGE_TRAIT_NAME);
+            empty_impl(s, SERVER_MESSAGE_TRAIT_NAME);
         }
         _ => {}
     }

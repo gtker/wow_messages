@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{CinematicSequenceId, CinematicSequenceIdError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_TRIGGER_CINEMATIC {
     pub cinematic_sequence_id: CinematicSequenceId,
 }
 
-impl ServerMessageWrite for SMSG_TRIGGER_CINEMATIC {}
+impl ServerMessage for SMSG_TRIGGER_CINEMATIC {}
 
 impl SMSG_TRIGGER_CINEMATIC {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {

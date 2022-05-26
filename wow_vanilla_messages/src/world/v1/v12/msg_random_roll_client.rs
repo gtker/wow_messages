@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct MSG_RANDOM_ROLL_Client {
     pub maximum: u32,
 }
 
-impl ClientMessageWrite for MSG_RANDOM_ROLL_Client {}
+impl ClientMessage for MSG_RANDOM_ROLL_Client {}
 
 impl MSG_RANDOM_ROLL_Client {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {

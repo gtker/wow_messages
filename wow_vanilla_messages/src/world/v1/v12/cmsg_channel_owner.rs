@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ pub struct CMSG_CHANNEL_OWNER {
     pub channel_name: String,
 }
 
-impl ClientMessageWrite for CMSG_CHANNEL_OWNER {}
+impl ClientMessage for CMSG_CHANNEL_OWNER {}
 
 impl CMSG_CHANNEL_OWNER {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct CMSG_GOSSIP_SELECT_OPTION {
     pub unknown: Option<CMSG_GOSSIP_SELECT_OPTIONunknown>,
 }
 
-impl ClientMessageWrite for CMSG_GOSSIP_SELECT_OPTION {}
+impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {}
 
 impl CMSG_GOSSIP_SELECT_OPTION {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

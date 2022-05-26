@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{MeetingStoneFailure, MeetingStoneFailureError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_MEETINGSTONE_JOINFAILED {
     pub reason: MeetingStoneFailure,
 }
 
-impl ServerMessageWrite for SMSG_MEETINGSTONE_JOINFAILED {}
+impl ServerMessage for SMSG_MEETINGSTONE_JOINFAILED {}
 
 impl SMSG_MEETINGSTONE_JOINFAILED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {

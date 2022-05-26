@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{WhoPlayer, WhoPlayerError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_WHO {
     pub players: Vec<WhoPlayer>,
 }
 
-impl ServerMessageWrite for SMSG_WHO {}
+impl ServerMessage for SMSG_WHO {}
 
 impl SMSG_WHO {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

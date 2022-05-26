@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_SET_FLAT_SPELL_MODIFIER {
     pub value: u32,
 }
 
-impl ServerMessageWrite for SMSG_SET_FLAT_SPELL_MODIFIER {}
+impl ServerMessage for SMSG_SET_FLAT_SPELL_MODIFIER {}
 
 impl SMSG_SET_FLAT_SPELL_MODIFIER {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 6], std::io::Error> {

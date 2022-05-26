@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{LootMethod, LootMethodError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct SMSG_LOOT_RESPONSE {
     pub loot_method: LootMethod,
 }
 
-impl ServerMessageWrite for SMSG_LOOT_RESPONSE {}
+impl ServerMessage for SMSG_LOOT_RESPONSE {}
 
 impl SMSG_LOOT_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 9], std::io::Error> {

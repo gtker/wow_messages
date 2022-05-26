@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_CLIENT_CONTROL_UPDATE {
     pub allow_movement: u8,
 }
 
-impl ServerMessageWrite for SMSG_CLIENT_CONTROL_UPDATE {}
+impl ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
 
 impl SMSG_CLIENT_CONTROL_UPDATE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

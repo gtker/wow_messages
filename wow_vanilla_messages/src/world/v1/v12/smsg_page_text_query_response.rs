@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_PAGE_TEXT_QUERY_RESPONSE {
     pub next_page_id: u32,
 }
 
-impl ServerMessageWrite for SMSG_PAGE_TEXT_QUERY_RESPONSE {}
+impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {}
 
 impl SMSG_PAGE_TEXT_QUERY_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

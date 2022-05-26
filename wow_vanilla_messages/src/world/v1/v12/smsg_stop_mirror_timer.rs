@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{TimerType, TimerTypeError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_STOP_MIRROR_TIMER {
     pub timer: TimerType,
 }
 
-impl ServerMessageWrite for SMSG_STOP_MIRROR_TIMER {}
+impl ServerMessage for SMSG_STOP_MIRROR_TIMER {}
 
 impl SMSG_STOP_MIRROR_TIMER {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {

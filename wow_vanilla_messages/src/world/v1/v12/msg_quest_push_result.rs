@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{QuestPartyMessage, QuestPartyMessageError};
-use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
+use crate::{ClientMessage, ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,9 +16,9 @@ pub struct MSG_QUEST_PUSH_RESULT {
     pub message: QuestPartyMessage,
 }
 
-impl ClientMessageWrite for MSG_QUEST_PUSH_RESULT {}
+impl ClientMessage for MSG_QUEST_PUSH_RESULT {}
 
-impl ServerMessageWrite for MSG_QUEST_PUSH_RESULT {}
+impl ServerMessage for MSG_QUEST_PUSH_RESULT {}
 
 impl MSG_QUEST_PUSH_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 9], std::io::Error> {

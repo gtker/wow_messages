@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct MSG_MINIMAP_PING_Client {
     pub position_y: f32,
 }
 
-impl ClientMessageWrite for MSG_MINIMAP_PING_Client {}
+impl ClientMessage for MSG_MINIMAP_PING_Client {}
 
 impl MSG_MINIMAP_PING_Client {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {

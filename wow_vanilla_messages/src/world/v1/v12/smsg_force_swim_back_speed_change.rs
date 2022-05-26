@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
     pub speed: f32,
 }
 
-impl ServerMessageWrite for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {}
+impl ServerMessage for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {}
 
 impl SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

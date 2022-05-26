@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{RollVote, RollVoteError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -22,7 +22,7 @@ pub struct SMSG_LOOT_ROLL_WON {
     pub vote: RollVote,
 }
 
-impl ServerMessageWrite for SMSG_LOOT_ROLL_WON {}
+impl ServerMessage for SMSG_LOOT_ROLL_WON {}
 
 impl SMSG_LOOT_ROLL_WON {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 34], std::io::Error> {

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,7 +17,7 @@ pub struct SMSG_PVP_CREDIT {
     pub rank: PvpRank,
 }
 
-impl ServerMessageWrite for SMSG_PVP_CREDIT {}
+impl ServerMessage for SMSG_PVP_CREDIT {}
 
 impl SMSG_PVP_CREDIT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 13], std::io::Error> {

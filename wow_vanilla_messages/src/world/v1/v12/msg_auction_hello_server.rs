@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct MSG_AUCTION_HELLO_Server {
     pub auction_house_id: u32,
 }
 
-impl ServerMessageWrite for MSG_AUCTION_HELLO_Server {}
+impl ServerMessage for MSG_AUCTION_HELLO_Server {}
 
 impl MSG_AUCTION_HELLO_Server {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -158,7 +158,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
-    use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite};
+    use crate::{MessageBody, ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

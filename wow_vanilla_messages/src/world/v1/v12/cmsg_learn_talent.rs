@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct CMSG_LEARN_TALENT {
     pub requested_rank: u32,
 }
 
-impl ClientMessageWrite for CMSG_LEARN_TALENT {}
+impl ClientMessage for CMSG_LEARN_TALENT {}
 
 impl CMSG_LEARN_TALENT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {

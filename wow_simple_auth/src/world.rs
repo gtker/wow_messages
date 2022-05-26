@@ -9,9 +9,7 @@ use wow_srp::server::SrpServer;
 use wow_vanilla_messages::helper::tokio_expect_client_message;
 use wow_vanilla_messages::v1::v12::opcodes::ClientOpcodeMessage;
 use wow_vanilla_messages::v1::v12::*;
-use wow_vanilla_messages::{
-    ClientMessageWrite, Guid, ServerMessageWrite, UpdateMask, UpdatePlayer,
-};
+use wow_vanilla_messages::{ClientMessage, Guid, ServerMessage, UpdateMask, UpdatePlayer};
 
 pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServer>>>) {
     let seed = ProofSeed::new();

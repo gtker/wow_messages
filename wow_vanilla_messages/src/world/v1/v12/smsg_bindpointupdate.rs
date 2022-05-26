@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -19,7 +19,7 @@ pub struct SMSG_BINDPOINTUPDATE {
     pub area: Area,
 }
 
-impl ServerMessageWrite for SMSG_BINDPOINTUPDATE {}
+impl ServerMessage for SMSG_BINDPOINTUPDATE {}
 
 impl SMSG_BINDPOINTUPDATE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 20], std::io::Error> {

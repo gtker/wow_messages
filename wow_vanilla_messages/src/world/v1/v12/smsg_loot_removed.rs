@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_LOOT_REMOVED {
     pub slot: u8,
 }
 
-impl ServerMessageWrite for SMSG_LOOT_REMOVED {}
+impl ServerMessage for SMSG_LOOT_REMOVED {}
 
 impl SMSG_LOOT_REMOVED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {

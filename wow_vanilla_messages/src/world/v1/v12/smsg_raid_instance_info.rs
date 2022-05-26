@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{RaidInfo, RaidInfoError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_RAID_INSTANCE_INFO {
     pub raid_infos: Vec<RaidInfo>,
 }
 
-impl ServerMessageWrite for SMSG_RAID_INSTANCE_INFO {}
+impl ServerMessage for SMSG_RAID_INSTANCE_INFO {}
 
 impl SMSG_RAID_INSTANCE_INFO {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

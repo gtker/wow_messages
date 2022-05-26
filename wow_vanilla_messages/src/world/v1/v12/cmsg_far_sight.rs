@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{FarSightOperation, FarSightOperationError};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct CMSG_FAR_SIGHT {
     pub operation: FarSightOperation,
 }
 
-impl ClientMessageWrite for CMSG_FAR_SIGHT {}
+impl ClientMessage for CMSG_FAR_SIGHT {}
 
 impl CMSG_FAR_SIGHT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {

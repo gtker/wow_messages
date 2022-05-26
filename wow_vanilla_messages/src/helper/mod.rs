@@ -5,7 +5,7 @@ use tokio::io::AsyncReadExt;
 use wow_srp::header_crypto::{Decrypter, CLIENT_HEADER_LENGTH};
 
 use crate::util::{read_u16_le, read_u32_le, read_u64_le, read_u8_le};
-use crate::ClientMessageWrite;
+use crate::ClientMessage;
 pub use expected::*;
 
 pub(crate) mod aura_mask;
@@ -17,7 +17,7 @@ const CLIENT_OPCODE_LENGTH: u16 = 4;
 
 #[cfg(feature = "tokio")]
 pub async fn tokio_expect_client_message_encryption<
-    M: ClientMessageWrite,
+    M: ClientMessage,
     R: tokio::io::AsyncReadExt + Unpin + Send,
     D: Decrypter,
 >(
@@ -45,7 +45,7 @@ pub async fn tokio_expect_client_message_encryption<
 
 #[cfg(feature = "tokio")]
 pub async fn tokio_expect_client_message<
-    M: ClientMessageWrite,
+    M: ClientMessage,
     R: tokio::io::AsyncReadExt + Unpin + Send,
 >(
     r: &mut R,

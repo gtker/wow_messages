@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_DISPEL_FAILED {
     pub spells: Vec<u32>,
 }
 
-impl ServerMessageWrite for SMSG_DISPEL_FAILED {}
+impl ServerMessage for SMSG_DISPEL_FAILED {}
 
 impl SMSG_DISPEL_FAILED {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

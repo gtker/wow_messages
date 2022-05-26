@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ use std::io::Write;
 pub struct SMSG_DUEL_OUTOFBOUNDS {
 }
 
-impl ServerMessageWrite for SMSG_DUEL_OUTOFBOUNDS {}
+impl ServerMessage for SMSG_DUEL_OUTOFBOUNDS {}
 
 impl SMSG_DUEL_OUTOFBOUNDS {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {

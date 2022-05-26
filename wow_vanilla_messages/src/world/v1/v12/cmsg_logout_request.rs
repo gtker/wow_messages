@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ use std::io::Write;
 pub struct CMSG_LOGOUT_REQUEST {
 }
 
-impl ClientMessageWrite for CMSG_LOGOUT_REQUEST {}
+impl ClientMessage for CMSG_LOGOUT_REQUEST {}
 
 impl CMSG_LOGOUT_REQUEST {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {
@@ -125,7 +125,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
-    use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite};
+    use crate::{MessageBody, ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{SpellCastResult, SpellCastResultError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct SMSG_PET_CAST_FAILED {
     pub result: SpellCastResult,
 }
 
-impl ServerMessageWrite for SMSG_PET_CAST_FAILED {}
+impl ServerMessage for SMSG_PET_CAST_FAILED {}
 
 impl SMSG_PET_CAST_FAILED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 6], std::io::Error> {

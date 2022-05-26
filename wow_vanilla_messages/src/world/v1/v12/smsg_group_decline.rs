@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ pub struct SMSG_GROUP_DECLINE {
     pub name: String,
 }
 
-impl ServerMessageWrite for SMSG_GROUP_DECLINE {}
+impl ServerMessage for SMSG_GROUP_DECLINE {}
 
 impl SMSG_GROUP_DECLINE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,7 +17,7 @@ pub struct SMSG_GUILD_INFO {
     pub amount_of_accounts_in_guild: u32,
 }
 
-impl ServerMessageWrite for SMSG_GUILD_INFO {}
+impl ServerMessage for SMSG_GUILD_INFO {}
 
 impl SMSG_GUILD_INFO {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

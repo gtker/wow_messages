@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct CMSG_QUEST_CONFIRM_ACCEPT {
     pub quest_id: u32,
 }
 
-impl ClientMessageWrite for CMSG_QUEST_CONFIRM_ACCEPT {}
+impl ClientMessage for CMSG_QUEST_CONFIRM_ACCEPT {}
 
 impl CMSG_QUEST_CONFIRM_ACCEPT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {

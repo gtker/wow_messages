@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{ChatNotify, ChatNotifyError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_CHANNEL_NOTIFY {
     pub channel_name: String,
 }
 
-impl ServerMessageWrite for SMSG_CHANNEL_NOTIFY {}
+impl ServerMessage for SMSG_CHANNEL_NOTIFY {}
 
 impl SMSG_CHANNEL_NOTIFY {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

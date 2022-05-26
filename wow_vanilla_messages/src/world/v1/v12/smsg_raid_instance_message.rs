@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::{RaidInstanceMessage, RaidInstanceMessageError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,7 +17,7 @@ pub struct SMSG_RAID_INSTANCE_MESSAGE {
     pub time_left: u32,
 }
 
-impl ServerMessageWrite for SMSG_RAID_INSTANCE_MESSAGE {}
+impl ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {}
 
 impl SMSG_RAID_INSTANCE_MESSAGE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {

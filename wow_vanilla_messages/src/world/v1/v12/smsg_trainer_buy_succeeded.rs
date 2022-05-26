@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_TRAINER_BUY_SUCCEEDED {
     pub id: u32,
 }
 
-impl ServerMessageWrite for SMSG_TRAINER_BUY_SUCCEEDED {}
+impl ServerMessage for SMSG_TRAINER_BUY_SUCCEEDED {}
 
 impl SMSG_TRAINER_BUY_SUCCEEDED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {

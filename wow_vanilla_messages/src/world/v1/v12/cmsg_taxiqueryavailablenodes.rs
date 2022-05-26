@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct CMSG_TAXIQUERYAVAILABLENODES {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_TAXIQUERYAVAILABLENODES {}
+impl ClientMessage for CMSG_TAXIQUERYAVAILABLENODES {}
 
 impl CMSG_TAXIQUERYAVAILABLENODES {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {

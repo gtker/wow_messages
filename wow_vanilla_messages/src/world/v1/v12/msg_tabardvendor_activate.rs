@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
+use crate::{ClientMessage, ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,9 +14,9 @@ pub struct MSG_TABARDVENDOR_ACTIVATE {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for MSG_TABARDVENDOR_ACTIVATE {}
+impl ClientMessage for MSG_TABARDVENDOR_ACTIVATE {}
 
-impl ServerMessageWrite for MSG_TABARDVENDOR_ACTIVATE {}
+impl ServerMessage for MSG_TABARDVENDOR_ACTIVATE {}
 
 impl MSG_TABARDVENDOR_ACTIVATE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {

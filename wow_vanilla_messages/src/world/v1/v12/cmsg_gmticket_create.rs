@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{GmTicketType, GmTicketTypeError};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -20,7 +20,7 @@ pub struct CMSG_GMTICKET_CREATE {
     pub reserved_for_future_use: String,
 }
 
-impl ClientMessageWrite for CMSG_GMTICKET_CREATE {}
+impl ClientMessage for CMSG_GMTICKET_CREATE {}
 
 impl CMSG_GMTICKET_CREATE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

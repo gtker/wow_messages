@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{SheathState, SheathStateError};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct CMSG_SETSHEATHED {
     pub sheathed: SheathState,
 }
 
-impl ClientMessageWrite for CMSG_SETSHEATHED {}
+impl ClientMessage for CMSG_SETSHEATHED {}
 
 impl CMSG_SETSHEATHED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {

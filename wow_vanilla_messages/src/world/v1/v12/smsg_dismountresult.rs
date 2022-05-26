@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{MountResult, MountResultError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_DISMOUNTRESULT {
     pub result: MountResult,
 }
 
-impl ServerMessageWrite for SMSG_DISMOUNTRESULT {}
+impl ServerMessage for SMSG_DISMOUNTRESULT {}
 
 impl SMSG_DISMOUNTRESULT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_COOLDOWN_EVENT {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_COOLDOWN_EVENT {}
+impl ServerMessage for SMSG_COOLDOWN_EVENT {}
 
 impl SMSG_COOLDOWN_EVENT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {

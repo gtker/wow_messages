@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,7 +17,7 @@ pub struct SMSG_RESURRECT_REQUEST {
     pub respect_resurrection_timer: u8,
 }
 
-impl ServerMessageWrite for SMSG_RESURRECT_REQUEST {}
+impl ServerMessage for SMSG_RESURRECT_REQUEST {}
 
 impl SMSG_RESURRECT_REQUEST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

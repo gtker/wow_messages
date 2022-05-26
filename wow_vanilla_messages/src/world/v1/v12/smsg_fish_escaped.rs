@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ use std::io::Write;
 pub struct SMSG_FISH_ESCAPED {
 }
 
-impl ServerMessageWrite for SMSG_FISH_ESCAPED {}
+impl ServerMessage for SMSG_FISH_ESCAPED {}
 
 impl SMSG_FISH_ESCAPED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_AUCTION_REMOVED_NOTIFICATION {
     pub random_property_id: u32,
 }
 
-impl ServerMessageWrite for SMSG_AUCTION_REMOVED_NOTIFICATION {}
+impl ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {}
 
 impl SMSG_AUCTION_REMOVED_NOTIFICATION {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {

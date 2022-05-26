@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{DuelWinnerReason, DuelWinnerReasonError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_DUEL_WINNER {
     pub initiator_name: String,
 }
 
-impl ServerMessageWrite for SMSG_DUEL_WINNER {}
+impl ServerMessage for SMSG_DUEL_WINNER {}
 
 impl SMSG_DUEL_WINNER {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

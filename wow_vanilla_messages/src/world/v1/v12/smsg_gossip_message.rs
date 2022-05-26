@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::GossipItem;
 use crate::world::v1::v12::{QuestItem, QuestItemError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -18,7 +18,7 @@ pub struct SMSG_GOSSIP_MESSAGE {
     pub quests: Vec<QuestItem>,
 }
 
-impl ServerMessageWrite for SMSG_GOSSIP_MESSAGE {}
+impl ServerMessage for SMSG_GOSSIP_MESSAGE {}
 
 impl SMSG_GOSSIP_MESSAGE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

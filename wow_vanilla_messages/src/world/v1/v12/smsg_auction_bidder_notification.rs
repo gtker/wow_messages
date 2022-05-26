@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -20,7 +20,7 @@ pub struct SMSG_AUCTION_BIDDER_NOTIFICATION {
     pub item_random_property_id: u32,
 }
 
-impl ServerMessageWrite for SMSG_AUCTION_BIDDER_NOTIFICATION {}
+impl ServerMessage for SMSG_AUCTION_BIDDER_NOTIFICATION {}
 
 impl SMSG_AUCTION_BIDDER_NOTIFICATION {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 32], std::io::Error> {

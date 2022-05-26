@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_UPDATE_AURA_DURATION {
     pub aura_duration: u32,
 }
 
-impl ServerMessageWrite for SMSG_UPDATE_AURA_DURATION {}
+impl ServerMessage for SMSG_UPDATE_AURA_DURATION {}
 
 impl SMSG_UPDATE_AURA_DURATION {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {

@@ -7,7 +7,7 @@ use crate::world::v1::v12::{ItemQuality, ItemQualityError};
 use crate::world::v1::v12::ItemSpells;
 use crate::world::v1::v12::ItemStat;
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -21,7 +21,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub found: Option<SMSG_ITEM_QUERY_SINGLE_RESPONSEfound>,
 }
 
-impl ServerMessageWrite for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
+impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

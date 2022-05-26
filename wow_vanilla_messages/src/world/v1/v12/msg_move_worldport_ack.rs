@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
+use crate::{ClientMessage, ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,9 +12,9 @@ use std::io::Write;
 pub struct MSG_MOVE_WORLDPORT_ACK {
 }
 
-impl ClientMessageWrite for MSG_MOVE_WORLDPORT_ACK {}
+impl ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
 
-impl ServerMessageWrite for MSG_MOVE_WORLDPORT_ACK {}
+impl ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
 
 impl MSG_MOVE_WORLDPORT_ACK {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{WeatherChangeType, WeatherChangeTypeError};
 use crate::world::v1::v12::{WeatherType, WeatherTypeError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -18,7 +18,7 @@ pub struct SMSG_WEATHER {
     pub change: WeatherChangeType,
 }
 
-impl ServerMessageWrite for SMSG_WEATHER {}
+impl ServerMessage for SMSG_WEATHER {}
 
 impl SMSG_WEATHER {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 13], std::io::Error> {

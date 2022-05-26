@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct SMSG_NEW_WORLD {
     pub orientation: f32,
 }
 
-impl ServerMessageWrite for SMSG_NEW_WORLD {}
+impl ServerMessage for SMSG_NEW_WORLD {}
 
 impl SMSG_NEW_WORLD {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {

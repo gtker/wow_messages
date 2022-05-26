@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{StabledPet, StabledPetError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct MSG_LIST_STABLED_PETS_Server {
     pub pets: Vec<StabledPet>,
 }
 
-impl ServerMessageWrite for MSG_LIST_STABLED_PETS_Server {}
+impl ServerMessage for MSG_LIST_STABLED_PETS_Server {}
 
 impl MSG_LIST_STABLED_PETS_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

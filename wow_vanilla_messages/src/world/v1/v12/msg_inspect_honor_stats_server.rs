@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -30,7 +30,7 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
     pub rank_progress_bar: u8,
 }
 
-impl ServerMessageWrite for MSG_INSPECT_HONOR_STATS_Server {}
+impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {}
 
 impl MSG_INSPECT_HONOR_STATS_Server {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 47], std::io::Error> {

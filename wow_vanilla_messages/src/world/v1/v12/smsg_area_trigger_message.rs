@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
     pub message: String,
 }
 
-impl ServerMessageWrite for SMSG_AREA_TRIGGER_MESSAGE {}
+impl ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
 
 impl SMSG_AREA_TRIGGER_MESSAGE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

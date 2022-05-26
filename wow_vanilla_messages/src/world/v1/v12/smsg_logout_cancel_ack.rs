@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ use std::io::Write;
 pub struct SMSG_LOGOUT_CANCEL_ACK {
 }
 
-impl ServerMessageWrite for SMSG_LOGOUT_CANCEL_ACK {}
+impl ServerMessage for SMSG_LOGOUT_CANCEL_ACK {}
 
 impl SMSG_LOGOUT_CANCEL_ACK {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {

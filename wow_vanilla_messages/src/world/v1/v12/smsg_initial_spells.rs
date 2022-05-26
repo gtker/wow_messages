@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::CooldownSpell;
 use crate::world::v1::v12::InitialSpell;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct SMSG_INITIAL_SPELLS {
     pub cooldowns: Vec<CooldownSpell>,
 }
 
-impl ServerMessageWrite for SMSG_INITIAL_SPELLS {}
+impl ServerMessage for SMSG_INITIAL_SPELLS {}
 
 impl SMSG_INITIAL_SPELLS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

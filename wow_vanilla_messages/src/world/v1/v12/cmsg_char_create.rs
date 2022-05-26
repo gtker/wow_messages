@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Race, RaceError};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -24,7 +24,7 @@ pub struct CMSG_CHAR_CREATE {
     pub outfit_id: u8,
 }
 
-impl ClientMessageWrite for CMSG_CHAR_CREATE {}
+impl ClientMessage for CMSG_CHAR_CREATE {}
 
 impl CMSG_CHAR_CREATE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

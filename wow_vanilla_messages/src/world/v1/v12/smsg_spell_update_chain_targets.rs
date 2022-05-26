@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub targets: Vec<Guid>,
 }
 
-impl ServerMessageWrite for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
+impl ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
 
 impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{FriendResult, FriendResultError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct SMSG_FRIEND_STATUS {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_FRIEND_STATUS {}
+impl ServerMessage for SMSG_FRIEND_STATUS {}
 
 impl SMSG_FRIEND_STATUS {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 9], std::io::Error> {

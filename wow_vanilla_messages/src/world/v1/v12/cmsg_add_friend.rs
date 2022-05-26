@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ pub struct CMSG_ADD_FRIEND {
     pub friend_name: String,
 }
 
-impl ClientMessageWrite for CMSG_ADD_FRIEND {}
+impl ClientMessage for CMSG_ADD_FRIEND {}
 
 impl CMSG_ADD_FRIEND {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

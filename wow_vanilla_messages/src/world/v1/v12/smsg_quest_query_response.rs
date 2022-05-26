@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::QuestItemReward;
 use crate::world::v1::v12::QuestObjective;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -40,7 +40,7 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
     pub objective_texts: [String; 4],
 }
 
-impl ServerMessageWrite for SMSG_QUEST_QUERY_RESPONSE {}
+impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {}
 
 impl SMSG_QUEST_QUERY_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

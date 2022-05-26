@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
+use crate::{ClientMessage, ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,9 +14,9 @@ pub struct MSG_PETITION_DECLINE {
     pub petition: Guid,
 }
 
-impl ClientMessageWrite for MSG_PETITION_DECLINE {}
+impl ClientMessage for MSG_PETITION_DECLINE {}
 
-impl ServerMessageWrite for MSG_PETITION_DECLINE {}
+impl ServerMessage for MSG_PETITION_DECLINE {}
 
 impl MSG_PETITION_DECLINE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct MSG_LIST_STABLED_PETS_Client {
     pub npc: Guid,
 }
 
-impl ClientMessageWrite for MSG_LIST_STABLED_PETS_Client {}
+impl ClientMessage for MSG_LIST_STABLED_PETS_Client {}
 
 impl MSG_LIST_STABLED_PETS_Client {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {

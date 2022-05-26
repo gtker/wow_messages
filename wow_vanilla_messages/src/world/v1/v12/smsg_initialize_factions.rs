@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::FactionInitializer;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_INITIALIZE_FACTIONS {
     pub factions: Vec<FactionInitializer>,
 }
 
-impl ServerMessageWrite for SMSG_INITIALIZE_FACTIONS {}
+impl ServerMessage for SMSG_INITIALIZE_FACTIONS {}
 
 impl SMSG_INITIALIZE_FACTIONS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

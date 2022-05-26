@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::MovementInfo;
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct CMSG_MOVE_KNOCK_BACK_ACK {
     pub movement_info: MovementInfo,
 }
 
-impl ClientMessageWrite for CMSG_MOVE_KNOCK_BACK_ACK {}
+impl ClientMessage for CMSG_MOVE_KNOCK_BACK_ACK {}
 
 impl CMSG_MOVE_KNOCK_BACK_ACK {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

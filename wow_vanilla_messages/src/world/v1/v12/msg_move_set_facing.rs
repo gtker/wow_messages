@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::MovementInfo;
-use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
+use crate::{ClientMessage, ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,9 +13,9 @@ pub struct MSG_MOVE_SET_FACING {
     pub info: MovementInfo,
 }
 
-impl ClientMessageWrite for MSG_MOVE_SET_FACING {}
+impl ClientMessage for MSG_MOVE_SET_FACING {}
 
-impl ServerMessageWrite for MSG_MOVE_SET_FACING {}
+impl ServerMessage for MSG_MOVE_SET_FACING {}
 
 impl MSG_MOVE_SET_FACING {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

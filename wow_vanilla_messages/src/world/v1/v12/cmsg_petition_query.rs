@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct CMSG_PETITION_QUERY {
     pub petition_guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_PETITION_QUERY {}
+impl ClientMessage for CMSG_PETITION_QUERY {}
 
 impl CMSG_PETITION_QUERY {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {

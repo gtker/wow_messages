@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -18,7 +18,7 @@ pub struct CMSG_BATTLEMASTER_JOIN {
     pub join_as_group: u8,
 }
 
-impl ClientMessageWrite for CMSG_BATTLEMASTER_JOIN {}
+impl ClientMessage for CMSG_BATTLEMASTER_JOIN {}
 
 impl CMSG_BATTLEMASTER_JOIN {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 17], std::io::Error> {

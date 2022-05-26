@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{UnitStandState, UnitStandStateError};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct CMSG_STANDSTATECHANGE {
     pub animation_state: UnitStandState,
 }
 
-impl ClientMessageWrite for CMSG_STANDSTATECHANGE {}
+impl ClientMessage for CMSG_STANDSTATECHANGE {}
 
 impl CMSG_STANDSTATECHANGE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {

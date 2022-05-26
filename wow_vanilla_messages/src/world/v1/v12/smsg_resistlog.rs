@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -20,7 +20,7 @@ pub struct SMSG_RESISTLOG {
     pub unknown5: u32,
 }
 
-impl ServerMessageWrite for SMSG_RESISTLOG {}
+impl ServerMessage for SMSG_RESISTLOG {}
 
 impl SMSG_RESISTLOG {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 36], std::io::Error> {

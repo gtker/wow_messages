@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ use std::io::Write;
 pub struct CMSG_CANCEL_GROWTH_AURA {
 }
 
-impl ClientMessageWrite for CMSG_CANCEL_GROWTH_AURA {}
+impl ClientMessage for CMSG_CANCEL_GROWTH_AURA {}
 
 impl CMSG_CANCEL_GROWTH_AURA {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {

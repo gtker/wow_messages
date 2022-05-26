@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{InventoryResult, InventoryResultError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_INVENTORY_CHANGE_FAILURE {
     pub result: SMSG_INVENTORY_CHANGE_FAILUREInventoryResult,
 }
 
-impl ServerMessageWrite for SMSG_INVENTORY_CHANGE_FAILURE {}
+impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {}
 
 impl SMSG_INVENTORY_CHANGE_FAILURE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{LogoutResult, LogoutResultError};
 use crate::world::v1::v12::{LogoutSpeed, LogoutSpeedError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,7 +16,7 @@ pub struct SMSG_LOGOUT_RESPONSE {
     pub speed: LogoutSpeed,
 }
 
-impl ServerMessageWrite for SMSG_LOGOUT_RESPONSE {}
+impl ServerMessage for SMSG_LOGOUT_RESPONSE {}
 
 impl SMSG_LOGOUT_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
@@ -197,7 +197,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
-    use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite};
+    use crate::{MessageBody, ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

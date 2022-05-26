@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Race, RaceError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -21,7 +21,7 @@ pub struct SMSG_NAME_QUERY_RESPONSE {
     pub class: Class,
 }
 
-impl ServerMessageWrite for SMSG_NAME_QUERY_RESPONSE {}
+impl ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
 
 impl SMSG_NAME_QUERY_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -300,7 +300,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
-    use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite};
+    use crate::{MessageBody, ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_SPLINE_MOVE_SET_RUN_MODE {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_SPLINE_MOVE_SET_RUN_MODE {}
+impl ServerMessage for SMSG_SPLINE_MOVE_SET_RUN_MODE {}
 
 impl SMSG_SPLINE_MOVE_SET_RUN_MODE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

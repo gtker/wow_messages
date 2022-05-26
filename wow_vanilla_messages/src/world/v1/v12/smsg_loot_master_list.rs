@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_LOOT_MASTER_LIST {
     pub guids: Vec<Guid>,
 }
 
-impl ServerMessageWrite for SMSG_LOOT_MASTER_LIST {}
+impl ServerMessage for SMSG_LOOT_MASTER_LIST {}
 
 impl SMSG_LOOT_MASTER_LIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

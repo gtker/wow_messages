@@ -28,16 +28,15 @@ pub struct Writer {
     import_path: String,
 }
 
-pub const LOGIN_CLIENT_MESSAGE_TRAIT_NAME: &str = "ClientMessage";
-pub const LOGIN_SERVER_MESSAGE_TRAIT_NAME: &str = "ServerMessage";
+pub const CLIENT_MESSAGE_TRAIT_NAME: &str = "ClientMessage";
+pub const SERVER_MESSAGE_TRAIT_NAME: &str = "ServerMessage";
+
 pub const LOGIN_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
 pub const LOGIN_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 pub const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
 pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 
 pub const WORLD_BODY_TRAIT_NAME: &str = "MessageBody";
-pub const WORLD_CLIENT_HEADER_TRAIT_NAME: &str = "ClientMessageWrite";
-pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "ServerMessageWrite";
 
 pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
 pub const TOKIO_READ_IMPORT: &str = "use tokio::io::AsyncReadExt;";

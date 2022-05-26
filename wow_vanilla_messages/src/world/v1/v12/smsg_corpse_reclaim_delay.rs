@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,7 +13,7 @@ pub struct SMSG_CORPSE_RECLAIM_DELAY {
     pub delay_in_seconds: u32,
 }
 
-impl ServerMessageWrite for SMSG_CORPSE_RECLAIM_DELAY {}
+impl ServerMessage for SMSG_CORPSE_RECLAIM_DELAY {}
 
 impl SMSG_CORPSE_RECLAIM_DELAY {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {

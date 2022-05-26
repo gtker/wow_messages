@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
+use crate::{ClientMessage, ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,9 +13,9 @@ pub struct SimpleMsg {
     pub basic: u8,
 }
 
-impl ClientMessageWrite for SimpleMsg {}
+impl ClientMessage for SimpleMsg {}
 
-impl ServerMessageWrite for SimpleMsg {}
+impl ServerMessage for SimpleMsg {}
 
 impl SimpleMsg {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {

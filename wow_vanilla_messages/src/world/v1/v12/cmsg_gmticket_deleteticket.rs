@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessageWrite, MessageBody};
+use crate::{ClientMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,7 +12,7 @@ use std::io::Write;
 pub struct CMSG_GMTICKET_DELETETICKET {
 }
 
-impl ClientMessageWrite for CMSG_GMTICKET_DELETETICKET {}
+impl ClientMessage for CMSG_GMTICKET_DELETETICKET {}
 
 impl CMSG_GMTICKET_DELETETICKET {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {

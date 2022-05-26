@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::ListInventoryItem;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,7 +15,7 @@ pub struct SMSG_LIST_INVENTORY {
     pub items: Vec<ListInventoryItem>,
 }
 
-impl ServerMessageWrite for SMSG_LIST_INVENTORY {}
+impl ServerMessage for SMSG_LIST_INVENTORY {}
 
 impl SMSG_LIST_INVENTORY {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

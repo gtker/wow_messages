@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_BATTLEGROUND_PLAYER_LEFT {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_BATTLEGROUND_PLAYER_LEFT {}
+impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {}
 
 impl SMSG_BATTLEGROUND_PLAYER_LEFT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {

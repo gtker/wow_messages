@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,7 +17,7 @@ pub struct MSG_RANDOM_ROLL_Server {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for MSG_RANDOM_ROLL_Server {}
+impl ServerMessage for MSG_RANDOM_ROLL_Server {}
 
 impl MSG_RANDOM_ROLL_Server {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 20], std::io::Error> {

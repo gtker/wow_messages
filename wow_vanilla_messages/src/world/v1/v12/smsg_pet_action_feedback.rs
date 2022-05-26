@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{PetFeedback, PetFeedbackError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_PET_ACTION_FEEDBACK {
     pub feedback: PetFeedback,
 }
 
-impl ServerMessageWrite for SMSG_PET_ACTION_FEEDBACK {}
+impl ServerMessage for SMSG_PET_ACTION_FEEDBACK {}
 
 impl SMSG_PET_ACTION_FEEDBACK {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {

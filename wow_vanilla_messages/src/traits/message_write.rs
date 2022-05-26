@@ -13,7 +13,7 @@ use tokio::io::AsyncWriteExt;
 const SERVER_OPCODE_LENGTH: u16 = 2;
 const CLIENT_OPCODE_LENGTH: u16 = 4;
 
-pub trait ServerMessageWrite: MessageBody {
+pub trait ServerMessage: MessageBody {
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         crate::util::write_u16_be(
@@ -143,7 +143,7 @@ pub trait ServerMessageWrite: MessageBody {
     }
 }
 
-pub trait ClientMessageWrite: MessageBody {
+pub trait ClientMessage: MessageBody {
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         crate::util::write_u16_be(

@@ -5,7 +5,7 @@ use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{GroupMemberOnlineStatus};
 use crate::world::v1::v12::{GroupUpdateFlags};
 use crate::world::v1::v12::{Power, PowerError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -19,7 +19,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL {
     pub mask: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags,
 }
 
-impl ServerMessageWrite for SMSG_PARTY_MEMBER_STATS_FULL {}
+impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
 
 impl SMSG_PARTY_MEMBER_STATS_FULL {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

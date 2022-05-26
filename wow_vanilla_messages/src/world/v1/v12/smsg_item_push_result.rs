@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::v1::v12::{NewItemChatAlert, NewItemChatAlertError};
 use crate::world::v1::v12::{NewItemCreationType, NewItemCreationTypeError};
 use crate::world::v1::v12::{NewItemSource, NewItemSourceError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -26,7 +26,7 @@ pub struct SMSG_ITEM_PUSH_RESULT {
     pub item_count: u32,
 }
 
-impl ServerMessageWrite for SMSG_ITEM_PUSH_RESULT {}
+impl ServerMessage for SMSG_ITEM_PUSH_RESULT {}
 
 impl SMSG_ITEM_PUSH_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 41], std::io::Error> {

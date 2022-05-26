@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{EnvironmentalDamageType, EnvironmentalDamageTypeError};
-use crate::{ServerMessageWrite, MessageBody};
+use crate::{ServerMessage, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -19,7 +19,7 @@ pub struct SMSG_ENVIRONMENTALDAMAGELOG {
     pub resist: u32,
 }
 
-impl ServerMessageWrite for SMSG_ENVIRONMENTALDAMAGELOG {}
+impl ServerMessage for SMSG_ENVIRONMENTALDAMAGELOG {}
 
 impl SMSG_ENVIRONMENTALDAMAGELOG {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 24], std::io::Error> {
