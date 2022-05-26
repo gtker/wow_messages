@@ -17,16 +17,14 @@ pub struct SMSG_PET_ACTION_SOUND {
 }
 
 impl SMSG_PET_ACTION_SOUND {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
-        let mut array_w = [0u8; 12];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // reason: PetTalkReason
         w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

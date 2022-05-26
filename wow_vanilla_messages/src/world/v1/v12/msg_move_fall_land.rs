@@ -14,19 +14,18 @@ pub struct MSG_MOVE_FALL_LAND {
 }
 
 impl MSG_MOVE_FALL_LAND {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        w.write_all(&self.info.as_bytes()?)?;
+        &self.info.as_bytes(w)?;;
 
-        Ok(w)
+        Ok(())
     }
 }
 
 impl ClientMessage for MSG_MOVE_FALL_LAND {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        w.write_all(&self.info.as_bytes()?)?;
+        &self.info.as_bytes(w)?;;
 
         Ok(())
     }
@@ -52,7 +51,7 @@ impl ClientMessage for MSG_MOVE_FALL_LAND {
 impl ServerMessage for MSG_MOVE_FALL_LAND {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        w.write_all(&self.info.as_bytes()?)?;
+        &self.info.as_bytes(w)?;;
 
         Ok(())
     }

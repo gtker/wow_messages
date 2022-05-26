@@ -16,9 +16,7 @@ pub struct CMSG_SET_TRADE_ITEM {
 }
 
 impl CMSG_SET_TRADE_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 3], std::io::Error> {
-        let mut array_w = [0u8; 3];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // trade_slot: u8
         w.write_all(&self.trade_slot.to_le_bytes())?;
 
@@ -28,7 +26,7 @@ impl CMSG_SET_TRADE_ITEM {
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

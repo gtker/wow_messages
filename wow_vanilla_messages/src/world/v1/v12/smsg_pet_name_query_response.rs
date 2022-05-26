@@ -15,8 +15,7 @@ pub struct SMSG_PET_NAME_QUERY_RESPONSE {
 }
 
 impl SMSG_PET_NAME_QUERY_RESPONSE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
 
@@ -28,7 +27,7 @@ impl SMSG_PET_NAME_QUERY_RESPONSE {
         // pet_name_timestamp: u32
         w.write_all(&self.pet_name_timestamp.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

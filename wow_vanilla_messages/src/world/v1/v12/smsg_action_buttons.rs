@@ -14,15 +14,13 @@ pub struct SMSG_ACTION_BUTTONS {
 }
 
 impl SMSG_ACTION_BUTTONS {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 480], std::io::Error> {
-        let mut array_w = [0u8; 480];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // data: u32[120]
         for i in self.data.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

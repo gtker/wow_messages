@@ -14,8 +14,7 @@ pub struct CMSG_CHANNEL_KICK {
 }
 
 impl CMSG_CHANNEL_KICK {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // channel_name: CString
         w.write_all(self.channel_name.as_bytes())?;
         // Null terminator
@@ -26,7 +25,7 @@ impl CMSG_CHANNEL_KICK {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

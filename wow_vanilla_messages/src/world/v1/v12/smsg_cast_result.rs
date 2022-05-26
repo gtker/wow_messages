@@ -17,8 +17,7 @@ pub struct SMSG_CAST_RESULT {
 }
 
 impl SMSG_CAST_RESULT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 
@@ -211,7 +210,7 @@ impl SMSG_CAST_RESULT {
             SMSG_CAST_RESULTSimpleSpellCastResult::FAILURE => {}
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

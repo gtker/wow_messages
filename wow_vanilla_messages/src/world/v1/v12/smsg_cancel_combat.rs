@@ -13,10 +13,8 @@ pub struct SMSG_CANCEL_COMBAT {
 }
 
 impl SMSG_CANCEL_COMBAT {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {
-        let mut array_w = [0u8; 0];
-        let mut w = array_w.as_mut_slice();
-        Ok(array_w)
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        Ok(())
     }
 }
 

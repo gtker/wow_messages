@@ -15,9 +15,7 @@ pub struct QuestObjective {
 }
 
 impl QuestObjective {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
-        let mut array_w = [0u8; 16];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // creature_id: u32
         w.write_all(&self.creature_id.to_le_bytes())?;
 
@@ -30,7 +28,7 @@ impl QuestObjective {
         // required_item_count: u32
         w.write_all(&self.required_item_count.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

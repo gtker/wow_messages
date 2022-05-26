@@ -16,14 +16,13 @@ pub struct CMSG_GMSURVEY_SUBMIT {
 }
 
 impl CMSG_GMSURVEY_SUBMIT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // survey_id: u32
         w.write_all(&self.survey_id.to_le_bytes())?;
 
         // questions: GmSurveyQuestion[10]
         for i in self.questions.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // answer_comment: CString
@@ -31,7 +30,7 @@ impl CMSG_GMSURVEY_SUBMIT {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -42,7 +41,7 @@ impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
 
         // questions: GmSurveyQuestion[10]
         for i in self.questions.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // answer_comment: CString

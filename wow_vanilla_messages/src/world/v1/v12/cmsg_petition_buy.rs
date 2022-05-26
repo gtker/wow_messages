@@ -31,8 +31,7 @@ pub struct CMSG_PETITION_BUY {
 }
 
 impl CMSG_PETITION_BUY {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
@@ -89,7 +88,7 @@ impl CMSG_PETITION_BUY {
         // skip15: u32
         w.write_all(&self.skip15.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

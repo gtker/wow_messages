@@ -16,10 +16,9 @@ pub struct CMSG_MOVE_SPLINE_DONE {
 }
 
 impl CMSG_MOVE_SPLINE_DONE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // movement_info: MovementInfo
-        w.write_all(&self.movement_info.as_bytes()?)?;
+        &self.movement_info.as_bytes(w)?;;
 
         // movement_counter: u32
         w.write_all(&self.movement_counter.to_le_bytes())?;
@@ -27,14 +26,14 @@ impl CMSG_MOVE_SPLINE_DONE {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 
 impl ClientMessage for CMSG_MOVE_SPLINE_DONE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // movement_info: MovementInfo
-        w.write_all(&self.movement_info.as_bytes()?)?;
+        &self.movement_info.as_bytes(w)?;;
 
         // movement_counter: u32
         w.write_all(&self.movement_counter.to_le_bytes())?;

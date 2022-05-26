@@ -15,13 +15,11 @@ pub struct SMSG_TRIGGER_CINEMATIC {
 }
 
 impl SMSG_TRIGGER_CINEMATIC {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
-        let mut array_w = [0u8; 4];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // cinematic_sequence_id: CinematicSequenceId
         w.write_all(&(self.cinematic_sequence_id.as_int() as u32).to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

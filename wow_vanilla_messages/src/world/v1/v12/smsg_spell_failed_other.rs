@@ -16,16 +16,14 @@ pub struct SMSG_SPELL_FAILED_OTHER {
 }
 
 impl SMSG_SPELL_FAILED_OTHER {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
-        let mut array_w = [0u8; 12];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster_guid: Guid
         w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

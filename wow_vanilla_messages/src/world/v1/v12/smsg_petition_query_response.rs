@@ -30,8 +30,7 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
 }
 
 impl SMSG_PETITION_QUERY_RESPONSE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition_guid: Guid
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
@@ -87,7 +86,7 @@ impl SMSG_PETITION_QUERY_RESPONSE {
         // number_of_choices: u32
         w.write_all(&self.number_of_choices.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

@@ -15,20 +15,18 @@ pub struct SMSG_UPDATE_WORLD_STATE {
 }
 
 impl SMSG_UPDATE_WORLD_STATE {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
-        let mut array_w = [0u8; 8];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // state: WorldState
-        w.write_all(&self.state.as_bytes()?)?;
+        &self.state.as_bytes(w)?;;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 
 impl ServerMessage for SMSG_UPDATE_WORLD_STATE {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // state: WorldState
-        w.write_all(&self.state.as_bytes()?)?;
+        &self.state.as_bytes(w)?;;
 
         Ok(())
     }

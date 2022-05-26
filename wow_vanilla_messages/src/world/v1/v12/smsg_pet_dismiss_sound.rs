@@ -17,9 +17,7 @@ pub struct SMSG_PET_DISMISS_SOUND {
 }
 
 impl SMSG_PET_DISMISS_SOUND {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
-        let mut array_w = [0u8; 16];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sound_id: u32
         w.write_all(&self.sound_id.to_le_bytes())?;
 
@@ -32,7 +30,7 @@ impl SMSG_PET_DISMISS_SOUND {
         // position_z: f32
         w.write_all(&self.position_z.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

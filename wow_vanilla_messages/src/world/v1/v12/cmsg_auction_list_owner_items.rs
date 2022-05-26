@@ -16,16 +16,14 @@ pub struct CMSG_AUCTION_LIST_OWNER_ITEMS {
 }
 
 impl CMSG_AUCTION_LIST_OWNER_ITEMS {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
-        let mut array_w = [0u8; 12];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid
         w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
 
         // list_from: u32
         w.write_all(&self.list_from.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

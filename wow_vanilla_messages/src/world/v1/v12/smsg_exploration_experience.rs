@@ -16,16 +16,14 @@ pub struct SMSG_EXPLORATION_EXPERIENCE {
 }
 
 impl SMSG_EXPLORATION_EXPERIENCE {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
-        let mut array_w = [0u8; 8];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // area: Area
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         // experience: u32
         w.write_all(&self.experience.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

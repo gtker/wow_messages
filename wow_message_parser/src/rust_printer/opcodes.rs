@@ -289,13 +289,12 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
             s.bodyn("match self", |s| {
                 for e in v {
                     s.wln(format!(
-                        "Self::{enum_name}(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,",
+                        "Self::{enum_name}(e) => e.as_bytes(w)?,",
                         enum_name = get_enumerator_name(e.name()),
                     ));
                 }
             });
-        },
-        None
+        }
     );
 }
 

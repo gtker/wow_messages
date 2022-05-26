@@ -18,8 +18,7 @@ pub struct SMSG_TRAINER_LIST {
 }
 
 impl SMSG_TRAINER_LIST {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -31,7 +30,7 @@ impl SMSG_TRAINER_LIST {
 
         // spells: TrainerSpell[amount_of_spells]
         for i in self.spells.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // greeting: CString
@@ -39,7 +38,7 @@ impl SMSG_TRAINER_LIST {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -56,7 +55,7 @@ impl ServerMessage for SMSG_TRAINER_LIST {
 
         // spells: TrainerSpell[amount_of_spells]
         for i in self.spells.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // greeting: CString

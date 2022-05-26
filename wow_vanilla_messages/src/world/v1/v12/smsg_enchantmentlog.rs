@@ -19,9 +19,7 @@ pub struct SMSG_ENCHANTMENTLOG {
 }
 
 impl SMSG_ENCHANTMENTLOG {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 25], std::io::Error> {
-        let mut array_w = [0u8; 25];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
@@ -37,7 +35,7 @@ impl SMSG_ENCHANTMENTLOG {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

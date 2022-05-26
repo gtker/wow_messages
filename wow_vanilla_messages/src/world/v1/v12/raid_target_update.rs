@@ -15,16 +15,14 @@ pub struct RaidTargetUpdate {
 }
 
 impl RaidTargetUpdate {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 9], std::io::Error> {
-        let mut array_w = [0u8; 9];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // index: RaidTargetIndex
         w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
 
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

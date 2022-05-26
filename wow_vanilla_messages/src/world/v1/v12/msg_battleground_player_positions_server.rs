@@ -19,8 +19,7 @@ impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 }
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_carriers: u32
         w.write_all(&Self::AMOUNT_OF_CARRIERS_VALUE.to_le_bytes())?;
 
@@ -29,10 +28,10 @@ impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
         for i in self.flag_carriers.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -46,7 +45,7 @@ impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
         for i in self.flag_carriers.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

@@ -14,19 +14,18 @@ pub struct CMSG_MOVE_FALL_RESET {
 }
 
 impl CMSG_MOVE_FALL_RESET {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        w.write_all(&self.info.as_bytes()?)?;
+        &self.info.as_bytes(w)?;;
 
-        Ok(w)
+        Ok(())
     }
 }
 
 impl ClientMessage for CMSG_MOVE_FALL_RESET {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        w.write_all(&self.info.as_bytes()?)?;
+        &self.info.as_bytes(w)?;;
 
         Ok(())
     }

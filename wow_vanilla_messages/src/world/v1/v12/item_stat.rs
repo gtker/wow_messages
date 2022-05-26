@@ -13,16 +13,14 @@ pub struct ItemStat {
 }
 
 impl ItemStat {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
-        let mut array_w = [0u8; 8];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_stat_type: u32
         w.write_all(&self.item_stat_type.to_le_bytes())?;
 
         // item_stat_value: u32
         w.write_all(&self.item_stat_value.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

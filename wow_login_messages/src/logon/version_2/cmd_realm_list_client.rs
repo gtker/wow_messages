@@ -17,16 +17,14 @@ impl CMD_REALM_LIST_Client {
 }
 
 impl CMD_REALM_LIST_Client {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
-        let mut array_w = [0u8; 5];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
         // padding: u32
         w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 
@@ -47,8 +45,9 @@ impl ClientMessage for CMD_REALM_LIST_Client {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
+        let mut v = Vec::with_capacity(5);
+        self.as_bytes(&mut v)?;
+        w.write_all(&v)
     }
 
     #[cfg(feature = "tokio")]
@@ -86,8 +85,9 @@ impl ClientMessage for CMD_REALM_LIST_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
+            let mut v = Vec::with_capacity(5);
+            self.as_bytes(&mut v)?;
+            w.write_all(&v).await
         })
     }
 
@@ -126,8 +126,9 @@ impl ClientMessage for CMD_REALM_LIST_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
+            let mut v = Vec::with_capacity(5);
+            self.as_bytes(&mut v)?;
+            w.write_all(&v).await
         })
     }
 

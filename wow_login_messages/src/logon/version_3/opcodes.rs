@@ -19,17 +19,16 @@ pub enum ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_REALM_LIST(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_XFER_INITIATE(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_XFER_DATA(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
+            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_LOGON_PROOF(e) => e.as_bytes(w)?,
+            Self::CMD_REALM_LIST(e) => e.as_bytes(w)?,
+            Self::CMD_XFER_INITIATE(e) => e.as_bytes(w)?,
+            Self::CMD_XFER_DATA(e) => e.as_bytes(w)?,
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -133,20 +132,19 @@ pub enum ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_SURVEY_RESULT(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_REALM_LIST(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_XFER_ACCEPT(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_XFER_RESUME(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_XFER_CANCEL(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
+            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_LOGON_PROOF(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.as_bytes(w)?,
+            Self::CMD_SURVEY_RESULT(e) => e.as_bytes(w)?,
+            Self::CMD_REALM_LIST(e) => e.as_bytes(w)?,
+            Self::CMD_XFER_ACCEPT(e) => e.as_bytes(w)?,
+            Self::CMD_XFER_RESUME(e) => e.as_bytes(w)?,
+            Self::CMD_XFER_CANCEL(e) => e.as_bytes(w)?,
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

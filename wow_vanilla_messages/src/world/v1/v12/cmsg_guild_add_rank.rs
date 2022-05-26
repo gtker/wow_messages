@@ -13,14 +13,13 @@ pub struct CMSG_GUILD_ADD_RANK {
 }
 
 impl CMSG_GUILD_ADD_RANK {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // rank_name: CString
         w.write_all(self.rank_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

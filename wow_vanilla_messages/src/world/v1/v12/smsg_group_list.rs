@@ -22,8 +22,7 @@ pub struct SMSG_GROUP_LIST {
 }
 
 impl SMSG_GROUP_LIST {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // group_type: GroupType
         w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
 
@@ -35,7 +34,7 @@ impl SMSG_GROUP_LIST {
 
         // members: GroupListMember[amount_of_members]
         for i in self.members.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // leader: Guid
@@ -54,7 +53,7 @@ impl SMSG_GROUP_LIST {
 
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -71,7 +70,7 @@ impl ServerMessage for SMSG_GROUP_LIST {
 
         // members: GroupListMember[amount_of_members]
         for i in self.members.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // leader: Guid

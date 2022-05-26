@@ -14,17 +14,16 @@ pub struct SMSG_CHAR_ENUM {
 }
 
 impl SMSG_CHAR_ENUM {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_characters: u8
         w.write_all(&(self.characters.len() as u8).to_le_bytes())?;
 
         // characters: Character[amount_of_characters]
         for i in self.characters.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -35,7 +34,7 @@ impl ServerMessage for SMSG_CHAR_ENUM {
 
         // characters: Character[amount_of_characters]
         for i in self.characters.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

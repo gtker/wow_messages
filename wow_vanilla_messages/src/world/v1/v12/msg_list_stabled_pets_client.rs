@@ -15,13 +15,11 @@ pub struct MSG_LIST_STABLED_PETS_Client {
 }
 
 impl MSG_LIST_STABLED_PETS_Client {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
-        let mut array_w = [0u8; 8];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

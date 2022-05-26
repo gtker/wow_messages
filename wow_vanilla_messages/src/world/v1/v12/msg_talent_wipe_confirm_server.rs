@@ -16,16 +16,14 @@ pub struct MSG_TALENT_WIPE_CONFIRM_Server {
 }
 
 impl MSG_TALENT_WIPE_CONFIRM_Server {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
-        let mut array_w = [0u8; 12];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // wiping_npc: Guid
         w.write_all(&self.wiping_npc.guid().to_le_bytes())?;
 
         // cost_in_copper: u32
         w.write_all(&self.cost_in_copper.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

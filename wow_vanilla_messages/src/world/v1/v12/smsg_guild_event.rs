@@ -15,8 +15,7 @@ pub struct SMSG_GUILD_EVENT {
 }
 
 impl SMSG_GUILD_EVENT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // event: GuildEvent
         w.write_all(&(self.event.as_int() as u8).to_le_bytes())?;
 
@@ -29,7 +28,7 @@ impl SMSG_GUILD_EVENT {
             w.write_all(&[0])?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

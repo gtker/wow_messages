@@ -14,8 +14,7 @@ pub struct QuestItem {
 }
 
 impl QuestItem {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 
@@ -30,7 +29,7 @@ impl QuestItem {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

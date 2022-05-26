@@ -15,8 +15,7 @@ pub struct SMSG_WHO {
 }
 
 impl SMSG_WHO {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // listed_players: u32
         w.write_all(&(self.players.len() as u32).to_le_bytes())?;
 
@@ -25,10 +24,10 @@ impl SMSG_WHO {
 
         // players: WhoPlayer[listed_players]
         for i in self.players.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -42,7 +41,7 @@ impl ServerMessage for SMSG_WHO {
 
         // players: WhoPlayer[listed_players]
         for i in self.players.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

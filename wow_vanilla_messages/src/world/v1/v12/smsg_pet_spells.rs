@@ -24,8 +24,7 @@ pub struct SMSG_PET_SPELLS {
 }
 
 impl SMSG_PET_SPELLS {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet: Guid
         w.write_all(&self.pet.guid().to_le_bytes())?;
 
@@ -59,10 +58,10 @@ impl SMSG_PET_SPELLS {
 
         // cooldowns: PetSpellCooldown[amount_of_cooldowns]
         for i in self.cooldowns.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -101,7 +100,7 @@ impl ServerMessage for SMSG_PET_SPELLS {
 
         // cooldowns: PetSpellCooldown[amount_of_cooldowns]
         for i in self.cooldowns.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

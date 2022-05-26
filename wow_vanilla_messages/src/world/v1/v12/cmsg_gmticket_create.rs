@@ -21,8 +21,7 @@ pub struct CMSG_GMTICKET_CREATE {
 }
 
 impl CMSG_GMTICKET_CREATE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // category: GmTicketType
         w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
 
@@ -77,7 +76,7 @@ impl CMSG_GMTICKET_CREATE {
             CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => {}
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

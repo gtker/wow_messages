@@ -13,16 +13,14 @@ pub struct SpellCooldownStatus {
 }
 
 impl SpellCooldownStatus {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
-        let mut array_w = [0u8; 8];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
         // cooldown_time_in_msecs: u32
         w.write_all(&self.cooldown_time_in_msecs.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

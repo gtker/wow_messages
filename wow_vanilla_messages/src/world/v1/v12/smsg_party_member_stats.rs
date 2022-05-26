@@ -20,8 +20,7 @@ pub struct SMSG_PARTY_MEMBER_STATS {
 }
 
 impl SMSG_PARTY_MEMBER_STATS {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 
@@ -141,7 +140,7 @@ impl SMSG_PARTY_MEMBER_STATS {
 
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

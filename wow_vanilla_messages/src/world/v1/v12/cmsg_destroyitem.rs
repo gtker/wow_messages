@@ -19,9 +19,7 @@ pub struct CMSG_DESTROYITEM {
 }
 
 impl CMSG_DESTROYITEM {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 6], std::io::Error> {
-        let mut array_w = [0u8; 6];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag: u8
         w.write_all(&self.bag.to_le_bytes())?;
 
@@ -40,7 +38,7 @@ impl CMSG_DESTROYITEM {
         // unknown3: u8
         w.write_all(&self.unknown3.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

@@ -17,8 +17,7 @@ pub struct SMSG_SPELLLOGEXECUTE {
 }
 
 impl SMSG_SPELLLOGEXECUTE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster: PackedGuid
         w.write_all(&self.caster.packed_guid())?;
 
@@ -30,10 +29,10 @@ impl SMSG_SPELLLOGEXECUTE {
 
         // logs: SpellLog[amount_of_effects]
         for i in self.logs.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -50,7 +49,7 @@ impl ServerMessage for SMSG_SPELLLOGEXECUTE {
 
         // logs: SpellLog[amount_of_effects]
         for i in self.logs.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

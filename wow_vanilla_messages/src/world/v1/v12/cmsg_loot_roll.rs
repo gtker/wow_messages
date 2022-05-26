@@ -18,9 +18,7 @@ pub struct CMSG_LOOT_ROLL {
 }
 
 impl CMSG_LOOT_ROLL {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 13], std::io::Error> {
-        let mut array_w = [0u8; 13];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_guid: Guid
         w.write_all(&self.item_guid.guid().to_le_bytes())?;
 
@@ -30,7 +28,7 @@ impl CMSG_LOOT_ROLL {
         // vote: RollVote
         w.write_all(&(self.vote.as_int() as u8).to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

@@ -18,9 +18,7 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
 }
 
 impl SMSG_PETITION_SHOW_SIGNATURES {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 25], std::io::Error> {
-        let mut array_w = [0u8; 25];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_guid: Guid
         w.write_all(&self.item_guid.guid().to_le_bytes())?;
 
@@ -33,7 +31,7 @@ impl SMSG_PETITION_SHOW_SIGNATURES {
         // amount_of_signatures: u8
         w.write_all(&self.amount_of_signatures.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

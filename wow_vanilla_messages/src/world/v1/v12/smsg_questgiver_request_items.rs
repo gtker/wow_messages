@@ -28,8 +28,7 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
 }
 
 impl SMSG_QUESTGIVER_REQUEST_ITEMS {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
@@ -63,7 +62,7 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         // required_items: QuestItemRequirement[amount_of_required_items]
         for i in self.required_items.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // unknown1: u32
@@ -78,7 +77,7 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
         // flags3: u32
         w.write_all(&self.flags3.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -117,7 +116,7 @@ impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         // required_items: QuestItemRequirement[amount_of_required_items]
         for i in self.required_items.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // unknown1: u32

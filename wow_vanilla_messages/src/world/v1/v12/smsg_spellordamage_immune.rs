@@ -18,9 +18,7 @@ pub struct SMSG_SPELLORDAMAGE_IMMUNE {
 }
 
 impl SMSG_SPELLORDAMAGE_IMMUNE {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 21], std::io::Error> {
-        let mut array_w = [0u8; 21];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster_guid: Guid
         w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 
@@ -33,7 +31,7 @@ impl SMSG_SPELLORDAMAGE_IMMUNE {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

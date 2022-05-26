@@ -16,16 +16,14 @@ pub struct SMSG_SET_PROFICIENCY {
 }
 
 impl SMSG_SET_PROFICIENCY {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
-        let mut array_w = [0u8; 5];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // class: ItemClass
         w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 
         // item_sub_class_mask: u32
         w.write_all(&self.item_sub_class_mask.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

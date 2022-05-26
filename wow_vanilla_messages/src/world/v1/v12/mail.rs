@@ -31,8 +31,7 @@ pub struct Mail {
 }
 
 impl Mail {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message_id: u32
         w.write_all(&self.message_id.to_le_bytes())?;
 
@@ -124,7 +123,7 @@ impl Mail {
         // mail_template_id: u32
         w.write_all(&self.mail_template_id.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

@@ -48,8 +48,7 @@ impl Character {
 }
 
 impl Character {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -120,7 +119,7 @@ impl Character {
 
         // equipment: CharacterGear[19]
         for i in self.equipment.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // first_bag_display_id: u32
@@ -129,7 +128,7 @@ impl Character {
         // first_bag_inventory_id: u8
         w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

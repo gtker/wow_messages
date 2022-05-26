@@ -15,8 +15,7 @@ pub struct MSG_CORPSE_QUERY_Server {
 }
 
 impl MSG_CORPSE_QUERY_Server {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: CorpseQueryResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
@@ -47,7 +46,7 @@ impl MSG_CORPSE_QUERY_Server {
             }
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

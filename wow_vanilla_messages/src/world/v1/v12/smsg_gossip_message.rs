@@ -19,8 +19,7 @@ pub struct SMSG_GOSSIP_MESSAGE {
 }
 
 impl SMSG_GOSSIP_MESSAGE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -32,7 +31,7 @@ impl SMSG_GOSSIP_MESSAGE {
 
         // gossips: GossipItem[amount_of_gossip_items]
         for i in self.gossips.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // amount_of_quests: u32
@@ -40,10 +39,10 @@ impl SMSG_GOSSIP_MESSAGE {
 
         // quests: QuestItem[amount_of_quests]
         for i in self.quests.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -60,7 +59,7 @@ impl ServerMessage for SMSG_GOSSIP_MESSAGE {
 
         // gossips: GossipItem[amount_of_gossip_items]
         for i in self.gossips.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // amount_of_quests: u32
@@ -68,7 +67,7 @@ impl ServerMessage for SMSG_GOSSIP_MESSAGE {
 
         // quests: QuestItem[amount_of_quests]
         for i in self.quests.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

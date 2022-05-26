@@ -16,8 +16,7 @@ pub struct SMSG_GMTICKET_GETTICKET {
 }
 
 impl SMSG_GMTICKET_GETTICKET {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // status: GmTicketStatus
         w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
 
@@ -59,7 +58,7 @@ impl SMSG_GMTICKET_GETTICKET {
             SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT => {}
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

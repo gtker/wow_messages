@@ -20,8 +20,7 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT {
 }
 
 impl SMSG_MONSTER_MOVE_TRANSPORT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // transport: PackedGuid
         w.write_all(&self.transport.packed_guid())?;
 
@@ -40,7 +39,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT {
         // move_type: MonsterMoveType
         w.write_all(&(self.move_type.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

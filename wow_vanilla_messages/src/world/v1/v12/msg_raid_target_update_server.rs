@@ -15,8 +15,7 @@ pub struct MSG_RAID_TARGET_UPDATE_Server {
 }
 
 impl MSG_RAID_TARGET_UPDATE_Server {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // update_type: RaidTargetUpdateType
         w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 
@@ -25,7 +24,7 @@ impl MSG_RAID_TARGET_UPDATE_Server {
                 raid_target,
             } => {
                 // raid_target: RaidTargetUpdate
-                w.write_all(&raid_target.as_bytes()?)?;
+                &raid_target.as_bytes(w)?;;
 
             }
             MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
@@ -33,13 +32,13 @@ impl MSG_RAID_TARGET_UPDATE_Server {
             } => {
                 // raid_targets: RaidTargetUpdate[8]
                 for i in raid_targets.iter() {
-                    w.write_all(&(i.as_bytes()?))?;
+                    i.as_bytes(w)?;
                 }
 
             }
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -53,7 +52,7 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
                 raid_target,
             } => {
                 // raid_target: RaidTargetUpdate
-                w.write_all(&raid_target.as_bytes()?)?;
+                &raid_target.as_bytes(w)?;;
 
             }
             MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
@@ -61,7 +60,7 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
             } => {
                 // raid_targets: RaidTargetUpdate[8]
                 for i in raid_targets.iter() {
-                    w.write_all(&(i.as_bytes()?))?;
+                    i.as_bytes(w)?;
                 }
 
             }

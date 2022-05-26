@@ -16,8 +16,7 @@ pub struct SMSG_FORCE_RUN_BACK_SPEED_CHANGE {
 }
 
 impl SMSG_FORCE_RUN_BACK_SPEED_CHANGE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 
@@ -27,7 +26,7 @@ impl SMSG_FORCE_RUN_BACK_SPEED_CHANGE {
         // speed: f32
         w.write_all(&self.speed.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

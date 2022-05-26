@@ -25,9 +25,7 @@ pub struct SMSG_LEVELUP_INFO {
 }
 
 impl SMSG_LEVELUP_INFO {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 48], std::io::Error> {
-        let mut array_w = [0u8; 48];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // new_level: u32
         w.write_all(&self.new_level.to_le_bytes())?;
 
@@ -64,7 +62,7 @@ impl SMSG_LEVELUP_INFO {
         // spirit: u32
         w.write_all(&self.spirit.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

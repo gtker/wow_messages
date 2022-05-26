@@ -24,8 +24,7 @@ pub struct Realm {
 }
 
 impl Realm {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // realm_type: RealmType
         w.write_all(&(self.realm_type.as_int() as u8).to_le_bytes())?;
 
@@ -59,11 +58,11 @@ impl Realm {
 
         if let Some(if_statement) = &self.flag.specify_build {
             // version: Version
-            w.write_all(&if_statement.version.as_bytes()?)?;
+            &if_statement.version.as_bytes(w)?;;
 
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

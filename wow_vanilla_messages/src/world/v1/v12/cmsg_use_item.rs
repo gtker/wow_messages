@@ -17,8 +17,7 @@ pub struct CMSG_USE_ITEM {
 }
 
 impl CMSG_USE_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag_index: u8
         w.write_all(&self.bag_index.to_le_bytes())?;
 
@@ -29,9 +28,9 @@ impl CMSG_USE_ITEM {
         w.write_all(&self.spell_index.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        w.write_all(&self.targets.as_bytes()?)?;
+        &self.targets.as_bytes(w)?;;
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -47,7 +46,7 @@ impl ClientMessage for CMSG_USE_ITEM {
         w.write_all(&self.spell_index.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        w.write_all(&self.targets.as_bytes()?)?;
+        &self.targets.as_bytes(w)?;;
 
         Ok(())
     }

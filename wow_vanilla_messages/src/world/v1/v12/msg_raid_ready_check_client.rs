@@ -13,8 +13,7 @@ pub struct MSG_RAID_READY_CHECK_Client {
 }
 
 impl MSG_RAID_READY_CHECK_Client {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional answer
         if let Some(v) = &self.answer {
             // state: u8
@@ -22,7 +21,7 @@ impl MSG_RAID_READY_CHECK_Client {
 
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

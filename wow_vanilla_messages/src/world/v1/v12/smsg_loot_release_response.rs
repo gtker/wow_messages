@@ -16,16 +16,14 @@ pub struct SMSG_LOOT_RELEASE_RESPONSE {
 }
 
 impl SMSG_LOOT_RELEASE_RESPONSE {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 9], std::io::Error> {
-        let mut array_w = [0u8; 9];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

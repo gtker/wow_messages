@@ -15,16 +15,14 @@ pub struct MSG_MINIMAP_PING_Client {
 }
 
 impl MSG_MINIMAP_PING_Client {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
-        let mut array_w = [0u8; 8];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes())?;
 
         // position_y: f32
         w.write_all(&self.position_y.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

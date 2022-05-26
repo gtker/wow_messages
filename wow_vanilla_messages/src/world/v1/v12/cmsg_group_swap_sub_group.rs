@@ -14,8 +14,7 @@ pub struct CMSG_GROUP_SWAP_SUB_GROUP {
 }
 
 impl CMSG_GROUP_SWAP_SUB_GROUP {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator
@@ -26,7 +25,7 @@ impl CMSG_GROUP_SWAP_SUB_GROUP {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

@@ -26,8 +26,7 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
 }
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target: PackedGuid
         w.write_all(&self.target.packed_guid())?;
 
@@ -64,7 +63,7 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
         // extend_flag: u8
         w.write_all(&self.extend_flag.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

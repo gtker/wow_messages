@@ -13,8 +13,7 @@ pub struct CMSG_TOGGLE_PVP {
 }
 
 impl CMSG_TOGGLE_PVP {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional set
         if let Some(v) = &self.set {
             // enable_pvp: u8
@@ -22,7 +21,7 @@ impl CMSG_TOGGLE_PVP {
 
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

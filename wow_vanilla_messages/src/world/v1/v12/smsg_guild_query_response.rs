@@ -20,8 +20,7 @@ pub struct SMSG_GUILD_QUERY_RESPONSE {
 }
 
 impl SMSG_GUILD_QUERY_RESPONSE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
@@ -51,7 +50,7 @@ impl SMSG_GUILD_QUERY_RESPONSE {
         // background_color: u32
         w.write_all(&self.background_color.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

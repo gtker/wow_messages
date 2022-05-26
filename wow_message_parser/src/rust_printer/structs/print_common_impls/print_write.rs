@@ -42,7 +42,7 @@ pub fn print_write_field_array(
             endian = integer_type.rust_endian_str(),
             postfix = postfix,
         )),
-        ArrayType::Complex(_) => s.wln(format!("w.write_all(&(i.as_bytes()?)){}?;", postfix)),
+        ArrayType::Complex(_) => s.wln(format!("i.as_bytes(w)?;")),
         ArrayType::CString => {
             s.wln(format!("w.write_all(&i.as_bytes()){}?;", postfix));
             s.wln(format!("w.write_all(&[0]){}?;", postfix));
@@ -102,17 +102,11 @@ pub fn print_write_field_integer(
     }
 }
 
-pub fn print_write_field_identifier(
-    s: &mut Writer,
-    variable_name: &str,
-    variable_prefix: &str,
-    postfix: &str,
-) {
+pub fn print_write_field_identifier(s: &mut Writer, variable_name: &str, variable_prefix: &str) {
     s.wln(format!(
-        "w.write_all(&{variable_prefix}{name}.as_bytes()?){postfix}?;",
+        "&{variable_prefix}{name}.as_bytes(w)?;;",
         name = variable_name,
         variable_prefix = variable_prefix,
-        postfix = postfix,
     ));
 }
 
@@ -217,7 +211,7 @@ pub fn print_write_definition(
                 _ => {}
             }
 
-            print_write_field_identifier(s, d.name(), variable_prefix, postfix);
+            print_write_field_identifier(s, d.name(), variable_prefix);
         }
         Type::PackedGuid => {
             s.wln(format!(

@@ -17,9 +17,7 @@ pub struct CMSG_LOOT_MASTER_GIVE {
 }
 
 impl CMSG_LOOT_MASTER_GIVE {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 17], std::io::Error> {
-        let mut array_w = [0u8; 17];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // loot_guid: Guid
         w.write_all(&self.loot_guid.guid().to_le_bytes())?;
 
@@ -29,7 +27,7 @@ impl CMSG_LOOT_MASTER_GIVE {
         // target_player_guid: Guid
         w.write_all(&self.target_player_guid.guid().to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

@@ -15,15 +15,14 @@ pub struct CMSG_CAST_SPELL {
 }
 
 impl CMSG_CAST_SPELL {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        w.write_all(&self.targets.as_bytes()?)?;
+        &self.targets.as_bytes(w)?;;
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -33,7 +32,7 @@ impl ClientMessage for CMSG_CAST_SPELL {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        w.write_all(&self.targets.as_bytes()?)?;
+        &self.targets.as_bytes(w)?;;
 
         Ok(())
     }

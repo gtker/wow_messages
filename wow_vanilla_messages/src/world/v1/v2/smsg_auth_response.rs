@@ -14,8 +14,7 @@ pub struct SMSG_AUTH_RESPONSE {
 }
 
 impl SMSG_AUTH_RESPONSE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: WorldResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
@@ -124,7 +123,7 @@ impl SMSG_AUTH_RESPONSE {
             SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_FAILURE => {}
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

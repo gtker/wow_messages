@@ -13,8 +13,7 @@ pub struct SMSG_EXPECTED_SPAM_RECORDS {
 }
 
 impl SMSG_EXPECTED_SPAM_RECORDS {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_records: u32
         w.write_all(&(self.records.len() as u32).to_le_bytes())?;
 
@@ -24,7 +23,7 @@ impl SMSG_EXPECTED_SPAM_RECORDS {
             w.write_all(&[0])?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

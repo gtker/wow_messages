@@ -17,8 +17,7 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
 }
 
 impl SMSG_ATTACKERSTATEUPDATE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // hit_info: u32
         w.write_all(&self.hit_info.to_le_bytes())?;
 
@@ -31,7 +30,7 @@ impl SMSG_ATTACKERSTATEUPDATE {
         // total_damage: u32
         w.write_all(&self.total_damage.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

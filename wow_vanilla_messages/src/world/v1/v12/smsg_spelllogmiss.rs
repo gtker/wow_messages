@@ -18,8 +18,7 @@ pub struct SMSG_SPELLLOGMISS {
 }
 
 impl SMSG_SPELLLOGMISS {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
@@ -34,10 +33,10 @@ impl SMSG_SPELLLOGMISS {
 
         // targets: SpellMiss[amount_of_targets]
         for i in self.targets.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -57,7 +56,7 @@ impl ServerMessage for SMSG_SPELLLOGMISS {
 
         // targets: SpellMiss[amount_of_targets]
         for i in self.targets.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

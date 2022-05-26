@@ -17,16 +17,14 @@ pub struct SMSG_INSTANCE_RESET_FAILED {
 }
 
 impl SMSG_INSTANCE_RESET_FAILED {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
-        let mut array_w = [0u8; 5];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: InstanceResetFailedReason
         w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
 
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

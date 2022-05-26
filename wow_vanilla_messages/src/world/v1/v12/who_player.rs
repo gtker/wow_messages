@@ -19,8 +19,7 @@ pub struct WhoPlayer {
 }
 
 impl WhoPlayer {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator
@@ -46,7 +45,7 @@ impl WhoPlayer {
         // party_status: u32
         w.write_all(&self.party_status.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

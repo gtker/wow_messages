@@ -13,16 +13,14 @@ pub struct Faction {
 }
 
 impl Faction {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
-        let mut array_w = [0u8; 8];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reputation_list_id: u32
         w.write_all(&self.reputation_list_id.to_le_bytes())?;
 
         // standing: u32
         w.write_all(&self.standing.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

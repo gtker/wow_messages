@@ -16,8 +16,7 @@ pub struct SMSG_DUEL_WINNER {
 }
 
 impl SMSG_DUEL_WINNER {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: DuelWinnerReason
         w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
 
@@ -31,7 +30,7 @@ impl SMSG_DUEL_WINNER {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

@@ -18,9 +18,7 @@ pub struct SMSG_RAID_INSTANCE_MESSAGE {
 }
 
 impl SMSG_RAID_INSTANCE_MESSAGE {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
-        let mut array_w = [0u8; 12];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message_type: RaidInstanceMessage
         w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
 
@@ -30,7 +28,7 @@ impl SMSG_RAID_INSTANCE_MESSAGE {
         // time_left: u32
         w.write_all(&self.time_left.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

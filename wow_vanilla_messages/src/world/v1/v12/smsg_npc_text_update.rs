@@ -16,8 +16,7 @@ pub struct SMSG_NPC_TEXT_UPDATE {
 }
 
 impl SMSG_NPC_TEXT_UPDATE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // text_id: u32
         w.write_all(&self.text_id.to_le_bytes())?;
 
@@ -26,10 +25,10 @@ impl SMSG_NPC_TEXT_UPDATE {
 
         // texts: NpcTextUpdate[8]
         for i in self.texts.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -43,7 +42,7 @@ impl ServerMessage for SMSG_NPC_TEXT_UPDATE {
 
         // texts: NpcTextUpdate[8]
         for i in self.texts.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

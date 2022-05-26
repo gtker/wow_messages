@@ -27,7 +27,6 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 |s, it| {
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
-                Some(e.sizes(o)),
             );
         }
         ContainerType::CLogin(opcode) | ContainerType::SLogin(opcode) => {
@@ -53,7 +52,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                     print_write::print_unencrypted_write_header(s, e, it.postfix());
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
-                Some(sizes),
+                sizes,
             );
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
@@ -73,13 +72,9 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 );
             };
 
-            s.write_as_bytes(
-                e.name(),
-                |s, it| {
-                    print_write::print_write(s, e, o, it.prefix(), it.postfix());
-                },
-                Some(e.sizes(o)),
-            );
+            s.write_as_bytes(e.name(), |s, it| {
+                print_write::print_write(s, e, o, it.prefix(), it.postfix());
+            });
 
             match e.container_type() {
                 ContainerType::CMsg(_) => bind(s, CLIENT_MESSAGE_TRAIT_NAME),

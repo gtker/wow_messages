@@ -15,8 +15,7 @@ pub struct SMSG_UPDATE_OBJECT {
 }
 
 impl SMSG_UPDATE_OBJECT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_objects: u32
         w.write_all(&(self.objects.len() as u32).to_le_bytes())?;
 
@@ -25,10 +24,10 @@ impl SMSG_UPDATE_OBJECT {
 
         // objects: Object[amount_of_objects]
         for i in self.objects.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -42,7 +41,7 @@ impl ClientMessage for SMSG_UPDATE_OBJECT {
 
         // objects: Object[amount_of_objects]
         for i in self.objects.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

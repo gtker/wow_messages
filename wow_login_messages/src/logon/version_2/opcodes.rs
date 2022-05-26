@@ -19,17 +19,16 @@ pub enum ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_AUTH_RECONNECT_PROOF(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_REALM_LIST(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
+            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_LOGON_PROOF(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_RECONNECT_PROOF(e) => e.as_bytes(w)?,
+            Self::CMD_REALM_LIST(e) => e.as_bytes(w)?,
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -127,17 +126,16 @@ pub enum ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_AUTH_RECONNECT_PROOF(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
-            Self::CMD_REALM_LIST(e) => std::io::Write::write_all(&mut w, &e.as_bytes()?)?,
+            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_LOGON_PROOF(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_RECONNECT_PROOF(e) => e.as_bytes(w)?,
+            Self::CMD_REALM_LIST(e) => e.as_bytes(w)?,
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

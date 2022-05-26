@@ -16,9 +16,7 @@ pub struct CMSG_AUTOSTORE_BAG_ITEM {
 }
 
 impl CMSG_AUTOSTORE_BAG_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 3], std::io::Error> {
-        let mut array_w = [0u8; 3];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // source_bag: u8
         w.write_all(&self.source_bag.to_le_bytes())?;
 
@@ -28,7 +26,7 @@ impl CMSG_AUTOSTORE_BAG_ITEM {
         // destination_bag: u8
         w.write_all(&self.destination_bag.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

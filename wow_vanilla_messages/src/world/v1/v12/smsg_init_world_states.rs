@@ -18,8 +18,7 @@ pub struct SMSG_INIT_WORLD_STATES {
 }
 
 impl SMSG_INIT_WORLD_STATES {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
@@ -31,10 +30,10 @@ impl SMSG_INIT_WORLD_STATES {
 
         // states: WorldState[amount_of_states]
         for i in self.states.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -51,7 +50,7 @@ impl ServerMessage for SMSG_INIT_WORLD_STATES {
 
         // states: WorldState[amount_of_states]
         for i in self.states.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

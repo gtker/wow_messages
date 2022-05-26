@@ -18,8 +18,7 @@ pub struct SMSG_RESURRECT_REQUEST {
 }
 
 impl SMSG_RESURRECT_REQUEST {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -37,7 +36,7 @@ impl SMSG_RESURRECT_REQUEST {
         // respect_resurrection_timer: u8
         w.write_all(&self.respect_resurrection_timer.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

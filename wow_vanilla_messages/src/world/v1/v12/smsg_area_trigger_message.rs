@@ -14,8 +14,7 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
 }
 
 impl SMSG_AREA_TRIGGER_MESSAGE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // length: u32
         w.write_all(&self.length.to_le_bytes())?;
 
@@ -24,7 +23,7 @@ impl SMSG_AREA_TRIGGER_MESSAGE {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

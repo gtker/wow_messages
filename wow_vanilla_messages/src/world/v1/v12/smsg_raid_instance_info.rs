@@ -14,17 +14,16 @@ pub struct SMSG_RAID_INSTANCE_INFO {
 }
 
 impl SMSG_RAID_INSTANCE_INFO {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_raid_infos: u32
         w.write_all(&(self.raid_infos.len() as u32).to_le_bytes())?;
 
         // raid_infos: RaidInfo[amount_of_raid_infos]
         for i in self.raid_infos.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -35,7 +34,7 @@ impl ServerMessage for SMSG_RAID_INSTANCE_INFO {
 
         // raid_infos: RaidInfo[amount_of_raid_infos]
         for i in self.raid_infos.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

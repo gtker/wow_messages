@@ -12,8 +12,7 @@ pub struct CMD_XFER_DATA {
 }
 
 impl CMD_XFER_DATA {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -25,7 +24,7 @@ impl CMD_XFER_DATA {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -52,8 +51,9 @@ impl ServerMessage for CMD_XFER_DATA {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
+        let mut v = Vec::with_capacity(self.size());
+        self.as_bytes(&mut v)?;
+        w.write_all(&v)
     }
 
     #[cfg(feature = "tokio")]
@@ -97,8 +97,9 @@ impl ServerMessage for CMD_XFER_DATA {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
+            let mut v = Vec::with_capacity(self.size());
+            self.as_bytes(&mut v)?;
+            w.write_all(&v).await
         })
     }
 
@@ -143,8 +144,9 @@ impl ServerMessage for CMD_XFER_DATA {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
+            let mut v = Vec::with_capacity(self.size());
+            self.as_bytes(&mut v)?;
+            w.write_all(&v).await
         })
     }
 

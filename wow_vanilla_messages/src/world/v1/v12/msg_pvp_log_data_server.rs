@@ -17,8 +17,7 @@ pub struct MSG_PVP_LOG_DATA_Server {
 }
 
 impl MSG_PVP_LOG_DATA_Server {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // status: BattlegroundEndStatus
         w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 
@@ -38,10 +37,10 @@ impl MSG_PVP_LOG_DATA_Server {
 
         // players: BattlegroundPlayer[amount_of_players]
         for i in self.players.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -66,7 +65,7 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
 
         // players: BattlegroundPlayer[amount_of_players]
         for i in self.players.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

@@ -19,9 +19,7 @@ pub struct SMSG_LOOT_ALL_PASSED {
 }
 
 impl SMSG_LOOT_ALL_PASSED {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 24], std::io::Error> {
-        let mut array_w = [0u8; 24];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // looted_target_guid: Guid
         w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
 
@@ -37,7 +35,7 @@ impl SMSG_LOOT_ALL_PASSED {
         // item_random_suffix_id: u32
         w.write_all(&self.item_random_suffix_id.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

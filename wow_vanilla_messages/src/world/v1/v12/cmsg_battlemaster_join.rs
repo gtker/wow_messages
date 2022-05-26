@@ -19,9 +19,7 @@ pub struct CMSG_BATTLEMASTER_JOIN {
 }
 
 impl CMSG_BATTLEMASTER_JOIN {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 17], std::io::Error> {
-        let mut array_w = [0u8; 17];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -34,7 +32,7 @@ impl CMSG_BATTLEMASTER_JOIN {
         // join_as_group: u8
         w.write_all(&self.join_as_group.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

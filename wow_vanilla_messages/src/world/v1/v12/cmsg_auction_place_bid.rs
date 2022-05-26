@@ -17,9 +17,7 @@ pub struct CMSG_AUCTION_PLACE_BID {
 }
 
 impl CMSG_AUCTION_PLACE_BID {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
-        let mut array_w = [0u8; 16];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid
         w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
 
@@ -29,7 +27,7 @@ impl CMSG_AUCTION_PLACE_BID {
         // price: u32
         w.write_all(&self.price.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

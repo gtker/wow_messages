@@ -13,14 +13,13 @@ pub struct CMSG_WHOIS {
 }
 
 impl CMSG_WHOIS {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // character: CString
         w.write_all(self.character.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

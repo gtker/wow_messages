@@ -22,8 +22,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 }
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
 
@@ -117,12 +116,12 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // stats: ItemStat[10]
             for i in v.stats.iter() {
-                w.write_all(&(i.as_bytes()?))?;
+                i.as_bytes(w)?;
             }
 
             // damages: ItemDamageType[5]
             for i in v.damages.iter() {
-                w.write_all(&(i.as_bytes()?))?;
+                i.as_bytes(w)?;
             }
 
             // armor: u32
@@ -157,7 +156,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // spells: ItemSpells[5]
             for i in v.spells.iter() {
-                w.write_all(&(i.as_bytes()?))?;
+                i.as_bytes(w)?;
             }
 
             // bonding: u32
@@ -212,7 +211,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -311,12 +310,12 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // stats: ItemStat[10]
             for i in v.stats.iter() {
-                w.write_all(&(i.as_bytes()?))?;
+                i.as_bytes(w)?;
             }
 
             // damages: ItemDamageType[5]
             for i in v.damages.iter() {
-                w.write_all(&(i.as_bytes()?))?;
+                i.as_bytes(w)?;
             }
 
             // armor: u32
@@ -351,7 +350,7 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // spells: ItemSpells[5]
             for i in v.spells.iter() {
-                w.write_all(&(i.as_bytes()?))?;
+                i.as_bytes(w)?;
             }
 
             // bonding: u32

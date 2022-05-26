@@ -12,8 +12,7 @@ pub struct SimpleIfEnum {
 }
 
 impl SimpleIfEnum {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // enum: SimpleEnum
         w.write_all(&(self.enum.as_int() as u8).to_le_bytes())?;
 
@@ -29,7 +28,7 @@ impl SimpleIfEnum {
             SimpleIfEnumSimpleEnum::TWO => {}
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

@@ -15,9 +15,7 @@ pub struct TelemetryKey {
 }
 
 impl TelemetryKey {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 30], std::io::Error> {
-        let mut array_w = [0u8; 30];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u16
         w.write_all(&self.unknown1.to_le_bytes())?;
 
@@ -34,7 +32,7 @@ impl TelemetryKey {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

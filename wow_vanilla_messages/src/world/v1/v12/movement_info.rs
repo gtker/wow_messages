@@ -19,8 +19,7 @@ pub struct MovementInfo {
 }
 
 impl MovementInfo {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // flags: MovementFlags
         w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
 
@@ -41,7 +40,7 @@ impl MovementInfo {
 
         if let Some(if_statement) = &self.flags.on_transport {
             // transport: TransportInfo
-            w.write_all(&if_statement.transport.as_bytes()?)?;
+            &if_statement.transport.as_bytes(w)?;;
 
         }
 
@@ -75,7 +74,7 @@ impl MovementInfo {
 
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

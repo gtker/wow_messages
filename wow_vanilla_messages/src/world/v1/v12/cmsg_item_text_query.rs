@@ -16,9 +16,7 @@ pub struct CMSG_ITEM_TEXT_QUERY {
 }
 
 impl CMSG_ITEM_TEXT_QUERY {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
-        let mut array_w = [0u8; 12];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_text_id: u32
         w.write_all(&self.item_text_id.to_le_bytes())?;
 
@@ -28,7 +26,7 @@ impl CMSG_ITEM_TEXT_QUERY {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

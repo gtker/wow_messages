@@ -18,9 +18,7 @@ pub struct SMSG_SPELL_FAILURE {
 }
 
 impl SMSG_SPELL_FAILURE {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 13], std::io::Error> {
-        let mut array_w = [0u8; 13];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -30,7 +28,7 @@ impl SMSG_SPELL_FAILURE {
         // result: SpellCastResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

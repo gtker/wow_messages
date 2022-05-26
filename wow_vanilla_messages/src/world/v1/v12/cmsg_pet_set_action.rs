@@ -17,8 +17,7 @@ pub struct CMSG_PET_SET_ACTION {
 }
 
 impl CMSG_PET_SET_ACTION {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -38,7 +37,7 @@ impl CMSG_PET_SET_ACTION {
 
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

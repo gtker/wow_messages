@@ -21,9 +21,7 @@ pub struct SMSG_RESISTLOG {
 }
 
 impl SMSG_RESISTLOG {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 36], std::io::Error> {
-        let mut array_w = [0u8; 36];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid1: Guid
         w.write_all(&self.guid1.guid().to_le_bytes())?;
 
@@ -45,7 +43,7 @@ impl SMSG_RESISTLOG {
         // unknown5: u32
         w.write_all(&self.unknown5.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

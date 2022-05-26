@@ -20,9 +20,7 @@ pub struct SMSG_TRADE_STATUS_EXTENDED {
 }
 
 impl SMSG_TRADE_STATUS_EXTENDED {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 444], std::io::Error> {
-        let mut array_w = [0u8; 444];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // self_player: u8
         w.write_all(&self.self_player.to_le_bytes())?;
 
@@ -40,10 +38,10 @@ impl SMSG_TRADE_STATUS_EXTENDED {
 
         // trade_slots: TradeSlot[7]
         for i in self.trade_slots.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(array_w)
+        Ok(())
     }
 }
 
@@ -66,7 +64,7 @@ impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
 
         // trade_slots: TradeSlot[7]
         for i in self.trade_slots.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

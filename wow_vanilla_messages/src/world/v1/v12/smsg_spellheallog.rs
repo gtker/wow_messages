@@ -18,8 +18,7 @@ pub struct SMSG_SPELLHEALLOG {
 }
 
 impl SMSG_SPELLHEALLOG {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // victim_guid: PackedGuid
         w.write_all(&self.victim_guid.packed_guid())?;
 
@@ -35,7 +34,7 @@ impl SMSG_SPELLHEALLOG {
         // critical: u8
         w.write_all(&self.critical.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

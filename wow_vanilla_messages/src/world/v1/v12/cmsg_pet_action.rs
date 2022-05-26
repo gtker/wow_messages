@@ -17,9 +17,7 @@ pub struct CMSG_PET_ACTION {
 }
 
 impl CMSG_PET_ACTION {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 20], std::io::Error> {
-        let mut array_w = [0u8; 20];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_guid: Guid
         w.write_all(&self.pet_guid.guid().to_le_bytes())?;
 
@@ -29,7 +27,7 @@ impl CMSG_PET_ACTION {
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

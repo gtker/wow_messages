@@ -17,9 +17,7 @@ pub struct SMSG_NEW_WORLD {
 }
 
 impl SMSG_NEW_WORLD {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
-        let mut array_w = [0u8; 16];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes())?;
 
@@ -32,7 +30,7 @@ impl SMSG_NEW_WORLD {
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

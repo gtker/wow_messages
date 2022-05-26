@@ -16,8 +16,7 @@ pub struct SMSG_LIST_INVENTORY {
 }
 
 impl SMSG_LIST_INVENTORY {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor: Guid
         w.write_all(&self.vendor.guid().to_le_bytes())?;
 
@@ -26,10 +25,10 @@ impl SMSG_LIST_INVENTORY {
 
         // items: ListInventoryItem[amount_of_items]
         for i in self.items.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -43,7 +42,7 @@ impl ServerMessage for SMSG_LIST_INVENTORY {
 
         // items: ListInventoryItem[amount_of_items]
         for i in self.items.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

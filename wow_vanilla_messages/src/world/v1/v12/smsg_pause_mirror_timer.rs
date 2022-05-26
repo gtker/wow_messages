@@ -16,16 +16,14 @@ pub struct SMSG_PAUSE_MIRROR_TIMER {
 }
 
 impl SMSG_PAUSE_MIRROR_TIMER {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
-        let mut array_w = [0u8; 5];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // timer: TimerType
         w.write_all(&(self.timer.as_int() as u32).to_le_bytes())?;
 
         // is_frozen: u8
         w.write_all(&self.is_frozen.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

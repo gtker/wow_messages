@@ -13,14 +13,13 @@ pub struct CMSG_GUILD_INFO_TEXT {
 }
 
 impl CMSG_GUILD_INFO_TEXT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_info: CString
         w.write_all(self.guild_info.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

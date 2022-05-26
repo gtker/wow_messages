@@ -15,16 +15,14 @@ pub struct SMSG_UPDATE_AURA_DURATION {
 }
 
 impl SMSG_UPDATE_AURA_DURATION {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
-        let mut array_w = [0u8; 5];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // aura_slot: u8
         w.write_all(&self.aura_slot.to_le_bytes())?;
 
         // aura_duration: u32
         w.write_all(&self.aura_duration.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

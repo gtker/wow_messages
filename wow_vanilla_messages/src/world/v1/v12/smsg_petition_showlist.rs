@@ -16,8 +16,7 @@ pub struct SMSG_PETITION_SHOWLIST {
 }
 
 impl SMSG_PETITION_SHOWLIST {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
@@ -26,10 +25,10 @@ impl SMSG_PETITION_SHOWLIST {
 
         // petitions: PetitionShowlist[amount_of_petitions]
         for i in self.petitions.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -43,7 +42,7 @@ impl ServerMessage for SMSG_PETITION_SHOWLIST {
 
         // petitions: PetitionShowlist[amount_of_petitions]
         for i in self.petitions.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

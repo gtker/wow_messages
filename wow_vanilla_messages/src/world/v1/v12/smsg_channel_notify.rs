@@ -15,8 +15,7 @@ pub struct SMSG_CHANNEL_NOTIFY {
 }
 
 impl SMSG_CHANNEL_NOTIFY {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // notify_type: ChatNotify
         w.write_all(&(self.notify_type.as_int() as u8).to_le_bytes())?;
 
@@ -25,7 +24,7 @@ impl SMSG_CHANNEL_NOTIFY {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

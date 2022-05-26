@@ -15,16 +15,14 @@ pub struct SMSG_SUPERCEDED_SPELL {
 }
 
 impl SMSG_SUPERCEDED_SPELL {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
-        let mut array_w = [0u8; 4];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // new_spell_id: u16
         w.write_all(&self.new_spell_id.to_le_bytes())?;
 
         // old_spell_id: u16
         w.write_all(&self.old_spell_id.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

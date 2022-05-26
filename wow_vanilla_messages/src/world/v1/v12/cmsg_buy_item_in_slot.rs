@@ -19,9 +19,7 @@ pub struct CMSG_BUY_ITEM_IN_SLOT {
 }
 
 impl CMSG_BUY_ITEM_IN_SLOT {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 22], std::io::Error> {
-        let mut array_w = [0u8; 22];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor_guid: Guid
         w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
 
@@ -37,7 +35,7 @@ impl CMSG_BUY_ITEM_IN_SLOT {
         // amount: u8
         w.write_all(&self.amount.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

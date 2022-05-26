@@ -18,8 +18,7 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
 }
 
 impl SMSG_QUESTGIVER_QUEST_COMPLETE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 
@@ -37,10 +36,10 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
 
         // item_rewards: QuestItemReward[amount_of_item_rewards]
         for i in self.item_rewards.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -63,7 +62,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
         // item_rewards: QuestItemReward[amount_of_item_rewards]
         for i in self.item_rewards.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         Ok(())

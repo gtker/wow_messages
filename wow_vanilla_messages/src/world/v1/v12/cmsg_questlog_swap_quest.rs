@@ -15,16 +15,14 @@ pub struct CMSG_QUESTLOG_SWAP_QUEST {
 }
 
 impl CMSG_QUESTLOG_SWAP_QUEST {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 2], std::io::Error> {
-        let mut array_w = [0u8; 2];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // slot1: u8
         w.write_all(&self.slot1.to_le_bytes())?;
 
         // slot2: u8
         w.write_all(&self.slot2.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

@@ -21,8 +21,7 @@ pub struct SMSG_MESSAGECHAT {
 }
 
 impl SMSG_MESSAGECHAT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // chat_type: ChatType
         w.write_all(&(self.chat_type.as_int() as u8).to_le_bytes())?;
 
@@ -368,7 +367,7 @@ impl SMSG_MESSAGECHAT {
         // tag: PlayerChatTag
         w.write_all(&(self.tag.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

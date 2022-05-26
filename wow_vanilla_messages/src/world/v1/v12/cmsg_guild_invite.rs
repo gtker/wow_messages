@@ -13,14 +13,13 @@ pub struct CMSG_GUILD_INVITE {
 }
 
 impl CMSG_GUILD_INVITE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // invited_player: CString
         w.write_all(self.invited_player.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

@@ -284,12 +284,16 @@ impl Writer {
         self.open_curly("Box::pin(async move");
     }
 
-    fn call_as_bytes(&mut self, it: ImplType) {
-        self.wln("let inner = self.as_bytes()?;");
-        self.wln(format!(
-            "w.write_all(&inner){postfix}",
-            postfix = it.postfix()
-        ));
+    fn call_as_bytes(&mut self, it: ImplType, sizes: Sizes) {
+        let size = if sizes.is_constant() {
+            sizes.maximum().to_string()
+        } else {
+            "self.size()".to_string()
+        };
+
+        self.wln(format!("let mut v = Vec::with_capacity({});", size));
+        self.wln("self.as_bytes(&mut v)?;");
+        self.wln(format!("w.write_all(&v){postfix}", postfix = it.postfix()));
     }
 
     pub fn write_as_bytes_trait(&mut self, write_function: impl Fn(&mut Self, ImplType)) {
@@ -306,39 +310,16 @@ impl Writer {
         &mut self,
         type_name: impl AsRef<str>,
         write_function: impl Fn(&mut Self, ImplType),
-        sizes: Option<Sizes>,
     ) {
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
-        if sizes.is_some() && sizes.unwrap().is_constant() {
-            self.open_curly(format!(
-                "pub(crate) fn as_bytes(&self) -> Result<[u8; {size}], std::io::Error>",
-                size = sizes.unwrap().maximum()
-            ));
-        } else {
-            self.open_curly("pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>");
-        }
+        self.open_curly(
+            "pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>",
+        );
 
-        if let Some(sizes) = sizes {
-            if sizes.is_constant() {
-                self.wln(format!(
-                    "let mut array_w = [0u8; {size}];",
-                    size = sizes.maximum()
-                ));
-                self.wln("let mut w = array_w.as_mut_slice();");
-            } else {
-                self.wln(format!("let mut w = Vec::with_capacity(self.size());",));
-            }
-        } else {
-            self.wln("let mut w = Vec::with_capacity(8000);");
-        }
         write_function(self, ImplType::Std);
 
-        if sizes.is_some() && sizes.unwrap().is_constant() {
-            self.wln("Ok(array_w)");
-        } else {
-            self.wln("Ok(w)");
-        }
+        self.wln("Ok(())");
 
         self.closing_curly();
         self.closing_curly_newline();
@@ -350,10 +331,9 @@ impl Writer {
         error_name: impl AsRef<str>,
         read_function: F,
         write_function: F2,
-        sizes: Option<Sizes>,
         visibility: impl AsRef<str>,
     ) {
-        self.write_as_bytes(&type_name, write_function, sizes);
+        self.write_as_bytes(&type_name, write_function);
 
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
@@ -385,16 +365,8 @@ impl Writer {
         error_name: S1,
         read_function: F,
         write_function: F2,
-        sizes: Option<Sizes>,
     ) {
-        self.impl_read_write_non_trait(
-            type_name,
-            error_name,
-            read_function,
-            write_function,
-            sizes,
-            "pub",
-        )
+        self.impl_read_write_non_trait(type_name, error_name, read_function, write_function, "pub")
     }
 
     pub fn impl_read_write_non_trait_pub_crate<
@@ -408,14 +380,12 @@ impl Writer {
         error_name: S1,
         read_function: F,
         write_function: F2,
-        sizes: Option<Sizes>,
     ) {
         self.impl_read_write_non_trait(
             type_name,
             error_name,
             read_function,
             write_function,
-            sizes,
             "pub(crate)",
         )
     }
@@ -428,9 +398,9 @@ impl Writer {
         trait_to_impl: impl AsRef<str>,
         read_function: impl Fn(&mut Self, ImplType),
         write_function: impl Fn(&mut Self, ImplType),
-        sizes: Option<Sizes>,
+        sizes: Sizes,
     ) {
-        self.write_as_bytes(&type_name, write_function, sizes);
+        self.write_as_bytes(&type_name, write_function);
 
         self.open_curly(format!(
             "impl {} for {}",
@@ -457,7 +427,7 @@ impl Writer {
 
             self.print_write_decl(it, "");
 
-            self.call_as_bytes(it);
+            self.call_as_bytes(it, sizes);
 
             if it.is_async() {
                 self.closing_curly_with(")"); // Box::pin

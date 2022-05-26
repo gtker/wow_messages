@@ -20,9 +20,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 }
 
 impl CMD_AUTH_RECONNECT_PROOF_Client {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 58], std::io::Error> {
-        let mut array_w = [0u8; 58];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -44,7 +42,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
         // key_count: u8
         w.write_all(&Self::KEY_COUNT_VALUE.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 
@@ -80,8 +78,9 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
+        let mut v = Vec::with_capacity(58);
+        self.as_bytes(&mut v)?;
+        w.write_all(&v)
     }
 
     #[cfg(feature = "tokio")]
@@ -134,8 +133,9 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
+            let mut v = Vec::with_capacity(58);
+            self.as_bytes(&mut v)?;
+            w.write_all(&v).await
         })
     }
 
@@ -189,8 +189,9 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
+            let mut v = Vec::with_capacity(58);
+            self.as_bytes(&mut v)?;
+            w.write_all(&v).await
         })
     }
 

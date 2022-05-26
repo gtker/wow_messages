@@ -15,16 +15,14 @@ pub struct CMSG_LEARN_TALENT {
 }
 
 impl CMSG_LEARN_TALENT {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
-        let mut array_w = [0u8; 8];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // talent_id: u32
         w.write_all(&self.talent_id.to_le_bytes())?;
 
         // requested_rank: u32
         w.write_all(&self.requested_rank.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

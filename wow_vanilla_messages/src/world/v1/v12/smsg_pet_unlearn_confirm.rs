@@ -16,16 +16,14 @@ pub struct SMSG_PET_UNLEARN_CONFIRM {
 }
 
 impl SMSG_PET_UNLEARN_CONFIRM {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
-        let mut array_w = [0u8; 12];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_guid: Guid
         w.write_all(&self.pet_guid.guid().to_le_bytes())?;
 
         // talent_reset_cost: u32
         w.write_all(&self.talent_reset_cost.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

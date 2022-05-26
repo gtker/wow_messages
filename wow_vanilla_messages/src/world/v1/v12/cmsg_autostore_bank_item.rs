@@ -15,16 +15,14 @@ pub struct CMSG_AUTOSTORE_BANK_ITEM {
 }
 
 impl CMSG_AUTOSTORE_BANK_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 2], std::io::Error> {
-        let mut array_w = [0u8; 2];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag_index: u8
         w.write_all(&self.bag_index.to_le_bytes())?;
 
         // slot_index: u8
         w.write_all(&self.slot_index.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

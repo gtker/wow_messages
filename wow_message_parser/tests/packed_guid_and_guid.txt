@@ -17,8 +17,7 @@ pub struct PackedGuidAndGuid {
 }
 
 impl PackedGuidAndGuid {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // packed: PackedGuid
         w.write_all(&self.packed.packed_guid())?;
 
@@ -51,7 +50,7 @@ impl PackedGuidAndGuid {
             w.write_all(&i.guid().to_le_bytes())?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

@@ -13,16 +13,14 @@ pub struct WorldState {
 }
 
 impl WorldState {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
-        let mut array_w = [0u8; 8];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // state: u32
         w.write_all(&self.state.to_le_bytes())?;
 
         // value: u32
         w.write_all(&self.value.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

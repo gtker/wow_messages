@@ -18,8 +18,7 @@ pub struct CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
 }
 
 impl CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -27,12 +26,12 @@ impl CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
         w.write_all(&self.counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        w.write_all(&self.movement_info.as_bytes()?)?;
+        &self.movement_info.as_bytes(w)?;;
 
         // new_speed: f32
         w.write_all(&self.new_speed.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -45,7 +44,7 @@ impl ClientMessage for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
         w.write_all(&self.counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        w.write_all(&self.movement_info.as_bytes()?)?;
+        &self.movement_info.as_bytes(w)?;;
 
         // new_speed: f32
         w.write_all(&self.new_speed.to_le_bytes())?;

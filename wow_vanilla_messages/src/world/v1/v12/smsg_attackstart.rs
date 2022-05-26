@@ -16,16 +16,14 @@ pub struct SMSG_ATTACKSTART {
 }
 
 impl SMSG_ATTACKSTART {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
-        let mut array_w = [0u8; 16];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // attacker_guid: Guid
         w.write_all(&self.attacker_guid.guid().to_le_bytes())?;
 
         // victim_guid: Guid
         w.write_all(&self.victim_guid.guid().to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

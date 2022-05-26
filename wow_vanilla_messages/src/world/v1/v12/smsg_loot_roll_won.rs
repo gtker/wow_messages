@@ -23,9 +23,7 @@ pub struct SMSG_LOOT_ROLL_WON {
 }
 
 impl SMSG_LOOT_ROLL_WON {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 34], std::io::Error> {
-        let mut array_w = [0u8; 34];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // looted_target_guid: Guid
         w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
 
@@ -50,7 +48,7 @@ impl SMSG_LOOT_ROLL_WON {
         // vote: RollVote
         w.write_all(&(self.vote.as_int() as u8).to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

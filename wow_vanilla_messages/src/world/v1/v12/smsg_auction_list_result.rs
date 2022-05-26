@@ -15,20 +15,19 @@ pub struct SMSG_AUCTION_LIST_RESULT {
 }
 
 impl SMSG_AUCTION_LIST_RESULT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // count: u32
         w.write_all(&(self.auctions.len() as u32).to_le_bytes())?;
 
         // auctions: AuctionListItem[count]
         for i in self.auctions.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // total_amount_of_auctions: u32
         w.write_all(&self.total_amount_of_auctions.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -39,7 +38,7 @@ impl ServerMessage for SMSG_AUCTION_LIST_RESULT {
 
         // auctions: AuctionListItem[count]
         for i in self.auctions.iter() {
-            w.write_all(&(i.as_bytes()?))?;
+            i.as_bytes(w)?;
         }
 
         // total_amount_of_auctions: u32

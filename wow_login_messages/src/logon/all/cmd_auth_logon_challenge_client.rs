@@ -28,8 +28,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Client {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -43,7 +42,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes())?;
 
         // version: Version
-        w.write_all(&self.version.as_bytes()?)?;
+        &self.version.as_bytes(w)?;;
 
         // platform: Platform
         w.write_all(&(self.platform.as_int() as u32).to_le_bytes())?;
@@ -66,7 +65,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         // account_name: String[account_name_length]
         w.write_all(self.account_name.as_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 
@@ -127,8 +126,9 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let inner = self.as_bytes()?;
-        w.write_all(&inner)
+        let mut v = Vec::with_capacity(self.size());
+        self.as_bytes(&mut v)?;
+        w.write_all(&v)
     }
 
     #[cfg(feature = "tokio")]
@@ -206,8 +206,9 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
+            let mut v = Vec::with_capacity(self.size());
+            self.as_bytes(&mut v)?;
+            w.write_all(&v).await
         })
     }
 
@@ -286,8 +287,9 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = self.as_bytes()?;
-            w.write_all(&inner).await
+            let mut v = Vec::with_capacity(self.size());
+            self.as_bytes(&mut v)?;
+            w.write_all(&v).await
         })
     }
 

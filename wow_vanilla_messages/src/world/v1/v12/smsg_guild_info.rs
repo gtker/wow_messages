@@ -18,8 +18,7 @@ pub struct SMSG_GUILD_INFO {
 }
 
 impl SMSG_GUILD_INFO {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_name: CString
         w.write_all(self.guild_name.as_bytes())?;
         // Null terminator
@@ -40,7 +39,7 @@ impl SMSG_GUILD_INFO {
         // amount_of_accounts_in_guild: u32
         w.write_all(&self.amount_of_accounts_in_guild.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

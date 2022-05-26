@@ -20,8 +20,7 @@ pub struct CMSG_WHO {
 }
 
 impl CMSG_WHO {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // minimum_level: u32
         w.write_all(&self.minimum_level.to_le_bytes())?;
 
@@ -61,7 +60,7 @@ impl CMSG_WHO {
             w.write_all(&[0])?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

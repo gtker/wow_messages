@@ -20,9 +20,7 @@ pub struct SMSG_AUCTION_OWNER_NOTIFICATION {
 }
 
 impl SMSG_AUCTION_OWNER_NOTIFICATION {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 28], std::io::Error> {
-        let mut array_w = [0u8; 28];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auction_id: u32
         w.write_all(&self.auction_id.to_le_bytes())?;
 
@@ -41,7 +39,7 @@ impl SMSG_AUCTION_OWNER_NOTIFICATION {
         // item_random_property_id: u32
         w.write_all(&self.item_random_property_id.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

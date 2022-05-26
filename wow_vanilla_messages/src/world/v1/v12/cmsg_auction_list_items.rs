@@ -23,8 +23,7 @@ pub struct CMSG_AUCTION_LIST_ITEMS {
 }
 
 impl CMSG_AUCTION_LIST_ITEMS {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid
         w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
 
@@ -57,7 +56,7 @@ impl CMSG_AUCTION_LIST_ITEMS {
         // usable: u8
         w.write_all(&self.usable.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
 }
 

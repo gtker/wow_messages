@@ -26,9 +26,7 @@ pub struct AuctionListItem {
 }
 
 impl AuctionListItem {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 64], std::io::Error> {
-        let mut array_w = [0u8; 64];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
@@ -71,7 +69,7 @@ impl AuctionListItem {
         // highest_bid: u32
         w.write_all(&self.highest_bid.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

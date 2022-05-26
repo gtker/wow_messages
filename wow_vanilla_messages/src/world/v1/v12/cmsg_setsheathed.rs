@@ -15,13 +15,11 @@ pub struct CMSG_SETSHEATHED {
 }
 
 impl CMSG_SETSHEATHED {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
-        let mut array_w = [0u8; 1];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sheathed: SheathState
         w.write_all(&(self.sheathed.as_int() as u32).to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

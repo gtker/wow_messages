@@ -14,13 +14,11 @@ pub struct CMSG_UNLEARN_SKILL {
 }
 
 impl CMSG_UNLEARN_SKILL {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
-        let mut array_w = [0u8; 4];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // skill_id: u32
         w.write_all(&self.skill_id.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

@@ -20,8 +20,7 @@ pub struct SMSG_BATTLEFIELD_LIST {
 }
 
 impl SMSG_BATTLEFIELD_LIST {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // battlemaster: Guid
         w.write_all(&self.battlemaster.guid().to_le_bytes())?;
 
@@ -45,7 +44,7 @@ impl SMSG_BATTLEFIELD_LIST {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        Ok(w)
+        Ok(())
     }
 }
 

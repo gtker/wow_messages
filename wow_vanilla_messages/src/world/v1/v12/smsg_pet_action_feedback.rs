@@ -15,13 +15,11 @@ pub struct SMSG_PET_ACTION_FEEDBACK {
 }
 
 impl SMSG_PET_ACTION_FEEDBACK {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
-        let mut array_w = [0u8; 1];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // feedback: PetFeedback
         w.write_all(&(self.feedback.as_int() as u8).to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

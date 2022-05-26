@@ -20,9 +20,7 @@ pub struct CMSG_WORLD_TELEPORT {
 }
 
 impl CMSG_WORLD_TELEPORT {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 28], std::io::Error> {
-        let mut array_w = [0u8; 28];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // time_in_msec: u64
         w.write_all(&self.time_in_msec.to_le_bytes())?;
 
@@ -41,7 +39,7 @@ impl CMSG_WORLD_TELEPORT {
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 

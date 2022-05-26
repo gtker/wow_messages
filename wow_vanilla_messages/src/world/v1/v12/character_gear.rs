@@ -14,16 +14,14 @@ pub struct CharacterGear {
 }
 
 impl CharacterGear {
-    pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
-        let mut array_w = [0u8; 5];
-        let mut w = array_w.as_mut_slice();
+    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // equipment_display_id: u32
         w.write_all(&self.equipment_display_id.to_le_bytes())?;
 
         // inventory_type: InventoryType
         w.write_all(&(self.inventory_type.as_int() as u8).to_le_bytes())?;
 
-        Ok(array_w)
+        Ok(())
     }
 }
 
