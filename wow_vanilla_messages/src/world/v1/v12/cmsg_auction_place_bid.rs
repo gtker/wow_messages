@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct CMSG_AUCTION_PLACE_BID {
     pub auction_id: u32,
     pub price: u32,
 }
-
-impl ClientMessage for CMSG_AUCTION_PLACE_BID {}
 
 impl CMSG_AUCTION_PLACE_BID {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
@@ -35,7 +33,7 @@ impl CMSG_AUCTION_PLACE_BID {
     }
 }
 
-impl MessageBody for CMSG_AUCTION_PLACE_BID {
+impl ClientMessage for CMSG_AUCTION_PLACE_BID {
     const OPCODE: u16 = 0x025a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_QUESTGIVER_REQUEST_REWARD {
     pub guid: Guid,
     pub quest_id: u32,
 }
-
-impl ClientMessage for CMSG_QUESTGIVER_REQUEST_REWARD {}
 
 impl CMSG_QUESTGIVER_REQUEST_REWARD {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -31,7 +29,7 @@ impl CMSG_QUESTGIVER_REQUEST_REWARD {
     }
 }
 
-impl MessageBody for CMSG_QUESTGIVER_REQUEST_REWARD {
+impl ClientMessage for CMSG_QUESTGIVER_REQUEST_REWARD {
     const OPCODE: u16 = 0x018c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

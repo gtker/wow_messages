@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{MeetingStoneStatus, MeetingStoneStatusError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct SMSG_MEETINGSTONE_SETQUEUE {
     pub area: Area,
     pub status: MeetingStoneStatus,
 }
-
-impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {}
 
 impl SMSG_MEETINGSTONE_SETQUEUE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
@@ -32,7 +30,7 @@ impl SMSG_MEETINGSTONE_SETQUEUE {
     }
 }
 
-impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
+impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {
     const OPCODE: u16 = 0x0295;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

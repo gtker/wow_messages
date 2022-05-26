@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::ChannelMember;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_CHANNEL_LIST {
     pub channel_flags: u8,
     pub members: Vec<ChannelMember>,
 }
-
-impl ServerMessage for SMSG_CHANNEL_LIST {}
 
 impl SMSG_CHANNEL_LIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -40,7 +38,7 @@ impl SMSG_CHANNEL_LIST {
     }
 }
 
-impl MessageBody for SMSG_CHANNEL_LIST {
+impl ServerMessage for SMSG_CHANNEL_LIST {
     const OPCODE: u16 = 0x009b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

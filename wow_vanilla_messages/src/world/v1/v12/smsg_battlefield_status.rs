@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::{StatusId, StatusIdError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_BATTLEFIELD_STATUS {
     pub queue_slot: u32,
     pub map: SMSG_BATTLEFIELD_STATUSMap,
 }
-
-impl ServerMessage for SMSG_BATTLEFIELD_STATUS {}
 
 impl SMSG_BATTLEFIELD_STATUS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -2141,7 +2139,7 @@ impl SMSG_BATTLEFIELD_STATUS {
     }
 }
 
-impl MessageBody for SMSG_BATTLEFIELD_STATUS {
+impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
     const OPCODE: u16 = 0x02d4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

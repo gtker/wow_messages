@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,8 +17,6 @@ pub struct SMSG_LOGIN_VERIFY_WORLD {
     pub position_z: f32,
     pub orientation: f32,
 }
-
-impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {}
 
 impl SMSG_LOGIN_VERIFY_WORLD {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 20], std::io::Error> {
@@ -43,7 +41,7 @@ impl SMSG_LOGIN_VERIFY_WORLD {
     }
 }
 
-impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
+impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
     const OPCODE: u16 = 0x0236;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

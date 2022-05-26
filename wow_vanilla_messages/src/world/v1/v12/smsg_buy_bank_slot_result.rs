@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{BuyBankSlotResult, BuyBankSlotResultError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_BUY_BANK_SLOT_RESULT {
     pub result: BuyBankSlotResult,
 }
 
-impl ServerMessage for SMSG_BUY_BANK_SLOT_RESULT {}
-
 impl SMSG_BUY_BANK_SLOT_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
         let mut array_w = [0u8; 4];
@@ -27,7 +25,7 @@ impl SMSG_BUY_BANK_SLOT_RESULT {
     }
 }
 
-impl MessageBody for SMSG_BUY_BANK_SLOT_RESULT {
+impl ServerMessage for SMSG_BUY_BANK_SLOT_RESULT {
     const OPCODE: u16 = 0x01ba;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

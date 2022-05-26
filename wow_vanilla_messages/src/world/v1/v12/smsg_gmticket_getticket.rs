@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{GmTicketEscalationStatus, GmTicketEscalationStatusError};
 use crate::world::v1::v12::{GmTicketStatus, GmTicketStatusError};
 use crate::world::v1::v12::{GmTicketType, GmTicketTypeError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ use std::io::Write;
 pub struct SMSG_GMTICKET_GETTICKET {
     pub status: SMSG_GMTICKET_GETTICKETGmTicketStatus,
 }
-
-impl ServerMessage for SMSG_GMTICKET_GETTICKET {}
 
 impl SMSG_GMTICKET_GETTICKET {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -65,7 +63,7 @@ impl SMSG_GMTICKET_GETTICKET {
     }
 }
 
-impl MessageBody for SMSG_GMTICKET_GETTICKET {
+impl ServerMessage for SMSG_GMTICKET_GETTICKET {
     const OPCODE: u16 = 0x0212;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

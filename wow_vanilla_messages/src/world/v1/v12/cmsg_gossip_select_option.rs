@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_GOSSIP_SELECT_OPTION {
     pub gossip_list_id: u32,
     pub unknown: Option<CMSG_GOSSIP_SELECT_OPTIONunknown>,
 }
-
-impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {}
 
 impl CMSG_GOSSIP_SELECT_OPTION {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -39,7 +37,7 @@ impl CMSG_GOSSIP_SELECT_OPTION {
     }
 }
 
-impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
+impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
     const OPCODE: u16 = 0x017c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

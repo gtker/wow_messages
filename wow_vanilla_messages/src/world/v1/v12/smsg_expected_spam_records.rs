@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -11,8 +11,6 @@ use std::io::Write;
 pub struct SMSG_EXPECTED_SPAM_RECORDS {
     pub records: Vec<String>,
 }
-
-impl ServerMessage for SMSG_EXPECTED_SPAM_RECORDS {}
 
 impl SMSG_EXPECTED_SPAM_RECORDS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -30,7 +28,7 @@ impl SMSG_EXPECTED_SPAM_RECORDS {
     }
 }
 
-impl MessageBody for SMSG_EXPECTED_SPAM_RECORDS {
+impl ServerMessage for SMSG_EXPECTED_SPAM_RECORDS {
     const OPCODE: u16 = 0x0332;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

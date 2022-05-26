@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_PET_NAME_QUERY {
     pub pet_number: u32,
     pub guid: Guid,
 }
-
-impl ClientMessage for CMSG_PET_NAME_QUERY {}
 
 impl CMSG_PET_NAME_QUERY {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -31,7 +29,7 @@ impl CMSG_PET_NAME_QUERY {
     }
 }
 
-impl MessageBody for CMSG_PET_NAME_QUERY {
+impl ClientMessage for CMSG_PET_NAME_QUERY {
     const OPCODE: u16 = 0x0052;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -158,7 +156,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
-    use crate::{MessageBody, ClientMessage, ServerMessage};
+    use crate::{ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

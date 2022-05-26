@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_FORCE_RUN_SPEED_CHANGE {
     pub move_event: u32,
     pub speed: f32,
 }
-
-impl ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {}
 
 impl SMSG_FORCE_RUN_SPEED_CHANGE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -33,7 +31,7 @@ impl SMSG_FORCE_RUN_SPEED_CHANGE {
     }
 }
 
-impl MessageBody for SMSG_FORCE_RUN_SPEED_CHANGE {
+impl ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {
     const OPCODE: u16 = 0x00e2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

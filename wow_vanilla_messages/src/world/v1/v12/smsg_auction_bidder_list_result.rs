@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::AuctionListItem;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_AUCTION_BIDDER_LIST_RESULT {
     pub auctions: Vec<AuctionListItem>,
     pub total_amount_of_auctions: u32,
 }
-
-impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {}
 
 impl SMSG_AUCTION_BIDDER_LIST_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -34,7 +32,7 @@ impl SMSG_AUCTION_BIDDER_LIST_RESULT {
     }
 }
 
-impl MessageBody for SMSG_AUCTION_BIDDER_LIST_RESULT {
+impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {
     const OPCODE: u16 = 0x0265;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct SMSG_SHOWTAXINODES {
     pub nearest_node: u32,
     pub nodes: Vec<u32>,
 }
-
-impl ServerMessage for SMSG_SHOWTAXINODES {}
 
 impl SMSG_SHOWTAXINODES {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -39,7 +37,7 @@ impl SMSG_SHOWTAXINODES {
     }
 }
 
-impl MessageBody for SMSG_SHOWTAXINODES {
+impl ServerMessage for SMSG_SHOWTAXINODES {
     const OPCODE: u16 = 0x01a9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

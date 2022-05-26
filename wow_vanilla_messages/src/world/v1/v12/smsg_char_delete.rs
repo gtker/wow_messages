@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v2::{WorldResult, WorldResultError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_CHAR_DELETE {
     pub result: WorldResult,
 }
 
-impl ServerMessage for SMSG_CHAR_DELETE {}
-
 impl SMSG_CHAR_DELETE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
         let mut array_w = [0u8; 4];
@@ -27,7 +25,7 @@ impl SMSG_CHAR_DELETE {
     }
 }
 
-impl MessageBody for SMSG_CHAR_DELETE {
+impl ServerMessage for SMSG_CHAR_DELETE {
     const OPCODE: u16 = 0x003c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

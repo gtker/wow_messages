@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::MovementInfo;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_MOVE_NOT_ACTIVE_MOVER {
     pub old_mover: Guid,
     pub movement_info: MovementInfo,
 }
-
-impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {}
 
 impl CMSG_MOVE_NOT_ACTIVE_MOVER {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -30,7 +28,7 @@ impl CMSG_MOVE_NOT_ACTIVE_MOVER {
     }
 }
 
-impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
+impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {
     const OPCODE: u16 = 0x02d1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

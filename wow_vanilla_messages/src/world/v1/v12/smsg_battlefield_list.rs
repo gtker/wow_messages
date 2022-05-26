@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -18,8 +18,6 @@ pub struct SMSG_BATTLEFIELD_LIST {
     pub unknown3: u8,
     pub battlegrounds: Vec<u32>,
 }
-
-impl ServerMessage for SMSG_BATTLEFIELD_LIST {}
 
 impl SMSG_BATTLEFIELD_LIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -51,7 +49,7 @@ impl SMSG_BATTLEFIELD_LIST {
     }
 }
 
-impl MessageBody for SMSG_BATTLEFIELD_LIST {
+impl ServerMessage for SMSG_BATTLEFIELD_LIST {
     const OPCODE: u16 = 0x023d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

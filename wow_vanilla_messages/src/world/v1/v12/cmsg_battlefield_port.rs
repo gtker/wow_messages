@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{BattlefieldPortAction, BattlefieldPortActionError};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct CMSG_BATTLEFIELD_PORT {
     pub map: Map,
     pub action: BattlefieldPortAction,
 }
-
-impl ClientMessage for CMSG_BATTLEFIELD_PORT {}
 
 impl CMSG_BATTLEFIELD_PORT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
@@ -32,7 +30,7 @@ impl CMSG_BATTLEFIELD_PORT {
     }
 }
 
-impl MessageBody for CMSG_BATTLEFIELD_PORT {
+impl ClientMessage for CMSG_BATTLEFIELD_PORT {
     const OPCODE: u16 = 0x02d5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

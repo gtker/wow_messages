@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -11,8 +11,6 @@ use std::io::Write;
 pub struct CMSG_TOGGLE_PVP {
     pub set: Option<CMSG_TOGGLE_PVPset>,
 }
-
-impl ClientMessage for CMSG_TOGGLE_PVP {}
 
 impl CMSG_TOGGLE_PVP {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -28,7 +26,7 @@ impl CMSG_TOGGLE_PVP {
     }
 }
 
-impl MessageBody for CMSG_TOGGLE_PVP {
+impl ClientMessage for CMSG_TOGGLE_PVP {
     const OPCODE: u16 = 0x0253;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

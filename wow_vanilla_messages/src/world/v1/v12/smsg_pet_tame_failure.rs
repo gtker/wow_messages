@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{PetTameFailureReason, PetTameFailureReasonError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_PET_TAME_FAILURE {
     pub reason: PetTameFailureReason,
 }
 
-impl ServerMessage for SMSG_PET_TAME_FAILURE {}
-
 impl SMSG_PET_TAME_FAILURE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
         let mut array_w = [0u8; 1];
@@ -27,7 +25,7 @@ impl SMSG_PET_TAME_FAILURE {
     }
 }
 
-impl MessageBody for SMSG_PET_TAME_FAILURE {
+impl ServerMessage for SMSG_PET_TAME_FAILURE {
     const OPCODE: u16 = 0x0173;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{InventoryResult, InventoryResultError};
 use crate::world::v1::v12::{TradeStatus, TradeStatusError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ use std::io::Write;
 pub struct SMSG_TRADE_STATUS {
     pub status: SMSG_TRADE_STATUSTradeStatus,
 }
-
-impl ServerMessage for SMSG_TRADE_STATUS {}
 
 impl SMSG_TRADE_STATUS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -86,7 +84,7 @@ impl SMSG_TRADE_STATUS {
     }
 }
 
-impl MessageBody for SMSG_TRADE_STATUS {
+impl ServerMessage for SMSG_TRADE_STATUS {
     const OPCODE: u16 = 0x0120;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

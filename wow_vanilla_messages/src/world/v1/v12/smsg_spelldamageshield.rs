@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellSchool, SpellSchoolError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,8 +17,6 @@ pub struct SMSG_SPELLDAMAGESHIELD {
     pub damage: u32,
     pub school: SpellSchool,
 }
-
-impl ServerMessage for SMSG_SPELLDAMAGESHIELD {}
 
 impl SMSG_SPELLDAMAGESHIELD {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 21], std::io::Error> {
@@ -40,7 +38,7 @@ impl SMSG_SPELLDAMAGESHIELD {
     }
 }
 
-impl MessageBody for SMSG_SPELLDAMAGESHIELD {
+impl ServerMessage for SMSG_SPELLDAMAGESHIELD {
     const OPCODE: u16 = 0x024f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

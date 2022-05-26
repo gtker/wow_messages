@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,8 +16,6 @@ pub struct SMSG_SPELLHEALLOG {
     pub damage: u32,
     pub critical: u8,
 }
-
-impl ServerMessage for SMSG_SPELLHEALLOG {}
 
 impl SMSG_SPELLHEALLOG {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -41,7 +39,7 @@ impl SMSG_SPELLHEALLOG {
     }
 }
 
-impl MessageBody for SMSG_SPELLHEALLOG {
+impl ServerMessage for SMSG_SPELLHEALLOG {
     const OPCODE: u16 = 0x0150;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

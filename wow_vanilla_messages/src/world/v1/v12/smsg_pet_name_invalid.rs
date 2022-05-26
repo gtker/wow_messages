@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ use std::io::Write;
 pub struct SMSG_PET_NAME_INVALID {
 }
 
-impl ServerMessage for SMSG_PET_NAME_INVALID {}
-
 impl SMSG_PET_NAME_INVALID {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {
         let mut array_w = [0u8; 0];
@@ -22,7 +20,7 @@ impl SMSG_PET_NAME_INVALID {
     }
 }
 
-impl MessageBody for SMSG_PET_NAME_INVALID {
+impl ServerMessage for SMSG_PET_NAME_INVALID {
     const OPCODE: u16 = 0x0178;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

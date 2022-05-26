@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{BuybackSlot, BuybackSlotError};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct CMSG_BUYBACK_ITEM {
     pub guid: Guid,
     pub slot: BuybackSlot,
 }
-
-impl ClientMessage for CMSG_BUYBACK_ITEM {}
 
 impl CMSG_BUYBACK_ITEM {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -32,7 +30,7 @@ impl CMSG_BUYBACK_ITEM {
     }
 }
 
-impl MessageBody for CMSG_BUYBACK_ITEM {
+impl ClientMessage for CMSG_BUYBACK_ITEM {
     const OPCODE: u16 = 0x0290;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

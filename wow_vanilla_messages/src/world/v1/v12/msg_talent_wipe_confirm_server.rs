@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct MSG_TALENT_WIPE_CONFIRM_Server {
     pub wiping_npc: Guid,
     pub cost_in_copper: u32,
 }
-
-impl ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {}
 
 impl MSG_TALENT_WIPE_CONFIRM_Server {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -31,7 +29,7 @@ impl MSG_TALENT_WIPE_CONFIRM_Server {
     }
 }
 
-impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Server {
+impl ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {
     const OPCODE: u16 = 0x02aa;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

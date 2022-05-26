@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct SMSG_PET_DISMISS_SOUND {
     pub position_y: f32,
     pub position_z: f32,
 }
-
-impl ServerMessage for SMSG_PET_DISMISS_SOUND {}
 
 impl SMSG_PET_DISMISS_SOUND {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
@@ -38,7 +36,7 @@ impl SMSG_PET_DISMISS_SOUND {
     }
 }
 
-impl MessageBody for SMSG_PET_DISMISS_SOUND {
+impl ServerMessage for SMSG_PET_DISMISS_SOUND {
     const OPCODE: u16 = 0x0325;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

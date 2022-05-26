@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -19,8 +19,6 @@ pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data6: u32,
     pub tutorial_data7: u32,
 }
-
-impl ServerMessage for SMSG_TUTORIAL_FLAGS {}
 
 impl SMSG_TUTORIAL_FLAGS {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 32], std::io::Error> {
@@ -54,7 +52,7 @@ impl SMSG_TUTORIAL_FLAGS {
     }
 }
 
-impl MessageBody for SMSG_TUTORIAL_FLAGS {
+impl ServerMessage for SMSG_TUTORIAL_FLAGS {
     const OPCODE: u16 = 0x00fd;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

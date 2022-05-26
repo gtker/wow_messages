@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::v1::v12::{PetCommandState, PetCommandStateError};
 use crate::world::v1::v12::{PetReactState, PetReactStateError};
 use crate::world::v1::v12::PetSpellCooldown;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -22,8 +22,6 @@ pub struct SMSG_PET_SPELLS {
     pub spells: Vec<u32>,
     pub cooldowns: Vec<PetSpellCooldown>,
 }
-
-impl ServerMessage for SMSG_PET_SPELLS {}
 
 impl SMSG_PET_SPELLS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -68,7 +66,7 @@ impl SMSG_PET_SPELLS {
     }
 }
 
-impl MessageBody for SMSG_PET_SPELLS {
+impl ServerMessage for SMSG_PET_SPELLS {
     const OPCODE: u16 = 0x0179;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::MovementInfo;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_MOVE_SPLINE_DONE {
     pub movement_counter: u32,
     pub unknown1: u32,
 }
-
-impl ClientMessage for CMSG_MOVE_SPLINE_DONE {}
 
 impl CMSG_MOVE_SPLINE_DONE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -33,7 +31,7 @@ impl CMSG_MOVE_SPLINE_DONE {
     }
 }
 
-impl MessageBody for CMSG_MOVE_SPLINE_DONE {
+impl ClientMessage for CMSG_MOVE_SPLINE_DONE {
     const OPCODE: u16 = 0x02c9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

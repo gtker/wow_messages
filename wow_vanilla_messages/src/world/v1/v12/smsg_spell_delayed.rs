@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_SPELL_DELAYED {
     pub guid: Guid,
     pub delay_time: u32,
 }
-
-impl ServerMessage for SMSG_SPELL_DELAYED {}
 
 impl SMSG_SPELL_DELAYED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -31,7 +29,7 @@ impl SMSG_SPELL_DELAYED {
     }
 }
 
-impl MessageBody for SMSG_SPELL_DELAYED {
+impl ServerMessage for SMSG_SPELL_DELAYED {
     const OPCODE: u16 = 0x01e2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

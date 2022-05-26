@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct CMSG_QUESTLOG_SWAP_QUEST {
     pub slot1: u8,
     pub slot2: u8,
 }
-
-impl ClientMessage for CMSG_QUESTLOG_SWAP_QUEST {}
 
 impl CMSG_QUESTLOG_SWAP_QUEST {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 2], std::io::Error> {
@@ -30,7 +28,7 @@ impl CMSG_QUESTLOG_SWAP_QUEST {
     }
 }
 
-impl MessageBody for CMSG_QUESTLOG_SWAP_QUEST {
+impl ClientMessage for CMSG_QUESTLOG_SWAP_QUEST {
     const OPCODE: u16 = 0x0193;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

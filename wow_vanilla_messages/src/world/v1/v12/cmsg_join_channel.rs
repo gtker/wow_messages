@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ pub struct CMSG_JOIN_CHANNEL {
     pub channel_name: String,
     pub channel_password: String,
 }
-
-impl ClientMessage for CMSG_JOIN_CHANNEL {}
 
 impl CMSG_JOIN_CHANNEL {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -32,7 +30,7 @@ impl CMSG_JOIN_CHANNEL {
     }
 }
 
-impl MessageBody for CMSG_JOIN_CHANNEL {
+impl ClientMessage for CMSG_JOIN_CHANNEL {
     const OPCODE: u16 = 0x0097;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

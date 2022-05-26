@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ pub struct CMSG_GUILD_SET_PUBLIC_NOTE {
     pub player_name: String,
     pub note: String,
 }
-
-impl ClientMessage for CMSG_GUILD_SET_PUBLIC_NOTE {}
 
 impl CMSG_GUILD_SET_PUBLIC_NOTE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -32,7 +30,7 @@ impl CMSG_GUILD_SET_PUBLIC_NOTE {
     }
 }
 
-impl MessageBody for CMSG_GUILD_SET_PUBLIC_NOTE {
+impl ClientMessage for CMSG_GUILD_SET_PUBLIC_NOTE {
     const OPCODE: u16 = 0x0234;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

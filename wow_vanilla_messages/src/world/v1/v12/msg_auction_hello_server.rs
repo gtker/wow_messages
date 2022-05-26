@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct MSG_AUCTION_HELLO_Server {
     pub auctioneer: Guid,
     pub auction_house_id: u32,
 }
-
-impl ServerMessage for MSG_AUCTION_HELLO_Server {}
 
 impl MSG_AUCTION_HELLO_Server {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -31,7 +29,7 @@ impl MSG_AUCTION_HELLO_Server {
     }
 }
 
-impl MessageBody for MSG_AUCTION_HELLO_Server {
+impl ServerMessage for MSG_AUCTION_HELLO_Server {
     const OPCODE: u16 = 0x0255;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -158,7 +156,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
-    use crate::{MessageBody, ClientMessage, ServerMessage};
+    use crate::{ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

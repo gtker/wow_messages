@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_SPLINE_MOVE_ROOT {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_SPLINE_MOVE_ROOT {}
-
 impl SMSG_SPLINE_MOVE_ROOT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
         let mut array_w = [0u8; 8];
@@ -27,7 +25,7 @@ impl SMSG_SPLINE_MOVE_ROOT {
     }
 }
 
-impl MessageBody for SMSG_SPLINE_MOVE_ROOT {
+impl ServerMessage for SMSG_SPLINE_MOVE_ROOT {
     const OPCODE: u16 = 0x031a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

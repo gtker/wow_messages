@@ -3,9 +3,7 @@ use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType};
-use crate::rust_printer::{
-    Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME, WORLD_BODY_TRAIT_NAME,
-};
+use crate::rust_printer::{Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME};
 use crate::wowm_printer::get_struct_wowm_definition;
 
 mod print_common_impls;
@@ -87,23 +85,17 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
             s.wln(format!("use crate::{};", SERVER_MESSAGE_TRAIT_NAME));
         }
         ContainerType::SMsg(_) => {
-            s.wln(format!(
-                "use crate::{{{}, {}}};",
-                SERVER_MESSAGE_TRAIT_NAME, WORLD_BODY_TRAIT_NAME,
-            ));
+            s.wln(format!("use crate::{};", SERVER_MESSAGE_TRAIT_NAME,));
             s.wln("use wow_srp::header_crypto::Encrypter;");
         }
         ContainerType::CMsg(_) => {
-            s.wln(format!(
-                "use crate::{{{}, {}}};",
-                CLIENT_MESSAGE_TRAIT_NAME, WORLD_BODY_TRAIT_NAME,
-            ));
+            s.wln(format!("use crate::{};", CLIENT_MESSAGE_TRAIT_NAME,));
             s.wln("use wow_srp::header_crypto::Encrypter;");
         }
         ContainerType::Msg(_) => {
             s.wln(format!(
-                "use crate::{{{}, {}, {}}};",
-                CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME, WORLD_BODY_TRAIT_NAME,
+                "use crate::{{{}, {}}};",
+                CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::Encrypter;");
         }

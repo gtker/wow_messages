@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,8 +17,6 @@ pub struct SMSG_ENCHANTMENTLOG {
     pub spell: u32,
     pub unknown1: u8,
 }
-
-impl ServerMessage for SMSG_ENCHANTMENTLOG {}
 
 impl SMSG_ENCHANTMENTLOG {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 25], std::io::Error> {
@@ -43,7 +41,7 @@ impl SMSG_ENCHANTMENTLOG {
     }
 }
 
-impl MessageBody for SMSG_ENCHANTMENTLOG {
+impl ServerMessage for SMSG_ENCHANTMENTLOG {
     const OPCODE: u16 = 0x01d7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

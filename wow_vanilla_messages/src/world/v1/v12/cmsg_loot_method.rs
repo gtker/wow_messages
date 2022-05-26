@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{GroupLootSetting, GroupLootSettingError};
 use crate::world::v1::v12::{ItemQuality, ItemQualityError};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,8 +17,6 @@ pub struct CMSG_LOOT_METHOD {
     pub loot_master: Guid,
     pub loot_threshold: ItemQuality,
 }
-
-impl ClientMessage for CMSG_LOOT_METHOD {}
 
 impl CMSG_LOOT_METHOD {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 10], std::io::Error> {
@@ -37,7 +35,7 @@ impl CMSG_LOOT_METHOD {
     }
 }
 
-impl MessageBody for CMSG_LOOT_METHOD {
+impl ClientMessage for CMSG_LOOT_METHOD {
     const OPCODE: u16 = 0x007a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{BattlegroundEndStatus, BattlegroundEndStatusError};
 use crate::world::v1::v12::{BattlegroundPlayer, BattlegroundPlayerError};
 use crate::world::v1::v12::{BattlegroundWinner, BattlegroundWinnerError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct MSG_PVP_LOG_DATA_Server {
     pub status: MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus,
     pub players: Vec<BattlegroundPlayer>,
 }
-
-impl ServerMessage for MSG_PVP_LOG_DATA_Server {}
 
 impl MSG_PVP_LOG_DATA_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -47,7 +45,7 @@ impl MSG_PVP_LOG_DATA_Server {
     }
 }
 
-impl MessageBody for MSG_PVP_LOG_DATA_Server {
+impl ServerMessage for MSG_PVP_LOG_DATA_Server {
     const OPCODE: u16 = 0x02e0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

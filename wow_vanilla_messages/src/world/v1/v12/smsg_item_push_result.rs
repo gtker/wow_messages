@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::v1::v12::{NewItemChatAlert, NewItemChatAlertError};
 use crate::world::v1::v12::{NewItemCreationType, NewItemCreationTypeError};
 use crate::world::v1::v12::{NewItemSource, NewItemSourceError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -25,8 +25,6 @@ pub struct SMSG_ITEM_PUSH_RESULT {
     pub item_random_property_id: u32,
     pub item_count: u32,
 }
-
-impl ServerMessage for SMSG_ITEM_PUSH_RESULT {}
 
 impl SMSG_ITEM_PUSH_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 41], std::io::Error> {
@@ -66,7 +64,7 @@ impl SMSG_ITEM_PUSH_RESULT {
     }
 }
 
-impl MessageBody for SMSG_ITEM_PUSH_RESULT {
+impl ServerMessage for SMSG_ITEM_PUSH_RESULT {
     const OPCODE: u16 = 0x0166;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

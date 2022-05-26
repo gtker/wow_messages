@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -29,8 +29,6 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
     pub last_week_standing: PvpRank,
     pub rank_progress_bar: u8,
 }
-
-impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {}
 
 impl MSG_INSPECT_HONOR_STATS_Server {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 47], std::io::Error> {
@@ -88,7 +86,7 @@ impl MSG_INSPECT_HONOR_STATS_Server {
     }
 }
 
-impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
+impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {
     const OPCODE: u16 = 0x02d6;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

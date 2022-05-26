@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_LOGIN_SETTIMESPEED {
     pub secs_to_time_bit_field: u32,
     pub game_speed: f32,
 }
-
-impl ServerMessage for SMSG_LOGIN_SETTIMESPEED {}
 
 impl SMSG_LOGIN_SETTIMESPEED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
@@ -30,7 +28,7 @@ impl SMSG_LOGIN_SETTIMESPEED {
     }
 }
 
-impl MessageBody for SMSG_LOGIN_SETTIMESPEED {
+impl ServerMessage for SMSG_LOGIN_SETTIMESPEED {
     const OPCODE: u16 = 0x0042;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

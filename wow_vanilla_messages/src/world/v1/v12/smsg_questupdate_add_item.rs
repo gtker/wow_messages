@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_QUESTUPDATE_ADD_ITEM {
     pub required_item_id: u32,
     pub items_required: u32,
 }
-
-impl ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {}
 
 impl SMSG_QUESTUPDATE_ADD_ITEM {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
@@ -30,7 +28,7 @@ impl SMSG_QUESTUPDATE_ADD_ITEM {
     }
 }
 
-impl MessageBody for SMSG_QUESTUPDATE_ADD_ITEM {
+impl ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {
     const OPCODE: u16 = 0x019a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

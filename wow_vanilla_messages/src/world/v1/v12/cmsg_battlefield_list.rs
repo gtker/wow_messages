@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_BATTLEFIELD_LIST {
     pub map: Map,
 }
 
-impl ClientMessage for CMSG_BATTLEFIELD_LIST {}
-
 impl CMSG_BATTLEFIELD_LIST {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
         let mut array_w = [0u8; 4];
@@ -27,7 +25,7 @@ impl CMSG_BATTLEFIELD_LIST {
     }
 }
 
-impl MessageBody for CMSG_BATTLEFIELD_LIST {
+impl ClientMessage for CMSG_BATTLEFIELD_LIST {
     const OPCODE: u16 = 0x023c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

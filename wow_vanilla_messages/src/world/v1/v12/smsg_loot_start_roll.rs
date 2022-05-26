@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -18,8 +18,6 @@ pub struct SMSG_LOOT_START_ROLL {
     pub item_random_property_id: u32,
     pub countdown_time: u32,
 }
-
-impl ServerMessage for SMSG_LOOT_START_ROLL {}
 
 impl SMSG_LOOT_START_ROLL {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 28], std::io::Error> {
@@ -47,7 +45,7 @@ impl SMSG_LOOT_START_ROLL {
     }
 }
 
-impl MessageBody for SMSG_LOOT_START_ROLL {
+impl ServerMessage for SMSG_LOOT_START_ROLL {
     const OPCODE: u16 = 0x02a1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

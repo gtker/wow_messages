@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct CMSG_PET_RENAME {
     pub pet_guid: Guid,
     pub name: String,
 }
-
-impl ClientMessage for CMSG_PET_RENAME {}
 
 impl CMSG_PET_RENAME {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -31,7 +29,7 @@ impl CMSG_PET_RENAME {
     }
 }
 
-impl MessageBody for CMSG_PET_RENAME {
+impl ClientMessage for CMSG_PET_RENAME {
     const OPCODE: u16 = 0x0177;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

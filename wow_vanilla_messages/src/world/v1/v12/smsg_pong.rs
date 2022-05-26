@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_PONG {
     pub sequence_id: u32,
 }
 
-impl ServerMessage for SMSG_PONG {}
-
 impl SMSG_PONG {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
         let mut array_w = [0u8; 4];
@@ -26,7 +24,7 @@ impl SMSG_PONG {
     }
 }
 
-impl MessageBody for SMSG_PONG {
+impl ServerMessage for SMSG_PONG {
     const OPCODE: u16 = 0x01dd;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -141,7 +139,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
-    use crate::{MessageBody, ClientMessage, ServerMessage};
+    use crate::{ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_TRANSFER_PENDING {
     pub map: Map,
     pub has_transport: Option<SMSG_TRANSFER_PENDINGhas_transport>,
 }
-
-impl ServerMessage for SMSG_TRANSFER_PENDING {}
 
 impl SMSG_TRANSFER_PENDING {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -36,7 +34,7 @@ impl SMSG_TRANSFER_PENDING {
     }
 }
 
-impl MessageBody for SMSG_TRANSFER_PENDING {
+impl ServerMessage for SMSG_TRANSFER_PENDING {
     const OPCODE: u16 = 0x003f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

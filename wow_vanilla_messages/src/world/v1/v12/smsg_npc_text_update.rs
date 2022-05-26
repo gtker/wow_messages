@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{NpcTextUpdate, NpcTextUpdateError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_NPC_TEXT_UPDATE {
     pub probability: f32,
     pub texts: [NpcTextUpdate; 8],
 }
-
-impl ServerMessage for SMSG_NPC_TEXT_UPDATE {}
 
 impl SMSG_NPC_TEXT_UPDATE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -35,7 +33,7 @@ impl SMSG_NPC_TEXT_UPDATE {
     }
 }
 
-impl MessageBody for SMSG_NPC_TEXT_UPDATE {
+impl ServerMessage for SMSG_NPC_TEXT_UPDATE {
     const OPCODE: u16 = 0x0180;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

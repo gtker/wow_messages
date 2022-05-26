@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ use std::io::Write;
 pub struct SMSG_LOOT_MASTER_LIST {
     pub guids: Vec<Guid>,
 }
-
-impl ServerMessage for SMSG_LOOT_MASTER_LIST {}
 
 impl SMSG_LOOT_MASTER_LIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -30,7 +28,7 @@ impl SMSG_LOOT_MASTER_LIST {
     }
 }
 
-impl MessageBody for SMSG_LOOT_MASTER_LIST {
+impl ServerMessage for SMSG_LOOT_MASTER_LIST {
     const OPCODE: u16 = 0x02a4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

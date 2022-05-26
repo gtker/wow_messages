@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::MovementInfo;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct CMSG_MOVE_FALL_RESET {
     pub info: MovementInfo,
 }
 
-impl ClientMessage for CMSG_MOVE_FALL_RESET {}
-
 impl CMSG_MOVE_FALL_RESET {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Vec::with_capacity(self.size());
@@ -25,7 +23,7 @@ impl CMSG_MOVE_FALL_RESET {
     }
 }
 
-impl MessageBody for CMSG_MOVE_FALL_RESET {
+impl ClientMessage for CMSG_MOVE_FALL_RESET {
     const OPCODE: u16 = 0x02ca;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

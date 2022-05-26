@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellLog, SpellLogError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct SMSG_SPELLLOGEXECUTE {
     pub spell: u32,
     pub logs: Vec<SpellLog>,
 }
-
-impl ServerMessage for SMSG_SPELLLOGEXECUTE {}
 
 impl SMSG_SPELLLOGEXECUTE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -39,7 +37,7 @@ impl SMSG_SPELLLOGEXECUTE {
     }
 }
 
-impl MessageBody for SMSG_SPELLLOGEXECUTE {
+impl ServerMessage for SMSG_SPELLLOGEXECUTE {
     const OPCODE: u16 = 0x024c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

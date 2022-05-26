@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -18,8 +18,6 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Client {
     pub border_color: u32,
     pub background_color: u32,
 }
-
-impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {}
 
 impl MSG_SAVE_GUILD_EMBLEM_Client {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 28], std::io::Error> {
@@ -47,7 +45,7 @@ impl MSG_SAVE_GUILD_EMBLEM_Client {
     }
 }
 
-impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Client {
+impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {
     const OPCODE: u16 = 0x01f1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

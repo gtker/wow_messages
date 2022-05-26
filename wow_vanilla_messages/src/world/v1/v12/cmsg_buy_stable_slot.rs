@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_BUY_STABLE_SLOT {
     pub npc_guid: Guid,
 }
 
-impl ClientMessage for CMSG_BUY_STABLE_SLOT {}
-
 impl CMSG_BUY_STABLE_SLOT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
         let mut array_w = [0u8; 8];
@@ -27,7 +25,7 @@ impl CMSG_BUY_STABLE_SLOT {
     }
 }
 
-impl MessageBody for CMSG_BUY_STABLE_SLOT {
+impl ClientMessage for CMSG_BUY_STABLE_SLOT {
     const OPCODE: u16 = 0x0272;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

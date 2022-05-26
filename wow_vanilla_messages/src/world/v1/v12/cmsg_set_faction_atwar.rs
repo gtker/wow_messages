@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct CMSG_SET_FACTION_ATWAR {
     pub reputation_list_id: u32,
     pub flags: u8,
 }
-
-impl ClientMessage for CMSG_SET_FACTION_ATWAR {}
 
 impl CMSG_SET_FACTION_ATWAR {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
@@ -30,7 +28,7 @@ impl CMSG_SET_FACTION_ATWAR {
     }
 }
 
-impl MessageBody for CMSG_SET_FACTION_ATWAR {
+impl ClientMessage for CMSG_SET_FACTION_ATWAR {
     const OPCODE: u16 = 0x0125;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

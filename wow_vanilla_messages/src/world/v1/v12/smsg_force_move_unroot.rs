@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_FORCE_MOVE_UNROOT {
     pub guid: Guid,
     pub counter: u32,
 }
-
-impl ServerMessage for SMSG_FORCE_MOVE_UNROOT {}
 
 impl SMSG_FORCE_MOVE_UNROOT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -31,7 +29,7 @@ impl SMSG_FORCE_MOVE_UNROOT {
     }
 }
 
-impl MessageBody for SMSG_FORCE_MOVE_UNROOT {
+impl ServerMessage for SMSG_FORCE_MOVE_UNROOT {
     const OPCODE: u16 = 0x00ea;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

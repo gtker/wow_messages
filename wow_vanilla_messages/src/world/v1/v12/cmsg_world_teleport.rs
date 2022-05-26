@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -18,8 +18,6 @@ pub struct CMSG_WORLD_TELEPORT {
     pub position_z: f32,
     pub orientation: f32,
 }
-
-impl ClientMessage for CMSG_WORLD_TELEPORT {}
 
 impl CMSG_WORLD_TELEPORT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 28], std::io::Error> {
@@ -47,7 +45,7 @@ impl CMSG_WORLD_TELEPORT {
     }
 }
 
-impl MessageBody for CMSG_WORLD_TELEPORT {
+impl ClientMessage for CMSG_WORLD_TELEPORT {
     const OPCODE: u16 = 0x0008;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -239,7 +237,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
-    use crate::{MessageBody, ClientMessage, ServerMessage};
+    use crate::{ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

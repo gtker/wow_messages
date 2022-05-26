@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -18,8 +18,6 @@ pub struct CMSG_WHO {
     pub zones: Vec<u32>,
     pub search_strings: Vec<String>,
 }
-
-impl ClientMessage for CMSG_WHO {}
 
 impl CMSG_WHO {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -67,7 +65,7 @@ impl CMSG_WHO {
     }
 }
 
-impl MessageBody for CMSG_WHO {
+impl ClientMessage for CMSG_WHO {
     const OPCODE: u16 = 0x0062;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

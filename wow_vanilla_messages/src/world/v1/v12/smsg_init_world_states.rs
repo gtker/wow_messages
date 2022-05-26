@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::WorldState;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,8 +16,6 @@ pub struct SMSG_INIT_WORLD_STATES {
     pub area: Area,
     pub states: Vec<WorldState>,
 }
-
-impl ServerMessage for SMSG_INIT_WORLD_STATES {}
 
 impl SMSG_INIT_WORLD_STATES {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -40,7 +38,7 @@ impl SMSG_INIT_WORLD_STATES {
     }
 }
 
-impl MessageBody for SMSG_INIT_WORLD_STATES {
+impl ServerMessage for SMSG_INIT_WORLD_STATES {
     const OPCODE: u16 = 0x02c2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

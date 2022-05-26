@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_LOOT_RELEASE_RESPONSE {
     pub guid: Guid,
     pub unknown1: u8,
 }
-
-impl ServerMessage for SMSG_LOOT_RELEASE_RESPONSE {}
 
 impl SMSG_LOOT_RELEASE_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 9], std::io::Error> {
@@ -31,7 +29,7 @@ impl SMSG_LOOT_RELEASE_RESPONSE {
     }
 }
 
-impl MessageBody for SMSG_LOOT_RELEASE_RESPONSE {
+impl ServerMessage for SMSG_LOOT_RELEASE_RESPONSE {
     const OPCODE: u16 = 0x0161;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

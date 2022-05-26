@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_SPLINE_MOVE_UNSET_HOVER {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_SPLINE_MOVE_UNSET_HOVER {}
-
 impl SMSG_SPLINE_MOVE_UNSET_HOVER {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Vec::with_capacity(self.size());
@@ -25,7 +23,7 @@ impl SMSG_SPLINE_MOVE_UNSET_HOVER {
     }
 }
 
-impl MessageBody for SMSG_SPLINE_MOVE_UNSET_HOVER {
+impl ServerMessage for SMSG_SPLINE_MOVE_UNSET_HOVER {
     const OPCODE: u16 = 0x0308;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

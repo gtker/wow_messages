@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_AUTH_CHALLENGE {
     pub server_seed: u32,
 }
 
-impl ServerMessage for SMSG_AUTH_CHALLENGE {}
-
 impl SMSG_AUTH_CHALLENGE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
         let mut array_w = [0u8; 4];
@@ -26,7 +24,7 @@ impl SMSG_AUTH_CHALLENGE {
     }
 }
 
-impl MessageBody for SMSG_AUTH_CHALLENGE {
+impl ServerMessage for SMSG_AUTH_CHALLENGE {
     const OPCODE: u16 = 0x01ec;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

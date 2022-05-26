@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct CMSG_PING {
     pub sequence_id: u32,
     pub round_time_in_ms: u32,
 }
-
-impl ClientMessage for CMSG_PING {}
 
 impl CMSG_PING {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
@@ -30,7 +28,7 @@ impl CMSG_PING {
     }
 }
 
-impl MessageBody for CMSG_PING {
+impl ClientMessage for CMSG_PING {
     const OPCODE: u16 = 0x01dc;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
@@ -157,7 +155,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
-    use crate::{MessageBody, ClientMessage, ServerMessage};
+    use crate::{ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

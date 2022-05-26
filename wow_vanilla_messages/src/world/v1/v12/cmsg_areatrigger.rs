@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct CMSG_AREATRIGGER {
     pub trigger_id: u32,
 }
 
-impl ClientMessage for CMSG_AREATRIGGER {}
-
 impl CMSG_AREATRIGGER {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
         let mut array_w = [0u8; 4];
@@ -26,7 +24,7 @@ impl CMSG_AREATRIGGER {
     }
 }
 
-impl MessageBody for CMSG_AREATRIGGER {
+impl ClientMessage for CMSG_AREATRIGGER {
     const OPCODE: u16 = 0x00b4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

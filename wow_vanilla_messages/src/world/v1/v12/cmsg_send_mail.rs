@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -22,8 +22,6 @@ pub struct CMSG_SEND_MAIL {
     pub unknown3: u32,
     pub unknown4: u32,
 }
-
-impl ClientMessage for CMSG_SEND_MAIL {}
 
 impl CMSG_SEND_MAIL {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -71,7 +69,7 @@ impl CMSG_SEND_MAIL {
     }
 }
 
-impl MessageBody for CMSG_SEND_MAIL {
+impl ClientMessage for CMSG_SEND_MAIL {
     const OPCODE: u16 = 0x0238;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

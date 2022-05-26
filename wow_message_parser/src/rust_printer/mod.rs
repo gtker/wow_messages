@@ -17,7 +17,6 @@ mod structs;
 mod update_mask;
 
 use crate::container::Sizes;
-use crate::ContainerType;
 pub use update_mask::*;
 
 #[derive(Debug)]
@@ -36,8 +35,6 @@ pub const LOGIN_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
 pub const LOGIN_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 pub const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
 pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
-
-pub const WORLD_BODY_TRAIT_NAME: &str = "MessageBody";
 
 pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
 pub const TOKIO_READ_IMPORT: &str = "use tokio::io::AsyncReadExt;";
@@ -143,51 +140,13 @@ impl Writer {
         type_name: impl AsRef<str>,
         error_name: impl AsRef<str>,
         opcode: u16,
-        container_type: ContainerType,
+        trait_to_impl: impl AsRef<str>,
         read_function: impl Fn(&mut Self, ImplType),
-        write_function: impl Fn(&mut Self, ImplType),
         sizes: Option<Sizes>,
     ) {
-        match container_type {
-            ContainerType::CMsg(_) => {
-                self.wln(format!(
-                    "impl {} for {} {{}}",
-                    CLIENT_MESSAGE_TRAIT_NAME,
-                    type_name.as_ref()
-                ));
-                self.newline();
-            }
-            ContainerType::SMsg(_) => {
-                self.wln(format!(
-                    "impl {} for {} {{}}",
-                    SERVER_MESSAGE_TRAIT_NAME,
-                    type_name.as_ref()
-                ));
-                self.newline();
-            }
-            ContainerType::Msg(_) => {
-                self.wln(format!(
-                    "impl {} for {} {{}}",
-                    CLIENT_MESSAGE_TRAIT_NAME,
-                    type_name.as_ref()
-                ));
-                self.newline();
-
-                self.wln(format!(
-                    "impl {} for {} {{}}",
-                    SERVER_MESSAGE_TRAIT_NAME,
-                    type_name.as_ref()
-                ));
-                self.newline();
-            }
-            _ => unreachable!(),
-        }
-
-        self.write_as_bytes(&type_name, write_function, sizes);
-
         self.open_curly(format!(
             "impl {} for {}",
-            WORLD_BODY_TRAIT_NAME,
+            trait_to_impl.as_ref(),
             type_name.as_ref()
         ));
 
@@ -342,7 +301,7 @@ impl Writer {
         ));
     }
 
-    fn write_as_bytes(
+    pub fn write_as_bytes(
         &mut self,
         type_name: impl AsRef<str>,
         write_function: impl Fn(&mut Self, ImplType),

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_MOUNTSPECIAL_ANIM {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_MOUNTSPECIAL_ANIM {}
-
 impl SMSG_MOUNTSPECIAL_ANIM {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
         let mut array_w = [0u8; 8];
@@ -27,7 +25,7 @@ impl SMSG_MOUNTSPECIAL_ANIM {
     }
 }
 
-impl MessageBody for SMSG_MOUNTSPECIAL_ANIM {
+impl ServerMessage for SMSG_MOUNTSPECIAL_ANIM {
     const OPCODE: u16 = 0x0172;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

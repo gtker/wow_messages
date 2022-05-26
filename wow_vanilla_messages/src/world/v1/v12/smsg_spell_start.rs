@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{CastFlags};
 use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -19,8 +19,6 @@ pub struct SMSG_SPELL_START {
     pub timer: u32,
     pub targets: SpellCastTargets,
 }
-
-impl ServerMessage for SMSG_SPELL_START {}
 
 impl SMSG_SPELL_START {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -56,7 +54,7 @@ impl SMSG_SPELL_START {
     }
 }
 
-impl MessageBody for SMSG_SPELL_START {
+impl ServerMessage for SMSG_SPELL_START {
     const OPCODE: u16 = 0x0131;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

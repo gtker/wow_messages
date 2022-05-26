@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{Emote, EmoteError};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,8 +16,6 @@ pub struct CMSG_TEXT_EMOTE {
     pub emote: Emote,
     pub guid: Guid,
 }
-
-impl ClientMessage for CMSG_TEXT_EMOTE {}
 
 impl CMSG_TEXT_EMOTE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
@@ -36,7 +34,7 @@ impl CMSG_TEXT_EMOTE {
     }
 }
 
-impl MessageBody for CMSG_TEXT_EMOTE {
+impl ClientMessage for CMSG_TEXT_EMOTE {
     const OPCODE: u16 = 0x0104;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

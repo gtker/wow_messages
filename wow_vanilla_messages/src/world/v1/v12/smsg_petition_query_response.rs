@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -28,8 +28,6 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
     pub todo_amount_of_signers: u32,
     pub number_of_choices: u32,
 }
-
-impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {}
 
 impl SMSG_PETITION_QUERY_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -93,7 +91,7 @@ impl SMSG_PETITION_QUERY_RESPONSE {
     }
 }
 
-impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
+impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
     const OPCODE: u16 = 0x01c7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_LOOT_MONEY_NOTIFY {
     pub amount: u32,
 }
 
-impl ServerMessage for SMSG_LOOT_MONEY_NOTIFY {}
-
 impl SMSG_LOOT_MONEY_NOTIFY {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
         let mut array_w = [0u8; 4];
@@ -26,7 +24,7 @@ impl SMSG_LOOT_MONEY_NOTIFY {
     }
 }
 
-impl MessageBody for SMSG_LOOT_MONEY_NOTIFY {
+impl ServerMessage for SMSG_LOOT_MONEY_NOTIFY {
     const OPCODE: u16 = 0x0163;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

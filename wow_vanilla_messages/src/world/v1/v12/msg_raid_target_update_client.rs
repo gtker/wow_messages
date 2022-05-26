@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{RaidTargetIndex, RaidTargetIndexError};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ use std::io::Write;
 pub struct MSG_RAID_TARGET_UPDATE_Client {
     pub index: MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex,
 }
-
-impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
 
 impl MSG_RAID_TARGET_UPDATE_Client {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -93,7 +91,7 @@ impl MSG_RAID_TARGET_UPDATE_Client {
     }
 }
 
-impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
+impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
     const OPCODE: u16 = 0x0321;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

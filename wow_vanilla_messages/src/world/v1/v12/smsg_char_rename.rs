@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v2::{WorldResult, WorldResultError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ use std::io::Write;
 pub struct SMSG_CHAR_RENAME {
     pub result: SMSG_CHAR_RENAMEWorldResult,
 }
-
-impl ServerMessage for SMSG_CHAR_RENAME {}
 
 impl SMSG_CHAR_RENAME {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -123,7 +121,7 @@ impl SMSG_CHAR_RENAME {
     }
 }
 
-impl MessageBody for SMSG_CHAR_RENAME {
+impl ServerMessage for SMSG_CHAR_RENAME {
     const OPCODE: u16 = 0x02c8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

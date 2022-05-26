@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{ItemClass, ItemClassError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_SET_PROFICIENCY {
     pub class: ItemClass,
     pub item_sub_class_mask: u32,
 }
-
-impl ServerMessage for SMSG_SET_PROFICIENCY {}
 
 impl SMSG_SET_PROFICIENCY {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
@@ -31,7 +29,7 @@ impl SMSG_SET_PROFICIENCY {
     }
 }
 
-impl MessageBody for SMSG_SET_PROFICIENCY {
+impl ServerMessage for SMSG_SET_PROFICIENCY {
     const OPCODE: u16 = 0x0127;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

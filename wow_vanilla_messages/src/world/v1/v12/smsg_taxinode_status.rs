@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_TAXINODE_STATUS {
     pub guid: Guid,
     pub taxi_mask_node_known: u8,
 }
-
-impl ServerMessage for SMSG_TAXINODE_STATUS {}
 
 impl SMSG_TAXINODE_STATUS {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 9], std::io::Error> {
@@ -31,7 +29,7 @@ impl SMSG_TAXINODE_STATUS {
     }
 }
 
-impl MessageBody for SMSG_TAXINODE_STATUS {
+impl ServerMessage for SMSG_TAXINODE_STATUS {
     const OPCODE: u16 = 0x01ab;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

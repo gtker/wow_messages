@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -11,8 +11,6 @@ use std::io::Write;
 pub struct SMSG_CHAT_PLAYER_NOT_FOUND {
     pub name: String,
 }
-
-impl ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {}
 
 impl SMSG_CHAT_PLAYER_NOT_FOUND {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -26,7 +24,7 @@ impl SMSG_CHAT_PLAYER_NOT_FOUND {
     }
 }
 
-impl MessageBody for SMSG_CHAT_PLAYER_NOT_FOUND {
+impl ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {
     const OPCODE: u16 = 0x02a9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_QUERY_TIME_RESPONSE {
     pub time: u32,
 }
 
-impl ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
-
 impl SMSG_QUERY_TIME_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
         let mut array_w = [0u8; 4];
@@ -26,7 +24,7 @@ impl SMSG_QUERY_TIME_RESPONSE {
     }
 }
 
-impl MessageBody for SMSG_QUERY_TIME_RESPONSE {
+impl ServerMessage for SMSG_QUERY_TIME_RESPONSE {
     const OPCODE: u16 = 0x01cf;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

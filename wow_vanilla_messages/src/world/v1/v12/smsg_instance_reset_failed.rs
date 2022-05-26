@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{InstanceResetFailedReason, InstanceResetFailedReasonError};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct SMSG_INSTANCE_RESET_FAILED {
     pub reason: InstanceResetFailedReason,
     pub map: Map,
 }
-
-impl ServerMessage for SMSG_INSTANCE_RESET_FAILED {}
 
 impl SMSG_INSTANCE_RESET_FAILED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
@@ -32,7 +30,7 @@ impl SMSG_INSTANCE_RESET_FAILED {
     }
 }
 
-impl MessageBody for SMSG_INSTANCE_RESET_FAILED {
+impl ServerMessage for SMSG_INSTANCE_RESET_FAILED {
     const OPCODE: u16 = 0x031f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

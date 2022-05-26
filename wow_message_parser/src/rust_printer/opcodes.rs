@@ -3,7 +3,7 @@ use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
     ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
-    CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME, TOKIO_IMPORT, WORLD_BODY_TRAIT_NAME,
+    CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME, TOKIO_IMPORT,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -71,7 +71,6 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
             s.wln(ASYNC_STD_IMPORT);
         }
         ContainerType::CMsg(_) => {
-            s.wln(format!("use crate::{};", WORLD_BODY_TRAIT_NAME));
             s.wln(format!(
                 "use crate::{{{}, {}}};",
                 SERVER_MESSAGE_TRAIT_NAME, CLIENT_MESSAGE_TRAIT_NAME,
@@ -135,6 +134,7 @@ fn world_common_impls_read_write(
     opcode_size: i32,
     error_ty: &str,
     it: ImplType,
+    ty: &str,
 ) {
     s.newline();
 
@@ -170,9 +170,10 @@ fn world_common_impls_read_write(
                     ContainerType::Msg(i) => i,
                     _ => panic!(),
                 };
-                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::{prefix}read_body(r, size){postfix}?)),",
+                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::{prefix}read_body(r, size){postfix}?)),",
                               opcode = opcode,
                               name = e.name(),
+                              impl_trait = ty,
                               prefix = it.prefix(),
                               postfix = it.postfix(),
                               enum_name = get_enumerator_name(e.name())));
@@ -219,7 +220,17 @@ fn world_common_impls_read_write(
                 _ => panic!(),
             };
 
-            s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::{prefix}read_body(r, header_size){postfix}?)),", prefix = it.prefix(), postfix = it.postfix(), opcode = opcode, name = e.name(), enum_name = get_enumerator_name(e.name())));
+            s.wln(
+                format!(
+                    "{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::{prefix}read_body(r, header_size){postfix}?)),",
+                    prefix = it.prefix(),
+                    postfix = it.postfix(),
+                    opcode = opcode,
+                    name = e.name(),
+                    impl_trait = ty,
+                    enum_name = get_enumerator_name(e.name()),
+                )
+            );
         }
         s.wln(format!("_ => Err({error_ty}::InvalidOpcode(header.opcode)),", error_ty = error_ty));
     });
@@ -248,6 +259,7 @@ pub fn common_impls_world(
                 opcode_size,
                 &format!("{t}OpcodeMessageError", t = ty),
                 it,
+                ty,
             );
         }
     });

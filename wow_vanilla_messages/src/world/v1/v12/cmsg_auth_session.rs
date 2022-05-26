@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,8 +17,6 @@ pub struct CMSG_AUTH_SESSION {
     pub decompressed_addon_info_size: u32,
     pub compressed_addon_info: Vec<u8>,
 }
-
-impl ClientMessage for CMSG_AUTH_SESSION {}
 
 impl CMSG_AUTH_SESSION {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -54,7 +52,7 @@ impl CMSG_AUTH_SESSION {
     }
 }
 
-impl MessageBody for CMSG_AUTH_SESSION {
+impl ClientMessage for CMSG_AUTH_SESSION {
     const OPCODE: u16 = 0x01ed;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

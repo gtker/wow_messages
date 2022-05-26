@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -11,8 +11,6 @@ use std::io::Write;
 pub struct MSG_RAID_READY_CHECK_Client {
     pub answer: Option<MSG_RAID_READY_CHECK_Clientanswer>,
 }
-
-impl ClientMessage for MSG_RAID_READY_CHECK_Client {}
 
 impl MSG_RAID_READY_CHECK_Client {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -28,7 +26,7 @@ impl MSG_RAID_READY_CHECK_Client {
     }
 }
 
-impl MessageBody for MSG_RAID_READY_CHECK_Client {
+impl ClientMessage for MSG_RAID_READY_CHECK_Client {
     const OPCODE: u16 = 0x0322;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

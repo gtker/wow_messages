@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_GROUP_SET_LEADER {
     pub guid: Guid,
 }
 
-impl ClientMessage for CMSG_GROUP_SET_LEADER {}
-
 impl CMSG_GROUP_SET_LEADER {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
         let mut array_w = [0u8; 8];
@@ -27,7 +25,7 @@ impl CMSG_GROUP_SET_LEADER {
     }
 }
 
-impl MessageBody for CMSG_GROUP_SET_LEADER {
+impl ClientMessage for CMSG_GROUP_SET_LEADER {
     const OPCODE: u16 = 0x0078;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

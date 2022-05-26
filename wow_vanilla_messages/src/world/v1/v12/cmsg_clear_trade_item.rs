@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct CMSG_CLEAR_TRADE_ITEM {
     pub trade_slot: u8,
 }
 
-impl ClientMessage for CMSG_CLEAR_TRADE_ITEM {}
-
 impl CMSG_CLEAR_TRADE_ITEM {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
         let mut array_w = [0u8; 1];
@@ -26,7 +24,7 @@ impl CMSG_CLEAR_TRADE_ITEM {
     }
 }
 
-impl MessageBody for CMSG_CLEAR_TRADE_ITEM {
+impl ClientMessage for CMSG_CLEAR_TRADE_ITEM {
     const OPCODE: u16 = 0x011e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

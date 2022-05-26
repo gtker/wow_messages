@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{PetTalkReason, PetTalkReasonError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct SMSG_PET_ACTION_SOUND {
     pub guid: Guid,
     pub reason: PetTalkReason,
 }
-
-impl ServerMessage for SMSG_PET_ACTION_SOUND {}
 
 impl SMSG_PET_ACTION_SOUND {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -32,7 +30,7 @@ impl SMSG_PET_ACTION_SOUND {
     }
 }
 
-impl MessageBody for SMSG_PET_ACTION_SOUND {
+impl ServerMessage for SMSG_PET_ACTION_SOUND {
     const OPCODE: u16 = 0x0324;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

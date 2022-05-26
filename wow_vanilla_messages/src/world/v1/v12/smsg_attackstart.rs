@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_ATTACKSTART {
     pub attacker_guid: Guid,
     pub victim_guid: Guid,
 }
-
-impl ServerMessage for SMSG_ATTACKSTART {}
 
 impl SMSG_ATTACKSTART {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
@@ -31,7 +29,7 @@ impl SMSG_ATTACKSTART {
     }
 }
 
-impl MessageBody for SMSG_ATTACKSTART {
+impl ServerMessage for SMSG_ATTACKSTART {
     const OPCODE: u16 = 0x0143;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

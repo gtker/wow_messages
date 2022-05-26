@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_PET_UNLEARN_CONFIRM {
     pub pet_guid: Guid,
     pub talent_reset_cost: u32,
 }
-
-impl ServerMessage for SMSG_PET_UNLEARN_CONFIRM {}
 
 impl SMSG_PET_UNLEARN_CONFIRM {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -31,7 +29,7 @@ impl SMSG_PET_UNLEARN_CONFIRM {
     }
 }
 
-impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
+impl ServerMessage for SMSG_PET_UNLEARN_CONFIRM {
     const OPCODE: u16 = 0x02f1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

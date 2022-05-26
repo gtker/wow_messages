@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,8 +16,6 @@ pub struct SMSG_RESURRECT_REQUEST {
     pub caster_is_spirit_healer: u8,
     pub respect_resurrection_timer: u8,
 }
-
-impl ServerMessage for SMSG_RESURRECT_REQUEST {}
 
 impl SMSG_RESURRECT_REQUEST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -43,7 +41,7 @@ impl SMSG_RESURRECT_REQUEST {
     }
 }
 
-impl MessageBody for SMSG_RESURRECT_REQUEST {
+impl ServerMessage for SMSG_RESURRECT_REQUEST {
     const OPCODE: u16 = 0x015b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

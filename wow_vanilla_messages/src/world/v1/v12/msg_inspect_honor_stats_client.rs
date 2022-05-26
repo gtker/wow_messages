@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct MSG_INSPECT_HONOR_STATS_Client {
     pub guid: Guid,
 }
 
-impl ClientMessage for MSG_INSPECT_HONOR_STATS_Client {}
-
 impl MSG_INSPECT_HONOR_STATS_Client {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
         let mut array_w = [0u8; 8];
@@ -27,7 +25,7 @@ impl MSG_INSPECT_HONOR_STATS_Client {
     }
 }
 
-impl MessageBody for MSG_INSPECT_HONOR_STATS_Client {
+impl ClientMessage for MSG_INSPECT_HONOR_STATS_Client {
     const OPCODE: u16 = 0x02d6;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

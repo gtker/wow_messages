@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{BuyResult, BuyResultError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,8 +16,6 @@ pub struct SMSG_BUY_FAILED {
     pub item_id: u32,
     pub result: BuyResult,
 }
-
-impl ServerMessage for SMSG_BUY_FAILED {}
 
 impl SMSG_BUY_FAILED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 13], std::io::Error> {
@@ -36,7 +34,7 @@ impl SMSG_BUY_FAILED {
     }
 }
 
-impl MessageBody for SMSG_BUY_FAILED {
+impl ServerMessage for SMSG_BUY_FAILED {
     const OPCODE: u16 = 0x01a5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

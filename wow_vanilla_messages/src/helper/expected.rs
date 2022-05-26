@@ -2,10 +2,10 @@ use std::fmt::{Display, Formatter};
 use std::io::{Error, Read};
 
 use crate::util::{read_u16_le, read_u32_le};
-use crate::{ClientMessage, MessageBody, ServerMessage};
+use crate::{ClientMessage, ServerMessage};
 
 #[cfg(feature = "sync")]
-pub fn read_expected_client_world_message<M: ClientMessage + MessageBody, R: Read>(
+pub fn read_expected_client_world_message<M: ClientMessage, R: Read>(
     r: &mut R,
 ) -> Result<M, ExpectedClientWorldMessageError> {
     let size = read_u16_le(r)?;
@@ -52,7 +52,7 @@ impl From<std::io::Error> for ExpectedClientWorldMessageError {
 }
 
 #[cfg(feature = "sync")]
-pub fn read_expected_server_world_message<M: ServerMessage + MessageBody, R: Read>(
+pub fn read_expected_server_world_message<M: ServerMessage, R: Read>(
     r: &mut R,
 ) -> Result<M, ExpectedServerWorldMessageError> {
     let size = read_u16_le(r)?;

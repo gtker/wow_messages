@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::WorldState;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_UPDATE_WORLD_STATE {
     pub state: WorldState,
 }
 
-impl ServerMessage for SMSG_UPDATE_WORLD_STATE {}
-
 impl SMSG_UPDATE_WORLD_STATE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
         let mut array_w = [0u8; 8];
@@ -27,7 +25,7 @@ impl SMSG_UPDATE_WORLD_STATE {
     }
 }
 
-impl MessageBody for SMSG_UPDATE_WORLD_STATE {
+impl ServerMessage for SMSG_UPDATE_WORLD_STATE {
     const OPCODE: u16 = 0x02c3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

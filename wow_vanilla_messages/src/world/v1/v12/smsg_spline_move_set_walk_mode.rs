@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_SPLINE_MOVE_SET_WALK_MODE {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_SPLINE_MOVE_SET_WALK_MODE {}
-
 impl SMSG_SPLINE_MOVE_SET_WALK_MODE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Vec::with_capacity(self.size());
@@ -25,7 +23,7 @@ impl SMSG_SPLINE_MOVE_SET_WALK_MODE {
     }
 }
 
-impl MessageBody for SMSG_SPLINE_MOVE_SET_WALK_MODE {
+impl ServerMessage for SMSG_SPLINE_MOVE_SET_WALK_MODE {
     const OPCODE: u16 = 0x030e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

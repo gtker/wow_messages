@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v2::{WorldResult, WorldResultError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ use std::io::Write;
 pub struct SMSG_AUTH_RESPONSE {
     pub result: SMSG_AUTH_RESPONSEWorldResult,
 }
-
-impl ServerMessage for SMSG_AUTH_RESPONSE {}
 
 impl SMSG_AUTH_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -130,7 +128,7 @@ impl SMSG_AUTH_RESPONSE {
     }
 }
 
-impl MessageBody for SMSG_AUTH_RESPONSE {
+impl ServerMessage for SMSG_AUTH_RESPONSE {
     const OPCODE: u16 = 0x01ee;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

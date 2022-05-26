@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{LogFormat, LogFormatError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -17,8 +17,6 @@ pub struct SMSG_PROCRESIST {
     pub id: u32,
     pub log_format: LogFormat,
 }
-
-impl ServerMessage for SMSG_PROCRESIST {}
 
 impl SMSG_PROCRESIST {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 21], std::io::Error> {
@@ -40,7 +38,7 @@ impl SMSG_PROCRESIST {
     }
 }
 
-impl MessageBody for SMSG_PROCRESIST {
+impl ServerMessage for SMSG_PROCRESIST {
     const OPCODE: u16 = 0x0260;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

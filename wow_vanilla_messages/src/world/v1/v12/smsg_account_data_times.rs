@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ use std::io::Write;
 pub struct SMSG_ACCOUNT_DATA_TIMES {
     pub data: [u32; 32],
 }
-
-impl ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 
 impl SMSG_ACCOUNT_DATA_TIMES {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 128], std::io::Error> {
@@ -28,7 +26,7 @@ impl SMSG_ACCOUNT_DATA_TIMES {
     }
 }
 
-impl MessageBody for SMSG_ACCOUNT_DATA_TIMES {
+impl ServerMessage for SMSG_ACCOUNT_DATA_TIMES {
     const OPCODE: u16 = 0x0209;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

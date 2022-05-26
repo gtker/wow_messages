@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_BATTLEGROUND_PLAYER_LEFT {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {}
-
 impl SMSG_BATTLEGROUND_PLAYER_LEFT {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
         let mut array_w = [0u8; 8];
@@ -27,7 +25,7 @@ impl SMSG_BATTLEGROUND_PLAYER_LEFT {
     }
 }
 
-impl MessageBody for SMSG_BATTLEGROUND_PLAYER_LEFT {
+impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {
     const OPCODE: u16 = 0x02ed;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

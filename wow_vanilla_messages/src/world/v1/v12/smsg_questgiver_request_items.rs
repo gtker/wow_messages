@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{QuestCompletable, QuestCompletableError};
 use crate::world::v1::v12::QuestItemRequirement;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -26,8 +26,6 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub flags2: u32,
     pub flags3: u32,
 }
-
-impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {}
 
 impl SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -84,7 +82,7 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
     }
 }
 
-impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
+impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {
     const OPCODE: u16 = 0x018b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

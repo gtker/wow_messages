@@ -57,19 +57,37 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
             );
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
-            s.impl_world_read_and_writable_with_error(
+            let bind = |s: &mut Writer, trait_to_impl| {
+                s.impl_world_read_and_writable_with_error(
+                    e.name(),
+                    &error_ty,
+                    opcode,
+                    trait_to_impl,
+                    |s, it| {
+                        print_read::print_read(s, e, o, it.prefix(), it.postfix());
+                    },
+                    Some(e.sizes(o)),
+                );
+            };
+
+            s.write_as_bytes(
                 e.name(),
-                error_ty,
-                opcode,
-                e.container_type(),
-                |s, it| {
-                    print_read::print_read(s, e, o, it.prefix(), it.postfix());
-                },
                 |s, it| {
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
                 Some(e.sizes(o)),
             );
+
+            match e.container_type() {
+                ContainerType::CMsg(_) => bind(s, CLIENT_MESSAGE_TRAIT_NAME),
+                ContainerType::SMsg(_) => bind(s, SERVER_MESSAGE_TRAIT_NAME),
+                ContainerType::Msg(_) => {
+                    bind(s, CLIENT_MESSAGE_TRAIT_NAME);
+
+                    bind(s, SERVER_MESSAGE_TRAIT_NAME);
+                }
+                _ => unreachable!(),
+            }
         }
     }
 

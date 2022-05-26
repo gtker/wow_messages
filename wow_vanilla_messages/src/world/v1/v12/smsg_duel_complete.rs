@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_DUEL_COMPLETE {
     pub ended_without_interruption: u8,
 }
 
-impl ServerMessage for SMSG_DUEL_COMPLETE {}
-
 impl SMSG_DUEL_COMPLETE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
         let mut array_w = [0u8; 1];
@@ -26,7 +24,7 @@ impl SMSG_DUEL_COMPLETE {
     }
 }
 
-impl MessageBody for SMSG_DUEL_COMPLETE {
+impl ServerMessage for SMSG_DUEL_COMPLETE {
     const OPCODE: u16 = 0x016a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

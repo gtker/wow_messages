@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ use std::io::Write;
 pub struct CMSG_REQUEST_ACCOUNT_DATA {
 }
 
-impl ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
-
 impl CMSG_REQUEST_ACCOUNT_DATA {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {
         let mut array_w = [0u8; 0];
@@ -22,7 +20,7 @@ impl CMSG_REQUEST_ACCOUNT_DATA {
     }
 }
 
-impl MessageBody for CMSG_REQUEST_ACCOUNT_DATA {
+impl ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {
     const OPCODE: u16 = 0x020a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

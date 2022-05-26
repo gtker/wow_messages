@@ -1,4 +1,3 @@
-use crate::MessageBody;
 use crate::{ServerMessage, ClientMessage};
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
@@ -20,7 +19,7 @@ impl ClientOpcodeMessage {
         let size = (crate::util::read_u16_be(r)? - 4) as u32;
         let opcode = crate::util::read_u32_le(r)?;
         match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::read_body(r, size)?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(r, size)?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -31,7 +30,7 @@ impl ClientOpcodeMessage {
         let header = d.decrypt_client_header(header);
         let header_size = (header.size - 4) as u32;
         match header.opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::read_body(r, header_size)?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(r, header_size)?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -42,7 +41,7 @@ impl ClientOpcodeMessage {
         let size = (crate::util::tokio_read_u16_be(r).await? - 4) as u32;
         let opcode = crate::util::tokio_read_u32_le(r).await?;
         match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::tokio_read_body(r, size).await?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::tokio_read_body(r, size).await?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -53,7 +52,7 @@ impl ClientOpcodeMessage {
         let header = d.decrypt_client_header(header);
         let header_size = (header.size - 4) as u32;
         match header.opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::tokio_read_body(r, header_size).await?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::tokio_read_body(r, header_size).await?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -64,7 +63,7 @@ impl ClientOpcodeMessage {
         let size = (crate::util::astd_read_u16_be(r).await? - 4) as u32;
         let opcode = crate::util::astd_read_u32_le(r).await?;
         match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::astd_read_body(r, size).await?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::astd_read_body(r, size).await?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -75,7 +74,7 @@ impl ClientOpcodeMessage {
         let header = d.decrypt_client_header(header);
         let header_size = (header.size - 4) as u32;
         match header.opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::astd_read_body(r, header_size).await?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::astd_read_body(r, header_size).await?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -120,8 +119,8 @@ impl ServerOpcodeMessage {
         let size = (crate::util::read_u16_be(r)? - 2) as u32;
         let opcode = crate::util::read_u16_le(r)?;
         match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::read_body(r, size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::read_body(r, size)?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(r, size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(r, size)?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -132,8 +131,8 @@ impl ServerOpcodeMessage {
         let header = d.decrypt_server_header(header);
         let header_size = (header.size - 2) as u32;
         match header.opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::read_body(r, header_size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::read_body(r, header_size)?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(r, header_size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(r, header_size)?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -144,8 +143,8 @@ impl ServerOpcodeMessage {
         let size = (crate::util::tokio_read_u16_be(r).await? - 2) as u32;
         let opcode = crate::util::tokio_read_u16_le(r).await?;
         match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::tokio_read_body(r, size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::tokio_read_body(r, size).await?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::tokio_read_body(r, size).await?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::tokio_read_body(r, size).await?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -156,8 +155,8 @@ impl ServerOpcodeMessage {
         let header = d.decrypt_server_header(header);
         let header_size = (header.size - 2) as u32;
         match header.opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::tokio_read_body(r, header_size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::tokio_read_body(r, header_size).await?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::tokio_read_body(r, header_size).await?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::tokio_read_body(r, header_size).await?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -168,8 +167,8 @@ impl ServerOpcodeMessage {
         let size = (crate::util::astd_read_u16_be(r).await? - 2) as u32;
         let opcode = crate::util::astd_read_u16_le(r).await?;
         match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::astd_read_body(r, size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::astd_read_body(r, size).await?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::astd_read_body(r, size).await?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::astd_read_body(r, size).await?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -180,8 +179,8 @@ impl ServerOpcodeMessage {
         let header = d.decrypt_server_header(header);
         let header_size = (header.size - 2) as u32;
         match header.opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::astd_read_body(r, header_size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::astd_read_body(r, header_size).await?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::astd_read_body(r, header_size).await?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::astd_read_body(r, header_size).await?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }

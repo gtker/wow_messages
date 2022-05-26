@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{QuestFailedReason, QuestFailedReasonError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_QUESTGIVER_QUEST_INVALID {
     pub msg: QuestFailedReason,
 }
 
-impl ServerMessage for SMSG_QUESTGIVER_QUEST_INVALID {}
-
 impl SMSG_QUESTGIVER_QUEST_INVALID {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
         let mut array_w = [0u8; 4];
@@ -27,7 +25,7 @@ impl SMSG_QUESTGIVER_QUEST_INVALID {
     }
 }
 
-impl MessageBody for SMSG_QUESTGIVER_QUEST_INVALID {
+impl ServerMessage for SMSG_QUESTGIVER_QUEST_INVALID {
     const OPCODE: u16 = 0x018f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

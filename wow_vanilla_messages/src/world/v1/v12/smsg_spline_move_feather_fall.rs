@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct SMSG_SPLINE_MOVE_FEATHER_FALL {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_SPLINE_MOVE_FEATHER_FALL {}
-
 impl SMSG_SPLINE_MOVE_FEATHER_FALL {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Vec::with_capacity(self.size());
@@ -25,7 +23,7 @@ impl SMSG_SPLINE_MOVE_FEATHER_FALL {
     }
 }
 
-impl MessageBody for SMSG_SPLINE_MOVE_FEATHER_FALL {
+impl ServerMessage for SMSG_SPLINE_MOVE_FEATHER_FALL {
     const OPCODE: u16 = 0x0305;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

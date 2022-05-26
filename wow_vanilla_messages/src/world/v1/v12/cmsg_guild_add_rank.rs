@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -11,8 +11,6 @@ use std::io::Write;
 pub struct CMSG_GUILD_ADD_RANK {
     pub rank_name: String,
 }
-
-impl ClientMessage for CMSG_GUILD_ADD_RANK {}
 
 impl CMSG_GUILD_ADD_RANK {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -26,7 +24,7 @@ impl CMSG_GUILD_ADD_RANK {
     }
 }
 
-impl MessageBody for CMSG_GUILD_ADD_RANK {
+impl ClientMessage for CMSG_GUILD_ADD_RANK {
     const OPCODE: u16 = 0x0232;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

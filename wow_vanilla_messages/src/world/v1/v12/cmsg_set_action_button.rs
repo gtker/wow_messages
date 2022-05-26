@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ pub struct CMSG_SET_ACTION_BUTTON {
     pub button: u8,
     pub action_type: u32,
 }
-
-impl ClientMessage for CMSG_SET_ACTION_BUTTON {}
 
 impl CMSG_SET_ACTION_BUTTON {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
@@ -30,7 +28,7 @@ impl CMSG_SET_ACTION_BUTTON {
     }
 }
 
-impl MessageBody for CMSG_SET_ACTION_BUTTON {
+impl ClientMessage for CMSG_SET_ACTION_BUTTON {
     const OPCODE: u16 = 0x0128;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

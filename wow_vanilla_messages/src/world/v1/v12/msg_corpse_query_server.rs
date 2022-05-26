@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{CorpseQueryResult, CorpseQueryResultError};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -13,8 +13,6 @@ use std::io::Write;
 pub struct MSG_CORPSE_QUERY_Server {
     pub result: MSG_CORPSE_QUERY_ServerCorpseQueryResult,
 }
-
-impl ServerMessage for MSG_CORPSE_QUERY_Server {}
 
 impl MSG_CORPSE_QUERY_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -53,7 +51,7 @@ impl MSG_CORPSE_QUERY_Server {
     }
 }
 
-impl MessageBody for MSG_CORPSE_QUERY_Server {
+impl ServerMessage for MSG_CORPSE_QUERY_Server {
     const OPCODE: u16 = 0x0216;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

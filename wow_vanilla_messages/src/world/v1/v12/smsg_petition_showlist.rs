@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::PetitionShowlist;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_PETITION_SHOWLIST {
     pub npc: Guid,
     pub petitions: Vec<PetitionShowlist>,
 }
-
-impl ServerMessage for SMSG_PETITION_SHOWLIST {}
 
 impl SMSG_PETITION_SHOWLIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -35,7 +33,7 @@ impl SMSG_PETITION_SHOWLIST {
     }
 }
 
-impl MessageBody for SMSG_PETITION_SHOWLIST {
+impl ServerMessage for SMSG_PETITION_SHOWLIST {
     const OPCODE: u16 = 0x01bc;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

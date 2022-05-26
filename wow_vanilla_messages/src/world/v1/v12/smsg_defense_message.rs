@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_DEFENSE_MESSAGE {
     pub message_length: u32,
     pub message: String,
 }
-
-impl ServerMessage for SMSG_DEFENSE_MESSAGE {}
 
 impl SMSG_DEFENSE_MESSAGE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -35,7 +33,7 @@ impl SMSG_DEFENSE_MESSAGE {
     }
 }
 
-impl MessageBody for SMSG_DEFENSE_MESSAGE {
+impl ServerMessage for SMSG_DEFENSE_MESSAGE {
     const OPCODE: u16 = 0x033b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

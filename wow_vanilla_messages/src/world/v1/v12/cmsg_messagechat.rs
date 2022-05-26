@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{ChatType, ChatTypeError};
 use crate::world::v1::v12::{Language, LanguageError};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_MESSAGECHAT {
     pub chat_type: CMSG_MESSAGECHATChatType,
     pub language: Language,
 }
-
-impl ClientMessage for CMSG_MESSAGECHAT {}
 
 impl CMSG_MESSAGECHAT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -200,7 +198,7 @@ impl CMSG_MESSAGECHAT {
     }
 }
 
-impl MessageBody for CMSG_MESSAGECHAT {
+impl ClientMessage for CMSG_MESSAGECHAT {
     const OPCODE: u16 = 0x0095;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

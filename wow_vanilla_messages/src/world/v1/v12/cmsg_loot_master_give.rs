@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct CMSG_LOOT_MASTER_GIVE {
     pub slot_id: u8,
     pub target_player_guid: Guid,
 }
-
-impl ClientMessage for CMSG_LOOT_MASTER_GIVE {}
 
 impl CMSG_LOOT_MASTER_GIVE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 17], std::io::Error> {
@@ -35,7 +33,7 @@ impl CMSG_LOOT_MASTER_GIVE {
     }
 }
 
-impl MessageBody for CMSG_LOOT_MASTER_GIVE {
+impl ClientMessage for CMSG_LOOT_MASTER_GIVE {
     const OPCODE: u16 = 0x02a3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

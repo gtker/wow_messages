@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::GmSurveyQuestion;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_GMSURVEY_SUBMIT {
     pub questions: [GmSurveyQuestion; 10],
     pub answer_comment: String,
 }
-
-impl ClientMessage for CMSG_GMSURVEY_SUBMIT {}
 
 impl CMSG_GMSURVEY_SUBMIT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -37,7 +35,7 @@ impl CMSG_GMSURVEY_SUBMIT {
     }
 }
 
-impl MessageBody for CMSG_GMSURVEY_SUBMIT {
+impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
     const OPCODE: u16 = 0x032a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

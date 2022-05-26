@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellMiss, SpellMissError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,8 +16,6 @@ pub struct SMSG_SPELLLOGMISS {
     pub unknown1: u8,
     pub targets: Vec<SpellMiss>,
 }
-
-impl ServerMessage for SMSG_SPELLLOGMISS {}
 
 impl SMSG_SPELLLOGMISS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -43,7 +41,7 @@ impl SMSG_SPELLLOGMISS {
     }
 }
 
-impl MessageBody for SMSG_SPELLLOGMISS {
+impl ServerMessage for SMSG_SPELLLOGMISS {
     const OPCODE: u16 = 0x024b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

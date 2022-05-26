@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{PartyOperation, PartyOperationError};
 use crate::world::v1::v12::{PartyResult, PartyResultError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct SMSG_PARTY_COMMAND_RESULT {
     pub member: String,
     pub result: PartyResult,
 }
-
-impl ServerMessage for SMSG_PARTY_COMMAND_RESULT {}
 
 impl SMSG_PARTY_COMMAND_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -36,7 +34,7 @@ impl SMSG_PARTY_COMMAND_RESULT {
     }
 }
 
-impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
+impl ServerMessage for SMSG_PARTY_COMMAND_RESULT {
     const OPCODE: u16 = 0x007f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

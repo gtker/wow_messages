@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{RollVote, RollVoteError};
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -16,8 +16,6 @@ pub struct CMSG_LOOT_ROLL {
     pub item_slot: u32,
     pub vote: RollVote,
 }
-
-impl ClientMessage for CMSG_LOOT_ROLL {}
 
 impl CMSG_LOOT_ROLL {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 13], std::io::Error> {
@@ -36,7 +34,7 @@ impl CMSG_LOOT_ROLL {
     }
 }
 
-impl MessageBody for CMSG_LOOT_ROLL {
+impl ClientMessage for CMSG_LOOT_ROLL {
     const OPCODE: u16 = 0x02a0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ pub struct SMSG_GUILD_INVITE {
     pub player_name: String,
     pub guild_name: String,
 }
-
-impl ServerMessage for SMSG_GUILD_INVITE {}
 
 impl SMSG_GUILD_INVITE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -32,7 +30,7 @@ impl SMSG_GUILD_INVITE {
     }
 }
 
-impl MessageBody for SMSG_GUILD_INVITE {
+impl ServerMessage for SMSG_GUILD_INVITE {
     const OPCODE: u16 = 0x0083;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

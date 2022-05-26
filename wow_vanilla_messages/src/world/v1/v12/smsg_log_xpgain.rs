@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{ExperienceAwardType, ExperienceAwardTypeError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -15,8 +15,6 @@ pub struct SMSG_LOG_XPGAIN {
     pub total_exp: u32,
     pub exp_type: SMSG_LOG_XPGAINExperienceAwardType,
 }
-
-impl ServerMessage for SMSG_LOG_XPGAIN {}
 
 impl SMSG_LOG_XPGAIN {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -49,7 +47,7 @@ impl SMSG_LOG_XPGAIN {
     }
 }
 
-impl MessageBody for SMSG_LOG_XPGAIN {
+impl ServerMessage for SMSG_LOG_XPGAIN {
     const OPCODE: u16 = 0x01d0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

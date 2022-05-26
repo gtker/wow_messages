@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{PetCommandState, PetCommandStateError};
 use crate::world::v1::v12::{PetReactState, PetReactStateError};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -19,8 +19,6 @@ pub struct SMSG_PET_MODE {
     pub unknown1: u8,
     pub pet_enabled: u8,
 }
-
-impl ServerMessage for SMSG_PET_MODE {}
 
 impl SMSG_PET_MODE {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -45,7 +43,7 @@ impl SMSG_PET_MODE {
     }
 }
 
-impl MessageBody for SMSG_PET_MODE {
+impl ServerMessage for SMSG_PET_MODE {
     const OPCODE: u16 = 0x017a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

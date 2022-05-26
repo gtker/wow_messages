@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::ForcedReaction;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ use std::io::Write;
 pub struct SMSG_SET_FORCED_REACTIONS {
     pub reactions: Vec<ForcedReaction>,
 }
-
-impl ServerMessage for SMSG_SET_FORCED_REACTIONS {}
 
 impl SMSG_SET_FORCED_REACTIONS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -30,7 +28,7 @@ impl SMSG_SET_FORCED_REACTIONS {
     }
 }
 
-impl MessageBody for SMSG_SET_FORCED_REACTIONS {
+impl ServerMessage for SMSG_SET_FORCED_REACTIONS {
     const OPCODE: u16 = 0x02a5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

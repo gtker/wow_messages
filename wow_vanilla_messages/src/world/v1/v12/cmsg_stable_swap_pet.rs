@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, MessageBody};
+use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct CMSG_STABLE_SWAP_PET {
     pub npc: Guid,
     pub pet_slot: u32,
 }
-
-impl ClientMessage for CMSG_STABLE_SWAP_PET {}
 
 impl CMSG_STABLE_SWAP_PET {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
@@ -31,7 +29,7 @@ impl CMSG_STABLE_SWAP_PET {
     }
 }
 
-impl MessageBody for CMSG_STABLE_SWAP_PET {
+impl ClientMessage for CMSG_STABLE_SWAP_PET {
     const OPCODE: u16 = 0x0275;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

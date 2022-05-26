@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -12,8 +12,6 @@ use std::io::Write;
 pub struct SMSG_QUESTLOG_FULL {
 }
 
-impl ServerMessage for SMSG_QUESTLOG_FULL {}
-
 impl SMSG_QUESTLOG_FULL {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {
         let mut array_w = [0u8; 0];
@@ -22,7 +20,7 @@ impl SMSG_QUESTLOG_FULL {
     }
 }
 
-impl MessageBody for SMSG_QUESTLOG_FULL {
+impl ServerMessage for SMSG_QUESTLOG_FULL {
     const OPCODE: u16 = 0x0195;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::QuestDetailsEmote;
 use crate::world::v1::v12::QuestItemReward;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -24,8 +24,6 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub reward_spell: u32,
     pub emotes: Vec<QuestDetailsEmote>,
 }
-
-impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {}
 
 impl SMSG_QUESTGIVER_QUEST_DETAILS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
@@ -88,7 +86,7 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
     }
 }
 
-impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
+impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
     const OPCODE: u16 = 0x0188;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {

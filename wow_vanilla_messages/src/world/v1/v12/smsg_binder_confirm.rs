@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ServerMessage, MessageBody};
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,8 +14,6 @@ pub struct SMSG_BINDER_CONFIRM {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_BINDER_CONFIRM {}
-
 impl SMSG_BINDER_CONFIRM {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
         let mut array_w = [0u8; 8];
@@ -27,7 +25,7 @@ impl SMSG_BINDER_CONFIRM {
     }
 }
 
-impl MessageBody for SMSG_BINDER_CONFIRM {
+impl ServerMessage for SMSG_BINDER_CONFIRM {
     const OPCODE: u16 = 0x02eb;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
