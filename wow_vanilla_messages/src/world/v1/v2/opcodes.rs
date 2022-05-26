@@ -160,15 +160,6 @@ impl From<std::io::Error> for ClientOpcodeMessageError {
     }
 }
 
-impl From<ClientOpcodeError> for ClientOpcodeMessageError {
-    fn from(e: ClientOpcodeError) -> Self {
-        match e {
-            ClientOpcodeError::Io(i) => Self::Io(i),
-            ClientOpcodeError::InvalidOpcode(i) => Self::InvalidOpcode(i),
-        }
-    }
-}
-
 use crate::world::v1::v2::SMSG_AUTH_CHALLENGE;
 use crate::world::v1::v2::{SMSG_AUTH_RESPONSE, SMSG_AUTH_RESPONSEError};
 
@@ -334,15 +325,6 @@ impl std::fmt::Display for ServerOpcodeMessageError {
 impl From<std::io::Error> for ServerOpcodeMessageError {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
-    }
-}
-
-impl From<ServerOpcodeError> for ServerOpcodeMessageError {
-    fn from(e: ServerOpcodeError) -> Self {
-        match e {
-            ServerOpcodeError::Io(i) => Self::Io(i),
-            ServerOpcodeError::InvalidOpcode(i) => Self::InvalidOpcode(i),
-        }
     }
 }
 

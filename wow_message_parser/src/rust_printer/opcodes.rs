@@ -57,8 +57,6 @@ pub fn print_login_opcodes(
 
     print_error(&mut s, v, ty, int_ty);
 
-    opcode_enum_login(&mut s, v, ty);
-
     s
 }
 
@@ -263,19 +261,27 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
         format!("{t}OpcodeMessage", t = ty),
         format!("{t}OpcodeMessageError", t = ty),
         |s, it| {
-            s.wln(format!("let opcode = {t}Opcode::{prefix}read(r){postfix}?;", t = ty, prefix = it.prefix(), postfix = it.postfix()));
+            s.wln(format!("let opcode = crate::util::{prefix}read_u8_le(r){postfix}?;", prefix = it.prefix(), postfix = it.postfix()));
 
             s.body("match opcode", |s| {
                 for e in v {
+                    let opcode = match e.container_type() {
+                        ContainerType::CLogin(opcode) |
+                        ContainerType::SLogin(opcode) => opcode,
+                        _ => unreachable!()
+                    };
+
                     s.wln(format!(
-                        "{t}Opcode::{enum_name} => Ok(Self::{enum_name}({name}::{prefix}read(r){postfix}?)),",
+                        "{opcode:#04X} => Ok(Self::{enum_name}({name}::{prefix}read(r){postfix}?)),",
                         name = e.name(),
                         enum_name = get_enumerator_name(e.name()),
-                        t = ty,
+                        opcode = opcode,
                         prefix = it.prefix(),
                         postfix = it.postfix(),
                     ));
                 }
+
+                s.wln(format!("opcode => Err({t}OpcodeMessageError::InvalidOpcode(opcode)),", t = ty));
             });
         },
         |s, _it| {
@@ -337,20 +343,6 @@ pub fn print_error(s: &mut Writer, v: &[&Container], ty: &str, int_ty: &str) {
         format!("{t}OpcodeMessageError", t = ty),
         |s| {
             s.wln("Self::Io(e)");
-        },
-    );
-
-    s.impl_from(
-        format!("{t}OpcodeError", t = ty),
-        format!("{t}OpcodeMessageError", t = ty),
-        |s| {
-            s.body("match e", |s| {
-                s.wln(format!("{t}OpcodeError::Io(i) => Self::Io(i),", t = ty));
-                s.wln(format!(
-                    "{t}OpcodeError::InvalidOpcode(i) => Self::InvalidOpcode(i),",
-                    t = ty
-                ));
-            });
         },
     );
 
@@ -491,119 +483,6 @@ pub fn opcode_enum_world(
                 },
             );
         },
-    );
-
-    s.impl_from("std::io::Error", format!("{t}OpcodeError", t = ty), |s| {
-        s.wln("Self::Io(e)")
-    });
-}
-
-pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
-    s.wln("#[derive(Debug)]");
-    s.new_enum("pub", format!("{t}Opcode", t = ty), |s| {
-        for e in v {
-            s.wln(format!(
-                "{enum_name},",
-                enum_name = get_enumerator_name(e.name())
-            ));
-        }
-    });
-
-    s.bodyn(format!("impl {t}Opcode", t = ty), |s| {
-        s.funcn_const("as_u8(&self)", "u8", |s| {
-            s.body("match self", |s| {
-                for e in v {
-                    s.wln(format!(
-                        "Self::{enum_name} => {value:#04x},",
-                        enum_name = get_enumerator_name(e.name()),
-                        value = match e.container_type() {
-                            ContainerType::CLogin(i) | ContainerType::SLogin(i) => i,
-                            ContainerType::SMsg(i) | ContainerType::CMsg(i) => i,
-                            _ => panic!("invalid type for opcode enum"),
-                        }
-                    ))
-                }
-            });
-        });
-    });
-
-    s.impl_read_write_non_trait_pub_crate(
-        &format!("{t}Opcode", t = ty),
-        &format!("{t}OpcodeError", t = ty),
-        |s, it| {
-            s.wln(format!(
-                "let opcode = crate::util::{prefix}read_u8_le(r){postfix}?;\n",
-                prefix = it.prefix(),
-                postfix = it.postfix()
-            ));
-
-            s.body("match opcode", |s| {
-                for e in v {
-                    s.wln(format!(
-                        "{value:#04x} => Ok(Self::{enum_name}),",
-                        enum_name = get_enumerator_name(e.name()),
-                        value = match e.container_type() {
-                            ContainerType::CLogin(i) | ContainerType::SLogin(i) => i,
-                            ContainerType::SMsg(i) | ContainerType::CMsg(i) => i,
-                            _ => panic!("invalid type for opcode enum"),
-                        }
-                    ));
-                }
-
-                s.wln(format!(
-                    "opcode => Err({t}OpcodeError::InvalidOpcode(opcode)),",
-                    t = ty
-                ));
-            });
-        },
-        |s, _it| {
-            s.wln("std::io::Write::write_all(&mut w, &self.as_u8().to_le_bytes())?;");
-        },
-        None,
-    );
-
-    s.impl_from(
-        format!("&{t}OpcodeMessage", t = ty),
-        format!("{t}Opcode", t = ty),
-        |s| {
-            s.body("match *e", |s| {
-                for e in v {
-                    s.wln(format!(
-                        "{t}OpcodeMessage::{enum_name}(_) => Self::{enum_name},",
-                        t = ty,
-                        enum_name = get_enumerator_name(e.name()),
-                    ));
-                }
-            });
-        },
-    );
-
-    s.wln("#[derive(Debug)]");
-    s.new_enum("pub", format!("{t}OpcodeError", t = ty), |s| {
-        s.wln("Io(std::io::Error),");
-        s.wln("InvalidOpcode(u8),");
-    });
-
-    s.impl_for(
-        "std::fmt::Display",
-        format!("{t}OpcodeError", t = ty),
-        |s| {
-            s.body(
-                "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
-                |s| {
-                    s.body("match self", |s| {
-                        s.wln("Self::Io(i) => i.fmt(f),");
-                        s.wln(format!(r#"Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode for {t}: '{{}}'", i)),"#, t = ty));
-                    });
-                },
-            );
-        },
-    );
-
-    s.impl_for(
-        "std::error::Error",
-        format!("{t}OpcodeError", t = ty),
-        |_| {},
     );
 
     s.impl_from("std::io::Error", format!("{t}OpcodeError", t = ty), |s| {

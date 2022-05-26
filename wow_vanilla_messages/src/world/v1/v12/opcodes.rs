@@ -3896,15 +3896,6 @@ impl From<std::io::Error> for ClientOpcodeMessageError {
     }
 }
 
-impl From<ClientOpcodeError> for ClientOpcodeMessageError {
-    fn from(e: ClientOpcodeError) -> Self {
-        match e {
-            ClientOpcodeError::Io(i) => Self::Io(i),
-            ClientOpcodeError::InvalidOpcode(i) => Self::InvalidOpcode(i),
-        }
-    }
-}
-
 impl From<MSG_QUEST_PUSH_RESULTError> for ClientOpcodeMessageError {
     fn from(e: MSG_QUEST_PUSH_RESULTError) -> Self {
         match e {
@@ -8957,15 +8948,6 @@ impl std::fmt::Display for ServerOpcodeMessageError {
 impl From<std::io::Error> for ServerOpcodeMessageError {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
-    }
-}
-
-impl From<ServerOpcodeError> for ServerOpcodeMessageError {
-    fn from(e: ServerOpcodeError) -> Self {
-        match e {
-            ServerOpcodeError::Io(i) => Self::Io(i),
-            ServerOpcodeError::InvalidOpcode(i) => Self::InvalidOpcode(i),
-        }
     }
 }
 

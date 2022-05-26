@@ -26,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `SecurifyFlag` enum. This was never used except in the `CMD_AUTH_LOGON_PROOF_ClientSecurityFlag` version.
 * BREAKING: Several member functions on enums, flags, and structs that were not useful for library users.
 * BREAKING: `MessageBody` trait. Functionality has been moved into `ClientMessage` and `ServerMessage` for simplicity.
+* BREAKING: `ClientOpcode` and `ServerOpcode` for all versions.
+This functionality exposes a difference between the opcode and the body in a way that is inconsistent with the abstractions of the crate.
 
 ### Fixed
 
