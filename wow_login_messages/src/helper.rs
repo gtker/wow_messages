@@ -51,6 +51,27 @@ pub fn read_expect_client_login_message<M: ClientMessage, R: Read>(
     }
 }
 
+#[cfg(feature = "tokio")]
+pub async fn tokio_read_expect_client_login_message<
+    M: ClientMessage,
+    R: tokio::io::AsyncReadExt + Unpin + Send,
+>(
+    r: &mut R,
+) -> Result<M, ExpectedServerLoginMessageError> {
+    let opcode = crate::util::tokio_read_u8_le(r).await?;
+
+    // Unable to match on associated const M::OPCODE, so we do if
+    if opcode == M::OPCODE {
+        let m = M::tokio_read(r).await;
+        match m {
+            Ok(m) => Ok(m),
+            Err(_) => Err(ExpectedServerLoginMessageError::GenericError),
+        }
+    } else {
+        Err(ExpectedServerLoginMessageError::UnexpectedOpcode(opcode))
+    }
+}
+
 #[derive(Debug)]
 pub enum ExpectedClientLoginMessageError {
     Io(std::io::Error),
@@ -101,6 +122,27 @@ pub fn read_expect_server_login_message<M: ServerMessage, R: Read>(
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
         let m = M::read(r);
+        match m {
+            Ok(m) => Ok(m),
+            Err(_) => Err(ExpectedServerLoginMessageError::GenericError),
+        }
+    } else {
+        Err(ExpectedServerLoginMessageError::UnexpectedOpcode(opcode))
+    }
+}
+
+#[cfg(feature = "tokio")]
+pub async fn tokio_read_expect_server_login_message<
+    M: ServerMessage,
+    R: tokio::io::AsyncReadExt + Unpin + Send,
+>(
+    r: &mut R,
+) -> Result<M, ExpectedServerLoginMessageError> {
+    let opcode = crate::util::tokio_read_u8_le(r).await?;
+
+    // Unable to match on associated const M::OPCODE, so we do if
+    if opcode == M::OPCODE {
+        let m = M::tokio_read(r).await;
         match m {
             Ok(m) => Ok(m),
             Err(_) => Err(ExpectedServerLoginMessageError::GenericError),
@@ -177,6 +219,22 @@ pub fn read_initial_opcode<R: Read>(
         )),
         CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialLoginOpcode::Reconnect(
             CMD_AUTH_RECONNECT_CHALLENGE_Client::read(r)?,
+        )),
+        opcode => Err(InitialLoginOpcodeError::InvalidOpcode(opcode)),
+    }
+}
+
+#[cfg(feature = "tokio")]
+pub async fn tokio_read_initial_opcode<R: tokio::io::AsyncReadExt + Unpin + Send>(
+    r: &mut R,
+) -> Result<InitialLoginOpcode, InitialLoginOpcodeError> {
+    let opcode = crate::util::tokio_read_u8_le(r).await?;
+    match opcode {
+        CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialLoginOpcode::Logon(
+            CMD_AUTH_LOGON_CHALLENGE_Client::tokio_read(r).await?,
+        )),
+        CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialLoginOpcode::Reconnect(
+            CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read(r).await?,
         )),
         opcode => Err(InitialLoginOpcodeError::InvalidOpcode(opcode)),
     }
