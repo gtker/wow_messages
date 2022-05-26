@@ -10,8 +10,15 @@ const CLIENT_HEADER_LENGTH: u16 = 6;
 fn get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity((size + SERVER_HEADER_LENGTH) as usize);
 
-    crate::util::write_u16_be(&mut v, size + SERVER_OPCODE_LENGTH).unwrap();
-    crate::util::write_u16_le(&mut v, opcode).unwrap();
+    let size = (size + SERVER_OPCODE_LENGTH).to_be_bytes();
+    let opcode = opcode.to_le_bytes();
+
+    let mut header = [0u8; SERVER_HEADER_LENGTH as usize];
+    header[0] = size[0];
+    header[1] = size[1];
+    header[2] = opcode[0];
+    header[3] = opcode[1];
+    v.extend_from_slice(&header);
 
     v
 }
@@ -308,8 +315,18 @@ pub trait ClientMessage: Sized {
 fn get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity((size + CLIENT_HEADER_LENGTH) as usize);
 
-    crate::util::write_u16_be(&mut v, size + CLIENT_OPCODE_LENGTH).unwrap();
-    crate::util::write_u32_le(&mut v, opcode as u32).unwrap();
+    let size = (size + CLIENT_OPCODE_LENGTH).to_be_bytes();
+    let opcode = (opcode as u32).to_le_bytes();
+
+    let mut header = [0u8; CLIENT_HEADER_LENGTH as usize];
+    header[0] = size[0];
+    header[1] = size[1];
+    header[2] = opcode[0];
+    header[3] = opcode[1];
+    header[4] = opcode[2];
+    header[5] = opcode[3];
+
+    v.extend_from_slice(&header);
 
     v
 }
