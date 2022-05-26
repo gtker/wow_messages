@@ -1,7 +1,7 @@
 mod container;
 mod definer;
 
-use crate::file_utils::write_string_to_file;
+use crate::file_utils::overwrite_if_not_same_contents;
 use crate::ir_printer::container::{containers_to_ir, IrContainer};
 use serde::Serialize;
 use std::path::Path;
@@ -179,5 +179,5 @@ pub fn write_intermediate_representation(o: &Objects) {
 
     let json = serde_json::to_string_pretty(&o).unwrap();
 
-    write_string_to_file(&json, Path::new(IR_PATH));
+    overwrite_if_not_same_contents(&json, Path::new(IR_PATH));
 }
