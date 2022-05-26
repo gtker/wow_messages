@@ -85,7 +85,7 @@ pub trait ServerMessageWrite: MessageBody {
                 self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
                 <Self as MessageBody>::OPCODE,
             );
-            w.write_all(&header);
+            w.write_all(&header).await;
 
             self.tokio_write_body(w).await?;
             Ok(())

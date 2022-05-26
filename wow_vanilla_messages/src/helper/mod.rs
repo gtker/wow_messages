@@ -13,6 +13,8 @@ pub(crate) mod expected;
 pub(crate) mod guid;
 pub(crate) mod update_mask;
 
+const CLIENT_OPCODE_LENGTH: u16 = 4;
+
 #[cfg(feature = "tokio")]
 pub async fn tokio_read_expect_client_message_encryption<
     M: ClientMessageWrite,
@@ -23,6 +25,7 @@ pub async fn tokio_read_expect_client_message_encryption<
     d: &mut D,
 ) -> Result<M, ExpectedServerLoginMessageError> {
     let mut buf = [0u8; CLIENT_HEADER_LENGTH as usize];
+    r.read_exact(&mut buf).await?;
     let d = d.decrypt_client_header(buf);
 
     let size = d.size;
@@ -30,7 +33,7 @@ pub async fn tokio_read_expect_client_message_encryption<
 
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode as u16 == M::OPCODE {
-        let m = M::tokio_read_body(r, (size - 2) as u32).await;
+        let m = M::tokio_read_body(r, (size - CLIENT_OPCODE_LENGTH) as u32).await;
         match m {
             Ok(m) => Ok(m),
             Err(_) => Err(ExpectedServerLoginMessageError::GenericError),
@@ -52,7 +55,7 @@ pub async fn tokio_read_expect_client_message<
 
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode as u16 == M::OPCODE {
-        let m = M::tokio_read_body(r, (size - 2) as u32).await;
+        let m = M::tokio_read_body(r, (size - CLIENT_OPCODE_LENGTH) as u32).await;
         match m {
             Ok(m) => Ok(m),
             Err(_) => Err(ExpectedServerLoginMessageError::GenericError),
