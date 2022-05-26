@@ -18,8 +18,11 @@ impl ClientOpcodeMessage {
     pub fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
         let size = (crate::util::read_u16_be(r)? - 4) as u32;
         let opcode = crate::util::read_u32_le(r)?;
+
+        let mut buf = vec![0; size as usize];
+        r.read_exact(&mut buf)?;
         match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(r, size)?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), size)?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -29,8 +32,11 @@ impl ClientOpcodeMessage {
         r.read_exact(&mut header)?;
         let header = d.decrypt_client_header(header);
         let header_size = (header.size - 4) as u32;
+
+        let mut buf = vec![0; header_size as usize];
+        r.read_exact(&mut buf)?;
         match header.opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(r, header_size)?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), header_size)?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -40,8 +46,11 @@ impl ClientOpcodeMessage {
     pub async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
         let size = (crate::util::tokio_read_u16_be(r).await? - 4) as u32;
         let opcode = crate::util::tokio_read_u32_le(r).await?;
+
+        let mut buf = vec![0; size as usize];
+        r.read_exact(&mut buf).await?;
         match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::tokio_read_body(r, size).await?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), size)?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -51,8 +60,11 @@ impl ClientOpcodeMessage {
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
         let header_size = (header.size - 4) as u32;
+
+        let mut buf = vec![0; header_size as usize];
+        r.read_exact(&mut buf).await?;
         match header.opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::tokio_read_body(r, header_size).await?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), header_size)?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -62,8 +74,11 @@ impl ClientOpcodeMessage {
     pub async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
         let size = (crate::util::astd_read_u16_be(r).await? - 4) as u32;
         let opcode = crate::util::astd_read_u32_le(r).await?;
+
+        let mut buf = vec![0; size as usize];
+        r.read_exact(&mut buf).await?;
         match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::astd_read_body(r, size).await?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), size)?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -73,8 +88,11 @@ impl ClientOpcodeMessage {
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
         let header_size = (header.size - 4) as u32;
+
+        let mut buf = vec![0; header_size as usize];
+        r.read_exact(&mut buf).await?;
         match header.opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::astd_read_body(r, header_size).await?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), header_size)?)),
             _ => Err(ClientOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -132,9 +150,12 @@ impl ServerOpcodeMessage {
     pub fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
         let size = (crate::util::read_u16_be(r)? - 2) as u32;
         let opcode = crate::util::read_u16_le(r)?;
+
+        let mut buf = vec![0; size as usize];
+        r.read_exact(&mut buf)?;
         match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(r, size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(r, size)?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -144,9 +165,12 @@ impl ServerOpcodeMessage {
         r.read_exact(&mut header)?;
         let header = d.decrypt_server_header(header);
         let header_size = (header.size - 2) as u32;
+
+        let mut buf = vec![0; header_size as usize];
+        r.read_exact(&mut buf)?;
         match header.opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(r, header_size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(r, header_size)?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -156,9 +180,12 @@ impl ServerOpcodeMessage {
     pub async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
         let size = (crate::util::tokio_read_u16_be(r).await? - 2) as u32;
         let opcode = crate::util::tokio_read_u16_le(r).await?;
+
+        let mut buf = vec![0; size as usize];
+        r.read_exact(&mut buf).await?;
         match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::tokio_read_body(r, size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::tokio_read_body(r, size).await?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -168,9 +195,12 @@ impl ServerOpcodeMessage {
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
         let header_size = (header.size - 2) as u32;
+
+        let mut buf = vec![0; header_size as usize];
+        r.read_exact(&mut buf).await?;
         match header.opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::tokio_read_body(r, header_size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::tokio_read_body(r, header_size).await?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }
@@ -180,9 +210,12 @@ impl ServerOpcodeMessage {
     pub async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
         let size = (crate::util::astd_read_u16_be(r).await? - 2) as u32;
         let opcode = crate::util::astd_read_u16_le(r).await?;
+
+        let mut buf = vec![0; size as usize];
+        r.read_exact(&mut buf).await?;
         match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::astd_read_body(r, size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::astd_read_body(r, size).await?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
         }
     }
@@ -192,9 +225,12 @@ impl ServerOpcodeMessage {
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
         let header_size = (header.size - 2) as u32;
+
+        let mut buf = vec![0; header_size as usize];
+        r.read_exact(&mut buf).await?;
         match header.opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::astd_read_body(r, header_size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::astd_read_body(r, header_size).await?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
             _ => Err(ServerOpcodeMessageError::InvalidOpcode(header.opcode)),
         }
     }

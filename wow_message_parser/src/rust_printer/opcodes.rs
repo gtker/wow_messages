@@ -153,6 +153,13 @@ fn world_common_impls_read_write(
         prefix = it.prefix(),
         postfix = it.postfix()
     ));
+    s.newline();
+
+    s.wln("let mut buf = vec![0; size as usize];");
+    s.wln(format!(
+        "r.read_exact(&mut buf){postfix}?;",
+        postfix = it.postfix()
+    ));
 
     s.body("match opcode", |s| {
             for &e in v {
@@ -162,12 +169,10 @@ fn world_common_impls_read_write(
                     ContainerType::Msg(i) => i,
                     _ => panic!(),
                 };
-                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::{prefix}read_body(r, size){postfix}?)),",
+                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::read_body(&mut buf.as_slice(), size)?)),",
                               opcode = opcode,
                               name = e.name(),
                               impl_trait = ty,
-                              prefix = it.prefix(),
-                              postfix = it.postfix(),
                               enum_name = get_enumerator_name(e.name())));
             }
             s.wln(format!("_ => Err({error_ty}::InvalidOpcode(opcode)),", error_ty = error_ty));
@@ -203,6 +208,14 @@ fn world_common_impls_read_write(
         "let header_size = (header.size - {opcode_size}) as u32;",
         opcode_size = opcode_size
     ));
+    s.newline();
+
+    s.wln("let mut buf = vec![0; header_size as usize];");
+    s.wln(format!(
+        "r.read_exact(&mut buf){postfix}?;",
+        postfix = it.postfix()
+    ));
+
     s.body("match header.opcode", |s| {
         for &e in v {
             let opcode = match e.container_type() {
@@ -214,9 +227,7 @@ fn world_common_impls_read_write(
 
             s.wln(
                 format!(
-                    "{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::{prefix}read_body(r, header_size){postfix}?)),",
-                    prefix = it.prefix(),
-                    postfix = it.postfix(),
+                    "{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::read_body(&mut buf.as_slice(), header_size)?)),",
                     opcode = opcode,
                     name = e.name(),
                     impl_trait = ty,
