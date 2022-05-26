@@ -6,7 +6,7 @@ use tokio::time::sleep;
 use wow_srp::header_crypto::ProofSeed;
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::server::SrpServer;
-use wow_vanilla_messages::helper::tokio_read_expect_client_message;
+use wow_vanilla_messages::helper::tokio_expect_client_message;
 use wow_vanilla_messages::v1::v12::opcodes::ClientOpcodeMessage;
 use wow_vanilla_messages::v1::v12::*;
 use wow_vanilla_messages::{
@@ -23,7 +23,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
     .await
     .unwrap();
 
-    let c = tokio_read_expect_client_message::<CMSG_AUTH_SESSION, _>(&mut stream)
+    let c = tokio_expect_client_message::<CMSG_AUTH_SESSION, _>(&mut stream)
         .await
         .unwrap();
     dbg!(&c);

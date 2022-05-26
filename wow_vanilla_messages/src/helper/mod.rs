@@ -16,14 +16,14 @@ pub(crate) mod update_mask;
 const CLIENT_OPCODE_LENGTH: u16 = 4;
 
 #[cfg(feature = "tokio")]
-pub async fn tokio_read_expect_client_message_encryption<
+pub async fn tokio_expect_client_message_encryption<
     M: ClientMessageWrite,
     R: tokio::io::AsyncReadExt + Unpin + Send,
     D: Decrypter,
 >(
     r: &mut R,
     d: &mut D,
-) -> Result<M, ExpectedServerLoginMessageError> {
+) -> Result<M, ExpectedServerMessageError> {
     let mut buf = [0u8; CLIENT_HEADER_LENGTH as usize];
     r.read_exact(&mut buf).await?;
     let d = d.decrypt_client_header(buf);
@@ -36,20 +36,20 @@ pub async fn tokio_read_expect_client_message_encryption<
         let m = M::tokio_read_body(r, (size - CLIENT_OPCODE_LENGTH) as u32).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedServerLoginMessageError::GenericError),
+            Err(_) => Err(ExpectedServerMessageError::GenericError),
         }
     } else {
-        Err(ExpectedServerLoginMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedServerMessageError::UnexpectedOpcode(opcode))
     }
 }
 
 #[cfg(feature = "tokio")]
-pub async fn tokio_read_expect_client_message<
+pub async fn tokio_expect_client_message<
     M: ClientMessageWrite,
     R: tokio::io::AsyncReadExt + Unpin + Send,
 >(
     r: &mut R,
-) -> Result<M, ExpectedServerLoginMessageError> {
+) -> Result<M, ExpectedServerMessageError> {
     let size = crate::util::tokio_read_u16_be(r).await?;
     let opcode = crate::util::tokio_read_u32_le(r).await?;
 
@@ -58,22 +58,22 @@ pub async fn tokio_read_expect_client_message<
         let m = M::tokio_read_body(r, (size - CLIENT_OPCODE_LENGTH) as u32).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedServerLoginMessageError::GenericError),
+            Err(_) => Err(ExpectedServerMessageError::GenericError),
         }
     } else {
-        Err(ExpectedServerLoginMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedServerMessageError::UnexpectedOpcode(opcode))
     }
 }
 
 #[derive(Debug)]
-pub enum ExpectedServerLoginMessageError {
+pub enum ExpectedServerMessageError {
     Io(std::io::Error),
     UnexpectedOpcode(u32),
     GenericError,
 }
-impl std::error::Error for ExpectedServerLoginMessageError {}
+impl std::error::Error for ExpectedServerMessageError {}
 
-impl Display for ExpectedServerLoginMessageError {
+impl Display for ExpectedServerMessageError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
@@ -85,7 +85,7 @@ impl Display for ExpectedServerLoginMessageError {
     }
 }
 
-impl From<std::io::Error> for ExpectedServerLoginMessageError {
+impl From<std::io::Error> for ExpectedServerMessageError {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
     }
