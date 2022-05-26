@@ -151,9 +151,10 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
             running_speed: 7.0,
             swimming_speed: 0.0,
             timestamp: 0,
-            turn_rate: 3.1415,
+            turn_rate: std::f32::consts::PI,
             walking_speed: 1.0,
         })
+        .set_ALL(MovementBlockUpdateFlagALL { unknown1: 1 })
         .set_SELF();
 
     SMSG_UPDATE_OBJECT {

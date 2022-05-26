@@ -17,13 +17,6 @@ pub struct MovementBlock {
 }
 
 impl MovementBlock {
-    pub const UNKNOWN0_VALUE: u32 = 0x00;
-
-    pub const UNKNOWN1_VALUE: u32 = 0x01;
-
-}
-
-impl MovementBlock {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Vec::with_capacity(self.size());
         // update_flag: UpdateFlag
@@ -203,13 +196,13 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.high_guid {
             // unknown0: u32
-            w.write_all(&Self::UNKNOWN0_VALUE.to_le_bytes())?;
+            w.write_all(&if_statement.unknown0.to_le_bytes())?;
 
         }
 
         if let Some(if_statement) = &self.update_flag.all {
             // unknown1: u32
-            w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes())?;
+            w.write_all(&if_statement.unknown1.to_le_bytes())?;
 
         }
 
@@ -440,10 +433,10 @@ impl MovementBlock {
 
         let update_flag_HIGH_GUID = if update_flag.is_HIGH_GUID() {
             // unknown0: u32
-            let _unknown0 = crate::util::read_u32_le(r)?;
-            // unknown0 is expected to always be 0 (0)
+            let unknown0 = crate::util::read_u32_le(r)?;
 
             Some(MovementBlockUpdateFlagHIGH_GUID {
+                unknown0,
             })
         }
         else {
@@ -452,10 +445,10 @@ impl MovementBlock {
 
         let update_flag_ALL = if update_flag.is_ALL() {
             // unknown1: u32
-            let _unknown1 = crate::util::read_u32_le(r)?;
-            // unknown1 is expected to always be 1 (1)
+            let unknown1 = crate::util::read_u32_le(r)?;
 
             Some(MovementBlockUpdateFlagALL {
+                unknown1,
             })
         }
         else {
@@ -710,10 +703,10 @@ impl MovementBlock {
 
         let update_flag_HIGH_GUID = if update_flag.is_HIGH_GUID() {
             // unknown0: u32
-            let _unknown0 = crate::util::tokio_read_u32_le(r).await?;
-            // unknown0 is expected to always be 0 (0)
+            let unknown0 = crate::util::tokio_read_u32_le(r).await?;
 
             Some(MovementBlockUpdateFlagHIGH_GUID {
+                unknown0,
             })
         }
         else {
@@ -722,10 +715,10 @@ impl MovementBlock {
 
         let update_flag_ALL = if update_flag.is_ALL() {
             // unknown1: u32
-            let _unknown1 = crate::util::tokio_read_u32_le(r).await?;
-            // unknown1 is expected to always be 1 (1)
+            let unknown1 = crate::util::tokio_read_u32_le(r).await?;
 
             Some(MovementBlockUpdateFlagALL {
+                unknown1,
             })
         }
         else {
@@ -980,10 +973,10 @@ impl MovementBlock {
 
         let update_flag_HIGH_GUID = if update_flag.is_HIGH_GUID() {
             // unknown0: u32
-            let _unknown0 = crate::util::astd_read_u32_le(r).await?;
-            // unknown0 is expected to always be 0 (0)
+            let unknown0 = crate::util::astd_read_u32_le(r).await?;
 
             Some(MovementBlockUpdateFlagHIGH_GUID {
+                unknown0,
             })
         }
         else {
@@ -992,10 +985,10 @@ impl MovementBlock {
 
         let update_flag_ALL = if update_flag.is_ALL() {
             // unknown1: u32
-            let _unknown1 = crate::util::astd_read_u32_le(r).await?;
-            // unknown1 is expected to always be 1 (1)
+            let unknown1 = crate::util::astd_read_u32_le(r).await?;
 
             Some(MovementBlockUpdateFlagALL {
+                unknown1,
             })
         }
         else {
@@ -2897,55 +2890,59 @@ impl MovementBlockUpdateFlag {
         self.clone()
     }
 
-    pub const fn new_HIGH_GUID() -> Self {
+    pub const fn new_HIGH_GUID(high_guid: MovementBlockUpdateFlagHIGH_GUID) -> Self {
         Self {
             inner: UpdateFlag::HIGH_GUID,
             transport: None,
             melee_attacking: None,
-            high_guid: None,
+            high_guid: Some(high_guid),
             all: None,
             living: None,
         }
     }
 
-    pub fn set_HIGH_GUID(&mut self) -> Self {
+    pub fn set_HIGH_GUID(&mut self, high_guid: MovementBlockUpdateFlagHIGH_GUID) -> Self {
         self.inner |= UpdateFlag::HIGH_GUID;
+        self.high_guid = Some(high_guid);
         self.clone()
     }
 
-    pub const fn get_HIGH_GUID(&self) -> bool {
-        (self.inner & UpdateFlag::HIGH_GUID) != 0
+    pub const fn get_HIGH_GUID(&self) -> Option<&MovementBlockUpdateFlagHIGH_GUID> {
+        self.high_guid.as_ref()
     }
 
     pub fn clear_HIGH_GUID(&mut self) -> Self {
         self.inner &= UpdateFlag::HIGH_GUID.reverse_bits();
+        self.high_guid = None;
         // TODO: Cloning like this is not conductive to good performance but it is
         // temporarily necessary due to test syntax
         self.clone()
     }
 
-    pub const fn new_ALL() -> Self {
+    pub const fn new_ALL(all: MovementBlockUpdateFlagALL) -> Self {
         Self {
             inner: UpdateFlag::ALL,
             transport: None,
             melee_attacking: None,
             high_guid: None,
-            all: None,
+            all: Some(all),
             living: None,
         }
     }
 
-    pub fn set_ALL(&mut self) -> Self {
+    pub fn set_ALL(&mut self, all: MovementBlockUpdateFlagALL) -> Self {
         self.inner |= UpdateFlag::ALL;
+        self.all = Some(all);
         self.clone()
     }
 
-    pub const fn get_ALL(&self) -> bool {
-        (self.inner & UpdateFlag::ALL) != 0
+    pub const fn get_ALL(&self) -> Option<&MovementBlockUpdateFlagALL> {
+        self.all.as_ref()
     }
 
     pub fn clear_ALL(&mut self) -> Self {
         self.inner &= UpdateFlag::ALL.reverse_bits();
+        self.all = None;
         // TODO: Cloning like this is not conductive to good performance but it is
         // temporarily necessary due to test syntax
         self.clone()
@@ -3050,6 +3047,7 @@ impl MovementBlockUpdateFlagMELEE_ATTACKING {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementBlockUpdateFlagHIGH_GUID {
+    pub unknown0: u32,
 }
 
 impl MovementBlockUpdateFlagHIGH_GUID {
@@ -3060,6 +3058,7 @@ impl MovementBlockUpdateFlagHIGH_GUID {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementBlockUpdateFlagALL {
+    pub unknown1: u32,
 }
 
 impl MovementBlockUpdateFlagALL {

@@ -149,10 +149,14 @@ struct MovementBlock {
         f32 orientation;
     }
     if (update_flag & HIGH_GUID) {
-        u32 unknown0 = 0;
+        u32 unknown0 {
+            comment = "vmangos statically sets to 0";
+        }
     }
     if (update_flag & ALL) {
-        u32 unknown1 = 1;
+        u32 unknown1 {
+            comment = "vmangos sets statically to 1";
+        }
     }
     if (update_flag & MELEE_ATTACKING) {
         PackedGuid guid;

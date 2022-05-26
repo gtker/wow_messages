@@ -61,10 +61,10 @@ struct MovementBlock {
         f32 orientation;
     }
     if (update_flag & HIGH_GUID) {
-        u32 unknown0 = 0;
+        u32 unknown0;
     }
     if (update_flag & ALL) {
-        u32 unknown1 = 1;
+        u32 unknown1;
     }
     if (update_flag & MELEE_ATTACKING) {
         PackedGuid guid;
@@ -169,13 +169,13 @@ If update_flag contains `HIGH_GUID`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unknown0 |  |  |
+| - | 4 / Little | u32 | unknown0 |  | vmangos statically sets to 0 |
 
 If update_flag contains `ALL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | unknown1 |  |  |
+| - | 4 / Little | u32 | unknown1 |  | vmangos sets statically to 1 |
 
 If update_flag contains `MELEE_ATTACKING`:
 

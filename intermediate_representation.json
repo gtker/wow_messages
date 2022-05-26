@@ -66851,13 +66851,12 @@
                       "endianness": "little"
                     }
                   },
-                  "constant_value": {
-                    "value": 0,
-                    "original_string": "0"
-                  },
+                  "constant_value": null,
                   "used_as_size_in": null,
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "comment": "vmangos statically sets to 0"
+                  }
                 }
               }
             ],
@@ -66893,13 +66892,12 @@
                       "endianness": "little"
                     }
                   },
-                  "constant_value": {
-                    "value": 1,
-                    "original_string": "1"
-                  },
+                  "constant_value": null,
                   "used_as_size_in": null,
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "comment": "vmangos sets statically to 1"
+                  }
                 }
               }
             ],
@@ -67014,7 +67012,6 @@
         "IfElseFlag",
         "VariableArrays",
         "ComplexArrays",
-        "ConstantValue",
         "PackedGuidTypes",
         "WorldVersion"
       ]
@@ -67780,7 +67777,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-        "start_position": 165
+        "start_position": 169
       },
       "only_has_io_error": false,
       "features": [
@@ -94579,7 +94576,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-        "start_position": 188
+        "start_position": 192
       },
       "only_has_io_error": false,
       "features": [
