@@ -26,8 +26,6 @@ pub fn print_world_opcodes(
 
     includes(&mut s, v, container_type);
 
-    opcode_enum_world(&mut s, v, ty, container_type);
-
     definition(&mut s, v, ty);
 
     common_impls_world(&mut s, v, ty, container_type);
@@ -368,126 +366,6 @@ pub fn print_error(s: &mut Writer, v: &[&Container], ty: &str, int_ty: &str) {
             },
         );
     }
-}
-
-pub fn opcode_enum_world(
-    s: &mut Writer,
-    v: &[&Container],
-    ty: &str,
-    container_type: ContainerType,
-) {
-    s.wln("#[derive(Debug)]");
-    s.new_enum("pub", format!("{t}Opcode", t = ty), |s| {
-        for e in v {
-            s.wln(format!(
-                "{enum_name},",
-                enum_name = get_enumerator_name(e.name())
-            ));
-        }
-    });
-    let int_ty = match container_type {
-        ContainerType::CMsg(_) => "u32",
-        ContainerType::SMsg(_) => "u16",
-        _ => panic!(),
-    };
-
-    s.bodyn(format!("impl {t}Opcode", t = ty), |s| {
-        s.funcn_const("as_int(&self)", int_ty, |s| {
-            s.body("match self", |s| {
-                for e in v {
-                    s.wln(format!(
-                        "Self::{enum_name} => {value:#04x},",
-                        enum_name = get_enumerator_name(e.name()),
-                        value = match e.container_type() {
-                            ContainerType::SMsg(i)
-                            | ContainerType::CMsg(i)
-                            | ContainerType::Msg(i) => i,
-                            _ => panic!("invalid type for opcode enum"),
-                        }
-                    ))
-                }
-            });
-        });
-    });
-
-    s.bodyn(&format!("impl {t}Opcode", t = ty), |s| {
-        s.bodyn(
-            format!(
-                "pub fn new(opcode: {int_ty}) -> std::result::Result<Self, {t}OpcodeError>",
-                int_ty = int_ty,
-                t = ty
-            ),
-            |s| {
-                s.body("match opcode", |s| {
-                    for e in v {
-                        s.wln(format!(
-                            "{value:#04x} => Ok(Self::{enum_name}),",
-                            enum_name = get_enumerator_name(e.name()),
-                            value = match e.container_type() {
-                                ContainerType::SMsg(i)
-                                | ContainerType::CMsg(i)
-                                | ContainerType::Msg(i) => i,
-                                _ => panic!("invalid type for opcode enum"),
-                            }
-                        ));
-                    }
-
-                    s.wln(format!(
-                        "opcode => Err({t}OpcodeError::InvalidOpcode(opcode)),",
-                        t = ty
-                    ));
-                });
-            },
-        );
-    });
-
-    s.impl_from(
-        format!("&{t}OpcodeMessage", t = ty),
-        format!("{t}Opcode", t = ty),
-        |s| {
-            s.body("match *e", |s| {
-                for e in v {
-                    s.wln(format!(
-                        "{t}OpcodeMessage::{enum_name}(_) => Self::{enum_name},",
-                        t = ty,
-                        enum_name = get_enumerator_name(e.name()),
-                    ));
-                }
-            });
-        },
-    );
-
-    s.wln("#[derive(Debug)]");
-    s.new_enum("pub", format!("{t}OpcodeError", t = ty), |s| {
-        s.wln("Io(std::io::Error),");
-        s.wln(format!("InvalidOpcode({int_ty}),", int_ty = int_ty));
-    });
-
-    s.impl_for(
-        "std::error::Error",
-        format!("{t}OpcodeError", t = ty),
-        |_| {},
-    );
-
-    s.impl_for(
-        "std::fmt::Display",
-        format!("{t}OpcodeError", t = ty),
-        |s| {
-            s.body(
-                "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
-                |s| {
-                    s.body("match self", |s| {
-                        s.wln("Self::Io(i) => i.fmt(f),");
-                        s.wln(format!(r#"Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode for {t}: '{{}}'", i)),"#, t = ty));
-                    });
-                },
-            );
-        },
-    );
-
-    s.impl_from("std::io::Error", format!("{t}OpcodeError", t = ty), |s| {
-        s.wln("Self::Io(e)")
-    });
 }
 
 pub fn get_enumerator_name(name: &str) -> String {

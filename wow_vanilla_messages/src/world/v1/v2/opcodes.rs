@@ -9,62 +9,6 @@ use async_std::io::{ReadExt, WriteExt};
 use crate::world::v1::v2::CMSG_CHAR_ENUM;
 
 #[derive(Debug)]
-pub enum ClientOpcode {
-    CMSG_CHAR_ENUM,
-}
-
-impl ClientOpcode {
-    pub(crate) const fn as_int(&self) -> u32 {
-        match self {
-            Self::CMSG_CHAR_ENUM => 0x37,
-        }
-    }
-
-}
-
-impl ClientOpcode {
-    pub fn new(opcode: u32) -> std::result::Result<Self, ClientOpcodeError> {
-        match opcode {
-            0x37 => Ok(Self::CMSG_CHAR_ENUM),
-            opcode => Err(ClientOpcodeError::InvalidOpcode(opcode)),
-        }
-    }
-
-}
-
-impl From<&ClientOpcodeMessage> for ClientOpcode {
-    fn from(e: &ClientOpcodeMessage) -> Self {
-        match *e {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => Self::CMSG_CHAR_ENUM,
-        }
-    }
-}
-
-#[derive(Debug)]
-pub enum ClientOpcodeError {
-    Io(std::io::Error),
-    InvalidOpcode(u32),
-}
-
-impl std::error::Error for ClientOpcodeError {
-}
-
-impl std::fmt::Display for ClientOpcodeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode for Client: '{}'", i)),
-        }
-    }
-}
-
-impl From<std::io::Error> for ClientOpcodeError {
-    fn from(e: std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-#[derive(Debug)]
 pub enum ClientOpcodeMessage {
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
 }
@@ -162,66 +106,6 @@ impl From<std::io::Error> for ClientOpcodeMessageError {
 
 use crate::world::v1::v2::SMSG_AUTH_CHALLENGE;
 use crate::world::v1::v2::{SMSG_AUTH_RESPONSE, SMSG_AUTH_RESPONSEError};
-
-#[derive(Debug)]
-pub enum ServerOpcode {
-    SMSG_AUTH_CHALLENGE,
-    SMSG_AUTH_RESPONSE,
-}
-
-impl ServerOpcode {
-    pub(crate) const fn as_int(&self) -> u16 {
-        match self {
-            Self::SMSG_AUTH_CHALLENGE => 0x1ec,
-            Self::SMSG_AUTH_RESPONSE => 0x1ee,
-        }
-    }
-
-}
-
-impl ServerOpcode {
-    pub fn new(opcode: u16) -> std::result::Result<Self, ServerOpcodeError> {
-        match opcode {
-            0x1ec => Ok(Self::SMSG_AUTH_CHALLENGE),
-            0x1ee => Ok(Self::SMSG_AUTH_RESPONSE),
-            opcode => Err(ServerOpcodeError::InvalidOpcode(opcode)),
-        }
-    }
-
-}
-
-impl From<&ServerOpcodeMessage> for ServerOpcode {
-    fn from(e: &ServerOpcodeMessage) -> Self {
-        match *e {
-            ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => Self::SMSG_AUTH_CHALLENGE,
-            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => Self::SMSG_AUTH_RESPONSE,
-        }
-    }
-}
-
-#[derive(Debug)]
-pub enum ServerOpcodeError {
-    Io(std::io::Error),
-    InvalidOpcode(u16),
-}
-
-impl std::error::Error for ServerOpcodeError {
-}
-
-impl std::fmt::Display for ServerOpcodeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode for Server: '{}'", i)),
-        }
-    }
-}
-
-impl From<std::io::Error> for ServerOpcodeError {
-    fn from(e: std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
 
 #[derive(Debug)]
 pub enum ServerOpcodeMessage {
