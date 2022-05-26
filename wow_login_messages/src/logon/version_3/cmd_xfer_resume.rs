@@ -29,7 +29,6 @@ impl ClientMessage for CMD_XFER_RESUME {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // offset: u64
         let offset = crate::util::read_u64_le(r)?;

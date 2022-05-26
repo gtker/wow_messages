@@ -94,7 +94,6 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // client_public_key: u8[32]
         let mut client_public_key = [0_u8; 32];

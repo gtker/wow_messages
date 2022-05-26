@@ -231,7 +231,9 @@ impl Writer {
     }
 
     fn print_read_decl(&mut self, it: ImplType, world_text: &str) {
-        self.wln(it.cfg());
+        if it.is_async() {
+            self.wln(it.cfg());
+        }
         if !it.is_async() {
             let body_size = if world_text == "_body" {
                 ", body_size: u32"

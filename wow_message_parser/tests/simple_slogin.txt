@@ -29,7 +29,6 @@ impl ServerMessage for SimpleSlogin {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // basic: u8
         let basic = crate::util::read_u8_le(r)?;

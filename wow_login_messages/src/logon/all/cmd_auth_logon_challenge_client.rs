@@ -74,7 +74,6 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
 
     type Error = crate::errors::ParseError;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // protocol_version: u8
         let protocol_version = crate::util::read_u8_le(r)?;

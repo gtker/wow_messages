@@ -33,7 +33,6 @@ impl ServerMessage for CMD_XFER_DATA {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // size: u16
         let size = crate::util::read_u16_le(r)?;

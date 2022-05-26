@@ -51,7 +51,6 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // proof_data: u8[16]
         let mut proof_data = [0_u8; 16];

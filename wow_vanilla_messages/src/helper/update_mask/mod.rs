@@ -134,7 +134,6 @@ impl Default for UpdateMask {
 }
 
 impl UpdateMask {
-    #[cfg(feature = "sync")]
     pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
         todo!()
     }

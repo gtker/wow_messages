@@ -25,7 +25,6 @@ impl ClientMessage for CMD_XFER_CANCEL {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         Ok(Self {
         })

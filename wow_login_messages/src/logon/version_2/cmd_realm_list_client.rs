@@ -33,7 +33,6 @@ impl ClientMessage for CMD_REALM_LIST_Client {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // padding: u32
         let _padding = crate::util::read_u32_le(r)?;

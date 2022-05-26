@@ -41,7 +41,6 @@ impl ClientMessage for CMD_SURVEY_RESULT {
 
     type Error = std::io::Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // survey_id: u32
         let survey_id = crate::util::read_u32_le(r)?;
