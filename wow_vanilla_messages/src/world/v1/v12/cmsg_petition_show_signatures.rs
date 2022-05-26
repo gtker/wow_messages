@@ -26,12 +26,11 @@ impl CMSG_PETITION_SHOW_SIGNATURES {
 }
 
 impl ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_guid: Guid
         w.write_all(&self.item_guid.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01be;
 

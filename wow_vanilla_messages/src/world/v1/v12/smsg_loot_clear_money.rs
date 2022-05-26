@@ -21,9 +21,8 @@ impl SMSG_LOOT_CLEAR_MONEY {
 }
 
 impl ServerMessage for SMSG_LOOT_CLEAR_MONEY {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(0);
-        Ok(w)
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        Ok(())
     }
     const OPCODE: u16 = 0x0165;
 

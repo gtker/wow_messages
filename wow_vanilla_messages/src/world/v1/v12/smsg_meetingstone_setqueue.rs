@@ -31,15 +31,14 @@ impl SMSG_MEETINGSTONE_SETQUEUE {
 }
 
 impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(5);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // area: Area
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         // status: MeetingStoneStatus
         w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0295;
 

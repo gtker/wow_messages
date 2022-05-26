@@ -27,8 +27,7 @@ impl CMSG_TOGGLE_PVP {
 }
 
 impl ClientMessage for CMSG_TOGGLE_PVP {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional set
         if let Some(v) = &self.set {
             // enable_pvp: u8
@@ -36,7 +35,7 @@ impl ClientMessage for CMSG_TOGGLE_PVP {
 
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0253;
 

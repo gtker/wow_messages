@@ -39,8 +39,7 @@ impl CMSG_BATTLEMASTER_JOIN {
 }
 
 impl ClientMessage for CMSG_BATTLEMASTER_JOIN {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(17);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -53,7 +52,7 @@ impl ClientMessage for CMSG_BATTLEMASTER_JOIN {
         // join_as_group: u8
         w.write_all(&self.join_as_group.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02ee;
 

@@ -33,8 +33,7 @@ impl SMSG_AUCTION_REMOVED_NOTIFICATION {
 }
 
 impl ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(12);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_id: u32
         w.write_all(&self.item_id.to_le_bytes())?;
 
@@ -44,7 +43,7 @@ impl ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {
         // random_property_id: u32
         w.write_all(&self.random_property_id.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x028d;
 

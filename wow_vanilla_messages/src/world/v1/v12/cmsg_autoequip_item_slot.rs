@@ -30,15 +30,14 @@ impl CMSG_AUTOEQUIP_ITEM_SLOT {
 }
 
 impl ClientMessage for CMSG_AUTOEQUIP_ITEM_SLOT {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(9);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // destination_slot: u8
         w.write_all(&self.destination_slot.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x010f;
 

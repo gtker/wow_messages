@@ -41,8 +41,7 @@ impl SMSG_SPELLENERGIZELOG {
 }
 
 impl ServerMessage for SMSG_SPELLENERGIZELOG {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // victim_guid: PackedGuid
         w.write_all(&self.victim_guid.packed_guid())?;
 
@@ -58,7 +57,7 @@ impl ServerMessage for SMSG_SPELLENERGIZELOG {
         // damage: u32
         w.write_all(&self.damage.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0151;
 

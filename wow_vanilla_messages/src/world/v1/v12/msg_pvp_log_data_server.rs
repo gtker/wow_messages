@@ -46,8 +46,7 @@ impl MSG_PVP_LOG_DATA_Server {
 }
 
 impl ServerMessage for MSG_PVP_LOG_DATA_Server {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // status: BattlegroundEndStatus
         w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 
@@ -70,7 +69,7 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
             w.write_all(&(i.as_bytes()?))?;
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02e0;
 

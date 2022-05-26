@@ -29,15 +29,14 @@ impl CMSG_SET_ACTION_BUTTON {
 }
 
 impl ClientMessage for CMSG_SET_ACTION_BUTTON {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(5);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // button: u8
         w.write_all(&self.button.to_le_bytes())?;
 
         // action_type: u32
         w.write_all(&self.action_type.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0128;
 

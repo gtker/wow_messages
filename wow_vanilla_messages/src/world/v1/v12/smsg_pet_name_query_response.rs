@@ -33,8 +33,7 @@ impl SMSG_PET_NAME_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
 
@@ -46,7 +45,7 @@ impl ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {
         // pet_name_timestamp: u32
         w.write_all(&self.pet_name_timestamp.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0053;
 

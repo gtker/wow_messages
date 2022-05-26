@@ -31,15 +31,14 @@ impl SMSG_LOGOUT_RESPONSE {
 }
 
 impl ServerMessage for SMSG_LOGOUT_RESPONSE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(5);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: LogoutResult
         w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
 
         // speed: LogoutSpeed
         w.write_all(&(self.speed.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x004c;
 

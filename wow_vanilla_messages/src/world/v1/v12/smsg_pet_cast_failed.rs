@@ -34,8 +34,7 @@ impl SMSG_PET_CAST_FAILED {
 }
 
 impl ServerMessage for SMSG_PET_CAST_FAILED {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(6);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
@@ -45,7 +44,7 @@ impl ServerMessage for SMSG_PET_CAST_FAILED {
         // result: SpellCastResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0138;
 

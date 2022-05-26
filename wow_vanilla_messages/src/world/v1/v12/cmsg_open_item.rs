@@ -29,15 +29,14 @@ impl CMSG_OPEN_ITEM {
 }
 
 impl ClientMessage for CMSG_OPEN_ITEM {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(2);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag_index: u8
         w.write_all(&self.bag_index.to_le_bytes())?;
 
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x00ac;
 

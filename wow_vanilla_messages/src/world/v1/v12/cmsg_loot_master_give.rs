@@ -34,8 +34,7 @@ impl CMSG_LOOT_MASTER_GIVE {
 }
 
 impl ClientMessage for CMSG_LOOT_MASTER_GIVE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(17);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // loot_guid: Guid
         w.write_all(&self.loot_guid.guid().to_le_bytes())?;
 
@@ -45,7 +44,7 @@ impl ClientMessage for CMSG_LOOT_MASTER_GIVE {
         // target_player_guid: Guid
         w.write_all(&self.target_player_guid.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02a3;
 

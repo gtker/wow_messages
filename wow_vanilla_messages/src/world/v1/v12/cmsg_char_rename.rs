@@ -30,8 +30,7 @@ impl CMSG_CHAR_RENAME {
 }
 
 impl ClientMessage for CMSG_CHAR_RENAME {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -40,7 +39,7 @@ impl ClientMessage for CMSG_CHAR_RENAME {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02c7;
 

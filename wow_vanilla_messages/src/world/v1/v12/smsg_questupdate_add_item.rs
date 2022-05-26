@@ -29,15 +29,14 @@ impl SMSG_QUESTUPDATE_ADD_ITEM {
 }
 
 impl ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // required_item_id: u32
         w.write_all(&self.required_item_id.to_le_bytes())?;
 
         // items_required: u32
         w.write_all(&self.items_required.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x019a;
 

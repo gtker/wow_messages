@@ -30,15 +30,14 @@ impl SMSG_SPELL_FAILED_OTHER {
 }
 
 impl ServerMessage for SMSG_SPELL_FAILED_OTHER {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(12);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster_guid: Guid
         w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02a6;
 

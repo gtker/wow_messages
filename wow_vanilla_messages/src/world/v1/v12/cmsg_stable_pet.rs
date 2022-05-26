@@ -26,12 +26,11 @@ impl CMSG_STABLE_PET {
 }
 
 impl ClientMessage for CMSG_STABLE_PET {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc_guid: Guid
         w.write_all(&self.npc_guid.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0270;
 

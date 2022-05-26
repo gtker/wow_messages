@@ -37,8 +37,7 @@ impl CMSG_SWAP_ITEM {
 }
 
 impl ClientMessage for CMSG_SWAP_ITEM {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // destination_bag: u8
         w.write_all(&self.destination_bag.to_le_bytes())?;
 
@@ -51,7 +50,7 @@ impl ClientMessage for CMSG_SWAP_ITEM {
         // source_slot: u8
         w.write_all(&self.source_slot.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x010c;
 

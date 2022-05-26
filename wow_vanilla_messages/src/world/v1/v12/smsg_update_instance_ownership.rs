@@ -25,12 +25,11 @@ impl SMSG_UPDATE_INSTANCE_OWNERSHIP {
 }
 
 impl ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // has_been_saved: u32
         w.write_all(&self.has_been_saved.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x032b;
 

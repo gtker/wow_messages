@@ -36,8 +36,7 @@ impl CMSG_LOOT_METHOD {
 }
 
 impl ClientMessage for CMSG_LOOT_METHOD {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(10);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // loot_setting: GroupLootSetting
         w.write_all(&(self.loot_setting.as_int() as u32).to_le_bytes())?;
 
@@ -47,7 +46,7 @@ impl ClientMessage for CMSG_LOOT_METHOD {
         // loot_threshold: ItemQuality
         w.write_all(&(self.loot_threshold.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x007a;
 

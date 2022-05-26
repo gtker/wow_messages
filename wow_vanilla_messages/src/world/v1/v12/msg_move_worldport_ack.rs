@@ -21,9 +21,8 @@ impl MSG_MOVE_WORLDPORT_ACK {
 }
 
 impl ClientMessage for MSG_MOVE_WORLDPORT_ACK {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(0);
-        Ok(w)
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        Ok(())
     }
     const OPCODE: u16 = 0x00dc;
 
@@ -78,9 +77,8 @@ impl ClientMessage for MSG_MOVE_WORLDPORT_ACK {
 }
 
 impl ServerMessage for MSG_MOVE_WORLDPORT_ACK {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(0);
-        Ok(w)
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        Ok(())
     }
     const OPCODE: u16 = 0x00dc;
 

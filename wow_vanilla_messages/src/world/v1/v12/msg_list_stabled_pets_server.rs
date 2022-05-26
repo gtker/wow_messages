@@ -38,8 +38,7 @@ impl MSG_LIST_STABLED_PETS_Server {
 }
 
 impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
@@ -54,7 +53,7 @@ impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
             w.write_all(&(i.as_bytes()?))?;
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x026f;
 

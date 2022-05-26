@@ -21,9 +21,8 @@ impl CMSG_GUILD_DISBAND {
 }
 
 impl ClientMessage for CMSG_GUILD_DISBAND {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(0);
-        Ok(w)
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        Ok(())
     }
     const OPCODE: u16 = 0x008f;
 

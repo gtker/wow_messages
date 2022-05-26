@@ -30,15 +30,14 @@ impl CMSG_RESURRECT_RESPONSE {
 }
 
 impl ClientMessage for CMSG_RESURRECT_RESPONSE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(9);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // status: u8
         w.write_all(&self.status.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x015c;
 

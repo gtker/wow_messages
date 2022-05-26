@@ -34,8 +34,7 @@ impl CMSG_SELL_ITEM {
 }
 
 impl ClientMessage for CMSG_SELL_ITEM {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(17);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor_guid: Guid
         w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
 
@@ -45,7 +44,7 @@ impl ClientMessage for CMSG_SELL_ITEM {
         // amount: u8
         w.write_all(&self.amount.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01a0;
 

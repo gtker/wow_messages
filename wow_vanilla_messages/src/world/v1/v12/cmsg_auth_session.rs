@@ -53,8 +53,7 @@ impl CMSG_AUTH_SESSION {
 }
 
 impl ClientMessage for CMSG_AUTH_SESSION {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // build: u32
         w.write_all(&self.build.to_le_bytes())?;
 
@@ -82,7 +81,7 @@ impl ClientMessage for CMSG_AUTH_SESSION {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01ed;
 

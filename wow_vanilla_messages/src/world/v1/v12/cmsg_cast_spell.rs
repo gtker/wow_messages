@@ -28,15 +28,14 @@ impl CMSG_CAST_SPELL {
 }
 
 impl ClientMessage for CMSG_CAST_SPELL {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 
         // targets: SpellCastTargets
         w.write_all(&self.targets.as_bytes()?)?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x012e;
 

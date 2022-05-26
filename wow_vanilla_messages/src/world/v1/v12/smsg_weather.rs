@@ -39,8 +39,7 @@ impl SMSG_WEATHER {
 }
 
 impl ServerMessage for SMSG_WEATHER {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(13);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // weather_type: WeatherType
         w.write_all(&(self.weather_type.as_int() as u32).to_le_bytes())?;
 
@@ -53,7 +52,7 @@ impl ServerMessage for SMSG_WEATHER {
         // change: WeatherChangeType
         w.write_all(&(self.change.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02f4;
 

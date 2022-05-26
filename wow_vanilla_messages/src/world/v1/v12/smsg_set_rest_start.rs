@@ -25,12 +25,11 @@ impl SMSG_SET_REST_START {
 }
 
 impl ServerMessage for SMSG_SET_REST_START {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x021e;
 

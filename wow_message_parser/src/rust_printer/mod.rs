@@ -151,7 +151,7 @@ impl Writer {
             type_name.as_ref()
         ));
 
-        self.write_as_bytes_trait(write_function, sizes);
+        self.write_as_bytes_trait(write_function);
 
         self.wln(format!("const OPCODE: u16 = {:#06x};", opcode));
 
@@ -295,29 +295,12 @@ impl Writer {
         ));
     }
 
-    pub fn write_as_bytes_trait(
-        &mut self,
-        write_function: impl Fn(&mut Self, ImplType),
-        sizes: Option<Sizes>,
-    ) {
-        self.open_curly("fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>");
-
-        if let Some(sizes) = sizes {
-            if sizes.is_constant() {
-                self.wln(format!(
-                    "let mut w = Vec::with_capacity({});",
-                    sizes.maximum()
-                ));
-            } else {
-                self.wln("let mut w = Vec::with_capacity(self.size());");
-            }
-        } else {
-            self.wln("let mut w = Vec::with_capacity(8000);");
-        }
+    pub fn write_as_bytes_trait(&mut self, write_function: impl Fn(&mut Self, ImplType)) {
+        self.open_curly("fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>");
 
         write_function(self, ImplType::Std);
 
-        self.wln("Ok(w)");
+        self.wln("Ok(())");
 
         self.closing_curly();
     }

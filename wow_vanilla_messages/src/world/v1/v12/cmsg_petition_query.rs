@@ -30,15 +30,14 @@ impl CMSG_PETITION_QUERY {
 }
 
 impl ClientMessage for CMSG_PETITION_QUERY {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(12);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_guid: u32
         w.write_all(&self.guild_guid.to_le_bytes())?;
 
         // petition_guid: Guid
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01c6;
 

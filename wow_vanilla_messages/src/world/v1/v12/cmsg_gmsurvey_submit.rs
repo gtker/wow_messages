@@ -36,8 +36,7 @@ impl CMSG_GMSURVEY_SUBMIT {
 }
 
 impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // survey_id: u32
         w.write_all(&self.survey_id.to_le_bytes())?;
 
@@ -51,7 +50,7 @@ impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x032a;
 

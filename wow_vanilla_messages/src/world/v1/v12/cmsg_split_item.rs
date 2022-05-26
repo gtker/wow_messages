@@ -41,8 +41,7 @@ impl CMSG_SPLIT_ITEM {
 }
 
 impl ClientMessage for CMSG_SPLIT_ITEM {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(5);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // source_bag: u8
         w.write_all(&self.source_bag.to_le_bytes())?;
 
@@ -58,7 +57,7 @@ impl ClientMessage for CMSG_SPLIT_ITEM {
         // amount: u8
         w.write_all(&self.amount.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x010e;
 

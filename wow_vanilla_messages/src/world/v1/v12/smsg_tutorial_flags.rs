@@ -53,8 +53,7 @@ impl SMSG_TUTORIAL_FLAGS {
 }
 
 impl ServerMessage for SMSG_TUTORIAL_FLAGS {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(32);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // tutorial_data0: u32
         w.write_all(&self.tutorial_data0.to_le_bytes())?;
 
@@ -79,7 +78,7 @@ impl ServerMessage for SMSG_TUTORIAL_FLAGS {
         // tutorial_data7: u32
         w.write_all(&self.tutorial_data7.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x00fd;
 

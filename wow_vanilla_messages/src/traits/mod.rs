@@ -7,28 +7,20 @@ const SERVER_HEADER_LENGTH: u16 = 4;
 const CLIENT_OPCODE_LENGTH: u16 = 4;
 const CLIENT_HEADER_LENGTH: u16 = 6;
 
-fn get_unencrypted_server(opcode: u16, size: u16, mut bytes: Vec<u8>) -> Vec<u8> {
+fn get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity((size + SERVER_HEADER_LENGTH) as usize);
 
     crate::util::write_u16_be(&mut v, size + SERVER_OPCODE_LENGTH).unwrap();
     crate::util::write_u16_le(&mut v, opcode).unwrap();
 
-    v.append(&mut bytes);
-
     v
 }
 
-fn get_encrypted_server(
-    opcode: u16,
-    size: u16,
-    mut bytes: Vec<u8>,
-    e: &mut impl Encrypter,
-) -> Vec<u8> {
+fn get_encrypted_server(opcode: u16, size: u16, e: &mut impl Encrypter) -> Vec<u8> {
     let mut v = Vec::with_capacity((size + SERVER_HEADER_LENGTH) as usize);
 
     v.extend_from_slice(&e.encrypt_server_header(size + SERVER_OPCODE_LENGTH, opcode));
 
-    v.append(&mut bytes);
     v
 }
 
@@ -39,15 +31,12 @@ pub trait ServerMessage: Sized {
 
     type Error;
 
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>;
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
-        let v = get_unencrypted_server(
-            Self::OPCODE,
-            self.size_without_size_or_opcode_fields(),
-            self.as_bytes()?,
-        );
+        let mut v = get_unencrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields());
+        self.as_bytes(&mut v);
 
         w.write_all(&v)
     }
@@ -58,12 +47,10 @@ pub trait ServerMessage: Sized {
         w: &mut W,
         e: &mut E,
     ) -> Result<(), std::io::Error> {
-        let v = get_encrypted_server(
-            Self::OPCODE,
-            self.size_without_size_or_opcode_fields(),
-            self.as_bytes()?,
-            e,
-        );
+        let mut v =
+            get_encrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
+
+        self.as_bytes(&mut v);
 
         w.write_all(&v)
     }
@@ -80,11 +67,9 @@ pub trait ServerMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let v = get_unencrypted_server(
-                Self::OPCODE,
-                self.size_without_size_or_opcode_fields(),
-                self.as_bytes()?,
-            );
+            let mut v =
+                get_unencrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields());
+            self.as_bytes(&mut v);
 
             w.write_all(&v).await
         })
@@ -105,12 +90,9 @@ pub trait ServerMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let v = get_encrypted_server(
-                Self::OPCODE,
-                self.size_without_size_or_opcode_fields(),
-                self.as_bytes()?,
-                e,
-            );
+            let mut v =
+                get_encrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
+            self.as_bytes(&mut v);
 
             w.write_all(&v).await
         })
@@ -128,11 +110,9 @@ pub trait ServerMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let v = get_unencrypted_server(
-                Self::OPCODE,
-                self.size_without_size_or_opcode_fields(),
-                self.as_bytes()?,
-            );
+            let mut v =
+                get_unencrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields());
+            self.as_bytes(&mut v);
 
             w.write_all(&v).await
         })
@@ -153,12 +133,9 @@ pub trait ServerMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let v = get_encrypted_server(
-                Self::OPCODE,
-                self.size_without_size_or_opcode_fields(),
-                self.as_bytes()?,
-                e,
-            );
+            let mut v =
+                get_encrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
+            self.as_bytes(&mut v);
 
             w.write_all(&v).await
         })
@@ -195,15 +172,12 @@ pub trait ClientMessage: Sized {
 
     type Error;
 
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>;
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
-        let v = get_unencrypted_client(
-            Self::OPCODE,
-            self.size_without_size_or_opcode_fields(),
-            self.as_bytes()?,
-        );
+        let mut v = get_unencrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields());
+        self.as_bytes(&mut v);
 
         w.write_all(&v)
     }
@@ -214,12 +188,9 @@ pub trait ClientMessage: Sized {
         w: &mut W,
         e: &mut E,
     ) -> Result<(), std::io::Error> {
-        let v = get_encrypted_client(
-            Self::OPCODE,
-            self.size_without_size_or_opcode_fields(),
-            self.as_bytes()?,
-            e,
-        );
+        let mut v =
+            get_encrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
+        self.as_bytes(&mut v);
 
         w.write_all(&v)
     }
@@ -236,11 +207,9 @@ pub trait ClientMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let v = get_unencrypted_client(
-                Self::OPCODE,
-                self.size_without_size_or_opcode_fields(),
-                self.as_bytes()?,
-            );
+            let mut v =
+                get_unencrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields());
+            self.as_bytes(&mut v);
 
             w.write_all(&v).await
         })
@@ -261,12 +230,9 @@ pub trait ClientMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let v = get_encrypted_client(
-                Self::OPCODE,
-                self.size_without_size_or_opcode_fields(),
-                self.as_bytes()?,
-                e,
-            );
+            let mut v =
+                get_encrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
+            self.as_bytes(&mut v);
 
             w.write_all(&v).await
         })
@@ -284,11 +250,9 @@ pub trait ClientMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let v = get_unencrypted_client(
-                Self::OPCODE,
-                self.size_without_size_or_opcode_fields(),
-                self.as_bytes()?,
-            );
+            let mut v =
+                get_unencrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields());
+            self.as_bytes(&mut v);
 
             w.write_all(&v).await
         })
@@ -309,12 +273,9 @@ pub trait ClientMessage: Sized {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let v = get_encrypted_client(
-                Self::OPCODE,
-                self.size_without_size_or_opcode_fields(),
-                self.as_bytes()?,
-                e,
-            );
+            let mut v =
+                get_encrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
+            self.as_bytes(&mut v);
 
             w.write_all(&v).await
         })
@@ -344,27 +305,19 @@ pub trait ClientMessage: Sized {
         Self: 'async_trait;
 }
 
-fn get_unencrypted_client(opcode: u16, size: u16, mut bytes: Vec<u8>) -> Vec<u8> {
+fn get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity((size + CLIENT_HEADER_LENGTH) as usize);
 
     crate::util::write_u16_be(&mut v, size + CLIENT_OPCODE_LENGTH).unwrap();
     crate::util::write_u32_le(&mut v, opcode as u32).unwrap();
 
-    v.append(&mut bytes);
-
     v
 }
 
-fn get_encrypted_client(
-    opcode: u16,
-    size: u16,
-    mut bytes: Vec<u8>,
-    e: &mut impl Encrypter,
-) -> Vec<u8> {
+fn get_encrypted_client(opcode: u16, size: u16, e: &mut impl Encrypter) -> Vec<u8> {
     let mut v = Vec::with_capacity((size + CLIENT_HEADER_LENGTH) as usize);
 
     v.extend_from_slice(&e.encrypt_client_header(size + CLIENT_OPCODE_LENGTH, opcode as u32));
 
-    v.append(&mut bytes);
     v
 }

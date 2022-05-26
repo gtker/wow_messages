@@ -30,15 +30,14 @@ impl SMSG_QUESTGIVER_QUEST_FAILED {
 }
 
 impl ServerMessage for SMSG_QUESTGIVER_QUEST_FAILED {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 
         // reason: QuestFailedReason
         w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0192;
 

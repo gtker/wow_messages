@@ -59,8 +59,7 @@ impl SMSG_GROUP_LIST {
 }
 
 impl ServerMessage for SMSG_GROUP_LIST {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // group_type: GroupType
         w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
 
@@ -91,7 +90,7 @@ impl ServerMessage for SMSG_GROUP_LIST {
 
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x007d;
 

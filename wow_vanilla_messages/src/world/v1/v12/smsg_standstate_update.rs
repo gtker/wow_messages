@@ -26,12 +26,11 @@ impl SMSG_STANDSTATE_UPDATE {
 }
 
 impl ServerMessage for SMSG_STANDSTATE_UPDATE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(1);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // state: UnitStandState
         w.write_all(&(self.state.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x029d;
 

@@ -39,8 +39,7 @@ impl SMSG_PROCRESIST {
 }
 
 impl ServerMessage for SMSG_PROCRESIST {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(21);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -53,7 +52,7 @@ impl ServerMessage for SMSG_PROCRESIST {
         // log_format: LogFormat
         w.write_all(&(self.log_format.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0260;
 

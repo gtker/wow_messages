@@ -26,12 +26,11 @@ impl CMSG_BATTLEFIELD_LIST {
 }
 
 impl ClientMessage for CMSG_BATTLEFIELD_LIST {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x023c;
 

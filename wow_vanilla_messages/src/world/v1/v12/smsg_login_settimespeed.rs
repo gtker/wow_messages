@@ -29,15 +29,14 @@ impl SMSG_LOGIN_SETTIMESPEED {
 }
 
 impl ServerMessage for SMSG_LOGIN_SETTIMESPEED {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // secs_to_time_bit_field: u32
         w.write_all(&self.secs_to_time_bit_field.to_le_bytes())?;
 
         // game_speed: f32
         w.write_all(&self.game_speed.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0042;
 

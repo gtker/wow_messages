@@ -46,8 +46,7 @@ impl CMSG_WORLD_TELEPORT {
 }
 
 impl ClientMessage for CMSG_WORLD_TELEPORT {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(28);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // time_in_msec: u64
         w.write_all(&self.time_in_msec.to_le_bytes())?;
 
@@ -66,7 +65,7 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0008;
 

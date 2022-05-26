@@ -34,8 +34,7 @@ impl SMSG_SUMMON_REQUEST {
 }
 
 impl ServerMessage for SMSG_SUMMON_REQUEST {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(16);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // summoner_guid: Guid
         w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
 
@@ -45,7 +44,7 @@ impl ServerMessage for SMSG_SUMMON_REQUEST {
         // auto_decline_time_in_msecs: u32
         w.write_all(&self.auto_decline_time_in_msecs.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02ab;
 

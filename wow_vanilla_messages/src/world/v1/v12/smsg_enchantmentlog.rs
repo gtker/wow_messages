@@ -42,8 +42,7 @@ impl SMSG_ENCHANTMENTLOG {
 }
 
 impl ServerMessage for SMSG_ENCHANTMENTLOG {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(25);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
@@ -59,7 +58,7 @@ impl ServerMessage for SMSG_ENCHANTMENTLOG {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01d7;
 

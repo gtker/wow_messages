@@ -35,8 +35,7 @@ impl SMSG_PVP_CREDIT {
 }
 
 impl ServerMessage for SMSG_PVP_CREDIT {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(13);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // honor_points: u32
         w.write_all(&self.honor_points.to_le_bytes())?;
 
@@ -46,7 +45,7 @@ impl ServerMessage for SMSG_PVP_CREDIT {
         // rank: PvpRank
         w.write_all(&(self.rank.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x028c;
 

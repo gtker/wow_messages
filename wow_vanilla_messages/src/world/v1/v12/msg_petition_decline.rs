@@ -26,12 +26,11 @@ impl MSG_PETITION_DECLINE {
 }
 
 impl ClientMessage for MSG_PETITION_DECLINE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition: Guid
         w.write_all(&self.petition.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01c2;
 
@@ -98,12 +97,11 @@ impl ClientMessage for MSG_PETITION_DECLINE {
 }
 
 impl ServerMessage for MSG_PETITION_DECLINE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition: Guid
         w.write_all(&self.petition.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01c2;
 

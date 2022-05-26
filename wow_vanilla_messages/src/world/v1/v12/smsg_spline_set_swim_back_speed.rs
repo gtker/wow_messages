@@ -28,15 +28,14 @@ impl SMSG_SPLINE_SET_SWIM_BACK_SPEED {
 }
 
 impl ServerMessage for SMSG_SPLINE_SET_SWIM_BACK_SPEED {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 
         // speed: f32
         w.write_all(&self.speed.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0302;
 

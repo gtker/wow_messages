@@ -25,12 +25,11 @@ impl CMSG_QUESTLOG_REMOVE_QUEST {
 }
 
 impl ClientMessage for CMSG_QUESTLOG_REMOVE_QUEST {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(1);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0194;
 

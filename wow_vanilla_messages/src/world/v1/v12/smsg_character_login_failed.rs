@@ -26,12 +26,11 @@ impl SMSG_CHARACTER_LOGIN_FAILED {
 }
 
 impl ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: WorldResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0041;
 

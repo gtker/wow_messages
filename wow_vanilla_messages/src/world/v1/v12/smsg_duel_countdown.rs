@@ -25,12 +25,11 @@ impl SMSG_DUEL_COUNTDOWN {
 }
 
 impl ServerMessage for SMSG_DUEL_COUNTDOWN {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // time_in_seconds: u32
         w.write_all(&self.time_in_seconds.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02b7;
 

@@ -29,15 +29,14 @@ impl SMSG_PLAYED_TIME {
 }
 
 impl ServerMessage for SMSG_PLAYED_TIME {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // total_played_time: u32
         w.write_all(&self.total_played_time.to_le_bytes())?;
 
         // level_played_time: u32
         w.write_all(&self.level_played_time.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01cd;
 

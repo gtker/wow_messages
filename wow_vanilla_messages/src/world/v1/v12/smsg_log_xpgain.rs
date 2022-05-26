@@ -48,8 +48,7 @@ impl SMSG_LOG_XPGAIN {
 }
 
 impl ServerMessage for SMSG_LOG_XPGAIN {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
@@ -74,7 +73,7 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
             }
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01d0;
 

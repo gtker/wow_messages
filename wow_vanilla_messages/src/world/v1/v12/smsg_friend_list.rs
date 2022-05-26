@@ -29,8 +29,7 @@ impl SMSG_FRIEND_LIST {
 }
 
 impl ServerMessage for SMSG_FRIEND_LIST {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_friends: u8
         w.write_all(&(self.friends.len() as u8).to_le_bytes())?;
 
@@ -39,7 +38,7 @@ impl ServerMessage for SMSG_FRIEND_LIST {
             w.write_all(&(i.as_bytes()?))?;
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0067;
 

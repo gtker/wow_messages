@@ -31,15 +31,14 @@ impl MSG_QUEST_PUSH_RESULT {
 }
 
 impl ClientMessage for MSG_QUEST_PUSH_RESULT {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(9);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // message: QuestPartyMessage
         w.write_all(&(self.message.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0276;
 
@@ -118,15 +117,14 @@ impl ClientMessage for MSG_QUEST_PUSH_RESULT {
 }
 
 impl ServerMessage for MSG_QUEST_PUSH_RESULT {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(9);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // message: QuestPartyMessage
         w.write_all(&(self.message.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0276;
 

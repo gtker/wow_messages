@@ -25,12 +25,11 @@ impl MSG_QUERY_NEXT_MAIL_TIME_Server {
 }
 
 impl ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unread_mails: f32
         w.write_all(&self.unread_mails.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0284;
 

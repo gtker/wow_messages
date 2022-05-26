@@ -31,8 +31,7 @@ impl MSG_RAID_READY_CHECK_Server {
 }
 
 impl ServerMessage for MSG_RAID_READY_CHECK_Server {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional state_check
         if let Some(v) = &self.state_check {
             // guid: Guid
@@ -43,7 +42,7 @@ impl ServerMessage for MSG_RAID_READY_CHECK_Server {
 
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0322;
 

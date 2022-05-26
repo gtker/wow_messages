@@ -29,15 +29,14 @@ impl CMSG_PING {
 }
 
 impl ClientMessage for CMSG_PING {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sequence_id: u32
         w.write_all(&self.sequence_id.to_le_bytes())?;
 
         // round_time_in_ms: u32
         w.write_all(&self.round_time_in_ms.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01dc;
 

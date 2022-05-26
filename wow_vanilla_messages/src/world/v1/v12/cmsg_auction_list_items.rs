@@ -62,8 +62,7 @@ impl CMSG_AUCTION_LIST_ITEMS {
 }
 
 impl ClientMessage for CMSG_AUCTION_LIST_ITEMS {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid
         w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
 
@@ -96,7 +95,7 @@ impl ClientMessage for CMSG_AUCTION_LIST_ITEMS {
         // usable: u8
         w.write_all(&self.usable.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0258;
 

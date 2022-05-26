@@ -46,8 +46,7 @@ impl MSG_SAVE_GUILD_EMBLEM_Client {
 }
 
 impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(28);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor: Guid
         w.write_all(&self.vendor.guid().to_le_bytes())?;
 
@@ -66,7 +65,7 @@ impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {
         // background_color: u32
         w.write_all(&self.background_color.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01f1;
 

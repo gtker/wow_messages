@@ -30,15 +30,14 @@ impl SMSG_PET_UNLEARN_CONFIRM {
 }
 
 impl ServerMessage for SMSG_PET_UNLEARN_CONFIRM {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(12);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_guid: Guid
         w.write_all(&self.pet_guid.guid().to_le_bytes())?;
 
         // talent_reset_cost: u32
         w.write_all(&self.talent_reset_cost.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02f1;
 

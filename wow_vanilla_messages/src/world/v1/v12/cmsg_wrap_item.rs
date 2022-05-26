@@ -37,8 +37,7 @@ impl CMSG_WRAP_ITEM {
 }
 
 impl ClientMessage for CMSG_WRAP_ITEM {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // gift_bag_index: u8
         w.write_all(&self.gift_bag_index.to_le_bytes())?;
 
@@ -51,7 +50,7 @@ impl ClientMessage for CMSG_WRAP_ITEM {
         // item_slot: u8
         w.write_all(&self.item_slot.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01d3;
 

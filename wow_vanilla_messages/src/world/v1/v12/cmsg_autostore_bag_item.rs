@@ -33,8 +33,7 @@ impl CMSG_AUTOSTORE_BAG_ITEM {
 }
 
 impl ClientMessage for CMSG_AUTOSTORE_BAG_ITEM {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(3);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // source_bag: u8
         w.write_all(&self.source_bag.to_le_bytes())?;
 
@@ -44,7 +43,7 @@ impl ClientMessage for CMSG_AUTOSTORE_BAG_ITEM {
         // destination_bag: u8
         w.write_all(&self.destination_bag.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x010b;
 

@@ -43,8 +43,7 @@ impl SMSG_BINDPOINTUPDATE {
 }
 
 impl ServerMessage for SMSG_BINDPOINTUPDATE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(20);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes())?;
 
@@ -60,7 +59,7 @@ impl ServerMessage for SMSG_BINDPOINTUPDATE {
         // area: Area
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0155;
 

@@ -26,12 +26,11 @@ impl CMSG_PET_ABANDON {
 }
 
 impl ClientMessage for CMSG_PET_ABANDON {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_guid: Guid
         w.write_all(&self.pet_guid.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0176;
 

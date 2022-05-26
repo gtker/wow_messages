@@ -21,9 +21,8 @@ impl SMSG_FEIGN_DEATH_RESISTED {
 }
 
 impl ServerMessage for SMSG_FEIGN_DEATH_RESISTED {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(0);
-        Ok(w)
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        Ok(())
     }
     const OPCODE: u16 = 0x02b4;
 

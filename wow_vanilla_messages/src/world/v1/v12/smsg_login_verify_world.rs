@@ -42,8 +42,7 @@ impl SMSG_LOGIN_VERIFY_WORLD {
 }
 
 impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(20);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
@@ -59,7 +58,7 @@ impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0236;
 

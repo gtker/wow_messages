@@ -29,8 +29,7 @@ impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_text_id: u32
         w.write_all(&self.item_text_id.to_le_bytes())?;
 
@@ -39,7 +38,7 @@ impl ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0244;
 

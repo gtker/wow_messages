@@ -30,15 +30,14 @@ impl SMSG_PARTYKILLLOG {
 }
 
 impl ServerMessage for SMSG_PARTYKILLLOG {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(16);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_with_killing_blow: Guid
         w.write_all(&self.player_with_killing_blow.guid().to_le_bytes())?;
 
         // victim: Guid
         w.write_all(&self.victim.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x01f5;
 

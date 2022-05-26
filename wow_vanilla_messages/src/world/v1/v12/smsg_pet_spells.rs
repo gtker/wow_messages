@@ -67,8 +67,7 @@ impl SMSG_PET_SPELLS {
 }
 
 impl ServerMessage for SMSG_PET_SPELLS {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet: Guid
         w.write_all(&self.pet.guid().to_le_bytes())?;
 
@@ -105,7 +104,7 @@ impl ServerMessage for SMSG_PET_SPELLS {
             w.write_all(&(i.as_bytes()?))?;
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0179;
 

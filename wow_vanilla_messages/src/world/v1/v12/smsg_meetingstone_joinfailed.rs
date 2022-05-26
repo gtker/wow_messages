@@ -26,12 +26,11 @@ impl SMSG_MEETINGSTONE_JOINFAILED {
 }
 
 impl ServerMessage for SMSG_MEETINGSTONE_JOINFAILED {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(1);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: MeetingStoneFailure
         w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02bb;
 

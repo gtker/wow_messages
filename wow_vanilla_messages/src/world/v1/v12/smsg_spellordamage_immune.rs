@@ -38,8 +38,7 @@ impl SMSG_SPELLORDAMAGE_IMMUNE {
 }
 
 impl ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(21);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster_guid: Guid
         w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 
@@ -52,7 +51,7 @@ impl ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0263;
 

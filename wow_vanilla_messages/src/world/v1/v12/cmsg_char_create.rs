@@ -64,8 +64,7 @@ impl CMSG_CHAR_CREATE {
 }
 
 impl ClientMessage for CMSG_CHAR_CREATE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator
@@ -98,7 +97,7 @@ impl ClientMessage for CMSG_CHAR_CREATE {
         // outfit_id: u8
         w.write_all(&self.outfit_id.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0036;
 

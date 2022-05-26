@@ -35,8 +35,7 @@ impl CMSG_LOOT_ROLL {
 }
 
 impl ClientMessage for CMSG_LOOT_ROLL {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(13);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_guid: Guid
         w.write_all(&self.item_guid.guid().to_le_bytes())?;
 
@@ -46,7 +45,7 @@ impl ClientMessage for CMSG_LOOT_ROLL {
         // vote: RollVote
         w.write_all(&(self.vote.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02a0;
 

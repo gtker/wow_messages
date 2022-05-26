@@ -34,8 +34,7 @@ impl SMSG_DEFENSE_MESSAGE {
 }
 
 impl ServerMessage for SMSG_DEFENSE_MESSAGE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
@@ -47,7 +46,7 @@ impl ServerMessage for SMSG_DEFENSE_MESSAGE {
         // Null terminator
         w.write_all(&[0])?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x033b;
 

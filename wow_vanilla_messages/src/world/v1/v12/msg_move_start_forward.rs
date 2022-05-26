@@ -24,12 +24,11 @@ impl MSG_MOVE_START_FORWARD {
 }
 
 impl ClientMessage for MSG_MOVE_START_FORWARD {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
         w.write_all(&self.info.as_bytes()?)?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x00b5;
 
@@ -96,12 +95,11 @@ impl ClientMessage for MSG_MOVE_START_FORWARD {
 }
 
 impl ServerMessage for MSG_MOVE_START_FORWARD {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
         w.write_all(&self.info.as_bytes()?)?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x00b5;
 

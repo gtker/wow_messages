@@ -33,8 +33,7 @@ impl SMSG_AUCTION_LIST_RESULT {
 }
 
 impl ServerMessage for SMSG_AUCTION_LIST_RESULT {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // count: u32
         w.write_all(&(self.auctions.len() as u32).to_le_bytes())?;
 
@@ -46,7 +45,7 @@ impl ServerMessage for SMSG_AUCTION_LIST_RESULT {
         // total_amount_of_auctions: u32
         w.write_all(&self.total_amount_of_auctions.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x025c;
 

@@ -24,12 +24,11 @@ impl CMSG_MOVE_FALL_RESET {
 }
 
 impl ClientMessage for CMSG_MOVE_FALL_RESET {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
         w.write_all(&self.info.as_bytes()?)?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x02ca;
 

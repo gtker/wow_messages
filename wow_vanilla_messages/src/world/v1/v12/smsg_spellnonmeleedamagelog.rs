@@ -69,8 +69,7 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
 }
 
 impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target: PackedGuid
         w.write_all(&self.target.packed_guid())?;
 
@@ -107,7 +106,7 @@ impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
         // extend_flag: u8
         w.write_all(&self.extend_flag.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0250;
 

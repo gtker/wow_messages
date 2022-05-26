@@ -92,8 +92,7 @@ impl MSG_RAID_TARGET_UPDATE_Client {
 }
 
 impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // index: RaidTargetIndex
         w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
 
@@ -164,7 +163,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS => {}
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0321;
 

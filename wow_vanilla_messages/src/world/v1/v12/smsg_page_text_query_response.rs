@@ -33,8 +33,7 @@ impl SMSG_PAGE_TEXT_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // page_id: u32
         w.write_all(&self.page_id.to_le_bytes())?;
 
@@ -46,7 +45,7 @@ impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {
         // next_page_id: u32
         w.write_all(&self.next_page_id.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x005b;
 

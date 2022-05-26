@@ -25,12 +25,11 @@ impl CMSG_PAGE_TEXT_QUERY {
 }
 
 impl ClientMessage for CMSG_PAGE_TEXT_QUERY {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(4);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // page_id: u32
         w.write_all(&self.page_id.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x005a;
 

@@ -48,8 +48,7 @@ impl SMSG_TRADE_STATUS_EXTENDED {
 }
 
 impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(444);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // self_player: u8
         w.write_all(&self.self_player.to_le_bytes())?;
 
@@ -70,7 +69,7 @@ impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
             w.write_all(&(i.as_bytes()?))?;
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0121;
 

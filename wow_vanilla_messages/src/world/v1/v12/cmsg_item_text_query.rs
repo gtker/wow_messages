@@ -33,8 +33,7 @@ impl CMSG_ITEM_TEXT_QUERY {
 }
 
 impl ClientMessage for CMSG_ITEM_TEXT_QUERY {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(12);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_text_id: u32
         w.write_all(&self.item_text_id.to_le_bytes())?;
 
@@ -44,7 +43,7 @@ impl ClientMessage for CMSG_ITEM_TEXT_QUERY {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0243;
 

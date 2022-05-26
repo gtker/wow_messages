@@ -37,8 +37,7 @@ impl SMSG_PET_DISMISS_SOUND {
 }
 
 impl ServerMessage for SMSG_PET_DISMISS_SOUND {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(16);
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sound_id: u32
         w.write_all(&self.sound_id.to_le_bytes())?;
 
@@ -51,7 +50,7 @@ impl ServerMessage for SMSG_PET_DISMISS_SOUND {
         // position_z: f32
         w.write_all(&self.position_z.to_le_bytes())?;
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0325;
 

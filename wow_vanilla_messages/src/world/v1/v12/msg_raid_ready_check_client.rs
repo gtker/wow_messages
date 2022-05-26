@@ -27,8 +27,7 @@ impl MSG_RAID_READY_CHECK_Client {
 }
 
 impl ClientMessage for MSG_RAID_READY_CHECK_Client {
-    fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(self.size());
+    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional answer
         if let Some(v) = &self.answer {
             // state: u8
@@ -36,7 +35,7 @@ impl ClientMessage for MSG_RAID_READY_CHECK_Client {
 
         }
 
-        Ok(w)
+        Ok(())
     }
     const OPCODE: u16 = 0x0322;
 
