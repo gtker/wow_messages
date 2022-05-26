@@ -61,6 +61,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 e.name(),
                 error_ty,
                 opcode,
+                e.container_type(),
                 |s, it| {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
@@ -100,25 +101,6 @@ pub fn print_constant(s: &mut Writer, m: &StructMember) {
 }
 
 fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
-    let empty_impl = |s: &mut Writer, t| {
-        s.wln(format!("impl {} for {} {{}}", t, e.name()));
-        s.newline();
-    };
-
-    match e.container_type() {
-        ContainerType::CMsg(_) => {
-            empty_impl(s, CLIENT_MESSAGE_TRAIT_NAME);
-        }
-        ContainerType::SMsg(_) => {
-            empty_impl(s, SERVER_MESSAGE_TRAIT_NAME);
-        }
-        ContainerType::Msg(_) => {
-            empty_impl(s, CLIENT_MESSAGE_TRAIT_NAME);
-            empty_impl(s, SERVER_MESSAGE_TRAIT_NAME);
-        }
-        _ => {}
-    }
-
     if e.any_fields_have_constant_value() {
         s.bodyn(format!("impl {name}", name = e.name()), |s| {
             for m in e.fields() {

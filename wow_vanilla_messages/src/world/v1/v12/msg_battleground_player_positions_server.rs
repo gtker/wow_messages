@@ -13,12 +13,12 @@ pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub flag_carriers: Vec<BattlegroundPlayerPosition>,
 }
 
-impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
-
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub const AMOUNT_OF_CARRIERS_VALUE: u32 = 0x00;
 
 }
+
+impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {

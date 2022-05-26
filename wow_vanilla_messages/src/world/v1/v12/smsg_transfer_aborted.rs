@@ -16,12 +16,12 @@ pub struct SMSG_TRANSFER_ABORTED {
     pub reason: TransferAbortReason,
 }
 
-impl ServerMessage for SMSG_TRANSFER_ABORTED {}
-
 impl SMSG_TRANSFER_ABORTED {
     pub const PADDING_VALUE: u8 = 0x00;
 
 }
+
+impl ServerMessage for SMSG_TRANSFER_ABORTED {}
 
 impl SMSG_TRANSFER_ABORTED {
     pub(crate) fn as_bytes(&self) -> Result<[u8; 6], std::io::Error> {

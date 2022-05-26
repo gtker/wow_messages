@@ -17,6 +17,7 @@ mod structs;
 mod update_mask;
 
 use crate::container::Sizes;
+use crate::ContainerType;
 pub use update_mask::*;
 
 #[derive(Debug)]
@@ -142,10 +143,46 @@ impl Writer {
         type_name: impl AsRef<str>,
         error_name: impl AsRef<str>,
         opcode: u16,
+        container_type: ContainerType,
         read_function: impl Fn(&mut Self, ImplType),
         write_function: impl Fn(&mut Self, ImplType),
         sizes: Option<Sizes>,
     ) {
+        match container_type {
+            ContainerType::CMsg(_) => {
+                self.wln(format!(
+                    "impl {} for {} {{}}",
+                    CLIENT_MESSAGE_TRAIT_NAME,
+                    type_name.as_ref()
+                ));
+                self.newline();
+            }
+            ContainerType::SMsg(_) => {
+                self.wln(format!(
+                    "impl {} for {} {{}}",
+                    SERVER_MESSAGE_TRAIT_NAME,
+                    type_name.as_ref()
+                ));
+                self.newline();
+            }
+            ContainerType::Msg(_) => {
+                self.wln(format!(
+                    "impl {} for {} {{}}",
+                    CLIENT_MESSAGE_TRAIT_NAME,
+                    type_name.as_ref()
+                ));
+                self.newline();
+
+                self.wln(format!(
+                    "impl {} for {} {{}}",
+                    SERVER_MESSAGE_TRAIT_NAME,
+                    type_name.as_ref()
+                ));
+                self.newline();
+            }
+            _ => unreachable!(),
+        }
+
         self.write_as_bytes(&type_name, write_function, sizes);
 
         self.open_curly(format!(
