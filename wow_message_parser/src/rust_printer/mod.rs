@@ -231,9 +231,6 @@ impl Writer {
     }
 
     fn print_read_decl(&mut self, it: ImplType, world_text: &str) {
-        if it.is_async() {
-            self.wln(it.cfg());
-        }
         if !it.is_async() {
             let body_size = if world_text == "_body" {
                 ", body_size: u32"
@@ -251,6 +248,7 @@ impl Writer {
             return;
         }
 
+        self.wln(it.cfg());
         self.wln(format!(
             "fn {}read{}<'life0, 'async_trait, R>(",
             it.prefix(),

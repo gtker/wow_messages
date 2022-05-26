@@ -7,7 +7,6 @@ use crate::Guid;
 #[cfg(feature = "async-std")]
 use async_std::io::ReadExt;
 use std::io;
-#[cfg(feature = "sync")]
 use std::io::Read;
 use std::io::Write;
 #[cfg(feature = "tokio")]
