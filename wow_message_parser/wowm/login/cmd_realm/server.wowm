@@ -1,11 +1,11 @@
 
-enum RealmType : u32 {
+enum RealmType : u8 {
     PLAYER_VS_ENVIRONMENT = 0;
     PLAYER_VS_PLAYER = 1;
     ROLEPLAYING = 6;
     ROLEPLAYING_PLAYER_VS_PLAYER = 8;
 } {
-    login_logon_versions = "2 3";
+    login_logon_versions = "2 3 8";
 }
 
 flag RealmFlag : u8 {
@@ -51,7 +51,7 @@ enum RealmCategory : u8 {
 }
 
 struct Realm {
-    RealmType realm_type;
+    (u32)RealmType realm_type;
     RealmFlag flag;
     CString name;
     CString address;
@@ -136,7 +136,7 @@ test CMD_REALM_LIST_Server {
 }
 
 struct Realm {
-    u8 realm_type {
+    RealmType realm_type {
         comment = "vmangos: this is the second column in Cfg_Configs.dbc";
     }
     u8 locked;
@@ -167,7 +167,7 @@ slogin CMD_REALM_LIST_Server = 0x10 {
 test CMD_REALM_LIST_Server {
     realms = [
         {
-            realm_type = 0;  
+            realm_type = PLAYER_VS_ENVIRONMENT;  
             locked = 0;
             flag = INVALID | OFFLINE;
             name = "A";
@@ -200,7 +200,7 @@ test CMD_REALM_LIST_Server {
 test CMD_REALM_LIST_Server {
     realms = [
         {
-            realm_type = 0;  
+            realm_type = PLAYER_VS_ENVIRONMENT;  
             locked = 0;
             flag = SPECIFY_BUILD;
             name = "A";

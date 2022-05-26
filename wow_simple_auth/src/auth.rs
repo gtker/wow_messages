@@ -360,22 +360,25 @@ async fn print_version_8_realm_list(mut stream: TcpStream) {
     while let Ok(_) =
         tokio_read_expect_client_login_message::<CMD_REALM_LIST_Client, _>(&mut stream).await
     {
-        CMD_REALM_LIST_Server {
-            realms: vec![Realm {
-                realm_type: 0,
+        let mut realms = Vec::new();
+        for i in 0..9 {
+            realms.push(Realm {
+                realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                 locked: 0,
-                flag: RealmRealmFlag::empty(),
-                name: "Tester".to_string(),
-                address: "127.0.0.1:8085".to_string(),
+                flag: Default::default(),
+                name: i.to_string(),
+                address: "localhost:8085".to_string(),
                 population: Default::default(),
-                number_of_characters_on_realm: 0,
+                number_of_characters_on_realm: i,
                 category: RealmCategory::ONE,
-                realm_id: 0,
-            }],
+                realm_id: i,
+            })
         }
-        .tokio_write(&mut stream)
-        .await
-        .unwrap();
+
+        CMD_REALM_LIST_Server { realms }
+            .tokio_write(&mut stream)
+            .await
+            .unwrap();
         println!("Sent Version 8 Realm List");
     }
 }

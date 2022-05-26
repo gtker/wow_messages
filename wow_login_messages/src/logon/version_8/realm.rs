@@ -2,6 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::Population;
 use crate::logon::version_2::{RealmCategory, RealmCategoryError};
 use crate::logon::version_8::{RealmFlag};
+use crate::logon::version_2::{RealmType, RealmTypeError};
 use crate::logon::all::Version;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -11,7 +12,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Realm {
-    pub realm_type: u8,
+    pub realm_type: RealmType,
     pub locked: u8,
     pub flag: RealmRealmFlag,
     pub name: String,
@@ -25,8 +26,8 @@ pub struct Realm {
 impl Realm {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Vec::with_capacity(527);
-        // realm_type: u8
-        w.write_all(&self.realm_type.to_le_bytes())?;
+        // realm_type: RealmType
+        w.write_all(&(self.realm_type.as_int() as u8).to_le_bytes())?;
 
         // locked: u8
         w.write_all(&self.locked.to_le_bytes())?;
@@ -69,8 +70,8 @@ impl Realm {
 impl Realm {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, RealmError> {
-        // realm_type: u8
-        let realm_type = crate::util::read_u8_le(r)?;
+        // realm_type: RealmType
+        let realm_type: RealmType = crate::util::read_u8_le(r)?.try_into()?;
 
         // locked: u8
         let locked = crate::util::read_u8_le(r)?;
@@ -130,8 +131,8 @@ impl Realm {
 
     #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RealmError> {
-        // realm_type: u8
-        let realm_type = crate::util::tokio_read_u8_le(r).await?;
+        // realm_type: RealmType
+        let realm_type: RealmType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
         // locked: u8
         let locked = crate::util::tokio_read_u8_le(r).await?;
@@ -191,8 +192,8 @@ impl Realm {
 
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RealmError> {
-        // realm_type: u8
-        let realm_type = crate::util::astd_read_u8_le(r).await?;
+        // realm_type: RealmType
+        let realm_type: RealmType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
         // locked: u8
         let locked = crate::util::astd_read_u8_le(r).await?;
@@ -255,7 +256,7 @@ impl Realm {
 impl Realm {
     pub fn size(&self) -> usize {
         0
-        + 1 // realm_type: u8
+        + 1 // realm_type: RealmType
         + 1 // locked: u8
         + self.flag.size() // flag: RealmRealmFlag
         + self.name.len() + 1 // name: CString
@@ -272,6 +273,7 @@ pub enum RealmError {
     Io(std::io::Error),
     String(std::string::FromUtf8Error),
     RealmCategory(RealmCategoryError),
+    RealmType(RealmTypeError),
 }
 
 impl std::error::Error for RealmError {}
@@ -281,6 +283,7 @@ impl std::fmt::Display for RealmError {
             Self::Io(i) => i.fmt(f),
             Self::String(i) => i.fmt(f),
             Self::RealmCategory(i) => i.fmt(f),
+            Self::RealmType(i) => i.fmt(f),
         }
     }
 }
@@ -300,6 +303,12 @@ impl From<std::string::FromUtf8Error> for RealmError {
 impl From<RealmCategoryError> for RealmError {
     fn from(e: RealmCategoryError) -> Self {
         Self::RealmCategory(e)
+    }
+}
+
+impl From<RealmTypeError> for RealmError {
+    fn from(e: RealmTypeError) -> Self {
+        Self::RealmType(e)
     }
 }
 

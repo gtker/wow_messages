@@ -23,7 +23,7 @@ pub struct Realm {
 
 impl Realm {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(524);
+        let mut w = Vec::with_capacity(521);
         // realm_type: RealmType
         w.write_all(&(self.realm_type.as_int() as u32).to_le_bytes())?;
 
@@ -60,7 +60,7 @@ impl Realm {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, RealmError> {
         // realm_type: RealmType
-        let realm_type: RealmType = crate::util::read_u32_le(r)?.try_into()?;
+        let realm_type: RealmType = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::read_u8_le(r)?);
@@ -100,7 +100,7 @@ impl Realm {
     #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RealmError> {
         // realm_type: RealmType
-        let realm_type: RealmType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
+        let realm_type: RealmType = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::tokio_read_u8_le(r).await?);
@@ -140,7 +140,7 @@ impl Realm {
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RealmError> {
         // realm_type: RealmType
-        let realm_type: RealmType = crate::util::astd_read_u32_le(r).await?.try_into()?;
+        let realm_type: RealmType = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::astd_read_u8_le(r).await?);

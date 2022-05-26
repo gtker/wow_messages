@@ -91,7 +91,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 22, 0, // size: u16
 0, 0, 0, 0, // header_padding: u32
 1, 0, // number_of_realms: u16
-0, // [0].Realm.realm_type: u8
+0, // [0].Realm.realm_type: RealmType PLAYER_VS_ENVIRONMENT (0)
 0, // [1].Realm.locked: u8
 3, // [2].Realm.flag: RealmFlag  INVALID| OFFLINE (3)
 65, 0, // [3].Realm.name: CString
@@ -108,7 +108,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 27, 0, // size: u16
 0, 0, 0, 0, // header_padding: u32
 1, 0, // number_of_realms: u16
-0, // [0].Realm.realm_type: u8
+0, // [0].Realm.realm_type: RealmType PLAYER_VS_ENVIRONMENT (0)
 0, // [1].Realm.locked: u8
 4, // [2].Realm.flag: RealmFlag  SPECIFY_BUILD (4)
 65, 0, // [3].Realm.name: CString

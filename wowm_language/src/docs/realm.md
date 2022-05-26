@@ -29,7 +29,7 @@ struct Realm {
 ### Wowm Representation
 ```rust,ignore
 struct Realm {
-    u8 realm_type;
+    RealmType realm_type;
     u8 locked;
     RealmFlag flag;
     CString name;
@@ -46,9 +46,9 @@ struct Realm {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | realm_type |  | vmangos: this is the second column in Cfg_Configs.dbc |
-| 0x01 | 1 / - | u8 | locked |  |  |
-| 0x02 | ? / - | [RealmFlag](realmflag.md) | flag |  |  |
+| 0x00 | ? / - | [RealmType](realmtype.md) | realm_type |  | vmangos: this is the second column in Cfg_Configs.dbc |
+| - | 1 / - | u8 | locked |  |  |
+| - | ? / - | [RealmFlag](realmflag.md) | flag |  |  |
 | - | - / - | CString | name |  |  |
 | - | - / - | CString | address |  |  |
 | - | ? / - | [Population](population.md) | population |  |  |

@@ -13,7 +13,7 @@ pub enum RealmType {
 }
 
 impl RealmType {
-    pub(crate) const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::PLAYER_VS_ENVIRONMENT => 0x0,
             Self::PLAYER_VS_PLAYER => 0x1,
@@ -41,9 +41,9 @@ impl std::fmt::Display for RealmType {
     }
 }
 
-impl TryFrom<u32> for RealmType {
+impl TryFrom<u8> for RealmType {
     type Error = RealmTypeError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::PLAYER_VS_ENVIRONMENT),
             1 => Ok(Self::PLAYER_VS_PLAYER),
@@ -56,11 +56,11 @@ impl TryFrom<u32> for RealmType {
 
 #[derive(Debug)]
 pub struct RealmTypeError {
-    pub value: u32,
+    pub value: u8,
 }
 
 impl RealmTypeError {
-    pub const fn new(value: u32) -> Self {
+    pub const fn new(value: u8) -> Self {
         Self { value }
     }
 }

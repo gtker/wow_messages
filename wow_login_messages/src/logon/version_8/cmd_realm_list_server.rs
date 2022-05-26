@@ -251,6 +251,7 @@ mod test {
     use crate::logon::version_8::Realm;
     use crate::logon::version_2::RealmCategory;
     use crate::logon::version_8::RealmFlag;
+    use crate::logon::version_2::RealmType;
     use crate::logon::all::Version;
     use super::*;
     use super::super::*;
@@ -266,7 +267,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: 0x0,
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
                     flag: RealmRealmFlag::empty()
                         .set_INVALID()
@@ -309,7 +310,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: 0x0,
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
                     flag: RealmRealmFlag::empty()
                         .set_INVALID()
@@ -352,7 +353,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: 0x0,
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
                     flag: RealmRealmFlag::empty()
                         .set_INVALID()
@@ -395,7 +396,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: 0x0,
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
                     flag: RealmRealmFlag::empty()
                         .set_SPECIFY_BUILD(RealmRealmFlagSPECIFY_BUILD {
@@ -444,7 +445,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: 0x0,
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
                     flag: RealmRealmFlag::empty()
                         .set_SPECIFY_BUILD(RealmRealmFlagSPECIFY_BUILD {
@@ -493,7 +494,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: 0x0,
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
                     flag: RealmRealmFlag::empty()
                         .set_SPECIFY_BUILD(RealmRealmFlagSPECIFY_BUILD {

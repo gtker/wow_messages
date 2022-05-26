@@ -27,6 +27,8 @@ mod realm_category;
 pub use realm_category::*;
 mod realm_flag;
 pub use realm_flag::*;
+mod realm_type;
+pub use realm_type::*;
 mod security_flag;
 pub use security_flag::*;
 mod telemetry_key;

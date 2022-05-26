@@ -26217,8 +26217,7 @@
       ],
       "self_value": null,
       "integer_type": {
-        "type": "u32",
-        "endianness": "little"
+        "type": "u8"
       },
       "tags": {
         "version": {
@@ -26231,11 +26230,19 @@
             {
               "type": "specific",
               "version": 3
+            },
+            {
+              "type": "specific",
+              "version": 8
             }
           ]
         }
       },
       "objects_used_in": [
+        {
+          "name": "Realm",
+          "usage": "used_but_not_in_if"
+        },
         {
           "name": "Realm",
           "usage": "used_but_not_in_if"
@@ -43969,9 +43976,9 @@
                       {
                         "variable_name": "realm_type",
                         "verified_value": {
-                          "Number": {
+                          "Enum": {
                             "value": 0,
-                            "original_string": "0"
+                            "original_string": "PLAYER_VS_ENVIRONMENT"
                           }
                         },
                         "tags": {}
@@ -44113,9 +44120,9 @@
                       {
                         "variable_name": "realm_type",
                         "verified_value": {
-                          "Number": {
+                          "Enum": {
                             "value": 0,
-                            "original_string": "0"
+                            "original_string": "PLAYER_VS_ENVIRONMENT"
                           }
                         },
                         "tags": {}
@@ -68565,7 +68572,10 @@
             "member_type": {
               "Identifier": {
                 "s": "RealmType",
-                "upcast": null
+                "upcast": {
+                  "type": "u32",
+                  "endianness": "little"
+                }
               }
             },
             "constant_value": null,
@@ -68691,6 +68701,7 @@
       "only_has_io_error": false,
       "features": [
         "Struct",
+        "EnumUpcast",
         "SubObjects",
         "ComplexBuiltInTypes",
         "SimpleBuiltInTypes",
@@ -68708,8 +68719,9 @@
           "Definition": {
             "name": "realm_type",
             "member_type": {
-              "Integer": {
-                "type": "u8"
+              "Identifier": {
+                "s": "RealmType",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -68886,8 +68898,8 @@
       "only_has_io_error": false,
       "features": [
         "Struct",
-        "SimpleBuiltInTypes",
         "SubObjects",
+        "SimpleBuiltInTypes",
         "ComplexBuiltInTypes",
         "IfFlag",
         "LoginVersion"
