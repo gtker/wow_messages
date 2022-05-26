@@ -136,7 +136,9 @@ test CMD_REALM_LIST_Server {
 }
 
 struct Realm {
-    u8 realm_type;
+    u8 realm_type {
+        comment = "vmangos: this is the second column in Cfg_Configs.dbc";
+    }
     u8 locked;
     RealmFlag flag;
     CString name;

@@ -46,7 +46,7 @@ struct Realm {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | 1 / - | u8 | realm_type |  |  |
+| 0x00 | 1 / - | u8 | realm_type |  | vmangos: this is the second column in Cfg_Configs.dbc |
 | 0x01 | 1 / - | u8 | locked |  |  |
 | 0x02 | ? / - | [RealmFlag](realmflag.md) | flag |  |  |
 | - | - / - | CString | name |  |  |

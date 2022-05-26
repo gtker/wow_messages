@@ -44097,7 +44097,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_realm/server.wowm",
-            "start_position": 165
+            "start_position": 167
           }
         },
         {
@@ -44296,13 +44296,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_realm/server.wowm",
-            "start_position": 198
+            "start_position": 200
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_realm/server.wowm",
-        "start_position": 155
+        "start_position": 157
       },
       "only_has_io_error": false,
       "features": [
@@ -68715,7 +68715,9 @@
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "vmangos: this is the second column in Cfg_Configs.dbc"
+            }
           }
         },
         {
