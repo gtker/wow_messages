@@ -6,12 +6,10 @@
     - if a == { if b == } (`SMSG_AUCTION_COMMAND_RESULT`)
 * Working UpdateMask
   * Tests
-* Rename MessageWrite traits
 
 # Direct upgrades to Login
 
 * Workable Intermediate Representation for Login
-* Rename expected error types
 
 # Low Priority
 
