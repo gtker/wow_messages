@@ -13,6 +13,12 @@ pub enum ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
+    fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, ClientOpcodeMessageError> {
+        match opcode {
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut r, body_size)?)),
+            _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
+        }
+    }
 
     #[cfg(feature = "sync")]
     pub fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
@@ -21,26 +27,19 @@ impl ClientOpcodeMessage {
 
         let mut buf = vec![0; size as usize];
         r.read_exact(&mut buf)?;
-        match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), size)?)),
-            _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
-        }
+        Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "sync")]
     pub fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, ClientOpcodeMessageError> {
         let mut header = [0u8; 6];
         r.read_exact(&mut header)?;
         let header = d.decrypt_client_header(header);
-        let header_size = (header.size - 4) as u32;
+        let body_size = (header.size - 4) as u32;
 
-        let mut buf = vec![0; header_size as usize];
+        let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf)?;
-        match header.opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), header_size)?)),
-            _ => Err(ClientOpcodeMessageError::InvalidOpcode(header.opcode)),
-        }
+        Self::read_opcodes(header.opcode, body_size, &buf)
     }
-
 
     #[cfg(feature = "tokio")]
     pub async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
@@ -49,26 +48,19 @@ impl ClientOpcodeMessage {
 
         let mut buf = vec![0; size as usize];
         r.read_exact(&mut buf).await?;
-        match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), size)?)),
-            _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
-        }
+        Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "tokio")]
     pub async fn tokio_read_encrypted<R: AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, ClientOpcodeMessageError> {
         let mut header = [0u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
-        let header_size = (header.size - 4) as u32;
+        let body_size = (header.size - 4) as u32;
 
-        let mut buf = vec![0; header_size as usize];
+        let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        match header.opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), header_size)?)),
-            _ => Err(ClientOpcodeMessageError::InvalidOpcode(header.opcode)),
-        }
+        Self::read_opcodes(header.opcode, body_size, &buf)
     }
-
 
     #[cfg(feature = "async-std")]
     pub async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
@@ -77,24 +69,18 @@ impl ClientOpcodeMessage {
 
         let mut buf = vec![0; size as usize];
         r.read_exact(&mut buf).await?;
-        match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), size)?)),
-            _ => Err(ClientOpcodeMessageError::InvalidOpcode(opcode)),
-        }
+        Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "async-std")]
     pub async fn astd_read_encrypted<R: ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, ClientOpcodeMessageError> {
         let mut header = [0u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
-        let header_size = (header.size - 4) as u32;
+        let body_size = (header.size - 4) as u32;
 
-        let mut buf = vec![0; header_size as usize];
+        let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        match header.opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut buf.as_slice(), header_size)?)),
-            _ => Err(ClientOpcodeMessageError::InvalidOpcode(header.opcode)),
-        }
+        Self::read_opcodes(header.opcode, body_size, &buf)
     }
 
 }
@@ -145,6 +131,13 @@ pub enum ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
+    fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, ServerOpcodeMessageError> {
+        match opcode {
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut r, body_size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut r, body_size)?)),
+            _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
+        }
+    }
 
     #[cfg(feature = "sync")]
     pub fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
@@ -153,28 +146,19 @@ impl ServerOpcodeMessage {
 
         let mut buf = vec![0; size as usize];
         r.read_exact(&mut buf)?;
-        match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
-            _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
-        }
+        Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "sync")]
     pub fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, ServerOpcodeMessageError> {
         let mut header = [0u8; 4];
         r.read_exact(&mut header)?;
         let header = d.decrypt_server_header(header);
-        let header_size = (header.size - 2) as u32;
+        let body_size = (header.size - 2) as u32;
 
-        let mut buf = vec![0; header_size as usize];
+        let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf)?;
-        match header.opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
-            _ => Err(ServerOpcodeMessageError::InvalidOpcode(header.opcode)),
-        }
+        Self::read_opcodes(header.opcode, body_size, &buf)
     }
-
 
     #[cfg(feature = "tokio")]
     pub async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
@@ -183,28 +167,19 @@ impl ServerOpcodeMessage {
 
         let mut buf = vec![0; size as usize];
         r.read_exact(&mut buf).await?;
-        match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
-            _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
-        }
+        Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "tokio")]
     pub async fn tokio_read_encrypted<R: AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, ServerOpcodeMessageError> {
         let mut header = [0u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
-        let header_size = (header.size - 2) as u32;
+        let body_size = (header.size - 2) as u32;
 
-        let mut buf = vec![0; header_size as usize];
+        let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        match header.opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
-            _ => Err(ServerOpcodeMessageError::InvalidOpcode(header.opcode)),
-        }
+        Self::read_opcodes(header.opcode, body_size, &buf)
     }
-
 
     #[cfg(feature = "async-std")]
     pub async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
@@ -213,26 +188,18 @@ impl ServerOpcodeMessage {
 
         let mut buf = vec![0; size as usize];
         r.read_exact(&mut buf).await?;
-        match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), size)?)),
-            _ => Err(ServerOpcodeMessageError::InvalidOpcode(opcode)),
-        }
+        Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "async-std")]
     pub async fn astd_read_encrypted<R: ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, ServerOpcodeMessageError> {
         let mut header = [0u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
-        let header_size = (header.size - 2) as u32;
+        let body_size = (header.size - 2) as u32;
 
-        let mut buf = vec![0; header_size as usize];
+        let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        match header.opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut buf.as_slice(), header_size)?)),
-            _ => Err(ServerOpcodeMessageError::InvalidOpcode(header.opcode)),
-        }
+        Self::read_opcodes(header.opcode, body_size, &buf)
     }
 
 }

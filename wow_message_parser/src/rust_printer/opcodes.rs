@@ -118,18 +118,43 @@ pub fn definition(s: &mut Writer, v: &[&Container], ty: &str) {
     });
 }
 
-fn world_common_impls_read_write(
+fn world_common_impls_read_opcodes(
     s: &mut Writer,
     v: &[&Container],
+    size: &str,
+    error_ty: &str,
+    ty: &str,
+) {
+    s.bodyn(format!("fn read_opcodes(opcode: {size}, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, {error_ty}>"), |s| {
+        s.open_curly("match opcode");
+
+        for &e in v {
+            let opcode = match e.container_type() {
+                ContainerType::CMsg(i) => i,
+                ContainerType::SMsg(i) => i,
+                ContainerType::Msg(i) => i,
+                _ => panic!(),
+            };
+            s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::read_body(&mut r, body_size)?)),",
+                          opcode = opcode,
+                          name = e.name(),
+                          impl_trait = ty,
+                          enum_name = get_enumerator_name(e.name())));
+        }
+        s.wln(format!("_ => Err({error_ty}::InvalidOpcode(opcode)),", error_ty = error_ty));
+
+        s.closing_curly(); // match opcode
+    });
+}
+
+fn world_common_impls_read_write(
+    s: &mut Writer,
     cd: &str,
     size: &str,
     opcode_size: i32,
     error_ty: &str,
     it: ImplType,
-    ty: &str,
 ) {
-    s.newline();
-
     s.wln(it.cfg());
     s.open_curly(format!(
         "pub {func}fn {prefix}read_unencrypted<R: {read}>(r: &mut R) -> std::result::Result<Self, {error_ty}>",
@@ -161,23 +186,7 @@ fn world_common_impls_read_write(
         postfix = it.postfix()
     ));
 
-    s.body("match opcode", |s| {
-            for &e in v {
-                let opcode = match e.container_type() {
-                    ContainerType::CMsg(i) => i,
-                    ContainerType::SMsg(i) => i,
-                    ContainerType::Msg(i) => i,
-                    _ => panic!(),
-                };
-                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::read_body(&mut buf.as_slice(), size)?)),",
-                              opcode = opcode,
-                              name = e.name(),
-                              impl_trait = ty,
-                              enum_name = get_enumerator_name(e.name())));
-            }
-            s.wln(format!("_ => Err({error_ty}::InvalidOpcode(opcode)),", error_ty = error_ty));
-        }
-    );
+    s.wln("Self::read_opcodes(opcode, size, &buf)");
 
     s.closing_curly();
 
@@ -205,38 +214,18 @@ fn world_common_impls_read_write(
         cd = cd
     ));
     s.wln(format!(
-        "let header_size = (header.size - {opcode_size}) as u32;",
+        "let body_size = (header.size - {opcode_size}) as u32;",
         opcode_size = opcode_size
     ));
     s.newline();
 
-    s.wln("let mut buf = vec![0; header_size as usize];");
+    s.wln("let mut buf = vec![0; body_size as usize];");
     s.wln(format!(
         "r.read_exact(&mut buf){postfix}?;",
         postfix = it.postfix()
     ));
 
-    s.body("match header.opcode", |s| {
-        for &e in v {
-            let opcode = match e.container_type() {
-                ContainerType::CMsg(i) => i,
-                ContainerType::SMsg(i) => i,
-                ContainerType::Msg(i) => i,
-                _ => panic!(),
-            };
-
-            s.wln(
-                format!(
-                    "{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::read_body(&mut buf.as_slice(), header_size)?)),",
-                    opcode = opcode,
-                    name = e.name(),
-                    impl_trait = ty,
-                    enum_name = get_enumerator_name(e.name()),
-                )
-            );
-        }
-        s.wln(format!("_ => Err({error_ty}::InvalidOpcode(header.opcode)),", error_ty = error_ty));
-    });
+    s.wln("Self::read_opcodes(header.opcode, body_size, &buf)");
 
     s.closing_curly_newline();
 }
@@ -253,16 +242,16 @@ pub fn common_impls_world(
         _ => panic!(),
     };
     s.bodyn(format!("impl {t}OpcodeMessage", t = ty), |s| {
+        world_common_impls_read_opcodes(s, v, size, &format!("{t}OpcodeMessageError", t = ty), ty);
+
         for it in ImplType::types() {
             world_common_impls_read_write(
                 s,
-                v,
                 cd,
                 size,
                 opcode_size,
                 &format!("{t}OpcodeMessageError", t = ty),
                 it,
-                ty,
             );
         }
     });
