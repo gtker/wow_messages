@@ -120,8 +120,8 @@ pub trait ServerMessage: Sized {
 
     type Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
+
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
@@ -171,8 +171,8 @@ pub trait ClientMessage: Sized {
 
     type Error;
 
-    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
+
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
