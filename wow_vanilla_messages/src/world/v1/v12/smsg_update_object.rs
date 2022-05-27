@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::Object;
-use crate::ClientMessage;
+use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
@@ -14,7 +14,7 @@ pub struct SMSG_UPDATE_OBJECT {
     pub objects: Vec<Object>,
 }
 
-impl ClientMessage for SMSG_UPDATE_OBJECT {
+impl ServerMessage for SMSG_UPDATE_OBJECT {
     fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_objects: u32
         w.write_all(&(self.objects.len() as u32).to_le_bytes())?;

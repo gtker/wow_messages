@@ -94506,7 +94506,7 @@
     {
       "name": "SMSG_UPDATE_OBJECT",
       "object_type": {
-        "type": "cmsg",
+        "type": "smsg",
         "opcode": 169
       },
       "constant": false,
@@ -94580,7 +94580,7 @@
       },
       "only_has_io_error": false,
       "features": [
-        "CMsg",
+        "SMsg",
         "SimpleBuiltInTypes",
         "VariableArrays",
         "ComplexArrays",

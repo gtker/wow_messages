@@ -93,7 +93,6 @@ use crate::world::v1::v12::CMSG_CHANNEL_BAN;
 use crate::world::v1::v12::CMSG_CHANNEL_UNBAN;
 use crate::world::v1::v12::CMSG_CHANNEL_ANNOUNCEMENTS;
 use crate::world::v1::v12::CMSG_CHANNEL_MODERATE;
-use crate::world::v1::v12::SMSG_UPDATE_OBJECT;
 use crate::world::v1::v12::CMSG_USE_ITEM;
 use crate::world::v1::v12::CMSG_OPEN_ITEM;
 use crate::world::v1::v12::CMSG_READ_ITEM;
@@ -397,7 +396,6 @@ pub enum ClientOpcodeMessage {
     CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN),
     CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS),
     CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE),
-    SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
     CMSG_USE_ITEM(CMSG_USE_ITEM),
     CMSG_OPEN_ITEM(CMSG_OPEN_ITEM),
     CMSG_READ_ITEM(CMSG_READ_ITEM),
@@ -703,7 +701,6 @@ impl ClientOpcodeMessage {
             0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(<CMSG_CHANNEL_UNBAN as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(<CMSG_CHANNEL_ANNOUNCEMENTS as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(<CMSG_CHANNEL_MODERATE as ClientMessage>::read_body(&mut r, body_size)?)),
-            0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(<SMSG_UPDATE_OBJECT as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00AB => Ok(Self::CMSG_USE_ITEM(<CMSG_USE_ITEM as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00AC => Ok(Self::CMSG_OPEN_ITEM(<CMSG_OPEN_ITEM as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00AD => Ok(Self::CMSG_READ_ITEM(<CMSG_READ_ITEM as ClientMessage>::read_body(&mut r, body_size)?)),
@@ -1061,6 +1058,7 @@ use crate::world::v1::v12::SMSG_GUILD_COMMAND_RESULT;
 use crate::world::v1::v12::SMSG_MESSAGECHAT;
 use crate::world::v1::v12::SMSG_CHANNEL_NOTIFY;
 use crate::world::v1::v12::SMSG_CHANNEL_LIST;
+use crate::world::v1::v12::SMSG_UPDATE_OBJECT;
 use crate::world::v1::v12::SMSG_DESTROY_OBJECT;
 use crate::world::v1::v12::SMSG_READ_ITEM_OK;
 use crate::world::v1::v12::SMSG_READ_ITEM_FAILED;
@@ -1402,6 +1400,7 @@ pub enum ServerOpcodeMessage {
     SMSG_MESSAGECHAT(SMSG_MESSAGECHAT),
     SMSG_CHANNEL_NOTIFY(SMSG_CHANNEL_NOTIFY),
     SMSG_CHANNEL_LIST(SMSG_CHANNEL_LIST),
+    SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
     SMSG_DESTROY_OBJECT(SMSG_DESTROY_OBJECT),
     SMSG_READ_ITEM_OK(SMSG_READ_ITEM_OK),
     SMSG_READ_ITEM_FAILED(SMSG_READ_ITEM_FAILED),
@@ -1745,6 +1744,7 @@ impl ServerOpcodeMessage {
             0x0096 => Ok(Self::SMSG_MESSAGECHAT(<SMSG_MESSAGECHAT as ServerMessage>::read_body(&mut r, body_size)?)),
             0x0099 => Ok(Self::SMSG_CHANNEL_NOTIFY(<SMSG_CHANNEL_NOTIFY as ServerMessage>::read_body(&mut r, body_size)?)),
             0x009B => Ok(Self::SMSG_CHANNEL_LIST(<SMSG_CHANNEL_LIST as ServerMessage>::read_body(&mut r, body_size)?)),
+            0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(<SMSG_UPDATE_OBJECT as ServerMessage>::read_body(&mut r, body_size)?)),
             0x00AA => Ok(Self::SMSG_DESTROY_OBJECT(<SMSG_DESTROY_OBJECT as ServerMessage>::read_body(&mut r, body_size)?)),
             0x00AE => Ok(Self::SMSG_READ_ITEM_OK(<SMSG_READ_ITEM_OK as ServerMessage>::read_body(&mut r, body_size)?)),
             0x00AF => Ok(Self::SMSG_READ_ITEM_FAILED(<SMSG_READ_ITEM_FAILED as ServerMessage>::read_body(&mut r, body_size)?)),

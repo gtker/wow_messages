@@ -9,7 +9,7 @@ use wow_srp::server::SrpServer;
 use wow_vanilla_messages::helper::tokio_expect_client_message;
 use wow_vanilla_messages::v1::v12::opcodes::ClientOpcodeMessage;
 use wow_vanilla_messages::v1::v12::*;
-use wow_vanilla_messages::{ClientMessage, Guid, ServerMessage, UpdateMask, UpdatePlayer};
+use wow_vanilla_messages::{Guid, ServerMessage, UpdateMask, UpdatePlayer};
 
 pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServer>>>) {
     let seed = ProofSeed::new();
@@ -105,7 +105,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
     }
 
     SMSG_LOGIN_VERIFY_WORLD {
-        map: Map::KALIMDOR,
+        map: Map::EASTERN_KINGDOMS,
         position_x: 200.0,
         position_y: 200.0,
         position_z: 200.0,
@@ -168,7 +168,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
             },
         }],
     }
-    .tokio_write_encrypted_client(&mut stream, &mut encryption)
+    .tokio_write_encrypted_server(&mut stream, &mut encryption)
     .await
     .unwrap();
 
