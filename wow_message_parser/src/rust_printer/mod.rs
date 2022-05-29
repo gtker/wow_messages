@@ -10,7 +10,6 @@ use crate::file_info::FileInfo;
 
 mod enums;
 mod flags;
-pub mod new_enums;
 mod opcodes;
 pub mod rust_view;
 mod structs;

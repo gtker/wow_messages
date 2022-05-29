@@ -6,8 +6,6 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     ArraySize, ArrayType, ContainerValue, ObjectType, VerifiedContainerValue,
 };
-use crate::rust_printer::new_enums::parse::add_to_statement;
-use crate::rust_printer::new_enums::NewIfStatement;
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
     DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
@@ -1085,16 +1083,6 @@ impl Container {
                 StructMember::Definition(_) => {}
                 StructMember::IfStatement(statement) => {
                     statement.set_original_ty(c.get_type_of_variable(statement.name()));
-                    let original_ty_name = statement.original_ty().rust_str();
-                    let new_ty_name = format!("{}{}", c.name(), original_ty_name);
-
-                    add_to_statement(
-                        statement,
-                        original_ty_name.as_str(),
-                        new_ty_name.as_str(),
-                        c,
-                        o,
-                    );
 
                     for else_if in &mut statement.else_ifs {
                         else_if.set_original_ty(c.get_type_of_variable(else_if.name()));
@@ -1390,7 +1378,6 @@ pub struct IfStatement {
     members: Vec<StructMember>,
     else_ifs: Vec<IfStatement>,
     else_statement_members: Vec<StructMember>,
-    new_enum: Option<NewIfStatement>,
     original_ty: Option<Type>,
 }
 
@@ -1414,7 +1401,6 @@ impl IfStatement {
             members,
             else_ifs,
             else_statement_members,
-            new_enum: None,
             original_ty: None,
         }
     }
@@ -1481,14 +1467,6 @@ impl IfStatement {
 
     pub fn set_original_ty(&mut self, original_ty: Type) {
         self.original_ty = Some(original_ty)
-    }
-
-    pub fn new_enum(&self) -> &NewIfStatement {
-        self.new_enum.as_ref().unwrap()
-    }
-
-    pub fn set_new_enum(&mut self, new_if_statement: NewIfStatement) {
-        self.new_enum = Some(new_if_statement);
     }
 
     pub fn definer_type(&self) -> DefinerType {
