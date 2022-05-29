@@ -50,7 +50,7 @@ fn print_container_example_array(
         }
     };
 
-    for _ in 0..size {
+    for i in 0..size {
         match array.ty() {
             ArrayType::Integer(t) => {
                 let bytes = bytes.take(t.size() as usize);
@@ -90,7 +90,7 @@ fn print_container_example_array(
 
                 let c = o.get_container(identifier, tags);
 
-                for (i, m) in c.fields().iter().enumerate() {
+                for m in c.fields() {
                     let prefix = format!("{}[{}].{}", prefix, i, c.name());
                     print_container_example_member(s, c, m, bytes, values, o, tags, &prefix);
                 }

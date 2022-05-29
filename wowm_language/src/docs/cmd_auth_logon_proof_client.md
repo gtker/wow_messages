@@ -48,13 +48,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 0, 208, // crc_hash: u8[20]
 2, // number_of_telemetry_keys: u8
 255, 0, // [0].TelemetryKey.unknown1: u16
-239, 190, 173, 222, // [1].TelemetryKey.unknown2: u32
-1, 2, 3, 4, // [2].TelemetryKey.unknown3: u8[4]
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [3].TelemetryKey.unknown4: u8[20]
-254, 0, // [0].TelemetryKey.unknown1: u16
+239, 190, 173, 222, // [0].TelemetryKey.unknown2: u32
+1, 2, 3, 4, // [0].TelemetryKey.unknown3: u8[4]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [0].TelemetryKey.unknown4: u8[20]
+254, 0, // [1].TelemetryKey.unknown1: u16
 238, 190, 173, 222, // [1].TelemetryKey.unknown2: u32
-0, 1, 2, 3, // [2].TelemetryKey.unknown3: u8[4]
-1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, // [3].TelemetryKey.unknown4: u8[20]
+0, 1, 2, 3, // [1].TelemetryKey.unknown3: u8[4]
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, // [1].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 ```
 #### Example 2
@@ -69,9 +69,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 0, 208, // crc_hash: u8[20]
 1, // number_of_telemetry_keys: u8
 255, 0, // [0].TelemetryKey.unknown1: u16
-239, 190, 173, 222, // [1].TelemetryKey.unknown2: u32
-1, 2, 3, 4, // [2].TelemetryKey.unknown3: u8[4]
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [3].TelemetryKey.unknown4: u8[20]
+239, 190, 173, 222, // [0].TelemetryKey.unknown2: u32
+1, 2, 3, 4, // [0].TelemetryKey.unknown3: u8[4]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [0].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 ```
 #### Example 3
@@ -150,13 +150,13 @@ If security_flag is equal to `PIN`:
 0, 208, // crc_hash: u8[20]
 2, // number_of_telemetry_keys: u8
 255, 0, // [0].TelemetryKey.unknown1: u16
-239, 190, 173, 222, // [1].TelemetryKey.unknown2: u32
-1, 2, 3, 4, // [2].TelemetryKey.unknown3: u8[4]
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [3].TelemetryKey.unknown4: u8[20]
-254, 0, // [0].TelemetryKey.unknown1: u16
+239, 190, 173, 222, // [0].TelemetryKey.unknown2: u32
+1, 2, 3, 4, // [0].TelemetryKey.unknown3: u8[4]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [0].TelemetryKey.unknown4: u8[20]
+254, 0, // [1].TelemetryKey.unknown1: u16
 238, 190, 173, 222, // [1].TelemetryKey.unknown2: u32
-0, 1, 2, 3, // [2].TelemetryKey.unknown3: u8[4]
-1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, // [3].TelemetryKey.unknown4: u8[20]
+0, 1, 2, 3, // [1].TelemetryKey.unknown3: u8[4]
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, // [1].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag NONE (0x0)
 ```
@@ -172,9 +172,9 @@ If security_flag is equal to `PIN`:
 0, 208, // crc_hash: u8[20]
 1, // number_of_telemetry_keys: u8
 255, 0, // [0].TelemetryKey.unknown1: u16
-239, 190, 173, 222, // [1].TelemetryKey.unknown2: u32
-1, 2, 3, 4, // [2].TelemetryKey.unknown3: u8[4]
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [3].TelemetryKey.unknown4: u8[20]
+239, 190, 173, 222, // [0].TelemetryKey.unknown2: u32
+1, 2, 3, 4, // [0].TelemetryKey.unknown3: u8[4]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [0].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag NONE (0x0)
 ```
@@ -297,13 +297,13 @@ If security_flag contains `AUTHENTICATOR`:
 0, 208, // crc_hash: u8[20]
 2, // number_of_telemetry_keys: u8
 255, 0, // [0].TelemetryKey.unknown1: u16
-239, 190, 173, 222, // [1].TelemetryKey.unknown2: u32
-1, 2, 3, 4, // [2].TelemetryKey.unknown3: u8[4]
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [3].TelemetryKey.unknown4: u8[20]
-254, 0, // [0].TelemetryKey.unknown1: u16
+239, 190, 173, 222, // [0].TelemetryKey.unknown2: u32
+1, 2, 3, 4, // [0].TelemetryKey.unknown3: u8[4]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [0].TelemetryKey.unknown4: u8[20]
+254, 0, // [1].TelemetryKey.unknown1: u16
 238, 190, 173, 222, // [1].TelemetryKey.unknown2: u32
-0, 1, 2, 3, // [2].TelemetryKey.unknown3: u8[4]
-1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, // [3].TelemetryKey.unknown4: u8[20]
+0, 1, 2, 3, // [1].TelemetryKey.unknown3: u8[4]
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, // [1].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag  NONE (0)
 ```
@@ -319,9 +319,9 @@ If security_flag contains `AUTHENTICATOR`:
 0, 208, // crc_hash: u8[20]
 1, // number_of_telemetry_keys: u8
 255, 0, // [0].TelemetryKey.unknown1: u16
-239, 190, 173, 222, // [1].TelemetryKey.unknown2: u32
-1, 2, 3, 4, // [2].TelemetryKey.unknown3: u8[4]
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [3].TelemetryKey.unknown4: u8[20]
+239, 190, 173, 222, // [0].TelemetryKey.unknown2: u32
+1, 2, 3, 4, // [0].TelemetryKey.unknown3: u8[4]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [0].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag  NONE (0)
 ```

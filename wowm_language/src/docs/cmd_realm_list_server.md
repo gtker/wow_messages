@@ -44,13 +44,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 0, 0, 0, 0, // header_padding: u32
 1, // number_of_realms: u8
 0, 0, 0, 0, // [0].Realm.realm_type: RealmType PLAYER_VS_ENVIRONMENT (0)
-0, // [1].Realm.flag: RealmFlag  NONE (0)
-65, 0, // [2].Realm.name: CString
-65, 0, // [3].Realm.address: CString
-0, 0, 200, 67, // [4].Realm.population: Population RED_FULL (0x43c80000)
-1, // [5].Realm.number_of_characters_on_realm: u8
-0, // [6].Realm.category: RealmCategory DEFAULT (0x0)
-2, // [7].Realm.realm_id: u8
+0, // [0].Realm.flag: RealmFlag  NONE (0)
+65, 0, // [0].Realm.name: CString
+65, 0, // [0].Realm.address: CString
+0, 0, 200, 67, // [0].Realm.population: Population RED_FULL (0x43c80000)
+1, // [0].Realm.number_of_characters_on_realm: u8
+0, // [0].Realm.category: RealmCategory DEFAULT (0x0)
+2, // [0].Realm.realm_id: u8
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
@@ -62,13 +62,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 0, 0, 0, 0, // header_padding: u32
 1, // number_of_realms: u8
 0, 0, 0, 0, // [0].Realm.realm_type: RealmType PLAYER_VS_ENVIRONMENT (0)
-3, // [1].Realm.flag: RealmFlag  INVALID| OFFLINE (3)
-65, 0, // [2].Realm.name: CString
-65, 0, // [3].Realm.address: CString
-0, 0, 200, 67, // [4].Realm.population: Population RED_FULL (0x43c80000)
-1, // [5].Realm.number_of_characters_on_realm: u8
-0, // [6].Realm.category: RealmCategory DEFAULT (0x0)
-2, // [7].Realm.realm_id: u8
+3, // [0].Realm.flag: RealmFlag  INVALID| OFFLINE (3)
+65, 0, // [0].Realm.name: CString
+65, 0, // [0].Realm.address: CString
+0, 0, 200, 67, // [0].Realm.population: Population RED_FULL (0x43c80000)
+1, // [0].Realm.number_of_characters_on_realm: u8
+0, // [0].Realm.category: RealmCategory DEFAULT (0x0)
+2, // [0].Realm.realm_id: u8
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
@@ -118,14 +118,14 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 0, 0, 0, 0, // header_padding: u32
 1, 0, // number_of_realms: u16
 0, // [0].Realm.realm_type: RealmType PLAYER_VS_ENVIRONMENT (0)
-0, // [1].Realm.locked: u8
-3, // [2].Realm.flag: RealmFlag  INVALID| OFFLINE (3)
-65, 0, // [3].Realm.name: CString
-65, 0, // [4].Realm.address: CString
-0, 0, 200, 67, // [5].Realm.population: Population RED_FULL (0x43c80000)
-1, // [6].Realm.number_of_characters_on_realm: u8
-0, // [7].Realm.category: RealmCategory DEFAULT (0x0)
-2, // [8].Realm.realm_id: u8
+0, // [0].Realm.locked: u8
+3, // [0].Realm.flag: RealmFlag  INVALID| OFFLINE (3)
+65, 0, // [0].Realm.name: CString
+65, 0, // [0].Realm.address: CString
+0, 0, 200, 67, // [0].Realm.population: Population RED_FULL (0x43c80000)
+1, // [0].Realm.number_of_characters_on_realm: u8
+0, // [0].Realm.category: RealmCategory DEFAULT (0x0)
+2, // [0].Realm.realm_id: u8
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
@@ -137,14 +137,14 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 0, 0, 0, 0, // header_padding: u32
 1, 0, // number_of_realms: u16
 0, // [0].Realm.realm_type: RealmType PLAYER_VS_ENVIRONMENT (0)
-0, // [1].Realm.locked: u8
-4, // [2].Realm.flag: RealmFlag  SPECIFY_BUILD (4)
-65, 0, // [3].Realm.name: CString
-65, 0, // [4].Realm.address: CString
-0, 0, 200, 67, // [5].Realm.population: Population RED_FULL (0x43c80000)
-1, // [6].Realm.number_of_characters_on_realm: u8
-0, // [7].Realm.category: RealmCategory DEFAULT (0x0)
-2, // [8].Realm.realm_id: u8
+0, // [0].Realm.locked: u8
+4, // [0].Realm.flag: RealmFlag  SPECIFY_BUILD (4)
+65, 0, // [0].Realm.name: CString
+65, 0, // [0].Realm.address: CString
+0, 0, 200, 67, // [0].Realm.population: Population RED_FULL (0x43c80000)
+1, // [0].Realm.number_of_characters_on_realm: u8
+0, // [0].Realm.category: RealmCategory DEFAULT (0x0)
+2, // [0].Realm.realm_id: u8
 1, // Version.major: u8
 12, // Version.minor: u8
 1, // Version.patch: u8

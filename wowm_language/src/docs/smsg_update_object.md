@@ -45,8 +45,8 @@ Most minimal package required to load into the world. Also requires a valid [SMS
 1, 0, 0, 0, // amount_of_objects: u32
 0, // has_transport: u8
 3, // [0].Object.update_type: UpdateType CREATE_OBJECT2 (3)
-4, // [1].Object.guid3: PackedGuid
-4, // [1].Object.object_type: ObjectType PLAYER (4)
+4, // [0].Object.guid3: PackedGuid
+4, // [0].Object.object_type: ObjectType PLAYER (4)
 49, // MovementBlock.update_flag: UpdateFlag  SELF| ALL| LIVING (49)
 0, 0, 0, 0, // MovementBlock.flags: MovementFlags  NONE (0)
 0, 0, 0, 0, // MovementBlock.timestamp: u32
@@ -71,7 +71,7 @@ Most minimal package required to load into the world. Also requires a valid [SMS
 25, 0, 0, 0, // Item
 100, 0, 0, 0, // Item
 1, 1, 1, 1, // Item
-// [1].Object.mask2: UpdateMask
+// [0].Object.mask2: UpdateMask
 // objects: Object[amount_of_objects]
 ```
 #### Example 2
@@ -82,8 +82,8 @@ Most minimal package required to load into the world. Also requires a valid [SMS
 1, 0, 0, 0, // amount_of_objects: u32
 0, // has_transport: u8
 3, // [0].Object.update_type: UpdateType CREATE_OBJECT2 (3)
-4, // [1].Object.guid3: PackedGuid
-4, // [1].Object.object_type: ObjectType PLAYER (4)
+4, // [0].Object.guid3: PackedGuid
+4, // [0].Object.object_type: ObjectType PLAYER (4)
 49, // MovementBlock.update_flag: UpdateFlag  SELF| ALL| LIVING (49)
 0, 0, 0, 0, // MovementBlock.flags: MovementFlags  NONE (0)
 0, 0, 0, 0, // MovementBlock.timestamp: u32
@@ -117,6 +117,6 @@ Most minimal package required to load into the world. Also requires a valid [SMS
 1, 1, 1, 1, // Item
 50, 0, 0, 0, // Item
 50, 0, 0, 0, // Item
-// [1].Object.mask2: UpdateMask
+// [0].Object.mask2: UpdateMask
 // objects: Object[amount_of_objects]
 ```
