@@ -27,6 +27,8 @@ pub struct Writer {
     import_path: String,
 }
 
+pub const EXPECTED_OPCODE_ERROR: &str = "crate::errors::ExpectedOpcodeError";
+
 pub const CLIENT_MESSAGE_TRAIT_NAME: &str = "ClientMessage";
 pub const SERVER_MESSAGE_TRAIT_NAME: &str = "ServerMessage";
 
@@ -533,21 +535,6 @@ impl Writer {
 
         f(self);
 
-        self.closing_curly_newline();
-    }
-
-    pub fn impl_from<S: AsRef<str>, S2: AsRef<str>, F: Fn(&mut Self)>(
-        &mut self,
-        s: S,
-        s2: S2,
-        f: F,
-    ) {
-        self.open_curly(format!("impl From<{}> for {}", s.as_ref(), s2.as_ref()));
-        self.open_curly(format!("fn from(e: {}) -> Self", s.as_ref()));
-
-        f(self);
-
-        self.closing_curly();
         self.closing_curly_newline();
     }
 

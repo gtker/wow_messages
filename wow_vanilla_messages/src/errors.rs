@@ -1,4 +1,5 @@
 use std::fmt::{format, Display, Formatter};
+use std::io::Error;
 
 #[derive(Debug)]
 pub enum ParseError {
@@ -62,7 +63,7 @@ impl std::error::Error for EnumError {}
 
 #[derive(Debug)]
 pub enum ExpectedOpcodeError {
-    Opcode(u16),
+    Opcode(u32),
     Parse(ParseError),
 }
 
@@ -78,5 +79,11 @@ impl Display for ExpectedOpcodeError {
 impl From<ParseError> for ExpectedOpcodeError {
     fn from(e: ParseError) -> Self {
         Self::Parse(e)
+    }
+}
+
+impl From<std::io::Error> for ExpectedOpcodeError {
+    fn from(e: std::io::Error) -> Self {
+        Self::Parse(e.into())
     }
 }
