@@ -48,4 +48,17 @@ smsg SMSG_CHAR_ENUM = 0x03B {
         comment = "Client can not handle values larger than 10";
     }
     Character[amount_of_characters] characters;
+} {
+    description = "Response to [CMSG_CHAR_ENUM].";
+}
+
+test SMSG_CHAR_ENUM {
+    amount_of_characters = 0;
+    characters = [];
+} [
+    0x00, 0x03, /* size */
+    0x3B, 0x00, /* opcode */
+    0x00, /* amount_of_characters */
+] {
+    description = "Empty character list.";
 }

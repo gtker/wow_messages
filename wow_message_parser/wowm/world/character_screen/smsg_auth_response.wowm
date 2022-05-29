@@ -10,4 +10,44 @@ smsg SMSG_AUTH_RESPONSE = 0x1EE {
     else if (result == AUTH_WAIT_QUEUE) {
         u32 queue_position;
     }
+} {
+    description = "Response to [CMSG_AUTH_SESSION].";
+}
+
+test SMSG_AUTH_RESPONSE {
+    result = AUTH_FAILED;
+} [
+    0x00, 0x06, /* size */
+    0xEE, 0x01, /* opcode */
+    0x0D, 0x00, 0x00, 0x00, /* result */
+] {
+    description = "Authentication failed.";
+}
+
+test SMSG_AUTH_RESPONSE {
+    result = AUTH_WAIT_QUEUE;
+    queue_position = 0xDEADBEEF;
+} [
+    0x00, 0x0A, /* size */
+    0xEE, 0x01, /* opcode */
+    0x1B, 0x00, 0x00, 0x00, /* result */
+    0xEF, 0xBE, 0xAD, 0xDE, /* queue_position */
+] {
+    description = "Client told to wait in queue.";
+}
+
+test SMSG_AUTH_RESPONSE {
+    result = AUTH_OK;
+    billing_time = 0xDEADBEEF;
+    billing_flags = 0;
+    billing_rested = 0;
+} [
+    0x00, 0x0F, /* size */
+    0xEE, 0x01, /* opcode */
+    0x0C, 0x00, 0x00, 0x00, /* result */
+    0xEF, 0xBE, 0xAD, 0xDE, /* queue_position */
+    0x00, /* billing_flags */
+    0x00, 0x00, 0x00, 0x00, /* billing_rested */
+] {
+    description = "Client can join.";
 }

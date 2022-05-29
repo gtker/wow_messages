@@ -164,7 +164,7 @@ fn world_common_impls_read_write(
         error_ty = error_ty,
     ));
     s.wln(format!(
-        "let size = ({path}::{prefix}read_u16_be(r){postfix}? - {opcode_size}) as u32;",
+        "let size = ({path}::{prefix}read_u16_be(r){postfix}?.saturating_sub({opcode_size})) as u32;",
         path = "crate::util",
         opcode_size = opcode_size,
         prefix = it.prefix(),
@@ -214,7 +214,7 @@ fn world_common_impls_read_write(
         cd = cd
     ));
     s.wln(format!(
-        "let body_size = (header.size - {opcode_size}) as u32;",
+        "let body_size = (header.size.saturating_sub({opcode_size})) as u32;",
         opcode_size = opcode_size
     ));
     s.newline();

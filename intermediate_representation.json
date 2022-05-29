@@ -70659,6 +70659,7 @@
         }
       ],
       "tags": {
+        "description": "Response to [CMSG_AUTH_SESSION].",
         "version": {
           "type": "world",
           "versions": [
@@ -70677,7 +70678,208 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_AUTH_RESPONSE",
+          "members": [
+            {
+              "variable_name": "result",
+              "verified_value": {
+                "Enum": {
+                  "value": 13,
+                  "original_string": "AUTH_FAILED"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            6,
+            238,
+            1,
+            13,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "description": "Authentication failed.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    2
+                  ]
+                },
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
+            "start_position": 17
+          }
+        },
+        {
+          "subject": "SMSG_AUTH_RESPONSE",
+          "members": [
+            {
+              "variable_name": "result",
+              "verified_value": {
+                "Enum": {
+                  "value": 27,
+                  "original_string": "AUTH_WAIT_QUEUE"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "queue_position",
+              "verified_value": {
+                "Number": {
+                  "value": 3735928559,
+                  "original_string": "0xDEADBEEF"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            10,
+            238,
+            1,
+            27,
+            0,
+            0,
+            0,
+            239,
+            190,
+            173,
+            222
+          ],
+          "tags": {
+            "description": "Client told to wait in queue.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    2
+                  ]
+                },
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
+            "start_position": 27
+          }
+        },
+        {
+          "subject": "SMSG_AUTH_RESPONSE",
+          "members": [
+            {
+              "variable_name": "result",
+              "verified_value": {
+                "Enum": {
+                  "value": 12,
+                  "original_string": "AUTH_OK"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "billing_time",
+              "verified_value": {
+                "Number": {
+                  "value": 3735928559,
+                  "original_string": "0xDEADBEEF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "billing_flags",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "billing_rested",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            15,
+            238,
+            1,
+            12,
+            0,
+            0,
+            0,
+            239,
+            190,
+            173,
+            222,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "description": "Client can join.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    2
+                  ]
+                },
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
+            "start_position": 39
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
         "start_position": 3
@@ -72371,6 +72573,7 @@
         }
       ],
       "tags": {
+        "description": "Response to [CMSG_CHAR_ENUM].",
         "version": {
           "type": "world",
           "versions": [
@@ -72383,7 +72586,60 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_CHAR_ENUM",
+          "members": [
+            {
+              "variable_name": "amount_of_characters",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "characters",
+              "verified_value": {
+                "Array": {
+                  "values": [],
+                  "size": {
+                    "Variable": "amount_of_characters"
+                  }
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            3,
+            59,
+            0,
+            0
+          ],
+          "tags": {
+            "description": "Empty character list.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm",
+            "start_position": 55
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm",
         "start_position": 45

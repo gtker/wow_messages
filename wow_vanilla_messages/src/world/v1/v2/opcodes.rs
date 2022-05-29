@@ -22,7 +22,7 @@ impl ClientOpcodeMessage {
 
     #[cfg(feature = "sync")]
     pub fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
-        let size = (crate::util::read_u16_be(r)? - 4) as u32;
+        let size = (crate::util::read_u16_be(r)?.saturating_sub(4)) as u32;
         let opcode = crate::util::read_u32_le(r)?;
 
         let mut buf = vec![0; size as usize];
@@ -34,7 +34,7 @@ impl ClientOpcodeMessage {
         let mut header = [0u8; 6];
         r.read_exact(&mut header)?;
         let header = d.decrypt_client_header(header);
-        let body_size = (header.size - 4) as u32;
+        let body_size = (header.size.saturating_sub(4)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf)?;
@@ -43,7 +43,7 @@ impl ClientOpcodeMessage {
 
     #[cfg(feature = "tokio")]
     pub async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
-        let size = (crate::util::tokio_read_u16_be(r).await? - 4) as u32;
+        let size = (crate::util::tokio_read_u16_be(r).await?.saturating_sub(4)) as u32;
         let opcode = crate::util::tokio_read_u32_le(r).await?;
 
         let mut buf = vec![0; size as usize];
@@ -55,7 +55,7 @@ impl ClientOpcodeMessage {
         let mut header = [0u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
-        let body_size = (header.size - 4) as u32;
+        let body_size = (header.size.saturating_sub(4)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
@@ -64,7 +64,7 @@ impl ClientOpcodeMessage {
 
     #[cfg(feature = "async-std")]
     pub async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ClientOpcodeMessageError> {
-        let size = (crate::util::astd_read_u16_be(r).await? - 4) as u32;
+        let size = (crate::util::astd_read_u16_be(r).await?.saturating_sub(4)) as u32;
         let opcode = crate::util::astd_read_u32_le(r).await?;
 
         let mut buf = vec![0; size as usize];
@@ -76,7 +76,7 @@ impl ClientOpcodeMessage {
         let mut header = [0u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
-        let body_size = (header.size - 4) as u32;
+        let body_size = (header.size.saturating_sub(4)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
@@ -141,7 +141,7 @@ impl ServerOpcodeMessage {
 
     #[cfg(feature = "sync")]
     pub fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
-        let size = (crate::util::read_u16_be(r)? - 2) as u32;
+        let size = (crate::util::read_u16_be(r)?.saturating_sub(2)) as u32;
         let opcode = crate::util::read_u16_le(r)?;
 
         let mut buf = vec![0; size as usize];
@@ -153,7 +153,7 @@ impl ServerOpcodeMessage {
         let mut header = [0u8; 4];
         r.read_exact(&mut header)?;
         let header = d.decrypt_server_header(header);
-        let body_size = (header.size - 2) as u32;
+        let body_size = (header.size.saturating_sub(2)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf)?;
@@ -162,7 +162,7 @@ impl ServerOpcodeMessage {
 
     #[cfg(feature = "tokio")]
     pub async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
-        let size = (crate::util::tokio_read_u16_be(r).await? - 2) as u32;
+        let size = (crate::util::tokio_read_u16_be(r).await?.saturating_sub(2)) as u32;
         let opcode = crate::util::tokio_read_u16_le(r).await?;
 
         let mut buf = vec![0; size as usize];
@@ -174,7 +174,7 @@ impl ServerOpcodeMessage {
         let mut header = [0u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
-        let body_size = (header.size - 2) as u32;
+        let body_size = (header.size.saturating_sub(2)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
@@ -183,7 +183,7 @@ impl ServerOpcodeMessage {
 
     #[cfg(feature = "async-std")]
     pub async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ServerOpcodeMessageError> {
-        let size = (crate::util::astd_read_u16_be(r).await? - 2) as u32;
+        let size = (crate::util::astd_read_u16_be(r).await?.saturating_sub(2)) as u32;
         let opcode = crate::util::astd_read_u16_le(r).await?;
 
         let mut buf = vec![0; size as usize];
@@ -195,7 +195,7 @@ impl ServerOpcodeMessage {
         let mut header = [0u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
-        let body_size = (header.size - 2) as u32;
+        let body_size = (header.size.saturating_sub(2)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;

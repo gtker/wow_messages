@@ -710,3 +710,256 @@ impl SMSG_AUTH_RESPONSEWorldResult {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use super::SMSG_AUTH_RESPONSE;
+    use crate::world::v1::v2::WorldResult;
+    use super::*;
+    use super::super::*;
+    use crate::world::v1::v2::opcodes::ServerOpcodeMessage;
+    use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
+    use crate::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 8] = [ 0x00, 0x06, 0xEE, 0x01, 0x0D, 0x00, 0x00, 0x00, ];
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_AUTH_RESPONSE0() {
+        let expected = SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_AUTH_RESPONSE0() {
+        let expected = SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_AUTH_RESPONSE0() {
+        let expected = SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    const RAW1: [u8; 12] = [ 0x00, 0x0A, 0xEE, 0x01, 0x1B, 0x00, 0x00, 0x00, 0xEF,
+         0xBE, 0xAD, 0xDE, ];
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_AUTH_RESPONSE1() {
+        let expected = SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
+                queue_position: 0xDEADBEEF,
+            },
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_AUTH_RESPONSE1() {
+        let expected = SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
+                queue_position: 0xDEADBEEF,
+            },
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_AUTH_RESPONSE1() {
+        let expected = SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
+                queue_position: 0xDEADBEEF,
+            },
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    const RAW2: [u8; 17] = [ 0x00, 0x0F, 0xEE, 0x01, 0x0C, 0x00, 0x00, 0x00, 0xEF,
+         0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_AUTH_RESPONSE2() {
+        let expected = SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+                billing_flags: 0x0,
+                billing_rested: 0x0,
+                billing_time: 0xDEADBEEF,
+            },
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW2)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW2.len());
+
+        let mut dest = Vec::with_capacity(RAW2.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW2);
+    }
+
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_AUTH_RESPONSE2() {
+        let expected = SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+                billing_flags: 0x0,
+                billing_rested: 0x0,
+                billing_time: 0xDEADBEEF,
+            },
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW2)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW2.len());
+
+        let mut dest = Vec::with_capacity(RAW2.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW2);
+    }
+
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_AUTH_RESPONSE2() {
+        let expected = SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+                billing_flags: 0x0,
+                billing_rested: 0x0,
+                billing_time: 0xDEADBEEF,
+            },
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW2)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_AUTH_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW2.len());
+
+        let mut dest = Vec::with_capacity(RAW2.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW2);
+    }
+
+}
