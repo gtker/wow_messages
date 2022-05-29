@@ -8,6 +8,131 @@ use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::UTILITY_PATH;
 
+fn print_read_array_fixed(
+    s: &mut Writer,
+    array: &Array,
+    e: &Container,
+    o: &Objects,
+    d: &StructMemberDefinition,
+    prefix: &str,
+    postfix: &str,
+    size: i64,
+) {
+    let inner_is_constant_sized = array.inner_type_is_constant_sized(e.tags(), o);
+
+    if inner_is_constant_sized {
+        s.wln(format!(
+            "let mut {name} = [{type_name}::default(); {size}];",
+            name = d.name(),
+            type_name = match array.ty() {
+                ArrayType::Integer(i) => {
+                    i.rust_str()
+                }
+                ArrayType::Complex(v) => {
+                    v
+                }
+                ArrayType::CString => "String",
+                ArrayType::Guid | ArrayType::PackedGuid => "Guid",
+            },
+            size = size
+        ));
+    } else {
+        s.wln(format!(
+            "let mut {name} = Vec::with_capacity({size});",
+            name = d.name(),
+            size = size
+        ));
+    }
+    s.open_curly(format!("for i in 0..{size}", size = size));
+
+    match array.ty() {
+        ArrayType::Integer(integer) => {
+            if inner_is_constant_sized {
+                s.wln(format!(
+                    "{name}[i] = {module}::{prefix}read_{int_type}_{endian}(r){postfix}?;",
+                    name = d.name(),
+                    module = UTILITY_PATH,
+                    int_type = integer.rust_str(),
+                    endian = integer.rust_endian_str(),
+                    prefix = prefix,
+                    postfix = postfix,
+                ));
+            } else {
+                s.wln(format!(
+                    "{name}.push({module}::{prefix}read_{int_type}_{endian}(r){postfix}?);",
+                    name = d.name(),
+                    module = UTILITY_PATH,
+                    int_type = integer.rust_str(),
+                    endian = integer.rust_endian_str(),
+                    prefix = prefix,
+                    postfix = postfix,
+                ));
+            }
+        }
+        ArrayType::Complex(_) => {
+            if inner_is_constant_sized {
+                s.wln(format!(
+                    "{name}[i] = {type_name}::{prefix}read(r){postfix}?;",
+                    name = d.name(),
+                    type_name = array.ty().rust_str(),
+                    prefix = prefix,
+                    postfix = postfix,
+                ));
+            } else {
+                s.wln(format!(
+                    "{name}.push({type_name}::{prefix}read(r){postfix}?);",
+                    name = d.name(),
+                    type_name = array.ty().rust_str(),
+                    prefix = prefix,
+                    postfix = postfix,
+                ));
+            }
+        }
+        ArrayType::CString => {
+            s.wln(format!(
+                "let s = crate::util::{prefix}read_c_string_to_vec(r){postfix}?;",
+                prefix = prefix,
+                postfix = postfix,
+            ));
+            match array.size() {
+                ArraySize::Fixed(_) => s.wln(format!(
+                    "{name}[i] = String::from_utf8(s)?;",
+                    name = d.name()
+                )),
+                ArraySize::Variable(_) => unreachable!(),
+                ArraySize::Endless => panic!(),
+            }
+        }
+        ArrayType::Guid => {
+            s.wln(format!(
+                "{name}[i] = Guid::{prefix}read(r){postfix}?;",
+                name = d.name(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        }
+        ArrayType::PackedGuid => {
+            s.wln(format!(
+                "{name}[i] = Guid::{prefix}read_packed(r){postfix}?;",
+                name = d.name(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        }
+    }
+
+    s.closing_curly();
+
+    if !inner_is_constant_sized {
+        s.wln(format!(
+            "let {name} = {name}.try_into().unwrap();",
+            name = d.name()
+        ));
+    }
+
+    s.newline();
+}
+
 fn print_read_array(
     s: &mut Writer,
     array: &Array,
@@ -34,119 +159,7 @@ fn print_read_array(
 
     match array.size() {
         ArraySize::Fixed(size) => {
-            let inner_is_constant_sized = array.inner_type_is_constant_sized(e.tags(), o);
-
-            if inner_is_constant_sized {
-                s.wln(format!(
-                    "let mut {name} = [{type_name}::default(); {size}];",
-                    name = d.name(),
-                    type_name = match array.ty() {
-                        ArrayType::Integer(i) => {
-                            i.rust_str()
-                        }
-                        ArrayType::Complex(v) => {
-                            v
-                        }
-                        ArrayType::CString => "String",
-                        ArrayType::Guid | ArrayType::PackedGuid => "Guid",
-                    },
-                    size = size
-                ));
-            } else {
-                s.wln(format!(
-                    "let mut {name} = Vec::with_capacity({size});",
-                    name = d.name(),
-                    size = size
-                ));
-            }
-            s.open_curly(format!("for i in 0..{size}", size = size));
-
-            match array.ty() {
-                ArrayType::Integer(integer) => {
-                    if inner_is_constant_sized {
-                        s.wln(format!(
-                            "{name}[i] = {module}::{prefix}read_{int_type}_{endian}(r){postfix}?;",
-                            name = d.name(),
-                            module = UTILITY_PATH,
-                            int_type = integer.rust_str(),
-                            endian = integer.rust_endian_str(),
-                            prefix = prefix,
-                            postfix = postfix,
-                        ));
-                    } else {
-                        s.wln(format!(
-                            "{name}.push({module}::{prefix}read_{int_type}_{endian}(r){postfix}?);",
-                            name = d.name(),
-                            module = UTILITY_PATH,
-                            int_type = integer.rust_str(),
-                            endian = integer.rust_endian_str(),
-                            prefix = prefix,
-                            postfix = postfix,
-                        ));
-                    }
-                }
-                ArrayType::Complex(_) => {
-                    if inner_is_constant_sized {
-                        s.wln(format!(
-                            "{name}[i] = {type_name}::{prefix}read(r){postfix}?;",
-                            name = d.name(),
-                            type_name = array.ty().rust_str(),
-                            prefix = prefix,
-                            postfix = postfix,
-                        ));
-                    } else {
-                        s.wln(format!(
-                            "{name}.push({type_name}::{prefix}read(r){postfix}?);",
-                            name = d.name(),
-                            type_name = array.ty().rust_str(),
-                            prefix = prefix,
-                            postfix = postfix,
-                        ));
-                    }
-                }
-                ArrayType::CString => {
-                    s.wln(format!(
-                        "let s = crate::util::{prefix}read_c_string_to_vec(r){postfix}?;",
-                        prefix = prefix,
-                        postfix = postfix,
-                    ));
-                    match array.size() {
-                        ArraySize::Fixed(_) => s.wln(format!(
-                            "{name}[i] = String::from_utf8(s)?;",
-                            name = d.name()
-                        )),
-                        ArraySize::Variable(_) => unreachable!(),
-                        ArraySize::Endless => panic!(),
-                    }
-                }
-                ArrayType::Guid => {
-                    s.wln(format!(
-                        "{name}[i] = Guid::{prefix}read(r){postfix}?;",
-                        name = d.name(),
-                        prefix = prefix,
-                        postfix = postfix,
-                    ));
-                }
-                ArrayType::PackedGuid => {
-                    s.wln(format!(
-                        "{name}[i] = Guid::{prefix}read_packed(r){postfix}?;",
-                        name = d.name(),
-                        prefix = prefix,
-                        postfix = postfix,
-                    ));
-                }
-            }
-
-            s.closing_curly();
-
-            if !inner_is_constant_sized {
-                s.wln(format!(
-                    "let {name} = {name}.try_into().unwrap();",
-                    name = d.name()
-                ));
-            }
-
-            s.newline();
+            print_read_array_fixed(s, array, e, o, d, prefix, postfix, size);
         }
         ArraySize::Variable(length) => {
             s.wln(format!(
