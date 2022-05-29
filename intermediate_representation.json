@@ -48653,7 +48653,7 @@
         }
       ],
       "tags": {
-        "description": "Command to delete a character from the clients account.",
+        "description": "Command to delete a character from the clients account. Can be sent after the client has received [SMSG_CHAR_ENUM].",
         "comment": "Sent after the client has confirmed the character deletion.",
         "version": {
           "type": "world",
@@ -48737,7 +48737,7 @@
       "constant": true,
       "members": [],
       "tags": {
-        "description": "Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE].",
+        "description": "Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE], or after failing to login with [SMSG_CHARACTER_LOGIN_FAILED].",
         "version": {
           "type": "world",
           "versions": [
@@ -48814,7 +48814,7 @@
       "members": [
         {
           "Definition": {
-            "name": "guid",
+            "name": "character",
             "member_type": "Guid",
             "constant_value": null,
             "used_as_size_in": null,
@@ -48824,7 +48824,7 @@
         },
         {
           "Definition": {
-            "name": "name",
+            "name": "new_name",
             "member_type": "CString",
             "constant_value": null,
             "used_as_size_in": null,
@@ -48834,6 +48834,7 @@
         }
       ],
       "tags": {
+        "description": "Request of new name for character. This is only sent by the client if RENAME is set in the [CharacterFlags] of [SMSG_CHAR_ENUM] and the client tries to login.",
         "version": {
           "type": "world",
           "versions": [
@@ -48846,7 +48847,72 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_CHAR_RENAME",
+          "members": [
+            {
+              "variable_name": "character",
+              "verified_value": {
+                "Guid": {
+                  "value": 3735928559,
+                  "original_string": "0xDEADBEEF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "new_name",
+              "verified_value": {
+                "String": "Deadbeef"
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            21,
+            199,
+            2,
+            0,
+            0,
+            239,
+            190,
+            173,
+            222,
+            0,
+            0,
+            0,
+            0,
+            68,
+            101,
+            97,
+            100,
+            98,
+            101,
+            101,
+            102,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_rename.wowm",
+            "start_position": 10
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_rename.wowm",
         "start_position": 3
@@ -72098,6 +72164,7 @@
         }
       ],
       "tags": {
+        "description": "Response to [CMSG_CHAR_CREATE].",
         "version": {
           "type": "world",
           "versions": [
@@ -72110,7 +72177,50 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_CHAR_CREATE",
+          "members": [
+            {
+              "variable_name": "result",
+              "verified_value": {
+                "Enum": {
+                  "value": 47,
+                  "original_string": "CHAR_CREATE_ERROR"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            6,
+            58,
+            0,
+            47,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm",
+            "start_position": 9
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm",
         "start_position": 3
@@ -72325,7 +72435,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "guid",
+                  "name": "character",
                   "member_type": "Guid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -72335,7 +72445,7 @@
               },
               {
                 "Definition": {
-                  "name": "name",
+                  "name": "new_name",
                   "member_type": "CString",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -72356,6 +72466,7 @@
         }
       ],
       "tags": {
+        "description": "Response to [CMSG_CHAR_RENAME].",
         "version": {
           "type": "world",
           "versions": [
@@ -72368,7 +72479,126 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_CHAR_RENAME",
+          "members": [
+            {
+              "variable_name": "result",
+              "verified_value": {
+                "Enum": {
+                  "value": 71,
+                  "original_string": "CHAR_NAME_TOO_LONG"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            6,
+            200,
+            2,
+            71,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm",
+            "start_position": 13
+          }
+        },
+        {
+          "subject": "SMSG_CHAR_RENAME",
+          "members": [
+            {
+              "variable_name": "result",
+              "verified_value": {
+                "Enum": {
+                  "value": 0,
+                  "original_string": "RESPONSE_SUCCESS"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "character",
+              "verified_value": {
+                "Guid": {
+                  "value": 3735928559,
+                  "original_string": "0xDEADBEEF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "new_name",
+              "verified_value": {
+                "String": "Deadbeef"
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            23,
+            200,
+            2,
+            0,
+            0,
+            0,
+            0,
+            239,
+            190,
+            173,
+            222,
+            0,
+            0,
+            0,
+            0,
+            68,
+            101,
+            97,
+            100,
+            98,
+            101,
+            101,
+            102,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm",
+            "start_position": 21
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm",
         "start_position": 3

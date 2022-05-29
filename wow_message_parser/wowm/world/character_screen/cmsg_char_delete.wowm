@@ -3,7 +3,7 @@
 cmsg CMSG_CHAR_DELETE = 0x38 {
     Guid guid;
 } {
-    description = "Command to delete a character from the clients account.";
+    description = "Command to delete a character from the clients account. Can be sent after the client has received [SMSG_CHAR_ENUM].";
     comment = "Sent after the client has confirmed the character deletion.";
 }
 

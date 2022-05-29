@@ -3,8 +3,29 @@
 smsg SMSG_CHAR_RENAME = 0x2C8 {
     WorldResult result;
     if (result == RESPONSE_SUCCESS) {
-        Guid guid;
-        CString name;
+        Guid character;
+        CString new_name;
     }
+} {
+    description = "Response to [CMSG_CHAR_RENAME].";
 }
 
+test SMSG_CHAR_RENAME {
+    result = CHAR_NAME_TOO_LONG;
+} [
+    0x00, 0x06, /* size */
+    0xC8, 0x02, /* opcode */
+    0x47, 0x00, 0x00, 0x00, /* result */
+]
+
+test SMSG_CHAR_RENAME {
+    result = RESPONSE_SUCCESS;
+    character = 0xDEADBEEF;
+    new_name = "Deadbeef";
+} [
+    0x00, 0x17, /* size */
+    0xC8, 0x02, /* opcode */
+    0x00, 0x00, 0x00, 0x00, /* result */
+    0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, /* character */
+    0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65, 0x66, 0x00, /* new_name */
+]

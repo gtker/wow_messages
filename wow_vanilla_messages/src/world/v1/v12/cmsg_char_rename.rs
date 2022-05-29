@@ -10,17 +10,17 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_CHAR_RENAME {
-    pub guid: Guid,
-    pub name: String,
+    pub character: Guid,
+    pub new_name: String,
 }
 
 impl ClientMessage for CMSG_CHAR_RENAME {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
+        // character: Guid
+        w.write_all(&self.character.guid().to_le_bytes())?;
 
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
+        // new_name: CString
+        w.write_all(self.new_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
@@ -35,16 +35,16 @@ impl ClientMessage for CMSG_CHAR_RENAME {
     type Error = crate::errors::ParseError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::read(r)?;
+        // character: Guid
+        let character = Guid::read(r)?;
 
-        // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        // new_name: CString
+        let new_name = crate::util::read_c_string_to_vec(r)?;
+        let new_name = String::from_utf8(new_name)?;
 
         Ok(Self {
-            guid,
-            name,
+            character,
+            new_name,
         })
     }
 
@@ -53,8 +53,100 @@ impl ClientMessage for CMSG_CHAR_RENAME {
 impl CMSG_CHAR_RENAME {
     pub(crate) fn size(&self) -> usize {
         0
-        + 8 // guid: Guid
-        + self.name.len() + 1 // name: CString
+        + 8 // character: Guid
+        + self.new_name.len() + 1 // new_name: CString
     }
 }
 
+#[cfg(test)]
+mod test {
+    use super::CMSG_CHAR_RENAME;
+    use super::*;
+    use super::super::*;
+    use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
+    use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
+    use crate::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 23] = [ 0x00, 0x15, 0xC7, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
+         0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
+         0x66, 0x00, ];
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_CHAR_RENAME0() {
+        let expected = CMSG_CHAR_RENAME {
+            character: Guid::new(0xDEADBEEF),
+            new_name: String::from("Deadbeef"),
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.character, expected.character);
+        assert_eq!(t.new_name, expected.new_name);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_CMSG_CHAR_RENAME0() {
+        let expected = CMSG_CHAR_RENAME {
+            character: Guid::new(0xDEADBEEF),
+            new_name: String::from("Deadbeef"),
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.character, expected.character);
+        assert_eq!(t.new_name, expected.new_name);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_CMSG_CHAR_RENAME0() {
+        let expected = CMSG_CHAR_RENAME {
+            character: Guid::new(0xDEADBEEF),
+            new_name: String::from("Deadbeef"),
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.character, expected.character);
+        assert_eq!(t.new_name, expected.new_name);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}

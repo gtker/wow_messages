@@ -1,7 +1,19 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_CHAR_RENAME = 0x2C7 {
-    Guid guid;
-    CString name;
+    Guid character;
+    CString new_name;
+} {
+    description = "Request of new name for character. This is only sent by the client if RENAME is set in the [CharacterFlags] of [SMSG_CHAR_ENUM] and the client tries to login.";
 }
+
+test CMSG_CHAR_RENAME {
+    character = 0xDEADBEEF;
+    new_name = "Deadbeef";
+} [
+    0x00, 0x15, /* size */
+    0xC7, 0x02, 0x00, 0x00, /* opcode */
+    0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, /* character */
+    0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65, 0x66, 0x00, /* new_name */
+]
 

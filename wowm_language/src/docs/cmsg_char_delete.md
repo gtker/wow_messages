@@ -4,7 +4,7 @@
 
 ### Description
 
-Command to delete a character from the clients account.
+Command to delete a character from the clients account. Can be sent after the client has received [SMSG_CHAR_ENUM](./smsg_char_enum.md).
 
 ### Comment
 

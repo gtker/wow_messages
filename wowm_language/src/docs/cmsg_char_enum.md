@@ -4,7 +4,7 @@
 
 ### Description
 
-Sent after a successful [CMSG_AUTH_SESSION](./cmsg_auth_session.md) and [SMSG_AUTH_RESPONSE](./smsg_auth_response.md).
+Sent after a successful [CMSG_AUTH_SESSION](./cmsg_auth_session.md) and [SMSG_AUTH_RESPONSE](./smsg_auth_response.md), or after failing to login with [SMSG_CHARACTER_LOGIN_FAILED](./smsg_character_login_failed.md).
 
 ### Wowm Representation
 

@@ -21,14 +21,14 @@ impl ServerMessage for SMSG_CHAR_RENAME {
 
         match &self.result {
             SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
-                guid,
-                name,
+                character,
+                new_name,
             } => {
-                // guid: Guid
-                w.write_all(&guid.guid().to_le_bytes())?;
+                // character: Guid
+                w.write_all(&character.guid().to_le_bytes())?;
 
-                // name: CString
-                w.write_all(name.as_bytes())?;
+                // new_name: CString
+                w.write_all(new_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
 
@@ -132,16 +132,16 @@ impl ServerMessage for SMSG_CHAR_RENAME {
 
         let result_if = match result {
             WorldResult::RESPONSE_SUCCESS => {
-                // guid: Guid
-                let guid = Guid::read(r)?;
+                // character: Guid
+                let character = Guid::read(r)?;
 
-                // name: CString
-                let name = crate::util::read_c_string_to_vec(r)?;
-                let name = String::from_utf8(name)?;
+                // new_name: CString
+                let new_name = crate::util::read_c_string_to_vec(r)?;
+                let new_name = String::from_utf8(new_name)?;
 
                 SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
-                    guid,
-                    name,
+                    character,
+                    new_name,
                 }
             }
             WorldResult::RESPONSE_FAILURE => SMSG_CHAR_RENAMEWorldResult::RESPONSE_FAILURE,
@@ -244,8 +244,8 @@ impl SMSG_CHAR_RENAME {
 #[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_CHAR_RENAMEWorldResult {
     RESPONSE_SUCCESS {
-        guid: Guid,
-        name: String,
+        character: Guid,
+        new_name: String,
     },
     RESPONSE_FAILURE,
     RESPONSE_CANCELLED,
@@ -334,8 +334,8 @@ impl Default for SMSG_CHAR_RENAMEWorldResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::RESPONSE_SUCCESS {
-            guid: Default::default(),
-            name: Default::default(),
+            character: Default::default(),
+            new_name: Default::default(),
         }
     }
 }
@@ -434,12 +434,12 @@ impl SMSG_CHAR_RENAMEWorldResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::RESPONSE_SUCCESS {
-                guid,
-                name,
+                character,
+                new_name,
             } => {
                 4
-                + 8 // guid: Guid
-                + name.len() + 1 // name: CString
+                + 8 // character: Guid
+                + new_name.len() + 1 // new_name: CString
             }
             Self::RESPONSE_FAILURE => {
                 4
@@ -688,3 +688,173 @@ impl SMSG_CHAR_RENAMEWorldResult {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use super::SMSG_CHAR_RENAME;
+    use crate::world::v1::v2::WorldResult;
+    use super::*;
+    use super::super::*;
+    use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
+    use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
+    use crate::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 8] = [ 0x00, 0x06, 0xC8, 0x02, 0x47, 0x00, 0x00, 0x00, ];
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_CHAR_RENAME0() {
+        let expected = SMSG_CHAR_RENAME {
+            result: SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_LONG,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_CHAR_RENAME0() {
+        let expected = SMSG_CHAR_RENAME {
+            result: SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_LONG,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_CHAR_RENAME0() {
+        let expected = SMSG_CHAR_RENAME {
+            result: SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_LONG,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    const RAW1: [u8; 25] = [ 0x00, 0x17, 0xC8, 0x02, 0x00, 0x00, 0x00, 0x00, 0xEF,
+         0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62,
+         0x65, 0x65, 0x66, 0x00, ];
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_CHAR_RENAME1() {
+        let expected = SMSG_CHAR_RENAME {
+            result: SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
+                character: Guid::new(0xDEADBEEF),
+                new_name: String::from("Deadbeef"),
+            },
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_CHAR_RENAME1() {
+        let expected = SMSG_CHAR_RENAME {
+            result: SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
+                character: Guid::new(0xDEADBEEF),
+                new_name: String::from("Deadbeef"),
+            },
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_CHAR_RENAME1() {
+        let expected = SMSG_CHAR_RENAME {
+            result: SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
+                character: Guid::new(0xDEADBEEF),
+                new_name: String::from("Deadbeef"),
+            },
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+}

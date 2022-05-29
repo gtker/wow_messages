@@ -1,7 +1,7 @@
 #tag_all versions "1.2 1.12";
 
 cmsg CMSG_CHAR_ENUM = 0x037 { } {
-    description = "Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE].";
+    description = "Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE], or after failing to login with [SMSG_CHARACTER_LOGIN_FAILED].";
 }
 
 test CMSG_CHAR_ENUM {} [
