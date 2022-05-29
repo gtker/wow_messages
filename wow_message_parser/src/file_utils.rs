@@ -68,66 +68,30 @@ impl ModFiles {
     }
 
     pub fn add_world_file(&mut self, name: &str, version: &WorldVersion) {
-        let (e, file_dir) = match version {
-            WorldVersion::Major(m)
-            | WorldVersion::Minor(m, _)
-            | WorldVersion::Patch(m, _, _)
-            | WorldVersion::Exact(m, _, _, _) => (
-                (format!("v{}", m), SubmoduleLocation::PubMod),
-                format!("{}/", WORLD_DIR),
-            ),
-            WorldVersion::All => (
-                (get_module_name(name), SubmoduleLocation::PubUseInternal),
-                get_module_name(name),
-            ),
+        let (m, i) = match version {
+            WorldVersion::Minor(m, i) => (m, i),
+            WorldVersion::Major(_)
+            | WorldVersion::Patch(_, _, _)
+            | WorldVersion::Exact(_, _, _, _)
+            | WorldVersion::All => unimplemented!(),
         };
 
-        self.add_or_append_file(file_dir, e);
+        self.add_or_append_file(
+            format!("{}/", WORLD_DIR),
+            (format!("v{}", m), SubmoduleLocation::PubMod),
+        );
 
-        let (e, file_dir) = match version {
-            WorldVersion::Minor(m, i)
-            | WorldVersion::Patch(m, i, _)
-            | WorldVersion::Exact(m, i, _, _) => (
-                (format!("v{}", i), SubmoduleLocation::PubMod),
-                format!("{}/v{}/", WORLD_DIR, m),
-            ),
-            WorldVersion::Major(m) => (
-                (get_module_name(name), SubmoduleLocation::PubUseInternal),
-                format!("{}/v{}/", WORLD_DIR, m),
-            ),
-            _ => return,
-        };
+        self.add_or_append_file(
+            format!("{}/v{}/", WORLD_DIR, m),
+            (format!("v{}", i), SubmoduleLocation::PubMod),
+        );
 
-        self.add_or_append_file(file_dir, e);
-
-        let (e, file_dir) = match version {
-            WorldVersion::Patch(m, i, p) | WorldVersion::Exact(m, i, p, _) => (
-                (format!("v{}", p), SubmoduleLocation::PubMod),
-                format!("{}/v{}/v{}/", WORLD_DIR, m, i),
-            ),
-            WorldVersion::Minor(m, i) => (
-                (get_module_name(name), SubmoduleLocation::PubUseInternal),
-                format!("{}/v{}/v{}/", WORLD_DIR, m, i),
-            ),
-            _ => return,
-        };
-
-        self.add_or_append_file(file_dir.clone(), e);
+        let file_dir = format!("{}/v{}/v{}/", WORLD_DIR, m, i);
+        self.add_or_append_file(
+            file_dir.clone(),
+            (get_module_name(name), SubmoduleLocation::PubUseInternal),
+        );
         self.add_or_append_file(file_dir, ("opcodes".to_string(), SubmoduleLocation::PubMod));
-
-        let (e, file_dir) = match version {
-            WorldVersion::Exact(m, i, p, b) => (
-                (format!("v{}", b), SubmoduleLocation::PubMod),
-                format!("{}/v{}/v{}/v{}/", WORLD_DIR, m, i, p),
-            ),
-            WorldVersion::Patch(m, i, p) => (
-                (get_module_name(name), SubmoduleLocation::PubUseInternal),
-                format!("{}/v{}/v{}/v{}/", WORLD_DIR, m, i, p),
-            ),
-            _ => return,
-        };
-
-        self.add_or_append_file(file_dir, e);
     }
 
     pub fn add_login_file(&mut self, name: &str, version: &LoginVersion) {
