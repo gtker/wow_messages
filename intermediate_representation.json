@@ -94328,7 +94328,148 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_TUTORIAL_FLAGS",
+          "members": [
+            {
+              "variable_name": "tutorial_data0",
+              "verified_value": {
+                "Number": {
+                  "value": 4294967295,
+                  "original_string": "0xFFFFFFFF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "tutorial_data1",
+              "verified_value": {
+                "Number": {
+                  "value": 4294967295,
+                  "original_string": "0xFFFFFFFF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "tutorial_data2",
+              "verified_value": {
+                "Number": {
+                  "value": 4294967295,
+                  "original_string": "0xFFFFFFFF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "tutorial_data3",
+              "verified_value": {
+                "Number": {
+                  "value": 4294967295,
+                  "original_string": "0xFFFFFFFF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "tutorial_data4",
+              "verified_value": {
+                "Number": {
+                  "value": 4294967295,
+                  "original_string": "0xFFFFFFFF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "tutorial_data5",
+              "verified_value": {
+                "Number": {
+                  "value": 4294967295,
+                  "original_string": "0xFFFFFFFF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "tutorial_data6",
+              "verified_value": {
+                "Number": {
+                  "value": 4294967295,
+                  "original_string": "0xFFFFFFFF"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "tutorial_data7",
+              "verified_value": {
+                "Number": {
+                  "value": 4294967295,
+                  "original_string": "0xFFFFFFFF"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            34,
+            253,
+            0,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm",
+            "start_position": 14
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm",
         "start_position": 3

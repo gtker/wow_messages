@@ -32,3 +32,16 @@ SMSG have a header of 4 bytes.
 | 0x18 | 4 / Little | u32 | tutorial_data5 |  |  |
 | 0x1C | 4 / Little | u32 | tutorial_data6 |  |  |
 | 0x20 | 4 / Little | u32 | tutorial_data7 |  |  |
+### Examples
+```c
+0, 34, // size
+253, 0, // opcode (253)
+255, 255, 255, 255, // tutorial_data0: u32
+255, 255, 255, 255, // tutorial_data1: u32
+255, 255, 255, 255, // tutorial_data2: u32
+255, 255, 255, 255, // tutorial_data3: u32
+255, 255, 255, 255, // tutorial_data4: u32
+255, 255, 255, 255, // tutorial_data5: u32
+255, 255, 255, 255, // tutorial_data6: u32
+255, 255, 255, 255, // tutorial_data7: u32
+```
