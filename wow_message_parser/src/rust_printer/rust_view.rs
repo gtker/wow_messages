@@ -333,6 +333,7 @@ pub enum RustType {
     },
     Enum {
         ty_name: String,
+        original_ty_name: String,
         enumerators: Vec<RustEnumerator>,
         int_ty: IntegerType,
         is_simple: bool,
@@ -340,6 +341,7 @@ pub enum RustType {
     },
     Flag {
         ty_name: String,
+        original_ty_name: String,
         int_ty: IntegerType,
         enumerators: Vec<RustEnumerator>,
         is_simple: bool,
@@ -465,17 +467,19 @@ impl RustObject {
         self.sizes
     }
 
-    fn get_rust_definer_from_ty(m: &RustMember, container_name: &str) -> Option<RustDefiner> {
-        let (ty_name, enumerators, int_ty, is_simple, definer_type, is_elseif) =
+    fn get_rust_definer_from_ty(m: &RustMember) -> Option<RustDefiner> {
+        let (ty_name, original_ty_name, enumerators, int_ty, is_simple, definer_type, is_elseif) =
             match m.ty().clone() {
                 RustType::Enum {
                     ty_name,
+                    original_ty_name,
                     enumerators,
                     int_ty,
                     is_simple,
                     is_elseif,
                 } => (
                     ty_name,
+                    original_ty_name,
                     enumerators,
                     int_ty,
                     is_simple,
@@ -484,12 +488,14 @@ impl RustObject {
                 ),
                 RustType::Flag {
                     ty_name,
+                    original_ty_name,
                     enumerators,
                     int_ty,
                     is_simple,
                     is_elseif,
                 } => (
                     ty_name,
+                    original_ty_name,
                     enumerators,
                     int_ty,
                     is_simple,
@@ -506,7 +512,7 @@ impl RustObject {
             int_ty,
             is_simple,
             is_elseif,
-            original_ty_name: ty_name.replacen(container_name, "", 1),
+            original_ty_name,
             definer_type,
         })
     }
@@ -545,7 +551,7 @@ impl RustObject {
         let mut v = Vec::new();
 
         for m in self.members_in_struct() {
-            if let Some(rd) = Self::get_rust_definer_from_ty(m, self.name()) {
+            if let Some(rd) = Self::get_rust_definer_from_ty(m) {
                 v.push(rd);
             }
         }
@@ -562,7 +568,7 @@ impl RustObject {
             v: &mut Vec<RustDefiner>,
             container_name: &str,
         ) {
-            if let Some(rd) = RustObject::get_rust_definer_from_ty(m, container_name) {
+            if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
                 for enumerator in rd.enumerators() {
                     if enumerator.name() == enumerator_name {
                         if enumerator.contains_elseif() {
@@ -572,10 +578,7 @@ impl RustObject {
                                         if enumerator.name() == enumerator_name {
                                             for m in enumerator.members_in_struct() {
                                                 if let Some(rd) =
-                                                    RustObject::get_rust_definer_from_ty(
-                                                        m,
-                                                        container_name,
-                                                    )
+                                                    RustObject::get_rust_definer_from_ty(m)
                                                 {
                                                     v.push(rd);
                                                 } else {
@@ -589,9 +592,7 @@ impl RustObject {
                             }
                         } else {
                             for m in enumerator.members_in_struct() {
-                                if let Some(rd) =
-                                    RustObject::get_rust_definer_from_ty(m, container_name)
-                                {
+                                if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
                                     v.push(rd);
                                 } else {
                                     inner(m, enumerator_name, v, container_name);
@@ -600,7 +601,7 @@ impl RustObject {
                         }
                     } else {
                         for m in enumerator.members_in_struct() {
-                            if RustObject::get_rust_definer_from_ty(m, container_name).is_some() {
+                            if RustObject::get_rust_definer_from_ty(m).is_some() {
                                 inner(m, enumerator_name, v, container_name);
                             }
                         }
@@ -623,7 +624,7 @@ impl RustObject {
 
         for enumerator in rd.enumerators {
             for m in enumerator.members_in_struct() {
-                if let Some(rd) = Self::get_rust_definer_from_ty(m, self.name()) {
+                if let Some(rd) = Self::get_rust_definer_from_ty(m) {
                     v.push(rd);
                 }
             }
@@ -634,7 +635,7 @@ impl RustObject {
 
     pub fn get_rust_definers(&self) -> Vec<RustDefiner> {
         fn inner(m: &RustMember, v: &mut Vec<RustDefiner>, container_name: &str) {
-            let rd = RustObject::get_rust_definer_from_ty(m, container_name);
+            let rd = RustObject::get_rust_definer_from_ty(m);
 
             if let Some(rd) = rd {
                 for enumerator in rd.enumerators() {
@@ -669,7 +670,7 @@ impl RustObject {
             enumerator_name: &str,
             container_name: &str,
         ) -> Option<RustDefiner> {
-            if let Some(rd) = RustObject::get_rust_definer_from_ty(m, container_name) {
+            if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
                 for enumerator in rd.enumerators() {
                     if enumerator.contains_elseif() {
                         match enumerator.members()[0].ty() {
@@ -714,7 +715,7 @@ impl RustObject {
     pub fn get_rust_definer(&self, name: &str) -> RustDefiner {
         let member = self.get_complex_definer_ty(name);
 
-        Self::get_rust_definer_from_ty(member, &self.name).unwrap()
+        Self::get_rust_definer_from_ty(member).unwrap()
     }
 
     pub fn get_complex_definer_ty(&self, name: &str) -> &RustMember {
@@ -896,6 +897,7 @@ fn create_else_if_flag(
         name: statement.name().to_string(),
         ty: RustType::Enum {
             ty_name: format!("{}{}", flag_ty_name, enumerator),
+            original_ty_name: flag_ty_name.clone(),
             enumerators,
             int_ty: flag_int_ty,
             is_simple: false,
@@ -1178,6 +1180,7 @@ pub fn create_struct_member(
 
                             RustType::Enum {
                                 ty_name: s.clone(),
+                                original_ty_name: s.clone(),
                                 enumerators,
                                 int_ty,
                                 is_simple: true,
@@ -1189,6 +1192,7 @@ pub fn create_struct_member(
 
                             RustType::Flag {
                                 ty_name: s.clone(),
+                                original_ty_name: s.to_string(),
                                 int_ty: *o.get_definer(s, tags).ty(),
                                 enumerators,
                                 is_simple: true,
