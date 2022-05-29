@@ -202,7 +202,7 @@ fn world_common_impls_read_write(
     );
 
     s.wln(format!(
-        "let mut header = [0u8; {header_size}];",
+        "let mut header = [0_u8; {header_size}];",
         header_size = opcode_size + 2
     ));
     s.wln(format!(

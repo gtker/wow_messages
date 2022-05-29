@@ -31,7 +31,7 @@ impl ClientOpcodeMessage {
     }
     #[cfg(feature = "sync")]
     pub fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, ClientOpcodeMessageError> {
-        let mut header = [0u8; 6];
+        let mut header = [0_u8; 6];
         r.read_exact(&mut header)?;
         let header = d.decrypt_client_header(header);
         let body_size = (header.size.saturating_sub(4)) as u32;
@@ -52,7 +52,7 @@ impl ClientOpcodeMessage {
     }
     #[cfg(feature = "tokio")]
     pub async fn tokio_read_encrypted<R: AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, ClientOpcodeMessageError> {
-        let mut header = [0u8; 6];
+        let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
         let body_size = (header.size.saturating_sub(4)) as u32;
@@ -73,7 +73,7 @@ impl ClientOpcodeMessage {
     }
     #[cfg(feature = "async-std")]
     pub async fn astd_read_encrypted<R: ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, ClientOpcodeMessageError> {
-        let mut header = [0u8; 6];
+        let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
         let body_size = (header.size.saturating_sub(4)) as u32;
@@ -150,7 +150,7 @@ impl ServerOpcodeMessage {
     }
     #[cfg(feature = "sync")]
     pub fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, ServerOpcodeMessageError> {
-        let mut header = [0u8; 4];
+        let mut header = [0_u8; 4];
         r.read_exact(&mut header)?;
         let header = d.decrypt_server_header(header);
         let body_size = (header.size.saturating_sub(2)) as u32;
@@ -171,7 +171,7 @@ impl ServerOpcodeMessage {
     }
     #[cfg(feature = "tokio")]
     pub async fn tokio_read_encrypted<R: AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, ServerOpcodeMessageError> {
-        let mut header = [0u8; 4];
+        let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
         let body_size = (header.size.saturating_sub(2)) as u32;
@@ -192,7 +192,7 @@ impl ServerOpcodeMessage {
     }
     #[cfg(feature = "async-std")]
     pub async fn astd_read_encrypted<R: ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, ServerOpcodeMessageError> {
-        let mut header = [0u8; 4];
+        let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
         let body_size = (header.size.saturating_sub(2)) as u32;
