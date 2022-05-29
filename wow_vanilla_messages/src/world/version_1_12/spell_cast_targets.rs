@@ -311,36 +311,19 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub const fn new_SELF() -> Self {
-        Self {
-            inner: SpellCastTargetFlags::SELF,
-            unit: None,
-            item: None,
-            source_location: None,
-            dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
-            gameobject: None,
-            trade_item: None,
-            string: None,
-            locked: None,
-            corpse_ally: None,
-        }
-    }
-
-    pub fn set_SELF(&mut self) -> Self {
-        self.inner |= SpellCastTargetFlags::SELF;
-        self.clone()
-    }
-
-    pub const fn get_SELF(&self) -> bool {
-        // Underlying value is 0
-        self.inner == SpellCastTargetFlags::SELF
-    }
-
-    pub fn clear_SELF(mut self) -> Self {
-        self.inner &= SpellCastTargetFlags::SELF.reverse_bits();
-        self
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+        && self.unit.is_none()
+        && self.item.is_none()
+        && self.source_location.is_none()
+        && self.dest_location.is_none()
+        && self.unit_enemy.is_none()
+        && self.corpse_enemy.is_none()
+        && self.gameobject.is_none()
+        && self.trade_item.is_none()
+        && self.string.is_none()
+        && self.locked.is_none()
+        && self.corpse_ally.is_none()
     }
 
     pub const fn new_UNUSED1() -> Self {

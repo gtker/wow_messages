@@ -154,26 +154,9 @@ impl FlagIfElseIf_SimpleFlag {
         }
     }
 
-    pub const fn new_ZERO() -> Self {
-        Self {
-            inner: SimpleFlag::ZERO,
-            one: None,
-        }
-    }
-
-    pub fn set_ZERO(&mut self) -> Self {
-        self.inner |= SimpleFlag::ZERO;
-        self.clone()
-    }
-
-    pub const fn get_ZERO(&self) -> bool {
-        // Underlying value is 0
-        self.inner == SimpleFlag::ZERO
-    }
-
-    pub fn clear_ZERO(mut self) -> Self {
-        self.inner &= SimpleFlag::ZERO.reverse_bits();
-        self
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+        && self.one.is_none()
     }
 
     pub const fn new_ONE(one: FlagIfElseIf_SimpleFlag_ONE) -> Self {
@@ -314,27 +297,10 @@ impl FlagIfElseIf_UpdateFlag {
         }
     }
 
-    pub const fn new_NONE() -> Self {
-        Self {
-            inner: UpdateFlag::NONE,
-            one_if: None,
-            eight_if: None,
-        }
-    }
-
-    pub fn set_NONE(&mut self) -> Self {
-        self.inner |= UpdateFlag::NONE;
-        self.clone()
-    }
-
-    pub const fn get_NONE(&self) -> bool {
-        // Underlying value is 0
-        self.inner == UpdateFlag::NONE
-    }
-
-    pub fn clear_NONE(mut self) -> Self {
-        self.inner &= UpdateFlag::NONE.reverse_bits();
-        self
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+        && self.one_if.is_none()
+        && self.eight_if.is_none()
     }
 
     pub const fn new_ONE_IF(one_if: FlagIfElseIf_UpdateFlag_ONE_IF) -> Self {

@@ -19,31 +19,16 @@ impl SimpleFlag {
         Self { inner: 0 }
     }
 
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+    }
+
     pub const fn all() -> Self {
         Self {
             inner: Self::ZERO
                 | Self::ONE
                 | Self::TWO
         }
-    }
-
-    pub const fn is_ZERO(&self) -> bool {
-        // Underlying value is 0
-        self.inner == Self::ZERO
-    }
-
-    pub const fn new_ZERO() -> Self {
-        Self { inner: Self::ZERO }
-    }
-
-    pub fn set_ZERO(&mut self) -> Self {
-        self.inner |= Self::ZERO;
-        *self
-    }
-
-    pub fn clear_ZERO(&mut self) -> Self {
-        self.inner &= Self::ZERO.reverse_bits();
-        *self
     }
 
     pub const fn is_ONE(&self) -> bool {

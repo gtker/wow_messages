@@ -648,28 +648,11 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
         }
     }
 
-    pub const fn new_NONE() -> Self {
-        Self {
-            inner: SecurityFlag::NONE,
-            pin: None,
-            unknown0: None,
-            authenticator: None,
-        }
-    }
-
-    pub fn set_NONE(&mut self) -> Self {
-        self.inner |= SecurityFlag::NONE;
-        self.clone()
-    }
-
-    pub const fn get_NONE(&self) -> bool {
-        // Underlying value is 0
-        self.inner == SecurityFlag::NONE
-    }
-
-    pub fn clear_NONE(mut self) -> Self {
-        self.inner &= SecurityFlag::NONE.reverse_bits();
-        self
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+        && self.pin.is_none()
+        && self.unknown0.is_none()
+        && self.authenticator.is_none()
     }
 
     pub const fn new_PIN(pin: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_PIN) -> Self {
@@ -1000,7 +983,6 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_NONE()
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
                      0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
@@ -1043,7 +1025,6 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_NONE()
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
                      0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
@@ -1086,7 +1067,6 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_NONE()
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
                      0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,

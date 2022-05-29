@@ -331,6 +331,10 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                 if let Some((enumerator, elseif_ty)) =
                     get_enumerator(rd.enumerators(), flag.as_str())
                 {
+                    if enumerator.value().int() == 0 {
+                        continue;
+                    }
+
                     if !enumerator.has_members_in_struct() {
                         s.wln(format!(".set_{}()", enumerator.name()));
                         continue;

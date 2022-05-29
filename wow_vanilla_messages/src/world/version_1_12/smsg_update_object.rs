@@ -113,7 +113,6 @@ mod test {
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
                                     flags: MovementBlock_MovementFlags::empty()
-                                        .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
                                     living_position_x: -8949.95_f32,
@@ -176,7 +175,6 @@ mod test {
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
                                     flags: MovementBlock_MovementFlags::empty()
-                                        .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
                                     living_position_x: -8949.95_f32,
@@ -239,7 +237,6 @@ mod test {
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
                                     flags: MovementBlock_MovementFlags::empty()
-                                        .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
                                     living_position_x: -8949.95_f32,
@@ -321,7 +318,6 @@ mod test {
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
                                     flags: MovementBlock_MovementFlags::empty()
-                                        .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
                                     living_position_x: -8949.95_f32,
@@ -390,7 +386,6 @@ mod test {
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
                                     flags: MovementBlock_MovementFlags::empty()
-                                        .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
                                     living_position_x: -8949.95_f32,
@@ -459,7 +454,6 @@ mod test {
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
                                     flags: MovementBlock_MovementFlags::empty()
-                                        .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
                                     living_position_x: -8949.95_f32,

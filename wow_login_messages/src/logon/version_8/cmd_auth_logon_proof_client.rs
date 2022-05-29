@@ -491,28 +491,11 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         }
     }
 
-    pub const fn new_NONE() -> Self {
-        Self {
-            inner: SecurityFlag::NONE,
-            pin: None,
-            unknown0: None,
-            authenticator: None,
-        }
-    }
-
-    pub fn set_NONE(&mut self) -> Self {
-        self.inner |= SecurityFlag::NONE;
-        self.clone()
-    }
-
-    pub const fn get_NONE(&self) -> bool {
-        // Underlying value is 0
-        self.inner == SecurityFlag::NONE
-    }
-
-    pub fn clear_NONE(mut self) -> Self {
-        self.inner &= SecurityFlag::NONE.reverse_bits();
-        self
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+        && self.pin.is_none()
+        && self.unknown0.is_none()
+        && self.authenticator.is_none()
     }
 
     pub const fn new_PIN(pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN) -> Self {
@@ -718,7 +701,6 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_NONE()
                 ,
         };
 
@@ -774,7 +756,6 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_NONE()
                 ,
         };
 
@@ -830,7 +811,6 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_NONE()
                 ,
         };
 
@@ -888,7 +868,6 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_NONE()
                 ,
         };
 
@@ -936,7 +915,6 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_NONE()
                 ,
         };
 
@@ -984,7 +962,6 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_NONE()
                 ,
         };
 
@@ -1031,7 +1008,6 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_NONE()
                 ,
         };
 
@@ -1070,7 +1046,6 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_NONE()
                 ,
         };
 
@@ -1109,7 +1084,6 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_NONE()
                 ,
         };
 

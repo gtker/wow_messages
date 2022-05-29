@@ -39,6 +39,10 @@ impl GroupUpdateFlags {
         Self { inner: 0 }
     }
 
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+    }
+
     pub const fn all() -> Self {
         Self {
             inner: Self::FLAG_NONE
@@ -65,25 +69,6 @@ impl GroupUpdateFlags {
                 | Self::FLAG_PET_AURAS_2
                 | Self::MODE_OFFLINE
         }
-    }
-
-    pub const fn is_FLAG_NONE(&self) -> bool {
-        // Underlying value is 0
-        self.inner == Self::FLAG_NONE
-    }
-
-    pub const fn new_FLAG_NONE() -> Self {
-        Self { inner: Self::FLAG_NONE }
-    }
-
-    pub fn set_FLAG_NONE(&mut self) -> Self {
-        self.inner |= Self::FLAG_NONE;
-        *self
-    }
-
-    pub fn clear_FLAG_NONE(&mut self) -> Self {
-        self.inner &= Self::FLAG_NONE.reverse_bits();
-        *self
     }
 
     pub const fn is_FLAG_STATUS(&self) -> bool {

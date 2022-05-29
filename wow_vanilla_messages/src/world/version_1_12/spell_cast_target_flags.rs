@@ -33,6 +33,10 @@ impl SpellCastTargetFlags {
         Self { inner: 0 }
     }
 
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+    }
+
     pub const fn all() -> Self {
         Self {
             inner: Self::SELF
@@ -53,25 +57,6 @@ impl SpellCastTargetFlags {
                 | Self::LOCKED
                 | Self::CORPSE_ALLY
         }
-    }
-
-    pub const fn is_SELF(&self) -> bool {
-        // Underlying value is 0
-        self.inner == Self::SELF
-    }
-
-    pub const fn new_SELF() -> Self {
-        Self { inner: Self::SELF }
-    }
-
-    pub fn set_SELF(&mut self) -> Self {
-        self.inner |= Self::SELF;
-        *self
-    }
-
-    pub fn clear_SELF(&mut self) -> Self {
-        self.inner &= Self::SELF.reverse_bits();
-        *self
     }
 
     pub const fn is_UNUSED1(&self) -> bool {

@@ -461,43 +461,26 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub const fn new_FLAG_NONE() -> Self {
-        Self {
-            inner: GroupUpdateFlags::FLAG_NONE,
-            flag_status: None,
-            flag_cur_hp: None,
-            flag_max_hp: None,
-            flag_power_type: None,
-            flag_cur_power: None,
-            flag_max_power: None,
-            flag_level: None,
-            flag_zone: None,
-            flag_position: None,
-            flag_auras: None,
-            flag_pet_name: None,
-            flag_pet_model_id: None,
-            flag_pet_cur_hp: None,
-            flag_pet_max_hp: None,
-            flag_pet_power_type: None,
-            flag_pet_cur_power: None,
-            flag_pet_max_power: None,
-            flag_pet_auras: None,
-        }
-    }
-
-    pub fn set_FLAG_NONE(&mut self) -> Self {
-        self.inner |= GroupUpdateFlags::FLAG_NONE;
-        self.clone()
-    }
-
-    pub const fn get_FLAG_NONE(&self) -> bool {
-        // Underlying value is 0
-        self.inner == GroupUpdateFlags::FLAG_NONE
-    }
-
-    pub fn clear_FLAG_NONE(mut self) -> Self {
-        self.inner &= GroupUpdateFlags::FLAG_NONE.reverse_bits();
-        self
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+        && self.flag_status.is_none()
+        && self.flag_cur_hp.is_none()
+        && self.flag_max_hp.is_none()
+        && self.flag_power_type.is_none()
+        && self.flag_cur_power.is_none()
+        && self.flag_max_power.is_none()
+        && self.flag_level.is_none()
+        && self.flag_zone.is_none()
+        && self.flag_position.is_none()
+        && self.flag_auras.is_none()
+        && self.flag_pet_name.is_none()
+        && self.flag_pet_model_id.is_none()
+        && self.flag_pet_cur_hp.is_none()
+        && self.flag_pet_max_hp.is_none()
+        && self.flag_pet_power_type.is_none()
+        && self.flag_pet_cur_power.is_none()
+        && self.flag_pet_max_power.is_none()
+        && self.flag_pet_auras.is_none()
     }
 
     pub const fn new_FLAG_STATUS(flag_status: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_STATUS) -> Self {

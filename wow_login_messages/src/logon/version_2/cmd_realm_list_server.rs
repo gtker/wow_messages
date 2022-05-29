@@ -236,7 +236,6 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     flag: RealmFlag::empty()
-                        .set_NONE()
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
@@ -273,7 +272,6 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     flag: RealmFlag::empty()
-                        .set_NONE()
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
@@ -310,7 +308,6 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     flag: RealmFlag::empty()
-                        .set_NONE()
                         ,
                     name: String::from("A"),
                     address: String::from("A"),

@@ -25,6 +25,10 @@ impl GroupMemberOnlineStatus {
         Self { inner: 0 }
     }
 
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+    }
+
     pub const fn all() -> Self {
         Self {
             inner: Self::OFFLINE
@@ -37,25 +41,6 @@ impl GroupMemberOnlineStatus {
                 | Self::AFK
                 | Self::DND
         }
-    }
-
-    pub const fn is_OFFLINE(&self) -> bool {
-        // Underlying value is 0
-        self.inner == Self::OFFLINE
-    }
-
-    pub const fn new_OFFLINE() -> Self {
-        Self { inner: Self::OFFLINE }
-    }
-
-    pub fn set_OFFLINE(&mut self) -> Self {
-        self.inner |= Self::OFFLINE;
-        *self
-    }
-
-    pub fn clear_OFFLINE(&mut self) -> Self {
-        self.inner &= Self::OFFLINE.reverse_bits();
-        *self
     }
 
     pub const fn is_ONLINE(&self) -> bool {

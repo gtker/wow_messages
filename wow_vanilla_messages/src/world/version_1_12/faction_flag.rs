@@ -23,6 +23,10 @@ impl FactionFlag {
         Self { inner: 0 }
     }
 
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+    }
+
     pub const fn all() -> Self {
         Self {
             inner: Self::VISIBLE

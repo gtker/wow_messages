@@ -68,7 +68,21 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
         });
     });
 
+    s.funcn_pub_const("is_empty(&self)", "bool", |s| {
+        s.wln("self.inner == 0");
+        for enumerator in rd.complex_flag_enumerators() {
+            s.wln(format!(
+                "&& self.{name}.is_none()",
+                name = enumerator.name().to_lowercase()
+            ))
+        }
+    });
+
     for enumerator in rd.enumerators() {
+        if enumerator.value().int() == 0 {
+            continue;
+        }
+
         if !enumerator.has_members_in_struct() {
             s.funcn_pub_const(format!("new_{}()", enumerator.name()), "Self", |s| {
                 s.body("Self", |s| {
@@ -201,6 +215,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 },
             );
         }
+
         s.funcn_pub(
             format!("clear_{}(mut self)", enumerator.name()),
             "Self",

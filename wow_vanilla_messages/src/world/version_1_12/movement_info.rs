@@ -203,29 +203,12 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub const fn new_NONE() -> Self {
-        Self {
-            inner: MovementFlags::NONE,
-            on_transport: None,
-            jumping: None,
-            swimming: None,
-            spline_elevation: None,
-        }
-    }
-
-    pub fn set_NONE(&mut self) -> Self {
-        self.inner |= MovementFlags::NONE;
-        self.clone()
-    }
-
-    pub const fn get_NONE(&self) -> bool {
-        // Underlying value is 0
-        self.inner == MovementFlags::NONE
-    }
-
-    pub fn clear_NONE(mut self) -> Self {
-        self.inner &= MovementFlags::NONE.reverse_bits();
-        self
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+        && self.on_transport.is_none()
+        && self.jumping.is_none()
+        && self.swimming.is_none()
+        && self.spline_elevation.is_none()
     }
 
     pub const fn new_FORWARD() -> Self {

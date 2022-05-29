@@ -23,6 +23,10 @@ impl RealmFlag {
         Self { inner: 0 }
     }
 
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+    }
+
     pub const fn all() -> Self {
         Self {
             inner: Self::NONE
@@ -33,25 +37,6 @@ impl RealmFlag {
                 | Self::FORCE_GREEN_RECOMMENDED
                 | Self::FORCE_RED_FULL
         }
-    }
-
-    pub const fn is_NONE(&self) -> bool {
-        // Underlying value is 0
-        self.inner == Self::NONE
-    }
-
-    pub const fn new_NONE() -> Self {
-        Self { inner: Self::NONE }
-    }
-
-    pub fn set_NONE(&mut self) -> Self {
-        self.inner |= Self::NONE;
-        *self
-    }
-
-    pub fn clear_NONE(&mut self) -> Self {
-        self.inner &= Self::NONE.reverse_bits();
-        *self
     }
 
     pub const fn is_INVALID(&self) -> bool {

@@ -279,26 +279,9 @@ impl Realm_RealmFlag {
         }
     }
 
-    pub const fn new_NONE() -> Self {
-        Self {
-            inner: RealmFlag::NONE,
-            specify_build: None,
-        }
-    }
-
-    pub fn set_NONE(&mut self) -> Self {
-        self.inner |= RealmFlag::NONE;
-        self.clone()
-    }
-
-    pub const fn get_NONE(&self) -> bool {
-        // Underlying value is 0
-        self.inner == RealmFlag::NONE
-    }
-
-    pub fn clear_NONE(mut self) -> Self {
-        self.inner &= RealmFlag::NONE.reverse_bits();
-        self
+    pub const fn is_empty(&self) -> bool {
+        self.inner == 0
+        && self.specify_build.is_none()
     }
 
     pub const fn new_INVALID() -> Self {
