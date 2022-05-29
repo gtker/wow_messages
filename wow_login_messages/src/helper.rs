@@ -1,6 +1,6 @@
 //! Utility functions for common operations.
 //!
-//! [`read_initial_opcode`] is used as the very first message sent by the client can
+//! [`read_initial_message`] is used as the very first message sent by the client can
 //! only be either a
 //! [`CMD_AUTH_LOGON_CHALLENGE_Client`] or
 //! [`CMD_AUTH_RECONNECT_CHALLENGE_Client`].
@@ -70,6 +70,33 @@ pub async fn tokio_expect_client_message<
     }
 }
 
+#[cfg(feature = "async-std")]
+/// See docs for the sync version called [`expect_client_message`].
+pub async fn astd_expect_client_message<
+    M: ClientMessage,
+    R: async_std::io::ReadExt + Unpin + Send,
+>(
+    r: &mut R,
+) -> Result<M, ExpectedMessageError> {
+    let opcode = crate::util::astd_read_u8_le(r).await?;
+
+    // Unable to match on associated const M::OPCODE, so we do if
+    if opcode == M::OPCODE {
+        let m = M::astd_read(r).await;
+        match m {
+            Ok(m) => Ok(m),
+            Err(_) => Err(ExpectedMessageError::IoOrParseError),
+        }
+    } else {
+        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
+    }
+}
+
+/// Error type for the [`helper`](crate::helper) functions.
+///
+/// The `IoOrParseError` does not contain the underlying error type due to generics.
+/// If you need to access the specifics of error type just manually match on [`opcodes`](crate::version_2::opcodes).
+/// Notice that the opcodes differ depending on version.
 #[derive(Debug)]
 pub enum ExpectedMessageError {
     UnexpectedOpcode(u8),
@@ -154,6 +181,35 @@ pub async fn tokio_expect_server_message<
     }
 }
 
+/// See docs for the sync version called [`expect_server_message`].
+#[cfg(feature = "async-std")]
+pub async fn astd_expect_server_message<
+    M: ServerMessage,
+    R: async_std::io::ReadExt + Unpin + Send,
+>(
+    r: &mut R,
+) -> Result<M, ExpectedMessageError> {
+    let opcode = crate::util::astd_read_u8_le(r).await?;
+
+    // Unable to match on associated const M::OPCODE, so we do if
+    if opcode == M::OPCODE {
+        let m = M::astd_read(r).await;
+        match m {
+            Ok(m) => Ok(m),
+            Err(_) => Err(ExpectedMessageError::IoOrParseError),
+        }
+    } else {
+        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
+    }
+}
+
+/// Either of the first two initial messages that are allowed.
+#[derive(Debug, Clone)]
+pub enum InitialMessage {
+    Logon(CMD_AUTH_LOGON_CHALLENGE_Client),
+    Reconnect(CMD_AUTH_RECONNECT_CHALLENGE_Client),
+}
+
 /// Reads either a
 /// [`CMD_AUTH_LOGON_CHALLENGE_Client`], a
 /// [`CMD_AUTH_RECONNECT_CHALLENGE_Client`] or returns an error.
@@ -167,20 +223,20 @@ pub async fn tokio_expect_server_message<
 /// and this creates a nicer abstraction around that.
 ///
 /// ```
-/// use wow_login_messages::helper::{InitialOpcode, read_initial_opcode};
+/// use wow_login_messages::helper::{InitialMessage, read_initial_message};
 /// use wow_login_messages::all::{CMD_AUTH_LOGON_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_Client};
 /// # fn handle_logon(l: CMD_AUTH_LOGON_CHALLENGE_Client) {}
 /// # fn handle_reconnect(l: CMD_AUTH_RECONNECT_CHALLENGE_Client) {}
 /// # fn test(mut reader: impl std::io::Read) -> Result<(), Box<dyn std::error::Error>> {
 ///
 /// // First thing we read from the socket
-/// let opcode = read_initial_opcode(&mut reader)?;
+/// let opcode = read_initial_message(&mut reader)?;
 /// // We now have either a logon attempt or a reconnect attempt
 /// match opcode {
-///     InitialOpcode::Logon(l) => {
+///     InitialMessage::Logon(l) => {
 ///         handle_logon(l);
 ///     }
-///     InitialOpcode::Reconnect(r) => {
+///     InitialMessage::Reconnect(r) => {
 ///         handle_reconnect(r);
 ///     }
 /// }
@@ -190,40 +246,51 @@ pub async fn tokio_expect_server_message<
 ///
 ///
 #[cfg(feature = "sync")]
-pub fn read_initial_opcode<R: std::io::Read>(
+pub fn read_initial_message<R: std::io::Read>(
     r: &mut R,
-) -> Result<InitialOpcode, ExpectedMessageError> {
+) -> Result<InitialMessage, ExpectedMessageError> {
     let opcode = read_u8_le(r)?;
     match opcode {
-        CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialOpcode::Logon(
+        CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Logon(
             CMD_AUTH_LOGON_CHALLENGE_Client::read(r)?,
         )),
-        CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialOpcode::Reconnect(
+        CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Reconnect(
             CMD_AUTH_RECONNECT_CHALLENGE_Client::read(r)?,
         )),
         opcode => Err(ExpectedMessageError::UnexpectedOpcode(opcode)),
     }
 }
 
-/// See docs for the sync version called [`read_initial_opcode`].
+/// See docs for the sync version called [`read_initial_message`].
 #[cfg(feature = "tokio")]
-pub async fn tokio_read_initial_opcode<R: tokio::io::AsyncReadExt + Unpin + Send>(
+pub async fn tokio_read_initial_message<R: tokio::io::AsyncReadExt + Unpin + Send>(
     r: &mut R,
-) -> Result<InitialOpcode, ExpectedMessageError> {
+) -> Result<InitialMessage, ExpectedMessageError> {
     let opcode = crate::util::tokio_read_u8_le(r).await?;
     match opcode {
-        CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialOpcode::Logon(
+        CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Logon(
             CMD_AUTH_LOGON_CHALLENGE_Client::tokio_read(r).await?,
         )),
-        CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialOpcode::Reconnect(
+        CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Reconnect(
             CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read(r).await?,
         )),
         opcode => Err(ExpectedMessageError::UnexpectedOpcode(opcode)),
     }
 }
 
-#[derive(Debug)]
-pub enum InitialOpcode {
-    Logon(CMD_AUTH_LOGON_CHALLENGE_Client),
-    Reconnect(CMD_AUTH_RECONNECT_CHALLENGE_Client),
+/// See docs for the sync version called [`read_initial_message`].
+#[cfg(feature = "async-std")]
+pub async fn astd_read_initial_message<R: async_std::io::ReadExt + Unpin + Send>(
+    r: &mut R,
+) -> Result<InitialMessage, ExpectedMessageError> {
+    let opcode = crate::util::astd_read_u8_le(r).await?;
+    match opcode {
+        CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Logon(
+            CMD_AUTH_LOGON_CHALLENGE_Client::astd_read(r).await?,
+        )),
+        CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Reconnect(
+            CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read(r).await?,
+        )),
+        opcode => Err(ExpectedMessageError::UnexpectedOpcode(opcode)),
+    }
 }

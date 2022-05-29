@@ -5,7 +5,7 @@ use wow_login_messages::all::{
     CMD_AUTH_LOGON_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_Client,
 };
 use wow_login_messages::helper::{
-    tokio_expect_client_message, tokio_read_initial_opcode, ExpectedMessageError, InitialOpcode,
+    tokio_expect_client_message, tokio_read_initial_message, ExpectedMessageError, InitialMessage,
 };
 use wow_login_messages::ServerMessage;
 use wow_srp::normalized_string::NormalizedString;
@@ -13,7 +13,7 @@ use wow_srp::server::{SrpProof, SrpServer, SrpVerifier};
 use wow_srp::{PublicKey, GENERATOR, LARGE_SAFE_PRIME_LITTLE_ENDIAN};
 
 pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServer>>>) {
-    let opcode = tokio_read_initial_opcode(&mut stream).await;
+    let opcode = tokio_read_initial_message(&mut stream).await;
     let opcode = match opcode {
         Ok(o) => o,
         Err(e) => {
@@ -28,13 +28,13 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
     };
 
     match opcode {
-        InitialOpcode::Logon(l) => match l.protocol_version {
+        InitialMessage::Logon(l) => match l.protocol_version {
             2 => login_version_2(stream, l, users).await,
             3 => login_version_3(stream, l, users).await,
             8 => login_version_8(stream, l, users).await,
             _ => {}
         },
-        InitialOpcode::Reconnect(r) => match r.protocol_version {
+        InitialMessage::Reconnect(r) => match r.protocol_version {
             2 => reconnect_version_2(stream, r, users).await,
             8 => reconnect_version_8(stream, r, users).await,
             _ => {}
