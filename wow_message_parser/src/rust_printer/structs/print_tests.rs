@@ -449,6 +449,9 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                         field = field
                     ));
                     continue;
+                } else if field == "TYPE" {
+                    // Automatically set through the struct
+                    continue;
                 }
                 s.wln(format!(
                     ".set_{ty}_{field}({value})",

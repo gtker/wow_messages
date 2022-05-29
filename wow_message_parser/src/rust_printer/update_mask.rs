@@ -165,9 +165,8 @@ impl MemberType {
     }
 }
 
-const FIELDS: [MemberType; 291] = [
+const FIELDS: [MemberType; 290] = [
     MemberType::new(UpdateMaskType::Object, "GUID", 0x0, 2, UfType::Guid),
-    MemberType::new(UpdateMaskType::Object, "TYPE", 0x2, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Object, "ENTRY", 0x3, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Object, "SCALE_X", 0x4, 1, UfType::Float),
     MemberType::new(UpdateMaskType::Item, "OWNER", 0x6, 2, UfType::Guid),

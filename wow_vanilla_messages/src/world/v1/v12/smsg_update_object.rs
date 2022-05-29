@@ -106,7 +106,6 @@ mod test {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
-                            .set_object_TYPE(0x19)
                             .set_unit_HEALTH(100)
                             .set_unit_BYTES_0(0x01010101)
                         ),
@@ -180,7 +179,6 @@ mod test {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
-                            .set_object_TYPE(0x19)
                             .set_unit_HEALTH(100)
                             .set_unit_BYTES_0(0x01010101)
                         ),
@@ -254,7 +252,6 @@ mod test {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
-                            .set_object_TYPE(0x19)
                             .set_unit_HEALTH(100)
                             .set_unit_BYTES_0(0x01010101)
                         ),

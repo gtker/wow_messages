@@ -10,12 +10,6 @@ impl UpdateItem {
         self
     }
 
-    pub fn set_object_TYPE(mut self, v: i32) -> Self {
-        self.header_set(2);
-        self.values.insert(2, v as u32);
-        self
-    }
-
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
@@ -128,12 +122,6 @@ impl UpdateContainer {
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
         self.values.insert(0 + 1, (v.guid() >> 32) as u32);
-        self
-    }
-
-    pub fn set_object_TYPE(mut self, v: i32) -> Self {
-        self.header_set(2);
-        self.values.insert(2, v as u32);
         self
     }
 
@@ -263,12 +251,6 @@ impl UpdateUnit {
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
         self.values.insert(0 + 1, (v.guid() >> 32) as u32);
-        self
-    }
-
-    pub fn set_object_TYPE(mut self, v: i32) -> Self {
-        self.header_set(2);
-        self.values.insert(2, v as u32);
         self
     }
 
@@ -746,12 +728,6 @@ impl UpdatePlayer {
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
         self.values.insert(0 + 1, (v.guid() >> 32) as u32);
-        self
-    }
-
-    pub fn set_object_TYPE(mut self, v: i32) -> Self {
-        self.header_set(2);
-        self.values.insert(2, v as u32);
         self
     }
 
@@ -2266,12 +2242,6 @@ impl UpdateGameObject {
         self
     }
 
-    pub fn set_object_TYPE(mut self, v: i32) -> Self {
-        self.header_set(2);
-        self.values.insert(2, v as u32);
-        self
-    }
-
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
@@ -2387,12 +2357,6 @@ impl UpdateDynamicObject {
         self
     }
 
-    pub fn set_object_TYPE(mut self, v: i32) -> Self {
-        self.header_set(2);
-        self.values.insert(2, v as u32);
-        self
-    }
-
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
@@ -2463,12 +2427,6 @@ impl UpdateCorpse {
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
         self.values.insert(0 + 1, (v.guid() >> 32) as u32);
-        self
-    }
-
-    pub fn set_object_TYPE(mut self, v: i32) -> Self {
-        self.header_set(2);
-        self.values.insert(2, v as u32);
         self
     }
 

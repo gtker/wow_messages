@@ -1,19 +1,28 @@
 mod impls;
 
 pub use impls::*;
-use std::collections::{BTreeMap, HashMap};
 
 use crate::Guid;
 #[cfg(feature = "async-std")]
 use async_std::io::ReadExt;
+use std::collections::BTreeMap;
 use std::io;
 use std::io::Read;
 use std::io::Write;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 
+const OBJECT: u32 = 0x0001;
+const ITEM: u32 = 0x0002;
+const CONTAINER: u32 = 0x0004;
+const UNIT: u32 = 0x0008;
+const PLAYER: u32 = 0x0010;
+const GAMEOBJECT: u32 = 0x0020;
+const DYNAMICOBJECT: u32 = 0x0040;
+const CORPSE: u32 = 0x0080;
+
 macro_rules! update_item {
-    ($name:ident) => {
+    ($name:ident, $type_value:expr) => {
         #[derive(Debug, Clone, Default, PartialEq)]
         pub struct $name {
             header: Vec<u32>,
@@ -22,10 +31,15 @@ macro_rules! update_item {
 
         impl $name {
             pub fn new() -> Self {
-                Self {
-                    header: vec![],
-                    values: Default::default(),
-                }
+                const OBJECT_FIELD_TYPE: u16 = 2;
+
+                let mut header = vec![];
+                let mut values = BTreeMap::new();
+
+                header_set(&mut header, &mut values, OBJECT_FIELD_TYPE);
+                values.insert(OBJECT_FIELD_TYPE, OBJECT | $type_value);
+
+                Self { header, values }
             }
 
             fn from_inners(header: Vec<u32>, values: BTreeMap<u16, u32>) -> Self {
@@ -73,13 +87,13 @@ fn as_bytes(header: &[u32], values: &BTreeMap<u16, u32>) -> Vec<u8> {
     v
 }
 
-update_item!(UpdateItem);
-update_item!(UpdateContainer);
-update_item!(UpdateUnit);
-update_item!(UpdatePlayer);
-update_item!(UpdateGameObject);
-update_item!(UpdateDynamicObject);
-update_item!(UpdateCorpse);
+update_item!(UpdateItem, ITEM);
+update_item!(UpdateContainer, ITEM | CONTAINER);
+update_item!(UpdateUnit, UNIT);
+update_item!(UpdatePlayer, UNIT | PLAYER);
+update_item!(UpdateGameObject, GAMEOBJECT);
+update_item!(UpdateDynamicObject, DYNAMICOBJECT);
+update_item!(UpdateCorpse, CORPSE);
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum UpdateMask {
@@ -128,15 +142,6 @@ impl UpdateMask {
             }
             Some(ty) => *ty,
         };
-
-        const OBJECT: u32 = 0x0001;
-        const ITEM: u32 = 0x0002;
-        const CONTAINER: u32 = 0x0004;
-        const UNIT: u32 = 0x0008;
-        const PLAYER: u32 = 0x0010;
-        const GAMEOBJECT: u32 = 0x0020;
-        const DYNAMICOBJECT: u32 = 0x0040;
-        const CORPSE: u32 = 0x0080;
 
         Ok(if (ty & CONTAINER) != 0 {
             Self::Container(UpdateContainer::from_inners(header, values))
@@ -227,7 +232,6 @@ mod test {
 
         let mut update_mask = UpdatePlayer::new()
             .set_object_GUID(Guid::new(4))
-            .set_object_TYPE(25)
             .set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1)
             .set_unit_HEALTH(100);
 
@@ -260,7 +264,6 @@ mod test {
 
         let mut update_mask = UpdatePlayer::new()
             .set_object_GUID(Guid::new(4))
-            .set_object_TYPE(25)
             .set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1)
             .set_object_SCALE_X(1.0)
             .set_unit_HEALTH(100)
