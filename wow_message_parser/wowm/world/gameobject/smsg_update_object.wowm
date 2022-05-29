@@ -257,3 +257,84 @@ test SMSG_UPDATE_OBJECT {
     0x64, 0x00, 0x00, 0x00, /* unit_field_health */
     0x01, 0x01, 0x01, 0x01 /* unit_field_bytes */
 ]
+
+test SMSG_UPDATE_OBJECT {
+    has_transport = 0;
+    objects = [
+        {
+            update_type = CREATE_OBJECT2;
+            guid3 = 4;
+            object_type = PLAYER;
+            movement2 = {
+                update_flag = LIVING | ALL | SELF;
+                flags = NONE;
+                timestamp = 0;
+                living_position_x = -8949.95;
+                living_position_y = -132.493;
+                living_position_z = 83.5312;
+                living_orientation = 0.0;
+                fall_time = 0;
+                walking_speed = 1.0;
+                running_speed = 7.0;
+                backwards_running_speed = 4.5;
+                swimming_speed = 0.0;
+                backwards_swimming_speed = 0.0;
+                turn_rate = 3.1415927;
+                unknown1 = 1;
+            };
+            mask2 = {
+                OBJECT_GUID = 4;
+                OBJECT_SCALE_X = 1.0;
+                OBJECT_TYPE = 0x19;
+                UNIT_HEALTH = 100;
+                UNIT_MAXHEALTH = 100;
+                UNIT_LEVEL = 1;
+                UNIT_FACTIONTEMPLATE = 1;
+                UNIT_BYTES_0 = 0x01010101;
+                UNIT_DISPLAYID = 50;
+                UNIT_NATIVEDISPLAYID = 50;
+            };
+        }
+    ];
+} [
+    0x00, 0x85, /* size */
+    0xa9, 0x00, /* opcode */
+    0x01, 0x00, 0x00, 0x00, /* amount_of_objects */
+    0x00, /* has_transport */
+    0x03, /* update_type */
+    0x01, 0x04, /* guid3 */
+    0x04, /* object_type */
+    0x31, /* update_flag */
+    0x00, 0x00, 0x00, 0x00, /* flags */
+    0x00, 0x00, 0x00, 0x00, /* timestamp */
+    0xcd, 0xd7, 0x0b, 0xc6, /* living_position_x */
+    0x35, 0x7e, 0x04, 0xc3, /* living_position_y */
+    0xf9, 0x0f, 0xa7, 0x42, /* living_position_z */
+    0x00, 0x00, 0x00, 0x00, /* living_orientation */
+    0x00, 0x00, 0x00, 0x00, /* fall_time */
+    0x00, 0x00, 0x80, 0x3f, /* walking_speed */
+    0x00, 0x00, 0xe0, 0x40, /* running_speed */
+    0x00, 0x00, 0x90, 0x40, /* backwards_running_speed */
+    0x00, 0x00, 0x00, 0x00, /* swimming_speed */
+    0x00, 0x00, 0x00, 0x00, /* backwards_swimming_speed */
+    0xdb, 0x0f, 0x49, 0x40, /* turn_rate */
+    0x01, 0x00, 0x00, 0x00, /* unknown1 */
+    5, /* Amount of u32 mask blocks */
+    /* Mask blocks */
+    23, 0, 64, 16, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0,
+    /* End of mask blocks */
+    4, 0, 0, 0, 0, 0, 0, 0, /* OBJECT_FIELD_GUID (4) (notice unpacked u64) */
+    25, 0, 0, 0, /* OBJECT_FIELD_TYPE (16 | 8 | 1) (TYPE_PLAYER | TYPE_UNIT | TYPE_OBJECT) */
+    0, 0, 128, 63, /* Scale (1.0) */
+    100, 0, 0, 0, /* UNIT_FIELD_HEALTH (100) */
+    100, 0, 0, 0, /* UNIT_FIELD_MAXHEALTH (100) */
+    1, 0, 0, 0, /* UNIT_FIELD_LEVEL (1) */
+    1, 0, 0, 0, /* UNIT_FIELD_FACTIONTEMPLATE (1) */
+    1, /* UNIT_FIELD_BYTES[0] Race (Human) */
+    1, /* UNIT_FIELD_BYTES[1] Class (Warrior) */
+    1, /* UNIT_FIELD_BYTES[2] Gender (Female) */
+    1, /* UNIT_FIELD_BYTES[3] Power (Rage) */
+    50, 0, 0, 0, /* UNIT_FIELD_DISPLAYD (50, Human Female) */
+    50, 0, 0, 0, /* UNIT_FIELD_NATIVEDISPLAYID (50, Human Female) */
+
+]

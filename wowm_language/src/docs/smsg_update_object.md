@@ -58,3 +58,47 @@ SMSG have a header of 4 bytes.
 // [1].Object.mask2: UpdateMask
 // objects: Object[amount_of_objects]
 ```
+```c
+0, 133, // size
+169, 0, // opcode (169)
+1, 0, 0, 0, // amount_of_objects: u32
+0, // has_transport: u8
+3, // [0].Object.update_type: UpdateType CREATE_OBJECT2 (3)
+4, // [1].Object.guid3: PackedGuid
+4, // [1].Object.object_type: ObjectType PLAYER (4)
+49, // MovementBlock.update_flag: UpdateFlag  SELF| ALL| LIVING (49)
+0, 0, 0, 0, // MovementBlock.flags: MovementFlags  NONE (0)
+0, 0, 0, 0, // MovementBlock.timestamp: u32
+205, 215, 11, 198, // MovementBlock.living_position_x: f32
+53, 126, 4, 195, // MovementBlock.living_position_y: f32
+249, 15, 167, 66, // MovementBlock.living_position_z: f32
+0, 0, 0, 0, // MovementBlock.living_orientation: f32
+0, 0, 0, 0, // MovementBlock.fall_time: f32
+0, 0, 128, 63, // MovementBlock.walking_speed: f32
+0, 0, 224, 64, // MovementBlock.running_speed: f32
+0, 0, 144, 64, // MovementBlock.backwards_running_speed: f32
+0, 0, 0, 0, // MovementBlock.swimming_speed: f32
+0, 0, 0, 0, // MovementBlock.backwards_swimming_speed: f32
+219, 15, 73, 64, // MovementBlock.turn_rate: f32
+1, 0, 0, 0, // MovementBlock.unknown1: u32
+// UpdateMask
+5, // amount_of_blocks
+23, 0, 64, 16, // Block 0
+28, 0, 0, 0, // Block 1
+0, 0, 0, 0, // Block 2
+0, 0, 0, 0, // Block 3
+24, 0, 0, 0, // Block 4
+4, 0, 0, 0, // Item
+0, 0, 0, 0, // Item
+25, 0, 0, 0, // Item
+0, 0, 128, 63, // Item
+100, 0, 0, 0, // Item
+100, 0, 0, 0, // Item
+1, 0, 0, 0, // Item
+1, 0, 0, 0, // Item
+1, 1, 1, 1, // Item
+50, 0, 0, 0, // Item
+50, 0, 0, 0, // Item
+// [1].Object.mask2: UpdateMask
+// objects: Object[amount_of_objects]
+```

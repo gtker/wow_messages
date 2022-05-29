@@ -5,8 +5,7 @@
     - if a ==, else { if b ==  } (`SMSG_SEND_MAIL_RESULT`)
     - if a == { if b == } (`SMSG_AUCTION_COMMAND_RESULT`)
 * Working UpdateMask
-  * Tests
-  * Improve Doc for UpdateMask
+  * Improve Docs
 
 # Direct upgrades to Login
 
