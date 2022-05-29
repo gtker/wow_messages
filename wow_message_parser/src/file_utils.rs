@@ -56,6 +56,17 @@ impl ModFiles {
         Self { v: vec![] }
     }
 
+    fn add_or_append_file(&mut self, file_dir: String, e: (String, SubmoduleLocation)) {
+        if let Some(v) = self.v.iter_mut().find(|a| a.name == file_dir) {
+            v.submodules.push(e);
+        } else {
+            self.v.push(ModFile {
+                name: file_dir,
+                submodules: vec![e],
+            })
+        }
+    }
+
     pub fn add_world_file(&mut self, name: &str, version: &WorldVersion) {
         let (e, file_dir) = match version {
             WorldVersion::Major(m)
@@ -71,14 +82,7 @@ impl ModFiles {
             ),
         };
 
-        if let Some(v) = self.v.iter_mut().find(|a| a.name == file_dir) {
-            v.submodules.push(e);
-        } else {
-            self.v.push(ModFile {
-                name: file_dir,
-                submodules: vec![e],
-            })
-        }
+        self.add_or_append_file(file_dir, e);
 
         let (e, file_dir) = match version {
             WorldVersion::Minor(m, i)
@@ -94,14 +98,7 @@ impl ModFiles {
             _ => return,
         };
 
-        if let Some(v) = self.v.iter_mut().find(|a| a.name == file_dir) {
-            v.submodules.push(e);
-        } else {
-            self.v.push(ModFile {
-                name: file_dir,
-                submodules: vec![e],
-            })
-        }
+        self.add_or_append_file(file_dir, e);
 
         let (e, file_dir) = match version {
             WorldVersion::Patch(m, i, p) | WorldVersion::Exact(m, i, p, _) => (
@@ -115,14 +112,8 @@ impl ModFiles {
             _ => return,
         };
 
-        if let Some(v) = self.v.iter_mut().find(|a| a.name == file_dir) {
-            v.submodules.push(e);
-        } else {
-            self.v.push(ModFile {
-                name: file_dir,
-                submodules: vec![e, ("opcodes".to_string(), SubmoduleLocation::PubMod)],
-            })
-        }
+        self.add_or_append_file(file_dir.clone(), e);
+        self.add_or_append_file(file_dir, ("opcodes".to_string(), SubmoduleLocation::PubMod));
 
         let (e, file_dir) = match version {
             WorldVersion::Exact(m, i, p, b) => (
@@ -136,14 +127,7 @@ impl ModFiles {
             _ => return,
         };
 
-        if let Some(v) = self.v.iter_mut().find(|a| a.name == file_dir) {
-            v.submodules.push(e);
-        } else {
-            self.v.push(ModFile {
-                name: file_dir,
-                submodules: vec![e],
-            })
-        }
+        self.add_or_append_file(file_dir, e);
     }
 
     pub fn add_login_file(&mut self, name: &str, version: &LoginVersion) {
