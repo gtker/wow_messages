@@ -1,6 +1,7 @@
 ## Client Version 1.12
 
 ### Description
+
 Notify a looting player that an item has been taken.
 
 ### Wowm Representation

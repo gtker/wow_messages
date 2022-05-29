@@ -1,6 +1,7 @@
 ## Client Version 1.2, Client Version 1.12
 
 ### Description
+
 Seed used by the client to prove in [CMSG_AUTH_SESSION] that it has authenticated with the auth server.
 
 ### Comment

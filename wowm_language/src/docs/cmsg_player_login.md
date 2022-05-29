@@ -1,6 +1,7 @@
 ## Client Version 1.12
 
 ### Description
+
 Command to log into the specified character.
 
 ### Comment

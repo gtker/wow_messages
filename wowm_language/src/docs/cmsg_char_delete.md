@@ -1,6 +1,7 @@
 ## Client Version 1.12
 
 ### Description
+
 Command to delete a character from the clients account.
 
 ### Comment

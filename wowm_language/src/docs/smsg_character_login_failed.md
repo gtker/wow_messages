@@ -1,6 +1,7 @@
 ## Client Version 1.12
 
 ### Description
+
 Response if [CMSG_PLAYER_LOGIN] fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD].
 
 ### Wowm Representation

@@ -1,6 +1,7 @@
 ## Client Version 1.12
 
 ### Description
+
 Response to [CMSG_CHAR_DELETE].
 
 ### Comment

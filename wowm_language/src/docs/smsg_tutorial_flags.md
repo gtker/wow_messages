@@ -1,6 +1,7 @@
 ## Client Version 1.12
 
 ### Description
+
 Data for which tutorials the client has passed.
 
 ### Comment

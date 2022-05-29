@@ -1,6 +1,7 @@
 ## Client Version 1.12
 
 ### Description
+
 Set new hearthstone location.
 
 ### Wowm Representation

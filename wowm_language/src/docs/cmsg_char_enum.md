@@ -1,6 +1,7 @@
 ## Client Version 1.2, Client Version 1.12
 
 ### Description
+
 Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE].
 
 ### Wowm Representation

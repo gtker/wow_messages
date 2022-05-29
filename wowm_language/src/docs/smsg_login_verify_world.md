@@ -1,6 +1,7 @@
 ## Client Version 1.12
 
 ### Description
+
 Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
 
 ### Comment

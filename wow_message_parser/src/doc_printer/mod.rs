@@ -196,17 +196,22 @@ fn definer_common(s: &mut DocWriter, tags: &Tags, fileinfo: &FileInfo, ty: &str,
     s.wln("```");
 }
 
+fn add_links_to_metadata_strings(s: &str) -> String {
+    s.to_string()
+}
+
 fn print_metadata(s: &mut DocWriter, tags: &Tags) {
     if let Some(description) = tags.description() {
         s.wln("### Description");
-        s.wln(description);
+        s.newline();
+        s.wln(add_links_to_metadata_strings(description));
         s.newline();
     }
 
     if let Some(comment) = tags.comment() {
         s.wln("### Comment");
         s.newline();
-        s.wln(comment);
+        s.wln(add_links_to_metadata_strings(comment));
         s.newline();
     }
 }
