@@ -116,6 +116,7 @@ pub use logon::*;
 pub const DEFAULT_PORT: u16 = 3724;
 
 pub trait ServerMessage: Sized {
+    #[doc(hidden)]
     const OPCODE: u8;
 
     type Error;
@@ -167,6 +168,7 @@ pub trait ServerMessage: Sized {
 }
 
 pub trait ClientMessage: Sized {
+    #[doc(hidden)]
     const OPCODE: u8;
 
     type Error;
