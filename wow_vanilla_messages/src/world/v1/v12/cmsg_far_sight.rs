@@ -27,9 +27,7 @@ impl ClientMessage for CMSG_FAR_SIGHT {
         1
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // operation: FarSightOperation
         let operation: FarSightOperation = crate::util::read_u8_le(r)?.try_into()?;
 

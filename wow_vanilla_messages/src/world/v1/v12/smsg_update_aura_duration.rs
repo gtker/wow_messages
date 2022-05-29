@@ -30,9 +30,7 @@ impl ServerMessage for SMSG_UPDATE_AURA_DURATION {
         5
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // aura_slot: u8
         let aura_slot = crate::util::read_u8_le(r)?;
 

@@ -31,9 +31,7 @@ impl ClientMessage for CMSG_MAIL_TAKE_ITEM {
         12
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // mailbox_guid: Guid
         let mailbox_guid = Guid::read(r)?;
 

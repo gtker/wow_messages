@@ -82,9 +82,7 @@ impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
         self.size() as u16
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // creature_entry: u32
         let creature_entry = crate::util::read_u32_le(r)?;
 

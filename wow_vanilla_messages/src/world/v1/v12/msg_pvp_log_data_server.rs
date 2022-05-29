@@ -48,9 +48,7 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
         self.size() as u16
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // status: BattlegroundEndStatus
         let status: BattlegroundEndStatus = crate::util::read_u8_le(r)?.try_into()?;
 

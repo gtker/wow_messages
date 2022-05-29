@@ -26,9 +26,7 @@ impl ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {
         4
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // unread_mails: f32
         let unread_mails = crate::util::read_f32_le(r)?;
         Ok(Self {

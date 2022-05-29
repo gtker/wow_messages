@@ -47,9 +47,7 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
         28
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // time_in_msec: u64
         let time_in_msec = crate::util::read_u64_le(r)?;
 

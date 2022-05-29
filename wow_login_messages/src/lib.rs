@@ -135,10 +135,7 @@ pub trait ServerMessage: Sized {
     const OPCODE: u8;
 
     #[doc(hidden)]
-    type Error;
-
-    #[doc(hidden)]
-    fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
+    fn read<R: std::io::Read>(r: &mut R) -> Result<Self, crate::errors::ParseError>;
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
@@ -147,7 +144,7 @@ pub trait ServerMessage: Sized {
     #[cfg(feature = "async-std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
+    ) -> Pin<Box<dyn Future<Output = Result<Self, crate::errors::ParseError>> + Send + 'async_trait>>
     where
         R: 'async_trait + ReadExt + Unpin + Send,
         'life0: 'async_trait,
@@ -168,7 +165,7 @@ pub trait ServerMessage: Sized {
     #[cfg(feature = "tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
+    ) -> Pin<Box<dyn Future<Output = Result<Self, crate::errors::ParseError>> + Send + 'async_trait>>
     where
         R: 'async_trait + AsyncReadExt + Unpin + Send,
         'life0: 'async_trait,
@@ -201,10 +198,7 @@ pub trait ClientMessage: Sized {
     const OPCODE: u8;
 
     #[doc(hidden)]
-    type Error;
-
-    #[doc(hidden)]
-    fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
+    fn read<R: std::io::Read>(r: &mut R) -> Result<Self, crate::errors::ParseError>;
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
@@ -213,7 +207,7 @@ pub trait ClientMessage: Sized {
     #[cfg(feature = "async-std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
+    ) -> Pin<Box<dyn Future<Output = Result<Self, crate::errors::ParseError>> + Send + 'async_trait>>
     where
         R: 'async_trait + ReadExt + Unpin + Send,
         'life0: 'async_trait,
@@ -234,7 +228,7 @@ pub trait ClientMessage: Sized {
     #[cfg(feature = "tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
+    ) -> Pin<Box<dyn Future<Output = Result<Self, crate::errors::ParseError>> + Send + 'async_trait>>
     where
         R: 'async_trait + AsyncReadExt + Unpin + Send,
         'life0: 'async_trait,

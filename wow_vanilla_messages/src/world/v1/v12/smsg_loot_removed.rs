@@ -26,9 +26,7 @@ impl ServerMessage for SMSG_LOOT_REMOVED {
         1
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // slot: u8
         let slot = crate::util::read_u8_le(r)?;
 

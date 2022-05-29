@@ -30,9 +30,7 @@ impl ClientMessage for MSG_RANDOM_ROLL_Client {
         8
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // minimum: u32
         let minimum = crate::util::read_u32_le(r)?;
 

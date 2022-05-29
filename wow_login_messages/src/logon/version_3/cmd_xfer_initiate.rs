@@ -23,9 +23,7 @@ impl CMD_XFER_INITIATE {
 impl ServerMessage for CMD_XFER_INITIATE {
     const OPCODE: u8 = 48;
 
-    type Error = std::io::Error;
-
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         Ok(Self {
         })
     }
@@ -41,7 +39,7 @@ impl ServerMessage for CMD_XFER_INITIATE {
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + AsyncReadExt + Unpin + Send,
@@ -78,7 +76,7 @@ impl ServerMessage for CMD_XFER_INITIATE {
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + ReadExt + Unpin + Send,

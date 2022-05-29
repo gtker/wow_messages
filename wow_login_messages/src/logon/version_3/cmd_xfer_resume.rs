@@ -27,9 +27,7 @@ impl CMD_XFER_RESUME {
 impl ClientMessage for CMD_XFER_RESUME {
     const OPCODE: u8 = 51;
 
-    type Error = std::io::Error;
-
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // offset: u64
         let offset = crate::util::read_u64_le(r)?;
 
@@ -49,7 +47,7 @@ impl ClientMessage for CMD_XFER_RESUME {
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + AsyncReadExt + Unpin + Send,
@@ -90,7 +88,7 @@ impl ClientMessage for CMD_XFER_RESUME {
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + ReadExt + Unpin + Send,

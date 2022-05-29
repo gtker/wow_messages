@@ -31,9 +31,7 @@ impl ServerMessage for SMSG_ATTACKSTART {
         16
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // attacker_guid: Guid
         let attacker_guid = Guid::read(r)?;
 

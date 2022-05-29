@@ -30,9 +30,7 @@ impl ClientMessage for CMSG_SWAP_INV_ITEM {
         2
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // source_slot: u8
         let source_slot = crate::util::read_u8_le(r)?;
 

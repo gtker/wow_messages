@@ -29,7 +29,7 @@ impl ItemDamageType {
 }
 
 impl ItemDamageType {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // damage_minimum: u32
         let damage_minimum = crate::util::read_u32_le(r)?;
 

@@ -36,9 +36,7 @@ impl ClientMessage for CMSG_LOOT_ROLL {
         13
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // item_guid: Guid
         let item_guid = Guid::read(r)?;
 

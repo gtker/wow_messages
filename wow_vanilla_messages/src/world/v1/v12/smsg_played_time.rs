@@ -30,9 +30,7 @@ impl ServerMessage for SMSG_PLAYED_TIME {
         8
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // total_played_time: u32
         let total_played_time = crate::util::read_u32_le(r)?;
 

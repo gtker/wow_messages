@@ -27,9 +27,7 @@ impl ClientMessage for CMSG_PET_STOP_ATTACK {
         8
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // pet_guid: Guid
         let pet_guid = Guid::read(r)?;
 

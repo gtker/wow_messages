@@ -26,9 +26,7 @@ impl ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {
         4
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // has_been_saved: u32
         let has_been_saved = crate::util::read_u32_le(r)?;
 

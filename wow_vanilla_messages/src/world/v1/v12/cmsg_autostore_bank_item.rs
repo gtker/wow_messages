@@ -30,9 +30,7 @@ impl ClientMessage for CMSG_AUTOSTORE_BANK_ITEM {
         2
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // bag_index: u8
         let bag_index = crate::util::read_u8_le(r)?;
 

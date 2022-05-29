@@ -22,9 +22,7 @@ impl ClientMessage for MSG_MOVE_WORLDPORT_ACK {
         0
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         Ok(Self {
         })
     }
@@ -41,9 +39,7 @@ impl ServerMessage for MSG_MOVE_WORLDPORT_ACK {
         0
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         Ok(Self {
         })
     }

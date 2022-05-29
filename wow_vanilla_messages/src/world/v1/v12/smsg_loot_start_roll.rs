@@ -47,9 +47,7 @@ impl ServerMessage for SMSG_LOOT_START_ROLL {
         28
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // creature_guid: Guid
         let creature_guid = Guid::read(r)?;
 

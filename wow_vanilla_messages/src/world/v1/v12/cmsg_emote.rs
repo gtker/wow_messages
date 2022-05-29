@@ -27,9 +27,7 @@ impl ClientMessage for CMSG_EMOTE {
         4
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // emote: Emote
         let emote: Emote = crate::util::read_u32_le(r)?.try_into()?;
 

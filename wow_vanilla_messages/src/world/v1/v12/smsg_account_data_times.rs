@@ -28,9 +28,7 @@ impl ServerMessage for SMSG_ACCOUNT_DATA_TIMES {
         128
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // data: u32[32]
         let mut data = [u32::default(); 32];
         for i in data.iter_mut() {

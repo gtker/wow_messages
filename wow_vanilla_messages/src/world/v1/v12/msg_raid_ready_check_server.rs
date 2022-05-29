@@ -33,9 +33,7 @@ impl ServerMessage for MSG_RAID_READY_CHECK_Server {
         self.size() as u16
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // optional state_check
         let current_size = {
             0

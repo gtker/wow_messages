@@ -29,9 +29,7 @@ impl ClientMessage for CMSG_TOGGLE_PVP {
         self.size() as u16
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // optional set
         let current_size = {
             0

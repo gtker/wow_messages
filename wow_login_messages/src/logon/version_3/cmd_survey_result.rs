@@ -39,9 +39,7 @@ impl CMD_SURVEY_RESULT {
 impl ClientMessage for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 4;
 
-    type Error = std::io::Error;
-
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // survey_id: u32
         let survey_id = crate::util::read_u32_le(r)?;
 
@@ -75,7 +73,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + AsyncReadExt + Unpin + Send,
@@ -130,7 +128,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + ReadExt + Unpin + Send,

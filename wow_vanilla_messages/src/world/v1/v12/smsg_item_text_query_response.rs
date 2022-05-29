@@ -31,9 +31,7 @@ impl ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         self.size() as u16
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // item_text_id: u32
         let item_text_id = crate::util::read_u32_le(r)?;
 

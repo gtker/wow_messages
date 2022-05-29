@@ -31,9 +31,7 @@ impl ServerMessage for SMSG_RAID_GROUP_ONLY {
         8
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // homebind_timer: u32
         let homebind_timer = crate::util::read_u32_le(r)?;
 

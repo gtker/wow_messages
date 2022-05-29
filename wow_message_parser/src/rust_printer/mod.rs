@@ -28,6 +28,7 @@ pub struct Writer {
 }
 
 pub const EXPECTED_OPCODE_ERROR: &str = "crate::errors::ExpectedOpcodeError";
+pub const PARSE_ERROR: &str = "crate::errors::ParseError";
 
 pub const CLIENT_MESSAGE_TRAIT_NAME: &str = "ClientMessage";
 pub const SERVER_MESSAGE_TRAIT_NAME: &str = "ServerMessage";
@@ -165,16 +166,10 @@ impl Writer {
             self.wln("self.size() as u16");
         }
         self.closing_curly();
-
-        self.newline();
-        self.wln(format!(
-            "type Error = {err_ty};",
-            err_ty = error_name.as_ref()
-        ));
         self.newline();
 
         self.open_curly(
-                "fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error>",
+                format!("fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, {}>", error_name.as_ref())
             );
 
         read_function(self, ImplType::Std);
@@ -231,7 +226,7 @@ impl Writer {
         self.open_curly("Box::pin(async move");
     }
 
-    fn print_read_decl(&mut self, it: ImplType, world_text: &str) {
+    fn print_read_decl(&mut self, it: ImplType, world_text: &str, error_name: impl AsRef<str>) {
         if !it.is_async() {
             let body_size = if world_text == "_body" {
                 ", body_size: u32"
@@ -239,11 +234,12 @@ impl Writer {
                 ""
             };
             self.open_curly(format!(
-                "fn {prefix}read{world_text}<R: {read}>(r: &mut R{body_size}) -> std::result::Result<Self, Self::Error>",
+                "fn {prefix}read{world_text}<R: {read}>(r: &mut R{body_size}) -> std::result::Result<Self, {error}>",
                 world_text = world_text,
                 prefix = it.prefix(),
                 read = it.read(),
                 body_size = body_size,
+                error = error_name.as_ref(),
             ));
 
             return;
@@ -266,7 +262,10 @@ impl Writer {
         self.wln(") -> core::pin::Pin<Box<");
 
         self.inc_indent();
-        self.wln("dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>");
+        self.wln(format!(
+            "dyn core::future::Future<Output = std::result::Result<Self, {}>>",
+            error_name.as_ref()
+        ));
         self.inc_indent();
 
         self.wln("+ Send + 'async_trait,");
@@ -428,14 +427,8 @@ impl Writer {
         self.wln(format!("const OPCODE: u8 = {};", opcode));
         self.newline();
 
-        self.wln(format!(
-            "type Error = {err_ty};",
-            err_ty = error_name.as_ref()
-        ));
-        self.newline();
-
         for it in ImplType::types() {
-            self.print_read_decl(it, "");
+            self.print_read_decl(it, "", &error_name);
 
             read_function(self, it);
             if it.is_async() {

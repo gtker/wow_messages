@@ -43,9 +43,7 @@ impl ClientMessage for CMSG_BUY_ITEM_IN_SLOT {
         22
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // vendor_guid: Guid
         let vendor_guid = Guid::read(r)?;
 

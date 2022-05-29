@@ -30,9 +30,7 @@ impl ServerMessage for SMSG_SUPERCEDED_SPELL {
         4
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // new_spell_id: u16
         let new_spell_id = crate::util::read_u16_le(r)?;
 

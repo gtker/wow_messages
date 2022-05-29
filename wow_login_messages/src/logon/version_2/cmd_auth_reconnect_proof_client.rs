@@ -49,9 +49,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
     const OPCODE: u8 = 3;
 
-    type Error = std::io::Error;
-
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // proof_data: u8[16]
         let mut proof_data = [0_u8; 16];
         r.read_exact(&mut proof_data)?;
@@ -86,7 +84,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + AsyncReadExt + Unpin + Send,
@@ -142,7 +140,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + ReadExt + Unpin + Send,

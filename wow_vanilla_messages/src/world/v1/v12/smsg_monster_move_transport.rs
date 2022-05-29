@@ -47,9 +47,7 @@ impl ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {
         self.size() as u16
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // transport: PackedGuid
         let transport = Guid::read_packed(r)?;
 

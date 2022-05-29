@@ -27,9 +27,7 @@ impl ClientMessage for CMSG_GUILD_ADD_RANK {
         self.size() as u16
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // rank_name: CString
         let rank_name = crate::util::read_c_string_to_vec(r)?;
         let rank_name = String::from_utf8(rank_name)?;

@@ -31,9 +31,7 @@ impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {
         self.size() as u16
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // old_mover: Guid
         let old_mover = Guid::read(r)?;
 

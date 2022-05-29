@@ -36,9 +36,7 @@ impl ServerMessage for SMSG_PVP_CREDIT {
         13
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // honor_points: u32
         let honor_points = crate::util::read_u32_le(r)?;
 

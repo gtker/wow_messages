@@ -26,9 +26,7 @@ impl ServerMessage for MSG_LOOKING_FOR_GROUP_Server {
         4
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
 

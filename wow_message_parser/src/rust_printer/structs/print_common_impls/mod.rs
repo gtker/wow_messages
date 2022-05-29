@@ -3,7 +3,9 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
-use crate::rust_printer::{Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME};
+use crate::rust_printer::{
+    Writer, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+};
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
 pub mod print_read;
@@ -11,10 +13,7 @@ pub mod print_write;
 
 pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_world_message_headers_and_constants(s, e);
-    let error_ty = match e.only_has_io_errors() {
-        true => "std::io::Error",
-        false => "crate::errors::ParseError",
-    };
+    let error_ty = PARSE_ERROR;
 
     match e.container_type() {
         ContainerType::Struct => {

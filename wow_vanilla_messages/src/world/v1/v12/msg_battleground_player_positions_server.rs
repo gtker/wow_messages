@@ -39,9 +39,7 @@ impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         self.size() as u16
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_carriers: u32
         let _amount_of_carriers = crate::util::read_u32_le(r)?;
         // amount_of_carriers is expected to always be 0 (0)

@@ -61,9 +61,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
 impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
     const OPCODE: u8 = 2;
 
-    type Error = crate::errors::ParseError;
-
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // result: LoginResult
         let result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -116,7 +114,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + AsyncReadExt + Unpin + Send,
@@ -190,7 +188,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + ReadExt + Unpin + Send,

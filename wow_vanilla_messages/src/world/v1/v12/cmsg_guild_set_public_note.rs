@@ -33,9 +33,7 @@ impl ClientMessage for CMSG_GUILD_SET_PUBLIC_NOTE {
         self.size() as u16
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // player_name: CString
         let player_name = crate::util::read_c_string_to_vec(r)?;
         let player_name = String::from_utf8(player_name)?;

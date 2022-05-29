@@ -41,8 +41,6 @@ pub trait ServerMessage: Sized {
     #[doc(hidden)]
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>;
 
-    type Error;
-
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         let mut v = get_unencrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields());
@@ -152,7 +150,10 @@ pub trait ServerMessage: Sized {
     }
 
     #[doc(hidden)]
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> Result<Self, Self::Error>;
+    fn read_body<R: std::io::Read>(
+        r: &mut R,
+        body_size: u32,
+    ) -> Result<Self, crate::errors::ParseError>;
 }
 
 pub trait ClientMessage: Sized {
@@ -164,8 +165,6 @@ pub trait ClientMessage: Sized {
 
     #[doc(hidden)]
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>;
-
-    type Error;
 
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
@@ -275,7 +274,10 @@ pub trait ClientMessage: Sized {
     }
 
     #[doc(hidden)]
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> Result<Self, Self::Error>;
+    fn read_body<R: std::io::Read>(
+        r: &mut R,
+        body_size: u32,
+    ) -> Result<Self, crate::errors::ParseError>;
 }
 
 fn get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {

@@ -27,9 +27,7 @@ impl ClientMessage for CMSG_GUILD_MOTD {
         self.size() as u16
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // message_of_the_day: CString
         let message_of_the_day = crate::util::read_c_string_to_vec(r)?;
         let message_of_the_day = String::from_utf8(message_of_the_day)?;

@@ -72,9 +72,7 @@ impl ClientMessage for CMSG_SEND_MAIL {
         self.size() as u16
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // mailbox: Guid
         let mailbox = Guid::read(r)?;
 

@@ -27,9 +27,7 @@ impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {
         8
     }
 
-    type Error = std::io::Error;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // player_guid: Guid
         let player_guid = Guid::read(r)?;
 

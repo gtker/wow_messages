@@ -33,9 +33,7 @@ impl ClientMessage for CMSG_CHANNEL_PASSWORD {
         self.size() as u16
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // channel_name: CString
         let channel_name = crate::util::read_c_string_to_vec(r)?;
         let channel_name = String::from_utf8(channel_name)?;

@@ -32,9 +32,7 @@ impl ServerMessage for SMSG_INSTANCE_RESET_FAILED {
         5
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // reason: InstanceResetFailedReason
         let reason: InstanceResetFailedReason = crate::util::read_u8_le(r)?.try_into()?;
 

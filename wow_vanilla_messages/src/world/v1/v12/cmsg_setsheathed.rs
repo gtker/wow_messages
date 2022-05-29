@@ -27,9 +27,7 @@ impl ClientMessage for CMSG_SETSHEATHED {
         1
     }
 
-    type Error = crate::errors::ParseError;
-
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // sheathed: SheathState
         let sheathed: SheathState = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
