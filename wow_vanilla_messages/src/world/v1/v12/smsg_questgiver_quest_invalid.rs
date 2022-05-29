@@ -15,7 +15,7 @@ pub struct SMSG_QUESTGIVER_QUEST_INVALID {
 }
 
 impl ServerMessage for SMSG_QUESTGIVER_QUEST_INVALID {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // msg: QuestFailedReason
         w.write_all(&(self.msg.as_int() as u32).to_le_bytes())?;
 

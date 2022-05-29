@@ -18,7 +18,7 @@ pub struct SMSG_GUILD_INFO {
 }
 
 impl ServerMessage for SMSG_GUILD_INFO {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_name: CString
         w.write_all(self.guild_name.as_bytes())?;
         // Null terminator

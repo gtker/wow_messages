@@ -15,7 +15,7 @@ pub struct SMSG_SPLINE_SET_WALK_SPEED {
 }
 
 impl ServerMessage for SMSG_SPLINE_SET_WALK_SPEED {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 

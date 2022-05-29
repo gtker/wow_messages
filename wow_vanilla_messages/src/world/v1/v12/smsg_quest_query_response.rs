@@ -41,7 +41,7 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 
@@ -89,12 +89,12 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
 
         // rewards: QuestItemReward[4]
         for i in self.rewards.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // choice_rewards: QuestItemReward[6]
         for i in self.choice_rewards.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // point_map_id: u32
@@ -131,7 +131,7 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
 
         // objectives: QuestObjective[4]
         for i in self.objectives.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // objective_texts: CString[4]

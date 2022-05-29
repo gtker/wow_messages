@@ -17,7 +17,7 @@ pub struct MSG_PVP_LOG_DATA_Server {
 }
 
 impl ServerMessage for MSG_PVP_LOG_DATA_Server {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // status: BattlegroundEndStatus
         w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 
@@ -37,7 +37,7 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
 
         // players: BattlegroundPlayer[amount_of_players]
         for i in self.players.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

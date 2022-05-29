@@ -16,7 +16,7 @@ pub struct CMSG_CREATURE_QUERY {
 }
 
 impl ClientMessage for CMSG_CREATURE_QUERY {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // creature: u32
         w.write_all(&self.creature.to_le_bytes())?;
 

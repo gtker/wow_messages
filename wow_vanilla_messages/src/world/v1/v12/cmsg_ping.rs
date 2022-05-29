@@ -15,7 +15,7 @@ pub struct CMSG_PING {
 }
 
 impl ClientMessage for CMSG_PING {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sequence_id: u32
         w.write_all(&self.sequence_id.to_le_bytes())?;
 

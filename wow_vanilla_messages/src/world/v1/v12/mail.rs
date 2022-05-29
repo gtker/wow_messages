@@ -31,7 +31,7 @@ pub struct Mail {
 }
 
 impl Mail {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message_id: u32
         w.write_all(&self.message_id.to_le_bytes())?;
 

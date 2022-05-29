@@ -20,7 +20,7 @@ impl CMD_REALM_LIST_Server {
 }
 
 impl CMD_REALM_LIST_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -35,7 +35,7 @@ impl CMD_REALM_LIST_Server {
 
         // realms: Realm[number_of_realms]
         for i in self.realms.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // footer_padding: u16
@@ -80,7 +80,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(self.size() + 1);
-        self.as_bytes(&mut v)?;
+        self.write_into_vec(&mut v)?;
         w.write_all(&v)
     }
 
@@ -138,7 +138,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(self.size() + 1);
-            self.as_bytes(&mut v)?;
+            self.write_into_vec(&mut v)?;
             w.write_all(&v).await
         })
     }
@@ -197,7 +197,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(self.size() + 1);
-            self.as_bytes(&mut v)?;
+            self.write_into_vec(&mut v)?;
             w.write_all(&v).await
         })
     }

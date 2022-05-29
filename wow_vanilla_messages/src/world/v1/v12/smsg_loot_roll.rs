@@ -23,7 +23,7 @@ pub struct SMSG_LOOT_ROLL {
 }
 
 impl ServerMessage for SMSG_LOOT_ROLL {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // creature_guid: Guid
         w.write_all(&self.creature_guid.guid().to_le_bytes())?;
 

@@ -15,7 +15,7 @@ pub struct CMSG_SET_ACTION_BUTTON {
 }
 
 impl ClientMessage for CMSG_SET_ACTION_BUTTON {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // button: u8
         w.write_all(&self.button.to_le_bytes())?;
 

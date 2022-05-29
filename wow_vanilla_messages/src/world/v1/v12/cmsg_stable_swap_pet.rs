@@ -16,7 +16,7 @@ pub struct CMSG_STABLE_SWAP_PET {
 }
 
 impl ClientMessage for CMSG_STABLE_SWAP_PET {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 

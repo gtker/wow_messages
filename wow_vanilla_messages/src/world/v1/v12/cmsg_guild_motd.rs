@@ -13,7 +13,7 @@ pub struct CMSG_GUILD_MOTD {
 }
 
 impl ClientMessage for CMSG_GUILD_MOTD {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message_of_the_day: CString
         w.write_all(self.message_of_the_day.as_bytes())?;
         // Null terminator

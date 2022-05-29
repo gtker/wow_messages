@@ -14,13 +14,13 @@ pub struct SMSG_SET_FACTION_STANDING {
 }
 
 impl ServerMessage for SMSG_SET_FACTION_STANDING {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_factions: u32
         w.write_all(&(self.factions.len() as u32).to_le_bytes())?;
 
         // factions: Faction[amount_of_factions]
         for i in self.factions.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

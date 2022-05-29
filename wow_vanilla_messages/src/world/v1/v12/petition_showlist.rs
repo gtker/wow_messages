@@ -22,7 +22,7 @@ impl PetitionShowlist {
 }
 
 impl PetitionShowlist {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // index: u32
         w.write_all(&self.index.to_le_bytes())?;
 

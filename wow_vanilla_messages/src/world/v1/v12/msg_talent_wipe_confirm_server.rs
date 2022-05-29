@@ -16,7 +16,7 @@ pub struct MSG_TALENT_WIPE_CONFIRM_Server {
 }
 
 impl ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // wiping_npc: Guid
         w.write_all(&self.wiping_npc.guid().to_le_bytes())?;
 

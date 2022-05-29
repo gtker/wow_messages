@@ -13,7 +13,7 @@ pub struct SMSG_WHOIS {
 }
 
 impl ServerMessage for SMSG_WHOIS {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message: CString
         w.write_all(self.message.as_bytes())?;
         // Null terminator

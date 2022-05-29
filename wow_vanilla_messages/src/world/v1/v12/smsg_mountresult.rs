@@ -15,7 +15,7 @@ pub struct SMSG_MOUNTRESULT {
 }
 
 impl ServerMessage for SMSG_MOUNTRESULT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: MountResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 

@@ -18,7 +18,7 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
 }
 
 impl ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_guid: Guid
         w.write_all(&self.item_guid.guid().to_le_bytes())?;
 

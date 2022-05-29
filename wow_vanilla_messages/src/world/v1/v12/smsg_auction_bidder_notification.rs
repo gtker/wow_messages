@@ -21,7 +21,7 @@ pub struct SMSG_AUCTION_BIDDER_NOTIFICATION {
 }
 
 impl ServerMessage for SMSG_AUCTION_BIDDER_NOTIFICATION {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auction_house_id: u32
         w.write_all(&self.auction_house_id.to_le_bytes())?;
 

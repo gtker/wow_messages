@@ -23,7 +23,7 @@ pub struct SMSG_SPELL_GO {
 }
 
 impl ServerMessage for SMSG_SPELL_GO {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // cast_item: PackedGuid
         w.write_all(&self.cast_item.packed_guid())?;
 
@@ -49,11 +49,11 @@ impl ServerMessage for SMSG_SPELL_GO {
 
         // misses: SpellMiss[amount_of_misses]
         for i in self.misses.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // targets: SpellCastTargets
-        &self.targets.as_bytes(w)?;;
+        &self.targets.write_into_vec(w)?;;
 
         if let Some(if_statement) = &self.flags.ammo {
             // ammo_display_id: u32

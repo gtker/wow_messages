@@ -15,7 +15,7 @@ pub struct MSG_PETITION_DECLINE {
 }
 
 impl ClientMessage for MSG_PETITION_DECLINE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition: Guid
         w.write_all(&self.petition.guid().to_le_bytes())?;
 
@@ -41,7 +41,7 @@ impl ClientMessage for MSG_PETITION_DECLINE {
 }
 
 impl ServerMessage for MSG_PETITION_DECLINE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition: Guid
         w.write_all(&self.petition.guid().to_le_bytes())?;
 

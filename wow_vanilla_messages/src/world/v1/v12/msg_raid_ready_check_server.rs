@@ -14,7 +14,7 @@ pub struct MSG_RAID_READY_CHECK_Server {
 }
 
 impl ServerMessage for MSG_RAID_READY_CHECK_Server {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional state_check
         if let Some(v) = &self.state_check {
             // guid: Guid

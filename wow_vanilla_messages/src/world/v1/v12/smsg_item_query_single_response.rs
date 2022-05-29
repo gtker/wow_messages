@@ -22,7 +22,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 }
 
 impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
 
@@ -116,12 +116,12 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // stats: ItemStat[10]
             for i in v.stats.iter() {
-                i.as_bytes(w)?;
+                i.write_into_vec(w)?;
             }
 
             // damages: ItemDamageType[5]
             for i in v.damages.iter() {
-                i.as_bytes(w)?;
+                i.write_into_vec(w)?;
             }
 
             // armor: u32
@@ -156,7 +156,7 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // spells: ItemSpells[5]
             for i in v.spells.iter() {
-                i.as_bytes(w)?;
+                i.write_into_vec(w)?;
             }
 
             // bonding: u32

@@ -14,7 +14,7 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // entry_id: u32
         w.write_all(&self.entry_id.to_le_bytes())?;
 

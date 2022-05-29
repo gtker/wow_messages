@@ -17,7 +17,7 @@ pub struct CMSG_SWAP_ITEM {
 }
 
 impl ClientMessage for CMSG_SWAP_ITEM {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // destination_bag: u8
         w.write_all(&self.destination_bag.to_le_bytes())?;
 

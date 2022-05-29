@@ -16,7 +16,7 @@ pub struct SMSG_ATTACKSTOP {
 }
 
 impl ServerMessage for SMSG_ATTACKSTOP {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player: PackedGuid
         w.write_all(&self.player.packed_guid())?;
 

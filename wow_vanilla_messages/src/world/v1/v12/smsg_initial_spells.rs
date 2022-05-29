@@ -17,7 +17,7 @@ pub struct SMSG_INITIAL_SPELLS {
 }
 
 impl ServerMessage for SMSG_INITIAL_SPELLS {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
@@ -26,7 +26,7 @@ impl ServerMessage for SMSG_INITIAL_SPELLS {
 
         // initial_spells: InitialSpell[spell_count]
         for i in self.initial_spells.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // cooldown_count: u16
@@ -34,7 +34,7 @@ impl ServerMessage for SMSG_INITIAL_SPELLS {
 
         // cooldowns: CooldownSpell[cooldown_count]
         for i in self.cooldowns.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

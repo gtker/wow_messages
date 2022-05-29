@@ -15,13 +15,13 @@ pub struct SMSG_AUCTION_BIDDER_LIST_RESULT {
 }
 
 impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // count: u32
         w.write_all(&(self.auctions.len() as u32).to_le_bytes())?;
 
         // auctions: AuctionListItem[count]
         for i in self.auctions.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // total_amount_of_auctions: u32

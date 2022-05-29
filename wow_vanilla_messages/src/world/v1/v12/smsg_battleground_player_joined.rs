@@ -15,7 +15,7 @@ pub struct SMSG_BATTLEGROUND_PLAYER_JOINED {
 }
 
 impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_guid: Guid
         w.write_all(&self.player_guid.guid().to_le_bytes())?;
 

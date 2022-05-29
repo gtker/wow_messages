@@ -28,7 +28,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -42,7 +42,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes())?;
 
         // version: Version
-        &self.version.as_bytes(w)?;;
+        &self.version.write_into_vec(w)?;;
 
         // platform: Platform
         w.write_all(&(self.platform.as_int() as u32).to_le_bytes())?;
@@ -126,7 +126,7 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(self.size() + 1);
-        self.as_bytes(&mut v)?;
+        self.write_into_vec(&mut v)?;
         w.write_all(&v)
     }
 
@@ -206,7 +206,7 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(self.size() + 1);
-            self.as_bytes(&mut v)?;
+            self.write_into_vec(&mut v)?;
             w.write_all(&v).await
         })
     }
@@ -287,7 +287,7 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(self.size() + 1);
-            self.as_bytes(&mut v)?;
+            self.write_into_vec(&mut v)?;
             w.write_all(&v).await
         })
     }

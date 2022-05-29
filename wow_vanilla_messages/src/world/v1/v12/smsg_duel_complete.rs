@@ -14,7 +14,7 @@ pub struct SMSG_DUEL_COMPLETE {
 }
 
 impl ServerMessage for SMSG_DUEL_COMPLETE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // ended_without_interruption: u8
         w.write_all(&self.ended_without_interruption.to_le_bytes())?;
 

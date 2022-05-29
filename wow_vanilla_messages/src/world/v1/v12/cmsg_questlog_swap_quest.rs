@@ -15,7 +15,7 @@ pub struct CMSG_QUESTLOG_SWAP_QUEST {
 }
 
 impl ClientMessage for CMSG_QUESTLOG_SWAP_QUEST {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // slot1: u8
         w.write_all(&self.slot1.to_le_bytes())?;
 

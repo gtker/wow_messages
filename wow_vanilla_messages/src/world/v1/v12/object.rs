@@ -16,7 +16,7 @@ pub struct Object {
 }
 
 impl Object {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // update_type: UpdateType
         w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 
@@ -40,7 +40,7 @@ impl Object {
                 w.write_all(&guid2.packed_guid())?;
 
                 // movement1: MovementBlock
-                &movement1.as_bytes(w)?;;
+                &movement1.write_into_vec(w)?;;
 
             }
             ObjectUpdateType::CREATE_OBJECT {
@@ -56,7 +56,7 @@ impl Object {
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
 
                 // movement2: MovementBlock
-                &movement2.as_bytes(w)?;;
+                &movement2.write_into_vec(w)?;;
 
                 // mask2: UpdateMask
                 w.write_all(&mask2.as_bytes())?;
@@ -75,7 +75,7 @@ impl Object {
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
 
                 // movement2: MovementBlock
-                &movement2.as_bytes(w)?;;
+                &movement2.write_into_vec(w)?;;
 
                 // mask2: UpdateMask
                 w.write_all(&mask2.as_bytes())?;

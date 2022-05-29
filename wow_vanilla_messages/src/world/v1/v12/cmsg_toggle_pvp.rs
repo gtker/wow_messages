@@ -13,7 +13,7 @@ pub struct CMSG_TOGGLE_PVP {
 }
 
 impl ClientMessage for CMSG_TOGGLE_PVP {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional set
         if let Some(v) = &self.set {
             // enable_pvp: u8

@@ -17,7 +17,7 @@ pub struct SMSG_PARTY_COMMAND_RESULT {
 }
 
 impl ServerMessage for SMSG_PARTY_COMMAND_RESULT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // operation: PartyOperation
         w.write_all(&(self.operation.as_int() as u32).to_le_bytes())?;
 

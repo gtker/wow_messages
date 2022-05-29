@@ -14,7 +14,7 @@ pub struct CMSG_SET_TRADE_GOLD {
 }
 
 impl ClientMessage for CMSG_SET_TRADE_GOLD {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // gold: u32
         w.write_all(&self.gold.to_le_bytes())?;
 

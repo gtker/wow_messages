@@ -13,7 +13,7 @@ pub struct SMSG_QUESTLOG_FULL {
 }
 
 impl ServerMessage for SMSG_QUESTLOG_FULL {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
     const OPCODE: u16 = 0x0195;

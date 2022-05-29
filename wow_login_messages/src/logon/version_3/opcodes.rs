@@ -19,13 +19,13 @@ pub enum ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.as_bytes(w)?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => e.as_bytes(w)?,
-            Self::CMD_REALM_LIST(e) => e.as_bytes(w)?,
-            Self::CMD_XFER_INITIATE(e) => e.as_bytes(w)?,
-            Self::CMD_XFER_DATA(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.write_into_vec(w)?,
+            Self::CMD_AUTH_LOGON_PROOF(e) => e.write_into_vec(w)?,
+            Self::CMD_REALM_LIST(e) => e.write_into_vec(w)?,
+            Self::CMD_XFER_INITIATE(e) => e.write_into_vec(w)?,
+            Self::CMD_XFER_DATA(e) => e.write_into_vec(w)?,
         }
 
         Ok(())
@@ -131,16 +131,16 @@ pub enum ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.as_bytes(w)?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => e.as_bytes(w)?,
-            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.as_bytes(w)?,
-            Self::CMD_SURVEY_RESULT(e) => e.as_bytes(w)?,
-            Self::CMD_REALM_LIST(e) => e.as_bytes(w)?,
-            Self::CMD_XFER_ACCEPT(e) => e.as_bytes(w)?,
-            Self::CMD_XFER_RESUME(e) => e.as_bytes(w)?,
-            Self::CMD_XFER_CANCEL(e) => e.as_bytes(w)?,
+            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.write_into_vec(w)?,
+            Self::CMD_AUTH_LOGON_PROOF(e) => e.write_into_vec(w)?,
+            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.write_into_vec(w)?,
+            Self::CMD_SURVEY_RESULT(e) => e.write_into_vec(w)?,
+            Self::CMD_REALM_LIST(e) => e.write_into_vec(w)?,
+            Self::CMD_XFER_ACCEPT(e) => e.write_into_vec(w)?,
+            Self::CMD_XFER_RESUME(e) => e.write_into_vec(w)?,
+            Self::CMD_XFER_CANCEL(e) => e.write_into_vec(w)?,
         }
 
         Ok(())

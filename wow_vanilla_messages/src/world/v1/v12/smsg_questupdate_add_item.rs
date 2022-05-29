@@ -15,7 +15,7 @@ pub struct SMSG_QUESTUPDATE_ADD_ITEM {
 }
 
 impl ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // required_item_id: u32
         w.write_all(&self.required_item_id.to_le_bytes())?;
 

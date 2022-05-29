@@ -13,7 +13,7 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Client {
 }
 
 impl ClientMessage for MSG_QUERY_NEXT_MAIL_TIME_Client {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
     const OPCODE: u16 = 0x0284;

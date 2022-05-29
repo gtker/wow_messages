@@ -16,7 +16,7 @@ pub struct SMSG_DUEL_WINNER {
 }
 
 impl ServerMessage for SMSG_DUEL_WINNER {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: DuelWinnerReason
         w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
 

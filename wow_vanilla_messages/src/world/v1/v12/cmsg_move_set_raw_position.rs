@@ -17,7 +17,7 @@ pub struct CMSG_MOVE_SET_RAW_POSITION {
 }
 
 impl ClientMessage for CMSG_MOVE_SET_RAW_POSITION {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes())?;
 

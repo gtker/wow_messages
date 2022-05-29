@@ -14,7 +14,7 @@ pub struct SMSG_INSTANCE_SAVE_CREATED {
 }
 
 impl ServerMessage for SMSG_INSTANCE_SAVE_CREATED {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown: u32
         w.write_all(&self.unknown.to_le_bytes())?;
 

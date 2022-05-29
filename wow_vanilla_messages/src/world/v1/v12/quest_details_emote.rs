@@ -13,7 +13,7 @@ pub struct QuestDetailsEmote {
 }
 
 impl QuestDetailsEmote {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // emote: u32
         w.write_all(&self.emote.to_le_bytes())?;
 

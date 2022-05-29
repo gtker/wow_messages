@@ -13,7 +13,7 @@ pub struct MSG_RAID_READY_CHECK_Client {
 }
 
 impl ClientMessage for MSG_RAID_READY_CHECK_Client {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional answer
         if let Some(v) = &self.answer {
             // state: u8

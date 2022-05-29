@@ -15,7 +15,7 @@ pub struct SMSG_BUY_BANK_SLOT_RESULT {
 }
 
 impl ServerMessage for SMSG_BUY_BANK_SLOT_RESULT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: BuyBankSlotResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 

@@ -17,7 +17,7 @@ pub struct CMSG_AUCTION_PLACE_BID {
 }
 
 impl ClientMessage for CMSG_AUCTION_PLACE_BID {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid
         w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
 

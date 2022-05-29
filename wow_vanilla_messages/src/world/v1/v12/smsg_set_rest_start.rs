@@ -14,7 +14,7 @@ pub struct SMSG_SET_REST_START {
 }
 
 impl ServerMessage for SMSG_SET_REST_START {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 

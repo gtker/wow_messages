@@ -15,7 +15,7 @@ pub struct Version {
 }
 
 impl Version {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // major: u8
         w.write_all(&self.major.to_le_bytes())?;
 

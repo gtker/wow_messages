@@ -16,7 +16,7 @@ pub struct SMSG_ATTACKSTART {
 }
 
 impl ServerMessage for SMSG_ATTACKSTART {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // attacker_guid: Guid
         w.write_all(&self.attacker_guid.guid().to_le_bytes())?;
 

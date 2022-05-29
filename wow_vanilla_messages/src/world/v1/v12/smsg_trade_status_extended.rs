@@ -20,7 +20,7 @@ pub struct SMSG_TRADE_STATUS_EXTENDED {
 }
 
 impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // self_player: u8
         w.write_all(&self.self_player.to_le_bytes())?;
 
@@ -38,7 +38,7 @@ impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
 
         // trade_slots: TradeSlot[7]
         for i in self.trade_slots.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

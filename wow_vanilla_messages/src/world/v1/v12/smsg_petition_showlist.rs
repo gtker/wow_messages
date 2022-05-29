@@ -16,7 +16,7 @@ pub struct SMSG_PETITION_SHOWLIST {
 }
 
 impl ServerMessage for SMSG_PETITION_SHOWLIST {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
@@ -25,7 +25,7 @@ impl ServerMessage for SMSG_PETITION_SHOWLIST {
 
         // petitions: PetitionShowlist[amount_of_petitions]
         for i in self.petitions.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

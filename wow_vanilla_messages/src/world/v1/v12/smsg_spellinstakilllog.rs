@@ -16,7 +16,7 @@ pub struct SMSG_SPELLINSTAKILLLOG {
 }
 
 impl ServerMessage for SMSG_SPELLINSTAKILLLOG {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
 

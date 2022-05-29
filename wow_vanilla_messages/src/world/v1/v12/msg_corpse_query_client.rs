@@ -13,7 +13,7 @@ pub struct MSG_CORPSE_QUERY_Client {
 }
 
 impl ClientMessage for MSG_CORPSE_QUERY_Client {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
     const OPCODE: u16 = 0x0216;

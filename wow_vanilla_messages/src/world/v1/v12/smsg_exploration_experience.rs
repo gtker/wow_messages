@@ -16,7 +16,7 @@ pub struct SMSG_EXPLORATION_EXPERIENCE {
 }
 
 impl ServerMessage for SMSG_EXPLORATION_EXPERIENCE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // area: Area
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 

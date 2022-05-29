@@ -13,7 +13,7 @@ pub struct Faction {
 }
 
 impl Faction {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reputation_list_id: u32
         w.write_all(&self.reputation_list_id.to_le_bytes())?;
 

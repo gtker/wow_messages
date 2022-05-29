@@ -20,7 +20,7 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Client {
 }
 
 impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor: Guid
         w.write_all(&self.vendor.guid().to_le_bytes())?;
 

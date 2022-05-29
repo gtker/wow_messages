@@ -16,7 +16,7 @@ pub struct CMSG_MESSAGECHAT {
 }
 
 impl ClientMessage for CMSG_MESSAGECHAT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // chat_type: ChatType
         w.write_all(&(self.chat_type.as_int() as u32).to_le_bytes())?;
 

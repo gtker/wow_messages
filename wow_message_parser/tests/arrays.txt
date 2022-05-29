@@ -23,7 +23,7 @@ pub struct Arrays {
 }
 
 impl Arrays {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // index: u8
         w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes())?;
 
@@ -69,12 +69,12 @@ impl Arrays {
 
         // complex_fixed_array: StructWithAllBuiltInTypes[10]
         for i in self.complex_fixed_array.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // complex_variable_array: StructWithAllBuiltInTypes[index]
         for i in self.complex_variable_array.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // fixed_cstring_array: CString[10]

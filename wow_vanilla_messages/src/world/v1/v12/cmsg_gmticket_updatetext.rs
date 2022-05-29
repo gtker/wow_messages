@@ -13,7 +13,7 @@ pub struct CMSG_GMTICKET_UPDATETEXT {
 }
 
 impl ClientMessage for CMSG_GMTICKET_UPDATETEXT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message: CString
         w.write_all(self.message.as_bytes())?;
         // Null terminator

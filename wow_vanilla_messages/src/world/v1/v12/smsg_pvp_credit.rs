@@ -18,7 +18,7 @@ pub struct SMSG_PVP_CREDIT {
 }
 
 impl ServerMessage for SMSG_PVP_CREDIT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // honor_points: u32
         w.write_all(&self.honor_points.to_le_bytes())?;
 

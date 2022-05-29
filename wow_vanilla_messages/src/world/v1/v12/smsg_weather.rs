@@ -19,7 +19,7 @@ pub struct SMSG_WEATHER {
 }
 
 impl ServerMessage for SMSG_WEATHER {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // weather_type: WeatherType
         w.write_all(&(self.weather_type.as_int() as u32).to_le_bytes())?;
 

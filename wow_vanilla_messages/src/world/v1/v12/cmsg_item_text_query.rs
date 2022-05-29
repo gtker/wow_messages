@@ -16,7 +16,7 @@ pub struct CMSG_ITEM_TEXT_QUERY {
 }
 
 impl ClientMessage for CMSG_ITEM_TEXT_QUERY {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_text_id: u32
         w.write_all(&self.item_text_id.to_le_bytes())?;
 

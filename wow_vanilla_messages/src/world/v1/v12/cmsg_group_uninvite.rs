@@ -13,7 +13,7 @@ pub struct CMSG_GROUP_UNINVITE {
 }
 
 impl ClientMessage for CMSG_GROUP_UNINVITE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator

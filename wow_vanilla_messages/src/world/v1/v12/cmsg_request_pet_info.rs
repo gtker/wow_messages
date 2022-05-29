@@ -13,7 +13,7 @@ pub struct CMSG_REQUEST_PET_INFO {
 }
 
 impl ClientMessage for CMSG_REQUEST_PET_INFO {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
     const OPCODE: u16 = 0x0279;

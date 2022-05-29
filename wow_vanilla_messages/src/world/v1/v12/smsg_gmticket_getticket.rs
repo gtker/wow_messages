@@ -16,7 +16,7 @@ pub struct SMSG_GMTICKET_GETTICKET {
 }
 
 impl ServerMessage for SMSG_GMTICKET_GETTICKET {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // status: GmTicketStatus
         w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
 

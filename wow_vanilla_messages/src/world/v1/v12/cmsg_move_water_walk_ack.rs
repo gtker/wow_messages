@@ -18,7 +18,7 @@ pub struct CMSG_MOVE_WATER_WALK_ACK {
 }
 
 impl ClientMessage for CMSG_MOVE_WATER_WALK_ACK {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -26,7 +26,7 @@ impl ClientMessage for CMSG_MOVE_WATER_WALK_ACK {
         w.write_all(&self.movement_counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        &self.movement_info.as_bytes(w)?;;
+        &self.movement_info.write_into_vec(w)?;;
 
         // apply: u32
         w.write_all(&self.apply.to_le_bytes())?;

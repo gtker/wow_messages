@@ -15,7 +15,7 @@ pub struct SMSG_UPDATE_LAST_INSTANCE {
 }
 
 impl ServerMessage for SMSG_UPDATE_LAST_INSTANCE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 

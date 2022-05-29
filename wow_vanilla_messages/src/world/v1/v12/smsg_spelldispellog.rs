@@ -16,7 +16,7 @@ pub struct SMSG_SPELLDISPELLOG {
 }
 
 impl ServerMessage for SMSG_SPELLDISPELLOG {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // victim: Guid
         w.write_all(&self.victim.guid().to_le_bytes())?;
 

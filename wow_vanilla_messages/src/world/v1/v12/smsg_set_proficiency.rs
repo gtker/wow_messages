@@ -16,7 +16,7 @@ pub struct SMSG_SET_PROFICIENCY {
 }
 
 impl ServerMessage for SMSG_SET_PROFICIENCY {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // class: ItemClass
         w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 

@@ -21,7 +21,7 @@ pub struct SMSG_RESISTLOG {
 }
 
 impl ServerMessage for SMSG_RESISTLOG {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid1: Guid
         w.write_all(&self.guid1.guid().to_le_bytes())?;
 

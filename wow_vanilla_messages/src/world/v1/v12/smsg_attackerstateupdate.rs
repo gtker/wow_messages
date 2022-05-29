@@ -17,7 +17,7 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
 }
 
 impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // hit_info: u32
         w.write_all(&self.hit_info.to_le_bytes())?;
 

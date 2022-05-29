@@ -20,7 +20,7 @@ pub struct CMSG_WHO {
 }
 
 impl ClientMessage for CMSG_WHO {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // minimum_level: u32
         w.write_all(&self.minimum_level.to_le_bytes())?;
 

@@ -17,7 +17,7 @@ pub struct SMSG_PET_CAST_FAILED {
 }
 
 impl ServerMessage for SMSG_PET_CAST_FAILED {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 

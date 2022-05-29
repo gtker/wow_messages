@@ -20,7 +20,7 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT {
 }
 
 impl ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // transport: PackedGuid
         w.write_all(&self.transport.packed_guid())?;
 

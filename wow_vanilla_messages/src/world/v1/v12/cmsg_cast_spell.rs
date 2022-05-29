@@ -15,12 +15,12 @@ pub struct CMSG_CAST_SPELL {
 }
 
 impl ClientMessage for CMSG_CAST_SPELL {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        &self.targets.as_bytes(w)?;;
+        &self.targets.write_into_vec(w)?;;
 
         Ok(())
     }

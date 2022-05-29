@@ -14,13 +14,13 @@ pub struct SMSG_CHAR_ENUM {
 }
 
 impl ServerMessage for SMSG_CHAR_ENUM {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_characters: u8
         w.write_all(&(self.characters.len() as u8).to_le_bytes())?;
 
         // characters: Character[amount_of_characters]
         for i in self.characters.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

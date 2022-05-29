@@ -13,7 +13,7 @@ pub struct CMSG_GUILD_ADD_RANK {
 }
 
 impl ClientMessage for CMSG_GUILD_ADD_RANK {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // rank_name: CString
         w.write_all(self.rank_name.as_bytes())?;
         // Null terminator

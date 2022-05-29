@@ -16,7 +16,7 @@ pub struct SMSG_SET_FLAT_SPELL_MODIFIER {
 }
 
 impl ServerMessage for SMSG_SET_FLAT_SPELL_MODIFIER {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // eff: u8
         w.write_all(&self.eff.to_le_bytes())?;
 

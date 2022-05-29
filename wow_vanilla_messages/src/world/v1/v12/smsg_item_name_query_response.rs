@@ -14,7 +14,7 @@ pub struct SMSG_ITEM_NAME_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_ITEM_NAME_QUERY_RESPONSE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_id: u32
         w.write_all(&self.item_id.to_le_bytes())?;
 

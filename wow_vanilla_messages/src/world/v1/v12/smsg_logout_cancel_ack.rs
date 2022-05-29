@@ -13,7 +13,7 @@ pub struct SMSG_LOGOUT_CANCEL_ACK {
 }
 
 impl ServerMessage for SMSG_LOGOUT_CANCEL_ACK {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
     const OPCODE: u16 = 0x004f;

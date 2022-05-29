@@ -15,7 +15,7 @@ pub struct CMSG_FAR_SIGHT {
 }
 
 impl ClientMessage for CMSG_FAR_SIGHT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // operation: FarSightOperation
         w.write_all(&(self.operation.as_int() as u8).to_le_bytes())?;
 

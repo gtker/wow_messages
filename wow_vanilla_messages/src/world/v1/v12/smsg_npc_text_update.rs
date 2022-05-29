@@ -16,7 +16,7 @@ pub struct SMSG_NPC_TEXT_UPDATE {
 }
 
 impl ServerMessage for SMSG_NPC_TEXT_UPDATE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // text_id: u32
         w.write_all(&self.text_id.to_le_bytes())?;
 
@@ -25,7 +25,7 @@ impl ServerMessage for SMSG_NPC_TEXT_UPDATE {
 
         // texts: NpcTextUpdate[8]
         for i in self.texts.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

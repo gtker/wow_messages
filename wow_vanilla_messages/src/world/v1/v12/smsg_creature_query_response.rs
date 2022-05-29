@@ -14,7 +14,7 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // creature_entry: u32
         w.write_all(&self.creature_entry.to_le_bytes())?;
 

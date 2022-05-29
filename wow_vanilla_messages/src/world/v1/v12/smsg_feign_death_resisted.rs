@@ -13,7 +13,7 @@ pub struct SMSG_FEIGN_DEATH_RESISTED {
 }
 
 impl ServerMessage for SMSG_FEIGN_DEATH_RESISTED {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
     const OPCODE: u16 = 0x02b4;

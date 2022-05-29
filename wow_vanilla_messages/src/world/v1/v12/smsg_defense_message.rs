@@ -16,7 +16,7 @@ pub struct SMSG_DEFENSE_MESSAGE {
 }
 
 impl ServerMessage for SMSG_DEFENSE_MESSAGE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 

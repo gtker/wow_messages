@@ -38,12 +38,12 @@ pub trait ServerMessage: Sized {
 
     type Error;
 
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>;
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         let mut v = get_unencrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields());
-        self.as_bytes(&mut v);
+        self.write_into_vec(&mut v);
 
         w.write_all(&v)
     }
@@ -57,7 +57,7 @@ pub trait ServerMessage: Sized {
         let mut v =
             get_encrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
 
-        self.as_bytes(&mut v);
+        self.write_into_vec(&mut v);
 
         w.write_all(&v)
     }
@@ -76,7 +76,7 @@ pub trait ServerMessage: Sized {
         Box::pin(async move {
             let mut v =
                 get_unencrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields());
-            self.as_bytes(&mut v);
+            self.write_into_vec(&mut v);
 
             w.write_all(&v).await
         })
@@ -99,7 +99,7 @@ pub trait ServerMessage: Sized {
         Box::pin(async move {
             let mut v =
                 get_encrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
-            self.as_bytes(&mut v);
+            self.write_into_vec(&mut v);
 
             w.write_all(&v).await
         })
@@ -119,7 +119,7 @@ pub trait ServerMessage: Sized {
         Box::pin(async move {
             let mut v =
                 get_unencrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields());
-            self.as_bytes(&mut v);
+            self.write_into_vec(&mut v);
 
             w.write_all(&v).await
         })
@@ -142,7 +142,7 @@ pub trait ServerMessage: Sized {
         Box::pin(async move {
             let mut v =
                 get_encrypted_server(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
-            self.as_bytes(&mut v);
+            self.write_into_vec(&mut v);
 
             w.write_all(&v).await
         })
@@ -158,12 +158,12 @@ pub trait ClientMessage: Sized {
 
     type Error;
 
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>;
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         let mut v = get_unencrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields());
-        self.as_bytes(&mut v);
+        self.write_into_vec(&mut v);
 
         w.write_all(&v)
     }
@@ -176,7 +176,7 @@ pub trait ClientMessage: Sized {
     ) -> Result<(), std::io::Error> {
         let mut v =
             get_encrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
-        self.as_bytes(&mut v);
+        self.write_into_vec(&mut v);
 
         w.write_all(&v)
     }
@@ -195,7 +195,7 @@ pub trait ClientMessage: Sized {
         Box::pin(async move {
             let mut v =
                 get_unencrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields());
-            self.as_bytes(&mut v);
+            self.write_into_vec(&mut v);
 
             w.write_all(&v).await
         })
@@ -218,7 +218,7 @@ pub trait ClientMessage: Sized {
         Box::pin(async move {
             let mut v =
                 get_encrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
-            self.as_bytes(&mut v);
+            self.write_into_vec(&mut v);
 
             w.write_all(&v).await
         })
@@ -238,7 +238,7 @@ pub trait ClientMessage: Sized {
         Box::pin(async move {
             let mut v =
                 get_unencrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields());
-            self.as_bytes(&mut v);
+            self.write_into_vec(&mut v);
 
             w.write_all(&v).await
         })
@@ -261,7 +261,7 @@ pub trait ClientMessage: Sized {
         Box::pin(async move {
             let mut v =
                 get_encrypted_client(Self::OPCODE, self.size_without_size_or_opcode_fields(), e);
-            self.as_bytes(&mut v);
+            self.write_into_vec(&mut v);
 
             w.write_all(&v).await
         })

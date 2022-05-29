@@ -15,7 +15,7 @@ pub struct MSG_RAID_TARGET_UPDATE_Client {
 }
 
 impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // index: RaidTargetIndex
         w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
 

@@ -19,7 +19,7 @@ pub struct CMSG_BATTLEMASTER_JOIN {
 }
 
 impl ClientMessage for CMSG_BATTLEMASTER_JOIN {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

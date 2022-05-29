@@ -14,7 +14,7 @@ pub struct CMSG_SET_ACTIONBAR_TOGGLES {
 }
 
 impl ClientMessage for CMSG_SET_ACTIONBAR_TOGGLES {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // action_bar: u8
         w.write_all(&self.action_bar.to_le_bytes())?;
 

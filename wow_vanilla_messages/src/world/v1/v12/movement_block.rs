@@ -17,7 +17,7 @@ pub struct MovementBlock {
 }
 
 impl MovementBlock {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // update_flag: UpdateFlag
         w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes())?;
 
@@ -58,7 +58,7 @@ impl MovementBlock {
 
                     if let Some(if_statement) = &flags.on_transport {
                         // transport: TransportInfo
-                        &if_statement.transport.as_bytes(w)?;;
+                        &if_statement.transport.write_into_vec(w)?;;
 
                     }
 
@@ -162,11 +162,11 @@ impl MovementBlock {
 
                         // nodes: Vector3d[amount_of_nodes]
                         for i in if_statement.nodes.iter() {
-                            i.as_bytes(w)?;
+                            i.write_into_vec(w)?;
                         }
 
                         // final_node: Vector3d
-                        &if_statement.final_node.as_bytes(w)?;;
+                        &if_statement.final_node.write_into_vec(w)?;;
 
                     }
 

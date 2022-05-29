@@ -15,7 +15,7 @@ pub struct RaidInfo {
 }
 
 impl RaidInfo {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 

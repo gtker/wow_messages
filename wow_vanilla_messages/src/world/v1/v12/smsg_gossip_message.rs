@@ -19,7 +19,7 @@ pub struct SMSG_GOSSIP_MESSAGE {
 }
 
 impl ServerMessage for SMSG_GOSSIP_MESSAGE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -31,7 +31,7 @@ impl ServerMessage for SMSG_GOSSIP_MESSAGE {
 
         // gossips: GossipItem[amount_of_gossip_items]
         for i in self.gossips.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // amount_of_quests: u32
@@ -39,7 +39,7 @@ impl ServerMessage for SMSG_GOSSIP_MESSAGE {
 
         // quests: QuestItem[amount_of_quests]
         for i in self.quests.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

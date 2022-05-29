@@ -26,7 +26,7 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
 }
 
 impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target: PackedGuid
         w.write_all(&self.target.packed_guid())?;
 

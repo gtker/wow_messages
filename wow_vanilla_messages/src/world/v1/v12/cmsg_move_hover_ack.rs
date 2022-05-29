@@ -18,7 +18,7 @@ pub struct CMSG_MOVE_HOVER_ACK {
 }
 
 impl ClientMessage for CMSG_MOVE_HOVER_ACK {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -26,7 +26,7 @@ impl ClientMessage for CMSG_MOVE_HOVER_ACK {
         w.write_all(&self.counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        &self.movement_info.as_bytes(w)?;;
+        &self.movement_info.write_into_vec(w)?;;
 
         // is_applied: u32
         w.write_all(&self.is_applied.to_le_bytes())?;

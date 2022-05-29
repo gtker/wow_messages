@@ -18,7 +18,7 @@ pub struct CMSG_BUY_ITEM {
 }
 
 impl ClientMessage for CMSG_BUY_ITEM {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor_guid: Guid
         w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
 

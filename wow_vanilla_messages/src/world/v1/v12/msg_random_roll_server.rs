@@ -18,7 +18,7 @@ pub struct MSG_RANDOM_ROLL_Server {
 }
 
 impl ServerMessage for MSG_RANDOM_ROLL_Server {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // minimum: u32
         w.write_all(&self.minimum.to_le_bytes())?;
 

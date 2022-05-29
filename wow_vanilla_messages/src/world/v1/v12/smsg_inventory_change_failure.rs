@@ -14,7 +14,7 @@ pub struct SMSG_INVENTORY_CHANGE_FAILURE {
 }
 
 impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: InventoryResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 

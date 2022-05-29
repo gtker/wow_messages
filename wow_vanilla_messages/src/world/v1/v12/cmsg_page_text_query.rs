@@ -14,7 +14,7 @@ pub struct CMSG_PAGE_TEXT_QUERY {
 }
 
 impl ClientMessage for CMSG_PAGE_TEXT_QUERY {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // page_id: u32
         w.write_all(&self.page_id.to_le_bytes())?;
 

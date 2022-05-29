@@ -15,7 +15,7 @@ pub struct SMSG_STOP_MIRROR_TIMER {
 }
 
 impl ServerMessage for SMSG_STOP_MIRROR_TIMER {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // timer: TimerType
         w.write_all(&(self.timer.as_int() as u32).to_le_bytes())?;
 

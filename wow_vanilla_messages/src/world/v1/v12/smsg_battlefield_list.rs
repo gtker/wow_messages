@@ -20,7 +20,7 @@ pub struct SMSG_BATTLEFIELD_LIST {
 }
 
 impl ServerMessage for SMSG_BATTLEFIELD_LIST {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // battlemaster: Guid
         w.write_all(&self.battlemaster.guid().to_le_bytes())?;
 

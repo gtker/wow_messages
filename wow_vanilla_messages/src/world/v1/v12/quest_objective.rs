@@ -15,7 +15,7 @@ pub struct QuestObjective {
 }
 
 impl QuestObjective {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // creature_id: u32
         w.write_all(&self.creature_id.to_le_bytes())?;
 

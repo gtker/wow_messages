@@ -16,7 +16,7 @@ pub struct CMSG_LEAVE_BATTLEFIELD {
 }
 
 impl ClientMessage for CMSG_LEAVE_BATTLEFIELD {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 

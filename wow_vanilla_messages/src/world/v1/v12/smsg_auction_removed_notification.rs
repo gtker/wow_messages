@@ -16,7 +16,7 @@ pub struct SMSG_AUCTION_REMOVED_NOTIFICATION {
 }
 
 impl ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_id: u32
         w.write_all(&self.item_id.to_le_bytes())?;
 

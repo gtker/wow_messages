@@ -16,7 +16,7 @@ pub struct SMSG_TRADE_STATUS {
 }
 
 impl ServerMessage for SMSG_TRADE_STATUS {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // status: TradeStatus
         w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
 

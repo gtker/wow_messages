@@ -15,7 +15,7 @@ pub struct CMSG_GUILD_RANK {
 }
 
 impl ClientMessage for CMSG_GUILD_RANK {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // rank_id: u32
         w.write_all(&self.rank_id.to_le_bytes())?;
 

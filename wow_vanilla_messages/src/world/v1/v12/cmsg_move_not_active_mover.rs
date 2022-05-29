@@ -16,12 +16,12 @@ pub struct CMSG_MOVE_NOT_ACTIVE_MOVER {
 }
 
 impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // old_mover: Guid
         w.write_all(&self.old_mover.guid().to_le_bytes())?;
 
         // movement_info: MovementInfo
-        &self.movement_info.as_bytes(w)?;;
+        &self.movement_info.write_into_vec(w)?;;
 
         Ok(())
     }

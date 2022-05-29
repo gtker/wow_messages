@@ -16,7 +16,7 @@ pub struct SMSG_RAID_GROUP_ONLY {
 }
 
 impl ServerMessage for SMSG_RAID_GROUP_ONLY {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // homebind_timer: u32
         w.write_all(&self.homebind_timer.to_le_bytes())?;
 

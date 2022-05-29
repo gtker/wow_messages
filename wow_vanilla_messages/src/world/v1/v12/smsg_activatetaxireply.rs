@@ -15,7 +15,7 @@ pub struct SMSG_ACTIVATETAXIREPLY {
 }
 
 impl ServerMessage for SMSG_ACTIVATETAXIREPLY {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reply: ActivateTaxiReply
         w.write_all(&(self.reply.as_int() as u32).to_le_bytes())?;
 

@@ -14,7 +14,7 @@ pub struct SMSG_AUTH_CHALLENGE {
 }
 
 impl ServerMessage for SMSG_AUTH_CHALLENGE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // server_seed: u32
         w.write_all(&self.server_seed.to_le_bytes())?;
 

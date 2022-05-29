@@ -13,7 +13,7 @@ pub struct CMSG_ADD_FRIEND {
 }
 
 impl ClientMessage for CMSG_ADD_FRIEND {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // friend_name: CString
         w.write_all(self.friend_name.as_bytes())?;
         // Null terminator

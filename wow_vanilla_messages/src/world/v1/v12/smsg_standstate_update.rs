@@ -15,7 +15,7 @@ pub struct SMSG_STANDSTATE_UPDATE {
 }
 
 impl ServerMessage for SMSG_STANDSTATE_UPDATE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // state: UnitStandState
         w.write_all(&(self.state.as_int() as u8).to_le_bytes())?;
 

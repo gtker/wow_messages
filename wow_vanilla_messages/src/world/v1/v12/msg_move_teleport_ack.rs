@@ -17,7 +17,7 @@ pub struct MSG_MOVE_TELEPORT_ACK {
 }
 
 impl ClientMessage for MSG_MOVE_TELEPORT_ACK {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -57,7 +57,7 @@ impl ClientMessage for MSG_MOVE_TELEPORT_ACK {
 }
 
 impl ServerMessage for MSG_MOVE_TELEPORT_ACK {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

@@ -15,7 +15,7 @@ pub struct CMSG_AUTOEQUIP_ITEM {
 }
 
 impl ClientMessage for CMSG_AUTOEQUIP_ITEM {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // source_bag: u8
         w.write_all(&self.source_bag.to_le_bytes())?;
 

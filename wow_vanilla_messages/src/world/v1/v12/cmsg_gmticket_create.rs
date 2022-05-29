@@ -21,7 +21,7 @@ pub struct CMSG_GMTICKET_CREATE {
 }
 
 impl ClientMessage for CMSG_GMTICKET_CREATE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // category: GmTicketType
         w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
 

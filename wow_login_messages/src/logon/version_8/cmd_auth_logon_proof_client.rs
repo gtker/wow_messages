@@ -18,7 +18,7 @@ pub struct CMD_AUTH_LOGON_PROOF_Client {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -42,7 +42,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 
         // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         for i in self.telemetry_keys.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // security_flag: SecurityFlag
@@ -196,7 +196,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(self.size() + 1);
-        self.as_bytes(&mut v)?;
+        self.write_into_vec(&mut v)?;
         w.write_all(&v)
     }
 
@@ -326,7 +326,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(self.size() + 1);
-            self.as_bytes(&mut v)?;
+            self.write_into_vec(&mut v)?;
             w.write_all(&v).await
         })
     }
@@ -457,7 +457,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(self.size() + 1);
-            self.as_bytes(&mut v)?;
+            self.write_into_vec(&mut v)?;
             w.write_all(&v).await
         })
     }

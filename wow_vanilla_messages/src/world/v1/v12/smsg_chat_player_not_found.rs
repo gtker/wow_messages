@@ -13,7 +13,7 @@ pub struct SMSG_CHAT_PLAYER_NOT_FOUND {
 }
 
 impl ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator

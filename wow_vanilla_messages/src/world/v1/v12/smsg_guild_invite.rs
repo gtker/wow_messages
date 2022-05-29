@@ -14,7 +14,7 @@ pub struct SMSG_GUILD_INVITE {
 }
 
 impl ServerMessage for SMSG_GUILD_INVITE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_name: CString
         w.write_all(self.player_name.as_bytes())?;
         // Null terminator

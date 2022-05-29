@@ -289,7 +289,7 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
             s.bodyn("match self", |s| {
                 for e in v {
                     s.wln(format!(
-                        "Self::{enum_name}(e) => e.as_bytes(w)?,",
+                        "Self::{enum_name}(e) => e.write_into_vec(w)?,",
                         enum_name = get_enumerator_name(e.name()),
                     ));
                 }

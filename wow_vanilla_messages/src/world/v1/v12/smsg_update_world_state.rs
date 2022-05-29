@@ -15,9 +15,9 @@ pub struct SMSG_UPDATE_WORLD_STATE {
 }
 
 impl ServerMessage for SMSG_UPDATE_WORLD_STATE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // state: WorldState
-        &self.state.as_bytes(w)?;;
+        &self.state.write_into_vec(w)?;;
 
         Ok(())
     }

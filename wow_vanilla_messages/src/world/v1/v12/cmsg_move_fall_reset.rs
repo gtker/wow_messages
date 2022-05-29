@@ -14,9 +14,9 @@ pub struct CMSG_MOVE_FALL_RESET {
 }
 
 impl ClientMessage for CMSG_MOVE_FALL_RESET {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        &self.info.as_bytes(w)?;;
+        &self.info.write_into_vec(w)?;;
 
         Ok(())
     }

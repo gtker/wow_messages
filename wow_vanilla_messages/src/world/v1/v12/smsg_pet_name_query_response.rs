@@ -15,7 +15,7 @@ pub struct SMSG_PET_NAME_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
 

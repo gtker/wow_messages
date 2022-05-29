@@ -15,7 +15,7 @@ pub struct SMSG_SUPERCEDED_SPELL {
 }
 
 impl ServerMessage for SMSG_SUPERCEDED_SPELL {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // new_spell_id: u16
         w.write_all(&self.new_spell_id.to_le_bytes())?;
 

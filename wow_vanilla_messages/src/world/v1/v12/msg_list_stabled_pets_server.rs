@@ -17,7 +17,7 @@ pub struct MSG_LIST_STABLED_PETS_Server {
 }
 
 impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
@@ -29,7 +29,7 @@ impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
 
         // pets: StabledPet[amount_of_pets]
         for i in self.pets.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

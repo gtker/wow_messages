@@ -17,7 +17,7 @@ pub struct SMSG_SHOWTAXINODES {
 }
 
 impl ServerMessage for SMSG_SHOWTAXINODES {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 

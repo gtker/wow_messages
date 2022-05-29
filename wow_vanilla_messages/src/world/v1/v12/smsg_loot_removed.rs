@@ -14,7 +14,7 @@ pub struct SMSG_LOOT_REMOVED {
 }
 
 impl ServerMessage for SMSG_LOOT_REMOVED {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
 

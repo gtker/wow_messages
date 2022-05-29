@@ -13,7 +13,7 @@ pub struct ItemStat {
 }
 
 impl ItemStat {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_stat_type: u32
         w.write_all(&self.item_stat_type.to_le_bytes())?;
 

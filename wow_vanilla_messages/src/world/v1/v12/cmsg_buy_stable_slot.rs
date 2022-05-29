@@ -15,7 +15,7 @@ pub struct CMSG_BUY_STABLE_SLOT {
 }
 
 impl ClientMessage for CMSG_BUY_STABLE_SLOT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc_guid: Guid
         w.write_all(&self.npc_guid.guid().to_le_bytes())?;
 

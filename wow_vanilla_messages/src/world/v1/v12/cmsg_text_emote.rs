@@ -18,7 +18,7 @@ pub struct CMSG_TEXT_EMOTE {
 }
 
 impl ClientMessage for CMSG_TEXT_EMOTE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // text_emote: u32
         w.write_all(&self.text_emote.to_le_bytes())?;
 

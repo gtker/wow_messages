@@ -17,7 +17,7 @@ pub struct SMSG_SUMMON_REQUEST {
 }
 
 impl ServerMessage for SMSG_SUMMON_REQUEST {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // summoner_guid: Guid
         w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
 

@@ -15,7 +15,7 @@ pub struct SMSG_PAGE_TEXT_QUERY_RESPONSE {
 }
 
 impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // page_id: u32
         w.write_all(&self.page_id.to_le_bytes())?;
 

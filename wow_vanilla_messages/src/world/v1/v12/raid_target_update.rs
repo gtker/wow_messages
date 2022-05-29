@@ -15,7 +15,7 @@ pub struct RaidTargetUpdate {
 }
 
 impl RaidTargetUpdate {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // index: RaidTargetIndex
         w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
 

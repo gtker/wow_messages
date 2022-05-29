@@ -14,7 +14,7 @@ pub struct SMSG_CORPSE_RECLAIM_DELAY {
 }
 
 impl ServerMessage for SMSG_CORPSE_RECLAIM_DELAY {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // delay_in_seconds: u32
         w.write_all(&self.delay_in_seconds.to_le_bytes())?;
 

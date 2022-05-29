@@ -26,7 +26,7 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
 }
 
 impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -56,7 +56,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
 
         // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
         for i in self.choice_item_rewards.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // amount_of_item_rewards: u32
@@ -64,7 +64,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
 
         // item_rewards: QuestItemReward[amount_of_item_rewards]
         for i in self.item_rewards.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // money_reward: u32
@@ -78,7 +78,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
 
         // emotes: QuestDetailsEmote[amount_of_emotes]
         for i in self.emotes.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

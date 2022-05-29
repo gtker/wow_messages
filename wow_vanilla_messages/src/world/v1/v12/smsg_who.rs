@@ -15,7 +15,7 @@ pub struct SMSG_WHO {
 }
 
 impl ServerMessage for SMSG_WHO {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // listed_players: u32
         w.write_all(&(self.players.len() as u32).to_le_bytes())?;
 
@@ -24,7 +24,7 @@ impl ServerMessage for SMSG_WHO {
 
         // players: WhoPlayer[listed_players]
         for i in self.players.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

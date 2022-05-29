@@ -13,7 +13,7 @@ pub struct GmSurveyQuestion {
 }
 
 impl GmSurveyQuestion {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // question_id: u32
         w.write_all(&self.question_id.to_le_bytes())?;
 

@@ -14,7 +14,7 @@ pub struct CMSG_UNLEARN_SKILL {
 }
 
 impl ClientMessage for CMSG_UNLEARN_SKILL {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // skill_id: u32
         w.write_all(&self.skill_id.to_le_bytes())?;
 

@@ -16,7 +16,7 @@ pub struct SMSG_CHANNEL_LIST {
 }
 
 impl ServerMessage for SMSG_CHANNEL_LIST {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // channel_name: CString
         w.write_all(self.channel_name.as_bytes())?;
         // Null terminator
@@ -30,7 +30,7 @@ impl ServerMessage for SMSG_CHANNEL_LIST {
 
         // members: ChannelMember[amount_of_members]
         for i in self.members.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

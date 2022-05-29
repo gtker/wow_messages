@@ -14,7 +14,7 @@ pub struct GroupListMember {
 }
 
 impl GroupListMember {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator

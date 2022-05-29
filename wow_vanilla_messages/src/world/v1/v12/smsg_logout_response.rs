@@ -17,7 +17,7 @@ pub struct SMSG_LOGOUT_RESPONSE {
 }
 
 impl ServerMessage for SMSG_LOGOUT_RESPONSE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: LogoutResult
         w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
 

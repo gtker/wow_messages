@@ -15,7 +15,7 @@ pub struct SMSG_BATTLEGROUND_PLAYER_LEFT {
 }
 
 impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

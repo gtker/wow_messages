@@ -15,7 +15,7 @@ pub struct SMSG_CLIENT_CONTROL_UPDATE {
 }
 
 impl ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 

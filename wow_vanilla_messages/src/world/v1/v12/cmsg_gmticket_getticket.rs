@@ -13,7 +13,7 @@ pub struct CMSG_GMTICKET_GETTICKET {
 }
 
 impl ClientMessage for CMSG_GMTICKET_GETTICKET {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
     const OPCODE: u16 = 0x0211;

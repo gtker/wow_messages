@@ -13,7 +13,7 @@ pub struct SpellCastTargets {
 }
 
 impl SpellCastTargets {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
         w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes())?;
 

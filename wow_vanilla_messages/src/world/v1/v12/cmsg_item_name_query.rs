@@ -16,7 +16,7 @@ pub struct CMSG_ITEM_NAME_QUERY {
 }
 
 impl ClientMessage for CMSG_ITEM_NAME_QUERY {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_id: u32
         w.write_all(&self.item_id.to_le_bytes())?;
 

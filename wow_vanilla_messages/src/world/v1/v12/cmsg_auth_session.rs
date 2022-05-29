@@ -19,7 +19,7 @@ pub struct CMSG_AUTH_SESSION {
 }
 
 impl ClientMessage for CMSG_AUTH_SESSION {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // build: u32
         w.write_all(&self.build.to_le_bytes())?;
 

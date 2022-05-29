@@ -16,7 +16,7 @@ pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
 }
 
 impl ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer: Guid
         w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 

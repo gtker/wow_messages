@@ -13,7 +13,7 @@ pub struct CMSG_GUILD_CREATE {
 }
 
 impl ClientMessage for CMSG_GUILD_CREATE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_name: CString
         w.write_all(self.guild_name.as_bytes())?;
         // Null terminator

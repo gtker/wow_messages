@@ -21,7 +21,7 @@ pub struct SMSG_SPELL_START {
 }
 
 impl ServerMessage for SMSG_SPELL_START {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // cast_item: PackedGuid
         w.write_all(&self.cast_item.packed_guid())?;
 
@@ -38,7 +38,7 @@ impl ServerMessage for SMSG_SPELL_START {
         w.write_all(&self.timer.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        &self.targets.as_bytes(w)?;;
+        &self.targets.write_into_vec(w)?;;
 
         if let Some(if_statement) = &self.flags.ammo {
             // ammo_display_id: u32

@@ -18,7 +18,7 @@ pub struct SMSG_SPELLORDAMAGE_IMMUNE {
 }
 
 impl ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster_guid: Guid
         w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 

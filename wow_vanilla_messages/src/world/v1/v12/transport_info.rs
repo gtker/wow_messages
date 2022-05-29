@@ -17,7 +17,7 @@ pub struct TransportInfo {
 }
 
 impl TransportInfo {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 

@@ -19,7 +19,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
 }
 
 impl CMD_AUTH_RECONNECT_PROOF_Server {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -54,7 +54,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(4);
-        self.as_bytes(&mut v)?;
+        self.write_into_vec(&mut v)?;
         w.write_all(&v)
     }
 
@@ -98,7 +98,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(4);
-            self.as_bytes(&mut v)?;
+            self.write_into_vec(&mut v)?;
             w.write_all(&v).await
         })
     }
@@ -143,7 +143,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(4);
-            self.as_bytes(&mut v)?;
+            self.write_into_vec(&mut v)?;
             w.write_all(&v).await
         })
     }

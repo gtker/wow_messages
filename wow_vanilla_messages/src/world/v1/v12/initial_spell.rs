@@ -13,7 +13,7 @@ pub struct InitialSpell {
 }
 
 impl InitialSpell {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell_id: u16
         w.write_all(&self.spell_id.to_le_bytes())?;
 

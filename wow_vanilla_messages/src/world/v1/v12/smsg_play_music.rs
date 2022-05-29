@@ -14,7 +14,7 @@ pub struct SMSG_PLAY_MUSIC {
 }
 
 impl ServerMessage for SMSG_PLAY_MUSIC {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // sound_id: u32
         w.write_all(&self.sound_id.to_le_bytes())?;
 

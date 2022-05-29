@@ -17,7 +17,7 @@ pub struct SMSG_GUILD_COMMAND_RESULT {
 }
 
 impl ServerMessage for SMSG_GUILD_COMMAND_RESULT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // command: GuildCommand
         w.write_all(&(self.command.as_int() as u32).to_le_bytes())?;
 

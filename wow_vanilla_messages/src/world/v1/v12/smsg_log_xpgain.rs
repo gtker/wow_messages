@@ -17,7 +17,7 @@ pub struct SMSG_LOG_XPGAIN {
 }
 
 impl ServerMessage for SMSG_LOG_XPGAIN {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
 

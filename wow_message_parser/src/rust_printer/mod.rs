@@ -151,7 +151,7 @@ impl Writer {
             type_name.as_ref()
         ));
 
-        self.write_as_bytes_trait(write_function);
+        self.write_into_vec_trait(write_function);
 
         self.wln(format!("const OPCODE: u16 = {:#06x};", opcode));
 
@@ -292,12 +292,12 @@ impl Writer {
         };
 
         self.wln(format!("let mut v = Vec::with_capacity({});", size));
-        self.wln("self.as_bytes(&mut v)?;");
+        self.wln("self.write_into_vec(&mut v)?;");
         self.wln(format!("w.write_all(&v){postfix}", postfix = it.postfix()));
     }
 
-    pub fn write_as_bytes_trait(&mut self, write_function: impl Fn(&mut Self, ImplType)) {
-        self.open_curly("fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>");
+    pub fn write_into_vec_trait(&mut self, write_function: impl Fn(&mut Self, ImplType)) {
+        self.open_curly("fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>");
 
         write_function(self, ImplType::Std);
 
@@ -306,7 +306,7 @@ impl Writer {
         self.closing_curly();
     }
 
-    pub fn write_as_bytes(
+    pub fn write_into_vec(
         &mut self,
         type_name: impl AsRef<str>,
         write_function: impl Fn(&mut Self, ImplType),
@@ -314,7 +314,7 @@ impl Writer {
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
         self.open_curly(
-            "pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>",
+            "pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>",
         );
 
         write_function(self, ImplType::Std);
@@ -333,7 +333,7 @@ impl Writer {
         write_function: F2,
         visibility: impl AsRef<str>,
     ) {
-        self.write_as_bytes(&type_name, write_function);
+        self.write_into_vec(&type_name, write_function);
 
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
@@ -402,7 +402,7 @@ impl Writer {
         write_function: impl Fn(&mut Self, ImplType),
         sizes: Sizes,
     ) {
-        self.write_as_bytes(&type_name, write_function);
+        self.write_into_vec(&type_name, write_function);
 
         self.open_curly(format!(
             "impl {} for {}",

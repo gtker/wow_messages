@@ -14,9 +14,9 @@ pub struct MSG_MOVE_START_BACKWARD {
 }
 
 impl ClientMessage for MSG_MOVE_START_BACKWARD {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        &self.info.as_bytes(w)?;;
+        &self.info.write_into_vec(w)?;;
 
         Ok(())
     }
@@ -40,9 +40,9 @@ impl ClientMessage for MSG_MOVE_START_BACKWARD {
 }
 
 impl ServerMessage for MSG_MOVE_START_BACKWARD {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        &self.info.as_bytes(w)?;;
+        &self.info.write_into_vec(w)?;;
 
         Ok(())
     }

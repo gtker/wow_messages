@@ -13,7 +13,7 @@ pub struct CMSG_LEAVE_CHANNEL {
 }
 
 impl ClientMessage for CMSG_LEAVE_CHANNEL {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // channel_name: CString
         w.write_all(self.channel_name.as_bytes())?;
         // Null terminator

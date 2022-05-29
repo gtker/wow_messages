@@ -20,7 +20,7 @@ pub struct SMSG_PARTY_MEMBER_STATS {
 }
 
 impl ServerMessage for SMSG_PARTY_MEMBER_STATS {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 

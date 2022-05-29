@@ -15,7 +15,7 @@ pub struct SMSG_LOGIN_SETTIMESPEED {
 }
 
 impl ServerMessage for SMSG_LOGIN_SETTIMESPEED {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // secs_to_time_bit_field: u32
         w.write_all(&self.secs_to_time_bit_field.to_le_bytes())?;
 

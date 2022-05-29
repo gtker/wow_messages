@@ -14,7 +14,7 @@ pub struct SMSG_ACCOUNT_DATA_TIMES {
 }
 
 impl ServerMessage for SMSG_ACCOUNT_DATA_TIMES {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // data: u32[32]
         for i in self.data.iter() {
             w.write_all(&i.to_le_bytes())?;

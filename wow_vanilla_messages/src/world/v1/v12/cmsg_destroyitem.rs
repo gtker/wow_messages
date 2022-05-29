@@ -19,7 +19,7 @@ pub struct CMSG_DESTROYITEM {
 }
 
 impl ClientMessage for CMSG_DESTROYITEM {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag: u8
         w.write_all(&self.bag.to_le_bytes())?;
 

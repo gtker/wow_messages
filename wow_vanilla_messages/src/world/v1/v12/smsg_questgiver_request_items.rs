@@ -28,7 +28,7 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
 }
 
 impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
@@ -62,7 +62,7 @@ impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         // required_items: QuestItemRequirement[amount_of_required_items]
         for i in self.required_items.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         // unknown1: u32

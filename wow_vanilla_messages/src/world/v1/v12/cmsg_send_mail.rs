@@ -24,7 +24,7 @@ pub struct CMSG_SEND_MAIL {
 }
 
 impl ClientMessage for CMSG_SEND_MAIL {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // mailbox: Guid
         w.write_all(&self.mailbox.guid().to_le_bytes())?;
 

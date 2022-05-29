@@ -13,7 +13,7 @@ pub struct AuraLog {
 }
 
 impl AuraLog {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // aura_type: AuraType
         w.write_all(&(self.aura_type.as_int() as u32).to_le_bytes())?;
 

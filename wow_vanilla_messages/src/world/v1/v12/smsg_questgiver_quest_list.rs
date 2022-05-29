@@ -19,7 +19,7 @@ pub struct SMSG_QUESTGIVER_QUEST_LIST {
 }
 
 impl ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
@@ -39,7 +39,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {
 
         // quest_items: QuestItem[amount_of_entries]
         for i in self.quest_items.iter() {
-            i.as_bytes(w)?;
+            i.write_into_vec(w)?;
         }
 
         Ok(())

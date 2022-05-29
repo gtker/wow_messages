@@ -16,7 +16,7 @@ pub struct SMSG_BATTLEFIELD_STATUS {
 }
 
 impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // queue_slot: u32
         w.write_all(&self.queue_slot.to_le_bytes())?;
 

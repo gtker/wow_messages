@@ -23,7 +23,7 @@ pub struct TrainerSpell {
 }
 
 impl TrainerSpell {
-    pub(crate) fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 

@@ -13,7 +13,7 @@ pub struct CMSG_GUILD_INVITE {
 }
 
 impl ClientMessage for CMSG_GUILD_INVITE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // invited_player: CString
         w.write_all(self.invited_player.as_bytes())?;
         // Null terminator

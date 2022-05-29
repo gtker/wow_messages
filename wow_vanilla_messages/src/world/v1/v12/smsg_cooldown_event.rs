@@ -16,7 +16,7 @@ pub struct SMSG_COOLDOWN_EVENT {
 }
 
 impl ServerMessage for SMSG_COOLDOWN_EVENT {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 

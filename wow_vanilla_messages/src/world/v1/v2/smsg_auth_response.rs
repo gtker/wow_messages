@@ -14,7 +14,7 @@ pub struct SMSG_AUTH_RESPONSE {
 }
 
 impl ServerMessage for SMSG_AUTH_RESPONSE {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: WorldResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 

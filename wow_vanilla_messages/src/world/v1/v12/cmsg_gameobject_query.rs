@@ -16,7 +16,7 @@ pub struct CMSG_GAMEOBJECT_QUERY {
 }
 
 impl ClientMessage for CMSG_GAMEOBJECT_QUERY {
-    fn as_bytes(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // entry_id: u32
         w.write_all(&self.entry_id.to_le_bytes())?;
 
