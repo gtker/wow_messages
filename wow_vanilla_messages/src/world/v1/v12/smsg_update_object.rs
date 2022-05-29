@@ -113,21 +113,21 @@ mod test {
                         movement2: MovementBlock {
                             update_flag: MovementBlockUpdateFlag::empty()
                                 .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
-                                    backwards_running_speed: 4.5,
-                                    backwards_swimming_speed: 0.0,
-                                    fall_time: 0.0,
+                                    backwards_running_speed: 4.5_f32,
+                                    backwards_swimming_speed: 0_f32,
+                                    fall_time: 0_f32,
                                     flags: MovementBlockMovementFlags::empty()
                                         .set_NONE()
                                         ,
-                                    living_orientation: 0.0,
-                                    living_position_x: -8950.0,
-                                    living_position_y: -132.5,
-                                    living_position_z: 83.5,
-                                    running_speed: 7.0,
-                                    swimming_speed: 0.0,
+                                    living_orientation: 0_f32,
+                                    living_position_x: -8949.95_f32,
+                                    living_position_y: -132.493_f32,
+                                    living_position_z: 83.5312_f32,
+                                    running_speed: 7_f32,
+                                    swimming_speed: 0_f32,
                                     timestamp: 0x0,
-                                    turn_rate: 3.1,
-                                    walking_speed: 1.0,
+                                    turn_rate: 3.1415927_f32,
+                                    walking_speed: 1_f32,
                                 })
                                 .set_ALL(MovementBlockUpdateFlagALL {
                                     unknown1: 0x1,
@@ -187,21 +187,21 @@ mod test {
                         movement2: MovementBlock {
                             update_flag: MovementBlockUpdateFlag::empty()
                                 .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
-                                    backwards_running_speed: 4.5,
-                                    backwards_swimming_speed: 0.0,
-                                    fall_time: 0.0,
+                                    backwards_running_speed: 4.5_f32,
+                                    backwards_swimming_speed: 0_f32,
+                                    fall_time: 0_f32,
                                     flags: MovementBlockMovementFlags::empty()
                                         .set_NONE()
                                         ,
-                                    living_orientation: 0.0,
-                                    living_position_x: -8950.0,
-                                    living_position_y: -132.5,
-                                    living_position_z: 83.5,
-                                    running_speed: 7.0,
-                                    swimming_speed: 0.0,
+                                    living_orientation: 0_f32,
+                                    living_position_x: -8949.95_f32,
+                                    living_position_y: -132.493_f32,
+                                    living_position_z: 83.5312_f32,
+                                    running_speed: 7_f32,
+                                    swimming_speed: 0_f32,
                                     timestamp: 0x0,
-                                    turn_rate: 3.1,
-                                    walking_speed: 1.0,
+                                    turn_rate: 3.1415927_f32,
+                                    walking_speed: 1_f32,
                                 })
                                 .set_ALL(MovementBlockUpdateFlagALL {
                                     unknown1: 0x1,
@@ -261,21 +261,21 @@ mod test {
                         movement2: MovementBlock {
                             update_flag: MovementBlockUpdateFlag::empty()
                                 .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
-                                    backwards_running_speed: 4.5,
-                                    backwards_swimming_speed: 0.0,
-                                    fall_time: 0.0,
+                                    backwards_running_speed: 4.5_f32,
+                                    backwards_swimming_speed: 0_f32,
+                                    fall_time: 0_f32,
                                     flags: MovementBlockMovementFlags::empty()
                                         .set_NONE()
                                         ,
-                                    living_orientation: 0.0,
-                                    living_position_x: -8950.0,
-                                    living_position_y: -132.5,
-                                    living_position_z: 83.5,
-                                    running_speed: 7.0,
-                                    swimming_speed: 0.0,
+                                    living_orientation: 0_f32,
+                                    living_position_x: -8949.95_f32,
+                                    living_position_y: -132.493_f32,
+                                    living_position_z: 83.5312_f32,
+                                    running_speed: 7_f32,
+                                    swimming_speed: 0_f32,
                                     timestamp: 0x0,
-                                    turn_rate: 3.1,
-                                    walking_speed: 1.0,
+                                    turn_rate: 3.1415927_f32,
+                                    walking_speed: 1_f32,
                                 })
                                 .set_ALL(MovementBlockUpdateFlagALL {
                                     unknown1: 0x1,

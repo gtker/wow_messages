@@ -97,10 +97,10 @@ mod test {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xFACADEDEADBEEF,
             map: Map::KALIMDOR,
-            position_x: 1.0,
-            position_y: 2.0,
-            position_z: 3.0,
-            orientation: 4.0,
+            position_x: 1_f32,
+            position_y: 2_f32,
+            position_z: 3_f32,
+            orientation: 4_f32,
         };
 
         let header_size = 2 + 4;
@@ -136,10 +136,10 @@ mod test {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xFACADEDEADBEEF,
             map: Map::KALIMDOR,
-            position_x: 1.0,
-            position_y: 2.0,
-            position_z: 3.0,
-            orientation: 4.0,
+            position_x: 1_f32,
+            position_y: 2_f32,
+            position_z: 3_f32,
+            orientation: 4_f32,
         };
 
         let header_size = 2 + 4;
@@ -175,10 +175,10 @@ mod test {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xFACADEDEADBEEF,
             map: Map::KALIMDOR,
-            position_x: 1.0,
-            position_y: 2.0,
-            position_z: 3.0,
-            orientation: 4.0,
+            position_x: 1_f32,
+            position_y: 2_f32,
+            position_z: 3_f32,
+            orientation: 4_f32,
         };
 
         let header_size = 2 + 4;

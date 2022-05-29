@@ -216,7 +216,7 @@ test SMSG_UPDATE_OBJECT {
                 backwards_running_speed = 4.5;
                 swimming_speed = 0.0;
                 backwards_swimming_speed = 0.0;
-                turn_rate = 3.14159265358979323846264338327950288;
+                turn_rate = 3.1415927;
                 unknown1 = 1;
             };
             mask2 = {

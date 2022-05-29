@@ -12,26 +12,12 @@ use std::io::Write;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 
-#[derive(Debug, Clone, PartialEq)]
-pub enum UpdateValue {
-    Guid(u64),
-    U32(u32),
-    I32(i32),
-    F32(f32),
-}
-
-impl Default for UpdateValue {
-    fn default() -> Self {
-        Self::Guid(0)
-    }
-}
-
 macro_rules! update_item {
     ($name:ident) => {
         #[derive(Debug, Clone, Default, PartialEq)]
         pub struct $name {
             header: Vec<u32>,
-            values: BTreeMap<u16, UpdateValue>,
+            values: BTreeMap<u16, u32>,
         }
 
         impl $name {
@@ -42,7 +28,7 @@ macro_rules! update_item {
                 }
             }
 
-            fn from_inners(header: Vec<u32>, values: BTreeMap<u16, UpdateValue>) -> Self {
+            fn from_inners(header: Vec<u32>, values: BTreeMap<u16, u32>) -> Self {
                 Self { header, values }
             }
 
@@ -57,7 +43,7 @@ macro_rules! update_item {
     };
 }
 
-fn header_set(header: &mut Vec<u32>, values: &mut BTreeMap<u16, UpdateValue>, bit: u16) {
+fn header_set(header: &mut Vec<u32>, values: &mut BTreeMap<u16, u32>, bit: u16) {
     let index = bit / 32;
     let offset = bit % 32;
 
@@ -71,7 +57,7 @@ fn header_set(header: &mut Vec<u32>, values: &mut BTreeMap<u16, UpdateValue>, bi
     header[index as usize] |= 1 << offset;
 }
 
-fn as_bytes(header: &[u32], values: &BTreeMap<u16, UpdateValue>) -> Vec<u8> {
+fn as_bytes(header: &[u32], values: &BTreeMap<u16, u32>) -> Vec<u8> {
     let mut v = Vec::new();
 
     v.write_all(&[header.len() as u8]).unwrap();
@@ -81,20 +67,7 @@ fn as_bytes(header: &[u32], values: &BTreeMap<u16, UpdateValue>) -> Vec<u8> {
     }
 
     for (_, value) in values {
-        match value {
-            UpdateValue::Guid(g) => {
-                v.write_all(&g.to_le_bytes()).unwrap();
-            }
-            UpdateValue::U32(u) => {
-                v.write_all(&u.to_le_bytes()).unwrap();
-            }
-            UpdateValue::I32(i) => {
-                v.write_all(&i.to_le_bytes()).unwrap();
-            }
-            UpdateValue::F32(f) => {
-                v.write_all(&f.to_le_bytes()).unwrap();
-            }
-        }
+        v.write_all(&value.to_le_bytes()).unwrap();
     }
 
     v
@@ -139,10 +112,7 @@ impl UpdateMask {
         for block in &header {
             for bit in 0..32 {
                 if (block & 1 << bit) != 0 {
-                    values.insert(
-                        index * 32 + bit,
-                        UpdateValue::U32(crate::util::read_u32_le(r)?),
-                    );
+                    values.insert(index * 32 + bit, crate::util::read_u32_le(r)?);
                 }
             }
 
@@ -156,10 +126,7 @@ impl UpdateMask {
                     "Missing object TYPE",
                 ))
             }
-            Some(ty) => match ty {
-                UpdateValue::U32(i) => *i,
-                _ => unreachable!(),
-            },
+            Some(ty) => *ty,
         };
 
         const OBJECT: u32 = 0x0001;

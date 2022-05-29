@@ -256,7 +256,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
             s.wln_no_indent(format!("Guid::new({:#X}),", i.value()));
         }
         TestValue::FloatingNumber { value, .. } => {
-            s.wln_no_indent(format!("{:1.1},", value));
+            s.wln_no_indent(format!("{}_f32,", value));
         }
         TestValue::Array { values, size } => {
             match size {

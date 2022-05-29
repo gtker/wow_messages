@@ -46,7 +46,6 @@ pub fn print_update_mask() {
     let mut s = Writer::new("");
     s.wln("use crate::Guid;");
     s.wln("use crate::helper::update_mask::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};");
-    s.wln("use crate::helper::update_mask::UpdateValue;");
     s.newline();
 
     for (ty, types) in update_types {
@@ -81,19 +80,29 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
             match m.uf {
                 UfType::Guid => {
                     s.wln(format!("self.header_set({});", m.offset + 1));
+
+                    s.wln(format!(
+                        "self.values.insert({}, v.guid() as u32);",
+                        m.offset
+                    ));
+                    s.wln(format!(
+                        "self.values.insert({} + 1, (v.guid() >> 32) as u32);",
+                        m.offset
+                    ));
                 }
-                _ => {}
+                _ => {
+                    let value = match m.uf {
+                        UfType::Int => "v as u32",
+                        UfType::Float => "u32::from_le_bytes(v.to_le_bytes())",
+                        UfType::Bytes => "v",
+                        UfType::TwoShort => "v",
+                        _ => unreachable!(),
+                    };
+
+                    s.wln(format!("self.values.insert({}, {});", m.offset, value));
+                }
             }
 
-            let value = match m.uf {
-                UfType::Guid => "UpdateValue::Guid(v.guid())",
-                UfType::Int => "UpdateValue::I32(v)",
-                UfType::Float => "UpdateValue::F32(v)",
-                UfType::Bytes => "UpdateValue::U32(v)",
-                UfType::TwoShort => "UpdateValue::U32(v)",
-            };
-
-            s.wln(format!("self.values.insert({}, {});", m.offset, value));
             s.wln("self.clone()");
         },
     );

@@ -94764,8 +94764,8 @@
                                 "variable_name": "turn_rate",
                                 "verified_value": {
                                   "FloatingNumber": {
-                                    "value": 3.141592653589793,
-                                    "original_string": "3.14159265358979323846264338327950288"
+                                    "value": 3.1415927,
+                                    "original_string": "3.1415927"
                                   }
                                 },
                                 "tags": {}
