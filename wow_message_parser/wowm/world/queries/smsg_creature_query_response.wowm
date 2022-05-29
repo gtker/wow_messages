@@ -2,7 +2,6 @@
 
 smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
     u32 creature_entry;
-    /* TODO: INT_EQUALS */
     optional found {
         CString name1;
         CString name2;

@@ -26,6 +26,9 @@
 //!
 //! The [`helper`] module contains utility functions for common operations.
 //!
+//! The [`ClientMessage`] (sent **from** the client) and [`ServerMessage`] (sent **from** the server)
+//! are the primary interface for sending messages.
+//!
 //! ## Usage
 //!
 //! To add only the synchronous methods add the following to your `Cargo.toml`:
