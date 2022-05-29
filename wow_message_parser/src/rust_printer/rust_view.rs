@@ -854,7 +854,7 @@ impl RustDefiner {
 fn create_else_if_flag(
     statement: &IfStatement,
     struct_ty_name: &str,
-    current_scope: &mut Vec<RustMember>,
+    current_scope: &mut [RustMember],
     parent_scope: &mut [RustMember],
 ) {
     assert_eq!(statement.get_conditional().equations().len(), 1);
@@ -1085,7 +1085,7 @@ pub fn create_struct_member(
     o: &Objects,
     e: &Container,
     current_scope: &mut Vec<RustMember>,
-    parent_scope: &mut Vec<RustMember>,
+    parent_scope: &mut [RustMember],
     optional: &mut Option<RustOptional>,
 ) {
     match m {
