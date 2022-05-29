@@ -12,7 +12,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_TRADE_STATUS {
-    pub status: SMSG_TRADE_STATUSTradeStatus,
+    pub status: SMSG_TRADE_STATUS_TradeStatus,
 }
 
 impl ServerMessage for SMSG_TRADE_STATUS {
@@ -21,25 +21,25 @@ impl ServerMessage for SMSG_TRADE_STATUS {
         w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
 
         match &self.status {
-            SMSG_TRADE_STATUSTradeStatus::BUSY => {}
-            SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
+            SMSG_TRADE_STATUS_TradeStatus::BUSY => {}
+            SMSG_TRADE_STATUS_TradeStatus::BEGIN_TRADE {
                 unknown1,
             } => {
                 // unknown1: Guid
                 w.write_all(&unknown1.guid().to_le_bytes())?;
 
             }
-            SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT => {}
-            SMSG_TRADE_STATUSTradeStatus::BUSY_2 => {}
-            SMSG_TRADE_STATUSTradeStatus::NO_TARGET => {}
-            SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR => {}
-            SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => {}
-            SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
+            SMSG_TRADE_STATUS_TradeStatus::OPEN_WINDOW => {}
+            SMSG_TRADE_STATUS_TradeStatus::TRADE_CANCELED => {}
+            SMSG_TRADE_STATUS_TradeStatus::TRADE_ACCEPT => {}
+            SMSG_TRADE_STATUS_TradeStatus::BUSY_2 => {}
+            SMSG_TRADE_STATUS_TradeStatus::NO_TARGET => {}
+            SMSG_TRADE_STATUS_TradeStatus::BACK_TO_TRADE => {}
+            SMSG_TRADE_STATUS_TradeStatus::TRADE_COMPLETE => {}
+            SMSG_TRADE_STATUS_TradeStatus::TRADE_REJECTED => {}
+            SMSG_TRADE_STATUS_TradeStatus::TARGET_TO_FAR => {}
+            SMSG_TRADE_STATUS_TradeStatus::WRONG_FACTION => {}
+            SMSG_TRADE_STATUS_TradeStatus::CLOSE_WINDOW {
                 inventory_result,
                 item_limit_category_id,
                 target_error,
@@ -54,23 +54,23 @@ impl ServerMessage for SMSG_TRADE_STATUS {
                 w.write_all(&item_limit_category_id.to_le_bytes())?;
 
             }
-            SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13 => {}
-            SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU => {}
-            SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED => {}
-            SMSG_TRADE_STATUSTradeStatus::YOU_DEAD => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD => {}
-            SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT => {}
-            SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT => {}
-            SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED {
+            SMSG_TRADE_STATUS_TradeStatus::UNKNOWN_13 => {}
+            SMSG_TRADE_STATUS_TradeStatus::IGNORE_YOU => {}
+            SMSG_TRADE_STATUS_TradeStatus::YOU_STUNNED => {}
+            SMSG_TRADE_STATUS_TradeStatus::TARGET_STUNNED => {}
+            SMSG_TRADE_STATUS_TradeStatus::YOU_DEAD => {}
+            SMSG_TRADE_STATUS_TradeStatus::TARGET_DEAD => {}
+            SMSG_TRADE_STATUS_TradeStatus::YOU_LOGOUT => {}
+            SMSG_TRADE_STATUS_TradeStatus::TARGET_LOGOUT => {}
+            SMSG_TRADE_STATUS_TradeStatus::TRIAL_ACCOUNT => {}
+            SMSG_TRADE_STATUS_TradeStatus::ONLY_CONJURED {
                 slot,
             } => {
                 // slot: u8
                 w.write_all(&slot.to_le_bytes())?;
 
             }
-            SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST {
+            SMSG_TRADE_STATUS_TradeStatus::NOT_ON_TAPLIST {
                 slot,
             } => {
                 // slot: u8
@@ -92,25 +92,25 @@ impl ServerMessage for SMSG_TRADE_STATUS {
         let status: TradeStatus = crate::util::read_u32_le(r)?.try_into()?;
 
         let status_if = match status {
-            TradeStatus::BUSY => SMSG_TRADE_STATUSTradeStatus::BUSY,
+            TradeStatus::BUSY => SMSG_TRADE_STATUS_TradeStatus::BUSY,
             TradeStatus::BEGIN_TRADE => {
                 // unknown1: Guid
                 let unknown1 = Guid::read(r)?;
 
-                SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
+                SMSG_TRADE_STATUS_TradeStatus::BEGIN_TRADE {
                     unknown1,
                 }
             }
-            TradeStatus::OPEN_WINDOW => SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW,
-            TradeStatus::TRADE_CANCELED => SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED,
-            TradeStatus::TRADE_ACCEPT => SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT,
-            TradeStatus::BUSY_2 => SMSG_TRADE_STATUSTradeStatus::BUSY_2,
-            TradeStatus::NO_TARGET => SMSG_TRADE_STATUSTradeStatus::NO_TARGET,
-            TradeStatus::BACK_TO_TRADE => SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE,
-            TradeStatus::TRADE_COMPLETE => SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE,
-            TradeStatus::TRADE_REJECTED => SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED,
-            TradeStatus::TARGET_TO_FAR => SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR,
-            TradeStatus::WRONG_FACTION => SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION,
+            TradeStatus::OPEN_WINDOW => SMSG_TRADE_STATUS_TradeStatus::OPEN_WINDOW,
+            TradeStatus::TRADE_CANCELED => SMSG_TRADE_STATUS_TradeStatus::TRADE_CANCELED,
+            TradeStatus::TRADE_ACCEPT => SMSG_TRADE_STATUS_TradeStatus::TRADE_ACCEPT,
+            TradeStatus::BUSY_2 => SMSG_TRADE_STATUS_TradeStatus::BUSY_2,
+            TradeStatus::NO_TARGET => SMSG_TRADE_STATUS_TradeStatus::NO_TARGET,
+            TradeStatus::BACK_TO_TRADE => SMSG_TRADE_STATUS_TradeStatus::BACK_TO_TRADE,
+            TradeStatus::TRADE_COMPLETE => SMSG_TRADE_STATUS_TradeStatus::TRADE_COMPLETE,
+            TradeStatus::TRADE_REJECTED => SMSG_TRADE_STATUS_TradeStatus::TRADE_REJECTED,
+            TradeStatus::TARGET_TO_FAR => SMSG_TRADE_STATUS_TradeStatus::TARGET_TO_FAR,
+            TradeStatus::WRONG_FACTION => SMSG_TRADE_STATUS_TradeStatus::WRONG_FACTION,
             TradeStatus::CLOSE_WINDOW => {
                 // inventory_result: InventoryResult
                 let inventory_result: InventoryResult = (crate::util::read_u32_le(r)? as u8).try_into()?;
@@ -121,26 +121,26 @@ impl ServerMessage for SMSG_TRADE_STATUS {
                 // item_limit_category_id: u32
                 let item_limit_category_id = crate::util::read_u32_le(r)?;
 
-                SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
+                SMSG_TRADE_STATUS_TradeStatus::CLOSE_WINDOW {
                     inventory_result,
                     item_limit_category_id,
                     target_error,
                 }
             }
-            TradeStatus::UNKNOWN_13 => SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13,
-            TradeStatus::IGNORE_YOU => SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU,
-            TradeStatus::YOU_STUNNED => SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED,
-            TradeStatus::TARGET_STUNNED => SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED,
-            TradeStatus::YOU_DEAD => SMSG_TRADE_STATUSTradeStatus::YOU_DEAD,
-            TradeStatus::TARGET_DEAD => SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD,
-            TradeStatus::YOU_LOGOUT => SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT,
-            TradeStatus::TARGET_LOGOUT => SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT,
-            TradeStatus::TRIAL_ACCOUNT => SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT,
+            TradeStatus::UNKNOWN_13 => SMSG_TRADE_STATUS_TradeStatus::UNKNOWN_13,
+            TradeStatus::IGNORE_YOU => SMSG_TRADE_STATUS_TradeStatus::IGNORE_YOU,
+            TradeStatus::YOU_STUNNED => SMSG_TRADE_STATUS_TradeStatus::YOU_STUNNED,
+            TradeStatus::TARGET_STUNNED => SMSG_TRADE_STATUS_TradeStatus::TARGET_STUNNED,
+            TradeStatus::YOU_DEAD => SMSG_TRADE_STATUS_TradeStatus::YOU_DEAD,
+            TradeStatus::TARGET_DEAD => SMSG_TRADE_STATUS_TradeStatus::TARGET_DEAD,
+            TradeStatus::YOU_LOGOUT => SMSG_TRADE_STATUS_TradeStatus::YOU_LOGOUT,
+            TradeStatus::TARGET_LOGOUT => SMSG_TRADE_STATUS_TradeStatus::TARGET_LOGOUT,
+            TradeStatus::TRIAL_ACCOUNT => SMSG_TRADE_STATUS_TradeStatus::TRIAL_ACCOUNT,
             TradeStatus::ONLY_CONJURED => {
                 // slot: u8
                 let slot = crate::util::read_u8_le(r)?;
 
-                SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED {
+                SMSG_TRADE_STATUS_TradeStatus::ONLY_CONJURED {
                     slot,
                 }
             }
@@ -148,7 +148,7 @@ impl ServerMessage for SMSG_TRADE_STATUS {
                 // slot: u8
                 let slot = crate::util::read_u8_le(r)?;
 
-                SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST {
+                SMSG_TRADE_STATUS_TradeStatus::NOT_ON_TAPLIST {
                     slot,
                 }
             }
@@ -163,12 +163,12 @@ impl ServerMessage for SMSG_TRADE_STATUS {
 
 impl SMSG_TRADE_STATUS {
     pub(crate) fn size(&self) -> usize {
-        self.status.size() // status: SMSG_TRADE_STATUSTradeStatus
+        self.status.size() // status: SMSG_TRADE_STATUS_TradeStatus
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum SMSG_TRADE_STATUSTradeStatus {
+pub enum SMSG_TRADE_STATUS_TradeStatus {
     BUSY,
     BEGIN_TRADE {
         unknown1: Guid,
@@ -205,14 +205,14 @@ pub enum SMSG_TRADE_STATUSTradeStatus {
     },
 }
 
-impl Default for SMSG_TRADE_STATUSTradeStatus {
+impl Default for SMSG_TRADE_STATUS_TradeStatus {
     fn default() -> Self {
         // First enumerator without any fields
         Self::BUSY
     }
 }
 
-impl SMSG_TRADE_STATUSTradeStatus {
+impl SMSG_TRADE_STATUS_TradeStatus {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::BUSY => 0,
@@ -244,7 +244,7 @@ impl SMSG_TRADE_STATUSTradeStatus {
 
 }
 
-impl SMSG_TRADE_STATUSTradeStatus {
+impl SMSG_TRADE_STATUS_TradeStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::BUSY => {

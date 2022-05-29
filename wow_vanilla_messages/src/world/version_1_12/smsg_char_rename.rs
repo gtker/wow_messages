@@ -11,7 +11,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_CHAR_RENAME {
-    pub result: SMSG_CHAR_RENAMEWorldResult,
+    pub result: SMSG_CHAR_RENAME_WorldResult,
 }
 
 impl ServerMessage for SMSG_CHAR_RENAME {
@@ -20,7 +20,7 @@ impl ServerMessage for SMSG_CHAR_RENAME {
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         match &self.result {
-            SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
+            SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
                 character,
                 new_name,
             } => {
@@ -33,87 +33,87 @@ impl ServerMessage for SMSG_CHAR_RENAME {
                 w.write_all(&[0])?;
 
             }
-            SMSG_CHAR_RENAMEWorldResult::RESPONSE_FAILURE => {}
-            SMSG_CHAR_RENAMEWorldResult::RESPONSE_CANCELLED => {}
-            SMSG_CHAR_RENAMEWorldResult::RESPONSE_DISCONNECTED => {}
-            SMSG_CHAR_RENAMEWorldResult::RESPONSE_FAILED_TO_CONNECT => {}
-            SMSG_CHAR_RENAMEWorldResult::RESPONSE_CONNECTED => {}
-            SMSG_CHAR_RENAMEWorldResult::RESPONSE_VERSION_MISMATCH => {}
-            SMSG_CHAR_RENAMEWorldResult::CSTATUS_CONNECTING => {}
-            SMSG_CHAR_RENAMEWorldResult::CSTATUS_NEGOTIATING_SECURITY => {}
-            SMSG_CHAR_RENAMEWorldResult::CSTATUS_NEGOTIATION_COMPLETE => {}
-            SMSG_CHAR_RENAMEWorldResult::CSTATUS_NEGOTIATION_FAILED => {}
-            SMSG_CHAR_RENAMEWorldResult::CSTATUS_AUTHENTICATING => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_OK => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_FAILED => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_REJECT => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_BAD_SERVER_PROOF => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_UNAVAILABLE => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_SYSTEM_ERROR => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_BILLING_ERROR => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_BILLING_EXPIRED => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_VERSION_MISMATCH => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_UNKNOWN_ACCOUNT => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_INCORRECT_PASSWORD => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_SESSION_EXPIRED => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_SERVER_SHUTTING_DOWN => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_ALREADY_LOGGING_IN => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_WAIT_QUEUE => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_BANNED => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_ALREADY_ONLINE => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_NO_TIME => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_DB_BUSY => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_SUSPENDED => {}
-            SMSG_CHAR_RENAMEWorldResult::AUTH_PARENTAL_CONTROL => {}
-            SMSG_CHAR_RENAMEWorldResult::REALM_LIST_IN_PROGRESS => {}
-            SMSG_CHAR_RENAMEWorldResult::REALM_LIST_SUCCESS => {}
-            SMSG_CHAR_RENAMEWorldResult::REALM_LIST_FAILED => {}
-            SMSG_CHAR_RENAMEWorldResult::REALM_LIST_INVALID => {}
-            SMSG_CHAR_RENAMEWorldResult::REALM_LIST_REALM_NOT_FOUND => {}
-            SMSG_CHAR_RENAMEWorldResult::ACCOUNT_CREATE_IN_PROGRESS => {}
-            SMSG_CHAR_RENAMEWorldResult::ACCOUNT_CREATE_SUCCESS => {}
-            SMSG_CHAR_RENAMEWorldResult::ACCOUNT_CREATE_FAILED => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LIST_RETRIEVING => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LIST_RETRIEVED => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LIST_FAILED => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_IN_PROGRESS => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_SUCCESS => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_ERROR => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_FAILED => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_NAME_IN_USE => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_DISABLED => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_SERVER_LIMIT => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_ACCOUNT_LIMIT => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_SERVER_QUEUE => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_ONLY_EXISTING => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_DELETE_IN_PROGRESS => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_DELETE_SUCCESS => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_DELETE_FAILED => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_IN_PROGRESS => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_SUCCESS => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_NO_WORLD => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_NO_INSTANCES => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_FAILED => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_DISABLED => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_NO_CHARACTER => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_NO_NAME => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_SHORT => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_LONG => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_ONLY_LETTERS => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_MIXED_LANGUAGES => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_PROFANE => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_RESERVED => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_INVALID_APOSTROPHE => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_THREE_CONSECUTIVE => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_INVALID_SPACE => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_SUCCESS => {}
-            SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_FAILURE => {}
+            SMSG_CHAR_RENAME_WorldResult::RESPONSE_FAILURE => {}
+            SMSG_CHAR_RENAME_WorldResult::RESPONSE_CANCELLED => {}
+            SMSG_CHAR_RENAME_WorldResult::RESPONSE_DISCONNECTED => {}
+            SMSG_CHAR_RENAME_WorldResult::RESPONSE_FAILED_TO_CONNECT => {}
+            SMSG_CHAR_RENAME_WorldResult::RESPONSE_CONNECTED => {}
+            SMSG_CHAR_RENAME_WorldResult::RESPONSE_VERSION_MISMATCH => {}
+            SMSG_CHAR_RENAME_WorldResult::CSTATUS_CONNECTING => {}
+            SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATING_SECURITY => {}
+            SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATION_COMPLETE => {}
+            SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATION_FAILED => {}
+            SMSG_CHAR_RENAME_WorldResult::CSTATUS_AUTHENTICATING => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_OK => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_FAILED => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_REJECT => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_BAD_SERVER_PROOF => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_UNAVAILABLE => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_SYSTEM_ERROR => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_BILLING_ERROR => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_BILLING_EXPIRED => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_VERSION_MISMATCH => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_UNKNOWN_ACCOUNT => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_INCORRECT_PASSWORD => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_SESSION_EXPIRED => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_SERVER_SHUTTING_DOWN => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_ALREADY_LOGGING_IN => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_WAIT_QUEUE => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_BANNED => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_ALREADY_ONLINE => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_NO_TIME => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_DB_BUSY => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_SUSPENDED => {}
+            SMSG_CHAR_RENAME_WorldResult::AUTH_PARENTAL_CONTROL => {}
+            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_IN_PROGRESS => {}
+            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_SUCCESS => {}
+            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_FAILED => {}
+            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_INVALID => {}
+            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_REALM_NOT_FOUND => {}
+            SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_IN_PROGRESS => {}
+            SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_SUCCESS => {}
+            SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_FAILED => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_RETRIEVING => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_RETRIEVED => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_FAILED => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_IN_PROGRESS => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SUCCESS => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ERROR => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_FAILED => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_NAME_IN_USE => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_DISABLED => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SERVER_LIMIT => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ACCOUNT_LIMIT => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SERVER_QUEUE => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ONLY_EXISTING => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_IN_PROGRESS => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_SUCCESS => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_FAILED => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_IN_PROGRESS => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_SUCCESS => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_WORLD => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_INSTANCES => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_FAILED => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_DISABLED => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_CHARACTER => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_NO_NAME => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_SHORT => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_ONLY_LETTERS => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_MIXED_LANGUAGES => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_PROFANE => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_RESERVED => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_INVALID_APOSTROPHE => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_THREE_CONSECUTIVE => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_INVALID_SPACE => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_SUCCESS => {}
+            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_FAILURE => {}
         }
 
         Ok(())
@@ -137,92 +137,92 @@ impl ServerMessage for SMSG_CHAR_RENAME {
                 let new_name = crate::util::read_c_string_to_vec(r)?;
                 let new_name = String::from_utf8(new_name)?;
 
-                SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
+                SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
                     character,
                     new_name,
                 }
             }
-            WorldResult::RESPONSE_FAILURE => SMSG_CHAR_RENAMEWorldResult::RESPONSE_FAILURE,
-            WorldResult::RESPONSE_CANCELLED => SMSG_CHAR_RENAMEWorldResult::RESPONSE_CANCELLED,
-            WorldResult::RESPONSE_DISCONNECTED => SMSG_CHAR_RENAMEWorldResult::RESPONSE_DISCONNECTED,
-            WorldResult::RESPONSE_FAILED_TO_CONNECT => SMSG_CHAR_RENAMEWorldResult::RESPONSE_FAILED_TO_CONNECT,
-            WorldResult::RESPONSE_CONNECTED => SMSG_CHAR_RENAMEWorldResult::RESPONSE_CONNECTED,
-            WorldResult::RESPONSE_VERSION_MISMATCH => SMSG_CHAR_RENAMEWorldResult::RESPONSE_VERSION_MISMATCH,
-            WorldResult::CSTATUS_CONNECTING => SMSG_CHAR_RENAMEWorldResult::CSTATUS_CONNECTING,
-            WorldResult::CSTATUS_NEGOTIATING_SECURITY => SMSG_CHAR_RENAMEWorldResult::CSTATUS_NEGOTIATING_SECURITY,
-            WorldResult::CSTATUS_NEGOTIATION_COMPLETE => SMSG_CHAR_RENAMEWorldResult::CSTATUS_NEGOTIATION_COMPLETE,
-            WorldResult::CSTATUS_NEGOTIATION_FAILED => SMSG_CHAR_RENAMEWorldResult::CSTATUS_NEGOTIATION_FAILED,
-            WorldResult::CSTATUS_AUTHENTICATING => SMSG_CHAR_RENAMEWorldResult::CSTATUS_AUTHENTICATING,
-            WorldResult::AUTH_OK => SMSG_CHAR_RENAMEWorldResult::AUTH_OK,
-            WorldResult::AUTH_FAILED => SMSG_CHAR_RENAMEWorldResult::AUTH_FAILED,
-            WorldResult::AUTH_REJECT => SMSG_CHAR_RENAMEWorldResult::AUTH_REJECT,
-            WorldResult::AUTH_BAD_SERVER_PROOF => SMSG_CHAR_RENAMEWorldResult::AUTH_BAD_SERVER_PROOF,
-            WorldResult::AUTH_UNAVAILABLE => SMSG_CHAR_RENAMEWorldResult::AUTH_UNAVAILABLE,
-            WorldResult::AUTH_SYSTEM_ERROR => SMSG_CHAR_RENAMEWorldResult::AUTH_SYSTEM_ERROR,
-            WorldResult::AUTH_BILLING_ERROR => SMSG_CHAR_RENAMEWorldResult::AUTH_BILLING_ERROR,
-            WorldResult::AUTH_BILLING_EXPIRED => SMSG_CHAR_RENAMEWorldResult::AUTH_BILLING_EXPIRED,
-            WorldResult::AUTH_VERSION_MISMATCH => SMSG_CHAR_RENAMEWorldResult::AUTH_VERSION_MISMATCH,
-            WorldResult::AUTH_UNKNOWN_ACCOUNT => SMSG_CHAR_RENAMEWorldResult::AUTH_UNKNOWN_ACCOUNT,
-            WorldResult::AUTH_INCORRECT_PASSWORD => SMSG_CHAR_RENAMEWorldResult::AUTH_INCORRECT_PASSWORD,
-            WorldResult::AUTH_SESSION_EXPIRED => SMSG_CHAR_RENAMEWorldResult::AUTH_SESSION_EXPIRED,
-            WorldResult::AUTH_SERVER_SHUTTING_DOWN => SMSG_CHAR_RENAMEWorldResult::AUTH_SERVER_SHUTTING_DOWN,
-            WorldResult::AUTH_ALREADY_LOGGING_IN => SMSG_CHAR_RENAMEWorldResult::AUTH_ALREADY_LOGGING_IN,
-            WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => SMSG_CHAR_RENAMEWorldResult::AUTH_LOGIN_SERVER_NOT_FOUND,
-            WorldResult::AUTH_WAIT_QUEUE => SMSG_CHAR_RENAMEWorldResult::AUTH_WAIT_QUEUE,
-            WorldResult::AUTH_BANNED => SMSG_CHAR_RENAMEWorldResult::AUTH_BANNED,
-            WorldResult::AUTH_ALREADY_ONLINE => SMSG_CHAR_RENAMEWorldResult::AUTH_ALREADY_ONLINE,
-            WorldResult::AUTH_NO_TIME => SMSG_CHAR_RENAMEWorldResult::AUTH_NO_TIME,
-            WorldResult::AUTH_DB_BUSY => SMSG_CHAR_RENAMEWorldResult::AUTH_DB_BUSY,
-            WorldResult::AUTH_SUSPENDED => SMSG_CHAR_RENAMEWorldResult::AUTH_SUSPENDED,
-            WorldResult::AUTH_PARENTAL_CONTROL => SMSG_CHAR_RENAMEWorldResult::AUTH_PARENTAL_CONTROL,
-            WorldResult::REALM_LIST_IN_PROGRESS => SMSG_CHAR_RENAMEWorldResult::REALM_LIST_IN_PROGRESS,
-            WorldResult::REALM_LIST_SUCCESS => SMSG_CHAR_RENAMEWorldResult::REALM_LIST_SUCCESS,
-            WorldResult::REALM_LIST_FAILED => SMSG_CHAR_RENAMEWorldResult::REALM_LIST_FAILED,
-            WorldResult::REALM_LIST_INVALID => SMSG_CHAR_RENAMEWorldResult::REALM_LIST_INVALID,
-            WorldResult::REALM_LIST_REALM_NOT_FOUND => SMSG_CHAR_RENAMEWorldResult::REALM_LIST_REALM_NOT_FOUND,
-            WorldResult::ACCOUNT_CREATE_IN_PROGRESS => SMSG_CHAR_RENAMEWorldResult::ACCOUNT_CREATE_IN_PROGRESS,
-            WorldResult::ACCOUNT_CREATE_SUCCESS => SMSG_CHAR_RENAMEWorldResult::ACCOUNT_CREATE_SUCCESS,
-            WorldResult::ACCOUNT_CREATE_FAILED => SMSG_CHAR_RENAMEWorldResult::ACCOUNT_CREATE_FAILED,
-            WorldResult::CHAR_LIST_RETRIEVING => SMSG_CHAR_RENAMEWorldResult::CHAR_LIST_RETRIEVING,
-            WorldResult::CHAR_LIST_RETRIEVED => SMSG_CHAR_RENAMEWorldResult::CHAR_LIST_RETRIEVED,
-            WorldResult::CHAR_LIST_FAILED => SMSG_CHAR_RENAMEWorldResult::CHAR_LIST_FAILED,
-            WorldResult::CHAR_CREATE_IN_PROGRESS => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_IN_PROGRESS,
-            WorldResult::CHAR_CREATE_SUCCESS => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_SUCCESS,
-            WorldResult::CHAR_CREATE_ERROR => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_ERROR,
-            WorldResult::CHAR_CREATE_FAILED => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_FAILED,
-            WorldResult::CHAR_CREATE_NAME_IN_USE => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_NAME_IN_USE,
-            WorldResult::CHAR_CREATE_DISABLED => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_DISABLED,
-            WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION,
-            WorldResult::CHAR_CREATE_SERVER_LIMIT => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_SERVER_LIMIT,
-            WorldResult::CHAR_CREATE_ACCOUNT_LIMIT => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_ACCOUNT_LIMIT,
-            WorldResult::CHAR_CREATE_SERVER_QUEUE => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_SERVER_QUEUE,
-            WorldResult::CHAR_CREATE_ONLY_EXISTING => SMSG_CHAR_RENAMEWorldResult::CHAR_CREATE_ONLY_EXISTING,
-            WorldResult::CHAR_DELETE_IN_PROGRESS => SMSG_CHAR_RENAMEWorldResult::CHAR_DELETE_IN_PROGRESS,
-            WorldResult::CHAR_DELETE_SUCCESS => SMSG_CHAR_RENAMEWorldResult::CHAR_DELETE_SUCCESS,
-            WorldResult::CHAR_DELETE_FAILED => SMSG_CHAR_RENAMEWorldResult::CHAR_DELETE_FAILED,
-            WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => SMSG_CHAR_RENAMEWorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER,
-            WorldResult::CHAR_LOGIN_IN_PROGRESS => SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_IN_PROGRESS,
-            WorldResult::CHAR_LOGIN_SUCCESS => SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_SUCCESS,
-            WorldResult::CHAR_LOGIN_NO_WORLD => SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_NO_WORLD,
-            WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER,
-            WorldResult::CHAR_LOGIN_NO_INSTANCES => SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_NO_INSTANCES,
-            WorldResult::CHAR_LOGIN_FAILED => SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_FAILED,
-            WorldResult::CHAR_LOGIN_DISABLED => SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_DISABLED,
-            WorldResult::CHAR_LOGIN_NO_CHARACTER => SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_NO_CHARACTER,
-            WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => SMSG_CHAR_RENAMEWorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER,
-            WorldResult::CHAR_NAME_NO_NAME => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_NO_NAME,
-            WorldResult::CHAR_NAME_TOO_SHORT => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_SHORT,
-            WorldResult::CHAR_NAME_TOO_LONG => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_LONG,
-            WorldResult::CHAR_NAME_ONLY_LETTERS => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_ONLY_LETTERS,
-            WorldResult::CHAR_NAME_MIXED_LANGUAGES => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_MIXED_LANGUAGES,
-            WorldResult::CHAR_NAME_PROFANE => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_PROFANE,
-            WorldResult::CHAR_NAME_RESERVED => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_RESERVED,
-            WorldResult::CHAR_NAME_INVALID_APOSTROPHE => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_INVALID_APOSTROPHE,
-            WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES,
-            WorldResult::CHAR_NAME_THREE_CONSECUTIVE => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_THREE_CONSECUTIVE,
-            WorldResult::CHAR_NAME_INVALID_SPACE => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_INVALID_SPACE,
-            WorldResult::CHAR_NAME_SUCCESS => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_SUCCESS,
-            WorldResult::CHAR_NAME_FAILURE => SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_FAILURE,
+            WorldResult::RESPONSE_FAILURE => SMSG_CHAR_RENAME_WorldResult::RESPONSE_FAILURE,
+            WorldResult::RESPONSE_CANCELLED => SMSG_CHAR_RENAME_WorldResult::RESPONSE_CANCELLED,
+            WorldResult::RESPONSE_DISCONNECTED => SMSG_CHAR_RENAME_WorldResult::RESPONSE_DISCONNECTED,
+            WorldResult::RESPONSE_FAILED_TO_CONNECT => SMSG_CHAR_RENAME_WorldResult::RESPONSE_FAILED_TO_CONNECT,
+            WorldResult::RESPONSE_CONNECTED => SMSG_CHAR_RENAME_WorldResult::RESPONSE_CONNECTED,
+            WorldResult::RESPONSE_VERSION_MISMATCH => SMSG_CHAR_RENAME_WorldResult::RESPONSE_VERSION_MISMATCH,
+            WorldResult::CSTATUS_CONNECTING => SMSG_CHAR_RENAME_WorldResult::CSTATUS_CONNECTING,
+            WorldResult::CSTATUS_NEGOTIATING_SECURITY => SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATING_SECURITY,
+            WorldResult::CSTATUS_NEGOTIATION_COMPLETE => SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATION_COMPLETE,
+            WorldResult::CSTATUS_NEGOTIATION_FAILED => SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATION_FAILED,
+            WorldResult::CSTATUS_AUTHENTICATING => SMSG_CHAR_RENAME_WorldResult::CSTATUS_AUTHENTICATING,
+            WorldResult::AUTH_OK => SMSG_CHAR_RENAME_WorldResult::AUTH_OK,
+            WorldResult::AUTH_FAILED => SMSG_CHAR_RENAME_WorldResult::AUTH_FAILED,
+            WorldResult::AUTH_REJECT => SMSG_CHAR_RENAME_WorldResult::AUTH_REJECT,
+            WorldResult::AUTH_BAD_SERVER_PROOF => SMSG_CHAR_RENAME_WorldResult::AUTH_BAD_SERVER_PROOF,
+            WorldResult::AUTH_UNAVAILABLE => SMSG_CHAR_RENAME_WorldResult::AUTH_UNAVAILABLE,
+            WorldResult::AUTH_SYSTEM_ERROR => SMSG_CHAR_RENAME_WorldResult::AUTH_SYSTEM_ERROR,
+            WorldResult::AUTH_BILLING_ERROR => SMSG_CHAR_RENAME_WorldResult::AUTH_BILLING_ERROR,
+            WorldResult::AUTH_BILLING_EXPIRED => SMSG_CHAR_RENAME_WorldResult::AUTH_BILLING_EXPIRED,
+            WorldResult::AUTH_VERSION_MISMATCH => SMSG_CHAR_RENAME_WorldResult::AUTH_VERSION_MISMATCH,
+            WorldResult::AUTH_UNKNOWN_ACCOUNT => SMSG_CHAR_RENAME_WorldResult::AUTH_UNKNOWN_ACCOUNT,
+            WorldResult::AUTH_INCORRECT_PASSWORD => SMSG_CHAR_RENAME_WorldResult::AUTH_INCORRECT_PASSWORD,
+            WorldResult::AUTH_SESSION_EXPIRED => SMSG_CHAR_RENAME_WorldResult::AUTH_SESSION_EXPIRED,
+            WorldResult::AUTH_SERVER_SHUTTING_DOWN => SMSG_CHAR_RENAME_WorldResult::AUTH_SERVER_SHUTTING_DOWN,
+            WorldResult::AUTH_ALREADY_LOGGING_IN => SMSG_CHAR_RENAME_WorldResult::AUTH_ALREADY_LOGGING_IN,
+            WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => SMSG_CHAR_RENAME_WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND,
+            WorldResult::AUTH_WAIT_QUEUE => SMSG_CHAR_RENAME_WorldResult::AUTH_WAIT_QUEUE,
+            WorldResult::AUTH_BANNED => SMSG_CHAR_RENAME_WorldResult::AUTH_BANNED,
+            WorldResult::AUTH_ALREADY_ONLINE => SMSG_CHAR_RENAME_WorldResult::AUTH_ALREADY_ONLINE,
+            WorldResult::AUTH_NO_TIME => SMSG_CHAR_RENAME_WorldResult::AUTH_NO_TIME,
+            WorldResult::AUTH_DB_BUSY => SMSG_CHAR_RENAME_WorldResult::AUTH_DB_BUSY,
+            WorldResult::AUTH_SUSPENDED => SMSG_CHAR_RENAME_WorldResult::AUTH_SUSPENDED,
+            WorldResult::AUTH_PARENTAL_CONTROL => SMSG_CHAR_RENAME_WorldResult::AUTH_PARENTAL_CONTROL,
+            WorldResult::REALM_LIST_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_IN_PROGRESS,
+            WorldResult::REALM_LIST_SUCCESS => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_SUCCESS,
+            WorldResult::REALM_LIST_FAILED => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_FAILED,
+            WorldResult::REALM_LIST_INVALID => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_INVALID,
+            WorldResult::REALM_LIST_REALM_NOT_FOUND => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_REALM_NOT_FOUND,
+            WorldResult::ACCOUNT_CREATE_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_IN_PROGRESS,
+            WorldResult::ACCOUNT_CREATE_SUCCESS => SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_SUCCESS,
+            WorldResult::ACCOUNT_CREATE_FAILED => SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_FAILED,
+            WorldResult::CHAR_LIST_RETRIEVING => SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_RETRIEVING,
+            WorldResult::CHAR_LIST_RETRIEVED => SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_RETRIEVED,
+            WorldResult::CHAR_LIST_FAILED => SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_FAILED,
+            WorldResult::CHAR_CREATE_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_IN_PROGRESS,
+            WorldResult::CHAR_CREATE_SUCCESS => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SUCCESS,
+            WorldResult::CHAR_CREATE_ERROR => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ERROR,
+            WorldResult::CHAR_CREATE_FAILED => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_FAILED,
+            WorldResult::CHAR_CREATE_NAME_IN_USE => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_NAME_IN_USE,
+            WorldResult::CHAR_CREATE_DISABLED => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_DISABLED,
+            WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION,
+            WorldResult::CHAR_CREATE_SERVER_LIMIT => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SERVER_LIMIT,
+            WorldResult::CHAR_CREATE_ACCOUNT_LIMIT => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ACCOUNT_LIMIT,
+            WorldResult::CHAR_CREATE_SERVER_QUEUE => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SERVER_QUEUE,
+            WorldResult::CHAR_CREATE_ONLY_EXISTING => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ONLY_EXISTING,
+            WorldResult::CHAR_DELETE_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_IN_PROGRESS,
+            WorldResult::CHAR_DELETE_SUCCESS => SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_SUCCESS,
+            WorldResult::CHAR_DELETE_FAILED => SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_FAILED,
+            WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER,
+            WorldResult::CHAR_LOGIN_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_IN_PROGRESS,
+            WorldResult::CHAR_LOGIN_SUCCESS => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_SUCCESS,
+            WorldResult::CHAR_LOGIN_NO_WORLD => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_WORLD,
+            WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER,
+            WorldResult::CHAR_LOGIN_NO_INSTANCES => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_INSTANCES,
+            WorldResult::CHAR_LOGIN_FAILED => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_FAILED,
+            WorldResult::CHAR_LOGIN_DISABLED => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_DISABLED,
+            WorldResult::CHAR_LOGIN_NO_CHARACTER => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_CHARACTER,
+            WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER,
+            WorldResult::CHAR_NAME_NO_NAME => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_NO_NAME,
+            WorldResult::CHAR_NAME_TOO_SHORT => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_SHORT,
+            WorldResult::CHAR_NAME_TOO_LONG => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG,
+            WorldResult::CHAR_NAME_ONLY_LETTERS => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_ONLY_LETTERS,
+            WorldResult::CHAR_NAME_MIXED_LANGUAGES => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_MIXED_LANGUAGES,
+            WorldResult::CHAR_NAME_PROFANE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_PROFANE,
+            WorldResult::CHAR_NAME_RESERVED => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_RESERVED,
+            WorldResult::CHAR_NAME_INVALID_APOSTROPHE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_INVALID_APOSTROPHE,
+            WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES,
+            WorldResult::CHAR_NAME_THREE_CONSECUTIVE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_THREE_CONSECUTIVE,
+            WorldResult::CHAR_NAME_INVALID_SPACE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_INVALID_SPACE,
+            WorldResult::CHAR_NAME_SUCCESS => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_SUCCESS,
+            WorldResult::CHAR_NAME_FAILURE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_FAILURE,
         };
 
         Ok(Self {
@@ -234,12 +234,12 @@ impl ServerMessage for SMSG_CHAR_RENAME {
 
 impl SMSG_CHAR_RENAME {
     pub(crate) fn size(&self) -> usize {
-        self.result.size() // result: SMSG_CHAR_RENAMEWorldResult
+        self.result.size() // result: SMSG_CHAR_RENAME_WorldResult
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum SMSG_CHAR_RENAMEWorldResult {
+pub enum SMSG_CHAR_RENAME_WorldResult {
     RESPONSE_SUCCESS {
         character: Guid,
         new_name: String,
@@ -327,7 +327,7 @@ pub enum SMSG_CHAR_RENAMEWorldResult {
     CHAR_NAME_FAILURE,
 }
 
-impl Default for SMSG_CHAR_RENAMEWorldResult {
+impl Default for SMSG_CHAR_RENAME_WorldResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::RESPONSE_SUCCESS {
@@ -337,7 +337,7 @@ impl Default for SMSG_CHAR_RENAMEWorldResult {
     }
 }
 
-impl SMSG_CHAR_RENAMEWorldResult {
+impl SMSG_CHAR_RENAME_WorldResult {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::RESPONSE_SUCCESS { .. } => 0,
@@ -427,7 +427,7 @@ impl SMSG_CHAR_RENAMEWorldResult {
 
 }
 
-impl SMSG_CHAR_RENAMEWorldResult {
+impl SMSG_CHAR_RENAME_WorldResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::RESPONSE_SUCCESS {
@@ -701,7 +701,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_RENAME0() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_LONG,
+            result: SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG,
         };
 
         let header_size = 2 + 2;
@@ -725,7 +725,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_RENAME0() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_LONG,
+            result: SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG,
         };
 
         let header_size = 2 + 2;
@@ -749,7 +749,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_RENAME0() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAMEWorldResult::CHAR_NAME_TOO_LONG,
+            result: SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG,
         };
 
         let header_size = 2 + 2;
@@ -777,7 +777,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_RENAME1() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
+            result: SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
                 character: Guid::new(0xDEADBEEF),
                 new_name: String::from("Deadbeef"),
             },
@@ -804,7 +804,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_RENAME1() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
+            result: SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
                 character: Guid::new(0xDEADBEEF),
                 new_name: String::from("Deadbeef"),
             },
@@ -831,7 +831,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_RENAME1() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
+            result: SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
                 character: Guid::new(0xDEADBEEF),
                 new_name: String::from("Deadbeef"),
             },

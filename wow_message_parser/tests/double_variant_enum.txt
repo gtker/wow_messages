@@ -8,7 +8,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct DoubleVariantEnum {
-    pub enum: DoubleVariantEnumSimpleEnum,
+    pub enum: DoubleVariantEnum_SimpleEnum,
 }
 
 impl DoubleVariantEnum {
@@ -17,21 +17,21 @@ impl DoubleVariantEnum {
         w.write_all(&(self.enum.as_int() as u8).to_le_bytes())?;
 
         match &self.enum {
-            DoubleVariantEnumSimpleEnum::ZERO {
+            DoubleVariantEnum_SimpleEnum::ZERO {
                 basic,
             } => {
                 // basic: u8
                 w.write_all(&basic.to_le_bytes())?;
 
             }
-            DoubleVariantEnumSimpleEnum::ONE {
+            DoubleVariantEnum_SimpleEnum::ONE {
                 basic,
             } => {
                 // basic: u8
                 w.write_all(&basic.to_le_bytes())?;
 
             }
-            DoubleVariantEnumSimpleEnum::TWO => {}
+            DoubleVariantEnum_SimpleEnum::TWO => {}
         }
 
         Ok(())
@@ -48,7 +48,7 @@ impl DoubleVariantEnum {
                 // basic: u8
                 let basic = crate::util::read_u8_le(r)?;
 
-                DoubleVariantEnumSimpleEnum::ZERO {
+                DoubleVariantEnum_SimpleEnum::ZERO {
                     basic,
                 }
             }
@@ -56,11 +56,11 @@ impl DoubleVariantEnum {
                 // basic: u8
                 let basic = crate::util::read_u8_le(r)?;
 
-                DoubleVariantEnumSimpleEnum::ONE {
+                DoubleVariantEnum_SimpleEnum::ONE {
                     basic,
                 }
             }
-            SimpleEnum::TWO => DoubleVariantEnumSimpleEnum::TWO,
+            SimpleEnum::TWO => DoubleVariantEnum_SimpleEnum::TWO,
         };
 
         Ok(Self {
@@ -72,12 +72,12 @@ impl DoubleVariantEnum {
 
 impl DoubleVariantEnum {
     pub(crate) fn size(&self) -> usize {
-        self.enum.size() // enum: DoubleVariantEnumSimpleEnum
+        self.enum.size() // enum: DoubleVariantEnum_SimpleEnum
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum DoubleVariantEnumSimpleEnum {
+pub enum DoubleVariantEnum_SimpleEnum {
     ZERO {
         basic: u8,
     },
@@ -87,7 +87,7 @@ pub enum DoubleVariantEnumSimpleEnum {
     TWO,
 }
 
-impl Default for DoubleVariantEnumSimpleEnum {
+impl Default for DoubleVariantEnum_SimpleEnum {
     fn default() -> Self {
         // First enumerator without any fields
         Self::ZERO {
@@ -96,7 +96,7 @@ impl Default for DoubleVariantEnumSimpleEnum {
     }
 }
 
-impl DoubleVariantEnumSimpleEnum {
+impl DoubleVariantEnum_SimpleEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::ZERO { .. } => 0,
@@ -107,7 +107,7 @@ impl DoubleVariantEnumSimpleEnum {
 
 }
 
-impl DoubleVariantEnumSimpleEnum {
+impl DoubleVariantEnum_SimpleEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::ZERO {

@@ -11,7 +11,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_RAID_TARGET_UPDATE_Server {
-    pub update_type: MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType,
+    pub update_type: MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType,
 }
 
 impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
@@ -20,14 +20,14 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
         w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 
         match &self.update_type {
-            MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
+            MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::PARTIAL {
                 raid_target,
             } => {
                 // raid_target: RaidTargetUpdate
                 raid_target.write_into_vec(w)?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
+            MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::FULL {
                 raid_targets,
             } => {
                 // raid_targets: RaidTargetUpdate[8]
@@ -55,7 +55,7 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
                 // raid_target: RaidTargetUpdate
                 let raid_target = RaidTargetUpdate::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
+                MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::PARTIAL {
                     raid_target,
                 }
             }
@@ -66,7 +66,7 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
                     *i = RaidTargetUpdate::read(r)?;
                 }
 
-                MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
+                MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::FULL {
                     raid_targets,
                 }
             }
@@ -81,12 +81,12 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
 
 impl MSG_RAID_TARGET_UPDATE_Server {
     pub(crate) fn size(&self) -> usize {
-        self.update_type.size() // update_type: MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType
+        self.update_type.size() // update_type: MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
+pub enum MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
     PARTIAL {
         raid_target: RaidTargetUpdate,
     },
@@ -95,7 +95,7 @@ pub enum MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
     },
 }
 
-impl Default for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
+impl Default for MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
     fn default() -> Self {
         // First enumerator without any fields
         Self::PARTIAL {
@@ -104,7 +104,7 @@ impl Default for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
     }
 }
 
-impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
+impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::PARTIAL { .. } => 0,
@@ -114,7 +114,7 @@ impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
 
 }
 
-impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
+impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::PARTIAL {

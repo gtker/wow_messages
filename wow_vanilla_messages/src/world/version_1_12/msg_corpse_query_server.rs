@@ -11,7 +11,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_CORPSE_QUERY_Server {
-    pub result: MSG_CORPSE_QUERY_ServerCorpseQueryResult,
+    pub result: MSG_CORPSE_QUERY_Server_CorpseQueryResult,
 }
 
 impl ServerMessage for MSG_CORPSE_QUERY_Server {
@@ -20,8 +20,8 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         match &self.result {
-            MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
-            MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+            MSG_CORPSE_QUERY_Server_CorpseQueryResult::NOT_FOUND => {}
+            MSG_CORPSE_QUERY_Server_CorpseQueryResult::FOUND {
                 corpse_map,
                 map,
                 position_x,
@@ -59,7 +59,7 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
         let result: CorpseQueryResult = crate::util::read_u8_le(r)?.try_into()?;
 
         let result_if = match result {
-            CorpseQueryResult::NOT_FOUND => MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND,
+            CorpseQueryResult::NOT_FOUND => MSG_CORPSE_QUERY_Server_CorpseQueryResult::NOT_FOUND,
             CorpseQueryResult::FOUND => {
                 // map: Map
                 let map: Map = crate::util::read_u32_le(r)?.try_into()?;
@@ -73,7 +73,7 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
                 // corpse_map: Map
                 let corpse_map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-                MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                MSG_CORPSE_QUERY_Server_CorpseQueryResult::FOUND {
                     corpse_map,
                     map,
                     position_x,
@@ -92,12 +92,12 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
 
 impl MSG_CORPSE_QUERY_Server {
     pub(crate) fn size(&self) -> usize {
-        self.result.size() // result: MSG_CORPSE_QUERY_ServerCorpseQueryResult
+        self.result.size() // result: MSG_CORPSE_QUERY_Server_CorpseQueryResult
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum MSG_CORPSE_QUERY_ServerCorpseQueryResult {
+pub enum MSG_CORPSE_QUERY_Server_CorpseQueryResult {
     NOT_FOUND,
     FOUND {
         corpse_map: Map,
@@ -108,14 +108,14 @@ pub enum MSG_CORPSE_QUERY_ServerCorpseQueryResult {
     },
 }
 
-impl Default for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
+impl Default for MSG_CORPSE_QUERY_Server_CorpseQueryResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::NOT_FOUND
     }
 }
 
-impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
+impl MSG_CORPSE_QUERY_Server_CorpseQueryResult {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NOT_FOUND => 0,
@@ -125,7 +125,7 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
 
 }
 
-impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
+impl MSG_CORPSE_QUERY_Server_CorpseQueryResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::NOT_FOUND => {

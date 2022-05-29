@@ -10,7 +10,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, IntegerType, ObjectType,
 };
-use crate::rust_printer::DefinerType;
+use crate::rust_printer::{get_new_type_name, DefinerType};
 use crate::test_case::TestCase;
 use crate::{CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 use std::fmt::{Display, Formatter};
@@ -1341,12 +1341,7 @@ fn set_simple_objects_name(m: &mut RustMember, struct_ty_name: &str) {
         } => {
             if !(*is_simple) {
                 let definer_ty = ty_name.clone();
-                ty_name.clear();
-                ty_name.push_str(&format!(
-                    "{struct_ty_name}{definer_ty}",
-                    struct_ty_name = struct_ty_name,
-                    definer_ty = definer_ty
-                ));
+                *ty_name = get_new_type_name(struct_ty_name, &definer_ty);
 
                 for e in enumerators {
                     for f in &mut e.members {

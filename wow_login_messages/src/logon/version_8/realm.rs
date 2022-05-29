@@ -14,7 +14,7 @@ use std::io::Write;
 pub struct Realm {
     pub realm_type: RealmType,
     pub locked: u8,
-    pub flag: RealmRealmFlag,
+    pub flag: Realm_RealmFlag,
     pub name: String,
     pub address: String,
     pub population: Population,
@@ -101,7 +101,7 @@ impl Realm {
             // version: Version
             let version = Version::read(r)?;
 
-            Some(RealmRealmFlagSPECIFY_BUILD {
+            Some(Realm_RealmFlagSPECIFY_BUILD {
                 version,
             })
         }
@@ -109,7 +109,7 @@ impl Realm {
             None
         };
 
-        let flag = RealmRealmFlag {
+        let flag = Realm_RealmFlag {
             inner: flag.as_int(),
             specify_build: flag_SPECIFY_BUILD,
         };
@@ -162,7 +162,7 @@ impl Realm {
             // version: Version
             let version = Version::tokio_read(r).await?;
 
-            Some(RealmRealmFlagSPECIFY_BUILD {
+            Some(Realm_RealmFlagSPECIFY_BUILD {
                 version,
             })
         }
@@ -170,7 +170,7 @@ impl Realm {
             None
         };
 
-        let flag = RealmRealmFlag {
+        let flag = Realm_RealmFlag {
             inner: flag.as_int(),
             specify_build: flag_SPECIFY_BUILD,
         };
@@ -223,7 +223,7 @@ impl Realm {
             // version: Version
             let version = Version::astd_read(r).await?;
 
-            Some(RealmRealmFlagSPECIFY_BUILD {
+            Some(Realm_RealmFlagSPECIFY_BUILD {
                 version,
             })
         }
@@ -231,7 +231,7 @@ impl Realm {
             None
         };
 
-        let flag = RealmRealmFlag {
+        let flag = Realm_RealmFlag {
             inner: flag.as_int(),
             specify_build: flag_SPECIFY_BUILD,
         };
@@ -255,7 +255,7 @@ impl Realm {
     pub(crate) fn size(&self) -> usize {
         1 // realm_type: RealmType
         + 1 // locked: u8
-        + self.flag.size() // flag: RealmRealmFlag
+        + self.flag.size() // flag: Realm_RealmFlag
         + self.name.len() + 1 // name: CString
         + self.address.len() + 1 // address: CString
         + 4 // population: Population
@@ -266,12 +266,12 @@ impl Realm {
 }
 
 #[derive(Default, Debug, PartialEq, Clone)]
-pub struct RealmRealmFlag {
+pub struct Realm_RealmFlag {
     inner: u8,
-    specify_build: Option<RealmRealmFlagSPECIFY_BUILD>,
+    specify_build: Option<Realm_RealmFlagSPECIFY_BUILD>,
 }
 
-impl RealmRealmFlag {
+impl Realm_RealmFlag {
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -343,20 +343,20 @@ impl RealmRealmFlag {
         self
     }
 
-    pub const fn new_SPECIFY_BUILD(specify_build: RealmRealmFlagSPECIFY_BUILD) -> Self {
+    pub const fn new_SPECIFY_BUILD(specify_build: Realm_RealmFlagSPECIFY_BUILD) -> Self {
         Self {
             inner: RealmFlag::SPECIFY_BUILD,
             specify_build: Some(specify_build),
         }
     }
 
-    pub fn set_SPECIFY_BUILD(&mut self, specify_build: RealmRealmFlagSPECIFY_BUILD) -> Self {
+    pub fn set_SPECIFY_BUILD(&mut self, specify_build: Realm_RealmFlagSPECIFY_BUILD) -> Self {
         self.inner |= RealmFlag::SPECIFY_BUILD;
         self.specify_build = Some(specify_build);
         self.clone()
     }
 
-    pub const fn get_SPECIFY_BUILD(&self) -> Option<&RealmRealmFlagSPECIFY_BUILD> {
+    pub const fn get_SPECIFY_BUILD(&self) -> Option<&Realm_RealmFlagSPECIFY_BUILD> {
         self.specify_build.as_ref()
     }
 
@@ -434,7 +434,7 @@ impl RealmRealmFlag {
     }
 
 }
-impl RealmRealmFlag {
+impl Realm_RealmFlag {
     pub(crate) fn size(&self) -> usize {
         1 // inner
         + {
@@ -448,11 +448,11 @@ impl RealmRealmFlag {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct RealmRealmFlagSPECIFY_BUILD {
+pub struct Realm_RealmFlagSPECIFY_BUILD {
     pub version: Version,
 }
 
-impl RealmRealmFlagSPECIFY_BUILD {
+impl Realm_RealmFlagSPECIFY_BUILD {
     pub(crate) fn size(&self) -> usize {
         5 // version: Version
     }

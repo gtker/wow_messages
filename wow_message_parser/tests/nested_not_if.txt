@@ -9,7 +9,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct NestedNotIf {
-    pub t: NestedNotIfTEnum,
+    pub t: NestedNotIf_TEnum,
 }
 
 impl NestedNotIf {
@@ -18,8 +18,8 @@ impl NestedNotIf {
         w.write_all(&(self.t.as_int() as u8).to_le_bytes())?;
 
         match &self.t {
-            NestedNotIfTEnum::ZERO => {}
-            NestedNotIfTEnum::ONE {
+            NestedNotIf_TEnum::ZERO => {}
+            NestedNotIf_TEnum::ONE {
                 e,
                 not_zero,
             } => {
@@ -30,18 +30,18 @@ impl NestedNotIf {
                 w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
-                    NestedNotIfNestedEnum::NESTED {
+                    NestedNotIf_NestedEnum::NESTED {
                         one,
                     } => {
                         // one: u8
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIfNestedEnum::NOT_NESTED => {}
+                    NestedNotIf_NestedEnum::NOT_NESTED => {}
                 }
 
             }
-            NestedNotIfTEnum::TWO {
+            NestedNotIf_TEnum::TWO {
                 e,
                 not_zero,
             } => {
@@ -52,18 +52,18 @@ impl NestedNotIf {
                 w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
-                    NestedNotIfNestedEnum::NESTED {
+                    NestedNotIf_NestedEnum::NESTED {
                         one,
                     } => {
                         // one: u8
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIfNestedEnum::NOT_NESTED => {}
+                    NestedNotIf_NestedEnum::NOT_NESTED => {}
                 }
 
             }
-            NestedNotIfTEnum::THREE {
+            NestedNotIf_TEnum::THREE {
                 e,
                 not_zero,
             } => {
@@ -74,18 +74,18 @@ impl NestedNotIf {
                 w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
-                    NestedNotIfNestedEnum::NESTED {
+                    NestedNotIf_NestedEnum::NESTED {
                         one,
                     } => {
                         // one: u8
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIfNestedEnum::NOT_NESTED => {}
+                    NestedNotIf_NestedEnum::NOT_NESTED => {}
                 }
 
             }
-            NestedNotIfTEnum::FOUR {
+            NestedNotIf_TEnum::FOUR {
                 e,
                 not_zero,
             } => {
@@ -96,18 +96,18 @@ impl NestedNotIf {
                 w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
-                    NestedNotIfNestedEnum::NESTED {
+                    NestedNotIf_NestedEnum::NESTED {
                         one,
                     } => {
                         // one: u8
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIfNestedEnum::NOT_NESTED => {}
+                    NestedNotIf_NestedEnum::NOT_NESTED => {}
                 }
 
             }
-            NestedNotIfTEnum::FIVE {
+            NestedNotIf_TEnum::FIVE {
                 e,
                 not_zero,
             } => {
@@ -118,18 +118,18 @@ impl NestedNotIf {
                 w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
-                    NestedNotIfNestedEnum::NESTED {
+                    NestedNotIf_NestedEnum::NESTED {
                         one,
                     } => {
                         // one: u8
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIfNestedEnum::NOT_NESTED => {}
+                    NestedNotIf_NestedEnum::NOT_NESTED => {}
                 }
 
             }
-            NestedNotIfTEnum::SIX {
+            NestedNotIf_TEnum::SIX {
                 e,
                 not_zero,
             } => {
@@ -140,18 +140,18 @@ impl NestedNotIf {
                 w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
-                    NestedNotIfNestedEnum::NESTED {
+                    NestedNotIf_NestedEnum::NESTED {
                         one,
                     } => {
                         // one: u8
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIfNestedEnum::NOT_NESTED => {}
+                    NestedNotIf_NestedEnum::NOT_NESTED => {}
                 }
 
             }
-            NestedNotIfTEnum::REST {
+            NestedNotIf_TEnum::REST {
                 e,
                 not_zero,
             } => {
@@ -162,14 +162,14 @@ impl NestedNotIf {
                 w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
-                    NestedNotIfNestedEnum::NESTED {
+                    NestedNotIf_NestedEnum::NESTED {
                         one,
                     } => {
                         // one: u8
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIfNestedEnum::NOT_NESTED => {}
+                    NestedNotIf_NestedEnum::NOT_NESTED => {}
                 }
 
             }
@@ -185,7 +185,7 @@ impl NestedNotIf {
         let t: TEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         let t_if = match t {
-            TEnum::ZERO => NestedNotIfTEnum::ZERO,
+            TEnum::ZERO => NestedNotIf_TEnum::ZERO,
             TEnum::ONE => {
                 // not_zero: u8
                 let not_zero = crate::util::read_u8_le(r)?;
@@ -198,14 +198,14 @@ impl NestedNotIf {
                         // one: u8
                         let one = crate::util::read_u8_le(r)?;
 
-                        NestedNotIfNestedEnum::NESTED {
+                        NestedNotIf_NestedEnum::NESTED {
                             one,
                         }
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    NestedEnum::NOT_NESTED => NestedNotIf_NestedEnum::NOT_NESTED,
                 };
 
-                NestedNotIfTEnum::ONE {
+                NestedNotIf_TEnum::ONE {
                     e: e_if,
                     not_zero,
                 }
@@ -222,14 +222,14 @@ impl NestedNotIf {
                         // one: u8
                         let one = crate::util::read_u8_le(r)?;
 
-                        NestedNotIfNestedEnum::NESTED {
+                        NestedNotIf_NestedEnum::NESTED {
                             one,
                         }
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    NestedEnum::NOT_NESTED => NestedNotIf_NestedEnum::NOT_NESTED,
                 };
 
-                NestedNotIfTEnum::TWO {
+                NestedNotIf_TEnum::TWO {
                     e: e_if,
                     not_zero,
                 }
@@ -246,14 +246,14 @@ impl NestedNotIf {
                         // one: u8
                         let one = crate::util::read_u8_le(r)?;
 
-                        NestedNotIfNestedEnum::NESTED {
+                        NestedNotIf_NestedEnum::NESTED {
                             one,
                         }
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    NestedEnum::NOT_NESTED => NestedNotIf_NestedEnum::NOT_NESTED,
                 };
 
-                NestedNotIfTEnum::THREE {
+                NestedNotIf_TEnum::THREE {
                     e: e_if,
                     not_zero,
                 }
@@ -270,14 +270,14 @@ impl NestedNotIf {
                         // one: u8
                         let one = crate::util::read_u8_le(r)?;
 
-                        NestedNotIfNestedEnum::NESTED {
+                        NestedNotIf_NestedEnum::NESTED {
                             one,
                         }
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    NestedEnum::NOT_NESTED => NestedNotIf_NestedEnum::NOT_NESTED,
                 };
 
-                NestedNotIfTEnum::FOUR {
+                NestedNotIf_TEnum::FOUR {
                     e: e_if,
                     not_zero,
                 }
@@ -294,14 +294,14 @@ impl NestedNotIf {
                         // one: u8
                         let one = crate::util::read_u8_le(r)?;
 
-                        NestedNotIfNestedEnum::NESTED {
+                        NestedNotIf_NestedEnum::NESTED {
                             one,
                         }
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    NestedEnum::NOT_NESTED => NestedNotIf_NestedEnum::NOT_NESTED,
                 };
 
-                NestedNotIfTEnum::FIVE {
+                NestedNotIf_TEnum::FIVE {
                     e: e_if,
                     not_zero,
                 }
@@ -318,14 +318,14 @@ impl NestedNotIf {
                         // one: u8
                         let one = crate::util::read_u8_le(r)?;
 
-                        NestedNotIfNestedEnum::NESTED {
+                        NestedNotIf_NestedEnum::NESTED {
                             one,
                         }
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    NestedEnum::NOT_NESTED => NestedNotIf_NestedEnum::NOT_NESTED,
                 };
 
-                NestedNotIfTEnum::SIX {
+                NestedNotIf_TEnum::SIX {
                     e: e_if,
                     not_zero,
                 }
@@ -342,14 +342,14 @@ impl NestedNotIf {
                         // one: u8
                         let one = crate::util::read_u8_le(r)?;
 
-                        NestedNotIfNestedEnum::NESTED {
+                        NestedNotIf_NestedEnum::NESTED {
                             one,
                         }
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    NestedEnum::NOT_NESTED => NestedNotIf_NestedEnum::NOT_NESTED,
                 };
 
-                NestedNotIfTEnum::REST {
+                NestedNotIf_TEnum::REST {
                     e: e_if,
                     not_zero,
                 }
@@ -365,19 +365,19 @@ impl NestedNotIf {
 
 impl NestedNotIf {
     pub(crate) fn size(&self) -> usize {
-        self.t.size() // t: NestedNotIfTEnum
+        self.t.size() // t: NestedNotIf_TEnum
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum NestedNotIfNestedEnum {
+pub enum NestedNotIf_NestedEnum {
     NESTED {
         one: u8,
     },
     NOT_NESTED,
 }
 
-impl Default for NestedNotIfNestedEnum {
+impl Default for NestedNotIf_NestedEnum {
     fn default() -> Self {
         // First enumerator without any fields
         Self::NESTED {
@@ -386,7 +386,7 @@ impl Default for NestedNotIfNestedEnum {
     }
 }
 
-impl NestedNotIfNestedEnum {
+impl NestedNotIf_NestedEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NESTED { .. } => 0,
@@ -396,7 +396,7 @@ impl NestedNotIfNestedEnum {
 
 }
 
-impl NestedNotIfNestedEnum {
+impl NestedNotIf_NestedEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::NESTED {
@@ -413,46 +413,46 @@ impl NestedNotIfNestedEnum {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum NestedNotIfTEnum {
+pub enum NestedNotIf_TEnum {
     ZERO,
     ONE {
-        e: NestedNotIfNestedEnum,
+        e: NestedNotIf_NestedEnum,
         not_zero: u8,
     },
     TWO {
-        e: NestedNotIfNestedEnum,
+        e: NestedNotIf_NestedEnum,
         not_zero: u8,
     },
     THREE {
-        e: NestedNotIfNestedEnum,
+        e: NestedNotIf_NestedEnum,
         not_zero: u8,
     },
     FOUR {
-        e: NestedNotIfNestedEnum,
+        e: NestedNotIf_NestedEnum,
         not_zero: u8,
     },
     FIVE {
-        e: NestedNotIfNestedEnum,
+        e: NestedNotIf_NestedEnum,
         not_zero: u8,
     },
     SIX {
-        e: NestedNotIfNestedEnum,
+        e: NestedNotIf_NestedEnum,
         not_zero: u8,
     },
     REST {
-        e: NestedNotIfNestedEnum,
+        e: NestedNotIf_NestedEnum,
         not_zero: u8,
     },
 }
 
-impl Default for NestedNotIfTEnum {
+impl Default for NestedNotIf_TEnum {
     fn default() -> Self {
         // First enumerator without any fields
         Self::ZERO
     }
 }
 
-impl NestedNotIfTEnum {
+impl NestedNotIf_TEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::ZERO => 0,
@@ -468,7 +468,7 @@ impl NestedNotIfTEnum {
 
 }
 
-impl NestedNotIfTEnum {
+impl NestedNotIf_TEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::ZERO => {
@@ -479,7 +479,7 @@ impl NestedNotIfTEnum {
                 not_zero,
             } => {
                 1
-                + e.size() // e: NestedNotIfNestedEnum
+                + e.size() // e: NestedNotIf_NestedEnum
                 + 1 // not_zero: u8
             }
             Self::TWO {
@@ -487,7 +487,7 @@ impl NestedNotIfTEnum {
                 not_zero,
             } => {
                 1
-                + e.size() // e: NestedNotIfNestedEnum
+                + e.size() // e: NestedNotIf_NestedEnum
                 + 1 // not_zero: u8
             }
             Self::THREE {
@@ -495,7 +495,7 @@ impl NestedNotIfTEnum {
                 not_zero,
             } => {
                 1
-                + e.size() // e: NestedNotIfNestedEnum
+                + e.size() // e: NestedNotIf_NestedEnum
                 + 1 // not_zero: u8
             }
             Self::FOUR {
@@ -503,7 +503,7 @@ impl NestedNotIfTEnum {
                 not_zero,
             } => {
                 1
-                + e.size() // e: NestedNotIfNestedEnum
+                + e.size() // e: NestedNotIf_NestedEnum
                 + 1 // not_zero: u8
             }
             Self::FIVE {
@@ -511,7 +511,7 @@ impl NestedNotIfTEnum {
                 not_zero,
             } => {
                 1
-                + e.size() // e: NestedNotIfNestedEnum
+                + e.size() // e: NestedNotIf_NestedEnum
                 + 1 // not_zero: u8
             }
             Self::SIX {
@@ -519,7 +519,7 @@ impl NestedNotIfTEnum {
                 not_zero,
             } => {
                 1
-                + e.size() // e: NestedNotIfNestedEnum
+                + e.size() // e: NestedNotIf_NestedEnum
                 + 1 // not_zero: u8
             }
             Self::REST {
@@ -527,7 +527,7 @@ impl NestedNotIfTEnum {
                 not_zero,
             } => {
                 1
-                + e.size() // e: NestedNotIfNestedEnum
+                + e.size() // e: NestedNotIf_NestedEnum
                 + 1 // not_zero: u8
             }
         }

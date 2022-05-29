@@ -10,7 +10,7 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Mail {
     pub message_id: u32,
-    pub message_type: MailMailType,
+    pub message_type: Mail_MailType,
     pub subject: String,
     pub item_text_id: u32,
     pub unknown1: u32,
@@ -39,35 +39,35 @@ impl Mail {
         w.write_all(&(self.message_type.as_int() as u8).to_le_bytes())?;
 
         match &self.message_type {
-            MailMailType::NORMAL {
+            Mail_MailType::NORMAL {
                 sender,
             } => {
                 // sender: Guid
                 w.write_all(&sender.guid().to_le_bytes())?;
 
             }
-            MailMailType::AUCTION {
+            Mail_MailType::AUCTION {
                 auction_id,
             } => {
                 // auction_id: u32
                 w.write_all(&auction_id.to_le_bytes())?;
 
             }
-            MailMailType::CREATURE {
+            Mail_MailType::CREATURE {
                 sender_id,
             } => {
                 // sender_id: u32
                 w.write_all(&sender_id.to_le_bytes())?;
 
             }
-            MailMailType::GAMEOBJECT {
+            Mail_MailType::GAMEOBJECT {
                 sender_id,
             } => {
                 // sender_id: u32
                 w.write_all(&sender_id.to_le_bytes())?;
 
             }
-            MailMailType::ITEM => {}
+            Mail_MailType::ITEM => {}
         }
 
         // subject: CString
@@ -140,7 +140,7 @@ impl Mail {
                 // sender: Guid
                 let sender = Guid::read(r)?;
 
-                MailMailType::NORMAL {
+                Mail_MailType::NORMAL {
                     sender,
                 }
             }
@@ -148,7 +148,7 @@ impl Mail {
                 // auction_id: u32
                 let auction_id = crate::util::read_u32_le(r)?;
 
-                MailMailType::AUCTION {
+                Mail_MailType::AUCTION {
                     auction_id,
                 }
             }
@@ -156,7 +156,7 @@ impl Mail {
                 // sender_id: u32
                 let sender_id = crate::util::read_u32_le(r)?;
 
-                MailMailType::CREATURE {
+                Mail_MailType::CREATURE {
                     sender_id,
                 }
             }
@@ -164,11 +164,11 @@ impl Mail {
                 // sender_id: u32
                 let sender_id = crate::util::read_u32_le(r)?;
 
-                MailMailType::GAMEOBJECT {
+                Mail_MailType::GAMEOBJECT {
                     sender_id,
                 }
             }
-            MailType::ITEM => MailMailType::ITEM,
+            MailType::ITEM => Mail_MailType::ITEM,
         };
 
         // subject: CString
@@ -250,7 +250,7 @@ impl Mail {
 impl Mail {
     pub(crate) fn size(&self) -> usize {
         4 // message_id: u32
-        + self.message_type.size() // message_type: MailMailType
+        + self.message_type.size() // message_type: Mail_MailType
         + self.subject.len() + 1 // subject: CString
         + 4 // item_text_id: u32
         + 4 // unknown1: u32
@@ -272,7 +272,7 @@ impl Mail {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum MailMailType {
+pub enum Mail_MailType {
     NORMAL {
         sender: Guid,
     },
@@ -288,7 +288,7 @@ pub enum MailMailType {
     ITEM,
 }
 
-impl Default for MailMailType {
+impl Default for Mail_MailType {
     fn default() -> Self {
         // First enumerator without any fields
         Self::NORMAL {
@@ -297,7 +297,7 @@ impl Default for MailMailType {
     }
 }
 
-impl MailMailType {
+impl Mail_MailType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NORMAL { .. } => 0,
@@ -310,7 +310,7 @@ impl MailMailType {
 
 }
 
-impl MailMailType {
+impl Mail_MailType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::NORMAL {

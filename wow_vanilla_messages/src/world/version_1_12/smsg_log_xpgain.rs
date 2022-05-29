@@ -13,7 +13,7 @@ use std::io::Write;
 pub struct SMSG_LOG_XPGAIN {
     pub target_guid: Guid,
     pub total_exp: u32,
-    pub exp_type: SMSG_LOG_XPGAINExperienceAwardType,
+    pub exp_type: SMSG_LOG_XPGAIN_ExperienceAwardType,
 }
 
 impl ServerMessage for SMSG_LOG_XPGAIN {
@@ -28,8 +28,8 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
         w.write_all(&(self.exp_type.as_int() as u8).to_le_bytes())?;
 
         match &self.exp_type {
-            SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
-            SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
+            SMSG_LOG_XPGAIN_ExperienceAwardType::KILL => {}
+            SMSG_LOG_XPGAIN_ExperienceAwardType::NON_KILL {
                 exp_group_bonus,
                 experience_without_rested,
             } => {
@@ -61,14 +61,14 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
         let exp_type: ExperienceAwardType = crate::util::read_u8_le(r)?.try_into()?;
 
         let exp_type_if = match exp_type {
-            ExperienceAwardType::KILL => SMSG_LOG_XPGAINExperienceAwardType::KILL,
+            ExperienceAwardType::KILL => SMSG_LOG_XPGAIN_ExperienceAwardType::KILL,
             ExperienceAwardType::NON_KILL => {
                 // experience_without_rested: u32
                 let experience_without_rested = crate::util::read_u32_le(r)?;
 
                 // exp_group_bonus: f32
                 let exp_group_bonus = crate::util::read_f32_le(r)?;
-                SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
+                SMSG_LOG_XPGAIN_ExperienceAwardType::NON_KILL {
                     exp_group_bonus,
                     experience_without_rested,
                 }
@@ -88,12 +88,12 @@ impl SMSG_LOG_XPGAIN {
     pub(crate) fn size(&self) -> usize {
         8 // target_guid: Guid
         + 4 // total_exp: u32
-        + self.exp_type.size() // exp_type: SMSG_LOG_XPGAINExperienceAwardType
+        + self.exp_type.size() // exp_type: SMSG_LOG_XPGAIN_ExperienceAwardType
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum SMSG_LOG_XPGAINExperienceAwardType {
+pub enum SMSG_LOG_XPGAIN_ExperienceAwardType {
     KILL,
     NON_KILL {
         exp_group_bonus: f32,
@@ -101,14 +101,14 @@ pub enum SMSG_LOG_XPGAINExperienceAwardType {
     },
 }
 
-impl Default for SMSG_LOG_XPGAINExperienceAwardType {
+impl Default for SMSG_LOG_XPGAIN_ExperienceAwardType {
     fn default() -> Self {
         // First enumerator without any fields
         Self::KILL
     }
 }
 
-impl SMSG_LOG_XPGAINExperienceAwardType {
+impl SMSG_LOG_XPGAIN_ExperienceAwardType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::KILL => 0,
@@ -118,7 +118,7 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
 
 }
 
-impl SMSG_LOG_XPGAINExperienceAwardType {
+impl SMSG_LOG_XPGAIN_ExperienceAwardType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::KILL => {

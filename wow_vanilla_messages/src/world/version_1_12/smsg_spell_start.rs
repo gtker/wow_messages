@@ -15,7 +15,7 @@ pub struct SMSG_SPELL_START {
     pub cast_item: Guid,
     pub caster: Guid,
     pub spell: u32,
-    pub flags: SMSG_SPELL_STARTCastFlags,
+    pub flags: SMSG_SPELL_START_CastFlags,
     pub timer: u32,
     pub targets: SpellCastTargets,
 }
@@ -83,7 +83,7 @@ impl ServerMessage for SMSG_SPELL_START {
             // ammo_inventory_type: u32
             let ammo_inventory_type = crate::util::read_u32_le(r)?;
 
-            Some(SMSG_SPELL_STARTCastFlagsAMMO {
+            Some(SMSG_SPELL_START_CastFlagsAMMO {
                 ammo_display_id,
                 ammo_inventory_type,
             })
@@ -92,7 +92,7 @@ impl ServerMessage for SMSG_SPELL_START {
             None
         };
 
-        let flags = SMSG_SPELL_STARTCastFlags {
+        let flags = SMSG_SPELL_START_CastFlags {
             inner: flags.as_int(),
             ammo: flags_AMMO,
         };
@@ -114,19 +114,19 @@ impl SMSG_SPELL_START {
         self.cast_item.size() // cast_item: Guid
         + self.caster.size() // caster: Guid
         + 4 // spell: u32
-        + self.flags.size() // flags: SMSG_SPELL_STARTCastFlags
+        + self.flags.size() // flags: SMSG_SPELL_START_CastFlags
         + 4 // timer: u32
         + self.targets.size() // targets: SpellCastTargets
     }
 }
 
 #[derive(Default, Debug, PartialEq, Clone)]
-pub struct SMSG_SPELL_STARTCastFlags {
+pub struct SMSG_SPELL_START_CastFlags {
     inner: u16,
-    ammo: Option<SMSG_SPELL_STARTCastFlagsAMMO>,
+    ammo: Option<SMSG_SPELL_START_CastFlagsAMMO>,
 }
 
-impl SMSG_SPELL_STARTCastFlags {
+impl SMSG_SPELL_START_CastFlags {
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -261,20 +261,20 @@ impl SMSG_SPELL_STARTCastFlags {
         self
     }
 
-    pub const fn new_AMMO(ammo: SMSG_SPELL_STARTCastFlagsAMMO) -> Self {
+    pub const fn new_AMMO(ammo: SMSG_SPELL_START_CastFlagsAMMO) -> Self {
         Self {
             inner: CastFlags::AMMO,
             ammo: Some(ammo),
         }
     }
 
-    pub fn set_AMMO(&mut self, ammo: SMSG_SPELL_STARTCastFlagsAMMO) -> Self {
+    pub fn set_AMMO(&mut self, ammo: SMSG_SPELL_START_CastFlagsAMMO) -> Self {
         self.inner |= CastFlags::AMMO;
         self.ammo = Some(ammo);
         self.clone()
     }
 
-    pub const fn get_AMMO(&self) -> Option<&SMSG_SPELL_STARTCastFlagsAMMO> {
+    pub const fn get_AMMO(&self) -> Option<&SMSG_SPELL_START_CastFlagsAMMO> {
         self.ammo.as_ref()
     }
 
@@ -352,7 +352,7 @@ impl SMSG_SPELL_STARTCastFlags {
     }
 
 }
-impl SMSG_SPELL_STARTCastFlags {
+impl SMSG_SPELL_START_CastFlags {
     pub(crate) fn size(&self) -> usize {
         2 // inner
         + {
@@ -366,12 +366,12 @@ impl SMSG_SPELL_STARTCastFlags {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_SPELL_STARTCastFlagsAMMO {
+pub struct SMSG_SPELL_START_CastFlagsAMMO {
     pub ammo_display_id: u32,
     pub ammo_inventory_type: u32,
 }
 
-impl SMSG_SPELL_STARTCastFlagsAMMO {
+impl SMSG_SPELL_START_CastFlagsAMMO {
     pub(crate) fn size(&self) -> usize {
         4 // ammo_display_id: u32
         + 4 // ammo_inventory_type: u32

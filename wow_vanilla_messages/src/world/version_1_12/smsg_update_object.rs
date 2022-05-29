@@ -99,7 +99,7 @@ mod test {
             has_transport: 0x0,
             objects: vec![
                 Object {
-                    update_type: ObjectUpdateType::CREATE_OBJECT2 {
+                    update_type: Object_UpdateType::CREATE_OBJECT2 {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
@@ -107,12 +107,12 @@ mod test {
                             .set_unit_BYTES_0(1, 1, 1, 1)
                         ),
                         movement2: MovementBlock {
-                            update_flag: MovementBlockUpdateFlag::empty()
-                                .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
+                            update_flag: MovementBlock_UpdateFlag::empty()
+                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
-                                    flags: MovementBlockMovementFlags::empty()
+                                    flags: MovementBlock_MovementFlags::empty()
                                         .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
@@ -125,7 +125,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlockUpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlagALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -162,7 +162,7 @@ mod test {
             has_transport: 0x0,
             objects: vec![
                 Object {
-                    update_type: ObjectUpdateType::CREATE_OBJECT2 {
+                    update_type: Object_UpdateType::CREATE_OBJECT2 {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
@@ -170,12 +170,12 @@ mod test {
                             .set_unit_BYTES_0(1, 1, 1, 1)
                         ),
                         movement2: MovementBlock {
-                            update_flag: MovementBlockUpdateFlag::empty()
-                                .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
+                            update_flag: MovementBlock_UpdateFlag::empty()
+                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
-                                    flags: MovementBlockMovementFlags::empty()
+                                    flags: MovementBlock_MovementFlags::empty()
                                         .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
@@ -188,7 +188,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlockUpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlagALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -225,7 +225,7 @@ mod test {
             has_transport: 0x0,
             objects: vec![
                 Object {
-                    update_type: ObjectUpdateType::CREATE_OBJECT2 {
+                    update_type: Object_UpdateType::CREATE_OBJECT2 {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
@@ -233,12 +233,12 @@ mod test {
                             .set_unit_BYTES_0(1, 1, 1, 1)
                         ),
                         movement2: MovementBlock {
-                            update_flag: MovementBlockUpdateFlag::empty()
-                                .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
+                            update_flag: MovementBlock_UpdateFlag::empty()
+                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
-                                    flags: MovementBlockMovementFlags::empty()
+                                    flags: MovementBlock_MovementFlags::empty()
                                         .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
@@ -251,7 +251,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlockUpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlagALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -301,7 +301,7 @@ mod test {
             has_transport: 0x0,
             objects: vec![
                 Object {
-                    update_type: ObjectUpdateType::CREATE_OBJECT2 {
+                    update_type: Object_UpdateType::CREATE_OBJECT2 {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
@@ -315,12 +315,12 @@ mod test {
                             .set_unit_NATIVEDISPLAYID(50)
                         ),
                         movement2: MovementBlock {
-                            update_flag: MovementBlockUpdateFlag::empty()
-                                .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
+                            update_flag: MovementBlock_UpdateFlag::empty()
+                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
-                                    flags: MovementBlockMovementFlags::empty()
+                                    flags: MovementBlock_MovementFlags::empty()
                                         .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
@@ -333,7 +333,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlockUpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlagALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -370,7 +370,7 @@ mod test {
             has_transport: 0x0,
             objects: vec![
                 Object {
-                    update_type: ObjectUpdateType::CREATE_OBJECT2 {
+                    update_type: Object_UpdateType::CREATE_OBJECT2 {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
@@ -384,12 +384,12 @@ mod test {
                             .set_unit_NATIVEDISPLAYID(50)
                         ),
                         movement2: MovementBlock {
-                            update_flag: MovementBlockUpdateFlag::empty()
-                                .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
+                            update_flag: MovementBlock_UpdateFlag::empty()
+                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
-                                    flags: MovementBlockMovementFlags::empty()
+                                    flags: MovementBlock_MovementFlags::empty()
                                         .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
@@ -402,7 +402,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlockUpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlagALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -439,7 +439,7 @@ mod test {
             has_transport: 0x0,
             objects: vec![
                 Object {
-                    update_type: ObjectUpdateType::CREATE_OBJECT2 {
+                    update_type: Object_UpdateType::CREATE_OBJECT2 {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
@@ -453,12 +453,12 @@ mod test {
                             .set_unit_NATIVEDISPLAYID(50)
                         ),
                         movement2: MovementBlock {
-                            update_flag: MovementBlockUpdateFlag::empty()
-                                .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
+                            update_flag: MovementBlock_UpdateFlag::empty()
+                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
-                                    flags: MovementBlockMovementFlags::empty()
+                                    flags: MovementBlock_MovementFlags::empty()
                                         .set_NONE()
                                         ,
                                     living_orientation: 0_f32,
@@ -471,7 +471,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlockUpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlagALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()

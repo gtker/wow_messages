@@ -8,7 +8,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct IfEdgeCases {
-    pub t: IfEdgeCasesTEnum,
+    pub t: IfEdgeCases_TEnum,
 }
 
 impl IfEdgeCases {
@@ -17,56 +17,56 @@ impl IfEdgeCases {
         w.write_all(&(self.t.as_int() as u8).to_le_bytes())?;
 
         match &self.t {
-            IfEdgeCasesTEnum::ZERO {
+            IfEdgeCases_TEnum::ZERO {
                 basic1,
             } => {
                 // basic1: u8
                 w.write_all(&basic1.to_le_bytes())?;
 
             }
-            IfEdgeCasesTEnum::ONE {
+            IfEdgeCases_TEnum::ONE {
                 basic1,
             } => {
                 // basic1: u8
                 w.write_all(&basic1.to_le_bytes())?;
 
             }
-            IfEdgeCasesTEnum::TWO {
+            IfEdgeCases_TEnum::TWO {
                 basic1,
             } => {
                 // basic1: u8
                 w.write_all(&basic1.to_le_bytes())?;
 
             }
-            IfEdgeCasesTEnum::THREE {
+            IfEdgeCases_TEnum::THREE {
                 basic3,
             } => {
                 // basic3: u8
                 w.write_all(&basic3.to_le_bytes())?;
 
             }
-            IfEdgeCasesTEnum::FOUR {
+            IfEdgeCases_TEnum::FOUR {
                 basic3,
             } => {
                 // basic3: u8
                 w.write_all(&basic3.to_le_bytes())?;
 
             }
-            IfEdgeCasesTEnum::FIVE {
+            IfEdgeCases_TEnum::FIVE {
                 basic5,
             } => {
                 // basic5: u8
                 w.write_all(&basic5.to_le_bytes())?;
 
             }
-            IfEdgeCasesTEnum::SIX {
+            IfEdgeCases_TEnum::SIX {
                 basic5,
             } => {
                 // basic5: u8
                 w.write_all(&basic5.to_le_bytes())?;
 
             }
-            IfEdgeCasesTEnum::REST {
+            IfEdgeCases_TEnum::REST {
                 rest,
             } => {
                 // rest: u8
@@ -89,7 +89,7 @@ impl IfEdgeCases {
                 // basic1: u8
                 let basic1 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCasesTEnum::ZERO {
+                IfEdgeCases_TEnum::ZERO {
                     basic1,
                 }
             }
@@ -97,7 +97,7 @@ impl IfEdgeCases {
                 // basic1: u8
                 let basic1 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCasesTEnum::ONE {
+                IfEdgeCases_TEnum::ONE {
                     basic1,
                 }
             }
@@ -105,7 +105,7 @@ impl IfEdgeCases {
                 // basic1: u8
                 let basic1 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCasesTEnum::TWO {
+                IfEdgeCases_TEnum::TWO {
                     basic1,
                 }
             }
@@ -113,7 +113,7 @@ impl IfEdgeCases {
                 // basic3: u8
                 let basic3 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCasesTEnum::THREE {
+                IfEdgeCases_TEnum::THREE {
                     basic3,
                 }
             }
@@ -121,7 +121,7 @@ impl IfEdgeCases {
                 // basic3: u8
                 let basic3 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCasesTEnum::FOUR {
+                IfEdgeCases_TEnum::FOUR {
                     basic3,
                 }
             }
@@ -129,7 +129,7 @@ impl IfEdgeCases {
                 // basic5: u8
                 let basic5 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCasesTEnum::FIVE {
+                IfEdgeCases_TEnum::FIVE {
                     basic5,
                 }
             }
@@ -137,7 +137,7 @@ impl IfEdgeCases {
                 // basic5: u8
                 let basic5 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCasesTEnum::SIX {
+                IfEdgeCases_TEnum::SIX {
                     basic5,
                 }
             }
@@ -145,7 +145,7 @@ impl IfEdgeCases {
                 // rest: u8
                 let rest = crate::util::read_u8_le(r)?;
 
-                IfEdgeCasesTEnum::REST {
+                IfEdgeCases_TEnum::REST {
                     rest,
                 }
             }
@@ -159,7 +159,7 @@ impl IfEdgeCases {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum IfEdgeCasesTEnum {
+pub enum IfEdgeCases_TEnum {
     ZERO {
         basic1: u8,
     },
@@ -186,7 +186,7 @@ pub enum IfEdgeCasesTEnum {
     },
 }
 
-impl Default for IfEdgeCasesTEnum {
+impl Default for IfEdgeCases_TEnum {
     fn default() -> Self {
         // First enumerator without any fields
         Self::ZERO {
@@ -195,7 +195,7 @@ impl Default for IfEdgeCasesTEnum {
     }
 }
 
-impl IfEdgeCasesTEnum {
+impl IfEdgeCases_TEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::ZERO { .. } => 0,
@@ -211,7 +211,7 @@ impl IfEdgeCasesTEnum {
 
 }
 
-impl IfEdgeCasesTEnum {
+impl IfEdgeCases_TEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::ZERO {

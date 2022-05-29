@@ -10,7 +10,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Server {
-    pub login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult,
+    pub login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult,
 }
 
 impl CMD_AUTH_LOGON_PROOF_Server {
@@ -27,7 +27,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
         w.write_all(&(self.login_result.as_int() as u8).to_le_bytes())?;
 
         match &self.login_result {
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
                 account_flag,
                 hardware_survey_id,
                 server_proof,
@@ -48,97 +48,97 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 w.write_all(&unknown_flags.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN0 {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN1 {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_BANNED {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN_ACCOUNT {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_INCORRECT_PASSWORD {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_ALREADY_ONLINE {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_VERSION_INVALID {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::LOGIN_DOWNLOAD_FILE {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_INVALID_SERVER {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_SUSPENDED {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_ACCESS {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS_SURVEY {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_PARENTALCONTROL {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_LOCKED_ENFORCED {
             } => {
                 // padding: u16
                 w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
@@ -172,29 +172,29 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
                 // unknown_flags: u16
                 let unknown_flags = crate::util::read_u16_le(r)?;
 
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+                CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
                     account_flag,
                     hardware_survey_id,
                     server_proof,
                     unknown_flags,
                 }
             }
-            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
-            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1,
-            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED,
-            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
-            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
-            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE,
-            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
-            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
-            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID,
-            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
-            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER,
-            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED,
-            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS,
-            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY,
-            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL,
-            LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED,
+            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN0,
+            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN1,
+            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_BANNED,
+            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN_ACCOUNT,
+            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
+            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_ALREADY_ONLINE,
+            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
+            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
+            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_VERSION_INVALID,
+            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LOGIN_DOWNLOAD_FILE,
+            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_INVALID_SERVER,
+            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_SUSPENDED,
+            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_ACCESS,
+            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS_SURVEY,
+            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_PARENTALCONTROL,
+            LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_LOCKED_ENFORCED,
         };
 
         Ok(Self {
@@ -239,29 +239,29 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
                     // unknown_flags: u16
                     let unknown_flags = crate::util::tokio_read_u16_le(r).await?;
 
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+                    CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
                         account_flag,
                         hardware_survey_id,
                         server_proof,
                         unknown_flags,
                     }
                 }
-                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
-                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1,
-                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED,
-                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
-                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
-                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE,
-                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
-                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
-                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID,
-                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
-                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER,
-                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED,
-                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS,
-                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY,
-                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL,
-                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED,
+                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN0,
+                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN1,
+                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_BANNED,
+                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN_ACCOUNT,
+                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
+                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_ALREADY_ONLINE,
+                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
+                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
+                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_VERSION_INVALID,
+                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LOGIN_DOWNLOAD_FILE,
+                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_INVALID_SERVER,
+                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_SUSPENDED,
+                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_ACCESS,
+                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS_SURVEY,
+                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_PARENTALCONTROL,
+                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_LOCKED_ENFORCED,
             };
 
             Ok(Self {
@@ -320,29 +320,29 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
                     // unknown_flags: u16
                     let unknown_flags = crate::util::astd_read_u16_le(r).await?;
 
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+                    CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
                         account_flag,
                         hardware_survey_id,
                         server_proof,
                         unknown_flags,
                     }
                 }
-                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
-                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1,
-                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED,
-                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
-                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
-                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE,
-                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
-                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
-                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID,
-                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
-                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER,
-                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED,
-                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS,
-                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY,
-                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL,
-                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED,
+                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN0,
+                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN1,
+                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_BANNED,
+                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_UNKNOWN_ACCOUNT,
+                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
+                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_ALREADY_ONLINE,
+                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
+                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
+                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_VERSION_INVALID,
+                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LOGIN_DOWNLOAD_FILE,
+                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_INVALID_SERVER,
+                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_SUSPENDED,
+                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_ACCESS,
+                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS_SURVEY,
+                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_PARENTALCONTROL,
+                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_LOCKED_ENFORCED,
             };
 
             Ok(Self {
@@ -375,12 +375,12 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 
 impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) fn size(&self) -> usize {
-        self.login_result.size() // login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult
+        self.login_result.size() // login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum CMD_AUTH_LOGON_PROOF_ServerLoginResult {
+pub enum CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     SUCCESS {
         account_flag: AccountFlag,
         hardware_survey_id: u32,
@@ -405,7 +405,7 @@ pub enum CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     FAIL_LOCKED_ENFORCED,
 }
 
-impl Default for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
+impl Default for CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::SUCCESS {
@@ -417,7 +417,7 @@ impl Default for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     }
 }
 
-impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
+impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SUCCESS { .. } => 0,
@@ -442,7 +442,7 @@ impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
 
 }
 
-impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
+impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::SUCCESS {
@@ -540,7 +540,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Server0() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
+            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
         };
 
         let header_size = 1;
@@ -564,7 +564,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Server0() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
+            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
         };
 
         let header_size = 1;
@@ -588,7 +588,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Server0() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
+            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
         };
 
         let header_size = 1;
@@ -614,7 +614,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Server1() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
+            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
         };
 
         let header_size = 1;
@@ -638,7 +638,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Server1() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
+            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
         };
 
         let header_size = 1;
@@ -662,7 +662,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Server1() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
+            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
         };
 
         let header_size = 1;

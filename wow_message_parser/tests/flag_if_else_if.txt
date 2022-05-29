@@ -9,7 +9,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct FlagIfElseIf {
-    pub flags: FlagIfElseIfUpdateFlag,
+    pub flags: FlagIfElseIf_UpdateFlag,
 }
 
 impl FlagIfElseIf {
@@ -19,14 +19,14 @@ impl FlagIfElseIf {
 
         if let Some(if_statement) = &self.flags.one_if {
             match if_statement {
-                FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
+                FlagIfElseIf_UpdateFlagONE_IF::ONE_IF {
                     b_if,
                 } => {
                     // b_if: u8
                     w.write_all(&b_if.to_le_bytes())?;
 
                 }
-                FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
+                FlagIfElseIf_UpdateFlagONE_IF::TWO_ELSEIF {
                     s,
                 } => {
                     // s: SimpleFlag
@@ -39,7 +39,7 @@ impl FlagIfElseIf {
                     }
 
                 }
-                FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
+                FlagIfElseIf_UpdateFlagONE_IF::FOUR_ELSEIF {
                     elseif2,
                 } => {
                     // elseif2: u8
@@ -68,7 +68,7 @@ impl FlagIfElseIf {
             // b_if: u8
             let b_if = crate::util::read_u8_le(r)?;
 
-            Some(FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
+            Some(FlagIfElseIf_UpdateFlagONE_IF::ONE_IF {
                 b_if,
             })
         }
@@ -80,7 +80,7 @@ impl FlagIfElseIf {
                 // if_one: u8
                 let if_one = crate::util::read_u8_le(r)?;
 
-                Some(FlagIfElseIfSimpleFlagONE {
+                Some(FlagIfElseIf_SimpleFlagONE {
                     if_one,
                 })
             }
@@ -88,12 +88,12 @@ impl FlagIfElseIf {
                 None
             };
 
-            let s = FlagIfElseIfSimpleFlag {
+            let s = FlagIfElseIf_SimpleFlag {
                 inner: s.as_int(),
                 one: s_ONE,
             };
 
-            Some(FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
+            Some(FlagIfElseIf_UpdateFlagONE_IF::TWO_ELSEIF {
                 s,
             })
         }
@@ -101,7 +101,7 @@ impl FlagIfElseIf {
             // elseif2: u8
             let elseif2 = crate::util::read_u8_le(r)?;
 
-            Some(FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
+            Some(FlagIfElseIf_UpdateFlagONE_IF::FOUR_ELSEIF {
                 elseif2,
             })
         }
@@ -113,7 +113,7 @@ impl FlagIfElseIf {
             // last_if: u8
             let last_if = crate::util::read_u8_le(r)?;
 
-            Some(FlagIfElseIfUpdateFlagEIGHT_IF {
+            Some(FlagIfElseIf_UpdateFlagEIGHT_IF {
                 last_if,
             })
         }
@@ -121,7 +121,7 @@ impl FlagIfElseIf {
             None
         };
 
-        let flags = FlagIfElseIfUpdateFlag {
+        let flags = FlagIfElseIf_UpdateFlag {
             inner: flags.as_int(),
             one_if: flags_ONE_IF,
             eight_if: flags_EIGHT_IF,
@@ -136,17 +136,17 @@ impl FlagIfElseIf {
 
 impl FlagIfElseIf {
     pub(crate) fn size(&self) -> usize {
-        self.flags.size() // flags: FlagIfElseIfUpdateFlag
+        self.flags.size() // flags: FlagIfElseIf_UpdateFlag
     }
 }
 
 #[derive(Default, Debug, PartialEq, Clone)]
-pub struct FlagIfElseIfSimpleFlag {
+pub struct FlagIfElseIf_SimpleFlag {
     inner: u8,
-    one: Option<FlagIfElseIfSimpleFlagONE>,
+    one: Option<FlagIfElseIf_SimpleFlagONE>,
 }
 
-impl FlagIfElseIfSimpleFlag {
+impl FlagIfElseIf_SimpleFlag {
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -176,20 +176,20 @@ impl FlagIfElseIfSimpleFlag {
         self
     }
 
-    pub const fn new_ONE(one: FlagIfElseIfSimpleFlagONE) -> Self {
+    pub const fn new_ONE(one: FlagIfElseIf_SimpleFlagONE) -> Self {
         Self {
             inner: SimpleFlag::ONE,
             one: Some(one),
         }
     }
 
-    pub fn set_ONE(&mut self, one: FlagIfElseIfSimpleFlagONE) -> Self {
+    pub fn set_ONE(&mut self, one: FlagIfElseIf_SimpleFlagONE) -> Self {
         self.inner |= SimpleFlag::ONE;
         self.one = Some(one);
         self.clone()
     }
 
-    pub const fn get_ONE(&self) -> Option<&FlagIfElseIfSimpleFlagONE> {
+    pub const fn get_ONE(&self) -> Option<&FlagIfElseIf_SimpleFlagONE> {
         self.one.as_ref()
     }
 
@@ -225,7 +225,7 @@ impl FlagIfElseIfSimpleFlag {
     }
 
 }
-impl FlagIfElseIfSimpleFlag {
+impl FlagIfElseIf_SimpleFlag {
     pub(crate) fn size(&self) -> usize {
         1 // inner
         + {
@@ -239,30 +239,30 @@ impl FlagIfElseIfSimpleFlag {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct FlagIfElseIfSimpleFlagONE {
+pub struct FlagIfElseIf_SimpleFlagONE {
     pub if_one: u8,
 }
 
-impl FlagIfElseIfSimpleFlagONE {
+impl FlagIfElseIf_SimpleFlagONE {
     pub(crate) fn size(&self) -> usize {
         1 // if_one: u8
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum FlagIfElseIfUpdateFlagONE_IF {
+pub enum FlagIfElseIf_UpdateFlagONE_IF {
     ONE_IF {
         b_if: u8,
     },
     TWO_ELSEIF {
-        s: FlagIfElseIfSimpleFlag,
+        s: FlagIfElseIf_SimpleFlag,
     },
     FOUR_ELSEIF {
         elseif2: u8,
     },
 }
 
-impl FlagIfElseIfUpdateFlagONE_IF {
+impl FlagIfElseIf_UpdateFlagONE_IF {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::ONE_IF { .. } => 1,
@@ -273,7 +273,7 @@ impl FlagIfElseIfUpdateFlagONE_IF {
 
 }
 
-impl FlagIfElseIfUpdateFlagONE_IF {
+impl FlagIfElseIf_UpdateFlagONE_IF {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::ONE_IF {
@@ -286,7 +286,7 @@ impl FlagIfElseIfUpdateFlagONE_IF {
                 s,
             } => {
                 // Not an actual enum sent over the wire
-                s.size() // s: FlagIfElseIfSimpleFlag
+                s.size() // s: FlagIfElseIf_SimpleFlag
             }
             Self::FOUR_ELSEIF {
                 elseif2,
@@ -299,13 +299,13 @@ impl FlagIfElseIfUpdateFlagONE_IF {
 }
 
 #[derive(Default, Debug, PartialEq, Clone)]
-pub struct FlagIfElseIfUpdateFlag {
+pub struct FlagIfElseIf_UpdateFlag {
     inner: u8,
-    one_if: Option<FlagIfElseIfUpdateFlagONE_IF>,
-    eight_if: Option<FlagIfElseIfUpdateFlagEIGHT_IF>,
+    one_if: Option<FlagIfElseIf_UpdateFlagONE_IF>,
+    eight_if: Option<FlagIfElseIf_UpdateFlagEIGHT_IF>,
 }
 
-impl FlagIfElseIfUpdateFlag {
+impl FlagIfElseIf_UpdateFlag {
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -337,7 +337,7 @@ impl FlagIfElseIfUpdateFlag {
         self
     }
 
-    pub const fn new_ONE_IF(one_if: FlagIfElseIfUpdateFlagONE_IF) -> Self {
+    pub const fn new_ONE_IF(one_if: FlagIfElseIf_UpdateFlagONE_IF) -> Self {
         Self {
             inner: one_if.as_int(),
             one_if: Some(one_if),
@@ -345,13 +345,13 @@ impl FlagIfElseIfUpdateFlag {
         }
     }
 
-    pub fn set_ONE_IF(&mut self, one_if: FlagIfElseIfUpdateFlagONE_IF) -> Self {
+    pub fn set_ONE_IF(&mut self, one_if: FlagIfElseIf_UpdateFlagONE_IF) -> Self {
         self.inner |= one_if.as_int();
         self.one_if = Some(one_if);
         self.clone()
     }
 
-    pub const fn get_ONE_IF(&self) -> Option<&FlagIfElseIfUpdateFlagONE_IF> {
+    pub const fn get_ONE_IF(&self) -> Option<&FlagIfElseIf_UpdateFlagONE_IF> {
         self.one_if.as_ref()
     }
 
@@ -361,7 +361,7 @@ impl FlagIfElseIfUpdateFlag {
         self
     }
 
-    pub const fn new_EIGHT_IF(eight_if: FlagIfElseIfUpdateFlagEIGHT_IF) -> Self {
+    pub const fn new_EIGHT_IF(eight_if: FlagIfElseIf_UpdateFlagEIGHT_IF) -> Self {
         Self {
             inner: UpdateFlag::EIGHT_IF,
             one_if: None,
@@ -369,13 +369,13 @@ impl FlagIfElseIfUpdateFlag {
         }
     }
 
-    pub fn set_EIGHT_IF(&mut self, eight_if: FlagIfElseIfUpdateFlagEIGHT_IF) -> Self {
+    pub fn set_EIGHT_IF(&mut self, eight_if: FlagIfElseIf_UpdateFlagEIGHT_IF) -> Self {
         self.inner |= UpdateFlag::EIGHT_IF;
         self.eight_if = Some(eight_if);
         self.clone()
     }
 
-    pub const fn get_EIGHT_IF(&self) -> Option<&FlagIfElseIfUpdateFlagEIGHT_IF> {
+    pub const fn get_EIGHT_IF(&self) -> Option<&FlagIfElseIf_UpdateFlagEIGHT_IF> {
         self.eight_if.as_ref()
     }
 
@@ -390,7 +390,7 @@ impl FlagIfElseIfUpdateFlag {
     }
 
 }
-impl FlagIfElseIfUpdateFlag {
+impl FlagIfElseIf_UpdateFlag {
     pub(crate) fn size(&self) -> usize {
         1 // inner
         + {
@@ -411,11 +411,11 @@ impl FlagIfElseIfUpdateFlag {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct FlagIfElseIfUpdateFlagEIGHT_IF {
+pub struct FlagIfElseIf_UpdateFlagEIGHT_IF {
     pub last_if: u8,
 }
 
-impl FlagIfElseIfUpdateFlagEIGHT_IF {
+impl FlagIfElseIf_UpdateFlagEIGHT_IF {
     pub(crate) fn size(&self) -> usize {
         1 // last_if: u8
     }

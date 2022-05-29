@@ -4,8 +4,8 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::{RustDefiner, RustType};
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
-use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
+use crate::rust_printer::{get_new_type_name, DefinerType};
 use crate::UTILITY_PATH;
 
 fn print_read_array_fixed(
@@ -566,9 +566,8 @@ fn print_read_if_statement_flag(
     );
 
     let new_ty_name = format!(
-        "{container_name}{definer_ty_name}{enumerator}",
-        container_name = e.name(),
-        definer_ty_name = statement.original_ty().rust_str(),
+        "{new_ty_name}{enumerator}",
+        new_ty_name = get_new_type_name(e.name(), &statement.original_ty().rust_str()),
         enumerator = statement.flag_get_enumerator(),
     );
 

@@ -11,7 +11,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_GMTICKET_CREATE {
-    pub category: CMSG_GMTICKET_CREATEGmTicketType,
+    pub category: CMSG_GMTICKET_CREATE_GmTicketType,
     pub map: Map,
     pub position_x: f32,
     pub position_y: f32,
@@ -48,8 +48,8 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
         w.write_all(&[0])?;
 
         match &self.category {
-            CMSG_GMTICKET_CREATEGmTicketType::STUCK => {}
-            CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
+            CMSG_GMTICKET_CREATE_GmTicketType::STUCK => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::BEHAVIOR_HARASSMENT {
                 chat_data_line_count,
                 chat_data_size_uncompressed,
                 compressed_chat_data,
@@ -66,14 +66,14 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
                 }
 
             }
-            CMSG_GMTICKET_CREATEGmTicketType::GUILD => {}
-            CMSG_GMTICKET_CREATEGmTicketType::ITEM => {}
-            CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL => {}
-            CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP => {}
-            CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC => {}
-            CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL => {}
-            CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING => {}
-            CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::GUILD => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::ITEM => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::ENVIRONMENTAL => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::NONQUEST_CREEP => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::QUEST_QUESTNPC => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::TECHNICAL => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::ACCOUNT_BILLING => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::CHARACTER => {}
         }
 
         Ok(())
@@ -106,7 +106,7 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
         let reserved_for_future_use = String::from_utf8(reserved_for_future_use)?;
 
         let category_if = match category {
-            GmTicketType::STUCK => CMSG_GMTICKET_CREATEGmTicketType::STUCK,
+            GmTicketType::STUCK => CMSG_GMTICKET_CREATE_GmTicketType::STUCK,
             GmTicketType::BEHAVIOR_HARASSMENT => {
                 // chat_data_line_count: u32
                 let chat_data_line_count = crate::util::read_u32_le(r)?;
@@ -116,7 +116,7 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
 
                 // compressed_chat_data: u8[-]
                 let mut current_size = {
-                    1 // category: CMSG_GMTICKET_CREATEGmTicketType
+                    1 // category: CMSG_GMTICKET_CREATE_GmTicketType
                     + 4 // map: Map
                     + 4 // position_x: f32
                     + 4 // position_y: f32
@@ -130,20 +130,20 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
                     current_size += 1;
                 }
 
-                CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
+                CMSG_GMTICKET_CREATE_GmTicketType::BEHAVIOR_HARASSMENT {
                     chat_data_line_count,
                     chat_data_size_uncompressed,
                     compressed_chat_data,
                 }
             }
-            GmTicketType::GUILD => CMSG_GMTICKET_CREATEGmTicketType::GUILD,
-            GmTicketType::ITEM => CMSG_GMTICKET_CREATEGmTicketType::ITEM,
-            GmTicketType::ENVIRONMENTAL => CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL,
-            GmTicketType::NONQUEST_CREEP => CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP,
-            GmTicketType::QUEST_QUESTNPC => CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC,
-            GmTicketType::TECHNICAL => CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL,
-            GmTicketType::ACCOUNT_BILLING => CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING,
-            GmTicketType::CHARACTER => CMSG_GMTICKET_CREATEGmTicketType::CHARACTER,
+            GmTicketType::GUILD => CMSG_GMTICKET_CREATE_GmTicketType::GUILD,
+            GmTicketType::ITEM => CMSG_GMTICKET_CREATE_GmTicketType::ITEM,
+            GmTicketType::ENVIRONMENTAL => CMSG_GMTICKET_CREATE_GmTicketType::ENVIRONMENTAL,
+            GmTicketType::NONQUEST_CREEP => CMSG_GMTICKET_CREATE_GmTicketType::NONQUEST_CREEP,
+            GmTicketType::QUEST_QUESTNPC => CMSG_GMTICKET_CREATE_GmTicketType::QUEST_QUESTNPC,
+            GmTicketType::TECHNICAL => CMSG_GMTICKET_CREATE_GmTicketType::TECHNICAL,
+            GmTicketType::ACCOUNT_BILLING => CMSG_GMTICKET_CREATE_GmTicketType::ACCOUNT_BILLING,
+            GmTicketType::CHARACTER => CMSG_GMTICKET_CREATE_GmTicketType::CHARACTER,
         };
 
         Ok(Self {
@@ -161,7 +161,7 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
 
 impl CMSG_GMTICKET_CREATE {
     pub(crate) fn size(&self) -> usize {
-        self.category.size() // category: CMSG_GMTICKET_CREATEGmTicketType
+        self.category.size() // category: CMSG_GMTICKET_CREATE_GmTicketType
         + 4 // map: Map
         + 4 // position_x: f32
         + 4 // position_y: f32
@@ -172,7 +172,7 @@ impl CMSG_GMTICKET_CREATE {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum CMSG_GMTICKET_CREATEGmTicketType {
+pub enum CMSG_GMTICKET_CREATE_GmTicketType {
     STUCK,
     BEHAVIOR_HARASSMENT {
         chat_data_line_count: u32,
@@ -189,14 +189,14 @@ pub enum CMSG_GMTICKET_CREATEGmTicketType {
     CHARACTER,
 }
 
-impl Default for CMSG_GMTICKET_CREATEGmTicketType {
+impl Default for CMSG_GMTICKET_CREATE_GmTicketType {
     fn default() -> Self {
         // First enumerator without any fields
         Self::STUCK
     }
 }
 
-impl CMSG_GMTICKET_CREATEGmTicketType {
+impl CMSG_GMTICKET_CREATE_GmTicketType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::STUCK => 1,
@@ -214,7 +214,7 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
 
 }
 
-impl CMSG_GMTICKET_CREATEGmTicketType {
+impl CMSG_GMTICKET_CREATE_GmTicketType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::STUCK => {

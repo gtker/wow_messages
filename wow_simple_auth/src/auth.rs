@@ -62,7 +62,7 @@ async fn reconnect_version_8(
         .reconnect_challenge_data();
 
     CMD_AUTH_RECONNECT_CHALLENGE_Server {
-        result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS {
+        result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SUCCESS {
             challenge_data: server_reconnect_challenge_data,
             checksum_salt: [0; 16],
         },
@@ -120,7 +120,7 @@ async fn reconnect_version_2(
         .reconnect_challenge_data();
 
     CMD_AUTH_RECONNECT_CHALLENGE_Server {
-        result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS {
+        result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SUCCESS {
             challenge_data: server_reconnect_challenge_data,
             checksum_salt: [0; 16],
         },
@@ -174,7 +174,7 @@ async fn login_version_2(
     let username = l.account_name;
 
     CMD_AUTH_LOGON_CHALLENGE_Server {
-        login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+        login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
             server_public_key: *p.server_public_key(),
             generator: vec![GENERATOR],
             large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
@@ -199,7 +199,7 @@ async fn login_version_2(
         .unwrap();
 
     CMD_AUTH_LOGON_PROOF_Server {
-        login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+        login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
             server_proof: proof,
             hardware_survey_id: 0,
         },
@@ -232,13 +232,13 @@ async fn login_version_3(
     let username = l.account_name;
 
     CMD_AUTH_LOGON_CHALLENGE_Server {
-        login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+        login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
             server_public_key: *p.server_public_key(),
             generator: vec![GENERATOR],
             large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
             salt: *p.salt(),
             crc_salt: [0; 16],
-            security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::NONE,
         },
     }
     .tokio_write(&mut stream)
@@ -258,7 +258,7 @@ async fn login_version_3(
         .unwrap();
 
     CMD_AUTH_LOGON_PROOF_Server {
-        login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+        login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
             server_proof: proof,
             hardware_survey_id: 0,
         },
@@ -284,13 +284,13 @@ async fn login_version_8(
     let username = l.account_name;
 
     CMD_AUTH_LOGON_CHALLENGE_Server {
-        login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+        login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
             server_public_key: *p.server_public_key(),
             generator: vec![GENERATOR],
             large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
             salt: *p.salt(),
             crc_salt: [0; 16],
-            security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty(),
+            security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty(),
         },
     }
     .tokio_write(&mut stream)
@@ -310,7 +310,7 @@ async fn login_version_8(
         .unwrap();
 
     CMD_AUTH_LOGON_PROOF_Server {
-        login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+        login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
             account_flag: AccountFlag::empty(),
             server_proof,
             hardware_survey_id: 0,

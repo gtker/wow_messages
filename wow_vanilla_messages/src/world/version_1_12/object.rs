@@ -12,7 +12,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Object {
-    pub update_type: ObjectUpdateType,
+    pub update_type: Object_UpdateType,
 }
 
 impl Object {
@@ -21,7 +21,7 @@ impl Object {
         w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 
         match &self.update_type {
-            ObjectUpdateType::VALUES {
+            Object_UpdateType::VALUES {
                 guid1,
                 mask1,
             } => {
@@ -32,7 +32,7 @@ impl Object {
                 mask1.write_into_vec(w)?;
 
             }
-            ObjectUpdateType::MOVEMENT {
+            Object_UpdateType::MOVEMENT {
                 guid2,
                 movement1,
             } => {
@@ -43,7 +43,7 @@ impl Object {
                 movement1.write_into_vec(w)?;
 
             }
-            ObjectUpdateType::CREATE_OBJECT {
+            Object_UpdateType::CREATE_OBJECT {
                 guid3,
                 mask2,
                 movement2,
@@ -62,7 +62,7 @@ impl Object {
                 mask2.write_into_vec(w)?;
 
             }
-            ObjectUpdateType::CREATE_OBJECT2 {
+            Object_UpdateType::CREATE_OBJECT2 {
                 guid3,
                 mask2,
                 movement2,
@@ -81,7 +81,7 @@ impl Object {
                 mask2.write_into_vec(w)?;
 
             }
-            ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
+            Object_UpdateType::OUT_OF_RANGE_OBJECTS {
                 count,
                 guids,
             } => {
@@ -94,7 +94,7 @@ impl Object {
                 }
 
             }
-            ObjectUpdateType::NEAR_OBJECTS {
+            Object_UpdateType::NEAR_OBJECTS {
                 count,
                 guids,
             } => {
@@ -126,7 +126,7 @@ impl Object {
                 // mask1: UpdateMask
                 let mask1 = UpdateMask::read(r)?;
 
-                ObjectUpdateType::VALUES {
+                Object_UpdateType::VALUES {
                     guid1,
                     mask1,
                 }
@@ -138,7 +138,7 @@ impl Object {
                 // movement1: MovementBlock
                 let movement1 = MovementBlock::read(r)?;
 
-                ObjectUpdateType::MOVEMENT {
+                Object_UpdateType::MOVEMENT {
                     guid2,
                     movement1,
                 }
@@ -156,7 +156,7 @@ impl Object {
                 // mask2: UpdateMask
                 let mask2 = UpdateMask::read(r)?;
 
-                ObjectUpdateType::CREATE_OBJECT {
+                Object_UpdateType::CREATE_OBJECT {
                     guid3,
                     mask2,
                     movement2,
@@ -176,7 +176,7 @@ impl Object {
                 // mask2: UpdateMask
                 let mask2 = UpdateMask::read(r)?;
 
-                ObjectUpdateType::CREATE_OBJECT2 {
+                Object_UpdateType::CREATE_OBJECT2 {
                     guid3,
                     mask2,
                     movement2,
@@ -193,7 +193,7 @@ impl Object {
                     guids.push(Guid::read_packed(r)?);
                 }
 
-                ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
+                Object_UpdateType::OUT_OF_RANGE_OBJECTS {
                     count,
                     guids,
                 }
@@ -208,7 +208,7 @@ impl Object {
                     guids.push(Guid::read_packed(r)?);
                 }
 
-                ObjectUpdateType::NEAR_OBJECTS {
+                Object_UpdateType::NEAR_OBJECTS {
                     count,
                     guids,
                 }
@@ -224,12 +224,12 @@ impl Object {
 
 impl Object {
     pub(crate) fn size(&self) -> usize {
-        self.update_type.size() // update_type: ObjectUpdateType
+        self.update_type.size() // update_type: Object_UpdateType
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum ObjectUpdateType {
+pub enum Object_UpdateType {
     VALUES {
         guid1: Guid,
         mask1: UpdateMask,
@@ -260,7 +260,7 @@ pub enum ObjectUpdateType {
     },
 }
 
-impl Default for ObjectUpdateType {
+impl Default for Object_UpdateType {
     fn default() -> Self {
         // First enumerator without any fields
         Self::VALUES {
@@ -270,7 +270,7 @@ impl Default for ObjectUpdateType {
     }
 }
 
-impl ObjectUpdateType {
+impl Object_UpdateType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::VALUES { .. } => 0,
@@ -284,7 +284,7 @@ impl ObjectUpdateType {
 
 }
 
-impl ObjectUpdateType {
+impl Object_UpdateType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::VALUES {

@@ -805,3 +805,7 @@ pub enum DefinerType {
     Enum,
     Flag,
 }
+
+fn get_new_type_name(original_ty: &str, definer_ty: &str) -> String {
+    format!("{original_ty}_{definer_ty}")
+}

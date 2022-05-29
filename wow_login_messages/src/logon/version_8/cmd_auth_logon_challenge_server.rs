@@ -10,7 +10,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server {
-    pub login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult,
+    pub login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult,
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -30,7 +30,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
         w.write_all(&(self.login_result.as_int() as u8).to_le_bytes())?;
 
         match &self.login_result {
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt,
                 generator,
                 large_safe_prime,
@@ -108,22 +108,22 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
                 }
 
             }
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN0 => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN1 => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_BANNED => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN_ACCOUNT => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_ALREADY_ONLINE => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_NO_TIME => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_DB_BUSY => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_VERSION_INVALID => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::LOGIN_DOWNLOAD_FILE => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INVALID_SERVER => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_SUSPENDED => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_NO_ACCESS => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS_SURVEY => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_PARENTALCONTROL => {}
+            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_LOCKED_ENFORCED => {}
         }
 
         Ok(())
@@ -184,7 +184,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     let mut pin_salt = [0_u8; 16];
                     r.read_exact(&mut pin_salt)?;
 
-                    Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN {
                         pin_grid_seed,
                         pin_salt,
                     })
@@ -209,7 +209,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // unknown4: u64
                     let unknown4 = crate::util::read_u64_le(r)?;
 
-                    Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
                         unknown0,
                         unknown1,
                         unknown2,
@@ -225,7 +225,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // unknown5: u8
                     let unknown5 = crate::util::read_u8_le(r)?;
 
-                    Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
                         unknown5,
                     })
                 }
@@ -233,14 +233,14 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     None
                 };
 
-                let security_flag = CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
+                let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
                     inner: security_flag.as_int(),
                     pin: security_flag_PIN,
                     unknown0: security_flag_UNKNOWN0,
                     authenticator: security_flag_AUTHENTICATOR,
                 };
 
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+                CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                     crc_salt,
                     generator,
                     large_safe_prime,
@@ -249,22 +249,22 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     server_public_key,
                 }
             }
-            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
-            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1,
-            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED,
-            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
-            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
-            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE,
-            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME,
-            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY,
-            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID,
-            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
-            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER,
-            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED,
-            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS,
-            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY,
-            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL,
-            LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED,
+            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN0,
+            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN1,
+            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_BANNED,
+            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN_ACCOUNT,
+            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
+            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_ALREADY_ONLINE,
+            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_NO_TIME,
+            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_DB_BUSY,
+            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_VERSION_INVALID,
+            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::LOGIN_DOWNLOAD_FILE,
+            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INVALID_SERVER,
+            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_SUSPENDED,
+            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_NO_ACCESS,
+            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS_SURVEY,
+            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_PARENTALCONTROL,
+            LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_LOCKED_ENFORCED,
         };
 
         Ok(Self {
@@ -341,7 +341,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         let mut pin_salt = [0_u8; 16];
                         r.read_exact(&mut pin_salt).await?;
 
-                        Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN {
                             pin_grid_seed,
                             pin_salt,
                         })
@@ -366,7 +366,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         // unknown4: u64
                         let unknown4 = crate::util::tokio_read_u64_le(r).await?;
 
-                        Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
                             unknown0,
                             unknown1,
                             unknown2,
@@ -382,7 +382,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         // unknown5: u8
                         let unknown5 = crate::util::tokio_read_u8_le(r).await?;
 
-                        Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
                             unknown5,
                         })
                     }
@@ -390,14 +390,14 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag = CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
+                    let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
                         inner: security_flag.as_int(),
                         pin: security_flag_PIN,
                         unknown0: security_flag_UNKNOWN0,
                         authenticator: security_flag_AUTHENTICATOR,
                     };
 
-                    CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+                    CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                         crc_salt,
                         generator,
                         large_safe_prime,
@@ -406,22 +406,22 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         server_public_key,
                     }
                 }
-                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
-                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1,
-                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED,
-                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
-                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
-                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE,
-                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME,
-                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY,
-                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID,
-                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
-                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER,
-                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED,
-                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS,
-                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY,
-                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL,
-                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED,
+                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN0,
+                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN1,
+                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_BANNED,
+                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN_ACCOUNT,
+                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
+                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_ALREADY_ONLINE,
+                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_NO_TIME,
+                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_DB_BUSY,
+                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_VERSION_INVALID,
+                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::LOGIN_DOWNLOAD_FILE,
+                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INVALID_SERVER,
+                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_SUSPENDED,
+                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_NO_ACCESS,
+                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS_SURVEY,
+                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_PARENTALCONTROL,
+                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_LOCKED_ENFORCED,
             };
 
             Ok(Self {
@@ -512,7 +512,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         let mut pin_salt = [0_u8; 16];
                         r.read_exact(&mut pin_salt).await?;
 
-                        Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN {
                             pin_grid_seed,
                             pin_salt,
                         })
@@ -537,7 +537,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         // unknown4: u64
                         let unknown4 = crate::util::astd_read_u64_le(r).await?;
 
-                        Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
                             unknown0,
                             unknown1,
                             unknown2,
@@ -553,7 +553,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         // unknown5: u8
                         let unknown5 = crate::util::astd_read_u8_le(r).await?;
 
-                        Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
                             unknown5,
                         })
                     }
@@ -561,14 +561,14 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag = CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
+                    let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
                         inner: security_flag.as_int(),
                         pin: security_flag_PIN,
                         unknown0: security_flag_UNKNOWN0,
                         authenticator: security_flag_AUTHENTICATOR,
                     };
 
-                    CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+                    CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                         crc_salt,
                         generator,
                         large_safe_prime,
@@ -577,22 +577,22 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         server_public_key,
                     }
                 }
-                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
-                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1,
-                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED,
-                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
-                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
-                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE,
-                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME,
-                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY,
-                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID,
-                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
-                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER,
-                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED,
-                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS,
-                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY,
-                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL,
-                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED,
+                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN0,
+                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN1,
+                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_BANNED,
+                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_UNKNOWN_ACCOUNT,
+                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
+                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_ALREADY_ONLINE,
+                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_NO_TIME,
+                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_DB_BUSY,
+                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_VERSION_INVALID,
+                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::LOGIN_DOWNLOAD_FILE,
+                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INVALID_SERVER,
+                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_SUSPENDED,
+                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_NO_ACCESS,
+                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS_SURVEY,
+                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_PARENTALCONTROL,
+                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_LOCKED_ENFORCED,
             };
 
             Ok(Self {
@@ -626,19 +626,19 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
     pub(crate) fn size(&self) -> usize {
         1 // protocol_version: u8
-        + self.login_result.size() // login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult
+        + self.login_result.size() // login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult
     }
 }
 
 #[derive(Default, Debug, PartialEq, Clone)]
-pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
+pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     inner: u8,
-    pin: Option<CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN>,
-    unknown0: Option<CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0>,
-    authenticator: Option<CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR>,
+    pin: Option<CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN>,
+    unknown0: Option<CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0>,
+    authenticator: Option<CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR>,
 }
 
-impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
+impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -672,7 +672,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         self
     }
 
-    pub const fn new_PIN(pin: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN) -> Self {
+    pub const fn new_PIN(pin: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN) -> Self {
         Self {
             inner: SecurityFlag::PIN,
             pin: Some(pin),
@@ -681,13 +681,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         }
     }
 
-    pub fn set_PIN(&mut self, pin: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN) -> Self {
+    pub fn set_PIN(&mut self, pin: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN) -> Self {
         self.inner |= SecurityFlag::PIN;
         self.pin = Some(pin);
         self.clone()
     }
 
-    pub const fn get_PIN(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN> {
+    pub const fn get_PIN(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN> {
         self.pin.as_ref()
     }
 
@@ -697,7 +697,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         self
     }
 
-    pub const fn new_UNKNOWN0(unknown0: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0) -> Self {
+    pub const fn new_UNKNOWN0(unknown0: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0) -> Self {
         Self {
             inner: SecurityFlag::UNKNOWN0,
             pin: None,
@@ -706,13 +706,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         }
     }
 
-    pub fn set_UNKNOWN0(&mut self, unknown0: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0) -> Self {
+    pub fn set_UNKNOWN0(&mut self, unknown0: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0) -> Self {
         self.inner |= SecurityFlag::UNKNOWN0;
         self.unknown0 = Some(unknown0);
         self.clone()
     }
 
-    pub const fn get_UNKNOWN0(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0> {
+    pub const fn get_UNKNOWN0(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0> {
         self.unknown0.as_ref()
     }
 
@@ -722,7 +722,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         self
     }
 
-    pub const fn new_AUTHENTICATOR(authenticator: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR) -> Self {
+    pub const fn new_AUTHENTICATOR(authenticator: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR) -> Self {
         Self {
             inner: SecurityFlag::AUTHENTICATOR,
             pin: None,
@@ -731,13 +731,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         }
     }
 
-    pub fn set_AUTHENTICATOR(&mut self, authenticator: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR) -> Self {
+    pub fn set_AUTHENTICATOR(&mut self, authenticator: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR) -> Self {
         self.inner |= SecurityFlag::AUTHENTICATOR;
         self.authenticator = Some(authenticator);
         self.clone()
     }
 
-    pub const fn get_AUTHENTICATOR(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR> {
+    pub const fn get_AUTHENTICATOR(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR> {
         self.authenticator.as_ref()
     }
 
@@ -752,7 +752,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
     }
 
 }
-impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
+impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     pub(crate) fn size(&self) -> usize {
         1 // inner
         + {
@@ -780,12 +780,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN {
     pub pin_grid_seed: u32,
     pub pin_salt: [u8; 16],
 }
 
-impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN {
     pub(crate) fn size(&self) -> usize {
         4 // pin_grid_seed: u32
         + 16 * core::mem::size_of::<u8>() // pin_salt: u8[16]
@@ -793,7 +793,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
     pub unknown0: u8,
     pub unknown1: u8,
     pub unknown2: u8,
@@ -801,7 +801,7 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
     pub unknown4: u64,
 }
 
-impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
     pub(crate) fn size(&self) -> usize {
         1 // unknown0: u8
         + 1 // unknown1: u8
@@ -812,24 +812,24 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
     pub unknown5: u8,
 }
 
-impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
     pub(crate) fn size(&self) -> usize {
         1 // unknown5: u8
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+pub enum CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
     SUCCESS {
         crc_salt: [u8; 16],
         generator: Vec<u8>,
         large_safe_prime: Vec<u8>,
         salt: [u8; 32],
-        security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag,
+        security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag,
         server_public_key: [u8; 32],
     },
     FAIL_UNKNOWN0,
@@ -850,7 +850,7 @@ pub enum CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     FAIL_LOCKED_ENFORCED,
 }
 
-impl Default for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+impl Default for CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::SUCCESS {
@@ -864,7 +864,7 @@ impl Default for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     }
 }
 
-impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+impl CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SUCCESS { .. } => 0,
@@ -889,7 +889,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
 
 }
 
-impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+impl CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::SUCCESS {
@@ -907,7 +907,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
                 + large_safe_prime.len() * core::mem::size_of::<u8>() // large_safe_prime: u8[large_safe_prime_length]
                 + 1 // large_safe_prime_length: u8
                 + 32 * core::mem::size_of::<u8>() // salt: u8[32]
-                + security_flag.size() // security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag
+                + security_flag.size() // security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag
                 + 32 * core::mem::size_of::<u8>() // server_public_key: u8[32]
             }
             Self::FAIL_UNKNOWN0 => {
@@ -987,7 +987,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -999,7 +999,7 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
                     .set_NONE()
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1030,7 +1030,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1042,7 +1042,7 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
                     .set_NONE()
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1073,7 +1073,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1085,7 +1085,7 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
                     .set_NONE()
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1129,7 +1129,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server1() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1141,8 +1141,8 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_PIN(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_PIN(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN {
                         pin_grid_seed: 0xDEADBEEF,
                         pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                              0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
@@ -1176,7 +1176,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server1() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1188,8 +1188,8 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_PIN(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_PIN(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN {
                         pin_grid_seed: 0xDEADBEEF,
                         pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                              0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
@@ -1223,7 +1223,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server1() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1235,8 +1235,8 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_PIN(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_PIN(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagPIN {
                         pin_grid_seed: 0xDEADBEEF,
                         pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                              0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
@@ -1282,7 +1282,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server2() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1294,8 +1294,8 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
                         unknown5: 0x1,
                     })
                     ,
@@ -1327,7 +1327,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server2() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1339,8 +1339,8 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
                         unknown5: 0x1,
                     })
                     ,
@@ -1372,7 +1372,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server2() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1384,8 +1384,8 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
                         unknown5: 0x1,
                     })
                     ,
@@ -1430,7 +1430,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server3() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1442,8 +1442,8 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
                         unknown0: 0xFF,
                         unknown1: 0xEE,
                         unknown2: 0xDD,
@@ -1479,7 +1479,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server3() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1491,8 +1491,8 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
                         unknown0: 0xFF,
                         unknown1: 0xEE,
                         unknown2: 0xDD,
@@ -1528,7 +1528,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server3() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1540,8 +1540,8 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
                         unknown0: 0xFF,
                         unknown1: 0xEE,
                         unknown2: 0xDD,
@@ -1579,7 +1579,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server4() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
         };
 
         let header_size = 1;
@@ -1603,7 +1603,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server4() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
         };
 
         let header_size = 1;
@@ -1627,7 +1627,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server4() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
         };
 
         let header_size = 1;
@@ -1664,7 +1664,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server5() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1676,15 +1676,15 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
                         unknown0: 0xFF,
                         unknown1: 0xEE,
                         unknown2: 0xDD,
                         unknown3: 0xCC,
                         unknown4: 0xDEADBEEFFACADE,
                     })
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
                         unknown5: 0x1,
                     })
                     ,
@@ -1716,7 +1716,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server5() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1728,15 +1728,15 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
                         unknown0: 0xFF,
                         unknown1: 0xEE,
                         unknown2: 0xDD,
                         unknown3: 0xCC,
                         unknown4: 0xDEADBEEFFACADE,
                     })
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
                         unknown5: 0x1,
                     })
                     ,
@@ -1768,7 +1768,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server5() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -1780,15 +1780,15 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
+                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagUNKNOWN0 {
                         unknown0: 0xFF,
                         unknown1: 0xEE,
                         unknown2: 0xDD,
                         unknown3: 0xCC,
                         unknown4: 0xDEADBEEFFACADE,
                     })
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlagAUTHENTICATOR {
                         unknown5: 0x1,
                     })
                     ,
@@ -1822,7 +1822,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server6() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
         };
 
         let header_size = 1;
@@ -1846,7 +1846,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server6() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
         };
 
         let header_size = 1;
@@ -1870,7 +1870,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server6() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FAIL_INCORRECT_PASSWORD,
         };
 
         let header_size = 1;

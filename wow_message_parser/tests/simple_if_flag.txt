@@ -8,7 +8,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SimpleIfFlag {
-    pub flag: SimpleIfFlagSimpleFlag,
+    pub flag: SimpleIfFlag_SimpleFlag,
 }
 
 impl SimpleIfFlag {
@@ -35,7 +35,7 @@ impl SimpleIfFlag {
             // basic: u8
             let basic = crate::util::read_u8_le(r)?;
 
-            Some(SimpleIfFlagSimpleFlagZERO {
+            Some(SimpleIfFlag_SimpleFlagZERO {
                 basic,
             })
         }
@@ -43,7 +43,7 @@ impl SimpleIfFlag {
             None
         };
 
-        let flag = SimpleIfFlagSimpleFlag {
+        let flag = SimpleIfFlag_SimpleFlag {
             inner: flag.as_int(),
             zero: flag_ZERO,
         };
@@ -57,17 +57,17 @@ impl SimpleIfFlag {
 
 impl SimpleIfFlag {
     pub(crate) fn size(&self) -> usize {
-        self.flag.size() // flag: SimpleIfFlagSimpleFlag
+        self.flag.size() // flag: SimpleIfFlag_SimpleFlag
     }
 }
 
 #[derive(Default, Debug, PartialEq, Clone)]
-pub struct SimpleIfFlagSimpleFlag {
+pub struct SimpleIfFlag_SimpleFlag {
     inner: u8,
-    zero: Option<SimpleIfFlagSimpleFlagZERO>,
+    zero: Option<SimpleIfFlag_SimpleFlagZERO>,
 }
 
-impl SimpleIfFlagSimpleFlag {
+impl SimpleIfFlag_SimpleFlag {
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -75,20 +75,20 @@ impl SimpleIfFlagSimpleFlag {
         }
     }
 
-    pub const fn new_ZERO(zero: SimpleIfFlagSimpleFlagZERO) -> Self {
+    pub const fn new_ZERO(zero: SimpleIfFlag_SimpleFlagZERO) -> Self {
         Self {
             inner: SimpleFlag::ZERO,
             zero: Some(zero),
         }
     }
 
-    pub fn set_ZERO(&mut self, zero: SimpleIfFlagSimpleFlagZERO) -> Self {
+    pub fn set_ZERO(&mut self, zero: SimpleIfFlag_SimpleFlagZERO) -> Self {
         self.inner |= SimpleFlag::ZERO;
         self.zero = Some(zero);
         self.clone()
     }
 
-    pub const fn get_ZERO(&self) -> Option<&SimpleIfFlagSimpleFlagZERO> {
+    pub const fn get_ZERO(&self) -> Option<&SimpleIfFlag_SimpleFlagZERO> {
         self.zero.as_ref()
     }
 
@@ -145,7 +145,7 @@ impl SimpleIfFlagSimpleFlag {
     }
 
 }
-impl SimpleIfFlagSimpleFlag {
+impl SimpleIfFlag_SimpleFlag {
     pub(crate) fn size(&self) -> usize {
         1 // inner
         + {
@@ -159,11 +159,11 @@ impl SimpleIfFlagSimpleFlag {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SimpleIfFlagSimpleFlagZERO {
+pub struct SimpleIfFlag_SimpleFlagZERO {
     pub basic: u8,
 }
 
-impl SimpleIfFlagSimpleFlagZERO {
+impl SimpleIfFlag_SimpleFlagZERO {
     pub(crate) fn size(&self) -> usize {
         1 // basic: u8
     }

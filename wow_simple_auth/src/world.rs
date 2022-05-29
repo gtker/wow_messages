@@ -41,7 +41,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
         .unwrap();
 
     SMSG_AUTH_RESPONSE {
-        result: SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+        result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_OK {
             billing_flags: 0,
             billing_rested: 0,
             billing_time: 0,
@@ -134,12 +134,12 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
         .set_unit_BYTES_0(1, 1, 1, 1)
         .set_unit_HEALTH(100);
 
-    let update_flag = MovementBlockUpdateFlag::empty()
-        .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
+    let update_flag = MovementBlock_UpdateFlag::empty()
+        .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
             backwards_running_speed: 4.5,
             backwards_swimming_speed: 0.0,
             fall_time: 0.0,
-            flags: MovementBlockMovementFlags::empty(),
+            flags: MovementBlock_MovementFlags::empty(),
             living_orientation: 0.0,
             living_position_x: -8949.95,
             living_position_y: -132.493,
@@ -150,13 +150,13 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
             turn_rate: std::f32::consts::PI,
             walking_speed: 1.0,
         })
-        .set_ALL(MovementBlockUpdateFlagALL { unknown1: 1 })
+        .set_ALL(MovementBlock_UpdateFlagALL { unknown1: 1 })
         .set_SELF();
 
     SMSG_UPDATE_OBJECT {
         has_transport: 0,
         objects: vec![Object {
-            update_type: ObjectUpdateType::CREATE_OBJECT2 {
+            update_type: Object_UpdateType::CREATE_OBJECT2 {
                 guid3: Guid::new(4),
                 mask2: UpdateMask::Player(update_mask),
                 movement2: MovementBlock { update_flag },

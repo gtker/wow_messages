@@ -237,7 +237,7 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
-                    flag: RealmRealmFlag::empty()
+                    flag: Realm_RealmFlag::empty()
                         .set_INVALID()
                         .set_OFFLINE()
                         ,
@@ -276,7 +276,7 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
-                    flag: RealmRealmFlag::empty()
+                    flag: Realm_RealmFlag::empty()
                         .set_INVALID()
                         .set_OFFLINE()
                         ,
@@ -315,7 +315,7 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
-                    flag: RealmRealmFlag::empty()
+                    flag: Realm_RealmFlag::empty()
                         .set_INVALID()
                         .set_OFFLINE()
                         ,
@@ -358,8 +358,8 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
-                    flag: RealmRealmFlag::empty()
-                        .set_SPECIFY_BUILD(RealmRealmFlagSPECIFY_BUILD {
+                    flag: Realm_RealmFlag::empty()
+                        .set_SPECIFY_BUILD(Realm_RealmFlagSPECIFY_BUILD {
                             version: Version {
                                 major: 0x1,
                                 minor: 0xC,
@@ -403,8 +403,8 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
-                    flag: RealmRealmFlag::empty()
-                        .set_SPECIFY_BUILD(RealmRealmFlagSPECIFY_BUILD {
+                    flag: Realm_RealmFlag::empty()
+                        .set_SPECIFY_BUILD(Realm_RealmFlagSPECIFY_BUILD {
                             version: Version {
                                 major: 0x1,
                                 minor: 0xC,
@@ -448,8 +448,8 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
-                    flag: RealmRealmFlag::empty()
-                        .set_SPECIFY_BUILD(RealmRealmFlagSPECIFY_BUILD {
+                    flag: Realm_RealmFlag::empty()
+                        .set_SPECIFY_BUILD(Realm_RealmFlagSPECIFY_BUILD {
                             version: Version {
                                 major: 0x1,
                                 minor: 0xC,

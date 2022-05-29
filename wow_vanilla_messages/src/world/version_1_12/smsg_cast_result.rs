@@ -13,7 +13,7 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_CAST_RESULT {
     pub spell: u32,
-    pub result: SMSG_CAST_RESULTSimpleSpellCastResult,
+    pub result: SMSG_CAST_RESULT_SimpleSpellCastResult,
 }
 
 impl ServerMessage for SMSG_CAST_RESULT {
@@ -25,39 +25,39 @@ impl ServerMessage for SMSG_CAST_RESULT {
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         match &self.result {
-            SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS {
+            SMSG_CAST_RESULT_SimpleSpellCastResult::SUCCESS {
                 reason,
             } => {
                 // reason: CastFailureReason
                 w.write_all(&(reason.as_int() as u8).to_le_bytes())?;
 
                 match &reason {
-                    SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT => {}
-                    SMSG_CAST_RESULTCastFailureReason::ALREADY_AT_FULL_HEALTH => {}
-                    SMSG_CAST_RESULTCastFailureReason::ALREADY_AT_FULL_POWER => {}
-                    SMSG_CAST_RESULTCastFailureReason::ALREADY_BEING_TAMED => {}
-                    SMSG_CAST_RESULTCastFailureReason::ALREADY_HAVE_CHARM => {}
-                    SMSG_CAST_RESULTCastFailureReason::ALREADY_HAVE_SUMMON => {}
-                    SMSG_CAST_RESULTCastFailureReason::ALREADY_OPEN => {}
-                    SMSG_CAST_RESULTCastFailureReason::AURA_BOUNCED => {}
-                    SMSG_CAST_RESULTCastFailureReason::AUTOTRACK_INTERRUPTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::BAD_IMPLICIT_TARGETS => {}
-                    SMSG_CAST_RESULTCastFailureReason::BAD_TARGETS => {}
-                    SMSG_CAST_RESULTCastFailureReason::CANT_BE_CHARMED => {}
-                    SMSG_CAST_RESULTCastFailureReason::CANT_BE_DISENCHANTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::CANT_BE_PROSPECTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::CANT_CAST_ON_TAPPED => {}
-                    SMSG_CAST_RESULTCastFailureReason::CANT_DUEL_WHILE_INVISIBLE => {}
-                    SMSG_CAST_RESULTCastFailureReason::CANT_DUEL_WHILE_STEALTHED => {}
-                    SMSG_CAST_RESULTCastFailureReason::CANT_STEALTH => {}
-                    SMSG_CAST_RESULTCastFailureReason::CASTER_AURASTATE => {}
-                    SMSG_CAST_RESULTCastFailureReason::CASTER_DEAD => {}
-                    SMSG_CAST_RESULTCastFailureReason::CHARMED => {}
-                    SMSG_CAST_RESULTCastFailureReason::CHEST_IN_USE => {}
-                    SMSG_CAST_RESULTCastFailureReason::CONFUSED => {}
-                    SMSG_CAST_RESULTCastFailureReason::DONT_REPORT => {}
-                    SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM => {}
-                    SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS {
+                    SMSG_CAST_RESULT_CastFailureReason::AFFECTING_COMBAT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ALREADY_AT_FULL_HEALTH => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ALREADY_AT_FULL_POWER => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ALREADY_BEING_TAMED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ALREADY_HAVE_CHARM => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ALREADY_HAVE_SUMMON => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ALREADY_OPEN => {}
+                    SMSG_CAST_RESULT_CastFailureReason::AURA_BOUNCED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::AUTOTRACK_INTERRUPTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::BAD_IMPLICIT_TARGETS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::BAD_TARGETS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CANT_BE_CHARMED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CANT_BE_DISENCHANTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CANT_BE_PROSPECTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CANT_CAST_ON_TAPPED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CANT_DUEL_WHILE_INVISIBLE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CANT_DUEL_WHILE_STEALTHED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CANT_STEALTH => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CASTER_AURASTATE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CASTER_DEAD => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CHARMED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CHEST_IN_USE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::CONFUSED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::DONT_REPORT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::EQUIPPED_ITEM => {}
+                    SMSG_CAST_RESULT_CastFailureReason::EQUIPPED_ITEM_CLASS {
                         equipped_item_class,
                         equipped_item_inventory_type_mask,
                         equipped_item_subclass_mask,
@@ -72,142 +72,142 @@ impl ServerMessage for SMSG_CAST_RESULT {
                         w.write_all(&equipped_item_inventory_type_mask.to_le_bytes())?;
 
                     }
-                    SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND => {}
-                    SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS_OFFHAND => {}
-                    SMSG_CAST_RESULTCastFailureReason::ERROR => {}
-                    SMSG_CAST_RESULTCastFailureReason::FIZZLE => {}
-                    SMSG_CAST_RESULTCastFailureReason::FLEEING => {}
-                    SMSG_CAST_RESULTCastFailureReason::FOOD_LOWLEVEL => {}
-                    SMSG_CAST_RESULTCastFailureReason::HIGHLEVEL => {}
-                    SMSG_CAST_RESULTCastFailureReason::HUNGER_SATIATED => {}
-                    SMSG_CAST_RESULTCastFailureReason::IMMUNE => {}
-                    SMSG_CAST_RESULTCastFailureReason::INTERRUPTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::INTERRUPTED_COMBAT => {}
-                    SMSG_CAST_RESULTCastFailureReason::ITEM_ALREADY_ENCHANTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::ITEM_GONE => {}
-                    SMSG_CAST_RESULTCastFailureReason::ITEM_NOT_FOUND => {}
-                    SMSG_CAST_RESULTCastFailureReason::ITEM_NOT_READY => {}
-                    SMSG_CAST_RESULTCastFailureReason::LEVEL_REQUIREMENT => {}
-                    SMSG_CAST_RESULTCastFailureReason::LINE_OF_SIGHT => {}
-                    SMSG_CAST_RESULTCastFailureReason::LOWLEVEL => {}
-                    SMSG_CAST_RESULTCastFailureReason::LOW_CASTLEVEL => {}
-                    SMSG_CAST_RESULTCastFailureReason::MAINHAND_EMPTY => {}
-                    SMSG_CAST_RESULTCastFailureReason::MOVING => {}
-                    SMSG_CAST_RESULTCastFailureReason::NEED_AMMO => {}
-                    SMSG_CAST_RESULTCastFailureReason::NEED_AMMO_POUCH => {}
-                    SMSG_CAST_RESULTCastFailureReason::NEED_EXOTIC_AMMO => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOPATH => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_BEHIND => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_FISHABLE => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_HERE => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_INFRONT => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_IN_CONTROL => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_KNOWN => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_MOUNTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_ON_TAXI => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_ON_TRANSPORT => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_READY => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_SHAPESHIFT => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_STANDING => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_TRADEABLE => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_TRADING => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_UNSHEATHED => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_WHILE_GHOST => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_AMMO => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_CHARGES_REMAIN => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_CHAMPION => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_COMBO_POINTS => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_DUELING => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_ENDURANCE => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_FISH => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_ITEMS_WHILE_SHAPESHIFTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_MOUNTS_ALLOWED => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_PET => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_POWER => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOTHING_TO_DISPEL => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOTHING_TO_STEAL => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_ABOVEWATER => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_DAYTIME => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_INDOORS => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_MOUNTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_NIGHTTIME => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_OUTDOORS => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_SHAPESHIFT => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_STEALTHED => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_UNDERWATER => {}
-                    SMSG_CAST_RESULTCastFailureReason::OUT_OF_RANGE => {}
-                    SMSG_CAST_RESULTCastFailureReason::PACIFIED => {}
-                    SMSG_CAST_RESULTCastFailureReason::POSSESSED => {}
-                    SMSG_CAST_RESULTCastFailureReason::REAGENTS => {}
-                    SMSG_CAST_RESULTCastFailureReason::REQUIRES_AREA {
+                    SMSG_CAST_RESULT_CastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND => {}
+                    SMSG_CAST_RESULT_CastFailureReason::EQUIPPED_ITEM_CLASS_OFFHAND => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ERROR => {}
+                    SMSG_CAST_RESULT_CastFailureReason::FIZZLE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::FLEEING => {}
+                    SMSG_CAST_RESULT_CastFailureReason::FOOD_LOWLEVEL => {}
+                    SMSG_CAST_RESULT_CastFailureReason::HIGHLEVEL => {}
+                    SMSG_CAST_RESULT_CastFailureReason::HUNGER_SATIATED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::IMMUNE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::INTERRUPTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::INTERRUPTED_COMBAT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ITEM_ALREADY_ENCHANTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ITEM_GONE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ITEM_NOT_FOUND => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ITEM_NOT_READY => {}
+                    SMSG_CAST_RESULT_CastFailureReason::LEVEL_REQUIREMENT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::LINE_OF_SIGHT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::LOWLEVEL => {}
+                    SMSG_CAST_RESULT_CastFailureReason::LOW_CASTLEVEL => {}
+                    SMSG_CAST_RESULT_CastFailureReason::MAINHAND_EMPTY => {}
+                    SMSG_CAST_RESULT_CastFailureReason::MOVING => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NEED_AMMO => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NEED_AMMO_POUCH => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NEED_EXOTIC_AMMO => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOPATH => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_BEHIND => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_FISHABLE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_HERE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_INFRONT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_IN_CONTROL => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_KNOWN => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_MOUNTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_ON_TAXI => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_ON_TRANSPORT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_READY => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_SHAPESHIFT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_STANDING => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_TRADEABLE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_TRADING => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_UNSHEATHED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_WHILE_GHOST => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_AMMO => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_CHARGES_REMAIN => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_CHAMPION => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_COMBO_POINTS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_DUELING => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_ENDURANCE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_FISH => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_ITEMS_WHILE_SHAPESHIFTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_MOUNTS_ALLOWED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_PET => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_POWER => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOTHING_TO_DISPEL => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOTHING_TO_STEAL => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_ABOVEWATER => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_DAYTIME => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_INDOORS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_MOUNTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_NIGHTTIME => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_OUTDOORS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_SHAPESHIFT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_STEALTHED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_UNDERWATER => {}
+                    SMSG_CAST_RESULT_CastFailureReason::OUT_OF_RANGE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::PACIFIED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::POSSESSED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::REAGENTS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::REQUIRES_AREA {
                         area,
                     } => {
                         // area: Area
                         w.write_all(&(area.as_int() as u32).to_le_bytes())?;
 
                     }
-                    SMSG_CAST_RESULTCastFailureReason::REQUIRES_SPELL_FOCUS {
+                    SMSG_CAST_RESULT_CastFailureReason::REQUIRES_SPELL_FOCUS {
                         required_spell_focus,
                     } => {
                         // required_spell_focus: u32
                         w.write_all(&required_spell_focus.to_le_bytes())?;
 
                     }
-                    SMSG_CAST_RESULTCastFailureReason::ROOTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::SILENCED => {}
-                    SMSG_CAST_RESULTCastFailureReason::SPELL_IN_PROGRESS => {}
-                    SMSG_CAST_RESULTCastFailureReason::SPELL_LEARNED => {}
-                    SMSG_CAST_RESULTCastFailureReason::SPELL_UNAVAILABLE => {}
-                    SMSG_CAST_RESULTCastFailureReason::STUNNED => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGETS_DEAD => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_AFFECTING_COMBAT => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_AURASTATE => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_DUELING => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_ENEMY => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_ENRAGED => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_FRIENDLY => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_IN_COMBAT => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_IS_PLAYER => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_DEAD => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_IN_PARTY => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_LOOTED => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_PLAYER => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_NO_POCKETS => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_NO_WEAPONS => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_UNSKINNABLE => {}
-                    SMSG_CAST_RESULTCastFailureReason::THIRST_SATIATED => {}
-                    SMSG_CAST_RESULTCastFailureReason::TOO_CLOSE => {}
-                    SMSG_CAST_RESULTCastFailureReason::TOO_MANY_OF_ITEM => {}
-                    SMSG_CAST_RESULTCastFailureReason::TOTEMS => {}
-                    SMSG_CAST_RESULTCastFailureReason::TRAINING_POINTS => {}
-                    SMSG_CAST_RESULTCastFailureReason::TRY_AGAIN => {}
-                    SMSG_CAST_RESULTCastFailureReason::UNIT_NOT_BEHIND => {}
-                    SMSG_CAST_RESULTCastFailureReason::UNIT_NOT_INFRONT => {}
-                    SMSG_CAST_RESULTCastFailureReason::WRONG_PET_FOOD => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_WHILE_FATIGUED => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_IN_INSTANCE => {}
-                    SMSG_CAST_RESULTCastFailureReason::NOT_WHILE_TRADING => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_IN_RAID => {}
-                    SMSG_CAST_RESULTCastFailureReason::DISENCHANT_WHILE_LOOTING => {}
-                    SMSG_CAST_RESULTCastFailureReason::PROSPECT_WHILE_LOOTING => {}
-                    SMSG_CAST_RESULTCastFailureReason::PROSPECT_NEED_MORE => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_FREEFORALL => {}
-                    SMSG_CAST_RESULTCastFailureReason::NO_EDIBLE_CORPSES => {}
-                    SMSG_CAST_RESULTCastFailureReason::ONLY_BATTLEGROUNDS => {}
-                    SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_GHOST => {}
-                    SMSG_CAST_RESULTCastFailureReason::TOO_MANY_SKILLS => {}
-                    SMSG_CAST_RESULTCastFailureReason::TRANSFORM_UNUSABLE => {}
-                    SMSG_CAST_RESULTCastFailureReason::WRONG_WEATHER => {}
-                    SMSG_CAST_RESULTCastFailureReason::DAMAGE_IMMUNE => {}
-                    SMSG_CAST_RESULTCastFailureReason::PREVENTED_BY_MECHANIC => {}
-                    SMSG_CAST_RESULTCastFailureReason::PLAY_TIME => {}
-                    SMSG_CAST_RESULTCastFailureReason::REPUTATION => {}
-                    SMSG_CAST_RESULTCastFailureReason::MIN_SKILL => {}
-                    SMSG_CAST_RESULTCastFailureReason::UNKNOWN => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ROOTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::SILENCED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::SPELL_IN_PROGRESS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::SPELL_LEARNED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::SPELL_UNAVAILABLE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::STUNNED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGETS_DEAD => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_AFFECTING_COMBAT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_AURASTATE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_DUELING => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_ENEMY => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_ENRAGED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_FRIENDLY => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_IN_COMBAT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_IS_PLAYER => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_DEAD => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_IN_PARTY => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_LOOTED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_PLAYER => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_NO_POCKETS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_NO_WEAPONS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_UNSKINNABLE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::THIRST_SATIATED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TOO_CLOSE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TOO_MANY_OF_ITEM => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TOTEMS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TRAINING_POINTS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TRY_AGAIN => {}
+                    SMSG_CAST_RESULT_CastFailureReason::UNIT_NOT_BEHIND => {}
+                    SMSG_CAST_RESULT_CastFailureReason::UNIT_NOT_INFRONT => {}
+                    SMSG_CAST_RESULT_CastFailureReason::WRONG_PET_FOOD => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_WHILE_FATIGUED => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_IN_INSTANCE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NOT_WHILE_TRADING => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_IN_RAID => {}
+                    SMSG_CAST_RESULT_CastFailureReason::DISENCHANT_WHILE_LOOTING => {}
+                    SMSG_CAST_RESULT_CastFailureReason::PROSPECT_WHILE_LOOTING => {}
+                    SMSG_CAST_RESULT_CastFailureReason::PROSPECT_NEED_MORE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_FREEFORALL => {}
+                    SMSG_CAST_RESULT_CastFailureReason::NO_EDIBLE_CORPSES => {}
+                    SMSG_CAST_RESULT_CastFailureReason::ONLY_BATTLEGROUNDS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_GHOST => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TOO_MANY_SKILLS => {}
+                    SMSG_CAST_RESULT_CastFailureReason::TRANSFORM_UNUSABLE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::WRONG_WEATHER => {}
+                    SMSG_CAST_RESULT_CastFailureReason::DAMAGE_IMMUNE => {}
+                    SMSG_CAST_RESULT_CastFailureReason::PREVENTED_BY_MECHANIC => {}
+                    SMSG_CAST_RESULT_CastFailureReason::PLAY_TIME => {}
+                    SMSG_CAST_RESULT_CastFailureReason::REPUTATION => {}
+                    SMSG_CAST_RESULT_CastFailureReason::MIN_SKILL => {}
+                    SMSG_CAST_RESULT_CastFailureReason::UNKNOWN => {}
                 }
 
             }
-            SMSG_CAST_RESULTSimpleSpellCastResult::FAILURE => {}
+            SMSG_CAST_RESULT_SimpleSpellCastResult::FAILURE => {}
         }
 
         Ok(())
@@ -231,31 +231,31 @@ impl ServerMessage for SMSG_CAST_RESULT {
                 let reason: CastFailureReason = crate::util::read_u8_le(r)?.try_into()?;
 
                 let reason_if = match reason {
-                    CastFailureReason::AFFECTING_COMBAT => SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT,
-                    CastFailureReason::ALREADY_AT_FULL_HEALTH => SMSG_CAST_RESULTCastFailureReason::ALREADY_AT_FULL_HEALTH,
-                    CastFailureReason::ALREADY_AT_FULL_POWER => SMSG_CAST_RESULTCastFailureReason::ALREADY_AT_FULL_POWER,
-                    CastFailureReason::ALREADY_BEING_TAMED => SMSG_CAST_RESULTCastFailureReason::ALREADY_BEING_TAMED,
-                    CastFailureReason::ALREADY_HAVE_CHARM => SMSG_CAST_RESULTCastFailureReason::ALREADY_HAVE_CHARM,
-                    CastFailureReason::ALREADY_HAVE_SUMMON => SMSG_CAST_RESULTCastFailureReason::ALREADY_HAVE_SUMMON,
-                    CastFailureReason::ALREADY_OPEN => SMSG_CAST_RESULTCastFailureReason::ALREADY_OPEN,
-                    CastFailureReason::AURA_BOUNCED => SMSG_CAST_RESULTCastFailureReason::AURA_BOUNCED,
-                    CastFailureReason::AUTOTRACK_INTERRUPTED => SMSG_CAST_RESULTCastFailureReason::AUTOTRACK_INTERRUPTED,
-                    CastFailureReason::BAD_IMPLICIT_TARGETS => SMSG_CAST_RESULTCastFailureReason::BAD_IMPLICIT_TARGETS,
-                    CastFailureReason::BAD_TARGETS => SMSG_CAST_RESULTCastFailureReason::BAD_TARGETS,
-                    CastFailureReason::CANT_BE_CHARMED => SMSG_CAST_RESULTCastFailureReason::CANT_BE_CHARMED,
-                    CastFailureReason::CANT_BE_DISENCHANTED => SMSG_CAST_RESULTCastFailureReason::CANT_BE_DISENCHANTED,
-                    CastFailureReason::CANT_BE_PROSPECTED => SMSG_CAST_RESULTCastFailureReason::CANT_BE_PROSPECTED,
-                    CastFailureReason::CANT_CAST_ON_TAPPED => SMSG_CAST_RESULTCastFailureReason::CANT_CAST_ON_TAPPED,
-                    CastFailureReason::CANT_DUEL_WHILE_INVISIBLE => SMSG_CAST_RESULTCastFailureReason::CANT_DUEL_WHILE_INVISIBLE,
-                    CastFailureReason::CANT_DUEL_WHILE_STEALTHED => SMSG_CAST_RESULTCastFailureReason::CANT_DUEL_WHILE_STEALTHED,
-                    CastFailureReason::CANT_STEALTH => SMSG_CAST_RESULTCastFailureReason::CANT_STEALTH,
-                    CastFailureReason::CASTER_AURASTATE => SMSG_CAST_RESULTCastFailureReason::CASTER_AURASTATE,
-                    CastFailureReason::CASTER_DEAD => SMSG_CAST_RESULTCastFailureReason::CASTER_DEAD,
-                    CastFailureReason::CHARMED => SMSG_CAST_RESULTCastFailureReason::CHARMED,
-                    CastFailureReason::CHEST_IN_USE => SMSG_CAST_RESULTCastFailureReason::CHEST_IN_USE,
-                    CastFailureReason::CONFUSED => SMSG_CAST_RESULTCastFailureReason::CONFUSED,
-                    CastFailureReason::DONT_REPORT => SMSG_CAST_RESULTCastFailureReason::DONT_REPORT,
-                    CastFailureReason::EQUIPPED_ITEM => SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM,
+                    CastFailureReason::AFFECTING_COMBAT => SMSG_CAST_RESULT_CastFailureReason::AFFECTING_COMBAT,
+                    CastFailureReason::ALREADY_AT_FULL_HEALTH => SMSG_CAST_RESULT_CastFailureReason::ALREADY_AT_FULL_HEALTH,
+                    CastFailureReason::ALREADY_AT_FULL_POWER => SMSG_CAST_RESULT_CastFailureReason::ALREADY_AT_FULL_POWER,
+                    CastFailureReason::ALREADY_BEING_TAMED => SMSG_CAST_RESULT_CastFailureReason::ALREADY_BEING_TAMED,
+                    CastFailureReason::ALREADY_HAVE_CHARM => SMSG_CAST_RESULT_CastFailureReason::ALREADY_HAVE_CHARM,
+                    CastFailureReason::ALREADY_HAVE_SUMMON => SMSG_CAST_RESULT_CastFailureReason::ALREADY_HAVE_SUMMON,
+                    CastFailureReason::ALREADY_OPEN => SMSG_CAST_RESULT_CastFailureReason::ALREADY_OPEN,
+                    CastFailureReason::AURA_BOUNCED => SMSG_CAST_RESULT_CastFailureReason::AURA_BOUNCED,
+                    CastFailureReason::AUTOTRACK_INTERRUPTED => SMSG_CAST_RESULT_CastFailureReason::AUTOTRACK_INTERRUPTED,
+                    CastFailureReason::BAD_IMPLICIT_TARGETS => SMSG_CAST_RESULT_CastFailureReason::BAD_IMPLICIT_TARGETS,
+                    CastFailureReason::BAD_TARGETS => SMSG_CAST_RESULT_CastFailureReason::BAD_TARGETS,
+                    CastFailureReason::CANT_BE_CHARMED => SMSG_CAST_RESULT_CastFailureReason::CANT_BE_CHARMED,
+                    CastFailureReason::CANT_BE_DISENCHANTED => SMSG_CAST_RESULT_CastFailureReason::CANT_BE_DISENCHANTED,
+                    CastFailureReason::CANT_BE_PROSPECTED => SMSG_CAST_RESULT_CastFailureReason::CANT_BE_PROSPECTED,
+                    CastFailureReason::CANT_CAST_ON_TAPPED => SMSG_CAST_RESULT_CastFailureReason::CANT_CAST_ON_TAPPED,
+                    CastFailureReason::CANT_DUEL_WHILE_INVISIBLE => SMSG_CAST_RESULT_CastFailureReason::CANT_DUEL_WHILE_INVISIBLE,
+                    CastFailureReason::CANT_DUEL_WHILE_STEALTHED => SMSG_CAST_RESULT_CastFailureReason::CANT_DUEL_WHILE_STEALTHED,
+                    CastFailureReason::CANT_STEALTH => SMSG_CAST_RESULT_CastFailureReason::CANT_STEALTH,
+                    CastFailureReason::CASTER_AURASTATE => SMSG_CAST_RESULT_CastFailureReason::CASTER_AURASTATE,
+                    CastFailureReason::CASTER_DEAD => SMSG_CAST_RESULT_CastFailureReason::CASTER_DEAD,
+                    CastFailureReason::CHARMED => SMSG_CAST_RESULT_CastFailureReason::CHARMED,
+                    CastFailureReason::CHEST_IN_USE => SMSG_CAST_RESULT_CastFailureReason::CHEST_IN_USE,
+                    CastFailureReason::CONFUSED => SMSG_CAST_RESULT_CastFailureReason::CONFUSED,
+                    CastFailureReason::DONT_REPORT => SMSG_CAST_RESULT_CastFailureReason::DONT_REPORT,
+                    CastFailureReason::EQUIPPED_ITEM => SMSG_CAST_RESULT_CastFailureReason::EQUIPPED_ITEM,
                     CastFailureReason::EQUIPPED_ITEM_CLASS => {
                         // equipped_item_class: u32
                         let equipped_item_class = crate::util::read_u32_le(r)?;
@@ -266,84 +266,84 @@ impl ServerMessage for SMSG_CAST_RESULT {
                         // equipped_item_inventory_type_mask: u32
                         let equipped_item_inventory_type_mask = crate::util::read_u32_le(r)?;
 
-                        SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS {
+                        SMSG_CAST_RESULT_CastFailureReason::EQUIPPED_ITEM_CLASS {
                             equipped_item_class,
                             equipped_item_inventory_type_mask,
                             equipped_item_subclass_mask,
                         }
                     }
-                    CastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND => SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND,
-                    CastFailureReason::EQUIPPED_ITEM_CLASS_OFFHAND => SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS_OFFHAND,
-                    CastFailureReason::ERROR => SMSG_CAST_RESULTCastFailureReason::ERROR,
-                    CastFailureReason::FIZZLE => SMSG_CAST_RESULTCastFailureReason::FIZZLE,
-                    CastFailureReason::FLEEING => SMSG_CAST_RESULTCastFailureReason::FLEEING,
-                    CastFailureReason::FOOD_LOWLEVEL => SMSG_CAST_RESULTCastFailureReason::FOOD_LOWLEVEL,
-                    CastFailureReason::HIGHLEVEL => SMSG_CAST_RESULTCastFailureReason::HIGHLEVEL,
-                    CastFailureReason::HUNGER_SATIATED => SMSG_CAST_RESULTCastFailureReason::HUNGER_SATIATED,
-                    CastFailureReason::IMMUNE => SMSG_CAST_RESULTCastFailureReason::IMMUNE,
-                    CastFailureReason::INTERRUPTED => SMSG_CAST_RESULTCastFailureReason::INTERRUPTED,
-                    CastFailureReason::INTERRUPTED_COMBAT => SMSG_CAST_RESULTCastFailureReason::INTERRUPTED_COMBAT,
-                    CastFailureReason::ITEM_ALREADY_ENCHANTED => SMSG_CAST_RESULTCastFailureReason::ITEM_ALREADY_ENCHANTED,
-                    CastFailureReason::ITEM_GONE => SMSG_CAST_RESULTCastFailureReason::ITEM_GONE,
-                    CastFailureReason::ITEM_NOT_FOUND => SMSG_CAST_RESULTCastFailureReason::ITEM_NOT_FOUND,
-                    CastFailureReason::ITEM_NOT_READY => SMSG_CAST_RESULTCastFailureReason::ITEM_NOT_READY,
-                    CastFailureReason::LEVEL_REQUIREMENT => SMSG_CAST_RESULTCastFailureReason::LEVEL_REQUIREMENT,
-                    CastFailureReason::LINE_OF_SIGHT => SMSG_CAST_RESULTCastFailureReason::LINE_OF_SIGHT,
-                    CastFailureReason::LOWLEVEL => SMSG_CAST_RESULTCastFailureReason::LOWLEVEL,
-                    CastFailureReason::LOW_CASTLEVEL => SMSG_CAST_RESULTCastFailureReason::LOW_CASTLEVEL,
-                    CastFailureReason::MAINHAND_EMPTY => SMSG_CAST_RESULTCastFailureReason::MAINHAND_EMPTY,
-                    CastFailureReason::MOVING => SMSG_CAST_RESULTCastFailureReason::MOVING,
-                    CastFailureReason::NEED_AMMO => SMSG_CAST_RESULTCastFailureReason::NEED_AMMO,
-                    CastFailureReason::NEED_AMMO_POUCH => SMSG_CAST_RESULTCastFailureReason::NEED_AMMO_POUCH,
-                    CastFailureReason::NEED_EXOTIC_AMMO => SMSG_CAST_RESULTCastFailureReason::NEED_EXOTIC_AMMO,
-                    CastFailureReason::NOPATH => SMSG_CAST_RESULTCastFailureReason::NOPATH,
-                    CastFailureReason::NOT_BEHIND => SMSG_CAST_RESULTCastFailureReason::NOT_BEHIND,
-                    CastFailureReason::NOT_FISHABLE => SMSG_CAST_RESULTCastFailureReason::NOT_FISHABLE,
-                    CastFailureReason::NOT_HERE => SMSG_CAST_RESULTCastFailureReason::NOT_HERE,
-                    CastFailureReason::NOT_INFRONT => SMSG_CAST_RESULTCastFailureReason::NOT_INFRONT,
-                    CastFailureReason::NOT_IN_CONTROL => SMSG_CAST_RESULTCastFailureReason::NOT_IN_CONTROL,
-                    CastFailureReason::NOT_KNOWN => SMSG_CAST_RESULTCastFailureReason::NOT_KNOWN,
-                    CastFailureReason::NOT_MOUNTED => SMSG_CAST_RESULTCastFailureReason::NOT_MOUNTED,
-                    CastFailureReason::NOT_ON_TAXI => SMSG_CAST_RESULTCastFailureReason::NOT_ON_TAXI,
-                    CastFailureReason::NOT_ON_TRANSPORT => SMSG_CAST_RESULTCastFailureReason::NOT_ON_TRANSPORT,
-                    CastFailureReason::NOT_READY => SMSG_CAST_RESULTCastFailureReason::NOT_READY,
-                    CastFailureReason::NOT_SHAPESHIFT => SMSG_CAST_RESULTCastFailureReason::NOT_SHAPESHIFT,
-                    CastFailureReason::NOT_STANDING => SMSG_CAST_RESULTCastFailureReason::NOT_STANDING,
-                    CastFailureReason::NOT_TRADEABLE => SMSG_CAST_RESULTCastFailureReason::NOT_TRADEABLE,
-                    CastFailureReason::NOT_TRADING => SMSG_CAST_RESULTCastFailureReason::NOT_TRADING,
-                    CastFailureReason::NOT_UNSHEATHED => SMSG_CAST_RESULTCastFailureReason::NOT_UNSHEATHED,
-                    CastFailureReason::NOT_WHILE_GHOST => SMSG_CAST_RESULTCastFailureReason::NOT_WHILE_GHOST,
-                    CastFailureReason::NO_AMMO => SMSG_CAST_RESULTCastFailureReason::NO_AMMO,
-                    CastFailureReason::NO_CHARGES_REMAIN => SMSG_CAST_RESULTCastFailureReason::NO_CHARGES_REMAIN,
-                    CastFailureReason::NO_CHAMPION => SMSG_CAST_RESULTCastFailureReason::NO_CHAMPION,
-                    CastFailureReason::NO_COMBO_POINTS => SMSG_CAST_RESULTCastFailureReason::NO_COMBO_POINTS,
-                    CastFailureReason::NO_DUELING => SMSG_CAST_RESULTCastFailureReason::NO_DUELING,
-                    CastFailureReason::NO_ENDURANCE => SMSG_CAST_RESULTCastFailureReason::NO_ENDURANCE,
-                    CastFailureReason::NO_FISH => SMSG_CAST_RESULTCastFailureReason::NO_FISH,
-                    CastFailureReason::NO_ITEMS_WHILE_SHAPESHIFTED => SMSG_CAST_RESULTCastFailureReason::NO_ITEMS_WHILE_SHAPESHIFTED,
-                    CastFailureReason::NO_MOUNTS_ALLOWED => SMSG_CAST_RESULTCastFailureReason::NO_MOUNTS_ALLOWED,
-                    CastFailureReason::NO_PET => SMSG_CAST_RESULTCastFailureReason::NO_PET,
-                    CastFailureReason::NO_POWER => SMSG_CAST_RESULTCastFailureReason::NO_POWER,
-                    CastFailureReason::NOTHING_TO_DISPEL => SMSG_CAST_RESULTCastFailureReason::NOTHING_TO_DISPEL,
-                    CastFailureReason::NOTHING_TO_STEAL => SMSG_CAST_RESULTCastFailureReason::NOTHING_TO_STEAL,
-                    CastFailureReason::ONLY_ABOVEWATER => SMSG_CAST_RESULTCastFailureReason::ONLY_ABOVEWATER,
-                    CastFailureReason::ONLY_DAYTIME => SMSG_CAST_RESULTCastFailureReason::ONLY_DAYTIME,
-                    CastFailureReason::ONLY_INDOORS => SMSG_CAST_RESULTCastFailureReason::ONLY_INDOORS,
-                    CastFailureReason::ONLY_MOUNTED => SMSG_CAST_RESULTCastFailureReason::ONLY_MOUNTED,
-                    CastFailureReason::ONLY_NIGHTTIME => SMSG_CAST_RESULTCastFailureReason::ONLY_NIGHTTIME,
-                    CastFailureReason::ONLY_OUTDOORS => SMSG_CAST_RESULTCastFailureReason::ONLY_OUTDOORS,
-                    CastFailureReason::ONLY_SHAPESHIFT => SMSG_CAST_RESULTCastFailureReason::ONLY_SHAPESHIFT,
-                    CastFailureReason::ONLY_STEALTHED => SMSG_CAST_RESULTCastFailureReason::ONLY_STEALTHED,
-                    CastFailureReason::ONLY_UNDERWATER => SMSG_CAST_RESULTCastFailureReason::ONLY_UNDERWATER,
-                    CastFailureReason::OUT_OF_RANGE => SMSG_CAST_RESULTCastFailureReason::OUT_OF_RANGE,
-                    CastFailureReason::PACIFIED => SMSG_CAST_RESULTCastFailureReason::PACIFIED,
-                    CastFailureReason::POSSESSED => SMSG_CAST_RESULTCastFailureReason::POSSESSED,
-                    CastFailureReason::REAGENTS => SMSG_CAST_RESULTCastFailureReason::REAGENTS,
+                    CastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND => SMSG_CAST_RESULT_CastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND,
+                    CastFailureReason::EQUIPPED_ITEM_CLASS_OFFHAND => SMSG_CAST_RESULT_CastFailureReason::EQUIPPED_ITEM_CLASS_OFFHAND,
+                    CastFailureReason::ERROR => SMSG_CAST_RESULT_CastFailureReason::ERROR,
+                    CastFailureReason::FIZZLE => SMSG_CAST_RESULT_CastFailureReason::FIZZLE,
+                    CastFailureReason::FLEEING => SMSG_CAST_RESULT_CastFailureReason::FLEEING,
+                    CastFailureReason::FOOD_LOWLEVEL => SMSG_CAST_RESULT_CastFailureReason::FOOD_LOWLEVEL,
+                    CastFailureReason::HIGHLEVEL => SMSG_CAST_RESULT_CastFailureReason::HIGHLEVEL,
+                    CastFailureReason::HUNGER_SATIATED => SMSG_CAST_RESULT_CastFailureReason::HUNGER_SATIATED,
+                    CastFailureReason::IMMUNE => SMSG_CAST_RESULT_CastFailureReason::IMMUNE,
+                    CastFailureReason::INTERRUPTED => SMSG_CAST_RESULT_CastFailureReason::INTERRUPTED,
+                    CastFailureReason::INTERRUPTED_COMBAT => SMSG_CAST_RESULT_CastFailureReason::INTERRUPTED_COMBAT,
+                    CastFailureReason::ITEM_ALREADY_ENCHANTED => SMSG_CAST_RESULT_CastFailureReason::ITEM_ALREADY_ENCHANTED,
+                    CastFailureReason::ITEM_GONE => SMSG_CAST_RESULT_CastFailureReason::ITEM_GONE,
+                    CastFailureReason::ITEM_NOT_FOUND => SMSG_CAST_RESULT_CastFailureReason::ITEM_NOT_FOUND,
+                    CastFailureReason::ITEM_NOT_READY => SMSG_CAST_RESULT_CastFailureReason::ITEM_NOT_READY,
+                    CastFailureReason::LEVEL_REQUIREMENT => SMSG_CAST_RESULT_CastFailureReason::LEVEL_REQUIREMENT,
+                    CastFailureReason::LINE_OF_SIGHT => SMSG_CAST_RESULT_CastFailureReason::LINE_OF_SIGHT,
+                    CastFailureReason::LOWLEVEL => SMSG_CAST_RESULT_CastFailureReason::LOWLEVEL,
+                    CastFailureReason::LOW_CASTLEVEL => SMSG_CAST_RESULT_CastFailureReason::LOW_CASTLEVEL,
+                    CastFailureReason::MAINHAND_EMPTY => SMSG_CAST_RESULT_CastFailureReason::MAINHAND_EMPTY,
+                    CastFailureReason::MOVING => SMSG_CAST_RESULT_CastFailureReason::MOVING,
+                    CastFailureReason::NEED_AMMO => SMSG_CAST_RESULT_CastFailureReason::NEED_AMMO,
+                    CastFailureReason::NEED_AMMO_POUCH => SMSG_CAST_RESULT_CastFailureReason::NEED_AMMO_POUCH,
+                    CastFailureReason::NEED_EXOTIC_AMMO => SMSG_CAST_RESULT_CastFailureReason::NEED_EXOTIC_AMMO,
+                    CastFailureReason::NOPATH => SMSG_CAST_RESULT_CastFailureReason::NOPATH,
+                    CastFailureReason::NOT_BEHIND => SMSG_CAST_RESULT_CastFailureReason::NOT_BEHIND,
+                    CastFailureReason::NOT_FISHABLE => SMSG_CAST_RESULT_CastFailureReason::NOT_FISHABLE,
+                    CastFailureReason::NOT_HERE => SMSG_CAST_RESULT_CastFailureReason::NOT_HERE,
+                    CastFailureReason::NOT_INFRONT => SMSG_CAST_RESULT_CastFailureReason::NOT_INFRONT,
+                    CastFailureReason::NOT_IN_CONTROL => SMSG_CAST_RESULT_CastFailureReason::NOT_IN_CONTROL,
+                    CastFailureReason::NOT_KNOWN => SMSG_CAST_RESULT_CastFailureReason::NOT_KNOWN,
+                    CastFailureReason::NOT_MOUNTED => SMSG_CAST_RESULT_CastFailureReason::NOT_MOUNTED,
+                    CastFailureReason::NOT_ON_TAXI => SMSG_CAST_RESULT_CastFailureReason::NOT_ON_TAXI,
+                    CastFailureReason::NOT_ON_TRANSPORT => SMSG_CAST_RESULT_CastFailureReason::NOT_ON_TRANSPORT,
+                    CastFailureReason::NOT_READY => SMSG_CAST_RESULT_CastFailureReason::NOT_READY,
+                    CastFailureReason::NOT_SHAPESHIFT => SMSG_CAST_RESULT_CastFailureReason::NOT_SHAPESHIFT,
+                    CastFailureReason::NOT_STANDING => SMSG_CAST_RESULT_CastFailureReason::NOT_STANDING,
+                    CastFailureReason::NOT_TRADEABLE => SMSG_CAST_RESULT_CastFailureReason::NOT_TRADEABLE,
+                    CastFailureReason::NOT_TRADING => SMSG_CAST_RESULT_CastFailureReason::NOT_TRADING,
+                    CastFailureReason::NOT_UNSHEATHED => SMSG_CAST_RESULT_CastFailureReason::NOT_UNSHEATHED,
+                    CastFailureReason::NOT_WHILE_GHOST => SMSG_CAST_RESULT_CastFailureReason::NOT_WHILE_GHOST,
+                    CastFailureReason::NO_AMMO => SMSG_CAST_RESULT_CastFailureReason::NO_AMMO,
+                    CastFailureReason::NO_CHARGES_REMAIN => SMSG_CAST_RESULT_CastFailureReason::NO_CHARGES_REMAIN,
+                    CastFailureReason::NO_CHAMPION => SMSG_CAST_RESULT_CastFailureReason::NO_CHAMPION,
+                    CastFailureReason::NO_COMBO_POINTS => SMSG_CAST_RESULT_CastFailureReason::NO_COMBO_POINTS,
+                    CastFailureReason::NO_DUELING => SMSG_CAST_RESULT_CastFailureReason::NO_DUELING,
+                    CastFailureReason::NO_ENDURANCE => SMSG_CAST_RESULT_CastFailureReason::NO_ENDURANCE,
+                    CastFailureReason::NO_FISH => SMSG_CAST_RESULT_CastFailureReason::NO_FISH,
+                    CastFailureReason::NO_ITEMS_WHILE_SHAPESHIFTED => SMSG_CAST_RESULT_CastFailureReason::NO_ITEMS_WHILE_SHAPESHIFTED,
+                    CastFailureReason::NO_MOUNTS_ALLOWED => SMSG_CAST_RESULT_CastFailureReason::NO_MOUNTS_ALLOWED,
+                    CastFailureReason::NO_PET => SMSG_CAST_RESULT_CastFailureReason::NO_PET,
+                    CastFailureReason::NO_POWER => SMSG_CAST_RESULT_CastFailureReason::NO_POWER,
+                    CastFailureReason::NOTHING_TO_DISPEL => SMSG_CAST_RESULT_CastFailureReason::NOTHING_TO_DISPEL,
+                    CastFailureReason::NOTHING_TO_STEAL => SMSG_CAST_RESULT_CastFailureReason::NOTHING_TO_STEAL,
+                    CastFailureReason::ONLY_ABOVEWATER => SMSG_CAST_RESULT_CastFailureReason::ONLY_ABOVEWATER,
+                    CastFailureReason::ONLY_DAYTIME => SMSG_CAST_RESULT_CastFailureReason::ONLY_DAYTIME,
+                    CastFailureReason::ONLY_INDOORS => SMSG_CAST_RESULT_CastFailureReason::ONLY_INDOORS,
+                    CastFailureReason::ONLY_MOUNTED => SMSG_CAST_RESULT_CastFailureReason::ONLY_MOUNTED,
+                    CastFailureReason::ONLY_NIGHTTIME => SMSG_CAST_RESULT_CastFailureReason::ONLY_NIGHTTIME,
+                    CastFailureReason::ONLY_OUTDOORS => SMSG_CAST_RESULT_CastFailureReason::ONLY_OUTDOORS,
+                    CastFailureReason::ONLY_SHAPESHIFT => SMSG_CAST_RESULT_CastFailureReason::ONLY_SHAPESHIFT,
+                    CastFailureReason::ONLY_STEALTHED => SMSG_CAST_RESULT_CastFailureReason::ONLY_STEALTHED,
+                    CastFailureReason::ONLY_UNDERWATER => SMSG_CAST_RESULT_CastFailureReason::ONLY_UNDERWATER,
+                    CastFailureReason::OUT_OF_RANGE => SMSG_CAST_RESULT_CastFailureReason::OUT_OF_RANGE,
+                    CastFailureReason::PACIFIED => SMSG_CAST_RESULT_CastFailureReason::PACIFIED,
+                    CastFailureReason::POSSESSED => SMSG_CAST_RESULT_CastFailureReason::POSSESSED,
+                    CastFailureReason::REAGENTS => SMSG_CAST_RESULT_CastFailureReason::REAGENTS,
                     CastFailureReason::REQUIRES_AREA => {
                         // area: Area
                         let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
-                        SMSG_CAST_RESULTCastFailureReason::REQUIRES_AREA {
+                        SMSG_CAST_RESULT_CastFailureReason::REQUIRES_AREA {
                             area,
                         }
                     }
@@ -351,68 +351,68 @@ impl ServerMessage for SMSG_CAST_RESULT {
                         // required_spell_focus: u32
                         let required_spell_focus = crate::util::read_u32_le(r)?;
 
-                        SMSG_CAST_RESULTCastFailureReason::REQUIRES_SPELL_FOCUS {
+                        SMSG_CAST_RESULT_CastFailureReason::REQUIRES_SPELL_FOCUS {
                             required_spell_focus,
                         }
                     }
-                    CastFailureReason::ROOTED => SMSG_CAST_RESULTCastFailureReason::ROOTED,
-                    CastFailureReason::SILENCED => SMSG_CAST_RESULTCastFailureReason::SILENCED,
-                    CastFailureReason::SPELL_IN_PROGRESS => SMSG_CAST_RESULTCastFailureReason::SPELL_IN_PROGRESS,
-                    CastFailureReason::SPELL_LEARNED => SMSG_CAST_RESULTCastFailureReason::SPELL_LEARNED,
-                    CastFailureReason::SPELL_UNAVAILABLE => SMSG_CAST_RESULTCastFailureReason::SPELL_UNAVAILABLE,
-                    CastFailureReason::STUNNED => SMSG_CAST_RESULTCastFailureReason::STUNNED,
-                    CastFailureReason::TARGETS_DEAD => SMSG_CAST_RESULTCastFailureReason::TARGETS_DEAD,
-                    CastFailureReason::TARGET_AFFECTING_COMBAT => SMSG_CAST_RESULTCastFailureReason::TARGET_AFFECTING_COMBAT,
-                    CastFailureReason::TARGET_AURASTATE => SMSG_CAST_RESULTCastFailureReason::TARGET_AURASTATE,
-                    CastFailureReason::TARGET_DUELING => SMSG_CAST_RESULTCastFailureReason::TARGET_DUELING,
-                    CastFailureReason::TARGET_ENEMY => SMSG_CAST_RESULTCastFailureReason::TARGET_ENEMY,
-                    CastFailureReason::TARGET_ENRAGED => SMSG_CAST_RESULTCastFailureReason::TARGET_ENRAGED,
-                    CastFailureReason::TARGET_FRIENDLY => SMSG_CAST_RESULTCastFailureReason::TARGET_FRIENDLY,
-                    CastFailureReason::TARGET_IN_COMBAT => SMSG_CAST_RESULTCastFailureReason::TARGET_IN_COMBAT,
-                    CastFailureReason::TARGET_IS_PLAYER => SMSG_CAST_RESULTCastFailureReason::TARGET_IS_PLAYER,
-                    CastFailureReason::TARGET_NOT_DEAD => SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_DEAD,
-                    CastFailureReason::TARGET_NOT_IN_PARTY => SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_IN_PARTY,
-                    CastFailureReason::TARGET_NOT_LOOTED => SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_LOOTED,
-                    CastFailureReason::TARGET_NOT_PLAYER => SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_PLAYER,
-                    CastFailureReason::TARGET_NO_POCKETS => SMSG_CAST_RESULTCastFailureReason::TARGET_NO_POCKETS,
-                    CastFailureReason::TARGET_NO_WEAPONS => SMSG_CAST_RESULTCastFailureReason::TARGET_NO_WEAPONS,
-                    CastFailureReason::TARGET_UNSKINNABLE => SMSG_CAST_RESULTCastFailureReason::TARGET_UNSKINNABLE,
-                    CastFailureReason::THIRST_SATIATED => SMSG_CAST_RESULTCastFailureReason::THIRST_SATIATED,
-                    CastFailureReason::TOO_CLOSE => SMSG_CAST_RESULTCastFailureReason::TOO_CLOSE,
-                    CastFailureReason::TOO_MANY_OF_ITEM => SMSG_CAST_RESULTCastFailureReason::TOO_MANY_OF_ITEM,
-                    CastFailureReason::TOTEMS => SMSG_CAST_RESULTCastFailureReason::TOTEMS,
-                    CastFailureReason::TRAINING_POINTS => SMSG_CAST_RESULTCastFailureReason::TRAINING_POINTS,
-                    CastFailureReason::TRY_AGAIN => SMSG_CAST_RESULTCastFailureReason::TRY_AGAIN,
-                    CastFailureReason::UNIT_NOT_BEHIND => SMSG_CAST_RESULTCastFailureReason::UNIT_NOT_BEHIND,
-                    CastFailureReason::UNIT_NOT_INFRONT => SMSG_CAST_RESULTCastFailureReason::UNIT_NOT_INFRONT,
-                    CastFailureReason::WRONG_PET_FOOD => SMSG_CAST_RESULTCastFailureReason::WRONG_PET_FOOD,
-                    CastFailureReason::NOT_WHILE_FATIGUED => SMSG_CAST_RESULTCastFailureReason::NOT_WHILE_FATIGUED,
-                    CastFailureReason::TARGET_NOT_IN_INSTANCE => SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_IN_INSTANCE,
-                    CastFailureReason::NOT_WHILE_TRADING => SMSG_CAST_RESULTCastFailureReason::NOT_WHILE_TRADING,
-                    CastFailureReason::TARGET_NOT_IN_RAID => SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_IN_RAID,
-                    CastFailureReason::DISENCHANT_WHILE_LOOTING => SMSG_CAST_RESULTCastFailureReason::DISENCHANT_WHILE_LOOTING,
-                    CastFailureReason::PROSPECT_WHILE_LOOTING => SMSG_CAST_RESULTCastFailureReason::PROSPECT_WHILE_LOOTING,
-                    CastFailureReason::PROSPECT_NEED_MORE => SMSG_CAST_RESULTCastFailureReason::PROSPECT_NEED_MORE,
-                    CastFailureReason::TARGET_FREEFORALL => SMSG_CAST_RESULTCastFailureReason::TARGET_FREEFORALL,
-                    CastFailureReason::NO_EDIBLE_CORPSES => SMSG_CAST_RESULTCastFailureReason::NO_EDIBLE_CORPSES,
-                    CastFailureReason::ONLY_BATTLEGROUNDS => SMSG_CAST_RESULTCastFailureReason::ONLY_BATTLEGROUNDS,
-                    CastFailureReason::TARGET_NOT_GHOST => SMSG_CAST_RESULTCastFailureReason::TARGET_NOT_GHOST,
-                    CastFailureReason::TOO_MANY_SKILLS => SMSG_CAST_RESULTCastFailureReason::TOO_MANY_SKILLS,
-                    CastFailureReason::TRANSFORM_UNUSABLE => SMSG_CAST_RESULTCastFailureReason::TRANSFORM_UNUSABLE,
-                    CastFailureReason::WRONG_WEATHER => SMSG_CAST_RESULTCastFailureReason::WRONG_WEATHER,
-                    CastFailureReason::DAMAGE_IMMUNE => SMSG_CAST_RESULTCastFailureReason::DAMAGE_IMMUNE,
-                    CastFailureReason::PREVENTED_BY_MECHANIC => SMSG_CAST_RESULTCastFailureReason::PREVENTED_BY_MECHANIC,
-                    CastFailureReason::PLAY_TIME => SMSG_CAST_RESULTCastFailureReason::PLAY_TIME,
-                    CastFailureReason::REPUTATION => SMSG_CAST_RESULTCastFailureReason::REPUTATION,
-                    CastFailureReason::MIN_SKILL => SMSG_CAST_RESULTCastFailureReason::MIN_SKILL,
-                    CastFailureReason::UNKNOWN => SMSG_CAST_RESULTCastFailureReason::UNKNOWN,
+                    CastFailureReason::ROOTED => SMSG_CAST_RESULT_CastFailureReason::ROOTED,
+                    CastFailureReason::SILENCED => SMSG_CAST_RESULT_CastFailureReason::SILENCED,
+                    CastFailureReason::SPELL_IN_PROGRESS => SMSG_CAST_RESULT_CastFailureReason::SPELL_IN_PROGRESS,
+                    CastFailureReason::SPELL_LEARNED => SMSG_CAST_RESULT_CastFailureReason::SPELL_LEARNED,
+                    CastFailureReason::SPELL_UNAVAILABLE => SMSG_CAST_RESULT_CastFailureReason::SPELL_UNAVAILABLE,
+                    CastFailureReason::STUNNED => SMSG_CAST_RESULT_CastFailureReason::STUNNED,
+                    CastFailureReason::TARGETS_DEAD => SMSG_CAST_RESULT_CastFailureReason::TARGETS_DEAD,
+                    CastFailureReason::TARGET_AFFECTING_COMBAT => SMSG_CAST_RESULT_CastFailureReason::TARGET_AFFECTING_COMBAT,
+                    CastFailureReason::TARGET_AURASTATE => SMSG_CAST_RESULT_CastFailureReason::TARGET_AURASTATE,
+                    CastFailureReason::TARGET_DUELING => SMSG_CAST_RESULT_CastFailureReason::TARGET_DUELING,
+                    CastFailureReason::TARGET_ENEMY => SMSG_CAST_RESULT_CastFailureReason::TARGET_ENEMY,
+                    CastFailureReason::TARGET_ENRAGED => SMSG_CAST_RESULT_CastFailureReason::TARGET_ENRAGED,
+                    CastFailureReason::TARGET_FRIENDLY => SMSG_CAST_RESULT_CastFailureReason::TARGET_FRIENDLY,
+                    CastFailureReason::TARGET_IN_COMBAT => SMSG_CAST_RESULT_CastFailureReason::TARGET_IN_COMBAT,
+                    CastFailureReason::TARGET_IS_PLAYER => SMSG_CAST_RESULT_CastFailureReason::TARGET_IS_PLAYER,
+                    CastFailureReason::TARGET_NOT_DEAD => SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_DEAD,
+                    CastFailureReason::TARGET_NOT_IN_PARTY => SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_IN_PARTY,
+                    CastFailureReason::TARGET_NOT_LOOTED => SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_LOOTED,
+                    CastFailureReason::TARGET_NOT_PLAYER => SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_PLAYER,
+                    CastFailureReason::TARGET_NO_POCKETS => SMSG_CAST_RESULT_CastFailureReason::TARGET_NO_POCKETS,
+                    CastFailureReason::TARGET_NO_WEAPONS => SMSG_CAST_RESULT_CastFailureReason::TARGET_NO_WEAPONS,
+                    CastFailureReason::TARGET_UNSKINNABLE => SMSG_CAST_RESULT_CastFailureReason::TARGET_UNSKINNABLE,
+                    CastFailureReason::THIRST_SATIATED => SMSG_CAST_RESULT_CastFailureReason::THIRST_SATIATED,
+                    CastFailureReason::TOO_CLOSE => SMSG_CAST_RESULT_CastFailureReason::TOO_CLOSE,
+                    CastFailureReason::TOO_MANY_OF_ITEM => SMSG_CAST_RESULT_CastFailureReason::TOO_MANY_OF_ITEM,
+                    CastFailureReason::TOTEMS => SMSG_CAST_RESULT_CastFailureReason::TOTEMS,
+                    CastFailureReason::TRAINING_POINTS => SMSG_CAST_RESULT_CastFailureReason::TRAINING_POINTS,
+                    CastFailureReason::TRY_AGAIN => SMSG_CAST_RESULT_CastFailureReason::TRY_AGAIN,
+                    CastFailureReason::UNIT_NOT_BEHIND => SMSG_CAST_RESULT_CastFailureReason::UNIT_NOT_BEHIND,
+                    CastFailureReason::UNIT_NOT_INFRONT => SMSG_CAST_RESULT_CastFailureReason::UNIT_NOT_INFRONT,
+                    CastFailureReason::WRONG_PET_FOOD => SMSG_CAST_RESULT_CastFailureReason::WRONG_PET_FOOD,
+                    CastFailureReason::NOT_WHILE_FATIGUED => SMSG_CAST_RESULT_CastFailureReason::NOT_WHILE_FATIGUED,
+                    CastFailureReason::TARGET_NOT_IN_INSTANCE => SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_IN_INSTANCE,
+                    CastFailureReason::NOT_WHILE_TRADING => SMSG_CAST_RESULT_CastFailureReason::NOT_WHILE_TRADING,
+                    CastFailureReason::TARGET_NOT_IN_RAID => SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_IN_RAID,
+                    CastFailureReason::DISENCHANT_WHILE_LOOTING => SMSG_CAST_RESULT_CastFailureReason::DISENCHANT_WHILE_LOOTING,
+                    CastFailureReason::PROSPECT_WHILE_LOOTING => SMSG_CAST_RESULT_CastFailureReason::PROSPECT_WHILE_LOOTING,
+                    CastFailureReason::PROSPECT_NEED_MORE => SMSG_CAST_RESULT_CastFailureReason::PROSPECT_NEED_MORE,
+                    CastFailureReason::TARGET_FREEFORALL => SMSG_CAST_RESULT_CastFailureReason::TARGET_FREEFORALL,
+                    CastFailureReason::NO_EDIBLE_CORPSES => SMSG_CAST_RESULT_CastFailureReason::NO_EDIBLE_CORPSES,
+                    CastFailureReason::ONLY_BATTLEGROUNDS => SMSG_CAST_RESULT_CastFailureReason::ONLY_BATTLEGROUNDS,
+                    CastFailureReason::TARGET_NOT_GHOST => SMSG_CAST_RESULT_CastFailureReason::TARGET_NOT_GHOST,
+                    CastFailureReason::TOO_MANY_SKILLS => SMSG_CAST_RESULT_CastFailureReason::TOO_MANY_SKILLS,
+                    CastFailureReason::TRANSFORM_UNUSABLE => SMSG_CAST_RESULT_CastFailureReason::TRANSFORM_UNUSABLE,
+                    CastFailureReason::WRONG_WEATHER => SMSG_CAST_RESULT_CastFailureReason::WRONG_WEATHER,
+                    CastFailureReason::DAMAGE_IMMUNE => SMSG_CAST_RESULT_CastFailureReason::DAMAGE_IMMUNE,
+                    CastFailureReason::PREVENTED_BY_MECHANIC => SMSG_CAST_RESULT_CastFailureReason::PREVENTED_BY_MECHANIC,
+                    CastFailureReason::PLAY_TIME => SMSG_CAST_RESULT_CastFailureReason::PLAY_TIME,
+                    CastFailureReason::REPUTATION => SMSG_CAST_RESULT_CastFailureReason::REPUTATION,
+                    CastFailureReason::MIN_SKILL => SMSG_CAST_RESULT_CastFailureReason::MIN_SKILL,
+                    CastFailureReason::UNKNOWN => SMSG_CAST_RESULT_CastFailureReason::UNKNOWN,
                 };
 
-                SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS {
+                SMSG_CAST_RESULT_SimpleSpellCastResult::SUCCESS {
                     reason: reason_if,
                 }
             }
-            SimpleSpellCastResult::FAILURE => SMSG_CAST_RESULTSimpleSpellCastResult::FAILURE,
+            SimpleSpellCastResult::FAILURE => SMSG_CAST_RESULT_SimpleSpellCastResult::FAILURE,
         };
 
         Ok(Self {
@@ -426,12 +426,12 @@ impl ServerMessage for SMSG_CAST_RESULT {
 impl SMSG_CAST_RESULT {
     pub(crate) fn size(&self) -> usize {
         4 // spell: u32
-        + self.result.size() // result: SMSG_CAST_RESULTSimpleSpellCastResult
+        + self.result.size() // result: SMSG_CAST_RESULT_SimpleSpellCastResult
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum SMSG_CAST_RESULTCastFailureReason {
+pub enum SMSG_CAST_RESULT_CastFailureReason {
     AFFECTING_COMBAT,
     ALREADY_AT_FULL_HEALTH,
     ALREADY_AT_FULL_POWER,
@@ -588,14 +588,14 @@ pub enum SMSG_CAST_RESULTCastFailureReason {
     UNKNOWN,
 }
 
-impl Default for SMSG_CAST_RESULTCastFailureReason {
+impl Default for SMSG_CAST_RESULT_CastFailureReason {
     fn default() -> Self {
         // First enumerator without any fields
         Self::AFFECTING_COMBAT
     }
 }
 
-impl SMSG_CAST_RESULTCastFailureReason {
+impl SMSG_CAST_RESULT_CastFailureReason {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::AFFECTING_COMBAT => 0,
@@ -749,7 +749,7 @@ impl SMSG_CAST_RESULTCastFailureReason {
 
 }
 
-impl SMSG_CAST_RESULTCastFailureReason {
+impl SMSG_CAST_RESULT_CastFailureReason {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::AFFECTING_COMBAT => {
@@ -1208,14 +1208,14 @@ impl SMSG_CAST_RESULTCastFailureReason {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum SMSG_CAST_RESULTSimpleSpellCastResult {
+pub enum SMSG_CAST_RESULT_SimpleSpellCastResult {
     SUCCESS {
-        reason: SMSG_CAST_RESULTCastFailureReason,
+        reason: SMSG_CAST_RESULT_CastFailureReason,
     },
     FAILURE,
 }
 
-impl Default for SMSG_CAST_RESULTSimpleSpellCastResult {
+impl Default for SMSG_CAST_RESULT_SimpleSpellCastResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::SUCCESS {
@@ -1224,7 +1224,7 @@ impl Default for SMSG_CAST_RESULTSimpleSpellCastResult {
     }
 }
 
-impl SMSG_CAST_RESULTSimpleSpellCastResult {
+impl SMSG_CAST_RESULT_SimpleSpellCastResult {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SUCCESS { .. } => 0,
@@ -1234,14 +1234,14 @@ impl SMSG_CAST_RESULTSimpleSpellCastResult {
 
 }
 
-impl SMSG_CAST_RESULTSimpleSpellCastResult {
+impl SMSG_CAST_RESULT_SimpleSpellCastResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::SUCCESS {
                 reason,
             } => {
                 1
-                + reason.size() // reason: SMSG_CAST_RESULTCastFailureReason
+                + reason.size() // reason: SMSG_CAST_RESULT_CastFailureReason
             }
             Self::FAILURE => {
                 1

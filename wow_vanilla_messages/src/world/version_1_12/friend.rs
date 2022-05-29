@@ -12,7 +12,7 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Friend {
     pub guid: Guid,
-    pub status: FriendFriendStatus,
+    pub status: Friend_FriendStatus,
 }
 
 impl Friend {
@@ -24,8 +24,8 @@ impl Friend {
         w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 
         match &self.status {
-            FriendFriendStatus::OFFLINE => {}
-            FriendFriendStatus::ONLINE {
+            Friend_FriendStatus::OFFLINE => {}
+            Friend_FriendStatus::ONLINE {
                 area,
                 class,
                 level,
@@ -40,7 +40,7 @@ impl Friend {
                 w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
-            FriendFriendStatus::AFK {
+            Friend_FriendStatus::AFK {
                 area,
                 class,
                 level,
@@ -55,7 +55,7 @@ impl Friend {
                 w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
-            FriendFriendStatus::UNKNOWN3 {
+            Friend_FriendStatus::UNKNOWN3 {
                 area,
                 class,
                 level,
@@ -70,7 +70,7 @@ impl Friend {
                 w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
-            FriendFriendStatus::DND {
+            Friend_FriendStatus::DND {
                 area,
                 class,
                 level,
@@ -100,7 +100,7 @@ impl Friend {
         let status: FriendStatus = crate::util::read_u8_le(r)?.try_into()?;
 
         let status_if = match status {
-            FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
+            FriendStatus::OFFLINE => Friend_FriendStatus::OFFLINE,
             FriendStatus::ONLINE => {
                 // area: Area
                 let area: Area = crate::util::read_u32_le(r)?.try_into()?;
@@ -111,7 +111,7 @@ impl Friend {
                 // class: Class
                 let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-                FriendFriendStatus::ONLINE {
+                Friend_FriendStatus::ONLINE {
                     area,
                     class,
                     level,
@@ -127,7 +127,7 @@ impl Friend {
                 // class: Class
                 let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-                FriendFriendStatus::AFK {
+                Friend_FriendStatus::AFK {
                     area,
                     class,
                     level,
@@ -143,7 +143,7 @@ impl Friend {
                 // class: Class
                 let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-                FriendFriendStatus::UNKNOWN3 {
+                Friend_FriendStatus::UNKNOWN3 {
                     area,
                     class,
                     level,
@@ -159,7 +159,7 @@ impl Friend {
                 // class: Class
                 let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-                FriendFriendStatus::DND {
+                Friend_FriendStatus::DND {
                     area,
                     class,
                     level,
@@ -178,12 +178,12 @@ impl Friend {
 impl Friend {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
-        + self.status.size() // status: FriendFriendStatus
+        + self.status.size() // status: Friend_FriendStatus
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum FriendFriendStatus {
+pub enum Friend_FriendStatus {
     OFFLINE,
     ONLINE {
         area: Area,
@@ -207,14 +207,14 @@ pub enum FriendFriendStatus {
     },
 }
 
-impl Default for FriendFriendStatus {
+impl Default for Friend_FriendStatus {
     fn default() -> Self {
         // First enumerator without any fields
         Self::OFFLINE
     }
 }
 
-impl FriendFriendStatus {
+impl Friend_FriendStatus {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::OFFLINE => 0,
@@ -227,7 +227,7 @@ impl FriendFriendStatus {
 
 }
 
-impl FriendFriendStatus {
+impl Friend_FriendStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::OFFLINE => {

@@ -11,7 +11,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_RAID_TARGET_UPDATE_Client {
-    pub index: MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex,
+    pub index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex,
 }
 
 impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
@@ -20,70 +20,70 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
         w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
 
         match &self.index {
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN0 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN1 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN2 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN3 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN4 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN5 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN6 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN7 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN8 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS => {}
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::REQUEST_ICONS => {}
         }
 
         Ok(())
@@ -103,7 +103,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN0 {
                     target,
                 }
             }
@@ -111,7 +111,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN1 {
                     target,
                 }
             }
@@ -119,7 +119,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN2 {
                     target,
                 }
             }
@@ -127,7 +127,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN3 {
                     target,
                 }
             }
@@ -135,7 +135,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN4 {
                     target,
                 }
             }
@@ -143,7 +143,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN5 {
                     target,
                 }
             }
@@ -151,7 +151,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN6 {
                     target,
                 }
             }
@@ -159,7 +159,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN7 {
                     target,
                 }
             }
@@ -167,11 +167,11 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN8 {
                     target,
                 }
             }
-            RaidTargetIndex::REQUEST_ICONS => MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS,
+            RaidTargetIndex::REQUEST_ICONS => MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::REQUEST_ICONS,
         };
 
         Ok(Self {
@@ -183,12 +183,12 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
 
 impl MSG_RAID_TARGET_UPDATE_Client {
     pub(crate) fn size(&self) -> usize {
-        self.index.size() // index: MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex
+        self.index.size() // index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
+pub enum MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     UNKNOWN0 {
         target: Guid,
     },
@@ -219,7 +219,7 @@ pub enum MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
     REQUEST_ICONS,
 }
 
-impl Default for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
+impl Default for MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     fn default() -> Self {
         // First enumerator without any fields
         Self::UNKNOWN0 {
@@ -228,7 +228,7 @@ impl Default for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
     }
 }
 
-impl MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
+impl MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::UNKNOWN0 { .. } => 0,
@@ -246,7 +246,7 @@ impl MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
 
 }
 
-impl MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
+impl MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::UNKNOWN0 {

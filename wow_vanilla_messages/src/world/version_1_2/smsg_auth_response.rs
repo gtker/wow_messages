@@ -10,7 +10,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_AUTH_RESPONSE {
-    pub result: SMSG_AUTH_RESPONSEWorldResult,
+    pub result: SMSG_AUTH_RESPONSE_WorldResult,
 }
 
 impl ServerMessage for SMSG_AUTH_RESPONSE {
@@ -19,19 +19,19 @@ impl ServerMessage for SMSG_AUTH_RESPONSE {
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         match &self.result {
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILURE => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CANCELLED => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_DISCONNECTED => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILED_TO_CONNECT => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CONNECTED => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_VERSION_MISMATCH => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_CONNECTING => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATING_SECURITY => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_COMPLETE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_AUTHENTICATING => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+            SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_SUCCESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_FAILURE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_CANCELLED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_DISCONNECTED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_FAILED_TO_CONNECT => {}
+            SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_CONNECTED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_VERSION_MISMATCH => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_CONNECTING => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_NEGOTIATING_SECURITY => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_NEGOTIATION_COMPLETE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_NEGOTIATION_FAILED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_AUTHENTICATING => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_OK {
                 billing_flags,
                 billing_rested,
                 billing_time,
@@ -46,81 +46,81 @@ impl ServerMessage for SMSG_AUTH_RESPONSE {
                 w.write_all(&billing_rested.to_le_bytes())?;
 
             }
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_REJECT => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_BAD_SERVER_PROOF => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_UNAVAILABLE => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_SYSTEM_ERROR => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_ERROR => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_EXPIRED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_VERSION_MISMATCH => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_UNKNOWN_ACCOUNT => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_INCORRECT_PASSWORD => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_SESSION_EXPIRED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_SERVER_SHUTTING_DOWN => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_LOGGING_IN => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_FAILED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_REJECT => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_BAD_SERVER_PROOF => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_UNAVAILABLE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_SYSTEM_ERROR => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_BILLING_ERROR => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_BILLING_EXPIRED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_VERSION_MISMATCH => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_UNKNOWN_ACCOUNT => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_INCORRECT_PASSWORD => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_SESSION_EXPIRED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_SERVER_SHUTTING_DOWN => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_ALREADY_LOGGING_IN => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_WAIT_QUEUE {
                 queue_position,
             } => {
                 // queue_position: u32
                 w.write_all(&queue_position.to_le_bytes())?;
 
             }
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_BANNED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_ONLINE => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_NO_TIME => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_DB_BUSY => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_SUSPENDED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_PARENTAL_CONTROL => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_INVALID => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_REALM_NOT_FOUND => {}
-            SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVING => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ERROR => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_NAME_IN_USE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_DISABLED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_LIMIT => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ACCOUNT_LIMIT => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_QUEUE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ONLY_EXISTING => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_WORLD => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_INSTANCES => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DISABLED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_CHARACTER => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_NO_NAME => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_SHORT => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_LONG => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_ONLY_LETTERS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MIXED_LANGUAGES => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_PROFANE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_RESERVED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_APOSTROPHE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_THREE_CONSECUTIVE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_SPACE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_FAILURE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_BANNED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_ALREADY_ONLINE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_NO_TIME => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_DB_BUSY => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_SUSPENDED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::AUTH_PARENTAL_CONTROL => {}
+            SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_SUCCESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_FAILED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_INVALID => {}
+            SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_REALM_NOT_FOUND => {}
+            SMSG_AUTH_RESPONSE_WorldResult::ACCOUNT_CREATE_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::ACCOUNT_CREATE_SUCCESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::ACCOUNT_CREATE_FAILED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LIST_RETRIEVING => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LIST_RETRIEVED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LIST_FAILED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_SUCCESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_ERROR => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_FAILED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_NAME_IN_USE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_DISABLED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_SERVER_LIMIT => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_ACCOUNT_LIMIT => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_SERVER_QUEUE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_ONLY_EXISTING => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_DELETE_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_DELETE_SUCCESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_DELETE_FAILED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_SUCCESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_NO_WORLD => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_NO_INSTANCES => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_FAILED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_DISABLED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_NO_CHARACTER => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_NO_NAME => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_TOO_SHORT => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_TOO_LONG => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_ONLY_LETTERS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_MIXED_LANGUAGES => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_PROFANE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_RESERVED => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_INVALID_APOSTROPHE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_THREE_CONSECUTIVE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_INVALID_SPACE => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_SUCCESS => {}
+            SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_FAILURE => {}
         }
 
         Ok(())
@@ -136,18 +136,18 @@ impl ServerMessage for SMSG_AUTH_RESPONSE {
         let result: WorldResult = crate::util::read_u32_le(r)?.try_into()?;
 
         let result_if = match result {
-            WorldResult::RESPONSE_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_SUCCESS,
-            WorldResult::RESPONSE_FAILURE => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILURE,
-            WorldResult::RESPONSE_CANCELLED => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CANCELLED,
-            WorldResult::RESPONSE_DISCONNECTED => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_DISCONNECTED,
-            WorldResult::RESPONSE_FAILED_TO_CONNECT => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILED_TO_CONNECT,
-            WorldResult::RESPONSE_CONNECTED => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CONNECTED,
-            WorldResult::RESPONSE_VERSION_MISMATCH => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_VERSION_MISMATCH,
-            WorldResult::CSTATUS_CONNECTING => SMSG_AUTH_RESPONSEWorldResult::CSTATUS_CONNECTING,
-            WorldResult::CSTATUS_NEGOTIATING_SECURITY => SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATING_SECURITY,
-            WorldResult::CSTATUS_NEGOTIATION_COMPLETE => SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_COMPLETE,
-            WorldResult::CSTATUS_NEGOTIATION_FAILED => SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_FAILED,
-            WorldResult::CSTATUS_AUTHENTICATING => SMSG_AUTH_RESPONSEWorldResult::CSTATUS_AUTHENTICATING,
+            WorldResult::RESPONSE_SUCCESS => SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_SUCCESS,
+            WorldResult::RESPONSE_FAILURE => SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_FAILURE,
+            WorldResult::RESPONSE_CANCELLED => SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_CANCELLED,
+            WorldResult::RESPONSE_DISCONNECTED => SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_DISCONNECTED,
+            WorldResult::RESPONSE_FAILED_TO_CONNECT => SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_FAILED_TO_CONNECT,
+            WorldResult::RESPONSE_CONNECTED => SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_CONNECTED,
+            WorldResult::RESPONSE_VERSION_MISMATCH => SMSG_AUTH_RESPONSE_WorldResult::RESPONSE_VERSION_MISMATCH,
+            WorldResult::CSTATUS_CONNECTING => SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_CONNECTING,
+            WorldResult::CSTATUS_NEGOTIATING_SECURITY => SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_NEGOTIATING_SECURITY,
+            WorldResult::CSTATUS_NEGOTIATION_COMPLETE => SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_NEGOTIATION_COMPLETE,
+            WorldResult::CSTATUS_NEGOTIATION_FAILED => SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_NEGOTIATION_FAILED,
+            WorldResult::CSTATUS_AUTHENTICATING => SMSG_AUTH_RESPONSE_WorldResult::CSTATUS_AUTHENTICATING,
             WorldResult::AUTH_OK => {
                 // billing_time: u32
                 let billing_time = crate::util::read_u32_le(r)?;
@@ -158,88 +158,88 @@ impl ServerMessage for SMSG_AUTH_RESPONSE {
                 // billing_rested: u32
                 let billing_rested = crate::util::read_u32_le(r)?;
 
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+                SMSG_AUTH_RESPONSE_WorldResult::AUTH_OK {
                     billing_flags,
                     billing_rested,
                     billing_time,
                 }
             }
-            WorldResult::AUTH_FAILED => SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,
-            WorldResult::AUTH_REJECT => SMSG_AUTH_RESPONSEWorldResult::AUTH_REJECT,
-            WorldResult::AUTH_BAD_SERVER_PROOF => SMSG_AUTH_RESPONSEWorldResult::AUTH_BAD_SERVER_PROOF,
-            WorldResult::AUTH_UNAVAILABLE => SMSG_AUTH_RESPONSEWorldResult::AUTH_UNAVAILABLE,
-            WorldResult::AUTH_SYSTEM_ERROR => SMSG_AUTH_RESPONSEWorldResult::AUTH_SYSTEM_ERROR,
-            WorldResult::AUTH_BILLING_ERROR => SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_ERROR,
-            WorldResult::AUTH_BILLING_EXPIRED => SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_EXPIRED,
-            WorldResult::AUTH_VERSION_MISMATCH => SMSG_AUTH_RESPONSEWorldResult::AUTH_VERSION_MISMATCH,
-            WorldResult::AUTH_UNKNOWN_ACCOUNT => SMSG_AUTH_RESPONSEWorldResult::AUTH_UNKNOWN_ACCOUNT,
-            WorldResult::AUTH_INCORRECT_PASSWORD => SMSG_AUTH_RESPONSEWorldResult::AUTH_INCORRECT_PASSWORD,
-            WorldResult::AUTH_SESSION_EXPIRED => SMSG_AUTH_RESPONSEWorldResult::AUTH_SESSION_EXPIRED,
-            WorldResult::AUTH_SERVER_SHUTTING_DOWN => SMSG_AUTH_RESPONSEWorldResult::AUTH_SERVER_SHUTTING_DOWN,
-            WorldResult::AUTH_ALREADY_LOGGING_IN => SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_LOGGING_IN,
-            WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => SMSG_AUTH_RESPONSEWorldResult::AUTH_LOGIN_SERVER_NOT_FOUND,
+            WorldResult::AUTH_FAILED => SMSG_AUTH_RESPONSE_WorldResult::AUTH_FAILED,
+            WorldResult::AUTH_REJECT => SMSG_AUTH_RESPONSE_WorldResult::AUTH_REJECT,
+            WorldResult::AUTH_BAD_SERVER_PROOF => SMSG_AUTH_RESPONSE_WorldResult::AUTH_BAD_SERVER_PROOF,
+            WorldResult::AUTH_UNAVAILABLE => SMSG_AUTH_RESPONSE_WorldResult::AUTH_UNAVAILABLE,
+            WorldResult::AUTH_SYSTEM_ERROR => SMSG_AUTH_RESPONSE_WorldResult::AUTH_SYSTEM_ERROR,
+            WorldResult::AUTH_BILLING_ERROR => SMSG_AUTH_RESPONSE_WorldResult::AUTH_BILLING_ERROR,
+            WorldResult::AUTH_BILLING_EXPIRED => SMSG_AUTH_RESPONSE_WorldResult::AUTH_BILLING_EXPIRED,
+            WorldResult::AUTH_VERSION_MISMATCH => SMSG_AUTH_RESPONSE_WorldResult::AUTH_VERSION_MISMATCH,
+            WorldResult::AUTH_UNKNOWN_ACCOUNT => SMSG_AUTH_RESPONSE_WorldResult::AUTH_UNKNOWN_ACCOUNT,
+            WorldResult::AUTH_INCORRECT_PASSWORD => SMSG_AUTH_RESPONSE_WorldResult::AUTH_INCORRECT_PASSWORD,
+            WorldResult::AUTH_SESSION_EXPIRED => SMSG_AUTH_RESPONSE_WorldResult::AUTH_SESSION_EXPIRED,
+            WorldResult::AUTH_SERVER_SHUTTING_DOWN => SMSG_AUTH_RESPONSE_WorldResult::AUTH_SERVER_SHUTTING_DOWN,
+            WorldResult::AUTH_ALREADY_LOGGING_IN => SMSG_AUTH_RESPONSE_WorldResult::AUTH_ALREADY_LOGGING_IN,
+            WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => SMSG_AUTH_RESPONSE_WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND,
             WorldResult::AUTH_WAIT_QUEUE => {
                 // queue_position: u32
                 let queue_position = crate::util::read_u32_le(r)?;
 
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
+                SMSG_AUTH_RESPONSE_WorldResult::AUTH_WAIT_QUEUE {
                     queue_position,
                 }
             }
-            WorldResult::AUTH_BANNED => SMSG_AUTH_RESPONSEWorldResult::AUTH_BANNED,
-            WorldResult::AUTH_ALREADY_ONLINE => SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_ONLINE,
-            WorldResult::AUTH_NO_TIME => SMSG_AUTH_RESPONSEWorldResult::AUTH_NO_TIME,
-            WorldResult::AUTH_DB_BUSY => SMSG_AUTH_RESPONSEWorldResult::AUTH_DB_BUSY,
-            WorldResult::AUTH_SUSPENDED => SMSG_AUTH_RESPONSEWorldResult::AUTH_SUSPENDED,
-            WorldResult::AUTH_PARENTAL_CONTROL => SMSG_AUTH_RESPONSEWorldResult::AUTH_PARENTAL_CONTROL,
-            WorldResult::REALM_LIST_IN_PROGRESS => SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_IN_PROGRESS,
-            WorldResult::REALM_LIST_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_SUCCESS,
-            WorldResult::REALM_LIST_FAILED => SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_FAILED,
-            WorldResult::REALM_LIST_INVALID => SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_INVALID,
-            WorldResult::REALM_LIST_REALM_NOT_FOUND => SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_REALM_NOT_FOUND,
-            WorldResult::ACCOUNT_CREATE_IN_PROGRESS => SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_IN_PROGRESS,
-            WorldResult::ACCOUNT_CREATE_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_SUCCESS,
-            WorldResult::ACCOUNT_CREATE_FAILED => SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_FAILED,
-            WorldResult::CHAR_LIST_RETRIEVING => SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVING,
-            WorldResult::CHAR_LIST_RETRIEVED => SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVED,
-            WorldResult::CHAR_LIST_FAILED => SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_FAILED,
-            WorldResult::CHAR_CREATE_IN_PROGRESS => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_IN_PROGRESS,
-            WorldResult::CHAR_CREATE_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SUCCESS,
-            WorldResult::CHAR_CREATE_ERROR => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ERROR,
-            WorldResult::CHAR_CREATE_FAILED => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_FAILED,
-            WorldResult::CHAR_CREATE_NAME_IN_USE => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_NAME_IN_USE,
-            WorldResult::CHAR_CREATE_DISABLED => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_DISABLED,
-            WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION,
-            WorldResult::CHAR_CREATE_SERVER_LIMIT => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_LIMIT,
-            WorldResult::CHAR_CREATE_ACCOUNT_LIMIT => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ACCOUNT_LIMIT,
-            WorldResult::CHAR_CREATE_SERVER_QUEUE => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_QUEUE,
-            WorldResult::CHAR_CREATE_ONLY_EXISTING => SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ONLY_EXISTING,
-            WorldResult::CHAR_DELETE_IN_PROGRESS => SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_IN_PROGRESS,
-            WorldResult::CHAR_DELETE_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_SUCCESS,
-            WorldResult::CHAR_DELETE_FAILED => SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED,
-            WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER,
-            WorldResult::CHAR_LOGIN_IN_PROGRESS => SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_IN_PROGRESS,
-            WorldResult::CHAR_LOGIN_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_SUCCESS,
-            WorldResult::CHAR_LOGIN_NO_WORLD => SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_WORLD,
-            WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER,
-            WorldResult::CHAR_LOGIN_NO_INSTANCES => SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_INSTANCES,
-            WorldResult::CHAR_LOGIN_FAILED => SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_FAILED,
-            WorldResult::CHAR_LOGIN_DISABLED => SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DISABLED,
-            WorldResult::CHAR_LOGIN_NO_CHARACTER => SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_CHARACTER,
-            WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER,
-            WorldResult::CHAR_NAME_NO_NAME => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_NO_NAME,
-            WorldResult::CHAR_NAME_TOO_SHORT => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_SHORT,
-            WorldResult::CHAR_NAME_TOO_LONG => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_LONG,
-            WorldResult::CHAR_NAME_ONLY_LETTERS => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_ONLY_LETTERS,
-            WorldResult::CHAR_NAME_MIXED_LANGUAGES => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MIXED_LANGUAGES,
-            WorldResult::CHAR_NAME_PROFANE => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_PROFANE,
-            WorldResult::CHAR_NAME_RESERVED => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_RESERVED,
-            WorldResult::CHAR_NAME_INVALID_APOSTROPHE => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_APOSTROPHE,
-            WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES,
-            WorldResult::CHAR_NAME_THREE_CONSECUTIVE => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_THREE_CONSECUTIVE,
-            WorldResult::CHAR_NAME_INVALID_SPACE => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_SPACE,
-            WorldResult::CHAR_NAME_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_SUCCESS,
-            WorldResult::CHAR_NAME_FAILURE => SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_FAILURE,
+            WorldResult::AUTH_BANNED => SMSG_AUTH_RESPONSE_WorldResult::AUTH_BANNED,
+            WorldResult::AUTH_ALREADY_ONLINE => SMSG_AUTH_RESPONSE_WorldResult::AUTH_ALREADY_ONLINE,
+            WorldResult::AUTH_NO_TIME => SMSG_AUTH_RESPONSE_WorldResult::AUTH_NO_TIME,
+            WorldResult::AUTH_DB_BUSY => SMSG_AUTH_RESPONSE_WorldResult::AUTH_DB_BUSY,
+            WorldResult::AUTH_SUSPENDED => SMSG_AUTH_RESPONSE_WorldResult::AUTH_SUSPENDED,
+            WorldResult::AUTH_PARENTAL_CONTROL => SMSG_AUTH_RESPONSE_WorldResult::AUTH_PARENTAL_CONTROL,
+            WorldResult::REALM_LIST_IN_PROGRESS => SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_IN_PROGRESS,
+            WorldResult::REALM_LIST_SUCCESS => SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_SUCCESS,
+            WorldResult::REALM_LIST_FAILED => SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_FAILED,
+            WorldResult::REALM_LIST_INVALID => SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_INVALID,
+            WorldResult::REALM_LIST_REALM_NOT_FOUND => SMSG_AUTH_RESPONSE_WorldResult::REALM_LIST_REALM_NOT_FOUND,
+            WorldResult::ACCOUNT_CREATE_IN_PROGRESS => SMSG_AUTH_RESPONSE_WorldResult::ACCOUNT_CREATE_IN_PROGRESS,
+            WorldResult::ACCOUNT_CREATE_SUCCESS => SMSG_AUTH_RESPONSE_WorldResult::ACCOUNT_CREATE_SUCCESS,
+            WorldResult::ACCOUNT_CREATE_FAILED => SMSG_AUTH_RESPONSE_WorldResult::ACCOUNT_CREATE_FAILED,
+            WorldResult::CHAR_LIST_RETRIEVING => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LIST_RETRIEVING,
+            WorldResult::CHAR_LIST_RETRIEVED => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LIST_RETRIEVED,
+            WorldResult::CHAR_LIST_FAILED => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LIST_FAILED,
+            WorldResult::CHAR_CREATE_IN_PROGRESS => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_IN_PROGRESS,
+            WorldResult::CHAR_CREATE_SUCCESS => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_SUCCESS,
+            WorldResult::CHAR_CREATE_ERROR => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_ERROR,
+            WorldResult::CHAR_CREATE_FAILED => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_FAILED,
+            WorldResult::CHAR_CREATE_NAME_IN_USE => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_NAME_IN_USE,
+            WorldResult::CHAR_CREATE_DISABLED => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_DISABLED,
+            WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION,
+            WorldResult::CHAR_CREATE_SERVER_LIMIT => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_SERVER_LIMIT,
+            WorldResult::CHAR_CREATE_ACCOUNT_LIMIT => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_ACCOUNT_LIMIT,
+            WorldResult::CHAR_CREATE_SERVER_QUEUE => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_SERVER_QUEUE,
+            WorldResult::CHAR_CREATE_ONLY_EXISTING => SMSG_AUTH_RESPONSE_WorldResult::CHAR_CREATE_ONLY_EXISTING,
+            WorldResult::CHAR_DELETE_IN_PROGRESS => SMSG_AUTH_RESPONSE_WorldResult::CHAR_DELETE_IN_PROGRESS,
+            WorldResult::CHAR_DELETE_SUCCESS => SMSG_AUTH_RESPONSE_WorldResult::CHAR_DELETE_SUCCESS,
+            WorldResult::CHAR_DELETE_FAILED => SMSG_AUTH_RESPONSE_WorldResult::CHAR_DELETE_FAILED,
+            WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => SMSG_AUTH_RESPONSE_WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER,
+            WorldResult::CHAR_LOGIN_IN_PROGRESS => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_IN_PROGRESS,
+            WorldResult::CHAR_LOGIN_SUCCESS => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_SUCCESS,
+            WorldResult::CHAR_LOGIN_NO_WORLD => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_NO_WORLD,
+            WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER,
+            WorldResult::CHAR_LOGIN_NO_INSTANCES => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_NO_INSTANCES,
+            WorldResult::CHAR_LOGIN_FAILED => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_FAILED,
+            WorldResult::CHAR_LOGIN_DISABLED => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_DISABLED,
+            WorldResult::CHAR_LOGIN_NO_CHARACTER => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_NO_CHARACTER,
+            WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => SMSG_AUTH_RESPONSE_WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER,
+            WorldResult::CHAR_NAME_NO_NAME => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_NO_NAME,
+            WorldResult::CHAR_NAME_TOO_SHORT => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_TOO_SHORT,
+            WorldResult::CHAR_NAME_TOO_LONG => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_TOO_LONG,
+            WorldResult::CHAR_NAME_ONLY_LETTERS => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_ONLY_LETTERS,
+            WorldResult::CHAR_NAME_MIXED_LANGUAGES => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_MIXED_LANGUAGES,
+            WorldResult::CHAR_NAME_PROFANE => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_PROFANE,
+            WorldResult::CHAR_NAME_RESERVED => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_RESERVED,
+            WorldResult::CHAR_NAME_INVALID_APOSTROPHE => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_INVALID_APOSTROPHE,
+            WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES,
+            WorldResult::CHAR_NAME_THREE_CONSECUTIVE => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_THREE_CONSECUTIVE,
+            WorldResult::CHAR_NAME_INVALID_SPACE => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_INVALID_SPACE,
+            WorldResult::CHAR_NAME_SUCCESS => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_SUCCESS,
+            WorldResult::CHAR_NAME_FAILURE => SMSG_AUTH_RESPONSE_WorldResult::CHAR_NAME_FAILURE,
         };
 
         Ok(Self {
@@ -251,12 +251,12 @@ impl ServerMessage for SMSG_AUTH_RESPONSE {
 
 impl SMSG_AUTH_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        self.result.size() // result: SMSG_AUTH_RESPONSEWorldResult
+        self.result.size() // result: SMSG_AUTH_RESPONSE_WorldResult
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum SMSG_AUTH_RESPONSEWorldResult {
+pub enum SMSG_AUTH_RESPONSE_WorldResult {
     RESPONSE_SUCCESS,
     RESPONSE_FAILURE,
     RESPONSE_CANCELLED,
@@ -347,14 +347,14 @@ pub enum SMSG_AUTH_RESPONSEWorldResult {
     CHAR_NAME_FAILURE,
 }
 
-impl Default for SMSG_AUTH_RESPONSEWorldResult {
+impl Default for SMSG_AUTH_RESPONSE_WorldResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::RESPONSE_SUCCESS
     }
 }
 
-impl SMSG_AUTH_RESPONSEWorldResult {
+impl SMSG_AUTH_RESPONSE_WorldResult {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::RESPONSE_SUCCESS => 0,
@@ -444,7 +444,7 @@ impl SMSG_AUTH_RESPONSEWorldResult {
 
 }
 
-impl SMSG_AUTH_RESPONSEWorldResult {
+impl SMSG_AUTH_RESPONSE_WorldResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::RESPONSE_SUCCESS => {
@@ -723,7 +723,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_AUTH_RESPONSE0() {
         let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,
+            result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_FAILED,
         };
 
         let header_size = 2 + 2;
@@ -747,7 +747,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_RESPONSE0() {
         let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,
+            result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_FAILED,
         };
 
         let header_size = 2 + 2;
@@ -771,7 +771,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_RESPONSE0() {
         let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,
+            result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_FAILED,
         };
 
         let header_size = 2 + 2;
@@ -798,7 +798,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_AUTH_RESPONSE1() {
         let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
+            result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_WAIT_QUEUE {
                 queue_position: 0xDEADBEEF,
             },
         };
@@ -824,7 +824,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_RESPONSE1() {
         let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
+            result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_WAIT_QUEUE {
                 queue_position: 0xDEADBEEF,
             },
         };
@@ -850,7 +850,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_RESPONSE1() {
         let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
+            result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_WAIT_QUEUE {
                 queue_position: 0xDEADBEEF,
             },
         };
@@ -879,7 +879,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_AUTH_RESPONSE2() {
         let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+            result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_OK {
                 billing_flags: 0x0,
                 billing_rested: 0x0,
                 billing_time: 0xDEADBEEF,
@@ -907,7 +907,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_RESPONSE2() {
         let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+            result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_OK {
                 billing_flags: 0x0,
                 billing_rested: 0x0,
                 billing_time: 0xDEADBEEF,
@@ -935,7 +935,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_RESPONSE2() {
         let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+            result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_OK {
                 billing_flags: 0x0,
                 billing_rested: 0x0,
                 billing_time: 0xDEADBEEF,
