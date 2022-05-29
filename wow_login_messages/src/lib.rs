@@ -118,17 +118,30 @@ pub use logon::*;
 /// Clients will automatically connect to this when no port is specified in the `realmlist.wtf`.
 pub const DEFAULT_PORT: u16 = 3724;
 
+/// Trait to write messages sent **from** the server.
+///
+/// In order to read messages sent from the server use the [`ServerOpcodeMessage`](crate::version_2::opcodes::ServerOpcodeMessage)
+/// with the correct version.
+///
+/// Do not be alarmed by the excessive boilerplate on the async functions,
+/// it is required for async functions in traits.
+///
+/// This trait also has a bunch of hidden functions that are necessary for the [`helper`](crate::helper)
+/// and [`opcodes`](crate::version_2::opcodes) modules to work.
 pub trait ServerMessage: Sized {
     #[doc(hidden)]
     const OPCODE: u8;
 
+    #[doc(hidden)]
     type Error;
 
+    #[doc(hidden)]
     fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
+    #[doc(hidden)]
     #[cfg(feature = "async-std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -149,6 +162,7 @@ pub trait ServerMessage: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 
+    #[doc(hidden)]
     #[cfg(feature = "tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -170,17 +184,30 @@ pub trait ServerMessage: Sized {
         Self: 'async_trait;
 }
 
+/// Trait to write messages sent **from** the client.
+///
+/// In order to read messages sent from the client use the [`ClientOpcodeMessage`](crate::version_2::opcodes::ClientOpcodeMessage)
+/// with the correct version.
+///
+/// Do not be alarmed by the excessive boilerplate on the async functions,
+/// it is required for async functions in traits.
+///
+/// This trait also has a bunch of hidden functions that are necessary for the [`helper`](crate::helper)
+/// and [`opcodes`](crate::version_2::opcodes) modules to work.
 pub trait ClientMessage: Sized {
     #[doc(hidden)]
     const OPCODE: u8;
 
+    #[doc(hidden)]
     type Error;
 
+    #[doc(hidden)]
     fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
+    #[doc(hidden)]
     #[cfg(feature = "async-std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
@@ -201,6 +228,7 @@ pub trait ClientMessage: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 
+    #[doc(hidden)]
     #[cfg(feature = "tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
