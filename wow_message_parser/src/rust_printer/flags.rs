@@ -6,17 +6,11 @@ use crate::rust_printer::Writer;
 pub fn print_flag(e: &Definer) -> Writer {
     let mut s = Writer::new(&get_import_path(e.tags()));
 
-    includes(&mut s);
-
     declaration(&mut s, e);
 
     common_impls(&mut s, e);
 
     s
-}
-
-fn includes(s: &mut Writer) {
-    s.write_async_includes();
 }
 
 fn declaration(s: &mut Writer, e: &Definer) {
