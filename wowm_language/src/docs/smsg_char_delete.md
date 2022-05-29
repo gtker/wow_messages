@@ -2,11 +2,11 @@
 
 ### Description
 
-Response to [CMSG_CHAR_DELETE].
+Response to [CMSG_CHAR_DELETE](./cmsg_char_delete.md).
 
 ### Comment
 
-The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM].
+The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM](./cmsg_char_enum.md).
 
 ### Wowm Representation
 ```rust,ignore

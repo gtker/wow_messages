@@ -2,7 +2,7 @@
 
 ### Comment
 
-vmangos/cmangos/mangoszero: this [message] causes on client to display: 'Your auction sold'
+vmangos/cmangos/mangoszero: this message causes on client to display: 'Your auction sold'
 
 ### Wowm Representation
 ```rust,ignore

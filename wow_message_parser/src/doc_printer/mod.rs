@@ -197,7 +197,21 @@ fn definer_common(s: &mut DocWriter, tags: &Tags, fileinfo: &FileInfo, ty: &str,
 }
 
 fn add_links_to_metadata_strings(s: &str) -> String {
-    s.to_string()
+    let mut s = s.to_string();
+
+    while let Some(start) = s.find('[') {
+        let end = s
+            .find(']')
+            .expect(&format!("non matching brackets in string '{}'", s));
+
+        let link_subject = &s[start + 1..end];
+        let link = "<".to_string() + link_subject + ">(./" + &link_subject.to_lowercase() + ".md)";
+        let original = &s[start..end + 1];
+
+        s = s.replace(original, &link);
+    }
+
+    s.replace("<", "[").replace(">", "]")
 }
 
 fn print_metadata(s: &mut DocWriter, tags: &Tags) {

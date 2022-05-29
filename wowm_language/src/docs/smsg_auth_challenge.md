@@ -2,7 +2,7 @@
 
 ### Description
 
-Seed used by the client to prove in [CMSG_AUTH_SESSION] that it has authenticated with the auth server.
+Seed used by the client to prove in [CMSG_AUTH_SESSION](./cmsg_auth_session.md) that it has authenticated with the auth server.
 
 ### Comment
 

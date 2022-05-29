@@ -6,8 +6,8 @@ Command to log into the specified character.
 
 ### Comment
 
-This is sent after the client has been authenticated and served the character list with [SMSG_CHAR_ENUM].
-If the player receives a [SMSG_CHARACTER_LOGIN_FAILED] it will return to the character screen and send a [CMSG_CHAR_ENUM].
+This is sent after the client has been authenticated and served the character list with [SMSG_CHAR_ENUM](./smsg_char_enum.md).
+If the player receives a [SMSG_CHARACTER_LOGIN_FAILED](./smsg_character_login_failed.md) it will return to the character screen and send a [CMSG_CHAR_ENUM](./cmsg_char_enum.md).
 
 ### Wowm Representation
 ```rust,ignore

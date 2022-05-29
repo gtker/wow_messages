@@ -2,7 +2,7 @@
 
 ### Description
 
-Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE].
+Sent after a successful [CMSG_AUTH_SESSION](./cmsg_auth_session.md) and [SMSG_AUTH_RESPONSE](./smsg_auth_response.md).
 
 ### Wowm Representation
 ```rust,ignore

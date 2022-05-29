@@ -2,7 +2,7 @@
 
 ### Description
 
-Response if [CMSG_PLAYER_LOGIN] fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD].
+Response if [CMSG_PLAYER_LOGIN](./cmsg_player_login.md) fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD](./smsg_login_verify_world.md).
 
 ### Wowm Representation
 ```rust,ignore

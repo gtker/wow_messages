@@ -6,7 +6,7 @@ Message to the client that is has successfully logged into the world and that it
 
 ### Comment
 
-The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].
+The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT](./smsg_update_object.md), but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT](./smsg_update_object.md).
 
 ### Wowm Representation
 ```rust,ignore

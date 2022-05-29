@@ -70251,7 +70251,7 @@
         }
       ],
       "tags": {
-        "comment": "vmangos/cmangos/mangoszero: this [message] causes on client to display: 'Your auction sold'",
+        "comment": "vmangos/cmangos/mangoszero: this message causes on client to display: 'Your auction sold'",
         "version": {
           "type": "world",
           "versions": [
