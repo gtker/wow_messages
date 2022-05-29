@@ -50,8 +50,8 @@ macro_rules! update_item {
                 header_set(&mut self.header, &mut self.values, bit);
             }
 
-            pub(crate) fn as_bytes(&self) -> Vec<u8> {
-                as_bytes(&self.header, &self.values)
+            pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), std::io::Error> {
+                write_into_vec(v, &self.header, &self.values)
             }
         }
     };
@@ -71,20 +71,22 @@ fn header_set(header: &mut Vec<u32>, values: &mut BTreeMap<u16, u32>, bit: u16) 
     header[index as usize] |= 1 << offset;
 }
 
-fn as_bytes(header: &[u32], values: &BTreeMap<u16, u32>) -> Vec<u8> {
-    let mut v = Vec::new();
-
-    v.write_all(&[header.len() as u8]).unwrap();
+fn write_into_vec(
+    v: &mut Vec<u8>,
+    header: &[u32],
+    values: &BTreeMap<u16, u32>,
+) -> Result<(), std::io::Error> {
+    v.write_all(&[header.len() as u8])?;
 
     for h in header {
-        v.write_all(h.to_le_bytes().as_slice()).unwrap();
+        v.write_all(h.to_le_bytes().as_slice())?;
     }
 
     for value in values.values() {
-        v.write_all(&value.to_le_bytes()).unwrap();
+        v.write_all(&value.to_le_bytes())?;
     }
 
-    v
+    Ok(())
 }
 
 update_item!(UpdateItem, ITEM);
@@ -174,17 +176,15 @@ impl UpdateMask {
     */
 
     pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        v.append(&mut match self {
-            UpdateMask::Item(i) => i.as_bytes(),
-            UpdateMask::Container(i) => i.as_bytes(),
-            UpdateMask::Unit(i) => i.as_bytes(),
-            UpdateMask::Player(i) => i.as_bytes(),
-            UpdateMask::GameObject(i) => i.as_bytes(),
-            UpdateMask::DynamicObject(i) => i.as_bytes(),
-            UpdateMask::Corpse(i) => i.as_bytes(),
-        });
-
-        Ok(())
+        match self {
+            UpdateMask::Item(i) => i.write_into_vec(v),
+            UpdateMask::Container(i) => i.write_into_vec(v),
+            UpdateMask::Unit(i) => i.write_into_vec(v),
+            UpdateMask::Player(i) => i.write_into_vec(v),
+            UpdateMask::GameObject(i) => i.write_into_vec(v),
+            UpdateMask::DynamicObject(i) => i.write_into_vec(v),
+            UpdateMask::Corpse(i) => i.write_into_vec(v),
+        }
     }
 
     pub fn size(&self) -> usize {
@@ -234,8 +234,10 @@ mod test {
             .set_object_GUID(Guid::new(4))
             .set_unit_BYTES_0(1, 1, 1, 1)
             .set_unit_HEALTH(100);
+        let update_mask = UpdateMask::Player(update_mask);
 
-        let mut v = update_mask.as_bytes();
+        let mut v = Vec::with_capacity(update_mask.size());
+        update_mask.write_into_vec(&mut v).unwrap();
         assert_eq!(b.as_slice(), v.as_slice());
     }
 
@@ -272,8 +274,10 @@ mod test {
             .set_unit_FACTIONTEMPLATE(1)
             .set_unit_DISPLAYID(50)
             .set_unit_NATIVEDISPLAYID(50);
+        let update_mask = UpdateMask::Player(update_mask);
 
-        let mut v = update_mask.as_bytes();
+        let mut v = Vec::with_capacity(update_mask.size());
+        update_mask.write_into_vec(&mut v).unwrap();
         assert_eq!(b.as_slice(), v.as_slice());
     }
 }
