@@ -1,31 +1,15 @@
 # UpdateMask
 
-Object
-    - ItemFields
-    - ContainerFields
+**NOT VALID FOR ALL VERSIONS. ONLY KNOWN VALID FOR 1.12.**
 
-    - UnitFields
-    - PlayerFields
+TODO
 
-    - GameObjectFields
-    - DynamicObjectFields
-    - CorpseFields
+An UpdateMask is a variable length way of sending known fields to the client.
+It is represented by a byte mask that decides which fields are sent afterwards.
 
-```rust,ignore
-struct ObjectFields {
-    guid: Option<u64>,
-    ty: Option<u32>,
-    entry: Option<u32>,
-    scale_x: Option<f32>,
-}
+## Representation
 
-struct UpdateMask {
-    pub guid: Option<u64>,
+The UpdateMask starts with a single u8 that decides how many **u32 mask blocks** will follow.
+The bit pattern in these mask blocks determine how many additional u32s of data will follow.
 
-    pub owner: Option<u64>,
-}
-
-impl UpdateMask {
-    
-}
-```
+## Examples
