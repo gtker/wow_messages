@@ -941,7 +941,7 @@ pub fn create_if_statement(
     tags: &Tags,
     o: &Objects,
     e: &Container,
-    current_scope: &mut Vec<RustMember>,
+    current_scope: &mut [RustMember],
     parent_scope: &mut [RustMember],
 ) {
     let mut reversed = false;
@@ -1301,7 +1301,7 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
             o,
             e,
             &mut v,
-            &mut vec![],
+            &mut Vec::new(),
             &mut optional,
         );
     }

@@ -78,7 +78,7 @@ pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin>(
 
 // u32
 pub async fn tokio_read_u32_le<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u32, std::io::Error> {
-    Ok(r.read_u32_le().await?)
+    r.read_u32_le().await
 }
 
 pub async fn tokio_read_u32_be<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u32, std::io::Error> {
