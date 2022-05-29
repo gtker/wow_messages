@@ -191,16 +191,19 @@ impl UpdateMask {
     }
 
     pub fn size(&self) -> usize {
+        let (header_len, values_len) = match self {
+            UpdateMask::Item(i) => (i.header.len(), i.values.len()),
+            UpdateMask::Container(i) => (i.header.len(), i.values.len()),
+            UpdateMask::Unit(i) => (i.header.len(), i.values.len()),
+            UpdateMask::Player(i) => (i.header.len(), i.values.len()),
+            UpdateMask::GameObject(i) => (i.header.len(), i.values.len()),
+            UpdateMask::DynamicObject(i) => (i.header.len(), i.values.len()),
+            UpdateMask::Corpse(i) => (i.header.len(), i.values.len()),
+        };
+
         1 // amount_of_blocks
-        + match self {
-            UpdateMask::Item(i) => i.header.len() * 4 + i.values.len() * 4,
-            UpdateMask::Container(i) => {i.header.len() * 4 + i.values.len() * 4}
-            UpdateMask::Unit(i) => {i.header.len() * 4 + i.values.len() * 4}
-            UpdateMask::Player(i) => {i.header.len() * 4 + i.values.len() * 4}
-            UpdateMask::GameObject(i) => {i.header.len() * 4 + i.values.len() * 4}
-            UpdateMask::DynamicObject(i) => {i.header.len() * 4 + i.values.len() * 4}
-            UpdateMask::Corpse(i) => {i.header.len() * 4 + i.values.len() * 4}
-        }
+        + header_len * 4
+        + values_len * 4
     }
 
     pub fn new() -> Self {
