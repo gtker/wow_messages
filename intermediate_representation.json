@@ -48653,6 +48653,8 @@
         }
       ],
       "tags": {
+        "description": "Command to delete a character from the clients account.",
+        "comment": "Sent after the client has confirmed the character deletion.",
         "version": {
           "type": "world",
           "versions": [
@@ -48665,7 +48667,56 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_CHAR_DELETE",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 3735928559,
+                  "original_string": "0xDEADBEEF"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            12,
+            56,
+            0,
+            0,
+            0,
+            239,
+            190,
+            173,
+            222,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm",
+            "start_position": 10
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm",
         "start_position": 3
@@ -48686,6 +48737,7 @@
       "constant": true,
       "members": [],
       "tags": {
+        "description": "Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE].",
         "version": {
           "type": "world",
           "versions": [
@@ -48704,7 +48756,43 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_CHAR_ENUM",
+          "members": [],
+          "raw_bytes": [
+            0,
+            4,
+            55,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    2
+                  ]
+                },
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm",
+            "start_position": 7
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm",
         "start_position": 3
@@ -56305,6 +56393,8 @@
         }
       ],
       "tags": {
+        "description": "Command to log into the specified character.",
+        "comment": "This is sent after the client has been authenticated and served the character list with [SMSG_CHAR_ENUM].\nIf the player receives a [SMSG_CHARACTER_LOGIN_FAILED] it will return to the character screen and send a [CMSG_CHAR_ENUM].",
         "version": {
           "type": "world",
           "versions": [
@@ -56317,7 +56407,56 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_PLAYER_LOGIN",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 3735928559,
+                  "original_string": "0xDEADBEEF"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            12,
+            61,
+            0,
+            0,
+            0,
+            239,
+            190,
+            173,
+            222,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow",
+            "start_position": 11
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow",
         "start_position": 3
@@ -70242,6 +70381,8 @@
         }
       ],
       "tags": {
+        "description": "Seed used by the client to prove in [CMSG_AUTH_SESSION] that it has authenticated with the auth server.",
+        "comment": "First thing sent when a client connects to the world server.\nThis message is always unencrypted.",
         "version": {
           "type": "world",
           "versions": [
@@ -70260,7 +70401,56 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_AUTH_CHALLENGE",
+          "members": [
+            {
+              "variable_name": "server_seed",
+              "verified_value": {
+                "Number": {
+                  "value": 3735928559,
+                  "original_string": "0xDEADBEEF"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            6,
+            236,
+            1,
+            239,
+            190,
+            173,
+            222
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    2
+                  ]
+                },
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm",
+            "start_position": 11
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm",
         "start_position": 3
@@ -71815,6 +72005,7 @@
         }
       ],
       "tags": {
+        "description": "Response if [CMSG_PLAYER_LOGIN] fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD].",
         "version": {
           "type": "world",
           "versions": [
@@ -71827,7 +72018,50 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_CHARACTER_LOGIN_FAILED",
+          "members": [
+            {
+              "variable_name": "result",
+              "verified_value": {
+                "Enum": {
+                  "value": 65,
+                  "original_string": "CHAR_LOGIN_FAILED"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            6,
+            65,
+            0,
+            65,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm",
+            "start_position": 9
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm",
         "start_position": 3
@@ -71913,6 +72147,8 @@
         }
       ],
       "tags": {
+        "description": "Response to [CMSG_CHAR_DELETE].",
+        "comment": "The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM].",
         "version": {
           "type": "world",
           "versions": [
@@ -71925,7 +72161,50 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_CHAR_DELETE",
+          "members": [
+            {
+              "variable_name": "result",
+              "verified_value": {
+                "Enum": {
+                  "value": 57,
+                  "original_string": "CHAR_DELETE_SUCCESS"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            6,
+            60,
+            0,
+            57,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm",
+            "start_position": 10
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm",
         "start_position": 3
@@ -79315,6 +79594,8 @@
         }
       ],
       "tags": {
+        "description": "Message to the client that is has successfully logged into the world and that it should load the map and coordinates.",
+        "comment": "The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].",
         "version": {
           "type": "world",
           "versions": [
@@ -79327,7 +79608,106 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_LOGIN_VERIFY_WORLD",
+          "members": [
+            {
+              "variable_name": "map",
+              "verified_value": {
+                "Enum": {
+                  "value": 0,
+                  "original_string": "EASTERN_KINGDOMS"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "position_x",
+              "verified_value": {
+                "FloatingNumber": {
+                  "value": -8949.95,
+                  "original_string": "-8949.95"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "position_y",
+              "verified_value": {
+                "FloatingNumber": {
+                  "value": -132.493,
+                  "original_string": "-132.493"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "position_z",
+              "verified_value": {
+                "FloatingNumber": {
+                  "value": 83.5312,
+                  "original_string": "83.5312"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "orientation",
+              "verified_value": {
+                "FloatingNumber": {
+                  "value": 0.0,
+                  "original_string": "0.0"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            22,
+            54,
+            2,
+            0,
+            0,
+            0,
+            0,
+            205,
+            215,
+            11,
+            198,
+            53,
+            126,
+            4,
+            195,
+            249,
+            15,
+            167,
+            66,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm",
+            "start_position": 14
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm",
         "start_position": 3
@@ -94316,6 +94696,8 @@
         }
       ],
       "tags": {
+        "description": "Data for which tutorials the client has passed.",
+        "comment": "All bits set means that all tutorials have been passed.\nMust be sent after [SMSG_LOGIN_VERIFY_WORLD] otherwise the client will SEGFAULT.",
         "version": {
           "type": "world",
           "versions": [
@@ -94466,7 +94848,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm",
-            "start_position": 14
+            "start_position": 18
           }
         }
       ],

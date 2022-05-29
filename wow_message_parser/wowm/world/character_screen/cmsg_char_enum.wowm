@@ -1,3 +1,10 @@
 #tag_all versions "1.2 1.12";
 
-cmsg CMSG_CHAR_ENUM = 0x037 { }
+cmsg CMSG_CHAR_ENUM = 0x037 { } {
+    description = "Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE].";
+}
+
+test CMSG_CHAR_ENUM {} [
+    0x00, 0x04, /* size */
+    0x37, 0x00, 0x00, 0x00, /* opcode */
+]

@@ -2,5 +2,15 @@
 
 cmsg CMSG_CHAR_DELETE = 0x38 {
     Guid guid;
+} {
+    description = "Command to delete a character from the clients account.";
+    comment = "Sent after the client has confirmed the character deletion.";
 }
 
+test CMSG_CHAR_DELETE {
+    guid = 0xDEADBEEF;
+} [
+    0x00, 0x0C, /* size */
+    0x38, 0x00, 0x00, 0x00, /* opcode */
+    0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, /* guid */
+]

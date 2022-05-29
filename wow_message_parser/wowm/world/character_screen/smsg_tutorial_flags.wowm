@@ -9,6 +9,10 @@ smsg SMSG_TUTORIAL_FLAGS = 0xFD {
     u32 tutorial_data5;
     u32 tutorial_data6;
     u32 tutorial_data7;
+} {
+    description = "Data for which tutorials the client has passed.";
+    comment = "All bits set means that all tutorials have been passed.";
+    comment = "Must be sent after [SMSG_LOGIN_VERIFY_WORLD] otherwise the client will SEGFAULT.";
 }
 
 test SMSG_TUTORIAL_FLAGS {

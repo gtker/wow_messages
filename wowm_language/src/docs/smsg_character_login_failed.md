@@ -1,5 +1,8 @@
 ## Client Version 1.12
 
+### Description
+Response if [CMSG_PLAYER_LOGIN] fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD].
+
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_CHARACTER_LOGIN_FAILED = 0x0041 {
@@ -18,3 +21,9 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |  |
+### Examples
+```c
+0, 6, // size
+65, 0, // opcode (65)
+65, 0, 0, 0, // result: WorldResult CHAR_LOGIN_FAILED (0x41)
+```

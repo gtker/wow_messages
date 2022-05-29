@@ -1,5 +1,12 @@
 ## Client Version 1.12
 
+### Description
+Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
+
+### Comment
+
+The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].
+
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_LOGIN_VERIFY_WORLD = 0x0236 {
@@ -26,3 +33,13 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | f32 | position_y |  |  |
 | - | 4 / Little | f32 | position_z |  |  |
 | - | 4 / Little | f32 | orientation |  |  |
+### Examples
+```c
+0, 22, // size
+54, 2, // opcode (566)
+0, 0, 0, 0, // map: Map EASTERN_KINGDOMS (0)
+205, 215, 11, 198, // position_x: f32
+53, 126, 4, 195, // position_y: f32
+249, 15, 167, 66, // position_z: f32
+0, 0, 0, 0, // orientation: f32
+```

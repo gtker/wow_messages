@@ -1,5 +1,13 @@
 ## Client Version 1.12
 
+### Description
+Command to log into the specified character.
+
+### Comment
+
+This is sent after the client has been authenticated and served the character list with [SMSG_CHAR_ENUM].
+If the player receives a [SMSG_CHARACTER_LOGIN_FAILED] it will return to the character screen and send a [CMSG_CHAR_ENUM].
+
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_PLAYER_LOGIN = 0x003D {
@@ -18,3 +26,9 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+### Examples
+```c
+0, 12, // size
+61, 0, 0, 0, // opcode (61)
+239, 190, 173, 222, 0, 0, 0, 0, // guid: Guid
+```

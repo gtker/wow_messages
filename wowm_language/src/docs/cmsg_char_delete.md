@@ -1,5 +1,12 @@
 ## Client Version 1.12
 
+### Description
+Command to delete a character from the clients account.
+
+### Comment
+
+Sent after the client has confirmed the character deletion.
+
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_CHAR_DELETE = 0x0038 {
@@ -18,3 +25,9 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+### Examples
+```c
+0, 12, // size
+56, 0, 0, 0, // opcode (56)
+239, 190, 173, 222, 0, 0, 0, 0, // guid: Guid
+```

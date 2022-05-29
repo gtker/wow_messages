@@ -1,5 +1,13 @@
 ## Client Version 1.12
 
+### Description
+Data for which tutorials the client has passed.
+
+### Comment
+
+All bits set means that all tutorials have been passed.
+Must be sent after [SMSG_LOGIN_VERIFY_WORLD] otherwise the client will SEGFAULT.
+
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_TUTORIAL_FLAGS = 0x00FD {

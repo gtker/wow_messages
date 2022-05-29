@@ -6,5 +6,23 @@ smsg SMSG_LOGIN_VERIFY_WORLD = 0x236 {
     f32 position_y;
     f32 position_z;
     f32 orientation;
+} {
+    description = "Message to the client that is has successfully logged into the world and that it should load the map and coordinates.";
+    comment = "The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].";
 }
 
+test SMSG_LOGIN_VERIFY_WORLD {
+    map = EASTERN_KINGDOMS;
+    position_x = -8949.95;
+    position_y = -132.493;
+    position_z = 83.5312;
+    orientation = 0.0;
+} [
+    0x00, 0x16, /* size */
+    0x36, 0x02, /* opcode */
+    0x00, 0x00, 0x00, 0x00, /* map */
+    0xcd, 0xd7, 0x0b, 0xc6, /* position_x */
+    0x35, 0x7e, 0x04, 0xc3, /* position_y */
+    0xf9, 0x0f, 0xa7, 0x42, /* position_z */
+    0x00, 0x00, 0x00, 0x00, /* orientation */
+]

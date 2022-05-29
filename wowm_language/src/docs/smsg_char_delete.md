@@ -1,5 +1,12 @@
 ## Client Version 1.12
 
+### Description
+Response to [CMSG_CHAR_DELETE].
+
+### Comment
+
+The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM].
+
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_CHAR_DELETE = 0x003C {
@@ -18,3 +25,9 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |  |
+### Examples
+```c
+0, 6, // size
+60, 0, // opcode (60)
+57, 0, 0, 0, // result: WorldResult CHAR_DELETE_SUCCESS (0x39)
+```

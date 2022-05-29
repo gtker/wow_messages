@@ -1,5 +1,8 @@
 ## Client Version 1.2, Client Version 1.12
 
+### Description
+Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE].
+
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_CHAR_ENUM = 0x0037 {
@@ -16,3 +19,8 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
+### Examples
+```c
+0, 4, // size
+55, 0, 0, 0, // opcode (55)
+```
