@@ -6,9 +6,11 @@ smsg SMSG_GOSSIP_COMPLETE = 0x017E {
 }
 ```
 ### Header
+
 SMSG have a header of 4 bytes.
 
 #### SMSG Header
+
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|

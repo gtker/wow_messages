@@ -8,9 +8,11 @@ smsg SMSG_ITEM_TEXT_QUERY_RESPONSE = 0x0244 {
 }
 ```
 ### Header
+
 SMSG have a header of 4 bytes.
 
 #### SMSG Header
+
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|

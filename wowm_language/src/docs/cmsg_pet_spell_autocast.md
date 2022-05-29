@@ -9,9 +9,11 @@ cmsg CMSG_PET_SPELL_AUTOCAST = 0x02F3 {
 }
 ```
 ### Header
+
 CMSG have a header of 6 bytes.
 
 #### CMSG Header
+
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|

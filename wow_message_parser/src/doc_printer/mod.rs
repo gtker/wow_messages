@@ -876,6 +876,7 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
     }
 
     s.wln("### Header");
+    s.newline();
 
     match e.container_type() {
         ContainerType::Msg(_) => s.wln("MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 4 bytes if they are sent from the server (SMSG)."),
@@ -898,6 +899,7 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
         ContainerType::CMsg(_) | ContainerType::Msg(_)
     ) {
         s.wln("#### CMSG Header");
+        s.newline();
 
         s.wln("| Offset | Size / Endianness | Type   | Name   | Description |");
         s.wln("| ------ | ----------------- | ------ | ------ | ----------- |");
@@ -910,6 +912,7 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
         ContainerType::SMsg(_) | ContainerType::Msg(_)
     ) {
         s.wln("#### SMSG Header");
+        s.newline();
 
         s.wln("| Offset | Size / Endianness | Type   | Name   | Description |");
         s.wln("| ------ | ----------------- | ------ | ------ | ----------- |");
@@ -922,6 +925,7 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
         ContainerType::SLogin(_) | ContainerType::CLogin(_)
     ) {
         s.wln("#### Login Header");
+        s.newline();
 
         s.wln("| Offset | Size / Endianness | Type   | Name   | Description |");
         s.wln("| ------ | ----------------- | ------ | ------ | ----------- |");
