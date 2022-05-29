@@ -855,7 +855,7 @@ fn create_else_if_flag(
     statement: &IfStatement,
     struct_ty_name: &str,
     current_scope: &mut Vec<RustMember>,
-    parent_scope: &mut Vec<RustMember>,
+    parent_scope: &mut [RustMember],
 ) {
     assert_eq!(statement.get_conditional().equations().len(), 1);
     assert!(statement.else_members().is_empty());
@@ -918,8 +918,8 @@ fn create_else_if_flag(
 }
 
 fn find_subject<'a>(
-    current_scope: &'a mut Vec<RustMember>,
-    parent_scope: &'a mut Vec<RustMember>,
+    current_scope: &'a mut [RustMember],
+    parent_scope: &'a mut [RustMember],
     statement: &IfStatement,
 ) -> &'a mut RustMember {
     let subject = current_scope
@@ -942,7 +942,7 @@ pub fn create_if_statement(
     o: &Objects,
     e: &Container,
     current_scope: &mut Vec<RustMember>,
-    parent_scope: &mut Vec<RustMember>,
+    parent_scope: &mut [RustMember],
 ) {
     let mut reversed = false;
     let mut main_enumerators = Vec::new();

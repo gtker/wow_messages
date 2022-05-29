@@ -1,3 +1,5 @@
+#![allow(clippy::too_many_arguments)]
+
 use std::path::Path;
 
 use doc_printer::container::print_docs_for_container;
