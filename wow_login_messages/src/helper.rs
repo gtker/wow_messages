@@ -41,7 +41,7 @@ pub fn expect_client_message<M: ClientMessage, R: std::io::Read>(
         let m = M::read(r);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::IoOrParseError),
         }
     } else {
         Err(ExpectedMessageError::UnexpectedOpcode(opcode))
@@ -49,6 +49,7 @@ pub fn expect_client_message<M: ClientMessage, R: std::io::Read>(
 }
 
 #[cfg(feature = "tokio")]
+/// See docs for the sync version called [`expect_client_message`].
 pub async fn tokio_expect_client_message<
     M: ClientMessage,
     R: tokio::io::AsyncReadExt + Unpin + Send,
@@ -62,7 +63,7 @@ pub async fn tokio_expect_client_message<
         let m = M::tokio_read(r).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::IoOrParseError),
         }
     } else {
         Err(ExpectedMessageError::UnexpectedOpcode(opcode))
@@ -71,27 +72,25 @@ pub async fn tokio_expect_client_message<
 
 #[derive(Debug)]
 pub enum ExpectedMessageError {
-    Io(std::io::Error),
     UnexpectedOpcode(u8),
-    GenericError,
+    IoOrParseError,
 }
 impl std::error::Error for ExpectedMessageError {}
 
 impl Display for ExpectedMessageError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Io(i) => i.fmt(f),
             Self::UnexpectedOpcode(i) => {
                 f.write_fmt(format_args!("unexpected opcode returned: '{}'", i))
             }
-            Self::GenericError => f.write_str("something went wrong parsing the message"),
+            Self::IoOrParseError => f.write_str("something went wrong parsing the message"),
         }
     }
 }
 
 impl From<std::io::Error> for ExpectedMessageError {
     fn from(e: std::io::Error) -> Self {
-        Self::Io(e)
+        Self::IoOrParseError
     }
 }
 
@@ -120,13 +119,14 @@ pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
         let m = M::read(r);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::IoOrParseError),
         }
     } else {
         Err(ExpectedMessageError::UnexpectedOpcode(opcode))
     }
 }
 
+/// See docs for the sync version called [`expect_server_message`].
 #[cfg(feature = "tokio")]
 pub async fn tokio_expect_server_message<
     M: ServerMessage,
@@ -141,7 +141,7 @@ pub async fn tokio_expect_server_message<
         let m = M::tokio_read(r).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::IoOrParseError),
         }
     } else {
         Err(ExpectedMessageError::UnexpectedOpcode(opcode))
@@ -154,6 +154,11 @@ pub async fn tokio_expect_server_message<
 ///
 /// This is intended to be used on authentication servers as the very first
 /// thing to be read from the socket.
+///
+/// This is provided instead of just having users use a
+/// [ClientOpcodeMessage](crate::version_2::opcodes::ClientOpcodeMessage)
+/// since [`CMD_AUTH_LOGON_CHALLENGE_Client`], and [`CMD_AUTH_RECONNECT_CHALLENGE_Client`] are valid for all versions,
+/// and this creates a nicer abstraction around that.
 ///
 /// ```
 /// use wow_login_messages::helper::{InitialOpcode, read_initial_opcode};
@@ -194,6 +199,7 @@ pub fn read_initial_opcode<R: std::io::Read>(
     }
 }
 
+/// See docs for the sync version called [`read_initial_opcode`].
 #[cfg(feature = "tokio")]
 pub async fn tokio_read_initial_opcode<R: tokio::io::AsyncReadExt + Unpin + Send>(
     r: &mut R,
