@@ -75,6 +75,8 @@ impl Display for ExpectedOpcodeError {
     }
 }
 
+impl std::error::Error for ExpectedOpcodeError {}
+
 impl From<ParseError> for ExpectedOpcodeError {
     fn from(e: ParseError) -> Self {
         Self::Parse(e)

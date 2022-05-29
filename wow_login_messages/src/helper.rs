@@ -8,7 +8,7 @@
 //! [`expect_client_message`] and [`expect_server_message`]
 //! are used when you're expecting exactly one specific message and all others are invalid.
 //!
-use crate::errors::{EnumError, ParseError};
+use crate::errors::{EnumError, ExpectedOpcodeError, ParseError};
 use crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client;
 use crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client;
 use crate::util::read_u8_le;
@@ -33,7 +33,7 @@ use std::string::FromUtf8Error;
 #[cfg(feature = "sync")]
 pub fn expect_client_message<M: ClientMessage, R: std::io::Read>(
     r: &mut R,
-) -> Result<M, ExpectedMessageError> {
+) -> Result<M, ExpectedOpcodeError> {
     let opcode = read_u8_le(r)?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -41,10 +41,10 @@ pub fn expect_client_message<M: ClientMessage, R: std::io::Read>(
         let m = M::read(r);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::IoOrParseError),
+            Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedOpcodeError::Opcode(opcode as u32))
     }
 }
 
@@ -55,7 +55,7 @@ pub async fn tokio_expect_client_message<
     R: tokio::io::AsyncReadExt + Unpin + Send,
 >(
     r: &mut R,
-) -> Result<M, ExpectedMessageError> {
+) -> Result<M, ExpectedOpcodeError> {
     let opcode = crate::util::tokio_read_u8_le(r).await?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -63,10 +63,10 @@ pub async fn tokio_expect_client_message<
         let m = M::tokio_read(r).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::IoOrParseError),
+            Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedOpcodeError::Opcode(opcode as u32))
     }
 }
 
@@ -77,7 +77,7 @@ pub async fn astd_expect_client_message<
     R: async_std::io::ReadExt + Unpin + Send,
 >(
     r: &mut R,
-) -> Result<M, ExpectedMessageError> {
+) -> Result<M, ExpectedOpcodeError> {
     let opcode = crate::util::astd_read_u8_le(r).await?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -85,45 +85,10 @@ pub async fn astd_expect_client_message<
         let m = M::astd_read(r).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::IoOrParseError),
+            Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
-    }
-}
-
-/// Error type for the [`helper`](crate::helper) functions.
-///
-/// The `IoOrParseError` does not contain the underlying error type due to generics.
-/// If you need to access the specifics of error type just manually match on [`opcodes`](crate::version_2::opcodes).
-/// Notice that the opcodes differ depending on version.
-#[derive(Debug)]
-pub enum ExpectedMessageError {
-    UnexpectedOpcode(u8),
-    IoOrParseError,
-}
-impl std::error::Error for ExpectedMessageError {}
-
-impl Display for ExpectedMessageError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::UnexpectedOpcode(i) => {
-                f.write_fmt(format_args!("unexpected opcode returned: '{}'", i))
-            }
-            Self::IoOrParseError => f.write_str("something went wrong parsing the message"),
-        }
-    }
-}
-
-impl From<std::io::Error> for ExpectedMessageError {
-    fn from(e: std::io::Error) -> Self {
-        Self::IoOrParseError
-    }
-}
-
-impl From<ParseError> for ExpectedMessageError {
-    fn from(e: ParseError) -> Self {
-        Self::IoOrParseError
+        Err(ExpectedOpcodeError::Opcode(opcode as u32))
     }
 }
 
@@ -144,7 +109,7 @@ impl From<ParseError> for ExpectedMessageError {
 #[cfg(feature = "sync")]
 pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
     r: &mut R,
-) -> Result<M, ExpectedMessageError> {
+) -> Result<M, ExpectedOpcodeError> {
     let opcode = read_u8_le(r)?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -152,10 +117,10 @@ pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
         let m = M::read(r);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::IoOrParseError),
+            Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedOpcodeError::Opcode(opcode as u32))
     }
 }
 
@@ -166,7 +131,7 @@ pub async fn tokio_expect_server_message<
     R: tokio::io::AsyncReadExt + Unpin + Send,
 >(
     r: &mut R,
-) -> Result<M, ExpectedMessageError> {
+) -> Result<M, ExpectedOpcodeError> {
     let opcode = crate::util::tokio_read_u8_le(r).await?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -174,10 +139,10 @@ pub async fn tokio_expect_server_message<
         let m = M::tokio_read(r).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::IoOrParseError),
+            Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedOpcodeError::Opcode(opcode as u32))
     }
 }
 
@@ -188,7 +153,7 @@ pub async fn astd_expect_server_message<
     R: async_std::io::ReadExt + Unpin + Send,
 >(
     r: &mut R,
-) -> Result<M, ExpectedMessageError> {
+) -> Result<M, ExpectedOpcodeError> {
     let opcode = crate::util::astd_read_u8_le(r).await?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -196,10 +161,10 @@ pub async fn astd_expect_server_message<
         let m = M::astd_read(r).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedMessageError::IoOrParseError),
+            Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedOpcodeError::Opcode(opcode as u32))
     }
 }
 
@@ -248,7 +213,7 @@ pub enum InitialMessage {
 #[cfg(feature = "sync")]
 pub fn read_initial_message<R: std::io::Read>(
     r: &mut R,
-) -> Result<InitialMessage, ExpectedMessageError> {
+) -> Result<InitialMessage, ExpectedOpcodeError> {
     let opcode = read_u8_le(r)?;
     match opcode {
         CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Logon(
@@ -257,7 +222,7 @@ pub fn read_initial_message<R: std::io::Read>(
         CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Reconnect(
             CMD_AUTH_RECONNECT_CHALLENGE_Client::read(r)?,
         )),
-        opcode => Err(ExpectedMessageError::UnexpectedOpcode(opcode)),
+        opcode => Err(ExpectedOpcodeError::Opcode(opcode as u32)),
     }
 }
 
@@ -265,7 +230,7 @@ pub fn read_initial_message<R: std::io::Read>(
 #[cfg(feature = "tokio")]
 pub async fn tokio_read_initial_message<R: tokio::io::AsyncReadExt + Unpin + Send>(
     r: &mut R,
-) -> Result<InitialMessage, ExpectedMessageError> {
+) -> Result<InitialMessage, ExpectedOpcodeError> {
     let opcode = crate::util::tokio_read_u8_le(r).await?;
     match opcode {
         CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Logon(
@@ -274,7 +239,7 @@ pub async fn tokio_read_initial_message<R: tokio::io::AsyncReadExt + Unpin + Sen
         CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Reconnect(
             CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read(r).await?,
         )),
-        opcode => Err(ExpectedMessageError::UnexpectedOpcode(opcode)),
+        opcode => Err(ExpectedOpcodeError::Opcode(opcode as u32)),
     }
 }
 
@@ -282,7 +247,7 @@ pub async fn tokio_read_initial_message<R: tokio::io::AsyncReadExt + Unpin + Sen
 #[cfg(feature = "async-std")]
 pub async fn astd_read_initial_message<R: async_std::io::ReadExt + Unpin + Send>(
     r: &mut R,
-) -> Result<InitialMessage, ExpectedMessageError> {
+) -> Result<InitialMessage, ExpectedOpcodeError> {
     let opcode = crate::util::astd_read_u8_le(r).await?;
     match opcode {
         CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Logon(
@@ -291,6 +256,6 @@ pub async fn astd_read_initial_message<R: async_std::io::ReadExt + Unpin + Send>
         CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Reconnect(
             CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read(r).await?,
         )),
-        opcode => Err(ExpectedMessageError::UnexpectedOpcode(opcode)),
+        opcode => Err(ExpectedOpcodeError::Opcode(opcode as u32)),
     }
 }
