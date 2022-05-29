@@ -79,13 +79,13 @@ impl Arrays {
 
         // fixed_cstring_array: CString[10]
         for i in self.fixed_cstring_array.iter() {
-            w.write_all(&i.as_bytes())?;
+            w.write_all(i.as_bytes())?;
             w.write_all(&[0])?;
         }
 
         // variable_cstring_array: CString[index]
         for i in self.variable_cstring_array.iter() {
-            w.write_all(&i.as_bytes())?;
+            w.write_all(i.as_bytes())?;
             w.write_all(&[0])?;
         }
 

@@ -44,7 +44,7 @@ pub fn print_write_field_array(
         )),
         ArrayType::Complex(_) => s.wln("i.write_into_vec(w)?;"),
         ArrayType::CString => {
-            s.wln(format!("w.write_all(&i.as_bytes()){}?;", postfix));
+            s.wln(format!("w.write_all(i.as_bytes()){}?;", postfix));
             s.wln(format!("w.write_all(&[0]){}?;", postfix));
         }
         ArrayType::Guid => {

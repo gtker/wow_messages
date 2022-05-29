@@ -31,7 +31,7 @@ impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
 
         // rank_names: CString[10]
         for i in self.rank_names.iter() {
-            w.write_all(&i.as_bytes())?;
+            w.write_all(i.as_bytes())?;
             w.write_all(&[0])?;
         }
 

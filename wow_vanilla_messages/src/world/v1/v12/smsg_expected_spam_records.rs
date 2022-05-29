@@ -19,7 +19,7 @@ impl ServerMessage for SMSG_EXPECTED_SPAM_RECORDS {
 
         // records: CString[amount_of_records]
         for i in self.records.iter() {
-            w.write_all(&i.as_bytes())?;
+            w.write_all(i.as_bytes())?;
             w.write_all(&[0])?;
         }
 

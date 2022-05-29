@@ -56,7 +56,7 @@ impl ClientMessage for CMSG_WHO {
 
         // search_strings: CString[amount_of_strings]
         for i in self.search_strings.iter() {
-            w.write_all(&i.as_bytes())?;
+            w.write_all(i.as_bytes())?;
             w.write_all(&[0])?;
         }
 

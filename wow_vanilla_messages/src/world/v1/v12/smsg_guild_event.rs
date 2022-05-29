@@ -24,7 +24,7 @@ impl ServerMessage for SMSG_GUILD_EVENT {
 
         // event_descriptions: CString[amount_of_events]
         for i in self.event_descriptions.iter() {
-            w.write_all(&i.as_bytes())?;
+            w.write_all(i.as_bytes())?;
             w.write_all(&[0])?;
         }
 

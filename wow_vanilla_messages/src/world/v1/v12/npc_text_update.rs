@@ -22,7 +22,7 @@ impl NpcTextUpdate {
 
         // texts: CString[2]
         for i in self.texts.iter() {
-            w.write_all(&i.as_bytes())?;
+            w.write_all(i.as_bytes())?;
             w.write_all(&[0])?;
         }
 

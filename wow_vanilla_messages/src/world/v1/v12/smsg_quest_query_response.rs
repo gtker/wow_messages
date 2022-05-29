@@ -136,7 +136,7 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
 
         // objective_texts: CString[4]
         for i in self.objective_texts.iter() {
-            w.write_all(&i.as_bytes())?;
+            w.write_all(i.as_bytes())?;
             w.write_all(&[0])?;
         }
 
