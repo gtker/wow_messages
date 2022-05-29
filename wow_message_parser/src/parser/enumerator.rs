@@ -58,7 +58,7 @@ impl DefinerValue {
 impl From<&str> for DefinerValue {
     fn from(s: &str) -> Self {
         let v = utility::parse_value(s);
-        if let Ok(v) = v {
+        if let Some(v) = v {
             return Self {
                 int: v,
                 original: s.to_string(),

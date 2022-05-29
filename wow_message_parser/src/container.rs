@@ -1643,7 +1643,7 @@ impl StructMemberDefinition {
             None => {}
             Some(v) => {
                 let parsed_val = crate::parser::utility::parse_value(v.identifier());
-                if let Ok(int_val) = parsed_val {
+                if let Some(int_val) = parsed_val {
                     self.verified_value = Some(VerifiedContainerValue::new(
                         int_val,
                         v.identifier().to_string(),

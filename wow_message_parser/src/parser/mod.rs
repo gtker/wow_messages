@@ -260,7 +260,7 @@ fn parse_struct(
 
     let opcode = t.clone().find(|a| a.as_rule() == Rule::value);
     let container_type = if let Some(opcode) = opcode {
-        if let Ok(v) = utility::parse_value(opcode.as_str()) {
+        if let Some(v) = parse_value(opcode.as_str()) {
             match container_type {
                 ContainerType::Struct => panic!("struct has opcode"),
                 ContainerType::CLogin(_) => ContainerType::CLogin(v as u16),

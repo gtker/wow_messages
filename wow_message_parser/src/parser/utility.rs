@@ -1,10 +1,10 @@
-pub fn parse_value(s: &str) -> Result<u64, ()> {
+pub fn parse_value(s: &str) -> Option<u64> {
     if s.starts_with("0x") {
         let stripped = s.strip_prefix("0x").unwrap();
-        return Ok(u64::from_str_radix(stripped, 16).unwrap());
+        return Some(u64::from_str_radix(stripped, 16).unwrap());
     } else if s.starts_with("0b") {
         let stripped = s.strip_prefix("0b").unwrap();
-        return Ok(u64::from_str_radix(stripped, 2).unwrap());
+        return Some(u64::from_str_radix(stripped, 2).unwrap());
     } else if s.contains('\"') {
         let string = s.replace('\"', "").replace(r#"\0"#, "\0");
         let stripped = string.as_bytes();
@@ -14,12 +14,12 @@ pub fn parse_value(s: &str) -> Result<u64, ()> {
 
         let value = u64::from_be_bytes(bytes);
 
-        return Ok(value);
+        return Some(value);
     }
     let v = str::parse::<u64>(s);
     if let Ok(v) = v {
-        return Ok(v);
+        return Some(v);
     }
 
-    Err(())
+    None
 }
