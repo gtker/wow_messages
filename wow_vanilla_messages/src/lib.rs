@@ -1,8 +1,25 @@
 #![allow(dead_code)]
-#![allow(unused)]
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
+#![doc(html_root_url = "https://docs.rs/wow_vanilla_messages/0.1.0")]
+#![forbid(unsafe_code)]
+#![allow(
+    unused,
+    non_camel_case_types,
+    non_snake_case,
+    clippy::missing_errors_doc,
+    clippy::upper_case_acronyms
+)]
+#![deny(
+    clippy::complexity,
+    clippy::correctness,
+    clippy::perf,
+    clippy::missing_panics_doc,
+    clippy::style,
+    clippy::missing_const_for_fn,
+    clippy::doc_markdown,
+    clippy::unseparated_literal_suffix
+)]
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 use crate::util::read_u8_le;
 use std::fmt::{Display, Formatter};
 use std::io::{Error, Read, Write};

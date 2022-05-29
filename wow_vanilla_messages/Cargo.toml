@@ -33,3 +33,7 @@ features = ["attributes", "default"]
 version = "1"
 default-features = false
 features = ["macros", "rt"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
