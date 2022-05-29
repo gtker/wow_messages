@@ -29,9 +29,7 @@ impl MovementBlock {
                     fall_time,
                     flags,
                     living_orientation,
-                    living_position_x,
-                    living_position_y,
-                    living_position_z,
+                    living_position,
                     running_speed,
                     swimming_speed,
                     timestamp,
@@ -44,14 +42,8 @@ impl MovementBlock {
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes())?;
 
-                    // living_position_x: f32
-                    w.write_all(&living_position_x.to_le_bytes())?;
-
-                    // living_position_y: f32
-                    w.write_all(&living_position_y.to_le_bytes())?;
-
-                    // living_position_z: f32
-                    w.write_all(&living_position_z.to_le_bytes())?;
+                    // living_position: Vector3d
+                    living_position.write_into_vec(w)?;
 
                     // living_orientation: f32
                     w.write_all(&living_orientation.to_le_bytes())?;
@@ -131,18 +123,10 @@ impl MovementBlock {
 
                                 }
                                 MovementBlock_SplineFlag_FINAL_ANGLE::FINAL_POINT {
-                                    spline_final_point_x,
-                                    spline_final_point_y,
-                                    spline_final_point_z,
+                                    spline_final_point,
                                 } => {
-                                    // spline_final_point_x: f32
-                                    w.write_all(&spline_final_point_x.to_le_bytes())?;
-
-                                    // spline_final_point_y: f32
-                                    w.write_all(&spline_final_point_y.to_le_bytes())?;
-
-                                    // spline_final_point_z: f32
-                                    w.write_all(&spline_final_point_z.to_le_bytes())?;
+                                    // spline_final_point: Vector3d
+                                    spline_final_point.write_into_vec(w)?;
 
                                 }
                             }
@@ -173,18 +157,10 @@ impl MovementBlock {
                 }
                 MovementBlock_UpdateFlag_LIVING::HAS_POSITION {
                     orientation,
-                    position_x,
-                    position_y,
-                    position_z,
+                    position,
                 } => {
-                    // position_x: f32
-                    w.write_all(&position_x.to_le_bytes())?;
-
-                    // position_y: f32
-                    w.write_all(&position_y.to_le_bytes())?;
-
-                    // position_z: f32
-                    w.write_all(&position_z.to_le_bytes())?;
+                    // position: Vector3d
+                    position.write_into_vec(w)?;
 
                     // orientation: f32
                     w.write_all(&orientation.to_le_bytes())?;
@@ -233,12 +209,9 @@ impl MovementBlock {
             // timestamp: u32
             let timestamp = crate::util::read_u32_le(r)?;
 
-            // living_position_x: f32
-            let living_position_x = crate::util::read_f32_le(r)?;
-            // living_position_y: f32
-            let living_position_y = crate::util::read_f32_le(r)?;
-            // living_position_z: f32
-            let living_position_z = crate::util::read_f32_le(r)?;
+            // living_position: Vector3d
+            let living_position = Vector3d::read(r)?;
+
             // living_orientation: f32
             let living_orientation = crate::util::read_f32_le(r)?;
             let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
@@ -329,16 +302,11 @@ impl MovementBlock {
                     })
                 }
                 else if spline_flags.is_FINAL_POINT() {
-                    // spline_final_point_x: f32
-                    let spline_final_point_x = crate::util::read_f32_le(r)?;
-                    // spline_final_point_y: f32
-                    let spline_final_point_y = crate::util::read_f32_le(r)?;
-                    // spline_final_point_z: f32
-                    let spline_final_point_z = crate::util::read_f32_le(r)?;
+                    // spline_final_point: Vector3d
+                    let spline_final_point = Vector3d::read(r)?;
+
                     Some(MovementBlock_SplineFlag_FINAL_ANGLE::FINAL_POINT {
-                        spline_final_point_x,
-                        spline_final_point_y,
-                        spline_final_point_z,
+                        spline_final_point,
                     })
                 }
                 else {
@@ -399,9 +367,7 @@ impl MovementBlock {
                 fall_time,
                 flags,
                 living_orientation,
-                living_position_x,
-                living_position_y,
-                living_position_z,
+                living_position,
                 running_speed,
                 swimming_speed,
                 timestamp,
@@ -410,19 +376,14 @@ impl MovementBlock {
             })
         }
         else if update_flag.is_HAS_POSITION() {
-            // position_x: f32
-            let position_x = crate::util::read_f32_le(r)?;
-            // position_y: f32
-            let position_y = crate::util::read_f32_le(r)?;
-            // position_z: f32
-            let position_z = crate::util::read_f32_le(r)?;
+            // position: Vector3d
+            let position = Vector3d::read(r)?;
+
             // orientation: f32
             let orientation = crate::util::read_f32_le(r)?;
             Some(MovementBlock_UpdateFlag_LIVING::HAS_POSITION {
                 orientation,
-                position_x,
-                position_y,
-                position_z,
+                position,
             })
         }
         else {
@@ -508,9 +469,7 @@ pub enum MovementBlock_SplineFlag_FINAL_ANGLE {
         target: u64,
     },
     FINAL_POINT {
-        spline_final_point_x: f32,
-        spline_final_point_y: f32,
-        spline_final_point_z: f32,
+        spline_final_point: Vector3d,
     },
 }
 
@@ -541,14 +500,10 @@ impl MovementBlock_SplineFlag_FINAL_ANGLE {
                 8 // target: u64
             }
             Self::FINAL_POINT {
-                spline_final_point_x,
-                spline_final_point_y,
-                spline_final_point_z,
+                spline_final_point,
             } => {
                 // Not an actual enum sent over the wire
-                4 // spline_final_point_x: f32
-                + 4 // spline_final_point_y: f32
-                + 4 // spline_final_point_z: f32
+                12 // spline_final_point: Vector3d
             }
         }
     }
@@ -1990,9 +1945,7 @@ pub enum MovementBlock_UpdateFlag_LIVING {
         fall_time: f32,
         flags: MovementBlock_MovementFlags,
         living_orientation: f32,
-        living_position_x: f32,
-        living_position_y: f32,
-        living_position_z: f32,
+        living_position: Vector3d,
         running_speed: f32,
         swimming_speed: f32,
         timestamp: u32,
@@ -2001,9 +1954,7 @@ pub enum MovementBlock_UpdateFlag_LIVING {
     },
     HAS_POSITION {
         orientation: f32,
-        position_x: f32,
-        position_y: f32,
-        position_z: f32,
+        position: Vector3d,
     },
 }
 
@@ -2026,9 +1977,7 @@ impl MovementBlock_UpdateFlag_LIVING {
                 fall_time,
                 flags,
                 living_orientation,
-                living_position_x,
-                living_position_y,
-                living_position_z,
+                living_position,
                 running_speed,
                 swimming_speed,
                 timestamp,
@@ -2041,9 +1990,7 @@ impl MovementBlock_UpdateFlag_LIVING {
                 + 4 // fall_time: f32
                 + flags.size() // flags: MovementBlock_MovementFlags
                 + 4 // living_orientation: f32
-                + 4 // living_position_x: f32
-                + 4 // living_position_y: f32
-                + 4 // living_position_z: f32
+                + 12 // living_position: Vector3d
                 + 4 // running_speed: f32
                 + 4 // swimming_speed: f32
                 + 4 // timestamp: u32
@@ -2052,15 +1999,11 @@ impl MovementBlock_UpdateFlag_LIVING {
             }
             Self::HAS_POSITION {
                 orientation,
-                position_x,
-                position_y,
-                position_z,
+                position,
             } => {
                 // Not an actual enum sent over the wire
                 4 // orientation: f32
-                + 4 // position_x: f32
-                + 4 // position_y: f32
-                + 4 // position_z: f32
+                + 12 // position: Vector3d
             }
         }
     }

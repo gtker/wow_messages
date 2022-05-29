@@ -94,9 +94,7 @@ struct MovementBlock {
         /* MovementInfo */
         MovementFlags flags;
         u32 timestamp;
-        f32 living_position_x;
-        f32 living_position_y;
-        f32 living_position_z;
+        Vector3d living_position;
         f32 living_orientation;
         if (flags & ON_TRANSPORT) {
             TransportInfo transport;
@@ -130,9 +128,7 @@ struct MovementBlock {
                 u64 target;
             }
             else if (spline_flags & FINAL_POINT) {
-                f32 spline_final_point_x;
-                f32 spline_final_point_y;
-                f32 spline_final_point_z;
+                Vector3d spline_final_point;
             }
             u32 time_passed;
             u32 duration;
@@ -143,9 +139,7 @@ struct MovementBlock {
         }
     }
     else if (update_flag & HAS_POSITION) {
-        f32 position_x;
-        f32 position_y;
-        f32 position_z;
+        Vector3d position;
         f32 orientation;
     }
     if (update_flag & HIGH_GUID) {
@@ -206,9 +200,11 @@ test SMSG_UPDATE_OBJECT {
                 update_flag = LIVING | ALL | SELF;
                 flags = NONE;
                 timestamp = 0;
-                living_position_x = -8949.95;
-                living_position_y = -132.493;
-                living_position_z = 83.5312;
+                living_position = {
+                    x = -8949.95;
+                    y = -132.493;
+                    z = 83.5312;
+                };
                 living_orientation = 0.0;
                 fall_time = 0;
                 walking_speed = 1.0;
@@ -238,9 +234,9 @@ test SMSG_UPDATE_OBJECT {
     0x31, /* update_flag */
     0x00, 0x00, 0x00, 0x00, /* flags */
     0x00, 0x00, 0x00, 0x00, /* timestamp */
-    0xcd, 0xd7, 0x0b, 0xc6, /* living_position_x */
-    0x35, 0x7e, 0x04, 0xc3, /* living_position_y */
-    0xf9, 0x0f, 0xa7, 0x42, /* living_position_z */
+    0xcd, 0xd7, 0x0b, 0xc6, /* living_position.x */
+    0x35, 0x7e, 0x04, 0xc3, /* living_position.y */
+    0xf9, 0x0f, 0xa7, 0x42, /* living_position.z */
     0x00, 0x00, 0x00, 0x00, /* living_orientation */
     0x00, 0x00, 0x00, 0x00, /* fall_time */
     0x00, 0x00, 0x80, 0x3f, /* walking_speed */
@@ -271,9 +267,11 @@ test SMSG_UPDATE_OBJECT {
                 update_flag = LIVING | ALL | SELF;
                 flags = NONE;
                 timestamp = 0;
-                living_position_x = -8949.95;
-                living_position_y = -132.493;
-                living_position_z = 83.5312;
+                living_position = {
+                    x = -8949.95;
+                    y = -132.493;
+                    z = 83.5312;
+                };
                 living_orientation = 0.0;
                 fall_time = 0;
                 walking_speed = 1.0;
@@ -309,9 +307,9 @@ test SMSG_UPDATE_OBJECT {
     0x31, /* update_flag */
     0x00, 0x00, 0x00, 0x00, /* flags */
     0x00, 0x00, 0x00, 0x00, /* timestamp */
-    0xcd, 0xd7, 0x0b, 0xc6, /* living_position_x */
-    0x35, 0x7e, 0x04, 0xc3, /* living_position_y */
-    0xf9, 0x0f, 0xa7, 0x42, /* living_position_z */
+    0xcd, 0xd7, 0x0b, 0xc6, /* living_position.x */
+    0x35, 0x7e, 0x04, 0xc3, /* living_position.y */
+    0xf9, 0x0f, 0xa7, 0x42, /* living_position.z */
     0x00, 0x00, 0x00, 0x00, /* living_orientation */
     0x00, 0x00, 0x00, 0x00, /* fall_time */
     0x00, 0x00, 0x80, 0x3f, /* walking_speed */

@@ -115,9 +115,11 @@ mod test {
                                     flags: MovementBlock_MovementFlags::empty()
                                         ,
                                     living_orientation: 0_f32,
-                                    living_position_x: -8949.95_f32,
-                                    living_position_y: -132.493_f32,
-                                    living_position_z: 83.5312_f32,
+                                    living_position: Vector3d {
+                                        x: -8949.95_f32,
+                                        y: -132.493_f32,
+                                        z: 83.5312_f32,
+                                    },
                                     running_speed: 7_f32,
                                     swimming_speed: 0_f32,
                                     timestamp: 0x0,
@@ -177,9 +179,11 @@ mod test {
                                     flags: MovementBlock_MovementFlags::empty()
                                         ,
                                     living_orientation: 0_f32,
-                                    living_position_x: -8949.95_f32,
-                                    living_position_y: -132.493_f32,
-                                    living_position_z: 83.5312_f32,
+                                    living_position: Vector3d {
+                                        x: -8949.95_f32,
+                                        y: -132.493_f32,
+                                        z: 83.5312_f32,
+                                    },
                                     running_speed: 7_f32,
                                     swimming_speed: 0_f32,
                                     timestamp: 0x0,
@@ -239,9 +243,11 @@ mod test {
                                     flags: MovementBlock_MovementFlags::empty()
                                         ,
                                     living_orientation: 0_f32,
-                                    living_position_x: -8949.95_f32,
-                                    living_position_y: -132.493_f32,
-                                    living_position_z: 83.5312_f32,
+                                    living_position: Vector3d {
+                                        x: -8949.95_f32,
+                                        y: -132.493_f32,
+                                        z: 83.5312_f32,
+                                    },
                                     running_speed: 7_f32,
                                     swimming_speed: 0_f32,
                                     timestamp: 0x0,
@@ -320,9 +326,11 @@ mod test {
                                     flags: MovementBlock_MovementFlags::empty()
                                         ,
                                     living_orientation: 0_f32,
-                                    living_position_x: -8949.95_f32,
-                                    living_position_y: -132.493_f32,
-                                    living_position_z: 83.5312_f32,
+                                    living_position: Vector3d {
+                                        x: -8949.95_f32,
+                                        y: -132.493_f32,
+                                        z: 83.5312_f32,
+                                    },
                                     running_speed: 7_f32,
                                     swimming_speed: 0_f32,
                                     timestamp: 0x0,
@@ -388,9 +396,11 @@ mod test {
                                     flags: MovementBlock_MovementFlags::empty()
                                         ,
                                     living_orientation: 0_f32,
-                                    living_position_x: -8949.95_f32,
-                                    living_position_y: -132.493_f32,
-                                    living_position_z: 83.5312_f32,
+                                    living_position: Vector3d {
+                                        x: -8949.95_f32,
+                                        y: -132.493_f32,
+                                        z: 83.5312_f32,
+                                    },
                                     running_speed: 7_f32,
                                     swimming_speed: 0_f32,
                                     timestamp: 0x0,
@@ -456,9 +466,11 @@ mod test {
                                     flags: MovementBlock_MovementFlags::empty()
                                         ,
                                     living_orientation: 0_f32,
-                                    living_position_x: -8949.95_f32,
-                                    living_position_y: -132.493_f32,
-                                    living_position_z: 83.5312_f32,
+                                    living_position: Vector3d {
+                                        x: -8949.95_f32,
+                                        y: -132.493_f32,
+                                        z: 83.5312_f32,
+                                    },
                                     running_speed: 7_f32,
                                     swimming_speed: 0_f32,
                                     timestamp: 0x0,

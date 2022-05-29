@@ -11,9 +11,7 @@ struct MovementBlock {
     if (update_flag & LIVING) {
         MovementFlags flags;
         u32 timestamp;
-        f32 living_position_x;
-        f32 living_position_y;
-        f32 living_position_z;
+        Vector3d living_position;
         f32 living_orientation;
         if (flags & ON_TRANSPORT) {
             TransportInfo transport;
@@ -46,9 +44,7 @@ struct MovementBlock {
                 u64 target;
             }
             else if (spline_flags & FINAL_POINT) {
-                f32 spline_final_point_x;
-                f32 spline_final_point_y;
-                f32 spline_final_point_z;
+                Vector3d spline_final_point;
             }
             u32 time_passed;
             u32 duration;
@@ -59,9 +55,7 @@ struct MovementBlock {
         }
     }
     else if (update_flag & HAS_POSITION) {
-        f32 position_x;
-        f32 position_y;
-        f32 position_z;
+        Vector3d position;
         f32 orientation;
     }
     if (update_flag & HIGH_GUID) {
@@ -90,9 +84,7 @@ If update_flag contains `LIVING`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
 | - | 4 / Little | u32 | timestamp |  |  |
-| - | 4 / Little | f32 | living_position_x |  |  |
-| - | 4 / Little | f32 | living_position_y |  |  |
-| - | 4 / Little | f32 | living_position_z |  |  |
+| - | ? / - | [Vector3d](vector3d.md) | living_position |  |  |
 | - | 4 / Little | f32 | living_orientation |  |  |
 
 If flags contains `ON_TRANSPORT`:
@@ -151,9 +143,7 @@ Else If spline_flags contains `FINAL_POINT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | spline_final_point_x |  |  |
-| - | 4 / Little | f32 | spline_final_point_y |  |  |
-| - | 4 / Little | f32 | spline_final_point_z |  |  |
+| - | ? / - | [Vector3d](vector3d.md) | spline_final_point |  |  |
 | - | 4 / Little | u32 | time_passed |  |  |
 | - | 4 / Little | u32 | duration |  |  |
 | - | 4 / Little | u32 | id |  |  |
@@ -165,9 +155,7 @@ Else If update_flag contains `HAS_POSITION`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | position_x |  |  |
-| - | 4 / Little | f32 | position_y |  |  |
-| - | 4 / Little | f32 | position_z |  |  |
+| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | f32 | orientation |  |  |
 
 If update_flag contains `HIGH_GUID`:

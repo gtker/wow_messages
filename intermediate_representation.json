@@ -66889,38 +66889,11 @@
               },
               {
                 "Definition": {
-                  "name": "living_position_x",
+                  "name": "living_position",
                   "member_type": {
-                    "FloatingPoint": {
-                      "F32": "little"
-                    }
-                  },
-                  "constant_value": null,
-                  "used_as_size_in": null,
-                  "used_in_if": false,
-                  "tags": {}
-                }
-              },
-              {
-                "Definition": {
-                  "name": "living_position_y",
-                  "member_type": {
-                    "FloatingPoint": {
-                      "F32": "little"
-                    }
-                  },
-                  "constant_value": null,
-                  "used_as_size_in": null,
-                  "used_in_if": false,
-                  "tags": {}
-                }
-              },
-              {
-                "Definition": {
-                  "name": "living_position_z",
-                  "member_type": {
-                    "FloatingPoint": {
-                      "F32": "little"
+                    "Identifier": {
+                      "s": "Vector3d",
+                      "upcast": null
                     }
                   },
                   "constant_value": null,
@@ -67344,38 +67317,11 @@
                             "members": [
                               {
                                 "Definition": {
-                                  "name": "spline_final_point_x",
+                                  "name": "spline_final_point",
                                   "member_type": {
-                                    "FloatingPoint": {
-                                      "F32": "little"
-                                    }
-                                  },
-                                  "constant_value": null,
-                                  "used_as_size_in": null,
-                                  "used_in_if": false,
-                                  "tags": {}
-                                }
-                              },
-                              {
-                                "Definition": {
-                                  "name": "spline_final_point_y",
-                                  "member_type": {
-                                    "FloatingPoint": {
-                                      "F32": "little"
-                                    }
-                                  },
-                                  "constant_value": null,
-                                  "used_as_size_in": null,
-                                  "used_in_if": false,
-                                  "tags": {}
-                                }
-                              },
-                              {
-                                "Definition": {
-                                  "name": "spline_final_point_z",
-                                  "member_type": {
-                                    "FloatingPoint": {
-                                      "F32": "little"
+                                    "Identifier": {
+                                      "s": "Vector3d",
+                                      "upcast": null
                                     }
                                   },
                                   "constant_value": null,
@@ -67525,38 +67471,11 @@
                 "members": [
                   {
                     "Definition": {
-                      "name": "position_x",
+                      "name": "position",
                       "member_type": {
-                        "FloatingPoint": {
-                          "F32": "little"
-                        }
-                      },
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {}
-                    }
-                  },
-                  {
-                    "Definition": {
-                      "name": "position_y",
-                      "member_type": {
-                        "FloatingPoint": {
-                          "F32": "little"
-                        }
-                      },
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {}
-                    }
-                  },
-                  {
-                    "Definition": {
-                      "name": "position_z",
-                      "member_type": {
-                        "FloatingPoint": {
-                          "F32": "little"
+                        "Identifier": {
+                          "s": "Vector3d",
+                          "upcast": null
                         }
                       },
                       "constant_value": null,
@@ -68547,7 +68466,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-        "start_position": 169
+        "start_position": 163
       },
       "only_has_io_error": false,
       "features": [
@@ -96235,31 +96154,42 @@
                                 "tags": {}
                               },
                               {
-                                "variable_name": "living_position_x",
+                                "variable_name": "living_position",
                                 "verified_value": {
-                                  "FloatingNumber": {
-                                    "value": -8949.95,
-                                    "original_string": "-8949.95"
-                                  }
-                                },
-                                "tags": {}
-                              },
-                              {
-                                "variable_name": "living_position_y",
-                                "verified_value": {
-                                  "FloatingNumber": {
-                                    "value": -132.493,
-                                    "original_string": "-132.493"
-                                  }
-                                },
-                                "tags": {}
-                              },
-                              {
-                                "variable_name": "living_position_z",
-                                "verified_value": {
-                                  "FloatingNumber": {
-                                    "value": 83.5312,
-                                    "original_string": "83.5312"
+                                  "SubObject": {
+                                    "ty_name": "Vector3d",
+                                    "members": [
+                                      {
+                                        "variable_name": "x",
+                                        "verified_value": {
+                                          "FloatingNumber": {
+                                            "value": -8949.95,
+                                            "original_string": "-8949.95"
+                                          }
+                                        },
+                                        "tags": {}
+                                      },
+                                      {
+                                        "variable_name": "y",
+                                        "verified_value": {
+                                          "FloatingNumber": {
+                                            "value": -132.493,
+                                            "original_string": "-132.493"
+                                          }
+                                        },
+                                        "tags": {}
+                                      },
+                                      {
+                                        "variable_name": "z",
+                                        "verified_value": {
+                                          "FloatingNumber": {
+                                            "value": 83.5312,
+                                            "original_string": "83.5312"
+                                          }
+                                        },
+                                        "tags": {}
+                                      }
+                                    ]
                                   }
                                 },
                                 "tags": {}
@@ -96511,7 +96441,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-            "start_position": 198
+            "start_position": 192
           }
         },
         {
@@ -96601,31 +96531,42 @@
                                 "tags": {}
                               },
                               {
-                                "variable_name": "living_position_x",
+                                "variable_name": "living_position",
                                 "verified_value": {
-                                  "FloatingNumber": {
-                                    "value": -8949.95,
-                                    "original_string": "-8949.95"
-                                  }
-                                },
-                                "tags": {}
-                              },
-                              {
-                                "variable_name": "living_position_y",
-                                "verified_value": {
-                                  "FloatingNumber": {
-                                    "value": -132.493,
-                                    "original_string": "-132.493"
-                                  }
-                                },
-                                "tags": {}
-                              },
-                              {
-                                "variable_name": "living_position_z",
-                                "verified_value": {
-                                  "FloatingNumber": {
-                                    "value": 83.5312,
-                                    "original_string": "83.5312"
+                                  "SubObject": {
+                                    "ty_name": "Vector3d",
+                                    "members": [
+                                      {
+                                        "variable_name": "x",
+                                        "verified_value": {
+                                          "FloatingNumber": {
+                                            "value": -8949.95,
+                                            "original_string": "-8949.95"
+                                          }
+                                        },
+                                        "tags": {}
+                                      },
+                                      {
+                                        "variable_name": "y",
+                                        "verified_value": {
+                                          "FloatingNumber": {
+                                            "value": -132.493,
+                                            "original_string": "-132.493"
+                                          }
+                                        },
+                                        "tags": {}
+                                      },
+                                      {
+                                        "variable_name": "z",
+                                        "verified_value": {
+                                          "FloatingNumber": {
+                                            "value": 83.5312,
+                                            "original_string": "83.5312"
+                                          }
+                                        },
+                                        "tags": {}
+                                      }
+                                    ]
                                   }
                                 },
                                 "tags": {}
@@ -96942,13 +96883,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-            "start_position": 263
+            "start_position": 259
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-        "start_position": 192
+        "start_position": 186
       },
       "only_has_io_error": false,
       "features": [
