@@ -211,6 +211,7 @@ impl Type {
         }
     }
 
+    #[allow(clippy::should_implement_trait)]
     pub fn from_str(s: &str) -> Self {
         let s = match s {
             "u8" => Self::Integer(IntegerType::U8),
