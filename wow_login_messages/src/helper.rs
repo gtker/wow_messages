@@ -49,7 +49,7 @@ pub fn expect_client_message<M: ClientMessage, R: std::io::Read>(
 }
 
 #[cfg(feature = "tokio")]
-pub async fn tokio_expect_login_message<
+pub async fn tokio_expect_client_message<
     M: ClientMessage,
     R: tokio::io::AsyncReadExt + Unpin + Send,
 >(

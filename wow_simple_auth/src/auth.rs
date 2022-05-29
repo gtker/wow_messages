@@ -5,7 +5,7 @@ use wow_login_messages::all::{
     CMD_AUTH_LOGON_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_Client,
 };
 use wow_login_messages::helper::{
-    tokio_expect_login_message, tokio_read_initial_opcode, InitialOpcode, InitialOpcodeError,
+    tokio_expect_client_message, tokio_read_initial_opcode, InitialOpcode, InitialOpcodeError,
 };
 use wow_login_messages::ServerMessage;
 use wow_srp::normalized_string::NormalizedString;
@@ -68,7 +68,7 @@ async fn reconnect_version_8(
     .await
     .unwrap();
 
-    let l = tokio_expect_login_message::<CMD_AUTH_RECONNECT_PROOF_Client, _>(&mut stream)
+    let l = tokio_expect_client_message::<CMD_AUTH_RECONNECT_PROOF_Client, _>(&mut stream)
         .await
         .unwrap();
 
@@ -126,7 +126,7 @@ async fn reconnect_version_2(
     .await
     .unwrap();
 
-    let l = tokio_expect_login_message::<CMD_AUTH_RECONNECT_PROOF_Client, _>(&mut stream)
+    let l = tokio_expect_client_message::<CMD_AUTH_RECONNECT_PROOF_Client, _>(&mut stream)
         .await
         .unwrap();
 
@@ -184,7 +184,7 @@ async fn login_version_2(
     .unwrap();
     println!("Sent Logon Challenge");
 
-    let l = tokio_expect_login_message::<CMD_AUTH_LOGON_PROOF_Client, _>(&mut stream)
+    let l = tokio_expect_client_message::<CMD_AUTH_LOGON_PROOF_Client, _>(&mut stream)
         .await
         .unwrap();
 
@@ -243,7 +243,7 @@ async fn login_version_3(
     .unwrap();
     println!("Sent Logon Challenge");
 
-    let l = tokio_expect_login_message::<CMD_AUTH_LOGON_PROOF_Client, _>(&mut stream)
+    let l = tokio_expect_client_message::<CMD_AUTH_LOGON_PROOF_Client, _>(&mut stream)
         .await
         .unwrap();
 
@@ -295,7 +295,7 @@ async fn login_version_8(
     .unwrap();
     println!("Sent Logon Challenge");
 
-    let l = tokio_expect_login_message::<CMD_AUTH_LOGON_PROOF_Client, _>(&mut stream)
+    let l = tokio_expect_client_message::<CMD_AUTH_LOGON_PROOF_Client, _>(&mut stream)
         .await
         .unwrap();
 
@@ -327,7 +327,7 @@ async fn login_version_8(
 async fn print_version_2_3_realm_list(mut stream: TcpStream) {
     use wow_login_messages::version_2::*;
 
-    while let Ok(_) = tokio_expect_login_message::<CMD_REALM_LIST_Client, _>(&mut stream).await {
+    while let Ok(_) = tokio_expect_client_message::<CMD_REALM_LIST_Client, _>(&mut stream).await {
         CMD_REALM_LIST_Server {
             realms: vec![Realm {
                 realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
@@ -350,7 +350,7 @@ async fn print_version_2_3_realm_list(mut stream: TcpStream) {
 async fn print_version_8_realm_list(mut stream: TcpStream) {
     use wow_login_messages::version_8::*;
 
-    while let Ok(_) = tokio_expect_login_message::<CMD_REALM_LIST_Client, _>(&mut stream).await {
+    while let Ok(_) = tokio_expect_client_message::<CMD_REALM_LIST_Client, _>(&mut stream).await {
         let mut realms = Vec::new();
         for i in 0..9 {
             realms.push(Realm {
