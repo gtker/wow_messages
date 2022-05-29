@@ -38,33 +38,5 @@ impl Faction {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // reputation_list_id: u32
-        let reputation_list_id = crate::util::tokio_read_u32_le(r).await?;
-
-        // standing: u32
-        let standing = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            reputation_list_id,
-            standing,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // reputation_list_id: u32
-        let reputation_list_id = crate::util::astd_read_u32_le(r).await?;
-
-        // standing: u32
-        let standing = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            reputation_list_id,
-            standing,
-        })
-    }
-
 }
 

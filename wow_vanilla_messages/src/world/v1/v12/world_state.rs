@@ -38,33 +38,5 @@ impl WorldState {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // state: u32
-        let state = crate::util::tokio_read_u32_le(r).await?;
-
-        // value: u32
-        let value = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            state,
-            value,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // state: u32
-        let state = crate::util::astd_read_u32_le(r).await?;
-
-        // value: u32
-        let value = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            state,
-            value,
-        })
-    }
-
 }
 

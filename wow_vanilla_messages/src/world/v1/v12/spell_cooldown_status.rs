@@ -38,33 +38,5 @@ impl SpellCooldownStatus {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // id: u32
-        let id = crate::util::tokio_read_u32_le(r).await?;
-
-        // cooldown_time_in_msecs: u32
-        let cooldown_time_in_msecs = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            id,
-            cooldown_time_in_msecs,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // id: u32
-        let id = crate::util::astd_read_u32_le(r).await?;
-
-        // cooldown_time_in_msecs: u32
-        let cooldown_time_in_msecs = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            id,
-            cooldown_time_in_msecs,
-        })
-    }
-
 }
 

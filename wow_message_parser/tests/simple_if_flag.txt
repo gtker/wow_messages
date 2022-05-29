@@ -53,60 +53,6 @@ impl SimpleIfFlag {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // flag: SimpleFlag
-        let flag = SimpleFlag::new(crate::util::tokio_read_u8_le(r).await?);
-
-        let flag_ZERO = if flag.is_ZERO() {
-            // basic: u8
-            let basic = crate::util::tokio_read_u8_le(r).await?;
-
-            Some(SimpleIfFlagSimpleFlagZERO {
-                basic,
-            })
-        }
-        else {
-            None
-        };
-
-        let flag = SimpleIfFlagSimpleFlag {
-            inner: flag.as_int(),
-            zero: flag_ZERO,
-        };
-
-        Ok(Self {
-            flag,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // flag: SimpleFlag
-        let flag = SimpleFlag::new(crate::util::astd_read_u8_le(r).await?);
-
-        let flag_ZERO = if flag.is_ZERO() {
-            // basic: u8
-            let basic = crate::util::astd_read_u8_le(r).await?;
-
-            Some(SimpleIfFlagSimpleFlagZERO {
-                basic,
-            })
-        }
-        else {
-            None
-        };
-
-        let flag = SimpleIfFlagSimpleFlag {
-            inner: flag.as_int(),
-            zero: flag_ZERO,
-        };
-
-        Ok(Self {
-            flag,
-        })
-    }
-
 }
 
 impl SimpleIfFlag {

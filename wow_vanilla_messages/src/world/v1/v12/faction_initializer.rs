@@ -39,33 +39,5 @@ impl FactionInitializer {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // flag: FactionFlag
-        let flag = FactionFlag::new(crate::util::tokio_read_u8_le(r).await?);
-
-        // standing: u32
-        let standing = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            flag,
-            standing,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // flag: FactionFlag
-        let flag = FactionFlag::new(crate::util::astd_read_u8_le(r).await?);
-
-        // standing: u32
-        let standing = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            flag,
-            standing,
-        })
-    }
-
 }
 

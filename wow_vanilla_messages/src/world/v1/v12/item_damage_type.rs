@@ -46,41 +46,5 @@ impl ItemDamageType {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // damage_minimum: u32
-        let damage_minimum = crate::util::tokio_read_u32_le(r).await?;
-
-        // damage_maximum: u32
-        let damage_maximum = crate::util::tokio_read_u32_le(r).await?;
-
-        // damage_type: u32
-        let damage_type = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            damage_minimum,
-            damage_maximum,
-            damage_type,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // damage_minimum: u32
-        let damage_minimum = crate::util::astd_read_u32_le(r).await?;
-
-        // damage_maximum: u32
-        let damage_maximum = crate::util::astd_read_u32_le(r).await?;
-
-        // damage_type: u32
-        let damage_type = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            damage_minimum,
-            damage_maximum,
-            damage_type,
-        })
-    }
-
 }
 

@@ -56,52 +56,6 @@ impl QuestItem {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // quest_id: u32
-        let quest_id = crate::util::tokio_read_u32_le(r).await?;
-
-        // quest_icon: u32
-        let quest_icon = crate::util::tokio_read_u32_le(r).await?;
-
-        // level: u32
-        let level = crate::util::tokio_read_u32_le(r).await?;
-
-        // title: CString
-        let title = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let title = String::from_utf8(title)?;
-
-        Ok(Self {
-            quest_id,
-            quest_icon,
-            level,
-            title,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // quest_id: u32
-        let quest_id = crate::util::astd_read_u32_le(r).await?;
-
-        // quest_icon: u32
-        let quest_icon = crate::util::astd_read_u32_le(r).await?;
-
-        // level: u32
-        let level = crate::util::astd_read_u32_le(r).await?;
-
-        // title: CString
-        let title = crate::util::astd_read_c_string_to_vec(r).await?;
-        let title = String::from_utf8(title)?;
-
-        Ok(Self {
-            quest_id,
-            quest_icon,
-            level,
-            title,
-        })
-    }
-
 }
 
 impl QuestItem {

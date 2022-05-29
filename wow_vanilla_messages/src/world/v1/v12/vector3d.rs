@@ -43,35 +43,5 @@ impl Vector3d {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // x: f32
-        let x = crate::util::tokio_read_f32_le(r).await?;
-        // y: f32
-        let y = crate::util::tokio_read_f32_le(r).await?;
-        // z: f32
-        let z = crate::util::tokio_read_f32_le(r).await?;
-        Ok(Self {
-            x,
-            y,
-            z,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // x: f32
-        let x = crate::util::astd_read_f32_le(r).await?;
-        // y: f32
-        let y = crate::util::astd_read_f32_le(r).await?;
-        // z: f32
-        let z = crate::util::astd_read_f32_le(r).await?;
-        Ok(Self {
-            x,
-            y,
-            z,
-        })
-    }
-
 }
 

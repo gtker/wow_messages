@@ -18,6 +18,8 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 
     match e.container_type() {
         ContainerType::Struct => {
+            let create_async_reads = e.tags().has_login_version();
+
             s.impl_read_write_non_trait_pub_crate(
                 e.name(),
                 error_ty,
@@ -27,6 +29,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 |s, it| {
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
+                create_async_reads,
             );
         }
         ContainerType::CLogin(opcode) | ContainerType::SLogin(opcode) => {

@@ -25,20 +25,6 @@ impl AuraMask {
         Ok(Self { auras })
     }
 
-    #[cfg(feature = "async-std")]
-    pub async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
-        let mut auras = [None; Self::MAX_CAPACITY];
-        let mut bit_pattern: u32 = crate::util::astd_read_u32_le(r).await?;
-
-        for i in 0..Self::MAX_CAPACITY {
-            if (bit_pattern & (1 << i)) != 0 {
-                auras[i] = Some(crate::util::astd_read_u16_le(r).await?);
-            }
-        }
-
-        Ok(Self { auras })
-    }
-
     pub(crate) fn as_bytes(&self) -> Vec<u8> {
         let mut v = Vec::with_capacity(48 * 4);
         let mut bit_pattern: u32 = 0;
@@ -57,20 +43,6 @@ impl AuraMask {
         }
 
         v
-    }
-
-    #[cfg(feature = "tokio")]
-    pub async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
-        let mut auras = [None; Self::MAX_CAPACITY];
-        let mut bit_pattern: u32 = crate::util::tokio_read_u32_le(r).await?;
-
-        for i in 0..Self::MAX_CAPACITY {
-            if (bit_pattern & (1 << i)) != 0 {
-                auras[i] = Some(crate::util::tokio_read_u16_le(r).await?);
-            }
-        }
-
-        Ok(Self { auras })
     }
 
     pub fn auras(&self) -> &[Option<u16>] {

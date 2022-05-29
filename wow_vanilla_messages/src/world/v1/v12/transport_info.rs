@@ -66,58 +66,6 @@ impl TransportInfo {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // guid: PackedGuid
-        let guid = Guid::tokio_read_packed(r).await?;
-
-        // position_x: f32
-        let position_x = crate::util::tokio_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::tokio_read_f32_le(r).await?;
-        // position_z: f32
-        let position_z = crate::util::tokio_read_f32_le(r).await?;
-        // orientation: f32
-        let orientation = crate::util::tokio_read_f32_le(r).await?;
-        // timestamp: u32
-        let timestamp = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            guid,
-            position_x,
-            position_y,
-            position_z,
-            orientation,
-            timestamp,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // guid: PackedGuid
-        let guid = Guid::astd_read_packed(r).await?;
-
-        // position_x: f32
-        let position_x = crate::util::astd_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::astd_read_f32_le(r).await?;
-        // position_z: f32
-        let position_z = crate::util::astd_read_f32_le(r).await?;
-        // orientation: f32
-        let orientation = crate::util::astd_read_f32_le(r).await?;
-        // timestamp: u32
-        let timestamp = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            guid,
-            position_x,
-            position_y,
-            position_z,
-            orientation,
-            timestamp,
-        })
-    }
-
 }
 
 impl TransportInfo {

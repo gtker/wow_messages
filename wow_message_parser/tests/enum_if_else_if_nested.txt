@@ -64,60 +64,6 @@ impl EnumIfElseIfNested {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // e: SimpleEnum
-        let e: SimpleEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-        // n: NestedEnum
-        let n: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-        let e_if = match e {
-            SimpleEnum::ZERO => {
-                // zero: u8
-                let zero = crate::util::tokio_read_u8_le(r).await?;
-
-                EnumIfElseIfNestedSimpleEnum::ZERO {
-                    zero,
-                }
-            }
-            SimpleEnum::ONE => EnumIfElseIfNestedSimpleEnum::ONE,
-            SimpleEnum::TWO => EnumIfElseIfNestedSimpleEnum::TWO,
-        };
-
-        Ok(Self {
-            e: e_if,
-            n: n_if,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // e: SimpleEnum
-        let e: SimpleEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-        // n: NestedEnum
-        let n: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-        let e_if = match e {
-            SimpleEnum::ZERO => {
-                // zero: u8
-                let zero = crate::util::astd_read_u8_le(r).await?;
-
-                EnumIfElseIfNestedSimpleEnum::ZERO {
-                    zero,
-                }
-            }
-            SimpleEnum::ONE => EnumIfElseIfNestedSimpleEnum::ONE,
-            SimpleEnum::TWO => EnumIfElseIfNestedSimpleEnum::TWO,
-        };
-
-        Ok(Self {
-            e: e_if,
-            n: n_if,
-        })
-    }
-
 }
 
 impl EnumIfElseIfNested {

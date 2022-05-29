@@ -55,52 +55,6 @@ impl SimpleIfEnum {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // enum: SimpleEnum
-        let enum: SimpleEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-        let enum_if = match enum {
-            SimpleEnum::ZERO => {
-                // basic: u8
-                let basic = crate::util::tokio_read_u8_le(r).await?;
-
-                SimpleIfEnumSimpleEnum::ZERO {
-                    basic,
-                }
-            }
-            SimpleEnum::ONE => SimpleIfEnumSimpleEnum::ONE,
-            SimpleEnum::TWO => SimpleIfEnumSimpleEnum::TWO,
-        };
-
-        Ok(Self {
-            enum: enum_if,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // enum: SimpleEnum
-        let enum: SimpleEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-        let enum_if = match enum {
-            SimpleEnum::ZERO => {
-                // basic: u8
-                let basic = crate::util::astd_read_u8_le(r).await?;
-
-                SimpleIfEnumSimpleEnum::ZERO {
-                    basic,
-                }
-            }
-            SimpleEnum::ONE => SimpleIfEnumSimpleEnum::ONE,
-            SimpleEnum::TWO => SimpleIfEnumSimpleEnum::TWO,
-        };
-
-        Ok(Self {
-            enum: enum_if,
-        })
-    }
-
 }
 
 impl SimpleIfEnum {

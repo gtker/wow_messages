@@ -54,49 +54,5 @@ impl QuestObjective {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // creature_id: u32
-        let creature_id = crate::util::tokio_read_u32_le(r).await?;
-
-        // kill_count: u32
-        let kill_count = crate::util::tokio_read_u32_le(r).await?;
-
-        // required_item_id: u32
-        let required_item_id = crate::util::tokio_read_u32_le(r).await?;
-
-        // required_item_count: u32
-        let required_item_count = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            creature_id,
-            kill_count,
-            required_item_id,
-            required_item_count,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // creature_id: u32
-        let creature_id = crate::util::astd_read_u32_le(r).await?;
-
-        // kill_count: u32
-        let kill_count = crate::util::astd_read_u32_le(r).await?;
-
-        // required_item_id: u32
-        let required_item_id = crate::util::astd_read_u32_le(r).await?;
-
-        // required_item_count: u32
-        let required_item_count = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            creature_id,
-            kill_count,
-            required_item_id,
-            required_item_count,
-        })
-    }
-
 }
 

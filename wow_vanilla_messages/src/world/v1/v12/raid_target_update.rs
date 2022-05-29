@@ -40,33 +40,5 @@ impl RaidTargetUpdate {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // index: RaidTargetIndex
-        let index: RaidTargetIndex = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-        // guid: Guid
-        let guid = Guid::tokio_read(r).await?;
-
-        Ok(Self {
-            index,
-            guid,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // index: RaidTargetIndex
-        let index: RaidTargetIndex = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-        // guid: Guid
-        let guid = Guid::astd_read(r).await?;
-
-        Ok(Self {
-            index,
-            guid,
-        })
-    }
-
 }
 

@@ -39,33 +39,5 @@ impl CharacterGear {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // equipment_display_id: u32
-        let equipment_display_id = crate::util::tokio_read_u32_le(r).await?;
-
-        // inventory_type: InventoryType
-        let inventory_type: InventoryType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-        Ok(Self {
-            equipment_display_id,
-            inventory_type,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // equipment_display_id: u32
-        let equipment_display_id = crate::util::astd_read_u32_le(r).await?;
-
-        // inventory_type: InventoryType
-        let inventory_type: InventoryType = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-        Ok(Self {
-            equipment_display_id,
-            inventory_type,
-        })
-    }
-
 }
 

@@ -332,6 +332,7 @@ impl Writer {
         read_function: F,
         write_function: F2,
         visibility: impl AsRef<str>,
+        create_async_reads: bool,
     ) {
         self.write_into_vec(&type_name, write_function);
 
@@ -339,6 +340,10 @@ impl Writer {
 
         for it in ImplType::types() {
             if it.is_async() {
+                if !create_async_reads {
+                    continue;
+                }
+
                 self.wln(it.cfg());
             }
             self.open_curly(format!(
@@ -367,8 +372,16 @@ impl Writer {
         error_name: S1,
         read_function: F,
         write_function: F2,
+        create_async_reads: bool,
     ) {
-        self.impl_read_write_non_trait(type_name, error_name, read_function, write_function, "pub")
+        self.impl_read_write_non_trait(
+            type_name,
+            error_name,
+            read_function,
+            write_function,
+            "pub",
+            create_async_reads,
+        )
     }
 
     pub fn impl_read_write_non_trait_pub_crate<
@@ -382,6 +395,7 @@ impl Writer {
         error_name: S1,
         read_function: F,
         write_function: F2,
+        create_async_reads: bool,
     ) {
         self.impl_read_write_non_trait(
             type_name,
@@ -389,6 +403,7 @@ impl Writer {
             read_function,
             write_function,
             "pub(crate)",
+            create_async_reads,
         )
     }
 

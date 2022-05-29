@@ -68,66 +68,6 @@ impl NpcTextUpdate {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // probability: f32
-        let probability = crate::util::tokio_read_f32_le(r).await?;
-        // texts: CString[2]
-        let mut texts = Vec::with_capacity(2 as usize);
-        for i in 0..2 {
-            let s = crate::util::tokio_read_c_string_to_vec(r).await?;
-            texts[i] = String::from_utf8(s)?;
-        }
-        let texts = texts.try_into().unwrap();
-
-        // language: Language
-        let language: Language = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-        // emotes: NpcTextUpdateEmote[3]
-        let mut emotes = Vec::with_capacity(3 as usize);
-        for i in 0..3 {
-            emotes.push(NpcTextUpdateEmote::tokio_read(r).await?);
-        }
-        let emotes = emotes.try_into().unwrap();
-
-        Ok(Self {
-            probability,
-            texts,
-            language,
-            emotes,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // probability: f32
-        let probability = crate::util::astd_read_f32_le(r).await?;
-        // texts: CString[2]
-        let mut texts = Vec::with_capacity(2 as usize);
-        for i in 0..2 {
-            let s = crate::util::astd_read_c_string_to_vec(r).await?;
-            texts[i] = String::from_utf8(s)?;
-        }
-        let texts = texts.try_into().unwrap();
-
-        // language: Language
-        let language: Language = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-        // emotes: NpcTextUpdateEmote[3]
-        let mut emotes = Vec::with_capacity(3 as usize);
-        for i in 0..3 {
-            emotes.push(NpcTextUpdateEmote::astd_read(r).await?);
-        }
-        let emotes = emotes.try_into().unwrap();
-
-        Ok(Self {
-            probability,
-            texts,
-            language,
-            emotes,
-        })
-    }
-
 }
 
 impl NpcTextUpdate {

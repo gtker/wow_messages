@@ -45,37 +45,5 @@ impl BattlegroundPlayerPosition {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // player: Guid
-        let player = Guid::tokio_read(r).await?;
-
-        // position_x: f32
-        let position_x = crate::util::tokio_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::tokio_read_f32_le(r).await?;
-        Ok(Self {
-            player,
-            position_x,
-            position_y,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // player: Guid
-        let player = Guid::astd_read(r).await?;
-
-        // position_x: f32
-        let position_x = crate::util::astd_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::astd_read_f32_le(r).await?;
-        Ok(Self {
-            player,
-            position_x,
-            position_y,
-        })
-    }
-
 }
 

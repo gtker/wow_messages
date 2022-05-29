@@ -39,33 +39,5 @@ impl ChannelMember {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // guid: Guid
-        let guid = Guid::tokio_read(r).await?;
-
-        // member_flags: u8
-        let member_flags = crate::util::tokio_read_u8_le(r).await?;
-
-        Ok(Self {
-            guid,
-            member_flags,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // guid: Guid
-        let guid = Guid::astd_read(r).await?;
-
-        // member_flags: u8
-        let member_flags = crate::util::astd_read_u8_le(r).await?;
-
-        Ok(Self {
-            guid,
-            member_flags,
-        })
-    }
-
 }
 

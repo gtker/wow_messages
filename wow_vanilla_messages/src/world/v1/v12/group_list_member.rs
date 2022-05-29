@@ -49,44 +49,6 @@ impl GroupListMember {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // name: CString
-        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
-
-        // guid: Guid
-        let guid = Guid::tokio_read(r).await?;
-
-        // is_online: u8
-        let is_online = crate::util::tokio_read_u8_le(r).await?;
-
-        Ok(Self {
-            name,
-            guid,
-            is_online,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // name: CString
-        let name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
-
-        // guid: Guid
-        let guid = Guid::astd_read(r).await?;
-
-        // is_online: u8
-        let is_online = crate::util::astd_read_u8_le(r).await?;
-
-        Ok(Self {
-            name,
-            guid,
-            is_online,
-        })
-    }
-
 }
 
 impl GroupListMember {

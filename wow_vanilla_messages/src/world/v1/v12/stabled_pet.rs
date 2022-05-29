@@ -72,68 +72,6 @@ impl StabledPet {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // pet_number: u32
-        let pet_number = crate::util::tokio_read_u32_le(r).await?;
-
-        // entry: u32
-        let entry = crate::util::tokio_read_u32_le(r).await?;
-
-        // level: u32
-        let level = crate::util::tokio_read_u32_le(r).await?;
-
-        // name: CString
-        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
-
-        // loyalty: u32
-        let loyalty = crate::util::tokio_read_u32_le(r).await?;
-
-        // slot: u8
-        let slot = crate::util::tokio_read_u8_le(r).await?;
-
-        Ok(Self {
-            pet_number,
-            entry,
-            level,
-            name,
-            loyalty,
-            slot,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // pet_number: u32
-        let pet_number = crate::util::astd_read_u32_le(r).await?;
-
-        // entry: u32
-        let entry = crate::util::astd_read_u32_le(r).await?;
-
-        // level: u32
-        let level = crate::util::astd_read_u32_le(r).await?;
-
-        // name: CString
-        let name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
-
-        // loyalty: u32
-        let loyalty = crate::util::astd_read_u32_le(r).await?;
-
-        // slot: u8
-        let slot = crate::util::astd_read_u8_le(r).await?;
-
-        Ok(Self {
-            pet_number,
-            entry,
-            level,
-            name,
-            loyalty,
-            slot,
-        })
-    }
-
 }
 
 impl StabledPet {

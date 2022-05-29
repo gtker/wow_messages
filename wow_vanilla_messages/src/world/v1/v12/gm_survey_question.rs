@@ -38,33 +38,5 @@ impl GmSurveyQuestion {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // question_id: u32
-        let question_id = crate::util::tokio_read_u32_le(r).await?;
-
-        // answer: u8
-        let answer = crate::util::tokio_read_u8_le(r).await?;
-
-        Ok(Self {
-            question_id,
-            answer,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // question_id: u32
-        let question_id = crate::util::astd_read_u32_le(r).await?;
-
-        // answer: u8
-        let answer = crate::util::astd_read_u8_le(r).await?;
-
-        Ok(Self {
-            question_id,
-            answer,
-        })
-    }
-
 }
 

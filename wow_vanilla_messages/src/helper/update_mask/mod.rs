@@ -160,15 +160,6 @@ impl UpdateMask {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub async fn tokio_read(r: &mut impl tokio::io::AsyncReadExt) -> Result<Self, io::Error> {
-        todo!()
-    }
-
-    #[cfg(feature = "async-std")]
-    pub async fn astd_read(r: &mut impl async_std::io::ReadExt) -> Result<Self, io::Error> {
-        todo!()
-    }
     /*
        Object
             Item

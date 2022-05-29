@@ -47,41 +47,5 @@ impl RaidInfo {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // map: Map
-        let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-        // reset_time: u32
-        let reset_time = crate::util::tokio_read_u32_le(r).await?;
-
-        // instance_id: u32
-        let instance_id = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            map,
-            reset_time,
-            instance_id,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // map: Map
-        let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-        // reset_time: u32
-        let reset_time = crate::util::astd_read_u32_le(r).await?;
-
-        // instance_id: u32
-        let instance_id = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            map,
-            reset_time,
-            instance_id,
-        })
-    }
-
 }
 

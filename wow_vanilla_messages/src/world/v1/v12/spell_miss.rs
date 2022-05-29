@@ -40,33 +40,5 @@ impl SpellMiss {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // target_guid: Guid
-        let target_guid = Guid::tokio_read(r).await?;
-
-        // miss_info: SpellMissInfo
-        let miss_info: SpellMissInfo = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-        Ok(Self {
-            target_guid,
-            miss_info,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // target_guid: Guid
-        let target_guid = Guid::astd_read(r).await?;
-
-        // miss_info: SpellMissInfo
-        let miss_info: SpellMissInfo = crate::util::astd_read_u32_le(r).await?.try_into()?;
-
-        Ok(Self {
-            target_guid,
-            miss_info,
-        })
-    }
-
 }
 

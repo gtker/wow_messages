@@ -39,34 +39,6 @@ impl CustomMasks {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // update_mask: UpdateMask
-        let update_mask = UpdateMask::tokio_read(r).await?;
-
-        // aura_mask: AuraMask
-        let aura_mask = AuraMask::tokio_read(r).await?;
-
-        Ok(Self {
-            update_mask,
-            aura_mask,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // update_mask: UpdateMask
-        let update_mask = UpdateMask::astd_read(r).await?;
-
-        // aura_mask: AuraMask
-        let aura_mask = AuraMask::astd_read(r).await?;
-
-        Ok(Self {
-            update_mask,
-            aura_mask,
-        })
-    }
-
 }
 
 impl CustomMasks {

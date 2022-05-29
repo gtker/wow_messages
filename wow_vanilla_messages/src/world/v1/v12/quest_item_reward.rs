@@ -38,33 +38,5 @@ impl QuestItemReward {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // item: u32
-        let item = crate::util::tokio_read_u32_le(r).await?;
-
-        // item_count: u32
-        let item_count = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            item,
-            item_count,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // item: u32
-        let item = crate::util::astd_read_u32_le(r).await?;
-
-        // item_count: u32
-        let item_count = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            item,
-            item_count,
-        })
-    }
-
 }
 

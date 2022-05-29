@@ -38,33 +38,5 @@ impl ItemStat {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // item_stat_type: u32
-        let item_stat_type = crate::util::tokio_read_u32_le(r).await?;
-
-        // item_stat_value: u32
-        let item_stat_value = crate::util::tokio_read_u32_le(r).await?;
-
-        Ok(Self {
-            item_stat_type,
-            item_stat_value,
-        })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
-        // item_stat_type: u32
-        let item_stat_type = crate::util::astd_read_u32_le(r).await?;
-
-        // item_stat_value: u32
-        let item_stat_value = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            item_stat_type,
-            item_stat_value,
-        })
-    }
-
 }
 
