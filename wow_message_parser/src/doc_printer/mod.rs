@@ -66,6 +66,11 @@ impl DocWriter {
         self.newline();
     }
 
+    pub fn wln_no_indent(&mut self, s: impl AsRef<str>) {
+        self.inner.write_str(s.as_ref()).unwrap();
+        self.newline();
+    }
+
     pub fn bytes<'a>(&mut self, bytes: impl Iterator<Item = &'a u8>) {
         for b in bytes {
             let text = format!("{}, ", b);
@@ -502,11 +507,27 @@ fn print_container_example_definition(
             }
         }
         Type::UpdateMask => {
+            s.wln("// UpdateMask");
             let amount_of_blocks = bytes.next().unwrap();
             s.wln(format!("{}, // amount_of_blocks", amount_of_blocks));
 
-            // TODO
-            s.wln("UPDATEMASK TODO");
+            let blocks: Vec<&u8> = bytes.take(4 * *amount_of_blocks as usize).collect();
+            let blocks = blocks.chunks(4);
+            for (i, block) in blocks.clone().enumerate() {
+                s.wln(format!(
+                    "{}, {}, {}, {}, // Block {}",
+                    block[0], block[1], block[2], block[3], i
+                ));
+            }
+            let blocks = blocks.map(|a| u32::from_le_bytes([*a[0], *a[1], *a[2], *a[3]]));
+            for block in blocks {
+                for bit in 0..32 {
+                    if (block & 1 << bit) != 0 {
+                        s.bytes(bytes.take(4).into_iter());
+                        s.wln_no_indent("// Item");
+                    }
+                }
+            }
         }
         Type::AuraMask => panic!("AuraMask example"),
     }

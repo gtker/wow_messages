@@ -46,8 +46,15 @@ SMSG have a header of 4 bytes.
 0, 0, 0, 0, // MovementBlock.backwards_swimming_speed: f32
 219, 15, 73, 64, // MovementBlock.turn_rate: f32
 1, 0, 0, 0, // MovementBlock.unknown1: u32
+// UpdateMask
 2, // amount_of_blocks
-UPDATEMASK TODO
+7, 0, 64, 0, // Block 0
+16, 0, 0, 0, // Block 1
+4, 0, 0, 0, // Item
+0, 0, 0, 0, // Item
+25, 0, 0, 0, // Item
+100, 0, 0, 0, // Item
+1, 1, 1, 1, // Item
 // [1].Object.mask2: UpdateMask
 // objects: Object[amount_of_objects]
 ```

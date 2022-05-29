@@ -7,7 +7,7 @@
 * Working UpdateMask
   * Tests
   * IR for UpdateMask and test
-  * Doc for UpdateMask
+  * Improve Doc for UpdateMask
 
 # Direct upgrades to Login
 
