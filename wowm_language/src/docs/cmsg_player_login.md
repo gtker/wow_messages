@@ -38,6 +38,9 @@ CMSG have a header of 6 bytes.
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 12, // size
 61, 0, 0, 0, // opcode (61)

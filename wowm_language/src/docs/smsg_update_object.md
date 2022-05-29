@@ -32,6 +32,9 @@ SMSG have a header of 4 bytes.
 | 0x09 | ? / - | [Object](object.md)[amount_of_objects] | objects |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 97, // size
 169, 0, // opcode (169)
@@ -67,6 +70,8 @@ SMSG have a header of 4 bytes.
 // [1].Object.mask2: UpdateMask
 // objects: Object[amount_of_objects]
 ```
+#### Example 2
+
 ```c
 0, 133, // size
 169, 0, // opcode (169)

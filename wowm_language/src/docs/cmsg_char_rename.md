@@ -34,6 +34,9 @@ CMSG have a header of 6 bytes.
 | 0x0E | - / - | CString | new_name |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 21, // size
 199, 2, 0, 0, // opcode (711)

@@ -28,6 +28,9 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | sequence_id |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 6, // size
 221, 1, // opcode (477)

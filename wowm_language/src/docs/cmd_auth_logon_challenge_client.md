@@ -47,6 +47,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | account_name_length / - | String[account_name_length] | account_name |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, // opcode (0)
 3, // protocol_version: u8

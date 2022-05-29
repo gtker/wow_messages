@@ -363,8 +363,12 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
     }
 
     s.wln("### Examples");
+    s.newline();
 
-    for t in e.tests() {
+    for (i, t) in e.tests().iter().enumerate() {
+        s.wln(format!("#### Example {}", i + 1));
+        s.newline();
+
         s.wln("```c");
         let mut bytes = t.raw_bytes().iter();
 

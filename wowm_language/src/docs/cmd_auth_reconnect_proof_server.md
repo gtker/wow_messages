@@ -27,14 +27,21 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x01 | ? / - | [LoginResult](loginresult.md) | result |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 3, // opcode (3)
 0, // result: LoginResult SUCCESS (0x00)
 ```
+#### Example 2
+
 ```c
 3, // opcode (3)
 14, // result: LoginResult SUCCESS_SURVEY (0x0E)
 ```
+#### Example 3
+
 ```c
 3, // opcode (3)
 14, // result: LoginResult SUCCESS_SURVEY (0x0E)
@@ -70,11 +77,16 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | 2 / Little | u16 | padding |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 3, // opcode (3)
 0, // result: LoginResult SUCCESS (0x00)
 0, 0, // padding: u16
 ```
+#### Example 2
+
 ```c
 3, // opcode (3)
 16, // result: LoginResult FAIL_LOCKED_ENFORCED (0x10)

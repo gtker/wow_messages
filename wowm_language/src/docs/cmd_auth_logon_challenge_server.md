@@ -50,6 +50,9 @@ If login_result is equal to `SUCCESS`:
 | - | ? / - | u8[16] | crc_salt |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8
@@ -130,6 +133,9 @@ If security_flag is equal to `PIN`:
 | - | ? / - | u8[16] | pin_salt |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8
@@ -148,6 +154,8 @@ If security_flag is equal to `PIN`:
 239, 190, 173, 222, // pin_grid_seed: u32
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
 ```
+#### Example 2
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8
@@ -255,6 +263,9 @@ If security_flag contains `AUTHENTICATOR`:
 | - | 1 / - | u8 | unknown5 |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8
@@ -271,6 +282,8 @@ If security_flag contains `AUTHENTICATOR`:
 186, 163, 30, 153, 160, 11, 33, 87, 252, 55, 63, 179, 105, 205, 210, 241, // crc_salt: u8[16]
 0, // security_flag: SecurityFlag  NONE (0)
 ```
+#### Example 2
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8
@@ -289,6 +302,8 @@ If security_flag contains `AUTHENTICATOR`:
 239, 190, 173, 222, // pin_grid_seed: u32
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
 ```
+#### Example 3
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8
@@ -306,6 +321,8 @@ If security_flag contains `AUTHENTICATOR`:
 4, // security_flag: SecurityFlag  AUTHENTICATOR (4)
 1, // unknown5: u8
 ```
+#### Example 4
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8
@@ -327,11 +344,15 @@ If security_flag contains `AUTHENTICATOR`:
 204, // unknown3: u8
 222, 202, 250, 239, 190, 173, 222, 0, // unknown4: u64
 ```
+#### Example 5
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8
 5, // login_result: LoginResult FAIL_INCORRECT_PASSWORD (0x05)
 ```
+#### Example 6
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8
@@ -354,6 +375,8 @@ If security_flag contains `AUTHENTICATOR`:
 222, 202, 250, 239, 190, 173, 222, 0, // unknown4: u64
 1, // unknown5: u8
 ```
+#### Example 7
+
 ```c
 0, // opcode (0)
 0, // protocol_version: u8

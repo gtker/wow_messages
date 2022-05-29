@@ -36,6 +36,9 @@ SMSG have a header of 4 bytes.
 | 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 6, // size
 60, 0, // opcode (60)

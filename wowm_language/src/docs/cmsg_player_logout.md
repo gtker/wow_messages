@@ -25,6 +25,9 @@ CMSG have a header of 6 bytes.
 This message has no fields in the body.
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 4, // size
 74, 0, 0, 0, // opcode (74)

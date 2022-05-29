@@ -38,6 +38,9 @@ SMSG have a header of 4 bytes.
 | - | ? / - | [Class](class.md) | class |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 28, // size
 81, 0, // opcode (81)
@@ -48,6 +51,8 @@ SMSG have a header of 4 bytes.
 0, 0, 0, 0, // gender: Gender MALE (0)
 1, 0, 0, 0, // class: Class WARRIOR (1)
 ```
+#### Example 2
+
 ```c
 0, 29, // size
 81, 0, // opcode (81)

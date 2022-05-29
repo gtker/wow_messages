@@ -43,11 +43,16 @@ If result is equal to `RESPONSE_SUCCESS`:
 | - | - / - | CString | new_name |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 6, // size
 200, 2, // opcode (712)
 71, 0, 0, 0, // result: WorldResult CHAR_NAME_TOO_LONG (0x47)
 ```
+#### Example 2
+
 ```c
 0, 23, // size
 200, 2, // opcode (712)

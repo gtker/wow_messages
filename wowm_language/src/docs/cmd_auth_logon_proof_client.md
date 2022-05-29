@@ -35,6 +35,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -54,6 +57,8 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, // [3].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 ```
+#### Example 2
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -69,6 +74,8 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [3].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 ```
+#### Example 3
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -130,6 +137,9 @@ If security_flag is equal to `PIN`:
 | - | ? / - | u8[20] | pin_hash |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -150,6 +160,8 @@ If security_flag is equal to `PIN`:
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag NONE (0x0)
 ```
+#### Example 2
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -166,6 +178,8 @@ If security_flag is equal to `PIN`:
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag NONE (0x0)
 ```
+#### Example 3
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -178,6 +192,8 @@ If security_flag is equal to `PIN`:
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag NONE (0x0)
 ```
+#### Example 4
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -268,6 +284,9 @@ If security_flag contains `AUTHENTICATOR`:
 | - | 1 / - | u8 | unknown5 |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -288,6 +307,8 @@ If security_flag contains `AUTHENTICATOR`:
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag  NONE (0)
 ```
+#### Example 2
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -304,6 +325,8 @@ If security_flag contains `AUTHENTICATOR`:
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag  NONE (0)
 ```
+#### Example 3
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -316,6 +339,8 @@ If security_flag contains `AUTHENTICATOR`:
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag  NONE (0)
 ```
+#### Example 4
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -330,6 +355,8 @@ If security_flag contains `AUTHENTICATOR`:
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
 ```
+#### Example 5
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
@@ -349,6 +376,8 @@ If security_flag contains `AUTHENTICATOR`:
 64, // unknown3: u8
 239, 190, 173, 222, 0, 0, 0, 0, // unknown4: u64
 ```
+#### Example 6
+
 ```c
 1, // opcode (1)
 241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 

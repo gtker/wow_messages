@@ -33,6 +33,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x08 | ? / - | u8[compressed_data_length] | data |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 4, // opcode (4)
 222, 250, 0, 0, // survey_id: u32

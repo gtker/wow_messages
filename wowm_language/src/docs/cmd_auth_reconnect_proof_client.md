@@ -33,6 +33,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | 1 / - | u8 | key_count |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 3, // opcode (3)
 234, 250, 185, 198, 24, 21, 11, 242, 249, 50, 206, 39, 98, 121, 150, 153, // proof_data: u8[16]

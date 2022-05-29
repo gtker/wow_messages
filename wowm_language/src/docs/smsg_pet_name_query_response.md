@@ -32,6 +32,9 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | pet_name_timestamp |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 17, // size
 83, 0, // opcode (83)

@@ -44,6 +44,9 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | f32 | orientation |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 22, // size
 54, 2, // opcode (566)

@@ -35,6 +35,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | 2 / Little | u16 | footer_padding |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 16, // opcode (16)
 23, 0, // size: u16
@@ -51,6 +54,8 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
+#### Example 2
+
 ```c
 16, // opcode (16)
 23, 0, // size: u16
@@ -104,6 +109,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | 2 / Little | u16 | footer_padding |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 16, // opcode (16)
 22, 0, // size: u16
@@ -121,6 +129,8 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
+#### Example 2
+
 ```c
 16, // opcode (16)
 27, 0, // size: u16

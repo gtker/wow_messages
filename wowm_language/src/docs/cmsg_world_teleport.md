@@ -38,6 +38,9 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | f32 | orientation |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 32, // size
 8, 0, 0, 0, // opcode (8)

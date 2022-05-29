@@ -29,11 +29,16 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x03 | ? / - | u8[size] | data |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 49, // opcode (49)
 1, 0, // size: u16
 255, // data: u8[size]
 ```
+#### Example 2
+
 ```c
 49, // opcode (49)
 0, 0, // size: u16

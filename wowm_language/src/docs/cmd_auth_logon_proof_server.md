@@ -38,6 +38,9 @@ If login_result is equal to `SUCCESS`:
 | - | 4 / Little | u32 | hardware_survey_id |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 1, // opcode (1)
 0, // login_result: LoginResult SUCCESS (0x00)
@@ -94,11 +97,16 @@ Else:
 | - | 2 / Little | u16 | padding |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 1, // opcode (1)
 7, // login_result: LoginResult FAIL_NO_TIME (0x07)
 0, 0, // padding: u16
 ```
+#### Example 2
+
 ```c
 1, // opcode (1)
 8, // login_result: LoginResult FAIL_DB_BUSY (0x08)

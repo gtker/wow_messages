@@ -27,6 +27,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x01 | 8 / Little | u64 | offset |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 51, // opcode (51)
 173, 222, 0, 0, 0, 0, 0, 0, // offset: u64

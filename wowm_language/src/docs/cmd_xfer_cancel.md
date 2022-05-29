@@ -24,6 +24,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 This message has no fields in the body.
 
 ### Examples
+
+#### Example 1
+
 ```c
 52, // opcode (52)
 ```

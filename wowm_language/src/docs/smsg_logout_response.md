@@ -30,6 +30,9 @@ SMSG have a header of 4 bytes.
 | - | ? / - | [LogoutSpeed](logoutspeed.md) | speed |  |  |
 
 ### Examples
+
+#### Example 1
+
 ```c
 0, 7, // size
 76, 0, // opcode (76)
