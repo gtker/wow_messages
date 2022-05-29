@@ -187,7 +187,7 @@ impl UpdateMask {
         }
     }
 
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         let (header_len, values_len) = match self {
             UpdateMask::Item(i) => (i.header.len(), i.values.len()),
             UpdateMask::Container(i) => (i.header.len(), i.values.len()),
