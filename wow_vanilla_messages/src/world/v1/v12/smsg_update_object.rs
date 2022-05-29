@@ -107,7 +107,7 @@ mod test {
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
                             .set_unit_HEALTH(100)
-                            .set_unit_BYTES_0(0x01010101)
+                            .set_unit_BYTES_0(1, 1, 1, 1)
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlockUpdateFlag::empty()
@@ -170,7 +170,7 @@ mod test {
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
                             .set_unit_HEALTH(100)
-                            .set_unit_BYTES_0(0x01010101)
+                            .set_unit_BYTES_0(1, 1, 1, 1)
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlockUpdateFlag::empty()
@@ -233,7 +233,7 @@ mod test {
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
                             .set_unit_HEALTH(100)
-                            .set_unit_BYTES_0(0x01010101)
+                            .set_unit_BYTES_0(1, 1, 1, 1)
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlockUpdateFlag::empty()
@@ -313,7 +313,7 @@ mod test {
                             .set_unit_MAXHEALTH(100)
                             .set_unit_LEVEL(1)
                             .set_unit_FACTIONTEMPLATE(1)
-                            .set_unit_BYTES_0(0x01010101)
+                            .set_unit_BYTES_0(1, 1, 1, 1)
                             .set_unit_DISPLAYID(50)
                             .set_unit_NATIVEDISPLAYID(50)
                         ),
@@ -382,7 +382,7 @@ mod test {
                             .set_unit_MAXHEALTH(100)
                             .set_unit_LEVEL(1)
                             .set_unit_FACTIONTEMPLATE(1)
-                            .set_unit_BYTES_0(0x01010101)
+                            .set_unit_BYTES_0(1, 1, 1, 1)
                             .set_unit_DISPLAYID(50)
                             .set_unit_NATIVEDISPLAYID(50)
                         ),
@@ -451,7 +451,7 @@ mod test {
                             .set_unit_MAXHEALTH(100)
                             .set_unit_LEVEL(1)
                             .set_unit_FACTIONTEMPLATE(1)
-                            .set_unit_BYTES_0(0x01010101)
+                            .set_unit_BYTES_0(1, 1, 1, 1)
                             .set_unit_DISPLAYID(50)
                             .set_unit_NATIVEDISPLAYID(50)
                         ),

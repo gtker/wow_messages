@@ -235,7 +235,7 @@ mod test {
 
         let mut update_mask = UpdatePlayer::new()
             .set_object_GUID(Guid::new(4))
-            .set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1)
+            .set_unit_BYTES_0(1, 1, 1, 1)
             .set_unit_HEALTH(100);
 
         let mut v = update_mask.as_bytes();
@@ -267,7 +267,7 @@ mod test {
 
         let mut update_mask = UpdatePlayer::new()
             .set_object_GUID(Guid::new(4))
-            .set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1)
+            .set_unit_BYTES_0(1, 1, 1, 1)
             .set_object_SCALE_X(1.0)
             .set_unit_HEALTH(100)
             .set_unit_MAXHEALTH(100)

@@ -67,7 +67,7 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
         UfType::Guid => ", v: Guid",
         UfType::Int => ", v: i32",
         UfType::Float => ", v: f32",
-        UfType::Bytes => ", v: u32",
+        UfType::Bytes => ", a: u8, b: u8, c: u8, d: u8",
         UfType::TwoShort => ", v: u32",
     };
     s.bodyn(
@@ -94,7 +94,7 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
                     let value = match m.uf {
                         UfType::Int => "v as u32",
                         UfType::Float => "u32::from_le_bytes(v.to_le_bytes())",
-                        UfType::Bytes => "v",
+                        UfType::Bytes => "u32::from_le_bytes([a, b, c, d])",
                         UfType::TwoShort => "v",
                         _ => unreachable!(),
                     };
@@ -136,7 +136,7 @@ impl Display for UpdateMaskType {
 }
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
-enum UfType {
+pub enum UfType {
     Guid,
     Int,
     Float,
@@ -145,7 +145,7 @@ enum UfType {
 }
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
-struct MemberType {
+pub struct MemberType {
     ty: UpdateMaskType,
     name: &'static str,
     offset: i32,
@@ -163,9 +163,18 @@ impl MemberType {
             uf,
         }
     }
+    pub fn ty(&self) -> UpdateMaskType {
+        self.ty
+    }
+    pub fn name(&self) -> &'static str {
+        self.name
+    }
+    pub fn uf(&self) -> UfType {
+        self.uf
+    }
 }
 
-const FIELDS: [MemberType; 290] = [
+pub const FIELDS: [MemberType; 290] = [
     MemberType::new(UpdateMaskType::Object, "GUID", 0x0, 2, UfType::Guid),
     MemberType::new(UpdateMaskType::Object, "ENTRY", 0x3, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Object, "SCALE_X", 0x4, 1, UfType::Float),

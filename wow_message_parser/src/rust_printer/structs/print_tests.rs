@@ -6,9 +6,9 @@ use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::rust_view::{RustEnumerator, RustMember, RustType};
 use crate::rust_printer::{
-    ImplType, UpdateMaskType, Writer, CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
-    LOGIN_SERVER_MESSAGE_ENUM_NAME, SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
-    WORLD_SERVER_MESSAGE_ENUM_NAME,
+    ImplType, UfType, UpdateMaskType, Writer, CLIENT_MESSAGE_TRAIT_NAME, FIELDS,
+    LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, SERVER_MESSAGE_TRAIT_NAME,
+    WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::test_case::{TestCase, TestCaseMember, TestValue};
 
@@ -445,36 +445,49 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
             s.inc_indent();
 
             for f in fields {
-                let value = f.value();
-                let ty = match f.ty() {
-                    UpdateMaskType::Object => "object",
-                    UpdateMaskType::Item => "item",
-                    UpdateMaskType::Unit => "unit",
-                    UpdateMaskType::Player => "player",
-                    UpdateMaskType::Container => "container",
-                    UpdateMaskType::GameObject => "gameobject",
-                    UpdateMaskType::DynamicObject => "dynamicobject",
-                    UpdateMaskType::Corpse => "corpse",
-                };
-                let field = f.name();
-                if field == "GUID" {
-                    s.wln(format!(
-                        ".set_{ty}_{field}(Guid::new({value}))",
-                        value = value,
-                        ty = ty,
-                        field = field
-                    ));
-                    continue;
-                } else if field == "TYPE" {
+                if f.name() == "TYPE" {
                     // Automatically set through the struct
                     continue;
                 }
-                s.wln(format!(
-                    ".set_{ty}_{field}({value})",
-                    value = value,
-                    ty = ty,
-                    field = field
-                ))
+
+                let field = FIELDS
+                    .iter()
+                    .find(|a| a.ty() == f.ty() && a.name() == f.name())
+                    .unwrap();
+
+                if field.uf() == UfType::Guid {
+                    s.wln(format!(
+                        ".set_{ty}_{field}(Guid::new({value}))",
+                        value = f.value(),
+                        ty = f.ty(),
+                        field = f.name()
+                    ));
+                } else if field.uf() == UfType::Bytes {
+                    let value = parse_value(f.value()).unwrap() as u32;
+                    let value = value.to_le_bytes();
+
+                    let a = value[0];
+                    let b = value[1];
+                    let c = value[2];
+                    let d = value[3];
+
+                    s.wln(format!(
+                        ".set_{ty}_{field}({a}, {b}, {c}, {d})",
+                        ty = field.ty(),
+                        field = f.name(),
+                        a = a,
+                        b = b,
+                        c = c,
+                        d = d
+                    ))
+                } else {
+                    s.wln(format!(
+                        ".set_{ty}_{field}({value})",
+                        value = f.value(),
+                        ty = f.ty(),
+                        field = f.name()
+                    ))
+                }
             }
 
             s.dec_indent();

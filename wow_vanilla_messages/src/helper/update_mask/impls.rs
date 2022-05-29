@@ -414,9 +414,9 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_BYTES_0(mut self, v: u32) -> Self {
+    pub fn set_unit_BYTES_0(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(36);
-        self.values.insert(36, v);
+        self.values.insert(36, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -426,9 +426,9 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_VIRTUAL_ITEM_INFO(mut self, v: u32) -> Self {
+    pub fn set_unit_VIRTUAL_ITEM_INFO(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(40);
-        self.values.insert(40, v);
+        self.values.insert(40, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -444,21 +444,21 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_AURAFLAGS(mut self, v: u32) -> Self {
+    pub fn set_unit_AURAFLAGS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(95);
-        self.values.insert(95, v);
+        self.values.insert(95, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_AURALEVELS(mut self, v: u32) -> Self {
+    pub fn set_unit_AURALEVELS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(101);
-        self.values.insert(101, v);
+        self.values.insert(101, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_AURAAPPLICATIONS(mut self, v: u32) -> Self {
+    pub fn set_unit_AURAAPPLICATIONS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(113);
-        self.values.insert(113, v);
+        self.values.insert(113, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -534,9 +534,9 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_BYTES_1(mut self, v: u32) -> Self {
+    pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(138);
-        self.values.insert(138, v);
+        self.values.insert(138, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -654,9 +654,9 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_BYTES_2(mut self, v: u32) -> Self {
+    pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(164);
-        self.values.insert(164, v);
+        self.values.insert(164, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -891,9 +891,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_BYTES_0(mut self, v: u32) -> Self {
+    pub fn set_unit_BYTES_0(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(36);
-        self.values.insert(36, v);
+        self.values.insert(36, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -903,9 +903,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_VIRTUAL_ITEM_INFO(mut self, v: u32) -> Self {
+    pub fn set_unit_VIRTUAL_ITEM_INFO(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(40);
-        self.values.insert(40, v);
+        self.values.insert(40, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -921,21 +921,21 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_AURAFLAGS(mut self, v: u32) -> Self {
+    pub fn set_unit_AURAFLAGS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(95);
-        self.values.insert(95, v);
+        self.values.insert(95, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_AURALEVELS(mut self, v: u32) -> Self {
+    pub fn set_unit_AURALEVELS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(101);
-        self.values.insert(101, v);
+        self.values.insert(101, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_AURAAPPLICATIONS(mut self, v: u32) -> Self {
+    pub fn set_unit_AURAAPPLICATIONS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(113);
-        self.values.insert(113, v);
+        self.values.insert(113, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -1011,9 +1011,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_BYTES_1(mut self, v: u32) -> Self {
+    pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(138);
-        self.values.insert(138, v);
+        self.values.insert(138, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -1131,9 +1131,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_BYTES_2(mut self, v: u32) -> Self {
+    pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(164);
-        self.values.insert(164, v);
+        self.values.insert(164, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -1223,21 +1223,21 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_BYTES(mut self, v: u32) -> Self {
+    pub fn set_player_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(193);
-        self.values.insert(193, v);
+        self.values.insert(193, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_player_BYTES_2(mut self, v: u32) -> Self {
+    pub fn set_player_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(194);
-        self.values.insert(194, v);
+        self.values.insert(194, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_player_BYTES_3(mut self, v: u32) -> Self {
+    pub fn set_player_BYTES_3(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(195);
-        self.values.insert(195, v);
+        self.values.insert(195, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -2009,9 +2009,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_EXPLORED_ZONES_1(mut self, v: u32) -> Self {
+    pub fn set_player_EXPLORED_ZONES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(1111);
-        self.values.insert(1111, v);
+        self.values.insert(1111, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -2117,9 +2117,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_BYTES(mut self, v: u32) -> Self {
+    pub fn set_player_FIELD_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(1222);
-        self.values.insert(1222, v);
+        self.values.insert(1222, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -2213,9 +2213,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_BYTES2(mut self, v: u32) -> Self {
+    pub fn set_player_FIELD_BYTES2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(1260);
-        self.values.insert(1260, v);
+        self.values.insert(1260, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -2377,9 +2377,9 @@ impl UpdateDynamicObject {
         self
     }
 
-    pub fn set_dynamicobject_BYTES(mut self, v: u32) -> Self {
+    pub fn set_dynamicobject_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(8);
-        self.values.insert(8, v);
+        self.values.insert(8, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
@@ -2486,15 +2486,15 @@ impl UpdateCorpse {
         self
     }
 
-    pub fn set_corpse_BYTES_1(mut self, v: u32) -> Self {
+    pub fn set_corpse_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(32);
-        self.values.insert(32, v);
+        self.values.insert(32, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_corpse_BYTES_2(mut self, v: u32) -> Self {
+    pub fn set_corpse_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(33);
-        self.values.insert(33, v);
+        self.values.insert(33, u32::from_le_bytes([a, b, c, d]));
         self
     }
 

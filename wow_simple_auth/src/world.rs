@@ -131,7 +131,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
 
     let update_mask = UpdatePlayer::new()
         .set_object_GUID(Guid::new(4))
-        .set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1)
+        .set_unit_BYTES_0(1, 1, 1, 1)
         .set_unit_HEALTH(100);
 
     let update_flag = MovementBlockUpdateFlag::empty()
