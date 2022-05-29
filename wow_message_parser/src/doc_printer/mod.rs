@@ -822,6 +822,13 @@ fn print_container_item_header(s: &mut DocWriter) {
 
 fn print_container_body(s: &mut DocWriter, e: &Container) {
     s.wln("### Body");
+    s.newline();
+
+    if e.fields().is_empty() {
+        s.wln("This message has no fields in the body.");
+        s.newline();
+        return;
+    }
 
     let mut offset = Some(match e.container_type() {
         ContainerType::Msg(_) => 0,
@@ -858,6 +865,8 @@ fn print_container_body(s: &mut DocWriter, e: &Container) {
             }
         }
     }
+
+    s.newline();
 }
 
 fn print_container_header(s: &mut DocWriter, e: &Container) {
@@ -918,6 +927,8 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
         s.wln("| ------ | ----------------- | ------ | ------ | ----------- |");
         s.wln("| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|");
     }
+
+    s.newline();
 }
 
 fn print_definer_table(s: &mut DocWriter, e: &Definer) {

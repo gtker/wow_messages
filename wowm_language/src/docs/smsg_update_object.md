@@ -16,12 +16,15 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | amount_of_objects |  |  |
 | 0x08 | 1 / - | u8 | has_transport |  |  |
 | 0x09 | ? / - | [Object](object.md)[amount_of_objects] | objects |  |  |
+
 ### Examples
 ```c
 0, 97, // size

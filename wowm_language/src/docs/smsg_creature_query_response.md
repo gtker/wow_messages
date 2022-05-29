@@ -30,7 +30,9 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | creature_entry |  |  |
@@ -53,3 +55,4 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | display_id |  | cmangos: DisplayID      wdbFeild13 and workaround, way to manage models must be fixed |
 | - | 1 / - | u8 | civilian |  | cmangos: wdbFeild14 |
 | - | 1 / - | u8 | racial_leader |  |  |
+

@@ -12,6 +12,7 @@ struct PetitionShowlist {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | index |  |  |
@@ -20,3 +21,4 @@ struct PetitionShowlist {
 | 0x0C | 4 / Little | u32 | guild_charter_cost |  | cmangos/vmangos/mangoszero: statically set to 1000 (10 silver). |
 | 0x10 | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: statically set to 1 |
 | 0x14 | 4 / Little | u32 | unknown2 |  | cmangos/vmangos/mangoszero: statically set to 9<br/>cmangos/vmangos/mangoszero: required signs? |
+

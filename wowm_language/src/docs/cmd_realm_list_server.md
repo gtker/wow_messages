@@ -17,7 +17,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 2 / Little | u16 | size |  |  |
@@ -25,6 +27,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x07 | 1 / - | u8 | number_of_realms |  |  |
 | 0x08 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |  |
 | - | 2 / Little | u16 | footer_padding |  |  |
+
 ### Examples
 ```c
 16, // opcode (16)
@@ -77,7 +80,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 2 / Little | u16 | size |  |  |
@@ -85,6 +90,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x07 | 2 / Little | u16 | number_of_realms |  |  |
 | 0x09 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |  |
 | - | 2 / Little | u16 | footer_padding |  |  |
+
 ### Examples
 ```c
 16, // opcode (16)

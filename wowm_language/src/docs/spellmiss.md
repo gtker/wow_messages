@@ -8,7 +8,9 @@ struct SpellMiss {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |  |
 | 0x08 | ? / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |  |
+

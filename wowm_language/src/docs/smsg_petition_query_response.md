@@ -30,7 +30,9 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | petition_guid |  |  |
@@ -50,3 +52,4 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | allowed_maximum_level |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | todo_amount_of_signers |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | number_of_choices |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+

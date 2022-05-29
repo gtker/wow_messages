@@ -23,7 +23,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 1 / - | u8 | protocol_version |  |  |
@@ -37,6 +39,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | 4 / Big | u32_be | client_ip_address |  |  |
 | - | 1 / - | u8 | account_name_length |  |  |
 | - | account_name_length / - | String[account_name_length] | account_name |  |  |
+
 ### Examples
 ```c
 2, // opcode (2)

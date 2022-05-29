@@ -8,7 +8,9 @@ struct ChannelMember {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | u8 | member_flags |  |  |
+

@@ -17,7 +17,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |  |
@@ -28,6 +30,7 @@ If login_result is equal to `SUCCESS`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | ? / - | u8[20] | server_proof |  |  |
 | - | 4 / Little | u32 | hardware_survey_id |  |  |
+
 ### Examples
 ```c
 1, // opcode (1)
@@ -59,7 +62,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |  |
@@ -75,6 +80,7 @@ If login_result is equal to `SUCCESS`:
 
 Else: 
 | - | 2 / Little | u16 | padding |  |  |
+
 ### Examples
 ```c
 1, // opcode (1)

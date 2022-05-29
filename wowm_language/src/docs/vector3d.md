@@ -9,8 +9,10 @@ struct Vector3d {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | f32 | x |  |  |
 | 0x04 | 4 / Little | f32 | y |  |  |
 | 0x08 | 4 / Little | f32 | z |  |  |
+

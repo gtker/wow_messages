@@ -9,8 +9,10 @@ struct ItemDamageType {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | damage_minimum |  |  |
 | 0x04 | 4 / Little | u32 | damage_maximum |  |  |
 | 0x08 | 4 / Little | u32 | damage_type |  | mangoszero/vmangos/cmangos: id from Resistances.dbc |
+

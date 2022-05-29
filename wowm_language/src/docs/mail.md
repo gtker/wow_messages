@@ -35,6 +35,7 @@ struct Mail {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | message_id |  |  |
@@ -75,3 +76,4 @@ Else If message_type is equal to `AUCTION`:
 | - | 4 / Little | u32 | checked_timestamp |  | cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item. |
 | - | 4 / Little | f32 | expiration_time |  |  |
 | - | 4 / Little | u32 | mail_template_id |  | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
+

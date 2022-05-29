@@ -20,7 +20,9 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |  |
@@ -33,3 +35,4 @@ If exp_type is equal to `NON_KILL`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | experience_without_rested |  |  |
 | - | 4 / Little | f32 | exp_group_bonus |  | mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output |
+

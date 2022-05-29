@@ -13,6 +13,7 @@ struct WhoPlayer {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | - / - | CString | name |  |  |
@@ -22,3 +23,4 @@ struct WhoPlayer {
 | - | ? / - | [Race](race.md) | race |  |  |
 | - | 4 / Little | u32 | zone_id |  |  |
 | - | 4 / Little | u32 | party_status |  |  |
+

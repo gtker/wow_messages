@@ -20,6 +20,7 @@ struct TradeSlot {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 1 / - | u8 | trade_slot_number |  | cmangos/vmangos/mangoszero: sets to index of array |
@@ -36,3 +37,4 @@ struct TradeSlot {
 | 0x31 | 4 / Little | u32 | lock_id |  |  |
 | 0x35 | 4 / Little | u32 | max_durability |  |  |
 | 0x39 | 4 / Little | u32 | durability |  |  |
+

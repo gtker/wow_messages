@@ -8,7 +8,9 @@ struct Faction {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | reputation_list_id |  |  |
 | 0x04 | 4 / Little | u32 | standing |  |  |
+

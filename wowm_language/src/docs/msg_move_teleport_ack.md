@@ -21,9 +21,12 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x08 | 4 / Little | u32 | movement_counter |  |  |
 | 0x0C | 4 / Little | u32 | time_in_msecs |  |  |
+

@@ -12,6 +12,7 @@ struct StabledPet {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | pet_number |  |  |
@@ -20,3 +21,4 @@ struct StabledPet {
 | 0x0C | - / - | CString | name |  |  |
 | - | 4 / Little | u32 | loyalty |  |  |
 | - | 1 / - | u8 | slot |  | vmangos/mangoszero/cmangos: client slot 1 == current pet (0) |
+

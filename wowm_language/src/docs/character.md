@@ -31,6 +31,7 @@ struct Character {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
@@ -58,3 +59,4 @@ struct Character {
 | - | ? / - | [CharacterGear](charactergear.md)[19] | equipment |  |  |
 | - | 4 / Little | u32 | first_bag_display_id |  |  |
 | - | 1 / - | u8 | first_bag_inventory_id |  |  |
+

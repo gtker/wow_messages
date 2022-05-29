@@ -28,6 +28,7 @@ struct AuraLog {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | ? / - | [AuraType](auratype.md) | aura_type |  |  |
@@ -64,3 +65,4 @@ Else If aura_type is equal to `PERIODIC_MANA_LEECH`:
 | - | 4 / Little | u32 | misc_value2 |  | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
 | - | 4 / Little | u32 | damage |  |  |
 | - | 4 / Little | f32 | gain_multiplier |  |  |
+

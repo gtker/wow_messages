@@ -75,6 +75,7 @@ struct MovementBlock {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | ? / - | [UpdateFlag](updateflag.md) | update_flag |  |  |
@@ -188,3 +189,4 @@ If update_flag contains `TRANSPORT`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | transport_progress_in_ms |  |  |
+

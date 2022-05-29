@@ -17,7 +17,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | ? / - | u8[32] | client_public_key |  |  |
@@ -25,6 +27,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | ? / - | u8[20] | crc_hash |  |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |  |
 | - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
+
 ### Examples
 ```c
 1, // opcode (1)
@@ -95,7 +98,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | ? / - | u8[32] | client_public_key |  |  |
@@ -111,6 +116,7 @@ If security_flag is equal to `PIN`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | ? / - | u8[16] | pin_salt |  |  |
 | - | ? / - | u8[20] | pin_hash |  |  |
+
 ### Examples
 ```c
 1, // opcode (1)
@@ -208,7 +214,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | ? / - | u8[32] | client_public_key |  |  |
@@ -240,6 +248,7 @@ If security_flag contains `AUTHENTICATOR`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 1 / - | u8 | unknown5 |  |  |
+
 ### Examples
 ```c
 1, // opcode (1)

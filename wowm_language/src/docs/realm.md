@@ -14,6 +14,7 @@ struct Realm {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | ? / - | [RealmType](realmtype.md) | realm_type |  |  |
@@ -24,6 +25,7 @@ struct Realm {
 | - | 1 / - | u8 | number_of_characters_on_realm |  |  |
 | - | ? / - | [RealmCategory](realmcategory.md) | category |  |  |
 | - | 1 / - | u8 | realm_id |  |  |
+
 ## Protocol Version 8
 
 ### Wowm Representation
@@ -44,6 +46,7 @@ struct Realm {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | ? / - | [RealmType](realmtype.md) | realm_type |  | vmangos: this is the second column in Cfg_Configs.dbc |
@@ -61,3 +64,4 @@ If flag contains `SPECIFY_BUILD`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | ? / - | [Version](version.md) | version |  |  |
+

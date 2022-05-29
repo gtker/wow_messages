@@ -8,7 +8,9 @@ struct CharacterGear {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | equipment_display_id |  |  |
 | 0x04 | ? / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
+

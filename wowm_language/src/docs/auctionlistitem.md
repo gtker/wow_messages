@@ -20,6 +20,7 @@ struct AuctionListItem {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | id |  |  |
@@ -36,3 +37,4 @@ struct AuctionListItem {
 | 0x30 | 4 / Little | u32 | time_left_in_msecs |  |  |
 | 0x34 | 8 / Little | [Guid](../spec/packed-guid.md) | highest_bidder |  |  |
 | 0x3C | 4 / Little | u32 | highest_bid |  |  |
+

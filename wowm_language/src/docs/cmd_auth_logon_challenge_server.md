@@ -23,7 +23,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 1 / - | u8 | protocol_version |  |  |
@@ -40,6 +42,7 @@ If login_result is equal to `SUCCESS`:
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |  |
 | - | ? / - | u8[32] | salt |  |  |
 | - | ? / - | u8[16] | crc_salt |  |  |
+
 ### Examples
 ```c
 0, // opcode (0)
@@ -86,7 +89,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 1 / - | u8 | protocol_version |  |  |
@@ -111,6 +116,7 @@ If security_flag is equal to `PIN`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | pin_grid_seed |  |  |
 | - | ? / - | u8[16] | pin_salt |  |  |
+
 ### Examples
 ```c
 0, // opcode (0)
@@ -186,7 +192,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 1 / - | u8 | protocol_version |  |  |
@@ -227,6 +235,7 @@ If security_flag contains `AUTHENTICATOR`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 1 / - | u8 | unknown5 |  |  |
+
 ### Examples
 ```c
 0, // opcode (0)

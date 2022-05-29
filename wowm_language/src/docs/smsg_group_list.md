@@ -23,7 +23,9 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | ? / - | [GroupType](grouptype.md) | group_type |  |  |
@@ -39,3 +41,4 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | ? / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | master_loot |  | Zero if loot_setting is not MASTER_LOOT |
 | - | ? / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
+

@@ -27,6 +27,7 @@ struct Object {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | ? / - | [UpdateType](updatetype.md) | update_type |  |  |
@@ -62,3 +63,4 @@ is equal to `NEAR_OBJECTS`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | count |  |  |
 | - | ? / - | [PackedGuid](../spec/packed-guid.md)[count] | guids |  |  |
+

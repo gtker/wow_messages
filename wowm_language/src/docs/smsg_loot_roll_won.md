@@ -21,7 +21,9 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | looted_target_guid |  |  |
@@ -32,3 +34,4 @@ SMSG have a header of 4 bytes.
 | 0x1C | 8 / Little | [Guid](../spec/packed-guid.md) | winning_player_guid |  |  |
 | 0x24 | 1 / - | u8 | winning_roll |  | rollnumber related to SMSG_LOOT_ROLL |
 | 0x25 | ? / - | [RollVote](rollvote.md) | vote |  | Rolltype related to SMSG_LOOT_ROLL |
+

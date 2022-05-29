@@ -13,6 +13,7 @@ struct Friend {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
@@ -25,3 +26,4 @@ If status is not equal to `OFFLINE`:
 | - | ? / - | [Area](area.md) | area |  |  |
 | - | 4 / Little | u32 | level |  |  |
 | - | ? / - | [Class](class.md) | class |  |  |
+

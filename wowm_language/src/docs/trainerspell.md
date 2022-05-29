@@ -17,6 +17,7 @@ struct TrainerSpell {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | spell |  | cmangos: learned spell (or cast-spell in profession case) |
@@ -30,3 +31,4 @@ struct TrainerSpell {
 | - | 4 / Little | u32 | spell_chain_required |  |  |
 | - | 4 / Little | u32 | spell_chain_previous |  |  |
 | - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: all set 0 |
+

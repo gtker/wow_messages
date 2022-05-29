@@ -16,13 +16,16 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | ? / - | u8[16] | proof_data |  |  |
 | - | ? / - | u8[20] | client_proof |  |  |
 | - | ? / - | u8[20] | client_checksum |  |  |
 | - | 1 / - | u8 | key_count |  |  |
+
 ### Examples
 ```c
 3, // opcode (3)

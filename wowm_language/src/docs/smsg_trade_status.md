@@ -26,7 +26,9 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | ? / - | [TradeStatus](tradestatus.md) | status |  |  |
@@ -51,3 +53,4 @@ is equal to `NOT_ON_TAPLIST`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 1 / - | u8 | slot |  | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
+

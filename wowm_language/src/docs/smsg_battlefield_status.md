@@ -31,7 +31,9 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | queue_slot |  |  |
@@ -64,3 +66,4 @@ Else If status_id is equal to `IN_PROGRESS`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |  |
 | - | 4 / Little | u32 | time_to_bg_start_in_ms |  |  |
+

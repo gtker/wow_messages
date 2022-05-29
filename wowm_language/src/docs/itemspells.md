@@ -12,6 +12,7 @@ struct ItemSpells {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | spell |  |  |
@@ -20,3 +21,4 @@ struct ItemSpells {
 | 0x0C | 4 / Little | u32 | spell_cooldown |  |  |
 | 0x10 | 4 / Little | u32 | spell_category |  |  |
 | 0x14 | 4 / Little | u32 | spell_category_cooldown |  |  |
+

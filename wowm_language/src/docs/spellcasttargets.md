@@ -44,6 +44,7 @@ struct SpellCastTargets {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | ? / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |  |
@@ -117,3 +118,4 @@ If target_flags contains `CORPSE_ENEMY`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse_target2 |  |  |
+

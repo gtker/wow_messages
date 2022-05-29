@@ -8,7 +8,9 @@ struct FactionInitializer {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | ? / - | [FactionFlag](factionflag.md) | flag |  |  |
 | - | 4 / Little | u32 | standing |  |  |
+

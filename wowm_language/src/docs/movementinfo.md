@@ -28,6 +28,7 @@ struct MovementInfo {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
@@ -64,3 +65,4 @@ If flags contains `SPLINE_ELEVATION`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | f32 | spline_elevation |  |  |
+

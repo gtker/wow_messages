@@ -51,6 +51,7 @@ struct SpellLog {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | ? / - | [SpellEffect](spelleffect.md) | effect |  |  |
@@ -119,3 +120,4 @@ is equal to `INSTAKILL`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |  |
+

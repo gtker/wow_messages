@@ -11,6 +11,7 @@ struct CooldownSpell {
 }
 ```
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 2 / Little | u16 | spell_id |  |  |
@@ -18,3 +19,4 @@ struct CooldownSpell {
 | 0x04 | 2 / Little | u16 | spell_category |  |  |
 | 0x06 | 4 / Little | u32 | cooldown_in_msecs |  |  |
 | 0x0A | 4 / Little | u32 | category_cooldown_in_msecs |  |  |
+

@@ -16,9 +16,12 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 4 / Little        | uint32 | opcode | Opcode that determines which fields the message contains.|
+
 ### Body
+
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / Little | u32 | survey_id |  | cmangos: Survey ID: found in GMSurveySurveys.dbc |
 | 0x0A | ? / - | [GmSurveyQuestion](gmsurveyquestion.md)[10] | questions |  |  |
 | - | - / - | CString | answer_comment |  | cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function<br/>cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586 |
+
