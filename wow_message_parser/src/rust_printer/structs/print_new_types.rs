@@ -28,7 +28,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container) {
                 });
                 print_size_for_new_flag(s, &rd);
 
-                print_types_for_new_flag(s, e, &rd);
+                print_types_for_new_flag(s, &rd);
             }
         }
     }
@@ -247,11 +247,9 @@ fn print_size_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_types_for_new_flag(s: &mut Writer, e: &Container, rd: &RustDefiner) {
+fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     for enumerator in rd.complex_flag_enumerators() {
-        if e.complex_enum_enumerator_has_else_if(enumerator.name())
-            .is_some()
-        {
+        if enumerator.contains_elseif() {
             continue;
         }
 

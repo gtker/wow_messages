@@ -409,49 +409,6 @@ impl Container {
         false
     }
 
-    pub fn complex_enum_enumerator_has_else_if(&self, name: &str) -> Option<&NewIfStatement> {
-        fn inner<'a>(m: &'a StructMember, name: &str) -> Option<&'a NewIfStatement> {
-            match m {
-                StructMember::Definition(_) => {}
-                StructMember::IfStatement(statement) => {
-                    for eq in statement.get_conditional().equations() {
-                        let eq_value = match eq {
-                            Equation::Equals { value }
-                            | Equation::NotEquals { value }
-                            | Equation::BitwiseAnd { value } => value.as_str(),
-                        };
-                        if eq_value == name && !statement.else_ifs.is_empty() {
-                            return Some(statement.new_enum());
-                        }
-                    }
-
-                    for m in statement.all_members() {
-                        if let Some(m) = inner(m, name) {
-                            return Some(m);
-                        }
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in optional.members() {
-                        if let Some(m) = inner(m, name) {
-                            return Some(m);
-                        }
-                    }
-                }
-            }
-
-            None
-        }
-
-        for m in &self.members {
-            if let Some(m) = inner(m, name) {
-                return Some(m);
-            }
-        }
-
-        None
-    }
-
     pub fn has_tag(&self, tag: &str) -> bool {
         self.tags().contains(tag)
     }
