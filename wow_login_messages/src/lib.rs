@@ -80,14 +80,6 @@
 
 #![doc(html_root_url = "https://docs.rs/wow_login_messages/0.1.0")]
 #![forbid(unsafe_code)]
-#![allow(
-    unused,
-    non_camel_case_types,
-    non_snake_case,
-    clippy::missing_errors_doc,
-    clippy::upper_case_acronyms,
-    clippy::missing_const_for_fn
-)]
 #![deny(
     clippy::complexity,
     clippy::correctness,
@@ -97,6 +89,14 @@
     clippy::missing_const_for_fn,
     clippy::doc_markdown,
     clippy::unseparated_literal_suffix
+)]
+#![allow(
+    unused,
+    non_camel_case_types,
+    non_snake_case,
+    clippy::missing_errors_doc,
+    clippy::upper_case_acronyms,
+    clippy::missing_const_for_fn
 )]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]

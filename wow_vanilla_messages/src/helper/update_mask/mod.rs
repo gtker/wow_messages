@@ -122,15 +122,12 @@ impl UpdateMask {
         }
 
         let mut values = BTreeMap::new();
-        let mut index = 0;
-        for block in &header {
+        for (index, block) in header.iter().enumerate() {
             for bit in 0..32 {
                 if (block & 1 << bit) != 0 {
-                    values.insert(index * 32 + bit, crate::util::read_u32_le(r)?);
+                    values.insert(index as u16 * 32 + bit, crate::util::read_u32_le(r)?);
                 }
             }
-
-            index += 1;
         }
 
         let ty = match values.get(&2) {

@@ -413,10 +413,10 @@ fn print_container_if_statement(
             s.wln(" **or** ");
         }
         s.w(&(match e {
-                Equation::Equals { value } => format!("is equal to `{}`", value),
-                Equation::NotEquals { value } => format!("is not equal to `{}`", value),
-                Equation::BitwiseAnd { value } => format!("contains `{}`", value),
-            }))
+            Equation::Equals { value } => format!("is equal to `{}`", value),
+            Equation::NotEquals { value } => format!("is not equal to `{}`", value),
+            Equation::BitwiseAnd { value } => format!("contains `{}`", value),
+        }))
     }
     s.wln(":");
     s.newline();
@@ -594,9 +594,8 @@ fn print_container_body(s: &mut DocWriter, e: &Container) {
 }
 
 fn print_container_header(s: &mut DocWriter, e: &Container) {
-    match e.container_type() {
-        ContainerType::Struct => return,
-        _ => {}
+    if e.container_type() == ContainerType::Struct {
+        return;
     }
 
     s.wln("### Header");

@@ -23,7 +23,7 @@ pub async fn tokio_expect_client_message_encryption<
     r: &mut R,
     d: &mut D,
 ) -> Result<M, ExpectedMessageError> {
-    let mut buf = [0u8; CLIENT_HEADER_LENGTH as usize];
+    let mut buf = [0_u8; CLIENT_HEADER_LENGTH as usize];
     r.read_exact(&mut buf).await?;
     let d = d.decrypt_client_header(buf);
 

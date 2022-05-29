@@ -70,9 +70,7 @@ pub struct ImplFeatures {
 
 impl ImplFeatures {
     pub fn new() -> Self {
-        Self {
-            inner: Vec::with_capacity(16),
-        }
+        Self::default()
     }
 
     pub fn add(&mut self, f: Feature) {
@@ -87,6 +85,14 @@ impl ImplFeatures {
 
     pub fn to_array(&self) -> Vec<Feature> {
         self.inner.clone()
+    }
+}
+
+impl Default for ImplFeatures {
+    fn default() -> Self {
+        Self {
+            inner: Vec::with_capacity(16),
+        }
     }
 }
 
