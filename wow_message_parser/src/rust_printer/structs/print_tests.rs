@@ -283,8 +283,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
         TestValue::Array { values, size } => {
             match size {
                 ArraySize::Fixed(_) => s.w_no_indent("["),
-                ArraySize::Variable(_) => s.w_no_indent("vec!["),
-                ArraySize::Endless => panic!(),
+                ArraySize::Variable(_) | ArraySize::Endless => s.w_no_indent("vec!["),
             }
             s.inc_indent();
 
