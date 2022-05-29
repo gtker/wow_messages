@@ -42,7 +42,7 @@ impl ClientMessage for CMSG_GROUP_INVITE {
 }
 
 impl CMSG_GROUP_INVITE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.name.len() + 1 // name: CString
     }

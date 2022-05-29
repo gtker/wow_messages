@@ -63,7 +63,7 @@ impl ServerMessage for MSG_RAID_READY_CHECK_Server {
 }
 
 impl MSG_RAID_READY_CHECK_Server {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + if let Some(state_check) = &self.state_check {
             0

@@ -59,7 +59,7 @@ impl ServerMessage for SMSG_DEFENSE_MESSAGE {
 }
 
 impl SMSG_DEFENSE_MESSAGE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // map: Map
         + 4 // message_length: u32

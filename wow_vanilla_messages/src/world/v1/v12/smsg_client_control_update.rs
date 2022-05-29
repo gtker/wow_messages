@@ -48,7 +48,7 @@ impl ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {
 }
 
 impl SMSG_CLIENT_CONTROL_UPDATE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
         + 1 // allow_movement: u8

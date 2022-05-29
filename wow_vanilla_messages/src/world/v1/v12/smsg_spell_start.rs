@@ -112,7 +112,7 @@ impl ServerMessage for SMSG_SPELL_START {
 }
 
 impl SMSG_SPELL_START {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.cast_item.size() // cast_item: Guid
         + self.caster.size() // caster: Guid
@@ -356,7 +356,7 @@ impl SMSG_SPELL_STARTCastFlags {
 
 }
 impl SMSG_SPELL_STARTCastFlags {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         2 // inner
         + {
             if let Some(s) = &self.ammo {
@@ -375,7 +375,7 @@ pub struct SMSG_SPELL_STARTCastFlagsAMMO {
 }
 
 impl SMSG_SPELL_STARTCastFlagsAMMO {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // ammo_display_id: u32
         + 4 // ammo_inventory_type: u32
     }

@@ -59,7 +59,7 @@ impl ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {
 }
 
 impl SMSG_QUEST_CONFIRM_ACCEPT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // quest_id: u32
         + self.quest_title.len() + 1 // quest_title: CString

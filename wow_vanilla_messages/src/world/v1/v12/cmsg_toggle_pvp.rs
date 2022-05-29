@@ -55,7 +55,7 @@ impl ClientMessage for CMSG_TOGGLE_PVP {
 }
 
 impl CMSG_TOGGLE_PVP {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + if let Some(set) = &self.set {
             0

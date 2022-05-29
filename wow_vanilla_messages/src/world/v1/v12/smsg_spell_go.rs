@@ -143,7 +143,7 @@ impl ServerMessage for SMSG_SPELL_GO {
 }
 
 impl SMSG_SPELL_GO {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.cast_item.size() // cast_item: Guid
         + self.caster.size() // caster: Guid
@@ -390,7 +390,7 @@ impl SMSG_SPELL_GOCastFlags {
 
 }
 impl SMSG_SPELL_GOCastFlags {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         2 // inner
         + {
             if let Some(s) = &self.ammo {
@@ -409,7 +409,7 @@ pub struct SMSG_SPELL_GOCastFlagsAMMO {
 }
 
 impl SMSG_SPELL_GOCastFlagsAMMO {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // ammo_display_id: u32
         + 4 // ammo_inventory_type: u32
     }

@@ -42,7 +42,7 @@ impl ClientMessage for CMSG_GUILD_LEADER {
 }
 
 impl CMSG_GUILD_LEADER {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.new_guild_leader_name.len() + 1 // new_guild_leader_name: CString
     }

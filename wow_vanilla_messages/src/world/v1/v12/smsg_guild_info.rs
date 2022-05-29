@@ -82,7 +82,7 @@ impl ServerMessage for SMSG_GUILD_INFO {
 }
 
 impl SMSG_GUILD_INFO {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guild_name.len() + 1 // guild_name: CString
         + 4 // created_day: u32

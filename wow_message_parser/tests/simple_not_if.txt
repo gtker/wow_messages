@@ -71,7 +71,7 @@ impl SimpleIfEnumNot {
 }
 
 impl SimpleIfEnumNot {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.enum.size() // enum: SimpleIfEnumNotSimpleEnum
     }
@@ -107,7 +107,7 @@ impl SimpleIfEnumNotSimpleEnum {
 }
 
 impl SimpleIfEnumNotSimpleEnum {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::ZERO => {
                 1

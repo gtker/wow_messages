@@ -174,7 +174,7 @@ impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
 }
 
 impl SMSG_PETITION_QUERY_RESPONSE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // petition_guid: Guid
         + 8 // charter_owner: Guid

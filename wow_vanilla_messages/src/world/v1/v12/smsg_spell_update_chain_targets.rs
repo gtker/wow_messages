@@ -67,7 +67,7 @@ impl ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 }
 
 impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // caster: Guid
         + 4 // spell: u32

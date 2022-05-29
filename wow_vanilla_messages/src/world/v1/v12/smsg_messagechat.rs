@@ -763,7 +763,7 @@ impl ServerMessage for SMSG_MESSAGECHAT {
 }
 
 impl SMSG_MESSAGECHAT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.chat_type.size() // chat_type: SMSG_MESSAGECHATChatType
         + 4 // language: Language
@@ -953,7 +953,7 @@ impl SMSG_MESSAGECHATChatType {
 }
 
 impl SMSG_MESSAGECHATChatType {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::SAY {
                 sender_guid1,

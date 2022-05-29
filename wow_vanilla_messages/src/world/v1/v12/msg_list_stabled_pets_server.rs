@@ -68,7 +68,7 @@ impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
 }
 
 impl MSG_LIST_STABLED_PETS_Server {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + 1 // amount_of_pets: u8

@@ -58,7 +58,7 @@ impl ServerMessage for SMSG_SPELL_COOLDOWN {
 }
 
 impl SMSG_SPELL_COOLDOWN {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + self.cooldowns.len() * 8 // cooldowns: SpellCooldownStatus[-]

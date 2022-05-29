@@ -51,7 +51,7 @@ impl ServerMessage for SMSG_INITIALIZE_FACTIONS {
 }
 
 impl SMSG_INITIALIZE_FACTIONS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // amount_of_factions: u32
         + self.factions.len() * 5 // factions: FactionInitializer[amount_of_factions]

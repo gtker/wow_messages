@@ -285,7 +285,7 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
 }
 
 impl SMSG_QUEST_QUERY_RESPONSE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // quest_id: u32
         + 4 // quest_method: u32

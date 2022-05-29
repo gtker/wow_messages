@@ -129,7 +129,7 @@ impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
 }
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.target.size() // target: Guid
         + self.attacker.size() // attacker: Guid

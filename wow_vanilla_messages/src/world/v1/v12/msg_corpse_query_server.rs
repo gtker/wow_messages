@@ -93,7 +93,7 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
 }
 
 impl MSG_CORPSE_QUERY_Server {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.result.size() // result: MSG_CORPSE_QUERY_ServerCorpseQueryResult
     }
@@ -129,7 +129,7 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
 }
 
 impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::NOT_FOUND => {
                 1

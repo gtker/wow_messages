@@ -51,7 +51,7 @@ impl ServerMessage for SMSG_MAIL_LIST_RESULT {
 }
 
 impl SMSG_MAIL_LIST_RESULT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // amount_of_mails: u8
         + self.mails.iter().fold(0, |acc, x| acc + x.size()) // mails: Mail[amount_of_mails]

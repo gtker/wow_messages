@@ -88,7 +88,7 @@ impl ServerMessage for SMSG_GOSSIP_MESSAGE {
 }
 
 impl SMSG_GOSSIP_MESSAGE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // title_text_id: u32

@@ -84,7 +84,7 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
 }
 
 impl MSG_PVP_LOG_DATA_Server {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.status.size() // status: MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus
         + 4 // amount_of_players: u32
@@ -118,7 +118,7 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
 }
 
 impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::NOT_ENDED => {
                 1

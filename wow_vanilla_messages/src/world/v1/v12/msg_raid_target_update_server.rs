@@ -83,7 +83,7 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
 }
 
 impl MSG_RAID_TARGET_UPDATE_Server {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.update_type.size() // update_type: MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType
     }
@@ -119,7 +119,7 @@ impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
 }
 
 impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::PARTIAL {
                 raid_target,

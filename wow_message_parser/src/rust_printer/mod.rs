@@ -127,7 +127,7 @@ impl Writer {
 
     pub fn variable_size<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, variable_sized: F) {
         self.open_curly(format!("impl {}", name.as_ref()));
-        self.open_curly("pub fn size(&self) -> usize");
+        self.open_curly("pub(crate) fn size(&self) -> usize");
 
         variable_sized(self);
 

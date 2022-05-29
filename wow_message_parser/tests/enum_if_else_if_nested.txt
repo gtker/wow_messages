@@ -67,7 +67,7 @@ impl EnumIfElseIfNested {
 }
 
 impl EnumIfElseIfNested {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.e.size() // e: EnumIfElseIfNestedSimpleEnum
         + self.n.size() // n: EnumIfElseIfNestedNestedEnum
@@ -104,7 +104,7 @@ impl EnumIfElseIfNestedSimpleEnum {
 }
 
 impl EnumIfElseIfNestedSimpleEnum {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::ZERO {
                 zero,
@@ -150,7 +150,7 @@ impl EnumIfElseIfNestedNestedEnum {
 }
 
 impl EnumIfElseIfNestedNestedEnum {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::NESTED {
                 nested,

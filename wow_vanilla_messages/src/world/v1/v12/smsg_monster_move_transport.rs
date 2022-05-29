@@ -78,7 +78,7 @@ impl ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {
 }
 
 impl SMSG_MONSTER_MOVE_TRANSPORT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.transport.size() // transport: Guid
         + 4 // position_x: f32

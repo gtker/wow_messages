@@ -66,7 +66,7 @@ impl ServerMessage for MSG_MOVE_START_SWIM {
 }
 
 impl MSG_MOVE_START_SWIM {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.info.size() // info: MovementInfo
     }

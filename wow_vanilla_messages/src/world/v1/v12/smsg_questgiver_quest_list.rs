@@ -87,7 +87,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {
 }
 
 impl SMSG_QUESTGIVER_QUEST_LIST {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + self.title.len() + 1 // title: CString

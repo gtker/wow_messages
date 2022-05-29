@@ -129,7 +129,7 @@ impl ClientMessage for CMSG_SEND_MAIL {
 }
 
 impl CMSG_SEND_MAIL {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // mailbox: Guid
         + self.receiver.len() + 1 // receiver: CString

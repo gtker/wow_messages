@@ -42,7 +42,7 @@ impl ServerMessage for SMSG_WHOIS {
 }
 
 impl SMSG_WHOIS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.message.len() + 1 // message: CString
     }

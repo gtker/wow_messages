@@ -57,7 +57,7 @@ impl ClientMessage for CMSG_MOVE_KNOCK_BACK_ACK {
 }
 
 impl CMSG_MOVE_KNOCK_BACK_ACK {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // counter: u32

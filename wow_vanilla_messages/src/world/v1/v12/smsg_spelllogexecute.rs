@@ -68,7 +68,7 @@ impl ServerMessage for SMSG_SPELLLOGEXECUTE {
 }
 
 impl SMSG_SPELLLOGEXECUTE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.caster.size() // caster: Guid
         + 4 // spell: u32

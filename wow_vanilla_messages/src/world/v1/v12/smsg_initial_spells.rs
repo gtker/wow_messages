@@ -79,7 +79,7 @@ impl ServerMessage for SMSG_INITIAL_SPELLS {
 }
 
 impl SMSG_INITIAL_SPELLS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // unknown1: u8
         + 2 // spell_count: u16

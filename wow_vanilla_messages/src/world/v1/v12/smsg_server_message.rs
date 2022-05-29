@@ -51,7 +51,7 @@ impl ServerMessage for SMSG_SERVER_MESSAGE {
 }
 
 impl SMSG_SERVER_MESSAGE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // message_type: ServerMessageType
         + self.message.len() + 1 // message: CString

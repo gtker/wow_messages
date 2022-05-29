@@ -72,7 +72,7 @@ impl ServerMessage for SMSG_TRANSFER_PENDING {
 }
 
 impl SMSG_TRANSFER_PENDING {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // map: Map
         + if let Some(has_transport) = &self.has_transport {

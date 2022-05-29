@@ -47,7 +47,7 @@ impl ServerMessage for SMSG_SPLINE_SET_WALK_SPEED {
 }
 
 impl SMSG_SPLINE_SET_WALK_SPEED {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
         + 4 // speed: f32

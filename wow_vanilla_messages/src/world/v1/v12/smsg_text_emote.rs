@@ -76,7 +76,7 @@ impl ServerMessage for SMSG_TEXT_EMOTE {
 }
 
 impl SMSG_TEXT_EMOTE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // text_emote: u32

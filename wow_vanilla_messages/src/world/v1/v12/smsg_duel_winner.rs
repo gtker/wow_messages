@@ -62,7 +62,7 @@ impl ServerMessage for SMSG_DUEL_WINNER {
 }
 
 impl SMSG_DUEL_WINNER {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // reason: DuelWinnerReason
         + self.opponent_name.len() + 1 // opponent_name: CString

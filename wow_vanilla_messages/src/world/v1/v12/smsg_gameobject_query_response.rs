@@ -134,7 +134,7 @@ impl ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 }
 
 impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // entry_id: u32
         + if let Some(found) = &self.found {

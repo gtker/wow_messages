@@ -51,7 +51,7 @@ impl ClientMessage for CMSG_PET_RENAME {
 }
 
 impl CMSG_PET_RENAME {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // pet_guid: Guid
         + self.name.len() + 1 // name: CString

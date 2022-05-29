@@ -51,7 +51,7 @@ impl ServerMessage for SMSG_FRIEND_LIST {
 }
 
 impl SMSG_FRIEND_LIST {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // amount_of_friends: u8
         + self.friends.iter().fold(0, |acc, x| acc + x.size()) // friends: Friend[amount_of_friends]

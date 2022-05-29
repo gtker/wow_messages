@@ -65,7 +65,7 @@ impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
 }
 
 impl CMSG_GMSURVEY_SUBMIT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // survey_id: u32
         + 10 * 5 // questions: GmSurveyQuestion[10]

@@ -77,7 +77,7 @@ impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
 }
 
 impl CMSG_GOSSIP_SELECT_OPTION {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // gossip_list_id: u32

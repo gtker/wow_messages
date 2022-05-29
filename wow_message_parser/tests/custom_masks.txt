@@ -42,7 +42,7 @@ impl CustomMasks {
 }
 
 impl CustomMasks {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.update_mask.size() // update_mask: UpdateMask
         + self.aura_mask.size() // aura_mask: AuraMask

@@ -40,7 +40,7 @@ impl ClientMessage for CMSG_MOVE_FALL_RESET {
 }
 
 impl CMSG_MOVE_FALL_RESET {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.info.size() // info: MovementInfo
     }

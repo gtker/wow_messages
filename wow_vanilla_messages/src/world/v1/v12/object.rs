@@ -223,7 +223,7 @@ impl Object {
 }
 
 impl Object {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.update_type.size() // update_type: ObjectUpdateType
     }
@@ -286,7 +286,7 @@ impl ObjectUpdateType {
 }
 
 impl ObjectUpdateType {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::VALUES {
                 guid1,

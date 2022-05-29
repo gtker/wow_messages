@@ -50,7 +50,7 @@ impl ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {
 }
 
 impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // item_text_id: u32
         + self.text.len() + 1 // text: CString

@@ -252,7 +252,7 @@ impl Realm {
 }
 
 impl Realm {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // realm_type: RealmType
         + 1 // locked: u8
@@ -436,7 +436,7 @@ impl RealmRealmFlag {
 
 }
 impl RealmRealmFlag {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.specify_build {
@@ -454,7 +454,7 @@ pub struct RealmRealmFlagSPECIFY_BUILD {
 }
 
 impl RealmRealmFlagSPECIFY_BUILD {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         5 // version: Version
     }
 }

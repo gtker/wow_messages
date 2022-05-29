@@ -364,7 +364,7 @@ impl NestedNotIf {
 }
 
 impl NestedNotIf {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.t.size() // t: NestedNotIfTEnum
     }
@@ -398,7 +398,7 @@ impl NestedNotIfNestedEnum {
 }
 
 impl NestedNotIfNestedEnum {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::NESTED {
                 one,
@@ -470,7 +470,7 @@ impl NestedNotIfTEnum {
 }
 
 impl NestedNotIfTEnum {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::ZERO => {
                 1

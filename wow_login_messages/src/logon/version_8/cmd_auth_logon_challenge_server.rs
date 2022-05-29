@@ -626,7 +626,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // protocol_version: u8
         + self.login_result.size() // login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult
@@ -756,7 +756,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
 
 }
 impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.pin {
@@ -789,7 +789,7 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // pin_grid_seed: u32
         + 16 * core::mem::size_of::<u8>() // pin_salt: u8[16]
     }
@@ -805,7 +805,7 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // unknown0: u8
         + 1 // unknown1: u8
         + 1 // unknown2: u8
@@ -820,7 +820,7 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // unknown5: u8
     }
 }
@@ -893,7 +893,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::SUCCESS {
                 crc_salt,

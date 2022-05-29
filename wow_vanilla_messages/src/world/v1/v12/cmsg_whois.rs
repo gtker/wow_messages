@@ -42,7 +42,7 @@ impl ClientMessage for CMSG_WHOIS {
 }
 
 impl CMSG_WHOIS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.character.len() + 1 // character: CString
     }

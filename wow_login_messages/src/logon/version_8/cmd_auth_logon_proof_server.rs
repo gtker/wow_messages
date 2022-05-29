@@ -376,7 +376,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Server {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.login_result.size() // login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult
     }
@@ -446,7 +446,7 @@ impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
 }
 
 impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::SUCCESS {
                 account_flag,

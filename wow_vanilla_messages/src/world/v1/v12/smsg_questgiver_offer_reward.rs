@@ -161,7 +161,7 @@ impl ServerMessage for SMSG_QUESTGIVER_OFFER_REWARD {
 }
 
 impl SMSG_QUESTGIVER_OFFER_REWARD {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + 4 // quest_id: u32

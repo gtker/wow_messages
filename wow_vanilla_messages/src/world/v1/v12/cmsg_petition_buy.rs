@@ -179,7 +179,7 @@ impl ClientMessage for CMSG_PETITION_BUY {
 }
 
 impl CMSG_PETITION_BUY {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + 4 // skip1: u32

@@ -152,7 +152,7 @@ impl ServerMessage for CMD_XFER_DATA {
 }
 
 impl CMD_XFER_DATA {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 2 // size: u16
         + self.data.len() * core::mem::size_of::<u8>() // data: u8[size]

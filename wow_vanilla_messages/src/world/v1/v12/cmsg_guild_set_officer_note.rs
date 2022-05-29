@@ -53,7 +53,7 @@ impl ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {
 }
 
 impl CMSG_GUILD_SET_OFFICER_NOTE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.player_name.len() + 1 // player_name: CString
         + self.note.len() + 1 // note: CString

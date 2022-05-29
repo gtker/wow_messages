@@ -51,7 +51,7 @@ impl ServerMessage for SMSG_SET_FORCED_REACTIONS {
 }
 
 impl SMSG_SET_FORCED_REACTIONS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // amount_of_reactions: u32
         + self.reactions.len() * 8 // reactions: ForcedReaction[amount_of_reactions]

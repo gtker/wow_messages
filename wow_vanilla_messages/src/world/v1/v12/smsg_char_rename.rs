@@ -235,7 +235,7 @@ impl ServerMessage for SMSG_CHAR_RENAME {
 }
 
 impl SMSG_CHAR_RENAME {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.result.size() // result: SMSG_CHAR_RENAMEWorldResult
     }
@@ -431,7 +431,7 @@ impl SMSG_CHAR_RENAMEWorldResult {
 }
 
 impl SMSG_CHAR_RENAMEWorldResult {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::RESPONSE_SUCCESS {
                 guid,

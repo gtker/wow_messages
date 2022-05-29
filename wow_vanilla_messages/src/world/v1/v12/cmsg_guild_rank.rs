@@ -58,7 +58,7 @@ impl ClientMessage for CMSG_GUILD_RANK {
 }
 
 impl CMSG_GUILD_RANK {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // rank_id: u32
         + 4 // rights: u32

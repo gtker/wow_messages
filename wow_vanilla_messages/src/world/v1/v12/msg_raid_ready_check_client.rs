@@ -55,7 +55,7 @@ impl ClientMessage for MSG_RAID_READY_CHECK_Client {
 }
 
 impl MSG_RAID_READY_CHECK_Client {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + if let Some(answer) = &self.answer {
             0

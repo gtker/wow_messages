@@ -61,7 +61,7 @@ impl ServerMessage for SMSG_GUILD_EVENT {
 }
 
 impl SMSG_GUILD_EVENT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // event: GuildEvent
         + 1 // amount_of_events: u8

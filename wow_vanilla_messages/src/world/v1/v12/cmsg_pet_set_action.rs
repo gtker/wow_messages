@@ -90,7 +90,7 @@ impl ClientMessage for CMSG_PET_SET_ACTION {
 }
 
 impl CMSG_PET_SET_ACTION {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // position1: u32

@@ -170,7 +170,7 @@ impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
 }
 
 impl SMSG_CREATURE_QUERY_RESPONSE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // creature_entry: u32
         + if let Some(found) = &self.found {

@@ -76,7 +76,7 @@ impl ServerMessage for SMSG_MOVE_KNOCK_BACK {
 }
 
 impl SMSG_MOVE_KNOCK_BACK {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
         + 4 // movement_counter: u32

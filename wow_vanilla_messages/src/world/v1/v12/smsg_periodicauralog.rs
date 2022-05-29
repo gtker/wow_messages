@@ -76,7 +76,7 @@ impl ServerMessage for SMSG_PERIODICAURALOG {
 }
 
 impl SMSG_PERIODICAURALOG {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.target.size() // target: Guid
         + self.caster.size() // caster: Guid

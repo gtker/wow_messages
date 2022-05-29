@@ -51,7 +51,7 @@ impl ServerMessage for SMSG_SET_FACTION_STANDING {
 }
 
 impl SMSG_SET_FACTION_STANDING {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // amount_of_factions: u32
         + self.factions.len() * 8 // factions: Faction[amount_of_factions]

@@ -127,7 +127,7 @@ impl ServerMessage for SMSG_PET_SPELLS {
 }
 
 impl SMSG_PET_SPELLS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // pet: Guid
         + 4 // unknown1: u32

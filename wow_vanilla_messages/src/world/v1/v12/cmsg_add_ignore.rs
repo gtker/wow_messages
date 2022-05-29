@@ -42,7 +42,7 @@ impl ClientMessage for CMSG_ADD_IGNORE {
 }
 
 impl CMSG_ADD_IGNORE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.ignore_name.len() + 1 // ignore_name: CString
     }

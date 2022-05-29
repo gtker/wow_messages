@@ -71,7 +71,7 @@ impl NpcTextUpdate {
 }
 
 impl NpcTextUpdate {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // probability: f32
         + self.texts.iter().fold(0, |acc, x| acc + x.len() + 1) // texts: CString[2]

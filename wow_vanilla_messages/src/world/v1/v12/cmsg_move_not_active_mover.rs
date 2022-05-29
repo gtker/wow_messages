@@ -49,7 +49,7 @@ impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {
 }
 
 impl CMSG_MOVE_NOT_ACTIVE_MOVER {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // old_mover: Guid
         + self.movement_info.size() // movement_info: MovementInfo

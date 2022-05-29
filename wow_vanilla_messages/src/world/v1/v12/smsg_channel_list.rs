@@ -70,7 +70,7 @@ impl ServerMessage for SMSG_CHANNEL_LIST {
 }
 
 impl SMSG_CHANNEL_LIST {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.channel_name.len() + 1 // channel_name: CString
         + 1 // channel_flags: u8

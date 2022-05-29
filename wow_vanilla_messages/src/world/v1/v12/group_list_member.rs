@@ -52,7 +52,7 @@ impl GroupListMember {
 }
 
 impl GroupListMember {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.name.len() + 1 // name: CString
         + 8 // guid: Guid

@@ -465,7 +465,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 32 * core::mem::size_of::<u8>() // client_public_key: u8[32]
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
@@ -599,7 +599,7 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
 
 }
 impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.pin {
@@ -632,7 +632,7 @@ pub struct CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
 }
 
 impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         20 * core::mem::size_of::<u8>() // pin_hash: u8[20]
         + 16 * core::mem::size_of::<u8>() // pin_salt: u8[16]
     }
@@ -648,7 +648,7 @@ pub struct CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
 }
 
 impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // unknown0: u8
         + 1 // unknown1: u8
         + 1 // unknown2: u8
@@ -663,7 +663,7 @@ pub struct CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
 }
 
 impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // unknown5: u8
     }
 }

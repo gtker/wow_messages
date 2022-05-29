@@ -92,7 +92,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_LIST {
 }
 
 impl SMSG_BATTLEFIELD_LIST {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // battlemaster: Guid
         + 4 // map: Map

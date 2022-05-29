@@ -60,7 +60,7 @@ impl ServerMessage for SMSG_PETITION_SHOWLIST {
 }
 
 impl SMSG_PETITION_SHOWLIST {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + 1 // amount_of_petitions: u8

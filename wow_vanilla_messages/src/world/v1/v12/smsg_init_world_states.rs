@@ -69,7 +69,7 @@ impl ServerMessage for SMSG_INIT_WORLD_STATES {
 }
 
 impl SMSG_INIT_WORLD_STATES {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // map: Map
         + 4 // area: Area

@@ -87,7 +87,7 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
 }
 
 impl SMSG_LOG_XPGAIN {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // target_guid: Guid
         + 4 // total_exp: u32
@@ -122,7 +122,7 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
 }
 
 impl SMSG_LOG_XPGAINExperienceAwardType {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::KILL => {
                 1

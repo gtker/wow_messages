@@ -79,7 +79,7 @@ impl ServerMessage for SMSG_TRAINER_LIST {
 }
 
 impl SMSG_TRAINER_LIST {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // trainer_type: u32

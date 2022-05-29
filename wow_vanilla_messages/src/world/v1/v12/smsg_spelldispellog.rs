@@ -67,7 +67,7 @@ impl ServerMessage for SMSG_SPELLDISPELLOG {
 }
 
 impl SMSG_SPELLDISPELLOG {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // victim: Guid
         + 8 // caster: Guid

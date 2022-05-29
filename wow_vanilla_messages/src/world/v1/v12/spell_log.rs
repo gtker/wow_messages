@@ -649,7 +649,7 @@ impl SpellLog {
 }
 
 impl SpellLog {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.effect.size() // effect: SpellLogSpellEffect
         + 4 // amount_of_logs: u32
@@ -983,7 +983,7 @@ impl SpellLogSpellEffect {
 }
 
 impl SpellLogSpellEffect {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::NONE => {
                 4

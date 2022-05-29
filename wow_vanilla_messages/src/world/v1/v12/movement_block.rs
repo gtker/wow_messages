@@ -494,7 +494,7 @@ impl MovementBlock {
 }
 
 impl MovementBlock {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.update_flag.size() // update_flag: MovementBlockUpdateFlag
     }
@@ -527,7 +527,7 @@ impl MovementBlockSplineFlagFINAL_ANGLE {
 }
 
 impl MovementBlockSplineFlagFINAL_ANGLE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::FINAL_ANGLE {
                 angle,
@@ -1229,7 +1229,7 @@ impl MovementBlockSplineFlag {
 
 }
 impl MovementBlockSplineFlag {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.final_angle {
@@ -1905,7 +1905,7 @@ impl MovementBlockMovementFlags {
 
 }
 impl MovementBlockMovementFlags {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.on_transport {
@@ -1951,7 +1951,7 @@ pub struct MovementBlockMovementFlagsON_TRANSPORT {
 }
 
 impl MovementBlockMovementFlagsON_TRANSPORT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.transport.size() // transport: TransportInfo
     }
 }
@@ -1965,7 +1965,7 @@ pub struct MovementBlockMovementFlagsJUMPING {
 }
 
 impl MovementBlockMovementFlagsJUMPING {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // cos_angle: f32
         + 4 // sin_angle: f32
         + 4 // xy_speed: f32
@@ -1979,7 +1979,7 @@ pub struct MovementBlockMovementFlagsSWIMMING {
 }
 
 impl MovementBlockMovementFlagsSWIMMING {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // pitch: f32
     }
 }
@@ -1995,7 +1995,7 @@ pub struct MovementBlockMovementFlagsSPLINE_ENABLED {
 }
 
 impl MovementBlockMovementFlagsSPLINE_ENABLED {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // amount_of_nodes: u32
         + 4 // duration: u32
         + 12 // final_node: Vector3d
@@ -2012,7 +2012,7 @@ pub struct MovementBlockMovementFlagsSPLINE_ELEVATION {
 }
 
 impl MovementBlockMovementFlagsSPLINE_ELEVATION {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // spline_elevation: f32
     }
 }
@@ -2053,7 +2053,7 @@ impl MovementBlockUpdateFlagLIVING {
 }
 
 impl MovementBlockUpdateFlagLIVING {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::LIVING {
                 backwards_running_speed,
@@ -2315,7 +2315,7 @@ impl MovementBlockUpdateFlag {
 
 }
 impl MovementBlockUpdateFlag {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.transport {
@@ -2361,7 +2361,7 @@ pub struct MovementBlockUpdateFlagTRANSPORT {
 }
 
 impl MovementBlockUpdateFlagTRANSPORT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // transport_progress_in_ms: u32
     }
 }
@@ -2372,7 +2372,7 @@ pub struct MovementBlockUpdateFlagMELEE_ATTACKING {
 }
 
 impl MovementBlockUpdateFlagMELEE_ATTACKING {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
     }
 }
@@ -2383,7 +2383,7 @@ pub struct MovementBlockUpdateFlagHIGH_GUID {
 }
 
 impl MovementBlockUpdateFlagHIGH_GUID {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // unknown0: u32
     }
 }
@@ -2394,7 +2394,7 @@ pub struct MovementBlockUpdateFlagALL {
 }
 
 impl MovementBlockUpdateFlagALL {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // unknown1: u32
     }
 }

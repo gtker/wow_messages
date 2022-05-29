@@ -75,7 +75,7 @@ impl ServerMessage for SMSG_RESURRECT_REQUEST {
 }
 
 impl SMSG_RESURRECT_REQUEST {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // name_length: u32

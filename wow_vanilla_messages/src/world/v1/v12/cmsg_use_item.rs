@@ -64,7 +64,7 @@ impl ClientMessage for CMSG_USE_ITEM {
 }
 
 impl CMSG_USE_ITEM {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // bag_index: u8
         + 1 // bag_slot: u8

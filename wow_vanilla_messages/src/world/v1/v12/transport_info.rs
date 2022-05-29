@@ -69,7 +69,7 @@ impl TransportInfo {
 }
 
 impl TransportInfo {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
         + 4 // position_x: f32

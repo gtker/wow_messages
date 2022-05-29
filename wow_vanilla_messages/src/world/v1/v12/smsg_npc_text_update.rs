@@ -61,7 +61,7 @@ impl ServerMessage for SMSG_NPC_TEXT_UPDATE {
 }
 
 impl SMSG_NPC_TEXT_UPDATE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // text_id: u32
         + 4 // probability: f32

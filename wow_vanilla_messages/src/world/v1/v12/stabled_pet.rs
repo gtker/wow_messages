@@ -75,7 +75,7 @@ impl StabledPet {
 }
 
 impl StabledPet {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // pet_number: u32
         + 4 // entry: u32

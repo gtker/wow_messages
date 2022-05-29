@@ -40,7 +40,7 @@ impl ServerMessage for SMSG_SPLINE_MOVE_UNSET_HOVER {
 }
 
 impl SMSG_SPLINE_MOVE_UNSET_HOVER {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
     }

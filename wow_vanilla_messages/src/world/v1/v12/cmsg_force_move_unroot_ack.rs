@@ -57,7 +57,7 @@ impl ClientMessage for CMSG_FORCE_MOVE_UNROOT_ACK {
 }
 
 impl CMSG_FORCE_MOVE_UNROOT_ACK {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // movement_counter: u32

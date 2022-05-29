@@ -248,7 +248,7 @@ impl Mail {
 }
 
 impl Mail {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // message_id: u32
         + self.message_type.size() // message_type: MailMailType
@@ -312,7 +312,7 @@ impl MailMailType {
 }
 
 impl MailMailType {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::NORMAL {
                 sender,

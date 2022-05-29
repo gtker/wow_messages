@@ -76,7 +76,7 @@ impl ClientMessage for CMSG_TEST_OPTIONAL {
 }
 
 impl CMSG_TEST_OPTIONAL {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.c_string.len() + 1 // c_string: CString
         + 1 // b_u8: u8

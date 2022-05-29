@@ -50,7 +50,7 @@ impl ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {
 }
 
 impl SMSG_AREA_TRIGGER_MESSAGE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // length: u32
         + self.message.len() + 1 // message: CString

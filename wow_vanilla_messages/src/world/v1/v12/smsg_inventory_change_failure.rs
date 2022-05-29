@@ -4164,7 +4164,7 @@ impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
 }
 
 impl SMSG_INVENTORY_CHANGE_FAILURE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.result.size() // result: SMSG_INVENTORY_CHANGE_FAILUREInventoryResult
     }
@@ -4589,7 +4589,7 @@ impl SMSG_INVENTORY_CHANGE_FAILUREInventoryResult {
 }
 
 impl SMSG_INVENTORY_CHANGE_FAILUREInventoryResult {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::OK => {
                 1

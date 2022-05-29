@@ -4443,7 +4443,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
 }
 
 impl SMSG_BATTLEFIELD_STATUS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // queue_slot: u32
         + self.map.size() // map: SMSG_BATTLEFIELD_STATUSMap
@@ -4488,7 +4488,7 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
 }
 
 impl SMSG_BATTLEFIELD_STATUSStatusId {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::NONE => {
                 1
@@ -4802,7 +4802,7 @@ impl SMSG_BATTLEFIELD_STATUSMap {
 }
 
 impl SMSG_BATTLEFIELD_STATUSMap {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::EASTERN_KINGDOMS => {
                 4

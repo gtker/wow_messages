@@ -243,7 +243,7 @@ impl Character {
 }
 
 impl Character {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + self.name.len() + 1 // name: CString

@@ -42,7 +42,7 @@ impl ClientMessage for CMSG_ADD_FRIEND {
 }
 
 impl CMSG_ADD_FRIEND {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.friend_name.len() + 1 // friend_name: CString
     }

@@ -172,7 +172,7 @@ impl MovementInfo {
 }
 
 impl MovementInfo {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.flags.size() // flags: MovementInfoMovementFlags
         + 4 // timestamp: u32
@@ -819,7 +819,7 @@ impl MovementInfoMovementFlags {
 
 }
 impl MovementInfoMovementFlags {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.on_transport {
@@ -858,7 +858,7 @@ pub struct MovementInfoMovementFlagsON_TRANSPORT {
 }
 
 impl MovementInfoMovementFlagsON_TRANSPORT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.transport.size() // transport: TransportInfo
     }
 }
@@ -872,7 +872,7 @@ pub struct MovementInfoMovementFlagsJUMPING {
 }
 
 impl MovementInfoMovementFlagsJUMPING {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // cos_angle: f32
         + 4 // sin_angle: f32
         + 4 // xy_speed: f32
@@ -886,7 +886,7 @@ pub struct MovementInfoMovementFlagsSWIMMING {
 }
 
 impl MovementInfoMovementFlagsSWIMMING {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // pitch: f32
     }
 }
@@ -897,7 +897,7 @@ pub struct MovementInfoMovementFlagsSPLINE_ELEVATION {
 }
 
 impl MovementInfoMovementFlagsSPLINE_ELEVATION {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // spline_elevation: f32
     }
 }

@@ -58,7 +58,7 @@ impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {
 }
 
 impl SMSG_PAGE_TEXT_QUERY_RESPONSE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // page_id: u32
         + self.text.len() + 1 // text: CString

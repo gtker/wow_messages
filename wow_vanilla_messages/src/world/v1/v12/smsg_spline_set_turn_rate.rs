@@ -47,7 +47,7 @@ impl ServerMessage for SMSG_SPLINE_SET_TURN_RATE {
 }
 
 impl SMSG_SPLINE_SET_TURN_RATE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
         + 4 // speed: f32

@@ -107,7 +107,7 @@ impl PackedGuidAndGuid {
 }
 
 impl PackedGuidAndGuid {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.packed.size() // packed: Guid
         + 8 // guid: Guid

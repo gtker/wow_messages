@@ -272,7 +272,7 @@ impl SpellCastTargets {
 }
 
 impl SpellCastTargets {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.target_flags.size() // target_flags: SpellCastTargetsSpellCastTargetFlags
     }
@@ -868,7 +868,7 @@ impl SpellCastTargetsSpellCastTargetFlags {
 
 }
 impl SpellCastTargetsSpellCastTargetFlags {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         2 // inner
         + {
             if let Some(s) = &self.unit {
@@ -956,7 +956,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsUNIT {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsUNIT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.unit_target1.size() // unit_target1: Guid
     }
 }
@@ -967,7 +967,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsITEM {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsITEM {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.item_target1.size() // item_target1: Guid
     }
 }
@@ -980,7 +980,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // position_x1: f32
         + 4 // position_y1: f32
         + 4 // position_z1: f32
@@ -995,7 +995,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // position_x2: f32
         + 4 // position_y2: f32
         + 4 // position_z2: f32
@@ -1008,7 +1008,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.unit_target2.size() // unit_target2: Guid
     }
 }
@@ -1019,7 +1019,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.corpse_target2.size() // corpse_target2: Guid
     }
 }
@@ -1030,7 +1030,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.object_target1.size() // object_target1: Guid
     }
 }
@@ -1041,7 +1041,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.item_target2.size() // item_target2: Guid
     }
 }
@@ -1052,7 +1052,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsSTRING {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsSTRING {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.target_string.len() + 1 // target_string: CString
     }
 }
@@ -1063,7 +1063,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsLOCKED {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsLOCKED {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.object_target2.size() // object_target2: Guid
     }
 }
@@ -1074,7 +1074,7 @@ pub struct SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.corpse_target1.size() // corpse_target1: Guid
     }
 }

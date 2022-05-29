@@ -50,7 +50,7 @@ impl ServerMessage for SMSG_IGNORE_LIST {
 }
 
 impl SMSG_IGNORE_LIST {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // amount_of_ignored: u8
         + self.ignored.len() * core::mem::size_of::<u64>() // ignored: u64[amount_of_ignored]

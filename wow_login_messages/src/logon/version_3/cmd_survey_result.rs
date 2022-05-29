@@ -184,7 +184,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
 }
 
 impl CMD_SURVEY_RESULT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // survey_id: u32
         + 1 // error: u8

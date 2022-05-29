@@ -67,7 +67,7 @@ impl ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {
 }
 
 impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // auctioneer: Guid
         + 4 // start_from_page: u32

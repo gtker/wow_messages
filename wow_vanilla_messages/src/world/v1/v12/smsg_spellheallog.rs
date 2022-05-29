@@ -72,7 +72,7 @@ impl ServerMessage for SMSG_SPELLHEALLOG {
 }
 
 impl SMSG_SPELLHEALLOG {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.victim_guid.size() // victim_guid: Guid
         + self.caster_guid.size() // caster_guid: Guid

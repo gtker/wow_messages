@@ -80,7 +80,7 @@ impl ServerMessage for SMSG_GOSSIP_POI {
 }
 
 impl SMSG_GOSSIP_POI {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // flags: u32
         + 4 // position_x: f32

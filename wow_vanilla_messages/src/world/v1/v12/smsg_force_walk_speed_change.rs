@@ -55,7 +55,7 @@ impl ServerMessage for SMSG_FORCE_WALK_SPEED_CHANGE {
 }
 
 impl SMSG_FORCE_WALK_SPEED_CHANGE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
         + 4 // move_event: u32

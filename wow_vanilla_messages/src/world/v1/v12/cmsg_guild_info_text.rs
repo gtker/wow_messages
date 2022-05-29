@@ -42,7 +42,7 @@ impl ClientMessage for CMSG_GUILD_INFO_TEXT {
 }
 
 impl CMSG_GUILD_INFO_TEXT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guild_info.len() + 1 // guild_info: CString
     }

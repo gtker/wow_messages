@@ -75,7 +75,7 @@ impl ServerMessage for SMSG_SHOWTAXINODES {
 }
 
 impl SMSG_SHOWTAXINODES {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // unknown1: u32
         + 8 // guid: Guid

@@ -205,7 +205,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
 }
 
 impl CMD_REALM_LIST_Server {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 2 // size: u16
         + 4 // header_padding: u32

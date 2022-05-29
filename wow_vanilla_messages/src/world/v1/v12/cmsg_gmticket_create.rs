@@ -162,7 +162,7 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
 }
 
 impl CMSG_GMTICKET_CREATE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.category.size() // category: CMSG_GMTICKET_CREATEGmTicketType
         + 4 // map: Map
@@ -218,7 +218,7 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
 }
 
 impl CMSG_GMTICKET_CREATEGmTicketType {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::STUCK => {
                 1

@@ -178,7 +178,7 @@ impl Realm {
 }
 
 impl Realm {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // realm_type: RealmType
         + 1 // flag: RealmFlag

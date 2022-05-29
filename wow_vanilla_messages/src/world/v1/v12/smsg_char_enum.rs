@@ -51,7 +51,7 @@ impl ServerMessage for SMSG_CHAR_ENUM {
 }
 
 impl SMSG_CHAR_ENUM {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // amount_of_characters: u8
         + self.characters.iter().fold(0, |acc, x| acc + x.size()) // characters: Character[amount_of_characters]

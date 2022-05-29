@@ -115,7 +115,7 @@ impl ServerMessage for SMSG_GMTICKET_GETTICKET {
 }
 
 impl SMSG_GMTICKET_GETTICKET {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.status.size() // status: SMSG_GMTICKET_GETTICKETGmTicketStatus
     }
@@ -155,7 +155,7 @@ impl SMSG_GMTICKET_GETTICKETGmTicketStatus {
 }
 
 impl SMSG_GMTICKET_GETTICKETGmTicketStatus {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::DBERROR => {
                 4

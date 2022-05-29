@@ -53,7 +53,7 @@ impl ClientMessage for CMSG_CHANNEL_PASSWORD {
 }
 
 impl CMSG_CHANNEL_PASSWORD {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.channel_name.len() + 1 // channel_name: CString
         + self.channel_password.len() + 1 // channel_password: CString

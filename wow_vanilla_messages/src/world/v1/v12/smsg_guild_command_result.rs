@@ -60,7 +60,7 @@ impl ServerMessage for SMSG_GUILD_COMMAND_RESULT {
 }
 
 impl SMSG_GUILD_COMMAND_RESULT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // command: GuildCommand
         + self.string.len() + 1 // string: CString

@@ -122,7 +122,7 @@ impl ServerMessage for SMSG_GROUP_LIST {
 }
 
 impl SMSG_GROUP_LIST {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 1 // group_type: GroupType
         + 1 // own_flags: u8

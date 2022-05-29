@@ -107,7 +107,7 @@ impl ClientMessage for CMSG_AUTH_SESSION {
 }
 
 impl CMSG_AUTH_SESSION {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // build: u32
         + 4 // server_id: u32

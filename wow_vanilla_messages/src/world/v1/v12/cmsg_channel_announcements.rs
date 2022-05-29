@@ -42,7 +42,7 @@ impl ClientMessage for CMSG_CHANNEL_ANNOUNCEMENTS {
 }
 
 impl CMSG_CHANNEL_ANNOUNCEMENTS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.channel_name.len() + 1 // channel_name: CString
     }

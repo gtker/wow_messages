@@ -387,7 +387,7 @@ impl ClientMessage for CMSG_MESSAGECHAT {
 }
 
 impl CMSG_MESSAGECHAT {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.chat_type.size() // chat_type: CMSG_MESSAGECHATChatType
         + 4 // language: Language
@@ -518,7 +518,7 @@ impl CMSG_MESSAGECHATChatType {
 }
 
 impl CMSG_MESSAGECHATChatType {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         match self {
             Self::SAY {
                 message,

@@ -155,7 +155,7 @@ impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {
 }
 
 impl SMSG_QUESTGIVER_REQUEST_ITEMS {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + 4 // quest_id: u32

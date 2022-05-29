@@ -480,7 +480,7 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 }
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // item: u32
         + if let Some(found) = &self.found {

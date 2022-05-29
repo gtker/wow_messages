@@ -106,7 +106,7 @@ impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
 }
 
 impl SMSG_GUILD_QUERY_RESPONSE {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + 4 // id: u32
         + self.name.len() + 1 // name: CString

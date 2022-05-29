@@ -42,7 +42,7 @@ impl ServerMessage for SMSG_GROUP_SET_LEADER {
 }
 
 impl SMSG_GROUP_SET_LEADER {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.name.len() + 1 // name: CString
     }

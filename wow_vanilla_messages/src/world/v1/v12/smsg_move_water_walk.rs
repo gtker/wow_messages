@@ -48,7 +48,7 @@ impl ServerMessage for SMSG_MOVE_WATER_WALK {
 }
 
 impl SMSG_MOVE_WATER_WALK {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
         + 4 // counter: u32
