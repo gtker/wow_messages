@@ -18,7 +18,7 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub item: u32,
-    pub found: Option<SMSG_ITEM_QUERY_SINGLE_RESPONSEfound>,
+    pub found: Option<SMSG_ITEM_QUERY_SINGLE_RESPONSE_found>,
 }
 
 impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
@@ -404,7 +404,7 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // bag_family: u32
             let bag_family = crate::util::read_u32_le(r)?;
 
-            Some(SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
+            Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
                 item_class,
                 item_sub_class,
                 name1,
@@ -539,7 +539,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
+pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub item_class: ItemClass,
     pub item_sub_class: u32,
     pub name1: String,
@@ -597,7 +597,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
     pub bag_family: u32,
 }
 
-impl SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
+impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub(crate) fn size(&self) -> usize {
         4 // item_class: ItemClass
         + 4 // item_sub_class: u32

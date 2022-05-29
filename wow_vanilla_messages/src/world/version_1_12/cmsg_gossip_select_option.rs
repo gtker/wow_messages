@@ -12,7 +12,7 @@ use std::io::Write;
 pub struct CMSG_GOSSIP_SELECT_OPTION {
     pub guid: Guid,
     pub gossip_list_id: u32,
-    pub unknown: Option<CMSG_GOSSIP_SELECT_OPTIONunknown>,
+    pub unknown: Option<CMSG_GOSSIP_SELECT_OPTION_unknown>,
 }
 
 impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
@@ -57,7 +57,7 @@ impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
             let code = crate::util::read_c_string_to_vec(r)?;
             let code = String::from_utf8(code)?;
 
-            Some(CMSG_GOSSIP_SELECT_OPTIONunknown {
+            Some(CMSG_GOSSIP_SELECT_OPTION_unknown {
                 code,
             })
         } else {
@@ -86,11 +86,11 @@ impl CMSG_GOSSIP_SELECT_OPTION {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct CMSG_GOSSIP_SELECT_OPTIONunknown {
+pub struct CMSG_GOSSIP_SELECT_OPTION_unknown {
     pub code: String,
 }
 
-impl CMSG_GOSSIP_SELECT_OPTIONunknown {
+impl CMSG_GOSSIP_SELECT_OPTION_unknown {
     pub(crate) fn size(&self) -> usize {
         self.code.len() + 1 // code: CString
     }

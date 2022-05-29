@@ -10,7 +10,7 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_CREATURE_QUERY_RESPONSE {
     pub creature_entry: u32,
-    pub found: Option<SMSG_CREATURE_QUERY_RESPONSEfound>,
+    pub found: Option<SMSG_CREATURE_QUERY_RESPONSE_found>,
 }
 
 impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
@@ -138,7 +138,7 @@ impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
             // racial_leader: u8
             let racial_leader = crate::util::read_u8_le(r)?;
 
-            Some(SMSG_CREATURE_QUERY_RESPONSEfound {
+            Some(SMSG_CREATURE_QUERY_RESPONSE_found {
                 name1,
                 name2,
                 name3,
@@ -191,7 +191,7 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct SMSG_CREATURE_QUERY_RESPONSEfound {
+pub struct SMSG_CREATURE_QUERY_RESPONSE_found {
     pub name1: String,
     pub name2: String,
     pub name3: String,
@@ -208,7 +208,7 @@ pub struct SMSG_CREATURE_QUERY_RESPONSEfound {
     pub racial_leader: u8,
 }
 
-impl SMSG_CREATURE_QUERY_RESPONSEfound {
+impl SMSG_CREATURE_QUERY_RESPONSE_found {
     pub(crate) fn size(&self) -> usize {
         self.name1.len() + 1 // name1: CString
         + self.name2.len() + 1 // name2: CString

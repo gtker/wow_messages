@@ -11,7 +11,7 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_TRANSFER_PENDING {
     pub map: Map,
-    pub has_transport: Option<SMSG_TRANSFER_PENDINGhas_transport>,
+    pub has_transport: Option<SMSG_TRANSFER_PENDING_has_transport>,
 }
 
 impl ServerMessage for SMSG_TRANSFER_PENDING {
@@ -52,7 +52,7 @@ impl ServerMessage for SMSG_TRANSFER_PENDING {
             // transport_map: Map
             let transport_map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-            Some(SMSG_TRANSFER_PENDINGhas_transport {
+            Some(SMSG_TRANSFER_PENDING_has_transport {
                 transport,
                 transport_map,
             })
@@ -81,12 +81,12 @@ impl SMSG_TRANSFER_PENDING {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct SMSG_TRANSFER_PENDINGhas_transport {
+pub struct SMSG_TRANSFER_PENDING_has_transport {
     pub transport: u32,
     pub transport_map: Map,
 }
 
-impl SMSG_TRANSFER_PENDINGhas_transport {
+impl SMSG_TRANSFER_PENDING_has_transport {
     pub(crate) fn size(&self) -> usize {
         4 // transport: u32
         + 4 // transport_map: Map

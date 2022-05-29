@@ -9,7 +9,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_RAID_READY_CHECK_Client {
-    pub answer: Option<MSG_RAID_READY_CHECK_Clientanswer>,
+    pub answer: Option<MSG_RAID_READY_CHECK_Client_answer>,
 }
 
 impl ClientMessage for MSG_RAID_READY_CHECK_Client {
@@ -38,7 +38,7 @@ impl ClientMessage for MSG_RAID_READY_CHECK_Client {
             // state: u8
             let state = crate::util::read_u8_le(r)?;
 
-            Some(MSG_RAID_READY_CHECK_Clientanswer {
+            Some(MSG_RAID_READY_CHECK_Client_answer {
                 state,
             })
         } else {
@@ -63,11 +63,11 @@ impl MSG_RAID_READY_CHECK_Client {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct MSG_RAID_READY_CHECK_Clientanswer {
+pub struct MSG_RAID_READY_CHECK_Client_answer {
     pub state: u8,
 }
 
-impl MSG_RAID_READY_CHECK_Clientanswer {
+impl MSG_RAID_READY_CHECK_Client_answer {
     pub(crate) fn size(&self) -> usize {
         1 // state: u8
     }

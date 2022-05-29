@@ -4,8 +4,8 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::{RustDefiner, RustType};
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
-use crate::rust_printer::Writer;
 use crate::rust_printer::{get_new_type_name, DefinerType};
+use crate::rust_printer::{get_optional_type_name, Writer};
 use crate::UTILITY_PATH;
 
 fn print_read_array_fixed(
@@ -767,9 +767,8 @@ fn print_read_field(
 
                     s.body_closing_with(
                         format!(
-                            "Some({original_name}{name}",
-                            original_name = e.name(),
-                            name = optional.name()
+                            "Some({optional_ty_name}",
+                            optional_ty_name = get_optional_type_name(e.name(), optional.name()),
                         ),
                         |s| {
                             for field in optional.members() {

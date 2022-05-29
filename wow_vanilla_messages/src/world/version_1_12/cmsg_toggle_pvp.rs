@@ -9,7 +9,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_TOGGLE_PVP {
-    pub set: Option<CMSG_TOGGLE_PVPset>,
+    pub set: Option<CMSG_TOGGLE_PVP_set>,
 }
 
 impl ClientMessage for CMSG_TOGGLE_PVP {
@@ -38,7 +38,7 @@ impl ClientMessage for CMSG_TOGGLE_PVP {
             // enable_pvp: u8
             let enable_pvp = crate::util::read_u8_le(r)?;
 
-            Some(CMSG_TOGGLE_PVPset {
+            Some(CMSG_TOGGLE_PVP_set {
                 enable_pvp,
             })
         } else {
@@ -63,11 +63,11 @@ impl CMSG_TOGGLE_PVP {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct CMSG_TOGGLE_PVPset {
+pub struct CMSG_TOGGLE_PVP_set {
     pub enable_pvp: u8,
 }
 
-impl CMSG_TOGGLE_PVPset {
+impl CMSG_TOGGLE_PVP_set {
     pub(crate) fn size(&self) -> usize {
         1 // enable_pvp: u8
     }

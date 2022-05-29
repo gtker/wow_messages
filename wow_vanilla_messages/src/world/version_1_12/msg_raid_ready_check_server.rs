@@ -10,7 +10,7 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_RAID_READY_CHECK_Server {
-    pub state_check: Option<MSG_RAID_READY_CHECK_Serverstate_check>,
+    pub state_check: Option<MSG_RAID_READY_CHECK_Server_state_check>,
 }
 
 impl ServerMessage for MSG_RAID_READY_CHECK_Server {
@@ -45,7 +45,7 @@ impl ServerMessage for MSG_RAID_READY_CHECK_Server {
             // state: u8
             let state = crate::util::read_u8_le(r)?;
 
-            Some(MSG_RAID_READY_CHECK_Serverstate_check {
+            Some(MSG_RAID_READY_CHECK_Server_state_check {
                 guid,
                 state,
             })
@@ -72,12 +72,12 @@ impl MSG_RAID_READY_CHECK_Server {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct MSG_RAID_READY_CHECK_Serverstate_check {
+pub struct MSG_RAID_READY_CHECK_Server_state_check {
     pub guid: Guid,
     pub state: u8,
 }
 
-impl MSG_RAID_READY_CHECK_Serverstate_check {
+impl MSG_RAID_READY_CHECK_Server_state_check {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
         + 1 // state: u8

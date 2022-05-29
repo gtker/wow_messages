@@ -13,7 +13,7 @@ pub struct CMSG_PET_SET_ACTION {
     pub guid: Guid,
     pub position1: u32,
     pub data1: u32,
-    pub extra: Option<CMSG_PET_SET_ACTIONextra>,
+    pub extra: Option<CMSG_PET_SET_ACTION_extra>,
 }
 
 impl ClientMessage for CMSG_PET_SET_ACTION {
@@ -68,7 +68,7 @@ impl ClientMessage for CMSG_PET_SET_ACTION {
             // data2: u32
             let data2 = crate::util::read_u32_le(r)?;
 
-            Some(CMSG_PET_SET_ACTIONextra {
+            Some(CMSG_PET_SET_ACTION_extra {
                 position2,
                 data2,
             })
@@ -101,12 +101,12 @@ impl CMSG_PET_SET_ACTION {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct CMSG_PET_SET_ACTIONextra {
+pub struct CMSG_PET_SET_ACTION_extra {
     pub position2: u32,
     pub data2: u32,
 }
 
-impl CMSG_PET_SET_ACTIONextra {
+impl CMSG_PET_SET_ACTION_extra {
     pub(crate) fn size(&self) -> usize {
         4 // position2: u32
         + 4 // data2: u32

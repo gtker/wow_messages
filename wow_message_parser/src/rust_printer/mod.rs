@@ -809,3 +809,7 @@ pub enum DefinerType {
 fn get_new_type_name(original_ty: &str, definer_ty: &str) -> String {
     format!("{original_ty}_{definer_ty}")
 }
+
+fn get_optional_type_name(original_ty: &str, optional_name: &str) -> String {
+    format!("{original_ty}_{optional_name}")
+}

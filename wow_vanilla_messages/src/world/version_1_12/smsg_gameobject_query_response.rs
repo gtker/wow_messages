@@ -10,7 +10,7 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE {
     pub entry_id: u32,
-    pub found: Option<SMSG_GAMEOBJECT_QUERY_RESPONSEfound>,
+    pub found: Option<SMSG_GAMEOBJECT_QUERY_RESPONSE_found>,
 }
 
 impl ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {
@@ -107,7 +107,7 @@ impl ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {
                 *i = crate::util::read_u32_le(r)?;
             }
 
-            Some(SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
+            Some(SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
                 info_type,
                 display_id,
                 name1,
@@ -148,7 +148,7 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
+pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
     pub info_type: u32,
     pub display_id: u32,
     pub name1: String,
@@ -159,7 +159,7 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
     pub raw_data: [u32; 6],
 }
 
-impl SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
+impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
     pub(crate) fn size(&self) -> usize {
         4 // info_type: u32
         + 4 // display_id: u32

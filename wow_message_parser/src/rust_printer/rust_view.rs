@@ -10,7 +10,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, IntegerType, ObjectType,
 };
-use crate::rust_printer::{get_new_type_name, DefinerType};
+use crate::rust_printer::{get_new_type_name, get_optional_type_name, DefinerType};
 use crate::test_case::TestCase;
 use crate::{CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 use std::fmt::{Display, Formatter};
@@ -1282,11 +1282,7 @@ pub fn create_struct_member(
 
             *optional = Some(RustOptional {
                 name: option.name().to_string(),
-                ty: format!(
-                    "{original_ty}{ty}",
-                    original_ty = struct_ty_name,
-                    ty = option.name()
-                ),
+                ty: get_optional_type_name(struct_ty_name, option.name()),
                 members,
             });
         }
