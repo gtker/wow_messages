@@ -6,7 +6,8 @@
     non_camel_case_types,
     non_snake_case,
     clippy::missing_errors_doc,
-    clippy::upper_case_acronyms
+    clippy::upper_case_acronyms,
+    clippy::missing_const_for_fn
 )]
 #![deny(
     clippy::complexity,
