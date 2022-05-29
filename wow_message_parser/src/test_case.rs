@@ -53,10 +53,8 @@ impl TestCase {
     }
 
     pub fn get_member<'a>(t: &'a [TestCaseMember], member: &str) -> &'a TestCaseMember {
-        t.iter().find(|a| a.name() == member).expect(&format!(
-            "variable '{}' not found in list of variables with values",
-            member
-        ))
+        t.iter().find(|a| a.name() == member).unwrap_or_else(|| panic!("variable '{}' not found in list of variables with values",
+            member))
     }
 
     pub fn verify(&mut self, o: &Objects) {
@@ -69,7 +67,7 @@ impl TestCase {
                     if ty == &Type::UpdateMask {
                         let mut v = Vec::new();
                         for m_inner in multiple.iter_mut() {
-                            let (ty, name) = &m_inner.variable_name.split_once("_").unwrap();
+                            let (ty, name) = &m_inner.variable_name.split_once('_').unwrap();
                             let ty = match *ty {
                                 "OBJECT" => UpdateMaskType::Object,
                                 "UNIT" => UpdateMaskType::Unit,

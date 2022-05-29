@@ -160,7 +160,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
                 guid3: Guid::new(4),
                 mask2: UpdateMask::Player(update_mask),
                 movement2: MovementBlock {
-                    update_flag: update_flag,
+                    update_flag,
                 },
                 object_type: ObjectType::PLAYER,
             },

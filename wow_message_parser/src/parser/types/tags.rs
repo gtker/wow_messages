@@ -244,7 +244,7 @@ impl Tags {
     }
 
     pub fn display(&self) -> Option<&str> {
-        if self.display == "" {
+        if self.display.is_empty() {
             None
         } else {
             Some(&self.display)
@@ -252,7 +252,7 @@ impl Tags {
     }
 
     pub fn has_display(&self) -> bool {
-        self.display != ""
+        !self.display.is_empty()
     }
 }
 
@@ -288,15 +288,15 @@ enum TagStringSymbol {
 
 impl TagStringSymbol {
     fn from_str(s: &str) -> Vec<Self> {
-        if !s.contains("[") {
+        if !s.contains('[') {
             return vec![TagStringSymbol::Text(s.to_string())];
         }
 
         let mut v = Vec::new();
         let mut s = s.to_string();
 
-        while let Some(start) = s.find("[") {
-            let end = s.find("]").unwrap();
+        while let Some(start) = s.find('[') {
+            let end = s.find(']').unwrap();
             v.push(TagStringSymbol::Text(s[..start].to_string()));
             v.push(TagStringSymbol::Link(s[start + 1..end].to_string()));
 
@@ -373,7 +373,7 @@ impl TagString {
             match i {
                 TagStringSymbol::Text(t) => s.push_str(t),
                 TagStringSymbol::Link(l) => s.push_str(&format!("[{}]", l)),
-                TagStringSymbol::Newline => s.push_str("\n"),
+                TagStringSymbol::Newline => s.push('\n'),
             }
         }
 

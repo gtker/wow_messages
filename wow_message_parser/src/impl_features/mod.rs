@@ -97,7 +97,7 @@ pub fn get_impl_features_for_definer(e: &Definer) -> ImplFeatures {
         DefinerType::Flag => f.add(Feature::Flag),
     };
 
-    if let Some(_) = e.self_value() {
+    if e.self_value().is_some() {
         f.add(Feature::EnumSelf);
     }
 
@@ -118,7 +118,7 @@ pub fn get_impl_features_for_container(e: &Container) -> ImplFeatures {
         ContainerType::SMsg(_) => f.add(Feature::SMsg),
     };
 
-    if e.fields().len() == 0 {
+    if e.fields().is_empty() {
         f.add(Feature::EmptyContainer);
     }
 
@@ -229,7 +229,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
             }
         }
         Type::Identifier { upcast, .. } => {
-            if let Some(_) = upcast {
+            if upcast.is_some() {
                 f.add(Feature::EnumUpcast);
             }
 

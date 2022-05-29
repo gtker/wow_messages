@@ -249,7 +249,7 @@ fn print_size_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
 
 fn print_types_for_new_flag(s: &mut Writer, e: &Container, rd: &RustDefiner) {
     for enumerator in rd.complex_flag_enumerators() {
-        if let Some(_) = e.complex_enum_enumerator_has_else_if(enumerator.name()) {
+        if e.complex_enum_enumerator_has_else_if(enumerator.name()).is_some() {
             continue;
         }
 
@@ -283,7 +283,7 @@ fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner) {
     s.wln("#[derive(Debug, PartialEq, Clone)]");
     s.new_enum("pub", rd.ty_name(), |s| {
         for enumerator in rd.enumerators() {
-            s.w(format!("{}", enumerator.name()));
+            s.w(enumerator.name());
 
             if !enumerator.has_members_in_struct() {
                 s.wln_no_indent(",");

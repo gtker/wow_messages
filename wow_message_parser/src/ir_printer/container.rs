@@ -299,7 +299,7 @@ impl From<ArraySize> for IrArraySize {
     fn from(v: ArraySize) -> Self {
         match v {
             ArraySize::Fixed(s) => Self::Fixed(s),
-            ArraySize::Variable(s) => Self::Variable(s.to_string()),
+            ArraySize::Variable(s) => Self::Variable(s),
             ArraySize::Endless => Self::Endless,
         }
     }

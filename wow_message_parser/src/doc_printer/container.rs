@@ -108,7 +108,7 @@ fn print_container_example_definition(
     tags: &Tags,
     prefix: &str,
 ) {
-    let comment = if prefix != "" {
+    let comment = if !prefix.is_empty() {
         format!("// {}.{}: {}", prefix, d.name(), d.ty().str())
     } else {
         format!("// {}: {}", d.name(), d.ty().str())
@@ -194,14 +194,14 @@ fn print_container_example_definition(
                         }
                     } else if type_of == ObjectType::Flag {
                         let values = e.get_set_flag_fields(value);
-                        let mut t = comment.to_string();
+                        let mut t = comment;
                         t.push(' ');
 
                         for (i, v) in values.iter().enumerate() {
                             if i != 0 {
                                 t.push_str("| ");
                             } else {
-                                t.push_str(" ");
+                                t.push(' ');
                             }
                             t.push_str(v.name());
                         }
@@ -412,14 +412,11 @@ fn print_container_if_statement(
         if i != 0 {
             s.wln(" **or** ");
         }
-        s.w(format!(
-            "{}",
-            match e {
+        s.w(&(match e {
                 Equation::Equals { value } => format!("is equal to `{}`", value),
                 Equation::NotEquals { value } => format!("is not equal to `{}`", value),
                 Equation::BitwiseAnd { value } => format!("contains `{}`", value),
-            }
-        ))
+            }))
     }
     s.wln(":");
     s.newline();
@@ -433,7 +430,7 @@ fn print_container_if_statement(
     if !statement.else_ifs().is_empty() {
         for elseif in statement.else_ifs() {
             s.newline();
-            s.w(format!("Else "));
+            s.w("Else ");
             print_container_if_statement(s, elseif, offset);
         }
     }
@@ -518,7 +515,7 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                 comment = comment,
             ));
 
-            if let Some(_) = offset {
+            if offset.is_some() {
                 *offset = match d.ty() {
                     Type::Integer(t) => Some(offset.unwrap() + t.size() as usize),
                     Type::Guid => Some(offset.unwrap() + 8),
@@ -573,7 +570,7 @@ fn print_container_body(s: &mut DocWriter, e: &Container) {
         print_container_field(s, m, &mut offset);
     }
 
-    if let Some(_) = e.rust_object().optional() {
+    if e.rust_object().optional().is_some() {
         s.newline();
         s.wln("Optionally the following fields can be present. This can only be detected by looking at the size of the message.");
         s.newline();

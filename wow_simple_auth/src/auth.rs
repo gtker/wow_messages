@@ -214,7 +214,7 @@ async fn login_version_2(
 fn get_proof(username: &str) -> SrpProof {
     let username = NormalizedString::new(username.to_string()).unwrap();
     let password = NormalizedString::new(username.to_string()).unwrap();
-    SrpVerifier::from_username_and_password(username.clone(), password).into_proof()
+    SrpVerifier::from_username_and_password(username, password).into_proof()
 }
 
 async fn login_version_3(
@@ -327,7 +327,7 @@ async fn login_version_8(
 async fn print_version_2_3_realm_list(mut stream: TcpStream) {
     use wow_login_messages::version_2::*;
 
-    while let Ok(_) = tokio_expect_client_message::<CMD_REALM_LIST_Client, _>(&mut stream).await {
+    while (tokio_expect_client_message::<CMD_REALM_LIST_Client, _>(&mut stream).await).is_ok() {
         CMD_REALM_LIST_Server {
             realms: vec![Realm {
                 realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
@@ -350,7 +350,7 @@ async fn print_version_2_3_realm_list(mut stream: TcpStream) {
 async fn print_version_8_realm_list(mut stream: TcpStream) {
     use wow_login_messages::version_8::*;
 
-    while let Ok(_) = tokio_expect_client_message::<CMD_REALM_LIST_Client, _>(&mut stream).await {
+    while (tokio_expect_client_message::<CMD_REALM_LIST_Client, _>(&mut stream).await).is_ok() {
         let mut realms = Vec::new();
         for i in 0..9 {
             realms.push(Realm {

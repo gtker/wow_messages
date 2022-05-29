@@ -8,7 +8,7 @@ use core::option::Option;
 use serde::Serialize;
 
 pub fn definers_to_ir(definers: &[Definer]) -> Vec<IrDefiner> {
-    definers.iter().map(|a| definer_to_ir(a)).collect()
+    definers.iter().map(definer_to_ir).collect()
 }
 
 fn definer_to_ir(e: &Definer) -> IrDefiner {

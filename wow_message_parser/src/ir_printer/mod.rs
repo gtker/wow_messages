@@ -116,17 +116,9 @@ pub struct IrTags {
 
 impl IrTags {
     fn from_tags(tags: &Tags) -> Self {
-        let description = if let Some(d) = tags.description() {
-            Some(d.as_ir_string())
-        } else {
-            None
-        };
+        let description = tags.description().map(|d| d.as_ir_string());
 
-        let comment = if let Some(d) = tags.comment() {
-            Some(d.as_ir_string())
-        } else {
-            None
-        };
+        let comment = tags.comment().map(|d| d.as_ir_string());
 
         Self {
             description,

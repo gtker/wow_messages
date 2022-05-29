@@ -84,7 +84,7 @@ impl RustMember {
                     .iter()
                     .enumerate()
                     .find(|a| a.1.name() == enumerator)
-                    .expect(&format!("{}", enumerator));
+                    .expect(enumerator);
                 let enumerator = enumerators[index].clone();
                 enumerators.remove(index);
                 enumerator
@@ -501,7 +501,7 @@ impl RustObject {
 
         Some(RustDefiner {
             inner: m.clone(),
-            enumerators: enumerators.clone(),
+            enumerators,
             ty_name: ty_name.clone(),
             int_ty,
             is_simple,
@@ -600,7 +600,7 @@ impl RustObject {
                         }
                     } else {
                         for m in enumerator.members_in_struct() {
-                            if let Some(_) = RustObject::get_rust_definer_from_ty(m, container_name)
+                            if RustObject::get_rust_definer_from_ty(m, container_name).is_some()
                             {
                                 inner(m, enumerator_name, v, container_name);
                             }
@@ -888,7 +888,7 @@ fn create_else_if_flag(
     }
 
     let flag_int_ty = match find_subject(current_scope, parent_scope, statement).ty() {
-        RustType::Flag { int_ty, .. } => int_ty.clone(),
+        RustType::Flag { int_ty, .. } => *int_ty,
         _ => unreachable!(),
     };
     let flag_ty_name = &find_subject(current_scope, parent_scope, statement).original_ty;
@@ -1099,14 +1099,14 @@ pub fn create_struct_member(
                     if d.used_as_size_in().is_some() || d.verified_value().is_some() {
                         in_rust_type = false;
                     }
-                    RustType::Integer(i.clone())
+                    RustType::Integer(*i)
                 }
                 Type::Guid => RustType::Guid,
                 Type::PackedGuid => {
                     definition_constantly_sized = false;
                     RustType::PackedGuid
                 }
-                Type::FloatingPoint(f) => RustType::Floating(f.clone()),
+                Type::FloatingPoint(f) => RustType::Floating(*f),
                 Type::CString => {
                     definition_constantly_sized = false;
                     RustType::CString
@@ -1173,9 +1173,9 @@ pub fn create_struct_member(
                         ObjectType::Enum => {
                             let enumerators = add_types();
                             let int_ty = if let Some(upcast) = upcast {
-                                upcast.clone()
+                                *upcast
                             } else {
-                                o.get_definer(s, tags).ty().clone()
+                                *o.get_definer(s, tags).ty()
                             };
 
                             RustType::Enum {
@@ -1191,7 +1191,7 @@ pub fn create_struct_member(
 
                             RustType::Flag {
                                 ty_name: s.clone(),
-                                int_ty: o.get_definer(s, tags).ty().clone(),
+                                int_ty: *o.get_definer(s, tags).ty(),
                                 enumerators,
                                 is_simple: true,
                                 is_elseif: false,
@@ -1230,7 +1230,7 @@ pub fn create_struct_member(
                 match m {
                     StructMember::Definition(_) => {}
                     StructMember::IfStatement(statement) => {
-                        if !(statement.name() == name) {
+                        if statement.name() != name {
                             continue;
                         }
 

@@ -203,16 +203,16 @@ fn print_versions(
     s.w("## ");
 
     for (i, l) in login_versions.iter().enumerate() {
-        s.w(format!("Protocol Version {}", l.to_string()));
+        s.w(format!("Protocol Version {}", l));
         if i != login_versions.len() - 1 {
-            s.w(format!(", "));
+            s.w(", ");
         }
     }
 
     for (i, l) in world_versions.iter().enumerate() {
-        s.w(format!("Client Version {}", l.to_string()));
+        s.w(format!("Client Version {}", l));
         if i != world_versions.len() - 1 {
-            s.w(format!(", "));
+            s.w(", ");
         }
     }
 
