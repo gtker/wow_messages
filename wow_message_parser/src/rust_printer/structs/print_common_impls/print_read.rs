@@ -12,6 +12,7 @@ fn print_read_array(
     s: &mut Writer,
     array: &Array,
     e: &Container,
+    o: &Objects,
     d: &StructMemberDefinition,
     prefix: &str,
     postfix: &str,
@@ -33,7 +34,9 @@ fn print_read_array(
 
     match array.size() {
         ArraySize::Fixed(size) => {
-            if e.is_constant_sized() {
+            let inner_is_constant_sized = array.inner_type_is_constant_sized(e.tags(), o);
+
+            if inner_is_constant_sized {
                 s.wln(format!(
                     "let mut {name} = [{type_name}::default(); {size}];",
                     name = d.name(),
@@ -60,7 +63,7 @@ fn print_read_array(
 
             match array.ty() {
                 ArrayType::Integer(integer) => {
-                    if e.is_constant_sized() {
+                    if inner_is_constant_sized {
                         s.wln(format!(
                             "{name}[i] = {module}::{prefix}read_{int_type}_{endian}(r){postfix}?;",
                             name = d.name(),
@@ -83,7 +86,7 @@ fn print_read_array(
                     }
                 }
                 ArrayType::Complex(_) => {
-                    if e.is_constant_sized() {
+                    if inner_is_constant_sized {
                         s.wln(format!(
                             "{name}[i] = {type_name}::{prefix}read(r){postfix}?;",
                             name = d.name(),
@@ -136,7 +139,7 @@ fn print_read_array(
 
             s.closing_curly();
 
-            if !e.is_constant_sized() {
+            if !inner_is_constant_sized {
                 s.wln(format!(
                     "let {name} = {name}.try_into().unwrap();",
                     name = d.name()
@@ -389,7 +392,7 @@ fn print_read_definition(
             s.newline();
         }
         Type::Array(array) => {
-            print_read_array(s, array, e, d, prefix, postfix);
+            print_read_array(s, array, e, o, d, prefix, postfix);
         }
         Type::Identifier { s: ty, upcast } => {
             if o.get_object_type_of(ty, e.tags()) == ObjectType::Enum {

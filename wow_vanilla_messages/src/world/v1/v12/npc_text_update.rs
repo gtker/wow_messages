@@ -54,11 +54,10 @@ impl NpcTextUpdate {
         let language: Language = crate::util::read_u32_le(r)?.try_into()?;
 
         // emotes: NpcTextUpdateEmote[3]
-        let mut emotes = Vec::with_capacity(3);
+        let mut emotes = [NpcTextUpdateEmote::default(); 3];
         for i in 0..3 {
-            emotes.push(NpcTextUpdateEmote::read(r)?);
+            emotes[i] = NpcTextUpdateEmote::read(r)?;
         }
-        let emotes = emotes.try_into().unwrap();
 
         Ok(Self {
             probability,

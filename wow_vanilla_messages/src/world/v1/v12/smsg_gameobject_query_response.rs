@@ -104,11 +104,10 @@ impl ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {
             let name5 = String::from_utf8(name5)?;
 
             // raw_data: u32[6]
-            let mut raw_data = Vec::with_capacity(6);
+            let mut raw_data = [u32::default(); 6];
             for i in 0..6 {
-                raw_data.push(crate::util::read_u32_le(r)?);
+                raw_data[i] = crate::util::read_u32_le(r)?;
             }
-            let raw_data = raw_data.try_into().unwrap();
 
             Some(SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
                 info_type,

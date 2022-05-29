@@ -1,3 +1,4 @@
+use crate::{Objects, Tags};
 use std::fmt::{Display, Formatter};
 
 pub mod objects;
@@ -255,6 +256,18 @@ impl Array {
             ArraySize::Fixed(_) => matches!(&self.ty(), ArrayType::Integer(IntegerType::U8)),
             ArraySize::Variable(_) => false,
             ArraySize::Endless => false,
+        }
+    }
+
+    pub fn inner_type_is_constant_sized(&self, tags: &Tags, o: &Objects) -> bool {
+        match self.ty() {
+            ArrayType::Integer(_) | ArrayType::Guid => true,
+            ArrayType::CString | ArrayType::PackedGuid => false,
+            ArrayType::Complex(ident) => match o.get_object_type_of(ident, tags) {
+                ObjectType::Struct => o.get_container(ident, tags).is_constant_sized(),
+                ObjectType::Enum | ObjectType::Flag => true,
+                _ => unreachable!(),
+            },
         }
     }
 

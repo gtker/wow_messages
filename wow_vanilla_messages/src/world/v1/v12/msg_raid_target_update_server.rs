@@ -63,11 +63,10 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
             }
             RaidTargetUpdateType::FULL => {
                 // raid_targets: RaidTargetUpdate[8]
-                let mut raid_targets = Vec::with_capacity(8);
+                let mut raid_targets = [RaidTargetUpdate::default(); 8];
                 for i in 0..8 {
-                    raid_targets.push(RaidTargetUpdate::read(r)?);
+                    raid_targets[i] = RaidTargetUpdate::read(r)?;
                 }
-                let raid_targets = raid_targets.try_into().unwrap();
 
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
                     raid_targets,

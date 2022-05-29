@@ -199,11 +199,10 @@ impl Character {
         let pet_familiy = crate::util::read_u32_le(r)?;
 
         // equipment: CharacterGear[19]
-        let mut equipment = Vec::with_capacity(19);
+        let mut equipment = [CharacterGear::default(); 19];
         for i in 0..19 {
-            equipment.push(CharacterGear::read(r)?);
+            equipment[i] = CharacterGear::read(r)?;
         }
-        let equipment = equipment.try_into().unwrap();
 
         // first_bag_display_id: u32
         let _first_bag_display_id = crate::util::read_u32_le(r)?;

@@ -197,18 +197,16 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
         let quest_flags = crate::util::read_u32_le(r)?;
 
         // rewards: QuestItemReward[4]
-        let mut rewards = Vec::with_capacity(4);
+        let mut rewards = [QuestItemReward::default(); 4];
         for i in 0..4 {
-            rewards.push(QuestItemReward::read(r)?);
+            rewards[i] = QuestItemReward::read(r)?;
         }
-        let rewards = rewards.try_into().unwrap();
 
         // choice_rewards: QuestItemReward[6]
-        let mut choice_rewards = Vec::with_capacity(6);
+        let mut choice_rewards = [QuestItemReward::default(); 6];
         for i in 0..6 {
-            choice_rewards.push(QuestItemReward::read(r)?);
+            choice_rewards[i] = QuestItemReward::read(r)?;
         }
-        let choice_rewards = choice_rewards.try_into().unwrap();
 
         // point_map_id: u32
         let point_map_id = crate::util::read_u32_le(r)?;
@@ -237,11 +235,10 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
         let end_text = String::from_utf8(end_text)?;
 
         // objectives: QuestObjective[4]
-        let mut objectives = Vec::with_capacity(4);
+        let mut objectives = [QuestObjective::default(); 4];
         for i in 0..4 {
-            objectives.push(QuestObjective::read(r)?);
+            objectives[i] = QuestObjective::read(r)?;
         }
-        let objectives = objectives.try_into().unwrap();
 
         // objective_texts: CString[4]
         let mut objective_texts = Vec::with_capacity(4);

@@ -70,11 +70,10 @@ impl PackedGuidAndGuid {
         let static_packed = static_packed.try_into().unwrap();
 
         // static_guid: Guid[10]
-        let mut static_guid = Vec::with_capacity(10);
+        let mut static_guid = [Guid::default(); 10];
         for i in 0..10 {
             static_guid[i] = Guid::read(r)?;
         }
-        let static_guid = static_guid.try_into().unwrap();
 
         // basic1: u8
         let basic1 = crate::util::read_u8_le(r)?;

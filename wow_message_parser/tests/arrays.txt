@@ -103,18 +103,16 @@ impl Arrays {
         r.read_exact(&mut basic_fixed_array)?;
 
         // simple_2byte_fixed_array: u16[16]
-        let mut simple_2byte_fixed_array = Vec::with_capacity(16);
+        let mut simple_2byte_fixed_array = [u16::default(); 16];
         for i in 0..16 {
-            simple_2byte_fixed_array.push(crate::util::read_u16_le(r)?);
+            simple_2byte_fixed_array[i] = crate::util::read_u16_le(r)?;
         }
-        let simple_2byte_fixed_array = simple_2byte_fixed_array.try_into().unwrap();
 
         // simple_2byte_be_fixed_array: u16_be[16]
-        let mut simple_2byte_be_fixed_array = Vec::with_capacity(16);
+        let mut simple_2byte_be_fixed_array = [u16::default(); 16];
         for i in 0..16 {
-            simple_2byte_be_fixed_array.push(crate::util::read_u16_be(r)?);
+            simple_2byte_be_fixed_array[i] = crate::util::read_u16_be(r)?;
         }
-        let simple_2byte_be_fixed_array = simple_2byte_be_fixed_array.try_into().unwrap();
 
         // simple_2byte_variable_array: u16[index]
         let mut simple_2byte_variable_array = Vec::with_capacity(index as usize);
@@ -123,11 +121,10 @@ impl Arrays {
         }
 
         // simple_4byte_be_fixed_array: u32_be[16]
-        let mut simple_4byte_be_fixed_array = Vec::with_capacity(16);
+        let mut simple_4byte_be_fixed_array = [u32::default(); 16];
         for i in 0..16 {
-            simple_4byte_be_fixed_array.push(crate::util::read_u32_be(r)?);
+            simple_4byte_be_fixed_array[i] = crate::util::read_u32_be(r)?;
         }
-        let simple_4byte_be_fixed_array = simple_4byte_be_fixed_array.try_into().unwrap();
 
         // simple_4byte_variable_array: u32[index]
         let mut simple_4byte_variable_array = Vec::with_capacity(index as usize);
@@ -136,11 +133,10 @@ impl Arrays {
         }
 
         // simple_8byte_be_fixed_array: u64_be[16]
-        let mut simple_8byte_be_fixed_array = Vec::with_capacity(16);
+        let mut simple_8byte_be_fixed_array = [u64::default(); 16];
         for i in 0..16 {
-            simple_8byte_be_fixed_array.push(crate::util::read_u64_be(r)?);
+            simple_8byte_be_fixed_array[i] = crate::util::read_u64_be(r)?;
         }
-        let simple_8byte_be_fixed_array = simple_8byte_be_fixed_array.try_into().unwrap();
 
         // simple_8byte_variable_array: u64[index]
         let mut simple_8byte_variable_array = Vec::with_capacity(index as usize);
