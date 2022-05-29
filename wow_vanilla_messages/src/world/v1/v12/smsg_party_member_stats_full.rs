@@ -86,7 +86,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_auras {
             // auras: AuraMask
-            w.write_all(&if_statement.auras.as_bytes())?;
+            &if_statement.auras.write_into_vec(w)?;
 
         }
 
@@ -136,7 +136,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_pet_auras {
             // pet_auras: AuraMask
-            w.write_all(&if_statement.pet_auras.as_bytes())?;
+            &if_statement.pet_auras.write_into_vec(w)?;
 
         }
 

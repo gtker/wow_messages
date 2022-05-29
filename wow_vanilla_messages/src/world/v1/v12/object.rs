@@ -29,7 +29,7 @@ impl Object {
                 w.write_all(&guid1.packed_guid())?;
 
                 // mask1: UpdateMask
-                w.write_all(&mask1.as_bytes())?;
+                &mask1.write_into_vec(w)?;
 
             }
             ObjectUpdateType::MOVEMENT {
@@ -59,7 +59,7 @@ impl Object {
                 &movement2.write_into_vec(w)?;;
 
                 // mask2: UpdateMask
-                w.write_all(&mask2.as_bytes())?;
+                &mask2.write_into_vec(w)?;
 
             }
             ObjectUpdateType::CREATE_OBJECT2 {
@@ -78,7 +78,7 @@ impl Object {
                 &movement2.write_into_vec(w)?;;
 
                 // mask2: UpdateMask
-                w.write_all(&mask2.as_bytes())?;
+                &mask2.write_into_vec(w)?;
 
             }
             ObjectUpdateType::OUT_OF_RANGE_OBJECTS {

@@ -171,8 +171,8 @@ impl UpdateMask {
             Corpse
     */
 
-    pub(crate) fn as_bytes(&self) -> Vec<u8> {
-        match self {
+    pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        v.append(&mut match self {
             UpdateMask::Item(i) => i.as_bytes(),
             UpdateMask::Container(i) => i.as_bytes(),
             UpdateMask::Unit(i) => i.as_bytes(),
@@ -180,7 +180,9 @@ impl UpdateMask {
             UpdateMask::GameObject(i) => i.as_bytes(),
             UpdateMask::DynamicObject(i) => i.as_bytes(),
             UpdateMask::Corpse(i) => i.as_bytes(),
-        }
+        });
+
+        Ok(())
     }
 
     pub fn size(&self) -> usize {

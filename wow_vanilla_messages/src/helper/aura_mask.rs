@@ -25,8 +25,7 @@ impl AuraMask {
         Ok(Self { auras })
     }
 
-    pub(crate) fn as_bytes(&self) -> Vec<u8> {
-        let mut v = Vec::with_capacity(48 * 4);
+    pub(crate) fn write_into_vec(&self, mut v: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let mut bit_pattern: u32 = 0;
         for (i, &b) in self.auras().iter().enumerate() {
             if b.is_some() {
@@ -34,15 +33,15 @@ impl AuraMask {
             }
         }
 
-        std::io::Write::write_all(&mut v, bit_pattern.to_le_bytes().as_slice());
+        std::io::Write::write_all(&mut v, bit_pattern.to_le_bytes().as_slice())?;
 
         for &i in self.auras() {
             if let Some(b) = i {
-                std::io::Write::write_all(&mut v, b.to_le_bytes().as_slice());
+                std::io::Write::write_all(&mut v, b.to_le_bytes().as_slice())?;
             }
         }
 
-        v
+        Ok(())
     }
 
     pub fn auras(&self) -> &[Option<u16>] {
@@ -74,8 +73,8 @@ mod test {
         let mut cursor = Cursor::new(v.clone());
         let mask = AuraMask::read(&mut cursor).unwrap();
 
-        let mut target = Vec::new();
-        target.append(&mut mask.as_bytes());
+        let mut target = Vec::with_capacity(mask.size());
+        mask.write_into_vec(&mut target);
 
         assert_eq!(v, target);
     }

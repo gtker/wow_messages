@@ -231,7 +231,7 @@ pub fn print_write_definition(
         }
         Type::UpdateMask | Type::AuraMask => {
             s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.as_bytes()){postfix}?;",
+                "&{variable_prefix}{name}.write_into_vec(w){postfix}?;",
                 variable_prefix = variable_prefix,
                 postfix = postfix,
                 name = d.name()
