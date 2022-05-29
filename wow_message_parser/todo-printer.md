@@ -14,6 +14,7 @@
 
 # Low Priority
 
+* Do not allocate for statically sized messages
 * Workable Intermediate Representation for World
 * More tests/definitions
 * Add derives for all types
