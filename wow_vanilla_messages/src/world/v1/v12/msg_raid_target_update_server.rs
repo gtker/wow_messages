@@ -64,8 +64,8 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
             RaidTargetUpdateType::FULL => {
                 // raid_targets: RaidTargetUpdate[8]
                 let mut raid_targets = [RaidTargetUpdate::default(); 8];
-                for i in 0..8 {
-                    raid_targets[i] = RaidTargetUpdate::read(r)?;
+                for i in raid_targets.iter_mut() {
+                    *i = RaidTargetUpdate::read(r)?;
                 }
 
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {

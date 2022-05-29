@@ -33,8 +33,8 @@ impl ServerMessage for SMSG_ACCOUNT_DATA_TIMES {
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // data: u32[32]
         let mut data = [u32::default(); 32];
-        for i in 0..32 {
-            data[i] = crate::util::read_u32_le(r)?;
+        for i in data.iter_mut() {
+            *i = crate::util::read_u32_le(r)?;
         }
 
         Ok(Self {

@@ -105,8 +105,8 @@ impl ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 
             // raw_data: u32[6]
             let mut raw_data = [u32::default(); 6];
-            for i in 0..6 {
-                raw_data[i] = crate::util::read_u32_le(r)?;
+            for i in raw_data.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
             }
 
             Some(SMSG_GAMEOBJECT_QUERY_RESPONSEfound {

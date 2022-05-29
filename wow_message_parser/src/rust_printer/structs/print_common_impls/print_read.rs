@@ -43,14 +43,18 @@ fn print_read_array_fixed(
             size = size
         ));
     }
-    s.open_curly(format!("for i in 0..{size}", size = size));
+
+    if inner_is_constant_sized {
+        s.open_curly(format!("for i in {name}.iter_mut()", name = d.name()));
+    } else {
+        s.open_curly(format!("for i in 0..{size}", size = size));
+    }
 
     match array.ty() {
         ArrayType::Integer(integer) => {
             if inner_is_constant_sized {
                 s.wln(format!(
-                    "{name}[i] = {module}::{prefix}read_{int_type}_{endian}(r){postfix}?;",
-                    name = d.name(),
+                    "*i = {module}::{prefix}read_{int_type}_{endian}(r){postfix}?;",
                     module = UTILITY_PATH,
                     int_type = integer.rust_str(),
                     endian = integer.rust_endian_str(),
@@ -72,8 +76,7 @@ fn print_read_array_fixed(
         ArrayType::Complex(_) => {
             if inner_is_constant_sized {
                 s.wln(format!(
-                    "{name}[i] = {type_name}::{prefix}read(r){postfix}?;",
-                    name = d.name(),
+                    "*i = {type_name}::{prefix}read(r){postfix}?;",
                     type_name = array.ty().rust_str(),
                     prefix = prefix,
                     postfix = postfix,
@@ -105,8 +108,7 @@ fn print_read_array_fixed(
         }
         ArrayType::Guid => {
             s.wln(format!(
-                "{name}[i] = Guid::{prefix}read(r){postfix}?;",
-                name = d.name(),
+                "*i = Guid::{prefix}read(r){postfix}?;",
                 prefix = prefix,
                 postfix = postfix,
             ));

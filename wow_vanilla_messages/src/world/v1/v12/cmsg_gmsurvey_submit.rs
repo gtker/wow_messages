@@ -46,8 +46,8 @@ impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
 
         // questions: GmSurveyQuestion[10]
         let mut questions = [GmSurveyQuestion::default(); 10];
-        for i in 0..10 {
-            questions[i] = GmSurveyQuestion::read(r)?;
+        for i in questions.iter_mut() {
+            *i = GmSurveyQuestion::read(r)?;
         }
 
         // answer_comment: CString

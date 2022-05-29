@@ -89,8 +89,8 @@ impl ServerMessage for SMSG_PET_SPELLS {
 
         // action_bars: u32[10]
         let mut action_bars = [u32::default(); 10];
-        for i in 0..10 {
-            action_bars[i] = crate::util::read_u32_le(r)?;
+        for i in action_bars.iter_mut() {
+            *i = crate::util::read_u32_le(r)?;
         }
 
         // amount_of_spells: u8

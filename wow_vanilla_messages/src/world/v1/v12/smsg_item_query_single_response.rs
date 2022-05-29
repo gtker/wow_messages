@@ -312,14 +312,14 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // stats: ItemStat[10]
             let mut stats = [ItemStat::default(); 10];
-            for i in 0..10 {
-                stats[i] = ItemStat::read(r)?;
+            for i in stats.iter_mut() {
+                *i = ItemStat::read(r)?;
             }
 
             // damages: ItemDamageType[5]
             let mut damages = [ItemDamageType::default(); 5];
-            for i in 0..5 {
-                damages[i] = ItemDamageType::read(r)?;
+            for i in damages.iter_mut() {
+                *i = ItemDamageType::read(r)?;
             }
 
             // armor: u32
@@ -353,8 +353,8 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let ranged_range_modification = crate::util::read_f32_le(r)?;
             // spells: ItemSpells[5]
             let mut spells = [ItemSpells::default(); 5];
-            for i in 0..5 {
-                spells[i] = ItemSpells::read(r)?;
+            for i in spells.iter_mut() {
+                *i = ItemSpells::read(r)?;
             }
 
             // bonding: u32

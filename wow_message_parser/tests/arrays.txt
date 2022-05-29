@@ -104,14 +104,14 @@ impl Arrays {
 
         // simple_2byte_fixed_array: u16[16]
         let mut simple_2byte_fixed_array = [u16::default(); 16];
-        for i in 0..16 {
-            simple_2byte_fixed_array[i] = crate::util::read_u16_le(r)?;
+        for i in simple_2byte_fixed_array.iter_mut() {
+            *i = crate::util::read_u16_le(r)?;
         }
 
         // simple_2byte_be_fixed_array: u16_be[16]
         let mut simple_2byte_be_fixed_array = [u16::default(); 16];
-        for i in 0..16 {
-            simple_2byte_be_fixed_array[i] = crate::util::read_u16_be(r)?;
+        for i in simple_2byte_be_fixed_array.iter_mut() {
+            *i = crate::util::read_u16_be(r)?;
         }
 
         // simple_2byte_variable_array: u16[index]
@@ -122,8 +122,8 @@ impl Arrays {
 
         // simple_4byte_be_fixed_array: u32_be[16]
         let mut simple_4byte_be_fixed_array = [u32::default(); 16];
-        for i in 0..16 {
-            simple_4byte_be_fixed_array[i] = crate::util::read_u32_be(r)?;
+        for i in simple_4byte_be_fixed_array.iter_mut() {
+            *i = crate::util::read_u32_be(r)?;
         }
 
         // simple_4byte_variable_array: u32[index]
@@ -134,8 +134,8 @@ impl Arrays {
 
         // simple_8byte_be_fixed_array: u64_be[16]
         let mut simple_8byte_be_fixed_array = [u64::default(); 16];
-        for i in 0..16 {
-            simple_8byte_be_fixed_array[i] = crate::util::read_u64_be(r)?;
+        for i in simple_8byte_be_fixed_array.iter_mut() {
+            *i = crate::util::read_u64_be(r)?;
         }
 
         // simple_8byte_variable_array: u64[index]

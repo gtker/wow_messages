@@ -198,14 +198,14 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
 
         // rewards: QuestItemReward[4]
         let mut rewards = [QuestItemReward::default(); 4];
-        for i in 0..4 {
-            rewards[i] = QuestItemReward::read(r)?;
+        for i in rewards.iter_mut() {
+            *i = QuestItemReward::read(r)?;
         }
 
         // choice_rewards: QuestItemReward[6]
         let mut choice_rewards = [QuestItemReward::default(); 6];
-        for i in 0..6 {
-            choice_rewards[i] = QuestItemReward::read(r)?;
+        for i in choice_rewards.iter_mut() {
+            *i = QuestItemReward::read(r)?;
         }
 
         // point_map_id: u32
@@ -236,8 +236,8 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
 
         // objectives: QuestObjective[4]
         let mut objectives = [QuestObjective::default(); 4];
-        for i in 0..4 {
-            objectives[i] = QuestObjective::read(r)?;
+        for i in objectives.iter_mut() {
+            *i = QuestObjective::read(r)?;
         }
 
         // objective_texts: CString[4]

@@ -41,8 +41,8 @@ impl ClientMessage for CMSG_ACTIVATETAXI {
 
         // nodes: u32[2]
         let mut nodes = [u32::default(); 2];
-        for i in 0..2 {
-            nodes[i] = crate::util::read_u32_le(r)?;
+        for i in nodes.iter_mut() {
+            *i = crate::util::read_u32_le(r)?;
         }
 
         Ok(Self {

@@ -200,8 +200,8 @@ impl Character {
 
         // equipment: CharacterGear[19]
         let mut equipment = [CharacterGear::default(); 19];
-        for i in 0..19 {
-            equipment[i] = CharacterGear::read(r)?;
+        for i in equipment.iter_mut() {
+            *i = CharacterGear::read(r)?;
         }
 
         // first_bag_display_id: u32

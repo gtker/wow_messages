@@ -69,8 +69,8 @@ impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
 
         // trade_slots: TradeSlot[7]
         let mut trade_slots = [TradeSlot::default(); 7];
-        for i in 0..7 {
-            trade_slots[i] = TradeSlot::read(r)?;
+        for i in trade_slots.iter_mut() {
+            *i = TradeSlot::read(r)?;
         }
 
         Ok(Self {

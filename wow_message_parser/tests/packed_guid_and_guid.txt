@@ -71,8 +71,8 @@ impl PackedGuidAndGuid {
 
         // static_guid: Guid[10]
         let mut static_guid = [Guid::default(); 10];
-        for i in 0..10 {
-            static_guid[i] = Guid::read(r)?;
+        for i in static_guid.iter_mut() {
+            *i = Guid::read(r)?;
         }
 
         // basic1: u8

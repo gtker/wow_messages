@@ -55,8 +55,8 @@ impl NpcTextUpdate {
 
         // emotes: NpcTextUpdateEmote[3]
         let mut emotes = [NpcTextUpdateEmote::default(); 3];
-        for i in 0..3 {
-            emotes[i] = NpcTextUpdateEmote::read(r)?;
+        for i in emotes.iter_mut() {
+            *i = NpcTextUpdateEmote::read(r)?;
         }
 
         Ok(Self {
