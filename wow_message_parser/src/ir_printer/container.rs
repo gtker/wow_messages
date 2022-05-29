@@ -8,7 +8,8 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, VerifiedContainerValue,
 };
-use crate::test_case::{TestCase, TestCaseMember, TestValue};
+use crate::rust_printer::UpdateMaskType;
+use crate::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use serde::Serialize;
 
 pub fn containers_to_ir(containers: &[&Container]) -> Vec<IrContainer> {
@@ -378,6 +379,58 @@ impl From<&TestCaseMember> for IrTestCaseMember {
 }
 
 #[derive(Debug, Serialize)]
+pub struct IrTestUpdateMaskValue {
+    ty: IrUpdateMaskType,
+    name: String,
+    value: String,
+}
+
+impl From<&TestUpdateMaskValue> for IrTestUpdateMaskValue {
+    fn from(e: &TestUpdateMaskValue) -> Self {
+        Self {
+            ty: e.ty().into(),
+            name: e.name().to_string(),
+            value: e.value().to_string(),
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+pub enum IrUpdateMaskType {
+    #[serde(rename = "OBJECT")]
+    Object,
+    #[serde(rename = "ITEM")]
+    Item,
+    #[serde(rename = "UNIT")]
+    Unit,
+    #[serde(rename = "PLAYER")]
+    Player,
+    #[serde(rename = "CONTAINER")]
+    Container,
+    #[serde(rename = "GAMEOBJECT")]
+    GameObject,
+    #[serde(rename = "DYNAMICOBJECT")]
+    DynamicObject,
+    #[serde(rename = "CORPSE")]
+    Corpse,
+}
+
+impl From<UpdateMaskType> for IrUpdateMaskType {
+    fn from(e: UpdateMaskType) -> Self {
+        match e {
+            UpdateMaskType::Object => Self::Object,
+            UpdateMaskType::Item => Self::Item,
+            UpdateMaskType::Unit => Self::Unit,
+            UpdateMaskType::Player => Self::Player,
+            UpdateMaskType::Container => Self::Container,
+            UpdateMaskType::GameObject => Self::GameObject,
+            UpdateMaskType::DynamicObject => Self::DynamicObject,
+            UpdateMaskType::Corpse => Self::Corpse,
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 pub enum IrTestValue {
     Number(IrIntegerEnumValue),
     Guid(IrIntegerEnumValue),
@@ -397,7 +450,7 @@ pub enum IrTestValue {
         members: Vec<IrTestCaseMember>,
     },
     ArrayOfSubObject(String, Vec<Vec<IrTestCaseMember>>),
-    UpdateMask,
+    UpdateMask(Vec<IrTestUpdateMaskValue>),
 }
 
 impl From<&TestValue> for IrTestValue {
@@ -430,8 +483,7 @@ impl From<&TestValue> for IrTestValue {
                     .collect(),
             ),
             TestValue::UpdateMask(v) => {
-                // TODO: Make proper
-                IrTestValue::UpdateMask
+                IrTestValue::UpdateMask(v.iter().map(|a| a.into()).collect())
             }
         }
     }

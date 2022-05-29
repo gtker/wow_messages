@@ -94787,7 +94787,30 @@
                       },
                       {
                         "variable_name": "mask2",
-                        "verified_value": "UpdateMask",
+                        "verified_value": {
+                          "UpdateMask": [
+                            {
+                              "ty": "OBJECT",
+                              "name": "GUID",
+                              "value": "4"
+                            },
+                            {
+                              "ty": "OBJECT",
+                              "name": "TYPE",
+                              "value": "0x19"
+                            },
+                            {
+                              "ty": "UNIT",
+                              "name": "HEALTH",
+                              "value": "100"
+                            },
+                            {
+                              "ty": "UNIT",
+                              "name": "BYTES_0",
+                              "value": "0x01010101"
+                            }
+                          ]
+                        },
                         "tags": {}
                       }
                     ]
