@@ -1,8 +1,8 @@
 use crate::container::Container;
 use crate::rust_printer::rust_view::RustDefiner;
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
-use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
+use crate::rust_printer::{get_new_flag_type_name, DefinerType};
 
 pub fn print_new_types(s: &mut Writer, e: &Container) {
     for rd in e.rust_object().get_rust_definers() {
@@ -46,10 +46,9 @@ fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
         for enumerator in rd.enumerators() {
             if !enumerator.should_not_be_in_flag_types() {
                 s.wln(format!(
-                    "{variable_name}: Option<{ce_name}{f_name}>,",
+                    "{variable_name}: Option<{ty_name}>,",
                     variable_name = enumerator.name().to_lowercase(),
-                    ce_name = rd.ty_name(),
-                    f_name = enumerator.name(),
+                    ty_name = get_new_flag_type_name(rd.ty_name(), enumerator.name()),
                 ));
             }
         }
@@ -119,7 +118,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 }
             });
         } else {
-            let new_ty = format!("{}{}", rd.ty_name(), enumerator.name());
+            let new_ty = get_new_flag_type_name(rd.ty_name(), enumerator.name());
             s.funcn_pub_const(
                 format!(
                     "new_{upper_name}({lower_name}: {new_ty})",
@@ -253,7 +252,7 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
             continue;
         }
 
-        let new_type_name = format!("{}{}", rd.ty_name(), enumerator.name());
+        let new_type_name = get_new_flag_type_name(rd.ty_name(), enumerator.name());
         s.wln("#[derive(Debug, PartialEq, Clone)]");
         s.new_struct(&new_type_name, |s| {
             for m in enumerator.members_in_struct() {

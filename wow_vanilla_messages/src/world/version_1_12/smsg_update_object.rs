@@ -108,7 +108,7 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
+                                .set_LIVING(MovementBlock_UpdateFlag_LIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
@@ -125,7 +125,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlock_UpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlag_ALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -171,7 +171,7 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
+                                .set_LIVING(MovementBlock_UpdateFlag_LIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
@@ -188,7 +188,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlock_UpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlag_ALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -234,7 +234,7 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
+                                .set_LIVING(MovementBlock_UpdateFlag_LIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
@@ -251,7 +251,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlock_UpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlag_ALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -316,7 +316,7 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
+                                .set_LIVING(MovementBlock_UpdateFlag_LIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
@@ -333,7 +333,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlock_UpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlag_ALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -385,7 +385,7 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
+                                .set_LIVING(MovementBlock_UpdateFlag_LIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
@@ -402,7 +402,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlock_UpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlag_ALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()
@@ -454,7 +454,7 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlagLIVING::LIVING {
+                                .set_LIVING(MovementBlock_UpdateFlag_LIVING::LIVING {
                                     backwards_running_speed: 4.5_f32,
                                     backwards_swimming_speed: 0_f32,
                                     fall_time: 0_f32,
@@ -471,7 +471,7 @@ mod test {
                                     turn_rate: 3.1415927_f32,
                                     walking_speed: 1_f32,
                                 })
-                                .set_ALL(MovementBlock_UpdateFlagALL {
+                                .set_ALL(MovementBlock_UpdateFlag_ALL {
                                     unknown1: 0x1,
                                 })
                                 .set_SELF()

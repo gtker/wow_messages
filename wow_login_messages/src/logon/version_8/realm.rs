@@ -101,7 +101,7 @@ impl Realm {
             // version: Version
             let version = Version::read(r)?;
 
-            Some(Realm_RealmFlagSPECIFY_BUILD {
+            Some(Realm_RealmFlag_SPECIFY_BUILD {
                 version,
             })
         }
@@ -162,7 +162,7 @@ impl Realm {
             // version: Version
             let version = Version::tokio_read(r).await?;
 
-            Some(Realm_RealmFlagSPECIFY_BUILD {
+            Some(Realm_RealmFlag_SPECIFY_BUILD {
                 version,
             })
         }
@@ -223,7 +223,7 @@ impl Realm {
             // version: Version
             let version = Version::astd_read(r).await?;
 
-            Some(Realm_RealmFlagSPECIFY_BUILD {
+            Some(Realm_RealmFlag_SPECIFY_BUILD {
                 version,
             })
         }
@@ -268,7 +268,7 @@ impl Realm {
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct Realm_RealmFlag {
     inner: u8,
-    specify_build: Option<Realm_RealmFlagSPECIFY_BUILD>,
+    specify_build: Option<Realm_RealmFlag_SPECIFY_BUILD>,
 }
 
 impl Realm_RealmFlag {
@@ -343,20 +343,20 @@ impl Realm_RealmFlag {
         self
     }
 
-    pub const fn new_SPECIFY_BUILD(specify_build: Realm_RealmFlagSPECIFY_BUILD) -> Self {
+    pub const fn new_SPECIFY_BUILD(specify_build: Realm_RealmFlag_SPECIFY_BUILD) -> Self {
         Self {
             inner: RealmFlag::SPECIFY_BUILD,
             specify_build: Some(specify_build),
         }
     }
 
-    pub fn set_SPECIFY_BUILD(&mut self, specify_build: Realm_RealmFlagSPECIFY_BUILD) -> Self {
+    pub fn set_SPECIFY_BUILD(&mut self, specify_build: Realm_RealmFlag_SPECIFY_BUILD) -> Self {
         self.inner |= RealmFlag::SPECIFY_BUILD;
         self.specify_build = Some(specify_build);
         self.clone()
     }
 
-    pub const fn get_SPECIFY_BUILD(&self) -> Option<&Realm_RealmFlagSPECIFY_BUILD> {
+    pub const fn get_SPECIFY_BUILD(&self) -> Option<&Realm_RealmFlag_SPECIFY_BUILD> {
         self.specify_build.as_ref()
     }
 
@@ -448,11 +448,11 @@ impl Realm_RealmFlag {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct Realm_RealmFlagSPECIFY_BUILD {
+pub struct Realm_RealmFlag_SPECIFY_BUILD {
     pub version: Version,
 }
 
-impl Realm_RealmFlagSPECIFY_BUILD {
+impl Realm_RealmFlag_SPECIFY_BUILD {
     pub(crate) fn size(&self) -> usize {
         5 // version: Version
     }

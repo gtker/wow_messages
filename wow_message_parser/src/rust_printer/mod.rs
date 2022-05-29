@@ -813,3 +813,7 @@ fn get_new_type_name(original_ty: &str, definer_ty: &str) -> String {
 fn get_optional_type_name(original_ty: &str, optional_name: &str) -> String {
     format!("{original_ty}_{optional_name}")
 }
+
+fn get_new_flag_type_name(original_ty: &str, enumerator_name: &str) -> String {
+    format!("{original_ty}_{enumerator_name}")
+}

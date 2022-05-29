@@ -4,7 +4,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::{RustDefiner, RustType};
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
-use crate::rust_printer::{get_new_type_name, DefinerType};
+use crate::rust_printer::{get_new_flag_type_name, get_new_type_name, DefinerType};
 use crate::rust_printer::{get_optional_type_name, Writer};
 use crate::UTILITY_PATH;
 
@@ -565,10 +565,9 @@ fn print_read_if_statement_flag(
             .rust_definers_in_enumerator(&statement.flag_get_enumerator()),
     );
 
-    let new_ty_name = format!(
-        "{new_ty_name}{enumerator}",
-        new_ty_name = get_new_type_name(e.name(), &statement.original_ty().rust_str()),
-        enumerator = statement.flag_get_enumerator(),
+    let new_ty_name = get_new_flag_type_name(
+        &get_new_type_name(e.name(), &statement.original_ty().rust_str()),
+        &statement.flag_get_enumerator(),
     );
 
     if statement.else_ifs().is_empty() {

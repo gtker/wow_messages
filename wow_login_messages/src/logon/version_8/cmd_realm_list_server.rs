@@ -359,7 +359,7 @@ mod test {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
                     flag: Realm_RealmFlag::empty()
-                        .set_SPECIFY_BUILD(Realm_RealmFlagSPECIFY_BUILD {
+                        .set_SPECIFY_BUILD(Realm_RealmFlag_SPECIFY_BUILD {
                             version: Version {
                                 major: 0x1,
                                 minor: 0xC,
@@ -404,7 +404,7 @@ mod test {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
                     flag: Realm_RealmFlag::empty()
-                        .set_SPECIFY_BUILD(Realm_RealmFlagSPECIFY_BUILD {
+                        .set_SPECIFY_BUILD(Realm_RealmFlag_SPECIFY_BUILD {
                             version: Version {
                                 major: 0x1,
                                 minor: 0xC,
@@ -449,7 +449,7 @@ mod test {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     locked: 0x0,
                     flag: Realm_RealmFlag::empty()
-                        .set_SPECIFY_BUILD(Realm_RealmFlagSPECIFY_BUILD {
+                        .set_SPECIFY_BUILD(Realm_RealmFlag_SPECIFY_BUILD {
                             version: Version {
                                 major: 0x1,
                                 minor: 0xC,
