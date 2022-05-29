@@ -203,7 +203,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
             );
         }
         s.funcn_pub(
-            format!("clear_{}(&mut self)", enumerator.name()),
+            format!("clear_{}(mut self)", enumerator.name()),
             "Self",
             |s| {
                 s.wln(format!(
@@ -214,9 +214,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 if enumerator.has_members_in_struct() {
                     s.wln(format!("self.{} = None;", enumerator.name().to_lowercase()));
                 }
-                s.wln("// TODO: Cloning like this is not conductive to good performance but it is");
-                s.wln("// temporarily necessary due to test syntax");
-                s.wln("self.clone()");
+                s.wln("self");
             },
         );
     }

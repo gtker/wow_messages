@@ -154,11 +154,9 @@ impl SMSG_SPELL_STARTCastFlags {
         self.inner == CastFlags::NONE
     }
 
-    pub fn clear_NONE(&mut self) -> Self {
+    pub fn clear_NONE(mut self) -> Self {
         self.inner &= CastFlags::NONE.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_HIDDEN_COMBATLOG() -> Self {
@@ -177,11 +175,9 @@ impl SMSG_SPELL_STARTCastFlags {
         (self.inner & CastFlags::HIDDEN_COMBATLOG) != 0
     }
 
-    pub fn clear_HIDDEN_COMBATLOG(&mut self) -> Self {
+    pub fn clear_HIDDEN_COMBATLOG(mut self) -> Self {
         self.inner &= CastFlags::HIDDEN_COMBATLOG.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_UNKNOWN2() -> Self {
@@ -200,11 +196,9 @@ impl SMSG_SPELL_STARTCastFlags {
         (self.inner & CastFlags::UNKNOWN2) != 0
     }
 
-    pub fn clear_UNKNOWN2(&mut self) -> Self {
+    pub fn clear_UNKNOWN2(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN2.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_UNKNOWN3() -> Self {
@@ -223,11 +217,9 @@ impl SMSG_SPELL_STARTCastFlags {
         (self.inner & CastFlags::UNKNOWN3) != 0
     }
 
-    pub fn clear_UNKNOWN3(&mut self) -> Self {
+    pub fn clear_UNKNOWN3(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN3.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_UNKNOWN4() -> Self {
@@ -246,11 +238,9 @@ impl SMSG_SPELL_STARTCastFlags {
         (self.inner & CastFlags::UNKNOWN4) != 0
     }
 
-    pub fn clear_UNKNOWN4(&mut self) -> Self {
+    pub fn clear_UNKNOWN4(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN4.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_UNKNOWN5() -> Self {
@@ -269,11 +259,9 @@ impl SMSG_SPELL_STARTCastFlags {
         (self.inner & CastFlags::UNKNOWN5) != 0
     }
 
-    pub fn clear_UNKNOWN5(&mut self) -> Self {
+    pub fn clear_UNKNOWN5(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN5.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_AMMO(ammo: SMSG_SPELL_STARTCastFlagsAMMO) -> Self {
@@ -293,12 +281,10 @@ impl SMSG_SPELL_STARTCastFlags {
         self.ammo.as_ref()
     }
 
-    pub fn clear_AMMO(&mut self) -> Self {
+    pub fn clear_AMMO(mut self) -> Self {
         self.inner &= CastFlags::AMMO.reverse_bits();
         self.ammo = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_UNKNOWN7() -> Self {
@@ -317,11 +303,9 @@ impl SMSG_SPELL_STARTCastFlags {
         (self.inner & CastFlags::UNKNOWN7) != 0
     }
 
-    pub fn clear_UNKNOWN7(&mut self) -> Self {
+    pub fn clear_UNKNOWN7(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN7.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_UNKNOWN8() -> Self {
@@ -340,11 +324,9 @@ impl SMSG_SPELL_STARTCastFlags {
         (self.inner & CastFlags::UNKNOWN8) != 0
     }
 
-    pub fn clear_UNKNOWN8(&mut self) -> Self {
+    pub fn clear_UNKNOWN8(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN8.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_UNKNOWN9() -> Self {
@@ -363,11 +345,9 @@ impl SMSG_SPELL_STARTCastFlags {
         (self.inner & CastFlags::UNKNOWN9) != 0
     }
 
-    pub fn clear_UNKNOWN9(&mut self) -> Self {
+    pub fn clear_UNKNOWN9(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN9.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub(crate) const fn as_int(&self) -> u16 {

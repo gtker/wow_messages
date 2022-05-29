@@ -172,11 +172,9 @@ impl FlagIfElseIfSimpleFlag {
         self.inner == SimpleFlag::ZERO
     }
 
-    pub fn clear_ZERO(&mut self) -> Self {
+    pub fn clear_ZERO(mut self) -> Self {
         self.inner &= SimpleFlag::ZERO.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_ONE(one: FlagIfElseIfSimpleFlagONE) -> Self {
@@ -196,12 +194,10 @@ impl FlagIfElseIfSimpleFlag {
         self.one.as_ref()
     }
 
-    pub fn clear_ONE(&mut self) -> Self {
+    pub fn clear_ONE(mut self) -> Self {
         self.inner &= SimpleFlag::ONE.reverse_bits();
         self.one = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_TWO() -> Self {
@@ -220,11 +216,9 @@ impl FlagIfElseIfSimpleFlag {
         (self.inner & SimpleFlag::TWO) != 0
     }
 
-    pub fn clear_TWO(&mut self) -> Self {
+    pub fn clear_TWO(mut self) -> Self {
         self.inner &= SimpleFlag::TWO.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub(crate) const fn as_int(&self) -> u8 {
@@ -339,11 +333,9 @@ impl FlagIfElseIfUpdateFlag {
         self.inner == UpdateFlag::NONE
     }
 
-    pub fn clear_NONE(&mut self) -> Self {
+    pub fn clear_NONE(mut self) -> Self {
         self.inner &= UpdateFlag::NONE.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_ONE_IF(one_if: FlagIfElseIfUpdateFlagONE_IF) -> Self {
@@ -364,12 +356,10 @@ impl FlagIfElseIfUpdateFlag {
         self.one_if.as_ref()
     }
 
-    pub fn clear_ONE_IF(&mut self) -> Self {
+    pub fn clear_ONE_IF(mut self) -> Self {
         self.inner &= UpdateFlag::ONE_IF.reverse_bits();
         self.one_if = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_EIGHT_IF(eight_if: FlagIfElseIfUpdateFlagEIGHT_IF) -> Self {
@@ -390,12 +380,10 @@ impl FlagIfElseIfUpdateFlag {
         self.eight_if.as_ref()
     }
 
-    pub fn clear_EIGHT_IF(&mut self) -> Self {
+    pub fn clear_EIGHT_IF(mut self) -> Self {
         self.inner &= UpdateFlag::EIGHT_IF.reverse_bits();
         self.eight_if = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub(crate) const fn as_int(&self) -> u8 {

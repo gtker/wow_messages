@@ -297,11 +297,9 @@ impl RealmRealmFlag {
         self.inner == RealmFlag::NONE
     }
 
-    pub fn clear_NONE(&mut self) -> Self {
+    pub fn clear_NONE(mut self) -> Self {
         self.inner &= RealmFlag::NONE.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_INVALID() -> Self {
@@ -320,11 +318,9 @@ impl RealmRealmFlag {
         (self.inner & RealmFlag::INVALID) != 0
     }
 
-    pub fn clear_INVALID(&mut self) -> Self {
+    pub fn clear_INVALID(mut self) -> Self {
         self.inner &= RealmFlag::INVALID.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_OFFLINE() -> Self {
@@ -343,11 +339,9 @@ impl RealmRealmFlag {
         (self.inner & RealmFlag::OFFLINE) != 0
     }
 
-    pub fn clear_OFFLINE(&mut self) -> Self {
+    pub fn clear_OFFLINE(mut self) -> Self {
         self.inner &= RealmFlag::OFFLINE.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_SPECIFY_BUILD(specify_build: RealmRealmFlagSPECIFY_BUILD) -> Self {
@@ -367,12 +361,10 @@ impl RealmRealmFlag {
         self.specify_build.as_ref()
     }
 
-    pub fn clear_SPECIFY_BUILD(&mut self) -> Self {
+    pub fn clear_SPECIFY_BUILD(mut self) -> Self {
         self.inner &= RealmFlag::SPECIFY_BUILD.reverse_bits();
         self.specify_build = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_FORCE_BLUE_RECOMMENDED() -> Self {
@@ -391,11 +383,9 @@ impl RealmRealmFlag {
         (self.inner & RealmFlag::FORCE_BLUE_RECOMMENDED) != 0
     }
 
-    pub fn clear_FORCE_BLUE_RECOMMENDED(&mut self) -> Self {
+    pub fn clear_FORCE_BLUE_RECOMMENDED(mut self) -> Self {
         self.inner &= RealmFlag::FORCE_BLUE_RECOMMENDED.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_FORCE_GREEN_RECOMMENDED() -> Self {
@@ -414,11 +404,9 @@ impl RealmRealmFlag {
         (self.inner & RealmFlag::FORCE_GREEN_RECOMMENDED) != 0
     }
 
-    pub fn clear_FORCE_GREEN_RECOMMENDED(&mut self) -> Self {
+    pub fn clear_FORCE_GREEN_RECOMMENDED(mut self) -> Self {
         self.inner &= RealmFlag::FORCE_GREEN_RECOMMENDED.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_FORCE_RED_FULL() -> Self {
@@ -437,11 +425,9 @@ impl RealmRealmFlag {
         (self.inner & RealmFlag::FORCE_RED_FULL) != 0
     }
 
-    pub fn clear_FORCE_RED_FULL(&mut self) -> Self {
+    pub fn clear_FORCE_RED_FULL(mut self) -> Self {
         self.inner &= RealmFlag::FORCE_RED_FULL.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub(crate) const fn as_int(&self) -> u8 {

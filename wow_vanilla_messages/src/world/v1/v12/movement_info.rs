@@ -224,11 +224,9 @@ impl MovementInfoMovementFlags {
         self.inner == MovementFlags::NONE
     }
 
-    pub fn clear_NONE(&mut self) -> Self {
+    pub fn clear_NONE(mut self) -> Self {
         self.inner &= MovementFlags::NONE.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_FORWARD() -> Self {
@@ -250,11 +248,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::FORWARD) != 0
     }
 
-    pub fn clear_FORWARD(&mut self) -> Self {
+    pub fn clear_FORWARD(mut self) -> Self {
         self.inner &= MovementFlags::FORWARD.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_BACKWARD() -> Self {
@@ -276,11 +272,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::BACKWARD) != 0
     }
 
-    pub fn clear_BACKWARD(&mut self) -> Self {
+    pub fn clear_BACKWARD(mut self) -> Self {
         self.inner &= MovementFlags::BACKWARD.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_STRAFE_LEFT() -> Self {
@@ -302,11 +296,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::STRAFE_LEFT) != 0
     }
 
-    pub fn clear_STRAFE_LEFT(&mut self) -> Self {
+    pub fn clear_STRAFE_LEFT(mut self) -> Self {
         self.inner &= MovementFlags::STRAFE_LEFT.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_STRAFE_RIGHT() -> Self {
@@ -328,11 +320,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::STRAFE_RIGHT) != 0
     }
 
-    pub fn clear_STRAFE_RIGHT(&mut self) -> Self {
+    pub fn clear_STRAFE_RIGHT(mut self) -> Self {
         self.inner &= MovementFlags::STRAFE_RIGHT.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_TURN_LEFT() -> Self {
@@ -354,11 +344,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::TURN_LEFT) != 0
     }
 
-    pub fn clear_TURN_LEFT(&mut self) -> Self {
+    pub fn clear_TURN_LEFT(mut self) -> Self {
         self.inner &= MovementFlags::TURN_LEFT.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_TURN_RIGHT() -> Self {
@@ -380,11 +368,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::TURN_RIGHT) != 0
     }
 
-    pub fn clear_TURN_RIGHT(&mut self) -> Self {
+    pub fn clear_TURN_RIGHT(mut self) -> Self {
         self.inner &= MovementFlags::TURN_RIGHT.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_PITCH_UP() -> Self {
@@ -406,11 +392,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::PITCH_UP) != 0
     }
 
-    pub fn clear_PITCH_UP(&mut self) -> Self {
+    pub fn clear_PITCH_UP(mut self) -> Self {
         self.inner &= MovementFlags::PITCH_UP.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_PITCH_DOWN() -> Self {
@@ -432,11 +416,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::PITCH_DOWN) != 0
     }
 
-    pub fn clear_PITCH_DOWN(&mut self) -> Self {
+    pub fn clear_PITCH_DOWN(mut self) -> Self {
         self.inner &= MovementFlags::PITCH_DOWN.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_WALK_MODE() -> Self {
@@ -458,11 +440,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::WALK_MODE) != 0
     }
 
-    pub fn clear_WALK_MODE(&mut self) -> Self {
+    pub fn clear_WALK_MODE(mut self) -> Self {
         self.inner &= MovementFlags::WALK_MODE.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_ON_TRANSPORT(on_transport: MovementInfoMovementFlagsON_TRANSPORT) -> Self {
@@ -485,12 +465,10 @@ impl MovementInfoMovementFlags {
         self.on_transport.as_ref()
     }
 
-    pub fn clear_ON_TRANSPORT(&mut self) -> Self {
+    pub fn clear_ON_TRANSPORT(mut self) -> Self {
         self.inner &= MovementFlags::ON_TRANSPORT.reverse_bits();
         self.on_transport = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_LEVITATING() -> Self {
@@ -512,11 +490,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::LEVITATING) != 0
     }
 
-    pub fn clear_LEVITATING(&mut self) -> Self {
+    pub fn clear_LEVITATING(mut self) -> Self {
         self.inner &= MovementFlags::LEVITATING.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_FIXED_Z() -> Self {
@@ -538,11 +514,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::FIXED_Z) != 0
     }
 
-    pub fn clear_FIXED_Z(&mut self) -> Self {
+    pub fn clear_FIXED_Z(mut self) -> Self {
         self.inner &= MovementFlags::FIXED_Z.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_ROOT() -> Self {
@@ -564,11 +538,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::ROOT) != 0
     }
 
-    pub fn clear_ROOT(&mut self) -> Self {
+    pub fn clear_ROOT(mut self) -> Self {
         self.inner &= MovementFlags::ROOT.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_JUMPING(jumping: MovementInfoMovementFlagsJUMPING) -> Self {
@@ -591,12 +563,10 @@ impl MovementInfoMovementFlags {
         self.jumping.as_ref()
     }
 
-    pub fn clear_JUMPING(&mut self) -> Self {
+    pub fn clear_JUMPING(mut self) -> Self {
         self.inner &= MovementFlags::JUMPING.reverse_bits();
         self.jumping = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_FALLINGFAR() -> Self {
@@ -618,11 +588,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::FALLINGFAR) != 0
     }
 
-    pub fn clear_FALLINGFAR(&mut self) -> Self {
+    pub fn clear_FALLINGFAR(mut self) -> Self {
         self.inner &= MovementFlags::FALLINGFAR.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_SWIMMING(swimming: MovementInfoMovementFlagsSWIMMING) -> Self {
@@ -645,12 +613,10 @@ impl MovementInfoMovementFlags {
         self.swimming.as_ref()
     }
 
-    pub fn clear_SWIMMING(&mut self) -> Self {
+    pub fn clear_SWIMMING(mut self) -> Self {
         self.inner &= MovementFlags::SWIMMING.reverse_bits();
         self.swimming = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_SPLINE_ENABLED() -> Self {
@@ -672,11 +638,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::SPLINE_ENABLED) != 0
     }
 
-    pub fn clear_SPLINE_ENABLED(&mut self) -> Self {
+    pub fn clear_SPLINE_ENABLED(mut self) -> Self {
         self.inner &= MovementFlags::SPLINE_ENABLED.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_CAN_FLY() -> Self {
@@ -698,11 +662,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::CAN_FLY) != 0
     }
 
-    pub fn clear_CAN_FLY(&mut self) -> Self {
+    pub fn clear_CAN_FLY(mut self) -> Self {
         self.inner &= MovementFlags::CAN_FLY.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_FLYING() -> Self {
@@ -724,11 +686,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::FLYING) != 0
     }
 
-    pub fn clear_FLYING(&mut self) -> Self {
+    pub fn clear_FLYING(mut self) -> Self {
         self.inner &= MovementFlags::FLYING.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_ONTRANSPORT() -> Self {
@@ -750,11 +710,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::ONTRANSPORT) != 0
     }
 
-    pub fn clear_ONTRANSPORT(&mut self) -> Self {
+    pub fn clear_ONTRANSPORT(mut self) -> Self {
         self.inner &= MovementFlags::ONTRANSPORT.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_SPLINE_ELEVATION(spline_elevation: MovementInfoMovementFlagsSPLINE_ELEVATION) -> Self {
@@ -777,12 +735,10 @@ impl MovementInfoMovementFlags {
         self.spline_elevation.as_ref()
     }
 
-    pub fn clear_SPLINE_ELEVATION(&mut self) -> Self {
+    pub fn clear_SPLINE_ELEVATION(mut self) -> Self {
         self.inner &= MovementFlags::SPLINE_ELEVATION.reverse_bits();
         self.spline_elevation = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_WATERWALKING() -> Self {
@@ -804,11 +760,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::WATERWALKING) != 0
     }
 
-    pub fn clear_WATERWALKING(&mut self) -> Self {
+    pub fn clear_WATERWALKING(mut self) -> Self {
         self.inner &= MovementFlags::WATERWALKING.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_SAFE_FALL() -> Self {
@@ -830,11 +784,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::SAFE_FALL) != 0
     }
 
-    pub fn clear_SAFE_FALL(&mut self) -> Self {
+    pub fn clear_SAFE_FALL(mut self) -> Self {
         self.inner &= MovementFlags::SAFE_FALL.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub const fn new_HOVER() -> Self {
@@ -856,11 +808,9 @@ impl MovementInfoMovementFlags {
         (self.inner & MovementFlags::HOVER) != 0
     }
 
-    pub fn clear_HOVER(&mut self) -> Self {
+    pub fn clear_HOVER(mut self) -> Self {
         self.inner &= MovementFlags::HOVER.reverse_bits();
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
+        self
     }
 
     pub(crate) const fn as_int(&self) -> u32 {

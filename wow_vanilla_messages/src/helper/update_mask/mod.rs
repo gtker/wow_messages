@@ -225,12 +225,11 @@ mod test {
             1, // UNIT_FIELD_BYTES[3] // Power (Rage)
         ];
 
-        let mut update_mask = UpdatePlayer::new();
-
-        update_mask.set_object_GUID(Guid::new(4));
-        update_mask.set_object_TYPE(25);
-        update_mask.set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1);
-        update_mask.set_unit_HEALTH(100);
+        let mut update_mask = UpdatePlayer::new()
+            .set_object_GUID(Guid::new(4))
+            .set_object_TYPE(25)
+            .set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1)
+            .set_unit_HEALTH(100);
 
         let mut v = update_mask.as_bytes();
         assert_eq!(b.as_slice(), v.as_slice());
@@ -259,18 +258,17 @@ mod test {
             50, 0, 0, 0, // UNIT_FIELD_NATIVEDISPLAYID (50, Human Female)
         ];
 
-        let mut update_mask = UpdatePlayer::new();
-
-        update_mask.set_object_GUID(Guid::new(4));
-        update_mask.set_object_TYPE(25);
-        update_mask.set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1);
-        update_mask.set_object_SCALE_X(1.0);
-        update_mask.set_unit_HEALTH(100);
-        update_mask.set_unit_MAXHEALTH(100);
-        update_mask.set_unit_LEVEL(1);
-        update_mask.set_unit_FACTIONTEMPLATE(1);
-        update_mask.set_unit_DISPLAYID(50);
-        update_mask.set_unit_NATIVEDISPLAYID(50);
+        let mut update_mask = UpdatePlayer::new()
+            .set_object_GUID(Guid::new(4))
+            .set_object_TYPE(25)
+            .set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1)
+            .set_object_SCALE_X(1.0)
+            .set_unit_HEALTH(100)
+            .set_unit_MAXHEALTH(100)
+            .set_unit_LEVEL(1)
+            .set_unit_FACTIONTEMPLATE(1)
+            .set_unit_DISPLAYID(50)
+            .set_unit_NATIVEDISPLAYID(50);
 
         let mut v = update_mask.as_bytes();
         assert_eq!(b.as_slice(), v.as_slice());

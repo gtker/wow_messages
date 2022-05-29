@@ -72,7 +72,7 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
     };
     s.bodyn(
         format!(
-            "pub fn set_{}_{}(&mut self{}) -> Self",
+            "pub fn set_{}_{}(mut self{}) -> Self",
             m.ty, m.name, parameter
         ),
         |s| {
@@ -103,7 +103,7 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
                 }
             }
 
-            s.wln("self.clone()");
+            s.wln("self");
         },
     );
 }
