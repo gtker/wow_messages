@@ -716,15 +716,20 @@ fn print_read_field(
             }
         },
         StructMember::OptionalStatement(optional) => {
-            // TODO OPTIONAL
             s.wln(format!("// optional {}", optional.name()));
             s.body_closing_with(
                 "let current_size =",
                 |s| {
-                    s.wln("0");
+                    if e.rust_object().members().is_empty() {
+                        s.wln("0");
+                    }
 
-                    for m in e.rust_object().members() {
-                        s.w("+ ");
+                    for (i, m) in e.rust_object().members().iter().enumerate() {
+                        if i != 0 {
+                            s.w("+ ");
+                        } else {
+                            s.w("");
+                        }
 
                         print_size_of_ty_rust_view(s, m, "");
                     }

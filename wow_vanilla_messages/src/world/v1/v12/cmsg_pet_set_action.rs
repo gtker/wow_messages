@@ -59,8 +59,7 @@ impl ClientMessage for CMSG_PET_SET_ACTION {
 
         // optional extra
         let current_size = {
-            0
-            + 8 // guid: Guid
+            8 // guid: Guid
             + 4 // position1: u32
             + 4 // data1: u32
         };

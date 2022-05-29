@@ -45,8 +45,7 @@ impl ServerMessage for SMSG_TRANSFER_PENDING {
 
         // optional has_transport
         let current_size = {
-            0
-            + 4 // map: Map
+            4 // map: Map
         };
         let has_transport = if current_size < body_size as usize {
             // transport: u32

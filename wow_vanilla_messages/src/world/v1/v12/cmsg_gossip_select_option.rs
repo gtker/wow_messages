@@ -51,8 +51,7 @@ impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
 
         // optional unknown
         let current_size = {
-            0
-            + 8 // guid: Guid
+            8 // guid: Guid
             + 4 // gossip_list_id: u32
         };
         let unknown = if current_size < body_size as usize {

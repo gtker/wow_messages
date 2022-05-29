@@ -90,8 +90,7 @@ impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
 
         // optional found
         let current_size = {
-            0
-            + 4 // creature_entry: u32
+            4 // creature_entry: u32
         };
         let found = if current_size < body_size as usize {
             // name1: CString

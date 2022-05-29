@@ -227,8 +227,7 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
         // optional found
         let current_size = {
-            0
-            + 4 // item: u32
+            4 // item: u32
         };
         let found = if current_size < body_size as usize {
             // item_class: ItemClass
