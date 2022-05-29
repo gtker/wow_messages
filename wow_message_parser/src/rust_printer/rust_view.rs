@@ -511,6 +511,36 @@ impl RustObject {
         })
     }
 
+    pub fn get_rust_member_with_variable_name(&self, variable_name: &str) -> &RustMember {
+        fn inner<'a>(m: &'a RustMember, variable_name: &str) -> Option<&'a RustMember> {
+            match m.ty() {
+                RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
+                    for enumerator in enumerators {
+                        for member in enumerator.members() {
+                            if let Some(member) = inner(member, variable_name) {
+                                return Some(member);
+                            }
+                        }
+                    }
+                }
+                _ => {
+                    if variable_name == m.name() {
+                        return Some(m);
+                    }
+                }
+            }
+
+            None
+        }
+        for m in self.members() {
+            if let Some(m) = inner(m, variable_name) {
+                return m;
+            }
+        }
+
+        unreachable!()
+    }
+
     pub fn rust_definers_in_global_scope(&self) -> Vec<RustDefiner> {
         let mut v = Vec::new();
 

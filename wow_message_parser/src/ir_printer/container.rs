@@ -397,6 +397,7 @@ pub enum IrTestValue {
         members: Vec<IrTestCaseMember>,
     },
     ArrayOfSubObject(String, Vec<Vec<IrTestCaseMember>>),
+    UpdateMask,
 }
 
 impl From<&TestValue> for IrTestValue {
@@ -428,6 +429,10 @@ impl From<&TestValue> for IrTestValue {
                     .map(|a| a.iter().map(|a| a.into()).collect::<Vec<_>>())
                     .collect(),
             ),
+            TestValue::UpdateMask(v) => {
+                // TODO: Make proper
+                IrTestValue::UpdateMask
+            }
         }
     }
 }

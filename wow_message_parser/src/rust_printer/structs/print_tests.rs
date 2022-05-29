@@ -33,8 +33,13 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
         s.wln("use super::super::*;");
         s.wln(format!("use {};", e.get_opcode_import_path(),));
         match e.container_type() {
-            ContainerType::Msg(_) => panic!(),
+            ContainerType::Msg(_) => {
+                s.wln("use crate::{Guid, UpdateMask};");
+
+                panic!()
+            }
             ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
+                s.wln("use crate::{Guid, UpdateMask};");
                 s.wln(format!(
                     "use crate::{{{}, {}}};",
                     CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
@@ -352,8 +357,10 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
             s.wln_no_indent(format!("{} {{", ty_name));
             s.inc_indent();
 
-            for m in members {
-                s.wln(format!("{}: {},", m.name(), m.value().original_string()));
+            let t = members.as_slice();
+            let e = o.get_container(ty_name, e.tags());
+            for m in e.rust_object().members_in_struct() {
+                print_value(s, m, t, e, o);
             }
 
             s.closing_curly_with(",");
@@ -386,6 +393,10 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
             }
 
             s.closing_curly_with(",");
+        }
+        TestValue::UpdateMask(v) => {
+            // TODO
+            s.wln_no_indent("UpdateMask::new(),");
         }
     }
 }

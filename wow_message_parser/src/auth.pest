@@ -15,6 +15,7 @@ value = @{ ( "0x" ~ HEX_DIGIT+
             | "self.size"
             | "0b" ~ ASCII_BIN_DIGIT+
             | (ASCII_DIGIT+ ~ "." ~ ASCII_DIGIT+)
+            | ("-" ~ ASCII_DIGIT+ ~ "." ~ ASCII_DIGIT+)
             | ASCII_DIGIT+
             | (QUOTATION_MARK ~ text ~ QUOTATION_MARK )
             | identifier ) }

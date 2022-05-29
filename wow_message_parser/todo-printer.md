@@ -6,6 +6,8 @@
     - if a == { if b == } (`SMSG_AUCTION_COMMAND_RESULT`)
 * Working UpdateMask
   * Tests
+  * IR for UpdateMask and test
+  * Doc for UpdateMask
 
 # Direct upgrades to Login
 

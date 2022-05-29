@@ -5,6 +5,7 @@ use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType, VerifiedContainerValue};
 use crate::parser::utility::parse_value;
+use crate::rust_printer::UpdateMaskType;
 
 #[derive(Debug, Clone)]
 pub struct TestCase {
@@ -61,9 +62,42 @@ impl TestCase {
     pub fn verify(&mut self, o: &Objects) {
         fn inner(m: &mut TestCaseMember, c: &Container, o: &Objects, tags: &Tags) {
             let ty = c.get_field_ty(&m.variable_name);
+
             let value = match &mut m.value {
                 TestCaseValueInitial::Single(s) => s.clone(),
                 TestCaseValueInitial::Multiple(multiple) => {
+                    if ty == &Type::UpdateMask {
+                        let mut v = Vec::new();
+                        for m_inner in multiple.iter_mut() {
+                            let (ty, name) = &m_inner.variable_name.split_once("_").unwrap();
+                            let ty = match *ty {
+                                "OBJECT" => UpdateMaskType::Object,
+                                "UNIT" => UpdateMaskType::Unit,
+                                "ITEM" => UpdateMaskType::Item,
+                                "PLAYER" => UpdateMaskType::Player,
+                                "CONTAINER" => UpdateMaskType::Container,
+                                "GAMEOBJECT" => UpdateMaskType::GameObject,
+                                "DYNAMICOBJECT" => UpdateMaskType::DynamicObject,
+                                "CORPSE" => UpdateMaskType::Corpse,
+                                _ => panic!("invalid update mask type: '{}'", ty),
+                            };
+
+                            let value = match &m_inner.value {
+                                TestCaseValueInitial::Single(v) => v.clone(),
+                                _ => unreachable!(),
+                            };
+
+                            v.push(TestUpdateMaskValue {
+                                ty,
+                                name: name.to_string(),
+                                value,
+                            })
+                        }
+
+                        m.verified_value = Some(TestValue::UpdateMask(v));
+                        return;
+                    }
+
                     let inner_c = o.get_container(ty.rust_str().as_str(), tags);
                     for m_inner in multiple.iter_mut() {
                         inner(m_inner, inner_c, o, tags);
@@ -217,6 +251,13 @@ impl TestCaseMember {
 }
 
 #[derive(Debug, Clone)]
+pub struct TestUpdateMaskValue {
+    ty: UpdateMaskType,
+    name: String,
+    value: String,
+}
+
+#[derive(Debug, Clone)]
 pub enum TestValue {
     Number(VerifiedContainerValue),
     Guid(VerifiedContainerValue),
@@ -236,6 +277,7 @@ pub enum TestValue {
         members: Vec<TestCaseMember>,
     },
     ArrayOfSubObject(String, Vec<Vec<TestCaseMember>>),
+    UpdateMask(Vec<TestUpdateMaskValue>),
 }
 
 impl TestValue {

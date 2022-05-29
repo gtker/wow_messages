@@ -63,6 +63,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
+    use crate::{Guid, UpdateMask};
     use crate::{ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]

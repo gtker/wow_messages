@@ -372,10 +372,10 @@ mod test {
                     flag: RealmRealmFlag::empty()
                         .set_SPECIFY_BUILD(RealmRealmFlagSPECIFY_BUILD {
                             version: Version {
-                                major: 1,
-                                minor: 12,
-                                patch: 1,
-                                build: 5875,
+                                major: 0x1,
+                                minor: 0xC,
+                                patch: 0x1,
+                                build: 0x16F3,
                             },
                         })
                         ,
@@ -421,10 +421,10 @@ mod test {
                     flag: RealmRealmFlag::empty()
                         .set_SPECIFY_BUILD(RealmRealmFlagSPECIFY_BUILD {
                             version: Version {
-                                major: 1,
-                                minor: 12,
-                                patch: 1,
-                                build: 5875,
+                                major: 0x1,
+                                minor: 0xC,
+                                patch: 0x1,
+                                build: 0x16F3,
                             },
                         })
                         ,
@@ -470,10 +470,10 @@ mod test {
                     flag: RealmRealmFlag::empty()
                         .set_SPECIFY_BUILD(RealmRealmFlagSPECIFY_BUILD {
                             version: Version {
-                                major: 1,
-                                minor: 12,
-                                patch: 1,
-                                build: 5875,
+                                major: 0x1,
+                                minor: 0xC,
+                                patch: 0x1,
+                                build: 0x16F3,
                             },
                         })
                         ,

@@ -501,7 +501,13 @@ fn print_container_example_definition(
                 _ => panic!("unsupported"),
             }
         }
-        Type::UpdateMask => panic!("UpdateMask example"),
+        Type::UpdateMask => {
+            let amount_of_blocks = bytes.next().unwrap();
+            s.wln(format!("{}, // amount_of_blocks", amount_of_blocks));
+
+            // TODO
+            s.wln("UPDATEMASK TODO");
+        }
         Type::AuraMask => panic!("AuraMask example"),
     }
     s.wln(comment);

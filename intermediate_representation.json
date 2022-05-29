@@ -94573,7 +94573,350 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_UPDATE_OBJECT",
+          "members": [
+            {
+              "variable_name": "has_transport",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "objects",
+              "verified_value": {
+                "ArrayOfSubObject": [
+                  "Object",
+                  [
+                    [
+                      {
+                        "variable_name": "update_type",
+                        "verified_value": {
+                          "Enum": {
+                            "value": 3,
+                            "original_string": "CREATE_OBJECT2"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "guid3",
+                        "verified_value": {
+                          "Guid": {
+                            "value": 4,
+                            "original_string": "4"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "object_type",
+                        "verified_value": {
+                          "Enum": {
+                            "value": 4,
+                            "original_string": "PLAYER"
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "movement2",
+                        "verified_value": {
+                          "SubObject": {
+                            "ty_name": "MovementBlock",
+                            "members": [
+                              {
+                                "variable_name": "update_flag",
+                                "verified_value": {
+                                  "Flag": [
+                                    "LIVING",
+                                    "ALL",
+                                    "SELF"
+                                  ]
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "flags",
+                                "verified_value": {
+                                  "Flag": [
+                                    "NONE"
+                                  ]
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "timestamp",
+                                "verified_value": {
+                                  "Number": {
+                                    "value": 0,
+                                    "original_string": "0"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "living_position_x",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": -8949.95,
+                                    "original_string": "-8949.95"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "living_position_y",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": -132.493,
+                                    "original_string": "-132.493"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "living_position_z",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": 83.5312,
+                                    "original_string": "83.5312"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "living_orientation",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": 0.0,
+                                    "original_string": "0.0"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "fall_time",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": 0.0,
+                                    "original_string": "0"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "walking_speed",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": 1.0,
+                                    "original_string": "1.0"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "running_speed",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": 7.0,
+                                    "original_string": "7.0"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "backwards_running_speed",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": 4.5,
+                                    "original_string": "4.5"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "swimming_speed",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": 0.0,
+                                    "original_string": "0.0"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "backwards_swimming_speed",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": 0.0,
+                                    "original_string": "0.0"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "turn_rate",
+                                "verified_value": {
+                                  "FloatingNumber": {
+                                    "value": 3.141592653589793,
+                                    "original_string": "3.14159265358979323846264338327950288"
+                                  }
+                                },
+                                "tags": {}
+                              },
+                              {
+                                "variable_name": "unknown1",
+                                "verified_value": {
+                                  "Number": {
+                                    "value": 1,
+                                    "original_string": "1"
+                                  }
+                                },
+                                "tags": {}
+                              }
+                            ]
+                          }
+                        },
+                        "tags": {}
+                      },
+                      {
+                        "variable_name": "mask2",
+                        "verified_value": "UpdateMask",
+                        "tags": {}
+                      }
+                    ]
+                  ]
+                ]
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            97,
+            169,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            3,
+            1,
+            4,
+            4,
+            49,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            205,
+            215,
+            11,
+            198,
+            53,
+            126,
+            4,
+            195,
+            249,
+            15,
+            167,
+            66,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            128,
+            63,
+            0,
+            0,
+            224,
+            64,
+            0,
+            0,
+            144,
+            64,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            219,
+            15,
+            73,
+            64,
+            1,
+            0,
+            0,
+            0,
+            2,
+            7,
+            0,
+            64,
+            0,
+            16,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            25,
+            0,
+            0,
+            0,
+            100,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
+            "start_position": 198
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
         "start_position": 192
