@@ -16,7 +16,7 @@ impl Guid {
         self.guid
     }
 
-    pub fn packed_guid(&self) -> Vec<u8> {
+    pub(crate) fn packed_guid(&self) -> Vec<u8> {
         // Worst case capacity
         let mut v = Vec::with_capacity(9);
         // Placeholder
@@ -36,13 +36,13 @@ impl Guid {
         v
     }
 
-    pub fn read(r: &mut impl Read) -> Result<Self, std::io::Error> {
+    pub(crate) fn read(r: &mut impl Read) -> Result<Self, std::io::Error> {
         Ok(Self {
             guid: read_u64_le(r)?,
         })
     }
 
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         let mut amount_of_bytes = 1;
 
         for i in 0..8 {
@@ -54,7 +54,7 @@ impl Guid {
         amount_of_bytes
     }
 
-    pub fn read_packed(r: &mut impl Read) -> Result<Self, std::io::Error> {
+    pub(crate) fn read_packed(r: &mut impl Read) -> Result<Self, std::io::Error> {
         let bit_pattern = read_u8_le(r)?;
         let mut guid: u64 = 0;
 
