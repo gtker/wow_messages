@@ -23,7 +23,7 @@ pub async fn tokio_expect_client_message_encryption<
 >(
     r: &mut R,
     d: &mut D,
-) -> Result<M, ExpectedServerMessageError> {
+) -> Result<M, ExpectedMessageError> {
     let mut buf = [0u8; CLIENT_HEADER_LENGTH as usize];
     r.read_exact(&mut buf).await?;
     let d = d.decrypt_client_header(buf);
@@ -39,10 +39,10 @@ pub async fn tokio_expect_client_message_encryption<
         let m = M::read_body(&mut buf.as_slice(), (size - CLIENT_OPCODE_LENGTH) as u32);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedServerMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::GenericError),
         }
     } else {
-        Err(ExpectedServerMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
     }
 }
 
@@ -52,7 +52,7 @@ pub async fn tokio_expect_client_message<
     R: tokio::io::AsyncReadExt + Unpin + Send,
 >(
     r: &mut R,
-) -> Result<M, ExpectedServerMessageError> {
+) -> Result<M, ExpectedMessageError> {
     let size = crate::util::tokio_read_u16_be(r).await?;
     let opcode = crate::util::tokio_read_u32_le(r).await?;
 
@@ -64,22 +64,22 @@ pub async fn tokio_expect_client_message<
         let m = M::read_body(&mut buf.as_slice(), (size - CLIENT_OPCODE_LENGTH) as u32);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedServerMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::GenericError),
         }
     } else {
-        Err(ExpectedServerMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
     }
 }
 
 #[derive(Debug)]
-pub enum ExpectedServerMessageError {
+pub enum ExpectedMessageError {
     Io(std::io::Error),
     UnexpectedOpcode(u32),
     GenericError,
 }
-impl std::error::Error for ExpectedServerMessageError {}
+impl std::error::Error for ExpectedMessageError {}
 
-impl Display for ExpectedServerMessageError {
+impl Display for ExpectedMessageError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
@@ -91,7 +91,7 @@ impl Display for ExpectedServerMessageError {
     }
 }
 
-impl From<std::io::Error> for ExpectedServerMessageError {
+impl From<std::io::Error> for ExpectedMessageError {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
     }

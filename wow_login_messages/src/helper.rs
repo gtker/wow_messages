@@ -33,7 +33,7 @@ use std::string::FromUtf8Error;
 #[cfg(feature = "sync")]
 pub fn expect_client_message<M: ClientMessage, R: std::io::Read>(
     r: &mut R,
-) -> Result<M, ExpectedServerMessageError> {
+) -> Result<M, ExpectedMessageError> {
     let opcode = read_u8_le(r)?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -41,10 +41,10 @@ pub fn expect_client_message<M: ClientMessage, R: std::io::Read>(
         let m = M::read(r);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedServerMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::GenericError),
         }
     } else {
-        Err(ExpectedServerMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
     }
 }
 
@@ -54,7 +54,7 @@ pub async fn tokio_expect_client_message<
     R: tokio::io::AsyncReadExt + Unpin + Send,
 >(
     r: &mut R,
-) -> Result<M, ExpectedServerMessageError> {
+) -> Result<M, ExpectedMessageError> {
     let opcode = crate::util::tokio_read_u8_le(r).await?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -62,22 +62,22 @@ pub async fn tokio_expect_client_message<
         let m = M::tokio_read(r).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedServerMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::GenericError),
         }
     } else {
-        Err(ExpectedServerMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
     }
 }
 
 #[derive(Debug)]
-pub enum ExpectedClientMessageError {
+pub enum ExpectedMessageError {
     Io(std::io::Error),
     UnexpectedOpcode(u8),
     GenericError,
 }
-impl std::error::Error for ExpectedClientMessageError {}
+impl std::error::Error for ExpectedMessageError {}
 
-impl Display for ExpectedClientMessageError {
+impl Display for ExpectedMessageError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
@@ -89,7 +89,7 @@ impl Display for ExpectedClientMessageError {
     }
 }
 
-impl From<std::io::Error> for ExpectedClientMessageError {
+impl From<std::io::Error> for ExpectedMessageError {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
     }
@@ -112,7 +112,7 @@ impl From<std::io::Error> for ExpectedClientMessageError {
 #[cfg(feature = "sync")]
 pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
     r: &mut R,
-) -> Result<M, ExpectedServerMessageError> {
+) -> Result<M, ExpectedMessageError> {
     let opcode = read_u8_le(r)?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -120,10 +120,10 @@ pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
         let m = M::read(r);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedServerMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::GenericError),
         }
     } else {
-        Err(ExpectedServerMessageError::UnexpectedOpcode(opcode))
+        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
     }
 }
 
@@ -133,7 +133,7 @@ pub async fn tokio_expect_server_message<
     R: tokio::io::AsyncReadExt + Unpin + Send,
 >(
     r: &mut R,
-) -> Result<M, ExpectedServerMessageError> {
+) -> Result<M, ExpectedMessageError> {
     let opcode = crate::util::tokio_read_u8_le(r).await?;
 
     // Unable to match on associated const M::OPCODE, so we do if
@@ -141,36 +141,10 @@ pub async fn tokio_expect_server_message<
         let m = M::tokio_read(r).await;
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedServerMessageError::GenericError),
+            Err(_) => Err(ExpectedMessageError::GenericError),
         }
     } else {
-        Err(ExpectedServerMessageError::UnexpectedOpcode(opcode))
-    }
-}
-
-#[derive(Debug)]
-pub enum ExpectedServerMessageError {
-    Io(std::io::Error),
-    UnexpectedOpcode(u8),
-    GenericError,
-}
-impl std::error::Error for ExpectedServerMessageError {}
-
-impl Display for ExpectedServerMessageError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::UnexpectedOpcode(i) => {
-                f.write_fmt(format_args!("unexpected opcode returned: '{}'", i))
-            }
-            Self::GenericError => f.write_str("something went wrong parsing the message"),
-        }
-    }
-}
-
-impl From<std::io::Error> for ExpectedServerMessageError {
-    fn from(e: std::io::Error) -> Self {
-        Self::Io(e)
+        Err(ExpectedMessageError::UnexpectedOpcode(opcode))
     }
 }
 

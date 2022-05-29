@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `read_expect_*_login_message`s have been renamed to `expect_*_message` for brevity.
 `Login` has been removed from the names of types in `helper` as well.
 * BREAKING: Added a single `EnumError` type instead of a separate type for every single enum.
+* BREAKING: `Expected*MesageError`s have been renamed to `ExpectedMessageError` along with changes to internal structure.
 
 ### Deprecated
 
