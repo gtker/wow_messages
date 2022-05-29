@@ -63,14 +63,14 @@ impl PackedGuidAndGuid {
         let guid = Guid::read(r)?;
 
         // static_packed: PackedGuid[10]
-        let mut static_packed = Vec::with_capacity(10 as usize);
+        let mut static_packed = Vec::with_capacity(10);
         for i in 0..10 {
             static_packed[i] = Guid::read_packed(r)?;
         }
         let static_packed = static_packed.try_into().unwrap();
 
         // static_guid: Guid[10]
-        let mut static_guid = Vec::with_capacity(10 as usize);
+        let mut static_guid = Vec::with_capacity(10);
         for i in 0..10 {
             static_guid[i] = Guid::read(r)?;
         }

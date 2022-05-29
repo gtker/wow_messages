@@ -51,7 +51,7 @@ fn print_read_array(
                 ));
             } else {
                 s.wln(format!(
-                    "let mut {name} = Vec::with_capacity({size} as usize);",
+                    "let mut {name} = Vec::with_capacity({size});",
                     name = d.name(),
                     size = size
                 ));

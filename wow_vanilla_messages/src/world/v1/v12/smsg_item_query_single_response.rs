@@ -312,14 +312,14 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let container_slots = crate::util::read_u32_le(r)?;
 
             // stats: ItemStat[10]
-            let mut stats = Vec::with_capacity(10 as usize);
+            let mut stats = Vec::with_capacity(10);
             for i in 0..10 {
                 stats.push(ItemStat::read(r)?);
             }
             let stats = stats.try_into().unwrap();
 
             // damages: ItemDamageType[5]
-            let mut damages = Vec::with_capacity(5 as usize);
+            let mut damages = Vec::with_capacity(5);
             for i in 0..5 {
                 damages.push(ItemDamageType::read(r)?);
             }
@@ -355,7 +355,7 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // ranged_range_modification: f32
             let ranged_range_modification = crate::util::read_f32_le(r)?;
             // spells: ItemSpells[5]
-            let mut spells = Vec::with_capacity(5 as usize);
+            let mut spells = Vec::with_capacity(5);
             for i in 0..5 {
                 spells.push(ItemSpells::read(r)?);
             }

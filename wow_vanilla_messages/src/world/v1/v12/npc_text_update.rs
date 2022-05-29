@@ -43,7 +43,7 @@ impl NpcTextUpdate {
         // probability: f32
         let probability = crate::util::read_f32_le(r)?;
         // texts: CString[2]
-        let mut texts = Vec::with_capacity(2 as usize);
+        let mut texts = Vec::with_capacity(2);
         for i in 0..2 {
             let s = crate::util::read_c_string_to_vec(r)?;
             texts[i] = String::from_utf8(s)?;
@@ -54,7 +54,7 @@ impl NpcTextUpdate {
         let language: Language = crate::util::read_u32_le(r)?.try_into()?;
 
         // emotes: NpcTextUpdateEmote[3]
-        let mut emotes = Vec::with_capacity(3 as usize);
+        let mut emotes = Vec::with_capacity(3);
         for i in 0..3 {
             emotes.push(NpcTextUpdateEmote::read(r)?);
         }

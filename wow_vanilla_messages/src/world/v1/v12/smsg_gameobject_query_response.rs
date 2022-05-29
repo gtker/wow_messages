@@ -105,7 +105,7 @@ impl ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {
             let name5 = String::from_utf8(name5)?;
 
             // raw_data: u32[6]
-            let mut raw_data = Vec::with_capacity(6 as usize);
+            let mut raw_data = Vec::with_capacity(6);
             for i in 0..6 {
                 raw_data.push(crate::util::read_u32_le(r)?);
             }

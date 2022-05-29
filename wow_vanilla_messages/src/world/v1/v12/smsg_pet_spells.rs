@@ -88,7 +88,7 @@ impl ServerMessage for SMSG_PET_SPELLS {
         let unknown2 = crate::util::read_u16_le(r)?;
 
         // action_bars: u32[10]
-        let mut action_bars = Vec::with_capacity(10 as usize);
+        let mut action_bars = Vec::with_capacity(10);
         for i in 0..10 {
             action_bars.push(crate::util::read_u32_le(r)?);
         }

@@ -103,14 +103,14 @@ impl Arrays {
         r.read_exact(&mut basic_fixed_array)?;
 
         // simple_2byte_fixed_array: u16[16]
-        let mut simple_2byte_fixed_array = Vec::with_capacity(16 as usize);
+        let mut simple_2byte_fixed_array = Vec::with_capacity(16);
         for i in 0..16 {
             simple_2byte_fixed_array.push(crate::util::read_u16_le(r)?);
         }
         let simple_2byte_fixed_array = simple_2byte_fixed_array.try_into().unwrap();
 
         // simple_2byte_be_fixed_array: u16_be[16]
-        let mut simple_2byte_be_fixed_array = Vec::with_capacity(16 as usize);
+        let mut simple_2byte_be_fixed_array = Vec::with_capacity(16);
         for i in 0..16 {
             simple_2byte_be_fixed_array.push(crate::util::read_u16_be(r)?);
         }
@@ -123,7 +123,7 @@ impl Arrays {
         }
 
         // simple_4byte_be_fixed_array: u32_be[16]
-        let mut simple_4byte_be_fixed_array = Vec::with_capacity(16 as usize);
+        let mut simple_4byte_be_fixed_array = Vec::with_capacity(16);
         for i in 0..16 {
             simple_4byte_be_fixed_array.push(crate::util::read_u32_be(r)?);
         }
@@ -136,7 +136,7 @@ impl Arrays {
         }
 
         // simple_8byte_be_fixed_array: u64_be[16]
-        let mut simple_8byte_be_fixed_array = Vec::with_capacity(16 as usize);
+        let mut simple_8byte_be_fixed_array = Vec::with_capacity(16);
         for i in 0..16 {
             simple_8byte_be_fixed_array.push(crate::util::read_u64_be(r)?);
         }
@@ -149,7 +149,7 @@ impl Arrays {
         }
 
         // complex_fixed_array: StructWithAllBuiltInTypes[10]
-        let mut complex_fixed_array = Vec::with_capacity(10 as usize);
+        let mut complex_fixed_array = Vec::with_capacity(10);
         for i in 0..10 {
             complex_fixed_array.push(StructWithAllBuiltInTypes::read(r)?);
         }
@@ -162,7 +162,7 @@ impl Arrays {
         }
 
         // fixed_cstring_array: CString[10]
-        let mut fixed_cstring_array = Vec::with_capacity(10 as usize);
+        let mut fixed_cstring_array = Vec::with_capacity(10);
         for i in 0..10 {
             let s = crate::util::read_c_string_to_vec(r)?;
             fixed_cstring_array[i] = String::from_utf8(s)?;

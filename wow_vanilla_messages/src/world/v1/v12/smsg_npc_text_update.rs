@@ -45,7 +45,7 @@ impl ServerMessage for SMSG_NPC_TEXT_UPDATE {
         // probability: f32
         let probability = crate::util::read_f32_le(r)?;
         // texts: NpcTextUpdate[8]
-        let mut texts = Vec::with_capacity(8 as usize);
+        let mut texts = Vec::with_capacity(8);
         for i in 0..8 {
             texts.push(NpcTextUpdate::read(r)?);
         }
