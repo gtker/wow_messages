@@ -249,7 +249,9 @@ fn print_size_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
 
 fn print_types_for_new_flag(s: &mut Writer, e: &Container, rd: &RustDefiner) {
     for enumerator in rd.complex_flag_enumerators() {
-        if e.complex_enum_enumerator_has_else_if(enumerator.name()).is_some() {
+        if e.complex_enum_enumerator_has_else_if(enumerator.name())
+            .is_some()
+        {
             continue;
         }
 
@@ -340,13 +342,17 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
                 }
 
                 if re.is_elseif() {
-                    s.wln("0 // Not an actual enum sent over the wire");
+                    s.wln("// Not an actual enum sent over the wire");
                 } else {
                     s.wln(format!("{}", re.int_ty().size()));
                 }
 
-                for m in enumerator.members() {
-                    s.w("+ ");
+                for (i, m) in enumerator.members().iter().enumerate() {
+                    if i == 0 && re.is_elseif() {
+                        s.w("");
+                    } else {
+                        s.w("+ ");
+                    }
 
                     print_size_of_ty_rust_view(s, m, "");
                 }

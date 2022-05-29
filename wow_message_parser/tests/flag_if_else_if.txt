@@ -279,20 +279,20 @@ impl FlagIfElseIfUpdateFlagONE_IF {
             Self::ONE_IF {
                 b_if,
             } => {
-                0 // Not an actual enum sent over the wire
-                + 1 // b_if: u8
+                // Not an actual enum sent over the wire
+                1 // b_if: u8
             }
             Self::TWO_ELSEIF {
                 s,
             } => {
-                0 // Not an actual enum sent over the wire
-                + s.size() // s: FlagIfElseIfSimpleFlag
+                // Not an actual enum sent over the wire
+                s.size() // s: FlagIfElseIfSimpleFlag
             }
             Self::FOUR_ELSEIF {
                 elseif2,
             } => {
-                0 // Not an actual enum sent over the wire
-                + 1 // elseif2: u8
+                // Not an actual enum sent over the wire
+                1 // elseif2: u8
             }
         }
     }

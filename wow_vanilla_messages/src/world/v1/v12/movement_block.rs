@@ -531,22 +531,22 @@ impl MovementBlockSplineFlagFINAL_ANGLE {
             Self::FINAL_ANGLE {
                 angle,
             } => {
-                0 // Not an actual enum sent over the wire
-                + 4 // angle: f32
+                // Not an actual enum sent over the wire
+                4 // angle: f32
             }
             Self::FINAL_TARGET {
                 target,
             } => {
-                0 // Not an actual enum sent over the wire
-                + 8 // target: u64
+                // Not an actual enum sent over the wire
+                8 // target: u64
             }
             Self::FINAL_POINT {
                 spline_final_point_x,
                 spline_final_point_y,
                 spline_final_point_z,
             } => {
-                0 // Not an actual enum sent over the wire
-                + 4 // spline_final_point_x: f32
+                // Not an actual enum sent over the wire
+                4 // spline_final_point_x: f32
                 + 4 // spline_final_point_y: f32
                 + 4 // spline_final_point_z: f32
             }
@@ -2069,8 +2069,8 @@ impl MovementBlockUpdateFlagLIVING {
                 turn_rate,
                 walking_speed,
             } => {
-                0 // Not an actual enum sent over the wire
-                + 4 // backwards_running_speed: f32
+                // Not an actual enum sent over the wire
+                4 // backwards_running_speed: f32
                 + 4 // backwards_swimming_speed: f32
                 + 4 // fall_time: f32
                 + flags.size() // flags: MovementBlockMovementFlags
@@ -2090,8 +2090,8 @@ impl MovementBlockUpdateFlagLIVING {
                 position_y,
                 position_z,
             } => {
-                0 // Not an actual enum sent over the wire
-                + 4 // orientation: f32
+                // Not an actual enum sent over the wire
+                4 // orientation: f32
                 + 4 // position_x: f32
                 + 4 // position_y: f32
                 + 4 // position_z: f32
