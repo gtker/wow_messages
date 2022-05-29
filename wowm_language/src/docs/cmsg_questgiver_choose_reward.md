@@ -1,3 +1,5 @@
+# CMSG_QUESTGIVER_CHOOSE_REWARD
+
 ## Client Version 1.12
 
 ### Wowm Representation

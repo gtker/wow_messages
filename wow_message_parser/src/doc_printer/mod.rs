@@ -175,6 +175,9 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
 }
 
 fn common(s: &mut DocWriter, tags: &Tags) {
+    s.wln(format!("# {}", &s.name));
+    s.newline();
+
     print_versions(s, tags.logon_versions(), tags.versions());
 
     print_metadata(s, tags);

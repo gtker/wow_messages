@@ -1,3 +1,5 @@
+# Realm
+
 ## Protocol Version 2, Protocol Version 3
 
 ### Wowm Representation
@@ -25,6 +27,8 @@ struct Realm {
 | - | 1 / - | u8 | number_of_characters_on_realm |  |  |
 | - | ? / - | [RealmCategory](realmcategory.md) | category |  |  |
 | - | 1 / - | u8 | realm_id |  |  |
+
+# Realm
 
 ## Protocol Version 8
 

@@ -1,3 +1,5 @@
+# SMSG_PETITION_SIGN_RESULTS
+
 ## Client Version 1.12
 
 ### Wowm Representation

@@ -1,3 +1,5 @@
+# SMSG_RAID_INSTANCE_MESSAGE
+
 ## Client Version 1.12
 
 ### Wowm Representation

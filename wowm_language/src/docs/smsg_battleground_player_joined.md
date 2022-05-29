@@ -1,3 +1,5 @@
+# SMSG_BATTLEGROUND_PLAYER_JOINED
+
 ## Client Version 1.12
 
 ### Wowm Representation

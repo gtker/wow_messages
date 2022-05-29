@@ -1,3 +1,5 @@
+# SMSG_GAMEOBJECT_PAGETEXT
+
 ## Client Version 1.12
 
 ### Wowm Representation

@@ -1,3 +1,5 @@
+# CMSG_AUTOSTORE_LOOT_ITEM
+
 ## Client Version 1.12
 
 ### Wowm Representation

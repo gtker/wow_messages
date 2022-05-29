@@ -1,3 +1,5 @@
+# SMSG_SET_FORCED_REACTIONS
+
 ## Client Version 1.12
 
 ### Wowm Representation

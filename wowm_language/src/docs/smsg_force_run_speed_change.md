@@ -1,3 +1,5 @@
+# SMSG_FORCE_RUN_SPEED_CHANGE
+
 ## Client Version 1.12
 
 ### Wowm Representation

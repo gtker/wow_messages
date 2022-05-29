@@ -1,3 +1,5 @@
+# SMSG_QUEST_CONFIRM_ACCEPT
+
 ## Client Version 1.12
 
 ### Wowm Representation

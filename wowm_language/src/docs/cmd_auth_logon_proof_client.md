@@ -1,3 +1,5 @@
+# CMD_AUTH_LOGON_PROOF_Client
+
 ## Protocol Version 2
 
 ### Wowm Representation
@@ -76,6 +78,8 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 0, // number_of_telemetry_keys: u8
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 ```
+# CMD_AUTH_LOGON_PROOF_Client
+
 ## Protocol Version 3
 
 ### Wowm Representation
@@ -184,6 +188,8 @@ If security_flag is equal to `PIN`:
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
 ```
+# CMD_AUTH_LOGON_PROOF_Client
+
 ## Protocol Version 8
 
 ### Wowm Representation

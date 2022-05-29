@@ -1,3 +1,5 @@
+# SMSG_SET_FLAT_SPELL_MODIFIER
+
 ## Client Version 1.12
 
 ### Wowm Representation

@@ -1,3 +1,5 @@
+# CMSG_SET_FACTION_INACTIVE
+
 ## Client Version 1.12
 
 ### Wowm Representation

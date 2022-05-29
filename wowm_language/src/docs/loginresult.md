@@ -1,3 +1,5 @@
+# LoginResult
+
 ## Protocol Version 2, Protocol Version 3
 
 ### Wowm Representation
@@ -52,6 +54,8 @@ Used in:
 * [CMD_AUTH_LOGON_PROOF_Server](cmd_auth_logon_proof_server.md)
 * [CMD_AUTH_RECONNECT_CHALLENGE_Server](cmd_auth_reconnect_challenge_server.md)
 * [CMD_AUTH_RECONNECT_PROOF_Server](cmd_auth_reconnect_proof_server.md)
+# LoginResult
+
 ## Protocol Version 8
 
 ### Wowm Representation

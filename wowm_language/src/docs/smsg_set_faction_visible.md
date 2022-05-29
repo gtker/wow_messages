@@ -1,3 +1,5 @@
+# SMSG_SET_FACTION_VISIBLE
+
 ## Client Version 1.12
 
 ### Wowm Representation

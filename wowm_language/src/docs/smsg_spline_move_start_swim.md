@@ -1,3 +1,5 @@
+# SMSG_SPLINE_MOVE_START_SWIM
+
 ## Client Version 1.12
 
 ### Wowm Representation

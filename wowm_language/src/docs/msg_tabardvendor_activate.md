@@ -1,3 +1,5 @@
+# MSG_TABARDVENDOR_ACTIVATE
+
 ## Client Version 1.12
 
 ### Wowm Representation

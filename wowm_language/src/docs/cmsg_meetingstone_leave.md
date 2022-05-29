@@ -1,3 +1,5 @@
+# CMSG_MEETINGSTONE_LEAVE
+
 ## Client Version 1.12
 
 ### Wowm Representation

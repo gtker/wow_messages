@@ -1,3 +1,5 @@
+# SMSG_SPELL_UPDATE_CHAIN_TARGETS
+
 ## Client Version 1.12
 
 ### Wowm Representation

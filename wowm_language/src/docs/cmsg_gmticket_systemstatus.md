@@ -1,3 +1,5 @@
+# CMSG_GMTICKET_SYSTEMSTATUS
+
 ## Client Version 1.12
 
 ### Wowm Representation

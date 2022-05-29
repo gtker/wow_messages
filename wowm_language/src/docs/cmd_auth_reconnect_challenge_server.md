@@ -1,3 +1,5 @@
+# CMD_AUTH_RECONNECT_CHALLENGE_Server
+
 ## Protocol Version 2
 
 ### Wowm Representation
@@ -44,6 +46,8 @@ If result is equal to `SUCCESS`:
 2, // opcode (2)
 3, // result: LoginResult FAIL_BANNED (0x03)
 ```
+# CMD_AUTH_RECONNECT_CHALLENGE_Server
+
 ## Protocol Version 8
 
 ### Wowm Representation

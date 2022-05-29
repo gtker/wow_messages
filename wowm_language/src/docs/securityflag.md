@@ -1,3 +1,5 @@
+# SecurityFlag
+
 ## Protocol Version 3
 
 ### Wowm Representation
@@ -21,6 +23,8 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
 * [CMD_AUTH_LOGON_PROOF_Client](cmd_auth_logon_proof_client.md)
+# SecurityFlag
+
 ## Protocol Version 8
 
 ### Wowm Representation

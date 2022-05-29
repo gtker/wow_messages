@@ -1,3 +1,5 @@
+# CMSG_QUESTGIVER_QUEST_AUTOLAUNCH
+
 ## Client Version 1.12
 
 ### Wowm Representation

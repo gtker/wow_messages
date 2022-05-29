@@ -1,3 +1,5 @@
+# CMSG_SET_ACTIONBAR_TOGGLES
+
 ## Client Version 1.12
 
 ### Wowm Representation

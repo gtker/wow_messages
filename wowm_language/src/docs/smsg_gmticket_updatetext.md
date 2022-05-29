@@ -1,3 +1,5 @@
+# SMSG_GMTICKET_UPDATETEXT
+
 ## Client Version 1.12
 
 ### Wowm Representation

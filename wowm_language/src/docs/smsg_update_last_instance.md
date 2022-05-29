@@ -1,3 +1,5 @@
+# SMSG_UPDATE_LAST_INSTANCE
+
 ## Client Version 1.12
 
 ### Wowm Representation

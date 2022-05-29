@@ -1,3 +1,5 @@
+# SMSG_SPIRIT_HEALER_CONFIRM
+
 ## Client Version 1.12
 
 ### Wowm Representation

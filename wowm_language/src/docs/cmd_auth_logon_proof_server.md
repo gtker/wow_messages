@@ -1,3 +1,5 @@
+# CMD_AUTH_LOGON_PROOF_Server
+
 ## Protocol Version 2, Protocol Version 3
 
 ### Wowm Representation
@@ -40,6 +42,8 @@ If login_result is equal to `SUCCESS`:
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // server_proof: u8[20]
 239, 190, 173, 222, // hardware_survey_id: u32
 ```
+# CMD_AUTH_LOGON_PROOF_Server
+
 ## Protocol Version 8
 
 ### Wowm Representation

@@ -1,3 +1,5 @@
+# SMSG_QUESTUPDATE_COMPLETE
+
 ## Client Version 1.12
 
 ### Wowm Representation

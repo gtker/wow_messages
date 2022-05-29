@@ -1,3 +1,5 @@
+# CMD_AUTH_RECONNECT_PROOF_Server
+
 ## Protocol Version 2
 
 ### Wowm Representation
@@ -35,6 +37,8 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 3, // opcode (3)
 14, // result: LoginResult SUCCESS_SURVEY (0x0E)
 ```
+# CMD_AUTH_RECONNECT_PROOF_Server
+
 ## Protocol Version 8
 
 ### Wowm Representation

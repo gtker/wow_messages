@@ -1,3 +1,5 @@
+# SMSG_INVENTORY_CHANGE_FAILURE
+
 ## Client Version 1.12
 
 ### Wowm Representation

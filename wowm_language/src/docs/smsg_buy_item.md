@@ -1,3 +1,5 @@
+# SMSG_BUY_ITEM
+
 ## Client Version 1.12
 
 ### Wowm Representation

@@ -1,3 +1,5 @@
+# SMSG_AREA_TRIGGER_MESSAGE
+
 ## Client Version 1.12
 
 ### Wowm Representation

@@ -1,3 +1,5 @@
+# SMSG_GAMEOBJECT_CUSTOM_ANIM
+
 ## Client Version 1.12
 
 ### Wowm Representation

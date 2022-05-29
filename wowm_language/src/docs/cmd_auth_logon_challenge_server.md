@@ -1,3 +1,5 @@
+# CMD_AUTH_LOGON_CHALLENGE_Server
+
 ## Protocol Version 2
 
 ### Wowm Representation
@@ -61,6 +63,8 @@ If login_result is equal to `SUCCESS`:
 242, 11, 207, 116, 214, 74, 119, 167, 211, 61, 243, 48, 144, 135, // salt: u8[32]
 186, 163, 30, 153, 160, 11, 33, 87, 252, 55, 63, 179, 105, 205, 210, 241, // crc_salt: u8[16]
 ```
+# CMD_AUTH_LOGON_CHALLENGE_Server
+
 ## Protocol Version 3
 
 ### Wowm Representation
@@ -156,6 +160,8 @@ If security_flag is equal to `PIN`:
 186, 163, 30, 153, 160, 11, 33, 87, 252, 55, 63, 179, 105, 205, 210, 241, // crc_salt: u8[16]
 0, // security_flag: SecurityFlag NONE (0x0)
 ```
+# CMD_AUTH_LOGON_CHALLENGE_Server
+
 ## Protocol Version 8
 
 ### Wowm Representation

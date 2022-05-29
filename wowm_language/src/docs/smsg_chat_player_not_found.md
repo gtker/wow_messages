@@ -1,3 +1,5 @@
+# SMSG_CHAT_PLAYER_NOT_FOUND
+
 ## Client Version 1.12
 
 ### Wowm Representation
