@@ -5,6 +5,7 @@ use crate::parser::types::IntegerType;
 use crate::parser::utility;
 use crate::rust_printer::DefinerType;
 use crate::ENUM_SELF_VALUE_FIELD;
+use std::collections::HashMap;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct DefinerField {
@@ -199,5 +200,24 @@ impl Definer {
         }
 
         v
+    }
+
+    pub fn self_check(&self) {
+        let mut h = HashMap::new();
+
+        for field in &self.fields {
+            if let Some(other) = h.get(&field.value.int) {
+                panic!(
+                    "Definer '{}' already has field with value '{}' ('{}'), '{}' must not overlap. {:?}",
+                    self.name(),
+                    field.value().int(),
+                    other,
+                    field.name(),
+                    self.file_info()
+                )
+            }
+
+            h.insert(field.value.int, &field.name);
+        }
     }
 }

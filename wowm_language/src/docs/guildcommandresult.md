@@ -16,8 +16,7 @@ enum GuildCommandResult : u8 {
     ALREADY_INVITED_TO_GUILD_S = 0x05;
     GUILD_NAME_INVALID = 0x06;
     GUILD_NAME_EXISTS_S = 0x07;
-    GUILD_LEADER_LEAVE = 0x08;
-    GUILD_PERMISSIONS = 0x08;
+    GUILD_PERMISSIONS_OR_LEADER = 0x08;
     GUILD_PLAYER_NOT_IN_GUILD = 0x09;
     GUILD_PLAYER_NOT_IN_GUILD_S = 0x0A;
     GUILD_PLAYER_NOT_FOUND_S = 0x0B;
@@ -39,8 +38,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `ALREADY_INVITED_TO_GUILD_S` | 5 (0x05) |  |  |
 | `GUILD_NAME_INVALID` | 6 (0x06) |  |  |
 | `GUILD_NAME_EXISTS_S` | 7 (0x07) |  |  |
-| `GUILD_LEADER_LEAVE` | 8 (0x08) |  |  |
-| `GUILD_PERMISSIONS` | 8 (0x08) |  |  |
+| `GUILD_PERMISSIONS_OR_LEADER` | 8 (0x08) |  | mangos has 0x08 as both GUILD_LEADER_LEAVE and GUILD_PERMISSIONS.<br/>Supposedly the [GuildCommand] QUIT used GUILD_LEADER_LEAVE and others used GUILD_PERMISSIONS |
 | `GUILD_PLAYER_NOT_IN_GUILD` | 9 (0x09) |  |  |
 | `GUILD_PLAYER_NOT_IN_GUILD_S` | 10 (0x0A) |  |  |
 | `GUILD_PLAYER_NOT_FOUND_S` | 11 (0x0B) |  |  |

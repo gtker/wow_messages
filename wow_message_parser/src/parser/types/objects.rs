@@ -332,6 +332,10 @@ impl Objects {
             s.verify(&c);
         }
 
+        for e in self.all_definers() {
+            e.self_check();
+        }
+
         let mut tests = self.tests.clone();
 
         for s in self.all_containers_mut() {
