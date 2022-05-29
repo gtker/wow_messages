@@ -82,7 +82,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
-    use crate::{Guid, UpdateMask};
+    use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
     use crate::{ClientMessage, ServerMessage};
 
     #[cfg(feature = "sync")]
@@ -104,7 +104,12 @@ mod test {
                 Object {
                     update_type: ObjectUpdateType::CREATE_OBJECT2 {
                         guid3: Guid::new(0x4),
-                        mask2: UpdateMask::new(),
+                        mask2: UpdateMask::Player(UpdatePlayer::new()
+                            .set_object_GUID(Guid::new(4))
+                            .set_object_TYPE(0x19)
+                            .set_unit_HEALTH(100)
+                            .set_unit_BYTES_0(0x01010101)
+                        ),
                         movement2: MovementBlock {
                             update_flag: MovementBlockUpdateFlag::empty()
                                 .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
@@ -173,7 +178,12 @@ mod test {
                 Object {
                     update_type: ObjectUpdateType::CREATE_OBJECT2 {
                         guid3: Guid::new(0x4),
-                        mask2: UpdateMask::new(),
+                        mask2: UpdateMask::Player(UpdatePlayer::new()
+                            .set_object_GUID(Guid::new(4))
+                            .set_object_TYPE(0x19)
+                            .set_unit_HEALTH(100)
+                            .set_unit_BYTES_0(0x01010101)
+                        ),
                         movement2: MovementBlock {
                             update_flag: MovementBlockUpdateFlag::empty()
                                 .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {
@@ -242,7 +252,12 @@ mod test {
                 Object {
                     update_type: ObjectUpdateType::CREATE_OBJECT2 {
                         guid3: Guid::new(0x4),
-                        mask2: UpdateMask::new(),
+                        mask2: UpdateMask::Player(UpdatePlayer::new()
+                            .set_object_GUID(Guid::new(4))
+                            .set_object_TYPE(0x19)
+                            .set_unit_HEALTH(100)
+                            .set_unit_BYTES_0(0x01010101)
+                        ),
                         movement2: MovementBlock {
                             update_flag: MovementBlockUpdateFlag::empty()
                                 .set_LIVING(MovementBlockUpdateFlagLIVING::LIVING {

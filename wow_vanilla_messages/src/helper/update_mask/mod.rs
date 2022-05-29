@@ -12,17 +12,6 @@ use std::io::Write;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 
-/*
-   Object
-        Item
-            Container
-        Unit
-            Player
-        GameObject
-        DynamicObject
-        Corpse
-*/
-
 #[derive(Debug, Clone, PartialEq)]
 pub enum UpdateValue {
     Guid(u64),
@@ -51,6 +40,10 @@ macro_rules! update_item {
                     header: vec![],
                     values: Default::default(),
                 }
+            }
+
+            fn from_inners(header: Vec<u32>, values: BTreeMap<u16, UpdateValue>) -> Self {
+                Self { header, values }
             }
 
             pub(crate) fn header_set(&mut self, bit: u16) {
@@ -134,18 +127,91 @@ impl Default for UpdateMask {
 
 impl UpdateMask {
     pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
+        let amount_of_blocks = crate::util::read_u8_le(r)?;
+
+        let mut header = Vec::new();
+        for _ in 0..amount_of_blocks {
+            header.push(crate::util::read_u32_le(r)?);
+        }
+
+        let mut values = BTreeMap::new();
+        let mut index = 0;
+        for block in &header {
+            for bit in 0..32 {
+                if (block & 1 << bit) != 0 {
+                    values.insert(
+                        index * 32 + bit,
+                        UpdateValue::U32(crate::util::read_u32_le(r)?),
+                    );
+                }
+            }
+
+            index += 1;
+        }
+
+        let ty = match values.get(&2) {
+            None => {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    "Missing object TYPE",
+                ))
+            }
+            Some(ty) => match ty {
+                UpdateValue::U32(i) => *i,
+                _ => unreachable!(),
+            },
+        };
+
+        const OBJECT: u32 = 0x0001;
+        const ITEM: u32 = 0x0002;
+        const CONTAINER: u32 = 0x0004;
+        const UNIT: u32 = 0x0008;
+        const PLAYER: u32 = 0x0010;
+        const GAMEOBJECT: u32 = 0x0020;
+        const DYNAMICOBJECT: u32 = 0x0040;
+        const CORPSE: u32 = 0x0080;
+
+        Ok(if (ty & CONTAINER) != 0 {
+            Self::Container(UpdateContainer::from_inners(header, values))
+        } else if (ty & ITEM) != 0 {
+            Self::Item(UpdateItem::from_inners(header, values))
+        } else if (ty & PLAYER) != 0 {
+            Self::Player(UpdatePlayer::from_inners(header, values))
+        } else if (ty & UNIT) != 0 {
+            Self::Unit(UpdateUnit::from_inners(header, values))
+        } else if (ty & GAMEOBJECT) != 0 {
+            Self::GameObject(UpdateGameObject::from_inners(header, values))
+        } else if (ty & DYNAMICOBJECT) != 0 {
+            Self::DynamicObject(UpdateDynamicObject::from_inners(header, values))
+        } else if (ty & CORPSE) != 0 {
+            Self::Corpse(UpdateCorpse::from_inners(header, values))
+        } else {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::Other,
+                "Object type not valid",
+            ));
+        })
+    }
+
+    #[cfg(feature = "tokio")]
+    pub async fn tokio_read(r: &mut impl tokio::io::AsyncReadExt) -> Result<Self, io::Error> {
         todo!()
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
+    pub async fn astd_read(r: &mut impl async_std::io::ReadExt) -> Result<Self, io::Error> {
         todo!()
     }
-
-    #[cfg(feature = "tokio")]
-    pub async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
-        todo!()
-    }
+    /*
+       Object
+            Item
+                Container
+            Unit
+                Player
+            GameObject
+            DynamicObject
+            Corpse
+    */
 
     pub(crate) fn as_bytes(&self) -> Vec<u8> {
         match self {

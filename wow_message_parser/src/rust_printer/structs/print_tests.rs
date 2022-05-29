@@ -2,10 +2,11 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ArraySize;
+use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::rust_view::{RustEnumerator, RustMember, RustType};
 use crate::rust_printer::{
-    ImplType, Writer, CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+    ImplType, UpdateMaskType, Writer, CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
     LOGIN_SERVER_MESSAGE_ENUM_NAME, SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
     WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
@@ -39,7 +40,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
                 panic!()
             }
             ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
-                s.wln("use crate::{Guid, UpdateMask};");
+                s.wln("use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};");
                 s.wln(format!(
                     "use crate::{{{}, {}}};",
                     CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
@@ -394,9 +395,71 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
 
             s.closing_curly_with(",");
         }
-        TestValue::UpdateMask(v) => {
-            // TODO
-            s.wln_no_indent("UpdateMask::new(),");
+        TestValue::UpdateMask(fields) => {
+            let ty = fields
+                .iter()
+                .find(|a| a.ty() == UpdateMaskType::Object && a.name() == "TYPE")
+                .unwrap();
+            let ty = parse_value(ty.value()).unwrap();
+
+            const ITEM: u64 = 0x0002;
+            const CONTAINER: u64 = 0x0004;
+            const UNIT: u64 = 0x0008;
+            const PLAYER: u64 = 0x0010;
+            const GAMEOBJECT: u64 = 0x0020;
+            const DYNAMICOBJECT: u64 = 0x0040;
+            const CORPSE: u64 = 0x0080;
+            if (ty & CONTAINER) != 0 {
+                s.wln_no_indent("UpdateMask::Container(UpdateContainer::new()");
+            } else if (ty & ITEM) != 0 {
+                s.wln_no_indent("UpdateMask::Item(UpdateItem::new()");
+            } else if (ty & PLAYER) != 0 {
+                s.wln_no_indent("UpdateMask::Player(UpdatePlayer::new()");
+            } else if (ty & UNIT) != 0 {
+                s.wln_no_indent("UpdateMask::Unit(UpdateUnit::new()");
+            } else if (ty & GAMEOBJECT) != 0 {
+                s.wln_no_indent("UpdateMask::GameObject(UpdateGameObject::new()");
+            } else if (ty & DYNAMICOBJECT) != 0 {
+                s.wln_no_indent("UpdateMask::DynamicObject(UpdateDynamicObject::new()");
+            } else if (ty & CORPSE) != 0 {
+                s.wln_no_indent("UpdateMask::Corpse(UpdateCorpse::new()");
+            } else {
+                unreachable!()
+            }
+            s.inc_indent();
+
+            for f in fields {
+                let value = f.value();
+                let ty = match f.ty() {
+                    UpdateMaskType::Object => "object",
+                    UpdateMaskType::Item => "item",
+                    UpdateMaskType::Unit => "unit",
+                    UpdateMaskType::Player => "player",
+                    UpdateMaskType::Container => "container",
+                    UpdateMaskType::GameObject => "gameobject",
+                    UpdateMaskType::DynamicObject => "dynamicobject",
+                    UpdateMaskType::Corpse => "corpse",
+                };
+                let field = f.name();
+                if field == "GUID" {
+                    s.wln(format!(
+                        ".set_{ty}_{field}(Guid::new({value}))",
+                        value = value,
+                        ty = ty,
+                        field = field
+                    ));
+                    continue;
+                }
+                s.wln(format!(
+                    ".set_{ty}_{field}({value})",
+                    value = value,
+                    ty = ty,
+                    field = field
+                ))
+            }
+
+            s.dec_indent();
+            s.wln("),")
         }
     }
 }

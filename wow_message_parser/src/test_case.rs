@@ -257,6 +257,18 @@ pub struct TestUpdateMaskValue {
     value: String,
 }
 
+impl TestUpdateMaskValue {
+    pub fn ty(&self) -> UpdateMaskType {
+        self.ty
+    }
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+    pub fn value(&self) -> &str {
+        &self.value
+    }
+}
+
 #[derive(Debug, Clone)]
 pub enum TestValue {
     Number(VerifiedContainerValue),

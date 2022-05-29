@@ -72,7 +72,10 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
         UfType::TwoShort => ", v: u32",
     };
     s.bodyn(
-        format!("pub fn set_{}_{}(&mut self{})", m.ty, m.name, parameter),
+        format!(
+            "pub fn set_{}_{}(&mut self{}) -> Self",
+            m.ty, m.name, parameter
+        ),
         |s| {
             s.wln(format!("self.header_set({});", m.offset));
             match m.uf {
@@ -91,6 +94,7 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
             };
 
             s.wln(format!("self.values.insert({}, {});", m.offset, value));
+            s.wln("self.clone()");
         },
     );
 }

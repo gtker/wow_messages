@@ -223,7 +223,7 @@ test SMSG_UPDATE_OBJECT {
                 OBJECT_GUID = 4;
                 OBJECT_TYPE = 0x19;
                 UNIT_HEALTH = 100;
-                UNIT_BYTES = 0x01010101;
+                UNIT_BYTES_0 = 0x01010101;
             };
         }
     ];
