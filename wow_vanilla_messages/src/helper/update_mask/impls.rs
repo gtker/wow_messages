@@ -6,7 +6,7 @@ impl UpdateItem {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
-        self.values.insert(0 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(1, (v.guid() >> 32) as u32);
         self
     }
 
@@ -26,7 +26,7 @@ impl UpdateItem {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
-        self.values.insert(6 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(7, (v.guid() >> 32) as u32);
         self
     }
 
@@ -34,7 +34,7 @@ impl UpdateItem {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
-        self.values.insert(8 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(9, (v.guid() >> 32) as u32);
         self
     }
 
@@ -42,7 +42,7 @@ impl UpdateItem {
         self.header_set(10);
         self.header_set(11);
         self.values.insert(10, v.guid() as u32);
-        self.values.insert(10 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(11, (v.guid() >> 32) as u32);
         self
     }
 
@@ -50,7 +50,7 @@ impl UpdateItem {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
-        self.values.insert(12 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(13, (v.guid() >> 32) as u32);
         self
     }
 
@@ -121,7 +121,7 @@ impl UpdateContainer {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
-        self.values.insert(0 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(1, (v.guid() >> 32) as u32);
         self
     }
 
@@ -141,7 +141,7 @@ impl UpdateContainer {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
-        self.values.insert(6 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(7, (v.guid() >> 32) as u32);
         self
     }
 
@@ -149,7 +149,7 @@ impl UpdateContainer {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
-        self.values.insert(8 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(9, (v.guid() >> 32) as u32);
         self
     }
 
@@ -157,7 +157,7 @@ impl UpdateContainer {
         self.header_set(10);
         self.header_set(11);
         self.values.insert(10, v.guid() as u32);
-        self.values.insert(10 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(11, (v.guid() >> 32) as u32);
         self
     }
 
@@ -165,7 +165,7 @@ impl UpdateContainer {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
-        self.values.insert(12 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(13, (v.guid() >> 32) as u32);
         self
     }
 
@@ -239,7 +239,7 @@ impl UpdateContainer {
         self.header_set(50);
         self.header_set(51);
         self.values.insert(50, v.guid() as u32);
-        self.values.insert(50 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(51, (v.guid() >> 32) as u32);
         self
     }
 
@@ -250,7 +250,7 @@ impl UpdateUnit {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
-        self.values.insert(0 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(1, (v.guid() >> 32) as u32);
         self
     }
 
@@ -270,7 +270,7 @@ impl UpdateUnit {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
-        self.values.insert(6 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(7, (v.guid() >> 32) as u32);
         self
     }
 
@@ -278,7 +278,7 @@ impl UpdateUnit {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
-        self.values.insert(8 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(9, (v.guid() >> 32) as u32);
         self
     }
 
@@ -286,7 +286,7 @@ impl UpdateUnit {
         self.header_set(10);
         self.header_set(11);
         self.values.insert(10, v.guid() as u32);
-        self.values.insert(10 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(11, (v.guid() >> 32) as u32);
         self
     }
 
@@ -294,7 +294,7 @@ impl UpdateUnit {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
-        self.values.insert(12 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(13, (v.guid() >> 32) as u32);
         self
     }
 
@@ -302,7 +302,7 @@ impl UpdateUnit {
         self.header_set(14);
         self.header_set(15);
         self.values.insert(14, v.guid() as u32);
-        self.values.insert(14 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(15, (v.guid() >> 32) as u32);
         self
     }
 
@@ -310,7 +310,7 @@ impl UpdateUnit {
         self.header_set(16);
         self.header_set(17);
         self.values.insert(16, v.guid() as u32);
-        self.values.insert(16 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(17, (v.guid() >> 32) as u32);
         self
     }
 
@@ -318,7 +318,7 @@ impl UpdateUnit {
         self.header_set(18);
         self.header_set(19);
         self.values.insert(18, v.guid() as u32);
-        self.values.insert(18 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(19, (v.guid() >> 32) as u32);
         self
     }
 
@@ -326,7 +326,7 @@ impl UpdateUnit {
         self.header_set(20);
         self.header_set(21);
         self.values.insert(20, v.guid() as u32);
-        self.values.insert(20 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(21, (v.guid() >> 32) as u32);
         self
     }
 
@@ -727,7 +727,7 @@ impl UpdatePlayer {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
-        self.values.insert(0 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(1, (v.guid() >> 32) as u32);
         self
     }
 
@@ -747,7 +747,7 @@ impl UpdatePlayer {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
-        self.values.insert(6 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(7, (v.guid() >> 32) as u32);
         self
     }
 
@@ -755,7 +755,7 @@ impl UpdatePlayer {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
-        self.values.insert(8 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(9, (v.guid() >> 32) as u32);
         self
     }
 
@@ -763,7 +763,7 @@ impl UpdatePlayer {
         self.header_set(10);
         self.header_set(11);
         self.values.insert(10, v.guid() as u32);
-        self.values.insert(10 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(11, (v.guid() >> 32) as u32);
         self
     }
 
@@ -771,7 +771,7 @@ impl UpdatePlayer {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
-        self.values.insert(12 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(13, (v.guid() >> 32) as u32);
         self
     }
 
@@ -779,7 +779,7 @@ impl UpdatePlayer {
         self.header_set(14);
         self.header_set(15);
         self.values.insert(14, v.guid() as u32);
-        self.values.insert(14 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(15, (v.guid() >> 32) as u32);
         self
     }
 
@@ -787,7 +787,7 @@ impl UpdatePlayer {
         self.header_set(16);
         self.header_set(17);
         self.values.insert(16, v.guid() as u32);
-        self.values.insert(16 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(17, (v.guid() >> 32) as u32);
         self
     }
 
@@ -795,7 +795,7 @@ impl UpdatePlayer {
         self.header_set(18);
         self.header_set(19);
         self.values.insert(18, v.guid() as u32);
-        self.values.insert(18 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(19, (v.guid() >> 32) as u32);
         self
     }
 
@@ -803,7 +803,7 @@ impl UpdatePlayer {
         self.header_set(20);
         self.header_set(21);
         self.values.insert(20, v.guid() as u32);
-        self.values.insert(20 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(21, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1201,7 +1201,7 @@ impl UpdatePlayer {
         self.header_set(188);
         self.header_set(189);
         self.values.insert(188, v.guid() as u32);
-        self.values.insert(188 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(189, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1497,7 +1497,7 @@ impl UpdatePlayer {
         self.header_set(258);
         self.header_set(259);
         self.values.insert(258, v.guid() as u32);
-        self.values.insert(258 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(259, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1517,7 +1517,7 @@ impl UpdatePlayer {
         self.header_set(270);
         self.header_set(271);
         self.values.insert(270, v.guid() as u32);
-        self.values.insert(270 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(271, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1537,7 +1537,7 @@ impl UpdatePlayer {
         self.header_set(282);
         self.header_set(283);
         self.values.insert(282, v.guid() as u32);
-        self.values.insert(282 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(283, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1557,7 +1557,7 @@ impl UpdatePlayer {
         self.header_set(294);
         self.header_set(295);
         self.values.insert(294, v.guid() as u32);
-        self.values.insert(294 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(295, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1577,7 +1577,7 @@ impl UpdatePlayer {
         self.header_set(306);
         self.header_set(307);
         self.values.insert(306, v.guid() as u32);
-        self.values.insert(306 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(307, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1597,7 +1597,7 @@ impl UpdatePlayer {
         self.header_set(318);
         self.header_set(319);
         self.values.insert(318, v.guid() as u32);
-        self.values.insert(318 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(319, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1617,7 +1617,7 @@ impl UpdatePlayer {
         self.header_set(330);
         self.header_set(331);
         self.values.insert(330, v.guid() as u32);
-        self.values.insert(330 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(331, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1637,7 +1637,7 @@ impl UpdatePlayer {
         self.header_set(342);
         self.header_set(343);
         self.values.insert(342, v.guid() as u32);
-        self.values.insert(342 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(343, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1657,7 +1657,7 @@ impl UpdatePlayer {
         self.header_set(354);
         self.header_set(355);
         self.values.insert(354, v.guid() as u32);
-        self.values.insert(354 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(355, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1677,7 +1677,7 @@ impl UpdatePlayer {
         self.header_set(366);
         self.header_set(367);
         self.values.insert(366, v.guid() as u32);
-        self.values.insert(366 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(367, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1697,7 +1697,7 @@ impl UpdatePlayer {
         self.header_set(378);
         self.header_set(379);
         self.values.insert(378, v.guid() as u32);
-        self.values.insert(378 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(379, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1717,7 +1717,7 @@ impl UpdatePlayer {
         self.header_set(390);
         self.header_set(391);
         self.values.insert(390, v.guid() as u32);
-        self.values.insert(390 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(391, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1737,7 +1737,7 @@ impl UpdatePlayer {
         self.header_set(402);
         self.header_set(403);
         self.values.insert(402, v.guid() as u32);
-        self.values.insert(402 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(403, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1757,7 +1757,7 @@ impl UpdatePlayer {
         self.header_set(414);
         self.header_set(415);
         self.values.insert(414, v.guid() as u32);
-        self.values.insert(414 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(415, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1777,7 +1777,7 @@ impl UpdatePlayer {
         self.header_set(426);
         self.header_set(427);
         self.values.insert(426, v.guid() as u32);
-        self.values.insert(426 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(427, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1797,7 +1797,7 @@ impl UpdatePlayer {
         self.header_set(438);
         self.header_set(439);
         self.values.insert(438, v.guid() as u32);
-        self.values.insert(438 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(439, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1817,7 +1817,7 @@ impl UpdatePlayer {
         self.header_set(450);
         self.header_set(451);
         self.values.insert(450, v.guid() as u32);
-        self.values.insert(450 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(451, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1837,7 +1837,7 @@ impl UpdatePlayer {
         self.header_set(462);
         self.header_set(463);
         self.values.insert(462, v.guid() as u32);
-        self.values.insert(462 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(463, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1857,7 +1857,7 @@ impl UpdatePlayer {
         self.header_set(474);
         self.header_set(475);
         self.values.insert(474, v.guid() as u32);
-        self.values.insert(474 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(475, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1877,7 +1877,7 @@ impl UpdatePlayer {
         self.header_set(486);
         self.header_set(487);
         self.values.insert(486, v.guid() as u32);
-        self.values.insert(486 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(487, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1885,7 +1885,7 @@ impl UpdatePlayer {
         self.header_set(532);
         self.header_set(533);
         self.values.insert(532, v.guid() as u32);
-        self.values.insert(532 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(533, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1893,7 +1893,7 @@ impl UpdatePlayer {
         self.header_set(564);
         self.header_set(565);
         self.values.insert(564, v.guid() as u32);
-        self.values.insert(564 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(565, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1901,7 +1901,7 @@ impl UpdatePlayer {
         self.header_set(612);
         self.header_set(613);
         self.values.insert(612, v.guid() as u32);
-        self.values.insert(612 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(613, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1909,7 +1909,7 @@ impl UpdatePlayer {
         self.header_set(624);
         self.header_set(625);
         self.values.insert(624, v.guid() as u32);
-        self.values.insert(624 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(625, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1917,7 +1917,7 @@ impl UpdatePlayer {
         self.header_set(648);
         self.header_set(649);
         self.values.insert(648, v.guid() as u32);
-        self.values.insert(648 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(649, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1925,7 +1925,7 @@ impl UpdatePlayer {
         self.header_set(712);
         self.header_set(713);
         self.values.insert(712, v.guid() as u32);
-        self.values.insert(712 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(713, (v.guid() >> 32) as u32);
         self
     }
 
@@ -1933,7 +1933,7 @@ impl UpdatePlayer {
         self.header_set(714);
         self.header_set(715);
         self.values.insert(714, v.guid() as u32);
-        self.values.insert(714 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(715, (v.guid() >> 32) as u32);
         self
     }
 
@@ -2238,7 +2238,7 @@ impl UpdateGameObject {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
-        self.values.insert(0 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(1, (v.guid() >> 32) as u32);
         self
     }
 
@@ -2258,7 +2258,7 @@ impl UpdateGameObject {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
-        self.values.insert(6 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(7, (v.guid() >> 32) as u32);
         self
     }
 
@@ -2353,7 +2353,7 @@ impl UpdateDynamicObject {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
-        self.values.insert(0 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(1, (v.guid() >> 32) as u32);
         self
     }
 
@@ -2373,7 +2373,7 @@ impl UpdateDynamicObject {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
-        self.values.insert(6 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(7, (v.guid() >> 32) as u32);
         self
     }
 
@@ -2426,7 +2426,7 @@ impl UpdateCorpse {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
-        self.values.insert(0 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(1, (v.guid() >> 32) as u32);
         self
     }
 
@@ -2446,7 +2446,7 @@ impl UpdateCorpse {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
-        self.values.insert(6 + 1, (v.guid() >> 32) as u32);
+        self.values.insert(7, (v.guid() >> 32) as u32);
         self
     }
 

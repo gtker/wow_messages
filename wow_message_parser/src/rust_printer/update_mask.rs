@@ -86,8 +86,8 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
                         m.offset
                     ));
                     s.wln(format!(
-                        "self.values.insert({} + 1, (v.guid() >> 32) as u32);",
-                        m.offset
+                        "self.values.insert({}, (v.guid() >> 32) as u32);",
+                        m.offset + 1
                     ));
                 }
                 _ => {
