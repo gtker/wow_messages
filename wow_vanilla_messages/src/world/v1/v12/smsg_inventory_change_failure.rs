@@ -4165,8 +4165,7 @@ impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
 
 impl SMSG_INVENTORY_CHANGE_FAILURE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.result.size() // result: SMSG_INVENTORY_CHANGE_FAILUREInventoryResult
+        self.result.size() // result: SMSG_INVENTORY_CHANGE_FAILUREInventoryResult
     }
 }
 

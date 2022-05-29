@@ -249,8 +249,7 @@ impl Mail {
 
 impl Mail {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // message_id: u32
+        4 // message_id: u32
         + self.message_type.size() // message_type: MailMailType
         + self.subject.len() + 1 // subject: CString
         + 4 // item_text_id: u32

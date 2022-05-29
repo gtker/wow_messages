@@ -65,8 +65,7 @@ impl ClientMessage for CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK {
 
 impl CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + 4 // counter: u32
         + self.movement_info.size() // movement_info: MovementInfo
         + 4 // new_speed: f32

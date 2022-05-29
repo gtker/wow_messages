@@ -78,12 +78,10 @@ impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
 
 impl CMSG_GOSSIP_SELECT_OPTION {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + 4 // gossip_list_id: u32
         + if let Some(unknown) = &self.unknown {
-            0
-            + unknown.code.len() + 1 // code: CString
+            unknown.code.len() + 1 // code: CString
         } else {
             0
         }

@@ -79,8 +79,7 @@ impl ServerMessage for SMSG_MONSTER_MOVE {
 
 impl SMSG_MONSTER_MOVE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.guid.size() // guid: Guid
+        self.guid.size() // guid: Guid
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32

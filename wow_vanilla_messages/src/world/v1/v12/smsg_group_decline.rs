@@ -43,8 +43,7 @@ impl ServerMessage for SMSG_GROUP_DECLINE {
 
 impl SMSG_GROUP_DECLINE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.name.len() + 1 // name: CString
+        self.name.len() + 1 // name: CString
     }
 }
 

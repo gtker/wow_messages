@@ -273,8 +273,7 @@ impl SpellCastTargets {
 
 impl SpellCastTargets {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.target_flags.size() // target_flags: SpellCastTargetsSpellCastTargetFlags
+        self.target_flags.size() // target_flags: SpellCastTargetsSpellCastTargetFlags
     }
 }
 

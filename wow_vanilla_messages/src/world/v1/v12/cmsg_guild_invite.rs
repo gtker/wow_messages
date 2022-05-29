@@ -43,8 +43,7 @@ impl ClientMessage for CMSG_GUILD_INVITE {
 
 impl CMSG_GUILD_INVITE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.invited_player.len() + 1 // invited_player: CString
+        self.invited_player.len() + 1 // invited_player: CString
     }
 }
 

@@ -206,8 +206,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
 
 impl CMD_REALM_LIST_Server {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 2 // size: u16
+        2 // size: u16
         + 4 // header_padding: u32
         + 2 // number_of_realms: u16
         + self.realms.iter().fold(0, |acc, x| acc + x.size()) // realms: Realm[number_of_realms]

@@ -185,8 +185,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
 
 impl MSG_RAID_TARGET_UPDATE_Client {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.index.size() // index: MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex
+        self.index.size() // index: MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex
     }
 }
 

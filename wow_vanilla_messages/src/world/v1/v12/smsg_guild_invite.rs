@@ -54,8 +54,7 @@ impl ServerMessage for SMSG_GUILD_INVITE {
 
 impl SMSG_GUILD_INVITE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.player_name.len() + 1 // player_name: CString
+        self.player_name.len() + 1 // player_name: CString
         + self.guild_name.len() + 1 // guild_name: CString
     }
 }

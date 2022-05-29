@@ -162,8 +162,7 @@ impl ServerMessage for SMSG_QUESTGIVER_OFFER_REWARD {
 
 impl SMSG_QUESTGIVER_OFFER_REWARD {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // npc: Guid
+        8 // npc: Guid
         + 4 // quest_id: u32
         + self.title.len() + 1 // title: CString
         + self.offer_reward_text.len() + 1 // offer_reward_text: CString

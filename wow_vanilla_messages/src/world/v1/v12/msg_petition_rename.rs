@@ -88,8 +88,7 @@ impl ServerMessage for MSG_PETITION_RENAME {
 
 impl MSG_PETITION_RENAME {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // petition_guid: Guid
+        8 // petition_guid: Guid
         + self.new_name.len() + 1 // new_name: CString
     }
 }

@@ -66,8 +66,7 @@ impl ClientMessage for CMSG_MOVE_HOVER_ACK {
 
 impl CMSG_MOVE_HOVER_ACK {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + 4 // counter: u32
         + self.movement_info.size() // movement_info: MovementInfo
         + 4 // is_applied: u32

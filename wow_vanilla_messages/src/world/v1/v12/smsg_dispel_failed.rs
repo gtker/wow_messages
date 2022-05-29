@@ -67,8 +67,7 @@ impl ServerMessage for SMSG_DISPEL_FAILED {
 
 impl SMSG_DISPEL_FAILED {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // caster_guid: Guid
+        8 // caster_guid: Guid
         + 8 // target_guid: Guid
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[-]
     }

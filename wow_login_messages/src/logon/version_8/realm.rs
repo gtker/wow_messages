@@ -253,8 +253,7 @@ impl Realm {
 
 impl Realm {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // realm_type: RealmType
+        1 // realm_type: RealmType
         + 1 // locked: u8
         + self.flag.size() // flag: RealmRealmFlag
         + self.name.len() + 1 // name: CString

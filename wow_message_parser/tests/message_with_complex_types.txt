@@ -99,8 +99,7 @@ impl ServerMessage for MessageWithComplexTypes {
 
 impl MessageWithComplexTypes {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // simple_enum: SimpleEnum
+        1 // simple_enum: SimpleEnum
         + 1 // simple_flag: SimpleFlag
         + self.simple_struct.size() // simple_struct: StructWithAllBuiltInTypes
     }

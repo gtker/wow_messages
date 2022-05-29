@@ -67,8 +67,7 @@ impl ServerMessage for MSG_MOVE_START_PITCH_UP {
 
 impl MSG_MOVE_START_PITCH_UP {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.info.size() // info: MovementInfo
+        self.info.size() // info: MovementInfo
     }
 }
 

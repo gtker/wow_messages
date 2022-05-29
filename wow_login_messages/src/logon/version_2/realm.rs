@@ -179,8 +179,7 @@ impl Realm {
 
 impl Realm {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // realm_type: RealmType
+        4 // realm_type: RealmType
         + 1 // flag: RealmFlag
         + self.name.len() + 1 // name: CString
         + self.address.len() + 1 // address: CString

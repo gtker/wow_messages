@@ -52,8 +52,7 @@ impl ServerMessage for SMSG_RAID_INSTANCE_INFO {
 
 impl SMSG_RAID_INSTANCE_INFO {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // amount_of_raid_infos: u32
+        4 // amount_of_raid_infos: u32
         + self.raid_infos.len() * 12 // raid_infos: RaidInfo[amount_of_raid_infos]
     }
 }

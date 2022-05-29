@@ -76,8 +76,7 @@ impl StabledPet {
 
 impl StabledPet {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // pet_number: u32
+        4 // pet_number: u32
         + 4 // entry: u32
         + 4 // level: u32
         + self.name.len() + 1 // name: CString

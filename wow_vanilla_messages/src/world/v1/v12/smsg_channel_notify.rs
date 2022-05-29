@@ -52,8 +52,7 @@ impl ServerMessage for SMSG_CHANNEL_NOTIFY {
 
 impl SMSG_CHANNEL_NOTIFY {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // notify_type: ChatNotify
+        1 // notify_type: ChatNotify
         + self.channel_name.len() + 1 // channel_name: CString
     }
 }

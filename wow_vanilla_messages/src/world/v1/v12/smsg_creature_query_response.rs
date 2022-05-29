@@ -171,11 +171,9 @@ impl ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {
 
 impl SMSG_CREATURE_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // creature_entry: u32
+        4 // creature_entry: u32
         + if let Some(found) = &self.found {
-            0
-            + found.name1.len() + 1 // name1: CString
+            found.name1.len() + 1 // name1: CString
             + found.name2.len() + 1 // name2: CString
             + found.name3.len() + 1 // name3: CString
             + found.name4.len() + 1 // name4: CString

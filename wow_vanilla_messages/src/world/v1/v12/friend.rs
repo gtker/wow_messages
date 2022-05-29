@@ -177,8 +177,7 @@ impl Friend {
 
 impl Friend {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + self.status.size() // status: FriendFriendStatus
     }
 }

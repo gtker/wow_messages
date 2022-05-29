@@ -68,8 +68,7 @@ impl ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
 impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // caster: Guid
+        8 // caster: Guid
         + 4 // spell: u32
         + 4 // amount_of_targets: u32
         + self.targets.iter().fold(0, |acc, _| acc + 8) // targets: Guid[amount_of_targets]

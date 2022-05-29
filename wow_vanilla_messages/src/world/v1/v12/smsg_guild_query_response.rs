@@ -107,8 +107,7 @@ impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
 
 impl SMSG_GUILD_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // id: u32
+        4 // id: u32
         + self.name.len() + 1 // name: CString
         + self.rank_names.iter().fold(0, |acc, x| acc + x.len() + 1) // rank_names: CString[10]
         + 4 // emblem_style: u32

@@ -49,8 +49,7 @@ impl ClientMessage for CMSG_CAST_SPELL {
 
 impl CMSG_CAST_SPELL {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // spell: u32
+        4 // spell: u32
         + self.targets.size() // targets: SpellCastTargets
     }
 }

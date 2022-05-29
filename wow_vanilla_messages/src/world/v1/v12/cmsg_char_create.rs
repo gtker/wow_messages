@@ -118,8 +118,7 @@ impl ClientMessage for CMSG_CHAR_CREATE {
 
 impl CMSG_CHAR_CREATE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.name.len() + 1 // name: CString
+        self.name.len() + 1 // name: CString
         + 1 // race: Race
         + 1 // class: Class
         + 1 // gender: Gender

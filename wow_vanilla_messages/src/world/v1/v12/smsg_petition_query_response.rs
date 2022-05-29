@@ -175,8 +175,7 @@ impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
 
 impl SMSG_PETITION_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // petition_guid: Guid
+        8 // petition_guid: Guid
         + 8 // charter_owner: Guid
         + self.guild_name.len() + 1 // guild_name: CString
         + self.body_text.len() + 1 // body_text: CString

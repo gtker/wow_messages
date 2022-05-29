@@ -67,8 +67,7 @@ impl ServerMessage for MSG_MOVE_START_TURN_LEFT {
 
 impl MSG_MOVE_START_TURN_LEFT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.info.size() // info: MovementInfo
+        self.info.size() // info: MovementInfo
     }
 }
 

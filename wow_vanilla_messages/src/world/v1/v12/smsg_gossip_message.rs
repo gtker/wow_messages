@@ -89,8 +89,7 @@ impl ServerMessage for SMSG_GOSSIP_MESSAGE {
 
 impl SMSG_GOSSIP_MESSAGE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + 4 // title_text_id: u32
         + 4 // amount_of_gossip_items: u32
         + self.gossips.len() * 6 // gossips: GossipItem[amount_of_gossip_items]

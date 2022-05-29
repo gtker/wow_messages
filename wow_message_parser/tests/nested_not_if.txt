@@ -365,8 +365,7 @@ impl NestedNotIf {
 
 impl NestedNotIf {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.t.size() // t: NestedNotIfTEnum
+        self.t.size() // t: NestedNotIfTEnum
     }
 }
 

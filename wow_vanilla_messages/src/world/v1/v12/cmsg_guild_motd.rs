@@ -43,8 +43,7 @@ impl ClientMessage for CMSG_GUILD_MOTD {
 
 impl CMSG_GUILD_MOTD {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.message_of_the_day.len() + 1 // message_of_the_day: CString
+        self.message_of_the_day.len() + 1 // message_of_the_day: CString
     }
 }
 

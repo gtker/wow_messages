@@ -72,8 +72,7 @@ impl DoubleVariantEnum {
 
 impl DoubleVariantEnum {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.enum.size() // enum: DoubleVariantEnumSimpleEnum
+        self.enum.size() // enum: DoubleVariantEnumSimpleEnum
     }
 }
 

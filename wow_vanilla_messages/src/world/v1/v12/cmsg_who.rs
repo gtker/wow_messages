@@ -126,8 +126,7 @@ impl ClientMessage for CMSG_WHO {
 
 impl CMSG_WHO {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // minimum_level: u32
+        4 // minimum_level: u32
         + 4 // maximum_level: u32
         + self.player_name.len() + 1 // player_name: CString
         + self.guild_name.len() + 1 // guild_name: CString

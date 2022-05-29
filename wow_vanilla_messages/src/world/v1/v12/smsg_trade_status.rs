@@ -165,8 +165,7 @@ impl ServerMessage for SMSG_TRADE_STATUS {
 
 impl SMSG_TRADE_STATUS {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.status.size() // status: SMSG_TRADE_STATUSTradeStatus
+        self.status.size() // status: SMSG_TRADE_STATUSTradeStatus
     }
 }
 

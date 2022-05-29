@@ -136,8 +136,7 @@ impl FlagIfElseIf {
 
 impl FlagIfElseIf {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.flags.size() // flags: FlagIfElseIfUpdateFlag
+        self.flags.size() // flags: FlagIfElseIfUpdateFlag
     }
 }
 

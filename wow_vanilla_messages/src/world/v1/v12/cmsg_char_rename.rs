@@ -52,8 +52,7 @@ impl ClientMessage for CMSG_CHAR_RENAME {
 
 impl CMSG_CHAR_RENAME {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // character: Guid
+        8 // character: Guid
         + self.new_name.len() + 1 // new_name: CString
     }
 }

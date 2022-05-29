@@ -43,8 +43,7 @@ impl ClientMessage for CMSG_GUILD_CREATE {
 
 impl CMSG_GUILD_CREATE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.guild_name.len() + 1 // guild_name: CString
+        self.guild_name.len() + 1 // guild_name: CString
     }
 }
 

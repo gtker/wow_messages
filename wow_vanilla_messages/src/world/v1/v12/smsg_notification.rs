@@ -43,8 +43,7 @@ impl ServerMessage for SMSG_NOTIFICATION {
 
 impl SMSG_NOTIFICATION {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.notification.len() + 1 // notification: CString
+        self.notification.len() + 1 // notification: CString
     }
 }
 

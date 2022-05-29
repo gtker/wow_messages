@@ -65,8 +65,7 @@ impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {
 
 impl SMSG_ATTACKERSTATEUPDATE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // hit_info: u32
+        4 // hit_info: u32
         + self.attacker.size() // attacker: Guid
         + self.target.size() // target: Guid
         + 4 // total_damage: u32

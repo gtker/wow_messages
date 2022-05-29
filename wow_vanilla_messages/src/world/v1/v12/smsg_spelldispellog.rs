@@ -68,8 +68,7 @@ impl ServerMessage for SMSG_SPELLDISPELLOG {
 
 impl SMSG_SPELLDISPELLOG {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // victim: Guid
+        8 // victim: Guid
         + 8 // caster: Guid
         + 4 // amount_of_spells: u32
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]

@@ -108,8 +108,7 @@ impl PackedGuidAndGuid {
 
 impl PackedGuidAndGuid {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.packed.size() // packed: Guid
+        self.packed.size() // packed: Guid
         + 8 // guid: Guid
         + self.static_packed.iter().fold(0, |acc, x| acc + x.size()) // static_packed: PackedGuid[10]
         + self.static_guid.iter().fold(0, |acc, _| acc + 8) // static_guid: Guid[10]

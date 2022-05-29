@@ -49,8 +49,7 @@ impl ServerMessage for SMSG_MOVE_UNSET_HOVER {
 
 impl SMSG_MOVE_UNSET_HOVER {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.guid.size() // guid: Guid
+        self.guid.size() // guid: Guid
         + 4 // counter: u32
     }
 }

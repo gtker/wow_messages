@@ -595,8 +595,7 @@ impl AuraLog {
 
 impl AuraLog {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.aura_type.size() // aura_type: AuraLogAuraType
+        self.aura_type.size() // aura_type: AuraLogAuraType
     }
 }
 

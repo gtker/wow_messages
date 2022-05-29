@@ -43,8 +43,7 @@ impl ClientMessage for CMSG_GUILD_ADD_RANK {
 
 impl CMSG_GUILD_ADD_RANK {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.rank_name.len() + 1 // rank_name: CString
+        self.rank_name.len() + 1 // rank_name: CString
     }
 }
 

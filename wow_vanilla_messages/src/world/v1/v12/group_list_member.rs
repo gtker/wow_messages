@@ -53,8 +53,7 @@ impl GroupListMember {
 
 impl GroupListMember {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.name.len() + 1 // name: CString
+        self.name.len() + 1 // name: CString
         + 8 // guid: Guid
         + 1 // is_online: u8
     }

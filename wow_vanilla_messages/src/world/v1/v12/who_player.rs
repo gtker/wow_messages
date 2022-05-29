@@ -89,8 +89,7 @@ impl WhoPlayer {
 
 impl WhoPlayer {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.name.len() + 1 // name: CString
+        self.name.len() + 1 // name: CString
         + self.guild.len() + 1 // guild: CString
         + 4 // level: u32
         + 1 // class: Class

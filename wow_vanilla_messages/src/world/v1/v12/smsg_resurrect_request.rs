@@ -76,8 +76,7 @@ impl ServerMessage for SMSG_RESURRECT_REQUEST {
 
 impl SMSG_RESURRECT_REQUEST {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + 4 // name_length: u32
         + self.name.len() + 1 // name: CString
         + 1 // caster_is_spirit_healer: u8

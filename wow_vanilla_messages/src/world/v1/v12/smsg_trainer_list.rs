@@ -80,8 +80,7 @@ impl ServerMessage for SMSG_TRAINER_LIST {
 
 impl SMSG_TRAINER_LIST {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + 4 // trainer_type: u32
         + 4 // amount_of_spells: u32
         + self.spells.len() * 38 // spells: TrainerSpell[amount_of_spells]

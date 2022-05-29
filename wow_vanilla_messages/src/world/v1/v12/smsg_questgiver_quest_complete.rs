@@ -84,8 +84,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
 impl SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // quest_id: u32
+        4 // quest_id: u32
         + 4 // unknown: u32
         + 4 // experience_reward: u32
         + 4 // money_reward: u32

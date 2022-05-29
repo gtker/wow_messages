@@ -62,8 +62,7 @@ impl ServerMessage for SMSG_GUILD_EVENT {
 
 impl SMSG_GUILD_EVENT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // event: GuildEvent
+        1 // event: GuildEvent
         + 1 // amount_of_events: u8
         + self.event_descriptions.iter().fold(0, |acc, x| acc + x.len() + 1) // event_descriptions: CString[amount_of_events]
     }

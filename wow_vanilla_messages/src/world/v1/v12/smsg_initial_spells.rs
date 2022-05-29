@@ -80,8 +80,7 @@ impl ServerMessage for SMSG_INITIAL_SPELLS {
 
 impl SMSG_INITIAL_SPELLS {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // unknown1: u8
+        1 // unknown1: u8
         + 2 // spell_count: u16
         + self.initial_spells.len() * 4 // initial_spells: InitialSpell[spell_count]
         + 2 // cooldown_count: u16

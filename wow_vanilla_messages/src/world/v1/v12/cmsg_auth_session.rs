@@ -108,8 +108,7 @@ impl ClientMessage for CMSG_AUTH_SESSION {
 
 impl CMSG_AUTH_SESSION {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // build: u32
+        4 // build: u32
         + 4 // server_id: u32
         + self.username.len() + 1 // username: CString
         + 4 // client_seed: u32

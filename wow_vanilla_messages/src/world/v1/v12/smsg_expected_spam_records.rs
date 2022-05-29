@@ -53,8 +53,7 @@ impl ServerMessage for SMSG_EXPECTED_SPAM_RECORDS {
 
 impl SMSG_EXPECTED_SPAM_RECORDS {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // amount_of_records: u32
+        4 // amount_of_records: u32
         + self.records.iter().fold(0, |acc, x| acc + x.len() + 1) // records: CString[amount_of_records]
     }
 }

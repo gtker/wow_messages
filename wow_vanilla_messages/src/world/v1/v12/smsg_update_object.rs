@@ -60,8 +60,7 @@ impl ServerMessage for SMSG_UPDATE_OBJECT {
 
 impl SMSG_UPDATE_OBJECT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // amount_of_objects: u32
+        4 // amount_of_objects: u32
         + 1 // has_transport: u8
         + self.objects.iter().fold(0, |acc, x| acc + x.size()) // objects: Object[amount_of_objects]
     }

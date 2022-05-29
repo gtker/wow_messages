@@ -185,8 +185,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
 
 impl CMD_SURVEY_RESULT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // survey_id: u32
+        4 // survey_id: u32
         + 1 // error: u8
         + 2 // compressed_data_length: u16
         + self.data.len() * core::mem::size_of::<u8>() // data: u8[compressed_data_length]

@@ -165,8 +165,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {
 
 impl SMSG_QUESTGIVER_QUEST_DETAILS {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + 4 // quest_id: u32
         + self.title.len() + 1 // title: CString
         + self.details.len() + 1 // details: CString

@@ -94,8 +94,7 @@ impl BattlegroundPlayer {
 
 impl BattlegroundPlayer {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // player: Guid
+        8 // player: Guid
         + 4 // rank: PvpRank
         + 4 // killing_blows: u32
         + 4 // honorable_kills: u32

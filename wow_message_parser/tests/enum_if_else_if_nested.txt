@@ -68,8 +68,7 @@ impl EnumIfElseIfNested {
 
 impl EnumIfElseIfNested {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.e.size() // e: EnumIfElseIfNestedSimpleEnum
+        self.e.size() // e: EnumIfElseIfNestedSimpleEnum
         + self.n.size() // n: EnumIfElseIfNestedNestedEnum
     }
 }

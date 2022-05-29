@@ -43,8 +43,7 @@ impl ClientMessage for CMSG_LEAVE_CHANNEL {
 
 impl CMSG_LEAVE_CHANNEL {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.channel_name.len() + 1 // channel_name: CString
+        self.channel_name.len() + 1 // channel_name: CString
     }
 }
 

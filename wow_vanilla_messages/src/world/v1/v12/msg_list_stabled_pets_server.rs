@@ -69,8 +69,7 @@ impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
 
 impl MSG_LIST_STABLED_PETS_Server {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // npc: Guid
+        8 // npc: Guid
         + 1 // amount_of_pets: u8
         + 1 // stable_slots: u8
         + self.pets.iter().fold(0, |acc, x| acc + x.size()) // pets: StabledPet[amount_of_pets]

@@ -43,8 +43,7 @@ impl ClientMessage for CMSG_CHANNEL_MODERATE {
 
 impl CMSG_CHANNEL_MODERATE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.channel_name.len() + 1 // channel_name: CString
+        self.channel_name.len() + 1 // channel_name: CString
     }
 }
 

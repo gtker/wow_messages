@@ -388,8 +388,7 @@ impl ClientMessage for CMSG_MESSAGECHAT {
 
 impl CMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.chat_type.size() // chat_type: CMSG_MESSAGECHATChatType
+        self.chat_type.size() // chat_type: CMSG_MESSAGECHATChatType
         + 4 // language: Language
     }
 }

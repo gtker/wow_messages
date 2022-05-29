@@ -60,8 +60,7 @@ impl QuestItem {
 
 impl QuestItem {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // quest_id: u32
+        4 // quest_id: u32
         + 4 // quest_icon: u32
         + 4 // level: u32
         + self.title.len() + 1 // title: CString

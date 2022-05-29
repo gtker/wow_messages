@@ -135,11 +135,9 @@ impl ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 
 impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // entry_id: u32
+        4 // entry_id: u32
         + if let Some(found) = &self.found {
-            0
-            + 4 // info_type: u32
+            4 // info_type: u32
             + 4 // display_id: u32
             + found.name1.len() + 1 // name1: CString
             + found.name2.len() + 1 // name2: CString

@@ -116,8 +116,7 @@ impl ServerMessage for SMSG_GMTICKET_GETTICKET {
 
 impl SMSG_GMTICKET_GETTICKET {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.status.size() // status: SMSG_GMTICKET_GETTICKETGmTicketStatus
+        self.status.size() // status: SMSG_GMTICKET_GETTICKETGmTicketStatus
     }
 }
 

@@ -65,8 +65,7 @@ impl EnumOutsideOfIf {
 
 impl EnumOutsideOfIf {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.t.size() // t: EnumOutsideOfIfTEnum
+        self.t.size() // t: EnumOutsideOfIfTEnum
         + self.n.size() // n: EnumOutsideOfIfNestedEnum
     }
 }

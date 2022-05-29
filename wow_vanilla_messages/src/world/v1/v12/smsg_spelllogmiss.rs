@@ -77,8 +77,7 @@ impl ServerMessage for SMSG_SPELLLOGMISS {
 
 impl SMSG_SPELLLOGMISS {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // id: u32
+        4 // id: u32
         + 8 // caster_guid: Guid
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32

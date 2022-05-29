@@ -163,8 +163,7 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
 
 impl CMSG_GMTICKET_CREATE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.category.size() // category: CMSG_GMTICKET_CREATEGmTicketType
+        self.category.size() // category: CMSG_GMTICKET_CREATEGmTicketType
         + 4 // map: Map
         + 4 // position_x: f32
         + 4 // position_y: f32

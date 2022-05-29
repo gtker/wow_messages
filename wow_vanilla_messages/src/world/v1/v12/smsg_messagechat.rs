@@ -764,8 +764,7 @@ impl ServerMessage for SMSG_MESSAGECHAT {
 
 impl SMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.chat_type.size() // chat_type: SMSG_MESSAGECHATChatType
+        self.chat_type.size() // chat_type: SMSG_MESSAGECHATChatType
         + 4 // language: Language
         + 4 // message_length: u32
         + self.message.len() + 1 // message: CString

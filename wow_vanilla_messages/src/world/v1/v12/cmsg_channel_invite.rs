@@ -54,8 +54,7 @@ impl ClientMessage for CMSG_CHANNEL_INVITE {
 
 impl CMSG_CHANNEL_INVITE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.channel_name.len() + 1 // channel_name: CString
+        self.channel_name.len() + 1 // channel_name: CString
         + self.player_name.len() + 1 // player_name: CString
     }
 }

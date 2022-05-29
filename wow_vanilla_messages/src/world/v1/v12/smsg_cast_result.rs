@@ -427,8 +427,7 @@ impl ServerMessage for SMSG_CAST_RESULT {
 
 impl SMSG_CAST_RESULT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // spell: u32
+        4 // spell: u32
         + self.result.size() // result: SMSG_CAST_RESULTSimpleSpellCastResult
     }
 }

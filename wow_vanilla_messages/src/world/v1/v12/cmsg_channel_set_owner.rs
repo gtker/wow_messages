@@ -54,8 +54,7 @@ impl ClientMessage for CMSG_CHANNEL_SET_OWNER {
 
 impl CMSG_CHANNEL_SET_OWNER {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.channel_name.len() + 1 // channel_name: CString
+        self.channel_name.len() + 1 // channel_name: CString
         + self.new_owner.len() + 1 // new_owner: CString
     }
 }

@@ -650,8 +650,7 @@ impl SpellLog {
 
 impl SpellLog {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.effect.size() // effect: SpellLogSpellEffect
+        self.effect.size() // effect: SpellLogSpellEffect
         + 4 // amount_of_logs: u32
     }
 }

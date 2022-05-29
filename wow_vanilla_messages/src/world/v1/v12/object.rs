@@ -224,8 +224,7 @@ impl Object {
 
 impl Object {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.update_type.size() // update_type: ObjectUpdateType
+        self.update_type.size() // update_type: ObjectUpdateType
     }
 }
 

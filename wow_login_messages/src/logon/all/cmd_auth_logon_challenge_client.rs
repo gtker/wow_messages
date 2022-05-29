@@ -296,8 +296,7 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
 
 impl CMD_AUTH_LOGON_CHALLENGE_Client {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // protocol_version: u8
+        1 // protocol_version: u8
         + 2 // size: u16
         + 4 // game_name: u32
         + 5 // version: Version

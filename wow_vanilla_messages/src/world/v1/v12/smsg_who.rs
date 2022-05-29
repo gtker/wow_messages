@@ -60,8 +60,7 @@ impl ServerMessage for SMSG_WHO {
 
 impl SMSG_WHO {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // listed_players: u32
+        4 // listed_players: u32
         + 4 // online_players: u32
         + self.players.iter().fold(0, |acc, x| acc + x.size()) // players: WhoPlayer[listed_players]
     }

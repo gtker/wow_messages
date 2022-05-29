@@ -410,8 +410,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS {
 
 impl SMSG_PARTY_MEMBER_STATS {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.guid.size() // guid: Guid
+        self.guid.size() // guid: Guid
         + self.mask.size() // mask: SMSG_PARTY_MEMBER_STATSGroupUpdateFlags
     }
 }

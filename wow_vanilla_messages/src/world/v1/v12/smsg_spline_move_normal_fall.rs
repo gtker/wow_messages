@@ -41,8 +41,7 @@ impl ServerMessage for SMSG_SPLINE_MOVE_NORMAL_FALL {
 
 impl SMSG_SPLINE_MOVE_NORMAL_FALL {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.guid.size() // guid: Guid
+        self.guid.size() // guid: Guid
     }
 }
 

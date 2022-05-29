@@ -4444,8 +4444,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
 
 impl SMSG_BATTLEFIELD_STATUS {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // queue_slot: u32
+        4 // queue_slot: u32
         + self.map.size() // map: SMSG_BATTLEFIELD_STATUSMap
     }
 }

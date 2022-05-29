@@ -43,8 +43,7 @@ impl ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {
 
 impl SMSG_CHAT_PLAYER_NOT_FOUND {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.name.len() + 1 // name: CString
+        self.name.len() + 1 // name: CString
     }
 }
 

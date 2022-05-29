@@ -57,8 +57,7 @@ impl SimpleIfFlag {
 
 impl SimpleIfFlag {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.flag.size() // flag: SimpleIfFlagSimpleFlag
+        self.flag.size() // flag: SimpleIfFlagSimpleFlag
     }
 }
 

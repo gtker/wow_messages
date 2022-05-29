@@ -64,8 +64,7 @@ impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // amount_of_carriers: u32
+        4 // amount_of_carriers: u32
         + 4 // amount_of_flag_carriers: u32
         + self.flag_carriers.len() * 16 // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
     }

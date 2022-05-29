@@ -61,8 +61,7 @@ impl ServerMessage for SMSG_LIST_INVENTORY {
 
 impl SMSG_LIST_INVENTORY {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // vendor: Guid
+        8 // vendor: Guid
         + 1 // amount_of_items: u8
         + self.items.len() * 28 // items: ListInventoryItem[amount_of_items]
     }

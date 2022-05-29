@@ -60,8 +60,7 @@ impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {
 
 impl SMSG_AUCTION_BIDDER_LIST_RESULT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // count: u32
+        4 // count: u32
         + self.auctions.len() * 64 // auctions: AuctionListItem[count]
         + 4 // total_amount_of_auctions: u32
     }

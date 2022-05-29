@@ -78,8 +78,7 @@ impl ClientMessage for CMSG_BUG {
 
 impl CMSG_BUG {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // suggestion: u32
+        4 // suggestion: u32
         + 4 // content_length: u32
         + self.content.len() + 1 // content: CString
         + 4 // type_length: u32

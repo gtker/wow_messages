@@ -88,8 +88,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {
 
 impl SMSG_QUESTGIVER_QUEST_LIST {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // npc: Guid
+        8 // npc: Guid
         + self.title.len() + 1 // title: CString
         + 4 // emote_delay: u32
         + 4 // emote: u32

@@ -123,15 +123,13 @@ impl ServerMessage for SMSG_GROUP_LIST {
 
 impl SMSG_GROUP_LIST {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // group_type: GroupType
+        1 // group_type: GroupType
         + 1 // own_flags: u8
         + 4 // amount_of_members: u32
         + self.members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
         + 8 // leader: Guid
         + if let Some(group_not_empty) = &self.group_not_empty {
-            0
-            + 1 // loot_setting: GroupLootSetting
+            1 // loot_setting: GroupLootSetting
             + 8 // master_loot: Guid
             + 1 // loot_threshold: ItemQuality
         } else {

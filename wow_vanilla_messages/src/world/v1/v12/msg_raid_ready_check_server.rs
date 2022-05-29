@@ -64,10 +64,8 @@ impl ServerMessage for MSG_RAID_READY_CHECK_Server {
 
 impl MSG_RAID_READY_CHECK_Server {
     pub(crate) fn size(&self) -> usize {
-        0
-        + if let Some(state_check) = &self.state_check {
-            0
-            + 8 // guid: Guid
+        if let Some(state_check) = &self.state_check {
+            8 // guid: Guid
             + 1 // state: u8
         } else {
             0

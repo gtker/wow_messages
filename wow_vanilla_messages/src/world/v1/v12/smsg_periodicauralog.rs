@@ -77,8 +77,7 @@ impl ServerMessage for SMSG_PERIODICAURALOG {
 
 impl SMSG_PERIODICAURALOG {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.target.size() // target: Guid
+        self.target.size() // target: Guid
         + self.caster.size() // caster: Guid
         + 4 // spell: u32
         + 4 // amount_of_auras: u32

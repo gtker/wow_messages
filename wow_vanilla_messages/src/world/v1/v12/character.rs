@@ -244,8 +244,7 @@ impl Character {
 
 impl Character {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + self.name.len() + 1 // name: CString
         + 1 // race: Race
         + 1 // class: Class

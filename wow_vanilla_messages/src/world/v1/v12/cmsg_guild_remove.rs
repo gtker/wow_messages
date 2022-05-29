@@ -43,8 +43,7 @@ impl ClientMessage for CMSG_GUILD_REMOVE {
 
 impl CMSG_GUILD_REMOVE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.player_name.len() + 1 // player_name: CString
+        self.player_name.len() + 1 // player_name: CString
     }
 }
 

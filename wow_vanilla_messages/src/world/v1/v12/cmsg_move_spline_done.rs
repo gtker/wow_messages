@@ -57,8 +57,7 @@ impl ClientMessage for CMSG_MOVE_SPLINE_DONE {
 
 impl CMSG_MOVE_SPLINE_DONE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.movement_info.size() // movement_info: MovementInfo
+        self.movement_info.size() // movement_info: MovementInfo
         + 4 // movement_counter: u32
         + 4 // unknown1: u32
     }

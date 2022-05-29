@@ -77,12 +77,10 @@ impl ClientMessage for CMSG_TEST_OPTIONAL {
 
 impl CMSG_TEST_OPTIONAL {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.c_string.len() + 1 // c_string: CString
+        self.c_string.len() + 1 // c_string: CString
         + 1 // b_u8: u8
         + if let Some(server) = &self.server {
-            0
-            + 1 // optional_u8: u8
+            1 // optional_u8: u8
         } else {
             0
         }

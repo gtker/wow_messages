@@ -81,8 +81,7 @@ impl ServerMessage for SMSG_GOSSIP_POI {
 
 impl SMSG_GOSSIP_POI {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // flags: u32
+        4 // flags: u32
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // icon: u32

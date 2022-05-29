@@ -253,8 +253,7 @@ impl ServerMessage for SMSG_AUTH_RESPONSE {
 
 impl SMSG_AUTH_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.result.size() // result: SMSG_AUTH_RESPONSEWorldResult
+        self.result.size() // result: SMSG_AUTH_RESPONSEWorldResult
     }
 }
 

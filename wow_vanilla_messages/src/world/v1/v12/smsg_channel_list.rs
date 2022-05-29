@@ -71,8 +71,7 @@ impl ServerMessage for SMSG_CHANNEL_LIST {
 
 impl SMSG_CHANNEL_LIST {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.channel_name.len() + 1 // channel_name: CString
+        self.channel_name.len() + 1 // channel_name: CString
         + 1 // channel_flags: u8
         + 4 // amount_of_members: u32
         + self.members.len() * 9 // members: ChannelMember[amount_of_members]

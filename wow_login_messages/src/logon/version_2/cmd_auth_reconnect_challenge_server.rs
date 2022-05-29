@@ -260,8 +260,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
 
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.result.size() // result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult
+        self.result.size() // result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult
     }
 }
 

@@ -236,8 +236,7 @@ impl ServerMessage for SMSG_CHAR_RENAME {
 
 impl SMSG_CHAR_RENAME {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.result.size() // result: SMSG_CHAR_RENAMEWorldResult
+        self.result.size() // result: SMSG_CHAR_RENAMEWorldResult
     }
 }
 

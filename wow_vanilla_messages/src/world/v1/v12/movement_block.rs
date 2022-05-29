@@ -495,8 +495,7 @@ impl MovementBlock {
 
 impl MovementBlock {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.update_flag.size() // update_flag: MovementBlockUpdateFlag
+        self.update_flag.size() // update_flag: MovementBlockUpdateFlag
     }
 }
 

@@ -57,8 +57,7 @@ impl ServerMessage for SMSG_ATTACKSTOP {
 
 impl SMSG_ATTACKSTOP {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.player.size() // player: Guid
+        self.player.size() // player: Guid
         + self.enemy.size() // enemy: Guid
         + 4 // unknown1: u32
     }

@@ -56,10 +56,8 @@ impl ClientMessage for CMSG_TOGGLE_PVP {
 
 impl CMSG_TOGGLE_PVP {
     pub(crate) fn size(&self) -> usize {
-        0
-        + if let Some(set) = &self.set {
-            0
-            + 1 // enable_pvp: u8
+        if let Some(set) = &self.set {
+            1 // enable_pvp: u8
         } else {
             0
         }

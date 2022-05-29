@@ -51,8 +51,7 @@ impl ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {
 
 impl CMSG_GROUP_CHANGE_SUB_GROUP {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.name.len() + 1 // name: CString
+        self.name.len() + 1 // name: CString
         + 1 // group_number: u8
     }
 }

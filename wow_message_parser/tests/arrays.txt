@@ -196,8 +196,7 @@ impl Arrays {
 
 impl Arrays {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // index: u8
+        1 // index: u8
         + 20 * core::mem::size_of::<u8>() // basic_fixed_array: u8[20]
         + 16 * core::mem::size_of::<u16>() // simple_2byte_fixed_array: u16[16]
         + 16 * core::mem::size_of::<u16>() // simple_2byte_be_fixed_array: u16_be[16]

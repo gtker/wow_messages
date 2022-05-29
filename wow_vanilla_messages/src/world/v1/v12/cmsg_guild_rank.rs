@@ -59,8 +59,7 @@ impl ClientMessage for CMSG_GUILD_RANK {
 
 impl CMSG_GUILD_RANK {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // rank_id: u32
+        4 // rank_id: u32
         + 4 // rights: u32
         + self.rank_name.len() + 1 // rank_name: CString
     }

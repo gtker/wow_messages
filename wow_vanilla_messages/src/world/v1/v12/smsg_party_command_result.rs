@@ -61,8 +61,7 @@ impl ServerMessage for SMSG_PARTY_COMMAND_RESULT {
 
 impl SMSG_PARTY_COMMAND_RESULT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // operation: PartyOperation
+        4 // operation: PartyOperation
         + self.member.len() + 1 // member: CString
         + 4 // result: PartyResult
     }

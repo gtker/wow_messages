@@ -481,11 +481,9 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // item: u32
+        4 // item: u32
         + if let Some(found) = &self.found {
-            0
-            + 4 // item_class: ItemClass
+            4 // item_class: ItemClass
             + 4 // item_sub_class: u32
             + found.name1.len() + 1 // name1: CString
             + found.name2.len() + 1 // name2: CString

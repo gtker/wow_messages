@@ -91,13 +91,11 @@ impl ClientMessage for CMSG_PET_SET_ACTION {
 
 impl CMSG_PET_SET_ACTION {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // guid: Guid
+        8 // guid: Guid
         + 4 // position1: u32
         + 4 // data1: u32
         + if let Some(extra) = &self.extra {
-            0
-            + 4 // position2: u32
+            4 // position2: u32
             + 4 // data2: u32
         } else {
             0

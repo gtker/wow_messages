@@ -262,10 +262,12 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
 pub fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
     if !r.constant_sized() {
         s.variable_size(r.name(), |s| {
-            s.wln("0");
-
-            for m in r.members() {
-                s.w("+ ");
+            for (i, m) in r.members().iter().enumerate() {
+                if i != 0 {
+                    s.w("+ ");
+                } else {
+                    s.w("");
+                }
 
                 print_size_of_ty_rust_view(s, m, prefix);
             }
@@ -273,16 +275,22 @@ pub fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
             if let Some(optional) = r.optional() {
                 s.body_else(
                     format!(
-                        "+ if let Some({name}) = &{prefix}{name}",
+                        "{plus}if let Some({name}) = &{prefix}{name}",
                         name = optional.name(),
-                        prefix = prefix
+                        prefix = prefix,
+                        plus = match r.members().is_empty() {
+                            true => "",
+                            false => "+ ",
+                        }
                     ),
                     |s| {
-                        s.wln("0");
-
                         let prefix = format!("{}.", optional.name());
-                        for m in optional.members_in_struct() {
-                            s.w("+ ");
+                        for (i, m) in optional.members_in_struct().iter().enumerate() {
+                            if i != 0 {
+                                s.w("+ ");
+                            } else {
+                                s.w("");
+                            }
 
                             print_size_of_ty_rust_view(s, m, &prefix);
                         }

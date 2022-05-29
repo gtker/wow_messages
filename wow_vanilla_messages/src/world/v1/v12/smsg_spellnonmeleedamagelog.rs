@@ -130,8 +130,7 @@ impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.target.size() // target: Guid
+        self.target.size() // target: Guid
         + self.attacker.size() // attacker: Guid
         + 4 // spell: u32
         + 4 // damage: u32

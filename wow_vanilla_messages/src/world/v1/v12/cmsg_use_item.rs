@@ -65,8 +65,7 @@ impl ClientMessage for CMSG_USE_ITEM {
 
 impl CMSG_USE_ITEM {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // bag_index: u8
+        1 // bag_index: u8
         + 1 // bag_slot: u8
         + 1 // spell_index: u8
         + self.targets.size() // targets: SpellCastTargets

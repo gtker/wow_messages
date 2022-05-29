@@ -88,8 +88,7 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
 
 impl SMSG_LOG_XPGAIN {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // target_guid: Guid
+        8 // target_guid: Guid
         + 4 // total_exp: u32
         + self.exp_type.size() // exp_type: SMSG_LOG_XPGAINExperienceAwardType
     }

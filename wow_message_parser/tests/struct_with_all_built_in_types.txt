@@ -127,8 +127,7 @@ impl StructWithAllBuiltInTypes {
 
 impl StructWithAllBuiltInTypes {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 1 // basic8: u8
+        1 // basic8: u8
         + 2 // basic16: u16
         + 4 // basic32: u32
         + 8 // basic64: u64

@@ -116,8 +116,7 @@ impl ClientMessage for CMSG_AUCTION_LIST_ITEMS {
 
 impl CMSG_AUCTION_LIST_ITEMS {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // auctioneer_guid: Guid
+        8 // auctioneer_guid: Guid
         + 4 // list_start_item: u32
         + self.searched_name.len() + 1 // searched_name: CString
         + 1 // minimum_level: u8

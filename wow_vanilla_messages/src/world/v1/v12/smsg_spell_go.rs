@@ -144,8 +144,7 @@ impl ServerMessage for SMSG_SPELL_GO {
 
 impl SMSG_SPELL_GO {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.cast_item.size() // cast_item: Guid
+        self.cast_item.size() // cast_item: Guid
         + self.caster.size() // caster: Guid
         + 4 // spell: u32
         + self.flags.size() // flags: SMSG_SPELL_GOCastFlags

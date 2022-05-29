@@ -60,8 +60,7 @@ impl ServerMessage for SMSG_DEFENSE_MESSAGE {
 
 impl SMSG_DEFENSE_MESSAGE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // map: Map
+        4 // map: Map
         + 4 // message_length: u32
         + self.message.len() + 1 // message: CString
     }

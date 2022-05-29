@@ -85,8 +85,7 @@ impl SimpleIfEnumElse {
 
 impl SimpleIfEnumElse {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.enum.size() // enum: SimpleIfEnumElseSimpleEnum
+        self.enum.size() // enum: SimpleIfEnumElseSimpleEnum
     }
 }
 

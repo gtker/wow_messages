@@ -180,8 +180,7 @@ impl ClientMessage for CMSG_PETITION_BUY {
 
 impl CMSG_PETITION_BUY {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 8 // npc: Guid
+        8 // npc: Guid
         + 4 // skip1: u32
         + 8 // skip2: Guid
         + self.name.len() + 1 // name: CString

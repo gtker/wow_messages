@@ -74,8 +74,7 @@ impl ServerMessage for SMSG_SPELLENERGIZELOG {
 
 impl SMSG_SPELLENERGIZELOG {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.victim_guid.size() // victim_guid: Guid
+        self.victim_guid.size() // victim_guid: Guid
         + self.caster_guid.size() // caster_guid: Guid
         + 4 // spell: u32
         + 4 // power: PowerType

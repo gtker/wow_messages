@@ -76,8 +76,7 @@ impl ServerMessage for SMSG_SHOWTAXINODES {
 
 impl SMSG_SHOWTAXINODES {
     pub(crate) fn size(&self) -> usize {
-        0
-        + 4 // unknown1: u32
+        4 // unknown1: u32
         + 8 // guid: Guid
         + 4 // nearest_node: u32
         + self.nodes.len() * core::mem::size_of::<u32>() // nodes: u32[-]

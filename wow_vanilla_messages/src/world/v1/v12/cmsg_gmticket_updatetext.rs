@@ -43,8 +43,7 @@ impl ClientMessage for CMSG_GMTICKET_UPDATETEXT {
 
 impl CMSG_GMTICKET_UPDATETEXT {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.message.len() + 1 // message: CString
+        self.message.len() + 1 // message: CString
     }
 }
 

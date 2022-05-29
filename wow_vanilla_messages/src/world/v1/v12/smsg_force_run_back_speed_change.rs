@@ -56,8 +56,7 @@ impl ServerMessage for SMSG_FORCE_RUN_BACK_SPEED_CHANGE {
 
 impl SMSG_FORCE_RUN_BACK_SPEED_CHANGE {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.guid.size() // guid: Guid
+        self.guid.size() // guid: Guid
         + 4 // move_event: u32
         + 4 // speed: f32
     }

@@ -173,8 +173,7 @@ impl MovementInfo {
 
 impl MovementInfo {
     pub(crate) fn size(&self) -> usize {
-        0
-        + self.flags.size() // flags: MovementInfoMovementFlags
+        self.flags.size() // flags: MovementInfoMovementFlags
         + 4 // timestamp: u32
         + 4 // position_x: f32
         + 4 // position_y: f32
