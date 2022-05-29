@@ -21,7 +21,7 @@ impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {
         w.write_all(&self.old_mover.guid().to_le_bytes())?;
 
         // movement_info: MovementInfo
-        &self.movement_info.write_into_vec(w)?;;
+        &self.movement_info.write_into_vec(w)?;
 
         Ok(())
     }

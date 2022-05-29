@@ -18,7 +18,7 @@ pub struct CMSG_MOVE_SPLINE_DONE {
 impl ClientMessage for CMSG_MOVE_SPLINE_DONE {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // movement_info: MovementInfo
-        &self.movement_info.write_into_vec(w)?;;
+        &self.movement_info.write_into_vec(w)?;
 
         // movement_counter: u32
         w.write_all(&self.movement_counter.to_le_bytes())?;

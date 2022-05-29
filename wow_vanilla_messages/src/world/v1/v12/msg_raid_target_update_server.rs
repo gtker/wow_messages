@@ -24,7 +24,7 @@ impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {
                 raid_target,
             } => {
                 // raid_target: RaidTargetUpdate
-                &raid_target.write_into_vec(w)?;;
+                &raid_target.write_into_vec(w)?;
 
             }
             MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {

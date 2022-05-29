@@ -17,7 +17,7 @@ pub struct SMSG_UPDATE_WORLD_STATE {
 impl ServerMessage for SMSG_UPDATE_WORLD_STATE {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // state: WorldState
-        &self.state.write_into_vec(w)?;;
+        &self.state.write_into_vec(w)?;
 
         Ok(())
     }

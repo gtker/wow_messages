@@ -26,7 +26,7 @@ impl ClientMessage for CMSG_MOVE_FEATHER_FALL_ACK {
         w.write_all(&self.movement_counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        &self.movement_info.write_into_vec(w)?;;
+        &self.movement_info.write_into_vec(w)?;
 
         // apply: u32
         w.write_all(&self.apply.to_le_bytes())?;

@@ -42,7 +42,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
         w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes())?;
 
         // version: Version
-        &self.version.write_into_vec(w)?;;
+        &self.version.write_into_vec(w)?;
 
         // platform: Platform
         w.write_all(&(self.platform.as_int() as u32).to_le_bytes())?;

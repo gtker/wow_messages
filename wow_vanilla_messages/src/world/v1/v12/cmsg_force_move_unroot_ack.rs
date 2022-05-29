@@ -25,7 +25,7 @@ impl ClientMessage for CMSG_FORCE_MOVE_UNROOT_ACK {
         w.write_all(&self.movement_counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        &self.movement_info.write_into_vec(w)?;;
+        &self.movement_info.write_into_vec(w)?;
 
         Ok(())
     }

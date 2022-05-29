@@ -58,7 +58,7 @@ impl MovementBlock {
 
                     if let Some(if_statement) = &flags.on_transport {
                         // transport: TransportInfo
-                        &if_statement.transport.write_into_vec(w)?;;
+                        &if_statement.transport.write_into_vec(w)?;
 
                     }
 
@@ -166,7 +166,7 @@ impl MovementBlock {
                         }
 
                         // final_node: Vector3d
-                        &if_statement.final_node.write_into_vec(w)?;;
+                        &if_statement.final_node.write_into_vec(w)?;
 
                     }
 
