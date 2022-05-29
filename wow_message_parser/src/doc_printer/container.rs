@@ -369,6 +369,24 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
         s.wln(format!("#### Example {}", i + 1));
         s.newline();
 
+        if let Some(desc) = t.tags().description() {
+            s.wln("##### Description");
+            s.newline();
+            for l in desc.as_doc_lines() {
+                s.wln(l);
+                s.newline();
+            }
+        }
+
+        if let Some(comment) = t.tags().comment() {
+            s.wln("##### Comment");
+            s.newline();
+            for l in comment.as_doc_lines() {
+                s.wln(l);
+                s.newline();
+            }
+        }
+
         s.wln("```c");
         let mut bytes = t.raw_bytes().iter();
 

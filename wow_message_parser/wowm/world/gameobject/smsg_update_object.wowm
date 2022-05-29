@@ -256,7 +256,9 @@ test SMSG_UPDATE_OBJECT {
     0x19, 0x00, 0x00, 0x00, /* object_type */
     0x64, 0x00, 0x00, 0x00, /* unit_field_health */
     0x01, 0x01, 0x01, 0x01 /* unit_field_bytes */
-]
+] {
+    description = "Most minimal package required to load into the world. Also requires a valid [SMSG_TUTORIAL_FLAGS] and [SMSG_LOGIN_VERIFY_WORLD].";
+}
 
 test SMSG_UPDATE_OBJECT {
     has_transport = 0;

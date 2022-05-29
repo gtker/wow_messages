@@ -95675,6 +95675,7 @@
             1
           ],
           "tags": {
+            "description": "Most minimal package required to load into the world. Also requires a valid [SMSG_TUTORIAL_FLAGS] and [SMSG_LOGIN_VERIFY_WORLD].",
             "version": {
               "type": "world",
               "versions": [
@@ -96120,7 +96121,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-            "start_position": 261
+            "start_position": 263
           }
         }
       ],

@@ -35,6 +35,10 @@ SMSG have a header of 4 bytes.
 
 #### Example 1
 
+##### Description
+
+Most minimal package required to load into the world. Also requires a valid [SMSG_TUTORIAL_FLAGS](./smsg_tutorial_flags.md) and [SMSG_LOGIN_VERIFY_WORLD](./smsg_login_verify_world.md).
+
 ```c
 0, 97, // size
 169, 0, // opcode (169)
