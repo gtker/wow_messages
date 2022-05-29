@@ -5,7 +5,7 @@ use wow_login_messages::all::{
     CMD_AUTH_LOGON_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_Client,
 };
 use wow_login_messages::helper::{
-    tokio_expect_client_message, tokio_read_initial_opcode, InitialOpcode, InitialOpcodeError,
+    tokio_expect_client_message, tokio_read_initial_opcode, ExpectedMessageError, InitialOpcode,
 };
 use wow_login_messages::ServerMessage;
 use wow_srp::normalized_string::NormalizedString;
@@ -18,7 +18,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
         Ok(o) => o,
         Err(e) => {
             match e {
-                InitialOpcodeError::InvalidOpcode(o) => {
+                ExpectedMessageError::UnexpectedOpcode(o) => {
                     println!("Got invalid opcode {}", o);
                 }
                 _ => panic!(),

@@ -94,6 +94,12 @@ impl From<std::io::Error> for ExpectedMessageError {
     }
 }
 
+impl From<ParseError> for ExpectedMessageError {
+    fn from(e: ParseError) -> Self {
+        Self::IoOrParseError
+    }
+}
+
 /// Read a complete message _from_ the **server** or return an error otherwise.
 ///
 /// ```
@@ -186,7 +192,7 @@ pub async fn tokio_expect_server_message<
 #[cfg(feature = "sync")]
 pub fn read_initial_opcode<R: std::io::Read>(
     r: &mut R,
-) -> Result<InitialOpcode, InitialOpcodeError> {
+) -> Result<InitialOpcode, ExpectedMessageError> {
     let opcode = read_u8_le(r)?;
     match opcode {
         CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialOpcode::Logon(
@@ -195,7 +201,7 @@ pub fn read_initial_opcode<R: std::io::Read>(
         CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialOpcode::Reconnect(
             CMD_AUTH_RECONNECT_CHALLENGE_Client::read(r)?,
         )),
-        opcode => Err(InitialOpcodeError::InvalidOpcode(opcode)),
+        opcode => Err(ExpectedMessageError::UnexpectedOpcode(opcode)),
     }
 }
 
@@ -203,7 +209,7 @@ pub fn read_initial_opcode<R: std::io::Read>(
 #[cfg(feature = "tokio")]
 pub async fn tokio_read_initial_opcode<R: tokio::io::AsyncReadExt + Unpin + Send>(
     r: &mut R,
-) -> Result<InitialOpcode, InitialOpcodeError> {
+) -> Result<InitialOpcode, ExpectedMessageError> {
     let opcode = crate::util::tokio_read_u8_le(r).await?;
     match opcode {
         CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialOpcode::Logon(
@@ -212,7 +218,7 @@ pub async fn tokio_read_initial_opcode<R: tokio::io::AsyncReadExt + Unpin + Send
         CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialOpcode::Reconnect(
             CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read(r).await?,
         )),
-        opcode => Err(InitialOpcodeError::InvalidOpcode(opcode)),
+        opcode => Err(ExpectedMessageError::UnexpectedOpcode(opcode)),
     }
 }
 
@@ -220,51 +226,4 @@ pub async fn tokio_read_initial_opcode<R: tokio::io::AsyncReadExt + Unpin + Send
 pub enum InitialOpcode {
     Logon(CMD_AUTH_LOGON_CHALLENGE_Client),
     Reconnect(CMD_AUTH_RECONNECT_CHALLENGE_Client),
-}
-
-#[derive(Debug)]
-pub enum InitialOpcodeError {
-    Io(std::io::Error),
-    InvalidOpcode(u8),
-    String(std::string::FromUtf8Error),
-    Enum(crate::errors::EnumError),
-}
-impl Display for InitialOpcodeError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Io(i) => i.fmt(f),
-            Self::InvalidOpcode(i) => f.write_fmt(format_args!("opcode that is not CMD_AUTH_LOGON_CHALLENGE or CMD_AUTH_RECONNECT_CHALLENGE received: '{}'", i)),
-            InitialOpcodeError::String(i) => i.fmt(f),
-            InitialOpcodeError::Enum(i) => i.fmt(f),
-        }
-    }
-}
-impl std::error::Error for InitialOpcodeError {}
-
-impl From<std::io::Error> for InitialOpcodeError {
-    fn from(e: std::io::Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-impl From<std::string::FromUtf8Error> for InitialOpcodeError {
-    fn from(e: FromUtf8Error) -> Self {
-        Self::String(e)
-    }
-}
-
-impl From<crate::errors::EnumError> for InitialOpcodeError {
-    fn from(e: EnumError) -> Self {
-        Self::Enum(e)
-    }
-}
-
-impl From<ParseError> for InitialOpcodeError {
-    fn from(e: ParseError) -> Self {
-        match e {
-            ParseError::Io(i) => Self::Io(i),
-            ParseError::Enum(i) => Self::Enum(i),
-            ParseError::String(i) => Self::String(i),
-        }
-    }
 }
