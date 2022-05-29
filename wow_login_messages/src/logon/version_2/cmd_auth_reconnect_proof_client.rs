@@ -203,16 +203,16 @@ mod test {
     use super::super::*;
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
+    const RAW0: [u8; 58] = [ 0x03, 0xEA, 0xFA, 0xB9, 0xC6, 0x18, 0x15, 0x0B, 0xF2,
+         0xF9, 0x32, 0xCE, 0x27, 0x62, 0x79, 0x96, 0x99, 0x6B, 0x6D, 0x1A, 0x0D,
+         0xF3, 0xA5, 0x9E, 0x6A, 0x38, 0x02, 0xE7, 0x0B, 0xE1, 0x2F, 0x05, 0x71,
+         0xBA, 0x47, 0x8C, 0xA3, 0x28, 0xA7, 0x9E, 0x9A, 0x24, 0x28, 0xE6, 0x82,
+         0xED, 0xEC, 0xC7, 0xC9, 0xE8, 0x6E, 0xF1, 0x3B, 0x7B, 0xE1, 0xE0, 0xF5,
+         0x00, ];
+
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Client0() {
-        const RAW: [u8; 58] = [ 0x03, 0xEA, 0xFA, 0xB9, 0xC6, 0x18, 0x15, 0x0B,
-             0xF2, 0xF9, 0x32, 0xCE, 0x27, 0x62, 0x79, 0x96, 0x99, 0x6B, 0x6D, 0x1A,
-             0x0D, 0xF3, 0xA5, 0x9E, 0x6A, 0x38, 0x02, 0xE7, 0x0B, 0xE1, 0x2F, 0x05,
-             0x71, 0xBA, 0x47, 0x8C, 0xA3, 0x28, 0xA7, 0x9E, 0x9A, 0x24, 0x28, 0xE6,
-             0x82, 0xED, 0xEC, 0xC7, 0xC9, 0xE8, 0x6E, 0xF1, 0x3B, 0x7B, 0xE1, 0xE0,
-             0xF5, 0x00, ];
-
         let expected = CMD_AUTH_RECONNECT_PROOF_Client {
             proof_data: [ 0xEA, 0xFA, 0xB9, 0xC6, 0x18, 0x15, 0x0B, 0xF2, 0xF9,
                  0x32, 0xCE, 0x27, 0x62, 0x79, 0x96, 0x99, ],
@@ -223,7 +223,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
@@ -233,24 +233,17 @@ mod test {
         assert_eq!(t.client_proof, expected.client_proof);
         assert_eq!(t.client_checksum, expected.client_checksum);
 
-        assert_eq!(57 + header_size, RAW.len());
+        assert_eq!(57 + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Client0() {
-        const RAW: [u8; 58] = [ 0x03, 0xEA, 0xFA, 0xB9, 0xC6, 0x18, 0x15, 0x0B,
-             0xF2, 0xF9, 0x32, 0xCE, 0x27, 0x62, 0x79, 0x96, 0x99, 0x6B, 0x6D, 0x1A,
-             0x0D, 0xF3, 0xA5, 0x9E, 0x6A, 0x38, 0x02, 0xE7, 0x0B, 0xE1, 0x2F, 0x05,
-             0x71, 0xBA, 0x47, 0x8C, 0xA3, 0x28, 0xA7, 0x9E, 0x9A, 0x24, 0x28, 0xE6,
-             0x82, 0xED, 0xEC, 0xC7, 0xC9, 0xE8, 0x6E, 0xF1, 0x3B, 0x7B, 0xE1, 0xE0,
-             0xF5, 0x00, ];
-
         let expected = CMD_AUTH_RECONNECT_PROOF_Client {
             proof_data: [ 0xEA, 0xFA, 0xB9, 0xC6, 0x18, 0x15, 0x0B, 0xF2, 0xF9,
                  0x32, 0xCE, 0x27, 0x62, 0x79, 0x96, 0x99, ],
@@ -261,7 +254,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
@@ -271,24 +264,17 @@ mod test {
         assert_eq!(t.client_proof, expected.client_proof);
         assert_eq!(t.client_checksum, expected.client_checksum);
 
-        assert_eq!(57 + header_size, RAW.len());
+        assert_eq!(57 + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Client0() {
-        const RAW: [u8; 58] = [ 0x03, 0xEA, 0xFA, 0xB9, 0xC6, 0x18, 0x15, 0x0B,
-             0xF2, 0xF9, 0x32, 0xCE, 0x27, 0x62, 0x79, 0x96, 0x99, 0x6B, 0x6D, 0x1A,
-             0x0D, 0xF3, 0xA5, 0x9E, 0x6A, 0x38, 0x02, 0xE7, 0x0B, 0xE1, 0x2F, 0x05,
-             0x71, 0xBA, 0x47, 0x8C, 0xA3, 0x28, 0xA7, 0x9E, 0x9A, 0x24, 0x28, 0xE6,
-             0x82, 0xED, 0xEC, 0xC7, 0xC9, 0xE8, 0x6E, 0xF1, 0x3B, 0x7B, 0xE1, 0xE0,
-             0xF5, 0x00, ];
-
         let expected = CMD_AUTH_RECONNECT_PROOF_Client {
             proof_data: [ 0xEA, 0xFA, 0xB9, 0xC6, 0x18, 0x15, 0x0B, 0xF2, 0xF9,
                  0x32, 0xCE, 0x27, 0x62, 0x79, 0x96, 0x99, ],
@@ -299,7 +285,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
@@ -309,12 +295,12 @@ mod test {
         assert_eq!(t.client_proof, expected.client_proof);
         assert_eq!(t.client_checksum, expected.client_checksum);
 
-        assert_eq!(57 + header_size, RAW.len());
+        assert_eq!(57 + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
 }

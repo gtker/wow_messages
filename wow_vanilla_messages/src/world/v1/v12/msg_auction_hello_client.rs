@@ -49,18 +49,18 @@ mod test {
     use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
     use crate::{ClientMessage, ServerMessage};
 
+    const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
+         0xDE, 0x00, 0x00, 0x00, 0x00, ];
+
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_AUCTION_HELLO_Client0() {
-        const RAW: [u8; 14] = [ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE,
-             0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
-
         let expected = MSG_AUCTION_HELLO_Client {
             auctioneer: Guid::new(0xDEADBEEF),
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW)).unwrap();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
@@ -68,26 +68,23 @@ mod test {
 
         assert_eq!(t.auctioneer, expected.auctioneer);
 
-        assert_eq!(8 + header_size, RAW.len());
+        assert_eq!(8 + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_AUCTION_HELLO_Client0() {
-        const RAW: [u8; 14] = [ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE,
-             0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
-
         let expected = MSG_AUCTION_HELLO_Client {
             auctioneer: Guid::new(0xDEADBEEF),
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
@@ -95,26 +92,23 @@ mod test {
 
         assert_eq!(t.auctioneer, expected.auctioneer);
 
-        assert_eq!(8 + header_size, RAW.len());
+        assert_eq!(8 + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_AUCTION_HELLO_Client0() {
-        const RAW: [u8; 14] = [ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE,
-             0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
-
         let expected = MSG_AUCTION_HELLO_Client {
             auctioneer: Guid::new(0xDEADBEEF),
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
@@ -122,12 +116,12 @@ mod test {
 
         assert_eq!(t.auctioneer, expected.auctioneer);
 
-        assert_eq!(8 + header_size, RAW.len());
+        assert_eq!(8 + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
 }

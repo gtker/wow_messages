@@ -51,6 +51,15 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
         s.newline();
 
         for (i, t) in e.tests().iter().enumerate() {
+            s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
+            s.inc_indent();
+            for i in t.raw_bytes() {
+                s.w_break_at(format!(" {:#04X},", i), 80);
+            }
+            s.dec_indent();
+            s.wln_no_indent(" ];\n");
+
+
             for it in ImplType::types() {
                 s.metadata_comment(format!(
                     "Generated from `{filename}` line {line}.",
@@ -68,7 +77,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
                         number = i,
                     ),
                     |s| {
-                        print_test_case(s, t, e, o, it);
+                        print_test_case(s, t, e, o, it,i );
                     },
                 );
             }
@@ -76,15 +85,14 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
     });
 }
 
-fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it: ImplType) {
-    s.w(format!("const RAW: [u8; {}] = [", t.raw_bytes().len()));
-    s.inc_indent();
-    for i in t.raw_bytes() {
-        s.w_break_at(format!(" {:#04X},", i), 80);
-    }
-    s.dec_indent();
-    s.wln_no_indent(" ];\n");
-
+fn print_test_case(
+    s: &mut Writer,
+    t: &TestCase,
+    e: &Container,
+    o: &Objects,
+    it: ImplType,
+    i: usize,
+) {
     s.body_closing_with(
         format!("let expected = {}", t.subject()),
         |s| {
@@ -132,8 +140,9 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it:
     };
 
     s.wln(format!(
-        "let t = {opcode}::{read_text}(&mut {cursor}Cursor::new(&RAW)){postfix}.unwrap();",
+        "let t = {opcode}::{read_text}(&mut {cursor}Cursor::new(&RAW{i})){postfix}.unwrap();",
         opcode = opcode,
+        i = i,
         read_text = read_text,
         postfix = it.postfix(),
         cursor = match it {
@@ -170,18 +179,25 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it:
     // Size reports correct length
     match e.is_constant_sized() {
         false => {
-            s.wln("assert_eq!(t.size() + header_size, RAW.len());");
+            s.wln(format!(
+                "assert_eq!(t.size() + header_size, RAW{i}.len());",
+                i = i
+            ));
         }
         true => {
             s.wln(format!(
-                "assert_eq!({} + header_size, RAW.len());",
+                "assert_eq!({} + header_size, RAW{i}.len());",
                 e.sizes(o).maximum(),
+                i = i,
             ));
         }
     }
     s.newline();
 
-    s.wln("let mut dest = Vec::with_capacity(RAW.len());");
+    s.wln(format!(
+        "let mut dest = Vec::with_capacity(RAW{i}.len());",
+        i = i
+    ));
     s.wln(format!(
         "expected.{write_text}(&mut {cursor}Cursor::new(&mut dest)){postfix}.unwrap();",
         write_text = write_text,
@@ -193,7 +209,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it:
     ));
     s.newline();
 
-    s.wln("assert_eq!(dest, RAW);")
+    s.wln(format!("assert_eq!(dest, RAW{i});", i = i))
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]

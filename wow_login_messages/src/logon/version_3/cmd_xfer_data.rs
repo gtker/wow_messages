@@ -166,17 +166,17 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
+    const RAW0: [u8; 4] = [ 0x31, 0x01, 0x00, 0xFF, ];
+
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_DATA0() {
-        const RAW: [u8; 4] = [ 0x31, 0x01, 0x00, 0xFF, ];
-
         let expected = CMD_XFER_DATA {
             data: vec![ 0xFF, ],
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
@@ -184,25 +184,23 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW.len());
+        assert_eq!(t.size() + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_DATA0() {
-        const RAW: [u8; 4] = [ 0x31, 0x01, 0x00, 0xFF, ];
-
         let expected = CMD_XFER_DATA {
             data: vec![ 0xFF, ],
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
@@ -210,25 +208,23 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW.len());
+        assert_eq!(t.size() + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_DATA0() {
-        const RAW: [u8; 4] = [ 0x31, 0x01, 0x00, 0xFF, ];
-
         let expected = CMD_XFER_DATA {
             data: vec![ 0xFF, ],
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
@@ -236,25 +232,25 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW.len());
+        assert_eq!(t.size() + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
+
+    const RAW1: [u8; 3] = [ 0x31, 0x00, 0x00, ];
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_DATA1() {
-        const RAW: [u8; 3] = [ 0x31, 0x00, 0x00, ];
-
         let expected = CMD_XFER_DATA {
             data: vec![ ],
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
@@ -262,25 +258,23 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW.len());
+        assert_eq!(t.size() + header_size, RAW1.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW1.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW1);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_DATA1() {
-        const RAW: [u8; 3] = [ 0x31, 0x00, 0x00, ];
-
         let expected = CMD_XFER_DATA {
             data: vec![ ],
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
@@ -288,25 +282,23 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW.len());
+        assert_eq!(t.size() + header_size, RAW1.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW1.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW1);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_DATA1() {
-        const RAW: [u8; 3] = [ 0x31, 0x00, 0x00, ];
-
         let expected = CMD_XFER_DATA {
             data: vec![ ],
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
@@ -314,12 +306,12 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW.len());
+        assert_eq!(t.size() + header_size, RAW1.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW1.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW1);
     }
 
 }

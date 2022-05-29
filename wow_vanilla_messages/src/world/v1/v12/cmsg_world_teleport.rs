@@ -86,14 +86,14 @@ mod test {
     use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
     use crate::{ClientMessage, ServerMessage};
 
+    const RAW0: [u8; 34] = [ 0x00, 0x20, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
+         0xDE, 0xDE, 0xCA, 0xFA, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80,
+         0x3F, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x40, 0x40, 0x00, 0x00, 0x80,
+         0x40, ];
+
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_WORLD_TELEPORT0() {
-        const RAW: [u8; 34] = [ 0x00, 0x20, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE,
-             0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
-             0x80, 0x3F, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x40, 0x40, 0x00, 0x00,
-             0x80, 0x40, ];
-
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xFACADEDEADBEEF,
             map: Map::KALIMDOR,
@@ -104,7 +104,7 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW)).unwrap();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
@@ -117,22 +117,17 @@ mod test {
         assert_eq!(t.position_z, expected.position_z);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(28 + header_size, RAW.len());
+        assert_eq!(28 + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_WORLD_TELEPORT0() {
-        const RAW: [u8; 34] = [ 0x00, 0x20, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE,
-             0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
-             0x80, 0x3F, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x40, 0x40, 0x00, 0x00,
-             0x80, 0x40, ];
-
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xFACADEDEADBEEF,
             map: Map::KALIMDOR,
@@ -143,7 +138,7 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
@@ -156,22 +151,17 @@ mod test {
         assert_eq!(t.position_z, expected.position_z);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(28 + header_size, RAW.len());
+        assert_eq!(28 + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_WORLD_TELEPORT0() {
-        const RAW: [u8; 34] = [ 0x00, 0x20, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE,
-             0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
-             0x80, 0x3F, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x40, 0x40, 0x00, 0x00,
-             0x80, 0x40, ];
-
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xFACADEDEADBEEF,
             map: Map::KALIMDOR,
@@ -182,7 +172,7 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
@@ -195,12 +185,12 @@ mod test {
         assert_eq!(t.position_z, expected.position_z);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(28 + header_size, RAW.len());
+        assert_eq!(28 + header_size, RAW0.len());
 
-        let mut dest = Vec::with_capacity(RAW.len());
+        let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW);
+        assert_eq!(dest, RAW0);
     }
 
 }
