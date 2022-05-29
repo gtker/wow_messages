@@ -59,3 +59,24 @@ impl Display for EnumError {
 }
 
 impl std::error::Error for EnumError {}
+
+#[derive(Debug)]
+pub enum ExpectedOpcodeError {
+    Opcode(u16),
+    Parse(ParseError),
+}
+
+impl Display for ExpectedOpcodeError {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Opcode(opcode) => f.write_str(&format!("unexpected opcode found: '{}'", opcode)),
+            Self::Parse(i) => i.fmt(f),
+        }
+    }
+}
+
+impl From<ParseError> for ExpectedOpcodeError {
+    fn from(e: ParseError) -> Self {
+        Self::Parse(e)
+    }
+}
