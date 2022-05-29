@@ -184,7 +184,16 @@ impl UpdateMask {
     }
 
     pub fn size(&self) -> usize {
-        self.as_bytes().len()
+        1 // amount_of_blocks
+        + match self {
+            UpdateMask::Item(i) => i.header.len() * 4 + i.values.len() * 4,
+            UpdateMask::Container(i) => {i.header.len() * 4 + i.values.len() * 4}
+            UpdateMask::Unit(i) => {i.header.len() * 4 + i.values.len() * 4}
+            UpdateMask::Player(i) => {i.header.len() * 4 + i.values.len() * 4}
+            UpdateMask::GameObject(i) => {i.header.len() * 4 + i.values.len() * 4}
+            UpdateMask::DynamicObject(i) => {i.header.len() * 4 + i.values.len() * 4}
+            UpdateMask::Corpse(i) => {i.header.len() * 4 + i.values.len() * 4}
+        }
     }
 
     pub fn new() -> Self {
