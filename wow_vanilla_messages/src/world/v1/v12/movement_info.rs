@@ -40,7 +40,7 @@ impl MovementInfo {
 
         if let Some(if_statement) = &self.flags.on_transport {
             // transport: TransportInfo
-            &if_statement.transport.write_into_vec(w)?;
+            if_statement.transport.write_into_vec(w)?;
 
         }
 

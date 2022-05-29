@@ -104,7 +104,7 @@ pub fn print_write_field_integer(
 
 pub fn print_write_field_identifier(s: &mut Writer, variable_name: &str, variable_prefix: &str) {
     s.wln(format!(
-        "&{variable_prefix}{name}.write_into_vec(w)?;",
+        "{variable_prefix}{name}.write_into_vec(w)?;",
         name = variable_name,
         variable_prefix = variable_prefix,
     ));
@@ -231,7 +231,7 @@ pub fn print_write_definition(
         }
         Type::UpdateMask | Type::AuraMask => {
             s.wln(format!(
-                "&{variable_prefix}{name}.write_into_vec(w){postfix}?;",
+                "{variable_prefix}{name}.write_into_vec(w){postfix}?;",
                 variable_prefix = variable_prefix,
                 postfix = postfix,
                 name = d.name()

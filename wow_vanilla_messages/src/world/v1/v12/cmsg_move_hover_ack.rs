@@ -26,7 +26,7 @@ impl ClientMessage for CMSG_MOVE_HOVER_ACK {
         w.write_all(&self.counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        &self.movement_info.write_into_vec(w)?;
+        self.movement_info.write_into_vec(w)?;
 
         // is_applied: u32
         w.write_all(&self.is_applied.to_le_bytes())?;

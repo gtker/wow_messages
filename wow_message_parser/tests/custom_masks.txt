@@ -16,10 +16,10 @@ pub struct CustomMasks {
 impl CustomMasks {
     pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // update_mask: UpdateMask
-        &self.update_mask.write_into_vec(w)?;
+        self.update_mask.write_into_vec(w)?;
 
         // aura_mask: AuraMask
-        &self.aura_mask.write_into_vec(w)?;
+        self.aura_mask.write_into_vec(w)?;
 
         Ok(())
     }

@@ -20,7 +20,7 @@ impl ClientMessage for CMSG_CAST_SPELL {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        &self.targets.write_into_vec(w)?;
+        self.targets.write_into_vec(w)?;
 
         Ok(())
     }

@@ -53,7 +53,7 @@ impl ServerMessage for SMSG_SPELL_GO {
         }
 
         // targets: SpellCastTargets
-        &self.targets.write_into_vec(w)?;
+        self.targets.write_into_vec(w)?;
 
         if let Some(if_statement) = &self.flags.ammo {
             // ammo_display_id: u32

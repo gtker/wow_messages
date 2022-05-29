@@ -26,7 +26,7 @@ impl ClientMessage for CMSG_FORCE_TURN_RATE_CHANGE_ACK {
         w.write_all(&self.counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        &self.movement_info.write_into_vec(w)?;
+        self.movement_info.write_into_vec(w)?;
 
         // new_speed: f32
         w.write_all(&self.new_speed.to_le_bytes())?;

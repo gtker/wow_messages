@@ -38,7 +38,7 @@ impl ServerMessage for SMSG_SPELL_START {
         w.write_all(&self.timer.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        &self.targets.write_into_vec(w)?;
+        self.targets.write_into_vec(w)?;
 
         if let Some(if_statement) = &self.flags.ammo {
             // ammo_display_id: u32

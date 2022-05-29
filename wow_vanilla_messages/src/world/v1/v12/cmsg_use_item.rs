@@ -28,7 +28,7 @@ impl ClientMessage for CMSG_USE_ITEM {
         w.write_all(&self.spell_index.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        &self.targets.write_into_vec(w)?;
+        self.targets.write_into_vec(w)?;
 
         Ok(())
     }

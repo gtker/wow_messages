@@ -16,7 +16,7 @@ pub struct MSG_MOVE_JUMP {
 impl ClientMessage for MSG_MOVE_JUMP {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        &self.info.write_into_vec(w)?;
+        self.info.write_into_vec(w)?;
 
         Ok(())
     }
@@ -42,7 +42,7 @@ impl ClientMessage for MSG_MOVE_JUMP {
 impl ServerMessage for MSG_MOVE_JUMP {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        &self.info.write_into_vec(w)?;
+        self.info.write_into_vec(w)?;
 
         Ok(())
     }

@@ -58,7 +58,7 @@ impl Realm {
 
         if let Some(if_statement) = &self.flag.specify_build {
             // version: Version
-            &if_statement.version.write_into_vec(w)?;
+            if_statement.version.write_into_vec(w)?;
 
         }
 
