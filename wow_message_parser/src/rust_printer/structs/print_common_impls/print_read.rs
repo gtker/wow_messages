@@ -99,7 +99,7 @@ fn print_read_array_fixed(
             ));
             match array.size() {
                 ArraySize::Fixed(_) => s.wln(format!(
-                    "{name}[i] = String::from_utf8(s)?;",
+                    "{name}.push(String::from_utf8(s)?);",
                     name = d.name()
                 )),
                 ArraySize::Variable(_) => unreachable!(),
@@ -115,7 +115,7 @@ fn print_read_array_fixed(
         }
         ArrayType::PackedGuid => {
             s.wln(format!(
-                "{name}[i] = Guid::{prefix}read_packed(r){postfix}?;",
+                "{name}.push(Guid::{prefix}read_packed(r){postfix}?);",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,

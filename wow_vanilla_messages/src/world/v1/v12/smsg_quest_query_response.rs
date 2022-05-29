@@ -244,7 +244,7 @@ impl ServerMessage for SMSG_QUEST_QUERY_RESPONSE {
         let mut objective_texts = Vec::with_capacity(4);
         for i in 0..4 {
             let s = crate::util::read_c_string_to_vec(r)?;
-            objective_texts[i] = String::from_utf8(s)?;
+            objective_texts.push(String::from_utf8(s)?);
         }
         let objective_texts = objective_texts.try_into().unwrap();
 

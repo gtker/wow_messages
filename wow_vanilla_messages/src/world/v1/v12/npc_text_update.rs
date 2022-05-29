@@ -46,7 +46,7 @@ impl NpcTextUpdate {
         let mut texts = Vec::with_capacity(2);
         for i in 0..2 {
             let s = crate::util::read_c_string_to_vec(r)?;
-            texts[i] = String::from_utf8(s)?;
+            texts.push(String::from_utf8(s)?);
         }
         let texts = texts.try_into().unwrap();
 

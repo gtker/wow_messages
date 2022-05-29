@@ -72,7 +72,7 @@ impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
         let mut rank_names = Vec::with_capacity(10);
         for i in 0..10 {
             let s = crate::util::read_c_string_to_vec(r)?;
-            rank_names[i] = String::from_utf8(s)?;
+            rank_names.push(String::from_utf8(s)?);
         }
         let rank_names = rank_names.try_into().unwrap();
 
