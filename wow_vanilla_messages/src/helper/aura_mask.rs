@@ -12,13 +12,14 @@ pub struct AuraMask {
 
 impl AuraMask {
     const MAX_CAPACITY: usize = 32;
+
     pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
         let mut auras = [None; Self::MAX_CAPACITY];
         let mut bit_pattern: u32 = crate::util::read_u32_le(r)?;
 
-        for i in 0..Self::MAX_CAPACITY {
+        for (i, aura) in auras.iter_mut().enumerate() {
             if (bit_pattern & (1 << i)) != 0 {
-                auras[i] = Some(crate::util::read_u16_le(r)?);
+                *aura = Some(crate::util::read_u16_le(r)?);
             }
         }
 
@@ -44,11 +45,11 @@ impl AuraMask {
         Ok(())
     }
 
-    pub fn auras(&self) -> &[Option<u16>] {
+    pub const fn auras(&self) -> &[Option<u16>] {
         self.auras.as_slice()
     }
 
-    pub fn size(&self) -> usize {
+    pub const fn size(&self) -> usize {
         std::mem::size_of::<u32>() + std::mem::size_of::<u16>() * self.auras.len()
     }
 }
