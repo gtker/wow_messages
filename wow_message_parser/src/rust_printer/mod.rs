@@ -288,7 +288,7 @@ impl Writer {
         let size = if sizes.is_constant() {
             sizes.maximum().to_string()
         } else {
-            "self.size()".to_string()
+            "self.size() + 1".to_string()
         };
 
         self.wln(format!("let mut v = Vec::with_capacity({});", size));

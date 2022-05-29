@@ -125,7 +125,7 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let mut v = Vec::with_capacity(self.size());
+        let mut v = Vec::with_capacity(self.size() + 1);
         self.as_bytes(&mut v)?;
         w.write_all(&v)
     }
@@ -205,7 +205,7 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let mut v = Vec::with_capacity(self.size());
+            let mut v = Vec::with_capacity(self.size() + 1);
             self.as_bytes(&mut v)?;
             w.write_all(&v).await
         })
@@ -286,7 +286,7 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let mut v = Vec::with_capacity(self.size());
+            let mut v = Vec::with_capacity(self.size() + 1);
             self.as_bytes(&mut v)?;
             w.write_all(&v).await
         })
