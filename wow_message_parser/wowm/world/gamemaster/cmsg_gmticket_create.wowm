@@ -3,16 +3,13 @@
 cmsg CMSG_GMTICKET_CREATE = 0x0205 {
     GmTicketType category;
     Map map;
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
+    Vector3d position;
     CString message;
     CString reserved_for_future_use {
         comment = "cmangos/vmangos/mangoszero: Pre-TBC: 'Reserved for future use'";
         comment = "cmangos/vmangos/mangoszero: Unused";
     }
     if (category == BEHAVIOR_HARASSMENT) {
-        /* TODO Incorrect codegen */
         u32 chat_data_line_count;
         u32 chat_data_size_uncompressed;
         u8[-] compressed_chat_data;

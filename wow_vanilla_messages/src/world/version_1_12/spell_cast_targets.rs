@@ -18,62 +18,62 @@ impl SpellCastTargets {
         w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes())?;
 
         if let Some(if_statement) = &self.target_flags.unit {
-            // unit_target1: PackedGuid
-            w.write_all(&if_statement.unit_target1.packed_guid())?;
+            // unit_target: PackedGuid
+            w.write_all(&if_statement.unit_target.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.unit_enemy {
-            // unit_target2: PackedGuid
-            w.write_all(&if_statement.unit_target2.packed_guid())?;
+            // unit_enemy_target: PackedGuid
+            w.write_all(&if_statement.unit_enemy_target.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.gameobject {
-            // object_target1: PackedGuid
-            w.write_all(&if_statement.object_target1.packed_guid())?;
+            // object_target: PackedGuid
+            w.write_all(&if_statement.object_target.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.locked {
-            // object_target2: PackedGuid
-            w.write_all(&if_statement.object_target2.packed_guid())?;
+            // object_target_locked: PackedGuid
+            w.write_all(&if_statement.object_target_locked.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.item {
-            // item_target1: PackedGuid
-            w.write_all(&if_statement.item_target1.packed_guid())?;
+            // item_target: PackedGuid
+            w.write_all(&if_statement.item_target.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.trade_item {
-            // item_target2: PackedGuid
-            w.write_all(&if_statement.item_target2.packed_guid())?;
+            // item_trade_target: PackedGuid
+            w.write_all(&if_statement.item_trade_target.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.source_location {
-            // position_x1: f32
-            w.write_all(&if_statement.position_x1.to_le_bytes())?;
+            // source_position_x: f32
+            w.write_all(&if_statement.source_position_x.to_le_bytes())?;
 
-            // position_y1: f32
-            w.write_all(&if_statement.position_y1.to_le_bytes())?;
+            // source_position_y: f32
+            w.write_all(&if_statement.source_position_y.to_le_bytes())?;
 
-            // position_z1: f32
-            w.write_all(&if_statement.position_z1.to_le_bytes())?;
+            // source_position_z: f32
+            w.write_all(&if_statement.source_position_z.to_le_bytes())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.dest_location {
-            // position_x2: f32
-            w.write_all(&if_statement.position_x2.to_le_bytes())?;
+            // destination_position_x: f32
+            w.write_all(&if_statement.destination_position_x.to_le_bytes())?;
 
-            // position_y2: f32
-            w.write_all(&if_statement.position_y2.to_le_bytes())?;
+            // destination_position_y: f32
+            w.write_all(&if_statement.destination_position_y.to_le_bytes())?;
 
-            // position_z2: f32
-            w.write_all(&if_statement.position_z2.to_le_bytes())?;
+            // destination_position_z: f32
+            w.write_all(&if_statement.destination_position_z.to_le_bytes())?;
 
         }
 
@@ -86,14 +86,14 @@ impl SpellCastTargets {
         }
 
         if let Some(if_statement) = &self.target_flags.corpse_ally {
-            // corpse_target1: PackedGuid
-            w.write_all(&if_statement.corpse_target1.packed_guid())?;
+            // corpse_target_ally: PackedGuid
+            w.write_all(&if_statement.corpse_target_ally.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.corpse_enemy {
-            // corpse_target2: PackedGuid
-            w.write_all(&if_statement.corpse_target2.packed_guid())?;
+            // corpse_target_enemy: PackedGuid
+            w.write_all(&if_statement.corpse_target_enemy.packed_guid())?;
 
         }
 
@@ -107,11 +107,11 @@ impl SpellCastTargets {
         let target_flags = SpellCastTargetFlags::new(crate::util::read_u16_le(r)?);
 
         let target_flags_UNIT = if target_flags.is_UNIT() {
-            // unit_target1: PackedGuid
-            let unit_target1 = Guid::read_packed(r)?;
+            // unit_target: PackedGuid
+            let unit_target = Guid::read_packed(r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_UNIT {
-                unit_target1,
+                unit_target,
             })
         }
         else {
@@ -119,11 +119,11 @@ impl SpellCastTargets {
         };
 
         let target_flags_UNIT_ENEMY = if target_flags.is_UNIT_ENEMY() {
-            // unit_target2: PackedGuid
-            let unit_target2 = Guid::read_packed(r)?;
+            // unit_enemy_target: PackedGuid
+            let unit_enemy_target = Guid::read_packed(r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY {
-                unit_target2,
+                unit_enemy_target,
             })
         }
         else {
@@ -131,11 +131,11 @@ impl SpellCastTargets {
         };
 
         let target_flags_GAMEOBJECT = if target_flags.is_GAMEOBJECT() {
-            // object_target1: PackedGuid
-            let object_target1 = Guid::read_packed(r)?;
+            // object_target: PackedGuid
+            let object_target = Guid::read_packed(r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT {
-                object_target1,
+                object_target,
             })
         }
         else {
@@ -143,11 +143,11 @@ impl SpellCastTargets {
         };
 
         let target_flags_LOCKED = if target_flags.is_LOCKED() {
-            // object_target2: PackedGuid
-            let object_target2 = Guid::read_packed(r)?;
+            // object_target_locked: PackedGuid
+            let object_target_locked = Guid::read_packed(r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_LOCKED {
-                object_target2,
+                object_target_locked,
             })
         }
         else {
@@ -155,11 +155,11 @@ impl SpellCastTargets {
         };
 
         let target_flags_ITEM = if target_flags.is_ITEM() {
-            // item_target1: PackedGuid
-            let item_target1 = Guid::read_packed(r)?;
+            // item_target: PackedGuid
+            let item_target = Guid::read_packed(r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_ITEM {
-                item_target1,
+                item_target,
             })
         }
         else {
@@ -167,11 +167,11 @@ impl SpellCastTargets {
         };
 
         let target_flags_TRADE_ITEM = if target_flags.is_TRADE_ITEM() {
-            // item_target2: PackedGuid
-            let item_target2 = Guid::read_packed(r)?;
+            // item_trade_target: PackedGuid
+            let item_trade_target = Guid::read_packed(r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM {
-                item_target2,
+                item_trade_target,
             })
         }
         else {
@@ -179,16 +179,16 @@ impl SpellCastTargets {
         };
 
         let target_flags_SOURCE_LOCATION = if target_flags.is_SOURCE_LOCATION() {
-            // position_x1: f32
-            let position_x1 = crate::util::read_f32_le(r)?;
-            // position_y1: f32
-            let position_y1 = crate::util::read_f32_le(r)?;
-            // position_z1: f32
-            let position_z1 = crate::util::read_f32_le(r)?;
+            // source_position_x: f32
+            let source_position_x = crate::util::read_f32_le(r)?;
+            // source_position_y: f32
+            let source_position_y = crate::util::read_f32_le(r)?;
+            // source_position_z: f32
+            let source_position_z = crate::util::read_f32_le(r)?;
             Some(SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION {
-                position_x1,
-                position_y1,
-                position_z1,
+                source_position_x,
+                source_position_y,
+                source_position_z,
             })
         }
         else {
@@ -196,16 +196,16 @@ impl SpellCastTargets {
         };
 
         let target_flags_DEST_LOCATION = if target_flags.is_DEST_LOCATION() {
-            // position_x2: f32
-            let position_x2 = crate::util::read_f32_le(r)?;
-            // position_y2: f32
-            let position_y2 = crate::util::read_f32_le(r)?;
-            // position_z2: f32
-            let position_z2 = crate::util::read_f32_le(r)?;
+            // destination_position_x: f32
+            let destination_position_x = crate::util::read_f32_le(r)?;
+            // destination_position_y: f32
+            let destination_position_y = crate::util::read_f32_le(r)?;
+            // destination_position_z: f32
+            let destination_position_z = crate::util::read_f32_le(r)?;
             Some(SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION {
-                position_x2,
-                position_y2,
-                position_z2,
+                destination_position_x,
+                destination_position_y,
+                destination_position_z,
             })
         }
         else {
@@ -226,11 +226,11 @@ impl SpellCastTargets {
         };
 
         let target_flags_CORPSE_ALLY = if target_flags.is_CORPSE_ALLY() {
-            // corpse_target1: PackedGuid
-            let corpse_target1 = Guid::read_packed(r)?;
+            // corpse_target_ally: PackedGuid
+            let corpse_target_ally = Guid::read_packed(r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY {
-                corpse_target1,
+                corpse_target_ally,
             })
         }
         else {
@@ -238,11 +238,11 @@ impl SpellCastTargets {
         };
 
         let target_flags_CORPSE_ENEMY = if target_flags.is_CORPSE_ENEMY() {
-            // corpse_target2: PackedGuid
-            let corpse_target2 = Guid::read_packed(r)?;
+            // corpse_target_enemy: PackedGuid
+            let corpse_target_enemy = Guid::read_packed(r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY {
-                corpse_target2,
+                corpse_target_enemy,
             })
         }
         else {
@@ -934,97 +934,97 @@ impl SpellCastTargets_SpellCastTargetFlags {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_UNIT {
-    pub unit_target1: Guid,
+    pub unit_target: Guid,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_UNIT {
     pub(crate) fn size(&self) -> usize {
-        self.unit_target1.size() // unit_target1: Guid
+        self.unit_target.size() // unit_target: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_ITEM {
-    pub item_target1: Guid,
+    pub item_target: Guid,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_ITEM {
     pub(crate) fn size(&self) -> usize {
-        self.item_target1.size() // item_target1: Guid
+        self.item_target.size() // item_target: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION {
-    pub position_x1: f32,
-    pub position_y1: f32,
-    pub position_z1: f32,
+    pub source_position_x: f32,
+    pub source_position_y: f32,
+    pub source_position_z: f32,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION {
     pub(crate) fn size(&self) -> usize {
-        4 // position_x1: f32
-        + 4 // position_y1: f32
-        + 4 // position_z1: f32
+        4 // source_position_x: f32
+        + 4 // source_position_y: f32
+        + 4 // source_position_z: f32
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION {
-    pub position_x2: f32,
-    pub position_y2: f32,
-    pub position_z2: f32,
+    pub destination_position_x: f32,
+    pub destination_position_y: f32,
+    pub destination_position_z: f32,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION {
     pub(crate) fn size(&self) -> usize {
-        4 // position_x2: f32
-        + 4 // position_y2: f32
-        + 4 // position_z2: f32
+        4 // destination_position_x: f32
+        + 4 // destination_position_y: f32
+        + 4 // destination_position_z: f32
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY {
-    pub unit_target2: Guid,
+    pub unit_enemy_target: Guid,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY {
     pub(crate) fn size(&self) -> usize {
-        self.unit_target2.size() // unit_target2: Guid
+        self.unit_enemy_target.size() // unit_enemy_target: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY {
-    pub corpse_target2: Guid,
+    pub corpse_target_enemy: Guid,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY {
     pub(crate) fn size(&self) -> usize {
-        self.corpse_target2.size() // corpse_target2: Guid
+        self.corpse_target_enemy.size() // corpse_target_enemy: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT {
-    pub object_target1: Guid,
+    pub object_target: Guid,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT {
     pub(crate) fn size(&self) -> usize {
-        self.object_target1.size() // object_target1: Guid
+        self.object_target.size() // object_target: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM {
-    pub item_target2: Guid,
+    pub item_trade_target: Guid,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM {
     pub(crate) fn size(&self) -> usize {
-        self.item_target2.size() // item_target2: Guid
+        self.item_trade_target.size() // item_trade_target: Guid
     }
 }
 
@@ -1041,23 +1041,23 @@ impl SpellCastTargets_SpellCastTargetFlags_STRING {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_LOCKED {
-    pub object_target2: Guid,
+    pub object_target_locked: Guid,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_LOCKED {
     pub(crate) fn size(&self) -> usize {
-        self.object_target2.size() // object_target2: Guid
+        self.object_target_locked.size() // object_target_locked: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY {
-    pub corpse_target1: Guid,
+    pub corpse_target_ally: Guid,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY {
     pub(crate) fn size(&self) -> usize {
-        self.corpse_target1.size() // corpse_target1: Guid
+        self.corpse_target_ally.size() // corpse_target_ally: Guid
     }
 }
 

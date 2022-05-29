@@ -1,5 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::version_1_12::Vector3d;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -9,9 +10,7 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct TransportInfo {
     pub guid: Guid,
-    pub position_x: f32,
-    pub position_y: f32,
-    pub position_z: f32,
+    pub position: Vector3d,
     pub orientation: f32,
     pub timestamp: u32,
 }
@@ -21,14 +20,8 @@ impl TransportInfo {
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
+        // position: Vector3d
+        self.position.write_into_vec(w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
@@ -45,12 +38,9 @@ impl TransportInfo {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
 
-        // position_x: f32
-        let position_x = crate::util::read_f32_le(r)?;
-        // position_y: f32
-        let position_y = crate::util::read_f32_le(r)?;
-        // position_z: f32
-        let position_z = crate::util::read_f32_le(r)?;
+        // position: Vector3d
+        let position = Vector3d::read(r)?;
+
         // orientation: f32
         let orientation = crate::util::read_f32_le(r)?;
         // timestamp: u32
@@ -58,9 +48,7 @@ impl TransportInfo {
 
         Ok(Self {
             guid,
-            position_x,
-            position_y,
-            position_z,
+            position,
             orientation,
             timestamp,
         })
@@ -71,9 +59,7 @@ impl TransportInfo {
 impl TransportInfo {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
+        + 12 // position: Vector3d
         + 4 // orientation: f32
         + 4 // timestamp: u32
     }

@@ -1,6 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::GmTicketType;
 use crate::world::version_1_12::Map;
+use crate::world::version_1_12::Vector3d;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -13,9 +14,7 @@ use std::io::Write;
 pub struct CMSG_GMTICKET_CREATE {
     pub category: CMSG_GMTICKET_CREATE_GmTicketType,
     pub map: Map,
-    pub position_x: f32,
-    pub position_y: f32,
-    pub position_z: f32,
+    pub position: Vector3d,
     pub message: String,
     pub reserved_for_future_use: String,
 }
@@ -28,14 +27,8 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
+        // position: Vector3d
+        self.position.write_into_vec(w)?;
 
         // message: CString
         w.write_all(self.message.as_bytes())?;
@@ -91,12 +84,9 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-        // position_x: f32
-        let position_x = crate::util::read_f32_le(r)?;
-        // position_y: f32
-        let position_y = crate::util::read_f32_le(r)?;
-        // position_z: f32
-        let position_z = crate::util::read_f32_le(r)?;
+        // position: Vector3d
+        let position = Vector3d::read(r)?;
+
         // message: CString
         let message = crate::util::read_c_string_to_vec(r)?;
         let message = String::from_utf8(message)?;
@@ -118,9 +108,7 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
                 let mut current_size = {
                     1 // category: CMSG_GMTICKET_CREATE_GmTicketType
                     + 4 // map: Map
-                    + 4 // position_x: f32
-                    + 4 // position_y: f32
-                    + 4 // position_z: f32
+                    + 12 // position: Vector3d
                     + message.len() + 1 // message: CString
                     + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
                 };
@@ -149,9 +137,7 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
         Ok(Self {
             category: category_if,
             map,
-            position_x,
-            position_y,
-            position_z,
+            position,
             message,
             reserved_for_future_use,
         })
@@ -163,9 +149,7 @@ impl CMSG_GMTICKET_CREATE {
     pub(crate) fn size(&self) -> usize {
         self.category.size() // category: CMSG_GMTICKET_CREATE_GmTicketType
         + 4 // map: Map
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
+        + 12 // position: Vector3d
         + self.message.len() + 1 // message: CString
         + self.reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
     }

@@ -67,6 +67,7 @@ mod test {
     use crate::world::version_1_12::InventoryType;
     use crate::world::version_1_12::Map;
     use crate::world::version_1_12::Race;
+    use crate::world::version_1_12::Vector3d;
     use super::*;
     use super::super::*;
     use crate::world::version_1_12::opcodes::ServerOpcodeMessage;

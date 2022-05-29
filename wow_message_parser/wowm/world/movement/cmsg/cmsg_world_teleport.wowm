@@ -3,18 +3,18 @@
 cmsg CMSG_WORLD_TELEPORT = 0x08 {
     u64 time_in_msec;
     Map map;
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
+    Vector3d position;
     f32 orientation;
 }
 
 test CMSG_WORLD_TELEPORT {
     time_in_msec = 0xFACADEDEADBEEF;
     map = KALIMDOR;
-    position_x = 1.0;
-    position_y = 2.0;
-    position_z = 3.0;
+    position = {
+        x = 1.0;
+        y = 2.0;
+        z = 3.0;
+    };
     orientation = 4.0;
 } [
     0x00, 0x20, /* Size: 32 */

@@ -1020,7 +1020,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/common_movement.wowm",
-        "start_position": 12
+        "start_position": 10
       },
       "features": [
         "Flag",
@@ -51064,38 +51064,11 @@
         },
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -51222,9 +51195,9 @@
       "features": [
         "CMsg",
         "SubObjects",
-        "SimpleBuiltInTypes",
         "ComplexBuiltInTypes",
         "IfEnum",
+        "SimpleBuiltInTypes",
         "EndlessArrays",
         "SimpleArrays",
         "WorldVersion"
@@ -55047,38 +55020,11 @@
       "members": [
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -55124,6 +55070,7 @@
       "only_has_io_error": true,
       "features": [
         "CMsg",
+        "SubObjects",
         "SimpleBuiltInTypes",
         "WorldVersion"
       ]
@@ -60838,38 +60785,11 @@
         },
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -60931,31 +60851,42 @@
               "tags": {}
             },
             {
-              "variable_name": "position_x",
+              "variable_name": "position",
               "verified_value": {
-                "FloatingNumber": {
-                  "value": 1.0,
-                  "original_string": "1.0"
-                }
-              },
-              "tags": {}
-            },
-            {
-              "variable_name": "position_y",
-              "verified_value": {
-                "FloatingNumber": {
-                  "value": 2.0,
-                  "original_string": "2.0"
-                }
-              },
-              "tags": {}
-            },
-            {
-              "variable_name": "position_z",
-              "verified_value": {
-                "FloatingNumber": {
-                  "value": 3.0,
-                  "original_string": "3.0"
+                "SubObject": {
+                  "ty_name": "Vector3d",
+                  "members": [
+                    {
+                      "variable_name": "x",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 1.0,
+                          "original_string": "1.0"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "y",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 2.0,
+                          "original_string": "2.0"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "z",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 3.0,
+                          "original_string": "3.0"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
                 }
               },
               "tags": {}
@@ -61022,7 +60953,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm",
-            "start_position": 12
+            "start_position": 10
           }
         }
       ],
@@ -61423,38 +61354,11 @@
         },
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -63253,38 +63157,11 @@
               },
               {
                 "Definition": {
-                  "name": "position_x",
+                  "name": "position",
                   "member_type": {
-                    "FloatingPoint": {
-                      "F32": "little"
-                    }
-                  },
-                  "constant_value": null,
-                  "used_as_size_in": null,
-                  "used_in_if": false,
-                  "tags": {}
-                }
-              },
-              {
-                "Definition": {
-                  "name": "position_y",
-                  "member_type": {
-                    "FloatingPoint": {
-                      "F32": "little"
-                    }
-                  },
-                  "constant_value": null,
-                  "used_as_size_in": null,
-                  "used_in_if": false,
-                  "tags": {}
-                }
-              },
-              {
-                "Definition": {
-                  "name": "position_z",
-                  "member_type": {
-                    "FloatingPoint": {
-                      "F32": "little"
+                    "Identifier": {
+                      "s": "Vector3d",
+                      "upcast": null
                     }
                   },
                   "constant_value": null,
@@ -63343,7 +63220,6 @@
         "SMsg",
         "SubObjects",
         "IfEnum",
-        "SimpleBuiltInTypes",
         "WorldVersion"
       ]
     },
@@ -67744,38 +67620,11 @@
         },
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -68024,7 +67873,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/common_movement.wowm",
-        "start_position": 40
+        "start_position": 38
       },
       "only_has_io_error": true,
       "features": [
@@ -71947,38 +71796,11 @@
       "members": [
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -72040,7 +71862,6 @@
       "only_has_io_error": false,
       "features": [
         "SMsg",
-        "SimpleBuiltInTypes",
         "SubObjects",
         "WorldVersion"
       ]
@@ -73120,13 +72941,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm",
-            "start_position": 55
+            "start_position": 53
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm",
-        "start_position": 45
+        "start_position": 43
       },
       "only_has_io_error": false,
       "features": [
@@ -80508,38 +80329,11 @@
         },
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -80593,31 +80387,42 @@
               "tags": {}
             },
             {
-              "variable_name": "position_x",
+              "variable_name": "position",
               "verified_value": {
-                "FloatingNumber": {
-                  "value": -8949.95,
-                  "original_string": "-8949.95"
-                }
-              },
-              "tags": {}
-            },
-            {
-              "variable_name": "position_y",
-              "verified_value": {
-                "FloatingNumber": {
-                  "value": -132.493,
-                  "original_string": "-132.493"
-                }
-              },
-              "tags": {}
-            },
-            {
-              "variable_name": "position_z",
-              "verified_value": {
-                "FloatingNumber": {
-                  "value": 83.5312,
-                  "original_string": "83.5312"
+                "SubObject": {
+                  "ty_name": "Vector3d",
+                  "members": [
+                    {
+                      "variable_name": "x",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": -8949.95,
+                          "original_string": "-8949.95"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "y",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": -132.493,
+                          "original_string": "-132.493"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "z",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 83.5312,
+                          "original_string": "83.5312"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
                 }
               },
               "tags": {}
@@ -80674,7 +80479,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm",
-            "start_position": 14
+            "start_position": 12
           }
         }
       ],
@@ -82542,38 +82347,11 @@
         },
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -82635,8 +82413,8 @@
       "features": [
         "SMsg",
         "PackedGuidTypes",
-        "SimpleBuiltInTypes",
         "SubObjects",
+        "SimpleBuiltInTypes",
         "WorldVersion"
       ]
     },
@@ -82660,38 +82438,11 @@
         },
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -82753,8 +82504,8 @@
       "features": [
         "SMsg",
         "PackedGuidTypes",
-        "SimpleBuiltInTypes",
         "SubObjects",
+        "SimpleBuiltInTypes",
         "WorldVersion"
       ]
     },
@@ -83718,38 +83469,11 @@
       "members": [
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -83794,6 +83518,7 @@
       "only_has_io_error": true,
       "features": [
         "SMsg",
+        "SubObjects",
         "SimpleBuiltInTypes",
         "WorldVersion"
       ]
@@ -86671,38 +86396,11 @@
         },
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -86734,6 +86432,7 @@
       "features": [
         "SMsg",
         "SimpleBuiltInTypes",
+        "SubObjects",
         "WorldVersion"
       ]
     },
@@ -97258,7 +96957,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "unit_target1",
+                  "name": "unit_target",
                   "member_type": "PackedGuid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -97292,7 +96991,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "unit_target2",
+                  "name": "unit_enemy_target",
                   "member_type": "PackedGuid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -97326,7 +97025,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "object_target1",
+                  "name": "object_target",
                   "member_type": "PackedGuid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -97360,7 +97059,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "object_target2",
+                  "name": "object_target_locked",
                   "member_type": "PackedGuid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -97394,7 +97093,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "item_target1",
+                  "name": "item_target",
                   "member_type": "PackedGuid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -97428,7 +97127,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "item_target2",
+                  "name": "item_trade_target",
                   "member_type": "PackedGuid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -97462,7 +97161,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "position_x1",
+                  "name": "source_position_x",
                   "member_type": {
                     "FloatingPoint": {
                       "F32": "little"
@@ -97476,7 +97175,7 @@
               },
               {
                 "Definition": {
-                  "name": "position_y1",
+                  "name": "source_position_y",
                   "member_type": {
                     "FloatingPoint": {
                       "F32": "little"
@@ -97490,7 +97189,7 @@
               },
               {
                 "Definition": {
-                  "name": "position_z1",
+                  "name": "source_position_z",
                   "member_type": {
                     "FloatingPoint": {
                       "F32": "little"
@@ -97528,7 +97227,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "position_x2",
+                  "name": "destination_position_x",
                   "member_type": {
                     "FloatingPoint": {
                       "F32": "little"
@@ -97542,7 +97241,7 @@
               },
               {
                 "Definition": {
-                  "name": "position_y2",
+                  "name": "destination_position_y",
                   "member_type": {
                     "FloatingPoint": {
                       "F32": "little"
@@ -97556,7 +97255,7 @@
               },
               {
                 "Definition": {
-                  "name": "position_z2",
+                  "name": "destination_position_z",
                   "member_type": {
                     "FloatingPoint": {
                       "F32": "little"
@@ -97628,7 +97327,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "corpse_target1",
+                  "name": "corpse_target_ally",
                   "member_type": "PackedGuid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -97662,7 +97361,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "corpse_target2",
+                  "name": "corpse_target_enemy",
                   "member_type": "PackedGuid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -99015,38 +98714,11 @@
         },
         {
           "Definition": {
-            "name": "position_x",
+            "name": "position",
             "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_y",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "position_z",
-            "member_type": {
-              "FloatingPoint": {
-                "F32": "little"
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -99107,6 +98779,7 @@
       "features": [
         "Struct",
         "PackedGuidTypes",
+        "SubObjects",
         "SimpleBuiltInTypes",
         "WorldVersion"
       ]

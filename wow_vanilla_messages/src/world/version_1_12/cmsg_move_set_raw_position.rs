@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::version_1_12::Vector3d;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -10,22 +11,14 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
 pub struct CMSG_MOVE_SET_RAW_POSITION {
-    pub position_x: f32,
-    pub position_y: f32,
-    pub position_z: f32,
+    pub position: Vector3d,
     pub orientation: f32,
 }
 
 impl ClientMessage for CMSG_MOVE_SET_RAW_POSITION {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
+        // position: Vector3d
+        self.position.write_into_vec(w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
@@ -39,18 +32,13 @@ impl ClientMessage for CMSG_MOVE_SET_RAW_POSITION {
     }
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        // position_x: f32
-        let position_x = crate::util::read_f32_le(r)?;
-        // position_y: f32
-        let position_y = crate::util::read_f32_le(r)?;
-        // position_z: f32
-        let position_z = crate::util::read_f32_le(r)?;
+        // position: Vector3d
+        let position = Vector3d::read(r)?;
+
         // orientation: f32
         let orientation = crate::util::read_f32_le(r)?;
         Ok(Self {
-            position_x,
-            position_y,
-            position_z,
+            position,
             orientation,
         })
     }

@@ -20,9 +20,7 @@ struct Character {
     u8 level;
     Area area;
     Map map;
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
+    Vector3d position;
     u32 guild_id;
     CharacterFlags flags;
     u8 first_login;
@@ -51,9 +49,7 @@ struct Character {
 | - | 1 / - | u8 | level |  |  |
 | - | ? / - | [Area](area.md) | area |  |  |
 | - | ? / - | [Map](map.md) | map |  |  |
-| - | 4 / Little | f32 | position_x |  |  |
-| - | 4 / Little | f32 | position_y |  |  |
-| - | 4 / Little | f32 | position_z |  |  |
+| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | u32 | guild_id |  |  |
 | - | ? / - | [CharacterFlags](characterflags.md) | flags |  |  |
 | - | 1 / - | u8 | first_login |  |  |

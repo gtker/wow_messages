@@ -10,9 +10,7 @@ smsg MSG_CORPSE_QUERY_Server = 0x0216 {
     CorpseQueryResult result;
     if (result == FOUND) {
         Map map;
-        f32 position_x;
-        f32 position_y;
-        f32 position_z;
+        Vector3d position;
         Map corpse_map;
     }
 }
@@ -39,8 +37,6 @@ If result is equal to `FOUND`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | ? / - | [Map](map.md) | map |  |  |
-| - | 4 / Little | f32 | position_x |  |  |
-| - | 4 / Little | f32 | position_y |  |  |
-| - | 4 / Little | f32 | position_z |  |  |
+| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
 | - | ? / - | [Map](map.md) | corpse_map |  |  |
 

@@ -1,6 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::version_1_12::MonsterMoveType;
+use crate::world::version_1_12::Vector3d;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -12,9 +13,7 @@ use std::io::Write;
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_MONSTER_MOVE {
     pub guid: Guid,
-    pub position_x: f32,
-    pub position_y: f32,
-    pub position_z: f32,
+    pub position: Vector3d,
     pub spline_id: u32,
     pub move_type: MonsterMoveType,
 }
@@ -24,14 +23,8 @@ impl ServerMessage for SMSG_MONSTER_MOVE {
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
+        // position: Vector3d
+        self.position.write_into_vec(w)?;
 
         // spline_id: u32
         w.write_all(&self.spline_id.to_le_bytes())?;
@@ -51,12 +44,9 @@ impl ServerMessage for SMSG_MONSTER_MOVE {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
 
-        // position_x: f32
-        let position_x = crate::util::read_f32_le(r)?;
-        // position_y: f32
-        let position_y = crate::util::read_f32_le(r)?;
-        // position_z: f32
-        let position_z = crate::util::read_f32_le(r)?;
+        // position: Vector3d
+        let position = Vector3d::read(r)?;
+
         // spline_id: u32
         let spline_id = crate::util::read_u32_le(r)?;
 
@@ -65,9 +55,7 @@ impl ServerMessage for SMSG_MONSTER_MOVE {
 
         Ok(Self {
             guid,
-            position_x,
-            position_y,
-            position_z,
+            position,
             spline_id,
             move_type,
         })
@@ -78,9 +66,7 @@ impl ServerMessage for SMSG_MONSTER_MOVE {
 impl SMSG_MONSTER_MOVE {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
+        + 12 // position: Vector3d
         + 4 // spline_id: u32
         + 1 // move_type: MonsterMoveType
     }

@@ -1,6 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::CorpseQueryResult;
 use crate::world::version_1_12::Map;
+use crate::world::version_1_12::Vector3d;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -24,21 +25,13 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
             MSG_CORPSE_QUERY_Server_CorpseQueryResult::FOUND {
                 corpse_map,
                 map,
-                position_x,
-                position_y,
-                position_z,
+                position,
             } => {
                 // map: Map
                 w.write_all(&(map.as_int() as u32).to_le_bytes())?;
 
-                // position_x: f32
-                w.write_all(&position_x.to_le_bytes())?;
-
-                // position_y: f32
-                w.write_all(&position_y.to_le_bytes())?;
-
-                // position_z: f32
-                w.write_all(&position_z.to_le_bytes())?;
+                // position: Vector3d
+                position.write_into_vec(w)?;
 
                 // corpse_map: Map
                 w.write_all(&(corpse_map.as_int() as u32).to_le_bytes())?;
@@ -64,21 +57,16 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
                 // map: Map
                 let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-                // position_x: f32
-                let position_x = crate::util::read_f32_le(r)?;
-                // position_y: f32
-                let position_y = crate::util::read_f32_le(r)?;
-                // position_z: f32
-                let position_z = crate::util::read_f32_le(r)?;
+                // position: Vector3d
+                let position = Vector3d::read(r)?;
+
                 // corpse_map: Map
                 let corpse_map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
                 MSG_CORPSE_QUERY_Server_CorpseQueryResult::FOUND {
                     corpse_map,
                     map,
-                    position_x,
-                    position_y,
-                    position_z,
+                    position,
                 }
             }
         };
@@ -102,9 +90,7 @@ pub enum MSG_CORPSE_QUERY_Server_CorpseQueryResult {
     FOUND {
         corpse_map: Map,
         map: Map,
-        position_x: f32,
-        position_y: f32,
-        position_z: f32,
+        position: Vector3d,
     },
 }
 
@@ -134,16 +120,12 @@ impl MSG_CORPSE_QUERY_Server_CorpseQueryResult {
             Self::FOUND {
                 corpse_map,
                 map,
-                position_x,
-                position_y,
-                position_z,
+                position,
             } => {
                 1
                 + 4 // corpse_map: Map
                 + 4 // map: Map
-                + 4 // position_x: f32
-                + 4 // position_y: f32
-                + 4 // position_z: f32
+                + 12 // position: Vector3d
             }
         }
     }

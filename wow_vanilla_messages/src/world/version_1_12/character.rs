@@ -7,6 +7,7 @@ use crate::world::version_1_12::Class;
 use crate::world::version_1_12::Gender;
 use crate::world::version_1_12::Map;
 use crate::world::version_1_12::Race;
+use crate::world::version_1_12::Vector3d;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
@@ -28,9 +29,7 @@ pub struct Character {
     pub level: u8,
     pub area: Area,
     pub map: Map,
-    pub position_x: f32,
-    pub position_y: f32,
-    pub position_z: f32,
+    pub position: Vector3d,
     pub guild_id: u32,
     pub flags: CharacterFlags,
     pub first_login: u8,
@@ -90,14 +89,8 @@ impl Character {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
+        // position: Vector3d
+        self.position.write_into_vec(w)?;
 
         // guild_id: u32
         w.write_all(&self.guild_id.to_le_bytes())?;
@@ -174,12 +167,9 @@ impl Character {
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-        // position_x: f32
-        let position_x = crate::util::read_f32_le(r)?;
-        // position_y: f32
-        let position_y = crate::util::read_f32_le(r)?;
-        // position_z: f32
-        let position_z = crate::util::read_f32_le(r)?;
+        // position: Vector3d
+        let position = Vector3d::read(r)?;
+
         // guild_id: u32
         let guild_id = crate::util::read_u32_le(r)?;
 
@@ -226,9 +216,7 @@ impl Character {
             level,
             area,
             map,
-            position_x,
-            position_y,
-            position_z,
+            position,
             guild_id,
             flags,
             first_login,
@@ -256,9 +244,7 @@ impl Character {
         + 1 // level: u8
         + 4 // area: Area
         + 4 // map: Map
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
+        + 12 // position: Vector3d
         + 4 // guild_id: u32
         + 4 // flags: CharacterFlags
         + 1 // first_login: u8

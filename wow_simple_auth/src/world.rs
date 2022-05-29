@@ -81,9 +81,11 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
                         level: 0,
                         area: Default::default(),
                         map: Default::default(),
-                        position_x: 0.0,
-                        position_y: 0.0,
-                        position_z: 0.0,
+                        position: Vector3d {
+                            x: 0.0,
+                            y: 0.0,
+                            z: 0.0,
+                        },
                         guild_id: 0,
                         flags: Default::default(),
                         first_login: 0,
@@ -106,9 +108,11 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
 
     SMSG_LOGIN_VERIFY_WORLD {
         map: Map::EASTERN_KINGDOMS,
-        position_x: 200.0,
-        position_y: 200.0,
-        position_z: 200.0,
+        position: Vector3d {
+            x: 200.0,
+            y: 200.0,
+            z: 200.0,
+        },
         orientation: 0.0,
     }
     .tokio_write_encrypted_server(&mut stream, &mut encryption)

@@ -28,9 +28,7 @@ struct Character {
     u8 level;
     Area area;
     Map map;
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
+    Vector3d position;
     u32 guild_id;
     CharacterFlags flags;
     u8 first_login;

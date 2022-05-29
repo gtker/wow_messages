@@ -1,5 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::Map;
+use crate::world::version_1_12::Vector3d;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -12,9 +13,7 @@ use std::io::Write;
 #[derive(Copy)]
 pub struct SMSG_LOGIN_VERIFY_WORLD {
     pub map: Map,
-    pub position_x: f32,
-    pub position_y: f32,
-    pub position_z: f32,
+    pub position: Vector3d,
     pub orientation: f32,
 }
 
@@ -23,14 +22,8 @@ impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
+        // position: Vector3d
+        self.position.write_into_vec(w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
@@ -47,19 +40,14 @@ impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-        // position_x: f32
-        let position_x = crate::util::read_f32_le(r)?;
-        // position_y: f32
-        let position_y = crate::util::read_f32_le(r)?;
-        // position_z: f32
-        let position_z = crate::util::read_f32_le(r)?;
+        // position: Vector3d
+        let position = Vector3d::read(r)?;
+
         // orientation: f32
         let orientation = crate::util::read_f32_le(r)?;
         Ok(Self {
             map,
-            position_x,
-            position_y,
-            position_z,
+            position,
             orientation,
         })
     }
@@ -70,6 +58,7 @@ impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
 mod test {
     use super::SMSG_LOGIN_VERIFY_WORLD;
     use crate::world::version_1_12::Map;
+    use crate::world::version_1_12::Vector3d;
     use super::*;
     use super::super::*;
     use crate::world::version_1_12::opcodes::ServerOpcodeMessage;
@@ -85,9 +74,11 @@ mod test {
     fn SMSG_LOGIN_VERIFY_WORLD0() {
         let expected = SMSG_LOGIN_VERIFY_WORLD {
             map: Map::EASTERN_KINGDOMS,
-            position_x: -8949.95_f32,
-            position_y: -132.493_f32,
-            position_z: 83.5312_f32,
+            position: Vector3d {
+                x: -8949.95_f32,
+                y: -132.493_f32,
+                z: 83.5312_f32,
+            },
             orientation: 0_f32,
         };
 
@@ -99,9 +90,7 @@ mod test {
         };
 
         assert_eq!(t.map, expected.map);
-        assert_eq!(t.position_x, expected.position_x);
-        assert_eq!(t.position_y, expected.position_y);
-        assert_eq!(t.position_z, expected.position_z);
+        assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
         assert_eq!(20 + header_size, RAW0.len());
@@ -117,9 +106,11 @@ mod test {
     async fn tokio_SMSG_LOGIN_VERIFY_WORLD0() {
         let expected = SMSG_LOGIN_VERIFY_WORLD {
             map: Map::EASTERN_KINGDOMS,
-            position_x: -8949.95_f32,
-            position_y: -132.493_f32,
-            position_z: 83.5312_f32,
+            position: Vector3d {
+                x: -8949.95_f32,
+                y: -132.493_f32,
+                z: 83.5312_f32,
+            },
             orientation: 0_f32,
         };
 
@@ -131,9 +122,7 @@ mod test {
         };
 
         assert_eq!(t.map, expected.map);
-        assert_eq!(t.position_x, expected.position_x);
-        assert_eq!(t.position_y, expected.position_y);
-        assert_eq!(t.position_z, expected.position_z);
+        assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
         assert_eq!(20 + header_size, RAW0.len());
@@ -149,9 +138,11 @@ mod test {
     async fn astd_SMSG_LOGIN_VERIFY_WORLD0() {
         let expected = SMSG_LOGIN_VERIFY_WORLD {
             map: Map::EASTERN_KINGDOMS,
-            position_x: -8949.95_f32,
-            position_y: -132.493_f32,
-            position_z: 83.5312_f32,
+            position: Vector3d {
+                x: -8949.95_f32,
+                y: -132.493_f32,
+                z: 83.5312_f32,
+            },
             orientation: 0_f32,
         };
 
@@ -163,9 +154,7 @@ mod test {
         };
 
         assert_eq!(t.map, expected.map);
-        assert_eq!(t.position_x, expected.position_x);
-        assert_eq!(t.position_y, expected.position_y);
-        assert_eq!(t.position_z, expected.position_z);
+        assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
         assert_eq!(20 + header_size, RAW0.len());

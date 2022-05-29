@@ -2,9 +2,7 @@
 
 smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
     PackedGuid transport;
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
+    Vector3d position;
     u32 spline_id;
     MonsterMoveType move_type;
     /* TODO Might have more things? */

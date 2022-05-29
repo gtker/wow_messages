@@ -2,9 +2,7 @@
 
 smsg SMSG_LOGIN_VERIFY_WORLD = 0x236 {
     Map map;
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
+    Vector3d position;
     f32 orientation;
 } {
     description = "Message to the client that is has successfully logged into the world and that it should load the map and coordinates.";
@@ -13,16 +11,18 @@ smsg SMSG_LOGIN_VERIFY_WORLD = 0x236 {
 
 test SMSG_LOGIN_VERIFY_WORLD {
     map = EASTERN_KINGDOMS;
-    position_x = -8949.95;
-    position_y = -132.493;
-    position_z = 83.5312;
+    position = {
+        x = -8949.95;
+        y = -132.493;
+        z = 83.5312;
+    };
     orientation = 0.0;
 } [
     0x00, 0x16, /* size */
     0x36, 0x02, /* opcode */
     0x00, 0x00, 0x00, 0x00, /* map */
-    0xcd, 0xd7, 0x0b, 0xc6, /* position_x */
-    0x35, 0x7e, 0x04, 0xc3, /* position_y */
-    0xf9, 0x0f, 0xa7, 0x42, /* position_z */
+    0xcd, 0xd7, 0x0b, 0xc6, /* position.x */
+    0x35, 0x7e, 0x04, 0xc3, /* position.y */
+    0xf9, 0x0f, 0xa7, 0x42, /* position.z */
     0x00, 0x00, 0x00, 0x00, /* orientation */
 ]

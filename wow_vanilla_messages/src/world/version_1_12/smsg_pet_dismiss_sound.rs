@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::version_1_12::Vector3d;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
@@ -11,9 +12,7 @@ use std::io::Write;
 #[derive(Copy)]
 pub struct SMSG_PET_DISMISS_SOUND {
     pub sound_id: u32,
-    pub position_x: f32,
-    pub position_y: f32,
-    pub position_z: f32,
+    pub position: Vector3d,
 }
 
 impl ServerMessage for SMSG_PET_DISMISS_SOUND {
@@ -21,14 +20,8 @@ impl ServerMessage for SMSG_PET_DISMISS_SOUND {
         // sound_id: u32
         w.write_all(&self.sound_id.to_le_bytes())?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
+        // position: Vector3d
+        self.position.write_into_vec(w)?;
 
         Ok(())
     }
@@ -42,17 +35,12 @@ impl ServerMessage for SMSG_PET_DISMISS_SOUND {
         // sound_id: u32
         let sound_id = crate::util::read_u32_le(r)?;
 
-        // position_x: f32
-        let position_x = crate::util::read_f32_le(r)?;
-        // position_y: f32
-        let position_y = crate::util::read_f32_le(r)?;
-        // position_z: f32
-        let position_z = crate::util::read_f32_le(r)?;
+        // position: Vector3d
+        let position = Vector3d::read(r)?;
+
         Ok(Self {
             sound_id,
-            position_x,
-            position_y,
-            position_z,
+            position,
         })
     }
 
