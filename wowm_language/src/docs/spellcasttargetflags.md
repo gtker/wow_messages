@@ -4,7 +4,7 @@
 
 ### Comment
 
-Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which SpellCastTargets needs.
+Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets](./spellcasttargets.md) needs.
 
 ### Wowm Representation
 
