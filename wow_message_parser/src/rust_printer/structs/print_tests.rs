@@ -185,9 +185,15 @@ fn print_test_case(
             ));
         }
         true => {
+            let size = if e.sizes(o).maximum() == 0 {
+                "".to_string()
+            } else {
+                format!("{} + ", e.sizes(o).maximum())
+            };
+
             s.wln(format!(
-                "assert_eq!({} + header_size, RAW{i}.len());",
-                e.sizes(o).maximum(),
+                "assert_eq!({}header_size, RAW{i}.len());",
+                size,
                 i = i,
             ));
         }
