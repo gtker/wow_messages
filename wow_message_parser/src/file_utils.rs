@@ -78,15 +78,10 @@ impl ModFiles {
 
         self.add_or_append_file(
             format!("{}/", WORLD_DIR),
-            (format!("v{}", m), SubmoduleLocation::PubMod),
+            (format!("version_{}_{}", m, i), SubmoduleLocation::PubMod),
         );
 
-        self.add_or_append_file(
-            format!("{}/v{}/", WORLD_DIR, m),
-            (format!("v{}", i), SubmoduleLocation::PubMod),
-        );
-
-        let file_dir = format!("{}/v{}/v{}/", WORLD_DIR, m, i);
+        let file_dir = format!("{}/version_{}_{}/", WORLD_DIR, m, i);
         self.add_or_append_file(
             file_dir.clone(),
             (get_module_name(name), SubmoduleLocation::PubUseInternal),
@@ -162,23 +157,15 @@ impl ModFiles {
 
 pub fn get_world_version_path(version: &WorldVersion) -> String {
     match version {
-        WorldVersion::Major(m) => format!("crate::world::v{}", m),
-        WorldVersion::Minor(m, i) => format!("crate::world::v{}::v{}", m, i),
-        WorldVersion::Patch(m, i, p) => format!("crate::world::v{}::v{}::v{}", m, i, p),
-        WorldVersion::Exact(m, i, p, b) => format!("crate::world::v{}::v{}::v{}::v{}", m, i, p, b),
-        WorldVersion::All => "crate::world".to_string(),
+        WorldVersion::Minor(m, i) => format!("crate::world::version_{}_{}", m, i),
+        _ => unimplemented!(),
     }
 }
 
 pub fn get_world_version_file_path(version: &WorldVersion) -> String {
     match version {
-        WorldVersion::Major(m) => format!("{}/v{}/", WORLD_DIR, m),
-        WorldVersion::Minor(m, i) => format!("{}/v{}/v{}/", WORLD_DIR, m, i),
-        WorldVersion::Patch(m, i, p) => format!("{}/v{}/v{}/v{}/", WORLD_DIR, m, i, p),
-        WorldVersion::Exact(m, i, p, b) => {
-            format!("{}/v{}/v{}/v{}/v{}/", WORLD_DIR, m, i, p, b)
-        }
-        WorldVersion::All => format!("{}/", WORLD_DIR),
+        WorldVersion::Minor(m, i) => format!("{}/version_{}_{}/", WORLD_DIR, m, i),
+        _ => unimplemented!(),
     }
 }
 

@@ -7,8 +7,8 @@ use wow_srp::header_crypto::ProofSeed;
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::server::SrpServer;
 use wow_vanilla_messages::helper::tokio_expect_client_message;
-use wow_vanilla_messages::v1::v12::opcodes::ClientOpcodeMessage;
-use wow_vanilla_messages::v1::v12::*;
+use wow_vanilla_messages::version_1_12::opcodes::ClientOpcodeMessage;
+use wow_vanilla_messages::version_1_12::*;
 use wow_vanilla_messages::{Guid, ServerMessage, UpdateMask, UpdatePlayer};
 
 pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServer>>>) {
@@ -159,9 +159,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
             update_type: ObjectUpdateType::CREATE_OBJECT2 {
                 guid3: Guid::new(4),
                 mask2: UpdateMask::Player(update_mask),
-                movement2: MovementBlock {
-                    update_flag,
-                },
+                movement2: MovementBlock { update_flag },
                 object_type: ObjectType::PLAYER,
             },
         }],
