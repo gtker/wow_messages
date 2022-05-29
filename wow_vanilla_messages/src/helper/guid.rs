@@ -47,7 +47,7 @@ impl Guid {
     }
 
     pub fn size(&self) -> usize {
-        let mut amount_of_bytes = 0;
+        let mut amount_of_bytes = 1;
 
         for i in 0..8 {
             if (self.guid & (0xFF << (i * 8))) != 0 {
