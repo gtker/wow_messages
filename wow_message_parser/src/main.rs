@@ -1,15 +1,14 @@
 use std::path::Path;
 
+use doc_printer::container::print_docs_for_container;
+use doc_printer::definer::{print_docs_for_enum, print_docs_for_flag};
 use walkdir::WalkDir;
 
 use parser::types::objects::Objects;
 use rust_printer::print_struct;
 
 use crate::container::{Container, ContainerType};
-use crate::doc_printer::{
-    print_docs_for_container, print_docs_for_enum, print_docs_for_flag,
-    print_docs_summary_and_objects,
-};
+use crate::doc_printer::print_docs_summary_and_objects;
 use crate::file_utils::{
     append_string_to_file, get_world_version_file_path, write_string_to_file, ModFiles, LOGIN_DIR,
 };
