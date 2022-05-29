@@ -48601,6 +48601,7 @@
         }
       ],
       "tags": {
+        "description": "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].",
         "version": {
           "type": "world",
           "versions": [
@@ -48613,7 +48614,153 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_CHAR_CREATE",
+          "members": [
+            {
+              "variable_name": "name",
+              "verified_value": {
+                "String": "Deadbeef"
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "race",
+              "verified_value": {
+                "Enum": {
+                  "value": 1,
+                  "original_string": "HUMAN"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "class",
+              "verified_value": {
+                "Enum": {
+                  "value": 1,
+                  "original_string": "WARRIOR"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "gender",
+              "verified_value": {
+                "Enum": {
+                  "value": 1,
+                  "original_string": "FEMALE"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "skin",
+              "verified_value": {
+                "Number": {
+                  "value": 8,
+                  "original_string": "0x08"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "face",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0x00"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "hairstyle",
+              "verified_value": {
+                "Number": {
+                  "value": 14,
+                  "original_string": "0x0e"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "haircolor",
+              "verified_value": {
+                "Number": {
+                  "value": 2,
+                  "original_string": "0x02"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "facialhair",
+              "verified_value": {
+                "Number": {
+                  "value": 4,
+                  "original_string": "0x04"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "outfit_id",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0x00"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            22,
+            54,
+            0,
+            0,
+            0,
+            68,
+            101,
+            97,
+            100,
+            98,
+            101,
+            101,
+            102,
+            0,
+            1,
+            1,
+            1,
+            8,
+            0,
+            14,
+            2,
+            4,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm",
+            "start_position": 18
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm",
         "start_position": 3

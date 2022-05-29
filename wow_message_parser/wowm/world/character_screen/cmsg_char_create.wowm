@@ -11,5 +11,32 @@ cmsg CMSG_CHAR_CREATE = 0x36 {
     u8 haircolor;
     u8 facialhair;
     u8 outfit_id;
+} {
+    description = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
 }
 
+test CMSG_CHAR_CREATE {
+    name = "Deadbeef";
+    race = HUMAN;
+    class = WARRIOR;
+    gender = FEMALE;
+    skin = 0x08;
+    face = 0x00;
+    hairstyle = 0x0e;
+    haircolor = 0x02;
+    facialhair = 0x04;
+    outfit_id = 0x00;
+} [
+    0x00, 0x16, /* size */
+    0x36, 0x00, 0x00, 0x00, /* opcode */
+    0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65, 0x66, 0x00,
+    0x01, /* race */
+    0x01, /* class */
+    0x01, /* gender */
+    0x08, /* skin */
+    0x00, /* face */
+    0x0e, /* hairstyle */
+    0x02, /* haircolor */
+    0x04, /* facialhair */
+    0x00, /* outfit_id */
+]
