@@ -199,37 +199,23 @@ fn definer_common(s: &mut DocWriter, tags: &Tags, fileinfo: &FileInfo, ty: &str,
     s.wln("```");
 }
 
-fn add_links_to_metadata_strings(s: &str) -> String {
-    let mut s = s.to_string();
-
-    while let Some(start) = s.find('[') {
-        let end = s
-            .find(']')
-            .expect(&format!("non matching brackets in string '{}'", s));
-
-        let link_subject = &s[start + 1..end];
-        let link = "<".to_string() + link_subject + ">(./" + &link_subject.to_lowercase() + ".md)";
-        let original = &s[start..end + 1];
-
-        s = s.replace(original, &link);
-    }
-
-    s.replace("<", "[").replace(">", "]")
-}
-
 fn print_metadata(s: &mut DocWriter, tags: &Tags) {
     if let Some(description) = tags.description() {
         s.wln("### Description");
         s.newline();
-        s.wln(add_links_to_metadata_strings(description));
-        s.newline();
+        for l in description.as_doc_lines() {
+            s.wln(l);
+            s.newline();
+        }
     }
 
     if let Some(comment) = tags.comment() {
         s.wln("### Comment");
         s.newline();
-        s.wln(add_links_to_metadata_strings(comment));
-        s.newline();
+        for l in comment.as_doc_lines() {
+            s.wln(l);
+            s.newline();
+        }
     }
 }
 
@@ -642,7 +628,7 @@ fn print_container_example_member(
             }
         }
         StructMember::OptionalStatement(_) => {
-            panic!("UNIMPLEMENTED_DOC_OPTIONAL");
+            unimplemented!("UNIMPLEMENTED_DOC_OPTIONAL");
         }
     }
 }
@@ -784,6 +770,18 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                     d.ty().str()
                 }
             };
+
+            let description = if let Some(d) = d.tags().description() {
+                d.as_doc_table_string()
+            } else {
+                "".to_string()
+            };
+            let comment = if let Some(d) = d.tags().comment() {
+                d.as_doc_table_string()
+            } else {
+                "".to_string()
+            };
+
             s.wln(format!(
                 "| {offset} | {size} / {endian} | {ty} | {name} | {description} | {comment} |",
                 offset = if let Some(offset) = offset {
@@ -795,8 +793,8 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                 endian = d.ty().doc_endian_str(),
                 ty = ty,
                 name = d.name(),
-                description = d.tags().description().unwrap_or("").replace("\n", "<br/>"),
-                comment = d.tags().comment().unwrap_or("").replace("\n", "<br/>"),
+                description = description,
+                comment = comment,
             ));
 
             if let Some(_) = offset {
@@ -981,13 +979,25 @@ fn print_definer_table(s: &mut DocWriter, e: &Definer) {
     }
 
     for f in e.fields() {
+        let description = if let Some(d) = f.tags().description() {
+            d.as_doc_table_string()
+        } else {
+            "".to_string()
+        };
+
+        let comment = if let Some(d) = f.tags().comment() {
+            d.as_doc_table_string()
+        } else {
+            "".to_string()
+        };
+
         s.w(format!(
             "| `{name}` | {value} (0x{hex:0>2X}) | {description} | {comment} |",
             name = f.name(),
             value = f.value().int(),
             hex = f.value().int(),
-            description = f.tags().description().unwrap_or(""),
-            comment = f.tags().comment().unwrap_or(""),
+            description = description,
+            comment = comment,
         ));
         if any_fields_has_display {
             s.wln(format!(" {} |", f.tags().display().unwrap_or("")));

@@ -116,9 +116,21 @@ pub struct IrTags {
 
 impl IrTags {
     fn from_tags(tags: &Tags) -> Self {
+        let description = if let Some(d) = tags.description() {
+            Some(d.as_ir_string())
+        } else {
+            None
+        };
+
+        let comment = if let Some(d) = tags.comment() {
+            Some(d.as_ir_string())
+        } else {
+            None
+        };
+
         Self {
-            description: tags.description().map(|a| a.to_owned()),
-            comment: tags.comment().map(|a| a.to_owned()),
+            description,
+            comment,
             display: tags.display().map(|a| a.to_owned()),
             version: if !tags.logon_versions().is_empty() {
                 Some(IrVersions::Login(

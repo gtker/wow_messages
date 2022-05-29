@@ -9,6 +9,7 @@ Data for which tutorials the client has passed.
 ### Comment
 
 All bits set means that all tutorials have been passed.
+
 Must be sent after [SMSG_LOGIN_VERIFY_WORLD](./smsg_login_verify_world.md) otherwise the client will SEGFAULT.
 
 ### Wowm Representation

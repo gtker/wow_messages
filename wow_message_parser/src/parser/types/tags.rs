@@ -43,8 +43,8 @@ pub struct Tags {
     inner: Vec<Tag>,
     login_logon_versions: Vec<LoginVersion>,
     world_versions: Vec<WorldVersion>,
-    description: String,
-    comment: String,
+    description: Option<TagString>,
+    comment: Option<TagString>,
     display: String,
 }
 
@@ -54,8 +54,8 @@ impl Tags {
             inner: vec![],
             login_logon_versions: vec![],
             world_versions: vec![],
-            description: "".to_string(),
-            comment: "".to_string(),
+            description: None,
+            comment: None,
             display: "".to_string(),
         }
     }
@@ -112,18 +112,20 @@ impl Tags {
                 self.world_versions = vec![WorldVersion::All];
             }
         } else if key == DESCRIPTION {
-            if self.description == "" {
-                self.description = value.to_string();
+            if let Some(desc) = &mut self.description {
+                desc.add(value);
             } else {
-                self.description.push_str("\n");
-                self.description.push_str(value);
+                let mut t = TagString::new();
+                t.add(value);
+                self.description = Some(t);
             }
         } else if key == COMMENT {
-            if self.comment == "" {
-                self.comment = value.to_string();
+            if let Some(comment) = &mut self.comment {
+                comment.add(value);
             } else {
-                self.comment.push_str("\n");
-                self.comment.push_str(value);
+                let mut t = TagString::new();
+                t.add(value);
+                self.comment = Some(t);
             }
         } else if key == DISPLAY {
             self.display = value.to_string();
@@ -233,20 +235,12 @@ impl Tags {
         false
     }
 
-    pub fn description(&self) -> Option<&str> {
-        if self.description == "" {
-            None
-        } else {
-            Some(&self.description)
-        }
+    pub fn description(&self) -> Option<&TagString> {
+        self.description.as_ref()
     }
 
-    pub fn comment(&self) -> Option<&str> {
-        if self.comment == "" {
-            None
-        } else {
-            Some(&self.comment)
-        }
+    pub fn comment(&self) -> Option<&TagString> {
+        self.comment.as_ref()
     }
 
     pub fn display(&self) -> Option<&str> {
@@ -282,5 +276,107 @@ impl Tag {
 
     pub fn value(&self) -> &str {
         &self.value
+    }
+}
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+enum TagStringSymbol {
+    Text(String),
+    Link(String),
+    Newline,
+}
+
+impl TagStringSymbol {
+    fn from_str(s: &str) -> Vec<Self> {
+        if !s.contains("[") {
+            return vec![TagStringSymbol::Text(s.to_string())];
+        }
+
+        let mut v = Vec::new();
+        let mut s = s.to_string();
+
+        while let Some(start) = s.find("[") {
+            let end = s.find("]").unwrap();
+            v.push(TagStringSymbol::Text(s[..start].to_string()));
+            v.push(TagStringSymbol::Link(s[start + 1..end].to_string()));
+
+            s = s[end + 1..].to_string();
+        }
+        if !s.is_empty() {
+            v.push(TagStringSymbol::Text(s));
+        }
+
+        v
+    }
+}
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub struct TagString {
+    inner: Vec<TagStringSymbol>,
+}
+
+impl TagString {
+    pub fn new() -> Self {
+        Self { inner: vec![] }
+    }
+
+    pub fn add(&mut self, s: &str) {
+        if !self.inner.is_empty() {
+            self.inner.push(TagStringSymbol::Newline);
+        }
+
+        self.inner.append(&mut TagStringSymbol::from_str(s));
+    }
+
+    pub fn as_doc_lines(&self) -> Vec<String> {
+        let mut v = Vec::new();
+
+        let mut current = String::new();
+        for i in &self.inner {
+            match i {
+                TagStringSymbol::Text(s) => current.push_str(s),
+                TagStringSymbol::Link(s) => current.push_str(&format!(
+                    "[{name}](./{lower}.md)",
+                    name = s,
+                    lower = s.to_lowercase()
+                )),
+                TagStringSymbol::Newline => {
+                    v.push(current.clone());
+                    current.clear();
+                }
+            }
+        }
+
+        v.push(current);
+
+        v
+    }
+
+    pub fn as_doc_table_string(&self) -> String {
+        let mut s = String::new();
+
+        for i in &self.inner {
+            match i {
+                TagStringSymbol::Text(t) => s.push_str(t),
+                TagStringSymbol::Link(l) => s.push_str(&format!("[{}]", l)),
+                TagStringSymbol::Newline => s.push_str("<br/>"),
+            }
+        }
+
+        s
+    }
+
+    pub fn as_ir_string(&self) -> String {
+        let mut s = String::new();
+
+        for i in &self.inner {
+            match i {
+                TagStringSymbol::Text(t) => s.push_str(t),
+                TagStringSymbol::Link(l) => s.push_str(&format!("[{}]", l)),
+                TagStringSymbol::Newline => s.push_str("\n"),
+            }
+        }
+
+        s
     }
 }

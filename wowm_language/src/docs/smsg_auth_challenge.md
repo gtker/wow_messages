@@ -9,6 +9,7 @@ Seed used by the client to prove in [CMSG_AUTH_SESSION](./cmsg_auth_session.md) 
 ### Comment
 
 First thing sent when a client connects to the world server.
+
 This message is always unencrypted.
 
 ### Wowm Representation
