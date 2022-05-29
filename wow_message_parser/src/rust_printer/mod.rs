@@ -813,10 +813,7 @@ impl ImplType {
     }
 
     pub fn is_async(&self) -> bool {
-        match self {
-            ImplType::Std => false,
-            _ => true,
-        }
+        !matches!(self, ImplType::Std)
     }
 
     pub fn types() -> Vec<Self> {

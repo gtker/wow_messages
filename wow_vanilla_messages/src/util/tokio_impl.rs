@@ -133,27 +133,35 @@ pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin>(
 }
 
 // f32
-pub async fn tokio_read_f32_le<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<f32, std::io::Error> {
-    let mut v = [0u8; 4];
+pub async fn tokio_read_f32_le<R: AsyncReadExt + Unpin + Send>(
+    r: &mut R,
+) -> Result<f32, std::io::Error> {
+    let mut v = [0_u8; 4];
     r.read_exact(&mut v).await?;
     Ok(f32::from_le_bytes(v))
 }
 
-pub async fn tokio_read_f32_be<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<f32, std::io::Error> {
-    let mut v = [0u8; 4];
+pub async fn tokio_read_f32_be<R: AsyncReadExt + Unpin + Send>(
+    r: &mut R,
+) -> Result<f32, std::io::Error> {
+    let mut v = [0_u8; 4];
     r.read_exact(&mut v).await?;
     Ok(f32::from_be_bytes(v))
 }
 
 // f64
-pub async fn tokio_read_f64_le<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<f64, std::io::Error> {
-    let mut v = [0u8; 8];
+pub async fn tokio_read_f64_le<R: AsyncReadExt + Unpin + Send>(
+    r: &mut R,
+) -> Result<f64, std::io::Error> {
+    let mut v = [0_u8; 8];
     r.read_exact(&mut v).await?;
     Ok(f64::from_le_bytes(v))
 }
 
-pub async fn tokio_read_f64_be<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<f64, std::io::Error> {
-    let mut v = [0u8; 8];
+pub async fn tokio_read_f64_be<R: AsyncReadExt + Unpin + Send>(
+    r: &mut R,
+) -> Result<f64, std::io::Error> {
+    let mut v = [0_u8; 8];
     r.read_exact(&mut v).await?;
     Ok(f64::from_be_bytes(v))
 }

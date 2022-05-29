@@ -124,26 +124,26 @@ pub fn write_u64_be<W: Write>(w: &mut W, v: u64) -> Result<(), std::io::Error> {
 
 // f32
 pub fn read_f32_le<R: Read>(r: &mut R) -> Result<f32, std::io::Error> {
-    let mut v = [0u8; 4];
+    let mut v = [0_u8; 4];
     r.read_exact(&mut v)?;
     Ok(f32::from_le_bytes(v))
 }
 
 pub fn read_f32_be<R: Read>(r: &mut R) -> Result<f32, std::io::Error> {
-    let mut v = [0u8; 4];
+    let mut v = [0_u8; 4];
     r.read_exact(&mut v)?;
     Ok(f32::from_be_bytes(v))
 }
 
 // f64
 pub fn read_f64_le<R: Read>(r: &mut R) -> Result<f64, std::io::Error> {
-    let mut v = [0u8; 8];
+    let mut v = [0_u8; 8];
     r.read_exact(&mut v)?;
     Ok(f64::from_le_bytes(v))
 }
 
 pub fn read_f64_be<R: Read>(r: &mut R) -> Result<f64, std::io::Error> {
-    let mut v = [0u8; 8];
+    let mut v = [0_u8; 8];
     r.read_exact(&mut v)?;
     Ok(f64::from_be_bytes(v))
 }

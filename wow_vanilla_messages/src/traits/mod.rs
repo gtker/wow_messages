@@ -13,7 +13,7 @@ fn get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
     let size = (size + SERVER_OPCODE_LENGTH).to_be_bytes();
     let opcode = opcode.to_le_bytes();
 
-    let mut header = [0u8; SERVER_HEADER_LENGTH as usize];
+    let mut header = [0_u8; SERVER_HEADER_LENGTH as usize];
     header[0] = size[0];
     header[1] = size[1];
     header[2] = opcode[0];
@@ -284,7 +284,7 @@ fn get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     let size = (size + CLIENT_OPCODE_LENGTH).to_be_bytes();
     let opcode = (opcode as u32).to_le_bytes();
 
-    let mut header = [0u8; CLIENT_HEADER_LENGTH as usize];
+    let mut header = [0_u8; CLIENT_HEADER_LENGTH as usize];
     header[0] = size[0];
     header[1] = size[1];
     header[2] = opcode[0];

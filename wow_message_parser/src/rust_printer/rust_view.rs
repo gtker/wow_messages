@@ -600,8 +600,7 @@ impl RustObject {
                         }
                     } else {
                         for m in enumerator.members_in_struct() {
-                            if RustObject::get_rust_definer_from_ty(m, container_name).is_some()
-                            {
+                            if RustObject::get_rust_definer_from_ty(m, container_name).is_some() {
                                 inner(m, enumerator_name, v, container_name);
                             }
                         }
@@ -873,8 +872,7 @@ fn create_else_if_flag(
     find_subject(current_scope, parent_scope, statement).set_is_elseif();
 
     // Push enumerators
-    let mut enumerators = Vec::new();
-    enumerators.push(main_enum);
+    let mut enumerators = vec![main_enum];
 
     // Append elseifs
     for elseif in statement.else_ifs() {

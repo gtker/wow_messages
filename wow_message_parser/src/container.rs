@@ -799,9 +799,8 @@ impl Container {
     pub fn contains_enum(&self, o: &Objects, tags: &Tags) -> bool {
         for d in self.all_definitions() {
             if let Type::Identifier { s, .. } = d.ty() {
-                match o.get_object_type_of(s, tags) {
-                    ObjectType::Enum => return true,
-                    _ => {}
+                if o.get_object_type_of(s, tags) == ObjectType::Enum {
+                    return true;
                 }
             }
         }
@@ -1262,7 +1261,7 @@ impl Container {
     }
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Default)]
 pub struct Sizes {
     minimum: usize,
     maximum: usize,
@@ -1319,15 +1318,6 @@ impl Sizes {
 
     pub fn is_constant(&self) -> bool {
         self.minimum == self.maximum
-    }
-}
-
-impl Default for Sizes {
-    fn default() -> Self {
-        Self {
-            minimum: 0,
-            maximum: 0,
-        }
     }
 }
 

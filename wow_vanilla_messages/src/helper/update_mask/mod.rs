@@ -80,7 +80,7 @@ fn as_bytes(header: &[u32], values: &BTreeMap<u16, u32>) -> Vec<u8> {
         v.write_all(h.to_le_bytes().as_slice()).unwrap();
     }
 
-    for (_, value) in values {
+    for value in values.values() {
         v.write_all(&value.to_le_bytes()).unwrap();
     }
 

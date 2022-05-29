@@ -38,7 +38,7 @@ impl Display for LoginVersion {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, Clone, Default)]
 pub struct Tags {
     inner: Vec<Tag>,
     login_logon_versions: Vec<LoginVersion>,
@@ -50,14 +50,7 @@ pub struct Tags {
 
 impl Tags {
     pub fn new() -> Self {
-        Self {
-            inner: vec![],
-            login_logon_versions: vec![],
-            world_versions: vec![],
-            description: None,
-            comment: None,
-            display: "".to_string(),
-        }
+        Self::default()
     }
 
     pub fn push(&mut self, t: Tag) {
@@ -310,14 +303,14 @@ impl TagStringSymbol {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, Clone, Default)]
 pub struct TagString {
     inner: Vec<TagStringSymbol>,
 }
 
 impl TagString {
     pub fn new() -> Self {
-        Self { inner: vec![] }
+        Self::default()
     }
 
     pub fn add(&mut self, s: &str) {

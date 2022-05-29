@@ -434,15 +434,6 @@ version 2: {:#?} in {} line {}",
             return s.has_constant_size(self);
         }
 
-        for s in self.all_containers() {
-            return s
-                .rust_object()
-                .get_rust_definer(type_name)
-                .inner()
-                .sizes()
-                .is_constant();
-        }
-
         panic!(
             "Type name: '{type_name}' was not found.",
             type_name = type_name

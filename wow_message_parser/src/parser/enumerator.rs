@@ -193,9 +193,7 @@ impl Definer {
 
         for f in self.fields() {
             let val = f.value().int();
-            if val == 0 && value == 0 {
-                v.push(f);
-            } else if (value & f.value().int()) != 0 {
+            if (val == 0 && value == 0) || (value & f.value().int()) != 0 {
                 v.push(f);
             }
         }

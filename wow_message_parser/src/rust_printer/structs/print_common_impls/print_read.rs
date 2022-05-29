@@ -817,14 +817,11 @@ pub fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, post
     s.open_curly("Ok(Self");
 
     for f in e.rust_object().members_in_struct() {
-        match f.ty() {
-            RustType::Enum { is_simple, .. } => {
-                if !is_simple {
-                    s.wln(format!("{name}: {name}_if,", name = f.name()));
-                    continue;
-                }
+        if let RustType::Enum { is_simple, .. } = f.ty() {
+            if !is_simple {
+                s.wln(format!("{name}: {name}_if,", name = f.name()));
+                continue;
             }
-            _ => {}
         }
         s.wln(format!("{name},", name = f.name()));
     }
