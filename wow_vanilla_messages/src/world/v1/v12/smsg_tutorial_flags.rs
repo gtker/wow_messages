@@ -107,7 +107,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_TUTORIAL_FLAGS0() {
-        let raw: Vec<u8> = vec![ 0x00, 0x22, 0xFD, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
+        const RAW: [u8; 36] = [ 0x00, 0x22, 0xFD, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
              0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
              0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
              0xFF, 0xFF, 0xFF, 0xFF, ];
@@ -124,7 +124,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
@@ -139,18 +139,18 @@ mod test {
         assert_eq!(t.tutorial_data6, expected.tutorial_data6);
         assert_eq!(t.tutorial_data7, expected.tutorial_data7);
 
-        assert_eq!(32 + header_size, raw.len());
+        assert_eq!(32 + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_TUTORIAL_FLAGS0() {
-        let raw: Vec<u8> = vec![ 0x00, 0x22, 0xFD, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
+        const RAW: [u8; 36] = [ 0x00, 0x22, 0xFD, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
              0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
              0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
              0xFF, 0xFF, 0xFF, 0xFF, ];
@@ -167,7 +167,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
@@ -182,18 +182,18 @@ mod test {
         assert_eq!(t.tutorial_data6, expected.tutorial_data6);
         assert_eq!(t.tutorial_data7, expected.tutorial_data7);
 
-        assert_eq!(32 + header_size, raw.len());
+        assert_eq!(32 + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_TUTORIAL_FLAGS0() {
-        let raw: Vec<u8> = vec![ 0x00, 0x22, 0xFD, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
+        const RAW: [u8; 36] = [ 0x00, 0x22, 0xFD, 0x00, 0xFF, 0xFF, 0xFF, 0xFF,
              0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
              0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
              0xFF, 0xFF, 0xFF, 0xFF, ];
@@ -210,7 +210,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
@@ -225,12 +225,12 @@ mod test {
         assert_eq!(t.tutorial_data6, expected.tutorial_data6);
         assert_eq!(t.tutorial_data7, expected.tutorial_data7);
 
-        assert_eq!(32 + header_size, raw.len());
+        assert_eq!(32 + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
 }

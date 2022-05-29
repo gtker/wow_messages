@@ -77,7 +77,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
 }
 
 fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it: ImplType) {
-    s.w("let raw: Vec<u8> = vec![");
+    s.w(format!("const RAW: [u8; {}] = [", t.raw_bytes().len()));
     s.inc_indent();
     for i in t.raw_bytes() {
         s.w_break_at(format!(" {:#04X},", i), 80);
@@ -132,7 +132,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it:
     };
 
     s.wln(format!(
-        "let t = {opcode}::{read_text}(&mut {cursor}Cursor::new(&raw)){postfix}.unwrap();",
+        "let t = {opcode}::{read_text}(&mut {cursor}Cursor::new(&RAW)){postfix}.unwrap();",
         opcode = opcode,
         read_text = read_text,
         postfix = it.postfix(),
@@ -170,18 +170,18 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it:
     // Size reports correct length
     match e.is_constant_sized() {
         false => {
-            s.wln("assert_eq!(t.size() + header_size, raw.len());");
+            s.wln("assert_eq!(t.size() + header_size, RAW.len());");
         }
         true => {
             s.wln(format!(
-                "assert_eq!({} + header_size, raw.len());",
+                "assert_eq!({} + header_size, RAW.len());",
                 e.sizes(o).maximum(),
             ));
         }
     }
     s.newline();
 
-    s.wln("let mut dest = Vec::with_capacity(raw.len());");
+    s.wln("let mut dest = Vec::with_capacity(RAW.len());");
     s.wln(format!(
         "expected.{write_text}(&mut {cursor}Cursor::new(&mut dest)){postfix}.unwrap();",
         write_text = write_text,
@@ -193,7 +193,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it:
     ));
     s.newline();
 
-    s.wln("assert_eq!(dest, raw);")
+    s.wln("assert_eq!(dest, RAW);")
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]

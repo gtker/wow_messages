@@ -60,7 +60,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_PET_NAME_QUERY0() {
-        let raw: Vec<u8> = vec![ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE,
+        const RAW: [u8; 18] = [ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE,
              0xAD, 0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
         let expected = CMSG_PET_NAME_QUERY {
@@ -69,7 +69,7 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_PET_NAME_QUERY(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
@@ -78,18 +78,18 @@ mod test {
         assert_eq!(t.pet_number, expected.pet_number);
         assert_eq!(t.guid, expected.guid);
 
-        assert_eq!(12 + header_size, raw.len());
+        assert_eq!(12 + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_PET_NAME_QUERY0() {
-        let raw: Vec<u8> = vec![ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE,
+        const RAW: [u8; 18] = [ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE,
              0xAD, 0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
         let expected = CMSG_PET_NAME_QUERY {
@@ -98,7 +98,7 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_PET_NAME_QUERY(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
@@ -107,18 +107,18 @@ mod test {
         assert_eq!(t.pet_number, expected.pet_number);
         assert_eq!(t.guid, expected.guid);
 
-        assert_eq!(12 + header_size, raw.len());
+        assert_eq!(12 + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_PET_NAME_QUERY0() {
-        let raw: Vec<u8> = vec![ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE,
+        const RAW: [u8; 18] = [ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE,
              0xAD, 0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
         let expected = CMSG_PET_NAME_QUERY {
@@ -127,7 +127,7 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_PET_NAME_QUERY(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
@@ -136,12 +136,12 @@ mod test {
         assert_eq!(t.pet_number, expected.pet_number);
         assert_eq!(t.guid, expected.guid);
 
-        assert_eq!(12 + header_size, raw.len());
+        assert_eq!(12 + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
 }

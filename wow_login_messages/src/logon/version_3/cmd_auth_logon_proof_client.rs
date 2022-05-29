@@ -373,7 +373,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client0() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 135] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -417,7 +417,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -429,18 +429,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client0() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 135] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -484,7 +484,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -496,18 +496,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client0() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 135] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -551,7 +551,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -563,18 +563,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client1() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 105] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -608,7 +608,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -620,18 +620,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client1() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 105] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -665,7 +665,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -677,18 +677,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client1() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 105] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -722,7 +722,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -734,18 +734,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client2() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 75] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -767,7 +767,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -779,18 +779,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client2() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 75] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -812,7 +812,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -824,18 +824,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client2() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 75] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -857,7 +857,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -869,18 +869,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client3() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 111] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -911,7 +911,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -923,18 +923,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client3() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 111] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -965,7 +965,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -977,18 +977,18 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client3() {
-        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+        const RAW: [u8; 111] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
              0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
              0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
@@ -1019,7 +1019,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
@@ -1031,12 +1031,12 @@ mod test {
         assert_eq!(t.telemetry_keys, expected.telemetry_keys);
         assert_eq!(t.security_flag, expected.security_flag);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
 }

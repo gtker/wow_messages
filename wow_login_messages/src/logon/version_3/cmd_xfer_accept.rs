@@ -123,73 +123,73 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_ACCEPT0() {
-        let raw: Vec<u8> = vec![ 0x32, ];
+        const RAW: [u8; 1] = [ 0x32, ];
 
         let expected = CMD_XFER_ACCEPT {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_XFER_ACCEPT(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_XFER_ACCEPT, got {opcode:#?}", opcode = opcode),
         };
 
 
-        assert_eq!(0 + header_size, raw.len());
+        assert_eq!(0 + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_ACCEPT0() {
-        let raw: Vec<u8> = vec![ 0x32, ];
+        const RAW: [u8; 1] = [ 0x32, ];
 
         let expected = CMD_XFER_ACCEPT {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_XFER_ACCEPT(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_XFER_ACCEPT, got {opcode:#?}", opcode = opcode),
         };
 
 
-        assert_eq!(0 + header_size, raw.len());
+        assert_eq!(0 + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_ACCEPT0() {
-        let raw: Vec<u8> = vec![ 0x32, ];
+        const RAW: [u8; 1] = [ 0x32, ];
 
         let expected = CMD_XFER_ACCEPT {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_XFER_ACCEPT(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_XFER_ACCEPT, got {opcode:#?}", opcode = opcode),
         };
 
 
-        assert_eq!(0 + header_size, raw.len());
+        assert_eq!(0 + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
 }

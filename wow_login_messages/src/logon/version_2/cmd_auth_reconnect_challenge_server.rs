@@ -393,7 +393,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Server0() {
-        let raw: Vec<u8> = vec![ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
+        const RAW: [u8; 34] = [ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
              0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0xFF, 0xFE,
              0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2,
              0xF1, 0xF0, ];
@@ -408,7 +408,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -416,18 +416,18 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Server0() {
-        let raw: Vec<u8> = vec![ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
+        const RAW: [u8; 34] = [ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
              0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0xFF, 0xFE,
              0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2,
              0xF1, 0xF0, ];
@@ -442,7 +442,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -450,18 +450,18 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Server0() {
-        let raw: Vec<u8> = vec![ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
+        const RAW: [u8; 34] = [ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
              0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0xFF, 0xFE,
              0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2,
              0xF1, 0xF0, ];
@@ -476,7 +476,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -484,25 +484,25 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Server1() {
-        let raw: Vec<u8> = vec![ 0x02, 0x03, ];
+        const RAW: [u8; 2] = [ 0x02, 0x03, ];
 
         let expected = CMD_AUTH_RECONNECT_CHALLENGE_Server {
             result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_BANNED,
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -510,25 +510,25 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Server1() {
-        let raw: Vec<u8> = vec![ 0x02, 0x03, ];
+        const RAW: [u8; 2] = [ 0x02, 0x03, ];
 
         let expected = CMD_AUTH_RECONNECT_CHALLENGE_Server {
             result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_BANNED,
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -536,25 +536,25 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Server1() {
-        let raw: Vec<u8> = vec![ 0x02, 0x03, ];
+        const RAW: [u8; 2] = [ 0x02, 0x03, ];
 
         let expected = CMD_AUTH_RECONNECT_CHALLENGE_Server {
             result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_BANNED,
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -562,12 +562,12 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
 }

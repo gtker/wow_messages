@@ -115,7 +115,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_NAME_QUERY_RESPONSE0() {
-        let raw: Vec<u8> = vec![ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+        const RAW: [u8; 30] = [ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
@@ -129,7 +129,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
@@ -142,18 +142,18 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE0() {
-        let raw: Vec<u8> = vec![ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+        const RAW: [u8; 30] = [ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
@@ -167,7 +167,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
@@ -180,18 +180,18 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE0() {
-        let raw: Vec<u8> = vec![ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+        const RAW: [u8; 30] = [ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
@@ -205,7 +205,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
@@ -218,18 +218,18 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_NAME_QUERY_RESPONSE1() {
-        let raw: Vec<u8> = vec![ 0x00, 0x1D, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+        const RAW: [u8; 31] = [ 0x00, 0x1D, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x41, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
@@ -243,7 +243,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
@@ -256,18 +256,18 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE1() {
-        let raw: Vec<u8> = vec![ 0x00, 0x1D, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+        const RAW: [u8; 31] = [ 0x00, 0x1D, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x41, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
@@ -281,7 +281,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
@@ -294,18 +294,18 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE1() {
-        let raw: Vec<u8> = vec![ 0x00, 0x1D, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+        const RAW: [u8; 31] = [ 0x00, 0x1D, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x41, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
@@ -319,7 +319,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
@@ -332,12 +332,12 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
 }

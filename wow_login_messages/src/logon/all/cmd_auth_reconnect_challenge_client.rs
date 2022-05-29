@@ -325,7 +325,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
-        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
+        const RAW: [u8; 35] = [ 0x02, 0x02, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
              0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
              0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
              0x01, 0x01, 0x41, ];
@@ -347,7 +347,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -362,18 +362,18 @@ mod test {
         assert_eq!(t.client_ip_address, expected.client_ip_address);
         assert_eq!(t.account_name, expected.account_name);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
-        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
+        const RAW: [u8; 35] = [ 0x02, 0x02, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
              0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
              0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
              0x01, 0x01, 0x41, ];
@@ -395,7 +395,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -410,18 +410,18 @@ mod test {
         assert_eq!(t.client_ip_address, expected.client_ip_address);
         assert_eq!(t.account_name, expected.account_name);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
-        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
+        const RAW: [u8; 35] = [ 0x02, 0x02, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
              0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
              0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
              0x01, 0x01, 0x41, ];
@@ -443,7 +443,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -458,18 +458,18 @@ mod test {
         assert_eq!(t.client_ip_address, expected.client_ip_address);
         assert_eq!(t.account_name, expected.account_name);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
-        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x2E, 0x00, 0x57, 0x6F, 0x57, 0x00,
+        const RAW: [u8; 50] = [ 0x02, 0x02, 0x2E, 0x00, 0x57, 0x6F, 0x57, 0x00,
              0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
              0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
              0x01, 0x10, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A,
@@ -492,7 +492,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -507,18 +507,18 @@ mod test {
         assert_eq!(t.client_ip_address, expected.client_ip_address);
         assert_eq!(t.account_name, expected.account_name);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
-        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x2E, 0x00, 0x57, 0x6F, 0x57, 0x00,
+        const RAW: [u8; 50] = [ 0x02, 0x02, 0x2E, 0x00, 0x57, 0x6F, 0x57, 0x00,
              0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
              0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
              0x01, 0x10, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A,
@@ -541,7 +541,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -556,18 +556,18 @@ mod test {
         assert_eq!(t.client_ip_address, expected.client_ip_address);
         assert_eq!(t.account_name, expected.account_name);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
-        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x2E, 0x00, 0x57, 0x6F, 0x57, 0x00,
+        const RAW: [u8; 50] = [ 0x02, 0x02, 0x2E, 0x00, 0x57, 0x6F, 0x57, 0x00,
              0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
              0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
              0x01, 0x10, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A,
@@ -590,7 +590,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -605,12 +605,12 @@ mod test {
         assert_eq!(t.client_ip_address, expected.client_ip_address);
         assert_eq!(t.account_name, expected.account_name);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
 }

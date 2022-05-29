@@ -230,7 +230,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server0() {
-        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+        const RAW: [u8; 26] = [ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
              0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
 
@@ -252,7 +252,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
@@ -260,18 +260,18 @@ mod test {
 
         assert_eq!(t.realms, expected.realms);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server0() {
-        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+        const RAW: [u8; 26] = [ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
              0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
 
@@ -293,7 +293,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
@@ -301,18 +301,18 @@ mod test {
 
         assert_eq!(t.realms, expected.realms);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server0() {
-        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+        const RAW: [u8; 26] = [ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
              0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
 
@@ -334,7 +334,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
@@ -342,18 +342,18 @@ mod test {
 
         assert_eq!(t.realms, expected.realms);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server1() {
-        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+        const RAW: [u8; 26] = [ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
              0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
 
@@ -376,7 +376,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
@@ -384,18 +384,18 @@ mod test {
 
         assert_eq!(t.realms, expected.realms);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server1() {
-        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+        const RAW: [u8; 26] = [ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
              0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
 
@@ -418,7 +418,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
@@ -426,18 +426,18 @@ mod test {
 
         assert_eq!(t.realms, expected.realms);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server1() {
-        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+        const RAW: [u8; 26] = [ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
              0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
 
@@ -460,7 +460,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
@@ -468,12 +468,12 @@ mod test {
 
         assert_eq!(t.realms, expected.realms);
 
-        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, RAW.len());
 
-        let mut dest = Vec::with_capacity(raw.len());
+        let mut dest = Vec::with_capacity(RAW.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, raw);
+        assert_eq!(dest, RAW);
     }
 
 }
