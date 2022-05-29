@@ -64,14 +64,13 @@ impl Container {
     pub fn get_variable_name_of_definer_ty(&self, ty_name: &str) -> Option<String> {
         fn inner(m: &StructMember, ty_name: &str) -> Option<String> {
             match m {
-                StructMember::Definition(d) => match d.ty() {
-                    Type::Identifier { s, .. } => {
+                StructMember::Definition(d) => {
+                    if let Type::Identifier { s, .. } = d.ty() {
                         if s == ty_name {
                             return Some(d.name().to_string());
                         }
                     }
-                    _ => {}
-                },
+                }
                 StructMember::IfStatement(statement) => {
                     for m in statement.all_members() {
                         if let Some(t) = inner(m, ty_name) {
@@ -103,14 +102,13 @@ impl Container {
     pub fn contains_definer(&self, ty_name: &str) -> DefinerUsage {
         fn inner(m: &StructMember, ty_name: &str, variable_name: &str) -> DefinerUsage {
             match m {
-                StructMember::Definition(d) => match d.ty() {
-                    Type::Identifier { s, .. } => {
+                StructMember::Definition(d) => {
+                    if let Type::Identifier { s, .. } = d.ty() {
                         if s == ty_name {
                             return DefinerUsage::NotInIf;
                         }
                     }
-                    _ => {}
-                },
+                }
                 StructMember::IfStatement(statement) => {
                     if statement.name() == variable_name {
                         return DefinerUsage::InIf;
@@ -785,15 +783,13 @@ impl Container {
 
     pub fn needs_enum_error(&self, o: &Objects, tags: &Tags) -> bool {
         for d in self.all_definitions() {
-            match d.ty() {
-                Type::Identifier { s, .. } => match o.get_object_type_of(s, tags) {
-                    ObjectType::Enum => match o.get_definer(s, tags).self_value().is_none() {
+            if let Type::Identifier { s, .. } = d.ty() {
+                if o.get_object_type_of(s, tags) == ObjectType::Enum {
+                    match o.get_definer(s, tags).self_value().is_none() {
                         true => return true,
                         false => {}
-                    },
-                    _ => {}
-                },
-                _ => {}
+                    }
+                }
             }
         }
 
@@ -802,12 +798,11 @@ impl Container {
 
     pub fn contains_enum(&self, o: &Objects, tags: &Tags) -> bool {
         for d in self.all_definitions() {
-            match d.ty() {
-                Type::Identifier { s, .. } => match o.get_object_type_of(s, tags) {
+            if let Type::Identifier { s, .. } = d.ty() {
+                match o.get_object_type_of(s, tags) {
                     ObjectType::Enum => return true,
                     _ => {}
-                },
-                _ => {}
+                }
             }
         }
 
@@ -1294,10 +1289,7 @@ pub const GUID_SIZE: u8 = core::mem::size_of::<u64>() as u8;
 
 impl Sizes {
     pub fn new() -> Self {
-        Self {
-            minimum: 0,
-            maximum: 0,
-        }
+        Self::default()
     }
 
     pub fn inc(&mut self, minimum: usize, maximum: usize) {
@@ -1327,6 +1319,15 @@ impl Sizes {
 
     pub fn is_constant(&self) -> bool {
         self.minimum == self.maximum
+    }
+}
+
+impl Default for Sizes {
+    fn default() -> Self {
+        Self {
+            minimum: 0,
+            maximum: 0,
+        }
     }
 }
 
@@ -1472,10 +1473,7 @@ impl IfStatement {
     }
 
     pub fn is_not_enum(&self) -> bool {
-        match self.conditional.equations[0] {
-            Equation::NotEquals { .. } => true,
-            _ => false,
-        }
+        matches!(self.conditional.equations[0], Equation::NotEquals { .. })
     }
 
     pub fn flag_get_enumerator(&self) -> String {
