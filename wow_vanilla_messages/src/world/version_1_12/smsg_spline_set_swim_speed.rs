@@ -20,7 +20,7 @@ pub struct SMSG_SPLINE_SET_SWIM_SPEED {
 impl ServerMessage for SMSG_SPLINE_SET_SWIM_SPEED {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
+        self.guid.write_packed_guid_into_vec(w);
 
         // speed: f32
         w.write_all(&self.speed.to_le_bytes())?;

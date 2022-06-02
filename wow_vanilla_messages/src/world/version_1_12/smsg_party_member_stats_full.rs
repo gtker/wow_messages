@@ -80,7 +80,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL {
 impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        w.write_all(&self.player.packed_guid())?;
+        self.player.write_packed_guid_into_vec(w);
 
         // mask: GroupUpdateFlags
         w.write_all(&(self.mask.as_int() as u32).to_le_bytes())?;

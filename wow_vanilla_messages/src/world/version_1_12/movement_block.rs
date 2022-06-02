@@ -247,7 +247,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.melee_attacking {
             // guid: PackedGuid
-            w.write_all(&if_statement.guid.packed_guid())?;
+            if_statement.guid.write_packed_guid_into_vec(w);
 
         }
 

@@ -20,7 +20,7 @@ pub struct SMSG_MOVE_LAND_WALK {
 impl ServerMessage for SMSG_MOVE_LAND_WALK {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
+        self.guid.write_packed_guid_into_vec(w);
 
         // counter: u32
         w.write_all(&self.counter.to_le_bytes())?;

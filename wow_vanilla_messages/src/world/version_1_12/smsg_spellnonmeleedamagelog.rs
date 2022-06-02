@@ -50,10 +50,10 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
 impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target: PackedGuid
-        w.write_all(&self.target.packed_guid())?;
+        self.target.write_packed_guid_into_vec(w);
 
         // attacker: PackedGuid
-        w.write_all(&self.attacker.packed_guid())?;
+        self.attacker.write_packed_guid_into_vec(w);
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;

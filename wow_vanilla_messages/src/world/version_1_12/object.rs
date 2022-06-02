@@ -48,7 +48,7 @@ impl Object {
                 mask1,
             } => {
                 // guid1: PackedGuid
-                w.write_all(&guid1.packed_guid())?;
+                guid1.write_packed_guid_into_vec(w);
 
                 // mask1: UpdateMask
                 mask1.write_into_vec(w)?;
@@ -59,7 +59,7 @@ impl Object {
                 movement1,
             } => {
                 // guid2: PackedGuid
-                w.write_all(&guid2.packed_guid())?;
+                guid2.write_packed_guid_into_vec(w);
 
                 // movement1: MovementBlock
                 movement1.write_into_vec(w)?;
@@ -72,7 +72,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                w.write_all(&guid3.packed_guid())?;
+                guid3.write_packed_guid_into_vec(w);
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
@@ -91,7 +91,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                w.write_all(&guid3.packed_guid())?;
+                guid3.write_packed_guid_into_vec(w);
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
@@ -112,7 +112,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    w.write_all(&i.packed_guid())?;
+                    i.write_packed_guid_into_vec(w);
                 }
 
             }
@@ -125,7 +125,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    w.write_all(&i.packed_guid())?;
+                    i.write_packed_guid_into_vec(w);
                 }
 
             }

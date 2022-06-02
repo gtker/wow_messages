@@ -28,14 +28,14 @@ pub struct PackedGuidAndGuid {
 impl PackedGuidAndGuid {
     pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // packed: PackedGuid
-        w.write_all(&self.packed.packed_guid())?;
+        self.packed.write_packed_guid_into_vec(w);
 
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // static_packed: PackedGuid[10]
         for i in self.static_packed.iter() {
-            w.write_all(&i.packed_guid())?;
+            i.write_packed_guid_into_vec(w);
         }
 
         // static_guid: Guid[10]
@@ -51,7 +51,7 @@ impl PackedGuidAndGuid {
 
         // variable_packed: PackedGuid[basic1]
         for i in self.variable_packed.iter() {
-            w.write_all(&i.packed_guid())?;
+            i.write_packed_guid_into_vec(w);
         }
 
         // variable_guid: Guid[basic2]

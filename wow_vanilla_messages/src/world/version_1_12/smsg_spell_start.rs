@@ -37,10 +37,10 @@ pub struct SMSG_SPELL_START {
 impl ServerMessage for SMSG_SPELL_START {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // cast_item: PackedGuid
-        w.write_all(&self.cast_item.packed_guid())?;
+        self.cast_item.write_packed_guid_into_vec(w);
 
         // caster: PackedGuid
-        w.write_all(&self.caster.packed_guid())?;
+        self.caster.write_packed_guid_into_vec(w);
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;

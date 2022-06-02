@@ -25,10 +25,10 @@ pub struct SMSG_ATTACKSTOP {
 impl ServerMessage for SMSG_ATTACKSTOP {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        w.write_all(&self.player.packed_guid())?;
+        self.player.write_packed_guid_into_vec(w);
 
         // enemy: PackedGuid
-        w.write_all(&self.enemy.packed_guid())?;
+        self.enemy.write_packed_guid_into_vec(w);
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;

@@ -26,7 +26,7 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT {
 impl ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // transport: PackedGuid
-        w.write_all(&self.transport.packed_guid())?;
+        self.transport.write_packed_guid_into_vec(w);
 
         // position: Vector3d
         self.position.write_into_vec(w)?;

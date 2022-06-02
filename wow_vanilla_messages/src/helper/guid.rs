@@ -16,11 +16,11 @@ impl Guid {
         self.guid
     }
 
-    pub(crate) fn packed_guid(&self) -> Vec<u8> {
-        // Worst case capacity
-        let mut v = Vec::with_capacity(9);
+    pub(crate) fn write_packed_guid_into_vec(&self, v: &mut Vec<u8>) {
+        let placeholder_index = v.len();
         // Placeholder
         v.push(0);
+
         let guid = self.guid.to_le_bytes();
         let mut bit_pattern = 0;
 
@@ -31,9 +31,7 @@ impl Guid {
             }
         }
 
-        v[0] = bit_pattern;
-
-        v
+        v[placeholder_index] = bit_pattern;
     }
 
     pub(crate) fn read(r: &mut impl Read) -> Result<Self, std::io::Error> {
@@ -81,6 +79,7 @@ impl From<u64> for Guid {
 mod test {
     use super::Guid;
     use std::io::Cursor;
+    use std::io::Read;
 
     #[test]
     fn packed() {
@@ -89,18 +88,22 @@ mod test {
         let guid = Guid::new(GUID);
         assert_eq!(guid.guid(), GUID);
 
-        let mut r = Vec::with_capacity(9);
-        r.append(&mut guid.packed_guid());
+        // Make sure that writing into a vec doesn't clobber existing values
+        let mut r = vec![1, 2, 3, 4];
+        guid.write_packed_guid_into_vec(&mut r);
 
         let mut cursor = Cursor::new(r);
+        let mut padding = [0_u8; 4];
+        cursor.read_exact(&mut padding).unwrap();
         let guid2 = Guid::read_packed(&mut cursor).unwrap();
 
         assert_eq!(guid, guid2);
 
-        let mut r = Vec::with_capacity(9);
+        let mut r = vec![1, 2, 3, 4];
         r.append(&mut guid.guid().to_le_bytes().to_vec());
 
         let mut cursor = Cursor::new(r);
+        cursor.read_exact(&mut padding).unwrap();
         let guid2 = Guid::read(&mut cursor).unwrap();
         assert_eq!(guid, guid2);
     }

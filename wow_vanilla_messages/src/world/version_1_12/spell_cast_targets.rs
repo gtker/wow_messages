@@ -58,37 +58,37 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target: PackedGuid
-            w.write_all(&if_statement.unit_target.packed_guid())?;
+            if_statement.unit_target.write_packed_guid_into_vec(w);
 
         }
 
         if let Some(if_statement) = &self.target_flags.unit_enemy {
             // unit_enemy_target: PackedGuid
-            w.write_all(&if_statement.unit_enemy_target.packed_guid())?;
+            if_statement.unit_enemy_target.write_packed_guid_into_vec(w);
 
         }
 
         if let Some(if_statement) = &self.target_flags.gameobject {
             // object_target: PackedGuid
-            w.write_all(&if_statement.object_target.packed_guid())?;
+            if_statement.object_target.write_packed_guid_into_vec(w);
 
         }
 
         if let Some(if_statement) = &self.target_flags.locked {
             // object_target_locked: PackedGuid
-            w.write_all(&if_statement.object_target_locked.packed_guid())?;
+            if_statement.object_target_locked.write_packed_guid_into_vec(w);
 
         }
 
         if let Some(if_statement) = &self.target_flags.item {
             // item_target: PackedGuid
-            w.write_all(&if_statement.item_target.packed_guid())?;
+            if_statement.item_target.write_packed_guid_into_vec(w);
 
         }
 
         if let Some(if_statement) = &self.target_flags.trade_item {
             // item_trade_target: PackedGuid
-            w.write_all(&if_statement.item_trade_target.packed_guid())?;
+            if_statement.item_trade_target.write_packed_guid_into_vec(w);
 
         }
 
@@ -126,13 +126,13 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.corpse_ally {
             // corpse_target_ally: PackedGuid
-            w.write_all(&if_statement.corpse_target_ally.packed_guid())?;
+            if_statement.corpse_target_ally.write_packed_guid_into_vec(w);
 
         }
 
         if let Some(if_statement) = &self.target_flags.corpse_enemy {
             // corpse_target_enemy: PackedGuid
-            w.write_all(&if_statement.corpse_target_enemy.packed_guid())?;
+            if_statement.corpse_target_enemy.write_packed_guid_into_vec(w);
 
         }
 

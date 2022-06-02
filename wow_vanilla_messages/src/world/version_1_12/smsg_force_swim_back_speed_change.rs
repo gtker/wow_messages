@@ -26,7 +26,7 @@ pub struct SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
 impl ServerMessage for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
+        self.guid.write_packed_guid_into_vec(w);
 
         // move_event: u32
         w.write_all(&self.move_event.to_le_bytes())?;

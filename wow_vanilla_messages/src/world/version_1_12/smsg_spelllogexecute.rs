@@ -24,7 +24,7 @@ pub struct SMSG_SPELLLOGEXECUTE {
 impl ServerMessage for SMSG_SPELLLOGEXECUTE {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster: PackedGuid
-        w.write_all(&self.caster.packed_guid())?;
+        self.caster.write_packed_guid_into_vec(w);
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;

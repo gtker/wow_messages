@@ -18,7 +18,7 @@ pub struct SMSG_SPLINE_MOVE_SET_WALK_MODE {
 impl ServerMessage for SMSG_SPLINE_MOVE_SET_WALK_MODE {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
+        self.guid.write_packed_guid_into_vec(w);
 
         Ok(())
     }

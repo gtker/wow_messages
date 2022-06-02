@@ -26,10 +26,10 @@ pub struct SMSG_SPELLHEALLOG {
 impl ServerMessage for SMSG_SPELLHEALLOG {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // victim_guid: PackedGuid
-        w.write_all(&self.victim_guid.packed_guid())?;
+        self.victim_guid.write_packed_guid_into_vec(w);
 
         // caster_guid: PackedGuid
-        w.write_all(&self.caster_guid.packed_guid())?;
+        self.caster_guid.write_packed_guid_into_vec(w);
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;

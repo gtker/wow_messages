@@ -20,7 +20,7 @@ pub struct SMSG_CLIENT_CONTROL_UPDATE {
 impl ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
+        self.guid.write_packed_guid_into_vec(w);
 
         // allow_movement: u8
         w.write_all(&self.allow_movement.to_le_bytes())?;

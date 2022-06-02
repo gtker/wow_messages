@@ -27,10 +27,10 @@ impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {
         w.write_all(&self.hit_info.to_le_bytes())?;
 
         // attacker: PackedGuid
-        w.write_all(&self.attacker.packed_guid())?;
+        self.attacker.write_packed_guid_into_vec(w);
 
         // target: PackedGuid
-        w.write_all(&self.target.packed_guid())?;
+        self.target.write_packed_guid_into_vec(w);
 
         // total_damage: u32
         w.write_all(&self.total_damage.to_le_bytes())?;

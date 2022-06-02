@@ -50,7 +50,7 @@ pub fn print_write_field_array(
         ArrayType::Guid => {
             s.wln(format!("w.write_all(&i.guid().to_le_bytes()){}?;", postfix));
         }
-        ArrayType::PackedGuid => s.wln(format!("w.write_all(&i.packed_guid()){}?;", postfix)),
+        ArrayType::PackedGuid => s.wln(format!("i.write_packed_guid_into_vec(w);")),
     }
 
     s.closing_curly();
@@ -215,9 +215,8 @@ pub fn print_write_definition(
         }
         Type::PackedGuid => {
             s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.packed_guid()){postfix}?;",
+                "{variable_prefix}{name}.write_packed_guid_into_vec(w);",
                 variable_prefix = variable_prefix,
-                postfix = postfix,
                 name = d.name(),
             ));
         }

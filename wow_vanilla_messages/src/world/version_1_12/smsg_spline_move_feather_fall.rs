@@ -18,7 +18,7 @@ pub struct SMSG_SPLINE_MOVE_FEATHER_FALL {
 impl ServerMessage for SMSG_SPLINE_MOVE_FEATHER_FALL {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
+        self.guid.write_packed_guid_into_vec(w);
 
         Ok(())
     }
