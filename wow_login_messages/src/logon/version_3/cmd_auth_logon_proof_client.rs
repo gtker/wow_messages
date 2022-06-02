@@ -83,7 +83,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 }
 
 impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
-    const OPCODE: u8 = 1;
+    const OPCODE: u8 = 0x01;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // client_public_key: u8[32]

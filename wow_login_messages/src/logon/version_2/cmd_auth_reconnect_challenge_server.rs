@@ -64,7 +64,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
 }
 
 impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
-    const OPCODE: u8 = 2;
+    const OPCODE: u8 = 0x02;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // result: LoginResult

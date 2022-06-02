@@ -22,7 +22,7 @@ impl CMD_XFER_INITIATE {
 }
 
 impl ServerMessage for CMD_XFER_INITIATE {
-    const OPCODE: u8 = 48;
+    const OPCODE: u8 = 0x30;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         Ok(Self {

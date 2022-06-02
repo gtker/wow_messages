@@ -70,7 +70,7 @@ impl CMD_REALM_LIST_Server {
 }
 
 impl ServerMessage for CMD_REALM_LIST_Server {
-    const OPCODE: u8 = 16;
+    const OPCODE: u8 = 0x10;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // size: u16

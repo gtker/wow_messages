@@ -27,7 +27,7 @@ impl SimpleSlogin {
 }
 
 impl ServerMessage for SimpleSlogin {
-    const OPCODE: u8 = 0;
+    const OPCODE: u8 = 0x00;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // basic: u8

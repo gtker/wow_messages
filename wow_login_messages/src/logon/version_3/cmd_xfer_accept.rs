@@ -22,7 +22,7 @@ impl CMD_XFER_ACCEPT {
 }
 
 impl ClientMessage for CMD_XFER_ACCEPT {
-    const OPCODE: u8 = 50;
+    const OPCODE: u8 = 0x32;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         Ok(Self {

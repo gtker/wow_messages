@@ -22,7 +22,7 @@ impl CMD_XFER_CANCEL {
 }
 
 impl ClientMessage for CMD_XFER_CANCEL {
-    const OPCODE: u8 = 52;
+    const OPCODE: u8 = 0x34;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         Ok(Self {

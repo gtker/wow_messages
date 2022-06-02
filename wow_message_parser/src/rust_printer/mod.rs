@@ -396,7 +396,7 @@ impl Writer {
             trait_to_impl.as_ref(),
             type_name.as_ref(),
         ));
-        self.wln(format!("const OPCODE: u8 = {};", opcode));
+        self.wln(format!("const OPCODE: u8 = {:#04x};", opcode));
         self.newline();
 
         for it in ImplType::types() {

@@ -32,7 +32,7 @@ impl CMD_XFER_DATA {
 }
 
 impl ServerMessage for CMD_XFER_DATA {
-    const OPCODE: u8 = 49;
+    const OPCODE: u8 = 0x31;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // size: u16

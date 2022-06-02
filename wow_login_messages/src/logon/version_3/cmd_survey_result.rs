@@ -42,7 +42,7 @@ impl CMD_SURVEY_RESULT {
 }
 
 impl ClientMessage for CMD_SURVEY_RESULT {
-    const OPCODE: u8 = 4;
+    const OPCODE: u8 = 0x04;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // survey_id: u32

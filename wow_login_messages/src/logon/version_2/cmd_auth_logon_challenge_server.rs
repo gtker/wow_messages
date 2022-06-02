@@ -111,7 +111,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
-    const OPCODE: u8 = 0;
+    const OPCODE: u8 = 0x00;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // protocol_version: u8

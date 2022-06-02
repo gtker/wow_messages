@@ -40,7 +40,7 @@ impl CMD_REALM_LIST_Client {
 }
 
 impl ClientMessage for CMD_REALM_LIST_Client {
-    const OPCODE: u8 = 16;
+    const OPCODE: u8 = 0x10;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // padding: u32

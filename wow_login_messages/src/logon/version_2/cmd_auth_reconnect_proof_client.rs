@@ -61,7 +61,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 }
 
 impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
-    const OPCODE: u8 = 3;
+    const OPCODE: u8 = 0x03;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // proof_data: u8[16]

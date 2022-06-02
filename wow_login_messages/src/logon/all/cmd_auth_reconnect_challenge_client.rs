@@ -91,7 +91,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
 }
 
 impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
-    const OPCODE: u8 = 2;
+    const OPCODE: u8 = 0x02;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // protocol_version: u8

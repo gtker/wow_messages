@@ -27,7 +27,7 @@ impl CMD_XFER_RESUME {
 }
 
 impl ClientMessage for CMD_XFER_RESUME {
-    const OPCODE: u8 = 51;
+    const OPCODE: u8 = 0x33;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // offset: u64

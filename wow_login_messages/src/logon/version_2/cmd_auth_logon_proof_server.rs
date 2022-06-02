@@ -62,7 +62,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
 }
 
 impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
-    const OPCODE: u8 = 1;
+    const OPCODE: u8 = 0x01;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // login_result: LoginResult
