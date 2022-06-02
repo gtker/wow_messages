@@ -64,14 +64,14 @@ impl Writer {
         &self.inner
     }
 
-    pub fn open_curly<S: AsRef<str>>(&mut self, s: S) {
+    pub fn open_curly(&mut self, s: impl AsRef<str>) {
         self.w(s);
         self.inner.write_str(" {").unwrap();
         self.newline();
         self.inc_indent();
     }
 
-    fn add_import<S: AsRef<str>>(&mut self, name: S) {
+    fn add_import(&mut self, name: impl AsRef<str>) {
         self.imports
             .write_fmt(format_args!(
                 "pub use {import_path}::{name};\n",
@@ -81,7 +81,7 @@ impl Writer {
             .unwrap();
     }
 
-    pub fn new_struct<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, f: F) {
+    pub fn new_struct(&mut self, name: impl AsRef<str>, f: impl Fn(&mut Self)) {
         self.add_import(&name);
 
         self.open_curly(format!("pub struct {}", name.as_ref()));
@@ -91,11 +91,11 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn new_flag<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
+    pub fn new_flag(
         &mut self,
-        name: S,
-        ty: S1,
-        declarations: F,
+        name: impl AsRef<str>,
+        ty: impl AsRef<str>,
+        declarations: impl Fn(&mut Self),
     ) {
         self.add_import(name.as_ref());
 
@@ -126,7 +126,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn variable_size<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, variable_sized: F) {
+    pub fn variable_size(&mut self, name: impl AsRef<str>, variable_sized: impl Fn(&mut Self)) {
         self.open_curly(format!("impl {}", name.as_ref()));
         self.open_curly("pub(crate) fn size(&self) -> usize");
 
@@ -309,12 +309,12 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn impl_read_write_non_trait<F: Fn(&mut Self, ImplType), F2: Fn(&mut Self, ImplType)>(
+    pub fn impl_read_write_non_trait(
         &mut self,
         type_name: impl AsRef<str>,
         error_name: impl AsRef<str>,
-        read_function: F,
-        write_function: F2,
+        read_function: impl Fn(&mut Self, ImplType),
+        write_function: impl Fn(&mut Self, ImplType),
         visibility: impl AsRef<str>,
         create_async_reads: bool,
     ) {
@@ -422,11 +422,11 @@ impl Writer {
         self.closing_curly_newline(); // impl
     }
 
-    pub fn funcn_const<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
+    pub fn funcn_const(
         &mut self,
-        name_and_args: S,
-        return_type: S1,
-        f: F,
+        name_and_args: impl AsRef<str>,
+        return_type: impl AsRef<str>,
+        f: impl Fn(&mut Self),
     ) {
         self.open_curly(format!(
             "pub(crate) const fn {} -> {}",
@@ -439,11 +439,11 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn funcn_pub_const<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
+    pub fn funcn_pub_const(
         &mut self,
-        name_and_args: S,
-        return_type: S1,
-        f: F,
+        name_and_args: impl AsRef<str>,
+        return_type: impl AsRef<str>,
+        f: impl Fn(&mut Self),
     ) {
         self.open_curly(format!(
             "pub const fn {} -> {}",
@@ -473,11 +473,11 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn funcn_pub<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
+    pub fn funcn_pub(
         &mut self,
-        name_and_args: S,
-        return_type: S1,
-        f: F,
+        name_and_args: impl AsRef<str>,
+        return_type: impl AsRef<str>,
+        f: impl Fn(&mut Self),
     ) {
         self.open_curly(format!(
             "pub fn {} -> {}",
@@ -490,12 +490,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn impl_for<S: AsRef<str>, S2: AsRef<str>, F: Fn(&mut Self)>(
-        &mut self,
-        s: S,
-        s2: S2,
-        f: F,
-    ) {
+    pub fn impl_for(&mut self, s: impl AsRef<str>, s2: impl AsRef<str>, f: impl Fn(&mut Self)) {
         self.open_curly(format!("impl {} for {}", s.as_ref(), s2.as_ref()));
 
         f(self);
@@ -503,7 +498,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn bodyn<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, s: S, f: F) {
+    pub fn bodyn(&mut self, s: impl AsRef<str>, f: impl Fn(&mut Self)) {
         self.open_curly(s);
 
         f(self);
@@ -511,17 +506,12 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn body_else_with_closing<
-        S: AsRef<str>,
-        S1: AsRef<str>,
-        F: Fn(&mut Self),
-        F1: Fn(&mut Self),
-    >(
+    pub fn body_else_with_closing(
         &mut self,
-        curly_text: S,
-        closing: S1,
-        if_statement: F,
-        else_statement: F1,
+        curly_text: impl AsRef<str>,
+        closing: impl AsRef<str>,
+        if_statement: impl Fn(&mut Self),
+        else_statement: impl Fn(&mut Self),
     ) {
         self.open_curly(curly_text);
         if_statement(self);
@@ -531,11 +521,11 @@ impl Writer {
         self.closing_curly_with(closing.as_ref());
     }
 
-    pub fn body_else<S: AsRef<str>, F: Fn(&mut Self), F1: Fn(&mut Self)>(
+    pub fn body_else(
         &mut self,
-        s: S,
-        if_statement: F,
-        else_statement: F1,
+        s: impl AsRef<str>,
+        if_statement: impl Fn(&mut Self),
+        else_statement: impl Fn(&mut Self),
     ) {
         self.open_curly(s);
         if_statement(self);
@@ -545,7 +535,7 @@ impl Writer {
         self.closing_curly();
     }
 
-    pub fn body<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, s: S, f: F) {
+    pub fn body(&mut self, s: impl AsRef<str>, f: impl Fn(&mut Self)) {
         self.open_curly(s);
 
         f(self);
@@ -553,11 +543,11 @@ impl Writer {
         self.closing_curly();
     }
 
-    pub fn body_closing_with<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
+    pub fn body_closing_with(
         &mut self,
-        s: S,
-        f: F,
-        ending: S1,
+        s: impl AsRef<str>,
+        f: impl Fn(&mut Self),
+        ending: impl AsRef<str>,
     ) {
         self.open_curly(s);
 
@@ -571,7 +561,7 @@ impl Writer {
         self.wln("}");
     }
 
-    pub fn closing_curly_with<S: AsRef<str>>(&mut self, s: S) {
+    pub fn closing_curly_with(&mut self, s: impl AsRef<str>) {
         self.dec_indent();
         self.wln(format!("}}{}", s.as_ref()));
     }
@@ -601,7 +591,7 @@ impl Writer {
         self.newline();
     }
 
-    pub fn metadata_comment<S: AsRef<str>>(&mut self, s: S) {
+    pub fn metadata_comment(&mut self, s: impl AsRef<str>) {
         if !Self::METADATA {
             return;
         }
@@ -618,7 +608,7 @@ impl Writer {
         self.newline();
     }
 
-    pub fn docc<S: AsRef<str>>(&mut self, s: S) {
+    pub fn docc(&mut self, s: impl AsRef<str>) {
         if !Self::METADATA {
             return;
         }
@@ -644,10 +634,10 @@ impl Writer {
     }
 
     #[allow(unused)]
-    pub fn w_no_indent<S: AsRef<str>>(&mut self, s: S) {
+    pub fn w_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
     }
-    pub fn w_break_at<S: AsRef<str>>(&mut self, s: S, break_at: usize) {
+    pub fn w_break_at(&mut self, s: impl AsRef<str>, break_at: usize) {
         if self.get_column() >= break_at {
             self.newline();
             self.w(s.as_ref());
@@ -656,7 +646,7 @@ impl Writer {
         }
     }
 
-    pub fn wln_no_indent<S: AsRef<str>>(&mut self, s: S) {
+    pub fn wln_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
         self.newline();
     }
@@ -665,7 +655,7 @@ impl Writer {
         self.inner.write_str("\n").unwrap();
     }
 
-    pub fn w<S: AsRef<str>>(&mut self, s: S) {
+    pub fn w(&mut self, s: impl AsRef<str>) {
         for _ in 0..self.indentation_level {
             self.inner.write_str(Self::INDENTATION).unwrap();
         }
