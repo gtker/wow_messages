@@ -5,6 +5,8 @@ clogin CMD_AUTH_RECONNECT_PROOF_Client = 0x03 {
     u8[20] client_proof;
     u8[20] client_checksum;
     u8 key_count = 0;
+} {
+    description = "Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Server].";
 }
 
 test CMD_AUTH_RECONNECT_PROOF_Client {

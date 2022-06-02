@@ -40,6 +40,7 @@
         "endianness": "little"
       },
       "tags": {
+        "description": "Reply to [CMD_AUTH_LOGON_PROOF_Client].",
         "version": {
           "type": "login",
           "versions": [
@@ -58,7 +59,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm",
-        "start_position": 26
+        "start_position": 27
       },
       "features": [
         "Flag",
@@ -36254,6 +36255,7 @@
         }
       ],
       "tags": {
+        "description": "Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].",
         "version": {
           "type": "login",
           "versions": [
@@ -36684,7 +36686,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 21
+            "start_position": 22
           }
         },
         {
@@ -37004,7 +37006,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 76
+            "start_position": 77
           }
         },
         {
@@ -37223,7 +37225,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 116
+            "start_position": 117
           }
         }
       ],
@@ -37429,6 +37431,7 @@
         }
       ],
       "tags": {
+        "description": "Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].",
         "version": {
           "type": "login",
           "versions": [
@@ -37870,7 +37873,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 156
+            "start_position": 158
           }
         },
         {
@@ -38201,7 +38204,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 213
+            "start_position": 215
           }
         },
         {
@@ -38431,7 +38434,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 255
+            "start_position": 257
           }
         },
         {
@@ -38759,13 +38762,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 281
+            "start_position": 283
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-        "start_position": 140
+        "start_position": 141
       },
       "only_has_io_error": false,
       "features": [
@@ -39100,6 +39103,7 @@
         }
       ],
       "tags": {
+        "description": "Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].",
         "version": {
           "type": "login",
           "versions": [
@@ -39540,7 +39544,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 341
+            "start_position": 344
           }
         },
         {
@@ -39870,7 +39874,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 398
+            "start_position": 401
           }
         },
         {
@@ -40099,7 +40103,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 440
+            "start_position": 443
           }
         },
         {
@@ -40426,7 +40430,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 466
+            "start_position": 469
           }
         },
         {
@@ -40816,7 +40820,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 500
+            "start_position": 503
           }
         },
         {
@@ -41218,13 +41222,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-            "start_position": 544
+            "start_position": 547
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm",
-        "start_position": 315
+        "start_position": 317
       },
       "only_has_io_error": true,
       "features": [
@@ -41324,6 +41328,7 @@
         }
       ],
       "tags": {
+        "description": "Reply to [CMD_AUTH_LOGON_PROOF_Client].",
         "version": {
           "type": "login",
           "versions": [
@@ -41441,7 +41446,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm",
-            "start_position": 12
+            "start_position": 13
           }
         }
       ],
@@ -41636,6 +41641,7 @@
             0
           ],
           "tags": {
+            "description": "Reply to [CMD_AUTH_LOGON_PROOF_Client].",
             "version": {
               "type": "login",
               "versions": [
@@ -41648,7 +41654,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm",
-            "start_position": 48
+            "start_position": 50
           }
         },
         {
@@ -41694,13 +41700,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm",
-            "start_position": 57
+            "start_position": 60
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm",
-        "start_position": 34
+        "start_position": 36
       },
       "only_has_io_error": false,
       "features": [
@@ -42403,6 +42409,7 @@
         }
       ],
       "tags": {
+        "description": "Reply to CMD_AUTH_RECONNECT_CHALLENGE_Client.",
         "version": {
           "type": "login",
           "versions": [
@@ -42535,7 +42542,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm",
-            "start_position": 12
+            "start_position": 13
           }
         },
         {
@@ -42569,7 +42576,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm",
-            "start_position": 25
+            "start_position": 26
           }
         }
       ],
@@ -42678,6 +42685,7 @@
         }
       ],
       "tags": {
+        "description": "Reply to CMD_AUTH_RECONNECT_CHALLENGE_Client.",
         "version": {
           "type": "login",
           "versions": [
@@ -42810,7 +42818,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm",
-            "start_position": 44
+            "start_position": 46
           }
         },
         {
@@ -42844,13 +42852,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm",
-            "start_position": 57
+            "start_position": 59
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm",
-        "start_position": 34
+        "start_position": 35
       },
       "only_has_io_error": false,
       "features": [
@@ -42952,6 +42960,7 @@
         }
       ],
       "tags": {
+        "description": "Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Server].",
         "version": {
           "type": "login",
           "versions": [
@@ -43143,7 +43152,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/proof_client.wowm",
-            "start_position": 10
+            "start_position": 12
           }
         }
       ],
@@ -43186,6 +43195,7 @@
         }
       ],
       "tags": {
+        "description": "Reply to [CMD_AUTH_RECONNECT_PROOF_Client].",
         "version": {
           "type": "login",
           "versions": [
@@ -43228,7 +43238,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm",
-            "start_position": 7
+            "start_position": 8
           }
         },
         {
@@ -43262,7 +43272,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm",
-            "start_position": 16
+            "start_position": 17
           }
         },
         {
@@ -43296,7 +43306,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm",
-            "start_position": 42
+            "start_position": 44
           }
         }
       ],
@@ -43354,6 +43364,7 @@
         }
       ],
       "tags": {
+        "description": "Reply to [CMD_AUTH_RECONNECT_PROOF_Client].",
         "version": {
           "type": "login",
           "versions": [
@@ -43398,7 +43409,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm",
-            "start_position": 32
+            "start_position": 34
           }
         },
         {
@@ -43434,13 +43445,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm",
-            "start_position": 51
+            "start_position": 53
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm",
-        "start_position": 25
+        "start_position": 26
       },
       "only_has_io_error": false,
       "features": [
