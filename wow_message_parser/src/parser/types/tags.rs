@@ -379,7 +379,9 @@ impl TagString {
         for i in &self.inner {
             match i {
                 TagStringSymbol::Text(t) => s.push_str(t),
-                TagStringSymbol::Link(l) => s.push_str(&format!("[{}]", l)),
+                TagStringSymbol::Link(l) => {
+                    s.push_str(&format!("[{}](./{}.md)", l, l.to_lowercase()))
+                }
                 TagStringSymbol::Newline => s.push_str("<br/>"),
             }
         }
