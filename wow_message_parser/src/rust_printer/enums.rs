@@ -25,8 +25,6 @@ pub fn print_enum(e: &Definer, o: &Objects) -> Writer {
 fn includes(s: &mut Writer) {
     s.wln("use std::convert::{TryFrom, TryInto};");
 
-    s.write_async_includes();
-
     s.newline();
 }
 

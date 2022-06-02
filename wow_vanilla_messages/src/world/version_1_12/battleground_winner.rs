@@ -1,8 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-#[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm#L8):
 /// ```text

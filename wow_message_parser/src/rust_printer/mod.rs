@@ -628,14 +628,6 @@ impl Writer {
         self.newline();
     }
 
-    pub fn write_async_includes(&mut self) {
-        self.wln(CFG_ASYNC_TOKIO);
-        self.wln(TOKIO_IMPORT);
-
-        self.wln(CFG_ASYNC_ASYNC_STD);
-        self.wln(ASYNC_STD_IMPORT);
-    }
-
     pub fn metadata_comment<S: AsRef<str>>(&mut self, s: S) {
         if !Self::METADATA {
             return;

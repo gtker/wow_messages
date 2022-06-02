@@ -1,8 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-#[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm#L3):
 /// ```text

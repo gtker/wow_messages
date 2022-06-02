@@ -1,8 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-#[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
 
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:5`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L5):
 /// ```text
