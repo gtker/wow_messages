@@ -4,10 +4,6 @@ use crate::logon::all::Os;
 use crate::logon::all::Platform;
 use crate::logon::all::Version;
 use crate::ClientMessage;
-#[cfg(feature = "tokio")]
-use tokio::io::AsyncReadExt;
-#[cfg(feature = "async-std")]
-use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -160,7 +156,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
         'life0: 'async_trait,
         Self: 'async_trait,
      {
@@ -241,7 +237,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
+        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
         'life0: 'async_trait,
         Self: 'async_trait,
      {

@@ -46,7 +46,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::tokio_read_u8_le(r).await?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::tokio_read(r).await?)),
@@ -59,7 +59,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::astd_read_u8_le(r).await?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::astd_read(r).await?)),
@@ -128,7 +128,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::tokio_read_u8_le(r).await?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::tokio_read(r).await?)),
@@ -144,7 +144,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::astd_read_u8_le(r).await?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::astd_read(r).await?)),

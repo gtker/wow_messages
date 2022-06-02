@@ -4,10 +4,6 @@ use crate::world::version_1_12::GmTicketStatus;
 use crate::world::version_1_12::GmTicketType;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-#[cfg(feature = "tokio")]
-use tokio::io::AsyncReadExt;
-#[cfg(feature = "async-std")]
-use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]

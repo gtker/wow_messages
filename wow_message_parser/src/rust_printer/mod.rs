@@ -40,9 +40,7 @@ pub const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
 pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 
 pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
-pub const TOKIO_READ_IMPORT: &str = "use tokio::io::AsyncReadExt;";
 pub const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
-pub const ASYNC_READ_STD_IMPORT: &str = "use async_std::io::ReadExt;";
 
 const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
@@ -630,14 +628,6 @@ impl Writer {
         self.newline();
     }
 
-    pub fn write_async_read_includes(&mut self) {
-        self.wln(CFG_ASYNC_TOKIO);
-        self.wln(TOKIO_READ_IMPORT);
-
-        self.wln(CFG_ASYNC_ASYNC_STD);
-        self.wln(ASYNC_READ_STD_IMPORT);
-    }
-
     pub fn write_async_includes(&mut self) {
         self.wln(CFG_ASYNC_TOKIO);
         self.wln(TOKIO_IMPORT);
@@ -772,8 +762,8 @@ impl ImplType {
     pub fn read(&self) -> &str {
         match self {
             ImplType::Std => "std::io::Read",
-            ImplType::Tokio => "AsyncReadExt + Unpin + Send",
-            ImplType::AsyncStd => "ReadExt + Unpin + Send",
+            ImplType::Tokio => "tokio::io::AsyncReadExt + Unpin + Send",
+            ImplType::AsyncStd => "async_std::io::ReadExt + Unpin + Send",
         }
     }
 

@@ -2,10 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_8::LoginResult;
 use crate::logon::version_8::SecurityFlag;
 use crate::ServerMessage;
-#[cfg(feature = "tokio")]
-use tokio::io::AsyncReadExt;
-#[cfg(feature = "async-std")]
-use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -326,7 +322,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
         'life0: 'async_trait,
         Self: 'async_trait,
      {
@@ -497,7 +493,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
+        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
         'life0: 'async_trait,
         Self: 'async_trait,
      {

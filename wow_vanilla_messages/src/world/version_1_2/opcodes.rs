@@ -42,7 +42,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read_unencrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let size = (crate::util::tokio_read_u16_be(r).await?.saturating_sub(4)) as u32;
         let opcode = crate::util::tokio_read_u32_le(r).await?;
 
@@ -51,7 +51,7 @@ impl ClientOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read_encrypted<R: AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read_encrypted<R: tokio::io::AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
@@ -63,7 +63,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read_unencrypted<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let size = (crate::util::astd_read_u16_be(r).await?.saturating_sub(4)) as u32;
         let opcode = crate::util::astd_read_u32_le(r).await?;
 
@@ -72,7 +72,7 @@ impl ClientOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "async-std")]
-    pub async fn astd_read_encrypted<R: ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read_encrypted<R: async_std::io::ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
@@ -125,7 +125,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read_unencrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let size = (crate::util::tokio_read_u16_be(r).await?.saturating_sub(2)) as u32;
         let opcode = crate::util::tokio_read_u16_le(r).await?;
 
@@ -134,7 +134,7 @@ impl ServerOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read_encrypted<R: AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read_encrypted<R: tokio::io::AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
@@ -146,7 +146,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read_unencrypted<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let size = (crate::util::astd_read_u16_be(r).await?.saturating_sub(2)) as u32;
         let opcode = crate::util::astd_read_u16_le(r).await?;
 
@@ -155,7 +155,7 @@ impl ServerOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(feature = "async-std")]
-    pub async fn astd_read_encrypted<R: ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read_encrypted<R: async_std::io::ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);

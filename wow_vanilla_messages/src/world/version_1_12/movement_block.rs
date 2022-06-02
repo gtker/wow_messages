@@ -5,10 +5,6 @@ use crate::world::version_1_12::SplineFlag;
 use crate::world::version_1_12::TransportInfo;
 use crate::world::version_1_12::UpdateFlag;
 use crate::world::version_1_12::Vector3d;
-#[cfg(feature = "tokio")]
-use tokio::io::AsyncReadExt;
-#[cfg(feature = "async-std")]
-use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
