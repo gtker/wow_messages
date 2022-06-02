@@ -79,6 +79,7 @@ fn print_fields(s: &mut Writer, e: &Definer) {
                 s.wln(format!("(self.inner & Self::{name}) != 0", name = f.name()));
             });
 
+            print_docc_description_and_comment(s, f.tags());
             s.funcn_pub_const(format!("new_{name}()", name = f.name()), "Self", |s| {
                 s.wln(format!("Self {{ inner: Self::{name} }}", name = f.name()));
             });

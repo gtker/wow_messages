@@ -86,6 +86,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNUSED1) != 0
     }
 
+    /// # Comment
+    ///
+    /// not used in any spells as of 2.4.3 (can be set dynamically)
     pub const fn new_UNUSED1() -> Self {
         Self { inner: Self::UNUSED1 }
     }
@@ -104,6 +107,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT) != 0
     }
 
+    /// # Comment
+    ///
+    /// pguid
     pub const fn new_UNIT() -> Self {
         Self { inner: Self::UNIT }
     }
@@ -122,6 +128,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_RAID) != 0
     }
 
+    /// # Comment
+    ///
+    /// not used in any spells as of 2.4.3 (can be set dynamically) - raid member
     pub const fn new_UNIT_RAID() -> Self {
         Self { inner: Self::UNIT_RAID }
     }
@@ -140,6 +149,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_PARTY) != 0
     }
 
+    /// # Comment
+    ///
+    /// not used in any spells as of 2.4.3 (can be set dynamically) - party member
     pub const fn new_UNIT_PARTY() -> Self {
         Self { inner: Self::UNIT_PARTY }
     }
@@ -158,6 +170,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::ITEM) != 0
     }
 
+    /// # Comment
+    ///
+    /// pguid
     pub const fn new_ITEM() -> Self {
         Self { inner: Self::ITEM }
     }
@@ -176,6 +191,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::SOURCE_LOCATION) != 0
     }
 
+    /// # Comment
+    ///
+    /// 3xfloat
     pub const fn new_SOURCE_LOCATION() -> Self {
         Self { inner: Self::SOURCE_LOCATION }
     }
@@ -194,6 +212,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::DEST_LOCATION) != 0
     }
 
+    /// # Comment
+    ///
+    /// 3xfloat
     pub const fn new_DEST_LOCATION() -> Self {
         Self { inner: Self::DEST_LOCATION }
     }
@@ -212,6 +233,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_ENEMY) != 0
     }
 
+    /// # Comment
+    ///
+    /// CanAttack == true
     pub const fn new_UNIT_ENEMY() -> Self {
         Self { inner: Self::UNIT_ENEMY }
     }
@@ -230,6 +254,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_ALLY) != 0
     }
 
+    /// # Comment
+    ///
+    /// CanAssist == true
     pub const fn new_UNIT_ALLY() -> Self {
         Self { inner: Self::UNIT_ALLY }
     }
@@ -248,6 +275,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::CORPSE_ENEMY) != 0
     }
 
+    /// # Comment
+    ///
+    /// pguid, CanAssist == false
     pub const fn new_CORPSE_ENEMY() -> Self {
         Self { inner: Self::CORPSE_ENEMY }
     }
@@ -266,6 +296,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_DEAD) != 0
     }
 
+    /// # Comment
+    ///
+    /// skinning-like effects
     pub const fn new_UNIT_DEAD() -> Self {
         Self { inner: Self::UNIT_DEAD }
     }
@@ -284,6 +317,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::GAMEOBJECT) != 0
     }
 
+    /// # Comment
+    ///
+    /// pguid, 0 spells in 2.4.3
     pub const fn new_GAMEOBJECT() -> Self {
         Self { inner: Self::GAMEOBJECT }
     }
@@ -302,6 +338,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::TRADE_ITEM) != 0
     }
 
+    /// # Comment
+    ///
+    /// pguid, 0 spells
     pub const fn new_TRADE_ITEM() -> Self {
         Self { inner: Self::TRADE_ITEM }
     }
@@ -320,6 +359,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::STRING) != 0
     }
 
+    /// # Comment
+    ///
+    /// string, 0 spells
     pub const fn new_STRING() -> Self {
         Self { inner: Self::STRING }
     }
@@ -338,6 +380,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::LOCKED) != 0
     }
 
+    /// # Comment
+    ///
+    /// 199 spells, opening object/lock
     pub const fn new_LOCKED() -> Self {
         Self { inner: Self::LOCKED }
     }
@@ -356,6 +401,9 @@ impl SpellCastTargetFlags {
         (self.inner & Self::CORPSE_ALLY) != 0
     }
 
+    /// # Comment
+    ///
+    /// pguid, CanAssist == true
     pub const fn new_CORPSE_ALLY() -> Self {
         Self { inner: Self::CORPSE_ALLY }
     }

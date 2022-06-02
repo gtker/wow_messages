@@ -101,6 +101,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_STATUS) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint8, enum GroupMemberOnlineStatus
     pub const fn new_FLAG_STATUS() -> Self {
         Self { inner: Self::FLAG_STATUS }
     }
@@ -119,6 +122,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_CUR_HP) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16
     pub const fn new_FLAG_CUR_HP() -> Self {
         Self { inner: Self::FLAG_CUR_HP }
     }
@@ -137,6 +143,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_MAX_HP) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16
     pub const fn new_FLAG_MAX_HP() -> Self {
         Self { inner: Self::FLAG_MAX_HP }
     }
@@ -155,6 +164,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_POWER_TYPE) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint8, enum Powers
     pub const fn new_FLAG_POWER_TYPE() -> Self {
         Self { inner: Self::FLAG_POWER_TYPE }
     }
@@ -173,6 +185,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_CUR_POWER) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16
     pub const fn new_FLAG_CUR_POWER() -> Self {
         Self { inner: Self::FLAG_CUR_POWER }
     }
@@ -191,6 +206,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_MAX_POWER) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16
     pub const fn new_FLAG_MAX_POWER() -> Self {
         Self { inner: Self::FLAG_MAX_POWER }
     }
@@ -209,6 +227,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_LEVEL) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16
     pub const fn new_FLAG_LEVEL() -> Self {
         Self { inner: Self::FLAG_LEVEL }
     }
@@ -227,6 +248,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_ZONE) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16
     pub const fn new_FLAG_ZONE() -> Self {
         Self { inner: Self::FLAG_ZONE }
     }
@@ -245,6 +269,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_POSITION) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16, uint16
     pub const fn new_FLAG_POSITION() -> Self {
         Self { inner: Self::FLAG_POSITION }
     }
@@ -263,6 +290,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_AURAS) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint32 mask, for each bit set uint16 spellid
     pub const fn new_FLAG_AURAS() -> Self {
         Self { inner: Self::FLAG_AURAS }
     }
@@ -281,6 +311,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_AURAS_2) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16 above mask continuation, giving max total of 48 auras possible
     pub const fn new_FLAG_AURAS_2() -> Self {
         Self { inner: Self::FLAG_AURAS_2 }
     }
@@ -299,6 +332,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_GUID) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint64 pet guid
     pub const fn new_FLAG_PET_GUID() -> Self {
         Self { inner: Self::FLAG_PET_GUID }
     }
@@ -317,6 +353,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_NAME) != 0
     }
 
+    /// # Comment
+    ///
+    /// pet name, NULL terminated string
     pub const fn new_FLAG_PET_NAME() -> Self {
         Self { inner: Self::FLAG_PET_NAME }
     }
@@ -335,6 +374,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_MODEL_ID) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16, model id
     pub const fn new_FLAG_PET_MODEL_ID() -> Self {
         Self { inner: Self::FLAG_PET_MODEL_ID }
     }
@@ -353,6 +395,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_CUR_HP) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16 pet cur health
     pub const fn new_FLAG_PET_CUR_HP() -> Self {
         Self { inner: Self::FLAG_PET_CUR_HP }
     }
@@ -371,6 +416,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_MAX_HP) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16 pet max health
     pub const fn new_FLAG_PET_MAX_HP() -> Self {
         Self { inner: Self::FLAG_PET_MAX_HP }
     }
@@ -389,6 +437,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_POWER_TYPE) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint8 pet power type
     pub const fn new_FLAG_PET_POWER_TYPE() -> Self {
         Self { inner: Self::FLAG_PET_POWER_TYPE }
     }
@@ -407,6 +458,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_CUR_POWER) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16 pet cur power
     pub const fn new_FLAG_PET_CUR_POWER() -> Self {
         Self { inner: Self::FLAG_PET_CUR_POWER }
     }
@@ -425,6 +479,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_MAX_POWER) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16 pet max power
     pub const fn new_FLAG_PET_MAX_POWER() -> Self {
         Self { inner: Self::FLAG_PET_MAX_POWER }
     }
@@ -443,6 +500,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_AURAS) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint32 mask, for each bit set uint16 spellid, pet auras...
     pub const fn new_FLAG_PET_AURAS() -> Self {
         Self { inner: Self::FLAG_PET_AURAS }
     }
@@ -461,6 +521,9 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_PET_AURAS_2) != 0
     }
 
+    /// # Comment
+    ///
+    /// uint16 above mask continuation, giving max total of 48 auras possible
     pub const fn new_FLAG_PET_AURAS_2() -> Self {
         Self { inner: Self::FLAG_PET_AURAS_2 }
     }
