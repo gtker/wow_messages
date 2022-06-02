@@ -460,17 +460,17 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
 
                 let field = FIELDS
                     .iter()
-                    .find(|a| a.ty() == f.ty() && a.name() == f.name())
+                    .find(|a| a.object_ty() == f.ty() && a.name() == f.name())
                     .unwrap();
 
-                if field.uf() == UfType::Guid {
+                if field.ty() == UfType::Guid {
                     s.wln(format!(
                         ".set_{ty}_{field}(Guid::new({value}))",
                         value = f.value(),
                         ty = f.ty(),
                         field = f.name()
                     ));
-                } else if field.uf() == UfType::Bytes {
+                } else if field.ty() == UfType::Bytes {
                     let value = parse_value(f.value()).unwrap() as u32;
                     let value = value.to_le_bytes();
 
@@ -481,7 +481,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
 
                     s.wln(format!(
                         ".set_{ty}_{field}({a}, {b}, {c}, {d})",
-                        ty = field.ty(),
+                        ty = field.object_ty(),
                         field = f.name(),
                         a = a,
                         b = b,

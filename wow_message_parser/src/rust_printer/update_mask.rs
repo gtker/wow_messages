@@ -50,7 +50,7 @@ pub fn print_update_mask() {
 
     for (ty, types) in update_types {
         s.bodyn(format!("impl {}", ty), |s| {
-            for m in FIELDS.iter().filter(|a| types.contains(&a.ty)) {
+            for m in FIELDS.iter().filter(|a| types.contains(&a.object_ty)) {
                 print_functions(s, m);
             }
         });
@@ -63,7 +63,7 @@ pub fn print_update_mask() {
 }
 
 fn print_functions(s: &mut Writer, m: &MemberType) {
-    let parameter = match m.uf {
+    let parameter = match m.ty {
         UfType::Guid => "v: Guid",
         UfType::Int => "v: i32",
         UfType::Float => "v: f32",
@@ -72,11 +72,11 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
     };
     s.open_curly(format!(
         "pub fn set_{}_{}(mut self, {}) -> Self",
-        m.ty, m.name, parameter
+        m.object_ty, m.name, parameter
     ));
 
     s.wln(format!("self.header_set({});", m.offset));
-    match m.uf {
+    match m.ty {
         UfType::Guid => {
             s.wln(format!("self.header_set({});", m.offset + 1));
 
@@ -90,7 +90,7 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
             ));
         }
         _ => {
-            let value = match m.uf {
+            let value = match m.ty {
                 UfType::Int => "v as u32",
                 UfType::Float => "u32::from_le_bytes(v.to_le_bytes())",
                 UfType::Bytes => "u32::from_le_bytes([a, b, c, d])",
@@ -144,31 +144,31 @@ pub enum UfType {
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
 pub struct MemberType {
-    ty: UpdateMaskType,
+    object_ty: UpdateMaskType,
     name: &'static str,
     offset: i32,
     size: i32,
-    uf: UfType,
+    ty: UfType,
 }
 
 impl MemberType {
     const fn new(ty: UpdateMaskType, s: &'static str, offset: i32, size: i32, uf: UfType) -> Self {
         Self {
-            ty,
+            object_ty: ty,
             name: s,
             offset,
             size,
-            uf,
+            ty: uf,
         }
     }
-    pub fn ty(&self) -> UpdateMaskType {
-        self.ty
+    pub fn object_ty(&self) -> UpdateMaskType {
+        self.object_ty
     }
     pub fn name(&self) -> &'static str {
         self.name
     }
-    pub fn uf(&self) -> UfType {
-        self.uf
+    pub fn ty(&self) -> UfType {
+        self.ty
     }
 }
 
