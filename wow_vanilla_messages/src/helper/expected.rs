@@ -1,99 +1,62 @@
-use std::fmt::{Display, Formatter};
-use std::io::{Error, Read};
+use crate::errors::ExpectedOpcodeError;
+use crate::ClientMessage;
+use tokio::io::AsyncReadExt;
+use wow_srp::header_crypto::{Decrypter, CLIENT_HEADER_LENGTH};
 
-use crate::util::{read_u16_le, read_u32_le};
-use crate::{ClientMessage, ServerMessage};
+const CLIENT_OPCODE_LENGTH: u16 = 4;
 
-#[cfg(feature = "sync")]
-pub fn read_expected_client_world_message<M: ClientMessage, R: Read>(
+#[cfg(feature = "tokio")]
+pub async fn tokio_expect_client_message_encryption<
+    M: ClientMessage,
+    R: tokio::io::AsyncReadExt + Unpin + Send,
+    D: Decrypter,
+>(
     r: &mut R,
-) -> Result<M, ExpectedClientWorldMessageError> {
-    let size = read_u16_le(r)?;
-    let opcode = read_u32_le(r)?;
+    d: &mut D,
+) -> Result<M, ExpectedOpcodeError> {
+    let mut buf = [0_u8; CLIENT_HEADER_LENGTH as usize];
+    r.read_exact(&mut buf).await?;
+    let d = d.decrypt_client_header(buf);
 
-    return if opcode == M::OPCODE as u32 {
-        let m = M::read_body(r, (size - 4) as u32);
+    let size = d.size;
+    let opcode = d.opcode;
+
+    let mut buf = vec![0; size as usize - 4];
+    r.read_exact(&mut buf).await;
+
+    // Unable to match on associated const M::OPCODE, so we do if
+    if opcode as u16 == M::OPCODE {
+        let m = M::read_body(&mut buf.as_slice(), (size - CLIENT_OPCODE_LENGTH) as u32);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedClientWorldMessageError::GenericError),
+            Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedClientWorldMessageError::UnexpectedOpcode(opcode))
-    };
-}
-
-#[derive(Debug)]
-pub enum ExpectedClientWorldMessageError {
-    Io(std::io::Error),
-    UnexpectedOpcode(u32),
-    GenericError,
-}
-
-impl std::error::Error for ExpectedClientWorldMessageError {}
-
-impl Display for ExpectedClientWorldMessageError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        match self {
-            ExpectedClientWorldMessageError::Io(i) => i.fmt(f),
-            ExpectedClientWorldMessageError::UnexpectedOpcode(i) => {
-                f.write_fmt(format_args!("unexpected opcode returned: '{}'", i))
-            }
-            ExpectedClientWorldMessageError::GenericError => {
-                f.write_str("something went wrong parsing the message")
-            }
-        }
+        Err(ExpectedOpcodeError::Opcode(opcode))
     }
 }
 
-impl From<std::io::Error> for ExpectedClientWorldMessageError {
-    fn from(e: Error) -> Self {
-        Self::Io(e)
-    }
-}
-
-#[cfg(feature = "sync")]
-pub fn read_expected_server_world_message<M: ServerMessage, R: Read>(
+#[cfg(feature = "tokio")]
+pub async fn tokio_expect_client_message<
+    M: ClientMessage,
+    R: tokio::io::AsyncReadExt + Unpin + Send,
+>(
     r: &mut R,
-) -> Result<M, ExpectedServerWorldMessageError> {
-    let size = read_u16_le(r)?;
-    let opcode = read_u16_le(r)?;
+) -> Result<M, ExpectedOpcodeError> {
+    let size = crate::util::tokio_read_u16_be(r).await?;
+    let opcode = crate::util::tokio_read_u32_le(r).await?;
 
-    return if opcode == M::OPCODE {
-        let m = M::read_body(r, (size - 2) as u32);
+    let mut buf = vec![0; size as usize - 4];
+    r.read_exact(&mut buf).await;
+
+    // Unable to match on associated const M::OPCODE, so we do if
+    if opcode as u16 == M::OPCODE {
+        let m = M::read_body(&mut buf.as_slice(), (size - CLIENT_OPCODE_LENGTH) as u32);
         match m {
             Ok(m) => Ok(m),
-            Err(_) => Err(ExpectedServerWorldMessageError::GenericError),
+            Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedServerWorldMessageError::UnexpectedOpcode(opcode))
-    };
-}
-
-#[derive(Debug)]
-pub enum ExpectedServerWorldMessageError {
-    Io(std::io::Error),
-    UnexpectedOpcode(u16),
-    GenericError,
-}
-
-impl std::error::Error for ExpectedServerWorldMessageError {}
-
-impl Display for ExpectedServerWorldMessageError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        match self {
-            ExpectedServerWorldMessageError::Io(i) => i.fmt(f),
-            ExpectedServerWorldMessageError::UnexpectedOpcode(i) => {
-                f.write_fmt(format_args!("unexpected opcode returned: '{}'", i))
-            }
-            ExpectedServerWorldMessageError::GenericError => {
-                f.write_str("something went wrong parsing the message")
-            }
-        }
-    }
-}
-
-impl From<std::io::Error> for ExpectedServerWorldMessageError {
-    fn from(e: Error) -> Self {
-        Self::Io(e)
+        Err(ExpectedOpcodeError::Opcode(opcode))
     }
 }
