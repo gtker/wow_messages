@@ -28,6 +28,9 @@ use std::io::Write;
 /// }
 /// ```
 pub struct TradeSlot {
+    /// # Comment
+    ///
+    /// cmangos/vmangos/mangoszero: sets to index of array
     pub trade_slot_number: u8,
     pub item_id: u32,
     pub display_id: u32,

@@ -22,11 +22,25 @@ use std::io::Write;
 /// }
 /// ```
 pub struct SMSG_TRADE_STATUS_EXTENDED {
+    /// # Comment
+    ///
+    /// cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)
     pub self_player: u8,
+    /// # Comment
+    ///
+    /// cmangos/vmangos/mangoszero: sets to 7
+    /// cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases
     pub trade_slot_count1: u32,
+    /// # Comment
+    ///
+    /// cmangos/vmangos/mangoszero: sets to 7
+    /// cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases
     pub trade_slot_count2: u32,
     pub money_in_trade: u32,
     pub spell_on_lowest_slot: u32,
+    /// # Comment
+    ///
+    /// vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.
     pub trade_slots: [TradeSlot; 7],
 }
 

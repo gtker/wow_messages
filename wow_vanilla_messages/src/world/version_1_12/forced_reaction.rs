@@ -15,7 +15,13 @@ use std::io::Write;
 /// }
 /// ```
 pub struct ForcedReaction {
+    /// # Comment
+    ///
+    /// vmangos: faction_id (Faction.dbc)
     pub faction_id: u32,
+    /// # Comment
+    ///
+    /// vmangos: reputation rank
     pub reputation_rank: u32,
 }
 

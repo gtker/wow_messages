@@ -16,6 +16,9 @@ use std::io::Write;
 ///     }
 /// }
 /// ```
+/// # Comment
+///
+/// vmangos: this opcode can be used in two ways: Either set explicit new status or toggle old status
 pub struct CMSG_TOGGLE_PVP {
     pub set: Option<CMSG_TOGGLE_PVP_set>,
 }

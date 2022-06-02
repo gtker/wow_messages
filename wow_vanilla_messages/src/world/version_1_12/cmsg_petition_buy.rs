@@ -32,6 +32,9 @@ use std::io::Write;
 ///     u32 skip15;
 /// }
 /// ```
+/// # Comment
+///
+/// cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused
 pub struct CMSG_PETITION_BUY {
     pub npc: Guid,
     pub skip1: u32,
@@ -49,6 +52,9 @@ pub struct CMSG_PETITION_BUY {
     pub skip12: u32,
     pub skip13: u16,
     pub skip14: u8,
+    /// # Comment
+    ///
+    /// cmangos/vmangos/mangoszero: Named but never used
     pub index: u32,
     pub skip15: u32,
 }

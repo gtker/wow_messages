@@ -33,6 +33,9 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
     pub platform: Platform,
     pub os: Os,
     pub locale: Locale,
+    /// # Description
+    ///
+    /// Offset in minutes from UTC time. 180 would be UTC+3
     pub utc_timezone_offset: u32,
     pub client_ip_address: u32,
     pub account_name: String,

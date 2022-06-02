@@ -36,6 +36,9 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub title: String,
     pub details: String,
     pub objectives: String,
+    /// # Comment
+    ///
+    /// cmangos/vmangos/mangoszero: sets to 1 for true and 0 for false
     pub auto_finish: u32,
     pub choice_item_rewards: Vec<QuestItemReward>,
     pub item_rewards: Vec<QuestItemReward>,

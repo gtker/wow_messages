@@ -26,6 +26,9 @@ pub struct SMSG_AUCTION_BIDDER_NOTIFICATION {
     pub auction_house_id: u32,
     pub auction_id: u32,
     pub bidder: Guid,
+    /// # Comment
+    ///
+    /// cmangos: if 0, client shows ERR_AUCTION_WON_S, else ERR_AUCTION_OUTBID_S
     pub won: u32,
     pub out_bid: u32,
     pub item_template: u32,

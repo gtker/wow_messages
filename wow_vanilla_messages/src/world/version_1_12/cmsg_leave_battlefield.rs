@@ -19,6 +19,9 @@ use std::io::Write;
 /// ```
 pub struct CMSG_LEAVE_BATTLEFIELD {
     pub unknown1: u8,
+    /// # Comment
+    ///
+    /// cmangos/vmangos/mangoszero: BattleGroundTypeId-1 ? - Classic Only
     pub battle_ground_type_id: u8,
     pub unknown2: u16,
 }

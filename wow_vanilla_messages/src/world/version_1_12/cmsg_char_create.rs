@@ -26,6 +26,9 @@ use std::io::Write;
 ///     u8 outfit_id = 0;
 /// }
 /// ```
+/// # Description
+///
+/// Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].
 pub struct CMSG_CHAR_CREATE {
     pub name: String,
     pub race: Race,

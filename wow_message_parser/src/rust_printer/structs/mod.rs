@@ -3,7 +3,10 @@ use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
-use crate::rust_printer::{Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME};
+use crate::rust_printer::{
+    print_docc_description_and_comment, Writer, CLIENT_MESSAGE_TRAIT_NAME,
+    SERVER_MESSAGE_TRAIT_NAME,
+};
 use crate::wowm_printer::get_struct_wowm_definition;
 
 mod print_common_impls;
@@ -127,8 +130,12 @@ fn print_declaration(s: &mut Writer, e: &Container) {
 
     print_struct_wowm_definition(s, e);
 
+    print_docc_description_and_comment(s, e.tags());
+
     s.new_struct(e.name(), |s| {
         for member in e.rust_object().members_in_struct() {
+            print_docc_description_and_comment(s, member.tags());
+
             s.wln(format!(
                 "pub {name}: {ty},",
                 name = member.name(),
@@ -137,6 +144,7 @@ fn print_declaration(s: &mut Writer, e: &Container) {
         }
 
         if let Some(optional) = e.rust_object().optional() {
+            print_docc_description_and_comment(s, optional.tags());
             s.wln(format!(
                 "pub {name}: Option<{ty}>,",
                 name = optional.name(),

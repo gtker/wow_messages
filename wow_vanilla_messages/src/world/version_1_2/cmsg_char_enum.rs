@@ -14,6 +14,9 @@ use std::io::Write;
 /// cmsg CMSG_CHAR_ENUM = 0x0037 {
 /// }
 /// ```
+/// # Description
+///
+/// Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE], or after failing to login with [SMSG_CHARACTER_LOGIN_FAILED].
 pub struct CMSG_CHAR_ENUM {
 }
 

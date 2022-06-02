@@ -20,6 +20,9 @@ use std::io::Write;
 pub struct SMSG_ATTACKSTOP {
     pub player: Guid,
     pub enemy: Guid,
+    /// # Comment
+    ///
+    /// cmangos/vmangos/mangoszero: set to 0 with comment: unk, can be 1 also
     pub unknown1: u32,
 }
 

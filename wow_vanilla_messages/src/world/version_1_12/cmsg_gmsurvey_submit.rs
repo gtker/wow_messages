@@ -18,8 +18,15 @@ use std::io::Write;
 /// }
 /// ```
 pub struct CMSG_GMSURVEY_SUBMIT {
+    /// # Comment
+    ///
+    /// cmangos: Survey ID: found in GMSurveySurveys.dbc
     pub survey_id: u32,
     pub questions: [GmSurveyQuestion; 10],
+    /// # Comment
+    ///
+    /// cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function
+    /// cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586
     pub answer_comment: String,
 }
 

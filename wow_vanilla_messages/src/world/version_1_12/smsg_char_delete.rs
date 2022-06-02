@@ -16,6 +16,12 @@ use std::io::Write;
 ///     WorldResult result;
 /// }
 /// ```
+/// # Description
+///
+/// Response to [CMSG_CHAR_DELETE].
+/// # Comment
+///
+/// The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM].
 pub struct SMSG_CHAR_DELETE {
     pub result: WorldResult,
 }

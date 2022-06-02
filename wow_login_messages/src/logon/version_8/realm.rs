@@ -29,6 +29,9 @@ use std::io::Write;
 /// }
 /// ```
 pub struct Realm {
+    /// # Comment
+    ///
+    /// vmangos: this is the second column in Cfg_Configs.dbc
     pub realm_type: RealmType,
     pub locked: u8,
     pub flag: Realm_RealmFlag,

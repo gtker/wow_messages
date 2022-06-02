@@ -17,6 +17,9 @@ use std::io::Write;
 ///     Guid guid;
 /// }
 /// ```
+/// # Comment
+///
+/// vmangos: Nostalrius: ignored by client if unit is not loaded
 pub struct SMSG_PLAY_OBJECT_SOUND {
     pub sound_id: u32,
     pub guid: Guid,

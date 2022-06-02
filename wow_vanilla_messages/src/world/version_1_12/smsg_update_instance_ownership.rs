@@ -16,6 +16,9 @@ use std::io::Write;
 /// }
 /// ```
 pub struct SMSG_UPDATE_INSTANCE_OWNERSHIP {
+    /// # Comment
+    ///
+    /// cmangos/vmangos/mangoszero: true or false means, whether you have current raid instances
     pub has_been_saved: u32,
 }
 

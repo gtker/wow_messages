@@ -23,6 +23,9 @@ use std::io::Write;
 ///     }
 /// }
 /// ```
+/// # Description
+///
+/// Response to [CMSG_AUTH_SESSION].
 pub struct SMSG_AUTH_RESPONSE {
     pub result: SMSG_AUTH_RESPONSE_WorldResult,
 }

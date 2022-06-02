@@ -20,6 +20,9 @@ use std::io::Write;
 ///     Area area;
 /// }
 /// ```
+/// # Description
+///
+/// Set new hearthstone location.
 pub struct SMSG_BINDPOINTUPDATE {
     pub position: Vector3d,
     pub map: Map,

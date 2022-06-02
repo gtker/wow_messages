@@ -15,6 +15,13 @@ use std::io::Write;
 ///     u32 server_seed;
 /// }
 /// ```
+/// # Description
+///
+/// Seed used by the client to prove in [CMSG_AUTH_SESSION] that it has authenticated with the auth server.
+/// # Comment
+///
+/// First thing sent when a client connects to the world server.
+/// This message is always unencrypted.
 pub struct SMSG_AUTH_CHALLENGE {
     pub server_seed: u32,
 }

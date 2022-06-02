@@ -20,6 +20,9 @@ use std::io::Write;
 ///     }
 /// }
 /// ```
+/// # Description
+///
+/// Response to [CMSG_CHAR_RENAME].
 pub struct SMSG_CHAR_RENAME {
     pub result: SMSG_CHAR_RENAME_WorldResult,
 }

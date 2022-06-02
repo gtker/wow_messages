@@ -23,6 +23,9 @@ use std::io::Write;
 pub struct SMSG_SPELLLOGMISS {
     pub id: u32,
     pub caster_guid: Guid,
+    /// # Comment
+    ///
+    /// cmangos/mangoszero: can be 0 or 1
     pub unknown1: u8,
     pub targets: Vec<SpellMiss>,
 }

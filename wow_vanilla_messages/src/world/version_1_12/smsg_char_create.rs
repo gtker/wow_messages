@@ -16,6 +16,9 @@ use std::io::Write;
 ///     WorldResult result;
 /// }
 /// ```
+/// # Description
+///
+/// Response to [CMSG_CHAR_CREATE].
 pub struct SMSG_CHAR_CREATE {
     pub result: WorldResult,
 }

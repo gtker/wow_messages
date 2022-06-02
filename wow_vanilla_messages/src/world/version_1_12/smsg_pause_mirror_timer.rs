@@ -17,6 +17,9 @@ use std::io::Write;
 ///     u8 is_frozen;
 /// }
 /// ```
+/// # Comment
+///
+/// According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with SMSG_START_MIRROR_TIMER to avoid lua errors.
 pub struct SMSG_PAUSE_MIRROR_TIMER {
     pub timer: TimerType,
     pub is_frozen: u8,

@@ -17,6 +17,9 @@ use std::io::Write;
 ///     RaidGroupError error;
 /// }
 /// ```
+/// # Comment
+///
+/// used when player leaves raid group inside instance
 pub struct SMSG_RAID_GROUP_ONLY {
     pub homebind_timer: u32,
     pub error: RaidGroupError,

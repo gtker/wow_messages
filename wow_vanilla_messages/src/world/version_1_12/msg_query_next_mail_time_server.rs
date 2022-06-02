@@ -15,7 +15,15 @@ use std::io::Write;
 ///     f32 unread_mails;
 /// }
 /// ```
+/// # Comment
+///
+/// mangoszero/vmangos: No idea when this is called.
 pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
+    /// # Comment
+    ///
+    /// mangoszero sets 0 if has unread mail, -86400.0f (0xC7A8C000) if not
+    /// vmangos sets 0 if has unread mail, -1.0f if not
+    /// cmangos has the behavior of mangoszero except when there are unread mails. This is TODO.
     pub unread_mails: f32,
 }
 

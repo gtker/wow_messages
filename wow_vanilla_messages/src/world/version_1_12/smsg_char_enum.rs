@@ -16,6 +16,9 @@ use std::io::Write;
 ///     Character[amount_of_characters] characters;
 /// }
 /// ```
+/// # Description
+///
+/// Response to [CMSG_CHAR_ENUM].
 pub struct SMSG_CHAR_ENUM {
     pub characters: Vec<Character>,
 }

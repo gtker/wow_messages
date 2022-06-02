@@ -23,6 +23,9 @@ pub struct CMSG_BUY_ITEM {
     pub vendor_guid: Guid,
     pub item_id: u32,
     pub amount: u8,
+    /// # Comment
+    ///
+    /// cmangos says this is hardcoded to 1 in the TBC client.
     pub unknown1: u8,
 }
 

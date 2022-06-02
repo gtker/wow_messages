@@ -15,7 +15,13 @@ use std::io::Write;
 ///     u32 unknown1;
 /// }
 /// ```
+/// # Comment
+///
+/// cmangos/vmangos/mangoszero: deliver undelivered mail
 pub struct SMSG_RECEIVED_MAIL {
+    /// # Comment
+    ///
+    /// cmangos/vmangos sends 0 as u32, mangoszero sends 0 as f32
     pub unknown1: u32,
 }
 

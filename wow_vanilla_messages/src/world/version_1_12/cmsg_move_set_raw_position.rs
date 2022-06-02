@@ -17,6 +17,9 @@ use std::io::Write;
 ///     f32 orientation;
 /// }
 /// ```
+/// # Comment
+///
+/// vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using MSG_MOVE_SET_RAW_POSITION_ACK.
 pub struct CMSG_MOVE_SET_RAW_POSITION {
     pub position: Vector3d,
     pub orientation: f32,

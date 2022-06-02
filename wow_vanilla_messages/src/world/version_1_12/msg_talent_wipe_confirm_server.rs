@@ -17,6 +17,10 @@ use std::io::Write;
 ///     u32 cost_in_copper;
 /// }
 /// ```
+/// # Comment
+///
+/// cmangos/vmangos/mangoszero returns guid 0 and unknown 0 when talents can not be reset
+/// cmangos/vmangos/mangoszero casts spell 14876 when resetting
 pub struct MSG_TALENT_WIPE_CONFIRM_Server {
     pub wiping_npc: Guid,
     pub cost_in_copper: u32,

@@ -23,6 +23,9 @@ pub struct SMSG_SPELLORDAMAGE_IMMUNE {
     pub caster_guid: Guid,
     pub target_guid: Guid,
     pub id: u32,
+    /// # Comment
+    ///
+    /// vmangos/cmangos sets to 0
     pub unknown1: u8,
 }
 

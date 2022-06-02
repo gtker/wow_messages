@@ -21,6 +21,9 @@ use std::io::Write;
 pub struct ItemSpells {
     pub spell: u32,
     pub spell_trigger: u32,
+    /// # Comment
+    ///
+    /// let the database control the sign here. negative means that the item should be consumed once the charges are consumed.
     pub spell_charges: u32,
     pub spell_cooldown: u32,
     pub spell_category: u32,

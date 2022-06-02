@@ -22,6 +22,13 @@ use std::io::Write;
 ///     u32 tutorial_data7;
 /// }
 /// ```
+/// # Description
+///
+/// Data for which tutorials the client has passed.
+/// # Comment
+///
+/// All bits set means that all tutorials have been passed.
+/// Must be sent after [SMSG_LOGIN_VERIFY_WORLD] otherwise the client will SEGFAULT.
 pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data0: u32,
     pub tutorial_data1: u32,

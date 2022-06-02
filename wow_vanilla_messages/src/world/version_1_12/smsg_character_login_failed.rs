@@ -16,6 +16,9 @@ use std::io::Write;
 ///     WorldResult result;
 /// }
 /// ```
+/// # Description
+///
+/// Response if [CMSG_PLAYER_LOGIN] fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD].
 pub struct SMSG_CHARACTER_LOGIN_FAILED {
     pub result: WorldResult,
 }

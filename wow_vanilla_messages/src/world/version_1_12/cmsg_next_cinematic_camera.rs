@@ -14,6 +14,9 @@ use std::io::Write;
 /// cmsg CMSG_NEXT_CINEMATIC_CAMERA = 0x00FB {
 /// }
 /// ```
+/// # Description
+///
+/// Sent by client when cinematic beings.
 pub struct CMSG_NEXT_CINEMATIC_CAMERA {
 }
 

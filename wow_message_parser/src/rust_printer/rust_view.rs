@@ -407,6 +407,7 @@ pub struct RustOptional {
     name: String,
     ty: String,
     members: Vec<RustMember>,
+    tags: Tags,
 }
 
 impl RustOptional {
@@ -424,6 +425,9 @@ impl RustOptional {
     }
     pub fn constant_sized(&self) -> bool {
         self.members().iter().all(|a| a.constant_sized())
+    }
+    pub fn tags(&self) -> &Tags {
+        &self.tags
     }
 }
 
@@ -1286,6 +1290,7 @@ pub fn create_struct_member(
                 name: option.name().to_string(),
                 ty: get_optional_type_name(struct_ty_name, option.name()),
                 members,
+                tags: option.tags().clone(),
             });
         }
     }

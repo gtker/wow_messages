@@ -21,6 +21,9 @@ use std::io::Write;
 /// }
 /// ```
 pub struct SMSG_INITIAL_SPELLS {
+    /// # Comment
+    ///
+    /// cmangos/mangoszero: sets to 0
     pub unknown1: u8,
     pub initial_spells: Vec<InitialSpell>,
     pub cooldowns: Vec<CooldownSpell>,

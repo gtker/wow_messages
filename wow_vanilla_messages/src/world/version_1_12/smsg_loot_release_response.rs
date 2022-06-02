@@ -19,6 +19,9 @@ use std::io::Write;
 /// ```
 pub struct SMSG_LOOT_RELEASE_RESPONSE {
     pub guid: Guid,
+    /// # Comment
+    ///
+    /// Set to 1 on mangoszero/vmangos/cmangos
     pub unknown1: u8,
 }
 

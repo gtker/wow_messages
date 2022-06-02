@@ -15,7 +15,13 @@ use std::io::Write;
 /// }
 /// ```
 pub struct GmSurveyQuestion {
+    /// # Comment
+    ///
+    /// cmangos: questions found in GMSurveyQuestions.dbc
     pub question_id: u32,
+    /// # Comment
+    ///
+    /// Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+
     pub answer: u8,
 }
 

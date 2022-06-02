@@ -16,6 +16,12 @@ use std::io::Write;
 ///     Guid guid;
 /// }
 /// ```
+/// # Description
+///
+/// Command to delete a character from the clients account. Can be sent after the client has received [SMSG_CHAR_ENUM].
+/// # Comment
+///
+/// Sent after the client has confirmed the character deletion.
 pub struct CMSG_CHAR_DELETE {
     pub guid: Guid,
 }

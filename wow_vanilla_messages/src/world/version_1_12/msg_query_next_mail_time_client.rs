@@ -14,6 +14,9 @@ use std::io::Write;
 /// cmsg MSG_QUERY_NEXT_MAIL_TIME_Client = 0x0284 {
 /// }
 /// ```
+/// # Comment
+///
+/// mangoszero/vmangos: No idea when this is called.
 pub struct MSG_QUERY_NEXT_MAIL_TIME_Client {
 }
 

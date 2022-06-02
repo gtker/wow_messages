@@ -15,6 +15,9 @@ use std::io::Write;
 ///     u8 slot;
 /// }
 /// ```
+/// # Description
+///
+/// Notify a looting player that an item has been taken.
 pub struct SMSG_LOOT_REMOVED {
     pub slot: u8,
 }
