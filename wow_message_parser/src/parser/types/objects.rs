@@ -113,13 +113,17 @@ impl Objects {
         );
     }
 
-    pub fn get_tags_of_object(&self, type_name: &str, finder_tags: &Tags) -> &Tags {
+    pub fn get_tags_of_object_fallible(
+        &self,
+        type_name: &str,
+        finder_tags: &Tags,
+    ) -> Option<&Tags> {
         if let Some(e) = self
             .enums
             .iter()
             .find(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
         {
-            return e.tags();
+            return Some(e.tags());
         }
 
         if let Some(e) = self
@@ -127,14 +131,22 @@ impl Objects {
             .iter()
             .find(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
         {
-            return e.tags();
+            return Some(e.tags());
         }
 
         if let Some(e) = self
             .all_containers()
             .find(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
         {
-            return e.tags();
+            return Some(e.tags());
+        }
+
+        None
+    }
+
+    pub fn get_tags_of_object(&self, type_name: &str, finder_tags: &Tags) -> &Tags {
+        if let Some(tags) = self.get_tags_of_object_fallible(type_name, finder_tags) {
+            return tags;
         }
 
         panic!(

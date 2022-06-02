@@ -46081,7 +46081,7 @@
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {
-              "description": "This is sent to the client in CMD_REALM_LIST_Server."
+              "description": "This is sent to the client in [CMD_REALM_LIST_Server]."
             }
           }
         },

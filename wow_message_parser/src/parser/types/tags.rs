@@ -355,8 +355,11 @@ impl TagString {
             match i {
                 TagStringSymbol::Text(s) => current.push_str(s),
                 TagStringSymbol::Link(s) => {
-                    let tags = o.get_tags_of_object(s, object_tags);
-                    current.push_str(&format!("[{}]({}::{})", s, get_import_path(tags), s))
+                    if let Some(tags) = o.get_tags_of_object_fallible(s, object_tags) {
+                        current.push_str(&format!("[{}]({}::{})", s, get_import_path(tags), s))
+                    } else {
+                        current.push_str(&format!("`{}`", s))
+                    }
                 }
                 TagStringSymbol::Newline => {
                     v.push(current.clone());

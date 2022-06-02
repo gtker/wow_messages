@@ -40,7 +40,7 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / Little | u32 | build |  |  |
-| 0x0A | 4 / Little | u32 | server_id | This is sent to the client in CMD_REALM_LIST_Server. |  |
+| 0x0A | 4 / Little | u32 | server_id | This is sent to the client in [CMD_REALM_LIST_Server]. |  |
 | 0x0E | - / - | CString | username |  |  |
 | - | 4 / Little | u32 | client_seed |  |  |
 | - | ? / - | u8[20] | client_proof |  |  |
