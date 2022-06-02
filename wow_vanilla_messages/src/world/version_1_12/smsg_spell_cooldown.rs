@@ -10,6 +10,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm#L8):
+/// ```text
+/// smsg SMSG_SPELL_COOLDOWN = 0x0134 {
+///     Guid guid;
+///     SpellCooldownStatus[-] cooldowns;
+/// }
+/// ```
 pub struct SMSG_SPELL_COOLDOWN {
     pub guid: Guid,
     pub cooldowns: Vec<SpellCooldownStatus>,

@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm#L3):
+/// ```text
+/// cmsg CMSG_ZONEUPDATE = 0x01F4 {
+///     u32 zone_id;
+/// }
+/// ```
 pub struct CMSG_ZONEUPDATE {
     pub zone_id: u32,
 }

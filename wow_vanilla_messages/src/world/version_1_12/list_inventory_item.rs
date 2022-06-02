@@ -7,6 +7,18 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_list_inventory.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_list_inventory.wowm#L3):
+/// ```text
+/// struct ListInventoryItem {
+///     u32 item_stack_count;
+///     u32 item_id;
+///     u32 item_display_id;
+///     u32 max_items;
+///     u32 price;
+///     u32 max_durability;
+///     u32 durability;
+/// }
+/// ```
 pub struct ListInventoryItem {
     pub item_stack_count: u32,
     pub item_id: u32,

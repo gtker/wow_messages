@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/cmsg_mail_delete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/cmsg_mail_delete.wowm#L3):
+/// ```text
+/// cmsg CMSG_MAIL_DELETE = 0x0249 {
+///     Guid mailbox_id;
+///     u32 mail_id;
+/// }
+/// ```
 pub struct CMSG_MAIL_DELETE {
     pub mailbox_id: Guid,
     pub mail_id: u32,

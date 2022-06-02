@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_set_actionbar_toggles.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_set_actionbar_toggles.wowm#L3):
+/// ```text
+/// cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
+///     u8 action_bar;
+/// }
+/// ```
 pub struct CMSG_SET_ACTIONBAR_TOGGLES {
     pub action_bar: u8,
 }

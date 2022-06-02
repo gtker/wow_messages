@@ -4,6 +4,16 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm#L3):
+/// ```text
+/// enum PlayerChatTag : u8 {
+///     NONE = 0;
+///     AFK = 1;
+///     DND = 2;
+///     GM = 3;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PlayerChatTag {
     NONE,

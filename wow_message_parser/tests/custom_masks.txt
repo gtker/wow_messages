@@ -8,6 +8,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:222`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L222):
+/// ```text
+/// struct CustomMasks {
+///     UpdateMask update_mask;
+///     AuraMask aura_mask;
+/// }
+/// ```
 pub struct CustomMasks {
     pub update_mask: UpdateMask,
     pub aura_mask: AuraMask,

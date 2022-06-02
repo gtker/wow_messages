@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_new_taxi_path.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_new_taxi_path.wowm#L3):
+/// ```text
+/// smsg SMSG_NEW_TAXI_PATH = 0x01AF {
+/// }
+/// ```
 pub struct SMSG_NEW_TAXI_PATH {
 }
 

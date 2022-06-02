@@ -11,6 +11,19 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm#L3):
+/// ```text
+/// smsg SMSG_LOOT_ROLL_WON = 0x029F {
+///     Guid looted_target_guid;
+///     u32 loot_slot;
+///     u32 item_id;
+///     u32 item_random_suffix;
+///     u32 item_random_property_id;
+///     Guid winning_player_guid;
+///     u8 winning_roll;
+///     RollVote vote;
+/// }
+/// ```
 pub struct SMSG_LOOT_ROLL_WON {
     pub looted_target_guid: Guid,
     pub loot_slot: u32,

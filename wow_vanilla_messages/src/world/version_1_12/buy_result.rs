@@ -4,6 +4,21 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_buy_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_buy_failed.wowm#L3):
+/// ```text
+/// enum BuyResult : u8 {
+///     CANT_FIND_ITEM = 0;
+///     ITEM_ALREADY_SOLD = 1;
+///     NOT_ENOUGHT_MONEY = 2;
+///     SELLER_DONT_LIKE_YOU = 4;
+///     DISTANCE_TOO_FAR = 5;
+///     ITEM_SOLD_OUT = 7;
+///     CANT_CARRY_MORE = 8;
+///     RANK_REQUIRE = 11;
+///     REPUTATION_REQUIRE = 12;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BuyResult {
     CANT_FIND_ITEM,

@@ -10,6 +10,16 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questupdate_add_kill.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questupdate_add_kill.wowm#L3):
+/// ```text
+/// smsg SMSG_QUESTUPDATE_ADD_KILL = 0x0199 {
+///     u32 quest_id;
+///     u32 create_id;
+///     u32 kill_count;
+///     u32 required_kill_count;
+///     Guid guid;
+/// }
+/// ```
 pub struct SMSG_QUESTUPDATE_ADD_KILL {
     pub quest_id: u32,
     pub create_id: u32,

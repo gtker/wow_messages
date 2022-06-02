@@ -11,6 +11,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm#L17):
+/// ```text
+/// smsg SMSG_LOGOUT_RESPONSE = 0x004C {
+///     LogoutResult reason;
+///     LogoutSpeed speed;
+/// }
+/// ```
 pub struct SMSG_LOGOUT_RESPONSE {
     pub reason: LogoutResult,
     pub speed: LogoutSpeed,
@@ -60,6 +67,7 @@ mod test {
 
     const RAW0: [u8; 9] = [ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, ];
 
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm` line 22.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGOUT_RESPONSE0() {
@@ -86,6 +94,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm` line 22.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGOUT_RESPONSE0() {
@@ -112,6 +121,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm` line 22.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGOUT_RESPONSE0() {

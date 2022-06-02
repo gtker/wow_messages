@@ -9,6 +9,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_spline_move_unset_hover.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_spline_move_unset_hover.wowm#L3):
+/// ```text
+/// smsg SMSG_SPLINE_MOVE_UNSET_HOVER = 0x0308 {
+///     PackedGuid guid;
+/// }
+/// ```
 pub struct SMSG_SPLINE_MOVE_UNSET_HOVER {
     pub guid: Guid,
 }

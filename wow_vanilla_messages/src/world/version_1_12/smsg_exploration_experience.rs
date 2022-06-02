@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_exploration_experience.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_exploration_experience.wowm#L3):
+/// ```text
+/// smsg SMSG_EXPLORATION_EXPERIENCE = 0x01F8 {
+///     Area area;
+///     u32 experience;
+/// }
+/// ```
 pub struct SMSG_EXPLORATION_EXPERIENCE {
     pub area: Area,
     pub experience: u32,

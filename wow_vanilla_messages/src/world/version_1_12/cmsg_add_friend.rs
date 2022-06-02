@@ -8,6 +8,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_add_friend.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_add_friend.wowm#L3):
+/// ```text
+/// cmsg CMSG_ADD_FRIEND = 0x0069 {
+///     CString friend_name;
+/// }
+/// ```
 pub struct CMSG_ADD_FRIEND {
     pub friend_name: String,
 }

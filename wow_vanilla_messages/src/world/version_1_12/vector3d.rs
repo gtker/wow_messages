@@ -7,6 +7,14 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:74`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L74):
+/// ```text
+/// struct Vector3d {
+///     f32 x;
+///     f32 y;
+///     f32 z;
+/// }
+/// ```
 pub struct Vector3d {
     pub x: f32,
     pub y: f32,

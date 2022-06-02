@@ -9,6 +9,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_run_back_speed_change.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_run_back_speed_change.wowm#L3):
+/// ```text
+/// smsg SMSG_FORCE_RUN_BACK_SPEED_CHANGE = 0x00E4 {
+///     PackedGuid guid;
+///     u32 move_event;
+///     f32 speed;
+/// }
+/// ```
 pub struct SMSG_FORCE_RUN_BACK_SPEED_CHANGE {
     pub guid: Guid,
     pub move_event: u32,

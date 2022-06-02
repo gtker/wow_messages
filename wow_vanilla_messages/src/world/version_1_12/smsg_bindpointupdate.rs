@@ -12,6 +12,14 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm#L5):
+/// ```text
+/// smsg SMSG_BINDPOINTUPDATE = 0x0155 {
+///     Vector3d position;
+///     Map map;
+///     Area area;
+/// }
+/// ```
 pub struct SMSG_BINDPOINTUPDATE {
     pub position: Vector3d,
     pub map: Map,

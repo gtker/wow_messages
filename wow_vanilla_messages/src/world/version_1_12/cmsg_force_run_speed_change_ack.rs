@@ -10,6 +10,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm#L3):
+/// ```text
+/// cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
+///     Guid guid;
+///     u32 counter;
+///     MovementInfo movement_info;
+///     f32 new_speed;
+/// }
+/// ```
 pub struct CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
     pub guid: Guid,
     pub counter: u32,

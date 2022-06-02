@@ -4,6 +4,14 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_request_item.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_request_item.wowm#L9):
+/// ```text
+/// enum QuestCompletable : u32 {
+///     NOT_COMPLETABLE = 0;
+///     COMPLETEABLE = 3;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestCompletable {
     NOT_COMPLETABLE,

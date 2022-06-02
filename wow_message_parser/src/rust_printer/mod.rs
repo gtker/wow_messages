@@ -49,7 +49,7 @@ const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async-std\")]";
 
 impl Writer {
     pub(crate) const INDENTATION: &'static str = "    ";
-    const METADATA: bool = false;
+    const METADATA: bool = true;
 
     pub fn new(import_path: &str) -> Self {
         Self {

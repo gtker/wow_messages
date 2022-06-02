@@ -4,6 +4,16 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/spell_common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/spell_common.wowm#L3):
+/// ```text
+/// enum TimerType : u32 {
+///     FATIGUE = 0;
+///     BREATH = 1;
+///     FEIGNDEATH = 2;
+///     ENVIRONMENTAL = 3;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TimerType {
     FATIGUE,

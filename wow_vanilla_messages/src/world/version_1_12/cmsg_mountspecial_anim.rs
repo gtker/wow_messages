@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/cmsg_mountspecial_anim.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/cmsg_mountspecial_anim.wowm#L3):
+/// ```text
+/// cmsg CMSG_MOUNTSPECIAL_ANIM = 0x0171 {
+/// }
+/// ```
 pub struct CMSG_MOUNTSPECIAL_ANIM {
 }
 

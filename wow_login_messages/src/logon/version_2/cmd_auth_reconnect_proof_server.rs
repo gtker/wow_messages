@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm#L1):
+/// ```text
+/// slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
+///     LoginResult result;
+/// }
+/// ```
 pub struct CMD_AUTH_RECONNECT_PROOF_Server {
     pub result: LoginResult,
 }
@@ -138,6 +144,7 @@ mod test {
 
     const RAW0: [u8; 2] = [ 0x03, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 7.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Server0() {
@@ -162,6 +169,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 7.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server0() {
@@ -186,6 +194,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 7.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server0() {
@@ -212,6 +221,7 @@ mod test {
 
     const RAW1: [u8; 2] = [ 0x03, 0x0E, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 16.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Server1() {
@@ -236,6 +246,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 16.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server1() {
@@ -260,6 +271,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 16.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server1() {
@@ -286,6 +298,7 @@ mod test {
 
     const RAW2: [u8; 2] = [ 0x03, 0x0E, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 42.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Server2() {
@@ -310,6 +323,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 42.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server2() {
@@ -334,6 +348,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 42.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server2() {

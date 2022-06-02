@@ -7,6 +7,15 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm#L2):
+/// ```text
+/// struct TelemetryKey {
+///     u16 unknown1;
+///     u32 unknown2;
+///     u8[4] unknown3;
+///     u8[20] unknown4;
+/// }
+/// ```
 pub struct TelemetryKey {
     pub unknown1: u16,
     pub unknown2: u32,

@@ -9,6 +9,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellheallog.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellheallog.wowm#L3):
+/// ```text
+/// smsg SMSG_SPELLHEALLOG = 0x0150 {
+///     PackedGuid victim_guid;
+///     PackedGuid caster_guid;
+///     u32 id;
+///     u32 damage;
+///     u8 critical;
+/// }
+/// ```
 pub struct SMSG_SPELLHEALLOG {
     pub victim_guid: Guid,
     pub caster_guid: Guid,

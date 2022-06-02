@@ -9,6 +9,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/cmsg_gossip_select_option.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/cmsg_gossip_select_option.wowm#L3):
+/// ```text
+/// cmsg CMSG_GOSSIP_SELECT_OPTION = 0x017C {
+///     Guid guid;
+///     u32 gossip_list_id;
+///     optional unknown {
+///         CString code;
+///     }
+/// }
+/// ```
 pub struct CMSG_GOSSIP_SELECT_OPTION {
     pub guid: Guid,
     pub gossip_list_id: u32,

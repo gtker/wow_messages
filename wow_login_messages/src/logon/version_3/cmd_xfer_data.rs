@@ -7,6 +7,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L10):
+/// ```text
+/// slogin CMD_XFER_DATA = 0x31 {
+///     u16 size;
+///     u8[size] data;
+/// }
+/// ```
 pub struct CMD_XFER_DATA {
     pub data: Vec<u8>,
 }
@@ -165,6 +172,7 @@ mod test {
 
     const RAW0: [u8; 4] = [ 0x31, 0x01, 0x00, 0xFF, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 15.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_DATA0() {
@@ -189,6 +197,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 15.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_DATA0() {
@@ -213,6 +222,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 15.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_DATA0() {
@@ -239,6 +249,7 @@ mod test {
 
     const RAW1: [u8; 3] = [ 0x31, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 24.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_DATA1() {
@@ -263,6 +274,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 24.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_DATA1() {
@@ -287,6 +299,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 24.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_DATA1() {

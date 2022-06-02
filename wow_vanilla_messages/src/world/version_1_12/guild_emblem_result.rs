@@ -4,6 +4,18 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/msg_save_guild_emblem_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/msg_save_guild_emblem_server.wowm#L3):
+/// ```text
+/// enum GuildEmblemResult : u32 {
+///     SUCCESS = 0;
+///     INVALID_TABARD_COLORS = 1;
+///     NO_GUILD = 2;
+///     NOT_GUILD_MASTER = 3;
+///     NOT_ENOUGH_MONEY = 4;
+///     NO_MESSAGE = 5;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildEmblemResult {
     SUCCESS,

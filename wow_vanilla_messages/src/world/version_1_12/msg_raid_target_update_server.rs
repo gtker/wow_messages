@@ -10,6 +10,18 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L26):
+/// ```text
+/// smsg MSG_RAID_TARGET_UPDATE_Server = 0x0321 {
+///     RaidTargetUpdateType update_type;
+///     if (update_type == FULL) {
+///         RaidTargetUpdate[8] raid_targets;
+///     }
+///     else if (update_type == PARTIAL) {
+///         RaidTargetUpdate raid_target;
+///     }
+/// }
+/// ```
 pub struct MSG_RAID_TARGET_UPDATE_Server {
     pub update_type: MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType,
 }

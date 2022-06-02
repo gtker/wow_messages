@@ -1,3 +1,15 @@
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L11):
+/// ```text
+/// flag RealmFlag : u8 {
+///     NONE = 0x00;
+///     INVALID = 0x01;
+///     OFFLINE = 0x02;
+///     FORCE_BLUE_RECOMMENDED = 0x20;
+///     FORCE_GREEN_RECOMMENDED = 0x40;
+///     FORCE_RED_FULL = 0x80;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct RealmFlag {
     inner: u8,

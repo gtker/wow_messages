@@ -4,6 +4,17 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm#L3):
+/// ```text
+/// enum TransferAbortReason : u8 {
+///     NONE = 0x00;
+///     IS_FULL = 0x01;
+///     NOT_FOUND = 0x02;
+///     TOO_MANY_INSTANCES = 0x03;
+///     ZONE_IS_IN_COMBAT = 0x05;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TransferAbortReason {
     NONE,

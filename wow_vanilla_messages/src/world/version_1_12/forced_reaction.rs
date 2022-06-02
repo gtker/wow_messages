@@ -7,6 +7,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_set_forced_reactions.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_set_forced_reactions.wowm#L3):
+/// ```text
+/// struct ForcedReaction {
+///     u32 faction_id;
+///     u32 reputation_rank;
+/// }
+/// ```
 pub struct ForcedReaction {
     pub faction_id: u32,
     pub reputation_rank: u32,

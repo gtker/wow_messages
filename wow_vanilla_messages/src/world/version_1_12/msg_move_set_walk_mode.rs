@@ -9,6 +9,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm#L3):
+/// ```text
+/// msg MSG_MOVE_SET_WALK_MODE = 0x00C3 {
+///     MovementInfo info;
+/// }
+/// ```
 pub struct MSG_MOVE_SET_WALK_MODE {
     pub info: MovementInfo,
 }

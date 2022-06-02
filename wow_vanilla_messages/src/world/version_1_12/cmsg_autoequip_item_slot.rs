@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_autoequip_item_slot.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_autoequip_item_slot.wowm#L3):
+/// ```text
+/// cmsg CMSG_AUTOEQUIP_ITEM_SLOT = 0x010F {
+///     Guid guid;
+///     u8 destination_slot;
+/// }
+/// ```
 pub struct CMSG_AUTOEQUIP_ITEM_SLOT {
     pub guid: Guid,
     pub destination_slot: u8,

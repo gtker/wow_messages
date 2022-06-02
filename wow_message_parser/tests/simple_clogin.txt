@@ -8,6 +8,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:36`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L36):
+/// ```text
+/// clogin SimpleClogin = 0x00 {
+///     u8 basic;
+/// }
+/// ```
 pub struct SimpleClogin {
     pub basic: u8,
 }

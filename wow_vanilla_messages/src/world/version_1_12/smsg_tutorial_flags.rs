@@ -9,6 +9,19 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm#L3):
+/// ```text
+/// smsg SMSG_TUTORIAL_FLAGS = 0x00FD {
+///     u32 tutorial_data0;
+///     u32 tutorial_data1;
+///     u32 tutorial_data2;
+///     u32 tutorial_data3;
+///     u32 tutorial_data4;
+///     u32 tutorial_data5;
+///     u32 tutorial_data6;
+///     u32 tutorial_data7;
+/// }
+/// ```
 pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data0: u32,
     pub tutorial_data1: u32,
@@ -107,6 +120,7 @@ mod test {
          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
          0xFF, 0xFF, 0xFF, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 18.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_TUTORIAL_FLAGS0() {
@@ -145,6 +159,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 18.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_TUTORIAL_FLAGS0() {
@@ -183,6 +198,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 18.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_TUTORIAL_FLAGS0() {

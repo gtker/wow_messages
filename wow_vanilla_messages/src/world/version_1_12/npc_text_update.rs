@@ -8,6 +8,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm#L3):
+/// ```text
+/// struct NpcTextUpdate {
+///     f32 probability;
+///     CString[2] texts;
+///     Language language;
+///     NpcTextUpdateEmote[3] emotes;
+/// }
+/// ```
 pub struct NpcTextUpdate {
     pub probability: f32,
     pub texts: [String; 2],

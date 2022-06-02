@@ -11,6 +11,15 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelldamageshield.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelldamageshield.wowm#L3):
+/// ```text
+/// smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
+///     Guid victim_guid;
+///     Guid caster_guid;
+///     u32 damage;
+///     SpellSchool school;
+/// }
+/// ```
 pub struct SMSG_SPELLDAMAGESHIELD {
     pub victim_guid: Guid,
     pub caster_guid: Guid,

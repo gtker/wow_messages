@@ -9,6 +9,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_confirm_accept.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_confirm_accept.wowm#L3):
+/// ```text
+/// smsg SMSG_QUEST_CONFIRM_ACCEPT = 0x019C {
+///     u32 quest_id;
+///     CString quest_title;
+///     Guid guid;
+/// }
+/// ```
 pub struct SMSG_QUEST_CONFIRM_ACCEPT {
     pub quest_id: u32,
     pub quest_title: String,

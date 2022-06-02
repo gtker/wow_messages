@@ -8,6 +8,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_set_leader.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_set_leader.wowm#L3):
+/// ```text
+/// smsg SMSG_GROUP_SET_LEADER = 0x0079 {
+///     CString name;
+/// }
+/// ```
 pub struct SMSG_GROUP_SET_LEADER {
     pub name: String,
 }

@@ -4,6 +4,25 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_buyback_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_buyback_item.wowm#L3):
+/// ```text
+/// enum BuybackSlot : u32 {
+///     SLOT1 = 69;
+///     SLOT2 = 70;
+///     SLOT3 = 71;
+///     SLOT4 = 72;
+///     SLOT5 = 73;
+///     SLOT6 = 74;
+///     SLOT7 = 75;
+///     SLOT8 = 76;
+///     SLOT9 = 77;
+///     SLOT10 = 78;
+///     SLOT11 = 79;
+///     SLOT12 = 80;
+///     SLOT13 = 81;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BuybackSlot {
     SLOT1,

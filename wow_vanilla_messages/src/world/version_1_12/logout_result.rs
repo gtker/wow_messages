@@ -4,6 +4,16 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm#L3):
+/// ```text
+/// enum LogoutResult : u32 {
+///     SUCCESS = 0;
+///     FAILURE_IN_COMBAT = 1;
+///     FAILURE_FROZEN_BY_GM = 2;
+///     FAILURE_JUMPING_OR_FALLING = 3;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LogoutResult {
     SUCCESS,

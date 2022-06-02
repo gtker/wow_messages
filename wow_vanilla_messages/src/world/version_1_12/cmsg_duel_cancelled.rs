@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/duel/cmsg_duel_cancelled.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/duel/cmsg_duel_cancelled.wowm#L3):
+/// ```text
+/// cmsg CMSG_DUEL_CANCELLED = 0x016D {
+///     Guid guid;
+/// }
+/// ```
 pub struct CMSG_DUEL_CANCELLED {
     pub guid: Guid,
 }

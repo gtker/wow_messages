@@ -11,6 +11,32 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:163`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L163):
+/// ```text
+/// struct Object {
+///     UpdateType update_type;
+///     if (update_type == VALUES) {
+///         PackedGuid guid1;
+///         UpdateMask mask1;
+///     }
+///     else if (update_type == MOVEMENT) {
+///         PackedGuid guid2;
+///         MovementBlock movement1;
+///     }
+///     else if (update_type == CREATE_OBJECT
+///         || update_type == CREATE_OBJECT2) {
+///         PackedGuid guid3;
+///         ObjectType object_type;
+///         MovementBlock movement2;
+///         UpdateMask mask2;
+///     }
+///     else if (update_type == OUT_OF_RANGE_OBJECTS
+///         || update_type == NEAR_OBJECTS) {
+///         u32 count;
+///         PackedGuid[count] guids;
+///     }
+/// }
+/// ```
 pub struct Object {
     pub update_type: Object_UpdateType,
 }

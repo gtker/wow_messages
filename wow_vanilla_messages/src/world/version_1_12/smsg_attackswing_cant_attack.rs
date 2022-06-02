@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackswing_cant_attack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackswing_cant_attack.wowm#L3):
+/// ```text
+/// smsg SMSG_ATTACKSWING_CANT_ATTACK = 0x0149 {
+/// }
+/// ```
 pub struct SMSG_ATTACKSWING_CANT_ATTACK {
 }
 

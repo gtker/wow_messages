@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm#L3):
+/// ```text
+/// smsg SMSG_CHAR_CREATE = 0x003A {
+///     WorldResult result;
+/// }
+/// ```
 pub struct SMSG_CHAR_CREATE {
     pub result: WorldResult,
 }
@@ -50,6 +56,7 @@ mod test {
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0x3A, 0x00, 0x2F, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_CREATE0() {
@@ -74,6 +81,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_CREATE0() {
@@ -98,6 +106,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_CREATE0() {

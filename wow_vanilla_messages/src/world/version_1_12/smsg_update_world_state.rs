@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_update_world_state.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_update_world_state.wowm#L3):
+/// ```text
+/// smsg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
+///     WorldState state;
+/// }
+/// ```
 pub struct SMSG_UPDATE_WORLD_STATE {
     pub state: WorldState,
 }

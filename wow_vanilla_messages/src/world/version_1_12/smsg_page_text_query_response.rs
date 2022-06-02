@@ -8,6 +8,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_page_text_query_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_page_text_query_response.wowm#L3):
+/// ```text
+/// smsg SMSG_PAGE_TEXT_QUERY_RESPONSE = 0x005B {
+///     u32 page_id;
+///     CString text;
+///     u32 next_page_id;
+/// }
+/// ```
 pub struct SMSG_PAGE_TEXT_QUERY_RESPONSE {
     pub page_id: u32,
     pub text: String,

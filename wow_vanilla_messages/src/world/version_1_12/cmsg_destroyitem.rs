@@ -9,6 +9,17 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_destroyitem.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_destroyitem.wowm#L3):
+/// ```text
+/// cmsg CMSG_DESTROYITEM = 0x0111 {
+///     u8 bag;
+///     u8 slot;
+///     u8 amount;
+///     u8 unknown1;
+///     u8 unknown2;
+///     u8 unknown3;
+/// }
+/// ```
 pub struct CMSG_DESTROYITEM {
     pub bag: u8,
     pub slot: u8,

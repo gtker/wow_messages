@@ -11,6 +11,21 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm#L3):
+/// ```text
+/// cmsg CMSG_GMTICKET_CREATE = 0x0205 {
+///     GmTicketType category;
+///     Map map;
+///     Vector3d position;
+///     CString message;
+///     CString reserved_for_future_use;
+///     if (category == BEHAVIOR_HARASSMENT) {
+///         u32 chat_data_line_count;
+///         u32 chat_data_size_uncompressed;
+///         u8[-] compressed_chat_data;
+///     }
+/// }
+/// ```
 pub struct CMSG_GMTICKET_CREATE {
     pub category: CMSG_GMTICKET_CREATE_GmTicketType,
     pub map: Map,

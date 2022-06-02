@@ -4,6 +4,19 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L3):
+/// ```text
+/// enum Power : u8 {
+///     MANA = 0;
+///     RAGE = 1;
+///     FOCUS = 2;
+///     ENERGY = 3;
+///     HAPPINESS = 4;
+///     MAX_POWERS = 5;
+///     ALL = 127;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Power {
     MANA,

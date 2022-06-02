@@ -8,6 +8,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_guild_add_rank.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_guild_add_rank.wowm#L3):
+/// ```text
+/// cmsg CMSG_GUILD_ADD_RANK = 0x0232 {
+///     CString rank_name;
+/// }
+/// ```
 pub struct CMSG_GUILD_ADD_RANK {
     pub rank_name: String,
 }

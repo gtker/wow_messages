@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow#L3):
+/// ```text
+/// cmsg CMSG_PLAYER_LOGIN = 0x003D {
+///     Guid guid;
+/// }
+/// ```
 pub struct CMSG_PLAYER_LOGIN {
     pub guid: Guid,
 }
@@ -50,6 +56,7 @@ mod test {
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x3D, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_PLAYER_LOGIN0() {
@@ -74,6 +81,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_PLAYER_LOGIN0() {
@@ -98,6 +106,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow` line 11.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_PLAYER_LOGIN0() {

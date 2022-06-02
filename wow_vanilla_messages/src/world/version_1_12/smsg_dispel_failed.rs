@@ -9,6 +9,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_dispel_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_dispel_failed.wowm#L3):
+/// ```text
+/// smsg SMSG_DISPEL_FAILED = 0x0262 {
+///     Guid caster_guid;
+///     Guid target_guid;
+///     u32[-] spells;
+/// }
+/// ```
 pub struct SMSG_DISPEL_FAILED {
     pub caster_guid: Guid,
     pub target_guid: Guid,

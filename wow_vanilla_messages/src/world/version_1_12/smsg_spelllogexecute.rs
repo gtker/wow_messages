@@ -10,6 +10,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm:179`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm#L179):
+/// ```text
+/// smsg SMSG_SPELLLOGEXECUTE = 0x024C {
+///     PackedGuid caster;
+///     u32 spell;
+///     u32 amount_of_effects;
+///     SpellLog[amount_of_effects] logs;
+/// }
+/// ```
 pub struct SMSG_SPELLLOGEXECUTE {
     pub caster: Guid,
     pub spell: u32,

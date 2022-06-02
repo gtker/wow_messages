@@ -8,6 +8,21 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:325`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L325):
+/// ```text
+/// struct EnumIfElseIfNested {
+///     SimpleEnum e;
+///     NestedEnum n;
+///     if (e == ZERO) {
+///         u8 zero;
+///     }
+///     else {
+///         if (n == NESTED) {
+///             u8 nested;
+///         }
+///     }
+/// }
+/// ```
 pub struct EnumIfElseIfNested {
     pub e: EnumIfElseIfNested_SimpleEnum,
     pub n: EnumIfElseIfNested_NestedEnum,

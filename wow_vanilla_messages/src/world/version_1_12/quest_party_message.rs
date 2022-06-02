@@ -4,6 +4,21 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/msg_quest_push_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/msg_quest_push_result.wowm#L3):
+/// ```text
+/// enum QuestPartyMessage : u8 {
+///     SHARING_QUEST = 0;
+///     CANT_TAKE_QUEST = 1;
+///     ACCEPT_QUEST = 2;
+///     DECLINE_QUEST = 3;
+///     TOO_FAR = 4;
+///     BUSY = 5;
+///     LOG_FULL = 6;
+///     HAVE_QUEST = 7;
+///     FINISH_QUEST = 8;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestPartyMessage {
     SHARING_QUEST,

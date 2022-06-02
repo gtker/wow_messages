@@ -9,6 +9,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_learn_talent.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_learn_talent.wowm#L3):
+/// ```text
+/// cmsg CMSG_LEARN_TALENT = 0x0251 {
+///     u32 talent_id;
+///     u32 requested_rank;
+/// }
+/// ```
 pub struct CMSG_LEARN_TALENT {
     pub talent_id: u32,
     pub requested_rank: u32,

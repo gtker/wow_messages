@@ -9,6 +9,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm:100`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm#L100):
+/// ```text
+/// smsg SMSG_CHANNEL_NOTIFY = 0x0099 {
+///     ChatNotify notify_type;
+///     CString channel_name;
+/// }
+/// ```
 pub struct SMSG_CHANNEL_NOTIFY {
     pub notify_type: ChatNotify,
     pub channel_name: String,

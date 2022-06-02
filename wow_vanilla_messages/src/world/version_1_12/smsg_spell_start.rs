@@ -11,6 +11,21 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_start.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_start.wowm#L3):
+/// ```text
+/// smsg SMSG_SPELL_START = 0x0131 {
+///     PackedGuid cast_item;
+///     PackedGuid caster;
+///     u32 spell;
+///     CastFlags flags;
+///     u32 timer;
+///     SpellCastTargets targets;
+///     if (flags & AMMO) {
+///         u32 ammo_display_id;
+///         u32 ammo_inventory_type;
+///     }
+/// }
+/// ```
 pub struct SMSG_SPELL_START {
     pub cast_item: Guid,
     pub caster: Guid,

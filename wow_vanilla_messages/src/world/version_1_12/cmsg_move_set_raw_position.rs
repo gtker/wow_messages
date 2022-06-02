@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_raw_position.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_raw_position.wowm#L3):
+/// ```text
+/// cmsg CMSG_MOVE_SET_RAW_POSITION = 0x00E1 {
+///     Vector3d position;
+///     f32 orientation;
+/// }
+/// ```
 pub struct CMSG_MOVE_SET_RAW_POSITION {
     pub position: Vector3d,
     pub orientation: f32,

@@ -1,3 +1,12 @@
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L26):
+/// ```text
+/// flag AccountFlag : u32 {
+///     GM = 0x000001;
+///     TRIAL = 0x000008;
+///     PROPASS = 0x800000;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct AccountFlag {
     inner: u32,

@@ -8,6 +8,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_area_trigger_message.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_area_trigger_message.wowm#L3):
+/// ```text
+/// smsg SMSG_AREA_TRIGGER_MESSAGE = 0x02B8 {
+///     u32 length;
+///     CString message;
+/// }
+/// ```
 pub struct SMSG_AREA_TRIGGER_MESSAGE {
     pub length: u32,
     pub message: String,

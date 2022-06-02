@@ -12,6 +12,74 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:91`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L91):
+/// ```text
+/// struct MovementBlock {
+///     UpdateFlag update_flag;
+///     if (update_flag & LIVING) {
+///         MovementFlags flags;
+///         u32 timestamp;
+///         Vector3d living_position;
+///         f32 living_orientation;
+///         if (flags & ON_TRANSPORT) {
+///             TransportInfo transport;
+///         }
+///         if (flags & SWIMMING) {
+///             f32 pitch;
+///         }
+///         f32 fall_time;
+///         if (flags & JUMPING) {
+///             f32 z_speed;
+///             f32 cos_angle;
+///             f32 sin_angle;
+///             f32 xy_speed;
+///         }
+///         if (flags & SPLINE_ELEVATION) {
+///             f32 spline_elevation;
+///         }
+///         f32 walking_speed;
+///         f32 running_speed;
+///         f32 backwards_running_speed;
+///         f32 swimming_speed;
+///         f32 backwards_swimming_speed;
+///         f32 turn_rate;
+///         if (flags & SPLINE_ENABLED) {
+///             SplineFlag spline_flags;
+///             if (spline_flags & FINAL_ANGLE) {
+///                 f32 angle;
+///             }
+///             else if (spline_flags & FINAL_TARGET) {
+///                 u64 target;
+///             }
+///             else if (spline_flags & FINAL_POINT) {
+///                 Vector3d spline_final_point;
+///             }
+///             u32 time_passed;
+///             u32 duration;
+///             u32 id;
+///             u32 amount_of_nodes;
+///             Vector3d[amount_of_nodes] nodes;
+///             Vector3d final_node;
+///         }
+///     }
+///     else if (update_flag & HAS_POSITION) {
+///         Vector3d position;
+///         f32 orientation;
+///     }
+///     if (update_flag & HIGH_GUID) {
+///         u32 unknown0;
+///     }
+///     if (update_flag & ALL) {
+///         u32 unknown1;
+///     }
+///     if (update_flag & MELEE_ATTACKING) {
+///         PackedGuid guid;
+///     }
+///     if (update_flag & TRANSPORT) {
+///         u32 transport_progress_in_ms;
+///     }
+/// }
+/// ```
 pub struct MovementBlock {
     pub update_flag: MovementBlock_UpdateFlag,
 }

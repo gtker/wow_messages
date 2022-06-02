@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm#L3):
+/// ```text
+/// smsg SMSG_GUILD_ROSTER = 0x008A {
+/// }
+/// ```
 pub struct SMSG_GUILD_ROSTER {
 }
 

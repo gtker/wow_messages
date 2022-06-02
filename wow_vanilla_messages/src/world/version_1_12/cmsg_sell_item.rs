@@ -10,6 +10,14 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_sell_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_sell_item.wowm#L3):
+/// ```text
+/// cmsg CMSG_SELL_ITEM = 0x01A0 {
+///     Guid vendor_guid;
+///     Guid item_guid;
+///     u8 amount;
+/// }
+/// ```
 pub struct CMSG_SELL_ITEM {
     pub vendor_guid: Guid,
     pub item_guid: Guid,

@@ -1,3 +1,17 @@
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L12):
+/// ```text
+/// flag UpdateFlag : u8 {
+///     NONE = 0x00;
+///     SELF = 0x01;
+///     TRANSPORT = 0x02;
+///     MELEE_ATTACKING = 0x04;
+///     HIGH_GUID = 0x08;
+///     ALL = 0x10;
+///     LIVING = 0x20;
+///     HAS_POSITION = 0x40;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct UpdateFlag {
     inner: u8,

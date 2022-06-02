@@ -9,6 +9,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_server_message.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_server_message.wowm#L11):
+/// ```text
+/// smsg SMSG_SERVER_MESSAGE = 0x0291 {
+///     ServerMessageType message_type;
+///     CString message;
+/// }
+/// ```
 pub struct SMSG_SERVER_MESSAGE {
     pub message_type: ServerMessageType,
     pub message: String,

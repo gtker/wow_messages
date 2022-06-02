@@ -1,3 +1,42 @@
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:24`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L24):
+/// ```text
+/// flag SplineFlag : u32 {
+///     NONE = 0x00000000;
+///     DONE = 0x00000001;
+///     FALLING = 0x00000002;
+///     UNKNOWN3 = 0x00000004;
+///     UNKNOWN4 = 0x00000008;
+///     UNKNOWN5 = 0x00000010;
+///     UNKNOWN6 = 0x00000020;
+///     UNKNOWN7 = 0x00000040;
+///     UNKNOWN8 = 0x00000080;
+///     RUNMODE = 0x00000100;
+///     FLYING = 0x00000200;
+///     NO_SPLINE = 0x00000400;
+///     UNKNOWN12 = 0x00000800;
+///     UNKNOWN13 = 0x00001000;
+///     UNKNOWN14 = 0x00002000;
+///     UNKNOWN15 = 0x00004000;
+///     UNKNOWN16 = 0x00008000;
+///     FINAL_POINT = 0x00010000;
+///     FINAL_TARGET = 0x00020000;
+///     FINAL_ANGLE = 0x00040000;
+///     UNKNOWN19 = 0x00080000;
+///     CYCLIC = 0x00100000;
+///     ENTER_CYCLE = 0x00200000;
+///     FROZEN = 0x00400000;
+///     UNKNOWN23 = 0x00800000;
+///     UNKNOWN24 = 0x01000000;
+///     UNKNOWN25 = 0x02000000;
+///     UNKNOWN26 = 0x04000000;
+///     UNKNOWN27 = 0x08000000;
+///     UNKNOWN28 = 0x10000000;
+///     UNKNOWN29 = 0x20000000;
+///     UNKNOWN30 = 0x40000000;
+///     UNKNOWN31 = 0x80000000;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct SplineFlag {
     inner: u32,

@@ -10,6 +10,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_root_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_root_ack.wowm#L3):
+/// ```text
+/// cmsg CMSG_FORCE_MOVE_ROOT_ACK = 0x00E9 {
+///     Guid guid;
+///     u32 movement_counter;
+///     MovementInfo movement_info;
+/// }
+/// ```
 pub struct CMSG_FORCE_MOVE_ROOT_ACK {
     pub guid: Guid,
     pub movement_counter: u32,

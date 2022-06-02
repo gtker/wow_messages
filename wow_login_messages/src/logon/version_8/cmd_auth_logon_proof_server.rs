@@ -9,11 +9,35 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L34):
+/// ```text
+/// slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
+///     LoginResult login_result;
+///     if (login_result == SUCCESS) {
+///         u8[20] server_proof;
+///         AccountFlag account_flag;
+///         u32 hardware_survey_id;
+///         u16 unknown_flags;
+///     }
+///     else {
+///         u16 padding = 0;
+///     }
+/// }
+/// ```
 pub struct CMD_AUTH_LOGON_PROOF_Server {
     pub login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult,
 }
 
 impl CMD_AUTH_LOGON_PROOF_Server {
+    /// The field `padding` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `0` |
+    /// | Hex | `0x00` |
+    /// | Original | `0` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const PADDING_VALUE: u16 = 0x00;
 
 }
@@ -536,6 +560,7 @@ mod test {
 
     const RAW0: [u8; 4] = [ 0x01, 0x07, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 48.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Server0() {
@@ -560,6 +585,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 48.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Server0() {
@@ -584,6 +610,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 48.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Server0() {
@@ -610,6 +637,7 @@ mod test {
 
     const RAW1: [u8; 4] = [ 0x01, 0x08, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 57.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Server1() {
@@ -634,6 +662,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 57.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Server1() {
@@ -658,6 +687,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 57.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Server1() {

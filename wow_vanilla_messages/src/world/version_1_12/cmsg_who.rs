@@ -8,6 +8,21 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_who.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_who.wowm#L3):
+/// ```text
+/// cmsg CMSG_WHO = 0x0062 {
+///     u32 minimum_level;
+///     u32 maximum_level;
+///     CString player_name;
+///     CString guild_name;
+///     u32 race_mask;
+///     u32 class_mask;
+///     u32 amount_of_zones;
+///     u32[amount_of_zones] zones;
+///     u32 amount_of_strings;
+///     CString[amount_of_strings] search_strings;
+/// }
+/// ```
 pub struct CMSG_WHO {
     pub minimum_level: u32,
     pub maximum_level: u32,

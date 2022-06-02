@@ -8,6 +8,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_invite.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_invite.wowm#L3):
+/// ```text
+/// smsg SMSG_GUILD_INVITE = 0x0083 {
+///     CString player_name;
+///     CString guild_name;
+/// }
+/// ```
 pub struct SMSG_GUILD_INVITE {
     pub player_name: String,
     pub guild_name: String,

@@ -9,6 +9,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/duel/smsg_duel_winner.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/duel/smsg_duel_winner.wowm#L8):
+/// ```text
+/// smsg SMSG_DUEL_WINNER = 0x016B {
+///     DuelWinnerReason reason;
+///     CString opponent_name;
+///     CString initiator_name;
+/// }
+/// ```
 pub struct SMSG_DUEL_WINNER {
     pub reason: DuelWinnerReason,
     pub opponent_name: String,

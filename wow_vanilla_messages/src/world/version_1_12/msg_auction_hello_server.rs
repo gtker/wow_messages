@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm#L3):
+/// ```text
+/// smsg MSG_AUCTION_HELLO_Server = 0x0255 {
+///     Guid auctioneer;
+///     u32 auction_house_id;
+/// }
+/// ```
 pub struct MSG_AUCTION_HELLO_Server {
     pub auctioneer: Guid,
     pub auction_house_id: u32,
@@ -58,6 +65,7 @@ mod test {
     const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
          0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_AUCTION_HELLO_Server0() {
@@ -84,6 +92,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_AUCTION_HELLO_Server0() {
@@ -110,6 +119,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_AUCTION_HELLO_Server0() {

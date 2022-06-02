@@ -8,6 +8,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:288`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L288):
+/// ```text
+/// cmsg CMSG_TEST_OPTIONAL = 0x1137 {
+///     CString c_string;
+///     u8 b_u8;
+///     optional server {
+///         u8 optional_u8;
+///     }
+/// }
+/// ```
 pub struct CMSG_TEST_OPTIONAL {
     pub c_string: String,
     pub b_u8: u8,

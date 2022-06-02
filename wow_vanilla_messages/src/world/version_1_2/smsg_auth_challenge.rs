@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm#L3):
+/// ```text
+/// smsg SMSG_AUTH_CHALLENGE = 0x01EC {
+///     u32 server_seed;
+/// }
+/// ```
 pub struct SMSG_AUTH_CHALLENGE {
     pub server_seed: u32,
 }
@@ -48,6 +54,7 @@ mod test {
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xEC, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_AUTH_CHALLENGE0() {
@@ -72,6 +79,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm` line 11.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_CHALLENGE0() {
@@ -96,6 +104,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm` line 11.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_CHALLENGE0() {

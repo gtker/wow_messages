@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_taxinode_status.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_taxinode_status.wowm#L3):
+/// ```text
+/// smsg SMSG_TAXINODE_STATUS = 0x01AB {
+///     Guid guid;
+///     u8 taxi_mask_node_known;
+/// }
+/// ```
 pub struct SMSG_TAXINODE_STATUS {
     pub guid: Guid,
     pub taxi_mask_node_known: u8,

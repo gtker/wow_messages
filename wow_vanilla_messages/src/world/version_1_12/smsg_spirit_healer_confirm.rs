@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/smsg_spirit_healer_confirm.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/smsg_spirit_healer_confirm.wowm#L3):
+/// ```text
+/// smsg SMSG_SPIRIT_HEALER_CONFIRM = 0x0222 {
+///     Guid guid;
+/// }
+/// ```
 pub struct SMSG_SPIRIT_HEALER_CONFIRM {
     pub guid: Guid,
 }

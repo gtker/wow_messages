@@ -8,6 +8,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_pet_name_query_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_pet_name_query_response.wowm#L3):
+/// ```text
+/// smsg SMSG_PET_NAME_QUERY_RESPONSE = 0x0053 {
+///     u32 pet_number;
+///     CString name;
+///     u32 pet_name_timestamp;
+/// }
+/// ```
 pub struct SMSG_PET_NAME_QUERY_RESPONSE {
     pub pet_number: u32,
     pub name: String,
@@ -75,6 +83,7 @@ mod test {
     const RAW0: [u8; 19] = [ 0x00, 0x11, 0x53, 0x00, 0xEF, 0xBE, 0xAD, 0xDE, 0x41,
          0x42, 0x43, 0x44, 0x45, 0x46, 0x00, 0xDE, 0xCA, 0xFA, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_pet_name_query_response.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_PET_NAME_QUERY_RESPONSE0() {
@@ -103,6 +112,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_pet_name_query_response.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_PET_NAME_QUERY_RESPONSE0() {
@@ -131,6 +141,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_pet_name_query_response.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_PET_NAME_QUERY_RESPONSE0() {

@@ -9,6 +9,18 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_pet_set_action.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_pet_set_action.wowm#L3):
+/// ```text
+/// cmsg CMSG_PET_SET_ACTION = 0x0174 {
+///     Guid guid;
+///     u32 position1;
+///     u32 data1;
+///     optional extra {
+///         u32 position2;
+///         u32 data2;
+///     }
+/// }
+/// ```
 pub struct CMSG_PET_SET_ACTION {
     pub guid: Guid,
     pub position1: u32,

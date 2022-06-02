@@ -4,6 +4,19 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L11):
+/// ```text
+/// enum ItemQuality : u8 {
+///     POOR = 0;
+///     NORMAL = 1;
+///     UNCOMMON = 2;
+///     RARE = 3;
+///     EPIC = 4;
+///     LEGENDARY = 5;
+///     ARTIFACT = 6;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ItemQuality {
     POOR,

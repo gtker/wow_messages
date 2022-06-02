@@ -11,6 +11,25 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm#L8):
+/// ```text
+/// smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
+///     Guid guid;
+///     u32 quest_id;
+///     CString title;
+///     CString details;
+///     CString objectives;
+///     u32 auto_finish;
+///     u32 amount_of_choice_item_rewards;
+///     QuestItemReward[amount_of_choice_item_rewards] choice_item_rewards;
+///     u32 amount_of_item_rewards;
+///     QuestItemReward[amount_of_item_rewards] item_rewards;
+///     u32 money_reward;
+///     u32 reward_spell;
+///     u32 amount_of_emotes;
+///     QuestDetailsEmote[amount_of_emotes] emotes;
+/// }
+/// ```
 pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub guid: Guid,
     pub quest_id: u32,

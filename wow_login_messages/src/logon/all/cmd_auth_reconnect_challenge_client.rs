@@ -11,6 +11,22 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm#L3):
+/// ```text
+/// clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
+///     u8 protocol_version;
+///     u16 size = self.size;
+///     u32 game_name = "\0WoW";
+///     Version version;
+///     Platform platform;
+///     Os os;
+///     Locale locale;
+///     u32 utc_timezone_offset;
+///     u32_be client_ip_address;
+///     u8 account_name_length;
+///     String[account_name_length] account_name;
+/// }
+/// ```
 pub struct CMD_AUTH_RECONNECT_CHALLENGE_Client {
     pub protocol_version: u8,
     pub version: Version,
@@ -23,6 +39,15 @@ pub struct CMD_AUTH_RECONNECT_CHALLENGE_Client {
 }
 
 impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
+    /// The field `game_name` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `5730135` |
+    /// | Hex | `0x576f57` |
+    /// | Original | `"\0WoW"` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const GAME_NAME_VALUE: u32 = 0x576f57;
 
 }
@@ -324,6 +349,7 @@ mod test {
          0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x01,
          0x01, 0x41, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 17.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
@@ -367,6 +393,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 17.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
@@ -410,6 +437,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 17.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
@@ -459,6 +487,7 @@ mod test {
          0x10, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B,
          0x4C, 0x4D, 0x4E, 0x4F, 0x50, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 48.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
@@ -502,6 +531,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 48.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
@@ -545,6 +575,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 48.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {

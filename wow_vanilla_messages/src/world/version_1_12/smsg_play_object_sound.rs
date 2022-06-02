@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_player_object_sound.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_player_object_sound.wowm#L5):
+/// ```text
+/// smsg SMSG_PLAY_OBJECT_SOUND = 0x0278 {
+///     u32 sound_id;
+///     Guid guid;
+/// }
+/// ```
 pub struct SMSG_PLAY_OBJECT_SOUND {
     pub sound_id: u32,
     pub guid: Guid,

@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_gameobject_pagetext.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_gameobject_pagetext.wowm#L3):
+/// ```text
+/// smsg SMSG_GAMEOBJECT_PAGETEXT = 0x01DF {
+///     Guid guid;
+/// }
+/// ```
 pub struct SMSG_GAMEOBJECT_PAGETEXT {
     pub guid: Guid,
 }

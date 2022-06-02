@@ -4,6 +4,17 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm#L3):
+/// ```text
+/// enum MailType : u8 {
+///     NORMAL = 0;
+///     AUCTION = 2;
+///     CREATURE = 3;
+///     GAMEOBJECT = 4;
+///     ITEM = 5;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum MailType {
     NORMAL,

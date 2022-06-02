@@ -4,6 +4,22 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/quest_common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/quest_common.wowm#L3):
+/// ```text
+/// enum QuestFailedReason : u32 {
+///     DONT_HAVE_REQ = 0;
+///     QUEST_FAILED_LOW_LEVEL = 1;
+///     QUEST_FAILED_REQS = 2;
+///     QUEST_FAILED_INVENTORY_FULL = 4;
+///     QUEST_FAILED_WRONG_RACE = 6;
+///     QUEST_ONLY_ONE_TIMED = 12;
+///     QUEST_ALREADY_ON = 13;
+///     QUEST_FAILED_DUPLICATE_ITEM = 17;
+///     QUEST_FAILED_MISSING_ITEMS = 20;
+///     QUEST_FAILED_NOT_ENOUGH_MONEY = 22;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestFailedReason {
     DONT_HAVE_REQ,

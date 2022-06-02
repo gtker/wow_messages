@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_delayed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_delayed.wowm#L3):
+/// ```text
+/// smsg SMSG_SPELL_DELAYED = 0x01E2 {
+///     Guid guid;
+///     u32 delay_time;
+/// }
+/// ```
 pub struct SMSG_SPELL_DELAYED {
     pub guid: Guid,
     pub delay_time: u32,

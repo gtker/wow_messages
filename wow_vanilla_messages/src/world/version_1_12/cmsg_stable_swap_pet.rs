@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_stable_swap_pet.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_stable_swap_pet.wowm#L3):
+/// ```text
+/// cmsg CMSG_STABLE_SWAP_PET = 0x0275 {
+///     Guid npc;
+///     u32 pet_slot;
+/// }
+/// ```
 pub struct CMSG_STABLE_SWAP_PET {
     pub npc: Guid,
     pub pet_slot: u32,

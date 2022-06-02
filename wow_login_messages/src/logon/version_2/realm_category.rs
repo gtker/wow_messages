@@ -4,6 +4,17 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:43`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L43):
+/// ```text
+/// enum RealmCategory : u8 {
+///     DEFAULT = 0x0;
+///     ONE = 0x1;
+///     TWO = 0x2;
+///     THREE = 0x3;
+///     FIVE = 0x5;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RealmCategory {
     DEFAULT,

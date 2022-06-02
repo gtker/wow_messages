@@ -9,6 +9,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm#L3):
+/// ```text
+/// msg MSG_MOVE_JUMP = 0x00BB {
+///     MovementInfo info;
+/// }
+/// ```
 pub struct MSG_MOVE_JUMP {
     pub info: MovementInfo,
 }

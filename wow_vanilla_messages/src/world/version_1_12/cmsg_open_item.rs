@@ -9,6 +9,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_open_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_open_item.wowm#L3):
+/// ```text
+/// cmsg CMSG_OPEN_ITEM = 0x00AC {
+///     u8 bag_index;
+///     u8 slot;
+/// }
+/// ```
 pub struct CMSG_OPEN_ITEM {
     pub bag_index: u8,
     pub slot: u8,

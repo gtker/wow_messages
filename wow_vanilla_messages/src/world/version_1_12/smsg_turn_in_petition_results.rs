@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm#L12):
+/// ```text
+/// smsg SMSG_TURN_IN_PETITION_RESULTS = 0x01C5 {
+///     PetitionTurnInResult result;
+/// }
+/// ```
 pub struct SMSG_TURN_IN_PETITION_RESULTS {
     pub result: PetitionTurnInResult,
 }

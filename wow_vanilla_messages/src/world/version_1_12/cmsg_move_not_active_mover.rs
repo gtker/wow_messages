@@ -10,6 +10,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_not_active_mover.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_not_active_mover.wowm#L3):
+/// ```text
+/// cmsg CMSG_MOVE_NOT_ACTIVE_MOVER = 0x02D1 {
+///     Guid old_mover;
+///     MovementInfo movement_info;
+/// }
+/// ```
 pub struct CMSG_MOVE_NOT_ACTIVE_MOVER {
     pub old_mover: Guid,
     pub movement_info: MovementInfo,

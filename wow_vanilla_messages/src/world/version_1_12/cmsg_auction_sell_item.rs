@@ -10,6 +10,17 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_sell_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_sell_item.wowm#L3):
+/// ```text
+/// cmsg CMSG_AUCTION_SELL_ITEM = 0x0256 {
+///     Guid auctioneer_guid;
+///     Guid object_guid;
+///     u32 stack_size;
+///     u32 starting_bid;
+///     u32 buyout;
+///     u32 auction_duration_in_minutes;
+/// }
+/// ```
 pub struct CMSG_AUCTION_SELL_ITEM {
     pub auctioneer_guid: Guid,
     pub object_guid: Guid,

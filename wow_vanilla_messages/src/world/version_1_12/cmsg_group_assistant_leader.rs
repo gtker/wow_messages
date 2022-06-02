@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_group_assistant_leader.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_group_assistant_leader.wowm#L3):
+/// ```text
+/// cmsg CMSG_GROUP_ASSISTANT_LEADER = 0x028F {
+///     Guid guid;
+///     u8 set_assistant;
+/// }
+/// ```
 pub struct CMSG_GROUP_ASSISTANT_LEADER {
     pub guid: Guid,
     pub set_assistant: u8,

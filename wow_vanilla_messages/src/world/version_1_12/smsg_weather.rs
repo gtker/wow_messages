@@ -11,6 +11,15 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_weather.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_weather.wowm#L15):
+/// ```text
+/// smsg SMSG_WEATHER = 0x02F4 {
+///     WeatherType weather_type;
+///     f32 grade;
+///     u32 sound_id;
+///     WeatherChangeType change;
+/// }
+/// ```
 pub struct SMSG_WEATHER {
     pub weather_type: WeatherType,
     pub grade: f32,

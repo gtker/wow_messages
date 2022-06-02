@@ -8,6 +8,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm#L34):
+/// ```text
+/// slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
+///     LoginResult result;
+///     if (result == SUCCESS) {
+///         u8[16] challenge_data;
+///         u8[16] checksum_salt;
+///     }
+/// }
+/// ```
 pub struct CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult,
 }
@@ -401,6 +411,7 @@ mod test {
          0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1,
          0xF0, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 44.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Server0() {
@@ -430,6 +441,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 44.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Server0() {
@@ -459,6 +471,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 44.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Server0() {
@@ -490,6 +503,7 @@ mod test {
 
     const RAW1: [u8; 2] = [ 0x02, 0x03, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 57.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Server1() {
@@ -514,6 +528,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 57.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Server1() {
@@ -538,6 +553,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 57.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Server1() {

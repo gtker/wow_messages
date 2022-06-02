@@ -8,13 +8,41 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:66`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L66):
+/// ```text
+/// slogin CMD_REALM_LIST_Server = 0x10 {
+///     u16 size = self.size;
+///     u32 header_padding = 0;
+///     u8 number_of_realms;
+///     Realm[number_of_realms] realms;
+///     u16 footer_padding = 0;
+/// }
+/// ```
 pub struct CMD_REALM_LIST_Server {
     pub realms: Vec<Realm>,
 }
 
 impl CMD_REALM_LIST_Server {
+    /// The field `header_padding` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `0` |
+    /// | Hex | `0x00` |
+    /// | Original | `0` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const HEADER_PADDING_VALUE: u32 = 0x00;
 
+    /// The field `footer_padding` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `0` |
+    /// | Hex | `0x00` |
+    /// | Original | `0` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const FOOTER_PADDING_VALUE: u16 = 0x00;
 
 }
@@ -228,6 +256,7 @@ mod test {
          0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8, 0x43,
          0x01, 0x00, 0x02, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server0() {
@@ -264,6 +293,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server0() {
@@ -300,6 +330,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server0() {
@@ -340,6 +371,7 @@ mod test {
          0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8, 0x43,
          0x01, 0x00, 0x02, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server1() {
@@ -378,6 +410,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server1() {
@@ -416,6 +449,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server1() {

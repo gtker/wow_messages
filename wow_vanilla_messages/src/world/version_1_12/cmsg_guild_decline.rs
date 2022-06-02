@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_guild_decline.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_guild_decline.wowm#L3):
+/// ```text
+/// cmsg CMSG_GUILD_DECLINE = 0x0085 {
+/// }
+/// ```
 pub struct CMSG_GUILD_DECLINE {
 }
 

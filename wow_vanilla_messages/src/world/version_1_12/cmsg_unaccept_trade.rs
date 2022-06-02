@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/cmsg_unaccept_trade.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/cmsg_unaccept_trade.wowm#L3):
+/// ```text
+/// cmsg CMSG_UNACCEPT_TRADE = 0x011B {
+/// }
+/// ```
 pub struct CMSG_UNACCEPT_TRADE {
 }
 

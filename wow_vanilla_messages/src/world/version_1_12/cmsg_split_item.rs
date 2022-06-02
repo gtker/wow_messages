@@ -9,6 +9,16 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_split_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_split_item.wowm#L3):
+/// ```text
+/// cmsg CMSG_SPLIT_ITEM = 0x010E {
+///     u8 source_bag;
+///     u8 source_slot;
+///     u8 destination_bag;
+///     u8 destination_slot;
+///     u8 amount;
+/// }
+/// ```
 pub struct CMSG_SPLIT_ITEM {
     pub source_bag: u8,
     pub source_slot: u8,

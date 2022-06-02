@@ -8,6 +8,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_leave_channel.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_leave_channel.wowm#L3):
+/// ```text
+/// cmsg CMSG_LEAVE_CHANNEL = 0x0098 {
+///     CString channel_name;
+/// }
+/// ```
 pub struct CMSG_LEAVE_CHANNEL {
     pub channel_name: String,
 }

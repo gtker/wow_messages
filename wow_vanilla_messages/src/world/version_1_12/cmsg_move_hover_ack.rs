@@ -10,6 +10,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_hover_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_hover_ack.wowm#L3):
+/// ```text
+/// cmsg CMSG_MOVE_HOVER_ACK = 0x00F6 {
+///     Guid guid;
+///     u32 counter;
+///     MovementInfo movement_info;
+///     u32 is_applied;
+/// }
+/// ```
 pub struct CMSG_MOVE_HOVER_ACK {
     pub guid: Guid,
     pub counter: u32,

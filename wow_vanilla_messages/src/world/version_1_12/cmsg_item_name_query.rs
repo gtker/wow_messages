@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_item_name_query.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_item_name_query.wowm#L3):
+/// ```text
+/// cmsg CMSG_ITEM_NAME_QUERY = 0x02C4 {
+///     u32 item_id;
+///     Guid guid;
+/// }
+/// ```
 pub struct CMSG_ITEM_NAME_QUERY {
     pub item_id: u32,
     pub guid: Guid,

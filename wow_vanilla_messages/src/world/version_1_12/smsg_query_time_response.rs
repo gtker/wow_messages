@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm#L3):
+/// ```text
+/// smsg SMSG_QUERY_TIME_RESPONSE = 0x01CF {
+///     u32 time;
+/// }
+/// ```
 pub struct SMSG_QUERY_TIME_RESPONSE {
     pub time: u32,
 }

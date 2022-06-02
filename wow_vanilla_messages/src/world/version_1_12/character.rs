@@ -15,6 +15,34 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L17):
+/// ```text
+/// struct Character {
+///     Guid guid;
+///     CString name;
+///     Race race;
+///     Class class;
+///     Gender gender;
+///     u8 skin;
+///     u8 face;
+///     u8 hairstyle;
+///     u8 haircolor;
+///     u8 facialhair;
+///     u8 level;
+///     Area area;
+///     Map map;
+///     Vector3d position;
+///     u32 guild_id;
+///     CharacterFlags flags;
+///     u8 first_login;
+///     u32 pet_display_id;
+///     u32 pet_level;
+///     u32 pet_familiy;
+///     CharacterGear[19] equipment;
+///     u32 first_bag_display_id = 0;
+///     u8 first_bag_inventory_id = 0;
+/// }
+/// ```
 pub struct Character {
     pub guid: Guid,
     pub name: String,
@@ -40,8 +68,26 @@ pub struct Character {
 }
 
 impl Character {
+    /// The field `first_bag_display_id` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `0` |
+    /// | Hex | `0x00` |
+    /// | Original | `0` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const FIRST_BAG_DISPLAY_ID_VALUE: u32 = 0x00;
 
+    /// The field `first_bag_inventory_id` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `0` |
+    /// | Hex | `0x00` |
+    /// | Original | `0` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const FIRST_BAG_INVENTORY_ID_VALUE: u8 = 0x00;
 
 }

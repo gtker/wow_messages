@@ -9,6 +9,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_played_time.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_played_time.wowm#L3):
+/// ```text
+/// smsg SMSG_PLAYED_TIME = 0x01CD {
+///     u32 total_played_time;
+///     u32 level_played_time;
+/// }
+/// ```
 pub struct SMSG_PLAYED_TIME {
     pub total_played_time: u32,
     pub level_played_time: u32,

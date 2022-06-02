@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm#L3):
+/// ```text
+/// cmsg CMSG_CHAR_ENUM = 0x0037 {
+/// }
+/// ```
 pub struct CMSG_CHAR_ENUM {
 }
 
@@ -40,6 +45,7 @@ mod test {
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x37, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm` line 7.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_ENUM0() {
@@ -62,6 +68,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm` line 7.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_ENUM0() {
@@ -84,6 +91,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm` line 7.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_ENUM0() {

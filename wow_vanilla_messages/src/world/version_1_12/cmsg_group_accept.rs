@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_group_accept.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_group_accept.wowm#L3):
+/// ```text
+/// cmsg CMSG_GROUP_ACCEPT = 0x0072 {
+/// }
+/// ```
 pub struct CMSG_GROUP_ACCEPT {
 }
 

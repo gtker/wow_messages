@@ -1,3 +1,18 @@
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:267`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L267):
+/// ```text
+/// flag GroupMemberOnlineStatus : u8 {
+///     OFFLINE = 0x0000;
+///     ONLINE = 0x0001;
+///     PVP = 0x0002;
+///     DEAD = 0x0004;
+///     GHOST = 0x0008;
+///     PVP_FFA = 0x0010;
+///     ZONE_OUT = 0x0020;
+///     AFK = 0x0040;
+///     DND = 0x0080;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct GroupMemberOnlineStatus {
     inner: u8,

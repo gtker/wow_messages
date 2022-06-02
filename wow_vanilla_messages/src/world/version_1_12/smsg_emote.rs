@@ -11,6 +11,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_emote.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_emote.wowm#L3):
+/// ```text
+/// smsg SMSG_EMOTE = 0x0103 {
+///     Emote emote;
+///     Guid guid;
+/// }
+/// ```
 pub struct SMSG_EMOTE {
     pub emote: Emote,
     pub guid: Guid,

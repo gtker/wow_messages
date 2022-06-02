@@ -9,6 +9,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_bidder_items.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_bidder_items.wowm#L3):
+/// ```text
+/// cmsg CMSG_AUCTION_LIST_BIDDER_ITEMS = 0x0264 {
+///     Guid auctioneer;
+///     u32 start_from_page;
+///     u32 amount_of_outbidded_items;
+///     u32[amount_of_outbidded_items] outbid_item_ids;
+/// }
+/// ```
 pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
     pub auctioneer: Guid,
     pub start_from_page: u32,

@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_trainer_buy_succeeded.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_trainer_buy_succeeded.wowm#L3):
+/// ```text
+/// smsg SMSG_TRAINER_BUY_SUCCEEDED = 0x01B3 {
+///     Guid guid;
+///     u32 id;
+/// }
+/// ```
 pub struct SMSG_TRAINER_BUY_SUCCEEDED {
     pub guid: Guid,
     pub id: u32,

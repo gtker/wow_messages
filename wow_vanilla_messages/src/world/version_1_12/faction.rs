@@ -7,6 +7,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm#L3):
+/// ```text
+/// struct Faction {
+///     u32 reputation_list_id;
+///     u32 standing;
+/// }
+/// ```
 pub struct Faction {
     pub reputation_list_id: u32,
     pub standing: u32,

@@ -9,6 +9,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_update_aura_duration.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_update_aura_duration.wowm#L3):
+/// ```text
+/// smsg SMSG_UPDATE_AURA_DURATION = 0x0137 {
+///     u8 aura_slot;
+///     u32 aura_duration;
+/// }
+/// ```
 pub struct SMSG_UPDATE_AURA_DURATION {
     pub aura_slot: u8,
     pub aura_duration: u32,

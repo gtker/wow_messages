@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_read_item_ok.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_read_item_ok.wowm#L3):
+/// ```text
+/// smsg SMSG_READ_ITEM_OK = 0x00AE {
+///     Guid guid;
+/// }
+/// ```
 pub struct SMSG_READ_ITEM_OK {
     pub guid: Guid,
 }

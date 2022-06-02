@@ -7,6 +7,17 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm#L3):
+/// ```text
+/// struct PetitionShowlist {
+///     u32 index;
+///     u32 charter_entry = 5863;
+///     u32 charter_display_id = 16161;
+///     u32 guild_charter_cost;
+///     u32 unknown1;
+///     u32 unknown2;
+/// }
+/// ```
 pub struct PetitionShowlist {
     pub index: u32,
     pub guild_charter_cost: u32,
@@ -15,8 +26,26 @@ pub struct PetitionShowlist {
 }
 
 impl PetitionShowlist {
+    /// The field `charter_entry` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `5863` |
+    /// | Hex | `0x16e7` |
+    /// | Original | `5863` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const CHARTER_ENTRY_VALUE: u32 = 0x16e7;
 
+    /// The field `charter_display_id` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `16161` |
+    /// | Hex | `0x3f21` |
+    /// | Original | `16161` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const CHARTER_DISPLAY_ID_VALUE: u32 = 0x3f21;
 
 }

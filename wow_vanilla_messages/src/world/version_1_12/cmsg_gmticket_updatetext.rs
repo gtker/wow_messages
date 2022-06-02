@@ -8,6 +8,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_updatetext.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_updatetext.wowm#L3):
+/// ```text
+/// cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
+///     CString message;
+/// }
+/// ```
 pub struct CMSG_GMTICKET_UPDATETEXT {
     pub message: String,
 }

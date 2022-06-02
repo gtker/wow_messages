@@ -11,6 +11,27 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_cast_result.wowm:449`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_cast_result.wowm#L449):
+/// ```text
+/// smsg SMSG_CAST_RESULT = 0x0130 {
+///     u32 spell;
+///     SimpleSpellCastResult result;
+///     if (result != FAILURE) {
+///         CastFailureReason reason;
+///         if (reason == REQUIRES_SPELL_FOCUS) {
+///             u32 required_spell_focus;
+///         }
+///         else if (reason == REQUIRES_AREA) {
+///             Area area;
+///         }
+///         else if (reason == EQUIPPED_ITEM_CLASS) {
+///             u32 equipped_item_class;
+///             u32 equipped_item_subclass_mask;
+///             u32 equipped_item_inventory_type_mask;
+///         }
+///     }
+/// }
+/// ```
 pub struct SMSG_CAST_RESULT {
     pub spell: u32,
     pub result: SMSG_CAST_RESULT_SimpleSpellCastResult,

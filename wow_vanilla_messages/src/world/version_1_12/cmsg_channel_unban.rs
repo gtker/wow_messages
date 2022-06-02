@@ -8,6 +8,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_channel_unban.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_channel_unban.wowm#L3):
+/// ```text
+/// cmsg CMSG_CHANNEL_UNBAN = 0x00A6 {
+///     CString channel_name;
+///     CString player_name;
+/// }
+/// ```
 pub struct CMSG_CHANNEL_UNBAN {
     pub channel_name: String,
     pub player_name: String,

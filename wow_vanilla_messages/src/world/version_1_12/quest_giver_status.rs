@@ -4,6 +4,20 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/quest_common.wowm:36`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/quest_common.wowm#L36):
+/// ```text
+/// enum QuestGiverStatus : u8 {
+///     NONE = 0;
+///     UNAVAILABLE = 1;
+///     CHAT = 2;
+///     INCOMPLETE = 3;
+///     REWARD_REP = 4;
+///     AVAILABLE = 5;
+///     REWARD_OLD = 6;
+///     REWARD2 = 7;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestGiverStatus {
     NONE,

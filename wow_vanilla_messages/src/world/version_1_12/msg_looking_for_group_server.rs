@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/msg_looking_for_group_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/msg_looking_for_group_server.wowm#L3):
+/// ```text
+/// smsg MSG_LOOKING_FOR_GROUP_Server = 0x01FF {
+///     u32 unknown1;
+/// }
+/// ```
 pub struct MSG_LOOKING_FOR_GROUP_Server {
     pub unknown1: u32,
 }

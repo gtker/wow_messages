@@ -4,6 +4,17 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_joined_battleground.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_joined_battleground.wowm#L3):
+/// ```text
+/// enum BgTypeId : u32 {
+///     NOT_ELIGIBLE = 0;
+///     QUEUED_FOR_AV = 1;
+///     QUEUED_FOR_WSG = 2;
+///     QUEUED_FOR_AB = 3;
+///     REMOVE_FROM_QUEUE = 0xFFFFFFFE;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BgTypeId {
     NOT_ELIGIBLE,

@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/msg_petition_decline.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/msg_petition_decline.wowm#L3):
+/// ```text
+/// msg MSG_PETITION_DECLINE = 0x01C2 {
+///     Guid petition;
+/// }
+/// ```
 pub struct MSG_PETITION_DECLINE {
     pub petition: Guid,
 }

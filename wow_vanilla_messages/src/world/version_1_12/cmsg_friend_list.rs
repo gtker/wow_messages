@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_friend_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_friend_list.wowm#L3):
+/// ```text
+/// cmsg CMSG_FRIEND_LIST = 0x0066 {
+/// }
+/// ```
 pub struct CMSG_FRIEND_LIST {
 }
 

@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_player_logout.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_player_logout.wowm#L3):
+/// ```text
+/// cmsg CMSG_PLAYER_LOGOUT = 0x004A {
+/// }
+/// ```
 pub struct CMSG_PLAYER_LOGOUT {
 }
 
@@ -40,6 +45,7 @@ mod test {
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x4A, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_player_logout.wowm` line 5.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_PLAYER_LOGOUT0() {
@@ -62,6 +68,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_player_logout.wowm` line 5.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_PLAYER_LOGOUT0() {
@@ -84,6 +91,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_player_logout.wowm` line 5.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_PLAYER_LOGOUT0() {

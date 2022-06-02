@@ -9,6 +9,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_initialize_factions.wowm:33`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_initialize_factions.wowm#L33):
+/// ```text
+/// smsg SMSG_INITIALIZE_FACTIONS = 0x0122 {
+///     u32 amount_of_factions;
+///     FactionInitializer[amount_of_factions] factions;
+/// }
+/// ```
 pub struct SMSG_INITIALIZE_FACTIONS {
     pub factions: Vec<FactionInitializer>,
 }

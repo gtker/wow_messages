@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_questgiver_query_quest.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_questgiver_query_quest.wowm#L3):
+/// ```text
+/// cmsg CMSG_QUESTGIVER_QUERY_QUEST = 0x0186 {
+///     Guid guid;
+///     u32 quest_id;
+/// }
+/// ```
 pub struct CMSG_QUESTGIVER_QUERY_QUEST {
     pub guid: Guid,
     pub quest_id: u32,

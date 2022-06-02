@@ -9,6 +9,14 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_autostore_bag_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_autostore_bag_item.wowm#L3):
+/// ```text
+/// cmsg CMSG_AUTOSTORE_BAG_ITEM = 0x010B {
+///     u8 source_bag;
+///     u8 source_slot;
+///     u8 destination_bag;
+/// }
+/// ```
 pub struct CMSG_AUTOSTORE_BAG_ITEM {
     pub source_bag: u8,
     pub source_slot: u8,

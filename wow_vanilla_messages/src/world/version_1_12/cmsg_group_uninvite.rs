@@ -8,6 +8,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_group_uninvite.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_group_uninvite.wowm#L3):
+/// ```text
+/// cmsg CMSG_GROUP_UNINVITE = 0x0075 {
+///     CString name;
+/// }
+/// ```
 pub struct CMSG_GROUP_UNINVITE {
     pub name: String,
 }

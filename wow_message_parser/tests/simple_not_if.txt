@@ -7,6 +7,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:129`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L129):
+/// ```text
+/// struct SimpleIfEnumNot {
+///     SimpleEnum enum;
+///     if (enum != ZERO) {
+///         u8 others;
+///     }
+/// }
+/// ```
 pub struct SimpleIfEnumNot {
     pub enum: SimpleIfEnumNot_SimpleEnum,
 }

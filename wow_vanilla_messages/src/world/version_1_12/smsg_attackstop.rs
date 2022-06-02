@@ -9,6 +9,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackstop.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackstop.wowm#L3):
+/// ```text
+/// smsg SMSG_ATTACKSTOP = 0x0144 {
+///     PackedGuid player;
+///     PackedGuid enemy;
+///     u32 unknown1;
+/// }
+/// ```
 pub struct SMSG_ATTACKSTOP {
     pub player: Guid,
     pub enemy: Guid,

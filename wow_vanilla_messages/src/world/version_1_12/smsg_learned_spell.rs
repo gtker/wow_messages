@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_learned_spell.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_learned_spell.wowm#L3):
+/// ```text
+/// smsg SMSG_LEARNED_SPELL = 0x012B {
+///     u32 id;
+/// }
+/// ```
 pub struct SMSG_LEARNED_SPELL {
     pub id: u32,
 }

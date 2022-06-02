@@ -9,6 +9,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_set_action_button.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_set_action_button.wowm#L3):
+/// ```text
+/// cmsg CMSG_SET_ACTION_BUTTON = 0x0128 {
+///     u8 button;
+///     u32 action_type;
+/// }
+/// ```
 pub struct CMSG_SET_ACTION_BUTTON {
     pub button: u8,
     pub action_type: u32,

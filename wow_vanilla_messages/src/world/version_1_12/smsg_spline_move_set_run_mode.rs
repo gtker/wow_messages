@@ -9,6 +9,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_spline_move_set_run_mode.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_spline_move_set_run_mode.wowm#L3):
+/// ```text
+/// smsg SMSG_SPLINE_MOVE_SET_RUN_MODE = 0x030D {
+///     PackedGuid guid;
+/// }
+/// ```
 pub struct SMSG_SPLINE_MOVE_SET_RUN_MODE {
     pub guid: Guid,
 }

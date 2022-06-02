@@ -7,6 +7,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/quest_common.wowm:51`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/quest_common.wowm#L51):
+/// ```text
+/// struct QuestItemReward {
+///     u32 item;
+///     u32 item_count;
+/// }
+/// ```
 pub struct QuestItemReward {
     pub item: u32,
     pub item_count: u32,

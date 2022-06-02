@@ -4,6 +4,44 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm#L3):
+/// ```text
+/// enum ChatNotify : u8 {
+///     JOINED_NOTICE = 0x00;
+///     LEFT_NOTICE = 0x01;
+///     YOU_JOINED_NOTICE = 0x02;
+///     YOU_LEFT_NOTICE = 0x03;
+///     WRONG_PASSWORD_NOTICE = 0x04;
+///     NOT_MEMBER_NOTICE = 0x05;
+///     NOT_MODERATOR_NOTICE = 0x06;
+///     PASSWORD_CHANGED_NOTICE = 0x07;
+///     OWNER_CHANGED_NOTICE = 0x08;
+///     PLAYER_NOT_FOUND_NOTICE = 0x09;
+///     NOT_OWNER_NOTICE = 0x0A;
+///     CHANNEL_OWNER_NOTICE = 0x0B;
+///     MODE_CHANGE_NOTICE = 0x0C;
+///     ANNOUNCEMENTS_ON_NOTICE = 0x0D;
+///     ANNOUNCEMENTS_OFF_NOTICE = 0x0E;
+///     MODERATION_ON_NOTICE = 0x0F;
+///     MODERATION_OFF_NOTICE = 0x10;
+///     MUTED_NOTICE = 0x11;
+///     PLAYER_KICKED_NOTICE = 0x12;
+///     BANNED_NOTICE = 0x13;
+///     PLAYER_BANNED_NOTICE = 0x14;
+///     PLAYER_UNBANNED_NOTICE = 0x15;
+///     PLAYER_NOT_BANNED_NOTICE = 0x16;
+///     PLAYER_ALREADY_MEMBER_NOTICE = 0x17;
+///     INVITE_NOTICE = 0x18;
+///     INVITE_WRONG_FACTION_NOTICE = 0x19;
+///     WRONG_FACTION_NOTICE = 0x1A;
+///     INVALID_NAME_NOTICE = 0x1B;
+///     NOT_MODERATED_NOTICE = 0x1C;
+///     PLAYER_INVITED_NOTICE = 0x1D;
+///     PLAYER_INVITE_BANNED_NOTICE = 0x1E;
+///     THROTTLED_NOTICE = 0x1F;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ChatNotify {
     JOINED_NOTICE,

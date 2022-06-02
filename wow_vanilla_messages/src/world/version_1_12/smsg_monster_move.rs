@@ -11,6 +11,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm#L11):
+/// ```text
+/// smsg SMSG_MONSTER_MOVE = 0x00DD {
+///     PackedGuid guid;
+///     Vector3d position;
+///     u32 spline_id;
+///     MonsterMoveType move_type;
+/// }
+/// ```
 pub struct SMSG_MONSTER_MOVE {
     pub guid: Guid,
     pub position: Vector3d,

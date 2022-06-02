@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_banker_activate.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_banker_activate.wowm#L3):
+/// ```text
+/// cmsg CMSG_BANKER_ACTIVATE = 0x01B7 {
+///     Guid guid;
+/// }
+/// ```
 pub struct CMSG_BANKER_ACTIVATE {
     pub guid: Guid,
 }

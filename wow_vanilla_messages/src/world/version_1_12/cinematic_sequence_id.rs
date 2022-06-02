@@ -4,6 +4,21 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/cinematic/smsg_trigger_cinematic.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/cinematic/smsg_trigger_cinematic.wowm#L3):
+/// ```text
+/// enum CinematicSequenceId : u32 {
+///     HUMAN = 81;
+///     ORC = 21;
+///     DWARF = 41;
+///     NIGHT_ELF = 61;
+///     UNDEAD = 2;
+///     TAUREN = 141;
+///     GNOME = 101;
+///     TROLL = 121;
+///     GOBLIN = 0;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CinematicSequenceId {
     HUMAN,

@@ -9,6 +9,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_swim_speed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_swim_speed.wowm#L3):
+/// ```text
+/// smsg SMSG_SPLINE_SET_SWIM_SPEED = 0x0300 {
+///     PackedGuid guid;
+///     f32 speed;
+/// }
+/// ```
 pub struct SMSG_SPLINE_SET_SWIM_SPEED {
     pub guid: Guid,
     pub speed: f32,

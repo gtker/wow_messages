@@ -9,6 +9,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_client_control_update.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_client_control_update.wowm#L3):
+/// ```text
+/// smsg SMSG_CLIENT_CONTROL_UPDATE = 0x0159 {
+///     PackedGuid guid;
+///     u8 allow_movement;
+/// }
+/// ```
 pub struct SMSG_CLIENT_CONTROL_UPDATE {
     pub guid: Guid,
     pub allow_movement: u8,

@@ -10,6 +10,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:299`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L299):
+/// ```text
+/// smsg SMSG_PERIODICAURALOG = 0x024E {
+///     PackedGuid target;
+///     PackedGuid caster;
+///     u32 spell;
+///     u32 amount_of_auras;
+///     AuraLog[amount_of_auras] auras;
+/// }
+/// ```
 pub struct SMSG_PERIODICAURALOG {
     pub target: Guid,
     pub caster: Guid,

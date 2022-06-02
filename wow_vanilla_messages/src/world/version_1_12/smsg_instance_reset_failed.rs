@@ -11,6 +11,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_instance_reset_failed.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_instance_reset_failed.wowm#L16):
+/// ```text
+/// smsg SMSG_INSTANCE_RESET_FAILED = 0x031F {
+///     InstanceResetFailedReason reason;
+///     Map map;
+/// }
+/// ```
 pub struct SMSG_INSTANCE_RESET_FAILED {
     pub reason: InstanceResetFailedReason,
     pub map: Map,

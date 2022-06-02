@@ -8,6 +8,18 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L3):
+/// ```text
+/// cmsg CMSG_AUTH_SESSION = 0x01ED {
+///     u32 build;
+///     u32 server_id;
+///     CString username;
+///     u32 client_seed;
+///     u8[20] client_proof;
+///     u32 decompressed_addon_info_size;
+///     u8[-] compressed_addon_info;
+/// }
+/// ```
 pub struct CMSG_AUTH_SESSION {
     pub build: u32,
     pub server_id: u32,
@@ -141,6 +153,7 @@ mod test {
          0x90, 0x80, 0x51, 0xFC, 0xB7, 0xA4, 0x50, 0x70, 0xB8, 0x12, 0xF3, 0x3F,
          0x26, 0x41, 0xFD, 0xB5, 0x37, 0x90, 0x19, 0x66, 0x8F, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 20.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_AUTH_SESSION0() {
@@ -190,6 +203,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 20.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_AUTH_SESSION0() {
@@ -239,6 +253,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 20.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_AUTH_SESSION0() {

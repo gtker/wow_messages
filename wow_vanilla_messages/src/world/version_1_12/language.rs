@@ -4,6 +4,27 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:59`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L59):
+/// ```text
+/// enum Language : u32 {
+///     UNIVERSAL = 0;
+///     ORCISH = 1;
+///     DARNASSIAN = 2;
+///     TAURAHE = 3;
+///     DWARVISH = 6;
+///     COMMON = 7;
+///     DEMONIC = 8;
+///     TITAN = 9;
+///     THALASSIAN = 10;
+///     DRACONIC = 11;
+///     KALIMAG = 12;
+///     GNOMISH = 13;
+///     TROLL = 14;
+///     GUTTERSPEAK = 33;
+///     ADDON = 0xFFFFFFFF;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Language {
     UNIVERSAL,

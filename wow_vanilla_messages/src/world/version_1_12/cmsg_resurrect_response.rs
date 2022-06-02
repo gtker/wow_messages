@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/cmsg_resurrect_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/cmsg_resurrect_response.wowm#L3):
+/// ```text
+/// cmsg CMSG_RESURRECT_RESPONSE = 0x015C {
+///     Guid guid;
+///     u8 status;
+/// }
+/// ```
 pub struct CMSG_RESURRECT_RESPONSE {
     pub guid: Guid,
     pub status: u8,

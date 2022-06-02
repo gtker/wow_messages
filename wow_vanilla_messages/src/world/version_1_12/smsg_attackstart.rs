@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackstart.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackstart.wowm#L3):
+/// ```text
+/// smsg SMSG_ATTACKSTART = 0x0143 {
+///     Guid attacker_guid;
+///     Guid victim_guid;
+/// }
+/// ```
 pub struct SMSG_ATTACKSTART {
     pub attacker_guid: Guid,
     pub victim_guid: Guid,

@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L3):
+/// ```text
+/// smsg SMSG_CHARACTER_LOGIN_FAILED = 0x0041 {
+///     WorldResult result;
+/// }
+/// ```
 pub struct SMSG_CHARACTER_LOGIN_FAILED {
     pub result: WorldResult,
 }
@@ -50,6 +56,7 @@ mod test {
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHARACTER_LOGIN_FAILED0() {
@@ -74,6 +81,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHARACTER_LOGIN_FAILED0() {
@@ -98,6 +106,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHARACTER_LOGIN_FAILED0() {

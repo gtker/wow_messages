@@ -11,6 +11,21 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/smsg_gmticket_getticket.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/smsg_gmticket_getticket.wowm#L15):
+/// ```text
+/// smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
+///     GmTicketStatus status;
+///     if (status == HASTEXT) {
+///         CString text;
+///         GmTicketType ticket_type;
+///         f32 days_since_ticket_creation;
+///         f32 days_since_oldest_ticket_creation;
+///         f32 days_since_last_updated;
+///         GmTicketEscalationStatus escalation_status;
+///         u8 read_by_gm;
+///     }
+/// }
+/// ```
 pub struct SMSG_GMTICKET_GETTICKET {
     pub status: SMSG_GMTICKET_GETTICKET_GmTicketStatus,
 }

@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_questfailed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_questfailed.wowm#L3):
+/// ```text
+/// smsg SMSG_QUESTGIVER_QUEST_FAILED = 0x0192 {
+///     u32 quest_id;
+///     QuestFailedReason reason;
+/// }
+/// ```
 pub struct SMSG_QUESTGIVER_QUEST_FAILED {
     pub quest_id: u32,
     pub reason: QuestFailedReason,

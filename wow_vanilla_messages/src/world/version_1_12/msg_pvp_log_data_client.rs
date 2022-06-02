@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_pvp_log_data_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_pvp_log_data_client.wowm#L3):
+/// ```text
+/// cmsg MSG_PVP_LOG_DATA_Client = 0x02E0 {
+/// }
+/// ```
 pub struct MSG_PVP_LOG_DATA_Client {
 }
 

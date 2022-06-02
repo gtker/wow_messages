@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_play_spell_visual.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_play_spell_visual.wowm#L3):
+/// ```text
+/// smsg SMSG_PLAY_SPELL_VISUAL = 0x01F3 {
+///     Guid guid;
+///     u32 spell_art_kit;
+/// }
+/// ```
 pub struct SMSG_PLAY_SPELL_VISUAL {
     pub guid: Guid,
     pub spell_art_kit: u32,

@@ -9,6 +9,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_update_chain_targets.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_update_chain_targets.wowm#L3):
+/// ```text
+/// smsg SMSG_SPELL_UPDATE_CHAIN_TARGETS = 0x0330 {
+///     Guid caster;
+///     u32 spell;
+///     u32 amount_of_targets;
+///     Guid[amount_of_targets] targets;
+/// }
+/// ```
 pub struct SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub caster: Guid,
     pub spell: u32,

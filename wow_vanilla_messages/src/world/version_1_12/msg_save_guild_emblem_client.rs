@@ -10,6 +10,17 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/msg_save_guild_emblem_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/msg_save_guild_emblem_client.wowm#L3):
+/// ```text
+/// cmsg MSG_SAVE_GUILD_EMBLEM_Client = 0x01F1 {
+///     Guid vendor;
+///     u32 emblem_style;
+///     u32 emblem_color;
+///     u32 border_style;
+///     u32 border_color;
+///     u32 background_color;
+/// }
+/// ```
 pub struct MSG_SAVE_GUILD_EMBLEM_Client {
     pub vendor: Guid,
     pub emblem_style: u32,

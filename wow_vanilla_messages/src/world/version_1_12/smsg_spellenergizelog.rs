@@ -10,6 +10,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellenergizelog.wowm:24`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellenergizelog.wowm#L24):
+/// ```text
+/// smsg SMSG_SPELLENERGIZELOG = 0x0151 {
+///     PackedGuid victim_guid;
+///     PackedGuid caster_guid;
+///     u32 spell;
+///     PowerType power;
+///     u32 damage;
+/// }
+/// ```
 pub struct SMSG_SPELLENERGIZELOG {
     pub victim_guid: Guid,
     pub caster_guid: Guid,

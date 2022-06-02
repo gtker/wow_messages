@@ -10,6 +10,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_text_emote.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_text_emote.wowm#L3):
+/// ```text
+/// smsg SMSG_TEXT_EMOTE = 0x0105 {
+///     Guid guid;
+///     u32 text_emote;
+///     Emote emote;
+///     u32 name_length;
+///     CString name;
+/// }
+/// ```
 pub struct SMSG_TEXT_EMOTE {
     pub guid: Guid,
     pub text_emote: u32,

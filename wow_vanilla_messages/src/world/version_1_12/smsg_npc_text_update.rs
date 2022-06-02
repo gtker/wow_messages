@@ -9,6 +9,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm#L10):
+/// ```text
+/// smsg SMSG_NPC_TEXT_UPDATE = 0x0180 {
+///     u32 text_id;
+///     f32 probability;
+///     NpcTextUpdate[8] texts;
+/// }
+/// ```
 pub struct SMSG_NPC_TEXT_UPDATE {
     pub text_id: u32,
     pub probability: f32,

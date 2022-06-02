@@ -11,6 +11,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_init_world_states.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_init_world_states.wowm#L3):
+/// ```text
+/// smsg SMSG_INIT_WORLD_STATES = 0x02C2 {
+///     Map map;
+///     Area area;
+///     u16 amount_of_states;
+///     WorldState[amount_of_states] states;
+/// }
+/// ```
 pub struct SMSG_INIT_WORLD_STATES {
     pub map: Map,
     pub area: Area,

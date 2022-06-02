@@ -9,6 +9,14 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_set_flat_spell_modifier.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_set_flat_spell_modifier.wowm#L3):
+/// ```text
+/// smsg SMSG_SET_FLAT_SPELL_MODIFIER = 0x0266 {
+///     u8 eff;
+///     u8 op;
+///     u32 value;
+/// }
+/// ```
 pub struct SMSG_SET_FLAT_SPELL_MODIFIER {
     pub eff: u8,
     pub op: u8,

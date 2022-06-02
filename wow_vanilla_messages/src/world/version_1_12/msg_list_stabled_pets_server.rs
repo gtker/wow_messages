@@ -10,6 +10,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/msg_list_stabled_pets_server.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/msg_list_stabled_pets_server.wowm#L14):
+/// ```text
+/// smsg MSG_LIST_STABLED_PETS_Server = 0x026F {
+///     Guid npc;
+///     u8 amount_of_pets;
+///     u8 stable_slots;
+///     StabledPet[amount_of_pets] pets;
+/// }
+/// ```
 pub struct MSG_LIST_STABLED_PETS_Server {
     pub npc: Guid,
     pub stable_slots: u8,

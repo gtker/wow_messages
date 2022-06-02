@@ -8,6 +8,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_whois.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_whois.wowm#L3):
+/// ```text
+/// smsg SMSG_WHOIS = 0x0065 {
+///     CString message;
+/// }
+/// ```
 pub struct SMSG_WHOIS {
     pub message: String,
 }

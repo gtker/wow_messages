@@ -4,6 +4,17 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_status.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_status.wowm#L3):
+/// ```text
+/// enum StatusId : u8 {
+///     NONE = 0;
+///     WAIT_QUEUE = 1;
+///     WAIT_JOIN = 2;
+///     IN_PROGRESS = 3;
+///     WAIT_LEAVE = 4;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum StatusId {
     NONE,

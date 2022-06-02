@@ -10,6 +10,18 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L11):
+/// ```text
+/// struct Friend {
+///     Guid guid;
+///     FriendStatus status;
+///     if (status != OFFLINE) {
+///         Area area;
+///         u32 level;
+///         Class class;
+///     }
+/// }
+/// ```
 pub struct Friend {
     pub guid: Guid,
     pub status: Friend_FriendStatus,

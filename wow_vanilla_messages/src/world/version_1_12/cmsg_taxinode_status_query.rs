@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_taxinode_status_query.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_taxinode_status_query.wowm#L3):
+/// ```text
+/// cmsg CMSG_TAXINODE_STATUS_QUERY = 0x01AA {
+///     Guid guid;
+/// }
+/// ```
 pub struct CMSG_TAXINODE_STATUS_QUERY {
     pub guid: Guid,
 }

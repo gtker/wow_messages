@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questupdate_failedtimer.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questupdate_failedtimer.wowm#L3):
+/// ```text
+/// smsg SMSG_QUESTUPDATE_FAILEDTIMER = 0x0197 {
+///     u32 quest_id;
+/// }
+/// ```
 pub struct SMSG_QUESTUPDATE_FAILEDTIMER {
     pub quest_id: u32,
 }

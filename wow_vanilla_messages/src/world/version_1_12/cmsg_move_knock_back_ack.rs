@@ -10,6 +10,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_knock_back_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_knock_back_ack.wowm#L3):
+/// ```text
+/// cmsg CMSG_MOVE_KNOCK_BACK_ACK = 0x00F0 {
+///     Guid guid;
+///     u32 counter;
+///     MovementInfo movement_info;
+/// }
+/// ```
 pub struct CMSG_MOVE_KNOCK_BACK_ACK {
     pub guid: Guid,
     pub counter: u32,

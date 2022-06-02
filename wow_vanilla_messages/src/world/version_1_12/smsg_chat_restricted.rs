@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_chat_restricted.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_chat_restricted.wowm#L3):
+/// ```text
+/// smsg SMSG_CHAT_RESTRICTED = 0x02FD {
+/// }
+/// ```
 pub struct SMSG_CHAT_RESTRICTED {
 }
 

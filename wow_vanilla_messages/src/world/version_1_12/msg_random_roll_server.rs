@@ -10,6 +10,15 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/msg_random_roll_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/msg_random_roll_server.wowm#L3):
+/// ```text
+/// smsg MSG_RANDOM_ROLL_Server = 0x01FB {
+///     u32 minimum;
+///     u32 maximum;
+///     u32 actual_roll;
+///     Guid guid;
+/// }
+/// ```
 pub struct MSG_RANDOM_ROLL_Server {
     pub minimum: u32,
     pub maximum: u32,

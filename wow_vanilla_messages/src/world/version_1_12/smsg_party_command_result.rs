@@ -10,6 +10,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_party_command_result.wowm:20`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_command_result.wowm#L20):
+/// ```text
+/// smsg SMSG_PARTY_COMMAND_RESULT = 0x007F {
+///     PartyOperation operation;
+///     CString member;
+///     PartyResult result;
+/// }
+/// ```
 pub struct SMSG_PARTY_COMMAND_RESULT {
     pub operation: PartyOperation,
     pub member: String,

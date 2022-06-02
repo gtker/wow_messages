@@ -11,6 +11,14 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm#L18):
+/// ```text
+/// smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {
+///     RaidInstanceMessage message_type;
+///     Map map;
+///     u32 time_left;
+/// }
+/// ```
 pub struct SMSG_RAID_INSTANCE_MESSAGE {
     pub message_type: RaidInstanceMessage,
     pub map: Map,

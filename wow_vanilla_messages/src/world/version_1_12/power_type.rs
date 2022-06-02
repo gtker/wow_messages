@@ -4,6 +4,18 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellenergizelog.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellenergizelog.wowm#L3):
+/// ```text
+/// enum PowerType : u32 {
+///     MANA = 0;
+///     RAGE = 1;
+///     FOCUS = 2;
+///     ENERGY = 3;
+///     HAPPINESS = 4;
+///     HEALTH = 0xFFFFFFFE;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PowerType {
     MANA,

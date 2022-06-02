@@ -11,6 +11,15 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlemaster_join.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlemaster_join.wowm#L3):
+/// ```text
+/// cmsg CMSG_BATTLEMASTER_JOIN = 0x02EE {
+///     Guid guid;
+///     Map map;
+///     u32 instance_id;
+///     u8 join_as_group;
+/// }
+/// ```
 pub struct CMSG_BATTLEMASTER_JOIN {
     pub guid: Guid,
     pub map: Map,

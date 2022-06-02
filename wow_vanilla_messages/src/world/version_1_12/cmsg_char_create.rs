@@ -11,6 +11,21 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L3):
+/// ```text
+/// cmsg CMSG_CHAR_CREATE = 0x0036 {
+///     CString name;
+///     Race race;
+///     Class class;
+///     Gender gender;
+///     u8 skin;
+///     u8 face;
+///     u8 hairstyle;
+///     u8 haircolor;
+///     u8 facialhair;
+///     u8 outfit_id = 0;
+/// }
+/// ```
 pub struct CMSG_CHAR_CREATE {
     pub name: String,
     pub race: Race,
@@ -24,6 +39,15 @@ pub struct CMSG_CHAR_CREATE {
 }
 
 impl CMSG_CHAR_CREATE {
+    /// The field `outfit_id` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `0` |
+    /// | Hex | `0x00` |
+    /// | Original | `0` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const OUTFIT_ID_VALUE: u8 = 0x00;
 
 }
@@ -149,6 +173,7 @@ mod test {
          0x64, 0x62, 0x65, 0x65, 0x66, 0x00, 0x01, 0x01, 0x01, 0x08, 0x00, 0x0E,
          0x02, 0x04, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 18.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_CREATE0() {
@@ -189,6 +214,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 18.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_CREATE0() {
@@ -229,6 +255,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 18.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_CREATE0() {

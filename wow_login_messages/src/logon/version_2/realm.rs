@@ -10,6 +10,19 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:53`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L53):
+/// ```text
+/// struct Realm {
+///     RealmType realm_type;
+///     RealmFlag flag;
+///     CString name;
+///     CString address;
+///     Population population;
+///     u8 number_of_characters_on_realm;
+///     RealmCategory category;
+///     u8 realm_id;
+/// }
+/// ```
 pub struct Realm {
     pub realm_type: RealmType,
     pub flag: RealmFlag,

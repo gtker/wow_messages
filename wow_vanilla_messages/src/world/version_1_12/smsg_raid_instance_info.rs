@@ -9,6 +9,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_raid_instance_info.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_raid_instance_info.wowm#L9):
+/// ```text
+/// smsg SMSG_RAID_INSTANCE_INFO = 0x02CC {
+///     u32 amount_of_raid_infos;
+///     RaidInfo[amount_of_raid_infos] raid_infos;
+/// }
+/// ```
 pub struct SMSG_RAID_INSTANCE_INFO {
     pub raid_infos: Vec<RaidInfo>,
 }

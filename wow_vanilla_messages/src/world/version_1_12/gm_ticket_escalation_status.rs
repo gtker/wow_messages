@@ -4,6 +4,15 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/smsg_gmticket_getticket.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/smsg_gmticket_getticket.wowm#L3):
+/// ```text
+/// enum GmTicketEscalationStatus : u8 {
+///     GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED = 0;
+///     GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED = 1;
+///     GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED = 2;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketEscalationStatus {
     GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED,

@@ -9,6 +9,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check_server.wowm#L3):
+/// ```text
+/// smsg MSG_RAID_READY_CHECK_Server = 0x0322 {
+///     optional state_check {
+///         Guid guid;
+///         u8 state;
+///     }
+/// }
+/// ```
 pub struct MSG_RAID_READY_CHECK_Server {
     pub state_check: Option<MSG_RAID_READY_CHECK_Server_state_check>,
 }

@@ -10,6 +10,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_command_result.wowm:38`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_command_result.wowm#L38):
+/// ```text
+/// smsg SMSG_GUILD_COMMAND_RESULT = 0x0093 {
+///     GuildCommand command;
+///     CString string;
+///     GuildCommandResult result;
+/// }
+/// ```
 pub struct SMSG_GUILD_COMMAND_RESULT {
     pub command: GuildCommand,
     pub string: String,

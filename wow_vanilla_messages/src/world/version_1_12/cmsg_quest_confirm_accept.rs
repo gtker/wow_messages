@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_quest_confirm_accept.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_quest_confirm_accept.wowm#L3):
+/// ```text
+/// cmsg CMSG_QUEST_CONFIRM_ACCEPT = 0x019B {
+///     u32 quest_id;
+/// }
+/// ```
 pub struct CMSG_QUEST_CONFIRM_ACCEPT {
     pub quest_id: u32,
 }

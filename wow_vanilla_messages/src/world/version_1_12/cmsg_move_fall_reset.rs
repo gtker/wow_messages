@@ -9,6 +9,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_fall_reset.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_fall_reset.wowm#L3):
+/// ```text
+/// cmsg CMSG_MOVE_FALL_RESET = 0x02CA {
+///     MovementInfo info;
+/// }
+/// ```
 pub struct CMSG_MOVE_FALL_RESET {
     pub info: MovementInfo,
 }

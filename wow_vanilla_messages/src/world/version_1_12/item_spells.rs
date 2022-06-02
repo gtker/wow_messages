@@ -7,6 +7,17 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L3):
+/// ```text
+/// struct ItemSpells {
+///     u32 spell;
+///     u32 spell_trigger;
+///     u32 spell_charges;
+///     u32 spell_cooldown;
+///     u32 spell_category;
+///     u32 spell_category_cooldown;
+/// }
+/// ```
 pub struct ItemSpells {
     pub spell: u32,
     pub spell_trigger: u32,

@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_failed_other.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_failed_other.wowm#L3):
+/// ```text
+/// smsg SMSG_SPELL_FAILED_OTHER = 0x02A6 {
+///     Guid caster_guid;
+///     u32 id;
+/// }
+/// ```
 pub struct SMSG_SPELL_FAILED_OTHER {
     pub caster_guid: Guid,
     pub id: u32,

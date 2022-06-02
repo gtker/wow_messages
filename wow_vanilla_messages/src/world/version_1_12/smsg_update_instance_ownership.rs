@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_update_instance_ownership.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_update_instance_ownership.wowm#L3):
+/// ```text
+/// smsg SMSG_UPDATE_INSTANCE_OWNERSHIP = 0x032B {
+///     u32 has_been_saved;
+/// }
+/// ```
 pub struct SMSG_UPDATE_INSTANCE_OWNERSHIP {
     pub has_been_saved: u32,
 }

@@ -7,6 +7,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:303`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L303):
+/// ```text
+/// struct NpcTextUpdateEmote {
+///     u32 delay;
+///     u32 emote;
+/// }
+/// ```
 pub struct NpcTextUpdateEmote {
     pub delay: u32,
     pub emote: u32,

@@ -7,6 +7,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/survey_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/survey_result.wowm#L3):
+/// ```text
+/// clogin CMD_SURVEY_RESULT = 0x04 {
+///     u32 survey_id;
+///     u8 error;
+///     u16 compressed_data_length;
+///     u8[compressed_data_length] data;
+/// }
+/// ```
 pub struct CMD_SURVEY_RESULT {
     pub survey_id: u32,
     pub error: u8,
@@ -199,6 +208,7 @@ mod test {
 
     const RAW0: [u8; 9] = [ 0x04, 0xDE, 0xFA, 0x00, 0x00, 0x00, 0x01, 0x00, 0xFF, ];
 
+    // Generated from `wow_message_parser/wowm/login/survey_result.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_SURVEY_RESULT0() {
@@ -227,6 +237,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/survey_result.wowm` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_SURVEY_RESULT0() {
@@ -255,6 +266,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/survey_result.wowm` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_SURVEY_RESULT0() {

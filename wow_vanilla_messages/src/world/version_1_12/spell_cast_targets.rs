@@ -8,6 +8,49 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:83`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L83):
+/// ```text
+/// struct SpellCastTargets {
+///     SpellCastTargetFlags target_flags;
+///     if (target_flags & UNIT) {
+///         PackedGuid unit_target;
+///     }
+///     if (target_flags & UNIT_ENEMY) {
+///         PackedGuid unit_enemy_target;
+///     }
+///     if (target_flags & GAMEOBJECT) {
+///         PackedGuid object_target;
+///     }
+///     if (target_flags & LOCKED) {
+///         PackedGuid object_target_locked;
+///     }
+///     if (target_flags & ITEM) {
+///         PackedGuid item_target;
+///     }
+///     if (target_flags & TRADE_ITEM) {
+///         PackedGuid item_trade_target;
+///     }
+///     if (target_flags & SOURCE_LOCATION) {
+///         f32 source_position_x;
+///         f32 source_position_y;
+///         f32 source_position_z;
+///     }
+///     if (target_flags & DEST_LOCATION) {
+///         f32 destination_position_x;
+///         f32 destination_position_y;
+///         f32 destination_position_z;
+///     }
+///     if (target_flags & STRING) {
+///         CString target_string;
+///     }
+///     if (target_flags & CORPSE_ALLY) {
+///         PackedGuid corpse_target_ally;
+///     }
+///     if (target_flags & CORPSE_ENEMY) {
+///         PackedGuid corpse_target_enemy;
+///     }
+/// }
+/// ```
 pub struct SpellCastTargets {
     pub target_flags: SpellCastTargets_SpellCastTargetFlags,
 }

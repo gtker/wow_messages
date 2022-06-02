@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_server.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_server.wowm#L5):
+/// ```text
+/// smsg MSG_TALENT_WIPE_CONFIRM_Server = 0x02AA {
+///     Guid wiping_npc;
+///     u32 cost_in_copper;
+/// }
+/// ```
 pub struct MSG_TALENT_WIPE_CONFIRM_Server {
     pub wiping_npc: Guid,
     pub cost_in_copper: u32,

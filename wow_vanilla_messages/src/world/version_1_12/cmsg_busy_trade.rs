@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/cmsg_busy_trade.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/cmsg_busy_trade.wowm#L3):
+/// ```text
+/// cmsg CMSG_BUSY_TRADE = 0x0118 {
+/// }
+/// ```
 pub struct CMSG_BUSY_TRADE {
 }
 

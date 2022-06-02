@@ -9,6 +9,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_superceded_spell.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_superceded_spell.wowm#L3):
+/// ```text
+/// smsg SMSG_SUPERCEDED_SPELL = 0x012C {
+///     u16 new_spell_id;
+///     u16 old_spell_id;
+/// }
+/// ```
 pub struct SMSG_SUPERCEDED_SPELL {
     pub new_spell_id: u16,
     pub old_spell_id: u16,

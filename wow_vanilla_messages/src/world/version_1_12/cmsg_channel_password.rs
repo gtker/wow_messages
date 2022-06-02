@@ -8,6 +8,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_channel_password.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_channel_password.wowm#L3):
+/// ```text
+/// cmsg CMSG_CHANNEL_PASSWORD = 0x009C {
+///     CString channel_name;
+///     CString channel_password;
+/// }
+/// ```
 pub struct CMSG_CHANNEL_PASSWORD {
     pub channel_name: String,
     pub channel_password: String,

@@ -8,10 +8,25 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/client.wowm#L3):
+/// ```text
+/// clogin CMD_REALM_LIST_Client = 0x10 {
+///     u32 padding = 0;
+/// }
+/// ```
 pub struct CMD_REALM_LIST_Client {
 }
 
 impl CMD_REALM_LIST_Client {
+    /// The field `padding` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `0` |
+    /// | Hex | `0x00` |
+    /// | Original | `0` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const PADDING_VALUE: u32 = 0x00;
 
 }
@@ -140,6 +155,7 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/client.wowm` line 7.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Client0() {
@@ -162,6 +178,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/client.wowm` line 7.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Client0() {
@@ -184,6 +201,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/client.wowm` line 7.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Client0() {

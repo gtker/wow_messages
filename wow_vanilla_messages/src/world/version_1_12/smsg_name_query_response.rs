@@ -12,6 +12,17 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm#L3):
+/// ```text
+/// smsg SMSG_NAME_QUERY_RESPONSE = 0x0051 {
+///     Guid guid;
+///     CString character_name;
+///     CString realm_name;
+///     Race race;
+///     Gender gender;
+///     Class class;
+/// }
+/// ```
 pub struct SMSG_NAME_QUERY_RESPONSE {
     pub guid: Guid,
     pub character_name: String,
@@ -113,6 +124,7 @@ mod test {
          0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 12.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_NAME_QUERY_RESPONSE0() {
@@ -147,6 +159,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 12.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE0() {
@@ -181,6 +194,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 12.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE0() {
@@ -219,6 +233,7 @@ mod test {
          0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x41, 0x00, 0x01, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 30.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_NAME_QUERY_RESPONSE1() {
@@ -253,6 +268,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 30.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE1() {
@@ -287,6 +303,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 30.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE1() {

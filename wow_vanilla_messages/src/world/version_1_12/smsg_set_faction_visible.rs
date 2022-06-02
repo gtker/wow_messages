@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_set_faction_visible.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_set_faction_visible.wowm#L3):
+/// ```text
+/// smsg SMSG_SET_FACTION_VISIBLE = 0x0123 {
+///     u32 reputation_list_id;
+/// }
+/// ```
 pub struct SMSG_SET_FACTION_VISIBLE {
     pub reputation_list_id: u32,
 }

@@ -11,12 +11,29 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm#L11):
+/// ```text
+/// smsg SMSG_TRANSFER_ABORTED = 0x0040 {
+///     Map map;
+///     TransferAbortReason reason;
+///     u8 padding = 0;
+/// }
+/// ```
 pub struct SMSG_TRANSFER_ABORTED {
     pub map: Map,
     pub reason: TransferAbortReason,
 }
 
 impl SMSG_TRANSFER_ABORTED {
+    /// The field `padding` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `0` |
+    /// | Hex | `0x00` |
+    /// | Original | `0` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const PADDING_VALUE: u8 = 0x00;
 
 }

@@ -8,6 +8,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_ignore_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_ignore_list.wowm#L3):
+/// ```text
+/// smsg SMSG_IGNORE_LIST = 0x006B {
+///     u8 amount_of_ignored;
+///     u64[amount_of_ignored] ignored;
+/// }
+/// ```
 pub struct SMSG_IGNORE_LIST {
     pub ignored: Vec<u64>,
 }
@@ -66,6 +73,7 @@ mod test {
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD, 0xDE,
          0xFE, 0x0F, 0xDC, 0xBA, ];
 
+    // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_IGNORE_LIST0() {
@@ -90,6 +98,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 8.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_IGNORE_LIST0() {
@@ -114,6 +123,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 8.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_IGNORE_LIST0() {
@@ -141,6 +151,7 @@ mod test {
     const RAW1: [u8; 21] = [ 0x00, 0x13, 0x6B, 0x00, 0x02, 0xEF, 0xBE, 0xAD, 0xDE,
          0xFE, 0x0F, 0xDC, 0xBA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 18.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_IGNORE_LIST1() {
@@ -165,6 +176,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 18.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_IGNORE_LIST1() {
@@ -189,6 +201,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 18.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_IGNORE_LIST1() {

@@ -11,6 +11,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L22):
+/// ```text
+/// smsg SMSG_LOOT_RESPONSE = 0x0160 {
+///     Guid guid;
+///     LootMethod loot_method;
+/// }
+/// ```
 pub struct SMSG_LOOT_RESPONSE {
     pub guid: Guid,
     pub loot_method: LootMethod,

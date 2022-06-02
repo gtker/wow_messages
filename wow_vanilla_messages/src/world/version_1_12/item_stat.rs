@@ -7,6 +7,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L22):
+/// ```text
+/// struct ItemStat {
+///     u32 item_stat_type;
+///     u32 item_stat_value;
+/// }
+/// ```
 pub struct ItemStat {
     pub item_stat_type: u32,
     pub item_stat_value: u32,

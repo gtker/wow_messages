@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_instance_reset.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_instance_reset.wowm#L3):
+/// ```text
+/// smsg SMSG_INSTANCE_RESET = 0x031E {
+///     Map map;
+/// }
+/// ```
 pub struct SMSG_INSTANCE_RESET {
     pub map: Map,
 }

@@ -9,6 +9,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_questlog_swap_quest.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_questlog_swap_quest.wowm#L3):
+/// ```text
+/// cmsg CMSG_QUESTLOG_SWAP_QUEST = 0x0193 {
+///     u8 slot1;
+///     u8 slot2;
+/// }
+/// ```
 pub struct CMSG_QUESTLOG_SWAP_QUEST {
     pub slot1: u8,
     pub slot2: u8,

@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/smsg_mountresult.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/smsg_mountresult.wowm#L3):
+/// ```text
+/// smsg SMSG_MOUNTRESULT = 0x016E {
+///     MountResult result;
+/// }
+/// ```
 pub struct SMSG_MOUNTRESULT {
     pub result: MountResult,
 }

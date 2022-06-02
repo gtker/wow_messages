@@ -11,6 +11,17 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm#L29):
+/// ```text
+/// smsg MSG_PVP_LOG_DATA_Server = 0x02E0 {
+///     BattlegroundEndStatus status;
+///     if (status == ENDED) {
+///         BattlegroundWinner winner;
+///     }
+///     u32 amount_of_players;
+///     BattlegroundPlayer[amount_of_players] players;
+/// }
+/// ```
 pub struct MSG_PVP_LOG_DATA_Server {
     pub status: MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus,
     pub players: Vec<BattlegroundPlayer>,

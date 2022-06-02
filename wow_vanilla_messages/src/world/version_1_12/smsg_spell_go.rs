@@ -12,6 +12,24 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_go.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_go.wowm#L3):
+/// ```text
+/// smsg SMSG_SPELL_GO = 0x0132 {
+///     PackedGuid cast_item;
+///     PackedGuid caster;
+///     u32 spell;
+///     CastFlags flags;
+///     u8 amount_of_hits;
+///     Guid[amount_of_hits] hits;
+///     u8 amount_of_misses;
+///     SpellMiss[amount_of_misses] misses;
+///     SpellCastTargets targets;
+///     if (flags & AMMO) {
+///         u32 ammo_display_id;
+///         u32 ammo_inventory_type;
+///     }
+/// }
+/// ```
 pub struct SMSG_SPELL_GO {
     pub cast_item: Guid,
     pub caster: Guid,

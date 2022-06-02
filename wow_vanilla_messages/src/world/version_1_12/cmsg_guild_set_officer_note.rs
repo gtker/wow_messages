@@ -8,6 +8,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_guild_set_officer_note.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_guild_set_officer_note.wowm#L3):
+/// ```text
+/// cmsg CMSG_GUILD_SET_OFFICER_NOTE = 0x0235 {
+///     CString player_name;
+///     CString note;
+/// }
+/// ```
 pub struct CMSG_GUILD_SET_OFFICER_NOTE {
     pub player_name: String,
     pub note: String,

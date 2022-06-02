@@ -10,6 +10,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm#L3):
+/// ```text
+/// smsg SMSG_CHAR_RENAME = 0x02C8 {
+///     WorldResult result;
+///     if (result == RESPONSE_SUCCESS) {
+///         Guid character;
+///         CString new_name;
+///     }
+/// }
+/// ```
 pub struct SMSG_CHAR_RENAME {
     pub result: SMSG_CHAR_RENAME_WorldResult,
 }
@@ -697,6 +707,7 @@ mod test {
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xC8, 0x02, 0x47, 0x00, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 13.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_RENAME0() {
@@ -721,6 +732,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 13.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_RENAME0() {
@@ -745,6 +757,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 13.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_RENAME0() {
@@ -773,6 +786,7 @@ mod test {
          0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62,
          0x65, 0x65, 0x66, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 21.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_RENAME1() {
@@ -800,6 +814,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 21.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_RENAME1() {
@@ -827,6 +842,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 21.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_RENAME1() {

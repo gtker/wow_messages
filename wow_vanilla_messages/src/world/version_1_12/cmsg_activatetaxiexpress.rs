@@ -10,6 +10,14 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_activatetaxiexpress.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_activatetaxiexpress.wowm#L3):
+/// ```text
+/// cmsg CMSG_ACTIVATETAXIEXPRESS = 0x0312 {
+///     Guid guid;
+///     u32 total_cost;
+///     u32 node_count;
+/// }
+/// ```
 pub struct CMSG_ACTIVATETAXIEXPRESS {
     pub guid: Guid,
     pub total_cost: u32,

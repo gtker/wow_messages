@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlefield_status.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlefield_status.wowm#L3):
+/// ```text
+/// cmsg CMSG_BATTLEFIELD_STATUS = 0x02D3 {
+/// }
+/// ```
 pub struct CMSG_BATTLEFIELD_STATUS {
 }
 

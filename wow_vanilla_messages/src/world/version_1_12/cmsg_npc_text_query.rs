@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_npc_text_query.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_npc_text_query.wowm#L3):
+/// ```text
+/// cmsg CMSG_NPC_TEXT_QUERY = 0x017F {
+///     u32 text_id;
+///     Guid guid;
+/// }
+/// ```
 pub struct CMSG_NPC_TEXT_QUERY {
     pub text_id: u32,
     pub guid: Guid,

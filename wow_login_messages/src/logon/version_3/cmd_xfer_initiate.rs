@@ -8,6 +8,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L3):
+/// ```text
+/// slogin CMD_XFER_INITIATE = 0x30 {
+/// }
+/// ```
 pub struct CMD_XFER_INITIATE {
 }
 
@@ -120,6 +125,7 @@ mod test {
 
     const RAW0: [u8; 1] = [ 0x30, ];
 
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 5.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_INITIATE0() {
@@ -142,6 +148,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 5.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_INITIATE0() {
@@ -164,6 +171,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 5.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_INITIATE0() {

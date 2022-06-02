@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/cinematic/cmsg_complete_cinematic.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/cinematic/cmsg_complete_cinematic.wowm#L3):
+/// ```text
+/// cmsg CMSG_COMPLETE_CINEMATIC = 0x00FC {
+/// }
+/// ```
 pub struct CMSG_COMPLETE_CINEMATIC {
 }
 

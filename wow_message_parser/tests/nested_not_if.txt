@@ -8,6 +8,19 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:258`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L258):
+/// ```text
+/// struct NestedNotIf {
+///     TEnum t;
+///     if (t != ZERO) {
+///         u8 not_zero;
+///         NestedEnum e;
+///         if (e == NESTED) {
+///             u8 one;
+///         }
+///     }
+/// }
+/// ```
 pub struct NestedNotIf {
     pub t: NestedNotIf_TEnum,
 }

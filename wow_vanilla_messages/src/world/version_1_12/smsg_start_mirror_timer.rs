@@ -10,6 +10,17 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_start_mirror_timer.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_start_mirror_timer.wowm#L3):
+/// ```text
+/// smsg SMSG_START_MIRROR_TIMER = 0x01D9 {
+///     TimerType timer;
+///     u32 time_remaining;
+///     u32 duration;
+///     u32 scale;
+///     u8 is_frozen;
+///     u32 id;
+/// }
+/// ```
 pub struct SMSG_START_MIRROR_TIMER {
     pub timer: TimerType,
     pub time_remaining: u32,

@@ -9,6 +9,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/smsg_resurrect_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/smsg_resurrect_request.wowm#L3):
+/// ```text
+/// smsg SMSG_RESURRECT_REQUEST = 0x015B {
+///     Guid guid;
+///     u32 name_length;
+///     CString name;
+///     u8 caster_is_spirit_healer;
+///     u8 respect_resurrection_timer;
+/// }
+/// ```
 pub struct SMSG_RESURRECT_REQUEST {
     pub guid: Guid,
     pub name_length: u32,

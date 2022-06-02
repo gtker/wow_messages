@@ -9,11 +9,28 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm#L9):
+/// ```text
+/// smsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Server = 0x02E9 {
+///     u32 amount_of_carriers = 0;
+///     u32 amount_of_flag_carriers;
+///     BattlegroundPlayerPosition[amount_of_flag_carriers] flag_carriers;
+/// }
+/// ```
 pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub flag_carriers: Vec<BattlegroundPlayerPosition>,
 }
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
+    /// The field `amount_of_carriers` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `0` |
+    /// | Hex | `0x00` |
+    /// | Original | `0` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const AMOUNT_OF_CARRIERS_VALUE: u32 = 0x00;
 
 }

@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:56`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L56):
+/// ```text
+/// msg SimpleMsg = 0x0002 {
+///     u8 basic;
+/// }
+/// ```
 pub struct SimpleMsg {
     pub basic: u8,
 }

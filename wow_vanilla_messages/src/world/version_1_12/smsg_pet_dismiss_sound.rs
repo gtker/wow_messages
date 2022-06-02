@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_dismiss_sound.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_dismiss_sound.wowm#L3):
+/// ```text
+/// smsg SMSG_PET_DISMISS_SOUND = 0x0325 {
+///     u32 sound_id;
+///     Vector3d position;
+/// }
+/// ```
 pub struct SMSG_PET_DISMISS_SOUND {
     pub sound_id: u32,
     pub position: Vector3d,

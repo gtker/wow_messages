@@ -4,6 +4,18 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L3):
+/// ```text
+/// enum UpdateType : u8 {
+///     VALUES = 0;
+///     MOVEMENT = 1;
+///     CREATE_OBJECT = 2;
+///     CREATE_OBJECT2 = 3;
+///     OUT_OF_RANGE_OBJECTS = 4;
+///     NEAR_OBJECTS = 5;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum UpdateType {
     VALUES,

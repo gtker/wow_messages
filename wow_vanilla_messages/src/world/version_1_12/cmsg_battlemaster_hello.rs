@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlemaster_hello.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlemaster_hello.wowm#L3):
+/// ```text
+/// cmsg CMSG_BATTLEMASTER_HELLO = 0x02D7 {
+///     Guid guid;
+/// }
+/// ```
 pub struct CMSG_BATTLEMASTER_HELLO {
     pub guid: Guid,
 }

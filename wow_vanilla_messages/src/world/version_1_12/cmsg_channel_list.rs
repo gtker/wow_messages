@@ -8,6 +8,12 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_channel_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_channel_list.wowm#L3):
+/// ```text
+/// cmsg CMSG_CHANNEL_LIST = 0x009A {
+///     CString channel_name;
+/// }
+/// ```
 pub struct CMSG_CHANNEL_LIST {
     pub channel_name: String,
 }

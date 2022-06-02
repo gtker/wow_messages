@@ -9,6 +9,15 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_wrap_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_wrap_item.wowm#L3):
+/// ```text
+/// cmsg CMSG_WRAP_ITEM = 0x01D3 {
+///     u8 gift_bag_index;
+///     u8 gift_slot;
+///     u8 item_bag_index;
+///     u8 item_slot;
+/// }
+/// ```
 pub struct CMSG_WRAP_ITEM {
     pub gift_bag_index: u8,
     pub gift_slot: u8,

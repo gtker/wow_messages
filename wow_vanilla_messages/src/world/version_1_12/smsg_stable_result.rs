@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_stable_result.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_stable_result.wowm#L21):
+/// ```text
+/// smsg SMSG_STABLE_RESULT = 0x0273 {
+///     StableResult result;
+/// }
+/// ```
 pub struct SMSG_STABLE_RESULT {
     pub result: StableResult,
 }

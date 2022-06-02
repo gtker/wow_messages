@@ -9,6 +9,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/smsg_corpse_reclaim_delay.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/smsg_corpse_reclaim_delay.wowm#L3):
+/// ```text
+/// smsg SMSG_CORPSE_RECLAIM_DELAY = 0x0269 {
+///     u32 delay_in_seconds;
+/// }
+/// ```
 pub struct SMSG_CORPSE_RECLAIM_DELAY {
     pub delay_in_seconds: u32,
 }

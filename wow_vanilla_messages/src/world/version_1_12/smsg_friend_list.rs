@@ -9,6 +9,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L21):
+/// ```text
+/// smsg SMSG_FRIEND_LIST = 0x0067 {
+///     u8 amount_of_friends;
+///     Friend[amount_of_friends] friends;
+/// }
+/// ```
 pub struct SMSG_FRIEND_LIST {
     pub friends: Vec<Friend>,
 }

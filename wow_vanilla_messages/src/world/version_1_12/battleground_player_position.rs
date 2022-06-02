@@ -8,6 +8,14 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm#L3):
+/// ```text
+/// struct BattlegroundPlayerPosition {
+///     Guid player;
+///     f32 position_x;
+///     f32 position_y;
+/// }
+/// ```
 pub struct BattlegroundPlayerPosition {
     pub player: Guid,
     pub position_x: f32,

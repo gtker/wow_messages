@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/cmsg_loot_release.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/cmsg_loot_release.wowm#L3):
+/// ```text
+/// cmsg CMSG_LOOT_RELEASE = 0x015F {
+///     Guid guid;
+/// }
+/// ```
 pub struct CMSG_LOOT_RELEASE {
     pub guid: Guid,
 }

@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/smsg_gmticket_updatetext.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/smsg_gmticket_updatetext.wowm#L3):
+/// ```text
+/// smsg SMSG_GMTICKET_UPDATETEXT = 0x0208 {
+///     GmTicketResponse response;
+/// }
+/// ```
 pub struct SMSG_GMTICKET_UPDATETEXT {
     pub response: GmTicketResponse,
 }

@@ -9,6 +9,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_showtaxinodes.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_showtaxinodes.wowm#L3):
+/// ```text
+/// smsg SMSG_SHOWTAXINODES = 0x01A9 {
+///     u32 unknown1;
+///     Guid guid;
+///     u32 nearest_node;
+///     u32[-] nodes;
+/// }
+/// ```
 pub struct SMSG_SHOWTAXINODES {
     pub unknown1: u32,
     pub guid: Guid,

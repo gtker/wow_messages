@@ -4,6 +4,23 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/mount_common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/mount_common.wowm#L3):
+/// ```text
+/// enum MountResult : u32 {
+///     INVALIDMOUNTEE = 0;
+///     TOOFARAWAY = 1;
+///     ALREADYMOUNTED = 2;
+///     NOTMOUNTABLE = 3;
+///     NOTYOURPET = 4;
+///     OTHER = 5;
+///     LOOTING = 6;
+///     RACECANTMOUNT = 7;
+///     SHAPESHIFTED = 8;
+///     FORCEDDISMOUNT = 9;
+///     OK = 10;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum MountResult {
     INVALIDMOUNTEE,

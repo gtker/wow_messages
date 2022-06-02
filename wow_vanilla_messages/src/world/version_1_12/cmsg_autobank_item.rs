@@ -9,6 +9,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_autobank_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_autobank_item.wowm#L3):
+/// ```text
+/// cmsg CMSG_AUTOBANK_ITEM = 0x0283 {
+///     u8 bag_index;
+///     u8 slot_index;
+/// }
+/// ```
 pub struct CMSG_AUTOBANK_ITEM {
     pub bag_index: u8,
     pub slot_index: u8,

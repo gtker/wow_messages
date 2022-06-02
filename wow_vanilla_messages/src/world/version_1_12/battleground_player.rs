@@ -8,6 +8,19 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm#L14):
+/// ```text
+/// struct BattlegroundPlayer {
+///     Guid player;
+///     PvpRank rank;
+///     u32 killing_blows;
+///     u32 honorable_kills;
+///     u32 deaths;
+///     u32 bonus_honor;
+///     u32 amount_of_extra_fields;
+///     u32[amount_of_extra_fields] fields;
+/// }
+/// ```
 pub struct BattlegroundPlayer {
     pub player: Guid,
     pub rank: PvpRank,

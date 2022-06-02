@@ -9,6 +9,13 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:43`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L43):
+/// ```text
+/// smsg SMSG_CHAR_ENUM = 0x003B {
+///     u8 amount_of_characters;
+///     Character[amount_of_characters] characters;
+/// }
+/// ```
 pub struct SMSG_CHAR_ENUM {
     pub characters: Vec<Character>,
 }
@@ -76,6 +83,7 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x3B, 0x00, 0x00, ];
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm` line 53.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_ENUM0() {
@@ -100,6 +108,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm` line 53.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_ENUM0() {
@@ -124,6 +133,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm` line 53.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_ENUM0() {

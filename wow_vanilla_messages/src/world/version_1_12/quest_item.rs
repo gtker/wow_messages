@@ -6,6 +6,15 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:294`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L294):
+/// ```text
+/// struct QuestItem {
+///     u32 quest_id;
+///     u32 quest_icon;
+///     u32 level;
+///     CString title;
+/// }
+/// ```
 pub struct QuestItem {
     pub quest_id: u32,
     pub quest_icon: u32,

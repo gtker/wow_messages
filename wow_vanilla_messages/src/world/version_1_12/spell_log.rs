@@ -8,11 +8,70 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm:134`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm#L134):
+/// ```text
+/// struct SpellLog {
+///     SpellEffect effect;
+///     u32 amount_of_logs = 1;
+///     if (effect == POWER_DRAIN) {
+///         Guid target1;
+///         u32 unknown1;
+///         u32 unknown2;
+///         f32 unknown3;
+///     }
+///     else if (effect == ADD_EXTRA_ATTACKS) {
+///         Guid target2;
+///         u32 unknown4;
+///     }
+///     else if (effect == INTERRUPT_CAST) {
+///         Guid target3;
+///         u32 interrupted_spell;
+///     }
+///     else if (effect == DURABILITY_DAMAGE) {
+///         Guid target4;
+///         u32 unknown5;
+///         u32 unknown6;
+///     }
+///     else if (effect == CREATE_ITEM) {
+///         u32 spell_effect_item_type;
+///     }
+///     else if (effect == FEED_PET) {
+///         u32 item_target_entry;
+///     }
+///     else if (effect == RESURRECT
+///         || effect == DISPEL
+///         || effect == THREAT
+///         || effect == DISTRACT
+///         || effect == SANCTUARY
+///         || effect == THREAT_ALL
+///         || effect == DISPEL_MECHANIC
+///         || effect == RESURRECT_NEW
+///         || effect == ATTACK_ME
+///         || effect == SKIN_PLAYER_CORPSE
+///         || effect == MODIFY_THREAT_PERCENT
+///         || effect == UNKNOWN126
+///         || effect == DISMISS_PET
+///         || effect == OPEN_LOCK
+///         || effect == OPEN_LOCK_ITEM
+///         || effect == INSTAKILL) {
+///         Guid target5;
+///     }
+/// }
+/// ```
 pub struct SpellLog {
     pub effect: SpellLog_SpellEffect,
 }
 
 impl SpellLog {
+    /// The field `amount_of_logs` is constantly specified to be:
+    /// 
+    /// | Format | Value |
+    /// | ------ | ----- |
+    /// | Decimal | `1` |
+    /// | Hex | `0x01` |
+    /// | Original | `1` |
+    /// 
+    /// **This field is not in the struct, but is written as this constant value.**
     pub const AMOUNT_OF_LOGS_VALUE: u32 = 0x01;
 
 }

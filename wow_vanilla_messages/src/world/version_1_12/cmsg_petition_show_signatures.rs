@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_petition_show_signatures.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_petition_show_signatures.wowm#L3):
+/// ```text
+/// cmsg CMSG_PETITION_SHOW_SIGNATURES = 0x01BE {
+///     Guid item_guid;
+/// }
+/// ```
 pub struct CMSG_PETITION_SHOW_SIGNATURES {
     pub item_guid: Guid,
 }

@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellinstakilllog.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellinstakilllog.wowm#L3):
+/// ```text
+/// smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
+///     Guid target_guid;
+///     u32 spell;
+/// }
+/// ```
 pub struct SMSG_SPELLINSTAKILLLOG {
     pub target_guid: Guid,
     pub spell: u32,

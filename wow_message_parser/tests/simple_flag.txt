@@ -1,3 +1,12 @@
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:12`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L12):
+/// ```text
+/// flag SimpleFlag : u8 {
+///     ZERO = 0;
+///     ONE = 1;
+///     TWO = 2;
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct SimpleFlag {
     inner: u8,

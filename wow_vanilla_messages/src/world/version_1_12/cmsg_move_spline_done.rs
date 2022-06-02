@@ -9,6 +9,14 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_spline_done.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_spline_done.wowm#L3):
+/// ```text
+/// cmsg CMSG_MOVE_SPLINE_DONE = 0x02C9 {
+///     MovementInfo movement_info;
+///     u32 movement_counter;
+///     u32 unknown1;
+/// }
+/// ```
 pub struct CMSG_MOVE_SPLINE_DONE {
     pub movement_info: MovementInfo,
     pub movement_counter: u32,

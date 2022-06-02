@@ -9,6 +9,20 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm#L5):
+/// ```text
+/// smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
+///     InventoryResult result;
+///     if (result == CANT_EQUIP_LEVEL_I) {
+///         u32 required_level;
+///     }
+///     if (result != OK) {
+///         u64 item1_guid;
+///         u64 item2_guid;
+///         u8 bag_type_subclass;
+///     }
+/// }
+/// ```
 pub struct SMSG_INVENTORY_CHANGE_FAILURE {
     pub result: SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult,
 }

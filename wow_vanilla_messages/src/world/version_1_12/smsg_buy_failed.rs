@@ -11,6 +11,14 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_buy_failed.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_buy_failed.wowm#L15):
+/// ```text
+/// smsg SMSG_BUY_FAILED = 0x01A5 {
+///     Guid guid;
+///     u32 item_id;
+///     BuyResult result;
+/// }
+/// ```
 pub struct SMSG_BUY_FAILED {
     pub guid: Guid,
     pub item_id: u32,

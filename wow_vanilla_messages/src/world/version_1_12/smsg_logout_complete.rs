@@ -9,6 +9,11 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm#L3):
+/// ```text
+/// smsg SMSG_LOGOUT_COMPLETE = 0x004D {
+/// }
+/// ```
 pub struct SMSG_LOGOUT_COMPLETE {
 }
 

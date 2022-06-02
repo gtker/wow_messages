@@ -10,6 +10,13 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_petition_query.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_petition_query.wowm#L3):
+/// ```text
+/// cmsg CMSG_PETITION_QUERY = 0x01C6 {
+///     u32 guild_guid;
+///     Guid petition_guid;
+/// }
+/// ```
 pub struct CMSG_PETITION_QUERY {
     pub guild_guid: u32,
     pub petition_guid: Guid,

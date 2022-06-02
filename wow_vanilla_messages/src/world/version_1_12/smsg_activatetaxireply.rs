@@ -10,6 +10,12 @@ use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_activatetaxireply.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_activatetaxireply.wowm#L19):
+/// ```text
+/// smsg SMSG_ACTIVATETAXIREPLY = 0x01AE {
+///     ActivateTaxiReply reply;
+/// }
+/// ```
 pub struct SMSG_ACTIVATETAXIREPLY {
     pub reply: ActivateTaxiReply,
 }

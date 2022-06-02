@@ -10,6 +10,16 @@ use async_std::io::ReadExt;
 use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:23`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L23):
+/// ```text
+/// smsg SMSG_INITIAL_SPELLS = 0x012A {
+///     u8 unknown1;
+///     u16 spell_count;
+///     InitialSpell[spell_count] initial_spells;
+///     u16 cooldown_count;
+///     CooldownSpell[cooldown_count] cooldowns;
+/// }
+/// ```
 pub struct SMSG_INITIAL_SPELLS {
     pub unknown1: u8,
     pub initial_spells: Vec<InitialSpell>,

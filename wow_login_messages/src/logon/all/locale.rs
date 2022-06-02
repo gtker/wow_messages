@@ -4,6 +4,27 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L15):
+/// ```text
+/// enum Locale : u32 {
+///     EN_GB = "enGB";
+///     EN_US = "enUS";
+///     ES_MX = "esMX";
+///     PT_BR = "ptBR";
+///     FR_FR = "frFR";
+///     DE_DE = "deDE";
+///     ES_ES = "esES";
+///     PT_PT = "ptPT";
+///     IT_IT = "itIT";
+///     RU_RU = "ruRU";
+///     KO_KR = "koKR";
+///     ZH_TW = "zhTW";
+///     EN_TW = "enTW";
+///     EN_CN = "enCN";
+///     OTHER = self.value
+/// }
+
+/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Locale {
     EN_GB,
