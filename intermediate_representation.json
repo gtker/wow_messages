@@ -21871,7 +21871,7 @@
         }
       ],
       "file_info": {
-        "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm",
+        "file_name": "wow_message_parser/wowm/login/challenge_client_commons.wowm",
         "start_position": 15
       },
       "features": [
@@ -23870,7 +23870,7 @@
         }
       ],
       "file_info": {
-        "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm",
+        "file_name": "wow_message_parser/wowm/login/challenge_client_commons.wowm",
         "start_position": 3
       },
       "features": [
@@ -24663,7 +24663,7 @@
         }
       ],
       "file_info": {
-        "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm",
+        "file_name": "wow_message_parser/wowm/login/challenge_client_commons.wowm",
         "start_position": 9
       },
       "features": [
@@ -32095,13 +32095,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm",
-            "start_position": 66
+            "start_position": 29
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm",
-        "start_position": 40
+        "start_position": 3
       },
       "only_has_io_error": false,
       "features": [
@@ -99039,7 +99039,7 @@
       },
       "tests": [],
       "file_info": {
-        "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm",
+        "file_name": "wow_message_parser/wowm/login/challenge_client_commons.wowm",
         "start_position": 33
       },
       "only_has_io_error": true,

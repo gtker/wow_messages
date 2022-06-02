@@ -11,7 +11,7 @@ use std::io::{Write, Read};
 ///
 /// Has the exact same layout as [CMD_AUTH_RECONNECT_CHALLENGE_Client](crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L40):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L3):
 /// ```text
 /// clogin CMD_AUTH_LOGON_CHALLENGE_Client = 0x00 {
 ///     u8 protocol_version;
@@ -356,7 +356,7 @@ mod test {
          0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x01,
          0x01, 0x41, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 66.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 29.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Client0() {
@@ -400,7 +400,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 66.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 29.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Client0() {
@@ -444,7 +444,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 66.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 29.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Client0() {
