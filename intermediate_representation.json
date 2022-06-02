@@ -16766,7 +16766,7 @@
             "original": "0x02"
           },
           "tags": {
-            "comment": "Joined Channel: [%s] -- You joined"
+            "comment": "Joined Channel: %s -- You joined"
           }
         },
         {
@@ -16776,7 +16776,7 @@
             "original": "0x03"
           },
           "tags": {
-            "comment": "Left Channel: [%s] -- You left"
+            "comment": "Left Channel: %s -- You left"
           }
         },
         {
@@ -16816,7 +16816,7 @@
             "original": "0x07"
           },
           "tags": {
-            "comment": "[%s] Password changed by %s."
+            "comment": "%s Password changed by %s."
           }
         },
         {
@@ -16826,7 +16826,7 @@
             "original": "0x08"
           },
           "tags": {
-            "comment": "[%s] Owner changed to %s."
+            "comment": "%s Owner changed to %s."
           }
         },
         {
@@ -16836,7 +16836,7 @@
             "original": "0x09"
           },
           "tags": {
-            "comment": "[%s] Player %s was not found."
+            "comment": "%s Player %s was not found."
           }
         },
         {
@@ -16846,7 +16846,7 @@
             "original": "0x0A"
           },
           "tags": {
-            "comment": "[%s] You are not the channel owner."
+            "comment": "%s You are not the channel owner."
           }
         },
         {
@@ -16856,7 +16856,7 @@
             "original": "0x0B"
           },
           "tags": {
-            "comment": "[%s] Channel owner is %s."
+            "comment": "%s Channel owner is %s."
           }
         },
         {
@@ -16874,7 +16874,7 @@
             "original": "0x0D"
           },
           "tags": {
-            "comment": "[%s] Channel announcements enabled by %s."
+            "comment": "%s Channel announcements enabled by %s."
           }
         },
         {
@@ -16884,7 +16884,7 @@
             "original": "0x0E"
           },
           "tags": {
-            "comment": "[%s] Channel announcements disabled by %s."
+            "comment": "%s Channel announcements disabled by %s."
           }
         },
         {
@@ -16894,7 +16894,7 @@
             "original": "0x0F"
           },
           "tags": {
-            "comment": "[%s] Channel moderation enabled by %s."
+            "comment": "%s Channel moderation enabled by %s."
           }
         },
         {
@@ -16904,7 +16904,7 @@
             "original": "0x10"
           },
           "tags": {
-            "comment": "[%s] Channel moderation disabled by %s."
+            "comment": "%s Channel moderation disabled by %s."
           }
         },
         {
@@ -16914,7 +16914,7 @@
             "original": "0x11"
           },
           "tags": {
-            "comment": "[%s] You do not have permission to speak."
+            "comment": "%s You do not have permission to speak."
           }
         },
         {
@@ -16924,7 +16924,7 @@
             "original": "0x12"
           },
           "tags": {
-            "comment": "[%s] Player %s kicked by %s."
+            "comment": "%s Player %s kicked by %s."
           }
         },
         {
@@ -16934,7 +16934,7 @@
             "original": "0x13"
           },
           "tags": {
-            "comment": "[%s] You are banned from that channel."
+            "comment": "%s You are banned from that channel."
           }
         },
         {
@@ -16944,7 +16944,7 @@
             "original": "0x14"
           },
           "tags": {
-            "comment": "[%s] Player %s banned by %s."
+            "comment": "%s Player %s banned by %s."
           }
         },
         {
@@ -16954,7 +16954,7 @@
             "original": "0x15"
           },
           "tags": {
-            "comment": "[%s] Player %s unbanned by %s."
+            "comment": "%s Player %s unbanned by %s."
           }
         },
         {
@@ -16964,7 +16964,7 @@
             "original": "0x16"
           },
           "tags": {
-            "comment": "[%s] Player %s is not banned."
+            "comment": "%s Player %s is not banned."
           }
         },
         {
@@ -16974,7 +16974,7 @@
             "original": "0x17"
           },
           "tags": {
-            "comment": "[%s] Player %s is already on the channel."
+            "comment": "%s Player %s is already on the channel."
           }
         },
         {
@@ -17034,7 +17034,7 @@
             "original": "0x1D"
           },
           "tags": {
-            "comment": "[%s] You invited %s to join the channel"
+            "comment": "%s You invited %s to join the channel"
           }
         },
         {
@@ -17044,7 +17044,7 @@
             "original": "0x1E"
           },
           "tags": {
-            "comment": "[%s] %s has been banned."
+            "comment": "%s %s has been banned."
           }
         },
         {
@@ -17054,7 +17054,7 @@
             "original": "0x1F"
           },
           "tags": {
-            "comment": "[%s] The number of messages that can be sent to this channel is limited, please wait to send another message."
+            "comment": "%s The number of messages that can be sent to this channel is limited, please wait to send another message."
           }
         }
       ],
@@ -20185,7 +20185,7 @@
             "original": "5"
           },
           "tags": {
-            "comment": "mangoszero: [This version] fails silently."
+            "comment": "mangoszero: This version fails silently."
           }
         }
       ],
@@ -46081,7 +46081,7 @@
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {
-              "description": "This is sent to the client in [CMD_REALM_LIST_Server]."
+              "description": "This is sent to the client in CMD_REALM_LIST_Server."
             }
           }
         },
@@ -81401,7 +81401,7 @@
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {
-              "comment": "vmangos/cmangos/mangoszero: 0: Need for: [item name] > 127: you passed on: [item name]      Roll number"
+              "comment": "vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number"
             }
           }
         },

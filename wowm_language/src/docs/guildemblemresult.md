@@ -26,7 +26,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `NO_GUILD` | 2 (0x02) |  | vmangos: You are not part of a guild! |
 | `NOT_GUILD_MASTER` | 3 (0x03) |  | vmangos: Only guild leaders can create emblems. |
 | `NOT_ENOUGH_MONEY` | 4 (0x04) |  | vmangos: You can't afford to do that. |
-| `NO_MESSAGE` | 5 (0x05) |  | mangoszero: [This version] fails silently. |
+| `NO_MESSAGE` | 5 (0x05) |  | mangoszero: This version fails silently. |
 
 Used in:
 * [MSG_SAVE_GUILD_EMBLEM_Server](msg_save_guild_emblem_server.md)

@@ -24,7 +24,7 @@ use std::io::Write;
 /// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
 /// # Comment
 ///
-/// The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].
+/// The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT](crate::world::version_1_12::SMSG_UPDATE_OBJECT), but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT](crate::world::version_1_12::SMSG_UPDATE_OBJECT).
 pub struct SMSG_LOGIN_VERIFY_WORLD {
     pub map: Map,
     pub position: Vector3d,

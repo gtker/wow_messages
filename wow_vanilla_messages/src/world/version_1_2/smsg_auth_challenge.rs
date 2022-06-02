@@ -17,7 +17,7 @@ use std::io::Write;
 /// ```
 /// # Description
 ///
-/// Seed used by the client to prove in [CMSG_AUTH_SESSION] that it has authenticated with the auth server.
+/// Seed used by the client to prove in [CMSG_AUTH_SESSION](crate::world::version_1_12::CMSG_AUTH_SESSION) that it has authenticated with the auth server.
 /// # Comment
 ///
 /// First thing sent when a client connects to the world server.

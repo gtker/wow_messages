@@ -11,7 +11,7 @@ smsg SMSG_LOOT_ROLL = 0x02A2 {
     u32 item_random_property_id;
     /* TODO exact meaning? */
     u8 roll_number {
-        comment = "vmangos/cmangos/mangoszero: 0: Need for: [item name] > 127: you passed on: [item name]      Roll number";
+        comment = "vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number";
     }
     RollVote vote;
 }

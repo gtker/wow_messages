@@ -69,7 +69,7 @@ fn main() {
         if should_not_write_object(e.tags()) {
             continue;
         }
-        let s = print_enum(e);
+        let s = print_enum(e, &o);
         m.write_contents_to_file(e.name(), e.tags(), &s);
 
         definer_docs.push(print_docs_for_enum(e));
@@ -79,7 +79,7 @@ fn main() {
         if should_not_write_object(e.tags()) {
             continue;
         }
-        let s = print_flag(e);
+        let s = print_flag(e, &o);
         m.write_contents_to_file(e.name(), e.tags(), &s);
 
         definer_docs.push(print_docs_for_flag(e));

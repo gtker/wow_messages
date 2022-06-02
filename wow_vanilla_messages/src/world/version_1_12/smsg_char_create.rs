@@ -18,7 +18,7 @@ use std::io::Write;
 /// ```
 /// # Description
 ///
-/// Response to [CMSG_CHAR_CREATE].
+/// Response to [CMSG_CHAR_CREATE](crate::world::version_1_12::CMSG_CHAR_CREATE).
 pub struct SMSG_CHAR_CREATE {
     pub result: WorldResult,
 }

@@ -18,7 +18,7 @@ use std::io::Write;
 /// ```
 /// # Description
 ///
-/// Response to [CMSG_CHAR_ENUM].
+/// Response to [CMSG_CHAR_ENUM](crate::world::version_1_2::CMSG_CHAR_ENUM).
 pub struct SMSG_CHAR_ENUM {
     pub characters: Vec<Character>,
 }

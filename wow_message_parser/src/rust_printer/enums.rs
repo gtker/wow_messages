@@ -2,14 +2,14 @@ use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::rust_printer::{print_docc_description_and_comment, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
-use crate::DISPLAY_STR;
+use crate::{Objects, DISPLAY_STR};
 
-pub fn print_enum(e: &Definer) -> Writer {
+pub fn print_enum(e: &Definer, o: &Objects) -> Writer {
     let mut s = Writer::new(&get_import_path(e.tags()));
 
     includes(&mut s);
 
-    declaration(&mut s, e);
+    declaration(&mut s, e, o);
 
     common_impls(&mut s, e);
 
@@ -30,7 +30,7 @@ fn includes(s: &mut Writer) {
     s.newline();
 }
 
-fn declaration(s: &mut Writer, e: &Definer) {
+fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
     print_wowm_definition("enum", s, e);
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]");
@@ -40,7 +40,7 @@ fn declaration(s: &mut Writer, e: &Definer) {
     };
     s.new_enum(visibility, e.name(), |s| {
         for field in e.fields() {
-            print_docc_description_and_comment(s, field.tags());
+            print_docc_description_and_comment(s, field.tags(), o, e.tags());
 
             s.wln(format!("{},", field.name()));
         }

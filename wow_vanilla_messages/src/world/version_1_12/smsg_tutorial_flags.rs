@@ -28,7 +28,7 @@ use std::io::Write;
 /// # Comment
 ///
 /// All bits set means that all tutorials have been passed.
-/// Must be sent after [SMSG_LOGIN_VERIFY_WORLD] otherwise the client will SEGFAULT.
+/// Must be sent after [SMSG_LOGIN_VERIFY_WORLD](crate::world::version_1_12::SMSG_LOGIN_VERIFY_WORLD) otherwise the client will SEGFAULT.
 pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data0: u32,
     pub tutorial_data1: u32,

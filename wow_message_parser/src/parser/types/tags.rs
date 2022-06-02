@@ -1,6 +1,7 @@
 use std::fmt::{Display, Formatter};
 
-use crate::{COMMENT, DESCRIPTION, DISPLAY, LOGIN_LOGON_VERSIONS, TEST_STR, VERSIONS};
+use crate::file_utils::get_import_path;
+use crate::{Objects, COMMENT, DESCRIPTION, DISPLAY, LOGIN_LOGON_VERSIONS, TEST_STR, VERSIONS};
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Copy, Clone)]
 pub enum WorldVersion {
@@ -345,7 +346,7 @@ impl TagString {
         v
     }
 
-    pub fn as_rust_doc_lines(&self) -> Vec<String> {
+    pub fn as_rust_doc_lines(&self, o: &Objects, object_tags: &Tags) -> Vec<String> {
         let mut v = Vec::new();
 
         let mut current = String::new();
@@ -353,7 +354,10 @@ impl TagString {
         for i in &self.inner {
             match i {
                 TagStringSymbol::Text(s) => current.push_str(s),
-                TagStringSymbol::Link(s) => current.push_str(&format!("[{}]", s)),
+                TagStringSymbol::Link(s) => {
+                    let tags = o.get_tags_of_object(s, object_tags);
+                    current.push_str(&format!("[{}]({}::{})", s, get_import_path(tags), s))
+                }
                 TagStringSymbol::Newline => {
                     v.push(current.clone());
                     current.clear();

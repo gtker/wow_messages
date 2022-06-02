@@ -37,7 +37,7 @@ pub enum GuildEmblemResult {
     NOT_ENOUGH_MONEY,
     /// # Comment
     ///
-    /// mangoszero: [This version] fails silently.
+    /// mangoszero: This version fails silently.
     NO_MESSAGE,
 }
 

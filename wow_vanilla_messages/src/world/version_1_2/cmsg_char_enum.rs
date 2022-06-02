@@ -16,7 +16,7 @@ use std::io::Write;
 /// ```
 /// # Description
 ///
-/// Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE], or after failing to login with [SMSG_CHARACTER_LOGIN_FAILED].
+/// Sent after a successful [CMSG_AUTH_SESSION](crate::world::version_1_12::CMSG_AUTH_SESSION) and [SMSG_AUTH_RESPONSE](crate::world::version_1_2::SMSG_AUTH_RESPONSE), or after failing to login with [SMSG_CHARACTER_LOGIN_FAILED](crate::world::version_1_12::SMSG_CHARACTER_LOGIN_FAILED).
 pub struct CMSG_CHAR_ENUM {
 }
 

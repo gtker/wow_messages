@@ -15,7 +15,7 @@ enum GuildEmblemResult : u32 {
         comment = "vmangos: You can't afford to do that.";
     }
     NO_MESSAGE = 5 {
-        comment = "mangoszero: [This version] fails silently.";
+        comment = "mangoszero: This version fails silently.";
     }
 }
 

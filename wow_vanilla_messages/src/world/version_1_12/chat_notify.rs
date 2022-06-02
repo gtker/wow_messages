@@ -54,11 +54,11 @@ pub enum ChatNotify {
     LEFT_NOTICE,
     /// # Comment
     ///
-    /// Joined Channel: [%s] -- You joined
+    /// Joined Channel: %s -- You joined
     YOU_JOINED_NOTICE,
     /// # Comment
     ///
-    /// Left Channel: [%s] -- You left
+    /// Left Channel: %s -- You left
     YOU_LEFT_NOTICE,
     /// # Comment
     ///
@@ -74,68 +74,68 @@ pub enum ChatNotify {
     NOT_MODERATOR_NOTICE,
     /// # Comment
     ///
-    /// [%s] Password changed by %s.
+    /// %s Password changed by %s.
     PASSWORD_CHANGED_NOTICE,
     /// # Comment
     ///
-    /// [%s] Owner changed to %s.
+    /// %s Owner changed to %s.
     OWNER_CHANGED_NOTICE,
     /// # Comment
     ///
-    /// [%s] Player %s was not found.
+    /// %s Player %s was not found.
     PLAYER_NOT_FOUND_NOTICE,
     /// # Comment
     ///
-    /// [%s] You are not the channel owner.
+    /// %s You are not the channel owner.
     NOT_OWNER_NOTICE,
     /// # Comment
     ///
-    /// [%s] Channel owner is %s.
+    /// %s Channel owner is %s.
     CHANNEL_OWNER_NOTICE,
     MODE_CHANGE_NOTICE,
     /// # Comment
     ///
-    /// [%s] Channel announcements enabled by %s.
+    /// %s Channel announcements enabled by %s.
     ANNOUNCEMENTS_ON_NOTICE,
     /// # Comment
     ///
-    /// [%s] Channel announcements disabled by %s.
+    /// %s Channel announcements disabled by %s.
     ANNOUNCEMENTS_OFF_NOTICE,
     /// # Comment
     ///
-    /// [%s] Channel moderation enabled by %s.
+    /// %s Channel moderation enabled by %s.
     MODERATION_ON_NOTICE,
     /// # Comment
     ///
-    /// [%s] Channel moderation disabled by %s.
+    /// %s Channel moderation disabled by %s.
     MODERATION_OFF_NOTICE,
     /// # Comment
     ///
-    /// [%s] You do not have permission to speak.
+    /// %s You do not have permission to speak.
     MUTED_NOTICE,
     /// # Comment
     ///
-    /// [%s] Player %s kicked by %s.
+    /// %s Player %s kicked by %s.
     PLAYER_KICKED_NOTICE,
     /// # Comment
     ///
-    /// [%s] You are banned from that channel.
+    /// %s You are banned from that channel.
     BANNED_NOTICE,
     /// # Comment
     ///
-    /// [%s] Player %s banned by %s.
+    /// %s Player %s banned by %s.
     PLAYER_BANNED_NOTICE,
     /// # Comment
     ///
-    /// [%s] Player %s unbanned by %s.
+    /// %s Player %s unbanned by %s.
     PLAYER_UNBANNED_NOTICE,
     /// # Comment
     ///
-    /// [%s] Player %s is not banned.
+    /// %s Player %s is not banned.
     PLAYER_NOT_BANNED_NOTICE,
     /// # Comment
     ///
-    /// [%s] Player %s is already on the channel.
+    /// %s Player %s is already on the channel.
     PLAYER_ALREADY_MEMBER_NOTICE,
     /// # Comment
     ///
@@ -159,15 +159,15 @@ pub enum ChatNotify {
     NOT_MODERATED_NOTICE,
     /// # Comment
     ///
-    /// [%s] You invited %s to join the channel
+    /// %s You invited %s to join the channel
     PLAYER_INVITED_NOTICE,
     /// # Comment
     ///
-    /// [%s] %s has been banned.
+    /// %s %s has been banned.
     PLAYER_INVITE_BANNED_NOTICE,
     /// # Comment
     ///
-    /// [%s] The number of messages that can be sent to this channel is limited, please wait to send another message.
+    /// %s The number of messages that can be sent to this channel is limited, please wait to send another message.
     THROTTLED_NOTICE,
 }
 

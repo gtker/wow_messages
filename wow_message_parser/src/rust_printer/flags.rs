@@ -2,27 +2,28 @@ use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::rust_printer::enums::print_wowm_definition;
 use crate::rust_printer::{print_docc_description_and_comment, Writer};
+use crate::Objects;
 
-pub fn print_flag(e: &Definer) -> Writer {
+pub fn print_flag(e: &Definer, o: &Objects) -> Writer {
     let mut s = Writer::new(&get_import_path(e.tags()));
 
-    declaration(&mut s, e);
+    declaration(&mut s, e, o);
 
-    common_impls(&mut s, e);
+    common_impls(&mut s, e, o);
 
     s
 }
 
-fn declaration(s: &mut Writer, e: &Definer) {
+fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
     print_wowm_definition("flag", s, e);
 
-    print_docc_description_and_comment(s, e.tags());
+    print_docc_description_and_comment(s, e.tags(), o, e.tags());
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]");
     s.new_flag(e.name(), e.ty().rust_str(), |_| {});
 }
 
-fn common_impls(s: &mut Writer, e: &Definer) {
+fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
         s.funcn_pub_const(
             format!("new(inner: {ty})", ty = e.ty().rust_str()),
@@ -32,7 +33,7 @@ fn common_impls(s: &mut Writer, e: &Definer) {
             },
         );
 
-        print_fields(s, e);
+        print_fields(s, e, o);
 
         s.funcn_const("as_int(&self)", e.ty().rust_str(), |s| {
             s.wln("self.inner");
@@ -40,7 +41,7 @@ fn common_impls(s: &mut Writer, e: &Definer) {
     });
 }
 
-fn print_fields(s: &mut Writer, e: &Definer) {
+fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {
     for f in e.fields() {
         s.wln(format!(
             "pub(crate) const {name}: {ty} = {value:#04x};",
@@ -79,7 +80,7 @@ fn print_fields(s: &mut Writer, e: &Definer) {
                 s.wln(format!("(self.inner & Self::{name}) != 0", name = f.name()));
             });
 
-            print_docc_description_and_comment(s, f.tags());
+            print_docc_description_and_comment(s, f.tags(), o, e.tags());
             s.funcn_pub_const(format!("new_{name}()", name = f.name()), "Self", |s| {
                 s.wln(format!("Self {{ inner: Self::{name} }}", name = f.name()));
             });

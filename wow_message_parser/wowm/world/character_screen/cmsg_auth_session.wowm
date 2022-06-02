@@ -3,7 +3,7 @@
 cmsg CMSG_AUTH_SESSION = 0x1ED {
     u32 build;
     u32 server_id {
-        description = "This is sent to the client in [CMD_REALM_LIST_Server].";
+        description = "This is sent to the client in CMD_REALM_LIST_Server."; /* Don't hyperlink to work around Rust not being able to link */
     }
     CString username;
     u32 client_seed;

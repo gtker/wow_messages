@@ -39,7 +39,7 @@ fn simple_enum() {
     let o = get_all_impl_items();
 
     let d = o.enums().iter().find(|a| a.name() == "SimpleEnum").unwrap();
-    let s = print_enum(d);
+    let s = print_enum(d, &o);
 
     tcheck(&s, "simple_enum");
 }
@@ -49,7 +49,7 @@ fn simple_flag() {
     let o = get_all_impl_items();
 
     let d = o.flags().iter().find(|a| a.name() == "SimpleFlag").unwrap();
-    let s = print_flag(d);
+    let s = print_flag(d, &o);
 
     tcheck(&s, "simple_flag");
 }

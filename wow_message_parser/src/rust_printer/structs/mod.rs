@@ -19,7 +19,7 @@ pub fn print_struct(e: &Container, o: &Objects) -> Writer {
 
     print_includes(&mut s, e, o);
 
-    print_declaration(&mut s, e);
+    print_declaration(&mut s, e, o);
 
     print_common_impls::print_common_impls(&mut s, e, o);
 
@@ -117,7 +117,7 @@ fn can_derive_default(e: &Container) -> bool {
     true
 }
 
-fn print_declaration(s: &mut Writer, e: &Container) {
+fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
     s.w("#[derive(Debug, PartialEq, Clone");
     if can_derive_default(e) {
         s.w_no_indent(", Default");
@@ -130,11 +130,11 @@ fn print_declaration(s: &mut Writer, e: &Container) {
 
     print_struct_wowm_definition(s, e);
 
-    print_docc_description_and_comment(s, e.tags());
+    print_docc_description_and_comment(s, e.tags(), o, e.tags());
 
     s.new_struct(e.name(), |s| {
         for member in e.rust_object().members_in_struct() {
-            print_docc_description_and_comment(s, member.tags());
+            print_docc_description_and_comment(s, member.tags(), o, e.tags());
 
             s.wln(format!(
                 "pub {name}: {ty},",
@@ -144,7 +144,7 @@ fn print_declaration(s: &mut Writer, e: &Container) {
         }
 
         if let Some(optional) = e.rust_object().optional() {
-            print_docc_description_and_comment(s, optional.tags());
+            print_docc_description_and_comment(s, optional.tags(), o, e.tags());
             s.wln(format!(
                 "pub {name}: Option<{ty}>,",
                 name = optional.name(),

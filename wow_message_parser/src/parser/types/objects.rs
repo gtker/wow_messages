@@ -137,7 +137,10 @@ impl Objects {
             return e.tags();
         }
 
-        panic!("unable to find type");
+        panic!(
+            "unable to find type: '{}' with tags '{:?}'",
+            type_name, finder_tags
+        );
     }
 
     pub fn get_world_versions_with_objects(&self) -> Vec<WorldVersion> {

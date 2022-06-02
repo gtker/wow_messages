@@ -18,7 +18,7 @@ use std::io::Write;
 /// ```
 /// # Description
 ///
-/// Request of new name for character. This is only sent by the client if RENAME is set in the [CharacterFlags] of [SMSG_CHAR_ENUM] and the client tries to login.
+/// Request of new name for character. This is only sent by the client if RENAME is set in the [CharacterFlags](crate::world::version_1_12::CharacterFlags) of [SMSG_CHAR_ENUM](crate::world::version_1_12::SMSG_CHAR_ENUM) and the client tries to login.
 pub struct CMSG_CHAR_RENAME {
     pub character: Guid,
     pub new_name: String,
