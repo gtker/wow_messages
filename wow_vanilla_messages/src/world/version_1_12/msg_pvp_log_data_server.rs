@@ -4,7 +4,7 @@ use crate::world::version_1_12::BattlegroundPlayer;
 use crate::world::version_1_12::BattlegroundWinner;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm#L29):
@@ -55,7 +55,7 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
         self.size() as u16
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // status: BattlegroundEndStatus
         let status: BattlegroundEndStatus = crate::util::read_u8_le(r)?.try_into()?;
 

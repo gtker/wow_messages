@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_ignore_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_ignore_list.wowm#L3):
@@ -33,7 +33,7 @@ impl ServerMessage for SMSG_IGNORE_LIST {
         self.size() as u16
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_ignored: u8
         let amount_of_ignored = crate::util::read_u8_le(r)?;
 

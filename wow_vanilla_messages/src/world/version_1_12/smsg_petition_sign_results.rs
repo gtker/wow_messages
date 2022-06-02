@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::version_1_12::PetitionResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -40,7 +40,7 @@ impl ServerMessage for SMSG_PETITION_SIGN_RESULTS {
         20
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // petition_guid: Guid
         let petition_guid = Guid::read(r)?;
 

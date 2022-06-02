@@ -3,7 +3,7 @@ use crate::world::version_1_12::Area;
 use crate::world::version_1_12::MeetingStoneStatus;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -35,7 +35,7 @@ impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {
         5
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // area: Area
         let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 

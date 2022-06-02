@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::BattlegroundPlayerPosition;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm#L9):
@@ -56,7 +56,7 @@ impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         self.size() as u16
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_carriers: u32
         let _amount_of_carriers = crate::util::read_u32_le(r)?;
         // amount_of_carriers is expected to always be 0 (0)

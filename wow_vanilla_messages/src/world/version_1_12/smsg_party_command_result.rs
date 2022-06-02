@@ -3,7 +3,7 @@ use crate::world::version_1_12::PartyOperation;
 use crate::world::version_1_12::PartyResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_party_command_result.wowm:20`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_command_result.wowm#L20):
@@ -41,7 +41,7 @@ impl ServerMessage for SMSG_PARTY_COMMAND_RESULT {
         self.size() as u16
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // operation: PartyOperation
         let operation: PartyOperation = (crate::util::read_u32_le(r)? as u8).try_into()?;
 

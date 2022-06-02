@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::version_1_12::RaidTargetIndex;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L35):
@@ -99,7 +99,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
         self.size() as u16
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // index: RaidTargetIndex
         let index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;
 

@@ -4,7 +4,7 @@ use crate::world::version_1_12::GroupLootSetting;
 use crate::world::version_1_12::ItemQuality;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -41,7 +41,7 @@ impl ClientMessage for CMSG_LOOT_METHOD {
         10
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // loot_setting: GroupLootSetting
         let loot_setting: GroupLootSetting = (crate::util::read_u32_le(r)? as u8).try_into()?;
 

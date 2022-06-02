@@ -3,7 +3,7 @@ use crate::world::version_1_12::Map;
 use crate::world::version_1_12::Vector3d;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -45,7 +45,7 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
         28
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // time_in_msec: u64
         let time_in_msec = crate::util::read_u64_le(r)?;
 

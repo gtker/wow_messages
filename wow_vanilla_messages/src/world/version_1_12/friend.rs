@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::version_1_12::Area;
 use crate::world::version_1_12::Class;
 use crate::world::version_1_12::FriendStatus;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L11):

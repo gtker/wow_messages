@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_8::SecurityFlag;
 use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm:315`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm#L315):

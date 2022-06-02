@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::UnitStandState;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -29,7 +29,7 @@ impl ClientMessage for CMSG_STANDSTATECHANGE {
         1
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // animation_state: UnitStandState
         let animation_state: UnitStandState = (crate::util::read_u32_le(r)? as u8).try_into()?;
 

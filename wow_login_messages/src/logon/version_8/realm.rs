@@ -4,7 +4,7 @@ use crate::logon::version_2::RealmCategory;
 use crate::logon::version_8::RealmFlag;
 use crate::logon::version_2::RealmType;
 use crate::logon::all::Version;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:138`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L138):

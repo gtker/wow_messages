@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::DuelWinnerReason;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/duel/smsg_duel_winner.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/duel/smsg_duel_winner.wowm#L8):
@@ -42,7 +42,7 @@ impl ServerMessage for SMSG_DUEL_WINNER {
         self.size() as u16
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // reason: DuelWinnerReason
         let reason: DuelWinnerReason = crate::util::read_u8_le(r)?.try_into()?;
 

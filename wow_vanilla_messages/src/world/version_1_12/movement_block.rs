@@ -5,7 +5,7 @@ use crate::world::version_1_12::SplineFlag;
 use crate::world::version_1_12::TransportInfo;
 use crate::world::version_1_12::UpdateFlag;
 use crate::world::version_1_12::Vector3d;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:91`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L91):

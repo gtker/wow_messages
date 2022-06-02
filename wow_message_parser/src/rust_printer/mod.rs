@@ -167,9 +167,10 @@ impl Writer {
         self.closing_curly();
         self.newline();
 
-        self.open_curly(
-                format!("fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, {}>", error_name.as_ref())
-            );
+        self.open_curly(format!(
+            "fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {}>",
+            error_name.as_ref()
+        ));
 
         read_function(self, ImplType::Std);
 

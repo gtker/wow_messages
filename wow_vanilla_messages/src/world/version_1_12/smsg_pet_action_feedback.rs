@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::PetFeedback;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -29,7 +29,7 @@ impl ServerMessage for SMSG_PET_ACTION_FEEDBACK {
         1
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // feedback: PetFeedback
         let feedback: PetFeedback = crate::util::read_u8_le(r)?.try_into()?;
 

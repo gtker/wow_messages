@@ -4,7 +4,7 @@ use crate::world::version_1_12::SimpleFlag;
 use crate::world::version_1_12::StructWithAllBuiltInTypes;
 use crate::{ClientMessage, ServerMessage};
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:61`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L61):
@@ -40,7 +40,7 @@ impl ClientMessage for MessageWithComplexTypes {
         self.size() as u16
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // simple_enum: SimpleEnum
         let simple_enum: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -78,7 +78,7 @@ impl ServerMessage for MessageWithComplexTypes {
         self.size() as u16
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // simple_enum: SimpleEnum
         let simple_enum: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
 

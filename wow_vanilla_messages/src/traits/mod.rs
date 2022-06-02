@@ -150,10 +150,7 @@ pub trait ServerMessage: Sized {
     }
 
     #[doc(hidden)]
-    fn read_body<R: std::io::Read>(
-        r: &mut R,
-        body_size: u32,
-    ) -> Result<Self, crate::errors::ParseError>;
+    fn read_body(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError>;
 }
 
 pub trait ClientMessage: Sized {
@@ -274,10 +271,7 @@ pub trait ClientMessage: Sized {
     }
 
     #[doc(hidden)]
-    fn read_body<R: std::io::Read>(
-        r: &mut R,
-        body_size: u32,
-    ) -> Result<Self, crate::errors::ParseError>;
+    fn read_body(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError>;
 }
 
 fn get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {

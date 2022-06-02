@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]

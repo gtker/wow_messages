@@ -84,7 +84,7 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
         _ => {}
     }
 
-    s.wln("use std::io::Write;");
+    s.wln("use std::io::{Write, Read};");
 
     s.newline();
 }

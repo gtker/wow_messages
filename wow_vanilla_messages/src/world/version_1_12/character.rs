@@ -8,7 +8,7 @@ use crate::world::version_1_12::Gender;
 use crate::world::version_1_12::Map;
 use crate::world::version_1_12::Race;
 use crate::world::version_1_12::Vector3d;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L17):

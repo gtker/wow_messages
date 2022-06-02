@@ -6,7 +6,7 @@ use crate::world::version_1_12::GroupType;
 use crate::world::version_1_12::ItemQuality;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_list.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_list.wowm#L14):
@@ -75,7 +75,7 @@ impl ServerMessage for SMSG_GROUP_LIST {
         self.size() as u16
     }
 
-    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // group_type: GroupType
         let group_type: GroupType = crate::util::read_u8_le(r)?.try_into()?;
 

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::MovementFlags;
 use crate::world::version_1_12::TransportInfo;
 use crate::world::version_1_12::Vector3d;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement.wowm:38`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement.wowm#L38):

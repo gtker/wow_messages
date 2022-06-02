@@ -4,7 +4,7 @@ use crate::logon::all::Os;
 use crate::logon::all::Platform;
 use crate::logon::all::Version;
 use crate::ClientMessage;
-use std::io::Write;
+use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L40):
