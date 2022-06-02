@@ -1,4 +1,4 @@
-#tag_all login_logon_versions "*";
+#tag_all login_versions "*";
 
 enum Os : u32 {
     WINDOWS = "\0Win";

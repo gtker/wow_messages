@@ -233,5 +233,5 @@ Any object with a world version (`versions` [tag](tags.md)).
 
 ### `LoginVersion`
 
-Any object with a login version (`login_logon_versions` [tag](tags.md)).
+Any object with a login version (`login_versions` [tag](tags.md)).
 

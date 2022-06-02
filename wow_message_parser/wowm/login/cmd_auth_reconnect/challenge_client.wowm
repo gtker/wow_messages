@@ -1,4 +1,4 @@
-#tag_all login_logon_versions "*";
+#tag_all login_versions "*";
 
 clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
     u8 protocol_version {

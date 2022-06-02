@@ -43,7 +43,7 @@ const DISPLAY: &str = "display";
 const TEST_STR: &str = "test";
 const DISPLAY_STR: &str = "display";
 const SKIP_STR: &str = "skip_codegen";
-const LOGIN_VERSIONS: &str = "login_logon_versions";
+const LOGIN_VERSIONS: &str = "login_versions";
 
 // Also used in /utils.rs
 const CSTRING_SMALLEST_ALLOWED: usize = 1;

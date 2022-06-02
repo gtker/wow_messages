@@ -5,7 +5,7 @@ enum RealmType : u8 {
     ROLEPLAYING = 6;
     ROLEPLAYING_PLAYER_VS_PLAYER = 8;
 } {
-    login_logon_versions = "2 3 8";
+    login_versions = "2 3 8";
 }
 
 flag RealmFlag : u8 {
@@ -16,7 +16,7 @@ flag RealmFlag : u8 {
     FORCE_GREEN_RECOMMENDED = 0x40;
     FORCE_RED_FULL = 0x80;
 } {
-    login_logon_versions = "2 3";
+    login_versions = "2 3";
 }
 
 flag RealmFlag : u8 {
@@ -28,7 +28,7 @@ flag RealmFlag : u8 {
     FORCE_GREEN_RECOMMENDED = 0x40;
     FORCE_RED_FULL = 0x80;
 } {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 enum Population : u32 {
@@ -37,7 +37,7 @@ enum Population : u32 {
     BLUE_RECOMMENDED = 0x44160000;
     OTHER = self.value;
 } {
-    login_logon_versions = "2 3 8";
+    login_versions = "2 3 8";
 }
 
 enum RealmCategory : u8 {
@@ -47,7 +47,7 @@ enum RealmCategory : u8 {
     THREE = 0x3;
     FIVE = 0x5;
 } {
-    login_logon_versions = "2 3 8";
+    login_versions = "2 3 8";
 }
 
 struct Realm {
@@ -60,7 +60,7 @@ struct Realm {
     RealmCategory category;
     u8 realm_id;
 } {
-    login_logon_versions = "2 3";
+    login_versions = "2 3";
 }
 
 slogin CMD_REALM_LIST_Server = 0x10 {
@@ -70,7 +70,7 @@ slogin CMD_REALM_LIST_Server = 0x10 {
     Realm[number_of_realms] realms;
     u16 footer_padding = 0;
 } {
-    login_logon_versions = "2 3";
+    login_versions = "2 3";
 }
 
 test CMD_REALM_LIST_Server {
@@ -101,7 +101,7 @@ test CMD_REALM_LIST_Server {
     0x02, /* realm_id */
     0x00, 0x00, /* footer_padding */
 ] {
-    login_logon_versions = "2 3";
+    login_versions = "2 3";
 }
 
 test CMD_REALM_LIST_Server {
@@ -132,7 +132,7 @@ test CMD_REALM_LIST_Server {
     0x02, /* realm_id */
     0x00, 0x00, /* footer_padding */
 ] {
-    login_logon_versions = "2 3";
+    login_versions = "2 3";
 }
 
 struct Realm {
@@ -151,7 +151,7 @@ struct Realm {
         Version version;
     }
 } {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 slogin CMD_REALM_LIST_Server = 0x10 {
@@ -161,7 +161,7 @@ slogin CMD_REALM_LIST_Server = 0x10 {
     Realm[number_of_realms] realms;
     u16 footer_padding = 0;
 } {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 test CMD_REALM_LIST_Server {
@@ -194,7 +194,7 @@ test CMD_REALM_LIST_Server {
     0x02, /* realm_id */
     0x00, 0x00, /* footer_padding */
 ] {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 test CMD_REALM_LIST_Server {
@@ -237,5 +237,5 @@ test CMD_REALM_LIST_Server {
     0xF3, 0x16, /* version.build */
     0x00, 0x00, /* footer_padding */
 ] {
-    login_logon_versions = "8";
+    login_versions = "8";
 }

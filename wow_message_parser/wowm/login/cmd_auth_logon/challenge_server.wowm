@@ -21,7 +21,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
         }
     }
 } {
-    login_logon_versions = "2";
+    login_versions = "2";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -70,7 +70,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0xba, 0xa3, 0x1e, 0x99, 0xa0, 0x0b, 0x21, 0x57, 0xfc, 0x37, 
     0x3f, 0xb3, 0x69, 0xcd, 0xd2, 0xf1, /* CRC Salt */
 ] {
-    login_logon_versions = "2";
+    login_versions = "2";
 }
 
 slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
@@ -102,7 +102,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
         }
     }
 } {
-    login_logon_versions = "3";
+    login_versions = "3";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -162,7 +162,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
     0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, /* PIN salt */
 ] {
-    login_logon_versions = "3";
+    login_versions = "3";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -215,7 +215,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 
     0x00, /* Two factor fields enabled: False */
 ] {
-    login_logon_versions = "3";
+    login_versions = "3";
 }
 
 slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
@@ -255,7 +255,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
         }
     }
 } {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -308,7 +308,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 
     0x00, /* Two factor fields enabled: False */
 ] {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -368,7 +368,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
     0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, /* PIN salt */
 ] {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -423,7 +423,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0x04, /* Two factor fields enabled: AUTHENTICATOR */
     0x01, /* unknown5 */
 ] {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -487,7 +487,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0xCC, /* unknown3 */
     0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, /* unknown4 */
 ] {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -497,7 +497,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0x00, /* Protocol Version: 0 */
     0x05, /* Result: FAIL_INCORRECT_PASSWORD (5) */
 ] {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -564,7 +564,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 
     0x01, /* unknown5 */
 ] {
-    login_logon_versions = "8";
+    login_versions = "8";
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -574,5 +574,5 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0x00, /* Protocol Version: 0 */
     0x05, /* Result: FAIL_INCORRECT_PASSWORD (5) */
 ] {
-    login_logon_versions = "8";
+    login_versions = "8";
 }

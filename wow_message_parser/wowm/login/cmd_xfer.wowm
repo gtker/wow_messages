@@ -1,4 +1,4 @@
-#tag_all login_logon_versions "3";
+#tag_all login_versions "3";
 
 slogin CMD_XFER_INITIATE = 0x30 {}
 

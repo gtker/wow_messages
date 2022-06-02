@@ -1,4 +1,4 @@
-#tag_all login_logon_versions "2 8";
+#tag_all login_versions "2 8";
 
 clogin CMD_AUTH_RECONNECT_PROOF_Client = 0x03 {
     u8[16] proof_data;
