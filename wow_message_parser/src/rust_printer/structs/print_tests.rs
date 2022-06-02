@@ -463,38 +463,47 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                     .find(|a| a.object_ty() == f.ty() && a.name() == f.name())
                     .unwrap();
 
-                if field.ty() == UfType::Guid {
-                    s.wln(format!(
-                        ".set_{ty}_{field}(Guid::new({value}))",
-                        value = f.value(),
-                        ty = f.ty(),
-                        field = f.name()
-                    ));
-                } else if field.ty() == UfType::Bytes {
-                    let value = parse_value(f.value()).unwrap() as u32;
-                    let value = value.to_le_bytes();
+                match field.ty() {
+                    UfType::Guid => {
+                        s.wln(format!(
+                            ".set_{ty}_{field}(Guid::new({value}))",
+                            value = f.value(),
+                            ty = f.ty(),
+                            field = f.name()
+                        ));
+                    }
+                    UfType::Bytes => {
+                        let (a, b, c, d) = split_u32_str_into_u8s(f.value());
 
-                    let a = value[0];
-                    let b = value[1];
-                    let c = value[2];
-                    let d = value[3];
+                        s.wln(format!(
+                            ".set_{ty}_{field}({a}, {b}, {c}, {d})",
+                            ty = field.object_ty(),
+                            field = f.name(),
+                            a = a,
+                            b = b,
+                            c = c,
+                            d = d
+                        ))
+                    }
+                    UfType::BytesWithTypes(_, _, _, _) => {
+                        let (a, b, c, d) = split_u32_str_into_u8s(f.value());
 
-                    s.wln(format!(
-                        ".set_{ty}_{field}({a}, {b}, {c}, {d})",
-                        ty = field.object_ty(),
-                        field = f.name(),
-                        a = a,
-                        b = b,
-                        c = c,
-                        d = d
-                    ))
-                } else {
-                    s.wln(format!(
+                        s.wln(format!(
+                            ".set_{ty}_{field}({a}.try_into().unwrap(), {b}.try_into().unwrap(), {c}.try_into().unwrap(), {d}.try_into().unwrap())",
+                            ty = field.object_ty(),
+                            field = f.name(),
+                            a = a,
+                            b = b,
+                            c = c,
+                            d = d
+                        ))
+                    }
+                    _ => s.wln(format!(
                         ".set_{ty}_{field}({value})",
                         value = f.value(),
                         ty = f.ty(),
                         field = f.name()
-                    ))
+                    )),
                 }
             }
 
@@ -502,4 +511,11 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
             s.wln("),")
         }
     }
+}
+
+fn split_u32_str_into_u8s(a: &str) -> (u8, u8, u8, u8) {
+    let value = parse_value(a).unwrap() as u32;
+    let value = value.to_le_bytes();
+
+    (value[0], value[1], value[2], value[3])
 }

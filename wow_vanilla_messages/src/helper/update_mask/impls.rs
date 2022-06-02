@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::version_1_12::{Race, Class, Gender, Power};
 use crate::helper::update_mask::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};
 
 impl UpdateItem {
@@ -414,9 +415,9 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_BYTES_0(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_0(mut self, a: Race, b: Class, c: Gender, d: Power) -> Self {
         self.header_set(36);
-        self.values.insert(36, u32::from_le_bytes([a, b, c, d]));
+        self.values.insert(36, u32::from_le_bytes([a.as_int(), b.as_int(), c.as_int(), d.as_int()]));
         self
     }
 
@@ -891,9 +892,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_BYTES_0(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_0(mut self, a: Race, b: Class, c: Gender, d: Power) -> Self {
         self.header_set(36);
-        self.values.insert(36, u32::from_le_bytes([a, b, c, d]));
+        self.values.insert(36, u32::from_le_bytes([a.as_int(), b.as_int(), c.as_int(), d.as_int()]));
         self
     }
 

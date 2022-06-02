@@ -109,7 +109,7 @@ mod test {
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
                             .set_unit_HEALTH(100)
-                            .set_unit_BYTES_0(1, 1, 1, 1)
+                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
@@ -174,7 +174,7 @@ mod test {
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
                             .set_unit_HEALTH(100)
-                            .set_unit_BYTES_0(1, 1, 1, 1)
+                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
@@ -239,7 +239,7 @@ mod test {
                         mask2: UpdateMask::Player(UpdatePlayer::new()
                             .set_object_GUID(Guid::new(4))
                             .set_unit_HEALTH(100)
-                            .set_unit_BYTES_0(1, 1, 1, 1)
+                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
@@ -321,7 +321,7 @@ mod test {
                             .set_unit_MAXHEALTH(100)
                             .set_unit_LEVEL(1)
                             .set_unit_FACTIONTEMPLATE(1)
-                            .set_unit_BYTES_0(1, 1, 1, 1)
+                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                             .set_unit_DISPLAYID(50)
                             .set_unit_NATIVEDISPLAYID(50)
                         ),
@@ -392,7 +392,7 @@ mod test {
                             .set_unit_MAXHEALTH(100)
                             .set_unit_LEVEL(1)
                             .set_unit_FACTIONTEMPLATE(1)
-                            .set_unit_BYTES_0(1, 1, 1, 1)
+                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                             .set_unit_DISPLAYID(50)
                             .set_unit_NATIVEDISPLAYID(50)
                         ),
@@ -463,7 +463,7 @@ mod test {
                             .set_unit_MAXHEALTH(100)
                             .set_unit_LEVEL(1)
                             .set_unit_FACTIONTEMPLATE(1)
-                            .set_unit_BYTES_0(1, 1, 1, 1)
+                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                             .set_unit_DISPLAYID(50)
                             .set_unit_NATIVEDISPLAYID(50)
                         ),

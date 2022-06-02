@@ -45,6 +45,17 @@ pub fn print_update_mask() {
 
     let mut s = Writer::new("");
     s.wln("use crate::Guid;");
+    for m in FIELDS {
+        match m.ty() {
+            UfType::BytesWithTypes(a, b, c, d) => s.wln(format!(
+                // The UpdateMask implementation realistically only works with 1.12
+                "use crate::version_1_12::{{{}, {}, {}, {}}};",
+                a, b, c, d
+            )),
+            _ => {}
+        }
+    }
+
     s.wln("use crate::helper::update_mask::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};");
     s.newline();
 
@@ -63,16 +74,11 @@ pub fn print_update_mask() {
 }
 
 fn print_functions(s: &mut Writer, m: &MemberType) {
-    let parameter = match m.ty {
-        UfType::Guid => "v: Guid",
-        UfType::Int => "v: i32",
-        UfType::Float => "v: f32",
-        UfType::Bytes => "a: u8, b: u8, c: u8, d: u8",
-        UfType::TwoShort => "v: u32",
-    };
     s.open_curly(format!(
         "pub fn set_{}_{}(mut self, {}) -> Self",
-        m.object_ty, m.name, parameter
+        m.object_ty,
+        m.name,
+        m.ty.parameter_str(),
     ));
 
     s.wln(format!("self.header_set({});", m.offset));
@@ -95,6 +101,9 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
                 UfType::Float => "u32::from_le_bytes(v.to_le_bytes())",
                 UfType::Bytes => "u32::from_le_bytes([a, b, c, d])",
                 UfType::TwoShort => "v",
+                UfType::BytesWithTypes(_, _, _, _) => {
+                    "u32::from_le_bytes([a.as_int(), b.as_int(), c.as_int(), d.as_int()])"
+                }
                 _ => unreachable!(),
             };
 
@@ -139,7 +148,33 @@ pub enum UfType {
     Int,
     Float,
     Bytes,
+    BytesWithTypes(&'static str, &'static str, &'static str, &'static str),
     TwoShort,
+}
+
+const GUID_TYPE: &str = "Guid";
+const INT_TYPE: &str = "i32";
+const FLOAT_TYPE: &str = "f32";
+const TWO_SHORT_TYPE: &str = "u32";
+
+impl UfType {
+    pub fn parameter_str(&self) -> String {
+        format!(
+            "v: {}",
+            match self {
+                UfType::Guid => GUID_TYPE,
+                UfType::Int => INT_TYPE,
+                UfType::Float => FLOAT_TYPE,
+                UfType::TwoShort => TWO_SHORT_TYPE,
+                UfType::Bytes => {
+                    return "a: u8, b: u8, c: u8, d: u8".to_string();
+                }
+                UfType::BytesWithTypes(a, b, c, d) => {
+                    return format!("a: {}, b: {}, c: {}, d: {}", a, b, c, d);
+                }
+            }
+        )
+    }
 }
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
@@ -232,7 +267,13 @@ pub const FIELDS: [MemberType; 290] = [
         1,
         UfType::Int,
     ),
-    MemberType::new(UpdateMaskType::Unit, "BYTES_0", 0x24, 1, UfType::Bytes),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "BYTES_0",
+        0x24,
+        1,
+        UfType::BytesWithTypes("Race", "Class", "Gender", "Power"),
+    ),
     MemberType::new(
         UpdateMaskType::Unit,
         "VIRTUAL_ITEM_SLOT_DISPLAY",
