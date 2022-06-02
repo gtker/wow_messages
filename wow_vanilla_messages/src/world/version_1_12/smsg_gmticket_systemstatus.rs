@@ -15,6 +15,7 @@ pub struct SMSG_GMTICKET_SYSTEMSTATUS {
     /// # Comment
     ///
     /// mangoszero/cmangos/vmangos all only send 1 for true and 0 for false. vmangos: Note: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor
+    ///
     pub will_accept_tickets: u32,
 }
 

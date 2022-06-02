@@ -18,10 +18,12 @@ pub struct CMSG_ITEM_TEXT_QUERY {
     /// # Comment
     ///
     /// vmangos/cmangos/mangoszero: this value can be item id in bag, but it is also mail id
+    ///
     pub mail_id: u32,
     /// # Comment
     ///
     /// vmangos/cmangos/mangoszero: maybe something like state - 0x70000000
+    ///
     pub unknown1: u32,
 }
 

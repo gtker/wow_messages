@@ -18,6 +18,7 @@ pub struct CooldownSpell {
     /// # Comment
     ///
     /// cmangos/mangoszero: cast item id
+    ///
     pub item_id: u16,
     pub spell_category: u16,
     pub cooldown_in_msecs: u32,

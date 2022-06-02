@@ -17,6 +17,7 @@ pub enum LogoutResult {
     /// # Comment
     ///
     /// vmangos checks for aura 9454. Has FIXME - Need the correct value.
+    ///
     FAILURE_FROZEN_BY_GM,
     FAILURE_JUMPING_OR_FALLING,
 }

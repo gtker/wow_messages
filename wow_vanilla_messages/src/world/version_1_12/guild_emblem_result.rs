@@ -17,23 +17,28 @@ pub enum GuildEmblemResult {
     /// # Comment
     ///
     /// Guild Emblem saved.
+    ///
     SUCCESS,
     INVALID_TABARD_COLORS,
     /// # Comment
     ///
     /// vmangos: You are not part of a guild!
+    ///
     NO_GUILD,
     /// # Comment
     ///
     /// vmangos: Only guild leaders can create emblems.
+    ///
     NOT_GUILD_MASTER,
     /// # Comment
     ///
     /// vmangos: You can't afford to do that.
+    ///
     NOT_ENOUGH_MONEY,
     /// # Comment
     ///
     /// mangoszero: This version fails silently.
+    ///
     NO_MESSAGE,
 }
 

@@ -14,14 +14,17 @@ pub enum GmTicketEscalationStatus {
     /// # Comment
     ///
     /// ticket is not currently assigned to a gm
+    ///
     GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED,
     /// # Comment
     ///
     /// ticket is assigned to a normal gm
+    ///
     GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED,
     /// # Comment
     ///
     /// ticket is in the escalation queue
+    ///
     GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED,
 }
 

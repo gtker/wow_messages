@@ -25,6 +25,7 @@ use std::io::{Write, Read};
 /// # Description
 ///
 /// Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE](crate::world::version_1_12::SMSG_CHAR_CREATE).
+///
 pub struct CMSG_CHAR_CREATE {
     pub name: String,
     pub race: Race,

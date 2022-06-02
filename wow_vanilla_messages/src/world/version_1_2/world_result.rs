@@ -93,121 +93,150 @@ pub enum WorldResult {
     /// # Description
     ///
     /// Shows `Success` with `Okay` button.
+    ///
     RESPONSE_SUCCESS,
     /// # Description
     ///
     /// Shows `Failure` with `Okay` button.
+    ///
     RESPONSE_FAILURE,
     /// # Description
     ///
     /// Shows `Cancelled` with `Okay` button.
+    ///
     RESPONSE_CANCELLED,
     /// # Description
     ///
     /// Shows `Disconnected from server` with `Okay` button.
+    ///
     RESPONSE_DISCONNECTED,
     /// # Description
     ///
     /// Shows `Failed to connect. Please be sure that your computer is currently connected to the internet, and that no security features on your system might be blocking traffic. See www.wow-europe.com/en/support for more information.` with `Okay` button.
+    ///
     RESPONSE_FAILED_TO_CONNECT,
     /// # Description
     ///
     /// Shows `Connected` with `Okay` button.
+    ///
     RESPONSE_CONNECTED,
     /// # Description
     ///
     /// Shows `Wrong client version` with `Okay` button.
+    ///
     RESPONSE_VERSION_MISMATCH,
     /// # Description
     ///
     /// Shows `Connecting to server...` with `Okay` button.
+    ///
     CSTATUS_CONNECTING,
     /// # Description
     ///
     /// Shows `Negotiating security` with `Okay` button.
+    ///
     CSTATUS_NEGOTIATING_SECURITY,
     /// # Description
     ///
     /// Shows `Security negotiation complete` with `Okay` button.
+    ///
     CSTATUS_NEGOTIATION_COMPLETE,
     /// # Description
     ///
     /// Shows `Security negotiation failed` with `Okay` button.
+    ///
     CSTATUS_NEGOTIATION_FAILED,
     /// # Description
     ///
     /// Shows `Authenticating` with `Okay` button.
+    ///
     CSTATUS_AUTHENTICATING,
     /// # Description
     ///
     /// Shows `Authentication Successful` with `Okay` button.
+    ///
     AUTH_OK,
     /// # Description
     ///
     /// Shows `Authentication failed` with `Okay` button.
+    ///
     AUTH_FAILED,
     /// # Description
     ///
     /// Shows `Login unavailable - Please contact Technical Support at http://www.wow-europe.com/en/support/` with `Okay` button.
+    ///
     AUTH_REJECT,
     /// # Description
     ///
     /// Shows `Server is not valid` with `Okay` button.
+    ///
     AUTH_BAD_SERVER_PROOF,
     /// # Description
     ///
     /// Shows `System unavailable - Please try again later` with `Okay` button.
+    ///
     AUTH_UNAVAILABLE,
     AUTH_SYSTEM_ERROR,
     /// # Description
     ///
     /// Shows `Billing system error` with `Okay` button.
+    ///
     AUTH_BILLING_ERROR,
     /// # Description
     ///
     /// Shows `Account billing has expired` with `Okay` button.
+    ///
     AUTH_BILLING_EXPIRED,
     /// # Description
     ///
     /// Shows `Wrong client version` with `Okay` button.
+    ///
     AUTH_VERSION_MISMATCH,
     /// # Description
     ///
     /// Shows `Unknown account` with `Okay` button.
+    ///
     AUTH_UNKNOWN_ACCOUNT,
     /// # Description
     ///
     /// Shows `Incorrect Password` with `Okay` button.
+    ///
     AUTH_INCORRECT_PASSWORD,
     /// # Description
     ///
     /// Shows `Session Expired` with `Okay` button.
+    ///
     AUTH_SESSION_EXPIRED,
     AUTH_SERVER_SHUTTING_DOWN,
     /// # Description
     ///
     /// Shows `Already Logging In` with `Okay` button.
+    ///
     AUTH_ALREADY_LOGGING_IN,
     /// # Description
     ///
     /// Shows `Invalid Login Server` with `Okay` button.
+    ///
     AUTH_LOGIN_SERVER_NOT_FOUND,
     AUTH_WAIT_QUEUE,
     /// # Description
     ///
     /// Shows `This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.` with `Okay` button.
+    ///
     AUTH_BANNED,
     /// # Description
     ///
     /// Shows `This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/` with `Okay` button.
+    ///
     AUTH_ALREADY_ONLINE,
     /// # Description
     ///
     /// Shows `Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.` with `Okay` button.
+    ///
     AUTH_NO_TIME,
     /// # Description
     ///
     /// Shows `This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus` with `Okay` button.
+    ///
     AUTH_DB_BUSY,
     AUTH_SUSPENDED,
     AUTH_PARENTAL_CONTROL,

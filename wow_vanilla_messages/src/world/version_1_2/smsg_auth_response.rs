@@ -22,6 +22,7 @@ use std::io::{Write, Read};
 /// # Description
 ///
 /// Response to [CMSG_AUTH_SESSION](crate::world::version_1_12::CMSG_AUTH_SESSION).
+///
 pub struct SMSG_AUTH_RESPONSE {
     pub result: SMSG_AUTH_RESPONSE_WorldResult,
 }

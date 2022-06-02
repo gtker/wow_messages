@@ -13,6 +13,7 @@ use std::io::{Write, Read};
 /// # Description
 ///
 /// Sent by client when cinematic beings.
+///
 pub struct CMSG_NEXT_CINEMATIC_CAMERA {
 }
 

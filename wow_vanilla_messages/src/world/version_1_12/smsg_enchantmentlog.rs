@@ -19,6 +19,7 @@ use std::io::{Write, Read};
 /// # Comment
 ///
 /// cmangos and vmangos/mangoszero disagree about packed and extra u8
+///
 pub struct SMSG_ENCHANTMENTLOG {
     pub target_guid: Guid,
     pub caster_guid: Guid,

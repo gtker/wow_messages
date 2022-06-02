@@ -27,16 +27,19 @@ pub struct SMSG_LOOT_ROLL_WON {
     /// # Comment
     ///
     /// vmangos/mangoszero: not used ?
+    ///
     pub item_random_suffix: u32,
     pub item_random_property_id: u32,
     pub winning_player_guid: Guid,
     /// # Comment
     ///
     /// rollnumber related to SMSG_LOOT_ROLL
+    ///
     pub winning_roll: u8,
     /// # Comment
     ///
     /// Rolltype related to SMSG_LOOT_ROLL
+    ///
     pub vote: RollVote,
 }
 

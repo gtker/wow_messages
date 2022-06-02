@@ -19,15 +19,18 @@ pub struct PetitionShowlist {
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: statically set to 1000 (10 silver).
+    ///
     pub guild_charter_cost: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: statically set to 1
+    ///
     pub unknown1: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: statically set to 9
     /// cmangos/vmangos/mangoszero: required signs?
+    ///
     pub unknown2: u32,
 }
 

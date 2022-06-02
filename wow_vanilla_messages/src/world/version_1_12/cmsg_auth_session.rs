@@ -19,14 +19,17 @@ use std::io::{Write, Read};
 /// # Description
 ///
 /// Sent after receiving [SMSG_AUTH_CHALLENGE](crate::world::version_1_2::SMSG_AUTH_CHALLENGE).
+///
 /// # Comment
 ///
 /// This message is never encrypted.
+///
 pub struct CMSG_AUTH_SESSION {
     pub build: u32,
     /// # Description
     ///
     /// This is sent to the client in `CMD_REALM_LIST_Server`.
+    ///
     pub server_id: u32,
     pub username: String,
     pub client_seed: u32,

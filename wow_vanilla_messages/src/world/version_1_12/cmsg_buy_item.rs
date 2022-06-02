@@ -22,6 +22,7 @@ pub struct CMSG_BUY_ITEM {
     /// # Comment
     ///
     /// cmangos says this is hardcoded to 1 in the TBC client.
+    ///
     pub unknown1: u8,
 }
 

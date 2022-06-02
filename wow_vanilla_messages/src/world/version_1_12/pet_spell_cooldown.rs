@@ -17,6 +17,7 @@ pub struct PetSpellCooldown {
     /// # Comment
     ///
     /// mangoszero: sets to 0
+    ///
     pub spell_category: u16,
     pub cooldown_in_msecs: u32,
     pub category_cooldown_in_msecs: u32,

@@ -34,58 +34,72 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub body_text: String,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos
+    ///
     pub unknown_flags: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
+    ///
     pub minimum_signatures: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
+    ///
     pub maximum_signatures: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub deadline: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub issue_date: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub allowed_guild_id: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub allowed_classes: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub allowed_races: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub allowed_genders: u16,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub allowed_minimum_level: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub allowed_maximum_level: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub todo_amount_of_signers: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    ///
     pub number_of_choices: u32,
 }
 

@@ -29,16 +29,19 @@ pub enum PetTameFailureReason {
     /// # Comment
     ///
     /// not used in taming
+    ///
     NOPETAVAILABLE,
     INTERNALERROR,
     TOOHIGHLEVEL,
     /// # Comment
     ///
     /// not used in taming
+    ///
     DEAD,
     /// # Comment
     ///
     /// not used in taming
+    ///
     NOTDEAD,
     UNKNOWNERROR,
 }

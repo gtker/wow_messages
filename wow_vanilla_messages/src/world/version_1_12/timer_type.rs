@@ -18,6 +18,7 @@ pub enum TimerType {
     /// # Comment
     ///
     /// Might be a mangos only thing.
+    ///
     ENVIRONMENTAL,
 }
 

@@ -17,6 +17,7 @@ use std::io::{Write, Read};
 ///
 /// vmangos/cmangos/mangoszero: Seems to be older versions used to be 'amount_of_carriers' followed by array. All versions now just set first to 0 and have second be 0/1/2.
 /// vmangos/cmangos/mangoszero: For AB and AV always set to all zero.
+///
 pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub flag_carriers: Vec<BattlegroundPlayerPosition>,
 }

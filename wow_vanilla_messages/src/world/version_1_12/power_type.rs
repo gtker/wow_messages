@@ -17,26 +17,32 @@ pub enum PowerType {
     /// # Comment
     ///
     /// UNIT_FIELD_POWER1
+    ///
     MANA,
     /// # Comment
     ///
     /// UNIT_FIELD_POWER2
+    ///
     RAGE,
     /// # Comment
     ///
     /// UNIT_FIELD_POWER3
+    ///
     FOCUS,
     /// # Comment
     ///
     /// UNIT_FIELD_POWER4
+    ///
     ENERGY,
     /// # Comment
     ///
     /// UNIT_FIELD_POWER5
+    ///
     HAPPINESS,
     /// # Comment
     ///
     /// (-2 as signed value)
+    ///
     HEALTH,
 }
 

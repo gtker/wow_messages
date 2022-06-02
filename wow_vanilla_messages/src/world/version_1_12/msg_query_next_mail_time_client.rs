@@ -13,6 +13,7 @@ use std::io::{Write, Read};
 /// # Comment
 ///
 /// mangoszero/vmangos: No idea when this is called.
+///
 pub struct MSG_QUERY_NEXT_MAIL_TIME_Client {
 }
 

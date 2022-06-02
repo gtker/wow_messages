@@ -24,6 +24,7 @@ pub struct SMSG_LOOT_START_ROLL {
     /// # Comment
     ///
     /// vmangos/mangoszero: not used ?
+    ///
     pub item_random_suffix: u32,
     pub item_random_property_id: u32,
     pub countdown_time: u32,

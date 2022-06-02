@@ -17,6 +17,7 @@ pub struct SMSG_LOGIN_SETTIMESPEED {
     /// # Comment
     ///
     /// Set to 0.01666667f in cmangos.
+    ///
     pub game_speed: f32,
 }
 

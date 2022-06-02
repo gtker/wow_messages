@@ -19,6 +19,7 @@ use std::io::{Write, Read};
 /// # Description
 ///
 /// Response to [CMSG_CHAR_RENAME](crate::world::version_1_12::CMSG_CHAR_RENAME).
+///
 pub struct SMSG_CHAR_RENAME {
     pub result: SMSG_CHAR_RENAME_WorldResult,
 }

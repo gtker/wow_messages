@@ -15,6 +15,7 @@ pub struct SMSG_SET_REST_START {
     /// # Comment
     ///
     /// cmangos/mangoszero: unknown, may be rest state time or experience
+    ///
     pub unknown1: u32,
 }
 

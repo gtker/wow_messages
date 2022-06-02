@@ -34,6 +34,7 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     /// # Comment
     ///
     /// vmangos/mangoszero/cmangos: Auto Finish
+    ///
     pub enable_next: u32,
     pub emotes: Vec<NpcTextUpdateEmote>,
     pub choice_item_rewards: Vec<QuestItemReward>,
@@ -43,6 +44,7 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     /// # Comment
     ///
     /// mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though.
+    ///
     pub reward_spell_cast: u32,
 }
 

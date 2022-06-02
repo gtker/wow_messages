@@ -24,6 +24,7 @@
 /// # Comment
 ///
 /// Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets](crate::world::version_1_12::SpellCastTargets) needs.
+///
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct SpellCastTargetFlags {
     inner: u16,
@@ -89,6 +90,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// not used in any spells as of 2.4.3 (can be set dynamically)
+    ///
     pub const fn new_UNUSED1() -> Self {
         Self { inner: Self::UNUSED1 }
     }
@@ -110,6 +112,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// pguid
+    ///
     pub const fn new_UNIT() -> Self {
         Self { inner: Self::UNIT }
     }
@@ -131,6 +134,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// not used in any spells as of 2.4.3 (can be set dynamically) - raid member
+    ///
     pub const fn new_UNIT_RAID() -> Self {
         Self { inner: Self::UNIT_RAID }
     }
@@ -152,6 +156,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// not used in any spells as of 2.4.3 (can be set dynamically) - party member
+    ///
     pub const fn new_UNIT_PARTY() -> Self {
         Self { inner: Self::UNIT_PARTY }
     }
@@ -173,6 +178,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// pguid
+    ///
     pub const fn new_ITEM() -> Self {
         Self { inner: Self::ITEM }
     }
@@ -194,6 +200,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// 3xfloat
+    ///
     pub const fn new_SOURCE_LOCATION() -> Self {
         Self { inner: Self::SOURCE_LOCATION }
     }
@@ -215,6 +222,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// 3xfloat
+    ///
     pub const fn new_DEST_LOCATION() -> Self {
         Self { inner: Self::DEST_LOCATION }
     }
@@ -236,6 +244,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// CanAttack == true
+    ///
     pub const fn new_UNIT_ENEMY() -> Self {
         Self { inner: Self::UNIT_ENEMY }
     }
@@ -257,6 +266,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// CanAssist == true
+    ///
     pub const fn new_UNIT_ALLY() -> Self {
         Self { inner: Self::UNIT_ALLY }
     }
@@ -278,6 +288,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// pguid, CanAssist == false
+    ///
     pub const fn new_CORPSE_ENEMY() -> Self {
         Self { inner: Self::CORPSE_ENEMY }
     }
@@ -299,6 +310,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// skinning-like effects
+    ///
     pub const fn new_UNIT_DEAD() -> Self {
         Self { inner: Self::UNIT_DEAD }
     }
@@ -320,6 +332,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// pguid, 0 spells in 2.4.3
+    ///
     pub const fn new_GAMEOBJECT() -> Self {
         Self { inner: Self::GAMEOBJECT }
     }
@@ -341,6 +354,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// pguid, 0 spells
+    ///
     pub const fn new_TRADE_ITEM() -> Self {
         Self { inner: Self::TRADE_ITEM }
     }
@@ -362,6 +376,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// string, 0 spells
+    ///
     pub const fn new_STRING() -> Self {
         Self { inner: Self::STRING }
     }
@@ -383,6 +398,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// 199 spells, opening object/lock
+    ///
     pub const fn new_LOCKED() -> Self {
         Self { inner: Self::LOCKED }
     }
@@ -404,6 +420,7 @@ impl SpellCastTargetFlags {
     /// # Comment
     ///
     /// pguid, CanAssist == true
+    ///
     pub const fn new_CORPSE_ALLY() -> Self {
         Self { inner: Self::CORPSE_ALLY }
     }

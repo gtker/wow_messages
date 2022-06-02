@@ -18,6 +18,7 @@ pub struct SMSG_PLAY_SPELL_VISUAL {
     /// # Comment
     ///
     /// mangoszero: index from SpellVisualKit.dbc. Used with 0xB3 when buying spells.
+    ///
     pub spell_art_kit: u32,
 }
 

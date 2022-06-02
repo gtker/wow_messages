@@ -19,6 +19,7 @@ use std::io::{Write, Read};
 /// # Description
 ///
 /// Set new hearthstone location.
+///
 pub struct SMSG_BINDPOINTUPDATE {
     pub position: Vector3d,
     pub map: Map,

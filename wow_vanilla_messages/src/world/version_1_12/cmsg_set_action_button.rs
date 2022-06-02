@@ -17,6 +17,7 @@ pub struct CMSG_SET_ACTION_BUTTON {
     /// # Comment
     ///
     /// Most significant byte determines types, rest is action.
+    ///
     pub action_type: u32,
 }
 

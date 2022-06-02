@@ -15,6 +15,7 @@ pub struct MSG_LOOKING_FOR_GROUP_Server {
     /// # Comment
     ///
     /// vmangos sets to 0. cmangos/mangoszero don't implement
+    ///
     pub unknown1: u32,
 }
 

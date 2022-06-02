@@ -29,6 +29,7 @@ use std::io::{Write, Read};
 /// # Comment
 ///
 /// mangoszero/vmangos: Quests that don't require items use the RequestItemsText field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
+///
 pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub npc: Guid,
     pub quest_id: u32,
@@ -42,18 +43,22 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: All set to 0x02
+    ///
     pub unknown1: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: Called flags1.
+    ///
     pub completable: QuestCompletable,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: set to 0x04
+    ///
     pub flags2: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: set to 0x08
+    ///
     pub flags3: u32,
 }
 

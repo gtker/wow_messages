@@ -16,6 +16,7 @@ pub struct QuestObjective {
     /// # Comment
     ///
     /// cmangos: client expected gameobject template id in form (id|0x80000000)
+    ///
     pub creature_id: u32,
     pub kill_count: u32,
     pub required_item_id: u32,

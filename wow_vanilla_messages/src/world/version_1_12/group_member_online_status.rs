@@ -62,6 +62,7 @@ impl GroupMemberOnlineStatus {
     /// # Comment
     ///
     /// Lua_UnitIsConnected
+    ///
     pub const fn new_ONLINE() -> Self {
         Self { inner: Self::ONLINE }
     }
@@ -83,6 +84,7 @@ impl GroupMemberOnlineStatus {
     /// # Comment
     ///
     /// Lua_UnitIsPVP
+    ///
     pub const fn new_PVP() -> Self {
         Self { inner: Self::PVP }
     }
@@ -104,6 +106,7 @@ impl GroupMemberOnlineStatus {
     /// # Comment
     ///
     /// Lua_UnitIsDead
+    ///
     pub const fn new_DEAD() -> Self {
         Self { inner: Self::DEAD }
     }
@@ -125,6 +128,7 @@ impl GroupMemberOnlineStatus {
     /// # Comment
     ///
     /// Lua_UnitIsGhost
+    ///
     pub const fn new_GHOST() -> Self {
         Self { inner: Self::GHOST }
     }
@@ -146,6 +150,7 @@ impl GroupMemberOnlineStatus {
     /// # Comment
     ///
     /// Lua_UnitIsPVPFreeForAll
+    ///
     pub const fn new_PVP_FFA() -> Self {
         Self { inner: Self::PVP_FFA }
     }
@@ -167,6 +172,7 @@ impl GroupMemberOnlineStatus {
     /// # Comment
     ///
     /// used in calls from Lua_GetPlayerMapPosition/Lua_GetBattlefieldFlagPosition
+    ///
     pub const fn new_ZONE_OUT() -> Self {
         Self { inner: Self::ZONE_OUT }
     }
@@ -188,6 +194,7 @@ impl GroupMemberOnlineStatus {
     /// # Comment
     ///
     /// Lua_UnitIsAFK
+    ///
     pub const fn new_AFK() -> Self {
         Self { inner: Self::AFK }
     }
@@ -209,6 +216,7 @@ impl GroupMemberOnlineStatus {
     /// # Comment
     ///
     /// Lua_UnitIsDND
+    ///
     pub const fn new_DND() -> Self {
         Self { inner: Self::DND }
     }

@@ -28,11 +28,13 @@ pub struct SMSG_LOOT_ROLL {
     /// # Comment
     ///
     /// vmangos/mangoszero: not used ?
+    ///
     pub item_random_suffix: u32,
     pub item_random_property_id: u32,
     /// # Comment
     ///
     /// vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number
+    ///
     pub roll_number: u8,
     pub vote: RollVote,
 }

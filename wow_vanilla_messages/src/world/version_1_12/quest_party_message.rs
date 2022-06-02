@@ -20,38 +20,47 @@ pub enum QuestPartyMessage {
     /// # Comment
     ///
     /// ERR_QUEST_PUSH_SUCCESS_S
+    ///
     SHARING_QUEST,
     /// # Comment
     ///
     /// ERR_QUEST_PUSH_INVALID_S
+    ///
     CANT_TAKE_QUEST,
     /// # Comment
     ///
     /// ERR_QUEST_PUSH_ACCEPTED_S
+    ///
     ACCEPT_QUEST,
     /// # Comment
     ///
     /// ERR_QUEST_PUSH_DECLINED_S
+    ///
     DECLINE_QUEST,
     /// # Comment
     ///
     /// removed in 3.x
+    ///
     TOO_FAR,
     /// # Comment
     ///
     /// ERR_QUEST_PUSH_BUSY_S
+    ///
     BUSY,
     /// # Comment
     ///
     /// ERR_QUEST_PUSH_LOG_FULL_S
+    ///
     LOG_FULL,
     /// # Comment
     ///
     /// ERR_QUEST_PUSH_ONQUEST_S
+    ///
     HAVE_QUEST,
     /// # Comment
     ///
     /// ERR_QUEST_PUSH_ALREADY_DONE_S
+    ///
     FINISH_QUEST,
 }
 

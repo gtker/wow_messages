@@ -23,10 +23,12 @@ pub struct SMSG_QUESTGIVER_QUEST_LIST {
     /// # Comment
     ///
     /// mangoszero: player emote
+    ///
     pub emote_delay: u32,
     /// # Comment
     ///
     /// mangoszero: NPC emote
+    ///
     pub emote: u32,
     pub quest_items: Vec<QuestItem>,
 }

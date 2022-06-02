@@ -18,6 +18,7 @@ pub enum SpellSchool {
     /// # Comment
     ///
     /// Physical, Armor
+    ///
     NORMAL,
     HOLY,
     FIRE,

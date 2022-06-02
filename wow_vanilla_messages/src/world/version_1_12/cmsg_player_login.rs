@@ -15,10 +15,12 @@ use std::io::{Write, Read};
 /// # Description
 ///
 /// Command to log into the specified character.
+///
 /// # Comment
 ///
 /// This is sent after the client has been authenticated and served the character list with [SMSG_CHAR_ENUM](crate::world::version_1_12::SMSG_CHAR_ENUM).
 /// If the player receives a [SMSG_CHARACTER_LOGIN_FAILED](crate::world::version_1_12::SMSG_CHARACTER_LOGIN_FAILED) it will return to the character screen and send a [CMSG_CHAR_ENUM](crate::world::version_1_2::CMSG_CHAR_ENUM).
+///
 pub struct CMSG_PLAYER_LOGIN {
     pub guid: Guid,
 }

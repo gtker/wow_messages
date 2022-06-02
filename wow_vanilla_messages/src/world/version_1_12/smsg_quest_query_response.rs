@@ -43,6 +43,7 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
     /// # Comment
     ///
     /// Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)
+    ///
     pub quest_method: u32,
     pub quest_level: u32,
     pub zone_or_sort: u32,
@@ -50,28 +51,34 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
     /// # Comment
     ///
     /// cmangos: shown in quest log as part of quest objective
+    ///
     pub reputation_objective_faction: u32,
     /// # Comment
     ///
     /// cmangos: shown in quest log as part of quest objective
+    ///
     pub reputation_objective_value: u32,
     /// # Comment
     ///
     /// cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0
+    ///
     pub required_opposite_faction: u32,
     /// # Comment
     ///
     /// cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0
+    ///
     pub required_opposite_reputation_value: u32,
     pub next_quest_in_chain: u32,
     pub money_reward: u32,
     /// # Comment
     ///
     /// cmangos: used in XP calculation at client
+    ///
     pub max_level_money_reward: u32,
     /// # Comment
     ///
     /// cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0)
+    ///
     pub reward_spell: u32,
     pub source_item_id: u32,
     pub quest_flags: u32,

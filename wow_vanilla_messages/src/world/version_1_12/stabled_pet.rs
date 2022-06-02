@@ -22,6 +22,7 @@ pub struct StabledPet {
     /// # Comment
     ///
     /// vmangos/mangoszero/cmangos: client slot 1 == current pet (0)
+    ///
     pub slot: u8,
 }
 

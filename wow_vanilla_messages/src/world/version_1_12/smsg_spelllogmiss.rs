@@ -22,6 +22,7 @@ pub struct SMSG_SPELLLOGMISS {
     /// # Comment
     ///
     /// cmangos/mangoszero: can be 0 or 1
+    ///
     pub unknown1: u8,
     pub targets: Vec<SpellMiss>,
 }

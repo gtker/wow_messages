@@ -18,22 +18,27 @@ pub enum SellItemResult {
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: merchant doesn't like that item
+    ///
     CANT_SELL_ITEM,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: merchant doesn't like you
+    ///
     CANT_FIND_VENDOR,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: you don't own that item
+    ///
     YOU_DONT_OWN_THAT_ITEM,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: nothing appears...
+    ///
     UNK,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: can only do with empty bags
+    ///
     ONLY_EMPTY_BAG,
 }
 

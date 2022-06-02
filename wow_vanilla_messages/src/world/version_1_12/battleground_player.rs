@@ -29,6 +29,7 @@ pub struct BattlegroundPlayer {
     /// This depends on the BG in question. AV expects 7: Graveyards Assaulted, Graveyards Defended, Towers Assaulted, Towers Defended, Secondary Objectives, LieutenantCount, SecondaryNpc
     /// WSG expects 2: Flag captures and flag returns
     /// AB expects 2: Bases assaulted and bases defended
+    ///
     pub fields: Vec<u32>,
 }
 

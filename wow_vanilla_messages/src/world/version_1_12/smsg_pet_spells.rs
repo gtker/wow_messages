@@ -28,12 +28,14 @@ pub struct SMSG_PET_SPELLS {
     /// # Comment
     ///
     /// mangoszero: set to 0
+    ///
     pub unknown1: u32,
     pub react: PetReactState,
     pub command: PetCommandState,
     /// # Comment
     ///
     /// mangoszero: set to 0
+    ///
     pub unknown2: u16,
     pub action_bars: [u32; 10],
     pub spells: Vec<u32>,

@@ -15,9 +15,11 @@ use std::io::{Write, Read};
 /// # Description
 ///
 /// Response to [CMSG_CHAR_DELETE](crate::world::version_1_12::CMSG_CHAR_DELETE).
+///
 /// # Comment
 ///
 /// The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM](crate::world::version_1_2::CMSG_CHAR_ENUM).
+///
 pub struct SMSG_CHAR_DELETE {
     pub result: WorldResult,
 }

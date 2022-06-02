@@ -18,6 +18,7 @@ pub struct QuestItem {
     /// # Comment
     ///
     /// vmangos/cmangos/mangoszero: max 0x200
+    ///
     pub title: String,
 }
 

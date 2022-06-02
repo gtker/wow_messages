@@ -206,93 +206,115 @@ pub(crate) enum AuraType {
     /// # Comment
     ///
     /// vmangos: The aura should do periodic damage, the function that handles this is Aura::HandlePeriodicDamage, the amount is usually decided by the Unit::SpellDamageBonusDone or Unit::MeleeDamageBonusDone which increases/decreases the Modifier::m_amount
+    ///
     PERIODIC_DAMAGE,
     /// # Comment
     ///
     /// vmangos: Used by Aura::HandleAuraDummy
+    ///
     DUMMY,
     /// # Comment
     ///
     /// vmangos: Used by Aura::HandleModConfuse, will either confuse or unconfuse the target depending on whether the apply flag is set
+    ///
     MOD_CONFUSE,
     MOD_CHARM,
     MOD_FEAR,
     /// # Comment
     ///
     /// vmangos: The aura will do periodic heals of a target, handled by Aura::HandlePeriodicHeal, uses Unit::SpellHealingBonusDone to calculate whether to increase or decrease Modifier::m_amount
+    ///
     PERIODIC_HEAL,
     /// # Comment
     ///
     /// vmangos: Changes the attackspeed, the Modifier::m_amount decides how much we change in percent, ie, if the m_amount is 50 the attackspeed will increase by 50%
+    ///
     MOD_ATTACKSPEED,
     /// # Comment
     ///
     /// vmangos: Modifies the threat that the Aura does in percent, the Modifier::m_miscvalue decides which of the SpellSchools it should affect threat for.  \see SpellSchoolMask
+    ///
     MOD_THREAT,
     /// # Comment
     ///
     /// vmangos: Just applies a taunt which will change the threat a mob has Taken care of in Aura::HandleModThreat
+    ///
     MOD_TAUNT,
     /// # Comment
     ///
     /// vmangos: Stuns targets in different ways, taken care of in Aura::HandleAuraModStun
+    ///
     MOD_STUN,
     /// # Comment
     ///
     /// vmangos: Changes the damage done by a weapon in any hand, the Modifier::m_miscvalue will tell what school the damage is from, it's used as a bitmask \see SpellSchoolMask
+    ///
     MOD_DAMAGE_DONE,
     /// # Comment
     ///
     /// vmangos: Not handled by the Aura class but instead this is implemented in Unit::MeleeDamageBonusTaken and Unit::SpellBaseDamageBonusTaken
+    ///
     MOD_DAMAGE_TAKEN,
     /// # Comment
     ///
     /// vmangos: Not handled by the Aura class, implemented in Unit::DealMeleeDamage
+    ///
     DAMAGE_SHIELD,
     /// # Comment
     ///
     /// vmangos: Taken care of in Aura::HandleModStealth, take note that this is not the same thing as invisibility
+    ///
     MOD_STEALTH,
     /// # Comment
     ///
     /// vmangos: Not handled by the Aura class, implemented in Unit::isVisibleForOrDetect which does a lot of checks to determine whether the person is visible or not, the SPELL_AURA_MOD_STEALTH seems to determine how in/visible ie a rogue is.
+    ///
     MOD_STEALTH_DETECT,
     /// # Comment
     ///
     /// vmangos: Handled by Aura::HandleInvisibility, the Modifier::m_miscvalue in the struct seems to decide what kind of invisibility it is with a bitflag. the miscvalue decides which bit is set, ie: 3 would make the 3rd bit be set.
+    ///
     MOD_INVISIBILITY,
     /// # Comment
     ///
     /// vmangos: Adds one of the kinds of detections to the possible detections.  As in SPEALL_AURA_MOD_INVISIBILITY the Modifier::m_miscvalue seems to decide what kind of invisibility the Unit should be able to detect.
+    ///
     MOD_INVISIBILITY_DETECTION,
     /// # Comment
     ///
     /// 20,21 unofficial
+    ///
     OBS_MOD_HEALTH,
     OBS_MOD_MANA,
     /// # Comment
     ///
     /// vmangos: Handled by Aura::HandleAuraModResistance, changes the resistance for a unit the field Modifier::m_miscvalue decides which kind of resistance that should be changed, for possible values see SpellSchools.  \see SpellSchools
+    ///
     MOD_RESISTANCE,
     /// # Comment
     ///
     /// vmangos: Currently just sets Aura::m_isPeriodic to apply and has a special case for Curse of the Plaguebringer.
+    ///
     PERIODIC_TRIGGER_SPELL,
     /// # Comment
     ///
     /// vmangos: Just sets Aura::m_isPeriodic to apply
+    ///
     PERIODIC_ENERGIZE,
     /// # Comment
     ///
     /// vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: http://classic.wowhead.com/spell=6462
+    ///
     MOD_PACIFY,
     /// # Comment
     ///
     /// vmangos: Roots or unroots the target
+    ///
     MOD_ROOT,
     /// # Comment
     ///
     /// vmangos: Silences the target and stops and spell casts that should be stopped, they have the flag SpellPreventionType::SPELL_PREVENTION_TYPE_SILENCE
+    ///
     MOD_SILENCE,
     REFLECT_SPELLS,
     MOD_STAT,
@@ -315,11 +337,13 @@ pub(crate) enum AuraType {
     /// # Comment
     ///
     /// Ignore all Gear test spells
+    ///
     UNKNOWN46,
     MOD_PARRY_PERCENT,
     /// # Comment
     ///
     /// One periodic spell
+    ///
     UNKNOWN48,
     MOD_DODGE_PERCENT,
     MOD_BLOCK_SKILL,
@@ -424,35 +448,43 @@ pub(crate) enum AuraType {
     /// # Comment
     ///
     /// Resist Pushback
+    ///
     RESIST_PUSHBACK,
     MOD_SHIELD_BLOCKVALUE_PCT,
     /// # Comment
     ///
     /// Track Stealthed
+    ///
     TRACK_STEALTHED,
     /// # Comment
     ///
     /// Mod Detected Range
+    ///
     MOD_DETECTED_RANGE,
     /// # Comment
     ///
     /// Split Damage Flat
+    ///
     SPLIT_DAMAGE_FLAT,
     /// # Comment
     ///
     /// Stealth Level Modifier
+    ///
     MOD_STEALTH_LEVEL,
     /// # Comment
     ///
     /// Mod Water Breathing
+    ///
     MOD_WATER_BREATHING,
     /// # Comment
     ///
     /// Mod Reputation Gain
+    ///
     MOD_REPUTATION_GAIN,
     /// # Comment
     ///
     /// Mod Pet Damage
+    ///
     PET_DAMAGE_MULTI,
     MOD_SHIELD_BLOCKVALUE,
     NO_PVP_CREDIT,
@@ -473,6 +505,7 @@ pub(crate) enum AuraType {
     /// # Comment
     ///
     /// in 1.12.1 only dependent spirit case
+    ///
     MOD_SPELL_DAMAGE_OF_STAT_PERCENT,
     MOD_SPELL_HEALING_OF_STAT_PERCENT,
     SPIRIT_OF_REDEMPTION,
@@ -483,6 +516,7 @@ pub(crate) enum AuraType {
     /// # Comment
     ///
     /// unused - possible flat spell crit damage versus
+    ///
     MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS,
     MOD_RESISTANCE_OF_STAT_PERCENT,
     MOD_CRITICAL_THREAT,

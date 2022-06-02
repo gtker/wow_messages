@@ -30,6 +30,7 @@ pub enum UnitStandState {
     /// # Comment
     ///
     /// Used for Cthun according to cmangos.
+    ///
     CUSTOM,
 }
 

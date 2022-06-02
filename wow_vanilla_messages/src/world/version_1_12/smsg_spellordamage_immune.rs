@@ -22,6 +22,7 @@ pub struct SMSG_SPELLORDAMAGE_IMMUNE {
     /// # Comment
     ///
     /// vmangos/cmangos sets to 0
+    ///
     pub unknown1: u8,
 }
 

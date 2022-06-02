@@ -23,18 +23,22 @@ pub enum LootMethod {
     /// # Comment
     ///
     /// unsupported by client, send LOOT_PICKPOCKETING instead
+    ///
     SKINNING,
     /// # Comment
     ///
     /// unsupported by client, send LOOT_FISHING instead
+    ///
     FISHINGHOLE,
     /// # Comment
     ///
     /// unsupported by client, send LOOT_FISHING instead
+    ///
     FISHING_FAIL,
     /// # Comment
     ///
     /// unsupported by client, send LOOT_CORPSE instead
+    ///
     INSIGNIA,
 }
 

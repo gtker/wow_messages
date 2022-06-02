@@ -14,11 +14,13 @@ pub struct InitialSpell {
     /// # Comment
     ///
     /// cmangos/mangoszero: only send 'first' part of spell
+    ///
     pub spell_id: u16,
     /// # Comment
     ///
     /// cmangos/mangoszero: sets to 0
     /// cmangos/mangoszero: it's not slot id
+    ///
     pub unknown1: u16,
 }
 

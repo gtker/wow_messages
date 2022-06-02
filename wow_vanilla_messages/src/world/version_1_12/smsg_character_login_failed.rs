@@ -15,6 +15,7 @@ use std::io::{Write, Read};
 /// # Description
 ///
 /// Response if [CMSG_PLAYER_LOGIN](crate::world::version_1_12::CMSG_PLAYER_LOGIN) fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD](crate::world::version_1_12::SMSG_LOGIN_VERIFY_WORLD).
+///
 pub struct SMSG_CHARACTER_LOGIN_FAILED {
     pub result: WorldResult,
 }

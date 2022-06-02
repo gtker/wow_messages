@@ -18,6 +18,7 @@ pub struct SMSG_PLAY_SPELL_IMPACT {
     /// # Comment
     ///
     /// mangoszero: index from SpellVisualKit.dbc. Used for visual effect on player with 0x016A
+    ///
     pub spell_visual_kit: u32,
 }
 

@@ -46,10 +46,12 @@ pub struct Mail {
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: set to 0
+    ///
     pub unknown1: u32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: stationery (Stationery.dbc)
+    ///
     pub stationery: u32,
     pub item_id: u32,
     pub item_enchant_id: u32,
@@ -64,11 +66,13 @@ pub struct Mail {
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item.
+    ///
     pub checked_timestamp: u32,
     pub expiration_time: f32,
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)
+    ///
     pub mail_template_id: u32,
 }
 

@@ -25,10 +25,12 @@ pub struct SMSG_PET_MODE {
     /// # Comment
     ///
     /// vmangos sets to 0.
+    ///
     pub unknown1: u8,
     /// # Comment
     ///
     /// vmangos sets 0 for not enabled and 0x8 for enabled.
+    ///
     pub pet_enabled: u8,
 }
 

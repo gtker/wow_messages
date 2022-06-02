@@ -213,6 +213,7 @@ pub enum SpellCastResult {
     /// # Comment
     ///
     /// rogues trying 'enchant' other's weapon with poison
+    ///
     NOT_TRADEABLE,
     NOT_TRADING,
     NOT_UNSHEATHED,

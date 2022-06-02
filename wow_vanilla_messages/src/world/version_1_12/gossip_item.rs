@@ -15,11 +15,13 @@ pub struct GossipItem {
     /// # Comment
     ///
     /// vmangos: sets to loop index
+    ///
     pub id: u32,
     pub item_icon: u8,
     /// # Comment
     ///
     /// vmangos: makes pop up box password
+    ///
     pub coded: u8,
 }
 

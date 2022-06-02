@@ -19,6 +19,7 @@ pub struct SMSG_PET_CAST_FAILED {
     /// # Comment
     ///
     /// vmangos sets to 2 and cmangos sets to 0.
+    ///
     pub unknown1: u8,
     pub result: SpellCastResult,
 }

@@ -19,6 +19,7 @@ pub struct SMSG_ATTACKSTOP {
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: set to 0 with comment: unk, can be 1 also
+    ///
     pub unknown1: u32,
 }
 

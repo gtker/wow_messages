@@ -15,6 +15,7 @@ pub struct SMSG_ACCOUNT_DATA_TIMES {
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero sets to all zeros
+    ///
     pub data: [u32; 32],
 }
 

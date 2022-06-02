@@ -17,6 +17,7 @@ pub struct ItemDamageType {
     /// # Comment
     ///
     /// mangoszero/vmangos/cmangos: id from Resistances.dbc
+    ///
     pub damage_type: u32,
 }
 

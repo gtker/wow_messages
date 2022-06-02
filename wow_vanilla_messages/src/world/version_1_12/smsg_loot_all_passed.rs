@@ -24,6 +24,7 @@ pub struct SMSG_LOOT_ALL_PASSED {
     /// # Comment
     ///
     /// vmangos/mangoszero: not used ?
+    ///
     pub item_random_suffix_id: u32,
 }
 

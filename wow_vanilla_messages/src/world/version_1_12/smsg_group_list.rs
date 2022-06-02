@@ -29,6 +29,7 @@ pub struct SMSG_GROUP_LIST {
     /// # Comment
     ///
     /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
+    ///
     pub own_flags: u8,
     pub members: Vec<GroupListMember>,
     pub leader: Guid,

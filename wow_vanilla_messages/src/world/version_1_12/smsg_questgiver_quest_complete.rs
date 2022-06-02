@@ -21,6 +21,7 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     /// # Comment
     ///
     /// cmangos/vmangos/mangoszero: set to 0x03
+    ///
     pub unknown: u32,
     pub experience_reward: u32,
     pub money_reward: u32,

@@ -15,6 +15,7 @@ pub struct CMSG_ACCEPT_TRADE {
     /// # Comment
     ///
     /// Skipped in vmangos and set to 1 for bots
+    ///
     pub unknown1: u32,
 }
 

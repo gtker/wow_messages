@@ -25,10 +25,12 @@ pub enum QuestGiverStatus {
     /// # Comment
     ///
     /// red dot on minimap
+    ///
     REWARD_OLD,
     /// # Comment
     ///
     /// yellow dot on minimap
+    ///
     REWARD2,
 }
 

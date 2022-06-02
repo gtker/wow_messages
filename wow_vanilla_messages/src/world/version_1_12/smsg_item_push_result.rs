@@ -33,15 +33,18 @@ pub struct SMSG_ITEM_PUSH_RESULT {
     /// # Comment
     ///
     /// mangoszero: item slot, but when added to stack: 0xFFFFFFFF
+    ///
     pub item_slot: u32,
     pub item_id: u32,
     /// # Comment
     ///
     /// mangoszero: SuffixFactor
+    ///
     pub item_suffix_factor: u32,
     /// # Comment
     ///
     /// mangoszero: random item property id
+    ///
     pub item_random_property_id: u32,
     pub item_count: u32,
 }
