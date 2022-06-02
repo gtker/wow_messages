@@ -202,10 +202,6 @@ impl UpdateMask {
         + header_len * 4
         + values_len * 4
     }
-
-    pub fn new() -> Self {
-        Default::default()
-    }
 }
 
 #[cfg(test)]
