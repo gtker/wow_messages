@@ -4,7 +4,7 @@ COMMENT = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
 command = { ("#" ~ identifier) ~ identifier ~ QUOTATION_MARK ~ text ~ (QUOTATION_MARK ~ ";") }
 commands = { command* }
 
-allowed_text_values = { ("." | "," | "'" | "\\" | "_" | "-" | "#" | "[" | "]" | "|" | "*" | "%" | ":" | "$" | "(" | ")" | "?" | "/" | "!" | "+" | ">" | "<" | "&" | "=") }
+allowed_text_values = { ("." | "," | "'" | "`" | "\\" | "_" | "-" | "#" | "[" | "]" | "|" | "*" | "%" | ":" | "$" | "(" | ")" | "?" | "/" | "!" | "+" | ">" | "<" | "&" | "=") }
 
 identifier = @{ ( ALPHABETIC | "_" | ASCII_DIGIT )+ }
 text = { (LETTER | NUMBER | allowed_text_values )* }
