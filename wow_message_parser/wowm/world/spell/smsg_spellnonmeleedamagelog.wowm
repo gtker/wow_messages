@@ -18,7 +18,7 @@ smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     /* TODO Hit info? */
     u32 hit_info;
     u8 extend_flag {
-        comment = "cmangos has some that might be correct https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497";
+        comment = "cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.";
     }
 }
 

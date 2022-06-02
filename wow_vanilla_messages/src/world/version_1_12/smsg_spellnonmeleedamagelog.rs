@@ -47,7 +47,7 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub hit_info: u32,
     /// # Comment
     ///
-    /// cmangos has some that might be correct https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497
+    /// cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.
     pub extend_flag: u8,
 }
 

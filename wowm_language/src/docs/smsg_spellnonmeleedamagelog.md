@@ -47,5 +47,5 @@ SMSG have a header of 4 bytes.
 | - | 1 / - | u8 | unused |  |  |
 | - | 4 / Little | u32 | blocked |  |  |
 | - | 4 / Little | u32 | hit_info |  |  |
-| - | 1 / - | u8 | extend_flag |  | cmangos has some that might be correct https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497 |
+| - | 1 / - | u8 | extend_flag |  | cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`. |
 

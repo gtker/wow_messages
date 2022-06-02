@@ -24,7 +24,7 @@ use std::io::Write;
 /// ```
 /// # Comment
 ///
-/// Structure as comment on https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525
+/// Structure as comment on `https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525`.
 pub struct SMSG_RESISTLOG {
     pub guid1: Guid,
     pub guid2: Guid,

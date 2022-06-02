@@ -90392,7 +90392,7 @@
         }
       ],
       "tags": {
-        "comment": "Structure as comment on https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525",
+        "comment": "Structure as comment on `https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525`.",
         "version": {
           "type": "world",
           "versions": [
@@ -92077,7 +92077,7 @@
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {
-              "comment": "cmangos has some that might be correct https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497"
+              "comment": "cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`."
             }
           }
         }
