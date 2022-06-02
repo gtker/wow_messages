@@ -361,17 +361,12 @@ impl Writer {
         self.closing_curly_newline(); // impl
     }
 
-    pub fn impl_read_write_non_trait_pub<
-        S: AsRef<str>,
-        S1: AsRef<str>,
-        F: Fn(&mut Self, ImplType),
-        F2: Fn(&mut Self, ImplType),
-    >(
+    pub fn impl_read_write_opcode(
         &mut self,
-        type_name: S,
-        error_name: S1,
-        read_function: F,
-        write_function: F2,
+        type_name: impl AsRef<str>,
+        error_name: impl AsRef<str>,
+        read_function: impl Fn(&mut Self, ImplType),
+        write_function: impl Fn(&mut Self, ImplType),
         create_async_reads: bool,
     ) {
         self.impl_read_write_non_trait(
@@ -384,22 +379,16 @@ impl Writer {
         )
     }
 
-    pub fn impl_read_write_non_trait_pub_crate<
-        S: AsRef<str>,
-        S1: AsRef<str>,
-        F: Fn(&mut Self, ImplType),
-        F2: Fn(&mut Self, ImplType),
-    >(
+    pub fn impl_read_write_struct(
         &mut self,
-        type_name: S,
-        error_name: S1,
-        read_function: F,
-        write_function: F2,
+        type_name: impl AsRef<str>,
+        read_function: impl Fn(&mut Self, ImplType),
+        write_function: impl Fn(&mut Self, ImplType),
         create_async_reads: bool,
     ) {
         self.impl_read_write_non_trait(
             type_name,
-            error_name,
+            PARSE_ERROR,
             read_function,
             write_function,
             "pub(crate)",

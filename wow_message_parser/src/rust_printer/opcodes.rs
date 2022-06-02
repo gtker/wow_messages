@@ -247,7 +247,7 @@ pub fn common_impls_world(
 }
 
 pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
-    s.impl_read_write_non_trait_pub(
+    s.impl_read_write_opcode(
         format!("{t}OpcodeMessage", t = ty),
         EXPECTED_OPCODE_ERROR,
         |s, it| {

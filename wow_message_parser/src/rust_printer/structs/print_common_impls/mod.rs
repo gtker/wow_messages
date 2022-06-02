@@ -19,9 +19,8 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         ContainerType::Struct => {
             let create_async_reads = e.tags().has_login_version();
 
-            s.impl_read_write_non_trait_pub_crate(
+            s.impl_read_write_struct(
                 e.name(),
-                error_ty,
                 |s, it| {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
