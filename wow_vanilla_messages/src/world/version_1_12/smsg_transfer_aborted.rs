@@ -26,13 +26,13 @@ pub struct SMSG_TRANSFER_ABORTED {
 
 impl SMSG_TRANSFER_ABORTED {
     /// The field `padding` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `0` |
     /// | Hex | `0x00` |
     /// | Original | `0` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const PADDING_VALUE: u8 = 0x00;
 

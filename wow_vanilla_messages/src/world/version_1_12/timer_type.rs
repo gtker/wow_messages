@@ -20,7 +20,7 @@ pub enum TimerType {
     BREATH,
     FEIGNDEATH,
     /// # Comment
-    /// 
+    ///
     /// Might be a mangos only thing.
     ENVIRONMENTAL,
 }

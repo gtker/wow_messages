@@ -24,24 +24,24 @@ pub struct CMD_REALM_LIST_Server {
 
 impl CMD_REALM_LIST_Server {
     /// The field `header_padding` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `0` |
     /// | Hex | `0x00` |
     /// | Original | `0` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const HEADER_PADDING_VALUE: u32 = 0x00;
 
     /// The field `footer_padding` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `0` |
     /// | Hex | `0x00` |
     /// | Original | `0` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const FOOTER_PADDING_VALUE: u16 = 0x00;
 

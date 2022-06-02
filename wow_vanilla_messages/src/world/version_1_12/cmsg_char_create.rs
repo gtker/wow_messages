@@ -40,13 +40,13 @@ pub struct CMSG_CHAR_CREATE {
 
 impl CMSG_CHAR_CREATE {
     /// The field `outfit_id` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `0` |
     /// | Hex | `0x00` |
     /// | Original | `0` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const OUTFIT_ID_VALUE: u8 = 0x00;
 

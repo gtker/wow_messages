@@ -20,7 +20,7 @@ use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SpellSchool {
     /// # Comment
-    /// 
+    ///
     /// Physical, Armor
     NORMAL,
     HOLY,

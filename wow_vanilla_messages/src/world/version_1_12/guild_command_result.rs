@@ -36,7 +36,7 @@ pub enum GuildCommandResult {
     GUILD_NAME_INVALID,
     GUILD_NAME_EXISTS_S,
     /// # Comment
-    /// 
+    ///
     /// mangos has 0x08 as both GUILD_LEADER_LEAVE and GUILD_PERMISSIONS.
     /// Supposedly the [GuildCommand] QUIT used GUILD_LEADER_LEAVE and others used GUILD_PERMISSIONS
     GUILD_PERMISSIONS_OR_LEADER,

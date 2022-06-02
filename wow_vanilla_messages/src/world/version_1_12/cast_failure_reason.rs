@@ -159,587 +159,587 @@ use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum CastFailureReason {
     /// # Comment
-    /// 
+    ///
     /// You are in combat
     AFFECTING_COMBAT,
     /// # Comment
-    /// 
+    ///
     /// You are already at full Health.
     ALREADY_AT_FULL_HEALTH,
     /// # Comment
-    /// 
+    ///
     /// You are already at full %s.
     ALREADY_AT_FULL_POWER,
     /// # Comment
-    /// 
+    ///
     /// That creature is already being tamed
     ALREADY_BEING_TAMED,
     /// # Comment
-    /// 
+    ///
     /// You already control a charmed creature
     ALREADY_HAVE_CHARM,
     /// # Comment
-    /// 
+    ///
     /// You already control a summoned creature
     ALREADY_HAVE_SUMMON,
     /// # Comment
-    /// 
+    ///
     /// Already open
     ALREADY_OPEN,
     /// # Comment
-    /// 
+    ///
     /// A more powerful spell is already active
     AURA_BOUNCED,
     /// # Comment
-    /// 
+    ///
     /// Message is hidden/unused
     AUTOTRACK_INTERRUPTED,
     /// # Comment
-    /// 
+    ///
     /// You have no target.
     BAD_IMPLICIT_TARGETS,
     /// # Comment
-    /// 
+    ///
     /// Invalid target
     BAD_TARGETS,
     /// # Comment
-    /// 
+    ///
     /// Target can't be charmed
     CANT_BE_CHARMED,
     /// # Comment
-    /// 
+    ///
     /// Item cannot be disenchanted
     CANT_BE_DISENCHANTED,
     /// # Comment
-    /// 
+    ///
     /// There are no gems in this
     CANT_BE_PROSPECTED,
     /// # Comment
-    /// 
+    ///
     /// Target is tapped
     CANT_CAST_ON_TAPPED,
     /// # Comment
-    /// 
+    ///
     /// You can't start a duel while invisible
     CANT_DUEL_WHILE_INVISIBLE,
     /// # Comment
-    /// 
+    ///
     /// You can't start a duel while stealthed
     CANT_DUEL_WHILE_STEALTHED,
     /// # Comment
-    /// 
+    ///
     /// You are too close to enemies
     CANT_STEALTH,
     /// # Comment
-    /// 
+    ///
     /// You can't do that yet
     CASTER_AURASTATE,
     /// # Comment
-    /// 
+    ///
     /// You are dead
     CASTER_DEAD,
     /// # Comment
-    /// 
+    ///
     /// Can't do that while charmed
     CHARMED,
     /// # Comment
-    /// 
+    ///
     /// That is already being used
     CHEST_IN_USE,
     /// # Comment
-    /// 
+    ///
     /// Can't do that while confused
     CONFUSED,
     /// # Comment
-    /// 
+    ///
     /// Message is hidden/unused
     DONT_REPORT,
     /// # Comment
-    /// 
+    ///
     /// Must have the proper item equipped
     EQUIPPED_ITEM,
     /// # Comment
-    /// 
+    ///
     /// Must have a %s equipped
     EQUIPPED_ITEM_CLASS,
     /// # Comment
-    /// 
+    ///
     /// Must have a %s equipped in the main hand
     EQUIPPED_ITEM_CLASS_MAINHAND,
     /// # Comment
-    /// 
+    ///
     /// Must have a %s equipped in the offhand
     EQUIPPED_ITEM_CLASS_OFFHAND,
     /// # Comment
-    /// 
+    ///
     /// Internal error
     ERROR,
     /// # Comment
-    /// 
+    ///
     /// Fizzled
     FIZZLE,
     /// # Comment
-    /// 
+    ///
     /// Can't do that while fleeing
     FLEEING,
     /// # Comment
-    /// 
+    ///
     /// That food's level is not high enough for your pet
     FOOD_LOWLEVEL,
     /// # Comment
-    /// 
+    ///
     /// Target is too high level
     HIGHLEVEL,
     /// # Comment
-    /// 
+    ///
     /// Message is hidden/unused
     HUNGER_SATIATED,
     /// # Comment
-    /// 
+    ///
     /// Immune
     IMMUNE,
     /// # Comment
-    /// 
+    ///
     /// Interrupted
     INTERRUPTED,
     /// # Comment
-    /// 
+    ///
     /// Interrupted
     INTERRUPTED_COMBAT,
     /// # Comment
-    /// 
+    ///
     /// Item is already enchanted
     ITEM_ALREADY_ENCHANTED,
     /// # Comment
-    /// 
+    ///
     /// Item is gone
     ITEM_GONE,
     /// # Comment
-    /// 
+    ///
     /// Tried to enchant an item that didn't exist
     ITEM_NOT_FOUND,
     /// # Comment
-    /// 
+    ///
     /// Item is not ready yet.
     ITEM_NOT_READY,
     /// # Comment
-    /// 
+    ///
     /// You are not high enough level
     LEVEL_REQUIREMENT,
     /// # Comment
-    /// 
+    ///
     /// Target not in line of sight
     LINE_OF_SIGHT,
     /// # Comment
-    /// 
+    ///
     /// Target is too low level
     LOWLEVEL,
     /// # Comment
-    /// 
+    ///
     /// Skill not high enough
     LOW_CASTLEVEL,
     /// # Comment
-    /// 
+    ///
     /// Your weapon hand is empty
     MAINHAND_EMPTY,
     /// # Comment
-    /// 
+    ///
     /// Can't do that while moving
     MOVING,
     /// # Comment
-    /// 
+    ///
     /// Ammo needs to be in the paper doll ammo slot before it can be fired
     NEED_AMMO,
     /// # Comment
-    /// 
+    ///
     /// Requires: %s
     NEED_AMMO_POUCH,
     /// # Comment
-    /// 
+    ///
     /// Requires exotic ammo: %s
     NEED_EXOTIC_AMMO,
     /// # Comment
-    /// 
+    ///
     /// No path available
     NOPATH,
     /// # Comment
-    /// 
+    ///
     /// You must be behind your target
     NOT_BEHIND,
     /// # Comment
-    /// 
+    ///
     /// Your cast didn't land in fishable water
     NOT_FISHABLE,
     /// # Comment
-    /// 
+    ///
     /// You can't use that here
     NOT_HERE,
     /// # Comment
-    /// 
+    ///
     /// You must be in front of your target
     NOT_INFRONT,
     /// # Comment
-    /// 
+    ///
     /// You are not in control of your actions
     NOT_IN_CONTROL,
     /// # Comment
-    /// 
+    ///
     /// Spell not learned
     NOT_KNOWN,
     /// # Comment
-    /// 
+    ///
     /// You are mounted
     NOT_MOUNTED,
     /// # Comment
-    /// 
+    ///
     /// You are in flight
     NOT_ON_TAXI,
     /// # Comment
-    /// 
+    ///
     /// You are on a transport
     NOT_ON_TRANSPORT,
     /// # Comment
-    /// 
+    ///
     /// Spell is not ready yet.
     NOT_READY,
     /// # Comment
-    /// 
+    ///
     /// You are in shapeshift form
     NOT_SHAPESHIFT,
     /// # Comment
-    /// 
+    ///
     /// You must be standing to do that
     NOT_STANDING,
     /// # Comment
-    /// 
+    ///
     /// You can only use this on an object you own
     NOT_TRADEABLE,
     /// # Comment
-    /// 
+    ///
     /// Tried to enchant a trade item, but not trading
     NOT_TRADING,
     /// # Comment
-    /// 
+    ///
     /// You have to be unsheathed to do that!
     NOT_UNSHEATHED,
     /// # Comment
-    /// 
+    ///
     /// Can't cast as ghost
     NOT_WHILE_GHOST,
     /// # Comment
-    /// 
+    ///
     /// Out of ammo
     NO_AMMO,
     /// # Comment
-    /// 
+    ///
     /// No charges remain
     NO_CHARGES_REMAIN,
     /// # Comment
-    /// 
+    ///
     /// You haven't selected a champion
     NO_CHAMPION,
     /// # Comment
-    /// 
+    ///
     /// That ability requires combo points
     NO_COMBO_POINTS,
     /// # Comment
-    /// 
+    ///
     /// Dueling isn't allowed here
     NO_DUELING,
     /// # Comment
-    /// 
+    ///
     /// Not enough endurance
     NO_ENDURANCE,
     /// # Comment
-    /// 
+    ///
     /// There aren't any fish here
     NO_FISH,
     /// # Comment
-    /// 
+    ///
     /// Can't use items while shapeshifted
     NO_ITEMS_WHILE_SHAPESHIFTED,
     /// # Comment
-    /// 
+    ///
     /// You can't mount here
     NO_MOUNTS_ALLOWED,
     /// # Comment
-    /// 
+    ///
     /// You do not have a pet
     NO_PET,
     /// # Comment
-    /// 
+    ///
     /// Dynamic pre-defined messages, no args: Not enough mana, Not enough rage, etc
     NO_POWER,
     /// # Comment
-    /// 
+    ///
     /// Nothing to dispel
     NOTHING_TO_DISPEL,
     /// # Comment
-    /// 
+    ///
     /// Nothing to steal
     NOTHING_TO_STEAL,
     /// # Comment
-    /// 
+    ///
     /// Cannot use while swimming
     ONLY_ABOVEWATER,
     /// # Comment
-    /// 
+    ///
     /// Can only use during the day
     ONLY_DAYTIME,
     /// # Comment
-    /// 
+    ///
     /// Can only use indoors
     ONLY_INDOORS,
     /// # Comment
-    /// 
+    ///
     /// Can only use while mounted
     ONLY_MOUNTED,
     /// # Comment
-    /// 
+    ///
     /// Can only use during the night
     ONLY_NIGHTTIME,
     /// # Comment
-    /// 
+    ///
     /// Can only use outside
     ONLY_OUTDOORS,
     /// # Comment
-    /// 
+    ///
     /// Must be in %s
     ONLY_SHAPESHIFT,
     /// # Comment
-    /// 
+    ///
     /// You must be in stealth mode
     ONLY_STEALTHED,
     /// # Comment
-    /// 
+    ///
     /// Can only use while swimming
     ONLY_UNDERWATER,
     /// # Comment
-    /// 
+    ///
     /// Out of range.
     OUT_OF_RANGE,
     /// # Comment
-    /// 
+    ///
     /// Can't use that ability while pacified
     PACIFIED,
     /// # Comment
-    /// 
+    ///
     /// You are possessed
     POSSESSED,
     /// # Comment
-    /// 
+    ///
     /// Message is hidden/unused, supposedly implemented client-side only
     REAGENTS,
     /// # Comment
-    /// 
+    ///
     /// You need to be in %s
     REQUIRES_AREA,
     /// # Comment
-    /// 
+    ///
     /// Requires %s
     REQUIRES_SPELL_FOCUS,
     /// # Comment
-    /// 
+    ///
     /// You are unable to move
     ROOTED,
     /// # Comment
-    /// 
+    ///
     /// Can't do that while silenced
     SILENCED,
     /// # Comment
-    /// 
+    ///
     /// Another action is in progress
     SPELL_IN_PROGRESS,
     /// # Comment
-    /// 
+    ///
     /// You have already learned the spell
     SPELL_LEARNED,
     /// # Comment
-    /// 
+    ///
     /// The spell is not available to you
     SPELL_UNAVAILABLE,
     /// # Comment
-    /// 
+    ///
     /// Can't do that while stunned
     STUNNED,
     /// # Comment
-    /// 
+    ///
     /// Your target is dead
     TARGETS_DEAD,
     /// # Comment
-    /// 
+    ///
     /// Target is in combat
     TARGET_AFFECTING_COMBAT,
     /// # Comment
-    /// 
+    ///
     /// You can't do that yet
     TARGET_AURASTATE,
     /// # Comment
-    /// 
+    ///
     /// Target is currently dueling
     TARGET_DUELING,
     /// # Comment
-    /// 
+    ///
     /// Target is hostile
     TARGET_ENEMY,
     /// # Comment
-    /// 
+    ///
     /// Target is too enraged to be charmed
     TARGET_ENRAGED,
     /// # Comment
-    /// 
+    ///
     /// Target is friendly
     TARGET_FRIENDLY,
     /// # Comment
-    /// 
+    ///
     /// The target can't be in combat
     TARGET_IN_COMBAT,
     /// # Comment
-    /// 
+    ///
     /// Can't target players
     TARGET_IS_PLAYER,
     /// # Comment
-    /// 
+    ///
     /// Target is alive
     TARGET_NOT_DEAD,
     /// # Comment
-    /// 
+    ///
     /// Target is not in your party
     TARGET_NOT_IN_PARTY,
     /// # Comment
-    /// 
+    ///
     /// Creature must be looted first
     TARGET_NOT_LOOTED,
     /// # Comment
-    /// 
+    ///
     /// Target is not a player
     TARGET_NOT_PLAYER,
     /// # Comment
-    /// 
+    ///
     /// No pockets to pick
     TARGET_NO_POCKETS,
     /// # Comment
-    /// 
+    ///
     /// Target has no weapons equipped
     TARGET_NO_WEAPONS,
     /// # Comment
-    /// 
+    ///
     /// Creature is not skinnable
     TARGET_UNSKINNABLE,
     /// # Comment
-    /// 
+    ///
     /// Message is hidden/unused
     THIRST_SATIATED,
     /// # Comment
-    /// 
+    ///
     /// Target too close
     TOO_CLOSE,
     /// # Comment
-    /// 
+    ///
     /// You have too many of that item already
     TOO_MANY_OF_ITEM,
     /// # Comment
-    /// 
+    ///
     /// Message is hidden/unused, supposedly implemented client-side only
     TOTEMS,
     /// # Comment
-    /// 
+    ///
     /// Not enough training points
     TRAINING_POINTS,
     /// # Comment
-    /// 
+    ///
     /// Failed attempt
     TRY_AGAIN,
     /// # Comment
-    /// 
+    ///
     /// Target needs to be behind you
     UNIT_NOT_BEHIND,
     /// # Comment
-    /// 
+    ///
     /// Target needs to be in front of you
     UNIT_NOT_INFRONT,
     /// # Comment
-    /// 
+    ///
     /// Your pet doesn't like that food
     WRONG_PET_FOOD,
     /// # Comment
-    /// 
+    ///
     /// Can't cast while fatigued
     NOT_WHILE_FATIGUED,
     /// # Comment
-    /// 
+    ///
     /// Target must be in this instance
     TARGET_NOT_IN_INSTANCE,
     /// # Comment
-    /// 
+    ///
     /// Can't cast while trading
     NOT_WHILE_TRADING,
     /// # Comment
-    /// 
+    ///
     /// Target is not in your party or raid group
     TARGET_NOT_IN_RAID,
     /// # Comment
-    /// 
+    ///
     /// Cannot disenchant while looting
     DISENCHANT_WHILE_LOOTING,
     /// # Comment
-    /// 
+    ///
     /// Cannot prospect while looting
     PROSPECT_WHILE_LOOTING,
     /// # Comment
-    /// 
+    ///
     /// Message is hidden/unused, supposedly implemented client-side only
     PROSPECT_NEED_MORE,
     /// # Comment
-    /// 
+    ///
     /// Target is currently in free-for-all PvP combat
     TARGET_FREEFORALL,
     /// # Comment
-    /// 
+    ///
     /// There are no nearby corpses to eat
     NO_EDIBLE_CORPSES,
     /// # Comment
-    /// 
+    ///
     /// Can only use in battlegrounds
     ONLY_BATTLEGROUNDS,
     /// # Comment
-    /// 
+    ///
     /// Target is not a ghost
     TARGET_NOT_GHOST,
     /// # Comment
-    /// 
+    ///
     /// Your pet can't learn any more skills
     TOO_MANY_SKILLS,
     /// # Comment
-    /// 
+    ///
     /// You can't use the new item
     TRANSFORM_UNUSABLE,
     /// # Comment
-    /// 
+    ///
     /// The weather isn't right for that
     WRONG_WEATHER,
     /// # Comment
-    /// 
+    ///
     /// You can't do that while you are immune
     DAMAGE_IMMUNE,
     /// # Comment
-    /// 
+    ///
     /// Can't do that while %s
     PREVENTED_BY_MECHANIC,
     /// # Comment
-    /// 
+    ///
     /// Maximum play time exceeded
     PLAY_TIME,
     /// # Comment
-    /// 
+    ///
     /// Your reputation isn't high enough
     REPUTATION,
     /// # Comment
-    /// 
+    ///
     /// Your skill is not high enough.  Requires %s (%d).
     MIN_SKILL,
     /// # Comment
-    /// 
+    ///
     /// Generic out of bounds response:  Unknown reason
     UNKNOWN,
 }

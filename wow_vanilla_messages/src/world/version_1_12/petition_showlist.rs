@@ -27,24 +27,24 @@ pub struct PetitionShowlist {
 
 impl PetitionShowlist {
     /// The field `charter_entry` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `5863` |
     /// | Hex | `0x16e7` |
     /// | Original | `5863` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const CHARTER_ENTRY_VALUE: u32 = 0x16e7;
 
     /// The field `charter_display_id` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `16161` |
     /// | Hex | `0x3f21` |
     /// | Original | `16161` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const CHARTER_DISPLAY_ID_VALUE: u32 = 0x3f21;
 

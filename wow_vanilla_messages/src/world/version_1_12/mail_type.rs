@@ -20,15 +20,15 @@ pub(crate) enum MailType {
     NORMAL,
     AUCTION,
     /// # Comment
-    /// 
+    ///
     /// client send CMSG_CREATURE_QUERY on this mailmessagetype
     CREATURE,
     /// # Comment
-    /// 
+    ///
     /// client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype
     GAMEOBJECT,
     /// # Comment
-    /// 
+    ///
     /// client send CMSG_ITEM_QUERY on this mailmessagetype
     ITEM,
 }

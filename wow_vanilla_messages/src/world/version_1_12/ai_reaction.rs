@@ -18,23 +18,23 @@ use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum AiReaction {
     /// # Comment
-    /// 
+    ///
     /// pre-aggro (used in client packet handler)
     ALERT,
     /// # Comment
-    /// 
+    ///
     /// (NOT used in client packet handler)
     FRIENDLY,
     /// # Comment
-    /// 
+    ///
     /// sent on every attack, triggers aggro sound (used in client packet handler)
     HOSTILE,
     /// # Comment
-    /// 
+    ///
     /// seen for polymorph (when AI not in control of self?) (NOT used in client packet handler)
     AFRAID,
     /// # Comment
-    /// 
+    ///
     /// used on object destroy (NOT used in client packet handler)
     DESTROY,
 }

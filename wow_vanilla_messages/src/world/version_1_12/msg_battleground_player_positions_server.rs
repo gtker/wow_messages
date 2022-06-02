@@ -23,13 +23,13 @@ pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     /// The field `amount_of_carriers` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `0` |
     /// | Hex | `0x00` |
     /// | Original | `0` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const AMOUNT_OF_CARRIERS_VALUE: u32 = 0x00;
 

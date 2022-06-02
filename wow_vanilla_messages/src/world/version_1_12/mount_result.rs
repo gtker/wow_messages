@@ -24,47 +24,47 @@ use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum MountResult {
     /// # Comment
-    /// 
+    ///
     /// You can't mount that unit!
     INVALIDMOUNTEE,
     /// # Comment
-    /// 
+    ///
     /// That mount is too far away!
     TOOFARAWAY,
     /// # Comment
-    /// 
+    ///
     /// You're already mounted!
     ALREADYMOUNTED,
     /// # Comment
-    /// 
+    ///
     /// That unit can't be mounted!
     NOTMOUNTABLE,
     /// # Comment
-    /// 
+    ///
     /// That mount isn't your pet!
     NOTYOURPET,
     /// # Comment
-    /// 
+    ///
     /// internal
     OTHER,
     /// # Comment
-    /// 
+    ///
     /// You can't mount while looting!
     LOOTING,
     /// # Comment
-    /// 
+    ///
     /// You can't mount because of your race!
     RACECANTMOUNT,
     /// # Comment
-    /// 
+    ///
     /// You can't mount while shapeshifted!
     SHAPESHIFTED,
     /// # Comment
-    /// 
+    ///
     /// You dismount before continuing.
     FORCEDDISMOUNT,
     /// # Comment
-    /// 
+    ///
     /// no error
     OK,
 }

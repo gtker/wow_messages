@@ -25,13 +25,13 @@ pub struct CMD_AUTH_RECONNECT_PROOF_Client {
 
 impl CMD_AUTH_RECONNECT_PROOF_Client {
     /// The field `key_count` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `0` |
     /// | Hex | `0x00` |
     /// | Original | `0` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const KEY_COUNT_VALUE: u8 = 0x00;
 

@@ -19,13 +19,13 @@ pub struct CMD_REALM_LIST_Client {
 
 impl CMD_REALM_LIST_Client {
     /// The field `padding` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `0` |
     /// | Hex | `0x00` |
     /// | Original | `0` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const PADDING_VALUE: u32 = 0x00;
 

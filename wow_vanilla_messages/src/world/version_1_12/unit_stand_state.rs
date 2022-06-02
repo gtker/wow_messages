@@ -32,7 +32,7 @@ pub enum UnitStandState {
     DEAD,
     KNEEL,
     /// # Comment
-    /// 
+    ///
     /// Used for Cthun according to cmangos.
     CUSTOM,
 }

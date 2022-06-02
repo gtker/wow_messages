@@ -135,13 +135,13 @@ pub fn print_constant_member(
         "The field `{name}` is constantly specified to be:",
         name = name
     ));
-    s.docc("");
+    s.docc_newline();
     s.docc("| Format | Value |");
     s.docc("| ------ | ----- |");
     s.docc(format!("| Decimal | `{value}` |", value = value));
     s.docc(format!("| Hex | `{value:#04x}` |", value = value));
     s.docc(format!("| Original | `{value}` |", value = original_value));
-    s.docc("");
+    s.docc_newline();
     s.docc("**This field is not in the struct, but is written as this constant value.**");
 
     s.wln(format!(

@@ -16,15 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TrainingFailureReason {
     /// # Comment
-    /// 
+    ///
     /// Trainer service %d unavailable.
     UNAVAILABLE,
     /// # Comment
-    /// 
+    ///
     /// Not enough money for trainer service %d.
     NOT_ENOUGH_MONEY,
     /// # Comment
-    /// 
+    ///
     /// Not enough skill points for trainer service %d.
     NOT_ENOUGH_SKILL,
 }

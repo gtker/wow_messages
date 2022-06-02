@@ -64,13 +64,13 @@ pub struct SpellLog {
 
 impl SpellLog {
     /// The field `amount_of_logs` is constantly specified to be:
-    /// 
+    ///
     /// | Format | Value |
     /// | ------ | ----- |
     /// | Decimal | `1` |
     /// | Hex | `0x01` |
     /// | Original | `1` |
-    /// 
+    ///
     /// **This field is not in the struct, but is written as this constant value.**
     pub const AMOUNT_OF_LOGS_VALUE: u32 = 0x01;
 

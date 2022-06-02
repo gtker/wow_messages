@@ -655,6 +655,14 @@ impl Writer {
         self.newline();
     }
 
+    pub fn docc_newline(&mut self) {
+        if !Self::METADATA {
+            return;
+        }
+        self.w("///");
+        self.newline();
+    }
+
     pub fn docc<S: AsRef<str>>(&mut self, s: S) {
         if !Self::METADATA {
             return;
@@ -822,7 +830,7 @@ fn get_new_flag_type_name(original_ty: &str, enumerator_name: &str) -> String {
 fn print_docc_description_and_comment(s: &mut Writer, tags: &Tags) {
     if let Some(description) = tags.description() {
         s.docc("# Description");
-        s.docc("");
+        s.docc_newline();
 
         for line in description.as_rust_doc_lines() {
             s.docc(line);
@@ -831,7 +839,7 @@ fn print_docc_description_and_comment(s: &mut Writer, tags: &Tags) {
 
     if let Some(comment) = tags.comment() {
         s.docc("# Comment");
-        s.docc("");
+        s.docc_newline();
 
         for line in comment.as_rust_doc_lines() {
             s.docc(line);
