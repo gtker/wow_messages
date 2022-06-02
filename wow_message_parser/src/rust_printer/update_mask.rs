@@ -64,48 +64,46 @@ pub fn print_update_mask() {
 
 fn print_functions(s: &mut Writer, m: &MemberType) {
     let parameter = match m.uf {
-        UfType::Guid => ", v: Guid",
-        UfType::Int => ", v: i32",
-        UfType::Float => ", v: f32",
-        UfType::Bytes => ", a: u8, b: u8, c: u8, d: u8",
-        UfType::TwoShort => ", v: u32",
+        UfType::Guid => "v: Guid",
+        UfType::Int => "v: i32",
+        UfType::Float => "v: f32",
+        UfType::Bytes => "a: u8, b: u8, c: u8, d: u8",
+        UfType::TwoShort => "v: u32",
     };
-    s.bodyn(
-        format!(
-            "pub fn set_{}_{}(mut self{}) -> Self",
-            m.ty, m.name, parameter
-        ),
-        |s| {
-            s.wln(format!("self.header_set({});", m.offset));
-            match m.uf {
-                UfType::Guid => {
-                    s.wln(format!("self.header_set({});", m.offset + 1));
+    s.open_curly(format!(
+        "pub fn set_{}_{}(mut self, {}) -> Self",
+        m.ty, m.name, parameter
+    ));
 
-                    s.wln(format!(
-                        "self.values.insert({}, v.guid() as u32);",
-                        m.offset
-                    ));
-                    s.wln(format!(
-                        "self.values.insert({}, (v.guid() >> 32) as u32);",
-                        m.offset + 1
-                    ));
-                }
-                _ => {
-                    let value = match m.uf {
-                        UfType::Int => "v as u32",
-                        UfType::Float => "u32::from_le_bytes(v.to_le_bytes())",
-                        UfType::Bytes => "u32::from_le_bytes([a, b, c, d])",
-                        UfType::TwoShort => "v",
-                        _ => unreachable!(),
-                    };
+    s.wln(format!("self.header_set({});", m.offset));
+    match m.uf {
+        UfType::Guid => {
+            s.wln(format!("self.header_set({});", m.offset + 1));
 
-                    s.wln(format!("self.values.insert({}, {});", m.offset, value));
-                }
-            }
+            s.wln(format!(
+                "self.values.insert({}, v.guid() as u32);",
+                m.offset
+            ));
+            s.wln(format!(
+                "self.values.insert({}, (v.guid() >> 32) as u32);",
+                m.offset + 1
+            ));
+        }
+        _ => {
+            let value = match m.uf {
+                UfType::Int => "v as u32",
+                UfType::Float => "u32::from_le_bytes(v.to_le_bytes())",
+                UfType::Bytes => "u32::from_le_bytes([a, b, c, d])",
+                UfType::TwoShort => "v",
+                _ => unreachable!(),
+            };
 
-            s.wln("self");
-        },
-    );
+            s.wln(format!("self.values.insert({}, {});", m.offset, value));
+        }
+    }
+
+    s.wln("self");
+    s.closing_curly_newline(); // pub fn set_
 }
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
