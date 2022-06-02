@@ -396,10 +396,9 @@ impl Writer {
         )
     }
 
-    pub fn impl_read_and_writable_with_error(
+    pub fn impl_read_and_writable_login(
         &mut self,
         type_name: impl AsRef<str>,
-        error_name: impl AsRef<str>,
         opcode: u16,
         trait_to_impl: impl AsRef<str>,
         read_function: impl Fn(&mut Self, ImplType),
@@ -417,7 +416,7 @@ impl Writer {
         self.newline();
 
         for it in ImplType::types() {
-            self.print_read_decl(it, "", &error_name);
+            self.print_read_decl(it, "", PARSE_ERROR);
 
             read_function(self, it);
             if it.is_async() {

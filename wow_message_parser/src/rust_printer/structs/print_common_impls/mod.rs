@@ -41,9 +41,8 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 _ => unreachable!(),
             };
 
-            s.impl_read_and_writable_with_error(
+            s.impl_read_and_writable_login(
                 e.name(),
-                &error_ty,
                 opcode,
                 trait_to_impl,
                 |s, it| {
