@@ -99,7 +99,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
                 .unwrap();
             }
             ClientOpcodeMessage::CMSG_CHAR_CREATE(c) => {
-                let result = match c.name.as_str() {
+                let result = match c.name.to_uppercase().as_str() {
                     "SYSTEME" => WorldResult::AUTH_SYSTEM_ERROR,
                     "SERVERSH" => WorldResult::AUTH_SERVER_SHUTTING_DOWN,
                     "WAITQU" => WorldResult::AUTH_WAIT_QUEUE,
@@ -144,7 +144,7 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
                     "NONAME" => WorldResult::CHAR_NAME_NO_NAME,
                     "TOOSHORT" => WorldResult::CHAR_NAME_TOO_SHORT,
                     "TOOLONG" => WorldResult::CHAR_NAME_TOO_LONG,
-                    "ONLYLETTERS" => WorldResult::CHAR_NAME_ONLY_LETTERS,
+                    "ONLYLETTE" => WorldResult::CHAR_NAME_ONLY_LETTERS,
                     "MIXEDLANG" => WorldResult::CHAR_NAME_MIXED_LANGUAGES,
                     "PROFANE" => WorldResult::CHAR_NAME_PROFANE,
                     "RESERVED" => WorldResult::CHAR_NAME_RESERVED,
