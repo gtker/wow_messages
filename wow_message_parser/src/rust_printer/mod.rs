@@ -226,37 +226,23 @@ impl Writer {
         self.open_curly("Box::pin(async move");
     }
 
-    fn print_read_decl(&mut self, it: ImplType, world_text: &str, error_name: impl AsRef<str>) {
+    fn print_read_decl(&mut self, it: ImplType) {
         if !it.is_async() {
-            let body_size = if world_text == "_body" {
-                ", body_size: u32"
-            } else {
-                ""
-            };
             self.open_curly(format!(
-                "fn {prefix}read{world_text}<R: {read}>(r: &mut R{body_size}) -> std::result::Result<Self, {error}>",
-                world_text = world_text,
+                "fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, {error}>",
                 prefix = it.prefix(),
                 read = it.read(),
-                body_size = body_size,
-                error = error_name.as_ref(),
+                error = PARSE_ERROR,
             ));
 
             return;
         }
 
         self.wln(it.cfg());
-        self.wln(format!(
-            "fn {}read{}<'life0, 'async_trait, R>(",
-            it.prefix(),
-            world_text
-        ));
+        self.wln(format!("fn {}read<'life0, 'async_trait, R>(", it.prefix()));
 
         self.inc_indent();
         self.wln("r: &'life0 mut R,");
-        if world_text == "_body" {
-            self.wln("body_size: u32,");
-        }
         self.dec_indent();
 
         self.wln(") -> core::pin::Pin<Box<");
@@ -264,7 +250,7 @@ impl Writer {
         self.inc_indent();
         self.wln(format!(
             "dyn core::future::Future<Output = std::result::Result<Self, {}>>",
-            error_name.as_ref()
+            PARSE_ERROR,
         ));
         self.inc_indent();
 
@@ -416,7 +402,7 @@ impl Writer {
         self.newline();
 
         for it in ImplType::types() {
-            self.print_read_decl(it, "", PARSE_ERROR);
+            self.print_read_decl(it);
 
             read_function(self, it);
             if it.is_async() {
