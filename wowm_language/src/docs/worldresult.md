@@ -97,38 +97,38 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
 | Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
-| `RESPONSE_SUCCESS` | 0 (0x00) |  |  |
-| `RESPONSE_FAILURE` | 1 (0x01) |  |  |
-| `RESPONSE_CANCELLED` | 2 (0x02) |  |  |
-| `RESPONSE_DISCONNECTED` | 3 (0x03) |  |  |
-| `RESPONSE_FAILED_TO_CONNECT` | 4 (0x04) |  |  |
-| `RESPONSE_CONNECTED` | 5 (0x05) |  |  |
-| `RESPONSE_VERSION_MISMATCH` | 6 (0x06) |  |  |
-| `CSTATUS_CONNECTING` | 7 (0x07) |  |  |
-| `CSTATUS_NEGOTIATING_SECURITY` | 8 (0x08) |  |  |
-| `CSTATUS_NEGOTIATION_COMPLETE` | 9 (0x09) |  |  |
-| `CSTATUS_NEGOTIATION_FAILED` | 10 (0x0A) |  |  |
-| `CSTATUS_AUTHENTICATING` | 11 (0x0B) |  |  |
-| `AUTH_OK` | 12 (0x0C) |  |  |
-| `AUTH_FAILED` | 13 (0x0D) |  |  |
-| `AUTH_REJECT` | 14 (0x0E) |  |  |
-| `AUTH_BAD_SERVER_PROOF` | 15 (0x0F) |  |  |
-| `AUTH_UNAVAILABLE` | 16 (0x10) |  |  |
+| `RESPONSE_SUCCESS` | 0 (0x00) | Shows 'Success' with 'Okay' button. |  |
+| `RESPONSE_FAILURE` | 1 (0x01) | Shows 'Failure' with 'Okay' button. |  |
+| `RESPONSE_CANCELLED` | 2 (0x02) | Shows 'Cancelled' with 'Okay' button. |  |
+| `RESPONSE_DISCONNECTED` | 3 (0x03) | Shows 'Disconnected from server' with 'Okay' button. |  |
+| `RESPONSE_FAILED_TO_CONNECT` | 4 (0x04) | Shows 'Failed to connect. Please be sure that your computer is currently connected to the internet, and that no security features on your system might be blocking traffic. See www.wow-europe.com/en/support for more information.' with 'Okay' button. |  |
+| `RESPONSE_CONNECTED` | 5 (0x05) | Shows 'Connected' with 'Okay' button. |  |
+| `RESPONSE_VERSION_MISMATCH` | 6 (0x06) | Shows 'Wrong client version' with 'Okay' button. |  |
+| `CSTATUS_CONNECTING` | 7 (0x07) | Shows 'Connecting to server...' with 'Okay' button. |  |
+| `CSTATUS_NEGOTIATING_SECURITY` | 8 (0x08) | Shows 'Negotiating security' with 'Okay' button. |  |
+| `CSTATUS_NEGOTIATION_COMPLETE` | 9 (0x09) | Shows 'Security negotiation complete' with 'Okay' button. |  |
+| `CSTATUS_NEGOTIATION_FAILED` | 10 (0x0A) | Shows 'Security negotiation failed' with 'Okay' button. |  |
+| `CSTATUS_AUTHENTICATING` | 11 (0x0B) | Shows 'Authenticating' with 'Okay' button. |  |
+| `AUTH_OK` | 12 (0x0C) | Shows 'Authentication Successful' with 'Okay' button. |  |
+| `AUTH_FAILED` | 13 (0x0D) | Shows 'Authentication failed' with 'Okay' button. |  |
+| `AUTH_REJECT` | 14 (0x0E) | Shows 'Login unavailable - Please contact Technical Support at http://www.wow-europe.com/en/support/' with 'Okay' button. |  |
+| `AUTH_BAD_SERVER_PROOF` | 15 (0x0F) | Shows 'Server is not valid' with 'Okay' button. |  |
+| `AUTH_UNAVAILABLE` | 16 (0x10) | Shows 'System unavailable - Please try again later' with 'Okay' button. |  |
 | `AUTH_SYSTEM_ERROR` | 17 (0x11) |  |  |
-| `AUTH_BILLING_ERROR` | 18 (0x12) |  |  |
-| `AUTH_BILLING_EXPIRED` | 19 (0x13) |  |  |
-| `AUTH_VERSION_MISMATCH` | 20 (0x14) |  |  |
-| `AUTH_UNKNOWN_ACCOUNT` | 21 (0x15) |  |  |
-| `AUTH_INCORRECT_PASSWORD` | 22 (0x16) |  |  |
-| `AUTH_SESSION_EXPIRED` | 23 (0x17) |  |  |
+| `AUTH_BILLING_ERROR` | 18 (0x12) | Shows 'Billing system error' with 'Okay' button. |  |
+| `AUTH_BILLING_EXPIRED` | 19 (0x13) | Shows 'Account billing has expired' with 'Okay' button. |  |
+| `AUTH_VERSION_MISMATCH` | 20 (0x14) | Shows 'Wrong client version' with 'Okay' button. |  |
+| `AUTH_UNKNOWN_ACCOUNT` | 21 (0x15) | Shows 'Unknown account' with 'Okay' button. |  |
+| `AUTH_INCORRECT_PASSWORD` | 22 (0x16) | Shows 'Incorrect Password' with 'Okay' button. |  |
+| `AUTH_SESSION_EXPIRED` | 23 (0x17) | Shows 'Session Expired' with 'Okay' button. |  |
 | `AUTH_SERVER_SHUTTING_DOWN` | 24 (0x18) |  |  |
-| `AUTH_ALREADY_LOGGING_IN` | 25 (0x19) |  |  |
-| `AUTH_LOGIN_SERVER_NOT_FOUND` | 26 (0x1A) |  |  |
+| `AUTH_ALREADY_LOGGING_IN` | 25 (0x19) | Shows 'Already Logging In' with 'Okay' button. |  |
+| `AUTH_LOGIN_SERVER_NOT_FOUND` | 26 (0x1A) | Shows 'Invalid Login Server' with 'Okay' button. |  |
 | `AUTH_WAIT_QUEUE` | 27 (0x1B) |  |  |
-| `AUTH_BANNED` | 28 (0x1C) |  |  |
-| `AUTH_ALREADY_ONLINE` | 29 (0x1D) |  |  |
-| `AUTH_NO_TIME` | 30 (0x1E) |  |  |
-| `AUTH_DB_BUSY` | 31 (0x1F) |  |  |
+| `AUTH_BANNED` | 28 (0x1C) | Shows 'This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.' with 'Okay' button. |  |
+| `AUTH_ALREADY_ONLINE` | 29 (0x1D) | Shows 'This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/' with 'Okay' button. |  |
+| `AUTH_NO_TIME` | 30 (0x1E) | Shows 'Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.' with 'Okay' button. |  |
+| `AUTH_DB_BUSY` | 31 (0x1F) | Shows 'This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus' with 'Okay' button. |  |
 | `AUTH_SUSPENDED` | 32 (0x20) |  |  |
 | `AUTH_PARENTAL_CONTROL` | 33 (0x21) |  |  |
 | `REALM_LIST_IN_PROGRESS` | 34 (0x22) |  |  |

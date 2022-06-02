@@ -21,7 +21,11 @@ pub struct CMSG_CHAR_CREATE {
     pub hairstyle: u8,
     pub haircolor: u8,
     pub facialhair: u8,
-    pub outfit_id: u8,
+}
+
+impl CMSG_CHAR_CREATE {
+    pub const OUTFIT_ID_VALUE: u8 = 0x00;
+
 }
 
 impl ClientMessage for CMSG_CHAR_CREATE {
@@ -56,7 +60,7 @@ impl ClientMessage for CMSG_CHAR_CREATE {
         w.write_all(&self.facialhair.to_le_bytes())?;
 
         // outfit_id: u8
-        w.write_all(&self.outfit_id.to_le_bytes())?;
+        w.write_all(&Self::OUTFIT_ID_VALUE.to_le_bytes())?;
 
         Ok(())
     }
@@ -96,7 +100,8 @@ impl ClientMessage for CMSG_CHAR_CREATE {
         let facialhair = crate::util::read_u8_le(r)?;
 
         // outfit_id: u8
-        let outfit_id = crate::util::read_u8_le(r)?;
+        let _outfit_id = crate::util::read_u8_le(r)?;
+        // outfit_id is expected to always be 0 (0)
 
         Ok(Self {
             name,
@@ -108,7 +113,6 @@ impl ClientMessage for CMSG_CHAR_CREATE {
             hairstyle,
             haircolor,
             facialhair,
-            outfit_id,
         })
     }
 
@@ -158,7 +162,6 @@ mod test {
             hairstyle: 0xE,
             haircolor: 0x2,
             facialhair: 0x4,
-            outfit_id: 0x0,
         };
 
         let header_size = 2 + 4;
@@ -177,7 +180,6 @@ mod test {
         assert_eq!(t.hairstyle, expected.hairstyle);
         assert_eq!(t.haircolor, expected.haircolor);
         assert_eq!(t.facialhair, expected.facialhair);
-        assert_eq!(t.outfit_id, expected.outfit_id);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -200,7 +202,6 @@ mod test {
             hairstyle: 0xE,
             haircolor: 0x2,
             facialhair: 0x4,
-            outfit_id: 0x0,
         };
 
         let header_size = 2 + 4;
@@ -219,7 +220,6 @@ mod test {
         assert_eq!(t.hairstyle, expected.hairstyle);
         assert_eq!(t.haircolor, expected.haircolor);
         assert_eq!(t.facialhair, expected.facialhair);
-        assert_eq!(t.outfit_id, expected.outfit_id);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -242,7 +242,6 @@ mod test {
             hairstyle: 0xE,
             haircolor: 0x2,
             facialhair: 0x4,
-            outfit_id: 0x0,
         };
 
         let header_size = 2 + 4;
@@ -261,7 +260,6 @@ mod test {
         assert_eq!(t.hairstyle, expected.hairstyle);
         assert_eq!(t.haircolor, expected.haircolor);
         assert_eq!(t.facialhair, expected.facialhair);
-        assert_eq!(t.outfit_id, expected.outfit_id);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 

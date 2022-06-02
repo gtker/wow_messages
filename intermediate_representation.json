@@ -30165,7 +30165,9 @@
             "int": 0,
             "original": "0x00"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Success' with 'Okay' button."
+          }
         },
         {
           "name": "RESPONSE_FAILURE",
@@ -30173,7 +30175,9 @@
             "int": 1,
             "original": "0x01"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Failure' with 'Okay' button."
+          }
         },
         {
           "name": "RESPONSE_CANCELLED",
@@ -30181,7 +30185,9 @@
             "int": 2,
             "original": "0x02"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Cancelled' with 'Okay' button."
+          }
         },
         {
           "name": "RESPONSE_DISCONNECTED",
@@ -30189,7 +30195,9 @@
             "int": 3,
             "original": "0x03"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Disconnected from server' with 'Okay' button."
+          }
         },
         {
           "name": "RESPONSE_FAILED_TO_CONNECT",
@@ -30197,7 +30205,9 @@
             "int": 4,
             "original": "0x04"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Failed to connect. Please be sure that your computer is currently connected to the internet, and that no security features on your system might be blocking traffic. See www.wow-europe.com/en/support for more information.' with 'Okay' button."
+          }
         },
         {
           "name": "RESPONSE_CONNECTED",
@@ -30205,7 +30215,9 @@
             "int": 5,
             "original": "0x05"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Connected' with 'Okay' button."
+          }
         },
         {
           "name": "RESPONSE_VERSION_MISMATCH",
@@ -30213,7 +30225,9 @@
             "int": 6,
             "original": "0x06"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Wrong client version' with 'Okay' button."
+          }
         },
         {
           "name": "CSTATUS_CONNECTING",
@@ -30221,7 +30235,9 @@
             "int": 7,
             "original": "0x07"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Connecting to server...' with 'Okay' button."
+          }
         },
         {
           "name": "CSTATUS_NEGOTIATING_SECURITY",
@@ -30229,7 +30245,9 @@
             "int": 8,
             "original": "0x08"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Negotiating security' with 'Okay' button."
+          }
         },
         {
           "name": "CSTATUS_NEGOTIATION_COMPLETE",
@@ -30237,7 +30255,9 @@
             "int": 9,
             "original": "0x09"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Security negotiation complete' with 'Okay' button."
+          }
         },
         {
           "name": "CSTATUS_NEGOTIATION_FAILED",
@@ -30245,7 +30265,9 @@
             "int": 10,
             "original": "0x0A"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Security negotiation failed' with 'Okay' button."
+          }
         },
         {
           "name": "CSTATUS_AUTHENTICATING",
@@ -30253,7 +30275,9 @@
             "int": 11,
             "original": "0x0B"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Authenticating' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_OK",
@@ -30261,7 +30285,9 @@
             "int": 12,
             "original": "0x0C"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Authentication Successful' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_FAILED",
@@ -30269,7 +30295,9 @@
             "int": 13,
             "original": "0x0D"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Authentication failed' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_REJECT",
@@ -30277,7 +30305,9 @@
             "int": 14,
             "original": "0x0E"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Login unavailable - Please contact Technical Support at http://www.wow-europe.com/en/support/' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_BAD_SERVER_PROOF",
@@ -30285,7 +30315,9 @@
             "int": 15,
             "original": "0x0F"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Server is not valid' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_UNAVAILABLE",
@@ -30293,7 +30325,9 @@
             "int": 16,
             "original": "0x10"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'System unavailable - Please try again later' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_SYSTEM_ERROR",
@@ -30309,7 +30343,9 @@
             "int": 18,
             "original": "0x12"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Billing system error' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_BILLING_EXPIRED",
@@ -30317,7 +30353,9 @@
             "int": 19,
             "original": "0x13"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Account billing has expired' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_VERSION_MISMATCH",
@@ -30325,7 +30363,9 @@
             "int": 20,
             "original": "0x14"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Wrong client version' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_UNKNOWN_ACCOUNT",
@@ -30333,7 +30373,9 @@
             "int": 21,
             "original": "0x15"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Unknown account' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_INCORRECT_PASSWORD",
@@ -30341,7 +30383,9 @@
             "int": 22,
             "original": "0x16"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Incorrect Password' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_SESSION_EXPIRED",
@@ -30349,7 +30393,9 @@
             "int": 23,
             "original": "0x17"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Session Expired' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_SERVER_SHUTTING_DOWN",
@@ -30365,7 +30411,9 @@
             "int": 25,
             "original": "0x19"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Already Logging In' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_LOGIN_SERVER_NOT_FOUND",
@@ -30373,7 +30421,9 @@
             "int": 26,
             "original": "0x1A"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Invalid Login Server' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_WAIT_QUEUE",
@@ -30389,7 +30439,9 @@
             "int": 28,
             "original": "0x1C"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_ALREADY_ONLINE",
@@ -30397,7 +30449,9 @@
             "int": 29,
             "original": "0x1D"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_NO_TIME",
@@ -30405,7 +30459,9 @@
             "int": 30,
             "original": "0x1E"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_DB_BUSY",
@@ -30413,7 +30469,9 @@
             "int": 31,
             "original": "0x1F"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_SUSPENDED",
@@ -49017,7 +49075,10 @@
                 "type": "u8"
               }
             },
-            "constant_value": null,
+            "constant_value": {
+              "value": 0,
+              "original_string": "0"
+            },
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {}
@@ -49195,6 +49256,7 @@
         "ComplexBuiltInTypes",
         "SubObjects",
         "SimpleBuiltInTypes",
+        "ConstantValue",
         "WorldVersion"
       ]
     },

@@ -24,7 +24,6 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
     let c = tokio_expect_client_message::<CMSG_AUTH_SESSION, _>(&mut stream)
         .await
         .unwrap();
-    dbg!(&c);
 
     let session_key = {
         let mut server = users.lock().unwrap();
@@ -98,6 +97,70 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
                 .tokio_write_encrypted_server(&mut stream, &mut encryption)
                 .await
                 .unwrap();
+            }
+            ClientOpcodeMessage::CMSG_CHAR_CREATE(c) => {
+                let result = match c.name.as_str() {
+                    "SYSTEME" => WorldResult::AUTH_SYSTEM_ERROR,
+                    "SERVERSH" => WorldResult::AUTH_SERVER_SHUTTING_DOWN,
+                    "WAITQU" => WorldResult::AUTH_WAIT_QUEUE,
+                    // Above fail
+                    "SUSPENDED" => WorldResult::AUTH_SUSPENDED,
+                    "PARENTAL" => WorldResult::AUTH_PARENTAL_CONTROL,
+                    "INPROGRESS" => WorldResult::REALM_LIST_IN_PROGRESS,
+                    "REALMSUC" => WorldResult::REALM_LIST_SUCCESS,
+                    "RLFAILED" => WorldResult::REALM_LIST_FAILED,
+                    "INVALID" => WorldResult::REALM_LIST_INVALID,
+                    "REALMNO" => WorldResult::REALM_LIST_REALM_NOT_FOUND,
+                    "CREATEI" => WorldResult::ACCOUNT_CREATE_IN_PROGRESS,
+                    "CREATES" => WorldResult::ACCOUNT_CREATE_SUCCESS,
+                    "CREATEF" => WorldResult::ACCOUNT_CREATE_FAILED,
+                    "RETRIEV" => WorldResult::CHAR_LIST_RETRIEVING,
+                    "RETRIED" => WorldResult::CHAR_LIST_RETRIEVED,
+                    "CHARFA" => WorldResult::CHAR_LIST_FAILED,
+                    "CCINPRO" => WorldResult::CHAR_CREATE_IN_PROGRESS,
+                    "CCSUCC" => WorldResult::CHAR_CREATE_SUCCESS,
+                    "ERROR" => WorldResult::CHAR_CREATE_ERROR,
+                    "CCFAIL" => WorldResult::CHAR_CREATE_FAILED,
+                    "NAMEIN" => WorldResult::CHAR_CREATE_NAME_IN_USE,
+                    "DISABLED" => WorldResult::CHAR_CREATE_DISABLED,
+                    "PVPTEAMS" => WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION,
+                    "SERVERL" => WorldResult::CHAR_CREATE_SERVER_LIMIT,
+                    "ACCOUNTL" => WorldResult::CHAR_CREATE_ACCOUNT_LIMIT,
+                    "SERVERQU" => WorldResult::CHAR_CREATE_SERVER_QUEUE,
+                    "ONLYEXI" => WorldResult::CHAR_CREATE_ONLY_EXISTING,
+                    "CDINPROG" => WorldResult::CHAR_DELETE_IN_PROGRESS,
+                    "CDSUCCESS" => WorldResult::CHAR_DELETE_SUCCESS,
+                    "CDFAIL" => WorldResult::CHAR_DELETE_FAILED,
+                    "FAILEDLOC" => WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER,
+                    "CLINPROG" => WorldResult::CHAR_LOGIN_IN_PROGRESS,
+                    "CLSUCCE" => WorldResult::CHAR_LOGIN_SUCCESS,
+                    "NOWORLD" => WorldResult::CHAR_LOGIN_NO_WORLD,
+                    "DUPLICATEC" => WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER,
+                    "NOINSTANC" => WorldResult::CHAR_LOGIN_NO_INSTANCES,
+                    "CLFAILED" => WorldResult::CHAR_LOGIN_FAILED,
+                    "CLDISABLED" => WorldResult::CHAR_LOGIN_DISABLED,
+                    "NOCHARACTER" => WorldResult::CHAR_LOGIN_NO_CHARACTER,
+                    "LOCKEDFORTR" => WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER,
+                    "NONAME" => WorldResult::CHAR_NAME_NO_NAME,
+                    "TOOSHORT" => WorldResult::CHAR_NAME_TOO_SHORT,
+                    "TOOLONG" => WorldResult::CHAR_NAME_TOO_LONG,
+                    "ONLYLETTERS" => WorldResult::CHAR_NAME_ONLY_LETTERS,
+                    "MIXEDLANG" => WorldResult::CHAR_NAME_MIXED_LANGUAGES,
+                    "PROFANE" => WorldResult::CHAR_NAME_PROFANE,
+                    "RESERVED" => WorldResult::CHAR_NAME_RESERVED,
+                    "INVALIDAPO" => WorldResult::CHAR_NAME_INVALID_APOSTROPHE,
+                    "MULTIPLEAP" => WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES,
+                    "THREECONS" => WorldResult::CHAR_NAME_THREE_CONSECUTIVE,
+                    "INVALIDSPA" => WorldResult::CHAR_NAME_INVALID_SPACE,
+                    "CNSUCCESS" => WorldResult::CHAR_NAME_SUCCESS,
+                    "CNFAILURE" => WorldResult::CHAR_NAME_FAILURE,
+                    _ => WorldResult::CHAR_CREATE_ERROR,
+                };
+
+                SMSG_CHAR_CREATE { result }
+                    .tokio_write_encrypted_server(&mut stream, &mut encryption)
+                    .await
+                    .unwrap();
             }
             ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => {
                 break;

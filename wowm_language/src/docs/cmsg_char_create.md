@@ -20,7 +20,7 @@ cmsg CMSG_CHAR_CREATE = 0x0036 {
     u8 hairstyle;
     u8 haircolor;
     u8 facialhair;
-    u8 outfit_id;
+    u8 outfit_id = 0;
 }
 ```
 ### Header
