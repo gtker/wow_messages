@@ -7,6 +7,10 @@ use crate::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// First message sent by the client when attempting to reconnect. The server will respond with `CMD_AUTH_RECONNECT_CHALLENGE_Server`.
+///
+/// Has the exact same layout as [CMD_AUTH_LOGON_CHALLENGE_Client](crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client).
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm#L3):
 /// ```text
 /// clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
@@ -24,13 +28,20 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMD_AUTH_RECONNECT_CHALLENGE_Client {
+    /// Determines which version of messages are used for further communication.
+    ///
     pub protocol_version: u8,
     pub version: Version,
     pub platform: Platform,
     pub os: Os,
     pub locale: Locale,
+    /// Offset in minutes from UTC time. 180 would be UTC+3
+    ///
     pub utc_timezone_offset: u32,
     pub client_ip_address: u32,
+    /// Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.
+    /// Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info.
+    ///
     pub account_name: String,
 }
 
@@ -345,7 +356,7 @@ mod test {
          0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x01,
          0x01, 0x41, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 29.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
@@ -389,7 +400,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 29.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
@@ -433,7 +444,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 29.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
@@ -483,7 +494,7 @@ mod test {
          0x10, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B,
          0x4C, 0x4D, 0x4E, 0x4F, 0x50, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 48.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 60.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
@@ -527,7 +538,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 48.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 60.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
@@ -571,7 +582,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 48.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 60.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {

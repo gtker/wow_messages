@@ -28,7 +28,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
-    /// Determines which version of messages are used in the future.
+    /// Determines which version of messages are used for further communication.
     ///
     pub protocol_version: u8,
     pub version: Version,

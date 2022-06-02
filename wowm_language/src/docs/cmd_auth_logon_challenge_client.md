@@ -42,7 +42,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | 1 / - | u8 | protocol_version |  | Determines which version of messages are used in the future. |
+| 0x01 | 1 / - | u8 | protocol_version |  | Determines which version of messages are used for further communication. |
 | 0x02 | 2 / Little | u16 | size |  |  |
 | 0x04 | 4 / Little | u32 | game_name |  |  |
 | 0x08 | ? / - | [Version](version.md) | version |  |  |
