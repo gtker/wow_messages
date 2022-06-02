@@ -1,7 +1,7 @@
 use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::rust_printer::enums::print_wowm_definition;
-use crate::rust_printer::Writer;
+use crate::rust_printer::{print_docc_description_and_comment, Writer};
 
 pub fn print_flag(e: &Definer) -> Writer {
     let mut s = Writer::new(&get_import_path(e.tags()));
@@ -15,6 +15,8 @@ pub fn print_flag(e: &Definer) -> Writer {
 
 fn declaration(s: &mut Writer, e: &Definer) {
     print_wowm_definition("flag", s, e);
+
+    print_docc_description_and_comment(s, e.tags());
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]");
     s.new_flag(e.name(), e.ty().rust_str(), |_| {});
