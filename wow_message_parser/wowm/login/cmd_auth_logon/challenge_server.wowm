@@ -1,15 +1,24 @@
 slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
-    u8 protocol_version = 0;
+    u8 protocol_version = 0 {
+        comment = "Mangos statically sets this to 0. It is unkown exactly what it does.";
+    }
 
     LoginResult login_result;
     if (login_result == SUCCESS) {
         u8[32] server_public_key;
-        u8 generator_length;
+        u8 generator_length {
+            comment = "The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1.";
+        }
         u8[generator_length] generator;
-        u8 large_safe_prime_length;
+        u8 large_safe_prime_length {
+            valid_range = "0 32";
+            comment = "Client can not handle arrays greater than 32.";
+        }
         u8[large_safe_prime_length] large_safe_prime;
         u8[32] salt;
-        u8[16] crc_salt;
+        u8[16] crc_salt {
+            description = "Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client].";
+        }
     }
 } {
     login_logon_versions = "2";
@@ -65,17 +74,26 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
-    u8 protocol_version = 0;
+    u8 protocol_version = 0 {
+        comment = "Mangos statically sets this to 0.";
+    }
 
     LoginResult login_result;
     if (login_result == SUCCESS) {
         u8[32] server_public_key;
-        u8 generator_length;
+        u8 generator_length {
+            comment = "The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1.";
+        }
         u8[generator_length] generator;
-        u8 large_safe_prime_length;
+        u8 large_safe_prime_length {
+            valid_range = "0 32";
+            comment = "Client can not handle arrays greater than 32.";
+        }
         u8[large_safe_prime_length] large_safe_prime;
         u8[32] salt;
-        u8[16] crc_salt;
+        u8[16] crc_salt {
+            description = "Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client].";
+        }
 
         SecurityFlag security_flag;
         if (security_flag == PIN) {
@@ -206,12 +224,19 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
     LoginResult login_result;
     if (login_result == SUCCESS) {
         u8[32] server_public_key;
-        u8 generator_length;
+        u8 generator_length {
+            comment = "The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1.";
+        }
         u8[generator_length] generator;
-        u8 large_safe_prime_length;
+        u8 large_safe_prime_length {
+            valid_range = "0 32";
+            comment = "Client can not handle arrays greater than 32.";
+        }
         u8[large_safe_prime_length] large_safe_prime;
         u8[32] salt;
-        u8[16] crc_salt;
+        u8[16] crc_salt {
+            description = "Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client].";
+        }
 
         SecurityFlag security_flag;
         if (security_flag & PIN) {

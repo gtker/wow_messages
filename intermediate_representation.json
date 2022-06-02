@@ -32136,7 +32136,9 @@
             },
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "Mangos statically sets this to 0. It is unkown exactly what it does."
+            }
           }
         },
         {
@@ -32199,7 +32201,9 @@
                   "constant_value": null,
                   "used_as_size_in": "generator",
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "comment": "The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1."
+                  }
                 }
               },
               {
@@ -32234,7 +32238,9 @@
                   "constant_value": null,
                   "used_as_size_in": "large_safe_prime",
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "comment": "Client can not handle arrays greater than 32."
+                  }
                 }
               },
               {
@@ -32297,7 +32303,9 @@
                   "constant_value": null,
                   "used_as_size_in": null,
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "description": "Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client]."
+                  }
                 }
               }
             ],
@@ -32649,7 +32657,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 18
+            "start_position": 27
           }
         }
       ],
@@ -32692,7 +32700,9 @@
             },
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "Mangos statically sets this to 0."
+            }
           }
         },
         {
@@ -32755,7 +32765,9 @@
                   "constant_value": null,
                   "used_as_size_in": "generator",
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "comment": "The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1."
+                  }
                 }
               },
               {
@@ -32790,7 +32802,9 @@
                   "constant_value": null,
                   "used_as_size_in": "large_safe_prime",
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "comment": "Client can not handle arrays greater than 32."
+                  }
                 }
               },
               {
@@ -32853,7 +32867,9 @@
                   "constant_value": null,
                   "used_as_size_in": null,
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "description": "Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client]."
+                  }
                 }
               },
               {
@@ -33350,7 +33366,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 90
+            "start_position": 108
           }
         },
         {
@@ -33689,13 +33705,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 150
+            "start_position": 168
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-        "start_position": 67
+        "start_position": 76
       },
       "only_has_io_error": false,
       "features": [
@@ -33795,7 +33811,9 @@
                   "constant_value": null,
                   "used_as_size_in": "generator",
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "comment": "The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1."
+                  }
                 }
               },
               {
@@ -33830,7 +33848,9 @@
                   "constant_value": null,
                   "used_as_size_in": "large_safe_prime",
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "comment": "Client can not handle arrays greater than 32."
+                  }
                 }
               },
               {
@@ -33893,7 +33913,9 @@
                   "constant_value": null,
                   "used_as_size_in": null,
                   "used_in_if": false,
-                  "tags": {}
+                  "tags": {
+                    "description": "Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client]."
+                  }
                 }
               },
               {
@@ -34463,7 +34485,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 236
+            "start_position": 261
           }
         },
         {
@@ -34860,7 +34882,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 289
+            "start_position": 314
           }
         },
         {
@@ -35209,7 +35231,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 349
+            "start_position": 374
           }
         },
         {
@@ -35619,7 +35641,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 404
+            "start_position": 429
           }
         },
         {
@@ -35654,7 +35676,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 468
+            "start_position": 493
           }
         },
         {
@@ -36066,7 +36088,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 478
+            "start_position": 503
           }
         },
         {
@@ -36101,13 +36123,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-            "start_position": 545
+            "start_position": 570
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm",
-        "start_position": 203
+        "start_position": 221
       },
       "only_has_io_error": false,
       "features": [
