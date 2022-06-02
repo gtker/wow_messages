@@ -16,6 +16,10 @@ use std::convert::{TryFrom, TryInto};
 /// }
 
 /// ```
+/// # Comment
+///
+/// vmangos: From GMTicketCategory.dbc
+///
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketType {
     STUCK,

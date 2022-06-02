@@ -9,6 +9,10 @@ use std::convert::{TryFrom, TryInto};
 /// }
 
 /// ```
+/// # Comment
+///
+/// According to cmangos: byte value (UNIT_FIELD_BYTES_2,0)
+///
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SheathState {
     UNARMED,

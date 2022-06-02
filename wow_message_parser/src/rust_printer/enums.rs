@@ -31,6 +31,7 @@ fn includes(s: &mut Writer) {
 fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
     print_wowm_definition("enum", s, e);
 
+    print_docc_description_and_comment(s, e.tags(), o, e.tags());
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]");
     let visibility = match e.only_used_in_if() {
         true => "pub(crate)",

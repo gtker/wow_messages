@@ -9,6 +9,10 @@ use std::convert::{TryFrom, TryInto};
 /// }
 
 /// ```
+/// # Comment
+///
+/// These errors are only printed in client console.
+///
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TrainingFailureReason {
     /// # Comment

@@ -15,6 +15,10 @@ use std::convert::{TryFrom, TryInto};
 /// }
 
 /// ```
+/// # Comment
+///
+/// cmangos has one instance of this be u32, but both vmangos/mangoszero are u8
+///
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestPartyMessage {
     /// # Comment

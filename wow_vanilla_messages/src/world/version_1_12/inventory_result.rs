@@ -73,6 +73,10 @@ use std::convert::{TryFrom, TryInto};
 /// }
 
 /// ```
+/// # Comment
+///
+/// Any values greater than maximum enum value show as 'bag full'
+///
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum InventoryResult {
     OK,
