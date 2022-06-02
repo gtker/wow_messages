@@ -12,7 +12,7 @@ use crate::rust_printer::{
     WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::test_case::TestCase;
-use crate::{CONTAINER_SELF_SIZE_FIELD, LOGIN_LOGON_VERSIONS};
+use crate::{CONTAINER_SELF_SIZE_FIELD, LOGIN_VERSIONS};
 use std::ops::AddAssign;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
@@ -280,7 +280,7 @@ impl Container {
     pub fn get_opcode_import_path(&self) -> String {
         let import_path = if self.tags().logon_versions().contains(&LoginVersion::All) {
             let mut tags = Tags::new();
-            tags.push(Tag::new(LOGIN_LOGON_VERSIONS, "3"));
+            tags.push(Tag::new(LOGIN_VERSIONS, "3"));
             get_import_path(&tags)
         } else {
             get_import_path(self.tags())

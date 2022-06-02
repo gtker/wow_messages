@@ -1,7 +1,7 @@
 use std::fmt::{Display, Formatter};
 
 use crate::file_utils::get_import_path;
-use crate::{Objects, COMMENT, DESCRIPTION, DISPLAY, LOGIN_LOGON_VERSIONS, TEST_STR, VERSIONS};
+use crate::{Objects, COMMENT, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, TEST_STR, VERSIONS};
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Copy, Clone)]
 pub enum WorldVersion {
@@ -65,7 +65,7 @@ impl Tags {
     }
 
     pub fn append_or_insert(&mut self, key: &str, value: &str) {
-        if key == LOGIN_LOGON_VERSIONS {
+        if key == LOGIN_VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
                     self.login_logon_versions.push(LoginVersion::Specific(v));
