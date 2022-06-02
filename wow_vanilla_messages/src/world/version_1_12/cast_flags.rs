@@ -24,9 +24,6 @@ impl CastFlags {
         Self { inner }
     }
 
-}
-
-impl CastFlags {
     pub(crate) const NONE: u16 = 0x00;
     pub(crate) const HIDDEN_COMBATLOG: u16 = 0x01;
     pub(crate) const UNKNOWN2: u16 = 0x02;

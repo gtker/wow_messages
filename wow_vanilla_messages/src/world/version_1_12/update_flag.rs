@@ -22,9 +22,6 @@ impl UpdateFlag {
         Self { inner }
     }
 
-}
-
-impl UpdateFlag {
     pub(crate) const NONE: u8 = 0x00;
     pub(crate) const SELF: u8 = 0x01;
     pub(crate) const TRANSPORT: u8 = 0x02;

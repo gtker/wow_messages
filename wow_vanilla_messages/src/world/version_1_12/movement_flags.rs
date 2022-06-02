@@ -39,9 +39,6 @@ impl MovementFlags {
         Self { inner }
     }
 
-}
-
-impl MovementFlags {
     pub(crate) const NONE: u32 = 0x00;
     pub(crate) const FORWARD: u32 = 0x01;
     pub(crate) const BACKWARD: u32 = 0x02;

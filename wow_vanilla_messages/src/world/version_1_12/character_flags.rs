@@ -20,9 +20,6 @@ impl CharacterFlags {
         Self { inner }
     }
 
-}
-
-impl CharacterFlags {
     pub(crate) const NONE: u32 = 0x00;
     pub(crate) const LOCKED_FOR_TRANSFER: u32 = 0x04;
     pub(crate) const HIDE_HELM: u32 = 0x400;

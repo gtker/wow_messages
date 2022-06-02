@@ -18,9 +18,6 @@ impl SecurityFlag {
         Self { inner }
     }
 
-}
-
-impl SecurityFlag {
     pub(crate) const NONE: u8 = 0x00;
     pub(crate) const PIN: u8 = 0x01;
     pub(crate) const UNKNOWN0: u8 = 0x02;

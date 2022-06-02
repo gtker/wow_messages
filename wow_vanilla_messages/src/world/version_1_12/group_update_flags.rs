@@ -37,9 +37,6 @@ impl GroupUpdateFlags {
         Self { inner }
     }
 
-}
-
-impl GroupUpdateFlags {
     pub(crate) const FLAG_NONE: u32 = 0x00;
     pub(crate) const FLAG_STATUS: u32 = 0x01;
     pub(crate) const FLAG_CUR_HP: u32 = 0x02;

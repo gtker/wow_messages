@@ -31,9 +31,6 @@ impl SpellCastTargetFlags {
         Self { inner }
     }
 
-}
-
-impl SpellCastTargetFlags {
     pub(crate) const SELF: u16 = 0x00;
     pub(crate) const UNUSED1: u16 = 0x01;
     pub(crate) const UNIT: u16 = 0x02;

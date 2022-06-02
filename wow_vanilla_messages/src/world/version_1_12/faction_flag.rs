@@ -21,9 +21,6 @@ impl FactionFlag {
         Self { inner }
     }
 
-}
-
-impl FactionFlag {
     pub(crate) const VISIBLE: u8 = 0x01;
     pub(crate) const AT_WAR: u8 = 0x02;
     pub(crate) const HIDDEN: u8 = 0x04;

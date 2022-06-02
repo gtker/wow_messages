@@ -23,9 +23,6 @@ impl GroupMemberOnlineStatus {
         Self { inner }
     }
 
-}
-
-impl GroupMemberOnlineStatus {
     pub(crate) const OFFLINE: u8 = 0x00;
     pub(crate) const ONLINE: u8 = 0x01;
     pub(crate) const PVP: u8 = 0x02;

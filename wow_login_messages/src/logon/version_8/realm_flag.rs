@@ -21,9 +21,6 @@ impl RealmFlag {
         Self { inner }
     }
 
-}
-
-impl RealmFlag {
     pub(crate) const NONE: u8 = 0x00;
     pub(crate) const INVALID: u8 = 0x01;
     pub(crate) const OFFLINE: u8 = 0x02;

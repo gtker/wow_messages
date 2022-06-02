@@ -18,7 +18,9 @@ fn declaration(s: &mut Writer, e: &Definer) {
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]");
     s.new_flag(e.name(), e.ty().rust_str(), |_| {});
+}
 
+fn common_impls(s: &mut Writer, e: &Definer) {
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
         s.funcn_pub_const(
             format!("new(inner: {ty})", ty = e.ty().rust_str()),
@@ -27,11 +29,7 @@ fn declaration(s: &mut Writer, e: &Definer) {
                 s.wln("Self { inner }");
             },
         );
-    });
-}
 
-fn common_impls(s: &mut Writer, e: &Definer) {
-    s.bodyn(format!("impl {name}", name = e.name()), |s| {
         print_fields(s, e);
 
         s.funcn_const("as_int(&self)", e.ty().rust_str(), |s| {

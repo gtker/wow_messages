@@ -47,9 +47,6 @@ impl SplineFlag {
         Self { inner }
     }
 
-}
-
-impl SplineFlag {
     pub(crate) const NONE: u32 = 0x00;
     pub(crate) const DONE: u32 = 0x01;
     pub(crate) const FALLING: u32 = 0x02;
