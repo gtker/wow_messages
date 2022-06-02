@@ -1,5 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 
+/// These errors are only printed in client console.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_trainer_buy_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_trainer_buy_failed.wowm#L3):
 /// ```text
 /// enum TrainingFailureReason : u32 {
@@ -9,24 +11,14 @@ use std::convert::{TryFrom, TryInto};
 /// }
 
 /// ```
-/// # Comment
-///
-/// These errors are only printed in client console.
-///
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TrainingFailureReason {
-    /// # Comment
-    ///
     /// Trainer service %d unavailable.
     ///
     UNAVAILABLE,
-    /// # Comment
-    ///
     /// Not enough money for trainer service %d.
     ///
     NOT_ENOUGH_MONEY,
-    /// # Comment
-    ///
     /// Not enough skill points for trainer service %d.
     ///
     NOT_ENOUGH_SKILL,

@@ -16,8 +16,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_PET_CAST_FAILED {
     pub id: u32,
-    /// # Comment
-    ///
     /// vmangos sets to 2 and cmangos sets to 0.
     ///
     pub unknown1: u8,

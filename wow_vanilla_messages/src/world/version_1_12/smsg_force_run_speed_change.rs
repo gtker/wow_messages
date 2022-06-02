@@ -15,8 +15,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_FORCE_RUN_SPEED_CHANGE {
     pub guid: Guid,
-    /// # Comment
-    ///
     /// cmangos/mangoszero/vmangos: set to 0
     /// cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39
     ///

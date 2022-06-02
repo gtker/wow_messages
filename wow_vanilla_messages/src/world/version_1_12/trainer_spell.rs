@@ -21,21 +21,15 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct TrainerSpell {
-    /// # Comment
-    ///
     /// cmangos: learned spell (or cast-spell in profession case)
     ///
     pub spell: u32,
     pub state: TrainerSpellState,
     pub spell_cost: u32,
-    /// # Comment
-    ///
     /// cmangos: spells don't cost talent points
     /// cmangos: set to 0
     ///
     pub talent_point_cost: u32,
-    /// # Comment
-    ///
     /// cmangos: must be equal prev. field to have learn button in enabled state
     /// cmangos: 1 for true 0 for false
     ///
@@ -45,8 +39,6 @@ pub struct TrainerSpell {
     pub required_skill_value: u32,
     pub spell_chain_required: u32,
     pub spell_chain_previous: u32,
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero: all set 0
     ///
     pub unknown1: u32,

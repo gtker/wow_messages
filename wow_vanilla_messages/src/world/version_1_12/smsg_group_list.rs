@@ -26,8 +26,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_GROUP_LIST {
     pub group_type: GroupType,
-    /// # Comment
-    ///
     /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
     ///
     pub own_flags: u8,

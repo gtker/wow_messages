@@ -8,6 +8,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Set new hearthstone location.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm#L5):
 /// ```text
 /// smsg SMSG_BINDPOINTUPDATE = 0x0155 {
@@ -16,10 +18,6 @@ use std::io::{Write, Read};
 ///     Area area;
 /// }
 /// ```
-/// # Description
-///
-/// Set new hearthstone location.
-///
 pub struct SMSG_BINDPOINTUPDATE {
     pub position: Vector3d,
     pub map: Map,

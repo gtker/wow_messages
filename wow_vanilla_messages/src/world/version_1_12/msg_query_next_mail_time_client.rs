@@ -5,15 +5,13 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// mangoszero/vmangos: No idea when this is called.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_query_next_mail_time_client.wowm#L3):
 /// ```text
 /// cmsg MSG_QUERY_NEXT_MAIL_TIME_Client = 0x0284 {
 /// }
 /// ```
-/// # Comment
-///
-/// mangoszero/vmangos: No idea when this is called.
-///
 pub struct MSG_QUERY_NEXT_MAIL_TIME_Client {
 }
 

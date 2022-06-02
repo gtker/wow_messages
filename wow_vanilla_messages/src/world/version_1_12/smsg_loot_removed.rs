@@ -5,16 +5,14 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Notify a looting player that an item has been taken.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_removed.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_removed.wowm#L5):
 /// ```text
 /// smsg SMSG_LOOT_REMOVED = 0x0162 {
 ///     u8 slot;
 /// }
 /// ```
-/// # Description
-///
-/// Notify a looting player that an item has been taken.
-///
 pub struct SMSG_LOOT_REMOVED {
     pub slot: u8,
 }

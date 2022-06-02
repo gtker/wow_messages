@@ -27,8 +27,6 @@ pub struct CMSG_GMTICKET_CREATE {
     pub map: Map,
     pub position: Vector3d,
     pub message: String,
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero: Pre-TBC: 'Reserved for future use'
     /// cmangos/vmangos/mangoszero: Unused
     ///

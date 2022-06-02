@@ -25,15 +25,11 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_PET_SPELLS {
     pub pet: Guid,
-    /// # Comment
-    ///
     /// mangoszero: set to 0
     ///
     pub unknown1: u32,
     pub react: PetReactState,
     pub command: PetCommandState,
-    /// # Comment
-    ///
     /// mangoszero: set to 0
     ///
     pub unknown2: u16,

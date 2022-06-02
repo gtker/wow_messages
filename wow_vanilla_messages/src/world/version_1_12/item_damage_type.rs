@@ -14,8 +14,6 @@ use std::io::{Write, Read};
 pub struct ItemDamageType {
     pub damage_minimum: u32,
     pub damage_maximum: u32,
-    /// # Comment
-    ///
     /// mangoszero/vmangos/cmangos: id from Resistances.dbc
     ///
     pub damage_type: u32,

@@ -15,8 +15,6 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_SHOWTAXINODES {
-    /// # Comment
-    ///
     /// Set to 1 in mangoszero
     ///
     pub unknown1: u32,

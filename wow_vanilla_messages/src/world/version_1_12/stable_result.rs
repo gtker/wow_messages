@@ -13,28 +13,18 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum StableResult {
-    /// # Comment
-    ///
     /// you don't have enough money
     ///
     ERR_MONEY,
-    /// # Comment
-    ///
     /// currently used in most fail cases
     ///
     ERR_STABLE,
-    /// # Comment
-    ///
     /// table success
     ///
     SUCCESS_STABLE,
-    /// # Comment
-    ///
     /// unstable/swap success
     ///
     SUCCESS_UNSTABLE,
-    /// # Comment
-    ///
     /// buy slot success
     ///
     SUCCESS_BUY_SLOT,

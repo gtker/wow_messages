@@ -1,3 +1,5 @@
+/// Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets](crate::world::version_1_12::SpellCastTargets) needs.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L29):
 /// ```text
 /// flag SpellCastTargetFlags : u16 {
@@ -21,10 +23,6 @@
 /// }
 
 /// ```
-/// # Comment
-///
-/// Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets](crate::world::version_1_12::SpellCastTargets) needs.
-///
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct SpellCastTargetFlags {
     inner: u16,
@@ -87,8 +85,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNUSED1) != 0
     }
 
-    /// # Comment
-    ///
     /// not used in any spells as of 2.4.3 (can be set dynamically)
     ///
     pub const fn new_UNUSED1() -> Self {
@@ -109,8 +105,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT) != 0
     }
 
-    /// # Comment
-    ///
     /// pguid
     ///
     pub const fn new_UNIT() -> Self {
@@ -131,8 +125,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_RAID) != 0
     }
 
-    /// # Comment
-    ///
     /// not used in any spells as of 2.4.3 (can be set dynamically) - raid member
     ///
     pub const fn new_UNIT_RAID() -> Self {
@@ -153,8 +145,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_PARTY) != 0
     }
 
-    /// # Comment
-    ///
     /// not used in any spells as of 2.4.3 (can be set dynamically) - party member
     ///
     pub const fn new_UNIT_PARTY() -> Self {
@@ -175,8 +165,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::ITEM) != 0
     }
 
-    /// # Comment
-    ///
     /// pguid
     ///
     pub const fn new_ITEM() -> Self {
@@ -197,8 +185,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::SOURCE_LOCATION) != 0
     }
 
-    /// # Comment
-    ///
     /// 3xfloat
     ///
     pub const fn new_SOURCE_LOCATION() -> Self {
@@ -219,8 +205,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::DEST_LOCATION) != 0
     }
 
-    /// # Comment
-    ///
     /// 3xfloat
     ///
     pub const fn new_DEST_LOCATION() -> Self {
@@ -241,8 +225,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_ENEMY) != 0
     }
 
-    /// # Comment
-    ///
     /// CanAttack == true
     ///
     pub const fn new_UNIT_ENEMY() -> Self {
@@ -263,8 +245,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_ALLY) != 0
     }
 
-    /// # Comment
-    ///
     /// CanAssist == true
     ///
     pub const fn new_UNIT_ALLY() -> Self {
@@ -285,8 +265,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::CORPSE_ENEMY) != 0
     }
 
-    /// # Comment
-    ///
     /// pguid, CanAssist == false
     ///
     pub const fn new_CORPSE_ENEMY() -> Self {
@@ -307,8 +285,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_DEAD) != 0
     }
 
-    /// # Comment
-    ///
     /// skinning-like effects
     ///
     pub const fn new_UNIT_DEAD() -> Self {
@@ -329,8 +305,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::GAMEOBJECT) != 0
     }
 
-    /// # Comment
-    ///
     /// pguid, 0 spells in 2.4.3
     ///
     pub const fn new_GAMEOBJECT() -> Self {
@@ -351,8 +325,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::TRADE_ITEM) != 0
     }
 
-    /// # Comment
-    ///
     /// pguid, 0 spells
     ///
     pub const fn new_TRADE_ITEM() -> Self {
@@ -373,8 +345,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::STRING) != 0
     }
 
-    /// # Comment
-    ///
     /// string, 0 spells
     ///
     pub const fn new_STRING() -> Self {
@@ -395,8 +365,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::LOCKED) != 0
     }
 
-    /// # Comment
-    ///
     /// 199 spells, opening object/lock
     ///
     pub const fn new_LOCKED() -> Self {
@@ -417,8 +385,6 @@ impl SpellCastTargetFlags {
         (self.inner & Self::CORPSE_ALLY) != 0
     }
 
-    /// # Comment
-    ///
     /// pguid, CanAssist == true
     ///
     pub const fn new_CORPSE_ALLY() -> Self {

@@ -7,6 +7,8 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// mangoszero/vmangos: Quests that don't require items use the RequestItemsText field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_request_item.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_request_item.wowm#L14):
 /// ```text
 /// smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
@@ -26,10 +28,6 @@ use std::io::{Write, Read};
 ///     u32 flags3;
 /// }
 /// ```
-/// # Comment
-///
-/// mangoszero/vmangos: Quests that don't require items use the RequestItemsText field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
-///
 pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub npc: Guid,
     pub quest_id: u32,
@@ -40,23 +38,15 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub auto_finish: u32,
     pub required_money: u32,
     pub required_items: Vec<QuestItemRequirement>,
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero: All set to 0x02
     ///
     pub unknown1: u32,
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero: Called flags1.
     ///
     pub completable: QuestCompletable,
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero: set to 0x04
     ///
     pub flags2: u32,
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero: set to 0x08
     ///
     pub flags3: u32,

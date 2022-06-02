@@ -17,8 +17,6 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_INITIAL_SPELLS {
-    /// # Comment
-    ///
     /// cmangos/mangoszero: sets to 0
     ///
     pub unknown1: u8,

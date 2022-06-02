@@ -5,6 +5,11 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Data for which tutorials the client has passed.
+///
+/// All bits set means that all tutorials have been passed.
+/// Must be sent after [SMSG_LOGIN_VERIFY_WORLD](crate::world::version_1_12::SMSG_LOGIN_VERIFY_WORLD) otherwise the client will SEGFAULT.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm#L3):
 /// ```text
 /// smsg SMSG_TUTORIAL_FLAGS = 0x00FD {
@@ -18,15 +23,6 @@ use std::io::{Write, Read};
 ///     u32 tutorial_data7;
 /// }
 /// ```
-/// # Description
-///
-/// Data for which tutorials the client has passed.
-///
-/// # Comment
-///
-/// All bits set means that all tutorials have been passed.
-/// Must be sent after [SMSG_LOGIN_VERIFY_WORLD](crate::world::version_1_12::SMSG_LOGIN_VERIFY_WORLD) otherwise the client will SEGFAULT.
-///
 pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data0: u32,
     pub tutorial_data1: u32,

@@ -149,8 +149,6 @@ impl SplineFlag {
         (self.inner & Self::FALLING) != 0
     }
 
-    /// # Comment
-    ///
     /// vmangos: Affects elevation computation
     ///
     pub const fn new_FALLING() -> Self {
@@ -297,8 +295,6 @@ impl SplineFlag {
         (self.inner & Self::FLYING) != 0
     }
 
-    /// # Comment
-    ///
     /// vmangos: Smooth movement(Catmullrom interpolation mode), flying animation
     ///
     pub const fn new_FLYING() -> Self {
@@ -481,8 +477,6 @@ impl SplineFlag {
         (self.inner & Self::UNKNOWN19) != 0
     }
 
-    /// # Comment
-    ///
     /// vmangos: exists, but unknown what it does
     ///
     pub const fn new_UNKNOWN19() -> Self {
@@ -503,8 +497,6 @@ impl SplineFlag {
         (self.inner & Self::CYCLIC) != 0
     }
 
-    /// # Comment
-    ///
     /// vmangos: Movement by cycled spline
     ///
     pub const fn new_CYCLIC() -> Self {
@@ -525,8 +517,6 @@ impl SplineFlag {
         (self.inner & Self::ENTER_CYCLE) != 0
     }
 
-    /// # Comment
-    ///
     /// vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done
     ///
     pub const fn new_ENTER_CYCLE() -> Self {
@@ -547,8 +537,6 @@ impl SplineFlag {
         (self.inner & Self::FROZEN) != 0
     }
 
-    /// # Comment
-    ///
     /// vmangos: Will never arrive
     ///
     pub const fn new_FROZEN() -> Self {
@@ -605,8 +593,6 @@ impl SplineFlag {
         (self.inner & Self::UNKNOWN25) != 0
     }
 
-    /// # Comment
-    ///
     /// vmangos: exists, but unknown what it does
     ///
     pub const fn new_UNKNOWN25() -> Self {

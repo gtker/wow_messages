@@ -25,14 +25,10 @@ pub struct SMSG_LOOT_ROLL {
     pub loot_slot: u32,
     pub item_guid: Guid,
     pub item_id: u32,
-    /// # Comment
-    ///
     /// vmangos/mangoszero: not used ?
     ///
     pub item_random_suffix: u32,
     pub item_random_property_id: u32,
-    /// # Comment
-    ///
     /// vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number
     ///
     pub roll_number: u8,

@@ -127,9 +127,9 @@ fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
         s.wln("#[derive(Copy)]");
     }
 
-    print_struct_wowm_definition(s, e);
-
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
+
+    print_struct_wowm_definition(s, e);
 
     s.new_struct(e.name(), |s| {
         for member in e.rust_object().members_in_struct() {

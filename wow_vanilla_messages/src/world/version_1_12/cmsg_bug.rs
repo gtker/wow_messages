@@ -15,8 +15,6 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMSG_BUG {
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero: If 0 received bug report, else received suggestion
     ///
     pub suggestion: u32,

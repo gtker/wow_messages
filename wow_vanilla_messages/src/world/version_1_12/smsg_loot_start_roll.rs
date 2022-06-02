@@ -21,8 +21,6 @@ pub struct SMSG_LOOT_START_ROLL {
     pub creature_guid: Guid,
     pub loot_slot: u32,
     pub item_id: u32,
-    /// # Comment
-    ///
     /// vmangos/mangoszero: not used ?
     ///
     pub item_random_suffix: u32,

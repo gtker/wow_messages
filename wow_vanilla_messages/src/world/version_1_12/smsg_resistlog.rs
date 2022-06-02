@@ -6,6 +6,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Structure as comment on `https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525`.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_resistlog.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_resistlog.wowm#L5):
 /// ```text
 /// smsg SMSG_RESISTLOG = 0x01D6 {
@@ -18,10 +20,6 @@ use std::io::{Write, Read};
 ///     u32 unknown5;
 /// }
 /// ```
-/// # Comment
-///
-/// Structure as comment on `https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525`.
-///
 pub struct SMSG_RESISTLOG {
     pub guid1: Guid,
     pub guid2: Guid,

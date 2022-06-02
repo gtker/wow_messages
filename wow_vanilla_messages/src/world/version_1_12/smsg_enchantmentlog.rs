@@ -6,6 +6,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// cmangos and vmangos/mangoszero disagree about packed and extra u8
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_enchantmentlog.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_enchantmentlog.wowm#L5):
 /// ```text
 /// smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
@@ -16,10 +18,6 @@ use std::io::{Write, Read};
 ///     u8 unknown1;
 /// }
 /// ```
-/// # Comment
-///
-/// cmangos and vmangos/mangoszero disagree about packed and extra u8
-///
 pub struct SMSG_ENCHANTMENTLOG {
     pub target_guid: Guid,
     pub caster_guid: Guid,

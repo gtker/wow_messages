@@ -18,8 +18,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_QUESTUPDATE_ADD_KILL {
     pub quest_id: u32,
-    /// # Comment
-    ///
     /// Unsure of name
     ///
     pub create_id: u32,

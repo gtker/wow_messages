@@ -13,8 +13,6 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct QuestObjective {
-    /// # Comment
-    ///
     /// cmangos: client expected gameobject template id in form (id|0x80000000)
     ///
     pub creature_id: u32,

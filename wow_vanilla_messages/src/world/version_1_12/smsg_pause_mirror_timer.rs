@@ -6,6 +6,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with SMSG_START_MIRROR_TIMER to avoid lua errors.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm#L5):
 /// ```text
 /// smsg SMSG_PAUSE_MIRROR_TIMER = 0x01DA {
@@ -13,10 +15,6 @@ use std::io::{Write, Read};
 ///     u8 is_frozen;
 /// }
 /// ```
-/// # Comment
-///
-/// According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with SMSG_START_MIRROR_TIMER to avoid lua errors.
-///
 pub struct SMSG_PAUSE_MIRROR_TIMER {
     pub timer: TimerType,
     pub is_frozen: u8,

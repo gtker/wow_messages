@@ -6,6 +6,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using MSG_MOVE_SET_RAW_POSITION_ACK.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_raw_position.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_raw_position.wowm#L3):
 /// ```text
 /// cmsg CMSG_MOVE_SET_RAW_POSITION = 0x00E1 {
@@ -13,10 +15,6 @@ use std::io::{Write, Read};
 ///     f32 orientation;
 /// }
 /// ```
-/// # Comment
-///
-/// vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using MSG_MOVE_SET_RAW_POSITION_ACK.
-///
 pub struct CMSG_MOVE_SET_RAW_POSITION {
     pub position: Vector3d,
     pub orientation: f32,

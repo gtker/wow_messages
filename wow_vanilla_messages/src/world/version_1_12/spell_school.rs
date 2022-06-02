@@ -15,8 +15,6 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SpellSchool {
-    /// # Comment
-    ///
     /// Physical, Armor
     ///
     NORMAL,

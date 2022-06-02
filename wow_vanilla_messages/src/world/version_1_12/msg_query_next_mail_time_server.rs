@@ -5,19 +5,15 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// mangoszero/vmangos: No idea when this is called.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm#L3):
 /// ```text
 /// smsg MSG_QUERY_NEXT_MAIL_TIME_Server = 0x0284 {
 ///     f32 unread_mails;
 /// }
 /// ```
-/// # Comment
-///
-/// mangoszero/vmangos: No idea when this is called.
-///
 pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
-    /// # Comment
-    ///
     /// mangoszero sets 0 if has unread mail, -86400.0f (0xC7A8C000) if not
     /// vmangos sets 0 if has unread mail, -1.0f if not
     /// cmangos has the behavior of mangoszero except when there are unread mails. This is TODO.

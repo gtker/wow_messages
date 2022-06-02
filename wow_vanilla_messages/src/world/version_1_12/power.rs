@@ -15,34 +15,22 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Power {
-    /// # Comment
-    ///
     /// The most common one, mobs usually have this or rage
     ///
     MANA,
-    /// # Comment
-    ///
     /// This is what warriors use to cast their spells
     ///
     RAGE,
-    /// # Comment
-    ///
     /// Used by hunters after Cataclysm (4.x)
     ///
     FOCUS,
-    /// # Comment
-    ///
     /// Used by rouges to do their spells
     ///
     ENERGY,
-    /// # Comment
-    ///
     /// Hunter's pet's happiness affect their damage
     ///
     HAPPINESS,
     MAX_POWERS,
-    /// # Comment
-    ///
     /// default for class? - need check for TBC
     ///
     ALL,

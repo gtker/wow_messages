@@ -7,6 +7,10 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
+///
+/// The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT](crate::world::version_1_12::SMSG_UPDATE_OBJECT), but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT](crate::world::version_1_12::SMSG_UPDATE_OBJECT).
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm#L3):
 /// ```text
 /// smsg SMSG_LOGIN_VERIFY_WORLD = 0x0236 {
@@ -15,14 +19,6 @@ use std::io::{Write, Read};
 ///     f32 orientation;
 /// }
 /// ```
-/// # Description
-///
-/// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
-///
-/// # Comment
-///
-/// The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT](crate::world::version_1_12::SMSG_UPDATE_OBJECT), but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT](crate::world::version_1_12::SMSG_UPDATE_OBJECT).
-///
 pub struct SMSG_LOGIN_VERIFY_WORLD {
     pub map: Map,
     pub position: Vector3d,

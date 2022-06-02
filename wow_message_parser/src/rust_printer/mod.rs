@@ -779,9 +779,6 @@ fn print_docc_description_and_comment(
     object_tags: &Tags,
 ) {
     if let Some(description) = tags.description() {
-        s.docc("# Description");
-        s.docc_newline();
-
         for line in description.as_rust_doc_lines(o, object_tags) {
             s.docc(line);
         }
@@ -790,9 +787,6 @@ fn print_docc_description_and_comment(
     }
 
     if let Some(comment) = tags.comment() {
-        s.docc("# Comment");
-        s.docc_newline();
-
         for line in comment.as_rust_doc_lines(o, object_tags) {
             s.docc(line);
         }

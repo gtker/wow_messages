@@ -24,20 +24,14 @@ pub struct SMSG_LOOT_ROLL_WON {
     pub looted_target_guid: Guid,
     pub loot_slot: u32,
     pub item_id: u32,
-    /// # Comment
-    ///
     /// vmangos/mangoszero: not used ?
     ///
     pub item_random_suffix: u32,
     pub item_random_property_id: u32,
     pub winning_player_guid: Guid,
-    /// # Comment
-    ///
     /// rollnumber related to SMSG_LOOT_ROLL
     ///
     pub winning_roll: u8,
-    /// # Comment
-    ///
     /// Rolltype related to SMSG_LOOT_ROLL
     ///
     pub vote: RollVote,

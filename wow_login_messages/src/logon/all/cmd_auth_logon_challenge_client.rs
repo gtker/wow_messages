@@ -7,6 +7,10 @@ use crate::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// First message sent by the client when attempting to connect. The server will respond with `CMD_AUTH_LOGON_CHALLENGE_Server`.
+///
+/// Has the exact same layout as [CMD_AUTH_RECONNECT_CHALLENGE_Client](crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client).
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L40):
 /// ```text
 /// clogin CMD_AUTH_LOGON_CHALLENGE_Client = 0x00 {
@@ -23,17 +27,7 @@ use std::io::{Write, Read};
 ///     String[account_name_length] account_name;
 /// }
 /// ```
-/// # Description
-///
-/// First message sent by the client when attempting to connect. The server will respond with `CMD_AUTH_LOGON_CHALLENGE_Server`.
-///
-/// # Comment
-///
-/// Has the exact same layout as [CMD_AUTH_RECONNECT_CHALLENGE_Client](crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client).
-///
 pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
-    /// # Comment
-    ///
     /// Determines which version of messages are used in the future.
     ///
     pub protocol_version: u8,
@@ -41,14 +35,10 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
     pub platform: Platform,
     pub os: Os,
     pub locale: Locale,
-    /// # Description
-    ///
     /// Offset in minutes from UTC time. 180 would be UTC+3
     ///
     pub utc_timezone_offset: u32,
     pub client_ip_address: u32,
-    /// # Comment
-    ///
     /// Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.
     /// Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info.
     ///

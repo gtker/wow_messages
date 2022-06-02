@@ -27,8 +27,6 @@ pub enum UnitStandState {
     SIT_HIGH_CHAIR,
     DEAD,
     KNEEL,
-    /// # Comment
-    ///
     /// Used for Cthun according to cmangos.
     ///
     CUSTOM,

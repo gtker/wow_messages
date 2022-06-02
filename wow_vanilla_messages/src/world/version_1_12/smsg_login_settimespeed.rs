@@ -14,8 +14,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_LOGIN_SETTIMESPEED {
     pub secs_to_time_bit_field: u32,
-    /// # Comment
-    ///
     /// Set to 0.01666667f in cmangos.
     ///
     pub game_speed: f32,

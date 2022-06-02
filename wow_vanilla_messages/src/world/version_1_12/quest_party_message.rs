@@ -1,5 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 
+/// cmangos has one instance of this be u32, but both vmangos/mangoszero are u8
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/msg_quest_push_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/msg_quest_push_result.wowm#L3):
 /// ```text
 /// enum QuestPartyMessage : u8 {
@@ -15,54 +17,32 @@ use std::convert::{TryFrom, TryInto};
 /// }
 
 /// ```
-/// # Comment
-///
-/// cmangos has one instance of this be u32, but both vmangos/mangoszero are u8
-///
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestPartyMessage {
-    /// # Comment
-    ///
     /// ERR_QUEST_PUSH_SUCCESS_S
     ///
     SHARING_QUEST,
-    /// # Comment
-    ///
     /// ERR_QUEST_PUSH_INVALID_S
     ///
     CANT_TAKE_QUEST,
-    /// # Comment
-    ///
     /// ERR_QUEST_PUSH_ACCEPTED_S
     ///
     ACCEPT_QUEST,
-    /// # Comment
-    ///
     /// ERR_QUEST_PUSH_DECLINED_S
     ///
     DECLINE_QUEST,
-    /// # Comment
-    ///
     /// removed in 3.x
     ///
     TOO_FAR,
-    /// # Comment
-    ///
     /// ERR_QUEST_PUSH_BUSY_S
     ///
     BUSY,
-    /// # Comment
-    ///
     /// ERR_QUEST_PUSH_LOG_FULL_S
     ///
     LOG_FULL,
-    /// # Comment
-    ///
     /// ERR_QUEST_PUSH_ONQUEST_S
     ///
     HAVE_QUEST,
-    /// # Comment
-    ///
     /// ERR_QUEST_PUSH_ALREADY_DONE_S
     ///
     FINISH_QUEST,

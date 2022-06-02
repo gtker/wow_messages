@@ -22,8 +22,6 @@ pub struct SMSG_BATTLEFIELD_LIST {
     pub battlemaster: Guid,
     pub map: Map,
     pub unknown1: u8,
-    /// # Comment
-    ///
     /// vmangos: number of bg instances, this is also present on the number_of_battlegrounds field
     ///
     pub unknown2: u32,

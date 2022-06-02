@@ -20,13 +20,9 @@ use std::io::{Write, Read};
 pub struct SMSG_QUESTGIVER_QUEST_LIST {
     pub npc: Guid,
     pub title: String,
-    /// # Comment
-    ///
     /// mangoszero: player emote
     ///
     pub emote_delay: u32,
-    /// # Comment
-    ///
     /// mangoszero: NPC emote
     ///
     pub emote: u32,

@@ -25,8 +25,6 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct Realm {
-    /// # Comment
-    ///
     /// vmangos: this is the second column in Cfg_Configs.dbc
     ///
     pub realm_type: RealmType,

@@ -12,23 +12,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidInstanceMessage {
-    /// # Comment
-    ///
     /// WARNING! %s is scheduled to reset in %d hour(s).
     ///
     WARNING_HOURS,
-    /// # Comment
-    ///
     /// WARNING! %s is scheduled to reset in %d minute(s)!
     ///
     WARNING_MIN,
-    /// # Comment
-    ///
     /// WARNING! %s is scheduled to reset in %d minute(s). Please exit the zone or you will be returned to your bind location!
     ///
     WARNING_MIN_SOON,
-    /// # Comment
-    ///
     /// Welcome to %s. This raid instance is scheduled to reset in %s.
     ///
     WELCOME,

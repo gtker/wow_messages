@@ -14,8 +14,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct PetSpellCooldown {
     pub spell_id: u16,
-    /// # Comment
-    ///
     /// mangoszero: sets to 0
     ///
     pub spell_category: u16,

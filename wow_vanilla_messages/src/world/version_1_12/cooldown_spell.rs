@@ -15,8 +15,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct CooldownSpell {
     pub spell_id: u16,
-    /// # Comment
-    ///
     /// cmangos/mangoszero: cast item id
     ///
     pub item_id: u16,

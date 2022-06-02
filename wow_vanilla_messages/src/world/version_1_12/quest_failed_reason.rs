@@ -18,53 +18,33 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestFailedReason {
-    /// # Comment
-    ///
     /// this is default case
     ///
     DONT_HAVE_REQ,
-    /// # Comment
-    ///
     /// You are not high enough level for that quest.
     ///
     QUEST_FAILED_LOW_LEVEL,
-    /// # Comment
-    ///
     /// You don't meet the requirements for that quest.
     ///
     QUEST_FAILED_REQS,
-    /// # Comment
-    ///
     /// Inventory is full. (Also 50. From SMSG_QUESTGIVER_QUEST_FAILED)
     ///
     QUEST_FAILED_INVENTORY_FULL,
-    /// # Comment
-    ///
     /// That quest is not available to your race.
     ///
     QUEST_FAILED_WRONG_RACE,
-    /// # Comment
-    ///
     /// You can only be on one timed quest at a time.
     ///
     QUEST_ONLY_ONE_TIMED,
-    /// # Comment
-    ///
     /// You are already on that quest.
     ///
     QUEST_ALREADY_ON,
-    /// # Comment
-    ///
     /// Duplicate item found. (From SMSG_QUESTGIVER_QUEST_FAILED)
     ///
     QUEST_FAILED_DUPLICATE_ITEM,
-    /// # Comment
-    ///
     /// You don't have the required items with you. Check storage.
     ///
     QUEST_FAILED_MISSING_ITEMS,
-    /// # Comment
-    ///
     /// You don't have enough money for that quest.
     ///
     QUEST_FAILED_NOT_ENOUGH_MONEY,

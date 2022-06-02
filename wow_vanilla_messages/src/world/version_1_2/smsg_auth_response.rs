@@ -5,6 +5,8 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Response to [CMSG_AUTH_SESSION](crate::world::version_1_12::CMSG_AUTH_SESSION).
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L3):
 /// ```text
 /// smsg SMSG_AUTH_RESPONSE = 0x01EE {
@@ -19,10 +21,6 @@ use std::io::{Write, Read};
 ///     }
 /// }
 /// ```
-/// # Description
-///
-/// Response to [CMSG_AUTH_SESSION](crate::world::version_1_12::CMSG_AUTH_SESSION).
-///
 pub struct SMSG_AUTH_RESPONSE {
     pub result: SMSG_AUTH_RESPONSE_WorldResult,
 }

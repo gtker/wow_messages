@@ -33,20 +33,14 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
     pub highest_rank: PvpRank,
     pub today_honorable_and_dishonorable: u32,
     pub yesterday_honorable: u16,
-    /// # Comment
-    ///
     /// vmangos: Unknown (deprecated, yesterday dishonourable?)
     ///
     pub unknown1: u16,
     pub last_week_honorable: u16,
-    /// # Comment
-    ///
     /// vmangos: Unknown (deprecated, last week dishonourable?)
     ///
     pub unknown2: u16,
     pub this_week_honorable: u16,
-    /// # Comment
-    ///
     /// vmangos: Unknown (deprecated, this week dishonourable?)
     ///
     pub unknown3: u16,

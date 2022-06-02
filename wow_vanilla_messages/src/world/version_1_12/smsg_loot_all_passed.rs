@@ -21,8 +21,6 @@ pub struct SMSG_LOOT_ALL_PASSED {
     pub loot_slot: u32,
     pub item_id: u32,
     pub item_random_property_id: u32,
-    /// # Comment
-    ///
     /// vmangos/mangoszero: not used ?
     ///
     pub item_random_suffix_id: u32,

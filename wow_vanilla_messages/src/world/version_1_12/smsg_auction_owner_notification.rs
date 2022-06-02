@@ -6,6 +6,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// vmangos/cmangos/mangoszero: this message causes on client to display: 'Your auction sold'
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_owner_notification.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_owner_notification.wowm#L3):
 /// ```text
 /// smsg SMSG_AUCTION_OWNER_NOTIFICATION = 0x025F {
@@ -17,14 +19,8 @@ use std::io::{Write, Read};
 ///     u32 item_random_property_id;
 /// }
 /// ```
-/// # Comment
-///
-/// vmangos/cmangos/mangoszero: this message causes on client to display: 'Your auction sold'
-///
 pub struct SMSG_AUCTION_OWNER_NOTIFICATION {
     pub auction_id: u32,
-    /// # Comment
-    ///
     /// vmangos/cmangos/mangoszero: if 0, client shows ERR_AUCTION_EXPIRED_S, else ERR_AUCTION_SOLD_S (works only when guid==0)
     ///
     pub bid: u32,

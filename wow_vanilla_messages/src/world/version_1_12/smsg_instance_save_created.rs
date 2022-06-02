@@ -12,8 +12,6 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_INSTANCE_SAVE_CREATED {
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero set to 0
     ///
     pub unknown: u32,

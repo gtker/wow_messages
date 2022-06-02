@@ -53,8 +53,6 @@ impl FactionFlag {
         (self.inner & Self::VISIBLE) != 0
     }
 
-    /// # Comment
-    ///
     /// makes visible in client (set or can be set at interaction with target of this faction)
     ///
     pub const fn new_VISIBLE() -> Self {
@@ -75,8 +73,6 @@ impl FactionFlag {
         (self.inner & Self::AT_WAR) != 0
     }
 
-    /// # Comment
-    ///
     /// enable AtWar-button in client. player controlled (except opposition team always war state), Flag only set on initial creation
     ///
     pub const fn new_AT_WAR() -> Self {
@@ -97,8 +93,6 @@ impl FactionFlag {
         (self.inner & Self::HIDDEN) != 0
     }
 
-    /// # Comment
-    ///
     /// hidden faction from reputation pane in client (player can gain reputation, but this update not sent to client)
     ///
     pub const fn new_HIDDEN() -> Self {
@@ -119,8 +113,6 @@ impl FactionFlag {
         (self.inner & Self::INVISIBLE_FORCED) != 0
     }
 
-    /// # Comment
-    ///
     /// always overwrite FACTION_FLAG_VISIBLE and hide faction in rep.list, used for hide opposite team factions
     ///
     pub const fn new_INVISIBLE_FORCED() -> Self {
@@ -141,8 +133,6 @@ impl FactionFlag {
         (self.inner & Self::PEACE_FORCED) != 0
     }
 
-    /// # Comment
-    ///
     /// always overwrite FACTION_FLAG_AT_WAR, used for prevent war with own team factions
     ///
     pub const fn new_PEACE_FORCED() -> Self {
@@ -163,8 +153,6 @@ impl FactionFlag {
         (self.inner & Self::INACTIVE) != 0
     }
 
-    /// # Comment
-    ///
     /// player controlled, state stored in characters.data ( CMSG_SET_FACTION_INACTIVE )
     ///
     pub const fn new_INACTIVE() -> Self {
@@ -185,8 +173,6 @@ impl FactionFlag {
         (self.inner & Self::RIVAL) != 0
     }
 
-    /// # Comment
-    ///
     /// flag for the two competing outland factions
     ///
     pub const fn new_RIVAL() -> Self {

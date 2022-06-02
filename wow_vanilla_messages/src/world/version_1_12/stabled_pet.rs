@@ -19,8 +19,6 @@ pub struct StabledPet {
     pub level: u32,
     pub name: String,
     pub loyalty: u32,
-    /// # Comment
-    ///
     /// vmangos/mangoszero/cmangos: client slot 1 == current pet (0)
     ///
     pub slot: u8,

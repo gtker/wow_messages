@@ -1,5 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 
+/// Any values greater than maximum enum value show as 'bag full'
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status.wowm#L3):
 /// ```text
 /// enum InventoryResult : u8 {
@@ -73,10 +75,6 @@ use std::convert::{TryFrom, TryInto};
 /// }
 
 /// ```
-/// # Comment
-///
-/// Any values greater than maximum enum value show as 'bag full'
-///
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum InventoryResult {
     OK,

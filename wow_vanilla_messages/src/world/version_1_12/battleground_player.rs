@@ -24,8 +24,6 @@ pub struct BattlegroundPlayer {
     pub honorable_kills: u32,
     pub deaths: u32,
     pub bonus_honor: u32,
-    /// # Comment
-    ///
     /// This depends on the BG in question. AV expects 7: Graveyards Assaulted, Graveyards Defended, Towers Assaulted, Towers Defended, Secondary Objectives, LieutenantCount, SecondaryNpc
     /// WSG expects 2: Flag captures and flag returns
     /// AB expects 2: Bases assaulted and bases defended

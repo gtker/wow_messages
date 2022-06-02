@@ -17,8 +17,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_ITEM_ENCHANT_TIME_UPDATE {
     pub item_guid: Guid,
-    /// # Comment
-    ///
     /// Possibly used with EnchantmentSlot enum.
     ///
     pub slot: u32,

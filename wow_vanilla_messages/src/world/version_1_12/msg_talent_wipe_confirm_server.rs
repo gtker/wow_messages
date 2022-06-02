@@ -6,6 +6,9 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// cmangos/vmangos/mangoszero returns guid 0 and unknown 0 when talents can not be reset
+/// cmangos/vmangos/mangoszero casts spell 14876 when resetting
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_server.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_server.wowm#L5):
 /// ```text
 /// smsg MSG_TALENT_WIPE_CONFIRM_Server = 0x02AA {
@@ -13,11 +16,6 @@ use std::io::{Write, Read};
 ///     u32 cost_in_copper;
 /// }
 /// ```
-/// # Comment
-///
-/// cmangos/vmangos/mangoszero returns guid 0 and unknown 0 when talents can not be reset
-/// cmangos/vmangos/mangoszero casts spell 14876 when resetting
-///
 pub struct MSG_TALENT_WIPE_CONFIRM_Server {
     pub wiping_npc: Guid,
     pub cost_in_copper: u32,

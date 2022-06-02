@@ -15,9 +15,9 @@ pub fn print_flag(e: &Definer, o: &Objects) -> Writer {
 }
 
 fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
-    print_wowm_definition("flag", s, e);
-
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
+
+    print_wowm_definition("flag", s, e);
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]");
     s.new_flag(e.name(), e.ty().rust_str(), |_| {});

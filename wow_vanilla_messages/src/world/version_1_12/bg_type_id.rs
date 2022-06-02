@@ -13,28 +13,18 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BgTypeId {
-    /// # Comment
-    ///
     /// Your group has joined a battleground queue, but you are not eligible
     ///
     NOT_ELIGIBLE,
-    /// # Comment
-    ///
     /// Your group has joined the queue for AV
     ///
     QUEUED_FOR_AV,
-    /// # Comment
-    ///
     /// Your group has joined the queue for WS
     ///
     QUEUED_FOR_WSG,
-    /// # Comment
-    ///
     /// Your group has joined the queue for AB
     ///
     QUEUED_FOR_AB,
-    /// # Comment
-    ///
     /// send bg command result to show nice message
     ///
     REMOVE_FROM_QUEUE,

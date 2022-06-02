@@ -5,6 +5,9 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// vmangos/cmangos/mangoszero: Seems to be older versions used to be 'amount_of_carriers' followed by array. All versions now just set first to 0 and have second be 0/1/2.
+/// vmangos/cmangos/mangoszero: For AB and AV always set to all zero.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm#L9):
 /// ```text
 /// smsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Server = 0x02E9 {
@@ -13,11 +16,6 @@ use std::io::{Write, Read};
 ///     BattlegroundPlayerPosition[amount_of_flag_carriers] flag_carriers;
 /// }
 /// ```
-/// # Comment
-///
-/// vmangos/cmangos/mangoszero: Seems to be older versions used to be 'amount_of_carriers' followed by array. All versions now just set first to 0 and have second be 0/1/2.
-/// vmangos/cmangos/mangoszero: For AB and AV always set to all zero.
-///
 pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub flag_carriers: Vec<BattlegroundPlayerPosition>,
 }

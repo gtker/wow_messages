@@ -6,6 +6,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// vmangos: Nostalrius: ignored by client if unit is not loaded
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_player_object_sound.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_player_object_sound.wowm#L5):
 /// ```text
 /// smsg SMSG_PLAY_OBJECT_SOUND = 0x0278 {
@@ -13,10 +15,6 @@ use std::io::{Write, Read};
 ///     Guid guid;
 /// }
 /// ```
-/// # Comment
-///
-/// vmangos: Nostalrius: ignored by client if unit is not loaded
-///
 pub struct SMSG_PLAY_OBJECT_SOUND {
     pub sound_id: u32,
     pub guid: Guid,

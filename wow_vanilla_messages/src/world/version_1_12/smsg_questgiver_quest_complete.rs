@@ -18,8 +18,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub quest_id: u32,
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero: set to 0x03
     ///
     pub unknown: u32,

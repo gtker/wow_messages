@@ -14,8 +14,6 @@ use std::io::{Write, Read};
 /// ```
 pub struct CMSG_SET_ACTION_BUTTON {
     pub button: u8,
-    /// # Comment
-    ///
     /// Most significant byte determines types, rest is action.
     ///
     pub action_type: u32,

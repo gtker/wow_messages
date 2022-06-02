@@ -4,6 +4,10 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Sent after receiving [SMSG_AUTH_CHALLENGE](crate::world::version_1_2::SMSG_AUTH_CHALLENGE).
+///
+/// This message is never encrypted.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUTH_SESSION = 0x01ED {
@@ -16,18 +20,8 @@ use std::io::{Write, Read};
 ///     u8[-] compressed_addon_info;
 /// }
 /// ```
-/// # Description
-///
-/// Sent after receiving [SMSG_AUTH_CHALLENGE](crate::world::version_1_2::SMSG_AUTH_CHALLENGE).
-///
-/// # Comment
-///
-/// This message is never encrypted.
-///
 pub struct CMSG_AUTH_SESSION {
     pub build: u32,
-    /// # Description
-    ///
     /// This is sent to the client in `CMD_REALM_LIST_Server`.
     ///
     pub server_id: u32,

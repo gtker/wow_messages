@@ -5,6 +5,8 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_petition_buy.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_petition_buy.wowm#L5):
 /// ```text
 /// cmsg CMSG_PETITION_BUY = 0x01BD {
@@ -28,10 +30,6 @@ use std::io::{Write, Read};
 ///     u32 skip15;
 /// }
 /// ```
-/// # Comment
-///
-/// cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused
-///
 pub struct CMSG_PETITION_BUY {
     pub npc: Guid,
     pub skip1: u32,
@@ -49,8 +47,6 @@ pub struct CMSG_PETITION_BUY {
     pub skip12: u32,
     pub skip13: u16,
     pub skip14: u8,
-    /// # Comment
-    ///
     /// cmangos/vmangos/mangoszero: Named but never used
     ///
     pub index: u32,

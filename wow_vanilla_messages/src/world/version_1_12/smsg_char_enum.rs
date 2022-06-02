@@ -5,6 +5,8 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+/// Response to [CMSG_CHAR_ENUM](crate::world::version_1_2::CMSG_CHAR_ENUM).
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:43`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L43):
 /// ```text
 /// smsg SMSG_CHAR_ENUM = 0x003B {
@@ -12,10 +14,6 @@ use std::io::{Write, Read};
 ///     Character[amount_of_characters] characters;
 /// }
 /// ```
-/// # Description
-///
-/// Response to [CMSG_CHAR_ENUM](crate::world::version_1_2::CMSG_CHAR_ENUM).
-///
 pub struct SMSG_CHAR_ENUM {
     pub characters: Vec<Character>,
 }
