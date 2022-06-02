@@ -31734,7 +31734,9 @@
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "Determines which version of messages are used in the future."
+            }
           }
         },
         {
@@ -31876,7 +31878,9 @@
             "constant_value": null,
             "used_as_size_in": "account_name",
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte."
+            }
           }
         },
         {
@@ -31890,11 +31894,15 @@
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.\nUppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info."
+            }
           }
         }
       ],
       "tags": {
+        "description": "First message sent by the client when attempting to connect. The server will respond with [CMD_AUTH_LOGON_CHALLENGE_Server].",
+        "comment": "Has the exact same layout as [CMD_AUTH_RECONNECT_CHALLENGE_Client].",
         "version": {
           "type": "login",
           "versions": [
@@ -32075,6 +32083,7 @@
             65
           ],
           "tags": {
+            "description": "x86 Windows user on enGB attempting to log in with username 'A'.",
             "version": {
               "type": "login",
               "versions": [
@@ -32086,7 +32095,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm",
-            "start_position": 56
+            "start_position": 66
           }
         }
       ],
