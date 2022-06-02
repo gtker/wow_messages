@@ -115,7 +115,7 @@ impl Default for UpdateMask {
 }
 
 impl UpdateMask {
-    pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
+    pub(crate) fn read(r: &mut impl Read) -> Result<Self, io::Error> {
         let amount_of_blocks = crate::util::read_u8_le(r)?;
 
         let mut header = Vec::new();
