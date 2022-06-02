@@ -136,10 +136,9 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn impl_world_read_and_writable_with_error(
+    pub fn impl_read_and_writable_world(
         &mut self,
         type_name: impl AsRef<str>,
-        error_name: impl AsRef<str>,
         opcode: u16,
         trait_to_impl: impl AsRef<str>,
         write_function: impl Fn(&mut Self, ImplType),
@@ -155,26 +154,27 @@ impl Writer {
         self.write_into_vec_trait(write_function);
 
         self.wln(format!("const OPCODE: u16 = {:#06x};", opcode));
-
         self.newline();
 
         self.open_curly("fn size_without_size_or_opcode_fields(&self) -> u16");
+
         if sizes.is_some() && sizes.unwrap().is_constant() {
             self.wln(format!("{}", sizes.unwrap().maximum()));
         } else {
             self.wln("self.size() as u16");
         }
-        self.closing_curly();
+
+        self.closing_curly(); // size_without_size_or_opcode_fields
         self.newline();
 
         self.open_curly(format!(
             "fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {}>",
-            error_name.as_ref()
+            PARSE_ERROR,
         ));
 
         read_function(self, ImplType::Std);
 
-        self.closing_curly_newline();
+        self.closing_curly_newline(); // read_body
 
         self.closing_curly_newline(); // impl
     }

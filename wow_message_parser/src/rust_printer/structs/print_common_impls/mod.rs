@@ -13,7 +13,6 @@ pub mod print_write;
 
 pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_world_message_headers_and_constants(s, e);
-    let error_ty = PARSE_ERROR;
 
     match e.container_type() {
         ContainerType::Struct => {
@@ -57,9 +56,8 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
             let bind = |s: &mut Writer, trait_to_impl| {
-                s.impl_world_read_and_writable_with_error(
+                s.impl_read_and_writable_world(
                     e.name(),
-                    &error_ty,
                     opcode,
                     trait_to_impl,
                     |s, it| {
