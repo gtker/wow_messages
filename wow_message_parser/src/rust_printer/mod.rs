@@ -179,23 +179,21 @@ impl Writer {
         self.closing_curly_newline(); // impl
     }
 
-    fn print_write_decl(&mut self, it: ImplType, world_text: &str) {
+    fn print_write_decl(&mut self, it: ImplType) {
         self.wln(it.cfg());
 
         if !it.is_async() {
-            self.open_curly(format!("fn {prefix}write{world_text}<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+            self.open_curly(format!("fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
                                     prefix = it.prefix(),
                                     write = it.write(),
-                                    world_text = world_text,
             ));
 
             return;
         }
 
         self.wln(format!(
-            "fn {prefix}write{world_text}<'life0, 'life1, 'async_trait, W>(",
+            "fn {prefix}write<'life0, 'life1, 'async_trait, W>(",
             prefix = it.prefix(),
-            world_text = world_text,
         ));
         self.inc_indent();
 
@@ -410,7 +408,7 @@ impl Writer {
             }
             self.closing_curly_newline();
 
-            self.print_write_decl(it, "");
+            self.print_write_decl(it);
 
             self.call_as_bytes(it, sizes);
 
