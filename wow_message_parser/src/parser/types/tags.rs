@@ -345,6 +345,27 @@ impl TagString {
         v
     }
 
+    pub fn as_rust_doc_lines(&self) -> Vec<String> {
+        let mut v = Vec::new();
+
+        let mut current = String::new();
+
+        for i in &self.inner {
+            match i {
+                TagStringSymbol::Text(s) => current.push_str(s),
+                TagStringSymbol::Link(s) => current.push_str(&format!("[{}]", s)),
+                TagStringSymbol::Newline => {
+                    v.push(current.clone());
+                    current.clear();
+                }
+            }
+        }
+
+        v.push(current);
+
+        v
+    }
+
     pub fn as_doc_table_string(&self) -> String {
         let mut s = String::new();
 

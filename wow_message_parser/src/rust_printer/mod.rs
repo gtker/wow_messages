@@ -16,6 +16,7 @@ mod structs;
 mod update_mask;
 
 use crate::container::Sizes;
+use crate::Tags;
 pub use update_mask::*;
 
 #[derive(Debug)]
@@ -816,4 +817,24 @@ fn get_optional_type_name(original_ty: &str, optional_name: &str) -> String {
 
 fn get_new_flag_type_name(original_ty: &str, enumerator_name: &str) -> String {
     format!("{original_ty}_{enumerator_name}")
+}
+
+fn print_docc_description_and_comment(s: &mut Writer, tags: &Tags) {
+    if let Some(description) = tags.description() {
+        s.docc("# Description");
+        s.docc("");
+
+        for line in description.as_rust_doc_lines() {
+            s.docc(line);
+        }
+    }
+
+    if let Some(comment) = tags.comment() {
+        s.docc("# Comment");
+        s.docc("");
+
+        for line in comment.as_rust_doc_lines() {
+            s.docc(line);
+        }
+    }
 }

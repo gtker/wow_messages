@@ -1,6 +1,6 @@
 use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
-use crate::rust_printer::Writer;
+use crate::rust_printer::{print_docc_description_and_comment, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::DISPLAY_STR;
 
@@ -40,6 +40,8 @@ fn declaration(s: &mut Writer, e: &Definer) {
     };
     s.new_enum(visibility, e.name(), |s| {
         for field in e.fields() {
+            print_docc_description_and_comment(s, field.tags());
+
             s.wln(format!("{},", field.name()));
         }
 

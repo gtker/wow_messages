@@ -19,6 +19,9 @@ pub enum TimerType {
     FATIGUE,
     BREATH,
     FEIGNDEATH,
+    /// # Comment
+    /// 
+    /// Might be a mangos only thing.
     ENVIRONMENTAL,
 }
 

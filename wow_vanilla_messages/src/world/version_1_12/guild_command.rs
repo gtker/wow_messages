@@ -22,7 +22,13 @@ pub enum GuildCommand {
     INVITE,
     QUIT,
     FOUNDER,
+    /// # Comment
+    /// 
+    /// cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE
     UNKNOWN19,
+    /// # Comment
+    /// 
+    /// cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE
     UNKNOWN20,
 }
 

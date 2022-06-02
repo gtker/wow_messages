@@ -17,10 +17,25 @@ use async_std::io::{ReadExt, WriteExt};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum StatusId {
+    /// # Comment
+    /// 
+    /// first status, should mean bg is not instance
     NONE,
+    /// # Comment
+    /// 
+    /// means bg is empty and waiting for queue
     WAIT_QUEUE,
+    /// # Comment
+    /// 
+    /// this means, that BG has already started and it is waiting for more players
     WAIT_JOIN,
+    /// # Comment
+    /// 
+    /// means bg is running
     IN_PROGRESS,
+    /// # Comment
+    /// 
+    /// means some faction has won BG and it is ending
     WAIT_LEAVE,
 }
 

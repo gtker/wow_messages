@@ -44,37 +44,130 @@ use async_std::io::{ReadExt, WriteExt};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ChatNotify {
+    /// # Comment
+    /// 
+    /// %s joined channel.
     JOINED_NOTICE,
+    /// # Comment
+    /// 
+    /// %s left channel.
     LEFT_NOTICE,
+    /// # Comment
+    /// 
+    /// Joined Channel: [%s] -- You joined
     YOU_JOINED_NOTICE,
+    /// # Comment
+    /// 
+    /// Left Channel: [%s] -- You left
     YOU_LEFT_NOTICE,
+    /// # Comment
+    /// 
+    /// Wrong password for %s.
     WRONG_PASSWORD_NOTICE,
+    /// # Comment
+    /// 
+    /// Not on channel %s.
     NOT_MEMBER_NOTICE,
+    /// # Comment
+    /// 
+    /// Not a moderator of %s.
     NOT_MODERATOR_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Password changed by %s.
     PASSWORD_CHANGED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Owner changed to %s.
     OWNER_CHANGED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Player %s was not found.
     PLAYER_NOT_FOUND_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] You are not the channel owner.
     NOT_OWNER_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Channel owner is %s.
     CHANNEL_OWNER_NOTICE,
     MODE_CHANGE_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Channel announcements enabled by %s.
     ANNOUNCEMENTS_ON_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Channel announcements disabled by %s.
     ANNOUNCEMENTS_OFF_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Channel moderation enabled by %s.
     MODERATION_ON_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Channel moderation disabled by %s.
     MODERATION_OFF_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] You do not have permission to speak.
     MUTED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Player %s kicked by %s.
     PLAYER_KICKED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] You are banned from that channel.
     BANNED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Player %s banned by %s.
     PLAYER_BANNED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Player %s unbanned by %s.
     PLAYER_UNBANNED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Player %s is not banned.
     PLAYER_NOT_BANNED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] Player %s is already on the channel.
     PLAYER_ALREADY_MEMBER_NOTICE,
+    /// # Comment
+    /// 
+    /// %2$s has invited you to join the channel '%1$s'.
     INVITE_NOTICE,
+    /// # Comment
+    /// 
+    /// Target is in the wrong alliance for %s.
     INVITE_WRONG_FACTION_NOTICE,
+    /// # Comment
+    /// 
+    /// Wrong alliance for %s.
     WRONG_FACTION_NOTICE,
+    /// # Comment
+    /// 
+    /// Invalid channel name
     INVALID_NAME_NOTICE,
+    /// # Comment
+    /// 
+    /// %s is not moderated
     NOT_MODERATED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] You invited %s to join the channel
     PLAYER_INVITED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] %s has been banned.
     PLAYER_INVITE_BANNED_NOTICE,
+    /// # Comment
+    /// 
+    /// [%s] The number of messages that can be sent to this channel is limited, please wait to send another message.
     THROTTLED_NOTICE,
 }
 

@@ -26,7 +26,13 @@ pub enum QuestGiverStatus {
     INCOMPLETE,
     REWARD_REP,
     AVAILABLE,
+    /// # Comment
+    /// 
+    /// red dot on minimap
     REWARD_OLD,
+    /// # Comment
+    /// 
+    /// yellow dot on minimap
     REWARD2,
 }
 

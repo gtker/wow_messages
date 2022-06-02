@@ -18,6 +18,9 @@ use async_std::io::{ReadExt, WriteExt};
 pub enum LogoutResult {
     SUCCESS,
     FAILURE_IN_COMBAT,
+    /// # Comment
+    /// 
+    /// vmangos checks for aura 9454. Has FIXME - Need the correct value.
     FAILURE_FROZEN_BY_GM,
     FAILURE_JUMPING_OR_FALLING,
 }

@@ -16,8 +16,17 @@ use async_std::io::{ReadExt, WriteExt};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum InstanceResetFailedReason {
+    /// # Comment
+    /// 
+    /// at least one player is in the instance
     GENERAL,
+    /// # Comment
+    /// 
+    /// at least one player is offline
     OFFLINE,
+    /// # Comment
+    /// 
+    /// at least one player try to enter the instance (being teleported in)
     ZONING,
     SILENTLY,
 }
