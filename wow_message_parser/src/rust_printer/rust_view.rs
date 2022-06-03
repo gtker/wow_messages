@@ -514,7 +514,7 @@ impl RustObject {
         Some(RustDefiner {
             inner: m.clone(),
             enumerators,
-            ty_name: ty_name.clone(),
+            ty_name,
             int_ty,
             is_simple,
             is_elseif,

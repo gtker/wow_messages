@@ -46,13 +46,12 @@ pub fn print_update_mask() {
     let mut s = Writer::new("");
     s.wln("use crate::Guid;");
     for m in FIELDS {
-        match m.ty() {
-            UfType::BytesWithTypes(a, b, c, d) => s.wln(format!(
+        if let UfType::BytesWithTypes(a, b, c, d) = m.ty() {
+            s.wln(format!(
                 // The UpdateMask implementation realistically only works with 1.12
                 "use crate::version_1_12::{{{}, {}, {}, {}}};",
                 a, b, c, d
-            )),
-            _ => {}
+            ))
         }
     }
 
