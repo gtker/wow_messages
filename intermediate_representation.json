@@ -42409,7 +42409,7 @@
         }
       ],
       "tags": {
-        "description": "Reply to CMD_AUTH_RECONNECT_CHALLENGE_Client.",
+        "description": "Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Client].",
         "version": {
           "type": "login",
           "versions": [
@@ -42685,7 +42685,7 @@
         }
       ],
       "tags": {
-        "description": "Reply to CMD_AUTH_RECONNECT_CHALLENGE_Client.",
+        "description": "Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Client].",
         "version": {
           "type": "login",
           "versions": [

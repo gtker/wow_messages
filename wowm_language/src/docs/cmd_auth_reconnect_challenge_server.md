@@ -4,7 +4,7 @@
 
 ### Description
 
-Reply to CMD_AUTH_RECONNECT_CHALLENGE_Client.
+Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Client](./cmd_auth_reconnect_challenge_client.md).
 
 ### Wowm Representation
 
@@ -63,7 +63,7 @@ If result is equal to `SUCCESS`:
 
 ### Description
 
-Reply to CMD_AUTH_RECONNECT_CHALLENGE_Client.
+Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Client](./cmd_auth_reconnect_challenge_client.md).
 
 ### Wowm Representation
 

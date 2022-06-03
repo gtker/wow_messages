@@ -6,7 +6,7 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
         u8[16] checksum_salt;
     }
 } {
-    description = "Reply to CMD_AUTH_RECONNECT_CHALLENGE_Client.";
+    description = "Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Client].";
     login_versions = "2";
 }
 
@@ -39,7 +39,7 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
         u8[16] checksum_salt;
     }
 } {
-    description = "Reply to CMD_AUTH_RECONNECT_CHALLENGE_Client.";
+    description = "Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Client].";
     login_versions = "8";
 }
 
