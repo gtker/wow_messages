@@ -6,7 +6,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Response to [CMSG_CHAR_RENAME](crate::world::version_1_12::CMSG_CHAR_RENAME).
+/// Response to [`CMSG_CHAR_RENAME`](crate::world::version_1_12::CMSG_CHAR_RENAME).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm#L3):
 /// ```text

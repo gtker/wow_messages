@@ -6,9 +6,9 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Response to [CMSG_CHAR_DELETE](crate::world::version_1_12::CMSG_CHAR_DELETE).
+/// Response to [`CMSG_CHAR_DELETE`](crate::world::version_1_12::CMSG_CHAR_DELETE).
 ///
-/// The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM](crate::world::version_1_2::CMSG_CHAR_ENUM).
+/// The result of this message will update the client character screen without them sending another [`CMSG_CHAR_ENUM`](crate::world::version_1_2::CMSG_CHAR_ENUM).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm#L3):
 /// ```text

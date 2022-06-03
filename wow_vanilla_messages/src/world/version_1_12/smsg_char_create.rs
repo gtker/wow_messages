@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Response to [CMSG_CHAR_CREATE](crate::world::version_1_12::CMSG_CHAR_CREATE).
+/// Response to [`CMSG_CHAR_CREATE`](crate::world::version_1_12::CMSG_CHAR_CREATE).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm#L3):
 /// ```text

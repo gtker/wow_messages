@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Response if [CMSG_PLAYER_LOGIN](crate::world::version_1_12::CMSG_PLAYER_LOGIN) fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD](crate::world::version_1_12::SMSG_LOGIN_VERIFY_WORLD).
+/// Response if [`CMSG_PLAYER_LOGIN`](crate::world::version_1_12::CMSG_PLAYER_LOGIN) fails. If successful it should instead be [`SMSG_LOGIN_VERIFY_WORLD`](crate::world::version_1_12::SMSG_LOGIN_VERIFY_WORLD).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L3):
 /// ```text

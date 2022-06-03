@@ -5,7 +5,7 @@ use crate::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server](crate::logon::version_8::CMD_AUTH_LOGON_CHALLENGE_Server).
+/// Reply after successful [`CMD_AUTH_LOGON_CHALLENGE_Server`](crate::logon::version_8::CMD_AUTH_LOGON_CHALLENGE_Server).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm:317`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm#L317):
 /// ```text

@@ -5,7 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Request of new name for character. This is only sent by the client if RENAME is set in the [CharacterFlags](crate::world::version_1_12::CharacterFlags) of [SMSG_CHAR_ENUM](crate::world::version_1_12::SMSG_CHAR_ENUM) and the client tries to login.
+/// Request of new name for character. This is only sent by the client if RENAME is set in the [`CharacterFlags`](crate::world::version_1_12::CharacterFlags) of [`SMSG_CHAR_ENUM`](crate::world::version_1_12::SMSG_CHAR_ENUM) and the client tries to login.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_rename.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_rename.wowm#L3):
 /// ```text

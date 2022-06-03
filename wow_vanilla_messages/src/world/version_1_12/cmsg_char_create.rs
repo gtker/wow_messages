@@ -7,7 +7,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE](crate::world::version_1_12::SMSG_CHAR_CREATE).
+/// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::world::version_1_12::SMSG_CHAR_CREATE).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L3):
 /// ```text
