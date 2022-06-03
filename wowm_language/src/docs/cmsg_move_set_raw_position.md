@@ -4,7 +4,7 @@
 
 ### Comment
 
-vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using MSG_MOVE_SET_RAW_POSITION_ACK.
+vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using [MSG_MOVE_SET_RAW_POSITION_ACK](./msg_move_set_raw_position_ack.md).
 
 ### Wowm Representation
 

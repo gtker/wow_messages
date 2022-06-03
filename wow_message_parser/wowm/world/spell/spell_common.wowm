@@ -55,7 +55,7 @@ flag CastFlags : u16 {
         comment = "cmangos/vmangos/mangoszero: Projectiles visual";
     }
     UNKNOWN7 = 0x00000040 {
-        comment = "cmangos/vmangos/mangoszero: !0x41 mask used to call CGTradeSkillInfo::DoRecast";
+        comment = "cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast`";
     }
     UNKNOWN8 = 0x00000080;
     UNKNOWN9 = 0x00000100;

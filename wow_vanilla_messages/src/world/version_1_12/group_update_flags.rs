@@ -101,7 +101,7 @@ impl GroupUpdateFlags {
         (self.inner & Self::FLAG_STATUS) != 0
     }
 
-    /// uint8, enum GroupMemberOnlineStatus
+    /// uint8, enum `GroupMemberOnlineStatus`
     ///
     pub const fn new_FLAG_STATUS() -> Self {
         Self { inner: Self::FLAG_STATUS }

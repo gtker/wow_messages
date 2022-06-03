@@ -4,7 +4,7 @@
 
 ### Comment
 
-Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets](./spellcasttargets.md) needs.
+Also has `UNIT_MINIPET` = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets](./spellcasttargets.md) needs.
 
 ### Wowm Representation
 
@@ -44,15 +44,15 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 | `ITEM` | 16 (0x10) |  | pguid |
 | `SOURCE_LOCATION` | 32 (0x20) |  | 3xfloat |
 | `DEST_LOCATION` | 64 (0x40) |  | 3xfloat |
-| `UNIT_ENEMY` | 128 (0x80) |  | CanAttack == true |
-| `UNIT_ALLY` | 256 (0x100) |  | CanAssist == true |
-| `CORPSE_ENEMY` | 512 (0x200) |  | pguid, CanAssist == false |
+| `UNIT_ENEMY` | 128 (0x80) |  | `CanAttack` == true |
+| `UNIT_ALLY` | 256 (0x100) |  | `CanAssist` == true |
+| `CORPSE_ENEMY` | 512 (0x200) |  | pguid, `CanAssist` == false |
 | `UNIT_DEAD` | 1024 (0x400) |  | skinning-like effects |
 | `GAMEOBJECT` | 2048 (0x800) |  | pguid, 0 spells in 2.4.3 |
 | `TRADE_ITEM` | 4096 (0x1000) |  | pguid, 0 spells |
 | `STRING` | 8192 (0x2000) |  | string, 0 spells |
 | `LOCKED` | 16384 (0x4000) |  | 199 spells, opening object/lock |
-| `CORPSE_ALLY` | 32768 (0x8000) |  | pguid, CanAssist == true |
+| `CORPSE_ALLY` | 32768 (0x8000) |  | pguid, `CanAssist` == true |
 
 Used in:
 * [SpellCastTargets](spellcasttargets.md)

@@ -174,7 +174,7 @@ impl CastFlags {
         (self.inner & Self::UNKNOWN7) != 0
     }
 
-    /// cmangos/vmangos/mangoszero: !0x41 mask used to call CGTradeSkillInfo::DoRecast
+    /// cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast`
     ///
     pub const fn new_UNKNOWN7() -> Self {
         Self { inner: Self::UNKNOWN7 }

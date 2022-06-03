@@ -32,7 +32,7 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 | `UNKNOWN4` | 8 (0x08) |  |  |
 | `UNKNOWN5` | 16 (0x10) |  |  |
 | `AMMO` | 32 (0x20) |  | cmangos/vmangos/mangoszero: Projectiles visual |
-| `UNKNOWN7` | 64 (0x40) |  | cmangos/vmangos/mangoszero: !0x41 mask used to call CGTradeSkillInfo::DoRecast |
+| `UNKNOWN7` | 64 (0x40) |  | cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast` |
 | `UNKNOWN8` | 128 (0x80) |  |  |
 | `UNKNOWN9` | 256 (0x100) |  |  |
 

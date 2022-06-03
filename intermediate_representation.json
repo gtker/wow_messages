@@ -137,7 +137,7 @@
             "original": "0x00000040"
           },
           "tags": {
-            "comment": "cmangos/vmangos/mangoszero: !0x41 mask used to call CGTradeSkillInfo::DoRecast"
+            "comment": "cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast`"
           }
         },
         {
@@ -321,7 +321,7 @@
             "original": "0x08"
           },
           "tags": {
-            "comment": "always overwrite FACTION_FLAG_VISIBLE and hide faction in rep.list, used for hide opposite team factions"
+            "comment": "always overwrite `FACTION_FLAG_VISIBLE` and hide faction in rep.list, used for hide opposite team factions"
           }
         },
         {
@@ -331,7 +331,7 @@
             "original": "0x10"
           },
           "tags": {
-            "comment": "always overwrite FACTION_FLAG_AT_WAR, used for prevent war with own team factions"
+            "comment": "always overwrite `FACTION_FLAG_AT_WAR`, used for prevent war with own team factions"
           }
         },
         {
@@ -341,7 +341,7 @@
             "original": "0x20"
           },
           "tags": {
-            "comment": "player controlled, state stored in characters.data ( CMSG_SET_FACTION_INACTIVE )"
+            "comment": "player controlled, state stored in characters.data ( [CMSG_SET_FACTION_INACTIVE] )"
           }
         },
         {
@@ -406,7 +406,7 @@
             "original": "0x0001"
           },
           "tags": {
-            "comment": "Lua_UnitIsConnected"
+            "comment": "`Lua_UnitIsConnected`"
           }
         },
         {
@@ -416,7 +416,7 @@
             "original": "0x0002"
           },
           "tags": {
-            "comment": "Lua_UnitIsPVP"
+            "comment": "`Lua_UnitIsPVP`"
           }
         },
         {
@@ -426,7 +426,7 @@
             "original": "0x0004"
           },
           "tags": {
-            "comment": "Lua_UnitIsDead"
+            "comment": "`Lua_UnitIsDead`"
           }
         },
         {
@@ -436,7 +436,7 @@
             "original": "0x0008"
           },
           "tags": {
-            "comment": "Lua_UnitIsGhost"
+            "comment": "`Lua_UnitIsGhost`"
           }
         },
         {
@@ -446,7 +446,7 @@
             "original": "0x0010"
           },
           "tags": {
-            "comment": "Lua_UnitIsPVPFreeForAll"
+            "comment": "`Lua_UnitIsPVPFreeForAll`"
           }
         },
         {
@@ -456,7 +456,7 @@
             "original": "0x0020"
           },
           "tags": {
-            "comment": "used in calls from Lua_GetPlayerMapPosition/Lua_GetBattlefieldFlagPosition"
+            "comment": "used in calls from `Lua_GetPlayerMapPosition`/`Lua_GetBattlefieldFlagPosition`"
           }
         },
         {
@@ -466,7 +466,7 @@
             "original": "0x0040"
           },
           "tags": {
-            "comment": "Lua_UnitIsAFK"
+            "comment": "`Lua_UnitIsAFK`"
           }
         },
         {
@@ -476,7 +476,7 @@
             "original": "0x0080"
           },
           "tags": {
-            "comment": "Lua_UnitIsDND"
+            "comment": "`Lua_UnitIsDND`"
           }
         }
       ],
@@ -537,7 +537,7 @@
             "original": "0x00000001"
           },
           "tags": {
-            "comment": "uint8, enum GroupMemberOnlineStatus"
+            "comment": "uint8, enum `GroupMemberOnlineStatus`"
           }
         },
         {
@@ -1366,7 +1366,7 @@
             "original": "0x00000080"
           },
           "tags": {
-            "comment": "CanAttack == true"
+            "comment": "`CanAttack` == true"
           }
         },
         {
@@ -1376,7 +1376,7 @@
             "original": "0x00000100"
           },
           "tags": {
-            "comment": "CanAssist == true"
+            "comment": "`CanAssist` == true"
           }
         },
         {
@@ -1386,7 +1386,7 @@
             "original": "0x00000200"
           },
           "tags": {
-            "comment": "pguid, CanAssist == false"
+            "comment": "pguid, `CanAssist` == false"
           }
         },
         {
@@ -1446,7 +1446,7 @@
             "original": "0x00008000"
           },
           "tags": {
-            "comment": "pguid, CanAssist == true"
+            "comment": "pguid, `CanAssist` == true"
           }
         }
       ],
@@ -1456,7 +1456,7 @@
         "endianness": "little"
       },
       "tags": {
-        "comment": "Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets] needs.",
+        "comment": "Also has `UNIT_MINIPET` = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets] needs.",
         "version": {
           "type": "world",
           "versions": [
@@ -26583,7 +26583,7 @@
         "type": "u8"
       },
       "tags": {
-        "comment": "According to cmangos: byte value (UNIT_FIELD_BYTES_2,0)",
+        "comment": "According to cmangos: byte value (`UNIT_FIELD_BYTES_2`,0)",
         "version": {
           "type": "world",
           "versions": [
@@ -55166,7 +55166,7 @@
         }
       ],
       "tags": {
-        "comment": "vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using MSG_MOVE_SET_RAW_POSITION_ACK.",
+        "comment": "vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using [MSG_MOVE_SET_RAW_POSITION_ACK].",
         "version": {
           "type": "world",
           "versions": [
@@ -63160,7 +63160,7 @@
         }
       ],
       "tags": {
-        "comment": "vmangos/cmangos/mangoszero: Seems to be older versions used to be 'amount_of_carriers' followed by array. All versions now just set first to 0 and have second be 0/1/2.\nvmangos/cmangos/mangoszero: For AB and AV always set to all zero.",
+        "comment": "vmangos/cmangos/mangoszero: Seems to be older versions used to be `amount_of_carriers` followed by array. All versions now just set first to 0 and have second be 0/1/2.\nvmangos/cmangos/mangoszero: For AB and AV always set to all zero.",
         "version": {
           "type": "world",
           "versions": [
@@ -85606,7 +85606,7 @@
         }
       ],
       "tags": {
-        "comment": "According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with SMSG_START_MIRROR_TIMER to avoid lua errors.",
+        "comment": "According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with `SMSG_START_MIRROR_TIMER` to avoid lua errors.",
         "version": {
           "type": "world",
           "versions": [
@@ -88977,7 +88977,7 @@
         }
       ],
       "tags": {
-        "comment": "mangoszero/vmangos: Quests that don't require items use the RequestItemsText field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.",
+        "comment": "mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.",
         "version": {
           "type": "world",
           "versions": [

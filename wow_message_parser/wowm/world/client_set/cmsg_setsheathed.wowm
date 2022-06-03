@@ -5,7 +5,7 @@ enum SheathState : u8 {
     MELEE = 1;
     RANGED = 2;
 } {
-    comment = "According to cmangos: byte value (UNIT_FIELD_BYTES_2,0)";
+    comment = "According to cmangos: byte value (`UNIT_FIELD_BYTES_2`,0)";
 }
 
 cmsg CMSG_SETSHEATHED = 0x01E0 {

@@ -4,7 +4,7 @@
 
 ### Comment
 
-According to cmangos: byte value (UNIT_FIELD_BYTES_2,0)
+According to cmangos: byte value (`UNIT_FIELD_BYTES_2`,0)
 
 ### Wowm Representation
 

@@ -1,4 +1,4 @@
-/// Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [`SpellCastTargets`](crate::world::version_1_12::SpellCastTargets) needs.
+/// Also has `UNIT_MINIPET` = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [`SpellCastTargets`](crate::world::version_1_12::SpellCastTargets) needs.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L29):
 /// ```text
@@ -225,7 +225,7 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_ENEMY) != 0
     }
 
-    /// CanAttack == true
+    /// `CanAttack` == true
     ///
     pub const fn new_UNIT_ENEMY() -> Self {
         Self { inner: Self::UNIT_ENEMY }
@@ -245,7 +245,7 @@ impl SpellCastTargetFlags {
         (self.inner & Self::UNIT_ALLY) != 0
     }
 
-    /// CanAssist == true
+    /// `CanAssist` == true
     ///
     pub const fn new_UNIT_ALLY() -> Self {
         Self { inner: Self::UNIT_ALLY }
@@ -265,7 +265,7 @@ impl SpellCastTargetFlags {
         (self.inner & Self::CORPSE_ENEMY) != 0
     }
 
-    /// pguid, CanAssist == false
+    /// pguid, `CanAssist` == false
     ///
     pub const fn new_CORPSE_ENEMY() -> Self {
         Self { inner: Self::CORPSE_ENEMY }
@@ -385,7 +385,7 @@ impl SpellCastTargetFlags {
         (self.inner & Self::CORPSE_ALLY) != 0
     }
 
-    /// pguid, CanAssist == true
+    /// pguid, `CanAssist` == true
     ///
     pub const fn new_CORPSE_ALLY() -> Self {
         Self { inner: Self::CORPSE_ALLY }

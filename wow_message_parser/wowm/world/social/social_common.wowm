@@ -199,7 +199,7 @@ flag GroupUpdateFlags : u32 {
         comment = "nothing";
     }
     FLAG_STATUS = 0x00000001 {
-        comment = "uint8, enum GroupMemberOnlineStatus";
+        comment = "uint8, enum `GroupMemberOnlineStatus`";
     }
     FLAG_CUR_HP = 0x00000002 {
         comment = "uint16";
@@ -267,28 +267,28 @@ flag GroupUpdateFlags : u32 {
 flag GroupMemberOnlineStatus : u8 {
     OFFLINE = 0x0000;
     ONLINE = 0x0001 {
-        comment = "Lua_UnitIsConnected";
+        comment = "`Lua_UnitIsConnected`";
     }
     PVP = 0x0002 {
-        comment = "Lua_UnitIsPVP";
+        comment = "`Lua_UnitIsPVP`";
     }
     DEAD = 0x0004 {
-        comment = "Lua_UnitIsDead";
+        comment = "`Lua_UnitIsDead`";
     }
     GHOST = 0x0008 {
-        comment = "Lua_UnitIsGhost";
+        comment = "`Lua_UnitIsGhost`";
     }
     PVP_FFA = 0x0010 {
-        comment = "Lua_UnitIsPVPFreeForAll";
+        comment = "`Lua_UnitIsPVPFreeForAll`";
     }
     ZONE_OUT = 0x0020 {
-        comment = "used in calls from Lua_GetPlayerMapPosition/Lua_GetBattlefieldFlagPosition";
+        comment = "used in calls from `Lua_GetPlayerMapPosition`/`Lua_GetBattlefieldFlagPosition`";
     }
     AFK = 0x0040 {
-        comment = "Lua_UnitIsAFK";
+        comment = "`Lua_UnitIsAFK`";
     }
     DND = 0x0080 {
-        comment = "Lua_UnitIsDND";
+        comment = "`Lua_UnitIsDND`";
     }
 }
 

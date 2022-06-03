@@ -4,6 +4,6 @@ cmsg CMSG_MOVE_SET_RAW_POSITION = 0x00E1 {
     Vector3d position;
     f32 orientation;
 } {
-    comment = "vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using MSG_MOVE_SET_RAW_POSITION_ACK.";
+    comment = "vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using [MSG_MOVE_SET_RAW_POSITION_ACK].";
 }
 

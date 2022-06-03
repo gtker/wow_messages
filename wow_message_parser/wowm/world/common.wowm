@@ -50,13 +50,13 @@ flag SpellCastTargetFlags : u16 {
         comment = "3xfloat";
     }
     UNIT_ENEMY = 0x00000080 {
-        comment = "CanAttack == true";
+        comment = "`CanAttack` == true";
     }
     UNIT_ALLY = 0x00000100 {
-        comment = "CanAssist == true";
+        comment = "`CanAssist` == true";
     }
     CORPSE_ENEMY = 0x00000200 {
-        comment = "pguid, CanAssist == false";
+        comment = "pguid, `CanAssist` == false";
     }
     UNIT_DEAD = 0x00000400 {
         comment = "skinning-like effects";
@@ -74,10 +74,10 @@ flag SpellCastTargetFlags : u16 {
         comment = "199 spells, opening object/lock";
     }
     CORPSE_ALLY = 0x00008000 {
-        comment = "pguid, CanAssist == true";
+        comment = "pguid, `CanAssist` == true";
     }
 } {
-    comment = "Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets] needs.";
+    comment = "Also has `UNIT_MINIPET` = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets] needs.";
 }
 
 struct SpellCastTargets {

@@ -25,14 +25,14 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `OFFLINE` | 0 (0x00) |  |  |
-| `ONLINE` | 1 (0x01) |  | Lua_UnitIsConnected |
-| `PVP` | 2 (0x02) |  | Lua_UnitIsPVP |
-| `DEAD` | 4 (0x04) |  | Lua_UnitIsDead |
-| `GHOST` | 8 (0x08) |  | Lua_UnitIsGhost |
-| `PVP_FFA` | 16 (0x10) |  | Lua_UnitIsPVPFreeForAll |
-| `ZONE_OUT` | 32 (0x20) |  | used in calls from Lua_GetPlayerMapPosition/Lua_GetBattlefieldFlagPosition |
-| `AFK` | 64 (0x40) |  | Lua_UnitIsAFK |
-| `DND` | 128 (0x80) |  | Lua_UnitIsDND |
+| `ONLINE` | 1 (0x01) |  | `Lua_UnitIsConnected` |
+| `PVP` | 2 (0x02) |  | `Lua_UnitIsPVP` |
+| `DEAD` | 4 (0x04) |  | `Lua_UnitIsDead` |
+| `GHOST` | 8 (0x08) |  | `Lua_UnitIsGhost` |
+| `PVP_FFA` | 16 (0x10) |  | `Lua_UnitIsPVPFreeForAll` |
+| `ZONE_OUT` | 32 (0x20) |  | used in calls from `Lua_GetPlayerMapPosition`/`Lua_GetBattlefieldFlagPosition` |
+| `AFK` | 64 (0x40) |  | `Lua_UnitIsAFK` |
+| `DND` | 128 (0x80) |  | `Lua_UnitIsDND` |
 
 Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
