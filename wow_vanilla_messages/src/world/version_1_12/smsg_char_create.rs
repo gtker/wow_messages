@@ -8,6 +8,8 @@ use std::io::{Write, Read};
 #[derive(Copy)]
 /// Response to [`CMSG_CHAR_CREATE`](crate::world::version_1_12::CMSG_CHAR_CREATE).
 ///
+/// Every [`WorldResult`](crate::world::version_1_2::WorldResult) except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [`CMSG_CHAR_ENUM`](crate::world::version_1_2::CMSG_CHAR_ENUM).
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm#L3):
 /// ```text
 /// smsg SMSG_CHAR_CREATE = 0x003A {
@@ -54,7 +56,7 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x3A, 0x00, 0x2F, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_CREATE0() {
@@ -79,7 +81,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_CREATE0() {
@@ -104,7 +106,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_CREATE0() {
