@@ -1,5 +1,5 @@
 [package]
-name = "wow_simple_auth"
+name = "simple_server"
 version = "0.0.0"
 edition = "2018"
 
