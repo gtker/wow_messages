@@ -62545,9 +62545,8 @@
           "Definition": {
             "name": "damage_minimum",
             "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
+              "FloatingPoint": {
+                "F32": "little"
               }
             },
             "constant_value": null,
@@ -62560,9 +62559,8 @@
           "Definition": {
             "name": "damage_maximum",
             "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
+              "FloatingPoint": {
+                "F32": "little"
               }
             },
             "constant_value": null,
@@ -62605,7 +62603,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm",
-        "start_position": 14
+        "start_position": 15
       },
       "only_has_io_error": true,
       "features": [
@@ -62656,7 +62654,7 @@
             "name": "spell_charges",
             "member_type": {
               "Integer": {
-                "type": "u32",
+                "type": "i32",
                 "endianness": "little"
               }
             },
@@ -62670,10 +62668,24 @@
         },
         {
           "Definition": {
+            "name": "spell_ppm_rate",
+            "member_type": {
+              "FloatingPoint": {
+                "F32": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
             "name": "spell_cooldown",
             "member_type": {
               "Integer": {
-                "type": "u32",
+                "type": "i32",
                 "endianness": "little"
               }
             },
@@ -62703,7 +62715,7 @@
             "name": "spell_category_cooldown",
             "member_type": {
               "Integer": {
-                "type": "u32",
+                "type": "i32",
                 "endianness": "little"
               }
             },
@@ -62766,7 +62778,7 @@
             "name": "item_stat_value",
             "member_type": {
               "Integer": {
-                "type": "u32",
+                "type": "i32",
                 "endianness": "little"
               }
             },
@@ -62793,7 +62805,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm",
-        "start_position": 22
+        "start_position": 23
       },
       "only_has_io_error": true,
       "features": [
@@ -79220,8 +79232,9 @@
                 "Definition": {
                   "name": "buy_price",
                   "member_type": {
-                    "FloatingPoint": {
-                      "F64": "little"
+                    "Integer": {
+                      "type": "u32",
+                      "endianness": "little"
                     }
                   },
                   "constant_value": null,
@@ -79234,8 +79247,9 @@
                 "Definition": {
                   "name": "sell_price",
                   "member_type": {
-                    "FloatingPoint": {
-                      "F64": "little"
+                    "Integer": {
+                      "type": "u32",
+                      "endianness": "little"
                     }
                   },
                   "constant_value": null,
@@ -79518,7 +79532,7 @@
                   "name": "armor",
                   "member_type": {
                     "Integer": {
-                      "type": "u32",
+                      "type": "i32",
                       "endianness": "little"
                     }
                   },
@@ -79533,7 +79547,7 @@
                   "name": "holy_resistance",
                   "member_type": {
                     "Integer": {
-                      "type": "u32",
+                      "type": "i32",
                       "endianness": "little"
                     }
                   },
@@ -79548,7 +79562,7 @@
                   "name": "fire_resistance",
                   "member_type": {
                     "Integer": {
-                      "type": "u32",
+                      "type": "i32",
                       "endianness": "little"
                     }
                   },
@@ -79563,7 +79577,7 @@
                   "name": "nature_resistance",
                   "member_type": {
                     "Integer": {
-                      "type": "u32",
+                      "type": "i32",
                       "endianness": "little"
                     }
                   },
@@ -79578,7 +79592,7 @@
                   "name": "frost_resistance",
                   "member_type": {
                     "Integer": {
-                      "type": "u32",
+                      "type": "i32",
                       "endianness": "little"
                     }
                   },
@@ -79593,7 +79607,7 @@
                   "name": "shadow_resistance",
                   "member_type": {
                     "Integer": {
-                      "type": "u32",
+                      "type": "i32",
                       "endianness": "little"
                     }
                   },
@@ -79608,7 +79622,7 @@
                   "name": "arcane_resistance",
                   "member_type": {
                     "Integer": {
-                      "type": "u32",
+                      "type": "i32",
                       "endianness": "little"
                     }
                   },
@@ -79945,7 +79959,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm",
-        "start_position": 27
+        "start_position": 28
       },
       "only_has_io_error": false,
       "features": [

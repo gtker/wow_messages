@@ -202,6 +202,8 @@ impl Type {
             "u16_be" => IntegerType::U16(Endianness::Big),
             "u32_be" => IntegerType::U32(Endianness::Big),
             "u64_be" => IntegerType::U64(Endianness::Big),
+            "i32" => IntegerType::U64(Endianness::Little),
+            "i32_be" => IntegerType::U64(Endianness::Big),
             _ => panic!("unsupported upcast: {}", upcasted),
         };
 
@@ -228,6 +230,8 @@ impl Type {
             "u16_be" => Self::Integer(IntegerType::U16(Endianness::Big)),
             "u32_be" => Self::Integer(IntegerType::U32(Endianness::Big)),
             "u64_be" => Self::Integer(IntegerType::U64(Endianness::Big)),
+            "i32" => Self::Integer(IntegerType::I32(Endianness::Little)),
+            "i32_be" => Self::Integer(IntegerType::I32(Endianness::Big)),
             "f32" => Self::FloatingPoint(FloatingPointType::F32(Endianness::Little)),
             "f32_be" => Self::FloatingPoint(FloatingPointType::F32(Endianness::Big)),
             "f64" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Little)),

@@ -35,14 +35,14 @@ fn print_container_example_array(
     s: &mut DocWriter,
     array: &Array,
     bytes: &mut Iter<u8>,
-    values: &mut HashMap<String, usize>,
+    values: &mut HashMap<String, isize>,
     o: &Objects,
     tags: &Tags,
     prefix: &str,
 ) {
     let size = match array.size() {
         ArraySize::Fixed(size) => size as usize,
-        ArraySize::Variable(length) => *values.get(&length).unwrap(),
+        ArraySize::Variable(length) => *values.get(&length).unwrap() as usize,
         ArraySize::Endless => {
             let size = bytes.size_hint();
             assert_eq!(size.0, size.1.unwrap());
@@ -103,7 +103,7 @@ fn print_container_example_definition(
     s: &mut DocWriter,
     d: &StructMemberDefinition,
     bytes: &mut Iter<u8>,
-    values: &mut HashMap<String, usize>,
+    values: &mut HashMap<String, isize>,
     o: &Objects,
     tags: &Tags,
     prefix: &str,
@@ -149,7 +149,7 @@ fn print_container_example_definition(
             let length = if let Ok(length) = length.parse::<usize>() {
                 length
             } else {
-                *values.get(length).unwrap()
+                *values.get(length).unwrap() as usize
             };
             s.bytes(bytes.take(length).into_iter());
         }
@@ -251,7 +251,7 @@ fn print_container_example_member(
     e: &Container,
     m: &StructMember,
     bytes: &mut Iter<u8>,
-    values: &mut HashMap<String, usize>,
+    values: &mut HashMap<String, isize>,
     o: &Objects,
     tags: &Tags,
     prefix: &str,
@@ -268,7 +268,7 @@ fn print_container_example_member(
                 _ => panic!(),
             };
 
-            let statement_set = |statement: &IfStatement, enum_value: usize| {
+            let statement_set = |statement: &IfStatement, enum_value: isize| {
                 let mut set = false;
                 for eq in statement.get_conditional().equations() {
                     match eq {
@@ -658,28 +658,35 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
     s.newline();
 }
 
-fn get_integer_value(t: &IntegerType, value: &[u8]) -> usize {
+fn get_integer_value(t: &IntegerType, value: &[u8]) -> isize {
     match t {
-        IntegerType::U8 => value[0] as usize,
+        IntegerType::U8 => value[0] as isize,
         IntegerType::U16(e) => {
             let value: [u8; 2] = value.try_into().unwrap();
             match e {
-                Endianness::Little => u16::from_le_bytes(value) as usize,
-                Endianness::Big => u16::from_be_bytes(value) as usize,
+                Endianness::Little => u16::from_le_bytes(value) as isize,
+                Endianness::Big => u16::from_be_bytes(value) as isize,
             }
         }
         IntegerType::U32(e) => {
             let value: [u8; 4] = value.try_into().unwrap();
             match e {
-                Endianness::Little => u32::from_le_bytes(value) as usize,
-                Endianness::Big => u32::from_be_bytes(value) as usize,
+                Endianness::Little => u32::from_le_bytes(value) as isize,
+                Endianness::Big => u32::from_be_bytes(value) as isize,
             }
         }
         IntegerType::U64(e) => {
             let value: [u8; 8] = value.try_into().unwrap();
             match e {
-                Endianness::Little => u64::from_le_bytes(value) as usize,
-                Endianness::Big => u64::from_be_bytes(value) as usize,
+                Endianness::Little => u64::from_le_bytes(value) as isize,
+                Endianness::Big => u64::from_be_bytes(value) as isize,
+            }
+        }
+        IntegerType::I32(e) => {
+            let value: [u8; 4] = value.try_into().unwrap();
+            match e {
+                Endianness::Little => i32::from_le_bytes(value) as isize,
+                Endianness::Big => i32::from_be_bytes(value) as isize,
             }
         }
     }

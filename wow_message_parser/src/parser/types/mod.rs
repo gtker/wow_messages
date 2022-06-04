@@ -84,6 +84,7 @@ pub enum IntegerType {
     U16(Endianness),
     U32(Endianness),
     U64(Endianness),
+    I32(Endianness),
 }
 
 impl IntegerType {
@@ -91,7 +92,7 @@ impl IntegerType {
         match self {
             IntegerType::U8 => 1,
             IntegerType::U16(_) => 2,
-            IntegerType::U32(_) => 4,
+            IntegerType::U32(_) | IntegerType::I32(_) => 4,
             IntegerType::U64(_) => 8,
         }
     }
@@ -119,6 +120,10 @@ impl IntegerType {
                 Endianness::Little => "u64",
                 Endianness::Big => "u64_be",
             },
+            IntegerType::I32(e) => match e {
+                Endianness::Little => "i32",
+                Endianness::Big => "i32_be",
+            },
         }
     }
 
@@ -128,20 +133,27 @@ impl IntegerType {
             IntegerType::U16(_) => "u16",
             IntegerType::U32(_) => "u32",
             IntegerType::U64(_) => "u64",
+            IntegerType::I32(_) => "i32",
         }
     }
 
     pub fn rust_endian_str(&self) -> &str {
         match self {
             IntegerType::U8 => "le",
-            IntegerType::U16(i) | IntegerType::U32(i) | IntegerType::U64(i) => i.rust_str(),
+            IntegerType::U16(i)
+            | IntegerType::U32(i)
+            | IntegerType::U64(i)
+            | IntegerType::I32(i) => i.rust_str(),
         }
     }
 
     pub fn doc_endian_str(&self) -> &str {
         match self {
             IntegerType::U8 => "-",
-            IntegerType::U16(e) | IntegerType::U32(e) | IntegerType::U64(e) => match e {
+            IntegerType::U16(e)
+            | IntegerType::U32(e)
+            | IntegerType::U64(e)
+            | IntegerType::I32(e) => match e {
                 Endianness::Little => "Little",
                 Endianness::Big => "Big",
             },
@@ -162,6 +174,8 @@ impl From<&str> for IntegerType {
             "u32_be" => IntegerType::U32(Endianness::Big),
             "u64" => IntegerType::U64(Endianness::Little),
             "u64_be" => IntegerType::U64(Endianness::Big),
+            "i32" => IntegerType::I32(Endianness::Little),
+            "i32_be" => IntegerType::I32(Endianness::Big),
             _ => panic!("invalid basic type attempted to be created as IntegerType"),
         }
     }

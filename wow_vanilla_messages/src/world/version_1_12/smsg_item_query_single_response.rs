@@ -12,7 +12,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L27):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:28`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L28):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -26,8 +26,8 @@ use std::io::{Write, Read};
 ///         u32 item_display_info;
 ///         ItemQuality quality;
 ///         u32 flags;
-///         f64 buy_price;
-///         f64 sell_price;
+///         u32 buy_price;
+///         u32 sell_price;
 ///         InventoryType inventory_type;
 ///         u32 allowed_class;
 ///         u32 allowed_race;
@@ -45,13 +45,13 @@ use std::io::{Write, Read};
 ///         u32 container_slots;
 ///         ItemStat[10] stats;
 ///         ItemDamageType[5] damages;
-///         u32 armor;
-///         u32 holy_resistance;
-///         u32 fire_resistance;
-///         u32 nature_resistance;
-///         u32 frost_resistance;
-///         u32 shadow_resistance;
-///         u32 arcane_resistance;
+///         i32 armor;
+///         i32 holy_resistance;
+///         i32 fire_resistance;
+///         i32 nature_resistance;
+///         i32 frost_resistance;
+///         i32 shadow_resistance;
+///         i32 arcane_resistance;
 ///         u32 delay;
 ///         u32 ammo_type;
 ///         f32 ranged_range_modification;
@@ -122,10 +122,10 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // flags: u32
             w.write_all(&v.flags.to_le_bytes())?;
 
-            // buy_price: f64
+            // buy_price: u32
             w.write_all(&v.buy_price.to_le_bytes())?;
 
-            // sell_price: f64
+            // sell_price: u32
             w.write_all(&v.sell_price.to_le_bytes())?;
 
             // inventory_type: InventoryType
@@ -183,25 +183,25 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 i.write_into_vec(w)?;
             }
 
-            // armor: u32
+            // armor: i32
             w.write_all(&v.armor.to_le_bytes())?;
 
-            // holy_resistance: u32
+            // holy_resistance: i32
             w.write_all(&v.holy_resistance.to_le_bytes())?;
 
-            // fire_resistance: u32
+            // fire_resistance: i32
             w.write_all(&v.fire_resistance.to_le_bytes())?;
 
-            // nature_resistance: u32
+            // nature_resistance: i32
             w.write_all(&v.nature_resistance.to_le_bytes())?;
 
-            // frost_resistance: u32
+            // frost_resistance: i32
             w.write_all(&v.frost_resistance.to_le_bytes())?;
 
-            // shadow_resistance: u32
+            // shadow_resistance: i32
             w.write_all(&v.shadow_resistance.to_le_bytes())?;
 
-            // arcane_resistance: u32
+            // arcane_resistance: i32
             w.write_all(&v.arcane_resistance.to_le_bytes())?;
 
             // delay: u32
@@ -318,10 +318,12 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // flags: u32
             let flags = crate::util::read_u32_le(r)?;
 
-            // buy_price: f64
-            let buy_price = crate::util::read_f64_le(r)?;
-            // sell_price: f64
-            let sell_price = crate::util::read_f64_le(r)?;
+            // buy_price: u32
+            let buy_price = crate::util::read_u32_le(r)?;
+
+            // sell_price: u32
+            let sell_price = crate::util::read_u32_le(r)?;
+
             // inventory_type: InventoryType
             let inventory_type: InventoryType = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -379,26 +381,26 @@ impl ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 *i = ItemDamageType::read(r)?;
             }
 
-            // armor: u32
-            let armor = crate::util::read_u32_le(r)?;
+            // armor: i32
+            let armor = crate::util::read_i32_le(r)?;
 
-            // holy_resistance: u32
-            let holy_resistance = crate::util::read_u32_le(r)?;
+            // holy_resistance: i32
+            let holy_resistance = crate::util::read_i32_le(r)?;
 
-            // fire_resistance: u32
-            let fire_resistance = crate::util::read_u32_le(r)?;
+            // fire_resistance: i32
+            let fire_resistance = crate::util::read_i32_le(r)?;
 
-            // nature_resistance: u32
-            let nature_resistance = crate::util::read_u32_le(r)?;
+            // nature_resistance: i32
+            let nature_resistance = crate::util::read_i32_le(r)?;
 
-            // frost_resistance: u32
-            let frost_resistance = crate::util::read_u32_le(r)?;
+            // frost_resistance: i32
+            let frost_resistance = crate::util::read_i32_le(r)?;
 
-            // shadow_resistance: u32
-            let shadow_resistance = crate::util::read_u32_le(r)?;
+            // shadow_resistance: i32
+            let shadow_resistance = crate::util::read_i32_le(r)?;
 
-            // arcane_resistance: u32
-            let arcane_resistance = crate::util::read_u32_le(r)?;
+            // arcane_resistance: i32
+            let arcane_resistance = crate::util::read_i32_le(r)?;
 
             // delay: u32
             let delay = crate::util::read_u32_le(r)?;
@@ -545,8 +547,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // item_display_info: u32
             + 4 // quality: ItemQuality
             + 4 // flags: u32
-            + 8 // buy_price: f64
-            + 8 // sell_price: f64
+            + 4 // buy_price: u32
+            + 4 // sell_price: u32
             + 1 // inventory_type: InventoryType
             + 4 // allowed_class: u32
             + 4 // allowed_race: u32
@@ -564,17 +566,17 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // container_slots: u32
             + 10 * 8 // stats: ItemStat[10]
             + 5 * 12 // damages: ItemDamageType[5]
-            + 4 // armor: u32
-            + 4 // holy_resistance: u32
-            + 4 // fire_resistance: u32
-            + 4 // nature_resistance: u32
-            + 4 // frost_resistance: u32
-            + 4 // shadow_resistance: u32
-            + 4 // arcane_resistance: u32
+            + 4 // armor: i32
+            + 4 // holy_resistance: i32
+            + 4 // fire_resistance: i32
+            + 4 // nature_resistance: i32
+            + 4 // frost_resistance: i32
+            + 4 // shadow_resistance: i32
+            + 4 // arcane_resistance: i32
             + 4 // delay: u32
             + 4 // ammo_type: u32
             + 4 // ranged_range_modification: f32
-            + 5 * 24 // spells: ItemSpells[5]
+            + 5 * 28 // spells: ItemSpells[5]
             + 4 // bonding: u32
             + found.description.len() + 1 // description: CString
             + 4 // page_text: u32
@@ -608,8 +610,8 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub item_display_info: u32,
     pub quality: ItemQuality,
     pub flags: u32,
-    pub buy_price: f64,
-    pub sell_price: f64,
+    pub buy_price: u32,
+    pub sell_price: u32,
     pub inventory_type: InventoryType,
     pub allowed_class: u32,
     pub allowed_race: u32,
@@ -627,13 +629,13 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub container_slots: u32,
     pub stats: [ItemStat; 10],
     pub damages: [ItemDamageType; 5],
-    pub armor: u32,
-    pub holy_resistance: u32,
-    pub fire_resistance: u32,
-    pub nature_resistance: u32,
-    pub frost_resistance: u32,
-    pub shadow_resistance: u32,
-    pub arcane_resistance: u32,
+    pub armor: i32,
+    pub holy_resistance: i32,
+    pub fire_resistance: i32,
+    pub nature_resistance: i32,
+    pub frost_resistance: i32,
+    pub shadow_resistance: i32,
+    pub arcane_resistance: i32,
     pub delay: u32,
     pub ammo_type: u32,
     pub ranged_range_modification: f32,
@@ -667,8 +669,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // item_display_info: u32
         + 4 // quality: ItemQuality
         + 4 // flags: u32
-        + 8 // buy_price: f64
-        + 8 // sell_price: f64
+        + 4 // buy_price: u32
+        + 4 // sell_price: u32
         + 1 // inventory_type: InventoryType
         + 4 // allowed_class: u32
         + 4 // allowed_race: u32
@@ -686,17 +688,17 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // container_slots: u32
         + 10 * 8 // stats: ItemStat[10]
         + 5 * 12 // damages: ItemDamageType[5]
-        + 4 // armor: u32
-        + 4 // holy_resistance: u32
-        + 4 // fire_resistance: u32
-        + 4 // nature_resistance: u32
-        + 4 // frost_resistance: u32
-        + 4 // shadow_resistance: u32
-        + 4 // arcane_resistance: u32
+        + 4 // armor: i32
+        + 4 // holy_resistance: i32
+        + 4 // fire_resistance: i32
+        + 4 // nature_resistance: i32
+        + 4 // frost_resistance: i32
+        + 4 // shadow_resistance: i32
+        + 4 // arcane_resistance: i32
         + 4 // delay: u32
         + 4 // ammo_type: u32
         + 4 // ranged_range_modification: f32
-        + 5 * 24 // spells: ItemSpells[5]
+        + 5 * 28 // spells: ItemSpells[5]
         + 4 // bonding: u32
         + self.description.len() + 1 // description: CString
         + 4 // page_text: u32

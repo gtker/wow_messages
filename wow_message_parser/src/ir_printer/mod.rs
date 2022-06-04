@@ -41,6 +41,7 @@ pub enum IrIntegerType {
     u16(IrEndianness),
     u32(IrEndianness),
     u64(IrEndianness),
+    i32(IrEndianness),
 }
 
 impl From<&IntegerType> for IrIntegerType {
@@ -50,6 +51,7 @@ impl From<&IntegerType> for IrIntegerType {
             IntegerType::U16(e) => IrIntegerType::u16(e.into()),
             IntegerType::U32(e) => IrIntegerType::u32(e.into()),
             IntegerType::U64(e) => IrIntegerType::u64(e.into()),
+            IntegerType::I32(e) => IrIntegerType::i32(e.into()),
         }
     }
 }

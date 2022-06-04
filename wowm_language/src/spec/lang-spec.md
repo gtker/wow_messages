@@ -33,8 +33,10 @@ The `CString` type is an array of valid UTF-8 `u8`s terminated by a null (0) byt
 
 | Type | Purpose | C Name |
 | ---- | ------- | ------ |
-| `u*` | Unsigned little endian `*` bit value. | `char`/`short`/`int`/`long long` |
-| `u*_be` | Unsigned big endian `*` bit value. | `char`/`short`/`int`/`long long` |
+| `u*` | Unsigned little endian `*` bit value. | `unsigned` `char`/`short`/`int`/`long long` |
+| `u*_be` | Unsigned big endian `*` bit value. | `unsigned` `char`/`short`/`int`/`long long` |
+| `i*` | Signed little endian `*` bit value. | `char`/`short`/`int`/`long long` |
+| `i*_be` | Signed big endian `*` bit value. | `char`/`short`/`int`/`long long` |
 | `f32` and `f64` | Floating point value. | `float`/`double` |
 | `f*_be` | Floating point value sent as big endian. | `float`/`double` |
 | `CString` | UTF-8 string type that is terminated by a zero byte value. | `char*` |
