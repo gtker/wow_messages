@@ -183,7 +183,7 @@ pub enum InitialMessage {
 /// thing to be read from the socket.
 ///
 /// This is provided instead of just having users use a
-/// [ClientOpcodeMessage](crate::version_2::opcodes::ClientOpcodeMessage)
+/// [`ClientOpcodeMessage`](crate::version_2::opcodes::ClientOpcodeMessage)
 /// since [`CMD_AUTH_LOGON_CHALLENGE_Client`], and [`CMD_AUTH_RECONNECT_CHALLENGE_Client`] are valid for all versions,
 /// and this creates a nicer abstraction around that.
 ///
