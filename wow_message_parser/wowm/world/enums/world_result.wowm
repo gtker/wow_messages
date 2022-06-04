@@ -78,7 +78,9 @@ enum WorldResult : u8 {
     AUTH_LOGIN_SERVER_NOT_FOUND = 0x1A {
         description = "Shows `Invalid Login Server` with `Okay` button.";
     }
-    AUTH_WAIT_QUEUE = 0x1B;
+    AUTH_WAIT_QUEUE = 0x1B {
+        comment = "If this is sent without a `queue_position` field it will either reuse the one from before or use 0.";
+    }
     AUTH_BANNED = 0x1C {
         description = "Shows `This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.` with `Okay` button.";
     }

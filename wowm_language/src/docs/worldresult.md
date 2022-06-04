@@ -124,7 +124,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `AUTH_SERVER_SHUTTING_DOWN` | 24 (0x18) |  |  |
 | `AUTH_ALREADY_LOGGING_IN` | 25 (0x19) | Shows `Already Logging In` with `Okay` button. |  |
 | `AUTH_LOGIN_SERVER_NOT_FOUND` | 26 (0x1A) | Shows `Invalid Login Server` with `Okay` button. |  |
-| `AUTH_WAIT_QUEUE` | 27 (0x1B) |  |  |
+| `AUTH_WAIT_QUEUE` | 27 (0x1B) |  | If this is sent without a `queue_position` field it will either reuse the one from before or use 0. |
 | `AUTH_BANNED` | 28 (0x1C) | Shows `This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.` with `Okay` button. |  |
 | `AUTH_ALREADY_ONLINE` | 29 (0x1D) | Shows `This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/` with `Okay` button. |  |
 | `AUTH_NO_TIME` | 30 (0x1E) | Shows `Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.` with `Okay` button. |  |

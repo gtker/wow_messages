@@ -30432,7 +30432,9 @@
             "int": 27,
             "original": "0x1B"
           },
-          "tags": {}
+          "tags": {
+            "comment": "If this is sent without a `queue_position` field it will either reuse the one from before or use 0."
+          }
         },
         {
           "name": "AUTH_BANNED",

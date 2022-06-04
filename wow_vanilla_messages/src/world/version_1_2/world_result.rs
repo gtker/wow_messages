@@ -167,6 +167,8 @@ pub enum WorldResult {
     /// Shows `Invalid Login Server` with `Okay` button.
     ///
     AUTH_LOGIN_SERVER_NOT_FOUND,
+    /// If this is sent without a `queue_position` field it will either reuse the one from before or use 0.
+    ///
     AUTH_WAIT_QUEUE,
     /// Shows `This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.` with `Okay` button.
     ///
