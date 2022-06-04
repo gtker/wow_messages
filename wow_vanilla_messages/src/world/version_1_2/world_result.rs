@@ -180,55 +180,147 @@ pub enum WorldResult {
     /// Shows `This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus` with `Okay` button.
     ///
     AUTH_DB_BUSY,
+    /// Shows 'This account has been temporarily suspended for violating the Terms of Use Agreement - `http://www.wow-europe.com/en/legal`. Please contact our GM department at `http://www.wow-europe.com/en/support/` for more information.' with 'Okay' button.
+    ///
     AUTH_SUSPENDED,
+    /// Shows 'Access to this account has been blocked by parental controls. Your settings may be changed in your preferences at `http://www.worldofwarcraft.com`.' with 'Okay' button.
+    ///
     AUTH_PARENTAL_CONTROL,
+    /// Shows 'Retrieving realm list' with 'Okay' button.
+    ///
     REALM_LIST_IN_PROGRESS,
+    /// Shows 'Realm list retrieved' with 'Okay' button.
+    ///
     REALM_LIST_SUCCESS,
+    /// Shows 'Unable to connect to realm list server' with 'Okay' button.
+    ///
     REALM_LIST_FAILED,
+    /// Shows 'Invalid realm list' with 'Okay' button.
+    ///
     REALM_LIST_INVALID,
+    /// Shows 'The game server you have chosen is currently down. Use the Change Realm button to choose another Realm. Check `http://www.wow-europe.com/en/serverstatus` for current server status.' with 'Okay' button.
+    ///
     REALM_LIST_REALM_NOT_FOUND,
+    /// Shows 'Creating account' with 'Okay' button.
+    ///
     ACCOUNT_CREATE_IN_PROGRESS,
+    /// Shows 'Account created' with 'Okay' button.
+    ///
     ACCOUNT_CREATE_SUCCESS,
+    /// Shows 'Account creation failed' with 'Okay' button.
+    ///
     ACCOUNT_CREATE_FAILED,
+    /// Shows 'Retrieving character list' with 'Okay' button.
+    ///
     CHAR_LIST_RETRIEVING,
+    /// Shows 'Character list retrieved' with 'Okay' button.
+    ///
     CHAR_LIST_RETRIEVED,
+    /// Shows 'Error retrieving character list' with 'Okay' button.
+    ///
     CHAR_LIST_FAILED,
+    /// Shows 'Creating character' with 'Okay' button.
+    ///
     CHAR_CREATE_IN_PROGRESS,
     CHAR_CREATE_SUCCESS,
     CHAR_CREATE_ERROR,
+    /// Shows 'Character creation failed' with 'Okay' button.
+    ///
     CHAR_CREATE_FAILED,
+    /// Shows 'That name is unavailable' with 'Okay' button.
+    ///
     CHAR_CREATE_NAME_IN_USE,
+    /// Shows 'Creation of that race and/or class is currently disabled.' with 'Okay' button.
+    ///
     CHAR_CREATE_DISABLED,
+    /// Shows 'You cannot have both a Horde and an Alliance character on the same PvP realm' with 'Okay' button.
+    ///
     CHAR_CREATE_PVP_TEAMS_VIOLATION,
     CHAR_CREATE_SERVER_LIMIT,
+    /// Shows 'You already have the maximum number of characters allowed on this account.' with 'Okay' button.
+    ///
     CHAR_CREATE_ACCOUNT_LIMIT,
     CHAR_CREATE_SERVER_QUEUE,
+    /// Shows 'Only players who already have characters on this realm are currently allowed to create characters.' with 'Okay' button.
+    ///
     CHAR_CREATE_ONLY_EXISTING,
+    /// Shows 'Deleting character' with 'Okay' button.
+    ///
     CHAR_DELETE_IN_PROGRESS,
+    /// Shows 'Character deleted' with 'Okay' button.
+    ///
     CHAR_DELETE_SUCCESS,
+    /// Shows 'Character deletion failed' with 'Okay' button.
+    ///
     CHAR_DELETE_FAILED,
+    /// Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button.
+    ///
     CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER,
+    /// Shows 'Entering the World of Warcraft' with 'Okay' button.
+    ///
     CHAR_LOGIN_IN_PROGRESS,
+    /// Shows 'Login successful' with 'Okay' button.
+    ///
     CHAR_LOGIN_SUCCESS,
+    /// Shows 'World server is down' with 'Okay' button.
+    ///
     CHAR_LOGIN_NO_WORLD,
+    /// Shows 'A character with that name already exists' with 'Okay' button.
+    ///
     CHAR_LOGIN_DUPLICATE_CHARACTER,
+    /// Shows 'No instance servers are available' with 'Okay' button.
+    ///
     CHAR_LOGIN_NO_INSTANCES,
+    /// Shows 'Login failed' with 'Okay' button.
+    ///
     CHAR_LOGIN_FAILED,
+    /// Shows 'Login for that race, class or character is currently disabled.' with 'Okay' button.
+    ///
     CHAR_LOGIN_DISABLED,
+    /// Shows 'Character not found' with 'Okay' button.
+    ///
     CHAR_LOGIN_NO_CHARACTER,
+    /// Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button.
+    ///
     CHAR_LOGIN_LOCKED_FOR_TRANSFER,
+    /// Shows 'Enter a name for your character' with 'Okay' button.
+    ///
     CHAR_NAME_NO_NAME,
+    /// Shows 'Names must be at least 2 characters' with 'Okay' button.
+    ///
     CHAR_NAME_TOO_SHORT,
+    /// Shows 'Names must be no more than 12 characters' with 'Okay' button.
+    ///
     CHAR_NAME_TOO_LONG,
+    /// Shows 'Names can only contain letters' with 'Okay' button.
+    ///
     CHAR_NAME_ONLY_LETTERS,
+    /// Shows 'Names must contain only one language' with 'Okay' button.
+    ///
     CHAR_NAME_MIXED_LANGUAGES,
+    /// Shows 'That name contains profanity' with 'Okay' button.
+    ///
     CHAR_NAME_PROFANE,
+    /// Shows 'That name is unavailable' with 'Okay' button.
+    ///
     CHAR_NAME_RESERVED,
+    /// Shows 'You cannot use an apostrophe as the first or last character of your name' with 'Okay' button.
+    ///
     CHAR_NAME_INVALID_APOSTROPHE,
+    /// Shows 'You can only have one apostrophe' with 'Okay' button.
+    ///
     CHAR_NAME_MULTIPLE_APOSTROPHES,
+    /// Shows 'You cannot use the same letter three times consecutively' with 'Okay' button.
+    ///
     CHAR_NAME_THREE_CONSECUTIVE,
+    /// Shows 'You cannot use a space as the first or last character of your name' with 'Okay' button.
+    ///
     CHAR_NAME_INVALID_SPACE,
+    /// Shows an empty box with 'Okay' button.
+    ///
     CHAR_NAME_SUCCESS,
+    /// Shows 'Invalid character name' with 'Okay' button.
+    ///
     CHAR_NAME_FAILURE,
 }
 

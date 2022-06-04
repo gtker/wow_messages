@@ -30480,7 +30480,9 @@
             "int": 32,
             "original": "0x20"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'This account has been temporarily suspended for violating the Terms of Use Agreement - `http://www.wow-europe.com/en/legal`. Please contact our GM department at `http://www.wow-europe.com/en/support/` for more information.' with 'Okay' button."
+          }
         },
         {
           "name": "AUTH_PARENTAL_CONTROL",
@@ -30488,7 +30490,9 @@
             "int": 33,
             "original": "0x21"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Access to this account has been blocked by parental controls. Your settings may be changed in your preferences at `http://www.worldofwarcraft.com`.' with 'Okay' button."
+          }
         },
         {
           "name": "REALM_LIST_IN_PROGRESS",
@@ -30496,7 +30500,9 @@
             "int": 34,
             "original": "0x22"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Retrieving realm list' with 'Okay' button."
+          }
         },
         {
           "name": "REALM_LIST_SUCCESS",
@@ -30504,7 +30510,9 @@
             "int": 35,
             "original": "0x23"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Realm list retrieved' with 'Okay' button."
+          }
         },
         {
           "name": "REALM_LIST_FAILED",
@@ -30512,7 +30520,9 @@
             "int": 36,
             "original": "0x24"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Unable to connect to realm list server' with 'Okay' button."
+          }
         },
         {
           "name": "REALM_LIST_INVALID",
@@ -30520,7 +30530,9 @@
             "int": 37,
             "original": "0x25"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Invalid realm list' with 'Okay' button."
+          }
         },
         {
           "name": "REALM_LIST_REALM_NOT_FOUND",
@@ -30528,7 +30540,9 @@
             "int": 38,
             "original": "0x26"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'The game server you have chosen is currently down. Use the Change Realm button to choose another Realm. Check `http://www.wow-europe.com/en/serverstatus` for current server status.' with 'Okay' button."
+          }
         },
         {
           "name": "ACCOUNT_CREATE_IN_PROGRESS",
@@ -30536,7 +30550,9 @@
             "int": 39,
             "original": "0x27"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Creating account' with 'Okay' button."
+          }
         },
         {
           "name": "ACCOUNT_CREATE_SUCCESS",
@@ -30544,7 +30560,9 @@
             "int": 40,
             "original": "0x28"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Account created' with 'Okay' button."
+          }
         },
         {
           "name": "ACCOUNT_CREATE_FAILED",
@@ -30552,7 +30570,9 @@
             "int": 41,
             "original": "0x29"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Account creation failed' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LIST_RETRIEVING",
@@ -30560,7 +30580,9 @@
             "int": 42,
             "original": "0x2A"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Retrieving character list' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LIST_RETRIEVED",
@@ -30568,7 +30590,9 @@
             "int": 43,
             "original": "0x2B"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Character list retrieved' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LIST_FAILED",
@@ -30576,7 +30600,9 @@
             "int": 44,
             "original": "0x2C"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Error retrieving character list' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_CREATE_IN_PROGRESS",
@@ -30584,7 +30610,9 @@
             "int": 45,
             "original": "0x2D"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Creating character' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_CREATE_SUCCESS",
@@ -30608,7 +30636,9 @@
             "int": 48,
             "original": "0x30"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Character creation failed' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_CREATE_NAME_IN_USE",
@@ -30616,7 +30646,9 @@
             "int": 49,
             "original": "0x31"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'That name is unavailable' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_CREATE_DISABLED",
@@ -30624,7 +30656,9 @@
             "int": 50,
             "original": "0x32"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Creation of that race and/or class is currently disabled.' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_CREATE_PVP_TEAMS_VIOLATION",
@@ -30632,7 +30666,9 @@
             "int": 51,
             "original": "0x33"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'You cannot have both a Horde and an Alliance character on the same PvP realm' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_CREATE_SERVER_LIMIT",
@@ -30648,7 +30684,9 @@
             "int": 53,
             "original": "0x35"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'You already have the maximum number of characters allowed on this account.' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_CREATE_SERVER_QUEUE",
@@ -30664,7 +30702,9 @@
             "int": 55,
             "original": "0x37"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Only players who already have characters on this realm are currently allowed to create characters.' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_DELETE_IN_PROGRESS",
@@ -30672,7 +30712,9 @@
             "int": 56,
             "original": "0x38"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Deleting character' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_DELETE_SUCCESS",
@@ -30680,7 +30722,9 @@
             "int": 57,
             "original": "0x39"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Character deleted' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_DELETE_FAILED",
@@ -30688,7 +30732,9 @@
             "int": 58,
             "original": "0x3A"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Character deletion failed' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER",
@@ -30696,7 +30742,9 @@
             "int": 59,
             "original": "0x3B"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LOGIN_IN_PROGRESS",
@@ -30704,7 +30752,9 @@
             "int": 60,
             "original": "0x3C"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Entering the World of Warcraft' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LOGIN_SUCCESS",
@@ -30712,7 +30762,9 @@
             "int": 61,
             "original": "0x3D"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Login successful' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LOGIN_NO_WORLD",
@@ -30720,7 +30772,9 @@
             "int": 62,
             "original": "0x3E"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'World server is down' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LOGIN_DUPLICATE_CHARACTER",
@@ -30728,7 +30782,9 @@
             "int": 63,
             "original": "0x3F"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'A character with that name already exists' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LOGIN_NO_INSTANCES",
@@ -30736,7 +30792,9 @@
             "int": 64,
             "original": "0x40"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'No instance servers are available' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LOGIN_FAILED",
@@ -30744,7 +30802,9 @@
             "int": 65,
             "original": "0x41"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Login failed' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LOGIN_DISABLED",
@@ -30752,7 +30812,9 @@
             "int": 66,
             "original": "0x42"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Login for that race, class or character is currently disabled.' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LOGIN_NO_CHARACTER",
@@ -30760,7 +30822,9 @@
             "int": 67,
             "original": "0x43"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Character not found' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_LOGIN_LOCKED_FOR_TRANSFER",
@@ -30768,7 +30832,9 @@
             "int": 68,
             "original": "0x44"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_NO_NAME",
@@ -30776,7 +30842,9 @@
             "int": 69,
             "original": "0x45"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Enter a name for your character' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_TOO_SHORT",
@@ -30784,7 +30852,9 @@
             "int": 70,
             "original": "0x46"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Names must be at least 2 characters' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_TOO_LONG",
@@ -30792,7 +30862,9 @@
             "int": 71,
             "original": "0x47"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Names must be no more than 12 characters' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_ONLY_LETTERS",
@@ -30800,7 +30872,9 @@
             "int": 72,
             "original": "0x48"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Names can only contain letters' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_MIXED_LANGUAGES",
@@ -30808,7 +30882,9 @@
             "int": 73,
             "original": "0x49"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Names must contain only one language' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_PROFANE",
@@ -30816,7 +30892,9 @@
             "int": 74,
             "original": "0x4A"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'That name contains profanity' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_RESERVED",
@@ -30824,7 +30902,9 @@
             "int": 75,
             "original": "0x4B"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'That name is unavailable' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_INVALID_APOSTROPHE",
@@ -30832,7 +30912,9 @@
             "int": 76,
             "original": "0x4C"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'You cannot use an apostrophe as the first or last character of your name' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_MULTIPLE_APOSTROPHES",
@@ -30840,7 +30922,9 @@
             "int": 77,
             "original": "0x4D"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'You can only have one apostrophe' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_THREE_CONSECUTIVE",
@@ -30848,7 +30932,9 @@
             "int": 78,
             "original": "0x4E"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'You cannot use the same letter three times consecutively' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_INVALID_SPACE",
@@ -30856,7 +30942,9 @@
             "int": 79,
             "original": "0x4F"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'You cannot use a space as the first or last character of your name' with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_SUCCESS",
@@ -30864,7 +30952,9 @@
             "int": 80,
             "original": "0x50"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows an empty box with 'Okay' button."
+          }
         },
         {
           "name": "CHAR_NAME_FAILURE",
@@ -30872,7 +30962,9 @@
             "int": 81,
             "original": "0x51"
           },
-          "tags": {}
+          "tags": {
+            "description": "Shows 'Invalid character name' with 'Okay' button."
+          }
         }
       ],
       "self_value": null,
