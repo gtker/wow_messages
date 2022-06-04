@@ -69,17 +69,17 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
                     characters: vec![Character {
                         guid: Guid::new(4),
                         name: "Warr".to_string(),
-                        race: Default::default(),
-                        class: Default::default(),
-                        gender: Default::default(),
+                        race: Race::HUMAN,
+                        class: Class::WARRIOR,
+                        gender: Gender::FEMALE,
                         skin: 0,
                         face: 0,
                         hairstyle: 0,
                         haircolor: 0,
                         facialhair: 0,
                         level: 0,
-                        area: Default::default(),
-                        map: Default::default(),
+                        area: Area::NORTHSHIRE_VALLEY,
+                        map: Map::EASTERN_KINGDOMS,
                         position: Vector3d {
                             x: 0.0,
                             y: 0.0,
@@ -154,7 +154,13 @@ pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpS
     let update_mask = UpdatePlayer::new()
         .set_object_GUID(Guid::new(4))
         .set_unit_BYTES_0(Race::HUMAN, Class::WARRIOR, Gender::FEMALE, Power::RAGE)
-        .set_unit_HEALTH(100);
+        .set_object_SCALE_X(1.0)
+        .set_unit_HEALTH(100)
+        .set_unit_MAXHEALTH(100)
+        .set_unit_LEVEL(1)
+        .set_unit_FACTIONTEMPLATE(1)
+        .set_unit_DISPLAYID(50)
+        .set_unit_NATIVEDISPLAYID(50);
 
     let update_flag = MovementBlock_UpdateFlag::empty()
         .set_LIVING(MovementBlock_UpdateFlag_LIVING::LIVING {
