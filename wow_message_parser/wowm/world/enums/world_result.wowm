@@ -1,6 +1,6 @@
 #tag_all versions "1.2 1.12";
 
-enum WorldResult : u32 {
+enum WorldResult : u8 {
     RESPONSE_SUCCESS = 0x00 {
         description = "Shows `Success` with `Okay` button.";
     }

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/world_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/world_result.wowm#L3):
 /// ```text
-/// enum WorldResult : u32 {
+/// enum WorldResult : u8 {
 ///     RESPONSE_SUCCESS = 0x00;
 ///     RESPONSE_FAILURE = 0x01;
 ///     RESPONSE_CANCELLED = 0x02;
@@ -325,7 +325,7 @@ pub enum WorldResult {
 }
 
 impl WorldResult {
-    pub(crate) const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::RESPONSE_SUCCESS => 0x0,
             Self::RESPONSE_FAILURE => 0x1,
@@ -509,9 +509,9 @@ impl std::fmt::Display for WorldResult {
     }
 }
 
-impl TryFrom<u32> for WorldResult {
+impl TryFrom<u8> for WorldResult {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::RESPONSE_SUCCESS),
             1 => Ok(Self::RESPONSE_FAILURE),

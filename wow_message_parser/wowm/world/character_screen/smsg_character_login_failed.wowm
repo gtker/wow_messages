@@ -9,7 +9,7 @@ smsg SMSG_CHARACTER_LOGIN_FAILED = 0x41 {
 test SMSG_CHARACTER_LOGIN_FAILED {
     result = CHAR_LOGIN_FAILED;
 } [
-    0x00, 0x06, /* size */
+    0x00, 0x03, /* size */
     0x41, 0x00, /* opcode */
-    0x41, 0x00, 0x00, 0x00, /* result */
+    0x41, /* result */
 ]

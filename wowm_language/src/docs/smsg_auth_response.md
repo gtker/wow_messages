@@ -62,9 +62,9 @@ Else If result is equal to `AUTH_WAIT_QUEUE`:
 Authentication failed.
 
 ```c
-0, 6, // size
+0, 3, // size
 238, 1, // opcode (494)
-13, 0, 0, 0, // result: WorldResult AUTH_FAILED (0x0D)
+13, // result: WorldResult AUTH_FAILED (0x0D)
 ```
 #### Example 2
 
@@ -73,9 +73,9 @@ Authentication failed.
 Client told to wait in queue.
 
 ```c
-0, 10, // size
+0, 7, // size
 238, 1, // opcode (494)
-27, 0, 0, 0, // result: WorldResult AUTH_WAIT_QUEUE (0x1B)
+27, // result: WorldResult AUTH_WAIT_QUEUE (0x1B)
 239, 190, 173, 222, // queue_position: u32
 ```
 #### Example 3
@@ -85,9 +85,9 @@ Client told to wait in queue.
 Client can join.
 
 ```c
-0, 15, // size
+0, 12, // size
 238, 1, // opcode (494)
-12, 0, 0, 0, // result: WorldResult AUTH_OK (0x0C)
+12, // result: WorldResult AUTH_OK (0x0C)
 239, 190, 173, 222, // billing_time: u32
 0, // billing_flags: u8
 0, 0, 0, 0, // billing_rested: u32

@@ -10,7 +10,7 @@ smsg SMSG_CHAR_DELETE = 0x3C {
 test SMSG_CHAR_DELETE {
     result = CHAR_DELETE_SUCCESS;
 } [
-    0x00, 0x06, /* size */
+    0x00, 0x03, /* size */
     0x3C, 0x00, /* opcode */
-    0x39, 0x00, 0x00, 0x00, /* result */
+    0x39, /* result */
 ]

@@ -40,7 +40,7 @@ SMSG have a header of 4 bytes.
 #### Example 1
 
 ```c
-0, 6, // size
+0, 3, // size
 60, 0, // opcode (60)
-57, 0, 0, 0, // result: WorldResult CHAR_DELETE_SUCCESS (0x39)
+57, // result: WorldResult CHAR_DELETE_SUCCESS (0x39)
 ```

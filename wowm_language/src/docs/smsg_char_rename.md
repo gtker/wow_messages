@@ -47,16 +47,16 @@ If result is equal to `RESPONSE_SUCCESS`:
 #### Example 1
 
 ```c
-0, 6, // size
+0, 3, // size
 200, 2, // opcode (712)
-71, 0, 0, 0, // result: WorldResult CHAR_NAME_TOO_LONG (0x47)
+71, // result: WorldResult CHAR_NAME_TOO_LONG (0x47)
 ```
 #### Example 2
 
 ```c
-0, 23, // size
+0, 20, // size
 200, 2, // opcode (712)
-0, 0, 0, 0, // result: WorldResult RESPONSE_SUCCESS (0x00)
+0, // result: WorldResult RESPONSE_SUCCESS (0x00)
 239, 190, 173, 222, 0, 0, 0, 0, // character: Guid
 68, 101, 97, 100, 98, 101, 101, 102, 0, // new_name: CString
 ```

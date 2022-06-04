@@ -23,19 +23,19 @@ pub struct SMSG_CHAR_DELETE {
 impl ServerMessage for SMSG_CHAR_DELETE {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: WorldResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
     const OPCODE: u16 = 0x003c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        4
+        1
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // result: WorldResult
-        let result: WorldResult = crate::util::read_u32_le(r)?.try_into()?;
+        let result: WorldResult = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             result,
@@ -54,7 +54,7 @@ mod test {
     use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
     use crate::{ClientMessage, ServerMessage};
 
-    const RAW0: [u8; 8] = [ 0x00, 0x06, 0x3C, 0x00, 0x39, 0x00, 0x00, 0x00, ];
+    const RAW0: [u8; 5] = [ 0x00, 0x03, 0x3C, 0x00, 0x39, ];
 
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm` line 10.
     #[cfg(feature = "sync")]
@@ -73,7 +73,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(1 + header_size, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -98,7 +98,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(1 + header_size, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -123,7 +123,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(1 + header_size, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

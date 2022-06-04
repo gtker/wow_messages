@@ -36,7 +36,7 @@ SMSG have a header of 4 bytes.
 #### Example 1
 
 ```c
-0, 6, // size
+0, 3, // size
 58, 0, // opcode (58)
-47, 0, 0, 0, // result: WorldResult CHAR_CREATE_ERROR (0x2F)
+47, // result: WorldResult CHAR_CREATE_ERROR (0x2F)
 ```

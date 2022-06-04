@@ -25,7 +25,7 @@ pub struct SMSG_CHAR_RENAME {
 impl ServerMessage for SMSG_CHAR_RENAME {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: WorldResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         match &self.result {
             SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
@@ -134,7 +134,7 @@ impl ServerMessage for SMSG_CHAR_RENAME {
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // result: WorldResult
-        let result: WorldResult = crate::util::read_u32_le(r)?.try_into()?;
+        let result: WorldResult = crate::util::read_u8_le(r)?.try_into()?;
 
         let result_if = match result {
             WorldResult::RESPONSE_SUCCESS => {
@@ -346,7 +346,7 @@ impl Default for SMSG_CHAR_RENAME_WorldResult {
 }
 
 impl SMSG_CHAR_RENAME_WorldResult {
-    pub(crate) const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::RESPONSE_SUCCESS { .. } => 0,
             Self::RESPONSE_FAILURE => 1,
@@ -442,252 +442,252 @@ impl SMSG_CHAR_RENAME_WorldResult {
                 character,
                 new_name,
             } => {
-                4
+                1
                 + 8 // character: Guid
                 + new_name.len() + 1 // new_name: CString
             }
             Self::RESPONSE_FAILURE => {
-                4
+                1
             }
             Self::RESPONSE_CANCELLED => {
-                4
+                1
             }
             Self::RESPONSE_DISCONNECTED => {
-                4
+                1
             }
             Self::RESPONSE_FAILED_TO_CONNECT => {
-                4
+                1
             }
             Self::RESPONSE_CONNECTED => {
-                4
+                1
             }
             Self::RESPONSE_VERSION_MISMATCH => {
-                4
+                1
             }
             Self::CSTATUS_CONNECTING => {
-                4
+                1
             }
             Self::CSTATUS_NEGOTIATING_SECURITY => {
-                4
+                1
             }
             Self::CSTATUS_NEGOTIATION_COMPLETE => {
-                4
+                1
             }
             Self::CSTATUS_NEGOTIATION_FAILED => {
-                4
+                1
             }
             Self::CSTATUS_AUTHENTICATING => {
-                4
+                1
             }
             Self::AUTH_OK => {
-                4
+                1
             }
             Self::AUTH_FAILED => {
-                4
+                1
             }
             Self::AUTH_REJECT => {
-                4
+                1
             }
             Self::AUTH_BAD_SERVER_PROOF => {
-                4
+                1
             }
             Self::AUTH_UNAVAILABLE => {
-                4
+                1
             }
             Self::AUTH_SYSTEM_ERROR => {
-                4
+                1
             }
             Self::AUTH_BILLING_ERROR => {
-                4
+                1
             }
             Self::AUTH_BILLING_EXPIRED => {
-                4
+                1
             }
             Self::AUTH_VERSION_MISMATCH => {
-                4
+                1
             }
             Self::AUTH_UNKNOWN_ACCOUNT => {
-                4
+                1
             }
             Self::AUTH_INCORRECT_PASSWORD => {
-                4
+                1
             }
             Self::AUTH_SESSION_EXPIRED => {
-                4
+                1
             }
             Self::AUTH_SERVER_SHUTTING_DOWN => {
-                4
+                1
             }
             Self::AUTH_ALREADY_LOGGING_IN => {
-                4
+                1
             }
             Self::AUTH_LOGIN_SERVER_NOT_FOUND => {
-                4
+                1
             }
             Self::AUTH_WAIT_QUEUE => {
-                4
+                1
             }
             Self::AUTH_BANNED => {
-                4
+                1
             }
             Self::AUTH_ALREADY_ONLINE => {
-                4
+                1
             }
             Self::AUTH_NO_TIME => {
-                4
+                1
             }
             Self::AUTH_DB_BUSY => {
-                4
+                1
             }
             Self::AUTH_SUSPENDED => {
-                4
+                1
             }
             Self::AUTH_PARENTAL_CONTROL => {
-                4
+                1
             }
             Self::REALM_LIST_IN_PROGRESS => {
-                4
+                1
             }
             Self::REALM_LIST_SUCCESS => {
-                4
+                1
             }
             Self::REALM_LIST_FAILED => {
-                4
+                1
             }
             Self::REALM_LIST_INVALID => {
-                4
+                1
             }
             Self::REALM_LIST_REALM_NOT_FOUND => {
-                4
+                1
             }
             Self::ACCOUNT_CREATE_IN_PROGRESS => {
-                4
+                1
             }
             Self::ACCOUNT_CREATE_SUCCESS => {
-                4
+                1
             }
             Self::ACCOUNT_CREATE_FAILED => {
-                4
+                1
             }
             Self::CHAR_LIST_RETRIEVING => {
-                4
+                1
             }
             Self::CHAR_LIST_RETRIEVED => {
-                4
+                1
             }
             Self::CHAR_LIST_FAILED => {
-                4
+                1
             }
             Self::CHAR_CREATE_IN_PROGRESS => {
-                4
+                1
             }
             Self::CHAR_CREATE_SUCCESS => {
-                4
+                1
             }
             Self::CHAR_CREATE_ERROR => {
-                4
+                1
             }
             Self::CHAR_CREATE_FAILED => {
-                4
+                1
             }
             Self::CHAR_CREATE_NAME_IN_USE => {
-                4
+                1
             }
             Self::CHAR_CREATE_DISABLED => {
-                4
+                1
             }
             Self::CHAR_CREATE_PVP_TEAMS_VIOLATION => {
-                4
+                1
             }
             Self::CHAR_CREATE_SERVER_LIMIT => {
-                4
+                1
             }
             Self::CHAR_CREATE_ACCOUNT_LIMIT => {
-                4
+                1
             }
             Self::CHAR_CREATE_SERVER_QUEUE => {
-                4
+                1
             }
             Self::CHAR_CREATE_ONLY_EXISTING => {
-                4
+                1
             }
             Self::CHAR_DELETE_IN_PROGRESS => {
-                4
+                1
             }
             Self::CHAR_DELETE_SUCCESS => {
-                4
+                1
             }
             Self::CHAR_DELETE_FAILED => {
-                4
+                1
             }
             Self::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {
-                4
+                1
             }
             Self::CHAR_LOGIN_IN_PROGRESS => {
-                4
+                1
             }
             Self::CHAR_LOGIN_SUCCESS => {
-                4
+                1
             }
             Self::CHAR_LOGIN_NO_WORLD => {
-                4
+                1
             }
             Self::CHAR_LOGIN_DUPLICATE_CHARACTER => {
-                4
+                1
             }
             Self::CHAR_LOGIN_NO_INSTANCES => {
-                4
+                1
             }
             Self::CHAR_LOGIN_FAILED => {
-                4
+                1
             }
             Self::CHAR_LOGIN_DISABLED => {
-                4
+                1
             }
             Self::CHAR_LOGIN_NO_CHARACTER => {
-                4
+                1
             }
             Self::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {
-                4
+                1
             }
             Self::CHAR_NAME_NO_NAME => {
-                4
+                1
             }
             Self::CHAR_NAME_TOO_SHORT => {
-                4
+                1
             }
             Self::CHAR_NAME_TOO_LONG => {
-                4
+                1
             }
             Self::CHAR_NAME_ONLY_LETTERS => {
-                4
+                1
             }
             Self::CHAR_NAME_MIXED_LANGUAGES => {
-                4
+                1
             }
             Self::CHAR_NAME_PROFANE => {
-                4
+                1
             }
             Self::CHAR_NAME_RESERVED => {
-                4
+                1
             }
             Self::CHAR_NAME_INVALID_APOSTROPHE => {
-                4
+                1
             }
             Self::CHAR_NAME_MULTIPLE_APOSTROPHES => {
-                4
+                1
             }
             Self::CHAR_NAME_THREE_CONSECUTIVE => {
-                4
+                1
             }
             Self::CHAR_NAME_INVALID_SPACE => {
-                4
+                1
             }
             Self::CHAR_NAME_SUCCESS => {
-                4
+                1
             }
             Self::CHAR_NAME_FAILURE => {
-                4
+                1
             }
         }
     }
@@ -703,7 +703,7 @@ mod test {
     use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
     use crate::{ClientMessage, ServerMessage};
 
-    const RAW0: [u8; 8] = [ 0x00, 0x06, 0xC8, 0x02, 0x47, 0x00, 0x00, 0x00, ];
+    const RAW0: [u8; 5] = [ 0x00, 0x03, 0xC8, 0x02, 0x47, ];
 
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 13.
     #[cfg(feature = "sync")]
@@ -780,9 +780,9 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    const RAW1: [u8; 25] = [ 0x00, 0x17, 0xC8, 0x02, 0x00, 0x00, 0x00, 0x00, 0xEF,
-         0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62,
-         0x65, 0x65, 0x66, 0x00, ];
+    const RAW1: [u8; 22] = [ 0x00, 0x14, 0xC8, 0x02, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+         0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65, 0x66,
+         0x00, ];
 
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 21.
     #[cfg(feature = "sync")]

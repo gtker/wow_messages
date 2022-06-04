@@ -9,7 +9,7 @@ smsg SMSG_CHAR_CREATE = 0x3A {
 test SMSG_CHAR_CREATE {
     result = CHAR_CREATE_ERROR;
 } [
-    0x00, 0x06, /* size */
+    0x00, 0x03, /* size */
     0x3A, 0x00, /* opcode */
-    0x2F, 0x00, 0x00, 0x00, /* result */
+    0x2F, /* result */
 ]
