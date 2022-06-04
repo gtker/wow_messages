@@ -7,6 +7,8 @@ use std::io::{Write, Read};
 #[derive(Debug, PartialEq, Clone, Default)]
 /// Response to [`CMSG_AUTH_SESSION`](crate::world::version_1_12::CMSG_AUTH_SESSION).
 ///
+/// vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L3):
 /// ```text
 /// smsg SMSG_AUTH_RESPONSE = 0x01EE {
@@ -731,7 +733,7 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0xEE, 0x01, 0x0D, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 18.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_AUTH_RESPONSE0() {
@@ -756,7 +758,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 18.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_RESPONSE0() {
@@ -781,7 +783,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 17.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 18.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_RESPONSE0() {
@@ -808,7 +810,7 @@ mod test {
 
     const RAW1: [u8; 9] = [ 0x00, 0x07, 0xEE, 0x01, 0x1B, 0xEF, 0xBE, 0xAD, 0xDE, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 27.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 28.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_AUTH_RESPONSE1() {
@@ -835,7 +837,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 27.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 28.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_RESPONSE1() {
@@ -862,7 +864,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 27.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 28.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_RESPONSE1() {
@@ -892,7 +894,7 @@ mod test {
     const RAW2: [u8; 14] = [ 0x00, 0x0C, 0xEE, 0x01, 0x0C, 0xEF, 0xBE, 0xAD, 0xDE,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 39.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 40.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_AUTH_RESPONSE2() {
@@ -921,7 +923,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 39.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 40.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_RESPONSE2() {
@@ -950,7 +952,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 39.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 40.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_RESPONSE2() {

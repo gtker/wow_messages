@@ -71203,6 +71203,7 @@
       ],
       "tags": {
         "description": "Response to [CMSG_AUTH_SESSION].",
+        "comment": "vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.",
         "version": {
           "type": "world",
           "versions": [
@@ -71265,7 +71266,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
-            "start_position": 17
+            "start_position": 18
           }
         },
         {
@@ -71325,7 +71326,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
-            "start_position": 27
+            "start_position": 28
           }
         },
         {
@@ -71410,7 +71411,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
-            "start_position": 39
+            "start_position": 40
           }
         }
       ],
