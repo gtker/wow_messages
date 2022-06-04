@@ -8,7 +8,8 @@ The project is split into the subdirectories:
 * `wow_login_messages`: Rust library for the authentication server.
 * `wow_message_parser`: The parser, codegen and definitions that creates the libraries.
 * `wow_vanilla_messages`: **UNRELEASED** Rust library for the world server for WoW version 1.x.y.
-* `simple_server`: Test binary that uses the authentication library.
+* `simple_server`: Test server that uses the authentication library. Can work as a start to making your own server. Uses tokio.
+* `simple_client`: Test client that uses the authentication library. Can work as a start to making your own client. Uses sync (std:io::Read/Write).
 * `wowm_language`: [mdbook](https://github.com/rust-lang/mdBook) of language specification.
 * `intermediate_representation.json` contains a machine readable version of the `wowm` files.
 

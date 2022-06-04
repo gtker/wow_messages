@@ -1,9 +1,40 @@
 use crate::errors::ExpectedOpcodeError;
-use crate::ClientMessage;
-use tokio::io::AsyncReadExt;
-use wow_srp::header_crypto::{Decrypter, CLIENT_HEADER_LENGTH};
+use crate::{ClientMessage, ServerMessage};
+use wow_srp::header_crypto::{Decrypter, CLIENT_HEADER_LENGTH, SERVER_HEADER_LENGTH};
 
 const CLIENT_OPCODE_LENGTH: u16 = 4;
+const SERVER_OPCODE_LENGTH: u16 = 2;
+
+#[cfg(feature = "sync")]
+pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
+    r: &mut R,
+) -> Result<M, ExpectedOpcodeError> {
+    let size = crate::util::read_u16_be(r)?;
+    let opcode = crate::util::read_u16_le(r)?;
+
+    let mut buf = vec![0; (size - SERVER_OPCODE_LENGTH).into()];
+    r.read_exact(&mut buf);
+
+    read_server_body(&mut buf.as_slice(), size, opcode as u32)
+}
+
+#[cfg(feature = "sync")]
+pub fn expect_server_message_encryption<M: ServerMessage, R: std::io::Read, D: Decrypter>(
+    r: &mut R,
+    d: &mut D,
+) -> Result<M, ExpectedOpcodeError> {
+    let mut buf = [0_u8; SERVER_HEADER_LENGTH as usize];
+    r.read_exact(&mut buf)?;
+    let d = d.decrypt_server_header(buf);
+
+    let size = d.size;
+    let opcode = d.opcode;
+
+    let mut buf = vec![0; (size - SERVER_OPCODE_LENGTH).into()];
+    r.read_exact(&mut buf);
+
+    read_server_body(&mut buf.as_slice(), size, opcode as u32)
+}
 
 #[cfg(feature = "tokio")]
 pub async fn tokio_expect_client_message_encryption<
@@ -51,6 +82,22 @@ fn read_client_body<M: ClientMessage>(
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode as u16 == M::OPCODE {
         let m = M::read_body(buf, (size - CLIENT_OPCODE_LENGTH) as u32);
+        match m {
+            Ok(m) => Ok(m),
+            Err(e) => Err(e.into()),
+        }
+    } else {
+        Err(ExpectedOpcodeError::Opcode(opcode))
+    }
+}
+fn read_server_body<M: ServerMessage>(
+    buf: &mut &[u8],
+    size: u16,
+    opcode: u32,
+) -> Result<M, ExpectedOpcodeError> {
+    // Unable to match on associated const M::OPCODE, so we do if
+    if opcode as u16 == M::OPCODE {
+        let m = M::read_body(buf, (size - SERVER_OPCODE_LENGTH) as u32);
         match m {
             Ok(m) => Ok(m),
             Err(e) => Err(e.into()),
