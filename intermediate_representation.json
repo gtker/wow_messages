@@ -32237,7 +32237,7 @@
         },
         {
           "Definition": {
-            "name": "login_result",
+            "name": "result",
             "member_type": {
               "Identifier": {
                 "s": "LoginResult",
@@ -32253,7 +32253,7 @@
         {
           "IfStatement": {
             "conditional": {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "equations": [
                 {
                   "Equals": {
@@ -32431,7 +32431,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,
@@ -32803,7 +32803,7 @@
         },
         {
           "Definition": {
-            "name": "login_result",
+            "name": "result",
             "member_type": {
               "Identifier": {
                 "s": "LoginResult",
@@ -32819,7 +32819,7 @@
         {
           "IfStatement": {
             "conditional": {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "equations": [
                 {
                   "Equals": {
@@ -33072,7 +33072,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,
@@ -33470,7 +33470,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,
@@ -33850,7 +33850,7 @@
         },
         {
           "Definition": {
-            "name": "login_result",
+            "name": "result",
             "member_type": {
               "Identifier": {
                 "s": "LoginResult",
@@ -33866,7 +33866,7 @@
         {
           "IfStatement": {
             "conditional": {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "equations": [
                 {
                   "Equals": {
@@ -34251,7 +34251,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,
@@ -34589,7 +34589,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,
@@ -34986,7 +34986,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,
@@ -35335,7 +35335,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,
@@ -35745,7 +35745,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 5,
@@ -35780,7 +35780,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,
@@ -36192,7 +36192,7 @@
           "subject": "CMD_AUTH_LOGON_CHALLENGE_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 5,
@@ -41346,7 +41346,7 @@
       "members": [
         {
           "Definition": {
-            "name": "login_result",
+            "name": "result",
             "member_type": {
               "Identifier": {
                 "s": "LoginResult",
@@ -41362,7 +41362,7 @@
         {
           "IfStatement": {
             "conditional": {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "equations": [
                 {
                   "Equals": {
@@ -41441,7 +41441,7 @@
           "subject": "CMD_AUTH_LOGON_PROOF_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,
@@ -41568,7 +41568,7 @@
       "members": [
         {
           "Definition": {
-            "name": "login_result",
+            "name": "result",
             "member_type": {
               "Identifier": {
                 "s": "LoginResult",
@@ -41584,7 +41584,7 @@
         {
           "IfStatement": {
             "conditional": {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "equations": [
                 {
                   "Equals": {
@@ -41707,7 +41707,7 @@
           "subject": "CMD_AUTH_LOGON_PROOF_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 7,
@@ -41754,7 +41754,7 @@
           "subject": "CMD_AUTH_LOGON_PROOF_Server",
           "members": [
             {
-              "variable_name": "login_result",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 8,

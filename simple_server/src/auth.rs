@@ -174,7 +174,7 @@ async fn login_version_2(
     let username = l.account_name;
 
     CMD_AUTH_LOGON_CHALLENGE_Server {
-        login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
             server_public_key: *p.server_public_key(),
             generator: vec![GENERATOR],
             large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
@@ -199,7 +199,7 @@ async fn login_version_2(
         .unwrap();
 
     CMD_AUTH_LOGON_PROOF_Server {
-        login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
             server_proof: proof,
             hardware_survey_id: 0,
         },
@@ -232,7 +232,7 @@ async fn login_version_3(
     let username = l.account_name;
 
     CMD_AUTH_LOGON_CHALLENGE_Server {
-        login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
             server_public_key: *p.server_public_key(),
             generator: vec![GENERATOR],
             large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
@@ -258,7 +258,7 @@ async fn login_version_3(
         .unwrap();
 
     CMD_AUTH_LOGON_PROOF_Server {
-        login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
             server_proof: proof,
             hardware_survey_id: 0,
         },
@@ -284,7 +284,7 @@ async fn login_version_8(
     let username = l.account_name;
 
     CMD_AUTH_LOGON_CHALLENGE_Server {
-        login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
             server_public_key: *p.server_public_key(),
             generator: vec![GENERATOR],
             large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
@@ -310,7 +310,7 @@ async fn login_version_8(
         .unwrap();
 
     CMD_AUTH_LOGON_PROOF_Server {
-        login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
             account_flag: AccountFlag::empty(),
             server_proof,
             hardware_survey_id: 0,

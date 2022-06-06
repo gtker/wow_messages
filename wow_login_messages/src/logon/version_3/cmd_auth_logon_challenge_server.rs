@@ -11,8 +11,8 @@ use std::io::{Write, Read};
 /// ```text
 /// slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
 ///     u8 protocol_version = 0;
-///     LoginResult login_result;
-///     if (login_result == SUCCESS) {
+///     LoginResult result;
+///     if (result == SUCCESS) {
 ///         u8[32] server_public_key;
 ///         u8 generator_length;
 ///         u8[generator_length] generator;
@@ -29,7 +29,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server {
-    pub login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult,
+    pub result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult,
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -54,10 +54,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
         // protocol_version: u8
         w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes())?;
 
-        // login_result: LoginResult
-        w.write_all(&(self.login_result.as_int() as u8).to_le_bytes())?;
+        // result: LoginResult
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
-        match &self.login_result {
+        match &self.result {
             CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt,
                 generator,
@@ -147,10 +147,10 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
         let _protocol_version = crate::util::read_u8_le(r)?;
         // protocol_version is expected to always be 0 (0)
 
-        // login_result: LoginResult
-        let login_result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
+        // result: LoginResult
+        let result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
 
-        let login_result_if = match login_result {
+        let result_if = match result {
             LoginResult::SUCCESS => {
                 // server_public_key: u8[32]
                 let mut server_public_key = [0_u8; 32];
@@ -229,7 +229,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
         };
 
         Ok(Self {
-            login_result: login_result_if,
+            result: result_if,
         })
     }
 
@@ -256,10 +256,10 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
             let _protocol_version = crate::util::tokio_read_u8_le(r).await?;
             // protocol_version is expected to always be 0 (0)
 
-            // login_result: LoginResult
-            let login_result: LoginResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+            // result: LoginResult
+            let result: LoginResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            let login_result_if = match login_result {
+            let result_if = match result {
                 LoginResult::SUCCESS => {
                     // server_public_key: u8[32]
                     let mut server_public_key = [0_u8; 32];
@@ -338,7 +338,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
             };
 
             Ok(Self {
-                login_result: login_result_if,
+                result: result_if,
             })
         })
     }
@@ -379,10 +379,10 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
             let _protocol_version = crate::util::astd_read_u8_le(r).await?;
             // protocol_version is expected to always be 0 (0)
 
-            // login_result: LoginResult
-            let login_result: LoginResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
+            // result: LoginResult
+            let result: LoginResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
-            let login_result_if = match login_result {
+            let result_if = match result {
                 LoginResult::SUCCESS => {
                     // server_public_key: u8[32]
                     let mut server_public_key = [0_u8; 32];
@@ -461,7 +461,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
             };
 
             Ok(Self {
-                login_result: login_result_if,
+                result: result_if,
             })
         })
     }
@@ -491,7 +491,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
     pub(crate) fn size(&self) -> usize {
         1 // protocol_version: u8
-        + self.login_result.size() // login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult
+        + self.result.size() // result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult
     }
 }
 
@@ -701,7 +701,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -732,7 +732,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -747,7 +747,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -778,7 +778,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -793,7 +793,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -824,7 +824,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -851,7 +851,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server1() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -878,7 +878,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW1.len());
 
@@ -893,7 +893,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server1() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -920,7 +920,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW1.len());
 
@@ -935,7 +935,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server1() {
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            login_result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
@@ -962,7 +962,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW1.len());
 

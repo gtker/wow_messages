@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `Expected*MesageError`s have been renamed to `ExpectedMessageError` along with changes to internal structure.
 * BREAKING: Flags setters now always take `mut self` instead of `&mut self`. This makes the builder pattern the only correct way of instantiating flag objects.
 * BREAKING: Composite type names are now separated by an underscore instead of nothing. This should improve readability.
+* BREAKING: Renaming `login_result` variables to just `result` in order to be consistent with other messages.
 
 ### Deprecated
 

@@ -3,8 +3,8 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
         comment = "Mangos statically sets this to 0. It is unkown exactly what it does.";
     }
 
-    LoginResult login_result;
-    if (login_result == SUCCESS) {
+    LoginResult result;
+    if (result == SUCCESS) {
         u8[32] server_public_key;
         u8 generator_length {
             comment = "The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1.";
@@ -26,7 +26,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = SUCCESS;
+    result = SUCCESS;
 
     server_public_key = [ 0x49, 0xd8, 0xc2, 0xbc, 0x68, 0x5c, 0x2b, 0xce, 0x4a, 0xf4, 0xfa, 0x07,
         0x0a, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46, 0xb5, 0x83, 0xd4, 0x41, 0x82, 0x9e, 0x24,
@@ -80,8 +80,8 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
         comment = "Mangos statically sets this to 0.";
     }
 
-    LoginResult login_result;
-    if (login_result == SUCCESS) {
+    LoginResult result;
+    if (result == SUCCESS) {
         u8[32] server_public_key;
         u8 generator_length {
             comment = "The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1.";
@@ -109,7 +109,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = SUCCESS;
+    result = SUCCESS;
 
     server_public_key = [ 0x49, 0xd8, 0xc2, 0xbc, 0x68, 0x5c, 0x2b, 0xce, 0x4a, 0xf4, 0xfa, 0x07,
         0x0a, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46, 0xb5, 0x83, 0xd4, 0x41, 0x82, 0x9e, 0x24,
@@ -169,7 +169,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = SUCCESS;
+    result = SUCCESS;
 
     server_public_key = [ 0x49, 0xd8, 0xc2, 0xbc, 0x68, 0x5c, 0x2b, 0xce, 0x4a, 0xf4, 0xfa, 0x07,
         0x0a, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46, 0xb5, 0x83, 0xd4, 0x41, 0x82, 0x9e, 0x24,
@@ -224,8 +224,8 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
     u8 protocol_version = 0;
 
-    LoginResult login_result;
-    if (login_result == SUCCESS) {
+    LoginResult result;
+    if (result == SUCCESS) {
         u8[32] server_public_key;
         u8 generator_length {
             comment = "The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1.";
@@ -262,7 +262,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = SUCCESS;
+    result = SUCCESS;
 
     server_public_key = [ 0x49, 0xd8, 0xc2, 0xbc, 0x68, 0x5c, 0x2b, 0xce, 0x4a, 0xf4, 0xfa, 0x07,
         0x0a, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46, 0xb5, 0x83, 0xd4, 0x41, 0x82, 0x9e, 0x24,
@@ -315,7 +315,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = SUCCESS;
+    result = SUCCESS;
 
     server_public_key = [ 0x49, 0xd8, 0xc2, 0xbc, 0x68, 0x5c, 0x2b, 0xce, 0x4a, 0xf4, 0xfa, 0x07,
         0x0a, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46, 0xb5, 0x83, 0xd4, 0x41, 0x82, 0x9e, 0x24,
@@ -375,7 +375,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = SUCCESS;
+    result = SUCCESS;
 
     server_public_key = [ 0x49, 0xd8, 0xc2, 0xbc, 0x68, 0x5c, 0x2b, 0xce, 0x4a, 0xf4, 0xfa, 0x07,
         0x0a, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46, 0xb5, 0x83, 0xd4, 0x41, 0x82, 0x9e, 0x24,
@@ -430,7 +430,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = SUCCESS;
+    result = SUCCESS;
 
     server_public_key = [ 0x49, 0xd8, 0xc2, 0xbc, 0x68, 0x5c, 0x2b, 0xce, 0x4a, 0xf4, 0xfa, 0x07,
         0x0a, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46, 0xb5, 0x83, 0xd4, 0x41, 0x82, 0x9e, 0x24,
@@ -494,7 +494,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = FAIL_INCORRECT_PASSWORD;
+    result = FAIL_INCORRECT_PASSWORD;
 } [
     0x00, /* Opcode: CMD_AUTH_LOGON_CHALLENGE */
     0x00, /* Protocol Version: 0 */
@@ -504,7 +504,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = SUCCESS;
+    result = SUCCESS;
 
     server_public_key = [ 0x49, 0xd8, 0xc2, 0xbc, 0x68, 0x5c, 0x2b, 0xce, 0x4a, 0xf4, 0xfa, 0x07,
         0x0a, 0x47, 0x93, 0x78, 0x58, 0x78, 0x46, 0xb5, 0x83, 0xd4, 0x41, 0x82, 0x9e, 0x24,
@@ -571,7 +571,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Server {
-    login_result = FAIL_INCORRECT_PASSWORD;
+    result = FAIL_INCORRECT_PASSWORD;
 } [
     0x00, /* Opcode: CMD_AUTH_LOGON_CHALLENGE */
     0x00, /* Protocol Version: 0 */

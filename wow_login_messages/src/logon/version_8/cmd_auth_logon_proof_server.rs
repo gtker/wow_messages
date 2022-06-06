@@ -8,8 +8,8 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:36`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L36):
 /// ```text
 /// slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
-///     LoginResult login_result;
-///     if (login_result == SUCCESS) {
+///     LoginResult result;
+///     if (result == SUCCESS) {
 ///         u8[20] server_proof;
 ///         AccountFlag account_flag;
 ///         u32 hardware_survey_id;
@@ -21,7 +21,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMD_AUTH_LOGON_PROOF_Server {
-    pub login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult,
+    pub result: CMD_AUTH_LOGON_PROOF_Server_LoginResult,
 }
 
 impl CMD_AUTH_LOGON_PROOF_Server {
@@ -43,10 +43,10 @@ impl CMD_AUTH_LOGON_PROOF_Server {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
-        // login_result: LoginResult
-        w.write_all(&(self.login_result.as_int() as u8).to_le_bytes())?;
+        // result: LoginResult
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
-        match &self.login_result {
+        match &self.result {
             CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
                 account_flag,
                 hardware_survey_id,
@@ -174,10 +174,10 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
     const OPCODE: u8 = 0x01;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // login_result: LoginResult
-        let login_result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
+        // result: LoginResult
+        let result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
 
-        let login_result_if = match login_result {
+        let result_if = match result {
             LoginResult::SUCCESS => {
                 // server_proof: u8[20]
                 let mut server_proof = [0_u8; 20];
@@ -218,7 +218,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
         };
 
         Ok(Self {
-            login_result: login_result_if,
+            result: result_if,
         })
     }
 
@@ -241,10 +241,10 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // login_result: LoginResult
-            let login_result: LoginResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+            // result: LoginResult
+            let result: LoginResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            let login_result_if = match login_result {
+            let result_if = match result {
                 LoginResult::SUCCESS => {
                     // server_proof: u8[20]
                     let mut server_proof = [0_u8; 20];
@@ -285,7 +285,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
             };
 
             Ok(Self {
-                login_result: login_result_if,
+                result: result_if,
             })
         })
     }
@@ -322,10 +322,10 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // login_result: LoginResult
-            let login_result: LoginResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
+            // result: LoginResult
+            let result: LoginResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
-            let login_result_if = match login_result {
+            let result_if = match result {
                 LoginResult::SUCCESS => {
                     // server_proof: u8[20]
                     let mut server_proof = [0_u8; 20];
@@ -366,7 +366,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
             };
 
             Ok(Self {
-                login_result: login_result_if,
+                result: result_if,
             })
         })
     }
@@ -395,7 +395,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 
 impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) fn size(&self) -> usize {
-        self.login_result.size() // login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
+        self.result.size() // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
     }
 }
 
@@ -561,7 +561,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Server0() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
+            result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
         };
 
         let header_size = 1;
@@ -571,7 +571,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -586,7 +586,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Server0() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
+            result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
         };
 
         let header_size = 1;
@@ -596,7 +596,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -611,7 +611,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Server0() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
+            result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_NO_TIME,
         };
 
         let header_size = 1;
@@ -621,7 +621,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -638,7 +638,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Server1() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
+            result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
         };
 
         let header_size = 1;
@@ -648,7 +648,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW1.len());
 
@@ -663,7 +663,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Server1() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
+            result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
         };
 
         let header_size = 1;
@@ -673,7 +673,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW1.len());
 
@@ -688,7 +688,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Server1() {
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
+            result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::FAIL_DB_BUSY,
         };
 
         let header_size = 1;
@@ -698,7 +698,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.login_result, expected.login_result);
+        assert_eq!(t.result, expected.result);
 
         assert_eq!(t.size() + header_size, RAW1.len());
 

@@ -44,7 +44,7 @@ pub fn auth(
         salt,
         server_public_key,
         ..
-    } = s.login_result
+    } = s.result
     {
         let generator = generator[0];
         let large_safe_prime = large_safe_prime.try_into().unwrap();
@@ -70,8 +70,7 @@ pub fn auth(
     .unwrap();
 
     let s = expect_server_message::<CMD_AUTH_LOGON_PROOF_Server, _>(auth_server).unwrap();
-    let c = if let CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS { server_proof, .. } =
-        s.login_result
+    let c = if let CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS { server_proof, .. } = s.result
     {
         c.verify_server_proof(server_proof).unwrap()
     } else {
