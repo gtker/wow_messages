@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
-use tokio::net::TcpStream;
+use tokio::net::{TcpListener, TcpStream};
 use tokio::time::sleep;
 use wow_srp::header_crypto::ProofSeed;
 use wow_srp::normalized_string::NormalizedString;
@@ -11,7 +11,17 @@ use wow_vanilla_messages::version_1_12::opcodes::ClientOpcodeMessage;
 use wow_vanilla_messages::version_1_12::*;
 use wow_vanilla_messages::{Guid, ServerMessage, UpdateMask, UpdatePlayer};
 
-pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServer>>>) {
+pub async fn world(users: Arc<Mutex<HashMap<String, SrpServer>>>) {
+    let listener = TcpListener::bind("0.0.0.0:8085").await.unwrap();
+
+    loop {
+        let (stream, _) = listener.accept().await.unwrap();
+
+        tokio::spawn(handle(stream, users.clone()));
+    }
+}
+
+async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServer>>>) {
     let seed = ProofSeed::new();
 
     SMSG_AUTH_CHALLENGE {

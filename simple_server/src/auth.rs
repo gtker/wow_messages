@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
-use tokio::net::TcpStream;
+use tokio::net::{TcpListener, TcpStream};
 use wow_login_messages::all::{
     CMD_AUTH_LOGON_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_Client,
 };
@@ -13,7 +13,17 @@ use wow_srp::normalized_string::NormalizedString;
 use wow_srp::server::{SrpProof, SrpServer, SrpVerifier};
 use wow_srp::{PublicKey, GENERATOR, LARGE_SAFE_PRIME_LITTLE_ENDIAN};
 
-pub async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServer>>>) {
+pub async fn auth(users: Arc<Mutex<HashMap<String, SrpServer>>>) {
+    let listener = TcpListener::bind("0.0.0.0:3724").await.unwrap();
+
+    loop {
+        let (stream, _) = listener.accept().await.unwrap();
+
+        tokio::spawn(handle(stream, users.clone()));
+    }
+}
+
+async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServer>>>) {
     let opcode = tokio_read_initial_message(&mut stream).await;
     let opcode = match opcode {
         Ok(o) => o,
