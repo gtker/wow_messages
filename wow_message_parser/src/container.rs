@@ -60,37 +60,11 @@ pub enum DefinerUsage {
 
 impl Container {
     pub fn get_variable_name_of_definer_ty(&self, ty_name: &str) -> Option<String> {
-        fn inner(m: &StructMember, ty_name: &str) -> Option<String> {
-            match m {
-                StructMember::Definition(d) => {
-                    if let Type::Identifier { s, .. } = d.ty() {
-                        if s == ty_name {
-                            return Some(d.name().to_string());
-                        }
-                    }
+        for d in self.all_definitions() {
+            if let Type::Identifier { s, .. } = d.ty() {
+                if s == ty_name {
+                    return Some(d.name().to_string());
                 }
-                StructMember::IfStatement(statement) => {
-                    for m in statement.all_members() {
-                        if let Some(t) = inner(m, ty_name) {
-                            return Some(t);
-                        }
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in optional.members() {
-                        if let Some(t) = inner(m, ty_name) {
-                            return Some(t);
-                        }
-                    }
-                }
-            }
-
-            None
-        }
-
-        for m in self.fields() {
-            if let Some(t) = inner(m, ty_name) {
-                return Some(t);
             }
         }
 
@@ -370,40 +344,12 @@ impl Container {
     }
 
     pub fn any_fields_have_constant_value(&self) -> bool {
-        fn field(m: &StructMember) -> bool {
-            match m {
-                StructMember::Definition(d) => {
-                    if d.verified_value.is_some() {
-                        return true;
-                    }
-                }
-                StructMember::IfStatement(statement) => {
-                    for member in statement.all_members() {
-                        match field(member) {
-                            true => return true,
-                            false => {}
-                        }
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in &optional.members {
-                        match field(m) {
-                            true => return true,
-                            false => {}
-                        }
-                    }
-                }
-            }
-
-            false
-        }
-
-        for m in self.fields() {
-            match field(m) {
-                true => return true,
-                false => {}
+        for d in self.all_definitions() {
+            if d.verified_value().is_some() {
+                return true;
             }
         }
+
         false
     }
 
@@ -668,49 +614,23 @@ impl Container {
             .collect()
     }
 
-    // TODO Use all_definitions
-    fn look_for_strings(&self, m: &StructMember) -> bool {
-        match m {
-            StructMember::Definition(d) => match d.ty() {
-                Type::String { .. } | Type::CString => true,
-                Type::Array(array) => matches!(array.ty(), ArrayType::CString),
-                _ => false,
-            },
-            StructMember::IfStatement(statement) => {
-                for m in statement.all_members() {
-                    match self.look_for_strings(m) {
-                        true => return true,
-                        false => {}
-                    }
-                }
-
-                false
-            }
-            StructMember::OptionalStatement(optional) => {
-                for m in &optional.members {
-                    match self.look_for_strings(m) {
-                        true => return true,
-                        false => {}
-                    }
-                }
-
-                false
-            }
-        }
-    }
-
     pub fn contains_string_or_cstring(&self) -> bool {
-        for m in self.fields() {
-            match self.look_for_strings(m) {
-                true => return true,
-                false => {}
+        for d in self.all_definitions() {
+            match d.ty() {
+                Type::CString | Type::String { .. } => return true,
+                Type::Array(array) => {
+                    if matches!(array.ty(), ArrayType::CString) {
+                        return true;
+                    }
+                }
+                _ => {}
             }
         }
 
         false
     }
 
-    fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
+    pub fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
         fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
             match m {
                 StructMember::Definition(d) => v.push(d),
@@ -764,36 +684,10 @@ impl Container {
     }
 
     pub fn contains_update_mask(&self) -> bool {
-        fn inner(m: &StructMember) -> bool {
-            match m {
-                StructMember::Definition(d) => {
-                    if d.ty() == &Type::UpdateMask {
-                        return true;
-                    }
-                }
-                StructMember::IfStatement(statement) => {
-                    for member in statement.all_members() {
-                        match inner(member) {
-                            true => return true,
-                            false => {}
-                        }
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in &optional.members {
-                        match inner(m) {
-                            true => return true,
-                            false => {}
-                        }
-                    }
-                }
-            }
-            false
-        }
-        for m in self.fields() {
-            match inner(m) {
-                true => return true,
-                false => {}
+        for d in self.all_definitions() {
+            match d.ty() {
+                Type::UpdateMask => return true,
+                _ => {}
             }
         }
 
@@ -801,36 +695,10 @@ impl Container {
     }
 
     pub fn contains_aura_mask(&self) -> bool {
-        fn inner(m: &StructMember) -> bool {
-            match m {
-                StructMember::Definition(d) => {
-                    if d.ty() == &Type::AuraMask {
-                        return true;
-                    }
-                }
-                StructMember::IfStatement(statement) => {
-                    for member in statement.all_members() {
-                        match inner(member) {
-                            true => return true,
-                            false => {}
-                        }
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in &optional.members {
-                        match inner(m) {
-                            true => return true,
-                            false => {}
-                        }
-                    }
-                }
-            }
-            false
-        }
-        for m in self.fields() {
-            match inner(m) {
-                true => return true,
-                false => {}
+        for d in self.all_definitions() {
+            match d.ty() {
+                Type::AuraMask => return true,
+                _ => {}
             }
         }
 
@@ -838,41 +706,14 @@ impl Container {
     }
 
     pub fn contains_guid_or_packed_guid(&self) -> bool {
-        fn inner(m: &StructMember) -> bool {
-            match m {
-                StructMember::Definition(d) => match d.ty() {
-                    Type::PackedGuid => return true,
-                    Type::Guid => return true,
-                    Type::Array(array) => match array.ty() {
-                        ArrayType::Guid => return true,
-                        ArrayType::PackedGuid => return true,
-                        _ => {}
-                    },
+        for d in self.all_definitions() {
+            match d.ty() {
+                Type::PackedGuid | Type::Guid => return true,
+                Type::Array(array) => match array.ty() {
+                    ArrayType::Guid | ArrayType::PackedGuid => return true,
                     _ => {}
                 },
-                StructMember::IfStatement(statement) => {
-                    for member in statement.all_members() {
-                        match inner(member) {
-                            true => return true,
-                            false => {}
-                        }
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in &optional.members {
-                        match inner(m) {
-                            true => return true,
-                            false => {}
-                        }
-                    }
-                }
-            }
-            false
-        }
-        for m in self.fields() {
-            match inner(m) {
-                true => return true,
-                false => {}
+                _ => {}
             }
         }
 
