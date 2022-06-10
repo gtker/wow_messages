@@ -996,11 +996,35 @@ impl Container {
         }
     }
 
+    fn check_values(&self, o: &Objects) {
+        for d in self.all_definitions() {
+            match &d.ty() {
+                Type::Array(a) => match &a.ty() {
+                    ArrayType::Complex(c) => o.contains_complex_type(c, self.tags(), d.name()),
+                    _ => {}
+                },
+                Type::Identifier { s: i, .. } => {
+                    o.contains_complex_type(i, self.tags(), d.name());
+
+                    match d.value() {
+                        None => {}
+                        Some(v) => match v.identifier().parse::<usize>() {
+                            Ok(_) => {}
+                            Err(_) => {
+                                o.contains_value_in_type(i, v.identifier());
+                            }
+                        },
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+
     pub fn set_internals(&mut self, o: &Objects) {
         self.panic_on_duplicate_field_names();
-        for i in self.fields() {
-            o.check_value(i, self.tags());
-        }
+
+        self.check_values(o);
 
         self.set_used_in_if();
 

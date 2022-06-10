@@ -1,4 +1,4 @@
-use crate::container::{Container, DefinerUsage, StructMember};
+use crate::container::{Container, DefinerUsage};
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::Definer;
 use crate::parser::stats::stats_for_1_12;
@@ -459,54 +459,7 @@ version 2: {:#?} in {} line {}",
         );
     }
 
-    pub fn check_value(&self, i: &StructMember, tags: &Tags) {
-        match i {
-            StructMember::Definition(d) => match &d.ty() {
-                Type::Integer(_) => {}
-                Type::FloatingPoint(_) => {}
-                Type::CString => {}
-                Type::String { .. } => {}
-                Type::Array(a) => match &a.inner {
-                    ArrayType::Integer(_) => {}
-                    ArrayType::Complex(c) => self.contains_complex_type(c, tags, d.name()),
-                    ArrayType::CString => {}
-                    ArrayType::Guid => {}
-                    ArrayType::PackedGuid => {}
-                },
-                Type::Identifier { s: i, .. } => {
-                    self.contains_complex_type(i, tags, d.name());
-                    match d.value() {
-                        None => {}
-                        Some(v) => match v.identifier().parse::<usize>() {
-                            Ok(_) => {}
-                            Err(_) => {
-                                self.contains_value_in_type(i, v.identifier());
-                            }
-                        },
-                    }
-                }
-                Type::PackedGuid => {}
-                Type::Guid => {}
-                Type::UpdateMask => {}
-                Type::AuraMask => {}
-            },
-            StructMember::IfStatement(statement) => {
-                for member in statement.members() {
-                    self.check_value(member, tags);
-                }
-                for member in statement.else_members() {
-                    self.check_value(member, tags);
-                }
-            }
-            StructMember::OptionalStatement(optional) => {
-                for m in optional.members() {
-                    self.check_value(m, tags);
-                }
-            }
-        }
-    }
-
-    fn contains_value_in_type(&self, variable_name: &str, value_name: &str) {
+    pub fn contains_value_in_type(&self, variable_name: &str, value_name: &str) {
         let enums = self.all_definers().find(|a| a.name() == variable_name);
         match enums {
             None => {}
@@ -525,7 +478,7 @@ version 2: {:#?} in {} line {}",
         );
     }
 
-    fn contains_complex_type(&self, variable_name: &str, tags: &Tags, struct_name: &str) {
+    pub fn contains_complex_type(&self, variable_name: &str, tags: &Tags, struct_name: &str) {
         for e in self.all_definers() {
             if e.name() == variable_name && e.tags().has_all_versions(tags) {
                 return;
