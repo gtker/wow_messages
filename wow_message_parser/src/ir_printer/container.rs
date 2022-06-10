@@ -218,6 +218,7 @@ pub enum IrType {
     Guid,
     FloatingPoint(IrFloatingPointType),
     CString,
+    SizedCString,
     String {
         length: String,
     },
@@ -248,6 +249,7 @@ impl From<&Type> for IrType {
                 s: s.to_string(),
                 upcast: upcast.map(|a| (&a).into()),
             },
+            Type::SizedCString => Self::SizedCString,
         }
     }
 }

@@ -376,6 +376,20 @@ fn print_read_definition(
                 postfix = postfix,
             ));
         }
+        Type::SizedCString => {
+            s.wln(format!(
+                "let {name} = crate::util::read_u32_le(r)?;",
+                name = d.name()
+            ));
+            s.wln(format!(
+                "let {name} = crate::util::read_sized_c_string_to_vec(r, {name})?;",
+                name = d.name()
+            ));
+            s.wln(format!(
+                "let {name} = String::from_utf8({name})?;;",
+                name = d.name()
+            ));
+        }
         Type::CString => {
             s.wln(format!(
                 "let {name} = {module}::{prefix}read_c_string_to_vec(r){postfix}?;",

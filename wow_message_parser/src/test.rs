@@ -395,3 +395,17 @@ fn enum_if_else_if_nested() {
 
     tcheck(&s, "enum_if_else_if_nested");
 }
+
+#[test]
+fn sized_cstring() {
+    let o = get_all_impl_items();
+
+    let d = o
+        .structs()
+        .iter()
+        .find(|a| a.name() == "SizedCString")
+        .unwrap();
+    let s = print_struct(d, &o);
+
+    tcheck(&s, "sized_cstring");
+}

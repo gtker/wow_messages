@@ -41,6 +41,17 @@ pub fn read_c_string_to_vec<R: Read>(r: &mut R) -> Result<Vec<u8>, std::io::Erro
     Ok(v)
 }
 
+pub fn read_sized_c_string_to_vec<R: Read>(
+    r: &mut R,
+    size: u32,
+) -> Result<Vec<u8>, std::io::Error> {
+    let mut v = vec![0u8; size as usize];
+
+    r.read_exact(&mut v)?;
+
+    Ok(v)
+}
+
 // u8
 pub fn read_u8_le<R: Read>(r: &mut R) -> Result<u8, std::io::Error> {
     let mut v = [0_u8; 1];

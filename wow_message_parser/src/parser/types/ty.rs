@@ -6,7 +6,10 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, Endianness, FloatingPointType, IntegerType, ObjectType,
 };
-use crate::{CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
+use crate::{
+    CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
+    SIZED_CSTRING_SMALLEST_ALLOWED,
+};
 use std::convert::TryInto;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
@@ -16,6 +19,7 @@ pub enum Type {
     Guid,
     FloatingPoint(FloatingPointType),
     CString,
+    SizedCString,
     String {
         length: String,
     },
@@ -41,6 +45,7 @@ impl Type {
             Type::Guid => "Guid".to_string(),
             Type::UpdateMask => "UpdateMask".to_string(),
             Type::AuraMask => "AuraMask".to_string(),
+            Type::SizedCString => "SizedCString".to_string(),
         }
     }
 
@@ -49,9 +54,8 @@ impl Type {
             Type::Integer(i) => i.rust_str().to_string(),
             Type::FloatingPoint(i) => i.rust_str().to_string(),
             Type::Identifier { s, .. } => s.clone(),
-            Type::CString => "String".to_string(),
+            Type::CString | Type::SizedCString | Type::String { .. } => "String".to_string(),
             Type::Array(a) => a.rust_str(),
-            Type::String { .. } => "String".to_string(),
             Type::PackedGuid | Type::Guid => "Guid".to_string(),
             Type::UpdateMask => "UpdateMask".to_string(),
             Type::AuraMask => "AuraMask".to_string(),
@@ -74,6 +78,10 @@ impl Type {
             }
             Type::AuraMask => sizes.inc(AURA_MASK_MIN_SIZE as usize, AURA_MASK_MAX_SIZE as usize),
             Type::CString => sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED),
+            Type::SizedCString => sizes.inc(
+                SIZED_CSTRING_SMALLEST_ALLOWED,
+                SIZED_CSTRING_LARGEST_ALLOWED,
+            ),
             Type::String { length } => {
                 if let Ok(length) = length.parse::<usize>() {
                     sizes.inc(length, length);
@@ -162,7 +170,11 @@ impl Type {
             Type::FloatingPoint(f) => f.size().to_string(),
             Type::String { length } => length.clone(),
             Type::Identifier { .. } | Type::Array(_) => "?".to_string(),
-            Type::CString | Type::UpdateMask | Type::AuraMask | Type::PackedGuid => "-".to_string(),
+            Type::SizedCString
+            | Type::CString
+            | Type::UpdateMask
+            | Type::AuraMask
+            | Type::PackedGuid => "-".to_string(),
         }
     }
 
@@ -178,7 +190,8 @@ impl Type {
             Type::Integer(i) => i.doc_endian_str().to_string(),
             Type::Guid => "Little".to_string(),
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
-            Type::String { .. }
+            Type::SizedCString
+            | Type::String { .. }
             | Type::Array(_)
             | Type::Identifier { .. }
             | Type::UpdateMask
@@ -237,6 +250,7 @@ impl Type {
             "f64" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Little)),
             "f64_be" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Big)),
             "CString" => Self::CString,
+            "SizedCString" => Self::SizedCString,
             _ => Self::Identifier {
                 s: s.to_string(),
                 upcast: None,
@@ -281,6 +295,7 @@ impl Type {
                             inner: ArrayType::CString,
                             size,
                         }),
+                        Type::SizedCString => panic!("unsupported"),
                         Type::String { .. } => panic!("unsupported"),
                         Type::Array(_) => panic!("unsupported"),
                         Type::FloatingPoint(_) => panic!("unsupported"),

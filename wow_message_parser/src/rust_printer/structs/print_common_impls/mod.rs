@@ -148,6 +148,9 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
         RustType::Guid => GUID_SIZE.to_string(),
         RustType::String => format!("{prefix}{name}.len()", name = m.name(), prefix = prefix),
         RustType::CString => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
+        RustType::SizedCString => {
+            format!("{prefix}{name}.len() + 5", name = m.name(), prefix = prefix)
+        }
         RustType::Struct { sizes, .. } => {
             if sizes.is_constant() {
                 format!("{}", sizes.maximum())

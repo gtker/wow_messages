@@ -329,6 +329,7 @@ pub enum RustType {
     PackedGuid,
     String,
     CString,
+    SizedCString,
     Array {
         array: Array,
         inner_sizes: Sizes,
@@ -368,6 +369,7 @@ impl RustType {
             RustType::UpdateMask => "UpdateMask".to_string(),
             RustType::AuraMask => "AuraMask".to_string(),
             RustType::PackedGuid | RustType::Guid => "Guid".to_string(),
+            RustType::SizedCString => "SizedCString".to_string(),
         }
     }
 
@@ -378,7 +380,7 @@ impl RustType {
             RustType::UpdateMask => "UpdateMask".to_string(),
             RustType::AuraMask => "AuraMask".to_string(),
             RustType::Guid | RustType::PackedGuid => "Guid".to_string(),
-            RustType::CString | RustType::String => "String".to_string(),
+            RustType::SizedCString | RustType::CString | RustType::String => "String".to_string(),
             RustType::Array { array, .. } => array.rust_str(),
             RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
             RustType::Struct { ty_name, .. } => ty_name.clone(),
@@ -391,7 +393,7 @@ impl Display for RustType {
         match self {
             RustType::Integer(i) => f.write_str(i.rust_str()),
             RustType::Floating(i) => f.write_str(i.rust_str()),
-            RustType::String | RustType::CString => f.write_str("String"),
+            RustType::SizedCString | RustType::String | RustType::CString => f.write_str("String"),
             RustType::Array { array, .. } => f.write_str(&array.rust_str()),
             RustType::Enum { ty_name, .. } | RustType::Flag { ty_name, .. } => f.write_str(ty_name),
             RustType::Struct { ty_name, .. } => f.write_str(ty_name),
@@ -1228,6 +1230,10 @@ pub fn create_struct_member(
                 Type::AuraMask => {
                     definition_constantly_sized = false;
                     RustType::AuraMask
+                }
+                Type::SizedCString => {
+                    definition_constantly_sized = false;
+                    RustType::SizedCString
                 }
             };
 

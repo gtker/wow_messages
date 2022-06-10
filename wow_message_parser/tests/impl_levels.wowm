@@ -363,3 +363,6 @@ struct EnumNotIfIfNested {
     }
 }
 
+struct SizedCString {
+    SizedCString s;
+}

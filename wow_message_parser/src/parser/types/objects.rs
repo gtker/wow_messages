@@ -424,25 +424,22 @@ version 2: {:#?} in {} line {}",
 
     pub fn type_has_constant_size(&self, ty: &Type) -> bool {
         let type_name = match ty {
-            Type::Integer(_) => return true,
-            Type::FloatingPoint(_) => return true,
-            Type::CString | Type::String { .. } => return false,
+            Type::Integer(_) | Type::FloatingPoint(_) | Type::Guid => return true,
+            Type::PackedGuid
+            | Type::UpdateMask
+            | Type::AuraMask
+            | Type::SizedCString
+            | Type::CString
+            | Type::String { .. } => return false,
             Type::Array(array) => match array.size() {
                 ArraySize::Fixed(_) => match array.ty() {
-                    ArrayType::Integer(_) => return true,
+                    ArrayType::Guid | ArrayType::Integer(_) => return true,
                     ArrayType::Complex(ident) => ident,
-                    ArrayType::CString => return false,
-                    ArrayType::Guid => return true,
-                    ArrayType::PackedGuid => return false,
+                    ArrayType::CString | ArrayType::PackedGuid => return false,
                 },
-                ArraySize::Variable(_) => return false,
-                ArraySize::Endless => return false,
+                ArraySize::Variable(_) | ArraySize::Endless => return false,
             },
             Type::Identifier { s, .. } => s,
-            Type::PackedGuid => return false,
-            Type::Guid => return true,
-            Type::UpdateMask => return false,
-            Type::AuraMask => return false,
         };
 
         if self.all_definers().any(|a| a.name() == type_name) {

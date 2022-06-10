@@ -47,7 +47,10 @@ const LOGIN_VERSIONS: &str = "login_versions";
 
 // Also used in /utils.rs
 const CSTRING_SMALLEST_ALLOWED: usize = 1;
-const CSTRING_LARGEST_ALLOWED: usize = 256;
+const CSTRING_LARGEST_ALLOWED: usize = 256; // 256 is a guess
+
+const SIZED_CSTRING_SMALLEST_ALLOWED: usize = 4 + 1;
+const SIZED_CSTRING_LARGEST_ALLOWED: usize = 4 + 8000; // 8000 is a guess
 
 // Also used in auth.pest
 const ENUM_SELF_VALUE_FIELD: &str = "self.value";

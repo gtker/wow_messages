@@ -374,6 +374,7 @@ impl Container {
                         Type::Guid => sum += 8_u64,
                         Type::UpdateMask => panic!(),
                         Type::AuraMask => panic!(),
+                        Type::SizedCString => panic!(),
                     }
                     if let Some(v) = &d.verified_value {
                         if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
@@ -535,6 +536,7 @@ impl Container {
                     Type::PackedGuid => return false,
                     Type::Guid => {}
                     Type::UpdateMask | Type::AuraMask => return false,
+                    Type::SizedCString => return false,
                 },
                 StructMember::IfStatement(_) => {
                     return false;
@@ -871,6 +873,7 @@ impl Container {
                 Type::Guid => {}
                 Type::UpdateMask => {}
                 Type::AuraMask => {}
+                Type::SizedCString => {}
             },
             StructMember::IfStatement(statement) => {
                 for m in &statement.members {

@@ -162,6 +162,22 @@ pub fn print_write_definition(
                 postfix = postfix,
             ));
         }
+        Type::SizedCString => {
+            s.wln(format!(
+                "w.write_all(&({prefix}{name}.len() as u32).to_le_bytes()){postfix}?;",
+                prefix = variable_prefix,
+                name = d.name(),
+                postfix = postfix,
+            ));
+            s.wln(format!(
+                "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
+                prefix = variable_prefix,
+                name = d.name(),
+                postfix = postfix,
+            ));
+            s.wln("// Null terminator");
+            s.wln(format!("w.write_all(&[0]){postfix}?;", postfix = postfix,));
+        }
         Type::CString => {
             s.wln(format!(
                 "w.write_all({prefix}{name}.as_bytes()){postfix}?;",

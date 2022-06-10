@@ -242,6 +242,7 @@ fn print_container_example_definition(
             }
         }
         Type::AuraMask => panic!("AuraMask example"),
+        Type::SizedCString => panic!("SizedCString example"),
     }
     s.wln(comment);
 }
@@ -484,9 +485,11 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                         )
                     }
                 },
-                Type::CString | Type::String { .. } | Type::Integer(_) | Type::FloatingPoint(_) => {
-                    d.ty().str()
-                }
+                Type::SizedCString
+                | Type::CString
+                | Type::String { .. }
+                | Type::Integer(_)
+                | Type::FloatingPoint(_) => d.ty().str(),
             };
 
             let description = if let Some(d) = d.tags().description() {
@@ -521,6 +524,7 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                     Type::Guid => Some(offset.unwrap() + 8),
                     Type::FloatingPoint(f) => Some(offset.unwrap() + f.size() as usize),
                     Type::CString
+                    | Type::SizedCString
                     | Type::String { .. }
                     | Type::Identifier { .. }
                     | Type::Array(_)
