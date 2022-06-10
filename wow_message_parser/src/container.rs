@@ -289,34 +289,9 @@ impl Container {
     }
 
     pub fn get_field_ty(&self, field_name: &str) -> &Type {
-        fn f<'a>(m: &'a StructMember, field_name: &str) -> Option<&'a Type> {
-            match m {
-                StructMember::Definition(d) => {
-                    if d.name() == field_name {
-                        return Some(d.ty());
-                    }
-                }
-                StructMember::IfStatement(statement) => {
-                    for member in statement.all_members() {
-                        if let Some(v) = f(member, field_name) {
-                            return Some(v);
-                        }
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in &optional.members {
-                        if let Some(v) = f(m, field_name) {
-                            return Some(v);
-                        }
-                    }
-                }
-            }
-
-            None
-        }
-        for m in self.fields() {
-            if let Some(v) = f(m, field_name) {
-                return v;
+        for d in self.all_definitions() {
+            if d.name() == field_name {
+                return d.ty();
             }
         }
 
