@@ -31,6 +31,8 @@ The `String[len]` type is the same as a sized `u8` array (`u8[len]`) containing 
 
 The `CString` type is an array of valid UTF-8 `u8`s terminated by a null (0) byte.
 
+The `SizedCString` is the same as a `u32` followed by a `CString`, but they are kept in the same type to semantically convey that the `u32` field has no purpose other than to parse the `CString`.
+
 | Type | Purpose | C Name |
 | ---- | ------- | ------ |
 | `u*` | Unsigned little endian `*` bit value. | `unsigned` `char`/`short`/`int`/`long long` |
