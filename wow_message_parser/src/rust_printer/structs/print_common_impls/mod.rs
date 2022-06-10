@@ -84,7 +84,6 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         }
     }
 
-    //print_size(s, e, o);
     print_size_rust_view(s, e.rust_object(), "self.");
 }
 
