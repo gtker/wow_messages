@@ -696,12 +696,7 @@ impl Container {
     }
 
     pub fn get_types_needing_import_recursively<'a>(&'a self, o: &'a Objects) -> Vec<&'a str> {
-        let mut v = Vec::new();
-        for m in self.fields() {
-            add_complex_types(m, &mut v);
-        }
-        v.sort_unstable();
-        v.dedup();
+        let mut v = self.get_complex_types();
 
         let mut v2 = Vec::new();
         for t in &v {
@@ -724,10 +719,26 @@ impl Container {
     }
 
     pub fn get_types_needing_import(&self) -> Vec<&str> {
+        self.get_complex_types()
+    }
+
+    fn get_complex_types(&self) -> Vec<&str> {
         let mut v = Vec::new();
-        for m in self.fields() {
-            add_complex_types(m, &mut v);
+
+        for d in self.all_definitions() {
+            match &d.struct_type {
+                Type::Array(a) => {
+                    if let ArrayType::Complex(i) = a.ty() {
+                        v.push(i.as_str());
+                    }
+                }
+                Type::Identifier { s, .. } => {
+                    v.push(s.as_str());
+                }
+                _ => {}
+            }
         }
+
         v.sort_unstable();
         v.dedup();
         v
@@ -1109,32 +1120,6 @@ impl Sizes {
 impl AddAssign for Sizes {
     fn add_assign(&mut self, rhs: Self) {
         self.inc(rhs.minimum, rhs.maximum);
-    }
-}
-
-fn add_complex_types<'a>(m: &'a StructMember, v: &mut Vec<&'a str>) {
-    match m {
-        StructMember::Definition(d) => match &d.struct_type {
-            Type::Array(a) => {
-                if let ArrayType::Complex(i) = a.ty() {
-                    v.push(i);
-                }
-            }
-            Type::Identifier { s, .. } => {
-                v.push(s);
-            }
-            _ => {}
-        },
-        StructMember::IfStatement(statement) => {
-            for member in statement.all_members() {
-                add_complex_types(member, v);
-            }
-        }
-        StructMember::OptionalStatement(optional) => {
-            for member in &optional.members {
-                add_complex_types(member, v);
-            }
-        }
     }
 }
 
