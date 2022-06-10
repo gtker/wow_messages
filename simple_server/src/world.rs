@@ -128,7 +128,9 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
             ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => {
                 break;
             }
-            _ => panic!(),
+            e => {
+                dbg!(e);
+            }
         }
     }
 
