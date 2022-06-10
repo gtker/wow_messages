@@ -1,4 +1,4 @@
-use crate::container::{Container, ContainerType, StructMember, GUID_SIZE};
+use crate::container::{Container, ContainerType, GUID_SIZE};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
@@ -85,34 +85,16 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_size_rust_view(s, e.rust_object(), "self.");
 }
 
-pub fn print_constant(s: &mut Writer, m: &StructMember) {
-    match m {
-        StructMember::Definition(d) => {
-            if let Some(v) = d.verified_value() {
-                if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
-                    return;
-                }
-                print_constant_member(s, d.name(), d.ty(), v.original_string(), v.value());
-            }
-        }
-        StructMember::IfStatement(statement) => {
-            for member in statement.all_members() {
-                print_constant(s, member);
-            }
-        }
-        StructMember::OptionalStatement(optional) => {
-            for member in optional.members() {
-                print_constant(s, member);
-            }
-        }
-    }
-}
-
 fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
     if e.any_fields_have_constant_value() {
         s.bodyn(format!("impl {name}", name = e.name()), |s| {
-            for m in e.fields() {
-                print_constant(s, m);
+            for d in e.all_definitions() {
+                if let Some(v) = d.verified_value() {
+                    if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
+                        continue;
+                    }
+                    print_constant_member(s, d.name(), d.ty(), v.original_string(), v.value());
+                }
             }
         });
     }
