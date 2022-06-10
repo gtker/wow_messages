@@ -16,8 +16,7 @@ use std::io::{Write, Read};
 ///     if (chat_type == MONSTER_WHISPER
 ///         || chat_type == RAID_BOSS_EMOTE
 ///         || chat_type == MONSTER_EMOTE) {
-///         u32 name_length;
-///         CString monster_name;
+///         SizedCString monster_name;
 ///         Guid monster_guid;
 ///     }
 ///     else if (chat_type == SAY
@@ -29,8 +28,7 @@ use std::io::{Write, Read};
 ///     else if (chat_type == MONSTER_SAY
 ///         || chat_type == MONSTER_YELL) {
 ///         Guid sender_guid3;
-///         u32 sender_name_length;
-///         CString sender_name;
+///         SizedCString sender_name;
 ///         Guid target_guid;
 ///     }
 ///     else if (chat_type == CHANNEL) {
@@ -41,15 +39,13 @@ use std::io::{Write, Read};
 ///     else {
 ///         Guid sender_guid4;
 ///     }
-///     u32 message_length;
-///     CString message;
+///     SizedCString message;
 ///     PlayerChatTag tag;
 /// }
 /// ```
 pub struct SMSG_MESSAGECHAT {
     pub chat_type: SMSG_MESSAGECHAT_ChatType,
     pub language: Language,
-    pub message_length: u32,
     pub message: String,
     pub tag: PlayerChatTag,
 }
@@ -155,16 +151,13 @@ impl ServerMessage for SMSG_MESSAGECHAT {
             SMSG_MESSAGECHAT_ChatType::MONSTER_SAY {
                 sender_guid3,
                 sender_name,
-                sender_name_length,
                 target_guid,
             } => {
                 // sender_guid3: Guid
                 w.write_all(&sender_guid3.guid().to_le_bytes())?;
 
-                // sender_name_length: u32
-                w.write_all(&sender_name_length.to_le_bytes())?;
-
-                // sender_name: CString
+                // sender_name: SizedCString
+                w.write_all(&(sender_name.len() as u32).to_le_bytes())?;
                 w.write_all(sender_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -176,16 +169,13 @@ impl ServerMessage for SMSG_MESSAGECHAT {
             SMSG_MESSAGECHAT_ChatType::MONSTER_YELL {
                 sender_guid3,
                 sender_name,
-                sender_name_length,
                 target_guid,
             } => {
                 // sender_guid3: Guid
                 w.write_all(&sender_guid3.guid().to_le_bytes())?;
 
-                // sender_name_length: u32
-                w.write_all(&sender_name_length.to_le_bytes())?;
-
-                // sender_name: CString
+                // sender_name: SizedCString
+                w.write_all(&(sender_name.len() as u32).to_le_bytes())?;
                 w.write_all(sender_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -197,12 +187,9 @@ impl ServerMessage for SMSG_MESSAGECHAT {
             SMSG_MESSAGECHAT_ChatType::MONSTER_EMOTE {
                 monster_guid,
                 monster_name,
-                name_length,
             } => {
-                // name_length: u32
-                w.write_all(&name_length.to_le_bytes())?;
-
-                // monster_name: CString
+                // monster_name: SizedCString
+                w.write_all(&(monster_name.len() as u32).to_le_bytes())?;
                 w.write_all(monster_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -301,12 +288,9 @@ impl ServerMessage for SMSG_MESSAGECHAT {
             SMSG_MESSAGECHAT_ChatType::MONSTER_WHISPER {
                 monster_guid,
                 monster_name,
-                name_length,
             } => {
-                // name_length: u32
-                w.write_all(&name_length.to_le_bytes())?;
-
-                // monster_name: CString
+                // monster_name: SizedCString
+                w.write_all(&(monster_name.len() as u32).to_le_bytes())?;
                 w.write_all(monster_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -360,12 +344,9 @@ impl ServerMessage for SMSG_MESSAGECHAT {
             SMSG_MESSAGECHAT_ChatType::RAID_BOSS_EMOTE {
                 monster_guid,
                 monster_name,
-                name_length,
             } => {
-                // name_length: u32
-                w.write_all(&name_length.to_le_bytes())?;
-
-                // monster_name: CString
+                // monster_name: SizedCString
+                w.write_all(&(monster_name.len() as u32).to_le_bytes())?;
                 w.write_all(monster_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -390,10 +371,8 @@ impl ServerMessage for SMSG_MESSAGECHAT {
             }
         }
 
-        // message_length: u32
-        w.write_all(&self.message_length.to_le_bytes())?;
-
-        // message: CString
+        // message: SizedCString
+        w.write_all(&(self.message.len() as u32).to_le_bytes())?;
         w.write_all(self.message.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
@@ -521,20 +500,16 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 // sender_guid3: Guid
                 let sender_guid3 = Guid::read(r)?;
 
-                // sender_name_length: u32
-                let sender_name_length = crate::util::read_u32_le(r)?;
-
-                // sender_name: CString
-                let sender_name = crate::util::read_c_string_to_vec(r)?;
-                let sender_name = String::from_utf8(sender_name)?;
-
+                // sender_name: SizedCString
+                let sender_name = crate::util::read_u32_le(r)?;
+                let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                let sender_name = String::from_utf8(sender_name)?;;
                 // target_guid: Guid
                 let target_guid = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MONSTER_SAY {
                     sender_guid3,
                     sender_name,
-                    sender_name_length,
                     target_guid,
                 }
             }
@@ -542,38 +517,30 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 // sender_guid3: Guid
                 let sender_guid3 = Guid::read(r)?;
 
-                // sender_name_length: u32
-                let sender_name_length = crate::util::read_u32_le(r)?;
-
-                // sender_name: CString
-                let sender_name = crate::util::read_c_string_to_vec(r)?;
-                let sender_name = String::from_utf8(sender_name)?;
-
+                // sender_name: SizedCString
+                let sender_name = crate::util::read_u32_le(r)?;
+                let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                let sender_name = String::from_utf8(sender_name)?;;
                 // target_guid: Guid
                 let target_guid = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MONSTER_YELL {
                     sender_guid3,
                     sender_name,
-                    sender_name_length,
                     target_guid,
                 }
             }
             ChatType::MONSTER_EMOTE => {
-                // name_length: u32
-                let name_length = crate::util::read_u32_le(r)?;
-
-                // monster_name: CString
-                let monster_name = crate::util::read_c_string_to_vec(r)?;
-                let monster_name = String::from_utf8(monster_name)?;
-
+                // monster_name: SizedCString
+                let monster_name = crate::util::read_u32_le(r)?;
+                let monster_name = crate::util::read_sized_c_string_to_vec(r, monster_name)?;
+                let monster_name = String::from_utf8(monster_name)?;;
                 // monster_guid: Guid
                 let monster_guid = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MONSTER_EMOTE {
                     monster_guid,
                     monster_name,
-                    name_length,
                 }
             }
             ChatType::CHANNEL => {
@@ -674,20 +641,16 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 }
             }
             ChatType::MONSTER_WHISPER => {
-                // name_length: u32
-                let name_length = crate::util::read_u32_le(r)?;
-
-                // monster_name: CString
-                let monster_name = crate::util::read_c_string_to_vec(r)?;
-                let monster_name = String::from_utf8(monster_name)?;
-
+                // monster_name: SizedCString
+                let monster_name = crate::util::read_u32_le(r)?;
+                let monster_name = crate::util::read_sized_c_string_to_vec(r, monster_name)?;
+                let monster_name = String::from_utf8(monster_name)?;;
                 // monster_guid: Guid
                 let monster_guid = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MONSTER_WHISPER {
                     monster_guid,
                     monster_name,
-                    name_length,
                 }
             }
             ChatType::BG_SYSTEM_NEUTRAL => {
@@ -739,20 +702,16 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 }
             }
             ChatType::RAID_BOSS_EMOTE => {
-                // name_length: u32
-                let name_length = crate::util::read_u32_le(r)?;
-
-                // monster_name: CString
-                let monster_name = crate::util::read_c_string_to_vec(r)?;
-                let monster_name = String::from_utf8(monster_name)?;
-
+                // monster_name: SizedCString
+                let monster_name = crate::util::read_u32_le(r)?;
+                let monster_name = crate::util::read_sized_c_string_to_vec(r, monster_name)?;
+                let monster_name = String::from_utf8(monster_name)?;;
                 // monster_guid: Guid
                 let monster_guid = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RAID_BOSS_EMOTE {
                     monster_guid,
                     monster_name,
-                    name_length,
                 }
             }
             ChatType::BATTLEGROUND => {
@@ -773,20 +732,16 @@ impl ServerMessage for SMSG_MESSAGECHAT {
             }
         };
 
-        // message_length: u32
-        let message_length = crate::util::read_u32_le(r)?;
-
-        // message: CString
-        let message = crate::util::read_c_string_to_vec(r)?;
-        let message = String::from_utf8(message)?;
-
+        // message: SizedCString
+        let message = crate::util::read_u32_le(r)?;
+        let message = crate::util::read_sized_c_string_to_vec(r, message)?;
+        let message = String::from_utf8(message)?;;
         // tag: PlayerChatTag
         let tag: PlayerChatTag = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             chat_type: chat_type_if,
             language,
-            message_length,
             message,
             tag,
         })
@@ -798,8 +753,7 @@ impl SMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {
         self.chat_type.size() // chat_type: SMSG_MESSAGECHAT_ChatType
         + 4 // language: Language
-        + 4 // message_length: u32
-        + self.message.len() + 1 // message: CString
+        + self.message.len() + 5 // message: SizedCString
         + 1 // tag: PlayerChatTag
     }
 }
@@ -845,19 +799,16 @@ pub enum SMSG_MESSAGECHAT_ChatType {
     MONSTER_SAY {
         sender_guid3: Guid,
         sender_name: String,
-        sender_name_length: u32,
         target_guid: Guid,
     },
     MONSTER_YELL {
         sender_guid3: Guid,
         sender_name: String,
-        sender_name_length: u32,
         target_guid: Guid,
     },
     MONSTER_EMOTE {
         monster_guid: Guid,
         monster_name: String,
-        name_length: u32,
     },
     CHANNEL {
         channel_name: String,
@@ -897,7 +848,6 @@ pub enum SMSG_MESSAGECHAT_ChatType {
     MONSTER_WHISPER {
         monster_guid: Guid,
         monster_name: String,
-        name_length: u32,
     },
     BG_SYSTEM_NEUTRAL {
         sender_guid4: Guid,
@@ -920,7 +870,6 @@ pub enum SMSG_MESSAGECHAT_ChatType {
     RAID_BOSS_EMOTE {
         monster_guid: Guid,
         monster_name: String,
-        name_length: u32,
     },
     BATTLEGROUND {
         sender_guid4: Guid,
@@ -1061,36 +1010,30 @@ impl SMSG_MESSAGECHAT_ChatType {
             Self::MONSTER_SAY {
                 sender_guid3,
                 sender_name,
-                sender_name_length,
                 target_guid,
             } => {
                 1
                 + 8 // sender_guid3: Guid
-                + sender_name.len() + 1 // sender_name: CString
-                + 4 // sender_name_length: u32
+                + sender_name.len() + 5 // sender_name: SizedCString
                 + 8 // target_guid: Guid
             }
             Self::MONSTER_YELL {
                 sender_guid3,
                 sender_name,
-                sender_name_length,
                 target_guid,
             } => {
                 1
                 + 8 // sender_guid3: Guid
-                + sender_name.len() + 1 // sender_name: CString
-                + 4 // sender_name_length: u32
+                + sender_name.len() + 5 // sender_name: SizedCString
                 + 8 // target_guid: Guid
             }
             Self::MONSTER_EMOTE {
                 monster_guid,
                 monster_name,
-                name_length,
             } => {
                 1
                 + 8 // monster_guid: Guid
-                + monster_name.len() + 1 // monster_name: CString
-                + 4 // name_length: u32
+                + monster_name.len() + 5 // monster_name: SizedCString
             }
             Self::CHANNEL {
                 channel_name,
@@ -1165,12 +1108,10 @@ impl SMSG_MESSAGECHAT_ChatType {
             Self::MONSTER_WHISPER {
                 monster_guid,
                 monster_name,
-                name_length,
             } => {
                 1
                 + 8 // monster_guid: Guid
-                + monster_name.len() + 1 // monster_name: CString
-                + 4 // name_length: u32
+                + monster_name.len() + 5 // monster_name: SizedCString
             }
             Self::BG_SYSTEM_NEUTRAL {
                 sender_guid4,
@@ -1211,12 +1152,10 @@ impl SMSG_MESSAGECHAT_ChatType {
             Self::RAID_BOSS_EMOTE {
                 monster_guid,
                 monster_name,
-                name_length,
             } => {
                 1
                 + 8 // monster_guid: Guid
-                + monster_name.len() + 1 // monster_name: CString
-                + 4 // name_length: u32
+                + monster_name.len() + 5 // monster_name: SizedCString
             }
             Self::BATTLEGROUND {
                 sender_guid4,

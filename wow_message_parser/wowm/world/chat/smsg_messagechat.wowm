@@ -6,9 +6,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     if (chat_type == MONSTER_WHISPER
      || chat_type == RAID_BOSS_EMOTE
      || chat_type == MONSTER_EMOTE) {
-        /* CString with len? */
-        u32 name_length;
-        CString monster_name;
+        SizedCString monster_name;
         Guid monster_guid;
     }
     else if (chat_type == SAY
@@ -24,8 +22,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     else if (chat_type == MONSTER_SAY
           || chat_type == MONSTER_YELL) {
         Guid sender_guid3;
-        u32 sender_name_length;
-        CString sender_name;
+        SizedCString sender_name;
         Guid target_guid;
     }
     else if (chat_type == CHANNEL) {
@@ -36,9 +33,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     else {
         Guid sender_guid4;
     }
-    /* CString len */
-    u32 message_length;
-    CString message;
+    SizedCString message;
     PlayerChatTag tag;
 }
 

@@ -12,8 +12,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     if (chat_type == MONSTER_WHISPER
         || chat_type == RAID_BOSS_EMOTE
         || chat_type == MONSTER_EMOTE) {
-        u32 name_length;
-        CString monster_name;
+        SizedCString monster_name;
         Guid monster_guid;
     }
     else if (chat_type == SAY
@@ -25,8 +24,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     else if (chat_type == MONSTER_SAY
         || chat_type == MONSTER_YELL) {
         Guid sender_guid3;
-        u32 sender_name_length;
-        CString sender_name;
+        SizedCString sender_name;
         Guid target_guid;
     }
     else if (chat_type == CHANNEL) {
@@ -37,8 +35,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     else {
         Guid sender_guid4;
     }
-    u32 message_length;
-    CString message;
+    SizedCString message;
     PlayerChatTag tag;
 }
 ```
@@ -66,8 +63,7 @@ is equal to `MONSTER_EMOTE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | name_length |  |  |
-| - | - / - | CString | monster_name |  |  |
+| - | - / - | SizedCString | monster_name |  |  |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | monster_guid |  |  |
 
 Else If chat_type is equal to `SAY` **or** 
@@ -85,8 +81,7 @@ is equal to `MONSTER_YELL`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid3 |  |  |
-| - | 4 / Little | u32 | sender_name_length |  |  |
-| - | - / - | CString | sender_name |  |  |
+| - | - / - | SizedCString | sender_name |  |  |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |  |
 
 Else If chat_type is equal to `CHANNEL`:
@@ -99,7 +94,6 @@ Else If chat_type is equal to `CHANNEL`:
 
 Else: 
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid4 |  |  |
-| - | 4 / Little | u32 | message_length |  |  |
-| - | - / - | CString | message |  |  |
+| - | - / - | SizedCString | message |  |  |
 | - | ? / - | [PlayerChatTag](playerchattag.md) | tag |  |  |
 

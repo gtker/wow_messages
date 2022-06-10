@@ -82216,23 +82216,8 @@
             "members": [
               {
                 "Definition": {
-                  "name": "name_length",
-                  "member_type": {
-                    "Integer": {
-                      "type": "u32",
-                      "endianness": "little"
-                    }
-                  },
-                  "constant_value": null,
-                  "used_as_size_in": null,
-                  "used_in_if": false,
-                  "tags": {}
-                }
-              },
-              {
-                "Definition": {
                   "name": "monster_name",
-                  "member_type": "CString",
+                  "member_type": "SizedCString",
                   "constant_value": null,
                   "used_as_size_in": null,
                   "used_in_if": false,
@@ -82336,23 +82321,8 @@
                   },
                   {
                     "Definition": {
-                      "name": "sender_name_length",
-                      "member_type": {
-                        "Integer": {
-                          "type": "u32",
-                          "endianness": "little"
-                        }
-                      },
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {}
-                    }
-                  },
-                  {
-                    "Definition": {
                       "name": "sender_name",
-                      "member_type": "CString",
+                      "member_type": "SizedCString",
                       "constant_value": null,
                       "used_as_size_in": null,
                       "used_in_if": false,
@@ -82459,23 +82429,8 @@
         },
         {
           "Definition": {
-            "name": "message_length",
-            "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
             "name": "message",
-            "member_type": "CString",
+            "member_type": "SizedCString",
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
@@ -82522,9 +82477,9 @@
         "SubObjects",
         "IfEnum",
         "IfMultiCondition",
-        "SimpleBuiltInTypes",
         "ComplexBuiltInTypes",
         "IfElseEnum",
+        "SimpleBuiltInTypes",
         "ElseEnum",
         "WorldVersion"
       ]

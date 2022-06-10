@@ -15,7 +15,7 @@ pub struct SizedCString {
 impl SizedCString {
     pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // s: SizedCString
-        w.write_all((self.s.len() as u32).to_le_bytes())?;
+        w.write_all(&(self.s.len() as u32).to_le_bytes())?;
         w.write_all(self.s.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
@@ -28,7 +28,7 @@ impl SizedCString {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // s: SizedCString
         let s = crate::util::read_u32_le(r)?;
-        let s = crate::util::read_sized_cstring_to_vec(r, s)?;
+        let s = crate::util::read_sized_c_string_to_vec(r, s)?;
         let s = String::from_utf8(s)?;;
         Ok(Self {
             s,
