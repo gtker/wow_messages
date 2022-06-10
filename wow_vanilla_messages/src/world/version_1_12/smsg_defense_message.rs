@@ -9,13 +9,11 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_DEFENSE_MESSAGE = 0x033B {
 ///     Map map;
-///     u32 message_length;
-///     CString message;
+///     SizedCString message;
 /// }
 /// ```
 pub struct SMSG_DEFENSE_MESSAGE {
     pub map: Map,
-    pub message_length: u32,
     pub message: String,
 }
 
@@ -24,10 +22,8 @@ impl ServerMessage for SMSG_DEFENSE_MESSAGE {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
-        // message_length: u32
-        w.write_all(&self.message_length.to_le_bytes())?;
-
-        // message: CString
+        // message: SizedCString
+        w.write_all(&(self.message.len() as u32).to_le_bytes())?;
         w.write_all(self.message.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
@@ -44,16 +40,12 @@ impl ServerMessage for SMSG_DEFENSE_MESSAGE {
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-        // message_length: u32
-        let message_length = crate::util::read_u32_le(r)?;
-
-        // message: CString
-        let message = crate::util::read_c_string_to_vec(r)?;
-        let message = String::from_utf8(message)?;
-
+        // message: SizedCString
+        let message = crate::util::read_u32_le(r)?;
+        let message = crate::util::read_sized_c_string_to_vec(r, message)?;
+        let message = String::from_utf8(message)?;;
         Ok(Self {
             map,
-            message_length,
             message,
         })
     }
@@ -63,8 +55,7 @@ impl ServerMessage for SMSG_DEFENSE_MESSAGE {
 impl SMSG_DEFENSE_MESSAGE {
     pub(crate) fn size(&self) -> usize {
         4 // map: Map
-        + 4 // message_length: u32
-        + self.message.len() + 1 // message: CString
+        + self.message.len() + 5 // message: SizedCString
     }
 }
 

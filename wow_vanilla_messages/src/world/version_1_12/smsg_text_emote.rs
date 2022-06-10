@@ -12,15 +12,13 @@ use std::io::{Write, Read};
 ///     Guid guid;
 ///     u32 text_emote;
 ///     Emote emote;
-///     u32 name_length;
-///     CString name;
+///     SizedCString name;
 /// }
 /// ```
 pub struct SMSG_TEXT_EMOTE {
     pub guid: Guid,
     pub text_emote: u32,
     pub emote: Emote,
-    pub name_length: u32,
     pub name: String,
 }
 
@@ -35,10 +33,8 @@ impl ServerMessage for SMSG_TEXT_EMOTE {
         // emote: Emote
         w.write_all(&(self.emote.as_int() as u32).to_le_bytes())?;
 
-        // name_length: u32
-        w.write_all(&self.name_length.to_le_bytes())?;
-
-        // name: CString
+        // name: SizedCString
+        w.write_all(&(self.name.len() as u32).to_le_bytes())?;
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
@@ -61,18 +57,14 @@ impl ServerMessage for SMSG_TEXT_EMOTE {
         // emote: Emote
         let emote: Emote = crate::util::read_u32_le(r)?.try_into()?;
 
-        // name_length: u32
-        let name_length = crate::util::read_u32_le(r)?;
-
-        // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
-
+        // name: SizedCString
+        let name = crate::util::read_u32_le(r)?;
+        let name = crate::util::read_sized_c_string_to_vec(r, name)?;
+        let name = String::from_utf8(name)?;;
         Ok(Self {
             guid,
             text_emote,
             emote,
-            name_length,
             name,
         })
     }
@@ -84,8 +76,7 @@ impl SMSG_TEXT_EMOTE {
         8 // guid: Guid
         + 4 // text_emote: u32
         + 4 // emote: Emote
-        + 4 // name_length: u32
-        + self.name.len() + 1 // name: CString
+        + self.name.len() + 5 // name: SizedCString
     }
 }
 

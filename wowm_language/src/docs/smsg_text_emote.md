@@ -10,8 +10,7 @@ smsg SMSG_TEXT_EMOTE = 0x0105 {
     Guid guid;
     u32 text_emote;
     Emote emote;
-    u32 name_length;
-    CString name;
+    SizedCString name;
 }
 ```
 ### Header
@@ -32,6 +31,5 @@ SMSG have a header of 4 bytes.
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0C | 4 / Little | u32 | text_emote |  |  |
 | 0x10 | ? / - | [Emote](emote.md) | emote |  |  |
-| - | 4 / Little | u32 | name_length |  |  |
-| - | - / - | CString | name |  |  |
+| - | - / - | SizedCString | name |  |  |
 

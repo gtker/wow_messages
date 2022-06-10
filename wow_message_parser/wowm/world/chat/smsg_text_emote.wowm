@@ -5,8 +5,6 @@ smsg SMSG_TEXT_EMOTE = 0x0105 {
     /* TODO: text_emote could be an enum */
     u32 text_emote;
     Emote emote;
-    u32 name_length;
-    /* Name length for CString??? */
-    CString name;
+    SizedCString name;
 }
 

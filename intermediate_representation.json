@@ -47611,38 +47611,8 @@
         },
         {
           "Definition": {
-            "name": "content_length",
-            "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
             "name": "content",
-            "member_type": "CString",
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "type_length",
-            "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
-              }
-            },
+            "member_type": "SizedCString",
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
@@ -47652,7 +47622,7 @@
         {
           "Definition": {
             "name": "bug_type",
-            "member_type": "CString",
+            "member_type": "SizedCString",
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
@@ -47678,7 +47648,7 @@
         "file_name": "wow_message_parser/wowm/world/gamemaster/cmsg_bug.wowm",
         "start_position": 3
       },
-      "only_has_io_error": false,
+      "only_has_io_error": true,
       "features": [
         "CMsg",
         "SimpleBuiltInTypes",
@@ -69957,23 +69927,8 @@
       "members": [
         {
           "Definition": {
-            "name": "length",
-            "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
             "name": "message",
-            "member_type": "CString",
+            "member_type": "SizedCString",
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
@@ -69999,10 +69954,9 @@
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_area_trigger_message.wowm",
         "start_position": 3
       },
-      "only_has_io_error": false,
+      "only_has_io_error": true,
       "features": [
         "SMsg",
-        "SimpleBuiltInTypes",
         "ComplexBuiltInTypes",
         "WorldVersion"
       ]
@@ -73992,23 +73946,8 @@
         },
         {
           "Definition": {
-            "name": "message_length",
-            "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
             "name": "message",
-            "member_type": "CString",
+            "member_type": "SizedCString",
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
@@ -74038,7 +73977,6 @@
       "features": [
         "SMsg",
         "SubObjects",
-        "SimpleBuiltInTypes",
         "ComplexBuiltInTypes",
         "WorldVersion"
       ]
@@ -90533,23 +90471,8 @@
         },
         {
           "Definition": {
-            "name": "name_length",
-            "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
             "name": "name",
-            "member_type": "CString",
+            "member_type": "SizedCString",
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
@@ -90603,7 +90526,7 @@
         "file_name": "wow_message_parser/wowm/world/resurrect/smsg_resurrect_request.wowm",
         "start_position": 3
       },
-      "only_has_io_error": false,
+      "only_has_io_error": true,
       "features": [
         "SMsg",
         "ComplexBuiltInTypes",
@@ -94485,23 +94408,8 @@
         },
         {
           "Definition": {
-            "name": "name_length",
-            "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
             "name": "name",
-            "member_type": "CString",
+            "member_type": "SizedCString",
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,

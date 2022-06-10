@@ -8,19 +8,15 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_BUG = 0x01CA {
 ///     u32 suggestion;
-///     u32 content_length;
-///     CString content;
-///     u32 type_length;
-///     CString bug_type;
+///     SizedCString content;
+///     SizedCString bug_type;
 /// }
 /// ```
 pub struct CMSG_BUG {
     /// cmangos/vmangos/mangoszero: If 0 received bug report, else received suggestion
     ///
     pub suggestion: u32,
-    pub content_length: u32,
     pub content: String,
-    pub type_length: u32,
     pub bug_type: String,
 }
 
@@ -29,18 +25,14 @@ impl ClientMessage for CMSG_BUG {
         // suggestion: u32
         w.write_all(&self.suggestion.to_le_bytes())?;
 
-        // content_length: u32
-        w.write_all(&self.content_length.to_le_bytes())?;
-
-        // content: CString
+        // content: SizedCString
+        w.write_all(&(self.content.len() as u32).to_le_bytes())?;
         w.write_all(self.content.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
-        // type_length: u32
-        w.write_all(&self.type_length.to_le_bytes())?;
-
-        // bug_type: CString
+        // bug_type: SizedCString
+        w.write_all(&(self.bug_type.len() as u32).to_le_bytes())?;
         w.write_all(self.bug_type.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
@@ -57,25 +49,17 @@ impl ClientMessage for CMSG_BUG {
         // suggestion: u32
         let suggestion = crate::util::read_u32_le(r)?;
 
-        // content_length: u32
-        let content_length = crate::util::read_u32_le(r)?;
-
-        // content: CString
-        let content = crate::util::read_c_string_to_vec(r)?;
-        let content = String::from_utf8(content)?;
-
-        // type_length: u32
-        let type_length = crate::util::read_u32_le(r)?;
-
-        // bug_type: CString
-        let bug_type = crate::util::read_c_string_to_vec(r)?;
-        let bug_type = String::from_utf8(bug_type)?;
-
+        // content: SizedCString
+        let content = crate::util::read_u32_le(r)?;
+        let content = crate::util::read_sized_c_string_to_vec(r, content)?;
+        let content = String::from_utf8(content)?;;
+        // bug_type: SizedCString
+        let bug_type = crate::util::read_u32_le(r)?;
+        let bug_type = crate::util::read_sized_c_string_to_vec(r, bug_type)?;
+        let bug_type = String::from_utf8(bug_type)?;;
         Ok(Self {
             suggestion,
-            content_length,
             content,
-            type_length,
             bug_type,
         })
     }
@@ -85,10 +69,8 @@ impl ClientMessage for CMSG_BUG {
 impl CMSG_BUG {
     pub(crate) fn size(&self) -> usize {
         4 // suggestion: u32
-        + 4 // content_length: u32
-        + self.content.len() + 1 // content: CString
-        + 4 // type_length: u32
-        + self.bug_type.len() + 1 // bug_type: CString
+        + self.content.len() + 5 // content: SizedCString
+        + self.bug_type.len() + 5 // bug_type: SizedCString
     }
 }
 

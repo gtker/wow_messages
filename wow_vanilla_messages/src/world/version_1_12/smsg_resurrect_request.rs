@@ -9,15 +9,13 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_RESURRECT_REQUEST = 0x015B {
 ///     Guid guid;
-///     u32 name_length;
-///     CString name;
+///     SizedCString name;
 ///     u8 caster_is_spirit_healer;
 ///     u8 respect_resurrection_timer;
 /// }
 /// ```
 pub struct SMSG_RESURRECT_REQUEST {
     pub guid: Guid,
-    pub name_length: u32,
     pub name: String,
     pub caster_is_spirit_healer: u8,
     pub respect_resurrection_timer: u8,
@@ -28,10 +26,8 @@ impl ServerMessage for SMSG_RESURRECT_REQUEST {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // name_length: u32
-        w.write_all(&self.name_length.to_le_bytes())?;
-
-        // name: CString
+        // name: SizedCString
+        w.write_all(&(self.name.len() as u32).to_le_bytes())?;
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
@@ -54,13 +50,10 @@ impl ServerMessage for SMSG_RESURRECT_REQUEST {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // name_length: u32
-        let name_length = crate::util::read_u32_le(r)?;
-
-        // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
-
+        // name: SizedCString
+        let name = crate::util::read_u32_le(r)?;
+        let name = crate::util::read_sized_c_string_to_vec(r, name)?;
+        let name = String::from_utf8(name)?;;
         // caster_is_spirit_healer: u8
         let caster_is_spirit_healer = crate::util::read_u8_le(r)?;
 
@@ -69,7 +62,6 @@ impl ServerMessage for SMSG_RESURRECT_REQUEST {
 
         Ok(Self {
             guid,
-            name_length,
             name,
             caster_is_spirit_healer,
             respect_resurrection_timer,
@@ -81,8 +73,7 @@ impl ServerMessage for SMSG_RESURRECT_REQUEST {
 impl SMSG_RESURRECT_REQUEST {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
-        + 4 // name_length: u32
-        + self.name.len() + 1 // name: CString
+        + self.name.len() + 5 // name: SizedCString
         + 1 // caster_is_spirit_healer: u8
         + 1 // respect_resurrection_timer: u8
     }

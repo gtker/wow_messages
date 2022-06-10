@@ -2,8 +2,6 @@
 
 smsg SMSG_DEFENSE_MESSAGE = 0x033B {
     Map map;
-    /* TODO CString with length? */
-    u32 message_length;
-    CString message;
+    SizedCString message;
 }
 
