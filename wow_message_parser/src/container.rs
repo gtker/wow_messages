@@ -389,32 +389,14 @@ impl Container {
         sum
     }
 
-    fn add_field_name_to_vec<'a>(m: &'a StructMember, v: &mut Vec<&'a str>) {
-        match m {
-            StructMember::Definition(d) => {
-                v.push(d.name());
-            }
-            StructMember::IfStatement(statement) => {
-                for m in statement.all_members() {
-                    Self::add_field_name_to_vec(m, v);
-                }
-            }
-            StructMember::OptionalStatement(optional) => {
-                for m in &optional.members {
-                    Self::add_field_name_to_vec(m, v);
-                }
-            }
-        }
-    }
-
     pub fn panic_on_duplicate_field_names(&self) {
         let mut v = Vec::new();
 
-        for m in self.fields() {
-            Self::add_field_name_to_vec(m, &mut v);
+        for d in self.all_definitions() {
+            v.push(d.name());
         }
-
         v.sort_unstable();
+
         let mut previous_name = "";
         for e in v {
             if e == previous_name {
