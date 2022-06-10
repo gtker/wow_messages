@@ -1,4 +1,4 @@
-use crate::container::{Container, ContainerType, StructMember};
+use crate::container::{Container, ContainerType};
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
@@ -90,26 +90,16 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
 }
 
 fn can_derive_default(e: &Container) -> bool {
-    fn inner(m: &StructMember) -> bool {
-        if let StructMember::Definition(d) = m {
-            if let Type::Array(array) = d.ty() {
-                if let ArrayType::Integer(_) = array.ty() {
-                    if let ArraySize::Fixed(size) = array.size() {
-                        if size > 32 {
-                            return false;
-                        }
+    for d in e.all_definitions() {
+        if let Type::Array(array) = d.ty() {
+            match (array.ty(), array.size()) {
+                (ArrayType::Integer(_), ArraySize::Fixed(size)) => {
+                    if size > 32 {
+                        return false;
                     }
                 }
+                (_, _) => {}
             }
-        }
-
-        true
-    }
-
-    for m in e.fields() {
-        match inner(m) {
-            true => {}
-            false => return false,
         }
     }
 
