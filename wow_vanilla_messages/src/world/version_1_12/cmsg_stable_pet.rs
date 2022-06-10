@@ -30,6 +30,10 @@ impl ClientMessage for CMSG_STABLE_PET {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // npc_guid: Guid
         let npc_guid = Guid::read(r)?;
 

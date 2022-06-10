@@ -3,7 +3,9 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
-use crate::rust_printer::{Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME};
+use crate::rust_printer::{
+    Writer, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+};
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
 pub mod print_read;
@@ -62,6 +64,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                         print_write::print_write(s, e, o, it.prefix(), it.postfix());
                     },
                     |s, it| {
+                        test_for_invalid_size(s, e, o);
                         print_read::print_read(s, e, o, it.prefix(), it.postfix());
                     },
                     Some(e.sizes(o)),
@@ -83,6 +86,17 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 
     //print_size(s, e, o);
     print_size_rust_view(s, e.rust_object(), "self.");
+}
+
+fn test_for_invalid_size(s: &mut Writer, e: &Container, o: &Objects) {
+    if e.is_constant_sized() {
+        s.bodyn(format!("if body_size != {}", e.sizes(o).maximum()), |s| {
+            s.wln(format!(
+                "return Err({}::InvalidSize(body_size as u32));",
+                PARSE_ERROR
+            ));
+        })
+    }
 }
 
 fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {

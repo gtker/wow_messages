@@ -37,6 +37,10 @@ impl ServerMessage for SMSG_PLAY_OBJECT_SOUND {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // sound_id: u32
         let sound_id = crate::util::read_u32_le(r)?;
 

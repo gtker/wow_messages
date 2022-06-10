@@ -30,6 +30,10 @@ impl ServerMessage for SMSG_STABLE_RESULT {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // result: StableResult
         let result: StableResult = crate::util::read_u8_le(r)?.try_into()?;
 

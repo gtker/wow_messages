@@ -43,6 +43,10 @@ impl ClientMessage for CMSG_ITEM_TEXT_QUERY {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // item_text_id: u32
         let item_text_id = crate::util::read_u32_le(r)?;
 

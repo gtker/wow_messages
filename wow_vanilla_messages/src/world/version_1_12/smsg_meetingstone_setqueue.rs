@@ -36,6 +36,10 @@ impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // area: Area
         let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 

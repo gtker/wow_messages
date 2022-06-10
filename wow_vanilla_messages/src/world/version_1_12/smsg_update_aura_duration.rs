@@ -34,6 +34,10 @@ impl ServerMessage for SMSG_UPDATE_AURA_DURATION {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // aura_slot: u8
         let aura_slot = crate::util::read_u8_le(r)?;
 

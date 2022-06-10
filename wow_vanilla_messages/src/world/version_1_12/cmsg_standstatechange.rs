@@ -30,6 +30,10 @@ impl ClientMessage for CMSG_STANDSTATECHANGE {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // animation_state: UnitStandState
         let animation_state: UnitStandState = (crate::util::read_u32_le(r)? as u8).try_into()?;
 

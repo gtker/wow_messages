@@ -40,6 +40,10 @@ impl ClientMessage for CMSG_LOOT_MASTER_GIVE {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 17 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // loot_guid: Guid
         let loot_guid = Guid::read(r)?;
 

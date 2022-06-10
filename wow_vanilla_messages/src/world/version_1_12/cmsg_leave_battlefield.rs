@@ -41,6 +41,10 @@ impl ClientMessage for CMSG_LEAVE_BATTLEFIELD {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
 

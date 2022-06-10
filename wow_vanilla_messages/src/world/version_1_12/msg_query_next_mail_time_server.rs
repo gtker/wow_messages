@@ -35,6 +35,10 @@ impl ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // unread_mails: f32
         let unread_mails = crate::util::read_f32_le(r)?;
         Ok(Self {

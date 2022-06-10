@@ -30,6 +30,10 @@ impl ServerMessage for SMSG_UPDATE_LAST_INSTANCE {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 

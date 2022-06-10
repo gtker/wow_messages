@@ -37,6 +37,10 @@ impl ServerMessage for SMSG_PAUSE_MIRROR_TIMER {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // timer: TimerType
         let timer: TimerType = crate::util::read_u32_le(r)?.try_into()?;
 

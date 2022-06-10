@@ -29,6 +29,10 @@ impl ServerMessage for SMSG_DUEL_COUNTDOWN {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // time_in_seconds: u32
         let time_in_seconds = crate::util::read_u32_le(r)?;
 

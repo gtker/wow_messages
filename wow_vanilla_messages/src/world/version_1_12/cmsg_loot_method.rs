@@ -42,6 +42,10 @@ impl ClientMessage for CMSG_LOOT_METHOD {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 10 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // loot_setting: GroupLootSetting
         let loot_setting: GroupLootSetting = (crate::util::read_u32_le(r)? as u8).try_into()?;
 

@@ -69,6 +69,10 @@ impl ServerMessage for SMSG_TUTORIAL_FLAGS {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 32 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // tutorial_data0: u32
         let tutorial_data0 = crate::util::read_u32_le(r)?;
 

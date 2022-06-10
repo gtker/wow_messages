@@ -30,6 +30,10 @@ impl ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // result: GuildEmblemResult
         let result: GuildEmblemResult = crate::util::read_u32_le(r)?.try_into()?;
 

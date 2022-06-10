@@ -35,6 +35,10 @@ impl ServerMessage for SMSG_PET_UNLEARN_CONFIRM {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // pet_guid: Guid
         let pet_guid = Guid::read(r)?;
 

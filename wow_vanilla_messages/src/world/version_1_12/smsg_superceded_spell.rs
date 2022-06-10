@@ -34,6 +34,10 @@ impl ServerMessage for SMSG_SUPERCEDED_SPELL {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // new_spell_id: u16
         let new_spell_id = crate::util::read_u16_le(r)?;
 

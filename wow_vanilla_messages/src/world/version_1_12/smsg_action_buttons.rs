@@ -31,6 +31,10 @@ impl ServerMessage for SMSG_ACTION_BUTTONS {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 480 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // data: u32[120]
         let mut data = [u32::default(); 120];
         for i in data.iter_mut() {

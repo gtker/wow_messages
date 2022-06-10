@@ -39,6 +39,10 @@ impl ServerMessage for SMSG_SET_PCT_SPELL_MODIFIER {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 6 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // eff: u8
         let eff = crate::util::read_u8_le(r)?;
 

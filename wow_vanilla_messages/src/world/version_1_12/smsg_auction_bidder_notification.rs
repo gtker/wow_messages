@@ -62,6 +62,10 @@ impl ServerMessage for SMSG_AUCTION_BIDDER_NOTIFICATION {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 32 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // auction_house_id: u32
         let auction_house_id = crate::util::read_u32_le(r)?;
 

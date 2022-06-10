@@ -36,6 +36,10 @@ impl ServerMessage for SMSG_LOGIN_SETTIMESPEED {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // secs_to_time_bit_field: u32
         let secs_to_time_bit_field = crate::util::read_u32_le(r)?;
 

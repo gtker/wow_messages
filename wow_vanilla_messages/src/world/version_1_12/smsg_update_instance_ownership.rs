@@ -31,6 +31,10 @@ impl ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // has_been_saved: u32
         let has_been_saved = crate::util::read_u32_le(r)?;
 

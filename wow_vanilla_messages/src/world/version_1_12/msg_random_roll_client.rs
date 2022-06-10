@@ -34,6 +34,10 @@ impl ClientMessage for MSG_RANDOM_ROLL_Client {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // minimum: u32
         let minimum = crate::util::read_u32_le(r)?;
 

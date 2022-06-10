@@ -35,6 +35,10 @@ impl ClientMessage for CMSG_PETITION_QUERY {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // guild_guid: u32
         let guild_guid = crate::util::read_u32_le(r)?;
 

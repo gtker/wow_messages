@@ -46,6 +46,10 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 28 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // time_in_msec: u64
         let time_in_msec = crate::util::read_u64_le(r)?;
 

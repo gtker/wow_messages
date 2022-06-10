@@ -1,10 +1,11 @@
-use std::fmt::{format, Display, Formatter};
+use std::fmt::{format, Display, Formatter, Write};
 
 #[derive(Debug)]
 pub enum ParseError {
     Io(std::io::Error),
     Enum(EnumError),
     String(std::string::FromUtf8Error),
+    InvalidSize(u32),
 }
 
 impl Display for ParseError {
@@ -13,6 +14,9 @@ impl Display for ParseError {
             ParseError::Io(i) => i.fmt(f),
             ParseError::Enum(i) => i.fmt(f),
             ParseError::String(i) => i.fmt(f),
+            ParseError::InvalidSize(i) => {
+                f.write_fmt(format_args!("message has invalid size: '{}'", i))
+            }
         }
     }
 }

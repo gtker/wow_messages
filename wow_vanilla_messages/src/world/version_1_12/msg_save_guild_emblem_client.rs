@@ -55,6 +55,10 @@ impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 28 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // vendor: Guid
         let vendor = Guid::read(r)?;
 

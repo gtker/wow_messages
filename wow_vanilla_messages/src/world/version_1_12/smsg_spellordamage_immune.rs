@@ -47,6 +47,10 @@ impl ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 21 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // caster_guid: Guid
         let caster_guid = Guid::read(r)?;
 

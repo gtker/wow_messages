@@ -29,6 +29,10 @@ impl ServerMessage for SMSG_ZONE_UNDER_ATTACK {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // zone_id: u32
         let zone_id = crate::util::read_u32_le(r)?;
 

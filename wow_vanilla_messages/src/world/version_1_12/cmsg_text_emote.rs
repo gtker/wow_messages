@@ -41,6 +41,10 @@ impl ClientMessage for CMSG_TEXT_EMOTE {
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
         // text_emote: u32
         let text_emote = crate::util::read_u32_le(r)?;
 
