@@ -1142,7 +1142,7 @@ pub fn create_struct_member(
                             if !c.has_constant_size(o) {
                                 definition_constantly_sized = false;
                             }
-                            inner_sizes += c.sizes(o);
+                            inner_sizes += c.sizes();
                         }
                         ArrayType::PackedGuid => inner_sizes
                             .inc(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into()),
@@ -1213,7 +1213,7 @@ pub fn create_struct_member(
 
                             RustType::Struct {
                                 ty_name: s.clone(),
-                                sizes: c.sizes(o),
+                                sizes: c.sizes(),
                             }
                         }
                         ObjectType::CLogin | ObjectType::SLogin => {
@@ -1321,7 +1321,7 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
         name: e.name().to_string(),
         members: v,
         optional,
-        sizes: e.sizes(o),
+        sizes: e.sizes(),
         tests: e.tests().to_vec(),
         tags: e.tags().clone(),
         file_info: e.file_info().clone(),

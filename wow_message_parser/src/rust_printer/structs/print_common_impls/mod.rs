@@ -30,7 +30,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
             );
         }
         ContainerType::CLogin(opcode) | ContainerType::SLogin(opcode) => {
-            let mut sizes = e.sizes(o);
+            let mut sizes = e.sizes();
             let opcode_size = 1;
             sizes.inc_both(opcode_size);
 
@@ -64,10 +64,10 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                         print_write::print_write(s, e, o, it.prefix(), it.postfix());
                     },
                     |s, it| {
-                        test_for_invalid_size(s, e, o);
+                        test_for_invalid_size(s, e);
                         print_read::print_read(s, e, o, it.prefix(), it.postfix());
                     },
-                    Some(e.sizes(o)),
+                    Some(e.sizes()),
                 );
             };
 
@@ -88,9 +88,9 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_size_rust_view(s, e.rust_object(), "self.");
 }
 
-fn test_for_invalid_size(s: &mut Writer, e: &Container, o: &Objects) {
+fn test_for_invalid_size(s: &mut Writer, e: &Container) {
     if e.is_constant_sized() {
-        s.bodyn(format!("if body_size != {}", e.sizes(o).maximum()), |s| {
+        s.bodyn(format!("if body_size != {}", e.sizes().maximum()), |s| {
             s.wln(format!(
                 "return Err({}::InvalidSize(body_size as u32));",
                 PARSE_ERROR

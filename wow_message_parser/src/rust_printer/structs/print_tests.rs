@@ -185,10 +185,10 @@ fn print_test_case(
             ));
         }
         true => {
-            let size = if e.sizes(o).maximum() == 0 {
+            let size = if e.sizes().maximum() == 0 {
                 "".to_string()
             } else {
-                format!("{} + ", e.sizes(o).maximum())
+                format!("{} + ", e.sizes().maximum())
             };
 
             s.wln(format!(
