@@ -1,8 +1,6 @@
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
-use std::time::Duration;
 use tokio::net::{TcpListener, TcpStream};
-use tokio::time::sleep;
 use wow_srp::header_crypto::ProofSeed;
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::server::SrpServer;
@@ -209,6 +207,13 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .unwrap();
 
     loop {
-        sleep(Duration::new(10, 0)).await;
+        let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, &mut encryption)
+            .await
+            .unwrap();
+        match opcode {
+            o => {
+                dbg!(o);
+            }
+        }
     }
 }
