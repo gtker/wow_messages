@@ -745,14 +745,12 @@ impl Container {
     }
 
     pub fn get_type_of_variable(&self, variable_name: &str) -> Type {
-        for m in &self.members {
-            match get_type(variable_name, m) {
-                None => {}
-                Some(t) => {
-                    return t;
-                }
+        for d in self.all_definitions() {
+            if d.name() == variable_name {
+                return d.ty().clone();
             }
         }
+
         panic!("unable to find type {}", variable_name)
     }
 
@@ -1120,38 +1118,6 @@ impl Sizes {
 impl AddAssign for Sizes {
     fn add_assign(&mut self, rhs: Self) {
         self.inc(rhs.minimum, rhs.maximum);
-    }
-}
-
-fn get_type(variable_name: &str, m: &StructMember) -> Option<Type> {
-    match m {
-        StructMember::Definition(d) => {
-            if d.name == variable_name {
-                Some(d.struct_type.clone())
-            } else {
-                None
-            }
-        }
-        StructMember::IfStatement(statement) => {
-            for m in statement.all_members() {
-                match get_type(variable_name, m) {
-                    None => {}
-                    Some(t) => {
-                        return Some(t);
-                    }
-                }
-            }
-
-            None
-        }
-        StructMember::OptionalStatement(optional) => {
-            for m in &optional.members {
-                if let Some(t) = get_type(variable_name, m) {
-                    return Some(t);
-                }
-            }
-            None
-        }
     }
 }
 
