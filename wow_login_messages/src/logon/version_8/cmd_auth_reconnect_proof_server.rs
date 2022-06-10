@@ -27,7 +27,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
     /// | Hex | `0x00` |
     /// | Original | `0` |
     ///
-    /// **This field is not in the struct, but is written as this constant value.**
+    /// **This field is not in the Rust struct, but is written as this constant value.**
     pub const PADDING_VALUE: u16 = 0x00;
 
 }

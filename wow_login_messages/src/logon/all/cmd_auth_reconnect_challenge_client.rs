@@ -54,7 +54,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
     /// | Hex | `0x576f57` |
     /// | Original | `"\0WoW"` |
     ///
-    /// **This field is not in the struct, but is written as this constant value.**
+    /// **This field is not in the Rust struct, but is written as this constant value.**
     pub const GAME_NAME_VALUE: u32 = 0x576f57;
 
 }

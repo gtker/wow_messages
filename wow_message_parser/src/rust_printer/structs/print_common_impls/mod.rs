@@ -132,7 +132,7 @@ pub fn print_constant_member(
     s.docc(format!("| Hex | `{value:#04x}` |", value = value));
     s.docc(format!("| Original | `{value}` |", value = original_value));
     s.docc_newline();
-    s.docc("**This field is not in the struct, but is written as this constant value.**");
+    s.docc("**This field is not in the Rust struct, but is written as this constant value.**");
 
     s.wln(format!(
         "pub const {name}_VALUE: {ty} = {value:#04x};\n",

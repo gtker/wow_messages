@@ -72,7 +72,7 @@ impl Character {
     /// | Hex | `0x00` |
     /// | Original | `0` |
     ///
-    /// **This field is not in the struct, but is written as this constant value.**
+    /// **This field is not in the Rust struct, but is written as this constant value.**
     pub const FIRST_BAG_DISPLAY_ID_VALUE: u32 = 0x00;
 
     /// The field `first_bag_inventory_id` is constantly specified to be:
@@ -83,7 +83,7 @@ impl Character {
     /// | Hex | `0x00` |
     /// | Original | `0` |
     ///
-    /// **This field is not in the struct, but is written as this constant value.**
+    /// **This field is not in the Rust struct, but is written as this constant value.**
     pub const FIRST_BAG_INVENTORY_ID_VALUE: u8 = 0x00;
 
 }

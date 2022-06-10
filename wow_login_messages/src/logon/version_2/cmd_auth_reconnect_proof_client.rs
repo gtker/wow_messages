@@ -30,7 +30,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
     /// | Hex | `0x00` |
     /// | Original | `0` |
     ///
-    /// **This field is not in the struct, but is written as this constant value.**
+    /// **This field is not in the Rust struct, but is written as this constant value.**
     pub const KEY_COUNT_VALUE: u8 = 0x00;
 
 }
