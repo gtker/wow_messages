@@ -92,13 +92,10 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
 fn can_derive_default(e: &Container) -> bool {
     for d in e.all_definitions() {
         if let Type::Array(array) = d.ty() {
-            match (array.ty(), array.size()) {
-                (ArrayType::Integer(_), ArraySize::Fixed(size)) => {
-                    if size > 32 {
-                        return false;
-                    }
+            if let (ArrayType::Integer(_), ArraySize::Fixed(size)) = (array.ty(), array.size()) {
+                if size > 32 {
+                    return false;
                 }
-                (_, _) => {}
             }
         }
     }

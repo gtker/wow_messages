@@ -212,10 +212,6 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
         let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, &mut encryption)
             .await
             .unwrap();
-        match opcode {
-            o => {
-                dbg!(o);
-            }
-        }
+        dbg!(opcode);
     }
 }

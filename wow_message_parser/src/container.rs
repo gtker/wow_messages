@@ -648,9 +648,8 @@ impl Container {
 
     pub fn contains_update_mask(&self) -> bool {
         for d in self.all_definitions() {
-            match d.ty() {
-                Type::UpdateMask => return true,
-                _ => {}
+            if d.ty() == &Type::UpdateMask {
+                return true;
             }
         }
 
@@ -659,9 +658,8 @@ impl Container {
 
     pub fn contains_aura_mask(&self) -> bool {
         for d in self.all_definitions() {
-            match d.ty() {
-                Type::AuraMask => return true,
-                _ => {}
+            if d.ty() == &Type::AuraMask {
+                return true;
             }
         }
 
@@ -997,10 +995,11 @@ impl Container {
     fn check_values(&self, o: &Objects) {
         for d in self.all_definitions() {
             match &d.ty() {
-                Type::Array(a) => match &a.ty() {
-                    ArrayType::Complex(c) => o.contains_complex_type(c, self.tags(), d.name()),
-                    _ => {}
-                },
+                Type::Array(a) => {
+                    if let ArrayType::Complex(c) = &a.ty() {
+                        o.contains_complex_type(c, self.tags(), d.name())
+                    }
+                }
                 Type::Identifier { s: i, .. } => {
                     o.contains_complex_type(i, self.tags(), d.name());
 
