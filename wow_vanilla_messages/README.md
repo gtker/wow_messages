@@ -17,7 +17,7 @@ Or add it with [cargo edit](https://github.com/killercup/cargo-edit):
 cargo add wow_login_messages
 ```
 
-And then [check out the docs](https://docs.rs/wow_srp/latest/wow_vanilla_messages/).
+And then [check out the docs](https://docs.rs/wow_vanilla_messages/latest/).
 
 ## Design Decisions
 

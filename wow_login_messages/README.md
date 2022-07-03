@@ -19,7 +19,7 @@ cargo add --features 'sync' wow_login_messages
 
 For `async` support see the Features section.
 
-And then [check out the docs](https://docs.rs/wow_srp/latest/wow_login_messages/).
+And then [check out the docs](https://docs.rs/wow_login_messages/latest/).
 
 ## Features
 
