@@ -1200,7 +1200,7 @@ pub const FIELDS: [MemberType; 290] = [
     MemberType::new(UpdateMaskType::Player, "FARSIGHT", 0x2C8, 2, UfType::Guid),
     MemberType::new(
         UpdateMaskType::Player,
-        "_FIELD_COMBO_TARGET",
+        "FIELD_COMBO_TARGET",
         0x2CA,
         2,
         UfType::Guid,

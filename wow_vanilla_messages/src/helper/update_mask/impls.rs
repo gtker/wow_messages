@@ -1930,7 +1930,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player__FIELD_COMBO_TARGET(mut self, v: Guid) -> Self {
+    pub fn set_player_FIELD_COMBO_TARGET(mut self, v: Guid) -> Self {
         self.header_set(714);
         self.header_set(715);
         self.values.insert(714, v.guid() as u32);
