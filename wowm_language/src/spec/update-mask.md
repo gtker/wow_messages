@@ -173,7 +173,7 @@ Fields that all players have:
 |`PLAYER_FLAGS`| 0x00be | 1 | INT |
 |`PLAYER_GUILDID`| 0x00bf | 1 | INT |
 |`PLAYER_GUILDRANK`| 0x00c0 | 1 | INT |
-|`PLAYER_BYTES`| 0x00c1 | 1 | BYTES |
+|`PLAYER_FEATURES`| 0x00c1 | 1 | BYTES |
 |`PLAYER_BYTES_2`| 0x00c2 | 1 | BYTES |
 |`PLAYER_BYTES_3`| 0x00c3 | 1 | BYTES |
 |`PLAYER_DUEL_TEAM`| 0x00c4 | 1 | INT |

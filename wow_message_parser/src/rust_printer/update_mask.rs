@@ -581,7 +581,7 @@ pub const FIELDS: [MemberType; 296] = [
     MemberType::new(UpdateMaskType::Player, "FLAGS", 0xBE, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Player, "GUILDID", 0xBF, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Player, "GUILDRANK", 0xC0, 1, UfType::Int),
-    MemberType::new(UpdateMaskType::Player, "BYTES", 0xC1, 1, UfType::Bytes),
+    MemberType::new(UpdateMaskType::Player, "FEATURES", 0xC1, 1, UfType::Bytes),
     MemberType::new(UpdateMaskType::Player, "BYTES_2", 0xC2, 1, UfType::Bytes),
     MemberType::new(UpdateMaskType::Player, "BYTES_3", 0xC3, 1, UfType::Bytes),
     MemberType::new(UpdateMaskType::Player, "DUEL_TEAM", 0xC4, 1, UfType::Int),

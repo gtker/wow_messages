@@ -1296,7 +1296,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_player_FEATURES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(193);
         self.values.insert(193, u32::from_le_bytes([a, b, c, d]));
         self
