@@ -53,6 +53,10 @@ pub fn print_login_opcodes(
     s
 }
 
+fn any_container_is_pure_movement_info(v: &[&Container]) -> bool {
+    v.iter().any(|a| a.is_pure_movement_info())
+}
+
 pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType) {
     match container_type {
         ContainerType::SLogin(_) => {
@@ -79,6 +83,13 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
             s.wln(TOKIO_IMPORT);
             s.wln(CFG_ASYNC_ASYNC_STD);
             s.wln(ASYNC_STD_IMPORT);
+
+            if any_container_is_pure_movement_info(v) {
+                s.wln(format!(
+                    "use {module_name}::MovementInfo;",
+                    module_name = get_import_path(v.first().unwrap().tags())
+                ));
+            }
         }
         _ => {}
     }
@@ -243,6 +254,24 @@ pub fn common_impls_world(
         for it in ImplType::types() {
             world_common_impls_read_write(s, cd, size, opcode_size, EXPECTED_OPCODE_ERROR, it);
         }
+
+        if any_container_is_pure_movement_info(v) {
+            world_movement_info(s, v);
+        }
+    });
+}
+
+fn world_movement_info(s: &mut Writer, v: &[&Container]) {
+    s.funcn_pub("movement_info(&self)", "Option<&MovementInfo>", |s| {
+        s.body("match self", |s| {
+            for container in v {
+                if container.is_pure_movement_info() {
+                    s.wln(format!("Self::{}(c) => Some(&c.info),", container.name()));
+                }
+            }
+
+            s.wln("_ => None,");
+        });
     });
 }
 

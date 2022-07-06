@@ -5,6 +5,7 @@ use wow_srp::header_crypto::{Decrypter, Encrypter};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
+use crate::world::version_1_12::MovementInfo;
 use crate::world::version_1_12::MSG_MOVE_START_FORWARD;
 use crate::world::version_1_12::MSG_MOVE_START_BACKWARD;
 use crate::world::version_1_12::MSG_MOVE_STOP;
@@ -978,6 +979,34 @@ impl ClientOpcodeMessage {
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
         Self::read_opcodes(header.opcode, body_size, &buf)
+    }
+
+    pub fn movement_info(&self) -> Option<&MovementInfo> {
+        match self {
+            Self::MSG_MOVE_START_FORWARD(c) => Some(&c.info),
+            Self::MSG_MOVE_START_BACKWARD(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP(c) => Some(&c.info),
+            Self::MSG_MOVE_START_STRAFE_LEFT(c) => Some(&c.info),
+            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP_STRAFE(c) => Some(&c.info),
+            Self::MSG_MOVE_JUMP(c) => Some(&c.info),
+            Self::MSG_MOVE_START_TURN_LEFT(c) => Some(&c.info),
+            Self::MSG_MOVE_START_TURN_RIGHT(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP_TURN(c) => Some(&c.info),
+            Self::MSG_MOVE_START_PITCH_UP(c) => Some(&c.info),
+            Self::MSG_MOVE_START_PITCH_DOWN(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP_PITCH(c) => Some(&c.info),
+            Self::MSG_MOVE_SET_RUN_MODE(c) => Some(&c.info),
+            Self::MSG_MOVE_SET_WALK_MODE(c) => Some(&c.info),
+            Self::MSG_MOVE_FALL_LAND(c) => Some(&c.info),
+            Self::MSG_MOVE_START_SWIM(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP_SWIM(c) => Some(&c.info),
+            Self::MSG_MOVE_SET_FACING(c) => Some(&c.info),
+            Self::MSG_MOVE_SET_PITCH(c) => Some(&c.info),
+            Self::MSG_MOVE_HEARTBEAT(c) => Some(&c.info),
+            Self::CMSG_MOVE_FALL_RESET(c) => Some(&c.info),
+            _ => None,
+        }
     }
 
 }
@@ -2045,6 +2074,33 @@ impl ServerOpcodeMessage {
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
         Self::read_opcodes(header.opcode, body_size, &buf)
+    }
+
+    pub fn movement_info(&self) -> Option<&MovementInfo> {
+        match self {
+            Self::MSG_MOVE_START_FORWARD(c) => Some(&c.info),
+            Self::MSG_MOVE_START_BACKWARD(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP(c) => Some(&c.info),
+            Self::MSG_MOVE_START_STRAFE_LEFT(c) => Some(&c.info),
+            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP_STRAFE(c) => Some(&c.info),
+            Self::MSG_MOVE_JUMP(c) => Some(&c.info),
+            Self::MSG_MOVE_START_TURN_LEFT(c) => Some(&c.info),
+            Self::MSG_MOVE_START_TURN_RIGHT(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP_TURN(c) => Some(&c.info),
+            Self::MSG_MOVE_START_PITCH_UP(c) => Some(&c.info),
+            Self::MSG_MOVE_START_PITCH_DOWN(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP_PITCH(c) => Some(&c.info),
+            Self::MSG_MOVE_SET_RUN_MODE(c) => Some(&c.info),
+            Self::MSG_MOVE_SET_WALK_MODE(c) => Some(&c.info),
+            Self::MSG_MOVE_FALL_LAND(c) => Some(&c.info),
+            Self::MSG_MOVE_START_SWIM(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP_SWIM(c) => Some(&c.info),
+            Self::MSG_MOVE_SET_FACING(c) => Some(&c.info),
+            Self::MSG_MOVE_SET_PITCH(c) => Some(&c.info),
+            Self::MSG_MOVE_HEARTBEAT(c) => Some(&c.info),
+            _ => None,
+        }
     }
 
 }

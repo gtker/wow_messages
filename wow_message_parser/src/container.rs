@@ -71,6 +71,25 @@ impl Container {
         None
     }
 
+    pub fn is_pure_movement_info(&self) -> bool {
+        let only_one_field = self.fields().len() == 1;
+        if only_one_field {
+            let field = self.fields().first().unwrap();
+            match field {
+                StructMember::Definition(d) => {
+                    d.name() == "info"
+                        && match d.ty() {
+                            Type::Identifier { s, .. } => s == "MovementInfo",
+                            _ => false,
+                        }
+                }
+                _ => false,
+            }
+        } else {
+            false
+        }
+    }
+
     pub fn contains_definer(&self, ty_name: &str) -> DefinerUsage {
         fn inner(m: &StructMember, ty_name: &str, variable_name: &str) -> DefinerUsage {
             match m {
