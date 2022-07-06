@@ -143,7 +143,13 @@ Fields that units have (+ the object fields):
 |`UNIT_STAMINA`                              | 0x98 | 1  | INT      |
 |`UNIT_INTELLECT`                            | 0x99 | 1  | INT      |
 |`UNIT_SPIRIT`                               | 0x9A | 1  | INT      |
-|`UNIT_RESISTANCES`                          | 0x9B | 7  | INT      |
+|`UNIT_NORMAL_RESISTANCE`                    | 0x9B | 1  | INT      |
+|`UNIT_HOLY_RESISTANCE`                      | 0x9C | 1  | INT      |
+|`UNIT_FIRE_RESISTANCE`                      | 0x9D | 1  | INT      |
+|`UNIT_NATURE_RESISTANCE`                    | 0x9E | 1  | INT      |
+|`UNIT_FROST_RESISTANCE`                     | 0x9F | 1  | INT      |
+|`UNIT_SHADOW_RESISTANCE`                    | 0xA0 | 1  | INT      |
+|`UNIT_ARCANE_RESISTANCE`                    | 0xA1 | 1  | INT      |
 |`UNIT_BASE_MANA`                            | 0xA2 | 1  | INT      |
 |`UNIT_BASE_HEALTH`                          | 0xA3 | 1  | INT      |
 |`UNIT_BYTES_2`                              | 0xA4 | 1  | BYTES    |

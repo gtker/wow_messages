@@ -206,7 +206,7 @@ impl MemberType {
     }
 }
 
-pub const FIELDS: [MemberType; 290] = [
+pub const FIELDS: [MemberType; 296] = [
     MemberType::new(UpdateMaskType::Object, "GUID", 0x0, 2, UfType::Guid),
     MemberType::new(UpdateMaskType::Object, "ENTRY", 0x3, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Object, "SCALE_X", 0x4, 1, UfType::Float),
@@ -387,7 +387,55 @@ pub const FIELDS: [MemberType; 290] = [
     MemberType::new(UpdateMaskType::Unit, "STAMINA", 0x98, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Unit, "INTELLECT", 0x99, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Unit, "SPIRIT", 0x9A, 1, UfType::Int),
-    MemberType::new(UpdateMaskType::Unit, "RESISTANCES", 0x9B, 7, UfType::Int),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "NORMAL_RESISTANCE",
+        0x9B,
+        1,
+        UfType::Int,
+    ),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "HOLY_RESISTANCE",
+        0x9C,
+        1,
+        UfType::Int,
+    ),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "FIRE_RESISTANCE",
+        0x9D,
+        1,
+        UfType::Int,
+    ),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "NATURE_RESISTANCE",
+        0x9E,
+        1,
+        UfType::Int,
+    ),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "FROST_RESISTANCE",
+        0x9F,
+        1,
+        UfType::Int,
+    ),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "SHADOW_RESISTANCE",
+        0xA0,
+        1,
+        UfType::Int,
+    ),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "ARCANE_RESISTANCE",
+        0xA1,
+        1,
+        UfType::Int,
+    ),
     MemberType::new(UpdateMaskType::Unit, "BASE_MANA", 0xA2, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Unit, "BASE_HEALTH", 0xA3, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Unit, "BYTES_2", 0xA4, 1, UfType::Bytes),

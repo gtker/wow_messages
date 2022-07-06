@@ -637,9 +637,45 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_RESISTANCES(mut self, v: i32) -> Self {
+    pub fn set_unit_NORMAL_RESISTANCE(mut self, v: i32) -> Self {
         self.header_set(155);
         self.values.insert(155, v as u32);
+        self
+    }
+
+    pub fn set_unit_HOLY_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(156);
+        self.values.insert(156, v as u32);
+        self
+    }
+
+    pub fn set_unit_FIRE_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(157);
+        self.values.insert(157, v as u32);
+        self
+    }
+
+    pub fn set_unit_NATURE_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(158);
+        self.values.insert(158, v as u32);
+        self
+    }
+
+    pub fn set_unit_FROST_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(159);
+        self.values.insert(159, v as u32);
+        self
+    }
+
+    pub fn set_unit_SHADOW_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(160);
+        self.values.insert(160, v as u32);
+        self
+    }
+
+    pub fn set_unit_ARCANE_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(161);
+        self.values.insert(161, v as u32);
         self
     }
 
@@ -1114,9 +1150,45 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_RESISTANCES(mut self, v: i32) -> Self {
+    pub fn set_unit_NORMAL_RESISTANCE(mut self, v: i32) -> Self {
         self.header_set(155);
         self.values.insert(155, v as u32);
+        self
+    }
+
+    pub fn set_unit_HOLY_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(156);
+        self.values.insert(156, v as u32);
+        self
+    }
+
+    pub fn set_unit_FIRE_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(157);
+        self.values.insert(157, v as u32);
+        self
+    }
+
+    pub fn set_unit_NATURE_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(158);
+        self.values.insert(158, v as u32);
+        self
+    }
+
+    pub fn set_unit_FROST_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(159);
+        self.values.insert(159, v as u32);
+        self
+    }
+
+    pub fn set_unit_SHADOW_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(160);
+        self.values.insert(160, v as u32);
+        self
+    }
+
+    pub fn set_unit_ARCANE_RESISTANCE(mut self, v: i32) -> Self {
+        self.header_set(161);
+        self.values.insert(161, v as u32);
         self
     }
 
