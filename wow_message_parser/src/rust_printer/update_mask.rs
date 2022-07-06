@@ -1,9 +1,77 @@
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::rust_printer::Writer;
 use std::fmt::{Display, Formatter};
+use std::fs::read_to_string;
 use std::path::Path;
 
+pub fn print_update_mask_docs() {
+    const UPDATE_MASK_FILE: &str = "wowm_language/src/spec/update-mask.md";
+    const LOOKUP_TABLE: &str = "## Lookup Table\n";
+    let contents = read_to_string(UPDATE_MASK_FILE).unwrap();
+
+    let update_types = [
+        ("object", UpdateMaskType::Object),
+        ("item", UpdateMaskType::Item),
+        ("container", UpdateMaskType::Container),
+        ("unit", UpdateMaskType::Unit),
+        ("player", UpdateMaskType::Player),
+        ("gameobject", UpdateMaskType::GameObject),
+        ("dynamicobject", UpdateMaskType::DynamicObject),
+        ("corpse", UpdateMaskType::Corpse),
+    ];
+
+    let (s, _) = contents.split_once(LOOKUP_TABLE).unwrap();
+    let mut s = s.to_string();
+    s.push_str(LOOKUP_TABLE);
+    s.push_str("Taken from [vmangos](https://github.com/vmangos/core/blob/4b2a5173b0ca4917dfe91aa7b87d84232fd7203c/src/game/Objects/UpdateFields_1_12_1.cpp#L5) with some modifications.\n\n");
+
+    for (name, u) in update_types {
+        s.push_str(&format!("Fields that all {}s have:\n\n", name));
+
+        s.push_str("| Name | Offset | Size | Type |\n");
+        s.push_str("|------|--------|------|------|\n");
+        for field in FIELDS {
+            if field.object_ty == u {
+                let ty = match field.ty {
+                    UfType::Guid => "GUID",
+                    UfType::Int => "INT",
+                    UfType::Float => "FLOAT",
+                    UfType::Bytes => "BYTES",
+                    UfType::BytesWithTypes(_, _, _, _) => "BYTES",
+                    UfType::TwoShort => "TWO_SHORT",
+                };
+
+                s.push_str(&format!(
+                    "|`{}_{}`| 0x{:04x?} | {} | {} |\n",
+                    name.to_uppercase(),
+                    field.name(),
+                    field.offset,
+                    field.size,
+                    ty
+                ));
+
+                if field.offset == 0 && field.ty == UfType::Guid {
+                    s.push_str(&format!(
+                        "|`{}_{}`| 0x{:04x?} | {} | {} |\n",
+                        name.to_uppercase(),
+                        "TYPE",
+                        2,
+                        1,
+                        "INT",
+                    ));
+                }
+            }
+        }
+
+        s.push_str("\n\n");
+    }
+
+    overwrite_if_not_same_contents(&s, Path::new(UPDATE_MASK_FILE));
+}
+
 pub fn print_update_mask() {
+    print_update_mask_docs();
+
     let update_types = [
         (
             "UpdateItem",
