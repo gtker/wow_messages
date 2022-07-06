@@ -84478,7 +84478,9 @@
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "description": "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm."
+            }
           }
         },
         {
@@ -84537,6 +84539,7 @@
         }
       ],
       "tags": {
+        "description": "Response to [CMSG_NAME_QUERY].",
         "version": {
           "type": "world",
           "versions": [
@@ -84655,7 +84658,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm",
-            "start_position": 12
+            "start_position": 16
           }
         },
         {
@@ -84764,7 +84767,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm",
-            "start_position": 30
+            "start_position": 34
           }
         }
       ],

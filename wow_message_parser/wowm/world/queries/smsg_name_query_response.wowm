@@ -3,10 +3,14 @@
 smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     Guid guid;
     CString character_name;
-    CString realm_name;
+    CString realm_name {
+        description = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
+    }
     (u32)Race race;
     (u32)Gender gender;
     (u32)Class class;
+} {
+    description = "Response to [CMSG_NAME_QUERY].";
 }
 
 test SMSG_NAME_QUERY_RESPONSE {
