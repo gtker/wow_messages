@@ -607,31 +607,31 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_STAT0(mut self, v: i32) -> Self {
+    pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
         self.header_set(150);
         self.values.insert(150, v as u32);
         self
     }
 
-    pub fn set_unit_STAT1(mut self, v: i32) -> Self {
+    pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
         self.header_set(151);
         self.values.insert(151, v as u32);
         self
     }
 
-    pub fn set_unit_STAT2(mut self, v: i32) -> Self {
+    pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
         self.header_set(152);
         self.values.insert(152, v as u32);
         self
     }
 
-    pub fn set_unit_STAT3(mut self, v: i32) -> Self {
+    pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
         self.header_set(153);
         self.values.insert(153, v as u32);
         self
     }
 
-    pub fn set_unit_STAT4(mut self, v: i32) -> Self {
+    pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
         self.header_set(154);
         self.values.insert(154, v as u32);
         self
@@ -1084,31 +1084,31 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_STAT0(mut self, v: i32) -> Self {
+    pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
         self.header_set(150);
         self.values.insert(150, v as u32);
         self
     }
 
-    pub fn set_unit_STAT1(mut self, v: i32) -> Self {
+    pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
         self.header_set(151);
         self.values.insert(151, v as u32);
         self
     }
 
-    pub fn set_unit_STAT2(mut self, v: i32) -> Self {
+    pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
         self.header_set(152);
         self.values.insert(152, v as u32);
         self
     }
 
-    pub fn set_unit_STAT3(mut self, v: i32) -> Self {
+    pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
         self.header_set(153);
         self.values.insert(153, v as u32);
         self
     }
 
-    pub fn set_unit_STAT4(mut self, v: i32) -> Self {
+    pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
         self.header_set(154);
         self.values.insert(154, v as u32);
         self

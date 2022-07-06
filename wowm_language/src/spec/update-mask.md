@@ -138,11 +138,11 @@ Fields that units have (+ the object fields):
 |`UNIT_UNIT_NPC_FLAGS`                       | 0x93 | 1  | INT      |
 |`UNIT_UNIT_NPC_EMOTESTATE`                  | 0x94 | 1  | INT      |
 |`UNIT_UNIT_TRAINING_POINTS`                 | 0x95 | 1  | TWO_SHORT|
-|`UNIT_STAT0`                                | 0x96 | 1  | INT      |
-|`UNIT_STAT1`                                | 0x97 | 1  | INT      |
-|`UNIT_STAT2`                                | 0x98 | 1  | INT      |
-|`UNIT_STAT3`                                | 0x99 | 1  | INT      |
-|`UNIT_STAT4`                                | 0x9A | 1  | INT      |
+|`UNIT_STRENGTH`                             | 0x96 | 1  | INT      |
+|`UNIT_AGILITY`                              | 0x97 | 1  | INT      |
+|`UNIT_STAMINA`                              | 0x98 | 1  | INT      |
+|`UNIT_INTELLECT`                            | 0x99 | 1  | INT      |
+|`UNIT_SPIRIT`                               | 0x9A | 1  | INT      |
 |`UNIT_RESISTANCES`                          | 0x9B | 7  | INT      |
 |`UNIT_BASE_MANA`                            | 0xA2 | 1  | INT      |
 |`UNIT_BASE_HEALTH`                          | 0xA3 | 1  | INT      |
