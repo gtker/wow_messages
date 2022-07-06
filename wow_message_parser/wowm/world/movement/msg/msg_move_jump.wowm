@@ -1,6 +1,11 @@
 #tag_all versions "1.12";
 
-msg MSG_MOVE_JUMP = 0x00BB {
+cmsg MSG_MOVE_JUMP_Client = 0x00BB {
+    MovementInfo info;
+}
+
+smsg MSG_MOVE_JUMP_Server = 0x00BB {
+    PackedGuid guid;
     MovementInfo info;
 }
 

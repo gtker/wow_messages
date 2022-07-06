@@ -1,6 +1,10 @@
 #tag_all versions "1.12";
 
-msg MSG_MOVE_HEARTBEAT = 0x00EE {
+cmsg MSG_MOVE_HEARTBEAT_Client = 0x00EE {
     MovementInfo info;
 }
 
+smsg MSG_MOVE_HEARTBEAT_Server = 0x00EE {
+    PackedGuid guid;
+    MovementInfo info;
+}

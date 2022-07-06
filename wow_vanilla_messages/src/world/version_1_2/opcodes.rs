@@ -83,6 +83,12 @@ impl ClientOpcodeMessage {
         Self::read_opcodes(header.opcode, body_size, &buf)
     }
 
+    pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
+        match self {
+            Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
+        }
+    }
+
 }
 
 use crate::world::version_1_2::SMSG_AUTH_CHALLENGE;
@@ -164,6 +170,13 @@ impl ServerOpcodeMessage {
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
         Self::read_opcodes(header.opcode, body_size, &buf)
+    }
+
+    pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
+        match self {
+            Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
+        }
     }
 
 }

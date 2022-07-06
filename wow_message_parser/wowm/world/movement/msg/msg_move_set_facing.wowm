@@ -1,6 +1,10 @@
 #tag_all versions "1.12";
 
-msg MSG_MOVE_SET_FACING = 0x00DA {
+cmsg MSG_MOVE_SET_FACING_Client = 0x00DA {
     MovementInfo info;
 }
 
+smsg MSG_MOVE_SET_FACING_Server = 0x00DA {
+    PackedGuid guid;
+    MovementInfo info;
+}

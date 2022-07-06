@@ -1,6 +1,10 @@
 #tag_all versions "1.12";
 
-msg MSG_MOVE_START_PITCH_UP = 0x00BF {
+cmsg MSG_MOVE_START_PITCH_UP_Client = 0x00BF {
     MovementInfo info;
 }
 
+smsg MSG_MOVE_START_PITCH_UP_Server = 0x00BF {
+    PackedGuid guid; 
+    MovementInfo info;
+}

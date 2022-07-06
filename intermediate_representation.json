@@ -64097,9 +64097,9 @@
       ]
     },
     {
-      "name": "MSG_MOVE_FALL_LAND",
+      "name": "MSG_MOVE_FALL_LAND_Client",
       "object_type": {
-        "type": "msg",
+        "type": "cmsg",
         "opcode": 201
       },
       "constant": false,
@@ -64140,15 +64140,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_HEARTBEAT",
+      "name": "MSG_MOVE_FALL_LAND_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 201
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_fall_land.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_HEARTBEAT_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 238
       },
       "constant": false,
@@ -64189,15 +64249,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_JUMP",
+      "name": "MSG_MOVE_HEARTBEAT_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 238
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_heartbeat.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_JUMP_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 187
       },
       "constant": false,
@@ -64238,15 +64358,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_SET_FACING",
+      "name": "MSG_MOVE_JUMP_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 187
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_SET_FACING_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 218
       },
       "constant": false,
@@ -64287,15 +64467,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_SET_PITCH",
+      "name": "MSG_MOVE_SET_FACING_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 218
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_set_facing.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_SET_PITCH_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 219
       },
       "constant": false,
@@ -64336,15 +64576,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_SET_RUN_MODE",
+      "name": "MSG_MOVE_SET_PITCH_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 219
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_set_pitch.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_SET_RUN_MODE_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 194
       },
       "constant": false,
@@ -64385,15 +64685,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_SET_WALK_MODE",
+      "name": "MSG_MOVE_SET_RUN_MODE_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 194
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_set_run_mode.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_SET_WALK_MODE_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 195
       },
       "constant": false,
@@ -64434,15 +64794,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_START_BACKWARD",
+      "name": "MSG_MOVE_SET_WALK_MODE_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 195
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_START_BACKWARD_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 182
       },
       "constant": false,
@@ -64483,15 +64903,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_START_FORWARD",
+      "name": "MSG_MOVE_START_BACKWARD_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 182
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_START_FORWARD_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 181
       },
       "constant": false,
@@ -64532,15 +65012,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_START_PITCH_DOWN",
+      "name": "MSG_MOVE_START_FORWARD_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 181
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_START_PITCH_DOWN_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 192
       },
       "constant": false,
@@ -64581,15 +65121,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_START_PITCH_UP",
+      "name": "MSG_MOVE_START_PITCH_DOWN_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 192
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_down.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_START_PITCH_UP_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 191
       },
       "constant": false,
@@ -64630,15 +65230,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_START_STRAFE_LEFT",
+      "name": "MSG_MOVE_START_PITCH_UP_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 191
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_up.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_START_STRAFE_LEFT_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 184
       },
       "constant": false,
@@ -64679,15 +65339,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_START_STRAFE_RIGHT",
+      "name": "MSG_MOVE_START_STRAFE_LEFT_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 184
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_left.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_START_STRAFE_RIGHT_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 185
       },
       "constant": false,
@@ -64728,15 +65448,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_START_SWIM",
+      "name": "MSG_MOVE_START_STRAFE_RIGHT_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 185
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_right.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_START_SWIM_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 202
       },
       "constant": false,
@@ -64777,15 +65557,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_START_TURN_LEFT",
+      "name": "MSG_MOVE_START_SWIM_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 202
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_swim.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_START_TURN_LEFT_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 188
       },
       "constant": false,
@@ -64826,15 +65666,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_START_TURN_RIGHT",
+      "name": "MSG_MOVE_START_TURN_LEFT_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 188
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_left.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_START_TURN_RIGHT_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 189
       },
       "constant": false,
@@ -64875,15 +65775,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_STOP",
+      "name": "MSG_MOVE_START_TURN_RIGHT_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 189
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_STOP_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 183
       },
       "constant": false,
@@ -64924,15 +65884,15 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_STOP_PITCH",
+      "name": "MSG_MOVE_STOP_PITCH_Client",
       "object_type": {
-        "type": "msg",
+        "type": "cmsg",
         "opcode": 193
       },
       "constant": false,
@@ -64973,15 +65933,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_STOP_STRAFE",
+      "name": "MSG_MOVE_STOP_PITCH_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 193
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_stop_pitch.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_STOP_STRAFE_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 186
       },
       "constant": false,
@@ -65022,15 +66042,75 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_STOP_SWIM",
+      "name": "MSG_MOVE_STOP_STRAFE_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 186
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_stop_strafe.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_STOP_SWIM_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 203
       },
       "constant": false,
@@ -65071,15 +66151,135 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]
     },
     {
-      "name": "MSG_MOVE_STOP_TURN",
+      "name": "MSG_MOVE_STOP_SWIM_Server",
       "object_type": {
-        "type": "msg",
+        "type": "smsg",
+        "opcode": 203
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_stop_swim.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_STOP_Server",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 183
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_stop.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_STOP_TURN_Client",
+      "object_type": {
+        "type": "cmsg",
         "opcode": 190
       },
       "constant": false,
@@ -65120,7 +66320,67 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_STOP_TURN_Server",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 190
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_stop_turn.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
         "SubObjects",
         "WorldVersion"
       ]

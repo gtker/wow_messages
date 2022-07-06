@@ -1,6 +1,11 @@
 #tag_all versions "1.12";
 
-msg MSG_MOVE_START_TURN_LEFT = 0x00BC {
+cmsg MSG_MOVE_START_TURN_LEFT_Client = 0x00BC {
+    MovementInfo info;
+}
+
+smsg MSG_MOVE_START_TURN_LEFT_Server = 0x00BC {
+    PackedGuid guid;
     MovementInfo info;
 }
 

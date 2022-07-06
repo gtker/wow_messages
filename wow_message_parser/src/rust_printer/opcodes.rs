@@ -255,9 +255,21 @@ pub fn common_impls_world(
             world_common_impls_read_write(s, cd, size, opcode_size, EXPECTED_OPCODE_ERROR, it);
         }
 
+        world_inner(s, v, cd);
+
         if any_container_is_pure_movement_info(v) {
             world_movement_info(s, v);
         }
+    });
+}
+
+fn world_inner(s: &mut Writer, v: &[&Container], cd: &str) {
+    s.bodyn(format!("pub async fn tokio_write_encrypted_{cd}<W: {write}, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error>", cd = cd, write = ImplType::Tokio.write()), |s| {
+        s.body("match self", |s| {
+           for container in v {
+               s.wln(format!("Self::{}(c) => c.tokio_write_encrypted_{cd}(w, e).await,", get_enumerator_name(container.name())));
+           }
+        });
     });
 }
 
@@ -266,7 +278,10 @@ fn world_movement_info(s: &mut Writer, v: &[&Container]) {
         s.body("match self", |s| {
             for container in v {
                 if container.is_pure_movement_info() {
-                    s.wln(format!("Self::{}(c) => Some(&c.info),", container.name()));
+                    s.wln(format!(
+                        "Self::{}(c) => Some(&c.info),",
+                        get_enumerator_name(container.name())
+                    ));
                 }
             }
 

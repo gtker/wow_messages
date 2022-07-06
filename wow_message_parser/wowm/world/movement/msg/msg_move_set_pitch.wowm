@@ -1,6 +1,11 @@
 #tag_all versions "1.12";
 
-msg MSG_MOVE_SET_PITCH = 0x00DB {
+cmsg MSG_MOVE_SET_PITCH_Client = 0x00DB {
+    MovementInfo info;
+}
+
+smsg MSG_MOVE_SET_PITCH_Server = 0x00DB {
+    PackedGuid guid;
     MovementInfo info;
 }
 

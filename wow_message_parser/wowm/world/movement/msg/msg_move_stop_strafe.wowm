@@ -1,6 +1,11 @@
 #tag_all versions "1.12";
 
-msg MSG_MOVE_STOP_STRAFE = 0x00BA {
+cmsg MSG_MOVE_STOP_STRAFE_Client = 0x00BA {
+    MovementInfo info;
+}
+
+smsg MSG_MOVE_STOP_STRAFE_Server = 0x00BA {
+    PackedGuid guid;
     MovementInfo info;
 }
 
