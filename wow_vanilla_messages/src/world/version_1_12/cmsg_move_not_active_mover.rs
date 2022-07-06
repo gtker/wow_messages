@@ -10,12 +10,12 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_MOVE_NOT_ACTIVE_MOVER = 0x02D1 {
 ///     Guid old_mover;
-///     MovementInfo movement_info;
+///     MovementInfo info;
 /// }
 /// ```
 pub struct CMSG_MOVE_NOT_ACTIVE_MOVER {
     pub old_mover: Guid,
-    pub movement_info: MovementInfo,
+    pub info: MovementInfo,
 }
 
 impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {
@@ -23,8 +23,8 @@ impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {
         // old_mover: Guid
         w.write_all(&self.old_mover.guid().to_le_bytes())?;
 
-        // movement_info: MovementInfo
-        self.movement_info.write_into_vec(w)?;
+        // info: MovementInfo
+        self.info.write_into_vec(w)?;
 
         Ok(())
     }
@@ -38,12 +38,12 @@ impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {
         // old_mover: Guid
         let old_mover = Guid::read(r)?;
 
-        // movement_info: MovementInfo
-        let movement_info = MovementInfo::read(r)?;
+        // info: MovementInfo
+        let info = MovementInfo::read(r)?;
 
         Ok(Self {
             old_mover,
-            movement_info,
+            info,
         })
     }
 
@@ -52,7 +52,7 @@ impl ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {
 impl CMSG_MOVE_NOT_ACTIVE_MOVER {
     pub(crate) fn size(&self) -> usize {
         8 // old_mover: Guid
-        + self.movement_info.size() // movement_info: MovementInfo
+        + self.info.size() // info: MovementInfo
     }
 }
 

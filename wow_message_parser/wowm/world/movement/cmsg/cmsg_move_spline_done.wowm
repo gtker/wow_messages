@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_MOVE_SPLINE_DONE = 0x02C9 {
-    MovementInfo movement_info;
+    MovementInfo info;
     u32 movement_counter;
     u32 unknown1;
 }

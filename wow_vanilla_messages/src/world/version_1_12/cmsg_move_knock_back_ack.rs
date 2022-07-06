@@ -11,13 +11,13 @@ use std::io::{Write, Read};
 /// cmsg CMSG_MOVE_KNOCK_BACK_ACK = 0x00F0 {
 ///     Guid guid;
 ///     u32 counter;
-///     MovementInfo movement_info;
+///     MovementInfo info;
 /// }
 /// ```
 pub struct CMSG_MOVE_KNOCK_BACK_ACK {
     pub guid: Guid,
     pub counter: u32,
-    pub movement_info: MovementInfo,
+    pub info: MovementInfo,
 }
 
 impl ClientMessage for CMSG_MOVE_KNOCK_BACK_ACK {
@@ -28,8 +28,8 @@ impl ClientMessage for CMSG_MOVE_KNOCK_BACK_ACK {
         // counter: u32
         w.write_all(&self.counter.to_le_bytes())?;
 
-        // movement_info: MovementInfo
-        self.movement_info.write_into_vec(w)?;
+        // info: MovementInfo
+        self.info.write_into_vec(w)?;
 
         Ok(())
     }
@@ -46,13 +46,13 @@ impl ClientMessage for CMSG_MOVE_KNOCK_BACK_ACK {
         // counter: u32
         let counter = crate::util::read_u32_le(r)?;
 
-        // movement_info: MovementInfo
-        let movement_info = MovementInfo::read(r)?;
+        // info: MovementInfo
+        let info = MovementInfo::read(r)?;
 
         Ok(Self {
             guid,
             counter,
-            movement_info,
+            info,
         })
     }
 
@@ -62,7 +62,7 @@ impl CMSG_MOVE_KNOCK_BACK_ACK {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
         + 4 // counter: u32
-        + self.movement_info.size() // movement_info: MovementInfo
+        + self.info.size() // info: MovementInfo
     }
 }
 
