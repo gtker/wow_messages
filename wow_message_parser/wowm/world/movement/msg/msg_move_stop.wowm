@@ -6,7 +6,7 @@ cmsg MSG_MOVE_STOP_Client = 0x00B7 {
 
 test MSG_MOVE_STOP_Client {
     info = {
-        flags = 0x0;  
+        flags = NONE;  
         timestamp = 24785394;
         position = {
             x = -8946.785;
@@ -37,7 +37,7 @@ smsg MSG_MOVE_STOP_Server = 0x00B7 {
 test MSG_MOVE_STOP_Server {
     guid = 5;
     info = {
-        flags = 0x0;  
+        flags = NONE;  
         timestamp = 24785394;
         position = {
             x = -8946.785;

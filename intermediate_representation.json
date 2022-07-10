@@ -66201,7 +66201,7 @@
                       "variable_name": "flags",
                       "verified_value": {
                         "Flag": [
-                          "0x0"
+                          "NONE"
                         ]
                       },
                       "tags": {}
@@ -66747,7 +66747,7 @@
                       "variable_name": "flags",
                       "verified_value": {
                         "Flag": [
-                          "0x0"
+                          "NONE"
                         ]
                       },
                       "tags": {}
