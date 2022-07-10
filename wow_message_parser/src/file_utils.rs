@@ -277,15 +277,6 @@ pub fn write_string_to_file(s: &str, filename: &Path) {
     f.write_all(s.as_bytes()).unwrap();
 }
 
-pub fn create_or_append(s: &str, filename: &Path) {
-    let f = std::fs::OpenOptions::new().append(true).open(filename);
-    if let Ok(mut f) = f {
-        f.write_all(s.as_bytes()).unwrap();
-    } else {
-        write_string_to_file(s, filename);
-    }
-}
-
 pub fn overwrite_if_not_same_contents(s: &str, filename: &Path) {
     let f = read_to_string(filename).unwrap();
     if f != s {

@@ -1,8 +1,9 @@
 pub mod container;
 pub mod definer;
 
-use crate::file_utils::{create_or_append, write_string_to_file};
+use crate::file_utils::create_and_overwrite_if_not_same_contents;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use std::collections::HashMap;
 use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::Path;
@@ -72,6 +73,14 @@ impl DocWriter {
     }
 }
 
+fn create_or_append_hashmap(s: &str, path: String, files: &mut HashMap<String, String>) {
+    if let Some(c) = files.get_mut(&path) {
+        c.push_str(s);
+    } else {
+        files.insert(path, s.to_string());
+    }
+}
+
 pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocWriter]) {
     const LOGIN_DEFINER_HEADER: &str = "# Login Definers\n";
     const LOGIN_CONTAINER_HEADER: &str = "# Login Containers\n";
@@ -87,15 +96,18 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
     let mut login_definers = Vec::new();
     let mut world_definers = Vec::new();
 
+    let mut files = HashMap::new();
+
     for definer in definers {
         let path = format!(
             "docs/{lower_name}.md",
             lower_name = definer.name().to_lowercase()
         );
 
-        create_or_append(
+        create_or_append_hashmap(
             definer.inner(),
-            Path::new(&("wowm_language/src/".to_string() + &path)),
+            "wowm_language/src/".to_string() + &path,
+            &mut files,
         );
 
         if already_added_files.contains(&path) {
@@ -132,9 +144,10 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
             lower_name = container.name().to_lowercase()
         );
 
-        create_or_append(
+        create_or_append_hashmap(
             container.inner(),
-            Path::new(&("wowm_language/src/".to_string() + &path)),
+            "wowm_language/src/".to_string() + &path,
+            &mut files,
         );
 
         if already_added_files.contains(&path) {
@@ -163,7 +176,11 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
     }
     s.push('\n');
 
-    write_string_to_file(&s, Path::new(SUMMARY_PATH))
+    create_and_overwrite_if_not_same_contents(&s, Path::new(SUMMARY_PATH));
+
+    for (path, s) in files {
+        create_and_overwrite_if_not_same_contents(&s, Path::new(&path));
+    }
 }
 
 fn common(s: &mut DocWriter, tags: &Tags) {
