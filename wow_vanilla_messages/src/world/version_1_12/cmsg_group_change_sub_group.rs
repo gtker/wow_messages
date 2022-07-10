@@ -30,8 +30,8 @@ impl ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {
     }
     const OPCODE: u16 = 0x027e;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
+    fn client_size(&self) -> u16 {
+        (self.size() + 6) as u16
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

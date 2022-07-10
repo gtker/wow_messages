@@ -30,8 +30,8 @@ impl ServerMessage for SMSG_FORCE_MOVE_UNROOT {
     }
     const OPCODE: u16 = 0x00ea;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        12
+    fn server_size(&self) -> u16 {
+        16
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

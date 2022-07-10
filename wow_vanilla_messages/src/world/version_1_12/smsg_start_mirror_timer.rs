@@ -50,8 +50,8 @@ impl ServerMessage for SMSG_START_MIRROR_TIMER {
     }
     const OPCODE: u16 = 0x01d9;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        21
+    fn server_size(&self) -> u16 {
+        25
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

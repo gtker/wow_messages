@@ -29,8 +29,8 @@ impl ServerMessage for SMSG_CHAR_DELETE {
     }
     const OPCODE: u16 = 0x003c;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        1
+    fn server_size(&self) -> u16 {
+        5
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

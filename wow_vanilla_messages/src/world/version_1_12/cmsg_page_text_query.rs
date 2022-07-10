@@ -24,8 +24,8 @@ impl ClientMessage for CMSG_PAGE_TEXT_QUERY {
     }
     const OPCODE: u16 = 0x005a;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        4
+    fn client_size(&self) -> u16 {
+        10
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

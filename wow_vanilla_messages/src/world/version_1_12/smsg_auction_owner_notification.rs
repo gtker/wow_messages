@@ -54,8 +54,8 @@ impl ServerMessage for SMSG_AUCTION_OWNER_NOTIFICATION {
     }
     const OPCODE: u16 = 0x025f;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        28
+    fn server_size(&self) -> u16 {
+        32
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

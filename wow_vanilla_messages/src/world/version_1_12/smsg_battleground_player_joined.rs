@@ -25,8 +25,8 @@ impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {
     }
     const OPCODE: u16 = 0x02ec;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        8
+    fn server_size(&self) -> u16 {
+        12
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

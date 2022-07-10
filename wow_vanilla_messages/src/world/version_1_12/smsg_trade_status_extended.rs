@@ -62,8 +62,8 @@ impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
     }
     const OPCODE: u16 = 0x0121;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        444
+    fn server_size(&self) -> u16 {
+        448
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

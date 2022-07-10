@@ -24,8 +24,8 @@ impl ClientMessage for CMSG_QUESTLOG_REMOVE_QUEST {
     }
     const OPCODE: u16 = 0x0194;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        1
+    fn client_size(&self) -> u16 {
+        7
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

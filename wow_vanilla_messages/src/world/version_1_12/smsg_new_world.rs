@@ -30,8 +30,8 @@ impl ServerMessage for SMSG_NEW_WORLD {
     }
     const OPCODE: u16 = 0x003e;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        16
+    fn server_size(&self) -> u16 {
+        20
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

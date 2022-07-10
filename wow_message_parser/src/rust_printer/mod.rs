@@ -16,7 +16,7 @@ mod structs;
 mod update_mask;
 
 use crate::container::Sizes;
-use crate::{Objects, Tags};
+use crate::{ContainerType, Objects, Tags};
 pub use update_mask::*;
 
 #[derive(Debug)]
@@ -140,28 +140,42 @@ impl Writer {
         &mut self,
         type_name: impl AsRef<str>,
         opcode: u16,
-        trait_to_impl: impl AsRef<str>,
+        container_type: ContainerType,
         write_function: impl Fn(&mut Self, ImplType),
         read_function: impl Fn(&mut Self, ImplType),
         sizes: Option<Sizes>,
     ) {
-        self.open_curly(format!(
-            "impl {} for {}",
-            trait_to_impl.as_ref(),
-            type_name.as_ref()
-        ));
+        let trait_to_impl = match container_type {
+            ContainerType::CMsg(_) => CLIENT_MESSAGE_TRAIT_NAME,
+            ContainerType::SMsg(_) => SERVER_MESSAGE_TRAIT_NAME,
+            _ => unreachable!(),
+        };
+        let client_or_server = match container_type {
+            ContainerType::CMsg(_) => "client",
+            ContainerType::SMsg(_) => "server",
+            _ => unreachable!(),
+        };
+
+        // Size field does not count in size
+        let opcode_size = match container_type {
+            ContainerType::CMsg(_) => 6,
+            ContainerType::SMsg(_) => 4,
+            _ => unreachable!(),
+        };
+
+        self.open_curly(format!("impl {} for {}", trait_to_impl, type_name.as_ref()));
 
         self.write_into_vec_trait(write_function);
 
         self.wln(format!("const OPCODE: u16 = {:#06x};", opcode));
         self.newline();
 
-        self.open_curly("fn size_without_size_or_opcode_fields(&self) -> u16");
+        self.open_curly(format!("fn {}_size(&self) -> u16", client_or_server,));
 
         if sizes.is_some() && sizes.unwrap().is_constant() {
-            self.wln(format!("{}", sizes.unwrap().maximum()));
+            self.wln(format!("{}", sizes.unwrap().maximum() + opcode_size));
         } else {
-            self.wln("self.size() as u16");
+            self.wln(format!("(self.size() + {}) as u16", opcode_size));
         }
 
         self.closing_curly(); // size_without_size_or_opcode_fields

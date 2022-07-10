@@ -25,8 +25,8 @@ impl ClientMessage for MSG_TABARDVENDOR_ACTIVATE {
     }
     const OPCODE: u16 = 0x01f2;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        8
+    fn client_size(&self) -> u16 {
+        14
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
@@ -53,8 +53,8 @@ impl ServerMessage for MSG_TABARDVENDOR_ACTIVATE {
     }
     const OPCODE: u16 = 0x01f2;
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        8
+    fn server_size(&self) -> u16 {
+        12
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
