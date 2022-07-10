@@ -45,7 +45,7 @@ Most minimal package required to load into the world. Also requires a valid [SMS
 1, 0, 0, 0, // amount_of_objects: u32
 0, // has_transport: u8
 3, // [0].Object.update_type: UpdateType CREATE_OBJECT2 (3)
-4, // [0].Object.guid3: PackedGuid
+1, 4, // [0].Object.guid3: PackedGuid
 4, // [0].Object.object_type: ObjectType PLAYER (4)
 49, // MovementBlock.update_flag: UpdateFlag  SELF| ALL| LIVING (49)
 0, 0, 0, 0, // MovementBlock.flags: MovementFlags  NONE (0)
@@ -82,7 +82,7 @@ Most minimal package required to load into the world. Also requires a valid [SMS
 1, 0, 0, 0, // amount_of_objects: u32
 0, // has_transport: u8
 3, // [0].Object.update_type: UpdateType CREATE_OBJECT2 (3)
-4, // [0].Object.guid3: PackedGuid
+1, 4, // [0].Object.guid3: PackedGuid
 4, // [0].Object.object_type: ObjectType PLAYER (4)
 49, // MovementBlock.update_flag: UpdateFlag  SELF| ALL| LIVING (49)
 0, 0, 0, 0, // MovementBlock.flags: MovementFlags  NONE (0)

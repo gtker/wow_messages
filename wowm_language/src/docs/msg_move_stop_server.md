@@ -36,7 +36,7 @@ SMSG have a header of 4 bytes.
 ```c
 0, 32, // size
 183, 0, // opcode (183)
-5, // guid: PackedGuid
+1, 5, // guid: PackedGuid
 0, 0, 0, 0, // MovementInfo.flags: MovementFlags  NONE (0)
 242, 49, 122, 1, // MovementInfo.timestamp: u32
 36, 203, 11, 198, // Vector3d.x: f32

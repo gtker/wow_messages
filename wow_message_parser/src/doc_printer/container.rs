@@ -134,6 +134,7 @@ fn print_container_example_definition(
         }
         Type::PackedGuid => {
             let mask = bytes.next().unwrap();
+            s.w(format!("{}, ", mask));
             let bytes = bytes.take(mask.count_ones() as _);
             s.bytes(bytes.into_iter());
         }
