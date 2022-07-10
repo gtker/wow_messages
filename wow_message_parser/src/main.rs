@@ -104,6 +104,7 @@ fn main() {
     print_docs_summary_and_objects(&definer_docs, &object_docs);
 
     m.write_mod_files();
+    m.remove_unwritten_files();
 
     write_login_opcodes(&o);
 

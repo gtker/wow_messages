@@ -1,8 +1,10 @@
-use std::fs::read_to_string;
+use std::collections::BTreeMap;
+use std::fs::{read_to_string, remove_file};
 use std::io::Write;
 use std::path::Path;
 
 use heck::SnakeCase;
+use walkdir::WalkDir;
 
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::rust_printer::Writer;
@@ -25,9 +27,18 @@ pub struct ModFile {
 #[derive(Debug)]
 pub struct ModFiles {
     v: Vec<ModFile>,
+    already_existing_files: BTreeMap<String, bool>,
 }
 
 impl ModFiles {
+    pub fn remove_unwritten_files(&self) {
+        for (filename, written) in self.already_existing_files.iter() {
+            if !written {
+                remove_file(Path::new(filename)).unwrap();
+            }
+        }
+    }
+
     pub fn write_mod_files(&mut self) {
         for m in &mut self.v {
             m.submodules.sort();
@@ -48,12 +59,30 @@ impl ModFiles {
                 }
             }
             let filename = m.name.to_string() + "mod.rs";
-            write_string_to_file(&s, Path::new(&filename));
+
+            self.already_existing_files.insert(filename.clone(), true);
+
+            create_and_overwrite_if_not_same_contents(&s, Path::new(&filename));
         }
     }
 
     pub fn new() -> Self {
-        Self { v: vec![] }
+        let mut already_existing_files = BTreeMap::new();
+
+        for dir in [LOGIN_DIR, WORLD_DIR] {
+            for file in WalkDir::new(dir).into_iter().filter_map(|a| a.ok()) {
+                if !file.file_type().is_file() {
+                    continue;
+                }
+
+                already_existing_files.insert(file.path().to_str().unwrap().to_string(), false);
+            }
+        }
+
+        Self {
+            v: vec![],
+            already_existing_files,
+        }
     }
 
     fn add_or_append_file(&mut self, file_dir: String, e: (String, SubmoduleLocation)) {
@@ -139,7 +168,10 @@ impl ModFiles {
             } else {
                 s.imports()
             };
-            write_string_to_file(s, Path::new(&path));
+
+            self.already_existing_files.insert(path.clone(), true);
+
+            create_and_overwrite_if_not_same_contents(s, Path::new(&path));
         }
 
         for (i, version) in tags.versions().iter().enumerate() {
@@ -150,7 +182,10 @@ impl ModFiles {
             } else {
                 s.imports()
             };
-            write_string_to_file(s, Path::new(&path));
+
+            self.already_existing_files.insert(path.clone(), true);
+
+            create_and_overwrite_if_not_same_contents(s, Path::new(&path));
         }
     }
 }
@@ -254,6 +289,18 @@ pub fn create_or_append(s: &str, filename: &Path) {
 pub fn overwrite_if_not_same_contents(s: &str, filename: &Path) {
     let f = read_to_string(filename).unwrap();
     if f != s {
+        write_string_to_file(s, filename);
+    }
+}
+
+pub fn create_and_overwrite_if_not_same_contents(s: &str, filename: &Path) {
+    let f = std::fs::OpenOptions::new().open(filename);
+    if f.is_ok() {
+        let f = read_to_string(filename).unwrap();
+        if f != s {
+            write_string_to_file(s, filename);
+        }
+    } else {
         write_string_to_file(s, filename);
     }
 }
