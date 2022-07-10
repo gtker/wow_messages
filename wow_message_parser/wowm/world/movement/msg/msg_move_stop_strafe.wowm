@@ -4,8 +4,58 @@ cmsg MSG_MOVE_STOP_STRAFE_Client = 0x00BA {
     MovementInfo info;
 }
 
+test MSG_MOVE_STOP_STRAFE_Client {
+    info = {
+        flags = FORWARD;
+        timestamp = 24761158;
+        position = {
+            x = -8944.021;
+            y = -135.19519;
+            z = 83.748924;
+        };
+        orientation = 0.38010955;
+        fall_time = 0.000000000000000000000000000000000000000001254;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xBA, 0x00, 0x00, 0x00, /* opcode */
+  0x01, 0x00, 0x00, 0x00, /* flags */
+  0x46, 0xd3, 0x79, 0x01, /* timestamp */
+  0x16, 0xc0, 0x0b, 0xc6, /* position.x */
+  0xf8, 0x31, 0x07, 0xc3, /* position.y */
+  0x73, 0x7f, 0xa7, 0x42, /* position.z */
+  0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
+  0x7f, 0x03, 0x00, 0x00, /* fall_time */
+]
+
 smsg MSG_MOVE_STOP_STRAFE_Server = 0x00BA {
     PackedGuid guid;
     MovementInfo info;
 }
+
+test MSG_MOVE_STOP_STRAFE_Server {
+    guid = 5;
+    info = {
+        flags = FORWARD;
+        timestamp = 24761158;
+        position = {
+            x = -8944.021;
+            y = -135.19519;
+            z = 83.748924;
+        };
+        orientation = 0.38010955;
+        fall_time = 0.000000000000000000000000000000000000000001254;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xBA, 0x00, /* opcode */
+  0x01, 0x05, /* guid */
+  0x01, 0x00, 0x00, 0x00, /* flags */
+  0x46, 0xd3, 0x79, 0x01, /* timestamp */
+  0x16, 0xc0, 0x0b, 0xc6, /* position.x */
+  0xf8, 0x31, 0x07, 0xc3, /* position.y */
+  0x73, 0x7f, 0xa7, 0x42, /* position.z */
+  0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
+  0x7f, 0x03, 0x00, 0x00, /* fall_time */
+]
 
