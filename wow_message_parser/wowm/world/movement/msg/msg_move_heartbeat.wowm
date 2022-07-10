@@ -4,7 +4,58 @@ cmsg MSG_MOVE_HEARTBEAT_Client = 0x00EE {
     MovementInfo info;
 }
 
+test MSG_MOVE_HEARTBEAT_Client {
+    info = {
+        flags = FORWARD;
+        timestamp = 24785222;
+        position = {
+            x = -8945.774;
+            y = -112.21678;
+            z = 82.978714;
+        };
+        orientation = 2.5674446;
+        fall_time = 0.000000000000000000000000000000000000000001263;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xEE, 0x00, 0x00, 0x00, /* opcode */
+  0x01, 0x00, 0x00, 0x00, /* flags */
+  0x46, 0x31, 0x7a, 0x01, /* timestamp */
+  0x19, 0xc7, 0x0b, 0xc6, /* position.x */
+  0xfe, 0x6e, 0xe0, 0xc2, /* position.y */
+  0x1a, 0xf5, 0xa5, 0x42, /* position.z */
+  0x03, 0x51, 0x24, 0x40, /* orientation */
+  0x85, 0x03, 0x00, 0x00, /* fall_time */
+]
+
 smsg MSG_MOVE_HEARTBEAT_Server = 0x00EE {
     PackedGuid guid;
     MovementInfo info;
 }
+
+test MSG_MOVE_HEARTBEAT_Server {
+    guid = 5;
+    info = {
+        flags = FORWARD;
+        timestamp = 24785222;
+        position = {
+            x = -8945.774;
+            y = -112.21678;
+            z = 82.978714;
+        };
+        orientation = 2.5674446;
+        fall_time = 0.000000000000000000000000000000000000000001263;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xEE, 0x00, /* opcode */
+  0x01, 0x05, /* guid */
+  0x01, 0x00, 0x00, 0x00, /* flags */
+  0x46, 0x31, 0x7a, 0x01, /* timestamp */
+  0x19, 0xc7, 0x0b, 0xc6, /* position.x */
+  0xfe, 0x6e, 0xe0, 0xc2, /* position.y */
+  0x1a, 0xf5, 0xa5, 0x42, /* position.z */
+  0x03, 0x51, 0x24, 0x40, /* orientation */
+  0x85, 0x03, 0x00, 0x00, /* fall_time */
+]
+
