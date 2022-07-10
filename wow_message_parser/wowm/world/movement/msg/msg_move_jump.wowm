@@ -4,8 +4,74 @@ cmsg MSG_MOVE_JUMP_Client = 0x00BB {
     MovementInfo info;
 }
 
+test MSG_MOVE_JUMP_Client {
+    info = {
+        flags = JUMPING | FORWARD;
+        timestamp = 24761888;
+        position = {
+            x = -8939.276;
+            y = -133.29927;
+            z = 83.646126;
+        };
+        orientation = 0.38010955;
+        fall_time = 0.0;
+        z_speed = -7.9555473;
+        cos_angle = 0.928624;
+        sin_angle = 0.3710222;
+        xy_speed = 7.0;
+    };
+} [
+  0x00, 0x30, /* size */
+  0xBB, 0x00, 0x00, 0x00, /* opcode */
+  0x01, 0x20, 0x00, 0x00, /* flags */
+  0x20, 0xd6, 0x79, 0x01, /* timestamp */
+  0x1b, 0xad, 0x0b, 0xc6, /* position.x */
+  0x9d, 0x4c, 0x05, 0xc3, /* position.y */
+  0xd1, 0x4a, 0xa7, 0x42, /* position.z */
+  0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+  0xd8, 0x93, 0xfe, 0xc0, /* z_speed */
+  0x4d, 0xba, 0x6d, 0x3f, /* cos_angle */
+  0x9f, 0xf6, 0xbd, 0x3e, /* sin_angle */
+  0x00, 0x00, 0xe0, 0x40, /* xy_speed */
+]
+
 smsg MSG_MOVE_JUMP_Server = 0x00BB {
     PackedGuid guid;
     MovementInfo info;
 }
+
+test MSG_MOVE_JUMP_Server {
+    guid = 5;
+    info = {
+        flags = JUMPING | FORWARD;
+        timestamp = 24761888;
+        position = {
+            x = -8939.276;
+            y = -133.29927;
+            z = 83.646126;
+        };
+        orientation = 0.38010955;
+        fall_time = 0.0;
+        z_speed = -7.9555473;
+        cos_angle = 0.928624;
+        sin_angle = 0.3710222;
+        xy_speed = 7.0;
+    };
+} [
+  0x00, 0x30, /* size */
+  0xBB, 0x00, /* opcode */
+  0x01, 0x05, /* guid */
+  0x01, 0x20, 0x00, 0x00, /* flags */
+  0x20, 0xd6, 0x79, 0x01, /* timestamp */
+  0x1b, 0xad, 0x0b, 0xc6, /* position.x */
+  0x9d, 0x4c, 0x05, 0xc3, /* position.y */
+  0xd1, 0x4a, 0xa7, 0x42, /* position.z */
+  0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+  0xd8, 0x93, 0xfe, 0xc0, /* z_speed */
+  0x4d, 0xba, 0x6d, 0x3f, /* cos_angle */
+  0x9f, 0xf6, 0xbd, 0x3e, /* sin_angle */
+  0x00, 0x00, 0xe0, 0x40, /* xy_speed */
+]
 
