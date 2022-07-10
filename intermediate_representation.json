@@ -65877,7 +65877,157 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "MSG_MOVE_STOP_Client",
+          "members": [
+            {
+              "variable_name": "info",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "MovementInfo",
+                  "members": [
+                    {
+                      "variable_name": "flags",
+                      "verified_value": {
+                        "Flag": [
+                          "0x0"
+                        ]
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "timestamp",
+                      "verified_value": {
+                        "Number": {
+                          "value": 24785394,
+                          "original_string": "24785394"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "position",
+                      "verified_value": {
+                        "SubObject": {
+                          "ty_name": "Vector3d",
+                          "members": [
+                            {
+                              "variable_name": "x",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -8946.785,
+                                  "original_string": "-8946.785"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "y",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -111.56287,
+                                  "original_string": "-111.56287"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "z",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": 83.04539,
+                                  "original_string": "83.04539"
+                                }
+                              },
+                              "tags": {}
+                            }
+                          ]
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "orientation",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 2.5674446,
+                          "original_string": "2.5674446"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "fall_time",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 1.263e-42,
+                          "original_string": "0.000000000000000000000000000000000000000001263"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            32,
+            183,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            242,
+            49,
+            122,
+            1,
+            36,
+            203,
+            11,
+            198,
+            48,
+            32,
+            223,
+            194,
+            61,
+            23,
+            166,
+            66,
+            3,
+            81,
+            36,
+            64,
+            133,
+            3,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_stop.wowm",
+            "start_position": 7
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_stop.wowm",
         "start_position": 3
@@ -66263,10 +66413,170 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "MSG_MOVE_STOP_Server",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 5,
+                  "original_string": "5"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "info",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "MovementInfo",
+                  "members": [
+                    {
+                      "variable_name": "flags",
+                      "verified_value": {
+                        "Flag": [
+                          "0x0"
+                        ]
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "timestamp",
+                      "verified_value": {
+                        "Number": {
+                          "value": 24785394,
+                          "original_string": "24785394"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "position",
+                      "verified_value": {
+                        "SubObject": {
+                          "ty_name": "Vector3d",
+                          "members": [
+                            {
+                              "variable_name": "x",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -8946.785,
+                                  "original_string": "-8946.785"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "y",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -111.56287,
+                                  "original_string": "-111.56287"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "z",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": 83.04539,
+                                  "original_string": "83.04539"
+                                }
+                              },
+                              "tags": {}
+                            }
+                          ]
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "orientation",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 2.5674446,
+                          "original_string": "2.5674446"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "fall_time",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 1.263e-42,
+                          "original_string": "0.000000000000000000000000000000000000000001263"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            32,
+            183,
+            0,
+            1,
+            5,
+            0,
+            0,
+            0,
+            0,
+            242,
+            49,
+            122,
+            1,
+            36,
+            203,
+            11,
+            198,
+            48,
+            32,
+            223,
+            194,
+            61,
+            23,
+            166,
+            66,
+            3,
+            81,
+            36,
+            64,
+            133,
+            3,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_stop.wowm",
+            "start_position": 37
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_stop.wowm",
-        "start_position": 7
+        "start_position": 31
       },
       "only_has_io_error": true,
       "features": [
