@@ -420,6 +420,7 @@ pub fn stats_for_1_12(o: &Objects) {
         Data::new("SMSG_GMTICKET_UPDATETEXT", 0x208),
         Data::new("SMSG_ACCOUNT_DATA_TIMES", 0x209),
         Data::new("CMSG_REQUEST_ACCOUNT_DATA", 0x20A),
+        Data::with_reason("CMSG_UPDATE_ACCOUNT_DATA", 0x20B, "Unknown implementation"),
         Data::new("CMSG_GMTICKET_GETTICKET", 0x211),
         Data::new("SMSG_GMTICKET_GETTICKET", 0x212),
         Data::new("SMSG_GAMEOBJECT_SPAWN_ANIM", 0x214),
