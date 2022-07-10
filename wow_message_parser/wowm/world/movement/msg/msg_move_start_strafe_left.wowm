@@ -4,8 +4,57 @@ cmsg MSG_MOVE_START_STRAFE_LEFT_Client = 0x00B8 {
     MovementInfo info;
 }
 
+test MSG_MOVE_START_STRAFE_LEFT_Client {
+    info = {
+        flags = FORWARD | STRAFE_LEFT;
+        timestamp = 24760991;
+        position = {
+            x = -8944.482;
+            y = -136.26949;
+            z = 83.74637;
+        };
+        orientation = 0.38010955;
+        fall_time = 0.000000000000000000000000000000000000000001254;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xB8, 0x00, 0x00, 0x00, /* opcode */
+  0x05, 0x00, 0x00, 0x00, /* flags */
+  0x9f, 0xd2, 0x79, 0x01, /* timestamp */
+  0xee, 0xc1, 0x0b, 0xc6, /* position.x */
+  0xfd, 0x44, 0x08, 0xc3, /* position.y */
+  0x24, 0x7e, 0xa7, 0x42, /* position.z */
+  0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
+  0x7f, 0x03, 0x00, 0x00, /* fall_time */
+]
+
 smsg MSG_MOVE_START_STRAFE_LEFT_Server = 0x00B8 {
     PackedGuid guid;
     MovementInfo info;
 }
 
+test MSG_MOVE_START_STRAFE_LEFT_Server {
+    guid = 5;
+    info = {
+        flags = FORWARD | STRAFE_LEFT;
+        timestamp = 24760991;
+        position = {
+            x = -8944.482;
+            y = -136.26949;
+            z = 83.74637;
+        };
+        orientation = 0.38010955;
+        fall_time = 0.000000000000000000000000000000000000000001254;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xB8, 0x00, /* opcode */
+  0x01, 0x05, /* guid */
+  0x05, 0x00, 0x00, 0x00, /* flags */
+  0x9f, 0xd2, 0x79, 0x01, /* timestamp */
+  0xee, 0xc1, 0x0b, 0xc6, /* position.x */
+  0xfd, 0x44, 0x08, 0xc3, /* position.y */
+  0x24, 0x7e, 0xa7, 0x42, /* position.z */
+  0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
+  0x7f, 0x03, 0x00, 0x00, /* fall_time */
+]

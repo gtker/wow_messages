@@ -66996,7 +66996,158 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "MSG_MOVE_START_STRAFE_LEFT_Client",
+          "members": [
+            {
+              "variable_name": "info",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "MovementInfo",
+                  "members": [
+                    {
+                      "variable_name": "flags",
+                      "verified_value": {
+                        "Flag": [
+                          "FORWARD",
+                          "STRAFE_LEFT"
+                        ]
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "timestamp",
+                      "verified_value": {
+                        "Number": {
+                          "value": 24760991,
+                          "original_string": "24760991"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "position",
+                      "verified_value": {
+                        "SubObject": {
+                          "ty_name": "Vector3d",
+                          "members": [
+                            {
+                              "variable_name": "x",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -8944.482,
+                                  "original_string": "-8944.482"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "y",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -136.26949,
+                                  "original_string": "-136.26949"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "z",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": 83.74637,
+                                  "original_string": "83.74637"
+                                }
+                              },
+                              "tags": {}
+                            }
+                          ]
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "orientation",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 0.38010955,
+                          "original_string": "0.38010955"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "fall_time",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 1.254e-42,
+                          "original_string": "0.000000000000000000000000000000000000000001254"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            32,
+            184,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            159,
+            210,
+            121,
+            1,
+            238,
+            193,
+            11,
+            198,
+            253,
+            68,
+            8,
+            195,
+            36,
+            126,
+            167,
+            66,
+            184,
+            157,
+            194,
+            62,
+            127,
+            3,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_left.wowm",
+            "start_position": 7
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_left.wowm",
         "start_position": 3
@@ -67055,10 +67206,171 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "MSG_MOVE_START_STRAFE_LEFT_Server",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 5,
+                  "original_string": "5"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "info",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "MovementInfo",
+                  "members": [
+                    {
+                      "variable_name": "flags",
+                      "verified_value": {
+                        "Flag": [
+                          "FORWARD",
+                          "STRAFE_LEFT"
+                        ]
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "timestamp",
+                      "verified_value": {
+                        "Number": {
+                          "value": 24760991,
+                          "original_string": "24760991"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "position",
+                      "verified_value": {
+                        "SubObject": {
+                          "ty_name": "Vector3d",
+                          "members": [
+                            {
+                              "variable_name": "x",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -8944.482,
+                                  "original_string": "-8944.482"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "y",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -136.26949,
+                                  "original_string": "-136.26949"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "z",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": 83.74637,
+                                  "original_string": "83.74637"
+                                }
+                              },
+                              "tags": {}
+                            }
+                          ]
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "orientation",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 0.38010955,
+                          "original_string": "0.38010955"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "fall_time",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 1.254e-42,
+                          "original_string": "0.000000000000000000000000000000000000000001254"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            32,
+            184,
+            0,
+            1,
+            5,
+            5,
+            0,
+            0,
+            0,
+            159,
+            210,
+            121,
+            1,
+            238,
+            193,
+            11,
+            198,
+            253,
+            68,
+            8,
+            195,
+            36,
+            126,
+            167,
+            66,
+            184,
+            157,
+            194,
+            62,
+            127,
+            3,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_left.wowm",
+            "start_position": 36
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_left.wowm",
-        "start_position": 7
+        "start_position": 31
       },
       "only_has_io_error": true,
       "features": [
