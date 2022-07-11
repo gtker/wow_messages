@@ -4,8 +4,59 @@ cmsg MSG_MOVE_STOP_TURN_Client = 0x00BE {
     MovementInfo info;
 }
 
+test MSG_MOVE_STOP_TURN_Client {
+    info = {
+        flags = NONE;
+        timestamp = 39560855;
+        position = {
+            x = -8936.536;
+            y = -124.25434;
+            z = 82.64232;
+        };
+        orientation = 4.877327;
+        fall_time = 0.0;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xBE, 0x00, 0x00, 0x00, /* opcode */
+  0x00, 0x00, 0x00, 0x00, /* flags */
+  0x97, 0xa6, 0x5b, 0x02, /* timestamp */
+  0x25, 0xa2, 0x0b, 0xc6, /* position.x */
+  0x39, 0x82, 0xf8, 0xc2, /* position.y */
+  0xde, 0x48, 0xa5, 0x42, /* position.z */
+  0x10, 0x13, 0x9c, 0x40, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+]
+
+
 smsg MSG_MOVE_STOP_TURN_Server = 0x00BE {
     PackedGuid guid;
     MovementInfo info;
 }
+
+test MSG_MOVE_STOP_TURN_Server {
+    guid = 5;
+    info = {
+        flags = NONE;
+        timestamp = 39560855;
+        position = {
+            x = -8936.536;
+            y = -124.25434;
+            z = 82.64232;
+        };
+        orientation = 4.877327;
+        fall_time = 0.0;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xBE, 0x00, /* opcode */
+  0x01, 0x05, /* guid */
+  0x00, 0x00, 0x00, 0x00, /* flags */
+  0x97, 0xa6, 0x5b, 0x02, /* timestamp */
+  0x25, 0xa2, 0x0b, 0xc6, /* position.x */
+  0x39, 0x82, 0xf8, 0xc2, /* position.y */
+  0xde, 0x48, 0xa5, 0x42, /* position.z */
+  0x10, 0x13, 0x9c, 0x40, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+]
 
