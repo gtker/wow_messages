@@ -57347,6 +57347,7 @@
       "constant": true,
       "members": [],
       "tags": {
+        "description": "Sent immediately after logging in. Client expects reply in [SMSG_QUERY_TIME_RESPONSE].",
         "version": {
           "type": "world",
           "versions": [
@@ -57359,7 +57360,37 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_QUERY_TIME",
+          "members": [],
+          "raw_bytes": [
+            0,
+            4,
+            206,
+            1,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/queries/cmsg_query_time.wowm",
+            "start_position": 7
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/queries/cmsg_query_time.wowm",
         "start_position": 3

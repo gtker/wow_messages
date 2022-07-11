@@ -1,4 +1,11 @@
 #tag_all versions "1.12";
 
-cmsg CMSG_QUERY_TIME = 0x01CE {}
+cmsg CMSG_QUERY_TIME = 0x01CE {} {
+    description = "Sent immediately after logging in. Client expects reply in [SMSG_QUERY_TIME_RESPONSE].";
+}
+
+test CMSG_QUERY_TIME {} [
+    0x00, 0x04, /* size */
+    0xCE, 0x01, 0x00, 0x00, /* opcode */
+]
 
