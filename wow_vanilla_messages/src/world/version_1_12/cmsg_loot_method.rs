@@ -38,11 +38,11 @@ impl ClientMessage for CMSG_LOOT_METHOD {
     const OPCODE: u16 = 0x007a;
 
     fn client_size(&self) -> u16 {
-        16
+        22
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size != 10 {
+        if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 

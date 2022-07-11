@@ -92,9 +92,14 @@ impl Type {
                     }
                 }
             }
-            Type::Identifier { s, .. } => match o.get_object_type_of(s, e.tags()) {
+            Type::Identifier { s, upcast } => match o.get_object_type_of(s, e.tags()) {
                 ObjectType::Enum | ObjectType::Flag => {
-                    let s = o.get_definer(s, e.tags()).ty().size() as usize;
+                    let s = if let Some(upcast) = upcast {
+                        upcast.size()
+                    } else {
+                        o.get_definer(s, e.tags()).ty().size()
+                    } as usize;
+
                     sizes.inc_both(s);
                 }
                 ObjectType::Struct => {

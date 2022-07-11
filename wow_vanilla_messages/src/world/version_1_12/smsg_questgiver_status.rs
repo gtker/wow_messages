@@ -32,11 +32,11 @@ impl ServerMessage for SMSG_QUESTGIVER_STATUS {
     const OPCODE: u16 = 0x0183;
 
     fn server_size(&self) -> u16 {
-        13
+        16
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
+        if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 

@@ -108,11 +108,11 @@ impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {
     const OPCODE: u16 = 0x02d6;
 
     fn server_size(&self) -> u16 {
-        51
+        54
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size != 47 {
+        if body_size != 50 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 

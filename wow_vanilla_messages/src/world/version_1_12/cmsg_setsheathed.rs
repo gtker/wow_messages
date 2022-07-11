@@ -26,11 +26,11 @@ impl ClientMessage for CMSG_SETSHEATHED {
     const OPCODE: u16 = 0x01e0;
 
     fn client_size(&self) -> u16 {
-        7
+        10
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
+        if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 

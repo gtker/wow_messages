@@ -37,11 +37,11 @@ impl ServerMessage for SMSG_PVP_CREDIT {
     const OPCODE: u16 = 0x028c;
 
     fn server_size(&self) -> u16 {
-        17
+        20
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size != 13 {
+        if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
