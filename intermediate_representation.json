@@ -58247,9 +58247,30 @@
         "type": "cmsg",
         "opcode": 522
       },
-      "constant": true,
-      "members": [],
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "unknown",
+            "member_type": {
+              "Array": {
+                "inner": {
+                  "Integer": {
+                    "type": "u8"
+                  }
+                },
+                "size": "Endless"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
       "tags": {
+        "comment": "cmangos/vmangos/mangoszero ignore the data in this.",
         "version": {
           "type": "world",
           "versions": [
@@ -58270,7 +58291,8 @@
       "only_has_io_error": true,
       "features": [
         "CMsg",
-        "EmptyContainer",
+        "EndlessArrays",
+        "SimpleArrays",
         "WorldVersion"
       ]
     },
