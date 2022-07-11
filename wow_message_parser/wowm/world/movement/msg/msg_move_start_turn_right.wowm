@@ -4,7 +4,58 @@ cmsg MSG_MOVE_START_TURN_RIGHT_Client = 0x00BD {
     MovementInfo info;
 }
 
+test MSG_MOVE_START_TURN_RIGHT_Client {
+    info = {
+        flags = TURN_RIGHT;
+        timestamp = 24755963;
+        position = {
+            x = -8949.95;
+            y = -132.493;
+            z = 83.5312;
+        };
+        orientation = 0.0;
+        fall_time = 0.0;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xBD, 0x00, 0x00, 0x00, /* opcode */
+  0x20, 0x00, 0x00, 0x00, /* flags */
+  0xfb, 0xbe, 0x79, 0x01, /* timestamp */
+  0xcd, 0xd7, 0x0b, 0xc6, /* position.x */
+  0x35, 0x7e, 0x04, 0xc3, /* position.y */
+  0xf9, 0x0f, 0xa7, 0x42, /* position.z */
+  0x00, 0x00, 0x00, 0x00, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+]
+
 smsg MSG_MOVE_START_TURN_RIGHT_Server = 0x00BD {
     PackedGuid guid;
     MovementInfo info;
 }
+
+test MSG_MOVE_START_TURN_RIGHT_Server {
+    guid = 5;
+    info = {
+        flags = TURN_RIGHT;
+        timestamp = 24755963;
+        position = {
+            x = -8949.95;
+            y = -132.493;
+            z = 83.5312;
+        };
+        orientation = 0.0;
+        fall_time = 0.0;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xBD, 0x00, /* opcode */
+  0x01, 0x05, /* guid */
+  0x20, 0x00, 0x00, 0x00, /* flags */
+  0xfb, 0xbe, 0x79, 0x01, /* timestamp */
+  0xcd, 0xd7, 0x0b, 0xc6, /* position.x */
+  0x35, 0x7e, 0x04, 0xc3, /* position.y */
+  0xf9, 0x0f, 0xa7, 0x42, /* position.z */
+  0x00, 0x00, 0x00, 0x00, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+]
+
