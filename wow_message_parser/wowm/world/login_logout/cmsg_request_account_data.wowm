@@ -1,7 +1,9 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {
-    u8[-] unknown;
+    u32 block {
+        comment = "The exact purpose is unknown, but [CMSG_UPDATE_ACCOUNT_DATA] and [SMSG_ACCOUNT_DATA_TIMES] possibly also operate on these blocks.";
+    }
 } {
     comment = "cmangos/vmangos/mangoszero ignore the data in this.";
 }

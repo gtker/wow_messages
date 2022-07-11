@@ -58247,25 +58247,23 @@
         "type": "cmsg",
         "opcode": 522
       },
-      "constant": false,
+      "constant": true,
       "members": [
         {
           "Definition": {
-            "name": "unknown",
+            "name": "block",
             "member_type": {
-              "Array": {
-                "inner": {
-                  "Integer": {
-                    "type": "u8"
-                  }
-                },
-                "size": "Endless"
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
               }
             },
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "The exact purpose is unknown, but [CMSG_UPDATE_ACCOUNT_DATA] and [SMSG_ACCOUNT_DATA_TIMES] possibly also operate on these blocks."
+            }
           }
         }
       ],
@@ -58291,8 +58289,7 @@
       "only_has_io_error": true,
       "features": [
         "CMsg",
-        "EndlessArrays",
-        "SimpleArrays",
+        "SimpleBuiltInTypes",
         "WorldVersion"
       ]
     },
@@ -60634,7 +60631,41 @@
       "members": [
         {
           "Definition": {
-            "name": "unknown",
+            "name": "block",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder."
+            }
+          }
+        },
+        {
+          "Definition": {
+            "name": "unknown1",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "Seems to be equal to size of unknown2 for smaller messages. Perhaps uncompressed size?"
+            }
+          }
+        },
+        {
+          "Definition": {
+            "name": "unknown2",
             "member_type": {
               "Array": {
                 "inner": {
@@ -60653,7 +60684,7 @@
         }
       ],
       "tags": {
-        "comment": "This is sent by the client after receiving [SMSG_ACCOUNT_DATA_TIMES]. Layout and purpose unknown.",
+        "comment": "This is sent by the client after receiving [SMSG_ACCOUNT_DATA_TIMES]. Client can also request a block through [CMSG_REQUEST_ACCOUNT_DATA].",
         "version": {
           "type": "world",
           "versions": [
@@ -60674,6 +60705,7 @@
       "only_has_io_error": true,
       "features": [
         "CMsg",
+        "SimpleBuiltInTypes",
         "EndlessArrays",
         "SimpleArrays",
         "WorldVersion"
@@ -75773,7 +75805,7 @@
         }
       ],
       "tags": {
-        "comment": "The purpose of this message is unknown, but it is required in order to prevent the chat box from being a white rectangle that is unable to show text.\nSending this causes the client to send [CMSG_UPDATE_ACCOUNT_DATA] messages.",
+        "comment": "The purpose of this message is unknown, but it is required in order to prevent the chat box from being a white rectangle that is unable to show text.\nSending this causes the client to send [CMSG_UPDATE_ACCOUNT_DATA] messages.\n[CMSG_UPDATE_ACCOUNT_DATA] and [CMSG_REQUEST_ACCOUNT_DATA] act on blocks numbered 0 to 7. The 32 u32s in this message could possibly actually be 8 sets of u8[16] but it could also be a variable sized message.",
         "version": {
           "type": "world",
           "versions": [
@@ -75986,7 +76018,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm",
-            "start_position": 12
+            "start_position": 13
           }
         }
       ],

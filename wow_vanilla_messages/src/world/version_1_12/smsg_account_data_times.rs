@@ -7,6 +7,7 @@ use std::io::{Write, Read};
 #[derive(Copy)]
 /// The purpose of this message is unknown, but it is required in order to prevent the chat box from being a white rectangle that is unable to show text.
 /// Sending this causes the client to send [`CMSG_UPDATE_ACCOUNT_DATA`](crate::world::version_1_12::CMSG_UPDATE_ACCOUNT_DATA) messages.
+/// [`CMSG_UPDATE_ACCOUNT_DATA`](crate::world::version_1_12::CMSG_UPDATE_ACCOUNT_DATA) and [`CMSG_REQUEST_ACCOUNT_DATA`](crate::world::version_1_12::CMSG_REQUEST_ACCOUNT_DATA) act on blocks numbered 0 to 7. The 32 u32s in this message could possibly actually be 8 sets of u8`16` but it could also be a variable sized message.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm#L3):
 /// ```text
@@ -75,7 +76,7 @@ mod test {
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm` line 13.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_ACCOUNT_DATA_TIMES0() {
@@ -102,7 +103,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm` line 13.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_ACCOUNT_DATA_TIMES0() {
@@ -129,7 +130,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm` line 13.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_ACCOUNT_DATA_TIMES0() {
