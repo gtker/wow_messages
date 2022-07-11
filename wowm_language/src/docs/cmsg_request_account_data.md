@@ -31,3 +31,12 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / Little | u32 | block |  | The exact purpose is unknown, but [CMSG_UPDATE_ACCOUNT_DATA](./cmsg_update_account_data.md) and [SMSG_ACCOUNT_DATA_TIMES](./smsg_account_data_times.md) possibly also operate on these blocks. |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 8, // size
+10, 2, 0, 0, // opcode (522)
+6, 0, 0, 0, // block: u32
+```

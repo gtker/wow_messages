@@ -58281,7 +58281,52 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_REQUEST_ACCOUNT_DATA",
+          "members": [
+            {
+              "variable_name": "block",
+              "verified_value": {
+                "Number": {
+                  "value": 6,
+                  "original_string": "6"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            8,
+            10,
+            2,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm",
+            "start_position": 11
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm",
         "start_position": 3

@@ -8,3 +8,10 @@ cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {
     comment = "cmangos/vmangos/mangoszero ignore the data in this.";
 }
 
+test CMSG_REQUEST_ACCOUNT_DATA {
+    block = 6;
+} [
+  0x00, 0x08, /* size */
+  0x0a, 0x02, 0x00, 0x00, /* opcode */
+  0x06, 0x00, 0x00, 0x00, /* block */
+]
