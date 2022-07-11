@@ -4,8 +4,58 @@ cmsg MSG_MOVE_START_BACKWARD_Client = 0x00B6 {
     MovementInfo info;
 }
 
+test MSG_MOVE_START_BACKWARD_Client {
+    info = {
+        flags = BACKWARD;
+        timestamp = 39540496;
+        position = {
+            x = -8937.364;
+            y = -122.47741;
+            z = 82.52683;
+        };
+        orientation = 4.5757346;
+        fall_time = 0.0;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xB6, 0x00, 0x00, 0x00, /* opcode */
+  0x02, 0x00, 0x00, 0x00, /* flags */
+  0x10, 0x57, 0x5b, 0x02, /* timestamp */
+  0x75, 0xa5, 0x0b, 0xc6, /* position.x */
+  0x6f, 0xf4, 0xf4, 0xc2, /* position.y */
+  0xbd, 0x0d, 0xa5, 0x42, /* position.z */
+  0x6b, 0x6c, 0x92, 0x40, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+]
+
 smsg MSG_MOVE_START_BACKWARD_Server = 0x00B6 {
     PackedGuid guid;
     MovementInfo info;
 }
+
+test MSG_MOVE_START_BACKWARD_Server {
+    guid = 5;
+    info = {
+        flags = BACKWARD;
+        timestamp = 39540496;
+        position = {
+            x = -8937.364;
+            y = -122.47741;
+            z = 82.52683;
+        };
+        orientation = 4.5757346;
+        fall_time = 0.0;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xB6, 0x00, /* opcode */
+  0x01, 0x05, /* guid */
+  0x02, 0x00, 0x00, 0x00, /* flags */
+  0x10, 0x57, 0x5b, 0x02, /* timestamp */
+  0x75, 0xa5, 0x0b, 0xc6, /* position.x */
+  0x6f, 0xf4, 0xf4, 0xc2, /* position.y */
+  0xbd, 0x0d, 0xa5, 0x42, /* position.z */
+  0x6b, 0x6c, 0x92, 0x40, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+]
 

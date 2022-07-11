@@ -66250,7 +66250,157 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "MSG_MOVE_START_BACKWARD_Client",
+          "members": [
+            {
+              "variable_name": "info",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "MovementInfo",
+                  "members": [
+                    {
+                      "variable_name": "flags",
+                      "verified_value": {
+                        "Flag": [
+                          "BACKWARD"
+                        ]
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "timestamp",
+                      "verified_value": {
+                        "Number": {
+                          "value": 39540496,
+                          "original_string": "39540496"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "position",
+                      "verified_value": {
+                        "SubObject": {
+                          "ty_name": "Vector3d",
+                          "members": [
+                            {
+                              "variable_name": "x",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -8937.364,
+                                  "original_string": "-8937.364"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "y",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -122.47741,
+                                  "original_string": "-122.47741"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "z",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": 82.52683,
+                                  "original_string": "82.52683"
+                                }
+                              },
+                              "tags": {}
+                            }
+                          ]
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "orientation",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 4.5757346,
+                          "original_string": "4.5757346"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "fall_time",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 0.0,
+                          "original_string": "0.0"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            32,
+            182,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            16,
+            87,
+            91,
+            2,
+            117,
+            165,
+            11,
+            198,
+            111,
+            244,
+            244,
+            194,
+            189,
+            13,
+            165,
+            66,
+            107,
+            108,
+            146,
+            64,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm",
+            "start_position": 7
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm",
         "start_position": 3
@@ -66309,10 +66459,170 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "MSG_MOVE_START_BACKWARD_Server",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 5,
+                  "original_string": "5"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "info",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "MovementInfo",
+                  "members": [
+                    {
+                      "variable_name": "flags",
+                      "verified_value": {
+                        "Flag": [
+                          "BACKWARD"
+                        ]
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "timestamp",
+                      "verified_value": {
+                        "Number": {
+                          "value": 39540496,
+                          "original_string": "39540496"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "position",
+                      "verified_value": {
+                        "SubObject": {
+                          "ty_name": "Vector3d",
+                          "members": [
+                            {
+                              "variable_name": "x",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -8937.364,
+                                  "original_string": "-8937.364"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "y",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -122.47741,
+                                  "original_string": "-122.47741"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "z",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": 82.52683,
+                                  "original_string": "82.52683"
+                                }
+                              },
+                              "tags": {}
+                            }
+                          ]
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "orientation",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 4.5757346,
+                          "original_string": "4.5757346"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "fall_time",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 0.0,
+                          "original_string": "0.0"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            32,
+            182,
+            0,
+            1,
+            5,
+            2,
+            0,
+            0,
+            0,
+            16,
+            87,
+            91,
+            2,
+            117,
+            165,
+            11,
+            198,
+            111,
+            244,
+            244,
+            194,
+            189,
+            13,
+            165,
+            66,
+            107,
+            108,
+            146,
+            64,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm",
+            "start_position": 36
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm",
-        "start_position": 7
+        "start_position": 31
       },
       "only_has_io_error": true,
       "features": [

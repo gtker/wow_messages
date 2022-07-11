@@ -27,3 +27,18 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 32, // size
+182, 0, 0, 0, // opcode (182)
+2, 0, 0, 0, // MovementInfo.flags: MovementFlags  BACKWARD (2)
+16, 87, 91, 2, // MovementInfo.timestamp: u32
+117, 165, 11, 198, // Vector3d.x: f32
+111, 244, 244, 194, // Vector3d.y: f32
+189, 13, 165, 66, // Vector3d.z: f32
+107, 108, 146, 64, // MovementInfo.orientation: f32
+0, 0, 0, 0, // MovementInfo.fall_time: f32
+```
