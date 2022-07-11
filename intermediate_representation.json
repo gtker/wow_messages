@@ -66141,7 +66141,158 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "MSG_MOVE_SET_WALK_MODE_Client",
+          "members": [
+            {
+              "variable_name": "info",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "MovementInfo",
+                  "members": [
+                    {
+                      "variable_name": "flags",
+                      "verified_value": {
+                        "Flag": [
+                          "WALK_MODE",
+                          "FORWARD"
+                        ]
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "timestamp",
+                      "verified_value": {
+                        "Number": {
+                          "value": 39524250,
+                          "original_string": "39524250"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "position",
+                      "verified_value": {
+                        "SubObject": {
+                          "ty_name": "Vector3d",
+                          "members": [
+                            {
+                              "variable_name": "x",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -8943.252,
+                                  "original_string": "-8943.252"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "y",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -129.34494,
+                                  "original_string": "-129.34494"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "z",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": 83.58037,
+                                  "original_string": "83.58037"
+                                }
+                              },
+                              "tags": {}
+                            }
+                          ]
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "orientation",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 6.095481,
+                          "original_string": "6.095481"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "fall_time",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 0.0,
+                          "original_string": "0.0"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            32,
+            195,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            154,
+            23,
+            91,
+            2,
+            2,
+            189,
+            11,
+            198,
+            78,
+            88,
+            1,
+            195,
+            38,
+            41,
+            167,
+            66,
+            46,
+            14,
+            195,
+            64,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm",
+            "start_position": 7
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm",
         "start_position": 3
@@ -66200,10 +66351,171 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "MSG_MOVE_SET_WALK_MODE_Server",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 5,
+                  "original_string": "5"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "info",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "MovementInfo",
+                  "members": [
+                    {
+                      "variable_name": "flags",
+                      "verified_value": {
+                        "Flag": [
+                          "WALK_MODE",
+                          "FORWARD"
+                        ]
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "timestamp",
+                      "verified_value": {
+                        "Number": {
+                          "value": 39524250,
+                          "original_string": "39524250"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "position",
+                      "verified_value": {
+                        "SubObject": {
+                          "ty_name": "Vector3d",
+                          "members": [
+                            {
+                              "variable_name": "x",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -8943.252,
+                                  "original_string": "-8943.252"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "y",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -129.34494,
+                                  "original_string": "-129.34494"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "z",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": 83.58037,
+                                  "original_string": "83.58037"
+                                }
+                              },
+                              "tags": {}
+                            }
+                          ]
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "orientation",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 6.095481,
+                          "original_string": "6.095481"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "fall_time",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 0.0,
+                          "original_string": "0.0"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            32,
+            195,
+            0,
+            1,
+            5,
+            1,
+            1,
+            0,
+            0,
+            154,
+            23,
+            91,
+            2,
+            2,
+            189,
+            11,
+            198,
+            78,
+            88,
+            1,
+            195,
+            38,
+            41,
+            167,
+            66,
+            46,
+            14,
+            195,
+            64,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm",
+            "start_position": 36
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm",
-        "start_position": 7
+        "start_position": 31
       },
       "only_has_io_error": true,
       "features": [

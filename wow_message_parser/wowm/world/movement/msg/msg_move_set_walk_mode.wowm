@@ -4,8 +4,58 @@ cmsg MSG_MOVE_SET_WALK_MODE_Client = 0x00C3 {
     MovementInfo info;
 }
 
+test MSG_MOVE_SET_WALK_MODE_Client {
+    info = {
+        flags = WALK_MODE | FORWARD;
+        timestamp = 39524250;
+        position = {
+            x = -8943.252;
+            y = -129.34494;
+            z = 83.58037;
+        };
+        orientation = 6.095481;
+        fall_time = 0.0;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xC3, 0x00, 0x00, 0x00, /* opcode */
+  0x01, 0x01, 0x00, 0x00, /* flags */
+  0x9a, 0x17, 0x5b, 0x02, /* timestamp */
+  0x02, 0xbd, 0x0b, 0xc6, /* position.x */
+  0x4e, 0x58, 0x01, 0xc3, /* position.y */
+  0x26, 0x29, 0xa7, 0x42, /* position.z */
+  0x2e, 0x0e, 0xc3, 0x40, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+]
+
 smsg MSG_MOVE_SET_WALK_MODE_Server = 0x00C3 {
     PackedGuid guid;
     MovementInfo info;
 }
+
+test MSG_MOVE_SET_WALK_MODE_Server {
+    guid = 5;
+    info = {
+        flags = WALK_MODE | FORWARD;
+        timestamp = 39524250;
+        position = {
+            x = -8943.252;
+            y = -129.34494;
+            z = 83.58037;
+        };
+        orientation = 6.095481;
+        fall_time = 0.0;
+    };
+} [
+  0x00, 0x20, /* size */
+  0xC3, 0x00, /* opcode */
+  0x01, 0x05, /* guid */
+  0x01, 0x01, 0x00, 0x00, /* flags */
+  0x9a, 0x17, 0x5b, 0x02, /* timestamp */
+  0x02, 0xbd, 0x0b, 0xc6, /* position.x */
+  0x4e, 0x58, 0x01, 0xc3, /* position.y */
+  0x26, 0x29, 0xa7, 0x42, /* position.z */
+  0x2e, 0x0e, 0xc3, 0x40, /* orientation */
+  0x00, 0x00, 0x00, 0x00, /* fall_time */
+]
 
