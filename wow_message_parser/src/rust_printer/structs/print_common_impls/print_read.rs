@@ -291,6 +291,10 @@ fn print_size_before_variable(s: &mut Writer, e: &Container, variable_name: &str
     s.body_closing_with(
         "let mut current_size =",
         |s| {
+            if e.rust_object().members().len() == 1 {
+                s.wln("0");
+            }
+
             for (i, m) in e.rust_object().members().iter().enumerate() {
                 if m.name() == variable_name {
                     // Fields after the endless array should not be counted here

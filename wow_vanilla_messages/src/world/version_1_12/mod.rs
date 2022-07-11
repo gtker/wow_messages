@@ -554,6 +554,8 @@ mod cmsg_unlearn_skill;
 pub use cmsg_unlearn_skill::*;
 mod cmsg_unstable_pet;
 pub use cmsg_unstable_pet::*;
+mod cmsg_update_account_data;
+pub use cmsg_update_account_data::*;
 mod cmsg_use_item;
 pub use cmsg_use_item::*;
 mod cmsg_who;

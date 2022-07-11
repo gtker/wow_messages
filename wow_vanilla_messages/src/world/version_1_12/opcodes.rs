@@ -209,6 +209,7 @@ use crate::world::version_1_12::CMSG_UNLEARN_SKILL;
 use crate::world::version_1_12::CMSG_GMTICKET_CREATE;
 use crate::world::version_1_12::CMSG_GMTICKET_UPDATETEXT;
 use crate::world::version_1_12::CMSG_REQUEST_ACCOUNT_DATA;
+use crate::world::version_1_12::CMSG_UPDATE_ACCOUNT_DATA;
 use crate::world::version_1_12::CMSG_GMTICKET_GETTICKET;
 use crate::world::version_1_12::MSG_CORPSE_QUERY_Client;
 use crate::world::version_1_12::CMSG_GMTICKET_DELETETICKET;
@@ -512,6 +513,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GMTICKET_CREATE(CMSG_GMTICKET_CREATE),
     CMSG_GMTICKET_UPDATETEXT(CMSG_GMTICKET_UPDATETEXT),
     CMSG_REQUEST_ACCOUNT_DATA(CMSG_REQUEST_ACCOUNT_DATA),
+    CMSG_UPDATE_ACCOUNT_DATA(CMSG_UPDATE_ACCOUNT_DATA),
     CMSG_GMTICKET_GETTICKET(CMSG_GMTICKET_GETTICKET),
     MSG_CORPSE_QUERY(MSG_CORPSE_QUERY_Client),
     CMSG_GMTICKET_DELETETICKET(CMSG_GMTICKET_DELETETICKET),
@@ -817,6 +819,7 @@ impl ClientOpcodeMessage {
             0x0205 => Ok(Self::CMSG_GMTICKET_CREATE(<CMSG_GMTICKET_CREATE as ClientMessage>::read_body(&mut r, body_size)?)),
             0x0207 => Ok(Self::CMSG_GMTICKET_UPDATETEXT(<CMSG_GMTICKET_UPDATETEXT as ClientMessage>::read_body(&mut r, body_size)?)),
             0x020A => Ok(Self::CMSG_REQUEST_ACCOUNT_DATA(<CMSG_REQUEST_ACCOUNT_DATA as ClientMessage>::read_body(&mut r, body_size)?)),
+            0x020B => Ok(Self::CMSG_UPDATE_ACCOUNT_DATA(<CMSG_UPDATE_ACCOUNT_DATA as ClientMessage>::read_body(&mut r, body_size)?)),
             0x0211 => Ok(Self::CMSG_GMTICKET_GETTICKET(<CMSG_GMTICKET_GETTICKET as ClientMessage>::read_body(&mut r, body_size)?)),
             0x0216 => Ok(Self::MSG_CORPSE_QUERY(<MSG_CORPSE_QUERY_Client as ClientMessage>::read_body(&mut r, body_size)?)),
             0x0217 => Ok(Self::CMSG_GMTICKET_DELETETICKET(<CMSG_GMTICKET_DELETETICKET as ClientMessage>::read_body(&mut r, body_size)?)),
@@ -1186,6 +1189,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_CORPSE_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_encrypted_client(w, e).await,

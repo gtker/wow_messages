@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
 /// The purpose of this message is unknown, but it is required in order to prevent the chat box from being a white rectangle that is unable to show text.
-/// Sending this causes the client to send `CMSG_UPDATE_ACCOUNT_DATA` messages.
+/// Sending this causes the client to send [`CMSG_UPDATE_ACCOUNT_DATA`](crate::world::version_1_12::CMSG_UPDATE_ACCOUNT_DATA) messages.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm#L3):
 /// ```text

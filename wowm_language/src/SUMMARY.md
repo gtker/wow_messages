@@ -423,6 +423,7 @@
 - [CMSG_UNACCEPT_TRADE](docs/cmsg_unaccept_trade.md)
 - [CMSG_UNLEARN_SKILL](docs/cmsg_unlearn_skill.md)
 - [CMSG_UNSTABLE_PET](docs/cmsg_unstable_pet.md)
+- [CMSG_UPDATE_ACCOUNT_DATA](docs/cmsg_update_account_data.md)
 - [CMSG_USE_ITEM](docs/cmsg_use_item.md)
 - [CMSG_WHO](docs/cmsg_who.md)
 - [CMSG_WHOIS](docs/cmsg_whois.md)
