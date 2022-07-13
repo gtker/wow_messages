@@ -2,6 +2,7 @@
 
 cmsg CMSG_QUERY_TIME = 0x01CE {} {
     description = "Sent immediately after logging in. Client expects reply in [SMSG_QUERY_TIME_RESPONSE].";
+    comment = "This message and the [SMSG_QUERY_TIME_RESPONSE] reply does not actually appear to set the time. Instead [SMSG_LOGIN_SETTIMESPEED] seems to correctly set the time.";
 }
 
 test CMSG_QUERY_TIME {} [

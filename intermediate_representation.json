@@ -57348,6 +57348,7 @@
       "members": [],
       "tags": {
         "description": "Sent immediately after logging in. Client expects reply in [SMSG_QUERY_TIME_RESPONSE].",
+        "comment": "This message and the [SMSG_QUERY_TIME_RESPONSE] reply does not actually appear to set the time. Instead [SMSG_LOGIN_SETTIMESPEED] seems to correctly set the time.",
         "version": {
           "type": "world",
           "versions": [
@@ -57387,7 +57388,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/queries/cmsg_query_time.wowm",
-            "start_position": 7
+            "start_position": 8
           }
         }
       ],
@@ -89290,7 +89291,7 @@
       "members": [
         {
           "Definition": {
-            "name": "secs_to_time_bit_field",
+            "name": "datetime",
             "member_type": {
               "Integer": {
                 "type": "u32",
@@ -89300,12 +89301,15 @@
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "description": "Current server datetime.",
+              "comment": "This is not just unix time but instead seems to be a custom bitfield.\nvmangos/cmangos/mangoszero uses the format `years_after_2000 << 24 | month << 20 | month_day << 14 | week_day << 11 | hours << 6 | minutes`. All values start at 0 and `week_day` starts on Sunday.\nRunning the client with `-console` verifies that this message in this format sets the correct datetime. [SMSG_QUERY_TIME_RESPONSE] will not set this."
+            }
           }
         },
         {
           "Definition": {
-            "name": "game_speed",
+            "name": "timescale",
             "member_type": {
               "FloatingPoint": {
                 "F32": "little"
@@ -89315,12 +89319,15 @@
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {
-              "comment": "Set to 0.01666667f in cmangos."
+              "description": "How many minutes should pass by every second.",
+              "comment": "vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second."
             }
           }
         }
       ],
       "tags": {
+        "description": "Tells the client what the datetime is and how fast time passes.",
+        "comment": "The client also asks for the datetime with [CMSG_QUERY_TIME] and gets a reply from [SMSG_QUERY_TIME_RESPONSE], but this does not appear to change anything in the client.\nDespite sending this as the very first message after the client logs in it will still send a [CMSG_QUERY_TIME].",
         "version": {
           "type": "world",
           "versions": [
@@ -89333,7 +89340,65 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_LOGIN_SETTIMESPEED",
+          "members": [
+            {
+              "variable_name": "datetime",
+              "verified_value": {
+                "Number": {
+                  "value": 376642058,
+                  "original_string": "376642058"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "timescale",
+              "verified_value": {
+                "FloatingNumber": {
+                  "value": 0.016666668,
+                  "original_string": "0.016666668"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            10,
+            66,
+            0,
+            10,
+            26,
+            115,
+            22,
+            137,
+            136,
+            136,
+            60
+          ],
+          "tags": {
+            "description": "Set time to 2022-08-13 (Wednesday) 08:10 and timescale 0.016666668 (1/60).",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm",
+            "start_position": 20
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm",
         "start_position": 3
@@ -96761,7 +96826,7 @@
         }
       ],
       "tags": {
-        "comment": "Reply to [CMSG_QUERY_TIME].",
+        "comment": "Reply to [CMSG_QUERY_TIME].\n[CMSG_QUERY_TIME] and this reply does not actually appear to set the time. Instead [SMSG_LOGIN_SETTIMESPEED] seems to correctly set the time. Running the client with `-console` will print the date when [SMSG_LOGIN_SETTIMESPEED] is received, but not when this message is received.",
         "version": {
           "type": "world",
           "versions": [
@@ -96814,7 +96879,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm",
-            "start_position": 11
+            "start_position": 12
           }
         }
       ],

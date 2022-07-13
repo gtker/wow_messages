@@ -1,8 +1,30 @@
 #tag_all versions "1.12";
 
 smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
-    u32 secs_to_time_bit_field;
-    f32 game_speed {
-        comment = "Set to 0.01666667f in cmangos.";
+    u32 datetime {
+        description = "Current server datetime.";
+        comment = "This is not just unix time but instead seems to be a custom bitfield.";
+        comment = "vmangos/cmangos/mangoszero uses the format `years_after_2000 << 24 | month << 20 | month_day << 14 | week_day << 11 | hours << 6 | minutes`. All values start at 0 and `week_day` starts on Sunday.";
+        comment = "Running the client with `-console` verifies that this message in this format sets the correct datetime. [SMSG_QUERY_TIME_RESPONSE] will not set this.";
     }
+    f32 timescale {
+        description = "How many minutes should pass by every second.";
+        comment = "vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second.";
+    }
+} {
+    description = "Tells the client what the datetime is and how fast time passes.";
+    comment = "The client also asks for the datetime with [CMSG_QUERY_TIME] and gets a reply from [SMSG_QUERY_TIME_RESPONSE], but this does not appear to change anything in the client.";
+    comment = "Despite sending this as the very first message after the client logs in it will still send a [CMSG_QUERY_TIME].";
+}
+
+test SMSG_LOGIN_SETTIMESPEED {
+    datetime = 376642058;
+    timescale = 0.016666668;
+} [
+  0x00, 0x0a, /* size */
+  0x42, 0x00, /* opcode */
+  0x0a, 0x1a, 0x73, 0x16, /* datetime */
+  0x89, 0x88, 0x88, 0x3c, /* timescale */
+] {
+    description = "Set time to 2022-08-13 (Wednesday) 08:10 and timescale 0.016666668 (1/60).";
 }
