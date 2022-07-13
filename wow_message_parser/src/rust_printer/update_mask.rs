@@ -1,5 +1,6 @@
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::rust_printer::Writer;
+use std::fmt::Write;
 use std::fmt::{Display, Formatter};
 use std::fs::read_to_string;
 use std::path::Path;
@@ -26,7 +27,7 @@ pub fn print_update_mask_docs() {
     s.push_str("Taken from [vmangos](https://github.com/vmangos/core/blob/4b2a5173b0ca4917dfe91aa7b87d84232fd7203c/src/game/Objects/UpdateFields_1_12_1.cpp#L5) with some modifications.\n\n");
 
     for (name, u) in update_types {
-        s.push_str(&format!("Fields that all {}s have:\n\n", name));
+        writeln!(s, "Fields that all {}s have:\n", name).unwrap();
 
         s.push_str("| Name | Offset | Size | Type |\n");
         s.push_str("|------|--------|------|------|\n");
@@ -41,24 +42,26 @@ pub fn print_update_mask_docs() {
                     UfType::TwoShort => "TWO_SHORT",
                 };
 
-                s.push_str(&format!(
-                    "|`{}_{}`| 0x{:04x?} | {} | {} |\n",
+                writeln!(
+                    s,
+                    "|`{}_{}`| 0x{:04x?} | {} | {} |",
                     name.to_uppercase(),
                     field.name(),
                     field.offset,
                     field.size,
                     ty
-                ));
+                )
+                .unwrap();
 
                 if field.offset == 0 && field.ty == UfType::Guid {
-                    s.push_str(&format!(
-                        "|`{}_{}`| 0x{:04x?} | {} | {} |\n",
+                    writeln!(
+                        s,
+                        "|`{}_TYPE`| 0x{:04x?} | {} | INT |",
                         name.to_uppercase(),
-                        "TYPE",
                         2,
                         1,
-                        "INT",
-                    ));
+                    )
+                    .unwrap();
                 }
             }
         }

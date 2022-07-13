@@ -1,4 +1,4 @@
-use std::fmt::{Display, Formatter};
+use std::fmt::{Display, Formatter, Write};
 
 use crate::file_utils::get_import_path;
 use crate::{Objects, COMMENT, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, TEST_STR, VERSIONS};
@@ -329,11 +329,13 @@ impl TagString {
         for i in &self.inner {
             match i {
                 TagStringSymbol::Text(s) => current.push_str(s),
-                TagStringSymbol::Link(s) => current.push_str(&format!(
+                TagStringSymbol::Link(s) => write!(
+                    current,
                     "[{name}](./{lower}.md)",
                     name = s,
                     lower = s.to_lowercase()
-                )),
+                )
+                .unwrap(),
                 TagStringSymbol::Newline => {
                     v.push(current.clone());
                     current.clear();
@@ -356,9 +358,9 @@ impl TagString {
                 TagStringSymbol::Text(s) => current.push_str(s),
                 TagStringSymbol::Link(s) => {
                     if let Some(tags) = o.get_tags_of_object_fallible(s, object_tags) {
-                        current.push_str(&format!("[`{}`]({}::{})", s, get_import_path(tags), s))
+                        write!(current, "[`{}`]({}::{})", s, get_import_path(tags), s).unwrap()
                     } else {
-                        current.push_str(&format!("`{}`", s))
+                        write!(current, "`{}`", s).unwrap()
                     }
                 }
                 TagStringSymbol::Newline => {
@@ -380,7 +382,7 @@ impl TagString {
             match i {
                 TagStringSymbol::Text(t) => s.push_str(t),
                 TagStringSymbol::Link(l) => {
-                    s.push_str(&format!("[{}](./{}.md)", l, l.to_lowercase()))
+                    write!(s, "[{}](./{}.md)", l, l.to_lowercase()).unwrap()
                 }
                 TagStringSymbol::Newline => s.push_str("<br/>"),
             }
@@ -395,7 +397,7 @@ impl TagString {
         for i in &self.inner {
             match i {
                 TagStringSymbol::Text(t) => s.push_str(t),
-                TagStringSymbol::Link(l) => s.push_str(&format!("[{}]", l)),
+                TagStringSymbol::Link(l) => write!(s, "[{}]", l).unwrap(),
                 TagStringSymbol::Newline => s.push('\n'),
             }
         }

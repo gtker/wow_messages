@@ -6,6 +6,7 @@ use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{doc_printer, Container, ContainerType, Objects, Tags};
 use std::collections::HashMap;
 use std::convert::TryInto;
+use std::fmt::Write;
 use std::slice::Iter;
 
 pub fn print_docs_for_container(e: &Container, o: &Objects) -> DocWriter {
@@ -207,7 +208,7 @@ fn print_container_example_definition(
                             t.push_str(v.name());
                         }
 
-                        t.push_str(&format!(" ({})", value));
+                        write!(t, " ({})", value).unwrap();
                         t
                     } else {
                         panic!()

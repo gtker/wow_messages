@@ -1,4 +1,5 @@
 use std::collections::BTreeMap;
+use std::fmt::Write as wfmt;
 use std::fs::{read_to_string, remove_file};
 use std::io::Write;
 use std::path::Path;
@@ -50,11 +51,11 @@ impl ModFiles {
             for (i, location) in &m.submodules {
                 match location {
                     SubmoduleLocation::PubUseInternal => {
-                        s.push_str(&format!("mod {};\n", i));
-                        s.push_str(&format!("pub use {}::*;\n", i));
+                        writeln!(s, "mod {};", i).unwrap();
+                        writeln!(s, "pub use {}::*;", i).unwrap();
                     }
                     SubmoduleLocation::PubMod => {
-                        s.push_str(&format!("pub mod {};\n", i));
+                        writeln!(s, "pub mod {};", i).unwrap();
                     }
                 }
             }
