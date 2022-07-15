@@ -23,7 +23,7 @@ impl ServerMessage for SMSG_DEFENSE_MESSAGE {
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // message: SizedCString
-        w.write_all(&(self.message.len() as u32).to_le_bytes())?;
+        w.write_all(&((self.message.len() + 1) as u32).to_le_bytes())?;
         w.write_all(self.message.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

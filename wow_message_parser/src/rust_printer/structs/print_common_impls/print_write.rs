@@ -164,7 +164,7 @@ pub fn print_write_definition(
         }
         Type::SizedCString => {
             s.wln(format!(
-                "w.write_all(&({prefix}{name}.len() as u32).to_le_bytes()){postfix}?;",
+                "w.write_all(&(({prefix}{name}.len() + 1) as u32).to_le_bytes()){postfix}?;",
                 prefix = variable_prefix,
                 name = d.name(),
                 postfix = postfix,

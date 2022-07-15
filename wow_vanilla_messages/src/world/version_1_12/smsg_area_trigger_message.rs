@@ -17,7 +17,7 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
 impl ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message: SizedCString
-        w.write_all(&(self.message.len() as u32).to_le_bytes())?;
+        w.write_all(&((self.message.len() + 1) as u32).to_le_bytes())?;
         w.write_all(self.message.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

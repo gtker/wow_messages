@@ -26,13 +26,13 @@ impl ClientMessage for CMSG_BUG {
         w.write_all(&self.suggestion.to_le_bytes())?;
 
         // content: SizedCString
-        w.write_all(&(self.content.len() as u32).to_le_bytes())?;
+        w.write_all(&((self.content.len() + 1) as u32).to_le_bytes())?;
         w.write_all(self.content.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // bug_type: SizedCString
-        w.write_all(&(self.bug_type.len() as u32).to_le_bytes())?;
+        w.write_all(&((self.bug_type.len() + 1) as u32).to_le_bytes())?;
         w.write_all(self.bug_type.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

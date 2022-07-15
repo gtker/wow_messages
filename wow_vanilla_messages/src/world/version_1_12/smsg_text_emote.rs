@@ -34,7 +34,7 @@ impl ServerMessage for SMSG_TEXT_EMOTE {
         w.write_all(&(self.emote.as_int() as u32).to_le_bytes())?;
 
         // name: SizedCString
-        w.write_all(&(self.name.len() as u32).to_le_bytes())?;
+        w.write_all(&((self.name.len() + 1) as u32).to_le_bytes())?;
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

@@ -27,7 +27,7 @@ impl ServerMessage for SMSG_RESURRECT_REQUEST {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // name: SizedCString
-        w.write_all(&(self.name.len() as u32).to_le_bytes())?;
+        w.write_all(&((self.name.len() + 1) as u32).to_le_bytes())?;
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

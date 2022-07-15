@@ -157,7 +157,7 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 w.write_all(&sender_guid3.guid().to_le_bytes())?;
 
                 // sender_name: SizedCString
-                w.write_all(&(sender_name.len() as u32).to_le_bytes())?;
+                w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
                 w.write_all(sender_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -175,7 +175,7 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 w.write_all(&sender_guid3.guid().to_le_bytes())?;
 
                 // sender_name: SizedCString
-                w.write_all(&(sender_name.len() as u32).to_le_bytes())?;
+                w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
                 w.write_all(sender_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -189,7 +189,7 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 monster_name,
             } => {
                 // monster_name: SizedCString
-                w.write_all(&(monster_name.len() as u32).to_le_bytes())?;
+                w.write_all(&((monster_name.len() + 1) as u32).to_le_bytes())?;
                 w.write_all(monster_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -290,7 +290,7 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 monster_name,
             } => {
                 // monster_name: SizedCString
-                w.write_all(&(monster_name.len() as u32).to_le_bytes())?;
+                w.write_all(&((monster_name.len() + 1) as u32).to_le_bytes())?;
                 w.write_all(monster_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -346,7 +346,7 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 monster_name,
             } => {
                 // monster_name: SizedCString
-                w.write_all(&(monster_name.len() as u32).to_le_bytes())?;
+                w.write_all(&((monster_name.len() + 1) as u32).to_le_bytes())?;
                 w.write_all(monster_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
@@ -372,7 +372,7 @@ impl ServerMessage for SMSG_MESSAGECHAT {
         }
 
         // message: SizedCString
-        w.write_all(&(self.message.len() as u32).to_le_bytes())?;
+        w.write_all(&((self.message.len() + 1) as u32).to_le_bytes())?;
         w.write_all(self.message.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
