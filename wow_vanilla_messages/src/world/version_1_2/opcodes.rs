@@ -90,6 +90,13 @@ impl ClientOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "tokio")]
+    pub async fn tokio_write_unencrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        match self {
+            Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
+        }
+    }
+
 }
 
 use crate::world::version_1_2::SMSG_AUTH_CHALLENGE;
@@ -178,6 +185,14 @@ impl ServerOpcodeMessage {
         match self {
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
+        }
+    }
+
+    #[cfg(feature = "tokio")]
+    pub async fn tokio_write_unencrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        match self {
+            Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 

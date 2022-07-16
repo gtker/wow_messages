@@ -255,7 +255,7 @@ pub fn common_impls_world(
             world_common_impls_read_write(s, cd, size, opcode_size, EXPECTED_OPCODE_ERROR, it);
         }
 
-        world_inner(s, v, cd);
+        world_inner(s, v, cd, ImplType::Tokio);
 
         if any_container_is_pure_movement_info(v) {
             world_movement_info(s, v);
@@ -263,9 +263,8 @@ pub fn common_impls_world(
     });
 }
 
-fn world_inner(s: &mut Writer, v: &[&Container], cd: &str) {
-    let it = ImplType::Tokio;
-    s.wln(ImplType::Tokio.cfg());
+fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType) {
+    s.wln(it.cfg());
     s.bodyn(
         format!(
             "pub {func}fn {prefix}write_encrypted_{cd}<W: {write}, E: wow_srp::header_crypto::Encrypter{decrypter}>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error>",
@@ -277,10 +276,35 @@ fn world_inner(s: &mut Writer, v: &[&Container], cd: &str) {
         ), |s| {
         s.body("match self", |s| {
            for container in v {
-               s.wln(format!("Self::{}(c) => c.tokio_write_encrypted_{cd}(w, e).await,", get_enumerator_name(container.name())));
+               s.wln(format!("Self::{en}(c) => c.{prefix}write_encrypted_{cd}(w, e){postfix},",
+                   en = get_enumerator_name(container.name()),
+                   prefix = it.prefix(),
+                   postfix = it.postfix(),
+               ));
            }
         });
     });
+
+    s.wln(it.cfg());
+    s.bodyn(
+        format!(
+            "pub {func}fn {prefix}write_unencrypted_{cd}<W: {write}>(&self, w: &mut W) -> Result<(), std::io::Error>",
+            cd = cd,
+            func = it.func(),
+            write = it.write(),
+            prefix = it.prefix(),
+        ), |s| {
+            s.body("match self", |s| {
+                for container in v {
+                    s.wln(format!("Self::{en}(c) => c.{prefix}write_unencrypted_{cd}(w){postfix},",
+                        en = get_enumerator_name(container.name()),
+                        prefix = it.prefix(),
+                        postfix = it.postfix())
+                    );
+                }
+            });
+        }
+    );
 }
 
 fn world_movement_info(s: &mut Writer, v: &[&Container]) {
