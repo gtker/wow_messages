@@ -83,6 +83,7 @@ impl ClientOpcodeMessage {
         Self::read_opcodes(header.opcode, body_size, &buf)
     }
 
+    #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -172,6 +173,7 @@ impl ServerOpcodeMessage {
         Self::read_opcodes(header.opcode, body_size, &buf)
     }
 
+    #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,

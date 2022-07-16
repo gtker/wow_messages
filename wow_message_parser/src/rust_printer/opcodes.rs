@@ -264,7 +264,17 @@ pub fn common_impls_world(
 }
 
 fn world_inner(s: &mut Writer, v: &[&Container], cd: &str) {
-    s.bodyn(format!("pub async fn tokio_write_encrypted_{cd}<W: {write}, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error>", cd = cd, write = ImplType::Tokio.write()), |s| {
+    let it = ImplType::Tokio;
+    s.wln(ImplType::Tokio.cfg());
+    s.bodyn(
+        format!(
+            "pub {func}fn {prefix}write_encrypted_{cd}<W: {write}, E: wow_srp::header_crypto::Encrypter{decrypter}>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error>",
+            cd = cd,
+            func = it.func(),
+            write = it.write(),
+            prefix = it.prefix(),
+            decrypter = it.decrypter(),
+        ), |s| {
         s.body("match self", |s| {
            for container in v {
                s.wln(format!("Self::{}(c) => c.tokio_write_encrypted_{cd}(w, e).await,", get_enumerator_name(container.name())));
