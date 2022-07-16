@@ -255,7 +255,9 @@ pub fn common_impls_world(
             world_common_impls_read_write(s, cd, size, opcode_size, EXPECTED_OPCODE_ERROR, it);
         }
 
-        world_inner(s, v, cd, ImplType::Tokio);
+        for it in ImplType::types() {
+            world_inner(s, v, cd, it);
+        }
 
         if any_container_is_pure_movement_info(v) {
             world_movement_info(s, v);
