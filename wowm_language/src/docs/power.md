@@ -13,8 +13,7 @@ enum Power : u8 {
     FOCUS = 2;
     ENERGY = 3;
     HAPPINESS = 4;
-    MAX_POWERS = 5;
-    ALL = 127;
+    HEALTH = 0xFE;
 }
 ```
 ### Type
@@ -22,13 +21,12 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
 | Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
-| `MANA` | 0 (0x00) |  | The most common one, mobs usually have this or rage |
-| `RAGE` | 1 (0x01) |  | This is what warriors use to cast their spells |
-| `FOCUS` | 2 (0x02) |  | Used by hunters after Cataclysm (4.x) |
-| `ENERGY` | 3 (0x03) |  | Used by rouges to do their spells |
-| `HAPPINESS` | 4 (0x04) |  | Hunter's pet's happiness affect their damage |
-| `MAX_POWERS` | 5 (0x05) |  |  |
-| `ALL` | 127 (0x7F) |  | default for class? - need check for TBC |
+| `MANA` | 0 (0x00) |  | mangoszero: The most common one, mobs usually have this or rage |
+| `RAGE` | 1 (0x01) |  | mangoszero: This is what warriors use to cast their spells |
+| `FOCUS` | 2 (0x02) |  | mangoszero: Used by hunters after Cataclysm (4.x) |
+| `ENERGY` | 3 (0x03) |  | mangoszero: Used by rouges to do their spells |
+| `HAPPINESS` | 4 (0x04) |  | mangoszero: Hunter's pet's happiness affect their damage |
+| `HEALTH` | 254 (0xFE) |  | mangoszero: Health, everyone has this (-2 as signed value)<br/>This might not actually be sent to the client. |
 
 Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)

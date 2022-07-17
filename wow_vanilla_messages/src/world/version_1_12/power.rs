@@ -8,32 +8,31 @@ use std::convert::{TryFrom, TryInto};
 ///     FOCUS = 2;
 ///     ENERGY = 3;
 ///     HAPPINESS = 4;
-///     MAX_POWERS = 5;
-///     ALL = 127;
+///     HEALTH = 0xFE;
 /// }
 
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Power {
-    /// The most common one, mobs usually have this or rage
+    /// mangoszero: The most common one, mobs usually have this or rage
     ///
     MANA,
-    /// This is what warriors use to cast their spells
+    /// mangoszero: This is what warriors use to cast their spells
     ///
     RAGE,
-    /// Used by hunters after Cataclysm (4.x)
+    /// mangoszero: Used by hunters after Cataclysm (4.x)
     ///
     FOCUS,
-    /// Used by rouges to do their spells
+    /// mangoszero: Used by rouges to do their spells
     ///
     ENERGY,
-    /// Hunter's pet's happiness affect their damage
+    /// mangoszero: Hunter's pet's happiness affect their damage
     ///
     HAPPINESS,
-    MAX_POWERS,
-    /// default for class? - need check for TBC
+    /// mangoszero: Health, everyone has this (-2 as signed value)
+    /// This might not actually be sent to the client.
     ///
-    ALL,
+    HEALTH,
 }
 
 impl Power {
@@ -44,8 +43,7 @@ impl Power {
             Self::FOCUS => 0x2,
             Self::ENERGY => 0x3,
             Self::HAPPINESS => 0x4,
-            Self::MAX_POWERS => 0x5,
-            Self::ALL => 0x7f,
+            Self::HEALTH => 0xfe,
         }
     }
 
@@ -65,8 +63,7 @@ impl std::fmt::Display for Power {
             Self::FOCUS => f.write_str("FOCUS"),
             Self::ENERGY => f.write_str("ENERGY"),
             Self::HAPPINESS => f.write_str("HAPPINESS"),
-            Self::MAX_POWERS => f.write_str("MAX_POWERS"),
-            Self::ALL => f.write_str("ALL"),
+            Self::HEALTH => f.write_str("HEALTH"),
         }
     }
 }
@@ -80,8 +77,7 @@ impl TryFrom<u8> for Power {
             2 => Ok(Self::FOCUS),
             3 => Ok(Self::ENERGY),
             4 => Ok(Self::HAPPINESS),
-            5 => Ok(Self::MAX_POWERS),
-            127 => Ok(Self::ALL),
+            254 => Ok(Self::HEALTH),
             v => Err(crate::errors::EnumError::new("Power", v as u32),)
         }
     }

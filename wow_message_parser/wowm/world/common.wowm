@@ -2,28 +2,24 @@
 
 enum Power : u8 {
     MANA = 0 {
-        comment = "The most common one, mobs usually have this or rage";
+        comment = "mangoszero: The most common one, mobs usually have this or rage";
     }
     RAGE = 1 {
-        comment = "This is what warriors use to cast their spells";
+        comment = "mangoszero: This is what warriors use to cast their spells";
     }
     FOCUS = 2 {
-        comment = "Used by hunters after Cataclysm (4.x)";
+        comment = "mangoszero: Used by hunters after Cataclysm (4.x)";
     }
     ENERGY = 3 {
-        comment = "Used by rouges to do their spells";
+        comment = "mangoszero: Used by rouges to do their spells";
     }
     HAPPINESS = 4 {
-        comment = "Hunter's pet's happiness affect their damage";
+        comment = "mangoszero: Hunter's pet's happiness affect their damage";
     }
-    MAX_POWERS = 5;
-    ALL = 127 {
-        comment = "default for class? - need check for TBC";
+    HEALTH = 0xFE {
+        comment = "mangoszero: Health, everyone has this (-2 as signed value)";
+        comment = "This might not actually be sent to the client.";
     }
-    /* Correct?
-    HEALTH = 0xFFFFFFFE {
-        comment = "Health, everyone has this (-2 as signed value)";
-    } */
 }
 
 flag SpellCastTargetFlags : u16 {

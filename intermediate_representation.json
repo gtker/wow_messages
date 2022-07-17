@@ -1477,7 +1477,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 29
+        "start_position": 25
       },
       "features": [
         "Flag",
@@ -21452,7 +21452,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 124
+        "start_position": 120
       },
       "features": [
         "Enum",
@@ -24829,7 +24829,7 @@
             "original": "0"
           },
           "tags": {
-            "comment": "The most common one, mobs usually have this or rage"
+            "comment": "mangoszero: The most common one, mobs usually have this or rage"
           }
         },
         {
@@ -24839,7 +24839,7 @@
             "original": "1"
           },
           "tags": {
-            "comment": "This is what warriors use to cast their spells"
+            "comment": "mangoszero: This is what warriors use to cast their spells"
           }
         },
         {
@@ -24849,7 +24849,7 @@
             "original": "2"
           },
           "tags": {
-            "comment": "Used by hunters after Cataclysm (4.x)"
+            "comment": "mangoszero: Used by hunters after Cataclysm (4.x)"
           }
         },
         {
@@ -24859,7 +24859,7 @@
             "original": "3"
           },
           "tags": {
-            "comment": "Used by rouges to do their spells"
+            "comment": "mangoszero: Used by rouges to do their spells"
           }
         },
         {
@@ -24869,25 +24869,17 @@
             "original": "4"
           },
           "tags": {
-            "comment": "Hunter's pet's happiness affect their damage"
+            "comment": "mangoszero: Hunter's pet's happiness affect their damage"
           }
         },
         {
-          "name": "MAX_POWERS",
+          "name": "HEALTH",
           "value": {
-            "int": 5,
-            "original": "5"
-          },
-          "tags": {}
-        },
-        {
-          "name": "ALL",
-          "value": {
-            "int": 127,
-            "original": "127"
+            "int": 254,
+            "original": "0xFE"
           },
           "tags": {
-            "comment": "default for class? - need check for TBC"
+            "comment": "mangoszero: Health, everyone has this (-2 as signed value)\nThis might not actually be sent to the client."
           }
         }
       ],
@@ -27828,7 +27820,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 148
+        "start_position": 144
       },
       "features": [
         "Enum",
@@ -76929,7 +76921,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 303
+        "start_position": 299
       },
       "only_has_io_error": true,
       "features": [
@@ -77600,7 +77592,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 294
+        "start_position": 290
       },
       "only_has_io_error": false,
       "features": [
@@ -106477,7 +106469,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 83
+        "start_position": 79
       },
       "only_has_io_error": false,
       "features": [
