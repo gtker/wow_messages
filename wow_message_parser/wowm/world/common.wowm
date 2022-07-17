@@ -20,6 +20,8 @@ enum Power : u8 {
         comment = "mangoszero: Health, everyone has this (-2 as signed value)";
         comment = "This might not actually be sent to the client.";
     }
+} {
+    rust_common_type = "true";
 }
 
 flag SpellCastTargetFlags : u16 {

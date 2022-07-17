@@ -1,85 +1,24 @@
-use std::convert::{TryFrom, TryInto};
+pub use wow_vanilla_base::Power;
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L3):
-/// ```text
-/// enum Power : u8 {
-///     MANA = 0;
-///     RAGE = 1;
-///     FOCUS = 2;
-///     ENERGY = 3;
-///     HAPPINESS = 4;
-///     HEALTH = 0xFE;
-/// }
-
-/// ```
-#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub enum Power {
-    /// mangoszero: The most common one, mobs usually have this or rage
-    ///
-    MANA,
-    /// mangoszero: This is what warriors use to cast their spells
-    ///
-    RAGE,
-    /// mangoszero: Used by hunters after Cataclysm (4.x)
-    ///
-    FOCUS,
-    /// mangoszero: Used by rouges to do their spells
-    ///
-    ENERGY,
-    /// mangoszero: Hunter's pet's happiness affect their damage
-    ///
-    HAPPINESS,
-    /// mangoszero: Health, everyone has this (-2 as signed value)
-    /// This might not actually be sent to the client.
-    ///
-    HEALTH,
-}
-
-impl Power {
-    pub(crate) const fn as_int(&self) -> u8 {
-        match self {
-            Self::MANA => 0x0,
-            Self::RAGE => 0x1,
-            Self::FOCUS => 0x2,
-            Self::ENERGY => 0x3,
-            Self::HAPPINESS => 0x4,
-            Self::HEALTH => 0xfe,
-        }
-    }
-
-}
-
-impl Default for Power {
-    fn default() -> Self {
-        Self::MANA
+pub(crate) const fn power_as_int(s: &Power) -> u8 {
+    match s {
+        Power::MANA => 0x0,
+        Power::RAGE => 0x1,
+        Power::FOCUS => 0x2,
+        Power::ENERGY => 0x3,
+        Power::HAPPINESS => 0x4,
+        Power::HEALTH => 0xfe,
     }
 }
 
-impl std::fmt::Display for Power {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::MANA => f.write_str("MANA"),
-            Self::RAGE => f.write_str("RAGE"),
-            Self::FOCUS => f.write_str("FOCUS"),
-            Self::ENERGY => f.write_str("ENERGY"),
-            Self::HAPPINESS => f.write_str("HAPPINESS"),
-            Self::HEALTH => f.write_str("HEALTH"),
-        }
+pub(crate) fn power_try_from(value: u8) -> std::result::Result<Power, crate::errors::EnumError> {
+    match value {
+        0 => Ok(Power::MANA),
+        1 => Ok(Power::RAGE),
+        2 => Ok(Power::FOCUS),
+        3 => Ok(Power::ENERGY),
+        4 => Ok(Power::HAPPINESS),
+        254 => Ok(Power::HEALTH),
+        v => Err(crate::errors::EnumError::new("Power", v as u32),)
     }
 }
-
-impl TryFrom<u8> for Power {
-    type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
-        match value {
-            0 => Ok(Self::MANA),
-            1 => Ok(Self::RAGE),
-            2 => Ok(Self::FOCUS),
-            3 => Ok(Self::ENERGY),
-            4 => Ok(Self::HAPPINESS),
-            254 => Ok(Self::HEALTH),
-            v => Err(crate::errors::EnumError::new("Power", v as u32),)
-        }
-    }
-}
-

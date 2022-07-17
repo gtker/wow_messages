@@ -4,7 +4,7 @@ use crate::AuraMask;
 use crate::world::version_1_12::Area;
 use crate::world::version_1_12::GroupMemberOnlineStatus;
 use crate::world::version_1_12::GroupUpdateFlags;
-use crate::world::version_1_12::Power;
+use crate::world::version_1_12::power::{Power, power_try_from, power_as_int};
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -105,7 +105,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_power_type {
             // power: Power
-            w.write_all(&(if_statement.power.as_int() as u8).to_le_bytes())?;
+            w.write_all(&(power_as_int(&if_statement.power) as u8).to_le_bytes())?;
 
         }
 
@@ -176,7 +176,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_pet_power_type {
             // pet_power_type: Power
-            w.write_all(&(if_statement.pet_power_type.as_int() as u8).to_le_bytes())?;
+            w.write_all(&(power_as_int(&if_statement.pet_power_type) as u8).to_le_bytes())?;
 
         }
 
@@ -251,7 +251,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
 
         let mask_FLAG_POWER_TYPE = if mask.is_FLAG_POWER_TYPE() {
             // power: Power
-            let power: Power = crate::util::read_u8_le(r)?.try_into()?;
+            let power: Power = power_try_from(crate::util::read_u8_le(r)?)?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POWER_TYPE {
                 power,
@@ -388,7 +388,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
 
         let mask_FLAG_PET_POWER_TYPE = if mask.is_FLAG_PET_POWER_TYPE() {
             // pet_power_type: Power
-            let pet_power_type: Power = crate::util::read_u8_le(r)?.try_into()?;
+            let pet_power_type: Power = power_try_from(crate::util::read_u8_le(r)?)?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_POWER_TYPE {
                 pet_power_type,
