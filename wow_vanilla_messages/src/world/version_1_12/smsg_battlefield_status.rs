@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::Map;
+use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
 use crate::world::version_1_12::StatusId;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -2166,7 +2166,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
         let queue_slot = crate::util::read_u32_le(r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
 
         let map_if = match map {
             Map::EASTERN_KINGDOMS => SMSG_BATTLEFIELD_STATUS_Map::EASTERN_KINGDOMS,

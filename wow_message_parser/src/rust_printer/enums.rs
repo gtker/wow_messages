@@ -4,6 +4,31 @@ use crate::rust_printer::{print_docc_description_and_comment, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{Objects, DISPLAY_STR};
 
+pub fn print_common_enum_common(e: &Definer, o: &Objects) -> Writer {
+    let mut s = Writer::new(&get_import_path(e.tags()));
+
+    declaration(&mut s, e, o);
+
+    print_default(&mut s, e);
+
+    print_display(&mut s, e);
+
+    s
+}
+
+pub fn print_common_enum_messages(e: &Definer) -> Writer {
+    let mut s = Writer::new(&get_import_path(e.tags()));
+
+    s.wln(format!("pub use wow_vanilla_base::{};", e.name()));
+    s.newline();
+
+    common_as_type(&mut s, e);
+
+    common_print_try_from(&mut s, e);
+
+    s
+}
+
 pub fn print_enum(e: &Definer, o: &Objects) -> Writer {
     let mut s = Writer::new(&get_import_path(e.tags()));
 
@@ -188,4 +213,52 @@ fn print_from(s: &mut Writer, e: &Definer) {
             },
         );
     });
+}
+
+fn common_as_type(s: &mut Writer, e: &Definer) {
+    s.funcn_const(
+        format!("{}_as_int(s: &{})", e.name().to_lowercase(), e.name(),),
+        e.ty().rust_str(),
+        |s| {
+            s.body("match s", |s| {
+                for field in e.fields() {
+                    s.wln(format!(
+                        "{}::{} => 0x{:x},",
+                        e.name(),
+                        field.name(),
+                        field.value().int()
+                    ));
+                }
+                assert!(e.self_value().is_none());
+            });
+        },
+    );
+}
+
+fn common_print_try_from(s: &mut Writer, e: &Definer) {
+    s.body(
+        format!(
+            "pub(crate) fn {}_try_from(value: {}) -> std::result::Result<{}, crate::errors::EnumError>",
+            e.name().to_lowercase(),
+            e.ty().rust_str(),
+            e.name(),
+        ),
+        |s| {
+            s.body("match value", |s| {
+                for field in e.fields() {
+                    s.wln(format!(
+                        "{} => Ok({}::{}),",
+                        field.value().int(),
+                        e.name(),
+                        field.name()
+                    ));
+                }
+
+                s.wln(format!(
+                    "v => Err(crate::errors::EnumError::new(\"{}\", v as u32),)",
+                    e.name()
+                ));
+            });
+        },
+    );
 }

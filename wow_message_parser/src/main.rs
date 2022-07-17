@@ -16,7 +16,8 @@ use crate::file_utils::{
 };
 use crate::ir_printer::write_intermediate_representation;
 use crate::rust_printer::{
-    print_enum, print_flag, print_login_opcodes, print_update_mask, print_world_opcodes,
+    print_common_enum_common, print_common_enum_messages, print_enum, print_flag,
+    print_login_opcodes, print_update_mask, print_world_opcodes,
 };
 use parser::types::tags::Tags;
 
@@ -44,6 +45,7 @@ const TEST_STR: &str = "test";
 const DISPLAY_STR: &str = "display";
 const SKIP_STR: &str = "skip_codegen";
 const LOGIN_VERSIONS: &str = "login_versions";
+const RUST_COMMON_TYPE: &str = "rust_common_type";
 
 // Also used in /utils.rs
 const CSTRING_SMALLEST_ALLOWED: usize = 1;
@@ -72,8 +74,16 @@ fn main() {
         if should_not_write_object(e.tags()) {
             continue;
         }
-        let s = print_enum(e, &o);
-        m.write_contents_to_file(e.name(), e.tags(), &s);
+
+        if !e.tags().is_in_common() {
+            let s = print_enum(e, &o);
+            m.write_contents_to_file(e.name(), e.tags(), &s);
+        } else {
+            let common_s = print_common_enum_common(e, &o);
+            let world_s = print_common_enum_messages(e);
+
+            m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s);
+        }
 
         definer_docs.push(print_docs_for_enum(e));
     }

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::Map;
+use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
 use crate::world::version_1_12::Vector3d;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -29,7 +29,7 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
         w.write_all(&self.time_in_msec.to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
 
         // position: Vector3d
         self.position.write_into_vec(w)?;
@@ -54,7 +54,7 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
         let time_in_msec = crate::util::read_u64_le(r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
 
         // position: Vector3d
         let position = Vector3d::read(r)?;

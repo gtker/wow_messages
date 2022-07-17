@@ -5,7 +5,7 @@ use crate::world::version_1_12::CharacterFlags;
 use crate::world::version_1_12::CharacterGear;
 use crate::world::version_1_12::Class;
 use crate::world::version_1_12::Gender;
-use crate::world::version_1_12::Map;
+use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
 use crate::world::version_1_12::Race;
 use crate::world::version_1_12::Vector3d;
 use std::io::{Write, Read};
@@ -129,7 +129,7 @@ impl Character {
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
 
         // position: Vector3d
         self.position.write_into_vec(w)?;
@@ -207,7 +207,7 @@ impl Character {
         let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
 
         // position: Vector3d
         let position = Vector3d::read(r)?;

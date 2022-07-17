@@ -1,6 +1,6 @@
 use std::fmt::Write;
 
-pub use enums::print_enum;
+pub use enums::{print_common_enum_common, print_common_enum_messages, print_enum};
 pub use flags::print_flag;
 pub use opcodes::print_login_opcodes;
 pub use opcodes::print_world_opcodes;

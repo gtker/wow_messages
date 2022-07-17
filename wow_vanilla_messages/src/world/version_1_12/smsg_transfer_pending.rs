@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::Map;
+use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -23,7 +23,7 @@ pub struct SMSG_TRANSFER_PENDING {
 impl ServerMessage for SMSG_TRANSFER_PENDING {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
 
         // optional has_transport
         if let Some(v) = &self.has_transport {
@@ -31,7 +31,7 @@ impl ServerMessage for SMSG_TRANSFER_PENDING {
             w.write_all(&v.transport.to_le_bytes())?;
 
             // transport_map: Map
-            w.write_all(&(v.transport_map.as_int() as u32).to_le_bytes())?;
+            w.write_all(&(map_as_int(&v.transport_map) as u32).to_le_bytes())?;
 
         }
 
@@ -45,7 +45,7 @@ impl ServerMessage for SMSG_TRANSFER_PENDING {
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
 
         // optional has_transport
         let current_size = {
@@ -56,7 +56,7 @@ impl ServerMessage for SMSG_TRANSFER_PENDING {
             let transport = crate::util::read_u32_le(r)?;
 
             // transport_map: Map
-            let transport_map: Map = crate::util::read_u32_le(r)?.try_into()?;
+            let transport_map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
 
             Some(SMSG_TRANSFER_PENDING_has_transport {
                 transport,

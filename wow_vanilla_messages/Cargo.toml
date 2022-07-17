@@ -5,6 +5,9 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[dependencies.wow_vanilla_base]
+path = "../wow_vanilla_base"
+
 [dependencies.wow_srp]
 version = "0.4.0"
 

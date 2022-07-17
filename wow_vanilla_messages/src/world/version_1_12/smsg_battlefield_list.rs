@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::version_1_12::Map;
+use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -35,7 +35,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_LIST {
         w.write_all(&self.battlemaster.guid().to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -67,7 +67,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_LIST {
         let battlemaster = Guid::read(r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;

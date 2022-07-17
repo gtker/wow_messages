@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::Area;
-use crate::world::version_1_12::Map;
+use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
 use crate::world::version_1_12::Vector3d;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -30,7 +30,7 @@ impl ServerMessage for SMSG_BINDPOINTUPDATE {
         self.position.write_into_vec(w)?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
 
         // area: Area
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
@@ -52,7 +52,7 @@ impl ServerMessage for SMSG_BINDPOINTUPDATE {
         let position = Vector3d::read(r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
 
         // area: Area
         let area: Area = crate::util::read_u32_le(r)?.try_into()?;

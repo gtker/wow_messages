@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::version_1_12::Map;
+use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -29,7 +29,7 @@ impl ClientMessage for CMSG_BATTLEMASTER_JOIN {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
 
         // instance_id: u32
         w.write_all(&self.instance_id.to_le_bytes())?;
@@ -54,7 +54,7 @@ impl ClientMessage for CMSG_BATTLEMASTER_JOIN {
         let guid = Guid::read(r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
 
         // instance_id: u32
         let instance_id = crate::util::read_u32_le(r)?;

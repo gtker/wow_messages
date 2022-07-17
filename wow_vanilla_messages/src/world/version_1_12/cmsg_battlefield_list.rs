@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::Map;
+use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -19,7 +19,7 @@ pub struct CMSG_BATTLEFIELD_LIST {
 impl ClientMessage for CMSG_BATTLEFIELD_LIST {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -35,7 +35,7 @@ impl ClientMessage for CMSG_BATTLEFIELD_LIST {
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
 
         Ok(Self {
             map,

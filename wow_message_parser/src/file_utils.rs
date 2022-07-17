@@ -12,6 +12,7 @@ use crate::rust_printer::Writer;
 
 pub const LOGIN_DIR: &str = "wow_login_messages/src/logon";
 pub const WORLD_DIR: &str = "wow_vanilla_messages/src/world";
+pub const BASE_DIR: &str = "wow_vanilla_base/src/inner";
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
 pub enum SubmoduleLocation {
@@ -70,7 +71,7 @@ impl ModFiles {
     pub fn new() -> Self {
         let mut already_existing_files = BTreeMap::new();
 
-        for dir in [LOGIN_DIR, WORLD_DIR] {
+        for dir in [LOGIN_DIR, WORLD_DIR, BASE_DIR] {
             for file in WalkDir::new(dir).into_iter().filter_map(|a| a.ok()) {
                 if !file.file_type().is_file() {
                     continue;
@@ -97,7 +98,14 @@ impl ModFiles {
         }
     }
 
-    pub fn add_world_file(&mut self, name: &str, version: &WorldVersion) {
+    pub fn add_world_file(&mut self, name: &str, version: &WorldVersion, tags: &Tags) {
+        if tags.is_in_common() {
+            self.add_or_append_file(
+                format!("{}/", BASE_DIR),
+                (get_module_name(name), SubmoduleLocation::PubUseInternal),
+            );
+        }
+
         let (m, i) = match version {
             WorldVersion::Minor(m, i) => (m, i),
             WorldVersion::Major(_)
@@ -160,9 +168,32 @@ impl ModFiles {
         }
     }
 
+    pub fn write_common_contents_to_file(
+        &mut self,
+        name: &str,
+        tags: &Tags,
+        common_s: &Writer,
+        world_s: &Writer,
+    ) {
+        for version in tags.versions() {
+            let world_path = get_world_filepath(name, version);
+            let common_path = get_common_filepath(name);
+
+            self.add_world_file(name, version, tags);
+
+            self.already_existing_files.insert(world_path.clone(), true);
+            self.already_existing_files
+                .insert(common_path.clone(), true);
+
+            create_and_overwrite_if_not_same_contents(world_s.inner(), Path::new(&world_path));
+            create_and_overwrite_if_not_same_contents(common_s.inner(), Path::new(&common_path));
+        }
+    }
+
     pub fn write_contents_to_file(&mut self, name: &str, tags: &Tags, s: &Writer) {
         for (i, version) in tags.logon_versions().iter().enumerate() {
             let path = get_login_filepath(name, version);
+
             self.add_login_file(name, version);
             let s = if i == 0 {
                 s.proper_as_str()
@@ -177,7 +208,8 @@ impl ModFiles {
 
         for (i, version) in tags.versions().iter().enumerate() {
             let path = get_world_filepath(name, version);
-            self.add_world_file(name, version);
+
+            self.add_world_file(name, version, tags);
             let s = if i == 0 {
                 s.proper_as_str()
             } else {
@@ -240,6 +272,11 @@ pub fn get_import_path(tags: &Tags) -> String {
             tags
         )
     }
+}
+
+fn get_common_filepath(object_name: &str) -> String {
+    let s = format!("{}/", BASE_DIR);
+    s + &get_module_name(object_name) + ".rs"
 }
 
 fn get_world_filepath(object_name: &str, version: &WorldVersion) -> String {
