@@ -691,9 +691,9 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_2(mut self, facial_hair: u8, unknown: u8, bank_bag_slots: u8, rested_state: u8) -> Self {
         self.header_set(164);
-        self.values.insert(164, u32::from_le_bytes([a, b, c, d]));
+        self.values.insert(164, u32::from_le_bytes([facial_hair, unknown, bank_bag_slots, rested_state]));
         self
     }
 
@@ -1204,9 +1204,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_2(mut self, facial_hair: u8, unknown: u8, bank_bag_slots: u8, rested_state: u8) -> Self {
         self.header_set(164);
-        self.values.insert(164, u32::from_le_bytes([a, b, c, d]));
+        self.values.insert(164, u32::from_le_bytes([facial_hair, unknown, bank_bag_slots, rested_state]));
         self
     }
 

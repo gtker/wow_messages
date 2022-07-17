@@ -37,8 +37,9 @@ pub fn print_update_mask_docs() {
                     UfType::Guid => "GUID",
                     UfType::Int => "INT",
                     UfType::Float => "FLOAT",
-                    UfType::Bytes => "BYTES",
-                    UfType::BytesWithTypes(_, _, _, _) => "BYTES",
+                    UfType::BytesWithNames(_, _, _, _)
+                    | UfType::Bytes
+                    | UfType::BytesWithTypes(_, _, _, _) => "BYTES",
                     UfType::TwoShort => "TWO_SHORT",
                 };
 
@@ -167,12 +168,16 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
         }
         _ => {
             let value = match m.ty {
-                UfType::Int => "v as u32",
-                UfType::Float => "u32::from_le_bytes(v.to_le_bytes())",
-                UfType::Bytes => "u32::from_le_bytes([a, b, c, d])",
-                UfType::TwoShort => "v",
+                UfType::Int => "v as u32".to_string(),
+                UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
+                UfType::Bytes => "u32::from_le_bytes([a, b, c, d])".to_string(),
+                UfType::TwoShort => "v".to_string(),
                 UfType::BytesWithTypes(_, _, _, _) => {
                     "u32::from_le_bytes([a.as_int(), b.as_int(), c.as_int(), d.as_int()])"
+                        .to_string()
+                }
+                UfType::BytesWithNames(a, b, c, d) => {
+                    format!("u32::from_le_bytes([{}, {}, {}, {}])", a, b, c, d)
                 }
                 _ => unreachable!(),
             };
@@ -218,6 +223,7 @@ pub enum UfType {
     Int,
     Float,
     Bytes,
+    BytesWithNames(&'static str, &'static str, &'static str, &'static str),
     BytesWithTypes(&'static str, &'static str, &'static str, &'static str),
     TwoShort,
 }
@@ -241,6 +247,9 @@ impl UfType {
                 }
                 UfType::BytesWithTypes(a, b, c, d) => {
                     return format!("a: {}, b: {}, c: {}, d: {}", a, b, c, d);
+                }
+                UfType::BytesWithNames(a, b, c, d) => {
+                    return format!("{}: u8, {}: u8, {}: u8, {}: u8", a, b, c, d);
                 }
             }
         )
@@ -509,7 +518,13 @@ pub const FIELDS: [MemberType; 296] = [
     ),
     MemberType::new(UpdateMaskType::Unit, "BASE_MANA", 0xA2, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Unit, "BASE_HEALTH", 0xA3, 1, UfType::Int),
-    MemberType::new(UpdateMaskType::Unit, "BYTES_2", 0xA4, 1, UfType::Bytes),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "BYTES_2",
+        0xA4,
+        1,
+        UfType::BytesWithNames("facial_hair", "unknown", "bank_bag_slots", "rested_state"),
+    ),
     MemberType::new(UpdateMaskType::Unit, "ATTACK_POWER", 0xA5, 1, UfType::Int),
     MemberType::new(
         UpdateMaskType::Unit,
