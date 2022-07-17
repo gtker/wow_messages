@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::version_1_12::Area;
-use crate::world::version_1_12::Class;
+use crate::world::version_1_12::class::{Class, class_try_from, class_as_int};
 use crate::world::version_1_12::FriendStatus;
 use std::io::{Write, Read};
 
@@ -45,7 +45,7 @@ impl Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+                w.write_all(&(class_as_int(&class) as u32).to_le_bytes())?;
 
             }
             Friend_FriendStatus::AFK {
@@ -60,7 +60,7 @@ impl Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+                w.write_all(&(class_as_int(&class) as u32).to_le_bytes())?;
 
             }
             Friend_FriendStatus::UNKNOWN3 {
@@ -75,7 +75,7 @@ impl Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+                w.write_all(&(class_as_int(&class) as u32).to_le_bytes())?;
 
             }
             Friend_FriendStatus::DND {
@@ -90,7 +90,7 @@ impl Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+                w.write_all(&(class_as_int(&class) as u32).to_le_bytes())?;
 
             }
         }
@@ -117,7 +117,7 @@ impl Friend {
                 let level = crate::util::read_u32_le(r)?;
 
                 // class: Class
-                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let class: Class = class_try_from(crate::util::read_u32_le(r)? as u8)?;
 
                 Friend_FriendStatus::ONLINE {
                     area,
@@ -133,7 +133,7 @@ impl Friend {
                 let level = crate::util::read_u32_le(r)?;
 
                 // class: Class
-                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let class: Class = class_try_from(crate::util::read_u32_le(r)? as u8)?;
 
                 Friend_FriendStatus::AFK {
                     area,
@@ -149,7 +149,7 @@ impl Friend {
                 let level = crate::util::read_u32_le(r)?;
 
                 // class: Class
-                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let class: Class = class_try_from(crate::util::read_u32_le(r)? as u8)?;
 
                 Friend_FriendStatus::UNKNOWN3 {
                     area,
@@ -165,7 +165,7 @@ impl Friend {
                 let level = crate::util::read_u32_le(r)?;
 
                 // class: Class
-                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let class: Class = class_try_from(crate::util::read_u32_le(r)? as u8)?;
 
                 Friend_FriendStatus::DND {
                     area,

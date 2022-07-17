@@ -1,6 +1,7 @@
 use crate::container::{Container, ContainerType};
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
+use crate::parser::types::tags::Tag;
 use crate::parser::types::ArraySize;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
@@ -11,6 +12,7 @@ use crate::rust_printer::{
     SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::test_case::{TestCase, TestCaseMember, TestValue};
+use crate::Tags;
 
 pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
     if e.tests().is_empty() {
@@ -485,11 +487,35 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                             d = d
                         ))
                     }
-                    UfType::BytesWithTypes(_, _, _, _) => {
+                    UfType::BytesWithTypes(a_ty, b_ty, c_ty, d_ty) => {
                         let (a, b, c, d) = split_u32_str_into_u8s(f.value());
 
+                        let mut tags = Tags::new();
+                        tags.push(Tag::new("versions", "1.12"));
+
+                        let get_try = |value, ty_name| -> String {
+                            if let Some(en) = o.try_get_definer(ty_name, &tags) {
+                                if en.tags().is_in_common() {
+                                    format!(
+                                        "{lower_ty}_try_from({value})",
+                                        lower_ty = en.name().to_lowercase(),
+                                        value = value,
+                                    )
+                                } else {
+                                    format!("{value}.try_into()", value = value)
+                                }
+                            } else {
+                                format!("{value}.try_into()", value = value)
+                            }
+                        };
+
+                        let a = get_try(a, a_ty);
+                        let b = get_try(b, b_ty);
+                        let c = get_try(c, c_ty);
+                        let d = get_try(d, d_ty);
+
                         s.wln(format!(
-                            ".set_{ty}_{field}({a}.try_into().unwrap(), {b}.try_into().unwrap(), {c}.try_into().unwrap(), {d}.try_into().unwrap())",
+                            ".set_{ty}_{field}({a}.unwrap(), {b}.unwrap(), {c}.unwrap(), {d}.unwrap())",
                             ty = field.object_ty(),
                             field = f.name(),
                             a = a,

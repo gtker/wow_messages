@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::Class;
-use crate::world::version_1_12::Gender;
-use crate::world::version_1_12::Race;
+use crate::world::version_1_12::class::{Class, class_try_from, class_as_int};
+use crate::world::version_1_12::gender::{Gender, gender_try_from, gender_as_int};
+use crate::world::version_1_12::race::{Race, race_try_from, race_as_int};
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -58,13 +58,13 @@ impl ClientMessage for CMSG_CHAR_CREATE {
         w.write_all(&[0])?;
 
         // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
+        w.write_all(&(race_as_int(&self.race) as u8).to_le_bytes())?;
 
         // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
+        w.write_all(&(class_as_int(&self.class) as u8).to_le_bytes())?;
 
         // gender: Gender
-        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
+        w.write_all(&(gender_as_int(&self.gender) as u8).to_le_bytes())?;
 
         // skin: u8
         w.write_all(&self.skin.to_le_bytes())?;
@@ -98,13 +98,13 @@ impl ClientMessage for CMSG_CHAR_CREATE {
         let name = String::from_utf8(name)?;
 
         // race: Race
-        let race: Race = crate::util::read_u8_le(r)?.try_into()?;
+        let race: Race = race_try_from(crate::util::read_u8_le(r)?)?;
 
         // class: Class
-        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
+        let class: Class = class_try_from(crate::util::read_u8_le(r)?)?;
 
         // gender: Gender
-        let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;
+        let gender: Gender = gender_try_from(crate::util::read_u8_le(r)?)?;
 
         // skin: u8
         let skin = crate::util::read_u8_le(r)?;

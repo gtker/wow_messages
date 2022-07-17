@@ -52,7 +52,7 @@ impl ModFiles {
             for (i, location) in &m.submodules {
                 match location {
                     SubmoduleLocation::PubUseInternal => {
-                        writeln!(s, "mod {};", i).unwrap();
+                        writeln!(s, "pub(crate) mod {};", i).unwrap();
                         writeln!(s, "pub use {}::*;", i).unwrap();
                     }
                     SubmoduleLocation::PubMod => {

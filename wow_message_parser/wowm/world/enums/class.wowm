@@ -10,5 +10,7 @@ enum Class : u8 {
     MAGE = 8;
     WARLOCK = 9;
     DRUID = 11;
+} {
+    rust_common_type = "true";
 }
 

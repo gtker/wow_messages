@@ -5,5 +5,7 @@ enum Gender : u8 {
     FEMALE = 1;
     /* Apparently used by some pets */
     NONE = 2;
+} {
+    rust_common_type = "true";
 }
 

@@ -1,12 +1,12 @@
-mod cmd_auth_logon_challenge_client;
+pub(crate) mod cmd_auth_logon_challenge_client;
 pub use cmd_auth_logon_challenge_client::*;
-mod cmd_auth_reconnect_challenge_client;
+pub(crate) mod cmd_auth_reconnect_challenge_client;
 pub use cmd_auth_reconnect_challenge_client::*;
-mod locale;
+pub(crate) mod locale;
 pub use locale::*;
-mod os;
+pub(crate) mod os;
 pub use os::*;
-mod platform;
+pub(crate) mod platform;
 pub use platform::*;
-mod version;
+pub(crate) mod version;
 pub use version::*;

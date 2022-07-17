@@ -1,5 +1,8 @@
-use crate::file_utils::overwrite_if_not_same_contents;
+use crate::file_utils::{get_module_name, overwrite_if_not_same_contents};
+use crate::parser::types::tags::Tag;
+use crate::parser::types::ObjectType;
 use crate::rust_printer::Writer;
+use crate::{Objects, Tags};
 use std::fmt::Write;
 use std::fmt::{Display, Formatter};
 use std::fs::read_to_string;
@@ -73,7 +76,7 @@ pub fn print_update_mask_docs() {
     overwrite_if_not_same_contents(&s, Path::new(UPDATE_MASK_FILE));
 }
 
-pub fn print_update_mask() {
+pub fn print_update_mask(o: &Objects) {
     print_update_mask_docs();
 
     let update_types = [
@@ -123,7 +126,18 @@ pub fn print_update_mask() {
                 // The UpdateMask implementation realistically only works with 1.12
                 "use crate::version_1_12::{{{}, {}, {}, {}}};",
                 a, b, c, d
-            ))
+            ));
+
+            let mut tags = Tags::new();
+            tags.push(Tag::new("versions", "1.12"));
+
+            for a in [a, b, c, d] {
+                if let Some(a) = o.try_get_definer(a, &tags) {
+                    if a.tags().is_in_common() {
+                        s.wln(format!("use crate::version_1_12::{module_name}::{{{lower_name}_try_from, {lower_name}_as_int}};", module_name = get_module_name(a.name()), lower_name = a.name().to_lowercase()));
+                    }
+                }
+            }
         }
     }
 
@@ -133,7 +147,7 @@ pub fn print_update_mask() {
     for (ty, types) in update_types {
         s.bodyn(format!("impl {}", ty), |s| {
             for m in FIELDS.iter().filter(|a| types.contains(&a.object_ty)) {
-                print_functions(s, m);
+                print_functions(s, m, o);
             }
         });
     }
@@ -144,7 +158,7 @@ pub fn print_update_mask() {
     );
 }
 
-fn print_functions(s: &mut Writer, m: &MemberType) {
+fn print_functions(s: &mut Writer, m: &MemberType, o: &Objects) {
     s.open_curly(format!(
         "pub fn set_{}_{}(mut self, {}) -> Self",
         m.object_ty,
@@ -172,9 +186,36 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
                 UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
                 UfType::Bytes => "u32::from_le_bytes([a, b, c, d])".to_string(),
                 UfType::TwoShort => "v".to_string(),
-                UfType::BytesWithTypes(_, _, _, _) => {
-                    "u32::from_le_bytes([a.as_int(), b.as_int(), c.as_int(), d.as_int()])"
-                        .to_string()
+                UfType::BytesWithTypes(a, b, c, d) => {
+                    let mut tags = Tags::new();
+                    tags.push(Tag::new("versions", "1.12"));
+
+                    let get_name = |ty_name, variable_name| -> String {
+                        if o.get_object_type_of(ty_name, &tags) == ObjectType::Enum
+                            && o.get_definer(ty_name, &tags).tags().is_in_common()
+                        {
+                            format!(
+                                "{lower}_as_int(&{name})",
+                                lower = ty_name.to_lowercase(),
+                                name = variable_name
+                            )
+                        } else {
+                            format!("{name}.as_int()", name = variable_name)
+                        }
+                    };
+
+                    let a = get_name(a, "a");
+                    let b = get_name(b, "b");
+                    let c = get_name(c, "c");
+                    let d = get_name(d, "d");
+
+                    format!(
+                        "u32::from_le_bytes([{a}, {b}, {c}, {d}])",
+                        a = a,
+                        b = b,
+                        c = c,
+                        d = d
+                    )
                 }
                 UfType::BytesWithNames(a, b, c, d) => {
                     format!("u32::from_le_bytes([{}, {}, {}, {}])", a, b, c, d)

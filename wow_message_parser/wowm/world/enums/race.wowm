@@ -10,5 +10,7 @@ enum Race : u8 {
     GNOME = 7;
     TROLL = 8;
     GOBLIN = 9;
+} {
+    rust_common_type = "true";
 }
 
