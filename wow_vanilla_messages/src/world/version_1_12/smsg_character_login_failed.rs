@@ -8,6 +8,8 @@ use std::io::{Write, Read};
 #[derive(Copy)]
 /// Response if [`CMSG_PLAYER_LOGIN`](crate::world::version_1_12::CMSG_PLAYER_LOGIN) fails. If successful it should instead be [`SMSG_LOGIN_VERIFY_WORLD`](crate::world::version_1_12::SMSG_LOGIN_VERIFY_WORLD).
 ///
+/// Client seems to always send a [`CMSG_CANCEL_TRADE`](crate::world::version_1_12::CMSG_CANCEL_TRADE) after receiving this message, for unknown reasons.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L3):
 /// ```text
 /// smsg SMSG_CHARACTER_LOGIN_FAILED = 0x0041 {
@@ -58,7 +60,7 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x41, 0x00, 0x41, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHARACTER_LOGIN_FAILED0() {
@@ -83,7 +85,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHARACTER_LOGIN_FAILED0() {
@@ -108,7 +110,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHARACTER_LOGIN_FAILED0() {
