@@ -5,6 +5,11 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Sent by client after pressing 'Logout' or 'Exit Game'.
+/// Server should reply with [`SMSG_LOGOUT_RESPONSE`](crate::world::version_1_12::SMSG_LOGOUT_RESPONSE).
+///
+/// Spamming the 'Logout' and 'Exit Game' buttons does not send multiple messages.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm#L3):
 /// ```text
 /// cmsg CMSG_LOGOUT_REQUEST = 0x004B {
@@ -45,7 +50,7 @@ mod test {
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x4B, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 5.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_LOGOUT_REQUEST0() {
@@ -68,7 +73,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 5.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_LOGOUT_REQUEST0() {
@@ -91,7 +96,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 5.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_LOGOUT_REQUEST0() {

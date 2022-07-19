@@ -53633,6 +53633,8 @@
       "constant": true,
       "members": [],
       "tags": {
+        "description": "Sent by client after pressing 'Logout' or 'Exit Game'.\nServer should reply with [SMSG_LOGOUT_RESPONSE].",
+        "comment": "Spamming the 'Logout' and 'Exit Game' buttons does not send multiple messages.",
         "version": {
           "type": "world",
           "versions": [
@@ -53672,7 +53674,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm",
-            "start_position": 5
+            "start_position": 9
           }
         }
       ],
@@ -89635,6 +89637,8 @@
       "constant": true,
       "members": [],
       "tags": {
+        "description": "Immediately logs out the client of the world and makes it send [CMSG_CHAR_ENUM].\nNormally the client will send [CMSG_LOGOUT_REQUEST] and the server will reply with an [SMSG_LOGOUT_RESPONSE] before this message, but sending it unprompted will also immediately send the client to the character screen.",
+        "comment": "The client always seems to send 2 [CMSG_CANCEL_TRADE] immediately after receiving this mesage, but before sending [CMSG_CHAR_ENUM].",
         "version": {
           "type": "world",
           "versions": [
@@ -89647,7 +89651,35 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_LOGOUT_COMPLETE",
+          "members": [],
+          "raw_bytes": [
+            0,
+            2,
+            77,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm",
+            "start_position": 9
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm",
         "start_position": 3
@@ -89699,6 +89731,8 @@
         }
       ],
       "tags": {
+        "description": "Reply to [CMSG_LOGOUT_REQUEST].",
+        "comment": "The client expects to get an [SMSG_LOGOUT_COMPLETE] when logout is complete.",
         "version": {
           "type": "world",
           "versions": [
@@ -89762,7 +89796,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm",
-            "start_position": 22
+            "start_position": 25
           }
         }
       ],

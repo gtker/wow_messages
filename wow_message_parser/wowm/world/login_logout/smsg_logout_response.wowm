@@ -17,6 +17,9 @@ enum LogoutSpeed : u8 {
 smsg SMSG_LOGOUT_RESPONSE = 0x4C {
     LogoutResult reason;
     LogoutSpeed speed;
+} {
+    description = "Reply to [CMSG_LOGOUT_REQUEST].";
+    comment = "The client expects to get an [SMSG_LOGOUT_COMPLETE] when logout is complete.";
 }
 
 test SMSG_LOGOUT_RESPONSE {
