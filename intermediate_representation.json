@@ -74090,6 +74090,8 @@
       "constant": true,
       "members": [],
       "tags": {
+        "description": "Acknowledge from the client that it has received an [SMSG_NEW_WORLD] and has loaded the new map.",
+        "comment": "Despite the name this seems to only be sent by the client.\nThe server should reply with what it normally does to log players into the world.",
         "version": {
           "type": "world",
           "versions": [

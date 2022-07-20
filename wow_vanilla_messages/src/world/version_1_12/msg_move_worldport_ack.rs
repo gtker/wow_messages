@@ -5,6 +5,11 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Acknowledge from the client that it has received an [`SMSG_NEW_WORLD`](crate::world::version_1_12::SMSG_NEW_WORLD) and has loaded the new map.
+///
+/// Despite the name this seems to only be sent by the client.
+/// The server should reply with what it normally does to log players into the world.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_worldport_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_worldport_ack.wowm#L3):
 /// ```text
 /// msg MSG_MOVE_WORLDPORT_ACK = 0x00DC {
