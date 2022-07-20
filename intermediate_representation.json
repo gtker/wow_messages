@@ -23154,6 +23154,10 @@
           "usage": "used_but_not_in_if"
         },
         {
+          "name": "SMSG_NEW_WORLD",
+          "usage": "used_but_not_in_if"
+        },
+        {
           "name": "SMSG_RAID_INSTANCE_MESSAGE",
           "usage": "used_but_not_in_if"
         },
@@ -92745,6 +92749,21 @@
       "members": [
         {
           "Definition": {
+            "name": "map",
+            "member_type": {
+              "Identifier": {
+                "s": "Map",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
             "name": "position",
             "member_type": {
               "Identifier": {
@@ -92791,7 +92810,7 @@
         "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm",
         "start_position": 3
       },
-      "only_has_io_error": true,
+      "only_has_io_error": false,
       "features": [
         "SMsg",
         "SubObjects",

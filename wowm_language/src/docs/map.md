@@ -123,6 +123,7 @@ Used in:
 * [SMSG_INSTANCE_RESET_FAILED](smsg_instance_reset_failed.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
+* [SMSG_NEW_WORLD](smsg_new_world.md)
 * [SMSG_RAID_INSTANCE_MESSAGE](smsg_raid_instance_message.md)
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
 * [SMSG_TRANSFER_PENDING](smsg_transfer_pending.md)
