@@ -36,6 +36,7 @@ pub fn stats_for_1_12(o: &Objects) {
 
     let mut data = vec![
         Data::new("CMSG_WORLD_TELEPORT", 0x008),
+        Data::new("CMSG_TELEPORT_TO_UNIT", 0x009),
         Data::new("CMSG_CHAR_CREATE", 0x036),
         Data::new("CMSG_CHAR_ENUM", 0x037),
         Data::new("CMSG_CHAR_DELETE", 0x038),

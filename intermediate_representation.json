@@ -59982,6 +59982,51 @@
       ]
     },
     {
+      "name": "CMSG_TELEPORT_TO_UNIT",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 9
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "location",
+            "member_type": "CString",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "description": "Sent when using the `port` console command.",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_teleport_to_unit.wowm",
+        "start_position": 3
+      },
+      "only_has_io_error": false,
+      "features": [
+        "CMsg",
+        "ComplexBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "CMSG_TEXT_EMOTE",
       "object_type": {
         "type": "cmsg",

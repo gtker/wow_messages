@@ -410,6 +410,7 @@
 - [CMSG_SWAP_ITEM](docs/cmsg_swap_item.md)
 - [CMSG_TAXINODE_STATUS_QUERY](docs/cmsg_taxinode_status_query.md)
 - [CMSG_TAXIQUERYAVAILABLENODES](docs/cmsg_taxiqueryavailablenodes.md)
+- [CMSG_TELEPORT_TO_UNIT](docs/cmsg_teleport_to_unit.md)
 - [CMSG_TEXT_EMOTE](docs/cmsg_text_emote.md)
 - [CMSG_TOGGLE_CLOAK](docs/cmsg_toggle_cloak.md)
 - [CMSG_TOGGLE_HELM](docs/cmsg_toggle_helm.md)

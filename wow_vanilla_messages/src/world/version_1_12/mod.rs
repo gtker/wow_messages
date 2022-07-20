@@ -528,6 +528,8 @@ pub(crate) mod cmsg_taxinode_status_query;
 pub use cmsg_taxinode_status_query::*;
 pub(crate) mod cmsg_taxiqueryavailablenodes;
 pub use cmsg_taxiqueryavailablenodes::*;
+pub(crate) mod cmsg_teleport_to_unit;
+pub use cmsg_teleport_to_unit::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
 pub(crate) mod cmsg_toggle_cloak;

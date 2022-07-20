@@ -13,6 +13,7 @@ use crate::world::version_1_12::MSG_TABARDVENDOR_ACTIVATE;
 use crate::world::version_1_12::MSG_QUEST_PUSH_RESULT;
 use crate::world::version_1_12::MSG_PETITION_RENAME;
 use crate::world::version_1_12::CMSG_WORLD_TELEPORT;
+use crate::world::version_1_12::CMSG_TELEPORT_TO_UNIT;
 use crate::world::version_1_12::CMSG_CHAR_CREATE;
 use crate::world::version_1_2::CMSG_CHAR_ENUM;
 use crate::world::version_1_12::CMSG_CHAR_DELETE;
@@ -317,6 +318,7 @@ pub enum ClientOpcodeMessage {
     MSG_QUEST_PUSH_RESULT(MSG_QUEST_PUSH_RESULT),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
     CMSG_WORLD_TELEPORT(CMSG_WORLD_TELEPORT),
+    CMSG_TELEPORT_TO_UNIT(CMSG_TELEPORT_TO_UNIT),
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
@@ -623,6 +625,7 @@ impl ClientOpcodeMessage {
             0x0276 => Ok(Self::MSG_QUEST_PUSH_RESULT(<MSG_QUEST_PUSH_RESULT as ClientMessage>::read_body(&mut r, body_size)?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as ClientMessage>::read_body(&mut r, body_size)?)),
             0x0008 => Ok(Self::CMSG_WORLD_TELEPORT(<CMSG_WORLD_TELEPORT as ClientMessage>::read_body(&mut r, body_size)?)),
+            0x0009 => Ok(Self::CMSG_TELEPORT_TO_UNIT(<CMSG_TELEPORT_TO_UNIT as ClientMessage>::read_body(&mut r, body_size)?)),
             0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as ClientMessage>::read_body(&mut r, body_size)?)),
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as ClientMessage>::read_body(&mut r, body_size)?)),
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as ClientMessage>::read_body(&mut r, body_size)?)),
@@ -994,6 +997,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
@@ -1301,6 +1305,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
@@ -1608,6 +1613,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1915,6 +1921,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2222,6 +2229,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2529,6 +2537,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
