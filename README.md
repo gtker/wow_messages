@@ -9,6 +9,7 @@ The project is split into the subdirectories:
 * `wow_message_parser`: The parser, codegen and definitions that creates the libraries.
 Used to build `wow_login_messages`, `wow_vanilla_messages` and `wowm_language`.
 * `wow_vanilla_messages`: **UNRELEASED** Rust library for the world server for WoW version 1.x.y.
+* `wow_vanilla_base`: **UNRELEASED** Rust library that provides the basic types and enums such as `Class`, `Race` and `Gender` for `wow_vanilla_messages` and others.
 * `simple_server`: Test server that uses the authentication library. Can work as a start to making your own server. Uses tokio.
 * `simple_client`: Test client that uses the authentication library. Can work as a start to making your own client. Uses sync (std:io::Read/Write).
 * `wowm_language`: [mdbook](https://github.com/rust-lang/mdBook) of language specification. Hosted at [`www.gtker.com/wow_messages`](https://www.gtker.com/wow_messages).
