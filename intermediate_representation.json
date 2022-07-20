@@ -54572,67 +54572,7 @@
               "equations": [
                 {
                   "Equals": {
-                    "value": "SAY"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "EMOTE"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "YELL"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "PARTY"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "GUILD"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "OFFICER"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "RAID"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "RAID_LEADER"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "RAID_WARNING"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "BATTLEGROUND"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "BATTLEGROUND_LEADER"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "AFK"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "DND"
+                    "value": "WHISPER"
                   }
                 }
               ]
@@ -54640,7 +54580,7 @@
             "members": [
               {
                 "Definition": {
-                  "name": "message",
+                  "name": "target_player",
                   "member_type": "CString",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -54656,51 +54596,6 @@
                   "equations": [
                     {
                       "Equals": {
-                        "value": "WHISPER"
-                      }
-                    }
-                  ]
-                },
-                "members": [
-                  {
-                    "Definition": {
-                      "name": "target_player",
-                      "member_type": "CString",
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {}
-                    }
-                  },
-                  {
-                    "Definition": {
-                      "name": "whisper_message",
-                      "member_type": "CString",
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {}
-                    }
-                  }
-                ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
-                  "Identifier": {
-                    "s": "ChatType",
-                    "upcast": {
-                      "type": "u32",
-                      "endianness": "little"
-                    }
-                  }
-                }
-              },
-              {
-                "conditional": {
-                  "variable_name": "chat_type",
-                  "equations": [
-                    {
-                      "Equals": {
                         "value": "CHANNEL"
                       }
                     }
@@ -54710,16 +54605,6 @@
                   {
                     "Definition": {
                       "name": "channel",
-                      "member_type": "CString",
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {}
-                    }
-                  },
-                  {
-                    "Definition": {
-                      "name": "channel_message",
                       "member_type": "CString",
                       "constant_value": null,
                       "used_as_size_in": null,
@@ -54752,6 +54637,16 @@
               }
             }
           }
+        },
+        {
+          "Definition": {
+            "name": "message",
+            "member_type": "CString",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
         }
       ],
       "tags": {
@@ -54778,7 +54673,6 @@
         "EnumUpcast",
         "SubObjects",
         "IfEnum",
-        "IfMultiCondition",
         "ComplexBuiltInTypes",
         "IfElseEnum",
         "WorldVersion"

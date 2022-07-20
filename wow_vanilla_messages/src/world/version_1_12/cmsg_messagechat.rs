@@ -11,34 +11,19 @@ use std::io::{Write, Read};
 /// cmsg CMSG_MESSAGECHAT = 0x0095 {
 ///     ChatType chat_type;
 ///     Language language;
-///     if (chat_type == SAY
-///         || chat_type == EMOTE
-///         || chat_type == YELL
-///         || chat_type == PARTY
-///         || chat_type == GUILD
-///         || chat_type == OFFICER
-///         || chat_type == RAID
-///         || chat_type == RAID_LEADER
-///         || chat_type == RAID_WARNING
-///         || chat_type == BATTLEGROUND
-///         || chat_type == BATTLEGROUND_LEADER
-///         || chat_type == AFK
-///         || chat_type == DND) {
-///         CString message;
-///     }
-///     else if (chat_type == WHISPER) {
+///     if (chat_type == WHISPER) {
 ///         CString target_player;
-///         CString whisper_message;
 ///     }
 ///     else if (chat_type == CHANNEL) {
 ///         CString channel;
-///         CString channel_message;
 ///     }
+///     CString message;
 /// }
 /// ```
 pub struct CMSG_MESSAGECHAT {
     pub chat_type: CMSG_MESSAGECHAT_ChatType,
     pub language: Language,
+    pub message: String,
 }
 
 impl ClientMessage for CMSG_MESSAGECHAT {
@@ -50,85 +35,23 @@ impl ClientMessage for CMSG_MESSAGECHAT {
         w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
 
         match &self.chat_type {
-            CMSG_MESSAGECHAT_ChatType::SAY {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHAT_ChatType::PARTY {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHAT_ChatType::RAID {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHAT_ChatType::GUILD {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHAT_ChatType::OFFICER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHAT_ChatType::YELL {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
+            CMSG_MESSAGECHAT_ChatType::SAY => {}
+            CMSG_MESSAGECHAT_ChatType::PARTY => {}
+            CMSG_MESSAGECHAT_ChatType::RAID => {}
+            CMSG_MESSAGECHAT_ChatType::GUILD => {}
+            CMSG_MESSAGECHAT_ChatType::OFFICER => {}
+            CMSG_MESSAGECHAT_ChatType::YELL => {}
             CMSG_MESSAGECHAT_ChatType::WHISPER {
                 target_player,
-                whisper_message,
             } => {
                 // target_player: CString
                 w.write_all(target_player.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // whisper_message: CString
-                w.write_all(whisper_message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
             }
             CMSG_MESSAGECHAT_ChatType::WHISPER_INFORM => {}
-            CMSG_MESSAGECHAT_ChatType::EMOTE {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
+            CMSG_MESSAGECHAT_ChatType::EMOTE => {}
             CMSG_MESSAGECHAT_ChatType::TEXT_EMOTE => {}
             CMSG_MESSAGECHAT_ChatType::SYSTEM => {}
             CMSG_MESSAGECHAT_ChatType::MONSTER_SAY => {}
@@ -136,15 +59,9 @@ impl ClientMessage for CMSG_MESSAGECHAT {
             CMSG_MESSAGECHAT_ChatType::MONSTER_EMOTE => {}
             CMSG_MESSAGECHAT_ChatType::CHANNEL {
                 channel,
-                channel_message,
             } => {
                 // channel: CString
                 w.write_all(channel.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // channel_message: CString
-                w.write_all(channel_message.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
 
@@ -154,24 +71,8 @@ impl ClientMessage for CMSG_MESSAGECHAT {
             CMSG_MESSAGECHAT_ChatType::CHANNEL_LIST => {}
             CMSG_MESSAGECHAT_ChatType::CHANNEL_NOTICE => {}
             CMSG_MESSAGECHAT_ChatType::CHANNEL_NOTICE_USER => {}
-            CMSG_MESSAGECHAT_ChatType::AFK {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHAT_ChatType::DND {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
+            CMSG_MESSAGECHAT_ChatType::AFK => {}
+            CMSG_MESSAGECHAT_ChatType::DND => {}
             CMSG_MESSAGECHAT_ChatType::IGNORED => {}
             CMSG_MESSAGECHAT_ChatType::SKILL => {}
             CMSG_MESSAGECHAT_ChatType::LOOT => {}
@@ -179,45 +80,18 @@ impl ClientMessage for CMSG_MESSAGECHAT {
             CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_NEUTRAL => {}
             CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_ALLIANCE => {}
             CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_HORDE => {}
-            CMSG_MESSAGECHAT_ChatType::RAID_LEADER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHAT_ChatType::RAID_WARNING {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
+            CMSG_MESSAGECHAT_ChatType::RAID_LEADER => {}
+            CMSG_MESSAGECHAT_ChatType::RAID_WARNING => {}
             CMSG_MESSAGECHAT_ChatType::RAID_BOSS_WHISPER => {}
             CMSG_MESSAGECHAT_ChatType::RAID_BOSS_EMOTE => {}
-            CMSG_MESSAGECHAT_ChatType::BATTLEGROUND {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHAT_ChatType::BATTLEGROUND_LEADER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
+            CMSG_MESSAGECHAT_ChatType::BATTLEGROUND => {}
+            CMSG_MESSAGECHAT_ChatType::BATTLEGROUND_LEADER => {}
         }
+
+        // message: CString
+        w.write_all(self.message.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
 
         Ok(())
     }
@@ -235,84 +109,23 @@ impl ClientMessage for CMSG_MESSAGECHAT {
         let language: Language = crate::util::read_u32_le(r)?.try_into()?;
 
         let chat_type_if = match chat_type {
-            ChatType::SAY => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::SAY {
-                    message,
-                }
-            }
-            ChatType::PARTY => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::PARTY {
-                    message,
-                }
-            }
-            ChatType::RAID => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::RAID {
-                    message,
-                }
-            }
-            ChatType::GUILD => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::GUILD {
-                    message,
-                }
-            }
-            ChatType::OFFICER => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::OFFICER {
-                    message,
-                }
-            }
-            ChatType::YELL => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::YELL {
-                    message,
-                }
-            }
+            ChatType::SAY => CMSG_MESSAGECHAT_ChatType::SAY,
+            ChatType::PARTY => CMSG_MESSAGECHAT_ChatType::PARTY,
+            ChatType::RAID => CMSG_MESSAGECHAT_ChatType::RAID,
+            ChatType::GUILD => CMSG_MESSAGECHAT_ChatType::GUILD,
+            ChatType::OFFICER => CMSG_MESSAGECHAT_ChatType::OFFICER,
+            ChatType::YELL => CMSG_MESSAGECHAT_ChatType::YELL,
             ChatType::WHISPER => {
                 // target_player: CString
                 let target_player = crate::util::read_c_string_to_vec(r)?;
                 let target_player = String::from_utf8(target_player)?;
 
-                // whisper_message: CString
-                let whisper_message = crate::util::read_c_string_to_vec(r)?;
-                let whisper_message = String::from_utf8(whisper_message)?;
-
                 CMSG_MESSAGECHAT_ChatType::WHISPER {
                     target_player,
-                    whisper_message,
                 }
             }
             ChatType::WHISPER_INFORM => CMSG_MESSAGECHAT_ChatType::WHISPER_INFORM,
-            ChatType::EMOTE => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::EMOTE {
-                    message,
-                }
-            }
+            ChatType::EMOTE => CMSG_MESSAGECHAT_ChatType::EMOTE,
             ChatType::TEXT_EMOTE => CMSG_MESSAGECHAT_ChatType::TEXT_EMOTE,
             ChatType::SYSTEM => CMSG_MESSAGECHAT_ChatType::SYSTEM,
             ChatType::MONSTER_SAY => CMSG_MESSAGECHAT_ChatType::MONSTER_SAY,
@@ -323,13 +136,8 @@ impl ClientMessage for CMSG_MESSAGECHAT {
                 let channel = crate::util::read_c_string_to_vec(r)?;
                 let channel = String::from_utf8(channel)?;
 
-                // channel_message: CString
-                let channel_message = crate::util::read_c_string_to_vec(r)?;
-                let channel_message = String::from_utf8(channel_message)?;
-
                 CMSG_MESSAGECHAT_ChatType::CHANNEL {
                     channel,
-                    channel_message,
                 }
             }
             ChatType::CHANNEL_JOIN => CMSG_MESSAGECHAT_ChatType::CHANNEL_JOIN,
@@ -337,24 +145,8 @@ impl ClientMessage for CMSG_MESSAGECHAT {
             ChatType::CHANNEL_LIST => CMSG_MESSAGECHAT_ChatType::CHANNEL_LIST,
             ChatType::CHANNEL_NOTICE => CMSG_MESSAGECHAT_ChatType::CHANNEL_NOTICE,
             ChatType::CHANNEL_NOTICE_USER => CMSG_MESSAGECHAT_ChatType::CHANNEL_NOTICE_USER,
-            ChatType::AFK => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::AFK {
-                    message,
-                }
-            }
-            ChatType::DND => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::DND {
-                    message,
-                }
-            }
+            ChatType::AFK => CMSG_MESSAGECHAT_ChatType::AFK,
+            ChatType::DND => CMSG_MESSAGECHAT_ChatType::DND,
             ChatType::IGNORED => CMSG_MESSAGECHAT_ChatType::IGNORED,
             ChatType::SKILL => CMSG_MESSAGECHAT_ChatType::SKILL,
             ChatType::LOOT => CMSG_MESSAGECHAT_ChatType::LOOT,
@@ -362,49 +154,22 @@ impl ClientMessage for CMSG_MESSAGECHAT {
             ChatType::BG_SYSTEM_NEUTRAL => CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_NEUTRAL,
             ChatType::BG_SYSTEM_ALLIANCE => CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_ALLIANCE,
             ChatType::BG_SYSTEM_HORDE => CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_HORDE,
-            ChatType::RAID_LEADER => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::RAID_LEADER {
-                    message,
-                }
-            }
-            ChatType::RAID_WARNING => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::RAID_WARNING {
-                    message,
-                }
-            }
+            ChatType::RAID_LEADER => CMSG_MESSAGECHAT_ChatType::RAID_LEADER,
+            ChatType::RAID_WARNING => CMSG_MESSAGECHAT_ChatType::RAID_WARNING,
             ChatType::RAID_BOSS_WHISPER => CMSG_MESSAGECHAT_ChatType::RAID_BOSS_WHISPER,
             ChatType::RAID_BOSS_EMOTE => CMSG_MESSAGECHAT_ChatType::RAID_BOSS_EMOTE,
-            ChatType::BATTLEGROUND => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::BATTLEGROUND {
-                    message,
-                }
-            }
-            ChatType::BATTLEGROUND_LEADER => {
-                // message: CString
-                let message = crate::util::read_c_string_to_vec(r)?;
-                let message = String::from_utf8(message)?;
-
-                CMSG_MESSAGECHAT_ChatType::BATTLEGROUND_LEADER {
-                    message,
-                }
-            }
+            ChatType::BATTLEGROUND => CMSG_MESSAGECHAT_ChatType::BATTLEGROUND,
+            ChatType::BATTLEGROUND_LEADER => CMSG_MESSAGECHAT_ChatType::BATTLEGROUND_LEADER,
         };
+
+        // message: CString
+        let message = crate::util::read_c_string_to_vec(r)?;
+        let message = String::from_utf8(message)?;
 
         Ok(Self {
             chat_type: chat_type_if,
             language,
+            message,
         })
     }
 
@@ -414,37 +179,23 @@ impl CMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {
         self.chat_type.size() // chat_type: CMSG_MESSAGECHAT_ChatType
         + 4 // language: Language
+        + self.message.len() + 1 // message: CString
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum CMSG_MESSAGECHAT_ChatType {
-    SAY {
-        message: String,
-    },
-    PARTY {
-        message: String,
-    },
-    RAID {
-        message: String,
-    },
-    GUILD {
-        message: String,
-    },
-    OFFICER {
-        message: String,
-    },
-    YELL {
-        message: String,
-    },
+    SAY,
+    PARTY,
+    RAID,
+    GUILD,
+    OFFICER,
+    YELL,
     WHISPER {
         target_player: String,
-        whisper_message: String,
     },
     WHISPER_INFORM,
-    EMOTE {
-        message: String,
-    },
+    EMOTE,
     TEXT_EMOTE,
     SYSTEM,
     MONSTER_SAY,
@@ -452,19 +203,14 @@ pub enum CMSG_MESSAGECHAT_ChatType {
     MONSTER_EMOTE,
     CHANNEL {
         channel: String,
-        channel_message: String,
     },
     CHANNEL_JOIN,
     CHANNEL_LEAVE,
     CHANNEL_LIST,
     CHANNEL_NOTICE,
     CHANNEL_NOTICE_USER,
-    AFK {
-        message: String,
-    },
-    DND {
-        message: String,
-    },
+    AFK,
+    DND,
     IGNORED,
     SKILL,
     LOOT,
@@ -472,43 +218,33 @@ pub enum CMSG_MESSAGECHAT_ChatType {
     BG_SYSTEM_NEUTRAL,
     BG_SYSTEM_ALLIANCE,
     BG_SYSTEM_HORDE,
-    RAID_LEADER {
-        message: String,
-    },
-    RAID_WARNING {
-        message: String,
-    },
+    RAID_LEADER,
+    RAID_WARNING,
     RAID_BOSS_WHISPER,
     RAID_BOSS_EMOTE,
-    BATTLEGROUND {
-        message: String,
-    },
-    BATTLEGROUND_LEADER {
-        message: String,
-    },
+    BATTLEGROUND,
+    BATTLEGROUND_LEADER,
 }
 
 impl Default for CMSG_MESSAGECHAT_ChatType {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::SAY {
-            message: Default::default(),
-        }
+        Self::SAY
     }
 }
 
 impl CMSG_MESSAGECHAT_ChatType {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::SAY { .. } => 0,
-            Self::PARTY { .. } => 1,
-            Self::RAID { .. } => 2,
-            Self::GUILD { .. } => 3,
-            Self::OFFICER { .. } => 4,
-            Self::YELL { .. } => 5,
+            Self::SAY => 0,
+            Self::PARTY => 1,
+            Self::RAID => 2,
+            Self::GUILD => 3,
+            Self::OFFICER => 4,
+            Self::YELL => 5,
             Self::WHISPER { .. } => 6,
             Self::WHISPER_INFORM => 7,
-            Self::EMOTE { .. } => 8,
+            Self::EMOTE => 8,
             Self::TEXT_EMOTE => 9,
             Self::SYSTEM => 10,
             Self::MONSTER_SAY => 11,
@@ -520,8 +256,8 @@ impl CMSG_MESSAGECHAT_ChatType {
             Self::CHANNEL_LIST => 17,
             Self::CHANNEL_NOTICE => 18,
             Self::CHANNEL_NOTICE_USER => 19,
-            Self::AFK { .. } => 20,
-            Self::DND { .. } => 21,
+            Self::AFK => 20,
+            Self::DND => 21,
             Self::IGNORED => 22,
             Self::SKILL => 23,
             Self::LOOT => 24,
@@ -529,12 +265,12 @@ impl CMSG_MESSAGECHAT_ChatType {
             Self::BG_SYSTEM_NEUTRAL => 82,
             Self::BG_SYSTEM_ALLIANCE => 83,
             Self::BG_SYSTEM_HORDE => 84,
-            Self::RAID_LEADER { .. } => 87,
-            Self::RAID_WARNING { .. } => 88,
+            Self::RAID_LEADER => 87,
+            Self::RAID_WARNING => 88,
             Self::RAID_BOSS_WHISPER => 89,
             Self::RAID_BOSS_EMOTE => 90,
-            Self::BATTLEGROUND { .. } => 92,
-            Self::BATTLEGROUND_LEADER { .. } => 93,
+            Self::BATTLEGROUND => 92,
+            Self::BATTLEGROUND_LEADER => 93,
         }
     }
 
@@ -543,58 +279,35 @@ impl CMSG_MESSAGECHAT_ChatType {
 impl CMSG_MESSAGECHAT_ChatType {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::SAY {
-                message,
-            } => {
+            Self::SAY => {
                 4
-                + message.len() + 1 // message: CString
             }
-            Self::PARTY {
-                message,
-            } => {
+            Self::PARTY => {
                 4
-                + message.len() + 1 // message: CString
             }
-            Self::RAID {
-                message,
-            } => {
+            Self::RAID => {
                 4
-                + message.len() + 1 // message: CString
             }
-            Self::GUILD {
-                message,
-            } => {
+            Self::GUILD => {
                 4
-                + message.len() + 1 // message: CString
             }
-            Self::OFFICER {
-                message,
-            } => {
+            Self::OFFICER => {
                 4
-                + message.len() + 1 // message: CString
             }
-            Self::YELL {
-                message,
-            } => {
+            Self::YELL => {
                 4
-                + message.len() + 1 // message: CString
             }
             Self::WHISPER {
                 target_player,
-                whisper_message,
             } => {
                 4
                 + target_player.len() + 1 // target_player: CString
-                + whisper_message.len() + 1 // whisper_message: CString
             }
             Self::WHISPER_INFORM => {
                 4
             }
-            Self::EMOTE {
-                message,
-            } => {
+            Self::EMOTE => {
                 4
-                + message.len() + 1 // message: CString
             }
             Self::TEXT_EMOTE => {
                 4
@@ -613,11 +326,9 @@ impl CMSG_MESSAGECHAT_ChatType {
             }
             Self::CHANNEL {
                 channel,
-                channel_message,
             } => {
                 4
                 + channel.len() + 1 // channel: CString
-                + channel_message.len() + 1 // channel_message: CString
             }
             Self::CHANNEL_JOIN => {
                 4
@@ -634,17 +345,11 @@ impl CMSG_MESSAGECHAT_ChatType {
             Self::CHANNEL_NOTICE_USER => {
                 4
             }
-            Self::AFK {
-                message,
-            } => {
+            Self::AFK => {
                 4
-                + message.len() + 1 // message: CString
             }
-            Self::DND {
-                message,
-            } => {
+            Self::DND => {
                 4
-                + message.len() + 1 // message: CString
             }
             Self::IGNORED => {
                 4
@@ -667,17 +372,11 @@ impl CMSG_MESSAGECHAT_ChatType {
             Self::BG_SYSTEM_HORDE => {
                 4
             }
-            Self::RAID_LEADER {
-                message,
-            } => {
+            Self::RAID_LEADER => {
                 4
-                + message.len() + 1 // message: CString
             }
-            Self::RAID_WARNING {
-                message,
-            } => {
+            Self::RAID_WARNING => {
                 4
-                + message.len() + 1 // message: CString
             }
             Self::RAID_BOSS_WHISPER => {
                 4
@@ -685,17 +384,11 @@ impl CMSG_MESSAGECHAT_ChatType {
             Self::RAID_BOSS_EMOTE => {
                 4
             }
-            Self::BATTLEGROUND {
-                message,
-            } => {
+            Self::BATTLEGROUND => {
                 4
-                + message.len() + 1 // message: CString
             }
-            Self::BATTLEGROUND_LEADER {
-                message,
-            } => {
+            Self::BATTLEGROUND_LEADER => {
                 4
-                + message.len() + 1 // message: CString
             }
         }
     }
