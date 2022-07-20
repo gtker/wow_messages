@@ -73925,9 +73925,9 @@
       ]
     },
     {
-      "name": "MSG_MOVE_TELEPORT_ACK",
+      "name": "MSG_MOVE_TELEPORT_ACK_Client",
       "object_type": {
-        "type": "msg",
+        "type": "cmsg",
         "opcode": 199
       },
       "constant": true,
@@ -73974,6 +73974,7 @@
         }
       ],
       "tags": {
+        "description": "Response to [MSG_MOVE_TELEPORT_ACK_Server], at which point [MSG_MOVE_TELEPORT_ACK_Server] should be sent to observing players.",
         "version": {
           "type": "world",
           "versions": [
@@ -73993,9 +73994,86 @@
       },
       "only_has_io_error": true,
       "features": [
-        "Msg",
+        "CMsg",
         "ComplexBuiltInTypes",
         "SimpleBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MSG_MOVE_TELEPORT_ACK_Server",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 199
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "PackedGuid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "movement_counter",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "info",
+            "member_type": {
+              "Identifier": {
+                "s": "MovementInfo",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "description": "Can be response to [CMSG_TELEPORT_TO_UNIT].\nCan also be a response to [MSG_MOVE_TELEPORT_ACK_Client] after being sent.",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Minor": [
+                1,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm",
+        "start_position": 11
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "PackedGuidTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
         "WorldVersion"
       ]
     },

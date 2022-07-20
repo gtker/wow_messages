@@ -6,7 +6,6 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::version_1_12::MovementInfo;
-use crate::world::version_1_12::MSG_MOVE_TELEPORT_ACK;
 use crate::world::version_1_12::MSG_MOVE_WORLDPORT_ACK;
 use crate::world::version_1_12::MSG_PETITION_DECLINE;
 use crate::world::version_1_12::MSG_TABARDVENDOR_ACTIVATE;
@@ -94,6 +93,7 @@ use crate::world::version_1_12::MSG_MOVE_START_PITCH_DOWN_Client;
 use crate::world::version_1_12::MSG_MOVE_STOP_PITCH_Client;
 use crate::world::version_1_12::MSG_MOVE_SET_RUN_MODE_Client;
 use crate::world::version_1_12::MSG_MOVE_SET_WALK_MODE_Client;
+use crate::world::version_1_12::MSG_MOVE_TELEPORT_ACK_Client;
 use crate::world::version_1_12::MSG_MOVE_FALL_LAND_Client;
 use crate::world::version_1_12::MSG_MOVE_START_SWIM_Client;
 use crate::world::version_1_12::MSG_MOVE_STOP_SWIM_Client;
@@ -311,7 +311,6 @@ use crate::world::version_1_12::CMSG_GMSURVEY_SUBMIT;
 
 #[derive(Debug)]
 pub enum ClientOpcodeMessage {
-    MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK),
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),
     MSG_TABARDVENDOR_ACTIVATE(MSG_TABARDVENDOR_ACTIVATE),
@@ -399,6 +398,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH_Client),
     MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE_Client),
     MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE_Client),
+    MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Client),
     MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND_Client),
     MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM_Client),
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Client),
@@ -618,7 +618,6 @@ pub enum ClientOpcodeMessage {
 impl ClientOpcodeMessage {
     fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
-            0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as ClientMessage>::read_body(&mut r, body_size)?)),
             0x01C2 => Ok(Self::MSG_PETITION_DECLINE(<MSG_PETITION_DECLINE as ClientMessage>::read_body(&mut r, body_size)?)),
             0x01F2 => Ok(Self::MSG_TABARDVENDOR_ACTIVATE(<MSG_TABARDVENDOR_ACTIVATE as ClientMessage>::read_body(&mut r, body_size)?)),
@@ -706,6 +705,7 @@ impl ClientOpcodeMessage {
             0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH_Client as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE_Client as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE_Client as ClientMessage>::read_body(&mut r, body_size)?)),
+            0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Client as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND_Client as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM_Client as ClientMessage>::read_body(&mut r, body_size)?)),
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Client as ClientMessage>::read_body(&mut r, body_size)?)),
@@ -990,7 +990,6 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_client<W: std::io::Write, E: wow_srp::header_crypto::Encrypter>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_DECLINE(c) => c.write_encrypted_client(w, e),
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_encrypted_client(w, e),
@@ -1078,6 +1077,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_client(w, e),
@@ -1298,7 +1298,6 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_DECLINE(c) => c.write_unencrypted_client(w),
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_unencrypted_client(w),
@@ -1386,6 +1385,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_client(w),
@@ -1606,7 +1606,6 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1694,6 +1693,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1914,7 +1914,6 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2002,6 +2001,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2222,7 +2222,6 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_client<W: async_std::io::WriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2310,6 +2309,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2530,7 +2530,6 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
@@ -2618,6 +2617,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_client(w).await,
@@ -2926,6 +2926,7 @@ use crate::world::version_1_12::MSG_MOVE_START_PITCH_DOWN_Server;
 use crate::world::version_1_12::MSG_MOVE_STOP_PITCH_Server;
 use crate::world::version_1_12::MSG_MOVE_SET_RUN_MODE_Server;
 use crate::world::version_1_12::MSG_MOVE_SET_WALK_MODE_Server;
+use crate::world::version_1_12::MSG_MOVE_TELEPORT_ACK_Server;
 use crate::world::version_1_12::MSG_MOVE_FALL_LAND_Server;
 use crate::world::version_1_12::MSG_MOVE_START_SWIM_Server;
 use crate::world::version_1_12::MSG_MOVE_STOP_SWIM_Server;
@@ -3201,7 +3202,6 @@ use crate::world::version_1_12::SMSG_DEFENSE_MESSAGE;
 
 #[derive(Debug)]
 pub enum ServerOpcodeMessage {
-    MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK),
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),
     MSG_TABARDVENDOR_ACTIVATE(MSG_TABARDVENDOR_ACTIVATE),
@@ -3268,6 +3268,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH_Server),
     MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE_Server),
     MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE_Server),
+    MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Server),
     MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND_Server),
     MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM_Server),
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Server),
@@ -3545,7 +3546,6 @@ pub enum ServerOpcodeMessage {
 impl ServerOpcodeMessage {
     fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
-            0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK as ServerMessage>::read_body(&mut r, body_size)?)),
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as ServerMessage>::read_body(&mut r, body_size)?)),
             0x01C2 => Ok(Self::MSG_PETITION_DECLINE(<MSG_PETITION_DECLINE as ServerMessage>::read_body(&mut r, body_size)?)),
             0x01F2 => Ok(Self::MSG_TABARDVENDOR_ACTIVATE(<MSG_TABARDVENDOR_ACTIVATE as ServerMessage>::read_body(&mut r, body_size)?)),
@@ -3612,6 +3612,7 @@ impl ServerOpcodeMessage {
             0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH_Server as ServerMessage>::read_body(&mut r, body_size)?)),
             0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE_Server as ServerMessage>::read_body(&mut r, body_size)?)),
             0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE_Server as ServerMessage>::read_body(&mut r, body_size)?)),
+            0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Server as ServerMessage>::read_body(&mut r, body_size)?)),
             0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND_Server as ServerMessage>::read_body(&mut r, body_size)?)),
             0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM_Server as ServerMessage>::read_body(&mut r, body_size)?)),
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Server as ServerMessage>::read_body(&mut r, body_size)?)),
@@ -3954,7 +3955,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_server<W: std::io::Write, E: wow_srp::header_crypto::Encrypter>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_PETITION_DECLINE(c) => c.write_encrypted_server(w, e),
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_encrypted_server(w, e),
@@ -4021,6 +4021,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_server(w, e),
@@ -4299,7 +4300,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_PETITION_DECLINE(c) => c.write_unencrypted_server(w),
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_unencrypted_server(w),
@@ -4366,6 +4366,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_server(w),
@@ -4644,7 +4645,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4711,6 +4711,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4989,7 +4990,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5056,6 +5056,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5334,7 +5335,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_server<W: async_std::io::WriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5401,6 +5401,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5679,7 +5680,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -5746,6 +5746,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_server(w).await,
