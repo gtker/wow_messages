@@ -4,6 +4,7 @@ smsg SMSG_LOGOUT_COMPLETE = 0x4D { } {
     description = "Immediately logs out the client of the world and makes it send [CMSG_CHAR_ENUM].";
     description = "Normally the client will send [CMSG_LOGOUT_REQUEST] and the server will reply with an [SMSG_LOGOUT_RESPONSE] before this message, but sending it unprompted will also immediately send the client to the character screen.";
     comment = "The client always seems to send 2 [CMSG_CANCEL_TRADE] immediately after receiving this mesage, but before sending [CMSG_CHAR_ENUM].";
+    comment = "Even if 'Exit Game' is selected the client will still send a [CMSG_CHAR_ENUM] immediately before closing the connection, despite it not needing to see the character list.";
 }
 
 test SMSG_LOGOUT_COMPLETE { } [

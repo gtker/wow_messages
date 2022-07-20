@@ -9,6 +9,7 @@ use std::io::{Write, Read};
 /// Normally the client will send [`CMSG_LOGOUT_REQUEST`](crate::world::version_1_12::CMSG_LOGOUT_REQUEST) and the server will reply with an [`SMSG_LOGOUT_RESPONSE`](crate::world::version_1_12::SMSG_LOGOUT_RESPONSE) before this message, but sending it unprompted will also immediately send the client to the character screen.
 ///
 /// The client always seems to send 2 [`CMSG_CANCEL_TRADE`](crate::world::version_1_12::CMSG_CANCEL_TRADE) immediately after receiving this mesage, but before sending [`CMSG_CHAR_ENUM`](crate::world::version_1_2::CMSG_CHAR_ENUM).
+/// Even if 'Exit Game' is selected the client will still send a [`CMSG_CHAR_ENUM`](crate::world::version_1_2::CMSG_CHAR_ENUM) immediately before closing the connection, despite it not needing to see the character list.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm#L3):
 /// ```text
@@ -50,7 +51,7 @@ mod test {
 
     const RAW0: [u8; 4] = [ 0x00, 0x02, 0x4D, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGOUT_COMPLETE0() {
@@ -73,7 +74,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGOUT_COMPLETE0() {
@@ -96,7 +97,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 9.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGOUT_COMPLETE0() {
