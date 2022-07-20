@@ -15,7 +15,7 @@ enum LogoutSpeed : u8 {
 }
 
 smsg SMSG_LOGOUT_RESPONSE = 0x4C {
-    LogoutResult reason;
+    LogoutResult result;
     LogoutSpeed speed;
 } {
     description = "Reply to [CMSG_LOGOUT_REQUEST].";
@@ -23,7 +23,7 @@ smsg SMSG_LOGOUT_RESPONSE = 0x4C {
 }
 
 test SMSG_LOGOUT_RESPONSE {
-    reason = SUCCESS;
+    result = SUCCESS;
     speed = INSTANT;
 } [
      0x00, 0x07, /* size */

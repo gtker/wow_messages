@@ -89596,7 +89596,7 @@
       "members": [
         {
           "Definition": {
-            "name": "reason",
+            "name": "result",
             "member_type": {
               "Identifier": {
                 "s": "LogoutResult",
@@ -89645,7 +89645,7 @@
           "subject": "SMSG_LOGOUT_RESPONSE",
           "members": [
             {
-              "variable_name": "reason",
+              "variable_name": "result",
               "verified_value": {
                 "Enum": {
                   "value": 0,

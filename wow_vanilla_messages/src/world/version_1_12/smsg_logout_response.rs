@@ -14,19 +14,19 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm#L17):
 /// ```text
 /// smsg SMSG_LOGOUT_RESPONSE = 0x004C {
-///     LogoutResult reason;
+///     LogoutResult result;
 ///     LogoutSpeed speed;
 /// }
 /// ```
 pub struct SMSG_LOGOUT_RESPONSE {
-    pub reason: LogoutResult,
+    pub result: LogoutResult,
     pub speed: LogoutSpeed,
 }
 
 impl ServerMessage for SMSG_LOGOUT_RESPONSE {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // reason: LogoutResult
-        w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
+        // result: LogoutResult
+        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         // speed: LogoutSpeed
         w.write_all(&(self.speed.as_int() as u8).to_le_bytes())?;
@@ -44,14 +44,14 @@ impl ServerMessage for SMSG_LOGOUT_RESPONSE {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
-        // reason: LogoutResult
-        let reason: LogoutResult = crate::util::read_u32_le(r)?.try_into()?;
+        // result: LogoutResult
+        let result: LogoutResult = crate::util::read_u32_le(r)?.try_into()?;
 
         // speed: LogoutSpeed
         let speed: LogoutSpeed = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
-            reason,
+            result,
             speed,
         })
     }
@@ -76,7 +76,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGOUT_RESPONSE0() {
         let expected = SMSG_LOGOUT_RESPONSE {
-            reason: LogoutResult::SUCCESS,
+            result: LogoutResult::SUCCESS,
             speed: LogoutSpeed::INSTANT,
         };
 
@@ -87,7 +87,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.reason, expected.reason);
+        assert_eq!(t.result, expected.result);
         assert_eq!(t.speed, expected.speed);
 
         assert_eq!(5 + header_size, RAW0.len());
@@ -103,7 +103,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGOUT_RESPONSE0() {
         let expected = SMSG_LOGOUT_RESPONSE {
-            reason: LogoutResult::SUCCESS,
+            result: LogoutResult::SUCCESS,
             speed: LogoutSpeed::INSTANT,
         };
 
@@ -114,7 +114,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.reason, expected.reason);
+        assert_eq!(t.result, expected.result);
         assert_eq!(t.speed, expected.speed);
 
         assert_eq!(5 + header_size, RAW0.len());
@@ -130,7 +130,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGOUT_RESPONSE0() {
         let expected = SMSG_LOGOUT_RESPONSE {
-            reason: LogoutResult::SUCCESS,
+            result: LogoutResult::SUCCESS,
             speed: LogoutSpeed::INSTANT,
         };
 
@@ -141,7 +141,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.reason, expected.reason);
+        assert_eq!(t.result, expected.result);
         assert_eq!(t.speed, expected.speed);
 
         assert_eq!(5 + header_size, RAW0.len());
