@@ -225,8 +225,9 @@ pub fn print_write_definition(
                         ));
                     } else {
                         s.wln(format!(
-                            "w.write_all(&({lower_ty}_as_int(&{variable_prefix}{name}) as {ty}).to_{endian}_bytes()){postfix}?;",
+                            "w.write_all(&({lower_ty}_as_int({ref_prefix}{variable_prefix}{name}) as {ty}).to_{endian}_bytes()){postfix}?;",
                             variable_prefix = variable_prefix,
+                            ref_prefix = if variable_prefix.is_empty() { "" } else { "&" },
                             postfix = postfix,
                             name = d.name(),
                             ty = integer.rust_str(),

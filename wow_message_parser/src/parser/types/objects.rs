@@ -56,7 +56,7 @@ impl Objects {
 
     pub fn get_definer(&self, ty_name: &str, tags: &Tags) -> &Definer {
         self.try_get_definer(ty_name, tags)
-            .expect(&format!("unable to find definer: '{}'", ty_name))
+            .unwrap_or_else(|| panic!("unable to find definer: '{}'", ty_name))
     }
 
     pub fn object_has_only_io_errors(&self, variable_name: &str, finder_tags: &Tags) -> bool {

@@ -35,13 +35,13 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
                 position,
             } => {
                 // map: Map
-                w.write_all(&(map_as_int(&map) as u32).to_le_bytes())?;
+                w.write_all(&(map_as_int(map) as u32).to_le_bytes())?;
 
                 // position: Vector3d
                 position.write_into_vec(w)?;
 
                 // corpse_map: Map
-                w.write_all(&(map_as_int(&corpse_map) as u32).to_le_bytes())?;
+                w.write_all(&(map_as_int(corpse_map) as u32).to_le_bytes())?;
 
             }
         }

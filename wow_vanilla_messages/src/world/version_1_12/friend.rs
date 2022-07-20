@@ -45,7 +45,7 @@ impl Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class_as_int(&class) as u32).to_le_bytes())?;
+                w.write_all(&(class_as_int(class) as u32).to_le_bytes())?;
 
             }
             Friend_FriendStatus::AFK {
@@ -60,7 +60,7 @@ impl Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class_as_int(&class) as u32).to_le_bytes())?;
+                w.write_all(&(class_as_int(class) as u32).to_le_bytes())?;
 
             }
             Friend_FriendStatus::UNKNOWN3 {
@@ -75,7 +75,7 @@ impl Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class_as_int(&class) as u32).to_le_bytes())?;
+                w.write_all(&(class_as_int(class) as u32).to_le_bytes())?;
 
             }
             Friend_FriendStatus::DND {
@@ -90,7 +90,7 @@ impl Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class_as_int(&class) as u32).to_le_bytes())?;
+                w.write_all(&(class_as_int(class) as u32).to_le_bytes())?;
 
             }
         }
