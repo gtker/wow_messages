@@ -63733,6 +63733,132 @@
             "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm",
             "start_position": 12
           }
+        },
+        {
+          "subject": "CMSG_WORLD_TELEPORT",
+          "members": [
+            {
+              "variable_name": "time_in_msec",
+              "verified_value": {
+                "Number": {
+                  "value": 34160026,
+                  "original_string": "34160026"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "map",
+              "verified_value": {
+                "Enum": {
+                  "value": 469,
+                  "original_string": "BLACKWING_LAIR"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "position",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "Vector3d",
+                  "members": [
+                    {
+                      "variable_name": "x",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 452.0,
+                          "original_string": "452.0"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "y",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 6454.0,
+                          "original_string": "6454.0"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "z",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 2536.0,
+                          "original_string": "2536.0"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "orientation",
+              "verified_value": {
+                "FloatingNumber": {
+                  "value": 3.1415927,
+                  "original_string": "3.1415927"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            28,
+            8,
+            0,
+            0,
+            0,
+            154,
+            61,
+            9,
+            2,
+            213,
+            1,
+            0,
+            0,
+            0,
+            0,
+            226,
+            67,
+            0,
+            176,
+            201,
+            69,
+            0,
+            128,
+            30,
+            69,
+            219,
+            15,
+            73,
+            64
+          ],
+          "tags": {
+            "comment": "Command in client was `worldport 469 452 6454 2536 180`.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm",
+            "start_position": 32
+          }
         }
       ],
       "file_info": {

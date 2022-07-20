@@ -193,4 +193,113 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    const RAW1: [u8; 30] = [ 0x00, 0x1C, 0x08, 0x00, 0x00, 0x00, 0x9A, 0x3D, 0x09,
+         0x02, 0xD5, 0x01, 0x00, 0x00, 0x00, 0x00, 0xE2, 0x43, 0x00, 0xB0, 0xC9,
+         0x45, 0x00, 0x80, 0x1E, 0x45, 0xDB, 0x0F, 0x49, 0x40, ];
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 32.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_WORLD_TELEPORT1() {
+        let expected = CMSG_WORLD_TELEPORT {
+            time_in_msec: 0x2093D9A,
+            map: Map::BLACKWING_LAIR,
+            position: Vector3d {
+                x: 452_f32,
+                y: 6454_f32,
+                z: 2536_f32,
+            },
+            orientation: 3.1415927_f32,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.time_in_msec, expected.time_in_msec);
+        assert_eq!(t.map, expected.map);
+        assert_eq!(t.position, expected.position);
+        assert_eq!(t.orientation, expected.orientation);
+
+        assert_eq!(24 + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 32.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_CMSG_WORLD_TELEPORT1() {
+        let expected = CMSG_WORLD_TELEPORT {
+            time_in_msec: 0x2093D9A,
+            map: Map::BLACKWING_LAIR,
+            position: Vector3d {
+                x: 452_f32,
+                y: 6454_f32,
+                z: 2536_f32,
+            },
+            orientation: 3.1415927_f32,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.time_in_msec, expected.time_in_msec);
+        assert_eq!(t.map, expected.map);
+        assert_eq!(t.position, expected.position);
+        assert_eq!(t.orientation, expected.orientation);
+
+        assert_eq!(24 + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 32.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_CMSG_WORLD_TELEPORT1() {
+        let expected = CMSG_WORLD_TELEPORT {
+            time_in_msec: 0x2093D9A,
+            map: Map::BLACKWING_LAIR,
+            position: Vector3d {
+                x: 452_f32,
+                y: 6454_f32,
+                z: 2536_f32,
+            },
+            orientation: 3.1415927_f32,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.time_in_msec, expected.time_in_msec);
+        assert_eq!(t.map, expected.map);
+        assert_eq!(t.position, expected.position);
+        assert_eq!(t.orientation, expected.orientation);
+
+        assert_eq!(24 + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
 }

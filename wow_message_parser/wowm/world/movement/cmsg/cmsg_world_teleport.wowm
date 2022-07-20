@@ -29,3 +29,24 @@ test CMSG_WORLD_TELEPORT {
     0x00, 0x00, 0x80, 0x40, /* orientation: 4.0 */
 ]
 
+test CMSG_WORLD_TELEPORT {
+    time_in_msec = 34160026;
+    map = BLACKWING_LAIR;
+    position = {
+        x = 452.0;
+        y = 6454.0;
+        z = 2536.0;
+    };
+    orientation = 3.1415927;
+} [
+  0x00, 0x1C, /* size */
+  0x08, 0x00, 0x00, 0x00, /* opcode */
+  0x9a, 0x3d, 0x09, 0x02, /* time_in_msec */
+  0xd5, 0x01, 0x00, 0x00, /* map */
+  0x00, 0x00, 0xe2, 0x43, /* position.x */
+  0x00, 0xb0, 0xc9, 0x45, /* position.y */
+  0x00, 0x80, 0x1e, 0x45, /* position.z */
+  0xdb, 0x0f, 0x49, 0x40 /* orientation */
+] {
+    comment = "Command in client was `worldport 469 452 6454 2536 180`.";
+}

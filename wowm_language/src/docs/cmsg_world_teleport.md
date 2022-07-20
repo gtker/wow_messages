@@ -51,3 +51,19 @@ CMSG have a header of 6 bytes.
 0, 0, 64, 64, // Vector3d.z: f32
 0, 0, 128, 64, // orientation: f32
 ```
+#### Example 2
+
+##### Comment
+
+Command in client was `worldport 469 452 6454 2536 180`.
+
+```c
+0, 28, // size
+8, 0, 0, 0, // opcode (8)
+154, 61, 9, 2, // time_in_msec: u32
+213, 1, 0, 0, // map: Map BLACKWING_LAIR (469)
+0, 0, 226, 67, // Vector3d.x: f32
+0, 176, 201, 69, // Vector3d.y: f32
+0, 128, 30, 69, // Vector3d.z: f32
+219, 15, 73, 64, // orientation: f32
+```
