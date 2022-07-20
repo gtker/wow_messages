@@ -1,14 +1,16 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_WORLD_TELEPORT = 0x08 {
-    u64 time_in_msec;
+    u32 time_in_msec;
     Map map;
     Vector3d position;
     f32 orientation;
+} {
+    description = "Sent when using the `worldport` console command.";
 }
 
 test CMSG_WORLD_TELEPORT {
-    time_in_msec = 0xFACADEDEADBEEF;
+    time_in_msec = 0xDEADBEEF;
     map = KALIMDOR;
     position = {
         x = 1.0;
@@ -17,9 +19,9 @@ test CMSG_WORLD_TELEPORT {
     };
     orientation = 4.0;
 } [
-    0x00, 0x20, /* Size: 32 */
+    0x00, 0x1c, /* Size: 28 */
     0x08, 0x00, 0x00, 0x00, /* Opcode */
-    0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, /* Time in msec */
+    0xEF, 0xBE, 0xAD, 0xDE, /* Time in msec */
     0x01, 0x00, 0x00, 0x00, /* Map: Kalimdor */
     0x00, 0x00, 0x80, 0x3F, /* position_x: 1.0 */
     0x00, 0x00, 0x00, 0x40, /* position_y: 2.0 */

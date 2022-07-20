@@ -63539,7 +63539,7 @@
             "name": "time_in_msec",
             "member_type": {
               "Integer": {
-                "type": "u64",
+                "type": "u32",
                 "endianness": "little"
               }
             },
@@ -63595,6 +63595,7 @@
         }
       ],
       "tags": {
+        "description": "Sent when using the `worldport` console command.",
         "version": {
           "type": "world",
           "versions": [
@@ -63615,8 +63616,8 @@
               "variable_name": "time_in_msec",
               "verified_value": {
                 "Number": {
-                  "value": 70591802745143023,
-                  "original_string": "0xFACADEDEADBEEF"
+                  "value": 3735928559,
+                  "original_string": "0xDEADBEEF"
                 }
               },
               "tags": {}
@@ -63685,7 +63686,7 @@
           ],
           "raw_bytes": [
             0,
-            32,
+            28,
             8,
             0,
             0,
@@ -63694,10 +63695,6 @@
             190,
             173,
             222,
-            222,
-            202,
-            250,
-            0,
             1,
             0,
             0,
@@ -63734,7 +63731,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm",
-            "start_position": 10
+            "start_position": 12
           }
         }
       ],
