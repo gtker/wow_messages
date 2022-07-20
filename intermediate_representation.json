@@ -59991,7 +59991,7 @@
       "members": [
         {
           "Definition": {
-            "name": "location",
+            "name": "name",
             "member_type": "CString",
             "constant_value": null,
             "used_as_size_in": null,
@@ -60014,7 +60014,52 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_TELEPORT_TO_UNIT",
+          "members": [
+            {
+              "variable_name": "name",
+              "verified_value": {
+                "String": "Vurtne"
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            11,
+            9,
+            0,
+            0,
+            0,
+            86,
+            117,
+            114,
+            116,
+            110,
+            101,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_teleport_to_unit.wowm",
+            "start_position": 9
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_teleport_to_unit.wowm",
         "start_position": 3
