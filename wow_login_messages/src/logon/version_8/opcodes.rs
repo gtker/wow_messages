@@ -73,6 +73,36 @@ impl ServerOpcodeMessage {
 
 }
 
+impl From<CMD_AUTH_LOGON_CHALLENGE_Server> for ServerOpcodeMessage {
+    fn from(c: CMD_AUTH_LOGON_CHALLENGE_Server) -> Self {
+        Self::CMD_AUTH_LOGON_CHALLENGE(c)
+    }
+}
+
+impl From<CMD_AUTH_LOGON_PROOF_Server> for ServerOpcodeMessage {
+    fn from(c: CMD_AUTH_LOGON_PROOF_Server) -> Self {
+        Self::CMD_AUTH_LOGON_PROOF(c)
+    }
+}
+
+impl From<CMD_AUTH_RECONNECT_CHALLENGE_Server> for ServerOpcodeMessage {
+    fn from(c: CMD_AUTH_RECONNECT_CHALLENGE_Server) -> Self {
+        Self::CMD_AUTH_RECONNECT_CHALLENGE(c)
+    }
+}
+
+impl From<CMD_AUTH_RECONNECT_PROOF_Server> for ServerOpcodeMessage {
+    fn from(c: CMD_AUTH_RECONNECT_PROOF_Server) -> Self {
+        Self::CMD_AUTH_RECONNECT_PROOF(c)
+    }
+}
+
+impl From<CMD_REALM_LIST_Server> for ServerOpcodeMessage {
+    fn from(c: CMD_REALM_LIST_Server) -> Self {
+        Self::CMD_REALM_LIST(c)
+    }
+}
+
 use crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client;
 use crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Client;
 use crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client;
@@ -141,5 +171,35 @@ impl ClientOpcodeMessage {
         }
     }
 
+}
+
+impl From<CMD_AUTH_LOGON_CHALLENGE_Client> for ClientOpcodeMessage {
+    fn from(c: CMD_AUTH_LOGON_CHALLENGE_Client) -> Self {
+        Self::CMD_AUTH_LOGON_CHALLENGE(c)
+    }
+}
+
+impl From<CMD_AUTH_LOGON_PROOF_Client> for ClientOpcodeMessage {
+    fn from(c: CMD_AUTH_LOGON_PROOF_Client) -> Self {
+        Self::CMD_AUTH_LOGON_PROOF(c)
+    }
+}
+
+impl From<CMD_AUTH_RECONNECT_CHALLENGE_Client> for ClientOpcodeMessage {
+    fn from(c: CMD_AUTH_RECONNECT_CHALLENGE_Client) -> Self {
+        Self::CMD_AUTH_RECONNECT_CHALLENGE(c)
+    }
+}
+
+impl From<CMD_AUTH_RECONNECT_PROOF_Client> for ClientOpcodeMessage {
+    fn from(c: CMD_AUTH_RECONNECT_PROOF_Client) -> Self {
+        Self::CMD_AUTH_RECONNECT_PROOF(c)
+    }
+}
+
+impl From<CMD_REALM_LIST_Client> for ClientOpcodeMessage {
+    fn from(c: CMD_REALM_LIST_Client) -> Self {
+        Self::CMD_REALM_LIST(c)
+    }
 }
 

@@ -73,6 +73,36 @@ impl ServerOpcodeMessage {
 
 }
 
+impl From<CMD_AUTH_LOGON_CHALLENGE_Server> for ServerOpcodeMessage {
+    fn from(c: CMD_AUTH_LOGON_CHALLENGE_Server) -> Self {
+        Self::CMD_AUTH_LOGON_CHALLENGE(c)
+    }
+}
+
+impl From<CMD_AUTH_LOGON_PROOF_Server> for ServerOpcodeMessage {
+    fn from(c: CMD_AUTH_LOGON_PROOF_Server) -> Self {
+        Self::CMD_AUTH_LOGON_PROOF(c)
+    }
+}
+
+impl From<CMD_REALM_LIST_Server> for ServerOpcodeMessage {
+    fn from(c: CMD_REALM_LIST_Server) -> Self {
+        Self::CMD_REALM_LIST(c)
+    }
+}
+
+impl From<CMD_XFER_INITIATE> for ServerOpcodeMessage {
+    fn from(c: CMD_XFER_INITIATE) -> Self {
+        Self::CMD_XFER_INITIATE(c)
+    }
+}
+
+impl From<CMD_XFER_DATA> for ServerOpcodeMessage {
+    fn from(c: CMD_XFER_DATA) -> Self {
+        Self::CMD_XFER_DATA(c)
+    }
+}
+
 use crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client;
 use crate::logon::version_3::CMD_AUTH_LOGON_PROOF_Client;
 use crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client;
@@ -159,5 +189,53 @@ impl ClientOpcodeMessage {
         }
     }
 
+}
+
+impl From<CMD_AUTH_LOGON_CHALLENGE_Client> for ClientOpcodeMessage {
+    fn from(c: CMD_AUTH_LOGON_CHALLENGE_Client) -> Self {
+        Self::CMD_AUTH_LOGON_CHALLENGE(c)
+    }
+}
+
+impl From<CMD_AUTH_LOGON_PROOF_Client> for ClientOpcodeMessage {
+    fn from(c: CMD_AUTH_LOGON_PROOF_Client) -> Self {
+        Self::CMD_AUTH_LOGON_PROOF(c)
+    }
+}
+
+impl From<CMD_AUTH_RECONNECT_CHALLENGE_Client> for ClientOpcodeMessage {
+    fn from(c: CMD_AUTH_RECONNECT_CHALLENGE_Client) -> Self {
+        Self::CMD_AUTH_RECONNECT_CHALLENGE(c)
+    }
+}
+
+impl From<CMD_SURVEY_RESULT> for ClientOpcodeMessage {
+    fn from(c: CMD_SURVEY_RESULT) -> Self {
+        Self::CMD_SURVEY_RESULT(c)
+    }
+}
+
+impl From<CMD_REALM_LIST_Client> for ClientOpcodeMessage {
+    fn from(c: CMD_REALM_LIST_Client) -> Self {
+        Self::CMD_REALM_LIST(c)
+    }
+}
+
+impl From<CMD_XFER_ACCEPT> for ClientOpcodeMessage {
+    fn from(c: CMD_XFER_ACCEPT) -> Self {
+        Self::CMD_XFER_ACCEPT(c)
+    }
+}
+
+impl From<CMD_XFER_RESUME> for ClientOpcodeMessage {
+    fn from(c: CMD_XFER_RESUME) -> Self {
+        Self::CMD_XFER_RESUME(c)
+    }
+}
+
+impl From<CMD_XFER_CANCEL> for ClientOpcodeMessage {
+    fn from(c: CMD_XFER_CANCEL) -> Self {
+        Self::CMD_XFER_CANCEL(c)
+    }
 }
 

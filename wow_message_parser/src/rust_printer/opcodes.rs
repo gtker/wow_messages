@@ -378,6 +378,18 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
         },
             true,
     );
+
+    for &e in v {
+        s.impl_for(
+            format!("From<{}>", e.name()),
+            format!("{t}OpcodeMessage", t = ty),
+            |s| {
+                s.body(format!("fn from(c: {}) -> Self", e.name()), |s| {
+                    s.wln(format!("Self::{}(c)", get_enumerator_name(e.name())));
+                });
+            },
+        );
+    }
 }
 
 pub fn get_enumerator_name(name: &str) -> String {
