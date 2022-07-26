@@ -263,6 +263,18 @@ pub fn common_impls_world(
             world_movement_info(s, v);
         }
     });
+
+    for &e in v {
+        s.impl_for(
+            format!("From<{}>", e.name()),
+            format!("{t}OpcodeMessage", t = ty),
+            |s| {
+                s.body(format!("fn from(c: {}) -> Self", e.name()), |s| {
+                    s.wln(format!("Self::{}(c)", get_enumerator_name(e.name())));
+                });
+            },
+        );
+    }
 }
 
 fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType) {

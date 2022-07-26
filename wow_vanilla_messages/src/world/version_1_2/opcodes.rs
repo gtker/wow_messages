@@ -127,6 +127,12 @@ impl ClientOpcodeMessage {
 
 }
 
+impl From<CMSG_CHAR_ENUM> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHAR_ENUM) -> Self {
+        Self::CMSG_CHAR_ENUM(c)
+    }
+}
+
 use crate::world::version_1_2::SMSG_AUTH_CHALLENGE;
 use crate::world::version_1_2::SMSG_AUTH_RESPONSE;
 
@@ -256,5 +262,17 @@ impl ServerOpcodeMessage {
         }
     }
 
+}
+
+impl From<SMSG_AUTH_CHALLENGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUTH_CHALLENGE) -> Self {
+        Self::SMSG_AUTH_CHALLENGE(c)
+    }
+}
+
+impl From<SMSG_AUTH_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUTH_RESPONSE) -> Self {
+        Self::SMSG_AUTH_RESPONSE(c)
+    }
 }
 

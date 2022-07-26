@@ -2865,6 +2865,1818 @@ impl ClientOpcodeMessage {
 
 }
 
+impl From<MSG_MOVE_WORLDPORT_ACK> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_WORLDPORT_ACK) -> Self {
+        Self::MSG_MOVE_WORLDPORT_ACK(c)
+    }
+}
+
+impl From<MSG_PETITION_DECLINE> for ClientOpcodeMessage {
+    fn from(c: MSG_PETITION_DECLINE) -> Self {
+        Self::MSG_PETITION_DECLINE(c)
+    }
+}
+
+impl From<MSG_TABARDVENDOR_ACTIVATE> for ClientOpcodeMessage {
+    fn from(c: MSG_TABARDVENDOR_ACTIVATE) -> Self {
+        Self::MSG_TABARDVENDOR_ACTIVATE(c)
+    }
+}
+
+impl From<MSG_QUEST_PUSH_RESULT> for ClientOpcodeMessage {
+    fn from(c: MSG_QUEST_PUSH_RESULT) -> Self {
+        Self::MSG_QUEST_PUSH_RESULT(c)
+    }
+}
+
+impl From<MSG_PETITION_RENAME> for ClientOpcodeMessage {
+    fn from(c: MSG_PETITION_RENAME) -> Self {
+        Self::MSG_PETITION_RENAME(c)
+    }
+}
+
+impl From<CMSG_WORLD_TELEPORT> for ClientOpcodeMessage {
+    fn from(c: CMSG_WORLD_TELEPORT) -> Self {
+        Self::CMSG_WORLD_TELEPORT(c)
+    }
+}
+
+impl From<CMSG_TELEPORT_TO_UNIT> for ClientOpcodeMessage {
+    fn from(c: CMSG_TELEPORT_TO_UNIT) -> Self {
+        Self::CMSG_TELEPORT_TO_UNIT(c)
+    }
+}
+
+impl From<CMSG_CHAR_CREATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHAR_CREATE) -> Self {
+        Self::CMSG_CHAR_CREATE(c)
+    }
+}
+
+impl From<CMSG_CHAR_ENUM> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHAR_ENUM) -> Self {
+        Self::CMSG_CHAR_ENUM(c)
+    }
+}
+
+impl From<CMSG_CHAR_DELETE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHAR_DELETE) -> Self {
+        Self::CMSG_CHAR_DELETE(c)
+    }
+}
+
+impl From<CMSG_PLAYER_LOGIN> for ClientOpcodeMessage {
+    fn from(c: CMSG_PLAYER_LOGIN) -> Self {
+        Self::CMSG_PLAYER_LOGIN(c)
+    }
+}
+
+impl From<CMSG_PLAYER_LOGOUT> for ClientOpcodeMessage {
+    fn from(c: CMSG_PLAYER_LOGOUT) -> Self {
+        Self::CMSG_PLAYER_LOGOUT(c)
+    }
+}
+
+impl From<CMSG_LOGOUT_REQUEST> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOGOUT_REQUEST) -> Self {
+        Self::CMSG_LOGOUT_REQUEST(c)
+    }
+}
+
+impl From<CMSG_LOGOUT_CANCEL> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOGOUT_CANCEL) -> Self {
+        Self::CMSG_LOGOUT_CANCEL(c)
+    }
+}
+
+impl From<CMSG_NAME_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_NAME_QUERY) -> Self {
+        Self::CMSG_NAME_QUERY(c)
+    }
+}
+
+impl From<CMSG_PET_NAME_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_NAME_QUERY) -> Self {
+        Self::CMSG_PET_NAME_QUERY(c)
+    }
+}
+
+impl From<CMSG_GUILD_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_QUERY) -> Self {
+        Self::CMSG_GUILD_QUERY(c)
+    }
+}
+
+impl From<CMSG_ITEM_QUERY_SINGLE> for ClientOpcodeMessage {
+    fn from(c: CMSG_ITEM_QUERY_SINGLE) -> Self {
+        Self::CMSG_ITEM_QUERY_SINGLE(c)
+    }
+}
+
+impl From<CMSG_PAGE_TEXT_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_PAGE_TEXT_QUERY) -> Self {
+        Self::CMSG_PAGE_TEXT_QUERY(c)
+    }
+}
+
+impl From<CMSG_QUEST_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUEST_QUERY) -> Self {
+        Self::CMSG_QUEST_QUERY(c)
+    }
+}
+
+impl From<CMSG_GAMEOBJECT_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_GAMEOBJECT_QUERY) -> Self {
+        Self::CMSG_GAMEOBJECT_QUERY(c)
+    }
+}
+
+impl From<CMSG_CREATURE_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_CREATURE_QUERY) -> Self {
+        Self::CMSG_CREATURE_QUERY(c)
+    }
+}
+
+impl From<CMSG_WHO> for ClientOpcodeMessage {
+    fn from(c: CMSG_WHO) -> Self {
+        Self::CMSG_WHO(c)
+    }
+}
+
+impl From<CMSG_WHOIS> for ClientOpcodeMessage {
+    fn from(c: CMSG_WHOIS) -> Self {
+        Self::CMSG_WHOIS(c)
+    }
+}
+
+impl From<CMSG_FRIEND_LIST> for ClientOpcodeMessage {
+    fn from(c: CMSG_FRIEND_LIST) -> Self {
+        Self::CMSG_FRIEND_LIST(c)
+    }
+}
+
+impl From<CMSG_ADD_FRIEND> for ClientOpcodeMessage {
+    fn from(c: CMSG_ADD_FRIEND) -> Self {
+        Self::CMSG_ADD_FRIEND(c)
+    }
+}
+
+impl From<CMSG_DEL_FRIEND> for ClientOpcodeMessage {
+    fn from(c: CMSG_DEL_FRIEND) -> Self {
+        Self::CMSG_DEL_FRIEND(c)
+    }
+}
+
+impl From<CMSG_ADD_IGNORE> for ClientOpcodeMessage {
+    fn from(c: CMSG_ADD_IGNORE) -> Self {
+        Self::CMSG_ADD_IGNORE(c)
+    }
+}
+
+impl From<CMSG_DEL_IGNORE> for ClientOpcodeMessage {
+    fn from(c: CMSG_DEL_IGNORE) -> Self {
+        Self::CMSG_DEL_IGNORE(c)
+    }
+}
+
+impl From<CMSG_GROUP_INVITE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_INVITE) -> Self {
+        Self::CMSG_GROUP_INVITE(c)
+    }
+}
+
+impl From<CMSG_GROUP_ACCEPT> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_ACCEPT) -> Self {
+        Self::CMSG_GROUP_ACCEPT(c)
+    }
+}
+
+impl From<CMSG_GROUP_DECLINE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_DECLINE) -> Self {
+        Self::CMSG_GROUP_DECLINE(c)
+    }
+}
+
+impl From<CMSG_GROUP_UNINVITE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_UNINVITE) -> Self {
+        Self::CMSG_GROUP_UNINVITE(c)
+    }
+}
+
+impl From<CMSG_GROUP_UNINVITE_GUID> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_UNINVITE_GUID) -> Self {
+        Self::CMSG_GROUP_UNINVITE_GUID(c)
+    }
+}
+
+impl From<CMSG_GROUP_SET_LEADER> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_SET_LEADER) -> Self {
+        Self::CMSG_GROUP_SET_LEADER(c)
+    }
+}
+
+impl From<CMSG_LOOT_METHOD> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOOT_METHOD) -> Self {
+        Self::CMSG_LOOT_METHOD(c)
+    }
+}
+
+impl From<CMSG_GROUP_DISBAND> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_DISBAND) -> Self {
+        Self::CMSG_GROUP_DISBAND(c)
+    }
+}
+
+impl From<CMSG_GUILD_CREATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_CREATE) -> Self {
+        Self::CMSG_GUILD_CREATE(c)
+    }
+}
+
+impl From<CMSG_GUILD_INVITE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_INVITE) -> Self {
+        Self::CMSG_GUILD_INVITE(c)
+    }
+}
+
+impl From<CMSG_GUILD_ACCEPT> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_ACCEPT) -> Self {
+        Self::CMSG_GUILD_ACCEPT(c)
+    }
+}
+
+impl From<CMSG_GUILD_DECLINE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_DECLINE) -> Self {
+        Self::CMSG_GUILD_DECLINE(c)
+    }
+}
+
+impl From<CMSG_GUILD_INFO> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_INFO) -> Self {
+        Self::CMSG_GUILD_INFO(c)
+    }
+}
+
+impl From<CMSG_GUILD_ROSTER> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_ROSTER) -> Self {
+        Self::CMSG_GUILD_ROSTER(c)
+    }
+}
+
+impl From<CMSG_GUILD_PROMOTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_PROMOTE) -> Self {
+        Self::CMSG_GUILD_PROMOTE(c)
+    }
+}
+
+impl From<CMSG_GUILD_DEMOTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_DEMOTE) -> Self {
+        Self::CMSG_GUILD_DEMOTE(c)
+    }
+}
+
+impl From<CMSG_GUILD_LEAVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_LEAVE) -> Self {
+        Self::CMSG_GUILD_LEAVE(c)
+    }
+}
+
+impl From<CMSG_GUILD_REMOVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_REMOVE) -> Self {
+        Self::CMSG_GUILD_REMOVE(c)
+    }
+}
+
+impl From<CMSG_GUILD_DISBAND> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_DISBAND) -> Self {
+        Self::CMSG_GUILD_DISBAND(c)
+    }
+}
+
+impl From<CMSG_GUILD_LEADER> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_LEADER) -> Self {
+        Self::CMSG_GUILD_LEADER(c)
+    }
+}
+
+impl From<CMSG_GUILD_MOTD> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_MOTD) -> Self {
+        Self::CMSG_GUILD_MOTD(c)
+    }
+}
+
+impl From<CMSG_MESSAGECHAT> for ClientOpcodeMessage {
+    fn from(c: CMSG_MESSAGECHAT) -> Self {
+        Self::CMSG_MESSAGECHAT(c)
+    }
+}
+
+impl From<CMSG_JOIN_CHANNEL> for ClientOpcodeMessage {
+    fn from(c: CMSG_JOIN_CHANNEL) -> Self {
+        Self::CMSG_JOIN_CHANNEL(c)
+    }
+}
+
+impl From<CMSG_LEAVE_CHANNEL> for ClientOpcodeMessage {
+    fn from(c: CMSG_LEAVE_CHANNEL) -> Self {
+        Self::CMSG_LEAVE_CHANNEL(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_LIST> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_LIST) -> Self {
+        Self::CMSG_CHANNEL_LIST(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_PASSWORD> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_PASSWORD) -> Self {
+        Self::CMSG_CHANNEL_PASSWORD(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_SET_OWNER> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_SET_OWNER) -> Self {
+        Self::CMSG_CHANNEL_SET_OWNER(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_OWNER> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_OWNER) -> Self {
+        Self::CMSG_CHANNEL_OWNER(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_MODERATOR> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_MODERATOR) -> Self {
+        Self::CMSG_CHANNEL_MODERATOR(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_UNMODERATOR> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_UNMODERATOR) -> Self {
+        Self::CMSG_CHANNEL_UNMODERATOR(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_MUTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_MUTE) -> Self {
+        Self::CMSG_CHANNEL_MUTE(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_UNMUTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_UNMUTE) -> Self {
+        Self::CMSG_CHANNEL_UNMUTE(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_INVITE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_INVITE) -> Self {
+        Self::CMSG_CHANNEL_INVITE(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_KICK> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_KICK) -> Self {
+        Self::CMSG_CHANNEL_KICK(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_BAN> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_BAN) -> Self {
+        Self::CMSG_CHANNEL_BAN(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_UNBAN> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_UNBAN) -> Self {
+        Self::CMSG_CHANNEL_UNBAN(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_ANNOUNCEMENTS> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_ANNOUNCEMENTS) -> Self {
+        Self::CMSG_CHANNEL_ANNOUNCEMENTS(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_MODERATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_MODERATE) -> Self {
+        Self::CMSG_CHANNEL_MODERATE(c)
+    }
+}
+
+impl From<CMSG_USE_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_USE_ITEM) -> Self {
+        Self::CMSG_USE_ITEM(c)
+    }
+}
+
+impl From<CMSG_OPEN_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_OPEN_ITEM) -> Self {
+        Self::CMSG_OPEN_ITEM(c)
+    }
+}
+
+impl From<CMSG_READ_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_READ_ITEM) -> Self {
+        Self::CMSG_READ_ITEM(c)
+    }
+}
+
+impl From<CMSG_GAMEOBJ_USE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GAMEOBJ_USE) -> Self {
+        Self::CMSG_GAMEOBJ_USE(c)
+    }
+}
+
+impl From<CMSG_AREATRIGGER> for ClientOpcodeMessage {
+    fn from(c: CMSG_AREATRIGGER) -> Self {
+        Self::CMSG_AREATRIGGER(c)
+    }
+}
+
+impl From<MSG_MOVE_START_FORWARD_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_FORWARD_Client) -> Self {
+        Self::MSG_MOVE_START_FORWARD(c)
+    }
+}
+
+impl From<MSG_MOVE_START_BACKWARD_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_BACKWARD_Client) -> Self {
+        Self::MSG_MOVE_START_BACKWARD(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_Client) -> Self {
+        Self::MSG_MOVE_STOP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_STRAFE_LEFT_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_STRAFE_LEFT_Client) -> Self {
+        Self::MSG_MOVE_START_STRAFE_LEFT(c)
+    }
+}
+
+impl From<MSG_MOVE_START_STRAFE_RIGHT_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_STRAFE_RIGHT_Client) -> Self {
+        Self::MSG_MOVE_START_STRAFE_RIGHT(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_STRAFE_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_STRAFE_Client) -> Self {
+        Self::MSG_MOVE_STOP_STRAFE(c)
+    }
+}
+
+impl From<MSG_MOVE_JUMP_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_JUMP_Client) -> Self {
+        Self::MSG_MOVE_JUMP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_TURN_LEFT_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_TURN_LEFT_Client) -> Self {
+        Self::MSG_MOVE_START_TURN_LEFT(c)
+    }
+}
+
+impl From<MSG_MOVE_START_TURN_RIGHT_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_TURN_RIGHT_Client) -> Self {
+        Self::MSG_MOVE_START_TURN_RIGHT(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_TURN_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_TURN_Client) -> Self {
+        Self::MSG_MOVE_STOP_TURN(c)
+    }
+}
+
+impl From<MSG_MOVE_START_PITCH_UP_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_PITCH_UP_Client) -> Self {
+        Self::MSG_MOVE_START_PITCH_UP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_PITCH_DOWN_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_PITCH_DOWN_Client) -> Self {
+        Self::MSG_MOVE_START_PITCH_DOWN(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_PITCH_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_PITCH_Client) -> Self {
+        Self::MSG_MOVE_STOP_PITCH(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_RUN_MODE_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_RUN_MODE_Client) -> Self {
+        Self::MSG_MOVE_SET_RUN_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_WALK_MODE_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_WALK_MODE_Client) -> Self {
+        Self::MSG_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_TELEPORT_ACK_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_TELEPORT_ACK_Client) -> Self {
+        Self::MSG_MOVE_TELEPORT_ACK(c)
+    }
+}
+
+impl From<MSG_MOVE_FALL_LAND_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_FALL_LAND_Client) -> Self {
+        Self::MSG_MOVE_FALL_LAND(c)
+    }
+}
+
+impl From<MSG_MOVE_START_SWIM_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_SWIM_Client) -> Self {
+        Self::MSG_MOVE_START_SWIM(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_SWIM_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_SWIM_Client) -> Self {
+        Self::MSG_MOVE_STOP_SWIM(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_FACING_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_FACING_Client) -> Self {
+        Self::MSG_MOVE_SET_FACING(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_PITCH_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_PITCH_Client) -> Self {
+        Self::MSG_MOVE_SET_PITCH(c)
+    }
+}
+
+impl From<CMSG_MOVE_SET_RAW_POSITION> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_SET_RAW_POSITION) -> Self {
+        Self::CMSG_MOVE_SET_RAW_POSITION(c)
+    }
+}
+
+impl From<CMSG_FORCE_RUN_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_RUN_SPEED_CHANGE_ACK) -> Self {
+        Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c)
+    }
+}
+
+impl From<CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK) -> Self {
+        Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c)
+    }
+}
+
+impl From<CMSG_FORCE_SWIM_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_SWIM_SPEED_CHANGE_ACK) -> Self {
+        Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c)
+    }
+}
+
+impl From<CMSG_FORCE_MOVE_ROOT_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_MOVE_ROOT_ACK) -> Self {
+        Self::CMSG_FORCE_MOVE_ROOT_ACK(c)
+    }
+}
+
+impl From<CMSG_FORCE_MOVE_UNROOT_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_MOVE_UNROOT_ACK) -> Self {
+        Self::CMSG_FORCE_MOVE_UNROOT_ACK(c)
+    }
+}
+
+impl From<MSG_MOVE_HEARTBEAT_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_HEARTBEAT_Client) -> Self {
+        Self::MSG_MOVE_HEARTBEAT(c)
+    }
+}
+
+impl From<CMSG_MOVE_KNOCK_BACK_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_KNOCK_BACK_ACK) -> Self {
+        Self::CMSG_MOVE_KNOCK_BACK_ACK(c)
+    }
+}
+
+impl From<CMSG_MOVE_HOVER_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_HOVER_ACK) -> Self {
+        Self::CMSG_MOVE_HOVER_ACK(c)
+    }
+}
+
+impl From<CMSG_NEXT_CINEMATIC_CAMERA> for ClientOpcodeMessage {
+    fn from(c: CMSG_NEXT_CINEMATIC_CAMERA) -> Self {
+        Self::CMSG_NEXT_CINEMATIC_CAMERA(c)
+    }
+}
+
+impl From<CMSG_COMPLETE_CINEMATIC> for ClientOpcodeMessage {
+    fn from(c: CMSG_COMPLETE_CINEMATIC) -> Self {
+        Self::CMSG_COMPLETE_CINEMATIC(c)
+    }
+}
+
+impl From<CMSG_TUTORIAL_FLAG> for ClientOpcodeMessage {
+    fn from(c: CMSG_TUTORIAL_FLAG) -> Self {
+        Self::CMSG_TUTORIAL_FLAG(c)
+    }
+}
+
+impl From<CMSG_TUTORIAL_CLEAR> for ClientOpcodeMessage {
+    fn from(c: CMSG_TUTORIAL_CLEAR) -> Self {
+        Self::CMSG_TUTORIAL_CLEAR(c)
+    }
+}
+
+impl From<CMSG_TUTORIAL_RESET> for ClientOpcodeMessage {
+    fn from(c: CMSG_TUTORIAL_RESET) -> Self {
+        Self::CMSG_TUTORIAL_RESET(c)
+    }
+}
+
+impl From<CMSG_STANDSTATECHANGE> for ClientOpcodeMessage {
+    fn from(c: CMSG_STANDSTATECHANGE) -> Self {
+        Self::CMSG_STANDSTATECHANGE(c)
+    }
+}
+
+impl From<CMSG_EMOTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_EMOTE) -> Self {
+        Self::CMSG_EMOTE(c)
+    }
+}
+
+impl From<CMSG_TEXT_EMOTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_TEXT_EMOTE) -> Self {
+        Self::CMSG_TEXT_EMOTE(c)
+    }
+}
+
+impl From<CMSG_AUTOSTORE_LOOT_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUTOSTORE_LOOT_ITEM) -> Self {
+        Self::CMSG_AUTOSTORE_LOOT_ITEM(c)
+    }
+}
+
+impl From<CMSG_AUTOEQUIP_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUTOEQUIP_ITEM) -> Self {
+        Self::CMSG_AUTOEQUIP_ITEM(c)
+    }
+}
+
+impl From<CMSG_AUTOSTORE_BAG_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUTOSTORE_BAG_ITEM) -> Self {
+        Self::CMSG_AUTOSTORE_BAG_ITEM(c)
+    }
+}
+
+impl From<CMSG_SWAP_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_SWAP_ITEM) -> Self {
+        Self::CMSG_SWAP_ITEM(c)
+    }
+}
+
+impl From<CMSG_SWAP_INV_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_SWAP_INV_ITEM) -> Self {
+        Self::CMSG_SWAP_INV_ITEM(c)
+    }
+}
+
+impl From<CMSG_SPLIT_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_SPLIT_ITEM) -> Self {
+        Self::CMSG_SPLIT_ITEM(c)
+    }
+}
+
+impl From<CMSG_AUTOEQUIP_ITEM_SLOT> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUTOEQUIP_ITEM_SLOT) -> Self {
+        Self::CMSG_AUTOEQUIP_ITEM_SLOT(c)
+    }
+}
+
+impl From<CMSG_DESTROYITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_DESTROYITEM) -> Self {
+        Self::CMSG_DESTROYITEM(c)
+    }
+}
+
+impl From<CMSG_INSPECT> for ClientOpcodeMessage {
+    fn from(c: CMSG_INSPECT) -> Self {
+        Self::CMSG_INSPECT(c)
+    }
+}
+
+impl From<CMSG_INITIATE_TRADE> for ClientOpcodeMessage {
+    fn from(c: CMSG_INITIATE_TRADE) -> Self {
+        Self::CMSG_INITIATE_TRADE(c)
+    }
+}
+
+impl From<CMSG_BEGIN_TRADE> for ClientOpcodeMessage {
+    fn from(c: CMSG_BEGIN_TRADE) -> Self {
+        Self::CMSG_BEGIN_TRADE(c)
+    }
+}
+
+impl From<CMSG_BUSY_TRADE> for ClientOpcodeMessage {
+    fn from(c: CMSG_BUSY_TRADE) -> Self {
+        Self::CMSG_BUSY_TRADE(c)
+    }
+}
+
+impl From<CMSG_IGNORE_TRADE> for ClientOpcodeMessage {
+    fn from(c: CMSG_IGNORE_TRADE) -> Self {
+        Self::CMSG_IGNORE_TRADE(c)
+    }
+}
+
+impl From<CMSG_ACCEPT_TRADE> for ClientOpcodeMessage {
+    fn from(c: CMSG_ACCEPT_TRADE) -> Self {
+        Self::CMSG_ACCEPT_TRADE(c)
+    }
+}
+
+impl From<CMSG_UNACCEPT_TRADE> for ClientOpcodeMessage {
+    fn from(c: CMSG_UNACCEPT_TRADE) -> Self {
+        Self::CMSG_UNACCEPT_TRADE(c)
+    }
+}
+
+impl From<CMSG_CANCEL_TRADE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CANCEL_TRADE) -> Self {
+        Self::CMSG_CANCEL_TRADE(c)
+    }
+}
+
+impl From<CMSG_SET_TRADE_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_TRADE_ITEM) -> Self {
+        Self::CMSG_SET_TRADE_ITEM(c)
+    }
+}
+
+impl From<CMSG_CLEAR_TRADE_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_CLEAR_TRADE_ITEM) -> Self {
+        Self::CMSG_CLEAR_TRADE_ITEM(c)
+    }
+}
+
+impl From<CMSG_SET_TRADE_GOLD> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_TRADE_GOLD) -> Self {
+        Self::CMSG_SET_TRADE_GOLD(c)
+    }
+}
+
+impl From<CMSG_SET_FACTION_ATWAR> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_FACTION_ATWAR) -> Self {
+        Self::CMSG_SET_FACTION_ATWAR(c)
+    }
+}
+
+impl From<CMSG_SET_ACTION_BUTTON> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_ACTION_BUTTON) -> Self {
+        Self::CMSG_SET_ACTION_BUTTON(c)
+    }
+}
+
+impl From<CMSG_CAST_SPELL> for ClientOpcodeMessage {
+    fn from(c: CMSG_CAST_SPELL) -> Self {
+        Self::CMSG_CAST_SPELL(c)
+    }
+}
+
+impl From<CMSG_CANCEL_CAST> for ClientOpcodeMessage {
+    fn from(c: CMSG_CANCEL_CAST) -> Self {
+        Self::CMSG_CANCEL_CAST(c)
+    }
+}
+
+impl From<CMSG_CANCEL_AURA> for ClientOpcodeMessage {
+    fn from(c: CMSG_CANCEL_AURA) -> Self {
+        Self::CMSG_CANCEL_AURA(c)
+    }
+}
+
+impl From<CMSG_CANCEL_CHANNELLING> for ClientOpcodeMessage {
+    fn from(c: CMSG_CANCEL_CHANNELLING) -> Self {
+        Self::CMSG_CANCEL_CHANNELLING(c)
+    }
+}
+
+impl From<CMSG_SET_SELECTION> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_SELECTION) -> Self {
+        Self::CMSG_SET_SELECTION(c)
+    }
+}
+
+impl From<CMSG_SET_TARGET_OBSOLETE> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_TARGET_OBSOLETE) -> Self {
+        Self::CMSG_SET_TARGET_OBSOLETE(c)
+    }
+}
+
+impl From<CMSG_ATTACKSWING> for ClientOpcodeMessage {
+    fn from(c: CMSG_ATTACKSWING) -> Self {
+        Self::CMSG_ATTACKSWING(c)
+    }
+}
+
+impl From<CMSG_ATTACKSTOP> for ClientOpcodeMessage {
+    fn from(c: CMSG_ATTACKSTOP) -> Self {
+        Self::CMSG_ATTACKSTOP(c)
+    }
+}
+
+impl From<CMSG_REPOP_REQUEST> for ClientOpcodeMessage {
+    fn from(c: CMSG_REPOP_REQUEST) -> Self {
+        Self::CMSG_REPOP_REQUEST(c)
+    }
+}
+
+impl From<CMSG_RESURRECT_RESPONSE> for ClientOpcodeMessage {
+    fn from(c: CMSG_RESURRECT_RESPONSE) -> Self {
+        Self::CMSG_RESURRECT_RESPONSE(c)
+    }
+}
+
+impl From<CMSG_LOOT> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOOT) -> Self {
+        Self::CMSG_LOOT(c)
+    }
+}
+
+impl From<CMSG_LOOT_MONEY> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOOT_MONEY) -> Self {
+        Self::CMSG_LOOT_MONEY(c)
+    }
+}
+
+impl From<CMSG_LOOT_RELEASE> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOOT_RELEASE) -> Self {
+        Self::CMSG_LOOT_RELEASE(c)
+    }
+}
+
+impl From<CMSG_DUEL_ACCEPTED> for ClientOpcodeMessage {
+    fn from(c: CMSG_DUEL_ACCEPTED) -> Self {
+        Self::CMSG_DUEL_ACCEPTED(c)
+    }
+}
+
+impl From<CMSG_DUEL_CANCELLED> for ClientOpcodeMessage {
+    fn from(c: CMSG_DUEL_CANCELLED) -> Self {
+        Self::CMSG_DUEL_CANCELLED(c)
+    }
+}
+
+impl From<CMSG_MOUNTSPECIAL_ANIM> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOUNTSPECIAL_ANIM) -> Self {
+        Self::CMSG_MOUNTSPECIAL_ANIM(c)
+    }
+}
+
+impl From<CMSG_PET_SET_ACTION> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_SET_ACTION) -> Self {
+        Self::CMSG_PET_SET_ACTION(c)
+    }
+}
+
+impl From<CMSG_PET_ACTION> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_ACTION) -> Self {
+        Self::CMSG_PET_ACTION(c)
+    }
+}
+
+impl From<CMSG_PET_ABANDON> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_ABANDON) -> Self {
+        Self::CMSG_PET_ABANDON(c)
+    }
+}
+
+impl From<CMSG_PET_RENAME> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_RENAME) -> Self {
+        Self::CMSG_PET_RENAME(c)
+    }
+}
+
+impl From<CMSG_GOSSIP_HELLO> for ClientOpcodeMessage {
+    fn from(c: CMSG_GOSSIP_HELLO) -> Self {
+        Self::CMSG_GOSSIP_HELLO(c)
+    }
+}
+
+impl From<CMSG_GOSSIP_SELECT_OPTION> for ClientOpcodeMessage {
+    fn from(c: CMSG_GOSSIP_SELECT_OPTION) -> Self {
+        Self::CMSG_GOSSIP_SELECT_OPTION(c)
+    }
+}
+
+impl From<CMSG_NPC_TEXT_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_NPC_TEXT_QUERY) -> Self {
+        Self::CMSG_NPC_TEXT_QUERY(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_STATUS_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_STATUS_QUERY) -> Self {
+        Self::CMSG_QUESTGIVER_STATUS_QUERY(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_HELLO> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_HELLO) -> Self {
+        Self::CMSG_QUESTGIVER_HELLO(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_QUERY_QUEST> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_QUERY_QUEST) -> Self {
+        Self::CMSG_QUESTGIVER_QUERY_QUEST(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_QUEST_AUTOLAUNCH> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_QUEST_AUTOLAUNCH) -> Self {
+        Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_ACCEPT_QUEST> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_ACCEPT_QUEST) -> Self {
+        Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_COMPLETE_QUEST> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_COMPLETE_QUEST) -> Self {
+        Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_REQUEST_REWARD> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_REQUEST_REWARD) -> Self {
+        Self::CMSG_QUESTGIVER_REQUEST_REWARD(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_CHOOSE_REWARD> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_CHOOSE_REWARD) -> Self {
+        Self::CMSG_QUESTGIVER_CHOOSE_REWARD(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_CANCEL> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_CANCEL) -> Self {
+        Self::CMSG_QUESTGIVER_CANCEL(c)
+    }
+}
+
+impl From<CMSG_QUESTLOG_SWAP_QUEST> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTLOG_SWAP_QUEST) -> Self {
+        Self::CMSG_QUESTLOG_SWAP_QUEST(c)
+    }
+}
+
+impl From<CMSG_QUESTLOG_REMOVE_QUEST> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTLOG_REMOVE_QUEST) -> Self {
+        Self::CMSG_QUESTLOG_REMOVE_QUEST(c)
+    }
+}
+
+impl From<CMSG_QUEST_CONFIRM_ACCEPT> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUEST_CONFIRM_ACCEPT) -> Self {
+        Self::CMSG_QUEST_CONFIRM_ACCEPT(c)
+    }
+}
+
+impl From<CMSG_PUSHQUESTTOPARTY> for ClientOpcodeMessage {
+    fn from(c: CMSG_PUSHQUESTTOPARTY) -> Self {
+        Self::CMSG_PUSHQUESTTOPARTY(c)
+    }
+}
+
+impl From<CMSG_LIST_INVENTORY> for ClientOpcodeMessage {
+    fn from(c: CMSG_LIST_INVENTORY) -> Self {
+        Self::CMSG_LIST_INVENTORY(c)
+    }
+}
+
+impl From<CMSG_SELL_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_SELL_ITEM) -> Self {
+        Self::CMSG_SELL_ITEM(c)
+    }
+}
+
+impl From<CMSG_BUY_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_BUY_ITEM) -> Self {
+        Self::CMSG_BUY_ITEM(c)
+    }
+}
+
+impl From<CMSG_BUY_ITEM_IN_SLOT> for ClientOpcodeMessage {
+    fn from(c: CMSG_BUY_ITEM_IN_SLOT) -> Self {
+        Self::CMSG_BUY_ITEM_IN_SLOT(c)
+    }
+}
+
+impl From<CMSG_TAXINODE_STATUS_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_TAXINODE_STATUS_QUERY) -> Self {
+        Self::CMSG_TAXINODE_STATUS_QUERY(c)
+    }
+}
+
+impl From<CMSG_TAXIQUERYAVAILABLENODES> for ClientOpcodeMessage {
+    fn from(c: CMSG_TAXIQUERYAVAILABLENODES) -> Self {
+        Self::CMSG_TAXIQUERYAVAILABLENODES(c)
+    }
+}
+
+impl From<CMSG_ACTIVATETAXI> for ClientOpcodeMessage {
+    fn from(c: CMSG_ACTIVATETAXI) -> Self {
+        Self::CMSG_ACTIVATETAXI(c)
+    }
+}
+
+impl From<CMSG_TRAINER_LIST> for ClientOpcodeMessage {
+    fn from(c: CMSG_TRAINER_LIST) -> Self {
+        Self::CMSG_TRAINER_LIST(c)
+    }
+}
+
+impl From<CMSG_TRAINER_BUY_SPELL> for ClientOpcodeMessage {
+    fn from(c: CMSG_TRAINER_BUY_SPELL) -> Self {
+        Self::CMSG_TRAINER_BUY_SPELL(c)
+    }
+}
+
+impl From<CMSG_BINDER_ACTIVATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_BINDER_ACTIVATE) -> Self {
+        Self::CMSG_BINDER_ACTIVATE(c)
+    }
+}
+
+impl From<CMSG_BANKER_ACTIVATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_BANKER_ACTIVATE) -> Self {
+        Self::CMSG_BANKER_ACTIVATE(c)
+    }
+}
+
+impl From<CMSG_BUY_BANK_SLOT> for ClientOpcodeMessage {
+    fn from(c: CMSG_BUY_BANK_SLOT) -> Self {
+        Self::CMSG_BUY_BANK_SLOT(c)
+    }
+}
+
+impl From<CMSG_PETITION_SHOWLIST> for ClientOpcodeMessage {
+    fn from(c: CMSG_PETITION_SHOWLIST) -> Self {
+        Self::CMSG_PETITION_SHOWLIST(c)
+    }
+}
+
+impl From<CMSG_PETITION_BUY> for ClientOpcodeMessage {
+    fn from(c: CMSG_PETITION_BUY) -> Self {
+        Self::CMSG_PETITION_BUY(c)
+    }
+}
+
+impl From<CMSG_PETITION_SHOW_SIGNATURES> for ClientOpcodeMessage {
+    fn from(c: CMSG_PETITION_SHOW_SIGNATURES) -> Self {
+        Self::CMSG_PETITION_SHOW_SIGNATURES(c)
+    }
+}
+
+impl From<CMSG_PETITION_SIGN> for ClientOpcodeMessage {
+    fn from(c: CMSG_PETITION_SIGN) -> Self {
+        Self::CMSG_PETITION_SIGN(c)
+    }
+}
+
+impl From<CMSG_OFFER_PETITION> for ClientOpcodeMessage {
+    fn from(c: CMSG_OFFER_PETITION) -> Self {
+        Self::CMSG_OFFER_PETITION(c)
+    }
+}
+
+impl From<CMSG_TURN_IN_PETITION> for ClientOpcodeMessage {
+    fn from(c: CMSG_TURN_IN_PETITION) -> Self {
+        Self::CMSG_TURN_IN_PETITION(c)
+    }
+}
+
+impl From<CMSG_PETITION_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_PETITION_QUERY) -> Self {
+        Self::CMSG_PETITION_QUERY(c)
+    }
+}
+
+impl From<CMSG_BUG> for ClientOpcodeMessage {
+    fn from(c: CMSG_BUG) -> Self {
+        Self::CMSG_BUG(c)
+    }
+}
+
+impl From<CMSG_PLAYED_TIME> for ClientOpcodeMessage {
+    fn from(c: CMSG_PLAYED_TIME) -> Self {
+        Self::CMSG_PLAYED_TIME(c)
+    }
+}
+
+impl From<CMSG_QUERY_TIME> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUERY_TIME) -> Self {
+        Self::CMSG_QUERY_TIME(c)
+    }
+}
+
+impl From<CMSG_RECLAIM_CORPSE> for ClientOpcodeMessage {
+    fn from(c: CMSG_RECLAIM_CORPSE) -> Self {
+        Self::CMSG_RECLAIM_CORPSE(c)
+    }
+}
+
+impl From<CMSG_WRAP_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_WRAP_ITEM) -> Self {
+        Self::CMSG_WRAP_ITEM(c)
+    }
+}
+
+impl From<MSG_MINIMAP_PING_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MINIMAP_PING_Client) -> Self {
+        Self::MSG_MINIMAP_PING(c)
+    }
+}
+
+impl From<CMSG_PING> for ClientOpcodeMessage {
+    fn from(c: CMSG_PING) -> Self {
+        Self::CMSG_PING(c)
+    }
+}
+
+impl From<CMSG_SETSHEATHED> for ClientOpcodeMessage {
+    fn from(c: CMSG_SETSHEATHED) -> Self {
+        Self::CMSG_SETSHEATHED(c)
+    }
+}
+
+impl From<CMSG_AUTH_SESSION> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUTH_SESSION) -> Self {
+        Self::CMSG_AUTH_SESSION(c)
+    }
+}
+
+impl From<CMSG_PET_CAST_SPELL> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_CAST_SPELL) -> Self {
+        Self::CMSG_PET_CAST_SPELL(c)
+    }
+}
+
+impl From<MSG_SAVE_GUILD_EMBLEM_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_SAVE_GUILD_EMBLEM_Client) -> Self {
+        Self::MSG_SAVE_GUILD_EMBLEM(c)
+    }
+}
+
+impl From<CMSG_ZONEUPDATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_ZONEUPDATE) -> Self {
+        Self::CMSG_ZONEUPDATE(c)
+    }
+}
+
+impl From<MSG_RANDOM_ROLL_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_RANDOM_ROLL_Client) -> Self {
+        Self::MSG_RANDOM_ROLL(c)
+    }
+}
+
+impl From<MSG_LOOKING_FOR_GROUP_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_LOOKING_FOR_GROUP_Client) -> Self {
+        Self::MSG_LOOKING_FOR_GROUP(c)
+    }
+}
+
+impl From<CMSG_UNLEARN_SKILL> for ClientOpcodeMessage {
+    fn from(c: CMSG_UNLEARN_SKILL) -> Self {
+        Self::CMSG_UNLEARN_SKILL(c)
+    }
+}
+
+impl From<CMSG_GMTICKET_CREATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GMTICKET_CREATE) -> Self {
+        Self::CMSG_GMTICKET_CREATE(c)
+    }
+}
+
+impl From<CMSG_GMTICKET_UPDATETEXT> for ClientOpcodeMessage {
+    fn from(c: CMSG_GMTICKET_UPDATETEXT) -> Self {
+        Self::CMSG_GMTICKET_UPDATETEXT(c)
+    }
+}
+
+impl From<CMSG_REQUEST_ACCOUNT_DATA> for ClientOpcodeMessage {
+    fn from(c: CMSG_REQUEST_ACCOUNT_DATA) -> Self {
+        Self::CMSG_REQUEST_ACCOUNT_DATA(c)
+    }
+}
+
+impl From<CMSG_UPDATE_ACCOUNT_DATA> for ClientOpcodeMessage {
+    fn from(c: CMSG_UPDATE_ACCOUNT_DATA) -> Self {
+        Self::CMSG_UPDATE_ACCOUNT_DATA(c)
+    }
+}
+
+impl From<CMSG_GMTICKET_GETTICKET> for ClientOpcodeMessage {
+    fn from(c: CMSG_GMTICKET_GETTICKET) -> Self {
+        Self::CMSG_GMTICKET_GETTICKET(c)
+    }
+}
+
+impl From<MSG_CORPSE_QUERY_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_CORPSE_QUERY_Client) -> Self {
+        Self::MSG_CORPSE_QUERY(c)
+    }
+}
+
+impl From<CMSG_GMTICKET_DELETETICKET> for ClientOpcodeMessage {
+    fn from(c: CMSG_GMTICKET_DELETETICKET) -> Self {
+        Self::CMSG_GMTICKET_DELETETICKET(c)
+    }
+}
+
+impl From<CMSG_GMTICKET_SYSTEMSTATUS> for ClientOpcodeMessage {
+    fn from(c: CMSG_GMTICKET_SYSTEMSTATUS) -> Self {
+        Self::CMSG_GMTICKET_SYSTEMSTATUS(c)
+    }
+}
+
+impl From<CMSG_SPIRIT_HEALER_ACTIVATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_SPIRIT_HEALER_ACTIVATE) -> Self {
+        Self::CMSG_SPIRIT_HEALER_ACTIVATE(c)
+    }
+}
+
+impl From<CMSG_CHAT_IGNORED> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHAT_IGNORED) -> Self {
+        Self::CMSG_CHAT_IGNORED(c)
+    }
+}
+
+impl From<CMSG_GUILD_RANK> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_RANK) -> Self {
+        Self::CMSG_GUILD_RANK(c)
+    }
+}
+
+impl From<CMSG_GUILD_ADD_RANK> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_ADD_RANK) -> Self {
+        Self::CMSG_GUILD_ADD_RANK(c)
+    }
+}
+
+impl From<CMSG_GUILD_DEL_RANK> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_DEL_RANK) -> Self {
+        Self::CMSG_GUILD_DEL_RANK(c)
+    }
+}
+
+impl From<CMSG_GUILD_SET_PUBLIC_NOTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_SET_PUBLIC_NOTE) -> Self {
+        Self::CMSG_GUILD_SET_PUBLIC_NOTE(c)
+    }
+}
+
+impl From<CMSG_GUILD_SET_OFFICER_NOTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_SET_OFFICER_NOTE) -> Self {
+        Self::CMSG_GUILD_SET_OFFICER_NOTE(c)
+    }
+}
+
+impl From<CMSG_SEND_MAIL> for ClientOpcodeMessage {
+    fn from(c: CMSG_SEND_MAIL) -> Self {
+        Self::CMSG_SEND_MAIL(c)
+    }
+}
+
+impl From<CMSG_GET_MAIL_LIST> for ClientOpcodeMessage {
+    fn from(c: CMSG_GET_MAIL_LIST) -> Self {
+        Self::CMSG_GET_MAIL_LIST(c)
+    }
+}
+
+impl From<CMSG_BATTLEFIELD_LIST> for ClientOpcodeMessage {
+    fn from(c: CMSG_BATTLEFIELD_LIST) -> Self {
+        Self::CMSG_BATTLEFIELD_LIST(c)
+    }
+}
+
+impl From<CMSG_BATTLEFIELD_JOIN> for ClientOpcodeMessage {
+    fn from(c: CMSG_BATTLEFIELD_JOIN) -> Self {
+        Self::CMSG_BATTLEFIELD_JOIN(c)
+    }
+}
+
+impl From<CMSG_ITEM_TEXT_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_ITEM_TEXT_QUERY) -> Self {
+        Self::CMSG_ITEM_TEXT_QUERY(c)
+    }
+}
+
+impl From<CMSG_MAIL_TAKE_MONEY> for ClientOpcodeMessage {
+    fn from(c: CMSG_MAIL_TAKE_MONEY) -> Self {
+        Self::CMSG_MAIL_TAKE_MONEY(c)
+    }
+}
+
+impl From<CMSG_MAIL_TAKE_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_MAIL_TAKE_ITEM) -> Self {
+        Self::CMSG_MAIL_TAKE_ITEM(c)
+    }
+}
+
+impl From<CMSG_MAIL_MARK_AS_READ> for ClientOpcodeMessage {
+    fn from(c: CMSG_MAIL_MARK_AS_READ) -> Self {
+        Self::CMSG_MAIL_MARK_AS_READ(c)
+    }
+}
+
+impl From<CMSG_MAIL_RETURN_TO_SENDER> for ClientOpcodeMessage {
+    fn from(c: CMSG_MAIL_RETURN_TO_SENDER) -> Self {
+        Self::CMSG_MAIL_RETURN_TO_SENDER(c)
+    }
+}
+
+impl From<CMSG_MAIL_DELETE> for ClientOpcodeMessage {
+    fn from(c: CMSG_MAIL_DELETE) -> Self {
+        Self::CMSG_MAIL_DELETE(c)
+    }
+}
+
+impl From<CMSG_MAIL_CREATE_TEXT_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_MAIL_CREATE_TEXT_ITEM) -> Self {
+        Self::CMSG_MAIL_CREATE_TEXT_ITEM(c)
+    }
+}
+
+impl From<CMSG_LEARN_TALENT> for ClientOpcodeMessage {
+    fn from(c: CMSG_LEARN_TALENT) -> Self {
+        Self::CMSG_LEARN_TALENT(c)
+    }
+}
+
+impl From<CMSG_TOGGLE_PVP> for ClientOpcodeMessage {
+    fn from(c: CMSG_TOGGLE_PVP) -> Self {
+        Self::CMSG_TOGGLE_PVP(c)
+    }
+}
+
+impl From<MSG_AUCTION_HELLO_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_AUCTION_HELLO_Client) -> Self {
+        Self::MSG_AUCTION_HELLO(c)
+    }
+}
+
+impl From<CMSG_AUCTION_SELL_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUCTION_SELL_ITEM) -> Self {
+        Self::CMSG_AUCTION_SELL_ITEM(c)
+    }
+}
+
+impl From<CMSG_AUCTION_REMOVE_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUCTION_REMOVE_ITEM) -> Self {
+        Self::CMSG_AUCTION_REMOVE_ITEM(c)
+    }
+}
+
+impl From<CMSG_AUCTION_LIST_ITEMS> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUCTION_LIST_ITEMS) -> Self {
+        Self::CMSG_AUCTION_LIST_ITEMS(c)
+    }
+}
+
+impl From<CMSG_AUCTION_LIST_OWNER_ITEMS> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUCTION_LIST_OWNER_ITEMS) -> Self {
+        Self::CMSG_AUCTION_LIST_OWNER_ITEMS(c)
+    }
+}
+
+impl From<CMSG_AUCTION_PLACE_BID> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUCTION_PLACE_BID) -> Self {
+        Self::CMSG_AUCTION_PLACE_BID(c)
+    }
+}
+
+impl From<CMSG_AUCTION_LIST_BIDDER_ITEMS> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUCTION_LIST_BIDDER_ITEMS) -> Self {
+        Self::CMSG_AUCTION_LIST_BIDDER_ITEMS(c)
+    }
+}
+
+impl From<CMSG_SET_AMMO> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_AMMO) -> Self {
+        Self::CMSG_SET_AMMO(c)
+    }
+}
+
+impl From<CMSG_SET_ACTIVE_MOVER> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_ACTIVE_MOVER) -> Self {
+        Self::CMSG_SET_ACTIVE_MOVER(c)
+    }
+}
+
+impl From<CMSG_PET_CANCEL_AURA> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_CANCEL_AURA) -> Self {
+        Self::CMSG_PET_CANCEL_AURA(c)
+    }
+}
+
+impl From<CMSG_CANCEL_AUTO_REPEAT_SPELL> for ClientOpcodeMessage {
+    fn from(c: CMSG_CANCEL_AUTO_REPEAT_SPELL) -> Self {
+        Self::CMSG_CANCEL_AUTO_REPEAT_SPELL(c)
+    }
+}
+
+impl From<MSG_LIST_STABLED_PETS_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_LIST_STABLED_PETS_Client) -> Self {
+        Self::MSG_LIST_STABLED_PETS(c)
+    }
+}
+
+impl From<CMSG_STABLE_PET> for ClientOpcodeMessage {
+    fn from(c: CMSG_STABLE_PET) -> Self {
+        Self::CMSG_STABLE_PET(c)
+    }
+}
+
+impl From<CMSG_UNSTABLE_PET> for ClientOpcodeMessage {
+    fn from(c: CMSG_UNSTABLE_PET) -> Self {
+        Self::CMSG_UNSTABLE_PET(c)
+    }
+}
+
+impl From<CMSG_BUY_STABLE_SLOT> for ClientOpcodeMessage {
+    fn from(c: CMSG_BUY_STABLE_SLOT) -> Self {
+        Self::CMSG_BUY_STABLE_SLOT(c)
+    }
+}
+
+impl From<CMSG_STABLE_SWAP_PET> for ClientOpcodeMessage {
+    fn from(c: CMSG_STABLE_SWAP_PET) -> Self {
+        Self::CMSG_STABLE_SWAP_PET(c)
+    }
+}
+
+impl From<CMSG_REQUEST_PET_INFO> for ClientOpcodeMessage {
+    fn from(c: CMSG_REQUEST_PET_INFO) -> Self {
+        Self::CMSG_REQUEST_PET_INFO(c)
+    }
+}
+
+impl From<CMSG_FAR_SIGHT> for ClientOpcodeMessage {
+    fn from(c: CMSG_FAR_SIGHT) -> Self {
+        Self::CMSG_FAR_SIGHT(c)
+    }
+}
+
+impl From<CMSG_GROUP_CHANGE_SUB_GROUP> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_CHANGE_SUB_GROUP) -> Self {
+        Self::CMSG_GROUP_CHANGE_SUB_GROUP(c)
+    }
+}
+
+impl From<CMSG_REQUEST_PARTY_MEMBER_STATS> for ClientOpcodeMessage {
+    fn from(c: CMSG_REQUEST_PARTY_MEMBER_STATS) -> Self {
+        Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c)
+    }
+}
+
+impl From<CMSG_GROUP_SWAP_SUB_GROUP> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_SWAP_SUB_GROUP) -> Self {
+        Self::CMSG_GROUP_SWAP_SUB_GROUP(c)
+    }
+}
+
+impl From<CMSG_AUTOSTORE_BANK_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUTOSTORE_BANK_ITEM) -> Self {
+        Self::CMSG_AUTOSTORE_BANK_ITEM(c)
+    }
+}
+
+impl From<CMSG_AUTOBANK_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUTOBANK_ITEM) -> Self {
+        Self::CMSG_AUTOBANK_ITEM(c)
+    }
+}
+
+impl From<MSG_QUERY_NEXT_MAIL_TIME_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_QUERY_NEXT_MAIL_TIME_Client) -> Self {
+        Self::MSG_QUERY_NEXT_MAIL_TIME(c)
+    }
+}
+
+impl From<CMSG_GROUP_RAID_CONVERT> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_RAID_CONVERT) -> Self {
+        Self::CMSG_GROUP_RAID_CONVERT(c)
+    }
+}
+
+impl From<CMSG_GROUP_ASSISTANT_LEADER> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_ASSISTANT_LEADER) -> Self {
+        Self::CMSG_GROUP_ASSISTANT_LEADER(c)
+    }
+}
+
+impl From<CMSG_BUYBACK_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_BUYBACK_ITEM) -> Self {
+        Self::CMSG_BUYBACK_ITEM(c)
+    }
+}
+
+impl From<CMSG_MEETINGSTONE_JOIN> for ClientOpcodeMessage {
+    fn from(c: CMSG_MEETINGSTONE_JOIN) -> Self {
+        Self::CMSG_MEETINGSTONE_JOIN(c)
+    }
+}
+
+impl From<CMSG_MEETINGSTONE_LEAVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_MEETINGSTONE_LEAVE) -> Self {
+        Self::CMSG_MEETINGSTONE_LEAVE(c)
+    }
+}
+
+impl From<CMSG_MEETINGSTONE_INFO> for ClientOpcodeMessage {
+    fn from(c: CMSG_MEETINGSTONE_INFO) -> Self {
+        Self::CMSG_MEETINGSTONE_INFO(c)
+    }
+}
+
+impl From<CMSG_CANCEL_GROWTH_AURA> for ClientOpcodeMessage {
+    fn from(c: CMSG_CANCEL_GROWTH_AURA) -> Self {
+        Self::CMSG_CANCEL_GROWTH_AURA(c)
+    }
+}
+
+impl From<CMSG_LOOT_ROLL> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOOT_ROLL) -> Self {
+        Self::CMSG_LOOT_ROLL(c)
+    }
+}
+
+impl From<CMSG_LOOT_MASTER_GIVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOOT_MASTER_GIVE) -> Self {
+        Self::CMSG_LOOT_MASTER_GIVE(c)
+    }
+}
+
+impl From<CMSG_REPAIR_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_REPAIR_ITEM) -> Self {
+        Self::CMSG_REPAIR_ITEM(c)
+    }
+}
+
+impl From<MSG_TALENT_WIPE_CONFIRM_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_TALENT_WIPE_CONFIRM_Client) -> Self {
+        Self::MSG_TALENT_WIPE_CONFIRM(c)
+    }
+}
+
+impl From<CMSG_SUMMON_RESPONSE> for ClientOpcodeMessage {
+    fn from(c: CMSG_SUMMON_RESPONSE) -> Self {
+        Self::CMSG_SUMMON_RESPONSE(c)
+    }
+}
+
+impl From<CMSG_SELF_RES> for ClientOpcodeMessage {
+    fn from(c: CMSG_SELF_RES) -> Self {
+        Self::CMSG_SELF_RES(c)
+    }
+}
+
+impl From<CMSG_TOGGLE_HELM> for ClientOpcodeMessage {
+    fn from(c: CMSG_TOGGLE_HELM) -> Self {
+        Self::CMSG_TOGGLE_HELM(c)
+    }
+}
+
+impl From<CMSG_TOGGLE_CLOAK> for ClientOpcodeMessage {
+    fn from(c: CMSG_TOGGLE_CLOAK) -> Self {
+        Self::CMSG_TOGGLE_CLOAK(c)
+    }
+}
+
+impl From<CMSG_SET_ACTIONBAR_TOGGLES> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_ACTIONBAR_TOGGLES) -> Self {
+        Self::CMSG_SET_ACTIONBAR_TOGGLES(c)
+    }
+}
+
+impl From<CMSG_ITEM_NAME_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_ITEM_NAME_QUERY) -> Self {
+        Self::CMSG_ITEM_NAME_QUERY(c)
+    }
+}
+
+impl From<CMSG_CHAR_RENAME> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHAR_RENAME) -> Self {
+        Self::CMSG_CHAR_RENAME(c)
+    }
+}
+
+impl From<CMSG_MOVE_SPLINE_DONE> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_SPLINE_DONE) -> Self {
+        Self::CMSG_MOVE_SPLINE_DONE(c)
+    }
+}
+
+impl From<CMSG_MOVE_FALL_RESET> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_FALL_RESET) -> Self {
+        Self::CMSG_MOVE_FALL_RESET(c)
+    }
+}
+
+impl From<CMSG_REQUEST_RAID_INFO> for ClientOpcodeMessage {
+    fn from(c: CMSG_REQUEST_RAID_INFO) -> Self {
+        Self::CMSG_REQUEST_RAID_INFO(c)
+    }
+}
+
+impl From<CMSG_MOVE_TIME_SKIPPED> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_TIME_SKIPPED) -> Self {
+        Self::CMSG_MOVE_TIME_SKIPPED(c)
+    }
+}
+
+impl From<CMSG_MOVE_FEATHER_FALL_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_FEATHER_FALL_ACK) -> Self {
+        Self::CMSG_MOVE_FEATHER_FALL_ACK(c)
+    }
+}
+
+impl From<CMSG_MOVE_WATER_WALK_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_WATER_WALK_ACK) -> Self {
+        Self::CMSG_MOVE_WATER_WALK_ACK(c)
+    }
+}
+
+impl From<CMSG_MOVE_NOT_ACTIVE_MOVER> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_NOT_ACTIVE_MOVER) -> Self {
+        Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c)
+    }
+}
+
+impl From<CMSG_BATTLEFIELD_STATUS> for ClientOpcodeMessage {
+    fn from(c: CMSG_BATTLEFIELD_STATUS) -> Self {
+        Self::CMSG_BATTLEFIELD_STATUS(c)
+    }
+}
+
+impl From<CMSG_BATTLEFIELD_PORT> for ClientOpcodeMessage {
+    fn from(c: CMSG_BATTLEFIELD_PORT) -> Self {
+        Self::CMSG_BATTLEFIELD_PORT(c)
+    }
+}
+
+impl From<MSG_INSPECT_HONOR_STATS_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_INSPECT_HONOR_STATS_Client) -> Self {
+        Self::MSG_INSPECT_HONOR_STATS(c)
+    }
+}
+
+impl From<CMSG_BATTLEMASTER_HELLO> for ClientOpcodeMessage {
+    fn from(c: CMSG_BATTLEMASTER_HELLO) -> Self {
+        Self::CMSG_BATTLEMASTER_HELLO(c)
+    }
+}
+
+impl From<CMSG_FORCE_WALK_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_WALK_SPEED_CHANGE_ACK) -> Self {
+        Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c)
+    }
+}
+
+impl From<CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK) -> Self {
+        Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c)
+    }
+}
+
+impl From<CMSG_FORCE_TURN_RATE_CHANGE_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_TURN_RATE_CHANGE_ACK) -> Self {
+        Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c)
+    }
+}
+
+impl From<MSG_PVP_LOG_DATA_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_PVP_LOG_DATA_Client) -> Self {
+        Self::MSG_PVP_LOG_DATA(c)
+    }
+}
+
+impl From<CMSG_LEAVE_BATTLEFIELD> for ClientOpcodeMessage {
+    fn from(c: CMSG_LEAVE_BATTLEFIELD) -> Self {
+        Self::CMSG_LEAVE_BATTLEFIELD(c)
+    }
+}
+
+impl From<CMSG_AREA_SPIRIT_HEALER_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_AREA_SPIRIT_HEALER_QUERY) -> Self {
+        Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c)
+    }
+}
+
+impl From<CMSG_AREA_SPIRIT_HEALER_QUEUE> for ClientOpcodeMessage {
+    fn from(c: CMSG_AREA_SPIRIT_HEALER_QUEUE) -> Self {
+        Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c)
+    }
+}
+
+impl From<MSG_BATTLEGROUND_PLAYER_POSITIONS_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_BATTLEGROUND_PLAYER_POSITIONS_Client) -> Self {
+        Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c)
+    }
+}
+
+impl From<CMSG_PET_STOP_ATTACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_STOP_ATTACK) -> Self {
+        Self::CMSG_PET_STOP_ATTACK(c)
+    }
+}
+
+impl From<CMSG_BATTLEMASTER_JOIN> for ClientOpcodeMessage {
+    fn from(c: CMSG_BATTLEMASTER_JOIN) -> Self {
+        Self::CMSG_BATTLEMASTER_JOIN(c)
+    }
+}
+
+impl From<CMSG_PET_UNLEARN> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_UNLEARN) -> Self {
+        Self::CMSG_PET_UNLEARN(c)
+    }
+}
+
+impl From<CMSG_PET_SPELL_AUTOCAST> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_SPELL_AUTOCAST) -> Self {
+        Self::CMSG_PET_SPELL_AUTOCAST(c)
+    }
+}
+
+impl From<CMSG_GUILD_INFO_TEXT> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_INFO_TEXT) -> Self {
+        Self::CMSG_GUILD_INFO_TEXT(c)
+    }
+}
+
+impl From<CMSG_ACTIVATETAXIEXPRESS> for ClientOpcodeMessage {
+    fn from(c: CMSG_ACTIVATETAXIEXPRESS) -> Self {
+        Self::CMSG_ACTIVATETAXIEXPRESS(c)
+    }
+}
+
+impl From<CMSG_SET_FACTION_INACTIVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_FACTION_INACTIVE) -> Self {
+        Self::CMSG_SET_FACTION_INACTIVE(c)
+    }
+}
+
+impl From<CMSG_SET_WATCHED_FACTION> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_WATCHED_FACTION) -> Self {
+        Self::CMSG_SET_WATCHED_FACTION(c)
+    }
+}
+
+impl From<CMSG_RESET_INSTANCES> for ClientOpcodeMessage {
+    fn from(c: CMSG_RESET_INSTANCES) -> Self {
+        Self::CMSG_RESET_INSTANCES(c)
+    }
+}
+
+impl From<MSG_RAID_TARGET_UPDATE_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_RAID_TARGET_UPDATE_Client) -> Self {
+        Self::MSG_RAID_TARGET_UPDATE(c)
+    }
+}
+
+impl From<MSG_RAID_READY_CHECK_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_RAID_READY_CHECK_Client) -> Self {
+        Self::MSG_RAID_READY_CHECK(c)
+    }
+}
+
+impl From<CMSG_GMSURVEY_SUBMIT> for ClientOpcodeMessage {
+    fn from(c: CMSG_GMSURVEY_SUBMIT) -> Self {
+        Self::CMSG_GMSURVEY_SUBMIT(c)
+    }
+}
+
 use crate::world::version_1_12::SMSG_CHAR_CREATE;
 use crate::world::version_1_12::SMSG_CHAR_ENUM;
 use crate::world::version_1_12::SMSG_CHAR_DELETE;
@@ -6022,5 +7834,2039 @@ impl ServerOpcodeMessage {
         }
     }
 
+}
+
+impl From<MSG_MOVE_WORLDPORT_ACK> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_WORLDPORT_ACK) -> Self {
+        Self::MSG_MOVE_WORLDPORT_ACK(c)
+    }
+}
+
+impl From<MSG_PETITION_DECLINE> for ServerOpcodeMessage {
+    fn from(c: MSG_PETITION_DECLINE) -> Self {
+        Self::MSG_PETITION_DECLINE(c)
+    }
+}
+
+impl From<MSG_TABARDVENDOR_ACTIVATE> for ServerOpcodeMessage {
+    fn from(c: MSG_TABARDVENDOR_ACTIVATE) -> Self {
+        Self::MSG_TABARDVENDOR_ACTIVATE(c)
+    }
+}
+
+impl From<MSG_QUEST_PUSH_RESULT> for ServerOpcodeMessage {
+    fn from(c: MSG_QUEST_PUSH_RESULT) -> Self {
+        Self::MSG_QUEST_PUSH_RESULT(c)
+    }
+}
+
+impl From<MSG_PETITION_RENAME> for ServerOpcodeMessage {
+    fn from(c: MSG_PETITION_RENAME) -> Self {
+        Self::MSG_PETITION_RENAME(c)
+    }
+}
+
+impl From<SMSG_CHAR_CREATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAR_CREATE) -> Self {
+        Self::SMSG_CHAR_CREATE(c)
+    }
+}
+
+impl From<SMSG_CHAR_ENUM> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAR_ENUM) -> Self {
+        Self::SMSG_CHAR_ENUM(c)
+    }
+}
+
+impl From<SMSG_CHAR_DELETE> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAR_DELETE) -> Self {
+        Self::SMSG_CHAR_DELETE(c)
+    }
+}
+
+impl From<SMSG_NEW_WORLD> for ServerOpcodeMessage {
+    fn from(c: SMSG_NEW_WORLD) -> Self {
+        Self::SMSG_NEW_WORLD(c)
+    }
+}
+
+impl From<SMSG_TRANSFER_PENDING> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRANSFER_PENDING) -> Self {
+        Self::SMSG_TRANSFER_PENDING(c)
+    }
+}
+
+impl From<SMSG_TRANSFER_ABORTED> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRANSFER_ABORTED) -> Self {
+        Self::SMSG_TRANSFER_ABORTED(c)
+    }
+}
+
+impl From<SMSG_CHARACTER_LOGIN_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHARACTER_LOGIN_FAILED) -> Self {
+        Self::SMSG_CHARACTER_LOGIN_FAILED(c)
+    }
+}
+
+impl From<SMSG_LOGIN_SETTIMESPEED> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOGIN_SETTIMESPEED) -> Self {
+        Self::SMSG_LOGIN_SETTIMESPEED(c)
+    }
+}
+
+impl From<SMSG_LOGOUT_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOGOUT_RESPONSE) -> Self {
+        Self::SMSG_LOGOUT_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_LOGOUT_COMPLETE> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOGOUT_COMPLETE) -> Self {
+        Self::SMSG_LOGOUT_COMPLETE(c)
+    }
+}
+
+impl From<SMSG_LOGOUT_CANCEL_ACK> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOGOUT_CANCEL_ACK) -> Self {
+        Self::SMSG_LOGOUT_CANCEL_ACK(c)
+    }
+}
+
+impl From<SMSG_NAME_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_NAME_QUERY_RESPONSE) -> Self {
+        Self::SMSG_NAME_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_PET_NAME_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_NAME_QUERY_RESPONSE) -> Self {
+        Self::SMSG_PET_NAME_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_GUILD_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GUILD_QUERY_RESPONSE) -> Self {
+        Self::SMSG_GUILD_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_ITEM_QUERY_SINGLE_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_QUERY_SINGLE_RESPONSE) -> Self {
+        Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_PAGE_TEXT_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_PAGE_TEXT_QUERY_RESPONSE) -> Self {
+        Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_QUEST_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUEST_QUERY_RESPONSE) -> Self {
+        Self::SMSG_QUEST_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_GAMEOBJECT_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GAMEOBJECT_QUERY_RESPONSE) -> Self {
+        Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_CREATURE_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_CREATURE_QUERY_RESPONSE) -> Self {
+        Self::SMSG_CREATURE_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_WHO> for ServerOpcodeMessage {
+    fn from(c: SMSG_WHO) -> Self {
+        Self::SMSG_WHO(c)
+    }
+}
+
+impl From<SMSG_WHOIS> for ServerOpcodeMessage {
+    fn from(c: SMSG_WHOIS) -> Self {
+        Self::SMSG_WHOIS(c)
+    }
+}
+
+impl From<SMSG_FRIEND_LIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_FRIEND_LIST) -> Self {
+        Self::SMSG_FRIEND_LIST(c)
+    }
+}
+
+impl From<SMSG_FRIEND_STATUS> for ServerOpcodeMessage {
+    fn from(c: SMSG_FRIEND_STATUS) -> Self {
+        Self::SMSG_FRIEND_STATUS(c)
+    }
+}
+
+impl From<SMSG_IGNORE_LIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_IGNORE_LIST) -> Self {
+        Self::SMSG_IGNORE_LIST(c)
+    }
+}
+
+impl From<SMSG_GROUP_INVITE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GROUP_INVITE) -> Self {
+        Self::SMSG_GROUP_INVITE(c)
+    }
+}
+
+impl From<SMSG_GROUP_DECLINE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GROUP_DECLINE) -> Self {
+        Self::SMSG_GROUP_DECLINE(c)
+    }
+}
+
+impl From<SMSG_GROUP_UNINVITE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GROUP_UNINVITE) -> Self {
+        Self::SMSG_GROUP_UNINVITE(c)
+    }
+}
+
+impl From<SMSG_GROUP_SET_LEADER> for ServerOpcodeMessage {
+    fn from(c: SMSG_GROUP_SET_LEADER) -> Self {
+        Self::SMSG_GROUP_SET_LEADER(c)
+    }
+}
+
+impl From<SMSG_GROUP_DESTROYED> for ServerOpcodeMessage {
+    fn from(c: SMSG_GROUP_DESTROYED) -> Self {
+        Self::SMSG_GROUP_DESTROYED(c)
+    }
+}
+
+impl From<SMSG_GROUP_LIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_GROUP_LIST) -> Self {
+        Self::SMSG_GROUP_LIST(c)
+    }
+}
+
+impl From<SMSG_PARTY_MEMBER_STATS> for ServerOpcodeMessage {
+    fn from(c: SMSG_PARTY_MEMBER_STATS) -> Self {
+        Self::SMSG_PARTY_MEMBER_STATS(c)
+    }
+}
+
+impl From<SMSG_PARTY_COMMAND_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_PARTY_COMMAND_RESULT) -> Self {
+        Self::SMSG_PARTY_COMMAND_RESULT(c)
+    }
+}
+
+impl From<SMSG_GUILD_INVITE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GUILD_INVITE) -> Self {
+        Self::SMSG_GUILD_INVITE(c)
+    }
+}
+
+impl From<SMSG_GUILD_INFO> for ServerOpcodeMessage {
+    fn from(c: SMSG_GUILD_INFO) -> Self {
+        Self::SMSG_GUILD_INFO(c)
+    }
+}
+
+impl From<SMSG_GUILD_ROSTER> for ServerOpcodeMessage {
+    fn from(c: SMSG_GUILD_ROSTER) -> Self {
+        Self::SMSG_GUILD_ROSTER(c)
+    }
+}
+
+impl From<SMSG_GUILD_EVENT> for ServerOpcodeMessage {
+    fn from(c: SMSG_GUILD_EVENT) -> Self {
+        Self::SMSG_GUILD_EVENT(c)
+    }
+}
+
+impl From<SMSG_GUILD_COMMAND_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_GUILD_COMMAND_RESULT) -> Self {
+        Self::SMSG_GUILD_COMMAND_RESULT(c)
+    }
+}
+
+impl From<SMSG_MESSAGECHAT> for ServerOpcodeMessage {
+    fn from(c: SMSG_MESSAGECHAT) -> Self {
+        Self::SMSG_MESSAGECHAT(c)
+    }
+}
+
+impl From<SMSG_CHANNEL_NOTIFY> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHANNEL_NOTIFY) -> Self {
+        Self::SMSG_CHANNEL_NOTIFY(c)
+    }
+}
+
+impl From<SMSG_CHANNEL_LIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHANNEL_LIST) -> Self {
+        Self::SMSG_CHANNEL_LIST(c)
+    }
+}
+
+impl From<SMSG_UPDATE_OBJECT> for ServerOpcodeMessage {
+    fn from(c: SMSG_UPDATE_OBJECT) -> Self {
+        Self::SMSG_UPDATE_OBJECT(c)
+    }
+}
+
+impl From<SMSG_DESTROY_OBJECT> for ServerOpcodeMessage {
+    fn from(c: SMSG_DESTROY_OBJECT) -> Self {
+        Self::SMSG_DESTROY_OBJECT(c)
+    }
+}
+
+impl From<SMSG_READ_ITEM_OK> for ServerOpcodeMessage {
+    fn from(c: SMSG_READ_ITEM_OK) -> Self {
+        Self::SMSG_READ_ITEM_OK(c)
+    }
+}
+
+impl From<SMSG_READ_ITEM_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_READ_ITEM_FAILED) -> Self {
+        Self::SMSG_READ_ITEM_FAILED(c)
+    }
+}
+
+impl From<SMSG_ITEM_COOLDOWN> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_COOLDOWN) -> Self {
+        Self::SMSG_ITEM_COOLDOWN(c)
+    }
+}
+
+impl From<SMSG_GAMEOBJECT_CUSTOM_ANIM> for ServerOpcodeMessage {
+    fn from(c: SMSG_GAMEOBJECT_CUSTOM_ANIM) -> Self {
+        Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c)
+    }
+}
+
+impl From<MSG_MOVE_START_FORWARD_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_FORWARD_Server) -> Self {
+        Self::MSG_MOVE_START_FORWARD(c)
+    }
+}
+
+impl From<MSG_MOVE_START_BACKWARD_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_BACKWARD_Server) -> Self {
+        Self::MSG_MOVE_START_BACKWARD(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_Server) -> Self {
+        Self::MSG_MOVE_STOP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_STRAFE_LEFT_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_STRAFE_LEFT_Server) -> Self {
+        Self::MSG_MOVE_START_STRAFE_LEFT(c)
+    }
+}
+
+impl From<MSG_MOVE_START_STRAFE_RIGHT_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_STRAFE_RIGHT_Server) -> Self {
+        Self::MSG_MOVE_START_STRAFE_RIGHT(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_STRAFE_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_STRAFE_Server) -> Self {
+        Self::MSG_MOVE_STOP_STRAFE(c)
+    }
+}
+
+impl From<MSG_MOVE_JUMP_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_JUMP_Server) -> Self {
+        Self::MSG_MOVE_JUMP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_TURN_LEFT_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_TURN_LEFT_Server) -> Self {
+        Self::MSG_MOVE_START_TURN_LEFT(c)
+    }
+}
+
+impl From<MSG_MOVE_START_TURN_RIGHT_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_TURN_RIGHT_Server) -> Self {
+        Self::MSG_MOVE_START_TURN_RIGHT(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_TURN_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_TURN_Server) -> Self {
+        Self::MSG_MOVE_STOP_TURN(c)
+    }
+}
+
+impl From<MSG_MOVE_START_PITCH_UP_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_PITCH_UP_Server) -> Self {
+        Self::MSG_MOVE_START_PITCH_UP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_PITCH_DOWN_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_PITCH_DOWN_Server) -> Self {
+        Self::MSG_MOVE_START_PITCH_DOWN(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_PITCH_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_PITCH_Server) -> Self {
+        Self::MSG_MOVE_STOP_PITCH(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_RUN_MODE_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_RUN_MODE_Server) -> Self {
+        Self::MSG_MOVE_SET_RUN_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_WALK_MODE_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_WALK_MODE_Server) -> Self {
+        Self::MSG_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_TELEPORT_ACK_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_TELEPORT_ACK_Server) -> Self {
+        Self::MSG_MOVE_TELEPORT_ACK(c)
+    }
+}
+
+impl From<MSG_MOVE_FALL_LAND_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_FALL_LAND_Server) -> Self {
+        Self::MSG_MOVE_FALL_LAND(c)
+    }
+}
+
+impl From<MSG_MOVE_START_SWIM_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_SWIM_Server) -> Self {
+        Self::MSG_MOVE_START_SWIM(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_SWIM_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_SWIM_Server) -> Self {
+        Self::MSG_MOVE_STOP_SWIM(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_FACING_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_FACING_Server) -> Self {
+        Self::MSG_MOVE_SET_FACING(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_PITCH_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_PITCH_Server) -> Self {
+        Self::MSG_MOVE_SET_PITCH(c)
+    }
+}
+
+impl From<SMSG_MONSTER_MOVE> for ServerOpcodeMessage {
+    fn from(c: SMSG_MONSTER_MOVE) -> Self {
+        Self::SMSG_MONSTER_MOVE(c)
+    }
+}
+
+impl From<SMSG_MOVE_WATER_WALK> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_WATER_WALK) -> Self {
+        Self::SMSG_MOVE_WATER_WALK(c)
+    }
+}
+
+impl From<SMSG_MOVE_LAND_WALK> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_LAND_WALK) -> Self {
+        Self::SMSG_MOVE_LAND_WALK(c)
+    }
+}
+
+impl From<SMSG_FORCE_RUN_SPEED_CHANGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_FORCE_RUN_SPEED_CHANGE) -> Self {
+        Self::SMSG_FORCE_RUN_SPEED_CHANGE(c)
+    }
+}
+
+impl From<SMSG_FORCE_RUN_BACK_SPEED_CHANGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_FORCE_RUN_BACK_SPEED_CHANGE) -> Self {
+        Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(c)
+    }
+}
+
+impl From<SMSG_FORCE_SWIM_SPEED_CHANGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_FORCE_SWIM_SPEED_CHANGE) -> Self {
+        Self::SMSG_FORCE_SWIM_SPEED_CHANGE(c)
+    }
+}
+
+impl From<SMSG_FORCE_MOVE_ROOT> for ServerOpcodeMessage {
+    fn from(c: SMSG_FORCE_MOVE_ROOT) -> Self {
+        Self::SMSG_FORCE_MOVE_ROOT(c)
+    }
+}
+
+impl From<SMSG_FORCE_MOVE_UNROOT> for ServerOpcodeMessage {
+    fn from(c: SMSG_FORCE_MOVE_UNROOT) -> Self {
+        Self::SMSG_FORCE_MOVE_UNROOT(c)
+    }
+}
+
+impl From<MSG_MOVE_HEARTBEAT_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_HEARTBEAT_Server) -> Self {
+        Self::MSG_MOVE_HEARTBEAT(c)
+    }
+}
+
+impl From<SMSG_MOVE_KNOCK_BACK> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_KNOCK_BACK) -> Self {
+        Self::SMSG_MOVE_KNOCK_BACK(c)
+    }
+}
+
+impl From<SMSG_MOVE_FEATHER_FALL> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_FEATHER_FALL) -> Self {
+        Self::SMSG_MOVE_FEATHER_FALL(c)
+    }
+}
+
+impl From<SMSG_MOVE_NORMAL_FALL> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_NORMAL_FALL) -> Self {
+        Self::SMSG_MOVE_NORMAL_FALL(c)
+    }
+}
+
+impl From<SMSG_MOVE_SET_HOVER> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_SET_HOVER) -> Self {
+        Self::SMSG_MOVE_SET_HOVER(c)
+    }
+}
+
+impl From<SMSG_MOVE_UNSET_HOVER> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_UNSET_HOVER) -> Self {
+        Self::SMSG_MOVE_UNSET_HOVER(c)
+    }
+}
+
+impl From<SMSG_TRIGGER_CINEMATIC> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRIGGER_CINEMATIC) -> Self {
+        Self::SMSG_TRIGGER_CINEMATIC(c)
+    }
+}
+
+impl From<SMSG_TUTORIAL_FLAGS> for ServerOpcodeMessage {
+    fn from(c: SMSG_TUTORIAL_FLAGS) -> Self {
+        Self::SMSG_TUTORIAL_FLAGS(c)
+    }
+}
+
+impl From<SMSG_EMOTE> for ServerOpcodeMessage {
+    fn from(c: SMSG_EMOTE) -> Self {
+        Self::SMSG_EMOTE(c)
+    }
+}
+
+impl From<SMSG_TEXT_EMOTE> for ServerOpcodeMessage {
+    fn from(c: SMSG_TEXT_EMOTE) -> Self {
+        Self::SMSG_TEXT_EMOTE(c)
+    }
+}
+
+impl From<SMSG_INVENTORY_CHANGE_FAILURE> for ServerOpcodeMessage {
+    fn from(c: SMSG_INVENTORY_CHANGE_FAILURE) -> Self {
+        Self::SMSG_INVENTORY_CHANGE_FAILURE(c)
+    }
+}
+
+impl From<SMSG_OPEN_CONTAINER> for ServerOpcodeMessage {
+    fn from(c: SMSG_OPEN_CONTAINER) -> Self {
+        Self::SMSG_OPEN_CONTAINER(c)
+    }
+}
+
+impl From<SMSG_INSPECT> for ServerOpcodeMessage {
+    fn from(c: SMSG_INSPECT) -> Self {
+        Self::SMSG_INSPECT(c)
+    }
+}
+
+impl From<SMSG_TRADE_STATUS> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRADE_STATUS) -> Self {
+        Self::SMSG_TRADE_STATUS(c)
+    }
+}
+
+impl From<SMSG_TRADE_STATUS_EXTENDED> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRADE_STATUS_EXTENDED) -> Self {
+        Self::SMSG_TRADE_STATUS_EXTENDED(c)
+    }
+}
+
+impl From<SMSG_INITIALIZE_FACTIONS> for ServerOpcodeMessage {
+    fn from(c: SMSG_INITIALIZE_FACTIONS) -> Self {
+        Self::SMSG_INITIALIZE_FACTIONS(c)
+    }
+}
+
+impl From<SMSG_SET_FACTION_VISIBLE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_FACTION_VISIBLE) -> Self {
+        Self::SMSG_SET_FACTION_VISIBLE(c)
+    }
+}
+
+impl From<SMSG_SET_FACTION_STANDING> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_FACTION_STANDING) -> Self {
+        Self::SMSG_SET_FACTION_STANDING(c)
+    }
+}
+
+impl From<SMSG_SET_PROFICIENCY> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_PROFICIENCY) -> Self {
+        Self::SMSG_SET_PROFICIENCY(c)
+    }
+}
+
+impl From<SMSG_ACTION_BUTTONS> for ServerOpcodeMessage {
+    fn from(c: SMSG_ACTION_BUTTONS) -> Self {
+        Self::SMSG_ACTION_BUTTONS(c)
+    }
+}
+
+impl From<SMSG_INITIAL_SPELLS> for ServerOpcodeMessage {
+    fn from(c: SMSG_INITIAL_SPELLS) -> Self {
+        Self::SMSG_INITIAL_SPELLS(c)
+    }
+}
+
+impl From<SMSG_LEARNED_SPELL> for ServerOpcodeMessage {
+    fn from(c: SMSG_LEARNED_SPELL) -> Self {
+        Self::SMSG_LEARNED_SPELL(c)
+    }
+}
+
+impl From<SMSG_SUPERCEDED_SPELL> for ServerOpcodeMessage {
+    fn from(c: SMSG_SUPERCEDED_SPELL) -> Self {
+        Self::SMSG_SUPERCEDED_SPELL(c)
+    }
+}
+
+impl From<SMSG_CAST_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_CAST_RESULT) -> Self {
+        Self::SMSG_CAST_RESULT(c)
+    }
+}
+
+impl From<SMSG_SPELL_START> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELL_START) -> Self {
+        Self::SMSG_SPELL_START(c)
+    }
+}
+
+impl From<SMSG_SPELL_GO> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELL_GO) -> Self {
+        Self::SMSG_SPELL_GO(c)
+    }
+}
+
+impl From<SMSG_SPELL_FAILURE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELL_FAILURE) -> Self {
+        Self::SMSG_SPELL_FAILURE(c)
+    }
+}
+
+impl From<SMSG_SPELL_COOLDOWN> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELL_COOLDOWN) -> Self {
+        Self::SMSG_SPELL_COOLDOWN(c)
+    }
+}
+
+impl From<SMSG_COOLDOWN_EVENT> for ServerOpcodeMessage {
+    fn from(c: SMSG_COOLDOWN_EVENT) -> Self {
+        Self::SMSG_COOLDOWN_EVENT(c)
+    }
+}
+
+impl From<SMSG_UPDATE_AURA_DURATION> for ServerOpcodeMessage {
+    fn from(c: SMSG_UPDATE_AURA_DURATION) -> Self {
+        Self::SMSG_UPDATE_AURA_DURATION(c)
+    }
+}
+
+impl From<SMSG_PET_CAST_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_CAST_FAILED) -> Self {
+        Self::SMSG_PET_CAST_FAILED(c)
+    }
+}
+
+impl From<SMSG_AI_REACTION> for ServerOpcodeMessage {
+    fn from(c: SMSG_AI_REACTION) -> Self {
+        Self::SMSG_AI_REACTION(c)
+    }
+}
+
+impl From<SMSG_ATTACKSTART> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKSTART) -> Self {
+        Self::SMSG_ATTACKSTART(c)
+    }
+}
+
+impl From<SMSG_ATTACKSTOP> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKSTOP) -> Self {
+        Self::SMSG_ATTACKSTOP(c)
+    }
+}
+
+impl From<SMSG_ATTACKSWING_NOTINRANGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKSWING_NOTINRANGE) -> Self {
+        Self::SMSG_ATTACKSWING_NOTINRANGE(c)
+    }
+}
+
+impl From<SMSG_ATTACKSWING_BADFACING> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKSWING_BADFACING) -> Self {
+        Self::SMSG_ATTACKSWING_BADFACING(c)
+    }
+}
+
+impl From<SMSG_ATTACKSWING_NOTSTANDING> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKSWING_NOTSTANDING) -> Self {
+        Self::SMSG_ATTACKSWING_NOTSTANDING(c)
+    }
+}
+
+impl From<SMSG_ATTACKSWING_DEADTARGET> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKSWING_DEADTARGET) -> Self {
+        Self::SMSG_ATTACKSWING_DEADTARGET(c)
+    }
+}
+
+impl From<SMSG_ATTACKSWING_CANT_ATTACK> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKSWING_CANT_ATTACK) -> Self {
+        Self::SMSG_ATTACKSWING_CANT_ATTACK(c)
+    }
+}
+
+impl From<SMSG_ATTACKERSTATEUPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKERSTATEUPDATE) -> Self {
+        Self::SMSG_ATTACKERSTATEUPDATE(c)
+    }
+}
+
+impl From<SMSG_CANCEL_COMBAT> for ServerOpcodeMessage {
+    fn from(c: SMSG_CANCEL_COMBAT) -> Self {
+        Self::SMSG_CANCEL_COMBAT(c)
+    }
+}
+
+impl From<SMSG_SPELLHEALLOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLHEALLOG) -> Self {
+        Self::SMSG_SPELLHEALLOG(c)
+    }
+}
+
+impl From<SMSG_SPELLENERGIZELOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLENERGIZELOG) -> Self {
+        Self::SMSG_SPELLENERGIZELOG(c)
+    }
+}
+
+impl From<SMSG_BINDPOINTUPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_BINDPOINTUPDATE) -> Self {
+        Self::SMSG_BINDPOINTUPDATE(c)
+    }
+}
+
+impl From<SMSG_PLAYERBOUND> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAYERBOUND) -> Self {
+        Self::SMSG_PLAYERBOUND(c)
+    }
+}
+
+impl From<SMSG_CLIENT_CONTROL_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_CLIENT_CONTROL_UPDATE) -> Self {
+        Self::SMSG_CLIENT_CONTROL_UPDATE(c)
+    }
+}
+
+impl From<SMSG_RESURRECT_REQUEST> for ServerOpcodeMessage {
+    fn from(c: SMSG_RESURRECT_REQUEST) -> Self {
+        Self::SMSG_RESURRECT_REQUEST(c)
+    }
+}
+
+impl From<SMSG_LOOT_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_RESPONSE) -> Self {
+        Self::SMSG_LOOT_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_LOOT_RELEASE_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_RELEASE_RESPONSE) -> Self {
+        Self::SMSG_LOOT_RELEASE_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_LOOT_REMOVED> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_REMOVED) -> Self {
+        Self::SMSG_LOOT_REMOVED(c)
+    }
+}
+
+impl From<SMSG_LOOT_MONEY_NOTIFY> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_MONEY_NOTIFY) -> Self {
+        Self::SMSG_LOOT_MONEY_NOTIFY(c)
+    }
+}
+
+impl From<SMSG_LOOT_CLEAR_MONEY> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_CLEAR_MONEY) -> Self {
+        Self::SMSG_LOOT_CLEAR_MONEY(c)
+    }
+}
+
+impl From<SMSG_ITEM_PUSH_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_PUSH_RESULT) -> Self {
+        Self::SMSG_ITEM_PUSH_RESULT(c)
+    }
+}
+
+impl From<SMSG_DUEL_REQUESTED> for ServerOpcodeMessage {
+    fn from(c: SMSG_DUEL_REQUESTED) -> Self {
+        Self::SMSG_DUEL_REQUESTED(c)
+    }
+}
+
+impl From<SMSG_DUEL_OUTOFBOUNDS> for ServerOpcodeMessage {
+    fn from(c: SMSG_DUEL_OUTOFBOUNDS) -> Self {
+        Self::SMSG_DUEL_OUTOFBOUNDS(c)
+    }
+}
+
+impl From<SMSG_DUEL_INBOUNDS> for ServerOpcodeMessage {
+    fn from(c: SMSG_DUEL_INBOUNDS) -> Self {
+        Self::SMSG_DUEL_INBOUNDS(c)
+    }
+}
+
+impl From<SMSG_DUEL_COMPLETE> for ServerOpcodeMessage {
+    fn from(c: SMSG_DUEL_COMPLETE) -> Self {
+        Self::SMSG_DUEL_COMPLETE(c)
+    }
+}
+
+impl From<SMSG_DUEL_WINNER> for ServerOpcodeMessage {
+    fn from(c: SMSG_DUEL_WINNER) -> Self {
+        Self::SMSG_DUEL_WINNER(c)
+    }
+}
+
+impl From<SMSG_MOUNTRESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOUNTRESULT) -> Self {
+        Self::SMSG_MOUNTRESULT(c)
+    }
+}
+
+impl From<SMSG_DISMOUNTRESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_DISMOUNTRESULT) -> Self {
+        Self::SMSG_DISMOUNTRESULT(c)
+    }
+}
+
+impl From<SMSG_MOUNTSPECIAL_ANIM> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOUNTSPECIAL_ANIM) -> Self {
+        Self::SMSG_MOUNTSPECIAL_ANIM(c)
+    }
+}
+
+impl From<SMSG_PET_TAME_FAILURE> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_TAME_FAILURE) -> Self {
+        Self::SMSG_PET_TAME_FAILURE(c)
+    }
+}
+
+impl From<SMSG_PET_NAME_INVALID> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_NAME_INVALID) -> Self {
+        Self::SMSG_PET_NAME_INVALID(c)
+    }
+}
+
+impl From<SMSG_PET_SPELLS> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_SPELLS) -> Self {
+        Self::SMSG_PET_SPELLS(c)
+    }
+}
+
+impl From<SMSG_PET_MODE> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_MODE) -> Self {
+        Self::SMSG_PET_MODE(c)
+    }
+}
+
+impl From<SMSG_GOSSIP_MESSAGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GOSSIP_MESSAGE) -> Self {
+        Self::SMSG_GOSSIP_MESSAGE(c)
+    }
+}
+
+impl From<SMSG_GOSSIP_COMPLETE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GOSSIP_COMPLETE) -> Self {
+        Self::SMSG_GOSSIP_COMPLETE(c)
+    }
+}
+
+impl From<SMSG_NPC_TEXT_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_NPC_TEXT_UPDATE) -> Self {
+        Self::SMSG_NPC_TEXT_UPDATE(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_STATUS> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_STATUS) -> Self {
+        Self::SMSG_QUESTGIVER_STATUS(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_QUEST_LIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_QUEST_LIST) -> Self {
+        Self::SMSG_QUESTGIVER_QUEST_LIST(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_QUEST_DETAILS> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_QUEST_DETAILS) -> Self {
+        Self::SMSG_QUESTGIVER_QUEST_DETAILS(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_REQUEST_ITEMS> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_REQUEST_ITEMS) -> Self {
+        Self::SMSG_QUESTGIVER_REQUEST_ITEMS(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_OFFER_REWARD> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_OFFER_REWARD) -> Self {
+        Self::SMSG_QUESTGIVER_OFFER_REWARD(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_QUEST_INVALID> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_QUEST_INVALID) -> Self {
+        Self::SMSG_QUESTGIVER_QUEST_INVALID(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_QUEST_COMPLETE> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_QUEST_COMPLETE) -> Self {
+        Self::SMSG_QUESTGIVER_QUEST_COMPLETE(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_QUEST_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_QUEST_FAILED) -> Self {
+        Self::SMSG_QUESTGIVER_QUEST_FAILED(c)
+    }
+}
+
+impl From<SMSG_QUESTLOG_FULL> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTLOG_FULL) -> Self {
+        Self::SMSG_QUESTLOG_FULL(c)
+    }
+}
+
+impl From<SMSG_QUESTUPDATE_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTUPDATE_FAILED) -> Self {
+        Self::SMSG_QUESTUPDATE_FAILED(c)
+    }
+}
+
+impl From<SMSG_QUESTUPDATE_FAILEDTIMER> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTUPDATE_FAILEDTIMER) -> Self {
+        Self::SMSG_QUESTUPDATE_FAILEDTIMER(c)
+    }
+}
+
+impl From<SMSG_QUESTUPDATE_COMPLETE> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTUPDATE_COMPLETE) -> Self {
+        Self::SMSG_QUESTUPDATE_COMPLETE(c)
+    }
+}
+
+impl From<SMSG_QUESTUPDATE_ADD_KILL> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTUPDATE_ADD_KILL) -> Self {
+        Self::SMSG_QUESTUPDATE_ADD_KILL(c)
+    }
+}
+
+impl From<SMSG_QUESTUPDATE_ADD_ITEM> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTUPDATE_ADD_ITEM) -> Self {
+        Self::SMSG_QUESTUPDATE_ADD_ITEM(c)
+    }
+}
+
+impl From<SMSG_QUEST_CONFIRM_ACCEPT> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUEST_CONFIRM_ACCEPT) -> Self {
+        Self::SMSG_QUEST_CONFIRM_ACCEPT(c)
+    }
+}
+
+impl From<SMSG_LIST_INVENTORY> for ServerOpcodeMessage {
+    fn from(c: SMSG_LIST_INVENTORY) -> Self {
+        Self::SMSG_LIST_INVENTORY(c)
+    }
+}
+
+impl From<SMSG_SELL_ITEM> for ServerOpcodeMessage {
+    fn from(c: SMSG_SELL_ITEM) -> Self {
+        Self::SMSG_SELL_ITEM(c)
+    }
+}
+
+impl From<SMSG_BUY_ITEM> for ServerOpcodeMessage {
+    fn from(c: SMSG_BUY_ITEM) -> Self {
+        Self::SMSG_BUY_ITEM(c)
+    }
+}
+
+impl From<SMSG_BUY_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_BUY_FAILED) -> Self {
+        Self::SMSG_BUY_FAILED(c)
+    }
+}
+
+impl From<SMSG_SHOWTAXINODES> for ServerOpcodeMessage {
+    fn from(c: SMSG_SHOWTAXINODES) -> Self {
+        Self::SMSG_SHOWTAXINODES(c)
+    }
+}
+
+impl From<SMSG_TAXINODE_STATUS> for ServerOpcodeMessage {
+    fn from(c: SMSG_TAXINODE_STATUS) -> Self {
+        Self::SMSG_TAXINODE_STATUS(c)
+    }
+}
+
+impl From<SMSG_ACTIVATETAXIREPLY> for ServerOpcodeMessage {
+    fn from(c: SMSG_ACTIVATETAXIREPLY) -> Self {
+        Self::SMSG_ACTIVATETAXIREPLY(c)
+    }
+}
+
+impl From<SMSG_NEW_TAXI_PATH> for ServerOpcodeMessage {
+    fn from(c: SMSG_NEW_TAXI_PATH) -> Self {
+        Self::SMSG_NEW_TAXI_PATH(c)
+    }
+}
+
+impl From<SMSG_TRAINER_LIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRAINER_LIST) -> Self {
+        Self::SMSG_TRAINER_LIST(c)
+    }
+}
+
+impl From<SMSG_TRAINER_BUY_SUCCEEDED> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRAINER_BUY_SUCCEEDED) -> Self {
+        Self::SMSG_TRAINER_BUY_SUCCEEDED(c)
+    }
+}
+
+impl From<SMSG_TRAINER_BUY_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRAINER_BUY_FAILED) -> Self {
+        Self::SMSG_TRAINER_BUY_FAILED(c)
+    }
+}
+
+impl From<SMSG_SHOW_BANK> for ServerOpcodeMessage {
+    fn from(c: SMSG_SHOW_BANK) -> Self {
+        Self::SMSG_SHOW_BANK(c)
+    }
+}
+
+impl From<SMSG_BUY_BANK_SLOT_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_BUY_BANK_SLOT_RESULT) -> Self {
+        Self::SMSG_BUY_BANK_SLOT_RESULT(c)
+    }
+}
+
+impl From<SMSG_PETITION_SHOWLIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_PETITION_SHOWLIST) -> Self {
+        Self::SMSG_PETITION_SHOWLIST(c)
+    }
+}
+
+impl From<SMSG_PETITION_SHOW_SIGNATURES> for ServerOpcodeMessage {
+    fn from(c: SMSG_PETITION_SHOW_SIGNATURES) -> Self {
+        Self::SMSG_PETITION_SHOW_SIGNATURES(c)
+    }
+}
+
+impl From<SMSG_PETITION_SIGN_RESULTS> for ServerOpcodeMessage {
+    fn from(c: SMSG_PETITION_SIGN_RESULTS) -> Self {
+        Self::SMSG_PETITION_SIGN_RESULTS(c)
+    }
+}
+
+impl From<SMSG_TURN_IN_PETITION_RESULTS> for ServerOpcodeMessage {
+    fn from(c: SMSG_TURN_IN_PETITION_RESULTS) -> Self {
+        Self::SMSG_TURN_IN_PETITION_RESULTS(c)
+    }
+}
+
+impl From<SMSG_PETITION_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_PETITION_QUERY_RESPONSE) -> Self {
+        Self::SMSG_PETITION_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_FISH_NOT_HOOKED> for ServerOpcodeMessage {
+    fn from(c: SMSG_FISH_NOT_HOOKED) -> Self {
+        Self::SMSG_FISH_NOT_HOOKED(c)
+    }
+}
+
+impl From<SMSG_FISH_ESCAPED> for ServerOpcodeMessage {
+    fn from(c: SMSG_FISH_ESCAPED) -> Self {
+        Self::SMSG_FISH_ESCAPED(c)
+    }
+}
+
+impl From<SMSG_NOTIFICATION> for ServerOpcodeMessage {
+    fn from(c: SMSG_NOTIFICATION) -> Self {
+        Self::SMSG_NOTIFICATION(c)
+    }
+}
+
+impl From<SMSG_PLAYED_TIME> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAYED_TIME) -> Self {
+        Self::SMSG_PLAYED_TIME(c)
+    }
+}
+
+impl From<SMSG_QUERY_TIME_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUERY_TIME_RESPONSE) -> Self {
+        Self::SMSG_QUERY_TIME_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_LOG_XPGAIN> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOG_XPGAIN) -> Self {
+        Self::SMSG_LOG_XPGAIN(c)
+    }
+}
+
+impl From<SMSG_LEVELUP_INFO> for ServerOpcodeMessage {
+    fn from(c: SMSG_LEVELUP_INFO) -> Self {
+        Self::SMSG_LEVELUP_INFO(c)
+    }
+}
+
+impl From<MSG_MINIMAP_PING_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MINIMAP_PING_Server) -> Self {
+        Self::MSG_MINIMAP_PING(c)
+    }
+}
+
+impl From<SMSG_RESISTLOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_RESISTLOG) -> Self {
+        Self::SMSG_RESISTLOG(c)
+    }
+}
+
+impl From<SMSG_ENCHANTMENTLOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_ENCHANTMENTLOG) -> Self {
+        Self::SMSG_ENCHANTMENTLOG(c)
+    }
+}
+
+impl From<SMSG_START_MIRROR_TIMER> for ServerOpcodeMessage {
+    fn from(c: SMSG_START_MIRROR_TIMER) -> Self {
+        Self::SMSG_START_MIRROR_TIMER(c)
+    }
+}
+
+impl From<SMSG_PAUSE_MIRROR_TIMER> for ServerOpcodeMessage {
+    fn from(c: SMSG_PAUSE_MIRROR_TIMER) -> Self {
+        Self::SMSG_PAUSE_MIRROR_TIMER(c)
+    }
+}
+
+impl From<SMSG_STOP_MIRROR_TIMER> for ServerOpcodeMessage {
+    fn from(c: SMSG_STOP_MIRROR_TIMER) -> Self {
+        Self::SMSG_STOP_MIRROR_TIMER(c)
+    }
+}
+
+impl From<SMSG_PONG> for ServerOpcodeMessage {
+    fn from(c: SMSG_PONG) -> Self {
+        Self::SMSG_PONG(c)
+    }
+}
+
+impl From<SMSG_CLEAR_COOLDOWN> for ServerOpcodeMessage {
+    fn from(c: SMSG_CLEAR_COOLDOWN) -> Self {
+        Self::SMSG_CLEAR_COOLDOWN(c)
+    }
+}
+
+impl From<SMSG_GAMEOBJECT_PAGETEXT> for ServerOpcodeMessage {
+    fn from(c: SMSG_GAMEOBJECT_PAGETEXT) -> Self {
+        Self::SMSG_GAMEOBJECT_PAGETEXT(c)
+    }
+}
+
+impl From<SMSG_SPELL_DELAYED> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELL_DELAYED) -> Self {
+        Self::SMSG_SPELL_DELAYED(c)
+    }
+}
+
+impl From<SMSG_ITEM_TIME_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_TIME_UPDATE) -> Self {
+        Self::SMSG_ITEM_TIME_UPDATE(c)
+    }
+}
+
+impl From<SMSG_ITEM_ENCHANT_TIME_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_ENCHANT_TIME_UPDATE) -> Self {
+        Self::SMSG_ITEM_ENCHANT_TIME_UPDATE(c)
+    }
+}
+
+impl From<SMSG_AUTH_CHALLENGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUTH_CHALLENGE) -> Self {
+        Self::SMSG_AUTH_CHALLENGE(c)
+    }
+}
+
+impl From<SMSG_AUTH_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUTH_RESPONSE) -> Self {
+        Self::SMSG_AUTH_RESPONSE(c)
+    }
+}
+
+impl From<MSG_SAVE_GUILD_EMBLEM_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_SAVE_GUILD_EMBLEM_Server) -> Self {
+        Self::MSG_SAVE_GUILD_EMBLEM(c)
+    }
+}
+
+impl From<SMSG_PLAY_SPELL_VISUAL> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAY_SPELL_VISUAL) -> Self {
+        Self::SMSG_PLAY_SPELL_VISUAL(c)
+    }
+}
+
+impl From<SMSG_PARTYKILLLOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_PARTYKILLLOG) -> Self {
+        Self::SMSG_PARTYKILLLOG(c)
+    }
+}
+
+impl From<SMSG_PLAY_SPELL_IMPACT> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAY_SPELL_IMPACT) -> Self {
+        Self::SMSG_PLAY_SPELL_IMPACT(c)
+    }
+}
+
+impl From<SMSG_EXPLORATION_EXPERIENCE> for ServerOpcodeMessage {
+    fn from(c: SMSG_EXPLORATION_EXPERIENCE) -> Self {
+        Self::SMSG_EXPLORATION_EXPERIENCE(c)
+    }
+}
+
+impl From<MSG_RANDOM_ROLL_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_RANDOM_ROLL_Server) -> Self {
+        Self::MSG_RANDOM_ROLL(c)
+    }
+}
+
+impl From<SMSG_ENVIRONMENTALDAMAGELOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_ENVIRONMENTALDAMAGELOG) -> Self {
+        Self::SMSG_ENVIRONMENTALDAMAGELOG(c)
+    }
+}
+
+impl From<MSG_LOOKING_FOR_GROUP_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_LOOKING_FOR_GROUP_Server) -> Self {
+        Self::MSG_LOOKING_FOR_GROUP(c)
+    }
+}
+
+impl From<SMSG_REMOVED_SPELL> for ServerOpcodeMessage {
+    fn from(c: SMSG_REMOVED_SPELL) -> Self {
+        Self::SMSG_REMOVED_SPELL(c)
+    }
+}
+
+impl From<SMSG_GMTICKET_CREATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GMTICKET_CREATE) -> Self {
+        Self::SMSG_GMTICKET_CREATE(c)
+    }
+}
+
+impl From<SMSG_GMTICKET_UPDATETEXT> for ServerOpcodeMessage {
+    fn from(c: SMSG_GMTICKET_UPDATETEXT) -> Self {
+        Self::SMSG_GMTICKET_UPDATETEXT(c)
+    }
+}
+
+impl From<SMSG_ACCOUNT_DATA_TIMES> for ServerOpcodeMessage {
+    fn from(c: SMSG_ACCOUNT_DATA_TIMES) -> Self {
+        Self::SMSG_ACCOUNT_DATA_TIMES(c)
+    }
+}
+
+impl From<SMSG_GMTICKET_GETTICKET> for ServerOpcodeMessage {
+    fn from(c: SMSG_GMTICKET_GETTICKET) -> Self {
+        Self::SMSG_GMTICKET_GETTICKET(c)
+    }
+}
+
+impl From<SMSG_GAMEOBJECT_SPAWN_ANIM> for ServerOpcodeMessage {
+    fn from(c: SMSG_GAMEOBJECT_SPAWN_ANIM) -> Self {
+        Self::SMSG_GAMEOBJECT_SPAWN_ANIM(c)
+    }
+}
+
+impl From<SMSG_GAMEOBJECT_DESPAWN_ANIM> for ServerOpcodeMessage {
+    fn from(c: SMSG_GAMEOBJECT_DESPAWN_ANIM) -> Self {
+        Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c)
+    }
+}
+
+impl From<MSG_CORPSE_QUERY_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_CORPSE_QUERY_Server) -> Self {
+        Self::MSG_CORPSE_QUERY(c)
+    }
+}
+
+impl From<SMSG_GMTICKET_DELETETICKET> for ServerOpcodeMessage {
+    fn from(c: SMSG_GMTICKET_DELETETICKET) -> Self {
+        Self::SMSG_GMTICKET_DELETETICKET(c)
+    }
+}
+
+impl From<SMSG_CHAT_WRONG_FACTION> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAT_WRONG_FACTION) -> Self {
+        Self::SMSG_CHAT_WRONG_FACTION(c)
+    }
+}
+
+impl From<SMSG_GMTICKET_SYSTEMSTATUS> for ServerOpcodeMessage {
+    fn from(c: SMSG_GMTICKET_SYSTEMSTATUS) -> Self {
+        Self::SMSG_GMTICKET_SYSTEMSTATUS(c)
+    }
+}
+
+impl From<SMSG_SET_REST_START> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_REST_START) -> Self {
+        Self::SMSG_SET_REST_START(c)
+    }
+}
+
+impl From<SMSG_SPIRIT_HEALER_CONFIRM> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPIRIT_HEALER_CONFIRM) -> Self {
+        Self::SMSG_SPIRIT_HEALER_CONFIRM(c)
+    }
+}
+
+impl From<SMSG_GOSSIP_POI> for ServerOpcodeMessage {
+    fn from(c: SMSG_GOSSIP_POI) -> Self {
+        Self::SMSG_GOSSIP_POI(c)
+    }
+}
+
+impl From<SMSG_LOGIN_VERIFY_WORLD> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOGIN_VERIFY_WORLD) -> Self {
+        Self::SMSG_LOGIN_VERIFY_WORLD(c)
+    }
+}
+
+impl From<SMSG_MAIL_LIST_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_MAIL_LIST_RESULT) -> Self {
+        Self::SMSG_MAIL_LIST_RESULT(c)
+    }
+}
+
+impl From<SMSG_BATTLEFIELD_LIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_BATTLEFIELD_LIST) -> Self {
+        Self::SMSG_BATTLEFIELD_LIST(c)
+    }
+}
+
+impl From<SMSG_ITEM_TEXT_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_TEXT_QUERY_RESPONSE) -> Self {
+        Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_SPELLLOGMISS> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLLOGMISS) -> Self {
+        Self::SMSG_SPELLLOGMISS(c)
+    }
+}
+
+impl From<SMSG_SPELLLOGEXECUTE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLLOGEXECUTE) -> Self {
+        Self::SMSG_SPELLLOGEXECUTE(c)
+    }
+}
+
+impl From<SMSG_PERIODICAURALOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_PERIODICAURALOG) -> Self {
+        Self::SMSG_PERIODICAURALOG(c)
+    }
+}
+
+impl From<SMSG_SPELLDAMAGESHIELD> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLDAMAGESHIELD) -> Self {
+        Self::SMSG_SPELLDAMAGESHIELD(c)
+    }
+}
+
+impl From<SMSG_SPELLNONMELEEDAMAGELOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLNONMELEEDAMAGELOG) -> Self {
+        Self::SMSG_SPELLNONMELEEDAMAGELOG(c)
+    }
+}
+
+impl From<SMSG_ZONE_UNDER_ATTACK> for ServerOpcodeMessage {
+    fn from(c: SMSG_ZONE_UNDER_ATTACK) -> Self {
+        Self::SMSG_ZONE_UNDER_ATTACK(c)
+    }
+}
+
+impl From<MSG_AUCTION_HELLO_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_AUCTION_HELLO_Server) -> Self {
+        Self::MSG_AUCTION_HELLO(c)
+    }
+}
+
+impl From<SMSG_AUCTION_LIST_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUCTION_LIST_RESULT) -> Self {
+        Self::SMSG_AUCTION_LIST_RESULT(c)
+    }
+}
+
+impl From<SMSG_AUCTION_OWNER_LIST_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUCTION_OWNER_LIST_RESULT) -> Self {
+        Self::SMSG_AUCTION_OWNER_LIST_RESULT(c)
+    }
+}
+
+impl From<SMSG_AUCTION_BIDDER_NOTIFICATION> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUCTION_BIDDER_NOTIFICATION) -> Self {
+        Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c)
+    }
+}
+
+impl From<SMSG_AUCTION_OWNER_NOTIFICATION> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUCTION_OWNER_NOTIFICATION) -> Self {
+        Self::SMSG_AUCTION_OWNER_NOTIFICATION(c)
+    }
+}
+
+impl From<SMSG_PROCRESIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_PROCRESIST) -> Self {
+        Self::SMSG_PROCRESIST(c)
+    }
+}
+
+impl From<SMSG_DISPEL_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_DISPEL_FAILED) -> Self {
+        Self::SMSG_DISPEL_FAILED(c)
+    }
+}
+
+impl From<SMSG_SPELLORDAMAGE_IMMUNE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLORDAMAGE_IMMUNE) -> Self {
+        Self::SMSG_SPELLORDAMAGE_IMMUNE(c)
+    }
+}
+
+impl From<SMSG_AUCTION_BIDDER_LIST_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUCTION_BIDDER_LIST_RESULT) -> Self {
+        Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c)
+    }
+}
+
+impl From<SMSG_SET_FLAT_SPELL_MODIFIER> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_FLAT_SPELL_MODIFIER) -> Self {
+        Self::SMSG_SET_FLAT_SPELL_MODIFIER(c)
+    }
+}
+
+impl From<SMSG_SET_PCT_SPELL_MODIFIER> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_PCT_SPELL_MODIFIER) -> Self {
+        Self::SMSG_SET_PCT_SPELL_MODIFIER(c)
+    }
+}
+
+impl From<SMSG_CORPSE_RECLAIM_DELAY> for ServerOpcodeMessage {
+    fn from(c: SMSG_CORPSE_RECLAIM_DELAY) -> Self {
+        Self::SMSG_CORPSE_RECLAIM_DELAY(c)
+    }
+}
+
+impl From<MSG_LIST_STABLED_PETS_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_LIST_STABLED_PETS_Server) -> Self {
+        Self::MSG_LIST_STABLED_PETS(c)
+    }
+}
+
+impl From<SMSG_STABLE_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_STABLE_RESULT) -> Self {
+        Self::SMSG_STABLE_RESULT(c)
+    }
+}
+
+impl From<SMSG_PLAY_MUSIC> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAY_MUSIC) -> Self {
+        Self::SMSG_PLAY_MUSIC(c)
+    }
+}
+
+impl From<SMSG_PLAY_OBJECT_SOUND> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAY_OBJECT_SOUND) -> Self {
+        Self::SMSG_PLAY_OBJECT_SOUND(c)
+    }
+}
+
+impl From<SMSG_SPELLDISPELLOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLDISPELLOG) -> Self {
+        Self::SMSG_SPELLDISPELLOG(c)
+    }
+}
+
+impl From<MSG_QUERY_NEXT_MAIL_TIME_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_QUERY_NEXT_MAIL_TIME_Server) -> Self {
+        Self::MSG_QUERY_NEXT_MAIL_TIME(c)
+    }
+}
+
+impl From<SMSG_RECEIVED_MAIL> for ServerOpcodeMessage {
+    fn from(c: SMSG_RECEIVED_MAIL) -> Self {
+        Self::SMSG_RECEIVED_MAIL(c)
+    }
+}
+
+impl From<SMSG_RAID_GROUP_ONLY> for ServerOpcodeMessage {
+    fn from(c: SMSG_RAID_GROUP_ONLY) -> Self {
+        Self::SMSG_RAID_GROUP_ONLY(c)
+    }
+}
+
+impl From<SMSG_PVP_CREDIT> for ServerOpcodeMessage {
+    fn from(c: SMSG_PVP_CREDIT) -> Self {
+        Self::SMSG_PVP_CREDIT(c)
+    }
+}
+
+impl From<SMSG_AUCTION_REMOVED_NOTIFICATION> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUCTION_REMOVED_NOTIFICATION) -> Self {
+        Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c)
+    }
+}
+
+impl From<SMSG_SERVER_MESSAGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SERVER_MESSAGE) -> Self {
+        Self::SMSG_SERVER_MESSAGE(c)
+    }
+}
+
+impl From<SMSG_MEETINGSTONE_SETQUEUE> for ServerOpcodeMessage {
+    fn from(c: SMSG_MEETINGSTONE_SETQUEUE) -> Self {
+        Self::SMSG_MEETINGSTONE_SETQUEUE(c)
+    }
+}
+
+impl From<SMSG_MEETINGSTONE_COMPLETE> for ServerOpcodeMessage {
+    fn from(c: SMSG_MEETINGSTONE_COMPLETE) -> Self {
+        Self::SMSG_MEETINGSTONE_COMPLETE(c)
+    }
+}
+
+impl From<SMSG_MEETINGSTONE_IN_PROGRESS> for ServerOpcodeMessage {
+    fn from(c: SMSG_MEETINGSTONE_IN_PROGRESS) -> Self {
+        Self::SMSG_MEETINGSTONE_IN_PROGRESS(c)
+    }
+}
+
+impl From<SMSG_MEETINGSTONE_MEMBER_ADDED> for ServerOpcodeMessage {
+    fn from(c: SMSG_MEETINGSTONE_MEMBER_ADDED) -> Self {
+        Self::SMSG_MEETINGSTONE_MEMBER_ADDED(c)
+    }
+}
+
+impl From<SMSG_CANCEL_AUTO_REPEAT> for ServerOpcodeMessage {
+    fn from(c: SMSG_CANCEL_AUTO_REPEAT) -> Self {
+        Self::SMSG_CANCEL_AUTO_REPEAT(c)
+    }
+}
+
+impl From<SMSG_STANDSTATE_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_STANDSTATE_UPDATE) -> Self {
+        Self::SMSG_STANDSTATE_UPDATE(c)
+    }
+}
+
+impl From<SMSG_LOOT_ALL_PASSED> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_ALL_PASSED) -> Self {
+        Self::SMSG_LOOT_ALL_PASSED(c)
+    }
+}
+
+impl From<SMSG_LOOT_ROLL_WON> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_ROLL_WON) -> Self {
+        Self::SMSG_LOOT_ROLL_WON(c)
+    }
+}
+
+impl From<SMSG_LOOT_START_ROLL> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_START_ROLL) -> Self {
+        Self::SMSG_LOOT_START_ROLL(c)
+    }
+}
+
+impl From<SMSG_LOOT_ROLL> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_ROLL) -> Self {
+        Self::SMSG_LOOT_ROLL(c)
+    }
+}
+
+impl From<SMSG_LOOT_MASTER_LIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_MASTER_LIST) -> Self {
+        Self::SMSG_LOOT_MASTER_LIST(c)
+    }
+}
+
+impl From<SMSG_SET_FORCED_REACTIONS> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_FORCED_REACTIONS) -> Self {
+        Self::SMSG_SET_FORCED_REACTIONS(c)
+    }
+}
+
+impl From<SMSG_SPELL_FAILED_OTHER> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELL_FAILED_OTHER) -> Self {
+        Self::SMSG_SPELL_FAILED_OTHER(c)
+    }
+}
+
+impl From<SMSG_GAMEOBJECT_RESET_STATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GAMEOBJECT_RESET_STATE) -> Self {
+        Self::SMSG_GAMEOBJECT_RESET_STATE(c)
+    }
+}
+
+impl From<SMSG_CHAT_PLAYER_NOT_FOUND> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAT_PLAYER_NOT_FOUND) -> Self {
+        Self::SMSG_CHAT_PLAYER_NOT_FOUND(c)
+    }
+}
+
+impl From<MSG_TALENT_WIPE_CONFIRM_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_TALENT_WIPE_CONFIRM_Server) -> Self {
+        Self::MSG_TALENT_WIPE_CONFIRM(c)
+    }
+}
+
+impl From<SMSG_SUMMON_REQUEST> for ServerOpcodeMessage {
+    fn from(c: SMSG_SUMMON_REQUEST) -> Self {
+        Self::SMSG_SUMMON_REQUEST(c)
+    }
+}
+
+impl From<SMSG_MONSTER_MOVE_TRANSPORT> for ServerOpcodeMessage {
+    fn from(c: SMSG_MONSTER_MOVE_TRANSPORT) -> Self {
+        Self::SMSG_MONSTER_MOVE_TRANSPORT(c)
+    }
+}
+
+impl From<SMSG_PET_BROKEN> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_BROKEN) -> Self {
+        Self::SMSG_PET_BROKEN(c)
+    }
+}
+
+impl From<SMSG_FEIGN_DEATH_RESISTED> for ServerOpcodeMessage {
+    fn from(c: SMSG_FEIGN_DEATH_RESISTED) -> Self {
+        Self::SMSG_FEIGN_DEATH_RESISTED(c)
+    }
+}
+
+impl From<SMSG_DUEL_COUNTDOWN> for ServerOpcodeMessage {
+    fn from(c: SMSG_DUEL_COUNTDOWN) -> Self {
+        Self::SMSG_DUEL_COUNTDOWN(c)
+    }
+}
+
+impl From<SMSG_AREA_TRIGGER_MESSAGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_AREA_TRIGGER_MESSAGE) -> Self {
+        Self::SMSG_AREA_TRIGGER_MESSAGE(c)
+    }
+}
+
+impl From<SMSG_MEETINGSTONE_JOINFAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_MEETINGSTONE_JOINFAILED) -> Self {
+        Self::SMSG_MEETINGSTONE_JOINFAILED(c)
+    }
+}
+
+impl From<SMSG_PLAYER_SKINNED> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAYER_SKINNED) -> Self {
+        Self::SMSG_PLAYER_SKINNED(c)
+    }
+}
+
+impl From<SMSG_DURABILITY_DAMAGE_DEATH> for ServerOpcodeMessage {
+    fn from(c: SMSG_DURABILITY_DAMAGE_DEATH) -> Self {
+        Self::SMSG_DURABILITY_DAMAGE_DEATH(c)
+    }
+}
+
+impl From<SMSG_INIT_WORLD_STATES> for ServerOpcodeMessage {
+    fn from(c: SMSG_INIT_WORLD_STATES) -> Self {
+        Self::SMSG_INIT_WORLD_STATES(c)
+    }
+}
+
+impl From<SMSG_UPDATE_WORLD_STATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_UPDATE_WORLD_STATE) -> Self {
+        Self::SMSG_UPDATE_WORLD_STATE(c)
+    }
+}
+
+impl From<SMSG_ITEM_NAME_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_NAME_QUERY_RESPONSE) -> Self {
+        Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_PET_ACTION_FEEDBACK> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_ACTION_FEEDBACK) -> Self {
+        Self::SMSG_PET_ACTION_FEEDBACK(c)
+    }
+}
+
+impl From<SMSG_CHAR_RENAME> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAR_RENAME) -> Self {
+        Self::SMSG_CHAR_RENAME(c)
+    }
+}
+
+impl From<SMSG_INSTANCE_SAVE_CREATED> for ServerOpcodeMessage {
+    fn from(c: SMSG_INSTANCE_SAVE_CREATED) -> Self {
+        Self::SMSG_INSTANCE_SAVE_CREATED(c)
+    }
+}
+
+impl From<SMSG_RAID_INSTANCE_INFO> for ServerOpcodeMessage {
+    fn from(c: SMSG_RAID_INSTANCE_INFO) -> Self {
+        Self::SMSG_RAID_INSTANCE_INFO(c)
+    }
+}
+
+impl From<SMSG_PLAY_SOUND> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAY_SOUND) -> Self {
+        Self::SMSG_PLAY_SOUND(c)
+    }
+}
+
+impl From<SMSG_BATTLEFIELD_STATUS> for ServerOpcodeMessage {
+    fn from(c: SMSG_BATTLEFIELD_STATUS) -> Self {
+        Self::SMSG_BATTLEFIELD_STATUS(c)
+    }
+}
+
+impl From<MSG_INSPECT_HONOR_STATS_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_INSPECT_HONOR_STATS_Server) -> Self {
+        Self::MSG_INSPECT_HONOR_STATS(c)
+    }
+}
+
+impl From<SMSG_FORCE_WALK_SPEED_CHANGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_FORCE_WALK_SPEED_CHANGE) -> Self {
+        Self::SMSG_FORCE_WALK_SPEED_CHANGE(c)
+    }
+}
+
+impl From<SMSG_FORCE_SWIM_BACK_SPEED_CHANGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_FORCE_SWIM_BACK_SPEED_CHANGE) -> Self {
+        Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c)
+    }
+}
+
+impl From<SMSG_FORCE_TURN_RATE_CHANGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_FORCE_TURN_RATE_CHANGE) -> Self {
+        Self::SMSG_FORCE_TURN_RATE_CHANGE(c)
+    }
+}
+
+impl From<MSG_PVP_LOG_DATA_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_PVP_LOG_DATA_Server) -> Self {
+        Self::MSG_PVP_LOG_DATA(c)
+    }
+}
+
+impl From<SMSG_AREA_SPIRIT_HEALER_TIME> for ServerOpcodeMessage {
+    fn from(c: SMSG_AREA_SPIRIT_HEALER_TIME) -> Self {
+        Self::SMSG_AREA_SPIRIT_HEALER_TIME(c)
+    }
+}
+
+impl From<SMSG_GROUP_JOINED_BATTLEGROUND> for ServerOpcodeMessage {
+    fn from(c: SMSG_GROUP_JOINED_BATTLEGROUND) -> Self {
+        Self::SMSG_GROUP_JOINED_BATTLEGROUND(c)
+    }
+}
+
+impl From<MSG_BATTLEGROUND_PLAYER_POSITIONS_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_BATTLEGROUND_PLAYER_POSITIONS_Server) -> Self {
+        Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c)
+    }
+}
+
+impl From<SMSG_BINDER_CONFIRM> for ServerOpcodeMessage {
+    fn from(c: SMSG_BINDER_CONFIRM) -> Self {
+        Self::SMSG_BINDER_CONFIRM(c)
+    }
+}
+
+impl From<SMSG_BATTLEGROUND_PLAYER_JOINED> for ServerOpcodeMessage {
+    fn from(c: SMSG_BATTLEGROUND_PLAYER_JOINED) -> Self {
+        Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c)
+    }
+}
+
+impl From<SMSG_BATTLEGROUND_PLAYER_LEFT> for ServerOpcodeMessage {
+    fn from(c: SMSG_BATTLEGROUND_PLAYER_LEFT) -> Self {
+        Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c)
+    }
+}
+
+impl From<SMSG_PET_UNLEARN_CONFIRM> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_UNLEARN_CONFIRM) -> Self {
+        Self::SMSG_PET_UNLEARN_CONFIRM(c)
+    }
+}
+
+impl From<SMSG_PARTY_MEMBER_STATS_FULL> for ServerOpcodeMessage {
+    fn from(c: SMSG_PARTY_MEMBER_STATS_FULL) -> Self {
+        Self::SMSG_PARTY_MEMBER_STATS_FULL(c)
+    }
+}
+
+impl From<SMSG_WEATHER> for ServerOpcodeMessage {
+    fn from(c: SMSG_WEATHER) -> Self {
+        Self::SMSG_WEATHER(c)
+    }
+}
+
+impl From<SMSG_RAID_INSTANCE_MESSAGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_RAID_INSTANCE_MESSAGE) -> Self {
+        Self::SMSG_RAID_INSTANCE_MESSAGE(c)
+    }
+}
+
+impl From<SMSG_CHAT_RESTRICTED> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAT_RESTRICTED) -> Self {
+        Self::SMSG_CHAT_RESTRICTED(c)
+    }
+}
+
+impl From<SMSG_SPLINE_SET_RUN_SPEED> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_SET_RUN_SPEED) -> Self {
+        Self::SMSG_SPLINE_SET_RUN_SPEED(c)
+    }
+}
+
+impl From<SMSG_SPLINE_SET_RUN_BACK_SPEED> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_SET_RUN_BACK_SPEED) -> Self {
+        Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c)
+    }
+}
+
+impl From<SMSG_SPLINE_SET_SWIM_SPEED> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_SET_SWIM_SPEED) -> Self {
+        Self::SMSG_SPLINE_SET_SWIM_SPEED(c)
+    }
+}
+
+impl From<SMSG_SPLINE_SET_WALK_SPEED> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_SET_WALK_SPEED) -> Self {
+        Self::SMSG_SPLINE_SET_WALK_SPEED(c)
+    }
+}
+
+impl From<SMSG_SPLINE_SET_SWIM_BACK_SPEED> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_SET_SWIM_BACK_SPEED) -> Self {
+        Self::SMSG_SPLINE_SET_SWIM_BACK_SPEED(c)
+    }
+}
+
+impl From<SMSG_SPLINE_SET_TURN_RATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_SET_TURN_RATE) -> Self {
+        Self::SMSG_SPLINE_SET_TURN_RATE(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_UNROOT> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_UNROOT) -> Self {
+        Self::SMSG_SPLINE_MOVE_UNROOT(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_FEATHER_FALL> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_FEATHER_FALL) -> Self {
+        Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_NORMAL_FALL> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_NORMAL_FALL) -> Self {
+        Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_SET_HOVER> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_SET_HOVER) -> Self {
+        Self::SMSG_SPLINE_MOVE_SET_HOVER(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_UNSET_HOVER> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_UNSET_HOVER) -> Self {
+        Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_WATER_WALK> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_WATER_WALK) -> Self {
+        Self::SMSG_SPLINE_MOVE_WATER_WALK(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_LAND_WALK> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_LAND_WALK) -> Self {
+        Self::SMSG_SPLINE_MOVE_LAND_WALK(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_START_SWIM> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_START_SWIM) -> Self {
+        Self::SMSG_SPLINE_MOVE_START_SWIM(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_STOP_SWIM> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_STOP_SWIM) -> Self {
+        Self::SMSG_SPLINE_MOVE_STOP_SWIM(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_SET_RUN_MODE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_SET_RUN_MODE) -> Self {
+        Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_SET_WALK_MODE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_SET_WALK_MODE) -> Self {
+        Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_ROOT> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_ROOT) -> Self {
+        Self::SMSG_SPLINE_MOVE_ROOT(c)
+    }
+}
+
+impl From<SMSG_INVALIDATE_PLAYER> for ServerOpcodeMessage {
+    fn from(c: SMSG_INVALIDATE_PLAYER) -> Self {
+        Self::SMSG_INVALIDATE_PLAYER(c)
+    }
+}
+
+impl From<SMSG_INSTANCE_RESET> for ServerOpcodeMessage {
+    fn from(c: SMSG_INSTANCE_RESET) -> Self {
+        Self::SMSG_INSTANCE_RESET(c)
+    }
+}
+
+impl From<SMSG_INSTANCE_RESET_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_INSTANCE_RESET_FAILED) -> Self {
+        Self::SMSG_INSTANCE_RESET_FAILED(c)
+    }
+}
+
+impl From<SMSG_UPDATE_LAST_INSTANCE> for ServerOpcodeMessage {
+    fn from(c: SMSG_UPDATE_LAST_INSTANCE) -> Self {
+        Self::SMSG_UPDATE_LAST_INSTANCE(c)
+    }
+}
+
+impl From<MSG_RAID_TARGET_UPDATE_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_RAID_TARGET_UPDATE_Server) -> Self {
+        Self::MSG_RAID_TARGET_UPDATE(c)
+    }
+}
+
+impl From<MSG_RAID_READY_CHECK_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_RAID_READY_CHECK_Server) -> Self {
+        Self::MSG_RAID_READY_CHECK(c)
+    }
+}
+
+impl From<SMSG_PET_ACTION_SOUND> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_ACTION_SOUND) -> Self {
+        Self::SMSG_PET_ACTION_SOUND(c)
+    }
+}
+
+impl From<SMSG_PET_DISMISS_SOUND> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_DISMISS_SOUND) -> Self {
+        Self::SMSG_PET_DISMISS_SOUND(c)
+    }
+}
+
+impl From<SMSG_GM_TICKET_STATUS_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GM_TICKET_STATUS_UPDATE) -> Self {
+        Self::SMSG_GM_TICKET_STATUS_UPDATE(c)
+    }
+}
+
+impl From<SMSG_UPDATE_INSTANCE_OWNERSHIP> for ServerOpcodeMessage {
+    fn from(c: SMSG_UPDATE_INSTANCE_OWNERSHIP) -> Self {
+        Self::SMSG_UPDATE_INSTANCE_OWNERSHIP(c)
+    }
+}
+
+impl From<SMSG_SPELLINSTAKILLLOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLINSTAKILLLOG) -> Self {
+        Self::SMSG_SPELLINSTAKILLLOG(c)
+    }
+}
+
+impl From<SMSG_SPELL_UPDATE_CHAIN_TARGETS> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELL_UPDATE_CHAIN_TARGETS) -> Self {
+        Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c)
+    }
+}
+
+impl From<SMSG_EXPECTED_SPAM_RECORDS> for ServerOpcodeMessage {
+    fn from(c: SMSG_EXPECTED_SPAM_RECORDS) -> Self {
+        Self::SMSG_EXPECTED_SPAM_RECORDS(c)
+    }
+}
+
+impl From<SMSG_DEFENSE_MESSAGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_DEFENSE_MESSAGE) -> Self {
+        Self::SMSG_DEFENSE_MESSAGE(c)
+    }
 }
 
