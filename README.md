@@ -15,6 +15,8 @@ Used to build `wow_login_messages`, `wow_vanilla_messages` and `wowm_language`.
 * `wowm_language`: [mdbook](https://github.com/rust-lang/mdBook) of language specification. Hosted at [`www.gtker.com/wow_messages`](https://www.gtker.com/wow_messages).
 * `intermediate_representation.json`: **UNRELEASED** contains a machine readable version of the `wowm` files.
 
+Run `cargo run -p wow_message_parser && cargo test` to "compile" all libraries and ensure that there are no issues.
+
 ## License
 
 Licensed under either of
