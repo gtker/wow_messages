@@ -25684,7 +25684,7 @@
           "tags": {}
         },
         {
-          "name": "NIGHTELF",
+          "name": "NIGHT_ELF",
           "value": {
             "int": 4,
             "original": "4"

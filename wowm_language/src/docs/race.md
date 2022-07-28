@@ -11,7 +11,7 @@ enum Race : u8 {
     HUMAN = 1;
     ORC = 2;
     DWARF = 3;
-    NIGHTELF = 4;
+    NIGHT_ELF = 4;
     UNDEAD = 5;
     TAUREN = 6;
     GNOME = 7;
@@ -27,7 +27,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `HUMAN` | 1 (0x01) |  |  |
 | `ORC` | 2 (0x02) |  |  |
 | `DWARF` | 3 (0x03) |  |  |
-| `NIGHTELF` | 4 (0x04) |  |  |
+| `NIGHT_ELF` | 4 (0x04) |  |  |
 | `UNDEAD` | 5 (0x05) |  |  |
 | `TAUREN` | 6 (0x06) |  |  |
 | `GNOME` | 7 (0x07) |  |  |

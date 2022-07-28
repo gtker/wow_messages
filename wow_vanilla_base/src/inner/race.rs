@@ -4,7 +4,7 @@
 ///     HUMAN = 1;
 ///     ORC = 2;
 ///     DWARF = 3;
-///     NIGHTELF = 4;
+///     NIGHT_ELF = 4;
 ///     UNDEAD = 5;
 ///     TAUREN = 6;
 ///     GNOME = 7;
@@ -18,7 +18,7 @@ pub enum Race {
     HUMAN,
     ORC,
     DWARF,
-    NIGHTELF,
+    NIGHT_ELF,
     UNDEAD,
     TAUREN,
     GNOME,
@@ -38,7 +38,7 @@ impl std::fmt::Display for Race {
             Self::HUMAN => f.write_str("HUMAN"),
             Self::ORC => f.write_str("ORC"),
             Self::DWARF => f.write_str("DWARF"),
-            Self::NIGHTELF => f.write_str("NIGHTELF"),
+            Self::NIGHT_ELF => f.write_str("NIGHT_ELF"),
             Self::UNDEAD => f.write_str("UNDEAD"),
             Self::TAUREN => f.write_str("TAUREN"),
             Self::GNOME => f.write_str("GNOME"),
