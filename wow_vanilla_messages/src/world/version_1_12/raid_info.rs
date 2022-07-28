@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::map::{Map, map_try_from};
+use crate::world::version_1_12::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -36,7 +36,7 @@ impl RaidInfo {
 impl RaidInfo {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // map: Map
-        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // reset_time: u32
         let reset_time = crate::util::read_u32_le(r)?;

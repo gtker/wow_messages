@@ -1,3 +1,5 @@
+use std::convert::{TryFrom, TryInto};
+
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L3):
 /// ```text
 /// enum Power : u8 {
@@ -64,5 +66,20 @@ impl Power {
         }
     }
 
+}
+
+impl TryFrom<u8> for Power {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+        match value {
+            0 => Ok(Self::MANA),
+            1 => Ok(Self::RAGE),
+            2 => Ok(Self::FOCUS),
+            3 => Ok(Self::ENERGY),
+            4 => Ok(Self::HAPPINESS),
+            254 => Ok(Self::HEALTH),
+            v => Err(crate::errors::EnumError::new("Power", v as u32),)
+        }
+    }
 }
 

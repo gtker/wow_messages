@@ -7,6 +7,8 @@ use crate::{Objects, DISPLAY_STR};
 pub fn print_common_enum_common(e: &Definer, o: &Objects) -> Writer {
     let mut s = Writer::new(&get_import_path(e.tags()));
 
+    includes(&mut s);
+
     declaration(&mut s, e, o);
 
     print_default(&mut s, e);
@@ -17,6 +19,8 @@ pub fn print_common_enum_common(e: &Definer, o: &Objects) -> Writer {
         common_as_type(s, e);
     });
 
+    print_try_from(&mut s, e);
+
     s
 }
 
@@ -25,8 +29,6 @@ pub fn print_common_enum_messages(e: &Definer) -> Writer {
 
     s.wln(format!("pub use wow_vanilla_base::{};", e.name()));
     s.newline();
-
-    common_print_try_from(&mut s, e);
 
     s
 }
@@ -230,32 +232,4 @@ fn common_as_type(s: &mut Writer, e: &Definer) {
             assert!(e.self_value().is_none());
         });
     });
-}
-
-fn common_print_try_from(s: &mut Writer, e: &Definer) {
-    s.body(
-        format!(
-            "pub(crate) fn {}_try_from(value: {}) -> std::result::Result<{}, crate::errors::EnumError>",
-            e.name().to_lowercase(),
-            e.ty().rust_str(),
-            e.name(),
-        ),
-        |s| {
-            s.body("match value", |s| {
-                for field in e.fields() {
-                    s.wln(format!(
-                        "{} => Ok({}::{}),",
-                        field.value().int(),
-                        e.name(),
-                        field.name()
-                    ));
-                }
-
-                s.wln(format!(
-                    "v => Err(crate::errors::EnumError::new(\"{}\", v as u32),)",
-                    e.name()
-                ));
-            });
-        },
-    );
 }

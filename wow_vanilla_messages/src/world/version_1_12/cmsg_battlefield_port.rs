@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::BattlefieldPortAction;
-use crate::world::version_1_12::map::{Map, map_try_from};
+use crate::world::version_1_12::Map;
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -41,7 +41,7 @@ impl ClientMessage for CMSG_BATTLEFIELD_PORT {
         }
 
         // map: Map
-        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // action: BattlefieldPortAction
         let action: BattlefieldPortAction = crate::util::read_u8_le(r)?.try_into()?;

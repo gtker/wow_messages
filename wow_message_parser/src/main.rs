@@ -122,7 +122,7 @@ fn main() {
 
     write_intermediate_representation(&o);
 
-    print_update_mask(&o);
+    print_update_mask();
 
     o.print_stats_for_1_12();
 }

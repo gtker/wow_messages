@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::map::{Map, map_try_from};
+use crate::world::version_1_12::Map;
 use crate::world::version_1_12::RaidInstanceMessage;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -49,7 +49,7 @@ impl ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {
         let message_type: RaidInstanceMessage = crate::util::read_u32_le(r)?.try_into()?;
 
         // map: Map
-        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // time_left: u32
         let time_left = crate::util::read_u32_le(r)?;

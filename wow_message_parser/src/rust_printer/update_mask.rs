@@ -1,7 +1,7 @@
-use crate::file_utils::{get_module_name, overwrite_if_not_same_contents};
+use crate::file_utils::overwrite_if_not_same_contents;
 use crate::parser::types::tags::Tag;
 use crate::rust_printer::Writer;
-use crate::{Objects, Tags};
+use crate::Tags;
 use std::fmt::Write;
 use std::fmt::{Display, Formatter};
 use std::fs::read_to_string;
@@ -75,7 +75,7 @@ pub fn print_update_mask_docs() {
     overwrite_if_not_same_contents(&s, Path::new(UPDATE_MASK_FILE));
 }
 
-pub fn print_update_mask(o: &Objects) {
+pub fn print_update_mask() {
     print_update_mask_docs();
 
     let update_types = [
@@ -129,18 +129,6 @@ pub fn print_update_mask(o: &Objects) {
 
             let mut tags = Tags::new();
             tags.push(Tag::new("versions", "1.12"));
-
-            for a in [a, b, c, d] {
-                if let Some(a) = o.try_get_definer(a, &tags) {
-                    if a.tags().is_in_common() {
-                        s.wln(format!(
-                            "use crate::version_1_12::{module_name}::{{{lower_name}_try_from}};",
-                            module_name = get_module_name(a.name()),
-                            lower_name = a.name().to_lowercase()
-                        ));
-                    }
-                }
-            }
         }
     }
 

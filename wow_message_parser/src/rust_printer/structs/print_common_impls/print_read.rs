@@ -451,8 +451,7 @@ fn print_read_definition(
                         ));
                         s.newline();
                     } else {
-                        if !definer.tags().is_in_common() {
-                            s.wln(format!(
+                        s.wln(format!(
                                 "let {name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).try_into()?;",
                                 name = d.name(),
                                 type_name = d.ty().rust_str(),
@@ -462,19 +461,6 @@ fn print_read_definition(
                                 postfix = postfix,
                                 original_ty = definer.ty().rust_str(),
                             ));
-                        } else {
-                            s.wln(format!(
-                                "let {name}: {type_name} = {lower_ty}_try_from(crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty})?;",
-                                name = d.name(),
-                                type_name = d.ty().rust_str(),
-                                endian = integer.rust_endian_str(),
-                                ty = integer.rust_str(),
-                                lower_ty = definer.name().to_lowercase(),
-                                prefix = prefix,
-                                postfix = postfix,
-                                original_ty = definer.ty().rust_str(),
-                            ));
-                        }
                         s.newline();
                     }
                     return;
@@ -497,8 +483,7 @@ fn print_read_definition(
                 }
                 ObjectType::Enum => {
                     let definer = o.get_definer(ty, e.tags());
-                    if !definer.tags().is_in_common() {
-                        s.wln(format!(
+                    s.wln(format!(
                             "let {value_set}{name}: {type_name} = crate::util::{prefix}read_{ty}_{endian}(r){postfix}?.{into};",
                             name = d.name(),
                             type_name = d.ty().rust_str(),
@@ -511,20 +496,7 @@ fn print_read_definition(
                             },
                             prefix = prefix,
                             postfix = postfix,
-                        ));
-                    } else {
-                        s.wln(format!(
-                            "let {value_set}{name}: {type_name} = {lower_name}_try_from(crate::util::{prefix}read_{ty}_{endian}(r){postfix}?)?;",
-                            name = d.name(),
-                            type_name = d.ty().rust_str(),
-                            lower_name = d.ty().rust_str().to_lowercase(),
-                            value_set = if d.value().is_some() { "_" } else { "" },
-                            endian = definer.ty().rust_endian_str(),
-                            ty = definer.ty().rust_str(),
-                            prefix = prefix,
-                            postfix = postfix,
-                        ));
-                    }
+                    ));
                 }
                 _ => {
                     s.wln(format!(

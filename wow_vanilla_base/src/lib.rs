@@ -19,7 +19,7 @@
     clippy::approx_constant
 )]
 
-mod errors;
+pub(crate) mod errors;
 pub mod inner;
 
 pub use errors::*;

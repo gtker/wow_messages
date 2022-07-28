@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::InstanceResetFailedReason;
-use crate::world::version_1_12::map::{Map, map_try_from};
+use crate::world::version_1_12::Map;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -44,7 +44,7 @@ impl ServerMessage for SMSG_INSTANCE_RESET_FAILED {
         let reason: InstanceResetFailedReason = crate::util::read_u8_le(r)?.try_into()?;
 
         // map: Map
-        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             reason,

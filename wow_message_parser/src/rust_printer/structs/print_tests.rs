@@ -487,32 +487,19 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                             d = d
                         ))
                     }
-                    UfType::BytesWithTypes(a_ty, b_ty, c_ty, d_ty) => {
+                    UfType::BytesWithTypes(_, _, _, _) => {
                         let (a, b, c, d) = split_u32_str_into_u8s(f.value());
 
                         let mut tags = Tags::new();
                         tags.push(Tag::new("versions", "1.12"));
 
-                        let get_try = |value, ty_name| -> String {
-                            if let Some(en) = o.try_get_definer(ty_name, &tags) {
-                                if en.tags().is_in_common() {
-                                    format!(
-                                        "{lower_ty}_try_from({value})",
-                                        lower_ty = en.name().to_lowercase(),
-                                        value = value,
-                                    )
-                                } else {
-                                    format!("{value}.try_into()", value = value)
-                                }
-                            } else {
-                                format!("{value}.try_into()", value = value)
-                            }
-                        };
+                        let get_try =
+                            |value| -> String { format!("{value}.try_into()", value = value) };
 
-                        let a = get_try(a, a_ty);
-                        let b = get_try(b, b_ty);
-                        let c = get_try(c, c_ty);
-                        let d = get_try(d, d_ty);
+                        let a = get_try(a);
+                        let b = get_try(b);
+                        let c = get_try(c);
+                        let d = get_try(d);
 
                         s.wln(format!(
                             ".set_{ty}_{field}({a}.unwrap(), {b}.unwrap(), {c}.unwrap(), {d}.unwrap())",

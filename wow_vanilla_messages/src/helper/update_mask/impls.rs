@@ -1,9 +1,5 @@
 use crate::Guid;
 use crate::version_1_12::{Race, Class, Gender, Power};
-use crate::version_1_12::race::{race_try_from};
-use crate::version_1_12::class::{class_try_from};
-use crate::version_1_12::gender::{gender_try_from};
-use crate::version_1_12::power::{power_try_from};
 use crate::helper::update_mask::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};
 
 impl UpdateItem {

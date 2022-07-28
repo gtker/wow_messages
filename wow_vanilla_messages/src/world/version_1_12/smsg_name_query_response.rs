@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::version_1_12::class::{Class, class_try_from};
-use crate::world::version_1_12::gender::{Gender, gender_try_from};
-use crate::world::version_1_12::race::{Race, race_try_from};
+use crate::world::version_1_12::Class;
+use crate::world::version_1_12::Gender;
+use crate::world::version_1_12::Race;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -77,13 +77,13 @@ impl ServerMessage for SMSG_NAME_QUERY_RESPONSE {
         let realm_name = String::from_utf8(realm_name)?;
 
         // race: Race
-        let race: Race = race_try_from(crate::util::read_u32_le(r)? as u8)?;
+        let race: Race = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // gender: Gender
-        let gender: Gender = gender_try_from(crate::util::read_u32_le(r)? as u8)?;
+        let gender: Gender = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // class: Class
-        let class: Class = class_try_from(crate::util::read_u32_le(r)? as u8)?;
+        let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             guid,

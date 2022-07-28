@@ -2,7 +2,7 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArraySize, ArrayType, ObjectType};
+use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::{
     print_docc_description_and_comment, Writer, CLIENT_MESSAGE_TRAIT_NAME,
     SERVER_MESSAGE_TRAIT_NAME,
@@ -52,22 +52,11 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     for name in e.get_types_needing_import() {
         let module_name = get_import_path(o.get_tags_of_object(name, e.tags()));
 
-        if o.get_object_type_of(name, e.tags()) == ObjectType::Enum
-            && o.get_definer(name, e.tags()).tags().is_in_common()
-        {
-            s.wln(format!(
-                "use {module_name}::{lower_name}::{{{name}, {lower_name}_try_from}};",
-                module_name = module_name,
-                lower_name = name.to_lowercase(),
-                name = name,
-            ));
-        } else {
-            s.wln(format!(
-                "use {module_name}::{name};",
-                module_name = module_name,
-                name = name,
-            ));
-        }
+        s.wln(format!(
+            "use {module_name}::{name};",
+            module_name = module_name,
+            name = name,
+        ));
     }
 
     match e.container_type() {

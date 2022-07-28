@@ -1,3 +1,5 @@
+use std::convert::{TryFrom, TryInto};
+
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/race.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/race.wowm#L3):
 /// ```text
 /// enum Race : u8 {
@@ -63,5 +65,23 @@ impl Race {
         }
     }
 
+}
+
+impl TryFrom<u8> for Race {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+        match value {
+            1 => Ok(Self::HUMAN),
+            2 => Ok(Self::ORC),
+            3 => Ok(Self::DWARF),
+            4 => Ok(Self::NIGHT_ELF),
+            5 => Ok(Self::UNDEAD),
+            6 => Ok(Self::TAUREN),
+            7 => Ok(Self::GNOME),
+            8 => Ok(Self::TROLL),
+            9 => Ok(Self::GOBLIN),
+            v => Err(crate::errors::EnumError::new("Race", v as u32),)
+        }
+    }
 }
 

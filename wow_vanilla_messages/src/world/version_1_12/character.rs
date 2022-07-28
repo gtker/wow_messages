@@ -3,10 +3,10 @@ use crate::Guid;
 use crate::world::version_1_12::Area;
 use crate::world::version_1_12::CharacterFlags;
 use crate::world::version_1_12::CharacterGear;
-use crate::world::version_1_12::class::{Class, class_try_from};
-use crate::world::version_1_12::gender::{Gender, gender_try_from};
-use crate::world::version_1_12::map::{Map, map_try_from};
-use crate::world::version_1_12::race::{Race, race_try_from};
+use crate::world::version_1_12::Class;
+use crate::world::version_1_12::Gender;
+use crate::world::version_1_12::Map;
+use crate::world::version_1_12::Race;
 use crate::world::version_1_12::Vector3d;
 use std::io::{Write, Read};
 
@@ -177,13 +177,13 @@ impl Character {
         let name = String::from_utf8(name)?;
 
         // race: Race
-        let race: Race = race_try_from(crate::util::read_u8_le(r)?)?;
+        let race: Race = crate::util::read_u8_le(r)?.try_into()?;
 
         // class: Class
-        let class: Class = class_try_from(crate::util::read_u8_le(r)?)?;
+        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
 
         // gender: Gender
-        let gender: Gender = gender_try_from(crate::util::read_u8_le(r)?)?;
+        let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;
 
         // skin: u8
         let skin = crate::util::read_u8_le(r)?;
@@ -207,7 +207,7 @@ impl Character {
         let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
         // map: Map
-        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // position: Vector3d
         let position = Vector3d::read(r)?;

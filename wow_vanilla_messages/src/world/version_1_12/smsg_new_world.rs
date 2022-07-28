@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::map::{Map, map_try_from};
+use crate::world::version_1_12::Map;
 use crate::world::version_1_12::Vector3d;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -46,7 +46,7 @@ impl ServerMessage for SMSG_NEW_WORLD {
         }
 
         // map: Map
-        let map: Map = map_try_from(crate::util::read_u32_le(r)?)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // position: Vector3d
         let position = Vector3d::read(r)?;

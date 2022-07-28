@@ -1,3 +1,5 @@
+use std::convert::{TryFrom, TryInto};
+
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/map.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/map.wowm#L2):
 /// ```text
 /// enum Map : u32 {
@@ -203,5 +205,58 @@ impl Map {
         }
     }
 
+}
+
+impl TryFrom<u32> for Map {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+        match value {
+            0 => Ok(Self::EASTERN_KINGDOMS),
+            1 => Ok(Self::KALIMDOR),
+            13 => Ok(Self::TESTING),
+            25 => Ok(Self::SCOTT_TEST),
+            29 => Ok(Self::CASH_TEST),
+            30 => Ok(Self::ALTERAC_VALLEY),
+            33 => Ok(Self::SHADOWFANG_KEEP),
+            34 => Ok(Self::STORMWIND_STOCKADE),
+            35 => Ok(Self::STORMWIND_PRISON),
+            36 => Ok(Self::DEADMINES),
+            37 => Ok(Self::AZSHARA_CRATER),
+            42 => Ok(Self::COLLINS_TEST),
+            43 => Ok(Self::WAILING_CAVERNS),
+            44 => Ok(Self::MONASTERY),
+            47 => Ok(Self::RAZORFEN_KRAUL),
+            48 => Ok(Self::BLACKFATHOM_DEEPS),
+            70 => Ok(Self::ULDAMAN),
+            90 => Ok(Self::GNOMERAGON),
+            109 => Ok(Self::SUNKEN_TEMPLE),
+            129 => Ok(Self::RAZORFEN_DOWNS),
+            169 => Ok(Self::EMERALD_DREAM),
+            189 => Ok(Self::SCARLET_MONASTERY),
+            209 => Ok(Self::ZUL_FARRAK),
+            229 => Ok(Self::BLACKROCK_SPIRE),
+            230 => Ok(Self::BLACKROCK_DEPTHS),
+            249 => Ok(Self::ONYXIAS_LAIR),
+            269 => Ok(Self::CAVERNS_OF_TIME),
+            289 => Ok(Self::SCHOLOMANCE),
+            309 => Ok(Self::ZUL_GURUB),
+            329 => Ok(Self::STRATHOLME),
+            349 => Ok(Self::MAURADON),
+            369 => Ok(Self::DEEPRUN_TRAM),
+            389 => Ok(Self::RAGEFIRE_CHASM),
+            409 => Ok(Self::MOLTEN_CORE),
+            429 => Ok(Self::DIRE_MAUL),
+            449 => Ok(Self::ALLIANCE_PVP_BARRACKS),
+            450 => Ok(Self::HORDE_PVP_BARRACKS),
+            451 => Ok(Self::DEVELOPMENT_LAND),
+            469 => Ok(Self::BLACKWING_LAIR),
+            489 => Ok(Self::WARSONG_GULCH),
+            509 => Ok(Self::RUINS_OF_AHN_QIRAJ),
+            529 => Ok(Self::ARATHI_BASIN),
+            531 => Ok(Self::AHN_QIRAJ_TEMPLE),
+            533 => Ok(Self::NAXXRAMAS),
+            v => Err(crate::errors::EnumError::new("Map", v as u32),)
+        }
+    }
 }
 
