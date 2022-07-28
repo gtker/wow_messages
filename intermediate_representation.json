@@ -12968,6 +12968,10 @@
       },
       "objects_used_in": [
         {
+          "name": "CMSG_ZONEUPDATE",
+          "usage": "used_but_not_in_if"
+        },
+        {
           "name": "Character",
           "usage": "used_but_not_in_if"
         },
@@ -64022,11 +64026,11 @@
       "members": [
         {
           "Definition": {
-            "name": "zone_id",
+            "name": "area",
             "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
+              "Identifier": {
+                "s": "Area",
+                "upcast": null
               }
             },
             "constant_value": null,
@@ -64037,6 +64041,8 @@
         }
       ],
       "tags": {
+        "description": "Sent by the client whenever it reaches a new area.",
+        "comment": "The client does not send an accurate area. For example when going to Sen'jin Village, the client will send `DUROTAR` (0x0E) and not `SENJIN_VILLAGE` (0x16F).",
         "version": {
           "type": "world",
           "versions": [
@@ -64049,15 +64055,60 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_ZONEUPDATE",
+          "members": [
+            {
+              "variable_name": "area",
+              "verified_value": {
+                "Enum": {
+                  "value": 1637,
+                  "original_string": "ORGRIMMAR"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            8,
+            244,
+            1,
+            0,
+            0,
+            101,
+            6,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm",
+            "start_position": 10
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm",
         "start_position": 3
       },
-      "only_has_io_error": true,
+      "only_has_io_error": false,
       "features": [
         "CMsg",
-        "SimpleBuiltInTypes",
+        "SubObjects",
         "WorldVersion"
       ]
     },

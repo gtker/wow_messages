@@ -1,7 +1,17 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_ZONEUPDATE = 0x01F4 {
-    /* TODO: Zone or Area? */
-    u32 zone_id;
+    Area area;
+} {
+    description = "Sent by the client whenever it reaches a new area.";
+    comment = "The client does not send an accurate area. For example when going to Sen'jin Village, the client will send `DUROTAR` (0x0E) and not `SENJIN_VILLAGE` (0x16F).";
 }
+
+test CMSG_ZONEUPDATE {
+    area = ORGRIMMAR;
+} [
+  0x00, 0x08, /* size */
+  0xF4, 0x01, 0x00, 0x00, /* opcode */
+  0x65, 0x06, 0x00, 0x00, /* area */
+]
 

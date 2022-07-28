@@ -2179,6 +2179,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `RAVENHOLDT_MANOR` | 3486 (0xD9E) |  |  | Ravenholdt Manor |
 
 Used in:
+* [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
 * [Character](character.md)
 * [Friend](friend.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
