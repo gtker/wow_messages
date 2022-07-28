@@ -1,6 +1,5 @@
 use crate::file_utils::{get_module_name, overwrite_if_not_same_contents};
 use crate::parser::types::tags::Tag;
-use crate::parser::types::ObjectType;
 use crate::rust_printer::Writer;
 use crate::{Objects, Tags};
 use std::fmt::Write;
@@ -134,7 +133,11 @@ pub fn print_update_mask(o: &Objects) {
             for a in [a, b, c, d] {
                 if let Some(a) = o.try_get_definer(a, &tags) {
                     if a.tags().is_in_common() {
-                        s.wln(format!("use crate::version_1_12::{module_name}::{{{lower_name}_try_from, {lower_name}_as_int}};", module_name = get_module_name(a.name()), lower_name = a.name().to_lowercase()));
+                        s.wln(format!(
+                            "use crate::version_1_12::{module_name}::{{{lower_name}_try_from}};",
+                            module_name = get_module_name(a.name()),
+                            lower_name = a.name().to_lowercase()
+                        ));
                     }
                 }
             }
@@ -147,7 +150,7 @@ pub fn print_update_mask(o: &Objects) {
     for (ty, types) in update_types {
         s.bodyn(format!("impl {}", ty), |s| {
             for m in FIELDS.iter().filter(|a| types.contains(&a.object_ty)) {
-                print_functions(s, m, o);
+                print_functions(s, m);
             }
         });
     }
@@ -158,7 +161,7 @@ pub fn print_update_mask(o: &Objects) {
     );
 }
 
-fn print_functions(s: &mut Writer, m: &MemberType, o: &Objects) {
+fn print_functions(s: &mut Writer, m: &MemberType) {
     s.open_curly(format!(
         "pub fn set_{}_{}(mut self, {}) -> Self",
         m.object_ty,
@@ -186,28 +189,18 @@ fn print_functions(s: &mut Writer, m: &MemberType, o: &Objects) {
                 UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
                 UfType::Bytes => "u32::from_le_bytes([a, b, c, d])".to_string(),
                 UfType::TwoShort => "v".to_string(),
-                UfType::BytesWithTypes(a, b, c, d) => {
+                UfType::BytesWithTypes(_, _, _, _) => {
                     let mut tags = Tags::new();
                     tags.push(Tag::new("versions", "1.12"));
 
-                    let get_name = |ty_name, variable_name| -> String {
-                        if o.get_object_type_of(ty_name, &tags) == ObjectType::Enum
-                            && o.get_definer(ty_name, &tags).tags().is_in_common()
-                        {
-                            format!(
-                                "{lower}_as_int(&{name})",
-                                lower = ty_name.to_lowercase(),
-                                name = variable_name
-                            )
-                        } else {
-                            format!("{name}.as_int()", name = variable_name)
-                        }
+                    let get_name = |variable_name| -> String {
+                        format!("{name}.as_int()", name = variable_name)
                     };
 
-                    let a = get_name(a, "a");
-                    let b = get_name(b, "b");
-                    let c = get_name(c, "c");
-                    let d = get_name(d, "d");
+                    let a = get_name("a");
+                    let b = get_name("b");
+                    let c = get_name("c");
+                    let d = get_name("d");
 
                     format!(
                         "u32::from_le_bytes([{a}, {b}, {c}, {d}])",

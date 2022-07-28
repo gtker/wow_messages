@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::class::{Class, class_try_from, class_as_int};
-use crate::world::version_1_12::race::{Race, race_try_from, race_as_int};
+use crate::world::version_1_12::class::{Class, class_try_from};
+use crate::world::version_1_12::race::{Race, race_try_from};
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -42,10 +42,10 @@ impl WhoPlayer {
         w.write_all(&self.level.to_le_bytes())?;
 
         // class: Class
-        w.write_all(&(class_as_int(&self.class) as u8).to_le_bytes())?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 
         // race: Race
-        w.write_all(&(race_as_int(&self.race) as u8).to_le_bytes())?;
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
 
         // zone_id: u32
         w.write_all(&self.zone_id.to_le_bytes())?;

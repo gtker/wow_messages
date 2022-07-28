@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::version_1_12::class::{Class, class_try_from, class_as_int};
-use crate::world::version_1_12::gender::{Gender, gender_try_from, gender_as_int};
-use crate::world::version_1_12::race::{Race, race_try_from, race_as_int};
+use crate::world::version_1_12::class::{Class, class_try_from};
+use crate::world::version_1_12::gender::{Gender, gender_try_from};
+use crate::world::version_1_12::race::{Race, race_try_from};
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -48,13 +48,13 @@ impl ServerMessage for SMSG_NAME_QUERY_RESPONSE {
         w.write_all(&[0])?;
 
         // race: Race
-        w.write_all(&(race_as_int(&self.race) as u32).to_le_bytes())?;
+        w.write_all(&(self.race.as_int() as u32).to_le_bytes())?;
 
         // gender: Gender
-        w.write_all(&(gender_as_int(&self.gender) as u32).to_le_bytes())?;
+        w.write_all(&(self.gender.as_int() as u32).to_le_bytes())?;
 
         // class: Class
-        w.write_all(&(class_as_int(&self.class) as u32).to_le_bytes())?;
+        w.write_all(&(self.class.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
+use crate::world::version_1_12::map::{Map, map_try_from};
 use crate::world::version_1_12::StatusId;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;

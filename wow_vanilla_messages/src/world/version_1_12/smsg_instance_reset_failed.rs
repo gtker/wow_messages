@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::InstanceResetFailedReason;
-use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
+use crate::world::version_1_12::map::{Map, map_try_from};
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -25,7 +25,7 @@ impl ServerMessage for SMSG_INSTANCE_RESET_FAILED {
         w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }

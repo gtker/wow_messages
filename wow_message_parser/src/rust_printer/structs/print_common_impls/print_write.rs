@@ -1,6 +1,5 @@
 use crate::container::{
-    Container, ContainerType, DefinerUsage, Equation, IfStatement, StructMember,
-    StructMemberDefinition,
+    Container, ContainerType, Equation, IfStatement, StructMember, StructMemberDefinition,
 };
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
@@ -212,29 +211,15 @@ pub fn print_write_definition(
                         Some(integer) => integer,
                     };
 
-                    if !definer.tags().is_in_common()
-                        || e.contains_definer(identifier) == DefinerUsage::InIf
-                    {
-                        s.wln(format!(
+                    s.wln(format!(
                             "w.write_all(&({variable_prefix}{name}.as_int() as {ty}).to_{endian}_bytes()){postfix}?;",
                             variable_prefix = variable_prefix,
                             postfix = postfix,
                             name = d.name(),
                             ty = integer.rust_str(),
                             endian = integer.rust_endian_str()
-                        ));
-                    } else {
-                        s.wln(format!(
-                            "w.write_all(&({lower_ty}_as_int({ref_prefix}{variable_prefix}{name}) as {ty}).to_{endian}_bytes()){postfix}?;",
-                            variable_prefix = variable_prefix,
-                            ref_prefix = if variable_prefix.is_empty() { "" } else { "&" },
-                            postfix = postfix,
-                            name = d.name(),
-                            ty = integer.rust_str(),
-                            lower_ty = definer.name().to_lowercase(),
-                            endian = integer.rust_endian_str()
-                        ));
-                    }
+                    ));
+
                     s.newline();
                     return;
                 }

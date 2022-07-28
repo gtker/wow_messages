@@ -52,3 +52,17 @@ impl std::fmt::Display for Power {
     }
 }
 
+impl Power {
+    pub const fn as_int(&self) -> u8 {
+        match self {
+            Self::MANA => 0x0,
+            Self::RAGE => 0x1,
+            Self::FOCUS => 0x2,
+            Self::ENERGY => 0x3,
+            Self::HAPPINESS => 0x4,
+            Self::HEALTH => 0xfe,
+        }
+    }
+
+}
+

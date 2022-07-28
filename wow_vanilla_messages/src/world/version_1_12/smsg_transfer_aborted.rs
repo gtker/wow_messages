@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
+use crate::world::version_1_12::map::{Map, map_try_from};
 use crate::world::version_1_12::TransferAbortReason;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -37,7 +37,7 @@ impl SMSG_TRANSFER_ABORTED {
 impl ServerMessage for SMSG_TRANSFER_ABORTED {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // reason: TransferAbortReason
         w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;

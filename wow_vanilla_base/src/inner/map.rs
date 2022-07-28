@@ -153,3 +153,55 @@ impl std::fmt::Display for Map {
     }
 }
 
+impl Map {
+    pub const fn as_int(&self) -> u32 {
+        match self {
+            Self::EASTERN_KINGDOMS => 0x0,
+            Self::KALIMDOR => 0x1,
+            Self::TESTING => 0xd,
+            Self::SCOTT_TEST => 0x19,
+            Self::CASH_TEST => 0x1d,
+            Self::ALTERAC_VALLEY => 0x1e,
+            Self::SHADOWFANG_KEEP => 0x21,
+            Self::STORMWIND_STOCKADE => 0x22,
+            Self::STORMWIND_PRISON => 0x23,
+            Self::DEADMINES => 0x24,
+            Self::AZSHARA_CRATER => 0x25,
+            Self::COLLINS_TEST => 0x2a,
+            Self::WAILING_CAVERNS => 0x2b,
+            Self::MONASTERY => 0x2c,
+            Self::RAZORFEN_KRAUL => 0x2f,
+            Self::BLACKFATHOM_DEEPS => 0x30,
+            Self::ULDAMAN => 0x46,
+            Self::GNOMERAGON => 0x5a,
+            Self::SUNKEN_TEMPLE => 0x6d,
+            Self::RAZORFEN_DOWNS => 0x81,
+            Self::EMERALD_DREAM => 0xa9,
+            Self::SCARLET_MONASTERY => 0xbd,
+            Self::ZUL_FARRAK => 0xd1,
+            Self::BLACKROCK_SPIRE => 0xe5,
+            Self::BLACKROCK_DEPTHS => 0xe6,
+            Self::ONYXIAS_LAIR => 0xf9,
+            Self::CAVERNS_OF_TIME => 0x10d,
+            Self::SCHOLOMANCE => 0x121,
+            Self::ZUL_GURUB => 0x135,
+            Self::STRATHOLME => 0x149,
+            Self::MAURADON => 0x15d,
+            Self::DEEPRUN_TRAM => 0x171,
+            Self::RAGEFIRE_CHASM => 0x185,
+            Self::MOLTEN_CORE => 0x199,
+            Self::DIRE_MAUL => 0x1ad,
+            Self::ALLIANCE_PVP_BARRACKS => 0x1c1,
+            Self::HORDE_PVP_BARRACKS => 0x1c2,
+            Self::DEVELOPMENT_LAND => 0x1c3,
+            Self::BLACKWING_LAIR => 0x1d5,
+            Self::WARSONG_GULCH => 0x1e9,
+            Self::RUINS_OF_AHN_QIRAJ => 0x1fd,
+            Self::ARATHI_BASIN => 0x211,
+            Self::AHN_QIRAJ_TEMPLE => 0x213,
+            Self::NAXXRAMAS => 0x215,
+        }
+    }
+
+}
+

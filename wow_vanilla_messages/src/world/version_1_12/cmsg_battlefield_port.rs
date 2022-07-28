@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::BattlefieldPortAction;
-use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
+use crate::world::version_1_12::map::{Map, map_try_from};
 use crate::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -22,7 +22,7 @@ pub struct CMSG_BATTLEFIELD_PORT {
 impl ClientMessage for CMSG_BATTLEFIELD_PORT {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // action: BattlefieldPortAction
         w.write_all(&(self.action.as_int() as u8).to_le_bytes())?;

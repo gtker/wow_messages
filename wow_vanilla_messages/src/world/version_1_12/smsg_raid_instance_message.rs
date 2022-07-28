@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
+use crate::world::version_1_12::map::{Map, map_try_from};
 use crate::world::version_1_12::RaidInstanceMessage;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -27,7 +27,7 @@ impl ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {
         w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // time_left: u32
         w.write_all(&self.time_left.to_le_bytes())?;

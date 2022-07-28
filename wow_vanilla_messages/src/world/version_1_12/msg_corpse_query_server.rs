@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::version_1_12::CorpseQueryResult;
-use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
+use crate::world::version_1_12::map::{Map, map_try_from};
 use crate::world::version_1_12::Vector3d;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
@@ -35,13 +35,13 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
                 position,
             } => {
                 // map: Map
-                w.write_all(&(map_as_int(map) as u32).to_le_bytes())?;
+                w.write_all(&(map.as_int() as u32).to_le_bytes())?;
 
                 // position: Vector3d
                 position.write_into_vec(w)?;
 
                 // corpse_map: Map
-                w.write_all(&(map_as_int(corpse_map) as u32).to_le_bytes())?;
+                w.write_all(&(corpse_map.as_int() as u32).to_le_bytes())?;
 
             }
         }

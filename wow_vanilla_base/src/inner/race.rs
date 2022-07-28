@@ -48,3 +48,20 @@ impl std::fmt::Display for Race {
     }
 }
 
+impl Race {
+    pub const fn as_int(&self) -> u8 {
+        match self {
+            Self::HUMAN => 0x1,
+            Self::ORC => 0x2,
+            Self::DWARF => 0x3,
+            Self::NIGHT_ELF => 0x4,
+            Self::UNDEAD => 0x5,
+            Self::TAUREN => 0x6,
+            Self::GNOME => 0x7,
+            Self::TROLL => 0x8,
+            Self::GOBLIN => 0x9,
+        }
+    }
+
+}
+

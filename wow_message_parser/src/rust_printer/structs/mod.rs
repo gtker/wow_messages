@@ -56,7 +56,7 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
             && o.get_definer(name, e.tags()).tags().is_in_common()
         {
             s.wln(format!(
-                "use {module_name}::{lower_name}::{{{name}, {lower_name}_try_from, {lower_name}_as_int}};",
+                "use {module_name}::{lower_name}::{{{name}, {lower_name}_try_from}};",
                 module_name = module_name,
                 lower_name = name.to_lowercase(),
                 name = name,

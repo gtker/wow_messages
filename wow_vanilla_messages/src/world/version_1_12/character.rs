@@ -3,10 +3,10 @@ use crate::Guid;
 use crate::world::version_1_12::Area;
 use crate::world::version_1_12::CharacterFlags;
 use crate::world::version_1_12::CharacterGear;
-use crate::world::version_1_12::class::{Class, class_try_from, class_as_int};
-use crate::world::version_1_12::gender::{Gender, gender_try_from, gender_as_int};
-use crate::world::version_1_12::map::{Map, map_try_from, map_as_int};
-use crate::world::version_1_12::race::{Race, race_try_from, race_as_int};
+use crate::world::version_1_12::class::{Class, class_try_from};
+use crate::world::version_1_12::gender::{Gender, gender_try_from};
+use crate::world::version_1_12::map::{Map, map_try_from};
+use crate::world::version_1_12::race::{Race, race_try_from};
 use crate::world::version_1_12::Vector3d;
 use std::io::{Write, Read};
 
@@ -99,13 +99,13 @@ impl Character {
         w.write_all(&[0])?;
 
         // race: Race
-        w.write_all(&(race_as_int(&self.race) as u8).to_le_bytes())?;
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
 
         // class: Class
-        w.write_all(&(class_as_int(&self.class) as u8).to_le_bytes())?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 
         // gender: Gender
-        w.write_all(&(gender_as_int(&self.gender) as u8).to_le_bytes())?;
+        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
 
         // skin: u8
         w.write_all(&self.skin.to_le_bytes())?;
@@ -129,7 +129,7 @@ impl Character {
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(map_as_int(&self.map) as u32).to_le_bytes())?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // position: Vector3d
         self.position.write_into_vec(w)?;

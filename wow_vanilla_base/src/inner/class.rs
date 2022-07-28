@@ -48,3 +48,20 @@ impl std::fmt::Display for Class {
     }
 }
 
+impl Class {
+    pub const fn as_int(&self) -> u8 {
+        match self {
+            Self::WARRIOR => 0x1,
+            Self::PALADIN => 0x2,
+            Self::HUNTER => 0x3,
+            Self::ROGUE => 0x4,
+            Self::PRIEST => 0x5,
+            Self::SHAMAN => 0x7,
+            Self::MAGE => 0x8,
+            Self::WARLOCK => 0x9,
+            Self::DRUID => 0xb,
+        }
+    }
+
+}
+
