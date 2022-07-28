@@ -19,5 +19,8 @@
     clippy::approx_constant
 )]
 
+mod errors;
 pub mod inner;
+
+pub use errors::*;
 pub use inner::*;
