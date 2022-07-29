@@ -21,9 +21,9 @@ use std::io::{Write, Read};
 ///     Gender gender;
 ///     u8 skin;
 ///     u8 face;
-///     u8 hairstyle;
-///     u8 haircolor;
-///     u8 facialhair;
+///     u8 hair_style;
+///     u8 hair_color;
+///     u8 facial_hair;
 ///     u8 level;
 ///     Area area;
 ///     Map map;
@@ -47,9 +47,9 @@ pub struct Character {
     pub gender: Gender,
     pub skin: u8,
     pub face: u8,
-    pub hairstyle: u8,
-    pub haircolor: u8,
-    pub facialhair: u8,
+    pub hair_style: u8,
+    pub hair_color: u8,
+    pub facial_hair: u8,
     pub level: u8,
     pub area: Area,
     pub map: Map,
@@ -113,14 +113,14 @@ impl Character {
         // face: u8
         w.write_all(&self.face.to_le_bytes())?;
 
-        // hairstyle: u8
-        w.write_all(&self.hairstyle.to_le_bytes())?;
+        // hair_style: u8
+        w.write_all(&self.hair_style.to_le_bytes())?;
 
-        // haircolor: u8
-        w.write_all(&self.haircolor.to_le_bytes())?;
+        // hair_color: u8
+        w.write_all(&self.hair_color.to_le_bytes())?;
 
-        // facialhair: u8
-        w.write_all(&self.facialhair.to_le_bytes())?;
+        // facial_hair: u8
+        w.write_all(&self.facial_hair.to_le_bytes())?;
 
         // level: u8
         w.write_all(&self.level.to_le_bytes())?;
@@ -191,14 +191,14 @@ impl Character {
         // face: u8
         let face = crate::util::read_u8_le(r)?;
 
-        // hairstyle: u8
-        let hairstyle = crate::util::read_u8_le(r)?;
+        // hair_style: u8
+        let hair_style = crate::util::read_u8_le(r)?;
 
-        // haircolor: u8
-        let haircolor = crate::util::read_u8_le(r)?;
+        // hair_color: u8
+        let hair_color = crate::util::read_u8_le(r)?;
 
-        // facialhair: u8
-        let facialhair = crate::util::read_u8_le(r)?;
+        // facial_hair: u8
+        let facial_hair = crate::util::read_u8_le(r)?;
 
         // level: u8
         let level = crate::util::read_u8_le(r)?;
@@ -252,9 +252,9 @@ impl Character {
             gender,
             skin,
             face,
-            hairstyle,
-            haircolor,
-            facialhair,
+            hair_style,
+            hair_color,
+            facial_hair,
             level,
             area,
             map,
@@ -280,9 +280,9 @@ impl Character {
         + 1 // gender: Gender
         + 1 // skin: u8
         + 1 // face: u8
-        + 1 // hairstyle: u8
-        + 1 // haircolor: u8
-        + 1 // facialhair: u8
+        + 1 // hair_style: u8
+        + 1 // hair_color: u8
+        + 1 // facial_hair: u8
         + 1 // level: u8
         + 4 // area: Area
         + 4 // map: Map

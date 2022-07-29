@@ -14,9 +14,9 @@ struct Character {
     Gender gender;
     u8 skin;
     u8 face;
-    u8 hairstyle;
-    u8 haircolor;
-    u8 facialhair;
+    u8 hair_style;
+    u8 hair_color;
+    u8 facial_hair;
     u8 level;
     Area area;
     Map map;
@@ -43,9 +43,9 @@ struct Character {
 | - | ? / - | [Gender](gender.md) | gender |  |  |
 | - | 1 / - | u8 | skin |  |  |
 | - | 1 / - | u8 | face |  |  |
-| - | 1 / - | u8 | hairstyle |  |  |
-| - | 1 / - | u8 | haircolor |  |  |
-| - | 1 / - | u8 | facialhair |  |  |
+| - | 1 / - | u8 | hair_style |  |  |
+| - | 1 / - | u8 | hair_color |  |  |
+| - | 1 / - | u8 | facial_hair |  |  |
 | - | 1 / - | u8 | level |  |  |
 | - | ? / - | [Area](area.md) | area |  |  |
 | - | ? / - | [Map](map.md) | map |  |  |

@@ -64272,7 +64272,7 @@
         },
         {
           "Definition": {
-            "name": "hairstyle",
+            "name": "hair_style",
             "member_type": {
               "Integer": {
                 "type": "u8"
@@ -64286,7 +64286,7 @@
         },
         {
           "Definition": {
-            "name": "haircolor",
+            "name": "hair_color",
             "member_type": {
               "Integer": {
                 "type": "u8"
@@ -64300,7 +64300,7 @@
         },
         {
           "Definition": {
-            "name": "facialhair",
+            "name": "facial_hair",
             "member_type": {
               "Integer": {
                 "type": "u8"
