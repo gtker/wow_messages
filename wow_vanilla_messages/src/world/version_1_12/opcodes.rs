@@ -920,7 +920,7 @@ impl ClientOpcodeMessage {
             0x0321 => Ok(Self::MSG_RAID_TARGET_UPDATE(<MSG_RAID_TARGET_UPDATE_Client as ClientMessage>::read_body(&mut r, body_size)?)),
             0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Client as ClientMessage>::read_body(&mut r, body_size)?)),
             0x032A => Ok(Self::CMSG_GMSURVEY_SUBMIT(<CMSG_GMSURVEY_SUBMIT as ClientMessage>::read_body(&mut r, body_size)?)),
-            _ => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
+            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size.into() }),
         }
     }
 
@@ -5697,7 +5697,7 @@ impl ServerOpcodeMessage {
             0x0330 => Ok(Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(<SMSG_SPELL_UPDATE_CHAIN_TARGETS as ServerMessage>::read_body(&mut r, body_size)?)),
             0x0332 => Ok(Self::SMSG_EXPECTED_SPAM_RECORDS(<SMSG_EXPECTED_SPAM_RECORDS as ServerMessage>::read_body(&mut r, body_size)?)),
             0x033B => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as ServerMessage>::read_body(&mut r, body_size)?)),
-            _ => Err(crate::errors::ExpectedOpcodeError::Opcode(opcode as u32)),
+            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size.into() }),
         }
     }
 

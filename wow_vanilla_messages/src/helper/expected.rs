@@ -87,7 +87,10 @@ fn read_client_body<M: ClientMessage>(
             Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedOpcodeError::Opcode(opcode))
+        Err(ExpectedOpcodeError::Opcode {
+            opcode,
+            size: size.into(),
+        })
     }
 }
 fn read_server_body<M: ServerMessage>(
@@ -103,6 +106,9 @@ fn read_server_body<M: ServerMessage>(
             Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedOpcodeError::Opcode(opcode))
+        Err(ExpectedOpcodeError::Opcode {
+            opcode,
+            size: size.into(),
+        })
     }
 }
