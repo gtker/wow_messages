@@ -83,7 +83,7 @@ mod test {
             guid: Guid::new(0x5),
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_JUMPING(MovementInfo_MovementFlags_JUMPING {
+                    .set_JUMPING(MovementInfo_MovementFlags_Jumping {
                         cos_angle: 0.928624_f32,
                         sin_angle: 0.3710222_f32,
                         xy_speed: 7_f32,
@@ -128,7 +128,7 @@ mod test {
             guid: Guid::new(0x5),
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_JUMPING(MovementInfo_MovementFlags_JUMPING {
+                    .set_JUMPING(MovementInfo_MovementFlags_Jumping {
                         cos_angle: 0.928624_f32,
                         sin_angle: 0.3710222_f32,
                         xy_speed: 7_f32,
@@ -173,7 +173,7 @@ mod test {
             guid: Guid::new(0x5),
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_JUMPING(MovementInfo_MovementFlags_JUMPING {
+                    .set_JUMPING(MovementInfo_MovementFlags_Jumping {
                         cos_angle: 0.928624_f32,
                         sin_angle: 0.3710222_f32,
                         xy_speed: 7_f32,

@@ -347,7 +347,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                             s.open_curly(format!(
                                 ".set_{}({}",
                                 enumerator.name(),
-                                get_new_flag_type_name(rd.ty_name(), enumerator.name()),
+                                get_new_flag_type_name(rd.ty_name(), enumerator.rust_name()),
                             ));
 
                             for m in enumerator.members_in_struct() {

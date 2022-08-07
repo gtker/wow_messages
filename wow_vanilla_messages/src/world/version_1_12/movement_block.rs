@@ -87,7 +87,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.living {
             match if_statement {
-                MovementBlock_UpdateFlag_LIVING::Living {
+                MovementBlock_UpdateFlag_Living::Living {
                     backwards_running_speed,
                     backwards_swimming_speed,
                     fall_time,
@@ -172,21 +172,21 @@ impl MovementBlock {
 
                         if let Some(if_statement) = &if_statement.spline_flags.final_angle {
                             match if_statement {
-                                MovementBlock_SplineFlag_FINAL_ANGLE::FinalAngle {
+                                MovementBlock_SplineFlag_FinalAngle::FinalAngle {
                                     angle,
                                 } => {
                                     // angle: f32
                                     w.write_all(&angle.to_le_bytes())?;
 
                                 }
-                                MovementBlock_SplineFlag_FINAL_ANGLE::FinalTarget {
+                                MovementBlock_SplineFlag_FinalAngle::FinalTarget {
                                     target,
                                 } => {
                                     // target: u64
                                     w.write_all(&target.to_le_bytes())?;
 
                                 }
-                                MovementBlock_SplineFlag_FINAL_ANGLE::FinalPoint {
+                                MovementBlock_SplineFlag_FinalAngle::FinalPoint {
                                     spline_final_point,
                                 } => {
                                     // spline_final_point: Vector3d
@@ -219,7 +219,7 @@ impl MovementBlock {
                     }
 
                 }
-                MovementBlock_UpdateFlag_LIVING::HasPosition {
+                MovementBlock_UpdateFlag_Living::HasPosition {
                     orientation,
                     position,
                 } => {
@@ -282,7 +282,7 @@ impl MovementBlock {
                 // transport: TransportInfo
                 let transport = TransportInfo::read(r)?;
 
-                Some(MovementBlock_MovementFlags_ON_TRANSPORT {
+                Some(MovementBlock_MovementFlags_OnTransport {
                     transport,
                 })
             }
@@ -293,7 +293,7 @@ impl MovementBlock {
             let flags_SWIMMING = if flags.is_SWIMMING() {
                 // pitch: f32
                 let pitch = crate::util::read_f32_le(r)?;
-                Some(MovementBlock_MovementFlags_SWIMMING {
+                Some(MovementBlock_MovementFlags_Swimming {
                     pitch,
                 })
             }
@@ -312,7 +312,7 @@ impl MovementBlock {
                 let sin_angle = crate::util::read_f32_le(r)?;
                 // xy_speed: f32
                 let xy_speed = crate::util::read_f32_le(r)?;
-                Some(MovementBlock_MovementFlags_JUMPING {
+                Some(MovementBlock_MovementFlags_Jumping {
                     cos_angle,
                     sin_angle,
                     xy_speed,
@@ -326,7 +326,7 @@ impl MovementBlock {
             let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
                 // spline_elevation: f32
                 let spline_elevation = crate::util::read_f32_le(r)?;
-                Some(MovementBlock_MovementFlags_SPLINE_ELEVATION {
+                Some(MovementBlock_MovementFlags_SplineElevation {
                     spline_elevation,
                 })
             }
@@ -353,7 +353,7 @@ impl MovementBlock {
                 let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
                     // angle: f32
                     let angle = crate::util::read_f32_le(r)?;
-                    Some(MovementBlock_SplineFlag_FINAL_ANGLE::FinalAngle {
+                    Some(MovementBlock_SplineFlag_FinalAngle::FinalAngle {
                         angle,
                     })
                 }
@@ -361,7 +361,7 @@ impl MovementBlock {
                     // target: u64
                     let target = crate::util::read_u64_le(r)?;
 
-                    Some(MovementBlock_SplineFlag_FINAL_ANGLE::FinalTarget {
+                    Some(MovementBlock_SplineFlag_FinalAngle::FinalTarget {
                         target,
                     })
                 }
@@ -369,7 +369,7 @@ impl MovementBlock {
                     // spline_final_point: Vector3d
                     let spline_final_point = Vector3d::read(r)?;
 
-                    Some(MovementBlock_SplineFlag_FINAL_ANGLE::FinalPoint {
+                    Some(MovementBlock_SplineFlag_FinalAngle::FinalPoint {
                         spline_final_point,
                     })
                 }
@@ -403,7 +403,7 @@ impl MovementBlock {
                     final_angle: spline_flags_FINAL_ANGLE,
                 };
 
-                Some(MovementBlock_MovementFlags_SPLINE_ENABLED {
+                Some(MovementBlock_MovementFlags_SplineEnabled {
                     duration,
                     final_node,
                     id,
@@ -425,7 +425,7 @@ impl MovementBlock {
                 spline_elevation: flags_SPLINE_ELEVATION,
             };
 
-            Some(MovementBlock_UpdateFlag_LIVING::Living {
+            Some(MovementBlock_UpdateFlag_Living::Living {
                 backwards_running_speed,
                 backwards_swimming_speed,
                 fall_time,
@@ -445,7 +445,7 @@ impl MovementBlock {
 
             // orientation: f32
             let orientation = crate::util::read_f32_le(r)?;
-            Some(MovementBlock_UpdateFlag_LIVING::HasPosition {
+            Some(MovementBlock_UpdateFlag_Living::HasPosition {
                 orientation,
                 position,
             })
@@ -458,7 +458,7 @@ impl MovementBlock {
             // unknown0: u32
             let unknown0 = crate::util::read_u32_le(r)?;
 
-            Some(MovementBlock_UpdateFlag_HIGH_GUID {
+            Some(MovementBlock_UpdateFlag_HighGuid {
                 unknown0,
             })
         }
@@ -470,7 +470,7 @@ impl MovementBlock {
             // unknown1: u32
             let unknown1 = crate::util::read_u32_le(r)?;
 
-            Some(MovementBlock_UpdateFlag_ALL {
+            Some(MovementBlock_UpdateFlag_All {
                 unknown1,
             })
         }
@@ -482,7 +482,7 @@ impl MovementBlock {
             // guid: PackedGuid
             let guid = Guid::read_packed(r)?;
 
-            Some(MovementBlock_UpdateFlag_MELEE_ATTACKING {
+            Some(MovementBlock_UpdateFlag_MeleeAttacking {
                 guid,
             })
         }
@@ -494,7 +494,7 @@ impl MovementBlock {
             // transport_progress_in_ms: u32
             let transport_progress_in_ms = crate::util::read_u32_le(r)?;
 
-            Some(MovementBlock_UpdateFlag_TRANSPORT {
+            Some(MovementBlock_UpdateFlag_Transport {
                 transport_progress_in_ms,
             })
         }
@@ -525,7 +525,7 @@ impl MovementBlock {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum MovementBlock_SplineFlag_FINAL_ANGLE {
+pub enum MovementBlock_SplineFlag_FinalAngle {
     FinalAngle {
         angle: f32,
     },
@@ -537,7 +537,7 @@ pub enum MovementBlock_SplineFlag_FINAL_ANGLE {
     },
 }
 
-impl MovementBlock_SplineFlag_FINAL_ANGLE {
+impl MovementBlock_SplineFlag_FinalAngle {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::FinalAngle { .. } => 262144,
@@ -548,7 +548,7 @@ impl MovementBlock_SplineFlag_FINAL_ANGLE {
 
 }
 
-impl MovementBlock_SplineFlag_FINAL_ANGLE {
+impl MovementBlock_SplineFlag_FinalAngle {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::FinalAngle {
@@ -576,7 +576,7 @@ impl MovementBlock_SplineFlag_FINAL_ANGLE {
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct MovementBlock_SplineFlag {
     inner: u32,
-    final_angle: Option<MovementBlock_SplineFlag_FINAL_ANGLE>,
+    final_angle: Option<MovementBlock_SplineFlag_FinalAngle>,
 }
 
 impl MovementBlock_SplineFlag {
@@ -928,20 +928,20 @@ impl MovementBlock_SplineFlag {
         self
     }
 
-    pub const fn new_FINAL_ANGLE(final_angle: MovementBlock_SplineFlag_FINAL_ANGLE) -> Self {
+    pub const fn new_FINAL_ANGLE(final_angle: MovementBlock_SplineFlag_FinalAngle) -> Self {
         Self {
             inner: final_angle.as_int(),
             final_angle: Some(final_angle),
         }
     }
 
-    pub fn set_FINAL_ANGLE(&mut self, final_angle: MovementBlock_SplineFlag_FINAL_ANGLE) -> Self {
+    pub fn set_FINAL_ANGLE(&mut self, final_angle: MovementBlock_SplineFlag_FinalAngle) -> Self {
         self.inner |= final_angle.as_int();
         self.final_angle = Some(final_angle);
         self.clone()
     }
 
-    pub const fn get_FINAL_ANGLE(&self) -> Option<&MovementBlock_SplineFlag_FINAL_ANGLE> {
+    pub const fn get_FINAL_ANGLE(&self) -> Option<&MovementBlock_SplineFlag_FinalAngle> {
         self.final_angle.as_ref()
     }
 
@@ -1245,11 +1245,11 @@ impl MovementBlock_SplineFlag {
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct MovementBlock_MovementFlags {
     inner: u32,
-    on_transport: Option<MovementBlock_MovementFlags_ON_TRANSPORT>,
-    jumping: Option<MovementBlock_MovementFlags_JUMPING>,
-    swimming: Option<MovementBlock_MovementFlags_SWIMMING>,
-    spline_enabled: Option<MovementBlock_MovementFlags_SPLINE_ENABLED>,
-    spline_elevation: Option<MovementBlock_MovementFlags_SPLINE_ELEVATION>,
+    on_transport: Option<MovementBlock_MovementFlags_OnTransport>,
+    jumping: Option<MovementBlock_MovementFlags_Jumping>,
+    swimming: Option<MovementBlock_MovementFlags_Swimming>,
+    spline_enabled: Option<MovementBlock_MovementFlags_SplineEnabled>,
+    spline_elevation: Option<MovementBlock_MovementFlags_SplineElevation>,
 }
 
 impl MovementBlock_MovementFlags {
@@ -1498,7 +1498,7 @@ impl MovementBlock_MovementFlags {
         self
     }
 
-    pub const fn new_ON_TRANSPORT(on_transport: MovementBlock_MovementFlags_ON_TRANSPORT) -> Self {
+    pub const fn new_ON_TRANSPORT(on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
         Self {
             inner: MovementFlags::ON_TRANSPORT,
             on_transport: Some(on_transport),
@@ -1509,13 +1509,13 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_ON_TRANSPORT(&mut self, on_transport: MovementBlock_MovementFlags_ON_TRANSPORT) -> Self {
+    pub fn set_ON_TRANSPORT(&mut self, on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
         self.inner |= MovementFlags::ON_TRANSPORT;
         self.on_transport = Some(on_transport);
         self.clone()
     }
 
-    pub const fn get_ON_TRANSPORT(&self) -> Option<&MovementBlock_MovementFlags_ON_TRANSPORT> {
+    pub const fn get_ON_TRANSPORT(&self) -> Option<&MovementBlock_MovementFlags_OnTransport> {
         self.on_transport.as_ref()
     }
 
@@ -1600,7 +1600,7 @@ impl MovementBlock_MovementFlags {
         self
     }
 
-    pub const fn new_JUMPING(jumping: MovementBlock_MovementFlags_JUMPING) -> Self {
+    pub const fn new_JUMPING(jumping: MovementBlock_MovementFlags_Jumping) -> Self {
         Self {
             inner: MovementFlags::JUMPING,
             on_transport: None,
@@ -1611,13 +1611,13 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_JUMPING(&mut self, jumping: MovementBlock_MovementFlags_JUMPING) -> Self {
+    pub fn set_JUMPING(&mut self, jumping: MovementBlock_MovementFlags_Jumping) -> Self {
         self.inner |= MovementFlags::JUMPING;
         self.jumping = Some(jumping);
         self.clone()
     }
 
-    pub const fn get_JUMPING(&self) -> Option<&MovementBlock_MovementFlags_JUMPING> {
+    pub const fn get_JUMPING(&self) -> Option<&MovementBlock_MovementFlags_Jumping> {
         self.jumping.as_ref()
     }
 
@@ -1652,7 +1652,7 @@ impl MovementBlock_MovementFlags {
         self
     }
 
-    pub const fn new_SWIMMING(swimming: MovementBlock_MovementFlags_SWIMMING) -> Self {
+    pub const fn new_SWIMMING(swimming: MovementBlock_MovementFlags_Swimming) -> Self {
         Self {
             inner: MovementFlags::SWIMMING,
             on_transport: None,
@@ -1663,13 +1663,13 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_SWIMMING(&mut self, swimming: MovementBlock_MovementFlags_SWIMMING) -> Self {
+    pub fn set_SWIMMING(&mut self, swimming: MovementBlock_MovementFlags_Swimming) -> Self {
         self.inner |= MovementFlags::SWIMMING;
         self.swimming = Some(swimming);
         self.clone()
     }
 
-    pub const fn get_SWIMMING(&self) -> Option<&MovementBlock_MovementFlags_SWIMMING> {
+    pub const fn get_SWIMMING(&self) -> Option<&MovementBlock_MovementFlags_Swimming> {
         self.swimming.as_ref()
     }
 
@@ -1679,7 +1679,7 @@ impl MovementBlock_MovementFlags {
         self
     }
 
-    pub const fn new_SPLINE_ENABLED(spline_enabled: MovementBlock_MovementFlags_SPLINE_ENABLED) -> Self {
+    pub const fn new_SPLINE_ENABLED(spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
         Self {
             inner: MovementFlags::SPLINE_ENABLED,
             on_transport: None,
@@ -1690,13 +1690,13 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_SPLINE_ENABLED(&mut self, spline_enabled: MovementBlock_MovementFlags_SPLINE_ENABLED) -> Self {
+    pub fn set_SPLINE_ENABLED(&mut self, spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
         self.inner |= MovementFlags::SPLINE_ENABLED;
         self.spline_enabled = Some(spline_enabled);
         self.clone()
     }
 
-    pub const fn get_SPLINE_ENABLED(&self) -> Option<&MovementBlock_MovementFlags_SPLINE_ENABLED> {
+    pub const fn get_SPLINE_ENABLED(&self) -> Option<&MovementBlock_MovementFlags_SplineEnabled> {
         self.spline_enabled.as_ref()
     }
 
@@ -1781,7 +1781,7 @@ impl MovementBlock_MovementFlags {
         self
     }
 
-    pub const fn new_SPLINE_ELEVATION(spline_elevation: MovementBlock_MovementFlags_SPLINE_ELEVATION) -> Self {
+    pub const fn new_SPLINE_ELEVATION(spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
         Self {
             inner: MovementFlags::SPLINE_ELEVATION,
             on_transport: None,
@@ -1792,13 +1792,13 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_SPLINE_ELEVATION(&mut self, spline_elevation: MovementBlock_MovementFlags_SPLINE_ELEVATION) -> Self {
+    pub fn set_SPLINE_ELEVATION(&mut self, spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
         self.inner |= MovementFlags::SPLINE_ELEVATION;
         self.spline_elevation = Some(spline_elevation);
         self.clone()
     }
 
-    pub const fn get_SPLINE_ELEVATION(&self) -> Option<&MovementBlock_MovementFlags_SPLINE_ELEVATION> {
+    pub const fn get_SPLINE_ELEVATION(&self) -> Option<&MovementBlock_MovementFlags_SplineElevation> {
         self.spline_elevation.as_ref()
     }
 
@@ -1930,25 +1930,25 @@ impl MovementBlock_MovementFlags {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct MovementBlock_MovementFlags_ON_TRANSPORT {
+pub struct MovementBlock_MovementFlags_OnTransport {
     pub transport: TransportInfo,
 }
 
-impl MovementBlock_MovementFlags_ON_TRANSPORT {
+impl MovementBlock_MovementFlags_OnTransport {
     pub(crate) fn size(&self) -> usize {
         self.transport.size() // transport: TransportInfo
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct MovementBlock_MovementFlags_JUMPING {
+pub struct MovementBlock_MovementFlags_Jumping {
     pub cos_angle: f32,
     pub sin_angle: f32,
     pub xy_speed: f32,
     pub z_speed: f32,
 }
 
-impl MovementBlock_MovementFlags_JUMPING {
+impl MovementBlock_MovementFlags_Jumping {
     pub(crate) fn size(&self) -> usize {
         4 // cos_angle: f32
         + 4 // sin_angle: f32
@@ -1958,18 +1958,18 @@ impl MovementBlock_MovementFlags_JUMPING {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct MovementBlock_MovementFlags_SWIMMING {
+pub struct MovementBlock_MovementFlags_Swimming {
     pub pitch: f32,
 }
 
-impl MovementBlock_MovementFlags_SWIMMING {
+impl MovementBlock_MovementFlags_Swimming {
     pub(crate) fn size(&self) -> usize {
         4 // pitch: f32
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct MovementBlock_MovementFlags_SPLINE_ENABLED {
+pub struct MovementBlock_MovementFlags_SplineEnabled {
     pub duration: u32,
     pub final_node: Vector3d,
     pub id: u32,
@@ -1978,7 +1978,7 @@ pub struct MovementBlock_MovementFlags_SPLINE_ENABLED {
     pub time_passed: u32,
 }
 
-impl MovementBlock_MovementFlags_SPLINE_ENABLED {
+impl MovementBlock_MovementFlags_SplineEnabled {
     pub(crate) fn size(&self) -> usize {
         4 // amount_of_nodes: u32
         + 4 // duration: u32
@@ -1991,18 +1991,18 @@ impl MovementBlock_MovementFlags_SPLINE_ENABLED {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct MovementBlock_MovementFlags_SPLINE_ELEVATION {
+pub struct MovementBlock_MovementFlags_SplineElevation {
     pub spline_elevation: f32,
 }
 
-impl MovementBlock_MovementFlags_SPLINE_ELEVATION {
+impl MovementBlock_MovementFlags_SplineElevation {
     pub(crate) fn size(&self) -> usize {
         4 // spline_elevation: f32
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum MovementBlock_UpdateFlag_LIVING {
+pub enum MovementBlock_UpdateFlag_Living {
     Living {
         backwards_running_speed: f32,
         backwards_swimming_speed: f32,
@@ -2022,7 +2022,7 @@ pub enum MovementBlock_UpdateFlag_LIVING {
     },
 }
 
-impl MovementBlock_UpdateFlag_LIVING {
+impl MovementBlock_UpdateFlag_Living {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::Living { .. } => 32,
@@ -2032,7 +2032,7 @@ impl MovementBlock_UpdateFlag_LIVING {
 
 }
 
-impl MovementBlock_UpdateFlag_LIVING {
+impl MovementBlock_UpdateFlag_Living {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Living {
@@ -2076,11 +2076,11 @@ impl MovementBlock_UpdateFlag_LIVING {
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct MovementBlock_UpdateFlag {
     inner: u8,
-    transport: Option<MovementBlock_UpdateFlag_TRANSPORT>,
-    melee_attacking: Option<MovementBlock_UpdateFlag_MELEE_ATTACKING>,
-    high_guid: Option<MovementBlock_UpdateFlag_HIGH_GUID>,
-    all: Option<MovementBlock_UpdateFlag_ALL>,
-    living: Option<MovementBlock_UpdateFlag_LIVING>,
+    transport: Option<MovementBlock_UpdateFlag_Transport>,
+    melee_attacking: Option<MovementBlock_UpdateFlag_MeleeAttacking>,
+    high_guid: Option<MovementBlock_UpdateFlag_HighGuid>,
+    all: Option<MovementBlock_UpdateFlag_All>,
+    living: Option<MovementBlock_UpdateFlag_Living>,
 }
 
 impl MovementBlock_UpdateFlag {
@@ -2129,7 +2129,7 @@ impl MovementBlock_UpdateFlag {
         self
     }
 
-    pub const fn new_TRANSPORT(transport: MovementBlock_UpdateFlag_TRANSPORT) -> Self {
+    pub const fn new_TRANSPORT(transport: MovementBlock_UpdateFlag_Transport) -> Self {
         Self {
             inner: UpdateFlag::TRANSPORT,
             transport: Some(transport),
@@ -2140,13 +2140,13 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_TRANSPORT(&mut self, transport: MovementBlock_UpdateFlag_TRANSPORT) -> Self {
+    pub fn set_TRANSPORT(&mut self, transport: MovementBlock_UpdateFlag_Transport) -> Self {
         self.inner |= UpdateFlag::TRANSPORT;
         self.transport = Some(transport);
         self.clone()
     }
 
-    pub const fn get_TRANSPORT(&self) -> Option<&MovementBlock_UpdateFlag_TRANSPORT> {
+    pub const fn get_TRANSPORT(&self) -> Option<&MovementBlock_UpdateFlag_Transport> {
         self.transport.as_ref()
     }
 
@@ -2156,7 +2156,7 @@ impl MovementBlock_UpdateFlag {
         self
     }
 
-    pub const fn new_MELEE_ATTACKING(melee_attacking: MovementBlock_UpdateFlag_MELEE_ATTACKING) -> Self {
+    pub const fn new_MELEE_ATTACKING(melee_attacking: MovementBlock_UpdateFlag_MeleeAttacking) -> Self {
         Self {
             inner: UpdateFlag::MELEE_ATTACKING,
             transport: None,
@@ -2167,13 +2167,13 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_MELEE_ATTACKING(&mut self, melee_attacking: MovementBlock_UpdateFlag_MELEE_ATTACKING) -> Self {
+    pub fn set_MELEE_ATTACKING(&mut self, melee_attacking: MovementBlock_UpdateFlag_MeleeAttacking) -> Self {
         self.inner |= UpdateFlag::MELEE_ATTACKING;
         self.melee_attacking = Some(melee_attacking);
         self.clone()
     }
 
-    pub const fn get_MELEE_ATTACKING(&self) -> Option<&MovementBlock_UpdateFlag_MELEE_ATTACKING> {
+    pub const fn get_MELEE_ATTACKING(&self) -> Option<&MovementBlock_UpdateFlag_MeleeAttacking> {
         self.melee_attacking.as_ref()
     }
 
@@ -2183,7 +2183,7 @@ impl MovementBlock_UpdateFlag {
         self
     }
 
-    pub const fn new_HIGH_GUID(high_guid: MovementBlock_UpdateFlag_HIGH_GUID) -> Self {
+    pub const fn new_HIGH_GUID(high_guid: MovementBlock_UpdateFlag_HighGuid) -> Self {
         Self {
             inner: UpdateFlag::HIGH_GUID,
             transport: None,
@@ -2194,13 +2194,13 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_HIGH_GUID(&mut self, high_guid: MovementBlock_UpdateFlag_HIGH_GUID) -> Self {
+    pub fn set_HIGH_GUID(&mut self, high_guid: MovementBlock_UpdateFlag_HighGuid) -> Self {
         self.inner |= UpdateFlag::HIGH_GUID;
         self.high_guid = Some(high_guid);
         self.clone()
     }
 
-    pub const fn get_HIGH_GUID(&self) -> Option<&MovementBlock_UpdateFlag_HIGH_GUID> {
+    pub const fn get_HIGH_GUID(&self) -> Option<&MovementBlock_UpdateFlag_HighGuid> {
         self.high_guid.as_ref()
     }
 
@@ -2210,7 +2210,7 @@ impl MovementBlock_UpdateFlag {
         self
     }
 
-    pub const fn new_ALL(all: MovementBlock_UpdateFlag_ALL) -> Self {
+    pub const fn new_ALL(all: MovementBlock_UpdateFlag_All) -> Self {
         Self {
             inner: UpdateFlag::ALL,
             transport: None,
@@ -2221,13 +2221,13 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_ALL(&mut self, all: MovementBlock_UpdateFlag_ALL) -> Self {
+    pub fn set_ALL(&mut self, all: MovementBlock_UpdateFlag_All) -> Self {
         self.inner |= UpdateFlag::ALL;
         self.all = Some(all);
         self.clone()
     }
 
-    pub const fn get_ALL(&self) -> Option<&MovementBlock_UpdateFlag_ALL> {
+    pub const fn get_ALL(&self) -> Option<&MovementBlock_UpdateFlag_All> {
         self.all.as_ref()
     }
 
@@ -2237,7 +2237,7 @@ impl MovementBlock_UpdateFlag {
         self
     }
 
-    pub const fn new_LIVING(living: MovementBlock_UpdateFlag_LIVING) -> Self {
+    pub const fn new_LIVING(living: MovementBlock_UpdateFlag_Living) -> Self {
         Self {
             inner: living.as_int(),
             transport: None,
@@ -2248,13 +2248,13 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_LIVING(&mut self, living: MovementBlock_UpdateFlag_LIVING) -> Self {
+    pub fn set_LIVING(&mut self, living: MovementBlock_UpdateFlag_Living) -> Self {
         self.inner |= living.as_int();
         self.living = Some(living);
         self.clone()
     }
 
-    pub const fn get_LIVING(&self) -> Option<&MovementBlock_UpdateFlag_LIVING> {
+    pub const fn get_LIVING(&self) -> Option<&MovementBlock_UpdateFlag_Living> {
         self.living.as_ref()
     }
 
@@ -2311,44 +2311,44 @@ impl MovementBlock_UpdateFlag {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct MovementBlock_UpdateFlag_TRANSPORT {
+pub struct MovementBlock_UpdateFlag_Transport {
     pub transport_progress_in_ms: u32,
 }
 
-impl MovementBlock_UpdateFlag_TRANSPORT {
+impl MovementBlock_UpdateFlag_Transport {
     pub(crate) fn size(&self) -> usize {
         4 // transport_progress_in_ms: u32
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct MovementBlock_UpdateFlag_MELEE_ATTACKING {
+pub struct MovementBlock_UpdateFlag_MeleeAttacking {
     pub guid: Guid,
 }
 
-impl MovementBlock_UpdateFlag_MELEE_ATTACKING {
+impl MovementBlock_UpdateFlag_MeleeAttacking {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct MovementBlock_UpdateFlag_HIGH_GUID {
+pub struct MovementBlock_UpdateFlag_HighGuid {
     pub unknown0: u32,
 }
 
-impl MovementBlock_UpdateFlag_HIGH_GUID {
+impl MovementBlock_UpdateFlag_HighGuid {
     pub(crate) fn size(&self) -> usize {
         4 // unknown0: u32
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct MovementBlock_UpdateFlag_ALL {
+pub struct MovementBlock_UpdateFlag_All {
     pub unknown1: u32,
 }
 
-impl MovementBlock_UpdateFlag_ALL {
+impl MovementBlock_UpdateFlag_All {
     pub(crate) fn size(&self) -> usize {
         4 // unknown1: u32
     }

@@ -40,7 +40,7 @@ impl SimpleIfFlag {
             // basic: u8
             let basic = crate::util::read_u8_le(r)?;
 
-            Some(SimpleIfFlag_SimpleFlag_ZERO {
+            Some(SimpleIfFlag_SimpleFlag_Zero {
                 basic,
             })
         }
@@ -69,7 +69,7 @@ impl SimpleIfFlag {
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct SimpleIfFlag_SimpleFlag {
     inner: u8,
-    zero: Option<SimpleIfFlag_SimpleFlag_ZERO>,
+    zero: Option<SimpleIfFlag_SimpleFlag_Zero>,
 }
 
 impl SimpleIfFlag_SimpleFlag {
@@ -146,11 +146,11 @@ impl SimpleIfFlag_SimpleFlag {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SimpleIfFlag_SimpleFlag_ZERO {
+pub struct SimpleIfFlag_SimpleFlag_Zero {
     pub basic: u8,
 }
 
-impl SimpleIfFlag_SimpleFlag_ZERO {
+impl SimpleIfFlag_SimpleFlag_Zero {
     pub(crate) fn size(&self) -> usize {
         1 // basic: u8
     }

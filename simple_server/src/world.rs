@@ -173,7 +173,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
         .set_unit_NATIVEDISPLAYID(50);
 
     let update_flag = MovementBlock_UpdateFlag::empty()
-        .set_LIVING(MovementBlock_UpdateFlag_LIVING::Living {
+        .set_LIVING(MovementBlock_UpdateFlag_Living::Living {
             backwards_running_speed: 4.5,
             backwards_swimming_speed: 0.0,
             fall_time: 0.0,
@@ -190,7 +190,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
             turn_rate: std::f32::consts::PI,
             walking_speed: 1.0,
         })
-        .set_ALL(MovementBlock_UpdateFlag_ALL { unknown1: 1 })
+        .set_ALL(MovementBlock_UpdateFlag_All { unknown1: 1 })
         .set_SELF();
 
     SMSG_UPDATE_OBJECT {

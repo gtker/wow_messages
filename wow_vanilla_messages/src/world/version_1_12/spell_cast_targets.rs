@@ -149,7 +149,7 @@ impl SpellCastTargets {
             // unit_target: PackedGuid
             let unit_target = Guid::read_packed(r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_UNIT {
+            Some(SpellCastTargets_SpellCastTargetFlags_Unit {
                 unit_target,
             })
         }
@@ -161,7 +161,7 @@ impl SpellCastTargets {
             // unit_enemy_target: PackedGuid
             let unit_enemy_target = Guid::read_packed(r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY {
+            Some(SpellCastTargets_SpellCastTargetFlags_UnitEnemy {
                 unit_enemy_target,
             })
         }
@@ -173,7 +173,7 @@ impl SpellCastTargets {
             // object_target: PackedGuid
             let object_target = Guid::read_packed(r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT {
+            Some(SpellCastTargets_SpellCastTargetFlags_Gameobject {
                 object_target,
             })
         }
@@ -185,7 +185,7 @@ impl SpellCastTargets {
             // object_target_locked: PackedGuid
             let object_target_locked = Guid::read_packed(r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_LOCKED {
+            Some(SpellCastTargets_SpellCastTargetFlags_Locked {
                 object_target_locked,
             })
         }
@@ -197,7 +197,7 @@ impl SpellCastTargets {
             // item_target: PackedGuid
             let item_target = Guid::read_packed(r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_ITEM {
+            Some(SpellCastTargets_SpellCastTargetFlags_Item {
                 item_target,
             })
         }
@@ -209,7 +209,7 @@ impl SpellCastTargets {
             // item_trade_target: PackedGuid
             let item_trade_target = Guid::read_packed(r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM {
+            Some(SpellCastTargets_SpellCastTargetFlags_TradeItem {
                 item_trade_target,
             })
         }
@@ -224,7 +224,7 @@ impl SpellCastTargets {
             let source_position_y = crate::util::read_f32_le(r)?;
             // source_position_z: f32
             let source_position_z = crate::util::read_f32_le(r)?;
-            Some(SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION {
+            Some(SpellCastTargets_SpellCastTargetFlags_SourceLocation {
                 source_position_x,
                 source_position_y,
                 source_position_z,
@@ -241,7 +241,7 @@ impl SpellCastTargets {
             let destination_position_y = crate::util::read_f32_le(r)?;
             // destination_position_z: f32
             let destination_position_z = crate::util::read_f32_le(r)?;
-            Some(SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION {
+            Some(SpellCastTargets_SpellCastTargetFlags_DestLocation {
                 destination_position_x,
                 destination_position_y,
                 destination_position_z,
@@ -256,7 +256,7 @@ impl SpellCastTargets {
             let target_string = crate::util::read_c_string_to_vec(r)?;
             let target_string = String::from_utf8(target_string)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_STRING {
+            Some(SpellCastTargets_SpellCastTargetFlags_String {
                 target_string,
             })
         }
@@ -268,7 +268,7 @@ impl SpellCastTargets {
             // corpse_target_ally: PackedGuid
             let corpse_target_ally = Guid::read_packed(r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY {
+            Some(SpellCastTargets_SpellCastTargetFlags_CorpseAlly {
                 corpse_target_ally,
             })
         }
@@ -280,7 +280,7 @@ impl SpellCastTargets {
             // corpse_target_enemy: PackedGuid
             let corpse_target_enemy = Guid::read_packed(r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY {
+            Some(SpellCastTargets_SpellCastTargetFlags_CorpseEnemy {
                 corpse_target_enemy,
             })
         }
@@ -319,17 +319,17 @@ impl SpellCastTargets {
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct SpellCastTargets_SpellCastTargetFlags {
     inner: u16,
-    unit: Option<SpellCastTargets_SpellCastTargetFlags_UNIT>,
-    item: Option<SpellCastTargets_SpellCastTargetFlags_ITEM>,
-    source_location: Option<SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION>,
-    dest_location: Option<SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION>,
-    unit_enemy: Option<SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY>,
-    corpse_enemy: Option<SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY>,
-    gameobject: Option<SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT>,
-    trade_item: Option<SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM>,
-    string: Option<SpellCastTargets_SpellCastTargetFlags_STRING>,
-    locked: Option<SpellCastTargets_SpellCastTargetFlags_LOCKED>,
-    corpse_ally: Option<SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY>,
+    unit: Option<SpellCastTargets_SpellCastTargetFlags_Unit>,
+    item: Option<SpellCastTargets_SpellCastTargetFlags_Item>,
+    source_location: Option<SpellCastTargets_SpellCastTargetFlags_SourceLocation>,
+    dest_location: Option<SpellCastTargets_SpellCastTargetFlags_DestLocation>,
+    unit_enemy: Option<SpellCastTargets_SpellCastTargetFlags_UnitEnemy>,
+    corpse_enemy: Option<SpellCastTargets_SpellCastTargetFlags_CorpseEnemy>,
+    gameobject: Option<SpellCastTargets_SpellCastTargetFlags_Gameobject>,
+    trade_item: Option<SpellCastTargets_SpellCastTargetFlags_TradeItem>,
+    string: Option<SpellCastTargets_SpellCastTargetFlags_String>,
+    locked: Option<SpellCastTargets_SpellCastTargetFlags_Locked>,
+    corpse_ally: Option<SpellCastTargets_SpellCastTargetFlags_CorpseAlly>,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags {
@@ -396,7 +396,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_UNIT(unit: SpellCastTargets_SpellCastTargetFlags_UNIT) -> Self {
+    pub const fn new_UNIT(unit: SpellCastTargets_SpellCastTargetFlags_Unit) -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT,
             unit: Some(unit),
@@ -413,13 +413,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_UNIT(&mut self, unit: SpellCastTargets_SpellCastTargetFlags_UNIT) -> Self {
+    pub fn set_UNIT(&mut self, unit: SpellCastTargets_SpellCastTargetFlags_Unit) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT;
         self.unit = Some(unit);
         self.clone()
     }
 
-    pub const fn get_UNIT(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_UNIT> {
+    pub const fn get_UNIT(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Unit> {
         self.unit.as_ref()
     }
 
@@ -491,7 +491,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_ITEM(item: SpellCastTargets_SpellCastTargetFlags_ITEM) -> Self {
+    pub const fn new_ITEM(item: SpellCastTargets_SpellCastTargetFlags_Item) -> Self {
         Self {
             inner: SpellCastTargetFlags::ITEM,
             unit: None,
@@ -508,13 +508,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_ITEM(&mut self, item: SpellCastTargets_SpellCastTargetFlags_ITEM) -> Self {
+    pub fn set_ITEM(&mut self, item: SpellCastTargets_SpellCastTargetFlags_Item) -> Self {
         self.inner |= SpellCastTargetFlags::ITEM;
         self.item = Some(item);
         self.clone()
     }
 
-    pub const fn get_ITEM(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_ITEM> {
+    pub const fn get_ITEM(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Item> {
         self.item.as_ref()
     }
 
@@ -524,7 +524,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_SOURCE_LOCATION(source_location: SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION) -> Self {
+    pub const fn new_SOURCE_LOCATION(source_location: SpellCastTargets_SpellCastTargetFlags_SourceLocation) -> Self {
         Self {
             inner: SpellCastTargetFlags::SOURCE_LOCATION,
             unit: None,
@@ -541,13 +541,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_SOURCE_LOCATION(&mut self, source_location: SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION) -> Self {
+    pub fn set_SOURCE_LOCATION(&mut self, source_location: SpellCastTargets_SpellCastTargetFlags_SourceLocation) -> Self {
         self.inner |= SpellCastTargetFlags::SOURCE_LOCATION;
         self.source_location = Some(source_location);
         self.clone()
     }
 
-    pub const fn get_SOURCE_LOCATION(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION> {
+    pub const fn get_SOURCE_LOCATION(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_SourceLocation> {
         self.source_location.as_ref()
     }
 
@@ -557,7 +557,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_DEST_LOCATION(dest_location: SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION) -> Self {
+    pub const fn new_DEST_LOCATION(dest_location: SpellCastTargets_SpellCastTargetFlags_DestLocation) -> Self {
         Self {
             inner: SpellCastTargetFlags::DEST_LOCATION,
             unit: None,
@@ -574,13 +574,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_DEST_LOCATION(&mut self, dest_location: SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION) -> Self {
+    pub fn set_DEST_LOCATION(&mut self, dest_location: SpellCastTargets_SpellCastTargetFlags_DestLocation) -> Self {
         self.inner |= SpellCastTargetFlags::DEST_LOCATION;
         self.dest_location = Some(dest_location);
         self.clone()
     }
 
-    pub const fn get_DEST_LOCATION(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION> {
+    pub const fn get_DEST_LOCATION(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_DestLocation> {
         self.dest_location.as_ref()
     }
 
@@ -590,7 +590,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_UNIT_ENEMY(unit_enemy: SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY) -> Self {
+    pub const fn new_UNIT_ENEMY(unit_enemy: SpellCastTargets_SpellCastTargetFlags_UnitEnemy) -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_ENEMY,
             unit: None,
@@ -607,13 +607,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_UNIT_ENEMY(&mut self, unit_enemy: SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY) -> Self {
+    pub fn set_UNIT_ENEMY(&mut self, unit_enemy: SpellCastTargets_SpellCastTargetFlags_UnitEnemy) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_ENEMY;
         self.unit_enemy = Some(unit_enemy);
         self.clone()
     }
 
-    pub const fn get_UNIT_ENEMY(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY> {
+    pub const fn get_UNIT_ENEMY(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_UnitEnemy> {
         self.unit_enemy.as_ref()
     }
 
@@ -654,7 +654,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_CORPSE_ENEMY(corpse_enemy: SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY) -> Self {
+    pub const fn new_CORPSE_ENEMY(corpse_enemy: SpellCastTargets_SpellCastTargetFlags_CorpseEnemy) -> Self {
         Self {
             inner: SpellCastTargetFlags::CORPSE_ENEMY,
             unit: None,
@@ -671,13 +671,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_CORPSE_ENEMY(&mut self, corpse_enemy: SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY) -> Self {
+    pub fn set_CORPSE_ENEMY(&mut self, corpse_enemy: SpellCastTargets_SpellCastTargetFlags_CorpseEnemy) -> Self {
         self.inner |= SpellCastTargetFlags::CORPSE_ENEMY;
         self.corpse_enemy = Some(corpse_enemy);
         self.clone()
     }
 
-    pub const fn get_CORPSE_ENEMY(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY> {
+    pub const fn get_CORPSE_ENEMY(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_CorpseEnemy> {
         self.corpse_enemy.as_ref()
     }
 
@@ -718,7 +718,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_GAMEOBJECT(gameobject: SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT) -> Self {
+    pub const fn new_GAMEOBJECT(gameobject: SpellCastTargets_SpellCastTargetFlags_Gameobject) -> Self {
         Self {
             inner: SpellCastTargetFlags::GAMEOBJECT,
             unit: None,
@@ -735,13 +735,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_GAMEOBJECT(&mut self, gameobject: SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT) -> Self {
+    pub fn set_GAMEOBJECT(&mut self, gameobject: SpellCastTargets_SpellCastTargetFlags_Gameobject) -> Self {
         self.inner |= SpellCastTargetFlags::GAMEOBJECT;
         self.gameobject = Some(gameobject);
         self.clone()
     }
 
-    pub const fn get_GAMEOBJECT(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT> {
+    pub const fn get_GAMEOBJECT(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Gameobject> {
         self.gameobject.as_ref()
     }
 
@@ -751,7 +751,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_TRADE_ITEM(trade_item: SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM) -> Self {
+    pub const fn new_TRADE_ITEM(trade_item: SpellCastTargets_SpellCastTargetFlags_TradeItem) -> Self {
         Self {
             inner: SpellCastTargetFlags::TRADE_ITEM,
             unit: None,
@@ -768,13 +768,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_TRADE_ITEM(&mut self, trade_item: SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM) -> Self {
+    pub fn set_TRADE_ITEM(&mut self, trade_item: SpellCastTargets_SpellCastTargetFlags_TradeItem) -> Self {
         self.inner |= SpellCastTargetFlags::TRADE_ITEM;
         self.trade_item = Some(trade_item);
         self.clone()
     }
 
-    pub const fn get_TRADE_ITEM(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM> {
+    pub const fn get_TRADE_ITEM(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_TradeItem> {
         self.trade_item.as_ref()
     }
 
@@ -784,7 +784,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_STRING(string: SpellCastTargets_SpellCastTargetFlags_STRING) -> Self {
+    pub const fn new_STRING(string: SpellCastTargets_SpellCastTargetFlags_String) -> Self {
         Self {
             inner: SpellCastTargetFlags::STRING,
             unit: None,
@@ -801,13 +801,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_STRING(&mut self, string: SpellCastTargets_SpellCastTargetFlags_STRING) -> Self {
+    pub fn set_STRING(&mut self, string: SpellCastTargets_SpellCastTargetFlags_String) -> Self {
         self.inner |= SpellCastTargetFlags::STRING;
         self.string = Some(string);
         self.clone()
     }
 
-    pub const fn get_STRING(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_STRING> {
+    pub const fn get_STRING(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_String> {
         self.string.as_ref()
     }
 
@@ -817,7 +817,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_LOCKED(locked: SpellCastTargets_SpellCastTargetFlags_LOCKED) -> Self {
+    pub const fn new_LOCKED(locked: SpellCastTargets_SpellCastTargetFlags_Locked) -> Self {
         Self {
             inner: SpellCastTargetFlags::LOCKED,
             unit: None,
@@ -834,13 +834,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_LOCKED(&mut self, locked: SpellCastTargets_SpellCastTargetFlags_LOCKED) -> Self {
+    pub fn set_LOCKED(&mut self, locked: SpellCastTargets_SpellCastTargetFlags_Locked) -> Self {
         self.inner |= SpellCastTargetFlags::LOCKED;
         self.locked = Some(locked);
         self.clone()
     }
 
-    pub const fn get_LOCKED(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_LOCKED> {
+    pub const fn get_LOCKED(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Locked> {
         self.locked.as_ref()
     }
 
@@ -850,7 +850,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_CORPSE_ALLY(corpse_ally: SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY) -> Self {
+    pub const fn new_CORPSE_ALLY(corpse_ally: SpellCastTargets_SpellCastTargetFlags_CorpseAlly) -> Self {
         Self {
             inner: SpellCastTargetFlags::CORPSE_ALLY,
             unit: None,
@@ -867,13 +867,13 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
-    pub fn set_CORPSE_ALLY(&mut self, corpse_ally: SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY) -> Self {
+    pub fn set_CORPSE_ALLY(&mut self, corpse_ally: SpellCastTargets_SpellCastTargetFlags_CorpseAlly) -> Self {
         self.inner |= SpellCastTargetFlags::CORPSE_ALLY;
         self.corpse_ally = Some(corpse_ally);
         self.clone()
     }
 
-    pub const fn get_CORPSE_ALLY(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY> {
+    pub const fn get_CORPSE_ALLY(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_CorpseAlly> {
         self.corpse_ally.as_ref()
     }
 
@@ -972,35 +972,35 @@ impl SpellCastTargets_SpellCastTargetFlags {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_UNIT {
+pub struct SpellCastTargets_SpellCastTargetFlags_Unit {
     pub unit_target: Guid,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_UNIT {
+impl SpellCastTargets_SpellCastTargetFlags_Unit {
     pub(crate) fn size(&self) -> usize {
         self.unit_target.size() // unit_target: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_ITEM {
+pub struct SpellCastTargets_SpellCastTargetFlags_Item {
     pub item_target: Guid,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_ITEM {
+impl SpellCastTargets_SpellCastTargetFlags_Item {
     pub(crate) fn size(&self) -> usize {
         self.item_target.size() // item_target: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION {
+pub struct SpellCastTargets_SpellCastTargetFlags_SourceLocation {
     pub source_position_x: f32,
     pub source_position_y: f32,
     pub source_position_z: f32,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION {
+impl SpellCastTargets_SpellCastTargetFlags_SourceLocation {
     pub(crate) fn size(&self) -> usize {
         4 // source_position_x: f32
         + 4 // source_position_y: f32
@@ -1009,13 +1009,13 @@ impl SpellCastTargets_SpellCastTargetFlags_SOURCE_LOCATION {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION {
+pub struct SpellCastTargets_SpellCastTargetFlags_DestLocation {
     pub destination_position_x: f32,
     pub destination_position_y: f32,
     pub destination_position_z: f32,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION {
+impl SpellCastTargets_SpellCastTargetFlags_DestLocation {
     pub(crate) fn size(&self) -> usize {
         4 // destination_position_x: f32
         + 4 // destination_position_y: f32
@@ -1024,77 +1024,77 @@ impl SpellCastTargets_SpellCastTargetFlags_DEST_LOCATION {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY {
+pub struct SpellCastTargets_SpellCastTargetFlags_UnitEnemy {
     pub unit_enemy_target: Guid,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_UNIT_ENEMY {
+impl SpellCastTargets_SpellCastTargetFlags_UnitEnemy {
     pub(crate) fn size(&self) -> usize {
         self.unit_enemy_target.size() // unit_enemy_target: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY {
+pub struct SpellCastTargets_SpellCastTargetFlags_CorpseEnemy {
     pub corpse_target_enemy: Guid,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_CORPSE_ENEMY {
+impl SpellCastTargets_SpellCastTargetFlags_CorpseEnemy {
     pub(crate) fn size(&self) -> usize {
         self.corpse_target_enemy.size() // corpse_target_enemy: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT {
+pub struct SpellCastTargets_SpellCastTargetFlags_Gameobject {
     pub object_target: Guid,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_GAMEOBJECT {
+impl SpellCastTargets_SpellCastTargetFlags_Gameobject {
     pub(crate) fn size(&self) -> usize {
         self.object_target.size() // object_target: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM {
+pub struct SpellCastTargets_SpellCastTargetFlags_TradeItem {
     pub item_trade_target: Guid,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_TRADE_ITEM {
+impl SpellCastTargets_SpellCastTargetFlags_TradeItem {
     pub(crate) fn size(&self) -> usize {
         self.item_trade_target.size() // item_trade_target: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_STRING {
+pub struct SpellCastTargets_SpellCastTargetFlags_String {
     pub target_string: String,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_STRING {
+impl SpellCastTargets_SpellCastTargetFlags_String {
     pub(crate) fn size(&self) -> usize {
         self.target_string.len() + 1 // target_string: CString
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_LOCKED {
+pub struct SpellCastTargets_SpellCastTargetFlags_Locked {
     pub object_target_locked: Guid,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_LOCKED {
+impl SpellCastTargets_SpellCastTargetFlags_Locked {
     pub(crate) fn size(&self) -> usize {
         self.object_target_locked.size() // object_target_locked: Guid
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY {
+pub struct SpellCastTargets_SpellCastTargetFlags_CorpseAlly {
     pub corpse_target_ally: Guid,
 }
 
-impl SpellCastTargets_SpellCastTargetFlags_CORPSE_ALLY {
+impl SpellCastTargets_SpellCastTargetFlags_CorpseAlly {
     pub(crate) fn size(&self) -> usize {
         self.corpse_target_ally.size() // corpse_target_ally: Guid
     }

@@ -11,7 +11,8 @@ use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, IntegerType, ObjectType,
 };
 use crate::rust_printer::{
-    get_new_flag_type_name, get_new_type_name, get_optional_type_name, DefinerType,
+    field_name_to_rust_name, get_new_flag_type_name, get_new_type_name, get_optional_type_name,
+    DefinerType,
 };
 use crate::test_case::TestCase;
 use crate::{CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
@@ -908,7 +909,7 @@ fn create_else_if_flag(
     let rm = RustMember {
         name: statement.name().to_string(),
         ty: RustType::Enum {
-            ty_name: get_new_flag_type_name(flag_ty_name, enumerator),
+            ty_name: get_new_flag_type_name(flag_ty_name, &field_name_to_rust_name(enumerator)),
             original_ty_name: flag_ty_name.clone(),
             enumerators,
             int_ty: flag_int_ty,

@@ -217,7 +217,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // status: GroupMemberOnlineStatus
             let status = GroupMemberOnlineStatus::new(crate::util::read_u8_le(r)?);
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_STATUS {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus {
                 status,
             })
         }
@@ -229,7 +229,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // current_health: u16
             let current_health = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_HP {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp {
                 current_health,
             })
         }
@@ -241,7 +241,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // max_health: u16
             let max_health = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_HP {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp {
                 max_health,
             })
         }
@@ -253,7 +253,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // power: Power
             let power: Power = crate::util::read_u8_le(r)?.try_into()?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POWER_TYPE {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType {
                 power,
             })
         }
@@ -265,7 +265,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // current_power: u16
             let current_power = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_POWER {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower {
                 current_power,
             })
         }
@@ -277,7 +277,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // max_power: u16
             let max_power = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_POWER {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower {
                 max_power,
             })
         }
@@ -289,7 +289,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // level: u16
             let level = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_LEVEL {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel {
                 level,
             })
         }
@@ -301,7 +301,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // area: Area
             let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_ZONE {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone {
                 area,
             })
         }
@@ -316,7 +316,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // position_y: u16
             let position_y = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POSITION {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition {
                 position_x,
                 position_y,
             })
@@ -329,7 +329,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // auras: AuraMask
             let auras = AuraMask::read(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_AURAS {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras {
                 auras,
             })
         }
@@ -342,7 +342,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             let pet_name = crate::util::read_c_string_to_vec(r)?;
             let pet_name = String::from_utf8(pet_name)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_NAME {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName {
                 pet_name,
             })
         }
@@ -354,7 +354,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // pet_display_id: u16
             let pet_display_id = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MODEL_ID {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId {
                 pet_display_id,
             })
         }
@@ -366,7 +366,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // pet_current_health: u16
             let pet_current_health = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_HP {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp {
                 pet_current_health,
             })
         }
@@ -378,7 +378,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // pet_max_health: u16
             let pet_max_health = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_HP {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp {
                 pet_max_health,
             })
         }
@@ -390,7 +390,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // pet_power_type: Power
             let pet_power_type: Power = crate::util::read_u8_le(r)?.try_into()?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_POWER_TYPE {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType {
                 pet_power_type,
             })
         }
@@ -402,7 +402,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // pet_current_power: u16
             let pet_current_power = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_POWER {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower {
                 pet_current_power,
             })
         }
@@ -414,7 +414,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // pet_max_power: u16
             let pet_max_power = crate::util::read_u16_le(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_POWER {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower {
                 pet_max_power,
             })
         }
@@ -426,7 +426,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
             // pet_auras: AuraMask
             let pet_auras = AuraMask::read(r)?;
 
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_AURAS {
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras {
                 pet_auras,
             })
         }
@@ -474,24 +474,24 @@ impl SMSG_PARTY_MEMBER_STATS_FULL {
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
     inner: u32,
-    flag_status: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_STATUS>,
-    flag_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_HP>,
-    flag_max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_HP>,
-    flag_power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POWER_TYPE>,
-    flag_cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_POWER>,
-    flag_max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_POWER>,
-    flag_level: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_LEVEL>,
-    flag_zone: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_ZONE>,
-    flag_position: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POSITION>,
-    flag_auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_AURAS>,
-    flag_pet_name: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_NAME>,
-    flag_pet_model_id: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MODEL_ID>,
-    flag_pet_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_HP>,
-    flag_pet_max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_HP>,
-    flag_pet_power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_POWER_TYPE>,
-    flag_pet_cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_POWER>,
-    flag_pet_max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_POWER>,
-    flag_pet_auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_AURAS>,
+    flag_status: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus>,
+    flag_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp>,
+    flag_max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp>,
+    flag_power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType>,
+    flag_cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower>,
+    flag_max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower>,
+    flag_level: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel>,
+    flag_zone: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone>,
+    flag_position: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition>,
+    flag_auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras>,
+    flag_pet_name: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName>,
+    flag_pet_model_id: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId>,
+    flag_pet_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp>,
+    flag_pet_max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp>,
+    flag_pet_power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType>,
+    flag_pet_cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower>,
+    flag_pet_max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower>,
+    flag_pet_auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras>,
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
@@ -541,7 +541,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         && self.flag_pet_auras.is_none()
     }
 
-    pub const fn new_FLAG_STATUS(flag_status: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_STATUS) -> Self {
+    pub const fn new_FLAG_STATUS(flag_status: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_STATUS,
             flag_status: Some(flag_status),
@@ -565,13 +565,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_STATUS(&mut self, flag_status: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_STATUS) -> Self {
+    pub fn set_FLAG_STATUS(&mut self, flag_status: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_STATUS;
         self.flag_status = Some(flag_status);
         self.clone()
     }
 
-    pub const fn get_FLAG_STATUS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_STATUS> {
+    pub const fn get_FLAG_STATUS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus> {
         self.flag_status.as_ref()
     }
 
@@ -581,7 +581,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_CUR_HP(flag_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_HP) -> Self {
+    pub const fn new_FLAG_CUR_HP(flag_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_CUR_HP,
             flag_status: None,
@@ -605,13 +605,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_CUR_HP(&mut self, flag_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_HP) -> Self {
+    pub fn set_FLAG_CUR_HP(&mut self, flag_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_CUR_HP;
         self.flag_cur_hp = Some(flag_cur_hp);
         self.clone()
     }
 
-    pub const fn get_FLAG_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_HP> {
+    pub const fn get_FLAG_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp> {
         self.flag_cur_hp.as_ref()
     }
 
@@ -621,7 +621,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_MAX_HP(flag_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_HP) -> Self {
+    pub const fn new_FLAG_MAX_HP(flag_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_MAX_HP,
             flag_status: None,
@@ -645,13 +645,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_MAX_HP(&mut self, flag_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_HP) -> Self {
+    pub fn set_FLAG_MAX_HP(&mut self, flag_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_MAX_HP;
         self.flag_max_hp = Some(flag_max_hp);
         self.clone()
     }
 
-    pub const fn get_FLAG_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_HP> {
+    pub const fn get_FLAG_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp> {
         self.flag_max_hp.as_ref()
     }
 
@@ -661,7 +661,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_POWER_TYPE(flag_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POWER_TYPE) -> Self {
+    pub const fn new_FLAG_POWER_TYPE(flag_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_POWER_TYPE,
             flag_status: None,
@@ -685,13 +685,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_POWER_TYPE(&mut self, flag_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POWER_TYPE) -> Self {
+    pub fn set_FLAG_POWER_TYPE(&mut self, flag_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_POWER_TYPE;
         self.flag_power_type = Some(flag_power_type);
         self.clone()
     }
 
-    pub const fn get_FLAG_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POWER_TYPE> {
+    pub const fn get_FLAG_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType> {
         self.flag_power_type.as_ref()
     }
 
@@ -701,7 +701,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_CUR_POWER(flag_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_POWER) -> Self {
+    pub const fn new_FLAG_CUR_POWER(flag_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_CUR_POWER,
             flag_status: None,
@@ -725,13 +725,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_CUR_POWER(&mut self, flag_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_POWER) -> Self {
+    pub fn set_FLAG_CUR_POWER(&mut self, flag_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_CUR_POWER;
         self.flag_cur_power = Some(flag_cur_power);
         self.clone()
     }
 
-    pub const fn get_FLAG_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_POWER> {
+    pub const fn get_FLAG_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower> {
         self.flag_cur_power.as_ref()
     }
 
@@ -741,7 +741,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_MAX_POWER(flag_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_POWER) -> Self {
+    pub const fn new_FLAG_MAX_POWER(flag_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_MAX_POWER,
             flag_status: None,
@@ -765,13 +765,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_MAX_POWER(&mut self, flag_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_POWER) -> Self {
+    pub fn set_FLAG_MAX_POWER(&mut self, flag_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_MAX_POWER;
         self.flag_max_power = Some(flag_max_power);
         self.clone()
     }
 
-    pub const fn get_FLAG_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_POWER> {
+    pub const fn get_FLAG_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower> {
         self.flag_max_power.as_ref()
     }
 
@@ -781,7 +781,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_LEVEL(flag_level: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_LEVEL) -> Self {
+    pub const fn new_FLAG_LEVEL(flag_level: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_LEVEL,
             flag_status: None,
@@ -805,13 +805,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_LEVEL(&mut self, flag_level: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_LEVEL) -> Self {
+    pub fn set_FLAG_LEVEL(&mut self, flag_level: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_LEVEL;
         self.flag_level = Some(flag_level);
         self.clone()
     }
 
-    pub const fn get_FLAG_LEVEL(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_LEVEL> {
+    pub const fn get_FLAG_LEVEL(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel> {
         self.flag_level.as_ref()
     }
 
@@ -821,7 +821,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_ZONE(flag_zone: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_ZONE) -> Self {
+    pub const fn new_FLAG_ZONE(flag_zone: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_ZONE,
             flag_status: None,
@@ -845,13 +845,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_ZONE(&mut self, flag_zone: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_ZONE) -> Self {
+    pub fn set_FLAG_ZONE(&mut self, flag_zone: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_ZONE;
         self.flag_zone = Some(flag_zone);
         self.clone()
     }
 
-    pub const fn get_FLAG_ZONE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_ZONE> {
+    pub const fn get_FLAG_ZONE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone> {
         self.flag_zone.as_ref()
     }
 
@@ -861,7 +861,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_POSITION(flag_position: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POSITION) -> Self {
+    pub const fn new_FLAG_POSITION(flag_position: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_POSITION,
             flag_status: None,
@@ -885,13 +885,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_POSITION(&mut self, flag_position: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POSITION) -> Self {
+    pub fn set_FLAG_POSITION(&mut self, flag_position: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_POSITION;
         self.flag_position = Some(flag_position);
         self.clone()
     }
 
-    pub const fn get_FLAG_POSITION(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POSITION> {
+    pub const fn get_FLAG_POSITION(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition> {
         self.flag_position.as_ref()
     }
 
@@ -901,7 +901,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_AURAS(flag_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_AURAS) -> Self {
+    pub const fn new_FLAG_AURAS(flag_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_AURAS,
             flag_status: None,
@@ -925,13 +925,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_AURAS(&mut self, flag_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_AURAS) -> Self {
+    pub fn set_FLAG_AURAS(&mut self, flag_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_AURAS;
         self.flag_auras = Some(flag_auras);
         self.clone()
     }
 
-    pub const fn get_FLAG_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_AURAS> {
+    pub const fn get_FLAG_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras> {
         self.flag_auras.as_ref()
     }
 
@@ -1017,7 +1017,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_PET_NAME(flag_pet_name: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_NAME) -> Self {
+    pub const fn new_FLAG_PET_NAME(flag_pet_name: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_PET_NAME,
             flag_status: None,
@@ -1041,13 +1041,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_NAME(&mut self, flag_pet_name: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_NAME) -> Self {
+    pub fn set_FLAG_PET_NAME(&mut self, flag_pet_name: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_NAME;
         self.flag_pet_name = Some(flag_pet_name);
         self.clone()
     }
 
-    pub const fn get_FLAG_PET_NAME(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_NAME> {
+    pub const fn get_FLAG_PET_NAME(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName> {
         self.flag_pet_name.as_ref()
     }
 
@@ -1057,7 +1057,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_PET_MODEL_ID(flag_pet_model_id: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MODEL_ID) -> Self {
+    pub const fn new_FLAG_PET_MODEL_ID(flag_pet_model_id: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_PET_MODEL_ID,
             flag_status: None,
@@ -1081,13 +1081,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_MODEL_ID(&mut self, flag_pet_model_id: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MODEL_ID) -> Self {
+    pub fn set_FLAG_PET_MODEL_ID(&mut self, flag_pet_model_id: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_MODEL_ID;
         self.flag_pet_model_id = Some(flag_pet_model_id);
         self.clone()
     }
 
-    pub const fn get_FLAG_PET_MODEL_ID(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MODEL_ID> {
+    pub const fn get_FLAG_PET_MODEL_ID(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId> {
         self.flag_pet_model_id.as_ref()
     }
 
@@ -1097,7 +1097,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_PET_CUR_HP(flag_pet_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_HP) -> Self {
+    pub const fn new_FLAG_PET_CUR_HP(flag_pet_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_PET_CUR_HP,
             flag_status: None,
@@ -1121,13 +1121,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_CUR_HP(&mut self, flag_pet_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_HP) -> Self {
+    pub fn set_FLAG_PET_CUR_HP(&mut self, flag_pet_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_CUR_HP;
         self.flag_pet_cur_hp = Some(flag_pet_cur_hp);
         self.clone()
     }
 
-    pub const fn get_FLAG_PET_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_HP> {
+    pub const fn get_FLAG_PET_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp> {
         self.flag_pet_cur_hp.as_ref()
     }
 
@@ -1137,7 +1137,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_PET_MAX_HP(flag_pet_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_HP) -> Self {
+    pub const fn new_FLAG_PET_MAX_HP(flag_pet_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_PET_MAX_HP,
             flag_status: None,
@@ -1161,13 +1161,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_MAX_HP(&mut self, flag_pet_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_HP) -> Self {
+    pub fn set_FLAG_PET_MAX_HP(&mut self, flag_pet_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_MAX_HP;
         self.flag_pet_max_hp = Some(flag_pet_max_hp);
         self.clone()
     }
 
-    pub const fn get_FLAG_PET_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_HP> {
+    pub const fn get_FLAG_PET_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp> {
         self.flag_pet_max_hp.as_ref()
     }
 
@@ -1177,7 +1177,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_PET_POWER_TYPE(flag_pet_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_POWER_TYPE) -> Self {
+    pub const fn new_FLAG_PET_POWER_TYPE(flag_pet_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_PET_POWER_TYPE,
             flag_status: None,
@@ -1201,13 +1201,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_POWER_TYPE(&mut self, flag_pet_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_POWER_TYPE) -> Self {
+    pub fn set_FLAG_PET_POWER_TYPE(&mut self, flag_pet_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_POWER_TYPE;
         self.flag_pet_power_type = Some(flag_pet_power_type);
         self.clone()
     }
 
-    pub const fn get_FLAG_PET_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_POWER_TYPE> {
+    pub const fn get_FLAG_PET_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType> {
         self.flag_pet_power_type.as_ref()
     }
 
@@ -1217,7 +1217,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_PET_CUR_POWER(flag_pet_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_POWER) -> Self {
+    pub const fn new_FLAG_PET_CUR_POWER(flag_pet_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_PET_CUR_POWER,
             flag_status: None,
@@ -1241,13 +1241,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_CUR_POWER(&mut self, flag_pet_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_POWER) -> Self {
+    pub fn set_FLAG_PET_CUR_POWER(&mut self, flag_pet_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_CUR_POWER;
         self.flag_pet_cur_power = Some(flag_pet_cur_power);
         self.clone()
     }
 
-    pub const fn get_FLAG_PET_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_POWER> {
+    pub const fn get_FLAG_PET_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower> {
         self.flag_pet_cur_power.as_ref()
     }
 
@@ -1257,7 +1257,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_PET_MAX_POWER(flag_pet_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_POWER) -> Self {
+    pub const fn new_FLAG_PET_MAX_POWER(flag_pet_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_PET_MAX_POWER,
             flag_status: None,
@@ -1281,13 +1281,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_MAX_POWER(&mut self, flag_pet_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_POWER) -> Self {
+    pub fn set_FLAG_PET_MAX_POWER(&mut self, flag_pet_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_MAX_POWER;
         self.flag_pet_max_power = Some(flag_pet_max_power);
         self.clone()
     }
 
-    pub const fn get_FLAG_PET_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_POWER> {
+    pub const fn get_FLAG_PET_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower> {
         self.flag_pet_max_power.as_ref()
     }
 
@@ -1297,7 +1297,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_FLAG_PET_AURAS(flag_pet_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_AURAS) -> Self {
+    pub const fn new_FLAG_PET_AURAS(flag_pet_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras) -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_PET_AURAS,
             flag_status: None,
@@ -1321,13 +1321,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_AURAS(&mut self, flag_pet_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_AURAS) -> Self {
+    pub fn set_FLAG_PET_AURAS(&mut self, flag_pet_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_AURAS;
         self.flag_pet_auras = Some(flag_pet_auras);
         self.clone()
     }
 
-    pub const fn get_FLAG_PET_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_AURAS> {
+    pub const fn get_FLAG_PET_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras> {
         self.flag_pet_auras.as_ref()
     }
 
@@ -1551,100 +1551,100 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_STATUS {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus {
     pub status: GroupMemberOnlineStatus,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_STATUS {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus {
     pub(crate) fn size(&self) -> usize {
         1 // status: GroupMemberOnlineStatus
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_HP {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp {
     pub current_health: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_HP {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp {
     pub(crate) fn size(&self) -> usize {
         2 // current_health: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_HP {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp {
     pub max_health: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_HP {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp {
     pub(crate) fn size(&self) -> usize {
         2 // max_health: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POWER_TYPE {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType {
     pub power: Power,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POWER_TYPE {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType {
     pub(crate) fn size(&self) -> usize {
         1 // power: Power
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_POWER {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower {
     pub current_power: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_CUR_POWER {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower {
     pub(crate) fn size(&self) -> usize {
         2 // current_power: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_POWER {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower {
     pub max_power: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_MAX_POWER {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower {
     pub(crate) fn size(&self) -> usize {
         2 // max_power: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_LEVEL {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel {
     pub level: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_LEVEL {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel {
     pub(crate) fn size(&self) -> usize {
         2 // level: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_ZONE {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone {
     pub area: Area,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_ZONE {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone {
     pub(crate) fn size(&self) -> usize {
         4 // area: Area
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POSITION {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition {
     pub position_x: u16,
     pub position_y: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POSITION {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition {
     pub(crate) fn size(&self) -> usize {
         2 // position_x: u16
         + 2 // position_y: u16
@@ -1652,99 +1652,99 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_POSITION {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_AURAS {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras {
     pub auras: AuraMask,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_AURAS {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras {
     pub(crate) fn size(&self) -> usize {
         self.auras.size() // auras: AuraMask
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_NAME {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName {
     pub pet_name: String,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_NAME {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName {
     pub(crate) fn size(&self) -> usize {
         self.pet_name.len() + 1 // pet_name: CString
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MODEL_ID {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId {
     pub pet_display_id: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MODEL_ID {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId {
     pub(crate) fn size(&self) -> usize {
         2 // pet_display_id: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_HP {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp {
     pub pet_current_health: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_HP {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp {
     pub(crate) fn size(&self) -> usize {
         2 // pet_current_health: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_HP {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp {
     pub pet_max_health: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_HP {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp {
     pub(crate) fn size(&self) -> usize {
         2 // pet_max_health: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_POWER_TYPE {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType {
     pub pet_power_type: Power,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_POWER_TYPE {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType {
     pub(crate) fn size(&self) -> usize {
         1 // pet_power_type: Power
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_POWER {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower {
     pub pet_current_power: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_CUR_POWER {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower {
     pub(crate) fn size(&self) -> usize {
         2 // pet_current_power: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_POWER {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower {
     pub pet_max_power: u16,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_MAX_POWER {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower {
     pub(crate) fn size(&self) -> usize {
         2 // pet_max_power: u16
     }
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_AURAS {
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras {
     pub pet_auras: AuraMask,
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FLAG_PET_AURAS {
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras {
     pub(crate) fn size(&self) -> usize {
         self.pet_auras.size() // pet_auras: AuraMask
     }

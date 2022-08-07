@@ -48,7 +48,7 @@ fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
                 s.wln(format!(
                     "{variable_name}: Option<{ty_name}>,",
                     variable_name = enumerator.name().to_lowercase(),
-                    ty_name = get_new_flag_type_name(rd.ty_name(), enumerator.name()),
+                    ty_name = get_new_flag_type_name(rd.ty_name(), enumerator.rust_name()),
                 ));
             }
         }
@@ -132,7 +132,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 }
             });
         } else {
-            let new_ty = get_new_flag_type_name(rd.ty_name(), enumerator.name());
+            let new_ty = get_new_flag_type_name(rd.ty_name(), enumerator.rust_name());
             s.funcn_pub_const(
                 format!(
                     "new_{upper_name}({lower_name}: {new_ty})",
@@ -267,7 +267,7 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
             continue;
         }
 
-        let new_type_name = get_new_flag_type_name(rd.ty_name(), enumerator.name());
+        let new_type_name = get_new_flag_type_name(rd.ty_name(), enumerator.rust_name());
         s.wln("#[derive(Debug, PartialEq, Clone)]");
         s.new_struct(&new_type_name, |s| {
             for m in enumerator.members_in_struct() {

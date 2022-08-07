@@ -586,7 +586,7 @@ fn print_read_if_statement_flag(
 
     let new_ty_name = get_new_flag_type_name(
         &get_new_type_name(e.name(), &statement.original_ty().rust_str()),
-        &statement.flag_get_enumerator(),
+        &statement.flag_get_enumerator_rust_name(),
     );
 
     if statement.else_ifs().is_empty() {

@@ -149,7 +149,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             let mut pin_hash = [0_u8; 20];
             r.read_exact(&mut pin_hash)?;
 
-            Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+            Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                 pin_hash,
                 pin_salt,
             })
@@ -174,7 +174,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // unknown4: u64
             let unknown4 = crate::util::read_u64_le(r)?;
 
-            Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+            Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
                 unknown0,
                 unknown1,
                 unknown2,
@@ -190,7 +190,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // unknown5: u8
             let unknown5 = crate::util::read_u8_le(r)?;
 
-            Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR {
+            Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
                 unknown5,
             })
         }
@@ -266,7 +266,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 let mut pin_hash = [0_u8; 20];
                 r.read_exact(&mut pin_hash).await?;
 
-                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash,
                     pin_salt,
                 })
@@ -291,7 +291,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 // unknown4: u64
                 let unknown4 = crate::util::tokio_read_u64_le(r).await?;
 
-                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
                     unknown0,
                     unknown1,
                     unknown2,
@@ -307,7 +307,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 // unknown5: u8
                 let unknown5 = crate::util::tokio_read_u8_le(r).await?;
 
-                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR {
+                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
                     unknown5,
                 })
             }
@@ -397,7 +397,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 let mut pin_hash = [0_u8; 20];
                 r.read_exact(&mut pin_hash).await?;
 
-                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash,
                     pin_salt,
                 })
@@ -422,7 +422,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 // unknown4: u64
                 let unknown4 = crate::util::astd_read_u64_le(r).await?;
 
-                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
                     unknown0,
                     unknown1,
                     unknown2,
@@ -438,7 +438,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 // unknown5: u8
                 let unknown5 = crate::util::astd_read_u8_le(r).await?;
 
-                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR {
+                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
                     unknown5,
                 })
             }
@@ -499,9 +499,9 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     inner: u8,
-    pin: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN>,
-    unknown0: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0>,
-    authenticator: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR>,
+    pin: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin>,
+    unknown0: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0>,
+    authenticator: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator>,
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
@@ -521,7 +521,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         && self.authenticator.is_none()
     }
 
-    pub const fn new_PIN(pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN) -> Self {
+    pub const fn new_PIN(pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin) -> Self {
         Self {
             inner: SecurityFlag::PIN,
             pin: Some(pin),
@@ -530,13 +530,13 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         }
     }
 
-    pub fn set_PIN(&mut self, pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN) -> Self {
+    pub fn set_PIN(&mut self, pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin) -> Self {
         self.inner |= SecurityFlag::PIN;
         self.pin = Some(pin);
         self.clone()
     }
 
-    pub const fn get_PIN(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN> {
+    pub const fn get_PIN(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin> {
         self.pin.as_ref()
     }
 
@@ -546,7 +546,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         self
     }
 
-    pub const fn new_UNKNOWN0(unknown0: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0) -> Self {
+    pub const fn new_UNKNOWN0(unknown0: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0) -> Self {
         Self {
             inner: SecurityFlag::UNKNOWN0,
             pin: None,
@@ -555,13 +555,13 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         }
     }
 
-    pub fn set_UNKNOWN0(&mut self, unknown0: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0) -> Self {
+    pub fn set_UNKNOWN0(&mut self, unknown0: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0) -> Self {
         self.inner |= SecurityFlag::UNKNOWN0;
         self.unknown0 = Some(unknown0);
         self.clone()
     }
 
-    pub const fn get_UNKNOWN0(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0> {
+    pub const fn get_UNKNOWN0(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0> {
         self.unknown0.as_ref()
     }
 
@@ -571,7 +571,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         self
     }
 
-    pub const fn new_AUTHENTICATOR(authenticator: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR) -> Self {
+    pub const fn new_AUTHENTICATOR(authenticator: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator) -> Self {
         Self {
             inner: SecurityFlag::AUTHENTICATOR,
             pin: None,
@@ -580,13 +580,13 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         }
     }
 
-    pub fn set_AUTHENTICATOR(&mut self, authenticator: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR) -> Self {
+    pub fn set_AUTHENTICATOR(&mut self, authenticator: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator) -> Self {
         self.inner |= SecurityFlag::AUTHENTICATOR;
         self.authenticator = Some(authenticator);
         self.clone()
     }
 
-    pub const fn get_AUTHENTICATOR(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR> {
+    pub const fn get_AUTHENTICATOR(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator> {
         self.authenticator.as_ref()
     }
 
@@ -629,12 +629,12 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
     pub pin_hash: [u8; 20],
     pub pin_salt: [u8; 16],
 }
 
-impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
     pub(crate) fn size(&self) -> usize {
         20 * core::mem::size_of::<u8>() // pin_hash: u8[20]
         + 16 * core::mem::size_of::<u8>() // pin_salt: u8[16]
@@ -642,7 +642,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
     pub unknown0: u8,
     pub unknown1: u8,
     pub unknown2: u8,
@@ -650,7 +650,7 @@ pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
     pub unknown4: u64,
 }
 
-impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
     pub(crate) fn size(&self) -> usize {
         1 // unknown0: u8
         + 1 // unknown1: u8
@@ -661,11 +661,11 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR {
+pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
     pub unknown5: u8,
 }
 
-impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR {
+impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
     pub(crate) fn size(&self) -> usize {
         1 // unknown5: u8
     }
@@ -1166,7 +1166,7 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                          0x12, 0x13, ],
@@ -1212,7 +1212,7 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                          0x12, 0x13, ],
@@ -1258,7 +1258,7 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                          0x12, 0x13, ],
@@ -1316,14 +1316,14 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                          0x12, 0x13, ],
                     pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
                     unknown0: 0x10,
                     unknown1: 0x20,
                     unknown2: 0x30,
@@ -1369,14 +1369,14 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                          0x12, 0x13, ],
                     pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
                     unknown0: 0x10,
                     unknown1: 0x20,
                     unknown2: 0x30,
@@ -1422,14 +1422,14 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                          0x12, 0x13, ],
                     pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
                     unknown0: 0x10,
                     unknown1: 0x20,
                     unknown2: 0x30,
@@ -1487,21 +1487,21 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                          0x12, 0x13, ],
                     pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
                     unknown0: 0x10,
                     unknown1: 0x20,
                     unknown2: 0x30,
                     unknown3: 0x40,
                     unknown4: 0xDEADBEEF,
                 })
-                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR {
+                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
                     unknown5: 0x1,
                 })
                 ,
@@ -1543,21 +1543,21 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                          0x12, 0x13, ],
                     pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
                     unknown0: 0x10,
                     unknown1: 0x20,
                     unknown2: 0x30,
                     unknown3: 0x40,
                     unknown4: 0xDEADBEEF,
                 })
-                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR {
+                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
                     unknown5: 0x1,
                 })
                 ,
@@ -1599,21 +1599,21 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_PIN {
+                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                          0x12, 0x13, ],
                     pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_UNKNOWN0 {
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
                     unknown0: 0x10,
                     unknown1: 0x20,
                     unknown2: 0x30,
                     unknown3: 0x40,
                     unknown4: 0xDEADBEEF,
                 })
-                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_AUTHENTICATOR {
+                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
                     unknown5: 0x1,
                 })
                 ,
