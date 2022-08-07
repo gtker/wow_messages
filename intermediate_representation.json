@@ -23842,7 +23842,7 @@
           "tags": {}
         },
         {
-          "name": "OSX",
+          "name": "MAC_OS_X",
           "value": {
             "int": 5198680,
             "original": "\"\\0OSX\""
@@ -24635,7 +24635,7 @@
           "tags": {}
         },
         {
-          "name": "PPC",
+          "name": "POWER_PC",
           "value": {
             "int": 5263427,
             "original": "\"\\0PPC\""

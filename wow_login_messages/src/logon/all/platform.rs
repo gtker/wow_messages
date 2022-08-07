@@ -4,7 +4,7 @@ use std::convert::{TryFrom, TryInto};
 /// ```text
 /// enum Platform : u32 {
 ///     X86 = "\0x86";
-///     PPC = "\0PPC";
+///     POWER_PC = "\0PPC";
 ///     OTHER = self.value
 /// }
 
@@ -12,7 +12,7 @@ use std::convert::{TryFrom, TryInto};
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Platform {
     X86,
-    Ppc,
+    PowerPc,
     Other(u32),
 }
 
@@ -20,7 +20,7 @@ impl Platform {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::X86 => 0x783836,
-            Self::Ppc => 0x505043,
+            Self::PowerPc => 0x505043,
             Self::Other(v) => *v,
         }
     }
@@ -37,7 +37,7 @@ impl std::fmt::Display for Platform {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::X86 => f.write_str("X86"),
-            Self::Ppc => f.write_str("Ppc"),
+            Self::PowerPc => f.write_str("PowerPc"),
             Self::Other(v) => f.write_fmt(format_args!("Other({})", v)),
         }
     }
@@ -47,7 +47,7 @@ impl From<u32> for Platform {
     fn from(value: u32) -> Self {
         match value {
             7878710 => Self::X86,
-            5263427 => Self::Ppc,
+            5263427 => Self::PowerPc,
             v => Self::Other(v)
         }
     }
