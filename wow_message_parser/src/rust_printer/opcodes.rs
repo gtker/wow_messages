@@ -148,7 +148,12 @@ fn world_common_impls_read_opcodes(
                           impl_trait = ty,
                           enum_name = get_enumerator_name(e.name())));
         }
-        s.wln(format!("_ => Err({error_ty}::Opcode{{ opcode: opcode.into(), size: body_size }}),", error_ty = error_ty));
+        let opcode_text = if size == "u32" {
+            "opcode"
+        } else {
+            "opcode: opcode.into()"  
+        };
+        s.wln(format!("_ => Err({error_ty}::Opcode{{ {opcode_text}, size: body_size }}),", error_ty = error_ty, opcode_text = opcode_text));
 
         s.closing_curly(); // match opcode
     });
