@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GroupType {
-    NORMAL,
-    RAID,
+    Normal,
+    Raid,
 }
 
 impl GroupType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NORMAL => 0x0,
-            Self::RAID => 0x1,
+            Self::Normal => 0x0,
+            Self::Raid => 0x1,
         }
     }
 
@@ -26,15 +26,15 @@ impl GroupType {
 
 impl Default for GroupType {
     fn default() -> Self {
-        Self::NORMAL
+        Self::Normal
     }
 }
 
 impl std::fmt::Display for GroupType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::NORMAL => f.write_str("NORMAL"),
-            Self::RAID => f.write_str("RAID"),
+            Self::Normal => f.write_str("Normal"),
+            Self::Raid => f.write_str("Raid"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u8> for GroupType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::NORMAL),
-            1 => Ok(Self::RAID),
+            0 => Ok(Self::Normal),
+            1 => Ok(Self::Raid),
             v => Err(crate::errors::EnumError::new("GroupType", v as u32),)
         }
     }

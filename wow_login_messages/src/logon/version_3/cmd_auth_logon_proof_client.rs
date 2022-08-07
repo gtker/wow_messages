@@ -62,8 +62,8 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         w.write_all(&(self.security_flag.as_int() as u8).to_le_bytes())?;
 
         match &self.security_flag {
-            CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE => {}
-            CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::PIN {
+            CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None => {}
+            CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
                 pin_hash,
                 pin_salt,
             } => {
@@ -113,8 +113,8 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
         let security_flag: SecurityFlag = crate::util::read_u8_le(r)?.try_into()?;
 
         let security_flag_if = match security_flag {
-            SecurityFlag::NONE => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
-            SecurityFlag::PIN => {
+            SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
+            SecurityFlag::Pin => {
                 // pin_salt: u8[16]
                 let mut pin_salt = [0_u8; 16];
                 r.read_exact(&mut pin_salt)?;
@@ -123,7 +123,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 let mut pin_hash = [0_u8; 20];
                 r.read_exact(&mut pin_hash)?;
 
-                CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::PIN {
+                CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
                     pin_hash,
                     pin_salt,
                 }
@@ -183,8 +183,8 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             let security_flag: SecurityFlag = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let security_flag_if = match security_flag {
-                SecurityFlag::NONE => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
-                SecurityFlag::PIN => {
+                SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
+                SecurityFlag::Pin => {
                     // pin_salt: u8[16]
                     let mut pin_salt = [0_u8; 16];
                     r.read_exact(&mut pin_salt).await?;
@@ -193,7 +193,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                     let mut pin_hash = [0_u8; 20];
                     r.read_exact(&mut pin_hash).await?;
 
-                    CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::PIN {
+                    CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
                         pin_hash,
                         pin_salt,
                     }
@@ -267,8 +267,8 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             let security_flag: SecurityFlag = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let security_flag_if = match security_flag {
-                SecurityFlag::NONE => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
-                SecurityFlag::PIN => {
+                SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
+                SecurityFlag::Pin => {
                     // pin_salt: u8[16]
                     let mut pin_salt = [0_u8; 16];
                     r.read_exact(&mut pin_salt).await?;
@@ -277,7 +277,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                     let mut pin_hash = [0_u8; 20];
                     r.read_exact(&mut pin_hash).await?;
 
-                    CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::PIN {
+                    CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
                         pin_hash,
                         pin_salt,
                     }
@@ -329,8 +329,8 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
-    NONE,
-    PIN {
+    None,
+    Pin {
         pin_hash: [u8; 20],
         pin_salt: [u8; 16],
     },
@@ -339,15 +339,15 @@ pub enum CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
 impl Default for CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::NONE
+        Self::None
     }
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NONE => 0,
-            Self::PIN { .. } => 1,
+            Self::None => 0,
+            Self::Pin { .. } => 1,
         }
     }
 
@@ -356,10 +356,10 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NONE => {
+            Self::None => {
                 1
             }
-            Self::PIN {
+            Self::Pin {
                 pin_hash,
                 pin_salt,
             } => {
@@ -424,7 +424,7 @@ mod test {
                          0x13, 0x14, ],
                 },
             ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
         };
 
         let header_size = 1;
@@ -479,7 +479,7 @@ mod test {
                          0x13, 0x14, ],
                 },
             ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
         };
 
         let header_size = 1;
@@ -534,7 +534,7 @@ mod test {
                          0x13, 0x14, ],
                 },
             ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
         };
 
         let header_size = 1;
@@ -591,7 +591,7 @@ mod test {
                          0x12, 0x13, ],
                 },
             ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
         };
 
         let header_size = 1;
@@ -638,7 +638,7 @@ mod test {
                          0x12, 0x13, ],
                 },
             ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
         };
 
         let header_size = 1;
@@ -685,7 +685,7 @@ mod test {
                          0x12, 0x13, ],
                 },
             ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
         };
 
         let header_size = 1;
@@ -731,7 +731,7 @@ mod test {
             crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
         };
 
         let header_size = 1;
@@ -769,7 +769,7 @@ mod test {
             crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
         };
 
         let header_size = 1;
@@ -807,7 +807,7 @@ mod test {
             crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
         };
 
         let header_size = 1;
@@ -856,7 +856,7 @@ mod test {
             crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::PIN {
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
                 pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
                      0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
                      0x13, ],
@@ -900,7 +900,7 @@ mod test {
             crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::PIN {
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
                 pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
                      0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
                      0x13, ],
@@ -944,7 +944,7 @@ mod test {
             crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::PIN {
+            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
                 pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
                      0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
                      0x13, ],

@@ -12,21 +12,21 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TimerType {
-    FATIGUE,
-    BREATH,
-    FEIGNDEATH,
+    Fatigue,
+    Breath,
+    Feigndeath,
     /// Might be a mangos only thing.
     ///
-    ENVIRONMENTAL,
+    Environmental,
 }
 
 impl TimerType {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::FATIGUE => 0x0,
-            Self::BREATH => 0x1,
-            Self::FEIGNDEATH => 0x2,
-            Self::ENVIRONMENTAL => 0x3,
+            Self::Fatigue => 0x0,
+            Self::Breath => 0x1,
+            Self::Feigndeath => 0x2,
+            Self::Environmental => 0x3,
         }
     }
 
@@ -34,17 +34,17 @@ impl TimerType {
 
 impl Default for TimerType {
     fn default() -> Self {
-        Self::FATIGUE
+        Self::Fatigue
     }
 }
 
 impl std::fmt::Display for TimerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::FATIGUE => f.write_str("FATIGUE"),
-            Self::BREATH => f.write_str("BREATH"),
-            Self::FEIGNDEATH => f.write_str("FEIGNDEATH"),
-            Self::ENVIRONMENTAL => f.write_str("ENVIRONMENTAL"),
+            Self::Fatigue => f.write_str("Fatigue"),
+            Self::Breath => f.write_str("Breath"),
+            Self::Feigndeath => f.write_str("Feigndeath"),
+            Self::Environmental => f.write_str("Environmental"),
         }
     }
 }
@@ -53,10 +53,10 @@ impl TryFrom<u32> for TimerType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::FATIGUE),
-            1 => Ok(Self::BREATH),
-            2 => Ok(Self::FEIGNDEATH),
-            3 => Ok(Self::ENVIRONMENTAL),
+            0 => Ok(Self::Fatigue),
+            1 => Ok(Self::Breath),
+            2 => Ok(Self::Feigndeath),
+            3 => Ok(Self::Environmental),
             v => Err(crate::errors::EnumError::new("TimerType", v as u32),)
         }
     }

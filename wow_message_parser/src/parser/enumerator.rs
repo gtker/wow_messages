@@ -3,13 +3,14 @@ use crate::file_info::FileInfo;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::IntegerType;
 use crate::parser::utility;
-use crate::rust_printer::DefinerType;
+use crate::rust_printer::{field_name_to_rust_name, DefinerType};
 use crate::ENUM_SELF_VALUE_FIELD;
 use std::collections::HashMap;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct DefinerField {
     name: String,
+    rust_name: String,
     value: DefinerValue,
     tags: Tags,
 }
@@ -22,6 +23,7 @@ impl DefinerField {
     pub fn key_value(name: &str, value: DefinerValue, tags: Tags) -> Self {
         Self {
             name: name.to_string(),
+            rust_name: field_name_to_rust_name(name),
             value,
             tags,
         }
@@ -29,6 +31,10 @@ impl DefinerField {
 
     pub fn name(&self) -> &str {
         &self.name
+    }
+
+    pub fn rust_name(&self) -> &str {
+        &self.rust_name
     }
 
     pub fn value(&self) -> &DefinerValue {
@@ -76,6 +82,7 @@ impl From<&str> for DefinerValue {
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct SelfValueDefinerField {
     name: String,
+    rust_name: String,
     tags: Tags,
 }
 
@@ -83,12 +90,17 @@ impl SelfValueDefinerField {
     pub fn new(name: &str, tags: Tags) -> Self {
         Self {
             name: name.to_string(),
+            rust_name: field_name_to_rust_name(name),
             tags,
         }
     }
 
     pub fn name(&self) -> &str {
         &self.name
+    }
+
+    pub fn rust_name(&self) -> &str {
+        &self.rust_name
     }
 
     pub fn tags(&self) -> &Tags {

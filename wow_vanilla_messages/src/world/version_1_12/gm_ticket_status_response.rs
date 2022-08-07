@@ -11,17 +11,17 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketStatusResponse {
-    UPDATED,
-    CLOSED,
-    SURVEY,
+    Updated,
+    Closed,
+    Survey,
 }
 
 impl GmTicketStatusResponse {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::UPDATED => 0x1,
-            Self::CLOSED => 0x2,
-            Self::SURVEY => 0x3,
+            Self::Updated => 0x1,
+            Self::Closed => 0x2,
+            Self::Survey => 0x3,
         }
     }
 
@@ -29,16 +29,16 @@ impl GmTicketStatusResponse {
 
 impl Default for GmTicketStatusResponse {
     fn default() -> Self {
-        Self::UPDATED
+        Self::Updated
     }
 }
 
 impl std::fmt::Display for GmTicketStatusResponse {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::UPDATED => f.write_str("UPDATED"),
-            Self::CLOSED => f.write_str("CLOSED"),
-            Self::SURVEY => f.write_str("SURVEY"),
+            Self::Updated => f.write_str("Updated"),
+            Self::Closed => f.write_str("Closed"),
+            Self::Survey => f.write_str("Survey"),
         }
     }
 }
@@ -47,9 +47,9 @@ impl TryFrom<u32> for GmTicketStatusResponse {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            1 => Ok(Self::UPDATED),
-            2 => Ok(Self::CLOSED),
-            3 => Ok(Self::SURVEY),
+            1 => Ok(Self::Updated),
+            2 => Ok(Self::Closed),
+            3 => Ok(Self::Survey),
             v => Err(crate::errors::EnumError::new("GmTicketStatusResponse", v as u32),)
         }
     }

@@ -20,35 +20,35 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SpellMissInfo {
-    NONE,
-    MISS,
-    RESIST,
-    DODGE,
-    PARRY,
-    BLOCK,
-    EVADE,
-    IMMUNE,
-    IMMUNE2,
-    DEFLECT,
-    ABSORB,
-    REFLECT,
+    None,
+    Miss,
+    Resist,
+    Dodge,
+    Parry,
+    Block,
+    Evade,
+    Immune,
+    Immune2,
+    Deflect,
+    Absorb,
+    Reflect,
 }
 
 impl SpellMissInfo {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::NONE => 0x0,
-            Self::MISS => 0x1,
-            Self::RESIST => 0x2,
-            Self::DODGE => 0x3,
-            Self::PARRY => 0x4,
-            Self::BLOCK => 0x5,
-            Self::EVADE => 0x6,
-            Self::IMMUNE => 0x7,
-            Self::IMMUNE2 => 0x8,
-            Self::DEFLECT => 0x9,
-            Self::ABSORB => 0xa,
-            Self::REFLECT => 0xb,
+            Self::None => 0x0,
+            Self::Miss => 0x1,
+            Self::Resist => 0x2,
+            Self::Dodge => 0x3,
+            Self::Parry => 0x4,
+            Self::Block => 0x5,
+            Self::Evade => 0x6,
+            Self::Immune => 0x7,
+            Self::Immune2 => 0x8,
+            Self::Deflect => 0x9,
+            Self::Absorb => 0xa,
+            Self::Reflect => 0xb,
         }
     }
 
@@ -56,25 +56,25 @@ impl SpellMissInfo {
 
 impl Default for SpellMissInfo {
     fn default() -> Self {
-        Self::NONE
+        Self::None
     }
 }
 
 impl std::fmt::Display for SpellMissInfo {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::NONE => f.write_str("NONE"),
-            Self::MISS => f.write_str("MISS"),
-            Self::RESIST => f.write_str("RESIST"),
-            Self::DODGE => f.write_str("DODGE"),
-            Self::PARRY => f.write_str("PARRY"),
-            Self::BLOCK => f.write_str("BLOCK"),
-            Self::EVADE => f.write_str("EVADE"),
-            Self::IMMUNE => f.write_str("IMMUNE"),
-            Self::IMMUNE2 => f.write_str("IMMUNE2"),
-            Self::DEFLECT => f.write_str("DEFLECT"),
-            Self::ABSORB => f.write_str("ABSORB"),
-            Self::REFLECT => f.write_str("REFLECT"),
+            Self::None => f.write_str("None"),
+            Self::Miss => f.write_str("Miss"),
+            Self::Resist => f.write_str("Resist"),
+            Self::Dodge => f.write_str("Dodge"),
+            Self::Parry => f.write_str("Parry"),
+            Self::Block => f.write_str("Block"),
+            Self::Evade => f.write_str("Evade"),
+            Self::Immune => f.write_str("Immune"),
+            Self::Immune2 => f.write_str("Immune2"),
+            Self::Deflect => f.write_str("Deflect"),
+            Self::Absorb => f.write_str("Absorb"),
+            Self::Reflect => f.write_str("Reflect"),
         }
     }
 }
@@ -83,18 +83,18 @@ impl TryFrom<u32> for SpellMissInfo {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::NONE),
-            1 => Ok(Self::MISS),
-            2 => Ok(Self::RESIST),
-            3 => Ok(Self::DODGE),
-            4 => Ok(Self::PARRY),
-            5 => Ok(Self::BLOCK),
-            6 => Ok(Self::EVADE),
-            7 => Ok(Self::IMMUNE),
-            8 => Ok(Self::IMMUNE2),
-            9 => Ok(Self::DEFLECT),
-            10 => Ok(Self::ABSORB),
-            11 => Ok(Self::REFLECT),
+            0 => Ok(Self::None),
+            1 => Ok(Self::Miss),
+            2 => Ok(Self::Resist),
+            3 => Ok(Self::Dodge),
+            4 => Ok(Self::Parry),
+            5 => Ok(Self::Block),
+            6 => Ok(Self::Evade),
+            7 => Ok(Self::Immune),
+            8 => Ok(Self::Immune2),
+            9 => Ok(Self::Deflect),
+            10 => Ok(Self::Absorb),
+            11 => Ok(Self::Reflect),
             v => Err(crate::errors::EnumError::new("SpellMissInfo", v as u32),)
         }
     }

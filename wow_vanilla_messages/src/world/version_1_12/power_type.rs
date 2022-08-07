@@ -16,33 +16,33 @@ use std::convert::{TryFrom, TryInto};
 pub enum PowerType {
     /// UNIT_FIELD_POWER1
     ///
-    MANA,
+    Mana,
     /// UNIT_FIELD_POWER2
     ///
-    RAGE,
+    Rage,
     /// UNIT_FIELD_POWER3
     ///
-    FOCUS,
+    Focus,
     /// UNIT_FIELD_POWER4
     ///
-    ENERGY,
+    Energy,
     /// UNIT_FIELD_POWER5
     ///
-    HAPPINESS,
+    Happiness,
     /// (-2 as signed value)
     ///
-    HEALTH,
+    Health,
 }
 
 impl PowerType {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::MANA => 0x0,
-            Self::RAGE => 0x1,
-            Self::FOCUS => 0x2,
-            Self::ENERGY => 0x3,
-            Self::HAPPINESS => 0x4,
-            Self::HEALTH => 0xfffffffe,
+            Self::Mana => 0x0,
+            Self::Rage => 0x1,
+            Self::Focus => 0x2,
+            Self::Energy => 0x3,
+            Self::Happiness => 0x4,
+            Self::Health => 0xfffffffe,
         }
     }
 
@@ -50,19 +50,19 @@ impl PowerType {
 
 impl Default for PowerType {
     fn default() -> Self {
-        Self::MANA
+        Self::Mana
     }
 }
 
 impl std::fmt::Display for PowerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::MANA => f.write_str("MANA"),
-            Self::RAGE => f.write_str("RAGE"),
-            Self::FOCUS => f.write_str("FOCUS"),
-            Self::ENERGY => f.write_str("ENERGY"),
-            Self::HAPPINESS => f.write_str("HAPPINESS"),
-            Self::HEALTH => f.write_str("HEALTH"),
+            Self::Mana => f.write_str("Mana"),
+            Self::Rage => f.write_str("Rage"),
+            Self::Focus => f.write_str("Focus"),
+            Self::Energy => f.write_str("Energy"),
+            Self::Happiness => f.write_str("Happiness"),
+            Self::Health => f.write_str("Health"),
         }
     }
 }
@@ -71,12 +71,12 @@ impl TryFrom<u32> for PowerType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::MANA),
-            1 => Ok(Self::RAGE),
-            2 => Ok(Self::FOCUS),
-            3 => Ok(Self::ENERGY),
-            4 => Ok(Self::HAPPINESS),
-            4294967294 => Ok(Self::HEALTH),
+            0 => Ok(Self::Mana),
+            1 => Ok(Self::Rage),
+            2 => Ok(Self::Focus),
+            3 => Ok(Self::Energy),
+            4 => Ok(Self::Happiness),
+            4294967294 => Ok(Self::Health),
             v => Err(crate::errors::EnumError::new("PowerType", v as u32),)
         }
     }

@@ -70,13 +70,17 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
         for field in e.fields() {
             print_docc_description_and_comment(s, field.tags(), o, e.tags());
 
-            s.wln(format!("{},", field.name()));
+            s.wln(format!("{},", field.rust_name()));
         }
 
         match e.self_value() {
             None => {}
             Some(self_value) => {
-                s.wln(format!("{}({}),", self_value.name(), e.ty().rust_str()));
+                s.wln(format!(
+                    "{}({}),",
+                    self_value.rust_name(),
+                    e.ty().rust_str()
+                ));
             }
         }
     });
@@ -103,14 +107,14 @@ fn as_type(s: &mut Writer, e: &Definer) {
             for field in e.fields() {
                 s.wln(format!(
                     "Self::{} => 0x{:x},",
-                    field.name(),
+                    field.rust_name(),
                     field.value().int()
                 ));
             }
             match e.self_value() {
                 None => {}
                 Some(self_value) => {
-                    s.wln(format!("Self::{}(v) => *v,", self_value.name()));
+                    s.wln(format!("Self::{}(v) => *v,", self_value.rust_name()));
                 }
             }
         });
@@ -120,7 +124,7 @@ fn as_type(s: &mut Writer, e: &Definer) {
 fn print_default(s: &mut Writer, e: &Definer) {
     s.impl_for("Default", e.name(), |s| {
         s.body("fn default() -> Self", |s| {
-            s.wln(format!("Self::{}", e.fields()[0].name()));
+            s.wln(format!("Self::{}", e.fields()[0].rust_name()));
         });
     });
 }
@@ -133,12 +137,12 @@ fn print_display(s: &mut Writer, e: &Definer) {
                 s.body("match self", |s| {
                     for field in e.fields() {
                         let display = match field.tags().get_ref(DISPLAY_STR) {
-                            None => field.name(),
+                            None => field.rust_name(),
                             Some(v) => v,
                         };
                         s.wln(format!(
                             r#"Self::{name} => f.write_str("{display}"),"#,
-                            name = field.name(),
+                            name = field.rust_name(),
                             display = display,
                         ));
                     }
@@ -148,7 +152,7 @@ fn print_display(s: &mut Writer, e: &Definer) {
                         Some(self_value) => {
                             s.wln(format!(
                                 r#"Self::{name}(v) => f.write_fmt(format_args!("{name}({{}})", v)),"#,
-                                name = self_value.name(),
+                                name = self_value.rust_name(),
                             ));
                         }
                     }
@@ -181,7 +185,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                         s.wln(format!(
                             "{} => Ok(Self::{}),",
                             field.value().int(),
-                            field.name()
+                            field.rust_name()
                         ));
                     }
 
@@ -205,13 +209,13 @@ fn print_from(s: &mut Writer, e: &Definer) {
                         s.wln(format!(
                             "{} => Self::{},",
                             field.value().int(),
-                            field.name()
+                            field.rust_name()
                         ));
                     }
 
                     s.wln(format!(
                         "v => Self::{}(v)",
-                        e.self_value().as_ref().unwrap().name()
+                        e.self_value().as_ref().unwrap().rust_name()
                     ));
                 });
             },
@@ -225,7 +229,7 @@ fn common_as_type(s: &mut Writer, e: &Definer) {
             for field in e.fields() {
                 s.wln(format!(
                     "Self::{} => 0x{:x},",
-                    field.name(),
+                    field.rust_name(),
                     field.value().int()
                 ));
             }

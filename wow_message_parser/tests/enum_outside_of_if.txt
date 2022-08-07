@@ -30,14 +30,14 @@ impl EnumOutsideOfIf {
         w.write_all(&(self.n.as_int() as u8).to_le_bytes())?;
 
         match &self.t {
-            EnumOutsideOfIf_TEnum::ZERO => {}
-            EnumOutsideOfIf_TEnum::ONE => {}
-            EnumOutsideOfIf_TEnum::TWO => {}
-            EnumOutsideOfIf_TEnum::THREE => {}
-            EnumOutsideOfIf_TEnum::FOUR => {}
-            EnumOutsideOfIf_TEnum::FIVE => {}
-            EnumOutsideOfIf_TEnum::SIX => {}
-            EnumOutsideOfIf_TEnum::REST => {}
+            EnumOutsideOfIf_TEnum::Zero => {}
+            EnumOutsideOfIf_TEnum::One => {}
+            EnumOutsideOfIf_TEnum::Two => {}
+            EnumOutsideOfIf_TEnum::Three => {}
+            EnumOutsideOfIf_TEnum::Four => {}
+            EnumOutsideOfIf_TEnum::Five => {}
+            EnumOutsideOfIf_TEnum::Six => {}
+            EnumOutsideOfIf_TEnum::Rest => {}
         }
 
         Ok(())
@@ -53,14 +53,14 @@ impl EnumOutsideOfIf {
         let n: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         let t_if = match t {
-            TEnum::ZERO => EnumOutsideOfIf_TEnum::ZERO,
-            TEnum::ONE => EnumOutsideOfIf_TEnum::ONE,
-            TEnum::TWO => EnumOutsideOfIf_TEnum::TWO,
-            TEnum::THREE => EnumOutsideOfIf_TEnum::THREE,
-            TEnum::FOUR => EnumOutsideOfIf_TEnum::FOUR,
-            TEnum::FIVE => EnumOutsideOfIf_TEnum::FIVE,
-            TEnum::SIX => EnumOutsideOfIf_TEnum::SIX,
-            TEnum::REST => EnumOutsideOfIf_TEnum::REST,
+            TEnum::Zero => EnumOutsideOfIf_TEnum::Zero,
+            TEnum::One => EnumOutsideOfIf_TEnum::One,
+            TEnum::Two => EnumOutsideOfIf_TEnum::Two,
+            TEnum::Three => EnumOutsideOfIf_TEnum::Three,
+            TEnum::Four => EnumOutsideOfIf_TEnum::Four,
+            TEnum::Five => EnumOutsideOfIf_TEnum::Five,
+            TEnum::Six => EnumOutsideOfIf_TEnum::Six,
+            TEnum::Rest => EnumOutsideOfIf_TEnum::Rest,
         };
 
         Ok(Self {
@@ -80,34 +80,34 @@ impl EnumOutsideOfIf {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum EnumOutsideOfIf_TEnum {
-    ZERO,
-    ONE,
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
-    REST,
+    Zero,
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Rest,
 }
 
 impl Default for EnumOutsideOfIf_TEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::ZERO
+        Self::Zero
     }
 }
 
 impl EnumOutsideOfIf_TEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::ZERO => 0,
-            Self::ONE => 1,
-            Self::TWO => 2,
-            Self::THREE => 3,
-            Self::FOUR => 4,
-            Self::FIVE => 5,
-            Self::SIX => 6,
-            Self::REST => 7,
+            Self::Zero => 0,
+            Self::One => 1,
+            Self::Two => 2,
+            Self::Three => 3,
+            Self::Four => 4,
+            Self::Five => 5,
+            Self::Six => 6,
+            Self::Rest => 7,
         }
     }
 
@@ -116,28 +116,28 @@ impl EnumOutsideOfIf_TEnum {
 impl EnumOutsideOfIf_TEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::ZERO => {
+            Self::Zero => {
                 1
             }
-            Self::ONE => {
+            Self::One => {
                 1
             }
-            Self::TWO => {
+            Self::Two => {
                 1
             }
-            Self::THREE => {
+            Self::Three => {
                 1
             }
-            Self::FOUR => {
+            Self::Four => {
                 1
             }
-            Self::FIVE => {
+            Self::Five => {
                 1
             }
-            Self::SIX => {
+            Self::Six => {
                 1
             }
-            Self::REST => {
+            Self::Rest => {
                 1
             }
         }
@@ -146,16 +146,16 @@ impl EnumOutsideOfIf_TEnum {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum EnumOutsideOfIf_NestedEnum {
-    NESTED {
+    Nested {
         nested: u8,
     },
-    NOT_NESTED,
+    NotNested,
 }
 
 impl Default for EnumOutsideOfIf_NestedEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::NESTED {
+        Self::Nested {
             nested: Default::default(),
         }
     }
@@ -164,8 +164,8 @@ impl Default for EnumOutsideOfIf_NestedEnum {
 impl EnumOutsideOfIf_NestedEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NESTED { .. } => 0,
-            Self::NOT_NESTED => 1,
+            Self::Nested { .. } => 0,
+            Self::NotNested => 1,
         }
     }
 
@@ -174,13 +174,13 @@ impl EnumOutsideOfIf_NestedEnum {
 impl EnumOutsideOfIf_NestedEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NESTED {
+            Self::Nested {
                 nested,
             } => {
                 1
                 + 1 // nested: u8
             }
-            Self::NOT_NESTED => {
+            Self::NotNested => {
                 1
             }
         }

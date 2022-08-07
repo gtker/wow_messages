@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidGroupError {
-    REQUIRED,
-    FULL,
+    Required,
+    Full,
 }
 
 impl RaidGroupError {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::REQUIRED => 0x1,
-            Self::FULL => 0x2,
+            Self::Required => 0x1,
+            Self::Full => 0x2,
         }
     }
 
@@ -26,15 +26,15 @@ impl RaidGroupError {
 
 impl Default for RaidGroupError {
     fn default() -> Self {
-        Self::REQUIRED
+        Self::Required
     }
 }
 
 impl std::fmt::Display for RaidGroupError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::REQUIRED => f.write_str("REQUIRED"),
-            Self::FULL => f.write_str("FULL"),
+            Self::Required => f.write_str("Required"),
+            Self::Full => f.write_str("Full"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u32> for RaidGroupError {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            1 => Ok(Self::REQUIRED),
-            2 => Ok(Self::FULL),
+            1 => Ok(Self::Required),
+            2 => Ok(Self::Full),
             v => Err(crate::errors::EnumError::new("RaidGroupError", v as u32),)
         }
     }

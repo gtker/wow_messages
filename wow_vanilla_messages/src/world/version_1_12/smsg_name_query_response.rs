@@ -132,9 +132,9 @@ mod test {
             guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from(""),
-            race: Race::HUMAN,
-            gender: Gender::MALE,
-            class: Class::WARRIOR,
+            race: Race::Human,
+            gender: Gender::Male,
+            class: Class::Warrior,
         };
 
         let header_size = 2 + 2;
@@ -167,9 +167,9 @@ mod test {
             guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from(""),
-            race: Race::HUMAN,
-            gender: Gender::MALE,
-            class: Class::WARRIOR,
+            race: Race::Human,
+            gender: Gender::Male,
+            class: Class::Warrior,
         };
 
         let header_size = 2 + 2;
@@ -202,9 +202,9 @@ mod test {
             guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from(""),
-            race: Race::HUMAN,
-            gender: Gender::MALE,
-            class: Class::WARRIOR,
+            race: Race::Human,
+            gender: Gender::Male,
+            class: Class::Warrior,
         };
 
         let header_size = 2 + 2;
@@ -241,9 +241,9 @@ mod test {
             guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from("A"),
-            race: Race::HUMAN,
-            gender: Gender::MALE,
-            class: Class::WARRIOR,
+            race: Race::Human,
+            gender: Gender::Male,
+            class: Class::Warrior,
         };
 
         let header_size = 2 + 2;
@@ -276,9 +276,9 @@ mod test {
             guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from("A"),
-            race: Race::HUMAN,
-            gender: Gender::MALE,
-            class: Class::WARRIOR,
+            race: Race::Human,
+            gender: Gender::Male,
+            class: Class::Warrior,
         };
 
         let header_size = 2 + 2;
@@ -311,9 +311,9 @@ mod test {
             guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from("A"),
-            race: Race::HUMAN,
-            gender: Gender::MALE,
-            class: Class::WARRIOR,
+            race: Race::Human,
+            gender: Gender::Male,
+            class: Class::Warrior,
         };
 
         let header_size = 2 + 2;

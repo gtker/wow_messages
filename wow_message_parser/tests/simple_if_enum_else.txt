@@ -25,21 +25,21 @@ impl SimpleIfEnumElse {
         w.write_all(&(self.enum.as_int() as u8).to_le_bytes())?;
 
         match &self.enum {
-            SimpleIfEnumElse_SimpleEnum::ZERO {
+            SimpleIfEnumElse_SimpleEnum::Zero {
                 basic,
             } => {
                 // basic: u8
                 w.write_all(&basic.to_le_bytes())?;
 
             }
-            SimpleIfEnumElse_SimpleEnum::ONE {
+            SimpleIfEnumElse_SimpleEnum::One {
                 other,
             } => {
                 // other: u16
                 w.write_all(&other.to_le_bytes())?;
 
             }
-            SimpleIfEnumElse_SimpleEnum::TWO {
+            SimpleIfEnumElse_SimpleEnum::Two {
                 other,
             } => {
                 // other: u16
@@ -58,27 +58,27 @@ impl SimpleIfEnumElse {
         let enum: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         let enum_if = match enum {
-            SimpleEnum::ZERO => {
+            SimpleEnum::Zero => {
                 // basic: u8
                 let basic = crate::util::read_u8_le(r)?;
 
-                SimpleIfEnumElse_SimpleEnum::ZERO {
+                SimpleIfEnumElse_SimpleEnum::Zero {
                     basic,
                 }
             }
-            SimpleEnum::ONE => {
+            SimpleEnum::One => {
                 // other: u16
                 let other = crate::util::read_u16_le(r)?;
 
-                SimpleIfEnumElse_SimpleEnum::ONE {
+                SimpleIfEnumElse_SimpleEnum::One {
                     other,
                 }
             }
-            SimpleEnum::TWO => {
+            SimpleEnum::Two => {
                 // other: u16
                 let other = crate::util::read_u16_le(r)?;
 
-                SimpleIfEnumElse_SimpleEnum::TWO {
+                SimpleIfEnumElse_SimpleEnum::Two {
                     other,
                 }
             }
@@ -99,13 +99,13 @@ impl SimpleIfEnumElse {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SimpleIfEnumElse_SimpleEnum {
-    ZERO {
+    Zero {
         basic: u8,
     },
-    ONE {
+    One {
         other: u16,
     },
-    TWO {
+    Two {
         other: u16,
     },
 }
@@ -113,7 +113,7 @@ pub enum SimpleIfEnumElse_SimpleEnum {
 impl Default for SimpleIfEnumElse_SimpleEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::ZERO {
+        Self::Zero {
             basic: Default::default(),
         }
     }
@@ -122,9 +122,9 @@ impl Default for SimpleIfEnumElse_SimpleEnum {
 impl SimpleIfEnumElse_SimpleEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::ZERO { .. } => 0,
-            Self::ONE { .. } => 1,
-            Self::TWO { .. } => 2,
+            Self::Zero { .. } => 0,
+            Self::One { .. } => 1,
+            Self::Two { .. } => 2,
         }
     }
 
@@ -133,19 +133,19 @@ impl SimpleIfEnumElse_SimpleEnum {
 impl SimpleIfEnumElse_SimpleEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::ZERO {
+            Self::Zero {
                 basic,
             } => {
                 1
                 + 1 // basic: u8
             }
-            Self::ONE {
+            Self::One {
                 other,
             } => {
                 1
                 + 2 // other: u16
             }
-            Self::TWO {
+            Self::Two {
                 other,
             } => {
                 1

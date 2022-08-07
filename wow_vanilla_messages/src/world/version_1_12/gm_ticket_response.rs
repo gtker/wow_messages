@@ -15,25 +15,25 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketResponse {
-    NOT_EXIST,
-    ALREADY_EXIST,
-    CREATE_SUCCESS,
-    CREATE_ERROR,
-    UPDATE_SUCCESS,
-    UPDATE_ERROR,
-    TICKET_DELETED,
+    NotExist,
+    AlreadyExist,
+    CreateSuccess,
+    CreateError,
+    UpdateSuccess,
+    UpdateError,
+    TicketDeleted,
 }
 
 impl GmTicketResponse {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::NOT_EXIST => 0x0,
-            Self::ALREADY_EXIST => 0x1,
-            Self::CREATE_SUCCESS => 0x2,
-            Self::CREATE_ERROR => 0x3,
-            Self::UPDATE_SUCCESS => 0x4,
-            Self::UPDATE_ERROR => 0x5,
-            Self::TICKET_DELETED => 0x9,
+            Self::NotExist => 0x0,
+            Self::AlreadyExist => 0x1,
+            Self::CreateSuccess => 0x2,
+            Self::CreateError => 0x3,
+            Self::UpdateSuccess => 0x4,
+            Self::UpdateError => 0x5,
+            Self::TicketDeleted => 0x9,
         }
     }
 
@@ -41,20 +41,20 @@ impl GmTicketResponse {
 
 impl Default for GmTicketResponse {
     fn default() -> Self {
-        Self::NOT_EXIST
+        Self::NotExist
     }
 }
 
 impl std::fmt::Display for GmTicketResponse {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::NOT_EXIST => f.write_str("NOT_EXIST"),
-            Self::ALREADY_EXIST => f.write_str("ALREADY_EXIST"),
-            Self::CREATE_SUCCESS => f.write_str("CREATE_SUCCESS"),
-            Self::CREATE_ERROR => f.write_str("CREATE_ERROR"),
-            Self::UPDATE_SUCCESS => f.write_str("UPDATE_SUCCESS"),
-            Self::UPDATE_ERROR => f.write_str("UPDATE_ERROR"),
-            Self::TICKET_DELETED => f.write_str("TICKET_DELETED"),
+            Self::NotExist => f.write_str("NotExist"),
+            Self::AlreadyExist => f.write_str("AlreadyExist"),
+            Self::CreateSuccess => f.write_str("CreateSuccess"),
+            Self::CreateError => f.write_str("CreateError"),
+            Self::UpdateSuccess => f.write_str("UpdateSuccess"),
+            Self::UpdateError => f.write_str("UpdateError"),
+            Self::TicketDeleted => f.write_str("TicketDeleted"),
         }
     }
 }
@@ -63,13 +63,13 @@ impl TryFrom<u32> for GmTicketResponse {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::NOT_EXIST),
-            1 => Ok(Self::ALREADY_EXIST),
-            2 => Ok(Self::CREATE_SUCCESS),
-            3 => Ok(Self::CREATE_ERROR),
-            4 => Ok(Self::UPDATE_SUCCESS),
-            5 => Ok(Self::UPDATE_ERROR),
-            9 => Ok(Self::TICKET_DELETED),
+            0 => Ok(Self::NotExist),
+            1 => Ok(Self::AlreadyExist),
+            2 => Ok(Self::CreateSuccess),
+            3 => Ok(Self::CreateError),
+            4 => Ok(Self::UpdateSuccess),
+            5 => Ok(Self::UpdateError),
+            9 => Ok(Self::TicketDeleted),
             v => Err(crate::errors::EnumError::new("GmTicketResponse", v as u32),)
         }
     }

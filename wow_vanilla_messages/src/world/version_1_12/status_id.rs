@@ -15,29 +15,29 @@ use std::convert::{TryFrom, TryInto};
 pub(crate) enum StatusId {
     /// first status, should mean bg is not instance
     ///
-    NONE,
+    None,
     /// means bg is empty and waiting for queue
     ///
-    WAIT_QUEUE,
+    WaitQueue,
     /// this means, that BG has already started and it is waiting for more players
     ///
-    WAIT_JOIN,
+    WaitJoin,
     /// means bg is running
     ///
-    IN_PROGRESS,
+    InProgress,
     /// means some faction has won BG and it is ending
     ///
-    WAIT_LEAVE,
+    WaitLeave,
 }
 
 impl StatusId {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NONE => 0x0,
-            Self::WAIT_QUEUE => 0x1,
-            Self::WAIT_JOIN => 0x2,
-            Self::IN_PROGRESS => 0x3,
-            Self::WAIT_LEAVE => 0x4,
+            Self::None => 0x0,
+            Self::WaitQueue => 0x1,
+            Self::WaitJoin => 0x2,
+            Self::InProgress => 0x3,
+            Self::WaitLeave => 0x4,
         }
     }
 
@@ -45,18 +45,18 @@ impl StatusId {
 
 impl Default for StatusId {
     fn default() -> Self {
-        Self::NONE
+        Self::None
     }
 }
 
 impl std::fmt::Display for StatusId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::NONE => f.write_str("NONE"),
-            Self::WAIT_QUEUE => f.write_str("WAIT_QUEUE"),
-            Self::WAIT_JOIN => f.write_str("WAIT_JOIN"),
-            Self::IN_PROGRESS => f.write_str("IN_PROGRESS"),
-            Self::WAIT_LEAVE => f.write_str("WAIT_LEAVE"),
+            Self::None => f.write_str("None"),
+            Self::WaitQueue => f.write_str("WaitQueue"),
+            Self::WaitJoin => f.write_str("WaitJoin"),
+            Self::InProgress => f.write_str("InProgress"),
+            Self::WaitLeave => f.write_str("WaitLeave"),
         }
     }
 }
@@ -65,11 +65,11 @@ impl TryFrom<u8> for StatusId {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::NONE),
-            1 => Ok(Self::WAIT_QUEUE),
-            2 => Ok(Self::WAIT_JOIN),
-            3 => Ok(Self::IN_PROGRESS),
-            4 => Ok(Self::WAIT_LEAVE),
+            0 => Ok(Self::None),
+            1 => Ok(Self::WaitQueue),
+            2 => Ok(Self::WaitJoin),
+            3 => Ok(Self::InProgress),
+            4 => Ok(Self::WaitLeave),
             v => Err(crate::errors::EnumError::new("StatusId", v as u32),)
         }
     }

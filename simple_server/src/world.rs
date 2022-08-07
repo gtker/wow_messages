@@ -48,7 +48,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
         .unwrap();
 
     SMSG_AUTH_RESPONSE {
-        result: SMSG_AUTH_RESPONSE_WorldResult::AUTH_OK {
+        result: SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
             billing_flags: 0,
             billing_rested: 0,
             billing_time: 0,
@@ -77,17 +77,17 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                     characters: vec![Character {
                         guid: Guid::new(4),
                         name: "Warr".to_string(),
-                        race: Race::HUMAN,
-                        class: Class::WARRIOR,
-                        gender: Gender::FEMALE,
+                        race: Race::Human,
+                        class: Class::Warrior,
+                        gender: Gender::Female,
                         skin: 0,
                         face: 0,
                         hair_style: 0,
                         hair_color: 0,
                         facial_hair: 0,
                         level: 0,
-                        area: Area::NORTHSHIRE_VALLEY,
-                        map: Map::EASTERN_KINGDOMS,
+                        area: Area::NorthshireValley,
+                        map: Map::EasternKingdoms,
                         position: Vector3d {
                             x: 0.0,
                             y: 0.0,
@@ -108,16 +108,16 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
             }
             ClientOpcodeMessage::CMSG_CHAR_CREATE(c) => {
                 let result = match c.name.to_uppercase().as_str() {
-                    "SYSTEME" => WorldResult::AUTH_SYSTEM_ERROR,
-                    "SERVERSH" => WorldResult::AUTH_SERVER_SHUTTING_DOWN,
-                    "WAITQU" => WorldResult::AUTH_WAIT_QUEUE,
-                    "ERROR" => WorldResult::CHAR_CREATE_ERROR,
-                    "SERVERL" => WorldResult::CHAR_CREATE_SERVER_LIMIT,
+                    "SYSTEME" => WorldResult::AuthSystemError,
+                    "SERVERSH" => WorldResult::AuthServerShuttingDown,
+                    "WAITQU" => WorldResult::AuthWaitQueue,
+                    "ERROR" => WorldResult::CharCreateError,
+                    "SERVERL" => WorldResult::CharCreateServerLimit,
                     // CCSUCC immediately returns to character screen
-                    "CCSUCC" => WorldResult::CHAR_CREATE_SUCCESS,
-                    "SERVERQU" => WorldResult::CHAR_CREATE_SERVER_QUEUE,
+                    "CCSUCC" => WorldResult::CharCreateSuccess,
+                    "SERVERQU" => WorldResult::CharCreateServerQueue,
                     // Above fail
-                    _ => WorldResult::CHAR_CREATE_ERROR,
+                    _ => WorldResult::CharCreateError,
                 };
 
                 SMSG_CHAR_CREATE { result }
@@ -135,7 +135,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     }
 
     SMSG_LOGIN_VERIFY_WORLD {
-        map: Map::EASTERN_KINGDOMS,
+        map: Map::EasternKingdoms,
         position: Vector3d {
             x: 200.0,
             y: 200.0,
@@ -163,7 +163,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
 
     let update_mask = UpdatePlayer::new()
         .set_object_GUID(Guid::new(4))
-        .set_unit_BYTES_0(Race::HUMAN, Class::WARRIOR, Gender::FEMALE, Power::RAGE)
+        .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
         .set_object_SCALE_X(1.0)
         .set_unit_HEALTH(100)
         .set_unit_MAXHEALTH(100)
@@ -173,7 +173,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
         .set_unit_NATIVEDISPLAYID(50);
 
     let update_flag = MovementBlock_UpdateFlag::empty()
-        .set_LIVING(MovementBlock_UpdateFlag_LIVING::LIVING {
+        .set_LIVING(MovementBlock_UpdateFlag_LIVING::Living {
             backwards_running_speed: 4.5,
             backwards_swimming_speed: 0.0,
             fall_time: 0.0,
@@ -196,11 +196,11 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     SMSG_UPDATE_OBJECT {
         has_transport: 0,
         objects: vec![Object {
-            update_type: Object_UpdateType::CREATE_OBJECT2 {
+            update_type: Object_UpdateType::CreateObject2 {
                 guid3: Guid::new(4),
                 mask2: UpdateMask::Player(update_mask),
                 movement2: MovementBlock { update_flag },
-                object_type: ObjectType::PLAYER,
+                object_type: ObjectType::Player,
             },
         }],
     }

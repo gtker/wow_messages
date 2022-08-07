@@ -27,8 +27,8 @@ pub fn auth(
             build: 5875,
         },
         platform: Platform::X86,
-        os: Os::WINDOWS,
-        locale: Locale::EN_GB,
+        os: Os::Windows,
+        locale: Locale::EnGb,
         utc_timezone_offset: 180,
         client_ip_address: 0x7F000001,      // 127.0.0.1
         account_name: USERNAME.to_string(), //
@@ -38,7 +38,7 @@ pub fn auth(
 
     let s = expect_server_message::<CMD_AUTH_LOGON_CHALLENGE_Server, _>(auth_server).unwrap();
 
-    let c = if let CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+    let c = if let CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
         generator,
         large_safe_prime,
         salt,
@@ -64,13 +64,13 @@ pub fn auth(
         client_proof: *c.client_proof(),
         crc_hash: [0u8; 20],
         telemetry_keys: vec![],
-        security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::NONE,
+        security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
     }
     .write(auth_server)
     .unwrap();
 
     let s = expect_server_message::<CMD_AUTH_LOGON_PROOF_Server, _>(auth_server).unwrap();
-    let c = if let CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS { server_proof, .. } = s.result
+    let c = if let CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success { server_proof, .. } = s.result
     {
         c.verify_server_proof(server_proof).unwrap()
     } else {

@@ -17,29 +17,29 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PartyResult {
-    SUCCESS,
-    BAD_PLAYER_NAME,
-    TARGET_NOT_IN_GROUP,
-    GROUP_FULL,
-    ALREADY_IN_GROUP,
-    NOT_IN_GROUP,
-    NOT_LEADER,
-    PLAYER_WRONG_FACTION,
-    IGNORING_YOU,
+    Success,
+    BadPlayerName,
+    TargetNotInGroup,
+    GroupFull,
+    AlreadyInGroup,
+    NotInGroup,
+    NotLeader,
+    PlayerWrongFaction,
+    IgnoringYou,
 }
 
 impl PartyResult {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::SUCCESS => 0x0,
-            Self::BAD_PLAYER_NAME => 0x1,
-            Self::TARGET_NOT_IN_GROUP => 0x2,
-            Self::GROUP_FULL => 0x3,
-            Self::ALREADY_IN_GROUP => 0x4,
-            Self::NOT_IN_GROUP => 0x5,
-            Self::NOT_LEADER => 0x6,
-            Self::PLAYER_WRONG_FACTION => 0x7,
-            Self::IGNORING_YOU => 0x8,
+            Self::Success => 0x0,
+            Self::BadPlayerName => 0x1,
+            Self::TargetNotInGroup => 0x2,
+            Self::GroupFull => 0x3,
+            Self::AlreadyInGroup => 0x4,
+            Self::NotInGroup => 0x5,
+            Self::NotLeader => 0x6,
+            Self::PlayerWrongFaction => 0x7,
+            Self::IgnoringYou => 0x8,
         }
     }
 
@@ -47,22 +47,22 @@ impl PartyResult {
 
 impl Default for PartyResult {
     fn default() -> Self {
-        Self::SUCCESS
+        Self::Success
     }
 }
 
 impl std::fmt::Display for PartyResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::SUCCESS => f.write_str("SUCCESS"),
-            Self::BAD_PLAYER_NAME => f.write_str("BAD_PLAYER_NAME"),
-            Self::TARGET_NOT_IN_GROUP => f.write_str("TARGET_NOT_IN_GROUP"),
-            Self::GROUP_FULL => f.write_str("GROUP_FULL"),
-            Self::ALREADY_IN_GROUP => f.write_str("ALREADY_IN_GROUP"),
-            Self::NOT_IN_GROUP => f.write_str("NOT_IN_GROUP"),
-            Self::NOT_LEADER => f.write_str("NOT_LEADER"),
-            Self::PLAYER_WRONG_FACTION => f.write_str("PLAYER_WRONG_FACTION"),
-            Self::IGNORING_YOU => f.write_str("IGNORING_YOU"),
+            Self::Success => f.write_str("Success"),
+            Self::BadPlayerName => f.write_str("BadPlayerName"),
+            Self::TargetNotInGroup => f.write_str("TargetNotInGroup"),
+            Self::GroupFull => f.write_str("GroupFull"),
+            Self::AlreadyInGroup => f.write_str("AlreadyInGroup"),
+            Self::NotInGroup => f.write_str("NotInGroup"),
+            Self::NotLeader => f.write_str("NotLeader"),
+            Self::PlayerWrongFaction => f.write_str("PlayerWrongFaction"),
+            Self::IgnoringYou => f.write_str("IgnoringYou"),
         }
     }
 }
@@ -71,15 +71,15 @@ impl TryFrom<u8> for PartyResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::SUCCESS),
-            1 => Ok(Self::BAD_PLAYER_NAME),
-            2 => Ok(Self::TARGET_NOT_IN_GROUP),
-            3 => Ok(Self::GROUP_FULL),
-            4 => Ok(Self::ALREADY_IN_GROUP),
-            5 => Ok(Self::NOT_IN_GROUP),
-            6 => Ok(Self::NOT_LEADER),
-            7 => Ok(Self::PLAYER_WRONG_FACTION),
-            8 => Ok(Self::IGNORING_YOU),
+            0 => Ok(Self::Success),
+            1 => Ok(Self::BadPlayerName),
+            2 => Ok(Self::TargetNotInGroup),
+            3 => Ok(Self::GroupFull),
+            4 => Ok(Self::AlreadyInGroup),
+            5 => Ok(Self::NotInGroup),
+            6 => Ok(Self::NotLeader),
+            7 => Ok(Self::PlayerWrongFaction),
+            8 => Ok(Self::IgnoringYou),
             v => Err(crate::errors::EnumError::new("PartyResult", v as u32),)
         }
     }

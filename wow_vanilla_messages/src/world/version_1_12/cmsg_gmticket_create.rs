@@ -55,8 +55,8 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
         w.write_all(&[0])?;
 
         match &self.category {
-            CMSG_GMTICKET_CREATE_GmTicketType::STUCK => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::BEHAVIOR_HARASSMENT {
+            CMSG_GMTICKET_CREATE_GmTicketType::Stuck => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
                 chat_data_line_count,
                 chat_data_size_uncompressed,
                 compressed_chat_data,
@@ -73,14 +73,14 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
                 }
 
             }
-            CMSG_GMTICKET_CREATE_GmTicketType::GUILD => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::ITEM => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::ENVIRONMENTAL => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::NONQUEST_CREEP => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::QUEST_QUESTNPC => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::TECHNICAL => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::ACCOUNT_BILLING => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::CHARACTER => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::Guild => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::Item => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::Environmental => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::NonquestCreep => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::QuestQuestnpc => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::Technical => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::AccountBilling => {}
+            CMSG_GMTICKET_CREATE_GmTicketType::Character => {}
         }
 
         Ok(())
@@ -110,8 +110,8 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
         let reserved_for_future_use = String::from_utf8(reserved_for_future_use)?;
 
         let category_if = match category {
-            GmTicketType::STUCK => CMSG_GMTICKET_CREATE_GmTicketType::STUCK,
-            GmTicketType::BEHAVIOR_HARASSMENT => {
+            GmTicketType::Stuck => CMSG_GMTICKET_CREATE_GmTicketType::Stuck,
+            GmTicketType::BehaviorHarassment => {
                 // chat_data_line_count: u32
                 let chat_data_line_count = crate::util::read_u32_le(r)?;
 
@@ -132,20 +132,20 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
                     current_size += 1;
                 }
 
-                CMSG_GMTICKET_CREATE_GmTicketType::BEHAVIOR_HARASSMENT {
+                CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
                     chat_data_line_count,
                     chat_data_size_uncompressed,
                     compressed_chat_data,
                 }
             }
-            GmTicketType::GUILD => CMSG_GMTICKET_CREATE_GmTicketType::GUILD,
-            GmTicketType::ITEM => CMSG_GMTICKET_CREATE_GmTicketType::ITEM,
-            GmTicketType::ENVIRONMENTAL => CMSG_GMTICKET_CREATE_GmTicketType::ENVIRONMENTAL,
-            GmTicketType::NONQUEST_CREEP => CMSG_GMTICKET_CREATE_GmTicketType::NONQUEST_CREEP,
-            GmTicketType::QUEST_QUESTNPC => CMSG_GMTICKET_CREATE_GmTicketType::QUEST_QUESTNPC,
-            GmTicketType::TECHNICAL => CMSG_GMTICKET_CREATE_GmTicketType::TECHNICAL,
-            GmTicketType::ACCOUNT_BILLING => CMSG_GMTICKET_CREATE_GmTicketType::ACCOUNT_BILLING,
-            GmTicketType::CHARACTER => CMSG_GMTICKET_CREATE_GmTicketType::CHARACTER,
+            GmTicketType::Guild => CMSG_GMTICKET_CREATE_GmTicketType::Guild,
+            GmTicketType::Item => CMSG_GMTICKET_CREATE_GmTicketType::Item,
+            GmTicketType::Environmental => CMSG_GMTICKET_CREATE_GmTicketType::Environmental,
+            GmTicketType::NonquestCreep => CMSG_GMTICKET_CREATE_GmTicketType::NonquestCreep,
+            GmTicketType::QuestQuestnpc => CMSG_GMTICKET_CREATE_GmTicketType::QuestQuestnpc,
+            GmTicketType::Technical => CMSG_GMTICKET_CREATE_GmTicketType::Technical,
+            GmTicketType::AccountBilling => CMSG_GMTICKET_CREATE_GmTicketType::AccountBilling,
+            GmTicketType::Character => CMSG_GMTICKET_CREATE_GmTicketType::Character,
         };
 
         Ok(Self {
@@ -171,42 +171,42 @@ impl CMSG_GMTICKET_CREATE {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum CMSG_GMTICKET_CREATE_GmTicketType {
-    STUCK,
-    BEHAVIOR_HARASSMENT {
+    Stuck,
+    BehaviorHarassment {
         chat_data_line_count: u32,
         chat_data_size_uncompressed: u32,
         compressed_chat_data: Vec<u8>,
     },
-    GUILD,
-    ITEM,
-    ENVIRONMENTAL,
-    NONQUEST_CREEP,
-    QUEST_QUESTNPC,
-    TECHNICAL,
-    ACCOUNT_BILLING,
-    CHARACTER,
+    Guild,
+    Item,
+    Environmental,
+    NonquestCreep,
+    QuestQuestnpc,
+    Technical,
+    AccountBilling,
+    Character,
 }
 
 impl Default for CMSG_GMTICKET_CREATE_GmTicketType {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::STUCK
+        Self::Stuck
     }
 }
 
 impl CMSG_GMTICKET_CREATE_GmTicketType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::STUCK => 1,
-            Self::BEHAVIOR_HARASSMENT { .. } => 2,
-            Self::GUILD => 3,
-            Self::ITEM => 4,
-            Self::ENVIRONMENTAL => 5,
-            Self::NONQUEST_CREEP => 6,
-            Self::QUEST_QUESTNPC => 7,
-            Self::TECHNICAL => 8,
-            Self::ACCOUNT_BILLING => 9,
-            Self::CHARACTER => 10,
+            Self::Stuck => 1,
+            Self::BehaviorHarassment { .. } => 2,
+            Self::Guild => 3,
+            Self::Item => 4,
+            Self::Environmental => 5,
+            Self::NonquestCreep => 6,
+            Self::QuestQuestnpc => 7,
+            Self::Technical => 8,
+            Self::AccountBilling => 9,
+            Self::Character => 10,
         }
     }
 
@@ -215,10 +215,10 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
 impl CMSG_GMTICKET_CREATE_GmTicketType {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::STUCK => {
+            Self::Stuck => {
                 1
             }
-            Self::BEHAVIOR_HARASSMENT {
+            Self::BehaviorHarassment {
                 chat_data_line_count,
                 chat_data_size_uncompressed,
                 compressed_chat_data,
@@ -228,28 +228,28 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
                 + 4 // chat_data_size_uncompressed: u32
                 + compressed_chat_data.len() * core::mem::size_of::<u8>() // compressed_chat_data: u8[-]
             }
-            Self::GUILD => {
+            Self::Guild => {
                 1
             }
-            Self::ITEM => {
+            Self::Item => {
                 1
             }
-            Self::ENVIRONMENTAL => {
+            Self::Environmental => {
                 1
             }
-            Self::NONQUEST_CREEP => {
+            Self::NonquestCreep => {
                 1
             }
-            Self::QUEST_QUESTNPC => {
+            Self::QuestQuestnpc => {
                 1
             }
-            Self::TECHNICAL => {
+            Self::Technical => {
                 1
             }
-            Self::ACCOUNT_BILLING => {
+            Self::AccountBilling => {
                 1
             }
-            Self::CHARACTER => {
+            Self::Character => {
                 1
             }
         }

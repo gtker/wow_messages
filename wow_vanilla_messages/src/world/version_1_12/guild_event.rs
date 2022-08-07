@@ -22,39 +22,39 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildEvent {
-    PROMOTION,
-    DEMOTION,
-    MOTD,
-    JOINED,
-    LEFT,
-    REMOVED,
-    LEADER_IS,
-    LEADER_CHANGED,
-    DISBANDED,
-    TABARD_CHANGED,
-    UNKNOWN10,
-    ROSTER_UPDATE,
-    SIGNED_ON,
-    SIGNED_OFF,
+    Promotion,
+    Demotion,
+    Motd,
+    Joined,
+    Left,
+    Removed,
+    LeaderIs,
+    LeaderChanged,
+    Disbanded,
+    TabardChanged,
+    Unknown10,
+    RosterUpdate,
+    SignedOn,
+    SignedOff,
 }
 
 impl GuildEvent {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::PROMOTION => 0x0,
-            Self::DEMOTION => 0x1,
-            Self::MOTD => 0x2,
-            Self::JOINED => 0x3,
-            Self::LEFT => 0x4,
-            Self::REMOVED => 0x5,
-            Self::LEADER_IS => 0x6,
-            Self::LEADER_CHANGED => 0x7,
-            Self::DISBANDED => 0x8,
-            Self::TABARD_CHANGED => 0x9,
-            Self::UNKNOWN10 => 0xa,
-            Self::ROSTER_UPDATE => 0xb,
-            Self::SIGNED_ON => 0xc,
-            Self::SIGNED_OFF => 0xd,
+            Self::Promotion => 0x0,
+            Self::Demotion => 0x1,
+            Self::Motd => 0x2,
+            Self::Joined => 0x3,
+            Self::Left => 0x4,
+            Self::Removed => 0x5,
+            Self::LeaderIs => 0x6,
+            Self::LeaderChanged => 0x7,
+            Self::Disbanded => 0x8,
+            Self::TabardChanged => 0x9,
+            Self::Unknown10 => 0xa,
+            Self::RosterUpdate => 0xb,
+            Self::SignedOn => 0xc,
+            Self::SignedOff => 0xd,
         }
     }
 
@@ -62,27 +62,27 @@ impl GuildEvent {
 
 impl Default for GuildEvent {
     fn default() -> Self {
-        Self::PROMOTION
+        Self::Promotion
     }
 }
 
 impl std::fmt::Display for GuildEvent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::PROMOTION => f.write_str("PROMOTION"),
-            Self::DEMOTION => f.write_str("DEMOTION"),
-            Self::MOTD => f.write_str("MOTD"),
-            Self::JOINED => f.write_str("JOINED"),
-            Self::LEFT => f.write_str("LEFT"),
-            Self::REMOVED => f.write_str("REMOVED"),
-            Self::LEADER_IS => f.write_str("LEADER_IS"),
-            Self::LEADER_CHANGED => f.write_str("LEADER_CHANGED"),
-            Self::DISBANDED => f.write_str("DISBANDED"),
-            Self::TABARD_CHANGED => f.write_str("TABARD_CHANGED"),
-            Self::UNKNOWN10 => f.write_str("UNKNOWN10"),
-            Self::ROSTER_UPDATE => f.write_str("ROSTER_UPDATE"),
-            Self::SIGNED_ON => f.write_str("SIGNED_ON"),
-            Self::SIGNED_OFF => f.write_str("SIGNED_OFF"),
+            Self::Promotion => f.write_str("Promotion"),
+            Self::Demotion => f.write_str("Demotion"),
+            Self::Motd => f.write_str("Motd"),
+            Self::Joined => f.write_str("Joined"),
+            Self::Left => f.write_str("Left"),
+            Self::Removed => f.write_str("Removed"),
+            Self::LeaderIs => f.write_str("LeaderIs"),
+            Self::LeaderChanged => f.write_str("LeaderChanged"),
+            Self::Disbanded => f.write_str("Disbanded"),
+            Self::TabardChanged => f.write_str("TabardChanged"),
+            Self::Unknown10 => f.write_str("Unknown10"),
+            Self::RosterUpdate => f.write_str("RosterUpdate"),
+            Self::SignedOn => f.write_str("SignedOn"),
+            Self::SignedOff => f.write_str("SignedOff"),
         }
     }
 }
@@ -91,20 +91,20 @@ impl TryFrom<u8> for GuildEvent {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::PROMOTION),
-            1 => Ok(Self::DEMOTION),
-            2 => Ok(Self::MOTD),
-            3 => Ok(Self::JOINED),
-            4 => Ok(Self::LEFT),
-            5 => Ok(Self::REMOVED),
-            6 => Ok(Self::LEADER_IS),
-            7 => Ok(Self::LEADER_CHANGED),
-            8 => Ok(Self::DISBANDED),
-            9 => Ok(Self::TABARD_CHANGED),
-            10 => Ok(Self::UNKNOWN10),
-            11 => Ok(Self::ROSTER_UPDATE),
-            12 => Ok(Self::SIGNED_ON),
-            13 => Ok(Self::SIGNED_OFF),
+            0 => Ok(Self::Promotion),
+            1 => Ok(Self::Demotion),
+            2 => Ok(Self::Motd),
+            3 => Ok(Self::Joined),
+            4 => Ok(Self::Left),
+            5 => Ok(Self::Removed),
+            6 => Ok(Self::LeaderIs),
+            7 => Ok(Self::LeaderChanged),
+            8 => Ok(Self::Disbanded),
+            9 => Ok(Self::TabardChanged),
+            10 => Ok(Self::Unknown10),
+            11 => Ok(Self::RosterUpdate),
+            12 => Ok(Self::SignedOn),
+            13 => Ok(Self::SignedOff),
             v => Err(crate::errors::EnumError::new("GuildEvent", v as u32),)
         }
     }

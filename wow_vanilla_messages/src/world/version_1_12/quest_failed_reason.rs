@@ -20,49 +20,49 @@ use std::convert::{TryFrom, TryInto};
 pub enum QuestFailedReason {
     /// this is default case
     ///
-    DONT_HAVE_REQ,
+    DontHaveReq,
     /// You are not high enough level for that quest.
     ///
-    QUEST_FAILED_LOW_LEVEL,
+    QuestFailedLowLevel,
     /// You don't meet the requirements for that quest.
     ///
-    QUEST_FAILED_REQS,
+    QuestFailedReqs,
     /// Inventory is full. (Also 50. From SMSG_QUESTGIVER_QUEST_FAILED)
     ///
-    QUEST_FAILED_INVENTORY_FULL,
+    QuestFailedInventoryFull,
     /// That quest is not available to your race.
     ///
-    QUEST_FAILED_WRONG_RACE,
+    QuestFailedWrongRace,
     /// You can only be on one timed quest at a time.
     ///
-    QUEST_ONLY_ONE_TIMED,
+    QuestOnlyOneTimed,
     /// You are already on that quest.
     ///
-    QUEST_ALREADY_ON,
+    QuestAlreadyOn,
     /// Duplicate item found. (From SMSG_QUESTGIVER_QUEST_FAILED)
     ///
-    QUEST_FAILED_DUPLICATE_ITEM,
+    QuestFailedDuplicateItem,
     /// You don't have the required items with you. Check storage.
     ///
-    QUEST_FAILED_MISSING_ITEMS,
+    QuestFailedMissingItems,
     /// You don't have enough money for that quest.
     ///
-    QUEST_FAILED_NOT_ENOUGH_MONEY,
+    QuestFailedNotEnoughMoney,
 }
 
 impl QuestFailedReason {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::DONT_HAVE_REQ => 0x0,
-            Self::QUEST_FAILED_LOW_LEVEL => 0x1,
-            Self::QUEST_FAILED_REQS => 0x2,
-            Self::QUEST_FAILED_INVENTORY_FULL => 0x4,
-            Self::QUEST_FAILED_WRONG_RACE => 0x6,
-            Self::QUEST_ONLY_ONE_TIMED => 0xc,
-            Self::QUEST_ALREADY_ON => 0xd,
-            Self::QUEST_FAILED_DUPLICATE_ITEM => 0x11,
-            Self::QUEST_FAILED_MISSING_ITEMS => 0x14,
-            Self::QUEST_FAILED_NOT_ENOUGH_MONEY => 0x16,
+            Self::DontHaveReq => 0x0,
+            Self::QuestFailedLowLevel => 0x1,
+            Self::QuestFailedReqs => 0x2,
+            Self::QuestFailedInventoryFull => 0x4,
+            Self::QuestFailedWrongRace => 0x6,
+            Self::QuestOnlyOneTimed => 0xc,
+            Self::QuestAlreadyOn => 0xd,
+            Self::QuestFailedDuplicateItem => 0x11,
+            Self::QuestFailedMissingItems => 0x14,
+            Self::QuestFailedNotEnoughMoney => 0x16,
         }
     }
 
@@ -70,23 +70,23 @@ impl QuestFailedReason {
 
 impl Default for QuestFailedReason {
     fn default() -> Self {
-        Self::DONT_HAVE_REQ
+        Self::DontHaveReq
     }
 }
 
 impl std::fmt::Display for QuestFailedReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::DONT_HAVE_REQ => f.write_str("DONT_HAVE_REQ"),
-            Self::QUEST_FAILED_LOW_LEVEL => f.write_str("QUEST_FAILED_LOW_LEVEL"),
-            Self::QUEST_FAILED_REQS => f.write_str("QUEST_FAILED_REQS"),
-            Self::QUEST_FAILED_INVENTORY_FULL => f.write_str("QUEST_FAILED_INVENTORY_FULL"),
-            Self::QUEST_FAILED_WRONG_RACE => f.write_str("QUEST_FAILED_WRONG_RACE"),
-            Self::QUEST_ONLY_ONE_TIMED => f.write_str("QUEST_ONLY_ONE_TIMED"),
-            Self::QUEST_ALREADY_ON => f.write_str("QUEST_ALREADY_ON"),
-            Self::QUEST_FAILED_DUPLICATE_ITEM => f.write_str("QUEST_FAILED_DUPLICATE_ITEM"),
-            Self::QUEST_FAILED_MISSING_ITEMS => f.write_str("QUEST_FAILED_MISSING_ITEMS"),
-            Self::QUEST_FAILED_NOT_ENOUGH_MONEY => f.write_str("QUEST_FAILED_NOT_ENOUGH_MONEY"),
+            Self::DontHaveReq => f.write_str("DontHaveReq"),
+            Self::QuestFailedLowLevel => f.write_str("QuestFailedLowLevel"),
+            Self::QuestFailedReqs => f.write_str("QuestFailedReqs"),
+            Self::QuestFailedInventoryFull => f.write_str("QuestFailedInventoryFull"),
+            Self::QuestFailedWrongRace => f.write_str("QuestFailedWrongRace"),
+            Self::QuestOnlyOneTimed => f.write_str("QuestOnlyOneTimed"),
+            Self::QuestAlreadyOn => f.write_str("QuestAlreadyOn"),
+            Self::QuestFailedDuplicateItem => f.write_str("QuestFailedDuplicateItem"),
+            Self::QuestFailedMissingItems => f.write_str("QuestFailedMissingItems"),
+            Self::QuestFailedNotEnoughMoney => f.write_str("QuestFailedNotEnoughMoney"),
         }
     }
 }
@@ -95,16 +95,16 @@ impl TryFrom<u32> for QuestFailedReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::DONT_HAVE_REQ),
-            1 => Ok(Self::QUEST_FAILED_LOW_LEVEL),
-            2 => Ok(Self::QUEST_FAILED_REQS),
-            4 => Ok(Self::QUEST_FAILED_INVENTORY_FULL),
-            6 => Ok(Self::QUEST_FAILED_WRONG_RACE),
-            12 => Ok(Self::QUEST_ONLY_ONE_TIMED),
-            13 => Ok(Self::QUEST_ALREADY_ON),
-            17 => Ok(Self::QUEST_FAILED_DUPLICATE_ITEM),
-            20 => Ok(Self::QUEST_FAILED_MISSING_ITEMS),
-            22 => Ok(Self::QUEST_FAILED_NOT_ENOUGH_MONEY),
+            0 => Ok(Self::DontHaveReq),
+            1 => Ok(Self::QuestFailedLowLevel),
+            2 => Ok(Self::QuestFailedReqs),
+            4 => Ok(Self::QuestFailedInventoryFull),
+            6 => Ok(Self::QuestFailedWrongRace),
+            12 => Ok(Self::QuestOnlyOneTimed),
+            13 => Ok(Self::QuestAlreadyOn),
+            17 => Ok(Self::QuestFailedDuplicateItem),
+            20 => Ok(Self::QuestFailedMissingItems),
+            22 => Ok(Self::QuestFailedNotEnoughMoney),
             v => Err(crate::errors::EnumError::new("QuestFailedReason", v as u32),)
         }
     }

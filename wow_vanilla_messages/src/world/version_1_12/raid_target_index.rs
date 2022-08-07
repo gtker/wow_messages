@@ -18,31 +18,31 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidTargetIndex {
-    UNKNOWN0,
-    UNKNOWN1,
-    UNKNOWN2,
-    UNKNOWN3,
-    UNKNOWN4,
-    UNKNOWN5,
-    UNKNOWN6,
-    UNKNOWN7,
-    UNKNOWN8,
-    REQUEST_ICONS,
+    Unknown0,
+    Unknown1,
+    Unknown2,
+    Unknown3,
+    Unknown4,
+    Unknown5,
+    Unknown6,
+    Unknown7,
+    Unknown8,
+    RequestIcons,
 }
 
 impl RaidTargetIndex {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::UNKNOWN0 => 0x0,
-            Self::UNKNOWN1 => 0x1,
-            Self::UNKNOWN2 => 0x2,
-            Self::UNKNOWN3 => 0x3,
-            Self::UNKNOWN4 => 0x4,
-            Self::UNKNOWN5 => 0x5,
-            Self::UNKNOWN6 => 0x6,
-            Self::UNKNOWN7 => 0x7,
-            Self::UNKNOWN8 => 0x8,
-            Self::REQUEST_ICONS => 0xff,
+            Self::Unknown0 => 0x0,
+            Self::Unknown1 => 0x1,
+            Self::Unknown2 => 0x2,
+            Self::Unknown3 => 0x3,
+            Self::Unknown4 => 0x4,
+            Self::Unknown5 => 0x5,
+            Self::Unknown6 => 0x6,
+            Self::Unknown7 => 0x7,
+            Self::Unknown8 => 0x8,
+            Self::RequestIcons => 0xff,
         }
     }
 
@@ -50,23 +50,23 @@ impl RaidTargetIndex {
 
 impl Default for RaidTargetIndex {
     fn default() -> Self {
-        Self::UNKNOWN0
+        Self::Unknown0
     }
 }
 
 impl std::fmt::Display for RaidTargetIndex {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::UNKNOWN0 => f.write_str("UNKNOWN0"),
-            Self::UNKNOWN1 => f.write_str("UNKNOWN1"),
-            Self::UNKNOWN2 => f.write_str("UNKNOWN2"),
-            Self::UNKNOWN3 => f.write_str("UNKNOWN3"),
-            Self::UNKNOWN4 => f.write_str("UNKNOWN4"),
-            Self::UNKNOWN5 => f.write_str("UNKNOWN5"),
-            Self::UNKNOWN6 => f.write_str("UNKNOWN6"),
-            Self::UNKNOWN7 => f.write_str("UNKNOWN7"),
-            Self::UNKNOWN8 => f.write_str("UNKNOWN8"),
-            Self::REQUEST_ICONS => f.write_str("REQUEST_ICONS"),
+            Self::Unknown0 => f.write_str("Unknown0"),
+            Self::Unknown1 => f.write_str("Unknown1"),
+            Self::Unknown2 => f.write_str("Unknown2"),
+            Self::Unknown3 => f.write_str("Unknown3"),
+            Self::Unknown4 => f.write_str("Unknown4"),
+            Self::Unknown5 => f.write_str("Unknown5"),
+            Self::Unknown6 => f.write_str("Unknown6"),
+            Self::Unknown7 => f.write_str("Unknown7"),
+            Self::Unknown8 => f.write_str("Unknown8"),
+            Self::RequestIcons => f.write_str("RequestIcons"),
         }
     }
 }
@@ -75,16 +75,16 @@ impl TryFrom<u8> for RaidTargetIndex {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::UNKNOWN0),
-            1 => Ok(Self::UNKNOWN1),
-            2 => Ok(Self::UNKNOWN2),
-            3 => Ok(Self::UNKNOWN3),
-            4 => Ok(Self::UNKNOWN4),
-            5 => Ok(Self::UNKNOWN5),
-            6 => Ok(Self::UNKNOWN6),
-            7 => Ok(Self::UNKNOWN7),
-            8 => Ok(Self::UNKNOWN8),
-            255 => Ok(Self::REQUEST_ICONS),
+            0 => Ok(Self::Unknown0),
+            1 => Ok(Self::Unknown1),
+            2 => Ok(Self::Unknown2),
+            3 => Ok(Self::Unknown3),
+            4 => Ok(Self::Unknown4),
+            5 => Ok(Self::Unknown5),
+            6 => Ok(Self::Unknown6),
+            7 => Ok(Self::Unknown7),
+            8 => Ok(Self::Unknown8),
+            255 => Ok(Self::RequestIcons),
             v => Err(crate::errors::EnumError::new("RaidTargetIndex", v as u32),)
         }
     }

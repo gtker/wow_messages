@@ -1,3 +1,4 @@
+use crate::rust_printer::field_name_to_rust_name;
 use crate::{Objects, Tags};
 use std::fmt::{Display, Formatter};
 
@@ -326,6 +327,10 @@ impl VerifiedContainerValue {
 
     pub fn original_string(&self) -> &str {
         &self.original_string
+    }
+
+    pub fn rust_name(&self) -> String {
+        field_name_to_rust_name(self.original_string())
     }
 
     pub fn new(value: u64, original_string: String) -> Self {

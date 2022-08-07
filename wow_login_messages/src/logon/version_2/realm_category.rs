@@ -13,21 +13,21 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RealmCategory {
-    DEFAULT,
-    ONE,
-    TWO,
-    THREE,
-    FIVE,
+    Default,
+    One,
+    Two,
+    Three,
+    Five,
 }
 
 impl RealmCategory {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::DEFAULT => 0x0,
-            Self::ONE => 0x1,
-            Self::TWO => 0x2,
-            Self::THREE => 0x3,
-            Self::FIVE => 0x5,
+            Self::Default => 0x0,
+            Self::One => 0x1,
+            Self::Two => 0x2,
+            Self::Three => 0x3,
+            Self::Five => 0x5,
         }
     }
 
@@ -35,18 +35,18 @@ impl RealmCategory {
 
 impl Default for RealmCategory {
     fn default() -> Self {
-        Self::DEFAULT
+        Self::Default
     }
 }
 
 impl std::fmt::Display for RealmCategory {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::DEFAULT => f.write_str("DEFAULT"),
-            Self::ONE => f.write_str("ONE"),
-            Self::TWO => f.write_str("TWO"),
-            Self::THREE => f.write_str("THREE"),
-            Self::FIVE => f.write_str("FIVE"),
+            Self::Default => f.write_str("Default"),
+            Self::One => f.write_str("One"),
+            Self::Two => f.write_str("Two"),
+            Self::Three => f.write_str("Three"),
+            Self::Five => f.write_str("Five"),
         }
     }
 }
@@ -55,11 +55,11 @@ impl TryFrom<u8> for RealmCategory {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::DEFAULT),
-            1 => Ok(Self::ONE),
-            2 => Ok(Self::TWO),
-            3 => Ok(Self::THREE),
-            5 => Ok(Self::FIVE),
+            0 => Ok(Self::Default),
+            1 => Ok(Self::One),
+            2 => Ok(Self::Two),
+            3 => Ok(Self::Three),
+            5 => Ok(Self::Five),
             v => Err(crate::errors::EnumError::new("RealmCategory", v as u32),)
         }
     }

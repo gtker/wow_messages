@@ -594,7 +594,7 @@ fn print_read_if_statement_flag(
     } else {
         s.open_curly(format!(
             "Some({new_ty_name}::{enumerator}",
-            enumerator = statement.flag_get_enumerator(),
+            enumerator = statement.flag_get_enumerator_rust_name(),
         ));
     }
 
@@ -631,7 +631,7 @@ fn print_read_if_statement_flag(
 
         s.open_curly(format!(
             "Some({new_ty_name}::{enumerator}",
-            enumerator = elseif.flag_get_enumerator(),
+            enumerator = elseif.flag_get_enumerator_rust_name(),
         ));
 
         let rd = e
@@ -685,7 +685,7 @@ fn print_read_if_statement_enum(
                 "{old_enum}::{enumerator} => {new_enum}::{enumerator},",
                 old_enum = rd.original_ty_name(),
                 new_enum = rd.ty_name(),
-                enumerator = enumerator.name()
+                enumerator = enumerator.rust_name()
             ));
             continue;
         }
@@ -693,7 +693,7 @@ fn print_read_if_statement_enum(
         s.open_curly(format!(
             "{old_enum}::{enumerator} =>",
             old_enum = rd.original_ty_name(),
-            enumerator = enumerator.name()
+            enumerator = enumerator.rust_name()
         ));
 
         for m in enumerator.original_fields() {
@@ -705,7 +705,7 @@ fn print_read_if_statement_enum(
         s.open_curly(format!(
             "{new_enum}::{enumerator}",
             new_enum = rd.ty_name(),
-            enumerator = enumerator.name()
+            enumerator = enumerator.rust_name()
         ));
 
         for m in enumerator.members_in_struct() {

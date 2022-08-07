@@ -11,17 +11,17 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SimpleEnum {
-    ZERO,
-    ONE,
-    TWO,
+    Zero,
+    One,
+    Two,
 }
 
 impl SimpleEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::ZERO => 0x0,
-            Self::ONE => 0x1,
-            Self::TWO => 0x2,
+            Self::Zero => 0x0,
+            Self::One => 0x1,
+            Self::Two => 0x2,
         }
     }
 
@@ -29,16 +29,16 @@ impl SimpleEnum {
 
 impl Default for SimpleEnum {
     fn default() -> Self {
-        Self::ZERO
+        Self::Zero
     }
 }
 
 impl std::fmt::Display for SimpleEnum {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::ZERO => f.write_str("ZERO"),
-            Self::ONE => f.write_str("ONE"),
-            Self::TWO => f.write_str("TWO"),
+            Self::Zero => f.write_str("Zero"),
+            Self::One => f.write_str("One"),
+            Self::Two => f.write_str("Two"),
         }
     }
 }
@@ -47,9 +47,9 @@ impl TryFrom<u8> for SimpleEnum {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::ZERO),
-            1 => Ok(Self::ONE),
-            2 => Ok(Self::TWO),
+            0 => Ok(Self::Zero),
+            1 => Ok(Self::One),
+            2 => Ok(Self::Two),
             v => Err(crate::errors::EnumError::new("SimpleEnum", v as u32),)
         }
     }

@@ -17,25 +17,25 @@ use std::convert::{TryFrom, TryInto};
 pub enum SpellSchool {
     /// Physical, Armor
     ///
-    NORMAL,
-    HOLY,
-    FIRE,
-    NATURE,
-    FROST,
-    SHADOW,
-    ARCANE,
+    Normal,
+    Holy,
+    Fire,
+    Nature,
+    Frost,
+    Shadow,
+    Arcane,
 }
 
 impl SpellSchool {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NORMAL => 0x0,
-            Self::HOLY => 0x1,
-            Self::FIRE => 0x2,
-            Self::NATURE => 0x3,
-            Self::FROST => 0x4,
-            Self::SHADOW => 0x5,
-            Self::ARCANE => 0x6,
+            Self::Normal => 0x0,
+            Self::Holy => 0x1,
+            Self::Fire => 0x2,
+            Self::Nature => 0x3,
+            Self::Frost => 0x4,
+            Self::Shadow => 0x5,
+            Self::Arcane => 0x6,
         }
     }
 
@@ -43,20 +43,20 @@ impl SpellSchool {
 
 impl Default for SpellSchool {
     fn default() -> Self {
-        Self::NORMAL
+        Self::Normal
     }
 }
 
 impl std::fmt::Display for SpellSchool {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::NORMAL => f.write_str("NORMAL"),
-            Self::HOLY => f.write_str("HOLY"),
-            Self::FIRE => f.write_str("FIRE"),
-            Self::NATURE => f.write_str("NATURE"),
-            Self::FROST => f.write_str("FROST"),
-            Self::SHADOW => f.write_str("SHADOW"),
-            Self::ARCANE => f.write_str("ARCANE"),
+            Self::Normal => f.write_str("Normal"),
+            Self::Holy => f.write_str("Holy"),
+            Self::Fire => f.write_str("Fire"),
+            Self::Nature => f.write_str("Nature"),
+            Self::Frost => f.write_str("Frost"),
+            Self::Shadow => f.write_str("Shadow"),
+            Self::Arcane => f.write_str("Arcane"),
         }
     }
 }
@@ -65,13 +65,13 @@ impl TryFrom<u8> for SpellSchool {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::NORMAL),
-            1 => Ok(Self::HOLY),
-            2 => Ok(Self::FIRE),
-            3 => Ok(Self::NATURE),
-            4 => Ok(Self::FROST),
-            5 => Ok(Self::SHADOW),
-            6 => Ok(Self::ARCANE),
+            0 => Ok(Self::Normal),
+            1 => Ok(Self::Holy),
+            2 => Ok(Self::Fire),
+            3 => Ok(Self::Nature),
+            4 => Ok(Self::Frost),
+            5 => Ok(Self::Shadow),
+            6 => Ok(Self::Arcane),
             v => Err(crate::errors::EnumError::new("SpellSchool", v as u32),)
         }
     }

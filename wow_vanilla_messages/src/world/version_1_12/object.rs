@@ -43,7 +43,7 @@ impl Object {
         w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 
         match &self.update_type {
-            Object_UpdateType::VALUES {
+            Object_UpdateType::Values {
                 guid1,
                 mask1,
             } => {
@@ -54,7 +54,7 @@ impl Object {
                 mask1.write_into_vec(w)?;
 
             }
-            Object_UpdateType::MOVEMENT {
+            Object_UpdateType::Movement {
                 guid2,
                 movement1,
             } => {
@@ -65,7 +65,7 @@ impl Object {
                 movement1.write_into_vec(w)?;
 
             }
-            Object_UpdateType::CREATE_OBJECT {
+            Object_UpdateType::CreateObject {
                 guid3,
                 mask2,
                 movement2,
@@ -84,7 +84,7 @@ impl Object {
                 mask2.write_into_vec(w)?;
 
             }
-            Object_UpdateType::CREATE_OBJECT2 {
+            Object_UpdateType::CreateObject2 {
                 guid3,
                 mask2,
                 movement2,
@@ -103,7 +103,7 @@ impl Object {
                 mask2.write_into_vec(w)?;
 
             }
-            Object_UpdateType::OUT_OF_RANGE_OBJECTS {
+            Object_UpdateType::OutOfRangeObjects {
                 count,
                 guids,
             } => {
@@ -116,7 +116,7 @@ impl Object {
                 }
 
             }
-            Object_UpdateType::NEAR_OBJECTS {
+            Object_UpdateType::NearObjects {
                 count,
                 guids,
             } => {
@@ -141,31 +141,31 @@ impl Object {
         let update_type: UpdateType = crate::util::read_u8_le(r)?.try_into()?;
 
         let update_type_if = match update_type {
-            UpdateType::VALUES => {
+            UpdateType::Values => {
                 // guid1: PackedGuid
                 let guid1 = Guid::read_packed(r)?;
 
                 // mask1: UpdateMask
                 let mask1 = UpdateMask::read(r)?;
 
-                Object_UpdateType::VALUES {
+                Object_UpdateType::Values {
                     guid1,
                     mask1,
                 }
             }
-            UpdateType::MOVEMENT => {
+            UpdateType::Movement => {
                 // guid2: PackedGuid
                 let guid2 = Guid::read_packed(r)?;
 
                 // movement1: MovementBlock
                 let movement1 = MovementBlock::read(r)?;
 
-                Object_UpdateType::MOVEMENT {
+                Object_UpdateType::Movement {
                     guid2,
                     movement1,
                 }
             }
-            UpdateType::CREATE_OBJECT => {
+            UpdateType::CreateObject => {
                 // guid3: PackedGuid
                 let guid3 = Guid::read_packed(r)?;
 
@@ -178,14 +178,14 @@ impl Object {
                 // mask2: UpdateMask
                 let mask2 = UpdateMask::read(r)?;
 
-                Object_UpdateType::CREATE_OBJECT {
+                Object_UpdateType::CreateObject {
                     guid3,
                     mask2,
                     movement2,
                     object_type,
                 }
             }
-            UpdateType::CREATE_OBJECT2 => {
+            UpdateType::CreateObject2 => {
                 // guid3: PackedGuid
                 let guid3 = Guid::read_packed(r)?;
 
@@ -198,14 +198,14 @@ impl Object {
                 // mask2: UpdateMask
                 let mask2 = UpdateMask::read(r)?;
 
-                Object_UpdateType::CREATE_OBJECT2 {
+                Object_UpdateType::CreateObject2 {
                     guid3,
                     mask2,
                     movement2,
                     object_type,
                 }
             }
-            UpdateType::OUT_OF_RANGE_OBJECTS => {
+            UpdateType::OutOfRangeObjects => {
                 // count: u32
                 let count = crate::util::read_u32_le(r)?;
 
@@ -215,12 +215,12 @@ impl Object {
                     guids.push(Guid::read_packed(r)?);
                 }
 
-                Object_UpdateType::OUT_OF_RANGE_OBJECTS {
+                Object_UpdateType::OutOfRangeObjects {
                     count,
                     guids,
                 }
             }
-            UpdateType::NEAR_OBJECTS => {
+            UpdateType::NearObjects => {
                 // count: u32
                 let count = crate::util::read_u32_le(r)?;
 
@@ -230,7 +230,7 @@ impl Object {
                     guids.push(Guid::read_packed(r)?);
                 }
 
-                Object_UpdateType::NEAR_OBJECTS {
+                Object_UpdateType::NearObjects {
                     count,
                     guids,
                 }
@@ -252,31 +252,31 @@ impl Object {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum Object_UpdateType {
-    VALUES {
+    Values {
         guid1: Guid,
         mask1: UpdateMask,
     },
-    MOVEMENT {
+    Movement {
         guid2: Guid,
         movement1: MovementBlock,
     },
-    CREATE_OBJECT {
+    CreateObject {
         guid3: Guid,
         mask2: UpdateMask,
         movement2: MovementBlock,
         object_type: ObjectType,
     },
-    CREATE_OBJECT2 {
+    CreateObject2 {
         guid3: Guid,
         mask2: UpdateMask,
         movement2: MovementBlock,
         object_type: ObjectType,
     },
-    OUT_OF_RANGE_OBJECTS {
+    OutOfRangeObjects {
         count: u32,
         guids: Vec<Guid>,
     },
-    NEAR_OBJECTS {
+    NearObjects {
         count: u32,
         guids: Vec<Guid>,
     },
@@ -285,7 +285,7 @@ pub enum Object_UpdateType {
 impl Default for Object_UpdateType {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::VALUES {
+        Self::Values {
             guid1: Default::default(),
             mask1: Default::default(),
         }
@@ -295,12 +295,12 @@ impl Default for Object_UpdateType {
 impl Object_UpdateType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::VALUES { .. } => 0,
-            Self::MOVEMENT { .. } => 1,
-            Self::CREATE_OBJECT { .. } => 2,
-            Self::CREATE_OBJECT2 { .. } => 3,
-            Self::OUT_OF_RANGE_OBJECTS { .. } => 4,
-            Self::NEAR_OBJECTS { .. } => 5,
+            Self::Values { .. } => 0,
+            Self::Movement { .. } => 1,
+            Self::CreateObject { .. } => 2,
+            Self::CreateObject2 { .. } => 3,
+            Self::OutOfRangeObjects { .. } => 4,
+            Self::NearObjects { .. } => 5,
         }
     }
 
@@ -309,7 +309,7 @@ impl Object_UpdateType {
 impl Object_UpdateType {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::VALUES {
+            Self::Values {
                 guid1,
                 mask1,
             } => {
@@ -317,7 +317,7 @@ impl Object_UpdateType {
                 + guid1.size() // guid1: Guid
                 + mask1.size() // mask1: UpdateMask
             }
-            Self::MOVEMENT {
+            Self::Movement {
                 guid2,
                 movement1,
             } => {
@@ -325,7 +325,7 @@ impl Object_UpdateType {
                 + guid2.size() // guid2: Guid
                 + movement1.size() // movement1: MovementBlock
             }
-            Self::CREATE_OBJECT {
+            Self::CreateObject {
                 guid3,
                 mask2,
                 movement2,
@@ -337,7 +337,7 @@ impl Object_UpdateType {
                 + movement2.size() // movement2: MovementBlock
                 + 1 // object_type: ObjectType
             }
-            Self::CREATE_OBJECT2 {
+            Self::CreateObject2 {
                 guid3,
                 mask2,
                 movement2,
@@ -349,7 +349,7 @@ impl Object_UpdateType {
                 + movement2.size() // movement2: MovementBlock
                 + 1 // object_type: ObjectType
             }
-            Self::OUT_OF_RANGE_OBJECTS {
+            Self::OutOfRangeObjects {
                 count,
                 guids,
             } => {
@@ -357,7 +357,7 @@ impl Object_UpdateType {
                 + 4 // count: u32
                 + guids.iter().fold(0, |acc, x| acc + x.size()) // guids: PackedGuid[count]
             }
-            Self::NEAR_OBJECTS {
+            Self::NearObjects {
                 count,
                 guids,
             } => {

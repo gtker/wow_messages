@@ -228,7 +228,7 @@ mod test {
 
         let mut update_mask = UpdatePlayer::new()
             .set_object_GUID(Guid::new(4))
-            .set_unit_BYTES_0(Race::HUMAN, Class::WARRIOR, Gender::FEMALE, Power::RAGE)
+            .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
             .set_unit_HEALTH(100);
         let update_mask = UpdateMask::Player(update_mask);
 
@@ -262,7 +262,7 @@ mod test {
 
         let mut update_mask = UpdatePlayer::new()
             .set_object_GUID(Guid::new(4))
-            .set_unit_BYTES_0(Race::HUMAN, Class::WARRIOR, Gender::FEMALE, Power::RAGE)
+            .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
             .set_object_SCALE_X(1.0)
             .set_unit_HEALTH(100)
             .set_unit_MAXHEALTH(100)

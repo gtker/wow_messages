@@ -16,31 +16,31 @@ use std::convert::{TryFrom, TryInto};
 pub enum GuildEmblemResult {
     /// Guild Emblem saved.
     ///
-    SUCCESS,
-    INVALID_TABARD_COLORS,
+    Success,
+    InvalidTabardColors,
     /// vmangos: You are not part of a guild!
     ///
-    NO_GUILD,
+    NoGuild,
     /// vmangos: Only guild leaders can create emblems.
     ///
-    NOT_GUILD_MASTER,
+    NotGuildMaster,
     /// vmangos: You can't afford to do that.
     ///
-    NOT_ENOUGH_MONEY,
+    NotEnoughMoney,
     /// mangoszero: This version fails silently.
     ///
-    NO_MESSAGE,
+    NoMessage,
 }
 
 impl GuildEmblemResult {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::SUCCESS => 0x0,
-            Self::INVALID_TABARD_COLORS => 0x1,
-            Self::NO_GUILD => 0x2,
-            Self::NOT_GUILD_MASTER => 0x3,
-            Self::NOT_ENOUGH_MONEY => 0x4,
-            Self::NO_MESSAGE => 0x5,
+            Self::Success => 0x0,
+            Self::InvalidTabardColors => 0x1,
+            Self::NoGuild => 0x2,
+            Self::NotGuildMaster => 0x3,
+            Self::NotEnoughMoney => 0x4,
+            Self::NoMessage => 0x5,
         }
     }
 
@@ -48,19 +48,19 @@ impl GuildEmblemResult {
 
 impl Default for GuildEmblemResult {
     fn default() -> Self {
-        Self::SUCCESS
+        Self::Success
     }
 }
 
 impl std::fmt::Display for GuildEmblemResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::SUCCESS => f.write_str("SUCCESS"),
-            Self::INVALID_TABARD_COLORS => f.write_str("INVALID_TABARD_COLORS"),
-            Self::NO_GUILD => f.write_str("NO_GUILD"),
-            Self::NOT_GUILD_MASTER => f.write_str("NOT_GUILD_MASTER"),
-            Self::NOT_ENOUGH_MONEY => f.write_str("NOT_ENOUGH_MONEY"),
-            Self::NO_MESSAGE => f.write_str("NO_MESSAGE"),
+            Self::Success => f.write_str("Success"),
+            Self::InvalidTabardColors => f.write_str("InvalidTabardColors"),
+            Self::NoGuild => f.write_str("NoGuild"),
+            Self::NotGuildMaster => f.write_str("NotGuildMaster"),
+            Self::NotEnoughMoney => f.write_str("NotEnoughMoney"),
+            Self::NoMessage => f.write_str("NoMessage"),
         }
     }
 }
@@ -69,12 +69,12 @@ impl TryFrom<u32> for GuildEmblemResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::SUCCESS),
-            1 => Ok(Self::INVALID_TABARD_COLORS),
-            2 => Ok(Self::NO_GUILD),
-            3 => Ok(Self::NOT_GUILD_MASTER),
-            4 => Ok(Self::NOT_ENOUGH_MONEY),
-            5 => Ok(Self::NO_MESSAGE),
+            0 => Ok(Self::Success),
+            1 => Ok(Self::InvalidTabardColors),
+            2 => Ok(Self::NoGuild),
+            3 => Ok(Self::NotGuildMaster),
+            4 => Ok(Self::NotEnoughMoney),
+            5 => Ok(Self::NoMessage),
             v => Err(crate::errors::EnumError::new("GuildEmblemResult", v as u32),)
         }
     }

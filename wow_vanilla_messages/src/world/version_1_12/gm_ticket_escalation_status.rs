@@ -13,21 +13,21 @@ use std::convert::{TryFrom, TryInto};
 pub enum GmTicketEscalationStatus {
     /// ticket is not currently assigned to a gm
     ///
-    GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED,
+    GmticketAssignedtogmStatusNotAssigned,
     /// ticket is assigned to a normal gm
     ///
-    GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED,
+    GmticketAssignedtogmStatusAssigned,
     /// ticket is in the escalation queue
     ///
-    GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED,
+    GmticketAssignedtogmStatusEscalated,
 }
 
 impl GmTicketEscalationStatus {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED => 0x0,
-            Self::GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED => 0x1,
-            Self::GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED => 0x2,
+            Self::GmticketAssignedtogmStatusNotAssigned => 0x0,
+            Self::GmticketAssignedtogmStatusAssigned => 0x1,
+            Self::GmticketAssignedtogmStatusEscalated => 0x2,
         }
     }
 
@@ -35,16 +35,16 @@ impl GmTicketEscalationStatus {
 
 impl Default for GmTicketEscalationStatus {
     fn default() -> Self {
-        Self::GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED
+        Self::GmticketAssignedtogmStatusNotAssigned
     }
 }
 
 impl std::fmt::Display for GmTicketEscalationStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED => f.write_str("GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED"),
-            Self::GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED => f.write_str("GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED"),
-            Self::GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED => f.write_str("GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED"),
+            Self::GmticketAssignedtogmStatusNotAssigned => f.write_str("GmticketAssignedtogmStatusNotAssigned"),
+            Self::GmticketAssignedtogmStatusAssigned => f.write_str("GmticketAssignedtogmStatusAssigned"),
+            Self::GmticketAssignedtogmStatusEscalated => f.write_str("GmticketAssignedtogmStatusEscalated"),
         }
     }
 }
@@ -53,9 +53,9 @@ impl TryFrom<u8> for GmTicketEscalationStatus {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED),
-            1 => Ok(Self::GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED),
-            2 => Ok(Self::GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED),
+            0 => Ok(Self::GmticketAssignedtogmStatusNotAssigned),
+            1 => Ok(Self::GmticketAssignedtogmStatusAssigned),
+            2 => Ok(Self::GmticketAssignedtogmStatusEscalated),
             v => Err(crate::errors::EnumError::new("GmTicketEscalationStatus", v as u32),)
         }
     }

@@ -25,45 +25,45 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LoginResult {
-    SUCCESS,
-    FAIL_UNKNOWN0,
-    FAIL_UNKNOWN1,
-    FAIL_BANNED,
-    FAIL_UNKNOWN_ACCOUNT,
-    FAIL_INCORRECT_PASSWORD,
-    FAIL_ALREADY_ONLINE,
-    FAIL_NO_TIME,
-    FAIL_DB_BUSY,
-    FAIL_VERSION_INVALID,
-    LOGIN_DOWNLOAD_FILE,
-    FAIL_INVALID_SERVER,
-    FAIL_SUSPENDED,
-    FAIL_NO_ACCESS,
-    SUCCESS_SURVEY,
-    FAIL_PARENTALCONTROL,
-    FAIL_LOCKED_ENFORCED,
+    Success,
+    FailUnknown0,
+    FailUnknown1,
+    FailBanned,
+    FailUnknownAccount,
+    FailIncorrectPassword,
+    FailAlreadyOnline,
+    FailNoTime,
+    FailDbBusy,
+    FailVersionInvalid,
+    LoginDownloadFile,
+    FailInvalidServer,
+    FailSuspended,
+    FailNoAccess,
+    SuccessSurvey,
+    FailParentalcontrol,
+    FailLockedEnforced,
 }
 
 impl LoginResult {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::SUCCESS => 0x0,
-            Self::FAIL_UNKNOWN0 => 0x1,
-            Self::FAIL_UNKNOWN1 => 0x2,
-            Self::FAIL_BANNED => 0x3,
-            Self::FAIL_UNKNOWN_ACCOUNT => 0x4,
-            Self::FAIL_INCORRECT_PASSWORD => 0x5,
-            Self::FAIL_ALREADY_ONLINE => 0x6,
-            Self::FAIL_NO_TIME => 0x7,
-            Self::FAIL_DB_BUSY => 0x8,
-            Self::FAIL_VERSION_INVALID => 0x9,
-            Self::LOGIN_DOWNLOAD_FILE => 0xa,
-            Self::FAIL_INVALID_SERVER => 0xb,
-            Self::FAIL_SUSPENDED => 0xc,
-            Self::FAIL_NO_ACCESS => 0xd,
-            Self::SUCCESS_SURVEY => 0xe,
-            Self::FAIL_PARENTALCONTROL => 0xf,
-            Self::FAIL_LOCKED_ENFORCED => 0x10,
+            Self::Success => 0x0,
+            Self::FailUnknown0 => 0x1,
+            Self::FailUnknown1 => 0x2,
+            Self::FailBanned => 0x3,
+            Self::FailUnknownAccount => 0x4,
+            Self::FailIncorrectPassword => 0x5,
+            Self::FailAlreadyOnline => 0x6,
+            Self::FailNoTime => 0x7,
+            Self::FailDbBusy => 0x8,
+            Self::FailVersionInvalid => 0x9,
+            Self::LoginDownloadFile => 0xa,
+            Self::FailInvalidServer => 0xb,
+            Self::FailSuspended => 0xc,
+            Self::FailNoAccess => 0xd,
+            Self::SuccessSurvey => 0xe,
+            Self::FailParentalcontrol => 0xf,
+            Self::FailLockedEnforced => 0x10,
         }
     }
 
@@ -71,30 +71,30 @@ impl LoginResult {
 
 impl Default for LoginResult {
     fn default() -> Self {
-        Self::SUCCESS
+        Self::Success
     }
 }
 
 impl std::fmt::Display for LoginResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::SUCCESS => f.write_str("SUCCESS"),
-            Self::FAIL_UNKNOWN0 => f.write_str("FAIL_UNKNOWN0"),
-            Self::FAIL_UNKNOWN1 => f.write_str("FAIL_UNKNOWN1"),
-            Self::FAIL_BANNED => f.write_str("FAIL_BANNED"),
-            Self::FAIL_UNKNOWN_ACCOUNT => f.write_str("FAIL_UNKNOWN_ACCOUNT"),
-            Self::FAIL_INCORRECT_PASSWORD => f.write_str("FAIL_INCORRECT_PASSWORD"),
-            Self::FAIL_ALREADY_ONLINE => f.write_str("FAIL_ALREADY_ONLINE"),
-            Self::FAIL_NO_TIME => f.write_str("FAIL_NO_TIME"),
-            Self::FAIL_DB_BUSY => f.write_str("FAIL_DB_BUSY"),
-            Self::FAIL_VERSION_INVALID => f.write_str("FAIL_VERSION_INVALID"),
-            Self::LOGIN_DOWNLOAD_FILE => f.write_str("LOGIN_DOWNLOAD_FILE"),
-            Self::FAIL_INVALID_SERVER => f.write_str("FAIL_INVALID_SERVER"),
-            Self::FAIL_SUSPENDED => f.write_str("FAIL_SUSPENDED"),
-            Self::FAIL_NO_ACCESS => f.write_str("FAIL_NO_ACCESS"),
-            Self::SUCCESS_SURVEY => f.write_str("SUCCESS_SURVEY"),
-            Self::FAIL_PARENTALCONTROL => f.write_str("FAIL_PARENTALCONTROL"),
-            Self::FAIL_LOCKED_ENFORCED => f.write_str("FAIL_LOCKED_ENFORCED"),
+            Self::Success => f.write_str("Success"),
+            Self::FailUnknown0 => f.write_str("FailUnknown0"),
+            Self::FailUnknown1 => f.write_str("FailUnknown1"),
+            Self::FailBanned => f.write_str("FailBanned"),
+            Self::FailUnknownAccount => f.write_str("FailUnknownAccount"),
+            Self::FailIncorrectPassword => f.write_str("FailIncorrectPassword"),
+            Self::FailAlreadyOnline => f.write_str("FailAlreadyOnline"),
+            Self::FailNoTime => f.write_str("FailNoTime"),
+            Self::FailDbBusy => f.write_str("FailDbBusy"),
+            Self::FailVersionInvalid => f.write_str("FailVersionInvalid"),
+            Self::LoginDownloadFile => f.write_str("LoginDownloadFile"),
+            Self::FailInvalidServer => f.write_str("FailInvalidServer"),
+            Self::FailSuspended => f.write_str("FailSuspended"),
+            Self::FailNoAccess => f.write_str("FailNoAccess"),
+            Self::SuccessSurvey => f.write_str("SuccessSurvey"),
+            Self::FailParentalcontrol => f.write_str("FailParentalcontrol"),
+            Self::FailLockedEnforced => f.write_str("FailLockedEnforced"),
         }
     }
 }
@@ -103,23 +103,23 @@ impl TryFrom<u8> for LoginResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::SUCCESS),
-            1 => Ok(Self::FAIL_UNKNOWN0),
-            2 => Ok(Self::FAIL_UNKNOWN1),
-            3 => Ok(Self::FAIL_BANNED),
-            4 => Ok(Self::FAIL_UNKNOWN_ACCOUNT),
-            5 => Ok(Self::FAIL_INCORRECT_PASSWORD),
-            6 => Ok(Self::FAIL_ALREADY_ONLINE),
-            7 => Ok(Self::FAIL_NO_TIME),
-            8 => Ok(Self::FAIL_DB_BUSY),
-            9 => Ok(Self::FAIL_VERSION_INVALID),
-            10 => Ok(Self::LOGIN_DOWNLOAD_FILE),
-            11 => Ok(Self::FAIL_INVALID_SERVER),
-            12 => Ok(Self::FAIL_SUSPENDED),
-            13 => Ok(Self::FAIL_NO_ACCESS),
-            14 => Ok(Self::SUCCESS_SURVEY),
-            15 => Ok(Self::FAIL_PARENTALCONTROL),
-            16 => Ok(Self::FAIL_LOCKED_ENFORCED),
+            0 => Ok(Self::Success),
+            1 => Ok(Self::FailUnknown0),
+            2 => Ok(Self::FailUnknown1),
+            3 => Ok(Self::FailBanned),
+            4 => Ok(Self::FailUnknownAccount),
+            5 => Ok(Self::FailIncorrectPassword),
+            6 => Ok(Self::FailAlreadyOnline),
+            7 => Ok(Self::FailNoTime),
+            8 => Ok(Self::FailDbBusy),
+            9 => Ok(Self::FailVersionInvalid),
+            10 => Ok(Self::LoginDownloadFile),
+            11 => Ok(Self::FailInvalidServer),
+            12 => Ok(Self::FailSuspended),
+            13 => Ok(Self::FailNoAccess),
+            14 => Ok(Self::SuccessSurvey),
+            15 => Ok(Self::FailParentalcontrol),
+            16 => Ok(Self::FailLockedEnforced),
             v => Err(crate::errors::EnumError::new("LoginResult", v as u32),)
         }
     }

@@ -23,41 +23,41 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Language {
-    UNIVERSAL,
-    ORCISH,
-    DARNASSIAN,
-    TAURAHE,
-    DWARVISH,
-    COMMON,
-    DEMONIC,
-    TITAN,
-    THALASSIAN,
-    DRACONIC,
-    KALIMAG,
-    GNOMISH,
-    TROLL,
-    GUTTERSPEAK,
-    ADDON,
+    Universal,
+    Orcish,
+    Darnassian,
+    Taurahe,
+    Dwarvish,
+    Common,
+    Demonic,
+    Titan,
+    Thalassian,
+    Draconic,
+    Kalimag,
+    Gnomish,
+    Troll,
+    Gutterspeak,
+    Addon,
 }
 
 impl Language {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::UNIVERSAL => 0x0,
-            Self::ORCISH => 0x1,
-            Self::DARNASSIAN => 0x2,
-            Self::TAURAHE => 0x3,
-            Self::DWARVISH => 0x6,
-            Self::COMMON => 0x7,
-            Self::DEMONIC => 0x8,
-            Self::TITAN => 0x9,
-            Self::THALASSIAN => 0xa,
-            Self::DRACONIC => 0xb,
-            Self::KALIMAG => 0xc,
-            Self::GNOMISH => 0xd,
-            Self::TROLL => 0xe,
-            Self::GUTTERSPEAK => 0x21,
-            Self::ADDON => 0xffffffff,
+            Self::Universal => 0x0,
+            Self::Orcish => 0x1,
+            Self::Darnassian => 0x2,
+            Self::Taurahe => 0x3,
+            Self::Dwarvish => 0x6,
+            Self::Common => 0x7,
+            Self::Demonic => 0x8,
+            Self::Titan => 0x9,
+            Self::Thalassian => 0xa,
+            Self::Draconic => 0xb,
+            Self::Kalimag => 0xc,
+            Self::Gnomish => 0xd,
+            Self::Troll => 0xe,
+            Self::Gutterspeak => 0x21,
+            Self::Addon => 0xffffffff,
         }
     }
 
@@ -65,28 +65,28 @@ impl Language {
 
 impl Default for Language {
     fn default() -> Self {
-        Self::UNIVERSAL
+        Self::Universal
     }
 }
 
 impl std::fmt::Display for Language {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::UNIVERSAL => f.write_str("UNIVERSAL"),
-            Self::ORCISH => f.write_str("ORCISH"),
-            Self::DARNASSIAN => f.write_str("DARNASSIAN"),
-            Self::TAURAHE => f.write_str("TAURAHE"),
-            Self::DWARVISH => f.write_str("DWARVISH"),
-            Self::COMMON => f.write_str("COMMON"),
-            Self::DEMONIC => f.write_str("DEMONIC"),
-            Self::TITAN => f.write_str("TITAN"),
-            Self::THALASSIAN => f.write_str("THALASSIAN"),
-            Self::DRACONIC => f.write_str("DRACONIC"),
-            Self::KALIMAG => f.write_str("KALIMAG"),
-            Self::GNOMISH => f.write_str("GNOMISH"),
-            Self::TROLL => f.write_str("TROLL"),
-            Self::GUTTERSPEAK => f.write_str("GUTTERSPEAK"),
-            Self::ADDON => f.write_str("ADDON"),
+            Self::Universal => f.write_str("Universal"),
+            Self::Orcish => f.write_str("Orcish"),
+            Self::Darnassian => f.write_str("Darnassian"),
+            Self::Taurahe => f.write_str("Taurahe"),
+            Self::Dwarvish => f.write_str("Dwarvish"),
+            Self::Common => f.write_str("Common"),
+            Self::Demonic => f.write_str("Demonic"),
+            Self::Titan => f.write_str("Titan"),
+            Self::Thalassian => f.write_str("Thalassian"),
+            Self::Draconic => f.write_str("Draconic"),
+            Self::Kalimag => f.write_str("Kalimag"),
+            Self::Gnomish => f.write_str("Gnomish"),
+            Self::Troll => f.write_str("Troll"),
+            Self::Gutterspeak => f.write_str("Gutterspeak"),
+            Self::Addon => f.write_str("Addon"),
         }
     }
 }
@@ -95,21 +95,21 @@ impl TryFrom<u32> for Language {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::UNIVERSAL),
-            1 => Ok(Self::ORCISH),
-            2 => Ok(Self::DARNASSIAN),
-            3 => Ok(Self::TAURAHE),
-            6 => Ok(Self::DWARVISH),
-            7 => Ok(Self::COMMON),
-            8 => Ok(Self::DEMONIC),
-            9 => Ok(Self::TITAN),
-            10 => Ok(Self::THALASSIAN),
-            11 => Ok(Self::DRACONIC),
-            12 => Ok(Self::KALIMAG),
-            13 => Ok(Self::GNOMISH),
-            14 => Ok(Self::TROLL),
-            33 => Ok(Self::GUTTERSPEAK),
-            4294967295 => Ok(Self::ADDON),
+            0 => Ok(Self::Universal),
+            1 => Ok(Self::Orcish),
+            2 => Ok(Self::Darnassian),
+            3 => Ok(Self::Taurahe),
+            6 => Ok(Self::Dwarvish),
+            7 => Ok(Self::Common),
+            8 => Ok(Self::Demonic),
+            9 => Ok(Self::Titan),
+            10 => Ok(Self::Thalassian),
+            11 => Ok(Self::Draconic),
+            12 => Ok(Self::Kalimag),
+            13 => Ok(Self::Gnomish),
+            14 => Ok(Self::Troll),
+            33 => Ok(Self::Gutterspeak),
+            4294967295 => Ok(Self::Addon),
             v => Err(crate::errors::EnumError::new("Language", v as u32),)
         }
     }

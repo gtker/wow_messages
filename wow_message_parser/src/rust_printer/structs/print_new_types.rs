@@ -297,7 +297,7 @@ fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner) {
     s.wln("#[derive(Debug, PartialEq, Clone)]");
     s.new_enum("pub", rd.ty_name(), |s| {
         for enumerator in rd.enumerators() {
-            s.w(enumerator.name());
+            s.w(enumerator.rust_name());
 
             if !enumerator.has_members_in_struct() {
                 s.wln_no_indent(",");
@@ -323,7 +323,7 @@ fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
                 s.wln("// First enumerator without any fields");
                 let enumerator = rd.enumerators().first().unwrap();
                 if enumerator.has_members_in_struct() {
-                    s.open_curly(format!("Self::{}", enumerator.name()));
+                    s.open_curly(format!("Self::{}", enumerator.rust_name()));
 
                     for m in enumerator.members_in_struct() {
                         s.wln(format!("{name}: Default::default(),", name = m.name()));
@@ -331,7 +331,7 @@ fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
 
                     s.closing_curly();
                 } else {
-                    s.wln(format!("Self::{}", enumerator.name()));
+                    s.wln(format!("Self::{}", enumerator.rust_name()));
                 }
             });
         },
@@ -343,14 +343,14 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
         s.body("match self", |s| {
             for enumerator in re.enumerators() {
                 if enumerator.has_members_in_struct() {
-                    s.open_curly(format!("Self::{name}", name = enumerator.name()));
+                    s.open_curly(format!("Self::{name}", name = enumerator.rust_name()));
                     for m in enumerator.members_in_struct() {
                         s.wln(format!("{},", m.name()));
                     }
                     s.closing_curly_with(" => {");
                     s.inc_indent();
                 } else {
-                    s.open_curly(format!("Self::{name} =>", name = enumerator.name()));
+                    s.open_curly(format!("Self::{name} =>", name = enumerator.rust_name()));
                 }
 
                 if re.is_elseif() {
@@ -380,7 +380,7 @@ fn print_enum_as_int(s: &mut Writer, rd: &RustDefiner) {
             for enumerator in rd.enumerators() {
                 s.wln(format!(
                     "Self::{enumerator}{extras} => {value},",
-                    enumerator = enumerator.name(),
+                    enumerator = enumerator.rust_name(),
                     value = enumerator.value().int(),
                     extras = match enumerator.has_members_in_struct() {
                         true => " { .. }",

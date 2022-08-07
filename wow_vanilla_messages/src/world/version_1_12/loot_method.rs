@@ -16,35 +16,35 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LootMethod {
-    CORPSE,
-    PICKPOCKETING,
-    FISHING,
-    DISENCHANTING,
+    Corpse,
+    Pickpocketing,
+    Fishing,
+    Disenchanting,
     /// unsupported by client, send LOOT_PICKPOCKETING instead
     ///
-    SKINNING,
+    Skinning,
     /// unsupported by client, send LOOT_FISHING instead
     ///
-    FISHINGHOLE,
+    Fishinghole,
     /// unsupported by client, send LOOT_FISHING instead
     ///
-    FISHING_FAIL,
+    FishingFail,
     /// unsupported by client, send LOOT_CORPSE instead
     ///
-    INSIGNIA,
+    Insignia,
 }
 
 impl LootMethod {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::CORPSE => 0x1,
-            Self::PICKPOCKETING => 0x2,
-            Self::FISHING => 0x3,
-            Self::DISENCHANTING => 0x4,
-            Self::SKINNING => 0x6,
-            Self::FISHINGHOLE => 0x14,
-            Self::FISHING_FAIL => 0x15,
-            Self::INSIGNIA => 0x16,
+            Self::Corpse => 0x1,
+            Self::Pickpocketing => 0x2,
+            Self::Fishing => 0x3,
+            Self::Disenchanting => 0x4,
+            Self::Skinning => 0x6,
+            Self::Fishinghole => 0x14,
+            Self::FishingFail => 0x15,
+            Self::Insignia => 0x16,
         }
     }
 
@@ -52,21 +52,21 @@ impl LootMethod {
 
 impl Default for LootMethod {
     fn default() -> Self {
-        Self::CORPSE
+        Self::Corpse
     }
 }
 
 impl std::fmt::Display for LootMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::CORPSE => f.write_str("CORPSE"),
-            Self::PICKPOCKETING => f.write_str("PICKPOCKETING"),
-            Self::FISHING => f.write_str("FISHING"),
-            Self::DISENCHANTING => f.write_str("DISENCHANTING"),
-            Self::SKINNING => f.write_str("SKINNING"),
-            Self::FISHINGHOLE => f.write_str("FISHINGHOLE"),
-            Self::FISHING_FAIL => f.write_str("FISHING_FAIL"),
-            Self::INSIGNIA => f.write_str("INSIGNIA"),
+            Self::Corpse => f.write_str("Corpse"),
+            Self::Pickpocketing => f.write_str("Pickpocketing"),
+            Self::Fishing => f.write_str("Fishing"),
+            Self::Disenchanting => f.write_str("Disenchanting"),
+            Self::Skinning => f.write_str("Skinning"),
+            Self::Fishinghole => f.write_str("Fishinghole"),
+            Self::FishingFail => f.write_str("FishingFail"),
+            Self::Insignia => f.write_str("Insignia"),
         }
     }
 }
@@ -75,14 +75,14 @@ impl TryFrom<u8> for LootMethod {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            1 => Ok(Self::CORPSE),
-            2 => Ok(Self::PICKPOCKETING),
-            3 => Ok(Self::FISHING),
-            4 => Ok(Self::DISENCHANTING),
-            6 => Ok(Self::SKINNING),
-            20 => Ok(Self::FISHINGHOLE),
-            21 => Ok(Self::FISHING_FAIL),
-            22 => Ok(Self::INSIGNIA),
+            1 => Ok(Self::Corpse),
+            2 => Ok(Self::Pickpocketing),
+            3 => Ok(Self::Fishing),
+            4 => Ok(Self::Disenchanting),
+            6 => Ok(Self::Skinning),
+            20 => Ok(Self::Fishinghole),
+            21 => Ok(Self::FishingFail),
+            22 => Ok(Self::Insignia),
             v => Err(crate::errors::EnumError::new("LootMethod", v as u32),)
         }
     }

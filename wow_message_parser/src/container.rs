@@ -8,8 +8,8 @@ use crate::parser::types::{
 };
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
-    DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
-    WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
+    field_name_to_rust_name, DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+    LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::test_case::TestCase;
 use crate::{CONTAINER_SELF_SIZE_FIELD, LOGIN_VERSIONS};
@@ -1214,6 +1214,10 @@ impl IfStatement {
             Equation::BitwiseAnd { value } => value.to_string(),
             _ => unreachable!(),
         }
+    }
+
+    pub fn flag_get_enumerator_rust_name(&self) -> String {
+        field_name_to_rust_name(&self.flag_get_enumerator())
     }
 
     pub fn is_elseif_flag(&self) -> bool {

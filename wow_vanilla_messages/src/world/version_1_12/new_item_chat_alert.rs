@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum NewItemChatAlert {
-    DO_NOT_SHOW,
-    SHOW,
+    DoNotShow,
+    Show,
 }
 
 impl NewItemChatAlert {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::DO_NOT_SHOW => 0x0,
-            Self::SHOW => 0x1,
+            Self::DoNotShow => 0x0,
+            Self::Show => 0x1,
         }
     }
 
@@ -26,15 +26,15 @@ impl NewItemChatAlert {
 
 impl Default for NewItemChatAlert {
     fn default() -> Self {
-        Self::DO_NOT_SHOW
+        Self::DoNotShow
     }
 }
 
 impl std::fmt::Display for NewItemChatAlert {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::DO_NOT_SHOW => f.write_str("DO_NOT_SHOW"),
-            Self::SHOW => f.write_str("SHOW"),
+            Self::DoNotShow => f.write_str("DoNotShow"),
+            Self::Show => f.write_str("Show"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u32> for NewItemChatAlert {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::DO_NOT_SHOW),
-            1 => Ok(Self::SHOW),
+            0 => Ok(Self::DoNotShow),
+            1 => Ok(Self::Show),
             v => Err(crate::errors::EnumError::new("NewItemChatAlert", v as u32),)
         }
     }

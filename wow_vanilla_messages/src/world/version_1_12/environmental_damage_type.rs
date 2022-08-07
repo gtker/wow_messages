@@ -14,23 +14,23 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum EnvironmentalDamageType {
-    EXHAUSTED,
-    DROWNING,
-    FALL,
-    LAVA,
-    SLIME,
-    FIRE,
+    Exhausted,
+    Drowning,
+    Fall,
+    Lava,
+    Slime,
+    Fire,
 }
 
 impl EnvironmentalDamageType {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::EXHAUSTED => 0x0,
-            Self::DROWNING => 0x1,
-            Self::FALL => 0x2,
-            Self::LAVA => 0x3,
-            Self::SLIME => 0x4,
-            Self::FIRE => 0x5,
+            Self::Exhausted => 0x0,
+            Self::Drowning => 0x1,
+            Self::Fall => 0x2,
+            Self::Lava => 0x3,
+            Self::Slime => 0x4,
+            Self::Fire => 0x5,
         }
     }
 
@@ -38,19 +38,19 @@ impl EnvironmentalDamageType {
 
 impl Default for EnvironmentalDamageType {
     fn default() -> Self {
-        Self::EXHAUSTED
+        Self::Exhausted
     }
 }
 
 impl std::fmt::Display for EnvironmentalDamageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::EXHAUSTED => f.write_str("EXHAUSTED"),
-            Self::DROWNING => f.write_str("DROWNING"),
-            Self::FALL => f.write_str("FALL"),
-            Self::LAVA => f.write_str("LAVA"),
-            Self::SLIME => f.write_str("SLIME"),
-            Self::FIRE => f.write_str("FIRE"),
+            Self::Exhausted => f.write_str("Exhausted"),
+            Self::Drowning => f.write_str("Drowning"),
+            Self::Fall => f.write_str("Fall"),
+            Self::Lava => f.write_str("Lava"),
+            Self::Slime => f.write_str("Slime"),
+            Self::Fire => f.write_str("Fire"),
         }
     }
 }
@@ -59,12 +59,12 @@ impl TryFrom<u32> for EnvironmentalDamageType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::EXHAUSTED),
-            1 => Ok(Self::DROWNING),
-            2 => Ok(Self::FALL),
-            3 => Ok(Self::LAVA),
-            4 => Ok(Self::SLIME),
-            5 => Ok(Self::FIRE),
+            0 => Ok(Self::Exhausted),
+            1 => Ok(Self::Drowning),
+            2 => Ok(Self::Fall),
+            3 => Ok(Self::Lava),
+            4 => Ok(Self::Slime),
+            5 => Ok(Self::Fire),
             v => Err(crate::errors::EnumError::new("EnvironmentalDamageType", v as u32),)
         }
     }

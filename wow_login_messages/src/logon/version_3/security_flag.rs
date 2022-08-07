@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum SecurityFlag {
-    NONE,
-    PIN,
+    None,
+    Pin,
 }
 
 impl SecurityFlag {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NONE => 0x0,
-            Self::PIN => 0x1,
+            Self::None => 0x0,
+            Self::Pin => 0x1,
         }
     }
 
@@ -26,15 +26,15 @@ impl SecurityFlag {
 
 impl Default for SecurityFlag {
     fn default() -> Self {
-        Self::NONE
+        Self::None
     }
 }
 
 impl std::fmt::Display for SecurityFlag {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::NONE => f.write_str("NONE"),
-            Self::PIN => f.write_str("PIN"),
+            Self::None => f.write_str("None"),
+            Self::Pin => f.write_str("Pin"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u8> for SecurityFlag {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::NONE),
-            1 => Ok(Self::PIN),
+            0 => Ok(Self::None),
+            1 => Ok(Self::Pin),
             v => Err(crate::errors::EnumError::new("SecurityFlag", v as u32),)
         }
     }

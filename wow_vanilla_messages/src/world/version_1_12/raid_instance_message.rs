@@ -14,25 +14,25 @@ use std::convert::{TryFrom, TryInto};
 pub enum RaidInstanceMessage {
     /// WARNING! %s is scheduled to reset in %d hour(s).
     ///
-    WARNING_HOURS,
+    WarningHours,
     /// WARNING! %s is scheduled to reset in %d minute(s)!
     ///
-    WARNING_MIN,
+    WarningMin,
     /// WARNING! %s is scheduled to reset in %d minute(s). Please exit the zone or you will be returned to your bind location!
     ///
-    WARNING_MIN_SOON,
+    WarningMinSoon,
     /// Welcome to %s. This raid instance is scheduled to reset in %s.
     ///
-    WELCOME,
+    Welcome,
 }
 
 impl RaidInstanceMessage {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::WARNING_HOURS => 0x1,
-            Self::WARNING_MIN => 0x2,
-            Self::WARNING_MIN_SOON => 0x3,
-            Self::WELCOME => 0x4,
+            Self::WarningHours => 0x1,
+            Self::WarningMin => 0x2,
+            Self::WarningMinSoon => 0x3,
+            Self::Welcome => 0x4,
         }
     }
 
@@ -40,17 +40,17 @@ impl RaidInstanceMessage {
 
 impl Default for RaidInstanceMessage {
     fn default() -> Self {
-        Self::WARNING_HOURS
+        Self::WarningHours
     }
 }
 
 impl std::fmt::Display for RaidInstanceMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::WARNING_HOURS => f.write_str("WARNING_HOURS"),
-            Self::WARNING_MIN => f.write_str("WARNING_MIN"),
-            Self::WARNING_MIN_SOON => f.write_str("WARNING_MIN_SOON"),
-            Self::WELCOME => f.write_str("WELCOME"),
+            Self::WarningHours => f.write_str("WarningHours"),
+            Self::WarningMin => f.write_str("WarningMin"),
+            Self::WarningMinSoon => f.write_str("WarningMinSoon"),
+            Self::Welcome => f.write_str("Welcome"),
         }
     }
 }
@@ -59,10 +59,10 @@ impl TryFrom<u32> for RaidInstanceMessage {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            1 => Ok(Self::WARNING_HOURS),
-            2 => Ok(Self::WARNING_MIN),
-            3 => Ok(Self::WARNING_MIN_SOON),
-            4 => Ok(Self::WELCOME),
+            1 => Ok(Self::WarningHours),
+            2 => Ok(Self::WarningMin),
+            3 => Ok(Self::WarningMinSoon),
+            4 => Ok(Self::Welcome),
             v => Err(crate::errors::EnumError::new("RaidInstanceMessage", v as u32),)
         }
     }

@@ -11,17 +11,17 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Os {
-    WINDOWS,
-    OSX,
-    OTHER(u32),
+    Windows,
+    Osx,
+    Other(u32),
 }
 
 impl Os {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::WINDOWS => 0x57696e,
-            Self::OSX => 0x4f5358,
-            Self::OTHER(v) => *v,
+            Self::Windows => 0x57696e,
+            Self::Osx => 0x4f5358,
+            Self::Other(v) => *v,
         }
     }
 
@@ -29,16 +29,16 @@ impl Os {
 
 impl Default for Os {
     fn default() -> Self {
-        Self::WINDOWS
+        Self::Windows
     }
 }
 
 impl std::fmt::Display for Os {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::WINDOWS => f.write_str("WINDOWS"),
-            Self::OSX => f.write_str("OSX"),
-            Self::OTHER(v) => f.write_fmt(format_args!("OTHER({})", v)),
+            Self::Windows => f.write_str("Windows"),
+            Self::Osx => f.write_str("Osx"),
+            Self::Other(v) => f.write_fmt(format_args!("Other({})", v)),
         }
     }
 }
@@ -46,9 +46,9 @@ impl std::fmt::Display for Os {
 impl From<u32> for Os {
     fn from(value: u32) -> Self {
         match value {
-            5728622 => Self::WINDOWS,
-            5198680 => Self::OSX,
-            v => Self::OTHER(v)
+            5728622 => Self::Windows,
+            5198680 => Self::Osx,
+            v => Self::Other(v)
         }
     }
 }

@@ -29,8 +29,8 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
         w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 
         match &self.status {
-            MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NOT_ENDED => {}
-            MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::ENDED {
+            MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NotEnded => {}
+            MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
                 winner,
             } => {
                 // winner: BattlegroundWinner
@@ -60,12 +60,12 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
         let status: BattlegroundEndStatus = crate::util::read_u8_le(r)?.try_into()?;
 
         let status_if = match status {
-            BattlegroundEndStatus::NOT_ENDED => MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NOT_ENDED,
-            BattlegroundEndStatus::ENDED => {
+            BattlegroundEndStatus::NotEnded => MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NotEnded,
+            BattlegroundEndStatus::Ended => {
                 // winner: BattlegroundWinner
                 let winner: BattlegroundWinner = crate::util::read_u8_le(r)?.try_into()?;
 
-                MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::ENDED {
+                MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
                     winner,
                 }
             }
@@ -98,8 +98,8 @@ impl MSG_PVP_LOG_DATA_Server {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
-    NOT_ENDED,
-    ENDED {
+    NotEnded,
+    Ended {
         winner: BattlegroundWinner,
     },
 }
@@ -107,15 +107,15 @@ pub enum MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
 impl Default for MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::NOT_ENDED
+        Self::NotEnded
     }
 }
 
 impl MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NOT_ENDED => 0,
-            Self::ENDED { .. } => 1,
+            Self::NotEnded => 0,
+            Self::Ended { .. } => 1,
         }
     }
 
@@ -124,10 +124,10 @@ impl MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
 impl MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NOT_ENDED => {
+            Self::NotEnded => {
                 1
             }
-            Self::ENDED {
+            Self::Ended {
                 winner,
             } => {
                 1

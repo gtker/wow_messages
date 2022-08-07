@@ -17,35 +17,35 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Race {
-    HUMAN,
-    ORC,
-    DWARF,
-    NIGHT_ELF,
-    UNDEAD,
-    TAUREN,
-    GNOME,
-    TROLL,
-    GOBLIN,
+    Human,
+    Orc,
+    Dwarf,
+    NightElf,
+    Undead,
+    Tauren,
+    Gnome,
+    Troll,
+    Goblin,
 }
 
 impl Default for Race {
     fn default() -> Self {
-        Self::HUMAN
+        Self::Human
     }
 }
 
 impl std::fmt::Display for Race {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::HUMAN => f.write_str("HUMAN"),
-            Self::ORC => f.write_str("ORC"),
-            Self::DWARF => f.write_str("DWARF"),
-            Self::NIGHT_ELF => f.write_str("NIGHT_ELF"),
-            Self::UNDEAD => f.write_str("UNDEAD"),
-            Self::TAUREN => f.write_str("TAUREN"),
-            Self::GNOME => f.write_str("GNOME"),
-            Self::TROLL => f.write_str("TROLL"),
-            Self::GOBLIN => f.write_str("GOBLIN"),
+            Self::Human => f.write_str("Human"),
+            Self::Orc => f.write_str("Orc"),
+            Self::Dwarf => f.write_str("Dwarf"),
+            Self::NightElf => f.write_str("NightElf"),
+            Self::Undead => f.write_str("Undead"),
+            Self::Tauren => f.write_str("Tauren"),
+            Self::Gnome => f.write_str("Gnome"),
+            Self::Troll => f.write_str("Troll"),
+            Self::Goblin => f.write_str("Goblin"),
         }
     }
 }
@@ -53,15 +53,15 @@ impl std::fmt::Display for Race {
 impl Race {
     pub const fn as_int(&self) -> u8 {
         match self {
-            Self::HUMAN => 0x1,
-            Self::ORC => 0x2,
-            Self::DWARF => 0x3,
-            Self::NIGHT_ELF => 0x4,
-            Self::UNDEAD => 0x5,
-            Self::TAUREN => 0x6,
-            Self::GNOME => 0x7,
-            Self::TROLL => 0x8,
-            Self::GOBLIN => 0x9,
+            Self::Human => 0x1,
+            Self::Orc => 0x2,
+            Self::Dwarf => 0x3,
+            Self::NightElf => 0x4,
+            Self::Undead => 0x5,
+            Self::Tauren => 0x6,
+            Self::Gnome => 0x7,
+            Self::Troll => 0x8,
+            Self::Goblin => 0x9,
         }
     }
 
@@ -71,15 +71,15 @@ impl TryFrom<u8> for Race {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            1 => Ok(Self::HUMAN),
-            2 => Ok(Self::ORC),
-            3 => Ok(Self::DWARF),
-            4 => Ok(Self::NIGHT_ELF),
-            5 => Ok(Self::UNDEAD),
-            6 => Ok(Self::TAUREN),
-            7 => Ok(Self::GNOME),
-            8 => Ok(Self::TROLL),
-            9 => Ok(Self::GOBLIN),
+            1 => Ok(Self::Human),
+            2 => Ok(Self::Orc),
+            3 => Ok(Self::Dwarf),
+            4 => Ok(Self::NightElf),
+            5 => Ok(Self::Undead),
+            6 => Ok(Self::Tauren),
+            7 => Ok(Self::Gnome),
+            8 => Ok(Self::Troll),
+            9 => Ok(Self::Goblin),
             v => Err(crate::errors::EnumError::new("Race", v as u32),)
         }
     }

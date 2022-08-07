@@ -11,17 +11,17 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum MeetingStoneFailure {
-    MEETINGSTONE_FAIL_PARTYLEADER,
-    MEETINGSTONE_FAIL_FULL_GROUP,
-    MEETINGSTONE_FAIL_RAID_GROUP,
+    MeetingstoneFailPartyleader,
+    MeetingstoneFailFullGroup,
+    MeetingstoneFailRaidGroup,
 }
 
 impl MeetingStoneFailure {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::MEETINGSTONE_FAIL_PARTYLEADER => 0x1,
-            Self::MEETINGSTONE_FAIL_FULL_GROUP => 0x2,
-            Self::MEETINGSTONE_FAIL_RAID_GROUP => 0x3,
+            Self::MeetingstoneFailPartyleader => 0x1,
+            Self::MeetingstoneFailFullGroup => 0x2,
+            Self::MeetingstoneFailRaidGroup => 0x3,
         }
     }
 
@@ -29,16 +29,16 @@ impl MeetingStoneFailure {
 
 impl Default for MeetingStoneFailure {
     fn default() -> Self {
-        Self::MEETINGSTONE_FAIL_PARTYLEADER
+        Self::MeetingstoneFailPartyleader
     }
 }
 
 impl std::fmt::Display for MeetingStoneFailure {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::MEETINGSTONE_FAIL_PARTYLEADER => f.write_str("MEETINGSTONE_FAIL_PARTYLEADER"),
-            Self::MEETINGSTONE_FAIL_FULL_GROUP => f.write_str("MEETINGSTONE_FAIL_FULL_GROUP"),
-            Self::MEETINGSTONE_FAIL_RAID_GROUP => f.write_str("MEETINGSTONE_FAIL_RAID_GROUP"),
+            Self::MeetingstoneFailPartyleader => f.write_str("MeetingstoneFailPartyleader"),
+            Self::MeetingstoneFailFullGroup => f.write_str("MeetingstoneFailFullGroup"),
+            Self::MeetingstoneFailRaidGroup => f.write_str("MeetingstoneFailRaidGroup"),
         }
     }
 }
@@ -47,9 +47,9 @@ impl TryFrom<u8> for MeetingStoneFailure {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            1 => Ok(Self::MEETINGSTONE_FAIL_PARTYLEADER),
-            2 => Ok(Self::MEETINGSTONE_FAIL_FULL_GROUP),
-            3 => Ok(Self::MEETINGSTONE_FAIL_RAID_GROUP),
+            1 => Ok(Self::MeetingstoneFailPartyleader),
+            2 => Ok(Self::MeetingstoneFailFullGroup),
+            3 => Ok(Self::MeetingstoneFailRaidGroup),
             v => Err(crate::errors::EnumError::new("MeetingStoneFailure", v as u32),)
         }
     }

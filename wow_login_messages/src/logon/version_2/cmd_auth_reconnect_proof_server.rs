@@ -147,7 +147,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Server0() {
         let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SUCCESS,
+            result: LoginResult::Success,
         };
 
         let header_size = 1;
@@ -172,7 +172,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server0() {
         let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SUCCESS,
+            result: LoginResult::Success,
         };
 
         let header_size = 1;
@@ -197,7 +197,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server0() {
         let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SUCCESS,
+            result: LoginResult::Success,
         };
 
         let header_size = 1;
@@ -224,7 +224,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Server1() {
         let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SUCCESS_SURVEY,
+            result: LoginResult::SuccessSurvey,
         };
 
         let header_size = 1;
@@ -249,7 +249,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server1() {
         let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SUCCESS_SURVEY,
+            result: LoginResult::SuccessSurvey,
         };
 
         let header_size = 1;
@@ -274,7 +274,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server1() {
         let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SUCCESS_SURVEY,
+            result: LoginResult::SuccessSurvey,
         };
 
         let header_size = 1;
@@ -301,7 +301,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Server2() {
         let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SUCCESS_SURVEY,
+            result: LoginResult::SuccessSurvey,
         };
 
         let header_size = 1;
@@ -326,7 +326,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server2() {
         let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SUCCESS_SURVEY,
+            result: LoginResult::SuccessSurvey,
         };
 
         let header_size = 1;
@@ -351,7 +351,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server2() {
         let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SUCCESS_SURVEY,
+            result: LoginResult::SuccessSurvey,
         };
 
         let header_size = 1;

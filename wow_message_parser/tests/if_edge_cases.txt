@@ -36,56 +36,56 @@ impl IfEdgeCases {
         w.write_all(&(self.t.as_int() as u8).to_le_bytes())?;
 
         match &self.t {
-            IfEdgeCases_TEnum::ZERO {
+            IfEdgeCases_TEnum::Zero {
                 basic1,
             } => {
                 // basic1: u8
                 w.write_all(&basic1.to_le_bytes())?;
 
             }
-            IfEdgeCases_TEnum::ONE {
+            IfEdgeCases_TEnum::One {
                 basic1,
             } => {
                 // basic1: u8
                 w.write_all(&basic1.to_le_bytes())?;
 
             }
-            IfEdgeCases_TEnum::TWO {
+            IfEdgeCases_TEnum::Two {
                 basic1,
             } => {
                 // basic1: u8
                 w.write_all(&basic1.to_le_bytes())?;
 
             }
-            IfEdgeCases_TEnum::THREE {
+            IfEdgeCases_TEnum::Three {
                 basic3,
             } => {
                 // basic3: u8
                 w.write_all(&basic3.to_le_bytes())?;
 
             }
-            IfEdgeCases_TEnum::FOUR {
+            IfEdgeCases_TEnum::Four {
                 basic3,
             } => {
                 // basic3: u8
                 w.write_all(&basic3.to_le_bytes())?;
 
             }
-            IfEdgeCases_TEnum::FIVE {
+            IfEdgeCases_TEnum::Five {
                 basic5,
             } => {
                 // basic5: u8
                 w.write_all(&basic5.to_le_bytes())?;
 
             }
-            IfEdgeCases_TEnum::SIX {
+            IfEdgeCases_TEnum::Six {
                 basic5,
             } => {
                 // basic5: u8
                 w.write_all(&basic5.to_le_bytes())?;
 
             }
-            IfEdgeCases_TEnum::REST {
+            IfEdgeCases_TEnum::Rest {
                 rest,
             } => {
                 // rest: u8
@@ -104,67 +104,67 @@ impl IfEdgeCases {
         let t: TEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         let t_if = match t {
-            TEnum::ZERO => {
+            TEnum::Zero => {
                 // basic1: u8
                 let basic1 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCases_TEnum::ZERO {
+                IfEdgeCases_TEnum::Zero {
                     basic1,
                 }
             }
-            TEnum::ONE => {
+            TEnum::One => {
                 // basic1: u8
                 let basic1 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCases_TEnum::ONE {
+                IfEdgeCases_TEnum::One {
                     basic1,
                 }
             }
-            TEnum::TWO => {
+            TEnum::Two => {
                 // basic1: u8
                 let basic1 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCases_TEnum::TWO {
+                IfEdgeCases_TEnum::Two {
                     basic1,
                 }
             }
-            TEnum::THREE => {
+            TEnum::Three => {
                 // basic3: u8
                 let basic3 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCases_TEnum::THREE {
+                IfEdgeCases_TEnum::Three {
                     basic3,
                 }
             }
-            TEnum::FOUR => {
+            TEnum::Four => {
                 // basic3: u8
                 let basic3 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCases_TEnum::FOUR {
+                IfEdgeCases_TEnum::Four {
                     basic3,
                 }
             }
-            TEnum::FIVE => {
+            TEnum::Five => {
                 // basic5: u8
                 let basic5 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCases_TEnum::FIVE {
+                IfEdgeCases_TEnum::Five {
                     basic5,
                 }
             }
-            TEnum::SIX => {
+            TEnum::Six => {
                 // basic5: u8
                 let basic5 = crate::util::read_u8_le(r)?;
 
-                IfEdgeCases_TEnum::SIX {
+                IfEdgeCases_TEnum::Six {
                     basic5,
                 }
             }
-            TEnum::REST => {
+            TEnum::Rest => {
                 // rest: u8
                 let rest = crate::util::read_u8_le(r)?;
 
-                IfEdgeCases_TEnum::REST {
+                IfEdgeCases_TEnum::Rest {
                     rest,
                 }
             }
@@ -179,28 +179,28 @@ impl IfEdgeCases {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum IfEdgeCases_TEnum {
-    ZERO {
+    Zero {
         basic1: u8,
     },
-    ONE {
+    One {
         basic1: u8,
     },
-    TWO {
+    Two {
         basic1: u8,
     },
-    THREE {
+    Three {
         basic3: u8,
     },
-    FOUR {
+    Four {
         basic3: u8,
     },
-    FIVE {
+    Five {
         basic5: u8,
     },
-    SIX {
+    Six {
         basic5: u8,
     },
-    REST {
+    Rest {
         rest: u8,
     },
 }
@@ -208,7 +208,7 @@ pub enum IfEdgeCases_TEnum {
 impl Default for IfEdgeCases_TEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::ZERO {
+        Self::Zero {
             basic1: Default::default(),
         }
     }
@@ -217,14 +217,14 @@ impl Default for IfEdgeCases_TEnum {
 impl IfEdgeCases_TEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::ZERO { .. } => 0,
-            Self::ONE { .. } => 1,
-            Self::TWO { .. } => 2,
-            Self::THREE { .. } => 3,
-            Self::FOUR { .. } => 4,
-            Self::FIVE { .. } => 5,
-            Self::SIX { .. } => 6,
-            Self::REST { .. } => 7,
+            Self::Zero { .. } => 0,
+            Self::One { .. } => 1,
+            Self::Two { .. } => 2,
+            Self::Three { .. } => 3,
+            Self::Four { .. } => 4,
+            Self::Five { .. } => 5,
+            Self::Six { .. } => 6,
+            Self::Rest { .. } => 7,
         }
     }
 
@@ -233,49 +233,49 @@ impl IfEdgeCases_TEnum {
 impl IfEdgeCases_TEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::ZERO {
+            Self::Zero {
                 basic1,
             } => {
                 1
                 + 1 // basic1: u8
             }
-            Self::ONE {
+            Self::One {
                 basic1,
             } => {
                 1
                 + 1 // basic1: u8
             }
-            Self::TWO {
+            Self::Two {
                 basic1,
             } => {
                 1
                 + 1 // basic1: u8
             }
-            Self::THREE {
+            Self::Three {
                 basic3,
             } => {
                 1
                 + 1 // basic3: u8
             }
-            Self::FOUR {
+            Self::Four {
                 basic3,
             } => {
                 1
                 + 1 // basic3: u8
             }
-            Self::FIVE {
+            Self::Five {
                 basic5,
             } => {
                 1
                 + 1 // basic5: u8
             }
-            Self::SIX {
+            Self::Six {
                 basic5,
             } => {
                 1
                 + 1 // basic5: u8
             }
-            Self::REST {
+            Self::Rest {
                 rest,
             } => {
                 1

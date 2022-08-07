@@ -41,7 +41,7 @@ pub fn server(
     let s =
         expect_server_message_encryption::<SMSG_AUTH_RESPONSE, _, _>(stream, &mut crypto).unwrap();
 
-    if !matches!(s.result, SMSG_AUTH_RESPONSE_WorldResult::AUTH_OK { .. }) {
+    if !matches!(s.result, SMSG_AUTH_RESPONSE_WorldResult::AuthOk { .. }) {
         panic!()
     }
     CMSG_CHAR_ENUM {}

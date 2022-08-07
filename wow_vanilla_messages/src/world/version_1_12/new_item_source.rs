@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum NewItemSource {
-    LOOTED,
-    FROM_NPC,
+    Looted,
+    FromNpc,
 }
 
 impl NewItemSource {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::LOOTED => 0x0,
-            Self::FROM_NPC => 0x1,
+            Self::Looted => 0x0,
+            Self::FromNpc => 0x1,
         }
     }
 
@@ -26,15 +26,15 @@ impl NewItemSource {
 
 impl Default for NewItemSource {
     fn default() -> Self {
-        Self::LOOTED
+        Self::Looted
     }
 }
 
 impl std::fmt::Display for NewItemSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::LOOTED => f.write_str("LOOTED"),
-            Self::FROM_NPC => f.write_str("FROM_NPC"),
+            Self::Looted => f.write_str("Looted"),
+            Self::FromNpc => f.write_str("FromNpc"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u32> for NewItemSource {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::LOOTED),
-            1 => Ok(Self::FROM_NPC),
+            0 => Ok(Self::Looted),
+            1 => Ok(Self::FromNpc),
             v => Err(crate::errors::EnumError::new("NewItemSource", v as u32),)
         }
     }

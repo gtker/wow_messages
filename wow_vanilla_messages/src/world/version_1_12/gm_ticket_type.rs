@@ -20,31 +20,31 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketType {
-    STUCK,
-    BEHAVIOR_HARASSMENT,
-    GUILD,
-    ITEM,
-    ENVIRONMENTAL,
-    NONQUEST_CREEP,
-    QUEST_QUESTNPC,
-    TECHNICAL,
-    ACCOUNT_BILLING,
-    CHARACTER,
+    Stuck,
+    BehaviorHarassment,
+    Guild,
+    Item,
+    Environmental,
+    NonquestCreep,
+    QuestQuestnpc,
+    Technical,
+    AccountBilling,
+    Character,
 }
 
 impl GmTicketType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::STUCK => 0x1,
-            Self::BEHAVIOR_HARASSMENT => 0x2,
-            Self::GUILD => 0x3,
-            Self::ITEM => 0x4,
-            Self::ENVIRONMENTAL => 0x5,
-            Self::NONQUEST_CREEP => 0x6,
-            Self::QUEST_QUESTNPC => 0x7,
-            Self::TECHNICAL => 0x8,
-            Self::ACCOUNT_BILLING => 0x9,
-            Self::CHARACTER => 0xa,
+            Self::Stuck => 0x1,
+            Self::BehaviorHarassment => 0x2,
+            Self::Guild => 0x3,
+            Self::Item => 0x4,
+            Self::Environmental => 0x5,
+            Self::NonquestCreep => 0x6,
+            Self::QuestQuestnpc => 0x7,
+            Self::Technical => 0x8,
+            Self::AccountBilling => 0x9,
+            Self::Character => 0xa,
         }
     }
 
@@ -52,23 +52,23 @@ impl GmTicketType {
 
 impl Default for GmTicketType {
     fn default() -> Self {
-        Self::STUCK
+        Self::Stuck
     }
 }
 
 impl std::fmt::Display for GmTicketType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::STUCK => f.write_str("STUCK"),
-            Self::BEHAVIOR_HARASSMENT => f.write_str("BEHAVIOR_HARASSMENT"),
-            Self::GUILD => f.write_str("GUILD"),
-            Self::ITEM => f.write_str("ITEM"),
-            Self::ENVIRONMENTAL => f.write_str("ENVIRONMENTAL"),
-            Self::NONQUEST_CREEP => f.write_str("NONQUEST_CREEP"),
-            Self::QUEST_QUESTNPC => f.write_str("QUEST_QUESTNPC"),
-            Self::TECHNICAL => f.write_str("TECHNICAL"),
-            Self::ACCOUNT_BILLING => f.write_str("ACCOUNT_BILLING"),
-            Self::CHARACTER => f.write_str("CHARACTER"),
+            Self::Stuck => f.write_str("Stuck"),
+            Self::BehaviorHarassment => f.write_str("BehaviorHarassment"),
+            Self::Guild => f.write_str("Guild"),
+            Self::Item => f.write_str("Item"),
+            Self::Environmental => f.write_str("Environmental"),
+            Self::NonquestCreep => f.write_str("NonquestCreep"),
+            Self::QuestQuestnpc => f.write_str("QuestQuestnpc"),
+            Self::Technical => f.write_str("Technical"),
+            Self::AccountBilling => f.write_str("AccountBilling"),
+            Self::Character => f.write_str("Character"),
         }
     }
 }
@@ -77,16 +77,16 @@ impl TryFrom<u8> for GmTicketType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            1 => Ok(Self::STUCK),
-            2 => Ok(Self::BEHAVIOR_HARASSMENT),
-            3 => Ok(Self::GUILD),
-            4 => Ok(Self::ITEM),
-            5 => Ok(Self::ENVIRONMENTAL),
-            6 => Ok(Self::NONQUEST_CREEP),
-            7 => Ok(Self::QUEST_QUESTNPC),
-            8 => Ok(Self::TECHNICAL),
-            9 => Ok(Self::ACCOUNT_BILLING),
-            10 => Ok(Self::CHARACTER),
+            1 => Ok(Self::Stuck),
+            2 => Ok(Self::BehaviorHarassment),
+            3 => Ok(Self::Guild),
+            4 => Ok(Self::Item),
+            5 => Ok(Self::Environmental),
+            6 => Ok(Self::NonquestCreep),
+            7 => Ok(Self::QuestQuestnpc),
+            8 => Ok(Self::Technical),
+            9 => Ok(Self::AccountBilling),
+            10 => Ok(Self::Character),
             v => Err(crate::errors::EnumError::new("GmTicketType", v as u32),)
         }
     }

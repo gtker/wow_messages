@@ -275,6 +275,7 @@ impl RustMember {
 #[derive(Debug, Clone)]
 pub struct RustEnumerator {
     name: String,
+    rust_name: String,
     value: DefinerValue,
     members: Vec<RustMember>,
     is_main_enumerator: bool,
@@ -285,6 +286,9 @@ pub struct RustEnumerator {
 impl RustEnumerator {
     pub fn name(&self) -> &str {
         &self.name
+    }
+    pub fn rust_name(&self) -> &str {
+        &self.rust_name
     }
     pub fn value(&self) -> &DefinerValue {
         &self.value
@@ -1167,6 +1171,7 @@ pub fn create_struct_member(
                         for field in definer.fields() {
                             enumerators.push(RustEnumerator {
                                 name: field.name().to_string(),
+                                rust_name: field.rust_name().to_string(),
                                 value: field.value().clone(),
                                 members: vec![],
                                 is_main_enumerator: false,

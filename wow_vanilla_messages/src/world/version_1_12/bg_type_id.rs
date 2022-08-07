@@ -15,29 +15,29 @@ use std::convert::{TryFrom, TryInto};
 pub enum BgTypeId {
     /// Your group has joined a battleground queue, but you are not eligible
     ///
-    NOT_ELIGIBLE,
+    NotEligible,
     /// Your group has joined the queue for AV
     ///
-    QUEUED_FOR_AV,
+    QueuedForAv,
     /// Your group has joined the queue for WS
     ///
-    QUEUED_FOR_WSG,
+    QueuedForWsg,
     /// Your group has joined the queue for AB
     ///
-    QUEUED_FOR_AB,
+    QueuedForAb,
     /// send bg command result to show nice message
     ///
-    REMOVE_FROM_QUEUE,
+    RemoveFromQueue,
 }
 
 impl BgTypeId {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::NOT_ELIGIBLE => 0x0,
-            Self::QUEUED_FOR_AV => 0x1,
-            Self::QUEUED_FOR_WSG => 0x2,
-            Self::QUEUED_FOR_AB => 0x3,
-            Self::REMOVE_FROM_QUEUE => 0xfffffffe,
+            Self::NotEligible => 0x0,
+            Self::QueuedForAv => 0x1,
+            Self::QueuedForWsg => 0x2,
+            Self::QueuedForAb => 0x3,
+            Self::RemoveFromQueue => 0xfffffffe,
         }
     }
 
@@ -45,18 +45,18 @@ impl BgTypeId {
 
 impl Default for BgTypeId {
     fn default() -> Self {
-        Self::NOT_ELIGIBLE
+        Self::NotEligible
     }
 }
 
 impl std::fmt::Display for BgTypeId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::NOT_ELIGIBLE => f.write_str("NOT_ELIGIBLE"),
-            Self::QUEUED_FOR_AV => f.write_str("QUEUED_FOR_AV"),
-            Self::QUEUED_FOR_WSG => f.write_str("QUEUED_FOR_WSG"),
-            Self::QUEUED_FOR_AB => f.write_str("QUEUED_FOR_AB"),
-            Self::REMOVE_FROM_QUEUE => f.write_str("REMOVE_FROM_QUEUE"),
+            Self::NotEligible => f.write_str("NotEligible"),
+            Self::QueuedForAv => f.write_str("QueuedForAv"),
+            Self::QueuedForWsg => f.write_str("QueuedForWsg"),
+            Self::QueuedForAb => f.write_str("QueuedForAb"),
+            Self::RemoveFromQueue => f.write_str("RemoveFromQueue"),
         }
     }
 }
@@ -65,11 +65,11 @@ impl TryFrom<u32> for BgTypeId {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::NOT_ELIGIBLE),
-            1 => Ok(Self::QUEUED_FOR_AV),
-            2 => Ok(Self::QUEUED_FOR_WSG),
-            3 => Ok(Self::QUEUED_FOR_AB),
-            4294967294 => Ok(Self::REMOVE_FROM_QUEUE),
+            0 => Ok(Self::NotEligible),
+            1 => Ok(Self::QueuedForAv),
+            2 => Ok(Self::QueuedForWsg),
+            3 => Ok(Self::QueuedForAb),
+            4294967294 => Ok(Self::RemoveFromQueue),
             v => Err(crate::errors::EnumError::new("BgTypeId", v as u32),)
         }
     }

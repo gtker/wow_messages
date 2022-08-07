@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum BattlegroundEndStatus {
-    NOT_ENDED,
-    ENDED,
+    NotEnded,
+    Ended,
 }
 
 impl BattlegroundEndStatus {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NOT_ENDED => 0x0,
-            Self::ENDED => 0x1,
+            Self::NotEnded => 0x0,
+            Self::Ended => 0x1,
         }
     }
 
@@ -26,15 +26,15 @@ impl BattlegroundEndStatus {
 
 impl Default for BattlegroundEndStatus {
     fn default() -> Self {
-        Self::NOT_ENDED
+        Self::NotEnded
     }
 }
 
 impl std::fmt::Display for BattlegroundEndStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::NOT_ENDED => f.write_str("NOT_ENDED"),
-            Self::ENDED => f.write_str("ENDED"),
+            Self::NotEnded => f.write_str("NotEnded"),
+            Self::Ended => f.write_str("Ended"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u8> for BattlegroundEndStatus {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::NOT_ENDED),
-            1 => Ok(Self::ENDED),
+            0 => Ok(Self::NotEnded),
+            1 => Ok(Self::Ended),
             v => Err(crate::errors::EnumError::new("BattlegroundEndStatus", v as u32),)
         }
     }

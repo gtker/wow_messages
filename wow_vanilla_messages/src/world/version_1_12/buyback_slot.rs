@@ -21,37 +21,37 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BuybackSlot {
-    SLOT1,
-    SLOT2,
-    SLOT3,
-    SLOT4,
-    SLOT5,
-    SLOT6,
-    SLOT7,
-    SLOT8,
-    SLOT9,
-    SLOT10,
-    SLOT11,
-    SLOT12,
-    SLOT13,
+    Slot1,
+    Slot2,
+    Slot3,
+    Slot4,
+    Slot5,
+    Slot6,
+    Slot7,
+    Slot8,
+    Slot9,
+    Slot10,
+    Slot11,
+    Slot12,
+    Slot13,
 }
 
 impl BuybackSlot {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::SLOT1 => 0x45,
-            Self::SLOT2 => 0x46,
-            Self::SLOT3 => 0x47,
-            Self::SLOT4 => 0x48,
-            Self::SLOT5 => 0x49,
-            Self::SLOT6 => 0x4a,
-            Self::SLOT7 => 0x4b,
-            Self::SLOT8 => 0x4c,
-            Self::SLOT9 => 0x4d,
-            Self::SLOT10 => 0x4e,
-            Self::SLOT11 => 0x4f,
-            Self::SLOT12 => 0x50,
-            Self::SLOT13 => 0x51,
+            Self::Slot1 => 0x45,
+            Self::Slot2 => 0x46,
+            Self::Slot3 => 0x47,
+            Self::Slot4 => 0x48,
+            Self::Slot5 => 0x49,
+            Self::Slot6 => 0x4a,
+            Self::Slot7 => 0x4b,
+            Self::Slot8 => 0x4c,
+            Self::Slot9 => 0x4d,
+            Self::Slot10 => 0x4e,
+            Self::Slot11 => 0x4f,
+            Self::Slot12 => 0x50,
+            Self::Slot13 => 0x51,
         }
     }
 
@@ -59,26 +59,26 @@ impl BuybackSlot {
 
 impl Default for BuybackSlot {
     fn default() -> Self {
-        Self::SLOT1
+        Self::Slot1
     }
 }
 
 impl std::fmt::Display for BuybackSlot {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::SLOT1 => f.write_str("SLOT1"),
-            Self::SLOT2 => f.write_str("SLOT2"),
-            Self::SLOT3 => f.write_str("SLOT3"),
-            Self::SLOT4 => f.write_str("SLOT4"),
-            Self::SLOT5 => f.write_str("SLOT5"),
-            Self::SLOT6 => f.write_str("SLOT6"),
-            Self::SLOT7 => f.write_str("SLOT7"),
-            Self::SLOT8 => f.write_str("SLOT8"),
-            Self::SLOT9 => f.write_str("SLOT9"),
-            Self::SLOT10 => f.write_str("SLOT10"),
-            Self::SLOT11 => f.write_str("SLOT11"),
-            Self::SLOT12 => f.write_str("SLOT12"),
-            Self::SLOT13 => f.write_str("SLOT13"),
+            Self::Slot1 => f.write_str("Slot1"),
+            Self::Slot2 => f.write_str("Slot2"),
+            Self::Slot3 => f.write_str("Slot3"),
+            Self::Slot4 => f.write_str("Slot4"),
+            Self::Slot5 => f.write_str("Slot5"),
+            Self::Slot6 => f.write_str("Slot6"),
+            Self::Slot7 => f.write_str("Slot7"),
+            Self::Slot8 => f.write_str("Slot8"),
+            Self::Slot9 => f.write_str("Slot9"),
+            Self::Slot10 => f.write_str("Slot10"),
+            Self::Slot11 => f.write_str("Slot11"),
+            Self::Slot12 => f.write_str("Slot12"),
+            Self::Slot13 => f.write_str("Slot13"),
         }
     }
 }
@@ -87,19 +87,19 @@ impl TryFrom<u32> for BuybackSlot {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            69 => Ok(Self::SLOT1),
-            70 => Ok(Self::SLOT2),
-            71 => Ok(Self::SLOT3),
-            72 => Ok(Self::SLOT4),
-            73 => Ok(Self::SLOT5),
-            74 => Ok(Self::SLOT6),
-            75 => Ok(Self::SLOT7),
-            76 => Ok(Self::SLOT8),
-            77 => Ok(Self::SLOT9),
-            78 => Ok(Self::SLOT10),
-            79 => Ok(Self::SLOT11),
-            80 => Ok(Self::SLOT12),
-            81 => Ok(Self::SLOT13),
+            69 => Ok(Self::Slot1),
+            70 => Ok(Self::Slot2),
+            71 => Ok(Self::Slot3),
+            72 => Ok(Self::Slot4),
+            73 => Ok(Self::Slot5),
+            74 => Ok(Self::Slot6),
+            75 => Ok(Self::Slot7),
+            76 => Ok(Self::Slot8),
+            77 => Ok(Self::Slot9),
+            78 => Ok(Self::Slot10),
+            79 => Ok(Self::Slot11),
+            80 => Ok(Self::Slot12),
+            81 => Ok(Self::Slot13),
             v => Err(crate::errors::EnumError::new("BuybackSlot", v as u32),)
         }
     }

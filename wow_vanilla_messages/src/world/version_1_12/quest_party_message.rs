@@ -21,45 +21,45 @@ use std::convert::{TryFrom, TryInto};
 pub enum QuestPartyMessage {
     /// ERR_QUEST_PUSH_SUCCESS_S
     ///
-    SHARING_QUEST,
+    SharingQuest,
     /// ERR_QUEST_PUSH_INVALID_S
     ///
-    CANT_TAKE_QUEST,
+    CantTakeQuest,
     /// ERR_QUEST_PUSH_ACCEPTED_S
     ///
-    ACCEPT_QUEST,
+    AcceptQuest,
     /// ERR_QUEST_PUSH_DECLINED_S
     ///
-    DECLINE_QUEST,
+    DeclineQuest,
     /// removed in 3.x
     ///
-    TOO_FAR,
+    TooFar,
     /// ERR_QUEST_PUSH_BUSY_S
     ///
-    BUSY,
+    Busy,
     /// ERR_QUEST_PUSH_LOG_FULL_S
     ///
-    LOG_FULL,
+    LogFull,
     /// ERR_QUEST_PUSH_ONQUEST_S
     ///
-    HAVE_QUEST,
+    HaveQuest,
     /// ERR_QUEST_PUSH_ALREADY_DONE_S
     ///
-    FINISH_QUEST,
+    FinishQuest,
 }
 
 impl QuestPartyMessage {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::SHARING_QUEST => 0x0,
-            Self::CANT_TAKE_QUEST => 0x1,
-            Self::ACCEPT_QUEST => 0x2,
-            Self::DECLINE_QUEST => 0x3,
-            Self::TOO_FAR => 0x4,
-            Self::BUSY => 0x5,
-            Self::LOG_FULL => 0x6,
-            Self::HAVE_QUEST => 0x7,
-            Self::FINISH_QUEST => 0x8,
+            Self::SharingQuest => 0x0,
+            Self::CantTakeQuest => 0x1,
+            Self::AcceptQuest => 0x2,
+            Self::DeclineQuest => 0x3,
+            Self::TooFar => 0x4,
+            Self::Busy => 0x5,
+            Self::LogFull => 0x6,
+            Self::HaveQuest => 0x7,
+            Self::FinishQuest => 0x8,
         }
     }
 
@@ -67,22 +67,22 @@ impl QuestPartyMessage {
 
 impl Default for QuestPartyMessage {
     fn default() -> Self {
-        Self::SHARING_QUEST
+        Self::SharingQuest
     }
 }
 
 impl std::fmt::Display for QuestPartyMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::SHARING_QUEST => f.write_str("SHARING_QUEST"),
-            Self::CANT_TAKE_QUEST => f.write_str("CANT_TAKE_QUEST"),
-            Self::ACCEPT_QUEST => f.write_str("ACCEPT_QUEST"),
-            Self::DECLINE_QUEST => f.write_str("DECLINE_QUEST"),
-            Self::TOO_FAR => f.write_str("TOO_FAR"),
-            Self::BUSY => f.write_str("BUSY"),
-            Self::LOG_FULL => f.write_str("LOG_FULL"),
-            Self::HAVE_QUEST => f.write_str("HAVE_QUEST"),
-            Self::FINISH_QUEST => f.write_str("FINISH_QUEST"),
+            Self::SharingQuest => f.write_str("SharingQuest"),
+            Self::CantTakeQuest => f.write_str("CantTakeQuest"),
+            Self::AcceptQuest => f.write_str("AcceptQuest"),
+            Self::DeclineQuest => f.write_str("DeclineQuest"),
+            Self::TooFar => f.write_str("TooFar"),
+            Self::Busy => f.write_str("Busy"),
+            Self::LogFull => f.write_str("LogFull"),
+            Self::HaveQuest => f.write_str("HaveQuest"),
+            Self::FinishQuest => f.write_str("FinishQuest"),
         }
     }
 }
@@ -91,15 +91,15 @@ impl TryFrom<u8> for QuestPartyMessage {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::SHARING_QUEST),
-            1 => Ok(Self::CANT_TAKE_QUEST),
-            2 => Ok(Self::ACCEPT_QUEST),
-            3 => Ok(Self::DECLINE_QUEST),
-            4 => Ok(Self::TOO_FAR),
-            5 => Ok(Self::BUSY),
-            6 => Ok(Self::LOG_FULL),
-            7 => Ok(Self::HAVE_QUEST),
-            8 => Ok(Self::FINISH_QUEST),
+            0 => Ok(Self::SharingQuest),
+            1 => Ok(Self::CantTakeQuest),
+            2 => Ok(Self::AcceptQuest),
+            3 => Ok(Self::DeclineQuest),
+            4 => Ok(Self::TooFar),
+            5 => Ok(Self::Busy),
+            6 => Ok(Self::LogFull),
+            7 => Ok(Self::HaveQuest),
+            8 => Ok(Self::FinishQuest),
             v => Err(crate::errors::EnumError::new("QuestPartyMessage", v as u32),)
         }
     }

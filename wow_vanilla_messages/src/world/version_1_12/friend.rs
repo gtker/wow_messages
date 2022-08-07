@@ -32,8 +32,8 @@ impl Friend {
         w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 
         match &self.status {
-            Friend_FriendStatus::OFFLINE => {}
-            Friend_FriendStatus::ONLINE {
+            Friend_FriendStatus::Offline => {}
+            Friend_FriendStatus::Online {
                 area,
                 class,
                 level,
@@ -48,7 +48,7 @@ impl Friend {
                 w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
-            Friend_FriendStatus::AFK {
+            Friend_FriendStatus::Afk {
                 area,
                 class,
                 level,
@@ -63,7 +63,7 @@ impl Friend {
                 w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
-            Friend_FriendStatus::UNKNOWN3 {
+            Friend_FriendStatus::Unknown3 {
                 area,
                 class,
                 level,
@@ -78,7 +78,7 @@ impl Friend {
                 w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
-            Friend_FriendStatus::DND {
+            Friend_FriendStatus::Dnd {
                 area,
                 class,
                 level,
@@ -108,8 +108,8 @@ impl Friend {
         let status: FriendStatus = crate::util::read_u8_le(r)?.try_into()?;
 
         let status_if = match status {
-            FriendStatus::OFFLINE => Friend_FriendStatus::OFFLINE,
-            FriendStatus::ONLINE => {
+            FriendStatus::Offline => Friend_FriendStatus::Offline,
+            FriendStatus::Online => {
                 // area: Area
                 let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
@@ -119,13 +119,13 @@ impl Friend {
                 // class: Class
                 let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-                Friend_FriendStatus::ONLINE {
+                Friend_FriendStatus::Online {
                     area,
                     class,
                     level,
                 }
             }
-            FriendStatus::AFK => {
+            FriendStatus::Afk => {
                 // area: Area
                 let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
@@ -135,13 +135,13 @@ impl Friend {
                 // class: Class
                 let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-                Friend_FriendStatus::AFK {
+                Friend_FriendStatus::Afk {
                     area,
                     class,
                     level,
                 }
             }
-            FriendStatus::UNKNOWN3 => {
+            FriendStatus::Unknown3 => {
                 // area: Area
                 let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
@@ -151,13 +151,13 @@ impl Friend {
                 // class: Class
                 let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-                Friend_FriendStatus::UNKNOWN3 {
+                Friend_FriendStatus::Unknown3 {
                     area,
                     class,
                     level,
                 }
             }
-            FriendStatus::DND => {
+            FriendStatus::Dnd => {
                 // area: Area
                 let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
@@ -167,7 +167,7 @@ impl Friend {
                 // class: Class
                 let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-                Friend_FriendStatus::DND {
+                Friend_FriendStatus::Dnd {
                     area,
                     class,
                     level,
@@ -192,23 +192,23 @@ impl Friend {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum Friend_FriendStatus {
-    OFFLINE,
-    ONLINE {
+    Offline,
+    Online {
         area: Area,
         class: Class,
         level: u32,
     },
-    AFK {
+    Afk {
         area: Area,
         class: Class,
         level: u32,
     },
-    UNKNOWN3 {
+    Unknown3 {
         area: Area,
         class: Class,
         level: u32,
     },
-    DND {
+    Dnd {
         area: Area,
         class: Class,
         level: u32,
@@ -218,18 +218,18 @@ pub enum Friend_FriendStatus {
 impl Default for Friend_FriendStatus {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::OFFLINE
+        Self::Offline
     }
 }
 
 impl Friend_FriendStatus {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::OFFLINE => 0,
-            Self::ONLINE { .. } => 1,
-            Self::AFK { .. } => 2,
-            Self::UNKNOWN3 { .. } => 3,
-            Self::DND { .. } => 4,
+            Self::Offline => 0,
+            Self::Online { .. } => 1,
+            Self::Afk { .. } => 2,
+            Self::Unknown3 { .. } => 3,
+            Self::Dnd { .. } => 4,
         }
     }
 
@@ -238,10 +238,10 @@ impl Friend_FriendStatus {
 impl Friend_FriendStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::OFFLINE => {
+            Self::Offline => {
                 1
             }
-            Self::ONLINE {
+            Self::Online {
                 area,
                 class,
                 level,
@@ -251,7 +251,7 @@ impl Friend_FriendStatus {
                 + 4 // class: Class
                 + 4 // level: u32
             }
-            Self::AFK {
+            Self::Afk {
                 area,
                 class,
                 level,
@@ -261,7 +261,7 @@ impl Friend_FriendStatus {
                 + 4 // class: Class
                 + 4 // level: u32
             }
-            Self::UNKNOWN3 {
+            Self::Unknown3 {
                 area,
                 class,
                 level,
@@ -271,7 +271,7 @@ impl Friend_FriendStatus {
                 + 4 // class: Class
                 + 4 // level: u32
             }
-            Self::DND {
+            Self::Dnd {
                 area,
                 class,
                 level,

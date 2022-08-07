@@ -11,23 +11,23 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Gender {
-    MALE,
-    FEMALE,
-    NONE,
+    Male,
+    Female,
+    None,
 }
 
 impl Default for Gender {
     fn default() -> Self {
-        Self::MALE
+        Self::Male
     }
 }
 
 impl std::fmt::Display for Gender {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::MALE => f.write_str("MALE"),
-            Self::FEMALE => f.write_str("FEMALE"),
-            Self::NONE => f.write_str("NONE"),
+            Self::Male => f.write_str("Male"),
+            Self::Female => f.write_str("Female"),
+            Self::None => f.write_str("None"),
         }
     }
 }
@@ -35,9 +35,9 @@ impl std::fmt::Display for Gender {
 impl Gender {
     pub const fn as_int(&self) -> u8 {
         match self {
-            Self::MALE => 0x0,
-            Self::FEMALE => 0x1,
-            Self::NONE => 0x2,
+            Self::Male => 0x0,
+            Self::Female => 0x1,
+            Self::None => 0x2,
         }
     }
 
@@ -47,9 +47,9 @@ impl TryFrom<u8> for Gender {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::MALE),
-            1 => Ok(Self::FEMALE),
-            2 => Ok(Self::NONE),
+            0 => Ok(Self::Male),
+            1 => Ok(Self::Female),
+            2 => Ok(Self::None),
             v => Err(crate::errors::EnumError::new("Gender", v as u32),)
         }
     }

@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum ExperienceAwardType {
-    KILL,
-    NON_KILL,
+    Kill,
+    NonKill,
 }
 
 impl ExperienceAwardType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::KILL => 0x0,
-            Self::NON_KILL => 0x1,
+            Self::Kill => 0x0,
+            Self::NonKill => 0x1,
         }
     }
 
@@ -26,15 +26,15 @@ impl ExperienceAwardType {
 
 impl Default for ExperienceAwardType {
     fn default() -> Self {
-        Self::KILL
+        Self::Kill
     }
 }
 
 impl std::fmt::Display for ExperienceAwardType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::KILL => f.write_str("KILL"),
-            Self::NON_KILL => f.write_str("NON_KILL"),
+            Self::Kill => f.write_str("Kill"),
+            Self::NonKill => f.write_str("NonKill"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u8> for ExperienceAwardType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::KILL),
-            1 => Ok(Self::NON_KILL),
+            0 => Ok(Self::Kill),
+            1 => Ok(Self::NonKill),
             v => Err(crate::errors::EnumError::new("ExperienceAwardType", v as u32),)
         }
     }

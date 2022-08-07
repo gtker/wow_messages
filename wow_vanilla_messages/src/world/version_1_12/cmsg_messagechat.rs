@@ -35,13 +35,13 @@ impl ClientMessage for CMSG_MESSAGECHAT {
         w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
 
         match &self.chat_type {
-            CMSG_MESSAGECHAT_ChatType::SAY => {}
-            CMSG_MESSAGECHAT_ChatType::PARTY => {}
-            CMSG_MESSAGECHAT_ChatType::RAID => {}
-            CMSG_MESSAGECHAT_ChatType::GUILD => {}
-            CMSG_MESSAGECHAT_ChatType::OFFICER => {}
-            CMSG_MESSAGECHAT_ChatType::YELL => {}
-            CMSG_MESSAGECHAT_ChatType::WHISPER {
+            CMSG_MESSAGECHAT_ChatType::Say => {}
+            CMSG_MESSAGECHAT_ChatType::Party => {}
+            CMSG_MESSAGECHAT_ChatType::Raid => {}
+            CMSG_MESSAGECHAT_ChatType::Guild => {}
+            CMSG_MESSAGECHAT_ChatType::Officer => {}
+            CMSG_MESSAGECHAT_ChatType::Yell => {}
+            CMSG_MESSAGECHAT_ChatType::Whisper {
                 target_player,
             } => {
                 // target_player: CString
@@ -50,14 +50,14 @@ impl ClientMessage for CMSG_MESSAGECHAT {
                 w.write_all(&[0])?;
 
             }
-            CMSG_MESSAGECHAT_ChatType::WHISPER_INFORM => {}
-            CMSG_MESSAGECHAT_ChatType::EMOTE => {}
-            CMSG_MESSAGECHAT_ChatType::TEXT_EMOTE => {}
-            CMSG_MESSAGECHAT_ChatType::SYSTEM => {}
-            CMSG_MESSAGECHAT_ChatType::MONSTER_SAY => {}
-            CMSG_MESSAGECHAT_ChatType::MONSTER_YELL => {}
-            CMSG_MESSAGECHAT_ChatType::MONSTER_EMOTE => {}
-            CMSG_MESSAGECHAT_ChatType::CHANNEL {
+            CMSG_MESSAGECHAT_ChatType::WhisperInform => {}
+            CMSG_MESSAGECHAT_ChatType::Emote => {}
+            CMSG_MESSAGECHAT_ChatType::TextEmote => {}
+            CMSG_MESSAGECHAT_ChatType::System => {}
+            CMSG_MESSAGECHAT_ChatType::MonsterSay => {}
+            CMSG_MESSAGECHAT_ChatType::MonsterYell => {}
+            CMSG_MESSAGECHAT_ChatType::MonsterEmote => {}
+            CMSG_MESSAGECHAT_ChatType::Channel {
                 channel,
             } => {
                 // channel: CString
@@ -66,26 +66,26 @@ impl ClientMessage for CMSG_MESSAGECHAT {
                 w.write_all(&[0])?;
 
             }
-            CMSG_MESSAGECHAT_ChatType::CHANNEL_JOIN => {}
-            CMSG_MESSAGECHAT_ChatType::CHANNEL_LEAVE => {}
-            CMSG_MESSAGECHAT_ChatType::CHANNEL_LIST => {}
-            CMSG_MESSAGECHAT_ChatType::CHANNEL_NOTICE => {}
-            CMSG_MESSAGECHAT_ChatType::CHANNEL_NOTICE_USER => {}
-            CMSG_MESSAGECHAT_ChatType::AFK => {}
-            CMSG_MESSAGECHAT_ChatType::DND => {}
-            CMSG_MESSAGECHAT_ChatType::IGNORED => {}
-            CMSG_MESSAGECHAT_ChatType::SKILL => {}
-            CMSG_MESSAGECHAT_ChatType::LOOT => {}
-            CMSG_MESSAGECHAT_ChatType::MONSTER_WHISPER => {}
-            CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_NEUTRAL => {}
-            CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_ALLIANCE => {}
-            CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_HORDE => {}
-            CMSG_MESSAGECHAT_ChatType::RAID_LEADER => {}
-            CMSG_MESSAGECHAT_ChatType::RAID_WARNING => {}
-            CMSG_MESSAGECHAT_ChatType::RAID_BOSS_WHISPER => {}
-            CMSG_MESSAGECHAT_ChatType::RAID_BOSS_EMOTE => {}
-            CMSG_MESSAGECHAT_ChatType::BATTLEGROUND => {}
-            CMSG_MESSAGECHAT_ChatType::BATTLEGROUND_LEADER => {}
+            CMSG_MESSAGECHAT_ChatType::ChannelJoin => {}
+            CMSG_MESSAGECHAT_ChatType::ChannelLeave => {}
+            CMSG_MESSAGECHAT_ChatType::ChannelList => {}
+            CMSG_MESSAGECHAT_ChatType::ChannelNotice => {}
+            CMSG_MESSAGECHAT_ChatType::ChannelNoticeUser => {}
+            CMSG_MESSAGECHAT_ChatType::Afk => {}
+            CMSG_MESSAGECHAT_ChatType::Dnd => {}
+            CMSG_MESSAGECHAT_ChatType::Ignored => {}
+            CMSG_MESSAGECHAT_ChatType::Skill => {}
+            CMSG_MESSAGECHAT_ChatType::Loot => {}
+            CMSG_MESSAGECHAT_ChatType::MonsterWhisper => {}
+            CMSG_MESSAGECHAT_ChatType::BgSystemNeutral => {}
+            CMSG_MESSAGECHAT_ChatType::BgSystemAlliance => {}
+            CMSG_MESSAGECHAT_ChatType::BgSystemHorde => {}
+            CMSG_MESSAGECHAT_ChatType::RaidLeader => {}
+            CMSG_MESSAGECHAT_ChatType::RaidWarning => {}
+            CMSG_MESSAGECHAT_ChatType::RaidBossWhisper => {}
+            CMSG_MESSAGECHAT_ChatType::RaidBossEmote => {}
+            CMSG_MESSAGECHAT_ChatType::Battleground => {}
+            CMSG_MESSAGECHAT_ChatType::BattlegroundLeader => {}
         }
 
         // message: CString
@@ -109,57 +109,57 @@ impl ClientMessage for CMSG_MESSAGECHAT {
         let language: Language = crate::util::read_u32_le(r)?.try_into()?;
 
         let chat_type_if = match chat_type {
-            ChatType::SAY => CMSG_MESSAGECHAT_ChatType::SAY,
-            ChatType::PARTY => CMSG_MESSAGECHAT_ChatType::PARTY,
-            ChatType::RAID => CMSG_MESSAGECHAT_ChatType::RAID,
-            ChatType::GUILD => CMSG_MESSAGECHAT_ChatType::GUILD,
-            ChatType::OFFICER => CMSG_MESSAGECHAT_ChatType::OFFICER,
-            ChatType::YELL => CMSG_MESSAGECHAT_ChatType::YELL,
-            ChatType::WHISPER => {
+            ChatType::Say => CMSG_MESSAGECHAT_ChatType::Say,
+            ChatType::Party => CMSG_MESSAGECHAT_ChatType::Party,
+            ChatType::Raid => CMSG_MESSAGECHAT_ChatType::Raid,
+            ChatType::Guild => CMSG_MESSAGECHAT_ChatType::Guild,
+            ChatType::Officer => CMSG_MESSAGECHAT_ChatType::Officer,
+            ChatType::Yell => CMSG_MESSAGECHAT_ChatType::Yell,
+            ChatType::Whisper => {
                 // target_player: CString
                 let target_player = crate::util::read_c_string_to_vec(r)?;
                 let target_player = String::from_utf8(target_player)?;
 
-                CMSG_MESSAGECHAT_ChatType::WHISPER {
+                CMSG_MESSAGECHAT_ChatType::Whisper {
                     target_player,
                 }
             }
-            ChatType::WHISPER_INFORM => CMSG_MESSAGECHAT_ChatType::WHISPER_INFORM,
-            ChatType::EMOTE => CMSG_MESSAGECHAT_ChatType::EMOTE,
-            ChatType::TEXT_EMOTE => CMSG_MESSAGECHAT_ChatType::TEXT_EMOTE,
-            ChatType::SYSTEM => CMSG_MESSAGECHAT_ChatType::SYSTEM,
-            ChatType::MONSTER_SAY => CMSG_MESSAGECHAT_ChatType::MONSTER_SAY,
-            ChatType::MONSTER_YELL => CMSG_MESSAGECHAT_ChatType::MONSTER_YELL,
-            ChatType::MONSTER_EMOTE => CMSG_MESSAGECHAT_ChatType::MONSTER_EMOTE,
-            ChatType::CHANNEL => {
+            ChatType::WhisperInform => CMSG_MESSAGECHAT_ChatType::WhisperInform,
+            ChatType::Emote => CMSG_MESSAGECHAT_ChatType::Emote,
+            ChatType::TextEmote => CMSG_MESSAGECHAT_ChatType::TextEmote,
+            ChatType::System => CMSG_MESSAGECHAT_ChatType::System,
+            ChatType::MonsterSay => CMSG_MESSAGECHAT_ChatType::MonsterSay,
+            ChatType::MonsterYell => CMSG_MESSAGECHAT_ChatType::MonsterYell,
+            ChatType::MonsterEmote => CMSG_MESSAGECHAT_ChatType::MonsterEmote,
+            ChatType::Channel => {
                 // channel: CString
                 let channel = crate::util::read_c_string_to_vec(r)?;
                 let channel = String::from_utf8(channel)?;
 
-                CMSG_MESSAGECHAT_ChatType::CHANNEL {
+                CMSG_MESSAGECHAT_ChatType::Channel {
                     channel,
                 }
             }
-            ChatType::CHANNEL_JOIN => CMSG_MESSAGECHAT_ChatType::CHANNEL_JOIN,
-            ChatType::CHANNEL_LEAVE => CMSG_MESSAGECHAT_ChatType::CHANNEL_LEAVE,
-            ChatType::CHANNEL_LIST => CMSG_MESSAGECHAT_ChatType::CHANNEL_LIST,
-            ChatType::CHANNEL_NOTICE => CMSG_MESSAGECHAT_ChatType::CHANNEL_NOTICE,
-            ChatType::CHANNEL_NOTICE_USER => CMSG_MESSAGECHAT_ChatType::CHANNEL_NOTICE_USER,
-            ChatType::AFK => CMSG_MESSAGECHAT_ChatType::AFK,
-            ChatType::DND => CMSG_MESSAGECHAT_ChatType::DND,
-            ChatType::IGNORED => CMSG_MESSAGECHAT_ChatType::IGNORED,
-            ChatType::SKILL => CMSG_MESSAGECHAT_ChatType::SKILL,
-            ChatType::LOOT => CMSG_MESSAGECHAT_ChatType::LOOT,
-            ChatType::MONSTER_WHISPER => CMSG_MESSAGECHAT_ChatType::MONSTER_WHISPER,
-            ChatType::BG_SYSTEM_NEUTRAL => CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_NEUTRAL,
-            ChatType::BG_SYSTEM_ALLIANCE => CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_ALLIANCE,
-            ChatType::BG_SYSTEM_HORDE => CMSG_MESSAGECHAT_ChatType::BG_SYSTEM_HORDE,
-            ChatType::RAID_LEADER => CMSG_MESSAGECHAT_ChatType::RAID_LEADER,
-            ChatType::RAID_WARNING => CMSG_MESSAGECHAT_ChatType::RAID_WARNING,
-            ChatType::RAID_BOSS_WHISPER => CMSG_MESSAGECHAT_ChatType::RAID_BOSS_WHISPER,
-            ChatType::RAID_BOSS_EMOTE => CMSG_MESSAGECHAT_ChatType::RAID_BOSS_EMOTE,
-            ChatType::BATTLEGROUND => CMSG_MESSAGECHAT_ChatType::BATTLEGROUND,
-            ChatType::BATTLEGROUND_LEADER => CMSG_MESSAGECHAT_ChatType::BATTLEGROUND_LEADER,
+            ChatType::ChannelJoin => CMSG_MESSAGECHAT_ChatType::ChannelJoin,
+            ChatType::ChannelLeave => CMSG_MESSAGECHAT_ChatType::ChannelLeave,
+            ChatType::ChannelList => CMSG_MESSAGECHAT_ChatType::ChannelList,
+            ChatType::ChannelNotice => CMSG_MESSAGECHAT_ChatType::ChannelNotice,
+            ChatType::ChannelNoticeUser => CMSG_MESSAGECHAT_ChatType::ChannelNoticeUser,
+            ChatType::Afk => CMSG_MESSAGECHAT_ChatType::Afk,
+            ChatType::Dnd => CMSG_MESSAGECHAT_ChatType::Dnd,
+            ChatType::Ignored => CMSG_MESSAGECHAT_ChatType::Ignored,
+            ChatType::Skill => CMSG_MESSAGECHAT_ChatType::Skill,
+            ChatType::Loot => CMSG_MESSAGECHAT_ChatType::Loot,
+            ChatType::MonsterWhisper => CMSG_MESSAGECHAT_ChatType::MonsterWhisper,
+            ChatType::BgSystemNeutral => CMSG_MESSAGECHAT_ChatType::BgSystemNeutral,
+            ChatType::BgSystemAlliance => CMSG_MESSAGECHAT_ChatType::BgSystemAlliance,
+            ChatType::BgSystemHorde => CMSG_MESSAGECHAT_ChatType::BgSystemHorde,
+            ChatType::RaidLeader => CMSG_MESSAGECHAT_ChatType::RaidLeader,
+            ChatType::RaidWarning => CMSG_MESSAGECHAT_ChatType::RaidWarning,
+            ChatType::RaidBossWhisper => CMSG_MESSAGECHAT_ChatType::RaidBossWhisper,
+            ChatType::RaidBossEmote => CMSG_MESSAGECHAT_ChatType::RaidBossEmote,
+            ChatType::Battleground => CMSG_MESSAGECHAT_ChatType::Battleground,
+            ChatType::BattlegroundLeader => CMSG_MESSAGECHAT_ChatType::BattlegroundLeader,
         };
 
         // message: CString
@@ -185,92 +185,92 @@ impl CMSG_MESSAGECHAT {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum CMSG_MESSAGECHAT_ChatType {
-    SAY,
-    PARTY,
-    RAID,
-    GUILD,
-    OFFICER,
-    YELL,
-    WHISPER {
+    Say,
+    Party,
+    Raid,
+    Guild,
+    Officer,
+    Yell,
+    Whisper {
         target_player: String,
     },
-    WHISPER_INFORM,
-    EMOTE,
-    TEXT_EMOTE,
-    SYSTEM,
-    MONSTER_SAY,
-    MONSTER_YELL,
-    MONSTER_EMOTE,
-    CHANNEL {
+    WhisperInform,
+    Emote,
+    TextEmote,
+    System,
+    MonsterSay,
+    MonsterYell,
+    MonsterEmote,
+    Channel {
         channel: String,
     },
-    CHANNEL_JOIN,
-    CHANNEL_LEAVE,
-    CHANNEL_LIST,
-    CHANNEL_NOTICE,
-    CHANNEL_NOTICE_USER,
-    AFK,
-    DND,
-    IGNORED,
-    SKILL,
-    LOOT,
-    MONSTER_WHISPER,
-    BG_SYSTEM_NEUTRAL,
-    BG_SYSTEM_ALLIANCE,
-    BG_SYSTEM_HORDE,
-    RAID_LEADER,
-    RAID_WARNING,
-    RAID_BOSS_WHISPER,
-    RAID_BOSS_EMOTE,
-    BATTLEGROUND,
-    BATTLEGROUND_LEADER,
+    ChannelJoin,
+    ChannelLeave,
+    ChannelList,
+    ChannelNotice,
+    ChannelNoticeUser,
+    Afk,
+    Dnd,
+    Ignored,
+    Skill,
+    Loot,
+    MonsterWhisper,
+    BgSystemNeutral,
+    BgSystemAlliance,
+    BgSystemHorde,
+    RaidLeader,
+    RaidWarning,
+    RaidBossWhisper,
+    RaidBossEmote,
+    Battleground,
+    BattlegroundLeader,
 }
 
 impl Default for CMSG_MESSAGECHAT_ChatType {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::SAY
+        Self::Say
     }
 }
 
 impl CMSG_MESSAGECHAT_ChatType {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::SAY => 0,
-            Self::PARTY => 1,
-            Self::RAID => 2,
-            Self::GUILD => 3,
-            Self::OFFICER => 4,
-            Self::YELL => 5,
-            Self::WHISPER { .. } => 6,
-            Self::WHISPER_INFORM => 7,
-            Self::EMOTE => 8,
-            Self::TEXT_EMOTE => 9,
-            Self::SYSTEM => 10,
-            Self::MONSTER_SAY => 11,
-            Self::MONSTER_YELL => 12,
-            Self::MONSTER_EMOTE => 13,
-            Self::CHANNEL { .. } => 14,
-            Self::CHANNEL_JOIN => 15,
-            Self::CHANNEL_LEAVE => 16,
-            Self::CHANNEL_LIST => 17,
-            Self::CHANNEL_NOTICE => 18,
-            Self::CHANNEL_NOTICE_USER => 19,
-            Self::AFK => 20,
-            Self::DND => 21,
-            Self::IGNORED => 22,
-            Self::SKILL => 23,
-            Self::LOOT => 24,
-            Self::MONSTER_WHISPER => 26,
-            Self::BG_SYSTEM_NEUTRAL => 82,
-            Self::BG_SYSTEM_ALLIANCE => 83,
-            Self::BG_SYSTEM_HORDE => 84,
-            Self::RAID_LEADER => 87,
-            Self::RAID_WARNING => 88,
-            Self::RAID_BOSS_WHISPER => 89,
-            Self::RAID_BOSS_EMOTE => 90,
-            Self::BATTLEGROUND => 92,
-            Self::BATTLEGROUND_LEADER => 93,
+            Self::Say => 0,
+            Self::Party => 1,
+            Self::Raid => 2,
+            Self::Guild => 3,
+            Self::Officer => 4,
+            Self::Yell => 5,
+            Self::Whisper { .. } => 6,
+            Self::WhisperInform => 7,
+            Self::Emote => 8,
+            Self::TextEmote => 9,
+            Self::System => 10,
+            Self::MonsterSay => 11,
+            Self::MonsterYell => 12,
+            Self::MonsterEmote => 13,
+            Self::Channel { .. } => 14,
+            Self::ChannelJoin => 15,
+            Self::ChannelLeave => 16,
+            Self::ChannelList => 17,
+            Self::ChannelNotice => 18,
+            Self::ChannelNoticeUser => 19,
+            Self::Afk => 20,
+            Self::Dnd => 21,
+            Self::Ignored => 22,
+            Self::Skill => 23,
+            Self::Loot => 24,
+            Self::MonsterWhisper => 26,
+            Self::BgSystemNeutral => 82,
+            Self::BgSystemAlliance => 83,
+            Self::BgSystemHorde => 84,
+            Self::RaidLeader => 87,
+            Self::RaidWarning => 88,
+            Self::RaidBossWhisper => 89,
+            Self::RaidBossEmote => 90,
+            Self::Battleground => 92,
+            Self::BattlegroundLeader => 93,
         }
     }
 
@@ -279,115 +279,115 @@ impl CMSG_MESSAGECHAT_ChatType {
 impl CMSG_MESSAGECHAT_ChatType {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::SAY => {
+            Self::Say => {
                 4
             }
-            Self::PARTY => {
+            Self::Party => {
                 4
             }
-            Self::RAID => {
+            Self::Raid => {
                 4
             }
-            Self::GUILD => {
+            Self::Guild => {
                 4
             }
-            Self::OFFICER => {
+            Self::Officer => {
                 4
             }
-            Self::YELL => {
+            Self::Yell => {
                 4
             }
-            Self::WHISPER {
+            Self::Whisper {
                 target_player,
             } => {
                 4
                 + target_player.len() + 1 // target_player: CString
             }
-            Self::WHISPER_INFORM => {
+            Self::WhisperInform => {
                 4
             }
-            Self::EMOTE => {
+            Self::Emote => {
                 4
             }
-            Self::TEXT_EMOTE => {
+            Self::TextEmote => {
                 4
             }
-            Self::SYSTEM => {
+            Self::System => {
                 4
             }
-            Self::MONSTER_SAY => {
+            Self::MonsterSay => {
                 4
             }
-            Self::MONSTER_YELL => {
+            Self::MonsterYell => {
                 4
             }
-            Self::MONSTER_EMOTE => {
+            Self::MonsterEmote => {
                 4
             }
-            Self::CHANNEL {
+            Self::Channel {
                 channel,
             } => {
                 4
                 + channel.len() + 1 // channel: CString
             }
-            Self::CHANNEL_JOIN => {
+            Self::ChannelJoin => {
                 4
             }
-            Self::CHANNEL_LEAVE => {
+            Self::ChannelLeave => {
                 4
             }
-            Self::CHANNEL_LIST => {
+            Self::ChannelList => {
                 4
             }
-            Self::CHANNEL_NOTICE => {
+            Self::ChannelNotice => {
                 4
             }
-            Self::CHANNEL_NOTICE_USER => {
+            Self::ChannelNoticeUser => {
                 4
             }
-            Self::AFK => {
+            Self::Afk => {
                 4
             }
-            Self::DND => {
+            Self::Dnd => {
                 4
             }
-            Self::IGNORED => {
+            Self::Ignored => {
                 4
             }
-            Self::SKILL => {
+            Self::Skill => {
                 4
             }
-            Self::LOOT => {
+            Self::Loot => {
                 4
             }
-            Self::MONSTER_WHISPER => {
+            Self::MonsterWhisper => {
                 4
             }
-            Self::BG_SYSTEM_NEUTRAL => {
+            Self::BgSystemNeutral => {
                 4
             }
-            Self::BG_SYSTEM_ALLIANCE => {
+            Self::BgSystemAlliance => {
                 4
             }
-            Self::BG_SYSTEM_HORDE => {
+            Self::BgSystemHorde => {
                 4
             }
-            Self::RAID_LEADER => {
+            Self::RaidLeader => {
                 4
             }
-            Self::RAID_WARNING => {
+            Self::RaidWarning => {
                 4
             }
-            Self::RAID_BOSS_WHISPER => {
+            Self::RaidBossWhisper => {
                 4
             }
-            Self::RAID_BOSS_EMOTE => {
+            Self::RaidBossEmote => {
                 4
             }
-            Self::BATTLEGROUND => {
+            Self::Battleground => {
                 4
             }
-            Self::BATTLEGROUND_LEADER => {
+            Self::BattlegroundLeader => {
                 4
             }
         }

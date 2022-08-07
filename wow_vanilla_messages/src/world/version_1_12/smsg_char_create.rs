@@ -65,7 +65,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_CREATE0() {
         let expected = SMSG_CHAR_CREATE {
-            result: WorldResult::CHAR_CREATE_ERROR,
+            result: WorldResult::CharCreateError,
         };
 
         let header_size = 2 + 2;
@@ -90,7 +90,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_CREATE0() {
         let expected = SMSG_CHAR_CREATE {
-            result: WorldResult::CHAR_CREATE_ERROR,
+            result: WorldResult::CharCreateError,
         };
 
         let header_size = 2 + 2;
@@ -115,7 +115,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_CREATE0() {
         let expected = SMSG_CHAR_CREATE {
-            result: WorldResult::CHAR_CREATE_ERROR,
+            result: WorldResult::CharCreateError,
         };
 
         let header_size = 2 + 2;

@@ -86,7 +86,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGIN_VERIFY_WORLD0() {
         let expected = SMSG_LOGIN_VERIFY_WORLD {
-            map: Map::EASTERN_KINGDOMS,
+            map: Map::EasternKingdoms,
             position: Vector3d {
                 x: -8949.95_f32,
                 y: -132.493_f32,
@@ -119,7 +119,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGIN_VERIFY_WORLD0() {
         let expected = SMSG_LOGIN_VERIFY_WORLD {
-            map: Map::EASTERN_KINGDOMS,
+            map: Map::EasternKingdoms,
             position: Vector3d {
                 x: -8949.95_f32,
                 y: -132.493_f32,
@@ -152,7 +152,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGIN_VERIFY_WORLD0() {
         let expected = SMSG_LOGIN_VERIFY_WORLD {
-            map: Map::EASTERN_KINGDOMS,
+            map: Map::EasternKingdoms,
             position: Vector3d {
                 x: -8949.95_f32,
                 y: -132.493_f32,

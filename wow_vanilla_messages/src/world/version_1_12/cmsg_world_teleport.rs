@@ -94,7 +94,7 @@ mod test {
     fn CMSG_WORLD_TELEPORT0() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xDEADBEEF,
-            map: Map::KALIMDOR,
+            map: Map::Kalimdor,
             position: Vector3d {
                 x: 1_f32,
                 y: 2_f32,
@@ -129,7 +129,7 @@ mod test {
     async fn tokio_CMSG_WORLD_TELEPORT0() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xDEADBEEF,
-            map: Map::KALIMDOR,
+            map: Map::Kalimdor,
             position: Vector3d {
                 x: 1_f32,
                 y: 2_f32,
@@ -164,7 +164,7 @@ mod test {
     async fn astd_CMSG_WORLD_TELEPORT0() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xDEADBEEF,
-            map: Map::KALIMDOR,
+            map: Map::Kalimdor,
             position: Vector3d {
                 x: 1_f32,
                 y: 2_f32,
@@ -203,7 +203,7 @@ mod test {
     fn CMSG_WORLD_TELEPORT1() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0x2093D9A,
-            map: Map::BLACKWING_LAIR,
+            map: Map::BlackwingLair,
             position: Vector3d {
                 x: 452_f32,
                 y: 6454_f32,
@@ -238,7 +238,7 @@ mod test {
     async fn tokio_CMSG_WORLD_TELEPORT1() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0x2093D9A,
-            map: Map::BLACKWING_LAIR,
+            map: Map::BlackwingLair,
             position: Vector3d {
                 x: 452_f32,
                 y: 6454_f32,
@@ -273,7 +273,7 @@ mod test {
     async fn astd_CMSG_WORLD_TELEPORT1() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0x2093D9A,
-            map: Map::BLACKWING_LAIR,
+            map: Map::BlackwingLair,
             position: Vector3d {
                 x: 452_f32,
                 y: 6454_f32,

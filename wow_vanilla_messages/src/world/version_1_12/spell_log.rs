@@ -81,21 +81,21 @@ impl SpellLog {
         w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes())?;
 
         match &self.effect {
-            SpellLog_SpellEffect::NONE => {}
-            SpellLog_SpellEffect::INSTAKILL {
+            SpellLog_SpellEffect::None => {}
+            SpellLog_SpellEffect::Instakill {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::SCHOOL_DAMAGE => {}
-            SpellLog_SpellEffect::DUMMY => {}
-            SpellLog_SpellEffect::PORTAL_TELEPORT => {}
-            SpellLog_SpellEffect::TELEPORT_UNITS => {}
-            SpellLog_SpellEffect::APPLY_AURA => {}
-            SpellLog_SpellEffect::ENVIRONMENTAL_DAMAGE => {}
-            SpellLog_SpellEffect::POWER_DRAIN {
+            SpellLog_SpellEffect::SchoolDamage => {}
+            SpellLog_SpellEffect::Dummy => {}
+            SpellLog_SpellEffect::PortalTeleport => {}
+            SpellLog_SpellEffect::TeleportUnits => {}
+            SpellLog_SpellEffect::ApplyAura => {}
+            SpellLog_SpellEffect::EnvironmentalDamage => {}
+            SpellLog_SpellEffect::PowerDrain {
                 target1,
                 unknown1,
                 unknown2,
@@ -114,23 +114,23 @@ impl SpellLog {
                 w.write_all(&unknown3.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::HEALTH_LEECH => {}
-            SpellLog_SpellEffect::HEAL => {}
-            SpellLog_SpellEffect::BIND => {}
-            SpellLog_SpellEffect::PORTAL => {}
-            SpellLog_SpellEffect::RITUAL_BASE => {}
-            SpellLog_SpellEffect::RITUAL_SPECIALIZE => {}
-            SpellLog_SpellEffect::RITUAL_ACTIVATE_PORTAL => {}
-            SpellLog_SpellEffect::QUEST_COMPLETE => {}
-            SpellLog_SpellEffect::WEAPON_DAMAGE_NOSCHOOL => {}
-            SpellLog_SpellEffect::RESURRECT {
+            SpellLog_SpellEffect::HealthLeech => {}
+            SpellLog_SpellEffect::Heal => {}
+            SpellLog_SpellEffect::Bind => {}
+            SpellLog_SpellEffect::Portal => {}
+            SpellLog_SpellEffect::RitualBase => {}
+            SpellLog_SpellEffect::RitualSpecialize => {}
+            SpellLog_SpellEffect::RitualActivatePortal => {}
+            SpellLog_SpellEffect::QuestComplete => {}
+            SpellLog_SpellEffect::WeaponDamageNoschool => {}
+            SpellLog_SpellEffect::Resurrect {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::ADD_EXTRA_ATTACKS {
+            SpellLog_SpellEffect::AddExtraAttacks {
                 target2,
                 unknown4,
             } => {
@@ -141,85 +141,85 @@ impl SpellLog {
                 w.write_all(&unknown4.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::DODGE => {}
-            SpellLog_SpellEffect::EVADE => {}
-            SpellLog_SpellEffect::PARRY => {}
-            SpellLog_SpellEffect::BLOCK => {}
-            SpellLog_SpellEffect::CREATE_ITEM {
+            SpellLog_SpellEffect::Dodge => {}
+            SpellLog_SpellEffect::Evade => {}
+            SpellLog_SpellEffect::Parry => {}
+            SpellLog_SpellEffect::Block => {}
+            SpellLog_SpellEffect::CreateItem {
                 spell_effect_item_type,
             } => {
                 // spell_effect_item_type: u32
                 w.write_all(&spell_effect_item_type.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::WEAPON => {}
-            SpellLog_SpellEffect::DEFENSE => {}
-            SpellLog_SpellEffect::PERSISTENT_AREA_AURA => {}
-            SpellLog_SpellEffect::SUMMON => {}
-            SpellLog_SpellEffect::LEAP => {}
-            SpellLog_SpellEffect::ENERGIZE => {}
-            SpellLog_SpellEffect::WEAPON_PERCENT_DAMAGE => {}
-            SpellLog_SpellEffect::TRIGGER_MISSILE => {}
-            SpellLog_SpellEffect::OPEN_LOCK {
+            SpellLog_SpellEffect::Weapon => {}
+            SpellLog_SpellEffect::Defense => {}
+            SpellLog_SpellEffect::PersistentAreaAura => {}
+            SpellLog_SpellEffect::Summon => {}
+            SpellLog_SpellEffect::Leap => {}
+            SpellLog_SpellEffect::Energize => {}
+            SpellLog_SpellEffect::WeaponPercentDamage => {}
+            SpellLog_SpellEffect::TriggerMissile => {}
+            SpellLog_SpellEffect::OpenLock {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::SUMMON_CHANGE_ITEM => {}
-            SpellLog_SpellEffect::APPLY_AREA_AURA_PARTY => {}
-            SpellLog_SpellEffect::LEARN_SPELL => {}
-            SpellLog_SpellEffect::SPELL_DEFENSE => {}
-            SpellLog_SpellEffect::DISPEL {
+            SpellLog_SpellEffect::SummonChangeItem => {}
+            SpellLog_SpellEffect::ApplyAreaAuraParty => {}
+            SpellLog_SpellEffect::LearnSpell => {}
+            SpellLog_SpellEffect::SpellDefense => {}
+            SpellLog_SpellEffect::Dispel {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::LANGUAGE => {}
-            SpellLog_SpellEffect::DUAL_WIELD => {}
-            SpellLog_SpellEffect::SUMMON_WILD => {}
-            SpellLog_SpellEffect::SUMMON_GUARDIAN => {}
-            SpellLog_SpellEffect::TELEPORT_UNITS_FACE_CASTER => {}
-            SpellLog_SpellEffect::SKILL_STEP => {}
-            SpellLog_SpellEffect::ADD_HONOR => {}
-            SpellLog_SpellEffect::SPAWN => {}
-            SpellLog_SpellEffect::TRADE_SKILL => {}
-            SpellLog_SpellEffect::STEALTH => {}
-            SpellLog_SpellEffect::DETECT => {}
-            SpellLog_SpellEffect::TRANS_DOOR => {}
-            SpellLog_SpellEffect::FORCE_CRITICAL_HIT => {}
-            SpellLog_SpellEffect::GUARANTEE_HIT => {}
-            SpellLog_SpellEffect::ENCHANT_ITEM => {}
-            SpellLog_SpellEffect::ENCHANT_ITEM_TEMPORARY => {}
-            SpellLog_SpellEffect::TAMECREATURE => {}
-            SpellLog_SpellEffect::SUMMON_PET => {}
-            SpellLog_SpellEffect::LEARN_PET_SPELL => {}
-            SpellLog_SpellEffect::WEAPON_DAMAGE => {}
-            SpellLog_SpellEffect::OPEN_LOCK_ITEM {
+            SpellLog_SpellEffect::Language => {}
+            SpellLog_SpellEffect::DualWield => {}
+            SpellLog_SpellEffect::SummonWild => {}
+            SpellLog_SpellEffect::SummonGuardian => {}
+            SpellLog_SpellEffect::TeleportUnitsFaceCaster => {}
+            SpellLog_SpellEffect::SkillStep => {}
+            SpellLog_SpellEffect::AddHonor => {}
+            SpellLog_SpellEffect::Spawn => {}
+            SpellLog_SpellEffect::TradeSkill => {}
+            SpellLog_SpellEffect::Stealth => {}
+            SpellLog_SpellEffect::Detect => {}
+            SpellLog_SpellEffect::TransDoor => {}
+            SpellLog_SpellEffect::ForceCriticalHit => {}
+            SpellLog_SpellEffect::GuaranteeHit => {}
+            SpellLog_SpellEffect::EnchantItem => {}
+            SpellLog_SpellEffect::EnchantItemTemporary => {}
+            SpellLog_SpellEffect::Tamecreature => {}
+            SpellLog_SpellEffect::SummonPet => {}
+            SpellLog_SpellEffect::LearnPetSpell => {}
+            SpellLog_SpellEffect::WeaponDamage => {}
+            SpellLog_SpellEffect::OpenLockItem {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::PROFICIENCY => {}
-            SpellLog_SpellEffect::SEND_EVENT => {}
-            SpellLog_SpellEffect::POWER_BURN => {}
-            SpellLog_SpellEffect::THREAT {
+            SpellLog_SpellEffect::Proficiency => {}
+            SpellLog_SpellEffect::SendEvent => {}
+            SpellLog_SpellEffect::PowerBurn => {}
+            SpellLog_SpellEffect::Threat {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::TRIGGER_SPELL => {}
-            SpellLog_SpellEffect::HEALTH_FUNNEL => {}
-            SpellLog_SpellEffect::POWER_FUNNEL => {}
-            SpellLog_SpellEffect::HEAL_MAX_HEALTH => {}
-            SpellLog_SpellEffect::INTERRUPT_CAST {
+            SpellLog_SpellEffect::TriggerSpell => {}
+            SpellLog_SpellEffect::HealthFunnel => {}
+            SpellLog_SpellEffect::PowerFunnel => {}
+            SpellLog_SpellEffect::HealMaxHealth => {}
+            SpellLog_SpellEffect::InterruptCast {
                 interrupted_spell,
                 target3,
             } => {
@@ -230,85 +230,85 @@ impl SpellLog {
                 w.write_all(&interrupted_spell.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::DISTRACT {
+            SpellLog_SpellEffect::Distract {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::PULL => {}
-            SpellLog_SpellEffect::PICKPOCKET => {}
-            SpellLog_SpellEffect::ADD_FARSIGHT => {}
-            SpellLog_SpellEffect::SUMMON_POSSESSED => {}
-            SpellLog_SpellEffect::SUMMON_TOTEM => {}
-            SpellLog_SpellEffect::HEAL_MECHANICAL => {}
-            SpellLog_SpellEffect::SUMMON_OBJECT_WILD => {}
-            SpellLog_SpellEffect::SCRIPT_EFFECT => {}
-            SpellLog_SpellEffect::ATTACK => {}
-            SpellLog_SpellEffect::SANCTUARY {
+            SpellLog_SpellEffect::Pull => {}
+            SpellLog_SpellEffect::Pickpocket => {}
+            SpellLog_SpellEffect::AddFarsight => {}
+            SpellLog_SpellEffect::SummonPossessed => {}
+            SpellLog_SpellEffect::SummonTotem => {}
+            SpellLog_SpellEffect::HealMechanical => {}
+            SpellLog_SpellEffect::SummonObjectWild => {}
+            SpellLog_SpellEffect::ScriptEffect => {}
+            SpellLog_SpellEffect::Attack => {}
+            SpellLog_SpellEffect::Sanctuary {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::ADD_COMBO_POINTS => {}
-            SpellLog_SpellEffect::CREATE_HOUSE => {}
-            SpellLog_SpellEffect::BIND_SIGHT => {}
-            SpellLog_SpellEffect::DUEL => {}
-            SpellLog_SpellEffect::STUCK => {}
-            SpellLog_SpellEffect::SUMMON_PLAYER => {}
-            SpellLog_SpellEffect::ACTIVATE_OBJECT => {}
-            SpellLog_SpellEffect::SUMMON_TOTEM_SLOT1 => {}
-            SpellLog_SpellEffect::SUMMON_TOTEM_SLOT2 => {}
-            SpellLog_SpellEffect::SUMMON_TOTEM_SLOT3 => {}
-            SpellLog_SpellEffect::SUMMON_TOTEM_SLOT4 => {}
-            SpellLog_SpellEffect::THREAT_ALL {
+            SpellLog_SpellEffect::AddComboPoints => {}
+            SpellLog_SpellEffect::CreateHouse => {}
+            SpellLog_SpellEffect::BindSight => {}
+            SpellLog_SpellEffect::Duel => {}
+            SpellLog_SpellEffect::Stuck => {}
+            SpellLog_SpellEffect::SummonPlayer => {}
+            SpellLog_SpellEffect::ActivateObject => {}
+            SpellLog_SpellEffect::SummonTotemSlot1 => {}
+            SpellLog_SpellEffect::SummonTotemSlot2 => {}
+            SpellLog_SpellEffect::SummonTotemSlot3 => {}
+            SpellLog_SpellEffect::SummonTotemSlot4 => {}
+            SpellLog_SpellEffect::ThreatAll {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::ENCHANT_HELD_ITEM => {}
-            SpellLog_SpellEffect::SUMMON_PHANTASM => {}
-            SpellLog_SpellEffect::SELF_RESURRECT => {}
-            SpellLog_SpellEffect::SKINNING => {}
-            SpellLog_SpellEffect::CHARGE => {}
-            SpellLog_SpellEffect::SUMMON_CRITTER => {}
-            SpellLog_SpellEffect::KNOCK_BACK => {}
-            SpellLog_SpellEffect::DISENCHANT => {}
-            SpellLog_SpellEffect::INEBRIATE => {}
-            SpellLog_SpellEffect::FEED_PET {
+            SpellLog_SpellEffect::EnchantHeldItem => {}
+            SpellLog_SpellEffect::SummonPhantasm => {}
+            SpellLog_SpellEffect::SelfResurrect => {}
+            SpellLog_SpellEffect::Skinning => {}
+            SpellLog_SpellEffect::Charge => {}
+            SpellLog_SpellEffect::SummonCritter => {}
+            SpellLog_SpellEffect::KnockBack => {}
+            SpellLog_SpellEffect::Disenchant => {}
+            SpellLog_SpellEffect::Inebriate => {}
+            SpellLog_SpellEffect::FeedPet {
                 item_target_entry,
             } => {
                 // item_target_entry: u32
                 w.write_all(&item_target_entry.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::DISMISS_PET {
+            SpellLog_SpellEffect::DismissPet {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::REPUTATION => {}
-            SpellLog_SpellEffect::SUMMON_OBJECT_SLOT1 => {}
-            SpellLog_SpellEffect::SUMMON_OBJECT_SLOT2 => {}
-            SpellLog_SpellEffect::SUMMON_OBJECT_SLOT3 => {}
-            SpellLog_SpellEffect::SUMMON_OBJECT_SLOT4 => {}
-            SpellLog_SpellEffect::DISPEL_MECHANIC {
+            SpellLog_SpellEffect::Reputation => {}
+            SpellLog_SpellEffect::SummonObjectSlot1 => {}
+            SpellLog_SpellEffect::SummonObjectSlot2 => {}
+            SpellLog_SpellEffect::SummonObjectSlot3 => {}
+            SpellLog_SpellEffect::SummonObjectSlot4 => {}
+            SpellLog_SpellEffect::DispelMechanic {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::SUMMON_DEAD_PET => {}
-            SpellLog_SpellEffect::DESTROY_ALL_TOTEMS => {}
-            SpellLog_SpellEffect::DURABILITY_DAMAGE {
+            SpellLog_SpellEffect::SummonDeadPet => {}
+            SpellLog_SpellEffect::DestroyAllTotems => {}
+            SpellLog_SpellEffect::DurabilityDamage {
                 target4,
                 unknown5,
                 unknown6,
@@ -323,52 +323,52 @@ impl SpellLog {
                 w.write_all(&unknown6.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::SUMMON_DEMON => {}
-            SpellLog_SpellEffect::RESURRECT_NEW {
+            SpellLog_SpellEffect::SummonDemon => {}
+            SpellLog_SpellEffect::ResurrectNew {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::ATTACK_ME {
+            SpellLog_SpellEffect::AttackMe {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::DURABILITY_DAMAGE_PCT => {}
-            SpellLog_SpellEffect::SKIN_PLAYER_CORPSE {
+            SpellLog_SpellEffect::DurabilityDamagePct => {}
+            SpellLog_SpellEffect::SkinPlayerCorpse {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::SPIRIT_HEAL => {}
-            SpellLog_SpellEffect::SKILL => {}
-            SpellLog_SpellEffect::APPLY_AREA_AURA_PET => {}
-            SpellLog_SpellEffect::TELEPORT_GRAVEYARD => {}
-            SpellLog_SpellEffect::NORMALIZED_WEAPON_DMG => {}
-            SpellLog_SpellEffect::UNKNOWN122 => {}
-            SpellLog_SpellEffect::SEND_TAXI => {}
-            SpellLog_SpellEffect::PLAYER_PULL => {}
-            SpellLog_SpellEffect::MODIFY_THREAT_PERCENT {
+            SpellLog_SpellEffect::SpiritHeal => {}
+            SpellLog_SpellEffect::Skill => {}
+            SpellLog_SpellEffect::ApplyAreaAuraPet => {}
+            SpellLog_SpellEffect::TeleportGraveyard => {}
+            SpellLog_SpellEffect::NormalizedWeaponDmg => {}
+            SpellLog_SpellEffect::Unknown122 => {}
+            SpellLog_SpellEffect::SendTaxi => {}
+            SpellLog_SpellEffect::PlayerPull => {}
+            SpellLog_SpellEffect::ModifyThreatPercent {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::UNKNOWN126 {
+            SpellLog_SpellEffect::Unknown126 {
                 target5,
             } => {
                 // target5: Guid
                 w.write_all(&target5.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::UNKNOWN127 => {}
+            SpellLog_SpellEffect::Unknown127 => {}
         }
 
         Ok(())
@@ -385,22 +385,22 @@ impl SpellLog {
         // amount_of_logs is expected to always be 1 (1)
 
         let effect_if = match effect {
-            SpellEffect::NONE => SpellLog_SpellEffect::NONE,
-            SpellEffect::INSTAKILL => {
+            SpellEffect::None => SpellLog_SpellEffect::None,
+            SpellEffect::Instakill => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::INSTAKILL {
+                SpellLog_SpellEffect::Instakill {
                     target5,
                 }
             }
-            SpellEffect::SCHOOL_DAMAGE => SpellLog_SpellEffect::SCHOOL_DAMAGE,
-            SpellEffect::DUMMY => SpellLog_SpellEffect::DUMMY,
-            SpellEffect::PORTAL_TELEPORT => SpellLog_SpellEffect::PORTAL_TELEPORT,
-            SpellEffect::TELEPORT_UNITS => SpellLog_SpellEffect::TELEPORT_UNITS,
-            SpellEffect::APPLY_AURA => SpellLog_SpellEffect::APPLY_AURA,
-            SpellEffect::ENVIRONMENTAL_DAMAGE => SpellLog_SpellEffect::ENVIRONMENTAL_DAMAGE,
-            SpellEffect::POWER_DRAIN => {
+            SpellEffect::SchoolDamage => SpellLog_SpellEffect::SchoolDamage,
+            SpellEffect::Dummy => SpellLog_SpellEffect::Dummy,
+            SpellEffect::PortalTeleport => SpellLog_SpellEffect::PortalTeleport,
+            SpellEffect::TeleportUnits => SpellLog_SpellEffect::TeleportUnits,
+            SpellEffect::ApplyAura => SpellLog_SpellEffect::ApplyAura,
+            SpellEffect::EnvironmentalDamage => SpellLog_SpellEffect::EnvironmentalDamage,
+            SpellEffect::PowerDrain => {
                 // target1: Guid
                 let target1 = Guid::read(r)?;
 
@@ -412,222 +412,222 @@ impl SpellLog {
 
                 // unknown3: f32
                 let unknown3 = crate::util::read_f32_le(r)?;
-                SpellLog_SpellEffect::POWER_DRAIN {
+                SpellLog_SpellEffect::PowerDrain {
                     target1,
                     unknown1,
                     unknown2,
                     unknown3,
                 }
             }
-            SpellEffect::HEALTH_LEECH => SpellLog_SpellEffect::HEALTH_LEECH,
-            SpellEffect::HEAL => SpellLog_SpellEffect::HEAL,
-            SpellEffect::BIND => SpellLog_SpellEffect::BIND,
-            SpellEffect::PORTAL => SpellLog_SpellEffect::PORTAL,
-            SpellEffect::RITUAL_BASE => SpellLog_SpellEffect::RITUAL_BASE,
-            SpellEffect::RITUAL_SPECIALIZE => SpellLog_SpellEffect::RITUAL_SPECIALIZE,
-            SpellEffect::RITUAL_ACTIVATE_PORTAL => SpellLog_SpellEffect::RITUAL_ACTIVATE_PORTAL,
-            SpellEffect::QUEST_COMPLETE => SpellLog_SpellEffect::QUEST_COMPLETE,
-            SpellEffect::WEAPON_DAMAGE_NOSCHOOL => SpellLog_SpellEffect::WEAPON_DAMAGE_NOSCHOOL,
-            SpellEffect::RESURRECT => {
+            SpellEffect::HealthLeech => SpellLog_SpellEffect::HealthLeech,
+            SpellEffect::Heal => SpellLog_SpellEffect::Heal,
+            SpellEffect::Bind => SpellLog_SpellEffect::Bind,
+            SpellEffect::Portal => SpellLog_SpellEffect::Portal,
+            SpellEffect::RitualBase => SpellLog_SpellEffect::RitualBase,
+            SpellEffect::RitualSpecialize => SpellLog_SpellEffect::RitualSpecialize,
+            SpellEffect::RitualActivatePortal => SpellLog_SpellEffect::RitualActivatePortal,
+            SpellEffect::QuestComplete => SpellLog_SpellEffect::QuestComplete,
+            SpellEffect::WeaponDamageNoschool => SpellLog_SpellEffect::WeaponDamageNoschool,
+            SpellEffect::Resurrect => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::RESURRECT {
+                SpellLog_SpellEffect::Resurrect {
                     target5,
                 }
             }
-            SpellEffect::ADD_EXTRA_ATTACKS => {
+            SpellEffect::AddExtraAttacks => {
                 // target2: Guid
                 let target2 = Guid::read(r)?;
 
                 // unknown4: u32
                 let unknown4 = crate::util::read_u32_le(r)?;
 
-                SpellLog_SpellEffect::ADD_EXTRA_ATTACKS {
+                SpellLog_SpellEffect::AddExtraAttacks {
                     target2,
                     unknown4,
                 }
             }
-            SpellEffect::DODGE => SpellLog_SpellEffect::DODGE,
-            SpellEffect::EVADE => SpellLog_SpellEffect::EVADE,
-            SpellEffect::PARRY => SpellLog_SpellEffect::PARRY,
-            SpellEffect::BLOCK => SpellLog_SpellEffect::BLOCK,
-            SpellEffect::CREATE_ITEM => {
+            SpellEffect::Dodge => SpellLog_SpellEffect::Dodge,
+            SpellEffect::Evade => SpellLog_SpellEffect::Evade,
+            SpellEffect::Parry => SpellLog_SpellEffect::Parry,
+            SpellEffect::Block => SpellLog_SpellEffect::Block,
+            SpellEffect::CreateItem => {
                 // spell_effect_item_type: u32
                 let spell_effect_item_type = crate::util::read_u32_le(r)?;
 
-                SpellLog_SpellEffect::CREATE_ITEM {
+                SpellLog_SpellEffect::CreateItem {
                     spell_effect_item_type,
                 }
             }
-            SpellEffect::WEAPON => SpellLog_SpellEffect::WEAPON,
-            SpellEffect::DEFENSE => SpellLog_SpellEffect::DEFENSE,
-            SpellEffect::PERSISTENT_AREA_AURA => SpellLog_SpellEffect::PERSISTENT_AREA_AURA,
-            SpellEffect::SUMMON => SpellLog_SpellEffect::SUMMON,
-            SpellEffect::LEAP => SpellLog_SpellEffect::LEAP,
-            SpellEffect::ENERGIZE => SpellLog_SpellEffect::ENERGIZE,
-            SpellEffect::WEAPON_PERCENT_DAMAGE => SpellLog_SpellEffect::WEAPON_PERCENT_DAMAGE,
-            SpellEffect::TRIGGER_MISSILE => SpellLog_SpellEffect::TRIGGER_MISSILE,
-            SpellEffect::OPEN_LOCK => {
+            SpellEffect::Weapon => SpellLog_SpellEffect::Weapon,
+            SpellEffect::Defense => SpellLog_SpellEffect::Defense,
+            SpellEffect::PersistentAreaAura => SpellLog_SpellEffect::PersistentAreaAura,
+            SpellEffect::Summon => SpellLog_SpellEffect::Summon,
+            SpellEffect::Leap => SpellLog_SpellEffect::Leap,
+            SpellEffect::Energize => SpellLog_SpellEffect::Energize,
+            SpellEffect::WeaponPercentDamage => SpellLog_SpellEffect::WeaponPercentDamage,
+            SpellEffect::TriggerMissile => SpellLog_SpellEffect::TriggerMissile,
+            SpellEffect::OpenLock => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::OPEN_LOCK {
+                SpellLog_SpellEffect::OpenLock {
                     target5,
                 }
             }
-            SpellEffect::SUMMON_CHANGE_ITEM => SpellLog_SpellEffect::SUMMON_CHANGE_ITEM,
-            SpellEffect::APPLY_AREA_AURA_PARTY => SpellLog_SpellEffect::APPLY_AREA_AURA_PARTY,
-            SpellEffect::LEARN_SPELL => SpellLog_SpellEffect::LEARN_SPELL,
-            SpellEffect::SPELL_DEFENSE => SpellLog_SpellEffect::SPELL_DEFENSE,
-            SpellEffect::DISPEL => {
+            SpellEffect::SummonChangeItem => SpellLog_SpellEffect::SummonChangeItem,
+            SpellEffect::ApplyAreaAuraParty => SpellLog_SpellEffect::ApplyAreaAuraParty,
+            SpellEffect::LearnSpell => SpellLog_SpellEffect::LearnSpell,
+            SpellEffect::SpellDefense => SpellLog_SpellEffect::SpellDefense,
+            SpellEffect::Dispel => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::DISPEL {
+                SpellLog_SpellEffect::Dispel {
                     target5,
                 }
             }
-            SpellEffect::LANGUAGE => SpellLog_SpellEffect::LANGUAGE,
-            SpellEffect::DUAL_WIELD => SpellLog_SpellEffect::DUAL_WIELD,
-            SpellEffect::SUMMON_WILD => SpellLog_SpellEffect::SUMMON_WILD,
-            SpellEffect::SUMMON_GUARDIAN => SpellLog_SpellEffect::SUMMON_GUARDIAN,
-            SpellEffect::TELEPORT_UNITS_FACE_CASTER => SpellLog_SpellEffect::TELEPORT_UNITS_FACE_CASTER,
-            SpellEffect::SKILL_STEP => SpellLog_SpellEffect::SKILL_STEP,
-            SpellEffect::ADD_HONOR => SpellLog_SpellEffect::ADD_HONOR,
-            SpellEffect::SPAWN => SpellLog_SpellEffect::SPAWN,
-            SpellEffect::TRADE_SKILL => SpellLog_SpellEffect::TRADE_SKILL,
-            SpellEffect::STEALTH => SpellLog_SpellEffect::STEALTH,
-            SpellEffect::DETECT => SpellLog_SpellEffect::DETECT,
-            SpellEffect::TRANS_DOOR => SpellLog_SpellEffect::TRANS_DOOR,
-            SpellEffect::FORCE_CRITICAL_HIT => SpellLog_SpellEffect::FORCE_CRITICAL_HIT,
-            SpellEffect::GUARANTEE_HIT => SpellLog_SpellEffect::GUARANTEE_HIT,
-            SpellEffect::ENCHANT_ITEM => SpellLog_SpellEffect::ENCHANT_ITEM,
-            SpellEffect::ENCHANT_ITEM_TEMPORARY => SpellLog_SpellEffect::ENCHANT_ITEM_TEMPORARY,
-            SpellEffect::TAMECREATURE => SpellLog_SpellEffect::TAMECREATURE,
-            SpellEffect::SUMMON_PET => SpellLog_SpellEffect::SUMMON_PET,
-            SpellEffect::LEARN_PET_SPELL => SpellLog_SpellEffect::LEARN_PET_SPELL,
-            SpellEffect::WEAPON_DAMAGE => SpellLog_SpellEffect::WEAPON_DAMAGE,
-            SpellEffect::OPEN_LOCK_ITEM => {
+            SpellEffect::Language => SpellLog_SpellEffect::Language,
+            SpellEffect::DualWield => SpellLog_SpellEffect::DualWield,
+            SpellEffect::SummonWild => SpellLog_SpellEffect::SummonWild,
+            SpellEffect::SummonGuardian => SpellLog_SpellEffect::SummonGuardian,
+            SpellEffect::TeleportUnitsFaceCaster => SpellLog_SpellEffect::TeleportUnitsFaceCaster,
+            SpellEffect::SkillStep => SpellLog_SpellEffect::SkillStep,
+            SpellEffect::AddHonor => SpellLog_SpellEffect::AddHonor,
+            SpellEffect::Spawn => SpellLog_SpellEffect::Spawn,
+            SpellEffect::TradeSkill => SpellLog_SpellEffect::TradeSkill,
+            SpellEffect::Stealth => SpellLog_SpellEffect::Stealth,
+            SpellEffect::Detect => SpellLog_SpellEffect::Detect,
+            SpellEffect::TransDoor => SpellLog_SpellEffect::TransDoor,
+            SpellEffect::ForceCriticalHit => SpellLog_SpellEffect::ForceCriticalHit,
+            SpellEffect::GuaranteeHit => SpellLog_SpellEffect::GuaranteeHit,
+            SpellEffect::EnchantItem => SpellLog_SpellEffect::EnchantItem,
+            SpellEffect::EnchantItemTemporary => SpellLog_SpellEffect::EnchantItemTemporary,
+            SpellEffect::Tamecreature => SpellLog_SpellEffect::Tamecreature,
+            SpellEffect::SummonPet => SpellLog_SpellEffect::SummonPet,
+            SpellEffect::LearnPetSpell => SpellLog_SpellEffect::LearnPetSpell,
+            SpellEffect::WeaponDamage => SpellLog_SpellEffect::WeaponDamage,
+            SpellEffect::OpenLockItem => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::OPEN_LOCK_ITEM {
+                SpellLog_SpellEffect::OpenLockItem {
                     target5,
                 }
             }
-            SpellEffect::PROFICIENCY => SpellLog_SpellEffect::PROFICIENCY,
-            SpellEffect::SEND_EVENT => SpellLog_SpellEffect::SEND_EVENT,
-            SpellEffect::POWER_BURN => SpellLog_SpellEffect::POWER_BURN,
-            SpellEffect::THREAT => {
+            SpellEffect::Proficiency => SpellLog_SpellEffect::Proficiency,
+            SpellEffect::SendEvent => SpellLog_SpellEffect::SendEvent,
+            SpellEffect::PowerBurn => SpellLog_SpellEffect::PowerBurn,
+            SpellEffect::Threat => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::THREAT {
+                SpellLog_SpellEffect::Threat {
                     target5,
                 }
             }
-            SpellEffect::TRIGGER_SPELL => SpellLog_SpellEffect::TRIGGER_SPELL,
-            SpellEffect::HEALTH_FUNNEL => SpellLog_SpellEffect::HEALTH_FUNNEL,
-            SpellEffect::POWER_FUNNEL => SpellLog_SpellEffect::POWER_FUNNEL,
-            SpellEffect::HEAL_MAX_HEALTH => SpellLog_SpellEffect::HEAL_MAX_HEALTH,
-            SpellEffect::INTERRUPT_CAST => {
+            SpellEffect::TriggerSpell => SpellLog_SpellEffect::TriggerSpell,
+            SpellEffect::HealthFunnel => SpellLog_SpellEffect::HealthFunnel,
+            SpellEffect::PowerFunnel => SpellLog_SpellEffect::PowerFunnel,
+            SpellEffect::HealMaxHealth => SpellLog_SpellEffect::HealMaxHealth,
+            SpellEffect::InterruptCast => {
                 // target3: Guid
                 let target3 = Guid::read(r)?;
 
                 // interrupted_spell: u32
                 let interrupted_spell = crate::util::read_u32_le(r)?;
 
-                SpellLog_SpellEffect::INTERRUPT_CAST {
+                SpellLog_SpellEffect::InterruptCast {
                     interrupted_spell,
                     target3,
                 }
             }
-            SpellEffect::DISTRACT => {
+            SpellEffect::Distract => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::DISTRACT {
+                SpellLog_SpellEffect::Distract {
                     target5,
                 }
             }
-            SpellEffect::PULL => SpellLog_SpellEffect::PULL,
-            SpellEffect::PICKPOCKET => SpellLog_SpellEffect::PICKPOCKET,
-            SpellEffect::ADD_FARSIGHT => SpellLog_SpellEffect::ADD_FARSIGHT,
-            SpellEffect::SUMMON_POSSESSED => SpellLog_SpellEffect::SUMMON_POSSESSED,
-            SpellEffect::SUMMON_TOTEM => SpellLog_SpellEffect::SUMMON_TOTEM,
-            SpellEffect::HEAL_MECHANICAL => SpellLog_SpellEffect::HEAL_MECHANICAL,
-            SpellEffect::SUMMON_OBJECT_WILD => SpellLog_SpellEffect::SUMMON_OBJECT_WILD,
-            SpellEffect::SCRIPT_EFFECT => SpellLog_SpellEffect::SCRIPT_EFFECT,
-            SpellEffect::ATTACK => SpellLog_SpellEffect::ATTACK,
-            SpellEffect::SANCTUARY => {
+            SpellEffect::Pull => SpellLog_SpellEffect::Pull,
+            SpellEffect::Pickpocket => SpellLog_SpellEffect::Pickpocket,
+            SpellEffect::AddFarsight => SpellLog_SpellEffect::AddFarsight,
+            SpellEffect::SummonPossessed => SpellLog_SpellEffect::SummonPossessed,
+            SpellEffect::SummonTotem => SpellLog_SpellEffect::SummonTotem,
+            SpellEffect::HealMechanical => SpellLog_SpellEffect::HealMechanical,
+            SpellEffect::SummonObjectWild => SpellLog_SpellEffect::SummonObjectWild,
+            SpellEffect::ScriptEffect => SpellLog_SpellEffect::ScriptEffect,
+            SpellEffect::Attack => SpellLog_SpellEffect::Attack,
+            SpellEffect::Sanctuary => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::SANCTUARY {
+                SpellLog_SpellEffect::Sanctuary {
                     target5,
                 }
             }
-            SpellEffect::ADD_COMBO_POINTS => SpellLog_SpellEffect::ADD_COMBO_POINTS,
-            SpellEffect::CREATE_HOUSE => SpellLog_SpellEffect::CREATE_HOUSE,
-            SpellEffect::BIND_SIGHT => SpellLog_SpellEffect::BIND_SIGHT,
-            SpellEffect::DUEL => SpellLog_SpellEffect::DUEL,
-            SpellEffect::STUCK => SpellLog_SpellEffect::STUCK,
-            SpellEffect::SUMMON_PLAYER => SpellLog_SpellEffect::SUMMON_PLAYER,
-            SpellEffect::ACTIVATE_OBJECT => SpellLog_SpellEffect::ACTIVATE_OBJECT,
-            SpellEffect::SUMMON_TOTEM_SLOT1 => SpellLog_SpellEffect::SUMMON_TOTEM_SLOT1,
-            SpellEffect::SUMMON_TOTEM_SLOT2 => SpellLog_SpellEffect::SUMMON_TOTEM_SLOT2,
-            SpellEffect::SUMMON_TOTEM_SLOT3 => SpellLog_SpellEffect::SUMMON_TOTEM_SLOT3,
-            SpellEffect::SUMMON_TOTEM_SLOT4 => SpellLog_SpellEffect::SUMMON_TOTEM_SLOT4,
-            SpellEffect::THREAT_ALL => {
+            SpellEffect::AddComboPoints => SpellLog_SpellEffect::AddComboPoints,
+            SpellEffect::CreateHouse => SpellLog_SpellEffect::CreateHouse,
+            SpellEffect::BindSight => SpellLog_SpellEffect::BindSight,
+            SpellEffect::Duel => SpellLog_SpellEffect::Duel,
+            SpellEffect::Stuck => SpellLog_SpellEffect::Stuck,
+            SpellEffect::SummonPlayer => SpellLog_SpellEffect::SummonPlayer,
+            SpellEffect::ActivateObject => SpellLog_SpellEffect::ActivateObject,
+            SpellEffect::SummonTotemSlot1 => SpellLog_SpellEffect::SummonTotemSlot1,
+            SpellEffect::SummonTotemSlot2 => SpellLog_SpellEffect::SummonTotemSlot2,
+            SpellEffect::SummonTotemSlot3 => SpellLog_SpellEffect::SummonTotemSlot3,
+            SpellEffect::SummonTotemSlot4 => SpellLog_SpellEffect::SummonTotemSlot4,
+            SpellEffect::ThreatAll => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::THREAT_ALL {
+                SpellLog_SpellEffect::ThreatAll {
                     target5,
                 }
             }
-            SpellEffect::ENCHANT_HELD_ITEM => SpellLog_SpellEffect::ENCHANT_HELD_ITEM,
-            SpellEffect::SUMMON_PHANTASM => SpellLog_SpellEffect::SUMMON_PHANTASM,
-            SpellEffect::SELF_RESURRECT => SpellLog_SpellEffect::SELF_RESURRECT,
-            SpellEffect::SKINNING => SpellLog_SpellEffect::SKINNING,
-            SpellEffect::CHARGE => SpellLog_SpellEffect::CHARGE,
-            SpellEffect::SUMMON_CRITTER => SpellLog_SpellEffect::SUMMON_CRITTER,
-            SpellEffect::KNOCK_BACK => SpellLog_SpellEffect::KNOCK_BACK,
-            SpellEffect::DISENCHANT => SpellLog_SpellEffect::DISENCHANT,
-            SpellEffect::INEBRIATE => SpellLog_SpellEffect::INEBRIATE,
-            SpellEffect::FEED_PET => {
+            SpellEffect::EnchantHeldItem => SpellLog_SpellEffect::EnchantHeldItem,
+            SpellEffect::SummonPhantasm => SpellLog_SpellEffect::SummonPhantasm,
+            SpellEffect::SelfResurrect => SpellLog_SpellEffect::SelfResurrect,
+            SpellEffect::Skinning => SpellLog_SpellEffect::Skinning,
+            SpellEffect::Charge => SpellLog_SpellEffect::Charge,
+            SpellEffect::SummonCritter => SpellLog_SpellEffect::SummonCritter,
+            SpellEffect::KnockBack => SpellLog_SpellEffect::KnockBack,
+            SpellEffect::Disenchant => SpellLog_SpellEffect::Disenchant,
+            SpellEffect::Inebriate => SpellLog_SpellEffect::Inebriate,
+            SpellEffect::FeedPet => {
                 // item_target_entry: u32
                 let item_target_entry = crate::util::read_u32_le(r)?;
 
-                SpellLog_SpellEffect::FEED_PET {
+                SpellLog_SpellEffect::FeedPet {
                     item_target_entry,
                 }
             }
-            SpellEffect::DISMISS_PET => {
+            SpellEffect::DismissPet => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::DISMISS_PET {
+                SpellLog_SpellEffect::DismissPet {
                     target5,
                 }
             }
-            SpellEffect::REPUTATION => SpellLog_SpellEffect::REPUTATION,
-            SpellEffect::SUMMON_OBJECT_SLOT1 => SpellLog_SpellEffect::SUMMON_OBJECT_SLOT1,
-            SpellEffect::SUMMON_OBJECT_SLOT2 => SpellLog_SpellEffect::SUMMON_OBJECT_SLOT2,
-            SpellEffect::SUMMON_OBJECT_SLOT3 => SpellLog_SpellEffect::SUMMON_OBJECT_SLOT3,
-            SpellEffect::SUMMON_OBJECT_SLOT4 => SpellLog_SpellEffect::SUMMON_OBJECT_SLOT4,
-            SpellEffect::DISPEL_MECHANIC => {
+            SpellEffect::Reputation => SpellLog_SpellEffect::Reputation,
+            SpellEffect::SummonObjectSlot1 => SpellLog_SpellEffect::SummonObjectSlot1,
+            SpellEffect::SummonObjectSlot2 => SpellLog_SpellEffect::SummonObjectSlot2,
+            SpellEffect::SummonObjectSlot3 => SpellLog_SpellEffect::SummonObjectSlot3,
+            SpellEffect::SummonObjectSlot4 => SpellLog_SpellEffect::SummonObjectSlot4,
+            SpellEffect::DispelMechanic => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::DISPEL_MECHANIC {
+                SpellLog_SpellEffect::DispelMechanic {
                     target5,
                 }
             }
-            SpellEffect::SUMMON_DEAD_PET => SpellLog_SpellEffect::SUMMON_DEAD_PET,
-            SpellEffect::DESTROY_ALL_TOTEMS => SpellLog_SpellEffect::DESTROY_ALL_TOTEMS,
-            SpellEffect::DURABILITY_DAMAGE => {
+            SpellEffect::SummonDeadPet => SpellLog_SpellEffect::SummonDeadPet,
+            SpellEffect::DestroyAllTotems => SpellLog_SpellEffect::DestroyAllTotems,
+            SpellEffect::DurabilityDamage => {
                 // target4: Guid
                 let target4 = Guid::read(r)?;
 
@@ -637,63 +637,63 @@ impl SpellLog {
                 // unknown6: u32
                 let unknown6 = crate::util::read_u32_le(r)?;
 
-                SpellLog_SpellEffect::DURABILITY_DAMAGE {
+                SpellLog_SpellEffect::DurabilityDamage {
                     target4,
                     unknown5,
                     unknown6,
                 }
             }
-            SpellEffect::SUMMON_DEMON => SpellLog_SpellEffect::SUMMON_DEMON,
-            SpellEffect::RESURRECT_NEW => {
+            SpellEffect::SummonDemon => SpellLog_SpellEffect::SummonDemon,
+            SpellEffect::ResurrectNew => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::RESURRECT_NEW {
+                SpellLog_SpellEffect::ResurrectNew {
                     target5,
                 }
             }
-            SpellEffect::ATTACK_ME => {
+            SpellEffect::AttackMe => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::ATTACK_ME {
+                SpellLog_SpellEffect::AttackMe {
                     target5,
                 }
             }
-            SpellEffect::DURABILITY_DAMAGE_PCT => SpellLog_SpellEffect::DURABILITY_DAMAGE_PCT,
-            SpellEffect::SKIN_PLAYER_CORPSE => {
+            SpellEffect::DurabilityDamagePct => SpellLog_SpellEffect::DurabilityDamagePct,
+            SpellEffect::SkinPlayerCorpse => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::SKIN_PLAYER_CORPSE {
+                SpellLog_SpellEffect::SkinPlayerCorpse {
                     target5,
                 }
             }
-            SpellEffect::SPIRIT_HEAL => SpellLog_SpellEffect::SPIRIT_HEAL,
-            SpellEffect::SKILL => SpellLog_SpellEffect::SKILL,
-            SpellEffect::APPLY_AREA_AURA_PET => SpellLog_SpellEffect::APPLY_AREA_AURA_PET,
-            SpellEffect::TELEPORT_GRAVEYARD => SpellLog_SpellEffect::TELEPORT_GRAVEYARD,
-            SpellEffect::NORMALIZED_WEAPON_DMG => SpellLog_SpellEffect::NORMALIZED_WEAPON_DMG,
-            SpellEffect::UNKNOWN122 => SpellLog_SpellEffect::UNKNOWN122,
-            SpellEffect::SEND_TAXI => SpellLog_SpellEffect::SEND_TAXI,
-            SpellEffect::PLAYER_PULL => SpellLog_SpellEffect::PLAYER_PULL,
-            SpellEffect::MODIFY_THREAT_PERCENT => {
+            SpellEffect::SpiritHeal => SpellLog_SpellEffect::SpiritHeal,
+            SpellEffect::Skill => SpellLog_SpellEffect::Skill,
+            SpellEffect::ApplyAreaAuraPet => SpellLog_SpellEffect::ApplyAreaAuraPet,
+            SpellEffect::TeleportGraveyard => SpellLog_SpellEffect::TeleportGraveyard,
+            SpellEffect::NormalizedWeaponDmg => SpellLog_SpellEffect::NormalizedWeaponDmg,
+            SpellEffect::Unknown122 => SpellLog_SpellEffect::Unknown122,
+            SpellEffect::SendTaxi => SpellLog_SpellEffect::SendTaxi,
+            SpellEffect::PlayerPull => SpellLog_SpellEffect::PlayerPull,
+            SpellEffect::ModifyThreatPercent => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::MODIFY_THREAT_PERCENT {
+                SpellLog_SpellEffect::ModifyThreatPercent {
                     target5,
                 }
             }
-            SpellEffect::UNKNOWN126 => {
+            SpellEffect::Unknown126 => {
                 // target5: Guid
                 let target5 = Guid::read(r)?;
 
-                SpellLog_SpellEffect::UNKNOWN126 {
+                SpellLog_SpellEffect::Unknown126 {
                     target5,
                 }
             }
-            SpellEffect::UNKNOWN127 => SpellLog_SpellEffect::UNKNOWN127,
+            SpellEffect::Unknown127 => SpellLog_SpellEffect::Unknown127,
         };
 
         Ok(Self {
@@ -712,325 +712,325 @@ impl SpellLog {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SpellLog_SpellEffect {
-    NONE,
-    INSTAKILL {
+    None,
+    Instakill {
         target5: Guid,
     },
-    SCHOOL_DAMAGE,
-    DUMMY,
-    PORTAL_TELEPORT,
-    TELEPORT_UNITS,
-    APPLY_AURA,
-    ENVIRONMENTAL_DAMAGE,
-    POWER_DRAIN {
+    SchoolDamage,
+    Dummy,
+    PortalTeleport,
+    TeleportUnits,
+    ApplyAura,
+    EnvironmentalDamage,
+    PowerDrain {
         target1: Guid,
         unknown1: u32,
         unknown2: u32,
         unknown3: f32,
     },
-    HEALTH_LEECH,
-    HEAL,
-    BIND,
-    PORTAL,
-    RITUAL_BASE,
-    RITUAL_SPECIALIZE,
-    RITUAL_ACTIVATE_PORTAL,
-    QUEST_COMPLETE,
-    WEAPON_DAMAGE_NOSCHOOL,
-    RESURRECT {
+    HealthLeech,
+    Heal,
+    Bind,
+    Portal,
+    RitualBase,
+    RitualSpecialize,
+    RitualActivatePortal,
+    QuestComplete,
+    WeaponDamageNoschool,
+    Resurrect {
         target5: Guid,
     },
-    ADD_EXTRA_ATTACKS {
+    AddExtraAttacks {
         target2: Guid,
         unknown4: u32,
     },
-    DODGE,
-    EVADE,
-    PARRY,
-    BLOCK,
-    CREATE_ITEM {
+    Dodge,
+    Evade,
+    Parry,
+    Block,
+    CreateItem {
         spell_effect_item_type: u32,
     },
-    WEAPON,
-    DEFENSE,
-    PERSISTENT_AREA_AURA,
-    SUMMON,
-    LEAP,
-    ENERGIZE,
-    WEAPON_PERCENT_DAMAGE,
-    TRIGGER_MISSILE,
-    OPEN_LOCK {
+    Weapon,
+    Defense,
+    PersistentAreaAura,
+    Summon,
+    Leap,
+    Energize,
+    WeaponPercentDamage,
+    TriggerMissile,
+    OpenLock {
         target5: Guid,
     },
-    SUMMON_CHANGE_ITEM,
-    APPLY_AREA_AURA_PARTY,
-    LEARN_SPELL,
-    SPELL_DEFENSE,
-    DISPEL {
+    SummonChangeItem,
+    ApplyAreaAuraParty,
+    LearnSpell,
+    SpellDefense,
+    Dispel {
         target5: Guid,
     },
-    LANGUAGE,
-    DUAL_WIELD,
-    SUMMON_WILD,
-    SUMMON_GUARDIAN,
-    TELEPORT_UNITS_FACE_CASTER,
-    SKILL_STEP,
-    ADD_HONOR,
-    SPAWN,
-    TRADE_SKILL,
-    STEALTH,
-    DETECT,
-    TRANS_DOOR,
-    FORCE_CRITICAL_HIT,
-    GUARANTEE_HIT,
-    ENCHANT_ITEM,
-    ENCHANT_ITEM_TEMPORARY,
-    TAMECREATURE,
-    SUMMON_PET,
-    LEARN_PET_SPELL,
-    WEAPON_DAMAGE,
-    OPEN_LOCK_ITEM {
+    Language,
+    DualWield,
+    SummonWild,
+    SummonGuardian,
+    TeleportUnitsFaceCaster,
+    SkillStep,
+    AddHonor,
+    Spawn,
+    TradeSkill,
+    Stealth,
+    Detect,
+    TransDoor,
+    ForceCriticalHit,
+    GuaranteeHit,
+    EnchantItem,
+    EnchantItemTemporary,
+    Tamecreature,
+    SummonPet,
+    LearnPetSpell,
+    WeaponDamage,
+    OpenLockItem {
         target5: Guid,
     },
-    PROFICIENCY,
-    SEND_EVENT,
-    POWER_BURN,
-    THREAT {
+    Proficiency,
+    SendEvent,
+    PowerBurn,
+    Threat {
         target5: Guid,
     },
-    TRIGGER_SPELL,
-    HEALTH_FUNNEL,
-    POWER_FUNNEL,
-    HEAL_MAX_HEALTH,
-    INTERRUPT_CAST {
+    TriggerSpell,
+    HealthFunnel,
+    PowerFunnel,
+    HealMaxHealth,
+    InterruptCast {
         interrupted_spell: u32,
         target3: Guid,
     },
-    DISTRACT {
+    Distract {
         target5: Guid,
     },
-    PULL,
-    PICKPOCKET,
-    ADD_FARSIGHT,
-    SUMMON_POSSESSED,
-    SUMMON_TOTEM,
-    HEAL_MECHANICAL,
-    SUMMON_OBJECT_WILD,
-    SCRIPT_EFFECT,
-    ATTACK,
-    SANCTUARY {
+    Pull,
+    Pickpocket,
+    AddFarsight,
+    SummonPossessed,
+    SummonTotem,
+    HealMechanical,
+    SummonObjectWild,
+    ScriptEffect,
+    Attack,
+    Sanctuary {
         target5: Guid,
     },
-    ADD_COMBO_POINTS,
-    CREATE_HOUSE,
-    BIND_SIGHT,
-    DUEL,
-    STUCK,
-    SUMMON_PLAYER,
-    ACTIVATE_OBJECT,
-    SUMMON_TOTEM_SLOT1,
-    SUMMON_TOTEM_SLOT2,
-    SUMMON_TOTEM_SLOT3,
-    SUMMON_TOTEM_SLOT4,
-    THREAT_ALL {
+    AddComboPoints,
+    CreateHouse,
+    BindSight,
+    Duel,
+    Stuck,
+    SummonPlayer,
+    ActivateObject,
+    SummonTotemSlot1,
+    SummonTotemSlot2,
+    SummonTotemSlot3,
+    SummonTotemSlot4,
+    ThreatAll {
         target5: Guid,
     },
-    ENCHANT_HELD_ITEM,
-    SUMMON_PHANTASM,
-    SELF_RESURRECT,
-    SKINNING,
-    CHARGE,
-    SUMMON_CRITTER,
-    KNOCK_BACK,
-    DISENCHANT,
-    INEBRIATE,
-    FEED_PET {
+    EnchantHeldItem,
+    SummonPhantasm,
+    SelfResurrect,
+    Skinning,
+    Charge,
+    SummonCritter,
+    KnockBack,
+    Disenchant,
+    Inebriate,
+    FeedPet {
         item_target_entry: u32,
     },
-    DISMISS_PET {
+    DismissPet {
         target5: Guid,
     },
-    REPUTATION,
-    SUMMON_OBJECT_SLOT1,
-    SUMMON_OBJECT_SLOT2,
-    SUMMON_OBJECT_SLOT3,
-    SUMMON_OBJECT_SLOT4,
-    DISPEL_MECHANIC {
+    Reputation,
+    SummonObjectSlot1,
+    SummonObjectSlot2,
+    SummonObjectSlot3,
+    SummonObjectSlot4,
+    DispelMechanic {
         target5: Guid,
     },
-    SUMMON_DEAD_PET,
-    DESTROY_ALL_TOTEMS,
-    DURABILITY_DAMAGE {
+    SummonDeadPet,
+    DestroyAllTotems,
+    DurabilityDamage {
         target4: Guid,
         unknown5: u32,
         unknown6: u32,
     },
-    SUMMON_DEMON,
-    RESURRECT_NEW {
+    SummonDemon,
+    ResurrectNew {
         target5: Guid,
     },
-    ATTACK_ME {
+    AttackMe {
         target5: Guid,
     },
-    DURABILITY_DAMAGE_PCT,
-    SKIN_PLAYER_CORPSE {
+    DurabilityDamagePct,
+    SkinPlayerCorpse {
         target5: Guid,
     },
-    SPIRIT_HEAL,
-    SKILL,
-    APPLY_AREA_AURA_PET,
-    TELEPORT_GRAVEYARD,
-    NORMALIZED_WEAPON_DMG,
-    UNKNOWN122,
-    SEND_TAXI,
-    PLAYER_PULL,
-    MODIFY_THREAT_PERCENT {
+    SpiritHeal,
+    Skill,
+    ApplyAreaAuraPet,
+    TeleportGraveyard,
+    NormalizedWeaponDmg,
+    Unknown122,
+    SendTaxi,
+    PlayerPull,
+    ModifyThreatPercent {
         target5: Guid,
     },
-    UNKNOWN126 {
+    Unknown126 {
         target5: Guid,
     },
-    UNKNOWN127,
+    Unknown127,
 }
 
 impl Default for SpellLog_SpellEffect {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::NONE
+        Self::None
     }
 }
 
 impl SpellLog_SpellEffect {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::NONE => 0,
-            Self::INSTAKILL { .. } => 1,
-            Self::SCHOOL_DAMAGE => 2,
-            Self::DUMMY => 3,
-            Self::PORTAL_TELEPORT => 4,
-            Self::TELEPORT_UNITS => 5,
-            Self::APPLY_AURA => 6,
-            Self::ENVIRONMENTAL_DAMAGE => 7,
-            Self::POWER_DRAIN { .. } => 8,
-            Self::HEALTH_LEECH => 9,
-            Self::HEAL => 10,
-            Self::BIND => 11,
-            Self::PORTAL => 12,
-            Self::RITUAL_BASE => 13,
-            Self::RITUAL_SPECIALIZE => 14,
-            Self::RITUAL_ACTIVATE_PORTAL => 15,
-            Self::QUEST_COMPLETE => 16,
-            Self::WEAPON_DAMAGE_NOSCHOOL => 17,
-            Self::RESURRECT { .. } => 18,
-            Self::ADD_EXTRA_ATTACKS { .. } => 19,
-            Self::DODGE => 20,
-            Self::EVADE => 21,
-            Self::PARRY => 22,
-            Self::BLOCK => 23,
-            Self::CREATE_ITEM { .. } => 24,
-            Self::WEAPON => 25,
-            Self::DEFENSE => 26,
-            Self::PERSISTENT_AREA_AURA => 27,
-            Self::SUMMON => 28,
-            Self::LEAP => 29,
-            Self::ENERGIZE => 30,
-            Self::WEAPON_PERCENT_DAMAGE => 31,
-            Self::TRIGGER_MISSILE => 32,
-            Self::OPEN_LOCK { .. } => 33,
-            Self::SUMMON_CHANGE_ITEM => 34,
-            Self::APPLY_AREA_AURA_PARTY => 35,
-            Self::LEARN_SPELL => 36,
-            Self::SPELL_DEFENSE => 37,
-            Self::DISPEL { .. } => 38,
-            Self::LANGUAGE => 39,
-            Self::DUAL_WIELD => 40,
-            Self::SUMMON_WILD => 41,
-            Self::SUMMON_GUARDIAN => 42,
-            Self::TELEPORT_UNITS_FACE_CASTER => 43,
-            Self::SKILL_STEP => 44,
-            Self::ADD_HONOR => 45,
-            Self::SPAWN => 46,
-            Self::TRADE_SKILL => 47,
-            Self::STEALTH => 48,
-            Self::DETECT => 49,
-            Self::TRANS_DOOR => 50,
-            Self::FORCE_CRITICAL_HIT => 51,
-            Self::GUARANTEE_HIT => 52,
-            Self::ENCHANT_ITEM => 53,
-            Self::ENCHANT_ITEM_TEMPORARY => 54,
-            Self::TAMECREATURE => 55,
-            Self::SUMMON_PET => 56,
-            Self::LEARN_PET_SPELL => 57,
-            Self::WEAPON_DAMAGE => 58,
-            Self::OPEN_LOCK_ITEM { .. } => 59,
-            Self::PROFICIENCY => 60,
-            Self::SEND_EVENT => 61,
-            Self::POWER_BURN => 62,
-            Self::THREAT { .. } => 63,
-            Self::TRIGGER_SPELL => 64,
-            Self::HEALTH_FUNNEL => 65,
-            Self::POWER_FUNNEL => 66,
-            Self::HEAL_MAX_HEALTH => 67,
-            Self::INTERRUPT_CAST { .. } => 68,
-            Self::DISTRACT { .. } => 69,
-            Self::PULL => 70,
-            Self::PICKPOCKET => 71,
-            Self::ADD_FARSIGHT => 72,
-            Self::SUMMON_POSSESSED => 73,
-            Self::SUMMON_TOTEM => 74,
-            Self::HEAL_MECHANICAL => 75,
-            Self::SUMMON_OBJECT_WILD => 76,
-            Self::SCRIPT_EFFECT => 77,
-            Self::ATTACK => 78,
-            Self::SANCTUARY { .. } => 79,
-            Self::ADD_COMBO_POINTS => 80,
-            Self::CREATE_HOUSE => 81,
-            Self::BIND_SIGHT => 82,
-            Self::DUEL => 83,
-            Self::STUCK => 84,
-            Self::SUMMON_PLAYER => 85,
-            Self::ACTIVATE_OBJECT => 86,
-            Self::SUMMON_TOTEM_SLOT1 => 87,
-            Self::SUMMON_TOTEM_SLOT2 => 88,
-            Self::SUMMON_TOTEM_SLOT3 => 89,
-            Self::SUMMON_TOTEM_SLOT4 => 90,
-            Self::THREAT_ALL { .. } => 91,
-            Self::ENCHANT_HELD_ITEM => 92,
-            Self::SUMMON_PHANTASM => 93,
-            Self::SELF_RESURRECT => 94,
-            Self::SKINNING => 95,
-            Self::CHARGE => 96,
-            Self::SUMMON_CRITTER => 97,
-            Self::KNOCK_BACK => 98,
-            Self::DISENCHANT => 99,
-            Self::INEBRIATE => 100,
-            Self::FEED_PET { .. } => 101,
-            Self::DISMISS_PET { .. } => 102,
-            Self::REPUTATION => 103,
-            Self::SUMMON_OBJECT_SLOT1 => 104,
-            Self::SUMMON_OBJECT_SLOT2 => 105,
-            Self::SUMMON_OBJECT_SLOT3 => 106,
-            Self::SUMMON_OBJECT_SLOT4 => 107,
-            Self::DISPEL_MECHANIC { .. } => 108,
-            Self::SUMMON_DEAD_PET => 109,
-            Self::DESTROY_ALL_TOTEMS => 110,
-            Self::DURABILITY_DAMAGE { .. } => 111,
-            Self::SUMMON_DEMON => 112,
-            Self::RESURRECT_NEW { .. } => 113,
-            Self::ATTACK_ME { .. } => 114,
-            Self::DURABILITY_DAMAGE_PCT => 115,
-            Self::SKIN_PLAYER_CORPSE { .. } => 116,
-            Self::SPIRIT_HEAL => 117,
-            Self::SKILL => 118,
-            Self::APPLY_AREA_AURA_PET => 119,
-            Self::TELEPORT_GRAVEYARD => 120,
-            Self::NORMALIZED_WEAPON_DMG => 121,
-            Self::UNKNOWN122 => 122,
-            Self::SEND_TAXI => 123,
-            Self::PLAYER_PULL => 124,
-            Self::MODIFY_THREAT_PERCENT { .. } => 125,
-            Self::UNKNOWN126 { .. } => 126,
-            Self::UNKNOWN127 => 127,
+            Self::None => 0,
+            Self::Instakill { .. } => 1,
+            Self::SchoolDamage => 2,
+            Self::Dummy => 3,
+            Self::PortalTeleport => 4,
+            Self::TeleportUnits => 5,
+            Self::ApplyAura => 6,
+            Self::EnvironmentalDamage => 7,
+            Self::PowerDrain { .. } => 8,
+            Self::HealthLeech => 9,
+            Self::Heal => 10,
+            Self::Bind => 11,
+            Self::Portal => 12,
+            Self::RitualBase => 13,
+            Self::RitualSpecialize => 14,
+            Self::RitualActivatePortal => 15,
+            Self::QuestComplete => 16,
+            Self::WeaponDamageNoschool => 17,
+            Self::Resurrect { .. } => 18,
+            Self::AddExtraAttacks { .. } => 19,
+            Self::Dodge => 20,
+            Self::Evade => 21,
+            Self::Parry => 22,
+            Self::Block => 23,
+            Self::CreateItem { .. } => 24,
+            Self::Weapon => 25,
+            Self::Defense => 26,
+            Self::PersistentAreaAura => 27,
+            Self::Summon => 28,
+            Self::Leap => 29,
+            Self::Energize => 30,
+            Self::WeaponPercentDamage => 31,
+            Self::TriggerMissile => 32,
+            Self::OpenLock { .. } => 33,
+            Self::SummonChangeItem => 34,
+            Self::ApplyAreaAuraParty => 35,
+            Self::LearnSpell => 36,
+            Self::SpellDefense => 37,
+            Self::Dispel { .. } => 38,
+            Self::Language => 39,
+            Self::DualWield => 40,
+            Self::SummonWild => 41,
+            Self::SummonGuardian => 42,
+            Self::TeleportUnitsFaceCaster => 43,
+            Self::SkillStep => 44,
+            Self::AddHonor => 45,
+            Self::Spawn => 46,
+            Self::TradeSkill => 47,
+            Self::Stealth => 48,
+            Self::Detect => 49,
+            Self::TransDoor => 50,
+            Self::ForceCriticalHit => 51,
+            Self::GuaranteeHit => 52,
+            Self::EnchantItem => 53,
+            Self::EnchantItemTemporary => 54,
+            Self::Tamecreature => 55,
+            Self::SummonPet => 56,
+            Self::LearnPetSpell => 57,
+            Self::WeaponDamage => 58,
+            Self::OpenLockItem { .. } => 59,
+            Self::Proficiency => 60,
+            Self::SendEvent => 61,
+            Self::PowerBurn => 62,
+            Self::Threat { .. } => 63,
+            Self::TriggerSpell => 64,
+            Self::HealthFunnel => 65,
+            Self::PowerFunnel => 66,
+            Self::HealMaxHealth => 67,
+            Self::InterruptCast { .. } => 68,
+            Self::Distract { .. } => 69,
+            Self::Pull => 70,
+            Self::Pickpocket => 71,
+            Self::AddFarsight => 72,
+            Self::SummonPossessed => 73,
+            Self::SummonTotem => 74,
+            Self::HealMechanical => 75,
+            Self::SummonObjectWild => 76,
+            Self::ScriptEffect => 77,
+            Self::Attack => 78,
+            Self::Sanctuary { .. } => 79,
+            Self::AddComboPoints => 80,
+            Self::CreateHouse => 81,
+            Self::BindSight => 82,
+            Self::Duel => 83,
+            Self::Stuck => 84,
+            Self::SummonPlayer => 85,
+            Self::ActivateObject => 86,
+            Self::SummonTotemSlot1 => 87,
+            Self::SummonTotemSlot2 => 88,
+            Self::SummonTotemSlot3 => 89,
+            Self::SummonTotemSlot4 => 90,
+            Self::ThreatAll { .. } => 91,
+            Self::EnchantHeldItem => 92,
+            Self::SummonPhantasm => 93,
+            Self::SelfResurrect => 94,
+            Self::Skinning => 95,
+            Self::Charge => 96,
+            Self::SummonCritter => 97,
+            Self::KnockBack => 98,
+            Self::Disenchant => 99,
+            Self::Inebriate => 100,
+            Self::FeedPet { .. } => 101,
+            Self::DismissPet { .. } => 102,
+            Self::Reputation => 103,
+            Self::SummonObjectSlot1 => 104,
+            Self::SummonObjectSlot2 => 105,
+            Self::SummonObjectSlot3 => 106,
+            Self::SummonObjectSlot4 => 107,
+            Self::DispelMechanic { .. } => 108,
+            Self::SummonDeadPet => 109,
+            Self::DestroyAllTotems => 110,
+            Self::DurabilityDamage { .. } => 111,
+            Self::SummonDemon => 112,
+            Self::ResurrectNew { .. } => 113,
+            Self::AttackMe { .. } => 114,
+            Self::DurabilityDamagePct => 115,
+            Self::SkinPlayerCorpse { .. } => 116,
+            Self::SpiritHeal => 117,
+            Self::Skill => 118,
+            Self::ApplyAreaAuraPet => 119,
+            Self::TeleportGraveyard => 120,
+            Self::NormalizedWeaponDmg => 121,
+            Self::Unknown122 => 122,
+            Self::SendTaxi => 123,
+            Self::PlayerPull => 124,
+            Self::ModifyThreatPercent { .. } => 125,
+            Self::Unknown126 { .. } => 126,
+            Self::Unknown127 => 127,
         }
     }
 
@@ -1039,34 +1039,34 @@ impl SpellLog_SpellEffect {
 impl SpellLog_SpellEffect {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NONE => {
+            Self::None => {
                 4
             }
-            Self::INSTAKILL {
+            Self::Instakill {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::SCHOOL_DAMAGE => {
+            Self::SchoolDamage => {
                 4
             }
-            Self::DUMMY => {
+            Self::Dummy => {
                 4
             }
-            Self::PORTAL_TELEPORT => {
+            Self::PortalTeleport => {
                 4
             }
-            Self::TELEPORT_UNITS => {
+            Self::TeleportUnits => {
                 4
             }
-            Self::APPLY_AURA => {
+            Self::ApplyAura => {
                 4
             }
-            Self::ENVIRONMENTAL_DAMAGE => {
+            Self::EnvironmentalDamage => {
                 4
             }
-            Self::POWER_DRAIN {
+            Self::PowerDrain {
                 target1,
                 unknown1,
                 unknown2,
@@ -1078,40 +1078,40 @@ impl SpellLog_SpellEffect {
                 + 4 // unknown2: u32
                 + 4 // unknown3: f32
             }
-            Self::HEALTH_LEECH => {
+            Self::HealthLeech => {
                 4
             }
-            Self::HEAL => {
+            Self::Heal => {
                 4
             }
-            Self::BIND => {
+            Self::Bind => {
                 4
             }
-            Self::PORTAL => {
+            Self::Portal => {
                 4
             }
-            Self::RITUAL_BASE => {
+            Self::RitualBase => {
                 4
             }
-            Self::RITUAL_SPECIALIZE => {
+            Self::RitualSpecialize => {
                 4
             }
-            Self::RITUAL_ACTIVATE_PORTAL => {
+            Self::RitualActivatePortal => {
                 4
             }
-            Self::QUEST_COMPLETE => {
+            Self::QuestComplete => {
                 4
             }
-            Self::WEAPON_DAMAGE_NOSCHOOL => {
+            Self::WeaponDamageNoschool => {
                 4
             }
-            Self::RESURRECT {
+            Self::Resurrect {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::ADD_EXTRA_ATTACKS {
+            Self::AddExtraAttacks {
                 target2,
                 unknown4,
             } => {
@@ -1119,166 +1119,166 @@ impl SpellLog_SpellEffect {
                 + 8 // target2: Guid
                 + 4 // unknown4: u32
             }
-            Self::DODGE => {
+            Self::Dodge => {
                 4
             }
-            Self::EVADE => {
+            Self::Evade => {
                 4
             }
-            Self::PARRY => {
+            Self::Parry => {
                 4
             }
-            Self::BLOCK => {
+            Self::Block => {
                 4
             }
-            Self::CREATE_ITEM {
+            Self::CreateItem {
                 spell_effect_item_type,
             } => {
                 4
                 + 4 // spell_effect_item_type: u32
             }
-            Self::WEAPON => {
+            Self::Weapon => {
                 4
             }
-            Self::DEFENSE => {
+            Self::Defense => {
                 4
             }
-            Self::PERSISTENT_AREA_AURA => {
+            Self::PersistentAreaAura => {
                 4
             }
-            Self::SUMMON => {
+            Self::Summon => {
                 4
             }
-            Self::LEAP => {
+            Self::Leap => {
                 4
             }
-            Self::ENERGIZE => {
+            Self::Energize => {
                 4
             }
-            Self::WEAPON_PERCENT_DAMAGE => {
+            Self::WeaponPercentDamage => {
                 4
             }
-            Self::TRIGGER_MISSILE => {
+            Self::TriggerMissile => {
                 4
             }
-            Self::OPEN_LOCK {
+            Self::OpenLock {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::SUMMON_CHANGE_ITEM => {
+            Self::SummonChangeItem => {
                 4
             }
-            Self::APPLY_AREA_AURA_PARTY => {
+            Self::ApplyAreaAuraParty => {
                 4
             }
-            Self::LEARN_SPELL => {
+            Self::LearnSpell => {
                 4
             }
-            Self::SPELL_DEFENSE => {
+            Self::SpellDefense => {
                 4
             }
-            Self::DISPEL {
+            Self::Dispel {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::LANGUAGE => {
+            Self::Language => {
                 4
             }
-            Self::DUAL_WIELD => {
+            Self::DualWield => {
                 4
             }
-            Self::SUMMON_WILD => {
+            Self::SummonWild => {
                 4
             }
-            Self::SUMMON_GUARDIAN => {
+            Self::SummonGuardian => {
                 4
             }
-            Self::TELEPORT_UNITS_FACE_CASTER => {
+            Self::TeleportUnitsFaceCaster => {
                 4
             }
-            Self::SKILL_STEP => {
+            Self::SkillStep => {
                 4
             }
-            Self::ADD_HONOR => {
+            Self::AddHonor => {
                 4
             }
-            Self::SPAWN => {
+            Self::Spawn => {
                 4
             }
-            Self::TRADE_SKILL => {
+            Self::TradeSkill => {
                 4
             }
-            Self::STEALTH => {
+            Self::Stealth => {
                 4
             }
-            Self::DETECT => {
+            Self::Detect => {
                 4
             }
-            Self::TRANS_DOOR => {
+            Self::TransDoor => {
                 4
             }
-            Self::FORCE_CRITICAL_HIT => {
+            Self::ForceCriticalHit => {
                 4
             }
-            Self::GUARANTEE_HIT => {
+            Self::GuaranteeHit => {
                 4
             }
-            Self::ENCHANT_ITEM => {
+            Self::EnchantItem => {
                 4
             }
-            Self::ENCHANT_ITEM_TEMPORARY => {
+            Self::EnchantItemTemporary => {
                 4
             }
-            Self::TAMECREATURE => {
+            Self::Tamecreature => {
                 4
             }
-            Self::SUMMON_PET => {
+            Self::SummonPet => {
                 4
             }
-            Self::LEARN_PET_SPELL => {
+            Self::LearnPetSpell => {
                 4
             }
-            Self::WEAPON_DAMAGE => {
+            Self::WeaponDamage => {
                 4
             }
-            Self::OPEN_LOCK_ITEM {
+            Self::OpenLockItem {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::PROFICIENCY => {
+            Self::Proficiency => {
                 4
             }
-            Self::SEND_EVENT => {
+            Self::SendEvent => {
                 4
             }
-            Self::POWER_BURN => {
+            Self::PowerBurn => {
                 4
             }
-            Self::THREAT {
+            Self::Threat {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::TRIGGER_SPELL => {
+            Self::TriggerSpell => {
                 4
             }
-            Self::HEALTH_FUNNEL => {
+            Self::HealthFunnel => {
                 4
             }
-            Self::POWER_FUNNEL => {
+            Self::PowerFunnel => {
                 4
             }
-            Self::HEAL_MAX_HEALTH => {
+            Self::HealMaxHealth => {
                 4
             }
-            Self::INTERRUPT_CAST {
+            Self::InterruptCast {
                 interrupted_spell,
                 target3,
             } => {
@@ -1286,151 +1286,151 @@ impl SpellLog_SpellEffect {
                 + 4 // interrupted_spell: u32
                 + 8 // target3: Guid
             }
-            Self::DISTRACT {
+            Self::Distract {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::PULL => {
+            Self::Pull => {
                 4
             }
-            Self::PICKPOCKET => {
+            Self::Pickpocket => {
                 4
             }
-            Self::ADD_FARSIGHT => {
+            Self::AddFarsight => {
                 4
             }
-            Self::SUMMON_POSSESSED => {
+            Self::SummonPossessed => {
                 4
             }
-            Self::SUMMON_TOTEM => {
+            Self::SummonTotem => {
                 4
             }
-            Self::HEAL_MECHANICAL => {
+            Self::HealMechanical => {
                 4
             }
-            Self::SUMMON_OBJECT_WILD => {
+            Self::SummonObjectWild => {
                 4
             }
-            Self::SCRIPT_EFFECT => {
+            Self::ScriptEffect => {
                 4
             }
-            Self::ATTACK => {
+            Self::Attack => {
                 4
             }
-            Self::SANCTUARY {
+            Self::Sanctuary {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::ADD_COMBO_POINTS => {
+            Self::AddComboPoints => {
                 4
             }
-            Self::CREATE_HOUSE => {
+            Self::CreateHouse => {
                 4
             }
-            Self::BIND_SIGHT => {
+            Self::BindSight => {
                 4
             }
-            Self::DUEL => {
+            Self::Duel => {
                 4
             }
-            Self::STUCK => {
+            Self::Stuck => {
                 4
             }
-            Self::SUMMON_PLAYER => {
+            Self::SummonPlayer => {
                 4
             }
-            Self::ACTIVATE_OBJECT => {
+            Self::ActivateObject => {
                 4
             }
-            Self::SUMMON_TOTEM_SLOT1 => {
+            Self::SummonTotemSlot1 => {
                 4
             }
-            Self::SUMMON_TOTEM_SLOT2 => {
+            Self::SummonTotemSlot2 => {
                 4
             }
-            Self::SUMMON_TOTEM_SLOT3 => {
+            Self::SummonTotemSlot3 => {
                 4
             }
-            Self::SUMMON_TOTEM_SLOT4 => {
+            Self::SummonTotemSlot4 => {
                 4
             }
-            Self::THREAT_ALL {
+            Self::ThreatAll {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::ENCHANT_HELD_ITEM => {
+            Self::EnchantHeldItem => {
                 4
             }
-            Self::SUMMON_PHANTASM => {
+            Self::SummonPhantasm => {
                 4
             }
-            Self::SELF_RESURRECT => {
+            Self::SelfResurrect => {
                 4
             }
-            Self::SKINNING => {
+            Self::Skinning => {
                 4
             }
-            Self::CHARGE => {
+            Self::Charge => {
                 4
             }
-            Self::SUMMON_CRITTER => {
+            Self::SummonCritter => {
                 4
             }
-            Self::KNOCK_BACK => {
+            Self::KnockBack => {
                 4
             }
-            Self::DISENCHANT => {
+            Self::Disenchant => {
                 4
             }
-            Self::INEBRIATE => {
+            Self::Inebriate => {
                 4
             }
-            Self::FEED_PET {
+            Self::FeedPet {
                 item_target_entry,
             } => {
                 4
                 + 4 // item_target_entry: u32
             }
-            Self::DISMISS_PET {
+            Self::DismissPet {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::REPUTATION => {
+            Self::Reputation => {
                 4
             }
-            Self::SUMMON_OBJECT_SLOT1 => {
+            Self::SummonObjectSlot1 => {
                 4
             }
-            Self::SUMMON_OBJECT_SLOT2 => {
+            Self::SummonObjectSlot2 => {
                 4
             }
-            Self::SUMMON_OBJECT_SLOT3 => {
+            Self::SummonObjectSlot3 => {
                 4
             }
-            Self::SUMMON_OBJECT_SLOT4 => {
+            Self::SummonObjectSlot4 => {
                 4
             }
-            Self::DISPEL_MECHANIC {
+            Self::DispelMechanic {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::SUMMON_DEAD_PET => {
+            Self::SummonDeadPet => {
                 4
             }
-            Self::DESTROY_ALL_TOTEMS => {
+            Self::DestroyAllTotems => {
                 4
             }
-            Self::DURABILITY_DAMAGE {
+            Self::DurabilityDamage {
                 target4,
                 unknown5,
                 unknown6,
@@ -1440,67 +1440,67 @@ impl SpellLog_SpellEffect {
                 + 4 // unknown5: u32
                 + 4 // unknown6: u32
             }
-            Self::SUMMON_DEMON => {
+            Self::SummonDemon => {
                 4
             }
-            Self::RESURRECT_NEW {
+            Self::ResurrectNew {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::ATTACK_ME {
+            Self::AttackMe {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::DURABILITY_DAMAGE_PCT => {
+            Self::DurabilityDamagePct => {
                 4
             }
-            Self::SKIN_PLAYER_CORPSE {
+            Self::SkinPlayerCorpse {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::SPIRIT_HEAL => {
+            Self::SpiritHeal => {
                 4
             }
-            Self::SKILL => {
+            Self::Skill => {
                 4
             }
-            Self::APPLY_AREA_AURA_PET => {
+            Self::ApplyAreaAuraPet => {
                 4
             }
-            Self::TELEPORT_GRAVEYARD => {
+            Self::TeleportGraveyard => {
                 4
             }
-            Self::NORMALIZED_WEAPON_DMG => {
+            Self::NormalizedWeaponDmg => {
                 4
             }
-            Self::UNKNOWN122 => {
+            Self::Unknown122 => {
                 4
             }
-            Self::SEND_TAXI => {
+            Self::SendTaxi => {
                 4
             }
-            Self::PLAYER_PULL => {
+            Self::PlayerPull => {
                 4
             }
-            Self::MODIFY_THREAT_PERCENT {
+            Self::ModifyThreatPercent {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::UNKNOWN126 {
+            Self::Unknown126 {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::UNKNOWN127 => {
+            Self::Unknown127 => {
                 4
             }
         }

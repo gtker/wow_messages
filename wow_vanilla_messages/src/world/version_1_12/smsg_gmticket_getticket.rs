@@ -32,8 +32,8 @@ impl ServerMessage for SMSG_GMTICKET_GETTICKET {
         w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
 
         match &self.status {
-            SMSG_GMTICKET_GETTICKET_GmTicketStatus::DBERROR => {}
-            SMSG_GMTICKET_GETTICKET_GmTicketStatus::HASTEXT {
+            SMSG_GMTICKET_GETTICKET_GmTicketStatus::Dberror => {}
+            SMSG_GMTICKET_GETTICKET_GmTicketStatus::Hastext {
                 days_since_last_updated,
                 days_since_oldest_ticket_creation,
                 days_since_ticket_creation,
@@ -66,7 +66,7 @@ impl ServerMessage for SMSG_GMTICKET_GETTICKET {
                 w.write_all(&read_by_gm.to_le_bytes())?;
 
             }
-            SMSG_GMTICKET_GETTICKET_GmTicketStatus::DEFAULT => {}
+            SMSG_GMTICKET_GETTICKET_GmTicketStatus::Default => {}
         }
 
         Ok(())
@@ -82,8 +82,8 @@ impl ServerMessage for SMSG_GMTICKET_GETTICKET {
         let status: GmTicketStatus = crate::util::read_u32_le(r)?.try_into()?;
 
         let status_if = match status {
-            GmTicketStatus::DBERROR => SMSG_GMTICKET_GETTICKET_GmTicketStatus::DBERROR,
-            GmTicketStatus::HASTEXT => {
+            GmTicketStatus::Dberror => SMSG_GMTICKET_GETTICKET_GmTicketStatus::Dberror,
+            GmTicketStatus::Hastext => {
                 // text: CString
                 let text = crate::util::read_c_string_to_vec(r)?;
                 let text = String::from_utf8(text)?;
@@ -103,7 +103,7 @@ impl ServerMessage for SMSG_GMTICKET_GETTICKET {
                 // read_by_gm: u8
                 let read_by_gm = crate::util::read_u8_le(r)?;
 
-                SMSG_GMTICKET_GETTICKET_GmTicketStatus::HASTEXT {
+                SMSG_GMTICKET_GETTICKET_GmTicketStatus::Hastext {
                     days_since_last_updated,
                     days_since_oldest_ticket_creation,
                     days_since_ticket_creation,
@@ -113,7 +113,7 @@ impl ServerMessage for SMSG_GMTICKET_GETTICKET {
                     ticket_type,
                 }
             }
-            GmTicketStatus::DEFAULT => SMSG_GMTICKET_GETTICKET_GmTicketStatus::DEFAULT,
+            GmTicketStatus::Default => SMSG_GMTICKET_GETTICKET_GmTicketStatus::Default,
         };
 
         Ok(Self {
@@ -131,8 +131,8 @@ impl SMSG_GMTICKET_GETTICKET {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_GMTICKET_GETTICKET_GmTicketStatus {
-    DBERROR,
-    HASTEXT {
+    Dberror,
+    Hastext {
         days_since_last_updated: f32,
         days_since_oldest_ticket_creation: f32,
         days_since_ticket_creation: f32,
@@ -141,22 +141,22 @@ pub enum SMSG_GMTICKET_GETTICKET_GmTicketStatus {
         text: String,
         ticket_type: GmTicketType,
     },
-    DEFAULT,
+    Default,
 }
 
 impl Default for SMSG_GMTICKET_GETTICKET_GmTicketStatus {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::DBERROR
+        Self::Dberror
     }
 }
 
 impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::DBERROR => 0,
-            Self::HASTEXT { .. } => 6,
-            Self::DEFAULT => 10,
+            Self::Dberror => 0,
+            Self::Hastext { .. } => 6,
+            Self::Default => 10,
         }
     }
 
@@ -165,10 +165,10 @@ impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
 impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::DBERROR => {
+            Self::Dberror => {
                 4
             }
-            Self::HASTEXT {
+            Self::Hastext {
                 days_since_last_updated,
                 days_since_oldest_ticket_creation,
                 days_since_ticket_creation,
@@ -186,7 +186,7 @@ impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
                 + text.len() + 1 // text: CString
                 + 1 // ticket_type: GmTicketType
             }
-            Self::DEFAULT => {
+            Self::Default => {
                 4
             }
         }

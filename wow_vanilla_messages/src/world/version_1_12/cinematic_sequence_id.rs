@@ -17,29 +17,29 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CinematicSequenceId {
-    HUMAN,
-    ORC,
-    DWARF,
-    NIGHT_ELF,
-    UNDEAD,
-    TAUREN,
-    GNOME,
-    TROLL,
-    GOBLIN,
+    Human,
+    Orc,
+    Dwarf,
+    NightElf,
+    Undead,
+    Tauren,
+    Gnome,
+    Troll,
+    Goblin,
 }
 
 impl CinematicSequenceId {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::HUMAN => 0x51,
-            Self::ORC => 0x15,
-            Self::DWARF => 0x29,
-            Self::NIGHT_ELF => 0x3d,
-            Self::UNDEAD => 0x2,
-            Self::TAUREN => 0x8d,
-            Self::GNOME => 0x65,
-            Self::TROLL => 0x79,
-            Self::GOBLIN => 0x0,
+            Self::Human => 0x51,
+            Self::Orc => 0x15,
+            Self::Dwarf => 0x29,
+            Self::NightElf => 0x3d,
+            Self::Undead => 0x2,
+            Self::Tauren => 0x8d,
+            Self::Gnome => 0x65,
+            Self::Troll => 0x79,
+            Self::Goblin => 0x0,
         }
     }
 
@@ -47,22 +47,22 @@ impl CinematicSequenceId {
 
 impl Default for CinematicSequenceId {
     fn default() -> Self {
-        Self::HUMAN
+        Self::Human
     }
 }
 
 impl std::fmt::Display for CinematicSequenceId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::HUMAN => f.write_str("HUMAN"),
-            Self::ORC => f.write_str("ORC"),
-            Self::DWARF => f.write_str("DWARF"),
-            Self::NIGHT_ELF => f.write_str("NIGHT_ELF"),
-            Self::UNDEAD => f.write_str("UNDEAD"),
-            Self::TAUREN => f.write_str("TAUREN"),
-            Self::GNOME => f.write_str("GNOME"),
-            Self::TROLL => f.write_str("TROLL"),
-            Self::GOBLIN => f.write_str("GOBLIN"),
+            Self::Human => f.write_str("Human"),
+            Self::Orc => f.write_str("Orc"),
+            Self::Dwarf => f.write_str("Dwarf"),
+            Self::NightElf => f.write_str("NightElf"),
+            Self::Undead => f.write_str("Undead"),
+            Self::Tauren => f.write_str("Tauren"),
+            Self::Gnome => f.write_str("Gnome"),
+            Self::Troll => f.write_str("Troll"),
+            Self::Goblin => f.write_str("Goblin"),
         }
     }
 }
@@ -71,15 +71,15 @@ impl TryFrom<u32> for CinematicSequenceId {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            81 => Ok(Self::HUMAN),
-            21 => Ok(Self::ORC),
-            41 => Ok(Self::DWARF),
-            61 => Ok(Self::NIGHT_ELF),
-            2 => Ok(Self::UNDEAD),
-            141 => Ok(Self::TAUREN),
-            101 => Ok(Self::GNOME),
-            121 => Ok(Self::TROLL),
-            0 => Ok(Self::GOBLIN),
+            81 => Ok(Self::Human),
+            21 => Ok(Self::Orc),
+            41 => Ok(Self::Dwarf),
+            61 => Ok(Self::NightElf),
+            2 => Ok(Self::Undead),
+            141 => Ok(Self::Tauren),
+            101 => Ok(Self::Gnome),
+            121 => Ok(Self::Troll),
+            0 => Ok(Self::Goblin),
             v => Err(crate::errors::EnumError::new("CinematicSequenceId", v as u32),)
         }
     }

@@ -1,3 +1,4 @@
+use heck::CamelCase;
 use std::fmt::Write;
 
 pub use enums::{print_common_enum_common, print_common_enum_messages, print_enum};
@@ -806,5 +807,16 @@ fn print_docc_description_and_comment(
         }
 
         s.docc_newline();
+    }
+}
+
+pub fn field_name_to_rust_name(s: &str) -> String {
+    let name = s.to_camel_case();
+    if name == "Self" {
+        "SelfX".to_string() // Self is a reserved keyword
+    } else if name == "Error" {
+        "ErrorX".to_string() // Makes it ambiguous with Self::Error in traits
+    } else {
+        name
     }
 }

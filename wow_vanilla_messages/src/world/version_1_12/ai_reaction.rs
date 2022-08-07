@@ -15,29 +15,29 @@ use std::convert::{TryFrom, TryInto};
 pub enum AiReaction {
     /// pre-aggro (used in client packet handler)
     ///
-    ALERT,
+    Alert,
     /// (NOT used in client packet handler)
     ///
-    FRIENDLY,
+    Friendly,
     /// sent on every attack, triggers aggro sound (used in client packet handler)
     ///
-    HOSTILE,
+    Hostile,
     /// seen for polymorph (when AI not in control of self?) (NOT used in client packet handler)
     ///
-    AFRAID,
+    Afraid,
     /// used on object destroy (NOT used in client packet handler)
     ///
-    DESTROY,
+    Destroy,
 }
 
 impl AiReaction {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::ALERT => 0x0,
-            Self::FRIENDLY => 0x1,
-            Self::HOSTILE => 0x2,
-            Self::AFRAID => 0x3,
-            Self::DESTROY => 0x4,
+            Self::Alert => 0x0,
+            Self::Friendly => 0x1,
+            Self::Hostile => 0x2,
+            Self::Afraid => 0x3,
+            Self::Destroy => 0x4,
         }
     }
 
@@ -45,18 +45,18 @@ impl AiReaction {
 
 impl Default for AiReaction {
     fn default() -> Self {
-        Self::ALERT
+        Self::Alert
     }
 }
 
 impl std::fmt::Display for AiReaction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::ALERT => f.write_str("ALERT"),
-            Self::FRIENDLY => f.write_str("FRIENDLY"),
-            Self::HOSTILE => f.write_str("HOSTILE"),
-            Self::AFRAID => f.write_str("AFRAID"),
-            Self::DESTROY => f.write_str("DESTROY"),
+            Self::Alert => f.write_str("Alert"),
+            Self::Friendly => f.write_str("Friendly"),
+            Self::Hostile => f.write_str("Hostile"),
+            Self::Afraid => f.write_str("Afraid"),
+            Self::Destroy => f.write_str("Destroy"),
         }
     }
 }
@@ -65,11 +65,11 @@ impl TryFrom<u32> for AiReaction {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::ALERT),
-            1 => Ok(Self::FRIENDLY),
-            2 => Ok(Self::HOSTILE),
-            3 => Ok(Self::AFRAID),
-            4 => Ok(Self::DESTROY),
+            0 => Ok(Self::Alert),
+            1 => Ok(Self::Friendly),
+            2 => Ok(Self::Hostile),
+            3 => Ok(Self::Afraid),
+            4 => Ok(Self::Destroy),
             v => Err(crate::errors::EnumError::new("AiReaction", v as u32),)
         }
     }

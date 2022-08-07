@@ -36,14 +36,14 @@ impl FlagIfElseIf {
 
         if let Some(if_statement) = &self.flags.one_if {
             match if_statement {
-                FlagIfElseIf_UpdateFlag_ONE_IF::ONE_IF {
+                FlagIfElseIf_UpdateFlag_ONE_IF::OneIf {
                     b_if,
                 } => {
                     // b_if: u8
                     w.write_all(&b_if.to_le_bytes())?;
 
                 }
-                FlagIfElseIf_UpdateFlag_ONE_IF::TWO_ELSEIF {
+                FlagIfElseIf_UpdateFlag_ONE_IF::TwoElseif {
                     s,
                 } => {
                     // s: SimpleFlag
@@ -56,7 +56,7 @@ impl FlagIfElseIf {
                     }
 
                 }
-                FlagIfElseIf_UpdateFlag_ONE_IF::FOUR_ELSEIF {
+                FlagIfElseIf_UpdateFlag_ONE_IF::FourElseif {
                     elseif2,
                 } => {
                     // elseif2: u8
@@ -85,7 +85,7 @@ impl FlagIfElseIf {
             // b_if: u8
             let b_if = crate::util::read_u8_le(r)?;
 
-            Some(FlagIfElseIf_UpdateFlag_ONE_IF::ONE_IF {
+            Some(FlagIfElseIf_UpdateFlag_ONE_IF::OneIf {
                 b_if,
             })
         }
@@ -110,7 +110,7 @@ impl FlagIfElseIf {
                 one: s_ONE,
             };
 
-            Some(FlagIfElseIf_UpdateFlag_ONE_IF::TWO_ELSEIF {
+            Some(FlagIfElseIf_UpdateFlag_ONE_IF::TwoElseif {
                 s,
             })
         }
@@ -118,7 +118,7 @@ impl FlagIfElseIf {
             // elseif2: u8
             let elseif2 = crate::util::read_u8_le(r)?;
 
-            Some(FlagIfElseIf_UpdateFlag_ONE_IF::FOUR_ELSEIF {
+            Some(FlagIfElseIf_UpdateFlag_ONE_IF::FourElseif {
                 elseif2,
             })
         }
@@ -251,13 +251,13 @@ impl FlagIfElseIf_SimpleFlag_ONE {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum FlagIfElseIf_UpdateFlag_ONE_IF {
-    ONE_IF {
+    OneIf {
         b_if: u8,
     },
-    TWO_ELSEIF {
+    TwoElseif {
         s: FlagIfElseIf_SimpleFlag,
     },
-    FOUR_ELSEIF {
+    FourElseif {
         elseif2: u8,
     },
 }
@@ -265,9 +265,9 @@ pub enum FlagIfElseIf_UpdateFlag_ONE_IF {
 impl FlagIfElseIf_UpdateFlag_ONE_IF {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::ONE_IF { .. } => 1,
-            Self::TWO_ELSEIF { .. } => 2,
-            Self::FOUR_ELSEIF { .. } => 4,
+            Self::OneIf { .. } => 1,
+            Self::TwoElseif { .. } => 2,
+            Self::FourElseif { .. } => 4,
         }
     }
 
@@ -276,19 +276,19 @@ impl FlagIfElseIf_UpdateFlag_ONE_IF {
 impl FlagIfElseIf_UpdateFlag_ONE_IF {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::ONE_IF {
+            Self::OneIf {
                 b_if,
             } => {
                 // Not an actual enum sent over the wire
                 1 // b_if: u8
             }
-            Self::TWO_ELSEIF {
+            Self::TwoElseif {
                 s,
             } => {
                 // Not an actual enum sent over the wire
                 s.size() // s: FlagIfElseIf_SimpleFlag
             }
-            Self::FOUR_ELSEIF {
+            Self::FourElseif {
                 elseif2,
             } => {
                 // Not an actual enum sent over the wire

@@ -28,7 +28,7 @@ impl ServerMessage for SMSG_CHAR_RENAME {
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         match &self.result {
-            SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
+            SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
                 character,
                 new_name,
             } => {
@@ -41,87 +41,87 @@ impl ServerMessage for SMSG_CHAR_RENAME {
                 w.write_all(&[0])?;
 
             }
-            SMSG_CHAR_RENAME_WorldResult::RESPONSE_FAILURE => {}
-            SMSG_CHAR_RENAME_WorldResult::RESPONSE_CANCELLED => {}
-            SMSG_CHAR_RENAME_WorldResult::RESPONSE_DISCONNECTED => {}
-            SMSG_CHAR_RENAME_WorldResult::RESPONSE_FAILED_TO_CONNECT => {}
-            SMSG_CHAR_RENAME_WorldResult::RESPONSE_CONNECTED => {}
-            SMSG_CHAR_RENAME_WorldResult::RESPONSE_VERSION_MISMATCH => {}
-            SMSG_CHAR_RENAME_WorldResult::CSTATUS_CONNECTING => {}
-            SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATING_SECURITY => {}
-            SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATION_COMPLETE => {}
-            SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATION_FAILED => {}
-            SMSG_CHAR_RENAME_WorldResult::CSTATUS_AUTHENTICATING => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_OK => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_FAILED => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_REJECT => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_BAD_SERVER_PROOF => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_UNAVAILABLE => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_SYSTEM_ERROR => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_BILLING_ERROR => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_BILLING_EXPIRED => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_VERSION_MISMATCH => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_UNKNOWN_ACCOUNT => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_INCORRECT_PASSWORD => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_SESSION_EXPIRED => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_SERVER_SHUTTING_DOWN => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_ALREADY_LOGGING_IN => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_WAIT_QUEUE => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_BANNED => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_ALREADY_ONLINE => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_NO_TIME => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_DB_BUSY => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_SUSPENDED => {}
-            SMSG_CHAR_RENAME_WorldResult::AUTH_PARENTAL_CONTROL => {}
-            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_IN_PROGRESS => {}
-            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_SUCCESS => {}
-            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_FAILED => {}
-            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_INVALID => {}
-            SMSG_CHAR_RENAME_WorldResult::REALM_LIST_REALM_NOT_FOUND => {}
-            SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_IN_PROGRESS => {}
-            SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_SUCCESS => {}
-            SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_FAILED => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_RETRIEVING => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_RETRIEVED => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_FAILED => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_IN_PROGRESS => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SUCCESS => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ERROR => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_FAILED => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_NAME_IN_USE => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_DISABLED => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SERVER_LIMIT => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ACCOUNT_LIMIT => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SERVER_QUEUE => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ONLY_EXISTING => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_IN_PROGRESS => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_SUCCESS => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_FAILED => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_IN_PROGRESS => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_SUCCESS => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_WORLD => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_INSTANCES => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_FAILED => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_DISABLED => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_CHARACTER => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_NO_NAME => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_SHORT => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_ONLY_LETTERS => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_MIXED_LANGUAGES => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_PROFANE => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_RESERVED => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_INVALID_APOSTROPHE => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_THREE_CONSECUTIVE => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_INVALID_SPACE => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_SUCCESS => {}
-            SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_FAILURE => {}
+            SMSG_CHAR_RENAME_WorldResult::ResponseFailure => {}
+            SMSG_CHAR_RENAME_WorldResult::ResponseCancelled => {}
+            SMSG_CHAR_RENAME_WorldResult::ResponseDisconnected => {}
+            SMSG_CHAR_RENAME_WorldResult::ResponseFailedToConnect => {}
+            SMSG_CHAR_RENAME_WorldResult::ResponseConnected => {}
+            SMSG_CHAR_RENAME_WorldResult::ResponseVersionMismatch => {}
+            SMSG_CHAR_RENAME_WorldResult::CstatusConnecting => {}
+            SMSG_CHAR_RENAME_WorldResult::CstatusNegotiatingSecurity => {}
+            SMSG_CHAR_RENAME_WorldResult::CstatusNegotiationComplete => {}
+            SMSG_CHAR_RENAME_WorldResult::CstatusNegotiationFailed => {}
+            SMSG_CHAR_RENAME_WorldResult::CstatusAuthenticating => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthOk => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthFailed => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthReject => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthBadServerProof => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthUnavailable => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthSystemError => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthBillingError => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthBillingExpired => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthVersionMismatch => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthUnknownAccount => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthIncorrectPassword => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthSessionExpired => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthServerShuttingDown => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthAlreadyLoggingIn => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthLoginServerNotFound => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthWaitQueue => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthBanned => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthAlreadyOnline => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthNoTime => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthDbBusy => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthSuspended => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthParentalControl => {}
+            SMSG_CHAR_RENAME_WorldResult::RealmListInProgress => {}
+            SMSG_CHAR_RENAME_WorldResult::RealmListSuccess => {}
+            SMSG_CHAR_RENAME_WorldResult::RealmListFailed => {}
+            SMSG_CHAR_RENAME_WorldResult::RealmListInvalid => {}
+            SMSG_CHAR_RENAME_WorldResult::RealmListRealmNotFound => {}
+            SMSG_CHAR_RENAME_WorldResult::AccountCreateInProgress => {}
+            SMSG_CHAR_RENAME_WorldResult::AccountCreateSuccess => {}
+            SMSG_CHAR_RENAME_WorldResult::AccountCreateFailed => {}
+            SMSG_CHAR_RENAME_WorldResult::CharListRetrieving => {}
+            SMSG_CHAR_RENAME_WorldResult::CharListRetrieved => {}
+            SMSG_CHAR_RENAME_WorldResult::CharListFailed => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateInProgress => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateSuccess => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateError => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateFailed => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateNameInUse => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateDisabled => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreatePvpTeamsViolation => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateServerLimit => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateAccountLimit => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateServerQueue => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateOnlyExisting => {}
+            SMSG_CHAR_RENAME_WorldResult::CharDeleteInProgress => {}
+            SMSG_CHAR_RENAME_WorldResult::CharDeleteSuccess => {}
+            SMSG_CHAR_RENAME_WorldResult::CharDeleteFailed => {}
+            SMSG_CHAR_RENAME_WorldResult::CharDeleteFailedLockedForTransfer => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginInProgress => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginSuccess => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginNoWorld => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginDuplicateCharacter => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginNoInstances => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginFailed => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginDisabled => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginNoCharacter => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginLockedForTransfer => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameNoName => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameTooShort => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameTooLong => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameOnlyLetters => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameMixedLanguages => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameProfane => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameReserved => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameInvalidApostrophe => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameMultipleApostrophes => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameThreeConsecutive => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameInvalidSpace => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameSuccess => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameFailure => {}
         }
 
         Ok(())
@@ -137,7 +137,7 @@ impl ServerMessage for SMSG_CHAR_RENAME {
         let result: WorldResult = crate::util::read_u8_le(r)?.try_into()?;
 
         let result_if = match result {
-            WorldResult::RESPONSE_SUCCESS => {
+            WorldResult::ResponseSuccess => {
                 // character: Guid
                 let character = Guid::read(r)?;
 
@@ -145,92 +145,92 @@ impl ServerMessage for SMSG_CHAR_RENAME {
                 let new_name = crate::util::read_c_string_to_vec(r)?;
                 let new_name = String::from_utf8(new_name)?;
 
-                SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
+                SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
                     character,
                     new_name,
                 }
             }
-            WorldResult::RESPONSE_FAILURE => SMSG_CHAR_RENAME_WorldResult::RESPONSE_FAILURE,
-            WorldResult::RESPONSE_CANCELLED => SMSG_CHAR_RENAME_WorldResult::RESPONSE_CANCELLED,
-            WorldResult::RESPONSE_DISCONNECTED => SMSG_CHAR_RENAME_WorldResult::RESPONSE_DISCONNECTED,
-            WorldResult::RESPONSE_FAILED_TO_CONNECT => SMSG_CHAR_RENAME_WorldResult::RESPONSE_FAILED_TO_CONNECT,
-            WorldResult::RESPONSE_CONNECTED => SMSG_CHAR_RENAME_WorldResult::RESPONSE_CONNECTED,
-            WorldResult::RESPONSE_VERSION_MISMATCH => SMSG_CHAR_RENAME_WorldResult::RESPONSE_VERSION_MISMATCH,
-            WorldResult::CSTATUS_CONNECTING => SMSG_CHAR_RENAME_WorldResult::CSTATUS_CONNECTING,
-            WorldResult::CSTATUS_NEGOTIATING_SECURITY => SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATING_SECURITY,
-            WorldResult::CSTATUS_NEGOTIATION_COMPLETE => SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATION_COMPLETE,
-            WorldResult::CSTATUS_NEGOTIATION_FAILED => SMSG_CHAR_RENAME_WorldResult::CSTATUS_NEGOTIATION_FAILED,
-            WorldResult::CSTATUS_AUTHENTICATING => SMSG_CHAR_RENAME_WorldResult::CSTATUS_AUTHENTICATING,
-            WorldResult::AUTH_OK => SMSG_CHAR_RENAME_WorldResult::AUTH_OK,
-            WorldResult::AUTH_FAILED => SMSG_CHAR_RENAME_WorldResult::AUTH_FAILED,
-            WorldResult::AUTH_REJECT => SMSG_CHAR_RENAME_WorldResult::AUTH_REJECT,
-            WorldResult::AUTH_BAD_SERVER_PROOF => SMSG_CHAR_RENAME_WorldResult::AUTH_BAD_SERVER_PROOF,
-            WorldResult::AUTH_UNAVAILABLE => SMSG_CHAR_RENAME_WorldResult::AUTH_UNAVAILABLE,
-            WorldResult::AUTH_SYSTEM_ERROR => SMSG_CHAR_RENAME_WorldResult::AUTH_SYSTEM_ERROR,
-            WorldResult::AUTH_BILLING_ERROR => SMSG_CHAR_RENAME_WorldResult::AUTH_BILLING_ERROR,
-            WorldResult::AUTH_BILLING_EXPIRED => SMSG_CHAR_RENAME_WorldResult::AUTH_BILLING_EXPIRED,
-            WorldResult::AUTH_VERSION_MISMATCH => SMSG_CHAR_RENAME_WorldResult::AUTH_VERSION_MISMATCH,
-            WorldResult::AUTH_UNKNOWN_ACCOUNT => SMSG_CHAR_RENAME_WorldResult::AUTH_UNKNOWN_ACCOUNT,
-            WorldResult::AUTH_INCORRECT_PASSWORD => SMSG_CHAR_RENAME_WorldResult::AUTH_INCORRECT_PASSWORD,
-            WorldResult::AUTH_SESSION_EXPIRED => SMSG_CHAR_RENAME_WorldResult::AUTH_SESSION_EXPIRED,
-            WorldResult::AUTH_SERVER_SHUTTING_DOWN => SMSG_CHAR_RENAME_WorldResult::AUTH_SERVER_SHUTTING_DOWN,
-            WorldResult::AUTH_ALREADY_LOGGING_IN => SMSG_CHAR_RENAME_WorldResult::AUTH_ALREADY_LOGGING_IN,
-            WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => SMSG_CHAR_RENAME_WorldResult::AUTH_LOGIN_SERVER_NOT_FOUND,
-            WorldResult::AUTH_WAIT_QUEUE => SMSG_CHAR_RENAME_WorldResult::AUTH_WAIT_QUEUE,
-            WorldResult::AUTH_BANNED => SMSG_CHAR_RENAME_WorldResult::AUTH_BANNED,
-            WorldResult::AUTH_ALREADY_ONLINE => SMSG_CHAR_RENAME_WorldResult::AUTH_ALREADY_ONLINE,
-            WorldResult::AUTH_NO_TIME => SMSG_CHAR_RENAME_WorldResult::AUTH_NO_TIME,
-            WorldResult::AUTH_DB_BUSY => SMSG_CHAR_RENAME_WorldResult::AUTH_DB_BUSY,
-            WorldResult::AUTH_SUSPENDED => SMSG_CHAR_RENAME_WorldResult::AUTH_SUSPENDED,
-            WorldResult::AUTH_PARENTAL_CONTROL => SMSG_CHAR_RENAME_WorldResult::AUTH_PARENTAL_CONTROL,
-            WorldResult::REALM_LIST_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_IN_PROGRESS,
-            WorldResult::REALM_LIST_SUCCESS => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_SUCCESS,
-            WorldResult::REALM_LIST_FAILED => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_FAILED,
-            WorldResult::REALM_LIST_INVALID => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_INVALID,
-            WorldResult::REALM_LIST_REALM_NOT_FOUND => SMSG_CHAR_RENAME_WorldResult::REALM_LIST_REALM_NOT_FOUND,
-            WorldResult::ACCOUNT_CREATE_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_IN_PROGRESS,
-            WorldResult::ACCOUNT_CREATE_SUCCESS => SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_SUCCESS,
-            WorldResult::ACCOUNT_CREATE_FAILED => SMSG_CHAR_RENAME_WorldResult::ACCOUNT_CREATE_FAILED,
-            WorldResult::CHAR_LIST_RETRIEVING => SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_RETRIEVING,
-            WorldResult::CHAR_LIST_RETRIEVED => SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_RETRIEVED,
-            WorldResult::CHAR_LIST_FAILED => SMSG_CHAR_RENAME_WorldResult::CHAR_LIST_FAILED,
-            WorldResult::CHAR_CREATE_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_IN_PROGRESS,
-            WorldResult::CHAR_CREATE_SUCCESS => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SUCCESS,
-            WorldResult::CHAR_CREATE_ERROR => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ERROR,
-            WorldResult::CHAR_CREATE_FAILED => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_FAILED,
-            WorldResult::CHAR_CREATE_NAME_IN_USE => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_NAME_IN_USE,
-            WorldResult::CHAR_CREATE_DISABLED => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_DISABLED,
-            WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION,
-            WorldResult::CHAR_CREATE_SERVER_LIMIT => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SERVER_LIMIT,
-            WorldResult::CHAR_CREATE_ACCOUNT_LIMIT => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ACCOUNT_LIMIT,
-            WorldResult::CHAR_CREATE_SERVER_QUEUE => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_SERVER_QUEUE,
-            WorldResult::CHAR_CREATE_ONLY_EXISTING => SMSG_CHAR_RENAME_WorldResult::CHAR_CREATE_ONLY_EXISTING,
-            WorldResult::CHAR_DELETE_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_IN_PROGRESS,
-            WorldResult::CHAR_DELETE_SUCCESS => SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_SUCCESS,
-            WorldResult::CHAR_DELETE_FAILED => SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_FAILED,
-            WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => SMSG_CHAR_RENAME_WorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER,
-            WorldResult::CHAR_LOGIN_IN_PROGRESS => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_IN_PROGRESS,
-            WorldResult::CHAR_LOGIN_SUCCESS => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_SUCCESS,
-            WorldResult::CHAR_LOGIN_NO_WORLD => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_WORLD,
-            WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER,
-            WorldResult::CHAR_LOGIN_NO_INSTANCES => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_INSTANCES,
-            WorldResult::CHAR_LOGIN_FAILED => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_FAILED,
-            WorldResult::CHAR_LOGIN_DISABLED => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_DISABLED,
-            WorldResult::CHAR_LOGIN_NO_CHARACTER => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_NO_CHARACTER,
-            WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => SMSG_CHAR_RENAME_WorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER,
-            WorldResult::CHAR_NAME_NO_NAME => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_NO_NAME,
-            WorldResult::CHAR_NAME_TOO_SHORT => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_SHORT,
-            WorldResult::CHAR_NAME_TOO_LONG => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG,
-            WorldResult::CHAR_NAME_ONLY_LETTERS => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_ONLY_LETTERS,
-            WorldResult::CHAR_NAME_MIXED_LANGUAGES => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_MIXED_LANGUAGES,
-            WorldResult::CHAR_NAME_PROFANE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_PROFANE,
-            WorldResult::CHAR_NAME_RESERVED => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_RESERVED,
-            WorldResult::CHAR_NAME_INVALID_APOSTROPHE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_INVALID_APOSTROPHE,
-            WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES,
-            WorldResult::CHAR_NAME_THREE_CONSECUTIVE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_THREE_CONSECUTIVE,
-            WorldResult::CHAR_NAME_INVALID_SPACE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_INVALID_SPACE,
-            WorldResult::CHAR_NAME_SUCCESS => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_SUCCESS,
-            WorldResult::CHAR_NAME_FAILURE => SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_FAILURE,
+            WorldResult::ResponseFailure => SMSG_CHAR_RENAME_WorldResult::ResponseFailure,
+            WorldResult::ResponseCancelled => SMSG_CHAR_RENAME_WorldResult::ResponseCancelled,
+            WorldResult::ResponseDisconnected => SMSG_CHAR_RENAME_WorldResult::ResponseDisconnected,
+            WorldResult::ResponseFailedToConnect => SMSG_CHAR_RENAME_WorldResult::ResponseFailedToConnect,
+            WorldResult::ResponseConnected => SMSG_CHAR_RENAME_WorldResult::ResponseConnected,
+            WorldResult::ResponseVersionMismatch => SMSG_CHAR_RENAME_WorldResult::ResponseVersionMismatch,
+            WorldResult::CstatusConnecting => SMSG_CHAR_RENAME_WorldResult::CstatusConnecting,
+            WorldResult::CstatusNegotiatingSecurity => SMSG_CHAR_RENAME_WorldResult::CstatusNegotiatingSecurity,
+            WorldResult::CstatusNegotiationComplete => SMSG_CHAR_RENAME_WorldResult::CstatusNegotiationComplete,
+            WorldResult::CstatusNegotiationFailed => SMSG_CHAR_RENAME_WorldResult::CstatusNegotiationFailed,
+            WorldResult::CstatusAuthenticating => SMSG_CHAR_RENAME_WorldResult::CstatusAuthenticating,
+            WorldResult::AuthOk => SMSG_CHAR_RENAME_WorldResult::AuthOk,
+            WorldResult::AuthFailed => SMSG_CHAR_RENAME_WorldResult::AuthFailed,
+            WorldResult::AuthReject => SMSG_CHAR_RENAME_WorldResult::AuthReject,
+            WorldResult::AuthBadServerProof => SMSG_CHAR_RENAME_WorldResult::AuthBadServerProof,
+            WorldResult::AuthUnavailable => SMSG_CHAR_RENAME_WorldResult::AuthUnavailable,
+            WorldResult::AuthSystemError => SMSG_CHAR_RENAME_WorldResult::AuthSystemError,
+            WorldResult::AuthBillingError => SMSG_CHAR_RENAME_WorldResult::AuthBillingError,
+            WorldResult::AuthBillingExpired => SMSG_CHAR_RENAME_WorldResult::AuthBillingExpired,
+            WorldResult::AuthVersionMismatch => SMSG_CHAR_RENAME_WorldResult::AuthVersionMismatch,
+            WorldResult::AuthUnknownAccount => SMSG_CHAR_RENAME_WorldResult::AuthUnknownAccount,
+            WorldResult::AuthIncorrectPassword => SMSG_CHAR_RENAME_WorldResult::AuthIncorrectPassword,
+            WorldResult::AuthSessionExpired => SMSG_CHAR_RENAME_WorldResult::AuthSessionExpired,
+            WorldResult::AuthServerShuttingDown => SMSG_CHAR_RENAME_WorldResult::AuthServerShuttingDown,
+            WorldResult::AuthAlreadyLoggingIn => SMSG_CHAR_RENAME_WorldResult::AuthAlreadyLoggingIn,
+            WorldResult::AuthLoginServerNotFound => SMSG_CHAR_RENAME_WorldResult::AuthLoginServerNotFound,
+            WorldResult::AuthWaitQueue => SMSG_CHAR_RENAME_WorldResult::AuthWaitQueue,
+            WorldResult::AuthBanned => SMSG_CHAR_RENAME_WorldResult::AuthBanned,
+            WorldResult::AuthAlreadyOnline => SMSG_CHAR_RENAME_WorldResult::AuthAlreadyOnline,
+            WorldResult::AuthNoTime => SMSG_CHAR_RENAME_WorldResult::AuthNoTime,
+            WorldResult::AuthDbBusy => SMSG_CHAR_RENAME_WorldResult::AuthDbBusy,
+            WorldResult::AuthSuspended => SMSG_CHAR_RENAME_WorldResult::AuthSuspended,
+            WorldResult::AuthParentalControl => SMSG_CHAR_RENAME_WorldResult::AuthParentalControl,
+            WorldResult::RealmListInProgress => SMSG_CHAR_RENAME_WorldResult::RealmListInProgress,
+            WorldResult::RealmListSuccess => SMSG_CHAR_RENAME_WorldResult::RealmListSuccess,
+            WorldResult::RealmListFailed => SMSG_CHAR_RENAME_WorldResult::RealmListFailed,
+            WorldResult::RealmListInvalid => SMSG_CHAR_RENAME_WorldResult::RealmListInvalid,
+            WorldResult::RealmListRealmNotFound => SMSG_CHAR_RENAME_WorldResult::RealmListRealmNotFound,
+            WorldResult::AccountCreateInProgress => SMSG_CHAR_RENAME_WorldResult::AccountCreateInProgress,
+            WorldResult::AccountCreateSuccess => SMSG_CHAR_RENAME_WorldResult::AccountCreateSuccess,
+            WorldResult::AccountCreateFailed => SMSG_CHAR_RENAME_WorldResult::AccountCreateFailed,
+            WorldResult::CharListRetrieving => SMSG_CHAR_RENAME_WorldResult::CharListRetrieving,
+            WorldResult::CharListRetrieved => SMSG_CHAR_RENAME_WorldResult::CharListRetrieved,
+            WorldResult::CharListFailed => SMSG_CHAR_RENAME_WorldResult::CharListFailed,
+            WorldResult::CharCreateInProgress => SMSG_CHAR_RENAME_WorldResult::CharCreateInProgress,
+            WorldResult::CharCreateSuccess => SMSG_CHAR_RENAME_WorldResult::CharCreateSuccess,
+            WorldResult::CharCreateError => SMSG_CHAR_RENAME_WorldResult::CharCreateError,
+            WorldResult::CharCreateFailed => SMSG_CHAR_RENAME_WorldResult::CharCreateFailed,
+            WorldResult::CharCreateNameInUse => SMSG_CHAR_RENAME_WorldResult::CharCreateNameInUse,
+            WorldResult::CharCreateDisabled => SMSG_CHAR_RENAME_WorldResult::CharCreateDisabled,
+            WorldResult::CharCreatePvpTeamsViolation => SMSG_CHAR_RENAME_WorldResult::CharCreatePvpTeamsViolation,
+            WorldResult::CharCreateServerLimit => SMSG_CHAR_RENAME_WorldResult::CharCreateServerLimit,
+            WorldResult::CharCreateAccountLimit => SMSG_CHAR_RENAME_WorldResult::CharCreateAccountLimit,
+            WorldResult::CharCreateServerQueue => SMSG_CHAR_RENAME_WorldResult::CharCreateServerQueue,
+            WorldResult::CharCreateOnlyExisting => SMSG_CHAR_RENAME_WorldResult::CharCreateOnlyExisting,
+            WorldResult::CharDeleteInProgress => SMSG_CHAR_RENAME_WorldResult::CharDeleteInProgress,
+            WorldResult::CharDeleteSuccess => SMSG_CHAR_RENAME_WorldResult::CharDeleteSuccess,
+            WorldResult::CharDeleteFailed => SMSG_CHAR_RENAME_WorldResult::CharDeleteFailed,
+            WorldResult::CharDeleteFailedLockedForTransfer => SMSG_CHAR_RENAME_WorldResult::CharDeleteFailedLockedForTransfer,
+            WorldResult::CharLoginInProgress => SMSG_CHAR_RENAME_WorldResult::CharLoginInProgress,
+            WorldResult::CharLoginSuccess => SMSG_CHAR_RENAME_WorldResult::CharLoginSuccess,
+            WorldResult::CharLoginNoWorld => SMSG_CHAR_RENAME_WorldResult::CharLoginNoWorld,
+            WorldResult::CharLoginDuplicateCharacter => SMSG_CHAR_RENAME_WorldResult::CharLoginDuplicateCharacter,
+            WorldResult::CharLoginNoInstances => SMSG_CHAR_RENAME_WorldResult::CharLoginNoInstances,
+            WorldResult::CharLoginFailed => SMSG_CHAR_RENAME_WorldResult::CharLoginFailed,
+            WorldResult::CharLoginDisabled => SMSG_CHAR_RENAME_WorldResult::CharLoginDisabled,
+            WorldResult::CharLoginNoCharacter => SMSG_CHAR_RENAME_WorldResult::CharLoginNoCharacter,
+            WorldResult::CharLoginLockedForTransfer => SMSG_CHAR_RENAME_WorldResult::CharLoginLockedForTransfer,
+            WorldResult::CharNameNoName => SMSG_CHAR_RENAME_WorldResult::CharNameNoName,
+            WorldResult::CharNameTooShort => SMSG_CHAR_RENAME_WorldResult::CharNameTooShort,
+            WorldResult::CharNameTooLong => SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
+            WorldResult::CharNameOnlyLetters => SMSG_CHAR_RENAME_WorldResult::CharNameOnlyLetters,
+            WorldResult::CharNameMixedLanguages => SMSG_CHAR_RENAME_WorldResult::CharNameMixedLanguages,
+            WorldResult::CharNameProfane => SMSG_CHAR_RENAME_WorldResult::CharNameProfane,
+            WorldResult::CharNameReserved => SMSG_CHAR_RENAME_WorldResult::CharNameReserved,
+            WorldResult::CharNameInvalidApostrophe => SMSG_CHAR_RENAME_WorldResult::CharNameInvalidApostrophe,
+            WorldResult::CharNameMultipleApostrophes => SMSG_CHAR_RENAME_WorldResult::CharNameMultipleApostrophes,
+            WorldResult::CharNameThreeConsecutive => SMSG_CHAR_RENAME_WorldResult::CharNameThreeConsecutive,
+            WorldResult::CharNameInvalidSpace => SMSG_CHAR_RENAME_WorldResult::CharNameInvalidSpace,
+            WorldResult::CharNameSuccess => SMSG_CHAR_RENAME_WorldResult::CharNameSuccess,
+            WorldResult::CharNameFailure => SMSG_CHAR_RENAME_WorldResult::CharNameFailure,
         };
 
         Ok(Self {
@@ -248,97 +248,97 @@ impl SMSG_CHAR_RENAME {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_CHAR_RENAME_WorldResult {
-    RESPONSE_SUCCESS {
+    ResponseSuccess {
         character: Guid,
         new_name: String,
     },
-    RESPONSE_FAILURE,
-    RESPONSE_CANCELLED,
-    RESPONSE_DISCONNECTED,
-    RESPONSE_FAILED_TO_CONNECT,
-    RESPONSE_CONNECTED,
-    RESPONSE_VERSION_MISMATCH,
-    CSTATUS_CONNECTING,
-    CSTATUS_NEGOTIATING_SECURITY,
-    CSTATUS_NEGOTIATION_COMPLETE,
-    CSTATUS_NEGOTIATION_FAILED,
-    CSTATUS_AUTHENTICATING,
-    AUTH_OK,
-    AUTH_FAILED,
-    AUTH_REJECT,
-    AUTH_BAD_SERVER_PROOF,
-    AUTH_UNAVAILABLE,
-    AUTH_SYSTEM_ERROR,
-    AUTH_BILLING_ERROR,
-    AUTH_BILLING_EXPIRED,
-    AUTH_VERSION_MISMATCH,
-    AUTH_UNKNOWN_ACCOUNT,
-    AUTH_INCORRECT_PASSWORD,
-    AUTH_SESSION_EXPIRED,
-    AUTH_SERVER_SHUTTING_DOWN,
-    AUTH_ALREADY_LOGGING_IN,
-    AUTH_LOGIN_SERVER_NOT_FOUND,
-    AUTH_WAIT_QUEUE,
-    AUTH_BANNED,
-    AUTH_ALREADY_ONLINE,
-    AUTH_NO_TIME,
-    AUTH_DB_BUSY,
-    AUTH_SUSPENDED,
-    AUTH_PARENTAL_CONTROL,
-    REALM_LIST_IN_PROGRESS,
-    REALM_LIST_SUCCESS,
-    REALM_LIST_FAILED,
-    REALM_LIST_INVALID,
-    REALM_LIST_REALM_NOT_FOUND,
-    ACCOUNT_CREATE_IN_PROGRESS,
-    ACCOUNT_CREATE_SUCCESS,
-    ACCOUNT_CREATE_FAILED,
-    CHAR_LIST_RETRIEVING,
-    CHAR_LIST_RETRIEVED,
-    CHAR_LIST_FAILED,
-    CHAR_CREATE_IN_PROGRESS,
-    CHAR_CREATE_SUCCESS,
-    CHAR_CREATE_ERROR,
-    CHAR_CREATE_FAILED,
-    CHAR_CREATE_NAME_IN_USE,
-    CHAR_CREATE_DISABLED,
-    CHAR_CREATE_PVP_TEAMS_VIOLATION,
-    CHAR_CREATE_SERVER_LIMIT,
-    CHAR_CREATE_ACCOUNT_LIMIT,
-    CHAR_CREATE_SERVER_QUEUE,
-    CHAR_CREATE_ONLY_EXISTING,
-    CHAR_DELETE_IN_PROGRESS,
-    CHAR_DELETE_SUCCESS,
-    CHAR_DELETE_FAILED,
-    CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER,
-    CHAR_LOGIN_IN_PROGRESS,
-    CHAR_LOGIN_SUCCESS,
-    CHAR_LOGIN_NO_WORLD,
-    CHAR_LOGIN_DUPLICATE_CHARACTER,
-    CHAR_LOGIN_NO_INSTANCES,
-    CHAR_LOGIN_FAILED,
-    CHAR_LOGIN_DISABLED,
-    CHAR_LOGIN_NO_CHARACTER,
-    CHAR_LOGIN_LOCKED_FOR_TRANSFER,
-    CHAR_NAME_NO_NAME,
-    CHAR_NAME_TOO_SHORT,
-    CHAR_NAME_TOO_LONG,
-    CHAR_NAME_ONLY_LETTERS,
-    CHAR_NAME_MIXED_LANGUAGES,
-    CHAR_NAME_PROFANE,
-    CHAR_NAME_RESERVED,
-    CHAR_NAME_INVALID_APOSTROPHE,
-    CHAR_NAME_MULTIPLE_APOSTROPHES,
-    CHAR_NAME_THREE_CONSECUTIVE,
-    CHAR_NAME_INVALID_SPACE,
-    CHAR_NAME_SUCCESS,
-    CHAR_NAME_FAILURE,
+    ResponseFailure,
+    ResponseCancelled,
+    ResponseDisconnected,
+    ResponseFailedToConnect,
+    ResponseConnected,
+    ResponseVersionMismatch,
+    CstatusConnecting,
+    CstatusNegotiatingSecurity,
+    CstatusNegotiationComplete,
+    CstatusNegotiationFailed,
+    CstatusAuthenticating,
+    AuthOk,
+    AuthFailed,
+    AuthReject,
+    AuthBadServerProof,
+    AuthUnavailable,
+    AuthSystemError,
+    AuthBillingError,
+    AuthBillingExpired,
+    AuthVersionMismatch,
+    AuthUnknownAccount,
+    AuthIncorrectPassword,
+    AuthSessionExpired,
+    AuthServerShuttingDown,
+    AuthAlreadyLoggingIn,
+    AuthLoginServerNotFound,
+    AuthWaitQueue,
+    AuthBanned,
+    AuthAlreadyOnline,
+    AuthNoTime,
+    AuthDbBusy,
+    AuthSuspended,
+    AuthParentalControl,
+    RealmListInProgress,
+    RealmListSuccess,
+    RealmListFailed,
+    RealmListInvalid,
+    RealmListRealmNotFound,
+    AccountCreateInProgress,
+    AccountCreateSuccess,
+    AccountCreateFailed,
+    CharListRetrieving,
+    CharListRetrieved,
+    CharListFailed,
+    CharCreateInProgress,
+    CharCreateSuccess,
+    CharCreateError,
+    CharCreateFailed,
+    CharCreateNameInUse,
+    CharCreateDisabled,
+    CharCreatePvpTeamsViolation,
+    CharCreateServerLimit,
+    CharCreateAccountLimit,
+    CharCreateServerQueue,
+    CharCreateOnlyExisting,
+    CharDeleteInProgress,
+    CharDeleteSuccess,
+    CharDeleteFailed,
+    CharDeleteFailedLockedForTransfer,
+    CharLoginInProgress,
+    CharLoginSuccess,
+    CharLoginNoWorld,
+    CharLoginDuplicateCharacter,
+    CharLoginNoInstances,
+    CharLoginFailed,
+    CharLoginDisabled,
+    CharLoginNoCharacter,
+    CharLoginLockedForTransfer,
+    CharNameNoName,
+    CharNameTooShort,
+    CharNameTooLong,
+    CharNameOnlyLetters,
+    CharNameMixedLanguages,
+    CharNameProfane,
+    CharNameReserved,
+    CharNameInvalidApostrophe,
+    CharNameMultipleApostrophes,
+    CharNameThreeConsecutive,
+    CharNameInvalidSpace,
+    CharNameSuccess,
+    CharNameFailure,
 }
 
 impl Default for SMSG_CHAR_RENAME_WorldResult {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::RESPONSE_SUCCESS {
+        Self::ResponseSuccess {
             character: Default::default(),
             new_name: Default::default(),
         }
@@ -348,88 +348,88 @@ impl Default for SMSG_CHAR_RENAME_WorldResult {
 impl SMSG_CHAR_RENAME_WorldResult {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::RESPONSE_SUCCESS { .. } => 0,
-            Self::RESPONSE_FAILURE => 1,
-            Self::RESPONSE_CANCELLED => 2,
-            Self::RESPONSE_DISCONNECTED => 3,
-            Self::RESPONSE_FAILED_TO_CONNECT => 4,
-            Self::RESPONSE_CONNECTED => 5,
-            Self::RESPONSE_VERSION_MISMATCH => 6,
-            Self::CSTATUS_CONNECTING => 7,
-            Self::CSTATUS_NEGOTIATING_SECURITY => 8,
-            Self::CSTATUS_NEGOTIATION_COMPLETE => 9,
-            Self::CSTATUS_NEGOTIATION_FAILED => 10,
-            Self::CSTATUS_AUTHENTICATING => 11,
-            Self::AUTH_OK => 12,
-            Self::AUTH_FAILED => 13,
-            Self::AUTH_REJECT => 14,
-            Self::AUTH_BAD_SERVER_PROOF => 15,
-            Self::AUTH_UNAVAILABLE => 16,
-            Self::AUTH_SYSTEM_ERROR => 17,
-            Self::AUTH_BILLING_ERROR => 18,
-            Self::AUTH_BILLING_EXPIRED => 19,
-            Self::AUTH_VERSION_MISMATCH => 20,
-            Self::AUTH_UNKNOWN_ACCOUNT => 21,
-            Self::AUTH_INCORRECT_PASSWORD => 22,
-            Self::AUTH_SESSION_EXPIRED => 23,
-            Self::AUTH_SERVER_SHUTTING_DOWN => 24,
-            Self::AUTH_ALREADY_LOGGING_IN => 25,
-            Self::AUTH_LOGIN_SERVER_NOT_FOUND => 26,
-            Self::AUTH_WAIT_QUEUE => 27,
-            Self::AUTH_BANNED => 28,
-            Self::AUTH_ALREADY_ONLINE => 29,
-            Self::AUTH_NO_TIME => 30,
-            Self::AUTH_DB_BUSY => 31,
-            Self::AUTH_SUSPENDED => 32,
-            Self::AUTH_PARENTAL_CONTROL => 33,
-            Self::REALM_LIST_IN_PROGRESS => 34,
-            Self::REALM_LIST_SUCCESS => 35,
-            Self::REALM_LIST_FAILED => 36,
-            Self::REALM_LIST_INVALID => 37,
-            Self::REALM_LIST_REALM_NOT_FOUND => 38,
-            Self::ACCOUNT_CREATE_IN_PROGRESS => 39,
-            Self::ACCOUNT_CREATE_SUCCESS => 40,
-            Self::ACCOUNT_CREATE_FAILED => 41,
-            Self::CHAR_LIST_RETRIEVING => 42,
-            Self::CHAR_LIST_RETRIEVED => 43,
-            Self::CHAR_LIST_FAILED => 44,
-            Self::CHAR_CREATE_IN_PROGRESS => 45,
-            Self::CHAR_CREATE_SUCCESS => 46,
-            Self::CHAR_CREATE_ERROR => 47,
-            Self::CHAR_CREATE_FAILED => 48,
-            Self::CHAR_CREATE_NAME_IN_USE => 49,
-            Self::CHAR_CREATE_DISABLED => 50,
-            Self::CHAR_CREATE_PVP_TEAMS_VIOLATION => 51,
-            Self::CHAR_CREATE_SERVER_LIMIT => 52,
-            Self::CHAR_CREATE_ACCOUNT_LIMIT => 53,
-            Self::CHAR_CREATE_SERVER_QUEUE => 54,
-            Self::CHAR_CREATE_ONLY_EXISTING => 55,
-            Self::CHAR_DELETE_IN_PROGRESS => 56,
-            Self::CHAR_DELETE_SUCCESS => 57,
-            Self::CHAR_DELETE_FAILED => 58,
-            Self::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => 59,
-            Self::CHAR_LOGIN_IN_PROGRESS => 60,
-            Self::CHAR_LOGIN_SUCCESS => 61,
-            Self::CHAR_LOGIN_NO_WORLD => 62,
-            Self::CHAR_LOGIN_DUPLICATE_CHARACTER => 63,
-            Self::CHAR_LOGIN_NO_INSTANCES => 64,
-            Self::CHAR_LOGIN_FAILED => 65,
-            Self::CHAR_LOGIN_DISABLED => 66,
-            Self::CHAR_LOGIN_NO_CHARACTER => 67,
-            Self::CHAR_LOGIN_LOCKED_FOR_TRANSFER => 68,
-            Self::CHAR_NAME_NO_NAME => 69,
-            Self::CHAR_NAME_TOO_SHORT => 70,
-            Self::CHAR_NAME_TOO_LONG => 71,
-            Self::CHAR_NAME_ONLY_LETTERS => 72,
-            Self::CHAR_NAME_MIXED_LANGUAGES => 73,
-            Self::CHAR_NAME_PROFANE => 74,
-            Self::CHAR_NAME_RESERVED => 75,
-            Self::CHAR_NAME_INVALID_APOSTROPHE => 76,
-            Self::CHAR_NAME_MULTIPLE_APOSTROPHES => 77,
-            Self::CHAR_NAME_THREE_CONSECUTIVE => 78,
-            Self::CHAR_NAME_INVALID_SPACE => 79,
-            Self::CHAR_NAME_SUCCESS => 80,
-            Self::CHAR_NAME_FAILURE => 81,
+            Self::ResponseSuccess { .. } => 0,
+            Self::ResponseFailure => 1,
+            Self::ResponseCancelled => 2,
+            Self::ResponseDisconnected => 3,
+            Self::ResponseFailedToConnect => 4,
+            Self::ResponseConnected => 5,
+            Self::ResponseVersionMismatch => 6,
+            Self::CstatusConnecting => 7,
+            Self::CstatusNegotiatingSecurity => 8,
+            Self::CstatusNegotiationComplete => 9,
+            Self::CstatusNegotiationFailed => 10,
+            Self::CstatusAuthenticating => 11,
+            Self::AuthOk => 12,
+            Self::AuthFailed => 13,
+            Self::AuthReject => 14,
+            Self::AuthBadServerProof => 15,
+            Self::AuthUnavailable => 16,
+            Self::AuthSystemError => 17,
+            Self::AuthBillingError => 18,
+            Self::AuthBillingExpired => 19,
+            Self::AuthVersionMismatch => 20,
+            Self::AuthUnknownAccount => 21,
+            Self::AuthIncorrectPassword => 22,
+            Self::AuthSessionExpired => 23,
+            Self::AuthServerShuttingDown => 24,
+            Self::AuthAlreadyLoggingIn => 25,
+            Self::AuthLoginServerNotFound => 26,
+            Self::AuthWaitQueue => 27,
+            Self::AuthBanned => 28,
+            Self::AuthAlreadyOnline => 29,
+            Self::AuthNoTime => 30,
+            Self::AuthDbBusy => 31,
+            Self::AuthSuspended => 32,
+            Self::AuthParentalControl => 33,
+            Self::RealmListInProgress => 34,
+            Self::RealmListSuccess => 35,
+            Self::RealmListFailed => 36,
+            Self::RealmListInvalid => 37,
+            Self::RealmListRealmNotFound => 38,
+            Self::AccountCreateInProgress => 39,
+            Self::AccountCreateSuccess => 40,
+            Self::AccountCreateFailed => 41,
+            Self::CharListRetrieving => 42,
+            Self::CharListRetrieved => 43,
+            Self::CharListFailed => 44,
+            Self::CharCreateInProgress => 45,
+            Self::CharCreateSuccess => 46,
+            Self::CharCreateError => 47,
+            Self::CharCreateFailed => 48,
+            Self::CharCreateNameInUse => 49,
+            Self::CharCreateDisabled => 50,
+            Self::CharCreatePvpTeamsViolation => 51,
+            Self::CharCreateServerLimit => 52,
+            Self::CharCreateAccountLimit => 53,
+            Self::CharCreateServerQueue => 54,
+            Self::CharCreateOnlyExisting => 55,
+            Self::CharDeleteInProgress => 56,
+            Self::CharDeleteSuccess => 57,
+            Self::CharDeleteFailed => 58,
+            Self::CharDeleteFailedLockedForTransfer => 59,
+            Self::CharLoginInProgress => 60,
+            Self::CharLoginSuccess => 61,
+            Self::CharLoginNoWorld => 62,
+            Self::CharLoginDuplicateCharacter => 63,
+            Self::CharLoginNoInstances => 64,
+            Self::CharLoginFailed => 65,
+            Self::CharLoginDisabled => 66,
+            Self::CharLoginNoCharacter => 67,
+            Self::CharLoginLockedForTransfer => 68,
+            Self::CharNameNoName => 69,
+            Self::CharNameTooShort => 70,
+            Self::CharNameTooLong => 71,
+            Self::CharNameOnlyLetters => 72,
+            Self::CharNameMixedLanguages => 73,
+            Self::CharNameProfane => 74,
+            Self::CharNameReserved => 75,
+            Self::CharNameInvalidApostrophe => 76,
+            Self::CharNameMultipleApostrophes => 77,
+            Self::CharNameThreeConsecutive => 78,
+            Self::CharNameInvalidSpace => 79,
+            Self::CharNameSuccess => 80,
+            Self::CharNameFailure => 81,
         }
     }
 
@@ -438,7 +438,7 @@ impl SMSG_CHAR_RENAME_WorldResult {
 impl SMSG_CHAR_RENAME_WorldResult {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::RESPONSE_SUCCESS {
+            Self::ResponseSuccess {
                 character,
                 new_name,
             } => {
@@ -446,247 +446,247 @@ impl SMSG_CHAR_RENAME_WorldResult {
                 + 8 // character: Guid
                 + new_name.len() + 1 // new_name: CString
             }
-            Self::RESPONSE_FAILURE => {
+            Self::ResponseFailure => {
                 1
             }
-            Self::RESPONSE_CANCELLED => {
+            Self::ResponseCancelled => {
                 1
             }
-            Self::RESPONSE_DISCONNECTED => {
+            Self::ResponseDisconnected => {
                 1
             }
-            Self::RESPONSE_FAILED_TO_CONNECT => {
+            Self::ResponseFailedToConnect => {
                 1
             }
-            Self::RESPONSE_CONNECTED => {
+            Self::ResponseConnected => {
                 1
             }
-            Self::RESPONSE_VERSION_MISMATCH => {
+            Self::ResponseVersionMismatch => {
                 1
             }
-            Self::CSTATUS_CONNECTING => {
+            Self::CstatusConnecting => {
                 1
             }
-            Self::CSTATUS_NEGOTIATING_SECURITY => {
+            Self::CstatusNegotiatingSecurity => {
                 1
             }
-            Self::CSTATUS_NEGOTIATION_COMPLETE => {
+            Self::CstatusNegotiationComplete => {
                 1
             }
-            Self::CSTATUS_NEGOTIATION_FAILED => {
+            Self::CstatusNegotiationFailed => {
                 1
             }
-            Self::CSTATUS_AUTHENTICATING => {
+            Self::CstatusAuthenticating => {
                 1
             }
-            Self::AUTH_OK => {
+            Self::AuthOk => {
                 1
             }
-            Self::AUTH_FAILED => {
+            Self::AuthFailed => {
                 1
             }
-            Self::AUTH_REJECT => {
+            Self::AuthReject => {
                 1
             }
-            Self::AUTH_BAD_SERVER_PROOF => {
+            Self::AuthBadServerProof => {
                 1
             }
-            Self::AUTH_UNAVAILABLE => {
+            Self::AuthUnavailable => {
                 1
             }
-            Self::AUTH_SYSTEM_ERROR => {
+            Self::AuthSystemError => {
                 1
             }
-            Self::AUTH_BILLING_ERROR => {
+            Self::AuthBillingError => {
                 1
             }
-            Self::AUTH_BILLING_EXPIRED => {
+            Self::AuthBillingExpired => {
                 1
             }
-            Self::AUTH_VERSION_MISMATCH => {
+            Self::AuthVersionMismatch => {
                 1
             }
-            Self::AUTH_UNKNOWN_ACCOUNT => {
+            Self::AuthUnknownAccount => {
                 1
             }
-            Self::AUTH_INCORRECT_PASSWORD => {
+            Self::AuthIncorrectPassword => {
                 1
             }
-            Self::AUTH_SESSION_EXPIRED => {
+            Self::AuthSessionExpired => {
                 1
             }
-            Self::AUTH_SERVER_SHUTTING_DOWN => {
+            Self::AuthServerShuttingDown => {
                 1
             }
-            Self::AUTH_ALREADY_LOGGING_IN => {
+            Self::AuthAlreadyLoggingIn => {
                 1
             }
-            Self::AUTH_LOGIN_SERVER_NOT_FOUND => {
+            Self::AuthLoginServerNotFound => {
                 1
             }
-            Self::AUTH_WAIT_QUEUE => {
+            Self::AuthWaitQueue => {
                 1
             }
-            Self::AUTH_BANNED => {
+            Self::AuthBanned => {
                 1
             }
-            Self::AUTH_ALREADY_ONLINE => {
+            Self::AuthAlreadyOnline => {
                 1
             }
-            Self::AUTH_NO_TIME => {
+            Self::AuthNoTime => {
                 1
             }
-            Self::AUTH_DB_BUSY => {
+            Self::AuthDbBusy => {
                 1
             }
-            Self::AUTH_SUSPENDED => {
+            Self::AuthSuspended => {
                 1
             }
-            Self::AUTH_PARENTAL_CONTROL => {
+            Self::AuthParentalControl => {
                 1
             }
-            Self::REALM_LIST_IN_PROGRESS => {
+            Self::RealmListInProgress => {
                 1
             }
-            Self::REALM_LIST_SUCCESS => {
+            Self::RealmListSuccess => {
                 1
             }
-            Self::REALM_LIST_FAILED => {
+            Self::RealmListFailed => {
                 1
             }
-            Self::REALM_LIST_INVALID => {
+            Self::RealmListInvalid => {
                 1
             }
-            Self::REALM_LIST_REALM_NOT_FOUND => {
+            Self::RealmListRealmNotFound => {
                 1
             }
-            Self::ACCOUNT_CREATE_IN_PROGRESS => {
+            Self::AccountCreateInProgress => {
                 1
             }
-            Self::ACCOUNT_CREATE_SUCCESS => {
+            Self::AccountCreateSuccess => {
                 1
             }
-            Self::ACCOUNT_CREATE_FAILED => {
+            Self::AccountCreateFailed => {
                 1
             }
-            Self::CHAR_LIST_RETRIEVING => {
+            Self::CharListRetrieving => {
                 1
             }
-            Self::CHAR_LIST_RETRIEVED => {
+            Self::CharListRetrieved => {
                 1
             }
-            Self::CHAR_LIST_FAILED => {
+            Self::CharListFailed => {
                 1
             }
-            Self::CHAR_CREATE_IN_PROGRESS => {
+            Self::CharCreateInProgress => {
                 1
             }
-            Self::CHAR_CREATE_SUCCESS => {
+            Self::CharCreateSuccess => {
                 1
             }
-            Self::CHAR_CREATE_ERROR => {
+            Self::CharCreateError => {
                 1
             }
-            Self::CHAR_CREATE_FAILED => {
+            Self::CharCreateFailed => {
                 1
             }
-            Self::CHAR_CREATE_NAME_IN_USE => {
+            Self::CharCreateNameInUse => {
                 1
             }
-            Self::CHAR_CREATE_DISABLED => {
+            Self::CharCreateDisabled => {
                 1
             }
-            Self::CHAR_CREATE_PVP_TEAMS_VIOLATION => {
+            Self::CharCreatePvpTeamsViolation => {
                 1
             }
-            Self::CHAR_CREATE_SERVER_LIMIT => {
+            Self::CharCreateServerLimit => {
                 1
             }
-            Self::CHAR_CREATE_ACCOUNT_LIMIT => {
+            Self::CharCreateAccountLimit => {
                 1
             }
-            Self::CHAR_CREATE_SERVER_QUEUE => {
+            Self::CharCreateServerQueue => {
                 1
             }
-            Self::CHAR_CREATE_ONLY_EXISTING => {
+            Self::CharCreateOnlyExisting => {
                 1
             }
-            Self::CHAR_DELETE_IN_PROGRESS => {
+            Self::CharDeleteInProgress => {
                 1
             }
-            Self::CHAR_DELETE_SUCCESS => {
+            Self::CharDeleteSuccess => {
                 1
             }
-            Self::CHAR_DELETE_FAILED => {
+            Self::CharDeleteFailed => {
                 1
             }
-            Self::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {
+            Self::CharDeleteFailedLockedForTransfer => {
                 1
             }
-            Self::CHAR_LOGIN_IN_PROGRESS => {
+            Self::CharLoginInProgress => {
                 1
             }
-            Self::CHAR_LOGIN_SUCCESS => {
+            Self::CharLoginSuccess => {
                 1
             }
-            Self::CHAR_LOGIN_NO_WORLD => {
+            Self::CharLoginNoWorld => {
                 1
             }
-            Self::CHAR_LOGIN_DUPLICATE_CHARACTER => {
+            Self::CharLoginDuplicateCharacter => {
                 1
             }
-            Self::CHAR_LOGIN_NO_INSTANCES => {
+            Self::CharLoginNoInstances => {
                 1
             }
-            Self::CHAR_LOGIN_FAILED => {
+            Self::CharLoginFailed => {
                 1
             }
-            Self::CHAR_LOGIN_DISABLED => {
+            Self::CharLoginDisabled => {
                 1
             }
-            Self::CHAR_LOGIN_NO_CHARACTER => {
+            Self::CharLoginNoCharacter => {
                 1
             }
-            Self::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {
+            Self::CharLoginLockedForTransfer => {
                 1
             }
-            Self::CHAR_NAME_NO_NAME => {
+            Self::CharNameNoName => {
                 1
             }
-            Self::CHAR_NAME_TOO_SHORT => {
+            Self::CharNameTooShort => {
                 1
             }
-            Self::CHAR_NAME_TOO_LONG => {
+            Self::CharNameTooLong => {
                 1
             }
-            Self::CHAR_NAME_ONLY_LETTERS => {
+            Self::CharNameOnlyLetters => {
                 1
             }
-            Self::CHAR_NAME_MIXED_LANGUAGES => {
+            Self::CharNameMixedLanguages => {
                 1
             }
-            Self::CHAR_NAME_PROFANE => {
+            Self::CharNameProfane => {
                 1
             }
-            Self::CHAR_NAME_RESERVED => {
+            Self::CharNameReserved => {
                 1
             }
-            Self::CHAR_NAME_INVALID_APOSTROPHE => {
+            Self::CharNameInvalidApostrophe => {
                 1
             }
-            Self::CHAR_NAME_MULTIPLE_APOSTROPHES => {
+            Self::CharNameMultipleApostrophes => {
                 1
             }
-            Self::CHAR_NAME_THREE_CONSECUTIVE => {
+            Self::CharNameThreeConsecutive => {
                 1
             }
-            Self::CHAR_NAME_INVALID_SPACE => {
+            Self::CharNameInvalidSpace => {
                 1
             }
-            Self::CHAR_NAME_SUCCESS => {
+            Self::CharNameSuccess => {
                 1
             }
-            Self::CHAR_NAME_FAILURE => {
+            Self::CharNameFailure => {
                 1
             }
         }
@@ -710,7 +710,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_RENAME0() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG,
+            result: SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
         };
 
         let header_size = 2 + 2;
@@ -735,7 +735,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_RENAME0() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG,
+            result: SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
         };
 
         let header_size = 2 + 2;
@@ -760,7 +760,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_RENAME0() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::CHAR_NAME_TOO_LONG,
+            result: SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
         };
 
         let header_size = 2 + 2;
@@ -789,7 +789,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_RENAME1() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
+            result: SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
                 character: Guid::new(0xDEADBEEF),
                 new_name: String::from("Deadbeef"),
             },
@@ -817,7 +817,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_RENAME1() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
+            result: SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
                 character: Guid::new(0xDEADBEEF),
                 new_name: String::from("Deadbeef"),
             },
@@ -845,7 +845,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_RENAME1() {
         let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::RESPONSE_SUCCESS {
+            result: SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
                 character: Guid::new(0xDEADBEEF),
                 new_name: String::from("Deadbeef"),
             },

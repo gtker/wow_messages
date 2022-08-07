@@ -72,7 +72,7 @@ async fn reconnect_version_8(
         .reconnect_challenge_data();
 
     CMD_AUTH_RECONNECT_CHALLENGE_Server {
-        result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
             challenge_data: server_reconnect_challenge_data,
             checksum_salt: [0; 16],
         },
@@ -94,7 +94,7 @@ async fn reconnect_version_8(
 
     if !success {
         CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::FAIL_BANNED,
+            result: LoginResult::FailBanned,
         }
         .tokio_write(&mut stream)
         .await
@@ -104,7 +104,7 @@ async fn reconnect_version_8(
     }
 
     CMD_AUTH_RECONNECT_PROOF_Server {
-        result: LoginResult::SUCCESS,
+        result: LoginResult::Success,
     }
     .tokio_write(&mut stream)
     .await
@@ -130,7 +130,7 @@ async fn reconnect_version_2(
         .reconnect_challenge_data();
 
     CMD_AUTH_RECONNECT_CHALLENGE_Server {
-        result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
             challenge_data: server_reconnect_challenge_data,
             checksum_salt: [0; 16],
         },
@@ -152,7 +152,7 @@ async fn reconnect_version_2(
 
     if !success {
         CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::FAIL_BANNED,
+            result: LoginResult::FailBanned,
         }
         .tokio_write(&mut stream)
         .await
@@ -162,7 +162,7 @@ async fn reconnect_version_2(
     }
 
     CMD_AUTH_RECONNECT_PROOF_Server {
-        result: LoginResult::SUCCESS,
+        result: LoginResult::Success,
     }
     .tokio_write(&mut stream)
     .await
@@ -184,7 +184,7 @@ async fn login_version_2(
     let username = l.account_name;
 
     CMD_AUTH_LOGON_CHALLENGE_Server {
-        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
             server_public_key: *p.server_public_key(),
             generator: vec![GENERATOR],
             large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
@@ -209,7 +209,7 @@ async fn login_version_2(
         .unwrap();
 
     CMD_AUTH_LOGON_PROOF_Server {
-        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
             server_proof: proof,
             hardware_survey_id: 0,
         },
@@ -242,13 +242,13 @@ async fn login_version_3(
     let username = l.account_name;
 
     CMD_AUTH_LOGON_CHALLENGE_Server {
-        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
             server_public_key: *p.server_public_key(),
             generator: vec![GENERATOR],
             large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
             salt: *p.salt(),
             crc_salt: [0; 16],
-            security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::NONE,
+            security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::None,
         },
     }
     .tokio_write(&mut stream)
@@ -268,7 +268,7 @@ async fn login_version_3(
         .unwrap();
 
     CMD_AUTH_LOGON_PROOF_Server {
-        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
             server_proof: proof,
             hardware_survey_id: 0,
         },
@@ -294,7 +294,7 @@ async fn login_version_8(
     let username = l.account_name;
 
     CMD_AUTH_LOGON_CHALLENGE_Server {
-        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
             server_public_key: *p.server_public_key(),
             generator: vec![GENERATOR],
             large_safe_prime: LARGE_SAFE_PRIME_LITTLE_ENDIAN.into(),
@@ -320,7 +320,7 @@ async fn login_version_8(
         .unwrap();
 
     CMD_AUTH_LOGON_PROOF_Server {
-        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::SUCCESS {
+        result: CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
             account_flag: AccountFlag::empty(),
             server_proof,
             hardware_survey_id: 0,
@@ -343,7 +343,7 @@ async fn print_version_2_3_realm_list(mut stream: TcpStream) {
     while (tokio_expect_client_message::<CMD_REALM_LIST_Client, _>(&mut stream).await).is_ok() {
         CMD_REALM_LIST_Server {
             realms: vec![Realm {
-                realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                realm_type: RealmType::PlayerVsEnvironment,
                 flag: RealmFlag::empty(),
                 name: "Tester".to_string(),
                 address: "127.0.0.1:8085".to_string(),
@@ -367,14 +367,14 @@ async fn print_version_8_realm_list(mut stream: TcpStream) {
         let mut realms = Vec::new();
         for i in 0..9 {
             realms.push(Realm {
-                realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                realm_type: RealmType::PlayerVsEnvironment,
                 locked: 0,
                 flag: Default::default(),
                 name: i.to_string(),
                 address: "localhost:8085".to_string(),
                 population: Default::default(),
                 number_of_characters_on_realm: i,
-                category: RealmCategory::ONE,
+                category: RealmCategory::One,
                 realm_id: i,
             })
         }

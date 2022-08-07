@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestCompletable {
-    NOT_COMPLETABLE,
-    COMPLETEABLE,
+    NotCompletable,
+    Completeable,
 }
 
 impl QuestCompletable {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::NOT_COMPLETABLE => 0x0,
-            Self::COMPLETEABLE => 0x3,
+            Self::NotCompletable => 0x0,
+            Self::Completeable => 0x3,
         }
     }
 
@@ -26,15 +26,15 @@ impl QuestCompletable {
 
 impl Default for QuestCompletable {
     fn default() -> Self {
-        Self::NOT_COMPLETABLE
+        Self::NotCompletable
     }
 }
 
 impl std::fmt::Display for QuestCompletable {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::NOT_COMPLETABLE => f.write_str("NOT_COMPLETABLE"),
-            Self::COMPLETEABLE => f.write_str("COMPLETEABLE"),
+            Self::NotCompletable => f.write_str("NotCompletable"),
+            Self::Completeable => f.write_str("Completeable"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u32> for QuestCompletable {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::NOT_COMPLETABLE),
-            3 => Ok(Self::COMPLETEABLE),
+            0 => Ok(Self::NotCompletable),
+            3 => Ok(Self::Completeable),
             v => Err(crate::errors::EnumError::new("QuestCompletable", v as u32),)
         }
     }

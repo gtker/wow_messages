@@ -25,70 +25,70 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
         w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
 
         match &self.index {
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN0 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN1 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN2 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN3 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN4 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN5 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN6 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN7 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN8 {
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
                 target,
             } => {
                 // target: Guid
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::REQUEST_ICONS => {}
+            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::RequestIcons => {}
         }
 
         Ok(())
@@ -104,79 +104,79 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
         let index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;
 
         let index_if = match index {
-            RaidTargetIndex::UNKNOWN0 => {
+            RaidTargetIndex::Unknown0 => {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN0 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
                     target,
                 }
             }
-            RaidTargetIndex::UNKNOWN1 => {
+            RaidTargetIndex::Unknown1 => {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN1 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
                     target,
                 }
             }
-            RaidTargetIndex::UNKNOWN2 => {
+            RaidTargetIndex::Unknown2 => {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN2 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
                     target,
                 }
             }
-            RaidTargetIndex::UNKNOWN3 => {
+            RaidTargetIndex::Unknown3 => {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN3 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
                     target,
                 }
             }
-            RaidTargetIndex::UNKNOWN4 => {
+            RaidTargetIndex::Unknown4 => {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN4 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
                     target,
                 }
             }
-            RaidTargetIndex::UNKNOWN5 => {
+            RaidTargetIndex::Unknown5 => {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN5 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
                     target,
                 }
             }
-            RaidTargetIndex::UNKNOWN6 => {
+            RaidTargetIndex::Unknown6 => {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN6 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
                     target,
                 }
             }
-            RaidTargetIndex::UNKNOWN7 => {
+            RaidTargetIndex::Unknown7 => {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN7 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
                     target,
                 }
             }
-            RaidTargetIndex::UNKNOWN8 => {
+            RaidTargetIndex::Unknown8 => {
                 // target: Guid
                 let target = Guid::read(r)?;
 
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::UNKNOWN8 {
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
                     target,
                 }
             }
-            RaidTargetIndex::REQUEST_ICONS => MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::REQUEST_ICONS,
+            RaidTargetIndex::RequestIcons => MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::RequestIcons,
         };
 
         Ok(Self {
@@ -194,40 +194,40 @@ impl MSG_RAID_TARGET_UPDATE_Client {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
-    UNKNOWN0 {
+    Unknown0 {
         target: Guid,
     },
-    UNKNOWN1 {
+    Unknown1 {
         target: Guid,
     },
-    UNKNOWN2 {
+    Unknown2 {
         target: Guid,
     },
-    UNKNOWN3 {
+    Unknown3 {
         target: Guid,
     },
-    UNKNOWN4 {
+    Unknown4 {
         target: Guid,
     },
-    UNKNOWN5 {
+    Unknown5 {
         target: Guid,
     },
-    UNKNOWN6 {
+    Unknown6 {
         target: Guid,
     },
-    UNKNOWN7 {
+    Unknown7 {
         target: Guid,
     },
-    UNKNOWN8 {
+    Unknown8 {
         target: Guid,
     },
-    REQUEST_ICONS,
+    RequestIcons,
 }
 
 impl Default for MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::UNKNOWN0 {
+        Self::Unknown0 {
             target: Default::default(),
         }
     }
@@ -236,16 +236,16 @@ impl Default for MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
 impl MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::UNKNOWN0 { .. } => 0,
-            Self::UNKNOWN1 { .. } => 1,
-            Self::UNKNOWN2 { .. } => 2,
-            Self::UNKNOWN3 { .. } => 3,
-            Self::UNKNOWN4 { .. } => 4,
-            Self::UNKNOWN5 { .. } => 5,
-            Self::UNKNOWN6 { .. } => 6,
-            Self::UNKNOWN7 { .. } => 7,
-            Self::UNKNOWN8 { .. } => 8,
-            Self::REQUEST_ICONS => 255,
+            Self::Unknown0 { .. } => 0,
+            Self::Unknown1 { .. } => 1,
+            Self::Unknown2 { .. } => 2,
+            Self::Unknown3 { .. } => 3,
+            Self::Unknown4 { .. } => 4,
+            Self::Unknown5 { .. } => 5,
+            Self::Unknown6 { .. } => 6,
+            Self::Unknown7 { .. } => 7,
+            Self::Unknown8 { .. } => 8,
+            Self::RequestIcons => 255,
         }
     }
 
@@ -254,61 +254,61 @@ impl MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
 impl MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::UNKNOWN0 {
+            Self::Unknown0 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN1 {
+            Self::Unknown1 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN2 {
+            Self::Unknown2 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN3 {
+            Self::Unknown3 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN4 {
+            Self::Unknown4 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN5 {
+            Self::Unknown5 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN6 {
+            Self::Unknown6 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN7 {
+            Self::Unknown7 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN8 {
+            Self::Unknown8 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::REQUEST_ICONS => {
+            Self::RequestIcons => {
                 1
             }
         }

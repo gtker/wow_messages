@@ -77,35 +77,35 @@ impl Mail {
         w.write_all(&(self.message_type.as_int() as u8).to_le_bytes())?;
 
         match &self.message_type {
-            Mail_MailType::NORMAL {
+            Mail_MailType::Normal {
                 sender,
             } => {
                 // sender: Guid
                 w.write_all(&sender.guid().to_le_bytes())?;
 
             }
-            Mail_MailType::AUCTION {
+            Mail_MailType::Auction {
                 auction_id,
             } => {
                 // auction_id: u32
                 w.write_all(&auction_id.to_le_bytes())?;
 
             }
-            Mail_MailType::CREATURE {
+            Mail_MailType::Creature {
                 sender_id,
             } => {
                 // sender_id: u32
                 w.write_all(&sender_id.to_le_bytes())?;
 
             }
-            Mail_MailType::GAMEOBJECT {
+            Mail_MailType::Gameobject {
                 sender_id,
             } => {
                 // sender_id: u32
                 w.write_all(&sender_id.to_le_bytes())?;
 
             }
-            Mail_MailType::ITEM => {}
+            Mail_MailType::Item => {}
         }
 
         // subject: CString
@@ -174,39 +174,39 @@ impl Mail {
         let message_type: MailType = crate::util::read_u8_le(r)?.try_into()?;
 
         let message_type_if = match message_type {
-            MailType::NORMAL => {
+            MailType::Normal => {
                 // sender: Guid
                 let sender = Guid::read(r)?;
 
-                Mail_MailType::NORMAL {
+                Mail_MailType::Normal {
                     sender,
                 }
             }
-            MailType::AUCTION => {
+            MailType::Auction => {
                 // auction_id: u32
                 let auction_id = crate::util::read_u32_le(r)?;
 
-                Mail_MailType::AUCTION {
+                Mail_MailType::Auction {
                     auction_id,
                 }
             }
-            MailType::CREATURE => {
+            MailType::Creature => {
                 // sender_id: u32
                 let sender_id = crate::util::read_u32_le(r)?;
 
-                Mail_MailType::CREATURE {
+                Mail_MailType::Creature {
                     sender_id,
                 }
             }
-            MailType::GAMEOBJECT => {
+            MailType::Gameobject => {
                 // sender_id: u32
                 let sender_id = crate::util::read_u32_le(r)?;
 
-                Mail_MailType::GAMEOBJECT {
+                Mail_MailType::Gameobject {
                     sender_id,
                 }
             }
-            MailType::ITEM => Mail_MailType::ITEM,
+            MailType::Item => Mail_MailType::Item,
         };
 
         // subject: CString
@@ -311,25 +311,25 @@ impl Mail {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum Mail_MailType {
-    NORMAL {
+    Normal {
         sender: Guid,
     },
-    AUCTION {
+    Auction {
         auction_id: u32,
     },
-    CREATURE {
+    Creature {
         sender_id: u32,
     },
-    GAMEOBJECT {
+    Gameobject {
         sender_id: u32,
     },
-    ITEM,
+    Item,
 }
 
 impl Default for Mail_MailType {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::NORMAL {
+        Self::Normal {
             sender: Default::default(),
         }
     }
@@ -338,11 +338,11 @@ impl Default for Mail_MailType {
 impl Mail_MailType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NORMAL { .. } => 0,
-            Self::AUCTION { .. } => 2,
-            Self::CREATURE { .. } => 3,
-            Self::GAMEOBJECT { .. } => 4,
-            Self::ITEM => 5,
+            Self::Normal { .. } => 0,
+            Self::Auction { .. } => 2,
+            Self::Creature { .. } => 3,
+            Self::Gameobject { .. } => 4,
+            Self::Item => 5,
         }
     }
 
@@ -351,31 +351,31 @@ impl Mail_MailType {
 impl Mail_MailType {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NORMAL {
+            Self::Normal {
                 sender,
             } => {
                 1
                 + 8 // sender: Guid
             }
-            Self::AUCTION {
+            Self::Auction {
                 auction_id,
             } => {
                 1
                 + 4 // auction_id: u32
             }
-            Self::CREATURE {
+            Self::Creature {
                 sender_id,
             } => {
                 1
                 + 4 // sender_id: u32
             }
-            Self::GAMEOBJECT {
+            Self::Gameobject {
                 sender_id,
             } => {
                 1
                 + 4 // sender_id: u32
             }
-            Self::ITEM => {
+            Self::Item => {
                 1
             }
         }

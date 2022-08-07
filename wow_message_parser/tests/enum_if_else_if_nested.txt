@@ -33,15 +33,15 @@ impl EnumIfElseIfNested {
         w.write_all(&(self.n.as_int() as u8).to_le_bytes())?;
 
         match &self.e {
-            EnumIfElseIfNested_SimpleEnum::ZERO {
+            EnumIfElseIfNested_SimpleEnum::Zero {
                 zero,
             } => {
                 // zero: u8
                 w.write_all(&zero.to_le_bytes())?;
 
             }
-            EnumIfElseIfNested_SimpleEnum::ONE => {}
-            EnumIfElseIfNested_SimpleEnum::TWO => {}
+            EnumIfElseIfNested_SimpleEnum::One => {}
+            EnumIfElseIfNested_SimpleEnum::Two => {}
         }
 
         Ok(())
@@ -57,16 +57,16 @@ impl EnumIfElseIfNested {
         let n: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         let e_if = match e {
-            SimpleEnum::ZERO => {
+            SimpleEnum::Zero => {
                 // zero: u8
                 let zero = crate::util::read_u8_le(r)?;
 
-                EnumIfElseIfNested_SimpleEnum::ZERO {
+                EnumIfElseIfNested_SimpleEnum::Zero {
                     zero,
                 }
             }
-            SimpleEnum::ONE => EnumIfElseIfNested_SimpleEnum::ONE,
-            SimpleEnum::TWO => EnumIfElseIfNested_SimpleEnum::TWO,
+            SimpleEnum::One => EnumIfElseIfNested_SimpleEnum::One,
+            SimpleEnum::Two => EnumIfElseIfNested_SimpleEnum::Two,
         };
 
         Ok(Self {
@@ -86,17 +86,17 @@ impl EnumIfElseIfNested {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum EnumIfElseIfNested_SimpleEnum {
-    ZERO {
+    Zero {
         zero: u8,
     },
-    ONE,
-    TWO,
+    One,
+    Two,
 }
 
 impl Default for EnumIfElseIfNested_SimpleEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::ZERO {
+        Self::Zero {
             zero: Default::default(),
         }
     }
@@ -105,9 +105,9 @@ impl Default for EnumIfElseIfNested_SimpleEnum {
 impl EnumIfElseIfNested_SimpleEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::ZERO { .. } => 0,
-            Self::ONE => 1,
-            Self::TWO => 2,
+            Self::Zero { .. } => 0,
+            Self::One => 1,
+            Self::Two => 2,
         }
     }
 
@@ -116,16 +116,16 @@ impl EnumIfElseIfNested_SimpleEnum {
 impl EnumIfElseIfNested_SimpleEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::ZERO {
+            Self::Zero {
                 zero,
             } => {
                 1
                 + 1 // zero: u8
             }
-            Self::ONE => {
+            Self::One => {
                 1
             }
-            Self::TWO => {
+            Self::Two => {
                 1
             }
         }
@@ -134,16 +134,16 @@ impl EnumIfElseIfNested_SimpleEnum {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum EnumIfElseIfNested_NestedEnum {
-    NESTED {
+    Nested {
         nested: u8,
     },
-    NOT_NESTED,
+    NotNested,
 }
 
 impl Default for EnumIfElseIfNested_NestedEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::NESTED {
+        Self::Nested {
             nested: Default::default(),
         }
     }
@@ -152,8 +152,8 @@ impl Default for EnumIfElseIfNested_NestedEnum {
 impl EnumIfElseIfNested_NestedEnum {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NESTED { .. } => 0,
-            Self::NOT_NESTED => 1,
+            Self::Nested { .. } => 0,
+            Self::NotNested => 1,
         }
     }
 
@@ -162,13 +162,13 @@ impl EnumIfElseIfNested_NestedEnum {
 impl EnumIfElseIfNested_NestedEnum {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NESTED {
+            Self::Nested {
                 nested,
             } => {
                 1
                 + 1 // nested: u8
             }
-            Self::NOT_NESTED => {
+            Self::NotNested => {
                 1
             }
         }

@@ -21,37 +21,37 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ActivateTaxiReply {
-    OK,
-    UNSPECIFIEDSERVERERROR,
-    NOSUCHPATH,
-    NOTENOUGHMONEY,
-    TOOFARAWAY,
-    NOVENDORNEARBY,
-    NOTVISITED,
-    PLAYERBUSY,
-    PLAYERALREADYMOUNTED,
-    PLAYERSHAPESHIFTED,
-    PLAYERMOVING,
-    SAMENODE,
-    NOTSTANDING,
+    Ok,
+    Unspecifiedservererror,
+    Nosuchpath,
+    Notenoughmoney,
+    Toofaraway,
+    Novendornearby,
+    Notvisited,
+    Playerbusy,
+    Playeralreadymounted,
+    Playershapeshifted,
+    Playermoving,
+    Samenode,
+    Notstanding,
 }
 
 impl ActivateTaxiReply {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::OK => 0x0,
-            Self::UNSPECIFIEDSERVERERROR => 0x1,
-            Self::NOSUCHPATH => 0x2,
-            Self::NOTENOUGHMONEY => 0x3,
-            Self::TOOFARAWAY => 0x4,
-            Self::NOVENDORNEARBY => 0x5,
-            Self::NOTVISITED => 0x6,
-            Self::PLAYERBUSY => 0x7,
-            Self::PLAYERALREADYMOUNTED => 0x8,
-            Self::PLAYERSHAPESHIFTED => 0x9,
-            Self::PLAYERMOVING => 0xa,
-            Self::SAMENODE => 0xb,
-            Self::NOTSTANDING => 0xc,
+            Self::Ok => 0x0,
+            Self::Unspecifiedservererror => 0x1,
+            Self::Nosuchpath => 0x2,
+            Self::Notenoughmoney => 0x3,
+            Self::Toofaraway => 0x4,
+            Self::Novendornearby => 0x5,
+            Self::Notvisited => 0x6,
+            Self::Playerbusy => 0x7,
+            Self::Playeralreadymounted => 0x8,
+            Self::Playershapeshifted => 0x9,
+            Self::Playermoving => 0xa,
+            Self::Samenode => 0xb,
+            Self::Notstanding => 0xc,
         }
     }
 
@@ -59,26 +59,26 @@ impl ActivateTaxiReply {
 
 impl Default for ActivateTaxiReply {
     fn default() -> Self {
-        Self::OK
+        Self::Ok
     }
 }
 
 impl std::fmt::Display for ActivateTaxiReply {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::OK => f.write_str("OK"),
-            Self::UNSPECIFIEDSERVERERROR => f.write_str("UNSPECIFIEDSERVERERROR"),
-            Self::NOSUCHPATH => f.write_str("NOSUCHPATH"),
-            Self::NOTENOUGHMONEY => f.write_str("NOTENOUGHMONEY"),
-            Self::TOOFARAWAY => f.write_str("TOOFARAWAY"),
-            Self::NOVENDORNEARBY => f.write_str("NOVENDORNEARBY"),
-            Self::NOTVISITED => f.write_str("NOTVISITED"),
-            Self::PLAYERBUSY => f.write_str("PLAYERBUSY"),
-            Self::PLAYERALREADYMOUNTED => f.write_str("PLAYERALREADYMOUNTED"),
-            Self::PLAYERSHAPESHIFTED => f.write_str("PLAYERSHAPESHIFTED"),
-            Self::PLAYERMOVING => f.write_str("PLAYERMOVING"),
-            Self::SAMENODE => f.write_str("SAMENODE"),
-            Self::NOTSTANDING => f.write_str("NOTSTANDING"),
+            Self::Ok => f.write_str("Ok"),
+            Self::Unspecifiedservererror => f.write_str("Unspecifiedservererror"),
+            Self::Nosuchpath => f.write_str("Nosuchpath"),
+            Self::Notenoughmoney => f.write_str("Notenoughmoney"),
+            Self::Toofaraway => f.write_str("Toofaraway"),
+            Self::Novendornearby => f.write_str("Novendornearby"),
+            Self::Notvisited => f.write_str("Notvisited"),
+            Self::Playerbusy => f.write_str("Playerbusy"),
+            Self::Playeralreadymounted => f.write_str("Playeralreadymounted"),
+            Self::Playershapeshifted => f.write_str("Playershapeshifted"),
+            Self::Playermoving => f.write_str("Playermoving"),
+            Self::Samenode => f.write_str("Samenode"),
+            Self::Notstanding => f.write_str("Notstanding"),
         }
     }
 }
@@ -87,19 +87,19 @@ impl TryFrom<u32> for ActivateTaxiReply {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::OK),
-            1 => Ok(Self::UNSPECIFIEDSERVERERROR),
-            2 => Ok(Self::NOSUCHPATH),
-            3 => Ok(Self::NOTENOUGHMONEY),
-            4 => Ok(Self::TOOFARAWAY),
-            5 => Ok(Self::NOVENDORNEARBY),
-            6 => Ok(Self::NOTVISITED),
-            7 => Ok(Self::PLAYERBUSY),
-            8 => Ok(Self::PLAYERALREADYMOUNTED),
-            9 => Ok(Self::PLAYERSHAPESHIFTED),
-            10 => Ok(Self::PLAYERMOVING),
-            11 => Ok(Self::SAMENODE),
-            12 => Ok(Self::NOTSTANDING),
+            0 => Ok(Self::Ok),
+            1 => Ok(Self::Unspecifiedservererror),
+            2 => Ok(Self::Nosuchpath),
+            3 => Ok(Self::Notenoughmoney),
+            4 => Ok(Self::Toofaraway),
+            5 => Ok(Self::Novendornearby),
+            6 => Ok(Self::Notvisited),
+            7 => Ok(Self::Playerbusy),
+            8 => Ok(Self::Playeralreadymounted),
+            9 => Ok(Self::Playershapeshifted),
+            10 => Ok(Self::Playermoving),
+            11 => Ok(Self::Samenode),
+            12 => Ok(Self::Notstanding),
             v => Err(crate::errors::EnumError::new("ActivateTaxiReply", v as u32),)
         }
     }

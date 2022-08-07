@@ -87,7 +87,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.living {
             match if_statement {
-                MovementBlock_UpdateFlag_LIVING::LIVING {
+                MovementBlock_UpdateFlag_LIVING::Living {
                     backwards_running_speed,
                     backwards_swimming_speed,
                     fall_time,
@@ -172,21 +172,21 @@ impl MovementBlock {
 
                         if let Some(if_statement) = &if_statement.spline_flags.final_angle {
                             match if_statement {
-                                MovementBlock_SplineFlag_FINAL_ANGLE::FINAL_ANGLE {
+                                MovementBlock_SplineFlag_FINAL_ANGLE::FinalAngle {
                                     angle,
                                 } => {
                                     // angle: f32
                                     w.write_all(&angle.to_le_bytes())?;
 
                                 }
-                                MovementBlock_SplineFlag_FINAL_ANGLE::FINAL_TARGET {
+                                MovementBlock_SplineFlag_FINAL_ANGLE::FinalTarget {
                                     target,
                                 } => {
                                     // target: u64
                                     w.write_all(&target.to_le_bytes())?;
 
                                 }
-                                MovementBlock_SplineFlag_FINAL_ANGLE::FINAL_POINT {
+                                MovementBlock_SplineFlag_FINAL_ANGLE::FinalPoint {
                                     spline_final_point,
                                 } => {
                                     // spline_final_point: Vector3d
@@ -219,7 +219,7 @@ impl MovementBlock {
                     }
 
                 }
-                MovementBlock_UpdateFlag_LIVING::HAS_POSITION {
+                MovementBlock_UpdateFlag_LIVING::HasPosition {
                     orientation,
                     position,
                 } => {
@@ -353,7 +353,7 @@ impl MovementBlock {
                 let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
                     // angle: f32
                     let angle = crate::util::read_f32_le(r)?;
-                    Some(MovementBlock_SplineFlag_FINAL_ANGLE::FINAL_ANGLE {
+                    Some(MovementBlock_SplineFlag_FINAL_ANGLE::FinalAngle {
                         angle,
                     })
                 }
@@ -361,7 +361,7 @@ impl MovementBlock {
                     // target: u64
                     let target = crate::util::read_u64_le(r)?;
 
-                    Some(MovementBlock_SplineFlag_FINAL_ANGLE::FINAL_TARGET {
+                    Some(MovementBlock_SplineFlag_FINAL_ANGLE::FinalTarget {
                         target,
                     })
                 }
@@ -369,7 +369,7 @@ impl MovementBlock {
                     // spline_final_point: Vector3d
                     let spline_final_point = Vector3d::read(r)?;
 
-                    Some(MovementBlock_SplineFlag_FINAL_ANGLE::FINAL_POINT {
+                    Some(MovementBlock_SplineFlag_FINAL_ANGLE::FinalPoint {
                         spline_final_point,
                     })
                 }
@@ -425,7 +425,7 @@ impl MovementBlock {
                 spline_elevation: flags_SPLINE_ELEVATION,
             };
 
-            Some(MovementBlock_UpdateFlag_LIVING::LIVING {
+            Some(MovementBlock_UpdateFlag_LIVING::Living {
                 backwards_running_speed,
                 backwards_swimming_speed,
                 fall_time,
@@ -445,7 +445,7 @@ impl MovementBlock {
 
             // orientation: f32
             let orientation = crate::util::read_f32_le(r)?;
-            Some(MovementBlock_UpdateFlag_LIVING::HAS_POSITION {
+            Some(MovementBlock_UpdateFlag_LIVING::HasPosition {
                 orientation,
                 position,
             })
@@ -526,13 +526,13 @@ impl MovementBlock {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum MovementBlock_SplineFlag_FINAL_ANGLE {
-    FINAL_ANGLE {
+    FinalAngle {
         angle: f32,
     },
-    FINAL_TARGET {
+    FinalTarget {
         target: u64,
     },
-    FINAL_POINT {
+    FinalPoint {
         spline_final_point: Vector3d,
     },
 }
@@ -540,9 +540,9 @@ pub enum MovementBlock_SplineFlag_FINAL_ANGLE {
 impl MovementBlock_SplineFlag_FINAL_ANGLE {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::FINAL_ANGLE { .. } => 262144,
-            Self::FINAL_TARGET { .. } => 131072,
-            Self::FINAL_POINT { .. } => 65536,
+            Self::FinalAngle { .. } => 262144,
+            Self::FinalTarget { .. } => 131072,
+            Self::FinalPoint { .. } => 65536,
         }
     }
 
@@ -551,19 +551,19 @@ impl MovementBlock_SplineFlag_FINAL_ANGLE {
 impl MovementBlock_SplineFlag_FINAL_ANGLE {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::FINAL_ANGLE {
+            Self::FinalAngle {
                 angle,
             } => {
                 // Not an actual enum sent over the wire
                 4 // angle: f32
             }
-            Self::FINAL_TARGET {
+            Self::FinalTarget {
                 target,
             } => {
                 // Not an actual enum sent over the wire
                 8 // target: u64
             }
-            Self::FINAL_POINT {
+            Self::FinalPoint {
                 spline_final_point,
             } => {
                 // Not an actual enum sent over the wire
@@ -2003,7 +2003,7 @@ impl MovementBlock_MovementFlags_SPLINE_ELEVATION {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum MovementBlock_UpdateFlag_LIVING {
-    LIVING {
+    Living {
         backwards_running_speed: f32,
         backwards_swimming_speed: f32,
         fall_time: f32,
@@ -2016,7 +2016,7 @@ pub enum MovementBlock_UpdateFlag_LIVING {
         turn_rate: f32,
         walking_speed: f32,
     },
-    HAS_POSITION {
+    HasPosition {
         orientation: f32,
         position: Vector3d,
     },
@@ -2025,8 +2025,8 @@ pub enum MovementBlock_UpdateFlag_LIVING {
 impl MovementBlock_UpdateFlag_LIVING {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::LIVING { .. } => 32,
-            Self::HAS_POSITION { .. } => 64,
+            Self::Living { .. } => 32,
+            Self::HasPosition { .. } => 64,
         }
     }
 
@@ -2035,7 +2035,7 @@ impl MovementBlock_UpdateFlag_LIVING {
 impl MovementBlock_UpdateFlag_LIVING {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::LIVING {
+            Self::Living {
                 backwards_running_speed,
                 backwards_swimming_speed,
                 fall_time,
@@ -2061,7 +2061,7 @@ impl MovementBlock_UpdateFlag_LIVING {
                 + 4 // turn_rate: f32
                 + 4 // walking_speed: f32
             }
-            Self::HAS_POSITION {
+            Self::HasPosition {
                 orientation,
                 position,
             } => {

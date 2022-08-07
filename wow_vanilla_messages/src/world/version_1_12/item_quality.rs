@@ -15,25 +15,25 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ItemQuality {
-    POOR,
-    NORMAL,
-    UNCOMMON,
-    RARE,
-    EPIC,
-    LEGENDARY,
-    ARTIFACT,
+    Poor,
+    Normal,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary,
+    Artifact,
 }
 
 impl ItemQuality {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::POOR => 0x0,
-            Self::NORMAL => 0x1,
-            Self::UNCOMMON => 0x2,
-            Self::RARE => 0x3,
-            Self::EPIC => 0x4,
-            Self::LEGENDARY => 0x5,
-            Self::ARTIFACT => 0x6,
+            Self::Poor => 0x0,
+            Self::Normal => 0x1,
+            Self::Uncommon => 0x2,
+            Self::Rare => 0x3,
+            Self::Epic => 0x4,
+            Self::Legendary => 0x5,
+            Self::Artifact => 0x6,
         }
     }
 
@@ -41,20 +41,20 @@ impl ItemQuality {
 
 impl Default for ItemQuality {
     fn default() -> Self {
-        Self::POOR
+        Self::Poor
     }
 }
 
 impl std::fmt::Display for ItemQuality {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::POOR => f.write_str("POOR"),
-            Self::NORMAL => f.write_str("NORMAL"),
-            Self::UNCOMMON => f.write_str("UNCOMMON"),
-            Self::RARE => f.write_str("RARE"),
-            Self::EPIC => f.write_str("EPIC"),
-            Self::LEGENDARY => f.write_str("LEGENDARY"),
-            Self::ARTIFACT => f.write_str("ARTIFACT"),
+            Self::Poor => f.write_str("Poor"),
+            Self::Normal => f.write_str("Normal"),
+            Self::Uncommon => f.write_str("Uncommon"),
+            Self::Rare => f.write_str("Rare"),
+            Self::Epic => f.write_str("Epic"),
+            Self::Legendary => f.write_str("Legendary"),
+            Self::Artifact => f.write_str("Artifact"),
         }
     }
 }
@@ -63,13 +63,13 @@ impl TryFrom<u8> for ItemQuality {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::POOR),
-            1 => Ok(Self::NORMAL),
-            2 => Ok(Self::UNCOMMON),
-            3 => Ok(Self::RARE),
-            4 => Ok(Self::EPIC),
-            5 => Ok(Self::LEGENDARY),
-            6 => Ok(Self::ARTIFACT),
+            0 => Ok(Self::Poor),
+            1 => Ok(Self::Normal),
+            2 => Ok(Self::Uncommon),
+            3 => Ok(Self::Rare),
+            4 => Ok(Self::Epic),
+            5 => Ok(Self::Legendary),
+            6 => Ok(Self::Artifact),
             v => Err(crate::errors::EnumError::new("ItemQuality", v as u32),)
         }
     }

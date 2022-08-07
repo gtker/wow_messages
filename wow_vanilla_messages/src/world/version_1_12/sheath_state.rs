@@ -13,17 +13,17 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SheathState {
-    UNARMED,
-    MELEE,
-    RANGED,
+    Unarmed,
+    Melee,
+    Ranged,
 }
 
 impl SheathState {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::UNARMED => 0x0,
-            Self::MELEE => 0x1,
-            Self::RANGED => 0x2,
+            Self::Unarmed => 0x0,
+            Self::Melee => 0x1,
+            Self::Ranged => 0x2,
         }
     }
 
@@ -31,16 +31,16 @@ impl SheathState {
 
 impl Default for SheathState {
     fn default() -> Self {
-        Self::UNARMED
+        Self::Unarmed
     }
 }
 
 impl std::fmt::Display for SheathState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::UNARMED => f.write_str("UNARMED"),
-            Self::MELEE => f.write_str("MELEE"),
-            Self::RANGED => f.write_str("RANGED"),
+            Self::Unarmed => f.write_str("Unarmed"),
+            Self::Melee => f.write_str("Melee"),
+            Self::Ranged => f.write_str("Ranged"),
         }
     }
 }
@@ -49,9 +49,9 @@ impl TryFrom<u8> for SheathState {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::UNARMED),
-            1 => Ok(Self::MELEE),
-            2 => Ok(Self::RANGED),
+            0 => Ok(Self::Unarmed),
+            1 => Ok(Self::Melee),
+            2 => Ok(Self::Ranged),
             v => Err(crate::errors::EnumError::new("SheathState", v as u32),)
         }
     }

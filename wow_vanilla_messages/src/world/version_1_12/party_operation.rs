@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PartyOperation {
-    INVITE,
-    LEAVE,
+    Invite,
+    Leave,
 }
 
 impl PartyOperation {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::INVITE => 0x0,
-            Self::LEAVE => 0x2,
+            Self::Invite => 0x0,
+            Self::Leave => 0x2,
         }
     }
 
@@ -26,15 +26,15 @@ impl PartyOperation {
 
 impl Default for PartyOperation {
     fn default() -> Self {
-        Self::INVITE
+        Self::Invite
     }
 }
 
 impl std::fmt::Display for PartyOperation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::INVITE => f.write_str("INVITE"),
-            Self::LEAVE => f.write_str("LEAVE"),
+            Self::Invite => f.write_str("Invite"),
+            Self::Leave => f.write_str("Leave"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u8> for PartyOperation {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::INVITE),
-            2 => Ok(Self::LEAVE),
+            0 => Ok(Self::Invite),
+            2 => Ok(Self::Leave),
             v => Err(crate::errors::EnumError::new("PartyOperation", v as u32),)
         }
     }

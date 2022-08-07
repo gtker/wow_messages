@@ -36,8 +36,8 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
         w.write_all(&(self.exp_type.as_int() as u8).to_le_bytes())?;
 
         match &self.exp_type {
-            SMSG_LOG_XPGAIN_ExperienceAwardType::KILL => {}
-            SMSG_LOG_XPGAIN_ExperienceAwardType::NON_KILL {
+            SMSG_LOG_XPGAIN_ExperienceAwardType::Kill => {}
+            SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
                 exp_group_bonus,
                 experience_without_rested,
             } => {
@@ -69,14 +69,14 @@ impl ServerMessage for SMSG_LOG_XPGAIN {
         let exp_type: ExperienceAwardType = crate::util::read_u8_le(r)?.try_into()?;
 
         let exp_type_if = match exp_type {
-            ExperienceAwardType::KILL => SMSG_LOG_XPGAIN_ExperienceAwardType::KILL,
-            ExperienceAwardType::NON_KILL => {
+            ExperienceAwardType::Kill => SMSG_LOG_XPGAIN_ExperienceAwardType::Kill,
+            ExperienceAwardType::NonKill => {
                 // experience_without_rested: u32
                 let experience_without_rested = crate::util::read_u32_le(r)?;
 
                 // exp_group_bonus: f32
                 let exp_group_bonus = crate::util::read_f32_le(r)?;
-                SMSG_LOG_XPGAIN_ExperienceAwardType::NON_KILL {
+                SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
                     exp_group_bonus,
                     experience_without_rested,
                 }
@@ -102,8 +102,8 @@ impl SMSG_LOG_XPGAIN {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_LOG_XPGAIN_ExperienceAwardType {
-    KILL,
-    NON_KILL {
+    Kill,
+    NonKill {
         exp_group_bonus: f32,
         experience_without_rested: u32,
     },
@@ -112,15 +112,15 @@ pub enum SMSG_LOG_XPGAIN_ExperienceAwardType {
 impl Default for SMSG_LOG_XPGAIN_ExperienceAwardType {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::KILL
+        Self::Kill
     }
 }
 
 impl SMSG_LOG_XPGAIN_ExperienceAwardType {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::KILL => 0,
-            Self::NON_KILL { .. } => 1,
+            Self::Kill => 0,
+            Self::NonKill { .. } => 1,
         }
     }
 
@@ -129,10 +129,10 @@ impl SMSG_LOG_XPGAIN_ExperienceAwardType {
 impl SMSG_LOG_XPGAIN_ExperienceAwardType {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::KILL => {
+            Self::Kill => {
                 1
             }
-            Self::NON_KILL {
+            Self::NonKill {
                 exp_group_bonus,
                 experience_without_rested,
             } => {

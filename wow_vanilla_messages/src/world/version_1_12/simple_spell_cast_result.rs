@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum SimpleSpellCastResult {
-    SUCCESS,
-    FAILURE,
+    Success,
+    Failure,
 }
 
 impl SimpleSpellCastResult {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::SUCCESS => 0x0,
-            Self::FAILURE => 0x2,
+            Self::Success => 0x0,
+            Self::Failure => 0x2,
         }
     }
 
@@ -26,15 +26,15 @@ impl SimpleSpellCastResult {
 
 impl Default for SimpleSpellCastResult {
     fn default() -> Self {
-        Self::SUCCESS
+        Self::Success
     }
 }
 
 impl std::fmt::Display for SimpleSpellCastResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::SUCCESS => f.write_str("SUCCESS"),
-            Self::FAILURE => f.write_str("FAILURE"),
+            Self::Success => f.write_str("Success"),
+            Self::Failure => f.write_str("Failure"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u8> for SimpleSpellCastResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::SUCCESS),
-            2 => Ok(Self::FAILURE),
+            0 => Ok(Self::Success),
+            2 => Ok(Self::Failure),
             v => Err(crate::errors::EnumError::new("SimpleSpellCastResult", v as u32),)
         }
     }

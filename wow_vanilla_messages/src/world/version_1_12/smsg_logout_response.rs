@@ -76,8 +76,8 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGOUT_RESPONSE0() {
         let expected = SMSG_LOGOUT_RESPONSE {
-            result: LogoutResult::SUCCESS,
-            speed: LogoutSpeed::INSTANT,
+            result: LogoutResult::Success,
+            speed: LogoutSpeed::Instant,
         };
 
         let header_size = 2 + 2;
@@ -103,8 +103,8 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGOUT_RESPONSE0() {
         let expected = SMSG_LOGOUT_RESPONSE {
-            result: LogoutResult::SUCCESS,
-            speed: LogoutSpeed::INSTANT,
+            result: LogoutResult::Success,
+            speed: LogoutSpeed::Instant,
         };
 
         let header_size = 2 + 2;
@@ -130,8 +130,8 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGOUT_RESPONSE0() {
         let expected = SMSG_LOGOUT_RESPONSE {
-            result: LogoutResult::SUCCESS,
-            speed: LogoutSpeed::INSTANT,
+            result: LogoutResult::Success,
+            speed: LogoutSpeed::Instant,
         };
 
         let header_size = 2 + 2;

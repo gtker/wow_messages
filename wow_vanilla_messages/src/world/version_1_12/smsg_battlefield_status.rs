@@ -43,8 +43,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         match &self.map {
-            SMSG_BATTLEFIELD_STATUS_Map::EASTERN_KINGDOMS => {}
-            SMSG_BATTLEFIELD_STATUS_Map::KALIMDOR {
+            SMSG_BATTLEFIELD_STATUS_Map::EasternKingdoms => {}
+            SMSG_BATTLEFIELD_STATUS_Map::Kalimdor {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -59,8 +59,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -71,14 +71,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -89,11 +89,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::TESTING {
+            SMSG_BATTLEFIELD_STATUS_Map::Testing {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -108,8 +108,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -120,14 +120,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -138,11 +138,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::SCOTT_TEST {
+            SMSG_BATTLEFIELD_STATUS_Map::ScottTest {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -157,8 +157,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -169,14 +169,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -187,11 +187,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::CASH_TEST {
+            SMSG_BATTLEFIELD_STATUS_Map::CashTest {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -206,8 +206,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -218,14 +218,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -236,11 +236,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::ALTERAC_VALLEY {
+            SMSG_BATTLEFIELD_STATUS_Map::AlteracValley {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -255,8 +255,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -267,14 +267,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -285,11 +285,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::SHADOWFANG_KEEP {
+            SMSG_BATTLEFIELD_STATUS_Map::ShadowfangKeep {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -304,8 +304,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -316,14 +316,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -334,11 +334,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::STORMWIND_STOCKADE {
+            SMSG_BATTLEFIELD_STATUS_Map::StormwindStockade {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -353,8 +353,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -365,14 +365,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -383,11 +383,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::STORMWIND_PRISON {
+            SMSG_BATTLEFIELD_STATUS_Map::StormwindPrison {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -402,8 +402,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -414,14 +414,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -432,11 +432,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::DEADMINES {
+            SMSG_BATTLEFIELD_STATUS_Map::Deadmines {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -451,8 +451,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -463,14 +463,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -481,11 +481,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::AZSHARA_CRATER {
+            SMSG_BATTLEFIELD_STATUS_Map::AzsharaCrater {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -500,8 +500,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -512,14 +512,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -530,11 +530,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::COLLINS_TEST {
+            SMSG_BATTLEFIELD_STATUS_Map::CollinsTest {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -549,8 +549,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -561,14 +561,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -579,11 +579,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::WAILING_CAVERNS {
+            SMSG_BATTLEFIELD_STATUS_Map::WailingCaverns {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -598,8 +598,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -610,14 +610,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -628,11 +628,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::MONASTERY {
+            SMSG_BATTLEFIELD_STATUS_Map::Monastery {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -647,8 +647,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -659,14 +659,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -677,11 +677,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::RAZORFEN_KRAUL {
+            SMSG_BATTLEFIELD_STATUS_Map::RazorfenKraul {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -696,8 +696,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -708,14 +708,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -726,11 +726,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::BLACKFATHOM_DEEPS {
+            SMSG_BATTLEFIELD_STATUS_Map::BlackfathomDeeps {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -745,8 +745,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -757,14 +757,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -775,11 +775,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::ULDAMAN {
+            SMSG_BATTLEFIELD_STATUS_Map::Uldaman {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -794,8 +794,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -806,14 +806,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -824,11 +824,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::GNOMERAGON {
+            SMSG_BATTLEFIELD_STATUS_Map::Gnomeragon {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -843,8 +843,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -855,14 +855,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -873,11 +873,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::SUNKEN_TEMPLE {
+            SMSG_BATTLEFIELD_STATUS_Map::SunkenTemple {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -892,8 +892,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -904,14 +904,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -922,11 +922,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::RAZORFEN_DOWNS {
+            SMSG_BATTLEFIELD_STATUS_Map::RazorfenDowns {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -941,8 +941,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -953,14 +953,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -971,11 +971,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::EMERALD_DREAM {
+            SMSG_BATTLEFIELD_STATUS_Map::EmeraldDream {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -990,8 +990,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1002,14 +1002,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1020,11 +1020,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::SCARLET_MONASTERY {
+            SMSG_BATTLEFIELD_STATUS_Map::ScarletMonastery {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1039,8 +1039,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1051,14 +1051,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1069,11 +1069,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::ZUL_FARRAK {
+            SMSG_BATTLEFIELD_STATUS_Map::ZulFarrak {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1088,8 +1088,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1100,14 +1100,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1118,11 +1118,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::BLACKROCK_SPIRE {
+            SMSG_BATTLEFIELD_STATUS_Map::BlackrockSpire {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1137,8 +1137,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1149,14 +1149,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1167,11 +1167,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::BLACKROCK_DEPTHS {
+            SMSG_BATTLEFIELD_STATUS_Map::BlackrockDepths {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1186,8 +1186,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1198,14 +1198,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1216,11 +1216,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::ONYXIAS_LAIR {
+            SMSG_BATTLEFIELD_STATUS_Map::OnyxiasLair {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1235,8 +1235,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1247,14 +1247,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1265,11 +1265,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::CAVERNS_OF_TIME {
+            SMSG_BATTLEFIELD_STATUS_Map::CavernsOfTime {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1284,8 +1284,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1296,14 +1296,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1314,11 +1314,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::SCHOLOMANCE {
+            SMSG_BATTLEFIELD_STATUS_Map::Scholomance {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1333,8 +1333,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1345,14 +1345,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1363,11 +1363,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::ZUL_GURUB {
+            SMSG_BATTLEFIELD_STATUS_Map::ZulGurub {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1382,8 +1382,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1394,14 +1394,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1412,11 +1412,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::STRATHOLME {
+            SMSG_BATTLEFIELD_STATUS_Map::Stratholme {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1431,8 +1431,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1443,14 +1443,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1461,11 +1461,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::MAURADON {
+            SMSG_BATTLEFIELD_STATUS_Map::Mauradon {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1480,8 +1480,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1492,14 +1492,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1510,11 +1510,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::DEEPRUN_TRAM {
+            SMSG_BATTLEFIELD_STATUS_Map::DeeprunTram {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1529,8 +1529,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1541,14 +1541,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1559,11 +1559,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::RAGEFIRE_CHASM {
+            SMSG_BATTLEFIELD_STATUS_Map::RagefireChasm {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1578,8 +1578,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1590,14 +1590,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1608,11 +1608,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::MOLTEN_CORE {
+            SMSG_BATTLEFIELD_STATUS_Map::MoltenCore {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1627,8 +1627,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1639,14 +1639,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1657,11 +1657,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::DIRE_MAUL {
+            SMSG_BATTLEFIELD_STATUS_Map::DireMaul {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1676,8 +1676,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1688,14 +1688,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1706,11 +1706,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::ALLIANCE_PVP_BARRACKS {
+            SMSG_BATTLEFIELD_STATUS_Map::AlliancePvpBarracks {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1725,8 +1725,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1737,14 +1737,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1755,11 +1755,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::HORDE_PVP_BARRACKS {
+            SMSG_BATTLEFIELD_STATUS_Map::HordePvpBarracks {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1774,8 +1774,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1786,14 +1786,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1804,11 +1804,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::DEVELOPMENT_LAND {
+            SMSG_BATTLEFIELD_STATUS_Map::DevelopmentLand {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1823,8 +1823,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1835,14 +1835,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1853,11 +1853,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::BLACKWING_LAIR {
+            SMSG_BATTLEFIELD_STATUS_Map::BlackwingLair {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1872,8 +1872,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1884,14 +1884,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1902,11 +1902,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::WARSONG_GULCH {
+            SMSG_BATTLEFIELD_STATUS_Map::WarsongGulch {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1921,8 +1921,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1933,14 +1933,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -1951,11 +1951,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::RUINS_OF_AHN_QIRAJ {
+            SMSG_BATTLEFIELD_STATUS_Map::RuinsOfAhnQiraj {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -1970,8 +1970,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -1982,14 +1982,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -2000,11 +2000,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::ARATHI_BASIN {
+            SMSG_BATTLEFIELD_STATUS_Map::ArathiBasin {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -2019,8 +2019,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -2031,14 +2031,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -2049,11 +2049,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::AHN_QIRAJ_TEMPLE {
+            SMSG_BATTLEFIELD_STATUS_Map::AhnQirajTemple {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -2068,8 +2068,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -2080,14 +2080,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -2098,11 +2098,11 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::NAXXRAMAS {
+            SMSG_BATTLEFIELD_STATUS_Map::Naxxramas {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -2117,8 +2117,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
                     } => {
@@ -2129,14 +2129,14 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                         time_to_remove_in_queue_in_ms,
                     } => {
                         // time_to_remove_in_queue_in_ms: u32
                         w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                    SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                         time_to_bg_autoleave_in_ms,
                         time_to_bg_start_in_ms,
                     } => {
@@ -2147,7 +2147,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE => {}
+                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
                 }
 
             }
@@ -2169,8 +2169,8 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         let map_if = match map {
-            Map::EASTERN_KINGDOMS => SMSG_BATTLEFIELD_STATUS_Map::EASTERN_KINGDOMS,
-            Map::KALIMDOR => {
+            Map::EasternKingdoms => SMSG_BATTLEFIELD_STATUS_Map::EasternKingdoms,
+            Map::Kalimdor => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2181,49 +2181,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::KALIMDOR {
+                SMSG_BATTLEFIELD_STATUS_Map::Kalimdor {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::TESTING => {
+            Map::Testing => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2234,49 +2234,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::TESTING {
+                SMSG_BATTLEFIELD_STATUS_Map::Testing {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::SCOTT_TEST => {
+            Map::ScottTest => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2287,49 +2287,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::SCOTT_TEST {
+                SMSG_BATTLEFIELD_STATUS_Map::ScottTest {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::CASH_TEST => {
+            Map::CashTest => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2340,49 +2340,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::CASH_TEST {
+                SMSG_BATTLEFIELD_STATUS_Map::CashTest {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::ALTERAC_VALLEY => {
+            Map::AlteracValley => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2393,49 +2393,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::ALTERAC_VALLEY {
+                SMSG_BATTLEFIELD_STATUS_Map::AlteracValley {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::SHADOWFANG_KEEP => {
+            Map::ShadowfangKeep => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2446,49 +2446,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::SHADOWFANG_KEEP {
+                SMSG_BATTLEFIELD_STATUS_Map::ShadowfangKeep {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::STORMWIND_STOCKADE => {
+            Map::StormwindStockade => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2499,49 +2499,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::STORMWIND_STOCKADE {
+                SMSG_BATTLEFIELD_STATUS_Map::StormwindStockade {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::STORMWIND_PRISON => {
+            Map::StormwindPrison => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2552,49 +2552,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::STORMWIND_PRISON {
+                SMSG_BATTLEFIELD_STATUS_Map::StormwindPrison {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::DEADMINES => {
+            Map::Deadmines => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2605,49 +2605,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::DEADMINES {
+                SMSG_BATTLEFIELD_STATUS_Map::Deadmines {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::AZSHARA_CRATER => {
+            Map::AzsharaCrater => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2658,49 +2658,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::AZSHARA_CRATER {
+                SMSG_BATTLEFIELD_STATUS_Map::AzsharaCrater {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::COLLINS_TEST => {
+            Map::CollinsTest => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2711,49 +2711,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::COLLINS_TEST {
+                SMSG_BATTLEFIELD_STATUS_Map::CollinsTest {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::WAILING_CAVERNS => {
+            Map::WailingCaverns => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2764,49 +2764,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::WAILING_CAVERNS {
+                SMSG_BATTLEFIELD_STATUS_Map::WailingCaverns {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::MONASTERY => {
+            Map::Monastery => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2817,49 +2817,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::MONASTERY {
+                SMSG_BATTLEFIELD_STATUS_Map::Monastery {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::RAZORFEN_KRAUL => {
+            Map::RazorfenKraul => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2870,49 +2870,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::RAZORFEN_KRAUL {
+                SMSG_BATTLEFIELD_STATUS_Map::RazorfenKraul {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::BLACKFATHOM_DEEPS => {
+            Map::BlackfathomDeeps => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2923,49 +2923,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::BLACKFATHOM_DEEPS {
+                SMSG_BATTLEFIELD_STATUS_Map::BlackfathomDeeps {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::ULDAMAN => {
+            Map::Uldaman => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -2976,49 +2976,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::ULDAMAN {
+                SMSG_BATTLEFIELD_STATUS_Map::Uldaman {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::GNOMERAGON => {
+            Map::Gnomeragon => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3029,49 +3029,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::GNOMERAGON {
+                SMSG_BATTLEFIELD_STATUS_Map::Gnomeragon {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::SUNKEN_TEMPLE => {
+            Map::SunkenTemple => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3082,49 +3082,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::SUNKEN_TEMPLE {
+                SMSG_BATTLEFIELD_STATUS_Map::SunkenTemple {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::RAZORFEN_DOWNS => {
+            Map::RazorfenDowns => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3135,49 +3135,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::RAZORFEN_DOWNS {
+                SMSG_BATTLEFIELD_STATUS_Map::RazorfenDowns {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::EMERALD_DREAM => {
+            Map::EmeraldDream => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3188,49 +3188,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::EMERALD_DREAM {
+                SMSG_BATTLEFIELD_STATUS_Map::EmeraldDream {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::SCARLET_MONASTERY => {
+            Map::ScarletMonastery => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3241,49 +3241,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::SCARLET_MONASTERY {
+                SMSG_BATTLEFIELD_STATUS_Map::ScarletMonastery {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::ZUL_FARRAK => {
+            Map::ZulFarrak => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3294,49 +3294,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::ZUL_FARRAK {
+                SMSG_BATTLEFIELD_STATUS_Map::ZulFarrak {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::BLACKROCK_SPIRE => {
+            Map::BlackrockSpire => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3347,49 +3347,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::BLACKROCK_SPIRE {
+                SMSG_BATTLEFIELD_STATUS_Map::BlackrockSpire {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::BLACKROCK_DEPTHS => {
+            Map::BlackrockDepths => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3400,49 +3400,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::BLACKROCK_DEPTHS {
+                SMSG_BATTLEFIELD_STATUS_Map::BlackrockDepths {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::ONYXIAS_LAIR => {
+            Map::OnyxiasLair => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3453,49 +3453,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::ONYXIAS_LAIR {
+                SMSG_BATTLEFIELD_STATUS_Map::OnyxiasLair {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::CAVERNS_OF_TIME => {
+            Map::CavernsOfTime => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3506,49 +3506,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::CAVERNS_OF_TIME {
+                SMSG_BATTLEFIELD_STATUS_Map::CavernsOfTime {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::SCHOLOMANCE => {
+            Map::Scholomance => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3559,49 +3559,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::SCHOLOMANCE {
+                SMSG_BATTLEFIELD_STATUS_Map::Scholomance {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::ZUL_GURUB => {
+            Map::ZulGurub => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3612,49 +3612,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::ZUL_GURUB {
+                SMSG_BATTLEFIELD_STATUS_Map::ZulGurub {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::STRATHOLME => {
+            Map::Stratholme => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3665,49 +3665,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::STRATHOLME {
+                SMSG_BATTLEFIELD_STATUS_Map::Stratholme {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::MAURADON => {
+            Map::Mauradon => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3718,49 +3718,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::MAURADON {
+                SMSG_BATTLEFIELD_STATUS_Map::Mauradon {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::DEEPRUN_TRAM => {
+            Map::DeeprunTram => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3771,49 +3771,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::DEEPRUN_TRAM {
+                SMSG_BATTLEFIELD_STATUS_Map::DeeprunTram {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::RAGEFIRE_CHASM => {
+            Map::RagefireChasm => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3824,49 +3824,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::RAGEFIRE_CHASM {
+                SMSG_BATTLEFIELD_STATUS_Map::RagefireChasm {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::MOLTEN_CORE => {
+            Map::MoltenCore => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3877,49 +3877,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::MOLTEN_CORE {
+                SMSG_BATTLEFIELD_STATUS_Map::MoltenCore {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::DIRE_MAUL => {
+            Map::DireMaul => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3930,49 +3930,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::DIRE_MAUL {
+                SMSG_BATTLEFIELD_STATUS_Map::DireMaul {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::ALLIANCE_PVP_BARRACKS => {
+            Map::AlliancePvpBarracks => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -3983,49 +3983,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::ALLIANCE_PVP_BARRACKS {
+                SMSG_BATTLEFIELD_STATUS_Map::AlliancePvpBarracks {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::HORDE_PVP_BARRACKS => {
+            Map::HordePvpBarracks => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -4036,49 +4036,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::HORDE_PVP_BARRACKS {
+                SMSG_BATTLEFIELD_STATUS_Map::HordePvpBarracks {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::DEVELOPMENT_LAND => {
+            Map::DevelopmentLand => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -4089,49 +4089,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::DEVELOPMENT_LAND {
+                SMSG_BATTLEFIELD_STATUS_Map::DevelopmentLand {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::BLACKWING_LAIR => {
+            Map::BlackwingLair => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -4142,49 +4142,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::BLACKWING_LAIR {
+                SMSG_BATTLEFIELD_STATUS_Map::BlackwingLair {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::WARSONG_GULCH => {
+            Map::WarsongGulch => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -4195,49 +4195,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::WARSONG_GULCH {
+                SMSG_BATTLEFIELD_STATUS_Map::WarsongGulch {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::RUINS_OF_AHN_QIRAJ => {
+            Map::RuinsOfAhnQiraj => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -4248,49 +4248,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::RUINS_OF_AHN_QIRAJ {
+                SMSG_BATTLEFIELD_STATUS_Map::RuinsOfAhnQiraj {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::ARATHI_BASIN => {
+            Map::ArathiBasin => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -4301,49 +4301,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::ARATHI_BASIN {
+                SMSG_BATTLEFIELD_STATUS_Map::ArathiBasin {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::AHN_QIRAJ_TEMPLE => {
+            Map::AhnQirajTemple => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -4354,49 +4354,49 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::AHN_QIRAJ_TEMPLE {
+                SMSG_BATTLEFIELD_STATUS_Map::AhnQirajTemple {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
                 }
             }
-            Map::NAXXRAMAS => {
+            Map::Naxxramas => {
                 // unknown0: u8
                 let unknown0 = crate::util::read_u8_le(r)?;
 
@@ -4407,43 +4407,43 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
                 let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUS_StatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
                         // average_wait_time_in_ms: u32
                         let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_in_queue_in_ms: u32
                         let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_QUEUE {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
                         }
                     }
-                    StatusId::WAIT_JOIN => {
+                    StatusId::WaitJoin => {
                         // time_to_remove_in_queue_in_ms: u32
                         let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_JOIN {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                             time_to_remove_in_queue_in_ms,
                         }
                     }
-                    StatusId::IN_PROGRESS => {
+                    StatusId::InProgress => {
                         // time_to_bg_autoleave_in_ms: u32
                         let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
 
                         // time_to_bg_start_in_ms: u32
                         let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
 
-                        SMSG_BATTLEFIELD_STATUS_StatusId::IN_PROGRESS {
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
                         }
                     }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUS_StatusId::WAIT_LEAVE,
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::NAXXRAMAS {
+                SMSG_BATTLEFIELD_STATUS_Map::Naxxramas {
                     client_instance_id,
                     status_id: status_id_if,
                     unknown0,
@@ -4468,36 +4468,36 @@ impl SMSG_BATTLEFIELD_STATUS {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_BATTLEFIELD_STATUS_StatusId {
-    NONE,
-    WAIT_QUEUE {
+    None,
+    WaitQueue {
         average_wait_time_in_ms: u32,
         time_in_queue_in_ms: u32,
     },
-    WAIT_JOIN {
+    WaitJoin {
         time_to_remove_in_queue_in_ms: u32,
     },
-    IN_PROGRESS {
+    InProgress {
         time_to_bg_autoleave_in_ms: u32,
         time_to_bg_start_in_ms: u32,
     },
-    WAIT_LEAVE,
+    WaitLeave,
 }
 
 impl Default for SMSG_BATTLEFIELD_STATUS_StatusId {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::NONE
+        Self::None
     }
 }
 
 impl SMSG_BATTLEFIELD_STATUS_StatusId {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NONE => 0,
-            Self::WAIT_QUEUE { .. } => 1,
-            Self::WAIT_JOIN { .. } => 2,
-            Self::IN_PROGRESS { .. } => 3,
-            Self::WAIT_LEAVE => 4,
+            Self::None => 0,
+            Self::WaitQueue { .. } => 1,
+            Self::WaitJoin { .. } => 2,
+            Self::InProgress { .. } => 3,
+            Self::WaitLeave => 4,
         }
     }
 
@@ -4506,10 +4506,10 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
 impl SMSG_BATTLEFIELD_STATUS_StatusId {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NONE => {
+            Self::None => {
                 1
             }
-            Self::WAIT_QUEUE {
+            Self::WaitQueue {
                 average_wait_time_in_ms,
                 time_in_queue_in_ms,
             } => {
@@ -4517,13 +4517,13 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
                 + 4 // average_wait_time_in_ms: u32
                 + 4 // time_in_queue_in_ms: u32
             }
-            Self::WAIT_JOIN {
+            Self::WaitJoin {
                 time_to_remove_in_queue_in_ms,
             } => {
                 1
                 + 4 // time_to_remove_in_queue_in_ms: u32
             }
-            Self::IN_PROGRESS {
+            Self::InProgress {
                 time_to_bg_autoleave_in_ms,
                 time_to_bg_start_in_ms,
             } => {
@@ -4531,7 +4531,7 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
                 + 4 // time_to_bg_autoleave_in_ms: u32
                 + 4 // time_to_bg_start_in_ms: u32
             }
-            Self::WAIT_LEAVE => {
+            Self::WaitLeave => {
                 1
             }
         }
@@ -4540,218 +4540,218 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_BATTLEFIELD_STATUS_Map {
-    EASTERN_KINGDOMS,
-    KALIMDOR {
+    EasternKingdoms,
+    Kalimdor {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    TESTING {
+    Testing {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    SCOTT_TEST {
+    ScottTest {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    CASH_TEST {
+    CashTest {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    ALTERAC_VALLEY {
+    AlteracValley {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    SHADOWFANG_KEEP {
+    ShadowfangKeep {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    STORMWIND_STOCKADE {
+    StormwindStockade {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    STORMWIND_PRISON {
+    StormwindPrison {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    DEADMINES {
+    Deadmines {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    AZSHARA_CRATER {
+    AzsharaCrater {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    COLLINS_TEST {
+    CollinsTest {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    WAILING_CAVERNS {
+    WailingCaverns {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    MONASTERY {
+    Monastery {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    RAZORFEN_KRAUL {
+    RazorfenKraul {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    BLACKFATHOM_DEEPS {
+    BlackfathomDeeps {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    ULDAMAN {
+    Uldaman {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    GNOMERAGON {
+    Gnomeragon {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    SUNKEN_TEMPLE {
+    SunkenTemple {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    RAZORFEN_DOWNS {
+    RazorfenDowns {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    EMERALD_DREAM {
+    EmeraldDream {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    SCARLET_MONASTERY {
+    ScarletMonastery {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    ZUL_FARRAK {
+    ZulFarrak {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    BLACKROCK_SPIRE {
+    BlackrockSpire {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    BLACKROCK_DEPTHS {
+    BlackrockDepths {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    ONYXIAS_LAIR {
+    OnyxiasLair {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    CAVERNS_OF_TIME {
+    CavernsOfTime {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    SCHOLOMANCE {
+    Scholomance {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    ZUL_GURUB {
+    ZulGurub {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    STRATHOLME {
+    Stratholme {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    MAURADON {
+    Mauradon {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    DEEPRUN_TRAM {
+    DeeprunTram {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    RAGEFIRE_CHASM {
+    RagefireChasm {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    MOLTEN_CORE {
+    MoltenCore {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    DIRE_MAUL {
+    DireMaul {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    ALLIANCE_PVP_BARRACKS {
+    AlliancePvpBarracks {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    HORDE_PVP_BARRACKS {
+    HordePvpBarracks {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    DEVELOPMENT_LAND {
+    DevelopmentLand {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    BLACKWING_LAIR {
+    BlackwingLair {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    WARSONG_GULCH {
+    WarsongGulch {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    RUINS_OF_AHN_QIRAJ {
+    RuinsOfAhnQiraj {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    ARATHI_BASIN {
+    ArathiBasin {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    AHN_QIRAJ_TEMPLE {
+    AhnQirajTemple {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
     },
-    NAXXRAMAS {
+    Naxxramas {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
         unknown0: u8,
@@ -4761,57 +4761,57 @@ pub enum SMSG_BATTLEFIELD_STATUS_Map {
 impl Default for SMSG_BATTLEFIELD_STATUS_Map {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::EASTERN_KINGDOMS
+        Self::EasternKingdoms
     }
 }
 
 impl SMSG_BATTLEFIELD_STATUS_Map {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::EASTERN_KINGDOMS => 0,
-            Self::KALIMDOR { .. } => 1,
-            Self::TESTING { .. } => 13,
-            Self::SCOTT_TEST { .. } => 25,
-            Self::CASH_TEST { .. } => 29,
-            Self::ALTERAC_VALLEY { .. } => 30,
-            Self::SHADOWFANG_KEEP { .. } => 33,
-            Self::STORMWIND_STOCKADE { .. } => 34,
-            Self::STORMWIND_PRISON { .. } => 35,
-            Self::DEADMINES { .. } => 36,
-            Self::AZSHARA_CRATER { .. } => 37,
-            Self::COLLINS_TEST { .. } => 42,
-            Self::WAILING_CAVERNS { .. } => 43,
-            Self::MONASTERY { .. } => 44,
-            Self::RAZORFEN_KRAUL { .. } => 47,
-            Self::BLACKFATHOM_DEEPS { .. } => 48,
-            Self::ULDAMAN { .. } => 70,
-            Self::GNOMERAGON { .. } => 90,
-            Self::SUNKEN_TEMPLE { .. } => 109,
-            Self::RAZORFEN_DOWNS { .. } => 129,
-            Self::EMERALD_DREAM { .. } => 169,
-            Self::SCARLET_MONASTERY { .. } => 189,
-            Self::ZUL_FARRAK { .. } => 209,
-            Self::BLACKROCK_SPIRE { .. } => 229,
-            Self::BLACKROCK_DEPTHS { .. } => 230,
-            Self::ONYXIAS_LAIR { .. } => 249,
-            Self::CAVERNS_OF_TIME { .. } => 269,
-            Self::SCHOLOMANCE { .. } => 289,
-            Self::ZUL_GURUB { .. } => 309,
-            Self::STRATHOLME { .. } => 329,
-            Self::MAURADON { .. } => 349,
-            Self::DEEPRUN_TRAM { .. } => 369,
-            Self::RAGEFIRE_CHASM { .. } => 389,
-            Self::MOLTEN_CORE { .. } => 409,
-            Self::DIRE_MAUL { .. } => 429,
-            Self::ALLIANCE_PVP_BARRACKS { .. } => 449,
-            Self::HORDE_PVP_BARRACKS { .. } => 450,
-            Self::DEVELOPMENT_LAND { .. } => 451,
-            Self::BLACKWING_LAIR { .. } => 469,
-            Self::WARSONG_GULCH { .. } => 489,
-            Self::RUINS_OF_AHN_QIRAJ { .. } => 509,
-            Self::ARATHI_BASIN { .. } => 529,
-            Self::AHN_QIRAJ_TEMPLE { .. } => 531,
-            Self::NAXXRAMAS { .. } => 533,
+            Self::EasternKingdoms => 0,
+            Self::Kalimdor { .. } => 1,
+            Self::Testing { .. } => 13,
+            Self::ScottTest { .. } => 25,
+            Self::CashTest { .. } => 29,
+            Self::AlteracValley { .. } => 30,
+            Self::ShadowfangKeep { .. } => 33,
+            Self::StormwindStockade { .. } => 34,
+            Self::StormwindPrison { .. } => 35,
+            Self::Deadmines { .. } => 36,
+            Self::AzsharaCrater { .. } => 37,
+            Self::CollinsTest { .. } => 42,
+            Self::WailingCaverns { .. } => 43,
+            Self::Monastery { .. } => 44,
+            Self::RazorfenKraul { .. } => 47,
+            Self::BlackfathomDeeps { .. } => 48,
+            Self::Uldaman { .. } => 70,
+            Self::Gnomeragon { .. } => 90,
+            Self::SunkenTemple { .. } => 109,
+            Self::RazorfenDowns { .. } => 129,
+            Self::EmeraldDream { .. } => 169,
+            Self::ScarletMonastery { .. } => 189,
+            Self::ZulFarrak { .. } => 209,
+            Self::BlackrockSpire { .. } => 229,
+            Self::BlackrockDepths { .. } => 230,
+            Self::OnyxiasLair { .. } => 249,
+            Self::CavernsOfTime { .. } => 269,
+            Self::Scholomance { .. } => 289,
+            Self::ZulGurub { .. } => 309,
+            Self::Stratholme { .. } => 329,
+            Self::Mauradon { .. } => 349,
+            Self::DeeprunTram { .. } => 369,
+            Self::RagefireChasm { .. } => 389,
+            Self::MoltenCore { .. } => 409,
+            Self::DireMaul { .. } => 429,
+            Self::AlliancePvpBarracks { .. } => 449,
+            Self::HordePvpBarracks { .. } => 450,
+            Self::DevelopmentLand { .. } => 451,
+            Self::BlackwingLair { .. } => 469,
+            Self::WarsongGulch { .. } => 489,
+            Self::RuinsOfAhnQiraj { .. } => 509,
+            Self::ArathiBasin { .. } => 529,
+            Self::AhnQirajTemple { .. } => 531,
+            Self::Naxxramas { .. } => 533,
         }
     }
 
@@ -4820,10 +4820,10 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
 impl SMSG_BATTLEFIELD_STATUS_Map {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::EASTERN_KINGDOMS => {
+            Self::EasternKingdoms => {
                 4
             }
-            Self::KALIMDOR {
+            Self::Kalimdor {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4833,7 +4833,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::TESTING {
+            Self::Testing {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4843,7 +4843,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::SCOTT_TEST {
+            Self::ScottTest {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4853,7 +4853,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::CASH_TEST {
+            Self::CashTest {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4863,7 +4863,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::ALTERAC_VALLEY {
+            Self::AlteracValley {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4873,7 +4873,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::SHADOWFANG_KEEP {
+            Self::ShadowfangKeep {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4883,7 +4883,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::STORMWIND_STOCKADE {
+            Self::StormwindStockade {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4893,7 +4893,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::STORMWIND_PRISON {
+            Self::StormwindPrison {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4903,7 +4903,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::DEADMINES {
+            Self::Deadmines {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4913,7 +4913,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::AZSHARA_CRATER {
+            Self::AzsharaCrater {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4923,7 +4923,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::COLLINS_TEST {
+            Self::CollinsTest {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4933,7 +4933,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::WAILING_CAVERNS {
+            Self::WailingCaverns {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4943,7 +4943,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::MONASTERY {
+            Self::Monastery {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4953,7 +4953,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::RAZORFEN_KRAUL {
+            Self::RazorfenKraul {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4963,7 +4963,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::BLACKFATHOM_DEEPS {
+            Self::BlackfathomDeeps {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4973,7 +4973,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::ULDAMAN {
+            Self::Uldaman {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4983,7 +4983,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::GNOMERAGON {
+            Self::Gnomeragon {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -4993,7 +4993,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::SUNKEN_TEMPLE {
+            Self::SunkenTemple {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5003,7 +5003,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::RAZORFEN_DOWNS {
+            Self::RazorfenDowns {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5013,7 +5013,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::EMERALD_DREAM {
+            Self::EmeraldDream {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5023,7 +5023,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::SCARLET_MONASTERY {
+            Self::ScarletMonastery {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5033,7 +5033,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::ZUL_FARRAK {
+            Self::ZulFarrak {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5043,7 +5043,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::BLACKROCK_SPIRE {
+            Self::BlackrockSpire {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5053,7 +5053,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::BLACKROCK_DEPTHS {
+            Self::BlackrockDepths {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5063,7 +5063,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::ONYXIAS_LAIR {
+            Self::OnyxiasLair {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5073,7 +5073,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::CAVERNS_OF_TIME {
+            Self::CavernsOfTime {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5083,7 +5083,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::SCHOLOMANCE {
+            Self::Scholomance {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5093,7 +5093,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::ZUL_GURUB {
+            Self::ZulGurub {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5103,7 +5103,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::STRATHOLME {
+            Self::Stratholme {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5113,7 +5113,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::MAURADON {
+            Self::Mauradon {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5123,7 +5123,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::DEEPRUN_TRAM {
+            Self::DeeprunTram {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5133,7 +5133,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::RAGEFIRE_CHASM {
+            Self::RagefireChasm {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5143,7 +5143,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::MOLTEN_CORE {
+            Self::MoltenCore {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5153,7 +5153,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::DIRE_MAUL {
+            Self::DireMaul {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5163,7 +5163,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::ALLIANCE_PVP_BARRACKS {
+            Self::AlliancePvpBarracks {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5173,7 +5173,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::HORDE_PVP_BARRACKS {
+            Self::HordePvpBarracks {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5183,7 +5183,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::DEVELOPMENT_LAND {
+            Self::DevelopmentLand {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5193,7 +5193,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::BLACKWING_LAIR {
+            Self::BlackwingLair {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5203,7 +5203,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::WARSONG_GULCH {
+            Self::WarsongGulch {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5213,7 +5213,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::RUINS_OF_AHN_QIRAJ {
+            Self::RuinsOfAhnQiraj {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5223,7 +5223,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::ARATHI_BASIN {
+            Self::ArathiBasin {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5233,7 +5233,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::AHN_QIRAJ_TEMPLE {
+            Self::AhnQirajTemple {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -5243,7 +5243,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
                 + 1 // unknown0: u8
             }
-            Self::NAXXRAMAS {
+            Self::Naxxramas {
                 client_instance_id,
                 status_id,
                 unknown0,

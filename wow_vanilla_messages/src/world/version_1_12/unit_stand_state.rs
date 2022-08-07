@@ -18,33 +18,33 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum UnitStandState {
-    STAND,
-    SIT,
-    SIT_CHAIR,
-    SLEEP,
-    SIT_LOW_CHAIR,
-    SIT_MEDIUM_CHAIR,
-    SIT_HIGH_CHAIR,
-    DEAD,
-    KNEEL,
+    Stand,
+    Sit,
+    SitChair,
+    Sleep,
+    SitLowChair,
+    SitMediumChair,
+    SitHighChair,
+    Dead,
+    Kneel,
     /// Used for Cthun according to cmangos.
     ///
-    CUSTOM,
+    Custom,
 }
 
 impl UnitStandState {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::STAND => 0x0,
-            Self::SIT => 0x1,
-            Self::SIT_CHAIR => 0x2,
-            Self::SLEEP => 0x3,
-            Self::SIT_LOW_CHAIR => 0x4,
-            Self::SIT_MEDIUM_CHAIR => 0x5,
-            Self::SIT_HIGH_CHAIR => 0x6,
-            Self::DEAD => 0x7,
-            Self::KNEEL => 0x8,
-            Self::CUSTOM => 0x9,
+            Self::Stand => 0x0,
+            Self::Sit => 0x1,
+            Self::SitChair => 0x2,
+            Self::Sleep => 0x3,
+            Self::SitLowChair => 0x4,
+            Self::SitMediumChair => 0x5,
+            Self::SitHighChair => 0x6,
+            Self::Dead => 0x7,
+            Self::Kneel => 0x8,
+            Self::Custom => 0x9,
         }
     }
 
@@ -52,23 +52,23 @@ impl UnitStandState {
 
 impl Default for UnitStandState {
     fn default() -> Self {
-        Self::STAND
+        Self::Stand
     }
 }
 
 impl std::fmt::Display for UnitStandState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::STAND => f.write_str("STAND"),
-            Self::SIT => f.write_str("SIT"),
-            Self::SIT_CHAIR => f.write_str("SIT_CHAIR"),
-            Self::SLEEP => f.write_str("SLEEP"),
-            Self::SIT_LOW_CHAIR => f.write_str("SIT_LOW_CHAIR"),
-            Self::SIT_MEDIUM_CHAIR => f.write_str("SIT_MEDIUM_CHAIR"),
-            Self::SIT_HIGH_CHAIR => f.write_str("SIT_HIGH_CHAIR"),
-            Self::DEAD => f.write_str("DEAD"),
-            Self::KNEEL => f.write_str("KNEEL"),
-            Self::CUSTOM => f.write_str("CUSTOM"),
+            Self::Stand => f.write_str("Stand"),
+            Self::Sit => f.write_str("Sit"),
+            Self::SitChair => f.write_str("SitChair"),
+            Self::Sleep => f.write_str("Sleep"),
+            Self::SitLowChair => f.write_str("SitLowChair"),
+            Self::SitMediumChair => f.write_str("SitMediumChair"),
+            Self::SitHighChair => f.write_str("SitHighChair"),
+            Self::Dead => f.write_str("Dead"),
+            Self::Kneel => f.write_str("Kneel"),
+            Self::Custom => f.write_str("Custom"),
         }
     }
 }
@@ -77,16 +77,16 @@ impl TryFrom<u8> for UnitStandState {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::STAND),
-            1 => Ok(Self::SIT),
-            2 => Ok(Self::SIT_CHAIR),
-            3 => Ok(Self::SLEEP),
-            4 => Ok(Self::SIT_LOW_CHAIR),
-            5 => Ok(Self::SIT_MEDIUM_CHAIR),
-            6 => Ok(Self::SIT_HIGH_CHAIR),
-            7 => Ok(Self::DEAD),
-            8 => Ok(Self::KNEEL),
-            9 => Ok(Self::CUSTOM),
+            0 => Ok(Self::Stand),
+            1 => Ok(Self::Sit),
+            2 => Ok(Self::SitChair),
+            3 => Ok(Self::Sleep),
+            4 => Ok(Self::SitLowChair),
+            5 => Ok(Self::SitMediumChair),
+            6 => Ok(Self::SitHighChair),
+            7 => Ok(Self::Dead),
+            8 => Ok(Self::Kneel),
+            9 => Ok(Self::Custom),
             v => Err(crate::errors::EnumError::new("UnitStandState", v as u32),)
         }
     }

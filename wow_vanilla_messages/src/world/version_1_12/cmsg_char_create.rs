@@ -177,9 +177,9 @@ mod test {
     fn CMSG_CHAR_CREATE0() {
         let expected = CMSG_CHAR_CREATE {
             name: String::from("Deadbeef"),
-            race: Race::HUMAN,
-            class: Class::WARRIOR,
-            gender: Gender::FEMALE,
+            race: Race::Human,
+            class: Class::Warrior,
+            gender: Gender::Female,
             skin: 0x8,
             face: 0x0,
             hairstyle: 0xE,
@@ -218,9 +218,9 @@ mod test {
     async fn tokio_CMSG_CHAR_CREATE0() {
         let expected = CMSG_CHAR_CREATE {
             name: String::from("Deadbeef"),
-            race: Race::HUMAN,
-            class: Class::WARRIOR,
-            gender: Gender::FEMALE,
+            race: Race::Human,
+            class: Class::Warrior,
+            gender: Gender::Female,
             skin: 0x8,
             face: 0x0,
             hairstyle: 0xE,
@@ -259,9 +259,9 @@ mod test {
     async fn astd_CMSG_CHAR_CREATE0() {
         let expected = CMSG_CHAR_CREATE {
             name: String::from("Deadbeef"),
-            race: Race::HUMAN,
-            class: Class::WARRIOR,
-            gender: Gender::FEMALE,
+            race: Race::Human,
+            class: Class::Warrior,
+            gender: Gender::Female,
             skin: 0x8,
             face: 0x0,
             hairstyle: 0xE,

@@ -10,15 +10,15 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BattlefieldPortAction {
-    LEAVE_QUEUE,
-    ENTER_BATTLE,
+    LeaveQueue,
+    EnterBattle,
 }
 
 impl BattlefieldPortAction {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::LEAVE_QUEUE => 0x0,
-            Self::ENTER_BATTLE => 0x1,
+            Self::LeaveQueue => 0x0,
+            Self::EnterBattle => 0x1,
         }
     }
 
@@ -26,15 +26,15 @@ impl BattlefieldPortAction {
 
 impl Default for BattlefieldPortAction {
     fn default() -> Self {
-        Self::LEAVE_QUEUE
+        Self::LeaveQueue
     }
 }
 
 impl std::fmt::Display for BattlefieldPortAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::LEAVE_QUEUE => f.write_str("LEAVE_QUEUE"),
-            Self::ENTER_BATTLE => f.write_str("ENTER_BATTLE"),
+            Self::LeaveQueue => f.write_str("LeaveQueue"),
+            Self::EnterBattle => f.write_str("EnterBattle"),
         }
     }
 }
@@ -43,8 +43,8 @@ impl TryFrom<u8> for BattlefieldPortAction {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::LEAVE_QUEUE),
-            1 => Ok(Self::ENTER_BATTLE),
+            0 => Ok(Self::LeaveQueue),
+            1 => Ok(Self::EnterBattle),
             v => Err(crate::errors::EnumError::new("BattlefieldPortAction", v as u32),)
         }
     }

@@ -17,29 +17,29 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BuyResult {
-    CANT_FIND_ITEM,
-    ITEM_ALREADY_SOLD,
-    NOT_ENOUGHT_MONEY,
-    SELLER_DONT_LIKE_YOU,
-    DISTANCE_TOO_FAR,
-    ITEM_SOLD_OUT,
-    CANT_CARRY_MORE,
-    RANK_REQUIRE,
-    REPUTATION_REQUIRE,
+    CantFindItem,
+    ItemAlreadySold,
+    NotEnoughtMoney,
+    SellerDontLikeYou,
+    DistanceTooFar,
+    ItemSoldOut,
+    CantCarryMore,
+    RankRequire,
+    ReputationRequire,
 }
 
 impl BuyResult {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::CANT_FIND_ITEM => 0x0,
-            Self::ITEM_ALREADY_SOLD => 0x1,
-            Self::NOT_ENOUGHT_MONEY => 0x2,
-            Self::SELLER_DONT_LIKE_YOU => 0x4,
-            Self::DISTANCE_TOO_FAR => 0x5,
-            Self::ITEM_SOLD_OUT => 0x7,
-            Self::CANT_CARRY_MORE => 0x8,
-            Self::RANK_REQUIRE => 0xb,
-            Self::REPUTATION_REQUIRE => 0xc,
+            Self::CantFindItem => 0x0,
+            Self::ItemAlreadySold => 0x1,
+            Self::NotEnoughtMoney => 0x2,
+            Self::SellerDontLikeYou => 0x4,
+            Self::DistanceTooFar => 0x5,
+            Self::ItemSoldOut => 0x7,
+            Self::CantCarryMore => 0x8,
+            Self::RankRequire => 0xb,
+            Self::ReputationRequire => 0xc,
         }
     }
 
@@ -47,22 +47,22 @@ impl BuyResult {
 
 impl Default for BuyResult {
     fn default() -> Self {
-        Self::CANT_FIND_ITEM
+        Self::CantFindItem
     }
 }
 
 impl std::fmt::Display for BuyResult {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::CANT_FIND_ITEM => f.write_str("CANT_FIND_ITEM"),
-            Self::ITEM_ALREADY_SOLD => f.write_str("ITEM_ALREADY_SOLD"),
-            Self::NOT_ENOUGHT_MONEY => f.write_str("NOT_ENOUGHT_MONEY"),
-            Self::SELLER_DONT_LIKE_YOU => f.write_str("SELLER_DONT_LIKE_YOU"),
-            Self::DISTANCE_TOO_FAR => f.write_str("DISTANCE_TOO_FAR"),
-            Self::ITEM_SOLD_OUT => f.write_str("ITEM_SOLD_OUT"),
-            Self::CANT_CARRY_MORE => f.write_str("CANT_CARRY_MORE"),
-            Self::RANK_REQUIRE => f.write_str("RANK_REQUIRE"),
-            Self::REPUTATION_REQUIRE => f.write_str("REPUTATION_REQUIRE"),
+            Self::CantFindItem => f.write_str("CantFindItem"),
+            Self::ItemAlreadySold => f.write_str("ItemAlreadySold"),
+            Self::NotEnoughtMoney => f.write_str("NotEnoughtMoney"),
+            Self::SellerDontLikeYou => f.write_str("SellerDontLikeYou"),
+            Self::DistanceTooFar => f.write_str("DistanceTooFar"),
+            Self::ItemSoldOut => f.write_str("ItemSoldOut"),
+            Self::CantCarryMore => f.write_str("CantCarryMore"),
+            Self::RankRequire => f.write_str("RankRequire"),
+            Self::ReputationRequire => f.write_str("ReputationRequire"),
         }
     }
 }
@@ -71,15 +71,15 @@ impl TryFrom<u8> for BuyResult {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::CANT_FIND_ITEM),
-            1 => Ok(Self::ITEM_ALREADY_SOLD),
-            2 => Ok(Self::NOT_ENOUGHT_MONEY),
-            4 => Ok(Self::SELLER_DONT_LIKE_YOU),
-            5 => Ok(Self::DISTANCE_TOO_FAR),
-            7 => Ok(Self::ITEM_SOLD_OUT),
-            8 => Ok(Self::CANT_CARRY_MORE),
-            11 => Ok(Self::RANK_REQUIRE),
-            12 => Ok(Self::REPUTATION_REQUIRE),
+            0 => Ok(Self::CantFindItem),
+            1 => Ok(Self::ItemAlreadySold),
+            2 => Ok(Self::NotEnoughtMoney),
+            4 => Ok(Self::SellerDontLikeYou),
+            5 => Ok(Self::DistanceTooFar),
+            7 => Ok(Self::ItemSoldOut),
+            8 => Ok(Self::CantCarryMore),
+            11 => Ok(Self::RankRequire),
+            12 => Ok(Self::ReputationRequire),
             v => Err(crate::errors::EnumError::new("BuyResult", v as u32),)
         }
     }

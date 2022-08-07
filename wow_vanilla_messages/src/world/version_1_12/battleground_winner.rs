@@ -11,17 +11,17 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BattlegroundWinner {
-    HORDE,
-    ALLIANCE,
-    NONE,
+    Horde,
+    Alliance,
+    None,
 }
 
 impl BattlegroundWinner {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::HORDE => 0x0,
-            Self::ALLIANCE => 0x1,
-            Self::NONE => 0x2,
+            Self::Horde => 0x0,
+            Self::Alliance => 0x1,
+            Self::None => 0x2,
         }
     }
 
@@ -29,16 +29,16 @@ impl BattlegroundWinner {
 
 impl Default for BattlegroundWinner {
     fn default() -> Self {
-        Self::HORDE
+        Self::Horde
     }
 }
 
 impl std::fmt::Display for BattlegroundWinner {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::HORDE => f.write_str("HORDE"),
-            Self::ALLIANCE => f.write_str("ALLIANCE"),
-            Self::NONE => f.write_str("NONE"),
+            Self::Horde => f.write_str("Horde"),
+            Self::Alliance => f.write_str("Alliance"),
+            Self::None => f.write_str("None"),
         }
     }
 }
@@ -47,9 +47,9 @@ impl TryFrom<u8> for BattlegroundWinner {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::HORDE),
-            1 => Ok(Self::ALLIANCE),
-            2 => Ok(Self::NONE),
+            0 => Ok(Self::Horde),
+            1 => Ok(Self::Alliance),
+            2 => Ok(Self::None),
             v => Err(crate::errors::EnumError::new("BattlegroundWinner", v as u32),)
         }
     }

@@ -66,7 +66,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_ZONEUPDATE0() {
         let expected = CMSG_ZONEUPDATE {
-            area: Area::ORGRIMMAR,
+            area: Area::Orgrimmar,
         };
 
         let header_size = 2 + 4;
@@ -91,7 +91,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_ZONEUPDATE0() {
         let expected = CMSG_ZONEUPDATE {
-            area: Area::ORGRIMMAR,
+            area: Area::Orgrimmar,
         };
 
         let header_size = 2 + 4;
@@ -116,7 +116,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_ZONEUPDATE0() {
         let expected = CMSG_ZONEUPDATE {
-            area: Area::ORGRIMMAR,
+            area: Area::Orgrimmar,
         };
 
         let header_size = 2 + 4;

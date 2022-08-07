@@ -23,41 +23,41 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Locale {
-    EN_GB,
-    EN_US,
-    ES_MX,
-    PT_BR,
-    FR_FR,
-    DE_DE,
-    ES_ES,
-    PT_PT,
-    IT_IT,
-    RU_RU,
-    KO_KR,
-    ZH_TW,
-    EN_TW,
-    EN_CN,
-    OTHER(u32),
+    EnGb,
+    EnUs,
+    EsMx,
+    PtBr,
+    FrFr,
+    DeDe,
+    EsEs,
+    PtPt,
+    ItIt,
+    RuRu,
+    KoKr,
+    ZhTw,
+    EnTw,
+    EnCn,
+    Other(u32),
 }
 
 impl Locale {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::EN_GB => 0x656e4742,
-            Self::EN_US => 0x656e5553,
-            Self::ES_MX => 0x65734d58,
-            Self::PT_BR => 0x70744252,
-            Self::FR_FR => 0x66724652,
-            Self::DE_DE => 0x64654445,
-            Self::ES_ES => 0x65734553,
-            Self::PT_PT => 0x70745054,
-            Self::IT_IT => 0x69744954,
-            Self::RU_RU => 0x72755255,
-            Self::KO_KR => 0x6b6f4b52,
-            Self::ZH_TW => 0x7a685457,
-            Self::EN_TW => 0x656e5457,
-            Self::EN_CN => 0x656e434e,
-            Self::OTHER(v) => *v,
+            Self::EnGb => 0x656e4742,
+            Self::EnUs => 0x656e5553,
+            Self::EsMx => 0x65734d58,
+            Self::PtBr => 0x70744252,
+            Self::FrFr => 0x66724652,
+            Self::DeDe => 0x64654445,
+            Self::EsEs => 0x65734553,
+            Self::PtPt => 0x70745054,
+            Self::ItIt => 0x69744954,
+            Self::RuRu => 0x72755255,
+            Self::KoKr => 0x6b6f4b52,
+            Self::ZhTw => 0x7a685457,
+            Self::EnTw => 0x656e5457,
+            Self::EnCn => 0x656e434e,
+            Self::Other(v) => *v,
         }
     }
 
@@ -65,28 +65,28 @@ impl Locale {
 
 impl Default for Locale {
     fn default() -> Self {
-        Self::EN_GB
+        Self::EnGb
     }
 }
 
 impl std::fmt::Display for Locale {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::EN_GB => f.write_str("EN_GB"),
-            Self::EN_US => f.write_str("EN_US"),
-            Self::ES_MX => f.write_str("ES_MX"),
-            Self::PT_BR => f.write_str("PT_BR"),
-            Self::FR_FR => f.write_str("FR_FR"),
-            Self::DE_DE => f.write_str("DE_DE"),
-            Self::ES_ES => f.write_str("ES_ES"),
-            Self::PT_PT => f.write_str("PT_PT"),
-            Self::IT_IT => f.write_str("IT_IT"),
-            Self::RU_RU => f.write_str("RU_RU"),
-            Self::KO_KR => f.write_str("KO_KR"),
-            Self::ZH_TW => f.write_str("ZH_TW"),
-            Self::EN_TW => f.write_str("EN_TW"),
-            Self::EN_CN => f.write_str("EN_CN"),
-            Self::OTHER(v) => f.write_fmt(format_args!("OTHER({})", v)),
+            Self::EnGb => f.write_str("EnGb"),
+            Self::EnUs => f.write_str("EnUs"),
+            Self::EsMx => f.write_str("EsMx"),
+            Self::PtBr => f.write_str("PtBr"),
+            Self::FrFr => f.write_str("FrFr"),
+            Self::DeDe => f.write_str("DeDe"),
+            Self::EsEs => f.write_str("EsEs"),
+            Self::PtPt => f.write_str("PtPt"),
+            Self::ItIt => f.write_str("ItIt"),
+            Self::RuRu => f.write_str("RuRu"),
+            Self::KoKr => f.write_str("KoKr"),
+            Self::ZhTw => f.write_str("ZhTw"),
+            Self::EnTw => f.write_str("EnTw"),
+            Self::EnCn => f.write_str("EnCn"),
+            Self::Other(v) => f.write_fmt(format_args!("Other({})", v)),
         }
     }
 }
@@ -94,21 +94,21 @@ impl std::fmt::Display for Locale {
 impl From<u32> for Locale {
     fn from(value: u32) -> Self {
         match value {
-            1701726018 => Self::EN_GB,
-            1701729619 => Self::EN_US,
-            1702055256 => Self::ES_MX,
-            1886667346 => Self::PT_BR,
-            1718765138 => Self::FR_FR,
-            1684358213 => Self::DE_DE,
-            1702053203 => Self::ES_ES,
-            1886670932 => Self::PT_PT,
-            1769228628 => Self::IT_IT,
-            1920291413 => Self::RU_RU,
-            1802455890 => Self::KO_KR,
-            2053657687 => Self::ZH_TW,
-            1701729367 => Self::EN_TW,
-            1701725006 => Self::EN_CN,
-            v => Self::OTHER(v)
+            1701726018 => Self::EnGb,
+            1701729619 => Self::EnUs,
+            1702055256 => Self::EsMx,
+            1886667346 => Self::PtBr,
+            1718765138 => Self::FrFr,
+            1684358213 => Self::DeDe,
+            1702053203 => Self::EsEs,
+            1886670932 => Self::PtPt,
+            1769228628 => Self::ItIt,
+            1920291413 => Self::RuRu,
+            1802455890 => Self::KoKr,
+            2053657687 => Self::ZhTw,
+            1701729367 => Self::EnTw,
+            1701725006 => Self::EnCn,
+            v => Self::Other(v)
         }
     }
 }

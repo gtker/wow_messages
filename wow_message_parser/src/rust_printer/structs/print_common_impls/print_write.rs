@@ -288,7 +288,7 @@ fn print_write_flag_if_statement(
             s.open_curly(format!(
                 "{ty}::{enumerator}",
                 ty = rd.ty_name(),
-                enumerator = enumerator.name(),
+                enumerator = enumerator.rust_name(),
             ));
 
             for m in enumerator.members_in_struct() {
@@ -380,7 +380,7 @@ fn print_write_if_enum_statement(
             s.wln(format!(
                 "{new_enum}::{variant} => {{}}",
                 new_enum = rd.ty_name(),
-                variant = enumerator.name()
+                variant = enumerator.rust_name()
             ));
 
             continue;
@@ -389,7 +389,7 @@ fn print_write_if_enum_statement(
         s.open_curly(format!(
             "{new_enum}::{variant}",
             new_enum = rd.ty_name(),
-            variant = enumerator.name(),
+            variant = enumerator.rust_name(),
         ));
         for m in enumerator.members_in_struct() {
             s.wln(format!("{},", m.name()));

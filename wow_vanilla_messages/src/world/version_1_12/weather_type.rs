@@ -12,19 +12,19 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum WeatherType {
-    FINE,
-    RAIN,
-    SNOW,
-    STORM,
+    Fine,
+    Rain,
+    Snow,
+    Storm,
 }
 
 impl WeatherType {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::FINE => 0x0,
-            Self::RAIN => 0x1,
-            Self::SNOW => 0x2,
-            Self::STORM => 0x3,
+            Self::Fine => 0x0,
+            Self::Rain => 0x1,
+            Self::Snow => 0x2,
+            Self::Storm => 0x3,
         }
     }
 
@@ -32,17 +32,17 @@ impl WeatherType {
 
 impl Default for WeatherType {
     fn default() -> Self {
-        Self::FINE
+        Self::Fine
     }
 }
 
 impl std::fmt::Display for WeatherType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::FINE => f.write_str("FINE"),
-            Self::RAIN => f.write_str("RAIN"),
-            Self::SNOW => f.write_str("SNOW"),
-            Self::STORM => f.write_str("STORM"),
+            Self::Fine => f.write_str("Fine"),
+            Self::Rain => f.write_str("Rain"),
+            Self::Snow => f.write_str("Snow"),
+            Self::Storm => f.write_str("Storm"),
         }
     }
 }
@@ -51,10 +51,10 @@ impl TryFrom<u32> for WeatherType {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::FINE),
-            1 => Ok(Self::RAIN),
-            2 => Ok(Self::SNOW),
-            3 => Ok(Self::STORM),
+            0 => Ok(Self::Fine),
+            1 => Ok(Self::Rain),
+            2 => Ok(Self::Snow),
+            3 => Ok(Self::Storm),
             v => Err(crate::errors::EnumError::new("WeatherType", v as u32),)
         }
     }

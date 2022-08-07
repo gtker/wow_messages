@@ -364,7 +364,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                                 ".set_{}({}::{}",
                                 parent_enum_name,
                                 parent_ty_name,
-                                enumerator.name()
+                                enumerator.rust_name()
                             ));
 
                             for m in enumerator.members_in_struct() {
@@ -396,7 +396,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
             s.w_no_indent(format!(
                 "{ty}::{enumerator}",
                 ty = m.ty(),
-                enumerator = i.original_string(),
+                enumerator = i.rust_name(),
             ));
 
             let subvars = match m.ty() {

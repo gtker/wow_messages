@@ -14,23 +14,23 @@ use std::convert::{TryFrom, TryInto};
 pub enum InstanceResetFailedReason {
     /// at least one player is in the instance
     ///
-    GENERAL,
+    General,
     /// at least one player is offline
     ///
-    OFFLINE,
+    Offline,
     /// at least one player try to enter the instance (being teleported in)
     ///
-    ZONING,
-    SILENTLY,
+    Zoning,
+    Silently,
 }
 
 impl InstanceResetFailedReason {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::GENERAL => 0x0,
-            Self::OFFLINE => 0x1,
-            Self::ZONING => 0x2,
-            Self::SILENTLY => 0x3,
+            Self::General => 0x0,
+            Self::Offline => 0x1,
+            Self::Zoning => 0x2,
+            Self::Silently => 0x3,
         }
     }
 
@@ -38,17 +38,17 @@ impl InstanceResetFailedReason {
 
 impl Default for InstanceResetFailedReason {
     fn default() -> Self {
-        Self::GENERAL
+        Self::General
     }
 }
 
 impl std::fmt::Display for InstanceResetFailedReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::GENERAL => f.write_str("GENERAL"),
-            Self::OFFLINE => f.write_str("OFFLINE"),
-            Self::ZONING => f.write_str("ZONING"),
-            Self::SILENTLY => f.write_str("SILENTLY"),
+            Self::General => f.write_str("General"),
+            Self::Offline => f.write_str("Offline"),
+            Self::Zoning => f.write_str("Zoning"),
+            Self::Silently => f.write_str("Silently"),
         }
     }
 }
@@ -57,10 +57,10 @@ impl TryFrom<u8> for InstanceResetFailedReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            0 => Ok(Self::GENERAL),
-            1 => Ok(Self::OFFLINE),
-            2 => Ok(Self::ZONING),
-            3 => Ok(Self::SILENTLY),
+            0 => Ok(Self::General),
+            1 => Ok(Self::Offline),
+            2 => Ok(Self::Zoning),
+            3 => Ok(Self::Silently),
             v => Err(crate::errors::EnumError::new("InstanceResetFailedReason", v as u32),)
         }
     }

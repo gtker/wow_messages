@@ -260,7 +260,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    realm_type: RealmType::PlayerVsEnvironment,
                     locked: 0x0,
                     flag: Realm_RealmFlag::empty()
                         .set_INVALID()
@@ -268,9 +268,9 @@ mod test {
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
-                    population: Population::RED_FULL,
+                    population: Population::RedFull,
                     number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::DEFAULT,
+                    category: RealmCategory::Default,
                     realm_id: 0x2,
                 },
             ],
@@ -300,7 +300,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    realm_type: RealmType::PlayerVsEnvironment,
                     locked: 0x0,
                     flag: Realm_RealmFlag::empty()
                         .set_INVALID()
@@ -308,9 +308,9 @@ mod test {
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
-                    population: Population::RED_FULL,
+                    population: Population::RedFull,
                     number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::DEFAULT,
+                    category: RealmCategory::Default,
                     realm_id: 0x2,
                 },
             ],
@@ -340,7 +340,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    realm_type: RealmType::PlayerVsEnvironment,
                     locked: 0x0,
                     flag: Realm_RealmFlag::empty()
                         .set_INVALID()
@@ -348,9 +348,9 @@ mod test {
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
-                    population: Population::RED_FULL,
+                    population: Population::RedFull,
                     number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::DEFAULT,
+                    category: RealmCategory::Default,
                     realm_id: 0x2,
                 },
             ],
@@ -384,7 +384,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    realm_type: RealmType::PlayerVsEnvironment,
                     locked: 0x0,
                     flag: Realm_RealmFlag::empty()
                         .set_SPECIFY_BUILD(Realm_RealmFlag_SPECIFY_BUILD {
@@ -398,9 +398,9 @@ mod test {
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
-                    population: Population::RED_FULL,
+                    population: Population::RedFull,
                     number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::DEFAULT,
+                    category: RealmCategory::Default,
                     realm_id: 0x2,
                 },
             ],
@@ -430,7 +430,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    realm_type: RealmType::PlayerVsEnvironment,
                     locked: 0x0,
                     flag: Realm_RealmFlag::empty()
                         .set_SPECIFY_BUILD(Realm_RealmFlag_SPECIFY_BUILD {
@@ -444,9 +444,9 @@ mod test {
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
-                    population: Population::RED_FULL,
+                    population: Population::RedFull,
                     number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::DEFAULT,
+                    category: RealmCategory::Default,
                     realm_id: 0x2,
                 },
             ],
@@ -476,7 +476,7 @@ mod test {
         let expected = CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
-                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    realm_type: RealmType::PlayerVsEnvironment,
                     locked: 0x0,
                     flag: Realm_RealmFlag::empty()
                         .set_SPECIFY_BUILD(Realm_RealmFlag_SPECIFY_BUILD {
@@ -490,9 +490,9 @@ mod test {
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
-                    population: Population::RED_FULL,
+                    population: Population::RedFull,
                     number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::DEFAULT,
+                    category: RealmCategory::Default,
                     realm_id: 0x2,
                 },
             ],
