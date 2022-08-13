@@ -7,5 +7,23 @@ smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {
         comment = "cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39";
     }
     f32 speed;
+} {
+    description = "Tells the client that the running speed has changed.";
+    description = "Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].";
+    description = "vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.";
+}
+
+test SMSG_FORCE_RUN_SPEED_CHANGE {
+    guid = 6;
+    move_event = 0;
+    speed = 7;
+} [
+    0x00, 0x0c, /* size */
+    0xE2, 0x00, /* opcode */
+    0x01, 0x06, /* guid */
+    0x00, 0x00, 0x00, 0x00, /* move_event */
+    0x00, 0x00, 0xe0, 0x40 /* speed */
+] {
+    description = "Force speed to 7";
 }
 

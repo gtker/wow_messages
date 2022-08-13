@@ -84354,6 +84354,7 @@
         }
       ],
       "tags": {
+        "description": "Tells the client that the running speed has changed.\nClient replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].\nvmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.",
         "version": {
           "type": "world",
           "versions": [
@@ -84366,7 +84367,77 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_FORCE_RUN_SPEED_CHANGE",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 6,
+                  "original_string": "6"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "move_event",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "speed",
+              "verified_value": {
+                "FloatingNumber": {
+                  "value": 7.0,
+                  "original_string": "7"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            12,
+            226,
+            0,
+            1,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            224,
+            64
+          ],
+          "tags": {
+            "description": "Force speed to 7",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm",
+            "start_position": 16
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm",
         "start_position": 3
