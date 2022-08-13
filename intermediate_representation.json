@@ -102998,6 +102998,7 @@
         }
       ],
       "tags": {
+        "description": "Informs the client that the run speed of a unit has changed.\nMangos sends this to third parties that aren't having their speed changed and [SMSG_FORCE_RUN_SPEED_CHANGE] to the client that has their run speed changed.",
         "version": {
           "type": "world",
           "versions": [
@@ -103010,7 +103011,63 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_SPLINE_SET_RUN_SPEED",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 6,
+                  "original_string": "6"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "speed",
+              "verified_value": {
+                "FloatingNumber": {
+                  "value": 7.0,
+                  "original_string": "7"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            8,
+            254,
+            2,
+            1,
+            6,
+            0,
+            0,
+            224,
+            64
+          ],
+          "tags": {
+            "description": "Object with guid 6 having run speed changed to 7.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_spline_run_speed.wowm",
+            "start_position": 11
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/smsg/smsg_spline_run_speed.wowm",
         "start_position": 3
