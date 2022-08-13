@@ -5,5 +5,39 @@ cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
     u32 counter;
     MovementInfo info;
     f32 new_speed;
+} {
+    description = "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].";
+}
+
+test CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
+    guid = 6;
+    counter = 0;
+    info = {
+        flags = 0;
+        timestamp = 32905024;
+        position = {
+            x = -8938.948;
+            y = -124.26177;
+            z = 82.90929;
+        };
+        orientation = 3.99377;
+        fall_time = 0.000000000000000000000000000000000000000001156;
+    };
+    new_speed = 7;
+} [
+    0x00, 0x30, /* size */
+    0xE3, 0x00, 0x00, 0x00, /* opcode */
+    0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* guid */
+    0x00, 0x00, 0x00, 0x00, /* counter */
+    0x00, 0x00, 0x00, 0x00, /* MovementInfo.flags */
+    0x40, 0x17, 0xf6, 0x01, /* MovementInfo.timestamp */
+    0xcb, 0xab, 0x0b, 0xc6, /* MovementInfo.Vector3d.x */
+    0x07, 0x86, 0xf8, 0xc2, /* MovementInfo.Vector3d.y */
+    0x8e, 0xd1, 0xa5, 0x42, /* MovementInfo.Vector3d.z */
+    0xed, 0x99, 0x7f, 0x40, /* MovementInfo.orientation */
+    0x39, 0x03, 0x00, 0x00, /* MovementInfo.fall_time */
+    0x00, 0x00, 0xe0, 0x40 /* new_speed */
+] {
+    description = "Client responds to having movement speed set to 7 in Northshire Abbey.";
 }
 

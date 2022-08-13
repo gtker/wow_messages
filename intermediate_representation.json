@@ -50552,6 +50552,7 @@
         }
       ],
       "tags": {
+        "description": "Sent to acknowledge the new speed. Reply to [SMSG_FORCE_RUN_SPEED_CHANGE].",
         "version": {
           "type": "world",
           "versions": [
@@ -50564,7 +50565,204 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_FORCE_RUN_SPEED_CHANGE_ACK",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 6,
+                  "original_string": "6"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "counter",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "info",
+              "verified_value": {
+                "SubObject": {
+                  "ty_name": "MovementInfo",
+                  "members": [
+                    {
+                      "variable_name": "flags",
+                      "verified_value": {
+                        "Flag": [
+                          "0"
+                        ]
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "timestamp",
+                      "verified_value": {
+                        "Number": {
+                          "value": 32905024,
+                          "original_string": "32905024"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "position",
+                      "verified_value": {
+                        "SubObject": {
+                          "ty_name": "Vector3d",
+                          "members": [
+                            {
+                              "variable_name": "x",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -8938.948,
+                                  "original_string": "-8938.948"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "y",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": -124.26177,
+                                  "original_string": "-124.26177"
+                                }
+                              },
+                              "tags": {}
+                            },
+                            {
+                              "variable_name": "z",
+                              "verified_value": {
+                                "FloatingNumber": {
+                                  "value": 82.90929,
+                                  "original_string": "82.90929"
+                                }
+                              },
+                              "tags": {}
+                            }
+                          ]
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "orientation",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 3.99377,
+                          "original_string": "3.99377"
+                        }
+                      },
+                      "tags": {}
+                    },
+                    {
+                      "variable_name": "fall_time",
+                      "verified_value": {
+                        "FloatingNumber": {
+                          "value": 1.156e-42,
+                          "original_string": "0.000000000000000000000000000000000000000001156"
+                        }
+                      },
+                      "tags": {}
+                    }
+                  ]
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "new_speed",
+              "verified_value": {
+                "FloatingNumber": {
+                  "value": 7.0,
+                  "original_string": "7"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            48,
+            227,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            64,
+            23,
+            246,
+            1,
+            203,
+            171,
+            11,
+            198,
+            7,
+            134,
+            248,
+            194,
+            142,
+            209,
+            165,
+            66,
+            237,
+            153,
+            127,
+            64,
+            57,
+            3,
+            0,
+            0,
+            0,
+            0,
+            224,
+            64
+          ],
+          "tags": {
+            "description": "Client responds to having movement speed set to 7 in Northshire Abbey.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm",
+            "start_position": 12
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm",
         "start_position": 3
