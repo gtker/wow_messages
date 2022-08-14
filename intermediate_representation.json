@@ -59436,7 +59436,7 @@
       "members": [
         {
           "Definition": {
-            "name": "guid",
+            "name": "target",
             "member_type": "Guid",
             "constant_value": null,
             "used_as_size_in": null,
@@ -59446,6 +59446,7 @@
         }
       ],
       "tags": {
+        "description": "Sets the current target.",
         "version": {
           "type": "world",
           "versions": [
@@ -59458,7 +59459,57 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_SET_SELECTION",
+          "members": [
+            {
+              "variable_name": "target",
+              "verified_value": {
+                "Guid": {
+                  "value": 6,
+                  "original_string": "6"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            12,
+            61,
+            1,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "description": "Client sets target to GUID 6.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/client_set/cmsg_set_selection.wowm",
+            "start_position": 9
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/client_set/cmsg_set_selection.wowm",
         "start_position": 3
