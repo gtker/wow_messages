@@ -13,6 +13,17 @@ impl Guid {
         Self { guid }
     }
 
+    /// Guid with 0 value.
+    ///
+    /// Client uses this to mean different things, including things like no target selected.
+    pub fn zero() -> Self {
+        Self::new(0)
+    }
+
+    pub fn is_zero(&self) -> bool {
+        self.guid == 0
+    }
+
     pub fn guid(&self) -> u64 {
         self.guid
     }
