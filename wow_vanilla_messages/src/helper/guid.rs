@@ -1,3 +1,4 @@
+use std::fmt::{Display, Formatter};
 use std::io::{Read, Write};
 
 use crate::util::{read_u64_le, read_u8_le};
@@ -72,6 +73,12 @@ impl Guid {
 impl From<u64> for Guid {
     fn from(v: u64) -> Self {
         Self::new(v)
+    }
+}
+
+impl Display for Guid {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        u64::fmt(&self.guid, f)
     }
 }
 
