@@ -54868,7 +54868,97 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_MESSAGECHAT",
+          "members": [
+            {
+              "variable_name": "chat_type",
+              "verified_value": {
+                "Enum": {
+                  "value": 0,
+                  "original_string": "SAY"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "language",
+              "verified_value": {
+                "Enum": {
+                  "value": 7,
+                  "original_string": "COMMON"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "message",
+              "verified_value": {
+                "String": "This is a say message."
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            35,
+            149,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            0,
+            0,
+            84,
+            104,
+            105,
+            115,
+            32,
+            105,
+            115,
+            32,
+            97,
+            32,
+            115,
+            97,
+            121,
+            32,
+            109,
+            101,
+            115,
+            115,
+            97,
+            103,
+            101,
+            46,
+            0
+          ],
+          "tags": {
+            "description": "Say message.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm",
+            "start_position": 21
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm",
         "start_position": 10

@@ -49,3 +49,18 @@ Else If chat_type is equal to `CHANNEL`:
 | - | - / - | CString | channel |  |  |
 | - | - / - | CString | message |  |  |
 
+### Examples
+
+#### Example 1
+
+##### Description
+
+Say message.
+
+```c
+0, 35, // size
+149, 0, 0, 0, // opcode (149)
+0, 0, 0, 0, // chat_type: ChatType SAY (0x00)
+7, 0, 0, 0, // language: Language COMMON (7)
+84, 104, 105, 115, 32, 105, 115, 32, 97, 32, 115, 97, 121, 32, 109, 101, 115, 115, 97, 103, 101, 46, 0, // message: CString
+```
