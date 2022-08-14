@@ -7,31 +7,35 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
      || chat_type == RAID_BOSS_EMOTE
      || chat_type == MONSTER_EMOTE) {
         SizedCString monster_name;
-        Guid monster_guid;
+        Guid monster;
     }
     else if (chat_type == SAY
           || chat_type == PARTY
           || chat_type == YELL) {
-        Guid sender_guid1 {
+        Guid speech_bubble_credit {
+            description = "This character will have the speech bubble above their head.";
+            comment = "0 value credits same as `chat_credit`. Invalid value credits no one.";
             comment = "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same";
         }
-        Guid sender_guid2 {
+        Guid chat_credit {
+            description = "This character will be appear to say this in the chat box.";
+            comment = "0 value credits no name.";
             comment = "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same";
         }
     }
     else if (chat_type == MONSTER_SAY
           || chat_type == MONSTER_YELL) {
-        Guid sender_guid3;
+        Guid sender1;
         SizedCString sender_name;
-        Guid target_guid;
+        Guid target;
     }
     else if (chat_type == CHANNEL) {
         CString channel_name;
         u32 player_rank;
-        Guid player_guid;
+        Guid player;
     }
     else {
-        Guid sender_guid4;
+        Guid sender2;
     }
     SizedCString message;
     PlayerChatTag tag;

@@ -17,27 +17,27 @@ use std::io::{Write, Read};
 ///         || chat_type == RAID_BOSS_EMOTE
 ///         || chat_type == MONSTER_EMOTE) {
 ///         SizedCString monster_name;
-///         Guid monster_guid;
+///         Guid monster;
 ///     }
 ///     else if (chat_type == SAY
 ///         || chat_type == PARTY
 ///         || chat_type == YELL) {
-///         Guid sender_guid1;
-///         Guid sender_guid2;
+///         Guid speech_bubble_credit;
+///         Guid chat_credit;
 ///     }
 ///     else if (chat_type == MONSTER_SAY
 ///         || chat_type == MONSTER_YELL) {
-///         Guid sender_guid3;
+///         Guid sender1;
 ///         SizedCString sender_name;
-///         Guid target_guid;
+///         Guid target;
 ///     }
 ///     else if (chat_type == CHANNEL) {
 ///         CString channel_name;
 ///         u32 player_rank;
-///         Guid player_guid;
+///         Guid player;
 ///     }
 ///     else {
-///         Guid sender_guid4;
+///         Guid sender2;
 ///     }
 ///     SizedCString message;
 ///     PlayerChatTag tag;
@@ -60,101 +60,101 @@ impl ServerMessage for SMSG_MESSAGECHAT {
 
         match &self.chat_type {
             SMSG_MESSAGECHAT_ChatType::Say {
-                sender_guid1,
-                sender_guid2,
+                chat_credit,
+                speech_bubble_credit,
             } => {
-                // sender_guid1: Guid
-                w.write_all(&sender_guid1.guid().to_le_bytes())?;
+                // speech_bubble_credit: Guid
+                w.write_all(&speech_bubble_credit.guid().to_le_bytes())?;
 
-                // sender_guid2: Guid
-                w.write_all(&sender_guid2.guid().to_le_bytes())?;
+                // chat_credit: Guid
+                w.write_all(&chat_credit.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Party {
-                sender_guid1,
-                sender_guid2,
+                chat_credit,
+                speech_bubble_credit,
             } => {
-                // sender_guid1: Guid
-                w.write_all(&sender_guid1.guid().to_le_bytes())?;
+                // speech_bubble_credit: Guid
+                w.write_all(&speech_bubble_credit.guid().to_le_bytes())?;
 
-                // sender_guid2: Guid
-                w.write_all(&sender_guid2.guid().to_le_bytes())?;
+                // chat_credit: Guid
+                w.write_all(&chat_credit.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Raid {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Guild {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Officer {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Yell {
-                sender_guid1,
-                sender_guid2,
+                chat_credit,
+                speech_bubble_credit,
             } => {
-                // sender_guid1: Guid
-                w.write_all(&sender_guid1.guid().to_le_bytes())?;
+                // speech_bubble_credit: Guid
+                w.write_all(&speech_bubble_credit.guid().to_le_bytes())?;
 
-                // sender_guid2: Guid
-                w.write_all(&sender_guid2.guid().to_le_bytes())?;
+                // chat_credit: Guid
+                w.write_all(&chat_credit.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Whisper {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::WhisperInform {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Emote {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::TextEmote {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::System {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::MonsterSay {
-                sender_guid3,
+                sender1,
                 sender_name,
-                target_guid,
+                target,
             } => {
-                // sender_guid3: Guid
-                w.write_all(&sender_guid3.guid().to_le_bytes())?;
+                // sender1: Guid
+                w.write_all(&sender1.guid().to_le_bytes())?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -162,17 +162,17 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // target_guid: Guid
-                w.write_all(&target_guid.guid().to_le_bytes())?;
+                // target: Guid
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::MonsterYell {
-                sender_guid3,
+                sender1,
                 sender_name,
-                target_guid,
+                target,
             } => {
-                // sender_guid3: Guid
-                w.write_all(&sender_guid3.guid().to_le_bytes())?;
+                // sender1: Guid
+                w.write_all(&sender1.guid().to_le_bytes())?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -180,12 +180,12 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // target_guid: Guid
-                w.write_all(&target_guid.guid().to_le_bytes())?;
+                // target: Guid
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::MonsterEmote {
-                monster_guid,
+                monster,
                 monster_name,
             } => {
                 // monster_name: SizedCString
@@ -194,13 +194,13 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // monster_guid: Guid
-                w.write_all(&monster_guid.guid().to_le_bytes())?;
+                // monster: Guid
+                w.write_all(&monster.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Channel {
                 channel_name,
-                player_guid,
+                player,
                 player_rank,
             } => {
                 // channel_name: CString
@@ -211,82 +211,82 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 // player_rank: u32
                 w.write_all(&player_rank.to_le_bytes())?;
 
-                // player_guid: Guid
-                w.write_all(&player_guid.guid().to_le_bytes())?;
+                // player: Guid
+                w.write_all(&player.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::ChannelJoin {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::ChannelLeave {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::ChannelList {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::ChannelNotice {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Afk {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Dnd {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Ignored {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Skill {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Loot {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
-                monster_guid,
+                monster,
                 monster_name,
             } => {
                 // monster_name: SizedCString
@@ -295,54 +295,54 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // monster_guid: Guid
-                w.write_all(&monster_guid.guid().to_le_bytes())?;
+                // monster: Guid
+                w.write_all(&monster.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::RaidLeader {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::RaidWarning {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
-                monster_guid,
+                monster,
                 monster_name,
             } => {
                 // monster_name: SizedCString
@@ -351,22 +351,22 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // monster_guid: Guid
-                w.write_all(&monster_guid.guid().to_le_bytes())?;
+                // monster: Guid
+                w.write_all(&monster.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Battleground {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
-                sender_guid4,
+                sender2,
             } => {
-                // sender_guid4: Guid
-                w.write_all(&sender_guid4.guid().to_le_bytes())?;
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
 
             }
         }
@@ -397,137 +397,137 @@ impl ServerMessage for SMSG_MESSAGECHAT {
 
         let chat_type_if = match chat_type {
             ChatType::Say => {
-                // sender_guid1: Guid
-                let sender_guid1 = Guid::read(r)?;
+                // speech_bubble_credit: Guid
+                let speech_bubble_credit = Guid::read(r)?;
 
-                // sender_guid2: Guid
-                let sender_guid2 = Guid::read(r)?;
+                // chat_credit: Guid
+                let chat_credit = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Say {
-                    sender_guid1,
-                    sender_guid2,
+                    chat_credit,
+                    speech_bubble_credit,
                 }
             }
             ChatType::Party => {
-                // sender_guid1: Guid
-                let sender_guid1 = Guid::read(r)?;
+                // speech_bubble_credit: Guid
+                let speech_bubble_credit = Guid::read(r)?;
 
-                // sender_guid2: Guid
-                let sender_guid2 = Guid::read(r)?;
+                // chat_credit: Guid
+                let chat_credit = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Party {
-                    sender_guid1,
-                    sender_guid2,
+                    chat_credit,
+                    speech_bubble_credit,
                 }
             }
             ChatType::Raid => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Raid {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::Guild => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Guild {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::Officer => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Officer {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::Yell => {
-                // sender_guid1: Guid
-                let sender_guid1 = Guid::read(r)?;
+                // speech_bubble_credit: Guid
+                let speech_bubble_credit = Guid::read(r)?;
 
-                // sender_guid2: Guid
-                let sender_guid2 = Guid::read(r)?;
+                // chat_credit: Guid
+                let chat_credit = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Yell {
-                    sender_guid1,
-                    sender_guid2,
+                    chat_credit,
+                    speech_bubble_credit,
                 }
             }
             ChatType::Whisper => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Whisper {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::WhisperInform => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::WhisperInform {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::Emote => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Emote {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::TextEmote => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::TextEmote {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::System => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::System {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::MonsterSay => {
-                // sender_guid3: Guid
-                let sender_guid3 = Guid::read(r)?;
+                // sender1: Guid
+                let sender1 = Guid::read(r)?;
 
                 // sender_name: SizedCString
                 let sender_name = crate::util::read_u32_le(r)?;
                 let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                 let sender_name = String::from_utf8(sender_name)?;;
-                // target_guid: Guid
-                let target_guid = Guid::read(r)?;
+                // target: Guid
+                let target = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterSay {
-                    sender_guid3,
+                    sender1,
                     sender_name,
-                    target_guid,
+                    target,
                 }
             }
             ChatType::MonsterYell => {
-                // sender_guid3: Guid
-                let sender_guid3 = Guid::read(r)?;
+                // sender1: Guid
+                let sender1 = Guid::read(r)?;
 
                 // sender_name: SizedCString
                 let sender_name = crate::util::read_u32_le(r)?;
                 let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                 let sender_name = String::from_utf8(sender_name)?;;
-                // target_guid: Guid
-                let target_guid = Guid::read(r)?;
+                // target: Guid
+                let target = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterYell {
-                    sender_guid3,
+                    sender1,
                     sender_name,
-                    target_guid,
+                    target,
                 }
             }
             ChatType::MonsterEmote => {
@@ -535,11 +535,11 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 let monster_name = crate::util::read_u32_le(r)?;
                 let monster_name = crate::util::read_sized_c_string_to_vec(r, monster_name)?;
                 let monster_name = String::from_utf8(monster_name)?;;
-                // monster_guid: Guid
-                let monster_guid = Guid::read(r)?;
+                // monster: Guid
+                let monster = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterEmote {
-                    monster_guid,
+                    monster,
                     monster_name,
                 }
             }
@@ -551,93 +551,93 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 // player_rank: u32
                 let player_rank = crate::util::read_u32_le(r)?;
 
-                // player_guid: Guid
-                let player_guid = Guid::read(r)?;
+                // player: Guid
+                let player = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Channel {
                     channel_name,
-                    player_guid,
+                    player,
                     player_rank,
                 }
             }
             ChatType::ChannelJoin => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelJoin {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::ChannelLeave => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelLeave {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::ChannelList => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelList {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::ChannelNotice => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelNotice {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::ChannelNoticeUser => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::Afk => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Afk {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::Dnd => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Dnd {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::Ignored => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Ignored {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::Skill => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Skill {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::Loot => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Loot {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::MonsterWhisper => {
@@ -645,60 +645,60 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 let monster_name = crate::util::read_u32_le(r)?;
                 let monster_name = crate::util::read_sized_c_string_to_vec(r, monster_name)?;
                 let monster_name = String::from_utf8(monster_name)?;;
-                // monster_guid: Guid
-                let monster_guid = Guid::read(r)?;
+                // monster: Guid
+                let monster = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
-                    monster_guid,
+                    monster,
                     monster_name,
                 }
             }
             ChatType::BgSystemNeutral => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::BgSystemAlliance => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::BgSystemHorde => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::RaidLeader => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidLeader {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::RaidWarning => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidWarning {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::RaidBossWhisper => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::RaidBossEmote => {
@@ -706,28 +706,28 @@ impl ServerMessage for SMSG_MESSAGECHAT {
                 let monster_name = crate::util::read_u32_le(r)?;
                 let monster_name = crate::util::read_sized_c_string_to_vec(r, monster_name)?;
                 let monster_name = String::from_utf8(monster_name)?;;
-                // monster_guid: Guid
-                let monster_guid = Guid::read(r)?;
+                // monster: Guid
+                let monster = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
-                    monster_guid,
+                    monster,
                     monster_name,
                 }
             }
             ChatType::Battleground => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Battleground {
-                    sender_guid4,
+                    sender2,
                 }
             }
             ChatType::BattlegroundLeader => {
-                // sender_guid4: Guid
-                let sender_guid4 = Guid::read(r)?;
+                // sender2: Guid
+                let sender2 = Guid::read(r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
-                    sender_guid4,
+                    sender2,
                 }
             }
         };
@@ -761,121 +761,121 @@ impl SMSG_MESSAGECHAT {
 #[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_MESSAGECHAT_ChatType {
     Say {
-        sender_guid1: Guid,
-        sender_guid2: Guid,
+        chat_credit: Guid,
+        speech_bubble_credit: Guid,
     },
     Party {
-        sender_guid1: Guid,
-        sender_guid2: Guid,
+        chat_credit: Guid,
+        speech_bubble_credit: Guid,
     },
     Raid {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     Guild {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     Officer {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     Yell {
-        sender_guid1: Guid,
-        sender_guid2: Guid,
+        chat_credit: Guid,
+        speech_bubble_credit: Guid,
     },
     Whisper {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     WhisperInform {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     Emote {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     TextEmote {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     System {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     MonsterSay {
-        sender_guid3: Guid,
+        sender1: Guid,
         sender_name: String,
-        target_guid: Guid,
+        target: Guid,
     },
     MonsterYell {
-        sender_guid3: Guid,
+        sender1: Guid,
         sender_name: String,
-        target_guid: Guid,
+        target: Guid,
     },
     MonsterEmote {
-        monster_guid: Guid,
+        monster: Guid,
         monster_name: String,
     },
     Channel {
         channel_name: String,
-        player_guid: Guid,
+        player: Guid,
         player_rank: u32,
     },
     ChannelJoin {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     ChannelLeave {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     ChannelList {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     ChannelNotice {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     ChannelNoticeUser {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     Afk {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     Dnd {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     Ignored {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     Skill {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     Loot {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     MonsterWhisper {
-        monster_guid: Guid,
+        monster: Guid,
         monster_name: String,
     },
     BgSystemNeutral {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     BgSystemAlliance {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     BgSystemHorde {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     RaidLeader {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     RaidWarning {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     RaidBossWhisper {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     RaidBossEmote {
-        monster_guid: Guid,
+        monster: Guid,
         monster_name: String,
     },
     Battleground {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
     BattlegroundLeader {
-        sender_guid4: Guid,
+        sender2: Guid,
     },
 }
 
@@ -883,8 +883,8 @@ impl Default for SMSG_MESSAGECHAT_ChatType {
     fn default() -> Self {
         // First enumerator without any fields
         Self::Say {
-            sender_guid1: Default::default(),
-            sender_guid2: Default::default(),
+            chat_credit: Default::default(),
+            speech_bubble_credit: Default::default(),
         }
     }
 }
@@ -936,238 +936,238 @@ impl SMSG_MESSAGECHAT_ChatType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Say {
-                sender_guid1,
-                sender_guid2,
+                chat_credit,
+                speech_bubble_credit,
             } => {
                 1
-                + 8 // sender_guid1: Guid
-                + 8 // sender_guid2: Guid
+                + 8 // chat_credit: Guid
+                + 8 // speech_bubble_credit: Guid
             }
             Self::Party {
-                sender_guid1,
-                sender_guid2,
+                chat_credit,
+                speech_bubble_credit,
             } => {
                 1
-                + 8 // sender_guid1: Guid
-                + 8 // sender_guid2: Guid
+                + 8 // chat_credit: Guid
+                + 8 // speech_bubble_credit: Guid
             }
             Self::Raid {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::Guild {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::Officer {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::Yell {
-                sender_guid1,
-                sender_guid2,
+                chat_credit,
+                speech_bubble_credit,
             } => {
                 1
-                + 8 // sender_guid1: Guid
-                + 8 // sender_guid2: Guid
+                + 8 // chat_credit: Guid
+                + 8 // speech_bubble_credit: Guid
             }
             Self::Whisper {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::WhisperInform {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::Emote {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::TextEmote {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::System {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::MonsterSay {
-                sender_guid3,
+                sender1,
                 sender_name,
-                target_guid,
+                target,
             } => {
                 1
-                + 8 // sender_guid3: Guid
+                + 8 // sender1: Guid
                 + sender_name.len() + 5 // sender_name: SizedCString
-                + 8 // target_guid: Guid
+                + 8 // target: Guid
             }
             Self::MonsterYell {
-                sender_guid3,
+                sender1,
                 sender_name,
-                target_guid,
+                target,
             } => {
                 1
-                + 8 // sender_guid3: Guid
+                + 8 // sender1: Guid
                 + sender_name.len() + 5 // sender_name: SizedCString
-                + 8 // target_guid: Guid
+                + 8 // target: Guid
             }
             Self::MonsterEmote {
-                monster_guid,
+                monster,
                 monster_name,
             } => {
                 1
-                + 8 // monster_guid: Guid
+                + 8 // monster: Guid
                 + monster_name.len() + 5 // monster_name: SizedCString
             }
             Self::Channel {
                 channel_name,
-                player_guid,
+                player,
                 player_rank,
             } => {
                 1
                 + channel_name.len() + 1 // channel_name: CString
-                + 8 // player_guid: Guid
+                + 8 // player: Guid
                 + 4 // player_rank: u32
             }
             Self::ChannelJoin {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::ChannelLeave {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::ChannelList {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::ChannelNotice {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::ChannelNoticeUser {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::Afk {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::Dnd {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::Ignored {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::Skill {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::Loot {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::MonsterWhisper {
-                monster_guid,
+                monster,
                 monster_name,
             } => {
                 1
-                + 8 // monster_guid: Guid
+                + 8 // monster: Guid
                 + monster_name.len() + 5 // monster_name: SizedCString
             }
             Self::BgSystemNeutral {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::BgSystemAlliance {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::BgSystemHorde {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::RaidLeader {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::RaidWarning {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::RaidBossWhisper {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::RaidBossEmote {
-                monster_guid,
+                monster,
                 monster_name,
             } => {
                 1
-                + 8 // monster_guid: Guid
+                + 8 // monster: Guid
                 + monster_name.len() + 5 // monster_name: SizedCString
             }
             Self::Battleground {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
             Self::BattlegroundLeader {
-                sender_guid4,
+                sender2,
             } => {
                 1
-                + 8 // sender_guid4: Guid
+                + 8 // sender2: Guid
             }
         }
     }

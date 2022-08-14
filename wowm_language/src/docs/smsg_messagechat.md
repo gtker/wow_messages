@@ -13,27 +13,27 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
         || chat_type == RAID_BOSS_EMOTE
         || chat_type == MONSTER_EMOTE) {
         SizedCString monster_name;
-        Guid monster_guid;
+        Guid monster;
     }
     else if (chat_type == SAY
         || chat_type == PARTY
         || chat_type == YELL) {
-        Guid sender_guid1;
-        Guid sender_guid2;
+        Guid speech_bubble_credit;
+        Guid chat_credit;
     }
     else if (chat_type == MONSTER_SAY
         || chat_type == MONSTER_YELL) {
-        Guid sender_guid3;
+        Guid sender1;
         SizedCString sender_name;
-        Guid target_guid;
+        Guid target;
     }
     else if (chat_type == CHANNEL) {
         CString channel_name;
         u32 player_rank;
-        Guid player_guid;
+        Guid player;
     }
     else {
-        Guid sender_guid4;
+        Guid sender2;
     }
     SizedCString message;
     PlayerChatTag tag;
@@ -64,7 +64,7 @@ is equal to `MONSTER_EMOTE`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | SizedCString | monster_name |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | monster_guid |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | monster |  |  |
 
 Else If chat_type is equal to `SAY` **or** 
 is equal to `PARTY` **or** 
@@ -72,17 +72,17 @@ is equal to `YELL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid1 |  | cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid2 |  | cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | speech_bubble_credit | This character will have the speech bubble above their head. | 0 value credits same as `chat_credit`. Invalid value credits no one.<br/>cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | chat_credit | This character will be appear to say this in the chat box. | 0 value credits no name.<br/>cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same |
 
 Else If chat_type is equal to `MONSTER_SAY` **or** 
 is equal to `MONSTER_YELL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid3 |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender1 |  |  |
 | - | - / - | SizedCString | sender_name |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
@@ -90,10 +90,10 @@ Else If chat_type is equal to `CHANNEL`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | CString | channel_name |  |  |
 | - | 4 / Little | u32 | player_rank |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | player_guid |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
 
 Else: 
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid4 |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender2 |  |  |
 | - | - / - | SizedCString | message |  |  |
 | - | ? / - | [PlayerChatTag](playerchattag.md) | tag |  |  |
 

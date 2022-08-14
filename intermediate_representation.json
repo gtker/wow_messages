@@ -91668,7 +91668,7 @@
               },
               {
                 "Definition": {
-                  "name": "monster_guid",
+                  "name": "monster",
                   "member_type": "Guid",
                   "constant_value": null,
                   "used_as_size_in": null,
@@ -91702,25 +91702,27 @@
                 "members": [
                   {
                     "Definition": {
-                      "name": "sender_guid1",
+                      "name": "speech_bubble_credit",
                       "member_type": "Guid",
                       "constant_value": null,
                       "used_as_size_in": null,
                       "used_in_if": false,
                       "tags": {
-                        "comment": "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same"
+                        "description": "This character will have the speech bubble above their head.",
+                        "comment": "0 value credits same as `chat_credit`. Invalid value credits no one.\ncmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same"
                       }
                     }
                   },
                   {
                     "Definition": {
-                      "name": "sender_guid2",
+                      "name": "chat_credit",
                       "member_type": "Guid",
                       "constant_value": null,
                       "used_as_size_in": null,
                       "used_in_if": false,
                       "tags": {
-                        "comment": "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same"
+                        "description": "This character will be appear to say this in the chat box.",
+                        "comment": "0 value credits no name.\ncmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same"
                       }
                     }
                   }
@@ -91753,7 +91755,7 @@
                 "members": [
                   {
                     "Definition": {
-                      "name": "sender_guid3",
+                      "name": "sender1",
                       "member_type": "Guid",
                       "constant_value": null,
                       "used_as_size_in": null,
@@ -91773,7 +91775,7 @@
                   },
                   {
                     "Definition": {
-                      "name": "target_guid",
+                      "name": "target",
                       "member_type": "Guid",
                       "constant_value": null,
                       "used_as_size_in": null,
@@ -91830,7 +91832,7 @@
                   },
                   {
                     "Definition": {
-                      "name": "player_guid",
+                      "name": "player",
                       "member_type": "Guid",
                       "constant_value": null,
                       "used_as_size_in": null,
@@ -91852,7 +91854,7 @@
             "else_statement_members": [
               {
                 "Definition": {
-                  "name": "sender_guid4",
+                  "name": "sender2",
                   "member_type": "Guid",
                   "constant_value": null,
                   "used_as_size_in": null,
