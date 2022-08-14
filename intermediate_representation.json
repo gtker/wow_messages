@@ -92000,7 +92000,142 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_MESSAGECHAT",
+          "members": [
+            {
+              "variable_name": "chat_type",
+              "verified_value": {
+                "Enum": {
+                  "value": 0,
+                  "original_string": "SAY"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "language",
+              "verified_value": {
+                "Enum": {
+                  "value": 0,
+                  "original_string": "UNIVERSAL"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "speech_bubble_credit",
+              "verified_value": {
+                "Guid": {
+                  "value": 5,
+                  "original_string": "5"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "chat_credit",
+              "verified_value": {
+                "Guid": {
+                  "value": 5,
+                  "original_string": "5"
+                }
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "message",
+              "verified_value": {
+                "String": "This is a say message."
+              },
+              "tags": {}
+            },
+            {
+              "variable_name": "tag",
+              "verified_value": {
+                "Enum": {
+                  "value": 0,
+                  "original_string": "NONE"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            51,
+            150,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            23,
+            0,
+            0,
+            0,
+            84,
+            104,
+            105,
+            115,
+            32,
+            105,
+            115,
+            32,
+            97,
+            32,
+            115,
+            97,
+            121,
+            32,
+            109,
+            101,
+            115,
+            115,
+            97,
+            103,
+            101,
+            46,
+            0,
+            0
+          ],
+          "tags": {
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/chat/smsg_messagechat.wowm",
+            "start_position": 44
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/chat/smsg_messagechat.wowm",
         "start_position": 3

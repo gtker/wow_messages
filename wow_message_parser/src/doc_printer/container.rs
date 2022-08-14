@@ -244,7 +244,21 @@ fn print_container_example_definition(
             }
         }
         Type::AuraMask => panic!("AuraMask example"),
-        Type::SizedCString => panic!("SizedCString example"),
+        Type::SizedCString => {
+            let b = bytes.take(4).cloned().collect::<Vec<u8>>();
+
+            for b in b {
+                s.w(format!("{}, ", b));
+            }
+            s.w(" // SizedCString.length");
+
+            let mut b = bytes.next().unwrap();
+            while *b != 0 {
+                s.w(format!("{}, ", b));
+                b = bytes.next().unwrap();
+            }
+            s.w(format!("{}, ", b));
+        }
     }
     s.wln(comment);
 }
