@@ -83479,6 +83479,8 @@
         }
       ],
       "tags": {
+        "description": "Immediately removes an object from the presence of the player.",
+        "comment": "Used by vmangos for logout.",
         "version": {
           "type": "world",
           "versions": [
@@ -83491,7 +83493,55 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "SMSG_DESTROY_OBJECT",
+          "members": [
+            {
+              "variable_name": "guid",
+              "verified_value": {
+                "Guid": {
+                  "value": 6,
+                  "original_string": "6"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            10,
+            170,
+            0,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "description": "Remove object with GUID 6 from game world.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/gameobject/smsg_destroy_object.wowm",
+            "start_position": 10
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_destroy_object.wowm",
         "start_position": 3

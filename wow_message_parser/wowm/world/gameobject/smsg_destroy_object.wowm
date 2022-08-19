@@ -2,5 +2,17 @@
 
 smsg SMSG_DESTROY_OBJECT = 0x00AA {
     Guid guid;
+} {
+    description = "Immediately removes an object from the presence of the player.";
+    comment = "Used by vmangos for logout.";
 }
 
+test SMSG_DESTROY_OBJECT {
+    guid = 6;
+} [
+  0x00, 0x0a, /* size */
+  0xAA, 0x00, /* opcode */
+  0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 /* guid */
+] {
+    description = "Remove object with GUID 6 from game world.";
+}
