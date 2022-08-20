@@ -45588,7 +45588,7 @@
         }
       ],
       "tags": {
-        "description": "Signals that client has right clicked an opponent and is in the attack stance.",
+        "description": "Signals that client has right clicked an opponent and is in the attack stance.\nServer should reply with [SMSG_ATTACKSTART].",
         "version": {
           "type": "world",
           "versions": [
@@ -45648,7 +45648,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm",
-            "start_position": 9
+            "start_position": 10
           }
         }
       ],

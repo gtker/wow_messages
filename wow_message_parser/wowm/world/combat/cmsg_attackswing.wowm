@@ -4,6 +4,7 @@ cmsg CMSG_ATTACKSWING = 0x0141 {
     Guid guid;
 } {
     description = "Signals that client has right clicked an opponent and is in the attack stance.";
+    description = "Server should reply with [SMSG_ATTACKSTART].";
 }
 
 test CMSG_ATTACKSWING {
