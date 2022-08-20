@@ -178,6 +178,7 @@ impl IfEdgeCases {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum IfEdgeCases_TEnum {
     Zero {
         basic1: u8,

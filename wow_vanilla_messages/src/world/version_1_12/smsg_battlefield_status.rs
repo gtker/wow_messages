@@ -6,6 +6,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_status.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_status.wowm#L21):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_STATUS = 0x02D4 {
@@ -4467,6 +4468,7 @@ impl SMSG_BATTLEFIELD_STATUS {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum SMSG_BATTLEFIELD_STATUS_StatusId {
     None,
     WaitQueue {
@@ -4539,6 +4541,7 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum SMSG_BATTLEFIELD_STATUS_Map {
     EasternKingdoms,
     Kalimdor {

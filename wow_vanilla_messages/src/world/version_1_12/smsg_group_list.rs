@@ -148,7 +148,8 @@ impl SMSG_GROUP_LIST {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct SMSG_GROUP_LIST_group_not_empty {
     pub loot_setting: GroupLootSetting,
     pub master_loot: Guid,

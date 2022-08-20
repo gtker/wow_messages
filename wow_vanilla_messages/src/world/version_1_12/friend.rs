@@ -6,6 +6,7 @@ use crate::world::version_1_12::FriendStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L11):
 /// ```text
 /// struct Friend {
@@ -191,6 +192,7 @@ impl Friend {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum Friend_FriendStatus {
     Offline,
     Online {

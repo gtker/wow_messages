@@ -159,7 +159,7 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
     pub info_type: u32,
     pub display_id: u32,

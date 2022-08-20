@@ -525,6 +525,7 @@ impl MovementBlock {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum MovementBlock_SplineFlag_FinalAngle {
     FinalAngle {
         angle: f32,

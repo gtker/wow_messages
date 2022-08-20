@@ -6,6 +6,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L35):
 /// ```text
 /// cmsg MSG_RAID_TARGET_UPDATE_Client = 0x0321 {
@@ -193,6 +194,7 @@ impl MSG_RAID_TARGET_UPDATE_Client {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     Unknown0 {
         target: Guid,

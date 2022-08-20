@@ -91,7 +91,7 @@ impl CMSG_GOSSIP_SELECT_OPTION {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_GOSSIP_SELECT_OPTION_unknown {
     pub code: String,
 }

@@ -89,28 +89,15 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     s.newline();
 }
 
-fn can_derive_default(members: &[RustMember]) -> bool {
-    for m in members {
-        if let RustType::Array { array, .. } = m.ty() {
-            if let (ArrayType::Integer(_), ArraySize::Fixed(size)) = (array.ty(), array.size()) {
-                if size > 32 {
-                    return false;
-                }
-            }
-        }
-    }
-
-    true
-}
-
 fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
     print_derives(
         s,
         &e.rust_object()
-            .members_in_struct()
+            .all_members()
+            .into_iter()
             .cloned()
             .collect::<Vec<_>>(),
-        e.is_constant_sized(),
+        false,
     );
 
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
@@ -148,15 +135,60 @@ fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
     );
 }
 
-pub fn print_derives(s: &mut Writer, members: &[RustMember], is_constant_sized: bool) {
+pub fn print_derives(s: &mut Writer, members: &[RustMember], is_enum_type: bool) {
     s.w("#[derive(Debug, PartialEq, Clone");
 
-    if can_derive_default(members) {
+    if !is_enum_type && can_derive_default(members) {
         s.w_no_indent(", Default");
     }
     s.wln_no_indent(")]");
 
-    if is_constant_sized {
+    if can_derive_copy(members) {
         s.wln("#[derive(Copy)]");
     }
+}
+
+fn can_derive_default(members: &[RustMember]) -> bool {
+    for m in members {
+        if let RustType::Array { array, .. } = m.ty() {
+            if let (ArrayType::Integer(_), ArraySize::Fixed(size)) = (array.ty(), array.size()) {
+                if size > 32 {
+                    return false;
+                }
+            }
+        }
+    }
+
+    true
+}
+
+fn can_derive_copy(members: &[RustMember]) -> bool {
+    for m in members {
+        match m.ty() {
+            RustType::UpdateMask
+            | RustType::AuraMask
+            | RustType::PackedGuid
+            | RustType::String
+            | RustType::CString
+            | RustType::SizedCString => return false,
+            RustType::Array { array, inner_sizes } => match array.size() {
+                ArraySize::Variable(_) | ArraySize::Endless => {
+                    return false;
+                }
+                ArraySize::Fixed(_) => {
+                    if !inner_sizes.is_constant() {
+                        return false;
+                    }
+                }
+            },
+            RustType::Struct { sizes, .. } => {
+                if !sizes.is_constant() {
+                    return false;
+                }
+            }
+            _ => {}
+        }
+    }
+
+    true
 }

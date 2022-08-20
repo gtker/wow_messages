@@ -4,6 +4,7 @@ use crate::world::version_1_12::UpdateFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:305`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L305):
 /// ```text
 /// struct FlagIfElseIf {
@@ -238,7 +239,8 @@ impl FlagIfElseIf_SimpleFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct FlagIfElseIf_SimpleFlag_One {
     pub if_one: u8,
 }
@@ -250,6 +252,7 @@ impl FlagIfElseIf_SimpleFlag_One {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum FlagIfElseIf_UpdateFlag_OneIf {
     OneIf {
         b_if: u8,
@@ -393,7 +396,8 @@ impl FlagIfElseIf_UpdateFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct FlagIfElseIf_UpdateFlag_EightIf {
     pub last_if: u8,
 }

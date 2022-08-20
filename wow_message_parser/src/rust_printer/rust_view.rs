@@ -285,6 +285,24 @@ pub struct RustEnumerator {
 }
 
 impl RustEnumerator {
+    pub fn all_members(&self) -> Vec<&RustMember> {
+        let mut v = Vec::new();
+
+        for m in self.members() {
+            match m.ty() {
+                RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
+                    for enumerator in enumerators {
+                        v.append(&mut enumerator.all_members());
+                    }
+                }
+                _ => {}
+            }
+
+            v.push(m);
+        }
+
+        v
+    }
     pub fn name(&self) -> &str {
         &self.name
     }
@@ -460,6 +478,24 @@ impl RustOptional {
     pub fn members_in_struct(&self) -> Vec<&RustMember> {
         self.members.iter().filter(|a| a.in_rust_type).collect()
     }
+    pub fn all_members(&self) -> Vec<&RustMember> {
+        let mut v = Vec::new();
+
+        for m in self.members() {
+            match m.ty() {
+                RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
+                    for enumerator in enumerators {
+                        v.append(&mut enumerator.all_members());
+                    }
+                }
+                _ => {}
+            }
+
+            v.push(m);
+        }
+
+        v
+    }
     pub fn constant_sized(&self) -> bool {
         self.members().iter().all(|a| a.constant_sized())
     }
@@ -482,6 +518,27 @@ pub struct RustObject {
 }
 
 impl RustObject {
+    pub fn all_members(&self) -> Vec<&RustMember> {
+        let mut v = Vec::new();
+
+        for m in self.members() {
+            match m.ty() {
+                RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
+                    for enumerator in enumerators {
+                        v.append(&mut enumerator.all_members());
+                    }
+                }
+                _ => {}
+            }
+            v.push(m);
+        }
+
+        if let Some(optional) = self.optional() {
+            v.append(&mut optional.all_members());
+        }
+
+        v
+    }
     pub fn name(&self) -> &str {
         &self.name
     }
@@ -815,6 +872,16 @@ pub struct RustDefiner {
 }
 
 impl RustDefiner {
+    pub fn all_members(&self) -> Vec<&RustMember> {
+        let mut v = Vec::new();
+        for enumerator in self.enumerators() {
+            for member in enumerator.all_members() {
+                v.push(member);
+            }
+        }
+
+        v
+    }
     pub fn variable_name(&self) -> &str {
         self.inner().name()
     }
@@ -838,6 +905,15 @@ impl RustDefiner {
     }
     pub fn is_simple(&self) -> bool {
         self.is_simple && !self.is_elseif
+    }
+    pub fn is_constant_sized(&self) -> bool {
+        for enumerator in self.enumerators() {
+            if !enumerator.is_constant_sized() {
+                return false;
+            }
+        }
+
+        true
     }
     pub fn is_elseif(&self) -> bool {
         self.is_elseif

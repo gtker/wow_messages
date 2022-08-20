@@ -5,6 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm#L5):
 /// ```text
 /// smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
@@ -4178,6 +4179,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
     Ok,
     CantEquipLevelI {

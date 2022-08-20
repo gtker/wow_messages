@@ -4,6 +4,7 @@ use crate::world::version_1_12::SimpleEnum;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:325`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L325):
 /// ```text
 /// struct EnumIfElseIfNested {
@@ -85,6 +86,7 @@ impl EnumIfElseIfNested {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum EnumIfElseIfNested_SimpleEnum {
     Zero {
         zero: u8,
@@ -133,6 +135,7 @@ impl EnumIfElseIfNested_SimpleEnum {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum EnumIfElseIfNested_NestedEnum {
     Nested {
         nested: u8,

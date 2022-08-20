@@ -599,7 +599,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub item_class: ItemClass,
     pub item_sub_class: u32,

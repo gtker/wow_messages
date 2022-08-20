@@ -3,6 +3,7 @@ use crate::world::version_1_12::SimpleEnum;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:93`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L93):
 /// ```text
 /// struct DoubleVariantEnum {
@@ -83,6 +84,7 @@ impl DoubleVariantEnum {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum DoubleVariantEnum_SimpleEnum {
     Zero {
         basic: u8,

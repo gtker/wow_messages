@@ -4,6 +4,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check_client.wowm#L3):
 /// ```text
 /// cmsg MSG_RAID_READY_CHECK_Client = 0x0322 {
@@ -66,7 +67,8 @@ impl MSG_RAID_READY_CHECK_Client {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct MSG_RAID_READY_CHECK_Client_answer {
     pub state: u8,
 }

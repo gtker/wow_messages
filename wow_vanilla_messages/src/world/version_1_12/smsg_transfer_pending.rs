@@ -5,6 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_transfer_pending.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_transfer_pending.wowm#L3):
 /// ```text
 /// smsg SMSG_TRANSFER_PENDING = 0x003F {
@@ -86,7 +87,8 @@ impl SMSG_TRANSFER_PENDING {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct SMSG_TRANSFER_PENDING_has_transport {
     pub transport: u32,
     pub transport_map: Map,

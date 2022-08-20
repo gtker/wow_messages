@@ -208,7 +208,7 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_CREATURE_QUERY_RESPONSE_found {
     pub name1: String,
     pub name2: String,

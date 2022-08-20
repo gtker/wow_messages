@@ -1,5 +1,6 @@
 use crate::rust_printer::rust_view::RustOptional;
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
+use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::Writer;
 
 pub fn print_optional(s: &mut Writer, optional: &RustOptional) {
@@ -9,7 +10,15 @@ pub fn print_optional(s: &mut Writer, optional: &RustOptional) {
 }
 
 fn print_declaration(s: &mut Writer, optional: &RustOptional) {
-    s.wln("#[derive(Debug, Clone, PartialEq, Default)]");
+    print_derives(
+        s,
+        &optional
+            .all_members()
+            .into_iter()
+            .cloned()
+            .collect::<Vec<_>>(),
+        false,
+    );
     s.new_struct(optional.ty(), |s| {
         for m in optional.members() {
             s.wln(format!("pub {name}: {ty},", name = m.name(), ty = m.ty(),));

@@ -310,6 +310,7 @@ impl Mail {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum Mail_MailType {
     Normal {
         sender: Guid,

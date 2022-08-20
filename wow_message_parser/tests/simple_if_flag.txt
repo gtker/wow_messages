@@ -3,6 +3,7 @@ use crate::world::version_1_12::SimpleFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:101`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L101):
 /// ```text
 /// struct SimpleIfFlag {
@@ -145,7 +146,8 @@ impl SimpleIfFlag_SimpleFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct SimpleIfFlag_SimpleFlag_Zero {
     pub basic: u8,
 }

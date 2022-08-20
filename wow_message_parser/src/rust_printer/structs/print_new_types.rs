@@ -272,11 +272,11 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
         print_derives(
             s,
             &enumerator
-                .members_in_struct()
+                .all_members()
                 .into_iter()
                 .cloned()
                 .collect::<Vec<_>>(),
-            enumerator.is_constant_sized(),
+            false,
         );
         s.new_struct(&new_type_name, |s| {
             for m in enumerator.members_in_struct() {
@@ -303,7 +303,11 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
 }
 
 fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner) {
-    s.wln("#[derive(Debug, PartialEq, Clone)]");
+    print_derives(
+        s,
+        &rd.all_members().into_iter().cloned().collect::<Vec<_>>(),
+        true,
+    );
     s.new_enum("pub", rd.ty_name(), |s| {
         for enumerator in rd.enumerators() {
             s.w(enumerator.rust_name());

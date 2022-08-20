@@ -496,6 +496,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[derive(Copy)]
 pub enum CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     None,
     Pin {
