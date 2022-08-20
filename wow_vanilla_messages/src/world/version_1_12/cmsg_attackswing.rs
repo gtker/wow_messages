@@ -6,6 +6,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
+/// Signals that client has right clicked an opponent and is in the attack stance.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm#L3):
 /// ```text
 /// cmsg CMSG_ATTACKSWING = 0x0141 {
@@ -56,7 +58,7 @@ mod test {
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x41, 0x01, 0x00, 0x00, 0x64, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_ATTACKSWING0() {
@@ -81,7 +83,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_ATTACKSWING0() {
@@ -106,7 +108,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_ATTACKSWING0() {

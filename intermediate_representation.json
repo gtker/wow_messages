@@ -45588,6 +45588,7 @@
         }
       ],
       "tags": {
+        "description": "Signals that client has right clicked an opponent and is in the attack stance.",
         "version": {
           "type": "world",
           "versions": [
@@ -45647,7 +45648,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm",
-            "start_position": 7
+            "start_position": 9
           }
         }
       ],
@@ -59119,6 +59120,7 @@
         }
       ],
       "tags": {
+        "description": "Says which weapon the client pulls out.",
         "version": {
           "type": "world",
           "versions": [
@@ -59131,7 +59133,53 @@
           ]
         }
       },
-      "tests": [],
+      "tests": [
+        {
+          "subject": "CMSG_SETSHEATHED",
+          "members": [
+            {
+              "variable_name": "sheathed",
+              "verified_value": {
+                "Enum": {
+                  "value": 1,
+                  "original_string": "MELEE"
+                }
+              },
+              "tags": {}
+            }
+          ],
+          "raw_bytes": [
+            0,
+            8,
+            224,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "tags": {
+            "description": "Client takes out melee weapon.",
+            "version": {
+              "type": "world",
+              "versions": [
+                {
+                  "Minor": [
+                    1,
+                    12
+                  ]
+                }
+              ]
+            }
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/world/client_set/cmsg_setsheathed.wowm",
+            "start_position": 17
+          }
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/client_set/cmsg_setsheathed.wowm",
         "start_position": 11

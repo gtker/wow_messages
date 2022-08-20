@@ -10,5 +10,16 @@ enum SheathState : u8 {
 
 cmsg CMSG_SETSHEATHED = 0x01E0 {
     (u32)SheathState sheathed;
+} {
+    description = "Says which weapon the client pulls out.";
 }
 
+test CMSG_SETSHEATHED {
+    sheathed = MELEE;
+} [
+    0x00, 0x08, /* size */
+    0xE0, 0x01, 0x00, 0x00, /* opcode */
+    0x01, 0x00, 0x00, 0x00 /* sheathed */
+] {
+    description = "Client takes out melee weapon.";
+}
