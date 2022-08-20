@@ -27,3 +27,16 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 
+### Examples
+
+#### Example 1
+
+##### Description
+
+Player starts attacking creature with GUID 100.
+
+```c
+0, 12, // size
+65, 1, 0, 0, // opcode (321)
+100, 0, 0, 0, 0, 0, 0, 0, // guid: Guid
+```
