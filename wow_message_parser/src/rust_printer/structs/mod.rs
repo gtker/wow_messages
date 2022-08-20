@@ -1,8 +1,8 @@
 use crate::container::{Container, ContainerType};
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
+use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
     print_docc_description_and_comment, Writer, CLIENT_MESSAGE_TRAIT_NAME,
     SERVER_MESSAGE_TRAIT_NAME,
@@ -89,9 +89,9 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     s.newline();
 }
 
-fn can_derive_default(e: &Container) -> bool {
-    for d in e.all_definitions() {
-        if let Type::Array(array) = d.ty() {
+fn can_derive_default(members: &[RustMember]) -> bool {
+    for m in members {
+        if let RustType::Array { array, .. } = m.ty() {
             if let (ArrayType::Integer(_), ArraySize::Fixed(size)) = (array.ty(), array.size()) {
                 if size > 32 {
                     return false;
@@ -104,15 +104,14 @@ fn can_derive_default(e: &Container) -> bool {
 }
 
 fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
-    s.w("#[derive(Debug, PartialEq, Clone");
-    if can_derive_default(e) {
-        s.w_no_indent(", Default");
-    }
-    s.wln_no_indent(")]");
-
-    if e.is_constant_sized() {
-        s.wln("#[derive(Copy)]");
-    }
+    print_derives(
+        s,
+        &e.rust_object()
+            .members_in_struct()
+            .cloned()
+            .collect::<Vec<_>>(),
+        e.is_constant_sized(),
+    );
 
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
 
@@ -147,4 +146,17 @@ fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
         },
         e.file_info(),
     );
+}
+
+pub fn print_derives(s: &mut Writer, members: &[RustMember], is_constant_sized: bool) {
+    s.w("#[derive(Debug, PartialEq, Clone");
+
+    if can_derive_default(members) {
+        s.w_no_indent(", Default");
+    }
+    s.wln_no_indent(")]");
+
+    if is_constant_sized {
+        s.wln("#[derive(Copy)]");
+    }
 }
