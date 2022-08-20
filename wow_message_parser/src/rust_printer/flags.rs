@@ -19,7 +19,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
 
     print_wowm_definition("flag", s, e);
 
-    s.wln("#[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]");
+    s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]");
     s.new_flag(e.name(), e.ty().rust_str(), |_| {});
 }
 

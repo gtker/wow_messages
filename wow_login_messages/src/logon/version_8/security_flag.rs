@@ -8,7 +8,7 @@
 /// }
 
 /// ```
-#[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
+#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct SecurityFlag {
     inner: u8,
 }
