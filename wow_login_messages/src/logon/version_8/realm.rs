@@ -445,7 +445,8 @@ impl Realm_RealmFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct Realm_RealmFlag_SpecifyBuild {
     pub version: Version,
 }

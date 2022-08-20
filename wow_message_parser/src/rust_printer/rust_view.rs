@@ -322,6 +322,36 @@ impl RustEnumerator {
     pub fn original_fields(&self) -> &[StructMember] {
         &self.original_fields
     }
+    pub fn is_constant_sized(&self) -> bool {
+        for m in &self.members {
+            match m.ty() {
+                RustType::UpdateMask
+                | RustType::AuraMask
+                | RustType::PackedGuid
+                | RustType::String
+                | RustType::CString
+                | RustType::SizedCString => return false,
+                RustType::Array { array, inner_sizes } => match array.size() {
+                    ArraySize::Variable(_) | ArraySize::Endless => {
+                        return false;
+                    }
+                    _ => {
+                        if !inner_sizes.is_constant() {
+                            return false;
+                        }
+                    }
+                },
+                RustType::Struct { sizes, .. } => {
+                    if !sizes.is_constant() {
+                        return false;
+                    }
+                }
+                _ => {}
+            }
+        }
+
+        true
+    }
 }
 
 #[derive(Debug, Clone)]

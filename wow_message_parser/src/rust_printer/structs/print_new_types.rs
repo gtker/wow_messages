@@ -1,6 +1,7 @@
 use crate::container::Container;
 use crate::rust_printer::rust_view::RustDefiner;
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
+use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::Writer;
 use crate::rust_printer::{get_new_flag_type_name, DefinerType};
 
@@ -268,7 +269,15 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
         }
 
         let new_type_name = get_new_flag_type_name(rd.ty_name(), enumerator.rust_name());
-        s.wln("#[derive(Debug, PartialEq, Clone)]");
+        print_derives(
+            s,
+            &enumerator
+                .members_in_struct()
+                .into_iter()
+                .cloned()
+                .collect::<Vec<_>>(),
+            enumerator.is_constant_sized(),
+        );
         s.new_struct(&new_type_name, |s| {
             for m in enumerator.members_in_struct() {
                 s.wln(format!(

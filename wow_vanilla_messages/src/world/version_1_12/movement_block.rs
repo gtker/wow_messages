@@ -1929,7 +1929,7 @@ impl MovementBlock_MovementFlags {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct MovementBlock_MovementFlags_OnTransport {
     pub transport: TransportInfo,
 }
@@ -1940,7 +1940,8 @@ impl MovementBlock_MovementFlags_OnTransport {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct MovementBlock_MovementFlags_Jumping {
     pub cos_angle: f32,
     pub sin_angle: f32,
@@ -1957,7 +1958,8 @@ impl MovementBlock_MovementFlags_Jumping {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct MovementBlock_MovementFlags_Swimming {
     pub pitch: f32,
 }
@@ -1968,7 +1970,7 @@ impl MovementBlock_MovementFlags_Swimming {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct MovementBlock_MovementFlags_SplineEnabled {
     pub duration: u32,
     pub final_node: Vector3d,
@@ -1990,7 +1992,8 @@ impl MovementBlock_MovementFlags_SplineEnabled {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct MovementBlock_MovementFlags_SplineElevation {
     pub spline_elevation: f32,
 }
@@ -2310,7 +2313,8 @@ impl MovementBlock_UpdateFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct MovementBlock_UpdateFlag_Transport {
     pub transport_progress_in_ms: u32,
 }
@@ -2321,7 +2325,7 @@ impl MovementBlock_UpdateFlag_Transport {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct MovementBlock_UpdateFlag_MeleeAttacking {
     pub guid: Guid,
 }
@@ -2332,7 +2336,8 @@ impl MovementBlock_UpdateFlag_MeleeAttacking {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct MovementBlock_UpdateFlag_HighGuid {
     pub unknown0: u32,
 }
@@ -2343,7 +2348,8 @@ impl MovementBlock_UpdateFlag_HighGuid {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct MovementBlock_UpdateFlag_All {
     pub unknown1: u32,
 }

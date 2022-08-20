@@ -798,7 +798,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
     pub pin_grid_seed: u32,
     pub pin_salt: [u8; 16],
@@ -811,7 +812,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
     pub unknown0: u8,
     pub unknown1: u8,
@@ -830,7 +832,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
     pub unknown5: u8,
 }
