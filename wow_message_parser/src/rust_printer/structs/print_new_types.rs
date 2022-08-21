@@ -42,7 +42,11 @@ fn print_flag_as_int(s: &mut Writer, rd: &RustDefiner) {
 }
 
 fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
-    s.wln("#[derive(Default, Debug, PartialEq, Clone)]");
+    print_derives(
+        s,
+        &rd.all_members().into_iter().cloned().collect::<Vec<_>>(),
+        false,
+    );
     s.new_flag(rd.ty_name(), rd.int_ty().rust_str(), |s| {
         for enumerator in rd.enumerators() {
             if !enumerator.should_not_be_in_flag_types() {

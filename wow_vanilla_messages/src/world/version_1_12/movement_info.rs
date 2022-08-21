@@ -190,7 +190,7 @@ impl MovementInfo {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct MovementInfo_MovementFlags {
     inner: u32,
     on_transport: Option<MovementInfo_MovementFlags_OnTransport>,

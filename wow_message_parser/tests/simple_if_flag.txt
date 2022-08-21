@@ -67,7 +67,8 @@ impl SimpleIfFlag {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct SimpleIfFlag_SimpleFlag {
     inner: u8,
     zero: Option<SimpleIfFlag_SimpleFlag_Zero>,

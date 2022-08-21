@@ -574,7 +574,8 @@ impl MovementBlock_SplineFlag_FinalAngle {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct MovementBlock_SplineFlag {
     inner: u32,
     final_angle: Option<MovementBlock_SplineFlag_FinalAngle>,
@@ -1243,7 +1244,7 @@ impl MovementBlock_SplineFlag {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct MovementBlock_MovementFlags {
     inner: u32,
     on_transport: Option<MovementBlock_MovementFlags_OnTransport>,
@@ -2077,7 +2078,7 @@ impl MovementBlock_UpdateFlag_Living {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct MovementBlock_UpdateFlag {
     inner: u8,
     transport: Option<MovementBlock_UpdateFlag_Transport>,

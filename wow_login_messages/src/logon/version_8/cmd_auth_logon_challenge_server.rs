@@ -666,7 +666,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     inner: u8,
     pin: Option<CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin>,

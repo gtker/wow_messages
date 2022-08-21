@@ -158,7 +158,8 @@ impl FlagIfElseIf {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct FlagIfElseIf_SimpleFlag {
     inner: u8,
     one: Option<FlagIfElseIf_SimpleFlag_One>,
@@ -301,7 +302,8 @@ impl FlagIfElseIf_UpdateFlag_OneIf {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct FlagIfElseIf_UpdateFlag {
     inner: u8,
     one_if: Option<FlagIfElseIf_UpdateFlag_OneIf>,

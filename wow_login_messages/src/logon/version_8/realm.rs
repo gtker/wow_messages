@@ -280,7 +280,8 @@ impl Realm {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct Realm_RealmFlag {
     inner: u8,
     specify_build: Option<Realm_RealmFlag_SpecifyBuild>,

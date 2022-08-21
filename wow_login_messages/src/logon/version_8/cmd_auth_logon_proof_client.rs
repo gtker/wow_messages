@@ -496,7 +496,8 @@ impl CMD_AUTH_LOGON_PROOF_Client {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     inner: u8,
     pin: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin>,

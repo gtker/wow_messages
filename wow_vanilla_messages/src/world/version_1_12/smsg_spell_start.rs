@@ -133,7 +133,8 @@ impl SMSG_SPELL_START {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
 pub struct SMSG_SPELL_START_CastFlags {
     inner: u16,
     ammo: Option<SMSG_SPELL_START_CastFlags_Ammo>,

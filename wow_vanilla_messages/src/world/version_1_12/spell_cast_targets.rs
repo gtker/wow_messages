@@ -316,7 +316,7 @@ impl SpellCastTargets {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags {
     inner: u16,
     unit: Option<SpellCastTargets_SpellCastTargetFlags_Unit>,

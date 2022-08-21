@@ -471,7 +471,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL {
     }
 }
 
-#[derive(Default, Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
     inner: u32,
     flag_status: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus>,
