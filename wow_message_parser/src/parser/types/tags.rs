@@ -14,6 +14,42 @@ pub enum WorldVersion {
     All,
 }
 
+impl WorldVersion {
+    pub fn overlaps(&self, other: &Self) -> bool {
+        match self {
+            WorldVersion::Major(m) => match other {
+                WorldVersion::Major(om)
+                | WorldVersion::Minor(om, _)
+                | WorldVersion::Patch(om, _, _)
+                | WorldVersion::Exact(om, _, _, _) => m == om,
+                WorldVersion::All => true,
+            },
+            WorldVersion::Minor(m, i) => match other {
+                WorldVersion::Major(om) => om == m,
+                WorldVersion::Minor(om, oi) => om == m && oi == i,
+                WorldVersion::Patch(om, oi, _) => om == m && oi == i,
+                WorldVersion::Exact(om, oi, _, _) => om == m && oi == i,
+                WorldVersion::All => true,
+            },
+            WorldVersion::Patch(m, i, p) => match other {
+                WorldVersion::Major(om) => om == m,
+                WorldVersion::Minor(om, oi) => om == m && oi == i,
+                WorldVersion::Patch(om, oi, op) => om == m && oi == i && op == p,
+                WorldVersion::Exact(om, oi, op, _) => om == m && oi == i && op == p,
+                WorldVersion::All => true,
+            },
+            WorldVersion::Exact(m, i, p, e) => match other {
+                WorldVersion::Major(om) => om == m,
+                WorldVersion::Minor(om, oi) => om == m && oi == i,
+                WorldVersion::Patch(om, oi, op) => om == m && oi == i && op == p,
+                WorldVersion::Exact(om, oi, op, oe) => om == m && oi == i && op == p && oe == e,
+                WorldVersion::All => true,
+            },
+            WorldVersion::All => true,
+        }
+    }
+}
+
 impl Display for WorldVersion {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
@@ -54,6 +90,12 @@ pub struct Tags {
 impl Tags {
     pub fn new() -> Self {
         Self::default()
+    }
+
+    pub fn new_with_tag(t: Tag) -> Self {
+        let mut s = Self::new();
+        s.push(t);
+        s
     }
 
     pub fn push(&mut self, t: Tag) {
@@ -183,32 +225,48 @@ impl Tags {
             return true;
         }
 
-        for t in &self.login_logon_versions {
-            match tags.login_logon_versions.contains(t)
-                || self.login_logon_versions.contains(&LoginVersion::All)
-            {
-                true => return true,
-                false => {}
+        if ((tags.has_login_version() && self.has_wildcard_logon_version())
+            || (self.has_login_version() && tags.has_wildcard_logon_version()))
+            || ((tags.has_world_version() && self.has_wildcard_world_version())
+                || (self.has_world_version() && tags.has_wildcard_world_version()))
+        {
+            return true;
+        }
+
+        for t in self.logon_versions() {
+            if tags.logon_versions().contains(t) {
+                return true;
             }
         }
 
-        for t in self.versions() {
-            match tags.versions().contains(t) || self.versions().contains(&WorldVersion::All) {
-                true => return true,
-                false => {}
+        for outer in self.versions() {
+            for inner in tags.versions() {
+                if outer.overlaps(inner) {
+                    return true;
+                }
             }
         }
 
         false
     }
 
+    pub fn is_main_version(&self) -> bool {
+        let versions = Tags::new_with_tag(Tag::new(VERSIONS, "1.12 2.4.3 3.3.5"));
+        let logon = Tags::new_with_tag(Tag::new(LOGIN_VERSIONS, "*"));
+
+        self.has_version_intersections(&versions) || self.has_version_intersections(&logon)
+    }
+
     pub fn has_version_all(&self) -> bool {
-        self.login_logon_versions.contains(&LoginVersion::All)
-            || self.world_versions.contains(&WorldVersion::All)
+        self.has_wildcard_logon_version() || self.has_wildcard_world_version()
     }
 
     pub fn has_wildcard_logon_version(&self) -> bool {
         self.logon_versions().contains(&LoginVersion::All)
+    }
+
+    pub fn has_wildcard_world_version(&self) -> bool {
+        self.versions().contains(&WorldVersion::All)
     }
 
     pub fn logon_versions(&self) -> &[LoginVersion] {
@@ -217,6 +275,18 @@ impl Tags {
 
     pub fn versions(&self) -> &[WorldVersion] {
         &self.world_versions
+    }
+
+    pub fn has_world_version(&self) -> bool {
+        if !self.versions().is_empty() {
+            assert!(self.logon_versions().is_empty());
+            return true;
+        } else if !self.logon_versions().is_empty() {
+            assert!(self.versions().is_empty());
+            return false;
+        }
+
+        false
     }
 
     pub fn has_login_version(&self) -> bool {

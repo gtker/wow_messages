@@ -211,5 +211,5 @@ fn load_files(dir: &Path, components: &mut Objects) {
 }
 
 fn should_not_write_object(t: &Tags) -> bool {
-    t.contains(TEST_STR) || t.contains(SKIP_STR)
+    t.contains(TEST_STR) || t.contains(SKIP_STR) || !t.is_main_version()
 }
