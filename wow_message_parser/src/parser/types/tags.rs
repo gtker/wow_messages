@@ -51,21 +51,9 @@ impl WorldVersion {
 
     pub fn is_main_version(&self) -> bool {
         match &self {
-            WorldVersion::Major(m) => {
-                if *m >= 1 && *m <= 3 {
-                    true
-                } else {
-                    false
-                }
-            }
-            WorldVersion::Minor(m, i) => match (m, i) {
-                (1, 12) | (2, 4) | (3, 3) => true,
-                _ => false,
-            },
-            WorldVersion::Patch(m, i, p) => match (m, i, p) {
-                (2, 4, 3) | (3, 3, 5) => true,
-                _ => false,
-            },
+            WorldVersion::Major(m) => *m >= 1 && *m <= 3,
+            WorldVersion::Minor(m, i) => matches!((m, i), (1, 12) | (2, 4) | (3, 3)),
+            WorldVersion::Patch(m, i, p) => matches!((m, i, p), (2, 4, 3) | (3, 3, 5)),
             WorldVersion::Exact(_, _, _, _) => false,
             WorldVersion::All => true,
         }

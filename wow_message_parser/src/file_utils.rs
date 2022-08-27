@@ -231,7 +231,7 @@ fn major_version_to_string(v: &WorldVersion) -> &'static str {
 
     match *v {
         WorldVersion::Major(m) => {
-            assert!(m >= 1 && m <= 3);
+            assert!((1..=3).contains(&m));
 
             version(m)
         }
