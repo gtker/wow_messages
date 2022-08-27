@@ -96,7 +96,9 @@
     non_snake_case,
     clippy::missing_errors_doc,
     clippy::upper_case_acronyms,
-    clippy::missing_const_for_fn
+    clippy::missing_const_for_fn,
+    clippy::clone_on_copy,
+    clippy::derive_partial_eq_without_eq
 )]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]

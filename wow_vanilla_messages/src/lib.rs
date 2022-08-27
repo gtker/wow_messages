@@ -18,10 +18,13 @@
     clippy::missing_errors_doc,
     clippy::upper_case_acronyms,
     clippy::missing_const_for_fn,
-    clippy::approx_constant
+    clippy::approx_constant,
+    clippy::clone_on_copy,
+    clippy::derive_partial_eq_without_eq
 )]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
+
 use crate::util::read_u8_le;
 use std::fmt::{Display, Formatter};
 use std::io::{Error, Read, Write};
