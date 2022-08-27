@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::version_1_12::{Race, Class, Gender, Power};
+use crate::vanilla::{Race, Class, Gender, Power};
 use crate::helper::update_mask::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};
 
 impl UpdateItem {

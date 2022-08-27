@@ -123,7 +123,7 @@ pub fn print_update_mask() {
         if let UfType::BytesWithTypes(a, b, c, d) = m.ty() {
             s.wln(format!(
                 // The UpdateMask implementation realistically only works with 1.12
-                "use crate::version_1_12::{{{}, {}, {}, {}}};",
+                "use crate::vanilla::{{{}, {}, {}, {}}};",
                 a, b, c, d
             ));
 

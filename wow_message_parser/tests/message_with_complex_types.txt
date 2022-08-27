@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_12::SimpleEnum;
-use crate::world::version_1_12::SimpleFlag;
-use crate::world::version_1_12::StructWithAllBuiltInTypes;
+use crate::world::vanilla::SimpleEnum;
+use crate::world::vanilla::SimpleFlag;
+use crate::world::vanilla::StructWithAllBuiltInTypes;
 use crate::{ClientMessage, ServerMessage};
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};

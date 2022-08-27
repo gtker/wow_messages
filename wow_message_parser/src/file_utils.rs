@@ -100,6 +100,8 @@ impl ModFiles {
     }
 
     pub fn add_world_file(&mut self, name: &str, version: &WorldVersion, tags: &Tags) {
+        assert!(version.is_main_version());
+
         if tags.is_in_common() {
             self.add_or_append_file(
                 format!("{}/", BASE_DIR),
@@ -107,20 +109,15 @@ impl ModFiles {
             );
         }
 
-        let (m, i) = match version {
-            WorldVersion::Minor(m, i) => (m, i),
-            WorldVersion::Major(_)
-            | WorldVersion::Patch(_, _, _)
-            | WorldVersion::Exact(_, _, _, _)
-            | WorldVersion::All => unimplemented!(),
-        };
-
         self.add_or_append_file(
             format!("{}/", WORLD_DIR),
-            (format!("version_{}_{}", m, i), SubmoduleLocation::PubMod),
+            (
+                major_version_to_string(version).to_string(),
+                SubmoduleLocation::PubMod,
+            ),
         );
 
-        let file_dir = format!("{}/version_{}_{}/", WORLD_DIR, m, i);
+        let file_dir = format!("{}/{}/", WORLD_DIR, major_version_to_string(version));
         self.add_or_append_file(
             file_dir.clone(),
             (get_module_name(name), SubmoduleLocation::PubUseInternal),
@@ -176,7 +173,7 @@ impl ModFiles {
         common_s: &Writer,
         world_s: &Writer,
     ) {
-        for version in tags.versions() {
+        for version in tags.main_versions() {
             let world_path = get_world_filepath(name, version);
             let common_path = get_common_filepath(name);
 
@@ -207,11 +204,7 @@ impl ModFiles {
             create_and_overwrite_if_not_same_contents(s, Path::new(&path));
         }
 
-        for version in tags.versions() {
-            if !version.is_main_version() {
-                continue;
-            }
-
+        for version in tags.main_versions() {
             let path = get_world_filepath(name, version);
 
             self.add_world_file(name, version, tags);
@@ -223,18 +216,51 @@ impl ModFiles {
     }
 }
 
-pub fn get_world_version_path(version: &WorldVersion) -> String {
-    match version {
-        WorldVersion::Minor(m, i) => format!("crate::world::version_{}_{}", m, i),
-        _ => unimplemented!(),
+fn major_version_to_string(v: &WorldVersion) -> &'static str {
+    fn version(m: u8) -> &'static str {
+        if m == 1 {
+            "vanilla"
+        } else if m == 2 {
+            "tbc"
+        } else if m == 3 {
+            "wrath"
+        } else {
+            unreachable!()
+        }
+    }
+
+    match *v {
+        WorldVersion::Major(m) => {
+            assert!(m >= 1 && m <= 3);
+
+            version(m)
+        }
+        WorldVersion::Minor(m, i) => {
+            match (m, i) {
+                (1, 12) | (2, 4) | (3, 3) => {}
+                _ => unreachable!(),
+            }
+
+            version(m)
+        }
+        WorldVersion::Patch(m, i, p) => {
+            match (m, i, p) {
+                (2, 4, 3) | (3, 3, 5) => {}
+                _ => unreachable!(),
+            }
+
+            version(m)
+        }
+        WorldVersion::Exact(_, _, _, _) | WorldVersion::All => unimplemented!(),
     }
 }
 
+pub fn get_world_version_path(version: &WorldVersion) -> String {
+    format!("crate::world::{}", major_version_to_string(version))
+}
+
 pub fn get_world_version_file_path(version: &WorldVersion) -> String {
-    match version {
-        WorldVersion::Minor(m, i) => format!("{}/version_{}_{}/", WORLD_DIR, m, i),
-        _ => unimplemented!(),
-    }
+    format!("{}/{}/", WORLD_DIR, major_version_to_string(version))
 }
 
 pub fn get_login_logon_version_path(version: &LoginVersion) -> String {

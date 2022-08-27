@@ -299,6 +299,10 @@ impl Tags {
         &self.world_versions
     }
 
+    pub fn main_versions(&self) -> impl Iterator<Item = &WorldVersion> {
+        self.versions().iter().filter(|a| a.is_main_version())
+    }
+
     pub fn first_major_version(&self) -> Option<&WorldVersion> {
         for v in self.versions() {
             if v.overlaps(&WorldVersion::Minor(1, 12))

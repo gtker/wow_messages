@@ -1,1 +1,1 @@
-pub mod version_1_12;
+pub mod vanilla;
