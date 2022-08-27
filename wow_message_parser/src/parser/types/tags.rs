@@ -48,6 +48,28 @@ impl WorldVersion {
             WorldVersion::All => true,
         }
     }
+
+    pub fn is_main_version(&self) -> bool {
+        match &self {
+            WorldVersion::Major(m) => {
+                if *m >= 1 && *m <= 3 {
+                    true
+                } else {
+                    false
+                }
+            }
+            WorldVersion::Minor(m, i) => match (m, i) {
+                (1, 12) | (2, 4) | (3, 3) => true,
+                _ => false,
+            },
+            WorldVersion::Patch(m, i, p) => match (m, i, p) {
+                (2, 4, 3) | (3, 3, 5) => true,
+                _ => false,
+            },
+            WorldVersion::Exact(_, _, _, _) => false,
+            WorldVersion::All => true,
+        }
+    }
 }
 
 impl Display for WorldVersion {
@@ -275,6 +297,19 @@ impl Tags {
 
     pub fn versions(&self) -> &[WorldVersion] {
         &self.world_versions
+    }
+
+    pub fn first_major_version(&self) -> Option<&WorldVersion> {
+        for v in self.versions() {
+            if v.overlaps(&WorldVersion::Minor(1, 12))
+                || v.overlaps(&WorldVersion::Patch(2, 4, 3))
+                || v.overlaps(&WorldVersion::Patch(3, 3, 5))
+            {
+                return Some(v);
+            }
+        }
+
+        None
     }
 
     pub fn has_world_version(&self) -> bool {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_2::WorldResult;
+use crate::world::version_1_12::WorldResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 #[derive(Copy)]
 /// Response to [`CMSG_CHAR_DELETE`](crate::world::version_1_12::CMSG_CHAR_DELETE).
 ///
-/// The result of this message will update the client character screen without them sending another [`CMSG_CHAR_ENUM`](crate::world::version_1_2::CMSG_CHAR_ENUM).
+/// The result of this message will update the client character screen without them sending another [`CMSG_CHAR_ENUM`](crate::world::version_1_12::CMSG_CHAR_ENUM).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm#L3):
 /// ```text
@@ -51,7 +51,7 @@ impl ServerMessage for SMSG_CHAR_DELETE {
 #[cfg(test)]
 mod test {
     use super::SMSG_CHAR_DELETE;
-    use crate::world::version_1_2::WorldResult;
+    use crate::world::version_1_12::WorldResult;
     use super::*;
     use super::super::*;
     use crate::world::version_1_12::opcodes::ServerOpcodeMessage;

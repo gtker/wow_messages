@@ -160,12 +160,14 @@ impl Objects {
         );
     }
 
-    pub fn get_world_versions_with_objects(&self) -> Vec<WorldVersion> {
+    pub fn get_main_world_versions_with_objects(&self) -> Vec<WorldVersion> {
         let mut v = Vec::new();
 
         for s in self.all_containers() {
             for l in s.tags().versions() {
-                v.push(*l);
+                if l.is_main_version() {
+                    v.push(*l);
+                }
             }
         }
 

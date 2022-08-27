@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::version_1_2::WorldResult;
+use crate::world::version_1_12::WorldResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -51,7 +51,7 @@ impl ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {
 #[cfg(test)]
 mod test {
     use super::SMSG_CHARACTER_LOGIN_FAILED;
-    use crate::world::version_1_2::WorldResult;
+    use crate::world::version_1_12::WorldResult;
     use super::*;
     use super::super::*;
     use crate::world::version_1_12::opcodes::ServerOpcodeMessage;

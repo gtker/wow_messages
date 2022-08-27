@@ -207,19 +207,18 @@ impl ModFiles {
             create_and_overwrite_if_not_same_contents(s, Path::new(&path));
         }
 
-        for (i, version) in tags.versions().iter().enumerate() {
+        for version in tags.versions() {
+            if !version.is_main_version() {
+                continue;
+            }
+
             let path = get_world_filepath(name, version);
 
             self.add_world_file(name, version, tags);
-            let s = if i == 0 {
-                s.proper_as_str()
-            } else {
-                s.imports()
-            };
 
             self.already_existing_files.insert(path.clone(), true);
 
-            create_and_overwrite_if_not_same_contents(s, Path::new(&path));
+            create_and_overwrite_if_not_same_contents(s.proper_as_str(), Path::new(&path));
         }
     }
 }
@@ -265,7 +264,7 @@ pub fn get_login_version_file_path(version: &LoginVersion) -> String {
 pub fn get_import_path(tags: &Tags) -> String {
     if let Some(f) = tags.logon_versions().first() {
         get_login_logon_version_path(f)
-    } else if let Some(f) = tags.versions().first() {
+    } else if let Some(f) = tags.first_major_version() {
         get_world_version_path(f)
     } else {
         panic!(

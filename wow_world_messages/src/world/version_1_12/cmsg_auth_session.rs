@@ -4,7 +4,7 @@ use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::world::version_1_2::SMSG_AUTH_CHALLENGE).
+/// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::world::version_1_12::SMSG_AUTH_CHALLENGE).
 ///
 /// This message is never encrypted.
 ///

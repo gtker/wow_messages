@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::version_1_2::WorldResult;
+use crate::world::version_1_12::WorldResult;
 use crate::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
@@ -696,7 +696,7 @@ impl SMSG_CHAR_RENAME_WorldResult {
 #[cfg(test)]
 mod test {
     use super::SMSG_CHAR_RENAME;
-    use crate::world::version_1_2::WorldResult;
+    use crate::world::version_1_12::WorldResult;
     use super::*;
     use super::super::*;
     use crate::world::version_1_12::opcodes::ServerOpcodeMessage;
