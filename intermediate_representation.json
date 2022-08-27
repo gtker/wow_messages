@@ -49548,6 +49548,13 @@
                 1,
                 12
               ]
+            },
+            {
+              "Patch": [
+                3,
+                3,
+                5
+              ]
             }
           ]
         }
@@ -49579,19 +49586,26 @@
                     1,
                     12
                   ]
+                },
+                {
+                  "Patch": [
+                    3,
+                    3,
+                    5
+                  ]
                 }
               ]
             }
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm",
-            "start_position": 7
+            "start_position": 6
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm",
-        "start_position": 3
+        "start_position": 1
       },
       "only_has_io_error": true,
       "features": [
@@ -80603,7 +80617,102 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm",
-        "start_position": 3
+        "start_position": 2
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_AUTH_CHALLENGE",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 492
+      },
+      "constant": true,
+      "members": [
+        {
+          "Definition": {
+            "name": "unknown1",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "realm_seed",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "seed1",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "seed2",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Patch": [
+                3,
+                3,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm",
+        "start_position": 21
       },
       "only_has_io_error": true,
       "features": [

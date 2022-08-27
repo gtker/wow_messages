@@ -12,7 +12,8 @@ use rust_printer::print_struct;
 use crate::container::{Container, ContainerType};
 use crate::doc_printer::print_docs_summary_and_objects;
 use crate::file_utils::{
-    append_string_to_file, get_world_version_file_path, write_string_to_file, ModFiles, LOGIN_DIR,
+    append_string_to_file, create_and_overwrite_if_not_same_contents, get_world_version_file_path,
+    write_string_to_file, ModFiles, LOGIN_DIR,
 };
 use crate::ir_printer::write_intermediate_representation;
 use crate::rust_printer::{
@@ -144,7 +145,7 @@ fn write_world_opcodes(o: &Objects) {
         if !cmsg.is_empty() {
             let s = print_world_opcodes(&cmsg, &e, ContainerType::CMsg(0));
             let filename = format!("{}/opcodes.rs", get_world_version_file_path(&e));
-            write_string_to_file(s.proper_as_str(), Path::new(&filename));
+            create_and_overwrite_if_not_same_contents(s.proper_as_str(), Path::new(&filename));
         }
 
         let smsg: Vec<&Container> = v
