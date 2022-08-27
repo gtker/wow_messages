@@ -1,5 +1,5 @@
 use std::fmt::{format, Display, Formatter, Write};
-pub use wow_vanilla_base::EnumError;
+pub use wow_world_base::EnumError;
 
 #[derive(Debug)]
 pub enum ParseError {

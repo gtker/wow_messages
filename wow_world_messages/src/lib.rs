@@ -1,5 +1,4 @@
 #![allow(dead_code)]
-#![doc(html_root_url = "https://docs.rs/wow_vanilla_messages/0.1.0")]
 #![forbid(unsafe_code)]
 #![deny(
     clippy::complexity,

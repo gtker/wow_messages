@@ -4,10 +4,10 @@ use tokio::net::{TcpListener, TcpStream};
 use wow_srp::header_crypto::ProofSeed;
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::server::SrpServer;
-use wow_vanilla_messages::helper::tokio_expect_client_message;
-use wow_vanilla_messages::version_1_12::opcodes::ClientOpcodeMessage;
-use wow_vanilla_messages::version_1_12::*;
-use wow_vanilla_messages::{Guid, ServerMessage, UpdateMask, UpdatePlayer};
+use wow_world_messages::helper::tokio_expect_client_message;
+use wow_world_messages::version_1_12::opcodes::ClientOpcodeMessage;
+use wow_world_messages::version_1_12::*;
+use wow_world_messages::{Guid, ServerMessage, UpdateMask, UpdatePlayer};
 
 pub async fn world(users: Arc<Mutex<HashMap<String, SrpServer>>>) {
     let listener = TcpListener::bind("0.0.0.0:8085").await.unwrap();

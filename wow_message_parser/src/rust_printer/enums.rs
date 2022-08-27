@@ -27,7 +27,7 @@ pub fn print_common_enum_common(e: &Definer, o: &Objects) -> Writer {
 pub fn print_common_enum_messages(e: &Definer) -> Writer {
     let mut s = Writer::new(&get_import_path(e.tags()));
 
-    s.wln(format!("pub use wow_vanilla_base::{};", e.name()));
+    s.wln(format!("pub use wow_world_base::{};", e.name()));
     s.newline();
 
     s

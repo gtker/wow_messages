@@ -3,13 +3,13 @@ use std::net::TcpStream;
 use wow_srp::header_crypto::ProofSeed;
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::SESSION_KEY_LENGTH;
-use wow_vanilla_messages::helper::{expect_server_message, expect_server_message_encryption};
-use wow_vanilla_messages::version_1_12::opcodes::ServerOpcodeMessage;
-use wow_vanilla_messages::version_1_12::{
+use wow_world_messages::helper::{expect_server_message, expect_server_message_encryption};
+use wow_world_messages::version_1_12::opcodes::ServerOpcodeMessage;
+use wow_world_messages::version_1_12::{
     SMSG_AUTH_RESPONSE_WorldResult, CMSG_AUTH_SESSION, CMSG_CHAR_ENUM, CMSG_PLAYER_LOGIN,
     SMSG_AUTH_CHALLENGE, SMSG_AUTH_RESPONSE, SMSG_CHAR_ENUM,
 };
-use wow_vanilla_messages::ClientMessage;
+use wow_world_messages::ClientMessage;
 
 pub fn server(
     stream: &mut TcpStream,

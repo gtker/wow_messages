@@ -1,4 +1,4 @@
-use crate::file_utils::overwrite_if_not_same_contents;
+use crate::file_utils::{overwrite_if_not_same_contents, UPDATE_MASK_LOCATION};
 use crate::parser::types::tags::Tag;
 use crate::rust_printer::Writer;
 use crate::Tags;
@@ -143,10 +143,7 @@ pub fn print_update_mask() {
         });
     }
 
-    overwrite_if_not_same_contents(
-        s.inner(),
-        Path::new("wow_vanilla_messages/src/helper/update_mask/impls.rs"),
-    );
+    overwrite_if_not_same_contents(s.inner(), Path::new(UPDATE_MASK_LOCATION));
 }
 
 fn print_functions(s: &mut Writer, m: &MemberType) {
