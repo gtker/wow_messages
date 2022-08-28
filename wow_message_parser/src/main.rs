@@ -88,25 +88,23 @@ fn main() {
                 Object::Flag(e) => print_flag(e, &o, first),
             };
 
-            m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
+            if versions.is_empty() {
+                m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
+            } else if !first.is_world() {
+                m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
 
-            for v in versions {
-                let s = if v.is_world() {
-                    s.proper_as_str()
-                } else {
-                    s.imports()
-                };
+                for v in versions {
+                    m.write_contents_to_file(e.name(), e.tags(), s.imports(), v);
+                }
+            } else {
+                versions.push(first);
 
-                let s = match v {
-                    Version::Login(_) => s.to_string(),
-                    Version::World(_) => match &e {
-                        Object::Container(e) => print_struct(e, &o, v).proper_as_str().to_string(),
-                        Object::Enum(e) => print_enum(e, &o, v).proper_as_str().to_string(),
-                        Object::Flag(e) => print_flag(e, &o, v).proper_as_str().to_string(),
-                    },
-                };
+                m.write_shared_contents_to_file(e.name(), e.tags(), s.inner(), &versions);
 
-                m.write_contents_to_file(e.name(), e.tags(), &s, v);
+                for v in versions.clone() {
+                    let s = get_import_from_shared(e.name(), &versions);
+                    m.write_contents_to_file(e.name(), e.tags(), &s, v);
+                }
             }
         } else {
             let (common_s, world_s) = match &e {
