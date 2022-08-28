@@ -7,7 +7,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::create_rust_object;
 use crate::test_case::TestCase;
-use crate::DefinerType;
+use crate::{DefinerType, Version};
 
 #[derive(Debug, Clone)]
 pub struct Objects {
@@ -213,10 +213,10 @@ impl Objects {
     ) -> Vec<&Container> {
         let mut v = Vec::new();
 
-        for s in self.all_containers() {
-            let logon = s.tags().versions();
-            if logon.contains(version_number) || logon.contains(&WorldVersion::All) {
-                v.push(s);
+        for e in self.all_containers() {
+            let tags = Tags::new_with_version(Version::World(*version_number));
+            if e.tags().fulfills_all(&tags) {
+                v.push(e);
             }
         }
 

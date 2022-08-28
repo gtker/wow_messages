@@ -1,11 +1,11 @@
 cmsg CMSG_CHAR_ENUM = 0x037 { } {
     description = "Sent after a successful [CMSG_AUTH_SESSION] and [SMSG_AUTH_RESPONSE], or after failing to login with [SMSG_CHARACTER_LOGIN_FAILED].";
-    versions = "1.2 1.12 3.3.5";
+    versions = "1 3";
 }
 
 test CMSG_CHAR_ENUM {} [
     0x00, 0x04, /* size */
     0x37, 0x00, 0x00, 0x00, /* opcode */
 ] {
-    versions = "1.2 1.12 3.3.5";
+    versions = "1 3";
 }

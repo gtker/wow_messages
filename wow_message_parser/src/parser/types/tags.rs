@@ -87,13 +87,19 @@ impl WorldVersion {
     }
 
     pub fn is_main_version(&self) -> bool {
-        match &self {
-            WorldVersion::Major(m) => *m >= 1 && *m <= 3,
-            WorldVersion::Minor(m, i) => matches!((m, i), (1, 12) | (2, 4) | (3, 3)),
-            WorldVersion::Patch(m, i, p) => matches!((m, i, p), (2, 4, 3) | (3, 3, 5)),
-            WorldVersion::Exact(_, _, _, _) => false,
-            WorldVersion::All => true,
+        let mains = [
+            WorldVersion::Minor(1, 12),
+            WorldVersion::Patch(2, 4, 3),
+            WorldVersion::Patch(3, 3, 5),
+        ];
+
+        for v in mains {
+            if self.overlaps(&v) {
+                return true;
+            }
         }
+
+        false
     }
 }
 
@@ -142,6 +148,15 @@ impl Tags {
     pub fn new_with_tag(t: Tag) -> Self {
         let mut s = Self::new();
         s.push(t);
+        s
+    }
+
+    pub fn new_with_version(version: Version) -> Self {
+        let mut s = Self::new();
+        match version {
+            Version::Login(l) => s.login_logon_versions.push(l),
+            Version::World(l) => s.world_versions.push(l),
+        }
         s
     }
 
