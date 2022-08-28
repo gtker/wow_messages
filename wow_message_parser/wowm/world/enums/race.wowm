@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "*";
 
 enum Race : u8 {
     HUMAN = 1;
@@ -10,6 +10,7 @@ enum Race : u8 {
     GNOME = 7;
     TROLL = 8;
     GOBLIN = 9;
+    BLOOD_ELF = 10;
 } {
     rust_common_type = "true";
 }

@@ -1,4 +1,5 @@
-#tag_all versions "1.12";
+#tag_all versions "*";
+
 enum Map : u32 {
     EASTERN_KINGDOMS = 0 {
         display = "Eastern Kingdoms";

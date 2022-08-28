@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "*";
 
 enum Class : u8 {
     WARRIOR = 1;
@@ -6,6 +6,7 @@ enum Class : u8 {
     HUNTER = 3;
     ROGUE = 4;
     PRIEST = 5;
+    DEATH_KNIGHT = 6;
     SHAMAN = 7;
     MAGE = 8;
     WARLOCK = 9;

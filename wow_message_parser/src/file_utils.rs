@@ -57,7 +57,7 @@ impl ModFiles {
                         writeln!(s, "pub use {}::*;", i).unwrap();
                     }
                     SubmoduleLocation::PubMod => {
-                        if ["vanilla", "wrath", "tbc"].contains(&i.as_str()) {
+                        if ["vanilla", "wrath", "tbc", "shared"].contains(&i.as_str()) {
                             writeln!(s, "#[cfg(feature = \"{}\")]", i).unwrap();
                         }
                         writeln!(s, "pub mod {};", i).unwrap();
@@ -106,6 +106,12 @@ impl ModFiles {
         assert!(version.is_main_version());
 
         if tags.is_in_common() {
+            assert!(
+                tags.has_wildcard_world_version(),
+                "Common types can only have a wildcard world version. Type {} has versions {} but is also marked as common.",
+                name,
+                version
+                );
             self.add_or_append_file(
                 format!("{}/", BASE_DIR),
                 (get_module_name(name), SubmoduleLocation::PubUseInternal),
@@ -254,7 +260,8 @@ fn major_version_to_string(v: &WorldVersion) -> &'static str {
 
             version(m)
         }
-        WorldVersion::Exact(_, _, _, _) | WorldVersion::All => unimplemented!(),
+        WorldVersion::All => "shared",
+        WorldVersion::Exact(_, _, _, _) => unimplemented!(),
     }
 }
 

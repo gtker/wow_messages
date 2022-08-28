@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "*";
 
 enum Power : u8 {
     MANA = 0 {
