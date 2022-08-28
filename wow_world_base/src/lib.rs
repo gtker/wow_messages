@@ -20,7 +20,7 @@
 )]
 
 pub(crate) mod errors;
-pub mod inner;
+pub(crate) mod inner;
 
 pub use errors::*;
 pub use inner::*;
