@@ -89,3 +89,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
+

@@ -34,3 +34,4 @@ Used in:
 * [AuraLog](auralog.md)
 * [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)
 * [SMSG_SPELLNONMELEEDAMAGELOG](smsg_spellnonmeleedamagelog.md)
+

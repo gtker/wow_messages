@@ -46,3 +46,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [SMSG_GUILD_EVENT](smsg_guild_event.md)
+

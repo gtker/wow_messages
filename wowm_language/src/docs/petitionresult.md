@@ -30,3 +30,4 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [SMSG_PETITION_SIGN_RESULTS](smsg_petition_sign_results.md)
+

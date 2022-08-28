@@ -39,3 +39,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [MSG_RAID_TARGET_UPDATE_Client](msg_raid_target_update_client.md)
 * [RaidTargetUpdate](raidtargetupdate.md)
+

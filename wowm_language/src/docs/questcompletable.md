@@ -22,3 +22,4 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [SMSG_QUESTGIVER_REQUEST_ITEMS](smsg_questgiver_request_items.md)
+

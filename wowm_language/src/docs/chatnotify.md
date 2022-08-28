@@ -82,3 +82,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [SMSG_CHANNEL_NOTIFY](smsg_channel_notify.md)
+

@@ -40,6 +40,7 @@ Used in:
 * [Friend](friend.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [WhoPlayer](whoplayer.md)
+
 # Class
 
 ## Client Version 3
@@ -79,3 +80,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `DRUID` | 11 (0x0B) |  |  |
 
 Used in:
+

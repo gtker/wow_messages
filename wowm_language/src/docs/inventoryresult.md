@@ -157,3 +157,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_INVENTORY_CHANGE_FAILURE](smsg_inventory_change_failure.md)
 * [SMSG_TRADE_STATUS](smsg_trade_status.md)
+

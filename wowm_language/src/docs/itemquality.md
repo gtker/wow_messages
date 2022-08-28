@@ -34,3 +34,4 @@ Used in:
 * [CMSG_LOOT_METHOD](cmsg_loot_method.md)
 * [SMSG_GROUP_LIST](smsg_group_list.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
+

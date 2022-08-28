@@ -39,3 +39,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [CMSG_STANDSTATECHANGE](cmsg_standstatechange.md)
 * [SMSG_STANDSTATE_UPDATE](smsg_standstate_update.md)
+

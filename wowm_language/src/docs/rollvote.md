@@ -26,3 +26,4 @@ Used in:
 * [CMSG_LOOT_ROLL](cmsg_loot_roll.md)
 * [SMSG_LOOT_ROLL](smsg_loot_roll.md)
 * [SMSG_LOOT_ROLL_WON](smsg_loot_roll_won.md)
+

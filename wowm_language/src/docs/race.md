@@ -39,3 +39,4 @@ Used in:
 * [Character](character.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [WhoPlayer](whoplayer.md)
+

@@ -24,3 +24,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [TrainerSpell](trainerspell.md)
+

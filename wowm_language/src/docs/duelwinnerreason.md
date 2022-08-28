@@ -22,3 +22,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [SMSG_DUEL_WINNER](smsg_duel_winner.md)
+

@@ -186,3 +186,4 @@ Used in:
 * [SMSG_CHAR_CREATE](smsg_char_create.md)
 * [SMSG_CHAR_DELETE](smsg_char_delete.md)
 * [SMSG_CHAR_RENAME](smsg_char_rename.md)
+

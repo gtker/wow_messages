@@ -29,3 +29,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_MONSTER_MOVE](smsg_monster_move.md)
 * [SMSG_MONSTER_MOVE_TRANSPORT](smsg_monster_move_transport.md)
+

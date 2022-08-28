@@ -44,3 +44,4 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [CMSG_BUYBACK_ITEM](cmsg_buyback_item.md)
+

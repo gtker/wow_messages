@@ -29,3 +29,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [CMSG_LOOT_METHOD](cmsg_loot_method.md)
 * [SMSG_GROUP_LIST](smsg_group_list.md)
+

@@ -28,3 +28,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
+

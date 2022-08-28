@@ -50,3 +50,4 @@ Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
 * [NpcTextUpdate](npctextupdate.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
+

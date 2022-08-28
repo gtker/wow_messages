@@ -30,3 +30,4 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [MSG_SAVE_GUILD_EMBLEM_Server](msg_save_guild_emblem_server.md)
+

@@ -22,3 +22,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [MSG_PVP_LOG_DATA_Server](msg_pvp_log_data_server.md)
+

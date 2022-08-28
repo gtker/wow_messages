@@ -36,6 +36,7 @@ pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
             ty_path = c.0.to_lowercase(),
         ));
     }
+    s.newline();
 
     s
 }

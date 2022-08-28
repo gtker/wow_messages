@@ -60,3 +60,4 @@ Used in:
 * [BattlegroundPlayer](battlegroundplayer.md)
 * [MSG_INSPECT_HONOR_STATS_Server](msg_inspect_honor_stats_server.md)
 * [SMSG_PVP_CREDIT](smsg_pvp_credit.md)
+

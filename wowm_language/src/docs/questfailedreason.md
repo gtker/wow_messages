@@ -39,3 +39,4 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 Used in:
 * [SMSG_QUESTGIVER_QUEST_FAILED](smsg_questgiver_quest_failed.md)
 * [SMSG_QUESTGIVER_QUEST_INVALID](smsg_questgiver_quest_invalid.md)
+
