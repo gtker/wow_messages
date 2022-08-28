@@ -82,7 +82,7 @@ fn create_or_append_hashmap(s: &str, path: String, files: &mut HashMap<String, S
 }
 
 pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocWriter]) {
-    const LOGIN_DEFINER_HEADER: &str = "# Login Definers\n";
+    const LOGIN_DEFINER_HEADER: &str = "# Login Definers";
     const LOGIN_CONTAINER_HEADER: &str = "# Login Containers\n";
     const WORLD_DEFINER_HEADER: &str = "# World Definers\n";
     const WORLD_CONTAINER_HEADER: &str = "# Login Containers\n";

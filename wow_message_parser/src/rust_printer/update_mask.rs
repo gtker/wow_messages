@@ -9,7 +9,7 @@ use std::path::Path;
 
 pub fn print_update_mask_docs() {
     const UPDATE_MASK_FILE: &str = "wowm_language/src/spec/update-mask.md";
-    const LOOKUP_TABLE: &str = "## Lookup Table\n";
+    const LOOKUP_TABLE: &str = "## Lookup Table";
     let contents = read_to_string(UPDATE_MASK_FILE).unwrap();
 
     let update_types = [
@@ -123,7 +123,7 @@ pub fn print_update_mask() {
         if let UfType::BytesWithTypes(a, b, c, d) = m.ty() {
             s.wln(format!(
                 // The UpdateMask implementation realistically only works with 1.12
-                "use crate::vanilla::{{{}, {}, {}, {}}};",
+                "use crate::shared::{{{}, {}, {}, {}}};",
                 a, b, c, d
             ));
 

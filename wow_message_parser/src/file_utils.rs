@@ -57,13 +57,14 @@ impl ModFiles {
                         writeln!(s, "pub use {}::*;", i).unwrap();
                     }
                     SubmoduleLocation::PubMod => {
-                        if ["vanilla", "wrath", "tbc", "shared"].contains(&i.as_str()) {
+                        if ["vanilla", "wrath", "tbc"].contains(&i.as_str()) {
                             writeln!(s, "#[cfg(feature = \"{}\")]", i).unwrap();
                         }
                         writeln!(s, "pub mod {};", i).unwrap();
                     }
                 }
             }
+
             let filename = m.name.to_string() + "mod.rs";
 
             self.already_existing_files.insert(filename.clone(), true);
@@ -131,7 +132,11 @@ impl ModFiles {
             file_dir.clone(),
             (get_module_name(name), SubmoduleLocation::PubUseInternal),
         );
-        self.add_or_append_file(file_dir, ("opcodes".to_string(), SubmoduleLocation::PubMod));
+
+        //Since only enums can end up in Shared, we don't need an opcode mod
+        if major_version_to_string(version) != "shared" {
+            self.add_or_append_file(file_dir, ("opcodes".to_string(), SubmoduleLocation::PubMod));
+        }
     }
 
     pub fn add_login_file(&mut self, name: &str, version: &LoginVersion) {
