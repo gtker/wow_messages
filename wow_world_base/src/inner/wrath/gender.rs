@@ -16,6 +16,17 @@ pub enum Gender {
     None,
 }
 
+impl Gender {
+    pub const fn as_int(&self) -> u8 {
+        match self {
+            Self::Male => 0x0,
+            Self::Female => 0x1,
+            Self::None => 0x2,
+        }
+    }
+
+}
+
 impl Default for Gender {
     fn default() -> Self {
         Self::Male
@@ -30,17 +41,6 @@ impl std::fmt::Display for Gender {
             Self::None => f.write_str("None"),
         }
     }
-}
-
-impl Gender {
-    pub const fn as_int(&self) -> u8 {
-        match self {
-            Self::Male => 0x0,
-            Self::Female => 0x1,
-            Self::None => 0x2,
-        }
-    }
-
 }
 
 impl TryFrom<u8> for Gender {

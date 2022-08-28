@@ -4,26 +4,6 @@ use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{Objects, DISPLAY_STR};
 
-pub fn print_common_enum_common(e: &Definer, o: &Objects, version: Version) -> Writer {
-    let mut s = Writer::new(&get_import_path(version));
-
-    includes(&mut s);
-
-    declaration(&mut s, e, o, true);
-
-    print_default(&mut s, e);
-
-    print_display(&mut s, e);
-
-    s.bodyn(format!("impl {}", e.name()), |s| {
-        common_as_type(s, e);
-    });
-
-    print_try_from(&mut s, e);
-
-    s
-}
-
 pub fn print_common_enum_messages(e: &Definer, version: Version) -> Writer {
     let mut s = Writer::new(&get_import_path(version));
     let version = match version {
@@ -41,14 +21,27 @@ pub fn print_common_enum_messages(e: &Definer, version: Version) -> Writer {
     s
 }
 
+pub fn print_common_enum_common(e: &Definer, o: &Objects, version: Version) -> Writer {
+    print_enum_inner(e, o, version, true)
+}
+
 pub fn print_enum(e: &Definer, o: &Objects, version: Version) -> Writer {
+    print_enum_inner(e, o, version, false)
+}
+
+fn print_enum_inner(
+    e: &Definer,
+    o: &Objects,
+    version: Version,
+    visibility_override: bool,
+) -> Writer {
     let mut s = Writer::new(&get_import_path(version));
 
     includes(&mut s);
 
-    declaration(&mut s, e, o, false);
+    declaration(&mut s, e, o, visibility_override);
 
-    common_impls(&mut s, e);
+    common_impls(&mut s, e, visibility_override);
 
     print_default(&mut s, e);
 
@@ -103,14 +96,20 @@ pub fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
     );
 }
 
-fn common_impls(s: &mut Writer, e: &Definer) {
+fn common_impls(s: &mut Writer, e: &Definer, visibility_override: bool) {
     s.bodyn(format!("impl {}", e.name()), |s| {
-        as_type(s, e);
+        as_type(s, e, visibility_override);
     });
 }
 
-fn as_type(s: &mut Writer, e: &Definer) {
-    s.funcn_const("as_int(&self)", e.ty().rust_str(), |s| {
+fn as_type(s: &mut Writer, e: &Definer, visibility_override: bool) {
+    let f = if visibility_override {
+        Writer::funcn_pub_const
+    } else {
+        Writer::funcn_const
+    };
+
+    f(s, "as_int(&self)", e.ty().rust_str(), |s: &mut Writer| {
         s.body("match self", |s| {
             for field in e.fields() {
                 s.wln(format!(
@@ -228,20 +227,5 @@ fn print_from(s: &mut Writer, e: &Definer) {
                 });
             },
         );
-    });
-}
-
-fn common_as_type(s: &mut Writer, e: &Definer) {
-    s.funcn_pub_const("as_int(&self)", e.ty().rust_str(), |s| {
-        s.body("match self", |s| {
-            for field in e.fields() {
-                s.wln(format!(
-                    "Self::{} => 0x{:x},",
-                    field.rust_name(),
-                    field.value().int()
-                ));
-            }
-            assert!(e.self_value().is_none());
-        });
     });
 }

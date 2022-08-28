@@ -28,6 +28,23 @@ pub enum Race {
     Goblin,
 }
 
+impl Race {
+    pub const fn as_int(&self) -> u8 {
+        match self {
+            Self::Human => 0x1,
+            Self::Orc => 0x2,
+            Self::Dwarf => 0x3,
+            Self::NightElf => 0x4,
+            Self::Undead => 0x5,
+            Self::Tauren => 0x6,
+            Self::Gnome => 0x7,
+            Self::Troll => 0x8,
+            Self::Goblin => 0x9,
+        }
+    }
+
+}
+
 impl Default for Race {
     fn default() -> Self {
         Self::Human
@@ -48,23 +65,6 @@ impl std::fmt::Display for Race {
             Self::Goblin => f.write_str("Goblin"),
         }
     }
-}
-
-impl Race {
-    pub const fn as_int(&self) -> u8 {
-        match self {
-            Self::Human => 0x1,
-            Self::Orc => 0x2,
-            Self::Dwarf => 0x3,
-            Self::NightElf => 0x4,
-            Self::Undead => 0x5,
-            Self::Tauren => 0x6,
-            Self::Gnome => 0x7,
-            Self::Troll => 0x8,
-            Self::Goblin => 0x9,
-        }
-    }
-
 }
 
 impl TryFrom<u8> for Race {

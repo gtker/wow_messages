@@ -35,6 +35,20 @@ pub enum Power {
     Health,
 }
 
+impl Power {
+    pub const fn as_int(&self) -> u8 {
+        match self {
+            Self::Mana => 0x0,
+            Self::Rage => 0x1,
+            Self::Focus => 0x2,
+            Self::Energy => 0x3,
+            Self::Happiness => 0x4,
+            Self::Health => 0xfe,
+        }
+    }
+
+}
+
 impl Default for Power {
     fn default() -> Self {
         Self::Mana
@@ -52,20 +66,6 @@ impl std::fmt::Display for Power {
             Self::Health => f.write_str("Health"),
         }
     }
-}
-
-impl Power {
-    pub const fn as_int(&self) -> u8 {
-        match self {
-            Self::Mana => 0x0,
-            Self::Rage => 0x1,
-            Self::Focus => 0x2,
-            Self::Energy => 0x3,
-            Self::Happiness => 0x4,
-            Self::Health => 0xfe,
-        }
-    }
-
 }
 
 impl TryFrom<u8> for Power {

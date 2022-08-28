@@ -98,6 +98,58 @@ pub enum Map {
     Naxxramas,
 }
 
+impl Map {
+    pub const fn as_int(&self) -> u32 {
+        match self {
+            Self::EasternKingdoms => 0x0,
+            Self::Kalimdor => 0x1,
+            Self::Testing => 0xd,
+            Self::ScottTest => 0x19,
+            Self::CashTest => 0x1d,
+            Self::AlteracValley => 0x1e,
+            Self::ShadowfangKeep => 0x21,
+            Self::StormwindStockade => 0x22,
+            Self::StormwindPrison => 0x23,
+            Self::Deadmines => 0x24,
+            Self::AzsharaCrater => 0x25,
+            Self::CollinsTest => 0x2a,
+            Self::WailingCaverns => 0x2b,
+            Self::Monastery => 0x2c,
+            Self::RazorfenKraul => 0x2f,
+            Self::BlackfathomDeeps => 0x30,
+            Self::Uldaman => 0x46,
+            Self::Gnomeragon => 0x5a,
+            Self::SunkenTemple => 0x6d,
+            Self::RazorfenDowns => 0x81,
+            Self::EmeraldDream => 0xa9,
+            Self::ScarletMonastery => 0xbd,
+            Self::ZulFarrak => 0xd1,
+            Self::BlackrockSpire => 0xe5,
+            Self::BlackrockDepths => 0xe6,
+            Self::OnyxiasLair => 0xf9,
+            Self::CavernsOfTime => 0x10d,
+            Self::Scholomance => 0x121,
+            Self::ZulGurub => 0x135,
+            Self::Stratholme => 0x149,
+            Self::Mauradon => 0x15d,
+            Self::DeeprunTram => 0x171,
+            Self::RagefireChasm => 0x185,
+            Self::MoltenCore => 0x199,
+            Self::DireMaul => 0x1ad,
+            Self::AlliancePvpBarracks => 0x1c1,
+            Self::HordePvpBarracks => 0x1c2,
+            Self::DevelopmentLand => 0x1c3,
+            Self::BlackwingLair => 0x1d5,
+            Self::WarsongGulch => 0x1e9,
+            Self::RuinsOfAhnQiraj => 0x1fd,
+            Self::ArathiBasin => 0x211,
+            Self::AhnQirajTemple => 0x213,
+            Self::Naxxramas => 0x215,
+        }
+    }
+
+}
+
 impl Default for Map {
     fn default() -> Self {
         Self::EasternKingdoms
@@ -153,58 +205,6 @@ impl std::fmt::Display for Map {
             Self::Naxxramas => f.write_str("Naxxramas"),
         }
     }
-}
-
-impl Map {
-    pub const fn as_int(&self) -> u32 {
-        match self {
-            Self::EasternKingdoms => 0x0,
-            Self::Kalimdor => 0x1,
-            Self::Testing => 0xd,
-            Self::ScottTest => 0x19,
-            Self::CashTest => 0x1d,
-            Self::AlteracValley => 0x1e,
-            Self::ShadowfangKeep => 0x21,
-            Self::StormwindStockade => 0x22,
-            Self::StormwindPrison => 0x23,
-            Self::Deadmines => 0x24,
-            Self::AzsharaCrater => 0x25,
-            Self::CollinsTest => 0x2a,
-            Self::WailingCaverns => 0x2b,
-            Self::Monastery => 0x2c,
-            Self::RazorfenKraul => 0x2f,
-            Self::BlackfathomDeeps => 0x30,
-            Self::Uldaman => 0x46,
-            Self::Gnomeragon => 0x5a,
-            Self::SunkenTemple => 0x6d,
-            Self::RazorfenDowns => 0x81,
-            Self::EmeraldDream => 0xa9,
-            Self::ScarletMonastery => 0xbd,
-            Self::ZulFarrak => 0xd1,
-            Self::BlackrockSpire => 0xe5,
-            Self::BlackrockDepths => 0xe6,
-            Self::OnyxiasLair => 0xf9,
-            Self::CavernsOfTime => 0x10d,
-            Self::Scholomance => 0x121,
-            Self::ZulGurub => 0x135,
-            Self::Stratholme => 0x149,
-            Self::Mauradon => 0x15d,
-            Self::DeeprunTram => 0x171,
-            Self::RagefireChasm => 0x185,
-            Self::MoltenCore => 0x199,
-            Self::DireMaul => 0x1ad,
-            Self::AlliancePvpBarracks => 0x1c1,
-            Self::HordePvpBarracks => 0x1c2,
-            Self::DevelopmentLand => 0x1c3,
-            Self::BlackwingLair => 0x1d5,
-            Self::WarsongGulch => 0x1e9,
-            Self::RuinsOfAhnQiraj => 0x1fd,
-            Self::ArathiBasin => 0x211,
-            Self::AhnQirajTemple => 0x213,
-            Self::Naxxramas => 0x215,
-        }
-    }
-
 }
 
 impl TryFrom<u32> for Map {

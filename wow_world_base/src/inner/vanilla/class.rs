@@ -28,6 +28,23 @@ pub enum Class {
     Druid,
 }
 
+impl Class {
+    pub const fn as_int(&self) -> u8 {
+        match self {
+            Self::Warrior => 0x1,
+            Self::Paladin => 0x2,
+            Self::Hunter => 0x3,
+            Self::Rogue => 0x4,
+            Self::Priest => 0x5,
+            Self::Shaman => 0x7,
+            Self::Mage => 0x8,
+            Self::Warlock => 0x9,
+            Self::Druid => 0xb,
+        }
+    }
+
+}
+
 impl Default for Class {
     fn default() -> Self {
         Self::Warrior
@@ -48,23 +65,6 @@ impl std::fmt::Display for Class {
             Self::Druid => f.write_str("Druid"),
         }
     }
-}
-
-impl Class {
-    pub const fn as_int(&self) -> u8 {
-        match self {
-            Self::Warrior => 0x1,
-            Self::Paladin => 0x2,
-            Self::Hunter => 0x3,
-            Self::Rogue => 0x4,
-            Self::Priest => 0x5,
-            Self::Shaman => 0x7,
-            Self::Mage => 0x8,
-            Self::Warlock => 0x9,
-            Self::Druid => 0xb,
-        }
-    }
-
 }
 
 impl TryFrom<u8> for Class {
