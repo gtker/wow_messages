@@ -340,10 +340,15 @@ fn get_login_filepath(object_name: &str, version: &LoginVersion) -> String {
 }
 
 pub fn append_string_to_file(s: &str, filename: &Path) {
-    let mut f = std::fs::OpenOptions::new()
-        .append(true)
-        .open(filename)
-        .unwrap();
+    let f = std::fs::OpenOptions::new().append(true).open(filename);
+    let mut f = match f {
+        Ok(f) => f,
+        Err(e) => panic!(
+            "Unable to append string to file: '{:?}' with error '{:?}'",
+            filename, e
+        ),
+    };
+
     f.write_all(s.as_bytes()).unwrap();
 }
 
