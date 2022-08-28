@@ -16,6 +16,7 @@ pub enum WorldVersion {
 }
 
 impl WorldVersion {
+    /// self has some overlap with other
     pub fn overlaps(&self, other: &Self) -> bool {
         match self {
             WorldVersion::Major(m) => match other {
@@ -47,6 +48,44 @@ impl WorldVersion {
                 WorldVersion::All => true,
             },
             WorldVersion::All => true,
+        }
+    }
+
+    /// self completely fulfills other
+    pub fn covers(&self, other: &Self) -> bool {
+        match other {
+            WorldVersion::Major(om) => match self {
+                WorldVersion::Major(m) => m == om,
+                WorldVersion::Minor(_, _) => false,
+                WorldVersion::Patch(_, _, _) => false,
+                WorldVersion::Exact(_, _, _, _) => false,
+                WorldVersion::All => true,
+            },
+            WorldVersion::Minor(om, oi) => match self {
+                WorldVersion::Major(m) => m == om,
+                WorldVersion::Minor(m, i) => m == om && i == oi,
+                WorldVersion::Patch(_, _, _) => false,
+                WorldVersion::Exact(_, _, _, _) => false,
+                WorldVersion::All => true,
+            },
+            WorldVersion::Patch(om, oi, op) => match self {
+                WorldVersion::Major(m) => m == om,
+                WorldVersion::Minor(m, i) => m == om && i == oi,
+                WorldVersion::Patch(m, i, p) => m == om && i == oi && p == op,
+                WorldVersion::Exact(_, _, _, _) => false,
+                WorldVersion::All => true,
+            },
+            WorldVersion::Exact(om, oi, op, oe) => match self {
+                WorldVersion::Major(m) => m == om,
+                WorldVersion::Minor(m, i) => m == om && i == oi,
+                WorldVersion::Patch(m, i, p) => m == om && i == oi && p == op,
+                WorldVersion::Exact(m, i, p, e) => m == om && i == oi && p == op && e == oe,
+                WorldVersion::All => true,
+            },
+            WorldVersion::All => match self {
+                WorldVersion::All => true,
+                _ => false,
+            },
         }
     }
 
@@ -231,6 +270,7 @@ impl Tags {
         true
     }
 
+    /// self and tags have any version in common at all
     pub fn has_version_intersections(&self, tags: &Tags) -> bool {
         if tags.contains(TEST_STR) && self.contains(TEST_STR) {
             return true;
@@ -326,6 +366,33 @@ impl Tags {
         }
 
         false
+    }
+
+    /// self is able to fulfill all version obligations for tags
+    pub fn fulfills_all(&self, tags: &Self) -> bool {
+        for version in tags.logon_versions() {
+            if !self.logon_versions().contains(version)
+                && !self.logon_versions().contains(&LoginVersion::All)
+            {
+                return false;
+            }
+        }
+
+        for version in tags.versions() {
+            let mut covered = false;
+
+            for self_version in self.versions() {
+                if self_version.covers(version) {
+                    covered = true;
+                }
+            }
+
+            if !covered {
+                return false;
+            }
+        }
+
+        true
     }
 
     pub fn has_login_version(&self) -> bool {

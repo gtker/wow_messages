@@ -484,13 +484,13 @@ version 2: {:#?} in {} line {}",
 
     pub fn contains_complex_type(&self, variable_name: &str, tags: &Tags, struct_name: &str) {
         for e in self.all_definers() {
-            if e.name() == variable_name && e.tags().has_all_versions(tags) {
+            if e.name() == variable_name && e.tags().fulfills_all(tags) {
                 return;
             }
         }
 
         for e in self.all_containers() {
-            if e.name() == variable_name && e.tags().has_all_versions(tags) {
+            if e.name() == variable_name && e.tags().fulfills_all(tags) {
                 return;
             }
         }
