@@ -783,6 +783,13 @@ impl Version {
             Version::World(_) => true,
         }
     }
+
+    pub fn to_world(&self) -> WorldVersion {
+        match self {
+            Version::Login(_) => unreachable!(),
+            Version::World(w) => *w,
+        }
+    }
 }
 
 impl From<LoginVersion> for Version {

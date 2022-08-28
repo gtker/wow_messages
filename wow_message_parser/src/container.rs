@@ -1,6 +1,6 @@
 use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
-use crate::parser::types::objects::Objects;
+use crate::parser::types::objects::{Object, Objects};
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
@@ -614,6 +614,54 @@ impl Container {
         false
     }
 
+    pub fn all_definitions_transitively(&self, o: &Objects) -> Vec<StructMemberDefinition> {
+        fn inner(m: &StructMember, v: &mut Vec<StructMemberDefinition>, o: &Objects, tags: &Tags) {
+            match m {
+                StructMember::Definition(d) => {
+                    v.push(d.clone());
+                    match d.ty() {
+                        Type::Identifier { s, .. } => {
+                            if let Object::Container(e) = o.get_object(s, tags) {
+                                for m in e.fields() {
+                                    inner(m, v, o, tags);
+                                }
+                            }
+                        }
+                        Type::Array(array) => match array.ty() {
+                            ArrayType::Complex(s) => {
+                                if let Object::Container(e) = o.get_object(s, tags) {
+                                    for m in e.fields() {
+                                        inner(m, v, o, tags);
+                                    }
+                                }
+                            }
+                            _ => {}
+                        },
+                        _ => {}
+                    }
+                }
+                StructMember::IfStatement(statement) => {
+                    for m in statement.all_members() {
+                        inner(m, v, o, tags);
+                    }
+                }
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        inner(m, v, o, tags);
+                    }
+                }
+            }
+        }
+
+        let mut v = Vec::new();
+
+        for m in self.fields() {
+            inner(m, &mut v, o, self.tags());
+        }
+
+        v
+    }
+
     pub fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
         fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
             match m {
@@ -677,6 +725,16 @@ impl Container {
         false
     }
 
+    pub fn contains_update_mask_transitively(&self, o: &Objects) -> bool {
+        for d in self.all_definitions_transitively(o) {
+            if d.ty() == &Type::UpdateMask {
+                return true;
+            }
+        }
+
+        false
+    }
+
     pub fn contains_aura_mask(&self) -> bool {
         for d in self.all_definitions() {
             if d.ty() == &Type::AuraMask {
@@ -687,8 +745,33 @@ impl Container {
         false
     }
 
+    pub fn contains_aura_mask_transitively(&self, o: &Objects) -> bool {
+        for d in self.all_definitions_transitively(o) {
+            if d.ty() == &Type::AuraMask {
+                return true;
+            }
+        }
+
+        false
+    }
+
     pub fn contains_guid_or_packed_guid(&self) -> bool {
         for d in self.all_definitions() {
+            match d.ty() {
+                Type::PackedGuid | Type::Guid => return true,
+                Type::Array(array) => match array.ty() {
+                    ArrayType::Guid | ArrayType::PackedGuid => return true,
+                    _ => {}
+                },
+                _ => {}
+            }
+        }
+
+        false
+    }
+
+    pub fn contains_guid_or_packed_guid_transitively(&self, o: &Objects) -> bool {
+        for d in self.all_definitions_transitively(o) {
             match d.ty() {
                 Type::PackedGuid | Type::Guid => return true,
                 Type::Array(array) => match array.ty() {

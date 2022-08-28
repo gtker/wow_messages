@@ -7,6 +7,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::create_rust_object;
 use crate::test_case::TestCase;
+use crate::DefinerType;
 
 #[derive(Debug, Clone)]
 pub struct Objects {
@@ -101,6 +102,30 @@ impl Objects {
         panic!(
             "unable to find variable name: '{}' with tags: '{:#?}'",
             type_name, finder_tags
+        );
+    }
+
+    pub fn get_object(&self, name: &str, finder_tags: &Tags) -> Object {
+        if let Some(e) = self
+            .all_containers()
+            .find(|a| a.name() == name && a.tags().fulfills_all(finder_tags))
+        {
+            return Object::Container(e.clone());
+        }
+
+        if let Some(e) = self
+            .all_definers()
+            .find(|a| a.name() == name && a.tags().fulfills_all(finder_tags))
+        {
+            match e.definer_ty() {
+                DefinerType::Enum => return Object::Enum(e.clone()),
+                DefinerType::Flag => return Object::Flag(e.clone()),
+            }
+        }
+
+        panic!(
+            "unable to find variable name: '{}' with tags: '{:#?}'",
+            name, finder_tags
         );
     }
 
@@ -539,4 +564,11 @@ version 2: {:#?} in {} line {}",
     pub fn print_stats_for_1_12(&self) {
         stats_for_1_12(self);
     }
+}
+
+#[derive(Debug, Clone)]
+pub enum Object {
+    Container(Container),
+    Enum(Definer),
+    Flag(Definer),
 }

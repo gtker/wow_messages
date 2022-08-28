@@ -1,5 +1,5 @@
 use crate::container::{Container, ContainerType};
-use crate::file_utils::get_import_path;
+use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::Tag;
 use crate::parser::types::ArraySize;
@@ -42,9 +42,17 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
                 panic!()
             }
             ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
-                // We will need to also look into subobjects to determine if we need these, so just include them always for now
-                s.wln("use crate::Guid;");
-                s.wln("use crate::vanilla::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};");
+                if e.contains_guid_or_packed_guid_transitively(o) || e.contains_update_mask_transitively(o) {
+                    s.wln("use crate::Guid;");
+                }
+
+                if e.contains_update_mask_transitively(o) {
+                    s.wln(format!("use crate::{}::{{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer}};", major_version_to_string(&version.to_world())));
+                }
+
+                if e.contains_aura_mask_transitively(o) {
+                    s.wln(format!("use crate::{}::{{AuraMask}};", major_version_to_string(&version.to_world())));
+                }
 
                 s.wln(format!(
                     "use crate::{{{}, {}}};",
