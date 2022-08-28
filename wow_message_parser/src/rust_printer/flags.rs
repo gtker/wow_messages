@@ -5,7 +5,7 @@ use crate::rust_printer::{print_docc_description_and_comment, Writer};
 use crate::Objects;
 
 pub fn print_flag(e: &Definer, o: &Objects) -> Writer {
-    let mut s = Writer::new(&get_import_path(e.tags()));
+    let mut s = Writer::new(&get_import_path(e.tags(), None));
 
     declaration(&mut s, e, o);
 

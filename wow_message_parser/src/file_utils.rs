@@ -302,8 +302,10 @@ pub fn get_login_version_file_path(version: &LoginVersion) -> String {
     }
 }
 
-pub fn get_import_path(tags: &Tags) -> String {
-    if let Some(f) = tags.logon_versions().first() {
+pub fn get_import_path(tags: &Tags, preferred_version: Option<&WorldVersion>) -> String {
+    if let Some(target_world_version) = preferred_version {
+        get_world_version_path(target_world_version)
+    } else if let Some(f) = tags.logon_versions().first() {
         get_login_logon_version_path(f)
     } else if let Some(f) = tags.first_major_version() {
         get_world_version_path(f)

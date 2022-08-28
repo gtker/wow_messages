@@ -274,9 +274,9 @@ impl Container {
         let import_path = if self.tags().logon_versions().contains(&LoginVersion::All) {
             let mut tags = Tags::new();
             tags.push(Tag::new(LOGIN_VERSIONS, "3"));
-            get_import_path(&tags)
+            get_import_path(&tags, None)
         } else {
-            get_import_path(self.tags())
+            get_import_path(self.tags(), None)
         };
         match self.container_type() {
             ContainerType::CLogin(_) => {

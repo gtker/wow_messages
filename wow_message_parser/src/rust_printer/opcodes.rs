@@ -23,7 +23,7 @@ pub fn print_world_opcodes(
         _ => panic!("invalid type passed to opcode printer"),
     };
 
-    includes(&mut s, v, container_type);
+    includes(&mut s, v, Some(version), container_type);
 
     definition(&mut s, v, ty);
 
@@ -44,7 +44,7 @@ pub fn print_login_opcodes(
         _ => panic!("invalid type passed to opcode printer"),
     };
 
-    includes(&mut s, v, container_type);
+    includes(&mut s, v, None, container_type);
 
     definition(&mut s, v, ty);
 
@@ -57,7 +57,12 @@ fn any_container_is_pure_movement_info(v: &[&Container]) -> bool {
     v.iter().any(|a| a.is_pure_movement_info())
 }
 
-pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType) {
+pub fn includes(
+    s: &mut Writer,
+    v: &[&Container],
+    target_world_version: Option<&WorldVersion>,
+    container_type: ContainerType,
+) {
     match container_type {
         ContainerType::SLogin(_) => {
             s.wln(format!(
@@ -87,7 +92,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
             if any_container_is_pure_movement_info(v) {
                 s.wln(format!(
                     "use {module_name}::MovementInfo;",
-                    module_name = get_import_path(v.first().unwrap().tags())
+                    module_name = get_import_path(v.first().unwrap().tags(), None)
                 ));
             }
         }
@@ -101,7 +106,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
             }
         }
 
-        let module_name = get_import_path(e.tags());
+        let module_name = get_import_path(e.tags(), target_world_version);
         s.wln(format!(
             "use {module_name}::{name};",
             module_name = module_name,

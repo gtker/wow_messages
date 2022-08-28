@@ -27,7 +27,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             let tags = o.get_tags_of_object(name, e.tags());
             s.wln(format!(
                 "use {import_path}::{ty};",
-                import_path = get_import_path(tags),
+                import_path = get_import_path(tags, None),
                 ty = name,
             ));
         }

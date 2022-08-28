@@ -5,7 +5,7 @@ use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{Objects, DISPLAY_STR};
 
 pub fn print_common_enum_common(e: &Definer, o: &Objects) -> Writer {
-    let mut s = Writer::new(&get_import_path(e.tags()));
+    let mut s = Writer::new(&get_import_path(e.tags(), None));
 
     includes(&mut s);
 
@@ -25,7 +25,7 @@ pub fn print_common_enum_common(e: &Definer, o: &Objects) -> Writer {
 }
 
 pub fn print_common_enum_messages(e: &Definer) -> Writer {
-    let mut s = Writer::new(&get_import_path(e.tags()));
+    let mut s = Writer::new(&get_import_path(e.tags(), None));
 
     s.wln(format!("pub use wow_world_base::{};", e.name()));
     s.newline();
@@ -34,7 +34,7 @@ pub fn print_common_enum_messages(e: &Definer) -> Writer {
 }
 
 pub fn print_enum(e: &Definer, o: &Objects) -> Writer {
-    let mut s = Writer::new(&get_import_path(e.tags()));
+    let mut s = Writer::new(&get_import_path(e.tags(), None));
 
     includes(&mut s);
 

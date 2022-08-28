@@ -15,7 +15,7 @@ mod print_optional;
 mod print_tests;
 
 pub fn print_struct(e: &Container, o: &Objects) -> Writer {
-    let mut s = Writer::new(&get_import_path(e.tags()));
+    let mut s = Writer::new(&get_import_path(e.tags(), None));
 
     print_includes(&mut s, e, o);
 
@@ -50,7 +50,7 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     }
 
     for name in e.get_types_needing_import() {
-        let module_name = get_import_path(o.get_tags_of_object(name, e.tags()));
+        let module_name = get_import_path(o.get_tags_of_object(name, e.tags()), None);
 
         s.wln(format!(
             "use {module_name}::{name};",

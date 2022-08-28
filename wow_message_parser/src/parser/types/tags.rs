@@ -461,7 +461,8 @@ impl TagString {
                 TagStringSymbol::Text(s) => current.push_str(s),
                 TagStringSymbol::Link(s) => {
                     if let Some(tags) = o.get_tags_of_object_fallible(s, object_tags) {
-                        write!(current, "[`{}`]({}::{})", s, get_import_path(tags), s).unwrap()
+                        write!(current, "[`{}`]({}::{})", s, get_import_path(tags, None), s)
+                            .unwrap()
                     } else {
                         write!(current, "`{}`", s).unwrap()
                     }
