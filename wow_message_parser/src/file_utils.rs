@@ -19,6 +19,7 @@ pub const BASE_DIR: &str = "wow_world_base/src/inner";
 pub enum SubmoduleLocation {
     PubUseInternal,
     PubMod,
+    PubUseOnly,
 }
 
 #[derive(Debug)]
@@ -61,6 +62,9 @@ impl ModFiles {
                             writeln!(s, "#[cfg(feature = \"{}\")]", i).unwrap();
                         }
                         writeln!(s, "pub mod {};", i).unwrap();
+                    }
+                    SubmoduleLocation::PubUseOnly => {
+                        writeln!(s, "pub use {}::*;", i).unwrap();
                     }
                 }
             }
@@ -133,7 +137,18 @@ impl ModFiles {
             file_dir.clone(),
             (get_module_name(name), SubmoduleLocation::PubUseInternal),
         );
-        self.add_or_append_file(file_dir, ("opcodes".to_string(), SubmoduleLocation::PubMod));
+        self.add_or_append_file(
+            file_dir.clone(),
+            ("opcodes".to_string(), SubmoduleLocation::PubMod),
+        );
+
+        self.add_or_append_file(
+            file_dir,
+            (
+                format!("crate::helper::{}", major_version_to_string(version)),
+                SubmoduleLocation::PubUseOnly,
+            ),
+        );
     }
 
     pub fn add_login_file(&mut self, name: &str, version: &LoginVersion) {

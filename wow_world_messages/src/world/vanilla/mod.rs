@@ -574,6 +574,7 @@ pub(crate) mod cooldown_spell;
 pub use cooldown_spell::*;
 pub(crate) mod corpse_query_result;
 pub use corpse_query_result::*;
+pub use crate::helper::vanilla::*;
 pub(crate) mod duel_winner_reason;
 pub use duel_winner_reason::*;
 pub(crate) mod emote;
