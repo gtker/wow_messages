@@ -17,6 +17,7 @@ mod structs;
 mod update_mask;
 
 use crate::container::Sizes;
+use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::{ContainerType, Objects, Tags};
 pub use update_mask::*;
 
@@ -767,6 +768,12 @@ impl ImplType {
     pub fn types() -> Vec<Self> {
         vec![ImplType::Std, ImplType::Tokio, ImplType::AsyncStd]
     }
+}
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+pub enum Version {
+    Login(LoginVersion),
+    World(WorldVersion),
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]

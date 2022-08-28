@@ -8,7 +8,7 @@ use heck::SnakeCase;
 use walkdir::WalkDir;
 
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
-use crate::rust_printer::Writer;
+use crate::rust_printer::{Version, Writer};
 
 pub const LOGIN_DIR: &str = "wow_login_messages/src/logon";
 pub const WORLD_DIR: &str = "wow_world_messages/src/world";
@@ -185,17 +185,28 @@ impl ModFiles {
         world_s: &Writer,
     ) {
         for version in tags.main_versions() {
-            let world_path = get_world_filepath(name, version);
-            let common_path = get_common_filepath(name, version);
+            match &version {
+                Version::Login(_) => unimplemented!(),
+                Version::World(version) => {
+                    let world_path = get_world_filepath(name, version);
+                    let common_path = get_common_filepath(name, version);
 
-            self.add_world_file(name, version, tags);
+                    self.add_world_file(name, version, tags);
 
-            self.already_existing_files.insert(world_path.clone(), true);
-            self.already_existing_files
-                .insert(common_path.clone(), true);
+                    self.already_existing_files.insert(world_path.clone(), true);
+                    self.already_existing_files
+                        .insert(common_path.clone(), true);
 
-            create_and_overwrite_if_not_same_contents(world_s.inner(), Path::new(&world_path));
-            create_and_overwrite_if_not_same_contents(common_s.inner(), Path::new(&common_path));
+                    create_and_overwrite_if_not_same_contents(
+                        world_s.inner(),
+                        Path::new(&world_path),
+                    );
+                    create_and_overwrite_if_not_same_contents(
+                        common_s.inner(),
+                        Path::new(&common_path),
+                    );
+                }
+            }
         }
     }
 
@@ -216,13 +227,18 @@ impl ModFiles {
         }
 
         for version in tags.main_versions() {
-            let path = get_world_filepath(name, version);
+            match &version {
+                Version::Login(_) => {}
+                Version::World(version) => {
+                    let path = get_world_filepath(name, version);
 
-            self.add_world_file(name, version, tags);
+                    self.add_world_file(name, version, tags);
 
-            self.already_existing_files.insert(path.clone(), true);
+                    self.already_existing_files.insert(path.clone(), true);
 
-            create_and_overwrite_if_not_same_contents(s.proper_as_str(), Path::new(&path));
+                    create_and_overwrite_if_not_same_contents(s.proper_as_str(), Path::new(&path));
+                }
+            }
         }
     }
 }

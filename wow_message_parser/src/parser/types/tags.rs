@@ -1,6 +1,7 @@
 use std::fmt::{Display, Formatter, Write};
 
 use crate::file_utils::get_import_path;
+use crate::rust_printer::Version;
 use crate::{
     Objects, COMMENT, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, RUST_COMMON_TYPE, TEST_STR, VERSIONS,
 };
@@ -287,8 +288,17 @@ impl Tags {
         &self.world_versions
     }
 
-    pub fn main_versions(&self) -> impl Iterator<Item = &WorldVersion> {
-        self.versions().iter().filter(|a| a.is_main_version())
+    pub fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
+        let world = self
+            .versions()
+            .into_iter()
+            .filter(|a| a.is_main_version())
+            .map(|a| Version::World(*a));
+
+        self.logon_versions()
+            .into_iter()
+            .map(|a| Version::Login(*a))
+            .chain(world)
     }
 
     pub fn first_major_version(&self) -> Option<&WorldVersion> {
