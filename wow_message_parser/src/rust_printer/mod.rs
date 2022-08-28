@@ -49,7 +49,7 @@ const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async-std\")]";
 
-pub fn get_import_from_shared(name: &str, versions: &[Version]) -> Writer {
+pub fn get_import_from_shared(name: &str, versions: &[Version]) -> String {
     let mut s = Writer::new(&get_import_path(versions[0]));
 
     let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
@@ -61,10 +61,10 @@ pub fn get_import_from_shared(name: &str, versions: &[Version]) -> Writer {
     ));
     s.newline();
 
-    s
+    s.inner
 }
 
-pub fn get_import_from_base(name: &str, version: Version) -> Writer {
+pub fn get_import_from_base(name: &str, version: Version) -> String {
     let mut s = Writer::new(&get_import_path(version));
 
     s.wln(format!(
@@ -74,7 +74,7 @@ pub fn get_import_from_base(name: &str, version: Version) -> Writer {
     ));
     s.newline();
 
-    s
+    s.inner
 }
 
 impl Writer {

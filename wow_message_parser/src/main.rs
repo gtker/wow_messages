@@ -120,11 +120,17 @@ fn main() {
             };
 
             if versions.is_empty() {
-                m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s, first);
+                m.write_common_contents_to_file(
+                    e.name(),
+                    e.tags(),
+                    &common_s.inner(),
+                    &world_s,
+                    first,
+                );
             } else {
                 versions.push(first);
 
-                m.write_shared_contents_to_file(e.name(), e.tags(), &common_s, &versions);
+                m.write_shared_contents_to_file(e.name(), e.tags(), &common_s.inner(), &versions);
 
                 for v in versions.clone() {
                     let (world_s, common_s) = match &e {

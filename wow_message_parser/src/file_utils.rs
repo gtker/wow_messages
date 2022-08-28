@@ -8,7 +8,7 @@ use heck::SnakeCase;
 use walkdir::WalkDir;
 
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
-use crate::rust_printer::{Version, Writer};
+use crate::rust_printer::Version;
 
 pub const LOGIN_DIR: &str = "wow_login_messages/src/logon";
 pub const WORLD_DIR: &str = "wow_world_messages/src/world";
@@ -222,7 +222,7 @@ impl ModFiles {
         &mut self,
         name: &str,
         tags: &Tags,
-        common_s: &Writer,
+        common_s: &str,
         versions: &[Version],
     ) {
         let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
@@ -237,15 +237,15 @@ impl ModFiles {
 
         self.already_existing_files.insert(path.clone(), true);
 
-        create_and_overwrite_if_not_same_contents(common_s.inner(), Path::new(&path));
+        create_and_overwrite_if_not_same_contents(common_s, Path::new(&path));
     }
 
     pub fn write_shared_import_to_file(
         &mut self,
         name: &str,
         tags: &Tags,
-        world_s: &Writer,
-        common_s: &Writer,
+        world_s: &str,
+        common_s: &str,
         version: &Version,
     ) {
         let version = &version.as_world();
@@ -256,16 +256,16 @@ impl ModFiles {
         self.already_existing_files
             .insert(common_path.clone(), true);
         self.already_existing_files.insert(world_path.clone(), true);
-        create_and_overwrite_if_not_same_contents(world_s.inner(), Path::new(&world_path));
-        create_and_overwrite_if_not_same_contents(common_s.inner(), Path::new(&common_path));
+        create_and_overwrite_if_not_same_contents(world_s, Path::new(&world_path));
+        create_and_overwrite_if_not_same_contents(common_s, Path::new(&common_path));
     }
 
     pub fn write_common_contents_to_file(
         &mut self,
         name: &str,
         tags: &Tags,
-        common_s: &Writer,
-        world_s: &Writer,
+        common_s: &str,
+        world_s: &str,
         version: Version,
     ) {
         match &version {
@@ -280,11 +280,8 @@ impl ModFiles {
                 self.already_existing_files
                     .insert(common_path.clone(), true);
 
-                create_and_overwrite_if_not_same_contents(world_s.inner(), Path::new(&world_path));
-                create_and_overwrite_if_not_same_contents(
-                    common_s.inner(),
-                    Path::new(&common_path),
-                );
+                create_and_overwrite_if_not_same_contents(world_s, Path::new(&world_path));
+                create_and_overwrite_if_not_same_contents(common_s, Path::new(&common_path));
             }
         }
     }
