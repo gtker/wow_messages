@@ -47,11 +47,11 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
                 }
 
                 if e.contains_update_mask_transitively(o) {
-                    s.wln(format!("use crate::{}::{{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer}};", major_version_to_string(&version.to_world())));
+                    s.wln(format!("use crate::{}::{{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer}};", major_version_to_string(&version.as_world())));
                 }
 
                 if e.contains_aura_mask_transitively(o) {
-                    s.wln(format!("use crate::{}::{{AuraMask}};", major_version_to_string(&version.to_world())));
+                    s.wln(format!("use crate::{}::{{AuraMask}};", major_version_to_string(&version.as_world())));
                 }
 
                 s.wln(format!(

@@ -567,6 +567,7 @@ version 2: {:#?} in {} line {}",
 }
 
 #[derive(Debug, Clone)]
+#[allow(clippy::large_enum_variant)]
 pub enum Object {
     Container(Container),
     Enum(Definer),

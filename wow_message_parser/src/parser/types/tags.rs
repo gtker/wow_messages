@@ -82,10 +82,7 @@ impl WorldVersion {
                 WorldVersion::Exact(m, i, p, e) => m == om && i == oi && p == op && e == oe,
                 WorldVersion::All => true,
             },
-            WorldVersion::All => match self {
-                WorldVersion::All => true,
-                _ => false,
-            },
+            WorldVersion::All => matches!(self, WorldVersion::All),
         }
     }
 
@@ -331,12 +328,12 @@ impl Tags {
     pub fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
         let world = self
             .versions()
-            .into_iter()
+            .iter()
             .filter(|a| a.is_main_version())
             .map(|a| Version::World(*a));
 
         self.logon_versions()
-            .into_iter()
+            .iter()
             .map(|a| Version::Login(*a))
             .chain(world)
     }

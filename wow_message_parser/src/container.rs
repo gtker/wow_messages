@@ -627,16 +627,15 @@ impl Container {
                                 }
                             }
                         }
-                        Type::Array(array) => match array.ty() {
-                            ArrayType::Complex(s) => {
+                        Type::Array(array) => {
+                            if let ArrayType::Complex(s) = array.ty() {
                                 if let Object::Container(e) = o.get_object(s, tags) {
                                     for m in e.fields() {
                                         inner(m, v, o, tags);
                                     }
                                 }
                             }
-                            _ => {}
-                        },
+                        }
                         _ => {}
                     }
                 }

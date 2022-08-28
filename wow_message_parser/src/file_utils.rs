@@ -16,6 +16,7 @@ pub const UPDATE_MASK_LOCATION: &str = "wow_world_messages/src/helper/vanilla/up
 pub const BASE_DIR: &str = "wow_world_base/src/inner";
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
+#[allow(clippy::enum_variant_names)]
 pub enum SubmoduleLocation {
     PubUseInternal,
     PubMod,
