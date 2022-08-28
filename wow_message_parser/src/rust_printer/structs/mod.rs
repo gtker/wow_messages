@@ -42,11 +42,11 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     }
 
     if e.contains_aura_mask() {
-        s.wln("use crate::AuraMask;");
+        s.wln("use crate::vanilla::AuraMask;");
     }
 
     if e.contains_update_mask() {
-        s.wln("use crate::UpdateMask;");
+        s.wln("use crate::vanilla::UpdateMask;");
     }
 
     for name in e.get_types_needing_import() {

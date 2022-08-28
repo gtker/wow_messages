@@ -55,7 +55,7 @@ mod test {
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
+    use crate::vanilla::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
     use crate::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xCF, 0x01, 0x94, 0x98, 0x50, 0x61, ];

@@ -132,7 +132,7 @@ pub fn print_update_mask() {
         }
     }
 
-    s.wln("use crate::helper::update_mask::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};");
+    s.wln("use crate::vanilla::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};");
     s.newline();
 
     for (ty, types) in update_types {

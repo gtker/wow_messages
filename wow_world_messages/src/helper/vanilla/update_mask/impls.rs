@@ -1,6 +1,6 @@
 use crate::Guid;
 use crate::vanilla::{Race, Class, Gender, Power};
-use crate::helper::update_mask::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};
+use crate::vanilla::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};
 
 impl UpdateItem {
     pub fn set_object_GUID(mut self, v: Guid) -> Self {

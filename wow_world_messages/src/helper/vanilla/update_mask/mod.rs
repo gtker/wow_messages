@@ -199,16 +199,17 @@ impl UpdateMask {
         };
 
         1 // amount_of_blocks
-        + header_len * 4
-        + values_len * 4
+            + header_len * 4
+            + values_len * 4
     }
 }
 
 #[cfg(test)]
 mod test {
     use crate::helper::update_mask::UpdatePlayer;
+    use crate::vanilla::UpdateMask;
     use crate::vanilla::{Class, Gender, Power, Race};
-    use crate::{Guid, UpdateMask};
+    use crate::Guid;
 
     #[test]
     fn most_minimal_example() {

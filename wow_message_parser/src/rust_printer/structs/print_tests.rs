@@ -44,7 +44,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
             ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
                 // We will need to also look into subobjects to determine if we need these, so just include them always for now
                 s.wln("use crate::Guid;");
-                s.wln("use crate::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};");
+                s.wln("use crate::vanilla::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};");
 
                 s.wln(format!(
                     "use crate::{{{}, {}}};",

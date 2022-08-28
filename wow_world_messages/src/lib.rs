@@ -41,12 +41,4 @@ pub use world::*;
 
 pub use helper::guid::Guid;
 
-#[cfg(feature = "vanilla")]
-pub use helper::vanilla::aura_mask::AuraMask;
-#[cfg(feature = "vanilla")]
-pub use helper::vanilla::update_mask::{
-    UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask,
-    UpdatePlayer, UpdateUnit,
-};
-
 pub const DEFAULT_PORT: u16 = 8085;
