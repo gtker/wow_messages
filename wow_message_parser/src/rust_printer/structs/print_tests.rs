@@ -36,14 +36,16 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
         s.wln("use super::*;");
         s.wln("use super::super::*;");
         s.wln(format!("use {};", e.get_opcode_import_path(version), ));
+
         match e.container_type() {
             ContainerType::Msg(_) => {
-                s.wln("use crate::{Guid, UpdateMask};");
-
                 panic!()
             }
             ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
-                s.wln("use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};");
+                // We will need to also look into subobjects to determine if we need these, so just include them always for now
+                s.wln("use crate::Guid;");
+                s.wln("use crate::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};");
+
                 s.wln(format!(
                     "use crate::{{{}, {}}};",
                     CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
