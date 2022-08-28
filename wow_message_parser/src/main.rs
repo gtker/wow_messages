@@ -18,7 +18,7 @@ use crate::file_utils::{
 use crate::ir_printer::write_intermediate_representation;
 use crate::rust_printer::{
     print_common_enum_common, print_common_enum_messages, print_enum, print_flag,
-    print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType,
+    print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
 };
 use parser::types::tags::Tags;
 
@@ -92,7 +92,16 @@ fn main() {
                 } else {
                     s.imports()
                 };
-                m.write_contents_to_file(e.name(), e.tags(), s, v);
+
+                let s = match v {
+                    Version::Login(_) => s.to_string(),
+                    Version::World(_) => match e.definer_ty() {
+                        DefinerType::Enum => print_enum(e, &o, v).proper_as_str().to_string(),
+                        DefinerType::Flag => print_flag(e, &o, v).proper_as_str().to_string(),
+                    },
+                };
+
+                m.write_contents_to_file(e.name(), e.tags(), &s, v);
             }
         } else {
             // TODO: base types that are the same across versions
@@ -130,7 +139,12 @@ fn main() {
                 s.imports()
             };
 
-            m.write_contents_to_file(e.name(), e.tags(), s, v);
+            let s = match v {
+                Version::Login(_) => s.to_string(),
+                Version::World(_) => print_struct(e, &o, v).proper_as_str().to_string(),
+            };
+
+            m.write_contents_to_file(e.name(), e.tags(), &s, v);
         }
 
         object_docs.push(print_docs_for_container(e, &o));

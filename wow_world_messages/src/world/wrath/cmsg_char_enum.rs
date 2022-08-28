@@ -41,7 +41,7 @@ mod test {
     use super::CMSG_CHAR_ENUM;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::world::wrath::opcodes::ClientOpcodeMessage;
     use crate::{Guid, UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
     use crate::{ClientMessage, ServerMessage};
 
