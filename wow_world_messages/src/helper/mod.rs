@@ -1,5 +1,9 @@
 pub(crate) mod guid;
-pub(crate) mod vanilla;
-pub(crate) mod wrath;
 
+#[cfg(feature = "vanilla")]
+pub(crate) mod vanilla;
+#[cfg(feature = "vanilla")]
 pub use vanilla::*;
+
+#[cfg(feature = "wrath")]
+pub(crate) mod wrath;
