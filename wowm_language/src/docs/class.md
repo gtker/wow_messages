@@ -1,6 +1,6 @@
 # Class
 
-## Client Version 1
+## Client Version 1, Client Version 2
 
 ### Wowm Representation
 
