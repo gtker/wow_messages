@@ -39,11 +39,12 @@ mod world;
 pub use traits::*;
 pub use world::*;
 
-#[cfg(feature = "vanilla")]
-pub use helper::aura_mask::AuraMask;
 pub use helper::guid::Guid;
+
 #[cfg(feature = "vanilla")]
-pub use helper::update_mask::{
+pub use helper::vanilla::aura_mask::AuraMask;
+#[cfg(feature = "vanilla")]
+pub use helper::vanilla::update_mask::{
     UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask,
     UpdatePlayer, UpdateUnit,
 };
