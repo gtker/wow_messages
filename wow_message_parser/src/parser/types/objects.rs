@@ -278,6 +278,14 @@ impl Objects {
         &self.flags
     }
 
+    pub fn all_objects(&self) -> impl Iterator<Item = Object> + '_ {
+        self.enums
+            .iter()
+            .map(|a| Object::Enum(a.clone()))
+            .chain(self.flags.iter().map(|a| Object::Flag(a.clone())))
+            .chain(self.all_containers().map(|a| Object::Container(a.clone())))
+    }
+
     pub fn all_definers(&self) -> impl Iterator<Item = &Definer> {
         self.enums.iter().chain(&self.flags)
     }
@@ -572,4 +580,22 @@ pub enum Object {
     Container(Container),
     Enum(Definer),
     Flag(Definer),
+}
+
+impl Object {
+    pub fn tags(&self) -> &Tags {
+        match self {
+            Object::Container(e) => e.tags(),
+            Object::Enum(e) => e.tags(),
+            Object::Flag(e) => e.tags(),
+        }
+    }
+
+    pub fn name(&self) -> &str {
+        match self {
+            Object::Container(e) => e.name(),
+            Object::Enum(e) => e.name(),
+            Object::Flag(e) => e.name(),
+        }
+    }
 }

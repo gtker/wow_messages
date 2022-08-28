@@ -16,6 +16,7 @@ use crate::file_utils::{
     write_string_to_file, ModFiles, LOGIN_DIR,
 };
 use crate::ir_printer::write_intermediate_representation;
+use crate::parser::types::objects::Object;
 use crate::rust_printer::{
     print_common_enum_common, print_common_enum_messages, print_enum, print_flag,
     print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
@@ -71,17 +72,20 @@ fn main() {
     let mut m = ModFiles::new();
 
     let mut definer_docs = Vec::new();
-    for e in o.all_definers() {
+    let mut object_docs = Vec::new();
+
+    for e in o.all_objects() {
         if should_not_write_object(e.tags()) {
             continue;
         }
 
-        let (first, versions) = e.tags().first_and_main_versions();
+        let (first, mut versions) = e.tags().first_and_main_versions();
 
         if !e.tags().is_in_common() {
-            let s = match e.definer_ty() {
-                DefinerType::Enum => print_enum(e, &o, first),
-                DefinerType::Flag => print_flag(e, &o, first),
+            let s = match &e {
+                Object::Container(e) => print_struct(e, &o, first),
+                Object::Enum(e) => print_enum(e, &o, first),
+                Object::Flag(e) => print_flag(e, &o, first),
             };
 
             m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
@@ -95,9 +99,10 @@ fn main() {
 
                 let s = match v {
                     Version::Login(_) => s.to_string(),
-                    Version::World(_) => match e.definer_ty() {
-                        DefinerType::Enum => print_enum(e, &o, v).proper_as_str().to_string(),
-                        DefinerType::Flag => print_flag(e, &o, v).proper_as_str().to_string(),
+                    Version::World(_) => match &e {
+                        Object::Container(e) => print_struct(e, &o, v).proper_as_str().to_string(),
+                        Object::Enum(e) => print_enum(e, &o, v).proper_as_str().to_string(),
+                        Object::Flag(e) => print_flag(e, &o, v).proper_as_str().to_string(),
                     },
                 };
 
@@ -105,51 +110,29 @@ fn main() {
             }
         } else {
             // TODO: base types that are the same across versions
-            let common_s = print_common_enum_common(e, &o, first);
-            let world_s = print_common_enum_messages(e, first);
 
-            m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s, first);
+            versions.push(first);
 
             for v in versions {
-                let common_s = print_common_enum_common(e, &o, v);
-                let world_s = print_common_enum_messages(e, v);
+                let (common_s, world_s) = match &e {
+                    Object::Enum(e) => {
+                        let common_s = print_common_enum_common(e, &o, v);
+                        let world_s = print_common_enum_messages(e, v);
+
+                        (common_s, world_s)
+                    }
+                    _ => unimplemented!(),
+                };
+
                 m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s, v);
             }
         }
 
-        let docs = match e.definer_ty() {
-            DefinerType::Enum => print_docs_for_enum(e),
-            DefinerType::Flag => print_docs_for_flag(e),
-        };
-        definer_docs.push(docs);
-    }
-
-    let mut object_docs = Vec::new();
-    for e in o.all_containers() {
-        if should_not_write_object(e.tags()) {
-            continue;
+        match &e {
+            Object::Container(e) => object_docs.push(print_docs_for_container(e, &o)),
+            Object::Enum(e) => definer_docs.push(print_docs_for_enum(e)),
+            Object::Flag(e) => definer_docs.push(print_docs_for_flag(e)),
         }
-
-        let (first, versions) = e.tags().first_and_main_versions();
-
-        let s = print_struct(e, &o, first);
-        m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
-        for v in versions {
-            let s = if v.is_world() {
-                s.proper_as_str()
-            } else {
-                s.imports()
-            };
-
-            let s = match v {
-                Version::Login(_) => s.to_string(),
-                Version::World(_) => print_struct(e, &o, v).proper_as_str().to_string(),
-            };
-
-            m.write_contents_to_file(e.name(), e.tags(), &s, v);
-        }
-
-        object_docs.push(print_docs_for_container(e, &o));
     }
 
     definer_docs.sort_by(|a, b| a.name().cmp(b.name()));
