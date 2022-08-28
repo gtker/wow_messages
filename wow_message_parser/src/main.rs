@@ -91,6 +91,7 @@ fn main() {
                 m.write_contents_to_file(e.name(), e.tags(), s, v);
             }
         } else {
+            // TODO: base types that are the same across versions
             let common_s = print_common_enum_common(e, &o, first);
             let world_s = print_common_enum_messages(e, first);
 

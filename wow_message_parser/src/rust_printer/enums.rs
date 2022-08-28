@@ -9,7 +9,7 @@ pub fn print_common_enum_common(e: &Definer, o: &Objects, version: Version) -> W
 
     includes(&mut s);
 
-    declaration(&mut s, e, o);
+    declaration(&mut s, e, o, true);
 
     print_default(&mut s, e);
 
@@ -46,7 +46,7 @@ pub fn print_enum(e: &Definer, o: &Objects, version: Version) -> Writer {
 
     includes(&mut s);
 
-    declaration(&mut s, e, o);
+    declaration(&mut s, e, o, false);
 
     common_impls(&mut s, e);
 
@@ -65,12 +65,12 @@ fn includes(s: &mut Writer) {
     s.newline();
 }
 
-fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
+fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_override: bool) {
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
     print_wowm_definition("enum", s, e);
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]");
-    let visibility = match e.only_used_in_if() {
+    let visibility = match e.only_used_in_if() && !common_visibility_override {
         true => "pub(crate)",
         false => "pub",
     };

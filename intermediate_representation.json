@@ -17641,7 +17641,116 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/class.wowm",
-        "start_position": 3
+        "start_position": 1
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "Class",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "WARRIOR",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PALADIN",
+          "value": {
+            "int": 2,
+            "original": "2"
+          },
+          "tags": {}
+        },
+        {
+          "name": "HUNTER",
+          "value": {
+            "int": 3,
+            "original": "3"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ROGUE",
+          "value": {
+            "int": 4,
+            "original": "4"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PRIEST",
+          "value": {
+            "int": 5,
+            "original": "5"
+          },
+          "tags": {}
+        },
+        {
+          "name": "DEATH_KNIGHT",
+          "value": {
+            "int": 6,
+            "original": "6"
+          },
+          "tags": {}
+        },
+        {
+          "name": "SHAMAN",
+          "value": {
+            "int": 7,
+            "original": "7"
+          },
+          "tags": {}
+        },
+        {
+          "name": "MAGE",
+          "value": {
+            "int": 8,
+            "original": "8"
+          },
+          "tags": {}
+        },
+        {
+          "name": "WARLOCK",
+          "value": {
+            "int": 9,
+            "original": "9"
+          },
+          "tags": {}
+        },
+        {
+          "name": "DRUID",
+          "value": {
+            "int": 11,
+            "original": "11"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u8"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Major": 3
+            }
+          ]
+        }
+      },
+      "objects_used_in": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/enums/class.wowm",
+        "start_position": 16
       },
       "features": [
         "Enum",

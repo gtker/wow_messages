@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/class.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/class.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/class.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/class.wowm#L16):
 /// ```text
 /// enum Class : u8 {
 ///     WARRIOR = 1;
@@ -8,6 +8,7 @@ use std::convert::{TryFrom, TryInto};
 ///     HUNTER = 3;
 ///     ROGUE = 4;
 ///     PRIEST = 5;
+///     DEATH_KNIGHT = 6;
 ///     SHAMAN = 7;
 ///     MAGE = 8;
 ///     WARLOCK = 9;
@@ -22,6 +23,7 @@ pub enum Class {
     Hunter,
     Rogue,
     Priest,
+    DeathKnight,
     Shaman,
     Mage,
     Warlock,
@@ -42,6 +44,7 @@ impl std::fmt::Display for Class {
             Self::Hunter => f.write_str("Hunter"),
             Self::Rogue => f.write_str("Rogue"),
             Self::Priest => f.write_str("Priest"),
+            Self::DeathKnight => f.write_str("DeathKnight"),
             Self::Shaman => f.write_str("Shaman"),
             Self::Mage => f.write_str("Mage"),
             Self::Warlock => f.write_str("Warlock"),
@@ -58,6 +61,7 @@ impl Class {
             Self::Hunter => 0x3,
             Self::Rogue => 0x4,
             Self::Priest => 0x5,
+            Self::DeathKnight => 0x6,
             Self::Shaman => 0x7,
             Self::Mage => 0x8,
             Self::Warlock => 0x9,
@@ -76,6 +80,7 @@ impl TryFrom<u8> for Class {
             3 => Ok(Self::Hunter),
             4 => Ok(Self::Rogue),
             5 => Ok(Self::Priest),
+            6 => Ok(Self::DeathKnight),
             7 => Ok(Self::Shaman),
             8 => Ok(Self::Mage),
             9 => Ok(Self::Warlock),
