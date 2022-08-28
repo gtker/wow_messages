@@ -13,6 +13,8 @@
 
 # Low Priority
 
+* Max size of vanilla message (10240) mangoszero/server/WorldSocket.cpp:367
+
 * Do not allocate for statically sized messages
 * Special type for SMSG_LOGIN_SETTIMESPEED.datetime
 * Workable Intermediate Representation for World
