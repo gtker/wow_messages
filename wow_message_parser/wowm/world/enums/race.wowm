@@ -11,6 +11,6 @@ enum Race : u8 {
     TROLL = 8;
     GOBLIN = 9;
 } {
-    rust_common_type = "true";
+    rust_base_type = "true";
 }
 

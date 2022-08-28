@@ -6,6 +6,6 @@ enum Gender : u8 {
     /* Apparently used by some pets */
     NONE = 2;
 } {
-    rust_common_type = "true";
+    rust_base_type = "true";
 }
 

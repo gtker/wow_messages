@@ -18,7 +18,7 @@ use crate::file_utils::{
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::types::objects::Object;
 use crate::rust_printer::{
-    get_import_from_base, get_import_from_shared, print_common_enum_common, print_enum, print_flag,
+    get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
     print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
 };
 use parser::types::tags::Tags;
@@ -47,7 +47,7 @@ const TEST_STR: &str = "test";
 const DISPLAY_STR: &str = "display";
 const SKIP_STR: &str = "skip_codegen";
 const LOGIN_VERSIONS: &str = "login_versions";
-const RUST_COMMON_TYPE: &str = "rust_common_type";
+const RUST_BASE_TYPE: &str = "rust_base_type";
 
 // Also used in /utils.rs
 const CSTRING_SMALLEST_ALLOWED: usize = 1;
@@ -81,7 +81,7 @@ fn main() {
 
         let (first, mut versions) = e.tags().first_and_main_versions();
 
-        if !e.tags().is_in_common() {
+        if !e.tags().is_in_base() {
             let s = match &e {
                 Object::Container(e) => print_struct(e, &o, first),
                 Object::Enum(e) => print_enum(e, &o, first),
@@ -107,41 +107,35 @@ fn main() {
                 }
             }
         } else {
-            let (common_s, world_s) = match &e {
+            let (base_s, world_s) = match &e {
                 Object::Enum(e) => {
-                    let common_s = print_common_enum_common(e, &o, first);
+                    let base_s = print_enum_for_base(e, &o, first);
                     let world_s = get_import_from_base(e.name(), first);
 
-                    (common_s, world_s)
+                    (base_s, world_s)
                 }
                 _ => unimplemented!(),
             };
 
             if versions.is_empty() {
-                m.write_common_contents_to_file(
-                    e.name(),
-                    e.tags(),
-                    &common_s.inner(),
-                    &world_s,
-                    first,
-                );
+                m.write_base_contents_to_file(e.name(), e.tags(), &base_s.inner(), &world_s, first);
             } else {
                 versions.push(first);
 
-                m.write_shared_contents_to_file(e.name(), e.tags(), &common_s.inner(), &versions);
+                m.write_shared_contents_to_file(e.name(), e.tags(), &base_s.inner(), &versions);
 
                 for v in versions.clone() {
-                    let (world_s, common_s) = match &e {
+                    let (world_s, base_s) = match &e {
                         Object::Enum(e) => {
-                            let common_s = get_import_from_shared(e.name(), &versions);
+                            let base_s = get_import_from_shared(e.name(), &versions);
                             let world_s = get_import_from_base(e.name(), v);
 
-                            (world_s, common_s)
+                            (world_s, base_s)
                         }
                         _ => unimplemented!(),
                     };
 
-                    m.write_shared_import_to_file(e.name(), e.tags(), &world_s, &common_s, &v);
+                    m.write_shared_import_to_file(e.name(), e.tags(), &world_s, &base_s, &v);
                 }
             }
         }

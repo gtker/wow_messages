@@ -1,7 +1,7 @@
 use heck::CamelCase;
 use std::fmt::Write;
 
-pub use enums::{print_common_enum_common, print_enum};
+pub use enums::{print_enum, print_enum_for_base};
 pub use flags::print_flag;
 pub use opcodes::print_login_opcodes;
 pub use opcodes::print_world_opcodes;

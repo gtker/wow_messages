@@ -3,7 +3,7 @@ use std::fmt::{Display, Formatter, Write};
 use crate::file_utils::get_import_path;
 use crate::rust_printer::Version;
 use crate::{
-    Objects, COMMENT, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, RUST_COMMON_TYPE, TEST_STR, VERSIONS,
+    Objects, COMMENT, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, RUST_BASE_TYPE, TEST_STR, VERSIONS,
 };
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Copy, Clone)]
@@ -443,8 +443,8 @@ impl Tags {
         !self.display.is_empty()
     }
 
-    pub fn is_in_common(&self) -> bool {
-        self.contains(RUST_COMMON_TYPE)
+    pub fn is_in_base(&self) -> bool {
+        self.contains(RUST_BASE_TYPE)
     }
 }
 

@@ -133,5 +133,5 @@ enum Map : u32 {
         display = "Naxxramas";
     }
 } {
-    rust_common_type = "true";
+    rust_base_type = "true";
 }

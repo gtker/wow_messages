@@ -112,7 +112,7 @@ impl ModFiles {
     }
 
     pub fn add_world_shared_file(&mut self, name: &str, versions: &[WorldVersion], tags: &Tags) {
-        let base_path = if tags.is_in_common() {
+        let base_path = if tags.is_in_base() {
             BASE_DIR
         } else {
             WORLD_DIR
@@ -135,7 +135,7 @@ impl ModFiles {
     pub fn add_world_file(&mut self, name: &str, version: &WorldVersion, tags: &Tags) {
         assert!(version.is_main_version());
 
-        if tags.is_in_common() {
+        if tags.is_in_base() {
             self.add_or_append_file(
                 format!("{}/", BASE_DIR),
                 (
@@ -222,13 +222,13 @@ impl ModFiles {
         &mut self,
         name: &str,
         tags: &Tags,
-        common_s: &str,
+        base_s: &str,
         versions: &[Version],
     ) {
         let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
 
-        let path = if tags.is_in_common() {
-            get_common_shared_filepath(name, &versions)
+        let path = if tags.is_in_base() {
+            get_base_shared_filepath(name, &versions)
         } else {
             get_world_shared_filepath(name, &versions)
         };
@@ -237,7 +237,7 @@ impl ModFiles {
 
         self.already_existing_files.insert(path.clone(), true);
 
-        create_and_overwrite_if_not_same_contents(common_s, Path::new(&path));
+        create_and_overwrite_if_not_same_contents(base_s, Path::new(&path));
     }
 
     pub fn write_shared_import_to_file(
@@ -245,26 +245,25 @@ impl ModFiles {
         name: &str,
         tags: &Tags,
         world_s: &str,
-        common_s: &str,
+        base_s: &str,
         version: &Version,
     ) {
         let version = &version.as_world();
-        let common_path = get_common_filepath(name, version);
+        let base_path = get_base_filepath(name, version);
         let world_path = get_world_filepath(name, version);
 
         self.add_world_file(name, version, tags);
-        self.already_existing_files
-            .insert(common_path.clone(), true);
+        self.already_existing_files.insert(base_path.clone(), true);
         self.already_existing_files.insert(world_path.clone(), true);
         create_and_overwrite_if_not_same_contents(world_s, Path::new(&world_path));
-        create_and_overwrite_if_not_same_contents(common_s, Path::new(&common_path));
+        create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
     }
 
-    pub fn write_common_contents_to_file(
+    pub fn write_base_contents_to_file(
         &mut self,
         name: &str,
         tags: &Tags,
-        common_s: &str,
+        base_s: &str,
         world_s: &str,
         version: Version,
     ) {
@@ -272,16 +271,15 @@ impl ModFiles {
             Version::Login(_) => unimplemented!(),
             Version::World(version) => {
                 let world_path = get_world_filepath(name, version);
-                let common_path = get_common_filepath(name, version);
+                let base_path = get_base_filepath(name, version);
 
                 self.add_world_file(name, version, tags);
 
                 self.already_existing_files.insert(world_path.clone(), true);
-                self.already_existing_files
-                    .insert(common_path.clone(), true);
+                self.already_existing_files.insert(base_path.clone(), true);
 
                 create_and_overwrite_if_not_same_contents(world_s, Path::new(&world_path));
-                create_and_overwrite_if_not_same_contents(common_s, Path::new(&common_path));
+                create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
             }
         }
     }
@@ -388,12 +386,12 @@ pub fn get_import_path(version: Version) -> String {
     }
 }
 
-fn get_common_filepath(object_name: &str, version: &WorldVersion) -> String {
+fn get_base_filepath(object_name: &str, version: &WorldVersion) -> String {
     let s = format!("{}/{}/", BASE_DIR, major_version_to_string(version));
     s + &get_module_name(object_name) + ".rs"
 }
 
-fn get_common_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> String {
+fn get_base_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> String {
     let s = format!("{}/shared/", BASE_DIR);
     s + &get_shared_module_name(object_name, versions) + ".rs"
 }

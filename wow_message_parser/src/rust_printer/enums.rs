@@ -4,7 +4,7 @@ use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{Objects, DISPLAY_STR};
 
-pub fn print_common_enum_common(e: &Definer, o: &Objects, version: Version) -> Writer {
+pub fn print_enum_for_base(e: &Definer, o: &Objects, version: Version) -> Writer {
     print_enum_inner(e, o, version, true)
 }
 

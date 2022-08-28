@@ -21,7 +21,7 @@ enum Power : u8 {
         comment = "This might not actually be sent to the client.";
     }
 } {
-    rust_common_type = "true";
+    rust_base_type = "true";
 }
 
 flag SpellCastTargetFlags : u16 {
