@@ -1,7 +1,5 @@
 use crate::file_utils::{overwrite_if_not_same_contents, UPDATE_MASK_LOCATION};
-use crate::parser::types::tags::Tag;
 use crate::rust_printer::Writer;
-use crate::Tags;
 use std::fmt::Write;
 use std::fmt::{Display, Formatter};
 use std::fs::read_to_string;
@@ -39,9 +37,7 @@ pub fn print_update_mask_docs() {
                     UfType::Guid => "GUID",
                     UfType::Int => "INT",
                     UfType::Float => "FLOAT",
-                    UfType::BytesWithNames(_, _, _, _)
-                    | UfType::Bytes
-                    | UfType::BytesWithTypes(_, _, _, _) => "BYTES",
+                    UfType::BytesWith(_, _, _, _) | UfType::Bytes => "BYTES",
                     UfType::TwoShort => "TWO_SHORT",
                 };
 
@@ -120,15 +116,15 @@ pub fn print_update_mask() {
     let mut s = Writer::new("");
     s.wln("use crate::Guid;");
     for m in FIELDS {
-        if let UfType::BytesWithTypes(a, b, c, d) = m.ty() {
-            s.wln(format!(
-                // The UpdateMask implementation realistically only works with 1.12
-                "use crate::vanilla::{{{}, {}, {}, {}}};",
-                a, b, c, d
-            ));
-
-            let mut tags = Tags::new();
-            tags.push(Tag::new("versions", "1.12"));
+        if let UfType::BytesWith(a, b, c, d) = m.ty() {
+            for ty in [a, b, c, d] {
+                match ty.ty {
+                    ByteInnerTy::Byte => {}
+                    ByteInnerTy::Ty(ty) => {
+                        s.wln(format!("use crate::vanilla::{{{}}};", ty));
+                    }
+                }
+            }
         }
     }
 
@@ -169,23 +165,25 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
             ));
         }
         _ => {
-            let value = match m.ty {
+            let value = match &m.ty {
                 UfType::Int => "v as u32".to_string(),
                 UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
                 UfType::Bytes => "u32::from_le_bytes([a, b, c, d])".to_string(),
                 UfType::TwoShort => "v".to_string(),
-                UfType::BytesWithTypes(_, _, _, _) => {
-                    let mut tags = Tags::new();
-                    tags.push(Tag::new("versions", "1.12"));
-
-                    let get_name = |variable_name| -> String {
-                        format!("{name}.as_int()", name = variable_name)
+                UfType::BytesWith(a, b, c, d) => {
+                    let get_name = |byte_type: &ByteType| -> String {
+                        match byte_type.ty {
+                            ByteInnerTy::Byte => byte_type.name.to_string(),
+                            ByteInnerTy::Ty(_) => {
+                                format!("{name}.as_int()", name = byte_type.name)
+                            }
+                        }
                     };
 
-                    let a = get_name("a");
-                    let b = get_name("b");
-                    let c = get_name("c");
-                    let d = get_name("d");
+                    let a = get_name(a);
+                    let b = get_name(b);
+                    let c = get_name(c);
+                    let d = get_name(d);
 
                     format!(
                         "u32::from_le_bytes([{a}, {b}, {c}, {d}])",
@@ -194,9 +192,6 @@ fn print_functions(s: &mut Writer, m: &MemberType) {
                         c = c,
                         d = d
                     )
-                }
-                UfType::BytesWithNames(a, b, c, d) => {
-                    format!("u32::from_le_bytes([{}, {}, {}, {}])", a, b, c, d)
                 }
                 _ => unreachable!(),
             };
@@ -236,14 +231,77 @@ impl Display for UpdateMaskType {
     }
 }
 
-#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
+pub enum ByteInnerTy {
+    Byte,
+    Ty(&'static str),
+}
+
+#[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
+pub struct ByteType {
+    pub name: &'static str,
+    pub ty: ByteInnerTy,
+}
+
+impl ByteType {
+    pub const fn new(name: &'static str, ty: &'static str) -> Self {
+        Self {
+            name,
+            ty: ByteInnerTy::Ty(ty),
+        }
+    }
+
+    pub const fn byte(name: &'static str) -> Self {
+        Self {
+            name,
+            ty: ByteInnerTy::Byte,
+        }
+    }
+
+    pub const fn ty_str(&self) -> &'static str {
+        match self.ty {
+            ByteInnerTy::Byte => "u8",
+            ByteInnerTy::Ty(s) => s,
+        }
+    }
+
+    #[allow(unused)]
+    pub const fn a() -> Self {
+        Self {
+            name: "a",
+            ty: ByteInnerTy::Byte,
+        }
+    }
+    #[allow(unused)]
+    pub const fn b() -> Self {
+        Self {
+            name: "b",
+            ty: ByteInnerTy::Byte,
+        }
+    }
+    #[allow(unused)]
+    pub const fn c() -> Self {
+        Self {
+            name: "c",
+            ty: ByteInnerTy::Byte,
+        }
+    }
+    #[allow(unused)]
+    pub const fn d() -> Self {
+        Self {
+            name: "d",
+            ty: ByteInnerTy::Byte,
+        }
+    }
+}
+
+#[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub enum UfType {
     Guid,
     Int,
     Float,
     Bytes,
-    BytesWithNames(&'static str, &'static str, &'static str, &'static str),
-    BytesWithTypes(&'static str, &'static str, &'static str, &'static str),
+    BytesWith(ByteType, ByteType, ByteType, ByteType),
     TwoShort,
 }
 
@@ -264,18 +322,25 @@ impl UfType {
                 UfType::Bytes => {
                     return "a: u8, b: u8, c: u8, d: u8".to_string();
                 }
-                UfType::BytesWithTypes(a, b, c, d) => {
-                    return format!("a: {}, b: {}, c: {}, d: {}", a, b, c, d);
-                }
-                UfType::BytesWithNames(a, b, c, d) => {
-                    return format!("{}: u8, {}: u8, {}: u8, {}: u8", a, b, c, d);
+                UfType::BytesWith(a, b, c, d) => {
+                    return format!(
+                        "{}: {}, {}: {}, {}: {}, {}: {}",
+                        a.name,
+                        a.ty_str(),
+                        b.name,
+                        b.ty_str(),
+                        c.name,
+                        c.ty_str(),
+                        d.name,
+                        d.ty_str(),
+                    );
                 }
             }
         )
     }
 }
 
-#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct MemberType {
     object_ty: UpdateMaskType,
     name: &'static str,
@@ -301,7 +366,7 @@ impl MemberType {
         self.name
     }
     pub fn ty(&self) -> UfType {
-        self.ty
+        self.ty.clone()
     }
 }
 
@@ -370,7 +435,12 @@ pub const FIELDS: [MemberType; 296] = [
         "BYTES_0",
         0x24,
         1,
-        UfType::BytesWithTypes("Race", "Class", "Gender", "Power"),
+        UfType::BytesWith(
+            ByteType::new("race", "Race"),
+            ByteType::new("class", "Class"),
+            ByteType::new("gender", "Gender"),
+            ByteType::new("power", "Power"),
+        ),
     ),
     MemberType::new(
         UpdateMaskType::Unit,
@@ -542,7 +612,12 @@ pub const FIELDS: [MemberType; 296] = [
         "BYTES_2",
         0xA4,
         1,
-        UfType::BytesWithNames("facial_hair", "unknown", "bank_bag_slots", "rested_state"),
+        UfType::BytesWith(
+            ByteType::byte("facial_hair"),
+            ByteType::byte("unknown"),
+            ByteType::byte("bank_bag_slots"),
+            ByteType::byte("rested_state"),
+        ),
     ),
     MemberType::new(UpdateMaskType::Unit, "ATTACK_POWER", 0xA5, 1, UfType::Int),
     MemberType::new(

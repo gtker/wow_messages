@@ -1,5 +1,8 @@
 use crate::Guid;
-use crate::vanilla::{Race, Class, Gender, Power};
+use crate::vanilla::{Race};
+use crate::vanilla::{Class};
+use crate::vanilla::{Gender};
+use crate::vanilla::{Power};
 use crate::vanilla::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};
 
 impl UpdateItem {
@@ -415,9 +418,9 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_BYTES_0(mut self, a: Race, b: Class, c: Gender, d: Power) -> Self {
+    pub fn set_unit_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
         self.header_set(36);
-        self.values.insert(36, u32::from_le_bytes([a.as_int(), b.as_int(), c.as_int(), d.as_int()]));
+        self.values.insert(36, u32::from_le_bytes([race.as_int(), class.as_int(), gender.as_int(), power.as_int()]));
         self
     }
 
@@ -928,9 +931,9 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_BYTES_0(mut self, a: Race, b: Class, c: Gender, d: Power) -> Self {
+    pub fn set_unit_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
         self.header_set(36);
-        self.values.insert(36, u32::from_le_bytes([a.as_int(), b.as_int(), c.as_int(), d.as_int()]));
+        self.values.insert(36, u32::from_le_bytes([race.as_int(), class.as_int(), gender.as_int(), power.as_int()]));
         self
     }
 
