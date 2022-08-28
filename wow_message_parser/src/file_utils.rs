@@ -57,6 +57,9 @@ impl ModFiles {
                         writeln!(s, "pub use {}::*;", i).unwrap();
                     }
                     SubmoduleLocation::PubMod => {
+                        if ["vanilla", "wrath", "tbc"].contains(&i.as_str()) {
+                            writeln!(s, "#[cfg(feature = \"{}\")]", i).unwrap();
+                        }
                         writeln!(s, "pub mod {};", i).unwrap();
                     }
                 }
