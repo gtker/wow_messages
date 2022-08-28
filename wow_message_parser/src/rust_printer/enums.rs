@@ -1,10 +1,26 @@
-use crate::file_utils::{get_import_path, major_version_to_string};
+use crate::file_utils::{get_import_path, get_shared_module_name, major_version_to_string};
 use crate::parser::enumerator::Definer;
+use crate::parser::types::tags::WorldVersion;
 use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{Objects, DISPLAY_STR};
 
-pub fn print_common_enum_messages(e: &Definer, version: Version) -> Writer {
+pub fn print_enum_import_from_shared(e: &Definer, versions: &[Version]) -> Writer {
+    let mut s = Writer::new(&get_import_path(versions[0]));
+
+    let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
+
+    s.wln(format!(
+        "pub use crate::shared::{}::{};",
+        get_shared_module_name(e.name(), &versions),
+        e.name()
+    ));
+    s.newline();
+
+    s
+}
+
+pub fn print_common_enum_import_from_common(e: &Definer, version: Version) -> Writer {
     let mut s = Writer::new(&get_import_path(version));
     let version = match version {
         Version::Login(_) => unreachable!(),

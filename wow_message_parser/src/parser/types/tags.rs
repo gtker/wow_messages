@@ -101,6 +101,10 @@ impl WorldVersion {
 
         false
     }
+
+    pub fn to_module_case(&self) -> String {
+        self.to_string().replace('.', "_")
+    }
 }
 
 impl Display for WorldVersion {

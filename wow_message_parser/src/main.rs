@@ -18,8 +18,9 @@ use crate::file_utils::{
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::types::objects::Object;
 use crate::rust_printer::{
-    print_common_enum_common, print_common_enum_messages, print_enum, print_flag,
-    print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
+    print_common_enum_common, print_common_enum_import_from_common, print_enum,
+    print_enum_import_from_shared, print_flag, print_login_opcodes, print_update_mask,
+    print_world_opcodes, DefinerType, Version,
 };
 use parser::types::tags::Tags;
 
@@ -109,22 +110,36 @@ fn main() {
                 m.write_contents_to_file(e.name(), e.tags(), &s, v);
             }
         } else {
-            // TODO: base types that are the same across versions
+            let (common_s, world_s) = match &e {
+                Object::Enum(e) => {
+                    let common_s = print_common_enum_common(e, &o, first);
+                    let world_s = print_common_enum_import_from_common(e, first);
 
-            versions.push(first);
+                    (common_s, world_s)
+                }
+                _ => unimplemented!(),
+            };
 
-            for v in versions {
-                let (common_s, world_s) = match &e {
-                    Object::Enum(e) => {
-                        let common_s = print_common_enum_common(e, &o, v);
-                        let world_s = print_common_enum_messages(e, v);
+            if versions.is_empty() {
+                m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s, first);
+            } else {
+                versions.push(first);
 
-                        (common_s, world_s)
-                    }
-                    _ => unimplemented!(),
-                };
+                m.write_shared_contents_to_file(e.name(), e.tags(), &common_s, &versions);
 
-                m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s, v);
+                for v in versions.clone() {
+                    let (world_s, common_s) = match &e {
+                        Object::Enum(e) => {
+                            let common_s = print_enum_import_from_shared(e, &versions);
+                            let world_s = print_common_enum_import_from_common(e, v);
+
+                            (world_s, common_s)
+                        }
+                        _ => unimplemented!(),
+                    };
+
+                    m.write_shared_import_to_file(e.name(), e.tags(), &world_s, &common_s, &v);
+                }
             }
         }
 

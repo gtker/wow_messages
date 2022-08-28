@@ -20,6 +20,7 @@ pub const BASE_DIR: &str = "wow_world_base/src/inner";
 pub enum SubmoduleLocation {
     PubUseInternal,
     PubMod,
+    PubCrateMod,
     PubUseOnly,
 }
 
@@ -67,6 +68,9 @@ impl ModFiles {
                     SubmoduleLocation::PubUseOnly => {
                         writeln!(s, "pub use {}::*;", i).unwrap();
                     }
+                    SubmoduleLocation::PubCrateMod => {
+                        writeln!(s, "pub(crate) mod {};", i).unwrap();
+                    }
                 }
             }
             let filename = m.name.to_string() + "mod.rs";
@@ -105,6 +109,27 @@ impl ModFiles {
                 submodules: vec![e],
             })
         }
+    }
+
+    pub fn add_world_shared_file(&mut self, name: &str, versions: &[WorldVersion], tags: &Tags) {
+        let base_path = if tags.is_in_common() {
+            BASE_DIR
+        } else {
+            WORLD_DIR
+        };
+
+        self.add_or_append_file(
+            format!("{}/", base_path),
+            ("shared".to_string(), SubmoduleLocation::PubCrateMod),
+        );
+
+        self.add_or_append_file(
+            format!("{}/shared/", base_path),
+            (
+                get_shared_module_name(name, versions),
+                SubmoduleLocation::PubMod,
+            ),
+        );
     }
 
     pub fn add_world_file(&mut self, name: &str, version: &WorldVersion, tags: &Tags) {
@@ -191,6 +216,48 @@ impl ModFiles {
                 },
             })
         }
+    }
+
+    pub fn write_shared_contents_to_file(
+        &mut self,
+        name: &str,
+        tags: &Tags,
+        common_s: &Writer,
+        versions: &[Version],
+    ) {
+        let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
+
+        let path = if tags.is_in_common() {
+            get_common_shared_filepath(name, &versions)
+        } else {
+            get_world_shared_filepath(name, &versions)
+        };
+
+        self.add_world_shared_file(name, &versions, tags);
+
+        self.already_existing_files.insert(path.clone(), true);
+
+        create_and_overwrite_if_not_same_contents(common_s.inner(), Path::new(&path));
+    }
+
+    pub fn write_shared_import_to_file(
+        &mut self,
+        name: &str,
+        tags: &Tags,
+        world_s: &Writer,
+        common_s: &Writer,
+        version: &Version,
+    ) {
+        let version = &version.as_world();
+        let common_path = get_common_filepath(name, version);
+        let world_path = get_world_filepath(name, version);
+
+        self.add_world_file(name, version, tags);
+        self.already_existing_files
+            .insert(common_path.clone(), true);
+        self.already_existing_files.insert(world_path.clone(), true);
+        create_and_overwrite_if_not_same_contents(world_s.inner(), Path::new(&world_path));
+        create_and_overwrite_if_not_same_contents(common_s.inner(), Path::new(&common_path));
     }
 
     pub fn write_common_contents_to_file(
@@ -329,6 +396,16 @@ fn get_common_filepath(object_name: &str, version: &WorldVersion) -> String {
     s + &get_module_name(object_name) + ".rs"
 }
 
+fn get_common_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> String {
+    let s = format!("{}/shared/", BASE_DIR);
+    s + &get_shared_module_name(object_name, versions) + ".rs"
+}
+
+fn get_world_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> String {
+    let s = format!("{}/shared/", WORLD_DIR);
+    s + &get_shared_module_name(object_name, versions) + ".rs"
+}
+
 fn get_world_filepath(object_name: &str, version: &WorldVersion) -> String {
     let s = get_world_version_file_path(version);
     s + &get_module_name(object_name) + ".rs"
@@ -391,4 +468,14 @@ pub fn create_and_overwrite_if_not_same_contents(s: &str, filename: &Path) {
 
 pub fn get_module_name(e: &str) -> String {
     e.to_snake_case()
+}
+
+pub fn get_shared_module_name(e: &str, versions: &[WorldVersion]) -> String {
+    let mut s = e.to_snake_case();
+
+    for v in versions {
+        s += &v.to_module_case();
+    }
+
+    s
 }

@@ -1,3 +1,4 @@
+pub(crate) mod shared;
 #[cfg(feature = "tbc")]
 pub mod tbc;
 #[cfg(feature = "vanilla")]
