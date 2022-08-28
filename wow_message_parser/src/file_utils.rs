@@ -468,6 +468,9 @@ pub fn get_module_name(e: &str) -> String {
 pub fn get_shared_module_name(e: &str, versions: &[WorldVersion]) -> String {
     let mut s = e.to_snake_case();
 
+    let mut versions = versions.to_vec();
+    versions.sort();
+
     for v in versions {
         s += &v.to_module_case();
     }

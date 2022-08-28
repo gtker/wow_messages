@@ -1,2 +1,2 @@
-pub mod cmsg_char_enum231;
-pub mod smsg_auth_challenge21;
+pub mod cmsg_char_enum123;
+pub mod smsg_auth_challenge12;

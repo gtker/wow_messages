@@ -1,2 +1,2 @@
-pub use crate::shared::class21::Class;
+pub use crate::shared::class12::Class;
 
