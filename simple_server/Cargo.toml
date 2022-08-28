@@ -6,7 +6,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio = {version = "1.18.2", features = ["full"]}
+tokio = { version = "1.18.2", features = ["full"] }
 wow_login_messages = { path = "../wow_login_messages", features = ["tokio"] }
-wow_world_messages = { path = "../wow_world_messages", features = ["tokio"] }
+wow_world_messages = { path = "../wow_world_messages", features = ["tokio", "vanilla"] }
 wow_srp = { version = "0.4.0", default-features = false, features = ["srp-fast-math"] }
