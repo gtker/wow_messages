@@ -1,2 +1,2 @@
-pub use wow_world_base::Race;
+pub use wow_world_base::vanilla::Race;
 

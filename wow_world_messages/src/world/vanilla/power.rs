@@ -1,2 +1,2 @@
-pub use wow_world_base::Power;
+pub use wow_world_base::vanilla::Power;
 

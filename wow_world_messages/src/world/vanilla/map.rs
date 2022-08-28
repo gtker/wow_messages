@@ -1,2 +1,2 @@
-pub use wow_world_base::Map;
+pub use wow_world_base::vanilla::Map;
 

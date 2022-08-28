@@ -108,6 +108,14 @@ impl ModFiles {
         if tags.is_in_common() {
             self.add_or_append_file(
                 format!("{}/", BASE_DIR),
+                (
+                    major_version_to_string(version).to_string(),
+                    SubmoduleLocation::PubMod,
+                ),
+            );
+
+            self.add_or_append_file(
+                format!("{}/{}/", BASE_DIR, major_version_to_string(version)),
                 (get_module_name(name), SubmoduleLocation::PubUseInternal),
             );
         }
@@ -178,7 +186,7 @@ impl ModFiles {
     ) {
         for version in tags.main_versions() {
             let world_path = get_world_filepath(name, version);
-            let common_path = get_common_filepath(name);
+            let common_path = get_common_filepath(name, version);
 
             self.add_world_file(name, version, tags);
 
@@ -303,8 +311,8 @@ pub fn get_import_path(tags: &Tags) -> String {
     }
 }
 
-fn get_common_filepath(object_name: &str) -> String {
-    let s = format!("{}/", BASE_DIR);
+fn get_common_filepath(object_name: &str, version: &WorldVersion) -> String {
+    let s = format!("{}/{}/", BASE_DIR, major_version_to_string(version));
     s + &get_module_name(object_name) + ".rs"
 }
 

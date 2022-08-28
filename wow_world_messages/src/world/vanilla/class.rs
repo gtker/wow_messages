@@ -1,2 +1,2 @@
-pub use wow_world_base::Class;
+pub use wow_world_base::vanilla::Class;
 
