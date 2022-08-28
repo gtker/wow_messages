@@ -5,7 +5,7 @@ use wow_srp::header_crypto::{Decrypter, Encrypter};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
-use crate::world::vanilla::CMSG_CHAR_ENUM;
+use crate::world::wrath::CMSG_CHAR_ENUM;
 
 #[derive(Debug)]
 pub enum ClientOpcodeMessage {

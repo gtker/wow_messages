@@ -101,7 +101,12 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType,
             }
         }
 
-        let module_name = get_import_path(e.tags().import_version());
+        let import_version = match e.tags().import_version() {
+            Version::Login(l) => l.into(),
+            // TODO: World does not deduplicate same types
+            Version::World(_) => version,
+        };
+        let module_name = get_import_path(import_version);
         s.wln(format!(
             "use {module_name}::{name};",
             module_name = module_name,
