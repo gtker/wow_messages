@@ -18,7 +18,7 @@ use crate::file_utils::{
 use crate::ir_printer::write_intermediate_representation;
 use crate::rust_printer::{
     print_common_enum_common, print_common_enum_messages, print_enum, print_flag,
-    print_login_opcodes, print_update_mask, print_world_opcodes,
+    print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType,
 };
 use parser::types::tags::Tags;
 
@@ -71,7 +71,7 @@ fn main() {
     let mut m = ModFiles::new();
 
     let mut definer_docs = Vec::new();
-    for e in o.enums() {
+    for e in o.all_definers() {
         if should_not_write_object(e.tags()) {
             continue;
         }
@@ -79,7 +79,11 @@ fn main() {
         let (first, versions) = e.tags().first_and_main_versions();
 
         if !e.tags().is_in_common() {
-            let s = print_enum(e, &o, first);
+            let s = match e.definer_ty() {
+                DefinerType::Enum => print_enum(e, &o, first),
+                DefinerType::Flag => print_flag(e, &o, first),
+            };
+
             m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
 
             for v in versions {
@@ -102,29 +106,11 @@ fn main() {
             }
         }
 
-        definer_docs.push(print_docs_for_enum(e));
-    }
-
-    for e in o.flags() {
-        if should_not_write_object(e.tags()) {
-            continue;
-        }
-
-        let (first, versions) = e.tags().first_and_main_versions();
-
-        let s = print_flag(e, &o, first);
-
-        m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
-        for v in versions {
-            let s = if v.is_world() {
-                s.proper_as_str()
-            } else {
-                s.imports()
-            };
-            m.write_contents_to_file(e.name(), e.tags(), s, v);
-        }
-
-        definer_docs.push(print_docs_for_flag(e));
+        let docs = match e.definer_ty() {
+            DefinerType::Enum => print_docs_for_enum(e),
+            DefinerType::Flag => print_docs_for_flag(e),
+        };
+        definer_docs.push(docs);
     }
 
     let mut object_docs = Vec::new();
