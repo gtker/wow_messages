@@ -93,7 +93,10 @@ pub fn parse_file(filename: &Path) -> Objects {
         .expect("unable to find statements")
         .into_inner();
 
-    parse_statements(&mut statements, commands.tags(), filename.to_str().unwrap())
+    use path_slash::PathExt as _;
+    let filename = filename.to_slash().unwrap();
+
+    parse_statements(&mut statements, commands.tags(), &filename)
 }
 
 fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, filename: &str) -> Objects {
