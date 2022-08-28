@@ -17,7 +17,7 @@ mod print_tests;
 pub fn print_struct(e: &Container, o: &Objects, version: Version) -> Writer {
     let mut s = Writer::new(&get_import_path(version));
 
-    print_includes(&mut s, e, o);
+    print_includes(&mut s, e, o, version);
 
     print_declaration(&mut s, e, o);
 
@@ -34,19 +34,21 @@ pub fn print_struct(e: &Container, o: &Objects, version: Version) -> Writer {
     s
 }
 
-fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
+fn print_includes(s: &mut Writer, e: &Container, o: &Objects, version: Version) {
     s.wln("use std::convert::{TryFrom, TryInto};");
 
     if e.contains_guid_or_packed_guid() {
         s.wln("use crate::Guid;");
     }
 
+    let import_path = get_import_path(version);
+
     if e.contains_aura_mask() {
-        s.wln("use crate::vanilla::AuraMask;");
+        s.wln(format!("use {}::AuraMask;", import_path));
     }
 
     if e.contains_update_mask() {
-        s.wln("use crate::vanilla::UpdateMask;");
+        s.wln(format!("use {}::UpdateMask;", import_path));
     }
 
     for name in e.get_types_needing_import() {

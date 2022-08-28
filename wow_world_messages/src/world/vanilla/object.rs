@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::vanilla::UpdateMask;
+use crate::world::vanilla::UpdateMask;
 use crate::world::vanilla::MovementBlock;
 use crate::world::vanilla::ObjectType;
 use crate::world::vanilla::UpdateType;

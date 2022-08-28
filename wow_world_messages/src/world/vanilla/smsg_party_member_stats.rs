@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::vanilla::AuraMask;
+use crate::world::vanilla::AuraMask;
 use crate::world::vanilla::Area;
 use crate::world::vanilla::GroupMemberOnlineStatus;
 use crate::world::vanilla::GroupUpdateFlags;
