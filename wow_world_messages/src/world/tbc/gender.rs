@@ -1,2 +1,2 @@
-pub use wow_world_base::vanilla::Gender;
+pub use wow_world_base::tbc::Gender;
 

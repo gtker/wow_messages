@@ -111,6 +111,8 @@ fn main() {
             m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s, first);
 
             for v in versions {
+                let common_s = print_common_enum_common(e, &o, v);
+                let world_s = print_common_enum_messages(e, v);
                 m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s, v);
             }
         }
