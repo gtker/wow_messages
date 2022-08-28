@@ -18,9 +18,8 @@ use crate::file_utils::{
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::types::objects::Object;
 use crate::rust_printer::{
-    print_common_enum_common, print_common_enum_import_from_common, print_enum,
-    print_enum_import_from_shared, print_flag, print_login_opcodes, print_update_mask,
-    print_world_opcodes, DefinerType, Version,
+    get_import_from_base, get_import_from_shared, print_common_enum_common, print_enum, print_flag,
+    print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
 };
 use parser::types::tags::Tags;
 
@@ -113,7 +112,7 @@ fn main() {
             let (common_s, world_s) = match &e {
                 Object::Enum(e) => {
                     let common_s = print_common_enum_common(e, &o, first);
-                    let world_s = print_common_enum_import_from_common(e, first);
+                    let world_s = get_import_from_base(e.name(), first);
 
                     (common_s, world_s)
                 }
@@ -130,8 +129,8 @@ fn main() {
                 for v in versions.clone() {
                     let (world_s, common_s) = match &e {
                         Object::Enum(e) => {
-                            let common_s = print_enum_import_from_shared(e, &versions);
-                            let world_s = print_common_enum_import_from_common(e, v);
+                            let common_s = get_import_from_shared(e.name(), &versions);
+                            let world_s = get_import_from_base(e.name(), v);
 
                             (world_s, common_s)
                         }

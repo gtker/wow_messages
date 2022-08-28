@@ -1,10 +1,7 @@
 use heck::CamelCase;
 use std::fmt::Write;
 
-pub use enums::{
-    print_common_enum_common, print_common_enum_import_from_common, print_enum,
-    print_enum_import_from_shared,
-};
+pub use enums::{print_common_enum_common, print_enum};
 pub use flags::print_flag;
 pub use opcodes::print_login_opcodes;
 pub use opcodes::print_world_opcodes;
@@ -20,6 +17,7 @@ mod structs;
 mod update_mask;
 
 use crate::container::Sizes;
+use crate::file_utils::{get_import_path, get_shared_module_name, major_version_to_string};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::{ContainerType, Objects, Tags};
 pub use update_mask::*;
@@ -50,6 +48,34 @@ pub const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
 const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async-std\")]";
+
+pub fn get_import_from_shared(name: &str, versions: &[Version]) -> Writer {
+    let mut s = Writer::new(&get_import_path(versions[0]));
+
+    let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
+
+    s.wln(format!(
+        "pub use crate::shared::{}::{};",
+        get_shared_module_name(name, &versions),
+        name
+    ));
+    s.newline();
+
+    s
+}
+
+pub fn get_import_from_base(name: &str, version: Version) -> Writer {
+    let mut s = Writer::new(&get_import_path(version));
+
+    s.wln(format!(
+        "pub use wow_world_base::{}::{};",
+        major_version_to_string(&version.as_world()),
+        name
+    ));
+    s.newline();
+
+    s
+}
 
 impl Writer {
     pub(crate) const INDENTATION: &'static str = "    ";
