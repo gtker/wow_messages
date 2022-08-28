@@ -19412,10 +19412,13 @@
           "type": "world",
           "versions": [
             {
-              "Minor": [
-                1,
-                12
-              ]
+              "Major": 1
+            },
+            {
+              "Major": 2
+            },
+            {
+              "Major": 3
             }
           ]
         }
