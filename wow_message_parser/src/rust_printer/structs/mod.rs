@@ -4,7 +4,7 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
-    print_docc_description_and_comment, Writer, CLIENT_MESSAGE_TRAIT_NAME,
+    print_docc_description_and_comment, Version, Writer, CLIENT_MESSAGE_TRAIT_NAME,
     SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::wowm_printer::get_struct_wowm_definition;
@@ -14,8 +14,8 @@ mod print_new_types;
 mod print_optional;
 mod print_tests;
 
-pub fn print_struct(e: &Container, o: &Objects) -> Writer {
-    let mut s = Writer::new(&get_import_path(e.tags()));
+pub fn print_struct(e: &Container, o: &Objects, version: Version) -> Writer {
+    let mut s = Writer::new(&get_import_path(version));
 
     print_includes(&mut s, e, o);
 
@@ -25,7 +25,7 @@ pub fn print_struct(e: &Container, o: &Objects) -> Writer {
 
     print_new_types::print_new_types(&mut s, e);
 
-    print_tests::print_tests(&mut s, e, o);
+    print_tests::print_tests(&mut s, e, o, version);
 
     if let Some(optional) = e.rust_object().optional() {
         print_optional::print_optional(&mut s, optional);
@@ -50,7 +50,8 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     }
 
     for name in e.get_types_needing_import() {
-        let module_name = get_import_path(o.get_tags_of_object(name, e.tags()));
+        let version = o.get_tags_of_object(name, e.tags()).import_version();
+        let module_name = get_import_path(version);
 
         s.wln(format!(
             "use {module_name}::{name};",

@@ -301,17 +301,19 @@ impl Tags {
             .chain(world)
     }
 
-    pub fn first_major_version(&self) -> Option<&WorldVersion> {
-        for v in self.versions() {
-            if v.overlaps(&WorldVersion::Minor(1, 12))
-                || v.overlaps(&WorldVersion::Patch(2, 4, 3))
-                || v.overlaps(&WorldVersion::Patch(3, 3, 5))
-            {
-                return Some(v);
-            }
-        }
+    pub fn first_and_main_versions(&self) -> (Version, Vec<Version>) {
+        let mut v = self.main_versions();
+        let first = v.next().unwrap();
 
-        None
+        let rest = v.collect::<Vec<_>>();
+
+        (first, rest)
+    }
+
+    pub fn import_version(&self) -> Version {
+        let (first, _) = self.first_and_main_versions();
+
+        first
     }
 
     pub fn has_world_version(&self) -> bool {
@@ -471,7 +473,8 @@ impl TagString {
                 TagStringSymbol::Text(s) => current.push_str(s),
                 TagStringSymbol::Link(s) => {
                     if let Some(tags) = o.get_tags_of_object_fallible(s, object_tags) {
-                        write!(current, "[`{}`]({}::{})", s, get_import_path(tags), s).unwrap()
+                        let version = tags.import_version();
+                        write!(current, "[`{}`]({}::{})", s, get_import_path(version), s).unwrap()
                     } else {
                         write!(current, "`{}`", s).unwrap()
                     }

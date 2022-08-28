@@ -1,11 +1,11 @@
-use crate::file_utils::get_import_path;
+use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::parser::enumerator::Definer;
-use crate::rust_printer::{print_docc_description_and_comment, Writer};
+use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{Objects, DISPLAY_STR};
 
-pub fn print_common_enum_common(e: &Definer, o: &Objects) -> Writer {
-    let mut s = Writer::new(&get_import_path(e.tags()));
+pub fn print_common_enum_common(e: &Definer, o: &Objects, version: Version) -> Writer {
+    let mut s = Writer::new(&get_import_path(version));
 
     includes(&mut s);
 
@@ -24,12 +24,16 @@ pub fn print_common_enum_common(e: &Definer, o: &Objects) -> Writer {
     s
 }
 
-pub fn print_common_enum_messages(e: &Definer) -> Writer {
-    let mut s = Writer::new(&get_import_path(e.tags()));
+pub fn print_common_enum_messages(e: &Definer, version: Version) -> Writer {
+    let mut s = Writer::new(&get_import_path(version));
+    let version = match version {
+        Version::Login(_) => unreachable!(),
+        Version::World(l) => l,
+    };
 
     s.wln(format!(
         "pub use wow_world_base::{}::{};",
-        "vanilla",
+        major_version_to_string(&version),
         e.name()
     ));
     s.newline();
@@ -37,8 +41,8 @@ pub fn print_common_enum_messages(e: &Definer) -> Writer {
     s
 }
 
-pub fn print_enum(e: &Definer, o: &Objects) -> Writer {
-    let mut s = Writer::new(&get_import_path(e.tags()));
+pub fn print_enum(e: &Definer, o: &Objects, version: Version) -> Writer {
+    let mut s = Writer::new(&get_import_path(version));
 
     includes(&mut s);
 

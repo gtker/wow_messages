@@ -776,6 +776,27 @@ pub enum Version {
     World(WorldVersion),
 }
 
+impl Version {
+    pub fn is_world(&self) -> bool {
+        match self {
+            Version::Login(_) => false,
+            Version::World(_) => true,
+        }
+    }
+}
+
+impl From<LoginVersion> for Version {
+    fn from(l: LoginVersion) -> Self {
+        Self::Login(l)
+    }
+}
+
+impl From<WorldVersion> for Version {
+    fn from(l: WorldVersion) -> Self {
+        Self::World(l)
+    }
+}
+
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub enum DefinerType {
     Enum,

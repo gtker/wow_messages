@@ -1,18 +1,18 @@
 use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::{LoginVersion, Tag, Tags, WorldVersion};
+use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
     ArraySize, ArrayType, ContainerValue, ObjectType, VerifiedContainerValue,
 };
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
-    field_name_to_rust_name, DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+    field_name_to_rust_name, DefinerType, Version, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
     LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::test_case::TestCase;
-use crate::{CONTAINER_SELF_SIZE_FIELD, LOGIN_VERSIONS};
+use crate::CONTAINER_SELF_SIZE_FIELD;
 use std::ops::AddAssign;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
@@ -270,14 +270,16 @@ impl Container {
         self.only_has_io_error = Some(self.recursive_only_has_io_errors(o));
     }
 
-    pub fn get_opcode_import_path(&self) -> String {
-        let import_path = if self.tags().logon_versions().contains(&LoginVersion::All) {
-            let mut tags = Tags::new();
-            tags.push(Tag::new(LOGIN_VERSIONS, "3"));
-            get_import_path(&tags)
-        } else {
-            get_import_path(self.tags())
+    pub fn get_opcode_import_path(&self, version: Version) -> String {
+        // `all` doesn't have an opcodes.rs
+        let import_path = match version {
+            Version::Login(f) => match f {
+                LoginVersion::Specific(_) => get_import_path(version),
+                LoginVersion::All => get_import_path(Version::Login(LoginVersion::Specific(3))),
+            },
+            Version::World(_) => get_import_path(version),
         };
+
         match self.container_type() {
             ContainerType::CLogin(_) => {
                 format!(
@@ -1070,6 +1072,7 @@ pub struct Sizes {
 
 pub const AURA_MASK_MAX_SIZE: u8 = 4 + 32 * 4;
 pub const AURA_MASK_MIN_SIZE: u8 = 4;
+
 const fn update_mask_max() -> u16 {
     let amount_of_bytes_for_data = 0x501; // PLAYER_END
     let amount_of_mask_blocks_size = core::mem::size_of::<u32>() as i32;
@@ -1081,6 +1084,7 @@ const fn update_mask_max() -> u16 {
 
     (amount_of_mask_blocks_size + max_mask_blocks + amount_of_bytes_for_data) as u16
 }
+
 pub const UPDATE_MASK_MAX_SIZE: u16 = update_mask_max();
 pub const UPDATE_MASK_MIN_SIZE: u8 = 1;
 pub const PACKED_GUID_MAX_SIZE: u8 = 9;

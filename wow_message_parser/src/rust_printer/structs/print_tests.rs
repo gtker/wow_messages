@@ -7,14 +7,15 @@ use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::rust_view::{RustEnumerator, RustMember, RustType};
 use crate::rust_printer::{
-    get_new_flag_type_name, ImplType, UfType, UpdateMaskType, Writer, CLIENT_MESSAGE_TRAIT_NAME,
-    FIELDS, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
-    SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
+    get_new_flag_type_name, ImplType, UfType, UpdateMaskType, Version, Writer,
+    CLIENT_MESSAGE_TRAIT_NAME, FIELDS, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+    LOGIN_SERVER_MESSAGE_ENUM_NAME, SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
+    WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::test_case::{TestCase, TestCaseMember, TestValue};
 use crate::Tags;
 
-pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
+pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: Version) {
     if e.tests().is_empty() {
         return;
     }
@@ -24,17 +25,17 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
         s.wln(format!("use super::{};", e.name()));
 
         for name in e.get_types_needing_import_recursively(o) {
-            let tags = o.get_tags_of_object(name, e.tags());
+            let version = o.get_tags_of_object(name, e.tags()).import_version();
             s.wln(format!(
                 "use {import_path}::{ty};",
-                import_path = get_import_path(tags),
+                import_path = get_import_path(version),
                 ty = name,
             ));
         }
 
         s.wln("use super::*;");
         s.wln("use super::super::*;");
-        s.wln(format!("use {};", e.get_opcode_import_path(),));
+        s.wln(format!("use {};", e.get_opcode_import_path(version), ));
         match e.container_type() {
             ContainerType::Msg(_) => {
                 s.wln("use crate::{Guid, UpdateMask};");
@@ -79,7 +80,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
                         number = i,
                     ),
                     |s| {
-                        print_test_case(s, t, e, o, it,i );
+                        print_test_case(s, t, e, o, it, i);
                     },
                 );
             }

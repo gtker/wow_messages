@@ -2,7 +2,7 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world_version_path};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
-    ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
+    ImplType, Version, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
     CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, SERVER_MESSAGE_TRAIT_NAME, TOKIO_IMPORT,
 };
 
@@ -23,7 +23,7 @@ pub fn print_world_opcodes(
         _ => panic!("invalid type passed to opcode printer"),
     };
 
-    includes(&mut s, v, container_type);
+    includes(&mut s, v, container_type, Version::World(*version));
 
     definition(&mut s, v, ty);
 
@@ -44,7 +44,7 @@ pub fn print_login_opcodes(
         _ => panic!("invalid type passed to opcode printer"),
     };
 
-    includes(&mut s, v, container_type);
+    includes(&mut s, v, container_type, Version::Login(*version));
 
     definition(&mut s, v, ty);
 
@@ -57,7 +57,7 @@ fn any_container_is_pure_movement_info(v: &[&Container]) -> bool {
     v.iter().any(|a| a.is_pure_movement_info())
 }
 
-pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType) {
+pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType, version: Version) {
     match container_type {
         ContainerType::SLogin(_) => {
             s.wln(format!(
@@ -87,7 +87,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
             if any_container_is_pure_movement_info(v) {
                 s.wln(format!(
                     "use {module_name}::MovementInfo;",
-                    module_name = get_import_path(v.first().unwrap().tags())
+                    module_name = get_import_path(version)
                 ));
             }
         }
@@ -101,7 +101,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
             }
         }
 
-        let module_name = get_import_path(e.tags());
+        let module_name = get_import_path(e.tags().import_version());
         s.wln(format!(
             "use {module_name}::{name};",
             module_name = module_name,
@@ -151,7 +151,7 @@ fn world_common_impls_read_opcodes(
         let opcode_text = if size == "u32" {
             "opcode"
         } else {
-            "opcode: opcode.into()"  
+            "opcode: opcode.into()"
         };
         s.wln(format!("_ => Err({error_ty}::Opcode{{ {opcode_text}, size: body_size }}),", error_ty = error_ty, opcode_text = opcode_text));
 
@@ -205,11 +205,11 @@ fn world_common_impls_read_write(
     s.wln(it.cfg());
     s.open_curly(
         format!("pub {func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, {error_ty}>",
-            func = it.func(),
-            prefix = it.prefix(),
-            read = it.read(),
-            decrypter = it.decrypter(),
-            error_ty = error_ty,
+                func = it.func(),
+                prefix = it.prefix(),
+                read = it.read(),
+                decrypter = it.decrypter(),
+                error_ty = error_ty,
         )
     );
 
@@ -293,16 +293,16 @@ fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType) {
             prefix = it.prefix(),
             decrypter = it.decrypter(),
         ), |s| {
-        s.body("match self", |s| {
-           for container in v {
-               s.wln(format!("Self::{en}(c) => c.{prefix}write_encrypted_{cd}(w, e){postfix},",
-                   en = get_enumerator_name(container.name()),
-                   prefix = it.prefix(),
-                   postfix = it.postfix(),
-               ));
-           }
+            s.body("match self", |s| {
+                for container in v {
+                    s.wln(format!("Self::{en}(c) => c.{prefix}write_encrypted_{cd}(w, e){postfix},",
+                                  en = get_enumerator_name(container.name()),
+                                  prefix = it.prefix(),
+                                  postfix = it.postfix(),
+                    ));
+                }
+            });
         });
-    });
 
     s.wln(it.cfg());
     s.bodyn(
@@ -316,13 +316,13 @@ fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType) {
             s.body("match self", |s| {
                 for container in v {
                     s.wln(format!("Self::{en}(c) => c.{prefix}write_unencrypted_{cd}(w){postfix},",
-                        en = get_enumerator_name(container.name()),
-                        prefix = it.prefix(),
-                        postfix = it.postfix())
+                                  en = get_enumerator_name(container.name()),
+                                  prefix = it.prefix(),
+                                  postfix = it.postfix())
                     );
                 }
             });
-        }
+        },
     );
 }
 
@@ -381,7 +381,7 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                 }
             });
         },
-            true,
+        true,
     );
 
     for &e in v {

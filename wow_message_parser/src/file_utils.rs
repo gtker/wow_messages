@@ -183,67 +183,54 @@ impl ModFiles {
         tags: &Tags,
         common_s: &Writer,
         world_s: &Writer,
+        version: Version,
     ) {
-        for version in tags.main_versions() {
-            match &version {
-                Version::Login(_) => unimplemented!(),
-                Version::World(version) => {
-                    let world_path = get_world_filepath(name, version);
-                    let common_path = get_common_filepath(name, version);
+        match &version {
+            Version::Login(_) => unimplemented!(),
+            Version::World(version) => {
+                let world_path = get_world_filepath(name, version);
+                let common_path = get_common_filepath(name, version);
 
-                    self.add_world_file(name, version, tags);
+                self.add_world_file(name, version, tags);
 
-                    self.already_existing_files.insert(world_path.clone(), true);
-                    self.already_existing_files
-                        .insert(common_path.clone(), true);
+                self.already_existing_files.insert(world_path.clone(), true);
+                self.already_existing_files
+                    .insert(common_path.clone(), true);
 
-                    create_and_overwrite_if_not_same_contents(
-                        world_s.inner(),
-                        Path::new(&world_path),
-                    );
-                    create_and_overwrite_if_not_same_contents(
-                        common_s.inner(),
-                        Path::new(&common_path),
-                    );
-                }
+                create_and_overwrite_if_not_same_contents(world_s.inner(), Path::new(&world_path));
+                create_and_overwrite_if_not_same_contents(
+                    common_s.inner(),
+                    Path::new(&common_path),
+                );
             }
         }
     }
 
-    pub fn write_contents_to_file(&mut self, name: &str, tags: &Tags, s: &Writer) {
-        for (i, version) in tags.logon_versions().iter().enumerate() {
-            let path = get_login_filepath(name, version);
+    pub fn write_contents_to_file(&mut self, name: &str, tags: &Tags, s: &str, version: Version) {
+        match &version {
+            Version::Login(v) => {
+                let path = get_login_filepath(name, v);
 
-            self.add_login_file(name, version);
-            let s = if i == 0 {
-                s.proper_as_str()
-            } else {
-                s.imports()
-            };
+                self.add_login_file(name, v);
 
-            self.already_existing_files.insert(path.clone(), true);
+                self.already_existing_files.insert(path.clone(), true);
 
-            create_and_overwrite_if_not_same_contents(s, Path::new(&path));
-        }
+                create_and_overwrite_if_not_same_contents(s, Path::new(&path));
+            }
+            Version::World(version) => {
+                let path = get_world_filepath(name, version);
 
-        for version in tags.main_versions() {
-            match &version {
-                Version::Login(_) => {}
-                Version::World(version) => {
-                    let path = get_world_filepath(name, version);
+                self.add_world_file(name, version, tags);
 
-                    self.add_world_file(name, version, tags);
+                self.already_existing_files.insert(path.clone(), true);
 
-                    self.already_existing_files.insert(path.clone(), true);
-
-                    create_and_overwrite_if_not_same_contents(s.proper_as_str(), Path::new(&path));
-                }
+                create_and_overwrite_if_not_same_contents(s, Path::new(&path));
             }
         }
     }
 }
 
-fn major_version_to_string(v: &WorldVersion) -> &'static str {
+pub fn major_version_to_string(v: &WorldVersion) -> &'static str {
     fn version(m: u8) -> &'static str {
         if m == 1 {
             "vanilla"
@@ -314,16 +301,10 @@ pub fn get_login_version_file_path(version: &LoginVersion) -> String {
     }
 }
 
-pub fn get_import_path(tags: &Tags) -> String {
-    if let Some(f) = tags.logon_versions().first() {
-        get_login_logon_version_path(f)
-    } else if let Some(f) = tags.first_major_version() {
-        get_world_version_path(f)
-    } else {
-        panic!(
-            "get_import_path does not have logon or reconnect version: {:#?}",
-            tags
-        )
+pub fn get_import_path(version: Version) -> String {
+    match &version {
+        Version::Login(f) => get_login_logon_version_path(f),
+        Version::World(f) => get_world_version_path(f),
     }
 }
 

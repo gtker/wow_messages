@@ -76,14 +76,29 @@ fn main() {
             continue;
         }
 
-        if !e.tags().is_in_common() {
-            let s = print_enum(e, &o);
-            m.write_contents_to_file(e.name(), e.tags(), &s);
-        } else {
-            let common_s = print_common_enum_common(e, &o);
-            let world_s = print_common_enum_messages(e);
+        let (first, versions) = e.tags().first_and_main_versions();
 
-            m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s);
+        if !e.tags().is_in_common() {
+            let s = print_enum(e, &o, first);
+            m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
+
+            for v in versions {
+                let s = if v.is_world() {
+                    s.proper_as_str()
+                } else {
+                    s.imports()
+                };
+                m.write_contents_to_file(e.name(), e.tags(), s, v);
+            }
+        } else {
+            let common_s = print_common_enum_common(e, &o, first);
+            let world_s = print_common_enum_messages(e, first);
+
+            m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s, first);
+
+            for v in versions {
+                m.write_common_contents_to_file(e.name(), e.tags(), &common_s, &world_s, v);
+            }
         }
 
         definer_docs.push(print_docs_for_enum(e));
@@ -93,8 +108,20 @@ fn main() {
         if should_not_write_object(e.tags()) {
             continue;
         }
-        let s = print_flag(e, &o);
-        m.write_contents_to_file(e.name(), e.tags(), &s);
+
+        let (first, versions) = e.tags().first_and_main_versions();
+
+        let s = print_flag(e, &o, first);
+
+        m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
+        for v in versions {
+            let s = if v.is_world() {
+                s.proper_as_str()
+            } else {
+                s.imports()
+            };
+            m.write_contents_to_file(e.name(), e.tags(), s, v);
+        }
 
         definer_docs.push(print_docs_for_flag(e));
     }
@@ -104,8 +131,21 @@ fn main() {
         if should_not_write_object(e.tags()) {
             continue;
         }
-        let s = print_struct(e, &o);
-        m.write_contents_to_file(e.name(), e.tags(), &s);
+
+        let (first, versions) = e.tags().first_and_main_versions();
+
+        let s = print_struct(e, &o, first);
+        m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
+        for v in versions {
+            let s = if v.is_world() {
+                s.proper_as_str()
+            } else {
+                s.imports()
+            };
+
+            m.write_contents_to_file(e.name(), e.tags(), s, v);
+        }
+
         object_docs.push(print_docs_for_container(e, &o));
     }
 
