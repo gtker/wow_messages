@@ -5,7 +5,7 @@ smsg SMSG_AUTH_CHALLENGE = 0x1EC {
     description = "Seed used by the client to prove in [CMSG_AUTH_SESSION] that it has authenticated with the auth server.";
     comment = "First thing sent when a client connects to the world server.";
     comment = "This message is always unencrypted.";
-    versions = "1.2 1.12";
+    versions = "1 2";
 }
 
 test SMSG_AUTH_CHALLENGE {
@@ -15,7 +15,7 @@ test SMSG_AUTH_CHALLENGE {
     0xEC, 0x01, /* opcode */
     0xEF, 0xBE, 0xAD, 0xDE, /* server_seed */
 ] {
-    versions = "1.2 1.12";
+    versions = "1 2";
 }
 
 smsg SMSG_AUTH_CHALLENGE = 0x1EC {

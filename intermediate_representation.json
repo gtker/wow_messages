@@ -49647,6 +49647,9 @@
               "Major": 1
             },
             {
+              "Major": 2
+            },
+            {
               "Major": 3
             }
           ]
@@ -49670,6 +49673,9 @@
               "versions": [
                 {
                   "Major": 1
+                },
+                {
+                  "Major": 2
                 },
                 {
                   "Major": 3
@@ -80631,16 +80637,10 @@
           "type": "world",
           "versions": [
             {
-              "Minor": [
-                1,
-                2
-              ]
+              "Major": 1
             },
             {
-              "Minor": [
-                1,
-                12
-              ]
+              "Major": 2
             }
           ]
         }
@@ -80675,16 +80675,10 @@
               "type": "world",
               "versions": [
                 {
-                  "Minor": [
-                    1,
-                    2
-                  ]
+                  "Major": 1
                 },
                 {
-                  "Minor": [
-                    1,
-                    12
-                  ]
+                  "Major": 2
                 }
               ]
             }
