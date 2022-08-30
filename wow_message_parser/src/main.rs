@@ -118,11 +118,11 @@ fn main() {
             };
 
             if versions.is_empty() {
-                m.write_base_contents_to_file(e.name(), e.tags(), &base_s.inner(), &world_s, first);
+                m.write_base_contents_to_file(e.name(), e.tags(), base_s.inner(), &world_s, first);
             } else {
                 versions.push(first);
 
-                m.write_shared_contents_to_file(e.name(), e.tags(), &base_s.inner(), &versions);
+                m.write_shared_contents_to_file(e.name(), e.tags(), base_s.inner(), &versions);
 
                 for v in versions.clone() {
                     let (world_s, base_s) = match &e {
