@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 ///
 /// This message is never encrypted.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L2):
 /// ```text
 /// cmsg CMSG_AUTH_SESSION = 0x01ED {
 ///     u32 build;

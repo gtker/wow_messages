@@ -1,4 +1,3 @@
-#tag_all versions "1.12";
 
 cmsg CMSG_AUTH_SESSION = 0x1ED {
     u32 build;
@@ -15,6 +14,7 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
 } {
     description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
     comment = "This message is never encrypted.";
+    versions = "1.12";
 }
 
 test CMSG_AUTH_SESSION {
@@ -64,4 +64,25 @@ test CMSG_AUTH_SESSION {
   0xb8, 0x90, 0x80, 0x51, 0xfc, 0xb7, 0xa4, 0x50,
   0x70, 0xb8, 0x12, 0xf3, 0x3f, 0x26, 0x41, 0xfd,
   0xb5, 0x37, 0x90, 0x19, 0x66, 0x8f /* compressed_addon_info */
-]
+] {
+    versions = "1.12";
+}
+
+cmsg CMSG_AUTH_SESSION = 0x1ED {
+    u32 client_build;
+    u32 login_server_id;
+    CString username;
+    u32 login_server_type;
+    u32 client_seed;
+    u32 region_id;
+    u32 battleground_id;
+    u32 realm_id;
+    u32 dos_response {
+        comment = "Purpose and exact meaning of name unknown.";
+        comment = "TrinityCore has this name but never uses the variable afterwards.";
+    }
+    u8[20] client_proof;
+    u8[-] compressed_addon_info;
+} {
+    versions = "3.3.5";
+}

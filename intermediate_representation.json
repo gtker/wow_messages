@@ -46915,7 +46915,218 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm",
-        "start_position": 3
+        "start_position": 2
+      },
+      "only_has_io_error": false,
+      "features": [
+        "CMsg",
+        "SimpleBuiltInTypes",
+        "ComplexBuiltInTypes",
+        "FixedArrays",
+        "SimpleArrays",
+        "EndlessArrays",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_AUTH_SESSION",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 493
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "client_build",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "login_server_id",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "username",
+            "member_type": "CString",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "login_server_type",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "client_seed",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "region_id",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "battleground_id",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "realm_id",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "dos_response",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "Purpose and exact meaning of name unknown.\nTrinityCore has this name but never uses the variable afterwards."
+            }
+          }
+        },
+        {
+          "Definition": {
+            "name": "client_proof",
+            "member_type": {
+              "Array": {
+                "inner": {
+                  "Integer": {
+                    "type": "u8"
+                  }
+                },
+                "size": {
+                  "Fixed": 20
+                }
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "compressed_addon_info",
+            "member_type": {
+              "Array": {
+                "inner": {
+                  "Integer": {
+                    "type": "u8"
+                  }
+                },
+                "size": "Endless"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Patch": [
+                3,
+                3,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm",
+        "start_position": 71
       },
       "only_has_io_error": false,
       "features": [
