@@ -10,15 +10,20 @@ use std::io::{Write, Read};
 /// smsg SMSG_AUTH_CHALLENGE = 0x01EC {
 ///     u32 unknown1;
 ///     u32 realm_seed;
-///     u32 seed1;
-///     u32 seed2;
+///     u8[32] seed;
 /// }
 /// ```
 pub struct SMSG_AUTH_CHALLENGE {
+    /// TrinityCore/ArcEmu/mangostwo always set to 1.
+    /// TrinityCore/mangostwo: 1...31
+    ///
     pub unknown1: u32,
+    /// Randomized values.
+    ///
     pub realm_seed: u32,
-    pub seed1: u32,
-    pub seed2: u32,
+    /// Randomized values.
+    ///
+    pub seed: [u8; 32],
 }
 
 impl ServerMessage for SMSG_AUTH_CHALLENGE {
@@ -29,22 +34,21 @@ impl ServerMessage for SMSG_AUTH_CHALLENGE {
         // realm_seed: u32
         w.write_all(&self.realm_seed.to_le_bytes())?;
 
-        // seed1: u32
-        w.write_all(&self.seed1.to_le_bytes())?;
-
-        // seed2: u32
-        w.write_all(&self.seed2.to_le_bytes())?;
+        // seed: u8[32]
+        for i in self.seed.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
 
         Ok(())
     }
     const OPCODE: u16 = 0x01ec;
 
     fn server_size(&self) -> u16 {
-        20
+        44
     }
 
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
+        if body_size != 40 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
@@ -54,17 +58,14 @@ impl ServerMessage for SMSG_AUTH_CHALLENGE {
         // realm_seed: u32
         let realm_seed = crate::util::read_u32_le(r)?;
 
-        // seed1: u32
-        let seed1 = crate::util::read_u32_le(r)?;
-
-        // seed2: u32
-        let seed2 = crate::util::read_u32_le(r)?;
+        // seed: u8[32]
+        let mut seed = [0_u8; 32];
+        r.read_exact(&mut seed)?;
 
         Ok(Self {
             unknown1,
             realm_seed,
-            seed1,
-            seed2,
+            seed,
         })
     }
 

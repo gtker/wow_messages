@@ -19,10 +19,16 @@ test SMSG_AUTH_CHALLENGE {
 }
 
 smsg SMSG_AUTH_CHALLENGE = 0x1EC {
-    u32 unknown1;
-    u32 realm_seed;
-    u32 seed1;
-    u32 seed2;
+    u32 unknown1 {
+        comment = "TrinityCore/ArcEmu/mangostwo always set to 1.";
+        comment = "TrinityCore/mangostwo: 1...31";
+    }
+    u32 realm_seed {
+        comment = "Randomized values.";
+    }
+    u8[32] seed {
+        comment = "Randomized values.";
+    }
 } {
     versions = "3.3.5";
 }

@@ -80726,7 +80726,9 @@
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "TrinityCore/ArcEmu/mangostwo always set to 1.\nTrinityCore/mangostwo: 1...31"
+            }
           }
         },
         {
@@ -80741,37 +80743,32 @@
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "Randomized values."
+            }
           }
         },
         {
           "Definition": {
-            "name": "seed1",
+            "name": "seed",
             "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
+              "Array": {
+                "inner": {
+                  "Integer": {
+                    "type": "u8"
+                  }
+                },
+                "size": {
+                  "Fixed": 32
+                }
               }
             },
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "Definition": {
-            "name": "seed2",
-            "member_type": {
-              "Integer": {
-                "type": "u32",
-                "endianness": "little"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "Randomized values."
+            }
           }
         }
       ],
@@ -80798,6 +80795,8 @@
       "features": [
         "SMsg",
         "SimpleBuiltInTypes",
+        "FixedArrays",
+        "SimpleArrays",
         "WorldVersion"
       ]
     },
