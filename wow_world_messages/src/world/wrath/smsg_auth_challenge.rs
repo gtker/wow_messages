@@ -18,10 +18,8 @@ pub struct SMSG_AUTH_CHALLENGE {
     /// TrinityCore/mangostwo: 1...31
     ///
     pub unknown1: u32,
-    /// Randomized values.
-    ///
     pub realm_seed: u32,
-    /// Randomized values.
+    /// Randomized values. Is not used at all by TrinityCore/mangostwo/ArcEmu.
     ///
     pub seed: [u8; 32],
 }

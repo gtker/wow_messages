@@ -57,6 +57,7 @@
 - [DuelWinnerReason](docs/duelwinnerreason.md)
 - [Emote](docs/emote.md)
 - [EnvironmentalDamageType](docs/environmentaldamagetype.md)
+- [Expansion](docs/expansion.md)
 - [ExperienceAwardType](docs/experienceawardtype.md)
 - [FactionFlag](docs/factionflag.md)
 - [FarSightOperation](docs/farsightoperation.md)

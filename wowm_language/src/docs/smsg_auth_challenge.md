@@ -76,6 +76,6 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | unknown1 |  | TrinityCore/ArcEmu/mangostwo always set to 1.<br/>TrinityCore/mangostwo: 1...31 |
-| 0x08 | 4 / Little | u32 | realm_seed |  | Randomized values. |
-| 0x0C | ? / - | u8[32] | seed |  | Randomized values. |
+| 0x08 | 4 / Little | u32 | realm_seed |  |  |
+| 0x0C | ? / - | u8[32] | seed |  | Randomized values. Is not used at all by TrinityCore/mangostwo/ArcEmu. |
 

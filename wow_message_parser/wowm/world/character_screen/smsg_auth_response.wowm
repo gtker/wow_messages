@@ -1,4 +1,3 @@
-#tag_all versions "1.2 1.12";
 
 smsg SMSG_AUTH_RESPONSE = 0x1EE {
     WorldResult result;
@@ -13,6 +12,7 @@ smsg SMSG_AUTH_RESPONSE = 0x1EE {
 } {
     description = "Response to [CMSG_AUTH_SESSION].";
     comment = "vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.";
+    versions = "1.2 1.12";
 }
 
 test SMSG_AUTH_RESPONSE {
@@ -23,6 +23,7 @@ test SMSG_AUTH_RESPONSE {
     0x0D, /* result */
 ] {
     description = "Authentication failed.";
+    versions = "1.2 1.12";
 }
 
 test SMSG_AUTH_RESPONSE {
@@ -35,6 +36,7 @@ test SMSG_AUTH_RESPONSE {
     0xEF, 0xBE, 0xAD, 0xDE, /* queue_position */
 ] {
     description = "Client told to wait in queue.";
+    versions = "1.2 1.12";
 }
 
 test SMSG_AUTH_RESPONSE {
@@ -51,4 +53,29 @@ test SMSG_AUTH_RESPONSE {
     0x00, 0x00, 0x00, 0x00, /* billing_rested */
 ] {
     description = "Client can join.";
+    versions = "1.2 1.12";
+}
+
+enum Expansion : u8 {
+    VANILLA = 0;
+    THE_BURNING_CRUSADE = 1;
+    WRATH_OF_THE_LICH_LING = 2;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_AUTH_RESPONSE = 0x1EE {
+    WorldResult result;
+    if (result == AUTH_OK) {
+        u32 billing_time;
+        u8 billing_flags;
+        u32 billing_rested;
+        Expansion expansion;
+    }
+    else if (result == AUTH_WAIT_QUEUE) {
+        u32 queue_position;
+        Bool realm_has_free_character_migration;
+    }
+} {
+    versions = "3.3.5";
 }
