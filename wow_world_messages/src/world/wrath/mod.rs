@@ -9,6 +9,8 @@ pub(crate) mod expansion;
 pub use expansion::*;
 pub(crate) mod gender;
 pub use gender::*;
+pub(crate) mod inventory_type;
+pub use inventory_type::*;
 pub mod opcodes;
 pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;

@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 enum InventoryType : u8 {
     NON_EQUIP = 0;

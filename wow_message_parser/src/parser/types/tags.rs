@@ -1,3 +1,4 @@
+use std::cmp::Ordering;
 use std::fmt::{Display, Formatter, Write};
 
 use crate::file_utils::get_import_path;
@@ -6,13 +7,103 @@ use crate::{
     Objects, COMMENT, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, RUST_BASE_TYPE, TEST_STR, VERSIONS,
 };
 
-#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Copy, Clone)]
+#[derive(Debug, Eq, PartialEq, Copy, Clone)]
 pub enum WorldVersion {
     Major(u8),
     Minor(u8, u8),
     Patch(u8, u8, u8),
     Exact(u8, u8, u8, u8),
     All,
+}
+
+impl PartialOrd<WorldVersion> for WorldVersion {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for WorldVersion {
+    fn cmp(&self, other: &Self) -> Ordering {
+        match self {
+            WorldVersion::Major(m) => match other {
+                WorldVersion::Major(om) => m.cmp(om),
+                WorldVersion::Minor(om, _)
+                | WorldVersion::Patch(om, _, _)
+                | WorldVersion::Exact(om, _, _, _) => m.cmp(om).then(Ordering::Less),
+                WorldVersion::All => Ordering::Greater,
+            },
+            WorldVersion::Minor(m, i) => match other {
+                WorldVersion::Major(om) => m.cmp(om).then(Ordering::Greater),
+                WorldVersion::Minor(om, oi) => m.cmp(om).then_with(|| i.cmp(oi)),
+                WorldVersion::Patch(om, oi, _) | WorldVersion::Exact(om, oi, _, _) => {
+                    m.cmp(om).then_with(|| i.cmp(oi)).then(Ordering::Less)
+                }
+                WorldVersion::All => Ordering::Greater,
+            },
+            WorldVersion::Patch(m, i, p) => match other {
+                WorldVersion::Major(om) => m.cmp(om).then(Ordering::Greater),
+                WorldVersion::Minor(om, oi) => {
+                    m.cmp(om).then_with(|| i.cmp(oi)).then(Ordering::Greater)
+                }
+                WorldVersion::Patch(om, oi, op) => {
+                    m.cmp(om).then_with(|| i.cmp(oi)).then_with(|| p.cmp(op))
+                }
+                WorldVersion::Exact(om, oi, op, _) => m
+                    .cmp(om)
+                    .then_with(|| i.cmp(oi))
+                    .then_with(|| p.cmp(op))
+                    .then(Ordering::Less),
+                WorldVersion::All => Ordering::Greater,
+            },
+            WorldVersion::Exact(m, i, p, e) => match other {
+                WorldVersion::Major(om) => m.cmp(om).then(Ordering::Greater),
+                WorldVersion::Minor(om, oi) => {
+                    m.cmp(om).then_with(|| i.cmp(oi)).then(Ordering::Greater)
+                }
+                WorldVersion::Patch(om, oi, op) => m
+                    .cmp(om)
+                    .then_with(|| i.cmp(oi))
+                    .then_with(|| p.cmp(op))
+                    .then(Ordering::Greater),
+                WorldVersion::Exact(om, oi, op, oe) => m
+                    .cmp(om)
+                    .then_with(|| i.cmp(oi))
+                    .then_with(|| p.cmp(op))
+                    .then_with(|| e.cmp(oe)),
+                WorldVersion::All => Ordering::Greater,
+            },
+            WorldVersion::All => match other {
+                WorldVersion::All => Ordering::Equal,
+                WorldVersion::Major(_)
+                | WorldVersion::Minor(_, _)
+                | WorldVersion::Patch(_, _, _)
+                | WorldVersion::Exact(_, _, _, _) => Ordering::Less,
+            },
+        }
+    }
+}
+
+#[test]
+fn world_version_ordering() {
+    let mut v = [
+        WorldVersion::Exact(1, 12, 1, 0),
+        WorldVersion::Patch(3, 3, 5),
+        WorldVersion::Major(1),
+        WorldVersion::Minor(2, 4),
+        WorldVersion::Major(3),
+    ];
+
+    v.sort();
+
+    let expected = [
+        WorldVersion::Major(1),
+        WorldVersion::Exact(1, 12, 1, 0),
+        WorldVersion::Minor(2, 4),
+        WorldVersion::Major(3),
+        WorldVersion::Patch(3, 3, 5),
+    ];
+
+    assert_eq!(v, expected);
 }
 
 impl WorldVersion {
