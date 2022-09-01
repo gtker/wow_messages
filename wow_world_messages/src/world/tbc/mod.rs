@@ -10,3 +10,5 @@ pub use inventory_type::*;
 pub mod opcodes;
 pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
+pub(crate) mod vector3d;
+pub use vector3d::*;

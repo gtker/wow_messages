@@ -16,5 +16,7 @@ pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;
 pub use smsg_auth_response::*;
+pub(crate) mod vector3d;
+pub use vector3d::*;
 pub(crate) mod world_result;
 pub use world_result::*;

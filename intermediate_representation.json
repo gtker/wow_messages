@@ -24002,7 +24002,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-        "start_position": 80
+        "start_position": 74
       },
       "features": [
         "Enum",
@@ -78384,7 +78384,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-        "start_position": 91
+        "start_position": 85
       },
       "only_has_io_error": true,
       "features": [
@@ -79133,7 +79133,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-        "start_position": 163
+        "start_position": 157
       },
       "only_has_io_error": false,
       "features": [
@@ -107779,7 +107779,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-            "start_position": 192
+            "start_position": 186
           }
         },
         {
@@ -108221,13 +108221,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-            "start_position": 259
+            "start_position": 253
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-        "start_position": 186
+        "start_position": 180
       },
       "only_has_io_error": false,
       "features": [
@@ -110478,18 +110478,21 @@
           "type": "world",
           "versions": [
             {
-              "Minor": [
-                1,
-                12
-              ]
+              "Major": 1
+            },
+            {
+              "Major": 2
+            },
+            {
+              "Major": 3
             }
           ]
         }
       },
       "tests": [],
       "file_info": {
-        "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
-        "start_position": 74
+        "file_name": "wow_message_parser/wowm/world/vector3d.wowm",
+        "start_position": 3
       },
       "only_has_io_error": true,
       "features": [

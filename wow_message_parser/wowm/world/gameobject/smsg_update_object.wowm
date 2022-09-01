@@ -71,12 +71,6 @@ flag SplineFlag : u32 {
     UNKNOWN31 = 0x80000000;
 }
 
-struct Vector3d {
-    f32 x;
-    f32 y;
-    f32 z;
-}
-
 enum ObjectType : u8 {
     OBJECT = 0;
     ITEM = 1;
