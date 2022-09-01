@@ -1,8 +1,8 @@
 [workspace]
 
 members = [
-    "simple_vanilla_client",
-    "simple_vanilla_server",
+    "vanilla_client",
+    "vanilla_server",
     "wow_message_parser",
     "wow_world_messages",
     "wow_world_base",

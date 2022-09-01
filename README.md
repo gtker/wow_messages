@@ -12,10 +12,8 @@ The project is split into the subdirectories:
 * `wow_world_messages`: **UNRELEASED** Rust library for the world server for WoW version 1.x.y.
 * `wow_world_base`: **UNRELEASED** Rust library that provides the basic types and enums such as `Class`, `Race`
   and `Gender` for `wow_world_messages` and others.
-* `simple_server`: Test server that uses the authentication library. Can work as a start to making your own server. Uses
-  tokio.
-* `simple_client`: Test client that uses the authentication library. Can work as a start to making your own client. Uses
-  sync (std:io::Read/Write).
+* `vanilla_server`: Test server for 1.12 that uses the authentication library. Can work as a start to making your own server. Uses tokio.
+* `vanilla_client`: Test client for 1.12 that uses the authentication library. Can work as a start to making your own client. Uses sync (std:io::Read/Write).
 * `wowm_language`: [mdbook](https://github.com/rust-lang/mdBook) of language specification. Hosted
   at [`www.gtker.com/wow_messages`](https://www.gtker.com/wow_messages).
 * `intermediate_representation.json`: **UNRELEASED** contains a machine readable version of the `wowm` files.
