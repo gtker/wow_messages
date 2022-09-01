@@ -206,7 +206,7 @@ impl UpdateMask {
 
 #[cfg(test)]
 mod test {
-    use crate::helper::update_mask::UpdatePlayer;
+    use crate::vanilla::update_mask::UpdatePlayer;
     use crate::vanilla::UpdateMask;
     use crate::vanilla::{Class, Gender, Power, Race};
     use crate::Guid;
