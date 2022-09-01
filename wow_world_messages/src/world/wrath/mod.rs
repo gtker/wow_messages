@@ -1,3 +1,7 @@
+pub(crate) mod character;
+pub use character::*;
+pub(crate) mod character_gear;
+pub use character_gear::*;
 pub(crate) mod class;
 pub use class::*;
 pub(crate) mod cmsg_auth_session;
@@ -16,6 +20,8 @@ pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;
 pub use smsg_auth_response::*;
+pub(crate) mod smsg_char_enum;
+pub use smsg_char_enum::*;
 pub(crate) mod vector3d;
 pub use vector3d::*;
 pub(crate) mod world_result;

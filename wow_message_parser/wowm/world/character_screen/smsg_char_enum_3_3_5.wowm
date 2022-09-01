@@ -1,0 +1,38 @@
+#tag_all versions "3.3.5";
+
+smsg SMSG_CHAR_ENUM = 0x03B {
+    u8 amount_of_characters;
+    Character[amount_of_characters] characters;
+}
+
+struct Character {
+    Guid guid;
+    CString name;
+    u8 race;
+    u8 class;
+    Gender gender;
+    u8 skin;
+    u8 face;
+    u8 hair_style;
+    u8 hair_color;
+    u8 facial_hair;
+    u8 level;
+    u32 area;
+    u32 map;
+    Vector3d position;
+    u32 guild_id;
+    u32 flags;
+    u32 recustomization_flags;
+    Bool first_login;
+    u32 pet_display_id;
+    u32 pet_level;
+    u32 pet_family;
+    CharacterGear[22] gear;
+}
+
+struct CharacterGear {
+    u32 equipment_display_id;
+    InventoryType inventory_type;
+    u32 enchantment;
+}
+

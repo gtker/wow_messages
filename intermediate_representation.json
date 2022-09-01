@@ -19495,6 +19495,10 @@
           "usage": "used_but_not_in_if"
         },
         {
+          "name": "Character",
+          "usage": "used_but_not_in_if"
+        },
+        {
           "name": "SMSG_NAME_QUERY_RESPONSE",
           "usage": "used_but_not_in_if"
         }
@@ -21456,6 +21460,10 @@
         }
       },
       "objects_used_in": [
+        {
+          "name": "CharacterGear",
+          "usage": "used_but_not_in_if"
+        },
         {
           "name": "CharacterGear",
           "usage": "used_but_not_in_if"
@@ -65893,6 +65901,359 @@
           "Definition": {
             "name": "race",
             "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "class",
+            "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "gender",
+            "member_type": {
+              "Identifier": {
+                "s": "Gender",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "skin",
+            "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "face",
+            "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "hair_style",
+            "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "hair_color",
+            "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "facial_hair",
+            "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "level",
+            "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "area",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "map",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "position",
+            "member_type": {
+              "Identifier": {
+                "s": "Vector3d",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "guild_id",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "flags",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "recustomization_flags",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "first_login",
+            "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "pet_display_id",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "pet_level",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "pet_family",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "gear",
+            "member_type": {
+              "Array": {
+                "inner": {
+                  "Complex": "CharacterGear"
+                },
+                "size": {
+                  "Fixed": 22
+                }
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Patch": [
+                3,
+                3,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_enum_3_3_5.wowm",
+        "start_position": 8
+      },
+      "only_has_io_error": false,
+      "features": [
+        "Struct",
+        "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "FixedArrays",
+        "ComplexArrays",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "Character",
+      "object_type": {
+        "type": "struct"
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "guid",
+            "member_type": "Guid",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "name",
+            "member_type": "CString",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "race",
+            "member_type": {
               "Identifier": {
                 "s": "Race",
                 "upcast": null
@@ -66234,6 +66595,86 @@
         "FixedArrays",
         "ComplexArrays",
         "ConstantValue",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CharacterGear",
+      "object_type": {
+        "type": "struct"
+      },
+      "constant": true,
+      "members": [
+        {
+          "Definition": {
+            "name": "equipment_display_id",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "inventory_type",
+            "member_type": {
+              "Identifier": {
+                "s": "InventoryType",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "enchantment",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Patch": [
+                3,
+                3,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_enum_3_3_5.wowm",
+        "start_position": 33
+      },
+      "only_has_io_error": false,
+      "features": [
+        "Struct",
+        "SimpleBuiltInTypes",
+        "SubObjects",
         "WorldVersion"
       ]
     },
@@ -84089,6 +84530,76 @@
       "features": [
         "SMsg",
         "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_CHAR_ENUM",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 59
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "amount_of_characters",
+            "member_type": {
+              "Integer": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": "characters",
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "characters",
+            "member_type": {
+              "Array": {
+                "inner": {
+                  "Complex": "Character"
+                },
+                "size": {
+                  "Variable": "amount_of_characters"
+                }
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Patch": [
+                3,
+                3,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_enum_3_3_5.wowm",
+        "start_position": 3
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "VariableArrays",
+        "ComplexArrays",
         "WorldVersion"
       ]
     },

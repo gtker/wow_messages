@@ -148,11 +148,13 @@ impl From<CMSG_AUTH_SESSION> for ClientOpcodeMessage {
     }
 }
 
+use crate::world::wrath::SMSG_CHAR_ENUM;
 use crate::world::wrath::SMSG_AUTH_CHALLENGE;
 use crate::world::wrath::SMSG_AUTH_RESPONSE;
 
 #[derive(Debug)]
 pub enum ServerOpcodeMessage {
+    SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
 }
@@ -160,6 +162,7 @@ pub enum ServerOpcodeMessage {
 impl ServerOpcodeMessage {
     fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
+            0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as ServerMessage>::read_body(&mut r, body_size)?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as ServerMessage>::read_body(&mut r, body_size)?)),
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as ServerMessage>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
@@ -232,6 +235,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_server<W: std::io::Write, E: wow_srp::header_crypto::Encrypter>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
+            Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
         }
@@ -240,6 +244,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
         }
@@ -248,6 +253,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
+            Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
         }
@@ -256,6 +262,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
         }
@@ -264,6 +271,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_server<W: async_std::io::WriteExt + Unpin + Send, E: wow_srp::header_crypto::Encrypter + Send>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error> {
         match self {
+            Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
         }
@@ -272,11 +280,18 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
+}
+
+impl From<SMSG_CHAR_ENUM> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAR_ENUM) -> Self {
+        Self::SMSG_CHAR_ENUM(c)
+    }
 }
 
 impl From<SMSG_AUTH_CHALLENGE> for ServerOpcodeMessage {
