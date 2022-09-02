@@ -23,7 +23,12 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
         s.wln(format!("use super::{};", e.name()));
 
         for name in e.get_types_needing_import_recursively(o) {
-            let version = o.get_tags_of_object(name, e.tags()).import_version();
+            let version = if !version.is_world() {
+                o.get_tags_of_object(name, e.tags()).import_version()
+            }  else {
+                version
+            };
+
             s.wln(format!(
                 "use {import_path}::{ty};",
                 import_path = get_import_path(version),
