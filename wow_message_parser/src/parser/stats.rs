@@ -1,7 +1,7 @@
 use crate::container::ContainerType;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::Tags;
-use crate::VERSIONS;
+use crate::parser::types::tags::{Tags, WorldVersion};
+use crate::Version;
 
 pub fn stats_for_1_12(o: &Objects) {
     struct Data {
@@ -644,10 +644,9 @@ pub fn stats_for_1_12(o: &Objects) {
         Data::new("SMSG_DEFENSE_MESSAGE", 0x33B),
     ];
 
-    let mut tags = Tags::new();
-    tags.append_or_insert(VERSIONS, "1.12");
+    let tags = Tags::new_with_version(Version::World(WorldVersion::Minor(1, 12)));
     for s in o.messages() {
-        if !s.has_overlapping_version(&tags) {
+        if !s.tags().fulfills_all(&tags) {
             continue;
         }
 
