@@ -1,9 +1,9 @@
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use tokio::net::{TcpListener, TcpStream};
-use wow_srp::header_crypto::ProofSeed;
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::server::SrpServer;
+use wow_srp::vanilla_header::ProofSeed;
 use wow_world_messages::vanilla::opcodes::ClientOpcodeMessage;
 use wow_world_messages::vanilla::tokio_expect_client_message;
 use wow_world_messages::vanilla::ServerMessage;
@@ -56,12 +56,12 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
             billing_time: 0,
         },
     }
-    .tokio_write_encrypted_server(&mut stream, &mut encryption)
+    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
     .await
     .unwrap();
 
     loop {
-        let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, &mut encryption)
+        let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter())
             .await
             .unwrap();
 
@@ -70,7 +70,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                 SMSG_PONG {
                     sequence_id: c.sequence_id,
                 }
-                .tokio_write_encrypted_server(&mut stream, &mut encryption)
+                .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
                 .await
                 .unwrap();
             }
@@ -104,7 +104,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         equipment: [Default::default(); 19],
                     }],
                 }
-                .tokio_write_encrypted_server(&mut stream, &mut encryption)
+                .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
                 .await
                 .unwrap();
             }
@@ -123,7 +123,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                 };
 
                 SMSG_CHAR_CREATE { result }
-                    .tokio_write_encrypted_server(&mut stream, &mut encryption)
+                    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
                     .await
                     .unwrap();
             }
@@ -145,7 +145,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
         },
         orientation: 0.0,
     }
-    .tokio_write_encrypted_server(&mut stream, &mut encryption)
+    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
     .await
     .unwrap();
 
@@ -159,7 +159,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
         tutorial_data6: 0xFFFFFFFF,
         tutorial_data7: 0xFFFFFFFF,
     }
-    .tokio_write_encrypted_server(&mut stream, &mut encryption)
+    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
     .await
     .unwrap();
 
@@ -206,12 +206,12 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
             },
         }],
     }
-    .tokio_write_encrypted_server(&mut stream, &mut encryption)
+    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
     .await
     .unwrap();
 
     loop {
-        let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, &mut encryption)
+        let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter())
             .await
             .unwrap();
         dbg!(opcode);

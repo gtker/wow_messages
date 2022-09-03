@@ -9,4 +9,4 @@ edition = "2018"
 tokio = { version = "1.18.2", features = ["full"] }
 wow_login_messages = { path = "../wow_login_messages", features = ["tokio"] }
 wow_world_messages = { path = "../wow_world_messages", features = ["tokio", "vanilla"] }
-wow_srp = { version = "0.4.0", default-features = false, features = ["srp-fast-math"] }
+wow_srp = { git = "https://github.com/gtker/wow_srp", branch = "wip-wrath-header" }

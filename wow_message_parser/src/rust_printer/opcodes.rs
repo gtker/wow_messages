@@ -79,7 +79,13 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType,
                 SERVER_MESSAGE_TRAIT_NAME,
                 CLIENT_MESSAGE_TRAIT_NAME,
             ));
-            s.wln("use wow_srp::header_crypto::{Decrypter, Encrypter};");
+
+            let import_path = version.as_major_world().encryption_path();
+
+            s.wln(format!(
+                "use {}::{{DecrypterHalf, EncrypterHalf}};",
+                import_path
+            ));
 
             s.newline();
 
@@ -207,11 +213,10 @@ fn world_common_impls_read_write(
 
     s.wln(it.cfg());
     s.open_curly(
-        format!("pub {func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, {error_ty}>",
+        format!("pub {func}fn {prefix}read_encrypted<R: {read}>(r: &mut R, d: &mut DecrypterHalf) -> std::result::Result<Self, {error_ty}>",
                 func = it.func(),
                 prefix = it.prefix(),
                 read = it.read(),
-                decrypter = it.decrypter(),
                 error_ty = error_ty,
         )
     );
@@ -289,12 +294,11 @@ fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType) {
     s.wln(it.cfg());
     s.bodyn(
         format!(
-            "pub {func}fn {prefix}write_encrypted_{cd}<W: {write}, E: wow_srp::header_crypto::Encrypter{decrypter}>(&self, w: &mut W, e: &mut E) -> Result<(), std::io::Error>",
+            "pub {func}fn {prefix}write_encrypted_{cd}<W: {write}>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error>",
             cd = cd,
             func = it.func(),
             write = it.write(),
             prefix = it.prefix(),
-            decrypter = it.decrypter(),
         ), |s| {
             s.body("match self", |s| {
                 for container in v {

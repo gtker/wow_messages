@@ -1,7 +1,7 @@
 use crate::USERNAME;
 use std::net::TcpStream;
-use wow_srp::header_crypto::ProofSeed;
 use wow_srp::normalized_string::NormalizedString;
+use wow_srp::vanilla_header::ProofSeed;
 use wow_srp::SESSION_KEY_LENGTH;
 use wow_world_messages::vanilla::opcodes::ServerOpcodeMessage;
 use wow_world_messages::vanilla::ClientMessage;
@@ -38,26 +38,27 @@ pub fn server(
     .write_unencrypted_client(stream)
     .unwrap();
 
-    let s =
-        expect_server_message_encryption::<SMSG_AUTH_RESPONSE, _, _>(stream, &mut crypto).unwrap();
+    let s = expect_server_message_encryption::<SMSG_AUTH_RESPONSE, _>(stream, crypto.decrypter())
+        .unwrap();
 
     if !matches!(s.result, SMSG_AUTH_RESPONSE_WorldResult::AuthOk { .. }) {
         panic!()
     }
     CMSG_CHAR_ENUM {}
-        .write_encrypted_client(stream, &mut crypto)
+        .write_encrypted_client(stream, crypto.encrypter())
         .unwrap();
 
-    let s = expect_server_message_encryption::<SMSG_CHAR_ENUM, _, _>(stream, &mut crypto).unwrap();
+    let s =
+        expect_server_message_encryption::<SMSG_CHAR_ENUM, _>(stream, crypto.decrypter()).unwrap();
 
     CMSG_PLAYER_LOGIN {
         guid: s.characters[0].guid,
     }
-    .write_encrypted_client(stream, &mut crypto)
+    .write_encrypted_client(stream, crypto.encrypter())
     .unwrap();
 
     loop {
-        let opcode = ServerOpcodeMessage::read_encrypted(stream, &mut crypto).unwrap();
+        let opcode = ServerOpcodeMessage::read_encrypted(stream, crypto.decrypter()).unwrap();
 
         dbg!(opcode);
     }

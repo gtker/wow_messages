@@ -764,13 +764,6 @@ impl ImplType {
         }
     }
 
-    pub fn decrypter(&self) -> &str {
-        match self {
-            ImplType::Std => "",
-            ImplType::AsyncStd | ImplType::Tokio => " + Send",
-        }
-    }
-
     pub fn cfg(&self) -> &str {
         match self {
             ImplType::Std => CFG_SYNC,
@@ -816,6 +809,21 @@ impl Version {
             Version::World(w) => *w,
         }
     }
+
+    pub fn as_major_world(&self) -> MajorWorldVersion {
+        match self.as_world() {
+            WorldVersion::Major(m)
+            | WorldVersion::Minor(m, _)
+            | WorldVersion::Patch(m, _, _)
+            | WorldVersion::Exact(m, _, _, _) => match m {
+                1 => MajorWorldVersion::Vanilla,
+                2 => MajorWorldVersion::BurningCrusade,
+                3 => MajorWorldVersion::Wrath,
+                _ => unreachable!(),
+            },
+            WorldVersion::All => unreachable!(),
+        }
+    }
 }
 
 impl From<LoginVersion> for Version {
@@ -827,6 +835,23 @@ impl From<LoginVersion> for Version {
 impl From<WorldVersion> for Version {
     fn from(l: WorldVersion) -> Self {
         Self::World(l)
+    }
+}
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+pub enum MajorWorldVersion {
+    Vanilla,
+    BurningCrusade,
+    Wrath,
+}
+
+impl MajorWorldVersion {
+    pub fn encryption_path(&self) -> &'static str {
+        match self {
+            MajorWorldVersion::BurningCrusade
+            | MajorWorldVersion::Wrath
+            | MajorWorldVersion::Vanilla => "wow_srp::vanilla_header",
+        }
     }
 }
 

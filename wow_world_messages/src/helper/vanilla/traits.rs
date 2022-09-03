@@ -6,7 +6,7 @@ use std::io::Write;
 use std::pin::Pin;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncWriteExt;
-use wow_srp::header_crypto::Encrypter;
+use wow_srp::vanilla_header::EncrypterHalf;
 
 const SERVER_OPCODE_LENGTH: u16 = 2;
 const SIZE_LENGTH: u16 = 2;
@@ -30,7 +30,7 @@ fn get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
     v
 }
 
-fn get_encrypted_server(opcode: u16, size: u16, e: &mut impl Encrypter) -> Vec<u8> {
+fn get_encrypted_server(opcode: u16, size: u16, e: &mut EncrypterHalf) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
     v.extend_from_slice(&e.encrypt_server_header(size - SIZE_LENGTH, opcode));
@@ -55,10 +55,10 @@ pub trait ServerMessage: Message {
     }
 
     #[cfg(feature = "sync")]
-    fn write_encrypted_server<W: std::io::Write, E: Encrypter>(
+    fn write_encrypted_server<W: std::io::Write>(
         &self,
         w: &mut W,
-        e: &mut E,
+        e: &mut EncrypterHalf,
     ) -> Result<(), std::io::Error> {
         let mut v = get_encrypted_server(Self::OPCODE as u16, self.server_size(), e);
 
@@ -87,14 +87,13 @@ pub trait ServerMessage: Message {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W, E>(
+    fn tokio_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
-        e: &'life2 mut E,
+        e: &'life2 mut EncrypterHalf,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        E: 'async_trait + Encrypter + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         'life2: 'async_trait,
@@ -128,14 +127,13 @@ pub trait ServerMessage: Message {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W, E>(
+    fn astd_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
-        e: &'life2 mut E,
+        e: &'life2 mut EncrypterHalf,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        E: 'async_trait + Encrypter + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         'life2: 'async_trait,
@@ -167,10 +165,10 @@ pub trait ClientMessage: Message {
     }
 
     #[cfg(feature = "sync")]
-    fn write_encrypted_client<W: std::io::Write, E: Encrypter>(
+    fn write_encrypted_client<W: std::io::Write>(
         &self,
         w: &mut W,
-        e: &mut E,
+        e: &mut EncrypterHalf,
     ) -> Result<(), std::io::Error> {
         let mut v = get_encrypted_client(Self::OPCODE as u16, self.client_size(), e);
         self.write_into_vec(&mut v);
@@ -198,14 +196,13 @@ pub trait ClientMessage: Message {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W, E>(
+    fn tokio_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
-        e: &'life2 mut E,
+        e: &'life2 mut EncrypterHalf,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        E: 'async_trait + Encrypter + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         'life2: 'async_trait,
@@ -239,14 +236,13 @@ pub trait ClientMessage: Message {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W, E>(
+    fn astd_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
-        e: &'life2 mut E,
+        e: &'life2 mut EncrypterHalf,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        E: 'async_trait + Encrypter + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         'life2: 'async_trait,
@@ -280,7 +276,7 @@ fn get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     v
 }
 
-fn get_encrypted_client(opcode: u16, size: u16, e: &mut impl Encrypter) -> Vec<u8> {
+fn get_encrypted_client(opcode: u16, size: u16, e: &mut EncrypterHalf) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
     v.extend_from_slice(&e.encrypt_client_header(size - SIZE_LENGTH, opcode as u32));
