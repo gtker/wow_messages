@@ -17,7 +17,13 @@ pub struct SMSG_CHANNEL_NOTIFY {
     pub channel_name: String,
 }
 
-impl ServerMessage for SMSG_CHANNEL_NOTIFY {
+impl crate::Message for SMSG_CHANNEL_NOTIFY {
+    const OPCODE: u32 = 0x0099;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // notify_type: ChatNotify
         w.write_all(&(self.notify_type.as_int() as u8).to_le_bytes())?;
@@ -29,12 +35,6 @@ impl ServerMessage for SMSG_CHANNEL_NOTIFY {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0099;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // notify_type: ChatNotify
         let notify_type: ChatNotify = crate::util::read_u8_le(r)?.try_into()?;
@@ -50,6 +50,7 @@ impl ServerMessage for SMSG_CHANNEL_NOTIFY {
     }
 
 }
+impl ServerMessage for SMSG_CHANNEL_NOTIFY {}
 
 impl SMSG_CHANNEL_NOTIFY {
     pub(crate) fn size(&self) -> usize {

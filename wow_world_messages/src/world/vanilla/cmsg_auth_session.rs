@@ -32,7 +32,13 @@ pub struct CMSG_AUTH_SESSION {
     pub compressed_addon_info: Vec<u8>,
 }
 
-impl ClientMessage for CMSG_AUTH_SESSION {
+impl crate::Message for CMSG_AUTH_SESSION {
+    const OPCODE: u32 = 0x01ed;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // build: u32
         w.write_all(&self.build.to_le_bytes())?;
@@ -63,12 +69,6 @@ impl ClientMessage for CMSG_AUTH_SESSION {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01ed;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // build: u32
         let build = crate::util::read_u32_le(r)?;
@@ -117,6 +117,7 @@ impl ClientMessage for CMSG_AUTH_SESSION {
     }
 
 }
+impl ClientMessage for CMSG_AUTH_SESSION {}
 
 impl CMSG_AUTH_SESSION {
     pub(crate) fn size(&self) -> usize {

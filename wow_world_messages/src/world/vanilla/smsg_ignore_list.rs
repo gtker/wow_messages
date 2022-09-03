@@ -15,7 +15,13 @@ pub struct SMSG_IGNORE_LIST {
     pub ignored: Vec<u64>,
 }
 
-impl ServerMessage for SMSG_IGNORE_LIST {
+impl crate::Message for SMSG_IGNORE_LIST {
+    const OPCODE: u32 = 0x006b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_ignored: u8
         w.write_all(&(self.ignored.len() as u8).to_le_bytes())?;
@@ -27,12 +33,6 @@ impl ServerMessage for SMSG_IGNORE_LIST {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x006b;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_ignored: u8
         let amount_of_ignored = crate::util::read_u8_le(r)?;
@@ -49,6 +49,7 @@ impl ServerMessage for SMSG_IGNORE_LIST {
     }
 
 }
+impl ServerMessage for SMSG_IGNORE_LIST {}
 
 impl SMSG_IGNORE_LIST {
     pub(crate) fn size(&self) -> usize {

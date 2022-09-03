@@ -17,7 +17,13 @@ pub struct SMSG_SERVER_MESSAGE {
     pub message: String,
 }
 
-impl ServerMessage for SMSG_SERVER_MESSAGE {
+impl crate::Message for SMSG_SERVER_MESSAGE {
+    const OPCODE: u32 = 0x0291;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message_type: ServerMessageType
         w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
@@ -29,12 +35,6 @@ impl ServerMessage for SMSG_SERVER_MESSAGE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0291;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // message_type: ServerMessageType
         let message_type: ServerMessageType = crate::util::read_u32_le(r)?.try_into()?;
@@ -50,6 +50,7 @@ impl ServerMessage for SMSG_SERVER_MESSAGE {
     }
 
 }
+impl ServerMessage for SMSG_SERVER_MESSAGE {}
 
 impl SMSG_SERVER_MESSAGE {
     pub(crate) fn size(&self) -> usize {

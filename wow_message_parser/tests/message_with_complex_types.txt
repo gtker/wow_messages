@@ -21,7 +21,13 @@ pub struct MessageWithComplexTypes {
     pub simple_struct: StructWithAllBuiltInTypes,
 }
 
-impl ClientMessage for MessageWithComplexTypes {
+impl crate::Message for MessageWithComplexTypes {
+    const OPCODE: u32 = 0x0003;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // simple_enum: SimpleEnum
         w.write_all(&(self.simple_enum.as_int() as u8).to_le_bytes())?;
@@ -34,12 +40,6 @@ impl ClientMessage for MessageWithComplexTypes {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0003;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // simple_enum: SimpleEnum
         let simple_enum: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
@@ -58,44 +58,9 @@ impl ClientMessage for MessageWithComplexTypes {
     }
 
 }
+impl ClientMessage for MessageWithComplexTypes {}
 
-impl ServerMessage for MessageWithComplexTypes {
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // simple_enum: SimpleEnum
-        w.write_all(&(self.simple_enum.as_int() as u8).to_le_bytes())?;
-
-        // simple_flag: SimpleFlag
-        w.write_all(&(self.simple_flag.as_int() as u8).to_le_bytes())?;
-
-        // simple_struct: StructWithAllBuiltInTypes
-        self.simple_struct.write_into_vec(w)?;
-
-        Ok(())
-    }
-    const OPCODE: u16 = 0x0003;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        // simple_enum: SimpleEnum
-        let simple_enum: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
-
-        // simple_flag: SimpleFlag
-        let simple_flag = SimpleFlag::new(crate::util::read_u8_le(r)?);
-
-        // simple_struct: StructWithAllBuiltInTypes
-        let simple_struct = StructWithAllBuiltInTypes::read(r)?;
-
-        Ok(Self {
-            simple_enum,
-            simple_flag,
-            simple_struct,
-        })
-    }
-
-}
+impl ServerMessage for MessageWithComplexTypes {}
 
 impl MessageWithComplexTypes {
     pub(crate) fn size(&self) -> usize {

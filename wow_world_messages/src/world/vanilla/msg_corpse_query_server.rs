@@ -23,7 +23,13 @@ pub struct MSG_CORPSE_QUERY_Server {
     pub result: MSG_CORPSE_QUERY_Server_CorpseQueryResult,
 }
 
-impl ServerMessage for MSG_CORPSE_QUERY_Server {
+impl crate::Message for MSG_CORPSE_QUERY_Server {
+    const OPCODE: u32 = 0x0216;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: CorpseQueryResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
@@ -49,12 +55,6 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0216;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // result: CorpseQueryResult
         let result: CorpseQueryResult = crate::util::read_u8_le(r)?.try_into()?;
@@ -85,6 +85,7 @@ impl ServerMessage for MSG_CORPSE_QUERY_Server {
     }
 
 }
+impl ServerMessage for MSG_CORPSE_QUERY_Server {}
 
 impl MSG_CORPSE_QUERY_Server {
     pub(crate) fn size(&self) -> usize {

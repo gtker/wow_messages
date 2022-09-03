@@ -15,19 +15,19 @@ pub struct CMSG_QUESTLOG_REMOVE_QUEST {
     pub slot: u8,
 }
 
-impl ClientMessage for CMSG_QUESTLOG_REMOVE_QUEST {
+impl crate::Message for CMSG_QUESTLOG_REMOVE_QUEST {
+    const OPCODE: u32 = 0x0194;
+
+    fn size_without_header(&self) -> u32 {
+        1
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0194;
-
-    fn client_size(&self) -> u16 {
-        7
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -42,4 +42,5 @@ impl ClientMessage for CMSG_QUESTLOG_REMOVE_QUEST {
     }
 
 }
+impl ClientMessage for CMSG_QUESTLOG_REMOVE_QUEST {}
 

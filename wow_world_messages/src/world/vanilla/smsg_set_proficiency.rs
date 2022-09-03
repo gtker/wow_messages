@@ -18,7 +18,13 @@ pub struct SMSG_SET_PROFICIENCY {
     pub item_sub_class_mask: u32,
 }
 
-impl ServerMessage for SMSG_SET_PROFICIENCY {
+impl crate::Message for SMSG_SET_PROFICIENCY {
+    const OPCODE: u32 = 0x0127;
+
+    fn size_without_header(&self) -> u32 {
+        5
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // class: ItemClass
         w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ServerMessage for SMSG_SET_PROFICIENCY {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0127;
-
-    fn server_size(&self) -> u16 {
-        9
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -52,4 +52,5 @@ impl ServerMessage for SMSG_SET_PROFICIENCY {
     }
 
 }
+impl ServerMessage for SMSG_SET_PROFICIENCY {}
 

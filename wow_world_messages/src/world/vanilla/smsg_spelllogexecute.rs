@@ -21,7 +21,13 @@ pub struct SMSG_SPELLLOGEXECUTE {
     pub logs: Vec<SpellLog>,
 }
 
-impl ServerMessage for SMSG_SPELLLOGEXECUTE {
+impl crate::Message for SMSG_SPELLLOGEXECUTE {
+    const OPCODE: u32 = 0x024c;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster: PackedGuid
         self.caster.write_packed_guid_into_vec(w);
@@ -39,12 +45,6 @@ impl ServerMessage for SMSG_SPELLLOGEXECUTE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x024c;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // caster: PackedGuid
         let caster = Guid::read_packed(r)?;
@@ -69,6 +69,7 @@ impl ServerMessage for SMSG_SPELLLOGEXECUTE {
     }
 
 }
+impl ServerMessage for SMSG_SPELLLOGEXECUTE {}
 
 impl SMSG_SPELLLOGEXECUTE {
     pub(crate) fn size(&self) -> usize {

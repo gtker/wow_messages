@@ -16,7 +16,13 @@ pub struct SMSG_SET_FORCED_REACTIONS {
     pub reactions: Vec<ForcedReaction>,
 }
 
-impl ServerMessage for SMSG_SET_FORCED_REACTIONS {
+impl crate::Message for SMSG_SET_FORCED_REACTIONS {
+    const OPCODE: u32 = 0x02a5;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_reactions: u32
         w.write_all(&(self.reactions.len() as u32).to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ServerMessage for SMSG_SET_FORCED_REACTIONS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02a5;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_reactions: u32
         let amount_of_reactions = crate::util::read_u32_le(r)?;
@@ -50,6 +50,7 @@ impl ServerMessage for SMSG_SET_FORCED_REACTIONS {
     }
 
 }
+impl ServerMessage for SMSG_SET_FORCED_REACTIONS {}
 
 impl SMSG_SET_FORCED_REACTIONS {
     pub(crate) fn size(&self) -> usize {

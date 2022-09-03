@@ -50,7 +50,13 @@ pub struct SMSG_MESSAGECHAT {
     pub tag: PlayerChatTag,
 }
 
-impl ServerMessage for SMSG_MESSAGECHAT {
+impl crate::Message for SMSG_MESSAGECHAT {
+    const OPCODE: u32 = 0x0096;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // chat_type: ChatType
         w.write_all(&(self.chat_type.as_int() as u8).to_le_bytes())?;
@@ -382,12 +388,6 @@ impl ServerMessage for SMSG_MESSAGECHAT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0096;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // chat_type: ChatType
         let chat_type: ChatType = crate::util::read_u8_le(r)?.try_into()?;
@@ -748,6 +748,7 @@ impl ServerMessage for SMSG_MESSAGECHAT {
     }
 
 }
+impl ServerMessage for SMSG_MESSAGECHAT {}
 
 impl SMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {

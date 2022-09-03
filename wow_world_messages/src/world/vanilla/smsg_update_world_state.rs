@@ -16,19 +16,19 @@ pub struct SMSG_UPDATE_WORLD_STATE {
     pub state: WorldState,
 }
 
-impl ServerMessage for SMSG_UPDATE_WORLD_STATE {
+impl crate::Message for SMSG_UPDATE_WORLD_STATE {
+    const OPCODE: u32 = 0x02c3;
+
+    fn size_without_header(&self) -> u32 {
+        8
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // state: WorldState
         self.state.write_into_vec(w)?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02c3;
-
-    fn server_size(&self) -> u16 {
-        12
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ServerMessage for SMSG_UPDATE_WORLD_STATE {
     }
 
 }
+impl ServerMessage for SMSG_UPDATE_WORLD_STATE {}
 

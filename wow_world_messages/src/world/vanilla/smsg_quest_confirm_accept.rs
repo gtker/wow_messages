@@ -19,7 +19,13 @@ pub struct SMSG_QUEST_CONFIRM_ACCEPT {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {
+impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
+    const OPCODE: u32 = 0x019c;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
@@ -34,12 +40,6 @@ impl ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x019c;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // quest_id: u32
         let quest_id = crate::util::read_u32_le(r)?;
@@ -59,6 +59,7 @@ impl ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {
     }
 
 }
+impl ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {}
 
 impl SMSG_QUEST_CONFIRM_ACCEPT {
     pub(crate) fn size(&self) -> usize {

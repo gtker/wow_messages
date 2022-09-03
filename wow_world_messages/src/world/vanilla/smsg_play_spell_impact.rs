@@ -20,7 +20,13 @@ pub struct SMSG_PLAY_SPELL_IMPACT {
     pub spell_visual_kit: u32,
 }
 
-impl ServerMessage for SMSG_PLAY_SPELL_IMPACT {
+impl crate::Message for SMSG_PLAY_SPELL_IMPACT {
+    const OPCODE: u32 = 0x01f7;
+
+    fn size_without_header(&self) -> u32 {
+        12
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -30,12 +36,6 @@ impl ServerMessage for SMSG_PLAY_SPELL_IMPACT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01f7;
-
-    fn server_size(&self) -> u16 {
-        16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -54,4 +54,5 @@ impl ServerMessage for SMSG_PLAY_SPELL_IMPACT {
     }
 
 }
+impl ServerMessage for SMSG_PLAY_SPELL_IMPACT {}
 

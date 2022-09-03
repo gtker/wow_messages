@@ -33,7 +33,13 @@ pub struct CMSG_GMTICKET_CREATE {
     pub reserved_for_future_use: String,
 }
 
-impl ClientMessage for CMSG_GMTICKET_CREATE {
+impl crate::Message for CMSG_GMTICKET_CREATE {
+    const OPCODE: u32 = 0x0205;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // category: GmTicketType
         w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
@@ -85,12 +91,6 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0205;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // category: GmTicketType
         let category: GmTicketType = crate::util::read_u8_le(r)?.try_into()?;
@@ -158,6 +158,7 @@ impl ClientMessage for CMSG_GMTICKET_CREATE {
     }
 
 }
+impl ClientMessage for CMSG_GMTICKET_CREATE {}
 
 impl CMSG_GMTICKET_CREATE {
     pub(crate) fn size(&self) -> usize {

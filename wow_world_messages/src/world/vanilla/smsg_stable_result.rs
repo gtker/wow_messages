@@ -16,19 +16,19 @@ pub struct SMSG_STABLE_RESULT {
     pub result: StableResult,
 }
 
-impl ServerMessage for SMSG_STABLE_RESULT {
+impl crate::Message for SMSG_STABLE_RESULT {
+    const OPCODE: u32 = 0x0273;
+
+    fn size_without_header(&self) -> u32 {
+        1
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: StableResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0273;
-
-    fn server_size(&self) -> u16 {
-        5
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ServerMessage for SMSG_STABLE_RESULT {
     }
 
 }
+impl ServerMessage for SMSG_STABLE_RESULT {}
 

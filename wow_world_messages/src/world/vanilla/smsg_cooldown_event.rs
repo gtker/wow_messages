@@ -18,7 +18,13 @@ pub struct SMSG_COOLDOWN_EVENT {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_COOLDOWN_EVENT {
+impl crate::Message for SMSG_COOLDOWN_EVENT {
+    const OPCODE: u32 = 0x0135;
+
+    fn size_without_header(&self) -> u32 {
+        12
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ServerMessage for SMSG_COOLDOWN_EVENT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0135;
-
-    fn server_size(&self) -> u16 {
-        16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -52,4 +52,5 @@ impl ServerMessage for SMSG_COOLDOWN_EVENT {
     }
 
 }
+impl ServerMessage for SMSG_COOLDOWN_EVENT {}
 

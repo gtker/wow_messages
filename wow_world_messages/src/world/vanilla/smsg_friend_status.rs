@@ -19,7 +19,13 @@ pub struct SMSG_FRIEND_STATUS {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_FRIEND_STATUS {
+impl crate::Message for SMSG_FRIEND_STATUS {
+    const OPCODE: u32 = 0x0068;
+
+    fn size_without_header(&self) -> u32 {
+        9
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: FriendResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
@@ -29,12 +35,6 @@ impl ServerMessage for SMSG_FRIEND_STATUS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0068;
-
-    fn server_size(&self) -> u16 {
-        13
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -53,4 +53,5 @@ impl ServerMessage for SMSG_FRIEND_STATUS {
     }
 
 }
+impl ServerMessage for SMSG_FRIEND_STATUS {}
 

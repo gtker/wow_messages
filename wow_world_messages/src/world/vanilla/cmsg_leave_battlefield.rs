@@ -21,7 +21,13 @@ pub struct CMSG_LEAVE_BATTLEFIELD {
     pub unknown2: u16,
 }
 
-impl ClientMessage for CMSG_LEAVE_BATTLEFIELD {
+impl crate::Message for CMSG_LEAVE_BATTLEFIELD {
+    const OPCODE: u32 = 0x02e1;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -34,12 +40,6 @@ impl ClientMessage for CMSG_LEAVE_BATTLEFIELD {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02e1;
-
-    fn client_size(&self) -> u16 {
-        10
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -62,4 +62,5 @@ impl ClientMessage for CMSG_LEAVE_BATTLEFIELD {
     }
 
 }
+impl ClientMessage for CMSG_LEAVE_BATTLEFIELD {}
 

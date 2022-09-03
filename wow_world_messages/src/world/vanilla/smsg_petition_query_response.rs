@@ -75,7 +75,13 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
     pub number_of_choices: u32,
 }
 
-impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
+impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
+    const OPCODE: u32 = 0x01c7;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition_guid: Guid
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
@@ -134,12 +140,6 @@ impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01c7;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // petition_guid: Guid
         let petition_guid = Guid::read(r)?;
@@ -216,6 +216,7 @@ impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {
     }
 
 }
+impl ServerMessage for SMSG_PETITION_QUERY_RESPONSE {}
 
 impl SMSG_PETITION_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

@@ -29,7 +29,13 @@ pub struct SMSG_BATTLEFIELD_LIST {
     pub battlegrounds: Vec<u32>,
 }
 
-impl ServerMessage for SMSG_BATTLEFIELD_LIST {
+impl crate::Message for SMSG_BATTLEFIELD_LIST {
+    const OPCODE: u32 = 0x023d;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // battlemaster: Guid
         w.write_all(&self.battlemaster.guid().to_le_bytes())?;
@@ -56,12 +62,6 @@ impl ServerMessage for SMSG_BATTLEFIELD_LIST {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x023d;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // battlemaster: Guid
         let battlemaster = Guid::read(r)?;
@@ -98,6 +98,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_LIST {
     }
 
 }
+impl ServerMessage for SMSG_BATTLEFIELD_LIST {}
 
 impl SMSG_BATTLEFIELD_LIST {
     pub(crate) fn size(&self) -> usize {

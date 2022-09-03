@@ -16,7 +16,13 @@ pub struct SMSG_LOOT_MASTER_LIST {
     pub guids: Vec<Guid>,
 }
 
-impl ServerMessage for SMSG_LOOT_MASTER_LIST {
+impl crate::Message for SMSG_LOOT_MASTER_LIST {
+    const OPCODE: u32 = 0x02a4;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_players: u8
         w.write_all(&(self.guids.len() as u8).to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ServerMessage for SMSG_LOOT_MASTER_LIST {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02a4;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_players: u8
         let amount_of_players = crate::util::read_u8_le(r)?;
@@ -50,6 +50,7 @@ impl ServerMessage for SMSG_LOOT_MASTER_LIST {
     }
 
 }
+impl ServerMessage for SMSG_LOOT_MASTER_LIST {}
 
 impl SMSG_LOOT_MASTER_LIST {
     pub(crate) fn size(&self) -> usize {

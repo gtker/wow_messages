@@ -18,7 +18,13 @@ pub struct SMSG_QUESTGIVER_QUEST_FAILED {
     pub reason: QuestFailedReason,
 }
 
-impl ServerMessage for SMSG_QUESTGIVER_QUEST_FAILED {
+impl crate::Message for SMSG_QUESTGIVER_QUEST_FAILED {
+    const OPCODE: u32 = 0x0192;
+
+    fn size_without_header(&self) -> u32 {
+        8
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_FAILED {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0192;
-
-    fn server_size(&self) -> u16 {
-        12
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -52,4 +52,5 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_FAILED {
     }
 
 }
+impl ServerMessage for SMSG_QUESTGIVER_QUEST_FAILED {}
 

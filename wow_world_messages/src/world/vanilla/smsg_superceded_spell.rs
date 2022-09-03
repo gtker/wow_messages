@@ -17,7 +17,13 @@ pub struct SMSG_SUPERCEDED_SPELL {
     pub old_spell_id: u16,
 }
 
-impl ServerMessage for SMSG_SUPERCEDED_SPELL {
+impl crate::Message for SMSG_SUPERCEDED_SPELL {
+    const OPCODE: u32 = 0x012c;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // new_spell_id: u16
         w.write_all(&self.new_spell_id.to_le_bytes())?;
@@ -27,12 +33,6 @@ impl ServerMessage for SMSG_SUPERCEDED_SPELL {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x012c;
-
-    fn server_size(&self) -> u16 {
-        8
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -51,4 +51,5 @@ impl ServerMessage for SMSG_SUPERCEDED_SPELL {
     }
 
 }
+impl ServerMessage for SMSG_SUPERCEDED_SPELL {}
 

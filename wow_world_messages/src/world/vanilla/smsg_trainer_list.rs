@@ -23,7 +23,13 @@ pub struct SMSG_TRAINER_LIST {
     pub greeting: String,
 }
 
-impl ServerMessage for SMSG_TRAINER_LIST {
+impl crate::Message for SMSG_TRAINER_LIST {
+    const OPCODE: u32 = 0x01b1;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -46,12 +52,6 @@ impl ServerMessage for SMSG_TRAINER_LIST {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01b1;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -81,6 +81,7 @@ impl ServerMessage for SMSG_TRAINER_LIST {
     }
 
 }
+impl ServerMessage for SMSG_TRAINER_LIST {}
 
 impl SMSG_TRAINER_LIST {
     pub(crate) fn size(&self) -> usize {

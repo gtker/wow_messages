@@ -34,7 +34,13 @@ impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
 }
 
-impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
+impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
+    const OPCODE: u32 = 0x02e9;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_carriers: u32
         w.write_all(&Self::AMOUNT_OF_CARRIERS_VALUE.to_le_bytes())?;
@@ -49,12 +55,6 @@ impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02e9;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_carriers: u32
         let _amount_of_carriers = crate::util::read_u32_le(r)?;
@@ -75,6 +75,7 @@ impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     }
 
 }
+impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub(crate) fn size(&self) -> usize {

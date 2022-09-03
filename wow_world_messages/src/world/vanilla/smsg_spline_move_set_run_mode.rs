@@ -15,19 +15,19 @@ pub struct SMSG_SPLINE_MOVE_SET_RUN_MODE {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_SPLINE_MOVE_SET_RUN_MODE {
+impl crate::Message for SMSG_SPLINE_MOVE_SET_RUN_MODE {
+    const OPCODE: u32 = 0x030d;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.write_packed_guid_into_vec(w);
 
         Ok(())
     }
-    const OPCODE: u16 = 0x030d;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
@@ -38,6 +38,7 @@ impl ServerMessage for SMSG_SPLINE_MOVE_SET_RUN_MODE {
     }
 
 }
+impl ServerMessage for SMSG_SPLINE_MOVE_SET_RUN_MODE {}
 
 impl SMSG_SPLINE_MOVE_SET_RUN_MODE {
     pub(crate) fn size(&self) -> usize {

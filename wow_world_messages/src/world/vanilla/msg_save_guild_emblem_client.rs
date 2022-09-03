@@ -26,7 +26,13 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Client {
     pub background_color: u32,
 }
 
-impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {
+impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
+    const OPCODE: u32 = 0x01f1;
+
+    fn size_without_header(&self) -> u32 {
+        28
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor: Guid
         w.write_all(&self.vendor.guid().to_le_bytes())?;
@@ -48,12 +54,6 @@ impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01f1;
-
-    fn client_size(&self) -> u16 {
-        34
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 28 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -88,4 +88,5 @@ impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {
     }
 
 }
+impl ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {}
 

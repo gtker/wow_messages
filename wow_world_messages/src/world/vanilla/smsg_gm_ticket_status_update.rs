@@ -16,19 +16,19 @@ pub struct SMSG_GM_TICKET_STATUS_UPDATE {
     pub response: GmTicketStatusResponse,
 }
 
-impl ServerMessage for SMSG_GM_TICKET_STATUS_UPDATE {
+impl crate::Message for SMSG_GM_TICKET_STATUS_UPDATE {
+    const OPCODE: u32 = 0x0328;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // response: GmTicketStatusResponse
         w.write_all(&(self.response.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0328;
-
-    fn server_size(&self) -> u16 {
-        8
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ServerMessage for SMSG_GM_TICKET_STATUS_UPDATE {
     }
 
 }
+impl ServerMessage for SMSG_GM_TICKET_STATUS_UPDATE {}
 

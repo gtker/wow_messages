@@ -24,7 +24,13 @@ pub struct SMSG_INITIAL_SPELLS {
     pub cooldowns: Vec<CooldownSpell>,
 }
 
-impl ServerMessage for SMSG_INITIAL_SPELLS {
+impl crate::Message for SMSG_INITIAL_SPELLS {
+    const OPCODE: u32 = 0x012a;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -47,12 +53,6 @@ impl ServerMessage for SMSG_INITIAL_SPELLS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x012a;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
@@ -83,6 +83,7 @@ impl ServerMessage for SMSG_INITIAL_SPELLS {
     }
 
 }
+impl ServerMessage for SMSG_INITIAL_SPELLS {}
 
 impl SMSG_INITIAL_SPELLS {
     pub(crate) fn size(&self) -> usize {

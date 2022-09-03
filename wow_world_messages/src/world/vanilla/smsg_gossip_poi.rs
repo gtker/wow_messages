@@ -24,7 +24,13 @@ pub struct SMSG_GOSSIP_POI {
     pub location_name: String,
 }
 
-impl ServerMessage for SMSG_GOSSIP_POI {
+impl crate::Message for SMSG_GOSSIP_POI {
+    const OPCODE: u32 = 0x0224;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // flags: u32
         w.write_all(&self.flags.to_le_bytes())?;
@@ -48,12 +54,6 @@ impl ServerMessage for SMSG_GOSSIP_POI {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0224;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // flags: u32
         let flags = crate::util::read_u32_le(r)?;
@@ -83,6 +83,7 @@ impl ServerMessage for SMSG_GOSSIP_POI {
     }
 
 }
+impl ServerMessage for SMSG_GOSSIP_POI {}
 
 impl SMSG_GOSSIP_POI {
     pub(crate) fn size(&self) -> usize {

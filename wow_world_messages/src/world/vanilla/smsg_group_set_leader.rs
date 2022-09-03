@@ -14,7 +14,13 @@ pub struct SMSG_GROUP_SET_LEADER {
     pub name: String,
 }
 
-impl ServerMessage for SMSG_GROUP_SET_LEADER {
+impl crate::Message for SMSG_GROUP_SET_LEADER {
+    const OPCODE: u32 = 0x0079;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
@@ -23,12 +29,6 @@ impl ServerMessage for SMSG_GROUP_SET_LEADER {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0079;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
@@ -40,6 +40,7 @@ impl ServerMessage for SMSG_GROUP_SET_LEADER {
     }
 
 }
+impl ServerMessage for SMSG_GROUP_SET_LEADER {}
 
 impl SMSG_GROUP_SET_LEADER {
     pub(crate) fn size(&self) -> usize {

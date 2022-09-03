@@ -18,19 +18,19 @@ pub struct CMSG_SET_SELECTION {
     pub target: Guid,
 }
 
-impl ClientMessage for CMSG_SET_SELECTION {
+impl crate::Message for CMSG_SET_SELECTION {
+    const OPCODE: u32 = 0x013d;
+
+    fn size_without_header(&self) -> u32 {
+        8
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target: Guid
         w.write_all(&self.target.guid().to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x013d;
-
-    fn client_size(&self) -> u16 {
-        14
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -45,6 +45,7 @@ impl ClientMessage for CMSG_SET_SELECTION {
     }
 
 }
+impl ClientMessage for CMSG_SET_SELECTION {}
 
 #[cfg(test)]
 mod test {

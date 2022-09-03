@@ -18,7 +18,13 @@ pub struct SMSG_PARTYKILLLOG {
     pub victim: Guid,
 }
 
-impl ServerMessage for SMSG_PARTYKILLLOG {
+impl crate::Message for SMSG_PARTYKILLLOG {
+    const OPCODE: u32 = 0x01f5;
+
+    fn size_without_header(&self) -> u32 {
+        16
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_with_killing_blow: Guid
         w.write_all(&self.player_with_killing_blow.guid().to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ServerMessage for SMSG_PARTYKILLLOG {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01f5;
-
-    fn server_size(&self) -> u16 {
-        20
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -52,4 +52,5 @@ impl ServerMessage for SMSG_PARTYKILLLOG {
     }
 
 }
+impl ServerMessage for SMSG_PARTYKILLLOG {}
 

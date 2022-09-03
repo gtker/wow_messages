@@ -18,7 +18,13 @@ pub struct CMSG_STABLE_SWAP_PET {
     pub pet_slot: u32,
 }
 
-impl ClientMessage for CMSG_STABLE_SWAP_PET {
+impl crate::Message for CMSG_STABLE_SWAP_PET {
+    const OPCODE: u32 = 0x0275;
+
+    fn size_without_header(&self) -> u32 {
+        12
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ClientMessage for CMSG_STABLE_SWAP_PET {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0275;
-
-    fn client_size(&self) -> u16 {
-        18
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -52,4 +52,5 @@ impl ClientMessage for CMSG_STABLE_SWAP_PET {
     }
 
 }
+impl ClientMessage for CMSG_STABLE_SWAP_PET {}
 

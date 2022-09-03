@@ -53,7 +53,13 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
     pub rank_progress_bar: u8,
 }
 
-impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {
+impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
+    const OPCODE: u32 = 0x02d6;
+
+    fn size_without_header(&self) -> u32 {
+        50
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -105,12 +111,6 @@ impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02d6;
-
-    fn server_size(&self) -> u16 {
-        54
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 50 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -185,4 +185,5 @@ impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {
     }
 
 }
+impl ServerMessage for MSG_INSPECT_HONOR_STATS_Server {}
 

@@ -30,7 +30,13 @@ pub struct CMSG_WHO {
     pub search_strings: Vec<String>,
 }
 
-impl ClientMessage for CMSG_WHO {
+impl crate::Message for CMSG_WHO {
+    const OPCODE: u32 = 0x0062;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // minimum_level: u32
         w.write_all(&self.minimum_level.to_le_bytes())?;
@@ -73,12 +79,6 @@ impl ClientMessage for CMSG_WHO {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0062;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // minimum_level: u32
         let minimum_level = crate::util::read_u32_le(r)?;
@@ -132,6 +132,7 @@ impl ClientMessage for CMSG_WHO {
     }
 
 }
+impl ClientMessage for CMSG_WHO {}
 
 impl CMSG_WHO {
     pub(crate) fn size(&self) -> usize {

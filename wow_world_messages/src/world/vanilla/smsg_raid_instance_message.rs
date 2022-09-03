@@ -21,7 +21,13 @@ pub struct SMSG_RAID_INSTANCE_MESSAGE {
     pub time_left: u32,
 }
 
-impl ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {
+impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
+    const OPCODE: u32 = 0x02fa;
+
+    fn size_without_header(&self) -> u32 {
+        12
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message_type: RaidInstanceMessage
         w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
@@ -34,12 +40,6 @@ impl ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02fa;
-
-    fn server_size(&self) -> u16 {
-        16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -62,4 +62,5 @@ impl ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {
     }
 
 }
+impl ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {}
 

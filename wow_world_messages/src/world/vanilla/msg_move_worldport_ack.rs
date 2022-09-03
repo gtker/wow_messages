@@ -18,16 +18,16 @@ use std::io::{Write, Read};
 pub struct MSG_MOVE_WORLDPORT_ACK {
 }
 
-impl ClientMessage for MSG_MOVE_WORLDPORT_ACK {
+impl crate::Message for MSG_MOVE_WORLDPORT_ACK {
+    const OPCODE: u32 = 0x00dc;
+
+    fn size_without_header(&self) -> u32 {
+        0
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
-    const OPCODE: u16 = 0x00dc;
-
-    fn client_size(&self) -> u16 {
-        6
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -38,25 +38,7 @@ impl ClientMessage for MSG_MOVE_WORLDPORT_ACK {
     }
 
 }
+impl ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
 
-impl ServerMessage for MSG_MOVE_WORLDPORT_ACK {
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        Ok(())
-    }
-    const OPCODE: u16 = 0x00dc;
-
-    fn server_size(&self) -> u16 {
-        4
-    }
-
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
-        }
-
-        Ok(Self {
-        })
-    }
-
-}
+impl ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
 

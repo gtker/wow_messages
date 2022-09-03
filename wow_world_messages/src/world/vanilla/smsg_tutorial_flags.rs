@@ -34,7 +34,13 @@ pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data7: u32,
 }
 
-impl ServerMessage for SMSG_TUTORIAL_FLAGS {
+impl crate::Message for SMSG_TUTORIAL_FLAGS {
+    const OPCODE: u32 = 0x00fd;
+
+    fn size_without_header(&self) -> u32 {
+        32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // tutorial_data0: u32
         w.write_all(&self.tutorial_data0.to_le_bytes())?;
@@ -62,12 +68,6 @@ impl ServerMessage for SMSG_TUTORIAL_FLAGS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x00fd;
-
-    fn server_size(&self) -> u16 {
-        36
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -110,6 +110,7 @@ impl ServerMessage for SMSG_TUTORIAL_FLAGS {
     }
 
 }
+impl ServerMessage for SMSG_TUTORIAL_FLAGS {}
 
 #[cfg(test)]
 mod test {

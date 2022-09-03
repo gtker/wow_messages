@@ -77,7 +77,13 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL {
     pub mask: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags,
 }
 
-impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
+impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
+    const OPCODE: u32 = 0x02f2;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player: PackedGuid
         self.player.write_packed_guid_into_vec(w);
@@ -200,12 +206,6 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02f2;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // player: PackedGuid
         let player = Guid::read_packed(r)?;
@@ -463,6 +463,7 @@ impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {
     }
 
 }
+impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
 
 impl SMSG_PARTY_MEMBER_STATS_FULL {
     pub(crate) fn size(&self) -> usize {

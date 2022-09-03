@@ -24,7 +24,13 @@ pub struct SMSG_SPELLORDAMAGE_IMMUNE {
     pub unknown1: u8,
 }
 
-impl ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {
+impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
+    const OPCODE: u32 = 0x0263;
+
+    fn size_without_header(&self) -> u32 {
+        21
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // caster_guid: Guid
         w.write_all(&self.caster_guid.guid().to_le_bytes())?;
@@ -40,12 +46,6 @@ impl ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0263;
-
-    fn server_size(&self) -> u16 {
-        25
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 21 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -72,4 +72,5 @@ impl ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {
     }
 
 }
+impl ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
 

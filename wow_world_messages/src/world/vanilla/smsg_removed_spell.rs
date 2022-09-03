@@ -15,19 +15,19 @@ pub struct SMSG_REMOVED_SPELL {
     pub spell_id: u16,
 }
 
-impl ServerMessage for SMSG_REMOVED_SPELL {
+impl crate::Message for SMSG_REMOVED_SPELL {
+    const OPCODE: u32 = 0x0203;
+
+    fn size_without_header(&self) -> u32 {
+        2
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell_id: u16
         w.write_all(&self.spell_id.to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0203;
-
-    fn server_size(&self) -> u16 {
-        6
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -42,4 +42,5 @@ impl ServerMessage for SMSG_REMOVED_SPELL {
     }
 
 }
+impl ServerMessage for SMSG_REMOVED_SPELL {}
 

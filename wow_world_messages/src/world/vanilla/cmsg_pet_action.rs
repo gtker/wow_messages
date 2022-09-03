@@ -20,7 +20,13 @@ pub struct CMSG_PET_ACTION {
     pub target_guid: Guid,
 }
 
-impl ClientMessage for CMSG_PET_ACTION {
+impl crate::Message for CMSG_PET_ACTION {
+    const OPCODE: u32 = 0x0175;
+
+    fn size_without_header(&self) -> u32 {
+        20
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_guid: Guid
         w.write_all(&self.pet_guid.guid().to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ClientMessage for CMSG_PET_ACTION {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0175;
-
-    fn client_size(&self) -> u16 {
-        26
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -61,4 +61,5 @@ impl ClientMessage for CMSG_PET_ACTION {
     }
 
 }
+impl ClientMessage for CMSG_PET_ACTION {}
 

@@ -15,19 +15,19 @@ pub struct MSG_MOVE_START_FORWARD_Client {
     pub info: MovementInfo,
 }
 
-impl ClientMessage for MSG_MOVE_START_FORWARD_Client {
+impl crate::Message for MSG_MOVE_START_FORWARD_Client {
+    const OPCODE: u32 = 0x00b5;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
         self.info.write_into_vec(w)?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x00b5;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // info: MovementInfo
         let info = MovementInfo::read(r)?;
@@ -38,6 +38,7 @@ impl ClientMessage for MSG_MOVE_START_FORWARD_Client {
     }
 
 }
+impl ClientMessage for MSG_MOVE_START_FORWARD_Client {}
 
 impl MSG_MOVE_START_FORWARD_Client {
     pub(crate) fn size(&self) -> usize {

@@ -30,7 +30,13 @@ pub struct SMSG_AUCTION_OWNER_NOTIFICATION {
     pub item_random_property_id: u32,
 }
 
-impl ServerMessage for SMSG_AUCTION_OWNER_NOTIFICATION {
+impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
+    const OPCODE: u32 = 0x025f;
+
+    fn size_without_header(&self) -> u32 {
+        28
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auction_id: u32
         w.write_all(&self.auction_id.to_le_bytes())?;
@@ -52,12 +58,6 @@ impl ServerMessage for SMSG_AUCTION_OWNER_NOTIFICATION {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x025f;
-
-    fn server_size(&self) -> u16 {
-        32
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 28 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -92,4 +92,5 @@ impl ServerMessage for SMSG_AUCTION_OWNER_NOTIFICATION {
     }
 
 }
+impl ServerMessage for SMSG_AUCTION_OWNER_NOTIFICATION {}
 

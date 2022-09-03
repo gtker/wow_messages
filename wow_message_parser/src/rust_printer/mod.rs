@@ -167,50 +167,28 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn impl_read_and_writable_world(
+    pub fn impl_world_message(
         &mut self,
         type_name: impl AsRef<str>,
         opcode: u16,
-        container_type: ContainerType,
         write_function: impl Fn(&mut Self, ImplType),
         read_function: impl Fn(&mut Self, ImplType),
         sizes: Option<Sizes>,
     ) {
-        let trait_to_impl = match container_type {
-            ContainerType::CMsg(_) => CLIENT_MESSAGE_TRAIT_NAME,
-            ContainerType::SMsg(_) => SERVER_MESSAGE_TRAIT_NAME,
-            _ => unreachable!(),
-        };
-        let client_or_server = match container_type {
-            ContainerType::CMsg(_) => "client",
-            ContainerType::SMsg(_) => "server",
-            _ => unreachable!(),
-        };
-
-        // Size field does not count in size
-        let opcode_size = match container_type {
-            ContainerType::CMsg(_) => 6,
-            ContainerType::SMsg(_) => 4,
-            _ => unreachable!(),
-        };
-
-        self.open_curly(format!("impl {} for {}", trait_to_impl, type_name.as_ref()));
-
-        self.write_into_vec_trait(write_function);
-
-        self.wln(format!("const OPCODE: u16 = {:#06x};", opcode));
+        self.open_curly(format!("impl crate::Message for {}", type_name.as_ref()));
+        self.wln(format!("const OPCODE: u32 = {:#06x};", opcode));
         self.newline();
 
-        self.open_curly(format!("fn {}_size(&self) -> u16", client_or_server,));
-
+        self.open_curly("fn size_without_header(&self) -> u32");
         if sizes.is_some() && sizes.unwrap().is_constant() {
-            self.wln(format!("{}", sizes.unwrap().maximum() + opcode_size));
+            self.wln(format!("{}", sizes.unwrap().maximum()));
         } else {
-            self.wln(format!("(self.size() + {}) as u16", opcode_size));
+            self.wln("self.size() as u32");
         }
-
-        self.closing_curly(); // size_without_size_or_opcode_fields
+        self.closing_curly(); // size_without_header
         self.newline();
+
+        self.write_into_vec_trait(&write_function);
 
         self.open_curly(format!(
             "fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {}>",
@@ -221,7 +199,26 @@ impl Writer {
 
         self.closing_curly_newline(); // read_body
 
-        self.closing_curly_newline(); // impl
+        self.closing_curly(); // impl Message
+    }
+
+    pub fn impl_read_and_writable_world(
+        &mut self,
+        type_name: impl AsRef<str>,
+        container_type: ContainerType,
+    ) {
+        let trait_to_impl = match container_type {
+            ContainerType::CMsg(_) => CLIENT_MESSAGE_TRAIT_NAME,
+            ContainerType::SMsg(_) => SERVER_MESSAGE_TRAIT_NAME,
+            _ => unreachable!(),
+        };
+
+        self.wln(format!(
+            "impl {} for {} {{}}",
+            trait_to_impl,
+            type_name.as_ref()
+        ));
+        self.newline();
     }
 
     fn print_write_decl(&mut self, it: ImplType) {

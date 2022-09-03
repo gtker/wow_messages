@@ -26,7 +26,13 @@ pub struct SMSG_ENCHANTMENTLOG {
     pub unknown1: u8,
 }
 
-impl ServerMessage for SMSG_ENCHANTMENTLOG {
+impl crate::Message for SMSG_ENCHANTMENTLOG {
+    const OPCODE: u32 = 0x01d7;
+
+    fn size_without_header(&self) -> u32 {
+        25
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
@@ -45,12 +51,6 @@ impl ServerMessage for SMSG_ENCHANTMENTLOG {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01d7;
-
-    fn server_size(&self) -> u16 {
-        29
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 25 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -81,4 +81,5 @@ impl ServerMessage for SMSG_ENCHANTMENTLOG {
     }
 
 }
+impl ServerMessage for SMSG_ENCHANTMENTLOG {}
 

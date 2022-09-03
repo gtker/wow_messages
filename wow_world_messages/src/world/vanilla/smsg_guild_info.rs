@@ -24,7 +24,13 @@ pub struct SMSG_GUILD_INFO {
     pub amount_of_accounts_in_guild: u32,
 }
 
-impl ServerMessage for SMSG_GUILD_INFO {
+impl crate::Message for SMSG_GUILD_INFO {
+    const OPCODE: u32 = 0x0088;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guild_name: CString
         w.write_all(self.guild_name.as_bytes())?;
@@ -48,12 +54,6 @@ impl ServerMessage for SMSG_GUILD_INFO {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0088;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // guild_name: CString
         let guild_name = crate::util::read_c_string_to_vec(r)?;
@@ -85,6 +85,7 @@ impl ServerMessage for SMSG_GUILD_INFO {
     }
 
 }
+impl ServerMessage for SMSG_GUILD_INFO {}
 
 impl SMSG_GUILD_INFO {
     pub(crate) fn size(&self) -> usize {

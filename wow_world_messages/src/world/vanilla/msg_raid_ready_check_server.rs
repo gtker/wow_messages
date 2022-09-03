@@ -19,7 +19,13 @@ pub struct MSG_RAID_READY_CHECK_Server {
     pub state_check: Option<MSG_RAID_READY_CHECK_Server_state_check>,
 }
 
-impl ServerMessage for MSG_RAID_READY_CHECK_Server {
+impl crate::Message for MSG_RAID_READY_CHECK_Server {
+    const OPCODE: u32 = 0x0322;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional state_check
         if let Some(v) = &self.state_check {
@@ -33,12 +39,6 @@ impl ServerMessage for MSG_RAID_READY_CHECK_Server {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0322;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // optional state_check
         let current_size = {
@@ -65,6 +65,7 @@ impl ServerMessage for MSG_RAID_READY_CHECK_Server {
     }
 
 }
+impl ServerMessage for MSG_RAID_READY_CHECK_Server {}
 
 impl MSG_RAID_READY_CHECK_Server {
     pub(crate) fn size(&self) -> usize {

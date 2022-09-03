@@ -20,7 +20,13 @@ pub struct CMSG_AUCTION_PLACE_BID {
     pub price: u32,
 }
 
-impl ClientMessage for CMSG_AUCTION_PLACE_BID {
+impl crate::Message for CMSG_AUCTION_PLACE_BID {
+    const OPCODE: u32 = 0x025a;
+
+    fn size_without_header(&self) -> u32 {
+        16
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid
         w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ClientMessage for CMSG_AUCTION_PLACE_BID {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x025a;
-
-    fn client_size(&self) -> u16 {
-        22
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -61,4 +61,5 @@ impl ClientMessage for CMSG_AUCTION_PLACE_BID {
     }
 
 }
+impl ClientMessage for CMSG_AUCTION_PLACE_BID {}
 

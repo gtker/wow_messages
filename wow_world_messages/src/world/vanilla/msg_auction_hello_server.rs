@@ -18,7 +18,13 @@ pub struct MSG_AUCTION_HELLO_Server {
     pub auction_house_id: u32,
 }
 
-impl ServerMessage for MSG_AUCTION_HELLO_Server {
+impl crate::Message for MSG_AUCTION_HELLO_Server {
+    const OPCODE: u32 = 0x0255;
+
+    fn size_without_header(&self) -> u32 {
+        12
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer: Guid
         w.write_all(&self.auctioneer.guid().to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ServerMessage for MSG_AUCTION_HELLO_Server {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0255;
-
-    fn server_size(&self) -> u16 {
-        16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -52,6 +52,7 @@ impl ServerMessage for MSG_AUCTION_HELLO_Server {
     }
 
 }
+impl ServerMessage for MSG_AUCTION_HELLO_Server {}
 
 #[cfg(test)]
 mod test {

@@ -28,7 +28,13 @@ pub struct SMSG_GUILD_QUERY_RESPONSE {
     pub background_color: u32,
 }
 
-impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
+impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
+    const OPCODE: u32 = 0x0055;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
@@ -61,12 +67,6 @@ impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0055;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // id: u32
         let id = crate::util::read_u32_le(r)?;
@@ -111,6 +111,7 @@ impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {
     }
 
 }
+impl ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
 
 impl SMSG_GUILD_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

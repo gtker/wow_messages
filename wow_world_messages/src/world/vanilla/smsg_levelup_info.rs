@@ -37,7 +37,13 @@ pub struct SMSG_LEVELUP_INFO {
     pub spirit: u32,
 }
 
-impl ServerMessage for SMSG_LEVELUP_INFO {
+impl crate::Message for SMSG_LEVELUP_INFO {
+    const OPCODE: u32 = 0x01d4;
+
+    fn size_without_header(&self) -> u32 {
+        48
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // new_level: u32
         w.write_all(&self.new_level.to_le_bytes())?;
@@ -77,12 +83,6 @@ impl ServerMessage for SMSG_LEVELUP_INFO {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01d4;
-
-    fn server_size(&self) -> u16 {
-        52
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 48 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -141,4 +141,5 @@ impl ServerMessage for SMSG_LEVELUP_INFO {
     }
 
 }
+impl ServerMessage for SMSG_LEVELUP_INFO {}
 

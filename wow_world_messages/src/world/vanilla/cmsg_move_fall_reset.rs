@@ -15,19 +15,19 @@ pub struct CMSG_MOVE_FALL_RESET {
     pub info: MovementInfo,
 }
 
-impl ClientMessage for CMSG_MOVE_FALL_RESET {
+impl crate::Message for CMSG_MOVE_FALL_RESET {
+    const OPCODE: u32 = 0x02ca;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // info: MovementInfo
         self.info.write_into_vec(w)?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02ca;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // info: MovementInfo
         let info = MovementInfo::read(r)?;
@@ -38,6 +38,7 @@ impl ClientMessage for CMSG_MOVE_FALL_RESET {
     }
 
 }
+impl ClientMessage for CMSG_MOVE_FALL_RESET {}
 
 impl CMSG_MOVE_FALL_RESET {
     pub(crate) fn size(&self) -> usize {

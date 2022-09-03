@@ -20,7 +20,13 @@ pub struct SMSG_SUMMON_REQUEST {
     pub auto_decline_time_in_msecs: u32,
 }
 
-impl ServerMessage for SMSG_SUMMON_REQUEST {
+impl crate::Message for SMSG_SUMMON_REQUEST {
+    const OPCODE: u32 = 0x02ab;
+
+    fn size_without_header(&self) -> u32 {
+        16
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // summoner_guid: Guid
         w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ServerMessage for SMSG_SUMMON_REQUEST {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02ab;
-
-    fn server_size(&self) -> u16 {
-        20
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -61,4 +61,5 @@ impl ServerMessage for SMSG_SUMMON_REQUEST {
     }
 
 }
+impl ServerMessage for SMSG_SUMMON_REQUEST {}
 

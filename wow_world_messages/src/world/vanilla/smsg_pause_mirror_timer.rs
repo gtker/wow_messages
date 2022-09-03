@@ -20,7 +20,13 @@ pub struct SMSG_PAUSE_MIRROR_TIMER {
     pub is_frozen: u8,
 }
 
-impl ServerMessage for SMSG_PAUSE_MIRROR_TIMER {
+impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
+    const OPCODE: u32 = 0x01da;
+
+    fn size_without_header(&self) -> u32 {
+        5
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // timer: TimerType
         w.write_all(&(self.timer.as_int() as u32).to_le_bytes())?;
@@ -30,12 +36,6 @@ impl ServerMessage for SMSG_PAUSE_MIRROR_TIMER {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01da;
-
-    fn server_size(&self) -> u16 {
-        9
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -54,4 +54,5 @@ impl ServerMessage for SMSG_PAUSE_MIRROR_TIMER {
     }
 
 }
+impl ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
 

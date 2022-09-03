@@ -14,7 +14,13 @@ pub struct SMSG_NOTIFICATION {
     pub notification: String,
 }
 
-impl ServerMessage for SMSG_NOTIFICATION {
+impl crate::Message for SMSG_NOTIFICATION {
+    const OPCODE: u32 = 0x01cb;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // notification: CString
         w.write_all(self.notification.as_bytes())?;
@@ -23,12 +29,6 @@ impl ServerMessage for SMSG_NOTIFICATION {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01cb;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // notification: CString
         let notification = crate::util::read_c_string_to_vec(r)?;
@@ -40,6 +40,7 @@ impl ServerMessage for SMSG_NOTIFICATION {
     }
 
 }
+impl ServerMessage for SMSG_NOTIFICATION {}
 
 impl SMSG_NOTIFICATION {
     pub(crate) fn size(&self) -> usize {

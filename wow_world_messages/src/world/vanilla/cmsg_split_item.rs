@@ -23,7 +23,13 @@ pub struct CMSG_SPLIT_ITEM {
     pub amount: u8,
 }
 
-impl ClientMessage for CMSG_SPLIT_ITEM {
+impl crate::Message for CMSG_SPLIT_ITEM {
+    const OPCODE: u32 = 0x010e;
+
+    fn size_without_header(&self) -> u32 {
+        5
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // source_bag: u8
         w.write_all(&self.source_bag.to_le_bytes())?;
@@ -42,12 +48,6 @@ impl ClientMessage for CMSG_SPLIT_ITEM {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x010e;
-
-    fn client_size(&self) -> u16 {
-        11
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -78,4 +78,5 @@ impl ClientMessage for CMSG_SPLIT_ITEM {
     }
 
 }
+impl ClientMessage for CMSG_SPLIT_ITEM {}
 

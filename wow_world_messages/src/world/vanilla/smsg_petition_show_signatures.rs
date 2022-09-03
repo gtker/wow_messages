@@ -22,7 +22,13 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
     pub amount_of_signatures: u8,
 }
 
-impl ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {
+impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
+    const OPCODE: u32 = 0x01bf;
+
+    fn size_without_header(&self) -> u32 {
+        25
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_guid: Guid
         w.write_all(&self.item_guid.guid().to_le_bytes())?;
@@ -38,12 +44,6 @@ impl ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01bf;
-
-    fn server_size(&self) -> u16 {
-        29
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 25 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -70,4 +70,5 @@ impl ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {
     }
 
 }
+impl ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {}
 

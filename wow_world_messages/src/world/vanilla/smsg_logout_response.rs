@@ -23,7 +23,13 @@ pub struct SMSG_LOGOUT_RESPONSE {
     pub speed: LogoutSpeed,
 }
 
-impl ServerMessage for SMSG_LOGOUT_RESPONSE {
+impl crate::Message for SMSG_LOGOUT_RESPONSE {
+    const OPCODE: u32 = 0x004c;
+
+    fn size_without_header(&self) -> u32 {
+        5
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: LogoutResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ServerMessage for SMSG_LOGOUT_RESPONSE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x004c;
-
-    fn server_size(&self) -> u16 {
-        9
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -57,6 +57,7 @@ impl ServerMessage for SMSG_LOGOUT_RESPONSE {
     }
 
 }
+impl ServerMessage for SMSG_LOGOUT_RESPONSE {}
 
 #[cfg(test)]
 mod test {

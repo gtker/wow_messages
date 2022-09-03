@@ -19,7 +19,13 @@ pub struct SMSG_PETITION_SHOWLIST {
     pub petitions: Vec<PetitionShowlist>,
 }
 
-impl ServerMessage for SMSG_PETITION_SHOWLIST {
+impl crate::Message for SMSG_PETITION_SHOWLIST {
+    const OPCODE: u32 = 0x01bc;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
@@ -34,12 +40,6 @@ impl ServerMessage for SMSG_PETITION_SHOWLIST {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01bc;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // npc: Guid
         let npc = Guid::read(r)?;
@@ -60,6 +60,7 @@ impl ServerMessage for SMSG_PETITION_SHOWLIST {
     }
 
 }
+impl ServerMessage for SMSG_PETITION_SHOWLIST {}
 
 impl SMSG_PETITION_SHOWLIST {
     pub(crate) fn size(&self) -> usize {

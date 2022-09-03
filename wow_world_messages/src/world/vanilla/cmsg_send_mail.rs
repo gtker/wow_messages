@@ -43,7 +43,13 @@ pub struct CMSG_SEND_MAIL {
     pub unknown4: u32,
 }
 
-impl ClientMessage for CMSG_SEND_MAIL {
+impl crate::Message for CMSG_SEND_MAIL {
+    const OPCODE: u32 = 0x0238;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // mailbox: Guid
         w.write_all(&self.mailbox.guid().to_le_bytes())?;
@@ -86,12 +92,6 @@ impl ClientMessage for CMSG_SEND_MAIL {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0238;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // mailbox: Guid
         let mailbox = Guid::read(r)?;
@@ -145,6 +145,7 @@ impl ClientMessage for CMSG_SEND_MAIL {
     }
 
 }
+impl ClientMessage for CMSG_SEND_MAIL {}
 
 impl CMSG_SEND_MAIL {
     pub(crate) fn size(&self) -> usize {

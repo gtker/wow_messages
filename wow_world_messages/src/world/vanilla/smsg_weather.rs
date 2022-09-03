@@ -23,7 +23,13 @@ pub struct SMSG_WEATHER {
     pub change: WeatherChangeType,
 }
 
-impl ServerMessage for SMSG_WEATHER {
+impl crate::Message for SMSG_WEATHER {
+    const OPCODE: u32 = 0x02f4;
+
+    fn size_without_header(&self) -> u32 {
+        13
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // weather_type: WeatherType
         w.write_all(&(self.weather_type.as_int() as u32).to_le_bytes())?;
@@ -39,12 +45,6 @@ impl ServerMessage for SMSG_WEATHER {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02f4;
-
-    fn server_size(&self) -> u16 {
-        17
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -70,4 +70,5 @@ impl ServerMessage for SMSG_WEATHER {
     }
 
 }
+impl ServerMessage for SMSG_WEATHER {}
 

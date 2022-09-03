@@ -21,7 +21,13 @@ pub struct CMSG_USE_ITEM {
     pub targets: SpellCastTargets,
 }
 
-impl ClientMessage for CMSG_USE_ITEM {
+impl crate::Message for CMSG_USE_ITEM {
+    const OPCODE: u32 = 0x00ab;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag_index: u8
         w.write_all(&self.bag_index.to_le_bytes())?;
@@ -37,12 +43,6 @@ impl ClientMessage for CMSG_USE_ITEM {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x00ab;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // bag_index: u8
         let bag_index = crate::util::read_u8_le(r)?;
@@ -65,6 +65,7 @@ impl ClientMessage for CMSG_USE_ITEM {
     }
 
 }
+impl ClientMessage for CMSG_USE_ITEM {}
 
 impl CMSG_USE_ITEM {
     pub(crate) fn size(&self) -> usize {

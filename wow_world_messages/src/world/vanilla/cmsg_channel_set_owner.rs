@@ -16,7 +16,13 @@ pub struct CMSG_CHANNEL_SET_OWNER {
     pub new_owner: String,
 }
 
-impl ClientMessage for CMSG_CHANNEL_SET_OWNER {
+impl crate::Message for CMSG_CHANNEL_SET_OWNER {
+    const OPCODE: u32 = 0x009d;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // channel_name: CString
         w.write_all(self.channel_name.as_bytes())?;
@@ -30,12 +36,6 @@ impl ClientMessage for CMSG_CHANNEL_SET_OWNER {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x009d;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // channel_name: CString
         let channel_name = crate::util::read_c_string_to_vec(r)?;
@@ -52,6 +52,7 @@ impl ClientMessage for CMSG_CHANNEL_SET_OWNER {
     }
 
 }
+impl ClientMessage for CMSG_CHANNEL_SET_OWNER {}
 
 impl CMSG_CHANNEL_SET_OWNER {
     pub(crate) fn size(&self) -> usize {

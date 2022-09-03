@@ -14,7 +14,13 @@ pub struct CMSG_GUILD_ADD_RANK {
     pub rank_name: String,
 }
 
-impl ClientMessage for CMSG_GUILD_ADD_RANK {
+impl crate::Message for CMSG_GUILD_ADD_RANK {
+    const OPCODE: u32 = 0x0232;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // rank_name: CString
         w.write_all(self.rank_name.as_bytes())?;
@@ -23,12 +29,6 @@ impl ClientMessage for CMSG_GUILD_ADD_RANK {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0232;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // rank_name: CString
         let rank_name = crate::util::read_c_string_to_vec(r)?;
@@ -40,6 +40,7 @@ impl ClientMessage for CMSG_GUILD_ADD_RANK {
     }
 
 }
+impl ClientMessage for CMSG_GUILD_ADD_RANK {}
 
 impl CMSG_GUILD_ADD_RANK {
     pub(crate) fn size(&self) -> usize {

@@ -20,7 +20,13 @@ pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
     pub outbid_item_ids: Vec<u32>,
 }
 
-impl ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {
+impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
+    const OPCODE: u32 = 0x0264;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer: Guid
         w.write_all(&self.auctioneer.guid().to_le_bytes())?;
@@ -38,12 +44,6 @@ impl ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0264;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // auctioneer: Guid
         let auctioneer = Guid::read(r)?;
@@ -68,6 +68,7 @@ impl ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     }
 
 }
+impl ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {}
 
 impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
     pub(crate) fn size(&self) -> usize {

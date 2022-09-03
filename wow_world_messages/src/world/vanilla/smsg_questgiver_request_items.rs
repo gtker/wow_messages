@@ -52,7 +52,13 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub flags3: u32,
 }
 
-impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {
+impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
+    const OPCODE: u32 = 0x018b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
@@ -104,12 +110,6 @@ impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x018b;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // npc: Guid
         let npc = Guid::read(r)?;
@@ -176,6 +176,7 @@ impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {
     }
 
 }
+impl ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {}
 
 impl SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub(crate) fn size(&self) -> usize {

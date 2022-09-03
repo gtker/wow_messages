@@ -26,7 +26,13 @@ pub struct CMSG_MESSAGECHAT {
     pub message: String,
 }
 
-impl ClientMessage for CMSG_MESSAGECHAT {
+impl crate::Message for CMSG_MESSAGECHAT {
+    const OPCODE: u32 = 0x0095;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // chat_type: ChatType
         w.write_all(&(self.chat_type.as_int() as u32).to_le_bytes())?;
@@ -95,12 +101,6 @@ impl ClientMessage for CMSG_MESSAGECHAT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0095;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // chat_type: ChatType
         let chat_type: ChatType = (crate::util::read_u32_le(r)? as u8).try_into()?;
@@ -174,6 +174,7 @@ impl ClientMessage for CMSG_MESSAGECHAT {
     }
 
 }
+impl ClientMessage for CMSG_MESSAGECHAT {}
 
 impl CMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {

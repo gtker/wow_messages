@@ -17,7 +17,13 @@ pub struct CMSG_AUTOBANK_ITEM {
     pub slot_index: u8,
 }
 
-impl ClientMessage for CMSG_AUTOBANK_ITEM {
+impl crate::Message for CMSG_AUTOBANK_ITEM {
+    const OPCODE: u32 = 0x0283;
+
+    fn size_without_header(&self) -> u32 {
+        2
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // bag_index: u8
         w.write_all(&self.bag_index.to_le_bytes())?;
@@ -27,12 +33,6 @@ impl ClientMessage for CMSG_AUTOBANK_ITEM {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0283;
-
-    fn client_size(&self) -> u16 {
-        8
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -51,4 +51,5 @@ impl ClientMessage for CMSG_AUTOBANK_ITEM {
     }
 
 }
+impl ClientMessage for CMSG_AUTOBANK_ITEM {}
 

@@ -21,7 +21,13 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
     pub total_damage: u32,
 }
 
-impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {
+impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
+    const OPCODE: u32 = 0x014a;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // hit_info: u32
         w.write_all(&self.hit_info.to_le_bytes())?;
@@ -37,12 +43,6 @@ impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x014a;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // hit_info: u32
         let hit_info = crate::util::read_u32_le(r)?;
@@ -65,6 +65,7 @@ impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {
     }
 
 }
+impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
 
 impl SMSG_ATTACKERSTATEUPDATE {
     pub(crate) fn size(&self) -> usize {

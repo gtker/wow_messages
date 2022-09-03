@@ -25,7 +25,13 @@ pub struct CMSG_WORLD_TELEPORT {
     pub orientation: f32,
 }
 
-impl ClientMessage for CMSG_WORLD_TELEPORT {
+impl crate::Message for CMSG_WORLD_TELEPORT {
+    const OPCODE: u32 = 0x0008;
+
+    fn size_without_header(&self) -> u32 {
+        24
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // time_in_msec: u32
         w.write_all(&self.time_in_msec.to_le_bytes())?;
@@ -41,12 +47,6 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0008;
-
-    fn client_size(&self) -> u16 {
-        30
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 24 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -72,6 +72,7 @@ impl ClientMessage for CMSG_WORLD_TELEPORT {
     }
 
 }
+impl ClientMessage for CMSG_WORLD_TELEPORT {}
 
 #[cfg(test)]
 mod test {

@@ -16,7 +16,13 @@ pub struct SMSG_GUILD_INVITE {
     pub guild_name: String,
 }
 
-impl ServerMessage for SMSG_GUILD_INVITE {
+impl crate::Message for SMSG_GUILD_INVITE {
+    const OPCODE: u32 = 0x0083;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_name: CString
         w.write_all(self.player_name.as_bytes())?;
@@ -30,12 +36,6 @@ impl ServerMessage for SMSG_GUILD_INVITE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0083;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // player_name: CString
         let player_name = crate::util::read_c_string_to_vec(r)?;
@@ -52,6 +52,7 @@ impl ServerMessage for SMSG_GUILD_INVITE {
     }
 
 }
+impl ServerMessage for SMSG_GUILD_INVITE {}
 
 impl SMSG_GUILD_INVITE {
     pub(crate) fn size(&self) -> usize {

@@ -16,19 +16,19 @@ pub struct SMSG_BINDER_CONFIRM {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_BINDER_CONFIRM {
+impl crate::Message for SMSG_BINDER_CONFIRM {
+    const OPCODE: u32 = 0x02eb;
+
+    fn size_without_header(&self) -> u32 {
+        8
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02eb;
-
-    fn server_size(&self) -> u16 {
-        12
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ServerMessage for SMSG_BINDER_CONFIRM {
     }
 
 }
+impl ServerMessage for SMSG_BINDER_CONFIRM {}
 

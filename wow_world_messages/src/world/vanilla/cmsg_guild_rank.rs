@@ -18,7 +18,13 @@ pub struct CMSG_GUILD_RANK {
     pub rank_name: String,
 }
 
-impl ClientMessage for CMSG_GUILD_RANK {
+impl crate::Message for CMSG_GUILD_RANK {
+    const OPCODE: u32 = 0x0231;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // rank_id: u32
         w.write_all(&self.rank_id.to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ClientMessage for CMSG_GUILD_RANK {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0231;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // rank_id: u32
         let rank_id = crate::util::read_u32_le(r)?;
@@ -58,6 +58,7 @@ impl ClientMessage for CMSG_GUILD_RANK {
     }
 
 }
+impl ClientMessage for CMSG_GUILD_RANK {}
 
 impl CMSG_GUILD_RANK {
     pub(crate) fn size(&self) -> usize {

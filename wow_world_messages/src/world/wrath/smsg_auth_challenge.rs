@@ -24,7 +24,13 @@ pub struct SMSG_AUTH_CHALLENGE {
     pub seed: [u8; 32],
 }
 
-impl ServerMessage for SMSG_AUTH_CHALLENGE {
+impl crate::Message for SMSG_AUTH_CHALLENGE {
+    const OPCODE: u32 = 0x01ec;
+
+    fn size_without_header(&self) -> u32 {
+        40
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -39,12 +45,6 @@ impl ServerMessage for SMSG_AUTH_CHALLENGE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01ec;
-
-    fn server_size(&self) -> u16 {
-        44
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 40 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -68,4 +68,5 @@ impl ServerMessage for SMSG_AUTH_CHALLENGE {
     }
 
 }
+impl ServerMessage for SMSG_AUTH_CHALLENGE {}
 

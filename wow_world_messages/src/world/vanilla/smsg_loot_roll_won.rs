@@ -37,7 +37,13 @@ pub struct SMSG_LOOT_ROLL_WON {
     pub vote: RollVote,
 }
 
-impl ServerMessage for SMSG_LOOT_ROLL_WON {
+impl crate::Message for SMSG_LOOT_ROLL_WON {
+    const OPCODE: u32 = 0x029f;
+
+    fn size_without_header(&self) -> u32 {
+        34
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // looted_target_guid: Guid
         w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
@@ -65,12 +71,6 @@ impl ServerMessage for SMSG_LOOT_ROLL_WON {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x029f;
-
-    fn server_size(&self) -> u16 {
-        38
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 34 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -113,4 +113,5 @@ impl ServerMessage for SMSG_LOOT_ROLL_WON {
     }
 
 }
+impl ServerMessage for SMSG_LOOT_ROLL_WON {}
 

@@ -17,7 +17,13 @@ pub struct CMSG_SWAP_INV_ITEM {
     pub destination_slot: u8,
 }
 
-impl ClientMessage for CMSG_SWAP_INV_ITEM {
+impl crate::Message for CMSG_SWAP_INV_ITEM {
+    const OPCODE: u32 = 0x010d;
+
+    fn size_without_header(&self) -> u32 {
+        2
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // source_slot: u8
         w.write_all(&self.source_slot.to_le_bytes())?;
@@ -27,12 +33,6 @@ impl ClientMessage for CMSG_SWAP_INV_ITEM {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x010d;
-
-    fn client_size(&self) -> u16 {
-        8
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -51,4 +51,5 @@ impl ClientMessage for CMSG_SWAP_INV_ITEM {
     }
 
 }
+impl ClientMessage for CMSG_SWAP_INV_ITEM {}
 

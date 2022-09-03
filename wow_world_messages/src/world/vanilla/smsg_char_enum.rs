@@ -18,7 +18,13 @@ pub struct SMSG_CHAR_ENUM {
     pub characters: Vec<Character>,
 }
 
-impl ServerMessage for SMSG_CHAR_ENUM {
+impl crate::Message for SMSG_CHAR_ENUM {
+    const OPCODE: u32 = 0x003b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_characters: u8
         w.write_all(&(self.characters.len() as u8).to_le_bytes())?;
@@ -30,12 +36,6 @@ impl ServerMessage for SMSG_CHAR_ENUM {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x003b;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_characters: u8
         let amount_of_characters = crate::util::read_u8_le(r)?;
@@ -52,6 +52,7 @@ impl ServerMessage for SMSG_CHAR_ENUM {
     }
 
 }
+impl ServerMessage for SMSG_CHAR_ENUM {}
 
 impl SMSG_CHAR_ENUM {
     pub(crate) fn size(&self) -> usize {

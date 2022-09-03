@@ -21,7 +21,13 @@ pub struct SMSG_TRANSFER_PENDING {
     pub has_transport: Option<SMSG_TRANSFER_PENDING_has_transport>,
 }
 
-impl ServerMessage for SMSG_TRANSFER_PENDING {
+impl crate::Message for SMSG_TRANSFER_PENDING {
+    const OPCODE: u32 = 0x003f;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
@@ -38,12 +44,6 @@ impl ServerMessage for SMSG_TRANSFER_PENDING {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x003f;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
@@ -74,6 +74,7 @@ impl ServerMessage for SMSG_TRANSFER_PENDING {
     }
 
 }
+impl ServerMessage for SMSG_TRANSFER_PENDING {}
 
 impl SMSG_TRANSFER_PENDING {
     pub(crate) fn size(&self) -> usize {

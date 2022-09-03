@@ -18,7 +18,13 @@ pub struct CMSG_UNSTABLE_PET {
     pub pet_number: u32,
 }
 
-impl ClientMessage for CMSG_UNSTABLE_PET {
+impl crate::Message for CMSG_UNSTABLE_PET {
+    const OPCODE: u32 = 0x0271;
+
+    fn size_without_header(&self) -> u32 {
+        12
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc_guid: Guid
         w.write_all(&self.npc_guid.guid().to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ClientMessage for CMSG_UNSTABLE_PET {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0271;
-
-    fn client_size(&self) -> u16 {
-        18
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -52,4 +52,5 @@ impl ClientMessage for CMSG_UNSTABLE_PET {
     }
 
 }
+impl ClientMessage for CMSG_UNSTABLE_PET {}
 

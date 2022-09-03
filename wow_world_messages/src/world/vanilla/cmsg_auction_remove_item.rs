@@ -18,7 +18,13 @@ pub struct CMSG_AUCTION_REMOVE_ITEM {
     pub auction_id: u32,
 }
 
-impl ClientMessage for CMSG_AUCTION_REMOVE_ITEM {
+impl crate::Message for CMSG_AUCTION_REMOVE_ITEM {
+    const OPCODE: u32 = 0x0257;
+
+    fn size_without_header(&self) -> u32 {
+        12
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // auctioneer_guid: Guid
         w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ClientMessage for CMSG_AUCTION_REMOVE_ITEM {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0257;
-
-    fn client_size(&self) -> u16 {
-        18
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -52,4 +52,5 @@ impl ClientMessage for CMSG_AUCTION_REMOVE_ITEM {
     }
 
 }
+impl ClientMessage for CMSG_AUCTION_REMOVE_ITEM {}
 

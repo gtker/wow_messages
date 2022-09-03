@@ -16,7 +16,13 @@ pub struct SMSG_INITIALIZE_FACTIONS {
     pub factions: Vec<FactionInitializer>,
 }
 
-impl ServerMessage for SMSG_INITIALIZE_FACTIONS {
+impl crate::Message for SMSG_INITIALIZE_FACTIONS {
+    const OPCODE: u32 = 0x0122;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // amount_of_factions: u32
         w.write_all(&(self.factions.len() as u32).to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ServerMessage for SMSG_INITIALIZE_FACTIONS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0122;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_factions: u32
         let amount_of_factions = crate::util::read_u32_le(r)?;
@@ -50,6 +50,7 @@ impl ServerMessage for SMSG_INITIALIZE_FACTIONS {
     }
 
 }
+impl ServerMessage for SMSG_INITIALIZE_FACTIONS {}
 
 impl SMSG_INITIALIZE_FACTIONS {
     pub(crate) fn size(&self) -> usize {

@@ -21,7 +21,13 @@ pub struct CMSG_GOSSIP_SELECT_OPTION {
     pub unknown: Option<CMSG_GOSSIP_SELECT_OPTION_unknown>,
 }
 
-impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
+impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
+    const OPCODE: u32 = 0x017c;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -40,12 +46,6 @@ impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x017c;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -78,6 +78,7 @@ impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {
     }
 
 }
+impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {}
 
 impl CMSG_GOSSIP_SELECT_OPTION {
     pub(crate) fn size(&self) -> usize {

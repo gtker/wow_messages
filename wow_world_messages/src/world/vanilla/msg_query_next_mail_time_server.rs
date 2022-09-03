@@ -21,19 +21,19 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
     pub unread_mails: f32,
 }
 
-impl ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {
+impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
+    const OPCODE: u32 = 0x0284;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // unread_mails: f32
         w.write_all(&self.unread_mails.to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0284;
-
-    fn server_size(&self) -> u16 {
-        8
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -47,4 +47,5 @@ impl ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {
     }
 
 }
+impl ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {}
 

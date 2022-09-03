@@ -21,7 +21,13 @@ pub struct SMSG_PVP_CREDIT {
     pub rank: PvpRank,
 }
 
-impl ServerMessage for SMSG_PVP_CREDIT {
+impl crate::Message for SMSG_PVP_CREDIT {
+    const OPCODE: u32 = 0x028c;
+
+    fn size_without_header(&self) -> u32 {
+        16
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // honor_points: u32
         w.write_all(&self.honor_points.to_le_bytes())?;
@@ -34,12 +40,6 @@ impl ServerMessage for SMSG_PVP_CREDIT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x028c;
-
-    fn server_size(&self) -> u16 {
-        20
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -62,4 +62,5 @@ impl ServerMessage for SMSG_PVP_CREDIT {
     }
 
 }
+impl ServerMessage for SMSG_PVP_CREDIT {}
 

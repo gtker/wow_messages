@@ -15,19 +15,19 @@ pub struct CMSG_PUSHQUESTTOPARTY {
     pub quest_id: u32,
 }
 
-impl ClientMessage for CMSG_PUSHQUESTTOPARTY {
+impl crate::Message for CMSG_PUSHQUESTTOPARTY {
+    const OPCODE: u32 = 0x019d;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x019d;
-
-    fn client_size(&self) -> u16 {
-        10
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -42,4 +42,5 @@ impl ClientMessage for CMSG_PUSHQUESTTOPARTY {
     }
 
 }
+impl ClientMessage for CMSG_PUSHQUESTTOPARTY {}
 

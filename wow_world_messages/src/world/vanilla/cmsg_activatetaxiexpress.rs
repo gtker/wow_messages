@@ -20,7 +20,13 @@ pub struct CMSG_ACTIVATETAXIEXPRESS {
     pub node_count: u32,
 }
 
-impl ClientMessage for CMSG_ACTIVATETAXIEXPRESS {
+impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
+    const OPCODE: u32 = 0x0312;
+
+    fn size_without_header(&self) -> u32 {
+        16
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ClientMessage for CMSG_ACTIVATETAXIEXPRESS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0312;
-
-    fn client_size(&self) -> u16 {
-        22
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -61,4 +61,5 @@ impl ClientMessage for CMSG_ACTIVATETAXIEXPRESS {
     }
 
 }
+impl ClientMessage for CMSG_ACTIVATETAXIEXPRESS {}
 

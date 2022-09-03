@@ -19,19 +19,19 @@ pub struct CMSG_REQUEST_ACCOUNT_DATA {
     pub block: u32,
 }
 
-impl ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {
+impl crate::Message for CMSG_REQUEST_ACCOUNT_DATA {
+    const OPCODE: u32 = 0x020a;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // block: u32
         w.write_all(&self.block.to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x020a;
-
-    fn client_size(&self) -> u16 {
-        10
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -46,6 +46,7 @@ impl ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {
     }
 
 }
+impl ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
 
 #[cfg(test)]
 mod test {

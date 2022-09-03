@@ -19,7 +19,13 @@ pub struct SMSG_DUEL_WINNER {
     pub initiator_name: String,
 }
 
-impl ServerMessage for SMSG_DUEL_WINNER {
+impl crate::Message for SMSG_DUEL_WINNER {
+    const OPCODE: u32 = 0x016b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // reason: DuelWinnerReason
         w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
@@ -36,12 +42,6 @@ impl ServerMessage for SMSG_DUEL_WINNER {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x016b;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // reason: DuelWinnerReason
         let reason: DuelWinnerReason = crate::util::read_u8_le(r)?.try_into()?;
@@ -62,6 +62,7 @@ impl ServerMessage for SMSG_DUEL_WINNER {
     }
 
 }
+impl ServerMessage for SMSG_DUEL_WINNER {}
 
 impl SMSG_DUEL_WINNER {
     pub(crate) fn size(&self) -> usize {

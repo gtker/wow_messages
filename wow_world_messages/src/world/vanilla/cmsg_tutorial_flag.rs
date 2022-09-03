@@ -15,19 +15,19 @@ pub struct CMSG_TUTORIAL_FLAG {
     pub tutorial_flag: u32,
 }
 
-impl ClientMessage for CMSG_TUTORIAL_FLAG {
+impl crate::Message for CMSG_TUTORIAL_FLAG {
+    const OPCODE: u32 = 0x00fe;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // tutorial_flag: u32
         w.write_all(&self.tutorial_flag.to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x00fe;
-
-    fn client_size(&self) -> u16 {
-        10
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -42,4 +42,5 @@ impl ClientMessage for CMSG_TUTORIAL_FLAG {
     }
 
 }
+impl ClientMessage for CMSG_TUTORIAL_FLAG {}
 

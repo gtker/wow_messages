@@ -20,7 +20,13 @@ pub struct CMSG_FORCE_MOVE_UNROOT_ACK {
     pub info: MovementInfo,
 }
 
-impl ClientMessage for CMSG_FORCE_MOVE_UNROOT_ACK {
+impl crate::Message for CMSG_FORCE_MOVE_UNROOT_ACK {
+    const OPCODE: u32 = 0x00eb;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ClientMessage for CMSG_FORCE_MOVE_UNROOT_ACK {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x00eb;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -57,6 +57,7 @@ impl ClientMessage for CMSG_FORCE_MOVE_UNROOT_ACK {
     }
 
 }
+impl ClientMessage for CMSG_FORCE_MOVE_UNROOT_ACK {}
 
 impl CMSG_FORCE_MOVE_UNROOT_ACK {
     pub(crate) fn size(&self) -> usize {

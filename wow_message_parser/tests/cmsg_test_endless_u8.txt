@@ -18,7 +18,13 @@ pub struct CMSG_TEST_ENDLESS_U8 {
     pub endless: Vec<u8>,
 }
 
-impl ClientMessage for CMSG_TEST_ENDLESS_U8 {
+impl crate::Message for CMSG_TEST_ENDLESS_U8 {
+    const OPCODE: u32 = 0x1337;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // c_string: CString
         w.write_all(self.c_string.as_bytes())?;
@@ -35,12 +41,6 @@ impl ClientMessage for CMSG_TEST_ENDLESS_U8 {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x1337;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // c_string: CString
         let c_string = crate::util::read_c_string_to_vec(r)?;
@@ -68,6 +68,7 @@ impl ClientMessage for CMSG_TEST_ENDLESS_U8 {
     }
 
 }
+impl ClientMessage for CMSG_TEST_ENDLESS_U8 {}
 
 impl CMSG_TEST_ENDLESS_U8 {
     pub(crate) fn size(&self) -> usize {

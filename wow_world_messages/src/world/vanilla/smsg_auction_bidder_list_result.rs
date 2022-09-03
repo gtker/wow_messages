@@ -18,7 +18,13 @@ pub struct SMSG_AUCTION_BIDDER_LIST_RESULT {
     pub total_amount_of_auctions: u32,
 }
 
-impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {
+impl crate::Message for SMSG_AUCTION_BIDDER_LIST_RESULT {
+    const OPCODE: u32 = 0x0265;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // count: u32
         w.write_all(&(self.auctions.len() as u32).to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0265;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // count: u32
         let count = crate::util::read_u32_le(r)?;
@@ -59,6 +59,7 @@ impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {
     }
 
 }
+impl ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {}
 
 impl SMSG_AUCTION_BIDDER_LIST_RESULT {
     pub(crate) fn size(&self) -> usize {

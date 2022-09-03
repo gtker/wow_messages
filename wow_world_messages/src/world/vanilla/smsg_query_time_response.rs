@@ -20,19 +20,19 @@ pub struct SMSG_QUERY_TIME_RESPONSE {
     pub time: u32,
 }
 
-impl ServerMessage for SMSG_QUERY_TIME_RESPONSE {
+impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
+    const OPCODE: u32 = 0x01cf;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // time: u32
         w.write_all(&self.time.to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01cf;
-
-    fn server_size(&self) -> u16 {
-        8
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -47,6 +47,7 @@ impl ServerMessage for SMSG_QUERY_TIME_RESPONSE {
     }
 
 }
+impl ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
 
 #[cfg(test)]
 mod test {

@@ -26,7 +26,13 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub item_rewards: Vec<QuestItemReward>,
 }
 
-impl ServerMessage for SMSG_QUESTGIVER_QUEST_COMPLETE {
+impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
+    const OPCODE: u32 = 0x0191;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
@@ -50,12 +56,6 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0191;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // quest_id: u32
         let quest_id = crate::util::read_u32_le(r)?;
@@ -88,6 +88,7 @@ impl ServerMessage for SMSG_QUESTGIVER_QUEST_COMPLETE {
     }
 
 }
+impl ServerMessage for SMSG_QUESTGIVER_QUEST_COMPLETE {}
 
 impl SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub(crate) fn size(&self) -> usize {

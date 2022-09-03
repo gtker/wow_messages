@@ -24,7 +24,13 @@ pub struct CMSG_GMSURVEY_SUBMIT {
     pub answer_comment: String,
 }
 
-impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
+impl crate::Message for CMSG_GMSURVEY_SUBMIT {
+    const OPCODE: u32 = 0x032a;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // survey_id: u32
         w.write_all(&self.survey_id.to_le_bytes())?;
@@ -41,12 +47,6 @@ impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x032a;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // survey_id: u32
         let survey_id = crate::util::read_u32_le(r)?;
@@ -69,6 +69,7 @@ impl ClientMessage for CMSG_GMSURVEY_SUBMIT {
     }
 
 }
+impl ClientMessage for CMSG_GMSURVEY_SUBMIT {}
 
 impl CMSG_GMSURVEY_SUBMIT {
     pub(crate) fn size(&self) -> usize {

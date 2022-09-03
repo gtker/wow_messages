@@ -23,7 +23,13 @@ pub struct MSG_PVP_LOG_DATA_Server {
     pub players: Vec<BattlegroundPlayer>,
 }
 
-impl ServerMessage for MSG_PVP_LOG_DATA_Server {
+impl crate::Message for MSG_PVP_LOG_DATA_Server {
+    const OPCODE: u32 = 0x02e0;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // status: BattlegroundEndStatus
         w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
@@ -49,12 +55,6 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02e0;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // status: BattlegroundEndStatus
         let status: BattlegroundEndStatus = crate::util::read_u8_le(r)?.try_into()?;
@@ -87,6 +87,7 @@ impl ServerMessage for MSG_PVP_LOG_DATA_Server {
     }
 
 }
+impl ServerMessage for MSG_PVP_LOG_DATA_Server {}
 
 impl MSG_PVP_LOG_DATA_Server {
     pub(crate) fn size(&self) -> usize {

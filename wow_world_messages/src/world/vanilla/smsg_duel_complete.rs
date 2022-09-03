@@ -15,19 +15,19 @@ pub struct SMSG_DUEL_COMPLETE {
     pub ended_without_interruption: u8,
 }
 
-impl ServerMessage for SMSG_DUEL_COMPLETE {
+impl crate::Message for SMSG_DUEL_COMPLETE {
+    const OPCODE: u32 = 0x016a;
+
+    fn size_without_header(&self) -> u32 {
+        1
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // ended_without_interruption: u8
         w.write_all(&self.ended_without_interruption.to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x016a;
-
-    fn server_size(&self) -> u16 {
-        5
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -42,4 +42,5 @@ impl ServerMessage for SMSG_DUEL_COMPLETE {
     }
 
 }
+impl ServerMessage for SMSG_DUEL_COMPLETE {}
 

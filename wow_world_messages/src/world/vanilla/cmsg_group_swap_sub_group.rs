@@ -16,7 +16,13 @@ pub struct CMSG_GROUP_SWAP_SUB_GROUP {
     pub swap_with_name: String,
 }
 
-impl ClientMessage for CMSG_GROUP_SWAP_SUB_GROUP {
+impl crate::Message for CMSG_GROUP_SWAP_SUB_GROUP {
+    const OPCODE: u32 = 0x0280;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
@@ -30,12 +36,6 @@ impl ClientMessage for CMSG_GROUP_SWAP_SUB_GROUP {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0280;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
@@ -52,6 +52,7 @@ impl ClientMessage for CMSG_GROUP_SWAP_SUB_GROUP {
     }
 
 }
+impl ClientMessage for CMSG_GROUP_SWAP_SUB_GROUP {}
 
 impl CMSG_GROUP_SWAP_SUB_GROUP {
     pub(crate) fn size(&self) -> usize {

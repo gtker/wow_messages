@@ -21,7 +21,13 @@ pub struct SMSG_SPELL_FAILURE {
     pub result: SpellCastResult,
 }
 
-impl ServerMessage for SMSG_SPELL_FAILURE {
+impl crate::Message for SMSG_SPELL_FAILURE {
+    const OPCODE: u32 = 0x0133;
+
+    fn size_without_header(&self) -> u32 {
+        13
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -34,12 +40,6 @@ impl ServerMessage for SMSG_SPELL_FAILURE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0133;
-
-    fn server_size(&self) -> u16 {
-        17
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -62,4 +62,5 @@ impl ServerMessage for SMSG_SPELL_FAILURE {
     }
 
 }
+impl ServerMessage for SMSG_SPELL_FAILURE {}
 

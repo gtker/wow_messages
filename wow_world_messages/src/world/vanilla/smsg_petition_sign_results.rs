@@ -21,7 +21,13 @@ pub struct SMSG_PETITION_SIGN_RESULTS {
     pub result: PetitionResult,
 }
 
-impl ServerMessage for SMSG_PETITION_SIGN_RESULTS {
+impl crate::Message for SMSG_PETITION_SIGN_RESULTS {
+    const OPCODE: u32 = 0x01c1;
+
+    fn size_without_header(&self) -> u32 {
+        20
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition_guid: Guid
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
@@ -34,12 +40,6 @@ impl ServerMessage for SMSG_PETITION_SIGN_RESULTS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01c1;
-
-    fn server_size(&self) -> u16 {
-        24
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -62,4 +62,5 @@ impl ServerMessage for SMSG_PETITION_SIGN_RESULTS {
     }
 
 }
+impl ServerMessage for SMSG_PETITION_SIGN_RESULTS {}
 

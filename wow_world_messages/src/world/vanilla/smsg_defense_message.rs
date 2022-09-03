@@ -17,7 +17,13 @@ pub struct SMSG_DEFENSE_MESSAGE {
     pub message: String,
 }
 
-impl ServerMessage for SMSG_DEFENSE_MESSAGE {
+impl crate::Message for SMSG_DEFENSE_MESSAGE {
+    const OPCODE: u32 = 0x033b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
@@ -30,12 +36,6 @@ impl ServerMessage for SMSG_DEFENSE_MESSAGE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x033b;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
@@ -51,6 +51,7 @@ impl ServerMessage for SMSG_DEFENSE_MESSAGE {
     }
 
 }
+impl ServerMessage for SMSG_DEFENSE_MESSAGE {}
 
 impl SMSG_DEFENSE_MESSAGE {
     pub(crate) fn size(&self) -> usize {

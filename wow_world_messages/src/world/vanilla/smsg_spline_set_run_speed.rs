@@ -20,7 +20,13 @@ pub struct SMSG_SPLINE_SET_RUN_SPEED {
     pub speed: f32,
 }
 
-impl ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {
+impl crate::Message for SMSG_SPLINE_SET_RUN_SPEED {
+    const OPCODE: u32 = 0x02fe;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.write_packed_guid_into_vec(w);
@@ -30,12 +36,6 @@ impl ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02fe;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
@@ -49,6 +49,7 @@ impl ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {
     }
 
 }
+impl ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {}
 
 impl SMSG_SPLINE_SET_RUN_SPEED {
     pub(crate) fn size(&self) -> usize {

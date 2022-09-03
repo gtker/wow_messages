@@ -17,7 +17,13 @@ pub struct SMSG_UPDATE_AURA_DURATION {
     pub aura_duration: u32,
 }
 
-impl ServerMessage for SMSG_UPDATE_AURA_DURATION {
+impl crate::Message for SMSG_UPDATE_AURA_DURATION {
+    const OPCODE: u32 = 0x0137;
+
+    fn size_without_header(&self) -> u32 {
+        5
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // aura_slot: u8
         w.write_all(&self.aura_slot.to_le_bytes())?;
@@ -27,12 +33,6 @@ impl ServerMessage for SMSG_UPDATE_AURA_DURATION {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0137;
-
-    fn server_size(&self) -> u16 {
-        9
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -51,4 +51,5 @@ impl ServerMessage for SMSG_UPDATE_AURA_DURATION {
     }
 
 }
+impl ServerMessage for SMSG_UPDATE_AURA_DURATION {}
 

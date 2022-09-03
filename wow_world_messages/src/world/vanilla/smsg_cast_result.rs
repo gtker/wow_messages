@@ -34,7 +34,13 @@ pub struct SMSG_CAST_RESULT {
     pub result: SMSG_CAST_RESULT_SimpleSpellCastResult,
 }
 
-impl ServerMessage for SMSG_CAST_RESULT {
+impl crate::Message for SMSG_CAST_RESULT {
+    const OPCODE: u32 = 0x0130;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -230,12 +236,6 @@ impl ServerMessage for SMSG_CAST_RESULT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0130;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // spell: u32
         let spell = crate::util::read_u32_le(r)?;
@@ -440,6 +440,7 @@ impl ServerMessage for SMSG_CAST_RESULT {
     }
 
 }
+impl ServerMessage for SMSG_CAST_RESULT {}
 
 impl SMSG_CAST_RESULT {
     pub(crate) fn size(&self) -> usize {

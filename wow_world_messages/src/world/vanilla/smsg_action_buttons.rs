@@ -15,7 +15,13 @@ pub struct SMSG_ACTION_BUTTONS {
     pub data: [u32; 120],
 }
 
-impl ServerMessage for SMSG_ACTION_BUTTONS {
+impl crate::Message for SMSG_ACTION_BUTTONS {
+    const OPCODE: u32 = 0x0129;
+
+    fn size_without_header(&self) -> u32 {
+        480
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // data: u32[120]
         for i in self.data.iter() {
@@ -24,12 +30,6 @@ impl ServerMessage for SMSG_ACTION_BUTTONS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0129;
-
-    fn server_size(&self) -> u16 {
-        484
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 480 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -47,4 +47,5 @@ impl ServerMessage for SMSG_ACTION_BUTTONS {
     }
 
 }
+impl ServerMessage for SMSG_ACTION_BUTTONS {}
 

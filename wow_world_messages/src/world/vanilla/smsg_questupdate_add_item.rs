@@ -17,7 +17,13 @@ pub struct SMSG_QUESTUPDATE_ADD_ITEM {
     pub items_required: u32,
 }
 
-impl ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {
+impl crate::Message for SMSG_QUESTUPDATE_ADD_ITEM {
+    const OPCODE: u32 = 0x019a;
+
+    fn size_without_header(&self) -> u32 {
+        8
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // required_item_id: u32
         w.write_all(&self.required_item_id.to_le_bytes())?;
@@ -27,12 +33,6 @@ impl ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x019a;
-
-    fn server_size(&self) -> u16 {
-        12
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -51,4 +51,5 @@ impl ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {
     }
 
 }
+impl ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {}
 

@@ -24,7 +24,13 @@ pub struct CMSG_UPDATE_ACCOUNT_DATA {
     pub unknown2: Vec<u8>,
 }
 
-impl ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
+impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
+    const OPCODE: u32 = 0x020b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // block: u32
         w.write_all(&self.block.to_le_bytes())?;
@@ -39,12 +45,6 @@ impl ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x020b;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // block: u32
         let block = crate::util::read_u32_le(r)?;
@@ -71,6 +71,7 @@ impl ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
     }
 
 }
+impl ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
 
 impl CMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {

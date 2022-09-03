@@ -80,7 +80,7 @@ fn read_client_body<M: ClientMessage>(
     opcode: u32,
 ) -> Result<M, ExpectedOpcodeError> {
     // Unable to match on associated const M::OPCODE, so we do if
-    if opcode as u16 == M::OPCODE {
+    if opcode == M::OPCODE {
         let m = M::read_body(buf, (size - CLIENT_OPCODE_LENGTH) as u32);
         match m {
             Ok(m) => Ok(m),
@@ -99,7 +99,7 @@ fn read_server_body<M: ServerMessage>(
     opcode: u32,
 ) -> Result<M, ExpectedOpcodeError> {
     // Unable to match on associated const M::OPCODE, so we do if
-    if opcode as u16 == M::OPCODE {
+    if opcode == M::OPCODE {
         let m = M::read_body(buf, (size - SERVER_OPCODE_LENGTH) as u32);
         match m {
             Ok(m) => Ok(m),

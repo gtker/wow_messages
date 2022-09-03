@@ -22,7 +22,13 @@ pub struct CMSG_LOOT_METHOD {
     pub loot_threshold: ItemQuality,
 }
 
-impl ClientMessage for CMSG_LOOT_METHOD {
+impl crate::Message for CMSG_LOOT_METHOD {
+    const OPCODE: u32 = 0x007a;
+
+    fn size_without_header(&self) -> u32 {
+        16
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // loot_setting: GroupLootSetting
         w.write_all(&(self.loot_setting.as_int() as u32).to_le_bytes())?;
@@ -35,12 +41,6 @@ impl ClientMessage for CMSG_LOOT_METHOD {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x007a;
-
-    fn client_size(&self) -> u16 {
-        22
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -63,4 +63,5 @@ impl ClientMessage for CMSG_LOOT_METHOD {
     }
 
 }
+impl ClientMessage for CMSG_LOOT_METHOD {}
 

@@ -23,7 +23,13 @@ pub struct SMSG_PERIODICAURALOG {
     pub auras: Vec<AuraLog>,
 }
 
-impl ServerMessage for SMSG_PERIODICAURALOG {
+impl crate::Message for SMSG_PERIODICAURALOG {
+    const OPCODE: u32 = 0x024e;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target: PackedGuid
         self.target.write_packed_guid_into_vec(w);
@@ -44,12 +50,6 @@ impl ServerMessage for SMSG_PERIODICAURALOG {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x024e;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // target: PackedGuid
         let target = Guid::read_packed(r)?;
@@ -78,6 +78,7 @@ impl ServerMessage for SMSG_PERIODICAURALOG {
     }
 
 }
+impl ServerMessage for SMSG_PERIODICAURALOG {}
 
 impl SMSG_PERIODICAURALOG {
     pub(crate) fn size(&self) -> usize {

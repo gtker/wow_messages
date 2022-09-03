@@ -20,7 +20,13 @@ pub struct MSG_RAID_TARGET_UPDATE_Client {
     pub index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex,
 }
 
-impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
+impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
+    const OPCODE: u32 = 0x0321;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // index: RaidTargetIndex
         w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
@@ -94,12 +100,6 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0321;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // index: RaidTargetIndex
         let index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;
@@ -186,6 +186,7 @@ impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {
     }
 
 }
+impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
 
 impl MSG_RAID_TARGET_UPDATE_Client {
     pub(crate) fn size(&self) -> usize {

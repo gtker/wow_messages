@@ -23,7 +23,13 @@ pub struct CMSG_BATTLEMASTER_JOIN {
     pub join_as_group: u8,
 }
 
-impl ClientMessage for CMSG_BATTLEMASTER_JOIN {
+impl crate::Message for CMSG_BATTLEMASTER_JOIN {
+    const OPCODE: u32 = 0x02ee;
+
+    fn size_without_header(&self) -> u32 {
+        17
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -39,12 +45,6 @@ impl ClientMessage for CMSG_BATTLEMASTER_JOIN {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02ee;
-
-    fn client_size(&self) -> u16 {
-        23
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 17 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -71,4 +71,5 @@ impl ClientMessage for CMSG_BATTLEMASTER_JOIN {
     }
 
 }
+impl ClientMessage for CMSG_BATTLEMASTER_JOIN {}
 

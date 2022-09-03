@@ -16,19 +16,19 @@ pub struct CMSG_RECLAIM_CORPSE {
     pub guid: Guid,
 }
 
-impl ClientMessage for CMSG_RECLAIM_CORPSE {
+impl crate::Message for CMSG_RECLAIM_CORPSE {
+    const OPCODE: u32 = 0x01d2;
+
+    fn size_without_header(&self) -> u32 {
+        8
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01d2;
-
-    fn client_size(&self) -> u16 {
-        14
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ClientMessage for CMSG_RECLAIM_CORPSE {
     }
 
 }
+impl ClientMessage for CMSG_RECLAIM_CORPSE {}
 

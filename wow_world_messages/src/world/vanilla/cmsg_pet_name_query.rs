@@ -18,7 +18,13 @@ pub struct CMSG_PET_NAME_QUERY {
     pub guid: Guid,
 }
 
-impl ClientMessage for CMSG_PET_NAME_QUERY {
+impl crate::Message for CMSG_PET_NAME_QUERY {
+    const OPCODE: u32 = 0x0052;
+
+    fn size_without_header(&self) -> u32 {
+        12
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
@@ -28,12 +34,6 @@ impl ClientMessage for CMSG_PET_NAME_QUERY {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0052;
-
-    fn client_size(&self) -> u16 {
-        18
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -52,6 +52,7 @@ impl ClientMessage for CMSG_PET_NAME_QUERY {
     }
 
 }
+impl ClientMessage for CMSG_PET_NAME_QUERY {}
 
 #[cfg(test)]
 mod test {

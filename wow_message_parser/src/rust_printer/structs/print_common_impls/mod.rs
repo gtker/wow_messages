@@ -56,20 +56,21 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
             let bind = |s: &mut Writer, container_type| {
-                s.impl_read_and_writable_world(
-                    e.name(),
-                    opcode,
-                    container_type,
-                    |s, it| {
-                        print_write::print_write(s, e, o, it.prefix(), it.postfix());
-                    },
-                    |s, it| {
-                        test_for_invalid_size(s, e);
-                        print_read::print_read(s, e, o, it.prefix(), it.postfix());
-                    },
-                    Some(e.sizes()),
-                );
+                s.impl_read_and_writable_world(e.name(), container_type);
             };
+
+            s.impl_world_message(
+                e.name(),
+                opcode,
+                |s, it| {
+                    print_write::print_write(s, e, o, it.prefix(), it.postfix());
+                },
+                |s, it| {
+                    test_for_invalid_size(s, e);
+                    print_read::print_read(s, e, o, it.prefix(), it.postfix());
+                },
+                Some(e.sizes()),
+            );
 
             match e.container_type() {
                 ContainerType::CMsg(_) => bind(s, ContainerType::CMsg(0)),

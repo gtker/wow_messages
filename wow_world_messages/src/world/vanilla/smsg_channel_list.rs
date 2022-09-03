@@ -20,7 +20,13 @@ pub struct SMSG_CHANNEL_LIST {
     pub members: Vec<ChannelMember>,
 }
 
-impl ServerMessage for SMSG_CHANNEL_LIST {
+impl crate::Message for SMSG_CHANNEL_LIST {
+    const OPCODE: u32 = 0x009b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // channel_name: CString
         w.write_all(self.channel_name.as_bytes())?;
@@ -40,12 +46,6 @@ impl ServerMessage for SMSG_CHANNEL_LIST {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x009b;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // channel_name: CString
         let channel_name = crate::util::read_c_string_to_vec(r)?;
@@ -71,6 +71,7 @@ impl ServerMessage for SMSG_CHANNEL_LIST {
     }
 
 }
+impl ServerMessage for SMSG_CHANNEL_LIST {}
 
 impl SMSG_CHANNEL_LIST {
     pub(crate) fn size(&self) -> usize {

@@ -24,7 +24,13 @@ pub struct CMSG_BUY_ITEM_IN_SLOT {
     pub amount: u8,
 }
 
-impl ClientMessage for CMSG_BUY_ITEM_IN_SLOT {
+impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
+    const OPCODE: u32 = 0x01a3;
+
+    fn size_without_header(&self) -> u32 {
+        22
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // vendor_guid: Guid
         w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
@@ -43,12 +49,6 @@ impl ClientMessage for CMSG_BUY_ITEM_IN_SLOT {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01a3;
-
-    fn client_size(&self) -> u16 {
-        28
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 22 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -79,4 +79,5 @@ impl ClientMessage for CMSG_BUY_ITEM_IN_SLOT {
     }
 
 }
+impl ClientMessage for CMSG_BUY_ITEM_IN_SLOT {}
 

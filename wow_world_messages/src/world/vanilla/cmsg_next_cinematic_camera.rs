@@ -15,16 +15,16 @@ use std::io::{Write, Read};
 pub struct CMSG_NEXT_CINEMATIC_CAMERA {
 }
 
-impl ClientMessage for CMSG_NEXT_CINEMATIC_CAMERA {
+impl crate::Message for CMSG_NEXT_CINEMATIC_CAMERA {
+    const OPCODE: u32 = 0x00fb;
+
+    fn size_without_header(&self) -> u32 {
+        0
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
-    const OPCODE: u16 = 0x00fb;
-
-    fn client_size(&self) -> u16 {
-        6
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -35,4 +35,5 @@ impl ClientMessage for CMSG_NEXT_CINEMATIC_CAMERA {
     }
 
 }
+impl ClientMessage for CMSG_NEXT_CINEMATIC_CAMERA {}
 

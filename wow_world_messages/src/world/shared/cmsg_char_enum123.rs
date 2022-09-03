@@ -15,16 +15,16 @@ use std::io::{Write, Read};
 pub struct CMSG_CHAR_ENUM {
 }
 
-impl ClientMessage for CMSG_CHAR_ENUM {
+impl crate::Message for CMSG_CHAR_ENUM {
+    const OPCODE: u32 = 0x0037;
+
+    fn size_without_header(&self) -> u32 {
+        0
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
-    const OPCODE: u16 = 0x0037;
-
-    fn client_size(&self) -> u16 {
-        6
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -35,6 +35,7 @@ impl ClientMessage for CMSG_CHAR_ENUM {
     }
 
 }
+impl ClientMessage for CMSG_CHAR_ENUM {}
 
 #[cfg(test)]
 mod test {

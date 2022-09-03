@@ -24,7 +24,13 @@ pub struct SMSG_INVENTORY_CHANGE_FAILURE {
     pub result: SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult,
 }
 
-impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
+impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
+    const OPCODE: u32 = 0x0112;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: InventoryResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
@@ -2027,12 +2033,6 @@ impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0112;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // result: InventoryResult
         let result: InventoryResult = crate::util::read_u8_le(r)?.try_into()?;
@@ -4171,6 +4171,7 @@ impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {
     }
 
 }
+impl ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {}
 
 impl SMSG_INVENTORY_CHANGE_FAILURE {
     pub(crate) fn size(&self) -> usize {

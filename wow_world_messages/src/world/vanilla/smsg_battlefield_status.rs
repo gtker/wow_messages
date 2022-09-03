@@ -35,7 +35,13 @@ pub struct SMSG_BATTLEFIELD_STATUS {
     pub map: SMSG_BATTLEFIELD_STATUS_Map,
 }
 
-impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
+impl crate::Message for SMSG_BATTLEFIELD_STATUS {
+    const OPCODE: u32 = 0x02d4;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // queue_slot: u32
         w.write_all(&self.queue_slot.to_le_bytes())?;
@@ -2156,12 +2162,6 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02d4;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // queue_slot: u32
         let queue_slot = crate::util::read_u32_le(r)?;
@@ -4459,6 +4459,7 @@ impl ServerMessage for SMSG_BATTLEFIELD_STATUS {
     }
 
 }
+impl ServerMessage for SMSG_BATTLEFIELD_STATUS {}
 
 impl SMSG_BATTLEFIELD_STATUS {
     pub(crate) fn size(&self) -> usize {

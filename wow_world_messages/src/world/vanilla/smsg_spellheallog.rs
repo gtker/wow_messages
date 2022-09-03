@@ -23,7 +23,13 @@ pub struct SMSG_SPELLHEALLOG {
     pub critical: u8,
 }
 
-impl ServerMessage for SMSG_SPELLHEALLOG {
+impl crate::Message for SMSG_SPELLHEALLOG {
+    const OPCODE: u32 = 0x0150;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // victim_guid: PackedGuid
         self.victim_guid.write_packed_guid_into_vec(w);
@@ -42,12 +48,6 @@ impl ServerMessage for SMSG_SPELLHEALLOG {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0150;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // victim_guid: PackedGuid
         let victim_guid = Guid::read_packed(r)?;
@@ -74,6 +74,7 @@ impl ServerMessage for SMSG_SPELLHEALLOG {
     }
 
 }
+impl ServerMessage for SMSG_SPELLHEALLOG {}
 
 impl SMSG_SPELLHEALLOG {
     pub(crate) fn size(&self) -> usize {

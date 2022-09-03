@@ -17,7 +17,13 @@ pub struct SMSG_MOVE_FEATHER_FALL {
     pub counter: u32,
 }
 
-impl ServerMessage for SMSG_MOVE_FEATHER_FALL {
+impl crate::Message for SMSG_MOVE_FEATHER_FALL {
+    const OPCODE: u32 = 0x00f2;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.write_packed_guid_into_vec(w);
@@ -27,12 +33,6 @@ impl ServerMessage for SMSG_MOVE_FEATHER_FALL {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x00f2;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
@@ -47,6 +47,7 @@ impl ServerMessage for SMSG_MOVE_FEATHER_FALL {
     }
 
 }
+impl ServerMessage for SMSG_MOVE_FEATHER_FALL {}
 
 impl SMSG_MOVE_FEATHER_FALL {
     pub(crate) fn size(&self) -> usize {

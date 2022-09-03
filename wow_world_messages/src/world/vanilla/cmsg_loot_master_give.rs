@@ -20,7 +20,13 @@ pub struct CMSG_LOOT_MASTER_GIVE {
     pub target_player_guid: Guid,
 }
 
-impl ClientMessage for CMSG_LOOT_MASTER_GIVE {
+impl crate::Message for CMSG_LOOT_MASTER_GIVE {
+    const OPCODE: u32 = 0x02a3;
+
+    fn size_without_header(&self) -> u32 {
+        17
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // loot_guid: Guid
         w.write_all(&self.loot_guid.guid().to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ClientMessage for CMSG_LOOT_MASTER_GIVE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02a3;
-
-    fn client_size(&self) -> u16 {
-        23
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 17 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -61,4 +61,5 @@ impl ClientMessage for CMSG_LOOT_MASTER_GIVE {
     }
 
 }
+impl ClientMessage for CMSG_LOOT_MASTER_GIVE {}
 

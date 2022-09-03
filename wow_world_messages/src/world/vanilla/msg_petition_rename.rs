@@ -17,7 +17,13 @@ pub struct MSG_PETITION_RENAME {
     pub new_name: String,
 }
 
-impl ClientMessage for MSG_PETITION_RENAME {
+impl crate::Message for MSG_PETITION_RENAME {
+    const OPCODE: u32 = 0x02c1;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // petition_guid: Guid
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
@@ -29,12 +35,6 @@ impl ClientMessage for MSG_PETITION_RENAME {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02c1;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // petition_guid: Guid
         let petition_guid = Guid::read(r)?;
@@ -50,40 +50,9 @@ impl ClientMessage for MSG_PETITION_RENAME {
     }
 
 }
+impl ClientMessage for MSG_PETITION_RENAME {}
 
-impl ServerMessage for MSG_PETITION_RENAME {
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
-
-        // new_name: CString
-        w.write_all(self.new_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-    const OPCODE: u16 = 0x02c1;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        // petition_guid: Guid
-        let petition_guid = Guid::read(r)?;
-
-        // new_name: CString
-        let new_name = crate::util::read_c_string_to_vec(r)?;
-        let new_name = String::from_utf8(new_name)?;
-
-        Ok(Self {
-            petition_guid,
-            new_name,
-        })
-    }
-
-}
+impl ServerMessage for MSG_PETITION_RENAME {}
 
 impl MSG_PETITION_RENAME {
     pub(crate) fn size(&self) -> usize {

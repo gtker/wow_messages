@@ -14,7 +14,13 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
     pub message: String,
 }
 
-impl ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {
+impl crate::Message for SMSG_AREA_TRIGGER_MESSAGE {
+    const OPCODE: u32 = 0x02b8;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message: SizedCString
         w.write_all(&((self.message.len() + 1) as u32).to_le_bytes())?;
@@ -24,12 +30,6 @@ impl ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02b8;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // message: SizedCString
         let message = crate::util::read_u32_le(r)?;
@@ -41,6 +41,7 @@ impl ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {
     }
 
 }
+impl ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
 
 impl SMSG_AREA_TRIGGER_MESSAGE {
     pub(crate) fn size(&self) -> usize {

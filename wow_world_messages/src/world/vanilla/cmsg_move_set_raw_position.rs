@@ -20,7 +20,13 @@ pub struct CMSG_MOVE_SET_RAW_POSITION {
     pub orientation: f32,
 }
 
-impl ClientMessage for CMSG_MOVE_SET_RAW_POSITION {
+impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
+    const OPCODE: u32 = 0x00e1;
+
+    fn size_without_header(&self) -> u32 {
+        16
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // position: Vector3d
         self.position.write_into_vec(w)?;
@@ -30,12 +36,6 @@ impl ClientMessage for CMSG_MOVE_SET_RAW_POSITION {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x00e1;
-
-    fn client_size(&self) -> u16 {
-        22
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -53,4 +53,5 @@ impl ClientMessage for CMSG_MOVE_SET_RAW_POSITION {
     }
 
 }
+impl ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
 

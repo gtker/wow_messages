@@ -17,19 +17,19 @@ pub struct SMSG_UPDATE_INSTANCE_OWNERSHIP {
     pub has_been_saved: u32,
 }
 
-impl ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {
+impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
+    const OPCODE: u32 = 0x032b;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // has_been_saved: u32
         w.write_all(&self.has_been_saved.to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x032b;
-
-    fn server_size(&self) -> u16 {
-        8
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -44,4 +44,5 @@ impl ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     }
 
 }
+impl ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 

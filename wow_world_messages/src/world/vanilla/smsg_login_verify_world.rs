@@ -25,7 +25,13 @@ pub struct SMSG_LOGIN_VERIFY_WORLD {
     pub orientation: f32,
 }
 
-impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
+impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
+    const OPCODE: u32 = 0x0236;
+
+    fn size_without_header(&self) -> u32 {
+        20
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
@@ -38,12 +44,6 @@ impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0236;
-
-    fn server_size(&self) -> u16 {
-        24
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -65,6 +65,7 @@ impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {
     }
 
 }
+impl ServerMessage for SMSG_LOGIN_VERIFY_WORLD {}
 
 #[cfg(test)]
 mod test {

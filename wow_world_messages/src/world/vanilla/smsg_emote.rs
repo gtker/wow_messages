@@ -19,7 +19,13 @@ pub struct SMSG_EMOTE {
     pub guid: Guid,
 }
 
-impl ServerMessage for SMSG_EMOTE {
+impl crate::Message for SMSG_EMOTE {
+    const OPCODE: u32 = 0x0103;
+
+    fn size_without_header(&self) -> u32 {
+        12
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // emote: Emote
         w.write_all(&(self.emote.as_int() as u32).to_le_bytes())?;
@@ -29,12 +35,6 @@ impl ServerMessage for SMSG_EMOTE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0103;
-
-    fn server_size(&self) -> u16 {
-        16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -53,4 +53,5 @@ impl ServerMessage for SMSG_EMOTE {
     }
 
 }
+impl ServerMessage for SMSG_EMOTE {}
 

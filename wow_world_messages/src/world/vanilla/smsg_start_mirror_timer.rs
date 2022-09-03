@@ -26,7 +26,13 @@ pub struct SMSG_START_MIRROR_TIMER {
     pub id: u32,
 }
 
-impl ServerMessage for SMSG_START_MIRROR_TIMER {
+impl crate::Message for SMSG_START_MIRROR_TIMER {
+    const OPCODE: u32 = 0x01d9;
+
+    fn size_without_header(&self) -> u32 {
+        21
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // timer: TimerType
         w.write_all(&(self.timer.as_int() as u32).to_le_bytes())?;
@@ -48,12 +54,6 @@ impl ServerMessage for SMSG_START_MIRROR_TIMER {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01d9;
-
-    fn server_size(&self) -> u16 {
-        25
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 21 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -88,4 +88,5 @@ impl ServerMessage for SMSG_START_MIRROR_TIMER {
     }
 
 }
+impl ServerMessage for SMSG_START_MIRROR_TIMER {}
 

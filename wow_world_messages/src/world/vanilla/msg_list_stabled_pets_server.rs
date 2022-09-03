@@ -21,7 +21,13 @@ pub struct MSG_LIST_STABLED_PETS_Server {
     pub pets: Vec<StabledPet>,
 }
 
-impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
+impl crate::Message for MSG_LIST_STABLED_PETS_Server {
+    const OPCODE: u32 = 0x026f;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
@@ -39,12 +45,6 @@ impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x026f;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // npc: Guid
         let npc = Guid::read(r)?;
@@ -69,6 +69,7 @@ impl ServerMessage for MSG_LIST_STABLED_PETS_Server {
     }
 
 }
+impl ServerMessage for MSG_LIST_STABLED_PETS_Server {}
 
 impl MSG_LIST_STABLED_PETS_Server {
     pub(crate) fn size(&self) -> usize {

@@ -16,19 +16,19 @@ pub struct CMSG_PETITION_SHOW_SIGNATURES {
     pub item_guid: Guid,
 }
 
-impl ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {
+impl crate::Message for CMSG_PETITION_SHOW_SIGNATURES {
+    const OPCODE: u32 = 0x01be;
+
+    fn size_without_header(&self) -> u32 {
+        8
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // item_guid: Guid
         w.write_all(&self.item_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01be;
-
-    fn client_size(&self) -> u16 {
-        14
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {
     }
 
 }
+impl ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {}
 

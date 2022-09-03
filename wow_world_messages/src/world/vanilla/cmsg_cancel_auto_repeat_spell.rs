@@ -13,16 +13,16 @@ use std::io::{Write, Read};
 pub struct CMSG_CANCEL_AUTO_REPEAT_SPELL {
 }
 
-impl ClientMessage for CMSG_CANCEL_AUTO_REPEAT_SPELL {
+impl crate::Message for CMSG_CANCEL_AUTO_REPEAT_SPELL {
+    const OPCODE: u32 = 0x026d;
+
+    fn size_without_header(&self) -> u32 {
+        0
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         Ok(())
     }
-    const OPCODE: u16 = 0x026d;
-
-    fn client_size(&self) -> u16 {
-        6
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -33,4 +33,5 @@ impl ClientMessage for CMSG_CANCEL_AUTO_REPEAT_SPELL {
     }
 
 }
+impl ClientMessage for CMSG_CANCEL_AUTO_REPEAT_SPELL {}
 

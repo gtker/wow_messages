@@ -16,19 +16,19 @@ pub struct CMSG_FAR_SIGHT {
     pub operation: FarSightOperation,
 }
 
-impl ClientMessage for CMSG_FAR_SIGHT {
+impl crate::Message for CMSG_FAR_SIGHT {
+    const OPCODE: u32 = 0x027a;
+
+    fn size_without_header(&self) -> u32 {
+        1
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // operation: FarSightOperation
         w.write_all(&(self.operation.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x027a;
-
-    fn client_size(&self) -> u16 {
-        7
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ClientMessage for CMSG_FAR_SIGHT {
     }
 
 }
+impl ClientMessage for CMSG_FAR_SIGHT {}
 

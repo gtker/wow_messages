@@ -36,7 +36,13 @@ pub struct SMSG_TRADE_STATUS_EXTENDED {
     pub trade_slots: [TradeSlot; 7],
 }
 
-impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
+impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
+    const OPCODE: u32 = 0x0121;
+
+    fn size_without_header(&self) -> u32 {
+        444
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // self_player: u8
         w.write_all(&self.self_player.to_le_bytes())?;
@@ -60,12 +66,6 @@ impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0121;
-
-    fn server_size(&self) -> u16 {
-        448
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 444 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -103,4 +103,5 @@ impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {
     }
 
 }
+impl ServerMessage for SMSG_TRADE_STATUS_EXTENDED {}
 

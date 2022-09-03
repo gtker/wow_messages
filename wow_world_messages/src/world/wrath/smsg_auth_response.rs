@@ -27,7 +27,13 @@ pub struct SMSG_AUTH_RESPONSE {
     pub result: SMSG_AUTH_RESPONSE_WorldResult,
 }
 
-impl ServerMessage for SMSG_AUTH_RESPONSE {
+impl crate::Message for SMSG_AUTH_RESPONSE {
+    const OPCODE: u32 = 0x01ee;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: WorldResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
@@ -169,12 +175,6 @@ impl ServerMessage for SMSG_AUTH_RESPONSE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01ee;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // result: WorldResult
         let result: WorldResult = crate::util::read_u8_le(r)?.try_into()?;
@@ -322,6 +322,7 @@ impl ServerMessage for SMSG_AUTH_RESPONSE {
     }
 
 }
+impl ServerMessage for SMSG_AUTH_RESPONSE {}
 
 impl SMSG_AUTH_RESPONSE {
     pub(crate) fn size(&self) -> usize {

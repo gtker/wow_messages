@@ -18,7 +18,13 @@ pub struct SMSG_PAGE_TEXT_QUERY_RESPONSE {
     pub next_page_id: u32,
 }
 
-impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {
+impl crate::Message for SMSG_PAGE_TEXT_QUERY_RESPONSE {
+    const OPCODE: u32 = 0x005b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // page_id: u32
         w.write_all(&self.page_id.to_le_bytes())?;
@@ -33,12 +39,6 @@ impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x005b;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // page_id: u32
         let page_id = crate::util::read_u32_le(r)?;
@@ -58,6 +58,7 @@ impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {
     }
 
 }
+impl ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {}
 
 impl SMSG_PAGE_TEXT_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

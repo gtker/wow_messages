@@ -19,7 +19,13 @@ pub struct SMSG_MEETINGSTONE_SETQUEUE {
     pub status: MeetingStoneStatus,
 }
 
-impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {
+impl crate::Message for SMSG_MEETINGSTONE_SETQUEUE {
+    const OPCODE: u32 = 0x0295;
+
+    fn size_without_header(&self) -> u32 {
+        5
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // area: Area
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
@@ -29,12 +35,6 @@ impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0295;
-
-    fn server_size(&self) -> u16 {
-        9
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -53,4 +53,5 @@ impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {
     }
 
 }
+impl ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {}
 

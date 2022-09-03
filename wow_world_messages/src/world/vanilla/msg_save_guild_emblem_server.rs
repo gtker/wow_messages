@@ -16,19 +16,19 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Server {
     pub result: GuildEmblemResult,
 }
 
-impl ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {
+impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Server {
+    const OPCODE: u32 = 0x01f1;
+
+    fn size_without_header(&self) -> u32 {
+        4
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // result: GuildEmblemResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01f1;
-
-    fn server_size(&self) -> u16 {
-        8
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {
     }
 
 }
+impl ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {}
 

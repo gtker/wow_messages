@@ -44,7 +44,13 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub extend_flag: u8,
 }
 
-impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
+impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
+    const OPCODE: u32 = 0x0250;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // target: PackedGuid
         self.target.write_packed_guid_into_vec(w);
@@ -84,12 +90,6 @@ impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0250;
-
-    fn server_size(&self) -> u16 {
-        (self.size() + 4) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // target: PackedGuid
         let target = Guid::read_packed(r)?;
@@ -144,6 +144,7 @@ impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {
     }
 
 }
+impl ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {}
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
     pub(crate) fn size(&self) -> usize {

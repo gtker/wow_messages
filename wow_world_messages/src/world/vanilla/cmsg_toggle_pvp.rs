@@ -19,7 +19,13 @@ pub struct CMSG_TOGGLE_PVP {
     pub set: Option<CMSG_TOGGLE_PVP_set>,
 }
 
-impl ClientMessage for CMSG_TOGGLE_PVP {
+impl crate::Message for CMSG_TOGGLE_PVP {
+    const OPCODE: u32 = 0x0253;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional set
         if let Some(v) = &self.set {
@@ -30,12 +36,6 @@ impl ClientMessage for CMSG_TOGGLE_PVP {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x0253;
-
-    fn client_size(&self) -> u16 {
-        (self.size() + 6) as u16
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         // optional set
         let current_size = {
@@ -58,6 +58,7 @@ impl ClientMessage for CMSG_TOGGLE_PVP {
     }
 
 }
+impl ClientMessage for CMSG_TOGGLE_PVP {}
 
 impl CMSG_TOGGLE_PVP {
     pub(crate) fn size(&self) -> usize {

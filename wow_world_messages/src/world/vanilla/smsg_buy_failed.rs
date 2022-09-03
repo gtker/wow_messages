@@ -21,7 +21,13 @@ pub struct SMSG_BUY_FAILED {
     pub result: BuyResult,
 }
 
-impl ServerMessage for SMSG_BUY_FAILED {
+impl crate::Message for SMSG_BUY_FAILED {
+    const OPCODE: u32 = 0x01a5;
+
+    fn size_without_header(&self) -> u32 {
+        13
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -34,12 +40,6 @@ impl ServerMessage for SMSG_BUY_FAILED {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01a5;
-
-    fn server_size(&self) -> u16 {
-        17
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -62,4 +62,5 @@ impl ServerMessage for SMSG_BUY_FAILED {
     }
 
 }
+impl ServerMessage for SMSG_BUY_FAILED {}
 

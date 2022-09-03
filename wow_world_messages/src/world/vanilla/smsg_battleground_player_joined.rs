@@ -16,19 +16,19 @@ pub struct SMSG_BATTLEGROUND_PLAYER_JOINED {
     pub player_guid: Guid,
 }
 
-impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {
+impl crate::Message for SMSG_BATTLEGROUND_PLAYER_JOINED {
+    const OPCODE: u32 = 0x02ec;
+
+    fn size_without_header(&self) -> u32 {
+        8
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // player_guid: Guid
         w.write_all(&self.player_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x02ec;
-
-    fn server_size(&self) -> u16 {
-        12
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {
     }
 
 }
+impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {}
 

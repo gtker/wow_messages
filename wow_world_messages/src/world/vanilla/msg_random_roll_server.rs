@@ -22,7 +22,13 @@ pub struct MSG_RANDOM_ROLL_Server {
     pub guid: Guid,
 }
 
-impl ServerMessage for MSG_RANDOM_ROLL_Server {
+impl crate::Message for MSG_RANDOM_ROLL_Server {
+    const OPCODE: u32 = 0x01fb;
+
+    fn size_without_header(&self) -> u32 {
+        20
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // minimum: u32
         w.write_all(&self.minimum.to_le_bytes())?;
@@ -38,12 +44,6 @@ impl ServerMessage for MSG_RANDOM_ROLL_Server {
 
         Ok(())
     }
-    const OPCODE: u16 = 0x01fb;
-
-    fn server_size(&self) -> u16 {
-        24
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -70,4 +70,5 @@ impl ServerMessage for MSG_RANDOM_ROLL_Server {
     }
 
 }
+impl ServerMessage for MSG_RANDOM_ROLL_Server {}
 

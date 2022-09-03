@@ -16,19 +16,19 @@ pub struct SMSG_STANDSTATE_UPDATE {
     pub state: UnitStandState,
 }
 
-impl ServerMessage for SMSG_STANDSTATE_UPDATE {
+impl crate::Message for SMSG_STANDSTATE_UPDATE {
+    const OPCODE: u32 = 0x029d;
+
+    fn size_without_header(&self) -> u32 {
+        1
+    }
+
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // state: UnitStandState
         w.write_all(&(self.state.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
-    const OPCODE: u16 = 0x029d;
-
-    fn server_size(&self) -> u16 {
-        5
-    }
-
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
@@ -43,4 +43,5 @@ impl ServerMessage for SMSG_STANDSTATE_UPDATE {
     }
 
 }
+impl ServerMessage for SMSG_STANDSTATE_UPDATE {}
 

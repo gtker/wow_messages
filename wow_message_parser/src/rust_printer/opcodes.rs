@@ -130,13 +130,7 @@ pub fn definition(s: &mut Writer, v: &[&Container], ty: &str) {
     });
 }
 
-fn world_common_impls_read_opcodes(
-    s: &mut Writer,
-    v: &[&Container],
-    size: &str,
-    error_ty: &str,
-    ty: &str,
-) {
+fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str, error_ty: &str) {
     s.bodyn(format!("fn read_opcodes(opcode: {size}, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, {error_ty}>"), |s| {
         s.open_curly("match opcode");
 
@@ -147,12 +141,12 @@ fn world_common_impls_read_opcodes(
                 ContainerType::Msg(i) => i,
                 _ => panic!(),
             };
-            s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as {impl_trait}Message>::read_body(&mut r, body_size)?)),",
+            s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body(&mut r, body_size)?)),",
                           opcode = opcode,
                           name = e.name(),
-                          impl_trait = ty,
                           enum_name = get_enumerator_name(e.name())));
         }
+
         let opcode_text = if size == "u32" {
             "opcode"
         } else {
@@ -259,7 +253,7 @@ pub fn common_impls_world(
         _ => panic!(),
     };
     s.bodyn(format!("impl {t}OpcodeMessage", t = ty), |s| {
-        world_common_impls_read_opcodes(s, v, size, EXPECTED_OPCODE_ERROR, ty);
+        world_common_impls_read_opcodes(s, v, size, EXPECTED_OPCODE_ERROR);
 
         for it in ImplType::types() {
             world_common_impls_read_write(s, cd, size, opcode_size, EXPECTED_OPCODE_ERROR, it);
