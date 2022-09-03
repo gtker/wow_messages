@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Area;
 use crate::world::vanilla::MeetingStoneStatus;
-use crate::ServerMessage;
+use crate::world::vanilla::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 

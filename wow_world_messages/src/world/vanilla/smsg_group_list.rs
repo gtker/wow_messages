@@ -4,7 +4,7 @@ use crate::world::vanilla::GroupListMember;
 use crate::world::vanilla::GroupLootSetting;
 use crate::world::vanilla::GroupType;
 use crate::world::vanilla::ItemQuality;
-use crate::ServerMessage;
+use crate::world::vanilla::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 

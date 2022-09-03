@@ -76,16 +76,16 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects, version: Version) 
             s.wln(format!("use crate::{};", SERVER_MESSAGE_TRAIT_NAME));
         }
         ContainerType::SMsg(_) => {
-            s.wln(format!("use crate::{};", SERVER_MESSAGE_TRAIT_NAME,));
+            s.wln(format!("use {import_path}::{};", SERVER_MESSAGE_TRAIT_NAME,));
             s.wln("use wow_srp::header_crypto::Encrypter;");
         }
         ContainerType::CMsg(_) => {
-            s.wln(format!("use crate::{};", CLIENT_MESSAGE_TRAIT_NAME,));
+            s.wln(format!("use {import_path}::{};", CLIENT_MESSAGE_TRAIT_NAME,));
             s.wln("use wow_srp::header_crypto::Encrypter;");
         }
         ContainerType::Msg(_) => {
             s.wln(format!(
-                "use crate::{{{}, {}}};",
+                "use {import_path}::{{{}, {}}};",
                 CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::Encrypter;");

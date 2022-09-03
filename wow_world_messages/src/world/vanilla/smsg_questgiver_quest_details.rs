@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::QuestDetailsEmote;
 use crate::world::vanilla::QuestItemReward;
-use crate::ServerMessage;
+use crate::world::vanilla::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 

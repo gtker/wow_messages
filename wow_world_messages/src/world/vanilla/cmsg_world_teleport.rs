@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Map;
 use crate::world::vanilla::Vector3d;
-use crate::ClientMessage;
+use crate::world::vanilla::ClientMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
@@ -82,7 +82,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ClientOpcodeMessage;
-    use crate::{ClientMessage, ServerMessage};
+    use crate::world::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 30] = [ 0x00, 0x1C, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x3F, 0x00, 0x00, 0x00,

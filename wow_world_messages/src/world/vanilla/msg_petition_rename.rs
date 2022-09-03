@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ClientMessage, ServerMessage};
+use crate::world::vanilla::{ClientMessage, ServerMessage};
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 

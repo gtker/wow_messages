@@ -1,5 +1,5 @@
 use crate::container::{Container, ContainerType};
-use crate::file_utils::{get_import_path, major_version_to_string};
+use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ArraySize;
 use crate::parser::utility::parse_value;
@@ -18,6 +18,8 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
         return;
     }
 
+    let import_path = get_import_path(version);
+
     s.wln("#[cfg(test)]");
     s.body("mod test", |s| {
         s.wln(format!("use super::{};", e.name()));
@@ -25,13 +27,13 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
         for name in e.get_types_needing_import_recursively(o) {
             let version = if !version.is_world() {
                 o.get_tags_of_object(name, e.tags()).import_version()
-            }  else {
+            } else {
                 version
             };
 
             s.wln(format!(
-                "use {import_path}::{ty};",
-                import_path = get_import_path(version),
+                "use {path}::{ty};",
+                path = get_import_path(version),
                 ty = name,
             ));
         }
@@ -50,15 +52,15 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
                 }
 
                 if e.contains_update_mask_transitively(o) {
-                    s.wln(format!("use crate::{}::{{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer}};", major_version_to_string(&version.as_world())));
+                    s.wln(format!("use {import_path}::{{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer}};"));
                 }
 
                 if e.contains_aura_mask_transitively(o) {
-                    s.wln(format!("use crate::{}::{{AuraMask}};", major_version_to_string(&version.as_world())));
+                    s.wln(format!("use {import_path}::{{AuraMask}};"));
                 }
 
                 s.wln(format!(
-                    "use crate::{{{}, {}}};",
+                    "use {import_path}::{{{}, {}}};",
                     CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
                 ));
             }

@@ -1,5 +1,7 @@
 use crate::container::{Container, ContainerType};
-use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world_version_path};
+use crate::file_utils::{
+    get_import_path, get_login_logon_version_path, get_world_version_path, major_version_to_string,
+};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
     ImplType, Version, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
@@ -72,8 +74,10 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType,
         }
         ContainerType::CMsg(_) => {
             s.wln(format!(
-                "use crate::{{{}, {}}};",
-                SERVER_MESSAGE_TRAIT_NAME, CLIENT_MESSAGE_TRAIT_NAME,
+                "use crate::{}::{{{}, {}}};",
+                major_version_to_string(&version.as_world()),
+                SERVER_MESSAGE_TRAIT_NAME,
+                CLIENT_MESSAGE_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::{Decrypter, Encrypter};");
 

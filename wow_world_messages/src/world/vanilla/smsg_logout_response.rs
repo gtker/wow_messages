@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::LogoutResult;
 use crate::world::vanilla::LogoutSpeed;
-use crate::ServerMessage;
+use crate::world::vanilla::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
@@ -67,7 +67,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::{ClientMessage, ServerMessage};
+    use crate::world::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 9] = [ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, ];
 

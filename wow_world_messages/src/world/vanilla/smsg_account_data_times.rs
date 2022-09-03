@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::ServerMessage;
+use crate::world::vanilla::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
@@ -61,7 +61,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::{ClientMessage, ServerMessage};
+    use crate::world::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 132] = [ 0x00, 0x82, 0x09, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

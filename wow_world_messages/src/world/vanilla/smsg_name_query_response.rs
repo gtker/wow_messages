@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::Class;
 use crate::world::vanilla::Gender;
 use crate::world::vanilla::Race;
-use crate::ServerMessage;
+use crate::world::vanilla::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
@@ -119,7 +119,7 @@ mod test {
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::{ClientMessage, ServerMessage};
+    use crate::world::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 30] = [ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE, 0x00,
          0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00, 0x00,

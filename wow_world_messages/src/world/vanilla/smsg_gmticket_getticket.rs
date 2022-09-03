@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::GmTicketEscalationStatus;
 use crate::world::vanilla::GmTicketStatus;
 use crate::world::vanilla::GmTicketType;
-use crate::ServerMessage;
+use crate::world::vanilla::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 

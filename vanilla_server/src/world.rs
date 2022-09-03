@@ -6,9 +6,10 @@ use wow_srp::normalized_string::NormalizedString;
 use wow_srp::server::SrpServer;
 use wow_world_messages::vanilla::opcodes::ClientOpcodeMessage;
 use wow_world_messages::vanilla::tokio_expect_client_message;
+use wow_world_messages::vanilla::ServerMessage;
 use wow_world_messages::vanilla::*;
 use wow_world_messages::vanilla::{UpdateMask, UpdatePlayer};
-use wow_world_messages::{Guid, ServerMessage};
+use wow_world_messages::Guid;
 
 pub async fn world(users: Arc<Mutex<HashMap<String, SrpServer>>>) {
     let listener = TcpListener::bind("0.0.0.0:8085").await.unwrap();

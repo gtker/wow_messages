@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::CooldownSpell;
 use crate::world::vanilla::InitialSpell;
-use crate::ServerMessage;
+use crate::world::vanilla::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 

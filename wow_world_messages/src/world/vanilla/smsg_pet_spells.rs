@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::PetCommandState;
 use crate::world::vanilla::PetReactState;
 use crate::world::vanilla::PetSpellCooldown;
-use crate::ServerMessage;
+use crate::world::vanilla::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 

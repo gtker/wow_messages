@@ -4,12 +4,12 @@ use wow_srp::header_crypto::ProofSeed;
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::SESSION_KEY_LENGTH;
 use wow_world_messages::vanilla::opcodes::ServerOpcodeMessage;
+use wow_world_messages::vanilla::ClientMessage;
 use wow_world_messages::vanilla::{expect_server_message, expect_server_message_encryption};
 use wow_world_messages::vanilla::{
     SMSG_AUTH_RESPONSE_WorldResult, CMSG_AUTH_SESSION, CMSG_CHAR_ENUM, CMSG_PLAYER_LOGIN,
     SMSG_AUTH_CHALLENGE, SMSG_AUTH_RESPONSE, SMSG_CHAR_ENUM,
 };
-use wow_world_messages::ClientMessage;
 
 pub fn server(
     stream: &mut TcpStream,

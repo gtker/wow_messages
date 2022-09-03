@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::wrath::Expansion;
 use crate::world::wrath::WorldResult;
-use crate::ServerMessage;
+use crate::world::wrath::ServerMessage;
 use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
