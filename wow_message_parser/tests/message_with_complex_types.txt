@@ -3,7 +3,6 @@ use crate::world::vanilla::SimpleEnum;
 use crate::world::vanilla::SimpleFlag;
 use crate::world::vanilla::StructWithAllBuiltInTypes;
 use crate::world::vanilla::{ClientMessage, ServerMessage};
-use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]

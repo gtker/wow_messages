@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::vanilla::QuestCompletable;
 use crate::world::vanilla::QuestItemRequirement;
 use crate::world::vanilla::ServerMessage;
-use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]

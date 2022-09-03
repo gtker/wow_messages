@@ -6,7 +6,6 @@ use crate::world::vanilla::GroupMemberOnlineStatus;
 use crate::world::vanilla::GroupUpdateFlags;
 use crate::world::vanilla::Power;
 use crate::world::vanilla::ServerMessage;
-use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]

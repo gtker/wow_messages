@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::PartyOperation;
 use crate::world::vanilla::PartyResult;
 use crate::world::vanilla::ServerMessage;
-use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]

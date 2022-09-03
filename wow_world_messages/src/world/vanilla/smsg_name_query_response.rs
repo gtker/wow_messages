@@ -4,7 +4,6 @@ use crate::world::vanilla::Class;
 use crate::world::vanilla::Gender;
 use crate::world::vanilla::Race;
 use crate::world::vanilla::ServerMessage;
-use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]

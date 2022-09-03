@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::vanilla::GroupLootSetting;
 use crate::world::vanilla::ItemQuality;
 use crate::world::vanilla::ClientMessage;
-use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]

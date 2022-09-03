@@ -3,7 +3,6 @@ use crate::world::vanilla::BattlegroundEndStatus;
 use crate::world::vanilla::BattlegroundPlayer;
 use crate::world::vanilla::BattlegroundWinner;
 use crate::world::vanilla::ServerMessage;
-use wow_srp::header_crypto::Encrypter;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
