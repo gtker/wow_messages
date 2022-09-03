@@ -13,7 +13,7 @@ use std::io::{Write, Read};
 ///     u32 region_id;
 ///     u32 battleground_id;
 ///     u32 realm_id;
-///     u32 dos_response;
+///     u64 dos_response;
 ///     u8[20] client_proof;
 ///     u8[-] compressed_addon_info;
 /// }
@@ -30,7 +30,7 @@ pub struct CMSG_AUTH_SESSION {
     /// Purpose and exact meaning of name unknown.
     /// TrinityCore has this name but never uses the variable afterwards.
     ///
-    pub dos_response: u32,
+    pub dos_response: u64,
     pub client_proof: [u8; 20],
     pub compressed_addon_info: Vec<u8>,
 }
@@ -69,7 +69,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
         // realm_id: u32
         w.write_all(&self.realm_id.to_le_bytes())?;
 
-        // dos_response: u32
+        // dos_response: u64
         w.write_all(&self.dos_response.to_le_bytes())?;
 
         // client_proof: u8[20]
@@ -110,8 +110,8 @@ impl crate::Message for CMSG_AUTH_SESSION {
         // realm_id: u32
         let realm_id = crate::util::read_u32_le(r)?;
 
-        // dos_response: u32
-        let dos_response = crate::util::read_u32_le(r)?;
+        // dos_response: u64
+        let dos_response = crate::util::read_u64_le(r)?;
 
         // client_proof: u8[20]
         let mut client_proof = [0_u8; 20];
@@ -127,7 +127,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
             + 4 // region_id: u32
             + 4 // battleground_id: u32
             + 4 // realm_id: u32
-            + 4 // dos_response: u32
+            + 8 // dos_response: u64
             + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
         };
         let mut compressed_addon_info = Vec::with_capacity(body_size as usize - current_size);
@@ -165,7 +165,7 @@ impl CMSG_AUTH_SESSION {
         + 4 // region_id: u32
         + 4 // battleground_id: u32
         + 4 // realm_id: u32
-        + 4 // dos_response: u32
+        + 8 // dos_response: u64
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
         + self.compressed_addon_info.len() * core::mem::size_of::<u8>() // compressed_addon_info: u8[-]
     }

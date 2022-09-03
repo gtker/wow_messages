@@ -48002,7 +48002,7 @@
             "name": "dos_response",
             "member_type": {
               "Integer": {
-                "type": "u32",
+                "type": "u64",
                 "endianness": "little"
               }
             },

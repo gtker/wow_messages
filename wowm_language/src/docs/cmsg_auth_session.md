@@ -87,7 +87,7 @@ cmsg CMSG_AUTH_SESSION = 0x01ED {
     u32 region_id;
     u32 battleground_id;
     u32 realm_id;
-    u32 dos_response;
+    u64 dos_response;
     u8[20] client_proof;
     u8[-] compressed_addon_info;
 }
@@ -115,7 +115,7 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | region_id |  |  |
 | - | 4 / Little | u32 | battleground_id |  |  |
 | - | 4 / Little | u32 | realm_id |  |  |
-| - | 4 / Little | u32 | dos_response |  | Purpose and exact meaning of name unknown.<br/>TrinityCore has this name but never uses the variable afterwards. |
+| - | 8 / Little | u64 | dos_response |  | Purpose and exact meaning of name unknown.<br/>TrinityCore has this name but never uses the variable afterwards. |
 | - | ? / - | u8[20] | client_proof |  |  |
 | - | ? / - | u8[-] | compressed_addon_info |  |  |
 
