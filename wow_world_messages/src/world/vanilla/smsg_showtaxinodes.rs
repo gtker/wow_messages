@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -77,7 +76,8 @@ impl crate::Message for SMSG_SHOWTAXINODES {
     }
 
 }
-impl ServerMessage for SMSG_SHOWTAXINODES {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SHOWTAXINODES {}
 
 impl SMSG_SHOWTAXINODES {
     pub(crate) fn size(&self) -> usize {

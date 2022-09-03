@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -67,7 +66,8 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     }
 
 }
-impl ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
 
 impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub(crate) fn size(&self) -> usize {

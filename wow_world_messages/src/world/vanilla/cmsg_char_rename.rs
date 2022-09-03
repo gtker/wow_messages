@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -51,7 +50,8 @@ impl crate::Message for CMSG_CHAR_RENAME {
     }
 
 }
-impl ClientMessage for CMSG_CHAR_RENAME {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_CHAR_RENAME {}
 
 impl CMSG_CHAR_RENAME {
     pub(crate) fn size(&self) -> usize {

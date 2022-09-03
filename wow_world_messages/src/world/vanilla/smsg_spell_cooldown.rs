@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::SpellCooldownStatus;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -56,7 +55,8 @@ impl crate::Message for SMSG_SPELL_COOLDOWN {
     }
 
 }
-impl ServerMessage for SMSG_SPELL_COOLDOWN {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SPELL_COOLDOWN {}
 
 impl SMSG_SPELL_COOLDOWN {
     pub(crate) fn size(&self) -> usize {

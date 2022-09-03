@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Map;
 use crate::world::vanilla::StatusId;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -4458,7 +4457,8 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
     }
 
 }
-impl ServerMessage for SMSG_BATTLEFIELD_STATUS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_BATTLEFIELD_STATUS {}
 
 impl SMSG_BATTLEFIELD_STATUS {
     pub(crate) fn size(&self) -> usize {

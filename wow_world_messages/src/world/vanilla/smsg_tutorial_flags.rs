@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -109,7 +108,8 @@ impl crate::Message for SMSG_TUTORIAL_FLAGS {
     }
 
 }
-impl ServerMessage for SMSG_TUTORIAL_FLAGS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_TUTORIAL_FLAGS {}
 
 #[cfg(test)]
 mod test {

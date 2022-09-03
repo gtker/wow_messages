@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::RollVote;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -61,5 +60,6 @@ impl crate::Message for CMSG_LOOT_ROLL {
     }
 
 }
-impl ClientMessage for CMSG_LOOT_ROLL {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_LOOT_ROLL {}
 

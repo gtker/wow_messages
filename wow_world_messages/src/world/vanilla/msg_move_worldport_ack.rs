@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::{ClientMessage, ServerMessage};
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -37,7 +36,9 @@ impl crate::Message for MSG_MOVE_WORLDPORT_ACK {
     }
 
 }
-impl ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
 
-impl ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
 

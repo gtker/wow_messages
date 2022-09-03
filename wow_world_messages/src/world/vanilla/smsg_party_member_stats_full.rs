@@ -5,7 +5,6 @@ use crate::world::vanilla::Area;
 use crate::world::vanilla::GroupMemberOnlineStatus;
 use crate::world::vanilla::GroupUpdateFlags;
 use crate::world::vanilla::Power;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -462,7 +461,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
     }
 
 }
-impl ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
 
 impl SMSG_PARTY_MEMBER_STATS_FULL {
     pub(crate) fn size(&self) -> usize {

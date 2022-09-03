@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Object;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -58,7 +57,8 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
     }
 
 }
-impl ServerMessage for SMSG_UPDATE_OBJECT {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_UPDATE_OBJECT {}
 
 impl SMSG_UPDATE_OBJECT {
     pub(crate) fn size(&self) -> usize {

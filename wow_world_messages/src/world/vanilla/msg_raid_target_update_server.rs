@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::RaidTargetUpdate;
 use crate::world::vanilla::RaidTargetUpdateType;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -86,7 +85,8 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
     }
 
 }
-impl ServerMessage for MSG_RAID_TARGET_UPDATE_Server {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MSG_RAID_TARGET_UPDATE_Server {}
 
 impl MSG_RAID_TARGET_UPDATE_Server {
     pub(crate) fn size(&self) -> usize {

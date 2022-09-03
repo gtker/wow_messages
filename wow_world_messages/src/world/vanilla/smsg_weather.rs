@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::WeatherChangeType;
 use crate::world::vanilla::WeatherType;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -69,5 +68,6 @@ impl crate::Message for SMSG_WEATHER {
     }
 
 }
-impl ServerMessage for SMSG_WEATHER {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_WEATHER {}
 

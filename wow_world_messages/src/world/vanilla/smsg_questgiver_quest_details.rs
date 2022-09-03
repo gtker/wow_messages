@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::QuestDetailsEmote;
 use crate::world::vanilla::QuestItemReward;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -176,7 +175,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
     }
 
 }
-impl ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {}
 
 impl SMSG_QUESTGIVER_QUEST_DETAILS {
     pub(crate) fn size(&self) -> usize {

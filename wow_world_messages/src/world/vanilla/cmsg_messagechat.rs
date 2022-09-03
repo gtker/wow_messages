@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::ChatType;
 use crate::world::vanilla::Language;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -173,7 +172,8 @@ impl crate::Message for CMSG_MESSAGECHAT {
     }
 
 }
-impl ClientMessage for CMSG_MESSAGECHAT {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_MESSAGECHAT {}
 
 impl CMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {

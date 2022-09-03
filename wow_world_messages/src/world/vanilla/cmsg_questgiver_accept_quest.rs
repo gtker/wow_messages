@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -51,5 +50,6 @@ impl crate::Message for CMSG_QUESTGIVER_ACCEPT_QUEST {
     }
 
 }
-impl ClientMessage for CMSG_QUESTGIVER_ACCEPT_QUEST {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_QUESTGIVER_ACCEPT_QUEST {}
 

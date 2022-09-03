@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::vanilla::CastFlags;
 use crate::world::vanilla::SpellCastTargets;
 use crate::world::vanilla::SpellMiss;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -154,7 +153,8 @@ impl crate::Message for SMSG_SPELL_GO {
     }
 
 }
-impl ServerMessage for SMSG_SPELL_GO {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SPELL_GO {}
 
 impl SMSG_SPELL_GO {
     pub(crate) fn size(&self) -> usize {

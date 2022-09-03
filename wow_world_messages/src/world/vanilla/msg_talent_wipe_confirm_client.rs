@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -42,5 +41,6 @@ impl crate::Message for MSG_TALENT_WIPE_CONFIRM_Client {
     }
 
 }
-impl ClientMessage for MSG_TALENT_WIPE_CONFIRM_Client {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_TALENT_WIPE_CONFIRM_Client {}
 

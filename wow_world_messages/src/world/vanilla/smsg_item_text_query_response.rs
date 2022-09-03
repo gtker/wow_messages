@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -50,7 +49,8 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
     }
 
 }
-impl ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {}
 
 impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

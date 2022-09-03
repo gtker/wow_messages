@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -64,7 +63,8 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
     }
 
 }
-impl ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
 
 impl SMSG_ATTACKERSTATEUPDATE {
     pub(crate) fn size(&self) -> usize {

@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::vanilla::NewItemChatAlert;
 use crate::world::vanilla::NewItemCreationType;
 use crate::world::vanilla::NewItemSource;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -132,5 +131,6 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
     }
 
 }
-impl ServerMessage for SMSG_ITEM_PUSH_RESULT {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
 

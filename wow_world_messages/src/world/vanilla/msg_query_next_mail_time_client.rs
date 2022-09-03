@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -34,5 +33,6 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Client {
     }
 
 }
-impl ClientMessage for MSG_QUERY_NEXT_MAIL_TIME_Client {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_QUERY_NEXT_MAIL_TIME_Client {}
 

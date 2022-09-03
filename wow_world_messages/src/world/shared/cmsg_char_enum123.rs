@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -34,7 +33,11 @@ impl crate::Message for CMSG_CHAR_ENUM {
     }
 
 }
-impl ClientMessage for CMSG_CHAR_ENUM {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_CHAR_ENUM {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_CHAR_ENUM {}
 
 #[cfg(test)]
 mod test {

@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::FactionInitializer;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -49,7 +48,8 @@ impl crate::Message for SMSG_INITIALIZE_FACTIONS {
     }
 
 }
-impl ServerMessage for SMSG_INITIALIZE_FACTIONS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_INITIALIZE_FACTIONS {}
 
 impl SMSG_INITIALIZE_FACTIONS {
     pub(crate) fn size(&self) -> usize {

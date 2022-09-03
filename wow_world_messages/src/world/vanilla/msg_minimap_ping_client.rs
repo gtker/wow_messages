@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -48,5 +47,6 @@ impl crate::Message for MSG_MINIMAP_PING_Client {
     }
 
 }
-impl ClientMessage for MSG_MINIMAP_PING_Client {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_MINIMAP_PING_Client {}
 

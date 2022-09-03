@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -32,5 +31,6 @@ impl crate::Message for CMSG_CANCEL_GROWTH_AURA {
     }
 
 }
-impl ClientMessage for CMSG_CANCEL_GROWTH_AURA {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_CANCEL_GROWTH_AURA {}
 

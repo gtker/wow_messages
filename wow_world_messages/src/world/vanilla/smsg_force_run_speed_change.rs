@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -61,7 +60,8 @@ impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
     }
 
 }
-impl ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {}
 
 impl SMSG_FORCE_RUN_SPEED_CHANGE {
     pub(crate) fn size(&self) -> usize {

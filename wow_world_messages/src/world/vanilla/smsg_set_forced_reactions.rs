@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::ForcedReaction;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -49,7 +48,8 @@ impl crate::Message for SMSG_SET_FORCED_REACTIONS {
     }
 
 }
-impl ServerMessage for SMSG_SET_FORCED_REACTIONS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SET_FORCED_REACTIONS {}
 
 impl SMSG_SET_FORCED_REACTIONS {
     pub(crate) fn size(&self) -> usize {

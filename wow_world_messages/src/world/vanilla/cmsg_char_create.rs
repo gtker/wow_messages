@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Class;
 use crate::world::vanilla::Gender;
 use crate::world::vanilla::Race;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -138,7 +137,8 @@ impl crate::Message for CMSG_CHAR_CREATE {
     }
 
 }
-impl ClientMessage for CMSG_CHAR_CREATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_CHAR_CREATE {}
 
 impl CMSG_CHAR_CREATE {
     pub(crate) fn size(&self) -> usize {

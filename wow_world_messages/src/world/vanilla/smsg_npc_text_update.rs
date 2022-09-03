@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::NpcTextUpdate;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -60,7 +59,8 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
     }
 
 }
-impl ServerMessage for SMSG_NPC_TEXT_UPDATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_NPC_TEXT_UPDATE {}
 
 impl SMSG_NPC_TEXT_UPDATE {
     pub(crate) fn size(&self) -> usize {

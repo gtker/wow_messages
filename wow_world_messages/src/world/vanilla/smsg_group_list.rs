@@ -4,7 +4,6 @@ use crate::world::vanilla::GroupListMember;
 use crate::world::vanilla::GroupLootSetting;
 use crate::world::vanilla::GroupType;
 use crate::world::vanilla::ItemQuality;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -129,7 +128,8 @@ impl crate::Message for SMSG_GROUP_LIST {
     }
 
 }
-impl ServerMessage for SMSG_GROUP_LIST {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_GROUP_LIST {}
 
 impl SMSG_GROUP_LIST {
     pub(crate) fn size(&self) -> usize {

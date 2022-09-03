@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -70,7 +69,8 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
     }
 
 }
-impl ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
 
 impl CMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {

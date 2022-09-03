@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::vanilla::Class;
 use crate::world::vanilla::Gender;
 use crate::world::vanilla::Race;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -95,7 +94,8 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
     }
 
 }
-impl ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
 
 impl SMSG_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

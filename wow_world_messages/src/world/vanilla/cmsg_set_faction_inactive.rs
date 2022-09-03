@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -50,5 +49,6 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
     }
 
 }
-impl ClientMessage for CMSG_SET_FACTION_INACTIVE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
 

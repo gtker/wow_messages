@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -49,7 +48,8 @@ impl crate::Message for SMSG_LOOT_MASTER_LIST {
     }
 
 }
-impl ServerMessage for SMSG_LOOT_MASTER_LIST {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_LOOT_MASTER_LIST {}
 
 impl SMSG_LOOT_MASTER_LIST {
     pub(crate) fn size(&self) -> usize {

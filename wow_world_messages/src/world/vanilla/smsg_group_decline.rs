@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -39,7 +38,8 @@ impl crate::Message for SMSG_GROUP_DECLINE {
     }
 
 }
-impl ServerMessage for SMSG_GROUP_DECLINE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_GROUP_DECLINE {}
 
 impl SMSG_GROUP_DECLINE {
     pub(crate) fn size(&self) -> usize {

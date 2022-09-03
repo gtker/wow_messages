@@ -55,8 +55,8 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
             );
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
-            let bind = |s: &mut Writer, container_type| {
-                s.impl_read_and_writable_world(e.name(), container_type);
+            let bind = |s: &mut Writer, container_type, version| {
+                s.impl_world_server_or_client_message(e.name(), container_type, version);
             };
 
             s.impl_world_message(
@@ -72,15 +72,17 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 Some(e.sizes()),
             );
 
-            match e.container_type() {
-                ContainerType::CMsg(_) => bind(s, ContainerType::CMsg(0)),
-                ContainerType::SMsg(_) => bind(s, ContainerType::SMsg(0)),
-                ContainerType::Msg(_) => {
-                    bind(s, ContainerType::CMsg(0));
+            for version in e.tags().main_trait_versions() {
+                match e.container_type() {
+                    ContainerType::CMsg(_) => bind(s, ContainerType::CMsg(0), version),
+                    ContainerType::SMsg(_) => bind(s, ContainerType::SMsg(0), version),
+                    ContainerType::Msg(_) => {
+                        bind(s, ContainerType::CMsg(0), version);
 
-                    bind(s, ContainerType::SMsg(0));
+                        bind(s, ContainerType::SMsg(0), version);
+                    }
+                    _ => unreachable!(),
                 }
-                _ => unreachable!(),
             }
         }
     }

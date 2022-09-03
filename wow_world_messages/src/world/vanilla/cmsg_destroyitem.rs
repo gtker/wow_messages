@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -86,5 +85,6 @@ impl crate::Message for CMSG_DESTROYITEM {
     }
 
 }
-impl ClientMessage for CMSG_DESTROYITEM {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_DESTROYITEM {}
 

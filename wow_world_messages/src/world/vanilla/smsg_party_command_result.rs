@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::PartyOperation;
 use crate::world::vanilla::PartyResult;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -59,7 +58,8 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
     }
 
 }
-impl ServerMessage for SMSG_PARTY_COMMAND_RESULT {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_PARTY_COMMAND_RESULT {}
 
 impl SMSG_PARTY_COMMAND_RESULT {
     pub(crate) fn size(&self) -> usize {

@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Vector3d;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -52,5 +51,6 @@ impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
     }
 
 }
-impl ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
 

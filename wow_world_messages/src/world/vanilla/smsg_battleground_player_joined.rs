@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -42,5 +41,6 @@ impl crate::Message for SMSG_BATTLEGROUND_PLAYER_JOINED {
     }
 
 }
-impl ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {}
 

@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -68,7 +67,8 @@ impl crate::Message for SMSG_RESURRECT_REQUEST {
     }
 
 }
-impl ServerMessage for SMSG_RESURRECT_REQUEST {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_RESURRECT_REQUEST {}
 
 impl SMSG_RESURRECT_REQUEST {
     pub(crate) fn size(&self) -> usize {

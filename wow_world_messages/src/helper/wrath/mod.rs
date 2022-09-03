@@ -1,1 +1,2 @@
-pub use crate::helper::vanilla::traits::*;
+pub(crate) mod traits;
+pub use traits::*;

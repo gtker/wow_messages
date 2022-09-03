@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::MovementInfo;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -37,7 +36,8 @@ impl crate::Message for MSG_MOVE_SET_WALK_MODE_Client {
     }
 
 }
-impl ClientMessage for MSG_MOVE_SET_WALK_MODE_Client {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_MOVE_SET_WALK_MODE_Client {}
 
 impl MSG_MOVE_SET_WALK_MODE_Client {
     pub(crate) fn size(&self) -> usize {

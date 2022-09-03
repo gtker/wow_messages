@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -77,5 +76,6 @@ impl crate::Message for CMSG_SPLIT_ITEM {
     }
 
 }
-impl ClientMessage for CMSG_SPLIT_ITEM {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_SPLIT_ITEM {}
 

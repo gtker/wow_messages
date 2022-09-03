@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::InventoryResult;
 use crate::world::vanilla::TradeStatus;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -174,7 +173,8 @@ impl crate::Message for SMSG_TRADE_STATUS {
     }
 
 }
-impl ServerMessage for SMSG_TRADE_STATUS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_TRADE_STATUS {}
 
 impl SMSG_TRADE_STATUS {
     pub(crate) fn size(&self) -> usize {

@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -32,5 +31,6 @@ impl crate::Message for SMSG_ATTACKSWING_NOTSTANDING {
     }
 
 }
-impl ServerMessage for SMSG_ATTACKSWING_NOTSTANDING {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_ATTACKSWING_NOTSTANDING {}
 

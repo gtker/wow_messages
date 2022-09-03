@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::CinematicSequenceId;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -42,5 +41,6 @@ impl crate::Message for SMSG_TRIGGER_CINEMATIC {
     }
 
 }
-impl ServerMessage for SMSG_TRIGGER_CINEMATIC {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_TRIGGER_CINEMATIC {}
 

@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -77,7 +76,8 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
     }
 
 }
-impl ClientMessage for CMSG_GOSSIP_SELECT_OPTION {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_GOSSIP_SELECT_OPTION {}
 
 impl CMSG_GOSSIP_SELECT_OPTION {
     pub(crate) fn size(&self) -> usize {

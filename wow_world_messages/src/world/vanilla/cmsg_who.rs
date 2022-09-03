@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -131,7 +130,8 @@ impl crate::Message for CMSG_WHO {
     }
 
 }
-impl ClientMessage for CMSG_WHO {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_WHO {}
 
 impl CMSG_WHO {
     pub(crate) fn size(&self) -> usize {

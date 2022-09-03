@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::ExperienceAwardType;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -91,7 +90,8 @@ impl crate::Message for SMSG_LOG_XPGAIN {
     }
 
 }
-impl ServerMessage for SMSG_LOG_XPGAIN {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_LOG_XPGAIN {}
 
 impl SMSG_LOG_XPGAIN {
     pub(crate) fn size(&self) -> usize {

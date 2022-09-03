@@ -202,10 +202,11 @@ impl Writer {
         self.closing_curly(); // impl Message
     }
 
-    pub fn impl_read_and_writable_world(
+    pub fn impl_world_server_or_client_message(
         &mut self,
         type_name: impl AsRef<str>,
         container_type: ContainerType,
+        version: Version,
     ) {
         let trait_to_impl = match container_type {
             ContainerType::CMsg(_) => CLIENT_MESSAGE_TRAIT_NAME,
@@ -214,9 +215,14 @@ impl Writer {
         };
 
         self.wln(format!(
-            "impl {} for {} {{}}",
+            "#[cfg(feature = \"{}\")]",
+            version.as_major_world().feature_name()
+        ));
+        self.wln(format!(
+            "impl {}::{} for {} {{}}",
+            get_import_path(version),
             trait_to_impl,
-            type_name.as_ref()
+            type_name.as_ref(),
         ));
         self.newline();
     }
@@ -848,9 +854,25 @@ pub enum MajorWorldVersion {
 impl MajorWorldVersion {
     pub fn encryption_path(&self) -> &'static str {
         match self {
-            MajorWorldVersion::BurningCrusade
-            | MajorWorldVersion::Wrath
-            | MajorWorldVersion::Vanilla => "wow_srp::vanilla_header",
+            MajorWorldVersion::BurningCrusade | MajorWorldVersion::Vanilla => {
+                "wow_srp::vanilla_header"
+            }
+            MajorWorldVersion::Wrath => "wow_srp::wrath_header",
+        }
+    }
+
+    pub fn feature_name(&self) -> &'static str {
+        match self {
+            MajorWorldVersion::Vanilla => "vanilla",
+            MajorWorldVersion::BurningCrusade => "tbc",
+            MajorWorldVersion::Wrath => "wrath",
+        }
+    }
+
+    pub fn wrath_or_greater(&self) -> bool {
+        match self {
+            MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => false,
+            MajorWorldVersion::Wrath => true,
         }
     }
 }

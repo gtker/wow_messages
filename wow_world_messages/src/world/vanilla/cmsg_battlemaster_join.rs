@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::Map;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -70,5 +69,6 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
     }
 
 }
-impl ClientMessage for CMSG_BATTLEMASTER_JOIN {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_BATTLEMASTER_JOIN {}
 

@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::WorldResult;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -46,7 +45,8 @@ impl crate::Message for SMSG_CHAR_CREATE {
     }
 
 }
-impl ServerMessage for SMSG_CHAR_CREATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_CHAR_CREATE {}
 
 #[cfg(test)]
 mod test {

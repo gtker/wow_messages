@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::vanilla::PetCommandState;
 use crate::world::vanilla::PetReactState;
 use crate::world::vanilla::PetSpellCooldown;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -136,7 +135,8 @@ impl crate::Message for SMSG_PET_SPELLS {
     }
 
 }
-impl ServerMessage for SMSG_PET_SPELLS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_PET_SPELLS {}
 
 impl SMSG_PET_SPELLS {
     pub(crate) fn size(&self) -> usize {

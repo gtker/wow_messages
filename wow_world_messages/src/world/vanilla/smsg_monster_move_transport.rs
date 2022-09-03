@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::MonsterMoveType;
 use crate::world::vanilla::Vector3d;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -66,7 +65,8 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
     }
 
 }
-impl ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {}
 
 impl SMSG_MONSTER_MOVE_TRANSPORT {
     pub(crate) fn size(&self) -> usize {

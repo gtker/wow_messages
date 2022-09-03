@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::ListInventoryItem;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -59,7 +58,8 @@ impl crate::Message for SMSG_LIST_INVENTORY {
     }
 
 }
-impl ServerMessage for SMSG_LIST_INVENTORY {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_LIST_INVENTORY {}
 
 impl SMSG_LIST_INVENTORY {
     pub(crate) fn size(&self) -> usize {

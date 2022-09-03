@@ -75,18 +75,6 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects, version: Version) 
         ContainerType::SLogin(_) => {
             s.wln(format!("use crate::{};", SERVER_MESSAGE_TRAIT_NAME));
         }
-        ContainerType::SMsg(_) => {
-            s.wln(format!("use {import_path}::{};", SERVER_MESSAGE_TRAIT_NAME,));
-        }
-        ContainerType::CMsg(_) => {
-            s.wln(format!("use {import_path}::{};", CLIENT_MESSAGE_TRAIT_NAME,));
-        }
-        ContainerType::Msg(_) => {
-            s.wln(format!(
-                "use {import_path}::{{{}, {}}};",
-                CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
-            ));
-        }
         _ => {}
     }
 

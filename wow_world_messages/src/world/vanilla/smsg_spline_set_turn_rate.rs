@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -45,7 +44,8 @@ impl crate::Message for SMSG_SPLINE_SET_TURN_RATE {
     }
 
 }
-impl ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
 
 impl SMSG_SPLINE_SET_TURN_RATE {
     pub(crate) fn size(&self) -> usize {

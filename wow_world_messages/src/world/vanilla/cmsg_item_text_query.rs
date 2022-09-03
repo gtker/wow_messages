@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -63,5 +62,6 @@ impl crate::Message for CMSG_ITEM_TEXT_QUERY {
     }
 
 }
-impl ClientMessage for CMSG_ITEM_TEXT_QUERY {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_ITEM_TEXT_QUERY {}
 

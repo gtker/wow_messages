@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -65,7 +64,8 @@ impl crate::Message for SMSG_DISPEL_FAILED {
     }
 
 }
-impl ServerMessage for SMSG_DISPEL_FAILED {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_DISPEL_FAILED {}
 
 impl SMSG_DISPEL_FAILED {
     pub(crate) fn size(&self) -> usize {

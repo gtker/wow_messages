@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::BattlegroundPlayerPosition;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -74,7 +73,8 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     }
 
 }
-impl ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub(crate) fn size(&self) -> usize {

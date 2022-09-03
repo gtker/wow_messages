@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::RaidTargetIndex;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -185,7 +184,8 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
     }
 
 }
-impl ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
 
 impl MSG_RAID_TARGET_UPDATE_Client {
     pub(crate) fn size(&self) -> usize {

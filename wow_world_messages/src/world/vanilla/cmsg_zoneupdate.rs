@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Area;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -46,7 +45,8 @@ impl crate::Message for CMSG_ZONEUPDATE {
     }
 
 }
-impl ClientMessage for CMSG_ZONEUPDATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_ZONEUPDATE {}
 
 #[cfg(test)]
 mod test {

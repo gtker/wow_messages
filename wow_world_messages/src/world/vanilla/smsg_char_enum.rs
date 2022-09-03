@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Character;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -51,7 +50,8 @@ impl crate::Message for SMSG_CHAR_ENUM {
     }
 
 }
-impl ServerMessage for SMSG_CHAR_ENUM {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_CHAR_ENUM {}
 
 impl SMSG_CHAR_ENUM {
     pub(crate) fn size(&self) -> usize {

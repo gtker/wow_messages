@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -46,7 +45,8 @@ impl crate::Message for SMSG_MOVE_UNSET_HOVER {
     }
 
 }
-impl ServerMessage for SMSG_MOVE_UNSET_HOVER {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_MOVE_UNSET_HOVER {}
 
 impl SMSG_MOVE_UNSET_HOVER {
     pub(crate) fn size(&self) -> usize {

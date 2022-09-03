@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::PowerType;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -74,7 +73,8 @@ impl crate::Message for SMSG_SPELLENERGIZELOG {
     }
 
 }
-impl ServerMessage for SMSG_SPELLENERGIZELOG {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SPELLENERGIZELOG {}
 
 impl SMSG_SPELLENERGIZELOG {
     pub(crate) fn size(&self) -> usize {

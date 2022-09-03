@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -41,5 +40,6 @@ impl crate::Message for SMSG_REMOVED_SPELL {
     }
 
 }
-impl ServerMessage for SMSG_REMOVED_SPELL {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_REMOVED_SPELL {}
 

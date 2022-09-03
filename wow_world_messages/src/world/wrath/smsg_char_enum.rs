@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::wrath::Character;
-use crate::world::wrath::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -49,7 +48,8 @@ impl crate::Message for SMSG_CHAR_ENUM {
     }
 
 }
-impl ServerMessage for SMSG_CHAR_ENUM {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_CHAR_ENUM {}
 
 impl SMSG_CHAR_ENUM {
     pub(crate) fn size(&self) -> usize {

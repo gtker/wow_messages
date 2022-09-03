@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone)]
@@ -46,5 +45,6 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
     }
 
 }
-impl ServerMessage for SMSG_ACTION_BUTTONS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_ACTION_BUTTONS {}
 

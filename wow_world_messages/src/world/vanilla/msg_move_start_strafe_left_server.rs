@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::MovementInfo;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -47,7 +46,8 @@ impl crate::Message for MSG_MOVE_START_STRAFE_LEFT_Server {
     }
 
 }
-impl ServerMessage for MSG_MOVE_START_STRAFE_LEFT_Server {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MSG_MOVE_START_STRAFE_LEFT_Server {}
 
 impl MSG_MOVE_START_STRAFE_LEFT_Server {
     pub(crate) fn size(&self) -> usize {

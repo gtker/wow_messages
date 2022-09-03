@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -67,5 +66,6 @@ impl crate::Message for SMSG_AUTH_CHALLENGE {
     }
 
 }
-impl ServerMessage for SMSG_AUTH_CHALLENGE {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_AUTH_CHALLENGE {}
 

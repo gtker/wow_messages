@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::MovementInfo;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -66,7 +65,8 @@ impl crate::Message for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
     }
 
 }
-impl ClientMessage for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {}
 
 impl CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
     pub(crate) fn size(&self) -> usize {

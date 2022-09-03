@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::SheathState;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -44,7 +43,8 @@ impl crate::Message for CMSG_SETSHEATHED {
     }
 
 }
-impl ClientMessage for CMSG_SETSHEATHED {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_SETSHEATHED {}
 
 #[cfg(test)]
 mod test {

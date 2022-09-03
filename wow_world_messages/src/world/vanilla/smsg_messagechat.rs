@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::vanilla::ChatType;
 use crate::world::vanilla::Language;
 use crate::world::vanilla::PlayerChatTag;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -747,7 +746,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
     }
 
 }
-impl ServerMessage for SMSG_MESSAGECHAT {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_MESSAGECHAT {}
 
 impl SMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {

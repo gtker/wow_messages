@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::WhoPlayer;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -58,7 +57,8 @@ impl crate::Message for SMSG_WHO {
     }
 
 }
-impl ServerMessage for SMSG_WHO {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_WHO {}
 
 impl SMSG_WHO {
     pub(crate) fn size(&self) -> usize {

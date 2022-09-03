@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -153,7 +152,8 @@ impl crate::Message for CMSG_AUTH_SESSION {
     }
 
 }
-impl ClientMessage for CMSG_AUTH_SESSION {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_AUTH_SESSION {}
 
 impl CMSG_AUTH_SESSION {
     pub(crate) fn size(&self) -> usize {

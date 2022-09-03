@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::ClientMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -197,7 +196,8 @@ impl crate::Message for CMSG_PETITION_BUY {
     }
 
 }
-impl ClientMessage for CMSG_PETITION_BUY {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_PETITION_BUY {}
 
 impl CMSG_PETITION_BUY {
     pub(crate) fn size(&self) -> usize {

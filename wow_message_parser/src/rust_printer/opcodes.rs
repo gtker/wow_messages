@@ -4,8 +4,9 @@ use crate::file_utils::{
 };
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
-    ImplType, Version, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
-    CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, SERVER_MESSAGE_TRAIT_NAME, TOKIO_IMPORT,
+    ImplType, MajorWorldVersion, Version, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD,
+    CFG_ASYNC_TOKIO, CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+    TOKIO_IMPORT,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -29,7 +30,7 @@ pub fn print_world_opcodes(
 
     definition(&mut s, v, ty);
 
-    common_impls_world(&mut s, v, ty, container_type);
+    common_impls_world(&mut s, v, ty, container_type, Version::World(*version));
 
     s
 }
@@ -81,11 +82,17 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType,
             ));
 
             let import_path = version.as_major_world().encryption_path();
-
-            s.wln(format!(
-                "use {}::{{DecrypterHalf, EncrypterHalf}};",
-                import_path
-            ));
+            match version.as_major_world() {
+                MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {
+                    s.wln(format!(
+                        "use {}::{{DecrypterHalf, EncrypterHalf}};",
+                        import_path
+                    ));
+                }
+                MajorWorldVersion::Wrath => {
+                    s.wln(format!("use {}::{{ClientEncrypterHalf, ClientDecrypterHalf, ServerEncrypterHalf, ServerDecrypterHalf}};", import_path));
+                }
+            }
 
             s.newline();
 
@@ -171,6 +178,7 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
 fn world_common_impls_read_write(
     s: &mut Writer,
     cd: &str,
+    dec_prefix: &str,
     size: &str,
     opcode_size: i32,
     error_ty: &str,
@@ -213,11 +221,12 @@ fn world_common_impls_read_write(
 
     s.wln(it.cfg());
     s.open_curly(
-        format!("pub {func}fn {prefix}read_encrypted<R: {read}>(r: &mut R, d: &mut DecrypterHalf) -> std::result::Result<Self, {error_ty}>",
+        format!("pub {func}fn {prefix}read_encrypted<R: {read}>(r: &mut R, d: &mut {dec_prefix}DecrypterHalf) -> std::result::Result<Self, {error_ty}>",
                 func = it.func(),
                 prefix = it.prefix(),
                 read = it.read(),
                 error_ty = error_ty,
+                dec_prefix = dec_prefix,
         )
     );
 
@@ -255,21 +264,48 @@ pub fn common_impls_world(
     v: &[&Container],
     ty: &str,
     container_type: ContainerType,
+    version: Version,
 ) {
-    let (cd, size, opcode_size) = match container_type {
-        ContainerType::CMsg(_) => ("client", "u32", 4),
-        ContainerType::SMsg(_) => ("server", "u16", 2),
+    let ((enc_prefix, dec_prefix), cd, size, opcode_size) = match container_type {
+        ContainerType::CMsg(_) => (
+            if version.as_major_world().wrath_or_greater() {
+                ("Client", "Server")
+            } else {
+                ("", "")
+            },
+            "client",
+            "u32",
+            4,
+        ),
+        ContainerType::SMsg(_) => (
+            if version.as_major_world().wrath_or_greater() {
+                ("Server", "Client")
+            } else {
+                ("", "")
+            },
+            "server",
+            "u16",
+            2,
+        ),
         _ => panic!(),
     };
     s.bodyn(format!("impl {t}OpcodeMessage", t = ty), |s| {
         world_common_impls_read_opcodes(s, v, size, EXPECTED_OPCODE_ERROR);
 
         for it in ImplType::types() {
-            world_common_impls_read_write(s, cd, size, opcode_size, EXPECTED_OPCODE_ERROR, it);
+            world_common_impls_read_write(
+                s,
+                cd,
+                dec_prefix,
+                size,
+                opcode_size,
+                EXPECTED_OPCODE_ERROR,
+                it,
+            );
         }
 
         for it in ImplType::types() {
-            world_inner(s, v, cd, it);
+            world_inner(s, v, cd, it, enc_prefix);
         }
 
         if any_container_is_pure_movement_info(v) {
@@ -290,12 +326,13 @@ pub fn common_impls_world(
     }
 }
 
-fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType) {
+fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType, enc_prefix: &str) {
     s.wln(it.cfg());
     s.bodyn(
         format!(
-            "pub {func}fn {prefix}write_encrypted_{cd}<W: {write}>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error>",
+            "pub {func}fn {prefix}write_encrypted_{cd}<W: {write}>(&self, w: &mut W, e: &mut {enc_prefix}EncrypterHalf) -> Result<(), std::io::Error>",
             cd = cd,
+            enc_prefix = enc_prefix,
             func = it.func(),
             write = it.write(),
             prefix = it.prefix(),

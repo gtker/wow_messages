@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::WorldResult;
-use crate::world::vanilla::ServerMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -46,7 +45,8 @@ impl crate::Message for SMSG_CHARACTER_LOGIN_FAILED {
     }
 
 }
-impl ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {}
 
 #[cfg(test)]
 mod test {

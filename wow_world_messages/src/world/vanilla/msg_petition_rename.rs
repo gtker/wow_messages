@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::{ClientMessage, ServerMessage};
 use std::io::{Write, Read};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -49,9 +48,11 @@ impl crate::Message for MSG_PETITION_RENAME {
     }
 
 }
-impl ClientMessage for MSG_PETITION_RENAME {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_PETITION_RENAME {}
 
-impl ServerMessage for MSG_PETITION_RENAME {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MSG_PETITION_RENAME {}
 
 impl MSG_PETITION_RENAME {
     pub(crate) fn size(&self) -> usize {
