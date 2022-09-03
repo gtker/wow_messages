@@ -14,7 +14,7 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
 } {
     description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
     comment = "This message is never encrypted.";
-    versions = "1.12";
+    versions = "1";
 }
 
 test CMSG_AUTH_SESSION {
@@ -65,7 +65,7 @@ test CMSG_AUTH_SESSION {
   0x70, 0xb8, 0x12, 0xf3, 0x3f, 0x26, 0x41, 0xfd,
   0xb5, 0x37, 0x90, 0x19, 0x66, 0x8f /* compressed_addon_info */
 ] {
-    versions = "1.12";
+    versions = "1";
 }
 
 cmsg CMSG_AUTH_SESSION = 0x1ED {
