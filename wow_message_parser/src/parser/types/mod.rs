@@ -35,6 +35,7 @@ pub enum FloatingPointType {
     F32(Endianness),
     F64(Endianness),
 }
+
 impl FloatingPointType {
     pub fn size(&self) -> u8 {
         match self {
@@ -237,6 +238,13 @@ pub struct Array {
 }
 
 impl Array {
+    pub fn new_unimplemented() -> Self {
+        Self {
+            inner: ArrayType::Integer(IntegerType::U8),
+            size: ArraySize::Endless,
+        }
+    }
+
     pub fn ty(&self) -> &ArrayType {
         &self.inner
     }

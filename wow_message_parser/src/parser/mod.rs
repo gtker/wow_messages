@@ -16,6 +16,7 @@ use crate::container::{
 };
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::{Definer, SelfValueDefinerField};
+use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::DefinerType;
 use crate::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
@@ -294,6 +295,14 @@ fn parse_struct(
 
     for member in container_members {
         let member = member.into_inner().next().unwrap();
+        if matches!(member.as_rule(), Rule::unimplemented) {
+            let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
+            let mut kvs = parse_object_key_values(&mut extra_kvs, tags);
+            kvs.push(Tag::new("unimplemented", "true"));
+            let v = vec![unimplemented_member()];
+
+            return Container::new(identifier, v, kvs, container_type, file_info);
+        }
         members.push(parse_struct_member(member));
     }
 
@@ -301,6 +310,15 @@ fn parse_struct(
     let kvs = parse_object_key_values(&mut extra_kvs, tags);
 
     Container::new(identifier, members, kvs, container_type, file_info)
+}
+
+fn unimplemented_member() -> StructMember {
+    StructMember::Definition(StructMemberDefinition::new(
+        "unimplemented",
+        Type::Array(Array::new_unimplemented()),
+        None,
+        Tags::new(),
+    ))
 }
 
 fn parse_struct_member(mut t: Pair<Rule>) -> StructMember {

@@ -5,12 +5,14 @@ use wow_srp::wrath_header::{ClientEncrypterHalf, ClientDecrypterHalf, ServerEncr
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
+use crate::world::wrath::CMSG_CHAR_CREATE;
 use crate::world::wrath::CMSG_CHAR_ENUM;
 use crate::world::wrath::CMSG_AUTH_SESSION;
 use crate::world::wrath::CMSG_REALM_SPLIT;
 
 #[derive(Debug)]
 pub enum ClientOpcodeMessage {
+    CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
@@ -19,6 +21,7 @@ pub enum ClientOpcodeMessage {
 impl ClientOpcodeMessage {
     fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
+            0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size)?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
@@ -92,6 +95,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_client<W: std::io::Write>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
@@ -101,6 +105,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
@@ -110,6 +115,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -119,6 +125,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -128,6 +135,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -137,12 +145,19 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
+}
+
+impl From<CMSG_CHAR_CREATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHAR_CREATE) -> Self {
+        Self::CMSG_CHAR_CREATE(c)
+    }
 }
 
 impl From<CMSG_CHAR_ENUM> for ClientOpcodeMessage {

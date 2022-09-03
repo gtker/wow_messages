@@ -64,11 +64,14 @@ optional_statement = { "optional" ~ identifier ~ "{" ~
                        container_members ~
                        "}" ~ object_key_values? }
 
+unimplemented = { "unimplemented" }
+
 container_members = { container_member* }
 container_member = { ( if_statement
                     | basic_container_item
                     | complex_container_item
-                    | optional_statement ) }
+                    | optional_statement
+                    | unimplemented) }
 
 container_keyword = { ("struct" | "clogin" | "slogin" | "smsg" | "cmsg" | "msg")}
 

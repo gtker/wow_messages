@@ -6,6 +6,8 @@ pub(crate) mod class;
 pub use class::*;
 pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
+pub(crate) mod cmsg_char_create;
+pub use cmsg_char_create::*;
 pub(crate) mod cmsg_char_enum;
 pub use cmsg_char_enum::*;
 pub(crate) mod cmsg_realm_split;

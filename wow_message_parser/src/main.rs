@@ -67,6 +67,7 @@ fn main() {
 
     load_files(Path::new("wow_message_parser/wowm/login"), &mut o);
     load_files(Path::new("wow_message_parser/wowm/world"), &mut o);
+    load_files(Path::new("wow_message_parser/wowm/unimplemented"), &mut o);
     //load_files(Path::new("wow_message_parser/wowm/test"), &mut o);
 
     let mut m = ModFiles::new();
@@ -140,10 +141,12 @@ fn main() {
             }
         }
 
-        match &e {
-            Object::Container(e) => object_docs.push(print_docs_for_container(e, &o)),
-            Object::Enum(e) => definer_docs.push(print_docs_for_enum(e)),
-            Object::Flag(e) => definer_docs.push(print_docs_for_flag(e)),
+        if !e.tags().unimplemented() {
+            match &e {
+                Object::Container(e) => object_docs.push(print_docs_for_container(e, &o)),
+                Object::Enum(e) => definer_docs.push(print_docs_for_enum(e)),
+                Object::Flag(e) => definer_docs.push(print_docs_for_flag(e)),
+            }
         }
     }
 

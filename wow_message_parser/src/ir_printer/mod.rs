@@ -114,6 +114,8 @@ pub struct IrTags {
     display: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     version: Option<IrVersions>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    unimplemented: Option<String>,
 }
 
 impl IrTags {
@@ -121,6 +123,12 @@ impl IrTags {
         let description = tags.description().map(|d| d.as_ir_string());
 
         let comment = tags.comment().map(|d| d.as_ir_string());
+
+        let unimplemented = if tags.contains("unimplemented") {
+            Some("true".to_string())
+        } else {
+            None
+        };
 
         Self {
             description,
@@ -137,6 +145,7 @@ impl IrTags {
             } else {
                 None
             },
+            unimplemented,
         }
     }
 }

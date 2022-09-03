@@ -348,6 +348,10 @@ impl Tags {
         }
     }
 
+    pub fn unimplemented(&self) -> bool {
+        self.contains("unimplemented")
+    }
+
     pub fn has_all_versions(&self, tags: &Tags) -> bool {
         // if self has all versions of tags
         if tags.contains(TEST_STR) && self.contains(TEST_STR) {
