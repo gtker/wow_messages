@@ -7,11 +7,13 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::wrath::CMSG_CHAR_ENUM;
 use crate::world::wrath::CMSG_AUTH_SESSION;
+use crate::world::wrath::CMSG_REALM_SPLIT;
 
 #[derive(Debug)]
 pub enum ClientOpcodeMessage {
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
+    CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
 }
 
 impl ClientOpcodeMessage {
@@ -19,6 +21,7 @@ impl ClientOpcodeMessage {
         match opcode {
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size)?)),
+            0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
         }
     }
@@ -91,6 +94,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -99,6 +103,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
+            Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -107,6 +112,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -115,6 +121,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -123,6 +130,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -131,6 +139,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -148,15 +157,23 @@ impl From<CMSG_AUTH_SESSION> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_REALM_SPLIT> for ClientOpcodeMessage {
+    fn from(c: CMSG_REALM_SPLIT) -> Self {
+        Self::CMSG_REALM_SPLIT(c)
+    }
+}
+
 use crate::world::wrath::SMSG_CHAR_ENUM;
 use crate::world::wrath::SMSG_AUTH_CHALLENGE;
 use crate::world::wrath::SMSG_AUTH_RESPONSE;
+use crate::world::wrath::SMSG_REALM_SPLIT;
 
 #[derive(Debug)]
 pub enum ServerOpcodeMessage {
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
+    SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
 }
 
 impl ServerOpcodeMessage {
@@ -165,6 +182,7 @@ impl ServerOpcodeMessage {
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
         }
     }
@@ -238,6 +256,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -247,6 +266,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -256,6 +276,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -265,6 +286,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -274,6 +296,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -283,6 +306,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -303,6 +327,12 @@ impl From<SMSG_AUTH_CHALLENGE> for ServerOpcodeMessage {
 impl From<SMSG_AUTH_RESPONSE> for ServerOpcodeMessage {
     fn from(c: SMSG_AUTH_RESPONSE) -> Self {
         Self::SMSG_AUTH_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_REALM_SPLIT> for ServerOpcodeMessage {
+    fn from(c: SMSG_REALM_SPLIT) -> Self {
+        Self::SMSG_REALM_SPLIT(c)
     }
 }
 

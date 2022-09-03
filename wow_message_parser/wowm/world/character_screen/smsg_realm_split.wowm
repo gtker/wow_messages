@@ -1,0 +1,17 @@
+#tag_all versions "3.3.5";
+
+enum RealmSplitState : u32 {
+    NORMAL = 0;
+    SPLIT = 1;
+    SPLIT_PENDING = 2;
+}
+
+smsg SMSG_REALM_SPLIT = 0x38B {
+    u32 unknown {
+        comment = "ArcEmu/TrinityCore/mangosthree send unknown from [CMSG_REALM_SPLIT] back.";
+    }
+    RealmSplitState state;
+    CString split_date {
+        comment = "Seems to be slash separated string, like '01/01/01'.";
+    }
+}

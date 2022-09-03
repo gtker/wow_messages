@@ -1,0 +1,7 @@
+#tag_all versions "3.3.5";
+
+cmsg CMSG_REALM_SPLIT = 0x38C {
+    u32 unknown1 {
+        comment = "ArcEmu/TriniyCore/mangosthree send back in [SMSG_REALM_SPLIT].";
+    }
+}

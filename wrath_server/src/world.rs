@@ -63,11 +63,27 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .unwrap();
 
     loop {
-        let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter())
-            .await
-            .unwrap();
+        let opcode =
+            ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter()).await;
+        let opcode = match opcode {
+            Ok(o) => o,
+            Err(e) => {
+                dbg!(e);
+                continue;
+            }
+        };
 
         match opcode {
+            ClientOpcodeMessage::CMSG_REALM_SPLIT(c) => {
+                SMSG_REALM_SPLIT {
+                    unknown: c.unknown1,
+                    state: RealmSplitState::Normal,
+                    split_date: "01/01/01".to_string(),
+                }
+                .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
+                .await
+                .unwrap();
+            }
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => {
                 SMSG_CHAR_ENUM {
                     characters: vec![Character {
@@ -81,13 +97,13 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         hair_style: 0,
                         hair_color: 0,
                         facial_hair: 0,
-                        level: 0,
+                        level: 1,
                         area: 1,
-                        map: 0,
+                        map: 1,
                         position: Vector3d {
-                            x: 0.0,
-                            y: 0.0,
-                            z: 0.0,
+                            x: 1.0,
+                            y: 1.0,
+                            z: 1.0,
                         },
                         guild_id: 0,
                         flags: Default::default(),
@@ -96,12 +112,13 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         pet_display_id: 0,
                         pet_level: 0,
                         pet_family: 0,
-                        equipment: [Default::default(); 22],
+                        equipment: [Default::default(); 23],
                     }],
                 }
                 .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
                 .await
                 .unwrap();
+                println!("SMSG_CHAR_ENUM");
             }
             e => {
                 dbg!(e);

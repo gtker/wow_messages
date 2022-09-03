@@ -26362,6 +26362,69 @@
       ]
     },
     {
+      "name": "RealmSplitState",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "NORMAL",
+          "value": {
+            "int": 0,
+            "original": "0"
+          },
+          "tags": {}
+        },
+        {
+          "name": "SPLIT",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {}
+        },
+        {
+          "name": "SPLIT_PENDING",
+          "value": {
+            "int": 2,
+            "original": "2"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u32",
+        "endianness": "little"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Patch": [
+                3,
+                3,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "SMSG_REALM_SPLIT",
+          "usage": "used_but_not_in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_realm_split.wowm",
+        "start_position": 3
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "RealmType",
       "definer_ty": "enum",
       "enumerators": [
@@ -59641,6 +59704,58 @@
       ]
     },
     {
+      "name": "CMSG_REALM_SPLIT",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 908
+      },
+      "constant": true,
+      "members": [
+        {
+          "Definition": {
+            "name": "unknown1",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "ArcEmu/TriniyCore/mangosthree send back in [SMSG_REALM_SPLIT]."
+            }
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Patch": [
+                3,
+                3,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_realm_split.wowm",
+        "start_position": 3
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "SimpleBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "CMSG_RECLAIM_CORPSE",
       "object_type": {
         "type": "cmsg",
@@ -66182,7 +66297,7 @@
                   "Complex": "CharacterGear"
                 },
                 "size": {
-                  "Fixed": 22
+                  "Fixed": 23
                 }
               }
             },
@@ -102245,6 +102360,87 @@
       "only_has_io_error": true,
       "features": [
         "SMsg",
+        "ComplexBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_REALM_SPLIT",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 907
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "unknown",
+            "member_type": {
+              "Integer": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "ArcEmu/TrinityCore/mangosthree send unknown from [CMSG_REALM_SPLIT] back."
+            }
+          }
+        },
+        {
+          "Definition": {
+            "name": "state",
+            "member_type": {
+              "Identifier": {
+                "s": "RealmSplitState",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "Definition": {
+            "name": "split_date",
+            "member_type": "CString",
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "Seems to be slash separated string, like '01/01/01'."
+            }
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "Patch": [
+                3,
+                3,
+                5
+              ]
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_realm_split.wowm",
+        "start_position": 9
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "SubObjects",
         "ComplexBuiltInTypes",
         "WorldVersion"
       ]
