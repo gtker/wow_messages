@@ -7,4 +7,5 @@ members = [
     "wow_world_messages",
     "wow_world_base",
     "wow_login_messages",
+    "wrath_server",
 ]
