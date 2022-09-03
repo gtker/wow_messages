@@ -66175,7 +66175,7 @@
         },
         {
           "Definition": {
-            "name": "gear",
+            "name": "equipment",
             "member_type": {
               "Array": {
                 "inner": {
@@ -66500,7 +66500,7 @@
         },
         {
           "Definition": {
-            "name": "pet_familiy",
+            "name": "pet_family",
             "member_type": {
               "Integer": {
                 "type": "u32",
@@ -82323,7 +82323,7 @@
         },
         {
           "Definition": {
-            "name": "realm_seed",
+            "name": "server_seed",
             "member_type": {
               "Integer": {
                 "type": "u32",

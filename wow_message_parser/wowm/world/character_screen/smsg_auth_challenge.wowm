@@ -23,7 +23,7 @@ smsg SMSG_AUTH_CHALLENGE = 0x1EC {
         comment = "TrinityCore/ArcEmu/mangostwo always set to 1.";
         comment = "TrinityCore/mangostwo: 1...31";
     }
-    u32 realm_seed;
+    u32 server_seed;
     u8[32] seed {
         comment = "Randomized values. Is not used at all by TrinityCore/mangostwo/ArcEmu.";
     }

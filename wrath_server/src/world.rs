@@ -25,7 +25,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
 
     SMSG_AUTH_CHALLENGE {
         unknown1: 1,
-        realm_seed: seed.seed(),
+        server_seed: seed.seed(),
         seed: [0_u8; 32],
     }
     .tokio_write_unencrypted_server(&mut stream)
@@ -96,7 +96,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         pet_display_id: 0,
                         pet_level: 0,
                         pet_family: 0,
-                        gear: [Default::default(); 22],
+                        equipment: [Default::default(); 22],
                     }],
                 }
                 .tokio_write_encrypted_server(&mut stream, encryption.encrypter())

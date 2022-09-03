@@ -30,7 +30,7 @@ use std::io::{Write, Read};
 ///     u32 pet_display_id;
 ///     u32 pet_level;
 ///     u32 pet_family;
-///     CharacterGear[22] gear;
+///     CharacterGear[22] equipment;
 /// }
 /// ```
 pub struct Character {
@@ -55,7 +55,7 @@ pub struct Character {
     pub pet_display_id: u32,
     pub pet_level: u32,
     pub pet_family: u32,
-    pub gear: [CharacterGear; 22],
+    pub equipment: [CharacterGear; 22],
 }
 
 impl Character {
@@ -125,8 +125,8 @@ impl Character {
         // pet_family: u32
         w.write_all(&self.pet_family.to_le_bytes())?;
 
-        // gear: CharacterGear[22]
-        for i in self.gear.iter() {
+        // equipment: CharacterGear[22]
+        for i in self.equipment.iter() {
             i.write_into_vec(w)?;
         }
 
@@ -200,9 +200,9 @@ impl Character {
         // pet_family: u32
         let pet_family = crate::util::read_u32_le(r)?;
 
-        // gear: CharacterGear[22]
-        let mut gear = [CharacterGear::default(); 22];
-        for i in gear.iter_mut() {
+        // equipment: CharacterGear[22]
+        let mut equipment = [CharacterGear::default(); 22];
+        for i in equipment.iter_mut() {
             *i = CharacterGear::read(r)?;
         }
 
@@ -228,7 +228,7 @@ impl Character {
             pet_display_id,
             pet_level,
             pet_family,
-            gear,
+            equipment,
         })
     }
 
@@ -257,7 +257,7 @@ impl Character {
         + 4 // pet_display_id: u32
         + 4 // pet_level: u32
         + 4 // pet_family: u32
-        + 22 * 9 // gear: CharacterGear[22]
+        + 22 * 9 // equipment: CharacterGear[22]
     }
 }
 

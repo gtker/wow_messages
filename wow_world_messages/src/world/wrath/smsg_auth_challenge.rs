@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_AUTH_CHALLENGE = 0x01EC {
 ///     u32 unknown1;
-///     u32 realm_seed;
+///     u32 server_seed;
 ///     u8[32] seed;
 /// }
 /// ```
@@ -16,7 +16,7 @@ pub struct SMSG_AUTH_CHALLENGE {
     /// TrinityCore/mangostwo: 1...31
     ///
     pub unknown1: u32,
-    pub realm_seed: u32,
+    pub server_seed: u32,
     /// Randomized values. Is not used at all by TrinityCore/mangostwo/ArcEmu.
     ///
     pub seed: [u8; 32],
@@ -33,8 +33,8 @@ impl crate::Message for SMSG_AUTH_CHALLENGE {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        // realm_seed: u32
-        w.write_all(&self.realm_seed.to_le_bytes())?;
+        // server_seed: u32
+        w.write_all(&self.server_seed.to_le_bytes())?;
 
         // seed: u8[32]
         for i in self.seed.iter() {
@@ -51,8 +51,8 @@ impl crate::Message for SMSG_AUTH_CHALLENGE {
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
 
-        // realm_seed: u32
-        let realm_seed = crate::util::read_u32_le(r)?;
+        // server_seed: u32
+        let server_seed = crate::util::read_u32_le(r)?;
 
         // seed: u8[32]
         let mut seed = [0_u8; 32];
@@ -60,7 +60,7 @@ impl crate::Message for SMSG_AUTH_CHALLENGE {
 
         Ok(Self {
             unknown1,
-            realm_seed,
+            server_seed,
             seed,
         })
     }

@@ -28,7 +28,7 @@ struct Character {
     u32 pet_display_id;
     u32 pet_level;
     u32 pet_family;
-    CharacterGear[22] gear;
+    CharacterGear[22] equipment;
 }
 ```
 ### Body
@@ -56,7 +56,7 @@ struct Character {
 | - | 4 / Little | u32 | pet_display_id |  |  |
 | - | 4 / Little | u32 | pet_level |  |  |
 | - | 4 / Little | u32 | pet_family |  |  |
-| - | ? / - | [CharacterGear](charactergear.md)[22] | gear |  |  |
+| - | ? / - | [CharacterGear](charactergear.md)[22] | equipment |  |  |
 
 # Character
 
@@ -86,7 +86,7 @@ struct Character {
     u8 first_login;
     u32 pet_display_id;
     u32 pet_level;
-    u32 pet_familiy;
+    u32 pet_family;
     CharacterGear[19] equipment;
     u32 first_bag_display_id = 0;
     u8 first_bag_inventory_id = 0;
@@ -115,7 +115,7 @@ struct Character {
 | - | 1 / - | u8 | first_login |  |  |
 | - | 4 / Little | u32 | pet_display_id |  |  |
 | - | 4 / Little | u32 | pet_level |  |  |
-| - | 4 / Little | u32 | pet_familiy |  |  |
+| - | 4 / Little | u32 | pet_family |  |  |
 | - | ? / - | [CharacterGear](charactergear.md)[19] | equipment |  |  |
 | - | 4 / Little | u32 | first_bag_display_id |  |  |
 | - | 1 / - | u8 | first_bag_inventory_id |  |  |
