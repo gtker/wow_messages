@@ -43,11 +43,12 @@ impl ClientOpcodeMessage {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header)?;
         let header = d.decrypt_client_header(header);
+        let opcode = header.opcode;
         let body_size = (header.size.saturating_sub(4)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf)?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "tokio")]
@@ -64,11 +65,12 @@ impl ClientOpcodeMessage {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
+        let opcode = header.opcode;
         let body_size = (header.size.saturating_sub(4)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "async-std")]
@@ -85,11 +87,12 @@ impl ClientOpcodeMessage {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
+        let opcode = header.opcode;
         let body_size = (header.size.saturating_sub(4)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "sync")]
@@ -204,8 +207,22 @@ impl ServerOpcodeMessage {
 
     #[cfg(feature = "sync")]
     pub fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
-        let size = (crate::util::read_u16_be(r)?.saturating_sub(2)) as u32;
-        let opcode = crate::util::read_u16_le(r)?;
+        let mut header = [0_u8; 4];
+        r.read_exact(&mut header)?;
+
+        let (size, opcode) = if header[0] & 0x80 != 0 {
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+
+            let mut last_byte = [0_u8; 1];
+            r.read_exact(&mut last_byte)?;
+            let opcode = u16::from_le_bytes([header[3], last_byte[0]]);
+            (size, opcode)
+        }
+        else {
+            let size = u16::from_be_bytes([header[0], header[1]]).saturating_sub(2).into();
+            let opcode = u16::from_le_bytes([header[2], header[3]]);
+            (size, opcode)
+        };
 
         let mut buf = vec![0; size as usize];
         r.read_exact(&mut buf)?;
@@ -215,18 +232,46 @@ impl ServerOpcodeMessage {
     pub fn read_encrypted<R: std::io::Read>(r: &mut R, d: &mut ClientDecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header)?;
-        let header = d.decrypt_server_header(header);
-        let body_size = (header.size.saturating_sub(2)) as u32;
+        d.decrypt(&mut header);
+
+        let (body_size, opcode) = if header[0] & 0x80 != 0 {
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+
+            let mut last_byte = [0_u8; 1];
+            r.read_exact(&mut last_byte)?;
+            d.decrypt(&mut last_byte);
+            let opcode = u16::from_le_bytes([header[3], last_byte[0]]);
+            (size, opcode)
+        }
+        else {
+            let size = u16::from_be_bytes([header[0], header[1]]).saturating_sub(2).into();
+            let opcode = u16::from_le_bytes([header[2], header[3]]);
+            (size, opcode)
+        };
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf)?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "tokio")]
     pub async fn tokio_read_unencrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
-        let size = (crate::util::tokio_read_u16_be(r).await?.saturating_sub(2)) as u32;
-        let opcode = crate::util::tokio_read_u16_le(r).await?;
+        let mut header = [0_u8; 4];
+        r.read_exact(&mut header).await?;
+
+        let (size, opcode) = if header[0] & 0x80 != 0 {
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+
+            let mut last_byte = [0_u8; 1];
+            r.read_exact(&mut last_byte).await?;
+            let opcode = u16::from_le_bytes([header[3], last_byte[0]]);
+            (size, opcode)
+        }
+        else {
+            let size = u16::from_be_bytes([header[0], header[1]]).saturating_sub(2).into();
+            let opcode = u16::from_le_bytes([header[2], header[3]]);
+            (size, opcode)
+        };
 
         let mut buf = vec![0; size as usize];
         r.read_exact(&mut buf).await?;
@@ -236,18 +281,46 @@ impl ServerOpcodeMessage {
     pub async fn tokio_read_encrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R, d: &mut ClientDecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
-        let header = d.decrypt_server_header(header);
-        let body_size = (header.size.saturating_sub(2)) as u32;
+        d.decrypt(&mut header);
+
+        let (body_size, opcode) = if header[0] & 0x80 != 0 {
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+
+            let mut last_byte = [0_u8; 1];
+            r.read_exact(&mut last_byte).await?;
+            d.decrypt(&mut last_byte);
+            let opcode = u16::from_le_bytes([header[3], last_byte[0]]);
+            (size, opcode)
+        }
+        else {
+            let size = u16::from_be_bytes([header[0], header[1]]).saturating_sub(2).into();
+            let opcode = u16::from_le_bytes([header[2], header[3]]);
+            (size, opcode)
+        };
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "async-std")]
     pub async fn astd_read_unencrypted<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
-        let size = (crate::util::astd_read_u16_be(r).await?.saturating_sub(2)) as u32;
-        let opcode = crate::util::astd_read_u16_le(r).await?;
+        let mut header = [0_u8; 4];
+        r.read_exact(&mut header).await?;
+
+        let (size, opcode) = if header[0] & 0x80 != 0 {
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+
+            let mut last_byte = [0_u8; 1];
+            r.read_exact(&mut last_byte).await?;
+            let opcode = u16::from_le_bytes([header[3], last_byte[0]]);
+            (size, opcode)
+        }
+        else {
+            let size = u16::from_be_bytes([header[0], header[1]]).saturating_sub(2).into();
+            let opcode = u16::from_le_bytes([header[2], header[3]]);
+            (size, opcode)
+        };
 
         let mut buf = vec![0; size as usize];
         r.read_exact(&mut buf).await?;
@@ -257,12 +330,26 @@ impl ServerOpcodeMessage {
     pub async fn astd_read_encrypted<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R, d: &mut ClientDecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
-        let header = d.decrypt_server_header(header);
-        let body_size = (header.size.saturating_sub(2)) as u32;
+        d.decrypt(&mut header);
+
+        let (body_size, opcode) = if header[0] & 0x80 != 0 {
+            let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+
+            let mut last_byte = [0_u8; 1];
+            r.read_exact(&mut last_byte).await?;
+            d.decrypt(&mut last_byte);
+            let opcode = u16::from_le_bytes([header[3], last_byte[0]]);
+            (size, opcode)
+        }
+        else {
+            let size = u16::from_be_bytes([header[0], header[1]]).saturating_sub(2).into();
+            let opcode = u16::from_le_bytes([header[2], header[3]]);
+            (size, opcode)
+        };
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "sync")]

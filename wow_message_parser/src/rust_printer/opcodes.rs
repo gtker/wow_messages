@@ -183,6 +183,8 @@ fn world_common_impls_read_write(
     opcode_size: i32,
     error_ty: &str,
     it: ImplType,
+    version: Version,
+    ty: &str,
 ) {
     s.wln(it.cfg());
     s.open_curly(format!(
@@ -192,21 +194,53 @@ fn world_common_impls_read_write(
         func = it.func(),
         error_ty = error_ty,
     ));
-    s.wln(format!(
-        "let size = ({path}::{prefix}read_u16_be(r){postfix}?.saturating_sub({opcode_size})) as u32;",
-        path = "crate::util",
-        opcode_size = opcode_size,
-        prefix = it.prefix(),
-        postfix = it.postfix()
-    ));
 
-    s.wln(format!(
-        "let opcode = {path}::{prefix}read_{size}_le(r){postfix}?;",
-        path = "crate::util",
-        size = size,
-        prefix = it.prefix(),
-        postfix = it.postfix()
-    ));
+    if version.as_major_world().wrath_or_greater() && ty == "Server" {
+        s.wln("let mut header = [0_u8; 4];");
+        s.wln(format!(
+            "r.read_exact(&mut header){postfix}?;",
+            postfix = it.postfix()
+        ));
+        s.newline();
+
+        s.body("let (size, opcode) = if header[0] & 0x80 != 0", |s| {
+            s.wln("let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);");
+            s.newline();
+
+            s.wln("let mut last_byte = [0_u8; 1];");
+            s.wln(format!(
+                "r.read_exact(&mut last_byte){postfix}?;",
+                postfix = it.postfix()
+            ));
+            s.wln("let opcode = u16::from_le_bytes([header[3], last_byte[0]]);");
+            s.wln("(size, opcode)");
+        });
+        s.body_closing_with(
+            "else",
+            |s| {
+                s.wln("let size = u16::from_be_bytes([header[0], header[1]]).saturating_sub(2).into();");
+                s.wln("let opcode = u16::from_le_bytes([header[2], header[3]]);");
+                s.wln("(size, opcode)");
+            },
+            ";",
+        );
+    } else {
+        s.wln(format!(
+            "let size = ({path}::{prefix}read_u16_be(r){postfix}?.saturating_sub({opcode_size})) as u32;",
+            path = "crate::util",
+            opcode_size = opcode_size,
+            prefix = it.prefix(),
+            postfix = it.postfix()
+        ));
+
+        s.wln(format!(
+            "let opcode = {path}::{prefix}read_{size}_le(r){postfix}?;",
+            path = "crate::util",
+            size = size,
+            prefix = it.prefix(),
+            postfix = it.postfix()
+        ));
+    }
     s.newline();
 
     s.wln("let mut buf = vec![0; size as usize];");
@@ -217,7 +251,7 @@ fn world_common_impls_read_write(
 
     s.wln("Self::read_opcodes(opcode, size, &buf)");
 
-    s.closing_curly();
+    s.closing_curly(); // read_unencrypted
 
     s.wln(it.cfg());
     s.open_curly(
@@ -230,22 +264,56 @@ fn world_common_impls_read_write(
         )
     );
 
-    s.wln(format!(
-        "let mut header = [0_u8; {header_size}];",
-        header_size = opcode_size + 2
-    ));
-    s.wln(format!(
-        "r.read_exact(&mut header){postfix}?;",
-        postfix = it.postfix()
-    ));
-    s.wln(format!(
-        "let header = d.decrypt_{cd}_header(header);",
-        cd = cd
-    ));
-    s.wln(format!(
-        "let body_size = (header.size.saturating_sub({opcode_size})) as u32;",
-        opcode_size = opcode_size
-    ));
+    if version.as_major_world().wrath_or_greater() && ty == "Server" {
+        s.wln("let mut header = [0_u8; 4];");
+        s.wln(format!(
+            "r.read_exact(&mut header){postfix}?;",
+            postfix = it.postfix()
+        ));
+        s.wln("d.decrypt(&mut header);");
+        s.newline();
+
+        s.body("let (body_size, opcode) = if header[0] & 0x80 != 0", |s| {
+            s.wln("let size = u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);");
+            s.newline();
+
+            s.wln("let mut last_byte = [0_u8; 1];");
+            s.wln(format!(
+                "r.read_exact(&mut last_byte){postfix}?;",
+                postfix = it.postfix()
+            ));
+            s.wln("d.decrypt(&mut last_byte);");
+            s.wln("let opcode = u16::from_le_bytes([header[3], last_byte[0]]);");
+            s.wln("(size, opcode)");
+        });
+        s.body_closing_with(
+            "else",
+            |s| {
+                s.wln("let size = u16::from_be_bytes([header[0], header[1]]).saturating_sub(2).into();");
+                s.wln("let opcode = u16::from_le_bytes([header[2], header[3]]);");
+                s.wln("(size, opcode)");
+            },
+            ";",
+        );
+    } else {
+        s.wln(format!(
+            "let mut header = [0_u8; {header_size}];",
+            header_size = opcode_size + 2
+        ));
+        s.wln(format!(
+            "r.read_exact(&mut header){postfix}?;",
+            postfix = it.postfix()
+        ));
+        s.wln(format!(
+            "let header = d.decrypt_{cd}_header(header);",
+            cd = cd
+        ));
+        s.wln("let opcode = header.opcode;");
+        s.wln(format!(
+            "let body_size = (header.size.saturating_sub({opcode_size})) as u32;",
+            opcode_size = opcode_size
+        ));
+    }
     s.newline();
 
     s.wln("let mut buf = vec![0; body_size as usize];");
@@ -254,7 +322,7 @@ fn world_common_impls_read_write(
         postfix = it.postfix()
     ));
 
-    s.wln("Self::read_opcodes(header.opcode, body_size, &buf)");
+    s.wln("Self::read_opcodes(opcode, body_size, &buf)");
 
     s.closing_curly_newline();
 }
@@ -301,6 +369,8 @@ pub fn common_impls_world(
                 opcode_size,
                 EXPECTED_OPCODE_ERROR,
                 it,
+                version,
+                ty,
             );
         }
 

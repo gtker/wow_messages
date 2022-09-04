@@ -938,11 +938,12 @@ impl ClientOpcodeMessage {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header)?;
         let header = d.decrypt_client_header(header);
+        let opcode = header.opcode;
         let body_size = (header.size.saturating_sub(4)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf)?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "tokio")]
@@ -959,11 +960,12 @@ impl ClientOpcodeMessage {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
+        let opcode = header.opcode;
         let body_size = (header.size.saturating_sub(4)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "async-std")]
@@ -980,11 +982,12 @@ impl ClientOpcodeMessage {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
+        let opcode = header.opcode;
         let body_size = (header.size.saturating_sub(4)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "sync")]
@@ -5715,11 +5718,12 @@ impl ServerOpcodeMessage {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header)?;
         let header = d.decrypt_server_header(header);
+        let opcode = header.opcode;
         let body_size = (header.size.saturating_sub(2)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf)?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "tokio")]
@@ -5736,11 +5740,12 @@ impl ServerOpcodeMessage {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
+        let opcode = header.opcode;
         let body_size = (header.size.saturating_sub(2)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "async-std")]
@@ -5757,11 +5762,12 @@ impl ServerOpcodeMessage {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_server_header(header);
+        let opcode = header.opcode;
         let body_size = (header.size.saturating_sub(2)) as u32;
 
         let mut buf = vec![0; body_size as usize];
         r.read_exact(&mut buf).await?;
-        Self::read_opcodes(header.opcode, body_size, &buf)
+        Self::read_opcodes(opcode, body_size, &buf)
     }
 
     #[cfg(feature = "sync")]
