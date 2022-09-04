@@ -5,10 +5,10 @@ All definers have:
 * `name`, the type name of the Definer.
 * `definer_ty`, either `flag` or `enum`.
 * `enumerators`, an array of Enumerators.
-* `self_value`, only for `Enums`, contains:
+* `self_value`, only for `Enums`, a specialized enumerator that should cover all remaining values that do not have a specific enumerator, contains:
     * `name`
     * `tags`
-* `integer_type`, contains:
+* `integer_type`, the underlying integer type representation, contains:
     * `type`, can be any of `u8`, `u16`, `u32` or `u64`.
     * `endianness`, either `little` or `big`. Not present when `type` is `u8`.
 * `tags`, a [Tags](tags.md) object.
@@ -25,22 +25,22 @@ A definer with two enumerators could look like:
     "name": "Os",
         "definer_ty": "enum",
         "enumerators": [
-        {
-            "name": "WINDOWS",
-            "value": {
-                "int": 5728622,
-                "original": "\"\\0Win\""
+            {
+                "name": "WINDOWS",
+                "value": {
+                    "int": 5728622,
+                    "original": "\"\\0Win\""
+                },
+                "tags": {}
             },
-            "tags": {}
-        },
-        {
-            "name": "OSX",
-            "value": {
-                "int": 5198680,
-                "original": "\"\\0OSX\""
-            },
-            "tags": {}
-        }
+            {
+                "name": "OSX",
+                "value": {
+                    "int": 5198680,
+                    "original": "\"\\0OSX\""
+                },
+                "tags": {}
+            }
         ],
         "self_value": {
             "name": "OTHER",
