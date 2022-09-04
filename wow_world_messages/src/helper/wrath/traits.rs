@@ -9,31 +9,56 @@ use tokio::io::AsyncWriteExt;
 use wow_srp::wrath_header::{ClientEncrypterHalf, ServerEncrypterHalf};
 
 const SERVER_OPCODE_LENGTH: u16 = 2;
-const SIZE_LENGTH: u16 = 2;
-const SERVER_HEADER_LENGTH: u16 = 4;
+const MINIMUM_SIZE_LENGTH: u32 = 2;
+const MAXIMUM_SIZE_LENGTH: u32 = 2;
+const MINIMUM_SERVER_HEADER_LENGTH: u16 = 4;
+const MAXIMUM_SERVER_HEADER_LENGTH: u16 = 5;
 const CLIENT_OPCODE_LENGTH: u16 = 4;
 const CLIENT_HEADER_LENGTH: u16 = 6;
 
-fn get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
+const LARGE_MESSAGE_THRESHOLD: u32 = 0x7FFF;
+
+fn get_unencrypted_server(opcode: u16, size: u32) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    let size = (size - SIZE_LENGTH).to_be_bytes();
-    let opcode = opcode.to_le_bytes();
+    if size > LARGE_MESSAGE_THRESHOLD {
+        let size = (size - MAXIMUM_SIZE_LENGTH).to_be_bytes();
+        let opcode = opcode.to_le_bytes();
 
-    let mut header = [0_u8; SERVER_HEADER_LENGTH as usize];
-    header[0] = size[0];
-    header[1] = size[1];
-    header[2] = opcode[0];
-    header[3] = opcode[1];
-    v.extend_from_slice(&header);
+        let mut header = [0_u8; MAXIMUM_SERVER_HEADER_LENGTH as usize];
+        header[0] = size[1] | 0x80;
+        header[1] = size[2];
+        header[2] = size[3];
+        header[3] = opcode[0];
+        header[4] = opcode[1];
+
+        v.extend_from_slice(&header);
+    } else {
+        let size = ((size - MINIMUM_SIZE_LENGTH) as u16).to_be_bytes();
+        let opcode = opcode.to_le_bytes();
+
+        let mut header = [0_u8; MINIMUM_SERVER_HEADER_LENGTH as usize];
+        header[0] = size[0];
+        header[1] = size[1];
+        header[2] = opcode[0];
+        header[3] = opcode[1];
+
+        v.extend_from_slice(&header);
+    }
 
     v
 }
 
-fn get_encrypted_server(opcode: u16, size: u16, e: &mut ServerEncrypterHalf) -> Vec<u8> {
+fn get_encrypted_server(opcode: u16, size: u32, e: &mut ServerEncrypterHalf) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    v.extend_from_slice(&e.encrypt_server_header(size - SIZE_LENGTH, opcode));
+    let size_length = if size > LARGE_MESSAGE_THRESHOLD {
+        MAXIMUM_SIZE_LENGTH
+    } else {
+        MINIMUM_SIZE_LENGTH
+    };
+
+    v.extend_from_slice(&e.encrypt_server_header(size - size_length, opcode));
 
     v
 }
@@ -42,8 +67,13 @@ pub trait ServerMessage: Message {
     /// Total size the message takes up including header.
     /// This is not the same value as what goes into the size field
     /// since the size field does not include the size of the size field.
-    fn server_size(&self) -> u16 {
-        self.size_without_header() as u16 + SERVER_HEADER_LENGTH
+    fn server_size(&self) -> u32 {
+        let size = self.size_without_header();
+        if size > LARGE_MESSAGE_THRESHOLD {
+            size + MAXIMUM_SERVER_HEADER_LENGTH as u32
+        } else {
+            size + MINIMUM_SERVER_HEADER_LENGTH as u32
+        }
     }
 
     #[cfg(feature = "sync")]
@@ -260,7 +290,7 @@ pub trait ClientMessage: Message {
 fn get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    let size = (size - SIZE_LENGTH).to_be_bytes();
+    let size = (size - MINIMUM_SIZE_LENGTH as u16).to_be_bytes();
     let opcode = (opcode as u32).to_le_bytes();
 
     let mut header = [0_u8; CLIENT_HEADER_LENGTH as usize];
@@ -279,7 +309,7 @@ fn get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
 fn get_encrypted_client(opcode: u16, size: u16, e: &mut ClientEncrypterHalf) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    v.extend_from_slice(&e.encrypt_client_header(size - SIZE_LENGTH, opcode as u32));
+    v.extend_from_slice(&e.encrypt_client_header(size - MINIMUM_SIZE_LENGTH as u16, opcode as u32));
 
     v
 }

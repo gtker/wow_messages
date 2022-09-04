@@ -11,12 +11,27 @@ const SERVER_OPCODE_LENGTH: u16 = 2;
 pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
     r: &mut R,
 ) -> Result<M, ExpectedOpcodeError> {
-    let size = crate::util::read_u16_be(r)?;
-    let opcode = crate::util::read_u16_le(r)?;
+    let mut header = [0_u8; 4];
+    r.read_exact(&mut header)?;
 
-    let mut buf = vec![0; (size - SERVER_OPCODE_LENGTH).into()];
-    r.read_exact(&mut buf);
+    let (size, opcode) = if header[0] & 0x80 != 0 {
+        let size =
+            u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
 
+        let mut last_byte = [0_u8; 1];
+        r.read_exact(&mut last_byte)?;
+        let opcode = u16::from_le_bytes([header[3], last_byte[0]]);
+        (size, opcode)
+    } else {
+        let size = u16::from_be_bytes([header[0], header[1]])
+            .saturating_sub(2)
+            .into();
+        let opcode = u16::from_le_bytes([header[2], header[3]]);
+        (size, opcode)
+    };
+
+    let mut buf = vec![0; size as usize];
+    r.read_exact(&mut buf)?;
     read_server_body(&mut buf.as_slice(), size, opcode as u32)
 }
 
@@ -25,17 +40,30 @@ pub fn expect_server_message_encryption<M: ServerMessage, R: std::io::Read>(
     r: &mut R,
     d: &mut ClientDecrypterHalf,
 ) -> Result<M, ExpectedOpcodeError> {
-    let mut buf = [0_u8; SERVER_HEADER_LENGTH as usize];
+    let mut header = [0_u8; 4];
+    r.read_exact(&mut header)?;
+    d.decrypt(&mut header);
+
+    let (body_size, opcode) = if header[0] & 0x80 != 0 {
+        let size =
+            u32::from_be_bytes([0x00, header[0] & 0x7F, header[1], header[2]]).saturating_sub(3);
+
+        let mut last_byte = [0_u8; 1];
+        r.read_exact(&mut last_byte)?;
+        d.decrypt(&mut last_byte);
+        let opcode = u16::from_le_bytes([header[3], last_byte[0]]);
+        (size, opcode)
+    } else {
+        let size = u16::from_be_bytes([header[0], header[1]])
+            .saturating_sub(2)
+            .into();
+        let opcode = u16::from_le_bytes([header[2], header[3]]);
+        (size, opcode)
+    };
+
+    let mut buf = vec![0; body_size as usize];
     r.read_exact(&mut buf)?;
-    let d = d.decrypt_server_header(buf);
-
-    let size = d.size;
-    let opcode = d.opcode;
-
-    let mut buf = vec![0; (size - SERVER_OPCODE_LENGTH).into()];
-    r.read_exact(&mut buf);
-
-    read_server_body(&mut buf.as_slice(), size, opcode as u32)
+    read_server_body(&mut buf.as_slice(), body_size, opcode as u32)
 }
 
 #[cfg(feature = "tokio")]
@@ -97,20 +125,17 @@ fn read_client_body<M: ClientMessage>(
 
 fn read_server_body<M: ServerMessage>(
     buf: &mut &[u8],
-    size: u16,
+    size: u32,
     opcode: u32,
 ) -> Result<M, ExpectedOpcodeError> {
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
-        let m = M::read_body(buf, (size - SERVER_OPCODE_LENGTH) as u32);
+        let m = M::read_body(buf, (size - SERVER_OPCODE_LENGTH as u32));
         match m {
             Ok(m) => Ok(m),
             Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedOpcodeError::Opcode {
-            opcode,
-            size: size.into(),
-        })
+        Err(ExpectedOpcodeError::Opcode { opcode, size })
     }
 }
