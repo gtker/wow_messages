@@ -16,7 +16,7 @@ All definers have:
     * `name`, name of the object.
     * `usage`, either `used_but_not_in_if` or `in_if`. 
 * `file_info`, a [FileInfo](fileinfo.md) object.
-* `features`, an array of [Features](features.md) required.
+* `features`, an array of strings with required [Features](../spec/features.md).
 
 A definer with two enumerators could look like:
 

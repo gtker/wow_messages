@@ -12,7 +12,7 @@ All containers have:
 * `tests`, an array of Container Tests.
 * `file_info`, a [FileInfo](fileinfo.md) object.
 * `only_has_io_error`, `true` if the contain does not contain an enum (which can error by having a non-existing enumerator value), a String or CString (which can contain invalid UTF-8 values) or a struct that has either, otherwise `false`.
-* `features`, an array of [Features](features.md) required.
+* `features`, an array of strings with required [Features](../spec/features.md).
 
 ## Member
 

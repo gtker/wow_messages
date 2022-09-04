@@ -18,7 +18,6 @@
     - [Containers](./ir/containers.md)
     - [Tags](./ir/tags.md)
     - [FileInfo](./ir/fileinfo.md)
-    - [Features](./ir/features.md)
 
 ------------
 
