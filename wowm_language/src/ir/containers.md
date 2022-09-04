@@ -96,8 +96,30 @@ The `identifier` type contains a `content` with:
 
 ### If Statement
 
+The if statement represents conditional presence of definitions.
+They contain:
+
+* `conditional`, contains:
+    * `variable_name`, the variable used in the if statement.
+    * `equations`, an array of values where one must be true in order to have the container contain the `members`. They have the fields
+        * `type`, `equals` if the variable must be exactly this value, `not_equals` if the value must not equal this value, `bitwise_and` if the variable bitwise and should not equal zero.
+        * `content`, always contains a `value` that contains the enumerator inside the variable name to check against.
+* `members`, contains struct members that are present if the conditional is true.
+* `else_ifs_statements`, if statements that are evaluated if the conditional is not true.
+* `else_members`, contains struct members that are present if the conditinal is not true.
+* `original_ty`, contains the original type of the variable being used in the if statement. It has the same fields as [Type Content](#type-content).
+
 ### Optional
 
+The optional statement represents a block of members that do not necessarily have to be present in every version of the message. In order to determine if optional is present, look at the size of any present members, and the reported size from the header.
 
+The optional statement consists of:
+
+* `name`, an identifier for the optional block.
+* `members`, the [Members](#member) in the block.
+* `tags`, a [Tags](tags.md) object.
 
 ## Test
+
+
+

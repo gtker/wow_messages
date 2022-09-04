@@ -32440,12 +32440,14 @@
               "variable_name": "aura_type",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "PERIODIC_DAMAGE"
                   }
                 },
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "PERIODIC_DAMAGE_PERCENT"
                   }
                 }
@@ -32522,18 +32524,20 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "aura_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "PERIODIC_HEAL"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "OBS_MOD_HEALTH"
                       }
                     }
@@ -32558,9 +32562,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "AuraType"
@@ -32572,12 +32576,14 @@
                   "variable_name": "aura_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "OBS_MOD_MANA"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "PERIODIC_ENERGIZE"
                       }
                     }
@@ -32621,9 +32627,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "AuraType"
@@ -32635,7 +32641,8 @@
                   "variable_name": "aura_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "PERIODIC_MANA_LEECH"
                       }
                     }
@@ -32696,9 +32703,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "AuraType"
@@ -32706,8 +32713,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "AuraType"
@@ -32885,7 +32892,7 @@
                   }
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_extra_fields"
                 }
               }
@@ -33479,7 +33486,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "SUCCESS"
                   }
                 }
@@ -33500,7 +33508,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 32
                       }
                     }
@@ -33543,7 +33551,7 @@
                         }
                       },
                       "size": {
-                        "type": "Variable",
+                        "type": "variable",
                         "content": "generator_length"
                       }
                     }
@@ -33586,7 +33594,7 @@
                         }
                       },
                       "size": {
-                        "type": "Variable",
+                        "type": "variable",
                         "content": "large_safe_prime_length"
                       }
                     }
@@ -33611,7 +33619,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 32
                       }
                     }
@@ -33636,7 +33644,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 16
                       }
                     }
@@ -33650,9 +33658,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "LoginResult"
@@ -33726,7 +33734,7 @@
                     70
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -33741,7 +33749,7 @@
                     7
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "generator_length"
                   }
                 }
@@ -33787,7 +33795,7 @@
                     137
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "large_safe_prime_length"
                   }
                 }
@@ -33833,7 +33841,7 @@
                     135
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -33863,7 +33871,7 @@
                     241
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -34078,7 +34086,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "SUCCESS"
                   }
                 }
@@ -34099,7 +34108,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 32
                       }
                     }
@@ -34142,7 +34151,7 @@
                         }
                       },
                       "size": {
-                        "type": "Variable",
+                        "type": "variable",
                         "content": "generator_length"
                       }
                     }
@@ -34185,7 +34194,7 @@
                         }
                       },
                       "size": {
-                        "type": "Variable",
+                        "type": "variable",
                         "content": "large_safe_prime_length"
                       }
                     }
@@ -34210,7 +34219,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 32
                       }
                     }
@@ -34235,7 +34244,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 16
                       }
                     }
@@ -34271,7 +34280,8 @@
                     "variable_name": "security_flag",
                     "equations": [
                       {
-                        "Equals": {
+                        "type": "equals",
+                        "content": {
                           "value": "PIN"
                         }
                       }
@@ -34309,7 +34319,7 @@
                               }
                             },
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 16
                             }
                           }
@@ -34321,9 +34331,9 @@
                       }
                     }
                   ],
-                  "else_ifs": [],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "SecurityFlag"
@@ -34332,9 +34342,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "LoginResult"
@@ -34408,7 +34418,7 @@
                     70
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -34423,7 +34433,7 @@
                     7
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "generator_length"
                   }
                 }
@@ -34469,7 +34479,7 @@
                     137
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "large_safe_prime_length"
                   }
                 }
@@ -34515,7 +34525,7 @@
                     135
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -34545,7 +34555,7 @@
                     241
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -34595,7 +34605,7 @@
                     15
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -34812,7 +34822,7 @@
                     70
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -34827,7 +34837,7 @@
                     7
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "generator_length"
                   }
                 }
@@ -34873,7 +34883,7 @@
                     137
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "large_safe_prime_length"
                   }
                 }
@@ -34919,7 +34929,7 @@
                     135
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -34949,7 +34959,7 @@
                     241
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -35172,7 +35182,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "SUCCESS"
                   }
                 }
@@ -35193,7 +35204,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 32
                       }
                     }
@@ -35236,7 +35247,7 @@
                         }
                       },
                       "size": {
-                        "type": "Variable",
+                        "type": "variable",
                         "content": "generator_length"
                       }
                     }
@@ -35279,7 +35290,7 @@
                         }
                       },
                       "size": {
-                        "type": "Variable",
+                        "type": "variable",
                         "content": "large_safe_prime_length"
                       }
                     }
@@ -35304,7 +35315,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 32
                       }
                     }
@@ -35329,7 +35340,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 16
                       }
                     }
@@ -35365,7 +35376,8 @@
                     "variable_name": "security_flag",
                     "equations": [
                       {
-                        "BitwiseAnd": {
+                        "type": "bitwise_and",
+                        "content": {
                           "value": "PIN"
                         }
                       }
@@ -35403,7 +35415,7 @@
                               }
                             },
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 16
                             }
                           }
@@ -35415,9 +35427,9 @@
                       }
                     }
                   ],
-                  "else_ifs": [],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "SecurityFlag"
@@ -35432,7 +35444,8 @@
                     "variable_name": "security_flag",
                     "equations": [
                       {
-                        "BitwiseAnd": {
+                        "type": "bitwise_and",
+                        "content": {
                           "value": "UNKNOWN0"
                         }
                       }
@@ -35521,9 +35534,9 @@
                       }
                     }
                   ],
-                  "else_ifs": [],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "SecurityFlag"
@@ -35538,7 +35551,8 @@
                     "variable_name": "security_flag",
                     "equations": [
                       {
-                        "BitwiseAnd": {
+                        "type": "bitwise_and",
+                        "content": {
                           "value": "AUTHENTICATOR"
                         }
                       }
@@ -35562,9 +35576,9 @@
                       }
                     }
                   ],
-                  "else_ifs": [],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "SecurityFlag"
@@ -35573,9 +35587,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "LoginResult"
@@ -35648,7 +35662,7 @@
                     70
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -35663,7 +35677,7 @@
                     7
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "generator_length"
                   }
                 }
@@ -35709,7 +35723,7 @@
                     137
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "large_safe_prime_length"
                   }
                 }
@@ -35755,7 +35769,7 @@
                     135
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -35785,7 +35799,7 @@
                     241
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -35991,7 +36005,7 @@
                     70
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -36006,7 +36020,7 @@
                     7
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "generator_length"
                   }
                 }
@@ -36052,7 +36066,7 @@
                     137
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "large_safe_prime_length"
                   }
                 }
@@ -36098,7 +36112,7 @@
                     135
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -36128,7 +36142,7 @@
                     241
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -36177,7 +36191,7 @@
                     15
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -36394,7 +36408,7 @@
                     70
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -36409,7 +36423,7 @@
                     7
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "generator_length"
                   }
                 }
@@ -36455,7 +36469,7 @@
                     137
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "large_safe_prime_length"
                   }
                 }
@@ -36501,7 +36515,7 @@
                     135
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -36531,7 +36545,7 @@
                     241
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -36748,7 +36762,7 @@
                     70
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -36763,7 +36777,7 @@
                     7
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "generator_length"
                   }
                 }
@@ -36809,7 +36823,7 @@
                     137
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "large_safe_prime_length"
                   }
                 }
@@ -36855,7 +36869,7 @@
                     135
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -36885,7 +36899,7 @@
                     241
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -37198,7 +37212,7 @@
                     70
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -37213,7 +37227,7 @@
                     7
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "generator_length"
                   }
                 }
@@ -37259,7 +37273,7 @@
                     137
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "large_safe_prime_length"
                   }
                 }
@@ -37305,7 +37319,7 @@
                     135
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -37335,7 +37349,7 @@
                     241
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -37639,7 +37653,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 32
                 }
               }
@@ -37664,7 +37678,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -37689,7 +37703,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -37728,7 +37742,7 @@
                   "content": "TelemetryKey"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "number_of_telemetry_keys"
                 }
               }
@@ -37795,7 +37809,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -37829,7 +37843,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -37863,7 +37877,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -37908,7 +37922,7 @@
                               4
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 4
                             }
                           }
@@ -37942,7 +37956,7 @@
                               19
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 20
                             }
                           }
@@ -37982,7 +37996,7 @@
                               3
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 4
                             }
                           }
@@ -38016,7 +38030,7 @@
                               20
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 20
                             }
                           }
@@ -38224,7 +38238,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -38258,7 +38272,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -38292,7 +38306,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -38337,7 +38351,7 @@
                               4
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 4
                             }
                           }
@@ -38371,7 +38385,7 @@
                               19
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 20
                             }
                           }
@@ -38549,7 +38563,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -38583,7 +38597,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -38617,7 +38631,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -38630,7 +38644,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "number_of_telemetry_keys"
                   }
                 }
@@ -38768,7 +38782,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 32
                 }
               }
@@ -38793,7 +38807,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -38818,7 +38832,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -38857,7 +38871,7 @@
                   "content": "TelemetryKey"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "number_of_telemetry_keys"
                 }
               }
@@ -38891,7 +38905,8 @@
               "variable_name": "security_flag",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "PIN"
                   }
                 }
@@ -38912,7 +38927,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 16
                       }
                     }
@@ -38937,7 +38952,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 20
                       }
                     }
@@ -38949,9 +38964,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SecurityFlag"
@@ -39015,7 +39030,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -39049,7 +39064,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -39083,7 +39098,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -39128,7 +39143,7 @@
                               4
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 4
                             }
                           }
@@ -39162,7 +39177,7 @@
                               19
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 20
                             }
                           }
@@ -39202,7 +39217,7 @@
                               3
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 4
                             }
                           }
@@ -39236,7 +39251,7 @@
                               20
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 20
                             }
                           }
@@ -39455,7 +39470,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -39489,7 +39504,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -39523,7 +39538,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -39568,7 +39583,7 @@
                               4
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 4
                             }
                           }
@@ -39602,7 +39617,7 @@
                               19
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 20
                             }
                           }
@@ -39791,7 +39806,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -39825,7 +39840,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -39859,7 +39874,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -39872,7 +39887,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "number_of_telemetry_keys"
                   }
                 }
@@ -40025,7 +40040,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -40059,7 +40074,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -40093,7 +40108,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -40106,7 +40121,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "number_of_telemetry_keys"
                   }
                 }
@@ -40146,7 +40161,7 @@
                     15
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -40180,7 +40195,7 @@
                     19
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -40357,7 +40372,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 32
                 }
               }
@@ -40382,7 +40397,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -40407,7 +40422,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -40446,7 +40461,7 @@
                   "content": "TelemetryKey"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "number_of_telemetry_keys"
                 }
               }
@@ -40480,7 +40495,8 @@
               "variable_name": "security_flag",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "PIN"
                   }
                 }
@@ -40501,7 +40517,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 16
                       }
                     }
@@ -40526,7 +40542,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 20
                       }
                     }
@@ -40538,9 +40554,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SecurityFlag"
@@ -40555,7 +40571,8 @@
               "variable_name": "security_flag",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "UNKNOWN0"
                   }
                 }
@@ -40644,9 +40661,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SecurityFlag"
@@ -40661,7 +40678,8 @@
               "variable_name": "security_flag",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "AUTHENTICATOR"
                   }
                 }
@@ -40685,9 +40703,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SecurityFlag"
@@ -40751,7 +40769,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -40785,7 +40803,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -40819,7 +40837,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -40864,7 +40882,7 @@
                               4
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 4
                             }
                           }
@@ -40898,7 +40916,7 @@
                               19
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 20
                             }
                           }
@@ -40938,7 +40956,7 @@
                               3
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 4
                             }
                           }
@@ -40972,7 +40990,7 @@
                               20
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 20
                             }
                           }
@@ -41190,7 +41208,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -41224,7 +41242,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -41258,7 +41276,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -41303,7 +41321,7 @@
                               4
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 4
                             }
                           }
@@ -41337,7 +41355,7 @@
                               19
                             ],
                             "size": {
-                              "type": "Fixed",
+                              "type": "fixed",
                               "content": 20
                             }
                           }
@@ -41525,7 +41543,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -41559,7 +41577,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -41593,7 +41611,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -41606,7 +41624,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "number_of_telemetry_keys"
                   }
                 }
@@ -41758,7 +41776,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -41792,7 +41810,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -41826,7 +41844,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -41839,7 +41857,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "number_of_telemetry_keys"
                   }
                 }
@@ -41878,7 +41896,7 @@
                     15
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -41912,7 +41930,7 @@
                     19
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -42091,7 +42109,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -42125,7 +42143,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -42159,7 +42177,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -42172,7 +42190,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "number_of_telemetry_keys"
                   }
                 }
@@ -42212,7 +42230,7 @@
                     15
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -42246,7 +42264,7 @@
                     19
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -42487,7 +42505,7 @@
                     8
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -42521,7 +42539,7 @@
                     62
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -42555,7 +42573,7 @@
                     208
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -42568,7 +42586,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "number_of_telemetry_keys"
                   }
                 }
@@ -42609,7 +42627,7 @@
                     15
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -42643,7 +42661,7 @@
                     19
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -42902,7 +42920,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "SUCCESS"
                   }
                 }
@@ -42923,7 +42942,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 20
                       }
                     }
@@ -42952,9 +42971,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "LoginResult"
@@ -43020,7 +43039,7 @@
                     19
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -43133,7 +43152,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "SUCCESS"
                   }
                 }
@@ -43154,7 +43174,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 20
                       }
                     }
@@ -43216,8 +43236,8 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [
+            "else_if_statements": [],
+            "else_members": [
               {
                 "type": "definition",
                 "content": {
@@ -43239,7 +43259,7 @@
                 }
               }
             ],
-            "original_ty": {
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "LoginResult"
@@ -44017,7 +44037,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "SUCCESS"
                   }
                 }
@@ -44038,7 +44059,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 16
                       }
                     }
@@ -44063,7 +44084,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 16
                       }
                     }
@@ -44075,9 +44096,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "LoginResult"
@@ -44135,7 +44156,7 @@
                     15
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -44165,7 +44186,7 @@
                     240
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -44305,7 +44326,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "SUCCESS"
                   }
                 }
@@ -44326,7 +44348,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 16
                       }
                     }
@@ -44351,7 +44373,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 16
                       }
                     }
@@ -44363,9 +44385,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "LoginResult"
@@ -44423,7 +44445,7 @@
                     15
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -44453,7 +44475,7 @@
                     240
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -44584,7 +44606,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 16
                 }
               }
@@ -44609,7 +44631,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -44634,7 +44656,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -44708,7 +44730,7 @@
                     153
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 16
                   }
                 }
@@ -44742,7 +44764,7 @@
                     163
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -44776,7 +44798,7 @@
                     245
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -45347,7 +45369,7 @@
                   "content": "Realm"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "number_of_realms"
                 }
               }
@@ -45765,7 +45787,7 @@
                   "content": "Realm"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "number_of_realms"
                 }
               }
@@ -46240,7 +46262,7 @@
                   }
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "compressed_data_length"
                 }
               }
@@ -46305,7 +46327,7 @@
                     255
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "compressed_data_length"
                   }
                 }
@@ -46501,7 +46523,7 @@
                   }
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "size"
                 }
               }
@@ -46546,7 +46568,7 @@
                     255
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "size"
                   }
                 }
@@ -46595,7 +46617,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "size"
                   }
                 }
@@ -46872,7 +46894,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 2
                 }
               }
@@ -47433,7 +47455,7 @@
                   }
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_outbidded_items"
                 }
               }
@@ -48096,7 +48118,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -48138,7 +48160,7 @@
                   }
                 },
                 "size": {
-                  "type": "Endless"
+                  "type": "endless"
                 }
               }
             },
@@ -48229,7 +48251,7 @@
                     198
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 20
                   }
                 }
@@ -48383,7 +48405,7 @@
                     143
                   ],
                   "size": {
-                    "type": "Endless"
+                    "type": "endless"
                   }
                 }
               },
@@ -48770,7 +48792,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }
@@ -48795,7 +48817,7 @@
                   }
                 },
                 "size": {
-                  "type": "Endless"
+                  "type": "endless"
                 }
               }
             },
@@ -51655,7 +51677,7 @@
                   }
                 },
                 "size": {
-                  "type": "Endless"
+                  "type": "endless"
                 }
               }
             },
@@ -53788,7 +53810,7 @@
                   "content": "GmSurveyQuestion"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 10
                 }
               }
@@ -53934,7 +53956,8 @@
               "variable_name": "category",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "BEHAVIOR_HARASSMENT"
                   }
                 }
@@ -53989,7 +54012,7 @@
                         }
                       },
                       "size": {
-                        "type": "Endless"
+                        "type": "endless"
                       }
                     }
                   },
@@ -54000,9 +54023,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GmTicketType"
@@ -57438,7 +57461,8 @@
               "variable_name": "chat_type",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "WHISPER"
                   }
                 }
@@ -57459,13 +57483,14 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "chat_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "CHANNEL"
                       }
                     }
@@ -57486,9 +57511,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "ChatType",
@@ -57500,8 +57525,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "ChatType",
@@ -64260,7 +64285,7 @@
                   }
                 },
                 "size": {
-                  "type": "Endless"
+                  "type": "endless"
                 }
               }
             },
@@ -64315,7 +64340,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Endless"
+                    "type": "endless"
                   }
                 }
               },
@@ -65558,7 +65583,7 @@
                     36
                   ],
                   "size": {
-                    "type": "Endless"
+                    "type": "endless"
                   }
                 }
               },
@@ -67018,7 +67043,7 @@
                   }
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_zones"
                 }
               }
@@ -67057,7 +67082,7 @@
                   "type": "cstring"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_strings"
                 }
               }
@@ -68094,7 +68119,7 @@
                   "content": "CharacterGear"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 19
                 }
               }
@@ -68532,7 +68557,7 @@
                   "content": "CharacterGear"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 23
                 }
               }
@@ -69094,7 +69119,8 @@
               "variable_name": "status",
               "equations": [
                 {
-                  "NotEquals": {
+                  "type": "not_equals",
+                  "content": {
                     "value": "OFFLINE"
                   }
                 }
@@ -69155,9 +69181,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "FriendStatus"
@@ -70273,7 +70299,7 @@
                   "content": "BattlegroundPlayerPosition"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_flag_carriers"
                 }
               }
@@ -70378,7 +70404,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "FOUND"
                   }
                 }
@@ -70434,9 +70461,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "CorpseQueryResult"
@@ -70942,7 +70969,7 @@
                   "content": "StabledPet"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_pets"
                 }
               }
@@ -78754,7 +78781,8 @@
               "variable_name": "status",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "ENDED"
                   }
                 }
@@ -78778,9 +78806,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "BattlegroundEndStatus"
@@ -78819,7 +78847,7 @@
                   "content": "BattlegroundPlayer"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_players"
                 }
               }
@@ -79177,7 +79205,8 @@
               "variable_name": "index",
               "equations": [
                 {
-                  "NotEquals": {
+                  "type": "not_equals",
+                  "content": {
                     "value": "REQUEST_ICONS"
                   }
                 }
@@ -79198,9 +79227,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "RaidTargetIndex"
@@ -79267,7 +79296,8 @@
               "variable_name": "update_type",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "FULL"
                   }
                 }
@@ -79286,7 +79316,7 @@
                         "content": "RaidTargetUpdate"
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 8
                       }
                     }
@@ -79298,13 +79328,14 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "update_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "PARTIAL"
                       }
                     }
@@ -79328,9 +79359,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "RaidTargetUpdateType"
@@ -79338,8 +79369,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "RaidTargetUpdateType"
@@ -79934,7 +79965,8 @@
               "variable_name": "message_type",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "NORMAL"
                   }
                 }
@@ -79955,18 +79987,20 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "message_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "CREATURE"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "GAMEOBJECT"
                       }
                     }
@@ -79991,9 +80025,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "MailType"
@@ -80005,7 +80039,8 @@
                   "variable_name": "message_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "AUCTION"
                       }
                     }
@@ -80030,9 +80065,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "MailType"
@@ -80040,8 +80075,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "MailType"
@@ -80401,7 +80436,8 @@
               "variable_name": "update_flag",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "LIVING"
                   }
                 }
@@ -80481,7 +80517,8 @@
                     "variable_name": "flags",
                     "equations": [
                       {
-                        "BitwiseAnd": {
+                        "type": "bitwise_and",
+                        "content": {
                           "value": "ON_TRANSPORT"
                         }
                       }
@@ -80505,9 +80542,9 @@
                       }
                     }
                   ],
-                  "else_ifs": [],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "MovementFlags"
@@ -80522,7 +80559,8 @@
                     "variable_name": "flags",
                     "equations": [
                       {
-                        "BitwiseAnd": {
+                        "type": "bitwise_and",
+                        "content": {
                           "value": "SWIMMING"
                         }
                       }
@@ -80547,9 +80585,9 @@
                       }
                     }
                   ],
-                  "else_ifs": [],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "MovementFlags"
@@ -80581,7 +80619,8 @@
                     "variable_name": "flags",
                     "equations": [
                       {
-                        "BitwiseAnd": {
+                        "type": "bitwise_and",
+                        "content": {
                           "value": "JUMPING"
                         }
                       }
@@ -80657,9 +80696,9 @@
                       }
                     }
                   ],
-                  "else_ifs": [],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "MovementFlags"
@@ -80674,7 +80713,8 @@
                     "variable_name": "flags",
                     "equations": [
                       {
-                        "BitwiseAnd": {
+                        "type": "bitwise_and",
+                        "content": {
                           "value": "SPLINE_ELEVATION"
                         }
                       }
@@ -80699,9 +80739,9 @@
                       }
                     }
                   ],
-                  "else_ifs": [],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "MovementFlags"
@@ -80818,7 +80858,8 @@
                     "variable_name": "flags",
                     "equations": [
                       {
-                        "BitwiseAnd": {
+                        "type": "bitwise_and",
+                        "content": {
                           "value": "SPLINE_ENABLED"
                         }
                       }
@@ -80848,7 +80889,8 @@
                           "variable_name": "spline_flags",
                           "equations": [
                             {
-                              "BitwiseAnd": {
+                              "type": "bitwise_and",
+                              "content": {
                                 "value": "FINAL_ANGLE"
                               }
                             }
@@ -80873,13 +80915,14 @@
                             }
                           }
                         ],
-                        "else_ifs": [
+                        "else_if_statements": [
                           {
                             "conditional": {
                               "variable_name": "spline_flags",
                               "equations": [
                                 {
-                                  "BitwiseAnd": {
+                                  "type": "bitwise_and",
+                                  "content": {
                                     "value": "FINAL_TARGET"
                                   }
                                 }
@@ -80904,9 +80947,9 @@
                                 }
                               }
                             ],
-                            "else_ifs": [],
-                            "else_statement_members": [],
-                            "original_ty": {
+                            "else_if_statements": [],
+                            "else_members": [],
+                            "original_type": {
                               "type": "identifier",
                               "content": {
                                 "type_name": "SplineFlag"
@@ -80918,7 +80961,8 @@
                               "variable_name": "spline_flags",
                               "equations": [
                                 {
-                                  "BitwiseAnd": {
+                                  "type": "bitwise_and",
+                                  "content": {
                                     "value": "FINAL_POINT"
                                   }
                                 }
@@ -80942,9 +80986,9 @@
                                 }
                               }
                             ],
-                            "else_ifs": [],
-                            "else_statement_members": [],
-                            "original_ty": {
+                            "else_if_statements": [],
+                            "else_members": [],
+                            "original_type": {
                               "type": "identifier",
                               "content": {
                                 "type_name": "SplineFlag"
@@ -80952,8 +80996,8 @@
                             }
                           }
                         ],
-                        "else_statement_members": [],
-                        "original_ty": {
+                        "else_members": [],
+                        "original_type": {
                           "type": "identifier",
                           "content": {
                             "type_name": "SplineFlag"
@@ -81041,7 +81085,7 @@
                               "content": "Vector3d"
                             },
                             "size": {
-                              "type": "Variable",
+                              "type": "variable",
                               "content": "amount_of_nodes"
                             }
                           }
@@ -81069,9 +81113,9 @@
                       }
                     }
                   ],
-                  "else_ifs": [],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "MovementFlags"
@@ -81080,13 +81124,14 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "update_flag",
                   "equations": [
                     {
-                      "BitwiseAnd": {
+                      "type": "bitwise_and",
+                      "content": {
                         "value": "HAS_POSITION"
                       }
                     }
@@ -81127,9 +81172,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "UpdateFlag"
@@ -81137,8 +81182,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "UpdateFlag"
@@ -81153,7 +81198,8 @@
               "variable_name": "update_flag",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "HIGH_GUID"
                   }
                 }
@@ -81180,9 +81226,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "UpdateFlag"
@@ -81197,7 +81243,8 @@
               "variable_name": "update_flag",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "ALL"
                   }
                 }
@@ -81224,9 +81271,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "UpdateFlag"
@@ -81241,7 +81288,8 @@
               "variable_name": "update_flag",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "MELEE_ATTACKING"
                   }
                 }
@@ -81262,9 +81310,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "UpdateFlag"
@@ -81279,7 +81327,8 @@
               "variable_name": "update_flag",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "TRANSPORT"
                   }
                 }
@@ -81304,9 +81353,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "UpdateFlag"
@@ -81426,7 +81475,8 @@
               "variable_name": "flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "ON_TRANSPORT"
                   }
                 }
@@ -81450,9 +81500,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "MovementFlags"
@@ -81467,7 +81517,8 @@
               "variable_name": "flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "SWIMMING"
                   }
                 }
@@ -81492,9 +81543,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "MovementFlags"
@@ -81526,7 +81577,8 @@
               "variable_name": "flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "JUMPING"
                   }
                 }
@@ -81602,9 +81654,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "MovementFlags"
@@ -81619,7 +81671,8 @@
               "variable_name": "flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "SPLINE_ELEVATION"
                   }
                 }
@@ -81644,9 +81697,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "MovementFlags"
@@ -81717,7 +81770,7 @@
                   "type": "cstring"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 2
                 }
               }
@@ -81756,7 +81809,7 @@
                   "content": "NpcTextUpdateEmote"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 3
                 }
               }
@@ -81893,7 +81946,8 @@
               "variable_name": "update_type",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "VALUES"
                   }
                 }
@@ -81927,13 +81981,14 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "update_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "MOVEMENT"
                       }
                     }
@@ -81970,9 +82025,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "UpdateType"
@@ -81984,12 +82039,14 @@
                   "variable_name": "update_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "CREATE_OBJECT"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "CREATE_OBJECT2"
                       }
                     }
@@ -82055,9 +82112,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "UpdateType"
@@ -82069,12 +82126,14 @@
                   "variable_name": "update_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "OUT_OF_RANGE_OBJECTS"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "NEAR_OBJECTS"
                       }
                     }
@@ -82109,7 +82168,7 @@
                             "type": "packed_guid"
                           },
                           "size": {
-                            "type": "Variable",
+                            "type": "variable",
                             "content": "count"
                           }
                         }
@@ -82121,9 +82180,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "UpdateType"
@@ -82131,8 +82190,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "UpdateType"
@@ -83314,7 +83373,8 @@
               "variable_name": "flag",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "SPECIFY_BUILD"
                   }
                 }
@@ -83338,9 +83398,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "RealmFlag"
@@ -83398,7 +83458,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 32
                 }
               }
@@ -83469,7 +83529,7 @@
                     0
                   ],
                   "size": {
-                    "type": "Fixed",
+                    "type": "fixed",
                     "content": 32
                   }
                 }
@@ -83666,7 +83726,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 120
                 }
               }
@@ -84367,7 +84427,7 @@
                   "content": "AuctionListItem"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "count"
                 }
               }
@@ -84612,7 +84672,7 @@
                   "content": "AuctionListItem"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "count"
                 }
               }
@@ -84705,7 +84765,7 @@
                   "content": "AuctionListItem"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "count"
                 }
               }
@@ -85136,7 +85196,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 32
                 }
               }
@@ -85209,7 +85269,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "AUTH_OK"
                   }
                 }
@@ -85267,13 +85328,14 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "result",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "AUTH_WAIT_QUEUE"
                       }
                     }
@@ -85298,9 +85360,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "WorldResult"
@@ -85308,8 +85370,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "WorldResult"
@@ -85577,7 +85639,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "AUTH_OK"
                   }
                 }
@@ -85651,13 +85714,14 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "result",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "AUTH_WAIT_QUEUE"
                       }
                     }
@@ -85698,9 +85762,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "WorldResult"
@@ -85708,8 +85772,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "WorldResult"
@@ -85869,7 +85933,7 @@
                   }
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "number_of_battlegrounds"
                 }
               }
@@ -85958,7 +86022,8 @@
               "variable_name": "map",
               "equations": [
                 {
-                  "NotEquals": {
+                  "type": "not_equals",
+                  "content": {
                     "value": "EASTERN_KINGDOMS"
                   }
                 }
@@ -86021,7 +86086,8 @@
                     "variable_name": "status_id",
                     "equations": [
                       {
-                        "Equals": {
+                        "type": "equals",
+                        "content": {
                           "value": "WAIT_QUEUE"
                         }
                       }
@@ -86063,13 +86129,14 @@
                       }
                     }
                   ],
-                  "else_ifs": [
+                  "else_if_statements": [
                     {
                       "conditional": {
                         "variable_name": "status_id",
                         "equations": [
                           {
-                            "Equals": {
+                            "type": "equals",
+                            "content": {
                               "value": "WAIT_JOIN"
                             }
                           }
@@ -86094,9 +86161,9 @@
                           }
                         }
                       ],
-                      "else_ifs": [],
-                      "else_statement_members": [],
-                      "original_ty": {
+                      "else_if_statements": [],
+                      "else_members": [],
+                      "original_type": {
                         "type": "identifier",
                         "content": {
                           "type_name": "StatusId"
@@ -86108,7 +86175,8 @@
                         "variable_name": "status_id",
                         "equations": [
                           {
-                            "Equals": {
+                            "type": "equals",
+                            "content": {
                               "value": "IN_PROGRESS"
                             }
                           }
@@ -86150,9 +86218,9 @@
                           }
                         }
                       ],
-                      "else_ifs": [],
-                      "else_statement_members": [],
-                      "original_ty": {
+                      "else_if_statements": [],
+                      "else_members": [],
+                      "original_type": {
                         "type": "identifier",
                         "content": {
                           "type_name": "StatusId"
@@ -86160,8 +86228,8 @@
                       }
                     }
                   ],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "StatusId"
@@ -86170,9 +86238,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "Map"
@@ -86779,7 +86847,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "NotEquals": {
+                  "type": "not_equals",
+                  "content": {
                     "value": "FAILURE"
                   }
                 }
@@ -86809,7 +86878,8 @@
                     "variable_name": "reason",
                     "equations": [
                       {
-                        "Equals": {
+                        "type": "equals",
+                        "content": {
                           "value": "REQUIRES_SPELL_FOCUS"
                         }
                       }
@@ -86834,13 +86904,14 @@
                       }
                     }
                   ],
-                  "else_ifs": [
+                  "else_if_statements": [
                     {
                       "conditional": {
                         "variable_name": "reason",
                         "equations": [
                           {
-                            "Equals": {
+                            "type": "equals",
+                            "content": {
                               "value": "REQUIRES_AREA"
                             }
                           }
@@ -86864,9 +86935,9 @@
                           }
                         }
                       ],
-                      "else_ifs": [],
-                      "else_statement_members": [],
-                      "original_ty": {
+                      "else_if_statements": [],
+                      "else_members": [],
+                      "original_type": {
                         "type": "identifier",
                         "content": {
                           "type_name": "CastFailureReason"
@@ -86878,7 +86949,8 @@
                         "variable_name": "reason",
                         "equations": [
                           {
-                            "Equals": {
+                            "type": "equals",
+                            "content": {
                               "value": "EQUIPPED_ITEM_CLASS"
                             }
                           }
@@ -86937,9 +87009,9 @@
                           }
                         }
                       ],
-                      "else_ifs": [],
-                      "else_statement_members": [],
-                      "original_ty": {
+                      "else_if_statements": [],
+                      "else_members": [],
+                      "original_type": {
                         "type": "identifier",
                         "content": {
                           "type_name": "CastFailureReason"
@@ -86947,8 +87019,8 @@
                       }
                     }
                   ],
-                  "else_statement_members": [],
-                  "original_ty": {
+                  "else_members": [],
+                  "original_type": {
                     "type": "identifier",
                     "content": {
                       "type_name": "CastFailureReason"
@@ -86957,9 +87029,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SimpleSpellCastResult"
@@ -87063,7 +87135,7 @@
                   "content": "ChannelMember"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_members"
                 }
               }
@@ -87481,7 +87553,7 @@
                   "content": "Character"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_characters"
                 }
               }
@@ -87527,7 +87599,7 @@
                 "Array": {
                   "values": [],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "amount_of_characters"
                   }
                 }
@@ -87611,7 +87683,7 @@
                   "content": "Character"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_characters"
                 }
               }
@@ -87682,7 +87754,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "RESPONSE_SUCCESS"
                   }
                 }
@@ -87716,9 +87789,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "WorldResult"
@@ -88778,7 +88851,7 @@
                   }
                 },
                 "size": {
-                  "type": "Endless"
+                  "type": "endless"
                 }
               }
             },
@@ -89481,7 +89554,7 @@
                   "type": "cstring"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_records"
                 }
               }
@@ -90428,7 +90501,7 @@
                   "content": "Friend"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_friends"
                 }
               }
@@ -90834,7 +90907,7 @@
                         }
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 6
                       }
                     }
@@ -91104,7 +91177,8 @@
               "variable_name": "status",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "HASTEXT"
                   }
                 }
@@ -91226,9 +91300,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GmTicketStatus"
@@ -91518,7 +91592,7 @@
                   "content": "GossipItem"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_gossip_items"
                 }
               }
@@ -91558,7 +91632,7 @@
                   "content": "QuestItem"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_quests"
                 }
               }
@@ -91979,7 +92053,7 @@
                   "content": "GroupListMember"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_members"
                 }
               }
@@ -92310,7 +92384,7 @@
                   "type": "cstring"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_events"
                 }
               }
@@ -92592,7 +92666,7 @@
                   "type": "cstring"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 10
                 }
               }
@@ -92789,7 +92863,7 @@
                   }
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_ignored"
                 }
               }
@@ -92836,7 +92910,7 @@
                     13464654573262978799
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "amount_of_ignored"
                   }
                 }
@@ -92899,7 +92973,7 @@
                     3735928559
                   ],
                   "size": {
-                    "type": "Variable",
+                    "type": "variable",
                     "content": "amount_of_ignored"
                   }
                 }
@@ -93001,7 +93075,7 @@
                   "content": "FactionInitializer"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_factions"
                 }
               }
@@ -93095,7 +93169,7 @@
                   "content": "InitialSpell"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "spell_count"
                 }
               }
@@ -93135,7 +93209,7 @@
                   "content": "CooldownSpell"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "cooldown_count"
                 }
               }
@@ -93243,7 +93317,7 @@
                   "content": "WorldState"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_states"
                 }
               }
@@ -93577,7 +93651,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "CANT_EQUIP_LEVEL_I"
                   }
                 }
@@ -93602,9 +93677,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "InventoryResult"
@@ -93619,7 +93694,8 @@
               "variable_name": "result",
               "equations": [
                 {
-                  "NotEquals": {
+                  "type": "not_equals",
+                  "content": {
                     "value": "OK"
                   }
                 }
@@ -93679,9 +93755,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "InventoryResult"
@@ -94632,7 +94708,7 @@
                         "content": "ItemStat"
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 10
                       }
                     }
@@ -94655,7 +94731,7 @@
                         "content": "ItemDamageType"
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 5
                       }
                     }
@@ -94848,7 +94924,7 @@
                         "content": "ItemSpells"
                       },
                       "size": {
-                        "type": "Fixed",
+                        "type": "fixed",
                         "content": 5
                       }
                     }
@@ -95641,7 +95717,7 @@
                   "content": "ListInventoryItem"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_items"
                 }
               }
@@ -96290,7 +96366,8 @@
               "variable_name": "exp_type",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "NON_KILL"
                   }
                 }
@@ -96334,9 +96411,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "ExperienceAwardType"
@@ -96559,7 +96636,7 @@
                   "type": "guid"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_players"
                 }
               }
@@ -97335,7 +97412,7 @@
                   "content": "Mail"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_mails"
                 }
               }
@@ -97650,17 +97727,20 @@
               "variable_name": "chat_type",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "MONSTER_WHISPER"
                   }
                 },
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "RAID_BOSS_EMOTE"
                   }
                 },
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "MONSTER_EMOTE"
                   }
                 }
@@ -97694,23 +97774,26 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "chat_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "SAY"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "PARTY"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "YELL"
                       }
                     }
@@ -97750,9 +97833,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "ChatType"
@@ -97764,12 +97847,14 @@
                   "variable_name": "chat_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "MONSTER_SAY"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "MONSTER_YELL"
                       }
                     }
@@ -97816,9 +97901,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "ChatType"
@@ -97830,7 +97915,8 @@
                   "variable_name": "chat_type",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "CHANNEL"
                       }
                     }
@@ -97881,9 +97967,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "ChatType"
@@ -97891,7 +97977,7 @@
                 }
               }
             ],
-            "else_statement_members": [
+            "else_members": [
               {
                 "type": "definition",
                 "content": {
@@ -97906,7 +97992,7 @@
                 }
               }
             ],
-            "original_ty": {
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "ChatType"
@@ -99510,7 +99596,7 @@
                   "content": "NpcTextUpdate"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 8
                 }
               }
@@ -99871,7 +99957,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_STATUS"
                   }
                 }
@@ -99895,9 +99982,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -99912,7 +99999,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_CUR_HP"
                   }
                 }
@@ -99937,9 +100025,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -99954,7 +100042,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_MAX_HP"
                   }
                 }
@@ -99979,9 +100068,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -99996,7 +100085,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_POWER_TYPE"
                   }
                 }
@@ -100020,9 +100110,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100037,7 +100127,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_CUR_POWER"
                   }
                 }
@@ -100062,9 +100153,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100079,7 +100170,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_MAX_POWER"
                   }
                 }
@@ -100104,9 +100196,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100121,7 +100213,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_LEVEL"
                   }
                 }
@@ -100146,9 +100239,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100163,7 +100256,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_ZONE"
                   }
                 }
@@ -100187,9 +100281,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100204,7 +100298,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_POSITION"
                   }
                 }
@@ -100250,9 +100345,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100267,7 +100362,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_AURAS"
                   }
                 }
@@ -100290,9 +100386,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100307,7 +100403,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_NAME"
                   }
                 }
@@ -100328,9 +100425,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100345,7 +100442,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_MODEL_ID"
                   }
                 }
@@ -100370,9 +100468,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100387,7 +100485,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_CUR_HP"
                   }
                 }
@@ -100412,9 +100511,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100429,7 +100528,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_MAX_HP"
                   }
                 }
@@ -100454,9 +100554,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100471,7 +100571,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_POWER_TYPE"
                   }
                 }
@@ -100495,9 +100596,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100512,7 +100613,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_CUR_POWER"
                   }
                 }
@@ -100537,9 +100639,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100554,7 +100656,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_MAX_POWER"
                   }
                 }
@@ -100579,9 +100682,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100596,7 +100699,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_AURAS"
                   }
                 }
@@ -100617,9 +100721,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100702,7 +100806,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_STATUS"
                   }
                 }
@@ -100726,9 +100831,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100743,7 +100848,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_CUR_HP"
                   }
                 }
@@ -100768,9 +100874,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100785,7 +100891,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_MAX_HP"
                   }
                 }
@@ -100810,9 +100917,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100827,7 +100934,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_POWER_TYPE"
                   }
                 }
@@ -100851,9 +100959,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100868,7 +100976,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_CUR_POWER"
                   }
                 }
@@ -100893,9 +101002,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100910,7 +101019,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_MAX_POWER"
                   }
                 }
@@ -100935,9 +101045,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100952,7 +101062,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_LEVEL"
                   }
                 }
@@ -100977,9 +101088,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -100994,7 +101105,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_ZONE"
                   }
                 }
@@ -101018,9 +101130,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101035,7 +101147,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_POSITION"
                   }
                 }
@@ -101081,9 +101194,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101098,7 +101211,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_AURAS"
                   }
                 }
@@ -101121,9 +101235,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101138,7 +101252,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_NAME"
                   }
                 }
@@ -101159,9 +101274,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101176,7 +101291,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_MODEL_ID"
                   }
                 }
@@ -101201,9 +101317,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101218,7 +101334,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_CUR_HP"
                   }
                 }
@@ -101243,9 +101360,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101260,7 +101377,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_MAX_HP"
                   }
                 }
@@ -101285,9 +101403,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101302,7 +101420,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_POWER_TYPE"
                   }
                 }
@@ -101326,9 +101445,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101343,7 +101462,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_CUR_POWER"
                   }
                 }
@@ -101368,9 +101488,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101385,7 +101505,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_MAX_POWER"
                   }
                 }
@@ -101410,9 +101531,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101427,7 +101548,8 @@
               "variable_name": "mask",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "FLAG_PET_AURAS"
                   }
                 }
@@ -101448,9 +101570,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "GroupUpdateFlags"
@@ -101637,7 +101759,7 @@
                   "content": "AuraLog"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_auras"
                 }
               }
@@ -102062,7 +102184,7 @@
                   "content": "PetitionShowlist"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_petitions"
                 }
               }
@@ -102979,7 +103101,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 10
                 }
               }
@@ -103021,7 +103143,7 @@
                   }
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_spells"
                 }
               }
@@ -103060,7 +103182,7 @@
                   "content": "PetSpellCooldown"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_cooldowns"
                 }
               }
@@ -104170,7 +104292,7 @@
                   "content": "NpcTextUpdateEmote"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_emotes"
                 }
               }
@@ -104210,7 +104332,7 @@
                   "content": "QuestItemReward"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_choice_item_rewards"
                 }
               }
@@ -104250,7 +104372,7 @@
                   "content": "QuestItemReward"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_item_rewards"
                 }
               }
@@ -104450,7 +104572,7 @@
                   "content": "QuestItemReward"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_item_rewards"
                 }
               }
@@ -104614,7 +104736,7 @@
                   "content": "QuestItemReward"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_choice_item_rewards"
                 }
               }
@@ -104654,7 +104776,7 @@
                   "content": "QuestItemReward"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_item_rewards"
                 }
               }
@@ -104728,7 +104850,7 @@
                   "content": "QuestDetailsEmote"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_emotes"
                 }
               }
@@ -104986,7 +105108,7 @@
                   "content": "QuestItem"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_entries"
                 }
               }
@@ -105187,7 +105309,7 @@
                   "content": "QuestItemRequirement"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_required_items"
                 }
               }
@@ -106112,7 +106234,7 @@
                   "content": "QuestItemReward"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 4
                 }
               }
@@ -106135,7 +106257,7 @@
                   "content": "QuestItemReward"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 6
                 }
               }
@@ -106278,7 +106400,7 @@
                   "content": "QuestObjective"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 4
                 }
               }
@@ -106300,7 +106422,7 @@
                   "type": "cstring"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 4
                 }
               }
@@ -106446,7 +106568,7 @@
                   "content": "RaidInfo"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_raid_infos"
                 }
               }
@@ -107273,7 +107395,7 @@
                   "content": "Faction"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_factions"
                 }
               }
@@ -107483,7 +107605,7 @@
                   "content": "ForcedReaction"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_reactions"
                 }
               }
@@ -107798,7 +107920,7 @@
                   }
                 },
                 "size": {
-                  "type": "Endless"
+                  "type": "endless"
                 }
               }
             },
@@ -108050,7 +108172,7 @@
                   }
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_spells"
                 }
               }
@@ -108445,7 +108567,7 @@
                   "content": "SpellLog"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_effects"
                 }
               }
@@ -108570,7 +108692,7 @@
                   "content": "SpellMiss"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_targets"
                 }
               }
@@ -108973,7 +109095,7 @@
                   "content": "SpellCooldownStatus"
                 },
                 "size": {
-                  "type": "Endless"
+                  "type": "endless"
                 }
               }
             },
@@ -109319,7 +109441,7 @@
                   "type": "guid"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_hits"
                 }
               }
@@ -109358,7 +109480,7 @@
                   "content": "SpellMiss"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_misses"
                 }
               }
@@ -109392,7 +109514,8 @@
               "variable_name": "flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "AMMO"
                   }
                 }
@@ -109434,9 +109557,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "CastFlags"
@@ -109584,7 +109707,8 @@
               "variable_name": "flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "AMMO"
                   }
                 }
@@ -109626,9 +109750,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "CastFlags"
@@ -109731,7 +109855,7 @@
                   "type": "guid"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_targets"
                 }
               }
@@ -111454,7 +111578,8 @@
               "variable_name": "status",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "BEGIN_TRADE"
                   }
                 }
@@ -111477,13 +111602,14 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "status",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "CLOSE_WINDOW"
                       }
                     }
@@ -111548,9 +111674,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "TradeStatus"
@@ -111562,12 +111688,14 @@
                   "variable_name": "status",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "ONLY_CONJURED"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "NOT_ON_TAPLIST"
                       }
                     }
@@ -111593,9 +111721,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "TradeStatus"
@@ -111603,8 +111731,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "TradeStatus"
@@ -111753,7 +111881,7 @@
                   "content": "TradeSlot"
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 7
                 }
               }
@@ -112008,7 +112136,7 @@
                   "content": "TrainerSpell"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_spells"
                 }
               }
@@ -112878,7 +113006,7 @@
                   "content": "Object"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "amount_of_objects"
                 }
               }
@@ -113942,7 +114070,7 @@
                   "content": "WhoPlayer"
                 },
                 "size": {
-                  "type": "Variable",
+                  "type": "variable",
                   "content": "listed_players"
                 }
               }
@@ -114109,7 +114237,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "UNIT"
                   }
                 }
@@ -114130,9 +114259,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114147,7 +114276,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "UNIT_ENEMY"
                   }
                 }
@@ -114168,9 +114298,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114185,7 +114315,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "GAMEOBJECT"
                   }
                 }
@@ -114206,9 +114337,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114223,7 +114354,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "LOCKED"
                   }
                 }
@@ -114244,9 +114376,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114261,7 +114393,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "ITEM"
                   }
                 }
@@ -114282,9 +114415,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114299,7 +114432,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "TRADE_ITEM"
                   }
                 }
@@ -114320,9 +114454,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114337,7 +114471,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "SOURCE_LOCATION"
                   }
                 }
@@ -114396,9 +114531,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114413,7 +114548,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "DEST_LOCATION"
                   }
                 }
@@ -114472,9 +114608,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114489,7 +114625,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "STRING"
                   }
                 }
@@ -114510,9 +114647,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114527,7 +114664,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "CORPSE_ALLY"
                   }
                 }
@@ -114548,9 +114686,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114565,7 +114703,8 @@
               "variable_name": "target_flags",
               "equations": [
                 {
-                  "BitwiseAnd": {
+                  "type": "bitwise_and",
+                  "content": {
                     "value": "CORPSE_ENEMY"
                   }
                 }
@@ -114586,9 +114725,9 @@
                 }
               }
             ],
-            "else_ifs": [],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellCastTargetFlags"
@@ -114745,7 +114884,8 @@
               "variable_name": "effect",
               "equations": [
                 {
-                  "Equals": {
+                  "type": "equals",
+                  "content": {
                     "value": "POWER_DRAIN"
                   }
                 }
@@ -114817,13 +114957,14 @@
                 }
               }
             ],
-            "else_ifs": [
+            "else_if_statements": [
               {
                 "conditional": {
                   "variable_name": "effect",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "ADD_EXTRA_ATTACKS"
                       }
                     }
@@ -114861,9 +115002,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "SpellEffect"
@@ -114875,7 +115016,8 @@
                   "variable_name": "effect",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "INTERRUPT_CAST"
                       }
                     }
@@ -114913,9 +115055,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "SpellEffect"
@@ -114927,7 +115069,8 @@
                   "variable_name": "effect",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "DURABILITY_DAMAGE"
                       }
                     }
@@ -114982,9 +115125,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "SpellEffect"
@@ -114996,7 +115139,8 @@
                   "variable_name": "effect",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "CREATE_ITEM"
                       }
                     }
@@ -115021,9 +115165,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "SpellEffect"
@@ -115035,7 +115179,8 @@
                   "variable_name": "effect",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "FEED_PET"
                       }
                     }
@@ -115060,9 +115205,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "SpellEffect"
@@ -115074,82 +115219,98 @@
                   "variable_name": "effect",
                   "equations": [
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "RESURRECT"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "DISPEL"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "THREAT"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "DISTRACT"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "SANCTUARY"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "THREAT_ALL"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "DISPEL_MECHANIC"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "RESURRECT_NEW"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "ATTACK_ME"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "SKIN_PLAYER_CORPSE"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "MODIFY_THREAT_PERCENT"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "UNKNOWN126"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "DISMISS_PET"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "OPEN_LOCK"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "OPEN_LOCK_ITEM"
                       }
                     },
                     {
-                      "Equals": {
+                      "type": "equals",
+                      "content": {
                         "value": "INSTAKILL"
                       }
                     }
@@ -115170,9 +115331,9 @@
                     }
                   }
                 ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
                   "type": "identifier",
                   "content": {
                     "type_name": "SpellEffect"
@@ -115180,8 +115341,8 @@
                 }
               }
             ],
-            "else_statement_members": [],
-            "original_ty": {
+            "else_members": [],
+            "original_type": {
               "type": "identifier",
               "content": {
                 "type_name": "SpellEffect"
@@ -115471,7 +115632,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 4
                 }
               }
@@ -115496,7 +115657,7 @@
                   }
                 },
                 "size": {
-                  "type": "Fixed",
+                  "type": "fixed",
                   "content": 20
                 }
               }

@@ -127,9 +127,13 @@ impl From<&StructMember> for IrStructMember {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "content")]
 pub enum IrEquation {
+    #[serde(rename = "equals")]
     Equals { value: String },
+    #[serde(rename = "not_equals")]
     NotEquals { value: String },
+    #[serde(rename = "bitwise_and")]
     BitwiseAnd { value: String },
 }
 
@@ -170,8 +174,11 @@ impl From<Conditional> for IrConditional {
 pub struct IrIfStatement {
     pub conditional: IrConditional,
     members: Vec<IrStructMember>,
+    #[serde(rename = "else_if_statements")]
     else_ifs: Vec<IrIfStatement>,
+    #[serde(rename = "else_members")]
     else_statement_members: Vec<IrStructMember>,
+    #[serde(rename = "original_type")]
     original_ty: IrType,
 }
 
