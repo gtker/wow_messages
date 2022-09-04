@@ -403,7 +403,7 @@ impl From<&TestCase> for IrTestCase {
 #[derive(Debug, Serialize)]
 pub struct IrTestCaseMember {
     variable_name: String,
-    verified_value: IrTestValue,
+    value: IrTestValue,
     tags: IrTags,
 }
 
@@ -411,7 +411,7 @@ impl From<&TestCaseMember> for IrTestCaseMember {
     fn from(v: &TestCaseMember) -> Self {
         Self {
             variable_name: v.name().to_string(),
-            verified_value: v.value().into(),
+            value: v.value().into(),
             tags: IrTags::from_tags(v.tags()),
         }
     }
@@ -419,6 +419,7 @@ impl From<&TestCaseMember> for IrTestCaseMember {
 
 #[derive(Debug, Serialize)]
 pub struct IrTestUpdateMaskValue {
+    #[serde(rename = "type")]
     ty: IrUpdateMaskType,
     name: String,
     value: String,
@@ -470,25 +471,37 @@ impl From<UpdateMaskType> for IrUpdateMaskType {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "content")]
 pub enum IrTestValue {
+    #[serde(rename = "number")]
     Number(IrIntegerEnumValue),
+    #[serde(rename = "guid")]
     Guid(IrIntegerEnumValue),
+    #[serde(rename = "floating_point")]
     FloatingNumber {
         value: f64,
         original_string: String,
     },
+    #[serde(rename = "array")]
     Array {
         values: Vec<usize>,
         size: IrArraySize,
     },
+    #[serde(rename = "string")]
     String(String),
+    #[serde(rename = "flag")]
     Flag(Vec<String>),
+    #[serde(rename = "enum")]
     Enum(IrIntegerEnumValue),
+    #[serde(rename = "sub_object")]
     SubObject {
+        #[serde(rename = "type_name")]
         ty_name: String,
         members: Vec<IrTestCaseMember>,
     },
-    ArrayOfSubObject(String, Vec<Vec<IrTestCaseMember>>),
+    #[serde(rename = "array_of_sub_object")]
+    ArrayOfSubObject{type_name: String,  members: Vec<Vec<IrTestCaseMember>>},
+    #[serde(rename = "update_mask")]
     UpdateMask(Vec<IrTestUpdateMaskValue>),
 }
 
@@ -515,12 +528,12 @@ impl From<&TestValue> for IrTestValue {
                 ty_name: ty_name.to_string(),
                 members: members.iter().map(|a| a.into()).collect(),
             },
-            TestValue::ArrayOfSubObject(s, t) => Self::ArrayOfSubObject(
-                s.to_string(),
-                t.iter()
+            TestValue::ArrayOfSubObject(s, t) => Self::ArrayOfSubObject{
+                type_name: s.to_string(),
+                members: t.iter()
                     .map(|a| a.iter().map(|a| a.into()).collect::<Vec<_>>())
                     .collect(),
-            ),
+            },
             TestValue::UpdateMask(v) => {
                 IrTestValue::UpdateMask(v.iter().map(|a| a.into()).collect())
             }

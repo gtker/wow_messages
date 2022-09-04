@@ -116,10 +116,64 @@ The optional statement represents a block of members that do not necessarily hav
 The optional statement consists of:
 
 * `name`, an identifier for the optional block.
-* `members`, the [Members](#member) in the block.
+* `members`, an array of [Members](#member).
 * `tags`, a [Tags](tags.md) object.
 
 ## Test
 
+Tests represent a valid series of bytes, and how they should be interpreted.
+A test consists of:
 
+* `subject`, type name of the object being tested.
+* `members`, an array of [Test Members](#test-member).
+* `raw_bytes`, an array of byte values that the object should be serialized from.
+* `tags`, a [Tags](tags.md) object.
+* `file_info`, a [FileInfo](fileinfo.md) object.
+
+### Test Member
+
+A test member represents the value that a variable should parse as.
+It contains:
+
+* `variable_name`, identifies the variable in question.
+* `value`, a [Test Value](#test-value).
+* `tags`, a [Tags](tags.md) object.
+
+#### Test Value
+
+A specific value. It contains:
+
+* `type`, any of:
+    * `number`
+    * `guid`
+    * `floating_point`
+    * `array`
+    * `string`
+    * `flag`
+    * `enum`
+    * `sub_object`
+    * `array_of_sub_object`
+    * `update_mask`
+* `content`, depending on `type`, if `type` is:
+    * `number`, `guid`, or `enum`:
+        * `value`, an integer of the value.
+        * `original_string`, the original string from the Wowm file.
+    * `floating_point`
+        * `value`, floating point value.
+        * `original_string`, the original string from the Wowm file.
+    * `array`
+        * `values`, an array of the values.
+        * `size`, having the same values as the regular [Array Size](#array).
+    * `string`, containing the string value.
+    * `flag`, containing an array of the flag enumerators that are active.
+    * `sub_object`, containing:
+        * `type_name`, the type name of the array item.
+        * `members`, an array of [Test Members](#test-member).
+    * `array_of_sub_object`, containing:
+        * `type_name`, the type name of the objects.
+        * `members`, an array containing [Test Members](#test-member).
+    * `update_mask`, containing an array of:
+        * `type`, the object type of the value (OBJECT, UNIT, etc)
+        * `name`, the name of the value (GUID, TYPE, HEALTH, etc)
+        * `value`, a string with the original value.
 
