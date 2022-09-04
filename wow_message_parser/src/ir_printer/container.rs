@@ -238,7 +238,8 @@ pub enum IrType {
     Array(IrArray),
     #[serde(rename = "identifier")]
     Identifier {
-        s: String,
+        type_name: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
         upcast: Option<IrIntegerType>,
     },
     #[serde(rename = "update_mask")]
@@ -262,7 +263,7 @@ impl From<&Type> for IrType {
             Type::AuraMask => Self::AuraMask,
             Type::Array(array) => Self::Array(array.into()),
             Type::Identifier { s, upcast } => Self::Identifier {
-                s: s.to_string(),
+                type_name: s.to_string(),
                 upcast: upcast.map(|a| (&a).into()),
             },
             Type::SizedCString => Self::SizedCString,
@@ -286,11 +287,17 @@ impl From<&Array> for IrArray {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "content")]
 pub enum IrArrayType {
+    #[serde(rename = "integer")]
     Integer(IrIntegerType),
+    #[serde(rename = "complex")]
     Complex(String),
+    #[serde(rename = "cstring")]
     CString,
+    #[serde(rename = "guid")]
     Guid,
+    #[serde(rename = "packed_guid")]
     PackedGuid,
 }
 
@@ -307,9 +314,13 @@ impl From<&ArrayType> for IrArrayType {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "content")]
 pub enum IrArraySize {
+    #[serde(rename = "fixed")]
     Fixed(i64),
+    #[serde(rename = "variable")]
     Variable(String),
+    #[serde(rename = "endless")]
     Endless,
 }
 
@@ -324,8 +335,11 @@ impl From<ArraySize> for IrArraySize {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "endianness")]
 pub enum IrFloatingPointType {
+    #[serde(rename = "f32")]
     F32(IrEndianness),
+    #[serde(rename = "f64")]
     F64(IrEndianness),
 }
 
