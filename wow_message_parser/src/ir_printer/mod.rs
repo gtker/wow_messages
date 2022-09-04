@@ -75,12 +75,23 @@ impl From<&LoginVersion> for IrLoginVersion {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "version")]
 pub enum IrWorldVersion {
+    #[serde(rename = "all")]
     All,
-    Major(u8),
-    Minor(u8, u8),
-    Patch(u8, u8, u8),
-    Exact(u8, u8, u8, u8),
+    #[serde(rename = "major")]
+    Major { major: u8 },
+    #[serde(rename = "minor")]
+    Minor { major: u8, minor: u8 },
+    #[serde(rename = "patch")]
+    Patch { major: u8, minor: u8, patch: u8 },
+    #[serde(rename = "exact")]
+    Exact {
+        major: u8,
+        minor: u8,
+        patch: u8,
+        exact: u8,
+    },
 }
 
 #[derive(Debug, Serialize)]
@@ -95,10 +106,22 @@ pub enum IrVersions {
 impl From<&WorldVersion> for IrWorldVersion {
     fn from(v: &WorldVersion) -> Self {
         match v {
-            WorldVersion::Major(m) => Self::Major(*m),
-            WorldVersion::Minor(m, i) => Self::Minor(*m, *i),
-            WorldVersion::Patch(m, i, p) => Self::Patch(*m, *i, *p),
-            WorldVersion::Exact(m, i, p, e) => Self::Exact(*m, *i, *p, *e),
+            WorldVersion::Major(m) => Self::Major { major: *m },
+            WorldVersion::Minor(m, i) => Self::Minor {
+                major: *m,
+                minor: *i,
+            },
+            WorldVersion::Patch(m, i, p) => Self::Patch {
+                major: *m,
+                minor: *i,
+                patch: *p,
+            },
+            WorldVersion::Exact(m, i, p, e) => Self::Exact {
+                major: *m,
+                minor: *i,
+                patch: *p,
+                exact: *e,
+            },
             WorldVersion::All => Self::All,
         }
     }
