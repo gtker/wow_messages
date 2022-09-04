@@ -106,9 +106,13 @@ impl From<&OptionalStatement> for IrOptionalStatement {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "content")]
 pub enum IrStructMember {
+    #[serde(rename = "definition")]
     Definition(IrStructMemberDefinition),
+    #[serde(rename = "if_statement")]
     IfStatement(IrIfStatement),
+    #[serde(rename = "optional")]
     Optional(IrOptionalStatement),
 }
 
@@ -212,22 +216,34 @@ impl From<&StructMemberDefinition> for IrStructMemberDefinition {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "content")]
 pub enum IrType {
+    #[serde(rename = "integer")]
     Integer(IrIntegerType),
+    #[serde(rename = "packed_guid")]
     PackedGuid,
+    #[serde(rename = "guid")]
     Guid,
+    #[serde(rename = "floating_point")]
     FloatingPoint(IrFloatingPointType),
+    #[serde(rename = "cstring")]
     CString,
+    #[serde(rename = "sized_cstring")]
     SizedCString,
+    #[serde(rename = "string")]
     String {
         length: String,
     },
+    #[serde(rename = "array")]
     Array(IrArray),
+    #[serde(rename = "identifier")]
     Identifier {
         s: String,
         upcast: Option<IrIntegerType>,
     },
+    #[serde(rename = "update_mask")]
     UpdateMask,
+    #[serde(rename = "aura_mask")]
     AuraMask,
 }
 
