@@ -1,5 +1,6 @@
 # Implementation Features
 
+
 ## Definers
 
 ### Enums
@@ -210,6 +211,37 @@ struct EndlessArrays {
 }
 /* This also uses feature STRUCT, SIMPLE_BUILT_IN_TYPES */
 ```
+
+## `ConstantValue`
+
+## `ManualSizeField`
+
+## `EmptyContainer`
+
+## `IfEnum`
+
+## `IfNotEnum`
+
+## `IfElseEnum`
+
+## `NotElseEnum`
+
+## `ElseEnum`
+
+## `IfInDifferentScope`
+
+## `IfFlag`
+
+## `IfElseFlag`
+
+## `ElseFlag`
+
+## `IfMultiCondition`
+
+## `Optional`
+
+## `EnumUpcast`
+
 
 ### Structs
 #### `Struct`
