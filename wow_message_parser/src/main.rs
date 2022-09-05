@@ -250,6 +250,7 @@ fn load_files(dir: &Path, components: &mut Objects) {
         components.add_vecs(c);
     }
     components.check_values();
+    components.sort_members();
 }
 
 fn should_not_write_object(t: &Tags) -> bool {

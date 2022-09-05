@@ -5,6 +5,7 @@ use crate::parser::types::IntegerType;
 use crate::parser::utility;
 use crate::rust_printer::{field_name_to_rust_name, DefinerType};
 use crate::ENUM_SELF_VALUE_FIELD;
+use std::cmp::Ordering;
 use std::collections::HashMap;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
@@ -118,6 +119,23 @@ pub struct Definer {
     tags: Tags,
     objects_used_in: Option<Vec<(String, DefinerUsage)>>,
     file_info: FileInfo,
+}
+
+impl Ord for Definer {
+    fn cmp(&self, other: &Self) -> Ordering {
+        let (self_first, _) = self.tags().first_and_main_versions();
+        let (other_first, _) = other.tags().first_and_main_versions();
+
+        self.name
+            .cmp(&other.name)
+            .then_with(|| self_first.cmp(&other_first))
+    }
+}
+
+impl PartialOrd for Definer {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
 }
 
 impl Definer {

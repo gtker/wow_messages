@@ -13,6 +13,7 @@ use crate::rust_printer::{
 };
 use crate::test_case::TestCase;
 use crate::CONTAINER_SELF_SIZE_FIELD;
+use std::cmp::Ordering;
 use std::ops::AddAssign;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
@@ -49,6 +50,32 @@ pub struct Container {
     file_info: FileInfo,
     only_has_io_error: Option<bool>,
     rust_object_view: Option<RustObject>,
+}
+
+impl PartialEq<Self> for Container {
+    fn eq(&self, other: &Self) -> bool {
+        self.name == other.name
+            && self.tags().first_and_main_versions() == other.tags().first_and_main_versions()
+    }
+}
+
+impl Eq for Container {}
+
+impl PartialOrd for Container {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Container {
+    fn cmp(&self, other: &Self) -> Ordering {
+        let (self_first, _) = self.tags().first_and_main_versions();
+        let (other_first, _) = other.tags().first_and_main_versions();
+
+        self.name
+            .cmp(&other.name)
+            .then_with(|| self_first.cmp(&other_first))
+    }
 }
 
 #[derive(Debug, Eq, PartialEq, Clone, Copy)]
@@ -1146,7 +1173,7 @@ impl Container {
     }
 }
 
-#[derive(Debug, Copy, Clone, Default)]
+#[derive(Debug, Copy, Clone, Default, Ord, PartialOrd, Eq, PartialEq)]
 pub struct Sizes {
     minimum: usize,
     maximum: usize,

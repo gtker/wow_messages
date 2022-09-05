@@ -328,6 +328,13 @@ impl Objects {
         }
     }
 
+    pub fn sort_members(&mut self) {
+        self.structs.sort();
+        self.messages.sort();
+        self.enums.sort();
+        self.flags.sort();
+    }
+
     pub fn get_tests_for_object(
         tests: &mut Vec<TestCase>,
         name: &str,
