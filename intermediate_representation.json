@@ -19509,7 +19509,9 @@
             "int": 2,
             "original": "2"
           },
-          "tags": {}
+          "tags": {
+            "comment": "Apparently used by hunter and warlock pets."
+          }
         }
       ],
       "self_value": null,

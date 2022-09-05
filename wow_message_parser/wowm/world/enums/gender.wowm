@@ -3,8 +3,9 @@
 enum Gender : u8 {
     MALE = 0;
     FEMALE = 1;
-    /* Apparently used by some pets */
-    NONE = 2;
+    NONE = 2 {
+        comment = "Apparently used by hunter and warlock pets.";
+    }
 } {
     rust_base_type = "true";
 }
