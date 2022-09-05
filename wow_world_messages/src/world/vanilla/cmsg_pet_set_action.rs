@@ -2,8 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_pet_set_action.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_pet_set_action.wowm#L3):
 /// ```text
 /// cmsg CMSG_PET_SET_ACTION = 0x0174 {
@@ -109,8 +108,7 @@ impl CMSG_PET_SET_ACTION {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct CMSG_PET_SET_ACTION_extra {
     pub position2: u32,
     pub data2: u32,

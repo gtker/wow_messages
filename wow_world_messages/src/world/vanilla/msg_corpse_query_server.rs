@@ -4,8 +4,7 @@ use crate::world::vanilla::Map;
 use crate::world::vanilla::Vector3d;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_corpse_query_server.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_corpse_query_server.wowm#L8):
 /// ```text
 /// smsg MSG_CORPSE_QUERY_Server = 0x0216 {
@@ -92,8 +91,7 @@ impl MSG_CORPSE_QUERY_Server {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum MSG_CORPSE_QUERY_Server_CorpseQueryResult {
     NotFound,
     Found {

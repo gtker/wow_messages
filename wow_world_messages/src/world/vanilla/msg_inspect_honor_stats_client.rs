@@ -2,8 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_inspect_honor_stats_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_inspect_honor_stats_client.wowm#L3):
 /// ```text
 /// cmsg MSG_INSPECT_HONOR_STATS_Client = 0x02D6 {

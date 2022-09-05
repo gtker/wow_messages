@@ -1,8 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Immediately logs out the client of the world and makes it send [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).
 /// Normally the client will send [`CMSG_LOGOUT_REQUEST`](crate::world::vanilla::CMSG_LOGOUT_REQUEST) and the server will reply with an [`SMSG_LOGOUT_RESPONSE`](crate::world::vanilla::SMSG_LOGOUT_RESPONSE) before this message, but sending it unprompted will also immediately send the client to the character screen.
 ///

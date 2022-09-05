@@ -2,8 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Command to log into the specified character.
 ///
 /// This is sent after the client has been authenticated and served the character list with [`SMSG_CHAR_ENUM`](crate::world::vanilla::SMSG_CHAR_ENUM).

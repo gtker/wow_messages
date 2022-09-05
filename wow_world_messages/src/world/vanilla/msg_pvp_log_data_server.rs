@@ -96,8 +96,7 @@ impl MSG_PVP_LOG_DATA_Server {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
     NotEnded,
     Ended {

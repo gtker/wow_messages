@@ -2,8 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Signals that client has right clicked an opponent and is in the attack stance.
 /// Server should reply with [`SMSG_ATTACKSTART`](crate::world::vanilla::SMSG_ATTACKSTART).
 ///

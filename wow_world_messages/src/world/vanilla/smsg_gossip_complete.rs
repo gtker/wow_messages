@@ -1,8 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_gossip_complete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_gossip_complete.wowm#L3):
 /// ```text
 /// smsg SMSG_GOSSIP_COMPLETE = 0x017E {

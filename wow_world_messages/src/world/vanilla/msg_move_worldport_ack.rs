@@ -1,8 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Acknowledge from the client that it has received an [`SMSG_NEW_WORLD`](crate::world::vanilla::SMSG_NEW_WORLD) and has loaded the new map.
 ///
 /// Despite the name this seems to only be sent by the client.

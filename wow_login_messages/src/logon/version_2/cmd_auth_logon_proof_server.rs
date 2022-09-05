@@ -3,8 +3,7 @@ use crate::logon::version_2::LoginResult;
 use crate::ServerMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Reply to [`CMD_AUTH_LOGON_PROOF_Client`](crate::logon::version_2::CMD_AUTH_LOGON_PROOF_Client).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L2):
@@ -266,8 +265,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     Success {
         hardware_survey_id: u32,

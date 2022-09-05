@@ -2,8 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Emote;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_emote.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_emote.wowm#L3):
 /// ```text
 /// cmsg CMSG_EMOTE = 0x0102 {

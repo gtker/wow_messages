@@ -327,8 +327,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     None,
     Pin {

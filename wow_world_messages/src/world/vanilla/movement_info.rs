@@ -852,8 +852,7 @@ impl MovementInfo_MovementFlags_OnTransport {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementInfo_MovementFlags_Jumping {
     pub cos_angle: f32,
     pub sin_angle: f32,
@@ -870,8 +869,7 @@ impl MovementInfo_MovementFlags_Jumping {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementInfo_MovementFlags_Swimming {
     pub pitch: f32,
 }
@@ -882,8 +880,7 @@ impl MovementInfo_MovementFlags_Swimming {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementInfo_MovementFlags_SplineElevation {
     pub spline_elevation: f32,
 }

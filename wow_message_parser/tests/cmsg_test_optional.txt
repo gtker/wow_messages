@@ -90,8 +90,7 @@ impl CMSG_TEST_OPTIONAL {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct CMSG_TEST_OPTIONAL_server {
     pub optional_u8: u8,
 }

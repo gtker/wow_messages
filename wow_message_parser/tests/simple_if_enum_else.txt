@@ -2,8 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::SimpleEnum;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:109`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L109):
 /// ```text
 /// struct SimpleIfEnumElse {
@@ -98,8 +97,7 @@ impl SimpleIfEnumElse {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum SimpleIfEnumElse_SimpleEnum {
     Zero {
         basic: u8,

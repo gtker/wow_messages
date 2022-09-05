@@ -3,8 +3,7 @@ use crate::world::vanilla::BattlefieldPortAction;
 use crate::world::vanilla::Map;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlefield_port.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlefield_port.wowm#L8):
 /// ```text
 /// cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {

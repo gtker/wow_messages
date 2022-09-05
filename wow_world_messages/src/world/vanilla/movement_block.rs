@@ -524,8 +524,7 @@ impl MovementBlock {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum MovementBlock_SplineFlag_FinalAngle {
     FinalAngle {
         angle: f32,
@@ -574,8 +573,7 @@ impl MovementBlock_SplineFlag_FinalAngle {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementBlock_SplineFlag {
     inner: u32,
     final_angle: Option<MovementBlock_SplineFlag_FinalAngle>,
@@ -1942,8 +1940,7 @@ impl MovementBlock_MovementFlags_OnTransport {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementBlock_MovementFlags_Jumping {
     pub cos_angle: f32,
     pub sin_angle: f32,
@@ -1960,8 +1957,7 @@ impl MovementBlock_MovementFlags_Jumping {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementBlock_MovementFlags_Swimming {
     pub pitch: f32,
 }
@@ -1994,8 +1990,7 @@ impl MovementBlock_MovementFlags_SplineEnabled {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementBlock_MovementFlags_SplineElevation {
     pub spline_elevation: f32,
 }
@@ -2315,8 +2310,7 @@ impl MovementBlock_UpdateFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementBlock_UpdateFlag_Transport {
     pub transport_progress_in_ms: u32,
 }
@@ -2338,8 +2332,7 @@ impl MovementBlock_UpdateFlag_MeleeAttacking {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementBlock_UpdateFlag_HighGuid {
     pub unknown0: u32,
 }
@@ -2350,8 +2343,7 @@ impl MovementBlock_UpdateFlag_HighGuid {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct MovementBlock_UpdateFlag_All {
     pub unknown1: u32,
 }

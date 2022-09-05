@@ -2,8 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::PetFeedback;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_action_feedback.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_action_feedback.wowm#L10):
 /// ```text
 /// smsg SMSG_PET_ACTION_FEEDBACK = 0x02C6 {

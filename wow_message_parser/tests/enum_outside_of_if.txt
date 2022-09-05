@@ -3,8 +3,7 @@ use crate::world::vanilla::NestedEnum;
 use crate::world::vanilla::TEnum;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:270`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L270):
 /// ```text
 /// struct EnumOutsideOfIf {
@@ -79,8 +78,7 @@ impl EnumOutsideOfIf {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum EnumOutsideOfIf_TEnum {
     Zero,
     One,
@@ -146,8 +144,7 @@ impl EnumOutsideOfIf_TEnum {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum EnumOutsideOfIf_NestedEnum {
     Nested {
         nested: u8,

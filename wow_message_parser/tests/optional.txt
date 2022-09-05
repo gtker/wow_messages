@@ -1,8 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:217`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L217):
 /// ```text
 /// struct Optional {

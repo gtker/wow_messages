@@ -3,8 +3,7 @@ use crate::world::vanilla::Map;
 use crate::world::vanilla::Vector3d;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
 ///
 /// The positions and orientations do not matter since they can be overwritten in the [`SMSG_UPDATE_OBJECT`](crate::world::vanilla::SMSG_UPDATE_OBJECT), but the map determines which map the client loads and this is not changeable in [`SMSG_UPDATE_OBJECT`](crate::world::vanilla::SMSG_UPDATE_OBJECT).

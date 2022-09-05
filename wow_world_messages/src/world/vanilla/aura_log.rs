@@ -3,8 +3,7 @@ use crate::world::vanilla::AuraType;
 use crate::world::vanilla::SpellSchool;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:266`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L266):
 /// ```text
 /// struct AuraLog {
@@ -623,8 +622,7 @@ impl AuraLog {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum AuraLog_AuraType {
     None,
     BindSight,

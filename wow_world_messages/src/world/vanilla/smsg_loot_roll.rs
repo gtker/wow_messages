@@ -3,8 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::RollVote;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm#L3):
 /// ```text
 /// smsg SMSG_LOOT_ROLL = 0x02A2 {

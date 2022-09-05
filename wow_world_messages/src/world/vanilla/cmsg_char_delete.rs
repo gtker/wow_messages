@@ -2,8 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Command to delete a character from the clients account. Can be sent after the client has received [`SMSG_CHAR_ENUM`](crate::world::vanilla::SMSG_CHAR_ENUM).
 ///
 /// Sent after the client has confirmed the character deletion.

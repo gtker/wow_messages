@@ -4,8 +4,7 @@ use crate::world::vanilla::CastFailureReason;
 use crate::world::vanilla::SimpleSpellCastResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_cast_result.wowm:449`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_cast_result.wowm#L449):
 /// ```text
 /// smsg SMSG_CAST_RESULT = 0x0130 {
@@ -448,8 +447,7 @@ impl SMSG_CAST_RESULT {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum SMSG_CAST_RESULT_CastFailureReason {
     AffectingCombat,
     AlreadyAtFullHealth,
@@ -1226,8 +1224,7 @@ impl SMSG_CAST_RESULT_CastFailureReason {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum SMSG_CAST_RESULT_SimpleSpellCastResult {
     Success {
         reason: SMSG_CAST_RESULT_CastFailureReason,

@@ -993,8 +993,7 @@ impl SpellCastTargets_SpellCastTargetFlags_Item {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_SourceLocation {
     pub source_position_x: f32,
     pub source_position_y: f32,
@@ -1009,8 +1008,7 @@ impl SpellCastTargets_SpellCastTargetFlags_SourceLocation {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_DestLocation {
     pub destination_position_x: f32,
     pub destination_position_y: f32,

@@ -496,8 +496,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     inner: u8,
     pin: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin>,
@@ -629,8 +628,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
     pub pin_hash: [u8; 20],
     pub pin_salt: [u8; 16],
@@ -643,8 +641,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
     pub unknown0: u8,
     pub unknown1: u8,
@@ -663,8 +660,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
     pub unknown5: u8,
 }

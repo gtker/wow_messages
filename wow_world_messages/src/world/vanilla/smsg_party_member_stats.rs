@@ -1550,8 +1550,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagStatus {
     pub status: GroupMemberOnlineStatus,
 }
@@ -1562,8 +1561,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagStatus {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagCurHp {
     pub current_health: u16,
 }
@@ -1574,8 +1572,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagCurHp {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagMaxHp {
     pub max_health: u16,
 }
@@ -1586,8 +1583,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagMaxHp {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPowerType {
     pub power: Power,
 }
@@ -1598,8 +1594,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPowerType {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagCurPower {
     pub current_power: u16,
 }
@@ -1610,8 +1605,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagCurPower {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagMaxPower {
     pub max_power: u16,
 }
@@ -1622,8 +1616,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagMaxPower {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagLevel {
     pub level: u16,
 }
@@ -1634,8 +1627,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagLevel {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagZone {
     pub area: Area,
 }
@@ -1646,8 +1638,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagZone {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPosition {
     pub position_x: u16,
     pub position_y: u16,
@@ -1682,8 +1673,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetName {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetModelId {
     pub pet_display_id: u16,
 }
@@ -1694,8 +1684,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetModelId {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetCurHp {
     pub pet_current_health: u16,
 }
@@ -1706,8 +1695,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetCurHp {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetMaxHp {
     pub pet_max_health: u16,
 }
@@ -1718,8 +1706,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetMaxHp {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetPowerType {
     pub pet_power_type: Power,
 }
@@ -1730,8 +1717,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetPowerType {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetCurPower {
     pub pet_current_power: u16,
 }
@@ -1742,8 +1728,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetCurPower {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
-#[derive(Copy)]
+#[derive(Debug, PartialEq, Clone, Copy, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_FlagPetMaxPower {
     pub pet_max_power: u16,
 }

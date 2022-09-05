@@ -132,14 +132,15 @@ fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
 pub fn print_derives(s: &mut Writer, members: &[RustMember], is_enum_type: bool) {
     s.w("#[derive(Debug, PartialEq, Clone");
 
+    if can_derive_copy(members) {
+        s.w_no_indent(", Copy");
+    }
+
     if !is_enum_type && can_derive_default(members) {
         s.w_no_indent(", Default");
     }
-    s.wln_no_indent(")]");
 
-    if can_derive_copy(members) {
-        s.wln("#[derive(Copy)]");
-    }
+    s.wln_no_indent(")]");
 }
 
 fn can_derive_default(members: &[RustMember]) -> bool {
