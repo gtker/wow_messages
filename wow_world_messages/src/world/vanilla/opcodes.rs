@@ -309,7 +309,7 @@ use crate::world::vanilla::MSG_RAID_TARGET_UPDATE_Client;
 use crate::world::vanilla::MSG_RAID_READY_CHECK_Client;
 use crate::world::vanilla::CMSG_GMSURVEY_SUBMIT;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),
@@ -5324,7 +5324,7 @@ use crate::world::vanilla::SMSG_SPELL_UPDATE_CHAIN_TARGETS;
 use crate::world::vanilla::SMSG_EXPECTED_SPAM_RECORDS;
 use crate::world::vanilla::SMSG_DEFENSE_MESSAGE;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),

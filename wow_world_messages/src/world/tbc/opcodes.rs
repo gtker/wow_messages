@@ -7,7 +7,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::tbc::CMSG_CHAR_ENUM;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
 }
@@ -146,7 +146,7 @@ impl From<CMSG_CHAR_ENUM> for ClientOpcodeMessage {
 
 use crate::world::tbc::SMSG_AUTH_CHALLENGE;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
 }

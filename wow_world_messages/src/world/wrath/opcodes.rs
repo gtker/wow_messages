@@ -10,7 +10,7 @@ use crate::world::wrath::CMSG_CHAR_ENUM;
 use crate::world::wrath::CMSG_AUTH_SESSION;
 use crate::world::wrath::CMSG_REALM_SPLIT;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
@@ -197,7 +197,7 @@ use crate::world::wrath::SMSG_AUTH_CHALLENGE;
 use crate::world::wrath::SMSG_AUTH_RESPONSE;
 use crate::world::wrath::SMSG_REALM_SPLIT;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),

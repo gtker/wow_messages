@@ -9,7 +9,7 @@ use crate::logon::version_2::CMD_REALM_LIST_Server;
 use crate::logon::version_3::CMD_XFER_INITIATE;
 use crate::logon::version_3::CMD_XFER_DATA;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
     CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server),
     CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server),
@@ -124,7 +124,7 @@ use crate::logon::version_3::CMD_XFER_ACCEPT;
 use crate::logon::version_3::CMD_XFER_RESUME;
 use crate::logon::version_3::CMD_XFER_CANCEL;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
     CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client),
     CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Client),

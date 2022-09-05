@@ -135,7 +135,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType,
 }
 
 pub fn definition(s: &mut Writer, v: &[&Container], ty: &str) {
-    s.wln("#[derive(Debug)]");
+    s.wln("#[derive(Debug, Clone, PartialEq)]");
     s.new_enum("pub", format!("{t}OpcodeMessage", t = ty), |s| {
         for &e in v {
             s.wln(format!(
