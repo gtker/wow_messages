@@ -130,6 +130,14 @@ impl ClientOpcodeMessage {
 
 }
 
+impl std::fmt::Display for ClientOpcodeMessage {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(match self {
+            ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
+        })
+    }
+}
+
 impl From<CMSG_CHAR_ENUM> for ClientOpcodeMessage {
     fn from(c: CMSG_CHAR_ENUM) -> Self {
         Self::CMSG_CHAR_ENUM(c)
@@ -259,6 +267,14 @@ impl ServerOpcodeMessage {
         }
     }
 
+}
+
+impl std::fmt::Display for ServerOpcodeMessage {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(match self {
+            ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
+        })
+    }
 }
 
 impl From<SMSG_AUTH_CHALLENGE> for ServerOpcodeMessage {

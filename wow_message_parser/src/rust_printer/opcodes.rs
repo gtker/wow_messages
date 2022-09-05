@@ -383,6 +383,8 @@ pub fn common_impls_world(
         }
     });
 
+    impl_display(s, v, ty);
+
     for &e in v {
         s.impl_for(
             format!("From<{}>", e.name()),
@@ -394,6 +396,33 @@ pub fn common_impls_world(
             },
         );
     }
+}
+
+fn impl_display(s: &mut Writer, v: &[&Container], ty: &str) {
+    s.bodyn(
+        format!("impl std::fmt::Display for {}OpcodeMessage", ty),
+        |s| {
+            s.body(
+                "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
+                |s| {
+                    s.body_closing_with(
+                        "f.write_str(match self",
+                        |s| {
+                            for e in v {
+                                s.wln(format!(
+                                    "{ty}OpcodeMessage::{enumerator}(_) => \"{message}\",",
+                                    ty = ty,
+                                    enumerator = get_enumerator_name(e.name()),
+                                    message = e.name(),
+                                ));
+                            }
+                        },
+                        ")",
+                    );
+                },
+            )
+        },
+    );
 }
 
 fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType, enc_prefix: &str) {
@@ -497,6 +526,8 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
         },
         true,
     );
+
+    impl_display(s, v, ty);
 
     for &e in v {
         s.impl_for(

@@ -73,6 +73,18 @@ impl ServerOpcodeMessage {
 
 }
 
+impl std::fmt::Display for ServerOpcodeMessage {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(match self {
+            ServerOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(_) => "CMD_AUTH_LOGON_CHALLENGE_Server",
+            ServerOpcodeMessage::CMD_AUTH_LOGON_PROOF(_) => "CMD_AUTH_LOGON_PROOF_Server",
+            ServerOpcodeMessage::CMD_REALM_LIST(_) => "CMD_REALM_LIST_Server",
+            ServerOpcodeMessage::CMD_XFER_INITIATE(_) => "CMD_XFER_INITIATE",
+            ServerOpcodeMessage::CMD_XFER_DATA(_) => "CMD_XFER_DATA",
+        })
+    }
+}
+
 impl From<CMD_AUTH_LOGON_CHALLENGE_Server> for ServerOpcodeMessage {
     fn from(c: CMD_AUTH_LOGON_CHALLENGE_Server) -> Self {
         Self::CMD_AUTH_LOGON_CHALLENGE(c)
@@ -189,6 +201,21 @@ impl ClientOpcodeMessage {
         }
     }
 
+}
+
+impl std::fmt::Display for ClientOpcodeMessage {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(match self {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_CHALLENGE(_) => "CMD_AUTH_LOGON_CHALLENGE_Client",
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(_) => "CMD_AUTH_LOGON_PROOF_Client",
+            ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(_) => "CMD_AUTH_RECONNECT_CHALLENGE_Client",
+            ClientOpcodeMessage::CMD_SURVEY_RESULT(_) => "CMD_SURVEY_RESULT",
+            ClientOpcodeMessage::CMD_REALM_LIST(_) => "CMD_REALM_LIST_Client",
+            ClientOpcodeMessage::CMD_XFER_ACCEPT(_) => "CMD_XFER_ACCEPT",
+            ClientOpcodeMessage::CMD_XFER_RESUME(_) => "CMD_XFER_RESUME",
+            ClientOpcodeMessage::CMD_XFER_CANCEL(_) => "CMD_XFER_CANCEL",
+        })
+    }
 }
 
 impl From<CMD_AUTH_LOGON_CHALLENGE_Client> for ClientOpcodeMessage {

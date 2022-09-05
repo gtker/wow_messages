@@ -157,6 +157,17 @@ impl ClientOpcodeMessage {
 
 }
 
+impl std::fmt::Display for ClientOpcodeMessage {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(match self {
+            ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => "CMSG_CHAR_CREATE",
+            ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
+            ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
+            ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
+        })
+    }
+}
+
 impl From<CMSG_CHAR_CREATE> for ClientOpcodeMessage {
     fn from(c: CMSG_CHAR_CREATE) -> Self {
         Self::CMSG_CHAR_CREATE(c)
@@ -412,6 +423,17 @@ impl ServerOpcodeMessage {
         }
     }
 
+}
+
+impl std::fmt::Display for ServerOpcodeMessage {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(match self {
+            ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
+            ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
+            ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
+        })
+    }
 }
 
 impl From<SMSG_CHAR_ENUM> for ServerOpcodeMessage {
