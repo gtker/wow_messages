@@ -58,7 +58,7 @@ fn get_encrypted_server(opcode: u16, size: u32, e: &mut ServerEncrypterHalf) -> 
         MINIMUM_SIZE_LENGTH
     };
 
-    v.extend_from_slice(&e.encrypt_server_header(size - size_length, opcode));
+    v.extend_from_slice(e.encrypt_server_header(size - size_length, opcode));
 
     v
 }
