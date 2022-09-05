@@ -1,6 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::wrath::CharacterGear;
+use crate::world::wrath::Class;
 use crate::world::wrath::Gender;
 use crate::world::wrath::Vector3d;
 use std::io::{Write, Read};
@@ -12,7 +13,7 @@ use std::io::{Write, Read};
 ///     Guid guid;
 ///     CString name;
 ///     u8 race;
-///     u8 class;
+///     Class class;
 ///     Gender gender;
 ///     u8 skin;
 ///     u8 face;
@@ -37,7 +38,7 @@ pub struct Character {
     pub guid: Guid,
     pub name: String,
     pub race: u8,
-    pub class: u8,
+    pub class: Class,
     pub gender: Gender,
     pub skin: u8,
     pub face: u8,
@@ -71,8 +72,8 @@ impl Character {
         // race: u8
         w.write_all(&self.race.to_le_bytes())?;
 
-        // class: u8
-        w.write_all(&self.class.to_le_bytes())?;
+        // class: Class
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 
         // gender: Gender
         w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
@@ -146,8 +147,8 @@ impl Character {
         // race: u8
         let race = crate::util::read_u8_le(r)?;
 
-        // class: u8
-        let class = crate::util::read_u8_le(r)?;
+        // class: Class
+        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
 
         // gender: Gender
         let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;
@@ -239,7 +240,7 @@ impl Character {
         8 // guid: Guid
         + self.name.len() + 1 // name: CString
         + 1 // race: u8
-        + 1 // class: u8
+        + 1 // class: Class
         + 1 // gender: Gender
         + 1 // skin: u8
         + 1 // face: u8

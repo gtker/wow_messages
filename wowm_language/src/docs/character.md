@@ -72,7 +72,7 @@ struct Character {
     Guid guid;
     CString name;
     u8 race;
-    u8 class;
+    Class class;
     Gender gender;
     u8 skin;
     u8 face;
@@ -100,7 +100,7 @@ struct Character {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x08 | - / - | CString | name |  |  |
 | - | 1 / - | u8 | race |  |  |
-| - | 1 / - | u8 | class |  |  |
+| - | ? / - | [Class](class.md) | class |  |  |
 | - | ? / - | [Gender](gender.md) | gender |  |  |
 | - | 1 / - | u8 | skin |  |  |
 | - | 1 / - | u8 | face |  |  |

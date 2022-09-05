@@ -9,7 +9,7 @@ struct Character {
     Guid guid;
     CString name;
     u8 race;
-    u8 class;
+    Class class;
     Gender gender;
     u8 skin;
     u8 face;

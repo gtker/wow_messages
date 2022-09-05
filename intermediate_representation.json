@@ -17783,7 +17783,12 @@
           ]
         }
       },
-      "objects_used_in": [],
+      "objects_used_in": [
+        {
+          "name": "Character",
+          "usage": "used_but_not_in_if"
+        }
+      ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/class.wowm",
         "start_position": 16
@@ -69072,9 +69077,9 @@
           "content": {
             "name": "class",
             "member_type": {
-              "type": "integer",
+              "type": "identifier",
               "content": {
-                "type": "u8"
+                "type_name": "Class"
               }
             },
             "constant_value": null,
