@@ -89,7 +89,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                     characters: vec![Character {
                         guid: Guid::new(4),
                         name: "Warr".to_string(),
-                        race: 1,
+                        race: Race::Human,
                         class: Class::Warrior,
                         gender: Gender::Female,
                         skin: 0,

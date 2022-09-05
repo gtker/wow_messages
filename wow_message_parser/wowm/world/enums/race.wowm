@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum Race : u8 {
     HUMAN = 1;
     ORC = 2;
@@ -12,5 +10,32 @@ enum Race : u8 {
     GOBLIN = 9;
 } {
     rust_base_type = "true";
+    versions = "1.12";
+}
+
+enum Race : u8 {
+    HUMAN = 1;
+    ORC = 2;
+    DWARF = 3;
+    NIGHT_ELF = 4;
+    UNDEAD = 5;
+    TAUREN = 6;
+    GNOME = 7;
+    TROLL = 8;
+    GOBLIN = 9;
+    BLOODELF = 10;
+    DRAENEI = 11;
+    FEL_ORC = 12;
+    NAGA = 13;
+    BROKEN = 14;
+    SKELETON = 15;
+    VRYKUL = 16;
+    TUSKARR = 17;
+    FOREST_TROLL = 18;
+    TAUNKA = 19;
+    NORTHREND_SKELETON = 20;
+    ICE_TROLL = 21;
+} {
+    versions = "3.3.5";
 }
 

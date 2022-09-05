@@ -3,6 +3,7 @@ use crate::Guid;
 use crate::world::wrath::CharacterGear;
 use crate::world::wrath::Class;
 use crate::world::wrath::Gender;
+use crate::world::wrath::Race;
 use crate::world::wrath::Vector3d;
 use std::io::{Write, Read};
 
@@ -12,7 +13,7 @@ use std::io::{Write, Read};
 /// struct Character {
 ///     Guid guid;
 ///     CString name;
-///     u8 race;
+///     Race race;
 ///     Class class;
 ///     Gender gender;
 ///     u8 skin;
@@ -37,7 +38,7 @@ use std::io::{Write, Read};
 pub struct Character {
     pub guid: Guid,
     pub name: String,
-    pub race: u8,
+    pub race: Race,
     pub class: Class,
     pub gender: Gender,
     pub skin: u8,
@@ -69,8 +70,8 @@ impl Character {
         // Null terminator
         w.write_all(&[0])?;
 
-        // race: u8
-        w.write_all(&self.race.to_le_bytes())?;
+        // race: Race
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
 
         // class: Class
         w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
@@ -144,8 +145,8 @@ impl Character {
         let name = crate::util::read_c_string_to_vec(r)?;
         let name = String::from_utf8(name)?;
 
-        // race: u8
-        let race = crate::util::read_u8_le(r)?;
+        // race: Race
+        let race: Race = crate::util::read_u8_le(r)?.try_into()?;
 
         // class: Class
         let class: Class = crate::util::read_u8_le(r)?.try_into()?;
@@ -239,7 +240,7 @@ impl Character {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
         + self.name.len() + 1 // name: CString
-        + 1 // race: u8
+        + 1 // race: Race
         + 1 // class: Class
         + 1 // gender: Gender
         + 1 // skin: u8

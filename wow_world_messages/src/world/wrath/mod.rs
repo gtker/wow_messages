@@ -20,6 +20,8 @@ pub use gender::*;
 pub(crate) mod inventory_type;
 pub use inventory_type::*;
 pub mod opcodes;
+pub(crate) mod race;
+pub use race::*;
 pub(crate) mod realm_split_state;
 pub use realm_split_state::*;
 pub(crate) mod smsg_auth_challenge;
