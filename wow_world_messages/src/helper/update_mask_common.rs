@@ -80,14 +80,14 @@ macro_rules! update_item {
                 let mut header = vec![];
                 let mut values = BTreeMap::new();
 
-                crate::helper::update_mask_common::header_set(
+                $crate::helper::update_mask_common::header_set(
                     &mut header,
                     &mut values,
                     OBJECT_FIELD_TYPE,
                 );
                 values.insert(
                     OBJECT_FIELD_TYPE,
-                    crate::helper::update_mask_common::OBJECT | $type_value,
+                    $crate::helper::update_mask_common::OBJECT | $type_value,
                 );
 
                 Self { header, values }
@@ -98,7 +98,7 @@ macro_rules! update_item {
             }
 
             pub(crate) fn header_set(&mut self, bit: u16) {
-                crate::helper::update_mask_common::header_set(
+                $crate::helper::update_mask_common::header_set(
                     &mut self.header,
                     &mut self.values,
                     bit,
@@ -106,7 +106,7 @@ macro_rules! update_item {
             }
 
             pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), std::io::Error> {
-                crate::helper::update_mask_common::write_into_vec(v, &self.header, &self.values)
+                $crate::helper::update_mask_common::write_into_vec(v, &self.header, &self.values)
             }
         }
     };
