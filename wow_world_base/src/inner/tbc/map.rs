@@ -1,21 +1,22 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/map.wowm:394`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/map.wowm#L394):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/map.wowm:139`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/map.wowm#L139):
 /// ```text
 /// enum Map : u32 {
 ///     EASTERN_KINGDOMS = 0;
 ///     KALIMDOR = 1;
 ///     TESTING = 13;
 ///     SCOTT_TEST = 25;
+///     CASHTEST = 29;
 ///     ALTERAC_VALLEY = 30;
 ///     SHADOWFANG_KEEP = 33;
 ///     STORMWIND_STOCKADE = 34;
-///     STORMWINDPRISON = 35;
+///     UNUSEDSTORMWINDPRISON = 35;
 ///     DEADMINES = 36;
 ///     AZSHARA_CRATER = 37;
 ///     COLLINS_TEST = 42;
 ///     WAILING_CAVERNS = 43;
-///     MONASTERY = 44;
+///     UNUSED_MONASTERY = 44;
 ///     RAZORFEN_KRAUL = 47;
 ///     BLACKFATHOM_DEEPS = 48;
 ///     ULDAMAN = 70;
@@ -72,13 +73,7 @@ use std::convert::{TryFrom, TryInto};
 ///     GRUULS_LAIR = 565;
 ///     EYE_OF_THE_STORM = 566;
 ///     ZUL_AMAN = 568;
-///     NORTHREND = 571;
 ///     RUINS_OF_LORDAERON = 572;
-///     EXTERIORTEST = 573;
-///     UTGARDE_KEEP = 574;
-///     UTGARDE_PINNACLE = 575;
-///     THE_NEXUS = 576;
-///     THE_OCULUS = 578;
 ///     THE_SUNWELL = 580;
 ///     TRANSPORT_RUT_THERAN_TO_AUBERDINE = 582;
 ///     TRANSPORT_MENETHIL_TO_THERAMORE = 584;
@@ -89,55 +84,8 @@ use std::convert::{TryFrom, TryInto};
 ///     TRANSPORT_ORGRIMMAR_TO_GROM_GOL = 589;
 ///     TRANSPORT_GROM_GOL_TO_UNDERCITY = 590;
 ///     TRANSPORT_UNDERCITY_TO_ORGRIMMAR = 591;
-///     TRANSPORT_BOREAN_TUNDRA_TEST = 592;
 ///     TRANSPORT_BOOTY_BAY_TO_RATCHET = 593;
-///     TRANSPORT_HOWLING_FJORD_SISTER_MERCY_QUEST = 594;
-///     THE_CULLING_OF_STRATHOLME = 595;
-///     TRANSPORT_NAGLFAR = 596;
-///     CRAIG_TEST = 597;
-///     SUNWELL_FIX = 598;
-///     HALLS_OF_STONE = 599;
-///     DRAK_THARON_KEEP = 600;
-///     AZJOL_NERUB = 601;
-///     HALLS_OF_LIGHTNING = 602;
-///     ULDUAR = 603;
-///     GUNDRAK = 604;
-///     DEVELOPMENT_LAND_NON_WEIGHTED_TEXTURES = 605;
-///     QA_AND_DVD = 606;
-///     STRAND_OF_THE_ANCIENTS = 607;
-///     VIOLET_HOLD = 608;
-///     EBON_HOLD = 609;
-///     TRANSPORT_TIRISFAL_TO_VENGEANCE_LANDING = 610;
-///     TRANSPORT_MENETHIL_TO_VALGARDE = 612;
-///     TRANSPORT_ORGRIMMAR_TO_WARSONG_HOLD = 613;
-///     TRANSPORT_STORMWIND_TO_VALIANCE_KEEP = 614;
-///     THE_OBSIDIAN_SANCTUM = 615;
-///     THE_EYE_OF_ETERNITY = 616;
-///     DALARAN_SEWERS = 617;
-///     THE_RING_OF_VALOR = 618;
-///     AHN_KAHET_THE_OLD_KINGDOM = 619;
-///     TRANSPORT_MOA_KI_TO_UNU_PE = 620;
-///     TRANSPORT_MOA_KI_TO_KAMAGUA = 621;
-///     TRANSPORT_ORGRIMS_HAMMER = 622;
-///     TRANSPORT_THE_SKYBREAKER = 623;
-///     VAULT_OF_ARCHAVON = 624;
-///     ISLE_OF_CONQUEST = 628;
-///     ICECROWN_CITADEL = 631;
-///     THE_FORGE_OF_SOULS = 632;
-///     TRANSPORT_ALLIANCE_AIRSHIP_BG = 641;
-///     TRANSPORT_HORDEAIRSHIPBG = 642;
-///     TRANSPORT_ORGRIMMAR_TO_THUNDER_BLUFF = 647;
-///     TRIAL_OF_THE_CRUSADER = 649;
-///     TRIAL_OF_THE_CHAMPION = 650;
-///     PIT_OF_SARON = 658;
-///     HALLS_OF_REFLECTION = 668;
-///     TRANSPORT_THE_SKYBREAKER_ICECROWN_CITADEL_RAID = 672;
-///     TRANSPORT_ORGRIMS_HAMMER_ICECROWN_CITADEL_RAID = 673;
-///     TRANSPORT_THE_SKYBREAKER_IC_DUNGEON = 712;
-///     TRANSPORT_ORGRIMS_HAMMER_IC_DUNGEON = 713;
-///     TRASNPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID = 718;
-///     STORMWIND = 723;
-///     THE_RUBY_SANCTUM = 724;
+///     SUNWELL_FIX_UNUSED = 598;
 /// }
 
 /// ```
@@ -147,15 +95,16 @@ pub enum Map {
     Kalimdor,
     Testing,
     ScottTest,
+    Cashtest,
     AlteracValley,
     ShadowfangKeep,
     StormwindStockade,
-    Stormwindprison,
+    Unusedstormwindprison,
     Deadmines,
     AzsharaCrater,
     CollinsTest,
     WailingCaverns,
-    Monastery,
+    UnusedMonastery,
     RazorfenKraul,
     BlackfathomDeeps,
     Uldaman,
@@ -212,13 +161,7 @@ pub enum Map {
     GruulsLair,
     EyeOfTheStorm,
     ZulAman,
-    Northrend,
     RuinsOfLordaeron,
-    Exteriortest,
-    UtgardeKeep,
-    UtgardePinnacle,
-    TheNexus,
-    TheOculus,
     TheSunwell,
     TransportRutTheranToAuberdine,
     TransportMenethilToTheramore,
@@ -229,55 +172,8 @@ pub enum Map {
     TransportOrgrimmarToGromGol,
     TransportGromGolToUndercity,
     TransportUndercityToOrgrimmar,
-    TransportBoreanTundraTest,
     TransportBootyBayToRatchet,
-    TransportHowlingFjordSisterMercyQuest,
-    TheCullingOfStratholme,
-    TransportNaglfar,
-    CraigTest,
-    SunwellFix,
-    HallsOfStone,
-    DrakTharonKeep,
-    AzjolNerub,
-    HallsOfLightning,
-    Ulduar,
-    Gundrak,
-    DevelopmentLandNonWeightedTextures,
-    QaAndDvd,
-    StrandOfTheAncients,
-    VioletHold,
-    EbonHold,
-    TransportTirisfalToVengeanceLanding,
-    TransportMenethilToValgarde,
-    TransportOrgrimmarToWarsongHold,
-    TransportStormwindToValianceKeep,
-    TheObsidianSanctum,
-    TheEyeOfEternity,
-    DalaranSewers,
-    TheRingOfValor,
-    AhnKahetTheOldKingdom,
-    TransportMoaKiToUnuPe,
-    TransportMoaKiToKamagua,
-    TransportOrgrimsHammer,
-    TransportTheSkybreaker,
-    VaultOfArchavon,
-    IsleOfConquest,
-    IcecrownCitadel,
-    TheForgeOfSouls,
-    TransportAllianceAirshipBg,
-    TransportHordeairshipbg,
-    TransportOrgrimmarToThunderBluff,
-    TrialOfTheCrusader,
-    TrialOfTheChampion,
-    PitOfSaron,
-    HallsOfReflection,
-    TransportTheSkybreakerIcecrownCitadelRaid,
-    TransportOrgrimsHammerIcecrownCitadelRaid,
-    TransportTheSkybreakerIcDungeon,
-    TransportOrgrimsHammerIcDungeon,
-    TrasnportTheMightyWindIcecrownCitadelRaid,
-    Stormwind,
-    TheRubySanctum,
+    SunwellFixUnused,
 }
 
 impl Map {
@@ -287,15 +183,16 @@ impl Map {
             Self::Kalimdor => 0x1,
             Self::Testing => 0xd,
             Self::ScottTest => 0x19,
+            Self::Cashtest => 0x1d,
             Self::AlteracValley => 0x1e,
             Self::ShadowfangKeep => 0x21,
             Self::StormwindStockade => 0x22,
-            Self::Stormwindprison => 0x23,
+            Self::Unusedstormwindprison => 0x23,
             Self::Deadmines => 0x24,
             Self::AzsharaCrater => 0x25,
             Self::CollinsTest => 0x2a,
             Self::WailingCaverns => 0x2b,
-            Self::Monastery => 0x2c,
+            Self::UnusedMonastery => 0x2c,
             Self::RazorfenKraul => 0x2f,
             Self::BlackfathomDeeps => 0x30,
             Self::Uldaman => 0x46,
@@ -352,13 +249,7 @@ impl Map {
             Self::GruulsLair => 0x235,
             Self::EyeOfTheStorm => 0x236,
             Self::ZulAman => 0x238,
-            Self::Northrend => 0x23b,
             Self::RuinsOfLordaeron => 0x23c,
-            Self::Exteriortest => 0x23d,
-            Self::UtgardeKeep => 0x23e,
-            Self::UtgardePinnacle => 0x23f,
-            Self::TheNexus => 0x240,
-            Self::TheOculus => 0x242,
             Self::TheSunwell => 0x244,
             Self::TransportRutTheranToAuberdine => 0x246,
             Self::TransportMenethilToTheramore => 0x248,
@@ -369,55 +260,8 @@ impl Map {
             Self::TransportOrgrimmarToGromGol => 0x24d,
             Self::TransportGromGolToUndercity => 0x24e,
             Self::TransportUndercityToOrgrimmar => 0x24f,
-            Self::TransportBoreanTundraTest => 0x250,
             Self::TransportBootyBayToRatchet => 0x251,
-            Self::TransportHowlingFjordSisterMercyQuest => 0x252,
-            Self::TheCullingOfStratholme => 0x253,
-            Self::TransportNaglfar => 0x254,
-            Self::CraigTest => 0x255,
-            Self::SunwellFix => 0x256,
-            Self::HallsOfStone => 0x257,
-            Self::DrakTharonKeep => 0x258,
-            Self::AzjolNerub => 0x259,
-            Self::HallsOfLightning => 0x25a,
-            Self::Ulduar => 0x25b,
-            Self::Gundrak => 0x25c,
-            Self::DevelopmentLandNonWeightedTextures => 0x25d,
-            Self::QaAndDvd => 0x25e,
-            Self::StrandOfTheAncients => 0x25f,
-            Self::VioletHold => 0x260,
-            Self::EbonHold => 0x261,
-            Self::TransportTirisfalToVengeanceLanding => 0x262,
-            Self::TransportMenethilToValgarde => 0x264,
-            Self::TransportOrgrimmarToWarsongHold => 0x265,
-            Self::TransportStormwindToValianceKeep => 0x266,
-            Self::TheObsidianSanctum => 0x267,
-            Self::TheEyeOfEternity => 0x268,
-            Self::DalaranSewers => 0x269,
-            Self::TheRingOfValor => 0x26a,
-            Self::AhnKahetTheOldKingdom => 0x26b,
-            Self::TransportMoaKiToUnuPe => 0x26c,
-            Self::TransportMoaKiToKamagua => 0x26d,
-            Self::TransportOrgrimsHammer => 0x26e,
-            Self::TransportTheSkybreaker => 0x26f,
-            Self::VaultOfArchavon => 0x270,
-            Self::IsleOfConquest => 0x274,
-            Self::IcecrownCitadel => 0x277,
-            Self::TheForgeOfSouls => 0x278,
-            Self::TransportAllianceAirshipBg => 0x281,
-            Self::TransportHordeairshipbg => 0x282,
-            Self::TransportOrgrimmarToThunderBluff => 0x287,
-            Self::TrialOfTheCrusader => 0x289,
-            Self::TrialOfTheChampion => 0x28a,
-            Self::PitOfSaron => 0x292,
-            Self::HallsOfReflection => 0x29c,
-            Self::TransportTheSkybreakerIcecrownCitadelRaid => 0x2a0,
-            Self::TransportOrgrimsHammerIcecrownCitadelRaid => 0x2a1,
-            Self::TransportTheSkybreakerIcDungeon => 0x2c8,
-            Self::TransportOrgrimsHammerIcDungeon => 0x2c9,
-            Self::TrasnportTheMightyWindIcecrownCitadelRaid => 0x2ce,
-            Self::Stormwind => 0x2d3,
-            Self::TheRubySanctum => 0x2d4,
+            Self::SunwellFixUnused => 0x256,
         }
     }
 
@@ -436,15 +280,16 @@ impl std::fmt::Display for Map {
             Self::Kalimdor => f.write_str("Kalimdor"),
             Self::Testing => f.write_str("Testing"),
             Self::ScottTest => f.write_str("Scott Test"),
+            Self::Cashtest => f.write_str("CashTest"),
             Self::AlteracValley => f.write_str("Alterac Valley"),
             Self::ShadowfangKeep => f.write_str("Shadowfang Keep"),
             Self::StormwindStockade => f.write_str("Stormwind Stockade"),
-            Self::Stormwindprison => f.write_str("StormwindPrison"),
+            Self::Unusedstormwindprison => f.write_str("<unused>StormwindPrison"),
             Self::Deadmines => f.write_str("Deadmines"),
             Self::AzsharaCrater => f.write_str("Azshara Crater"),
             Self::CollinsTest => f.write_str("Collin's Test"),
             Self::WailingCaverns => f.write_str("Wailing Caverns"),
-            Self::Monastery => f.write_str("Monastery"),
+            Self::UnusedMonastery => f.write_str("<unused> Monastery"),
             Self::RazorfenKraul => f.write_str("Razorfen Kraul"),
             Self::BlackfathomDeeps => f.write_str("Blackfathom Deeps"),
             Self::Uldaman => f.write_str("Uldaman"),
@@ -501,13 +346,7 @@ impl std::fmt::Display for Map {
             Self::GruulsLair => f.write_str("Gruul's Lair"),
             Self::EyeOfTheStorm => f.write_str("Eye of the Storm"),
             Self::ZulAman => f.write_str("Zul'Aman"),
-            Self::Northrend => f.write_str("Northrend"),
             Self::RuinsOfLordaeron => f.write_str("Ruins of Lordaeron"),
-            Self::Exteriortest => f.write_str("ExteriorTest"),
-            Self::UtgardeKeep => f.write_str("Utgarde Keep"),
-            Self::UtgardePinnacle => f.write_str("Utgarde Pinnacle"),
-            Self::TheNexus => f.write_str("The Nexus"),
-            Self::TheOculus => f.write_str("The Oculus"),
             Self::TheSunwell => f.write_str("The Sunwell"),
             Self::TransportRutTheranToAuberdine => f.write_str("Transport: Rut'theran to Auberdine"),
             Self::TransportMenethilToTheramore => f.write_str("Transport: Menethil to Theramore"),
@@ -518,55 +357,8 @@ impl std::fmt::Display for Map {
             Self::TransportOrgrimmarToGromGol => f.write_str("Transport: Orgrimmar to Grom'Gol"),
             Self::TransportGromGolToUndercity => f.write_str("Transport: Grom'Gol to Undercity"),
             Self::TransportUndercityToOrgrimmar => f.write_str("Transport: Undercity to Orgrimmar"),
-            Self::TransportBoreanTundraTest => f.write_str("Transport: Borean Tundra Test"),
             Self::TransportBootyBayToRatchet => f.write_str("Transport: Booty Bay to Ratchet"),
-            Self::TransportHowlingFjordSisterMercyQuest => f.write_str("Transport: Howling Fjord Sister Mercy (Quest)"),
-            Self::TheCullingOfStratholme => f.write_str("The Culling of Stratholme"),
-            Self::TransportNaglfar => f.write_str("Transport: Naglfar"),
-            Self::CraigTest => f.write_str("Craig Test"),
-            Self::SunwellFix => f.write_str("Sunwell Fix"),
-            Self::HallsOfStone => f.write_str("Halls of Stone"),
-            Self::DrakTharonKeep => f.write_str("Drak'Tharon Keep"),
-            Self::AzjolNerub => f.write_str("Azjol-Nerub"),
-            Self::HallsOfLightning => f.write_str("Halls of Lightning"),
-            Self::Ulduar => f.write_str("Ulduar"),
-            Self::Gundrak => f.write_str("Gundrak"),
-            Self::DevelopmentLandNonWeightedTextures => f.write_str("Development Land (non-weighted textures)"),
-            Self::QaAndDvd => f.write_str("QA and DVD"),
-            Self::StrandOfTheAncients => f.write_str("Strand of the Ancients"),
-            Self::VioletHold => f.write_str("Violet Hold"),
-            Self::EbonHold => f.write_str("Ebon Hold"),
-            Self::TransportTirisfalToVengeanceLanding => f.write_str("Transport: Tirisfal to Vengeance Landing"),
-            Self::TransportMenethilToValgarde => f.write_str("Transport: Menethil to Valgarde"),
-            Self::TransportOrgrimmarToWarsongHold => f.write_str("Transport: Orgrimmar to Warsong Hold"),
-            Self::TransportStormwindToValianceKeep => f.write_str("Transport: Stormwind to Valiance Keep"),
-            Self::TheObsidianSanctum => f.write_str("The Obsidian Sanctum"),
-            Self::TheEyeOfEternity => f.write_str("The Eye of Eternity"),
-            Self::DalaranSewers => f.write_str("Dalaran Sewers"),
-            Self::TheRingOfValor => f.write_str("The Ring of Valor"),
-            Self::AhnKahetTheOldKingdom => f.write_str("Ahn'kahet: The Old Kingdom"),
-            Self::TransportMoaKiToUnuPe => f.write_str("Transport: Moa'ki to Unu'pe"),
-            Self::TransportMoaKiToKamagua => f.write_str("Transport: Moa'ki to Kamagua"),
-            Self::TransportOrgrimsHammer => f.write_str("Transport: Orgrim's Hammer"),
-            Self::TransportTheSkybreaker => f.write_str("Transport: The Skybreaker"),
-            Self::VaultOfArchavon => f.write_str("Vault of Archavon"),
-            Self::IsleOfConquest => f.write_str("Isle of Conquest"),
-            Self::IcecrownCitadel => f.write_str("Icecrown Citadel"),
-            Self::TheForgeOfSouls => f.write_str("The Forge of Souls"),
-            Self::TransportAllianceAirshipBg => f.write_str("Transport: Alliance Airship BG"),
-            Self::TransportHordeairshipbg => f.write_str("Transport: HordeAirshipBG"),
-            Self::TransportOrgrimmarToThunderBluff => f.write_str("Transport: Orgrimmar to Thunder Bluff"),
-            Self::TrialOfTheCrusader => f.write_str("Trial of the Crusader"),
-            Self::TrialOfTheChampion => f.write_str("Trial of the Champion"),
-            Self::PitOfSaron => f.write_str("Pit of Saron"),
-            Self::HallsOfReflection => f.write_str("Halls of Reflection"),
-            Self::TransportTheSkybreakerIcecrownCitadelRaid => f.write_str("Transport: The Skybreaker (Icecrown Citadel Raid)"),
-            Self::TransportOrgrimsHammerIcecrownCitadelRaid => f.write_str("Transport: Orgrim's Hammer (Icecrown Citadel Raid)"),
-            Self::TransportTheSkybreakerIcDungeon => f.write_str("Transport: The Skybreaker (IC Dungeon)"),
-            Self::TransportOrgrimsHammerIcDungeon => f.write_str("Transport: Orgrim's Hammer (IC Dungeon)"),
-            Self::TrasnportTheMightyWindIcecrownCitadelRaid => f.write_str("Trasnport: The Mighty Wind (Icecrown Citadel Raid)"),
-            Self::Stormwind => f.write_str("Stormwind"),
-            Self::TheRubySanctum => f.write_str("The Ruby Sanctum"),
+            Self::SunwellFixUnused => f.write_str("Sunwell Fix (Unused)"),
         }
     }
 }
@@ -579,15 +371,16 @@ impl TryFrom<u32> for Map {
             1 => Ok(Self::Kalimdor),
             13 => Ok(Self::Testing),
             25 => Ok(Self::ScottTest),
+            29 => Ok(Self::Cashtest),
             30 => Ok(Self::AlteracValley),
             33 => Ok(Self::ShadowfangKeep),
             34 => Ok(Self::StormwindStockade),
-            35 => Ok(Self::Stormwindprison),
+            35 => Ok(Self::Unusedstormwindprison),
             36 => Ok(Self::Deadmines),
             37 => Ok(Self::AzsharaCrater),
             42 => Ok(Self::CollinsTest),
             43 => Ok(Self::WailingCaverns),
-            44 => Ok(Self::Monastery),
+            44 => Ok(Self::UnusedMonastery),
             47 => Ok(Self::RazorfenKraul),
             48 => Ok(Self::BlackfathomDeeps),
             70 => Ok(Self::Uldaman),
@@ -644,13 +437,7 @@ impl TryFrom<u32> for Map {
             565 => Ok(Self::GruulsLair),
             566 => Ok(Self::EyeOfTheStorm),
             568 => Ok(Self::ZulAman),
-            571 => Ok(Self::Northrend),
             572 => Ok(Self::RuinsOfLordaeron),
-            573 => Ok(Self::Exteriortest),
-            574 => Ok(Self::UtgardeKeep),
-            575 => Ok(Self::UtgardePinnacle),
-            576 => Ok(Self::TheNexus),
-            578 => Ok(Self::TheOculus),
             580 => Ok(Self::TheSunwell),
             582 => Ok(Self::TransportRutTheranToAuberdine),
             584 => Ok(Self::TransportMenethilToTheramore),
@@ -661,55 +448,8 @@ impl TryFrom<u32> for Map {
             589 => Ok(Self::TransportOrgrimmarToGromGol),
             590 => Ok(Self::TransportGromGolToUndercity),
             591 => Ok(Self::TransportUndercityToOrgrimmar),
-            592 => Ok(Self::TransportBoreanTundraTest),
             593 => Ok(Self::TransportBootyBayToRatchet),
-            594 => Ok(Self::TransportHowlingFjordSisterMercyQuest),
-            595 => Ok(Self::TheCullingOfStratholme),
-            596 => Ok(Self::TransportNaglfar),
-            597 => Ok(Self::CraigTest),
-            598 => Ok(Self::SunwellFix),
-            599 => Ok(Self::HallsOfStone),
-            600 => Ok(Self::DrakTharonKeep),
-            601 => Ok(Self::AzjolNerub),
-            602 => Ok(Self::HallsOfLightning),
-            603 => Ok(Self::Ulduar),
-            604 => Ok(Self::Gundrak),
-            605 => Ok(Self::DevelopmentLandNonWeightedTextures),
-            606 => Ok(Self::QaAndDvd),
-            607 => Ok(Self::StrandOfTheAncients),
-            608 => Ok(Self::VioletHold),
-            609 => Ok(Self::EbonHold),
-            610 => Ok(Self::TransportTirisfalToVengeanceLanding),
-            612 => Ok(Self::TransportMenethilToValgarde),
-            613 => Ok(Self::TransportOrgrimmarToWarsongHold),
-            614 => Ok(Self::TransportStormwindToValianceKeep),
-            615 => Ok(Self::TheObsidianSanctum),
-            616 => Ok(Self::TheEyeOfEternity),
-            617 => Ok(Self::DalaranSewers),
-            618 => Ok(Self::TheRingOfValor),
-            619 => Ok(Self::AhnKahetTheOldKingdom),
-            620 => Ok(Self::TransportMoaKiToUnuPe),
-            621 => Ok(Self::TransportMoaKiToKamagua),
-            622 => Ok(Self::TransportOrgrimsHammer),
-            623 => Ok(Self::TransportTheSkybreaker),
-            624 => Ok(Self::VaultOfArchavon),
-            628 => Ok(Self::IsleOfConquest),
-            631 => Ok(Self::IcecrownCitadel),
-            632 => Ok(Self::TheForgeOfSouls),
-            641 => Ok(Self::TransportAllianceAirshipBg),
-            642 => Ok(Self::TransportHordeairshipbg),
-            647 => Ok(Self::TransportOrgrimmarToThunderBluff),
-            649 => Ok(Self::TrialOfTheCrusader),
-            650 => Ok(Self::TrialOfTheChampion),
-            658 => Ok(Self::PitOfSaron),
-            668 => Ok(Self::HallsOfReflection),
-            672 => Ok(Self::TransportTheSkybreakerIcecrownCitadelRaid),
-            673 => Ok(Self::TransportOrgrimsHammerIcecrownCitadelRaid),
-            712 => Ok(Self::TransportTheSkybreakerIcDungeon),
-            713 => Ok(Self::TransportOrgrimsHammerIcDungeon),
-            718 => Ok(Self::TrasnportTheMightyWindIcecrownCitadelRaid),
-            723 => Ok(Self::Stormwind),
-            724 => Ok(Self::TheRubySanctum),
+            598 => Ok(Self::SunwellFixUnused),
             v => Err(crate::errors::EnumError::new("Map", v as u32),)
         }
     }

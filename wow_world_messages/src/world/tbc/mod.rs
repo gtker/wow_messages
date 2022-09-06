@@ -13,6 +13,8 @@ pub(crate) mod gender;
 pub use gender::*;
 pub(crate) mod inventory_type;
 pub use inventory_type::*;
+pub(crate) mod map;
+pub use map::*;
 pub mod opcodes;
 pub(crate) mod power;
 pub use power::*;

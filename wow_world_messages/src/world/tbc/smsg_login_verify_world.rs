@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::tbc::Map;
 use crate::world::tbc::Vector3d;
 use std::io::{Write, Read};
 
@@ -10,13 +11,13 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm#L32):
 /// ```text
 /// smsg SMSG_LOGIN_VERIFY_WORLD = 0x0236 {
-///     u32 map;
+///     Map map;
 ///     Vector3d position;
 ///     f32 orientation;
 /// }
 /// ```
 pub struct SMSG_LOGIN_VERIFY_WORLD {
-    pub map: u32,
+    pub map: Map,
     pub position: Vector3d,
     pub orientation: f32,
 }
@@ -29,8 +30,8 @@ impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // map: u32
-        w.write_all(&self.map.to_le_bytes())?;
+        // map: Map
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // position: Vector3d
         self.position.write_into_vec(w)?;
@@ -45,8 +46,8 @@ impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
-        // map: u32
-        let map = crate::util::read_u32_le(r)?;
+        // map: Map
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // position: Vector3d
         let position = Vector3d::read(r)?;
