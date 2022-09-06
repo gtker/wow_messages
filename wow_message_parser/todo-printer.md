@@ -17,4 +17,3 @@
 * MSRV test
   * Login
   * World
-* cfg options for `wow_srp`

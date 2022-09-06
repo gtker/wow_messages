@@ -6,6 +6,7 @@ use std::io::Write;
 use std::pin::Pin;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncWriteExt;
+#[cfg(feature = "encryption")]
 use wow_srp::vanilla_header::EncrypterHalf;
 
 const SERVER_OPCODE_LENGTH: u16 = 2;
@@ -30,6 +31,7 @@ fn get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
     v
 }
 
+#[cfg(feature = "encryption")]
 fn get_encrypted_server(opcode: u16, size: u16, e: &mut EncrypterHalf) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
@@ -54,7 +56,7 @@ pub trait ServerMessage: Message {
         w.write_all(&v)
     }
 
-    #[cfg(feature = "sync")]
+    #[cfg(all(feature = "sync", feature = "encryption"))]
     fn write_encrypted_server<W: std::io::Write>(
         &self,
         w: &mut W,
@@ -86,7 +88,7 @@ pub trait ServerMessage: Message {
         })
     }
 
-    #[cfg(feature = "tokio")]
+    #[cfg(all(feature = "tokio", feature = "encryption"))]
     fn tokio_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -126,7 +128,7 @@ pub trait ServerMessage: Message {
         })
     }
 
-    #[cfg(feature = "async-std")]
+    #[cfg(all(feature = "async-std", feature = "encryption"))]
     fn astd_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -164,7 +166,7 @@ pub trait ClientMessage: Message {
         w.write_all(&v)
     }
 
-    #[cfg(feature = "sync")]
+    #[cfg(all(feature = "sync", feature = "encryption"))]
     fn write_encrypted_client<W: std::io::Write>(
         &self,
         w: &mut W,
@@ -195,7 +197,7 @@ pub trait ClientMessage: Message {
         })
     }
 
-    #[cfg(feature = "tokio")]
+    #[cfg(all(feature = "encryption", feature = "tokio"))]
     fn tokio_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -235,7 +237,7 @@ pub trait ClientMessage: Message {
         })
     }
 
-    #[cfg(feature = "async-std")]
+    #[cfg(all(feature = "async-std", feature = "encryption"))]
     fn astd_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -276,6 +278,7 @@ fn get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     v
 }
 
+#[cfg(feature = "encryption")]
 fn get_encrypted_client(opcode: u16, size: u16, e: &mut EncrypterHalf) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 

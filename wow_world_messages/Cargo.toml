@@ -12,14 +12,16 @@ features = ["vanilla", "tbc", "wrath"]
 [dependencies.wow_srp]
 version = "0.5.0"
 default-features = false
+optional = true
 features = ["wrath-header"]
 
 [features]
-default = []
+default = ["encryption"]
 sync = []
 vanilla = []
 tbc = []
 wrath = []
+encryption = ["wow_srp"]
 
 [dependencies.tokio]
 version = "1"
