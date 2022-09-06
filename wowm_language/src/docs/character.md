@@ -138,7 +138,7 @@ struct Character {
     u8 hair_color;
     u8 facial_hair;
     u8 level;
-    u32 area;
+    Area area;
     Map map;
     Vector3d position;
     u32 guild_id;
@@ -166,7 +166,7 @@ struct Character {
 | - | 1 / - | u8 | hair_color |  |  |
 | - | 1 / - | u8 | facial_hair |  |  |
 | - | 1 / - | u8 | level |  |  |
-| - | 4 / Little | u32 | area |  |  |
+| - | ? / - | [Area](area.md) | area |  |  |
 | - | ? / - | [Map](map.md) | map |  |  |
 | - | ? / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | u32 | guild_id |  |  |

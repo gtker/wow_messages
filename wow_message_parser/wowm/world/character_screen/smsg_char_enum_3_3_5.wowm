@@ -17,7 +17,7 @@ struct Character {
     u8 hair_color;
     u8 facial_hair;
     u8 level;
-    u32 area;
+    Area area;
     Map map;
     Vector3d position;
     u32 guild_id;

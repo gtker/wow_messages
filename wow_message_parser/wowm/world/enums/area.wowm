@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum Area : u32 {
     DUN_MOROGH = 1 {
         display = "Dun Morogh";
@@ -3244,4 +3242,6933 @@ enum Area : u32 {
     RAVENHOLDT_MANOR = 3486 {
         display = "Ravenholdt Manor";
     }
+} {
+    versions = "1.12";
 }
+
+enum Area : u32 {
+    DUN_MOROGH = 1 {
+        display = "Dun Morogh";
+    }
+    LONGSHORE = 2 {
+        display = "Longshore";
+    }
+    BADLANDS = 3 {
+        display = "Badlands";
+    }
+    BLASTED_LANDS = 4 {
+        display = "Blasted Lands";
+    }
+    BLACKWATER_COVE = 7 {
+        display = "Blackwater Cove";
+    }
+    SWAMP_OF_SORROWS = 8 {
+        display = "Swamp of Sorrows";
+    }
+    NORTHSHIRE_VALLEY = 9 {
+        display = "Northshire Valley";
+    }
+    DUSKWOOD = 10 {
+        display = "Duskwood";
+    }
+    WETLANDS = 11 {
+        display = "Wetlands";
+    }
+    ELWYNN_FOREST = 12 {
+        display = "Elwynn Forest";
+    }
+    THE_WORLD_TREE = 13 {
+        display = "The World Tree";
+    }
+    DUROTAR = 14 {
+        display = "Durotar";
+    }
+    DUSTWALLOW_MARSH = 15 {
+        display = "Dustwallow Marsh";
+    }
+    AZSHARA = 16 {
+        display = "Azshara";
+    }
+    THE_BARRENS = 17 {
+        display = "The Barrens";
+    }
+    CRYSTAL_LAKE = 18 {
+        display = "Crystal Lake";
+    }
+    ZUL_GURUB = 19 {
+        display = "Zul'Gurub";
+    }
+    MOONBROOK = 20 {
+        display = "Moonbrook";
+    }
+    KUL_TIRAS = 21 {
+        display = "Kul Tiras";
+    }
+    PROGRAMMER_ISLE = 22 {
+        display = "Programmer Isle";
+    }
+    NORTHSHIRE_RIVER = 23 {
+        display = "Northshire River";
+    }
+    NORTHSHIRE_ABBEY = 24 {
+        display = "Northshire Abbey";
+    }
+    BLACKROCK_MOUNTAIN = 25 {
+        display = "Blackrock Mountain";
+    }
+    LIGHTHOUSE = 26 {
+        display = "Lighthouse";
+    }
+    WESTERN_PLAGUELANDS = 28 {
+        display = "Western Plaguelands";
+    }
+    NINE = 30 {
+        display = "Nine";
+    }
+    THE_CEMETARY = 32 {
+        display = "The Cemetary";
+    }
+    STRANGLETHORN_VALE = 33 {
+        display = "Stranglethorn Vale";
+    }
+    ECHO_RIDGE_MINE = 34 {
+        display = "Echo Ridge Mine";
+    }
+    BOOTY_BAY = 35 {
+        display = "Booty Bay";
+    }
+    ALTERAC_MOUNTAINS = 36 {
+        display = "Alterac Mountains";
+    }
+    LAKE_NAZFERITI = 37 {
+        display = "Lake Nazferiti";
+    }
+    LOCH_MODAN = 38 {
+        display = "Loch Modan";
+    }
+    WESTFALL = 40 {
+        display = "Westfall";
+    }
+    DEADWIND_PASS = 41 {
+        display = "Deadwind Pass";
+    }
+    DARKSHIRE = 42 {
+        display = "Darkshire";
+    }
+    WILD_SHORE = 43 {
+        display = "Wild Shore";
+    }
+    REDRIDGE_MOUNTAINS = 44 {
+        display = "Redridge Mountains";
+    }
+    ARATHI_HIGHLANDS = 45 {
+        display = "Arathi Highlands";
+    }
+    BURNING_STEPPES = 46 {
+        display = "Burning Steppes";
+    }
+    THE_HINTERLANDS = 47 {
+        display = "The Hinterlands";
+    }
+    DEAD_MANS_HOLE = 49 {
+        display = "Dead Man's Hole";
+    }
+    SEARING_GORGE = 51 {
+        display = "Searing Gorge";
+    }
+    THIEVES_CAMP = 53 {
+        display = "Thieves Camp";
+    }
+    JASPERLODE_MINE = 54 {
+        display = "Jasperlode Mine";
+    }
+    VALLEY_OF_HEROES_UNUSED = 55 {
+        display = "Valley of Heroes UNUSED";
+    }
+    HEROES_VIGIL = 56 {
+        display = "Heroes' Vigil";
+    }
+    FARGODEEP_MINE = 57 {
+        display = "Fargodeep Mine";
+    }
+    NORTHSHIRE_VINEYARDS = 59 {
+        display = "Northshire Vineyards";
+    }
+    FORESTS_EDGE = 60 {
+        display = "Forest's Edge";
+    }
+    THUNDER_FALLS = 61 {
+        display = "Thunder Falls";
+    }
+    BRACKWELL_PUMPKIN_PATCH = 62 {
+        display = "Brackwell Pumpkin Patch";
+    }
+    THE_STONEFIELD_FARM = 63 {
+        display = "The Stonefield Farm";
+    }
+    THE_MACLURE_VINEYARDS = 64 {
+        display = "The Maclure Vineyards";
+    }
+    DRAGONBLIGHT = 65 {
+        display = "Dragonblight";
+    }
+    ZUL_DRAK = 66 {
+        display = "Zul'Drak";
+    }
+    THE_STORM_PEAKS = 67 {
+        display = "The Storm Peaks";
+    }
+    LAKE_EVERSTILL = 68 {
+        display = "Lake Everstill";
+    }
+    LAKESHIRE = 69 {
+        display = "Lakeshire";
+    }
+    STONEWATCH = 70 {
+        display = "Stonewatch";
+    }
+    STONEWATCH_FALLS = 71 {
+        display = "Stonewatch Falls";
+    }
+    THE_DARK_PORTAL = 72 {
+        display = "The Dark Portal";
+    }
+    THE_TAINTED_SCAR = 73 {
+        display = "The Tainted Scar";
+    }
+    POOL_OF_TEARS = 74 {
+        display = "Pool of Tears";
+    }
+    STONARD = 75 {
+        display = "Stonard";
+    }
+    FALLOW_SANCTUARY = 76 {
+        display = "Fallow Sanctuary";
+    }
+    ANVILMAR = 77 {
+        display = "Anvilmar";
+    }
+    STORMWIND_MOUNTAINS = 80 {
+        display = "Stormwind Mountains";
+    }
+    JEFF_NE_QUADRANT_CHANGED = 81 {
+        display = "Jeff NE Quadrant Changed";
+    }
+    JEFF_NW_QUADRANT = 82 {
+        display = "Jeff NW Quadrant";
+    }
+    JEFF_SE_QUADRANT = 83 {
+        display = "Jeff SE Quadrant";
+    }
+    JEFF_SW_QUADRANT = 84 {
+        display = "Jeff SW Quadrant";
+    }
+    TIRISFAL_GLADES = 85 {
+        display = "Tirisfal Glades";
+    }
+    STONE_CAIRN_LAKE = 86 {
+        display = "Stone Cairn Lake";
+    }
+    GOLDSHIRE = 87 {
+        display = "Goldshire";
+    }
+    EASTVALE_LOGGING_CAMP = 88 {
+        display = "Eastvale Logging Camp";
+    }
+    MIRROR_LAKE_ORCHARD = 89 {
+        display = "Mirror Lake Orchard";
+    }
+    TOWER_OF_AZORA = 91 {
+        display = "Tower of Azora";
+    }
+    MIRROR_LAKE = 92 {
+        display = "Mirror Lake";
+    }
+    VUL_GOL_OGRE_MOUND = 93 {
+        display = "Vul'Gol Ogre Mound";
+    }
+    RAVEN_HILL = 94 {
+        display = "Raven Hill";
+    }
+    REDRIDGE_CANYONS = 95 {
+        display = "Redridge Canyons";
+    }
+    TOWER_OF_ILGALAR = 96 {
+        display = "Tower of Ilgalar";
+    }
+    ALTHERS_MILL = 97 {
+        display = "Alther's Mill";
+    }
+    RETHBAN_CAVERNS = 98 {
+        display = "Rethban Caverns";
+    }
+    REBEL_CAMP = 99 {
+        display = "Rebel Camp";
+    }
+    NESINGWARYS_EXPEDITION = 100 {
+        display = "Nesingwary's Expedition";
+    }
+    KURZENS_COMPOUND = 101 {
+        display = "Kurzen's Compound";
+    }
+    RUINS_OF_ZUL_KUNDA = 102 {
+        display = "Ruins of Zul'Kunda";
+    }
+    RUINS_OF_ZUL_MAMWE = 103 {
+        display = "Ruins of Zul'Mamwe";
+    }
+    THE_VILE_REEF = 104 {
+        display = "The Vile Reef";
+    }
+    MOSH_OGG_OGRE_MOUND = 105 {
+        display = "Mosh'Ogg Ogre Mound";
+    }
+    THE_STOCKPILE = 106 {
+        display = "The Stockpile";
+    }
+    SALDEANS_FARM = 107 {
+        display = "Saldean's Farm";
+    }
+    SENTINEL_HILL = 108 {
+        display = "Sentinel Hill";
+    }
+    FURLBROWS_PUMPKIN_FARM = 109 {
+        display = "Furlbrow's Pumpkin Farm";
+    }
+    JANGOLODE_MINE = 111 {
+        display = "Jangolode Mine";
+    }
+    GOLD_COAST_QUARRY = 113 {
+        display = "Gold Coast Quarry";
+    }
+    WESTFALL_LIGHTHOUSE = 115 {
+        display = "Westfall Lighthouse";
+    }
+    MISTY_VALLEY = 116 {
+        display = "Misty Valley";
+    }
+    GROM_GOL_BASE_CAMP = 117 {
+        display = "Grom'gol Base Camp";
+    }
+    WHELGARS_EXCAVATION_SITE = 118 {
+        display = "Whelgar's Excavation Site";
+    }
+    WESTBROOK_GARRISON = 120 {
+        display = "Westbrook Garrison";
+    }
+    TRANQUIL_GARDENS_CEMETERY = 121 {
+        display = "Tranquil Gardens Cemetery";
+    }
+    ZUULDAIA_RUINS = 122 {
+        display = "Zuuldaia Ruins";
+    }
+    BAL_LAL_RUINS = 123 {
+        display = "Bal'lal Ruins";
+    }
+    KAL_AI_RUINS = 125 {
+        display = "Kal'ai Ruins";
+    }
+    TKASHI_RUINS = 126 {
+        display = "Tkashi Ruins";
+    }
+    BALIA_MAH_RUINS = 127 {
+        display = "Balia'mah Ruins";
+    }
+    ZIATA_JAI_RUINS = 128 {
+        display = "Ziata'jai Ruins";
+    }
+    MIZJAH_RUINS = 129 {
+        display = "Mizjah Ruins";
+    }
+    SILVERPINE_FOREST = 130 {
+        display = "Silverpine Forest";
+    }
+    KHARANOS = 131 {
+        display = "Kharanos";
+    }
+    COLDRIDGE_VALLEY = 132 {
+        display = "Coldridge Valley";
+    }
+    GNOMEREGAN = 133 {
+        display = "Gnomeregan";
+    }
+    GOL_BOLAR_QUARRY = 134 {
+        display = "Gol'Bolar Quarry";
+    }
+    FROSTMANE_HOLD = 135 {
+        display = "Frostmane Hold";
+    }
+    THE_GRIZZLED_DEN = 136 {
+        display = "The Grizzled Den";
+    }
+    BREWNALL_VILLAGE = 137 {
+        display = "Brewnall Village";
+    }
+    MISTY_PINE_REFUGE = 138 {
+        display = "Misty Pine Refuge";
+    }
+    EASTERN_PLAGUELANDS = 139 {
+        display = "Eastern Plaguelands";
+    }
+    TELDRASSIL = 141 {
+        display = "Teldrassil";
+    }
+    IRONBANDS_EXCAVATION_SITE = 142 {
+        display = "Ironband's Excavation Site";
+    }
+    MO_GROSH_STRONGHOLD = 143 {
+        display = "Mo'grosh Stronghold";
+    }
+    THELSAMAR = 144 {
+        display = "Thelsamar";
+    }
+    ALGAZ_GATE = 145 {
+        display = "Algaz Gate";
+    }
+    STONEWROUGHT_DAM = 146 {
+        display = "Stonewrought Dam";
+    }
+    THE_FARSTRIDER_LODGE = 147 {
+        display = "The Farstrider Lodge";
+    }
+    DARKSHORE = 148 {
+        display = "Darkshore";
+    }
+    SILVER_STREAM_MINE = 149 {
+        display = "Silver Stream Mine";
+    }
+    MENETHIL_HARBOR = 150 {
+        display = "Menethil Harbor";
+    }
+    DESIGNER_ISLAND = 151 {
+        display = "Designer Island";
+    }
+    THE_BULWARK = 152 {
+        display = "The Bulwark";
+    }
+    RUINS_OF_LORDAERON = 153 {
+        display = "Ruins of Lordaeron";
+    }
+    DEATHKNELL = 154 {
+        display = "Deathknell";
+    }
+    NIGHT_WEBS_HOLLOW = 155 {
+        display = "Night Web's Hollow";
+    }
+    SOLLIDEN_FARMSTEAD = 156 {
+        display = "Solliden Farmstead";
+    }
+    AGAMAND_MILLS = 157 {
+        display = "Agamand Mills";
+    }
+    AGAMAND_FAMILY_CRYPT = 158 {
+        display = "Agamand Family Crypt";
+    }
+    BRILL = 159 {
+        display = "Brill";
+    }
+    WHISPERING_GARDENS = 160 {
+        display = "Whispering Gardens";
+    }
+    TERRACE_OF_REPOSE = 161 {
+        display = "Terrace of Repose";
+    }
+    BRIGHTWATER_LAKE = 162 {
+        display = "Brightwater Lake";
+    }
+    GUNTHERS_RETREAT = 163 {
+        display = "Gunther's Retreat";
+    }
+    GARRENS_HAUNT = 164 {
+        display = "Garren's Haunt";
+    }
+    BALNIR_FARMSTEAD = 165 {
+        display = "Balnir Farmstead";
+    }
+    COLD_HEARTH_MANOR = 166 {
+        display = "Cold Hearth Manor";
+    }
+    CRUSADER_OUTPOST = 167 {
+        display = "Crusader Outpost";
+    }
+    THE_NORTH_COAST = 168 {
+        display = "The North Coast";
+    }
+    WHISPERING_SHORE = 169 {
+        display = "Whispering Shore";
+    }
+    LORDAMERE_LAKE = 170 {
+        display = "Lordamere Lake";
+    }
+    FENRIS_ISLE = 172 {
+        display = "Fenris Isle";
+    }
+    FAOLS_REST = 173 {
+        display = "Faol's Rest";
+    }
+    DOLANAAR = 186 {
+        display = "Dolanaar";
+    }
+    DARNASSUS_UNUSED = 187 {
+        display = "Darnassus UNUSED";
+    }
+    SHADOWGLEN = 188 {
+        display = "Shadowglen";
+    }
+    STEELGRILLS_DEPOT = 189 {
+        display = "Steelgrill's Depot";
+    }
+    HEARTHGLEN = 190 {
+        display = "Hearthglen";
+    }
+    NORTHRIDGE_LUMBER_CAMP = 192 {
+        display = "Northridge Lumber Camp";
+    }
+    RUINS_OF_ANDORHAL = 193 {
+        display = "Ruins of Andorhal";
+    }
+    SCHOOL_OF_NECROMANCY = 195 {
+        display = "School of Necromancy";
+    }
+    UTHERS_TOMB = 196 {
+        display = "Uther's Tomb";
+    }
+    SORROW_HILL = 197 {
+        display = "Sorrow Hill";
+    }
+    THE_WEEPING_CAVE = 198 {
+        display = "The Weeping Cave";
+    }
+    FELSTONE_FIELD = 199 {
+        display = "Felstone Field";
+    }
+    DALSONS_TEARS = 200 {
+        display = "Dalson's Tears";
+    }
+    GAHRRONS_WITHERING = 201 {
+        display = "Gahrron's Withering";
+    }
+    THE_WRITHING_HAUNT = 202 {
+        display = "The Writhing Haunt";
+    }
+    MARDENHOLDE_KEEP = 203 {
+        display = "Mardenholde Keep";
+    }
+    PYREWOOD_VILLAGE = 204 {
+        display = "Pyrewood Village";
+    }
+    DUN_MODR = 205 {
+        display = "Dun Modr";
+    }
+    UTGARDE_KEEP = 206 {
+        display = "Utgarde Keep";
+    }
+    THE_GREAT_SEA = 207 {
+        display = "The Great Sea";
+    }
+    UNUSED_IRONCLADCOVE = 208 {
+        display = "Unused Ironcladcove";
+    }
+    SHADOWFANG_KEEP = 209 {
+        display = "Shadowfang Keep";
+    }
+    ICECROWN = 210 {
+        display = "Icecrown";
+    }
+    ICEFLOW_LAKE = 211 {
+        display = "Iceflow Lake";
+    }
+    HELMS_BED_LAKE = 212 {
+        display = "Helm's Bed Lake";
+    }
+    DEEP_ELEM_MINE = 213 {
+        display = "Deep Elem Mine";
+    }
+    THE_GREAT_SEA1 = 214 {
+        display = "The Great Sea";
+    }
+    MULGORE = 215 {
+        display = "Mulgore";
+    }
+    ALEXSTON_FARMSTEAD = 219 {
+        display = "Alexston Farmstead";
+    }
+    RED_CLOUD_MESA = 220 {
+        display = "Red Cloud Mesa";
+    }
+    CAMP_NARACHE = 221 {
+        display = "Camp Narache";
+    }
+    BLOODHOOF_VILLAGE = 222 {
+        display = "Bloodhoof Village";
+    }
+    STONEBULL_LAKE = 223 {
+        display = "Stonebull Lake";
+    }
+    RAVAGED_CARAVAN = 224 {
+        display = "Ravaged Caravan";
+    }
+    RED_ROCKS = 225 {
+        display = "Red Rocks";
+    }
+    THE_SKITTERING_DARK = 226 {
+        display = "The Skittering Dark";
+    }
+    VALGANS_FIELD = 227 {
+        display = "Valgan's Field";
+    }
+    THE_SEPULCHER = 228 {
+        display = "The Sepulcher";
+    }
+    OLSENS_FARTHING = 229 {
+        display = "Olsen's Farthing";
+    }
+    THE_GREYMANE_WALL = 230 {
+        display = "The Greymane Wall";
+    }
+    BERENS_PERIL = 231 {
+        display = "Beren's Peril";
+    }
+    THE_DAWNING_ISLES = 232 {
+        display = "The Dawning Isles";
+    }
+    AMBERMILL = 233 {
+        display = "Ambermill";
+    }
+    FENRIS_KEEP = 235 {
+        display = "Fenris Keep";
+    }
+    SHADOWFANG_KEEP1 = 236 {
+        display = "Shadowfang Keep";
+    }
+    THE_DECREPIT_FERRY = 237 {
+        display = "The Decrepit Ferry";
+    }
+    MALDENS_ORCHARD = 238 {
+        display = "Malden's Orchard";
+    }
+    THE_IVAR_PATCH = 239 {
+        display = "The Ivar Patch";
+    }
+    THE_DEAD_FIELD = 240 {
+        display = "The Dead Field";
+    }
+    THE_ROTTING_ORCHARD = 241 {
+        display = "The Rotting Orchard";
+    }
+    BRIGHTWOOD_GROVE = 242 {
+        display = "Brightwood Grove";
+    }
+    FORLORN_ROWE = 243 {
+        display = "Forlorn Rowe";
+    }
+    THE_WHIPPLE_ESTATE = 244 {
+        display = "The Whipple Estate";
+    }
+    THE_YORGEN_FARMSTEAD = 245 {
+        display = "The Yorgen Farmstead";
+    }
+    THE_CAULDRON = 246 {
+        display = "The Cauldron";
+    }
+    GRIMESILT_DIG_SITE = 247 {
+        display = "Grimesilt Dig Site";
+    }
+    DREADMAUL_ROCK = 249 {
+        display = "Dreadmaul Rock";
+    }
+    RUINS_OF_THAURISSAN = 250 {
+        display = "Ruins of Thaurissan";
+    }
+    FLAME_CREST = 251 {
+        display = "Flame Crest";
+    }
+    BLACKROCK_STRONGHOLD = 252 {
+        display = "Blackrock Stronghold";
+    }
+    THE_PILLAR_OF_ASH = 253 {
+        display = "The Pillar of Ash";
+    }
+    BLACKROCK_MOUNTAIN1 = 254 {
+        display = "Blackrock Mountain";
+    }
+    ALTAR_OF_STORMS = 255 {
+        display = "Altar of Storms";
+    }
+    ALDRASSIL = 256 {
+        display = "Aldrassil";
+    }
+    SHADOWTHREAD_CAVE = 257 {
+        display = "Shadowthread Cave";
+    }
+    FEL_ROCK = 258 {
+        display = "Fel Rock";
+    }
+    LAKE_AL_AMETH = 259 {
+        display = "Lake Al'Ameth";
+    }
+    STARBREEZE_VILLAGE = 260 {
+        display = "Starbreeze Village";
+    }
+    GNARLPINE_HOLD = 261 {
+        display = "Gnarlpine Hold";
+    }
+    BAN_ETHIL_BARROW_DEN = 262 {
+        display = "Ban'ethil Barrow Den";
+    }
+    THE_CLEFT = 263 {
+        display = "The Cleft";
+    }
+    THE_ORACLE_GLADE = 264 {
+        display = "The Oracle Glade";
+    }
+    WELLSPRING_RIVER = 265 {
+        display = "Wellspring River";
+    }
+    WELLSPRING_LAKE = 266 {
+        display = "Wellspring Lake";
+    }
+    HILLSBRAD_FOOTHILLS = 267 {
+        display = "Hillsbrad Foothills";
+    }
+    AZSHARA_CRATER = 268 {
+        display = "Azshara Crater";
+    }
+    DUN_ALGAZ = 269 {
+        display = "Dun Algaz";
+    }
+    SOUTHSHORE = 271 {
+        display = "Southshore";
+    }
+    TARREN_MILL = 272 {
+        display = "Tarren Mill";
+    }
+    DURNHOLDE_KEEP = 275 {
+        display = "Durnholde Keep";
+    }
+    UNUSED_STONEWROUGHT_PASS = 276 {
+        display = "UNUSED Stonewrought Pass";
+    }
+    THE_FOOTHILL_CAVERNS = 277 {
+        display = "The Foothill Caverns";
+    }
+    LORDAMERE_INTERNMENT_CAMP = 278 {
+        display = "Lordamere Internment Camp";
+    }
+    DALARAN_CRATER = 279 {
+        display = "Dalaran Crater";
+    }
+    STRAHNBRAD = 280 {
+        display = "Strahnbrad";
+    }
+    RUINS_OF_ALTERAC = 281 {
+        display = "Ruins of Alterac";
+    }
+    CRUSHRIDGE_HOLD = 282 {
+        display = "Crushridge Hold";
+    }
+    SLAUGHTER_HOLLOW = 283 {
+        display = "Slaughter Hollow";
+    }
+    THE_UPLANDS = 284 {
+        display = "The Uplands";
+    }
+    SOUTHPOINT_TOWER = 285 {
+        display = "Southpoint Tower";
+    }
+    HILLSBRAD_FIELDS = 286 {
+        display = "Hillsbrad Fields";
+    }
+    HILLSBRAD = 287 {
+        display = "Hillsbrad";
+    }
+    AZURELODE_MINE = 288 {
+        display = "Azurelode Mine";
+    }
+    NETHANDER_STEAD = 289 {
+        display = "Nethander Stead";
+    }
+    DUN_GAROK = 290 {
+        display = "Dun Garok";
+    }
+    THORADINS_WALL = 293 {
+        display = "Thoradin's Wall";
+    }
+    EASTERN_STRAND = 294 {
+        display = "Eastern Strand";
+    }
+    WESTERN_STRAND = 295 {
+        display = "Western Strand";
+    }
+    SOUTH_SEAS_UNUSED = 296 {
+        display = "South Seas UNUSED";
+    }
+    JAGUERO_ISLE = 297 {
+        display = "Jaguero Isle";
+    }
+    BARADIN_BAY = 298 {
+        display = "Baradin Bay";
+    }
+    MENETHIL_BAY = 299 {
+        display = "Menethil Bay";
+    }
+    MISTY_REED_STRAND = 300 {
+        display = "Misty Reed Strand";
+    }
+    THE_SAVAGE_COAST = 301 {
+        display = "The Savage Coast";
+    }
+    THE_CRYSTAL_SHORE = 302 {
+        display = "The Crystal Shore";
+    }
+    SHELL_BEACH = 303 {
+        display = "Shell Beach";
+    }
+    NORTH_TIDES_RUN = 305 {
+        display = "North Tide's Run";
+    }
+    SOUTH_TIDES_RUN = 306 {
+        display = "South Tide's Run";
+    }
+    THE_OVERLOOK_CLIFFS = 307 {
+        display = "The Overlook Cliffs";
+    }
+    THE_FORBIDDING_SEA = 308 {
+        display = "The Forbidding Sea";
+    }
+    IRONBEARDS_TOMB = 309 {
+        display = "Ironbeard's Tomb";
+    }
+    CRYSTALVEIN_MINE = 310 {
+        display = "Crystalvein Mine";
+    }
+    RUINS_OF_ABORAZ = 311 {
+        display = "Ruins of Aboraz";
+    }
+    JANEIROS_POINT = 312 {
+        display = "Janeiro's Point";
+    }
+    NORTHFOLD_MANOR = 313 {
+        display = "Northfold Manor";
+    }
+    GOSHEK_FARM = 314 {
+        display = "Go'Shek Farm";
+    }
+    DABYRIES_FARMSTEAD = 315 {
+        display = "Dabyrie's Farmstead";
+    }
+    BOULDERFIST_HALL = 316 {
+        display = "Boulderfist Hall";
+    }
+    WITHERBARK_VILLAGE = 317 {
+        display = "Witherbark Village";
+    }
+    DRYWHISKER_GORGE = 318 {
+        display = "Drywhisker Gorge";
+    }
+    REFUGE_POINTE = 320 {
+        display = "Refuge Pointe";
+    }
+    HAMMERFALL = 321 {
+        display = "Hammerfall";
+    }
+    BLACKWATER_SHIPWRECKS = 322 {
+        display = "Blackwater Shipwrecks";
+    }
+    O_BREENS_CAMP = 323 {
+        display = "O'Breen's Camp";
+    }
+    STROMGARDE_KEEP = 324 {
+        display = "Stromgarde Keep";
+    }
+    THE_TOWER_OF_ARATHOR = 325 {
+        display = "The Tower of Arathor";
+    }
+    THE_SANCTUM = 326 {
+        display = "The Sanctum";
+    }
+    FALDIRS_COVE = 327 {
+        display = "Faldir's Cove";
+    }
+    THE_DROWNED_REEF = 328 {
+        display = "The Drowned Reef";
+    }
+    THANDOL_SPAN = 330 {
+        display = "Thandol Span";
+    }
+    ASHENVALE = 331 {
+        display = "Ashenvale";
+    }
+    THE_GREAT_SEA2 = 332 {
+        display = "The Great Sea";
+    }
+    CIRCLE_OF_EAST_BINDING = 333 {
+        display = "Circle of East Binding";
+    }
+    CIRCLE_OF_WEST_BINDING = 334 {
+        display = "Circle of West Binding";
+    }
+    CIRCLE_OF_INNER_BINDING = 335 {
+        display = "Circle of Inner Binding";
+    }
+    CIRCLE_OF_OUTER_BINDING = 336 {
+        display = "Circle of Outer Binding";
+    }
+    APOCRYPHANS_REST = 337 {
+        display = "Apocryphan's Rest";
+    }
+    ANGOR_FORTRESS = 338 {
+        display = "Angor Fortress";
+    }
+    LETHLOR_RAVINE = 339 {
+        display = "Lethlor Ravine";
+    }
+    KARGATH = 340 {
+        display = "Kargath";
+    }
+    CAMP_KOSH = 341 {
+        display = "Camp Kosh";
+    }
+    CAMP_BOFF = 342 {
+        display = "Camp Boff";
+    }
+    CAMP_WURG = 343 {
+        display = "Camp Wurg";
+    }
+    CAMP_CAGG = 344 {
+        display = "Camp Cagg";
+    }
+    AGMONDS_END = 345 {
+        display = "Agmond's End";
+    }
+    HAMMERTOES_DIGSITE = 346 {
+        display = "Hammertoe's Digsite";
+    }
+    DUSTBELCH_GROTTO = 347 {
+        display = "Dustbelch Grotto";
+    }
+    AERIE_PEAK = 348 {
+        display = "Aerie Peak";
+    }
+    WILDHAMMER_KEEP = 349 {
+        display = "Wildhammer Keep";
+    }
+    QUEL_DANIL_LODGE = 350 {
+        display = "Quel'Danil Lodge";
+    }
+    SKULK_ROCK = 351 {
+        display = "Skulk Rock";
+    }
+    ZUN_WATHA = 352 {
+        display = "Zun'watha";
+    }
+    SHADRA_ALOR = 353 {
+        display = "Shadra'Alor";
+    }
+    JINTHA_ALOR = 354 {
+        display = "Jintha'Alor";
+    }
+    THE_ALTAR_OF_ZUL = 355 {
+        display = "The Altar of Zul";
+    }
+    SERADANE = 356 {
+        display = "Seradane";
+    }
+    FERALAS = 357 {
+        display = "Feralas";
+    }
+    BRAMBLEBLADE_RAVINE = 358 {
+        display = "Brambleblade Ravine";
+    }
+    BAEL_MODAN = 359 {
+        display = "Bael Modan";
+    }
+    THE_VENTURE_CO_MINE = 360 {
+        display = "The Venture Co. Mine";
+    }
+    FELWOOD = 361 {
+        display = "Felwood";
+    }
+    RAZOR_HILL = 362 {
+        display = "Razor Hill";
+    }
+    VALLEY_OF_TRIALS = 363 {
+        display = "Valley of Trials";
+    }
+    THE_DEN = 364 {
+        display = "The Den";
+    }
+    BURNING_BLADE_COVEN = 365 {
+        display = "Burning Blade Coven";
+    }
+    KOLKAR_CRAG = 366 {
+        display = "Kolkar Crag";
+    }
+    SEN_JIN_VILLAGE = 367 {
+        display = "Sen'jin Village";
+    }
+    ECHO_ISLES = 368 {
+        display = "Echo Isles";
+    }
+    THUNDER_RIDGE = 369 {
+        display = "Thunder Ridge";
+    }
+    DRYGULCH_RAVINE = 370 {
+        display = "Drygulch Ravine";
+    }
+    DUSTWIND_CAVE = 371 {
+        display = "Dustwind Cave";
+    }
+    TIRAGARDE_KEEP = 372 {
+        display = "Tiragarde Keep";
+    }
+    SCUTTLE_COAST = 373 {
+        display = "Scuttle Coast";
+    }
+    BLADEFIST_BAY = 374 {
+        display = "Bladefist Bay";
+    }
+    DEADEYE_SHORE = 375 {
+        display = "Deadeye Shore";
+    }
+    SOUTHFURY_RIVER = 377 {
+        display = "Southfury River";
+    }
+    CAMP_TAURAJO = 378 {
+        display = "Camp Taurajo";
+    }
+    FAR_WATCH_POST = 379 {
+        display = "Far Watch Post";
+    }
+    THE_CROSSROADS = 380 {
+        display = "The Crossroads";
+    }
+    BOULDER_LODE_MINE = 381 {
+        display = "Boulder Lode Mine";
+    }
+    THE_SLUDGE_FEN = 382 {
+        display = "The Sludge Fen";
+    }
+    THE_DRY_HILLS = 383 {
+        display = "The Dry Hills";
+    }
+    DREADMIST_PEAK = 384 {
+        display = "Dreadmist Peak";
+    }
+    NORTHWATCH_HOLD = 385 {
+        display = "Northwatch Hold";
+    }
+    THE_FORGOTTEN_POOLS = 386 {
+        display = "The Forgotten Pools";
+    }
+    LUSHWATER_OASIS = 387 {
+        display = "Lushwater Oasis";
+    }
+    THE_STAGNANT_OASIS = 388 {
+        display = "The Stagnant Oasis";
+    }
+    FIELD_OF_GIANTS = 390 {
+        display = "Field of Giants";
+    }
+    THE_MERCHANT_COAST = 391 {
+        display = "The Merchant Coast";
+    }
+    RATCHET = 392 {
+        display = "Ratchet";
+    }
+    DARKSPEAR_STRAND = 393 {
+        display = "Darkspear Strand";
+    }
+    GRIZZLY_HILLS = 394 {
+        display = "Grizzly Hills";
+    }
+    GRIZZLEMAW = 395 {
+        display = "Grizzlemaw";
+    }
+    WINTERHOOF_WATER_WELL = 396 {
+        display = "Winterhoof Water Well";
+    }
+    THUNDERHORN_WATER_WELL = 397 {
+        display = "Thunderhorn Water Well";
+    }
+    WILDMANE_WATER_WELL = 398 {
+        display = "Wildmane Water Well";
+    }
+    SKYLINE_RIDGE = 399 {
+        display = "Skyline Ridge";
+    }
+    THOUSAND_NEEDLES = 400 {
+        display = "Thousand Needles";
+    }
+    THE_TIDUS_STAIR = 401 {
+        display = "The Tidus Stair";
+    }
+    SHADY_REST_INN = 403 {
+        display = "Shady Rest Inn";
+    }
+    BAEL_DUN_DIGSITE = 404 {
+        display = "Bael'dun Digsite";
+    }
+    DESOLACE = 405 {
+        display = "Desolace";
+    }
+    STONETALON_MOUNTAINS = 406 {
+        display = "Stonetalon Mountains";
+    }
+    ORGRIMMAR_UNUSED = 407 {
+        display = "Orgrimmar UNUSED";
+    }
+    GILLIJIMS_ISLE = 408 {
+        display = "Gillijim's Isle";
+    }
+    ISLAND_OF_DOCTOR_LAPIDIS = 409 {
+        display = "Island of Doctor Lapidis";
+    }
+    RAZORWIND_CANYON = 410 {
+        display = "Razorwind Canyon";
+    }
+    BATHRANS_HAUNT = 411 {
+        display = "Bathran's Haunt";
+    }
+    THE_RUINS_OF_ORDIL_ARAN = 412 {
+        display = "The Ruins of Ordil'Aran";
+    }
+    MAESTRAS_POST = 413 {
+        display = "Maestra's Post";
+    }
+    THE_ZORAM_STRAND = 414 {
+        display = "The Zoram Strand";
+    }
+    ASTRANAAR = 415 {
+        display = "Astranaar";
+    }
+    THE_SHRINE_OF_AESSINA = 416 {
+        display = "The Shrine of Aessina";
+    }
+    FIRE_SCAR_SHRINE = 417 {
+        display = "Fire Scar Shrine";
+    }
+    THE_RUINS_OF_STARDUST = 418 {
+        display = "The Ruins of Stardust";
+    }
+    THE_HOWLING_VALE = 419 {
+        display = "The Howling Vale";
+    }
+    SILVERWIND_REFUGE = 420 {
+        display = "Silverwind Refuge";
+    }
+    MYSTRAL_LAKE = 421 {
+        display = "Mystral Lake";
+    }
+    FALLEN_SKY_LAKE = 422 {
+        display = "Fallen Sky Lake";
+    }
+    IRIS_LAKE = 424 {
+        display = "Iris Lake";
+    }
+    MOONWELL = 425 {
+        display = "Moonwell";
+    }
+    RAYNEWOOD_RETREAT = 426 {
+        display = "Raynewood Retreat";
+    }
+    THE_SHADY_NOOK = 427 {
+        display = "The Shady Nook";
+    }
+    NIGHT_RUN = 428 {
+        display = "Night Run";
+    }
+    XAVIAN = 429 {
+        display = "Xavian";
+    }
+    SATYRNAAR = 430 {
+        display = "Satyrnaar";
+    }
+    SPLINTERTREE_POST = 431 {
+        display = "Splintertree Post";
+    }
+    THE_DOR_DANIL_BARROW_DEN = 432 {
+        display = "The Dor'Danil Barrow Den";
+    }
+    FALFARREN_RIVER = 433 {
+        display = "Falfarren River";
+    }
+    FELFIRE_HILL = 434 {
+        display = "Felfire Hill";
+    }
+    DEMON_FALL_CANYON = 435 {
+        display = "Demon Fall Canyon";
+    }
+    DEMON_FALL_RIDGE = 436 {
+        display = "Demon Fall Ridge";
+    }
+    WARSONG_LUMBER_CAMP = 437 {
+        display = "Warsong Lumber Camp";
+    }
+    BOUGH_SHADOW = 438 {
+        display = "Bough Shadow";
+    }
+    THE_SHIMMERING_FLATS = 439 {
+        display = "The Shimmering Flats";
+    }
+    TANARIS = 440 {
+        display = "Tanaris";
+    }
+    LAKE_FALATHIM = 441 {
+        display = "Lake Falathim";
+    }
+    AUBERDINE = 442 {
+        display = "Auberdine";
+    }
+    RUINS_OF_MATHYSTRA = 443 {
+        display = "Ruins of Mathystra";
+    }
+    TOWER_OF_ALTHALAXX = 444 {
+        display = "Tower of Althalaxx";
+    }
+    CLIFFSPRING_FALLS = 445 {
+        display = "Cliffspring Falls";
+    }
+    BASHAL_ARAN = 446 {
+        display = "Bashal'Aran";
+    }
+    AMETH_ARAN = 447 {
+        display = "Ameth'Aran";
+    }
+    GROVE_OF_THE_ANCIENTS = 448 {
+        display = "Grove of the Ancients";
+    }
+    THE_MASTERS_GLAIVE = 449 {
+        display = "The Master's Glaive";
+    }
+    REMTRAVELS_EXCAVATION = 450 {
+        display = "Remtravel's Excavation";
+    }
+    MISTS_EDGE = 452 {
+        display = "Mist's Edge";
+    }
+    THE_LONG_WASH = 453 {
+        display = "The Long Wash";
+    }
+    WILDBEND_RIVER = 454 {
+        display = "Wildbend River";
+    }
+    BLACKWOOD_DEN = 455 {
+        display = "Blackwood Den";
+    }
+    CLIFFSPRING_RIVER = 456 {
+        display = "Cliffspring River";
+    }
+    THE_VEILED_SEA = 457 {
+        display = "The Veiled Sea";
+    }
+    GOLD_ROAD = 458 {
+        display = "Gold Road";
+    }
+    SCARLET_WATCH_POST = 459 {
+        display = "Scarlet Watch Post";
+    }
+    SUN_ROCK_RETREAT = 460 {
+        display = "Sun Rock Retreat";
+    }
+    WINDSHEAR_CRAG = 461 {
+        display = "Windshear Crag";
+    }
+    CRAGPOOL_LAKE = 463 {
+        display = "Cragpool Lake";
+    }
+    MIRKFALLON_LAKE = 464 {
+        display = "Mirkfallon Lake";
+    }
+    THE_CHARRED_VALE = 465 {
+        display = "The Charred Vale";
+    }
+    VALLEY_OF_THE_BLOODFURIES = 466 {
+        display = "Valley of the Bloodfuries";
+    }
+    STONETALON_PEAK = 467 {
+        display = "Stonetalon Peak";
+    }
+    THE_TALON_DEN = 468 {
+        display = "The Talon Den";
+    }
+    GREATWOOD_VALE = 469 {
+        display = "Greatwood Vale";
+    }
+    THUNDER_BLUFF_UNUSED = 470 {
+        display = "Thunder Bluff UNUSED";
+    }
+    BRAVE_WIND_MESA = 471 {
+        display = "Brave Wind Mesa";
+    }
+    FIRE_STONE_MESA = 472 {
+        display = "Fire Stone Mesa";
+    }
+    MANTLE_ROCK = 473 {
+        display = "Mantle Rock";
+    }
+    HUNTER_RISE_UNUSED = 474 {
+        display = "Hunter Rise UNUSED";
+    }
+    SPIRIT_RISEUNUSED = 475 {
+        display = "Spirit RiseUNUSED";
+    }
+    ELDER_RISEUNUSED = 476 {
+        display = "Elder RiseUNUSED";
+    }
+    RUINS_OF_JUBUWAL = 477 {
+        display = "Ruins of Jubuwal";
+    }
+    POOLS_OF_ARLITHRIEN = 478 {
+        display = "Pools of Arlithrien";
+    }
+    THE_RUSTMAUL_DIG_SITE = 479 {
+        display = "The Rustmaul Dig Site";
+    }
+    CAMP_E_THOK = 480 {
+        display = "Camp E'thok";
+    }
+    SPLITHOOF_CRAG = 481 {
+        display = "Splithoof Crag";
+    }
+    HIGHPERCH = 482 {
+        display = "Highperch";
+    }
+    THE_SCREECHING_CANYON = 483 {
+        display = "The Screeching Canyon";
+    }
+    FREEWIND_POST = 484 {
+        display = "Freewind Post";
+    }
+    THE_GREAT_LIFT = 485 {
+        display = "The Great Lift";
+    }
+    GALAK_HOLD = 486 {
+        display = "Galak Hold";
+    }
+    ROGUEFEATHER_DEN = 487 {
+        display = "Roguefeather Den";
+    }
+    THE_WEATHERED_NOOK = 488 {
+        display = "The Weathered Nook";
+    }
+    THALANAAR = 489 {
+        display = "Thalanaar";
+    }
+    UN_GORO_CRATER = 490 {
+        display = "Un'Goro Crater";
+    }
+    RAZORFEN_KRAUL = 491 {
+        display = "Razorfen Kraul";
+    }
+    RAVEN_HILL_CEMETERY = 492 {
+        display = "Raven Hill Cemetery";
+    }
+    MOONGLADE = 493 {
+        display = "Moonglade";
+    }
+    HOWLING_FJORD = 495 {
+        display = "Howling Fjord";
+    }
+    BRACKENWALL_VILLAGE = 496 {
+        display = "Brackenwall Village";
+    }
+    SWAMPLIGHT_MANOR = 497 {
+        display = "Swamplight Manor";
+    }
+    BLOODFEN_BURROW = 498 {
+        display = "Bloodfen Burrow";
+    }
+    DARKMIST_CAVERN = 499 {
+        display = "Darkmist Cavern";
+    }
+    MOGGLE_POINT = 500 {
+        display = "Moggle Point";
+    }
+    BEEZILS_WRECK = 501 {
+        display = "Beezil's Wreck";
+    }
+    WITCH_HILL = 502 {
+        display = "Witch Hill";
+    }
+    SENTRY_POINT = 503 {
+        display = "Sentry Point";
+    }
+    NORTH_POINT_TOWER = 504 {
+        display = "North Point Tower";
+    }
+    WEST_POINT_TOWER = 505 {
+        display = "West Point Tower";
+    }
+    LOST_POINT = 506 {
+        display = "Lost Point";
+    }
+    BLUEFEN = 507 {
+        display = "Bluefen";
+    }
+    STONEMAUL_RUINS = 508 {
+        display = "Stonemaul Ruins";
+    }
+    THE_DEN_OF_FLAME = 509 {
+        display = "The Den of Flame";
+    }
+    THE_DRAGONMURK = 510 {
+        display = "The Dragonmurk";
+    }
+    WYRMBOG = 511 {
+        display = "Wyrmbog";
+    }
+    BLACKHOOF_VILLAGE = 512 {
+        display = "Blackhoof Village";
+    }
+    THERAMORE_ISLE = 513 {
+        display = "Theramore Isle";
+    }
+    FOOTHOLD_CITADEL = 514 {
+        display = "Foothold Citadel";
+    }
+    IRONCLAD_PRISON = 515 {
+        display = "Ironclad Prison";
+    }
+    DUSTWALLOW_BAY = 516 {
+        display = "Dustwallow Bay";
+    }
+    TIDEFURY_COVE = 517 {
+        display = "Tidefury Cove";
+    }
+    DREADMURK_SHORE = 518 {
+        display = "Dreadmurk Shore";
+    }
+    ADDLES_STEAD = 536 {
+        display = "Addle's Stead";
+    }
+    FIRE_PLUME_RIDGE = 537 {
+        display = "Fire Plume Ridge";
+    }
+    LAKKARI_TAR_PITS = 538 {
+        display = "Lakkari Tar Pits";
+    }
+    TERROR_RUN = 539 {
+        display = "Terror Run";
+    }
+    THE_SLITHERING_SCAR = 540 {
+        display = "The Slithering Scar";
+    }
+    MARSHALS_REFUGE = 541 {
+        display = "Marshal's Refuge";
+    }
+    FUNGAL_ROCK = 542 {
+        display = "Fungal Rock";
+    }
+    GOLAKKA_HOT_SPRINGS = 543 {
+        display = "Golakka Hot Springs";
+    }
+    THE_LOCH = 556 {
+        display = "The Loch";
+    }
+    BEGGARS_HAUNT = 576 {
+        display = "Beggar's Haunt";
+    }
+    KODO_GRAVEYARD = 596 {
+        display = "Kodo Graveyard";
+    }
+    GHOST_WALKER_POST = 597 {
+        display = "Ghost Walker Post";
+    }
+    SAR_THERIS_STRAND = 598 {
+        display = "Sar'theris Strand";
+    }
+    THUNDER_AXE_FORTRESS = 599 {
+        display = "Thunder Axe Fortress";
+    }
+    BOLGANS_HOLE = 600 {
+        display = "Bolgan's Hole";
+    }
+    MANNOROC_COVEN = 602 {
+        display = "Mannoroc Coven";
+    }
+    SARGERON = 603 {
+        display = "Sargeron";
+    }
+    MAGRAM_VILLAGE = 604 {
+        display = "Magram Village";
+    }
+    GELKIS_VILLAGE = 606 {
+        display = "Gelkis Village";
+    }
+    VALLEY_OF_SPEARS = 607 {
+        display = "Valley of Spears";
+    }
+    NIJELS_POINT = 608 {
+        display = "Nijel's Point";
+    }
+    KOLKAR_VILLAGE = 609 {
+        display = "Kolkar Village";
+    }
+    HYJAL = 616 {
+        display = "Hyjal";
+    }
+    WINTERSPRING = 618 {
+        display = "Winterspring";
+    }
+    BLACKWOLF_RIVER = 636 {
+        display = "Blackwolf River";
+    }
+    KODO_ROCK = 637 {
+        display = "Kodo Rock";
+    }
+    HIDDEN_PATH = 638 {
+        display = "Hidden Path";
+    }
+    SPIRIT_ROCK = 639 {
+        display = "Spirit Rock";
+    }
+    SHRINE_OF_THE_DORMANT_FLAME = 640 {
+        display = "Shrine of the Dormant Flame";
+    }
+    LAKE_ELUNE_ARA = 656 {
+        display = "Lake Elune'ara";
+    }
+    THE_HARBORAGE = 657 {
+        display = "The Harborage";
+    }
+    OUTLAND = 676 {
+        display = "Outland";
+    }
+    CRAFTSMENS_TERRACE_UNUSED = 696 {
+        display = "Craftsmen's Terrace UNUSED";
+    }
+    TRADESMENS_TERRACE_UNUSED = 697 {
+        display = "Tradesmen's Terrace UNUSED";
+    }
+    THE_TEMPLE_GARDENS_UNUSED = 698 {
+        display = "The Temple Gardens UNUSED";
+    }
+    TEMPLE_OF_ELUNE_UNUSED = 699 {
+        display = "Temple of Elune UNUSED";
+    }
+    CENARION_ENCLAVE_UNUSED = 700 {
+        display = "Cenarion Enclave UNUSED";
+    }
+    WARRIORS_TERRACE_UNUSED = 701 {
+        display = "Warrior's Terrace UNUSED";
+    }
+    RUT_THERAN_VILLAGE = 702 {
+        display = "Rut'theran Village";
+    }
+    IRONBANDS_COMPOUND = 716 {
+        display = "Ironband's Compound";
+    }
+    THE_STOCKADE = 717 {
+        display = "The Stockade";
+    }
+    WAILING_CAVERNS = 718 {
+        display = "Wailing Caverns";
+    }
+    BLACKFATHOM_DEEPS = 719 {
+        display = "Blackfathom Deeps";
+    }
+    FRAY_ISLAND = 720 {
+        display = "Fray Island";
+    }
+    GNOMEREGAN1 = 721 {
+        display = "Gnomeregan";
+    }
+    RAZORFEN_DOWNS = 722 {
+        display = "Razorfen Downs";
+    }
+    BAN_ETHIL_HOLLOW = 736 {
+        display = "Ban'ethil Hollow";
+    }
+    SCARLET_MONASTERY = 796 {
+        display = "Scarlet Monastery";
+    }
+    JERODS_LANDING = 797 {
+        display = "Jerod's Landing";
+    }
+    RIDGEPOINT_TOWER = 798 {
+        display = "Ridgepoint Tower";
+    }
+    THE_DARKENED_BANK = 799 {
+        display = "The Darkened Bank";
+    }
+    COLDRIDGE_PASS = 800 {
+        display = "Coldridge Pass";
+    }
+    CHILL_BREEZE_VALLEY = 801 {
+        display = "Chill Breeze Valley";
+    }
+    SHIMMER_RIDGE = 802 {
+        display = "Shimmer Ridge";
+    }
+    AMBERSTILL_RANCH = 803 {
+        display = "Amberstill Ranch";
+    }
+    THE_TUNDRID_HILLS = 804 {
+        display = "The Tundrid Hills";
+    }
+    SOUTH_GATE_PASS = 805 {
+        display = "South Gate Pass";
+    }
+    SOUTH_GATE_OUTPOST = 806 {
+        display = "South Gate Outpost";
+    }
+    NORTH_GATE_PASS = 807 {
+        display = "North Gate Pass";
+    }
+    NORTH_GATE_OUTPOST = 808 {
+        display = "North Gate Outpost";
+    }
+    GATES_OF_IRONFORGE = 809 {
+        display = "Gates of Ironforge";
+    }
+    STILLWATER_POND = 810 {
+        display = "Stillwater Pond";
+    }
+    NIGHTMARE_VALE = 811 {
+        display = "Nightmare Vale";
+    }
+    VENOMWEB_VALE = 812 {
+        display = "Venomweb Vale";
+    }
+    THE_BULWARK1 = 813 {
+        display = "The Bulwark";
+    }
+    SOUTHFURY_RIVER1 = 814 {
+        display = "Southfury River";
+    }
+    SOUTHFURY_RIVER2 = 815 {
+        display = "Southfury River";
+    }
+    RAZORMANE_GROUNDS = 816 {
+        display = "Razormane Grounds";
+    }
+    SKULL_ROCK = 817 {
+        display = "Skull Rock";
+    }
+    PALEMANE_ROCK = 818 {
+        display = "Palemane Rock";
+    }
+    WINDFURY_RIDGE = 819 {
+        display = "Windfury Ridge";
+    }
+    THE_GOLDEN_PLAINS = 820 {
+        display = "The Golden Plains";
+    }
+    THE_ROLLING_PLAINS = 821 {
+        display = "The Rolling Plains";
+    }
+    DUN_ALGAZ1 = 836 {
+        display = "Dun Algaz";
+    }
+    DUN_ALGAZ2 = 837 {
+        display = "Dun Algaz";
+    }
+    NORTH_GATE_PASS1 = 838 {
+        display = "North Gate Pass";
+    }
+    SOUTH_GATE_PASS1 = 839 {
+        display = "South Gate Pass";
+    }
+    TWILIGHT_GROVE = 856 {
+        display = "Twilight Grove";
+    }
+    GM_ISLAND = 876 {
+        display = "GM Island";
+    }
+    DELETE_ME = 877 {
+        display = "Delete ME";
+    }
+    SOUTHFURY_RIVER3 = 878 {
+        display = "Southfury River";
+    }
+    SOUTHFURY_RIVER4 = 879 {
+        display = "Southfury River";
+    }
+    THANDOL_SPAN1 = 880 {
+        display = "Thandol Span";
+    }
+    THANDOL_SPAN2 = 881 {
+        display = "Thandol Span";
+    }
+    PURGATION_ISLE = 896 {
+        display = "Purgation Isle";
+    }
+    THE_JANSEN_STEAD = 916 {
+        display = "The Jansen Stead";
+    }
+    THE_DEAD_ACRE = 917 {
+        display = "The Dead Acre";
+    }
+    THE_MOLSEN_FARM = 918 {
+        display = "The Molsen Farm";
+    }
+    STENDELS_POND = 919 {
+        display = "Stendel's Pond";
+    }
+    THE_DAGGER_HILLS = 920 {
+        display = "The Dagger Hills";
+    }
+    DEMONTS_PLACE = 921 {
+        display = "Demont's Place";
+    }
+    THE_DUST_PLAINS = 922 {
+        display = "The Dust Plains";
+    }
+    STONESPLINTER_VALLEY = 923 {
+        display = "Stonesplinter Valley";
+    }
+    VALLEY_OF_KINGS = 924 {
+        display = "Valley of Kings";
+    }
+    ALGAZ_STATION = 925 {
+        display = "Algaz Station";
+    }
+    BUCKLEBREE_FARM = 926 {
+        display = "Bucklebree Farm";
+    }
+    THE_SHINING_STRAND = 927 {
+        display = "The Shining Strand";
+    }
+    NORTH_TIDES_HOLLOW = 928 {
+        display = "North Tide's Hollow";
+    }
+    GRIZZLEPAW_RIDGE = 936 {
+        display = "Grizzlepaw Ridge";
+    }
+    THE_VERDANT_FIELDS = 956 {
+        display = "The Verdant Fields";
+    }
+    GADGETZAN = 976 {
+        display = "Gadgetzan";
+    }
+    STEAMWHEEDLE_PORT = 977 {
+        display = "Steamwheedle Port";
+    }
+    ZUL_FARRAK = 978 {
+        display = "Zul'Farrak";
+    }
+    SANDSORROW_WATCH = 979 {
+        display = "Sandsorrow Watch";
+    }
+    THISTLESHRUB_VALLEY = 980 {
+        display = "Thistleshrub Valley";
+    }
+    THE_GAPING_CHASM = 981 {
+        display = "The Gaping Chasm";
+    }
+    THE_NOXIOUS_LAIR = 982 {
+        display = "The Noxious Lair";
+    }
+    DUNEMAUL_COMPOUND = 983 {
+        display = "Dunemaul Compound";
+    }
+    EASTMOON_RUINS = 984 {
+        display = "Eastmoon Ruins";
+    }
+    WATERSPRING_FIELD = 985 {
+        display = "Waterspring Field";
+    }
+    ZALASHJIS_DEN = 986 {
+        display = "Zalashji's Den";
+    }
+    LANDS_END_BEACH = 987 {
+        display = "Land's End Beach";
+    }
+    WAVESTRIDER_BEACH = 988 {
+        display = "Wavestrider Beach";
+    }
+    ULDUM = 989 {
+        display = "Uldum";
+    }
+    VALLEY_OF_THE_WATCHERS = 990 {
+        display = "Valley of the Watchers";
+    }
+    GUNSTANS_POST = 991 {
+        display = "Gunstan's Post";
+    }
+    SOUTHMOON_RUINS = 992 {
+        display = "Southmoon Ruins";
+    }
+    RENDERS_CAMP = 996 {
+        display = "Render's Camp";
+    }
+    RENDERS_VALLEY = 997 {
+        display = "Render's Valley";
+    }
+    RENDERS_ROCK = 998 {
+        display = "Render's Rock";
+    }
+    STONEWATCH_TOWER = 999 {
+        display = "Stonewatch Tower";
+    }
+    GALARDELL_VALLEY = 1000 {
+        display = "Galardell Valley";
+    }
+    LAKERIDGE_HIGHWAY = 1001 {
+        display = "Lakeridge Highway";
+    }
+    THREE_CORNERS = 1002 {
+        display = "Three Corners";
+    }
+    DIREFORGE_HILL = 1016 {
+        display = "Direforge Hill";
+    }
+    RAPTOR_RIDGE = 1017 {
+        display = "Raptor Ridge";
+    }
+    BLACK_CHANNEL_MARSH = 1018 {
+        display = "Black Channel Marsh";
+    }
+    THE_GREEN_BELT = 1019 {
+        display = "The Green Belt";
+    }
+    MOSSHIDE_FEN = 1020 {
+        display = "Mosshide Fen";
+    }
+    THELGEN_ROCK = 1021 {
+        display = "Thelgen Rock";
+    }
+    BLUEGILL_MARSH = 1022 {
+        display = "Bluegill Marsh";
+    }
+    SALTSPRAY_GLEN = 1023 {
+        display = "Saltspray Glen";
+    }
+    SUNDOWN_MARSH = 1024 {
+        display = "Sundown Marsh";
+    }
+    THE_GREEN_BELT1 = 1025 {
+        display = "The Green Belt";
+    }
+    ANGERFANG_ENCAMPMENT = 1036 {
+        display = "Angerfang Encampment";
+    }
+    GRIM_BATOL = 1037 {
+        display = "Grim Batol";
+    }
+    DRAGONMAW_GATES = 1038 {
+        display = "Dragonmaw Gates";
+    }
+    THE_LOST_FLEET = 1039 {
+        display = "The Lost Fleet";
+    }
+    DARROW_HILL = 1056 {
+        display = "Darrow Hill";
+    }
+    THORADINS_WALL1 = 1057 {
+        display = "Thoradin's Wall";
+    }
+    WEBWINDER_PATH = 1076 {
+        display = "Webwinder Path";
+    }
+    THE_HUSHED_BANK = 1097 {
+        display = "The Hushed Bank";
+    }
+    MANOR_MISTMANTLE = 1098 {
+        display = "Manor Mistmantle";
+    }
+    CAMP_MOJACHE = 1099 {
+        display = "Camp Mojache";
+    }
+    GRIMTOTEM_COMPOUND = 1100 {
+        display = "Grimtotem Compound";
+    }
+    THE_WRITHING_DEEP = 1101 {
+        display = "The Writhing Deep";
+    }
+    WILDWIND_LAKE = 1102 {
+        display = "Wildwind Lake";
+    }
+    GORDUNNI_OUTPOST = 1103 {
+        display = "Gordunni Outpost";
+    }
+    MOK_GORDUN = 1104 {
+        display = "Mok'Gordun";
+    }
+    FERAL_SCAR_VALE = 1105 {
+        display = "Feral Scar Vale";
+    }
+    FRAYFEATHER_HIGHLANDS = 1106 {
+        display = "Frayfeather Highlands";
+    }
+    IDLEWIND_LAKE = 1107 {
+        display = "Idlewind Lake";
+    }
+    THE_FORGOTTEN_COAST = 1108 {
+        display = "The Forgotten Coast";
+    }
+    EAST_PILLAR = 1109 {
+        display = "East Pillar";
+    }
+    WEST_PILLAR = 1110 {
+        display = "West Pillar";
+    }
+    DREAM_BOUGH = 1111 {
+        display = "Dream Bough";
+    }
+    JADEMIR_LAKE = 1112 {
+        display = "Jademir Lake";
+    }
+    ONEIROS = 1113 {
+        display = "Oneiros";
+    }
+    RUINS_OF_RAVENWIND = 1114 {
+        display = "Ruins of Ravenwind";
+    }
+    RAGE_SCAR_HOLD = 1115 {
+        display = "Rage Scar Hold";
+    }
+    FEATHERMOON_STRONGHOLD = 1116 {
+        display = "Feathermoon Stronghold";
+    }
+    RUINS_OF_SOLARSAL = 1117 {
+        display = "Ruins of Solarsal";
+    }
+    LOWER_WILDS_UNUSED = 1118 {
+        display = "Lower Wilds UNUSED";
+    }
+    THE_TWIN_COLOSSALS = 1119 {
+        display = "The Twin Colossals";
+    }
+    SARDOR_ISLE = 1120 {
+        display = "Sardor Isle";
+    }
+    ISLE_OF_DREAD = 1121 {
+        display = "Isle of Dread";
+    }
+    HIGH_WILDERNESS = 1136 {
+        display = "High Wilderness";
+    }
+    LOWER_WILDS = 1137 {
+        display = "Lower Wilds";
+    }
+    SOUTHERN_BARRENS = 1156 {
+        display = "Southern Barrens";
+    }
+    SOUTHERN_GOLD_ROAD = 1157 {
+        display = "Southern Gold Road";
+    }
+    ZUL_FARRAK1 = 1176 {
+        display = "Zul'Farrak";
+    }
+    UTGARDE_PINNACLE = 1196 {
+        display = "Utgarde Pinnacle";
+    }
+    TIMBERMAW_HOLD = 1216 {
+        display = "Timbermaw Hold";
+    }
+    VANNDIR_ENCAMPMENT = 1217 {
+        display = "Vanndir Encampment";
+    }
+    TESTAZSHARA = 1218 {
+        display = "TESTAzshara";
+    }
+    LEGASH_ENCAMPMENT = 1219 {
+        display = "Legash Encampment";
+    }
+    THALASSIAN_BASE_CAMP = 1220 {
+        display = "Thalassian Base Camp";
+    }
+    RUINS_OF_ELDARATH = 1221 {
+        display = "Ruins of Eldarath";
+    }
+    HETAERAS_CLUTCH = 1222 {
+        display = "Hetaera's Clutch";
+    }
+    TEMPLE_OF_ZIN_MALOR = 1223 {
+        display = "Temple of Zin-Malor";
+    }
+    BEARS_HEAD = 1224 {
+        display = "Bear's Head";
+    }
+    URSOLAN = 1225 {
+        display = "Ursolan";
+    }
+    TEMPLE_OF_ARKKORAN = 1226 {
+        display = "Temple of Arkkoran";
+    }
+    BAY_OF_STORMS = 1227 {
+        display = "Bay of Storms";
+    }
+    THE_SHATTERED_STRAND = 1228 {
+        display = "The Shattered Strand";
+    }
+    TOWER_OF_ELDARA = 1229 {
+        display = "Tower of Eldara";
+    }
+    JAGGED_REEF = 1230 {
+        display = "Jagged Reef";
+    }
+    SOUTHRIDGE_BEACH = 1231 {
+        display = "Southridge Beach";
+    }
+    RAVENCREST_MONUMENT = 1232 {
+        display = "Ravencrest Monument";
+    }
+    FORLORN_RIDGE = 1233 {
+        display = "Forlorn Ridge";
+    }
+    LAKE_MENNAR = 1234 {
+        display = "Lake Mennar";
+    }
+    SHADOWSONG_SHRINE = 1235 {
+        display = "Shadowsong Shrine";
+    }
+    HALDARR_ENCAMPMENT = 1236 {
+        display = "Haldarr Encampment";
+    }
+    VALORMOK = 1237 {
+        display = "Valormok";
+    }
+    THE_RUINED_REACHES = 1256 {
+        display = "The Ruined Reaches";
+    }
+    THE_TALONDEEP_PATH = 1276 {
+        display = "The Talondeep Path";
+    }
+    THE_TALONDEEP_PATH1 = 1277 {
+        display = "The Talondeep Path";
+    }
+    ROCKTUSK_FARM = 1296 {
+        display = "Rocktusk Farm";
+    }
+    JAGGEDSWINE_FARM = 1297 {
+        display = "Jaggedswine Farm";
+    }
+    RAZORFEN_DOWNS1 = 1316 {
+        display = "Razorfen Downs";
+    }
+    LOST_RIGGER_COVE = 1336 {
+        display = "Lost Rigger Cove";
+    }
+    ULDAMAN = 1337 {
+        display = "Uldaman";
+    }
+    LORDAMERE_LAKE1 = 1338 {
+        display = "Lordamere Lake";
+    }
+    LORDAMERE_LAKE2 = 1339 {
+        display = "Lordamere Lake";
+    }
+    GALLOWS_CORNER = 1357 {
+        display = "Gallows' Corner";
+    }
+    SILITHUS = 1377 {
+        display = "Silithus";
+    }
+    EMERALD_FOREST = 1397 {
+        display = "Emerald Forest";
+    }
+    SUNKEN_TEMPLE = 1417 {
+        display = "Sunken Temple";
+    }
+    DREADMAUL_HOLD = 1437 {
+        display = "Dreadmaul Hold";
+    }
+    NETHERGARDE_KEEP = 1438 {
+        display = "Nethergarde Keep";
+    }
+    DREADMAUL_POST = 1439 {
+        display = "Dreadmaul Post";
+    }
+    SERPENTS_COIL = 1440 {
+        display = "Serpent's Coil";
+    }
+    ALTAR_OF_STORMS1 = 1441 {
+        display = "Altar of Storms";
+    }
+    FIREWATCH_RIDGE = 1442 {
+        display = "Firewatch Ridge";
+    }
+    THE_SLAG_PIT = 1443 {
+        display = "The Slag Pit";
+    }
+    THE_SEA_OF_CINDERS = 1444 {
+        display = "The Sea of Cinders";
+    }
+    BLACKROCK_MOUNTAIN2 = 1445 {
+        display = "Blackrock Mountain";
+    }
+    THORIUM_POINT = 1446 {
+        display = "Thorium Point";
+    }
+    GARRISON_ARMORY = 1457 {
+        display = "Garrison Armory";
+    }
+    THE_TEMPLE_OF_ATAL_HAKKAR = 1477 {
+        display = "The Temple of Atal'Hakkar";
+    }
+    UNDERCITY = 1497 {
+        display = "Undercity";
+    }
+    ULDAMAN1 = 1517 {
+        display = "Uldaman";
+    }
+    NOT_USED_DEADMINES = 1518 {
+        display = "Not Used Deadmines";
+    }
+    STORMWIND_CITY = 1519 {
+        display = "Stormwind City";
+    }
+    IRONFORGE = 1537 {
+        display = "Ironforge";
+    }
+    SPLITHOOF_HOLD = 1557 {
+        display = "Splithoof Hold";
+    }
+    THE_CAPE_OF_STRANGLETHORN = 1577 {
+        display = "The Cape of Stranglethorn";
+    }
+    SOUTHERN_SAVAGE_COAST = 1578 {
+        display = "Southern Savage Coast";
+    }
+    UNUSED_THE_DEADMINES_002 = 1579 {
+        display = "Unused The Deadmines 002";
+    }
+    UNUSED_IRONCLAD_COVE_003 = 1580 {
+        display = "Unused Ironclad Cove 003";
+    }
+    THE_DEADMINES = 1581 {
+        display = "The Deadmines";
+    }
+    IRONCLAD_COVE = 1582 {
+        display = "Ironclad Cove";
+    }
+    BLACKROCK_SPIRE = 1583 {
+        display = "Blackrock Spire";
+    }
+    BLACKROCK_DEPTHS = 1584 {
+        display = "Blackrock Depths";
+    }
+    RAPTOR_GROUNDS_UNUSED = 1597 {
+        display = "Raptor Grounds UNUSED";
+    }
+    GROL_DOM_FARM_UNUSED = 1598 {
+        display = "Grol'dom Farm UNUSED";
+    }
+    MORSHAN_BASE_CAMP = 1599 {
+        display = "Mor'shan Base Camp";
+    }
+    HONORS_STAND_UNUSED = 1600 {
+        display = "Honor's Stand UNUSED";
+    }
+    BLACKTHORN_RIDGE_UNUSED = 1601 {
+        display = "Blackthorn Ridge UNUSED";
+    }
+    BRAMBLESCAR_UNUSED = 1602 {
+        display = "Bramblescar UNUSED";
+    }
+    AGAMA_GOR_UNUSED = 1603 {
+        display = "Agama'gor UNUSED";
+    }
+    VALLEY_OF_HEROES = 1617 {
+        display = "Valley of Heroes";
+    }
+    ORGRIMMAR = 1637 {
+        display = "Orgrimmar";
+    }
+    THUNDER_BLUFF = 1638 {
+        display = "Thunder Bluff";
+    }
+    ELDER_RISE = 1639 {
+        display = "Elder Rise";
+    }
+    SPIRIT_RISE = 1640 {
+        display = "Spirit Rise";
+    }
+    HUNTER_RISE = 1641 {
+        display = "Hunter Rise";
+    }
+    DARNASSUS = 1657 {
+        display = "Darnassus";
+    }
+    CENARION_ENCLAVE = 1658 {
+        display = "Cenarion Enclave";
+    }
+    CRAFTSMENS_TERRACE = 1659 {
+        display = "Craftsmen's Terrace";
+    }
+    WARRIORS_TERRACE = 1660 {
+        display = "Warrior's Terrace";
+    }
+    THE_TEMPLE_GARDENS = 1661 {
+        display = "The Temple Gardens";
+    }
+    TRADESMENS_TERRACE = 1662 {
+        display = "Tradesmen's Terrace";
+    }
+    GAVINS_NAZE = 1677 {
+        display = "Gavin's Naze";
+    }
+    SOFERAS_NAZE = 1678 {
+        display = "Sofera's Naze";
+    }
+    CORRAHNS_DAGGER = 1679 {
+        display = "Corrahn's Dagger";
+    }
+    THE_HEADLAND = 1680 {
+        display = "The Headland";
+    }
+    MISTY_SHORE = 1681 {
+        display = "Misty Shore";
+    }
+    DANDREDS_FOLD = 1682 {
+        display = "Dandred's Fold";
+    }
+    GROWLESS_CAVE = 1683 {
+        display = "Growless Cave";
+    }
+    CHILLWIND_POINT = 1684 {
+        display = "Chillwind Point";
+    }
+    RAPTOR_GROUNDS = 1697 {
+        display = "Raptor Grounds";
+    }
+    BRAMBLESCAR = 1698 {
+        display = "Bramblescar";
+    }
+    THORN_HILL = 1699 {
+        display = "Thorn Hill";
+    }
+    AGAMA_GOR = 1700 {
+        display = "Agama'gor";
+    }
+    BLACKTHORN_RIDGE = 1701 {
+        display = "Blackthorn Ridge";
+    }
+    HONORS_STAND = 1702 {
+        display = "Honor's Stand";
+    }
+    THE_MORSHAN_RAMPART = 1703 {
+        display = "The Mor'shan Rampart";
+    }
+    GROL_DOM_FARM = 1704 {
+        display = "Grol'dom Farm";
+    }
+    RAZORFEN_KRAUL1 = 1717 {
+        display = "Razorfen Kraul";
+    }
+    THE_GREAT_LIFT1 = 1718 {
+        display = "The Great Lift";
+    }
+    MISTVALE_VALLEY = 1737 {
+        display = "Mistvale Valley";
+    }
+    NEK_MANI_WELLSPRING = 1738 {
+        display = "Nek'mani Wellspring";
+    }
+    BLOODSAIL_COMPOUND = 1739 {
+        display = "Bloodsail Compound";
+    }
+    VENTURE_CO_BASE_CAMP = 1740 {
+        display = "Venture Co. Base Camp";
+    }
+    GURUBASHI_ARENA = 1741 {
+        display = "Gurubashi Arena";
+    }
+    SPIRIT_DEN = 1742 {
+        display = "Spirit Den";
+    }
+    THE_CRIMSON_VEIL = 1757 {
+        display = "The Crimson Veil";
+    }
+    THE_RIPTIDE = 1758 {
+        display = "The Riptide";
+    }
+    THE_DAMSELS_LUCK = 1759 {
+        display = "The Damsel's Luck";
+    }
+    VENTURE_CO_OPERATIONS_CENTER = 1760 {
+        display = "Venture Co. Operations Center";
+    }
+    DEADWOOD_VILLAGE = 1761 {
+        display = "Deadwood Village";
+    }
+    FELPAW_VILLAGE = 1762 {
+        display = "Felpaw Village";
+    }
+    JAEDENAR = 1763 {
+        display = "Jaedenar";
+    }
+    BLOODVENOM_RIVER = 1764 {
+        display = "Bloodvenom River";
+    }
+    BLOODVENOM_FALLS = 1765 {
+        display = "Bloodvenom Falls";
+    }
+    SHATTER_SCAR_VALE = 1766 {
+        display = "Shatter Scar Vale";
+    }
+    IRONTREE_WOODS = 1767 {
+        display = "Irontree Woods";
+    }
+    IRONTREE_CAVERN = 1768 {
+        display = "Irontree Cavern";
+    }
+    TIMBERMAW_HOLD1 = 1769 {
+        display = "Timbermaw Hold";
+    }
+    SHADOW_HOLD = 1770 {
+        display = "Shadow Hold";
+    }
+    SHRINE_OF_THE_DECEIVER = 1771 {
+        display = "Shrine of the Deceiver";
+    }
+    ITHARIUSS_CAVE = 1777 {
+        display = "Itharius's Cave";
+    }
+    SORROWMURK = 1778 {
+        display = "Sorrowmurk";
+    }
+    DRAENIL_DUR_VILLAGE = 1779 {
+        display = "Draenil'dur Village";
+    }
+    SPLINTERSPEAR_JUNCTION = 1780 {
+        display = "Splinterspear Junction";
+    }
+    STAGALBOG = 1797 {
+        display = "Stagalbog";
+    }
+    THE_SHIFTING_MIRE = 1798 {
+        display = "The Shifting Mire";
+    }
+    STAGALBOG_CAVE = 1817 {
+        display = "Stagalbog Cave";
+    }
+    WITHERBARK_CAVERNS = 1837 {
+        display = "Witherbark Caverns";
+    }
+    THORADINS_WALL2 = 1857 {
+        display = "Thoradin's Wall";
+    }
+    BOULDER_GOR = 1858 {
+        display = "Boulder'gor";
+    }
+    VALLEY_OF_FANGS = 1877 {
+        display = "Valley of Fangs";
+    }
+    THE_DUSTBOWL = 1878 {
+        display = "The Dustbowl";
+    }
+    MIRAGE_FLATS = 1879 {
+        display = "Mirage Flats";
+    }
+    FEATHERBEARDS_HOVEL = 1880 {
+        display = "Featherbeard's Hovel";
+    }
+    SHINDIGGERS_CAMP = 1881 {
+        display = "Shindigger's Camp";
+    }
+    PLAGUEMIST_RAVINE = 1882 {
+        display = "Plaguemist Ravine";
+    }
+    VALORWIND_LAKE = 1883 {
+        display = "Valorwind Lake";
+    }
+    AGOL_WATHA = 1884 {
+        display = "Agol'watha";
+    }
+    HIRI_WATHA = 1885 {
+        display = "Hiri'watha";
+    }
+    THE_CREEPING_RUIN = 1886 {
+        display = "The Creeping Ruin";
+    }
+    BOGENS_LEDGE = 1887 {
+        display = "Bogen's Ledge";
+    }
+    THE_MAKERS_TERRACE = 1897 {
+        display = "The Maker's Terrace";
+    }
+    DUSTWIND_GULCH = 1898 {
+        display = "Dustwind Gulch";
+    }
+    SHAOL_WATHA = 1917 {
+        display = "Shaol'watha";
+    }
+    NOONSHADE_RUINS = 1937 {
+        display = "Noonshade Ruins";
+    }
+    BROKEN_PILLAR = 1938 {
+        display = "Broken Pillar";
+    }
+    ABYSSAL_SANDS = 1939 {
+        display = "Abyssal Sands";
+    }
+    SOUTHBREAK_SHORE = 1940 {
+        display = "Southbreak Shore";
+    }
+    CAVERNS_OF_TIME = 1941 {
+        display = "Caverns of Time";
+    }
+    THE_MARSHLANDS = 1942 {
+        display = "The Marshlands";
+    }
+    IRONSTONE_PLATEAU = 1943 {
+        display = "Ironstone Plateau";
+    }
+    BLACKCHAR_CAVE = 1957 {
+        display = "Blackchar Cave";
+    }
+    TANNER_CAMP = 1958 {
+        display = "Tanner Camp";
+    }
+    DUSTFIRE_VALLEY = 1959 {
+        display = "Dustfire Valley";
+    }
+    ZUL_GURUB1 = 1977 {
+        display = "Zul'Gurub";
+    }
+    MISTY_REED_POST = 1978 {
+        display = "Misty Reed Post";
+    }
+    BLOODVENOM_POST_ = 1997 {
+        display = "Bloodvenom Post ";
+    }
+    TALONBRANCH_GLADE_ = 1998 {
+        display = "Talonbranch Glade ";
+    }
+    STRATHOLME = 2017 {
+        display = "Stratholme";
+    }
+    QUEL_THALAS = 2037 {
+        display = "Quel'thalas";
+    }
+    SCHOLOMANCE = 2057 {
+        display = "Scholomance";
+    }
+    TWILIGHT_VALE = 2077 {
+        display = "Twilight Vale";
+    }
+    TWILIGHT_SHORE = 2078 {
+        display = "Twilight Shore";
+    }
+    ALCAZ_ISLAND = 2079 {
+        display = "Alcaz Island";
+    }
+    DARKCLOUD_PINNACLE = 2097 {
+        display = "Darkcloud Pinnacle";
+    }
+    DAWNING_WOOD_CATACOMBS = 2098 {
+        display = "Dawning Wood Catacombs";
+    }
+    STONEWATCH_KEEP = 2099 {
+        display = "Stonewatch Keep";
+    }
+    MARAUDON = 2100 {
+        display = "Maraudon";
+    }
+    STOUTLAGER_INN = 2101 {
+        display = "Stoutlager Inn";
+    }
+    THUNDERBREW_DISTILLERY = 2102 {
+        display = "Thunderbrew Distillery";
+    }
+    MENETHIL_KEEP = 2103 {
+        display = "Menethil Keep";
+    }
+    DEEPWATER_TAVERN = 2104 {
+        display = "Deepwater Tavern";
+    }
+    SHADOW_GRAVE = 2117 {
+        display = "Shadow Grave";
+    }
+    BRILL_TOWN_HALL = 2118 {
+        display = "Brill Town Hall";
+    }
+    GALLOWS_END_TAVERN = 2119 {
+        display = "Gallows' End Tavern";
+    }
+    THE_POOLS_OF_VISIONUNUSED = 2137 {
+        display = "The Pools of VisionUNUSED";
+    }
+    DREADMIST_DEN = 2138 {
+        display = "Dreadmist Den";
+    }
+    BAEL_DUN_KEEP = 2157 {
+        display = "Bael'dun Keep";
+    }
+    EMBERSTRIFES_DEN = 2158 {
+        display = "Emberstrife's Den";
+    }
+    ONYXIAS_LAIR = 2159 {
+        display = "Onyxia's Lair";
+    }
+    WINDSHEAR_MINE = 2160 {
+        display = "Windshear Mine";
+    }
+    ROLANDS_DOOM = 2161 {
+        display = "Roland's Doom";
+    }
+    BATTLE_RING = 2177 {
+        display = "Battle Ring";
+    }
+    THE_POOLS_OF_VISION = 2197 {
+        display = "The Pools of Vision";
+    }
+    SHADOWBREAK_RAVINE = 2198 {
+        display = "Shadowbreak Ravine";
+    }
+    BROKEN_SPEAR_VILLAGE = 2217 {
+        display = "Broken Spear Village";
+    }
+    WHITEREACH_POST = 2237 {
+        display = "Whitereach Post";
+    }
+    GORNIA = 2238 {
+        display = "Gornia";
+    }
+    ZANES_EYE_CRATER = 2239 {
+        display = "Zane's Eye Crater";
+    }
+    MIRAGE_RACEWAY = 2240 {
+        display = "Mirage Raceway";
+    }
+    FROSTSABER_ROCK = 2241 {
+        display = "Frostsaber Rock";
+    }
+    THE_HIDDEN_GROVE = 2242 {
+        display = "The Hidden Grove";
+    }
+    TIMBERMAW_POST = 2243 {
+        display = "Timbermaw Post";
+    }
+    WINTERFALL_VILLAGE = 2244 {
+        display = "Winterfall Village";
+    }
+    MAZTHORIL = 2245 {
+        display = "Mazthoril";
+    }
+    FROSTFIRE_HOT_SPRINGS = 2246 {
+        display = "Frostfire Hot Springs";
+    }
+    ICE_THISTLE_HILLS = 2247 {
+        display = "Ice Thistle Hills";
+    }
+    DUN_MANDARR = 2248 {
+        display = "Dun Mandarr";
+    }
+    FROSTWHISPER_GORGE = 2249 {
+        display = "Frostwhisper Gorge";
+    }
+    OWL_WING_THICKET = 2250 {
+        display = "Owl Wing Thicket";
+    }
+    LAKE_KEL_THERIL = 2251 {
+        display = "Lake Kel'Theril";
+    }
+    THE_RUINS_OF_KEL_THERIL = 2252 {
+        display = "The Ruins of Kel'Theril";
+    }
+    STARFALL_VILLAGE = 2253 {
+        display = "Starfall Village";
+    }
+    BAN_THALLOW_BARROW_DEN = 2254 {
+        display = "Ban'Thallow Barrow Den";
+    }
+    EVERLOOK = 2255 {
+        display = "Everlook";
+    }
+    DARKWHISPER_GORGE = 2256 {
+        display = "Darkwhisper Gorge";
+    }
+    DEEPRUN_TRAM = 2257 {
+        display = "Deeprun Tram";
+    }
+    THE_FUNGAL_VALE = 2258 {
+        display = "The Fungal Vale";
+    }
+    UNUSEDTHE_MARRIS_STEAD = 2259 {
+        display = "UNUSEDThe Marris Stead";
+    }
+    THE_MARRIS_STEAD = 2260 {
+        display = "The Marris Stead";
+    }
+    THE_UNDERCROFT = 2261 {
+        display = "The Undercroft";
+    }
+    DARROWSHIRE = 2262 {
+        display = "Darrowshire";
+    }
+    CROWN_GUARD_TOWER = 2263 {
+        display = "Crown Guard Tower";
+    }
+    CORINS_CROSSING = 2264 {
+        display = "Corin's Crossing";
+    }
+    SCARLET_BASE_CAMP = 2265 {
+        display = "Scarlet Base Camp";
+    }
+    TYRS_HAND = 2266 {
+        display = "Tyr's Hand";
+    }
+    THE_SCARLET_BASILICA = 2267 {
+        display = "The Scarlet Basilica";
+    }
+    LIGHTS_HOPE_CHAPEL = 2268 {
+        display = "Light's Hope Chapel";
+    }
+    BROWMAN_MILL = 2269 {
+        display = "Browman Mill";
+    }
+    THE_NOXIOUS_GLADE = 2270 {
+        display = "The Noxious Glade";
+    }
+    EASTWALL_TOWER = 2271 {
+        display = "Eastwall Tower";
+    }
+    NORTHDALE = 2272 {
+        display = "Northdale";
+    }
+    ZUL_MASHAR = 2273 {
+        display = "Zul'Mashar";
+    }
+    MAZRA_ALOR = 2274 {
+        display = "Mazra'Alor";
+    }
+    NORTHPASS_TOWER = 2275 {
+        display = "Northpass Tower";
+    }
+    QUEL_LITHIEN_LODGE = 2276 {
+        display = "Quel'Lithien Lodge";
+    }
+    PLAGUEWOOD = 2277 {
+        display = "Plaguewood";
+    }
+    SCOURGEHOLD = 2278 {
+        display = "Scourgehold";
+    }
+    STRATHOLME1 = 2279 {
+        display = "Stratholme";
+    }
+    DO_NOT_USE = 2280 {
+        display = "DO NOT USE";
+    }
+    DARROWMERE_LAKE = 2297 {
+        display = "Darrowmere Lake";
+    }
+    CAER_DARROW = 2298 {
+        display = "Caer Darrow";
+    }
+    DARROWMERE_LAKE1 = 2299 {
+        display = "Darrowmere Lake";
+    }
+    CAVERNS_OF_TIME1 = 2300 {
+        display = "Caverns of Time";
+    }
+    THISTLEFUR_VILLAGE = 2301 {
+        display = "Thistlefur Village";
+    }
+    THE_QUAGMIRE = 2302 {
+        display = "The Quagmire";
+    }
+    WINDBREAK_CANYON = 2303 {
+        display = "Windbreak Canyon";
+    }
+    SOUTH_SEAS = 2317 {
+        display = "South Seas";
+    }
+    THE_GREAT_SEA3 = 2318 {
+        display = "The Great Sea";
+    }
+    THE_GREAT_SEA4 = 2319 {
+        display = "The Great Sea";
+    }
+    THE_GREAT_SEA5 = 2320 {
+        display = "The Great Sea";
+    }
+    THE_GREAT_SEA6 = 2321 {
+        display = "The Great Sea";
+    }
+    THE_VEILED_SEA1 = 2322 {
+        display = "The Veiled Sea";
+    }
+    THE_VEILED_SEA2 = 2323 {
+        display = "The Veiled Sea";
+    }
+    THE_VEILED_SEA3 = 2324 {
+        display = "The Veiled Sea";
+    }
+    THE_VEILED_SEA4 = 2325 {
+        display = "The Veiled Sea";
+    }
+    THE_VEILED_SEA5 = 2326 {
+        display = "The Veiled Sea";
+    }
+    RAZOR_HILL_BARRACKS = 2337 {
+        display = "Razor Hill Barracks";
+    }
+    SOUTH_SEAS1 = 2338 {
+        display = "South Seas";
+    }
+    THE_GREAT_SEA7 = 2339 {
+        display = "The Great Sea";
+    }
+    BLOODTOOTH_CAMP = 2357 {
+        display = "Bloodtooth Camp";
+    }
+    FOREST_SONG = 2358 {
+        display = "Forest Song";
+    }
+    GREENPAW_VILLAGE = 2359 {
+        display = "Greenpaw Village";
+    }
+    SILVERWING_OUTPOST = 2360 {
+        display = "Silverwing Outpost";
+    }
+    NIGHTHAVEN = 2361 {
+        display = "Nighthaven";
+    }
+    SHRINE_OF_REMULOS = 2362 {
+        display = "Shrine of Remulos";
+    }
+    STORMRAGE_BARROW_DENS = 2363 {
+        display = "Stormrage Barrow Dens";
+    }
+    THE_GREAT_SEA8 = 2364 {
+        display = "The Great Sea";
+    }
+    THE_GREAT_SEA9 = 2365 {
+        display = "The Great Sea";
+    }
+    THE_BLACK_MORASS = 2366 {
+        display = "The Black Morass";
+    }
+    OLD_HILLSBRAD_FOOTHILLS = 2367 {
+        display = "Old Hillsbrad Foothills";
+    }
+    TARREN_MILL1 = 2368 {
+        display = "Tarren Mill";
+    }
+    SOUTHSHORE1 = 2369 {
+        display = "Southshore";
+    }
+    DURNHOLDE_KEEP1 = 2370 {
+        display = "Durnholde Keep";
+    }
+    DUN_GAROK1 = 2371 {
+        display = "Dun Garok";
+    }
+    HILLSBRAD_FIELDS1 = 2372 {
+        display = "Hillsbrad Fields";
+    }
+    EASTERN_STRAND1 = 2373 {
+        display = "Eastern Strand";
+    }
+    NETHANDER_STEAD1 = 2374 {
+        display = "Nethander Stead";
+    }
+    DARROW_HILL1 = 2375 {
+        display = "Darrow Hill";
+    }
+    SOUTHPOINT_TOWER1 = 2376 {
+        display = "Southpoint Tower";
+    }
+    THORADINS_WALL3 = 2377 {
+        display = "Thoradin's Wall";
+    }
+    WESTERN_STRAND1 = 2378 {
+        display = "Western Strand";
+    }
+    AZURELODE_MINE1 = 2379 {
+        display = "Azurelode Mine";
+    }
+    THE_GREAT_SEA10 = 2397 {
+        display = "The Great Sea";
+    }
+    THE_GREAT_SEA11 = 2398 {
+        display = "The Great Sea";
+    }
+    THE_GREAT_SEA12 = 2399 {
+        display = "The Great Sea";
+    }
+    THE_FORBIDDING_SEA1 = 2400 {
+        display = "The Forbidding Sea";
+    }
+    THE_FORBIDDING_SEA2 = 2401 {
+        display = "The Forbidding Sea";
+    }
+    THE_FORBIDDING_SEA3 = 2402 {
+        display = "The Forbidding Sea";
+    }
+    THE_FORBIDDING_SEA4 = 2403 {
+        display = "The Forbidding Sea";
+    }
+    TETHRIS_ARAN = 2404 {
+        display = "Tethris Aran";
+    }
+    ETHEL_RETHOR = 2405 {
+        display = "Ethel Rethor";
+    }
+    RANAZJAR_ISLE = 2406 {
+        display = "Ranazjar Isle";
+    }
+    KORMEKS_HUT = 2407 {
+        display = "Kormek's Hut";
+    }
+    SHADOWPREY_VILLAGE = 2408 {
+        display = "Shadowprey Village";
+    }
+    BLACKROCK_PASS = 2417 {
+        display = "Blackrock Pass";
+    }
+    MORGANS_VIGIL = 2418 {
+        display = "Morgan's Vigil";
+    }
+    SLITHER_ROCK = 2419 {
+        display = "Slither Rock";
+    }
+    TERROR_WING_PATH = 2420 {
+        display = "Terror Wing Path";
+    }
+    DRACO_DAR = 2421 {
+        display = "Draco'dar";
+    }
+    RAGEFIRE_CHASM = 2437 {
+        display = "Ragefire Chasm";
+    }
+    NIGHTSONG_WOODS = 2457 {
+        display = "Nightsong Woods";
+    }
+    THE_VEILED_SEA6 = 2477 {
+        display = "The Veiled Sea";
+    }
+    MORLOS_ARAN = 2478 {
+        display = "Morlos'Aran";
+    }
+    EMERALD_SANCTUARY = 2479 {
+        display = "Emerald Sanctuary";
+    }
+    JADEFIRE_GLEN = 2480 {
+        display = "Jadefire Glen";
+    }
+    RUINS_OF_CONSTELLAS = 2481 {
+        display = "Ruins of Constellas";
+    }
+    BITTER_REACHES = 2497 {
+        display = "Bitter Reaches";
+    }
+    RISE_OF_THE_DEFILER = 2517 {
+        display = "Rise of the Defiler";
+    }
+    LARISS_PAVILION = 2518 {
+        display = "Lariss Pavilion";
+    }
+    WOODPAW_HILLS = 2519 {
+        display = "Woodpaw Hills";
+    }
+    WOODPAW_DEN = 2520 {
+        display = "Woodpaw Den";
+    }
+    VERDANTIS_RIVER = 2521 {
+        display = "Verdantis River";
+    }
+    RUINS_OF_ISILDIEN = 2522 {
+        display = "Ruins of Isildien";
+    }
+    GRIMTOTEM_POST = 2537 {
+        display = "Grimtotem Post";
+    }
+    CAMP_APARAJE = 2538 {
+        display = "Camp Aparaje";
+    }
+    MALAKA_JIN = 2539 {
+        display = "Malaka'jin";
+    }
+    BOULDERSLIDE_RAVINE = 2540 {
+        display = "Boulderslide Ravine";
+    }
+    SISHIR_CANYON = 2541 {
+        display = "Sishir Canyon";
+    }
+    DIRE_MAUL = 2557 {
+        display = "Dire Maul";
+    }
+    DEADWIND_RAVINE = 2558 {
+        display = "Deadwind Ravine";
+    }
+    DIAMONDHEAD_RIVER = 2559 {
+        display = "Diamondhead River";
+    }
+    ARIDENS_CAMP = 2560 {
+        display = "Ariden's Camp";
+    }
+    THE_VICE = 2561 {
+        display = "The Vice";
+    }
+    KARAZHAN = 2562 {
+        display = "Karazhan";
+    }
+    MORGANS_PLOT = 2563 {
+        display = "Morgan's Plot";
+    }
+    DIRE_MAUL1 = 2577 {
+        display = "Dire Maul";
+    }
+    ALTERAC_VALLEY = 2597 {
+        display = "Alterac Valley";
+    }
+    SCRABBLESCREWS_CAMP = 2617 {
+        display = "Scrabblescrew's Camp";
+    }
+    JADEFIRE_RUN = 2618 {
+        display = "Jadefire Run";
+    }
+    THONDRORIL_RIVER = 2619 {
+        display = "Thondroril River";
+    }
+    THONDRORIL_RIVER1 = 2620 {
+        display = "Thondroril River";
+    }
+    LAKE_MERELDAR = 2621 {
+        display = "Lake Mereldar";
+    }
+    PESTILENT_SCAR = 2622 {
+        display = "Pestilent Scar";
+    }
+    THE_INFECTIS_SCAR = 2623 {
+        display = "The Infectis Scar";
+    }
+    BLACKWOOD_LAKE = 2624 {
+        display = "Blackwood Lake";
+    }
+    EASTWALL_GATE = 2625 {
+        display = "Eastwall Gate";
+    }
+    TERRORWEB_TUNNEL = 2626 {
+        display = "Terrorweb Tunnel";
+    }
+    TERRORDALE = 2627 {
+        display = "Terrordale";
+    }
+    KARGATHIA_KEEP = 2637 {
+        display = "Kargathia Keep";
+    }
+    VALLEY_OF_BONES = 2657 {
+        display = "Valley of Bones";
+    }
+    BLACKWING_LAIR = 2677 {
+        display = "Blackwing Lair";
+    }
+    DEADMANS_CROSSING = 2697 {
+        display = "Deadman's Crossing";
+    }
+    MOLTEN_CORE = 2717 {
+        display = "Molten Core";
+    }
+    THE_SCARAB_WALL = 2737 {
+        display = "The Scarab Wall";
+    }
+    SOUTHWIND_VILLAGE = 2738 {
+        display = "Southwind Village";
+    }
+    TWILIGHT_BASE_CAMP = 2739 {
+        display = "Twilight Base Camp";
+    }
+    THE_CRYSTAL_VALE = 2740 {
+        display = "The Crystal Vale";
+    }
+    THE_SCARAB_DAIS = 2741 {
+        display = "The Scarab Dais";
+    }
+    HIVE_ASHI = 2742 {
+        display = "Hive'Ashi";
+    }
+    HIVE_ZORA = 2743 {
+        display = "Hive'Zora";
+    }
+    HIVE_REGAL = 2744 {
+        display = "Hive'Regal";
+    }
+    SHRINE_OF_THE_FALLEN_WARRIOR = 2757 {
+        display = "Shrine of the Fallen Warrior";
+    }
+    UNUSED_ALTERAC_VALLEY = 2777 {
+        display = "UNUSED Alterac Valley";
+    }
+    BLACKFATHOM_DEEPS1 = 2797 {
+        display = "Blackfathom Deeps";
+    }
+    CRYSTALSONG_FOREST = 2817 {
+        display = "Crystalsong Forest";
+    }
+    THE_MASTERS_CELLAR = 2837 {
+        display = "The Master's Cellar";
+    }
+    STONEWROUGHT_PASS = 2838 {
+        display = "Stonewrought Pass";
+    }
+    ALTERAC_VALLEY1 = 2839 {
+        display = "Alterac Valley";
+    }
+    THE_RUMBLE_CAGE = 2857 {
+        display = "The Rumble Cage";
+    }
+    CHUNK_TEST = 2877 {
+        display = "Chunk Test";
+    }
+    ZORAM_GAR_OUTPOST = 2897 {
+        display = "Zoram'gar Outpost";
+    }
+    HALL_OF_LEGENDS = 2917 {
+        display = "Hall of Legends";
+    }
+    CHAMPIONS_HALL = 2918 {
+        display = "Champions' Hall";
+    }
+    GROSH_GOK_COMPOUND = 2937 {
+        display = "Grosh'gok Compound";
+    }
+    SLEEPING_GORGE = 2938 {
+        display = "Sleeping Gorge";
+    }
+    IRONDEEP_MINE = 2957 {
+        display = "Irondeep Mine";
+    }
+    STONEHEARTH_OUTPOST = 2958 {
+        display = "Stonehearth Outpost";
+    }
+    DUN_BALDAR = 2959 {
+        display = "Dun Baldar";
+    }
+    ICEWING_PASS = 2960 {
+        display = "Icewing Pass";
+    }
+    FROSTWOLF_VILLAGE = 2961 {
+        display = "Frostwolf Village";
+    }
+    TOWER_POINT = 2962 {
+        display = "Tower Point";
+    }
+    COLDTOOTH_MINE = 2963 {
+        display = "Coldtooth Mine";
+    }
+    WINTERAX_HOLD = 2964 {
+        display = "Winterax Hold";
+    }
+    ICEBLOOD_GARRISON = 2977 {
+        display = "Iceblood Garrison";
+    }
+    FROSTWOLF_KEEP = 2978 {
+        display = "Frostwolf Keep";
+    }
+    TOR_KREN_FARM = 2979 {
+        display = "Tor'kren Farm";
+    }
+    FROST_DAGGER_PASS = 3017 {
+        display = "Frost Dagger Pass";
+    }
+    IRONSTONE_CAMP = 3037 {
+        display = "Ironstone Camp";
+    }
+    WEAZELS_CRATER = 3038 {
+        display = "Weazel's Crater";
+    }
+    TAHONDA_RUINS = 3039 {
+        display = "Tahonda Ruins";
+    }
+    FIELD_OF_STRIFE = 3057 {
+        display = "Field of Strife";
+    }
+    ICEWING_CAVERN = 3058 {
+        display = "Icewing Cavern";
+    }
+    VALORS_REST = 3077 {
+        display = "Valor's Rest";
+    }
+    THE_SWARMING_PILLAR = 3097 {
+        display = "The Swarming Pillar";
+    }
+    TWILIGHT_POST = 3098 {
+        display = "Twilight Post";
+    }
+    TWILIGHT_OUTPOST = 3099 {
+        display = "Twilight Outpost";
+    }
+    RAVAGED_TWILIGHT_CAMP = 3100 {
+        display = "Ravaged Twilight Camp";
+    }
+    SHALZARUS_LAIR = 3117 {
+        display = "Shalzaru's Lair";
+    }
+    TALRENDIS_POINT = 3137 {
+        display = "Talrendis Point";
+    }
+    RETHRESS_SANCTUM = 3138 {
+        display = "Rethress Sanctum";
+    }
+    MOON_HORROR_DEN = 3139 {
+        display = "Moon Horror Den";
+    }
+    SCALEBEARDS_CAVE = 3140 {
+        display = "Scalebeard's Cave";
+    }
+    BOULDERSLIDE_CAVERN = 3157 {
+        display = "Boulderslide Cavern";
+    }
+    WARSONG_LABOR_CAMP = 3177 {
+        display = "Warsong Labor Camp";
+    }
+    CHILLWIND_CAMP = 3197 {
+        display = "Chillwind Camp";
+    }
+    THE_MAUL = 3217 {
+        display = "The Maul";
+    }
+    THE_MAUL_UNUSED = 3237 {
+        display = "The Maul UNUSED";
+    }
+    BONES_OF_GRAKKAROND = 3257 {
+        display = "Bones of Grakkarond";
+    }
+    WARSONG_GULCH = 3277 {
+        display = "Warsong Gulch";
+    }
+    FROSTWOLF_GRAVEYARD = 3297 {
+        display = "Frostwolf Graveyard";
+    }
+    FROSTWOLF_PASS = 3298 {
+        display = "Frostwolf Pass";
+    }
+    DUN_BALDAR_PASS = 3299 {
+        display = "Dun Baldar Pass";
+    }
+    ICEBLOOD_GRAVEYARD = 3300 {
+        display = "Iceblood Graveyard";
+    }
+    SNOWFALL_GRAVEYARD = 3301 {
+        display = "Snowfall Graveyard";
+    }
+    STONEHEARTH_GRAVEYARD = 3302 {
+        display = "Stonehearth Graveyard";
+    }
+    STORMPIKE_GRAVEYARD = 3303 {
+        display = "Stormpike Graveyard";
+    }
+    ICEWING_BUNKER = 3304 {
+        display = "Icewing Bunker";
+    }
+    STONEHEARTH_BUNKER = 3305 {
+        display = "Stonehearth Bunker";
+    }
+    WILDPAW_RIDGE = 3306 {
+        display = "Wildpaw Ridge";
+    }
+    REVANTUSK_VILLAGE = 3317 {
+        display = "Revantusk Village";
+    }
+    ROCK_OF_DUROTAN = 3318 {
+        display = "Rock of Durotan";
+    }
+    SILVERWING_GROVE = 3319 {
+        display = "Silverwing Grove";
+    }
+    WARSONG_LUMBER_MILL = 3320 {
+        display = "Warsong Lumber Mill";
+    }
+    SILVERWING_HOLD = 3321 {
+        display = "Silverwing Hold";
+    }
+    WILDPAW_CAVERN = 3337 {
+        display = "Wildpaw Cavern";
+    }
+    THE_VEILED_CLEFT = 3338 {
+        display = "The Veiled Cleft";
+    }
+    YOJAMBA_ISLE = 3357 {
+        display = "Yojamba Isle";
+    }
+    ARATHI_BASIN = 3358 {
+        display = "Arathi Basin";
+    }
+    THE_COIL = 3377 {
+        display = "The Coil";
+    }
+    ALTAR_OF_HIR_EEK = 3378 {
+        display = "Altar of Hir'eek";
+    }
+    SHADRA_ZAAR = 3379 {
+        display = "Shadra'zaar";
+    }
+    HAKKARI_GROUNDS = 3380 {
+        display = "Hakkari Grounds";
+    }
+    NAZE_OF_SHIRVALLAH = 3381 {
+        display = "Naze of Shirvallah";
+    }
+    TEMPLE_OF_BETHEKK = 3382 {
+        display = "Temple of Bethekk";
+    }
+    THE_BLOODFIRE_PIT = 3383 {
+        display = "The Bloodfire Pit";
+    }
+    ALTAR_OF_THE_BLOOD_GOD = 3384 {
+        display = "Altar of the Blood God";
+    }
+    ZANZAS_RISE = 3397 {
+        display = "Zanza's Rise";
+    }
+    EDGE_OF_MADNESS = 3398 {
+        display = "Edge of Madness";
+    }
+    TROLLBANE_HALL = 3417 {
+        display = "Trollbane Hall";
+    }
+    DEFILERS_DEN = 3418 {
+        display = "Defiler's Den";
+    }
+    PAGLES_POINTE = 3419 {
+        display = "Pagle's Pointe";
+    }
+    FARM = 3420 {
+        display = "Farm";
+    }
+    BLACKSMITH = 3421 {
+        display = "Blacksmith";
+    }
+    LUMBER_MILL = 3422 {
+        display = "Lumber Mill";
+    }
+    GOLD_MINE = 3423 {
+        display = "Gold Mine";
+    }
+    STABLES = 3424 {
+        display = "Stables";
+    }
+    CENARION_HOLD = 3425 {
+        display = "Cenarion Hold";
+    }
+    STAGHELM_POINT = 3426 {
+        display = "Staghelm Point";
+    }
+    BRONZEBEARD_ENCAMPMENT = 3427 {
+        display = "Bronzebeard Encampment";
+    }
+    AHN_QIRAJ = 3428 {
+        display = "Ahn'Qiraj";
+    }
+    RUINS_OF_AHN_QIRAJ = 3429 {
+        display = "Ruins of Ahn'Qiraj";
+    }
+    EVERSONG_WOODS = 3430 {
+        display = "Eversong Woods";
+    }
+    SUNSTRIDER_ISLE = 3431 {
+        display = "Sunstrider Isle";
+    }
+    SHRINE_OF_DATH_REMAR = 3432 {
+        display = "Shrine of Dath'Remar";
+    }
+    GHOSTLANDS = 3433 {
+        display = "Ghostlands";
+    }
+    SCARAB_TERRACE = 3434 {
+        display = "Scarab Terrace";
+    }
+    GENERALS_TERRACE = 3435 {
+        display = "General's Terrace";
+    }
+    THE_RESERVOIR = 3436 {
+        display = "The Reservoir";
+    }
+    THE_HATCHERY = 3437 {
+        display = "The Hatchery";
+    }
+    THE_COMB = 3438 {
+        display = "The Comb";
+    }
+    WATCHERS_TERRACE = 3439 {
+        display = "Watchers' Terrace";
+    }
+    SCARAB_TERRACE1 = 3440 {
+        display = "Scarab Terrace";
+    }
+    GENERALS_TERRACE1 = 3441 {
+        display = "General's Terrace";
+    }
+    THE_RESERVOIR1 = 3442 {
+        display = "The Reservoir";
+    }
+    THE_HATCHERY1 = 3443 {
+        display = "The Hatchery";
+    }
+    THE_COMB1 = 3444 {
+        display = "The Comb";
+    }
+    WATCHERS_TERRACE1 = 3445 {
+        display = "Watchers' Terrace";
+    }
+    TWILIGHTS_RUN = 3446 {
+        display = "Twilight's Run";
+    }
+    ORTELLS_HIDEOUT = 3447 {
+        display = "Ortell's Hideout";
+    }
+    SCARAB_TERRACE2 = 3448 {
+        display = "Scarab Terrace";
+    }
+    GENERALS_TERRACE2 = 3449 {
+        display = "General's Terrace";
+    }
+    THE_RESERVOIR2 = 3450 {
+        display = "The Reservoir";
+    }
+    THE_HATCHERY2 = 3451 {
+        display = "The Hatchery";
+    }
+    THE_COMB2 = 3452 {
+        display = "The Comb";
+    }
+    WATCHERS_TERRACE2 = 3453 {
+        display = "Watchers' Terrace";
+    }
+    RUINS_OF_AHN_QIRAJ1 = 3454 {
+        display = "Ruins of Ahn'Qiraj";
+    }
+    THE_NORTH_SEA = 3455 {
+        display = "The North Sea";
+    }
+    NAXXRAMAS = 3456 {
+        display = "Naxxramas";
+    }
+    KARAZHAN1 = 3457 {
+        display = "Karazhan";
+    }
+    CITY = 3459 {
+        display = "City";
+    }
+    GOLDEN_STRAND = 3460 {
+        display = "Golden Strand";
+    }
+    SUNSAIL_ANCHORAGE = 3461 {
+        display = "Sunsail Anchorage";
+    }
+    FAIRBREEZE_VILLAGE = 3462 {
+        display = "Fairbreeze Village";
+    }
+    MAGISTERS_GATE = 3463 {
+        display = "Magisters Gate";
+    }
+    FARSTRIDER_RETREAT = 3464 {
+        display = "Farstrider Retreat";
+    }
+    NORTH_SANCTUM = 3465 {
+        display = "North Sanctum";
+    }
+    WEST_SANCTUM = 3466 {
+        display = "West Sanctum";
+    }
+    EAST_SANCTUM = 3467 {
+        display = "East Sanctum";
+    }
+    SALTHERILS_HAVEN = 3468 {
+        display = "Saltheril's Haven";
+    }
+    THURONS_LIVERY = 3469 {
+        display = "Thuron's Livery";
+    }
+    STILLWHISPER_POND = 3470 {
+        display = "Stillwhisper Pond";
+    }
+    THE_LIVING_WOOD = 3471 {
+        display = "The Living Wood";
+    }
+    AZUREBREEZE_COAST = 3472 {
+        display = "Azurebreeze Coast";
+    }
+    LAKE_ELRENDAR = 3473 {
+        display = "Lake Elrendar";
+    }
+    THE_SCORCHED_GROVE = 3474 {
+        display = "The Scorched Grove";
+    }
+    ZEB_WATHA = 3475 {
+        display = "Zeb'Watha";
+    }
+    TOR_WATHA = 3476 {
+        display = "Tor'Watha";
+    }
+    AZJOL_NERUB = 3477 {
+        display = "Azjol-Nerub";
+    }
+    GATES_OF_AHN_QIRAJ = 3478 {
+        display = "Gates of Ahn'Qiraj";
+    }
+    THE_VEILED_SEA7 = 3479 {
+        display = "The Veiled Sea";
+    }
+    DUSKWITHER_GROUNDS = 3480 {
+        display = "Duskwither Grounds";
+    }
+    DUSKWITHER_SPIRE = 3481 {
+        display = "Duskwither Spire";
+    }
+    THE_DEAD_SCAR = 3482 {
+        display = "The Dead Scar";
+    }
+    HELLFIRE_PENINSULA = 3483 {
+        display = "Hellfire Peninsula";
+    }
+    THE_SUNSPIRE = 3484 {
+        display = "The Sunspire";
+    }
+    FALTHRIEN_ACADEMY = 3485 {
+        display = "Falthrien Academy";
+    }
+    RAVENHOLDT_MANOR = 3486 {
+        display = "Ravenholdt Manor";
+    }
+    SILVERMOON_CITY = 3487 {
+        display = "Silvermoon City";
+    }
+    TRANQUILLIEN = 3488 {
+        display = "Tranquillien";
+    }
+    SUNCROWN_VILLAGE = 3489 {
+        display = "Suncrown Village";
+    }
+    GOLDENMIST_VILLAGE = 3490 {
+        display = "Goldenmist Village";
+    }
+    WINDRUNNER_VILLAGE = 3491 {
+        display = "Windrunner Village";
+    }
+    WINDRUNNER_SPIRE = 3492 {
+        display = "Windrunner Spire";
+    }
+    SANCTUM_OF_THE_SUN = 3493 {
+        display = "Sanctum of the Sun";
+    }
+    SANCTUM_OF_THE_MOON = 3494 {
+        display = "Sanctum of the Moon";
+    }
+    DAWNSTAR_SPIRE = 3495 {
+        display = "Dawnstar Spire";
+    }
+    FARSTRIDER_ENCLAVE = 3496 {
+        display = "Farstrider Enclave";
+    }
+    AN_DAROTH = 3497 {
+        display = "An'daroth";
+    }
+    AN_TELAS = 3498 {
+        display = "An'telas";
+    }
+    AN_OWYN = 3499 {
+        display = "An'owyn";
+    }
+    DEATHOLME = 3500 {
+        display = "Deatholme";
+    }
+    BLEEDING_ZIGGURAT = 3501 {
+        display = "Bleeding Ziggurat";
+    }
+    HOWLING_ZIGGURAT = 3502 {
+        display = "Howling Ziggurat";
+    }
+    SHALANDIS_ISLE = 3503 {
+        display = "Shalandis Isle";
+    }
+    TORYL_ESTATE = 3504 {
+        display = "Toryl Estate";
+    }
+    UNDERLIGHT_MINES = 3505 {
+        display = "Underlight Mines";
+    }
+    ANDILIEN_ESTATE = 3506 {
+        display = "Andilien Estate";
+    }
+    HATCHET_HILLS = 3507 {
+        display = "Hatchet Hills";
+    }
+    AMANI_PASS = 3508 {
+        display = "Amani Pass";
+    }
+    SUNGRAZE_PEAK = 3509 {
+        display = "Sungraze Peak";
+    }
+    AMANI_CATACOMBS = 3510 {
+        display = "Amani Catacombs";
+    }
+    TOWER_OF_THE_DAMNED = 3511 {
+        display = "Tower of the Damned";
+    }
+    ZEBSORA = 3512 {
+        display = "Zeb'Sora";
+    }
+    LAKE_ELRENDAR1 = 3513 {
+        display = "Lake Elrendar";
+    }
+    THE_DEAD_SCAR1 = 3514 {
+        display = "The Dead Scar";
+    }
+    ELRENDAR_RIVER = 3515 {
+        display = "Elrendar River";
+    }
+    ZEB_TELA = 3516 {
+        display = "Zeb'Tela";
+    }
+    ZEB_NOWA = 3517 {
+        display = "Zeb'Nowa";
+    }
+    NAGRAND = 3518 {
+        display = "Nagrand";
+    }
+    TEROKKAR_FOREST = 3519 {
+        display = "Terokkar Forest";
+    }
+    SHADOWMOON_VALLEY = 3520 {
+        display = "Shadowmoon Valley";
+    }
+    ZANGARMARSH = 3521 {
+        display = "Zangarmarsh";
+    }
+    BLADES_EDGE_MOUNTAINS = 3522 {
+        display = "Blade's Edge Mountains";
+    }
+    NETHERSTORM = 3523 {
+        display = "Netherstorm";
+    }
+    AZUREMYST_ISLE = 3524 {
+        display = "Azuremyst Isle";
+    }
+    BLOODMYST_ISLE = 3525 {
+        display = "Bloodmyst Isle";
+    }
+    AMMEN_VALE = 3526 {
+        display = "Ammen Vale";
+    }
+    CRASH_SITE = 3527 {
+        display = "Crash Site";
+    }
+    SILVERLINE_LAKE = 3528 {
+        display = "Silverline Lake";
+    }
+    NESTLEWOOD_THICKET = 3529 {
+        display = "Nestlewood Thicket";
+    }
+    SHADOW_RIDGE = 3530 {
+        display = "Shadow Ridge";
+    }
+    SKULKING_ROW = 3531 {
+        display = "Skulking Row";
+    }
+    DAWNING_LANE = 3532 {
+        display = "Dawning Lane";
+    }
+    RUINS_OF_SILVERMOON = 3533 {
+        display = "Ruins of Silvermoon";
+    }
+    FETHS_WAY = 3534 {
+        display = "Feth's Way";
+    }
+    HELLFIRE_CITADEL = 3535 {
+        display = "Hellfire Citadel";
+    }
+    THRALLMAR = 3536 {
+        display = "Thrallmar";
+    }
+    BOREAN_TUNDRA = 3537 {
+        display = "Borean Tundra";
+    }
+    HONOR_HOLD = 3538 {
+        display = "Honor Hold";
+    }
+    THE_STAIR_OF_DESTINY = 3539 {
+        display = "The Stair of Destiny";
+    }
+    TWISTING_NETHER = 3540 {
+        display = "Twisting Nether";
+    }
+    FORGE_CAMP_MAGEDDON = 3541 {
+        display = "Forge Camp: Mageddon";
+    }
+    THE_PATH_OF_GLORY = 3542 {
+        display = "The Path of Glory";
+    }
+    THE_GREAT_FISSURE = 3543 {
+        display = "The Great Fissure";
+    }
+    PLAIN_OF_SHARDS = 3544 {
+        display = "Plain of Shards";
+    }
+    HELLFIRE_CITADEL1 = 3545 {
+        display = "Hellfire Citadel";
+    }
+    EXPEDITION_ARMORY = 3546 {
+        display = "Expedition Armory";
+    }
+    THRONE_OF_KIL_JAEDEN = 3547 {
+        display = "Throne of Kil'jaeden";
+    }
+    FORGE_CAMP_RAGE = 3548 {
+        display = "Forge Camp: Rage";
+    }
+    INVASION_POINT_ANNIHILATOR = 3549 {
+        display = "Invasion Point: Annihilator";
+    }
+    BORUNE_RUINS = 3550 {
+        display = "Borune Ruins";
+    }
+    RUINS_OF_SHA_NAAR = 3551 {
+        display = "Ruins of Sha'naar";
+    }
+    TEMPLE_OF_TELHAMAT = 3552 {
+        display = "Temple of Telhamat";
+    }
+    POOLS_OF_AGGONAR = 3553 {
+        display = "Pools of Aggonar";
+    }
+    FALCON_WATCH = 3554 {
+        display = "Falcon Watch";
+    }
+    MAG_HAR_POST = 3555 {
+        display = "Mag'har Post";
+    }
+    DEN_OF_HAAL_ESH = 3556 {
+        display = "Den of Haal'esh";
+    }
+    THE_EXODAR = 3557 {
+        display = "The Exodar";
+    }
+    ELRENDAR_FALLS = 3558 {
+        display = "Elrendar Falls";
+    }
+    NESTLEWOOD_HILLS = 3559 {
+        display = "Nestlewood Hills";
+    }
+    AMMEN_FIELDS = 3560 {
+        display = "Ammen Fields";
+    }
+    THE_SACRED_GROVE = 3561 {
+        display = "The Sacred Grove";
+    }
+    HELLFIRE_RAMPARTS = 3562 {
+        display = "Hellfire Ramparts";
+    }
+    HELLFIRE_CITADEL2 = 3563 {
+        display = "Hellfire Citadel";
+    }
+    EMBERGLADE = 3564 {
+        display = "Emberglade";
+    }
+    CENARION_REFUGE = 3565 {
+        display = "Cenarion Refuge";
+    }
+    MOONWING_DEN = 3566 {
+        display = "Moonwing Den";
+    }
+    POD_CLUSTER = 3567 {
+        display = "Pod Cluster";
+    }
+    POD_WRECKAGE = 3568 {
+        display = "Pod Wreckage";
+    }
+    TIDES_HOLLOW = 3569 {
+        display = "Tides' Hollow";
+    }
+    WRATHSCALE_POINT = 3570 {
+        display = "Wrathscale Point";
+    }
+    BRISTLELIMB_VILLAGE = 3571 {
+        display = "Bristlelimb Village";
+    }
+    STILLPINE_HOLD = 3572 {
+        display = "Stillpine Hold";
+    }
+    ODESYUS_LANDING = 3573 {
+        display = "Odesyus' Landing";
+    }
+    VALAARS_BERTH = 3574 {
+        display = "Valaar's Berth";
+    }
+    SILTING_SHORE = 3575 {
+        display = "Silting Shore";
+    }
+    AZURE_WATCH = 3576 {
+        display = "Azure Watch";
+    }
+    GEEZLES_CAMP = 3577 {
+        display = "Geezle's Camp";
+    }
+    MENAGERIE_WRECKAGE = 3578 {
+        display = "Menagerie Wreckage";
+    }
+    TRAITORS_COVE = 3579 {
+        display = "Traitor's Cove";
+    }
+    WILDWIND_PEAK = 3580 {
+        display = "Wildwind Peak";
+    }
+    WILDWIND_PATH = 3581 {
+        display = "Wildwind Path";
+    }
+    ZETH_GOR = 3582 {
+        display = "Zeth'Gor";
+    }
+    BERYL_COAST = 3583 {
+        display = "Beryl Coast";
+    }
+    BLOOD_WATCH = 3584 {
+        display = "Blood Watch";
+    }
+    BLADEWOOD = 3585 {
+        display = "Bladewood";
+    }
+    THE_VECTOR_COIL = 3586 {
+        display = "The Vector Coil";
+    }
+    THE_WARP_PISTON = 3587 {
+        display = "The Warp Piston";
+    }
+    THE_CRYO_CORE = 3588 {
+        display = "The Cryo-Core";
+    }
+    THE_CRIMSON_REACH = 3589 {
+        display = "The Crimson Reach";
+    }
+    WRATHSCALE_LAIR = 3590 {
+        display = "Wrathscale Lair";
+    }
+    RUINS_OF_LORETH_ARAN = 3591 {
+        display = "Ruins of Loreth'Aran";
+    }
+    NAZZIVIAN = 3592 {
+        display = "Nazzivian";
+    }
+    AXXARIEN = 3593 {
+        display = "Axxarien";
+    }
+    BLACKSILT_SHORE = 3594 {
+        display = "Blacksilt Shore";
+    }
+    THE_FOUL_POOL = 3595 {
+        display = "The Foul Pool";
+    }
+    THE_HIDDEN_REEF = 3596 {
+        display = "The Hidden Reef";
+    }
+    AMBERWEB_PASS = 3597 {
+        display = "Amberweb Pass";
+    }
+    WYRMSCAR_ISLAND = 3598 {
+        display = "Wyrmscar Island";
+    }
+    TALON_STAND = 3599 {
+        display = "Talon Stand";
+    }
+    BRISTLELIMB_ENCLAVE = 3600 {
+        display = "Bristlelimb Enclave";
+    }
+    RAGEFEATHER_RIDGE = 3601 {
+        display = "Ragefeather Ridge";
+    }
+    KESSELS_CROSSING = 3602 {
+        display = "Kessel's Crossing";
+    }
+    TEL_ATHIONS_CAMP = 3603 {
+        display = "Tel'athion's Camp";
+    }
+    THE_BLOODCURSED_REEF = 3604 {
+        display = "The Bloodcursed Reef";
+    }
+    HYJAL_PAST = 3605 {
+        display = "Hyjal Past";
+    }
+    HYJAL_SUMMIT = 3606 {
+        display = "Hyjal Summit";
+    }
+    SERPENTSHRINE_CAVERN = 3607 {
+        display = "Serpentshrine Cavern";
+    }
+    VINDICATORS_REST = 3608 {
+        display = "Vindicator's Rest";
+    }
+    UNUSED3 = 3609 {
+        display = "Unused3";
+    }
+    BURNING_BLADE_RUINS = 3610 {
+        display = "Burning Blade Ruins";
+    }
+    CLAN_WATCH = 3611 {
+        display = "Clan Watch";
+    }
+    BLOODCURSE_ISLE = 3612 {
+        display = "Bloodcurse Isle";
+    }
+    GARADAR = 3613 {
+        display = "Garadar";
+    }
+    SKYSONG_LAKE = 3614 {
+        display = "Skysong Lake";
+    }
+    THRONE_OF_THE_ELEMENTS = 3615 {
+        display = "Throne of the Elements";
+    }
+    LAUGHING_SKULL_RUINS = 3616 {
+        display = "Laughing Skull Ruins";
+    }
+    WARMAUL_HILL = 3617 {
+        display = "Warmaul Hill";
+    }
+    GRUULS_LAIR = 3618 {
+        display = "Gruul's Lair";
+    }
+    AUREN_RIDGE = 3619 {
+        display = "Auren Ridge";
+    }
+    AUREN_FALLS = 3620 {
+        display = "Auren Falls";
+    }
+    LAKE_SUNSPRING = 3621 {
+        display = "Lake Sunspring";
+    }
+    SUNSPRING_POST = 3622 {
+        display = "Sunspring Post";
+    }
+    AERIS_LANDING = 3623 {
+        display = "Aeris Landing";
+    }
+    FORGE_CAMP_FEAR = 3624 {
+        display = "Forge Camp: Fear";
+    }
+    FORGE_CAMP_HATE = 3625 {
+        display = "Forge Camp: Hate";
+    }
+    TELAAR = 3626 {
+        display = "Telaar";
+    }
+    NORTHWIND_CLEFT = 3627 {
+        display = "Northwind Cleft";
+    }
+    HALAA = 3628 {
+        display = "Halaa";
+    }
+    SOUTHWIND_CLEFT = 3629 {
+        display = "Southwind Cleft";
+    }
+    OSHU_GUN = 3630 {
+        display = "Oshu'gun";
+    }
+    SPIRIT_FIELDS = 3631 {
+        display = "Spirit Fields";
+    }
+    SHAMANAR = 3632 {
+        display = "Shamanar";
+    }
+    ANCESTRAL_GROUNDS = 3633 {
+        display = "Ancestral Grounds";
+    }
+    WINDYREED_VILLAGE = 3634 {
+        display = "Windyreed Village";
+    }
+    UNUSED2 = 3635 {
+        display = "Unused2";
+    }
+    ELEMENTAL_PLATEAU = 3636 {
+        display = "Elemental Plateau";
+    }
+    KILSORROW_FORTRESS = 3637 {
+        display = "Kil'sorrow Fortress";
+    }
+    THE_RING_OF_TRIALS = 3638 {
+        display = "The Ring of Trials";
+    }
+    SILVERMYST_ISLE = 3639 {
+        display = "Silvermyst Isle";
+    }
+    DAGGERFEN_VILLAGE = 3640 {
+        display = "Daggerfen Village";
+    }
+    UMBRAFEN_VILLAGE = 3641 {
+        display = "Umbrafen Village";
+    }
+    FERALFEN_VILLAGE = 3642 {
+        display = "Feralfen Village";
+    }
+    BLOODSCALE_ENCLAVE = 3643 {
+        display = "Bloodscale Enclave";
+    }
+    TELREDOR = 3644 {
+        display = "Telredor";
+    }
+    ZABRA_JIN = 3645 {
+        display = "Zabra'jin";
+    }
+    QUAGG_RIDGE = 3646 {
+        display = "Quagg Ridge";
+    }
+    THE_SPAWNING_GLEN = 3647 {
+        display = "The Spawning Glen";
+    }
+    THE_DEAD_MIRE = 3648 {
+        display = "The Dead Mire";
+    }
+    SPOREGGAR = 3649 {
+        display = "Sporeggar";
+    }
+    ANGO_ROSH_GROUNDS = 3650 {
+        display = "Ango'rosh Grounds";
+    }
+    ANGO_ROSH_STRONGHOLD = 3651 {
+        display = "Ango'rosh Stronghold";
+    }
+    FUNGGOR_CAVERN = 3652 {
+        display = "Funggor Cavern";
+    }
+    SERPENT_LAKE = 3653 {
+        display = "Serpent Lake";
+    }
+    THE_DRAIN = 3654 {
+        display = "The Drain";
+    }
+    UMBRAFEN_LAKE = 3655 {
+        display = "Umbrafen Lake";
+    }
+    MARSHLIGHT_LAKE = 3656 {
+        display = "Marshlight Lake";
+    }
+    PORTAL_CLEARING = 3657 {
+        display = "Portal Clearing";
+    }
+    SPOREWIND_LAKE = 3658 {
+        display = "Sporewind Lake";
+    }
+    THE_LAGOON = 3659 {
+        display = "The Lagoon";
+    }
+    BLADES_RUN = 3660 {
+        display = "Blades' Run";
+    }
+    BLADE_TOOTH_CANYON = 3661 {
+        display = "Blade Tooth Canyon";
+    }
+    COMMONS_HALL = 3662 {
+        display = "Commons Hall";
+    }
+    DERELICT_MANOR = 3663 {
+        display = "Derelict Manor";
+    }
+    HUNTRESS_OF_THE_SUN = 3664 {
+        display = "Huntress of the Sun";
+    }
+    FALCONWING_SQUARE = 3665 {
+        display = "Falconwing Square";
+    }
+    HALAANI_BASIN = 3666 {
+        display = "Halaani Basin";
+    }
+    HEWN_BOG = 3667 {
+        display = "Hewn Bog";
+    }
+    BOHA_MU_RUINS = 3668 {
+        display = "Boha'mu Ruins";
+    }
+    THE_STADIUM = 3669 {
+        display = "The Stadium";
+    }
+    THE_OVERLOOK = 3670 {
+        display = "The Overlook";
+    }
+    BROKEN_HILL = 3671 {
+        display = "Broken Hill";
+    }
+    MAG_HARI_PROCESSION = 3672 {
+        display = "Mag'hari Procession";
+    }
+    NESINGWARY_SAFARI = 3673 {
+        display = "Nesingwary Safari";
+    }
+    CENARION_THICKET = 3674 {
+        display = "Cenarion Thicket";
+    }
+    TUUREM = 3675 {
+        display = "Tuurem";
+    }
+    VEIL_SHIENOR = 3676 {
+        display = "Veil Shienor";
+    }
+    VEIL_SKITH = 3677 {
+        display = "Veil Skith";
+    }
+    VEIL_SHALAS = 3678 {
+        display = "Veil Shalas";
+    }
+    SKETTIS = 3679 {
+        display = "Skettis";
+    }
+    BLACKWIND_VALLEY = 3680 {
+        display = "Blackwind Valley";
+    }
+    FIREWING_POINT = 3681 {
+        display = "Firewing Point";
+    }
+    GRANGOL_VAR_VILLAGE = 3682 {
+        display = "Grangol'var Village";
+    }
+    STONEBREAKER_HOLD = 3683 {
+        display = "Stonebreaker Hold";
+    }
+    ALLERIAN_STRONGHOLD = 3684 {
+        display = "Allerian Stronghold";
+    }
+    BONECHEWER_RUINS = 3685 {
+        display = "Bonechewer Ruins";
+    }
+    VEIL_LITHIC = 3686 {
+        display = "Veil Lithic";
+    }
+    OLEMBAS = 3687 {
+        display = "Olembas";
+    }
+    AUCHINDOUN = 3688 {
+        display = "Auchindoun";
+    }
+    VEIL_RESKK = 3689 {
+        display = "Veil Reskk";
+    }
+    BLACKWIND_LAKE = 3690 {
+        display = "Blackwind Lake";
+    }
+    LAKE_ERE_NORU = 3691 {
+        display = "Lake Ere'Noru";
+    }
+    LAKE_JORUNE = 3692 {
+        display = "Lake Jorune";
+    }
+    SKETHYL_MOUNTAINS = 3693 {
+        display = "Skethyl Mountains";
+    }
+    MISTY_RIDGE = 3694 {
+        display = "Misty Ridge";
+    }
+    THE_BROKEN_HILLS = 3695 {
+        display = "The Broken Hills";
+    }
+    THE_BARRIER_HILLS = 3696 {
+        display = "The Barrier Hills";
+    }
+    THE_BONE_WASTES = 3697 {
+        display = "The Bone Wastes";
+    }
+    NAGRAND_ARENA = 3698 {
+        display = "Nagrand Arena";
+    }
+    LAUGHING_SKULL_COURTYARD = 3699 {
+        display = "Laughing Skull Courtyard";
+    }
+    THE_RING_OF_BLOOD = 3700 {
+        display = "The Ring of Blood";
+    }
+    ARENA_FLOOR = 3701 {
+        display = "Arena Floor";
+    }
+    BLADES_EDGE_ARENA = 3702 {
+        display = "Blade's Edge Arena";
+    }
+    SHATTRATH_CITY = 3703 {
+        display = "Shattrath City";
+    }
+    THE_SHEPHERDS_GATE = 3704 {
+        display = "The Shepherd's Gate";
+    }
+    TELAARI_BASIN = 3705 {
+        display = "Telaari Basin";
+    }
+    THE_DARK_PORTAL1 = 3706 {
+        display = "The Dark Portal";
+    }
+    ALLIANCE_BASE = 3707 {
+        display = "Alliance Base";
+    }
+    HORDE_ENCAMPMENT = 3708 {
+        display = "Horde Encampment";
+    }
+    NIGHT_ELF_VILLAGE = 3709 {
+        display = "Night Elf Village";
+    }
+    NORDRASSIL = 3710 {
+        display = "Nordrassil";
+    }
+    SHOLAZAR_BASIN = 3711 {
+        display = "Sholazar Basin";
+    }
+    AREA_52 = 3712 {
+        display = "Area 52";
+    }
+    THE_BLOOD_FURNACE = 3713 {
+        display = "The Blood Furnace";
+    }
+    THE_SHATTERED_HALLS = 3714 {
+        display = "The Shattered Halls";
+    }
+    THE_STEAMVAULT = 3715 {
+        display = "The Steamvault";
+    }
+    THE_UNDERBOG = 3716 {
+        display = "The Underbog";
+    }
+    THE_SLAVE_PENS = 3717 {
+        display = "The Slave Pens";
+    }
+    SWAMPRAT_POST = 3718 {
+        display = "Swamprat Post";
+    }
+    BLEEDING_HOLLOW_RUINS = 3719 {
+        display = "Bleeding Hollow Ruins";
+    }
+    TWIN_SPIRE_RUINS = 3720 {
+        display = "Twin Spire Ruins";
+    }
+    THE_CRUMBLING_WASTE = 3721 {
+        display = "The Crumbling Waste";
+    }
+    MANAFORGE_ARA = 3722 {
+        display = "Manaforge Ara";
+    }
+    ARKLON_RUINS = 3723 {
+        display = "Arklon Ruins";
+    }
+    COSMOWRENCH = 3724 {
+        display = "Cosmowrench";
+    }
+    RUINS_OF_ENKAAT = 3725 {
+        display = "Ruins of Enkaat";
+    }
+    MANAFORGE_B_NAAR = 3726 {
+        display = "Manaforge B'naar";
+    }
+    THE_SCRAP_FIELD = 3727 {
+        display = "The Scrap Field";
+    }
+    THE_VORTEX_FIELDS = 3728 {
+        display = "The Vortex Fields";
+    }
+    THE_HEAP = 3729 {
+        display = "The Heap";
+    }
+    MANAFORGE_CORUU = 3730 {
+        display = "Manaforge Coruu";
+    }
+    THE_TEMPEST_RIFT = 3731 {
+        display = "The Tempest Rift";
+    }
+    KIRIN_VAR_VILLAGE = 3732 {
+        display = "Kirin'Var Village";
+    }
+    THE_VIOLET_TOWER = 3733 {
+        display = "The Violet Tower";
+    }
+    MANAFORGE_DURO = 3734 {
+        display = "Manaforge Duro";
+    }
+    VOIDWIND_PLATEAU = 3735 {
+        display = "Voidwind Plateau";
+    }
+    MANAFORGE_ULTRIS = 3736 {
+        display = "Manaforge Ultris";
+    }
+    CELESTIAL_RIDGE = 3737 {
+        display = "Celestial Ridge";
+    }
+    THE_STORMSPIRE = 3738 {
+        display = "The Stormspire";
+    }
+    FORGE_BASE_OBLIVION = 3739 {
+        display = "Forge Base: Oblivion";
+    }
+    FORGE_BASE_GEHENNA = 3740 {
+        display = "Forge Base: Gehenna";
+    }
+    RUINS_OF_FARAHLON = 3741 {
+        display = "Ruins of Farahlon";
+    }
+    SOCRETHARS_SEAT = 3742 {
+        display = "Socrethar's Seat";
+    }
+    LEGION_HOLD = 3743 {
+        display = "Legion Hold";
+    }
+    SHADOWMOON_VILLAGE = 3744 {
+        display = "Shadowmoon Village";
+    }
+    WILDHAMMER_STRONGHOLD = 3745 {
+        display = "Wildhammer Stronghold";
+    }
+    THE_HAND_OF_GUL_DAN = 3746 {
+        display = "The Hand of Gul'dan";
+    }
+    THE_FEL_PITS = 3747 {
+        display = "The Fel Pits";
+    }
+    THE_DEATHFORGE = 3748 {
+        display = "The Deathforge";
+    }
+    COILSKAR_CISTERN = 3749 {
+        display = "Coilskar Cistern";
+    }
+    COILSKAR_POINT = 3750 {
+        display = "Coilskar Point";
+    }
+    SUNFIRE_POINT = 3751 {
+        display = "Sunfire Point";
+    }
+    ILLIDARI_POINT = 3752 {
+        display = "Illidari Point";
+    }
+    RUINS_OF_BAA_RI = 3753 {
+        display = "Ruins of Baa'ri";
+    }
+    ALTAR_OF_SHA_TAR = 3754 {
+        display = "Altar of Sha'tar";
+    }
+    THE_STAIR_OF_DOOM = 3755 {
+        display = "The Stair of Doom";
+    }
+    RUINS_OF_KARABOR = 3756 {
+        display = "Ruins of Karabor";
+    }
+    ATA_MAL_TERRACE = 3757 {
+        display = "Ata'mal Terrace";
+    }
+    NETHERWING_FIELDS = 3758 {
+        display = "Netherwing Fields";
+    }
+    NETHERWING_LEDGE = 3759 {
+        display = "Netherwing Ledge";
+    }
+    THE_BARRIER_HILLS1 = 3760 {
+        display = "The Barrier Hills";
+    }
+    THE_HIGH_PATH = 3761 {
+        display = "The High Path";
+    }
+    WINDYREED_PASS = 3762 {
+        display = "Windyreed Pass";
+    }
+    ZANGAR_RIDGE = 3763 {
+        display = "Zangar Ridge";
+    }
+    THE_TWILIGHT_RIDGE = 3764 {
+        display = "The Twilight Ridge";
+    }
+    RAZORTHORN_TRAIL = 3765 {
+        display = "Razorthorn Trail";
+    }
+    OREBOR_HARBORAGE = 3766 {
+        display = "Orebor Harborage";
+    }
+    BLADES_RUN1 = 3767 {
+        display = "Blades' Run";
+    }
+    JAGGED_RIDGE = 3768 {
+        display = "Jagged Ridge";
+    }
+    THUNDERLORD_STRONGHOLD = 3769 {
+        display = "Thunderlord Stronghold";
+    }
+    BLADE_TOOTH_CANYON1 = 3770 {
+        display = "Blade Tooth Canyon";
+    }
+    THE_LIVING_GROVE = 3771 {
+        display = "The Living Grove";
+    }
+    SYLVANAAR = 3772 {
+        display = "Sylvanaar";
+    }
+    BLADESPIRE_HOLD = 3773 {
+        display = "Bladespire Hold";
+    }
+    GRUULS_LAIR1 = 3774 {
+        display = "Gruul's Lair";
+    }
+    CIRCLE_OF_BLOOD = 3775 {
+        display = "Circle of Blood";
+    }
+    BLOODMAUL_OUTPOST = 3776 {
+        display = "Bloodmaul Outpost";
+    }
+    BLOODMAUL_CAMP = 3777 {
+        display = "Bloodmaul Camp";
+    }
+    DRAENETHYST_MINE = 3778 {
+        display = "Draenethyst Mine";
+    }
+    TROGMAS_CLAIM = 3779 {
+        display = "Trogma's Claim";
+    }
+    BLACKWING_COVEN = 3780 {
+        display = "Blackwing Coven";
+    }
+    GRISHNATH = 3781 {
+        display = "Grishnath";
+    }
+    VEIL_LASHH = 3782 {
+        display = "Veil Lashh";
+    }
+    VEIL_VEKH = 3783 {
+        display = "Veil Vekh";
+    }
+    FORGE_CAMP_TERROR = 3784 {
+        display = "Forge Camp: Terror";
+    }
+    FORGE_CAMP_WRATH = 3785 {
+        display = "Forge Camp: Wrath";
+    }
+    OGRI_LA = 3786 {
+        display = "Ogri'la";
+    }
+    FORGE_CAMP_ANGER = 3787 {
+        display = "Forge Camp: Anger";
+    }
+    THE_LOW_PATH = 3788 {
+        display = "The Low Path";
+    }
+    SHADOW_LABYRINTH = 3789 {
+        display = "Shadow Labyrinth";
+    }
+    AUCHENAI_CRYPTS = 3790 {
+        display = "Auchenai Crypts";
+    }
+    SETHEKK_HALLS = 3791 {
+        display = "Sethekk Halls";
+    }
+    MANA_TOMBS = 3792 {
+        display = "Mana-Tombs";
+    }
+    FELSPARK_RAVINE = 3793 {
+        display = "Felspark Ravine";
+    }
+    VALLEY_OF_BONES1 = 3794 {
+        display = "Valley of Bones";
+    }
+    SHA_NAARI_WASTES = 3795 {
+        display = "Sha'naari Wastes";
+    }
+    THE_WARP_FIELDS = 3796 {
+        display = "The Warp Fields";
+    }
+    FALLEN_SKY_RIDGE = 3797 {
+        display = "Fallen Sky Ridge";
+    }
+    HAAL_ESHI_GORGE = 3798 {
+        display = "Haal'eshi Gorge";
+    }
+    STONEWALL_CANYON = 3799 {
+        display = "Stonewall Canyon";
+    }
+    THORNFANG_HILL = 3800 {
+        display = "Thornfang Hill";
+    }
+    MAG_HAR_GROUNDS = 3801 {
+        display = "Mag'har Grounds";
+    }
+    VOID_RIDGE = 3802 {
+        display = "Void Ridge";
+    }
+    THE_ABYSSAL_SHELF = 3803 {
+        display = "The Abyssal Shelf";
+    }
+    THE_LEGION_FRONT = 3804 {
+        display = "The Legion Front";
+    }
+    ZUL_AMAN = 3805 {
+        display = "Zul'Aman";
+    }
+    SUPPLY_CARAVAN = 3806 {
+        display = "Supply Caravan";
+    }
+    REAVERS_FALL = 3807 {
+        display = "Reaver's Fall";
+    }
+    CENARION_POST = 3808 {
+        display = "Cenarion Post";
+    }
+    SOUTHERN_RAMPART = 3809 {
+        display = "Southern Rampart";
+    }
+    NORTHERN_RAMPART = 3810 {
+        display = "Northern Rampart";
+    }
+    GOR_GAZ_OUTPOST = 3811 {
+        display = "Gor'gaz Outpost";
+    }
+    SPINEBREAKER_POST = 3812 {
+        display = "Spinebreaker Post";
+    }
+    THE_PATH_OF_ANGUISH = 3813 {
+        display = "The Path of Anguish";
+    }
+    EAST_SUPPLY_CARAVAN = 3814 {
+        display = "East Supply Caravan";
+    }
+    EXPEDITION_POINT = 3815 {
+        display = "Expedition Point";
+    }
+    ZEPPELIN_CRASH = 3816 {
+        display = "Zeppelin Crash";
+    }
+    TESTING = 3817 {
+        display = "Testing";
+    }
+    BLOODSCALE_GROUNDS = 3818 {
+        display = "Bloodscale Grounds";
+    }
+    DARKCREST_ENCLAVE = 3819 {
+        display = "Darkcrest Enclave";
+    }
+    EYE_OF_THE_STORM = 3820 {
+        display = "Eye of the Storm";
+    }
+    WARDENS_CAGE = 3821 {
+        display = "Warden's Cage";
+    }
+    ECLIPSE_POINT = 3822 {
+        display = "Eclipse Point";
+    }
+    ISLE_OF_TRIBULATIONS = 3823 {
+        display = "Isle of Tribulations";
+    }
+    BLOODMAUL_RAVINE = 3824 {
+        display = "Bloodmaul Ravine";
+    }
+    DRAGONS_END = 3825 {
+        display = "Dragons' End";
+    }
+    DAGGERMAW_CANYON = 3826 {
+        display = "Daggermaw Canyon";
+    }
+    VEKHAAR_STAND = 3827 {
+        display = "Vekhaar Stand";
+    }
+    RUUAN_WEALD = 3828 {
+        display = "Ruuan Weald";
+    }
+    VEIL_RUUAN = 3829 {
+        display = "Veil Ruuan";
+    }
+    RAVENS_WOOD = 3830 {
+        display = "Raven's Wood";
+    }
+    DEATHS_DOOR = 3831 {
+        display = "Death's Door";
+    }
+    VORTEX_PINNACLE = 3832 {
+        display = "Vortex Pinnacle";
+    }
+    RAZOR_RIDGE = 3833 {
+        display = "Razor Ridge";
+    }
+    RIDGE_OF_MADNESS = 3834 {
+        display = "Ridge of Madness";
+    }
+    DUSTQUILL_RAVINE = 3835 {
+        display = "Dustquill Ravine";
+    }
+    MAGTHERIDONS_LAIR = 3836 {
+        display = "Magtheridon's Lair";
+    }
+    SUNFURY_HOLD = 3837 {
+        display = "Sunfury Hold";
+    }
+    SPINEBREAKER_MOUNTAINS = 3838 {
+        display = "Spinebreaker Mountains";
+    }
+    ABANDONED_ARMORY = 3839 {
+        display = "Abandoned Armory";
+    }
+    THE_BLACK_TEMPLE = 3840 {
+        display = "The Black Temple";
+    }
+    DARKCREST_SHORE = 3841 {
+        display = "Darkcrest Shore";
+    }
+    TEMPEST_KEEP = 3842 {
+        display = "Tempest Keep";
+    }
+    MOK_NATHAL_VILLAGE = 3844 {
+        display = "Mok'Nathal Village";
+    }
+    TEMPEST_KEEP1 = 3845 {
+        display = "Tempest Keep";
+    }
+    THE_ARCATRAZ = 3846 {
+        display = "The Arcatraz";
+    }
+    THE_BOTANICA = 3847 {
+        display = "The Botanica";
+    }
+    THE_ARCATRAZ1 = 3848 {
+        display = "The Arcatraz";
+    }
+    THE_MECHANAR = 3849 {
+        display = "The Mechanar";
+    }
+    NETHERSTONE = 3850 {
+        display = "Netherstone";
+    }
+    MIDREALM_POST = 3851 {
+        display = "Midrealm Post";
+    }
+    TULUMANS_LANDING = 3852 {
+        display = "Tuluman's Landing";
+    }
+    PROTECTORATE_WATCH_POST = 3854 {
+        display = "Protectorate Watch Post";
+    }
+    CIRCLE_OF_BLOOD_ARENA = 3855 {
+        display = "Circle of Blood Arena";
+    }
+    ELRENDAR_CROSSING = 3856 {
+        display = "Elrendar Crossing";
+    }
+    AMMEN_FORD = 3857 {
+        display = "Ammen Ford";
+    }
+    RAZORTHORN_SHELF = 3858 {
+        display = "Razorthorn Shelf";
+    }
+    SILMYR_LAKE = 3859 {
+        display = "Silmyr Lake";
+    }
+    RAASTOK_GLADE = 3860 {
+        display = "Raastok Glade";
+    }
+    THALASSIAN_PASS = 3861 {
+        display = "Thalassian Pass";
+    }
+    CHURNING_GULCH = 3862 {
+        display = "Churning Gulch";
+    }
+    BROKEN_WILDS = 3863 {
+        display = "Broken Wilds";
+    }
+    BASH_IR_LANDING = 3864 {
+        display = "Bash'ir Landing";
+    }
+    CRYSTAL_SPINE = 3865 {
+        display = "Crystal Spine";
+    }
+    SKALD = 3866 {
+        display = "Skald";
+    }
+    BLADED_GULCH = 3867 {
+        display = "Bladed Gulch";
+    }
+    GYRO_PLANK_BRIDGE = 3868 {
+        display = "Gyro-Plank Bridge";
+    }
+    MAGE_TOWER = 3869 {
+        display = "Mage Tower";
+    }
+    BLOOD_ELF_TOWER = 3870 {
+        display = "Blood Elf Tower";
+    }
+    DRAENEI_RUINS = 3871 {
+        display = "Draenei Ruins";
+    }
+    FEL_REAVER_RUINS = 3872 {
+        display = "Fel Reaver Ruins";
+    }
+    THE_PROVING_GROUNDS = 3873 {
+        display = "The Proving Grounds";
+    }
+    ECO_DOME_FARFIELD = 3874 {
+        display = "Eco-Dome Farfield";
+    }
+    ECO_DOME_SKYPERCH = 3875 {
+        display = "Eco-Dome Skyperch";
+    }
+    ECO_DOME_SUTHERON = 3876 {
+        display = "Eco-Dome Sutheron";
+    }
+    ECO_DOME_MIDREALM = 3877 {
+        display = "Eco-Dome Midrealm";
+    }
+    ETHEREUM_STAGING_GROUNDS = 3878 {
+        display = "Ethereum Staging Grounds";
+    }
+    CHAPEL_YARD = 3879 {
+        display = "Chapel Yard";
+    }
+    ACCESS_SHAFT_ZEON = 3880 {
+        display = "Access Shaft Zeon";
+    }
+    TRELLEUM_MINE = 3881 {
+        display = "Trelleum Mine";
+    }
+    INVASION_POINT_DESTROYER = 3882 {
+        display = "Invasion Point: Destroyer";
+    }
+    CAMP_OF_BOOM = 3883 {
+        display = "Camp of Boom";
+    }
+    SPINEBREAKER_PASS = 3884 {
+        display = "Spinebreaker Pass";
+    }
+    NETHERWEB_RIDGE = 3885 {
+        display = "Netherweb Ridge";
+    }
+    DERELICT_CARAVAN = 3886 {
+        display = "Derelict Caravan";
+    }
+    REFUGEE_CARAVAN = 3887 {
+        display = "Refugee Caravan";
+    }
+    SHADOW_TOMB = 3888 {
+        display = "Shadow Tomb";
+    }
+    VEIL_RHAZE = 3889 {
+        display = "Veil Rhaze";
+    }
+    TOMB_OF_LIGHTS = 3890 {
+        display = "Tomb of Lights";
+    }
+    CARRION_HILL = 3891 {
+        display = "Carrion Hill";
+    }
+    WRITHING_MOUND = 3892 {
+        display = "Writhing Mound";
+    }
+    RING_OF_OBSERVANCE = 3893 {
+        display = "Ring of Observance";
+    }
+    AUCHENAI_GROUNDS = 3894 {
+        display = "Auchenai Grounds";
+    }
+    CENARION_WATCHPOST = 3895 {
+        display = "Cenarion Watchpost";
+    }
+    ALDOR_RISE = 3896 {
+        display = "Aldor Rise";
+    }
+    TERRACE_OF_LIGHT = 3897 {
+        display = "Terrace of Light";
+    }
+    SCRYERS_TIER = 3898 {
+        display = "Scryer's Tier";
+    }
+    LOWER_CITY = 3899 {
+        display = "Lower City";
+    }
+    INVASION_POINT_OVERLORD = 3900 {
+        display = "Invasion Point: Overlord";
+    }
+    ALLERIAN_POST = 3901 {
+        display = "Allerian Post";
+    }
+    STONEBREAKER_CAMP = 3902 {
+        display = "Stonebreaker Camp";
+    }
+    BOULDER_MOK = 3903 {
+        display = "Boulder'mok";
+    }
+    CURSED_HOLLOW = 3904 {
+        display = "Cursed Hollow";
+    }
+    COILFANG_RESERVOIR = 3905 {
+        display = "Coilfang Reservoir";
+    }
+    THE_BLOODWASH = 3906 {
+        display = "The Bloodwash";
+    }
+    VERIDIAN_POINT = 3907 {
+        display = "Veridian Point";
+    }
+    MIDDENVALE = 3908 {
+        display = "Middenvale";
+    }
+    THE_LOST_FOLD = 3909 {
+        display = "The Lost Fold";
+    }
+    MYSTWOOD = 3910 {
+        display = "Mystwood";
+    }
+    TRANQUIL_SHORE = 3911 {
+        display = "Tranquil Shore";
+    }
+    GOLDENBOUGH_PASS = 3912 {
+        display = "Goldenbough Pass";
+    }
+    RUNESTONE_FALITHAS = 3913 {
+        display = "Runestone Falithas";
+    }
+    RUNESTONE_SHAN_DOR = 3914 {
+        display = "Runestone Shan'dor";
+    }
+    FAIRBRIDGE_STRAND = 3915 {
+        display = "Fairbridge Strand";
+    }
+    MOONGRAZE_WOODS = 3916 {
+        display = "Moongraze Woods";
+    }
+    AUCHINDOUN1 = 3917 {
+        display = "Auchindoun";
+    }
+    TOSHLEYS_STATION = 3918 {
+        display = "Toshley's Station";
+    }
+    SINGING_RIDGE = 3919 {
+        display = "Singing Ridge";
+    }
+    SHATTER_POINT = 3920 {
+        display = "Shatter Point";
+    }
+    ARKLONIS_RIDGE = 3921 {
+        display = "Arklonis Ridge";
+    }
+    BLADESPIRE_OUTPOST = 3922 {
+        display = "Bladespire Outpost";
+    }
+    GRUULS_LAIR2 = 3923 {
+        display = "Gruul's Lair";
+    }
+    NORTHMAUL_TOWER = 3924 {
+        display = "Northmaul Tower";
+    }
+    SOUTHMAUL_TOWER = 3925 {
+        display = "Southmaul Tower";
+    }
+    SHATTERED_PLAINS = 3926 {
+        display = "Shattered Plains";
+    }
+    ORONOKS_FARM = 3927 {
+        display = "Oronok's Farm";
+    }
+    THE_ALTAR_OF_DAMNATION = 3928 {
+        display = "The Altar of Damnation";
+    }
+    THE_PATH_OF_CONQUEST = 3929 {
+        display = "The Path of Conquest";
+    }
+    ECLIPSION_FIELDS = 3930 {
+        display = "Eclipsion Fields";
+    }
+    BLADESPIRE_GROUNDS = 3931 {
+        display = "Bladespire Grounds";
+    }
+    SKETH_LON_BASE_CAMP = 3932 {
+        display = "Sketh'lon Base Camp";
+    }
+    SKETH_LON_WRECKAGE = 3933 {
+        display = "Sketh'lon Wreckage";
+    }
+    TOWN_SQUARE = 3934 {
+        display = "Town Square";
+    }
+    WIZARD_ROW = 3935 {
+        display = "Wizard Row";
+    }
+    DEATHFORGE_TOWER = 3936 {
+        display = "Deathforge Tower";
+    }
+    SLAG_WATCH = 3937 {
+        display = "Slag Watch";
+    }
+    SANCTUM_OF_THE_STARS = 3938 {
+        display = "Sanctum of the Stars";
+    }
+    DRAGONMAW_FORTRESS = 3939 {
+        display = "Dragonmaw Fortress";
+    }
+    THE_FETID_POOL = 3940 {
+        display = "The Fetid Pool";
+    }
+    TEST = 3941 {
+        display = "Test";
+    }
+    RAZAANS_LANDING = 3942 {
+        display = "Razaan's Landing";
+    }
+    INVASION_POINT_CATACLYSM = 3943 {
+        display = "Invasion Point: Cataclysm";
+    }
+    THE_ALTAR_OF_SHADOWS = 3944 {
+        display = "The Altar of Shadows";
+    }
+    NETHERWING_PASS = 3945 {
+        display = "Netherwing Pass";
+    }
+    WAYNES_REFUGE = 3946 {
+        display = "Wayne's Refuge";
+    }
+    THE_SCALDING_POOLS = 3947 {
+        display = "The Scalding Pools";
+    }
+    BRIAN_AND_PAT_TEST = 3948 {
+        display = "Brian and Pat Test";
+    }
+    MAGMA_FIELDS = 3949 {
+        display = "Magma Fields";
+    }
+    CRIMSON_WATCH = 3950 {
+        display = "Crimson Watch";
+    }
+    EVERGROVE = 3951 {
+        display = "Evergrove";
+    }
+    WYRMSKULL_BRIDGE = 3952 {
+        display = "Wyrmskull Bridge";
+    }
+    SCALEWING_SHELF = 3953 {
+        display = "Scalewing Shelf";
+    }
+    WYRMSKULL_TUNNEL = 3954 {
+        display = "Wyrmskull Tunnel";
+    }
+    HELLFIRE_BASIN = 3955 {
+        display = "Hellfire Basin";
+    }
+    THE_SHADOW_STAIR = 3956 {
+        display = "The Shadow Stair";
+    }
+    SHA_TARI_OUTPOST = 3957 {
+        display = "Sha'tari Outpost";
+    }
+    SHA_TARI_BASE_CAMP = 3958 {
+        display = "Sha'tari Base Camp";
+    }
+    BLACK_TEMPLE = 3959 {
+        display = "Black Temple";
+    }
+    SOULGRINDERS_BARROW = 3960 {
+        display = "Soulgrinder's Barrow";
+    }
+    SORROW_WING_POINT = 3961 {
+        display = "Sorrow Wing Point";
+    }
+    VIM_GOLS_CIRCLE = 3962 {
+        display = "Vim'gol's Circle";
+    }
+    DRAGONSPINE_RIDGE = 3963 {
+        display = "Dragonspine Ridge";
+    }
+    SKYGUARD_OUTPOST = 3964 {
+        display = "Skyguard Outpost";
+    }
+    NETHERWING_MINES = 3965 {
+        display = "Netherwing Mines";
+    }
+    DRAGONMAW_BASE_CAMP = 3966 {
+        display = "Dragonmaw Base Camp";
+    }
+    DRAGONMAW_SKYWAY = 3967 {
+        display = "Dragonmaw Skyway";
+    }
+    RUINS_OF_LORDAERON1 = 3968 {
+        display = "Ruins of Lordaeron";
+    }
+    RIVENDARKS_PERCH = 3969 {
+        display = "Rivendark's Perch";
+    }
+    OBSIDIAS_PERCH = 3970 {
+        display = "Obsidia's Perch";
+    }
+    INSIDIONS_PERCH = 3971 {
+        display = "Insidion's Perch";
+    }
+    FURYWINGS_PERCH = 3972 {
+        display = "Furywing's Perch";
+    }
+    BLACKWIND_LANDING = 3973 {
+        display = "Blackwind Landing";
+    }
+    VEIL_HARR_IK = 3974 {
+        display = "Veil Harr'ik";
+    }
+    TEROKKS_REST = 3975 {
+        display = "Terokk's Rest";
+    }
+    VEIL_ALA_RAK = 3976 {
+        display = "Veil Ala'rak";
+    }
+    UPPER_VEIL_SHIL_AK = 3977 {
+        display = "Upper Veil Shil'ak";
+    }
+    LOWER_VEIL_SHIL_AK = 3978 {
+        display = "Lower Veil Shil'ak";
+    }
+    THE_FROZEN_SEA = 3979 {
+        display = "The Frozen Sea";
+    }
+    DAGGERCAP_BAY = 3980 {
+        display = "Daggercap Bay";
+    }
+    VALGARDE = 3981 {
+        display = "Valgarde";
+    }
+    WYRMSKULL_VILLAGE = 3982 {
+        display = "Wyrmskull Village";
+    }
+    UTGARDE_KEEP1 = 3983 {
+        display = "Utgarde Keep";
+    }
+    NIFFLEVAR = 3984 {
+        display = "Nifflevar";
+    }
+    FALLS_OF_YMIRON = 3985 {
+        display = "Falls of Ymiron";
+    }
+    ECHO_REACH = 3986 {
+        display = "Echo Reach";
+    }
+    THE_ISLE_OF_SPEARS = 3987 {
+        display = "The Isle of Spears";
+    }
+    KAMAGUA = 3988 {
+        display = "Kamagua";
+    }
+    GARVANS_REEF = 3989 {
+        display = "Garvan's Reef";
+    }
+    SCALAWAG_POINT = 3990 {
+        display = "Scalawag Point";
+    }
+    NEW_AGAMAND = 3991 {
+        display = "New Agamand";
+    }
+    THE_ANCIENT_LIFT = 3992 {
+        display = "The Ancient Lift";
+    }
+    WESTGUARD_TURRET = 3993 {
+        display = "Westguard Turret";
+    }
+    HALGRIND = 3994 {
+        display = "Halgrind";
+    }
+    THE_LAUGHING_STAND = 3995 {
+        display = "The Laughing Stand";
+    }
+    BAELGUNS_EXCAVATION_SITE = 3996 {
+        display = "Baelgun's Excavation Site";
+    }
+    EXPLORERS_LEAGUE_OUTPOST = 3997 {
+        display = "Explorers' League Outpost";
+    }
+    WESTGUARD_KEEP = 3998 {
+        display = "Westguard Keep";
+    }
+    STEEL_GATE = 3999 {
+        display = "Steel Gate";
+    }
+    VENGEANCE_LANDING = 4000 {
+        display = "Vengeance Landing";
+    }
+    BALEHEIM = 4001 {
+        display = "Baleheim";
+    }
+    SKORN = 4002 {
+        display = "Skorn";
+    }
+    FORT_WILDERVAR = 4003 {
+        display = "Fort Wildervar";
+    }
+    VILEPREY_VILLAGE = 4004 {
+        display = "Vileprey Village";
+    }
+    IVALDS_RUIN = 4005 {
+        display = "Ivald's Ruin";
+    }
+    GJALERBRON = 4006 {
+        display = "Gjalerbron";
+    }
+    TOMB_OF_THE_LOST_KINGS = 4007 {
+        display = "Tomb of the Lost Kings";
+    }
+    SHARTUULS_TRANSPORTER = 4008 {
+        display = "Shartuul's Transporter";
+    }
+    ILLIDARI_TRAINING_GROUNDS = 4009 {
+        display = "Illidari Training Grounds";
+    }
+    MUDSPROCKET = 4010 {
+        display = "Mudsprocket";
+    }
+    CAMP_WINTERHOOF = 4018 {
+        display = "Camp Winterhoof";
+    }
+    DEVELOPMENT_LAND = 4019 {
+        display = "Development Land";
+    }
+    MIGHTSTONE_QUARRY = 4020 {
+        display = "Mightstone Quarry";
+    }
+    BLOODSPORE_PLAINS = 4021 {
+        display = "Bloodspore Plains";
+    }
+    GAMMOTH = 4022 {
+        display = "Gammoth";
+    }
+    AMBER_LEDGE = 4023 {
+        display = "Amber Ledge";
+    }
+    COLDARRA = 4024 {
+        display = "Coldarra";
+    }
+    THE_WESTRIFT = 4025 {
+        display = "The Westrift";
+    }
+    THE_TRANSITUS_STAIR = 4026 {
+        display = "The Transitus Stair";
+    }
+    COAST_OF_ECHOES = 4027 {
+        display = "Coast of Echoes";
+    }
+    RIPLASH_STRAND = 4028 {
+        display = "Riplash Strand";
+    }
+    RIPLASH_RUINS = 4029 {
+        display = "Riplash Ruins";
+    }
+    COAST_OF_IDOLS = 4030 {
+        display = "Coast of Idols";
+    }
+    PAL_EA = 4031 {
+        display = "Pal'ea";
+    }
+    VALIANCE_KEEP = 4032 {
+        display = "Valiance Keep";
+    }
+    WINTERFIN_VILLAGE = 4033 {
+        display = "Winterfin Village";
+    }
+    THE_BOREAN_WALL = 4034 {
+        display = "The Borean Wall";
+    }
+    THE_GEYSER_FIELDS = 4035 {
+        display = "The Geyser Fields";
+    }
+    FIZZCRANK_PUMPING_STATION = 4036 {
+        display = "Fizzcrank Pumping Station";
+    }
+    TAUNKA_LE_VILLAGE = 4037 {
+        display = "Taunka'le Village";
+    }
+    MAGNAMOTH_CAVERNS = 4038 {
+        display = "Magnamoth Caverns";
+    }
+    COLDROCK_QUARRY = 4039 {
+        display = "Coldrock Quarry";
+    }
+    NJORDS_BREATH_BAY = 4040 {
+        display = "Njord's Breath Bay";
+    }
+    KASKALA = 4041 {
+        display = "Kaskala";
+    }
+    TRANSBOREA = 4042 {
+        display = "Transborea";
+    }
+    THE_FLOOD_PLAINS = 4043 {
+        display = "The Flood Plains";
+    }
+    DIREHORN_POST = 4046 {
+        display = "Direhorn Post";
+    }
+    NATS_LANDING = 4047 {
+        display = "Nat's Landing";
+    }
+    EMBER_CLUTCH = 4048 {
+        display = "Ember Clutch";
+    }
+    TABETHAS_FARM = 4049 {
+        display = "Tabetha's Farm";
+    }
+    DERELICT_STRAND = 4050 {
+        display = "Derelict Strand";
+    }
+    THE_FROZEN_GLADE = 4051 {
+        display = "The Frozen Glade";
+    }
+    THE_VIBRANT_GLADE = 4052 {
+        display = "The Vibrant Glade";
+    }
+    THE_TWISTED_GLADE = 4053 {
+        display = "The Twisted Glade";
+    }
+    RIVENWOOD = 4054 {
+        display = "Rivenwood";
+    }
+    CALDEMERE_LAKE = 4055 {
+        display = "Caldemere Lake";
+    }
+    UTGARDE_CATACOMBS = 4056 {
+        display = "Utgarde Catacombs";
+    }
+    SHIELD_HILL = 4057 {
+        display = "Shield Hill";
+    }
+    LAKE_CAULDROS = 4058 {
+        display = "Lake Cauldros";
+    }
+    CAULDROS_ISLE = 4059 {
+        display = "Cauldros Isle";
+    }
+    BLEEDING_VALE = 4060 {
+        display = "Bleeding Vale";
+    }
+    GIANTS_RUN = 4061 {
+        display = "Giants' Run";
+    }
+    APOTHECARY_CAMP = 4062 {
+        display = "Apothecary Camp";
+    }
+    EMBER_SPEAR_TOWER = 4063 {
+        display = "Ember Spear Tower";
+    }
+    SHATTERED_STRAITS = 4064 {
+        display = "Shattered Straits";
+    }
+    GJALERHORN = 4065 {
+        display = "Gjalerhorn";
+    }
+    FROSTBLADE_PEAK = 4066 {
+        display = "Frostblade Peak";
+    }
+    PLAGUEWOOD_TOWER = 4067 {
+        display = "Plaguewood Tower";
+    }
+    WEST_SPEAR_TOWER = 4068 {
+        display = "West Spear Tower";
+    }
+    NORTH_SPEAR_TOWER = 4069 {
+        display = "North Spear Tower";
+    }
+    CHILLMERE_COAST = 4070 {
+        display = "Chillmere Coast";
+    }
+    WHISPER_GULCH = 4071 {
+        display = "Whisper Gulch";
+    }
+    SUB_ZONE = 4072 {
+        display = "Sub zone";
+    }
+    WINTERS_TERRACE = 4073 {
+        display = "Winter's Terrace";
+    }
+    THE_WAKING_HALLS = 4074 {
+        display = "The Waking Halls";
+    }
+    SUNWELL_PLATEAU = 4075 {
+        display = "Sunwell Plateau";
+    }
+    REUSE_ME_SEVEN = 4076 {
+        display = "Reuse Me 7";
+    }
+    SORLOFS_STRAND = 4077 {
+        display = "Sorlof's Strand";
+    }
+    RAZORTHORN_RISE = 4078 {
+        display = "Razorthorn Rise";
+    }
+    FROSTBLADE_PASS = 4079 {
+        display = "Frostblade Pass";
+    }
+    ISLE_OF_QUEL_DANAS = 4080 {
+        display = "Isle of Quel'Danas";
+    }
+    THE_DAWNCHASER = 4081 {
+        display = "The Dawnchaser";
+    }
+    THE_SIN_LOREN = 4082 {
+        display = "The Sin'loren";
+    }
+    SILVERMOONS_PRIDE = 4083 {
+        display = "Silvermoon's Pride";
+    }
+    THE_BLOODOATH = 4084 {
+        display = "The Bloodoath";
+    }
+    SHATTERED_SUN_STAGING_AREA = 4085 {
+        display = "Shattered Sun Staging Area";
+    }
+    SUNS_REACH_SANCTUM = 4086 {
+        display = "Sun's Reach Sanctum";
+    }
+    SUNS_REACH_HARBOR = 4087 {
+        display = "Sun's Reach Harbor";
+    }
+    SUNS_REACH_ARMORY = 4088 {
+        display = "Sun's Reach Armory";
+    }
+    DAWNSTAR_VILLAGE = 4089 {
+        display = "Dawnstar Village";
+    }
+    THE_DAWNING_SQUARE = 4090 {
+        display = "The Dawning Square";
+    }
+    GREENGILL_COAST = 4091 {
+        display = "Greengill Coast";
+    }
+    THE_DEAD_SCAR2 = 4092 {
+        display = "The Dead Scar";
+    }
+    THE_SUN_FORGE = 4093 {
+        display = "The Sun Forge";
+    }
+    SUNWELL_PLATEAU1 = 4094 {
+        display = "Sunwell Plateau";
+    }
+    MAGISTERS_TERRACE = 4095 {
+        display = "Magisters' Terrace";
+    }
+    CLAYTÖNS_WOWEDIT_LAND = 4096 {
+        display = "Claytön's WoWEdit Land";
+    }
+    WINTERFIN_CAVERNS = 4097 {
+        display = "Winterfin Caverns";
+    }
+    GLIMMER_BAY = 4098 {
+        display = "Glimmer Bay";
+    }
+    WINTERFIN_RETREAT = 4099 {
+        display = "Winterfin Retreat";
+    }
+    THE_CULLING_OF_STRATHOLME = 4100 {
+        display = "The Culling of Stratholme";
+    }
+    SANDS_OF_NASAM = 4101 {
+        display = "Sands of Nasam";
+    }
+    KROMS_LANDING = 4102 {
+        display = "Krom's Landing";
+    }
+    NASAMS_TALON = 4103 {
+        display = "Nasam's Talon";
+    }
+    ECHO_COVE = 4104 {
+        display = "Echo Cove";
+    }
+    BERYL_POINT = 4105 {
+        display = "Beryl Point";
+    }
+    GARROSHS_LANDING = 4106 {
+        display = "Garrosh's Landing";
+    }
+    WARSONG_JETTY = 4107 {
+        display = "Warsong Jetty";
+    }
+    FIZZCRANK_AIRSTRIP = 4108 {
+        display = "Fizzcrank Airstrip";
+    }
+    LAKE_KUM_UYA = 4109 {
+        display = "Lake Kum'uya";
+    }
+    FARSHIRE_FIELDS = 4110 {
+        display = "Farshire Fields";
+    }
+    FARSHIRE = 4111 {
+        display = "Farshire";
+    }
+    FARSHIRE_LIGHTHOUSE = 4112 {
+        display = "Farshire Lighthouse";
+    }
+    UNU_PE = 4113 {
+        display = "Unu'pe";
+    }
+    DEATHS_STAND = 4114 {
+        display = "Death's Stand";
+    }
+    THE_ABANDONED_REACH = 4115 {
+        display = "The Abandoned Reach";
+    }
+    SCALDING_POOLS = 4116 {
+        display = "Scalding Pools";
+    }
+    STEAM_SPRINGS = 4117 {
+        display = "Steam Springs";
+    }
+    TALRAMAS = 4118 {
+        display = "Talramas";
+    }
+    FESTERING_POOLS = 4119 {
+        display = "Festering Pools";
+    }
+    THE_NEXUS = 4120 {
+        display = "The Nexus";
+    }
+    TRANSITUS_SHIELD = 4121 {
+        display = "Transitus Shield";
+    }
+    BOR_GOROK_OUTPOST = 4122 {
+        display = "Bor'gorok Outpost";
+    }
+    MAGMOTH = 4123 {
+        display = "Magmoth";
+    }
+    THE_DENS_OF_DYING = 4124 {
+        display = "The Dens of Dying";
+    }
+    TEMPLE_CITY_OF_EN_KILAH = 4125 {
+        display = "Temple City of En'kilah";
+    }
+    THE_WAILING_ZIGGURAT = 4126 {
+        display = "The Wailing Ziggurat";
+    }
+    STEELJAWS_CARAVAN = 4127 {
+        display = "Steeljaw's Caravan";
+    }
+    NAXXANAR = 4128 {
+        display = "Naxxanar";
+    }
+    WARSONG_HOLD = 4129 {
+        display = "Warsong Hold";
+    }
+    PLAINS_OF_NASAM = 4130 {
+        display = "Plains of Nasam";
+    }
+    MAGISTERS_TERRACE1 = 4131 {
+        display = "Magisters' Terrace";
+    }
+    RUINS_OF_ELDRA_NATH = 4132 {
+        display = "Ruins of Eldra'nath";
+    }
+    CHARRED_RISE = 4133 {
+        display = "Charred Rise";
+    }
+    BLISTERING_POOL = 4134 {
+        display = "Blistering Pool";
+    }
+    SPIRE_OF_BLOOD = 4135 {
+        display = "Spire of Blood";
+    }
+    SPIRE_OF_DECAY = 4136 {
+        display = "Spire of Decay";
+    }
+    SPIRE_OF_PAIN = 4137 {
+        display = "Spire of Pain";
+    }
+    FROZEN_REACH = 4138 {
+        display = "Frozen Reach";
+    }
+    PARHELION_PLAZA = 4139 {
+        display = "Parhelion Plaza";
+    }
+    THE_DEAD_SCAR3 = 4140 {
+        display = "The Dead Scar";
+    }
+    TORPS_FARM = 4141 {
+        display = "Torp's Farm";
+    }
+    WARSONG_GRANARY = 4142 {
+        display = "Warsong Granary";
+    }
+    WARSONG_SLAUGHTERHOUSE = 4143 {
+        display = "Warsong Slaughterhouse";
+    }
+    WARSONG_FARMS_OUTPOST = 4144 {
+        display = "Warsong Farms Outpost";
+    }
+    WEST_POINT_STATION = 4145 {
+        display = "West Point Station";
+    }
+    NORTH_POINT_STATION = 4146 {
+        display = "North Point Station";
+    }
+    MID_POINT_STATION = 4147 {
+        display = "Mid Point Station";
+    }
+    SOUTH_POINT_STATION = 4148 {
+        display = "South Point Station";
+    }
+    DEHTA_ENCAMPMENT = 4149 {
+        display = "D.E.H.T.A. Encampment";
+    }
+    KAWS_ROOST = 4150 {
+        display = "Kaw's Roost";
+    }
+    WESTWIND_REFUGEE_CAMP = 4151 {
+        display = "Westwind Refugee Camp";
+    }
+    MOA_KI_HARBOR = 4152 {
+        display = "Moa'ki Harbor";
+    }
+    INDU_LE_VILLAGE = 4153 {
+        display = "Indu'le Village";
+    }
+    SNOWFALL_GLADE = 4154 {
+        display = "Snowfall Glade";
+    }
+    THE_HALF_SHELL = 4155 {
+        display = "The Half Shell";
+    }
+    SURGE_NEEDLE = 4156 {
+        display = "Surge Needle";
+    }
+    MOONREST_GARDENS = 4157 {
+        display = "Moonrest Gardens";
+    }
+    STARS_REST = 4158 {
+        display = "Stars' Rest";
+    }
+    WESTFALL_BRIGADE_ENCAMPMENT = 4159 {
+        display = "Westfall Brigade Encampment";
+    }
+    LOTHALOR_WOODLANDS = 4160 {
+        display = "Lothalor Woodlands";
+    }
+    WYRMREST_TEMPLE = 4161 {
+        display = "Wyrmrest Temple";
+    }
+    ICEMIST_FALLS = 4162 {
+        display = "Icemist Falls";
+    }
+    ICEMIST_VILLAGE = 4163 {
+        display = "Icemist Village";
+    }
+    THE_PIT_OF_NARJUN = 4164 {
+        display = "The Pit of Narjun";
+    }
+    AGMARS_HAMMER = 4165 {
+        display = "Agmar's Hammer";
+    }
+    LAKE_INDU_LE = 4166 {
+        display = "Lake Indu'le";
+    }
+    OBSIDIAN_DRAGONSHRINE = 4167 {
+        display = "Obsidian Dragonshrine";
+    }
+    RUBY_DRAGONSHRINE = 4168 {
+        display = "Ruby Dragonshrine";
+    }
+    FORDRAGON_HOLD = 4169 {
+        display = "Fordragon Hold";
+    }
+    KOR_KRON_VANGUARD = 4170 {
+        display = "Kor'kron Vanguard";
+    }
+    THE_COURT_OF_SKULLS = 4171 {
+        display = "The Court of Skulls";
+    }
+    ANGRATHAR_THE_WRATHGATE = 4172 {
+        display = "Angrathar the Wrathgate";
+    }
+    GALAKRONDS_REST = 4173 {
+        display = "Galakrond's Rest";
+    }
+    THE_WICKED_COIL = 4174 {
+        display = "The Wicked Coil";
+    }
+    BRONZE_DRAGONSHRINE = 4175 {
+        display = "Bronze Dragonshrine";
+    }
+    THE_MIRROR_OF_DAWN = 4176 {
+        display = "The Mirror of Dawn";
+    }
+    WINTERGARDE_KEEP = 4177 {
+        display = "Wintergarde Keep";
+    }
+    WINTERGARDE_MINE = 4178 {
+        display = "Wintergarde Mine";
+    }
+    EMERALD_DRAGONSHRINE = 4179 {
+        display = "Emerald Dragonshrine";
+    }
+    NEW_HEARTHGLEN = 4180 {
+        display = "New Hearthglen";
+    }
+    CRUSADERS_LANDING = 4181 {
+        display = "Crusader's Landing";
+    }
+    SINNERS_FOLLY = 4182 {
+        display = "Sinner's Folly";
+    }
+    AZURE_DRAGONSHRINE = 4183 {
+        display = "Azure Dragonshrine";
+    }
+    PATH_OF_THE_TITANS = 4184 {
+        display = "Path of the Titans";
+    }
+    THE_FORGOTTEN_SHORE = 4185 {
+        display = "The Forgotten Shore";
+    }
+    VENOMSPITE = 4186 {
+        display = "Venomspite";
+    }
+    THE_CRYSTAL_VICE = 4187 {
+        display = "The Crystal Vice";
+    }
+    THE_CARRION_FIELDS = 4188 {
+        display = "The Carrion Fields";
+    }
+    ONSLAUGHT_BASE_CAMP = 4189 {
+        display = "Onslaught Base Camp";
+    }
+    THORSONS_POST = 4190 {
+        display = "Thorson's Post";
+    }
+    LIGHTS_TRUST = 4191 {
+        display = "Light's Trust";
+    }
+    FROSTMOURNE_CAVERN = 4192 {
+        display = "Frostmourne Cavern";
+    }
+    SCARLET_POINT = 4193 {
+        display = "Scarlet Point";
+    }
+    JINTHA_KALAR = 4194 {
+        display = "Jintha'kalar";
+    }
+    ICE_HEART_CAVERN = 4195 {
+        display = "Ice Heart Cavern";
+    }
+    DRAK_THARON_KEEP = 4196 {
+        display = "Drak'Tharon Keep";
+    }
+    WINTERGRASP = 4197 {
+        display = "Wintergrasp";
+    }
+    KILI_UAS_ATOLL = 4198 {
+        display = "Kili'ua's Atoll";
+    }
+    SILVERBROOK = 4199 {
+        display = "Silverbrook";
+    }
+    VORDRASSILS_HEART = 4200 {
+        display = "Vordrassil's Heart";
+    }
+    VORDRASSILS_TEARS = 4201 {
+        display = "Vordrassil's Tears";
+    }
+    VORDRASSILS_TEARS1 = 4202 {
+        display = "Vordrassil's Tears";
+    }
+    VORDRASSILS_LIMB = 4203 {
+        display = "Vordrassil's Limb";
+    }
+    AMBERPINE_LODGE = 4204 {
+        display = "Amberpine Lodge";
+    }
+    SOLSTICE_VILLAGE = 4205 {
+        display = "Solstice Village";
+    }
+    CONQUEST_HOLD = 4206 {
+        display = "Conquest Hold";
+    }
+    VOLDRUNE = 4207 {
+        display = "Voldrune";
+    }
+    GRANITE_SPRINGS = 4208 {
+        display = "Granite Springs";
+    }
+    ZEB_HALAK = 4209 {
+        display = "Zeb'Halak";
+    }
+    DRAK_THARON_KEEP1 = 4210 {
+        display = "Drak'Tharon Keep";
+    }
+    CAMP_ONEQWAH = 4211 {
+        display = "Camp Oneqwah";
+    }
+    EASTWIND_SHORE = 4212 {
+        display = "Eastwind Shore";
+    }
+    THE_BROKEN_BLUFFS = 4213 {
+        display = "The Broken Bluffs";
+    }
+    BOULDER_HILLS = 4214 {
+        display = "Boulder Hills";
+    }
+    RAGE_FANG_SHRINE = 4215 {
+        display = "Rage Fang Shrine";
+    }
+    DRAKIL_JIN_RUINS = 4216 {
+        display = "Drakil'jin Ruins";
+    }
+    BLACKRIVER_LOGGING_CAMP = 4217 {
+        display = "Blackriver Logging Camp";
+    }
+    HEARTS_BLOOD_SHRINE = 4218 {
+        display = "Heart's Blood Shrine";
+    }
+    HOLLOWSTONE_MINE = 4219 {
+        display = "Hollowstone Mine";
+    }
+    DUN_ARGOL = 4220 {
+        display = "Dun Argol";
+    }
+    THOR_MODAN = 4221 {
+        display = "Thor Modan";
+    }
+    BLUE_SKY_LOGGING_GROUNDS = 4222 {
+        display = "Blue Sky Logging Grounds";
+    }
+    MAW_OF_NELTHARION = 4223 {
+        display = "Maw of Neltharion";
+    }
+    THE_BRINY_PINNACLE = 4224 {
+        display = "The Briny Pinnacle";
+    }
+    GLITTERING_STRAND = 4225 {
+        display = "Glittering Strand";
+    }
+    ISKAAL = 4226 {
+        display = "Iskaal";
+    }
+    DRAGONS_FALL = 4227 {
+        display = "Dragon's Fall";
+    }
+    THE_OCULUS = 4228 {
+        display = "The Oculus";
+    }
+    PROSPECTORS_POINT = 4229 {
+        display = "Prospector's Point";
+    }
+    COLDWIND_HEIGHTS = 4230 {
+        display = "Coldwind Heights";
+    }
+    REDWOOD_TRADING_POST = 4231 {
+        display = "Redwood Trading Post";
+    }
+    VENGEANCE_PASS = 4232 {
+        display = "Vengeance Pass";
+    }
+    DAWNS_REACH = 4233 {
+        display = "Dawn's Reach";
+    }
+    NAXXRAMAS1 = 4234 {
+        display = "Naxxramas";
+    }
+    HEARTWOOD_TRADING_POST = 4235 {
+        display = "Heartwood Trading Post";
+    }
+    EVERGREEN_TRADING_POST = 4236 {
+        display = "Evergreen Trading Post";
+    }
+    SPRUCE_POINT_POST = 4237 {
+        display = "Spruce Point Post";
+    }
+    WHITE_PINE_TRADING_POST = 4238 {
+        display = "White Pine Trading Post";
+    }
+    ASPEN_GROVE_POST = 4239 {
+        display = "Aspen Grove Post";
+    }
+    FORESTS_EDGE_POST = 4240 {
+        display = "Forest's Edge Post";
+    }
+    ELDRITCH_HEIGHTS = 4241 {
+        display = "Eldritch Heights";
+    }
+    VENTURE_BAY = 4242 {
+        display = "Venture Bay";
+    }
+    WINTERGARDE_CRYPT = 4243 {
+        display = "Wintergarde Crypt";
+    }
+    BLOODMOON_ISLE = 4244 {
+        display = "Bloodmoon Isle";
+    }
+    SHADOWFANG_TOWER = 4245 {
+        display = "Shadowfang Tower";
+    }
+    WINTERGARDE_MAUSOLEUM = 4246 {
+        display = "Wintergarde Mausoleum";
+    }
+    DUSKHOWL_DEN = 4247 {
+        display = "Duskhowl Den";
+    }
+    THE_CONQUEST_PIT = 4248 {
+        display = "The Conquest Pit";
+    }
+    THE_PATH_OF_IRON = 4249 {
+        display = "The Path of Iron";
+    }
+    RUINS_OF_TETHYS = 4250 {
+        display = "Ruins of Tethys";
+    }
+    SILVERBROOK_HILLS = 4251 {
+        display = "Silverbrook Hills";
+    }
+    THE_BROKEN_BLUFFS1 = 4252 {
+        display = "The Broken Bluffs";
+    }
+    SEVENTH_LEGION_FRONT = 4253 {
+        display = "7th Legion Front";
+    }
+    THE_DRAGON_WASTES = 4254 {
+        display = "The Dragon Wastes";
+    }
+    RUINS_OF_DRAK_ZIN = 4255 {
+        display = "Ruins of Drak'Zin";
+    }
+    DRAK_MAR_LAKE = 4256 {
+        display = "Drak'Mar Lake";
+    }
+    DRAGONSPINE_TRIBUTARY = 4257 {
+        display = "Dragonspine Tributary";
+    }
+    THE_NORTH_SEA1 = 4258 {
+        display = "The North Sea";
+    }
+    DRAK_URAL = 4259 {
+        display = "Drak'ural";
+    }
+    THORVALDS_CAMP = 4260 {
+        display = "Thorvald's Camp";
+    }
+    GHOSTBLADE_POST = 4261 {
+        display = "Ghostblade Post";
+    }
+    ASHWOOD_POST = 4262 {
+        display = "Ashwood Post";
+    }
+    LYDELLS_AMBUSH = 4263 {
+        display = "Lydell's Ambush";
+    }
+    HALLS_OF_STONE = 4264 {
+        display = "Halls of Stone";
+    }
+    THE_NEXUS1 = 4265 {
+        display = "The Nexus";
+    }
+    HARKORS_CAMP = 4266 {
+        display = "Harkor's Camp";
+    }
+    VORDRASSIL_PASS = 4267 {
+        display = "Vordrassil Pass";
+    }
+    RUUNAS_CAMP = 4268 {
+        display = "Ruuna's Camp";
+    }
+    SHRINE_OF_SCALES = 4269 {
+        display = "Shrine of Scales";
+    }
+    DRAK_ATAL_PASSAGE = 4270 {
+        display = "Drak'atal Passage";
+    }
+    UTGARDE_PINNACLE1 = 4271 {
+        display = "Utgarde Pinnacle";
+    }
+    HALLS_OF_LIGHTNING = 4272 {
+        display = "Halls of Lightning";
+    }
+    ULDUAR = 4273 {
+        display = "Ulduar";
+    }
+    THE_ARGENT_STAND = 4275 {
+        display = "The Argent Stand";
+    }
+    ALTAR_OF_SSERATUS = 4276 {
+        display = "Altar of Sseratus";
+    }
+    AZJOL_NERUB1 = 4277 {
+        display = "Azjol-Nerub";
+    }
+    DRAKSOTRA_FIELDS = 4278 {
+        display = "Drak'Sotra Fields";
+    }
+    DRAKSOTRA = 4279 {
+        display = "Drak'Sotra";
+    }
+    DRAK_AGAL = 4280 {
+        display = "Drak'Agal";
+    }
+    ACHERUS_THE_EBON_HOLD = 4281 {
+        display = "Acherus: The Ebon Hold";
+    }
+    THE_AVALANCHE = 4282 {
+        display = "The Avalanche";
+    }
+    THE_LOST_LANDS = 4283 {
+        display = "The Lost Lands";
+    }
+    NESINGWARY_BASE_CAMP = 4284 {
+        display = "Nesingwary Base Camp";
+    }
+    THE_SEABREACH_FLOW = 4285 {
+        display = "The Seabreach Flow";
+    }
+    THE_BONES_OF_NOZRONN = 4286 {
+        display = "The Bones of Nozronn";
+    }
+    KARTAKS_HOLD = 4287 {
+        display = "Kartak's Hold";
+    }
+    SPARKTOUCHED_HAVEN = 4288 {
+        display = "Sparktouched Haven";
+    }
+    THE_PATH_OF_THE_LIFEWARDEN = 4289 {
+        display = "The Path of the Lifewarden";
+    }
+    RIVERS_HEART = 4290 {
+        display = "River's Heart";
+    }
+    RAINSPEAKER_CANOPY = 4291 {
+        display = "Rainspeaker Canopy";
+    }
+    FRENZYHEART_HILL = 4292 {
+        display = "Frenzyheart Hill";
+    }
+    WILDGROWTH_MANGAL = 4293 {
+        display = "Wildgrowth Mangal";
+    }
+    HEB_VALOK = 4294 {
+        display = "Heb'Valok";
+    }
+    THE_SUNDERED_SHARD = 4295 {
+        display = "The Sundered Shard";
+    }
+    THE_LIFEBLOOD_PILLAR = 4296 {
+        display = "The Lifeblood Pillar";
+    }
+    MOSSWALKER_VILLAGE = 4297 {
+        display = "Mosswalker Village";
+    }
+    PLAGUELANDS_THE_SCARLET_ENCLAVE = 4298 {
+        display = "Plaguelands: The Scarlet Enclave";
+    }
+    KOLRAMAS = 4299 {
+        display = "Kolramas";
+    }
+    WAYGATE = 4300 {
+        display = "Waygate";
+    }
+    THE_SKYREACH_PILLAR = 4302 {
+        display = "The Skyreach Pillar";
+    }
+    HARDKNUCKLE_CLEARING = 4303 {
+        display = "Hardknuckle Clearing";
+    }
+    SAPPHIRE_HIVE = 4304 {
+        display = "Sapphire Hive";
+    }
+    MISTWHISPER_REFUGE = 4306 {
+        display = "Mistwhisper Refuge";
+    }
+    THE_GLIMMERING_PILLAR = 4307 {
+        display = "The Glimmering Pillar";
+    }
+    SPEARBORN_ENCAMPMENT = 4308 {
+        display = "Spearborn Encampment";
+    }
+    DRAK_THARON_KEEP2 = 4309 {
+        display = "Drak'Tharon Keep";
+    }
+    ZERAMAS = 4310 {
+        display = "Zeramas";
+    }
+    RELIQUARY_OF_AGONY = 4311 {
+        display = "Reliquary of Agony";
+    }
+    EBON_WATCH = 4312 {
+        display = "Ebon Watch";
+    }
+    THRYMS_END = 4313 {
+        display = "Thrym's End";
+    }
+    VOLTARUS = 4314 {
+        display = "Voltarus";
+    }
+    RELIQUARY_OF_PAIN = 4315 {
+        display = "Reliquary of Pain";
+    }
+    RAGECLAW_DEN = 4316 {
+        display = "Rageclaw Den";
+    }
+    LIGHTS_BREACH = 4317 {
+        display = "Light's Breach";
+    }
+    POOLS_OF_ZHA_JIN = 4318 {
+        display = "Pools of Zha'Jin";
+    }
+    ZIM_ABWA = 4319 {
+        display = "Zim'Abwa";
+    }
+    AMPHITHEATER_OF_ANGUISH = 4320 {
+        display = "Amphitheater of Anguish";
+    }
+    ALTAR_OF_RHUNOK = 4321 {
+        display = "Altar of Rhunok";
+    }
+    ALTAR_OF_HAR_KOA = 4322 {
+        display = "Altar of Har'koa";
+    }
+    ZIM_TORGA = 4323 {
+        display = "Zim'Torga";
+    }
+    POOLS_OF_JIN_ALAI = 4324 {
+        display = "Pools of Jin'Alai";
+    }
+    ALTAR_OF_QUETZ_LUN = 4325 {
+        display = "Altar of Quetz'lun";
+    }
+    HEB_DRAKKAR = 4326 {
+        display = "Heb'Drakkar";
+    }
+    DRAK_MABWA = 4327 {
+        display = "Drak'Mabwa";
+    }
+    ZIM_RHUK = 4328 {
+        display = "Zim'Rhuk";
+    }
+    ALTAR_OF_MAM_TOTH = 4329 {
+        display = "Altar of Mam'toth";
+    }
+    ACHERUS_THE_EBON_HOLD1 = 4342 {
+        display = "Acherus: The Ebon Hold";
+    }
+    NEW_AVALON = 4343 {
+        display = "New Avalon";
+    }
+    NEW_AVALON_FIELDS = 4344 {
+        display = "New Avalon Fields";
+    }
+    NEW_AVALON_ORCHARD = 4345 {
+        display = "New Avalon Orchard";
+    }
+    NEW_AVALON_TOWN_HALL = 4346 {
+        display = "New Avalon Town Hall";
+    }
+    HAVENSHIRE = 4347 {
+        display = "Havenshire";
+    }
+    HAVENSHIRE_FARMS = 4348 {
+        display = "Havenshire Farms";
+    }
+    HAVENSHIRE_LUMBER_MILL = 4349 {
+        display = "Havenshire Lumber Mill";
+    }
+    HAVENSHIRE_STABLES = 4350 {
+        display = "Havenshire Stables";
+    }
+    SCARLET_HOLD = 4351 {
+        display = "Scarlet Hold";
+    }
+    CHAPEL_OF_THE_CRIMSON_FLAME = 4352 {
+        display = "Chapel of the Crimson Flame";
+    }
+    LIGHTS_POINT_TOWER = 4353 {
+        display = "Light's Point Tower";
+    }
+    LIGHTS_POINT = 4354 {
+        display = "Light's Point";
+    }
+    CRYPT_OF_REMEMBRANCE = 4355 {
+        display = "Crypt of Remembrance";
+    }
+    DEATHS_BREACH = 4356 {
+        display = "Death's Breach";
+    }
+    THE_NOXIOUS_GLADE1 = 4357 {
+        display = "The Noxious Glade";
+    }
+    TYRS_HAND1 = 4358 {
+        display = "Tyr's Hand";
+    }
+    KINGS_HARBOR = 4359 {
+        display = "King's Harbor";
+    }
+    SCARLET_OVERLOOK = 4360 {
+        display = "Scarlet Overlook";
+    }
+    LIGHTS_HOPE_CHAPEL1 = 4361 {
+        display = "Light's Hope Chapel";
+    }
+    SINNERS_FOLLY1 = 4362 {
+        display = "Sinner's Folly";
+    }
+    PESTILENT_SCAR1 = 4363 {
+        display = "Pestilent Scar";
+    }
+    BROWMAN_MILL1 = 4364 {
+        display = "Browman Mill";
+    }
+    HAVENSHIRE_MINE = 4365 {
+        display = "Havenshire Mine";
+    }
+    URSOCS_DEN = 4366 {
+        display = "Ursoc's Den";
+    }
+    THE_BLIGHT_LINE = 4367 {
+        display = "The Blight Line";
+    }
+    THE_BONEFIELDS = 4368 {
+        display = "The Bonefields";
+    }
+    DORIANS_OUTPOST = 4369 {
+        display = "Dorian's Outpost";
+    }
+    MAM_TOTH_CRATER = 4371 {
+        display = "Mam'toth Crater";
+    }
+    ZOL_MAZ_STRONGHOLD = 4372 {
+        display = "Zol'Maz Stronghold";
+    }
+    ZOL_HEB = 4373 {
+        display = "Zol'Heb";
+    }
+    RAGECLAW_LAKE = 4374 {
+        display = "Rageclaw Lake";
+    }
+    GUNDRAK = 4375 {
+        display = "Gundrak";
+    }
+    THE_SAVAGE_THICKET = 4376 {
+        display = "The Savage Thicket";
+    }
+    NEW_AVALON_FORGE = 4377 {
+        display = "New Avalon Forge";
+    }
+    DALARAN_ARENA = 4378 {
+        display = "Dalaran Arena";
+    }
+    VALGARDE1 = 4379 {
+        display = "Valgarde";
+    }
+    WESTGUARD_INN = 4380 {
+        display = "Westguard Inn";
+    }
+    WAYGATE1 = 4381 {
+        display = "Waygate";
+    }
+    THE_SHAPERS_TERRACE = 4382 {
+        display = "The Shaper's Terrace";
+    }
+    LAKESIDE_LANDING = 4383 {
+        display = "Lakeside Landing";
+    }
+    STRAND_OF_THE_ANCIENTS = 4384 {
+        display = "Strand of the Ancients";
+    }
+    BITTERTIDE_LAKE = 4385 {
+        display = "Bittertide Lake";
+    }
+    RAINSPEAKER_RAPIDS = 4386 {
+        display = "Rainspeaker Rapids";
+    }
+    FRENZYHEART_RIVER = 4387 {
+        display = "Frenzyheart River";
+    }
+    WINTERGRASP_RIVER = 4388 {
+        display = "Wintergrasp River";
+    }
+    THE_SUNTOUCHED_PILLAR = 4389 {
+        display = "The Suntouched Pillar";
+    }
+    FRIGID_BREACH = 4390 {
+        display = "Frigid Breach";
+    }
+    SWINDLEGRINS_DIG = 4391 {
+        display = "Swindlegrin's Dig";
+    }
+    THE_STORMWRIGHTS_SHELF = 4392 {
+        display = "The Stormwright's Shelf";
+    }
+    DEATHS_HAND_ENCAMPMENT = 4393 {
+        display = "Death's Hand Encampment";
+    }
+    SCARLET_TAVERN = 4394 {
+        display = "Scarlet Tavern";
+    }
+    DALARAN = 4395 {
+        display = "Dalaran";
+    }
+    NOZZLERUST_POST = 4396 {
+        display = "Nozzlerust Post";
+    }
+    FARSHIRE_MINE = 4399 {
+        display = "Farshire Mine";
+    }
+    THE_MOSSLIGHT_PILLAR = 4400 {
+        display = "The Mosslight Pillar";
+    }
+    SARAGOSAS_LANDING = 4401 {
+        display = "Saragosa's Landing";
+    }
+    VENGEANCE_LIFT = 4402 {
+        display = "Vengeance Lift";
+    }
+    BALEJAR_WATCH = 4403 {
+        display = "Balejar Watch";
+    }
+    NEW_AGAMAND_INN = 4404 {
+        display = "New Agamand Inn";
+    }
+    PASSAGE_OF_LOST_FIENDS = 4405 {
+        display = "Passage of Lost Fiends";
+    }
+    THE_RING_OF_VALOR = 4406 {
+        display = "The Ring of Valor";
+    }
+    HALL_OF_THE_FROSTWOLF = 4407 {
+        display = "Hall of the Frostwolf";
+    }
+    HALL_OF_THE_STORMPIKE = 4408 {
+        display = "Hall of the Stormpike";
+    }
+    STORMWIND_HARBOR = 4411 {
+        display = "Stormwind Harbor";
+    }
+    THE_MAKERS_OVERLOOK = 4412 {
+        display = "The Makers' Overlook";
+    }
+    THE_MAKERS_PERCH = 4413 {
+        display = "The Makers' Perch";
+    }
+    SCARLET_TOWER = 4414 {
+        display = "Scarlet Tower";
+    }
+    THE_VIOLET_HOLD = 4415 {
+        display = "The Violet Hold";
+    }
+    GUNDRAK1 = 4416 {
+        display = "Gundrak";
+    }
+    ONSLAUGHT_HARBOR = 4417 {
+        display = "Onslaught Harbor";
+    }
+    K3 = 4418 {
+        display = "K3";
+    }
+    SNOWBLIND_HILLS = 4419 {
+        display = "Snowblind Hills";
+    }
+    SNOWBLIND_TERRACE = 4420 {
+        display = "Snowblind Terrace";
+    }
+    GARM = 4421 {
+        display = "Garm";
+    }
+    BRUNNHILDAR_VILLAGE = 4422 {
+        display = "Brunnhildar Village";
+    }
+    SIFRELDAR_VILLAGE = 4423 {
+        display = "Sifreldar Village";
+    }
+    VALKYRION = 4424 {
+        display = "Valkyrion";
+    }
+    THE_FORLORN_MINE = 4425 {
+        display = "The Forlorn Mine";
+    }
+    BORS_BREATH_RIVER = 4426 {
+        display = "Bor's Breath River";
+    }
+    ARGENT_VANGUARD = 4427 {
+        display = "Argent Vanguard";
+    }
+    FROSTHOLD = 4428 {
+        display = "Frosthold";
+    }
+    GROM_ARSH_CRASH_SITE = 4429 {
+        display = "Grom'arsh Crash-Site";
+    }
+    TEMPLE_OF_STORMS = 4430 {
+        display = "Temple of Storms";
+    }
+    ENGINE_OF_THE_MAKERS = 4431 {
+        display = "Engine of the Makers";
+    }
+    THE_FOOT_STEPPES = 4432 {
+        display = "The Foot Steppes";
+    }
+    DRAGONSPINE_PEAKS = 4433 {
+        display = "Dragonspine Peaks";
+    }
+    NIDAVELIR = 4434 {
+        display = "Nidavelir";
+    }
+    NARVIRS_CRADLE = 4435 {
+        display = "Narvir's Cradle";
+    }
+    SNOWDRIFT_PLAINS = 4436 {
+        display = "Snowdrift Plains";
+    }
+    VALLEY_OF_ANCIENT_WINTERS = 4437 {
+        display = "Valley of Ancient Winters";
+    }
+    DUN_NIFFELEM = 4438 {
+        display = "Dun Niffelem";
+    }
+    FROSTFIELD_LAKE = 4439 {
+        display = "Frostfield Lake";
+    }
+    THUNDERFALL = 4440 {
+        display = "Thunderfall";
+    }
+    CAMP_TUNKA_LO = 4441 {
+        display = "Camp Tunka'lo";
+    }
+    BRANNS_BASE_CAMP = 4442 {
+        display = "Brann's Base-Camp";
+    }
+    GATE_OF_ECHOES = 4443 {
+        display = "Gate of Echoes";
+    }
+    PLAIN_OF_ECHOES = 4444 {
+        display = "Plain of Echoes";
+    }
+    ULDUAR1 = 4445 {
+        display = "Ulduar";
+    }
+    TERRACE_OF_THE_MAKERS = 4446 {
+        display = "Terrace of the Makers";
+    }
+    GATE_OF_LIGHTNING = 4447 {
+        display = "Gate of Lightning";
+    }
+    PATH_OF_THE_TITANS1 = 4448 {
+        display = "Path of the Titans";
+    }
+    ULDIS = 4449 {
+        display = "Uldis";
+    }
+    LOKENS_BARGAIN = 4450 {
+        display = "Loken's Bargain";
+    }
+    BORS_FALL = 4451 {
+        display = "Bor's Fall";
+    }
+    BORS_BREATH = 4452 {
+        display = "Bor's Breath";
+    }
+    ROHEMDAL_PASS = 4453 {
+        display = "Rohemdal Pass";
+    }
+    THE_STORM_FOUNDRY = 4454 {
+        display = "The Storm Foundry";
+    }
+    HIBERNAL_CAVERN = 4455 {
+        display = "Hibernal Cavern";
+    }
+    VOLDRUNE_DWELLING = 4456 {
+        display = "Voldrune Dwelling";
+    }
+    TORSEGS_REST = 4457 {
+        display = "Torseg's Rest";
+    }
+    SPARKSOCKET_MINEFIELD = 4458 {
+        display = "Sparksocket Minefield";
+    }
+    RICKETS_FOLLY = 4459 {
+        display = "Ricket's Folly";
+    }
+    GARMS_BANE = 4460 {
+        display = "Garm's Bane";
+    }
+    GARMS_RISE = 4461 {
+        display = "Garm's Rise";
+    }
+    CRYSTALWEB_CAVERN = 4462 {
+        display = "Crystalweb Cavern";
+    }
+    TEMPLE_OF_LIFE = 4463 {
+        display = "Temple of Life";
+    }
+    TEMPLE_OF_ORDER = 4464 {
+        display = "Temple of Order";
+    }
+    TEMPLE_OF_WINTER = 4465 {
+        display = "Temple of Winter";
+    }
+    TEMPLE_OF_INVENTION = 4466 {
+        display = "Temple of Invention";
+    }
+    DEATHS_RISE = 4467 {
+        display = "Death's Rise";
+    }
+    THE_DEAD_FIELDS = 4468 {
+        display = "The Dead Fields";
+    }
+    DARGATHS_DEMISE = 4469 {
+        display = "Dargath's Demise";
+    }
+    THE_HIDDEN_HOLLOW = 4470 {
+        display = "The Hidden Hollow";
+    }
+    BERNAUS_HAPPY_FUN_LAND = 4471 {
+        display = "Bernau's Happy Fun Land";
+    }
+    FROSTGRIPS_HOLLOW = 4472 {
+        display = "Frostgrip's Hollow";
+    }
+    THE_FRIGID_TOMB = 4473 {
+        display = "The Frigid Tomb";
+    }
+    TWIN_SHORES = 4474 {
+        display = "Twin Shores";
+    }
+    ZIM_BOS_HIDEOUT = 4475 {
+        display = "Zim'bo's Hideout";
+    }
+    ABANDONED_CAMP = 4476 {
+        display = "Abandoned Camp";
+    }
+    THE_SHADOW_VAULT = 4477 {
+        display = "The Shadow Vault";
+    }
+    COLDWIND_PASS = 4478 {
+        display = "Coldwind Pass";
+    }
+    WINTERS_BREATH_LAKE = 4479 {
+        display = "Winter's Breath Lake";
+    }
+    THE_FORGOTTEN_OVERLOOK = 4480 {
+        display = "The Forgotten Overlook";
+    }
+    JINTHA_KALAR_PASSAGE = 4481 {
+        display = "Jintha'kalar Passage";
+    }
+    ARRIGA_FOOTBRIDGE = 4482 {
+        display = "Arriga Footbridge";
+    }
+    THE_LOST_PASSAGE = 4483 {
+        display = "The Lost Passage";
+    }
+    BOULDERCRAGS_REFUGE = 4484 {
+        display = "Bouldercrag's Refuge";
+    }
+    THE_INVENTORS_LIBRARY = 4485 {
+        display = "The Inventor's Library";
+    }
+    THE_FROZEN_MINE = 4486 {
+        display = "The Frozen Mine";
+    }
+    FROSTFLOE_DEEP = 4487 {
+        display = "Frostfloe Deep";
+    }
+    THE_HOWLING_HOLLOW = 4488 {
+        display = "The Howling Hollow";
+    }
+    CRUSADER_FORWARD_CAMP = 4489 {
+        display = "Crusader Forward Camp";
+    }
+    STORMCREST = 4490 {
+        display = "Stormcrest";
+    }
+    BONESNAPS_CAMP = 4491 {
+        display = "Bonesnap's Camp";
+    }
+    UFRANGS_HALL = 4492 {
+        display = "Ufrang's Hall";
+    }
+    THE_OBSIDIAN_SANCTUM = 4493 {
+        display = "The Obsidian Sanctum";
+    }
+    AHN_KAHET_THE_OLD_KINGDOM = 4494 {
+        display = "Ahn'kahet: The Old Kingdom";
+    }
+    FJORNS_ANVIL = 4495 {
+        display = "Fjorn's Anvil";
+    }
+    JOTUNHEIM = 4496 {
+        display = "Jotunheim";
+    }
+    SAVAGE_LEDGE = 4497 {
+        display = "Savage Ledge";
+    }
+    HALLS_OF_THE_ANCESTORS = 4498 {
+        display = "Halls of the Ancestors";
+    }
+    THE_BLIGHTED_POOL = 4499 {
+        display = "The Blighted Pool";
+    }
+    THE_EYE_OF_ETERNITY = 4500 {
+        display = "The Eye of Eternity";
+    }
+    THE_ARGENT_VANGUARD = 4501 {
+        display = "The Argent Vanguard";
+    }
+    MIMIRS_WORKSHOP = 4502 {
+        display = "Mimir's Workshop";
+    }
+    IRONWALL_DAM = 4503 {
+        display = "Ironwall Dam";
+    }
+    VALLEY_OF_ECHOES = 4504 {
+        display = "Valley of Echoes";
+    }
+    THE_BREACH = 4505 {
+        display = "The Breach";
+    }
+    SCOURGEHOLME = 4506 {
+        display = "Scourgeholme";
+    }
+    THE_BROKEN_FRONT = 4507 {
+        display = "The Broken Front";
+    }
+    MORD_RETHAR_THE_DEATH_GATE = 4508 {
+        display = "Mord'rethar: The Death Gate";
+    }
+    THE_BOMBARDMENT = 4509 {
+        display = "The Bombardment";
+    }
+    ALDUR_THAR_THE_DESOLATION_GATE = 4510 {
+        display = "Aldur'thar: The Desolation Gate";
+    }
+    THE_SKYBREAKER = 4511 {
+        display = "The Skybreaker";
+    }
+    ORGRIMS_HAMMER = 4512 {
+        display = "Orgrim's Hammer";
+    }
+    YMIRHEIM = 4513 {
+        display = "Ymirheim";
+    }
+    SARONITE_MINES = 4514 {
+        display = "Saronite Mines";
+    }
+    THE_CONFLAGRATION = 4515 {
+        display = "The Conflagration";
+    }
+    IRONWALL_RAMPART = 4516 {
+        display = "Ironwall Rampart";
+    }
+    WEEPING_QUARRY = 4517 {
+        display = "Weeping Quarry";
+    }
+    CORP_RETHAR_THE_HORROR_GATE = 4518 {
+        display = "Corp'rethar: The Horror Gate";
+    }
+    THE_COURT_OF_BONES = 4519 {
+        display = "The Court of Bones";
+    }
+    MALYKRISS_THE_VILE_HOLD = 4520 {
+        display = "Malykriss: The Vile Hold";
+    }
+    CATHEDRAL_OF_DARKNESS = 4521 {
+        display = "Cathedral of Darkness";
+    }
+    ICECROWN_CITADEL = 4522 {
+        display = "Icecrown Citadel";
+    }
+    ICECROWN_GLACIER = 4523 {
+        display = "Icecrown Glacier";
+    }
+    VALHALAS = 4524 {
+        display = "Valhalas";
+    }
+    THE_UNDERHALLS = 4525 {
+        display = "The Underhalls";
+    }
+    NJORNDAR_VILLAGE = 4526 {
+        display = "Njorndar Village";
+    }
+    BALARGARDE_FORTRESS = 4527 {
+        display = "Balargarde Fortress";
+    }
+    KUL_GALAR_KEEP = 4528 {
+        display = "Kul'galar Keep";
+    }
+    THE_CRIMSON_CATHEDRAL = 4529 {
+        display = "The Crimson Cathedral";
+    }
+    SANCTUM_OF_REANIMATION = 4530 {
+        display = "Sanctum of Reanimation";
+    }
+    THE_FLESHWERKS = 4531 {
+        display = "The Fleshwerks";
+    }
+    VENGEANCE_LANDING_INN = 4532 {
+        display = "Vengeance Landing Inn";
+    }
+    SINDRAGOSAS_FALL = 4533 {
+        display = "Sindragosa's Fall";
+    }
+    WILDERVAR_MINE = 4534 {
+        display = "Wildervar Mine";
+    }
+    THE_PIT_OF_THE_FANG = 4535 {
+        display = "The Pit of the Fang";
+    }
+    FROSTHOWL_CAVERN = 4536 {
+        display = "Frosthowl Cavern";
+    }
+    THE_VALLEY_OF_LOST_HOPE = 4537 {
+        display = "The Valley of Lost Hope";
+    }
+    THE_SUNKEN_RING = 4538 {
+        display = "The Sunken Ring";
+    }
+    THE_BROKEN_TEMPLE = 4539 {
+        display = "The Broken Temple";
+    }
+    THE_VALLEY_OF_FALLEN_HEROES = 4540 {
+        display = "The Valley of Fallen Heroes";
+    }
+    VANGUARD_INFIRMARY = 4541 {
+        display = "Vanguard Infirmary";
+    }
+    HALL_OF_THE_SHAPER = 4542 {
+        display = "Hall of the Shaper";
+    }
+    TEMPLE_OF_WISDOM = 4543 {
+        display = "Temple of Wisdom";
+    }
+    DEATHS_BREACH1 = 4544 {
+        display = "Death's Breach";
+    }
+    ABANDONED_MINE = 4545 {
+        display = "Abandoned Mine";
+    }
+    RUINS_OF_THE_SCARLET_ENCLAVE = 4546 {
+        display = "Ruins of the Scarlet Enclave";
+    }
+    HALLS_OF_STONE1 = 4547 {
+        display = "Halls of Stone";
+    }
+    HALLS_OF_LIGHTNING1 = 4548 {
+        display = "Halls of Lightning";
+    }
+    THE_GREAT_TREE = 4549 {
+        display = "The Great Tree";
+    }
+    THE_MIRROR_OF_TWILIGHT = 4550 {
+        display = "The Mirror of Twilight";
+    }
+    THE_TWILIGHT_RIVULET = 4551 {
+        display = "The Twilight Rivulet";
+    }
+    THE_DECREPIT_FLOW = 4552 {
+        display = "The Decrepit Flow";
+    }
+    FORLORN_WOODS = 4553 {
+        display = "Forlorn Woods";
+    }
+    RUINS_OF_SHANDARAL = 4554 {
+        display = "Ruins of Shandaral";
+    }
+    THE_AZURE_FRONT = 4555 {
+        display = "The Azure Front";
+    }
+    VIOLET_STAND = 4556 {
+        display = "Violet Stand";
+    }
+    THE_UNBOUND_THICKET = 4557 {
+        display = "The Unbound Thicket";
+    }
+    SUNREAVERS_COMMAND = 4558 {
+        display = "Sunreaver's Command";
+    }
+    WINDRUNNERS_OVERLOOK = 4559 {
+        display = "Windrunner's Overlook";
+    }
+    THE_UNDERBELLY = 4560 {
+        display = "The Underbelly";
+    }
+    KRASUS_LANDING = 4564 {
+        display = "Krasus' Landing";
+    }
+    THE_VIOLET_HOLD1 = 4567 {
+        display = "The Violet Hold";
+    }
+    THE_EVENTIDE = 4568 {
+        display = "The Eventide";
+    }
+    SEWER_EXIT_PIPE = 4569 {
+        display = "Sewer Exit Pipe";
+    }
+    CIRCLE_OF_WILLS = 4570 {
+        display = "Circle of Wills";
+    }
+    SILVERWING_FLAG_ROOM = 4571 {
+        display = "Silverwing Flag Room";
+    }
+    WARSONG_FLAG_ROOM = 4572 {
+        display = "Warsong Flag Room";
+    }
+    WINTERGRASP_FORTRESS = 4575 {
+        display = "Wintergrasp Fortress";
+    }
+    CENTRAL_BRIDGE = 4576 {
+        display = "Central Bridge";
+    }
+    EASTERN_BRIDGE = 4577 {
+        display = "Eastern Bridge";
+    }
+    WESTERN_BRIDGE = 4578 {
+        display = "Western Bridge";
+    }
+    DUBRA_JIN = 4579 {
+        display = "Dubra'Jin";
+    }
+    CRUSADERS_PINNACLE = 4580 {
+        display = "Crusaders' Pinnacle";
+    }
+    FLAMEWATCH_TOWER = 4581 {
+        display = "Flamewatch Tower";
+    }
+    WINTERS_EDGE_TOWER = 4582 {
+        display = "Winter's Edge Tower";
+    }
+    SHADOWSIGHT_TOWER = 4583 {
+        display = "Shadowsight Tower";
+    }
+    THE_CAULDRON_OF_FLAMES = 4584 {
+        display = "The Cauldron of Flames";
+    }
+    GLACIAL_FALLS = 4585 {
+        display = "Glacial Falls";
+    }
+    WINDY_BLUFFS = 4586 {
+        display = "Windy Bluffs";
+    }
+    THE_FOREST_OF_SHADOWS = 4587 {
+        display = "The Forest of Shadows";
+    }
+    BLACKWATCH = 4588 {
+        display = "Blackwatch";
+    }
+    THE_CHILLED_QUAGMIRE = 4589 {
+        display = "The Chilled Quagmire";
+    }
+    THE_STEPPE_OF_LIFE = 4590 {
+        display = "The Steppe of Life";
+    }
+    SILENT_VIGIL = 4591 {
+        display = "Silent Vigil";
+    }
+    GIMORAKS_DEN = 4592 {
+        display = "Gimorak's Den";
+    }
+    THE_PIT_OF_FIENDS = 4593 {
+        display = "The Pit of Fiends";
+    }
+    BATTLESCAR_SPIRE = 4594 {
+        display = "Battlescar Spire";
+    }
+    HALL_OF_HORRORS = 4595 {
+        display = "Hall of Horrors";
+    }
+    THE_CIRCLE_OF_SUFFERING = 4596 {
+        display = "The Circle of Suffering";
+    }
+    RISE_OF_SUFFERING = 4597 {
+        display = "Rise of Suffering";
+    }
+    KRASUS_LANDING1 = 4598 {
+        display = "Krasus' Landing";
+    }
+    SEWER_EXIT_PIPE1 = 4599 {
+        display = "Sewer Exit Pipe";
+    }
+    DALARAN_ISLAND = 4601 {
+        display = "Dalaran Island";
+    }
+    FORCE_INTERIOR = 4602 {
+        display = "Force Interior";
+    }
+    VAULT_OF_ARCHAVON = 4603 {
+        display = "Vault of Archavon";
+    }
+    GATE_OF_THE_RED_SUN = 4604 {
+        display = "Gate of the Red Sun";
+    }
+    GATE_OF_THE_BLUE_SAPPHIRE = 4605 {
+        display = "Gate of the Blue Sapphire";
+    }
+    GATE_OF_THE_GREEN_EMERALD = 4606 {
+        display = "Gate of the Green Emerald";
+    }
+    GATE_OF_THE_PURPLE_AMETHYST = 4607 {
+        display = "Gate of the Purple Amethyst";
+    }
+    GATE_OF_THE_YELLOW_MOON = 4608 {
+        display = "Gate of the Yellow Moon";
+    }
+    COURTYARD_OF_THE_ANCIENTS = 4609 {
+        display = "Courtyard of the Ancients";
+    }
+    LANDING_BEACH = 4610 {
+        display = "Landing Beach";
+    }
+    WESTSPARK_WORKSHOP = 4611 {
+        display = "Westspark Workshop";
+    }
+    EASTSPARK_WORKSHOP = 4612 {
+        display = "Eastspark Workshop";
+    }
+    DALARAN_CITY = 4613 {
+        display = "Dalaran City";
+    }
+    THE_VIOLET_CITADEL_SPIRE = 4614 {
+        display = "The Violet Citadel Spire";
+    }
+    NAZ_ANAK_THE_FORGOTTEN_DEPTHS = 4615 {
+        display = "Naz'anak: The Forgotten Depths";
+    }
+    SUNREAVERS_SANCTUARY = 4616 {
+        display = "Sunreaver's Sanctuary";
+    }
+    ELEVATOR = 4617 {
+        display = "Elevator";
+    }
+    ANTONIDAS_MEMORIAL = 4618 {
+        display = "Antonidas Memorial";
+    }
+    THE_VIOLET_CITADEL = 4619 {
+        display = "The Violet Citadel";
+    }
+    MAGUS_COMMERCE_EXCHANGE = 4620 {
+        display = "Magus Commerce Exchange";
+    }
+    UNUSED = 4621 {
+        display = "UNUSED";
+    }
+    FIRST_LEGION_FORWARD_CAMP = 4622 {
+        display = "First Legion Forward Camp";
+    }
+    HALL_OF_THE_CONQUERED_KINGS = 4623 {
+        display = "Hall of the Conquered Kings";
+    }
+    BEFOULED_TERRACE = 4624 {
+        display = "Befouled Terrace";
+    }
+    THE_DESECRATED_ALTAR = 4625 {
+        display = "The Desecrated Altar";
+    }
+    SHIMMERING_BOG = 4626 {
+        display = "Shimmering Bog";
+    }
+    FALLEN_TEMPLE_OF_AHN_KAHET = 4627 {
+        display = "Fallen Temple of Ahn'kahet";
+    }
+    HALLS_OF_BINDING = 4628 {
+        display = "Halls of Binding";
+    }
+    WINTERS_HEART = 4629 {
+        display = "Winter's Heart";
+    }
+    THE_NORTH_SEA2 = 4630 {
+        display = "The North Sea";
+    }
+    THE_BROODMOTHERS_NEST = 4631 {
+        display = "The Broodmother's Nest";
+    }
+    DALARAN_FLOATING_ROCKS = 4632 {
+        display = "Dalaran Floating Rocks";
+    }
+    RAPTOR_PENS = 4633 {
+        display = "Raptor Pens";
+    }
+    DRAK_THARON_KEEP3 = 4635 {
+        display = "Drak'Tharon Keep";
+    }
+    THE_NOXIOUS_PASS = 4636 {
+        display = "The Noxious Pass";
+    }
+    VARGOTHS_RETREAT = 4637 {
+        display = "Vargoth's Retreat";
+    }
+    VIOLET_CITADEL_BALCONY = 4638 {
+        display = "Violet Citadel Balcony";
+    }
+    BAND_OF_VARIANCE = 4639 {
+        display = "Band of Variance";
+    }
+    BAND_OF_ACCELERATION = 4640 {
+        display = "Band of Acceleration";
+    }
+    BAND_OF_TRANSMUTATION = 4641 {
+        display = "Band of Transmutation";
+    }
+    BAND_OF_ALIGNMENT = 4642 {
+        display = "Band of Alignment";
+    }
+    ASHWOOD_LAKE = 4646 {
+        display = "Ashwood Lake";
+    }
+    IRON_CONCOURSE = 4650 {
+        display = "Iron Concourse";
+    }
+    FORMATION_GROUNDS = 4652 {
+        display = "Formation Grounds";
+    }
+    RAZORSCALES_AERIE = 4653 {
+        display = "Razorscale's Aerie";
+    }
+    THE_COLOSSAL_FORGE = 4654 {
+        display = "The Colossal Forge";
+    }
+    THE_SCRAPYARD = 4655 {
+        display = "The Scrapyard";
+    }
+    THE_CONSERVATORY_OF_LIFE = 4656 {
+        display = "The Conservatory of Life";
+    }
+    THE_ARCHIVUM = 4657 {
+        display = "The Archivum";
+    }
+    ARGENT_TOURNAMENT_GROUNDS = 4658 {
+        display = "Argent Tournament Grounds";
+    }
+    EXPEDITION_BASE_CAMP = 4665 {
+        display = "Expedition Base Camp";
+    }
+    SUNREAVER_PAVILION = 4666 {
+        display = "Sunreaver Pavilion";
+    }
+    SILVER_COVENANT_PAVILION = 4667 {
+        display = "Silver Covenant Pavilion";
+    }
+    THE_COOPER_RESIDENCE = 4668 {
+        display = "The Cooper Residence";
+    }
+    THE_RING_OF_CHAMPIONS = 4669 {
+        display = "The Ring of Champions";
+    }
+    THE_ASPIRANTS_RING = 4670 {
+        display = "The Aspirants' Ring";
+    }
+    THE_ARGENT_VALIANTS_RING = 4671 {
+        display = "The Argent Valiants' Ring";
+    }
+    THE_ALLIANCE_VALIANTS_RING = 4672 {
+        display = "The Alliance Valiants' Ring";
+    }
+    THE_HORDE_VALIANTS_RING = 4673 {
+        display = "The Horde Valiants' Ring";
+    }
+    ARGENT_PAVILION = 4674 {
+        display = "Argent Pavilion";
+    }
+    SUNREAVER_PAVILION1 = 4676 {
+        display = "Sunreaver Pavilion";
+    }
+    SILVER_COVENANT_PAVILION1 = 4677 {
+        display = "Silver Covenant Pavilion";
+    }
+    THE_FORLORN_CAVERN = 4679 {
+        display = "The Forlorn Cavern";
+    }
+    CLAYTONIO_TEST_AREA = 4688 {
+        display = "claytonio test area";
+    }
+    QUEL_DELARS_REST = 4692 {
+        display = "Quel'Delar's Rest";
+    }
+    ISLE_OF_CONQUEST = 4710 {
+        display = "Isle of Conquest";
+    }
+    TRIAL_OF_THE_CRUSADER = 4722 {
+        display = "Trial of the Crusader";
+    }
+    TRIAL_OF_THE_CHAMPION = 4723 {
+        display = "Trial of the Champion";
+    }
+    RUNEWEAVER_SQUARE = 4739 {
+        display = "Runeweaver Square";
+    }
+    THE_SILVER_ENCLAVE = 4740 {
+        display = "The Silver Enclave";
+    }
+    ISLE_OF_CONQUEST_NO_MANS_LAND = 4741 {
+        display = "Isle of Conquest No Man's Land";
+    }
+    HROTHGARS_LANDING = 4742 {
+        display = "Hrothgar's Landing";
+    }
+    DEATHSPEAKERS_WATCH = 4743 {
+        display = "Deathspeaker's Watch";
+    }
+    WORKSHOP = 4747 {
+        display = "Workshop";
+    }
+    QUARRY = 4748 {
+        display = "Quarry";
+    }
+    DOCKS = 4749 {
+        display = "Docks";
+    }
+    HANGAR = 4750 {
+        display = "Hangar";
+    }
+    REFINERY = 4751 {
+        display = "Refinery";
+    }
+    HORDE_KEEP = 4752 {
+        display = "Horde Keep";
+    }
+    ALLIANCE_KEEP = 4753 {
+        display = "Alliance Keep";
+    }
+    THE_SEA_REAVERS_RUN = 4760 {
+        display = "The Sea Reaver's Run";
+    }
+    TRANSPORT_ALLIANCE_GUNSHIP = 4763 {
+        display = "Transport: Alliance Gunship";
+    }
+    TRANSPORT_HORDE_GUNSHIP = 4764 {
+        display = "Transport: Horde Gunship";
+    }
+    HROTHGARS_LANDING1 = 4769 {
+        display = "Hrothgar's Landing";
+    }
+    THE_FORGE_OF_SOULS = 4809 {
+        display = "The Forge of Souls";
+    }
+    ICECROWN_CITADEL1 = 4812 {
+        display = "Icecrown Citadel";
+    }
+    PIT_OF_SARON = 4813 {
+        display = "Pit of Saron";
+    }
+    HALLS_OF_REFLECTION = 4820 {
+        display = "Halls of Reflection";
+    }
+    TRANSPORT_ALLIANCE_GUNSHIP_IGB = 4832 {
+        display = "Transport: Alliance Gunship (IGB)";
+    }
+    TRANSPORT_HORDE_GUNSHIP_IGB = 4833 {
+        display = "Transport: Horde Gunship (IGB)";
+    }
+    THE_FROZEN_THRONE = 4859 {
+        display = "The Frozen Throne";
+    }
+    THE_FROZEN_HALLS = 4862 {
+        display = "The Frozen Halls";
+    }
+    THE_FROST_QUEENS_LAIR = 4889 {
+        display = "The Frost Queen's Lair";
+    }
+    PUTRICIDES_LABORATORY_OF_ALCHEMICAL_HORRORS_AND_FUN = 4890 {
+        display = "Putricide's Laboratory of Alchemical Horrors and Fun";
+    }
+    THE_SANCTUM_OF_BLOOD = 4891 {
+        display = "The Sanctum of Blood";
+    }
+    THE_CRIMSON_HALL = 4892 {
+        display = "The Crimson Hall";
+    }
+    THE_FROST_QUEENS_LAIR1 = 4893 {
+        display = "The Frost Queen's Lair";
+    }
+    PUTRICIDES_LABORATORY_OF_ALCHEMICAL_HORRORS_AND_FUN1 = 4894 {
+        display = "Putricide's Laboratory of Alchemical Horrors and Fun";
+    }
+    THE_CRIMSON_HALL1 = 4895 {
+        display = "The Crimson Hall";
+    }
+    THE_FROZEN_THRONE1 = 4896 {
+        display = "The Frozen Throne";
+    }
+    THE_SANCTUM_OF_BLOOD1 = 4897 {
+        display = "The Sanctum of Blood";
+    }
+    FROSTMOURNE = 4898 {
+        display = "Frostmourne";
+    }
+    THE_DARK_APPROACH = 4904 {
+        display = "The Dark Approach";
+    }
+    SCOURGELORDS_COMMAND = 4905 {
+        display = "Scourgelord's Command";
+    }
+    THE_SHADOW_THRONE = 4906 {
+        display = "The Shadow Throne";
+    }
+    THE_HIDDEN_PASSAGE = 4908 {
+        display = "The Hidden Passage";
+    }
+    FROSTMOURNE1 = 4910 {
+        display = "Frostmourne";
+    }
+    THE_RUBY_SANCTUM = 4987 {
+        display = "The Ruby Sanctum";
+    }
+} {
+    versions = "3.3.5";
+}
+
