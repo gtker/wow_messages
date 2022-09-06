@@ -64,7 +64,7 @@ pub(crate) fn read_inner(
     Ok((header, values))
 }
 
-#[macro_export]
+#[macro_use]
 macro_rules! update_item {
     ($name:ident, $type_value:expr) => {
         #[derive(Debug, Clone, Default, PartialEq)]
@@ -112,4 +112,4 @@ macro_rules! update_item {
     };
 }
 
-pub use update_item;
+pub(crate) use update_item;
