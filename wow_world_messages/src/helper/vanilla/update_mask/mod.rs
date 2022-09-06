@@ -24,7 +24,7 @@ update_item!(UpdateGameObject, GAMEOBJECT);
 update_item!(UpdateDynamicObject, DYNAMICOBJECT);
 update_item!(UpdateCorpse, CORPSE);
 
-#[derive(Debug, Hash, Clone, PartialEq)]
+#[derive(Debug, Hash, Clone, PartialEq, Eq)]
 pub enum UpdateMask {
     Item(UpdateItem),
     Container(UpdateContainer),

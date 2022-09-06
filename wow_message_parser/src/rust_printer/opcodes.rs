@@ -28,7 +28,7 @@ pub fn print_world_opcodes(
 
     includes(&mut s, v, container_type, Version::World(*version));
 
-    definition(&mut s, v, ty);
+    definition(&mut s, v, ty, (*version).into());
 
     common_impls_world(&mut s, v, ty, container_type, Version::World(*version));
 
@@ -49,7 +49,7 @@ pub fn print_login_opcodes(
 
     includes(&mut s, v, container_type, Version::Login(*version));
 
-    definition(&mut s, v, ty);
+    definition(&mut s, v, ty, (*version).into());
 
     common_impls_login(&mut s, v, ty);
 
@@ -134,8 +134,19 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType,
     s.newline();
 }
 
-pub fn definition(s: &mut Writer, v: &[&Container], ty: &str) {
-    s.wln("#[derive(Debug, Clone, PartialEq)]");
+pub fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Version) {
+    // Login does not have any floats guaranteed while World does.
+    // We could also dynamically check, but then adding a message with floats
+    // would be a breaking change.
+    match version {
+        Version::Login(_) => {
+            s.wln("#[derive(Debug, Clone, PartialEq, Eq)]");
+        }
+        Version::World(_) => {
+            s.wln("#[derive(Debug, Clone, PartialEq)]");
+        }
+    }
+
     s.new_enum("pub", format!("{t}OpcodeMessage", t = ty), |s| {
         for &e in v {
             s.wln(format!(
