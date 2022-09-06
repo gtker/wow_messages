@@ -51,6 +51,28 @@ impl RustMember {
         &self.original_ty
     }
 
+    pub fn all_members(&self) -> Vec<&RustMember> {
+        let mut v = Vec::new();
+
+        v.push(self);
+        match self.ty() {
+            RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
+                for enumerator in enumerators {
+                    v.append(&mut enumerator.all_members());
+                }
+            }
+            RustType::Struct { object, .. } => {
+                v.append(&mut object.all_members());
+            }
+            RustType::Array { .. } => {
+                // TODO: Add complex array ty
+            }
+            _ => {}
+        }
+
+        v
+    }
+
     pub fn is_elseif_flag(&self) -> bool {
         match self.ty() {
             RustType::Flag { is_elseif, .. } | RustType::Enum { is_elseif, .. } => *is_elseif,
@@ -289,16 +311,7 @@ impl RustEnumerator {
         let mut v = Vec::new();
 
         for m in self.members() {
-            match m.ty() {
-                RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
-                    for enumerator in enumerators {
-                        v.append(&mut enumerator.all_members());
-                    }
-                }
-                _ => {}
-            }
-
-            v.push(m);
+            v.append(&mut m.all_members());
         }
 
         v
@@ -406,6 +419,7 @@ pub enum RustType {
     Struct {
         ty_name: String,
         sizes: Sizes,
+        object: RustObject,
     },
 }
 
@@ -482,16 +496,7 @@ impl RustOptional {
         let mut v = Vec::new();
 
         for m in self.members() {
-            match m.ty() {
-                RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
-                    for enumerator in enumerators {
-                        v.append(&mut enumerator.all_members());
-                    }
-                }
-                _ => {}
-            }
-
-            v.push(m);
+            v.append(&mut m.all_members());
         }
 
         v
@@ -522,15 +527,7 @@ impl RustObject {
         let mut v = Vec::new();
 
         for m in self.members() {
-            match m.ty() {
-                RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
-                    for enumerator in enumerators {
-                        v.append(&mut enumerator.all_members());
-                    }
-                }
-                _ => {}
-            }
-            v.push(m);
+            v.append(&mut m.all_members());
         }
 
         if let Some(optional) = self.optional() {
@@ -874,10 +871,9 @@ pub struct RustDefiner {
 impl RustDefiner {
     pub fn all_members(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
+
         for enumerator in self.enumerators() {
-            for member in enumerator.all_members() {
-                v.push(member);
-            }
+            v.append(&mut enumerator.all_members());
         }
 
         v
@@ -1325,9 +1321,12 @@ pub fn create_struct_member(
                                 definition_constantly_sized = false;
                             }
 
+                            let object = create_rust_object(c, o);
+
                             RustType::Struct {
                                 ty_name: s.clone(),
                                 sizes: c.sizes(),
+                                object,
                             }
                         }
                         ObjectType::CLogin | ObjectType::SLogin => {
