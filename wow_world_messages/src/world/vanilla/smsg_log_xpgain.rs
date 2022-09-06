@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::ExperienceAwardType;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm#L8):
 /// ```text
 /// smsg SMSG_LOG_XPGAIN = 0x01D0 {
@@ -100,7 +100,7 @@ impl SMSG_LOG_XPGAIN {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum SMSG_LOG_XPGAIN_ExperienceAwardType {
     Kill,
     NonKill {

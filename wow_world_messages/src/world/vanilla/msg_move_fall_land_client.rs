@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_fall_land.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_fall_land.wowm#L3):
 /// ```text
 /// cmsg MSG_MOVE_FALL_LAND_Client = 0x00C9 {

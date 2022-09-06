@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_heartbeat.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_heartbeat.wowm#L31):
 /// ```text
 /// smsg MSG_MOVE_HEARTBEAT_Server = 0x00EE {

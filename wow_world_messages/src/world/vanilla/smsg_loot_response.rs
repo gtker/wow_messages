@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::LootMethod;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L22):
 /// ```text
 /// smsg SMSG_LOOT_RESPONSE = 0x0160 {

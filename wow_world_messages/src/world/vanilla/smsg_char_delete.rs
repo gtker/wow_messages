@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::WorldResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 /// Response to [`CMSG_CHAR_DELETE`](crate::world::vanilla::CMSG_CHAR_DELETE).
 ///
 /// The result of this message will update the client character screen without them sending another [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).

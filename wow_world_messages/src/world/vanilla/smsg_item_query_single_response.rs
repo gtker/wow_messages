@@ -9,7 +9,7 @@ use crate::world::vanilla::ItemStat;
 use crate::world::vanilla::Map;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:28`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L28):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
@@ -599,7 +599,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Default)]
 pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub item_class: ItemClass,
     pub item_sub_class: u32,

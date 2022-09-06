@@ -4,7 +4,7 @@ use crate::world::vanilla::QuestDetailsEmote;
 use crate::world::vanilla::QuestItemReward;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm#L8):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {

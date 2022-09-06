@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::TEnum;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:239`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L239):
 /// ```text
 /// struct IfEdgeCases {
@@ -176,7 +176,7 @@ impl IfEdgeCases {
 
 }
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum IfEdgeCases_TEnum {
     Zero {
         basic1: u8,

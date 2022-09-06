@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::ListInventoryItem;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_list_inventory.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_list_inventory.wowm#L15):
 /// ```text
 /// smsg SMSG_LIST_INVENTORY = 0x019F {

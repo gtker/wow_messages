@@ -4,7 +4,7 @@ use crate::world::vanilla::GossipItem;
 use crate::world::vanilla::QuestItem;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm#L13):
 /// ```text
 /// smsg SMSG_GOSSIP_MESSAGE = 0x017D {

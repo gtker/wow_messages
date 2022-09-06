@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::SpellEffect;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm:134`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm#L134):
 /// ```text
 /// struct SpellLog {
@@ -710,7 +710,7 @@ impl SpellLog {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum SpellLog_SpellEffect {
     None,
     Instakill {

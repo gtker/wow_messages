@@ -130,10 +130,15 @@ fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
 }
 
 pub fn print_derives(s: &mut Writer, members: &[RustMember], is_enum_type: bool) {
-    s.w("#[derive(Debug, PartialEq, Clone");
+    s.w("#[derive(Debug, Clone");
 
     if can_derive_copy(members) {
         s.w_no_indent(", Copy");
+    }
+
+    s.w_no_indent(", PartialEq");
+    if can_derive_eq(members) {
+        s.w_no_indent(", Eq");
     }
 
     if !is_enum_type && can_derive_default(members) {
@@ -141,6 +146,16 @@ pub fn print_derives(s: &mut Writer, members: &[RustMember], is_enum_type: bool)
     }
 
     s.wln_no_indent(")]");
+}
+
+fn can_derive_eq(members: &[RustMember]) -> bool {
+    for m in members {
+        if matches!(m.ty(), RustType::Floating(_)) {
+            return false;
+        }
+    }
+
+    true
 }
 
 fn can_derive_default(members: &[RustMember]) -> bool {

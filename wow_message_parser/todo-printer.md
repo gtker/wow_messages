@@ -13,7 +13,7 @@
 * Special type for `SMSG_LOGIN_SETTIMESPEED.datetime`
 * More tests/definitions
 * Add derives for all types
-  * Add Eq and Hash for structs?
+  * Add Hash for structs?
 * MSRV test
   * Login
   * World

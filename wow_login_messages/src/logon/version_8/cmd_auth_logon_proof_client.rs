@@ -4,7 +4,7 @@ use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Reply after successful [`CMD_AUTH_LOGON_CHALLENGE_Server`](crate::logon::version_8::CMD_AUTH_LOGON_CHALLENGE_Server).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm:317`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm#L317):
@@ -496,7 +496,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     inner: u8,
     pin: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin>,
@@ -628,7 +628,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
     pub pin_hash: [u8; 20],
     pub pin_salt: [u8; 16],
@@ -641,7 +641,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
     pub unknown0: u8,
     pub unknown1: u8,
@@ -660,7 +660,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
     pub unknown5: u8,
 }

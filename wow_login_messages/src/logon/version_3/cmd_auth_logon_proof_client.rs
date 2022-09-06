@@ -4,7 +4,7 @@ use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Reply after successful [`CMD_AUTH_LOGON_CHALLENGE_Server`](crate::logon::version_3::CMD_AUTH_LOGON_CHALLENGE_Server).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm:141`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm#L141):
@@ -327,7 +327,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     None,
     Pin {

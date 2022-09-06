@@ -3,7 +3,7 @@ use crate::world::tbc::Map;
 use crate::world::tbc::Vector3d;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Default)]
 /// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
 ///
 /// The positions and orientations do not matter since they can be overwritten in the `SMSG_UPDATE_OBJECT`, but the map determines which map the client loads and this is not changeable in `SMSG_UPDATE_OBJECT`.

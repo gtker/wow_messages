@@ -4,7 +4,7 @@ use crate::world::vanilla::SimpleFlag;
 use crate::world::vanilla::StructWithAllBuiltInTypes;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:61`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L61):
 /// ```text
 /// msg MessageWithComplexTypes = 0x0003 {

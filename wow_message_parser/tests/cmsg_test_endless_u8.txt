@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:281`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L281):
 /// ```text
 /// cmsg CMSG_TEST_ENDLESS_U8 = 0x1337 {

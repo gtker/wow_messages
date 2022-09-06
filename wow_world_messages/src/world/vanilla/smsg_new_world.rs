@@ -3,7 +3,7 @@ use crate::world::vanilla::Map;
 use crate::world::vanilla::Vector3d;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm#L3):
 /// ```text
 /// smsg SMSG_NEW_WORLD = 0x003E {

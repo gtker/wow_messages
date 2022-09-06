@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:288`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L288):
 /// ```text
 /// cmsg CMSG_TEST_OPTIONAL = 0x1137 {
@@ -90,7 +90,7 @@ impl CMSG_TEST_OPTIONAL {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct CMSG_TEST_OPTIONAL_server {
     pub optional_u8: u8,
 }

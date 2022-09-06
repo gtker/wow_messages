@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/cmsg_gossip_select_option.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/cmsg_gossip_select_option.wowm#L3):
 /// ```text
 /// cmsg CMSG_GOSSIP_SELECT_OPTION = 0x017C {
@@ -91,7 +91,7 @@ impl CMSG_GOSSIP_SELECT_OPTION {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct CMSG_GOSSIP_SELECT_OPTION_unknown {
     pub code: String,
 }

@@ -3,7 +3,7 @@ use crate::world::vanilla::SimpleFlag;
 use crate::world::vanilla::UpdateFlag;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:305`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L305):
 /// ```text
 /// struct FlagIfElseIf {
@@ -157,7 +157,7 @@ impl FlagIfElseIf {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct FlagIfElseIf_SimpleFlag {
     inner: u8,
     one: Option<FlagIfElseIf_SimpleFlag_One>,
@@ -238,7 +238,7 @@ impl FlagIfElseIf_SimpleFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct FlagIfElseIf_SimpleFlag_One {
     pub if_one: u8,
 }
@@ -249,7 +249,7 @@ impl FlagIfElseIf_SimpleFlag_One {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum FlagIfElseIf_UpdateFlag_OneIf {
     OneIf {
         b_if: u8,
@@ -298,7 +298,7 @@ impl FlagIfElseIf_UpdateFlag_OneIf {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct FlagIfElseIf_UpdateFlag {
     inner: u8,
     one_if: Option<FlagIfElseIf_UpdateFlag_OneIf>,
@@ -393,7 +393,7 @@ impl FlagIfElseIf_UpdateFlag {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct FlagIfElseIf_UpdateFlag_EightIf {
     pub last_if: u8,
 }

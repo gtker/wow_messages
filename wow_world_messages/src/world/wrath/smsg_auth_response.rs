@@ -3,7 +3,7 @@ use crate::world::wrath::Expansion;
 use crate::world::wrath::WorldResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:67`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L67):
 /// ```text
 /// smsg SMSG_AUTH_RESPONSE = 0x01EE {
@@ -328,7 +328,7 @@ impl SMSG_AUTH_RESPONSE {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SMSG_AUTH_RESPONSE_WorldResult {
     ResponseSuccess,
     ResponseFailure,

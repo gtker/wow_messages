@@ -4,7 +4,7 @@ use crate::world::vanilla::BattlegroundPlayer;
 use crate::world::vanilla::BattlegroundWinner;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm#L29):
 /// ```text
 /// smsg MSG_PVP_LOG_DATA_Server = 0x02E0 {
@@ -96,7 +96,7 @@ impl MSG_PVP_LOG_DATA_Server {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
     NotEnded,
     Ended {

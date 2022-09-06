@@ -6,7 +6,7 @@ use crate::world::vanilla::ObjectType;
 use crate::world::vanilla::UpdateType;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:157`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L157):
 /// ```text
 /// struct Object {
@@ -250,7 +250,7 @@ impl Object {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Object_UpdateType {
     Values {
         guid1: Guid,

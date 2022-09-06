@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_gameobject_query_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_gameobject_query_response.wowm#L3):
 /// ```text
 /// smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
@@ -159,7 +159,7 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
     }
 }
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
     pub info_type: u32,
     pub display_id: u32,

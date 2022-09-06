@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:19`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L19):
 /// ```text
 /// struct StructWithAllBuiltInTypes {

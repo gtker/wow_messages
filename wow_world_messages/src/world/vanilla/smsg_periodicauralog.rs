@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::AuraLog;
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:299`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L299):
 /// ```text
 /// smsg SMSG_PERIODICAURALOG = 0x024E {

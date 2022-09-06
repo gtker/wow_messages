@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Default)]
 /// Tells the client what the datetime is and how fast time passes.
 ///
 /// The client also asks for the datetime with [`CMSG_QUERY_TIME`](crate::world::vanilla::CMSG_QUERY_TIME) and gets a reply from [`SMSG_QUERY_TIME_RESPONSE`](crate::world::vanilla::SMSG_QUERY_TIME_RESPONSE), but this does not appear to change anything in the client.

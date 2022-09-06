@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:268`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L268):
 /// ```text
 /// struct QuestItem {
