@@ -64,8 +64,10 @@ impl RustMember {
             RustType::Struct { object, .. } => {
                 v.append(&mut object.all_members());
             }
-            RustType::Array { .. } => {
-                // TODO: Add complex array ty
+            RustType::Array { inner_object, .. } => {
+                if let Some(o) = inner_object {
+                    v.append(&mut o.all_members());
+                }
             }
             _ => {}
         }
@@ -362,7 +364,9 @@ impl RustEnumerator {
                 | RustType::String
                 | RustType::CString
                 | RustType::SizedCString => return false,
-                RustType::Array { array, inner_sizes } => match array.size() {
+                RustType::Array {
+                    array, inner_sizes, ..
+                } => match array.size() {
                     ArraySize::Variable(_) | ArraySize::Endless => {
                         return false;
                     }
@@ -399,6 +403,7 @@ pub enum RustType {
     Array {
         array: Array,
         inner_sizes: Sizes,
+        inner_object: Option<RustObject>,
     },
     Enum {
         ty_name: String,
@@ -1239,12 +1244,14 @@ pub fn create_struct_member(
                     }
 
                     let mut inner_sizes = Sizes::new();
-                    match array.ty() {
+                    let complex = match array.ty() {
                         ArrayType::Integer(i) => {
                             inner_sizes.inc_both(i.size().into());
+                            None
                         }
                         ArrayType::Guid => {
                             inner_sizes.inc_both(GUID_SIZE.into());
+                            None
                         }
                         ArrayType::Complex(complex) => {
                             let c = o.get_container(complex, tags);
@@ -1252,18 +1259,30 @@ pub fn create_struct_member(
                                 definition_constantly_sized = false;
                             }
                             inner_sizes += c.sizes();
+                            Some(c)
                         }
-                        ArrayType::PackedGuid => inner_sizes
-                            .inc(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into()),
+                        ArrayType::PackedGuid => {
+                            inner_sizes
+                                .inc(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into());
+                            None
+                        }
                         ArrayType::CString => {
                             definition_constantly_sized = false;
-                            inner_sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED)
+                            inner_sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED);
+                            None
                         }
+                    };
+
+                    let inner_object = if let Some(c) = complex {
+                        Some(create_rust_object(c, o))
+                    } else {
+                        None
                     };
 
                     RustType::Array {
                         array: array.clone(),
                         inner_sizes,
+                        inner_object,
                     }
                 }
                 Type::Identifier { s, upcast } => {

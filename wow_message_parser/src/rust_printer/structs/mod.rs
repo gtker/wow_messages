@@ -166,7 +166,9 @@ fn can_derive_copy(members: &[RustMember]) -> bool {
             | RustType::String
             | RustType::CString
             | RustType::SizedCString => return false,
-            RustType::Array { array, inner_sizes } => match array.size() {
+            RustType::Array {
+                array, inner_sizes, ..
+            } => match array.size() {
                 ArraySize::Variable(_) | ArraySize::Endless => {
                     return false;
                 }

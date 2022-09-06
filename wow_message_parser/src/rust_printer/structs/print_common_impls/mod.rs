@@ -176,7 +176,9 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
                 int_ty.size().to_string()
             }
         }
-        RustType::Array { array, inner_sizes } => {
+        RustType::Array {
+            array, inner_sizes, ..
+        } => {
             let inner_is_constant = inner_sizes.is_constant();
             match array.ty() {
                 ArrayType::Integer(integer_type) => match array.size() {
