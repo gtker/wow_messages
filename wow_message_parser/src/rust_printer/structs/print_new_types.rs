@@ -107,7 +107,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
             });
 
             s.funcn_pub(
-                format!("set_{}(&mut self)", enumerator.name()),
+                format!("set_{}(mut self)", enumerator.name()),
                 "Self",
                 |s| {
                     s.wln(format!(
@@ -116,7 +116,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                         name = enumerator.name()
                     ));
 
-                    s.wln("self.clone()");
+                    s.wln("self");
                 },
             );
 
@@ -180,7 +180,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
 
             s.funcn_pub(
                 format!(
-                    "set_{upper_name}(&mut self, {lower_name}: {new_ty})",
+                    "set_{upper_name}(mut self, {lower_name}: {new_ty})",
                     upper_name = enumerator.name(),
                     lower_name = enumerator.name().to_lowercase(),
                     new_ty = new_ty,
@@ -205,7 +205,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                         name_lower = enumerator.name().to_lowercase()
                     ));
 
-                    s.wln("self.clone()");
+                    s.wln("self");
                 },
             );
 

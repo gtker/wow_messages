@@ -183,10 +183,10 @@ impl FlagIfElseIf_SimpleFlag {
         }
     }
 
-    pub fn set_ONE(&mut self, one: FlagIfElseIf_SimpleFlag_One) -> Self {
+    pub fn set_ONE(mut self, one: FlagIfElseIf_SimpleFlag_One) -> Self {
         self.inner |= SimpleFlag::ONE;
         self.one = Some(one);
-        self.clone()
+        self
     }
 
     pub const fn get_ONE(&self) -> Option<&FlagIfElseIf_SimpleFlag_One> {
@@ -206,9 +206,9 @@ impl FlagIfElseIf_SimpleFlag {
         }
     }
 
-    pub fn set_TWO(&mut self) -> Self {
+    pub fn set_TWO(mut self) -> Self {
         self.inner |= SimpleFlag::TWO;
-        self.clone()
+        self
     }
 
     pub const fn get_TWO(&self) -> bool {
@@ -328,10 +328,10 @@ impl FlagIfElseIf_UpdateFlag {
         }
     }
 
-    pub fn set_ONE_IF(&mut self, one_if: FlagIfElseIf_UpdateFlag_OneIf) -> Self {
+    pub fn set_ONE_IF(mut self, one_if: FlagIfElseIf_UpdateFlag_OneIf) -> Self {
         self.inner |= one_if.as_int();
         self.one_if = Some(one_if);
-        self.clone()
+        self
     }
 
     pub const fn get_ONE_IF(&self) -> Option<&FlagIfElseIf_UpdateFlag_OneIf> {
@@ -352,10 +352,10 @@ impl FlagIfElseIf_UpdateFlag {
         }
     }
 
-    pub fn set_EIGHT_IF(&mut self, eight_if: FlagIfElseIf_UpdateFlag_EightIf) -> Self {
+    pub fn set_EIGHT_IF(mut self, eight_if: FlagIfElseIf_UpdateFlag_EightIf) -> Self {
         self.inner |= UpdateFlag::EIGHT_IF;
         self.eight_if = Some(eight_if);
-        self.clone()
+        self
     }
 
     pub const fn get_EIGHT_IF(&self) -> Option<&FlagIfElseIf_UpdateFlag_EightIf> {

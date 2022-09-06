@@ -306,9 +306,9 @@ impl Realm_RealmFlag {
         }
     }
 
-    pub fn set_INVALID(&mut self) -> Self {
+    pub fn set_INVALID(mut self) -> Self {
         self.inner |= RealmFlag::INVALID;
-        self.clone()
+        self
     }
 
     pub const fn get_INVALID(&self) -> bool {
@@ -327,9 +327,9 @@ impl Realm_RealmFlag {
         }
     }
 
-    pub fn set_OFFLINE(&mut self) -> Self {
+    pub fn set_OFFLINE(mut self) -> Self {
         self.inner |= RealmFlag::OFFLINE;
-        self.clone()
+        self
     }
 
     pub const fn get_OFFLINE(&self) -> bool {
@@ -348,10 +348,10 @@ impl Realm_RealmFlag {
         }
     }
 
-    pub fn set_SPECIFY_BUILD(&mut self, specify_build: Realm_RealmFlag_SpecifyBuild) -> Self {
+    pub fn set_SPECIFY_BUILD(mut self, specify_build: Realm_RealmFlag_SpecifyBuild) -> Self {
         self.inner |= RealmFlag::SPECIFY_BUILD;
         self.specify_build = Some(specify_build);
-        self.clone()
+        self
     }
 
     pub const fn get_SPECIFY_BUILD(&self) -> Option<&Realm_RealmFlag_SpecifyBuild> {
@@ -371,9 +371,9 @@ impl Realm_RealmFlag {
         }
     }
 
-    pub fn set_FORCE_BLUE_RECOMMENDED(&mut self) -> Self {
+    pub fn set_FORCE_BLUE_RECOMMENDED(mut self) -> Self {
         self.inner |= RealmFlag::FORCE_BLUE_RECOMMENDED;
-        self.clone()
+        self
     }
 
     pub const fn get_FORCE_BLUE_RECOMMENDED(&self) -> bool {
@@ -392,9 +392,9 @@ impl Realm_RealmFlag {
         }
     }
 
-    pub fn set_FORCE_GREEN_RECOMMENDED(&mut self) -> Self {
+    pub fn set_FORCE_GREEN_RECOMMENDED(mut self) -> Self {
         self.inner |= RealmFlag::FORCE_GREEN_RECOMMENDED;
-        self.clone()
+        self
     }
 
     pub const fn get_FORCE_GREEN_RECOMMENDED(&self) -> bool {
@@ -413,9 +413,9 @@ impl Realm_RealmFlag {
         }
     }
 
-    pub fn set_FORCE_RED_FULL(&mut self) -> Self {
+    pub fn set_FORCE_RED_FULL(mut self) -> Self {
         self.inner |= RealmFlag::FORCE_RED_FULL;
-        self.clone()
+        self
     }
 
     pub const fn get_FORCE_RED_FULL(&self) -> bool {

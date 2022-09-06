@@ -565,10 +565,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_STATUS(&mut self, flag_status: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus) -> Self {
+    pub fn set_FLAG_STATUS(mut self, flag_status: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_STATUS;
         self.flag_status = Some(flag_status);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_STATUS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus> {
@@ -605,10 +605,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_CUR_HP(&mut self, flag_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp) -> Self {
+    pub fn set_FLAG_CUR_HP(mut self, flag_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_CUR_HP;
         self.flag_cur_hp = Some(flag_cur_hp);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp> {
@@ -645,10 +645,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_MAX_HP(&mut self, flag_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp) -> Self {
+    pub fn set_FLAG_MAX_HP(mut self, flag_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_MAX_HP;
         self.flag_max_hp = Some(flag_max_hp);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp> {
@@ -685,10 +685,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_POWER_TYPE(&mut self, flag_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType) -> Self {
+    pub fn set_FLAG_POWER_TYPE(mut self, flag_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_POWER_TYPE;
         self.flag_power_type = Some(flag_power_type);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType> {
@@ -725,10 +725,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_CUR_POWER(&mut self, flag_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower) -> Self {
+    pub fn set_FLAG_CUR_POWER(mut self, flag_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_CUR_POWER;
         self.flag_cur_power = Some(flag_cur_power);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower> {
@@ -765,10 +765,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_MAX_POWER(&mut self, flag_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower) -> Self {
+    pub fn set_FLAG_MAX_POWER(mut self, flag_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_MAX_POWER;
         self.flag_max_power = Some(flag_max_power);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower> {
@@ -805,10 +805,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_LEVEL(&mut self, flag_level: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel) -> Self {
+    pub fn set_FLAG_LEVEL(mut self, flag_level: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_LEVEL;
         self.flag_level = Some(flag_level);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_LEVEL(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel> {
@@ -845,10 +845,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_ZONE(&mut self, flag_zone: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone) -> Self {
+    pub fn set_FLAG_ZONE(mut self, flag_zone: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_ZONE;
         self.flag_zone = Some(flag_zone);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_ZONE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone> {
@@ -885,10 +885,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_POSITION(&mut self, flag_position: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition) -> Self {
+    pub fn set_FLAG_POSITION(mut self, flag_position: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_POSITION;
         self.flag_position = Some(flag_position);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_POSITION(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition> {
@@ -925,10 +925,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_AURAS(&mut self, flag_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras) -> Self {
+    pub fn set_FLAG_AURAS(mut self, flag_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_AURAS;
         self.flag_auras = Some(flag_auras);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras> {
@@ -965,9 +965,9 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_AURAS_2(&mut self) -> Self {
+    pub fn set_FLAG_AURAS_2(mut self) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_AURAS_2;
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_AURAS_2(&self) -> bool {
@@ -1003,9 +1003,9 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_GUID(&mut self) -> Self {
+    pub fn set_FLAG_PET_GUID(mut self) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_GUID;
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_GUID(&self) -> bool {
@@ -1041,10 +1041,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_NAME(&mut self, flag_pet_name: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName) -> Self {
+    pub fn set_FLAG_PET_NAME(mut self, flag_pet_name: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_NAME;
         self.flag_pet_name = Some(flag_pet_name);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_NAME(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName> {
@@ -1081,10 +1081,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_MODEL_ID(&mut self, flag_pet_model_id: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId) -> Self {
+    pub fn set_FLAG_PET_MODEL_ID(mut self, flag_pet_model_id: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_MODEL_ID;
         self.flag_pet_model_id = Some(flag_pet_model_id);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_MODEL_ID(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId> {
@@ -1121,10 +1121,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_CUR_HP(&mut self, flag_pet_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp) -> Self {
+    pub fn set_FLAG_PET_CUR_HP(mut self, flag_pet_cur_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_CUR_HP;
         self.flag_pet_cur_hp = Some(flag_pet_cur_hp);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp> {
@@ -1161,10 +1161,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_MAX_HP(&mut self, flag_pet_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp) -> Self {
+    pub fn set_FLAG_PET_MAX_HP(mut self, flag_pet_max_hp: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_MAX_HP;
         self.flag_pet_max_hp = Some(flag_pet_max_hp);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp> {
@@ -1201,10 +1201,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_POWER_TYPE(&mut self, flag_pet_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType) -> Self {
+    pub fn set_FLAG_PET_POWER_TYPE(mut self, flag_pet_power_type: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_POWER_TYPE;
         self.flag_pet_power_type = Some(flag_pet_power_type);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType> {
@@ -1241,10 +1241,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_CUR_POWER(&mut self, flag_pet_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower) -> Self {
+    pub fn set_FLAG_PET_CUR_POWER(mut self, flag_pet_cur_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_CUR_POWER;
         self.flag_pet_cur_power = Some(flag_pet_cur_power);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower> {
@@ -1281,10 +1281,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_MAX_POWER(&mut self, flag_pet_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower) -> Self {
+    pub fn set_FLAG_PET_MAX_POWER(mut self, flag_pet_max_power: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_MAX_POWER;
         self.flag_pet_max_power = Some(flag_pet_max_power);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower> {
@@ -1321,10 +1321,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_AURAS(&mut self, flag_pet_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras) -> Self {
+    pub fn set_FLAG_PET_AURAS(mut self, flag_pet_auras: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_AURAS;
         self.flag_pet_auras = Some(flag_pet_auras);
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras> {
@@ -1361,9 +1361,9 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_FLAG_PET_AURAS_2(&mut self) -> Self {
+    pub fn set_FLAG_PET_AURAS_2(mut self) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_PET_AURAS_2;
-        self.clone()
+        self
     }
 
     pub const fn get_FLAG_PET_AURAS_2(&self) -> bool {
@@ -1399,9 +1399,9 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         }
     }
 
-    pub fn set_MODE_OFFLINE(&mut self) -> Self {
+    pub fn set_MODE_OFFLINE(mut self) -> Self {
         self.inner |= GroupUpdateFlags::MODE_OFFLINE;
-        self.clone()
+        self
     }
 
     pub const fn get_MODE_OFFLINE(&self) -> bool {

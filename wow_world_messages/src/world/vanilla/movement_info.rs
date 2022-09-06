@@ -228,9 +228,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_FORWARD(&mut self) -> Self {
+    pub fn set_FORWARD(mut self) -> Self {
         self.inner |= MovementFlags::FORWARD;
-        self.clone()
+        self
     }
 
     pub const fn get_FORWARD(&self) -> bool {
@@ -252,9 +252,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_BACKWARD(&mut self) -> Self {
+    pub fn set_BACKWARD(mut self) -> Self {
         self.inner |= MovementFlags::BACKWARD;
-        self.clone()
+        self
     }
 
     pub const fn get_BACKWARD(&self) -> bool {
@@ -276,9 +276,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_STRAFE_LEFT(&mut self) -> Self {
+    pub fn set_STRAFE_LEFT(mut self) -> Self {
         self.inner |= MovementFlags::STRAFE_LEFT;
-        self.clone()
+        self
     }
 
     pub const fn get_STRAFE_LEFT(&self) -> bool {
@@ -300,9 +300,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_STRAFE_RIGHT(&mut self) -> Self {
+    pub fn set_STRAFE_RIGHT(mut self) -> Self {
         self.inner |= MovementFlags::STRAFE_RIGHT;
-        self.clone()
+        self
     }
 
     pub const fn get_STRAFE_RIGHT(&self) -> bool {
@@ -324,9 +324,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_TURN_LEFT(&mut self) -> Self {
+    pub fn set_TURN_LEFT(mut self) -> Self {
         self.inner |= MovementFlags::TURN_LEFT;
-        self.clone()
+        self
     }
 
     pub const fn get_TURN_LEFT(&self) -> bool {
@@ -348,9 +348,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_TURN_RIGHT(&mut self) -> Self {
+    pub fn set_TURN_RIGHT(mut self) -> Self {
         self.inner |= MovementFlags::TURN_RIGHT;
-        self.clone()
+        self
     }
 
     pub const fn get_TURN_RIGHT(&self) -> bool {
@@ -372,9 +372,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_PITCH_UP(&mut self) -> Self {
+    pub fn set_PITCH_UP(mut self) -> Self {
         self.inner |= MovementFlags::PITCH_UP;
-        self.clone()
+        self
     }
 
     pub const fn get_PITCH_UP(&self) -> bool {
@@ -396,9 +396,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_PITCH_DOWN(&mut self) -> Self {
+    pub fn set_PITCH_DOWN(mut self) -> Self {
         self.inner |= MovementFlags::PITCH_DOWN;
-        self.clone()
+        self
     }
 
     pub const fn get_PITCH_DOWN(&self) -> bool {
@@ -420,9 +420,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_WALK_MODE(&mut self) -> Self {
+    pub fn set_WALK_MODE(mut self) -> Self {
         self.inner |= MovementFlags::WALK_MODE;
-        self.clone()
+        self
     }
 
     pub const fn get_WALK_MODE(&self) -> bool {
@@ -444,10 +444,10 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_ON_TRANSPORT(&mut self, on_transport: MovementInfo_MovementFlags_OnTransport) -> Self {
+    pub fn set_ON_TRANSPORT(mut self, on_transport: MovementInfo_MovementFlags_OnTransport) -> Self {
         self.inner |= MovementFlags::ON_TRANSPORT;
         self.on_transport = Some(on_transport);
-        self.clone()
+        self
     }
 
     pub const fn get_ON_TRANSPORT(&self) -> Option<&MovementInfo_MovementFlags_OnTransport> {
@@ -470,9 +470,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_LEVITATING(&mut self) -> Self {
+    pub fn set_LEVITATING(mut self) -> Self {
         self.inner |= MovementFlags::LEVITATING;
-        self.clone()
+        self
     }
 
     pub const fn get_LEVITATING(&self) -> bool {
@@ -494,9 +494,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_FIXED_Z(&mut self) -> Self {
+    pub fn set_FIXED_Z(mut self) -> Self {
         self.inner |= MovementFlags::FIXED_Z;
-        self.clone()
+        self
     }
 
     pub const fn get_FIXED_Z(&self) -> bool {
@@ -518,9 +518,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_ROOT(&mut self) -> Self {
+    pub fn set_ROOT(mut self) -> Self {
         self.inner |= MovementFlags::ROOT;
-        self.clone()
+        self
     }
 
     pub const fn get_ROOT(&self) -> bool {
@@ -542,10 +542,10 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_JUMPING(&mut self, jumping: MovementInfo_MovementFlags_Jumping) -> Self {
+    pub fn set_JUMPING(mut self, jumping: MovementInfo_MovementFlags_Jumping) -> Self {
         self.inner |= MovementFlags::JUMPING;
         self.jumping = Some(jumping);
-        self.clone()
+        self
     }
 
     pub const fn get_JUMPING(&self) -> Option<&MovementInfo_MovementFlags_Jumping> {
@@ -568,9 +568,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_FALLINGFAR(&mut self) -> Self {
+    pub fn set_FALLINGFAR(mut self) -> Self {
         self.inner |= MovementFlags::FALLINGFAR;
-        self.clone()
+        self
     }
 
     pub const fn get_FALLINGFAR(&self) -> bool {
@@ -592,10 +592,10 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_SWIMMING(&mut self, swimming: MovementInfo_MovementFlags_Swimming) -> Self {
+    pub fn set_SWIMMING(mut self, swimming: MovementInfo_MovementFlags_Swimming) -> Self {
         self.inner |= MovementFlags::SWIMMING;
         self.swimming = Some(swimming);
-        self.clone()
+        self
     }
 
     pub const fn get_SWIMMING(&self) -> Option<&MovementInfo_MovementFlags_Swimming> {
@@ -618,9 +618,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_SPLINE_ENABLED(&mut self) -> Self {
+    pub fn set_SPLINE_ENABLED(mut self) -> Self {
         self.inner |= MovementFlags::SPLINE_ENABLED;
-        self.clone()
+        self
     }
 
     pub const fn get_SPLINE_ENABLED(&self) -> bool {
@@ -642,9 +642,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_CAN_FLY(&mut self) -> Self {
+    pub fn set_CAN_FLY(mut self) -> Self {
         self.inner |= MovementFlags::CAN_FLY;
-        self.clone()
+        self
     }
 
     pub const fn get_CAN_FLY(&self) -> bool {
@@ -666,9 +666,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_FLYING(&mut self) -> Self {
+    pub fn set_FLYING(mut self) -> Self {
         self.inner |= MovementFlags::FLYING;
-        self.clone()
+        self
     }
 
     pub const fn get_FLYING(&self) -> bool {
@@ -690,9 +690,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_ONTRANSPORT(&mut self) -> Self {
+    pub fn set_ONTRANSPORT(mut self) -> Self {
         self.inner |= MovementFlags::ONTRANSPORT;
-        self.clone()
+        self
     }
 
     pub const fn get_ONTRANSPORT(&self) -> bool {
@@ -714,10 +714,10 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_SPLINE_ELEVATION(&mut self, spline_elevation: MovementInfo_MovementFlags_SplineElevation) -> Self {
+    pub fn set_SPLINE_ELEVATION(mut self, spline_elevation: MovementInfo_MovementFlags_SplineElevation) -> Self {
         self.inner |= MovementFlags::SPLINE_ELEVATION;
         self.spline_elevation = Some(spline_elevation);
-        self.clone()
+        self
     }
 
     pub const fn get_SPLINE_ELEVATION(&self) -> Option<&MovementInfo_MovementFlags_SplineElevation> {
@@ -740,9 +740,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_WATERWALKING(&mut self) -> Self {
+    pub fn set_WATERWALKING(mut self) -> Self {
         self.inner |= MovementFlags::WATERWALKING;
-        self.clone()
+        self
     }
 
     pub const fn get_WATERWALKING(&self) -> bool {
@@ -764,9 +764,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_SAFE_FALL(&mut self) -> Self {
+    pub fn set_SAFE_FALL(mut self) -> Self {
         self.inner |= MovementFlags::SAFE_FALL;
-        self.clone()
+        self
     }
 
     pub const fn get_SAFE_FALL(&self) -> bool {
@@ -788,9 +788,9 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_HOVER(&mut self) -> Self {
+    pub fn set_HOVER(mut self) -> Self {
         self.inner |= MovementFlags::HOVER;
-        self.clone()
+        self
     }
 
     pub const fn get_HOVER(&self) -> bool {

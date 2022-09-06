@@ -92,9 +92,9 @@ impl SimpleIfFlag_SimpleFlag {
         }
     }
 
-    pub fn set_ONE(&mut self) -> Self {
+    pub fn set_ONE(mut self) -> Self {
         self.inner |= SimpleFlag::ONE;
-        self.clone()
+        self
     }
 
     pub const fn get_ONE(&self) -> bool {
@@ -113,9 +113,9 @@ impl SimpleIfFlag_SimpleFlag {
         }
     }
 
-    pub fn set_TWO(&mut self) -> Self {
+    pub fn set_TWO(mut self) -> Self {
         self.inner |= SimpleFlag::TWO;
-        self.clone()
+        self
     }
 
     pub const fn get_TWO(&self) -> bool {

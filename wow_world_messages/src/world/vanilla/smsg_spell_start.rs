@@ -159,9 +159,9 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
-    pub fn set_HIDDEN_COMBATLOG(&mut self) -> Self {
+    pub fn set_HIDDEN_COMBATLOG(mut self) -> Self {
         self.inner |= CastFlags::HIDDEN_COMBATLOG;
-        self.clone()
+        self
     }
 
     pub const fn get_HIDDEN_COMBATLOG(&self) -> bool {
@@ -180,9 +180,9 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
-    pub fn set_UNKNOWN2(&mut self) -> Self {
+    pub fn set_UNKNOWN2(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN2;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN2(&self) -> bool {
@@ -201,9 +201,9 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
-    pub fn set_UNKNOWN3(&mut self) -> Self {
+    pub fn set_UNKNOWN3(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN3;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN3(&self) -> bool {
@@ -222,9 +222,9 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
-    pub fn set_UNKNOWN4(&mut self) -> Self {
+    pub fn set_UNKNOWN4(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN4;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN4(&self) -> bool {
@@ -243,9 +243,9 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
-    pub fn set_UNKNOWN5(&mut self) -> Self {
+    pub fn set_UNKNOWN5(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN5;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN5(&self) -> bool {
@@ -264,10 +264,10 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
-    pub fn set_AMMO(&mut self, ammo: SMSG_SPELL_START_CastFlags_Ammo) -> Self {
+    pub fn set_AMMO(mut self, ammo: SMSG_SPELL_START_CastFlags_Ammo) -> Self {
         self.inner |= CastFlags::AMMO;
         self.ammo = Some(ammo);
-        self.clone()
+        self
     }
 
     pub const fn get_AMMO(&self) -> Option<&SMSG_SPELL_START_CastFlags_Ammo> {
@@ -287,9 +287,9 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
-    pub fn set_UNKNOWN7(&mut self) -> Self {
+    pub fn set_UNKNOWN7(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN7;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN7(&self) -> bool {
@@ -308,9 +308,9 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
-    pub fn set_UNKNOWN8(&mut self) -> Self {
+    pub fn set_UNKNOWN8(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN8;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN8(&self) -> bool {
@@ -329,9 +329,9 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
-    pub fn set_UNKNOWN9(&mut self) -> Self {
+    pub fn set_UNKNOWN9(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN9;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN9(&self) -> bool {

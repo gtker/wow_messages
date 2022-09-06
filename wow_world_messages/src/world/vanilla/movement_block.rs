@@ -599,9 +599,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_DONE(&mut self) -> Self {
+    pub fn set_DONE(mut self) -> Self {
         self.inner |= SplineFlag::DONE;
-        self.clone()
+        self
     }
 
     pub const fn get_DONE(&self) -> bool {
@@ -620,9 +620,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_FALLING(&mut self) -> Self {
+    pub fn set_FALLING(mut self) -> Self {
         self.inner |= SplineFlag::FALLING;
-        self.clone()
+        self
     }
 
     pub const fn get_FALLING(&self) -> bool {
@@ -641,9 +641,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN3(&mut self) -> Self {
+    pub fn set_UNKNOWN3(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN3;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN3(&self) -> bool {
@@ -662,9 +662,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN4(&mut self) -> Self {
+    pub fn set_UNKNOWN4(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN4;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN4(&self) -> bool {
@@ -683,9 +683,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN5(&mut self) -> Self {
+    pub fn set_UNKNOWN5(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN5;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN5(&self) -> bool {
@@ -704,9 +704,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN6(&mut self) -> Self {
+    pub fn set_UNKNOWN6(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN6;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN6(&self) -> bool {
@@ -725,9 +725,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN7(&mut self) -> Self {
+    pub fn set_UNKNOWN7(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN7;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN7(&self) -> bool {
@@ -746,9 +746,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN8(&mut self) -> Self {
+    pub fn set_UNKNOWN8(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN8;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN8(&self) -> bool {
@@ -767,9 +767,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_RUNMODE(&mut self) -> Self {
+    pub fn set_RUNMODE(mut self) -> Self {
         self.inner |= SplineFlag::RUNMODE;
-        self.clone()
+        self
     }
 
     pub const fn get_RUNMODE(&self) -> bool {
@@ -788,9 +788,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_FLYING(&mut self) -> Self {
+    pub fn set_FLYING(mut self) -> Self {
         self.inner |= SplineFlag::FLYING;
-        self.clone()
+        self
     }
 
     pub const fn get_FLYING(&self) -> bool {
@@ -809,9 +809,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_NO_SPLINE(&mut self) -> Self {
+    pub fn set_NO_SPLINE(mut self) -> Self {
         self.inner |= SplineFlag::NO_SPLINE;
-        self.clone()
+        self
     }
 
     pub const fn get_NO_SPLINE(&self) -> bool {
@@ -830,9 +830,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN12(&mut self) -> Self {
+    pub fn set_UNKNOWN12(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN12;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN12(&self) -> bool {
@@ -851,9 +851,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN13(&mut self) -> Self {
+    pub fn set_UNKNOWN13(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN13;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN13(&self) -> bool {
@@ -872,9 +872,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN14(&mut self) -> Self {
+    pub fn set_UNKNOWN14(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN14;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN14(&self) -> bool {
@@ -893,9 +893,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN15(&mut self) -> Self {
+    pub fn set_UNKNOWN15(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN15;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN15(&self) -> bool {
@@ -914,9 +914,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN16(&mut self) -> Self {
+    pub fn set_UNKNOWN16(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN16;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN16(&self) -> bool {
@@ -935,10 +935,10 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_FINAL_ANGLE(&mut self, final_angle: MovementBlock_SplineFlag_FinalAngle) -> Self {
+    pub fn set_FINAL_ANGLE(mut self, final_angle: MovementBlock_SplineFlag_FinalAngle) -> Self {
         self.inner |= final_angle.as_int();
         self.final_angle = Some(final_angle);
-        self.clone()
+        self
     }
 
     pub const fn get_FINAL_ANGLE(&self) -> Option<&MovementBlock_SplineFlag_FinalAngle> {
@@ -958,9 +958,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN19(&mut self) -> Self {
+    pub fn set_UNKNOWN19(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN19;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN19(&self) -> bool {
@@ -979,9 +979,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_CYCLIC(&mut self) -> Self {
+    pub fn set_CYCLIC(mut self) -> Self {
         self.inner |= SplineFlag::CYCLIC;
-        self.clone()
+        self
     }
 
     pub const fn get_CYCLIC(&self) -> bool {
@@ -1000,9 +1000,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_ENTER_CYCLE(&mut self) -> Self {
+    pub fn set_ENTER_CYCLE(mut self) -> Self {
         self.inner |= SplineFlag::ENTER_CYCLE;
-        self.clone()
+        self
     }
 
     pub const fn get_ENTER_CYCLE(&self) -> bool {
@@ -1021,9 +1021,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_FROZEN(&mut self) -> Self {
+    pub fn set_FROZEN(mut self) -> Self {
         self.inner |= SplineFlag::FROZEN;
-        self.clone()
+        self
     }
 
     pub const fn get_FROZEN(&self) -> bool {
@@ -1042,9 +1042,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN23(&mut self) -> Self {
+    pub fn set_UNKNOWN23(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN23;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN23(&self) -> bool {
@@ -1063,9 +1063,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN24(&mut self) -> Self {
+    pub fn set_UNKNOWN24(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN24;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN24(&self) -> bool {
@@ -1084,9 +1084,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN25(&mut self) -> Self {
+    pub fn set_UNKNOWN25(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN25;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN25(&self) -> bool {
@@ -1105,9 +1105,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN26(&mut self) -> Self {
+    pub fn set_UNKNOWN26(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN26;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN26(&self) -> bool {
@@ -1126,9 +1126,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN27(&mut self) -> Self {
+    pub fn set_UNKNOWN27(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN27;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN27(&self) -> bool {
@@ -1147,9 +1147,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN28(&mut self) -> Self {
+    pub fn set_UNKNOWN28(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN28;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN28(&self) -> bool {
@@ -1168,9 +1168,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN29(&mut self) -> Self {
+    pub fn set_UNKNOWN29(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN29;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN29(&self) -> bool {
@@ -1189,9 +1189,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN30(&mut self) -> Self {
+    pub fn set_UNKNOWN30(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN30;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN30(&self) -> bool {
@@ -1210,9 +1210,9 @@ impl MovementBlock_SplineFlag {
         }
     }
 
-    pub fn set_UNKNOWN31(&mut self) -> Self {
+    pub fn set_UNKNOWN31(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN31;
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN31(&self) -> bool {
@@ -1284,9 +1284,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_FORWARD(&mut self) -> Self {
+    pub fn set_FORWARD(mut self) -> Self {
         self.inner |= MovementFlags::FORWARD;
-        self.clone()
+        self
     }
 
     pub const fn get_FORWARD(&self) -> bool {
@@ -1309,9 +1309,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_BACKWARD(&mut self) -> Self {
+    pub fn set_BACKWARD(mut self) -> Self {
         self.inner |= MovementFlags::BACKWARD;
-        self.clone()
+        self
     }
 
     pub const fn get_BACKWARD(&self) -> bool {
@@ -1334,9 +1334,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_STRAFE_LEFT(&mut self) -> Self {
+    pub fn set_STRAFE_LEFT(mut self) -> Self {
         self.inner |= MovementFlags::STRAFE_LEFT;
-        self.clone()
+        self
     }
 
     pub const fn get_STRAFE_LEFT(&self) -> bool {
@@ -1359,9 +1359,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_STRAFE_RIGHT(&mut self) -> Self {
+    pub fn set_STRAFE_RIGHT(mut self) -> Self {
         self.inner |= MovementFlags::STRAFE_RIGHT;
-        self.clone()
+        self
     }
 
     pub const fn get_STRAFE_RIGHT(&self) -> bool {
@@ -1384,9 +1384,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_TURN_LEFT(&mut self) -> Self {
+    pub fn set_TURN_LEFT(mut self) -> Self {
         self.inner |= MovementFlags::TURN_LEFT;
-        self.clone()
+        self
     }
 
     pub const fn get_TURN_LEFT(&self) -> bool {
@@ -1409,9 +1409,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_TURN_RIGHT(&mut self) -> Self {
+    pub fn set_TURN_RIGHT(mut self) -> Self {
         self.inner |= MovementFlags::TURN_RIGHT;
-        self.clone()
+        self
     }
 
     pub const fn get_TURN_RIGHT(&self) -> bool {
@@ -1434,9 +1434,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_PITCH_UP(&mut self) -> Self {
+    pub fn set_PITCH_UP(mut self) -> Self {
         self.inner |= MovementFlags::PITCH_UP;
-        self.clone()
+        self
     }
 
     pub const fn get_PITCH_UP(&self) -> bool {
@@ -1459,9 +1459,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_PITCH_DOWN(&mut self) -> Self {
+    pub fn set_PITCH_DOWN(mut self) -> Self {
         self.inner |= MovementFlags::PITCH_DOWN;
-        self.clone()
+        self
     }
 
     pub const fn get_PITCH_DOWN(&self) -> bool {
@@ -1484,9 +1484,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_WALK_MODE(&mut self) -> Self {
+    pub fn set_WALK_MODE(mut self) -> Self {
         self.inner |= MovementFlags::WALK_MODE;
-        self.clone()
+        self
     }
 
     pub const fn get_WALK_MODE(&self) -> bool {
@@ -1509,10 +1509,10 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_ON_TRANSPORT(&mut self, on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
+    pub fn set_ON_TRANSPORT(mut self, on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
         self.inner |= MovementFlags::ON_TRANSPORT;
         self.on_transport = Some(on_transport);
-        self.clone()
+        self
     }
 
     pub const fn get_ON_TRANSPORT(&self) -> Option<&MovementBlock_MovementFlags_OnTransport> {
@@ -1536,9 +1536,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_LEVITATING(&mut self) -> Self {
+    pub fn set_LEVITATING(mut self) -> Self {
         self.inner |= MovementFlags::LEVITATING;
-        self.clone()
+        self
     }
 
     pub const fn get_LEVITATING(&self) -> bool {
@@ -1561,9 +1561,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_FIXED_Z(&mut self) -> Self {
+    pub fn set_FIXED_Z(mut self) -> Self {
         self.inner |= MovementFlags::FIXED_Z;
-        self.clone()
+        self
     }
 
     pub const fn get_FIXED_Z(&self) -> bool {
@@ -1586,9 +1586,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_ROOT(&mut self) -> Self {
+    pub fn set_ROOT(mut self) -> Self {
         self.inner |= MovementFlags::ROOT;
-        self.clone()
+        self
     }
 
     pub const fn get_ROOT(&self) -> bool {
@@ -1611,10 +1611,10 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_JUMPING(&mut self, jumping: MovementBlock_MovementFlags_Jumping) -> Self {
+    pub fn set_JUMPING(mut self, jumping: MovementBlock_MovementFlags_Jumping) -> Self {
         self.inner |= MovementFlags::JUMPING;
         self.jumping = Some(jumping);
-        self.clone()
+        self
     }
 
     pub const fn get_JUMPING(&self) -> Option<&MovementBlock_MovementFlags_Jumping> {
@@ -1638,9 +1638,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_FALLINGFAR(&mut self) -> Self {
+    pub fn set_FALLINGFAR(mut self) -> Self {
         self.inner |= MovementFlags::FALLINGFAR;
-        self.clone()
+        self
     }
 
     pub const fn get_FALLINGFAR(&self) -> bool {
@@ -1663,10 +1663,10 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_SWIMMING(&mut self, swimming: MovementBlock_MovementFlags_Swimming) -> Self {
+    pub fn set_SWIMMING(mut self, swimming: MovementBlock_MovementFlags_Swimming) -> Self {
         self.inner |= MovementFlags::SWIMMING;
         self.swimming = Some(swimming);
-        self.clone()
+        self
     }
 
     pub const fn get_SWIMMING(&self) -> Option<&MovementBlock_MovementFlags_Swimming> {
@@ -1690,10 +1690,10 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_SPLINE_ENABLED(&mut self, spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
+    pub fn set_SPLINE_ENABLED(mut self, spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
         self.inner |= MovementFlags::SPLINE_ENABLED;
         self.spline_enabled = Some(spline_enabled);
-        self.clone()
+        self
     }
 
     pub const fn get_SPLINE_ENABLED(&self) -> Option<&MovementBlock_MovementFlags_SplineEnabled> {
@@ -1717,9 +1717,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_CAN_FLY(&mut self) -> Self {
+    pub fn set_CAN_FLY(mut self) -> Self {
         self.inner |= MovementFlags::CAN_FLY;
-        self.clone()
+        self
     }
 
     pub const fn get_CAN_FLY(&self) -> bool {
@@ -1742,9 +1742,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_FLYING(&mut self) -> Self {
+    pub fn set_FLYING(mut self) -> Self {
         self.inner |= MovementFlags::FLYING;
-        self.clone()
+        self
     }
 
     pub const fn get_FLYING(&self) -> bool {
@@ -1767,9 +1767,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_ONTRANSPORT(&mut self) -> Self {
+    pub fn set_ONTRANSPORT(mut self) -> Self {
         self.inner |= MovementFlags::ONTRANSPORT;
-        self.clone()
+        self
     }
 
     pub const fn get_ONTRANSPORT(&self) -> bool {
@@ -1792,10 +1792,10 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_SPLINE_ELEVATION(&mut self, spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
+    pub fn set_SPLINE_ELEVATION(mut self, spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
         self.inner |= MovementFlags::SPLINE_ELEVATION;
         self.spline_elevation = Some(spline_elevation);
-        self.clone()
+        self
     }
 
     pub const fn get_SPLINE_ELEVATION(&self) -> Option<&MovementBlock_MovementFlags_SplineElevation> {
@@ -1819,9 +1819,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_WATERWALKING(&mut self) -> Self {
+    pub fn set_WATERWALKING(mut self) -> Self {
         self.inner |= MovementFlags::WATERWALKING;
-        self.clone()
+        self
     }
 
     pub const fn get_WATERWALKING(&self) -> bool {
@@ -1844,9 +1844,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_SAFE_FALL(&mut self) -> Self {
+    pub fn set_SAFE_FALL(mut self) -> Self {
         self.inner |= MovementFlags::SAFE_FALL;
-        self.clone()
+        self
     }
 
     pub const fn get_SAFE_FALL(&self) -> bool {
@@ -1869,9 +1869,9 @@ impl MovementBlock_MovementFlags {
         }
     }
 
-    pub fn set_HOVER(&mut self) -> Self {
+    pub fn set_HOVER(mut self) -> Self {
         self.inner |= MovementFlags::HOVER;
-        self.clone()
+        self
     }
 
     pub const fn get_HOVER(&self) -> bool {
@@ -2115,9 +2115,9 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_SELF(&mut self) -> Self {
+    pub fn set_SELF(mut self) -> Self {
         self.inner |= UpdateFlag::SELF;
-        self.clone()
+        self
     }
 
     pub const fn get_SELF(&self) -> bool {
@@ -2140,10 +2140,10 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_TRANSPORT(&mut self, transport: MovementBlock_UpdateFlag_Transport) -> Self {
+    pub fn set_TRANSPORT(mut self, transport: MovementBlock_UpdateFlag_Transport) -> Self {
         self.inner |= UpdateFlag::TRANSPORT;
         self.transport = Some(transport);
-        self.clone()
+        self
     }
 
     pub const fn get_TRANSPORT(&self) -> Option<&MovementBlock_UpdateFlag_Transport> {
@@ -2167,10 +2167,10 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_MELEE_ATTACKING(&mut self, melee_attacking: MovementBlock_UpdateFlag_MeleeAttacking) -> Self {
+    pub fn set_MELEE_ATTACKING(mut self, melee_attacking: MovementBlock_UpdateFlag_MeleeAttacking) -> Self {
         self.inner |= UpdateFlag::MELEE_ATTACKING;
         self.melee_attacking = Some(melee_attacking);
-        self.clone()
+        self
     }
 
     pub const fn get_MELEE_ATTACKING(&self) -> Option<&MovementBlock_UpdateFlag_MeleeAttacking> {
@@ -2194,10 +2194,10 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_HIGH_GUID(&mut self, high_guid: MovementBlock_UpdateFlag_HighGuid) -> Self {
+    pub fn set_HIGH_GUID(mut self, high_guid: MovementBlock_UpdateFlag_HighGuid) -> Self {
         self.inner |= UpdateFlag::HIGH_GUID;
         self.high_guid = Some(high_guid);
-        self.clone()
+        self
     }
 
     pub const fn get_HIGH_GUID(&self) -> Option<&MovementBlock_UpdateFlag_HighGuid> {
@@ -2221,10 +2221,10 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_ALL(&mut self, all: MovementBlock_UpdateFlag_All) -> Self {
+    pub fn set_ALL(mut self, all: MovementBlock_UpdateFlag_All) -> Self {
         self.inner |= UpdateFlag::ALL;
         self.all = Some(all);
-        self.clone()
+        self
     }
 
     pub const fn get_ALL(&self) -> Option<&MovementBlock_UpdateFlag_All> {
@@ -2248,10 +2248,10 @@ impl MovementBlock_UpdateFlag {
         }
     }
 
-    pub fn set_LIVING(&mut self, living: MovementBlock_UpdateFlag_Living) -> Self {
+    pub fn set_LIVING(mut self, living: MovementBlock_UpdateFlag_Living) -> Self {
         self.inner |= living.as_int();
         self.living = Some(living);
-        self.clone()
+        self
     }
 
     pub const fn get_LIVING(&self) -> Option<&MovementBlock_UpdateFlag_Living> {

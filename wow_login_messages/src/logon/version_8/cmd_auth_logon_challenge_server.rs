@@ -700,10 +700,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
         }
     }
 
-    pub fn set_PIN(&mut self, pin: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin) -> Self {
+    pub fn set_PIN(mut self, pin: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin) -> Self {
         self.inner |= SecurityFlag::PIN;
         self.pin = Some(pin);
-        self.clone()
+        self
     }
 
     pub const fn get_PIN(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin> {
@@ -725,10 +725,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
         }
     }
 
-    pub fn set_UNKNOWN0(&mut self, unknown0: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0) -> Self {
+    pub fn set_UNKNOWN0(mut self, unknown0: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0) -> Self {
         self.inner |= SecurityFlag::UNKNOWN0;
         self.unknown0 = Some(unknown0);
-        self.clone()
+        self
     }
 
     pub const fn get_UNKNOWN0(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0> {
@@ -750,10 +750,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
         }
     }
 
-    pub fn set_AUTHENTICATOR(&mut self, authenticator: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator) -> Self {
+    pub fn set_AUTHENTICATOR(mut self, authenticator: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator) -> Self {
         self.inner |= SecurityFlag::AUTHENTICATOR;
         self.authenticator = Some(authenticator);
-        self.clone()
+        self
     }
 
     pub const fn get_AUTHENTICATOR(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator> {
