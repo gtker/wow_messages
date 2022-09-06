@@ -1,0 +1,14 @@
+#tag_all versions "1";
+
+enum E : u8 {
+    ONE = 1;
+    TWO = 2;
+    FOUR = 4;
+}
+
+struct T {
+    E enum;
+    if (enum & ONE) {
+        u8 simple;
+    }
+}

@@ -38,6 +38,24 @@ fn overwrite(s: &Writer, name: &str) {
 const VERSION: Version = Version::World(WorldVersion::Minor(1, 12));
 
 #[test]
+#[should_panic]
+fn flag_equals_must_err() {
+    let mut o = Objects::empty();
+    load_files(Path::new("tests/error_flag.wowm"), &mut o);
+
+    o.check_values();
+}
+
+#[test]
+#[should_panic]
+fn enum_equals_must_err() {
+    let mut o = Objects::empty();
+    load_files(Path::new("tests/error_enum.wowm"), &mut o);
+
+    o.check_values();
+}
+
+#[test]
 fn simple_enum() {
     let o = get_all_impl_items();
 

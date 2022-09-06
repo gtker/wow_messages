@@ -413,6 +413,10 @@ impl Objects {
             e.set_objects_used_in(objects_used_in);
         }
 
+        for e in self.all_containers() {
+            e.check_if_statement_operators(self);
+        }
+
         Self::check_versions(self.all_containers(), self.all_definers());
 
         self.add_rust_views();

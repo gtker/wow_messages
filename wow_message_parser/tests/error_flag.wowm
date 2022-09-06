@@ -1,0 +1,14 @@
+#tag_all versions "1";
+
+flag F : u8 {
+    ONE = 1;
+    TWO = 2;
+    FOUR = 4;
+}
+
+struct T {
+    F flag;
+    if (flag == ONE) {
+        u8 simple;
+    }
+}

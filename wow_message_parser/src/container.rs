@@ -459,6 +459,57 @@ impl Container {
         }
     }
 
+    pub fn check_if_statement_operators(&self, o: &Objects) {
+        fn inner(m: &StructMember, e: &Container, o: &Objects) {
+            match m {
+                StructMember::IfStatement(statement) => {
+                    let ty = match e.get_field_ty(statement.name()) {
+                        Type::Identifier { s, .. } => s,
+                        _ => unreachable!(),
+                    };
+
+                    let definer = o.get_definer(ty, e.tags());
+                    match definer.definer_ty() {
+                        DefinerType::Enum => {
+                            for c in statement.get_conditional().equations() {
+                                match c {
+                                    Equation::Equals { .. } | Equation::NotEquals { .. } => {}
+                                    Equation::BitwiseAnd { .. } => {
+                                        panic!("enum has bitwise and")
+                                    }
+                                }
+                            }
+                        }
+                        DefinerType::Flag => {
+                            for c in statement.get_conditional().equations() {
+                                match c {
+                                    Equation::Equals { .. } | Equation::NotEquals { .. } => {
+                                        panic!("flag has equals or not equals")
+                                    }
+                                    Equation::BitwiseAnd { .. } => {}
+                                }
+                            }
+                        }
+                    }
+
+                    for m in statement.all_members() {
+                        inner(m, e, o);
+                    }
+                }
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        inner(m, e, o);
+                    }
+                }
+                StructMember::Definition(_) => {}
+            }
+        }
+
+        for m in self.fields() {
+            inner(m, self, o);
+        }
+    }
+
     pub fn tags(&self) -> &Tags {
         &self.tags
     }
