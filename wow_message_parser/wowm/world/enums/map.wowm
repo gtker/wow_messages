@@ -1,4 +1,3 @@
-#tag_all versions "1.12";
 enum Map : u32 {
     EASTERN_KINGDOMS = 0 {
         display = "Eastern Kingdoms";
@@ -134,4 +133,417 @@ enum Map : u32 {
     }
 } {
     rust_base_type = "true";
+    versions = "1.12";
 }
+
+enum Map : u32 {
+    EASTERN_KINGDOMS = 0 {
+        display = "Eastern Kingdoms";
+    }
+    KALIMDOR = 1 {
+        display = "Kalimdor";
+    }
+    TESTING = 13 {
+        display = "Testing";
+    }
+    SCOTT_TEST = 25 {
+        display = "Scott Test";
+    }
+    ALTERAC_VALLEY = 30 {
+        display = "Alterac Valley";
+    }
+    SHADOWFANG_KEEP = 33 {
+        display = "Shadowfang Keep";
+    }
+    STORMWIND_STOCKADE = 34 {
+        display = "Stormwind Stockade";
+    }
+    STORMWINDPRISON = 35 {
+        display = "StormwindPrison";
+    }
+    DEADMINES = 36 {
+        display = "Deadmines";
+    }
+    AZSHARA_CRATER = 37 {
+        display = "Azshara Crater";
+    }
+    COLLINS_TEST = 42 {
+        display = "Collin's Test";
+    }
+    WAILING_CAVERNS = 43 {
+        display = "Wailing Caverns";
+    }
+    MONASTERY = 44 {
+        display = "Monastery";
+    }
+    RAZORFEN_KRAUL = 47 {
+        display = "Razorfen Kraul";
+    }
+    BLACKFATHOM_DEEPS = 48 {
+        display = "Blackfathom Deeps";
+    }
+    ULDAMAN = 70 {
+        display = "Uldaman";
+    }
+    GNOMEREGAN = 90 {
+        display = "Gnomeregan";
+    }
+    SUNKEN_TEMPLE = 109 {
+        display = "Sunken Temple";
+    }
+    RAZORFEN_DOWNS = 129 {
+        display = "Razorfen Downs";
+    }
+    EMERALD_DREAM = 169 {
+        display = "Emerald Dream";
+    }
+    SCARLET_MONASTERY = 189 {
+        display = "Scarlet Monastery";
+    }
+    ZUL_FARRAK = 209 {
+        display = "Zul'Farrak";
+    }
+    BLACKROCK_SPIRE = 229 {
+        display = "Blackrock Spire";
+    }
+    BLACKROCK_DEPTHS = 230 {
+        display = "Blackrock Depths";
+    }
+    ONYXIAS_LAIR = 249 {
+        display = "Onyxia's Lair";
+    }
+    OPENING_OF_THE_DARK_PORTAL = 269 {
+        display = "Opening of the Dark Portal";
+    }
+    SCHOLOMANCE = 289 {
+        display = "Scholomance";
+    }
+    ZUL_GURUB = 309 {
+        display = "Zul'Gurub";
+    }
+    STRATHOLME = 329 {
+        display = "Stratholme";
+    }
+    MARAUDON = 349 {
+        display = "Maraudon";
+    }
+    DEEPRUN_TRAM = 369 {
+        display = "Deeprun Tram";
+    }
+    RAGEFIRE_CHASM = 389 {
+        display = "Ragefire Chasm";
+    }
+    MOLTEN_CORE = 409 {
+        display = "Molten Core";
+    }
+    DIRE_MAUL = 429 {
+        display = "Dire Maul";
+    }
+    ALLIANCE_PVP_BARRACKS = 449 {
+        display = "Alliance PVP Barracks";
+    }
+    HORDE_PVP_BARRACKS = 450 {
+        display = "Horde PVP Barracks";
+    }
+    DEVELOPMENT_LAND = 451 {
+        display = "Development Land";
+    }
+    BLACKWING_LAIR = 469 {
+        display = "Blackwing Lair";
+    }
+    WARSONG_GULCH = 489 {
+        display = "Warsong Gulch";
+    }
+    RUINS_OF_AHN_QIRAJ = 509 {
+        display = "Ruins of Ahn'Qiraj";
+    }
+    ARATHI_BASIN = 529 {
+        display = "Arathi Basin";
+    }
+    OUTLAND = 530 {
+        display = "Outland";
+    }
+    AHN_QIRAJ_TEMPLE = 531 {
+        display = "Ahn'Qiraj Temple";
+    }
+    KARAZHAN = 532 {
+        display = "Karazhan";
+    }
+    NAXXRAMAS = 533 {
+        display = "Naxxramas";
+    }
+    THE_BATTLE_FOR_MOUNT_HYJAL = 534 {
+        display = "The Battle for Mount Hyjal";
+    }
+    HELLFIRE_CITADEL_THE_SHATTERED_HALLS = 540 {
+        display = "Hellfire Citadel: The Shattered Halls";
+    }
+    HELLFIRE_CITADEL_THE_BLOOD_FURNACE = 542 {
+        display = "Hellfire Citadel: The Blood Furnace";
+    }
+    HELLFIRE_CITADEL_RAMPARTS = 543 {
+        display = "Hellfire Citadel: Ramparts";
+    }
+    MAGTHERIDONS_LAIR = 544 {
+        display = "Magtheridon's Lair";
+    }
+    COILFANG_THE_STEAMVAULT = 545 {
+        display = "Coilfang: The Steamvault";
+    }
+    COILFANG_THE_UNDERBOG = 546 {
+        display = "Coilfang: The Underbog";
+    }
+    COILFANG_THE_SLAVE_PENS = 547 {
+        display = "Coilfang: The Slave Pens";
+    }
+    COILFANG_SERPENTSHRINE_CAVERN = 548 {
+        display = "Coilfang: Serpentshrine Cavern";
+    }
+    TEMPEST_KEEP = 550 {
+        display = "Tempest Keep";
+    }
+    TEMPEST_KEEP_THE_ARCATRAZ = 552 {
+        display = "Tempest Keep: The Arcatraz";
+    }
+    TEMPEST_KEEP_THE_BOTANICA = 553 {
+        display = "Tempest Keep: The Botanica";
+    }
+    TEMPEST_KEEP_THE_MECHANAR = 554 {
+        display = "Tempest Keep: The Mechanar";
+    }
+    AUCHINDOUN_SHADOW_LABYRINTH = 555 {
+        display = "Auchindoun: Shadow Labyrinth";
+    }
+    AUCHINDOUN_SETHEKK_HALLS = 556 {
+        display = "Auchindoun: Sethekk Halls";
+    }
+    AUCHINDOUN_MANA_TOMBS = 557 {
+        display = "Auchindoun: Mana-Tombs";
+    }
+    AUCHINDOUN_AUCHENAI_CRYPTS = 558 {
+        display = "Auchindoun: Auchenai Crypts";
+    }
+    NAGRAND_ARENA = 559 {
+        display = "Nagrand Arena";
+    }
+    THE_ESCAPE_FROM_DURNHOLDE = 560 {
+        display = "The Escape From Durnholde";
+    }
+    BLADES_EDGE_ARENA = 562 {
+        display = "Blade's Edge Arena";
+    }
+    BLACK_TEMPLE = 564 {
+        display = "Black Temple";
+    }
+    GRUULS_LAIR = 565 {
+        display = "Gruul's Lair";
+    }
+    EYE_OF_THE_STORM = 566 {
+        display = "Eye of the Storm";
+    }
+    ZUL_AMAN = 568 {
+        display = "Zul'Aman";
+    }
+    NORTHREND = 571 {
+        display = "Northrend";
+    }
+    RUINS_OF_LORDAERON = 572 {
+        display = "Ruins of Lordaeron";
+    }
+    EXTERIORTEST = 573 {
+        display = "ExteriorTest";
+    }
+    UTGARDE_KEEP = 574 {
+        display = "Utgarde Keep";
+    }
+    UTGARDE_PINNACLE = 575 {
+        display = "Utgarde Pinnacle";
+    }
+    THE_NEXUS = 576 {
+        display = "The Nexus";
+    }
+    THE_OCULUS = 578 {
+        display = "The Oculus";
+    }
+    THE_SUNWELL = 580 {
+        display = "The Sunwell";
+    }
+    TRANSPORT_RUT_THERAN_TO_AUBERDINE = 582 {
+        display = "Transport: Rut'theran to Auberdine";
+    }
+    TRANSPORT_MENETHIL_TO_THERAMORE = 584 {
+        display = "Transport: Menethil to Theramore";
+    }
+    MAGISTERS_TERRACE = 585 {
+        display = "Magister's Terrace";
+    }
+    TRANSPORT_EXODAR_TO_AUBERDINE = 586 {
+        display = "Transport: Exodar to Auberdine";
+    }
+    TRANSPORT_FEATHERMOON_FERRY = 587 {
+        display = "Transport: Feathermoon Ferry";
+    }
+    TRANSPORT_MENETHIL_TO_AUBERDINE = 588 {
+        display = "Transport: Menethil to Auberdine";
+    }
+    TRANSPORT_ORGRIMMAR_TO_GROM_GOL = 589 {
+        display = "Transport: Orgrimmar to Grom'Gol";
+    }
+    TRANSPORT_GROM_GOL_TO_UNDERCITY = 590 {
+        display = "Transport: Grom'Gol to Undercity";
+    }
+    TRANSPORT_UNDERCITY_TO_ORGRIMMAR = 591 {
+        display = "Transport: Undercity to Orgrimmar";
+    }
+    TRANSPORT_BOREAN_TUNDRA_TEST = 592 {
+        display = "Transport: Borean Tundra Test";
+    }
+    TRANSPORT_BOOTY_BAY_TO_RATCHET = 593 {
+        display = "Transport: Booty Bay to Ratchet";
+    }
+    TRANSPORT_HOWLING_FJORD_SISTER_MERCY_QUEST = 594 {
+        display = "Transport: Howling Fjord Sister Mercy (Quest)";
+    }
+    THE_CULLING_OF_STRATHOLME = 595 {
+        display = "The Culling of Stratholme";
+    }
+    TRANSPORT_NAGLFAR = 596 {
+        display = "Transport: Naglfar";
+    }
+    CRAIG_TEST = 597 {
+        display = "Craig Test";
+    }
+    SUNWELL_FIX = 598 {
+        display = "Sunwell Fix";
+    }
+    HALLS_OF_STONE = 599 {
+        display = "Halls of Stone";
+    }
+    DRAK_THARON_KEEP = 600 {
+        display = "Drak'Tharon Keep";
+    }
+    AZJOL_NERUB = 601 {
+        display = "Azjol-Nerub";
+    }
+    HALLS_OF_LIGHTNING = 602 {
+        display = "Halls of Lightning";
+    }
+    ULDUAR = 603 {
+        display = "Ulduar";
+    }
+    GUNDRAK = 604 {
+        display = "Gundrak";
+    }
+    DEVELOPMENT_LAND_NON_WEIGHTED_TEXTURES = 605 {
+        display = "Development Land (non-weighted textures)";
+    }
+    QA_AND_DVD = 606 {
+        display = "QA and DVD";
+    }
+    STRAND_OF_THE_ANCIENTS = 607 {
+        display = "Strand of the Ancients";
+    }
+    VIOLET_HOLD = 608 {
+        display = "Violet Hold";
+    }
+    EBON_HOLD = 609 {
+        display = "Ebon Hold";
+    }
+    TRANSPORT_TIRISFAL_TO_VENGEANCE_LANDING = 610 {
+        display = "Transport: Tirisfal to Vengeance Landing";
+    }
+    TRANSPORT_MENETHIL_TO_VALGARDE = 612 {
+        display = "Transport: Menethil to Valgarde";
+    }
+    TRANSPORT_ORGRIMMAR_TO_WARSONG_HOLD = 613 {
+        display = "Transport: Orgrimmar to Warsong Hold";
+    }
+    TRANSPORT_STORMWIND_TO_VALIANCE_KEEP = 614 {
+        display = "Transport: Stormwind to Valiance Keep";
+    }
+    THE_OBSIDIAN_SANCTUM = 615 {
+        display = "The Obsidian Sanctum";
+    }
+    THE_EYE_OF_ETERNITY = 616 {
+        display = "The Eye of Eternity";
+    }
+    DALARAN_SEWERS = 617 {
+        display = "Dalaran Sewers";
+    }
+    THE_RING_OF_VALOR = 618 {
+        display = "The Ring of Valor";
+    }
+    AHN_KAHET_THE_OLD_KINGDOM = 619 {
+        display = "Ahn'kahet: The Old Kingdom";
+    }
+    TRANSPORT_MOA_KI_TO_UNU_PE = 620 {
+        display = "Transport: Moa'ki to Unu'pe";
+    }
+    TRANSPORT_MOA_KI_TO_KAMAGUA = 621 {
+        display = "Transport: Moa'ki to Kamagua";
+    }
+    TRANSPORT_ORGRIMS_HAMMER = 622 {
+        display = "Transport: Orgrim's Hammer";
+    }
+    TRANSPORT_THE_SKYBREAKER = 623 {
+        display = "Transport: The Skybreaker";
+    }
+    VAULT_OF_ARCHAVON = 624 {
+        display = "Vault of Archavon";
+    }
+    ISLE_OF_CONQUEST = 628 {
+        display = "Isle of Conquest";
+    }
+    ICECROWN_CITADEL = 631 {
+        display = "Icecrown Citadel";
+    }
+    THE_FORGE_OF_SOULS = 632 {
+        display = "The Forge of Souls";
+    }
+    TRANSPORT_ALLIANCE_AIRSHIP_BG = 641 {
+        display = "Transport: Alliance Airship BG";
+    }
+    TRANSPORT_HORDEAIRSHIPBG = 642 {
+        display = "Transport: HordeAirshipBG";
+    }
+    TRANSPORT_ORGRIMMAR_TO_THUNDER_BLUFF = 647 {
+        display = "Transport: Orgrimmar to Thunder Bluff";
+    }
+    TRIAL_OF_THE_CRUSADER = 649 {
+        display = "Trial of the Crusader";
+    }
+    TRIAL_OF_THE_CHAMPION = 650 {
+        display = "Trial of the Champion";
+    }
+    PIT_OF_SARON = 658 {
+        display = "Pit of Saron";
+    }
+    HALLS_OF_REFLECTION = 668 {
+        display = "Halls of Reflection";
+    }
+    TRANSPORT_THE_SKYBREAKER_ICECROWN_CITADEL_RAID = 672 {
+        display = "Transport: The Skybreaker (Icecrown Citadel Raid)";
+    }
+    TRANSPORT_ORGRIMS_HAMMER_ICECROWN_CITADEL_RAID = 673 {
+        display = "Transport: Orgrim's Hammer (Icecrown Citadel Raid)";
+    }
+    TRANSPORT_THE_SKYBREAKER_IC_DUNGEON = 712 {
+        display = "Transport: The Skybreaker (IC Dungeon)";
+    }
+    TRANSPORT_ORGRIMS_HAMMER_IC_DUNGEON = 713 {
+        display = "Transport: Orgrim's Hammer (IC Dungeon)";
+    }
+    TRASNPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID = 718 {
+        display = "Trasnport: The Mighty Wind (Icecrown Citadel Raid)";
+    }
+    STORMWIND = 723 {
+        display = "Stormwind";
+    }
+    THE_RUBY_SANCTUM = 724 {
+        display = "The Ruby Sanctum";
+    }
+} {
+    rust_base_type = "true";
+    versions = "3.3.5";
+}
+

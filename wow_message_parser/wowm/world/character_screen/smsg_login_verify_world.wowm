@@ -40,7 +40,7 @@ smsg SMSG_LOGIN_VERIFY_WORLD = 0x236 {
 }
 
 smsg SMSG_LOGIN_VERIFY_WORLD = 0x236 {
-    u32 map;
+    Map map;
     Vector3d position;
     f32 orientation;
 } {

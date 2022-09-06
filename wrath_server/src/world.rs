@@ -99,7 +99,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         facial_hair: 0,
                         level: 1,
                         area: 1,
-                        map: 1,
+                        map: Map::Kalimdor,
                         position: Vector3d {
                             x: 1.0,
                             y: 1.0,

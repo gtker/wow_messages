@@ -23467,7 +23467,1401 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/map.wowm",
-        "start_position": 2
+        "start_position": 1
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "Map",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "EASTERN_KINGDOMS",
+          "value": {
+            "int": 0,
+            "original": "0"
+          },
+          "tags": {
+            "display": "Eastern Kingdoms"
+          }
+        },
+        {
+          "name": "KALIMDOR",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {
+            "display": "Kalimdor"
+          }
+        },
+        {
+          "name": "TESTING",
+          "value": {
+            "int": 13,
+            "original": "13"
+          },
+          "tags": {
+            "display": "Testing"
+          }
+        },
+        {
+          "name": "SCOTT_TEST",
+          "value": {
+            "int": 25,
+            "original": "25"
+          },
+          "tags": {
+            "display": "Scott Test"
+          }
+        },
+        {
+          "name": "ALTERAC_VALLEY",
+          "value": {
+            "int": 30,
+            "original": "30"
+          },
+          "tags": {
+            "display": "Alterac Valley"
+          }
+        },
+        {
+          "name": "SHADOWFANG_KEEP",
+          "value": {
+            "int": 33,
+            "original": "33"
+          },
+          "tags": {
+            "display": "Shadowfang Keep"
+          }
+        },
+        {
+          "name": "STORMWIND_STOCKADE",
+          "value": {
+            "int": 34,
+            "original": "34"
+          },
+          "tags": {
+            "display": "Stormwind Stockade"
+          }
+        },
+        {
+          "name": "STORMWINDPRISON",
+          "value": {
+            "int": 35,
+            "original": "35"
+          },
+          "tags": {
+            "display": "StormwindPrison"
+          }
+        },
+        {
+          "name": "DEADMINES",
+          "value": {
+            "int": 36,
+            "original": "36"
+          },
+          "tags": {
+            "display": "Deadmines"
+          }
+        },
+        {
+          "name": "AZSHARA_CRATER",
+          "value": {
+            "int": 37,
+            "original": "37"
+          },
+          "tags": {
+            "display": "Azshara Crater"
+          }
+        },
+        {
+          "name": "COLLINS_TEST",
+          "value": {
+            "int": 42,
+            "original": "42"
+          },
+          "tags": {
+            "display": "Collin's Test"
+          }
+        },
+        {
+          "name": "WAILING_CAVERNS",
+          "value": {
+            "int": 43,
+            "original": "43"
+          },
+          "tags": {
+            "display": "Wailing Caverns"
+          }
+        },
+        {
+          "name": "MONASTERY",
+          "value": {
+            "int": 44,
+            "original": "44"
+          },
+          "tags": {
+            "display": "Monastery"
+          }
+        },
+        {
+          "name": "RAZORFEN_KRAUL",
+          "value": {
+            "int": 47,
+            "original": "47"
+          },
+          "tags": {
+            "display": "Razorfen Kraul"
+          }
+        },
+        {
+          "name": "BLACKFATHOM_DEEPS",
+          "value": {
+            "int": 48,
+            "original": "48"
+          },
+          "tags": {
+            "display": "Blackfathom Deeps"
+          }
+        },
+        {
+          "name": "ULDAMAN",
+          "value": {
+            "int": 70,
+            "original": "70"
+          },
+          "tags": {
+            "display": "Uldaman"
+          }
+        },
+        {
+          "name": "GNOMEREGAN",
+          "value": {
+            "int": 90,
+            "original": "90"
+          },
+          "tags": {
+            "display": "Gnomeregan"
+          }
+        },
+        {
+          "name": "SUNKEN_TEMPLE",
+          "value": {
+            "int": 109,
+            "original": "109"
+          },
+          "tags": {
+            "display": "Sunken Temple"
+          }
+        },
+        {
+          "name": "RAZORFEN_DOWNS",
+          "value": {
+            "int": 129,
+            "original": "129"
+          },
+          "tags": {
+            "display": "Razorfen Downs"
+          }
+        },
+        {
+          "name": "EMERALD_DREAM",
+          "value": {
+            "int": 169,
+            "original": "169"
+          },
+          "tags": {
+            "display": "Emerald Dream"
+          }
+        },
+        {
+          "name": "SCARLET_MONASTERY",
+          "value": {
+            "int": 189,
+            "original": "189"
+          },
+          "tags": {
+            "display": "Scarlet Monastery"
+          }
+        },
+        {
+          "name": "ZUL_FARRAK",
+          "value": {
+            "int": 209,
+            "original": "209"
+          },
+          "tags": {
+            "display": "Zul'Farrak"
+          }
+        },
+        {
+          "name": "BLACKROCK_SPIRE",
+          "value": {
+            "int": 229,
+            "original": "229"
+          },
+          "tags": {
+            "display": "Blackrock Spire"
+          }
+        },
+        {
+          "name": "BLACKROCK_DEPTHS",
+          "value": {
+            "int": 230,
+            "original": "230"
+          },
+          "tags": {
+            "display": "Blackrock Depths"
+          }
+        },
+        {
+          "name": "ONYXIAS_LAIR",
+          "value": {
+            "int": 249,
+            "original": "249"
+          },
+          "tags": {
+            "display": "Onyxia's Lair"
+          }
+        },
+        {
+          "name": "OPENING_OF_THE_DARK_PORTAL",
+          "value": {
+            "int": 269,
+            "original": "269"
+          },
+          "tags": {
+            "display": "Opening of the Dark Portal"
+          }
+        },
+        {
+          "name": "SCHOLOMANCE",
+          "value": {
+            "int": 289,
+            "original": "289"
+          },
+          "tags": {
+            "display": "Scholomance"
+          }
+        },
+        {
+          "name": "ZUL_GURUB",
+          "value": {
+            "int": 309,
+            "original": "309"
+          },
+          "tags": {
+            "display": "Zul'Gurub"
+          }
+        },
+        {
+          "name": "STRATHOLME",
+          "value": {
+            "int": 329,
+            "original": "329"
+          },
+          "tags": {
+            "display": "Stratholme"
+          }
+        },
+        {
+          "name": "MARAUDON",
+          "value": {
+            "int": 349,
+            "original": "349"
+          },
+          "tags": {
+            "display": "Maraudon"
+          }
+        },
+        {
+          "name": "DEEPRUN_TRAM",
+          "value": {
+            "int": 369,
+            "original": "369"
+          },
+          "tags": {
+            "display": "Deeprun Tram"
+          }
+        },
+        {
+          "name": "RAGEFIRE_CHASM",
+          "value": {
+            "int": 389,
+            "original": "389"
+          },
+          "tags": {
+            "display": "Ragefire Chasm"
+          }
+        },
+        {
+          "name": "MOLTEN_CORE",
+          "value": {
+            "int": 409,
+            "original": "409"
+          },
+          "tags": {
+            "display": "Molten Core"
+          }
+        },
+        {
+          "name": "DIRE_MAUL",
+          "value": {
+            "int": 429,
+            "original": "429"
+          },
+          "tags": {
+            "display": "Dire Maul"
+          }
+        },
+        {
+          "name": "ALLIANCE_PVP_BARRACKS",
+          "value": {
+            "int": 449,
+            "original": "449"
+          },
+          "tags": {
+            "display": "Alliance PVP Barracks"
+          }
+        },
+        {
+          "name": "HORDE_PVP_BARRACKS",
+          "value": {
+            "int": 450,
+            "original": "450"
+          },
+          "tags": {
+            "display": "Horde PVP Barracks"
+          }
+        },
+        {
+          "name": "DEVELOPMENT_LAND",
+          "value": {
+            "int": 451,
+            "original": "451"
+          },
+          "tags": {
+            "display": "Development Land"
+          }
+        },
+        {
+          "name": "BLACKWING_LAIR",
+          "value": {
+            "int": 469,
+            "original": "469"
+          },
+          "tags": {
+            "display": "Blackwing Lair"
+          }
+        },
+        {
+          "name": "WARSONG_GULCH",
+          "value": {
+            "int": 489,
+            "original": "489"
+          },
+          "tags": {
+            "display": "Warsong Gulch"
+          }
+        },
+        {
+          "name": "RUINS_OF_AHN_QIRAJ",
+          "value": {
+            "int": 509,
+            "original": "509"
+          },
+          "tags": {
+            "display": "Ruins of Ahn'Qiraj"
+          }
+        },
+        {
+          "name": "ARATHI_BASIN",
+          "value": {
+            "int": 529,
+            "original": "529"
+          },
+          "tags": {
+            "display": "Arathi Basin"
+          }
+        },
+        {
+          "name": "OUTLAND",
+          "value": {
+            "int": 530,
+            "original": "530"
+          },
+          "tags": {
+            "display": "Outland"
+          }
+        },
+        {
+          "name": "AHN_QIRAJ_TEMPLE",
+          "value": {
+            "int": 531,
+            "original": "531"
+          },
+          "tags": {
+            "display": "Ahn'Qiraj Temple"
+          }
+        },
+        {
+          "name": "KARAZHAN",
+          "value": {
+            "int": 532,
+            "original": "532"
+          },
+          "tags": {
+            "display": "Karazhan"
+          }
+        },
+        {
+          "name": "NAXXRAMAS",
+          "value": {
+            "int": 533,
+            "original": "533"
+          },
+          "tags": {
+            "display": "Naxxramas"
+          }
+        },
+        {
+          "name": "THE_BATTLE_FOR_MOUNT_HYJAL",
+          "value": {
+            "int": 534,
+            "original": "534"
+          },
+          "tags": {
+            "display": "The Battle for Mount Hyjal"
+          }
+        },
+        {
+          "name": "HELLFIRE_CITADEL_THE_SHATTERED_HALLS",
+          "value": {
+            "int": 540,
+            "original": "540"
+          },
+          "tags": {
+            "display": "Hellfire Citadel: The Shattered Halls"
+          }
+        },
+        {
+          "name": "HELLFIRE_CITADEL_THE_BLOOD_FURNACE",
+          "value": {
+            "int": 542,
+            "original": "542"
+          },
+          "tags": {
+            "display": "Hellfire Citadel: The Blood Furnace"
+          }
+        },
+        {
+          "name": "HELLFIRE_CITADEL_RAMPARTS",
+          "value": {
+            "int": 543,
+            "original": "543"
+          },
+          "tags": {
+            "display": "Hellfire Citadel: Ramparts"
+          }
+        },
+        {
+          "name": "MAGTHERIDONS_LAIR",
+          "value": {
+            "int": 544,
+            "original": "544"
+          },
+          "tags": {
+            "display": "Magtheridon's Lair"
+          }
+        },
+        {
+          "name": "COILFANG_THE_STEAMVAULT",
+          "value": {
+            "int": 545,
+            "original": "545"
+          },
+          "tags": {
+            "display": "Coilfang: The Steamvault"
+          }
+        },
+        {
+          "name": "COILFANG_THE_UNDERBOG",
+          "value": {
+            "int": 546,
+            "original": "546"
+          },
+          "tags": {
+            "display": "Coilfang: The Underbog"
+          }
+        },
+        {
+          "name": "COILFANG_THE_SLAVE_PENS",
+          "value": {
+            "int": 547,
+            "original": "547"
+          },
+          "tags": {
+            "display": "Coilfang: The Slave Pens"
+          }
+        },
+        {
+          "name": "COILFANG_SERPENTSHRINE_CAVERN",
+          "value": {
+            "int": 548,
+            "original": "548"
+          },
+          "tags": {
+            "display": "Coilfang: Serpentshrine Cavern"
+          }
+        },
+        {
+          "name": "TEMPEST_KEEP",
+          "value": {
+            "int": 550,
+            "original": "550"
+          },
+          "tags": {
+            "display": "Tempest Keep"
+          }
+        },
+        {
+          "name": "TEMPEST_KEEP_THE_ARCATRAZ",
+          "value": {
+            "int": 552,
+            "original": "552"
+          },
+          "tags": {
+            "display": "Tempest Keep: The Arcatraz"
+          }
+        },
+        {
+          "name": "TEMPEST_KEEP_THE_BOTANICA",
+          "value": {
+            "int": 553,
+            "original": "553"
+          },
+          "tags": {
+            "display": "Tempest Keep: The Botanica"
+          }
+        },
+        {
+          "name": "TEMPEST_KEEP_THE_MECHANAR",
+          "value": {
+            "int": 554,
+            "original": "554"
+          },
+          "tags": {
+            "display": "Tempest Keep: The Mechanar"
+          }
+        },
+        {
+          "name": "AUCHINDOUN_SHADOW_LABYRINTH",
+          "value": {
+            "int": 555,
+            "original": "555"
+          },
+          "tags": {
+            "display": "Auchindoun: Shadow Labyrinth"
+          }
+        },
+        {
+          "name": "AUCHINDOUN_SETHEKK_HALLS",
+          "value": {
+            "int": 556,
+            "original": "556"
+          },
+          "tags": {
+            "display": "Auchindoun: Sethekk Halls"
+          }
+        },
+        {
+          "name": "AUCHINDOUN_MANA_TOMBS",
+          "value": {
+            "int": 557,
+            "original": "557"
+          },
+          "tags": {
+            "display": "Auchindoun: Mana-Tombs"
+          }
+        },
+        {
+          "name": "AUCHINDOUN_AUCHENAI_CRYPTS",
+          "value": {
+            "int": 558,
+            "original": "558"
+          },
+          "tags": {
+            "display": "Auchindoun: Auchenai Crypts"
+          }
+        },
+        {
+          "name": "NAGRAND_ARENA",
+          "value": {
+            "int": 559,
+            "original": "559"
+          },
+          "tags": {
+            "display": "Nagrand Arena"
+          }
+        },
+        {
+          "name": "THE_ESCAPE_FROM_DURNHOLDE",
+          "value": {
+            "int": 560,
+            "original": "560"
+          },
+          "tags": {
+            "display": "The Escape From Durnholde"
+          }
+        },
+        {
+          "name": "BLADES_EDGE_ARENA",
+          "value": {
+            "int": 562,
+            "original": "562"
+          },
+          "tags": {
+            "display": "Blade's Edge Arena"
+          }
+        },
+        {
+          "name": "BLACK_TEMPLE",
+          "value": {
+            "int": 564,
+            "original": "564"
+          },
+          "tags": {
+            "display": "Black Temple"
+          }
+        },
+        {
+          "name": "GRUULS_LAIR",
+          "value": {
+            "int": 565,
+            "original": "565"
+          },
+          "tags": {
+            "display": "Gruul's Lair"
+          }
+        },
+        {
+          "name": "EYE_OF_THE_STORM",
+          "value": {
+            "int": 566,
+            "original": "566"
+          },
+          "tags": {
+            "display": "Eye of the Storm"
+          }
+        },
+        {
+          "name": "ZUL_AMAN",
+          "value": {
+            "int": 568,
+            "original": "568"
+          },
+          "tags": {
+            "display": "Zul'Aman"
+          }
+        },
+        {
+          "name": "NORTHREND",
+          "value": {
+            "int": 571,
+            "original": "571"
+          },
+          "tags": {
+            "display": "Northrend"
+          }
+        },
+        {
+          "name": "RUINS_OF_LORDAERON",
+          "value": {
+            "int": 572,
+            "original": "572"
+          },
+          "tags": {
+            "display": "Ruins of Lordaeron"
+          }
+        },
+        {
+          "name": "EXTERIORTEST",
+          "value": {
+            "int": 573,
+            "original": "573"
+          },
+          "tags": {
+            "display": "ExteriorTest"
+          }
+        },
+        {
+          "name": "UTGARDE_KEEP",
+          "value": {
+            "int": 574,
+            "original": "574"
+          },
+          "tags": {
+            "display": "Utgarde Keep"
+          }
+        },
+        {
+          "name": "UTGARDE_PINNACLE",
+          "value": {
+            "int": 575,
+            "original": "575"
+          },
+          "tags": {
+            "display": "Utgarde Pinnacle"
+          }
+        },
+        {
+          "name": "THE_NEXUS",
+          "value": {
+            "int": 576,
+            "original": "576"
+          },
+          "tags": {
+            "display": "The Nexus"
+          }
+        },
+        {
+          "name": "THE_OCULUS",
+          "value": {
+            "int": 578,
+            "original": "578"
+          },
+          "tags": {
+            "display": "The Oculus"
+          }
+        },
+        {
+          "name": "THE_SUNWELL",
+          "value": {
+            "int": 580,
+            "original": "580"
+          },
+          "tags": {
+            "display": "The Sunwell"
+          }
+        },
+        {
+          "name": "TRANSPORT_RUT_THERAN_TO_AUBERDINE",
+          "value": {
+            "int": 582,
+            "original": "582"
+          },
+          "tags": {
+            "display": "Transport: Rut'theran to Auberdine"
+          }
+        },
+        {
+          "name": "TRANSPORT_MENETHIL_TO_THERAMORE",
+          "value": {
+            "int": 584,
+            "original": "584"
+          },
+          "tags": {
+            "display": "Transport: Menethil to Theramore"
+          }
+        },
+        {
+          "name": "MAGISTERS_TERRACE",
+          "value": {
+            "int": 585,
+            "original": "585"
+          },
+          "tags": {
+            "display": "Magister's Terrace"
+          }
+        },
+        {
+          "name": "TRANSPORT_EXODAR_TO_AUBERDINE",
+          "value": {
+            "int": 586,
+            "original": "586"
+          },
+          "tags": {
+            "display": "Transport: Exodar to Auberdine"
+          }
+        },
+        {
+          "name": "TRANSPORT_FEATHERMOON_FERRY",
+          "value": {
+            "int": 587,
+            "original": "587"
+          },
+          "tags": {
+            "display": "Transport: Feathermoon Ferry"
+          }
+        },
+        {
+          "name": "TRANSPORT_MENETHIL_TO_AUBERDINE",
+          "value": {
+            "int": 588,
+            "original": "588"
+          },
+          "tags": {
+            "display": "Transport: Menethil to Auberdine"
+          }
+        },
+        {
+          "name": "TRANSPORT_ORGRIMMAR_TO_GROM_GOL",
+          "value": {
+            "int": 589,
+            "original": "589"
+          },
+          "tags": {
+            "display": "Transport: Orgrimmar to Grom'Gol"
+          }
+        },
+        {
+          "name": "TRANSPORT_GROM_GOL_TO_UNDERCITY",
+          "value": {
+            "int": 590,
+            "original": "590"
+          },
+          "tags": {
+            "display": "Transport: Grom'Gol to Undercity"
+          }
+        },
+        {
+          "name": "TRANSPORT_UNDERCITY_TO_ORGRIMMAR",
+          "value": {
+            "int": 591,
+            "original": "591"
+          },
+          "tags": {
+            "display": "Transport: Undercity to Orgrimmar"
+          }
+        },
+        {
+          "name": "TRANSPORT_BOREAN_TUNDRA_TEST",
+          "value": {
+            "int": 592,
+            "original": "592"
+          },
+          "tags": {
+            "display": "Transport: Borean Tundra Test"
+          }
+        },
+        {
+          "name": "TRANSPORT_BOOTY_BAY_TO_RATCHET",
+          "value": {
+            "int": 593,
+            "original": "593"
+          },
+          "tags": {
+            "display": "Transport: Booty Bay to Ratchet"
+          }
+        },
+        {
+          "name": "TRANSPORT_HOWLING_FJORD_SISTER_MERCY_QUEST",
+          "value": {
+            "int": 594,
+            "original": "594"
+          },
+          "tags": {
+            "display": "Transport: Howling Fjord Sister Mercy (Quest)"
+          }
+        },
+        {
+          "name": "THE_CULLING_OF_STRATHOLME",
+          "value": {
+            "int": 595,
+            "original": "595"
+          },
+          "tags": {
+            "display": "The Culling of Stratholme"
+          }
+        },
+        {
+          "name": "TRANSPORT_NAGLFAR",
+          "value": {
+            "int": 596,
+            "original": "596"
+          },
+          "tags": {
+            "display": "Transport: Naglfar"
+          }
+        },
+        {
+          "name": "CRAIG_TEST",
+          "value": {
+            "int": 597,
+            "original": "597"
+          },
+          "tags": {
+            "display": "Craig Test"
+          }
+        },
+        {
+          "name": "SUNWELL_FIX",
+          "value": {
+            "int": 598,
+            "original": "598"
+          },
+          "tags": {
+            "display": "Sunwell Fix"
+          }
+        },
+        {
+          "name": "HALLS_OF_STONE",
+          "value": {
+            "int": 599,
+            "original": "599"
+          },
+          "tags": {
+            "display": "Halls of Stone"
+          }
+        },
+        {
+          "name": "DRAK_THARON_KEEP",
+          "value": {
+            "int": 600,
+            "original": "600"
+          },
+          "tags": {
+            "display": "Drak'Tharon Keep"
+          }
+        },
+        {
+          "name": "AZJOL_NERUB",
+          "value": {
+            "int": 601,
+            "original": "601"
+          },
+          "tags": {
+            "display": "Azjol-Nerub"
+          }
+        },
+        {
+          "name": "HALLS_OF_LIGHTNING",
+          "value": {
+            "int": 602,
+            "original": "602"
+          },
+          "tags": {
+            "display": "Halls of Lightning"
+          }
+        },
+        {
+          "name": "ULDUAR",
+          "value": {
+            "int": 603,
+            "original": "603"
+          },
+          "tags": {
+            "display": "Ulduar"
+          }
+        },
+        {
+          "name": "GUNDRAK",
+          "value": {
+            "int": 604,
+            "original": "604"
+          },
+          "tags": {
+            "display": "Gundrak"
+          }
+        },
+        {
+          "name": "DEVELOPMENT_LAND_NON_WEIGHTED_TEXTURES",
+          "value": {
+            "int": 605,
+            "original": "605"
+          },
+          "tags": {
+            "display": "Development Land (non-weighted textures)"
+          }
+        },
+        {
+          "name": "QA_AND_DVD",
+          "value": {
+            "int": 606,
+            "original": "606"
+          },
+          "tags": {
+            "display": "QA and DVD"
+          }
+        },
+        {
+          "name": "STRAND_OF_THE_ANCIENTS",
+          "value": {
+            "int": 607,
+            "original": "607"
+          },
+          "tags": {
+            "display": "Strand of the Ancients"
+          }
+        },
+        {
+          "name": "VIOLET_HOLD",
+          "value": {
+            "int": 608,
+            "original": "608"
+          },
+          "tags": {
+            "display": "Violet Hold"
+          }
+        },
+        {
+          "name": "EBON_HOLD",
+          "value": {
+            "int": 609,
+            "original": "609"
+          },
+          "tags": {
+            "display": "Ebon Hold"
+          }
+        },
+        {
+          "name": "TRANSPORT_TIRISFAL_TO_VENGEANCE_LANDING",
+          "value": {
+            "int": 610,
+            "original": "610"
+          },
+          "tags": {
+            "display": "Transport: Tirisfal to Vengeance Landing"
+          }
+        },
+        {
+          "name": "TRANSPORT_MENETHIL_TO_VALGARDE",
+          "value": {
+            "int": 612,
+            "original": "612"
+          },
+          "tags": {
+            "display": "Transport: Menethil to Valgarde"
+          }
+        },
+        {
+          "name": "TRANSPORT_ORGRIMMAR_TO_WARSONG_HOLD",
+          "value": {
+            "int": 613,
+            "original": "613"
+          },
+          "tags": {
+            "display": "Transport: Orgrimmar to Warsong Hold"
+          }
+        },
+        {
+          "name": "TRANSPORT_STORMWIND_TO_VALIANCE_KEEP",
+          "value": {
+            "int": 614,
+            "original": "614"
+          },
+          "tags": {
+            "display": "Transport: Stormwind to Valiance Keep"
+          }
+        },
+        {
+          "name": "THE_OBSIDIAN_SANCTUM",
+          "value": {
+            "int": 615,
+            "original": "615"
+          },
+          "tags": {
+            "display": "The Obsidian Sanctum"
+          }
+        },
+        {
+          "name": "THE_EYE_OF_ETERNITY",
+          "value": {
+            "int": 616,
+            "original": "616"
+          },
+          "tags": {
+            "display": "The Eye of Eternity"
+          }
+        },
+        {
+          "name": "DALARAN_SEWERS",
+          "value": {
+            "int": 617,
+            "original": "617"
+          },
+          "tags": {
+            "display": "Dalaran Sewers"
+          }
+        },
+        {
+          "name": "THE_RING_OF_VALOR",
+          "value": {
+            "int": 618,
+            "original": "618"
+          },
+          "tags": {
+            "display": "The Ring of Valor"
+          }
+        },
+        {
+          "name": "AHN_KAHET_THE_OLD_KINGDOM",
+          "value": {
+            "int": 619,
+            "original": "619"
+          },
+          "tags": {
+            "display": "Ahn'kahet: The Old Kingdom"
+          }
+        },
+        {
+          "name": "TRANSPORT_MOA_KI_TO_UNU_PE",
+          "value": {
+            "int": 620,
+            "original": "620"
+          },
+          "tags": {
+            "display": "Transport: Moa'ki to Unu'pe"
+          }
+        },
+        {
+          "name": "TRANSPORT_MOA_KI_TO_KAMAGUA",
+          "value": {
+            "int": 621,
+            "original": "621"
+          },
+          "tags": {
+            "display": "Transport: Moa'ki to Kamagua"
+          }
+        },
+        {
+          "name": "TRANSPORT_ORGRIMS_HAMMER",
+          "value": {
+            "int": 622,
+            "original": "622"
+          },
+          "tags": {
+            "display": "Transport: Orgrim's Hammer"
+          }
+        },
+        {
+          "name": "TRANSPORT_THE_SKYBREAKER",
+          "value": {
+            "int": 623,
+            "original": "623"
+          },
+          "tags": {
+            "display": "Transport: The Skybreaker"
+          }
+        },
+        {
+          "name": "VAULT_OF_ARCHAVON",
+          "value": {
+            "int": 624,
+            "original": "624"
+          },
+          "tags": {
+            "display": "Vault of Archavon"
+          }
+        },
+        {
+          "name": "ISLE_OF_CONQUEST",
+          "value": {
+            "int": 628,
+            "original": "628"
+          },
+          "tags": {
+            "display": "Isle of Conquest"
+          }
+        },
+        {
+          "name": "ICECROWN_CITADEL",
+          "value": {
+            "int": 631,
+            "original": "631"
+          },
+          "tags": {
+            "display": "Icecrown Citadel"
+          }
+        },
+        {
+          "name": "THE_FORGE_OF_SOULS",
+          "value": {
+            "int": 632,
+            "original": "632"
+          },
+          "tags": {
+            "display": "The Forge of Souls"
+          }
+        },
+        {
+          "name": "TRANSPORT_ALLIANCE_AIRSHIP_BG",
+          "value": {
+            "int": 641,
+            "original": "641"
+          },
+          "tags": {
+            "display": "Transport: Alliance Airship BG"
+          }
+        },
+        {
+          "name": "TRANSPORT_HORDEAIRSHIPBG",
+          "value": {
+            "int": 642,
+            "original": "642"
+          },
+          "tags": {
+            "display": "Transport: HordeAirshipBG"
+          }
+        },
+        {
+          "name": "TRANSPORT_ORGRIMMAR_TO_THUNDER_BLUFF",
+          "value": {
+            "int": 647,
+            "original": "647"
+          },
+          "tags": {
+            "display": "Transport: Orgrimmar to Thunder Bluff"
+          }
+        },
+        {
+          "name": "TRIAL_OF_THE_CRUSADER",
+          "value": {
+            "int": 649,
+            "original": "649"
+          },
+          "tags": {
+            "display": "Trial of the Crusader"
+          }
+        },
+        {
+          "name": "TRIAL_OF_THE_CHAMPION",
+          "value": {
+            "int": 650,
+            "original": "650"
+          },
+          "tags": {
+            "display": "Trial of the Champion"
+          }
+        },
+        {
+          "name": "PIT_OF_SARON",
+          "value": {
+            "int": 658,
+            "original": "658"
+          },
+          "tags": {
+            "display": "Pit of Saron"
+          }
+        },
+        {
+          "name": "HALLS_OF_REFLECTION",
+          "value": {
+            "int": 668,
+            "original": "668"
+          },
+          "tags": {
+            "display": "Halls of Reflection"
+          }
+        },
+        {
+          "name": "TRANSPORT_THE_SKYBREAKER_ICECROWN_CITADEL_RAID",
+          "value": {
+            "int": 672,
+            "original": "672"
+          },
+          "tags": {
+            "display": "Transport: The Skybreaker (Icecrown Citadel Raid)"
+          }
+        },
+        {
+          "name": "TRANSPORT_ORGRIMS_HAMMER_ICECROWN_CITADEL_RAID",
+          "value": {
+            "int": 673,
+            "original": "673"
+          },
+          "tags": {
+            "display": "Transport: Orgrim's Hammer (Icecrown Citadel Raid)"
+          }
+        },
+        {
+          "name": "TRANSPORT_THE_SKYBREAKER_IC_DUNGEON",
+          "value": {
+            "int": 712,
+            "original": "712"
+          },
+          "tags": {
+            "display": "Transport: The Skybreaker (IC Dungeon)"
+          }
+        },
+        {
+          "name": "TRANSPORT_ORGRIMS_HAMMER_IC_DUNGEON",
+          "value": {
+            "int": 713,
+            "original": "713"
+          },
+          "tags": {
+            "display": "Transport: Orgrim's Hammer (IC Dungeon)"
+          }
+        },
+        {
+          "name": "TRASNPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID",
+          "value": {
+            "int": 718,
+            "original": "718"
+          },
+          "tags": {
+            "display": "Trasnport: The Mighty Wind (Icecrown Citadel Raid)"
+          }
+        },
+        {
+          "name": "STORMWIND",
+          "value": {
+            "int": 723,
+            "original": "723"
+          },
+          "tags": {
+            "display": "Stormwind"
+          }
+        },
+        {
+          "name": "THE_RUBY_SANCTUM",
+          "value": {
+            "int": 724,
+            "original": "724"
+          },
+          "tags": {
+            "display": "The Ruby Sanctum"
+          }
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u32",
+        "endianness": "little"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "Character",
+          "usage": "used_but_not_in_if"
+        },
+        {
+          "name": "SMSG_LOGIN_VERIFY_WORLD",
+          "usage": "used_but_not_in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/enums/map.wowm",
+        "start_position": 139
       },
       "features": [
         "Enum",
@@ -70135,10 +71529,9 @@
           "content": {
             "name": "map",
             "member_type": {
-              "type": "integer",
+              "type": "identifier",
               "content": {
-                "type": "u32",
-                "endianness": "little"
+                "type_name": "Map"
               }
             },
             "constant_value": null,
@@ -98720,10 +100113,9 @@
           "content": {
             "name": "map",
             "member_type": {
-              "type": "integer",
+              "type": "identifier",
               "content": {
-                "type": "u32",
-                "endianness": "little"
+                "type_name": "Map"
               }
             },
             "constant_value": null,
@@ -98788,11 +100180,11 @@
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm",
         "start_position": 42
       },
-      "only_has_io_error": true,
+      "only_has_io_error": false,
       "features": [
         "SMsg",
-        "SimpleBuiltInTypes",
         "SubObjects",
+        "SimpleBuiltInTypes",
         "WorldVersion"
       ]
     },

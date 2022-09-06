@@ -3,6 +3,7 @@ use crate::Guid;
 use crate::world::wrath::CharacterGear;
 use crate::world::wrath::Class;
 use crate::world::wrath::Gender;
+use crate::world::wrath::Map;
 use crate::world::wrath::Race;
 use crate::world::wrath::Vector3d;
 use std::io::{Write, Read};
@@ -23,7 +24,7 @@ use std::io::{Write, Read};
 ///     u8 facial_hair;
 ///     u8 level;
 ///     u32 area;
-///     u32 map;
+///     Map map;
 ///     Vector3d position;
 ///     u32 guild_id;
 ///     u32 flags;
@@ -48,7 +49,7 @@ pub struct Character {
     pub facial_hair: u8,
     pub level: u8,
     pub area: u32,
-    pub map: u32,
+    pub map: Map,
     pub position: Vector3d,
     pub guild_id: u32,
     pub flags: u32,
@@ -100,8 +101,8 @@ impl Character {
         // area: u32
         w.write_all(&self.area.to_le_bytes())?;
 
-        // map: u32
-        w.write_all(&self.map.to_le_bytes())?;
+        // map: Map
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // position: Vector3d
         self.position.write_into_vec(w)?;
@@ -175,8 +176,8 @@ impl Character {
         // area: u32
         let area = crate::util::read_u32_le(r)?;
 
-        // map: u32
-        let map = crate::util::read_u32_le(r)?;
+        // map: Map
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // position: Vector3d
         let position = Vector3d::read(r)?;
@@ -250,7 +251,7 @@ impl Character {
         + 1 // facial_hair: u8
         + 1 // level: u8
         + 4 // area: u32
-        + 4 // map: u32
+        + 4 // map: Map
         + 12 // position: Vector3d
         + 4 // guild_id: u32
         + 4 // flags: u32
