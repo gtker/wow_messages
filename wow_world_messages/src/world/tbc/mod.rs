@@ -22,6 +22,8 @@ pub(crate) mod power;
 pub use power::*;
 pub(crate) mod race;
 pub use race::*;
+pub(crate) mod smsg_account_data_times;
+pub use smsg_account_data_times::*;
 pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_char_enum;

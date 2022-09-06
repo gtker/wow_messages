@@ -127585,6 +127585,12 @@
                 "major": 1,
                 "minor": 12
               }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 2
+              }
             }
           ]
         }
@@ -127798,7 +127804,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm",
-        "start_position": 3
+        "start_position": 1
       },
       "only_has_io_error": true,
       "features": [
