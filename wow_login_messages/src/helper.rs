@@ -8,13 +8,11 @@
 //! [`expect_client_message`] and [`expect_server_message`]
 //! are used when you're expecting exactly one specific message and all others are invalid.
 //!
-use crate::errors::{EnumError, ExpectedOpcodeError, ParseError};
+use crate::errors::ExpectedOpcodeError;
 use crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client;
 use crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client;
 use crate::util::read_u8_le;
 use crate::{ClientMessage, ServerMessage};
-use std::fmt::{Display, Formatter};
-use std::string::FromUtf8Error;
 
 /// Read a complete message _from_ the **client** or return an error otherwise.
 ///

@@ -91,7 +91,6 @@
     clippy::unseparated_literal_suffix
 )]
 #![allow(
-    unused,
     non_camel_case_types,
     non_snake_case,
     clippy::missing_errors_doc,
@@ -112,7 +111,9 @@ use async_std::io::{ReadExt, WriteExt};
 
 pub mod errors;
 pub mod helper;
+#[allow(unused)]
 pub(crate) mod logon;
+#[allow(unused)]
 pub(crate) mod util;
 
 pub use logon::*;

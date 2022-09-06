@@ -1,5 +1,5 @@
 use std::fmt::{Display, Formatter};
-use std::io::{Read, Write};
+use std::io::Read;
 
 use crate::util::{read_u64_le, read_u8_le};
 
@@ -73,7 +73,7 @@ impl Guid {
 
             if bit != 0 {
                 let byte = read_u8_le(r)?;
-                guid |= ((byte as u64) << (index * 8));
+                guid |= (byte as u64) << (index * 8);
             }
         }
 

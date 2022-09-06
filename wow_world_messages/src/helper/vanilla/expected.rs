@@ -13,7 +13,7 @@ pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
     let opcode = crate::util::read_u16_le(r)?;
 
     let mut buf = vec![0; (size - SERVER_OPCODE_LENGTH).into()];
-    r.read_exact(&mut buf);
+    r.read_exact(&mut buf)?;
 
     read_server_body(&mut buf.as_slice(), size, opcode as u32)
 }
@@ -31,7 +31,7 @@ pub fn expect_server_message_encryption<M: ServerMessage, R: std::io::Read>(
     let opcode = d.opcode;
 
     let mut buf = vec![0; (size - SERVER_OPCODE_LENGTH).into()];
-    r.read_exact(&mut buf);
+    r.read_exact(&mut buf)?;
 
     read_server_body(&mut buf.as_slice(), size, opcode as u32)
 }
@@ -52,7 +52,7 @@ pub async fn tokio_expect_client_message_encryption<
     let opcode = d.opcode;
 
     let mut buf = vec![0; (size - CLIENT_OPCODE_LENGTH).into()];
-    r.read_exact(&mut buf).await;
+    r.read_exact(&mut buf).await?;
 
     read_client_body(&mut buf.as_slice(), size, opcode)
 }
@@ -68,7 +68,7 @@ pub async fn tokio_expect_client_message<
     let opcode = crate::util::tokio_read_u32_le(r).await?;
 
     let mut buf = vec![0; (size - CLIENT_OPCODE_LENGTH).into()];
-    r.read_exact(&mut buf).await;
+    r.read_exact(&mut buf).await?;
 
     read_client_body(&mut buf.as_slice(), size, opcode)
 }

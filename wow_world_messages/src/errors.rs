@@ -1,4 +1,4 @@
-use std::fmt::{format, Display, Formatter, Write};
+use std::fmt::{Display, Formatter};
 pub use wow_world_base::EnumError;
 
 #[derive(Debug)]

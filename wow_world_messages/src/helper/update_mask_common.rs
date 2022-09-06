@@ -10,7 +10,7 @@ pub const GAMEOBJECT: u32 = 0x0020;
 pub const DYNAMICOBJECT: u32 = 0x0040;
 pub const CORPSE: u32 = 0x0080;
 
-pub(crate) fn header_set(header: &mut Vec<u32>, values: &mut BTreeMap<u16, u32>, bit: u16) {
+pub(crate) fn header_set(header: &mut Vec<u32>, bit: u16) {
     let index = bit / 32;
     let offset = bit % 32;
 
@@ -64,7 +64,6 @@ pub(crate) fn read_inner(
     Ok((header, values))
 }
 
-#[macro_use]
 macro_rules! update_item {
     ($name:ident, $type_value:expr) => {
         #[derive(Debug, Hash, Clone, Default, PartialEq, Eq)]
@@ -80,11 +79,7 @@ macro_rules! update_item {
                 let mut header = vec![];
                 let mut values = BTreeMap::new();
 
-                $crate::helper::update_mask_common::header_set(
-                    &mut header,
-                    &mut values,
-                    OBJECT_FIELD_TYPE,
-                );
+                $crate::helper::update_mask_common::header_set(&mut header, OBJECT_FIELD_TYPE);
                 values.insert(
                     OBJECT_FIELD_TYPE,
                     $crate::helper::update_mask_common::OBJECT | $type_value,
@@ -98,11 +93,7 @@ macro_rules! update_item {
             }
 
             pub(crate) fn header_set(&mut self, bit: u16) {
-                $crate::helper::update_mask_common::header_set(
-                    &mut self.header,
-                    &mut self.values,
-                    bit,
-                );
+                $crate::helper::update_mask_common::header_set(&mut self.header, bit);
             }
 
             pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), std::io::Error> {

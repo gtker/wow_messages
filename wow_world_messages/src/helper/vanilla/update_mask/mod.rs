@@ -6,15 +6,9 @@ use crate::helper::update_mask_common;
 use crate::helper::update_mask_common::{
     update_item, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM, PLAYER, UNIT,
 };
-use crate::Guid;
-#[cfg(feature = "async-std")]
-use async_std::io::ReadExt;
 use std::collections::BTreeMap;
 use std::io;
 use std::io::Read;
-use std::io::Write;
-#[cfg(feature = "tokio")]
-use tokio::io::AsyncReadExt;
 
 update_item!(UpdateItem, ITEM);
 update_item!(UpdateContainer, ITEM | CONTAINER);
@@ -140,7 +134,7 @@ mod test {
             1, // UNIT_FIELD_BYTES[3] // Power (Rage)
         ];
 
-        let mut update_mask = UpdatePlayer::new()
+        let update_mask = UpdatePlayer::new()
             .set_object_GUID(Guid::new(4))
             .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
             .set_unit_HEALTH(100);
@@ -174,7 +168,7 @@ mod test {
             50, 0, 0, 0, // UNIT_FIELD_NATIVEDISPLAYID (50, Human Female)
         ];
 
-        let mut update_mask = UpdatePlayer::new()
+        let update_mask = UpdatePlayer::new()
             .set_object_GUID(Guid::new(4))
             .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
             .set_object_SCALE_X(1.0)

@@ -6,15 +6,9 @@ use crate::helper::update_mask_common;
 use crate::helper::update_mask_common::{
     update_item, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM, PLAYER, UNIT,
 };
-use crate::Guid;
-#[cfg(feature = "async-std")]
-use async_std::io::ReadExt;
 use std::collections::BTreeMap;
 use std::io;
 use std::io::Read;
-use std::io::Write;
-#[cfg(feature = "tokio")]
-use tokio::io::AsyncReadExt;
 
 update_item!(UpdateItem, ITEM);
 update_item!(UpdateContainer, ITEM | CONTAINER);

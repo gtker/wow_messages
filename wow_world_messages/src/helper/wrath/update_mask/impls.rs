@@ -3,7 +3,7 @@ use crate::wrath::{Race};
 use crate::wrath::{Class};
 use crate::wrath::{Gender};
 use crate::wrath::{Power};
-use crate::wrath::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};
+use crate::wrath::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdatePlayer, UpdateUnit};
 
 impl UpdateItem {
     pub fn set_object_GUID(mut self, v: Guid) -> Self {

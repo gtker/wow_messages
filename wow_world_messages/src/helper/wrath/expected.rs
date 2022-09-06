@@ -80,7 +80,7 @@ pub async fn tokio_expect_client_message_encryption<
     let opcode = d.opcode;
 
     let mut buf = vec![0; (size - CLIENT_OPCODE_LENGTH).into()];
-    r.read_exact(&mut buf).await;
+    r.read_exact(&mut buf).await?;
 
     read_client_body(&mut buf.as_slice(), size, opcode)
 }
@@ -96,7 +96,7 @@ pub async fn tokio_expect_client_message<
     let opcode = crate::util::tokio_read_u32_le(r).await?;
 
     let mut buf = vec![0; (size - CLIENT_OPCODE_LENGTH).into()];
-    r.read_exact(&mut buf).await;
+    r.read_exact(&mut buf).await?;
 
     read_client_body(&mut buf.as_slice(), size, opcode)
 }
@@ -128,7 +128,7 @@ fn read_server_body<M: ServerMessage>(
 ) -> Result<M, ExpectedOpcodeError> {
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
-        let m = M::read_body(buf, (size - SERVER_OPCODE_LENGTH as u32));
+        let m = M::read_body(buf, size - SERVER_OPCODE_LENGTH as u32);
         match m {
             Ok(m) => Ok(m),
             Err(e) => Err(e.into()),

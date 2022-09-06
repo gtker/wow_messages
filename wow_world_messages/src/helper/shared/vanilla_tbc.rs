@@ -1,11 +1,6 @@
 use crate::Message;
-#[cfg(feature = "async-std")]
-use async_std::io::WriteExt;
 use std::future::Future;
-use std::io::Write;
 use std::pin::Pin;
-#[cfg(feature = "tokio")]
-use tokio::io::AsyncWriteExt;
 #[cfg(feature = "encryption")]
 use wow_srp::vanilla_header::EncrypterHalf;
 
@@ -51,7 +46,7 @@ pub trait ServerMessage: Message {
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         let mut v = get_unencrypted_server(Self::OPCODE as u16, self.server_size());
-        self.write_into_vec(&mut v);
+        self.write_into_vec(&mut v)?;
 
         w.write_all(&v)
     }
@@ -64,7 +59,7 @@ pub trait ServerMessage: Message {
     ) -> Result<(), std::io::Error> {
         let mut v = get_encrypted_server(Self::OPCODE as u16, self.server_size(), e);
 
-        self.write_into_vec(&mut v);
+        self.write_into_vec(&mut v)?;
 
         w.write_all(&v)
     }
@@ -82,7 +77,7 @@ pub trait ServerMessage: Message {
     {
         Box::pin(async move {
             let mut v = get_unencrypted_server(Self::OPCODE as u16, self.server_size());
-            self.write_into_vec(&mut v);
+            self.write_into_vec(&mut v)?;
 
             w.write_all(&v).await
         })
@@ -103,7 +98,7 @@ pub trait ServerMessage: Message {
     {
         Box::pin(async move {
             let mut v = get_encrypted_server(Self::OPCODE as u16, self.server_size(), e);
-            self.write_into_vec(&mut v);
+            self.write_into_vec(&mut v)?;
 
             w.write_all(&v).await
         })
@@ -122,7 +117,7 @@ pub trait ServerMessage: Message {
     {
         Box::pin(async move {
             let mut v = get_unencrypted_server(Self::OPCODE as u16, self.server_size());
-            self.write_into_vec(&mut v);
+            self.write_into_vec(&mut v)?;
 
             w.write_all(&v).await
         })
@@ -143,7 +138,7 @@ pub trait ServerMessage: Message {
     {
         Box::pin(async move {
             let mut v = get_encrypted_server(Self::OPCODE as u16, self.server_size(), e);
-            self.write_into_vec(&mut v);
+            self.write_into_vec(&mut v)?;
 
             w.write_all(&v).await
         })
@@ -161,7 +156,7 @@ pub trait ClientMessage: Message {
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         let mut v = get_unencrypted_client(Self::OPCODE as u16, self.client_size());
-        self.write_into_vec(&mut v);
+        self.write_into_vec(&mut v)?;
 
         w.write_all(&v)
     }
@@ -173,7 +168,7 @@ pub trait ClientMessage: Message {
         e: &mut EncrypterHalf,
     ) -> Result<(), std::io::Error> {
         let mut v = get_encrypted_client(Self::OPCODE as u16, self.client_size(), e);
-        self.write_into_vec(&mut v);
+        self.write_into_vec(&mut v)?;
 
         w.write_all(&v)
     }
@@ -191,7 +186,7 @@ pub trait ClientMessage: Message {
     {
         Box::pin(async move {
             let mut v = get_unencrypted_client(Self::OPCODE as u16, self.client_size());
-            self.write_into_vec(&mut v);
+            self.write_into_vec(&mut v)?;
 
             w.write_all(&v).await
         })
@@ -212,7 +207,7 @@ pub trait ClientMessage: Message {
     {
         Box::pin(async move {
             let mut v = get_encrypted_client(Self::OPCODE as u16, self.client_size(), e);
-            self.write_into_vec(&mut v);
+            self.write_into_vec(&mut v)?;
 
             w.write_all(&v).await
         })
@@ -231,7 +226,7 @@ pub trait ClientMessage: Message {
     {
         Box::pin(async move {
             let mut v = get_unencrypted_client(Self::OPCODE as u16, self.client_size());
-            self.write_into_vec(&mut v);
+            self.write_into_vec(&mut v)?;
 
             w.write_all(&v).await
         })
@@ -252,7 +247,7 @@ pub trait ClientMessage: Message {
     {
         Box::pin(async move {
             let mut v = get_encrypted_client(Self::OPCODE as u16, self.client_size(), e);
-            self.write_into_vec(&mut v);
+            self.write_into_vec(&mut v)?;
 
             w.write_all(&v).await
         })

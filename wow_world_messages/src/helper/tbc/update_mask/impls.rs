@@ -3,7 +3,7 @@ use crate::tbc::{Race};
 use crate::tbc::{Class};
 use crate::tbc::{Gender};
 use crate::tbc::{Power};
-use crate::tbc::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};
+use crate::tbc::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdatePlayer, UpdateUnit};
 
 impl UpdateItem {
     pub fn set_object_FIELD_GUID(mut self, v: Guid) -> Self {

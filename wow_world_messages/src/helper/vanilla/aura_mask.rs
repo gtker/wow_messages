@@ -1,9 +1,5 @@
-#[cfg(feature = "async-std")]
-use async_std::io::ReadExt;
 use std::io;
-use std::io::{Read, Write};
-#[cfg(feature = "tokio")]
-use tokio::io::AsyncReadExt;
+use std::io::Read;
 
 #[derive(Debug, Hash, Default, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct AuraMask {
@@ -15,7 +11,7 @@ impl AuraMask {
 
     pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
         let mut auras = [None; Self::MAX_CAPACITY];
-        let mut bit_pattern: u32 = crate::util::read_u32_le(r)?;
+        let bit_pattern: u32 = crate::util::read_u32_le(r)?;
 
         for (i, aura) in auras.iter_mut().enumerate() {
             if (bit_pattern & (1 << i)) != 0 {
@@ -75,7 +71,7 @@ mod test {
         let mask = AuraMask::read(&mut cursor).unwrap();
 
         let mut target = Vec::with_capacity(mask.size());
-        mask.write_into_vec(&mut target);
+        mask.write_into_vec(&mut target).unwrap();
 
         assert_eq!(v, target);
     }

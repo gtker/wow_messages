@@ -148,7 +148,7 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
         }
     }
 
-    s.wln(format!("use crate::{}::{{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit}};", version.module_name()));
+    s.wln(format!("use crate::{}::{{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdatePlayer, UpdateUnit}};", version.module_name()));
     s.newline();
 
     for (ty, types) in update_types {

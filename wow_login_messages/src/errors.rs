@@ -1,4 +1,4 @@
-use std::fmt::{format, Display, Formatter};
+use std::fmt::{Display, Formatter};
 
 #[derive(Debug)]
 pub enum ParseError {
