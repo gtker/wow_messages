@@ -1,12 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/race.wowm:39`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/race.wowm#L39):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/race.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/race.wowm#L16):
 /// ```text
 /// enum Race : u8 {
 ///     HUMAN = 1;
 ///     ORC = 2;
 ///     DWARF = 3;
-///     NIGHT_ELF = 4;
+///     NIGHTELF = 4;
 ///     UNDEAD = 5;
 ///     TAUREN = 6;
 ///     GNOME = 7;
@@ -21,9 +21,6 @@ use std::convert::{TryFrom, TryInto};
 ///     VRYKUL = 16;
 ///     TUSKARR = 17;
 ///     FOREST_TROLL = 18;
-///     TAUNKA = 19;
-///     NORTHREND_SKELETON = 20;
-///     ICE_TROLL = 21;
 /// }
 
 /// ```
@@ -32,7 +29,7 @@ pub enum Race {
     Human,
     Orc,
     Dwarf,
-    NightElf,
+    Nightelf,
     Undead,
     Tauren,
     Gnome,
@@ -47,9 +44,6 @@ pub enum Race {
     Vrykul,
     Tuskarr,
     ForestTroll,
-    Taunka,
-    NorthrendSkeleton,
-    IceTroll,
 }
 
 impl Race {
@@ -58,7 +52,7 @@ impl Race {
             Self::Human => 0x1,
             Self::Orc => 0x2,
             Self::Dwarf => 0x3,
-            Self::NightElf => 0x4,
+            Self::Nightelf => 0x4,
             Self::Undead => 0x5,
             Self::Tauren => 0x6,
             Self::Gnome => 0x7,
@@ -73,9 +67,6 @@ impl Race {
             Self::Vrykul => 0x10,
             Self::Tuskarr => 0x11,
             Self::ForestTroll => 0x12,
-            Self::Taunka => 0x13,
-            Self::NorthrendSkeleton => 0x14,
-            Self::IceTroll => 0x15,
         }
     }
 
@@ -93,7 +84,7 @@ impl std::fmt::Display for Race {
             Self::Human => f.write_str("Human"),
             Self::Orc => f.write_str("Orc"),
             Self::Dwarf => f.write_str("Dwarf"),
-            Self::NightElf => f.write_str("NightElf"),
+            Self::Nightelf => f.write_str("Nightelf"),
             Self::Undead => f.write_str("Undead"),
             Self::Tauren => f.write_str("Tauren"),
             Self::Gnome => f.write_str("Gnome"),
@@ -108,9 +99,6 @@ impl std::fmt::Display for Race {
             Self::Vrykul => f.write_str("Vrykul"),
             Self::Tuskarr => f.write_str("Tuskarr"),
             Self::ForestTroll => f.write_str("ForestTroll"),
-            Self::Taunka => f.write_str("Taunka"),
-            Self::NorthrendSkeleton => f.write_str("NorthrendSkeleton"),
-            Self::IceTroll => f.write_str("IceTroll"),
         }
     }
 }
@@ -122,7 +110,7 @@ impl TryFrom<u8> for Race {
             1 => Ok(Self::Human),
             2 => Ok(Self::Orc),
             3 => Ok(Self::Dwarf),
-            4 => Ok(Self::NightElf),
+            4 => Ok(Self::Nightelf),
             5 => Ok(Self::Undead),
             6 => Ok(Self::Tauren),
             7 => Ok(Self::Gnome),
@@ -137,9 +125,6 @@ impl TryFrom<u8> for Race {
             16 => Ok(Self::Vrykul),
             17 => Ok(Self::Tuskarr),
             18 => Ok(Self::ForestTroll),
-            19 => Ok(Self::Taunka),
-            20 => Ok(Self::NorthrendSkeleton),
-            21 => Ok(Self::IceTroll),
             v => Err(crate::errors::EnumError::new("Race", v as u32),)
         }
     }

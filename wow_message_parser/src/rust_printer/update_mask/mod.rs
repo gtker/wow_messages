@@ -1,5 +1,6 @@
 use crate::file_utils::{
-    overwrite_if_not_same_contents, VANILLA_UPDATE_MASK_LOCATION, WRATH_UPDATE_MASK_LOCATION,
+    overwrite_if_not_same_contents, TBC_UPDATE_MASK_LOCATION, VANILLA_UPDATE_MASK_LOCATION,
+    WRATH_UPDATE_MASK_LOCATION,
 };
 use crate::rust_printer::{MajorWorldVersion, Writer};
 use std::fmt::Write;
@@ -7,6 +8,7 @@ use std::fmt::{Display, Formatter};
 use std::fs::read_to_string;
 use std::path::Path;
 
+pub mod tbc_fields;
 pub mod vanilla_fields;
 pub mod wrath_fields;
 
@@ -77,6 +79,11 @@ pub fn print_update_mask_docs() {
     s.push_str("Taken from [vmangos](https://github.com/vmangos/core/blob/4b2a5173b0ca4917dfe91aa7b87d84232fd7203c/src/game/Objects/UpdateFields_1_12_1.cpp#L5) with some modifications.\n\n");
 
     print_specific_update_mask_doc(&vanilla_fields::FIELDS, &mut s);
+
+    s.push_str("### Version 2.4.3\n\n");
+    s.push_str("Taken from [mangosone](https://github.com/mangosone/server/blob/f441fc27a6430e79753bceb545f62fef90a79832/src/game/Object/UpdateFields.h#L30) with some modifications.\n\n");
+
+    print_specific_update_mask_doc(&tbc_fields::FIELDS, &mut s);
 
     s.push_str("### Version 3.3.5\n\n");
     s.push_str("Taken from [ArcEmu](https://github.com/arcemu/arcemu/blob/1cb2b5248d050cb6fe413d7c42dd1817994b6366/src/world/Game/Entities/Update/UpdateFields.h#L26) with some modifications.\n\n");
@@ -160,6 +167,9 @@ pub fn print_update_mask() {
 
     let s = print_specific_update_mask(&vanilla_fields::FIELDS, MajorWorldVersion::Vanilla);
     overwrite_if_not_same_contents(s.inner(), Path::new(VANILLA_UPDATE_MASK_LOCATION));
+
+    let s = print_specific_update_mask(&tbc_fields::FIELDS, MajorWorldVersion::BurningCrusade);
+    overwrite_if_not_same_contents(s.inner(), Path::new(TBC_UPDATE_MASK_LOCATION));
 
     let s = print_specific_update_mask(&wrath_fields::FIELDS, MajorWorldVersion::Wrath);
     overwrite_if_not_same_contents(s.inner(), Path::new(WRATH_UPDATE_MASK_LOCATION));

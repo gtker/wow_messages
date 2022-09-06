@@ -20,7 +20,7 @@ enum Power : u8 {
     }
 } {
     rust_base_type = "true";
-    versions = "1.12";
+    versions = "1.12 2";
 }
 
 enum Power : u8 {

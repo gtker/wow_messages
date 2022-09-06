@@ -26,5 +26,6 @@ Used in:
 * [CMSG_CHAR_CREATE](cmsg_char_create.md)
 * [Character](character.md)
 * [Character](character.md)
+* [Character](character.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 
