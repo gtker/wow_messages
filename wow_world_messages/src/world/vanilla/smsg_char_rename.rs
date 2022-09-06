@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::WorldResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Response to [`CMSG_CHAR_RENAME`](crate::world::vanilla::CMSG_CHAR_RENAME).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm#L3):
@@ -246,7 +246,7 @@ impl SMSG_CHAR_RENAME {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum SMSG_CHAR_RENAME_WorldResult {
     ResponseSuccess {
         character: Guid,

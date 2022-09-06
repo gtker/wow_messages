@@ -3,7 +3,7 @@ use crate::world::vanilla::CooldownSpell;
 use crate::world::vanilla::InitialSpell;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:23`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L23):
 /// ```text
 /// smsg SMSG_INITIAL_SPELLS = 0x012A {

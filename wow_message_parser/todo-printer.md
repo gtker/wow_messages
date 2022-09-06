@@ -12,8 +12,6 @@
 * Do not allocate for statically sized messages
 * Special type for `SMSG_LOGIN_SETTIMESPEED.datetime`
 * More tests/definitions
-* Add derives for all types
-  * Add Hash for structs?
 * MSRV test
   * Login
   * World

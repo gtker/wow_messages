@@ -5,7 +5,7 @@ use std::io::{Read, Write};
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
 
-#[derive(Debug, Default, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Debug, Hash, Default, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct AuraMask {
     auras: [Option<u16>; Self::MAX_CAPACITY],
 }

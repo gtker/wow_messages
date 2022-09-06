@@ -4,7 +4,7 @@ use crate::world::vanilla::Map;
 use crate::world::vanilla::WorldState;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_init_world_states.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_init_world_states.wowm#L3):
 /// ```text
 /// smsg SMSG_INIT_WORLD_STATES = 0x02C2 {

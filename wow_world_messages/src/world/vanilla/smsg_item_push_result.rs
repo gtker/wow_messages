@@ -5,7 +5,7 @@ use crate::world::vanilla::NewItemCreationType;
 use crate::world::vanilla::NewItemSource;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_item_push_result.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_item_push_result.wowm#L18):
 /// ```text
 /// smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {

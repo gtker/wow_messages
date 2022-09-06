@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Sent by client after pressing 'Logout' or 'Exit Game'.
 /// Server should reply with [`SMSG_LOGOUT_RESPONSE`](crate::world::vanilla::SMSG_LOGOUT_RESPONSE).
 ///

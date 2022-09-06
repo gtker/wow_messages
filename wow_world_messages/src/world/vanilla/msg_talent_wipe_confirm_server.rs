@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// cmangos/vmangos/mangoszero returns guid 0 and unknown 0 when talents can not be reset
 /// cmangos/vmangos/mangoszero casts spell 14876 when resetting
 ///

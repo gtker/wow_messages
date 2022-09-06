@@ -169,7 +169,7 @@ impl CMSG_GMTICKET_CREATE {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum CMSG_GMTICKET_CREATE_GmTicketType {
     Stuck,
     BehaviorHarassment {

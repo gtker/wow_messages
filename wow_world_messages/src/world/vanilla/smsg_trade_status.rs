@@ -4,7 +4,7 @@ use crate::world::vanilla::InventoryResult;
 use crate::world::vanilla::TradeStatus;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status.wowm:102`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status.wowm#L102):
 /// ```text
 /// smsg SMSG_TRADE_STATUS = 0x0120 {
@@ -181,7 +181,7 @@ impl SMSG_TRADE_STATUS {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum SMSG_TRADE_STATUS_TradeStatus {
     Busy,
     BeginTrade {

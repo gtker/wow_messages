@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:46`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L46):
 /// ```text
 /// smsg SimpleSmsg = 0x0000 {

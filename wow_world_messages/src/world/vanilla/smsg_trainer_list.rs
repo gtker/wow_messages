@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::TrainerSpell;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_trainer_list.wowm:33`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_trainer_list.wowm#L33):
 /// ```text
 /// smsg SMSG_TRAINER_LIST = 0x01B1 {

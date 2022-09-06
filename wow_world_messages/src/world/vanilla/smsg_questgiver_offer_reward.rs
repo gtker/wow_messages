@@ -4,7 +4,7 @@ use crate::world::vanilla::NpcTextUpdateEmote;
 use crate::world::vanilla::QuestItemReward;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_offer_reward.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_offer_reward.wowm#L3):
 /// ```text
 /// smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {

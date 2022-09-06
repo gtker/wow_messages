@@ -67,7 +67,7 @@ pub(crate) fn read_inner(
 #[macro_use]
 macro_rules! update_item {
     ($name:ident, $type_value:expr) => {
-        #[derive(Debug, Clone, Default, PartialEq)]
+        #[derive(Debug, Hash, Clone, Default, PartialEq)]
         pub struct $name {
             header: Vec<u32>,
             values: BTreeMap<u16, u32>,

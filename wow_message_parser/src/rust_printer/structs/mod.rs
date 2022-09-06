@@ -138,7 +138,7 @@ pub fn print_derives(s: &mut Writer, members: &[RustMember], is_enum_type: bool)
 
     s.w_no_indent(", PartialEq");
     if can_derive_eq(members) {
-        s.w_no_indent(", Eq");
+        s.w_no_indent(", Eq, Hash");
     }
 
     if !is_enum_type && can_derive_default(members) {

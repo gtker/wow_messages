@@ -2310,7 +2310,7 @@ impl MovementBlock_UpdateFlag {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct MovementBlock_UpdateFlag_Transport {
     pub transport_progress_in_ms: u32,
 }
@@ -2321,7 +2321,7 @@ impl MovementBlock_UpdateFlag_Transport {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 pub struct MovementBlock_UpdateFlag_MeleeAttacking {
     pub guid: Guid,
 }
@@ -2332,7 +2332,7 @@ impl MovementBlock_UpdateFlag_MeleeAttacking {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct MovementBlock_UpdateFlag_HighGuid {
     pub unknown0: u32,
 }
@@ -2343,7 +2343,7 @@ impl MovementBlock_UpdateFlag_HighGuid {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct MovementBlock_UpdateFlag_All {
     pub unknown1: u32,
 }

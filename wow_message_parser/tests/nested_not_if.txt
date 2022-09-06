@@ -3,7 +3,7 @@ use crate::world::vanilla::NestedEnum;
 use crate::world::vanilla::TEnum;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:258`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L258):
 /// ```text
 /// struct NestedNotIf {
@@ -378,7 +378,7 @@ impl NestedNotIf {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum NestedNotIf_NestedEnum {
     Nested {
         one: u8,
@@ -421,7 +421,7 @@ impl NestedNotIf_NestedEnum {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum NestedNotIf_TEnum {
     Zero,
     One {

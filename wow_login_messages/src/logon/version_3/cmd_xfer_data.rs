@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::ServerMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L10):
 /// ```text
 /// slogin CMD_XFER_DATA = 0x31 {

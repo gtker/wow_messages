@@ -3,7 +3,7 @@ use crate::world::vanilla::RaidTargetUpdate;
 use crate::world::vanilla::RaidTargetUpdateType;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L26):
 /// ```text
 /// smsg MSG_RAID_TARGET_UPDATE_Server = 0x0321 {
@@ -93,7 +93,7 @@ impl MSG_RAID_TARGET_UPDATE_Server {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
     Partial {
         raid_target: RaidTargetUpdate,

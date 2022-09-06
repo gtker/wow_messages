@@ -4,7 +4,7 @@ use crate::world::vanilla::PetCommandState;
 use crate::world::vanilla::PetReactState;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm#L3):
 /// ```text
 /// smsg SMSG_PET_MODE = 0x017A {

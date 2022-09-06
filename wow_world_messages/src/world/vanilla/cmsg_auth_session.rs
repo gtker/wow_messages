@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::world::vanilla::SMSG_AUTH_CHALLENGE).
 ///
 /// This message is never encrypted.

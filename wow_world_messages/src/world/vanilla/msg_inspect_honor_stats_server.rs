@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::vanilla::PvpRank;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_inspect_honor_stats_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_inspect_honor_stats_server.wowm#L3):
 /// ```text
 /// smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
