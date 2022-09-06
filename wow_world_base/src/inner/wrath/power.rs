@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/power.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/power.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/power.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/power.wowm#L26):
 /// ```text
 /// enum Power : u8 {
 ///     MANA = 0;
@@ -8,30 +8,21 @@ use std::convert::{TryFrom, TryInto};
 ///     FOCUS = 2;
 ///     ENERGY = 3;
 ///     HAPPINESS = 4;
+///     RUNE = 5;
+///     RUNIC_POWER = 6;
 ///     HEALTH = 0xFE;
 /// }
 
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Power {
-    /// mangoszero: The most common one, mobs usually have this or rage
-    ///
     Mana,
-    /// mangoszero: This is what warriors use to cast their spells
-    ///
     Rage,
-    /// mangoszero: Used by hunters after Cataclysm (4.x)
-    ///
     Focus,
-    /// mangoszero: Used by rouges to do their spells
-    ///
     Energy,
-    /// mangoszero: Hunter's pet's happiness affect their damage
-    ///
     Happiness,
-    /// mangoszero: Health, everyone has this (-2 as signed value)
-    /// This might not actually be sent to the client.
-    ///
+    Rune,
+    RunicPower,
     Health,
 }
 
@@ -43,6 +34,8 @@ impl Power {
             Self::Focus => 0x2,
             Self::Energy => 0x3,
             Self::Happiness => 0x4,
+            Self::Rune => 0x5,
+            Self::RunicPower => 0x6,
             Self::Health => 0xfe,
         }
     }
@@ -63,6 +56,8 @@ impl std::fmt::Display for Power {
             Self::Focus => f.write_str("Focus"),
             Self::Energy => f.write_str("Energy"),
             Self::Happiness => f.write_str("Happiness"),
+            Self::Rune => f.write_str("Rune"),
+            Self::RunicPower => f.write_str("RunicPower"),
             Self::Health => f.write_str("Health"),
         }
     }
@@ -77,6 +72,8 @@ impl TryFrom<u8> for Power {
             2 => Ok(Self::Focus),
             3 => Ok(Self::Energy),
             4 => Ok(Self::Happiness),
+            5 => Ok(Self::Rune),
+            6 => Ok(Self::RunicPower),
             254 => Ok(Self::Health),
             v => Err(crate::errors::EnumError::new("Power", v as u32),)
         }

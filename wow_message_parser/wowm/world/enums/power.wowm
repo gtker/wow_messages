@@ -1,0 +1,39 @@
+enum Power : u8 {
+    MANA = 0 {
+        comment = "mangoszero: The most common one, mobs usually have this or rage";
+    }
+    RAGE = 1 {
+        comment = "mangoszero: This is what warriors use to cast their spells";
+    }
+    FOCUS = 2 {
+        comment = "mangoszero: Used by hunters after Cataclysm (4.x)";
+    }
+    ENERGY = 3 {
+        comment = "mangoszero: Used by rouges to do their spells";
+    }
+    HAPPINESS = 4 {
+        comment = "mangoszero: Hunter's pet's happiness affect their damage";
+    }
+    HEALTH = 0xFE {
+        comment = "mangoszero: Health, everyone has this (-2 as signed value)";
+        comment = "This might not actually be sent to the client.";
+    }
+} {
+    rust_base_type = "true";
+    versions = "1.12";
+}
+
+enum Power : u8 {
+    MANA = 0;
+    RAGE = 1;
+    FOCUS = 2;
+    ENERGY = 3;
+    HAPPINESS = 4;
+    RUNE = 5;
+    RUNIC_POWER = 6;
+    HEALTH = 0xFE;
+} {
+    rust_base_type = "true";
+    versions = "3.3.5";
+}
+

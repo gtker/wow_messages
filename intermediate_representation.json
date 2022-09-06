@@ -1484,7 +1484,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 27
+        "start_position": 3
       },
       "features": [
         "Flag",
@@ -21723,7 +21723,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 122
+        "start_position": 98
       },
       "features": [
         "Enum",
@@ -25213,8 +25213,106 @@
         }
       ],
       "file_info": {
-        "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 3
+        "file_name": "wow_message_parser/wowm/world/enums/power.wowm",
+        "start_position": 1
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "Power",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "MANA",
+          "value": {
+            "int": 0,
+            "original": "0"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RAGE",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {}
+        },
+        {
+          "name": "FOCUS",
+          "value": {
+            "int": 2,
+            "original": "2"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ENERGY",
+          "value": {
+            "int": 3,
+            "original": "3"
+          },
+          "tags": {}
+        },
+        {
+          "name": "HAPPINESS",
+          "value": {
+            "int": 4,
+            "original": "4"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RUNE",
+          "value": {
+            "int": 5,
+            "original": "5"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RUNIC_POWER",
+          "value": {
+            "int": 6,
+            "original": "6"
+          },
+          "tags": {}
+        },
+        {
+          "name": "HEALTH",
+          "value": {
+            "int": 254,
+            "original": "0xFE"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u8"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/enums/power.wowm",
+        "start_position": 26
       },
       "features": [
         "Enum",
@@ -28410,7 +28508,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 146
+        "start_position": 122
       },
       "features": [
         "Enum",
@@ -83365,7 +83463,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 301
+        "start_position": 277
       },
       "only_has_io_error": true,
       "features": [
@@ -84107,7 +84205,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 292
+        "start_position": 268
       },
       "only_has_io_error": false,
       "features": [
@@ -116681,7 +116779,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/common.wowm",
-        "start_position": 81
+        "start_position": 57
       },
       "only_has_io_error": false,
       "features": [
