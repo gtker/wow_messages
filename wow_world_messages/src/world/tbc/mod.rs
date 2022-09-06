@@ -22,5 +22,7 @@ pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_char_enum;
 pub use smsg_char_enum::*;
+pub(crate) mod smsg_login_verify_world;
+pub use smsg_login_verify_world::*;
 pub(crate) mod vector3d;
 pub use vector3d::*;

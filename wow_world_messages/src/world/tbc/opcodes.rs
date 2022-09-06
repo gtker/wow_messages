@@ -162,11 +162,13 @@ impl From<CMSG_PLAYER_LOGIN> for ClientOpcodeMessage {
 
 use crate::world::tbc::SMSG_CHAR_ENUM;
 use crate::world::tbc::SMSG_AUTH_CHALLENGE;
+use crate::world::tbc::SMSG_LOGIN_VERIFY_WORLD;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
+    SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
 }
 
 impl ServerOpcodeMessage {
@@ -174,6 +176,7 @@ impl ServerOpcodeMessage {
         match opcode {
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
         }
     }
@@ -249,6 +252,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -257,6 +261,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -265,6 +270,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -273,6 +279,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -281,6 +288,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -289,6 +297,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -299,6 +308,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
         f.write_str(match self {
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
             ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
+            ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
         })
     }
 }
@@ -312,6 +322,12 @@ impl From<SMSG_CHAR_ENUM> for ServerOpcodeMessage {
 impl From<SMSG_AUTH_CHALLENGE> for ServerOpcodeMessage {
     fn from(c: SMSG_AUTH_CHALLENGE) -> Self {
         Self::SMSG_AUTH_CHALLENGE(c)
+    }
+}
+
+impl From<SMSG_LOGIN_VERIFY_WORLD> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOGIN_VERIFY_WORLD) -> Self {
+        Self::SMSG_LOGIN_VERIFY_WORLD(c)
     }
 }
 

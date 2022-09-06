@@ -98608,13 +98608,191 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm",
-        "start_position": 3
+        "start_position": 2
       },
       "only_has_io_error": false,
       "features": [
         "SMsg",
         "SubObjects",
         "SimpleBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_LOGIN_VERIFY_WORLD",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 566
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "map",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "position",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "Vector3d"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "orientation",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "description": "Message to the client that is has successfully logged into the world and that it should load the map and coordinates.",
+        "comment": "The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm",
+        "start_position": 32
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_LOGIN_VERIFY_WORLD",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 566
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "map",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "position",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "Vector3d"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "orientation",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "description": "Message to the client that is has successfully logged into the world and that it should load the map and coordinates.",
+        "comment": "The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT], but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT].",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm",
+        "start_position": 42
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "SubObjects",
         "WorldVersion"
       ]
     },
