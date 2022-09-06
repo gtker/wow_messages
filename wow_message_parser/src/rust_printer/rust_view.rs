@@ -64,10 +64,11 @@ impl RustMember {
             RustType::Struct { object, .. } => {
                 v.append(&mut object.all_members());
             }
-            RustType::Array { inner_object, .. } => {
-                if let Some(o) = inner_object {
-                    v.append(&mut o.all_members());
-                }
+            RustType::Array {
+                inner_object: Some(o),
+                ..
+            } => {
+                v.append(&mut o.all_members());
             }
             _ => {}
         }
@@ -1273,11 +1274,7 @@ pub fn create_struct_member(
                         }
                     };
 
-                    let inner_object = if let Some(c) = complex {
-                        Some(create_rust_object(c, o))
-                    } else {
-                        None
-                    };
+                    let inner_object = complex.map(|c| create_rust_object(c, o));
 
                     RustType::Array {
                         array: array.clone(),
