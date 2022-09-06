@@ -10,8 +10,9 @@ path = "../wow_world_base"
 features = ["vanilla", "tbc", "wrath"]
 
 [dependencies.wow_srp]
-git = "https://github.com/gtker/wow_srp"
-branch = "wip-wrath-header"
+version = "0.5.0"
+default-features = false
+features = ["wrath-header"]
 
 [features]
 default = []
