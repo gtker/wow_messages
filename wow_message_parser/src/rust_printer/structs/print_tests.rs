@@ -5,9 +5,10 @@ use crate::parser::types::ArraySize;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::rust_view::{RustEnumerator, RustMember, RustType};
+use crate::rust_printer::update_mask::vanilla_fields::FIELDS;
 use crate::rust_printer::{
     get_new_flag_type_name, ByteInnerTy, ByteType, ImplType, UfType, UpdateMaskType, Version,
-    Writer, CLIENT_MESSAGE_TRAIT_NAME, FIELDS, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+    Writer, CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
     LOGIN_SERVER_MESSAGE_ENUM_NAME, SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
     WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
