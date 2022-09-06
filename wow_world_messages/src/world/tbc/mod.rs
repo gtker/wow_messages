@@ -1,3 +1,5 @@
+pub(crate) mod area;
+pub use area::*;
 pub(crate) mod character;
 pub use character::*;
 pub(crate) mod character_gear;

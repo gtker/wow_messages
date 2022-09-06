@@ -1,5 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::tbc::Area;
 use crate::world::tbc::CharacterGear;
 use crate::world::tbc::Class;
 use crate::world::tbc::Gender;
@@ -23,7 +24,7 @@ use std::io::{Write, Read};
 ///     u8 hair_color;
 ///     u8 facial_hair;
 ///     u8 level;
-///     u32 area;
+///     Area area;
 ///     Map map;
 ///     Vector3d position;
 ///     u32 guild_id;
@@ -47,7 +48,7 @@ pub struct Character {
     pub hair_color: u8,
     pub facial_hair: u8,
     pub level: u8,
-    pub area: u32,
+    pub area: Area,
     pub map: Map,
     pub position: Vector3d,
     pub guild_id: u32,
@@ -96,8 +97,8 @@ impl Character {
         // level: u8
         w.write_all(&self.level.to_le_bytes())?;
 
-        // area: u32
-        w.write_all(&self.area.to_le_bytes())?;
+        // area: Area
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
@@ -168,8 +169,8 @@ impl Character {
         // level: u8
         let level = crate::util::read_u8_le(r)?;
 
-        // area: u32
-        let area = crate::util::read_u32_le(r)?;
+        // area: Area
+        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
@@ -241,7 +242,7 @@ impl Character {
         + 1 // hair_color: u8
         + 1 // facial_hair: u8
         + 1 // level: u8
-        + 4 // area: u32
+        + 4 // area: Area
         + 4 // map: Map
         + 12 // position: Vector3d
         + 4 // guild_id: u32

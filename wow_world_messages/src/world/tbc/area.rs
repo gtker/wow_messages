@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/area.wowm:8183`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/area.wowm#L8183):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/area.wowm:3249`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/area.wowm#L3249):
 /// ```text
 /// enum Area : u32 {
 ///     DUN_MOROGH = 1;
@@ -57,9 +57,9 @@ use std::convert::{TryFrom, TryInto};
 ///     BRACKWELL_PUMPKIN_PATCH = 62;
 ///     THE_STONEFIELD_FARM = 63;
 ///     THE_MACLURE_VINEYARDS = 64;
-///     DRAGONBLIGHT = 65;
-///     ZUL_DRAK = 66;
-///     THE_STORM_PEAKS = 67;
+///     REUSE_ME_THREE = 65;
+///     REUSE_ME_SIX = 66;
+///     REUSE_ME_FIVE = 67;
 ///     LAKE_EVERSTILL = 68;
 ///     LAKESHIRE = 69;
 ///     STONEWATCH = 70;
@@ -174,11 +174,11 @@ use std::convert::{TryFrom, TryInto};
 ///     MARDENHOLDE_KEEP = 203;
 ///     PYREWOOD_VILLAGE = 204;
 ///     DUN_MODR = 205;
-///     UTGARDE_KEEP = 206;
+///     UNUSED_WESTFALL = 206;
 ///     THE_GREAT_SEA = 207;
 ///     UNUSED_IRONCLADCOVE = 208;
 ///     SHADOWFANG_KEEP = 209;
-///     ICECROWN = 210;
+///     REUSE_ME_2 = 210;
 ///     ICEFLOW_LAKE = 211;
 ///     HELMS_BED_LAKE = 212;
 ///     DEEP_ELEM_MINE = 213;
@@ -239,7 +239,7 @@ use std::convert::{TryFrom, TryInto};
 ///     UNUSED_STONEWROUGHT_PASS = 276;
 ///     THE_FOOTHILL_CAVERNS = 277;
 ///     LORDAMERE_INTERNMENT_CAMP = 278;
-///     DALARAN_CRATER = 279;
+///     DALARAN = 279;
 ///     STRAHNBRAD = 280;
 ///     RUINS_OF_ALTERAC = 281;
 ///     CRUSHRIDGE_HOLD = 282;
@@ -347,8 +347,8 @@ use std::convert::{TryFrom, TryInto};
 ///     THE_MERCHANT_COAST = 391;
 ///     RATCHET = 392;
 ///     DARKSPEAR_STRAND = 393;
-///     GRIZZLY_HILLS = 394;
-///     GRIZZLEMAW = 395;
+///     DARROWMERE_LAKE_UNUSED = 394;
+///     CAER_DARROW_UNUSED = 395;
 ///     WINTERHOOF_WATER_WELL = 396;
 ///     THUNDERHORN_WATER_WELL = 397;
 ///     WILDMANE_WATER_WELL = 398;
@@ -443,7 +443,7 @@ use std::convert::{TryFrom, TryInto};
 ///     RAZORFEN_KRAUL = 491;
 ///     RAVEN_HILL_CEMETERY = 492;
 ///     MOONGLADE = 493;
-///     HOWLING_FJORD = 495;
+///     DELETE_ME = 495;
 ///     BRACKENWALL_VILLAGE = 496;
 ///     SWAMPLIGHT_MANOR = 497;
 ///     BLOODFEN_BURROW = 498;
@@ -546,7 +546,7 @@ use std::convert::{TryFrom, TryInto};
 ///     SOUTH_GATE_PASS1 = 839;
 ///     TWILIGHT_GROVE = 856;
 ///     GM_ISLAND = 876;
-///     DELETE_ME = 877;
+///     DELETE_ME1 = 877;
 ///     SOUTHFURY_RIVER3 = 878;
 ///     SOUTHFURY_RIVER4 = 879;
 ///     THANDOL_SPAN1 = 880;
@@ -638,13 +638,13 @@ use std::convert::{TryFrom, TryInto};
 ///     SOUTHERN_BARRENS = 1156;
 ///     SOUTHERN_GOLD_ROAD = 1157;
 ///     ZUL_FARRAK1 = 1176;
-///     UTGARDE_PINNACLE = 1196;
+///     UNUSEDALCAZ_ISLAND = 1196;
 ///     TIMBERMAW_HOLD = 1216;
 ///     VANNDIR_ENCAMPMENT = 1217;
 ///     TESTAZSHARA = 1218;
 ///     LEGASH_ENCAMPMENT = 1219;
 ///     THALASSIAN_BASE_CAMP = 1220;
-///     RUINS_OF_ELDARATH = 1221;
+///     RUINS_OF_ELDARATH_ = 1221;
 ///     HETAERAS_CLUTCH = 1222;
 ///     TEMPLE_OF_ZIN_MALOR = 1223;
 ///     BEARS_HEAD = 1224;
@@ -696,7 +696,7 @@ use std::convert::{TryFrom, TryInto};
 ///     THE_CAPE_OF_STRANGLETHORN = 1577;
 ///     SOUTHERN_SAVAGE_COAST = 1578;
 ///     UNUSED_THE_DEADMINES_002 = 1579;
-///     UNUSED_IRONCLAD_COVE_003 = 1580;
+///     UNUSED_IRONCLAD_COVE_00THREE = 1580;
 ///     THE_DEADMINES = 1581;
 ///     IRONCLAD_COVE = 1582;
 ///     BLACKROCK_SPIRE = 1583;
@@ -868,7 +868,7 @@ use std::convert::{TryFrom, TryInto};
 ///     PLAGUEWOOD = 2277;
 ///     SCOURGEHOLD = 2278;
 ///     STRATHOLME1 = 2279;
-///     DO_NOT_USE = 2280;
+///     UNUSED_STRATHOLME = 2280;
 ///     DARROWMERE_LAKE = 2297;
 ///     CAER_DARROW = 2298;
 ///     DARROWMERE_LAKE1 = 2299;
@@ -984,7 +984,7 @@ use std::convert::{TryFrom, TryInto};
 ///     SHRINE_OF_THE_FALLEN_WARRIOR = 2757;
 ///     UNUSED_ALTERAC_VALLEY = 2777;
 ///     BLACKFATHOM_DEEPS1 = 2797;
-///     CRYSTALSONG_FOREST = 2817;
+///     REUSE_ME_4 = 2817;
 ///     THE_MASTERS_CELLAR = 2837;
 ///     STONEWROUGHT_PASS = 2838;
 ///     ALTERAC_VALLEY1 = 2839;
@@ -1117,7 +1117,7 @@ use std::convert::{TryFrom, TryInto};
 ///     THE_SCORCHED_GROVE = 3474;
 ///     ZEB_WATHA = 3475;
 ///     TOR_WATHA = 3476;
-///     AZJOL_NERUB = 3477;
+///     KARAZHAN_UNUSED = 3477;
 ///     GATES_OF_AHN_QIRAJ = 3478;
 ///     THE_VEILED_SEA7 = 3479;
 ///     DUSKWITHER_GROUNDS = 3480;
@@ -1177,7 +1177,7 @@ use std::convert::{TryFrom, TryInto};
 ///     FETHS_WAY = 3534;
 ///     HELLFIRE_CITADEL = 3535;
 ///     THRALLMAR = 3536;
-///     BOREAN_TUNDRA = 3537;
+///     REUSE = 3537;
 ///     HONOR_HOLD = 3538;
 ///     THE_STAIR_OF_DESTINY = 3539;
 ///     TWISTING_NETHER = 3540;
@@ -1249,7 +1249,7 @@ use std::convert::{TryFrom, TryInto};
 ///     HYJAL_SUMMIT = 3606;
 ///     SERPENTSHRINE_CAVERN = 3607;
 ///     VINDICATORS_REST = 3608;
-///     UNUSED3 = 3609;
+///     UNUSEDTHREE = 3609;
 ///     BURNING_BLADE_RUINS = 3610;
 ///     CLAN_WATCH = 3611;
 ///     BLOODCURSE_ISLE = 3612;
@@ -1351,7 +1351,7 @@ use std::convert::{TryFrom, TryInto};
 ///     HORDE_ENCAMPMENT = 3708;
 ///     NIGHT_ELF_VILLAGE = 3709;
 ///     NORDRASSIL = 3710;
-///     SHOLAZAR_BASIN = 3711;
+///     REUSE_ME = 3711;
 ///     AREA_52 = 3712;
 ///     THE_BLOOD_FURNACE = 3713;
 ///     THE_SHATTERED_HALLS = 3714;
@@ -1617,98 +1617,16 @@ use std::convert::{TryFrom, TryInto};
 ///     VEIL_ALA_RAK = 3976;
 ///     UPPER_VEIL_SHIL_AK = 3977;
 ///     LOWER_VEIL_SHIL_AK = 3978;
-///     THE_FROZEN_SEA = 3979;
-///     DAGGERCAP_BAY = 3980;
-///     VALGARDE = 3981;
-///     WYRMSKULL_VILLAGE = 3982;
-///     UTGARDE_KEEP1 = 3983;
-///     NIFFLEVAR = 3984;
-///     FALLS_OF_YMIRON = 3985;
-///     ECHO_REACH = 3986;
-///     THE_ISLE_OF_SPEARS = 3987;
-///     KAMAGUA = 3988;
-///     GARVANS_REEF = 3989;
-///     SCALAWAG_POINT = 3990;
-///     NEW_AGAMAND = 3991;
-///     THE_ANCIENT_LIFT = 3992;
-///     WESTGUARD_TURRET = 3993;
-///     HALGRIND = 3994;
-///     THE_LAUGHING_STAND = 3995;
-///     BAELGUNS_EXCAVATION_SITE = 3996;
-///     EXPLORERS_LEAGUE_OUTPOST = 3997;
-///     WESTGUARD_KEEP = 3998;
-///     STEEL_GATE = 3999;
-///     VENGEANCE_LANDING = 4000;
-///     BALEHEIM = 4001;
-///     SKORN = 4002;
-///     FORT_WILDERVAR = 4003;
-///     VILEPREY_VILLAGE = 4004;
-///     IVALDS_RUIN = 4005;
-///     GJALERBRON = 4006;
-///     TOMB_OF_THE_LOST_KINGS = 4007;
 ///     SHARTUULS_TRANSPORTER = 4008;
 ///     ILLIDARI_TRAINING_GROUNDS = 4009;
 ///     MUDSPROCKET = 4010;
-///     CAMP_WINTERHOOF = 4018;
-///     DEVELOPMENT_LAND = 4019;
-///     MIGHTSTONE_QUARRY = 4020;
-///     BLOODSPORE_PLAINS = 4021;
-///     GAMMOTH = 4022;
-///     AMBER_LEDGE = 4023;
-///     COLDARRA = 4024;
-///     THE_WESTRIFT = 4025;
-///     THE_TRANSITUS_STAIR = 4026;
-///     COAST_OF_ECHOES = 4027;
-///     RIPLASH_STRAND = 4028;
-///     RIPLASH_RUINS = 4029;
-///     COAST_OF_IDOLS = 4030;
-///     PAL_EA = 4031;
-///     VALIANCE_KEEP = 4032;
-///     WINTERFIN_VILLAGE = 4033;
-///     THE_BOREAN_WALL = 4034;
-///     THE_GEYSER_FIELDS = 4035;
-///     FIZZCRANK_PUMPING_STATION = 4036;
-///     TAUNKA_LE_VILLAGE = 4037;
-///     MAGNAMOTH_CAVERNS = 4038;
-///     COLDROCK_QUARRY = 4039;
-///     NJORDS_BREATH_BAY = 4040;
-///     KASKALA = 4041;
-///     TRANSBOREA = 4042;
-///     THE_FLOOD_PLAINS = 4043;
 ///     DIREHORN_POST = 4046;
 ///     NATS_LANDING = 4047;
-///     EMBER_CLUTCH = 4048;
 ///     TABETHAS_FARM = 4049;
-///     DERELICT_STRAND = 4050;
-///     THE_FROZEN_GLADE = 4051;
-///     THE_VIBRANT_GLADE = 4052;
-///     THE_TWISTED_GLADE = 4053;
-///     RIVENWOOD = 4054;
-///     CALDEMERE_LAKE = 4055;
-///     UTGARDE_CATACOMBS = 4056;
-///     SHIELD_HILL = 4057;
-///     LAKE_CAULDROS = 4058;
-///     CAULDROS_ISLE = 4059;
-///     BLEEDING_VALE = 4060;
-///     GIANTS_RUN = 4061;
-///     APOTHECARY_CAMP = 4062;
-///     EMBER_SPEAR_TOWER = 4063;
-///     SHATTERED_STRAITS = 4064;
-///     GJALERHORN = 4065;
-///     FROSTBLADE_PEAK = 4066;
 ///     PLAGUEWOOD_TOWER = 4067;
-///     WEST_SPEAR_TOWER = 4068;
-///     NORTH_SPEAR_TOWER = 4069;
-///     CHILLMERE_COAST = 4070;
-///     WHISPER_GULCH = 4071;
-///     SUB_ZONE = 4072;
-///     WINTERS_TERRACE = 4073;
-///     THE_WAKING_HALLS = 4074;
 ///     SUNWELL_PLATEAU = 4075;
 ///     REUSE_ME_SEVEN = 4076;
-///     SORLOFS_STRAND = 4077;
 ///     RAZORTHORN_RISE = 4078;
-///     FROSTBLADE_PASS = 4079;
 ///     ISLE_OF_QUEL_DANAS = 4080;
 ///     THE_DAWNCHASER = 4081;
 ///     THE_SIN_LOREN = 4082;
@@ -1725,591 +1643,9 @@ use std::convert::{TryFrom, TryInto};
 ///     THE_SUN_FORGE = 4093;
 ///     SUNWELL_PLATEAU1 = 4094;
 ///     MAGISTERS_TERRACE = 4095;
-///     CLAYTÖNS_WOWEDIT_LAND = 4096;
-///     WINTERFIN_CAVERNS = 4097;
-///     GLIMMER_BAY = 4098;
-///     WINTERFIN_RETREAT = 4099;
-///     THE_CULLING_OF_STRATHOLME = 4100;
-///     SANDS_OF_NASAM = 4101;
-///     KROMS_LANDING = 4102;
-///     NASAMS_TALON = 4103;
-///     ECHO_COVE = 4104;
-///     BERYL_POINT = 4105;
-///     GARROSHS_LANDING = 4106;
-///     WARSONG_JETTY = 4107;
-///     FIZZCRANK_AIRSTRIP = 4108;
-///     LAKE_KUM_UYA = 4109;
-///     FARSHIRE_FIELDS = 4110;
-///     FARSHIRE = 4111;
-///     FARSHIRE_LIGHTHOUSE = 4112;
-///     UNU_PE = 4113;
-///     DEATHS_STAND = 4114;
-///     THE_ABANDONED_REACH = 4115;
-///     SCALDING_POOLS = 4116;
-///     STEAM_SPRINGS = 4117;
-///     TALRAMAS = 4118;
-///     FESTERING_POOLS = 4119;
-///     THE_NEXUS = 4120;
-///     TRANSITUS_SHIELD = 4121;
-///     BOR_GOROK_OUTPOST = 4122;
-///     MAGMOTH = 4123;
-///     THE_DENS_OF_DYING = 4124;
-///     TEMPLE_CITY_OF_EN_KILAH = 4125;
-///     THE_WAILING_ZIGGURAT = 4126;
-///     STEELJAWS_CARAVAN = 4127;
-///     NAXXANAR = 4128;
-///     WARSONG_HOLD = 4129;
-///     PLAINS_OF_NASAM = 4130;
 ///     MAGISTERS_TERRACE1 = 4131;
-///     RUINS_OF_ELDRA_NATH = 4132;
-///     CHARRED_RISE = 4133;
-///     BLISTERING_POOL = 4134;
-///     SPIRE_OF_BLOOD = 4135;
-///     SPIRE_OF_DECAY = 4136;
-///     SPIRE_OF_PAIN = 4137;
-///     FROZEN_REACH = 4138;
 ///     PARHELION_PLAZA = 4139;
 ///     THE_DEAD_SCAR3 = 4140;
-///     TORPS_FARM = 4141;
-///     WARSONG_GRANARY = 4142;
-///     WARSONG_SLAUGHTERHOUSE = 4143;
-///     WARSONG_FARMS_OUTPOST = 4144;
-///     WEST_POINT_STATION = 4145;
-///     NORTH_POINT_STATION = 4146;
-///     MID_POINT_STATION = 4147;
-///     SOUTH_POINT_STATION = 4148;
-///     DEHTA_ENCAMPMENT = 4149;
-///     KAWS_ROOST = 4150;
-///     WESTWIND_REFUGEE_CAMP = 4151;
-///     MOA_KI_HARBOR = 4152;
-///     INDU_LE_VILLAGE = 4153;
-///     SNOWFALL_GLADE = 4154;
-///     THE_HALF_SHELL = 4155;
-///     SURGE_NEEDLE = 4156;
-///     MOONREST_GARDENS = 4157;
-///     STARS_REST = 4158;
-///     WESTFALL_BRIGADE_ENCAMPMENT = 4159;
-///     LOTHALOR_WOODLANDS = 4160;
-///     WYRMREST_TEMPLE = 4161;
-///     ICEMIST_FALLS = 4162;
-///     ICEMIST_VILLAGE = 4163;
-///     THE_PIT_OF_NARJUN = 4164;
-///     AGMARS_HAMMER = 4165;
-///     LAKE_INDU_LE = 4166;
-///     OBSIDIAN_DRAGONSHRINE = 4167;
-///     RUBY_DRAGONSHRINE = 4168;
-///     FORDRAGON_HOLD = 4169;
-///     KOR_KRON_VANGUARD = 4170;
-///     THE_COURT_OF_SKULLS = 4171;
-///     ANGRATHAR_THE_WRATHGATE = 4172;
-///     GALAKRONDS_REST = 4173;
-///     THE_WICKED_COIL = 4174;
-///     BRONZE_DRAGONSHRINE = 4175;
-///     THE_MIRROR_OF_DAWN = 4176;
-///     WINTERGARDE_KEEP = 4177;
-///     WINTERGARDE_MINE = 4178;
-///     EMERALD_DRAGONSHRINE = 4179;
-///     NEW_HEARTHGLEN = 4180;
-///     CRUSADERS_LANDING = 4181;
-///     SINNERS_FOLLY = 4182;
-///     AZURE_DRAGONSHRINE = 4183;
-///     PATH_OF_THE_TITANS = 4184;
-///     THE_FORGOTTEN_SHORE = 4185;
-///     VENOMSPITE = 4186;
-///     THE_CRYSTAL_VICE = 4187;
-///     THE_CARRION_FIELDS = 4188;
-///     ONSLAUGHT_BASE_CAMP = 4189;
-///     THORSONS_POST = 4190;
-///     LIGHTS_TRUST = 4191;
-///     FROSTMOURNE_CAVERN = 4192;
-///     SCARLET_POINT = 4193;
-///     JINTHA_KALAR = 4194;
-///     ICE_HEART_CAVERN = 4195;
-///     DRAK_THARON_KEEP = 4196;
-///     WINTERGRASP = 4197;
-///     KILI_UAS_ATOLL = 4198;
-///     SILVERBROOK = 4199;
-///     VORDRASSILS_HEART = 4200;
-///     VORDRASSILS_TEARS = 4201;
-///     VORDRASSILS_TEARS1 = 4202;
-///     VORDRASSILS_LIMB = 4203;
-///     AMBERPINE_LODGE = 4204;
-///     SOLSTICE_VILLAGE = 4205;
-///     CONQUEST_HOLD = 4206;
-///     VOLDRUNE = 4207;
-///     GRANITE_SPRINGS = 4208;
-///     ZEB_HALAK = 4209;
-///     DRAK_THARON_KEEP1 = 4210;
-///     CAMP_ONEQWAH = 4211;
-///     EASTWIND_SHORE = 4212;
-///     THE_BROKEN_BLUFFS = 4213;
-///     BOULDER_HILLS = 4214;
-///     RAGE_FANG_SHRINE = 4215;
-///     DRAKIL_JIN_RUINS = 4216;
-///     BLACKRIVER_LOGGING_CAMP = 4217;
-///     HEARTS_BLOOD_SHRINE = 4218;
-///     HOLLOWSTONE_MINE = 4219;
-///     DUN_ARGOL = 4220;
-///     THOR_MODAN = 4221;
-///     BLUE_SKY_LOGGING_GROUNDS = 4222;
-///     MAW_OF_NELTHARION = 4223;
-///     THE_BRINY_PINNACLE = 4224;
-///     GLITTERING_STRAND = 4225;
-///     ISKAAL = 4226;
-///     DRAGONS_FALL = 4227;
-///     THE_OCULUS = 4228;
-///     PROSPECTORS_POINT = 4229;
-///     COLDWIND_HEIGHTS = 4230;
-///     REDWOOD_TRADING_POST = 4231;
-///     VENGEANCE_PASS = 4232;
-///     DAWNS_REACH = 4233;
-///     NAXXRAMAS1 = 4234;
-///     HEARTWOOD_TRADING_POST = 4235;
-///     EVERGREEN_TRADING_POST = 4236;
-///     SPRUCE_POINT_POST = 4237;
-///     WHITE_PINE_TRADING_POST = 4238;
-///     ASPEN_GROVE_POST = 4239;
-///     FORESTS_EDGE_POST = 4240;
-///     ELDRITCH_HEIGHTS = 4241;
-///     VENTURE_BAY = 4242;
-///     WINTERGARDE_CRYPT = 4243;
-///     BLOODMOON_ISLE = 4244;
-///     SHADOWFANG_TOWER = 4245;
-///     WINTERGARDE_MAUSOLEUM = 4246;
-///     DUSKHOWL_DEN = 4247;
-///     THE_CONQUEST_PIT = 4248;
-///     THE_PATH_OF_IRON = 4249;
-///     RUINS_OF_TETHYS = 4250;
-///     SILVERBROOK_HILLS = 4251;
-///     THE_BROKEN_BLUFFS1 = 4252;
-///     SEVENTH_LEGION_FRONT = 4253;
-///     THE_DRAGON_WASTES = 4254;
-///     RUINS_OF_DRAK_ZIN = 4255;
-///     DRAK_MAR_LAKE = 4256;
-///     DRAGONSPINE_TRIBUTARY = 4257;
-///     THE_NORTH_SEA1 = 4258;
-///     DRAK_URAL = 4259;
-///     THORVALDS_CAMP = 4260;
-///     GHOSTBLADE_POST = 4261;
-///     ASHWOOD_POST = 4262;
-///     LYDELLS_AMBUSH = 4263;
-///     HALLS_OF_STONE = 4264;
-///     THE_NEXUS1 = 4265;
-///     HARKORS_CAMP = 4266;
-///     VORDRASSIL_PASS = 4267;
-///     RUUNAS_CAMP = 4268;
-///     SHRINE_OF_SCALES = 4269;
-///     DRAK_ATAL_PASSAGE = 4270;
-///     UTGARDE_PINNACLE1 = 4271;
-///     HALLS_OF_LIGHTNING = 4272;
-///     ULDUAR = 4273;
-///     THE_ARGENT_STAND = 4275;
-///     ALTAR_OF_SSERATUS = 4276;
-///     AZJOL_NERUB1 = 4277;
-///     DRAKSOTRA_FIELDS = 4278;
-///     DRAKSOTRA = 4279;
-///     DRAK_AGAL = 4280;
-///     ACHERUS_THE_EBON_HOLD = 4281;
-///     THE_AVALANCHE = 4282;
-///     THE_LOST_LANDS = 4283;
-///     NESINGWARY_BASE_CAMP = 4284;
-///     THE_SEABREACH_FLOW = 4285;
-///     THE_BONES_OF_NOZRONN = 4286;
-///     KARTAKS_HOLD = 4287;
-///     SPARKTOUCHED_HAVEN = 4288;
-///     THE_PATH_OF_THE_LIFEWARDEN = 4289;
-///     RIVERS_HEART = 4290;
-///     RAINSPEAKER_CANOPY = 4291;
-///     FRENZYHEART_HILL = 4292;
-///     WILDGROWTH_MANGAL = 4293;
-///     HEB_VALOK = 4294;
-///     THE_SUNDERED_SHARD = 4295;
-///     THE_LIFEBLOOD_PILLAR = 4296;
-///     MOSSWALKER_VILLAGE = 4297;
-///     PLAGUELANDS_THE_SCARLET_ENCLAVE = 4298;
-///     KOLRAMAS = 4299;
-///     WAYGATE = 4300;
-///     THE_SKYREACH_PILLAR = 4302;
-///     HARDKNUCKLE_CLEARING = 4303;
-///     SAPPHIRE_HIVE = 4304;
-///     MISTWHISPER_REFUGE = 4306;
-///     THE_GLIMMERING_PILLAR = 4307;
-///     SPEARBORN_ENCAMPMENT = 4308;
-///     DRAK_THARON_KEEP2 = 4309;
-///     ZERAMAS = 4310;
-///     RELIQUARY_OF_AGONY = 4311;
-///     EBON_WATCH = 4312;
-///     THRYMS_END = 4313;
-///     VOLTARUS = 4314;
-///     RELIQUARY_OF_PAIN = 4315;
-///     RAGECLAW_DEN = 4316;
-///     LIGHTS_BREACH = 4317;
-///     POOLS_OF_ZHA_JIN = 4318;
-///     ZIM_ABWA = 4319;
-///     AMPHITHEATER_OF_ANGUISH = 4320;
-///     ALTAR_OF_RHUNOK = 4321;
-///     ALTAR_OF_HAR_KOA = 4322;
-///     ZIM_TORGA = 4323;
-///     POOLS_OF_JIN_ALAI = 4324;
-///     ALTAR_OF_QUETZ_LUN = 4325;
-///     HEB_DRAKKAR = 4326;
-///     DRAK_MABWA = 4327;
-///     ZIM_RHUK = 4328;
-///     ALTAR_OF_MAM_TOTH = 4329;
-///     ACHERUS_THE_EBON_HOLD1 = 4342;
-///     NEW_AVALON = 4343;
-///     NEW_AVALON_FIELDS = 4344;
-///     NEW_AVALON_ORCHARD = 4345;
-///     NEW_AVALON_TOWN_HALL = 4346;
-///     HAVENSHIRE = 4347;
-///     HAVENSHIRE_FARMS = 4348;
-///     HAVENSHIRE_LUMBER_MILL = 4349;
-///     HAVENSHIRE_STABLES = 4350;
-///     SCARLET_HOLD = 4351;
-///     CHAPEL_OF_THE_CRIMSON_FLAME = 4352;
-///     LIGHTS_POINT_TOWER = 4353;
-///     LIGHTS_POINT = 4354;
-///     CRYPT_OF_REMEMBRANCE = 4355;
-///     DEATHS_BREACH = 4356;
-///     THE_NOXIOUS_GLADE1 = 4357;
-///     TYRS_HAND1 = 4358;
-///     KINGS_HARBOR = 4359;
-///     SCARLET_OVERLOOK = 4360;
-///     LIGHTS_HOPE_CHAPEL1 = 4361;
-///     SINNERS_FOLLY1 = 4362;
-///     PESTILENT_SCAR1 = 4363;
-///     BROWMAN_MILL1 = 4364;
-///     HAVENSHIRE_MINE = 4365;
-///     URSOCS_DEN = 4366;
-///     THE_BLIGHT_LINE = 4367;
-///     THE_BONEFIELDS = 4368;
-///     DORIANS_OUTPOST = 4369;
-///     MAM_TOTH_CRATER = 4371;
-///     ZOL_MAZ_STRONGHOLD = 4372;
-///     ZOL_HEB = 4373;
-///     RAGECLAW_LAKE = 4374;
-///     GUNDRAK = 4375;
-///     THE_SAVAGE_THICKET = 4376;
-///     NEW_AVALON_FORGE = 4377;
-///     DALARAN_ARENA = 4378;
-///     VALGARDE1 = 4379;
-///     WESTGUARD_INN = 4380;
-///     WAYGATE1 = 4381;
-///     THE_SHAPERS_TERRACE = 4382;
-///     LAKESIDE_LANDING = 4383;
-///     STRAND_OF_THE_ANCIENTS = 4384;
-///     BITTERTIDE_LAKE = 4385;
-///     RAINSPEAKER_RAPIDS = 4386;
-///     FRENZYHEART_RIVER = 4387;
-///     WINTERGRASP_RIVER = 4388;
-///     THE_SUNTOUCHED_PILLAR = 4389;
-///     FRIGID_BREACH = 4390;
-///     SWINDLEGRINS_DIG = 4391;
-///     THE_STORMWRIGHTS_SHELF = 4392;
-///     DEATHS_HAND_ENCAMPMENT = 4393;
-///     SCARLET_TAVERN = 4394;
-///     DALARAN = 4395;
-///     NOZZLERUST_POST = 4396;
-///     FARSHIRE_MINE = 4399;
-///     THE_MOSSLIGHT_PILLAR = 4400;
-///     SARAGOSAS_LANDING = 4401;
-///     VENGEANCE_LIFT = 4402;
-///     BALEJAR_WATCH = 4403;
-///     NEW_AGAMAND_INN = 4404;
-///     PASSAGE_OF_LOST_FIENDS = 4405;
-///     THE_RING_OF_VALOR = 4406;
-///     HALL_OF_THE_FROSTWOLF = 4407;
-///     HALL_OF_THE_STORMPIKE = 4408;
-///     STORMWIND_HARBOR = 4411;
-///     THE_MAKERS_OVERLOOK = 4412;
-///     THE_MAKERS_PERCH = 4413;
-///     SCARLET_TOWER = 4414;
-///     THE_VIOLET_HOLD = 4415;
-///     GUNDRAK1 = 4416;
-///     ONSLAUGHT_HARBOR = 4417;
-///     K3 = 4418;
-///     SNOWBLIND_HILLS = 4419;
-///     SNOWBLIND_TERRACE = 4420;
-///     GARM = 4421;
-///     BRUNNHILDAR_VILLAGE = 4422;
-///     SIFRELDAR_VILLAGE = 4423;
-///     VALKYRION = 4424;
-///     THE_FORLORN_MINE = 4425;
-///     BORS_BREATH_RIVER = 4426;
-///     ARGENT_VANGUARD = 4427;
-///     FROSTHOLD = 4428;
-///     GROM_ARSH_CRASH_SITE = 4429;
-///     TEMPLE_OF_STORMS = 4430;
-///     ENGINE_OF_THE_MAKERS = 4431;
-///     THE_FOOT_STEPPES = 4432;
-///     DRAGONSPINE_PEAKS = 4433;
-///     NIDAVELIR = 4434;
-///     NARVIRS_CRADLE = 4435;
-///     SNOWDRIFT_PLAINS = 4436;
-///     VALLEY_OF_ANCIENT_WINTERS = 4437;
-///     DUN_NIFFELEM = 4438;
-///     FROSTFIELD_LAKE = 4439;
-///     THUNDERFALL = 4440;
-///     CAMP_TUNKA_LO = 4441;
-///     BRANNS_BASE_CAMP = 4442;
-///     GATE_OF_ECHOES = 4443;
-///     PLAIN_OF_ECHOES = 4444;
-///     ULDUAR1 = 4445;
-///     TERRACE_OF_THE_MAKERS = 4446;
-///     GATE_OF_LIGHTNING = 4447;
-///     PATH_OF_THE_TITANS1 = 4448;
-///     ULDIS = 4449;
-///     LOKENS_BARGAIN = 4450;
-///     BORS_FALL = 4451;
-///     BORS_BREATH = 4452;
-///     ROHEMDAL_PASS = 4453;
-///     THE_STORM_FOUNDRY = 4454;
-///     HIBERNAL_CAVERN = 4455;
-///     VOLDRUNE_DWELLING = 4456;
-///     TORSEGS_REST = 4457;
-///     SPARKSOCKET_MINEFIELD = 4458;
-///     RICKETS_FOLLY = 4459;
-///     GARMS_BANE = 4460;
-///     GARMS_RISE = 4461;
-///     CRYSTALWEB_CAVERN = 4462;
-///     TEMPLE_OF_LIFE = 4463;
-///     TEMPLE_OF_ORDER = 4464;
-///     TEMPLE_OF_WINTER = 4465;
-///     TEMPLE_OF_INVENTION = 4466;
-///     DEATHS_RISE = 4467;
-///     THE_DEAD_FIELDS = 4468;
-///     DARGATHS_DEMISE = 4469;
-///     THE_HIDDEN_HOLLOW = 4470;
-///     BERNAUS_HAPPY_FUN_LAND = 4471;
-///     FROSTGRIPS_HOLLOW = 4472;
-///     THE_FRIGID_TOMB = 4473;
-///     TWIN_SHORES = 4474;
-///     ZIM_BOS_HIDEOUT = 4475;
-///     ABANDONED_CAMP = 4476;
-///     THE_SHADOW_VAULT = 4477;
-///     COLDWIND_PASS = 4478;
-///     WINTERS_BREATH_LAKE = 4479;
-///     THE_FORGOTTEN_OVERLOOK = 4480;
-///     JINTHA_KALAR_PASSAGE = 4481;
-///     ARRIGA_FOOTBRIDGE = 4482;
-///     THE_LOST_PASSAGE = 4483;
-///     BOULDERCRAGS_REFUGE = 4484;
-///     THE_INVENTORS_LIBRARY = 4485;
-///     THE_FROZEN_MINE = 4486;
-///     FROSTFLOE_DEEP = 4487;
-///     THE_HOWLING_HOLLOW = 4488;
-///     CRUSADER_FORWARD_CAMP = 4489;
-///     STORMCREST = 4490;
-///     BONESNAPS_CAMP = 4491;
-///     UFRANGS_HALL = 4492;
-///     THE_OBSIDIAN_SANCTUM = 4493;
-///     AHN_KAHET_THE_OLD_KINGDOM = 4494;
-///     FJORNS_ANVIL = 4495;
-///     JOTUNHEIM = 4496;
-///     SAVAGE_LEDGE = 4497;
-///     HALLS_OF_THE_ANCESTORS = 4498;
-///     THE_BLIGHTED_POOL = 4499;
-///     THE_EYE_OF_ETERNITY = 4500;
-///     THE_ARGENT_VANGUARD = 4501;
-///     MIMIRS_WORKSHOP = 4502;
-///     IRONWALL_DAM = 4503;
-///     VALLEY_OF_ECHOES = 4504;
-///     THE_BREACH = 4505;
-///     SCOURGEHOLME = 4506;
-///     THE_BROKEN_FRONT = 4507;
-///     MORD_RETHAR_THE_DEATH_GATE = 4508;
-///     THE_BOMBARDMENT = 4509;
-///     ALDUR_THAR_THE_DESOLATION_GATE = 4510;
-///     THE_SKYBREAKER = 4511;
-///     ORGRIMS_HAMMER = 4512;
-///     YMIRHEIM = 4513;
-///     SARONITE_MINES = 4514;
-///     THE_CONFLAGRATION = 4515;
-///     IRONWALL_RAMPART = 4516;
-///     WEEPING_QUARRY = 4517;
-///     CORP_RETHAR_THE_HORROR_GATE = 4518;
-///     THE_COURT_OF_BONES = 4519;
-///     MALYKRISS_THE_VILE_HOLD = 4520;
-///     CATHEDRAL_OF_DARKNESS = 4521;
-///     ICECROWN_CITADEL = 4522;
-///     ICECROWN_GLACIER = 4523;
-///     VALHALAS = 4524;
-///     THE_UNDERHALLS = 4525;
-///     NJORNDAR_VILLAGE = 4526;
-///     BALARGARDE_FORTRESS = 4527;
-///     KUL_GALAR_KEEP = 4528;
-///     THE_CRIMSON_CATHEDRAL = 4529;
-///     SANCTUM_OF_REANIMATION = 4530;
-///     THE_FLESHWERKS = 4531;
-///     VENGEANCE_LANDING_INN = 4532;
-///     SINDRAGOSAS_FALL = 4533;
-///     WILDERVAR_MINE = 4534;
-///     THE_PIT_OF_THE_FANG = 4535;
-///     FROSTHOWL_CAVERN = 4536;
-///     THE_VALLEY_OF_LOST_HOPE = 4537;
-///     THE_SUNKEN_RING = 4538;
-///     THE_BROKEN_TEMPLE = 4539;
-///     THE_VALLEY_OF_FALLEN_HEROES = 4540;
-///     VANGUARD_INFIRMARY = 4541;
-///     HALL_OF_THE_SHAPER = 4542;
-///     TEMPLE_OF_WISDOM = 4543;
-///     DEATHS_BREACH1 = 4544;
-///     ABANDONED_MINE = 4545;
-///     RUINS_OF_THE_SCARLET_ENCLAVE = 4546;
-///     HALLS_OF_STONE1 = 4547;
-///     HALLS_OF_LIGHTNING1 = 4548;
-///     THE_GREAT_TREE = 4549;
-///     THE_MIRROR_OF_TWILIGHT = 4550;
-///     THE_TWILIGHT_RIVULET = 4551;
-///     THE_DECREPIT_FLOW = 4552;
-///     FORLORN_WOODS = 4553;
-///     RUINS_OF_SHANDARAL = 4554;
-///     THE_AZURE_FRONT = 4555;
-///     VIOLET_STAND = 4556;
-///     THE_UNBOUND_THICKET = 4557;
-///     SUNREAVERS_COMMAND = 4558;
-///     WINDRUNNERS_OVERLOOK = 4559;
-///     THE_UNDERBELLY = 4560;
-///     KRASUS_LANDING = 4564;
-///     THE_VIOLET_HOLD1 = 4567;
-///     THE_EVENTIDE = 4568;
-///     SEWER_EXIT_PIPE = 4569;
-///     CIRCLE_OF_WILLS = 4570;
-///     SILVERWING_FLAG_ROOM = 4571;
-///     WARSONG_FLAG_ROOM = 4572;
-///     WINTERGRASP_FORTRESS = 4575;
-///     CENTRAL_BRIDGE = 4576;
-///     EASTERN_BRIDGE = 4577;
-///     WESTERN_BRIDGE = 4578;
-///     DUBRA_JIN = 4579;
-///     CRUSADERS_PINNACLE = 4580;
-///     FLAMEWATCH_TOWER = 4581;
-///     WINTERS_EDGE_TOWER = 4582;
-///     SHADOWSIGHT_TOWER = 4583;
-///     THE_CAULDRON_OF_FLAMES = 4584;
-///     GLACIAL_FALLS = 4585;
-///     WINDY_BLUFFS = 4586;
-///     THE_FOREST_OF_SHADOWS = 4587;
-///     BLACKWATCH = 4588;
-///     THE_CHILLED_QUAGMIRE = 4589;
-///     THE_STEPPE_OF_LIFE = 4590;
-///     SILENT_VIGIL = 4591;
-///     GIMORAKS_DEN = 4592;
-///     THE_PIT_OF_FIENDS = 4593;
-///     BATTLESCAR_SPIRE = 4594;
-///     HALL_OF_HORRORS = 4595;
-///     THE_CIRCLE_OF_SUFFERING = 4596;
-///     RISE_OF_SUFFERING = 4597;
-///     KRASUS_LANDING1 = 4598;
-///     SEWER_EXIT_PIPE1 = 4599;
-///     DALARAN_ISLAND = 4601;
-///     FORCE_INTERIOR = 4602;
-///     VAULT_OF_ARCHAVON = 4603;
-///     GATE_OF_THE_RED_SUN = 4604;
-///     GATE_OF_THE_BLUE_SAPPHIRE = 4605;
-///     GATE_OF_THE_GREEN_EMERALD = 4606;
-///     GATE_OF_THE_PURPLE_AMETHYST = 4607;
-///     GATE_OF_THE_YELLOW_MOON = 4608;
-///     COURTYARD_OF_THE_ANCIENTS = 4609;
-///     LANDING_BEACH = 4610;
-///     WESTSPARK_WORKSHOP = 4611;
-///     EASTSPARK_WORKSHOP = 4612;
-///     DALARAN_CITY = 4613;
-///     THE_VIOLET_CITADEL_SPIRE = 4614;
-///     NAZ_ANAK_THE_FORGOTTEN_DEPTHS = 4615;
-///     SUNREAVERS_SANCTUARY = 4616;
-///     ELEVATOR = 4617;
-///     ANTONIDAS_MEMORIAL = 4618;
-///     THE_VIOLET_CITADEL = 4619;
-///     MAGUS_COMMERCE_EXCHANGE = 4620;
-///     UNUSED = 4621;
-///     FIRST_LEGION_FORWARD_CAMP = 4622;
-///     HALL_OF_THE_CONQUERED_KINGS = 4623;
-///     BEFOULED_TERRACE = 4624;
-///     THE_DESECRATED_ALTAR = 4625;
-///     SHIMMERING_BOG = 4626;
-///     FALLEN_TEMPLE_OF_AHN_KAHET = 4627;
-///     HALLS_OF_BINDING = 4628;
-///     WINTERS_HEART = 4629;
-///     THE_NORTH_SEA2 = 4630;
-///     THE_BROODMOTHERS_NEST = 4631;
-///     DALARAN_FLOATING_ROCKS = 4632;
-///     RAPTOR_PENS = 4633;
-///     DRAK_THARON_KEEP3 = 4635;
-///     THE_NOXIOUS_PASS = 4636;
-///     VARGOTHS_RETREAT = 4637;
-///     VIOLET_CITADEL_BALCONY = 4638;
-///     BAND_OF_VARIANCE = 4639;
-///     BAND_OF_ACCELERATION = 4640;
-///     BAND_OF_TRANSMUTATION = 4641;
-///     BAND_OF_ALIGNMENT = 4642;
-///     ASHWOOD_LAKE = 4646;
-///     IRON_CONCOURSE = 4650;
-///     FORMATION_GROUNDS = 4652;
-///     RAZORSCALES_AERIE = 4653;
-///     THE_COLOSSAL_FORGE = 4654;
-///     THE_SCRAPYARD = 4655;
-///     THE_CONSERVATORY_OF_LIFE = 4656;
-///     THE_ARCHIVUM = 4657;
-///     ARGENT_TOURNAMENT_GROUNDS = 4658;
-///     EXPEDITION_BASE_CAMP = 4665;
-///     SUNREAVER_PAVILION = 4666;
-///     SILVER_COVENANT_PAVILION = 4667;
-///     THE_COOPER_RESIDENCE = 4668;
-///     THE_RING_OF_CHAMPIONS = 4669;
-///     THE_ASPIRANTS_RING = 4670;
-///     THE_ARGENT_VALIANTS_RING = 4671;
-///     THE_ALLIANCE_VALIANTS_RING = 4672;
-///     THE_HORDE_VALIANTS_RING = 4673;
-///     ARGENT_PAVILION = 4674;
-///     SUNREAVER_PAVILION1 = 4676;
-///     SILVER_COVENANT_PAVILION1 = 4677;
-///     THE_FORLORN_CAVERN = 4679;
-///     CLAYTONIO_TEST_AREA = 4688;
-///     QUEL_DELARS_REST = 4692;
-///     ISLE_OF_CONQUEST = 4710;
-///     TRIAL_OF_THE_CRUSADER = 4722;
-///     TRIAL_OF_THE_CHAMPION = 4723;
-///     RUNEWEAVER_SQUARE = 4739;
-///     THE_SILVER_ENCLAVE = 4740;
-///     ISLE_OF_CONQUEST_NO_MANS_LAND = 4741;
-///     HROTHGARS_LANDING = 4742;
-///     DEATHSPEAKERS_WATCH = 4743;
-///     WORKSHOP = 4747;
-///     QUARRY = 4748;
-///     DOCKS = 4749;
-///     HANGAR = 4750;
-///     REFINERY = 4751;
-///     HORDE_KEEP = 4752;
-///     ALLIANCE_KEEP = 4753;
-///     THE_SEA_REAVERS_RUN = 4760;
-///     TRANSPORT_ALLIANCE_GUNSHIP = 4763;
-///     TRANSPORT_HORDE_GUNSHIP = 4764;
-///     HROTHGARS_LANDING1 = 4769;
-///     THE_FORGE_OF_SOULS = 4809;
-///     ICECROWN_CITADEL1 = 4812;
-///     PIT_OF_SARON = 4813;
-///     HALLS_OF_REFLECTION = 4820;
-///     TRANSPORT_ALLIANCE_GUNSHIP_IGB = 4832;
-///     TRANSPORT_HORDE_GUNSHIP_IGB = 4833;
-///     THE_FROZEN_THRONE = 4859;
-///     THE_FROZEN_HALLS = 4862;
-///     THE_FROST_QUEENS_LAIR = 4889;
-///     PUTRICIDES_LABORATORY_OF_ALCHEMICAL_HORRORS_AND_FUN = 4890;
-///     THE_SANCTUM_OF_BLOOD = 4891;
-///     THE_CRIMSON_HALL = 4892;
-///     THE_FROST_QUEENS_LAIR1 = 4893;
-///     PUTRICIDES_LABORATORY_OF_ALCHEMICAL_HORRORS_AND_FUN1 = 4894;
-///     THE_CRIMSON_HALL1 = 4895;
-///     THE_FROZEN_THRONE1 = 4896;
-///     THE_SANCTUM_OF_BLOOD1 = 4897;
-///     FROSTMOURNE = 4898;
-///     THE_DARK_APPROACH = 4904;
-///     SCOURGELORDS_COMMAND = 4905;
-///     THE_SHADOW_THRONE = 4906;
-///     THE_HIDDEN_PASSAGE = 4908;
-///     FROSTMOURNE1 = 4910;
-///     THE_RUBY_SANCTUM = 4987;
 /// }
 
 /// ```
@@ -2369,9 +1705,9 @@ pub enum Area {
     BrackwellPumpkinPatch,
     TheStonefieldFarm,
     TheMaclureVineyards,
-    Dragonblight,
-    ZulDrak,
-    TheStormPeaks,
+    ReuseMeThree,
+    ReuseMeSix,
+    ReuseMeFive,
     LakeEverstill,
     Lakeshire,
     Stonewatch,
@@ -2486,11 +1822,11 @@ pub enum Area {
     MardenholdeKeep,
     PyrewoodVillage,
     DunModr,
-    UtgardeKeep,
+    UnusedWestfall,
     TheGreatSea,
     UnusedIroncladcove,
     ShadowfangKeep,
-    Icecrown,
+    ReuseMe2,
     IceflowLake,
     HelmsBedLake,
     DeepElemMine,
@@ -2551,7 +1887,7 @@ pub enum Area {
     UnusedStonewroughtPass,
     TheFoothillCaverns,
     LordamereInternmentCamp,
-    DalaranCrater,
+    Dalaran,
     Strahnbrad,
     RuinsOfAlterac,
     CrushridgeHold,
@@ -2659,8 +1995,8 @@ pub enum Area {
     TheMerchantCoast,
     Ratchet,
     DarkspearStrand,
-    GrizzlyHills,
-    Grizzlemaw,
+    DarrowmereLakeUnused,
+    CaerDarrowUnused,
     WinterhoofWaterWell,
     ThunderhornWaterWell,
     WildmaneWaterWell,
@@ -2755,7 +2091,7 @@ pub enum Area {
     RazorfenKraul,
     RavenHillCemetery,
     Moonglade,
-    HowlingFjord,
+    DeleteMe,
     BrackenwallVillage,
     SwamplightManor,
     BloodfenBurrow,
@@ -2858,7 +2194,7 @@ pub enum Area {
     SouthGatePass1,
     TwilightGrove,
     GmIsland,
-    DeleteMe,
+    DeleteMe1,
     SouthfuryRiver3,
     SouthfuryRiver4,
     ThandolSpan1,
@@ -2950,7 +2286,7 @@ pub enum Area {
     SouthernBarrens,
     SouthernGoldRoad,
     ZulFarrak1,
-    UtgardePinnacle,
+    UnusedalcazIsland,
     TimbermawHold,
     VanndirEncampment,
     Testazshara,
@@ -3008,7 +2344,7 @@ pub enum Area {
     TheCapeOfStranglethorn,
     SouthernSavageCoast,
     UnusedTheDeadmines002,
-    UnusedIroncladCove003,
+    UnusedIroncladCove00three,
     TheDeadmines,
     IroncladCove,
     BlackrockSpire,
@@ -3180,7 +2516,7 @@ pub enum Area {
     Plaguewood,
     Scourgehold,
     Stratholme1,
-    DoNotUse,
+    UnusedStratholme,
     DarrowmereLake,
     CaerDarrow,
     DarrowmereLake1,
@@ -3296,7 +2632,7 @@ pub enum Area {
     ShrineOfTheFallenWarrior,
     UnusedAlteracValley,
     BlackfathomDeeps1,
-    CrystalsongForest,
+    ReuseMe4,
     TheMastersCellar,
     StonewroughtPass,
     AlteracValley1,
@@ -3429,7 +2765,7 @@ pub enum Area {
     TheScorchedGrove,
     ZebWatha,
     TorWatha,
-    AzjolNerub,
+    KarazhanUnused,
     GatesOfAhnQiraj,
     TheVeiledSea7,
     DuskwitherGrounds,
@@ -3489,7 +2825,7 @@ pub enum Area {
     FethsWay,
     HellfireCitadel,
     Thrallmar,
-    BoreanTundra,
+    Reuse,
     HonorHold,
     TheStairOfDestiny,
     TwistingNether,
@@ -3561,7 +2897,7 @@ pub enum Area {
     HyjalSummit,
     SerpentshrineCavern,
     VindicatorsRest,
-    Unused3,
+    Unusedthree,
     BurningBladeRuins,
     ClanWatch,
     BloodcurseIsle,
@@ -3663,7 +2999,7 @@ pub enum Area {
     HordeEncampment,
     NightElfVillage,
     Nordrassil,
-    SholazarBasin,
+    ReuseMe,
     Area52,
     TheBloodFurnace,
     TheShatteredHalls,
@@ -3929,98 +3265,16 @@ pub enum Area {
     VeilAlaRak,
     UpperVeilShilAk,
     LowerVeilShilAk,
-    TheFrozenSea,
-    DaggercapBay,
-    Valgarde,
-    WyrmskullVillage,
-    UtgardeKeep1,
-    Nifflevar,
-    FallsOfYmiron,
-    EchoReach,
-    TheIsleOfSpears,
-    Kamagua,
-    GarvansReef,
-    ScalawagPoint,
-    NewAgamand,
-    TheAncientLift,
-    WestguardTurret,
-    Halgrind,
-    TheLaughingStand,
-    BaelgunsExcavationSite,
-    ExplorersLeagueOutpost,
-    WestguardKeep,
-    SteelGate,
-    VengeanceLanding,
-    Baleheim,
-    Skorn,
-    FortWildervar,
-    VilepreyVillage,
-    IvaldsRuin,
-    Gjalerbron,
-    TombOfTheLostKings,
     ShartuulsTransporter,
     IllidariTrainingGrounds,
     Mudsprocket,
-    CampWinterhoof,
-    DevelopmentLand,
-    MightstoneQuarry,
-    BloodsporePlains,
-    Gammoth,
-    AmberLedge,
-    Coldarra,
-    TheWestrift,
-    TheTransitusStair,
-    CoastOfEchoes,
-    RiplashStrand,
-    RiplashRuins,
-    CoastOfIdols,
-    PalEa,
-    ValianceKeep,
-    WinterfinVillage,
-    TheBoreanWall,
-    TheGeyserFields,
-    FizzcrankPumpingStation,
-    TaunkaLeVillage,
-    MagnamothCaverns,
-    ColdrockQuarry,
-    NjordsBreathBay,
-    Kaskala,
-    Transborea,
-    TheFloodPlains,
     DirehornPost,
     NatsLanding,
-    EmberClutch,
     TabethasFarm,
-    DerelictStrand,
-    TheFrozenGlade,
-    TheVibrantGlade,
-    TheTwistedGlade,
-    Rivenwood,
-    CaldemereLake,
-    UtgardeCatacombs,
-    ShieldHill,
-    LakeCauldros,
-    CauldrosIsle,
-    BleedingVale,
-    GiantsRun,
-    ApothecaryCamp,
-    EmberSpearTower,
-    ShatteredStraits,
-    Gjalerhorn,
-    FrostbladePeak,
     PlaguewoodTower,
-    WestSpearTower,
-    NorthSpearTower,
-    ChillmereCoast,
-    WhisperGulch,
-    SubZone,
-    WintersTerrace,
-    TheWakingHalls,
     SunwellPlateau,
     ReuseMeSeven,
-    SorlofsStrand,
     RazorthornRise,
-    FrostbladePass,
     IsleOfQuelDanas,
     TheDawnchaser,
     TheSinLoren,
@@ -4037,591 +3291,9 @@ pub enum Area {
     TheSunForge,
     SunwellPlateau1,
     MagistersTerrace,
-    ClaytönsWoweditLand,
-    WinterfinCaverns,
-    GlimmerBay,
-    WinterfinRetreat,
-    TheCullingOfStratholme,
-    SandsOfNasam,
-    KromsLanding,
-    NasamsTalon,
-    EchoCove,
-    BerylPoint,
-    GarroshsLanding,
-    WarsongJetty,
-    FizzcrankAirstrip,
-    LakeKumUya,
-    FarshireFields,
-    Farshire,
-    FarshireLighthouse,
-    UnuPe,
-    DeathsStand,
-    TheAbandonedReach,
-    ScaldingPools,
-    SteamSprings,
-    Talramas,
-    FesteringPools,
-    TheNexus,
-    TransitusShield,
-    BorGorokOutpost,
-    Magmoth,
-    TheDensOfDying,
-    TempleCityOfEnKilah,
-    TheWailingZiggurat,
-    SteeljawsCaravan,
-    Naxxanar,
-    WarsongHold,
-    PlainsOfNasam,
     MagistersTerrace1,
-    RuinsOfEldraNath,
-    CharredRise,
-    BlisteringPool,
-    SpireOfBlood,
-    SpireOfDecay,
-    SpireOfPain,
-    FrozenReach,
     ParhelionPlaza,
     TheDeadScar3,
-    TorpsFarm,
-    WarsongGranary,
-    WarsongSlaughterhouse,
-    WarsongFarmsOutpost,
-    WestPointStation,
-    NorthPointStation,
-    MidPointStation,
-    SouthPointStation,
-    DehtaEncampment,
-    KawsRoost,
-    WestwindRefugeeCamp,
-    MoaKiHarbor,
-    InduLeVillage,
-    SnowfallGlade,
-    TheHalfShell,
-    SurgeNeedle,
-    MoonrestGardens,
-    StarsRest,
-    WestfallBrigadeEncampment,
-    LothalorWoodlands,
-    WyrmrestTemple,
-    IcemistFalls,
-    IcemistVillage,
-    ThePitOfNarjun,
-    AgmarsHammer,
-    LakeInduLe,
-    ObsidianDragonshrine,
-    RubyDragonshrine,
-    FordragonHold,
-    KorKronVanguard,
-    TheCourtOfSkulls,
-    AngratharTheWrathgate,
-    GalakrondsRest,
-    TheWickedCoil,
-    BronzeDragonshrine,
-    TheMirrorOfDawn,
-    WintergardeKeep,
-    WintergardeMine,
-    EmeraldDragonshrine,
-    NewHearthglen,
-    CrusadersLanding,
-    SinnersFolly,
-    AzureDragonshrine,
-    PathOfTheTitans,
-    TheForgottenShore,
-    Venomspite,
-    TheCrystalVice,
-    TheCarrionFields,
-    OnslaughtBaseCamp,
-    ThorsonsPost,
-    LightsTrust,
-    FrostmourneCavern,
-    ScarletPoint,
-    JinthaKalar,
-    IceHeartCavern,
-    DrakTharonKeep,
-    Wintergrasp,
-    KiliUasAtoll,
-    Silverbrook,
-    VordrassilsHeart,
-    VordrassilsTears,
-    VordrassilsTears1,
-    VordrassilsLimb,
-    AmberpineLodge,
-    SolsticeVillage,
-    ConquestHold,
-    Voldrune,
-    GraniteSprings,
-    ZebHalak,
-    DrakTharonKeep1,
-    CampOneqwah,
-    EastwindShore,
-    TheBrokenBluffs,
-    BoulderHills,
-    RageFangShrine,
-    DrakilJinRuins,
-    BlackriverLoggingCamp,
-    HeartsBloodShrine,
-    HollowstoneMine,
-    DunArgol,
-    ThorModan,
-    BlueSkyLoggingGrounds,
-    MawOfNeltharion,
-    TheBrinyPinnacle,
-    GlitteringStrand,
-    Iskaal,
-    DragonsFall,
-    TheOculus,
-    ProspectorsPoint,
-    ColdwindHeights,
-    RedwoodTradingPost,
-    VengeancePass,
-    DawnsReach,
-    Naxxramas1,
-    HeartwoodTradingPost,
-    EvergreenTradingPost,
-    SprucePointPost,
-    WhitePineTradingPost,
-    AspenGrovePost,
-    ForestsEdgePost,
-    EldritchHeights,
-    VentureBay,
-    WintergardeCrypt,
-    BloodmoonIsle,
-    ShadowfangTower,
-    WintergardeMausoleum,
-    DuskhowlDen,
-    TheConquestPit,
-    ThePathOfIron,
-    RuinsOfTethys,
-    SilverbrookHills,
-    TheBrokenBluffs1,
-    SeventhLegionFront,
-    TheDragonWastes,
-    RuinsOfDrakZin,
-    DrakMarLake,
-    DragonspineTributary,
-    TheNorthSea1,
-    DrakUral,
-    ThorvaldsCamp,
-    GhostbladePost,
-    AshwoodPost,
-    LydellsAmbush,
-    HallsOfStone,
-    TheNexus1,
-    HarkorsCamp,
-    VordrassilPass,
-    RuunasCamp,
-    ShrineOfScales,
-    DrakAtalPassage,
-    UtgardePinnacle1,
-    HallsOfLightning,
-    Ulduar,
-    TheArgentStand,
-    AltarOfSseratus,
-    AzjolNerub1,
-    DraksotraFields,
-    Draksotra,
-    DrakAgal,
-    AcherusTheEbonHold,
-    TheAvalanche,
-    TheLostLands,
-    NesingwaryBaseCamp,
-    TheSeabreachFlow,
-    TheBonesOfNozronn,
-    KartaksHold,
-    SparktouchedHaven,
-    ThePathOfTheLifewarden,
-    RiversHeart,
-    RainspeakerCanopy,
-    FrenzyheartHill,
-    WildgrowthMangal,
-    HebValok,
-    TheSunderedShard,
-    TheLifebloodPillar,
-    MosswalkerVillage,
-    PlaguelandsTheScarletEnclave,
-    Kolramas,
-    Waygate,
-    TheSkyreachPillar,
-    HardknuckleClearing,
-    SapphireHive,
-    MistwhisperRefuge,
-    TheGlimmeringPillar,
-    SpearbornEncampment,
-    DrakTharonKeep2,
-    Zeramas,
-    ReliquaryOfAgony,
-    EbonWatch,
-    ThrymsEnd,
-    Voltarus,
-    ReliquaryOfPain,
-    RageclawDen,
-    LightsBreach,
-    PoolsOfZhaJin,
-    ZimAbwa,
-    AmphitheaterOfAnguish,
-    AltarOfRhunok,
-    AltarOfHarKoa,
-    ZimTorga,
-    PoolsOfJinAlai,
-    AltarOfQuetzLun,
-    HebDrakkar,
-    DrakMabwa,
-    ZimRhuk,
-    AltarOfMamToth,
-    AcherusTheEbonHold1,
-    NewAvalon,
-    NewAvalonFields,
-    NewAvalonOrchard,
-    NewAvalonTownHall,
-    Havenshire,
-    HavenshireFarms,
-    HavenshireLumberMill,
-    HavenshireStables,
-    ScarletHold,
-    ChapelOfTheCrimsonFlame,
-    LightsPointTower,
-    LightsPoint,
-    CryptOfRemembrance,
-    DeathsBreach,
-    TheNoxiousGlade1,
-    TyrsHand1,
-    KingsHarbor,
-    ScarletOverlook,
-    LightsHopeChapel1,
-    SinnersFolly1,
-    PestilentScar1,
-    BrowmanMill1,
-    HavenshireMine,
-    UrsocsDen,
-    TheBlightLine,
-    TheBonefields,
-    DoriansOutpost,
-    MamTothCrater,
-    ZolMazStronghold,
-    ZolHeb,
-    RageclawLake,
-    Gundrak,
-    TheSavageThicket,
-    NewAvalonForge,
-    DalaranArena,
-    Valgarde1,
-    WestguardInn,
-    Waygate1,
-    TheShapersTerrace,
-    LakesideLanding,
-    StrandOfTheAncients,
-    BittertideLake,
-    RainspeakerRapids,
-    FrenzyheartRiver,
-    WintergraspRiver,
-    TheSuntouchedPillar,
-    FrigidBreach,
-    SwindlegrinsDig,
-    TheStormwrightsShelf,
-    DeathsHandEncampment,
-    ScarletTavern,
-    Dalaran,
-    NozzlerustPost,
-    FarshireMine,
-    TheMosslightPillar,
-    SaragosasLanding,
-    VengeanceLift,
-    BalejarWatch,
-    NewAgamandInn,
-    PassageOfLostFiends,
-    TheRingOfValor,
-    HallOfTheFrostwolf,
-    HallOfTheStormpike,
-    StormwindHarbor,
-    TheMakersOverlook,
-    TheMakersPerch,
-    ScarletTower,
-    TheVioletHold,
-    Gundrak1,
-    OnslaughtHarbor,
-    K3,
-    SnowblindHills,
-    SnowblindTerrace,
-    Garm,
-    BrunnhildarVillage,
-    SifreldarVillage,
-    Valkyrion,
-    TheForlornMine,
-    BorsBreathRiver,
-    ArgentVanguard,
-    Frosthold,
-    GromArshCrashSite,
-    TempleOfStorms,
-    EngineOfTheMakers,
-    TheFootSteppes,
-    DragonspinePeaks,
-    Nidavelir,
-    NarvirsCradle,
-    SnowdriftPlains,
-    ValleyOfAncientWinters,
-    DunNiffelem,
-    FrostfieldLake,
-    Thunderfall,
-    CampTunkaLo,
-    BrannsBaseCamp,
-    GateOfEchoes,
-    PlainOfEchoes,
-    Ulduar1,
-    TerraceOfTheMakers,
-    GateOfLightning,
-    PathOfTheTitans1,
-    Uldis,
-    LokensBargain,
-    BorsFall,
-    BorsBreath,
-    RohemdalPass,
-    TheStormFoundry,
-    HibernalCavern,
-    VoldruneDwelling,
-    TorsegsRest,
-    SparksocketMinefield,
-    RicketsFolly,
-    GarmsBane,
-    GarmsRise,
-    CrystalwebCavern,
-    TempleOfLife,
-    TempleOfOrder,
-    TempleOfWinter,
-    TempleOfInvention,
-    DeathsRise,
-    TheDeadFields,
-    DargathsDemise,
-    TheHiddenHollow,
-    BernausHappyFunLand,
-    FrostgripsHollow,
-    TheFrigidTomb,
-    TwinShores,
-    ZimBosHideout,
-    AbandonedCamp,
-    TheShadowVault,
-    ColdwindPass,
-    WintersBreathLake,
-    TheForgottenOverlook,
-    JinthaKalarPassage,
-    ArrigaFootbridge,
-    TheLostPassage,
-    BouldercragsRefuge,
-    TheInventorsLibrary,
-    TheFrozenMine,
-    FrostfloeDeep,
-    TheHowlingHollow,
-    CrusaderForwardCamp,
-    Stormcrest,
-    BonesnapsCamp,
-    UfrangsHall,
-    TheObsidianSanctum,
-    AhnKahetTheOldKingdom,
-    FjornsAnvil,
-    Jotunheim,
-    SavageLedge,
-    HallsOfTheAncestors,
-    TheBlightedPool,
-    TheEyeOfEternity,
-    TheArgentVanguard,
-    MimirsWorkshop,
-    IronwallDam,
-    ValleyOfEchoes,
-    TheBreach,
-    Scourgeholme,
-    TheBrokenFront,
-    MordRetharTheDeathGate,
-    TheBombardment,
-    AldurTharTheDesolationGate,
-    TheSkybreaker,
-    OrgrimsHammer,
-    Ymirheim,
-    SaroniteMines,
-    TheConflagration,
-    IronwallRampart,
-    WeepingQuarry,
-    CorpRetharTheHorrorGate,
-    TheCourtOfBones,
-    MalykrissTheVileHold,
-    CathedralOfDarkness,
-    IcecrownCitadel,
-    IcecrownGlacier,
-    Valhalas,
-    TheUnderhalls,
-    NjorndarVillage,
-    BalargardeFortress,
-    KulGalarKeep,
-    TheCrimsonCathedral,
-    SanctumOfReanimation,
-    TheFleshwerks,
-    VengeanceLandingInn,
-    SindragosasFall,
-    WildervarMine,
-    ThePitOfTheFang,
-    FrosthowlCavern,
-    TheValleyOfLostHope,
-    TheSunkenRing,
-    TheBrokenTemple,
-    TheValleyOfFallenHeroes,
-    VanguardInfirmary,
-    HallOfTheShaper,
-    TempleOfWisdom,
-    DeathsBreach1,
-    AbandonedMine,
-    RuinsOfTheScarletEnclave,
-    HallsOfStone1,
-    HallsOfLightning1,
-    TheGreatTree,
-    TheMirrorOfTwilight,
-    TheTwilightRivulet,
-    TheDecrepitFlow,
-    ForlornWoods,
-    RuinsOfShandaral,
-    TheAzureFront,
-    VioletStand,
-    TheUnboundThicket,
-    SunreaversCommand,
-    WindrunnersOverlook,
-    TheUnderbelly,
-    KrasusLanding,
-    TheVioletHold1,
-    TheEventide,
-    SewerExitPipe,
-    CircleOfWills,
-    SilverwingFlagRoom,
-    WarsongFlagRoom,
-    WintergraspFortress,
-    CentralBridge,
-    EasternBridge,
-    WesternBridge,
-    DubraJin,
-    CrusadersPinnacle,
-    FlamewatchTower,
-    WintersEdgeTower,
-    ShadowsightTower,
-    TheCauldronOfFlames,
-    GlacialFalls,
-    WindyBluffs,
-    TheForestOfShadows,
-    Blackwatch,
-    TheChilledQuagmire,
-    TheSteppeOfLife,
-    SilentVigil,
-    GimoraksDen,
-    ThePitOfFiends,
-    BattlescarSpire,
-    HallOfHorrors,
-    TheCircleOfSuffering,
-    RiseOfSuffering,
-    KrasusLanding1,
-    SewerExitPipe1,
-    DalaranIsland,
-    ForceInterior,
-    VaultOfArchavon,
-    GateOfTheRedSun,
-    GateOfTheBlueSapphire,
-    GateOfTheGreenEmerald,
-    GateOfThePurpleAmethyst,
-    GateOfTheYellowMoon,
-    CourtyardOfTheAncients,
-    LandingBeach,
-    WestsparkWorkshop,
-    EastsparkWorkshop,
-    DalaranCity,
-    TheVioletCitadelSpire,
-    NazAnakTheForgottenDepths,
-    SunreaversSanctuary,
-    Elevator,
-    AntonidasMemorial,
-    TheVioletCitadel,
-    MagusCommerceExchange,
-    Unused,
-    FirstLegionForwardCamp,
-    HallOfTheConqueredKings,
-    BefouledTerrace,
-    TheDesecratedAltar,
-    ShimmeringBog,
-    FallenTempleOfAhnKahet,
-    HallsOfBinding,
-    WintersHeart,
-    TheNorthSea2,
-    TheBroodmothersNest,
-    DalaranFloatingRocks,
-    RaptorPens,
-    DrakTharonKeep3,
-    TheNoxiousPass,
-    VargothsRetreat,
-    VioletCitadelBalcony,
-    BandOfVariance,
-    BandOfAcceleration,
-    BandOfTransmutation,
-    BandOfAlignment,
-    AshwoodLake,
-    IronConcourse,
-    FormationGrounds,
-    RazorscalesAerie,
-    TheColossalForge,
-    TheScrapyard,
-    TheConservatoryOfLife,
-    TheArchivum,
-    ArgentTournamentGrounds,
-    ExpeditionBaseCamp,
-    SunreaverPavilion,
-    SilverCovenantPavilion,
-    TheCooperResidence,
-    TheRingOfChampions,
-    TheAspirantsRing,
-    TheArgentValiantsRing,
-    TheAllianceValiantsRing,
-    TheHordeValiantsRing,
-    ArgentPavilion,
-    SunreaverPavilion1,
-    SilverCovenantPavilion1,
-    TheForlornCavern,
-    ClaytonioTestArea,
-    QuelDelarsRest,
-    IsleOfConquest,
-    TrialOfTheCrusader,
-    TrialOfTheChampion,
-    RuneweaverSquare,
-    TheSilverEnclave,
-    IsleOfConquestNoMansLand,
-    HrothgarsLanding,
-    DeathspeakersWatch,
-    Workshop,
-    Quarry,
-    Docks,
-    Hangar,
-    Refinery,
-    HordeKeep,
-    AllianceKeep,
-    TheSeaReaversRun,
-    TransportAllianceGunship,
-    TransportHordeGunship,
-    HrothgarsLanding1,
-    TheForgeOfSouls,
-    IcecrownCitadel1,
-    PitOfSaron,
-    HallsOfReflection,
-    TransportAllianceGunshipIgb,
-    TransportHordeGunshipIgb,
-    TheFrozenThrone,
-    TheFrozenHalls,
-    TheFrostQueensLair,
-    PutricidesLaboratoryOfAlchemicalHorrorsAndFun,
-    TheSanctumOfBlood,
-    TheCrimsonHall,
-    TheFrostQueensLair1,
-    PutricidesLaboratoryOfAlchemicalHorrorsAndFun1,
-    TheCrimsonHall1,
-    TheFrozenThrone1,
-    TheSanctumOfBlood1,
-    Frostmourne,
-    TheDarkApproach,
-    ScourgelordsCommand,
-    TheShadowThrone,
-    TheHiddenPassage,
-    Frostmourne1,
-    TheRubySanctum,
 }
 
 impl Area {
@@ -4681,9 +3353,9 @@ impl Area {
             Self::BrackwellPumpkinPatch => 0x3e,
             Self::TheStonefieldFarm => 0x3f,
             Self::TheMaclureVineyards => 0x40,
-            Self::Dragonblight => 0x41,
-            Self::ZulDrak => 0x42,
-            Self::TheStormPeaks => 0x43,
+            Self::ReuseMeThree => 0x41,
+            Self::ReuseMeSix => 0x42,
+            Self::ReuseMeFive => 0x43,
             Self::LakeEverstill => 0x44,
             Self::Lakeshire => 0x45,
             Self::Stonewatch => 0x46,
@@ -4798,11 +3470,11 @@ impl Area {
             Self::MardenholdeKeep => 0xcb,
             Self::PyrewoodVillage => 0xcc,
             Self::DunModr => 0xcd,
-            Self::UtgardeKeep => 0xce,
+            Self::UnusedWestfall => 0xce,
             Self::TheGreatSea => 0xcf,
             Self::UnusedIroncladcove => 0xd0,
             Self::ShadowfangKeep => 0xd1,
-            Self::Icecrown => 0xd2,
+            Self::ReuseMe2 => 0xd2,
             Self::IceflowLake => 0xd3,
             Self::HelmsBedLake => 0xd4,
             Self::DeepElemMine => 0xd5,
@@ -4863,7 +3535,7 @@ impl Area {
             Self::UnusedStonewroughtPass => 0x114,
             Self::TheFoothillCaverns => 0x115,
             Self::LordamereInternmentCamp => 0x116,
-            Self::DalaranCrater => 0x117,
+            Self::Dalaran => 0x117,
             Self::Strahnbrad => 0x118,
             Self::RuinsOfAlterac => 0x119,
             Self::CrushridgeHold => 0x11a,
@@ -4971,8 +3643,8 @@ impl Area {
             Self::TheMerchantCoast => 0x187,
             Self::Ratchet => 0x188,
             Self::DarkspearStrand => 0x189,
-            Self::GrizzlyHills => 0x18a,
-            Self::Grizzlemaw => 0x18b,
+            Self::DarrowmereLakeUnused => 0x18a,
+            Self::CaerDarrowUnused => 0x18b,
             Self::WinterhoofWaterWell => 0x18c,
             Self::ThunderhornWaterWell => 0x18d,
             Self::WildmaneWaterWell => 0x18e,
@@ -5067,7 +3739,7 @@ impl Area {
             Self::RazorfenKraul => 0x1eb,
             Self::RavenHillCemetery => 0x1ec,
             Self::Moonglade => 0x1ed,
-            Self::HowlingFjord => 0x1ef,
+            Self::DeleteMe => 0x1ef,
             Self::BrackenwallVillage => 0x1f0,
             Self::SwamplightManor => 0x1f1,
             Self::BloodfenBurrow => 0x1f2,
@@ -5170,7 +3842,7 @@ impl Area {
             Self::SouthGatePass1 => 0x347,
             Self::TwilightGrove => 0x358,
             Self::GmIsland => 0x36c,
-            Self::DeleteMe => 0x36d,
+            Self::DeleteMe1 => 0x36d,
             Self::SouthfuryRiver3 => 0x36e,
             Self::SouthfuryRiver4 => 0x36f,
             Self::ThandolSpan1 => 0x370,
@@ -5262,7 +3934,7 @@ impl Area {
             Self::SouthernBarrens => 0x484,
             Self::SouthernGoldRoad => 0x485,
             Self::ZulFarrak1 => 0x498,
-            Self::UtgardePinnacle => 0x4ac,
+            Self::UnusedalcazIsland => 0x4ac,
             Self::TimbermawHold => 0x4c0,
             Self::VanndirEncampment => 0x4c1,
             Self::Testazshara => 0x4c2,
@@ -5320,7 +3992,7 @@ impl Area {
             Self::TheCapeOfStranglethorn => 0x629,
             Self::SouthernSavageCoast => 0x62a,
             Self::UnusedTheDeadmines002 => 0x62b,
-            Self::UnusedIroncladCove003 => 0x62c,
+            Self::UnusedIroncladCove00three => 0x62c,
             Self::TheDeadmines => 0x62d,
             Self::IroncladCove => 0x62e,
             Self::BlackrockSpire => 0x62f,
@@ -5492,7 +4164,7 @@ impl Area {
             Self::Plaguewood => 0x8e5,
             Self::Scourgehold => 0x8e6,
             Self::Stratholme1 => 0x8e7,
-            Self::DoNotUse => 0x8e8,
+            Self::UnusedStratholme => 0x8e8,
             Self::DarrowmereLake => 0x8f9,
             Self::CaerDarrow => 0x8fa,
             Self::DarrowmereLake1 => 0x8fb,
@@ -5608,7 +4280,7 @@ impl Area {
             Self::ShrineOfTheFallenWarrior => 0xac5,
             Self::UnusedAlteracValley => 0xad9,
             Self::BlackfathomDeeps1 => 0xaed,
-            Self::CrystalsongForest => 0xb01,
+            Self::ReuseMe4 => 0xb01,
             Self::TheMastersCellar => 0xb15,
             Self::StonewroughtPass => 0xb16,
             Self::AlteracValley1 => 0xb17,
@@ -5741,7 +4413,7 @@ impl Area {
             Self::TheScorchedGrove => 0xd92,
             Self::ZebWatha => 0xd93,
             Self::TorWatha => 0xd94,
-            Self::AzjolNerub => 0xd95,
+            Self::KarazhanUnused => 0xd95,
             Self::GatesOfAhnQiraj => 0xd96,
             Self::TheVeiledSea7 => 0xd97,
             Self::DuskwitherGrounds => 0xd98,
@@ -5801,7 +4473,7 @@ impl Area {
             Self::FethsWay => 0xdce,
             Self::HellfireCitadel => 0xdcf,
             Self::Thrallmar => 0xdd0,
-            Self::BoreanTundra => 0xdd1,
+            Self::Reuse => 0xdd1,
             Self::HonorHold => 0xdd2,
             Self::TheStairOfDestiny => 0xdd3,
             Self::TwistingNether => 0xdd4,
@@ -5873,7 +4545,7 @@ impl Area {
             Self::HyjalSummit => 0xe16,
             Self::SerpentshrineCavern => 0xe17,
             Self::VindicatorsRest => 0xe18,
-            Self::Unused3 => 0xe19,
+            Self::Unusedthree => 0xe19,
             Self::BurningBladeRuins => 0xe1a,
             Self::ClanWatch => 0xe1b,
             Self::BloodcurseIsle => 0xe1c,
@@ -5975,7 +4647,7 @@ impl Area {
             Self::HordeEncampment => 0xe7c,
             Self::NightElfVillage => 0xe7d,
             Self::Nordrassil => 0xe7e,
-            Self::SholazarBasin => 0xe7f,
+            Self::ReuseMe => 0xe7f,
             Self::Area52 => 0xe80,
             Self::TheBloodFurnace => 0xe81,
             Self::TheShatteredHalls => 0xe82,
@@ -6241,98 +4913,16 @@ impl Area {
             Self::VeilAlaRak => 0xf88,
             Self::UpperVeilShilAk => 0xf89,
             Self::LowerVeilShilAk => 0xf8a,
-            Self::TheFrozenSea => 0xf8b,
-            Self::DaggercapBay => 0xf8c,
-            Self::Valgarde => 0xf8d,
-            Self::WyrmskullVillage => 0xf8e,
-            Self::UtgardeKeep1 => 0xf8f,
-            Self::Nifflevar => 0xf90,
-            Self::FallsOfYmiron => 0xf91,
-            Self::EchoReach => 0xf92,
-            Self::TheIsleOfSpears => 0xf93,
-            Self::Kamagua => 0xf94,
-            Self::GarvansReef => 0xf95,
-            Self::ScalawagPoint => 0xf96,
-            Self::NewAgamand => 0xf97,
-            Self::TheAncientLift => 0xf98,
-            Self::WestguardTurret => 0xf99,
-            Self::Halgrind => 0xf9a,
-            Self::TheLaughingStand => 0xf9b,
-            Self::BaelgunsExcavationSite => 0xf9c,
-            Self::ExplorersLeagueOutpost => 0xf9d,
-            Self::WestguardKeep => 0xf9e,
-            Self::SteelGate => 0xf9f,
-            Self::VengeanceLanding => 0xfa0,
-            Self::Baleheim => 0xfa1,
-            Self::Skorn => 0xfa2,
-            Self::FortWildervar => 0xfa3,
-            Self::VilepreyVillage => 0xfa4,
-            Self::IvaldsRuin => 0xfa5,
-            Self::Gjalerbron => 0xfa6,
-            Self::TombOfTheLostKings => 0xfa7,
             Self::ShartuulsTransporter => 0xfa8,
             Self::IllidariTrainingGrounds => 0xfa9,
             Self::Mudsprocket => 0xfaa,
-            Self::CampWinterhoof => 0xfb2,
-            Self::DevelopmentLand => 0xfb3,
-            Self::MightstoneQuarry => 0xfb4,
-            Self::BloodsporePlains => 0xfb5,
-            Self::Gammoth => 0xfb6,
-            Self::AmberLedge => 0xfb7,
-            Self::Coldarra => 0xfb8,
-            Self::TheWestrift => 0xfb9,
-            Self::TheTransitusStair => 0xfba,
-            Self::CoastOfEchoes => 0xfbb,
-            Self::RiplashStrand => 0xfbc,
-            Self::RiplashRuins => 0xfbd,
-            Self::CoastOfIdols => 0xfbe,
-            Self::PalEa => 0xfbf,
-            Self::ValianceKeep => 0xfc0,
-            Self::WinterfinVillage => 0xfc1,
-            Self::TheBoreanWall => 0xfc2,
-            Self::TheGeyserFields => 0xfc3,
-            Self::FizzcrankPumpingStation => 0xfc4,
-            Self::TaunkaLeVillage => 0xfc5,
-            Self::MagnamothCaverns => 0xfc6,
-            Self::ColdrockQuarry => 0xfc7,
-            Self::NjordsBreathBay => 0xfc8,
-            Self::Kaskala => 0xfc9,
-            Self::Transborea => 0xfca,
-            Self::TheFloodPlains => 0xfcb,
             Self::DirehornPost => 0xfce,
             Self::NatsLanding => 0xfcf,
-            Self::EmberClutch => 0xfd0,
             Self::TabethasFarm => 0xfd1,
-            Self::DerelictStrand => 0xfd2,
-            Self::TheFrozenGlade => 0xfd3,
-            Self::TheVibrantGlade => 0xfd4,
-            Self::TheTwistedGlade => 0xfd5,
-            Self::Rivenwood => 0xfd6,
-            Self::CaldemereLake => 0xfd7,
-            Self::UtgardeCatacombs => 0xfd8,
-            Self::ShieldHill => 0xfd9,
-            Self::LakeCauldros => 0xfda,
-            Self::CauldrosIsle => 0xfdb,
-            Self::BleedingVale => 0xfdc,
-            Self::GiantsRun => 0xfdd,
-            Self::ApothecaryCamp => 0xfde,
-            Self::EmberSpearTower => 0xfdf,
-            Self::ShatteredStraits => 0xfe0,
-            Self::Gjalerhorn => 0xfe1,
-            Self::FrostbladePeak => 0xfe2,
             Self::PlaguewoodTower => 0xfe3,
-            Self::WestSpearTower => 0xfe4,
-            Self::NorthSpearTower => 0xfe5,
-            Self::ChillmereCoast => 0xfe6,
-            Self::WhisperGulch => 0xfe7,
-            Self::SubZone => 0xfe8,
-            Self::WintersTerrace => 0xfe9,
-            Self::TheWakingHalls => 0xfea,
             Self::SunwellPlateau => 0xfeb,
             Self::ReuseMeSeven => 0xfec,
-            Self::SorlofsStrand => 0xfed,
             Self::RazorthornRise => 0xfee,
-            Self::FrostbladePass => 0xfef,
             Self::IsleOfQuelDanas => 0xff0,
             Self::TheDawnchaser => 0xff1,
             Self::TheSinLoren => 0xff2,
@@ -6349,591 +4939,9 @@ impl Area {
             Self::TheSunForge => 0xffd,
             Self::SunwellPlateau1 => 0xffe,
             Self::MagistersTerrace => 0xfff,
-            Self::ClaytönsWoweditLand => 0x1000,
-            Self::WinterfinCaverns => 0x1001,
-            Self::GlimmerBay => 0x1002,
-            Self::WinterfinRetreat => 0x1003,
-            Self::TheCullingOfStratholme => 0x1004,
-            Self::SandsOfNasam => 0x1005,
-            Self::KromsLanding => 0x1006,
-            Self::NasamsTalon => 0x1007,
-            Self::EchoCove => 0x1008,
-            Self::BerylPoint => 0x1009,
-            Self::GarroshsLanding => 0x100a,
-            Self::WarsongJetty => 0x100b,
-            Self::FizzcrankAirstrip => 0x100c,
-            Self::LakeKumUya => 0x100d,
-            Self::FarshireFields => 0x100e,
-            Self::Farshire => 0x100f,
-            Self::FarshireLighthouse => 0x1010,
-            Self::UnuPe => 0x1011,
-            Self::DeathsStand => 0x1012,
-            Self::TheAbandonedReach => 0x1013,
-            Self::ScaldingPools => 0x1014,
-            Self::SteamSprings => 0x1015,
-            Self::Talramas => 0x1016,
-            Self::FesteringPools => 0x1017,
-            Self::TheNexus => 0x1018,
-            Self::TransitusShield => 0x1019,
-            Self::BorGorokOutpost => 0x101a,
-            Self::Magmoth => 0x101b,
-            Self::TheDensOfDying => 0x101c,
-            Self::TempleCityOfEnKilah => 0x101d,
-            Self::TheWailingZiggurat => 0x101e,
-            Self::SteeljawsCaravan => 0x101f,
-            Self::Naxxanar => 0x1020,
-            Self::WarsongHold => 0x1021,
-            Self::PlainsOfNasam => 0x1022,
             Self::MagistersTerrace1 => 0x1023,
-            Self::RuinsOfEldraNath => 0x1024,
-            Self::CharredRise => 0x1025,
-            Self::BlisteringPool => 0x1026,
-            Self::SpireOfBlood => 0x1027,
-            Self::SpireOfDecay => 0x1028,
-            Self::SpireOfPain => 0x1029,
-            Self::FrozenReach => 0x102a,
             Self::ParhelionPlaza => 0x102b,
             Self::TheDeadScar3 => 0x102c,
-            Self::TorpsFarm => 0x102d,
-            Self::WarsongGranary => 0x102e,
-            Self::WarsongSlaughterhouse => 0x102f,
-            Self::WarsongFarmsOutpost => 0x1030,
-            Self::WestPointStation => 0x1031,
-            Self::NorthPointStation => 0x1032,
-            Self::MidPointStation => 0x1033,
-            Self::SouthPointStation => 0x1034,
-            Self::DehtaEncampment => 0x1035,
-            Self::KawsRoost => 0x1036,
-            Self::WestwindRefugeeCamp => 0x1037,
-            Self::MoaKiHarbor => 0x1038,
-            Self::InduLeVillage => 0x1039,
-            Self::SnowfallGlade => 0x103a,
-            Self::TheHalfShell => 0x103b,
-            Self::SurgeNeedle => 0x103c,
-            Self::MoonrestGardens => 0x103d,
-            Self::StarsRest => 0x103e,
-            Self::WestfallBrigadeEncampment => 0x103f,
-            Self::LothalorWoodlands => 0x1040,
-            Self::WyrmrestTemple => 0x1041,
-            Self::IcemistFalls => 0x1042,
-            Self::IcemistVillage => 0x1043,
-            Self::ThePitOfNarjun => 0x1044,
-            Self::AgmarsHammer => 0x1045,
-            Self::LakeInduLe => 0x1046,
-            Self::ObsidianDragonshrine => 0x1047,
-            Self::RubyDragonshrine => 0x1048,
-            Self::FordragonHold => 0x1049,
-            Self::KorKronVanguard => 0x104a,
-            Self::TheCourtOfSkulls => 0x104b,
-            Self::AngratharTheWrathgate => 0x104c,
-            Self::GalakrondsRest => 0x104d,
-            Self::TheWickedCoil => 0x104e,
-            Self::BronzeDragonshrine => 0x104f,
-            Self::TheMirrorOfDawn => 0x1050,
-            Self::WintergardeKeep => 0x1051,
-            Self::WintergardeMine => 0x1052,
-            Self::EmeraldDragonshrine => 0x1053,
-            Self::NewHearthglen => 0x1054,
-            Self::CrusadersLanding => 0x1055,
-            Self::SinnersFolly => 0x1056,
-            Self::AzureDragonshrine => 0x1057,
-            Self::PathOfTheTitans => 0x1058,
-            Self::TheForgottenShore => 0x1059,
-            Self::Venomspite => 0x105a,
-            Self::TheCrystalVice => 0x105b,
-            Self::TheCarrionFields => 0x105c,
-            Self::OnslaughtBaseCamp => 0x105d,
-            Self::ThorsonsPost => 0x105e,
-            Self::LightsTrust => 0x105f,
-            Self::FrostmourneCavern => 0x1060,
-            Self::ScarletPoint => 0x1061,
-            Self::JinthaKalar => 0x1062,
-            Self::IceHeartCavern => 0x1063,
-            Self::DrakTharonKeep => 0x1064,
-            Self::Wintergrasp => 0x1065,
-            Self::KiliUasAtoll => 0x1066,
-            Self::Silverbrook => 0x1067,
-            Self::VordrassilsHeart => 0x1068,
-            Self::VordrassilsTears => 0x1069,
-            Self::VordrassilsTears1 => 0x106a,
-            Self::VordrassilsLimb => 0x106b,
-            Self::AmberpineLodge => 0x106c,
-            Self::SolsticeVillage => 0x106d,
-            Self::ConquestHold => 0x106e,
-            Self::Voldrune => 0x106f,
-            Self::GraniteSprings => 0x1070,
-            Self::ZebHalak => 0x1071,
-            Self::DrakTharonKeep1 => 0x1072,
-            Self::CampOneqwah => 0x1073,
-            Self::EastwindShore => 0x1074,
-            Self::TheBrokenBluffs => 0x1075,
-            Self::BoulderHills => 0x1076,
-            Self::RageFangShrine => 0x1077,
-            Self::DrakilJinRuins => 0x1078,
-            Self::BlackriverLoggingCamp => 0x1079,
-            Self::HeartsBloodShrine => 0x107a,
-            Self::HollowstoneMine => 0x107b,
-            Self::DunArgol => 0x107c,
-            Self::ThorModan => 0x107d,
-            Self::BlueSkyLoggingGrounds => 0x107e,
-            Self::MawOfNeltharion => 0x107f,
-            Self::TheBrinyPinnacle => 0x1080,
-            Self::GlitteringStrand => 0x1081,
-            Self::Iskaal => 0x1082,
-            Self::DragonsFall => 0x1083,
-            Self::TheOculus => 0x1084,
-            Self::ProspectorsPoint => 0x1085,
-            Self::ColdwindHeights => 0x1086,
-            Self::RedwoodTradingPost => 0x1087,
-            Self::VengeancePass => 0x1088,
-            Self::DawnsReach => 0x1089,
-            Self::Naxxramas1 => 0x108a,
-            Self::HeartwoodTradingPost => 0x108b,
-            Self::EvergreenTradingPost => 0x108c,
-            Self::SprucePointPost => 0x108d,
-            Self::WhitePineTradingPost => 0x108e,
-            Self::AspenGrovePost => 0x108f,
-            Self::ForestsEdgePost => 0x1090,
-            Self::EldritchHeights => 0x1091,
-            Self::VentureBay => 0x1092,
-            Self::WintergardeCrypt => 0x1093,
-            Self::BloodmoonIsle => 0x1094,
-            Self::ShadowfangTower => 0x1095,
-            Self::WintergardeMausoleum => 0x1096,
-            Self::DuskhowlDen => 0x1097,
-            Self::TheConquestPit => 0x1098,
-            Self::ThePathOfIron => 0x1099,
-            Self::RuinsOfTethys => 0x109a,
-            Self::SilverbrookHills => 0x109b,
-            Self::TheBrokenBluffs1 => 0x109c,
-            Self::SeventhLegionFront => 0x109d,
-            Self::TheDragonWastes => 0x109e,
-            Self::RuinsOfDrakZin => 0x109f,
-            Self::DrakMarLake => 0x10a0,
-            Self::DragonspineTributary => 0x10a1,
-            Self::TheNorthSea1 => 0x10a2,
-            Self::DrakUral => 0x10a3,
-            Self::ThorvaldsCamp => 0x10a4,
-            Self::GhostbladePost => 0x10a5,
-            Self::AshwoodPost => 0x10a6,
-            Self::LydellsAmbush => 0x10a7,
-            Self::HallsOfStone => 0x10a8,
-            Self::TheNexus1 => 0x10a9,
-            Self::HarkorsCamp => 0x10aa,
-            Self::VordrassilPass => 0x10ab,
-            Self::RuunasCamp => 0x10ac,
-            Self::ShrineOfScales => 0x10ad,
-            Self::DrakAtalPassage => 0x10ae,
-            Self::UtgardePinnacle1 => 0x10af,
-            Self::HallsOfLightning => 0x10b0,
-            Self::Ulduar => 0x10b1,
-            Self::TheArgentStand => 0x10b3,
-            Self::AltarOfSseratus => 0x10b4,
-            Self::AzjolNerub1 => 0x10b5,
-            Self::DraksotraFields => 0x10b6,
-            Self::Draksotra => 0x10b7,
-            Self::DrakAgal => 0x10b8,
-            Self::AcherusTheEbonHold => 0x10b9,
-            Self::TheAvalanche => 0x10ba,
-            Self::TheLostLands => 0x10bb,
-            Self::NesingwaryBaseCamp => 0x10bc,
-            Self::TheSeabreachFlow => 0x10bd,
-            Self::TheBonesOfNozronn => 0x10be,
-            Self::KartaksHold => 0x10bf,
-            Self::SparktouchedHaven => 0x10c0,
-            Self::ThePathOfTheLifewarden => 0x10c1,
-            Self::RiversHeart => 0x10c2,
-            Self::RainspeakerCanopy => 0x10c3,
-            Self::FrenzyheartHill => 0x10c4,
-            Self::WildgrowthMangal => 0x10c5,
-            Self::HebValok => 0x10c6,
-            Self::TheSunderedShard => 0x10c7,
-            Self::TheLifebloodPillar => 0x10c8,
-            Self::MosswalkerVillage => 0x10c9,
-            Self::PlaguelandsTheScarletEnclave => 0x10ca,
-            Self::Kolramas => 0x10cb,
-            Self::Waygate => 0x10cc,
-            Self::TheSkyreachPillar => 0x10ce,
-            Self::HardknuckleClearing => 0x10cf,
-            Self::SapphireHive => 0x10d0,
-            Self::MistwhisperRefuge => 0x10d2,
-            Self::TheGlimmeringPillar => 0x10d3,
-            Self::SpearbornEncampment => 0x10d4,
-            Self::DrakTharonKeep2 => 0x10d5,
-            Self::Zeramas => 0x10d6,
-            Self::ReliquaryOfAgony => 0x10d7,
-            Self::EbonWatch => 0x10d8,
-            Self::ThrymsEnd => 0x10d9,
-            Self::Voltarus => 0x10da,
-            Self::ReliquaryOfPain => 0x10db,
-            Self::RageclawDen => 0x10dc,
-            Self::LightsBreach => 0x10dd,
-            Self::PoolsOfZhaJin => 0x10de,
-            Self::ZimAbwa => 0x10df,
-            Self::AmphitheaterOfAnguish => 0x10e0,
-            Self::AltarOfRhunok => 0x10e1,
-            Self::AltarOfHarKoa => 0x10e2,
-            Self::ZimTorga => 0x10e3,
-            Self::PoolsOfJinAlai => 0x10e4,
-            Self::AltarOfQuetzLun => 0x10e5,
-            Self::HebDrakkar => 0x10e6,
-            Self::DrakMabwa => 0x10e7,
-            Self::ZimRhuk => 0x10e8,
-            Self::AltarOfMamToth => 0x10e9,
-            Self::AcherusTheEbonHold1 => 0x10f6,
-            Self::NewAvalon => 0x10f7,
-            Self::NewAvalonFields => 0x10f8,
-            Self::NewAvalonOrchard => 0x10f9,
-            Self::NewAvalonTownHall => 0x10fa,
-            Self::Havenshire => 0x10fb,
-            Self::HavenshireFarms => 0x10fc,
-            Self::HavenshireLumberMill => 0x10fd,
-            Self::HavenshireStables => 0x10fe,
-            Self::ScarletHold => 0x10ff,
-            Self::ChapelOfTheCrimsonFlame => 0x1100,
-            Self::LightsPointTower => 0x1101,
-            Self::LightsPoint => 0x1102,
-            Self::CryptOfRemembrance => 0x1103,
-            Self::DeathsBreach => 0x1104,
-            Self::TheNoxiousGlade1 => 0x1105,
-            Self::TyrsHand1 => 0x1106,
-            Self::KingsHarbor => 0x1107,
-            Self::ScarletOverlook => 0x1108,
-            Self::LightsHopeChapel1 => 0x1109,
-            Self::SinnersFolly1 => 0x110a,
-            Self::PestilentScar1 => 0x110b,
-            Self::BrowmanMill1 => 0x110c,
-            Self::HavenshireMine => 0x110d,
-            Self::UrsocsDen => 0x110e,
-            Self::TheBlightLine => 0x110f,
-            Self::TheBonefields => 0x1110,
-            Self::DoriansOutpost => 0x1111,
-            Self::MamTothCrater => 0x1113,
-            Self::ZolMazStronghold => 0x1114,
-            Self::ZolHeb => 0x1115,
-            Self::RageclawLake => 0x1116,
-            Self::Gundrak => 0x1117,
-            Self::TheSavageThicket => 0x1118,
-            Self::NewAvalonForge => 0x1119,
-            Self::DalaranArena => 0x111a,
-            Self::Valgarde1 => 0x111b,
-            Self::WestguardInn => 0x111c,
-            Self::Waygate1 => 0x111d,
-            Self::TheShapersTerrace => 0x111e,
-            Self::LakesideLanding => 0x111f,
-            Self::StrandOfTheAncients => 0x1120,
-            Self::BittertideLake => 0x1121,
-            Self::RainspeakerRapids => 0x1122,
-            Self::FrenzyheartRiver => 0x1123,
-            Self::WintergraspRiver => 0x1124,
-            Self::TheSuntouchedPillar => 0x1125,
-            Self::FrigidBreach => 0x1126,
-            Self::SwindlegrinsDig => 0x1127,
-            Self::TheStormwrightsShelf => 0x1128,
-            Self::DeathsHandEncampment => 0x1129,
-            Self::ScarletTavern => 0x112a,
-            Self::Dalaran => 0x112b,
-            Self::NozzlerustPost => 0x112c,
-            Self::FarshireMine => 0x112f,
-            Self::TheMosslightPillar => 0x1130,
-            Self::SaragosasLanding => 0x1131,
-            Self::VengeanceLift => 0x1132,
-            Self::BalejarWatch => 0x1133,
-            Self::NewAgamandInn => 0x1134,
-            Self::PassageOfLostFiends => 0x1135,
-            Self::TheRingOfValor => 0x1136,
-            Self::HallOfTheFrostwolf => 0x1137,
-            Self::HallOfTheStormpike => 0x1138,
-            Self::StormwindHarbor => 0x113b,
-            Self::TheMakersOverlook => 0x113c,
-            Self::TheMakersPerch => 0x113d,
-            Self::ScarletTower => 0x113e,
-            Self::TheVioletHold => 0x113f,
-            Self::Gundrak1 => 0x1140,
-            Self::OnslaughtHarbor => 0x1141,
-            Self::K3 => 0x1142,
-            Self::SnowblindHills => 0x1143,
-            Self::SnowblindTerrace => 0x1144,
-            Self::Garm => 0x1145,
-            Self::BrunnhildarVillage => 0x1146,
-            Self::SifreldarVillage => 0x1147,
-            Self::Valkyrion => 0x1148,
-            Self::TheForlornMine => 0x1149,
-            Self::BorsBreathRiver => 0x114a,
-            Self::ArgentVanguard => 0x114b,
-            Self::Frosthold => 0x114c,
-            Self::GromArshCrashSite => 0x114d,
-            Self::TempleOfStorms => 0x114e,
-            Self::EngineOfTheMakers => 0x114f,
-            Self::TheFootSteppes => 0x1150,
-            Self::DragonspinePeaks => 0x1151,
-            Self::Nidavelir => 0x1152,
-            Self::NarvirsCradle => 0x1153,
-            Self::SnowdriftPlains => 0x1154,
-            Self::ValleyOfAncientWinters => 0x1155,
-            Self::DunNiffelem => 0x1156,
-            Self::FrostfieldLake => 0x1157,
-            Self::Thunderfall => 0x1158,
-            Self::CampTunkaLo => 0x1159,
-            Self::BrannsBaseCamp => 0x115a,
-            Self::GateOfEchoes => 0x115b,
-            Self::PlainOfEchoes => 0x115c,
-            Self::Ulduar1 => 0x115d,
-            Self::TerraceOfTheMakers => 0x115e,
-            Self::GateOfLightning => 0x115f,
-            Self::PathOfTheTitans1 => 0x1160,
-            Self::Uldis => 0x1161,
-            Self::LokensBargain => 0x1162,
-            Self::BorsFall => 0x1163,
-            Self::BorsBreath => 0x1164,
-            Self::RohemdalPass => 0x1165,
-            Self::TheStormFoundry => 0x1166,
-            Self::HibernalCavern => 0x1167,
-            Self::VoldruneDwelling => 0x1168,
-            Self::TorsegsRest => 0x1169,
-            Self::SparksocketMinefield => 0x116a,
-            Self::RicketsFolly => 0x116b,
-            Self::GarmsBane => 0x116c,
-            Self::GarmsRise => 0x116d,
-            Self::CrystalwebCavern => 0x116e,
-            Self::TempleOfLife => 0x116f,
-            Self::TempleOfOrder => 0x1170,
-            Self::TempleOfWinter => 0x1171,
-            Self::TempleOfInvention => 0x1172,
-            Self::DeathsRise => 0x1173,
-            Self::TheDeadFields => 0x1174,
-            Self::DargathsDemise => 0x1175,
-            Self::TheHiddenHollow => 0x1176,
-            Self::BernausHappyFunLand => 0x1177,
-            Self::FrostgripsHollow => 0x1178,
-            Self::TheFrigidTomb => 0x1179,
-            Self::TwinShores => 0x117a,
-            Self::ZimBosHideout => 0x117b,
-            Self::AbandonedCamp => 0x117c,
-            Self::TheShadowVault => 0x117d,
-            Self::ColdwindPass => 0x117e,
-            Self::WintersBreathLake => 0x117f,
-            Self::TheForgottenOverlook => 0x1180,
-            Self::JinthaKalarPassage => 0x1181,
-            Self::ArrigaFootbridge => 0x1182,
-            Self::TheLostPassage => 0x1183,
-            Self::BouldercragsRefuge => 0x1184,
-            Self::TheInventorsLibrary => 0x1185,
-            Self::TheFrozenMine => 0x1186,
-            Self::FrostfloeDeep => 0x1187,
-            Self::TheHowlingHollow => 0x1188,
-            Self::CrusaderForwardCamp => 0x1189,
-            Self::Stormcrest => 0x118a,
-            Self::BonesnapsCamp => 0x118b,
-            Self::UfrangsHall => 0x118c,
-            Self::TheObsidianSanctum => 0x118d,
-            Self::AhnKahetTheOldKingdom => 0x118e,
-            Self::FjornsAnvil => 0x118f,
-            Self::Jotunheim => 0x1190,
-            Self::SavageLedge => 0x1191,
-            Self::HallsOfTheAncestors => 0x1192,
-            Self::TheBlightedPool => 0x1193,
-            Self::TheEyeOfEternity => 0x1194,
-            Self::TheArgentVanguard => 0x1195,
-            Self::MimirsWorkshop => 0x1196,
-            Self::IronwallDam => 0x1197,
-            Self::ValleyOfEchoes => 0x1198,
-            Self::TheBreach => 0x1199,
-            Self::Scourgeholme => 0x119a,
-            Self::TheBrokenFront => 0x119b,
-            Self::MordRetharTheDeathGate => 0x119c,
-            Self::TheBombardment => 0x119d,
-            Self::AldurTharTheDesolationGate => 0x119e,
-            Self::TheSkybreaker => 0x119f,
-            Self::OrgrimsHammer => 0x11a0,
-            Self::Ymirheim => 0x11a1,
-            Self::SaroniteMines => 0x11a2,
-            Self::TheConflagration => 0x11a3,
-            Self::IronwallRampart => 0x11a4,
-            Self::WeepingQuarry => 0x11a5,
-            Self::CorpRetharTheHorrorGate => 0x11a6,
-            Self::TheCourtOfBones => 0x11a7,
-            Self::MalykrissTheVileHold => 0x11a8,
-            Self::CathedralOfDarkness => 0x11a9,
-            Self::IcecrownCitadel => 0x11aa,
-            Self::IcecrownGlacier => 0x11ab,
-            Self::Valhalas => 0x11ac,
-            Self::TheUnderhalls => 0x11ad,
-            Self::NjorndarVillage => 0x11ae,
-            Self::BalargardeFortress => 0x11af,
-            Self::KulGalarKeep => 0x11b0,
-            Self::TheCrimsonCathedral => 0x11b1,
-            Self::SanctumOfReanimation => 0x11b2,
-            Self::TheFleshwerks => 0x11b3,
-            Self::VengeanceLandingInn => 0x11b4,
-            Self::SindragosasFall => 0x11b5,
-            Self::WildervarMine => 0x11b6,
-            Self::ThePitOfTheFang => 0x11b7,
-            Self::FrosthowlCavern => 0x11b8,
-            Self::TheValleyOfLostHope => 0x11b9,
-            Self::TheSunkenRing => 0x11ba,
-            Self::TheBrokenTemple => 0x11bb,
-            Self::TheValleyOfFallenHeroes => 0x11bc,
-            Self::VanguardInfirmary => 0x11bd,
-            Self::HallOfTheShaper => 0x11be,
-            Self::TempleOfWisdom => 0x11bf,
-            Self::DeathsBreach1 => 0x11c0,
-            Self::AbandonedMine => 0x11c1,
-            Self::RuinsOfTheScarletEnclave => 0x11c2,
-            Self::HallsOfStone1 => 0x11c3,
-            Self::HallsOfLightning1 => 0x11c4,
-            Self::TheGreatTree => 0x11c5,
-            Self::TheMirrorOfTwilight => 0x11c6,
-            Self::TheTwilightRivulet => 0x11c7,
-            Self::TheDecrepitFlow => 0x11c8,
-            Self::ForlornWoods => 0x11c9,
-            Self::RuinsOfShandaral => 0x11ca,
-            Self::TheAzureFront => 0x11cb,
-            Self::VioletStand => 0x11cc,
-            Self::TheUnboundThicket => 0x11cd,
-            Self::SunreaversCommand => 0x11ce,
-            Self::WindrunnersOverlook => 0x11cf,
-            Self::TheUnderbelly => 0x11d0,
-            Self::KrasusLanding => 0x11d4,
-            Self::TheVioletHold1 => 0x11d7,
-            Self::TheEventide => 0x11d8,
-            Self::SewerExitPipe => 0x11d9,
-            Self::CircleOfWills => 0x11da,
-            Self::SilverwingFlagRoom => 0x11db,
-            Self::WarsongFlagRoom => 0x11dc,
-            Self::WintergraspFortress => 0x11df,
-            Self::CentralBridge => 0x11e0,
-            Self::EasternBridge => 0x11e1,
-            Self::WesternBridge => 0x11e2,
-            Self::DubraJin => 0x11e3,
-            Self::CrusadersPinnacle => 0x11e4,
-            Self::FlamewatchTower => 0x11e5,
-            Self::WintersEdgeTower => 0x11e6,
-            Self::ShadowsightTower => 0x11e7,
-            Self::TheCauldronOfFlames => 0x11e8,
-            Self::GlacialFalls => 0x11e9,
-            Self::WindyBluffs => 0x11ea,
-            Self::TheForestOfShadows => 0x11eb,
-            Self::Blackwatch => 0x11ec,
-            Self::TheChilledQuagmire => 0x11ed,
-            Self::TheSteppeOfLife => 0x11ee,
-            Self::SilentVigil => 0x11ef,
-            Self::GimoraksDen => 0x11f0,
-            Self::ThePitOfFiends => 0x11f1,
-            Self::BattlescarSpire => 0x11f2,
-            Self::HallOfHorrors => 0x11f3,
-            Self::TheCircleOfSuffering => 0x11f4,
-            Self::RiseOfSuffering => 0x11f5,
-            Self::KrasusLanding1 => 0x11f6,
-            Self::SewerExitPipe1 => 0x11f7,
-            Self::DalaranIsland => 0x11f9,
-            Self::ForceInterior => 0x11fa,
-            Self::VaultOfArchavon => 0x11fb,
-            Self::GateOfTheRedSun => 0x11fc,
-            Self::GateOfTheBlueSapphire => 0x11fd,
-            Self::GateOfTheGreenEmerald => 0x11fe,
-            Self::GateOfThePurpleAmethyst => 0x11ff,
-            Self::GateOfTheYellowMoon => 0x1200,
-            Self::CourtyardOfTheAncients => 0x1201,
-            Self::LandingBeach => 0x1202,
-            Self::WestsparkWorkshop => 0x1203,
-            Self::EastsparkWorkshop => 0x1204,
-            Self::DalaranCity => 0x1205,
-            Self::TheVioletCitadelSpire => 0x1206,
-            Self::NazAnakTheForgottenDepths => 0x1207,
-            Self::SunreaversSanctuary => 0x1208,
-            Self::Elevator => 0x1209,
-            Self::AntonidasMemorial => 0x120a,
-            Self::TheVioletCitadel => 0x120b,
-            Self::MagusCommerceExchange => 0x120c,
-            Self::Unused => 0x120d,
-            Self::FirstLegionForwardCamp => 0x120e,
-            Self::HallOfTheConqueredKings => 0x120f,
-            Self::BefouledTerrace => 0x1210,
-            Self::TheDesecratedAltar => 0x1211,
-            Self::ShimmeringBog => 0x1212,
-            Self::FallenTempleOfAhnKahet => 0x1213,
-            Self::HallsOfBinding => 0x1214,
-            Self::WintersHeart => 0x1215,
-            Self::TheNorthSea2 => 0x1216,
-            Self::TheBroodmothersNest => 0x1217,
-            Self::DalaranFloatingRocks => 0x1218,
-            Self::RaptorPens => 0x1219,
-            Self::DrakTharonKeep3 => 0x121b,
-            Self::TheNoxiousPass => 0x121c,
-            Self::VargothsRetreat => 0x121d,
-            Self::VioletCitadelBalcony => 0x121e,
-            Self::BandOfVariance => 0x121f,
-            Self::BandOfAcceleration => 0x1220,
-            Self::BandOfTransmutation => 0x1221,
-            Self::BandOfAlignment => 0x1222,
-            Self::AshwoodLake => 0x1226,
-            Self::IronConcourse => 0x122a,
-            Self::FormationGrounds => 0x122c,
-            Self::RazorscalesAerie => 0x122d,
-            Self::TheColossalForge => 0x122e,
-            Self::TheScrapyard => 0x122f,
-            Self::TheConservatoryOfLife => 0x1230,
-            Self::TheArchivum => 0x1231,
-            Self::ArgentTournamentGrounds => 0x1232,
-            Self::ExpeditionBaseCamp => 0x1239,
-            Self::SunreaverPavilion => 0x123a,
-            Self::SilverCovenantPavilion => 0x123b,
-            Self::TheCooperResidence => 0x123c,
-            Self::TheRingOfChampions => 0x123d,
-            Self::TheAspirantsRing => 0x123e,
-            Self::TheArgentValiantsRing => 0x123f,
-            Self::TheAllianceValiantsRing => 0x1240,
-            Self::TheHordeValiantsRing => 0x1241,
-            Self::ArgentPavilion => 0x1242,
-            Self::SunreaverPavilion1 => 0x1244,
-            Self::SilverCovenantPavilion1 => 0x1245,
-            Self::TheForlornCavern => 0x1247,
-            Self::ClaytonioTestArea => 0x1250,
-            Self::QuelDelarsRest => 0x1254,
-            Self::IsleOfConquest => 0x1266,
-            Self::TrialOfTheCrusader => 0x1272,
-            Self::TrialOfTheChampion => 0x1273,
-            Self::RuneweaverSquare => 0x1283,
-            Self::TheSilverEnclave => 0x1284,
-            Self::IsleOfConquestNoMansLand => 0x1285,
-            Self::HrothgarsLanding => 0x1286,
-            Self::DeathspeakersWatch => 0x1287,
-            Self::Workshop => 0x128b,
-            Self::Quarry => 0x128c,
-            Self::Docks => 0x128d,
-            Self::Hangar => 0x128e,
-            Self::Refinery => 0x128f,
-            Self::HordeKeep => 0x1290,
-            Self::AllianceKeep => 0x1291,
-            Self::TheSeaReaversRun => 0x1298,
-            Self::TransportAllianceGunship => 0x129b,
-            Self::TransportHordeGunship => 0x129c,
-            Self::HrothgarsLanding1 => 0x12a1,
-            Self::TheForgeOfSouls => 0x12c9,
-            Self::IcecrownCitadel1 => 0x12cc,
-            Self::PitOfSaron => 0x12cd,
-            Self::HallsOfReflection => 0x12d4,
-            Self::TransportAllianceGunshipIgb => 0x12e0,
-            Self::TransportHordeGunshipIgb => 0x12e1,
-            Self::TheFrozenThrone => 0x12fb,
-            Self::TheFrozenHalls => 0x12fe,
-            Self::TheFrostQueensLair => 0x1319,
-            Self::PutricidesLaboratoryOfAlchemicalHorrorsAndFun => 0x131a,
-            Self::TheSanctumOfBlood => 0x131b,
-            Self::TheCrimsonHall => 0x131c,
-            Self::TheFrostQueensLair1 => 0x131d,
-            Self::PutricidesLaboratoryOfAlchemicalHorrorsAndFun1 => 0x131e,
-            Self::TheCrimsonHall1 => 0x131f,
-            Self::TheFrozenThrone1 => 0x1320,
-            Self::TheSanctumOfBlood1 => 0x1321,
-            Self::Frostmourne => 0x1322,
-            Self::TheDarkApproach => 0x1328,
-            Self::ScourgelordsCommand => 0x1329,
-            Self::TheShadowThrone => 0x132a,
-            Self::TheHiddenPassage => 0x132c,
-            Self::Frostmourne1 => 0x132e,
-            Self::TheRubySanctum => 0x137b,
         }
     }
 
@@ -7002,9 +5010,9 @@ impl std::fmt::Display for Area {
             Self::BrackwellPumpkinPatch => f.write_str("Brackwell Pumpkin Patch"),
             Self::TheStonefieldFarm => f.write_str("The Stonefield Farm"),
             Self::TheMaclureVineyards => f.write_str("The Maclure Vineyards"),
-            Self::Dragonblight => f.write_str("Dragonblight"),
-            Self::ZulDrak => f.write_str("Zul'Drak"),
-            Self::TheStormPeaks => f.write_str("The Storm Peaks"),
+            Self::ReuseMeThree => f.write_str("Reuse Me 3"),
+            Self::ReuseMeSix => f.write_str("Reuse Me 6"),
+            Self::ReuseMeFive => f.write_str("Reuse Me 5"),
             Self::LakeEverstill => f.write_str("Lake Everstill"),
             Self::Lakeshire => f.write_str("Lakeshire"),
             Self::Stonewatch => f.write_str("Stonewatch"),
@@ -7119,11 +5127,11 @@ impl std::fmt::Display for Area {
             Self::MardenholdeKeep => f.write_str("Mardenholde Keep"),
             Self::PyrewoodVillage => f.write_str("Pyrewood Village"),
             Self::DunModr => f.write_str("Dun Modr"),
-            Self::UtgardeKeep => f.write_str("Utgarde Keep"),
+            Self::UnusedWestfall => f.write_str("UNUSED Westfall"),
             Self::TheGreatSea => f.write_str("The Great Sea"),
             Self::UnusedIroncladcove => f.write_str("Unused Ironcladcove"),
             Self::ShadowfangKeep => f.write_str("Shadowfang Keep"),
-            Self::Icecrown => f.write_str("Icecrown"),
+            Self::ReuseMe2 => f.write_str("Reuse Me 2"),
             Self::IceflowLake => f.write_str("Iceflow Lake"),
             Self::HelmsBedLake => f.write_str("Helm's Bed Lake"),
             Self::DeepElemMine => f.write_str("Deep Elem Mine"),
@@ -7184,7 +5192,7 @@ impl std::fmt::Display for Area {
             Self::UnusedStonewroughtPass => f.write_str("UNUSED Stonewrought Pass"),
             Self::TheFoothillCaverns => f.write_str("The Foothill Caverns"),
             Self::LordamereInternmentCamp => f.write_str("Lordamere Internment Camp"),
-            Self::DalaranCrater => f.write_str("Dalaran Crater"),
+            Self::Dalaran => f.write_str("Dalaran"),
             Self::Strahnbrad => f.write_str("Strahnbrad"),
             Self::RuinsOfAlterac => f.write_str("Ruins of Alterac"),
             Self::CrushridgeHold => f.write_str("Crushridge Hold"),
@@ -7292,8 +5300,8 @@ impl std::fmt::Display for Area {
             Self::TheMerchantCoast => f.write_str("The Merchant Coast"),
             Self::Ratchet => f.write_str("Ratchet"),
             Self::DarkspearStrand => f.write_str("Darkspear Strand"),
-            Self::GrizzlyHills => f.write_str("Grizzly Hills"),
-            Self::Grizzlemaw => f.write_str("Grizzlemaw"),
+            Self::DarrowmereLakeUnused => f.write_str("Darrowmere Lake UNUSED"),
+            Self::CaerDarrowUnused => f.write_str("Caer Darrow UNUSED"),
             Self::WinterhoofWaterWell => f.write_str("Winterhoof Water Well"),
             Self::ThunderhornWaterWell => f.write_str("Thunderhorn Water Well"),
             Self::WildmaneWaterWell => f.write_str("Wildmane Water Well"),
@@ -7388,7 +5396,7 @@ impl std::fmt::Display for Area {
             Self::RazorfenKraul => f.write_str("Razorfen Kraul"),
             Self::RavenHillCemetery => f.write_str("Raven Hill Cemetery"),
             Self::Moonglade => f.write_str("Moonglade"),
-            Self::HowlingFjord => f.write_str("Howling Fjord"),
+            Self::DeleteMe => f.write_str("DELETE ME"),
             Self::BrackenwallVillage => f.write_str("Brackenwall Village"),
             Self::SwamplightManor => f.write_str("Swamplight Manor"),
             Self::BloodfenBurrow => f.write_str("Bloodfen Burrow"),
@@ -7491,7 +5499,7 @@ impl std::fmt::Display for Area {
             Self::SouthGatePass1 => f.write_str("South Gate Pass"),
             Self::TwilightGrove => f.write_str("Twilight Grove"),
             Self::GmIsland => f.write_str("GM Island"),
-            Self::DeleteMe => f.write_str("Delete ME"),
+            Self::DeleteMe1 => f.write_str("Delete ME"),
             Self::SouthfuryRiver3 => f.write_str("Southfury River"),
             Self::SouthfuryRiver4 => f.write_str("Southfury River"),
             Self::ThandolSpan1 => f.write_str("Thandol Span"),
@@ -7583,7 +5591,7 @@ impl std::fmt::Display for Area {
             Self::SouthernBarrens => f.write_str("Southern Barrens"),
             Self::SouthernGoldRoad => f.write_str("Southern Gold Road"),
             Self::ZulFarrak1 => f.write_str("Zul'Farrak"),
-            Self::UtgardePinnacle => f.write_str("Utgarde Pinnacle"),
+            Self::UnusedalcazIsland => f.write_str("UNUSEDAlcaz Island"),
             Self::TimbermawHold => f.write_str("Timbermaw Hold"),
             Self::VanndirEncampment => f.write_str("Vanndir Encampment"),
             Self::Testazshara => f.write_str("TESTAzshara"),
@@ -7641,7 +5649,7 @@ impl std::fmt::Display for Area {
             Self::TheCapeOfStranglethorn => f.write_str("The Cape of Stranglethorn"),
             Self::SouthernSavageCoast => f.write_str("Southern Savage Coast"),
             Self::UnusedTheDeadmines002 => f.write_str("Unused The Deadmines 002"),
-            Self::UnusedIroncladCove003 => f.write_str("Unused Ironclad Cove 003"),
+            Self::UnusedIroncladCove00three => f.write_str("Unused Ironclad Cove 003"),
             Self::TheDeadmines => f.write_str("The Deadmines"),
             Self::IroncladCove => f.write_str("Ironclad Cove"),
             Self::BlackrockSpire => f.write_str("Blackrock Spire"),
@@ -7813,7 +5821,7 @@ impl std::fmt::Display for Area {
             Self::Plaguewood => f.write_str("Plaguewood"),
             Self::Scourgehold => f.write_str("Scourgehold"),
             Self::Stratholme1 => f.write_str("Stratholme"),
-            Self::DoNotUse => f.write_str("DO NOT USE"),
+            Self::UnusedStratholme => f.write_str("UNUSED Stratholme"),
             Self::DarrowmereLake => f.write_str("Darrowmere Lake"),
             Self::CaerDarrow => f.write_str("Caer Darrow"),
             Self::DarrowmereLake1 => f.write_str("Darrowmere Lake"),
@@ -7929,7 +5937,7 @@ impl std::fmt::Display for Area {
             Self::ShrineOfTheFallenWarrior => f.write_str("Shrine of the Fallen Warrior"),
             Self::UnusedAlteracValley => f.write_str("UNUSED Alterac Valley"),
             Self::BlackfathomDeeps1 => f.write_str("Blackfathom Deeps"),
-            Self::CrystalsongForest => f.write_str("Crystalsong Forest"),
+            Self::ReuseMe4 => f.write_str("Reuse Me 4"),
             Self::TheMastersCellar => f.write_str("The Master's Cellar"),
             Self::StonewroughtPass => f.write_str("Stonewrought Pass"),
             Self::AlteracValley1 => f.write_str("Alterac Valley"),
@@ -8062,7 +6070,7 @@ impl std::fmt::Display for Area {
             Self::TheScorchedGrove => f.write_str("The Scorched Grove"),
             Self::ZebWatha => f.write_str("Zeb'Watha"),
             Self::TorWatha => f.write_str("Tor'Watha"),
-            Self::AzjolNerub => f.write_str("Azjol-Nerub"),
+            Self::KarazhanUnused => f.write_str("Karazhan *UNUSED*"),
             Self::GatesOfAhnQiraj => f.write_str("Gates of Ahn'Qiraj"),
             Self::TheVeiledSea7 => f.write_str("The Veiled Sea"),
             Self::DuskwitherGrounds => f.write_str("Duskwither Grounds"),
@@ -8122,7 +6130,7 @@ impl std::fmt::Display for Area {
             Self::FethsWay => f.write_str("Feth's Way"),
             Self::HellfireCitadel => f.write_str("Hellfire Citadel"),
             Self::Thrallmar => f.write_str("Thrallmar"),
-            Self::BoreanTundra => f.write_str("Borean Tundra"),
+            Self::Reuse => f.write_str("REUSE"),
             Self::HonorHold => f.write_str("Honor Hold"),
             Self::TheStairOfDestiny => f.write_str("The Stair of Destiny"),
             Self::TwistingNether => f.write_str("Twisting Nether"),
@@ -8194,7 +6202,7 @@ impl std::fmt::Display for Area {
             Self::HyjalSummit => f.write_str("Hyjal Summit"),
             Self::SerpentshrineCavern => f.write_str("Serpentshrine Cavern"),
             Self::VindicatorsRest => f.write_str("Vindicator's Rest"),
-            Self::Unused3 => f.write_str("Unused3"),
+            Self::Unusedthree => f.write_str("Unused3"),
             Self::BurningBladeRuins => f.write_str("Burning Blade Ruins"),
             Self::ClanWatch => f.write_str("Clan Watch"),
             Self::BloodcurseIsle => f.write_str("Bloodcurse Isle"),
@@ -8296,7 +6304,7 @@ impl std::fmt::Display for Area {
             Self::HordeEncampment => f.write_str("Horde Encampment"),
             Self::NightElfVillage => f.write_str("Night Elf Village"),
             Self::Nordrassil => f.write_str("Nordrassil"),
-            Self::SholazarBasin => f.write_str("Sholazar Basin"),
+            Self::ReuseMe => f.write_str("Reuse Me"),
             Self::Area52 => f.write_str("Area 52"),
             Self::TheBloodFurnace => f.write_str("The Blood Furnace"),
             Self::TheShatteredHalls => f.write_str("The Shattered Halls"),
@@ -8562,98 +6570,16 @@ impl std::fmt::Display for Area {
             Self::VeilAlaRak => f.write_str("Veil Ala'rak"),
             Self::UpperVeilShilAk => f.write_str("Upper Veil Shil'ak"),
             Self::LowerVeilShilAk => f.write_str("Lower Veil Shil'ak"),
-            Self::TheFrozenSea => f.write_str("The Frozen Sea"),
-            Self::DaggercapBay => f.write_str("Daggercap Bay"),
-            Self::Valgarde => f.write_str("Valgarde"),
-            Self::WyrmskullVillage => f.write_str("Wyrmskull Village"),
-            Self::UtgardeKeep1 => f.write_str("Utgarde Keep"),
-            Self::Nifflevar => f.write_str("Nifflevar"),
-            Self::FallsOfYmiron => f.write_str("Falls of Ymiron"),
-            Self::EchoReach => f.write_str("Echo Reach"),
-            Self::TheIsleOfSpears => f.write_str("The Isle of Spears"),
-            Self::Kamagua => f.write_str("Kamagua"),
-            Self::GarvansReef => f.write_str("Garvan's Reef"),
-            Self::ScalawagPoint => f.write_str("Scalawag Point"),
-            Self::NewAgamand => f.write_str("New Agamand"),
-            Self::TheAncientLift => f.write_str("The Ancient Lift"),
-            Self::WestguardTurret => f.write_str("Westguard Turret"),
-            Self::Halgrind => f.write_str("Halgrind"),
-            Self::TheLaughingStand => f.write_str("The Laughing Stand"),
-            Self::BaelgunsExcavationSite => f.write_str("Baelgun's Excavation Site"),
-            Self::ExplorersLeagueOutpost => f.write_str("Explorers' League Outpost"),
-            Self::WestguardKeep => f.write_str("Westguard Keep"),
-            Self::SteelGate => f.write_str("Steel Gate"),
-            Self::VengeanceLanding => f.write_str("Vengeance Landing"),
-            Self::Baleheim => f.write_str("Baleheim"),
-            Self::Skorn => f.write_str("Skorn"),
-            Self::FortWildervar => f.write_str("Fort Wildervar"),
-            Self::VilepreyVillage => f.write_str("Vileprey Village"),
-            Self::IvaldsRuin => f.write_str("Ivald's Ruin"),
-            Self::Gjalerbron => f.write_str("Gjalerbron"),
-            Self::TombOfTheLostKings => f.write_str("Tomb of the Lost Kings"),
             Self::ShartuulsTransporter => f.write_str("Shartuul's Transporter"),
             Self::IllidariTrainingGrounds => f.write_str("Illidari Training Grounds"),
             Self::Mudsprocket => f.write_str("Mudsprocket"),
-            Self::CampWinterhoof => f.write_str("Camp Winterhoof"),
-            Self::DevelopmentLand => f.write_str("Development Land"),
-            Self::MightstoneQuarry => f.write_str("Mightstone Quarry"),
-            Self::BloodsporePlains => f.write_str("Bloodspore Plains"),
-            Self::Gammoth => f.write_str("Gammoth"),
-            Self::AmberLedge => f.write_str("Amber Ledge"),
-            Self::Coldarra => f.write_str("Coldarra"),
-            Self::TheWestrift => f.write_str("The Westrift"),
-            Self::TheTransitusStair => f.write_str("The Transitus Stair"),
-            Self::CoastOfEchoes => f.write_str("Coast of Echoes"),
-            Self::RiplashStrand => f.write_str("Riplash Strand"),
-            Self::RiplashRuins => f.write_str("Riplash Ruins"),
-            Self::CoastOfIdols => f.write_str("Coast of Idols"),
-            Self::PalEa => f.write_str("Pal'ea"),
-            Self::ValianceKeep => f.write_str("Valiance Keep"),
-            Self::WinterfinVillage => f.write_str("Winterfin Village"),
-            Self::TheBoreanWall => f.write_str("The Borean Wall"),
-            Self::TheGeyserFields => f.write_str("The Geyser Fields"),
-            Self::FizzcrankPumpingStation => f.write_str("Fizzcrank Pumping Station"),
-            Self::TaunkaLeVillage => f.write_str("Taunka'le Village"),
-            Self::MagnamothCaverns => f.write_str("Magnamoth Caverns"),
-            Self::ColdrockQuarry => f.write_str("Coldrock Quarry"),
-            Self::NjordsBreathBay => f.write_str("Njord's Breath Bay"),
-            Self::Kaskala => f.write_str("Kaskala"),
-            Self::Transborea => f.write_str("Transborea"),
-            Self::TheFloodPlains => f.write_str("The Flood Plains"),
             Self::DirehornPost => f.write_str("Direhorn Post"),
             Self::NatsLanding => f.write_str("Nat's Landing"),
-            Self::EmberClutch => f.write_str("Ember Clutch"),
             Self::TabethasFarm => f.write_str("Tabetha's Farm"),
-            Self::DerelictStrand => f.write_str("Derelict Strand"),
-            Self::TheFrozenGlade => f.write_str("The Frozen Glade"),
-            Self::TheVibrantGlade => f.write_str("The Vibrant Glade"),
-            Self::TheTwistedGlade => f.write_str("The Twisted Glade"),
-            Self::Rivenwood => f.write_str("Rivenwood"),
-            Self::CaldemereLake => f.write_str("Caldemere Lake"),
-            Self::UtgardeCatacombs => f.write_str("Utgarde Catacombs"),
-            Self::ShieldHill => f.write_str("Shield Hill"),
-            Self::LakeCauldros => f.write_str("Lake Cauldros"),
-            Self::CauldrosIsle => f.write_str("Cauldros Isle"),
-            Self::BleedingVale => f.write_str("Bleeding Vale"),
-            Self::GiantsRun => f.write_str("Giants' Run"),
-            Self::ApothecaryCamp => f.write_str("Apothecary Camp"),
-            Self::EmberSpearTower => f.write_str("Ember Spear Tower"),
-            Self::ShatteredStraits => f.write_str("Shattered Straits"),
-            Self::Gjalerhorn => f.write_str("Gjalerhorn"),
-            Self::FrostbladePeak => f.write_str("Frostblade Peak"),
             Self::PlaguewoodTower => f.write_str("Plaguewood Tower"),
-            Self::WestSpearTower => f.write_str("West Spear Tower"),
-            Self::NorthSpearTower => f.write_str("North Spear Tower"),
-            Self::ChillmereCoast => f.write_str("Chillmere Coast"),
-            Self::WhisperGulch => f.write_str("Whisper Gulch"),
-            Self::SubZone => f.write_str("Sub zone"),
-            Self::WintersTerrace => f.write_str("Winter's Terrace"),
-            Self::TheWakingHalls => f.write_str("The Waking Halls"),
             Self::SunwellPlateau => f.write_str("Sunwell Plateau"),
             Self::ReuseMeSeven => f.write_str("Reuse Me 7"),
-            Self::SorlofsStrand => f.write_str("Sorlof's Strand"),
             Self::RazorthornRise => f.write_str("Razorthorn Rise"),
-            Self::FrostbladePass => f.write_str("Frostblade Pass"),
             Self::IsleOfQuelDanas => f.write_str("Isle of Quel'Danas"),
             Self::TheDawnchaser => f.write_str("The Dawnchaser"),
             Self::TheSinLoren => f.write_str("The Sin'loren"),
@@ -8670,591 +6596,9 @@ impl std::fmt::Display for Area {
             Self::TheSunForge => f.write_str("The Sun Forge"),
             Self::SunwellPlateau1 => f.write_str("Sunwell Plateau"),
             Self::MagistersTerrace => f.write_str("Magisters' Terrace"),
-            Self::ClaytönsWoweditLand => f.write_str("Claytön's WoWEdit Land"),
-            Self::WinterfinCaverns => f.write_str("Winterfin Caverns"),
-            Self::GlimmerBay => f.write_str("Glimmer Bay"),
-            Self::WinterfinRetreat => f.write_str("Winterfin Retreat"),
-            Self::TheCullingOfStratholme => f.write_str("The Culling of Stratholme"),
-            Self::SandsOfNasam => f.write_str("Sands of Nasam"),
-            Self::KromsLanding => f.write_str("Krom's Landing"),
-            Self::NasamsTalon => f.write_str("Nasam's Talon"),
-            Self::EchoCove => f.write_str("Echo Cove"),
-            Self::BerylPoint => f.write_str("Beryl Point"),
-            Self::GarroshsLanding => f.write_str("Garrosh's Landing"),
-            Self::WarsongJetty => f.write_str("Warsong Jetty"),
-            Self::FizzcrankAirstrip => f.write_str("Fizzcrank Airstrip"),
-            Self::LakeKumUya => f.write_str("Lake Kum'uya"),
-            Self::FarshireFields => f.write_str("Farshire Fields"),
-            Self::Farshire => f.write_str("Farshire"),
-            Self::FarshireLighthouse => f.write_str("Farshire Lighthouse"),
-            Self::UnuPe => f.write_str("Unu'pe"),
-            Self::DeathsStand => f.write_str("Death's Stand"),
-            Self::TheAbandonedReach => f.write_str("The Abandoned Reach"),
-            Self::ScaldingPools => f.write_str("Scalding Pools"),
-            Self::SteamSprings => f.write_str("Steam Springs"),
-            Self::Talramas => f.write_str("Talramas"),
-            Self::FesteringPools => f.write_str("Festering Pools"),
-            Self::TheNexus => f.write_str("The Nexus"),
-            Self::TransitusShield => f.write_str("Transitus Shield"),
-            Self::BorGorokOutpost => f.write_str("Bor'gorok Outpost"),
-            Self::Magmoth => f.write_str("Magmoth"),
-            Self::TheDensOfDying => f.write_str("The Dens of Dying"),
-            Self::TempleCityOfEnKilah => f.write_str("Temple City of En'kilah"),
-            Self::TheWailingZiggurat => f.write_str("The Wailing Ziggurat"),
-            Self::SteeljawsCaravan => f.write_str("Steeljaw's Caravan"),
-            Self::Naxxanar => f.write_str("Naxxanar"),
-            Self::WarsongHold => f.write_str("Warsong Hold"),
-            Self::PlainsOfNasam => f.write_str("Plains of Nasam"),
             Self::MagistersTerrace1 => f.write_str("Magisters' Terrace"),
-            Self::RuinsOfEldraNath => f.write_str("Ruins of Eldra'nath"),
-            Self::CharredRise => f.write_str("Charred Rise"),
-            Self::BlisteringPool => f.write_str("Blistering Pool"),
-            Self::SpireOfBlood => f.write_str("Spire of Blood"),
-            Self::SpireOfDecay => f.write_str("Spire of Decay"),
-            Self::SpireOfPain => f.write_str("Spire of Pain"),
-            Self::FrozenReach => f.write_str("Frozen Reach"),
             Self::ParhelionPlaza => f.write_str("Parhelion Plaza"),
             Self::TheDeadScar3 => f.write_str("The Dead Scar"),
-            Self::TorpsFarm => f.write_str("Torp's Farm"),
-            Self::WarsongGranary => f.write_str("Warsong Granary"),
-            Self::WarsongSlaughterhouse => f.write_str("Warsong Slaughterhouse"),
-            Self::WarsongFarmsOutpost => f.write_str("Warsong Farms Outpost"),
-            Self::WestPointStation => f.write_str("West Point Station"),
-            Self::NorthPointStation => f.write_str("North Point Station"),
-            Self::MidPointStation => f.write_str("Mid Point Station"),
-            Self::SouthPointStation => f.write_str("South Point Station"),
-            Self::DehtaEncampment => f.write_str("D.E.H.T.A. Encampment"),
-            Self::KawsRoost => f.write_str("Kaw's Roost"),
-            Self::WestwindRefugeeCamp => f.write_str("Westwind Refugee Camp"),
-            Self::MoaKiHarbor => f.write_str("Moa'ki Harbor"),
-            Self::InduLeVillage => f.write_str("Indu'le Village"),
-            Self::SnowfallGlade => f.write_str("Snowfall Glade"),
-            Self::TheHalfShell => f.write_str("The Half Shell"),
-            Self::SurgeNeedle => f.write_str("Surge Needle"),
-            Self::MoonrestGardens => f.write_str("Moonrest Gardens"),
-            Self::StarsRest => f.write_str("Stars' Rest"),
-            Self::WestfallBrigadeEncampment => f.write_str("Westfall Brigade Encampment"),
-            Self::LothalorWoodlands => f.write_str("Lothalor Woodlands"),
-            Self::WyrmrestTemple => f.write_str("Wyrmrest Temple"),
-            Self::IcemistFalls => f.write_str("Icemist Falls"),
-            Self::IcemistVillage => f.write_str("Icemist Village"),
-            Self::ThePitOfNarjun => f.write_str("The Pit of Narjun"),
-            Self::AgmarsHammer => f.write_str("Agmar's Hammer"),
-            Self::LakeInduLe => f.write_str("Lake Indu'le"),
-            Self::ObsidianDragonshrine => f.write_str("Obsidian Dragonshrine"),
-            Self::RubyDragonshrine => f.write_str("Ruby Dragonshrine"),
-            Self::FordragonHold => f.write_str("Fordragon Hold"),
-            Self::KorKronVanguard => f.write_str("Kor'kron Vanguard"),
-            Self::TheCourtOfSkulls => f.write_str("The Court of Skulls"),
-            Self::AngratharTheWrathgate => f.write_str("Angrathar the Wrathgate"),
-            Self::GalakrondsRest => f.write_str("Galakrond's Rest"),
-            Self::TheWickedCoil => f.write_str("The Wicked Coil"),
-            Self::BronzeDragonshrine => f.write_str("Bronze Dragonshrine"),
-            Self::TheMirrorOfDawn => f.write_str("The Mirror of Dawn"),
-            Self::WintergardeKeep => f.write_str("Wintergarde Keep"),
-            Self::WintergardeMine => f.write_str("Wintergarde Mine"),
-            Self::EmeraldDragonshrine => f.write_str("Emerald Dragonshrine"),
-            Self::NewHearthglen => f.write_str("New Hearthglen"),
-            Self::CrusadersLanding => f.write_str("Crusader's Landing"),
-            Self::SinnersFolly => f.write_str("Sinner's Folly"),
-            Self::AzureDragonshrine => f.write_str("Azure Dragonshrine"),
-            Self::PathOfTheTitans => f.write_str("Path of the Titans"),
-            Self::TheForgottenShore => f.write_str("The Forgotten Shore"),
-            Self::Venomspite => f.write_str("Venomspite"),
-            Self::TheCrystalVice => f.write_str("The Crystal Vice"),
-            Self::TheCarrionFields => f.write_str("The Carrion Fields"),
-            Self::OnslaughtBaseCamp => f.write_str("Onslaught Base Camp"),
-            Self::ThorsonsPost => f.write_str("Thorson's Post"),
-            Self::LightsTrust => f.write_str("Light's Trust"),
-            Self::FrostmourneCavern => f.write_str("Frostmourne Cavern"),
-            Self::ScarletPoint => f.write_str("Scarlet Point"),
-            Self::JinthaKalar => f.write_str("Jintha'kalar"),
-            Self::IceHeartCavern => f.write_str("Ice Heart Cavern"),
-            Self::DrakTharonKeep => f.write_str("Drak'Tharon Keep"),
-            Self::Wintergrasp => f.write_str("Wintergrasp"),
-            Self::KiliUasAtoll => f.write_str("Kili'ua's Atoll"),
-            Self::Silverbrook => f.write_str("Silverbrook"),
-            Self::VordrassilsHeart => f.write_str("Vordrassil's Heart"),
-            Self::VordrassilsTears => f.write_str("Vordrassil's Tears"),
-            Self::VordrassilsTears1 => f.write_str("Vordrassil's Tears"),
-            Self::VordrassilsLimb => f.write_str("Vordrassil's Limb"),
-            Self::AmberpineLodge => f.write_str("Amberpine Lodge"),
-            Self::SolsticeVillage => f.write_str("Solstice Village"),
-            Self::ConquestHold => f.write_str("Conquest Hold"),
-            Self::Voldrune => f.write_str("Voldrune"),
-            Self::GraniteSprings => f.write_str("Granite Springs"),
-            Self::ZebHalak => f.write_str("Zeb'Halak"),
-            Self::DrakTharonKeep1 => f.write_str("Drak'Tharon Keep"),
-            Self::CampOneqwah => f.write_str("Camp Oneqwah"),
-            Self::EastwindShore => f.write_str("Eastwind Shore"),
-            Self::TheBrokenBluffs => f.write_str("The Broken Bluffs"),
-            Self::BoulderHills => f.write_str("Boulder Hills"),
-            Self::RageFangShrine => f.write_str("Rage Fang Shrine"),
-            Self::DrakilJinRuins => f.write_str("Drakil'jin Ruins"),
-            Self::BlackriverLoggingCamp => f.write_str("Blackriver Logging Camp"),
-            Self::HeartsBloodShrine => f.write_str("Heart's Blood Shrine"),
-            Self::HollowstoneMine => f.write_str("Hollowstone Mine"),
-            Self::DunArgol => f.write_str("Dun Argol"),
-            Self::ThorModan => f.write_str("Thor Modan"),
-            Self::BlueSkyLoggingGrounds => f.write_str("Blue Sky Logging Grounds"),
-            Self::MawOfNeltharion => f.write_str("Maw of Neltharion"),
-            Self::TheBrinyPinnacle => f.write_str("The Briny Pinnacle"),
-            Self::GlitteringStrand => f.write_str("Glittering Strand"),
-            Self::Iskaal => f.write_str("Iskaal"),
-            Self::DragonsFall => f.write_str("Dragon's Fall"),
-            Self::TheOculus => f.write_str("The Oculus"),
-            Self::ProspectorsPoint => f.write_str("Prospector's Point"),
-            Self::ColdwindHeights => f.write_str("Coldwind Heights"),
-            Self::RedwoodTradingPost => f.write_str("Redwood Trading Post"),
-            Self::VengeancePass => f.write_str("Vengeance Pass"),
-            Self::DawnsReach => f.write_str("Dawn's Reach"),
-            Self::Naxxramas1 => f.write_str("Naxxramas"),
-            Self::HeartwoodTradingPost => f.write_str("Heartwood Trading Post"),
-            Self::EvergreenTradingPost => f.write_str("Evergreen Trading Post"),
-            Self::SprucePointPost => f.write_str("Spruce Point Post"),
-            Self::WhitePineTradingPost => f.write_str("White Pine Trading Post"),
-            Self::AspenGrovePost => f.write_str("Aspen Grove Post"),
-            Self::ForestsEdgePost => f.write_str("Forest's Edge Post"),
-            Self::EldritchHeights => f.write_str("Eldritch Heights"),
-            Self::VentureBay => f.write_str("Venture Bay"),
-            Self::WintergardeCrypt => f.write_str("Wintergarde Crypt"),
-            Self::BloodmoonIsle => f.write_str("Bloodmoon Isle"),
-            Self::ShadowfangTower => f.write_str("Shadowfang Tower"),
-            Self::WintergardeMausoleum => f.write_str("Wintergarde Mausoleum"),
-            Self::DuskhowlDen => f.write_str("Duskhowl Den"),
-            Self::TheConquestPit => f.write_str("The Conquest Pit"),
-            Self::ThePathOfIron => f.write_str("The Path of Iron"),
-            Self::RuinsOfTethys => f.write_str("Ruins of Tethys"),
-            Self::SilverbrookHills => f.write_str("Silverbrook Hills"),
-            Self::TheBrokenBluffs1 => f.write_str("The Broken Bluffs"),
-            Self::SeventhLegionFront => f.write_str("7th Legion Front"),
-            Self::TheDragonWastes => f.write_str("The Dragon Wastes"),
-            Self::RuinsOfDrakZin => f.write_str("Ruins of Drak'Zin"),
-            Self::DrakMarLake => f.write_str("Drak'Mar Lake"),
-            Self::DragonspineTributary => f.write_str("Dragonspine Tributary"),
-            Self::TheNorthSea1 => f.write_str("The North Sea"),
-            Self::DrakUral => f.write_str("Drak'ural"),
-            Self::ThorvaldsCamp => f.write_str("Thorvald's Camp"),
-            Self::GhostbladePost => f.write_str("Ghostblade Post"),
-            Self::AshwoodPost => f.write_str("Ashwood Post"),
-            Self::LydellsAmbush => f.write_str("Lydell's Ambush"),
-            Self::HallsOfStone => f.write_str("Halls of Stone"),
-            Self::TheNexus1 => f.write_str("The Nexus"),
-            Self::HarkorsCamp => f.write_str("Harkor's Camp"),
-            Self::VordrassilPass => f.write_str("Vordrassil Pass"),
-            Self::RuunasCamp => f.write_str("Ruuna's Camp"),
-            Self::ShrineOfScales => f.write_str("Shrine of Scales"),
-            Self::DrakAtalPassage => f.write_str("Drak'atal Passage"),
-            Self::UtgardePinnacle1 => f.write_str("Utgarde Pinnacle"),
-            Self::HallsOfLightning => f.write_str("Halls of Lightning"),
-            Self::Ulduar => f.write_str("Ulduar"),
-            Self::TheArgentStand => f.write_str("The Argent Stand"),
-            Self::AltarOfSseratus => f.write_str("Altar of Sseratus"),
-            Self::AzjolNerub1 => f.write_str("Azjol-Nerub"),
-            Self::DraksotraFields => f.write_str("Drak'Sotra Fields"),
-            Self::Draksotra => f.write_str("Drak'Sotra"),
-            Self::DrakAgal => f.write_str("Drak'Agal"),
-            Self::AcherusTheEbonHold => f.write_str("Acherus: The Ebon Hold"),
-            Self::TheAvalanche => f.write_str("The Avalanche"),
-            Self::TheLostLands => f.write_str("The Lost Lands"),
-            Self::NesingwaryBaseCamp => f.write_str("Nesingwary Base Camp"),
-            Self::TheSeabreachFlow => f.write_str("The Seabreach Flow"),
-            Self::TheBonesOfNozronn => f.write_str("The Bones of Nozronn"),
-            Self::KartaksHold => f.write_str("Kartak's Hold"),
-            Self::SparktouchedHaven => f.write_str("Sparktouched Haven"),
-            Self::ThePathOfTheLifewarden => f.write_str("The Path of the Lifewarden"),
-            Self::RiversHeart => f.write_str("River's Heart"),
-            Self::RainspeakerCanopy => f.write_str("Rainspeaker Canopy"),
-            Self::FrenzyheartHill => f.write_str("Frenzyheart Hill"),
-            Self::WildgrowthMangal => f.write_str("Wildgrowth Mangal"),
-            Self::HebValok => f.write_str("Heb'Valok"),
-            Self::TheSunderedShard => f.write_str("The Sundered Shard"),
-            Self::TheLifebloodPillar => f.write_str("The Lifeblood Pillar"),
-            Self::MosswalkerVillage => f.write_str("Mosswalker Village"),
-            Self::PlaguelandsTheScarletEnclave => f.write_str("Plaguelands: The Scarlet Enclave"),
-            Self::Kolramas => f.write_str("Kolramas"),
-            Self::Waygate => f.write_str("Waygate"),
-            Self::TheSkyreachPillar => f.write_str("The Skyreach Pillar"),
-            Self::HardknuckleClearing => f.write_str("Hardknuckle Clearing"),
-            Self::SapphireHive => f.write_str("Sapphire Hive"),
-            Self::MistwhisperRefuge => f.write_str("Mistwhisper Refuge"),
-            Self::TheGlimmeringPillar => f.write_str("The Glimmering Pillar"),
-            Self::SpearbornEncampment => f.write_str("Spearborn Encampment"),
-            Self::DrakTharonKeep2 => f.write_str("Drak'Tharon Keep"),
-            Self::Zeramas => f.write_str("Zeramas"),
-            Self::ReliquaryOfAgony => f.write_str("Reliquary of Agony"),
-            Self::EbonWatch => f.write_str("Ebon Watch"),
-            Self::ThrymsEnd => f.write_str("Thrym's End"),
-            Self::Voltarus => f.write_str("Voltarus"),
-            Self::ReliquaryOfPain => f.write_str("Reliquary of Pain"),
-            Self::RageclawDen => f.write_str("Rageclaw Den"),
-            Self::LightsBreach => f.write_str("Light's Breach"),
-            Self::PoolsOfZhaJin => f.write_str("Pools of Zha'Jin"),
-            Self::ZimAbwa => f.write_str("Zim'Abwa"),
-            Self::AmphitheaterOfAnguish => f.write_str("Amphitheater of Anguish"),
-            Self::AltarOfRhunok => f.write_str("Altar of Rhunok"),
-            Self::AltarOfHarKoa => f.write_str("Altar of Har'koa"),
-            Self::ZimTorga => f.write_str("Zim'Torga"),
-            Self::PoolsOfJinAlai => f.write_str("Pools of Jin'Alai"),
-            Self::AltarOfQuetzLun => f.write_str("Altar of Quetz'lun"),
-            Self::HebDrakkar => f.write_str("Heb'Drakkar"),
-            Self::DrakMabwa => f.write_str("Drak'Mabwa"),
-            Self::ZimRhuk => f.write_str("Zim'Rhuk"),
-            Self::AltarOfMamToth => f.write_str("Altar of Mam'toth"),
-            Self::AcherusTheEbonHold1 => f.write_str("Acherus: The Ebon Hold"),
-            Self::NewAvalon => f.write_str("New Avalon"),
-            Self::NewAvalonFields => f.write_str("New Avalon Fields"),
-            Self::NewAvalonOrchard => f.write_str("New Avalon Orchard"),
-            Self::NewAvalonTownHall => f.write_str("New Avalon Town Hall"),
-            Self::Havenshire => f.write_str("Havenshire"),
-            Self::HavenshireFarms => f.write_str("Havenshire Farms"),
-            Self::HavenshireLumberMill => f.write_str("Havenshire Lumber Mill"),
-            Self::HavenshireStables => f.write_str("Havenshire Stables"),
-            Self::ScarletHold => f.write_str("Scarlet Hold"),
-            Self::ChapelOfTheCrimsonFlame => f.write_str("Chapel of the Crimson Flame"),
-            Self::LightsPointTower => f.write_str("Light's Point Tower"),
-            Self::LightsPoint => f.write_str("Light's Point"),
-            Self::CryptOfRemembrance => f.write_str("Crypt of Remembrance"),
-            Self::DeathsBreach => f.write_str("Death's Breach"),
-            Self::TheNoxiousGlade1 => f.write_str("The Noxious Glade"),
-            Self::TyrsHand1 => f.write_str("Tyr's Hand"),
-            Self::KingsHarbor => f.write_str("King's Harbor"),
-            Self::ScarletOverlook => f.write_str("Scarlet Overlook"),
-            Self::LightsHopeChapel1 => f.write_str("Light's Hope Chapel"),
-            Self::SinnersFolly1 => f.write_str("Sinner's Folly"),
-            Self::PestilentScar1 => f.write_str("Pestilent Scar"),
-            Self::BrowmanMill1 => f.write_str("Browman Mill"),
-            Self::HavenshireMine => f.write_str("Havenshire Mine"),
-            Self::UrsocsDen => f.write_str("Ursoc's Den"),
-            Self::TheBlightLine => f.write_str("The Blight Line"),
-            Self::TheBonefields => f.write_str("The Bonefields"),
-            Self::DoriansOutpost => f.write_str("Dorian's Outpost"),
-            Self::MamTothCrater => f.write_str("Mam'toth Crater"),
-            Self::ZolMazStronghold => f.write_str("Zol'Maz Stronghold"),
-            Self::ZolHeb => f.write_str("Zol'Heb"),
-            Self::RageclawLake => f.write_str("Rageclaw Lake"),
-            Self::Gundrak => f.write_str("Gundrak"),
-            Self::TheSavageThicket => f.write_str("The Savage Thicket"),
-            Self::NewAvalonForge => f.write_str("New Avalon Forge"),
-            Self::DalaranArena => f.write_str("Dalaran Arena"),
-            Self::Valgarde1 => f.write_str("Valgarde"),
-            Self::WestguardInn => f.write_str("Westguard Inn"),
-            Self::Waygate1 => f.write_str("Waygate"),
-            Self::TheShapersTerrace => f.write_str("The Shaper's Terrace"),
-            Self::LakesideLanding => f.write_str("Lakeside Landing"),
-            Self::StrandOfTheAncients => f.write_str("Strand of the Ancients"),
-            Self::BittertideLake => f.write_str("Bittertide Lake"),
-            Self::RainspeakerRapids => f.write_str("Rainspeaker Rapids"),
-            Self::FrenzyheartRiver => f.write_str("Frenzyheart River"),
-            Self::WintergraspRiver => f.write_str("Wintergrasp River"),
-            Self::TheSuntouchedPillar => f.write_str("The Suntouched Pillar"),
-            Self::FrigidBreach => f.write_str("Frigid Breach"),
-            Self::SwindlegrinsDig => f.write_str("Swindlegrin's Dig"),
-            Self::TheStormwrightsShelf => f.write_str("The Stormwright's Shelf"),
-            Self::DeathsHandEncampment => f.write_str("Death's Hand Encampment"),
-            Self::ScarletTavern => f.write_str("Scarlet Tavern"),
-            Self::Dalaran => f.write_str("Dalaran"),
-            Self::NozzlerustPost => f.write_str("Nozzlerust Post"),
-            Self::FarshireMine => f.write_str("Farshire Mine"),
-            Self::TheMosslightPillar => f.write_str("The Mosslight Pillar"),
-            Self::SaragosasLanding => f.write_str("Saragosa's Landing"),
-            Self::VengeanceLift => f.write_str("Vengeance Lift"),
-            Self::BalejarWatch => f.write_str("Balejar Watch"),
-            Self::NewAgamandInn => f.write_str("New Agamand Inn"),
-            Self::PassageOfLostFiends => f.write_str("Passage of Lost Fiends"),
-            Self::TheRingOfValor => f.write_str("The Ring of Valor"),
-            Self::HallOfTheFrostwolf => f.write_str("Hall of the Frostwolf"),
-            Self::HallOfTheStormpike => f.write_str("Hall of the Stormpike"),
-            Self::StormwindHarbor => f.write_str("Stormwind Harbor"),
-            Self::TheMakersOverlook => f.write_str("The Makers' Overlook"),
-            Self::TheMakersPerch => f.write_str("The Makers' Perch"),
-            Self::ScarletTower => f.write_str("Scarlet Tower"),
-            Self::TheVioletHold => f.write_str("The Violet Hold"),
-            Self::Gundrak1 => f.write_str("Gundrak"),
-            Self::OnslaughtHarbor => f.write_str("Onslaught Harbor"),
-            Self::K3 => f.write_str("K3"),
-            Self::SnowblindHills => f.write_str("Snowblind Hills"),
-            Self::SnowblindTerrace => f.write_str("Snowblind Terrace"),
-            Self::Garm => f.write_str("Garm"),
-            Self::BrunnhildarVillage => f.write_str("Brunnhildar Village"),
-            Self::SifreldarVillage => f.write_str("Sifreldar Village"),
-            Self::Valkyrion => f.write_str("Valkyrion"),
-            Self::TheForlornMine => f.write_str("The Forlorn Mine"),
-            Self::BorsBreathRiver => f.write_str("Bor's Breath River"),
-            Self::ArgentVanguard => f.write_str("Argent Vanguard"),
-            Self::Frosthold => f.write_str("Frosthold"),
-            Self::GromArshCrashSite => f.write_str("Grom'arsh Crash-Site"),
-            Self::TempleOfStorms => f.write_str("Temple of Storms"),
-            Self::EngineOfTheMakers => f.write_str("Engine of the Makers"),
-            Self::TheFootSteppes => f.write_str("The Foot Steppes"),
-            Self::DragonspinePeaks => f.write_str("Dragonspine Peaks"),
-            Self::Nidavelir => f.write_str("Nidavelir"),
-            Self::NarvirsCradle => f.write_str("Narvir's Cradle"),
-            Self::SnowdriftPlains => f.write_str("Snowdrift Plains"),
-            Self::ValleyOfAncientWinters => f.write_str("Valley of Ancient Winters"),
-            Self::DunNiffelem => f.write_str("Dun Niffelem"),
-            Self::FrostfieldLake => f.write_str("Frostfield Lake"),
-            Self::Thunderfall => f.write_str("Thunderfall"),
-            Self::CampTunkaLo => f.write_str("Camp Tunka'lo"),
-            Self::BrannsBaseCamp => f.write_str("Brann's Base-Camp"),
-            Self::GateOfEchoes => f.write_str("Gate of Echoes"),
-            Self::PlainOfEchoes => f.write_str("Plain of Echoes"),
-            Self::Ulduar1 => f.write_str("Ulduar"),
-            Self::TerraceOfTheMakers => f.write_str("Terrace of the Makers"),
-            Self::GateOfLightning => f.write_str("Gate of Lightning"),
-            Self::PathOfTheTitans1 => f.write_str("Path of the Titans"),
-            Self::Uldis => f.write_str("Uldis"),
-            Self::LokensBargain => f.write_str("Loken's Bargain"),
-            Self::BorsFall => f.write_str("Bor's Fall"),
-            Self::BorsBreath => f.write_str("Bor's Breath"),
-            Self::RohemdalPass => f.write_str("Rohemdal Pass"),
-            Self::TheStormFoundry => f.write_str("The Storm Foundry"),
-            Self::HibernalCavern => f.write_str("Hibernal Cavern"),
-            Self::VoldruneDwelling => f.write_str("Voldrune Dwelling"),
-            Self::TorsegsRest => f.write_str("Torseg's Rest"),
-            Self::SparksocketMinefield => f.write_str("Sparksocket Minefield"),
-            Self::RicketsFolly => f.write_str("Ricket's Folly"),
-            Self::GarmsBane => f.write_str("Garm's Bane"),
-            Self::GarmsRise => f.write_str("Garm's Rise"),
-            Self::CrystalwebCavern => f.write_str("Crystalweb Cavern"),
-            Self::TempleOfLife => f.write_str("Temple of Life"),
-            Self::TempleOfOrder => f.write_str("Temple of Order"),
-            Self::TempleOfWinter => f.write_str("Temple of Winter"),
-            Self::TempleOfInvention => f.write_str("Temple of Invention"),
-            Self::DeathsRise => f.write_str("Death's Rise"),
-            Self::TheDeadFields => f.write_str("The Dead Fields"),
-            Self::DargathsDemise => f.write_str("Dargath's Demise"),
-            Self::TheHiddenHollow => f.write_str("The Hidden Hollow"),
-            Self::BernausHappyFunLand => f.write_str("Bernau's Happy Fun Land"),
-            Self::FrostgripsHollow => f.write_str("Frostgrip's Hollow"),
-            Self::TheFrigidTomb => f.write_str("The Frigid Tomb"),
-            Self::TwinShores => f.write_str("Twin Shores"),
-            Self::ZimBosHideout => f.write_str("Zim'bo's Hideout"),
-            Self::AbandonedCamp => f.write_str("Abandoned Camp"),
-            Self::TheShadowVault => f.write_str("The Shadow Vault"),
-            Self::ColdwindPass => f.write_str("Coldwind Pass"),
-            Self::WintersBreathLake => f.write_str("Winter's Breath Lake"),
-            Self::TheForgottenOverlook => f.write_str("The Forgotten Overlook"),
-            Self::JinthaKalarPassage => f.write_str("Jintha'kalar Passage"),
-            Self::ArrigaFootbridge => f.write_str("Arriga Footbridge"),
-            Self::TheLostPassage => f.write_str("The Lost Passage"),
-            Self::BouldercragsRefuge => f.write_str("Bouldercrag's Refuge"),
-            Self::TheInventorsLibrary => f.write_str("The Inventor's Library"),
-            Self::TheFrozenMine => f.write_str("The Frozen Mine"),
-            Self::FrostfloeDeep => f.write_str("Frostfloe Deep"),
-            Self::TheHowlingHollow => f.write_str("The Howling Hollow"),
-            Self::CrusaderForwardCamp => f.write_str("Crusader Forward Camp"),
-            Self::Stormcrest => f.write_str("Stormcrest"),
-            Self::BonesnapsCamp => f.write_str("Bonesnap's Camp"),
-            Self::UfrangsHall => f.write_str("Ufrang's Hall"),
-            Self::TheObsidianSanctum => f.write_str("The Obsidian Sanctum"),
-            Self::AhnKahetTheOldKingdom => f.write_str("Ahn'kahet: The Old Kingdom"),
-            Self::FjornsAnvil => f.write_str("Fjorn's Anvil"),
-            Self::Jotunheim => f.write_str("Jotunheim"),
-            Self::SavageLedge => f.write_str("Savage Ledge"),
-            Self::HallsOfTheAncestors => f.write_str("Halls of the Ancestors"),
-            Self::TheBlightedPool => f.write_str("The Blighted Pool"),
-            Self::TheEyeOfEternity => f.write_str("The Eye of Eternity"),
-            Self::TheArgentVanguard => f.write_str("The Argent Vanguard"),
-            Self::MimirsWorkshop => f.write_str("Mimir's Workshop"),
-            Self::IronwallDam => f.write_str("Ironwall Dam"),
-            Self::ValleyOfEchoes => f.write_str("Valley of Echoes"),
-            Self::TheBreach => f.write_str("The Breach"),
-            Self::Scourgeholme => f.write_str("Scourgeholme"),
-            Self::TheBrokenFront => f.write_str("The Broken Front"),
-            Self::MordRetharTheDeathGate => f.write_str("Mord'rethar: The Death Gate"),
-            Self::TheBombardment => f.write_str("The Bombardment"),
-            Self::AldurTharTheDesolationGate => f.write_str("Aldur'thar: The Desolation Gate"),
-            Self::TheSkybreaker => f.write_str("The Skybreaker"),
-            Self::OrgrimsHammer => f.write_str("Orgrim's Hammer"),
-            Self::Ymirheim => f.write_str("Ymirheim"),
-            Self::SaroniteMines => f.write_str("Saronite Mines"),
-            Self::TheConflagration => f.write_str("The Conflagration"),
-            Self::IronwallRampart => f.write_str("Ironwall Rampart"),
-            Self::WeepingQuarry => f.write_str("Weeping Quarry"),
-            Self::CorpRetharTheHorrorGate => f.write_str("Corp'rethar: The Horror Gate"),
-            Self::TheCourtOfBones => f.write_str("The Court of Bones"),
-            Self::MalykrissTheVileHold => f.write_str("Malykriss: The Vile Hold"),
-            Self::CathedralOfDarkness => f.write_str("Cathedral of Darkness"),
-            Self::IcecrownCitadel => f.write_str("Icecrown Citadel"),
-            Self::IcecrownGlacier => f.write_str("Icecrown Glacier"),
-            Self::Valhalas => f.write_str("Valhalas"),
-            Self::TheUnderhalls => f.write_str("The Underhalls"),
-            Self::NjorndarVillage => f.write_str("Njorndar Village"),
-            Self::BalargardeFortress => f.write_str("Balargarde Fortress"),
-            Self::KulGalarKeep => f.write_str("Kul'galar Keep"),
-            Self::TheCrimsonCathedral => f.write_str("The Crimson Cathedral"),
-            Self::SanctumOfReanimation => f.write_str("Sanctum of Reanimation"),
-            Self::TheFleshwerks => f.write_str("The Fleshwerks"),
-            Self::VengeanceLandingInn => f.write_str("Vengeance Landing Inn"),
-            Self::SindragosasFall => f.write_str("Sindragosa's Fall"),
-            Self::WildervarMine => f.write_str("Wildervar Mine"),
-            Self::ThePitOfTheFang => f.write_str("The Pit of the Fang"),
-            Self::FrosthowlCavern => f.write_str("Frosthowl Cavern"),
-            Self::TheValleyOfLostHope => f.write_str("The Valley of Lost Hope"),
-            Self::TheSunkenRing => f.write_str("The Sunken Ring"),
-            Self::TheBrokenTemple => f.write_str("The Broken Temple"),
-            Self::TheValleyOfFallenHeroes => f.write_str("The Valley of Fallen Heroes"),
-            Self::VanguardInfirmary => f.write_str("Vanguard Infirmary"),
-            Self::HallOfTheShaper => f.write_str("Hall of the Shaper"),
-            Self::TempleOfWisdom => f.write_str("Temple of Wisdom"),
-            Self::DeathsBreach1 => f.write_str("Death's Breach"),
-            Self::AbandonedMine => f.write_str("Abandoned Mine"),
-            Self::RuinsOfTheScarletEnclave => f.write_str("Ruins of the Scarlet Enclave"),
-            Self::HallsOfStone1 => f.write_str("Halls of Stone"),
-            Self::HallsOfLightning1 => f.write_str("Halls of Lightning"),
-            Self::TheGreatTree => f.write_str("The Great Tree"),
-            Self::TheMirrorOfTwilight => f.write_str("The Mirror of Twilight"),
-            Self::TheTwilightRivulet => f.write_str("The Twilight Rivulet"),
-            Self::TheDecrepitFlow => f.write_str("The Decrepit Flow"),
-            Self::ForlornWoods => f.write_str("Forlorn Woods"),
-            Self::RuinsOfShandaral => f.write_str("Ruins of Shandaral"),
-            Self::TheAzureFront => f.write_str("The Azure Front"),
-            Self::VioletStand => f.write_str("Violet Stand"),
-            Self::TheUnboundThicket => f.write_str("The Unbound Thicket"),
-            Self::SunreaversCommand => f.write_str("Sunreaver's Command"),
-            Self::WindrunnersOverlook => f.write_str("Windrunner's Overlook"),
-            Self::TheUnderbelly => f.write_str("The Underbelly"),
-            Self::KrasusLanding => f.write_str("Krasus' Landing"),
-            Self::TheVioletHold1 => f.write_str("The Violet Hold"),
-            Self::TheEventide => f.write_str("The Eventide"),
-            Self::SewerExitPipe => f.write_str("Sewer Exit Pipe"),
-            Self::CircleOfWills => f.write_str("Circle of Wills"),
-            Self::SilverwingFlagRoom => f.write_str("Silverwing Flag Room"),
-            Self::WarsongFlagRoom => f.write_str("Warsong Flag Room"),
-            Self::WintergraspFortress => f.write_str("Wintergrasp Fortress"),
-            Self::CentralBridge => f.write_str("Central Bridge"),
-            Self::EasternBridge => f.write_str("Eastern Bridge"),
-            Self::WesternBridge => f.write_str("Western Bridge"),
-            Self::DubraJin => f.write_str("Dubra'Jin"),
-            Self::CrusadersPinnacle => f.write_str("Crusaders' Pinnacle"),
-            Self::FlamewatchTower => f.write_str("Flamewatch Tower"),
-            Self::WintersEdgeTower => f.write_str("Winter's Edge Tower"),
-            Self::ShadowsightTower => f.write_str("Shadowsight Tower"),
-            Self::TheCauldronOfFlames => f.write_str("The Cauldron of Flames"),
-            Self::GlacialFalls => f.write_str("Glacial Falls"),
-            Self::WindyBluffs => f.write_str("Windy Bluffs"),
-            Self::TheForestOfShadows => f.write_str("The Forest of Shadows"),
-            Self::Blackwatch => f.write_str("Blackwatch"),
-            Self::TheChilledQuagmire => f.write_str("The Chilled Quagmire"),
-            Self::TheSteppeOfLife => f.write_str("The Steppe of Life"),
-            Self::SilentVigil => f.write_str("Silent Vigil"),
-            Self::GimoraksDen => f.write_str("Gimorak's Den"),
-            Self::ThePitOfFiends => f.write_str("The Pit of Fiends"),
-            Self::BattlescarSpire => f.write_str("Battlescar Spire"),
-            Self::HallOfHorrors => f.write_str("Hall of Horrors"),
-            Self::TheCircleOfSuffering => f.write_str("The Circle of Suffering"),
-            Self::RiseOfSuffering => f.write_str("Rise of Suffering"),
-            Self::KrasusLanding1 => f.write_str("Krasus' Landing"),
-            Self::SewerExitPipe1 => f.write_str("Sewer Exit Pipe"),
-            Self::DalaranIsland => f.write_str("Dalaran Island"),
-            Self::ForceInterior => f.write_str("Force Interior"),
-            Self::VaultOfArchavon => f.write_str("Vault of Archavon"),
-            Self::GateOfTheRedSun => f.write_str("Gate of the Red Sun"),
-            Self::GateOfTheBlueSapphire => f.write_str("Gate of the Blue Sapphire"),
-            Self::GateOfTheGreenEmerald => f.write_str("Gate of the Green Emerald"),
-            Self::GateOfThePurpleAmethyst => f.write_str("Gate of the Purple Amethyst"),
-            Self::GateOfTheYellowMoon => f.write_str("Gate of the Yellow Moon"),
-            Self::CourtyardOfTheAncients => f.write_str("Courtyard of the Ancients"),
-            Self::LandingBeach => f.write_str("Landing Beach"),
-            Self::WestsparkWorkshop => f.write_str("Westspark Workshop"),
-            Self::EastsparkWorkshop => f.write_str("Eastspark Workshop"),
-            Self::DalaranCity => f.write_str("Dalaran City"),
-            Self::TheVioletCitadelSpire => f.write_str("The Violet Citadel Spire"),
-            Self::NazAnakTheForgottenDepths => f.write_str("Naz'anak: The Forgotten Depths"),
-            Self::SunreaversSanctuary => f.write_str("Sunreaver's Sanctuary"),
-            Self::Elevator => f.write_str("Elevator"),
-            Self::AntonidasMemorial => f.write_str("Antonidas Memorial"),
-            Self::TheVioletCitadel => f.write_str("The Violet Citadel"),
-            Self::MagusCommerceExchange => f.write_str("Magus Commerce Exchange"),
-            Self::Unused => f.write_str("UNUSED"),
-            Self::FirstLegionForwardCamp => f.write_str("First Legion Forward Camp"),
-            Self::HallOfTheConqueredKings => f.write_str("Hall of the Conquered Kings"),
-            Self::BefouledTerrace => f.write_str("Befouled Terrace"),
-            Self::TheDesecratedAltar => f.write_str("The Desecrated Altar"),
-            Self::ShimmeringBog => f.write_str("Shimmering Bog"),
-            Self::FallenTempleOfAhnKahet => f.write_str("Fallen Temple of Ahn'kahet"),
-            Self::HallsOfBinding => f.write_str("Halls of Binding"),
-            Self::WintersHeart => f.write_str("Winter's Heart"),
-            Self::TheNorthSea2 => f.write_str("The North Sea"),
-            Self::TheBroodmothersNest => f.write_str("The Broodmother's Nest"),
-            Self::DalaranFloatingRocks => f.write_str("Dalaran Floating Rocks"),
-            Self::RaptorPens => f.write_str("Raptor Pens"),
-            Self::DrakTharonKeep3 => f.write_str("Drak'Tharon Keep"),
-            Self::TheNoxiousPass => f.write_str("The Noxious Pass"),
-            Self::VargothsRetreat => f.write_str("Vargoth's Retreat"),
-            Self::VioletCitadelBalcony => f.write_str("Violet Citadel Balcony"),
-            Self::BandOfVariance => f.write_str("Band of Variance"),
-            Self::BandOfAcceleration => f.write_str("Band of Acceleration"),
-            Self::BandOfTransmutation => f.write_str("Band of Transmutation"),
-            Self::BandOfAlignment => f.write_str("Band of Alignment"),
-            Self::AshwoodLake => f.write_str("Ashwood Lake"),
-            Self::IronConcourse => f.write_str("Iron Concourse"),
-            Self::FormationGrounds => f.write_str("Formation Grounds"),
-            Self::RazorscalesAerie => f.write_str("Razorscale's Aerie"),
-            Self::TheColossalForge => f.write_str("The Colossal Forge"),
-            Self::TheScrapyard => f.write_str("The Scrapyard"),
-            Self::TheConservatoryOfLife => f.write_str("The Conservatory of Life"),
-            Self::TheArchivum => f.write_str("The Archivum"),
-            Self::ArgentTournamentGrounds => f.write_str("Argent Tournament Grounds"),
-            Self::ExpeditionBaseCamp => f.write_str("Expedition Base Camp"),
-            Self::SunreaverPavilion => f.write_str("Sunreaver Pavilion"),
-            Self::SilverCovenantPavilion => f.write_str("Silver Covenant Pavilion"),
-            Self::TheCooperResidence => f.write_str("The Cooper Residence"),
-            Self::TheRingOfChampions => f.write_str("The Ring of Champions"),
-            Self::TheAspirantsRing => f.write_str("The Aspirants' Ring"),
-            Self::TheArgentValiantsRing => f.write_str("The Argent Valiants' Ring"),
-            Self::TheAllianceValiantsRing => f.write_str("The Alliance Valiants' Ring"),
-            Self::TheHordeValiantsRing => f.write_str("The Horde Valiants' Ring"),
-            Self::ArgentPavilion => f.write_str("Argent Pavilion"),
-            Self::SunreaverPavilion1 => f.write_str("Sunreaver Pavilion"),
-            Self::SilverCovenantPavilion1 => f.write_str("Silver Covenant Pavilion"),
-            Self::TheForlornCavern => f.write_str("The Forlorn Cavern"),
-            Self::ClaytonioTestArea => f.write_str("claytonio test area"),
-            Self::QuelDelarsRest => f.write_str("Quel'Delar's Rest"),
-            Self::IsleOfConquest => f.write_str("Isle of Conquest"),
-            Self::TrialOfTheCrusader => f.write_str("Trial of the Crusader"),
-            Self::TrialOfTheChampion => f.write_str("Trial of the Champion"),
-            Self::RuneweaverSquare => f.write_str("Runeweaver Square"),
-            Self::TheSilverEnclave => f.write_str("The Silver Enclave"),
-            Self::IsleOfConquestNoMansLand => f.write_str("Isle of Conquest No Man's Land"),
-            Self::HrothgarsLanding => f.write_str("Hrothgar's Landing"),
-            Self::DeathspeakersWatch => f.write_str("Deathspeaker's Watch"),
-            Self::Workshop => f.write_str("Workshop"),
-            Self::Quarry => f.write_str("Quarry"),
-            Self::Docks => f.write_str("Docks"),
-            Self::Hangar => f.write_str("Hangar"),
-            Self::Refinery => f.write_str("Refinery"),
-            Self::HordeKeep => f.write_str("Horde Keep"),
-            Self::AllianceKeep => f.write_str("Alliance Keep"),
-            Self::TheSeaReaversRun => f.write_str("The Sea Reaver's Run"),
-            Self::TransportAllianceGunship => f.write_str("Transport: Alliance Gunship"),
-            Self::TransportHordeGunship => f.write_str("Transport: Horde Gunship"),
-            Self::HrothgarsLanding1 => f.write_str("Hrothgar's Landing"),
-            Self::TheForgeOfSouls => f.write_str("The Forge of Souls"),
-            Self::IcecrownCitadel1 => f.write_str("Icecrown Citadel"),
-            Self::PitOfSaron => f.write_str("Pit of Saron"),
-            Self::HallsOfReflection => f.write_str("Halls of Reflection"),
-            Self::TransportAllianceGunshipIgb => f.write_str("Transport: Alliance Gunship (IGB)"),
-            Self::TransportHordeGunshipIgb => f.write_str("Transport: Horde Gunship (IGB)"),
-            Self::TheFrozenThrone => f.write_str("The Frozen Throne"),
-            Self::TheFrozenHalls => f.write_str("The Frozen Halls"),
-            Self::TheFrostQueensLair => f.write_str("The Frost Queen's Lair"),
-            Self::PutricidesLaboratoryOfAlchemicalHorrorsAndFun => f.write_str("Putricide's Laboratory of Alchemical Horrors and Fun"),
-            Self::TheSanctumOfBlood => f.write_str("The Sanctum of Blood"),
-            Self::TheCrimsonHall => f.write_str("The Crimson Hall"),
-            Self::TheFrostQueensLair1 => f.write_str("The Frost Queen's Lair"),
-            Self::PutricidesLaboratoryOfAlchemicalHorrorsAndFun1 => f.write_str("Putricide's Laboratory of Alchemical Horrors and Fun"),
-            Self::TheCrimsonHall1 => f.write_str("The Crimson Hall"),
-            Self::TheFrozenThrone1 => f.write_str("The Frozen Throne"),
-            Self::TheSanctumOfBlood1 => f.write_str("The Sanctum of Blood"),
-            Self::Frostmourne => f.write_str("Frostmourne"),
-            Self::TheDarkApproach => f.write_str("The Dark Approach"),
-            Self::ScourgelordsCommand => f.write_str("Scourgelord's Command"),
-            Self::TheShadowThrone => f.write_str("The Shadow Throne"),
-            Self::TheHiddenPassage => f.write_str("The Hidden Passage"),
-            Self::Frostmourne1 => f.write_str("Frostmourne"),
-            Self::TheRubySanctum => f.write_str("The Ruby Sanctum"),
         }
     }
 }
@@ -9317,9 +6661,9 @@ impl TryFrom<u32> for Area {
             62 => Ok(Self::BrackwellPumpkinPatch),
             63 => Ok(Self::TheStonefieldFarm),
             64 => Ok(Self::TheMaclureVineyards),
-            65 => Ok(Self::Dragonblight),
-            66 => Ok(Self::ZulDrak),
-            67 => Ok(Self::TheStormPeaks),
+            65 => Ok(Self::ReuseMeThree),
+            66 => Ok(Self::ReuseMeSix),
+            67 => Ok(Self::ReuseMeFive),
             68 => Ok(Self::LakeEverstill),
             69 => Ok(Self::Lakeshire),
             70 => Ok(Self::Stonewatch),
@@ -9434,11 +6778,11 @@ impl TryFrom<u32> for Area {
             203 => Ok(Self::MardenholdeKeep),
             204 => Ok(Self::PyrewoodVillage),
             205 => Ok(Self::DunModr),
-            206 => Ok(Self::UtgardeKeep),
+            206 => Ok(Self::UnusedWestfall),
             207 => Ok(Self::TheGreatSea),
             208 => Ok(Self::UnusedIroncladcove),
             209 => Ok(Self::ShadowfangKeep),
-            210 => Ok(Self::Icecrown),
+            210 => Ok(Self::ReuseMe2),
             211 => Ok(Self::IceflowLake),
             212 => Ok(Self::HelmsBedLake),
             213 => Ok(Self::DeepElemMine),
@@ -9499,7 +6843,7 @@ impl TryFrom<u32> for Area {
             276 => Ok(Self::UnusedStonewroughtPass),
             277 => Ok(Self::TheFoothillCaverns),
             278 => Ok(Self::LordamereInternmentCamp),
-            279 => Ok(Self::DalaranCrater),
+            279 => Ok(Self::Dalaran),
             280 => Ok(Self::Strahnbrad),
             281 => Ok(Self::RuinsOfAlterac),
             282 => Ok(Self::CrushridgeHold),
@@ -9607,8 +6951,8 @@ impl TryFrom<u32> for Area {
             391 => Ok(Self::TheMerchantCoast),
             392 => Ok(Self::Ratchet),
             393 => Ok(Self::DarkspearStrand),
-            394 => Ok(Self::GrizzlyHills),
-            395 => Ok(Self::Grizzlemaw),
+            394 => Ok(Self::DarrowmereLakeUnused),
+            395 => Ok(Self::CaerDarrowUnused),
             396 => Ok(Self::WinterhoofWaterWell),
             397 => Ok(Self::ThunderhornWaterWell),
             398 => Ok(Self::WildmaneWaterWell),
@@ -9703,7 +7047,7 @@ impl TryFrom<u32> for Area {
             491 => Ok(Self::RazorfenKraul),
             492 => Ok(Self::RavenHillCemetery),
             493 => Ok(Self::Moonglade),
-            495 => Ok(Self::HowlingFjord),
+            495 => Ok(Self::DeleteMe),
             496 => Ok(Self::BrackenwallVillage),
             497 => Ok(Self::SwamplightManor),
             498 => Ok(Self::BloodfenBurrow),
@@ -9806,7 +7150,7 @@ impl TryFrom<u32> for Area {
             839 => Ok(Self::SouthGatePass1),
             856 => Ok(Self::TwilightGrove),
             876 => Ok(Self::GmIsland),
-            877 => Ok(Self::DeleteMe),
+            877 => Ok(Self::DeleteMe1),
             878 => Ok(Self::SouthfuryRiver3),
             879 => Ok(Self::SouthfuryRiver4),
             880 => Ok(Self::ThandolSpan1),
@@ -9898,7 +7242,7 @@ impl TryFrom<u32> for Area {
             1156 => Ok(Self::SouthernBarrens),
             1157 => Ok(Self::SouthernGoldRoad),
             1176 => Ok(Self::ZulFarrak1),
-            1196 => Ok(Self::UtgardePinnacle),
+            1196 => Ok(Self::UnusedalcazIsland),
             1216 => Ok(Self::TimbermawHold),
             1217 => Ok(Self::VanndirEncampment),
             1218 => Ok(Self::Testazshara),
@@ -9956,7 +7300,7 @@ impl TryFrom<u32> for Area {
             1577 => Ok(Self::TheCapeOfStranglethorn),
             1578 => Ok(Self::SouthernSavageCoast),
             1579 => Ok(Self::UnusedTheDeadmines002),
-            1580 => Ok(Self::UnusedIroncladCove003),
+            1580 => Ok(Self::UnusedIroncladCove00three),
             1581 => Ok(Self::TheDeadmines),
             1582 => Ok(Self::IroncladCove),
             1583 => Ok(Self::BlackrockSpire),
@@ -10128,7 +7472,7 @@ impl TryFrom<u32> for Area {
             2277 => Ok(Self::Plaguewood),
             2278 => Ok(Self::Scourgehold),
             2279 => Ok(Self::Stratholme1),
-            2280 => Ok(Self::DoNotUse),
+            2280 => Ok(Self::UnusedStratholme),
             2297 => Ok(Self::DarrowmereLake),
             2298 => Ok(Self::CaerDarrow),
             2299 => Ok(Self::DarrowmereLake1),
@@ -10244,7 +7588,7 @@ impl TryFrom<u32> for Area {
             2757 => Ok(Self::ShrineOfTheFallenWarrior),
             2777 => Ok(Self::UnusedAlteracValley),
             2797 => Ok(Self::BlackfathomDeeps1),
-            2817 => Ok(Self::CrystalsongForest),
+            2817 => Ok(Self::ReuseMe4),
             2837 => Ok(Self::TheMastersCellar),
             2838 => Ok(Self::StonewroughtPass),
             2839 => Ok(Self::AlteracValley1),
@@ -10377,7 +7721,7 @@ impl TryFrom<u32> for Area {
             3474 => Ok(Self::TheScorchedGrove),
             3475 => Ok(Self::ZebWatha),
             3476 => Ok(Self::TorWatha),
-            3477 => Ok(Self::AzjolNerub),
+            3477 => Ok(Self::KarazhanUnused),
             3478 => Ok(Self::GatesOfAhnQiraj),
             3479 => Ok(Self::TheVeiledSea7),
             3480 => Ok(Self::DuskwitherGrounds),
@@ -10437,7 +7781,7 @@ impl TryFrom<u32> for Area {
             3534 => Ok(Self::FethsWay),
             3535 => Ok(Self::HellfireCitadel),
             3536 => Ok(Self::Thrallmar),
-            3537 => Ok(Self::BoreanTundra),
+            3537 => Ok(Self::Reuse),
             3538 => Ok(Self::HonorHold),
             3539 => Ok(Self::TheStairOfDestiny),
             3540 => Ok(Self::TwistingNether),
@@ -10509,7 +7853,7 @@ impl TryFrom<u32> for Area {
             3606 => Ok(Self::HyjalSummit),
             3607 => Ok(Self::SerpentshrineCavern),
             3608 => Ok(Self::VindicatorsRest),
-            3609 => Ok(Self::Unused3),
+            3609 => Ok(Self::Unusedthree),
             3610 => Ok(Self::BurningBladeRuins),
             3611 => Ok(Self::ClanWatch),
             3612 => Ok(Self::BloodcurseIsle),
@@ -10611,7 +7955,7 @@ impl TryFrom<u32> for Area {
             3708 => Ok(Self::HordeEncampment),
             3709 => Ok(Self::NightElfVillage),
             3710 => Ok(Self::Nordrassil),
-            3711 => Ok(Self::SholazarBasin),
+            3711 => Ok(Self::ReuseMe),
             3712 => Ok(Self::Area52),
             3713 => Ok(Self::TheBloodFurnace),
             3714 => Ok(Self::TheShatteredHalls),
@@ -10877,98 +8221,16 @@ impl TryFrom<u32> for Area {
             3976 => Ok(Self::VeilAlaRak),
             3977 => Ok(Self::UpperVeilShilAk),
             3978 => Ok(Self::LowerVeilShilAk),
-            3979 => Ok(Self::TheFrozenSea),
-            3980 => Ok(Self::DaggercapBay),
-            3981 => Ok(Self::Valgarde),
-            3982 => Ok(Self::WyrmskullVillage),
-            3983 => Ok(Self::UtgardeKeep1),
-            3984 => Ok(Self::Nifflevar),
-            3985 => Ok(Self::FallsOfYmiron),
-            3986 => Ok(Self::EchoReach),
-            3987 => Ok(Self::TheIsleOfSpears),
-            3988 => Ok(Self::Kamagua),
-            3989 => Ok(Self::GarvansReef),
-            3990 => Ok(Self::ScalawagPoint),
-            3991 => Ok(Self::NewAgamand),
-            3992 => Ok(Self::TheAncientLift),
-            3993 => Ok(Self::WestguardTurret),
-            3994 => Ok(Self::Halgrind),
-            3995 => Ok(Self::TheLaughingStand),
-            3996 => Ok(Self::BaelgunsExcavationSite),
-            3997 => Ok(Self::ExplorersLeagueOutpost),
-            3998 => Ok(Self::WestguardKeep),
-            3999 => Ok(Self::SteelGate),
-            4000 => Ok(Self::VengeanceLanding),
-            4001 => Ok(Self::Baleheim),
-            4002 => Ok(Self::Skorn),
-            4003 => Ok(Self::FortWildervar),
-            4004 => Ok(Self::VilepreyVillage),
-            4005 => Ok(Self::IvaldsRuin),
-            4006 => Ok(Self::Gjalerbron),
-            4007 => Ok(Self::TombOfTheLostKings),
             4008 => Ok(Self::ShartuulsTransporter),
             4009 => Ok(Self::IllidariTrainingGrounds),
             4010 => Ok(Self::Mudsprocket),
-            4018 => Ok(Self::CampWinterhoof),
-            4019 => Ok(Self::DevelopmentLand),
-            4020 => Ok(Self::MightstoneQuarry),
-            4021 => Ok(Self::BloodsporePlains),
-            4022 => Ok(Self::Gammoth),
-            4023 => Ok(Self::AmberLedge),
-            4024 => Ok(Self::Coldarra),
-            4025 => Ok(Self::TheWestrift),
-            4026 => Ok(Self::TheTransitusStair),
-            4027 => Ok(Self::CoastOfEchoes),
-            4028 => Ok(Self::RiplashStrand),
-            4029 => Ok(Self::RiplashRuins),
-            4030 => Ok(Self::CoastOfIdols),
-            4031 => Ok(Self::PalEa),
-            4032 => Ok(Self::ValianceKeep),
-            4033 => Ok(Self::WinterfinVillage),
-            4034 => Ok(Self::TheBoreanWall),
-            4035 => Ok(Self::TheGeyserFields),
-            4036 => Ok(Self::FizzcrankPumpingStation),
-            4037 => Ok(Self::TaunkaLeVillage),
-            4038 => Ok(Self::MagnamothCaverns),
-            4039 => Ok(Self::ColdrockQuarry),
-            4040 => Ok(Self::NjordsBreathBay),
-            4041 => Ok(Self::Kaskala),
-            4042 => Ok(Self::Transborea),
-            4043 => Ok(Self::TheFloodPlains),
             4046 => Ok(Self::DirehornPost),
             4047 => Ok(Self::NatsLanding),
-            4048 => Ok(Self::EmberClutch),
             4049 => Ok(Self::TabethasFarm),
-            4050 => Ok(Self::DerelictStrand),
-            4051 => Ok(Self::TheFrozenGlade),
-            4052 => Ok(Self::TheVibrantGlade),
-            4053 => Ok(Self::TheTwistedGlade),
-            4054 => Ok(Self::Rivenwood),
-            4055 => Ok(Self::CaldemereLake),
-            4056 => Ok(Self::UtgardeCatacombs),
-            4057 => Ok(Self::ShieldHill),
-            4058 => Ok(Self::LakeCauldros),
-            4059 => Ok(Self::CauldrosIsle),
-            4060 => Ok(Self::BleedingVale),
-            4061 => Ok(Self::GiantsRun),
-            4062 => Ok(Self::ApothecaryCamp),
-            4063 => Ok(Self::EmberSpearTower),
-            4064 => Ok(Self::ShatteredStraits),
-            4065 => Ok(Self::Gjalerhorn),
-            4066 => Ok(Self::FrostbladePeak),
             4067 => Ok(Self::PlaguewoodTower),
-            4068 => Ok(Self::WestSpearTower),
-            4069 => Ok(Self::NorthSpearTower),
-            4070 => Ok(Self::ChillmereCoast),
-            4071 => Ok(Self::WhisperGulch),
-            4072 => Ok(Self::SubZone),
-            4073 => Ok(Self::WintersTerrace),
-            4074 => Ok(Self::TheWakingHalls),
             4075 => Ok(Self::SunwellPlateau),
             4076 => Ok(Self::ReuseMeSeven),
-            4077 => Ok(Self::SorlofsStrand),
             4078 => Ok(Self::RazorthornRise),
-            4079 => Ok(Self::FrostbladePass),
             4080 => Ok(Self::IsleOfQuelDanas),
             4081 => Ok(Self::TheDawnchaser),
             4082 => Ok(Self::TheSinLoren),
@@ -10985,591 +8247,9 @@ impl TryFrom<u32> for Area {
             4093 => Ok(Self::TheSunForge),
             4094 => Ok(Self::SunwellPlateau1),
             4095 => Ok(Self::MagistersTerrace),
-            4096 => Ok(Self::ClaytönsWoweditLand),
-            4097 => Ok(Self::WinterfinCaverns),
-            4098 => Ok(Self::GlimmerBay),
-            4099 => Ok(Self::WinterfinRetreat),
-            4100 => Ok(Self::TheCullingOfStratholme),
-            4101 => Ok(Self::SandsOfNasam),
-            4102 => Ok(Self::KromsLanding),
-            4103 => Ok(Self::NasamsTalon),
-            4104 => Ok(Self::EchoCove),
-            4105 => Ok(Self::BerylPoint),
-            4106 => Ok(Self::GarroshsLanding),
-            4107 => Ok(Self::WarsongJetty),
-            4108 => Ok(Self::FizzcrankAirstrip),
-            4109 => Ok(Self::LakeKumUya),
-            4110 => Ok(Self::FarshireFields),
-            4111 => Ok(Self::Farshire),
-            4112 => Ok(Self::FarshireLighthouse),
-            4113 => Ok(Self::UnuPe),
-            4114 => Ok(Self::DeathsStand),
-            4115 => Ok(Self::TheAbandonedReach),
-            4116 => Ok(Self::ScaldingPools),
-            4117 => Ok(Self::SteamSprings),
-            4118 => Ok(Self::Talramas),
-            4119 => Ok(Self::FesteringPools),
-            4120 => Ok(Self::TheNexus),
-            4121 => Ok(Self::TransitusShield),
-            4122 => Ok(Self::BorGorokOutpost),
-            4123 => Ok(Self::Magmoth),
-            4124 => Ok(Self::TheDensOfDying),
-            4125 => Ok(Self::TempleCityOfEnKilah),
-            4126 => Ok(Self::TheWailingZiggurat),
-            4127 => Ok(Self::SteeljawsCaravan),
-            4128 => Ok(Self::Naxxanar),
-            4129 => Ok(Self::WarsongHold),
-            4130 => Ok(Self::PlainsOfNasam),
             4131 => Ok(Self::MagistersTerrace1),
-            4132 => Ok(Self::RuinsOfEldraNath),
-            4133 => Ok(Self::CharredRise),
-            4134 => Ok(Self::BlisteringPool),
-            4135 => Ok(Self::SpireOfBlood),
-            4136 => Ok(Self::SpireOfDecay),
-            4137 => Ok(Self::SpireOfPain),
-            4138 => Ok(Self::FrozenReach),
             4139 => Ok(Self::ParhelionPlaza),
             4140 => Ok(Self::TheDeadScar3),
-            4141 => Ok(Self::TorpsFarm),
-            4142 => Ok(Self::WarsongGranary),
-            4143 => Ok(Self::WarsongSlaughterhouse),
-            4144 => Ok(Self::WarsongFarmsOutpost),
-            4145 => Ok(Self::WestPointStation),
-            4146 => Ok(Self::NorthPointStation),
-            4147 => Ok(Self::MidPointStation),
-            4148 => Ok(Self::SouthPointStation),
-            4149 => Ok(Self::DehtaEncampment),
-            4150 => Ok(Self::KawsRoost),
-            4151 => Ok(Self::WestwindRefugeeCamp),
-            4152 => Ok(Self::MoaKiHarbor),
-            4153 => Ok(Self::InduLeVillage),
-            4154 => Ok(Self::SnowfallGlade),
-            4155 => Ok(Self::TheHalfShell),
-            4156 => Ok(Self::SurgeNeedle),
-            4157 => Ok(Self::MoonrestGardens),
-            4158 => Ok(Self::StarsRest),
-            4159 => Ok(Self::WestfallBrigadeEncampment),
-            4160 => Ok(Self::LothalorWoodlands),
-            4161 => Ok(Self::WyrmrestTemple),
-            4162 => Ok(Self::IcemistFalls),
-            4163 => Ok(Self::IcemistVillage),
-            4164 => Ok(Self::ThePitOfNarjun),
-            4165 => Ok(Self::AgmarsHammer),
-            4166 => Ok(Self::LakeInduLe),
-            4167 => Ok(Self::ObsidianDragonshrine),
-            4168 => Ok(Self::RubyDragonshrine),
-            4169 => Ok(Self::FordragonHold),
-            4170 => Ok(Self::KorKronVanguard),
-            4171 => Ok(Self::TheCourtOfSkulls),
-            4172 => Ok(Self::AngratharTheWrathgate),
-            4173 => Ok(Self::GalakrondsRest),
-            4174 => Ok(Self::TheWickedCoil),
-            4175 => Ok(Self::BronzeDragonshrine),
-            4176 => Ok(Self::TheMirrorOfDawn),
-            4177 => Ok(Self::WintergardeKeep),
-            4178 => Ok(Self::WintergardeMine),
-            4179 => Ok(Self::EmeraldDragonshrine),
-            4180 => Ok(Self::NewHearthglen),
-            4181 => Ok(Self::CrusadersLanding),
-            4182 => Ok(Self::SinnersFolly),
-            4183 => Ok(Self::AzureDragonshrine),
-            4184 => Ok(Self::PathOfTheTitans),
-            4185 => Ok(Self::TheForgottenShore),
-            4186 => Ok(Self::Venomspite),
-            4187 => Ok(Self::TheCrystalVice),
-            4188 => Ok(Self::TheCarrionFields),
-            4189 => Ok(Self::OnslaughtBaseCamp),
-            4190 => Ok(Self::ThorsonsPost),
-            4191 => Ok(Self::LightsTrust),
-            4192 => Ok(Self::FrostmourneCavern),
-            4193 => Ok(Self::ScarletPoint),
-            4194 => Ok(Self::JinthaKalar),
-            4195 => Ok(Self::IceHeartCavern),
-            4196 => Ok(Self::DrakTharonKeep),
-            4197 => Ok(Self::Wintergrasp),
-            4198 => Ok(Self::KiliUasAtoll),
-            4199 => Ok(Self::Silverbrook),
-            4200 => Ok(Self::VordrassilsHeart),
-            4201 => Ok(Self::VordrassilsTears),
-            4202 => Ok(Self::VordrassilsTears1),
-            4203 => Ok(Self::VordrassilsLimb),
-            4204 => Ok(Self::AmberpineLodge),
-            4205 => Ok(Self::SolsticeVillage),
-            4206 => Ok(Self::ConquestHold),
-            4207 => Ok(Self::Voldrune),
-            4208 => Ok(Self::GraniteSprings),
-            4209 => Ok(Self::ZebHalak),
-            4210 => Ok(Self::DrakTharonKeep1),
-            4211 => Ok(Self::CampOneqwah),
-            4212 => Ok(Self::EastwindShore),
-            4213 => Ok(Self::TheBrokenBluffs),
-            4214 => Ok(Self::BoulderHills),
-            4215 => Ok(Self::RageFangShrine),
-            4216 => Ok(Self::DrakilJinRuins),
-            4217 => Ok(Self::BlackriverLoggingCamp),
-            4218 => Ok(Self::HeartsBloodShrine),
-            4219 => Ok(Self::HollowstoneMine),
-            4220 => Ok(Self::DunArgol),
-            4221 => Ok(Self::ThorModan),
-            4222 => Ok(Self::BlueSkyLoggingGrounds),
-            4223 => Ok(Self::MawOfNeltharion),
-            4224 => Ok(Self::TheBrinyPinnacle),
-            4225 => Ok(Self::GlitteringStrand),
-            4226 => Ok(Self::Iskaal),
-            4227 => Ok(Self::DragonsFall),
-            4228 => Ok(Self::TheOculus),
-            4229 => Ok(Self::ProspectorsPoint),
-            4230 => Ok(Self::ColdwindHeights),
-            4231 => Ok(Self::RedwoodTradingPost),
-            4232 => Ok(Self::VengeancePass),
-            4233 => Ok(Self::DawnsReach),
-            4234 => Ok(Self::Naxxramas1),
-            4235 => Ok(Self::HeartwoodTradingPost),
-            4236 => Ok(Self::EvergreenTradingPost),
-            4237 => Ok(Self::SprucePointPost),
-            4238 => Ok(Self::WhitePineTradingPost),
-            4239 => Ok(Self::AspenGrovePost),
-            4240 => Ok(Self::ForestsEdgePost),
-            4241 => Ok(Self::EldritchHeights),
-            4242 => Ok(Self::VentureBay),
-            4243 => Ok(Self::WintergardeCrypt),
-            4244 => Ok(Self::BloodmoonIsle),
-            4245 => Ok(Self::ShadowfangTower),
-            4246 => Ok(Self::WintergardeMausoleum),
-            4247 => Ok(Self::DuskhowlDen),
-            4248 => Ok(Self::TheConquestPit),
-            4249 => Ok(Self::ThePathOfIron),
-            4250 => Ok(Self::RuinsOfTethys),
-            4251 => Ok(Self::SilverbrookHills),
-            4252 => Ok(Self::TheBrokenBluffs1),
-            4253 => Ok(Self::SeventhLegionFront),
-            4254 => Ok(Self::TheDragonWastes),
-            4255 => Ok(Self::RuinsOfDrakZin),
-            4256 => Ok(Self::DrakMarLake),
-            4257 => Ok(Self::DragonspineTributary),
-            4258 => Ok(Self::TheNorthSea1),
-            4259 => Ok(Self::DrakUral),
-            4260 => Ok(Self::ThorvaldsCamp),
-            4261 => Ok(Self::GhostbladePost),
-            4262 => Ok(Self::AshwoodPost),
-            4263 => Ok(Self::LydellsAmbush),
-            4264 => Ok(Self::HallsOfStone),
-            4265 => Ok(Self::TheNexus1),
-            4266 => Ok(Self::HarkorsCamp),
-            4267 => Ok(Self::VordrassilPass),
-            4268 => Ok(Self::RuunasCamp),
-            4269 => Ok(Self::ShrineOfScales),
-            4270 => Ok(Self::DrakAtalPassage),
-            4271 => Ok(Self::UtgardePinnacle1),
-            4272 => Ok(Self::HallsOfLightning),
-            4273 => Ok(Self::Ulduar),
-            4275 => Ok(Self::TheArgentStand),
-            4276 => Ok(Self::AltarOfSseratus),
-            4277 => Ok(Self::AzjolNerub1),
-            4278 => Ok(Self::DraksotraFields),
-            4279 => Ok(Self::Draksotra),
-            4280 => Ok(Self::DrakAgal),
-            4281 => Ok(Self::AcherusTheEbonHold),
-            4282 => Ok(Self::TheAvalanche),
-            4283 => Ok(Self::TheLostLands),
-            4284 => Ok(Self::NesingwaryBaseCamp),
-            4285 => Ok(Self::TheSeabreachFlow),
-            4286 => Ok(Self::TheBonesOfNozronn),
-            4287 => Ok(Self::KartaksHold),
-            4288 => Ok(Self::SparktouchedHaven),
-            4289 => Ok(Self::ThePathOfTheLifewarden),
-            4290 => Ok(Self::RiversHeart),
-            4291 => Ok(Self::RainspeakerCanopy),
-            4292 => Ok(Self::FrenzyheartHill),
-            4293 => Ok(Self::WildgrowthMangal),
-            4294 => Ok(Self::HebValok),
-            4295 => Ok(Self::TheSunderedShard),
-            4296 => Ok(Self::TheLifebloodPillar),
-            4297 => Ok(Self::MosswalkerVillage),
-            4298 => Ok(Self::PlaguelandsTheScarletEnclave),
-            4299 => Ok(Self::Kolramas),
-            4300 => Ok(Self::Waygate),
-            4302 => Ok(Self::TheSkyreachPillar),
-            4303 => Ok(Self::HardknuckleClearing),
-            4304 => Ok(Self::SapphireHive),
-            4306 => Ok(Self::MistwhisperRefuge),
-            4307 => Ok(Self::TheGlimmeringPillar),
-            4308 => Ok(Self::SpearbornEncampment),
-            4309 => Ok(Self::DrakTharonKeep2),
-            4310 => Ok(Self::Zeramas),
-            4311 => Ok(Self::ReliquaryOfAgony),
-            4312 => Ok(Self::EbonWatch),
-            4313 => Ok(Self::ThrymsEnd),
-            4314 => Ok(Self::Voltarus),
-            4315 => Ok(Self::ReliquaryOfPain),
-            4316 => Ok(Self::RageclawDen),
-            4317 => Ok(Self::LightsBreach),
-            4318 => Ok(Self::PoolsOfZhaJin),
-            4319 => Ok(Self::ZimAbwa),
-            4320 => Ok(Self::AmphitheaterOfAnguish),
-            4321 => Ok(Self::AltarOfRhunok),
-            4322 => Ok(Self::AltarOfHarKoa),
-            4323 => Ok(Self::ZimTorga),
-            4324 => Ok(Self::PoolsOfJinAlai),
-            4325 => Ok(Self::AltarOfQuetzLun),
-            4326 => Ok(Self::HebDrakkar),
-            4327 => Ok(Self::DrakMabwa),
-            4328 => Ok(Self::ZimRhuk),
-            4329 => Ok(Self::AltarOfMamToth),
-            4342 => Ok(Self::AcherusTheEbonHold1),
-            4343 => Ok(Self::NewAvalon),
-            4344 => Ok(Self::NewAvalonFields),
-            4345 => Ok(Self::NewAvalonOrchard),
-            4346 => Ok(Self::NewAvalonTownHall),
-            4347 => Ok(Self::Havenshire),
-            4348 => Ok(Self::HavenshireFarms),
-            4349 => Ok(Self::HavenshireLumberMill),
-            4350 => Ok(Self::HavenshireStables),
-            4351 => Ok(Self::ScarletHold),
-            4352 => Ok(Self::ChapelOfTheCrimsonFlame),
-            4353 => Ok(Self::LightsPointTower),
-            4354 => Ok(Self::LightsPoint),
-            4355 => Ok(Self::CryptOfRemembrance),
-            4356 => Ok(Self::DeathsBreach),
-            4357 => Ok(Self::TheNoxiousGlade1),
-            4358 => Ok(Self::TyrsHand1),
-            4359 => Ok(Self::KingsHarbor),
-            4360 => Ok(Self::ScarletOverlook),
-            4361 => Ok(Self::LightsHopeChapel1),
-            4362 => Ok(Self::SinnersFolly1),
-            4363 => Ok(Self::PestilentScar1),
-            4364 => Ok(Self::BrowmanMill1),
-            4365 => Ok(Self::HavenshireMine),
-            4366 => Ok(Self::UrsocsDen),
-            4367 => Ok(Self::TheBlightLine),
-            4368 => Ok(Self::TheBonefields),
-            4369 => Ok(Self::DoriansOutpost),
-            4371 => Ok(Self::MamTothCrater),
-            4372 => Ok(Self::ZolMazStronghold),
-            4373 => Ok(Self::ZolHeb),
-            4374 => Ok(Self::RageclawLake),
-            4375 => Ok(Self::Gundrak),
-            4376 => Ok(Self::TheSavageThicket),
-            4377 => Ok(Self::NewAvalonForge),
-            4378 => Ok(Self::DalaranArena),
-            4379 => Ok(Self::Valgarde1),
-            4380 => Ok(Self::WestguardInn),
-            4381 => Ok(Self::Waygate1),
-            4382 => Ok(Self::TheShapersTerrace),
-            4383 => Ok(Self::LakesideLanding),
-            4384 => Ok(Self::StrandOfTheAncients),
-            4385 => Ok(Self::BittertideLake),
-            4386 => Ok(Self::RainspeakerRapids),
-            4387 => Ok(Self::FrenzyheartRiver),
-            4388 => Ok(Self::WintergraspRiver),
-            4389 => Ok(Self::TheSuntouchedPillar),
-            4390 => Ok(Self::FrigidBreach),
-            4391 => Ok(Self::SwindlegrinsDig),
-            4392 => Ok(Self::TheStormwrightsShelf),
-            4393 => Ok(Self::DeathsHandEncampment),
-            4394 => Ok(Self::ScarletTavern),
-            4395 => Ok(Self::Dalaran),
-            4396 => Ok(Self::NozzlerustPost),
-            4399 => Ok(Self::FarshireMine),
-            4400 => Ok(Self::TheMosslightPillar),
-            4401 => Ok(Self::SaragosasLanding),
-            4402 => Ok(Self::VengeanceLift),
-            4403 => Ok(Self::BalejarWatch),
-            4404 => Ok(Self::NewAgamandInn),
-            4405 => Ok(Self::PassageOfLostFiends),
-            4406 => Ok(Self::TheRingOfValor),
-            4407 => Ok(Self::HallOfTheFrostwolf),
-            4408 => Ok(Self::HallOfTheStormpike),
-            4411 => Ok(Self::StormwindHarbor),
-            4412 => Ok(Self::TheMakersOverlook),
-            4413 => Ok(Self::TheMakersPerch),
-            4414 => Ok(Self::ScarletTower),
-            4415 => Ok(Self::TheVioletHold),
-            4416 => Ok(Self::Gundrak1),
-            4417 => Ok(Self::OnslaughtHarbor),
-            4418 => Ok(Self::K3),
-            4419 => Ok(Self::SnowblindHills),
-            4420 => Ok(Self::SnowblindTerrace),
-            4421 => Ok(Self::Garm),
-            4422 => Ok(Self::BrunnhildarVillage),
-            4423 => Ok(Self::SifreldarVillage),
-            4424 => Ok(Self::Valkyrion),
-            4425 => Ok(Self::TheForlornMine),
-            4426 => Ok(Self::BorsBreathRiver),
-            4427 => Ok(Self::ArgentVanguard),
-            4428 => Ok(Self::Frosthold),
-            4429 => Ok(Self::GromArshCrashSite),
-            4430 => Ok(Self::TempleOfStorms),
-            4431 => Ok(Self::EngineOfTheMakers),
-            4432 => Ok(Self::TheFootSteppes),
-            4433 => Ok(Self::DragonspinePeaks),
-            4434 => Ok(Self::Nidavelir),
-            4435 => Ok(Self::NarvirsCradle),
-            4436 => Ok(Self::SnowdriftPlains),
-            4437 => Ok(Self::ValleyOfAncientWinters),
-            4438 => Ok(Self::DunNiffelem),
-            4439 => Ok(Self::FrostfieldLake),
-            4440 => Ok(Self::Thunderfall),
-            4441 => Ok(Self::CampTunkaLo),
-            4442 => Ok(Self::BrannsBaseCamp),
-            4443 => Ok(Self::GateOfEchoes),
-            4444 => Ok(Self::PlainOfEchoes),
-            4445 => Ok(Self::Ulduar1),
-            4446 => Ok(Self::TerraceOfTheMakers),
-            4447 => Ok(Self::GateOfLightning),
-            4448 => Ok(Self::PathOfTheTitans1),
-            4449 => Ok(Self::Uldis),
-            4450 => Ok(Self::LokensBargain),
-            4451 => Ok(Self::BorsFall),
-            4452 => Ok(Self::BorsBreath),
-            4453 => Ok(Self::RohemdalPass),
-            4454 => Ok(Self::TheStormFoundry),
-            4455 => Ok(Self::HibernalCavern),
-            4456 => Ok(Self::VoldruneDwelling),
-            4457 => Ok(Self::TorsegsRest),
-            4458 => Ok(Self::SparksocketMinefield),
-            4459 => Ok(Self::RicketsFolly),
-            4460 => Ok(Self::GarmsBane),
-            4461 => Ok(Self::GarmsRise),
-            4462 => Ok(Self::CrystalwebCavern),
-            4463 => Ok(Self::TempleOfLife),
-            4464 => Ok(Self::TempleOfOrder),
-            4465 => Ok(Self::TempleOfWinter),
-            4466 => Ok(Self::TempleOfInvention),
-            4467 => Ok(Self::DeathsRise),
-            4468 => Ok(Self::TheDeadFields),
-            4469 => Ok(Self::DargathsDemise),
-            4470 => Ok(Self::TheHiddenHollow),
-            4471 => Ok(Self::BernausHappyFunLand),
-            4472 => Ok(Self::FrostgripsHollow),
-            4473 => Ok(Self::TheFrigidTomb),
-            4474 => Ok(Self::TwinShores),
-            4475 => Ok(Self::ZimBosHideout),
-            4476 => Ok(Self::AbandonedCamp),
-            4477 => Ok(Self::TheShadowVault),
-            4478 => Ok(Self::ColdwindPass),
-            4479 => Ok(Self::WintersBreathLake),
-            4480 => Ok(Self::TheForgottenOverlook),
-            4481 => Ok(Self::JinthaKalarPassage),
-            4482 => Ok(Self::ArrigaFootbridge),
-            4483 => Ok(Self::TheLostPassage),
-            4484 => Ok(Self::BouldercragsRefuge),
-            4485 => Ok(Self::TheInventorsLibrary),
-            4486 => Ok(Self::TheFrozenMine),
-            4487 => Ok(Self::FrostfloeDeep),
-            4488 => Ok(Self::TheHowlingHollow),
-            4489 => Ok(Self::CrusaderForwardCamp),
-            4490 => Ok(Self::Stormcrest),
-            4491 => Ok(Self::BonesnapsCamp),
-            4492 => Ok(Self::UfrangsHall),
-            4493 => Ok(Self::TheObsidianSanctum),
-            4494 => Ok(Self::AhnKahetTheOldKingdom),
-            4495 => Ok(Self::FjornsAnvil),
-            4496 => Ok(Self::Jotunheim),
-            4497 => Ok(Self::SavageLedge),
-            4498 => Ok(Self::HallsOfTheAncestors),
-            4499 => Ok(Self::TheBlightedPool),
-            4500 => Ok(Self::TheEyeOfEternity),
-            4501 => Ok(Self::TheArgentVanguard),
-            4502 => Ok(Self::MimirsWorkshop),
-            4503 => Ok(Self::IronwallDam),
-            4504 => Ok(Self::ValleyOfEchoes),
-            4505 => Ok(Self::TheBreach),
-            4506 => Ok(Self::Scourgeholme),
-            4507 => Ok(Self::TheBrokenFront),
-            4508 => Ok(Self::MordRetharTheDeathGate),
-            4509 => Ok(Self::TheBombardment),
-            4510 => Ok(Self::AldurTharTheDesolationGate),
-            4511 => Ok(Self::TheSkybreaker),
-            4512 => Ok(Self::OrgrimsHammer),
-            4513 => Ok(Self::Ymirheim),
-            4514 => Ok(Self::SaroniteMines),
-            4515 => Ok(Self::TheConflagration),
-            4516 => Ok(Self::IronwallRampart),
-            4517 => Ok(Self::WeepingQuarry),
-            4518 => Ok(Self::CorpRetharTheHorrorGate),
-            4519 => Ok(Self::TheCourtOfBones),
-            4520 => Ok(Self::MalykrissTheVileHold),
-            4521 => Ok(Self::CathedralOfDarkness),
-            4522 => Ok(Self::IcecrownCitadel),
-            4523 => Ok(Self::IcecrownGlacier),
-            4524 => Ok(Self::Valhalas),
-            4525 => Ok(Self::TheUnderhalls),
-            4526 => Ok(Self::NjorndarVillage),
-            4527 => Ok(Self::BalargardeFortress),
-            4528 => Ok(Self::KulGalarKeep),
-            4529 => Ok(Self::TheCrimsonCathedral),
-            4530 => Ok(Self::SanctumOfReanimation),
-            4531 => Ok(Self::TheFleshwerks),
-            4532 => Ok(Self::VengeanceLandingInn),
-            4533 => Ok(Self::SindragosasFall),
-            4534 => Ok(Self::WildervarMine),
-            4535 => Ok(Self::ThePitOfTheFang),
-            4536 => Ok(Self::FrosthowlCavern),
-            4537 => Ok(Self::TheValleyOfLostHope),
-            4538 => Ok(Self::TheSunkenRing),
-            4539 => Ok(Self::TheBrokenTemple),
-            4540 => Ok(Self::TheValleyOfFallenHeroes),
-            4541 => Ok(Self::VanguardInfirmary),
-            4542 => Ok(Self::HallOfTheShaper),
-            4543 => Ok(Self::TempleOfWisdom),
-            4544 => Ok(Self::DeathsBreach1),
-            4545 => Ok(Self::AbandonedMine),
-            4546 => Ok(Self::RuinsOfTheScarletEnclave),
-            4547 => Ok(Self::HallsOfStone1),
-            4548 => Ok(Self::HallsOfLightning1),
-            4549 => Ok(Self::TheGreatTree),
-            4550 => Ok(Self::TheMirrorOfTwilight),
-            4551 => Ok(Self::TheTwilightRivulet),
-            4552 => Ok(Self::TheDecrepitFlow),
-            4553 => Ok(Self::ForlornWoods),
-            4554 => Ok(Self::RuinsOfShandaral),
-            4555 => Ok(Self::TheAzureFront),
-            4556 => Ok(Self::VioletStand),
-            4557 => Ok(Self::TheUnboundThicket),
-            4558 => Ok(Self::SunreaversCommand),
-            4559 => Ok(Self::WindrunnersOverlook),
-            4560 => Ok(Self::TheUnderbelly),
-            4564 => Ok(Self::KrasusLanding),
-            4567 => Ok(Self::TheVioletHold1),
-            4568 => Ok(Self::TheEventide),
-            4569 => Ok(Self::SewerExitPipe),
-            4570 => Ok(Self::CircleOfWills),
-            4571 => Ok(Self::SilverwingFlagRoom),
-            4572 => Ok(Self::WarsongFlagRoom),
-            4575 => Ok(Self::WintergraspFortress),
-            4576 => Ok(Self::CentralBridge),
-            4577 => Ok(Self::EasternBridge),
-            4578 => Ok(Self::WesternBridge),
-            4579 => Ok(Self::DubraJin),
-            4580 => Ok(Self::CrusadersPinnacle),
-            4581 => Ok(Self::FlamewatchTower),
-            4582 => Ok(Self::WintersEdgeTower),
-            4583 => Ok(Self::ShadowsightTower),
-            4584 => Ok(Self::TheCauldronOfFlames),
-            4585 => Ok(Self::GlacialFalls),
-            4586 => Ok(Self::WindyBluffs),
-            4587 => Ok(Self::TheForestOfShadows),
-            4588 => Ok(Self::Blackwatch),
-            4589 => Ok(Self::TheChilledQuagmire),
-            4590 => Ok(Self::TheSteppeOfLife),
-            4591 => Ok(Self::SilentVigil),
-            4592 => Ok(Self::GimoraksDen),
-            4593 => Ok(Self::ThePitOfFiends),
-            4594 => Ok(Self::BattlescarSpire),
-            4595 => Ok(Self::HallOfHorrors),
-            4596 => Ok(Self::TheCircleOfSuffering),
-            4597 => Ok(Self::RiseOfSuffering),
-            4598 => Ok(Self::KrasusLanding1),
-            4599 => Ok(Self::SewerExitPipe1),
-            4601 => Ok(Self::DalaranIsland),
-            4602 => Ok(Self::ForceInterior),
-            4603 => Ok(Self::VaultOfArchavon),
-            4604 => Ok(Self::GateOfTheRedSun),
-            4605 => Ok(Self::GateOfTheBlueSapphire),
-            4606 => Ok(Self::GateOfTheGreenEmerald),
-            4607 => Ok(Self::GateOfThePurpleAmethyst),
-            4608 => Ok(Self::GateOfTheYellowMoon),
-            4609 => Ok(Self::CourtyardOfTheAncients),
-            4610 => Ok(Self::LandingBeach),
-            4611 => Ok(Self::WestsparkWorkshop),
-            4612 => Ok(Self::EastsparkWorkshop),
-            4613 => Ok(Self::DalaranCity),
-            4614 => Ok(Self::TheVioletCitadelSpire),
-            4615 => Ok(Self::NazAnakTheForgottenDepths),
-            4616 => Ok(Self::SunreaversSanctuary),
-            4617 => Ok(Self::Elevator),
-            4618 => Ok(Self::AntonidasMemorial),
-            4619 => Ok(Self::TheVioletCitadel),
-            4620 => Ok(Self::MagusCommerceExchange),
-            4621 => Ok(Self::Unused),
-            4622 => Ok(Self::FirstLegionForwardCamp),
-            4623 => Ok(Self::HallOfTheConqueredKings),
-            4624 => Ok(Self::BefouledTerrace),
-            4625 => Ok(Self::TheDesecratedAltar),
-            4626 => Ok(Self::ShimmeringBog),
-            4627 => Ok(Self::FallenTempleOfAhnKahet),
-            4628 => Ok(Self::HallsOfBinding),
-            4629 => Ok(Self::WintersHeart),
-            4630 => Ok(Self::TheNorthSea2),
-            4631 => Ok(Self::TheBroodmothersNest),
-            4632 => Ok(Self::DalaranFloatingRocks),
-            4633 => Ok(Self::RaptorPens),
-            4635 => Ok(Self::DrakTharonKeep3),
-            4636 => Ok(Self::TheNoxiousPass),
-            4637 => Ok(Self::VargothsRetreat),
-            4638 => Ok(Self::VioletCitadelBalcony),
-            4639 => Ok(Self::BandOfVariance),
-            4640 => Ok(Self::BandOfAcceleration),
-            4641 => Ok(Self::BandOfTransmutation),
-            4642 => Ok(Self::BandOfAlignment),
-            4646 => Ok(Self::AshwoodLake),
-            4650 => Ok(Self::IronConcourse),
-            4652 => Ok(Self::FormationGrounds),
-            4653 => Ok(Self::RazorscalesAerie),
-            4654 => Ok(Self::TheColossalForge),
-            4655 => Ok(Self::TheScrapyard),
-            4656 => Ok(Self::TheConservatoryOfLife),
-            4657 => Ok(Self::TheArchivum),
-            4658 => Ok(Self::ArgentTournamentGrounds),
-            4665 => Ok(Self::ExpeditionBaseCamp),
-            4666 => Ok(Self::SunreaverPavilion),
-            4667 => Ok(Self::SilverCovenantPavilion),
-            4668 => Ok(Self::TheCooperResidence),
-            4669 => Ok(Self::TheRingOfChampions),
-            4670 => Ok(Self::TheAspirantsRing),
-            4671 => Ok(Self::TheArgentValiantsRing),
-            4672 => Ok(Self::TheAllianceValiantsRing),
-            4673 => Ok(Self::TheHordeValiantsRing),
-            4674 => Ok(Self::ArgentPavilion),
-            4676 => Ok(Self::SunreaverPavilion1),
-            4677 => Ok(Self::SilverCovenantPavilion1),
-            4679 => Ok(Self::TheForlornCavern),
-            4688 => Ok(Self::ClaytonioTestArea),
-            4692 => Ok(Self::QuelDelarsRest),
-            4710 => Ok(Self::IsleOfConquest),
-            4722 => Ok(Self::TrialOfTheCrusader),
-            4723 => Ok(Self::TrialOfTheChampion),
-            4739 => Ok(Self::RuneweaverSquare),
-            4740 => Ok(Self::TheSilverEnclave),
-            4741 => Ok(Self::IsleOfConquestNoMansLand),
-            4742 => Ok(Self::HrothgarsLanding),
-            4743 => Ok(Self::DeathspeakersWatch),
-            4747 => Ok(Self::Workshop),
-            4748 => Ok(Self::Quarry),
-            4749 => Ok(Self::Docks),
-            4750 => Ok(Self::Hangar),
-            4751 => Ok(Self::Refinery),
-            4752 => Ok(Self::HordeKeep),
-            4753 => Ok(Self::AllianceKeep),
-            4760 => Ok(Self::TheSeaReaversRun),
-            4763 => Ok(Self::TransportAllianceGunship),
-            4764 => Ok(Self::TransportHordeGunship),
-            4769 => Ok(Self::HrothgarsLanding1),
-            4809 => Ok(Self::TheForgeOfSouls),
-            4812 => Ok(Self::IcecrownCitadel1),
-            4813 => Ok(Self::PitOfSaron),
-            4820 => Ok(Self::HallsOfReflection),
-            4832 => Ok(Self::TransportAllianceGunshipIgb),
-            4833 => Ok(Self::TransportHordeGunshipIgb),
-            4859 => Ok(Self::TheFrozenThrone),
-            4862 => Ok(Self::TheFrozenHalls),
-            4889 => Ok(Self::TheFrostQueensLair),
-            4890 => Ok(Self::PutricidesLaboratoryOfAlchemicalHorrorsAndFun),
-            4891 => Ok(Self::TheSanctumOfBlood),
-            4892 => Ok(Self::TheCrimsonHall),
-            4893 => Ok(Self::TheFrostQueensLair1),
-            4894 => Ok(Self::PutricidesLaboratoryOfAlchemicalHorrorsAndFun1),
-            4895 => Ok(Self::TheCrimsonHall1),
-            4896 => Ok(Self::TheFrozenThrone1),
-            4897 => Ok(Self::TheSanctumOfBlood1),
-            4898 => Ok(Self::Frostmourne),
-            4904 => Ok(Self::TheDarkApproach),
-            4905 => Ok(Self::ScourgelordsCommand),
-            4906 => Ok(Self::TheShadowThrone),
-            4908 => Ok(Self::TheHiddenPassage),
-            4910 => Ok(Self::Frostmourne1),
-            4987 => Ok(Self::TheRubySanctum),
             v => Err(crate::errors::EnumError::new("Area", v as u32),)
         }
     }
