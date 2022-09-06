@@ -10,6 +10,8 @@ pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
 pub(crate) mod cmsg_char_enum;
 pub use cmsg_char_enum::*;
+pub(crate) mod cmsg_player_login;
+pub use cmsg_player_login::*;
 pub(crate) mod cmsg_realm_split;
 pub use cmsg_realm_split::*;
 pub use crate::helper::wrath::*;
