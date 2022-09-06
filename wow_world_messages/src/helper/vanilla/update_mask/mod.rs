@@ -2,6 +2,10 @@ mod impls;
 
 pub use impls::*;
 
+use crate::helper::update_mask_common;
+use crate::helper::update_mask_common::{
+    update_item, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM, PLAYER, UNIT,
+};
 use crate::Guid;
 #[cfg(feature = "async-std")]
 use async_std::io::ReadExt;
@@ -11,83 +15,6 @@ use std::io::Read;
 use std::io::Write;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncReadExt;
-
-const OBJECT: u32 = 0x0001;
-const ITEM: u32 = 0x0002;
-const CONTAINER: u32 = 0x0004;
-const UNIT: u32 = 0x0008;
-const PLAYER: u32 = 0x0010;
-const GAMEOBJECT: u32 = 0x0020;
-const DYNAMICOBJECT: u32 = 0x0040;
-const CORPSE: u32 = 0x0080;
-
-macro_rules! update_item {
-    ($name:ident, $type_value:expr) => {
-        #[derive(Debug, Clone, Default, PartialEq)]
-        pub struct $name {
-            header: Vec<u32>,
-            values: BTreeMap<u16, u32>,
-        }
-
-        impl $name {
-            pub fn new() -> Self {
-                const OBJECT_FIELD_TYPE: u16 = 2;
-
-                let mut header = vec![];
-                let mut values = BTreeMap::new();
-
-                header_set(&mut header, &mut values, OBJECT_FIELD_TYPE);
-                values.insert(OBJECT_FIELD_TYPE, OBJECT | $type_value);
-
-                Self { header, values }
-            }
-
-            fn from_inners(header: Vec<u32>, values: BTreeMap<u16, u32>) -> Self {
-                Self { header, values }
-            }
-
-            pub(crate) fn header_set(&mut self, bit: u16) {
-                header_set(&mut self.header, &mut self.values, bit);
-            }
-
-            pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), std::io::Error> {
-                write_into_vec(v, &self.header, &self.values)
-            }
-        }
-    };
-}
-
-fn header_set(header: &mut Vec<u32>, values: &mut BTreeMap<u16, u32>, bit: u16) {
-    let index = bit / 32;
-    let offset = bit % 32;
-
-    if index >= header.len() as u16 {
-        let extras = index - header.len() as u16;
-        for _ in 0..=extras {
-            header.push(0);
-        }
-    }
-
-    header[index as usize] |= 1 << offset;
-}
-
-fn write_into_vec(
-    v: &mut Vec<u8>,
-    header: &[u32],
-    values: &BTreeMap<u16, u32>,
-) -> Result<(), std::io::Error> {
-    v.write_all(&[header.len() as u8])?;
-
-    for h in header {
-        v.write_all(h.to_le_bytes().as_slice())?;
-    }
-
-    for value in values.values() {
-        v.write_all(&value.to_le_bytes())?;
-    }
-
-    Ok(())
-}
 
 update_item!(UpdateItem, ITEM);
 update_item!(UpdateContainer, ITEM | CONTAINER);
@@ -116,21 +43,7 @@ impl Default for UpdateMask {
 
 impl UpdateMask {
     pub(crate) fn read(r: &mut impl Read) -> Result<Self, io::Error> {
-        let amount_of_blocks = crate::util::read_u8_le(r)?;
-
-        let mut header = Vec::new();
-        for _ in 0..amount_of_blocks {
-            header.push(crate::util::read_u32_le(r)?);
-        }
-
-        let mut values = BTreeMap::new();
-        for (index, block) in header.iter().enumerate() {
-            for bit in 0..32 {
-                if (block & 1 << bit) != 0 {
-                    values.insert(index as u16 * 32 + bit, crate::util::read_u32_le(r)?);
-                }
-            }
-        }
+        let (header, values) = update_mask_common::read_inner(r)?;
 
         let ty = match values.get(&2) {
             None => {

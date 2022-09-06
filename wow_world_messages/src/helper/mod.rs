@@ -8,3 +8,4 @@ pub(crate) mod wrath;
 
 #[cfg(feature = "tbc")]
 pub(crate) mod tbc;
+pub(crate) mod update_mask_common;
