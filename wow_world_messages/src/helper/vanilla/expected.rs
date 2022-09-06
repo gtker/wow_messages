@@ -1,5 +1,5 @@
 use crate::errors::ExpectedOpcodeError;
-use crate::helper::vanilla::traits::{ClientMessage, ServerMessage};
+use crate::vanilla::{ClientMessage, ServerMessage};
 use wow_srp::vanilla_header::{DecrypterHalf, CLIENT_HEADER_LENGTH, SERVER_HEADER_LENGTH};
 
 const CLIENT_OPCODE_LENGTH: u16 = 4;
