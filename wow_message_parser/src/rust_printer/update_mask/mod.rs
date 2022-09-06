@@ -1,12 +1,14 @@
-use crate::file_utils::{overwrite_if_not_same_contents, VANILLA_UPDATE_MASK_LOCATION};
+use crate::file_utils::{
+    overwrite_if_not_same_contents, VANILLA_UPDATE_MASK_LOCATION, WRATH_UPDATE_MASK_LOCATION,
+};
 use crate::rust_printer::{MajorWorldVersion, Writer};
 use std::fmt::Write;
 use std::fmt::{Display, Formatter};
 use std::fs::read_to_string;
 use std::path::Path;
-use vanilla_fields::FIELDS;
 
 pub mod vanilla_fields;
+pub mod wrath_fields;
 
 fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut String) {
     let update_types = [
@@ -74,7 +76,12 @@ pub fn print_update_mask_docs() {
     s.push_str("### Version 1.12\n\n");
     s.push_str("Taken from [vmangos](https://github.com/vmangos/core/blob/4b2a5173b0ca4917dfe91aa7b87d84232fd7203c/src/game/Objects/UpdateFields_1_12_1.cpp#L5) with some modifications.\n\n");
 
-    print_specific_update_mask_doc(&FIELDS, &mut s);
+    print_specific_update_mask_doc(&vanilla_fields::FIELDS, &mut s);
+
+    s.push_str("### Version 3.3.5\n\n");
+    s.push_str("Taken from [ArcEmu](https://github.com/arcemu/arcemu/blob/1cb2b5248d050cb6fe413d7c42dd1817994b6366/src/world/Game/Entities/Update/UpdateFields.h#L26) with some modifications.\n\n");
+
+    print_specific_update_mask_doc(&wrath_fields::FIELDS, &mut s);
 
     overwrite_if_not_same_contents(&s, Path::new(UPDATE_MASK_FILE));
 }
@@ -151,8 +158,11 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
 pub fn print_update_mask() {
     print_update_mask_docs();
 
-    let s = print_specific_update_mask(&FIELDS, MajorWorldVersion::Vanilla);
+    let s = print_specific_update_mask(&vanilla_fields::FIELDS, MajorWorldVersion::Vanilla);
     overwrite_if_not_same_contents(s.inner(), Path::new(VANILLA_UPDATE_MASK_LOCATION));
+
+    let s = print_specific_update_mask(&wrath_fields::FIELDS, MajorWorldVersion::Wrath);
+    overwrite_if_not_same_contents(s.inner(), Path::new(WRATH_UPDATE_MASK_LOCATION));
 }
 
 fn print_functions(s: &mut Writer, m: &MemberType) {
