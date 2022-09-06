@@ -40,6 +40,8 @@ We do this for every field.
 After the mask blocks we simply send the data in the order of their offsets.
 
 ## Lookup Table
+### Version 1.12
+
 Taken from [vmangos](https://github.com/vmangos/core/blob/4b2a5173b0ca4917dfe91aa7b87d84232fd7203c/src/game/Objects/UpdateFields_1_12_1.cpp#L5) with some modifications.
 
 Fields that all objects have:

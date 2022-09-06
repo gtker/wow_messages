@@ -7,8 +7,8 @@ use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::rust_view::{RustEnumerator, RustMember, RustType};
 use crate::rust_printer::update_mask::vanilla_fields::FIELDS;
 use crate::rust_printer::{
-    get_new_flag_type_name, ByteInnerTy, ByteType, ImplType, UfType, UpdateMaskType, Version,
-    Writer, CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+    get_new_flag_type_name, ByteInnerTy, ByteType, ImplType, MajorWorldVersion, UfType,
+    UpdateMaskType, Version, Writer, CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
     LOGIN_SERVER_MESSAGE_ENUM_NAME, SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
     WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
@@ -96,7 +96,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
                         number = i,
                     ),
                     |s| {
-                        print_test_case(s, t, e, o, it, i);
+                        print_test_case(s, t, e, o, it, i, version);
                     },
                 );
             }
@@ -111,12 +111,13 @@ fn print_test_case(
     o: &Objects,
     it: ImplType,
     i: usize,
+    version: Version,
 ) {
     s.body_closing_with(
         format!("let expected = {}", t.subject()),
         |s| {
             for m in e.rust_object().members_in_struct() {
-                print_value(s, m, t.members(), e, o);
+                print_value(s, m, t.members(), e, o, version);
             }
         },
         ";\n",
@@ -285,7 +286,14 @@ pub fn get_enumerator<'a>(
     None
 }
 
-fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Container, o: &Objects) {
+fn print_value(
+    s: &mut Writer,
+    m: &RustMember,
+    t: &[TestCaseMember],
+    e: &Container,
+    o: &Objects,
+    version: Version,
+) {
     let member = TestCase::get_member(t, m.name());
     s.w(format!("{name}: ", name = m.name(),));
 
@@ -329,7 +337,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                 s.inc_indent();
 
                 for m in array_container.rust_object().members_in_struct() {
-                    print_value(s, m, multiple, array_container, o);
+                    print_value(s, m, multiple, array_container, o, version);
                 }
 
                 s.closing_curly_with(",");
@@ -368,7 +376,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                             ));
 
                             for m in enumerator.members_in_struct() {
-                                print_value(s, m, t, e, o);
+                                print_value(s, m, t, e, o, version);
                             }
 
                             s.closing_curly_with(")");
@@ -385,7 +393,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                             ));
 
                             for m in enumerator.members_in_struct() {
-                                print_value(s, m, t, e, o);
+                                print_value(s, m, t, e, o, version);
                             }
 
                             s.closing_curly_with(")");
@@ -404,7 +412,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
             let t = members.as_slice();
             let e = o.get_container(ty_name, e.tags());
             for m in e.rust_object().members_in_struct() {
-                print_value(s, m, t, e, o);
+                print_value(s, m, t, e, o, version);
             }
 
             s.closing_curly_with(",");
@@ -433,7 +441,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
             s.inc_indent();
 
             for sf in subvars {
-                print_value(s, sf, t, e, o);
+                print_value(s, sf, t, e, o, version);
             }
 
             s.closing_curly_with(",");
@@ -477,7 +485,13 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                     continue;
                 }
 
-                let field = FIELDS
+                let fields = match version.as_major_world() {
+                    MajorWorldVersion::Vanilla => FIELDS.as_slice(),
+                    MajorWorldVersion::BurningCrusade => unimplemented!(),
+                    MajorWorldVersion::Wrath => unimplemented!(),
+                };
+
+                let field = fields
                     .iter()
                     .find(|a| a.object_ty() == f.ty() && a.name() == f.name())
                     .unwrap()

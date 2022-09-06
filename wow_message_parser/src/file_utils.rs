@@ -12,7 +12,8 @@ use crate::rust_printer::Version;
 
 pub const LOGIN_DIR: &str = "wow_login_messages/src/logon";
 pub const WORLD_DIR: &str = "wow_world_messages/src/world";
-pub const UPDATE_MASK_LOCATION: &str = "wow_world_messages/src/helper/vanilla/update_mask/impls.rs";
+pub const VANILLA_UPDATE_MASK_LOCATION: &str =
+    "wow_world_messages/src/helper/vanilla/update_mask/impls.rs";
 pub const BASE_DIR: &str = "wow_world_base/src/inner";
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]

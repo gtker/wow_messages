@@ -883,6 +883,10 @@ impl MajorWorldVersion {
         }
     }
 
+    pub fn module_name(&self) -> &'static str {
+        self.feature_name()
+    }
+
     pub fn feature_name(&self) -> &'static str {
         match self {
             MajorWorldVersion::Vanilla => "vanilla",

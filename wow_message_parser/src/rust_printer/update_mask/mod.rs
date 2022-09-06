@@ -1,5 +1,5 @@
-use crate::file_utils::{overwrite_if_not_same_contents, UPDATE_MASK_LOCATION};
-use crate::rust_printer::Writer;
+use crate::file_utils::{overwrite_if_not_same_contents, VANILLA_UPDATE_MASK_LOCATION};
+use crate::rust_printer::{MajorWorldVersion, Writer};
 use std::fmt::Write;
 use std::fmt::{Display, Formatter};
 use std::fs::read_to_string;
@@ -8,11 +8,7 @@ use vanilla_fields::FIELDS;
 
 pub mod vanilla_fields;
 
-pub fn print_update_mask_docs() {
-    const UPDATE_MASK_FILE: &str = "wowm_language/src/spec/update-mask.md";
-    const LOOKUP_TABLE: &str = "## Lookup Table\n";
-    let contents = read_to_string(UPDATE_MASK_FILE).unwrap();
-
+fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut String) {
     let update_types = [
         ("object", UpdateMaskType::Object),
         ("item", UpdateMaskType::Item),
@@ -24,17 +20,12 @@ pub fn print_update_mask_docs() {
         ("corpse", UpdateMaskType::Corpse),
     ];
 
-    let (s, _) = contents.split_once(LOOKUP_TABLE).unwrap();
-    let mut s = s.to_string();
-    s.push_str(LOOKUP_TABLE);
-    s.push_str("Taken from [vmangos](https://github.com/vmangos/core/blob/4b2a5173b0ca4917dfe91aa7b87d84232fd7203c/src/game/Objects/UpdateFields_1_12_1.cpp#L5) with some modifications.\n\n");
-
     for (name, u) in update_types {
         writeln!(s, "Fields that all {}s have:\n", name).unwrap();
 
         s.push_str("| Name | Offset | Size | Type |\n");
         s.push_str("|------|--------|------|------|\n");
-        for field in FIELDS {
+        for field in fields {
             if field.object_ty == u {
                 let ty = match field.ty {
                     UfType::Guid => "GUID",
@@ -70,13 +61,25 @@ pub fn print_update_mask_docs() {
 
         s.push_str("\n\n");
     }
+}
+
+pub fn print_update_mask_docs() {
+    const UPDATE_MASK_FILE: &str = "wowm_language/src/spec/update-mask.md";
+    const LOOKUP_TABLE: &str = "## Lookup Table\n";
+    let contents = read_to_string(UPDATE_MASK_FILE).unwrap();
+
+    let (s, _) = contents.split_once(LOOKUP_TABLE).unwrap();
+    let mut s = s.to_string();
+    s.push_str(LOOKUP_TABLE);
+    s.push_str("### Version 1.12\n\n");
+    s.push_str("Taken from [vmangos](https://github.com/vmangos/core/blob/4b2a5173b0ca4917dfe91aa7b87d84232fd7203c/src/game/Objects/UpdateFields_1_12_1.cpp#L5) with some modifications.\n\n");
+
+    print_specific_update_mask_doc(&FIELDS, &mut s);
 
     overwrite_if_not_same_contents(&s, Path::new(UPDATE_MASK_FILE));
 }
 
-pub fn print_update_mask() {
-    print_update_mask_docs();
-
+fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion) -> Writer {
     let update_types = [
         (
             "UpdateItem",
@@ -118,31 +121,38 @@ pub fn print_update_mask() {
 
     let mut s = Writer::new("");
     s.wln("use crate::Guid;");
-    for m in FIELDS {
+    for m in fields {
         if let UfType::BytesWith(a, b, c, d) = m.ty() {
             for ty in [a, b, c, d] {
                 match ty.ty {
                     ByteInnerTy::Byte => {}
                     ByteInnerTy::Ty(ty) => {
-                        s.wln(format!("use crate::vanilla::{{{}}};", ty));
+                        s.wln(format!("use crate::{}::{{{}}};", version.module_name(), ty));
                     }
                 }
             }
         }
     }
 
-    s.wln("use crate::vanilla::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};");
+    s.wln(format!("use crate::{}::{{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit}};", version.module_name()));
     s.newline();
 
     for (ty, types) in update_types {
         s.bodyn(format!("impl {}", ty), |s| {
-            for m in FIELDS.iter().filter(|a| types.contains(&a.object_ty)) {
+            for m in fields.iter().filter(|a| types.contains(&a.object_ty)) {
                 print_functions(s, m);
             }
         });
     }
 
-    overwrite_if_not_same_contents(s.inner(), Path::new(UPDATE_MASK_LOCATION));
+    s
+}
+
+pub fn print_update_mask() {
+    print_update_mask_docs();
+
+    let s = print_specific_update_mask(&FIELDS, MajorWorldVersion::Vanilla);
+    overwrite_if_not_same_contents(s.inner(), Path::new(VANILLA_UPDATE_MASK_LOCATION));
 }
 
 fn print_functions(s: &mut Writer, m: &MemberType) {
