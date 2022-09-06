@@ -42,6 +42,8 @@ pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
 pub(crate) mod smsg_realm_split;
 pub use smsg_realm_split::*;
+pub(crate) mod smsg_tutorial_flags;
+pub use smsg_tutorial_flags::*;
 pub(crate) mod vector3d;
 pub use vector3d::*;
 pub(crate) mod world_result;

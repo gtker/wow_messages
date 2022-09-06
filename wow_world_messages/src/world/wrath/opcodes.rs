@@ -209,6 +209,7 @@ impl From<CMSG_REALM_SPLIT> for ClientOpcodeMessage {
 }
 
 use crate::world::wrath::SMSG_CHAR_ENUM;
+use crate::world::wrath::SMSG_TUTORIAL_FLAGS;
 use crate::world::wrath::SMSG_AUTH_CHALLENGE;
 use crate::world::wrath::SMSG_AUTH_RESPONSE;
 use crate::world::wrath::SMSG_LOGIN_VERIFY_WORLD;
@@ -217,6 +218,7 @@ use crate::world::wrath::SMSG_REALM_SPLIT;
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
+    SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
@@ -227,6 +229,7 @@ impl ServerOpcodeMessage {
     fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(<SMSG_TUTORIAL_FLAGS as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
@@ -386,6 +389,7 @@ impl ServerOpcodeMessage {
     pub fn write_encrypted_server<W: std::io::Write>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_TUTORIAL_FLAGS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
@@ -397,6 +401,7 @@ impl ServerOpcodeMessage {
     pub fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
+            Self::SMSG_TUTORIAL_FLAGS(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
@@ -408,6 +413,7 @@ impl ServerOpcodeMessage {
     pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -419,6 +425,7 @@ impl ServerOpcodeMessage {
     pub async fn tokio_write_unencrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
@@ -430,6 +437,7 @@ impl ServerOpcodeMessage {
     pub async fn astd_write_encrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
@@ -441,6 +449,7 @@ impl ServerOpcodeMessage {
     pub async fn astd_write_unencrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
@@ -454,6 +463,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
+            ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(_) => "SMSG_TUTORIAL_FLAGS",
             ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
@@ -465,6 +475,12 @@ impl std::fmt::Display for ServerOpcodeMessage {
 impl From<SMSG_CHAR_ENUM> for ServerOpcodeMessage {
     fn from(c: SMSG_CHAR_ENUM) -> Self {
         Self::SMSG_CHAR_ENUM(c)
+    }
+}
+
+impl From<SMSG_TUTORIAL_FLAGS> for ServerOpcodeMessage {
+    fn from(c: SMSG_TUTORIAL_FLAGS) -> Self {
+        Self::SMSG_TUTORIAL_FLAGS(c)
     }
 }
 
