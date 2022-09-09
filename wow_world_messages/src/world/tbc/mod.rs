@@ -8,6 +8,8 @@ pub(crate) mod class;
 pub use class::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
+pub(crate) mod cmsg_char_delete;
+pub use cmsg_char_delete::*;
 pub(crate) mod cmsg_char_enum;
 pub use cmsg_char_enum::*;
 pub(crate) mod cmsg_player_login;

@@ -95040,10 +95040,21 @@
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "major",
               "version": {
-                "major": 1,
-                "minor": 12
+                "major": 1
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 2
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 3
               }
             }
           ]
@@ -95086,10 +95097,21 @@
               "type": "world",
               "versions": [
                 {
-                  "type": "minor",
+                  "type": "major",
                   "version": {
-                    "major": 1,
-                    "minor": 12
+                    "major": 1
+                  }
+                },
+                {
+                  "type": "major",
+                  "version": {
+                    "major": 2
+                  }
+                },
+                {
+                  "type": "major",
+                  "version": {
+                    "major": 3
                   }
                 }
               ]

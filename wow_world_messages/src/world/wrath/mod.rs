@@ -10,6 +10,8 @@ pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
+pub(crate) mod cmsg_char_delete;
+pub use cmsg_char_delete::*;
 pub(crate) mod cmsg_char_enum;
 pub use cmsg_char_enum::*;
 pub(crate) mod cmsg_player_login;
