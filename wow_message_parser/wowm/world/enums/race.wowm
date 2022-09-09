@@ -9,9 +9,22 @@ enum Race : u8 {
     TROLL = 8;
     GOBLIN = 9;
 } {
+    versions = "0.5.4";
+}
+
+enum Race : u8 {
+    HUMAN = 1;
+    ORC = 2;
+    DWARF = 3;
+    NIGHT_ELF = 4;
+    UNDEAD = 5;
+    TAUREN = 6;
+    GNOME = 7;
+    TROLL = 8;
+    GOBLIN = 9;
+} {
     rust_base_type = "true";
-    versions = "1";
-    comment = "Goblins seem to be present in DBCs from 0.5.5 and onward.";
+    versions = "0.5.5 0.6 0.7 0.8 0.9 0.10 0.11 0.12 1";
 }
 
 enum Race : u8 {

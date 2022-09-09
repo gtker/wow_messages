@@ -68021,10 +68021,172 @@
         "type": "u8"
       },
       "tags": {
-        "comment": "Goblins seem to be present in DBCs from 0.5.5 and onward.",
         "version": {
           "type": "world",
           "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 0,
+                "minor": 5,
+                "patch": 4
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/enums/race.wowm",
+        "start_position": 1
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "Race",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "HUMAN",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ORC",
+          "value": {
+            "int": 2,
+            "original": "2"
+          },
+          "tags": {}
+        },
+        {
+          "name": "DWARF",
+          "value": {
+            "int": 3,
+            "original": "3"
+          },
+          "tags": {}
+        },
+        {
+          "name": "NIGHT_ELF",
+          "value": {
+            "int": 4,
+            "original": "4"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNDEAD",
+          "value": {
+            "int": 5,
+            "original": "5"
+          },
+          "tags": {}
+        },
+        {
+          "name": "TAUREN",
+          "value": {
+            "int": 6,
+            "original": "6"
+          },
+          "tags": {}
+        },
+        {
+          "name": "GNOME",
+          "value": {
+            "int": 7,
+            "original": "7"
+          },
+          "tags": {}
+        },
+        {
+          "name": "TROLL",
+          "value": {
+            "int": 8,
+            "original": "8"
+          },
+          "tags": {}
+        },
+        {
+          "name": "GOBLIN",
+          "value": {
+            "int": 9,
+            "original": "9"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u8"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 0,
+                "minor": 5,
+                "patch": 5
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 0,
+                "minor": 6
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 0,
+                "minor": 7
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 0,
+                "minor": 8
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 0,
+                "minor": 9
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 0,
+                "minor": 10
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 0,
+                "minor": 11
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 0,
+                "minor": 12
+              }
+            },
             {
               "type": "major",
               "version": {
@@ -68054,7 +68216,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/race.wowm",
-        "start_position": 1
+        "start_position": 15
       },
       "features": [
         "Enum",
@@ -68255,7 +68417,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/race.wowm",
-        "start_position": 17
+        "start_position": 30
       },
       "features": [
         "Enum",
@@ -68472,7 +68634,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/race.wowm",
-        "start_position": 40
+        "start_position": 53
       },
       "features": [
         "Enum",

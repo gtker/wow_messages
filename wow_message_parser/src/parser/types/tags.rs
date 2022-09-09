@@ -472,6 +472,16 @@ impl Tags {
         v
     }
 
+    pub fn first_version(&self) -> Version {
+        if let Some(v) = self.logon_versions().first() {
+            Version::Login(*v)
+        } else if let Some(v) = self.versions().first() {
+            Version::World(*v)
+        } else {
+            unreachable!()
+        }
+    }
+
     pub fn first_and_main_versions(&self) -> (Version, Vec<Version>) {
         let mut v = self.main_versions();
         let first = v.next().unwrap();

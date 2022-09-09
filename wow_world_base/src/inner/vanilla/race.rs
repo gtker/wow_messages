@@ -1,8 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Goblins seem to be present in DBCs from 0.5.5 and onward.
-///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/race.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/race.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/race.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/race.wowm#L15):
 /// ```text
 /// enum Race : u8 {
 ///     HUMAN = 1;

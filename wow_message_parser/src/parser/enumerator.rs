@@ -123,8 +123,8 @@ pub struct Definer {
 
 impl Ord for Definer {
     fn cmp(&self, other: &Self) -> Ordering {
-        let (self_first, _) = self.tags().first_and_main_versions();
-        let (other_first, _) = other.tags().first_and_main_versions();
+        let self_first = self.tags().first_version();
+        let other_first = other.tags().first_version();
 
         self.name
             .cmp(&other.name)

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/race.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/race.wowm#L40):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/race.wowm:53`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/race.wowm#L53):
 /// ```text
 /// enum Race : u8 {
 ///     HUMAN = 1;
