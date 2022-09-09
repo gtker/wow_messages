@@ -1,5 +1,7 @@
 pub(crate) mod area;
 pub use area::*;
+pub(crate) mod billing_plan_flags;
+pub use billing_plan_flags::*;
 pub(crate) mod character;
 pub use character::*;
 pub(crate) mod character_gear;

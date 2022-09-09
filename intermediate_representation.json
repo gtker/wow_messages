@@ -67,6 +67,129 @@
       ]
     },
     {
+      "name": "BillingPlanFlags",
+      "definer_ty": "flag",
+      "enumerators": [
+        {
+          "name": "NONE",
+          "value": {
+            "int": 0,
+            "original": "0x00"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNUSED",
+          "value": {
+            "int": 1,
+            "original": "0x01"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RECURRING_BILL",
+          "value": {
+            "int": 2,
+            "original": "0x02"
+          },
+          "tags": {}
+        },
+        {
+          "name": "FREE_TRIAL",
+          "value": {
+            "int": 4,
+            "original": "0x04"
+          },
+          "tags": {}
+        },
+        {
+          "name": "IGR",
+          "value": {
+            "int": 8,
+            "original": "0x08"
+          },
+          "tags": {
+            "comment": "Name meaning unknown"
+          }
+        },
+        {
+          "name": "USAGE",
+          "value": {
+            "int": 16,
+            "original": "0x10"
+          },
+          "tags": {}
+        },
+        {
+          "name": "TIME_MIXTURE",
+          "value": {
+            "int": 32,
+            "original": "0x20"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RESTRICTED",
+          "value": {
+            "int": 64,
+            "original": "0x40"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ENABLE_CAIS",
+          "value": {
+            "int": 128,
+            "original": "0x80"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u8"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 3
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "SMSG_AUTH_RESPONSE",
+          "usage": "used_but_not_in_if"
+        },
+        {
+          "name": "SMSG_AUTH_RESPONSE",
+          "usage": "used_but_not_in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
+        "start_position": 66
+      },
+      "features": [
+        "Flag",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "CastFlags",
       "definer_ty": "flag",
       "enumerators": [
@@ -58591,6 +58714,61 @@
             "original": "1"
           },
           "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u8"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "SMSG_AUTH_RESPONSE",
+          "usage": "used_but_not_in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
+        "start_position": 59
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "Expansion",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "VANILLA",
+          "value": {
+            "int": 0,
+            "original": "0"
+          },
+          "tags": {}
+        },
+        {
+          "name": "THE_BURNING_CRUSADE",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {}
         },
         {
           "name": "WRATH_OF_THE_LICH_LING",
@@ -58628,7 +58806,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
-        "start_position": 59
+        "start_position": 97
       },
       "features": [
         "Enum",
@@ -74719,6 +74897,10 @@
         }
       },
       "objects_used_in": [
+        {
+          "name": "SMSG_AUTH_RESPONSE",
+          "usage": "in_if"
+        },
         {
           "name": "SMSG_CHAR_CREATE",
           "usage": "used_but_not_in_if"
@@ -130911,17 +131093,9 @@
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "major",
               "version": {
-                "major": 1,
-                "minor": 2
-              }
-            },
-            {
-              "type": "minor",
-              "version": {
-                "major": 1,
-                "minor": 12
+                "major": 1
               }
             }
           ]
@@ -130955,13 +131129,6 @@
             "version": {
               "type": "world",
               "versions": [
-                {
-                  "type": "minor",
-                  "version": {
-                    "major": 1,
-                    "minor": 2
-                  }
-                },
                 {
                   "type": "minor",
                   "version": {
@@ -131019,13 +131186,6 @@
             "version": {
               "type": "world",
               "versions": [
-                {
-                  "type": "minor",
-                  "version": {
-                    "major": 1,
-                    "minor": 2
-                  }
-                },
                 {
                   "type": "minor",
                   "version": {
@@ -131110,13 +131270,6 @@
             "version": {
               "type": "world",
               "versions": [
-                {
-                  "type": "minor",
-                  "version": {
-                    "major": 1,
-                    "minor": 2
-                  }
-                },
                 {
                   "type": "minor",
                   "version": {
@@ -131208,9 +131361,197 @@
                 "content": {
                   "name": "billing_flags",
                   "member_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "BillingPlanFlags"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "billing_rested",
+                  "member_type": {
                     "type": "integer",
                     "content": {
-                      "type": "u8"
+                      "type": "u32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "expansion",
+                  "member_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "Expansion"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [
+              {
+                "conditional": {
+                  "variable_name": "result",
+                  "equations": [
+                    {
+                      "type": "equals",
+                      "content": {
+                        "value": "AUTH_WAIT_QUEUE"
+                      }
+                    }
+                  ]
+                },
+                "members": [
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "queue_position",
+                      "member_type": {
+                        "type": "integer",
+                        "content": {
+                          "type": "u32",
+                          "endianness": "little"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  }
+                ],
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
+                  "type": "identifier",
+                  "content": {
+                    "type_name": "WorldResult"
+                  }
+                }
+              }
+            ],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            }
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
+        "start_position": 82
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SubObjects",
+        "IfEnum",
+        "SimpleBuiltInTypes",
+        "IfElseEnum",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_AUTH_RESPONSE",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 494
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "result",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": true,
+            "tags": {}
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "result",
+              "equations": [
+                {
+                  "type": "equals",
+                  "content": {
+                    "value": "AUTH_OK"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "billing_time",
+                  "member_type": {
+                    "type": "integer",
+                    "content": {
+                      "type": "u32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "billing_flags",
+                  "member_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "BillingPlanFlags"
                     }
                   },
                   "constant_value": null,
@@ -131339,7 +131680,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm",
-        "start_position": 67
+        "start_position": 105
       },
       "only_has_io_error": false,
       "features": [

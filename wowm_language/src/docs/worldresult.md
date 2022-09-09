@@ -388,6 +388,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME` | 90 (0x5A) |  |  |
 
 Used in:
+* [SMSG_AUTH_RESPONSE](smsg_auth_response.md)
 * [SMSG_CHAR_CREATE](smsg_char_create.md)
 * [SMSG_CHAR_DELETE](smsg_char_delete.md)
 

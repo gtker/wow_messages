@@ -52,7 +52,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
 
     SMSG_AUTH_RESPONSE {
         result: SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-            billing_flags: 0,
+            billing_flags: BillingPlanFlags::empty(),
             billing_rested: 0,
             billing_time: 0,
             expansion: Expansion::WrathOfTheLichLing,

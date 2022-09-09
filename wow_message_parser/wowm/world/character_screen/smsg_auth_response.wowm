@@ -12,7 +12,7 @@ smsg SMSG_AUTH_RESPONSE = 0x1EE {
 } {
     description = "Response to [CMSG_AUTH_SESSION].";
     comment = "vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.";
-    versions = "1.2 1.12";
+    versions = "1";
 }
 
 test SMSG_AUTH_RESPONSE {
@@ -23,7 +23,7 @@ test SMSG_AUTH_RESPONSE {
     0x0D, /* result */
 ] {
     description = "Authentication failed.";
-    versions = "1.2 1.12";
+    versions = "1.12";
 }
 
 test SMSG_AUTH_RESPONSE {
@@ -36,7 +36,7 @@ test SMSG_AUTH_RESPONSE {
     0xEF, 0xBE, 0xAD, 0xDE, /* queue_position */
 ] {
     description = "Client told to wait in queue.";
-    versions = "1.2 1.12";
+    versions = "1.12";
 }
 
 test SMSG_AUTH_RESPONSE {
@@ -53,7 +53,45 @@ test SMSG_AUTH_RESPONSE {
     0x00, 0x00, 0x00, 0x00, /* billing_rested */
 ] {
     description = "Client can join.";
-    versions = "1.2 1.12";
+    versions = "1.12";
+}
+
+enum Expansion : u8 {
+    VANILLA = 0;
+    THE_BURNING_CRUSADE = 1;
+} {
+    versions = "2.4.3";
+}
+
+flag BillingPlanFlags : u8 {
+    NONE            = 0x00;
+    UNUSED          = 0x01;
+    RECURRING_BILL  = 0x02;
+    FREE_TRIAL      = 0x04;
+    IGR             = 0x08 {
+        comment = "Name meaning unknown";
+    }
+    USAGE           = 0x10;
+    TIME_MIXTURE    = 0x20;
+    RESTRICTED      = 0x40;
+    ENABLE_CAIS     = 0x80; 
+} {
+    versions = "2.4.3 3";
+}
+
+smsg SMSG_AUTH_RESPONSE = 0x1EE {
+    WorldResult result;
+    if (result == AUTH_OK) {
+        u32 billing_time;
+        BillingPlanFlags billing_flags;
+        u32 billing_rested;
+        Expansion expansion;
+    }
+    else if (result == AUTH_WAIT_QUEUE) {
+        u32 queue_position;
+    }
+} {
+    versions = "2.4.3";
 }
 
 enum Expansion : u8 {
@@ -68,7 +106,7 @@ smsg SMSG_AUTH_RESPONSE = 0x1EE {
     WorldResult result;
     if (result == AUTH_OK) {
         u32 billing_time;
-        u8 billing_flags;
+        BillingPlanFlags billing_flags;
         u32 billing_rested;
         Expansion expansion;
     }

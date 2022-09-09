@@ -1,11 +1,11 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::BillingPlanFlags;
-use crate::world::wrath::Expansion;
-use crate::world::wrath::WorldResult;
+use crate::world::tbc::BillingPlanFlags;
+use crate::world::tbc::Expansion;
+use crate::world::tbc::WorldResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:105`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L105):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:82`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L82):
 /// ```text
 /// smsg SMSG_AUTH_RESPONSE = 0x01EE {
 ///     WorldResult result;
@@ -17,7 +17,6 @@ use std::io::{Write, Read};
 ///     }
 ///     else if (result == AUTH_WAIT_QUEUE) {
 ///         u32 queue_position;
-///         u8 realm_has_free_character_migration;
 ///     }
 /// }
 /// ```
@@ -84,13 +83,9 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
             SMSG_AUTH_RESPONSE_WorldResult::AuthLoginServerNotFound => {}
             SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
                 queue_position,
-                realm_has_free_character_migration,
             } => {
                 // queue_position: u32
                 w.write_all(&queue_position.to_le_bytes())?;
-
-                // realm_has_free_character_migration: u8
-                w.write_all(&realm_has_free_character_migration.to_le_bytes())?;
 
             }
             SMSG_AUTH_RESPONSE_WorldResult::AuthBanned => {}
@@ -123,18 +118,6 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
             SMSG_AUTH_RESPONSE_WorldResult::CharCreateServerQueue => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharCreateOnlyExisting => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharCreateExpansion => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateExpansionClass => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateLevelRequirement => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateUniqueClassLimit => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterInGuild => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateRestrictedRaceclass => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterChooseRace => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterArenaLeader => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterDeleteMail => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterSwapFaction => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterRaceOnly => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterGoldLimit => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateForceLogin => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharDeleteInProgress => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharDeleteSuccess => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharDeleteFailed => {}
@@ -151,7 +134,6 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
             SMSG_AUTH_RESPONSE_WorldResult::CharLoginNoCharacter => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharLoginLockedForTransfer => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharLoginLockedByBilling => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginLockedByMobileAh => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharNameSuccess => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharNameFailure => {}
             SMSG_AUTH_RESPONSE_WorldResult::CharNameNoName => {}
@@ -228,12 +210,8 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
                 // queue_position: u32
                 let queue_position = crate::util::read_u32_le(r)?;
 
-                // realm_has_free_character_migration: u8
-                let realm_has_free_character_migration = crate::util::read_u8_le(r)?;
-
                 SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
                     queue_position,
-                    realm_has_free_character_migration,
                 }
             }
             WorldResult::AuthBanned => SMSG_AUTH_RESPONSE_WorldResult::AuthBanned,
@@ -266,18 +244,6 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
             WorldResult::CharCreateServerQueue => SMSG_AUTH_RESPONSE_WorldResult::CharCreateServerQueue,
             WorldResult::CharCreateOnlyExisting => SMSG_AUTH_RESPONSE_WorldResult::CharCreateOnlyExisting,
             WorldResult::CharCreateExpansion => SMSG_AUTH_RESPONSE_WorldResult::CharCreateExpansion,
-            WorldResult::CharCreateExpansionClass => SMSG_AUTH_RESPONSE_WorldResult::CharCreateExpansionClass,
-            WorldResult::CharCreateLevelRequirement => SMSG_AUTH_RESPONSE_WorldResult::CharCreateLevelRequirement,
-            WorldResult::CharCreateUniqueClassLimit => SMSG_AUTH_RESPONSE_WorldResult::CharCreateUniqueClassLimit,
-            WorldResult::CharCreateCharacterInGuild => SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterInGuild,
-            WorldResult::CharCreateRestrictedRaceclass => SMSG_AUTH_RESPONSE_WorldResult::CharCreateRestrictedRaceclass,
-            WorldResult::CharCreateCharacterChooseRace => SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterChooseRace,
-            WorldResult::CharCreateCharacterArenaLeader => SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterArenaLeader,
-            WorldResult::CharCreateCharacterDeleteMail => SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterDeleteMail,
-            WorldResult::CharCreateCharacterSwapFaction => SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterSwapFaction,
-            WorldResult::CharCreateCharacterRaceOnly => SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterRaceOnly,
-            WorldResult::CharCreateCharacterGoldLimit => SMSG_AUTH_RESPONSE_WorldResult::CharCreateCharacterGoldLimit,
-            WorldResult::CharCreateForceLogin => SMSG_AUTH_RESPONSE_WorldResult::CharCreateForceLogin,
             WorldResult::CharDeleteInProgress => SMSG_AUTH_RESPONSE_WorldResult::CharDeleteInProgress,
             WorldResult::CharDeleteSuccess => SMSG_AUTH_RESPONSE_WorldResult::CharDeleteSuccess,
             WorldResult::CharDeleteFailed => SMSG_AUTH_RESPONSE_WorldResult::CharDeleteFailed,
@@ -294,7 +260,6 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
             WorldResult::CharLoginNoCharacter => SMSG_AUTH_RESPONSE_WorldResult::CharLoginNoCharacter,
             WorldResult::CharLoginLockedForTransfer => SMSG_AUTH_RESPONSE_WorldResult::CharLoginLockedForTransfer,
             WorldResult::CharLoginLockedByBilling => SMSG_AUTH_RESPONSE_WorldResult::CharLoginLockedByBilling,
-            WorldResult::CharLoginLockedByMobileAh => SMSG_AUTH_RESPONSE_WorldResult::CharLoginLockedByMobileAh,
             WorldResult::CharNameSuccess => SMSG_AUTH_RESPONSE_WorldResult::CharNameSuccess,
             WorldResult::CharNameFailure => SMSG_AUTH_RESPONSE_WorldResult::CharNameFailure,
             WorldResult::CharNameNoName => SMSG_AUTH_RESPONSE_WorldResult::CharNameNoName,
@@ -320,8 +285,8 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
     }
 
 }
-#[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_AUTH_RESPONSE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_AUTH_RESPONSE {}
 
 impl SMSG_AUTH_RESPONSE {
     pub(crate) fn size(&self) -> usize {
@@ -365,7 +330,6 @@ pub enum SMSG_AUTH_RESPONSE_WorldResult {
     AuthLoginServerNotFound,
     AuthWaitQueue {
         queue_position: u32,
-        realm_has_free_character_migration: u8,
     },
     AuthBanned,
     AuthAlreadyOnline,
@@ -397,18 +361,6 @@ pub enum SMSG_AUTH_RESPONSE_WorldResult {
     CharCreateServerQueue,
     CharCreateOnlyExisting,
     CharCreateExpansion,
-    CharCreateExpansionClass,
-    CharCreateLevelRequirement,
-    CharCreateUniqueClassLimit,
-    CharCreateCharacterInGuild,
-    CharCreateRestrictedRaceclass,
-    CharCreateCharacterChooseRace,
-    CharCreateCharacterArenaLeader,
-    CharCreateCharacterDeleteMail,
-    CharCreateCharacterSwapFaction,
-    CharCreateCharacterRaceOnly,
-    CharCreateCharacterGoldLimit,
-    CharCreateForceLogin,
     CharDeleteInProgress,
     CharDeleteSuccess,
     CharDeleteFailed,
@@ -425,7 +377,6 @@ pub enum SMSG_AUTH_RESPONSE_WorldResult {
     CharLoginNoCharacter,
     CharLoginLockedForTransfer,
     CharLoginLockedByBilling,
-    CharLoginLockedByMobileAh,
     CharNameSuccess,
     CharNameFailure,
     CharNameNoName,
@@ -513,52 +464,39 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
             Self::CharCreateServerQueue => 55,
             Self::CharCreateOnlyExisting => 56,
             Self::CharCreateExpansion => 57,
-            Self::CharCreateExpansionClass => 58,
-            Self::CharCreateLevelRequirement => 59,
-            Self::CharCreateUniqueClassLimit => 60,
-            Self::CharCreateCharacterInGuild => 61,
-            Self::CharCreateRestrictedRaceclass => 62,
-            Self::CharCreateCharacterChooseRace => 63,
-            Self::CharCreateCharacterArenaLeader => 64,
-            Self::CharCreateCharacterDeleteMail => 65,
-            Self::CharCreateCharacterSwapFaction => 66,
-            Self::CharCreateCharacterRaceOnly => 67,
-            Self::CharCreateCharacterGoldLimit => 68,
-            Self::CharCreateForceLogin => 69,
-            Self::CharDeleteInProgress => 70,
-            Self::CharDeleteSuccess => 71,
-            Self::CharDeleteFailed => 72,
-            Self::CharDeleteFailedLockedForTransfer => 73,
-            Self::CharDeleteFailedGuildLeader => 74,
-            Self::CharDeleteFailedArenaCaptain => 75,
-            Self::CharLoginInProgress => 76,
-            Self::CharLoginSuccess => 77,
-            Self::CharLoginNoWorld => 78,
-            Self::CharLoginDuplicateCharacter => 79,
-            Self::CharLoginNoInstances => 80,
-            Self::CharLoginFailed => 81,
-            Self::CharLoginDisabled => 82,
-            Self::CharLoginNoCharacter => 83,
-            Self::CharLoginLockedForTransfer => 84,
-            Self::CharLoginLockedByBilling => 85,
-            Self::CharLoginLockedByMobileAh => 86,
-            Self::CharNameSuccess => 87,
-            Self::CharNameFailure => 88,
-            Self::CharNameNoName => 89,
-            Self::CharNameTooShort => 90,
-            Self::CharNameTooLong => 91,
-            Self::CharNameInvalidCharacter => 92,
-            Self::CharNameMixedLanguages => 93,
-            Self::CharNameProfane => 94,
-            Self::CharNameReserved => 95,
-            Self::CharNameInvalidApostrophe => 96,
-            Self::CharNameMultipleApostrophes => 97,
-            Self::CharNameThreeConsecutive => 98,
-            Self::CharNameInvalidSpace => 99,
-            Self::CharNameConsecutiveSpaces => 100,
-            Self::CharNameRussianConsecutiveSilentCharacters => 101,
-            Self::CharNameRussianSilentCharacterAtBeginningOrEnd => 102,
-            Self::CharNameDeclensionDoesntMatchBaseName => 103,
+            Self::CharDeleteInProgress => 58,
+            Self::CharDeleteSuccess => 59,
+            Self::CharDeleteFailed => 60,
+            Self::CharDeleteFailedLockedForTransfer => 61,
+            Self::CharDeleteFailedGuildLeader => 62,
+            Self::CharDeleteFailedArenaCaptain => 63,
+            Self::CharLoginInProgress => 64,
+            Self::CharLoginSuccess => 65,
+            Self::CharLoginNoWorld => 66,
+            Self::CharLoginDuplicateCharacter => 67,
+            Self::CharLoginNoInstances => 68,
+            Self::CharLoginFailed => 69,
+            Self::CharLoginDisabled => 70,
+            Self::CharLoginNoCharacter => 71,
+            Self::CharLoginLockedForTransfer => 72,
+            Self::CharLoginLockedByBilling => 73,
+            Self::CharNameSuccess => 74,
+            Self::CharNameFailure => 75,
+            Self::CharNameNoName => 76,
+            Self::CharNameTooShort => 77,
+            Self::CharNameTooLong => 78,
+            Self::CharNameInvalidCharacter => 79,
+            Self::CharNameMixedLanguages => 80,
+            Self::CharNameProfane => 81,
+            Self::CharNameReserved => 82,
+            Self::CharNameInvalidApostrophe => 83,
+            Self::CharNameMultipleApostrophes => 84,
+            Self::CharNameThreeConsecutive => 85,
+            Self::CharNameInvalidSpace => 86,
+            Self::CharNameConsecutiveSpaces => 87,
+            Self::CharNameRussianConsecutiveSilentCharacters => 88,
+            Self::CharNameRussianSilentCharacterAtBeginningOrEnd => 89,
+            Self::CharNameDeclensionDoesntMatchBaseName => 90,
         }
     }
 
@@ -659,11 +597,9 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
             }
             Self::AuthWaitQueue {
                 queue_position,
-                realm_has_free_character_migration,
             } => {
                 1
                 + 4 // queue_position: u32
-                + 1 // realm_has_free_character_migration: u8
             }
             Self::AuthBanned => {
                 1
@@ -755,42 +691,6 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
             Self::CharCreateExpansion => {
                 1
             }
-            Self::CharCreateExpansionClass => {
-                1
-            }
-            Self::CharCreateLevelRequirement => {
-                1
-            }
-            Self::CharCreateUniqueClassLimit => {
-                1
-            }
-            Self::CharCreateCharacterInGuild => {
-                1
-            }
-            Self::CharCreateRestrictedRaceclass => {
-                1
-            }
-            Self::CharCreateCharacterChooseRace => {
-                1
-            }
-            Self::CharCreateCharacterArenaLeader => {
-                1
-            }
-            Self::CharCreateCharacterDeleteMail => {
-                1
-            }
-            Self::CharCreateCharacterSwapFaction => {
-                1
-            }
-            Self::CharCreateCharacterRaceOnly => {
-                1
-            }
-            Self::CharCreateCharacterGoldLimit => {
-                1
-            }
-            Self::CharCreateForceLogin => {
-                1
-            }
             Self::CharDeleteInProgress => {
                 1
             }
@@ -837,9 +737,6 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
                 1
             }
             Self::CharLoginLockedByBilling => {
-                1
-            }
-            Self::CharLoginLockedByMobileAh => {
                 1
             }
             Self::CharNameSuccess => {

@@ -1,11 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:97`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L97):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:59`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L59):
 /// ```text
 /// enum Expansion : u8 {
 ///     VANILLA = 0;
 ///     THE_BURNING_CRUSADE = 1;
-///     WRATH_OF_THE_LICH_LING = 2;
 /// }
 
 /// ```
@@ -13,7 +12,6 @@ use std::convert::{TryFrom, TryInto};
 pub enum Expansion {
     Vanilla,
     TheBurningCrusade,
-    WrathOfTheLichLing,
 }
 
 impl Expansion {
@@ -21,7 +19,6 @@ impl Expansion {
         match self {
             Self::Vanilla => 0x0,
             Self::TheBurningCrusade => 0x1,
-            Self::WrathOfTheLichLing => 0x2,
         }
     }
 
@@ -38,7 +35,6 @@ impl std::fmt::Display for Expansion {
         match self {
             Self::Vanilla => f.write_str("Vanilla"),
             Self::TheBurningCrusade => f.write_str("TheBurningCrusade"),
-            Self::WrathOfTheLichLing => f.write_str("WrathOfTheLichLing"),
         }
     }
 }
@@ -49,7 +45,6 @@ impl TryFrom<u8> for Expansion {
         match value {
             0 => Ok(Self::Vanilla),
             1 => Ok(Self::TheBurningCrusade),
-            2 => Ok(Self::WrathOfTheLichLing),
             v => Err(crate::errors::EnumError::new("Expansion", v as u32),)
         }
     }
