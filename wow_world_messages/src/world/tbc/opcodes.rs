@@ -216,6 +216,7 @@ use crate::world::tbc::SMSG_AUTH_CHALLENGE;
 use crate::world::tbc::SMSG_AUTH_RESPONSE;
 use crate::world::tbc::SMSG_ACCOUNT_DATA_TIMES;
 use crate::world::tbc::SMSG_LOGIN_VERIFY_WORLD;
+use crate::world::tbc::SMSG_CHAR_RENAME;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -227,6 +228,7 @@ pub enum ServerOpcodeMessage {
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
+    SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
 }
 
 impl ServerOpcodeMessage {
@@ -240,6 +242,7 @@ impl ServerOpcodeMessage {
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
         }
     }
@@ -321,6 +324,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -335,6 +339,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -349,6 +354,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -363,6 +369,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -377,6 +384,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -391,6 +399,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -407,6 +416,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
+            ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
         })
     }
 }
@@ -456,6 +466,12 @@ impl From<SMSG_ACCOUNT_DATA_TIMES> for ServerOpcodeMessage {
 impl From<SMSG_LOGIN_VERIFY_WORLD> for ServerOpcodeMessage {
     fn from(c: SMSG_LOGIN_VERIFY_WORLD) -> Self {
         Self::SMSG_LOGIN_VERIFY_WORLD(c)
+    }
+}
+
+impl From<SMSG_CHAR_RENAME> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAR_RENAME) -> Self {
+        Self::SMSG_CHAR_RENAME(c)
     }
 }
 

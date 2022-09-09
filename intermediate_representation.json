@@ -74908,6 +74908,10 @@
         {
           "name": "SMSG_CHAR_DELETE",
           "usage": "used_but_not_in_if"
+        },
+        {
+          "name": "SMSG_CHAR_RENAME",
+          "usage": "in_if"
         }
       ],
       "file_info": {
@@ -75787,6 +75791,10 @@
         {
           "name": "SMSG_CHAR_DELETE",
           "usage": "used_but_not_in_if"
+        },
+        {
+          "name": "SMSG_CHAR_RENAME",
+          "usage": "in_if"
         }
       ],
       "file_info": {
@@ -134009,10 +134017,9 @@
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "major",
               "version": {
-                "major": 1,
-                "minor": 12
+                "major": 1
               }
             }
           ]
@@ -134057,7 +134064,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm",
-            "start_position": 13
+            "start_position": 12
           }
         },
         {
@@ -134134,13 +134141,227 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm",
-            "start_position": 21
+            "start_position": 22
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm",
-        "start_position": 3
+        "start_position": 1
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SubObjects",
+        "IfEnum",
+        "ComplexBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_CHAR_RENAME",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 712
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "result",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": true,
+            "tags": {}
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "result",
+              "equations": [
+                {
+                  "type": "equals",
+                  "content": {
+                    "value": "RESPONSE_SUCCESS"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "character",
+                  "member_type": {
+                    "type": "guid"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "new_name",
+                  "member_type": {
+                    "type": "cstring"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            }
+          }
+        }
+      ],
+      "tags": {
+        "description": "Response to [CMSG_CHAR_RENAME].",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm",
+        "start_position": 36
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SubObjects",
+        "IfEnum",
+        "ComplexBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_CHAR_RENAME",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 712
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "result",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": true,
+            "tags": {}
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "result",
+              "equations": [
+                {
+                  "type": "equals",
+                  "content": {
+                    "value": "RESPONSE_SUCCESS"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "character",
+                  "member_type": {
+                    "type": "guid"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "new_name",
+                  "member_type": {
+                    "type": "cstring"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            }
+          }
+        }
+      ],
+      "tags": {
+        "description": "Response to [CMSG_CHAR_RENAME].",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm",
+        "start_position": 47
       },
       "only_has_io_error": false,
       "features": [

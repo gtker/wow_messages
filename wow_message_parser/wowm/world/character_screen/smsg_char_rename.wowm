@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 smsg SMSG_CHAR_RENAME = 0x2C8 {
     WorldResult result;
     if (result == RESPONSE_SUCCESS) {
@@ -8,6 +6,7 @@ smsg SMSG_CHAR_RENAME = 0x2C8 {
     }
 } {
     description = "Response to [CMSG_CHAR_RENAME].";
+    versions = "1";
 }
 
 test SMSG_CHAR_RENAME {
@@ -16,7 +15,9 @@ test SMSG_CHAR_RENAME {
     0x00, 0x03, /* size */
     0xC8, 0x02, /* opcode */
     0x47, /* result */
-]
+] {
+    versions = "1.12";
+}
 
 test SMSG_CHAR_RENAME {
     result = RESPONSE_SUCCESS;
@@ -28,4 +29,28 @@ test SMSG_CHAR_RENAME {
     0x00, /* result */
     0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, /* character */
     0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65, 0x66, 0x00, /* new_name */
-]
+] {
+    versions = "1.12";
+}
+
+smsg SMSG_CHAR_RENAME = 0x2C8 {
+    WorldResult result;
+    if (result == RESPONSE_SUCCESS) {
+        Guid character;
+        CString new_name;
+    }
+} {
+    description = "Response to [CMSG_CHAR_RENAME].";
+    versions = "2.4.3";
+}
+
+smsg SMSG_CHAR_RENAME = 0x2C8 {
+    WorldResult result;
+    if (result == RESPONSE_SUCCESS) {
+        Guid character;
+        CString new_name;
+    }
+} {
+    description = "Response to [CMSG_CHAR_RENAME].";
+    versions = "3.3.5";
+}

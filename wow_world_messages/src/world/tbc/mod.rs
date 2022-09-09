@@ -44,6 +44,8 @@ pub(crate) mod smsg_char_delete;
 pub use smsg_char_delete::*;
 pub(crate) mod smsg_char_enum;
 pub use smsg_char_enum::*;
+pub(crate) mod smsg_char_rename;
+pub use smsg_char_rename::*;
 pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
 pub(crate) mod smsg_tutorial_flags;

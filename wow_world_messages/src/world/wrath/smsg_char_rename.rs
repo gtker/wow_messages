@@ -1,12 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::WorldResult;
+use crate::world::wrath::WorldResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Response to [`CMSG_CHAR_RENAME`](crate::world::vanilla::CMSG_CHAR_RENAME).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm:47`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm#L47):
 /// ```text
 /// smsg SMSG_CHAR_RENAME = 0x02C8 {
 ///     WorldResult result;
@@ -78,6 +78,7 @@ impl crate::Message for SMSG_CHAR_RENAME {
             SMSG_CHAR_RENAME_WorldResult::AuthDbBusy => {}
             SMSG_CHAR_RENAME_WorldResult::AuthSuspended => {}
             SMSG_CHAR_RENAME_WorldResult::AuthParentalControl => {}
+            SMSG_CHAR_RENAME_WorldResult::AuthLockedEnforced => {}
             SMSG_CHAR_RENAME_WorldResult::RealmListInProgress => {}
             SMSG_CHAR_RENAME_WorldResult::RealmListSuccess => {}
             SMSG_CHAR_RENAME_WorldResult::RealmListFailed => {}
@@ -100,10 +101,25 @@ impl crate::Message for SMSG_CHAR_RENAME {
             SMSG_CHAR_RENAME_WorldResult::CharCreateAccountLimit => {}
             SMSG_CHAR_RENAME_WorldResult::CharCreateServerQueue => {}
             SMSG_CHAR_RENAME_WorldResult::CharCreateOnlyExisting => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateExpansion => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateExpansionClass => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateLevelRequirement => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateUniqueClassLimit => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterInGuild => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateRestrictedRaceclass => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterChooseRace => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterArenaLeader => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterDeleteMail => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterSwapFaction => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterRaceOnly => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterGoldLimit => {}
+            SMSG_CHAR_RENAME_WorldResult::CharCreateForceLogin => {}
             SMSG_CHAR_RENAME_WorldResult::CharDeleteInProgress => {}
             SMSG_CHAR_RENAME_WorldResult::CharDeleteSuccess => {}
             SMSG_CHAR_RENAME_WorldResult::CharDeleteFailed => {}
             SMSG_CHAR_RENAME_WorldResult::CharDeleteFailedLockedForTransfer => {}
+            SMSG_CHAR_RENAME_WorldResult::CharDeleteFailedGuildLeader => {}
+            SMSG_CHAR_RENAME_WorldResult::CharDeleteFailedArenaCaptain => {}
             SMSG_CHAR_RENAME_WorldResult::CharLoginInProgress => {}
             SMSG_CHAR_RENAME_WorldResult::CharLoginSuccess => {}
             SMSG_CHAR_RENAME_WorldResult::CharLoginNoWorld => {}
@@ -113,10 +129,14 @@ impl crate::Message for SMSG_CHAR_RENAME {
             SMSG_CHAR_RENAME_WorldResult::CharLoginDisabled => {}
             SMSG_CHAR_RENAME_WorldResult::CharLoginNoCharacter => {}
             SMSG_CHAR_RENAME_WorldResult::CharLoginLockedForTransfer => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginLockedByBilling => {}
+            SMSG_CHAR_RENAME_WorldResult::CharLoginLockedByMobileAh => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameSuccess => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameFailure => {}
             SMSG_CHAR_RENAME_WorldResult::CharNameNoName => {}
             SMSG_CHAR_RENAME_WorldResult::CharNameTooShort => {}
             SMSG_CHAR_RENAME_WorldResult::CharNameTooLong => {}
-            SMSG_CHAR_RENAME_WorldResult::CharNameOnlyLetters => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameInvalidCharacter => {}
             SMSG_CHAR_RENAME_WorldResult::CharNameMixedLanguages => {}
             SMSG_CHAR_RENAME_WorldResult::CharNameProfane => {}
             SMSG_CHAR_RENAME_WorldResult::CharNameReserved => {}
@@ -124,8 +144,10 @@ impl crate::Message for SMSG_CHAR_RENAME {
             SMSG_CHAR_RENAME_WorldResult::CharNameMultipleApostrophes => {}
             SMSG_CHAR_RENAME_WorldResult::CharNameThreeConsecutive => {}
             SMSG_CHAR_RENAME_WorldResult::CharNameInvalidSpace => {}
-            SMSG_CHAR_RENAME_WorldResult::CharNameSuccess => {}
-            SMSG_CHAR_RENAME_WorldResult::CharNameFailure => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameConsecutiveSpaces => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameRussianConsecutiveSilentCharacters => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameRussianSilentCharacterAtBeginningOrEnd => {}
+            SMSG_CHAR_RENAME_WorldResult::CharNameDeclensionDoesntMatchBaseName => {}
         }
 
         Ok(())
@@ -181,6 +203,7 @@ impl crate::Message for SMSG_CHAR_RENAME {
             WorldResult::AuthDbBusy => SMSG_CHAR_RENAME_WorldResult::AuthDbBusy,
             WorldResult::AuthSuspended => SMSG_CHAR_RENAME_WorldResult::AuthSuspended,
             WorldResult::AuthParentalControl => SMSG_CHAR_RENAME_WorldResult::AuthParentalControl,
+            WorldResult::AuthLockedEnforced => SMSG_CHAR_RENAME_WorldResult::AuthLockedEnforced,
             WorldResult::RealmListInProgress => SMSG_CHAR_RENAME_WorldResult::RealmListInProgress,
             WorldResult::RealmListSuccess => SMSG_CHAR_RENAME_WorldResult::RealmListSuccess,
             WorldResult::RealmListFailed => SMSG_CHAR_RENAME_WorldResult::RealmListFailed,
@@ -203,10 +226,25 @@ impl crate::Message for SMSG_CHAR_RENAME {
             WorldResult::CharCreateAccountLimit => SMSG_CHAR_RENAME_WorldResult::CharCreateAccountLimit,
             WorldResult::CharCreateServerQueue => SMSG_CHAR_RENAME_WorldResult::CharCreateServerQueue,
             WorldResult::CharCreateOnlyExisting => SMSG_CHAR_RENAME_WorldResult::CharCreateOnlyExisting,
+            WorldResult::CharCreateExpansion => SMSG_CHAR_RENAME_WorldResult::CharCreateExpansion,
+            WorldResult::CharCreateExpansionClass => SMSG_CHAR_RENAME_WorldResult::CharCreateExpansionClass,
+            WorldResult::CharCreateLevelRequirement => SMSG_CHAR_RENAME_WorldResult::CharCreateLevelRequirement,
+            WorldResult::CharCreateUniqueClassLimit => SMSG_CHAR_RENAME_WorldResult::CharCreateUniqueClassLimit,
+            WorldResult::CharCreateCharacterInGuild => SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterInGuild,
+            WorldResult::CharCreateRestrictedRaceclass => SMSG_CHAR_RENAME_WorldResult::CharCreateRestrictedRaceclass,
+            WorldResult::CharCreateCharacterChooseRace => SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterChooseRace,
+            WorldResult::CharCreateCharacterArenaLeader => SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterArenaLeader,
+            WorldResult::CharCreateCharacterDeleteMail => SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterDeleteMail,
+            WorldResult::CharCreateCharacterSwapFaction => SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterSwapFaction,
+            WorldResult::CharCreateCharacterRaceOnly => SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterRaceOnly,
+            WorldResult::CharCreateCharacterGoldLimit => SMSG_CHAR_RENAME_WorldResult::CharCreateCharacterGoldLimit,
+            WorldResult::CharCreateForceLogin => SMSG_CHAR_RENAME_WorldResult::CharCreateForceLogin,
             WorldResult::CharDeleteInProgress => SMSG_CHAR_RENAME_WorldResult::CharDeleteInProgress,
             WorldResult::CharDeleteSuccess => SMSG_CHAR_RENAME_WorldResult::CharDeleteSuccess,
             WorldResult::CharDeleteFailed => SMSG_CHAR_RENAME_WorldResult::CharDeleteFailed,
             WorldResult::CharDeleteFailedLockedForTransfer => SMSG_CHAR_RENAME_WorldResult::CharDeleteFailedLockedForTransfer,
+            WorldResult::CharDeleteFailedGuildLeader => SMSG_CHAR_RENAME_WorldResult::CharDeleteFailedGuildLeader,
+            WorldResult::CharDeleteFailedArenaCaptain => SMSG_CHAR_RENAME_WorldResult::CharDeleteFailedArenaCaptain,
             WorldResult::CharLoginInProgress => SMSG_CHAR_RENAME_WorldResult::CharLoginInProgress,
             WorldResult::CharLoginSuccess => SMSG_CHAR_RENAME_WorldResult::CharLoginSuccess,
             WorldResult::CharLoginNoWorld => SMSG_CHAR_RENAME_WorldResult::CharLoginNoWorld,
@@ -216,10 +254,14 @@ impl crate::Message for SMSG_CHAR_RENAME {
             WorldResult::CharLoginDisabled => SMSG_CHAR_RENAME_WorldResult::CharLoginDisabled,
             WorldResult::CharLoginNoCharacter => SMSG_CHAR_RENAME_WorldResult::CharLoginNoCharacter,
             WorldResult::CharLoginLockedForTransfer => SMSG_CHAR_RENAME_WorldResult::CharLoginLockedForTransfer,
+            WorldResult::CharLoginLockedByBilling => SMSG_CHAR_RENAME_WorldResult::CharLoginLockedByBilling,
+            WorldResult::CharLoginLockedByMobileAh => SMSG_CHAR_RENAME_WorldResult::CharLoginLockedByMobileAh,
+            WorldResult::CharNameSuccess => SMSG_CHAR_RENAME_WorldResult::CharNameSuccess,
+            WorldResult::CharNameFailure => SMSG_CHAR_RENAME_WorldResult::CharNameFailure,
             WorldResult::CharNameNoName => SMSG_CHAR_RENAME_WorldResult::CharNameNoName,
             WorldResult::CharNameTooShort => SMSG_CHAR_RENAME_WorldResult::CharNameTooShort,
             WorldResult::CharNameTooLong => SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
-            WorldResult::CharNameOnlyLetters => SMSG_CHAR_RENAME_WorldResult::CharNameOnlyLetters,
+            WorldResult::CharNameInvalidCharacter => SMSG_CHAR_RENAME_WorldResult::CharNameInvalidCharacter,
             WorldResult::CharNameMixedLanguages => SMSG_CHAR_RENAME_WorldResult::CharNameMixedLanguages,
             WorldResult::CharNameProfane => SMSG_CHAR_RENAME_WorldResult::CharNameProfane,
             WorldResult::CharNameReserved => SMSG_CHAR_RENAME_WorldResult::CharNameReserved,
@@ -227,8 +269,10 @@ impl crate::Message for SMSG_CHAR_RENAME {
             WorldResult::CharNameMultipleApostrophes => SMSG_CHAR_RENAME_WorldResult::CharNameMultipleApostrophes,
             WorldResult::CharNameThreeConsecutive => SMSG_CHAR_RENAME_WorldResult::CharNameThreeConsecutive,
             WorldResult::CharNameInvalidSpace => SMSG_CHAR_RENAME_WorldResult::CharNameInvalidSpace,
-            WorldResult::CharNameSuccess => SMSG_CHAR_RENAME_WorldResult::CharNameSuccess,
-            WorldResult::CharNameFailure => SMSG_CHAR_RENAME_WorldResult::CharNameFailure,
+            WorldResult::CharNameConsecutiveSpaces => SMSG_CHAR_RENAME_WorldResult::CharNameConsecutiveSpaces,
+            WorldResult::CharNameRussianConsecutiveSilentCharacters => SMSG_CHAR_RENAME_WorldResult::CharNameRussianConsecutiveSilentCharacters,
+            WorldResult::CharNameRussianSilentCharacterAtBeginningOrEnd => SMSG_CHAR_RENAME_WorldResult::CharNameRussianSilentCharacterAtBeginningOrEnd,
+            WorldResult::CharNameDeclensionDoesntMatchBaseName => SMSG_CHAR_RENAME_WorldResult::CharNameDeclensionDoesntMatchBaseName,
         };
 
         Ok(Self {
@@ -237,8 +281,8 @@ impl crate::Message for SMSG_CHAR_RENAME {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHAR_RENAME {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_CHAR_RENAME {}
 
 impl SMSG_CHAR_RENAME {
     pub(crate) fn size(&self) -> usize {
@@ -285,6 +329,7 @@ pub enum SMSG_CHAR_RENAME_WorldResult {
     AuthDbBusy,
     AuthSuspended,
     AuthParentalControl,
+    AuthLockedEnforced,
     RealmListInProgress,
     RealmListSuccess,
     RealmListFailed,
@@ -307,10 +352,25 @@ pub enum SMSG_CHAR_RENAME_WorldResult {
     CharCreateAccountLimit,
     CharCreateServerQueue,
     CharCreateOnlyExisting,
+    CharCreateExpansion,
+    CharCreateExpansionClass,
+    CharCreateLevelRequirement,
+    CharCreateUniqueClassLimit,
+    CharCreateCharacterInGuild,
+    CharCreateRestrictedRaceclass,
+    CharCreateCharacterChooseRace,
+    CharCreateCharacterArenaLeader,
+    CharCreateCharacterDeleteMail,
+    CharCreateCharacterSwapFaction,
+    CharCreateCharacterRaceOnly,
+    CharCreateCharacterGoldLimit,
+    CharCreateForceLogin,
     CharDeleteInProgress,
     CharDeleteSuccess,
     CharDeleteFailed,
     CharDeleteFailedLockedForTransfer,
+    CharDeleteFailedGuildLeader,
+    CharDeleteFailedArenaCaptain,
     CharLoginInProgress,
     CharLoginSuccess,
     CharLoginNoWorld,
@@ -320,10 +380,14 @@ pub enum SMSG_CHAR_RENAME_WorldResult {
     CharLoginDisabled,
     CharLoginNoCharacter,
     CharLoginLockedForTransfer,
+    CharLoginLockedByBilling,
+    CharLoginLockedByMobileAh,
+    CharNameSuccess,
+    CharNameFailure,
     CharNameNoName,
     CharNameTooShort,
     CharNameTooLong,
-    CharNameOnlyLetters,
+    CharNameInvalidCharacter,
     CharNameMixedLanguages,
     CharNameProfane,
     CharNameReserved,
@@ -331,8 +395,10 @@ pub enum SMSG_CHAR_RENAME_WorldResult {
     CharNameMultipleApostrophes,
     CharNameThreeConsecutive,
     CharNameInvalidSpace,
-    CharNameSuccess,
-    CharNameFailure,
+    CharNameConsecutiveSpaces,
+    CharNameRussianConsecutiveSilentCharacters,
+    CharNameRussianSilentCharacterAtBeginningOrEnd,
+    CharNameDeclensionDoesntMatchBaseName,
 }
 
 impl Default for SMSG_CHAR_RENAME_WorldResult {
@@ -382,54 +448,76 @@ impl SMSG_CHAR_RENAME_WorldResult {
             Self::AuthDbBusy => 31,
             Self::AuthSuspended => 32,
             Self::AuthParentalControl => 33,
-            Self::RealmListInProgress => 34,
-            Self::RealmListSuccess => 35,
-            Self::RealmListFailed => 36,
-            Self::RealmListInvalid => 37,
-            Self::RealmListRealmNotFound => 38,
-            Self::AccountCreateInProgress => 39,
-            Self::AccountCreateSuccess => 40,
-            Self::AccountCreateFailed => 41,
-            Self::CharListRetrieving => 42,
-            Self::CharListRetrieved => 43,
-            Self::CharListFailed => 44,
-            Self::CharCreateInProgress => 45,
-            Self::CharCreateSuccess => 46,
-            Self::CharCreateError => 47,
-            Self::CharCreateFailed => 48,
-            Self::CharCreateNameInUse => 49,
-            Self::CharCreateDisabled => 50,
-            Self::CharCreatePvpTeamsViolation => 51,
-            Self::CharCreateServerLimit => 52,
-            Self::CharCreateAccountLimit => 53,
-            Self::CharCreateServerQueue => 54,
-            Self::CharCreateOnlyExisting => 55,
-            Self::CharDeleteInProgress => 56,
-            Self::CharDeleteSuccess => 57,
-            Self::CharDeleteFailed => 58,
-            Self::CharDeleteFailedLockedForTransfer => 59,
-            Self::CharLoginInProgress => 60,
-            Self::CharLoginSuccess => 61,
-            Self::CharLoginNoWorld => 62,
-            Self::CharLoginDuplicateCharacter => 63,
-            Self::CharLoginNoInstances => 64,
-            Self::CharLoginFailed => 65,
-            Self::CharLoginDisabled => 66,
-            Self::CharLoginNoCharacter => 67,
-            Self::CharLoginLockedForTransfer => 68,
-            Self::CharNameNoName => 69,
-            Self::CharNameTooShort => 70,
-            Self::CharNameTooLong => 71,
-            Self::CharNameOnlyLetters => 72,
-            Self::CharNameMixedLanguages => 73,
-            Self::CharNameProfane => 74,
-            Self::CharNameReserved => 75,
-            Self::CharNameInvalidApostrophe => 76,
-            Self::CharNameMultipleApostrophes => 77,
-            Self::CharNameThreeConsecutive => 78,
-            Self::CharNameInvalidSpace => 79,
-            Self::CharNameSuccess => 80,
-            Self::CharNameFailure => 81,
+            Self::AuthLockedEnforced => 34,
+            Self::RealmListInProgress => 35,
+            Self::RealmListSuccess => 36,
+            Self::RealmListFailed => 37,
+            Self::RealmListInvalid => 38,
+            Self::RealmListRealmNotFound => 39,
+            Self::AccountCreateInProgress => 40,
+            Self::AccountCreateSuccess => 41,
+            Self::AccountCreateFailed => 42,
+            Self::CharListRetrieving => 43,
+            Self::CharListRetrieved => 44,
+            Self::CharListFailed => 45,
+            Self::CharCreateInProgress => 46,
+            Self::CharCreateSuccess => 47,
+            Self::CharCreateError => 48,
+            Self::CharCreateFailed => 49,
+            Self::CharCreateNameInUse => 50,
+            Self::CharCreateDisabled => 51,
+            Self::CharCreatePvpTeamsViolation => 52,
+            Self::CharCreateServerLimit => 53,
+            Self::CharCreateAccountLimit => 54,
+            Self::CharCreateServerQueue => 55,
+            Self::CharCreateOnlyExisting => 56,
+            Self::CharCreateExpansion => 57,
+            Self::CharCreateExpansionClass => 58,
+            Self::CharCreateLevelRequirement => 59,
+            Self::CharCreateUniqueClassLimit => 60,
+            Self::CharCreateCharacterInGuild => 61,
+            Self::CharCreateRestrictedRaceclass => 62,
+            Self::CharCreateCharacterChooseRace => 63,
+            Self::CharCreateCharacterArenaLeader => 64,
+            Self::CharCreateCharacterDeleteMail => 65,
+            Self::CharCreateCharacterSwapFaction => 66,
+            Self::CharCreateCharacterRaceOnly => 67,
+            Self::CharCreateCharacterGoldLimit => 68,
+            Self::CharCreateForceLogin => 69,
+            Self::CharDeleteInProgress => 70,
+            Self::CharDeleteSuccess => 71,
+            Self::CharDeleteFailed => 72,
+            Self::CharDeleteFailedLockedForTransfer => 73,
+            Self::CharDeleteFailedGuildLeader => 74,
+            Self::CharDeleteFailedArenaCaptain => 75,
+            Self::CharLoginInProgress => 76,
+            Self::CharLoginSuccess => 77,
+            Self::CharLoginNoWorld => 78,
+            Self::CharLoginDuplicateCharacter => 79,
+            Self::CharLoginNoInstances => 80,
+            Self::CharLoginFailed => 81,
+            Self::CharLoginDisabled => 82,
+            Self::CharLoginNoCharacter => 83,
+            Self::CharLoginLockedForTransfer => 84,
+            Self::CharLoginLockedByBilling => 85,
+            Self::CharLoginLockedByMobileAh => 86,
+            Self::CharNameSuccess => 87,
+            Self::CharNameFailure => 88,
+            Self::CharNameNoName => 89,
+            Self::CharNameTooShort => 90,
+            Self::CharNameTooLong => 91,
+            Self::CharNameInvalidCharacter => 92,
+            Self::CharNameMixedLanguages => 93,
+            Self::CharNameProfane => 94,
+            Self::CharNameReserved => 95,
+            Self::CharNameInvalidApostrophe => 96,
+            Self::CharNameMultipleApostrophes => 97,
+            Self::CharNameThreeConsecutive => 98,
+            Self::CharNameInvalidSpace => 99,
+            Self::CharNameConsecutiveSpaces => 100,
+            Self::CharNameRussianConsecutiveSilentCharacters => 101,
+            Self::CharNameRussianSilentCharacterAtBeginningOrEnd => 102,
+            Self::CharNameDeclensionDoesntMatchBaseName => 103,
         }
     }
 
@@ -545,6 +633,9 @@ impl SMSG_CHAR_RENAME_WorldResult {
             Self::AuthParentalControl => {
                 1
             }
+            Self::AuthLockedEnforced => {
+                1
+            }
             Self::RealmListInProgress => {
                 1
             }
@@ -611,6 +702,45 @@ impl SMSG_CHAR_RENAME_WorldResult {
             Self::CharCreateOnlyExisting => {
                 1
             }
+            Self::CharCreateExpansion => {
+                1
+            }
+            Self::CharCreateExpansionClass => {
+                1
+            }
+            Self::CharCreateLevelRequirement => {
+                1
+            }
+            Self::CharCreateUniqueClassLimit => {
+                1
+            }
+            Self::CharCreateCharacterInGuild => {
+                1
+            }
+            Self::CharCreateRestrictedRaceclass => {
+                1
+            }
+            Self::CharCreateCharacterChooseRace => {
+                1
+            }
+            Self::CharCreateCharacterArenaLeader => {
+                1
+            }
+            Self::CharCreateCharacterDeleteMail => {
+                1
+            }
+            Self::CharCreateCharacterSwapFaction => {
+                1
+            }
+            Self::CharCreateCharacterRaceOnly => {
+                1
+            }
+            Self::CharCreateCharacterGoldLimit => {
+                1
+            }
+            Self::CharCreateForceLogin => {
+                1
+            }
             Self::CharDeleteInProgress => {
                 1
             }
@@ -621,6 +751,12 @@ impl SMSG_CHAR_RENAME_WorldResult {
                 1
             }
             Self::CharDeleteFailedLockedForTransfer => {
+                1
+            }
+            Self::CharDeleteFailedGuildLeader => {
+                1
+            }
+            Self::CharDeleteFailedArenaCaptain => {
                 1
             }
             Self::CharLoginInProgress => {
@@ -650,6 +786,18 @@ impl SMSG_CHAR_RENAME_WorldResult {
             Self::CharLoginLockedForTransfer => {
                 1
             }
+            Self::CharLoginLockedByBilling => {
+                1
+            }
+            Self::CharLoginLockedByMobileAh => {
+                1
+            }
+            Self::CharNameSuccess => {
+                1
+            }
+            Self::CharNameFailure => {
+                1
+            }
             Self::CharNameNoName => {
                 1
             }
@@ -659,7 +807,7 @@ impl SMSG_CHAR_RENAME_WorldResult {
             Self::CharNameTooLong => {
                 1
             }
-            Self::CharNameOnlyLetters => {
+            Self::CharNameInvalidCharacter => {
                 1
             }
             Self::CharNameMixedLanguages => {
@@ -683,189 +831,19 @@ impl SMSG_CHAR_RENAME_WorldResult {
             Self::CharNameInvalidSpace => {
                 1
             }
-            Self::CharNameSuccess => {
+            Self::CharNameConsecutiveSpaces => {
                 1
             }
-            Self::CharNameFailure => {
+            Self::CharNameRussianConsecutiveSilentCharacters => {
+                1
+            }
+            Self::CharNameRussianSilentCharacterAtBeginningOrEnd => {
+                1
+            }
+            Self::CharNameDeclensionDoesntMatchBaseName => {
                 1
             }
         }
     }
 }
 
-#[cfg(test)]
-mod test {
-    use super::SMSG_CHAR_RENAME;
-    use crate::world::vanilla::WorldResult;
-    use super::*;
-    use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
-
-    const RAW0: [u8; 5] = [ 0x00, 0x03, 0xC8, 0x02, 0x47, ];
-
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 12.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_CHAR_RENAME0() {
-        let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
-        };
-
-        let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
-        let t = match t {
-            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.result, expected.result);
-
-        assert_eq!(t.size() + header_size, RAW0.len());
-
-        let mut dest = Vec::with_capacity(RAW0.len());
-        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
-
-        assert_eq!(dest, RAW0);
-    }
-
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 12.
-    #[cfg(feature = "tokio")]
-    #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_CHAR_RENAME0() {
-        let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
-        };
-
-        let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
-            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.result, expected.result);
-
-        assert_eq!(t.size() + header_size, RAW0.len());
-
-        let mut dest = Vec::with_capacity(RAW0.len());
-        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW0);
-    }
-
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 12.
-    #[cfg(feature = "async-std")]
-    #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_CHAR_RENAME0() {
-        let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::CharNameTooLong,
-        };
-
-        let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
-            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.result, expected.result);
-
-        assert_eq!(t.size() + header_size, RAW0.len());
-
-        let mut dest = Vec::with_capacity(RAW0.len());
-        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW0);
-    }
-
-    const RAW1: [u8; 22] = [ 0x00, 0x14, 0xC8, 0x02, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
-         0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65, 0x66,
-         0x00, ];
-
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 22.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_CHAR_RENAME1() {
-        let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character: Guid::new(0xDEADBEEF),
-                new_name: String::from("Deadbeef"),
-            },
-        };
-
-        let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
-        let t = match t {
-            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.result, expected.result);
-
-        assert_eq!(t.size() + header_size, RAW1.len());
-
-        let mut dest = Vec::with_capacity(RAW1.len());
-        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
-
-        assert_eq!(dest, RAW1);
-    }
-
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 22.
-    #[cfg(feature = "tokio")]
-    #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_CHAR_RENAME1() {
-        let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character: Guid::new(0xDEADBEEF),
-                new_name: String::from("Deadbeef"),
-            },
-        };
-
-        let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
-        let t = match t {
-            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.result, expected.result);
-
-        assert_eq!(t.size() + header_size, RAW1.len());
-
-        let mut dest = Vec::with_capacity(RAW1.len());
-        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW1);
-    }
-
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm` line 22.
-    #[cfg(feature = "async-std")]
-    #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_CHAR_RENAME1() {
-        let expected = SMSG_CHAR_RENAME {
-            result: SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character: Guid::new(0xDEADBEEF),
-                new_name: String::from("Deadbeef"),
-            },
-        };
-
-        let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
-        let t = match t {
-            ServerOpcodeMessage::SMSG_CHAR_RENAME(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.result, expected.result);
-
-        assert_eq!(t.size() + header_size, RAW1.len());
-
-        let mut dest = Vec::with_capacity(RAW1.len());
-        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW1);
-    }
-
-}
