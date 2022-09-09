@@ -94,7 +94,9 @@ impl ModFiles {
                     continue;
                 }
 
-                already_existing_files.insert(file.path().to_str().unwrap().to_string(), false);
+                use path_slash::PathExt as _;
+                let filename = file.path().to_slash().unwrap();
+                already_existing_files.insert(filename.into(), false);
             }
         }
 
