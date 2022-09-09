@@ -1,10 +1,9 @@
-#tag_all versions "1.12";
-
 smsg SMSG_CHARACTER_LOGIN_FAILED = 0x41 {
     WorldResult result;
 } {
     description = "Response if [CMSG_PLAYER_LOGIN] fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD].";
     comment = "Client seems to always send a [CMSG_CANCEL_TRADE] after receiving this message, for unknown reasons.";
+    versions = "1";
 }
 
 test SMSG_CHARACTER_LOGIN_FAILED {
@@ -13,4 +12,22 @@ test SMSG_CHARACTER_LOGIN_FAILED {
     0x00, 0x03, /* size */
     0x41, 0x00, /* opcode */
     0x41, /* result */
-]
+] {
+    versions = "1.12";
+}
+
+smsg SMSG_CHARACTER_LOGIN_FAILED = 0x41 {
+    WorldResult result;
+} {
+    description = "Response if [CMSG_PLAYER_LOGIN] fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD].";
+    comment = "Client seems to always send a [CMSG_CANCEL_TRADE] after receiving this message, for unknown reasons.";
+    versions = "2.4.3";
+}
+
+smsg SMSG_CHARACTER_LOGIN_FAILED = 0x41 {
+    WorldResult result;
+} {
+    description = "Response if [CMSG_PLAYER_LOGIN] fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD].";
+    comment = "Client seems to always send a [CMSG_CANCEL_TRADE] after receiving this message, for unknown reasons.";
+    versions = "3.3.5";
+}

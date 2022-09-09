@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 ///
 /// Client seems to always send a [`CMSG_CANCEL_TRADE`](crate::world::vanilla::CMSG_CANCEL_TRADE) after receiving this message, for unknown reasons.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L1):
 /// ```text
 /// smsg SMSG_CHARACTER_LOGIN_FAILED = 0x0041 {
 ///     WorldResult result;
@@ -58,7 +58,7 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x41, 0x00, 0x41, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHARACTER_LOGIN_FAILED0() {
@@ -83,7 +83,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHARACTER_LOGIN_FAILED0() {
@@ -108,7 +108,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHARACTER_LOGIN_FAILED0() {

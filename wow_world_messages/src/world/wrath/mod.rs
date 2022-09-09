@@ -50,6 +50,8 @@ pub(crate) mod smsg_char_enum;
 pub use smsg_char_enum::*;
 pub(crate) mod smsg_char_rename;
 pub use smsg_char_rename::*;
+pub(crate) mod smsg_character_login_failed;
+pub use smsg_character_login_failed::*;
 pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
 pub(crate) mod smsg_realm_split;
