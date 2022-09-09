@@ -82,6 +82,7 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
         comment = "TrinityCore has this name but never uses the variable afterwards.";
     }
     u8[20] client_proof;
+    u32 decompressed_addon_info_size;
     u8[-] compressed_addon_info;
 } {
     versions = "3.3.5";

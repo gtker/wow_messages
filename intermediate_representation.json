@@ -91641,6 +91641,23 @@
         {
           "type": "definition",
           "content": {
+            "name": "decompressed_addon_info_size",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
             "name": "compressed_addon_info",
             "member_type": {
               "type": "array",

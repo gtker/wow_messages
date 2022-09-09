@@ -15,6 +15,7 @@ use std::io::{Write, Read};
 ///     u32 realm_id;
 ///     u64 dos_response;
 ///     u8[20] client_proof;
+///     u32 decompressed_addon_info_size;
 ///     u8[-] compressed_addon_info;
 /// }
 /// ```
@@ -32,6 +33,7 @@ pub struct CMSG_AUTH_SESSION {
     ///
     pub dos_response: u64,
     pub client_proof: [u8; 20],
+    pub decompressed_addon_info_size: u32,
     pub compressed_addon_info: Vec<u8>,
 }
 
@@ -77,6 +79,9 @@ impl crate::Message for CMSG_AUTH_SESSION {
             w.write_all(&i.to_le_bytes())?;
         }
 
+        // decompressed_addon_info_size: u32
+        w.write_all(&self.decompressed_addon_info_size.to_le_bytes())?;
+
         // compressed_addon_info: u8[-]
         for i in self.compressed_addon_info.iter() {
             w.write_all(&i.to_le_bytes())?;
@@ -117,6 +122,9 @@ impl crate::Message for CMSG_AUTH_SESSION {
         let mut client_proof = [0_u8; 20];
         r.read_exact(&mut client_proof)?;
 
+        // decompressed_addon_info_size: u32
+        let decompressed_addon_info_size = crate::util::read_u32_le(r)?;
+
         // compressed_addon_info: u8[-]
         let mut current_size = {
             4 // client_build: u32
@@ -129,6 +137,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
             + 4 // realm_id: u32
             + 8 // dos_response: u64
             + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+            + 4 // decompressed_addon_info_size: u32
         };
         let mut compressed_addon_info = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
@@ -147,6 +156,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
             realm_id,
             dos_response,
             client_proof,
+            decompressed_addon_info_size,
             compressed_addon_info,
         })
     }
@@ -167,6 +177,7 @@ impl CMSG_AUTH_SESSION {
         + 4 // realm_id: u32
         + 8 // dos_response: u64
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+        + 4 // decompressed_addon_info_size: u32
         + self.compressed_addon_info.len() * core::mem::size_of::<u8>() // compressed_addon_info: u8[-]
     }
 }
