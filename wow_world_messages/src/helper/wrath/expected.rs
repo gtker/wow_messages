@@ -101,6 +101,22 @@ pub async fn tokio_expect_client_message<
     read_client_body(&mut buf.as_slice(), size, opcode)
 }
 
+#[cfg(feature = "async-std")]
+pub async fn astd_expect_client_message<
+    M: ClientMessage,
+    R: async_std::io::ReadExt + Unpin + Send,
+>(
+    r: &mut R,
+) -> Result<M, ExpectedOpcodeError> {
+    let size = crate::util::astd_read_u16_be(r).await?;
+    let opcode = crate::util::astd_read_u32_le(r).await?;
+
+    let mut buf = vec![0; (size - CLIENT_OPCODE_LENGTH).into()];
+    r.read_exact(&mut buf).await?;
+
+    read_client_body(&mut buf.as_slice(), size, opcode)
+}
+
 fn read_client_body<M: ClientMessage>(
     buf: &mut &[u8],
     size: u16,
