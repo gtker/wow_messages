@@ -69,12 +69,13 @@ fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut String) {
 
 pub fn print_update_mask_docs() {
     const UPDATE_MASK_FILE: &str = "wowm_language/src/spec/update-mask.md";
-    const LOOKUP_TABLE: &str = "## Lookup Table\n";
+    const LOOKUP_TABLE: &str = "## Lookup Table";
     let contents = read_to_string(UPDATE_MASK_FILE).unwrap();
 
     let (s, _) = contents.split_once(LOOKUP_TABLE).unwrap();
     let mut s = s.to_string();
     s.push_str(LOOKUP_TABLE);
+    s.push('\n');
     s.push_str("### Version 1.12\n\n");
     s.push_str("Taken from [vmangos](https://github.com/vmangos/core/blob/4b2a5173b0ca4917dfe91aa7b87d84232fd7203c/src/game/Objects/UpdateFields_1_12_1.cpp#L5) with some modifications.\n\n");
 
