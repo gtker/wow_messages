@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 ///
 /// The result of this message will update the client character screen without them sending another [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm#L1):
 /// ```text
 /// smsg SMSG_CHAR_DELETE = 0x003C {
 ///     WorldResult result;
@@ -58,7 +58,7 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x3C, 0x00, 0x39, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_DELETE0() {
@@ -83,7 +83,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_DELETE0() {
@@ -108,7 +108,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_DELETE0() {

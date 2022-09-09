@@ -74722,6 +74722,10 @@
         {
           "name": "SMSG_CHAR_CREATE",
           "usage": "used_but_not_in_if"
+        },
+        {
+          "name": "SMSG_CHAR_DELETE",
+          "usage": "used_but_not_in_if"
         }
       ],
       "file_info": {
@@ -75596,6 +75600,10 @@
         },
         {
           "name": "SMSG_CHAR_CREATE",
+          "usage": "used_but_not_in_if"
+        },
+        {
+          "name": "SMSG_CHAR_DELETE",
           "usage": "used_but_not_in_if"
         }
       ],
@@ -133164,13 +133172,121 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm",
-            "start_position": 10
+            "start_position": 9
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm",
-        "start_position": 3
+        "start_position": 1
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_CHAR_DELETE",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 60
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "result",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "description": "Response to [CMSG_CHAR_DELETE].",
+        "comment": "The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM].",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm",
+        "start_position": 19
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_CHAR_DELETE",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 60
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "result",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "description": "Response to [CMSG_CHAR_DELETE].",
+        "comment": "The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM].",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm",
+        "start_position": 27
       },
       "only_has_io_error": false,
       "features": [
