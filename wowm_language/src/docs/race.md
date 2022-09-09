@@ -57,13 +57,13 @@ enum Race : u8 {
     HUMAN = 1;
     ORC = 2;
     DWARF = 3;
-    NIGHTELF = 4;
+    NIGHT_ELF = 4;
     UNDEAD = 5;
     TAUREN = 6;
     GNOME = 7;
     TROLL = 8;
     GOBLIN = 9;
-    BLOODELF = 10;
+    BLOOD_ELF = 10;
     DRAENEI = 11;
     FEL_ORC = 12;
     NAGA = 13;
@@ -82,13 +82,13 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `HUMAN` | 1 (0x01) |  |  |
 | `ORC` | 2 (0x02) |  |  |
 | `DWARF` | 3 (0x03) |  |  |
-| `NIGHTELF` | 4 (0x04) |  |  |
+| `NIGHT_ELF` | 4 (0x04) |  |  |
 | `UNDEAD` | 5 (0x05) |  |  |
 | `TAUREN` | 6 (0x06) |  |  |
 | `GNOME` | 7 (0x07) |  |  |
 | `TROLL` | 8 (0x08) |  |  |
 | `GOBLIN` | 9 (0x09) |  |  |
-| `BLOODELF` | 10 (0x0A) |  |  |
+| `BLOOD_ELF` | 10 (0x0A) |  |  |
 | `DRAENEI` | 11 (0x0B) |  |  |
 | `FEL_ORC` | 12 (0x0C) |  |  |
 | `NAGA` | 13 (0x0D) |  |  |
@@ -121,7 +121,7 @@ enum Race : u8 {
     GNOME = 7;
     TROLL = 8;
     GOBLIN = 9;
-    BLOODELF = 10;
+    BLOOD_ELF = 10;
     DRAENEI = 11;
     FEL_ORC = 12;
     NAGA = 13;
@@ -149,7 +149,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `GNOME` | 7 (0x07) |  |  |
 | `TROLL` | 8 (0x08) |  |  |
 | `GOBLIN` | 9 (0x09) |  |  |
-| `BLOODELF` | 10 (0x0A) |  |  |
+| `BLOOD_ELF` | 10 (0x0A) |  |  |
 | `DRAENEI` | 11 (0x0B) |  |  |
 | `FEL_ORC` | 12 (0x0C) |  |  |
 | `NAGA` | 13 (0x0D) |  |  |

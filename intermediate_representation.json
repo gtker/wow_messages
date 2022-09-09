@@ -68090,7 +68090,7 @@
           "tags": {}
         },
         {
-          "name": "NIGHTELF",
+          "name": "NIGHT_ELF",
           "value": {
             "int": 4,
             "original": "4"
@@ -68138,7 +68138,7 @@
           "tags": {}
         },
         {
-          "name": "BLOODELF",
+          "name": "BLOOD_ELF",
           "value": {
             "int": 10,
             "original": "10"
@@ -68339,7 +68339,7 @@
           "tags": {}
         },
         {
-          "name": "BLOODELF",
+          "name": "BLOOD_ELF",
           "value": {
             "int": 10,
             "original": "10"

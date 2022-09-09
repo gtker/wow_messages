@@ -12,7 +12,7 @@ use std::convert::{TryFrom, TryInto};
 ///     GNOME = 7;
 ///     TROLL = 8;
 ///     GOBLIN = 9;
-///     BLOODELF = 10;
+///     BLOOD_ELF = 10;
 ///     DRAENEI = 11;
 ///     FEL_ORC = 12;
 ///     NAGA = 13;
@@ -38,7 +38,7 @@ pub enum Race {
     Gnome,
     Troll,
     Goblin,
-    Bloodelf,
+    BloodElf,
     Draenei,
     FelOrc,
     Naga,
@@ -64,7 +64,7 @@ impl Race {
             Self::Gnome => 0x7,
             Self::Troll => 0x8,
             Self::Goblin => 0x9,
-            Self::Bloodelf => 0xa,
+            Self::BloodElf => 0xa,
             Self::Draenei => 0xb,
             Self::FelOrc => 0xc,
             Self::Naga => 0xd,
@@ -99,7 +99,7 @@ impl std::fmt::Display for Race {
             Self::Gnome => f.write_str("Gnome"),
             Self::Troll => f.write_str("Troll"),
             Self::Goblin => f.write_str("Goblin"),
-            Self::Bloodelf => f.write_str("Bloodelf"),
+            Self::BloodElf => f.write_str("BloodElf"),
             Self::Draenei => f.write_str("Draenei"),
             Self::FelOrc => f.write_str("FelOrc"),
             Self::Naga => f.write_str("Naga"),
@@ -128,7 +128,7 @@ impl TryFrom<u8> for Race {
             7 => Ok(Self::Gnome),
             8 => Ok(Self::Troll),
             9 => Ok(Self::Goblin),
-            10 => Ok(Self::Bloodelf),
+            10 => Ok(Self::BloodElf),
             11 => Ok(Self::Draenei),
             12 => Ok(Self::FelOrc),
             13 => Ok(Self::Naga),
