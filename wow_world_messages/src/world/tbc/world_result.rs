@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/world_result.wowm:345`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/world_result.wowm#L345):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/world_result.wowm:240`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/world_result.wowm#L240):
 /// ```text
 /// enum WorldResult : u8 {
 ///     RESPONSE_SUCCESS = 0x00;
@@ -61,52 +61,39 @@ use std::convert::{TryFrom, TryInto};
 ///     CHAR_CREATE_SERVER_QUEUE = 0x37;
 ///     CHAR_CREATE_ONLY_EXISTING = 0x38;
 ///     CHAR_CREATE_EXPANSION = 0x39;
-///     CHAR_CREATE_EXPANSION_CLASS = 0x3A;
-///     CHAR_CREATE_LEVEL_REQUIREMENT = 0x3B;
-///     CHAR_CREATE_UNIQUE_CLASS_LIMIT = 0x3C;
-///     CHAR_CREATE_CHARACTER_IN_GUILD = 0x3D;
-///     CHAR_CREATE_RESTRICTED_RACECLASS = 0x3E;
-///     CHAR_CREATE_CHARACTER_CHOOSE_RACE = 0x3F;
-///     CHAR_CREATE_CHARACTER_ARENA_LEADER = 0x40;
-///     CHAR_CREATE_CHARACTER_DELETE_MAIL = 0x41;
-///     CHAR_CREATE_CHARACTER_SWAP_FACTION = 0x42;
-///     CHAR_CREATE_CHARACTER_RACE_ONLY = 0x43;
-///     CHAR_CREATE_CHARACTER_GOLD_LIMIT = 0x44;
-///     CHAR_CREATE_FORCE_LOGIN = 0x45;
-///     CHAR_DELETE_IN_PROGRESS = 0x46;
-///     CHAR_DELETE_SUCCESS = 0x47;
-///     CHAR_DELETE_FAILED = 0x48;
-///     CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER = 0x49;
-///     CHAR_DELETE_FAILED_GUILD_LEADER = 0x4A;
-///     CHAR_DELETE_FAILED_ARENA_CAPTAIN = 0x4B;
-///     CHAR_LOGIN_IN_PROGRESS = 0x4C;
-///     CHAR_LOGIN_SUCCESS = 0x4D;
-///     CHAR_LOGIN_NO_WORLD = 0x4E;
-///     CHAR_LOGIN_DUPLICATE_CHARACTER = 0x4F;
-///     CHAR_LOGIN_NO_INSTANCES = 0x50;
-///     CHAR_LOGIN_FAILED = 0x51;
-///     CHAR_LOGIN_DISABLED = 0x52;
-///     CHAR_LOGIN_NO_CHARACTER = 0x53;
-///     CHAR_LOGIN_LOCKED_FOR_TRANSFER = 0x54;
-///     CHAR_LOGIN_LOCKED_BY_BILLING = 0x55;
-///     CHAR_LOGIN_LOCKED_BY_MOBILE_AH = 0x56;
-///     CHAR_NAME_SUCCESS = 0x57;
-///     CHAR_NAME_FAILURE = 0x58;
-///     CHAR_NAME_NO_NAME = 0x59;
-///     CHAR_NAME_TOO_SHORT = 0x5A;
-///     CHAR_NAME_TOO_LONG = 0x5B;
-///     CHAR_NAME_INVALID_CHARACTER = 0x5C;
-///     CHAR_NAME_MIXED_LANGUAGES = 0x5D;
-///     CHAR_NAME_PROFANE = 0x5E;
-///     CHAR_NAME_RESERVED = 0x5F;
-///     CHAR_NAME_INVALID_APOSTROPHE = 0x60;
-///     CHAR_NAME_MULTIPLE_APOSTROPHES = 0x61;
-///     CHAR_NAME_THREE_CONSECUTIVE = 0x62;
-///     CHAR_NAME_INVALID_SPACE = 0x63;
-///     CHAR_NAME_CONSECUTIVE_SPACES = 0x64;
-///     CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS = 0x65;
-///     CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END = 0x66;
-///     CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME = 0x67;
+///     CHAR_DELETE_IN_PROGRESS = 0x3A;
+///     CHAR_DELETE_SUCCESS = 0x3B;
+///     CHAR_DELETE_FAILED = 0x3C;
+///     CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER = 0x3D;
+///     CHAR_DELETE_FAILED_GUILD_LEADER = 0x3E;
+///     CHAR_DELETE_FAILED_ARENA_CAPTAIN = 0x3F;
+///     CHAR_LOGIN_IN_PROGRESS = 0x40;
+///     CHAR_LOGIN_SUCCESS = 0x41;
+///     CHAR_LOGIN_NO_WORLD = 0x42;
+///     CHAR_LOGIN_DUPLICATE_CHARACTER = 0x43;
+///     CHAR_LOGIN_NO_INSTANCES = 0x44;
+///     CHAR_LOGIN_FAILED = 0x45;
+///     CHAR_LOGIN_DISABLED = 0x46;
+///     CHAR_LOGIN_NO_CHARACTER = 0x47;
+///     CHAR_LOGIN_LOCKED_FOR_TRANSFER = 0x48;
+///     CHAR_LOGIN_LOCKED_BY_BILLING = 0x49;
+///     CHAR_NAME_SUCCESS = 0x4A;
+///     CHAR_NAME_FAILURE = 0x4B;
+///     CHAR_NAME_NO_NAME = 0x4C;
+///     CHAR_NAME_TOO_SHORT = 0x4D;
+///     CHAR_NAME_TOO_LONG = 0x4E;
+///     CHAR_NAME_INVALID_CHARACTER = 0x4F;
+///     CHAR_NAME_MIXED_LANGUAGES = 0x50;
+///     CHAR_NAME_PROFANE = 0x51;
+///     CHAR_NAME_RESERVED = 0x52;
+///     CHAR_NAME_INVALID_APOSTROPHE = 0x53;
+///     CHAR_NAME_MULTIPLE_APOSTROPHES = 0x54;
+///     CHAR_NAME_THREE_CONSECUTIVE = 0x55;
+///     CHAR_NAME_INVALID_SPACE = 0x56;
+///     CHAR_NAME_CONSECUTIVE_SPACES = 0x57;
+///     CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS = 0x58;
+///     CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END = 0x59;
+///     CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME = 0x5A;
 /// }
 
 /// ```
@@ -170,18 +157,6 @@ pub enum WorldResult {
     CharCreateServerQueue,
     CharCreateOnlyExisting,
     CharCreateExpansion,
-    CharCreateExpansionClass,
-    CharCreateLevelRequirement,
-    CharCreateUniqueClassLimit,
-    CharCreateCharacterInGuild,
-    CharCreateRestrictedRaceclass,
-    CharCreateCharacterChooseRace,
-    CharCreateCharacterArenaLeader,
-    CharCreateCharacterDeleteMail,
-    CharCreateCharacterSwapFaction,
-    CharCreateCharacterRaceOnly,
-    CharCreateCharacterGoldLimit,
-    CharCreateForceLogin,
     CharDeleteInProgress,
     CharDeleteSuccess,
     CharDeleteFailed,
@@ -198,7 +173,6 @@ pub enum WorldResult {
     CharLoginNoCharacter,
     CharLoginLockedForTransfer,
     CharLoginLockedByBilling,
-    CharLoginLockedByMobileAh,
     CharNameSuccess,
     CharNameFailure,
     CharNameNoName,
@@ -279,52 +253,39 @@ impl WorldResult {
             Self::CharCreateServerQueue => 0x37,
             Self::CharCreateOnlyExisting => 0x38,
             Self::CharCreateExpansion => 0x39,
-            Self::CharCreateExpansionClass => 0x3a,
-            Self::CharCreateLevelRequirement => 0x3b,
-            Self::CharCreateUniqueClassLimit => 0x3c,
-            Self::CharCreateCharacterInGuild => 0x3d,
-            Self::CharCreateRestrictedRaceclass => 0x3e,
-            Self::CharCreateCharacterChooseRace => 0x3f,
-            Self::CharCreateCharacterArenaLeader => 0x40,
-            Self::CharCreateCharacterDeleteMail => 0x41,
-            Self::CharCreateCharacterSwapFaction => 0x42,
-            Self::CharCreateCharacterRaceOnly => 0x43,
-            Self::CharCreateCharacterGoldLimit => 0x44,
-            Self::CharCreateForceLogin => 0x45,
-            Self::CharDeleteInProgress => 0x46,
-            Self::CharDeleteSuccess => 0x47,
-            Self::CharDeleteFailed => 0x48,
-            Self::CharDeleteFailedLockedForTransfer => 0x49,
-            Self::CharDeleteFailedGuildLeader => 0x4a,
-            Self::CharDeleteFailedArenaCaptain => 0x4b,
-            Self::CharLoginInProgress => 0x4c,
-            Self::CharLoginSuccess => 0x4d,
-            Self::CharLoginNoWorld => 0x4e,
-            Self::CharLoginDuplicateCharacter => 0x4f,
-            Self::CharLoginNoInstances => 0x50,
-            Self::CharLoginFailed => 0x51,
-            Self::CharLoginDisabled => 0x52,
-            Self::CharLoginNoCharacter => 0x53,
-            Self::CharLoginLockedForTransfer => 0x54,
-            Self::CharLoginLockedByBilling => 0x55,
-            Self::CharLoginLockedByMobileAh => 0x56,
-            Self::CharNameSuccess => 0x57,
-            Self::CharNameFailure => 0x58,
-            Self::CharNameNoName => 0x59,
-            Self::CharNameTooShort => 0x5a,
-            Self::CharNameTooLong => 0x5b,
-            Self::CharNameInvalidCharacter => 0x5c,
-            Self::CharNameMixedLanguages => 0x5d,
-            Self::CharNameProfane => 0x5e,
-            Self::CharNameReserved => 0x5f,
-            Self::CharNameInvalidApostrophe => 0x60,
-            Self::CharNameMultipleApostrophes => 0x61,
-            Self::CharNameThreeConsecutive => 0x62,
-            Self::CharNameInvalidSpace => 0x63,
-            Self::CharNameConsecutiveSpaces => 0x64,
-            Self::CharNameRussianConsecutiveSilentCharacters => 0x65,
-            Self::CharNameRussianSilentCharacterAtBeginningOrEnd => 0x66,
-            Self::CharNameDeclensionDoesntMatchBaseName => 0x67,
+            Self::CharDeleteInProgress => 0x3a,
+            Self::CharDeleteSuccess => 0x3b,
+            Self::CharDeleteFailed => 0x3c,
+            Self::CharDeleteFailedLockedForTransfer => 0x3d,
+            Self::CharDeleteFailedGuildLeader => 0x3e,
+            Self::CharDeleteFailedArenaCaptain => 0x3f,
+            Self::CharLoginInProgress => 0x40,
+            Self::CharLoginSuccess => 0x41,
+            Self::CharLoginNoWorld => 0x42,
+            Self::CharLoginDuplicateCharacter => 0x43,
+            Self::CharLoginNoInstances => 0x44,
+            Self::CharLoginFailed => 0x45,
+            Self::CharLoginDisabled => 0x46,
+            Self::CharLoginNoCharacter => 0x47,
+            Self::CharLoginLockedForTransfer => 0x48,
+            Self::CharLoginLockedByBilling => 0x49,
+            Self::CharNameSuccess => 0x4a,
+            Self::CharNameFailure => 0x4b,
+            Self::CharNameNoName => 0x4c,
+            Self::CharNameTooShort => 0x4d,
+            Self::CharNameTooLong => 0x4e,
+            Self::CharNameInvalidCharacter => 0x4f,
+            Self::CharNameMixedLanguages => 0x50,
+            Self::CharNameProfane => 0x51,
+            Self::CharNameReserved => 0x52,
+            Self::CharNameInvalidApostrophe => 0x53,
+            Self::CharNameMultipleApostrophes => 0x54,
+            Self::CharNameThreeConsecutive => 0x55,
+            Self::CharNameInvalidSpace => 0x56,
+            Self::CharNameConsecutiveSpaces => 0x57,
+            Self::CharNameRussianConsecutiveSilentCharacters => 0x58,
+            Self::CharNameRussianSilentCharacterAtBeginningOrEnd => 0x59,
+            Self::CharNameDeclensionDoesntMatchBaseName => 0x5a,
         }
     }
 
@@ -397,18 +358,6 @@ impl std::fmt::Display for WorldResult {
             Self::CharCreateServerQueue => f.write_str("CharCreateServerQueue"),
             Self::CharCreateOnlyExisting => f.write_str("CharCreateOnlyExisting"),
             Self::CharCreateExpansion => f.write_str("CharCreateExpansion"),
-            Self::CharCreateExpansionClass => f.write_str("CharCreateExpansionClass"),
-            Self::CharCreateLevelRequirement => f.write_str("CharCreateLevelRequirement"),
-            Self::CharCreateUniqueClassLimit => f.write_str("CharCreateUniqueClassLimit"),
-            Self::CharCreateCharacterInGuild => f.write_str("CharCreateCharacterInGuild"),
-            Self::CharCreateRestrictedRaceclass => f.write_str("CharCreateRestrictedRaceclass"),
-            Self::CharCreateCharacterChooseRace => f.write_str("CharCreateCharacterChooseRace"),
-            Self::CharCreateCharacterArenaLeader => f.write_str("CharCreateCharacterArenaLeader"),
-            Self::CharCreateCharacterDeleteMail => f.write_str("CharCreateCharacterDeleteMail"),
-            Self::CharCreateCharacterSwapFaction => f.write_str("CharCreateCharacterSwapFaction"),
-            Self::CharCreateCharacterRaceOnly => f.write_str("CharCreateCharacterRaceOnly"),
-            Self::CharCreateCharacterGoldLimit => f.write_str("CharCreateCharacterGoldLimit"),
-            Self::CharCreateForceLogin => f.write_str("CharCreateForceLogin"),
             Self::CharDeleteInProgress => f.write_str("CharDeleteInProgress"),
             Self::CharDeleteSuccess => f.write_str("CharDeleteSuccess"),
             Self::CharDeleteFailed => f.write_str("CharDeleteFailed"),
@@ -425,7 +374,6 @@ impl std::fmt::Display for WorldResult {
             Self::CharLoginNoCharacter => f.write_str("CharLoginNoCharacter"),
             Self::CharLoginLockedForTransfer => f.write_str("CharLoginLockedForTransfer"),
             Self::CharLoginLockedByBilling => f.write_str("CharLoginLockedByBilling"),
-            Self::CharLoginLockedByMobileAh => f.write_str("CharLoginLockedByMobileAh"),
             Self::CharNameSuccess => f.write_str("CharNameSuccess"),
             Self::CharNameFailure => f.write_str("CharNameFailure"),
             Self::CharNameNoName => f.write_str("CharNameNoName"),
@@ -509,52 +457,39 @@ impl TryFrom<u8> for WorldResult {
             55 => Ok(Self::CharCreateServerQueue),
             56 => Ok(Self::CharCreateOnlyExisting),
             57 => Ok(Self::CharCreateExpansion),
-            58 => Ok(Self::CharCreateExpansionClass),
-            59 => Ok(Self::CharCreateLevelRequirement),
-            60 => Ok(Self::CharCreateUniqueClassLimit),
-            61 => Ok(Self::CharCreateCharacterInGuild),
-            62 => Ok(Self::CharCreateRestrictedRaceclass),
-            63 => Ok(Self::CharCreateCharacterChooseRace),
-            64 => Ok(Self::CharCreateCharacterArenaLeader),
-            65 => Ok(Self::CharCreateCharacterDeleteMail),
-            66 => Ok(Self::CharCreateCharacterSwapFaction),
-            67 => Ok(Self::CharCreateCharacterRaceOnly),
-            68 => Ok(Self::CharCreateCharacterGoldLimit),
-            69 => Ok(Self::CharCreateForceLogin),
-            70 => Ok(Self::CharDeleteInProgress),
-            71 => Ok(Self::CharDeleteSuccess),
-            72 => Ok(Self::CharDeleteFailed),
-            73 => Ok(Self::CharDeleteFailedLockedForTransfer),
-            74 => Ok(Self::CharDeleteFailedGuildLeader),
-            75 => Ok(Self::CharDeleteFailedArenaCaptain),
-            76 => Ok(Self::CharLoginInProgress),
-            77 => Ok(Self::CharLoginSuccess),
-            78 => Ok(Self::CharLoginNoWorld),
-            79 => Ok(Self::CharLoginDuplicateCharacter),
-            80 => Ok(Self::CharLoginNoInstances),
-            81 => Ok(Self::CharLoginFailed),
-            82 => Ok(Self::CharLoginDisabled),
-            83 => Ok(Self::CharLoginNoCharacter),
-            84 => Ok(Self::CharLoginLockedForTransfer),
-            85 => Ok(Self::CharLoginLockedByBilling),
-            86 => Ok(Self::CharLoginLockedByMobileAh),
-            87 => Ok(Self::CharNameSuccess),
-            88 => Ok(Self::CharNameFailure),
-            89 => Ok(Self::CharNameNoName),
-            90 => Ok(Self::CharNameTooShort),
-            91 => Ok(Self::CharNameTooLong),
-            92 => Ok(Self::CharNameInvalidCharacter),
-            93 => Ok(Self::CharNameMixedLanguages),
-            94 => Ok(Self::CharNameProfane),
-            95 => Ok(Self::CharNameReserved),
-            96 => Ok(Self::CharNameInvalidApostrophe),
-            97 => Ok(Self::CharNameMultipleApostrophes),
-            98 => Ok(Self::CharNameThreeConsecutive),
-            99 => Ok(Self::CharNameInvalidSpace),
-            100 => Ok(Self::CharNameConsecutiveSpaces),
-            101 => Ok(Self::CharNameRussianConsecutiveSilentCharacters),
-            102 => Ok(Self::CharNameRussianSilentCharacterAtBeginningOrEnd),
-            103 => Ok(Self::CharNameDeclensionDoesntMatchBaseName),
+            58 => Ok(Self::CharDeleteInProgress),
+            59 => Ok(Self::CharDeleteSuccess),
+            60 => Ok(Self::CharDeleteFailed),
+            61 => Ok(Self::CharDeleteFailedLockedForTransfer),
+            62 => Ok(Self::CharDeleteFailedGuildLeader),
+            63 => Ok(Self::CharDeleteFailedArenaCaptain),
+            64 => Ok(Self::CharLoginInProgress),
+            65 => Ok(Self::CharLoginSuccess),
+            66 => Ok(Self::CharLoginNoWorld),
+            67 => Ok(Self::CharLoginDuplicateCharacter),
+            68 => Ok(Self::CharLoginNoInstances),
+            69 => Ok(Self::CharLoginFailed),
+            70 => Ok(Self::CharLoginDisabled),
+            71 => Ok(Self::CharLoginNoCharacter),
+            72 => Ok(Self::CharLoginLockedForTransfer),
+            73 => Ok(Self::CharLoginLockedByBilling),
+            74 => Ok(Self::CharNameSuccess),
+            75 => Ok(Self::CharNameFailure),
+            76 => Ok(Self::CharNameNoName),
+            77 => Ok(Self::CharNameTooShort),
+            78 => Ok(Self::CharNameTooLong),
+            79 => Ok(Self::CharNameInvalidCharacter),
+            80 => Ok(Self::CharNameMixedLanguages),
+            81 => Ok(Self::CharNameProfane),
+            82 => Ok(Self::CharNameReserved),
+            83 => Ok(Self::CharNameInvalidApostrophe),
+            84 => Ok(Self::CharNameMultipleApostrophes),
+            85 => Ok(Self::CharNameThreeConsecutive),
+            86 => Ok(Self::CharNameInvalidSpace),
+            87 => Ok(Self::CharNameConsecutiveSpaces),
+            88 => Ok(Self::CharNameRussianConsecutiveSilentCharacters),
+            89 => Ok(Self::CharNameRussianSilentCharacterAtBeginningOrEnd),
+            90 => Ok(Self::CharNameDeclensionDoesntMatchBaseName),
             v => Err(crate::errors::EnumError::new("WorldResult", v as u32),)
         }
     }

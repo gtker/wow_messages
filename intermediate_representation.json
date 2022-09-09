@@ -73927,17 +73927,9 @@
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "major",
               "version": {
-                "major": 1,
-                "minor": 2
-              }
-            },
-            {
-              "type": "minor",
-              "version": {
-                "major": 1,
-                "minor": 12
+                "major": 1
               }
             }
           ]
@@ -73968,6 +73960,773 @@
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/world_result.wowm",
         "start_position": 1
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "WorldResult",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "RESPONSE_SUCCESS",
+          "value": {
+            "int": 0,
+            "original": "0x00"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RESPONSE_FAILURE",
+          "value": {
+            "int": 1,
+            "original": "0x01"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RESPONSE_CANCELLED",
+          "value": {
+            "int": 2,
+            "original": "0x02"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RESPONSE_DISCONNECTED",
+          "value": {
+            "int": 3,
+            "original": "0x03"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RESPONSE_FAILED_TO_CONNECT",
+          "value": {
+            "int": 4,
+            "original": "0x04"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RESPONSE_CONNECTED",
+          "value": {
+            "int": 5,
+            "original": "0x05"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RESPONSE_VERSION_MISMATCH",
+          "value": {
+            "int": 6,
+            "original": "0x06"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CSTATUS_CONNECTING",
+          "value": {
+            "int": 7,
+            "original": "0x07"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CSTATUS_NEGOTIATING_SECURITY",
+          "value": {
+            "int": 8,
+            "original": "0x08"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CSTATUS_NEGOTIATION_COMPLETE",
+          "value": {
+            "int": 9,
+            "original": "0x09"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CSTATUS_NEGOTIATION_FAILED",
+          "value": {
+            "int": 10,
+            "original": "0x0A"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CSTATUS_AUTHENTICATING",
+          "value": {
+            "int": 11,
+            "original": "0x0B"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_OK",
+          "value": {
+            "int": 12,
+            "original": "0x0C"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_FAILED",
+          "value": {
+            "int": 13,
+            "original": "0x0D"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_REJECT",
+          "value": {
+            "int": 14,
+            "original": "0x0E"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_BAD_SERVER_PROOF",
+          "value": {
+            "int": 15,
+            "original": "0x0F"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_UNAVAILABLE",
+          "value": {
+            "int": 16,
+            "original": "0x10"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_SYSTEM_ERROR",
+          "value": {
+            "int": 17,
+            "original": "0x11"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_BILLING_ERROR",
+          "value": {
+            "int": 18,
+            "original": "0x12"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_BILLING_EXPIRED",
+          "value": {
+            "int": 19,
+            "original": "0x13"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_VERSION_MISMATCH",
+          "value": {
+            "int": 20,
+            "original": "0x14"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_UNKNOWN_ACCOUNT",
+          "value": {
+            "int": 21,
+            "original": "0x15"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_INCORRECT_PASSWORD",
+          "value": {
+            "int": 22,
+            "original": "0x16"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_SESSION_EXPIRED",
+          "value": {
+            "int": 23,
+            "original": "0x17"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_SERVER_SHUTTING_DOWN",
+          "value": {
+            "int": 24,
+            "original": "0x18"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_ALREADY_LOGGING_IN",
+          "value": {
+            "int": 25,
+            "original": "0x19"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_LOGIN_SERVER_NOT_FOUND",
+          "value": {
+            "int": 26,
+            "original": "0x1A"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_WAIT_QUEUE",
+          "value": {
+            "int": 27,
+            "original": "0x1B"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_BANNED",
+          "value": {
+            "int": 28,
+            "original": "0x1C"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_ALREADY_ONLINE",
+          "value": {
+            "int": 29,
+            "original": "0x1D"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_NO_TIME",
+          "value": {
+            "int": 30,
+            "original": "0x1E"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_DB_BUSY",
+          "value": {
+            "int": 31,
+            "original": "0x1F"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_SUSPENDED",
+          "value": {
+            "int": 32,
+            "original": "0x20"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_PARENTAL_CONTROL",
+          "value": {
+            "int": 33,
+            "original": "0x21"
+          },
+          "tags": {}
+        },
+        {
+          "name": "AUTH_LOCKED_ENFORCED",
+          "value": {
+            "int": 34,
+            "original": "0x22"
+          },
+          "tags": {}
+        },
+        {
+          "name": "REALM_LIST_IN_PROGRESS",
+          "value": {
+            "int": 35,
+            "original": "0x23"
+          },
+          "tags": {}
+        },
+        {
+          "name": "REALM_LIST_SUCCESS",
+          "value": {
+            "int": 36,
+            "original": "0x24"
+          },
+          "tags": {}
+        },
+        {
+          "name": "REALM_LIST_FAILED",
+          "value": {
+            "int": 37,
+            "original": "0x25"
+          },
+          "tags": {}
+        },
+        {
+          "name": "REALM_LIST_INVALID",
+          "value": {
+            "int": 38,
+            "original": "0x26"
+          },
+          "tags": {}
+        },
+        {
+          "name": "REALM_LIST_REALM_NOT_FOUND",
+          "value": {
+            "int": 39,
+            "original": "0x27"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ACCOUNT_CREATE_IN_PROGRESS",
+          "value": {
+            "int": 40,
+            "original": "0x28"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ACCOUNT_CREATE_SUCCESS",
+          "value": {
+            "int": 41,
+            "original": "0x29"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ACCOUNT_CREATE_FAILED",
+          "value": {
+            "int": 42,
+            "original": "0x2A"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LIST_RETRIEVING",
+          "value": {
+            "int": 43,
+            "original": "0x2B"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LIST_RETRIEVED",
+          "value": {
+            "int": 44,
+            "original": "0x2C"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LIST_FAILED",
+          "value": {
+            "int": 45,
+            "original": "0x2D"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_IN_PROGRESS",
+          "value": {
+            "int": 46,
+            "original": "0x2E"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_SUCCESS",
+          "value": {
+            "int": 47,
+            "original": "0x2F"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_ERROR",
+          "value": {
+            "int": 48,
+            "original": "0x30"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_FAILED",
+          "value": {
+            "int": 49,
+            "original": "0x31"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_NAME_IN_USE",
+          "value": {
+            "int": 50,
+            "original": "0x32"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_DISABLED",
+          "value": {
+            "int": 51,
+            "original": "0x33"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_PVP_TEAMS_VIOLATION",
+          "value": {
+            "int": 52,
+            "original": "0x34"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_SERVER_LIMIT",
+          "value": {
+            "int": 53,
+            "original": "0x35"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_ACCOUNT_LIMIT",
+          "value": {
+            "int": 54,
+            "original": "0x36"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_SERVER_QUEUE",
+          "value": {
+            "int": 55,
+            "original": "0x37"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_ONLY_EXISTING",
+          "value": {
+            "int": 56,
+            "original": "0x38"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_CREATE_EXPANSION",
+          "value": {
+            "int": 57,
+            "original": "0x39"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_DELETE_IN_PROGRESS",
+          "value": {
+            "int": 58,
+            "original": "0x3A"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_DELETE_SUCCESS",
+          "value": {
+            "int": 59,
+            "original": "0x3B"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_DELETE_FAILED",
+          "value": {
+            "int": 60,
+            "original": "0x3C"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER",
+          "value": {
+            "int": 61,
+            "original": "0x3D"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_DELETE_FAILED_GUILD_LEADER",
+          "value": {
+            "int": 62,
+            "original": "0x3E"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_DELETE_FAILED_ARENA_CAPTAIN",
+          "value": {
+            "int": 63,
+            "original": "0x3F"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_IN_PROGRESS",
+          "value": {
+            "int": 64,
+            "original": "0x40"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_SUCCESS",
+          "value": {
+            "int": 65,
+            "original": "0x41"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_NO_WORLD",
+          "value": {
+            "int": 66,
+            "original": "0x42"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_DUPLICATE_CHARACTER",
+          "value": {
+            "int": 67,
+            "original": "0x43"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_NO_INSTANCES",
+          "value": {
+            "int": 68,
+            "original": "0x44"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_FAILED",
+          "value": {
+            "int": 69,
+            "original": "0x45"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_DISABLED",
+          "value": {
+            "int": 70,
+            "original": "0x46"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_NO_CHARACTER",
+          "value": {
+            "int": 71,
+            "original": "0x47"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_LOCKED_FOR_TRANSFER",
+          "value": {
+            "int": 72,
+            "original": "0x48"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_LOGIN_LOCKED_BY_BILLING",
+          "value": {
+            "int": 73,
+            "original": "0x49"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_SUCCESS",
+          "value": {
+            "int": 74,
+            "original": "0x4A"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_FAILURE",
+          "value": {
+            "int": 75,
+            "original": "0x4B"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_NO_NAME",
+          "value": {
+            "int": 76,
+            "original": "0x4C"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_TOO_SHORT",
+          "value": {
+            "int": 77,
+            "original": "0x4D"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_TOO_LONG",
+          "value": {
+            "int": 78,
+            "original": "0x4E"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_INVALID_CHARACTER",
+          "value": {
+            "int": 79,
+            "original": "0x4F"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_MIXED_LANGUAGES",
+          "value": {
+            "int": 80,
+            "original": "0x50"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_PROFANE",
+          "value": {
+            "int": 81,
+            "original": "0x51"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_RESERVED",
+          "value": {
+            "int": 82,
+            "original": "0x52"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_INVALID_APOSTROPHE",
+          "value": {
+            "int": 83,
+            "original": "0x53"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_MULTIPLE_APOSTROPHES",
+          "value": {
+            "int": 84,
+            "original": "0x54"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_THREE_CONSECUTIVE",
+          "value": {
+            "int": 85,
+            "original": "0x55"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_INVALID_SPACE",
+          "value": {
+            "int": 86,
+            "original": "0x56"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_CONSECUTIVE_SPACES",
+          "value": {
+            "int": 87,
+            "original": "0x57"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS",
+          "value": {
+            "int": 88,
+            "original": "0x58"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END",
+          "value": {
+            "int": 89,
+            "original": "0x59"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME",
+          "value": {
+            "int": 90,
+            "original": "0x5A"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u8"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "SMSG_CHAR_CREATE",
+          "usage": "used_but_not_in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/enums/world_result.wowm",
+        "start_position": 240
       },
       "features": [
         "Enum",
@@ -74834,11 +75593,15 @@
         {
           "name": "SMSG_AUTH_RESPONSE",
           "usage": "in_if"
+        },
+        {
+          "name": "SMSG_CHAR_CREATE",
+          "usage": "used_but_not_in_if"
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/world_result.wowm",
-        "start_position": 240
+        "start_position": 345
       },
       "features": [
         "Enum",
@@ -132149,10 +132912,9 @@
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "major",
               "version": {
-                "major": 1,
-                "minor": 12
+                "major": 1
               }
             }
           ]
@@ -132182,6 +132944,8 @@
             47
           ],
           "tags": {
+            "description": "Response to [CMSG_CHAR_CREATE].",
+            "comment": "Every [WorldResult] except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [CMSG_CHAR_ENUM].",
             "version": {
               "type": "world",
               "versions": [
@@ -132203,7 +132967,115 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm",
-        "start_position": 3
+        "start_position": 4
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_CHAR_CREATE",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 58
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "result",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "description": "Response to [CMSG_CHAR_CREATE].",
+        "comment": "Every [WorldResult] except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [CMSG_CHAR_ENUM].",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm",
+        "start_position": 20
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_CHAR_CREATE",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 58
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "result",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "WorldResult"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "description": "Response to [CMSG_CHAR_CREATE].",
+        "comment": "Every [WorldResult] except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [CMSG_CHAR_ENUM].",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm",
+        "start_position": 26
       },
       "only_has_io_error": false,
       "features": [

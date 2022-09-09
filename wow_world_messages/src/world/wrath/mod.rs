@@ -40,6 +40,8 @@ pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;
 pub use smsg_auth_response::*;
+pub(crate) mod smsg_char_create;
+pub use smsg_char_create::*;
 pub(crate) mod smsg_char_enum;
 pub use smsg_char_enum::*;
 pub(crate) mod smsg_login_verify_world;
