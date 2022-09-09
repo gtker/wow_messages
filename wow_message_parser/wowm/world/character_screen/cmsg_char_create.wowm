@@ -1,18 +1,18 @@
-#tag_all versions "1.12";
 
 cmsg CMSG_CHAR_CREATE = 0x36 {
     CString name;
     Race race;
     Class class;
     Gender gender;
-    u8 skin;
+    u8 skin_color;
     u8 face;
-    u8 hairstyle;
-    u8 haircolor;
-    u8 facialhair;
+    u8 hair_style;
+    u8 hair_color;
+    u8 facial_hair;
     u8 outfit_id = 0;
 } {
     description = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
+    versions = "1";
 }
 
 test CMSG_CHAR_CREATE {
@@ -20,11 +20,11 @@ test CMSG_CHAR_CREATE {
     race = HUMAN;
     class = WARRIOR;
     gender = FEMALE;
-    skin = 0x08;
+    skin_color = 0x08;
     face = 0x00;
-    hairstyle = 0x0e;
-    haircolor = 0x02;
-    facialhair = 0x04;
+    hair_style = 0x0e;
+    hair_color = 0x02;
+    facial_hair = 0x04;
     outfit_id = 0x00;
 } [
     0x00, 0x16, /* size */
@@ -39,4 +39,38 @@ test CMSG_CHAR_CREATE {
     0x02, /* haircolor */
     0x04, /* facialhair */
     0x00, /* outfit_id */
-]
+] {
+    versions = "1";
+}
+
+cmsg CMSG_CHAR_CREATE = 0x36 {
+    CString name;
+    Race race;
+    Class class;
+    Gender gender;
+    u8 skin_color;
+    u8 face;
+    u8 hair_style;
+    u8 hair_color;
+    u8 facial_hair;
+    u8 outfit_id = 0;
+} {
+    description = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
+    versions = "2.4.3";
+}
+
+cmsg CMSG_CHAR_CREATE = 0x36 {
+    CString name;
+    Race race;
+    Class class;
+    Gender gender;
+    u8 skin_color;
+    u8 face;
+    u8 hair_style;
+    u8 hair_color;
+    u8 facial_hair;
+    u8 outfit_id = 0;
+} {
+    description = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
+    versions = "3.2 3.3";
+}

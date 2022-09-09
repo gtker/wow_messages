@@ -1,13 +1,13 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Class;
-use crate::world::wrath::Gender;
-use crate::world::wrath::Race;
+use crate::world::tbc::Class;
+use crate::world::tbc::Gender;
+use crate::world::tbc::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Sent after the client presses 'Create Character'. The client will then wait for `SMSG_CHAR_CREATE`.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:62`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L62):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:46`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L46):
 /// ```text
 /// cmsg CMSG_CHAR_CREATE = 0x0036 {
 ///     CString name;
@@ -137,8 +137,8 @@ impl crate::Message for CMSG_CHAR_CREATE {
     }
 
 }
-#[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHAR_CREATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_CHAR_CREATE {}
 
 impl CMSG_CHAR_CREATE {
     pub(crate) fn size(&self) -> usize {

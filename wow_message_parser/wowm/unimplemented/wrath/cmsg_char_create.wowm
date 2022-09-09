@@ -1,5 +1,0 @@
-#tag_all versions "3.3.5";
-
-cmsg CMSG_CHAR_CREATE = 0x036 {
-    unimplemented
-}

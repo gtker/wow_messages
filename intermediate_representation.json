@@ -57236,6 +57236,10 @@
           "usage": "used_but_not_in_if"
         },
         {
+          "name": "CMSG_CHAR_CREATE",
+          "usage": "used_but_not_in_if"
+        },
+        {
           "name": "Character",
           "usage": "used_but_not_in_if"
         },
@@ -57368,6 +57372,10 @@
         }
       },
       "objects_used_in": [
+        {
+          "name": "CMSG_CHAR_CREATE",
+          "usage": "used_but_not_in_if"
+        },
         {
           "name": "Character",
           "usage": "used_but_not_in_if"
@@ -59128,6 +59136,14 @@
         }
       },
       "objects_used_in": [
+        {
+          "name": "CMSG_CHAR_CREATE",
+          "usage": "used_but_not_in_if"
+        },
+        {
+          "name": "CMSG_CHAR_CREATE",
+          "usage": "used_but_not_in_if"
+        },
         {
           "name": "CMSG_CHAR_CREATE",
           "usage": "used_but_not_in_if"
@@ -68005,14 +68021,14 @@
         "type": "u8"
       },
       "tags": {
+        "comment": "Goblins seem to be present in DBCs from 0.5.5 and onward.",
         "version": {
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "major",
               "version": {
-                "major": 1,
-                "minor": 12
+                "major": 1
               }
             }
           ]
@@ -68209,11 +68225,29 @@
                 "minor": 4,
                 "patch": 3
               }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 3,
+                "minor": 0
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 3,
+                "minor": 1
+              }
             }
           ]
         }
       },
       "objects_used_in": [
+        {
+          "name": "CMSG_CHAR_CREATE",
+          "usage": "used_but_not_in_if"
+        },
         {
           "name": "Character",
           "usage": "used_but_not_in_if"
@@ -68221,7 +68255,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/race.wowm",
-        "start_position": 16
+        "start_position": 17
       },
       "features": [
         "Enum",
@@ -68410,11 +68444,17 @@
           "type": "world",
           "versions": [
             {
-              "type": "patch",
+              "type": "minor",
               "version": {
                 "major": 3,
-                "minor": 3,
-                "patch": 5
+                "minor": 2
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 3,
+                "minor": 3
               }
             }
           ]
@@ -68422,13 +68462,17 @@
       },
       "objects_used_in": [
         {
+          "name": "CMSG_CHAR_CREATE",
+          "usage": "used_but_not_in_if"
+        },
+        {
           "name": "Character",
           "usage": "used_but_not_in_if"
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/enums/race.wowm",
-        "start_position": 39
+        "start_position": 40
       },
       "features": [
         "Enum",
@@ -94279,7 +94323,7 @@
         {
           "type": "definition",
           "content": {
-            "name": "skin",
+            "name": "skin_color",
             "member_type": {
               "type": "integer",
               "content": {
@@ -94311,7 +94355,7 @@
         {
           "type": "definition",
           "content": {
-            "name": "hairstyle",
+            "name": "hair_style",
             "member_type": {
               "type": "integer",
               "content": {
@@ -94327,7 +94371,7 @@
         {
           "type": "definition",
           "content": {
-            "name": "haircolor",
+            "name": "hair_color",
             "member_type": {
               "type": "integer",
               "content": {
@@ -94343,7 +94387,7 @@
         {
           "type": "definition",
           "content": {
-            "name": "facialhair",
+            "name": "facial_hair",
             "member_type": {
               "type": "integer",
               "content": {
@@ -94382,10 +94426,9 @@
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "major",
               "version": {
-                "major": 1,
-                "minor": 12
+                "major": 1
               }
             }
           ]
@@ -94437,7 +94480,7 @@
               "tags": {}
             },
             {
-              "variable_name": "skin",
+              "variable_name": "skin_color",
               "value": {
                 "type": "number",
                 "content": {
@@ -94459,7 +94502,7 @@
               "tags": {}
             },
             {
-              "variable_name": "hairstyle",
+              "variable_name": "hair_style",
               "value": {
                 "type": "number",
                 "content": {
@@ -94470,7 +94513,7 @@
               "tags": {}
             },
             {
-              "variable_name": "haircolor",
+              "variable_name": "hair_color",
               "value": {
                 "type": "number",
                 "content": {
@@ -94481,7 +94524,7 @@
               "tags": {}
             },
             {
-              "variable_name": "facialhair",
+              "variable_name": "facial_hair",
               "value": {
                 "type": "number",
                 "content": {
@@ -94534,10 +94577,9 @@
               "type": "world",
               "versions": [
                 {
-                  "type": "minor",
+                  "type": "major",
                   "version": {
-                    "major": 1,
-                    "minor": 12
+                    "major": 1
                   }
                 }
               ]
@@ -94551,7 +94593,7 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm",
-        "start_position": 3
+        "start_position": 2
       },
       "only_has_io_error": false,
       "features": [
@@ -94574,19 +94616,24 @@
         {
           "type": "definition",
           "content": {
-            "name": "unimplemented",
+            "name": "name",
             "member_type": {
-              "type": "array",
+              "type": "cstring"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "race",
+            "member_type": {
+              "type": "identifier",
               "content": {
-                "inner": {
-                  "type": "integer",
-                  "content": {
-                    "type": "u8"
-                  }
-                },
-                "size": {
-                  "type": "endless"
-                }
+                "type_name": "Race"
               }
             },
             "constant_value": null,
@@ -94594,34 +94641,373 @@
             "used_in_if": false,
             "tags": {}
           }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "class",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "Class"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "gender",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "Gender"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "skin_color",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "face",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "hair_style",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "hair_color",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "facial_hair",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "outfit_id",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": {
+              "value": 0,
+              "original_string": "0"
+            },
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
         }
       ],
       "tags": {
+        "description": "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].",
         "version": {
           "type": "world",
           "versions": [
             {
               "type": "patch",
               "version": {
-                "major": 3,
-                "minor": 3,
-                "patch": 5
+                "major": 2,
+                "minor": 4,
+                "patch": 3
               }
             }
           ]
-        },
-        "unimplemented": "true"
+        }
       },
       "tests": [],
       "file_info": {
-        "file_name": "wow_message_parser/wowm/unimplemented/wrath/cmsg_char_create.wowm",
-        "start_position": 3
+        "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm",
+        "start_position": 46
       },
-      "only_has_io_error": true,
+      "only_has_io_error": false,
       "features": [
         "CMsg",
-        "EndlessArrays",
-        "SimpleArrays",
+        "ComplexBuiltInTypes",
+        "SubObjects",
+        "SimpleBuiltInTypes",
+        "ConstantValue",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_CHAR_CREATE",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 54
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "name",
+            "member_type": {
+              "type": "cstring"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "race",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "Race"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "class",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "Class"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "gender",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "Gender"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "skin_color",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "face",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "hair_style",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "hair_color",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "facial_hair",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "outfit_id",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": {
+              "value": 0,
+              "original_string": "0"
+            },
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "description": "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "minor",
+              "version": {
+                "major": 3,
+                "minor": 2
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 3,
+                "minor": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm",
+        "start_position": 62
+      },
+      "only_has_io_error": false,
+      "features": [
+        "CMsg",
+        "ComplexBuiltInTypes",
+        "SubObjects",
+        "SimpleBuiltInTypes",
+        "ConstantValue",
         "WorldVersion"
       ]
     },

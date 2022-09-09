@@ -36,6 +36,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [CMSG_CHAR_CREATE](cmsg_char_create.md)
+* [CMSG_CHAR_CREATE](cmsg_char_create.md)
 * [Character](character.md)
 * [Character](character.md)
 * [Friend](friend.md)
@@ -81,5 +82,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `DRUID` | 11 (0x0B) |  |  |
 
 Used in:
+* [CMSG_CHAR_CREATE](cmsg_char_create.md)
 * [Character](character.md)
 

@@ -10,7 +10,8 @@ enum Race : u8 {
     GOBLIN = 9;
 } {
     rust_base_type = "true";
-    versions = "1.12";
+    versions = "1";
+    comment = "Goblins seem to be present in DBCs from 0.5.5 and onward.";
 }
 
 enum Race : u8 {
@@ -33,7 +34,7 @@ enum Race : u8 {
     TUSKARR = 17;
     FOREST_TROLL = 18;
 } {
-    versions = "2.4.3";
+    versions = "2.4.3 3.0 3.1";
 }
 
 enum Race : u8 {
@@ -59,6 +60,6 @@ enum Race : u8 {
     NORTHREND_SKELETON = 20;
     ICE_TROLL = 21;
 } {
-    versions = "3.3.5";
+    versions = "3.2 3.3";
 }
 

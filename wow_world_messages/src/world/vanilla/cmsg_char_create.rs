@@ -7,18 +7,18 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::world::vanilla::SMSG_CHAR_CREATE).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L2):
 /// ```text
 /// cmsg CMSG_CHAR_CREATE = 0x0036 {
 ///     CString name;
 ///     Race race;
 ///     Class class;
 ///     Gender gender;
-///     u8 skin;
+///     u8 skin_color;
 ///     u8 face;
-///     u8 hairstyle;
-///     u8 haircolor;
-///     u8 facialhair;
+///     u8 hair_style;
+///     u8 hair_color;
+///     u8 facial_hair;
 ///     u8 outfit_id = 0;
 /// }
 /// ```
@@ -27,11 +27,11 @@ pub struct CMSG_CHAR_CREATE {
     pub race: Race,
     pub class: Class,
     pub gender: Gender,
-    pub skin: u8,
+    pub skin_color: u8,
     pub face: u8,
-    pub hairstyle: u8,
-    pub haircolor: u8,
-    pub facialhair: u8,
+    pub hair_style: u8,
+    pub hair_color: u8,
+    pub facial_hair: u8,
 }
 
 impl CMSG_CHAR_CREATE {
@@ -70,20 +70,20 @@ impl crate::Message for CMSG_CHAR_CREATE {
         // gender: Gender
         w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
 
-        // skin: u8
-        w.write_all(&self.skin.to_le_bytes())?;
+        // skin_color: u8
+        w.write_all(&self.skin_color.to_le_bytes())?;
 
         // face: u8
         w.write_all(&self.face.to_le_bytes())?;
 
-        // hairstyle: u8
-        w.write_all(&self.hairstyle.to_le_bytes())?;
+        // hair_style: u8
+        w.write_all(&self.hair_style.to_le_bytes())?;
 
-        // haircolor: u8
-        w.write_all(&self.haircolor.to_le_bytes())?;
+        // hair_color: u8
+        w.write_all(&self.hair_color.to_le_bytes())?;
 
-        // facialhair: u8
-        w.write_all(&self.facialhair.to_le_bytes())?;
+        // facial_hair: u8
+        w.write_all(&self.facial_hair.to_le_bytes())?;
 
         // outfit_id: u8
         w.write_all(&Self::OUTFIT_ID_VALUE.to_le_bytes())?;
@@ -104,20 +104,20 @@ impl crate::Message for CMSG_CHAR_CREATE {
         // gender: Gender
         let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;
 
-        // skin: u8
-        let skin = crate::util::read_u8_le(r)?;
+        // skin_color: u8
+        let skin_color = crate::util::read_u8_le(r)?;
 
         // face: u8
         let face = crate::util::read_u8_le(r)?;
 
-        // hairstyle: u8
-        let hairstyle = crate::util::read_u8_le(r)?;
+        // hair_style: u8
+        let hair_style = crate::util::read_u8_le(r)?;
 
-        // haircolor: u8
-        let haircolor = crate::util::read_u8_le(r)?;
+        // hair_color: u8
+        let hair_color = crate::util::read_u8_le(r)?;
 
-        // facialhair: u8
-        let facialhair = crate::util::read_u8_le(r)?;
+        // facial_hair: u8
+        let facial_hair = crate::util::read_u8_le(r)?;
 
         // outfit_id: u8
         let _outfit_id = crate::util::read_u8_le(r)?;
@@ -128,11 +128,11 @@ impl crate::Message for CMSG_CHAR_CREATE {
             race,
             class,
             gender,
-            skin,
+            skin_color,
             face,
-            hairstyle,
-            haircolor,
-            facialhair,
+            hair_style,
+            hair_color,
+            facial_hair,
         })
     }
 
@@ -146,11 +146,11 @@ impl CMSG_CHAR_CREATE {
         + 1 // race: Race
         + 1 // class: Class
         + 1 // gender: Gender
-        + 1 // skin: u8
+        + 1 // skin_color: u8
         + 1 // face: u8
-        + 1 // hairstyle: u8
-        + 1 // haircolor: u8
-        + 1 // facialhair: u8
+        + 1 // hair_style: u8
+        + 1 // hair_color: u8
+        + 1 // facial_hair: u8
         + 1 // outfit_id: u8
     }
 }
@@ -179,11 +179,11 @@ mod test {
             race: Race::Human,
             class: Class::Warrior,
             gender: Gender::Female,
-            skin: 0x8,
+            skin_color: 0x8,
             face: 0x0,
-            hairstyle: 0xE,
-            haircolor: 0x2,
-            facialhair: 0x4,
+            hair_style: 0xE,
+            hair_color: 0x2,
+            facial_hair: 0x4,
         };
 
         let header_size = 2 + 4;
@@ -197,11 +197,11 @@ mod test {
         assert_eq!(t.race, expected.race);
         assert_eq!(t.class, expected.class);
         assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.skin, expected.skin);
+        assert_eq!(t.skin_color, expected.skin_color);
         assert_eq!(t.face, expected.face);
-        assert_eq!(t.hairstyle, expected.hairstyle);
-        assert_eq!(t.haircolor, expected.haircolor);
-        assert_eq!(t.facialhair, expected.facialhair);
+        assert_eq!(t.hair_style, expected.hair_style);
+        assert_eq!(t.hair_color, expected.hair_color);
+        assert_eq!(t.facial_hair, expected.facial_hair);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -220,11 +220,11 @@ mod test {
             race: Race::Human,
             class: Class::Warrior,
             gender: Gender::Female,
-            skin: 0x8,
+            skin_color: 0x8,
             face: 0x0,
-            hairstyle: 0xE,
-            haircolor: 0x2,
-            facialhair: 0x4,
+            hair_style: 0xE,
+            hair_color: 0x2,
+            facial_hair: 0x4,
         };
 
         let header_size = 2 + 4;
@@ -238,11 +238,11 @@ mod test {
         assert_eq!(t.race, expected.race);
         assert_eq!(t.class, expected.class);
         assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.skin, expected.skin);
+        assert_eq!(t.skin_color, expected.skin_color);
         assert_eq!(t.face, expected.face);
-        assert_eq!(t.hairstyle, expected.hairstyle);
-        assert_eq!(t.haircolor, expected.haircolor);
-        assert_eq!(t.facialhair, expected.facialhair);
+        assert_eq!(t.hair_style, expected.hair_style);
+        assert_eq!(t.hair_color, expected.hair_color);
+        assert_eq!(t.facial_hair, expected.facial_hair);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -261,11 +261,11 @@ mod test {
             race: Race::Human,
             class: Class::Warrior,
             gender: Gender::Female,
-            skin: 0x8,
+            skin_color: 0x8,
             face: 0x0,
-            hairstyle: 0xE,
-            haircolor: 0x2,
-            facialhair: 0x4,
+            hair_style: 0xE,
+            hair_color: 0x2,
+            facial_hair: 0x4,
         };
 
         let header_size = 2 + 4;
@@ -279,11 +279,11 @@ mod test {
         assert_eq!(t.race, expected.race);
         assert_eq!(t.class, expected.class);
         assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.skin, expected.skin);
+        assert_eq!(t.skin_color, expected.skin_color);
         assert_eq!(t.face, expected.face);
-        assert_eq!(t.hairstyle, expected.hairstyle);
-        assert_eq!(t.haircolor, expected.haircolor);
-        assert_eq!(t.facialhair, expected.facialhair);
+        assert_eq!(t.hair_style, expected.hair_style);
+        assert_eq!(t.hair_color, expected.hair_color);
+        assert_eq!(t.facial_hair, expected.facial_hair);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
