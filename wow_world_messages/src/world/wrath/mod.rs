@@ -14,6 +14,8 @@ pub(crate) mod cmsg_char_delete;
 pub use cmsg_char_delete::*;
 pub(crate) mod cmsg_char_enum;
 pub use cmsg_char_enum::*;
+pub(crate) mod cmsg_char_rename;
+pub use cmsg_char_rename::*;
 pub(crate) mod cmsg_player_login;
 pub use cmsg_player_login::*;
 pub(crate) mod cmsg_realm_split;
