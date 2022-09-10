@@ -6,7 +6,7 @@ use crate::tbc::{Power};
 use crate::tbc::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdatePlayer, UpdateUnit};
 
 impl UpdateItem {
-    pub fn set_object_FIELD_GUID(mut self, v: Guid) -> Self {
+    pub fn set_object_GUID(mut self, v: Guid) -> Self {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
@@ -14,25 +14,25 @@ impl UpdateItem {
         self
     }
 
-    pub fn set_object_FIELD_TYPE(mut self, v: i32) -> Self {
+    pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_ENTRY(mut self, v: i32) -> Self {
+    pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_SCALE_X(mut self, v: f32) -> Self {
+    pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_item_FIELD_OWNER(mut self, v: Guid) -> Self {
+    pub fn set_item_OWNER(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -40,7 +40,7 @@ impl UpdateItem {
         self
     }
 
-    pub fn set_item_FIELD_CONTAINED(mut self, v: Guid) -> Self {
+    pub fn set_item_CONTAINED(mut self, v: Guid) -> Self {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
@@ -48,7 +48,7 @@ impl UpdateItem {
         self
     }
 
-    pub fn set_item_FIELD_CREATOR(mut self, v: Guid) -> Self {
+    pub fn set_item_CREATOR(mut self, v: Guid) -> Self {
         self.header_set(10);
         self.header_set(11);
         self.values.insert(10, v.guid() as u32);
@@ -56,7 +56,7 @@ impl UpdateItem {
         self
     }
 
-    pub fn set_item_FIELD_GIFTCREATOR(mut self, v: Guid) -> Self {
+    pub fn set_item_GIFTCREATOR(mut self, v: Guid) -> Self {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
@@ -64,67 +64,67 @@ impl UpdateItem {
         self
     }
 
-    pub fn set_item_FIELD_STACK_COUNT(mut self, v: i32) -> Self {
+    pub fn set_item_STACK_COUNT(mut self, v: i32) -> Self {
         self.header_set(14);
         self.values.insert(14, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_DURATION(mut self, v: i32) -> Self {
+    pub fn set_item_DURATION(mut self, v: i32) -> Self {
         self.header_set(15);
         self.values.insert(15, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_SPELL_CHARGES(mut self, v: i32) -> Self {
+    pub fn set_item_SPELL_CHARGES(mut self, v: i32) -> Self {
         self.header_set(16);
         self.values.insert(16, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_FLAGS(mut self, v: i32) -> Self {
+    pub fn set_item_FLAGS(mut self, v: i32) -> Self {
         self.header_set(21);
         self.values.insert(21, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_ENCHANTMENT_1_1(mut self, v: i32) -> Self {
+    pub fn set_item_ENCHANTMENT_1_1(mut self, v: i32) -> Self {
         self.header_set(22);
         self.values.insert(22, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_PROPERTY_SEED(mut self, v: i32) -> Self {
+    pub fn set_item_PROPERTY_SEED(mut self, v: i32) -> Self {
         self.header_set(55);
         self.values.insert(55, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
+    pub fn set_item_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
         self.header_set(56);
         self.values.insert(56, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_ITEM_TEXT_ID(mut self, v: i32) -> Self {
+    pub fn set_item_ITEM_TEXT_ID(mut self, v: i32) -> Self {
         self.header_set(57);
         self.values.insert(57, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_DURABILITY(mut self, v: i32) -> Self {
+    pub fn set_item_DURABILITY(mut self, v: i32) -> Self {
         self.header_set(58);
         self.values.insert(58, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_MAXDURABILITY(mut self, v: i32) -> Self {
+    pub fn set_item_MAXDURABILITY(mut self, v: i32) -> Self {
         self.header_set(59);
         self.values.insert(59, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_CREATED_BY(mut self, v: Guid) -> Self {
+    pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -135,7 +135,7 @@ impl UpdateItem {
 }
 
 impl UpdateContainer {
-    pub fn set_object_FIELD_GUID(mut self, v: Guid) -> Self {
+    pub fn set_object_GUID(mut self, v: Guid) -> Self {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
@@ -143,25 +143,25 @@ impl UpdateContainer {
         self
     }
 
-    pub fn set_object_FIELD_TYPE(mut self, v: i32) -> Self {
+    pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_ENTRY(mut self, v: i32) -> Self {
+    pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_SCALE_X(mut self, v: f32) -> Self {
+    pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_item_FIELD_OWNER(mut self, v: Guid) -> Self {
+    pub fn set_item_OWNER(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -169,7 +169,7 @@ impl UpdateContainer {
         self
     }
 
-    pub fn set_item_FIELD_CONTAINED(mut self, v: Guid) -> Self {
+    pub fn set_item_CONTAINED(mut self, v: Guid) -> Self {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
@@ -177,7 +177,7 @@ impl UpdateContainer {
         self
     }
 
-    pub fn set_item_FIELD_CREATOR(mut self, v: Guid) -> Self {
+    pub fn set_item_CREATOR(mut self, v: Guid) -> Self {
         self.header_set(10);
         self.header_set(11);
         self.values.insert(10, v.guid() as u32);
@@ -185,7 +185,7 @@ impl UpdateContainer {
         self
     }
 
-    pub fn set_item_FIELD_GIFTCREATOR(mut self, v: Guid) -> Self {
+    pub fn set_item_GIFTCREATOR(mut self, v: Guid) -> Self {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
@@ -193,73 +193,73 @@ impl UpdateContainer {
         self
     }
 
-    pub fn set_item_FIELD_STACK_COUNT(mut self, v: i32) -> Self {
+    pub fn set_item_STACK_COUNT(mut self, v: i32) -> Self {
         self.header_set(14);
         self.values.insert(14, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_DURATION(mut self, v: i32) -> Self {
+    pub fn set_item_DURATION(mut self, v: i32) -> Self {
         self.header_set(15);
         self.values.insert(15, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_SPELL_CHARGES(mut self, v: i32) -> Self {
+    pub fn set_item_SPELL_CHARGES(mut self, v: i32) -> Self {
         self.header_set(16);
         self.values.insert(16, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_FLAGS(mut self, v: i32) -> Self {
+    pub fn set_item_FLAGS(mut self, v: i32) -> Self {
         self.header_set(21);
         self.values.insert(21, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_ENCHANTMENT_1_1(mut self, v: i32) -> Self {
+    pub fn set_item_ENCHANTMENT_1_1(mut self, v: i32) -> Self {
         self.header_set(22);
         self.values.insert(22, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_PROPERTY_SEED(mut self, v: i32) -> Self {
+    pub fn set_item_PROPERTY_SEED(mut self, v: i32) -> Self {
         self.header_set(55);
         self.values.insert(55, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
+    pub fn set_item_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
         self.header_set(56);
         self.values.insert(56, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_ITEM_TEXT_ID(mut self, v: i32) -> Self {
+    pub fn set_item_ITEM_TEXT_ID(mut self, v: i32) -> Self {
         self.header_set(57);
         self.values.insert(57, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_DURABILITY(mut self, v: i32) -> Self {
+    pub fn set_item_DURABILITY(mut self, v: i32) -> Self {
         self.header_set(58);
         self.values.insert(58, v as u32);
         self
     }
 
-    pub fn set_item_FIELD_MAXDURABILITY(mut self, v: i32) -> Self {
+    pub fn set_item_MAXDURABILITY(mut self, v: i32) -> Self {
         self.header_set(59);
         self.values.insert(59, v as u32);
         self
     }
 
-    pub fn set_container_FIELD_NUM_SLOTS(mut self, v: i32) -> Self {
+    pub fn set_container_NUM_SLOTS(mut self, v: i32) -> Self {
         self.header_set(60);
         self.values.insert(60, v as u32);
         self
     }
 
-    pub fn set_container_FIELD_SLOT_1(mut self, v: Guid) -> Self {
+    pub fn set_container_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(62);
         self.header_set(63);
         self.values.insert(62, v.guid() as u32);
@@ -267,7 +267,7 @@ impl UpdateContainer {
         self
     }
 
-    pub fn set_object_FIELD_CREATED_BY(mut self, v: Guid) -> Self {
+    pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -278,7 +278,7 @@ impl UpdateContainer {
 }
 
 impl UpdateUnit {
-    pub fn set_object_FIELD_GUID(mut self, v: Guid) -> Self {
+    pub fn set_object_GUID(mut self, v: Guid) -> Self {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
@@ -286,25 +286,25 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_object_FIELD_TYPE(mut self, v: i32) -> Self {
+    pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_ENTRY(mut self, v: i32) -> Self {
+    pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_SCALE_X(mut self, v: f32) -> Self {
+    pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_CHARM(mut self, v: Guid) -> Self {
+    pub fn set_unit_CHARM(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -312,7 +312,7 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_SUMMON(mut self, v: Guid) -> Self {
+    pub fn set_unit_SUMMON(mut self, v: Guid) -> Self {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
@@ -320,7 +320,7 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_CHARMEDBY(mut self, v: Guid) -> Self {
+    pub fn set_unit_CHARMEDBY(mut self, v: Guid) -> Self {
         self.header_set(10);
         self.header_set(11);
         self.values.insert(10, v.guid() as u32);
@@ -328,7 +328,7 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_SUMMONEDBY(mut self, v: Guid) -> Self {
+    pub fn set_unit_SUMMONEDBY(mut self, v: Guid) -> Self {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
@@ -336,7 +336,7 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_CREATEDBY(mut self, v: Guid) -> Self {
+    pub fn set_unit_CREATEDBY(mut self, v: Guid) -> Self {
         self.header_set(14);
         self.header_set(15);
         self.values.insert(14, v.guid() as u32);
@@ -344,7 +344,7 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_TARGET(mut self, v: Guid) -> Self {
+    pub fn set_unit_TARGET(mut self, v: Guid) -> Self {
         self.header_set(16);
         self.header_set(17);
         self.values.insert(16, v.guid() as u32);
@@ -352,7 +352,7 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_PERSUADED(mut self, v: Guid) -> Self {
+    pub fn set_unit_PERSUADED(mut self, v: Guid) -> Self {
         self.header_set(18);
         self.header_set(19);
         self.values.insert(18, v.guid() as u32);
@@ -360,7 +360,7 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_CHANNEL_OBJECT(mut self, v: Guid) -> Self {
+    pub fn set_unit_CHANNEL_OBJECT(mut self, v: Guid) -> Self {
         self.header_set(20);
         self.header_set(21);
         self.values.insert(20, v.guid() as u32);
@@ -368,91 +368,91 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_HEALTH(mut self, v: i32) -> Self {
+    pub fn set_unit_HEALTH(mut self, v: i32) -> Self {
         self.header_set(22);
         self.values.insert(22, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER1(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER1(mut self, v: i32) -> Self {
         self.header_set(23);
         self.values.insert(23, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER2(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER2(mut self, v: i32) -> Self {
         self.header_set(24);
         self.values.insert(24, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER3(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER3(mut self, v: i32) -> Self {
         self.header_set(25);
         self.values.insert(25, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER4(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER4(mut self, v: i32) -> Self {
         self.header_set(26);
         self.values.insert(26, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER5(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER5(mut self, v: i32) -> Self {
         self.header_set(27);
         self.values.insert(27, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXHEALTH(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXHEALTH(mut self, v: i32) -> Self {
         self.header_set(28);
         self.values.insert(28, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER1(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER1(mut self, v: i32) -> Self {
         self.header_set(29);
         self.values.insert(29, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER2(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER2(mut self, v: i32) -> Self {
         self.header_set(30);
         self.values.insert(30, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER3(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER3(mut self, v: i32) -> Self {
         self.header_set(31);
         self.values.insert(31, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER4(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER4(mut self, v: i32) -> Self {
         self.header_set(32);
         self.values.insert(32, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER5(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER5(mut self, v: i32) -> Self {
         self.header_set(33);
         self.values.insert(33, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_LEVEL(mut self, v: i32) -> Self {
+    pub fn set_unit_LEVEL(mut self, v: i32) -> Self {
         self.header_set(34);
         self.values.insert(34, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_FACTIONTEMPLATE(mut self, v: i32) -> Self {
+    pub fn set_unit_FACTIONTEMPLATE(mut self, v: i32) -> Self {
         self.header_set(35);
         self.values.insert(35, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
+    pub fn set_unit_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
         self.header_set(36);
         self.values.insert(36, u32::from_le_bytes([race.as_int(), class.as_int(), gender.as_int(), power.as_int()]));
         self
@@ -470,139 +470,139 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_FLAGS(mut self, v: i32) -> Self {
+    pub fn set_unit_FLAGS(mut self, v: i32) -> Self {
         self.header_set(46);
         self.values.insert(46, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_FLAGS_2(mut self, v: i32) -> Self {
+    pub fn set_unit_FLAGS_2(mut self, v: i32) -> Self {
         self.header_set(47);
         self.values.insert(47, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_AURA(mut self, v: i32) -> Self {
+    pub fn set_unit_AURA(mut self, v: i32) -> Self {
         self.header_set(48);
         self.values.insert(48, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_AURAFLAGS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_AURAFLAGS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(104);
         self.values.insert(104, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_AURALEVELS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_AURALEVELS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(118);
         self.values.insert(118, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_AURAAPPLICATIONS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_AURAAPPLICATIONS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(132);
         self.values.insert(132, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_AURASTATE(mut self, v: i32) -> Self {
+    pub fn set_unit_AURASTATE(mut self, v: i32) -> Self {
         self.header_set(146);
         self.values.insert(146, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BASEATTACKTIME(mut self, v: i32) -> Self {
+    pub fn set_unit_BASEATTACKTIME(mut self, v: i32) -> Self {
         self.header_set(147);
         self.values.insert(147, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_RANGEDATTACKTIME(mut self, v: i32) -> Self {
+    pub fn set_unit_RANGEDATTACKTIME(mut self, v: i32) -> Self {
         self.header_set(149);
         self.values.insert(149, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BOUNDINGRADIUS(mut self, v: f32) -> Self {
+    pub fn set_unit_BOUNDINGRADIUS(mut self, v: f32) -> Self {
         self.header_set(150);
         self.values.insert(150, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_COMBATREACH(mut self, v: f32) -> Self {
+    pub fn set_unit_COMBATREACH(mut self, v: f32) -> Self {
         self.header_set(151);
         self.values.insert(151, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_DISPLAYID(mut self, v: i32) -> Self {
+    pub fn set_unit_DISPLAYID(mut self, v: i32) -> Self {
         self.header_set(152);
         self.values.insert(152, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_NATIVEDISPLAYID(mut self, v: i32) -> Self {
+    pub fn set_unit_NATIVEDISPLAYID(mut self, v: i32) -> Self {
         self.header_set(153);
         self.values.insert(153, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MOUNTDISPLAYID(mut self, v: i32) -> Self {
+    pub fn set_unit_MOUNTDISPLAYID(mut self, v: i32) -> Self {
         self.header_set(154);
         self.values.insert(154, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MINDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MINDAMAGE(mut self, v: f32) -> Self {
         self.header_set(155);
         self.values.insert(155, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MAXDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MAXDAMAGE(mut self, v: f32) -> Self {
         self.header_set(156);
         self.values.insert(156, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MINOFFHANDDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MINOFFHANDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(157);
         self.values.insert(157, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MAXOFFHANDDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MAXOFFHANDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(158);
         self.values.insert(158, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(159);
         self.values.insert(159, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_PETNUMBER(mut self, v: i32) -> Self {
+    pub fn set_unit_PETNUMBER(mut self, v: i32) -> Self {
         self.header_set(160);
         self.values.insert(160, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
+    pub fn set_unit_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
         self.header_set(161);
         self.values.insert(161, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_PETEXPERIENCE(mut self, v: i32) -> Self {
+    pub fn set_unit_PETEXPERIENCE(mut self, v: i32) -> Self {
         self.header_set(162);
         self.values.insert(162, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
+    pub fn set_unit_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
         self.header_set(163);
         self.values.insert(163, v as u32);
         self
@@ -650,163 +650,163 @@ impl UpdateUnit {
         self
     }
 
-    pub fn set_unit_FIELD_STRENGTH(mut self, v: i32) -> Self {
+    pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
         self.header_set(171);
         self.values.insert(171, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_AGILITY(mut self, v: i32) -> Self {
+    pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
         self.header_set(172);
         self.values.insert(172, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_STAMINA(mut self, v: i32) -> Self {
+    pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
         self.header_set(173);
         self.values.insert(173, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_INTELLECT(mut self, v: i32) -> Self {
+    pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
         self.header_set(174);
         self.values.insert(174, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_SPIRIT(mut self, v: i32) -> Self {
+    pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
         self.header_set(175);
         self.values.insert(175, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POSSTAT1(mut self, v: i32) -> Self {
+    pub fn set_unit_POSSTAT1(mut self, v: i32) -> Self {
         self.header_set(177);
         self.values.insert(177, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POSSTAT2(mut self, v: i32) -> Self {
+    pub fn set_unit_POSSTAT2(mut self, v: i32) -> Self {
         self.header_set(178);
         self.values.insert(178, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POSSTAT3(mut self, v: i32) -> Self {
+    pub fn set_unit_POSSTAT3(mut self, v: i32) -> Self {
         self.header_set(179);
         self.values.insert(179, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_NEGSTAT1(mut self, v: i32) -> Self {
+    pub fn set_unit_NEGSTAT1(mut self, v: i32) -> Self {
         self.header_set(182);
         self.values.insert(182, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_NEGSTAT2(mut self, v: i32) -> Self {
+    pub fn set_unit_NEGSTAT2(mut self, v: i32) -> Self {
         self.header_set(183);
         self.values.insert(183, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_NEGSTAT3(mut self, v: i32) -> Self {
+    pub fn set_unit_NEGSTAT3(mut self, v: i32) -> Self {
         self.header_set(184);
         self.values.insert(184, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_RESISTANCES(mut self, v: i32) -> Self {
+    pub fn set_unit_RESISTANCES(mut self, v: i32) -> Self {
         self.header_set(186);
         self.values.insert(186, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BASE_MANA(mut self, v: i32) -> Self {
+    pub fn set_unit_BASE_MANA(mut self, v: i32) -> Self {
         self.header_set(207);
         self.values.insert(207, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BASE_HEALTH(mut self, v: i32) -> Self {
+    pub fn set_unit_BASE_HEALTH(mut self, v: i32) -> Self {
         self.header_set(208);
         self.values.insert(208, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(209);
         self.values.insert(209, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_ATTACK_POWER(mut self, v: i32) -> Self {
+    pub fn set_unit_ATTACK_POWER(mut self, v: i32) -> Self {
         self.header_set(210);
         self.values.insert(210, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
         self.header_set(211);
         self.values.insert(211, v);
         self
     }
 
-    pub fn set_unit_FIELD_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
+    pub fn set_unit_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
         self.header_set(212);
         self.values.insert(212, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
         self.header_set(213);
         self.values.insert(213, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
         self.header_set(214);
         self.values.insert(214, v);
         self
     }
 
-    pub fn set_unit_FIELD_RANGED_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
         self.header_set(215);
         self.values.insert(215, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MINRANGEDDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MINRANGEDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(216);
         self.values.insert(216, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MAXRANGEDDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MAXRANGEDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(217);
         self.values.insert(217, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
         self.header_set(218);
         self.values.insert(218, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER_COST_MULTIPLIER(mut self, v: f32) -> Self {
+    pub fn set_unit_POWER_COST_MULTIPLIER(mut self, v: f32) -> Self {
         self.header_set(225);
         self.values.insert(225, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MAXHEALTHMODIFIER(mut self, v: f32) -> Self {
+    pub fn set_unit_MAXHEALTHMODIFIER(mut self, v: f32) -> Self {
         self.header_set(232);
         self.values.insert(232, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_object_FIELD_CREATED_BY(mut self, v: Guid) -> Self {
+    pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -817,7 +817,7 @@ impl UpdateUnit {
 }
 
 impl UpdatePlayer {
-    pub fn set_object_FIELD_GUID(mut self, v: Guid) -> Self {
+    pub fn set_object_GUID(mut self, v: Guid) -> Self {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
@@ -825,25 +825,25 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_object_FIELD_TYPE(mut self, v: i32) -> Self {
+    pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_ENTRY(mut self, v: i32) -> Self {
+    pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_SCALE_X(mut self, v: f32) -> Self {
+    pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_CHARM(mut self, v: Guid) -> Self {
+    pub fn set_unit_CHARM(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -851,7 +851,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_SUMMON(mut self, v: Guid) -> Self {
+    pub fn set_unit_SUMMON(mut self, v: Guid) -> Self {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
@@ -859,7 +859,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_CHARMEDBY(mut self, v: Guid) -> Self {
+    pub fn set_unit_CHARMEDBY(mut self, v: Guid) -> Self {
         self.header_set(10);
         self.header_set(11);
         self.values.insert(10, v.guid() as u32);
@@ -867,7 +867,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_SUMMONEDBY(mut self, v: Guid) -> Self {
+    pub fn set_unit_SUMMONEDBY(mut self, v: Guid) -> Self {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
@@ -875,7 +875,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_CREATEDBY(mut self, v: Guid) -> Self {
+    pub fn set_unit_CREATEDBY(mut self, v: Guid) -> Self {
         self.header_set(14);
         self.header_set(15);
         self.values.insert(14, v.guid() as u32);
@@ -883,7 +883,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_TARGET(mut self, v: Guid) -> Self {
+    pub fn set_unit_TARGET(mut self, v: Guid) -> Self {
         self.header_set(16);
         self.header_set(17);
         self.values.insert(16, v.guid() as u32);
@@ -891,7 +891,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_PERSUADED(mut self, v: Guid) -> Self {
+    pub fn set_unit_PERSUADED(mut self, v: Guid) -> Self {
         self.header_set(18);
         self.header_set(19);
         self.values.insert(18, v.guid() as u32);
@@ -899,7 +899,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_CHANNEL_OBJECT(mut self, v: Guid) -> Self {
+    pub fn set_unit_CHANNEL_OBJECT(mut self, v: Guid) -> Self {
         self.header_set(20);
         self.header_set(21);
         self.values.insert(20, v.guid() as u32);
@@ -907,91 +907,91 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_HEALTH(mut self, v: i32) -> Self {
+    pub fn set_unit_HEALTH(mut self, v: i32) -> Self {
         self.header_set(22);
         self.values.insert(22, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER1(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER1(mut self, v: i32) -> Self {
         self.header_set(23);
         self.values.insert(23, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER2(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER2(mut self, v: i32) -> Self {
         self.header_set(24);
         self.values.insert(24, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER3(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER3(mut self, v: i32) -> Self {
         self.header_set(25);
         self.values.insert(25, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER4(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER4(mut self, v: i32) -> Self {
         self.header_set(26);
         self.values.insert(26, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER5(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER5(mut self, v: i32) -> Self {
         self.header_set(27);
         self.values.insert(27, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXHEALTH(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXHEALTH(mut self, v: i32) -> Self {
         self.header_set(28);
         self.values.insert(28, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER1(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER1(mut self, v: i32) -> Self {
         self.header_set(29);
         self.values.insert(29, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER2(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER2(mut self, v: i32) -> Self {
         self.header_set(30);
         self.values.insert(30, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER3(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER3(mut self, v: i32) -> Self {
         self.header_set(31);
         self.values.insert(31, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER4(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER4(mut self, v: i32) -> Self {
         self.header_set(32);
         self.values.insert(32, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MAXPOWER5(mut self, v: i32) -> Self {
+    pub fn set_unit_MAXPOWER5(mut self, v: i32) -> Self {
         self.header_set(33);
         self.values.insert(33, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_LEVEL(mut self, v: i32) -> Self {
+    pub fn set_unit_LEVEL(mut self, v: i32) -> Self {
         self.header_set(34);
         self.values.insert(34, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_FACTIONTEMPLATE(mut self, v: i32) -> Self {
+    pub fn set_unit_FACTIONTEMPLATE(mut self, v: i32) -> Self {
         self.header_set(35);
         self.values.insert(35, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
+    pub fn set_unit_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
         self.header_set(36);
         self.values.insert(36, u32::from_le_bytes([race.as_int(), class.as_int(), gender.as_int(), power.as_int()]));
         self
@@ -1009,139 +1009,139 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_FLAGS(mut self, v: i32) -> Self {
+    pub fn set_unit_FLAGS(mut self, v: i32) -> Self {
         self.header_set(46);
         self.values.insert(46, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_FLAGS_2(mut self, v: i32) -> Self {
+    pub fn set_unit_FLAGS_2(mut self, v: i32) -> Self {
         self.header_set(47);
         self.values.insert(47, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_AURA(mut self, v: i32) -> Self {
+    pub fn set_unit_AURA(mut self, v: i32) -> Self {
         self.header_set(48);
         self.values.insert(48, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_AURAFLAGS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_AURAFLAGS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(104);
         self.values.insert(104, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_AURALEVELS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_AURALEVELS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(118);
         self.values.insert(118, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_AURAAPPLICATIONS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_AURAAPPLICATIONS(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(132);
         self.values.insert(132, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_AURASTATE(mut self, v: i32) -> Self {
+    pub fn set_unit_AURASTATE(mut self, v: i32) -> Self {
         self.header_set(146);
         self.values.insert(146, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BASEATTACKTIME(mut self, v: i32) -> Self {
+    pub fn set_unit_BASEATTACKTIME(mut self, v: i32) -> Self {
         self.header_set(147);
         self.values.insert(147, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_RANGEDATTACKTIME(mut self, v: i32) -> Self {
+    pub fn set_unit_RANGEDATTACKTIME(mut self, v: i32) -> Self {
         self.header_set(149);
         self.values.insert(149, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BOUNDINGRADIUS(mut self, v: f32) -> Self {
+    pub fn set_unit_BOUNDINGRADIUS(mut self, v: f32) -> Self {
         self.header_set(150);
         self.values.insert(150, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_COMBATREACH(mut self, v: f32) -> Self {
+    pub fn set_unit_COMBATREACH(mut self, v: f32) -> Self {
         self.header_set(151);
         self.values.insert(151, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_DISPLAYID(mut self, v: i32) -> Self {
+    pub fn set_unit_DISPLAYID(mut self, v: i32) -> Self {
         self.header_set(152);
         self.values.insert(152, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_NATIVEDISPLAYID(mut self, v: i32) -> Self {
+    pub fn set_unit_NATIVEDISPLAYID(mut self, v: i32) -> Self {
         self.header_set(153);
         self.values.insert(153, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MOUNTDISPLAYID(mut self, v: i32) -> Self {
+    pub fn set_unit_MOUNTDISPLAYID(mut self, v: i32) -> Self {
         self.header_set(154);
         self.values.insert(154, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_MINDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MINDAMAGE(mut self, v: f32) -> Self {
         self.header_set(155);
         self.values.insert(155, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MAXDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MAXDAMAGE(mut self, v: f32) -> Self {
         self.header_set(156);
         self.values.insert(156, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MINOFFHANDDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MINOFFHANDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(157);
         self.values.insert(157, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MAXOFFHANDDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MAXOFFHANDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(158);
         self.values.insert(158, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(159);
         self.values.insert(159, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_PETNUMBER(mut self, v: i32) -> Self {
+    pub fn set_unit_PETNUMBER(mut self, v: i32) -> Self {
         self.header_set(160);
         self.values.insert(160, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
+    pub fn set_unit_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
         self.header_set(161);
         self.values.insert(161, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_PETEXPERIENCE(mut self, v: i32) -> Self {
+    pub fn set_unit_PETEXPERIENCE(mut self, v: i32) -> Self {
         self.header_set(162);
         self.values.insert(162, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
+    pub fn set_unit_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
         self.header_set(163);
         self.values.insert(163, v as u32);
         self
@@ -1189,193 +1189,193 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_unit_FIELD_STRENGTH(mut self, v: i32) -> Self {
+    pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
         self.header_set(171);
         self.values.insert(171, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_AGILITY(mut self, v: i32) -> Self {
+    pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
         self.header_set(172);
         self.values.insert(172, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_STAMINA(mut self, v: i32) -> Self {
+    pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
         self.header_set(173);
         self.values.insert(173, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_INTELLECT(mut self, v: i32) -> Self {
+    pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
         self.header_set(174);
         self.values.insert(174, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_SPIRIT(mut self, v: i32) -> Self {
+    pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
         self.header_set(175);
         self.values.insert(175, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_POSSTAT0(mut self, v: i32) -> Self {
+    pub fn set_player_POSSTAT0(mut self, v: i32) -> Self {
         self.header_set(176);
         self.values.insert(176, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POSSTAT1(mut self, v: i32) -> Self {
+    pub fn set_unit_POSSTAT1(mut self, v: i32) -> Self {
         self.header_set(177);
         self.values.insert(177, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POSSTAT2(mut self, v: i32) -> Self {
+    pub fn set_unit_POSSTAT2(mut self, v: i32) -> Self {
         self.header_set(178);
         self.values.insert(178, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POSSTAT3(mut self, v: i32) -> Self {
+    pub fn set_unit_POSSTAT3(mut self, v: i32) -> Self {
         self.header_set(179);
         self.values.insert(179, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_POSSTAT4(mut self, v: i32) -> Self {
+    pub fn set_player_POSSTAT4(mut self, v: i32) -> Self {
         self.header_set(180);
         self.values.insert(180, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_NEGSTAT0(mut self, v: i32) -> Self {
+    pub fn set_player_NEGSTAT0(mut self, v: i32) -> Self {
         self.header_set(181);
         self.values.insert(181, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_NEGSTAT1(mut self, v: i32) -> Self {
+    pub fn set_unit_NEGSTAT1(mut self, v: i32) -> Self {
         self.header_set(182);
         self.values.insert(182, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_NEGSTAT2(mut self, v: i32) -> Self {
+    pub fn set_unit_NEGSTAT2(mut self, v: i32) -> Self {
         self.header_set(183);
         self.values.insert(183, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_NEGSTAT3(mut self, v: i32) -> Self {
+    pub fn set_unit_NEGSTAT3(mut self, v: i32) -> Self {
         self.header_set(184);
         self.values.insert(184, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_NEGSTAT4(mut self, v: i32) -> Self {
+    pub fn set_player_NEGSTAT4(mut self, v: i32) -> Self {
         self.header_set(185);
         self.values.insert(185, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_RESISTANCES(mut self, v: i32) -> Self {
+    pub fn set_unit_RESISTANCES(mut self, v: i32) -> Self {
         self.header_set(186);
         self.values.insert(186, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_RESISTANCEBUFFMODSPOSITIVE(mut self, v: i32) -> Self {
+    pub fn set_player_RESISTANCEBUFFMODSPOSITIVE(mut self, v: i32) -> Self {
         self.header_set(193);
         self.values.insert(193, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_RESISTANCEBUFFMODSNEGATIVE(mut self, v: i32) -> Self {
+    pub fn set_player_RESISTANCEBUFFMODSNEGATIVE(mut self, v: i32) -> Self {
         self.header_set(200);
         self.values.insert(200, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BASE_MANA(mut self, v: i32) -> Self {
+    pub fn set_unit_BASE_MANA(mut self, v: i32) -> Self {
         self.header_set(207);
         self.values.insert(207, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BASE_HEALTH(mut self, v: i32) -> Self {
+    pub fn set_unit_BASE_HEALTH(mut self, v: i32) -> Self {
         self.header_set(208);
         self.values.insert(208, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(209);
         self.values.insert(209, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_unit_FIELD_ATTACK_POWER(mut self, v: i32) -> Self {
+    pub fn set_unit_ATTACK_POWER(mut self, v: i32) -> Self {
         self.header_set(210);
         self.values.insert(210, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
         self.header_set(211);
         self.values.insert(211, v);
         self
     }
 
-    pub fn set_unit_FIELD_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
+    pub fn set_unit_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
         self.header_set(212);
         self.values.insert(212, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
         self.header_set(213);
         self.values.insert(213, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
         self.header_set(214);
         self.values.insert(214, v);
         self
     }
 
-    pub fn set_unit_FIELD_RANGED_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
         self.header_set(215);
         self.values.insert(215, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MINRANGEDDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MINRANGEDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(216);
         self.values.insert(216, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MAXRANGEDDAMAGE(mut self, v: f32) -> Self {
+    pub fn set_unit_MAXRANGEDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(217);
         self.values.insert(217, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
+    pub fn set_unit_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
         self.header_set(218);
         self.values.insert(218, v as u32);
         self
     }
 
-    pub fn set_unit_FIELD_POWER_COST_MULTIPLIER(mut self, v: f32) -> Self {
+    pub fn set_unit_POWER_COST_MULTIPLIER(mut self, v: f32) -> Self {
         self.header_set(225);
         self.values.insert(225, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_unit_FIELD_MAXHEALTHMODIFIER(mut self, v: f32) -> Self {
+    pub fn set_unit_MAXHEALTHMODIFIER(mut self, v: f32) -> Self {
         self.header_set(232);
         self.values.insert(232, u32::from_le_bytes(v.to_le_bytes()));
         self
@@ -1407,7 +1407,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_player_FIELD_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(239);
         self.values.insert(239, u32::from_le_bytes([a, b, c, d]));
         self
@@ -2423,7 +2423,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_INV_SLOT_HEAD(mut self, v: Guid) -> Self {
+    pub fn set_player_INV_SLOT_HEAD(mut self, v: Guid) -> Self {
         self.header_set(650);
         self.header_set(651);
         self.values.insert(650, v.guid() as u32);
@@ -2431,7 +2431,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_PACK_SLOT_1(mut self, v: Guid) -> Self {
+    pub fn set_player_PACK_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(696);
         self.header_set(697);
         self.values.insert(696, v.guid() as u32);
@@ -2439,7 +2439,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_BANK_SLOT_1(mut self, v: Guid) -> Self {
+    pub fn set_player_BANK_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(728);
         self.header_set(729);
         self.values.insert(728, v.guid() as u32);
@@ -2447,7 +2447,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_BANKBAG_SLOT_1(mut self, v: Guid) -> Self {
+    pub fn set_player_BANKBAG_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(784);
         self.header_set(785);
         self.values.insert(784, v.guid() as u32);
@@ -2455,7 +2455,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_VENDORBUYBACK_SLOT_1(mut self, v: Guid) -> Self {
+    pub fn set_player_VENDORBUYBACK_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(798);
         self.header_set(799);
         self.values.insert(798, v.guid() as u32);
@@ -2463,7 +2463,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_KEYRING_SLOT_1(mut self, v: Guid) -> Self {
+    pub fn set_player_KEYRING_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(822);
         self.header_set(823);
         self.values.insert(822, v.guid() as u32);
@@ -2471,7 +2471,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_VANITYPET_SLOT_1(mut self, v: Guid) -> Self {
+    pub fn set_player_VANITYPET_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(886);
         self.header_set(887);
         self.values.insert(886, v.guid() as u32);
@@ -2487,7 +2487,7 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player__FIELD_KNOWN_TITLES(mut self, v: Guid) -> Self {
+    pub fn set_player_KNOWN_TITLES(mut self, v: Guid) -> Self {
         self.header_set(924);
         self.header_set(925);
         self.values.insert(924, v.guid() as u32);
@@ -2609,49 +2609,49 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_COINAGE(mut self, v: i32) -> Self {
+    pub fn set_player_COINAGE(mut self, v: i32) -> Self {
         self.header_set(1461);
         self.values.insert(1461, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_MOD_DAMAGE_DONE_POS(mut self, v: i32) -> Self {
+    pub fn set_player_MOD_DAMAGE_DONE_POS(mut self, v: i32) -> Self {
         self.header_set(1462);
         self.values.insert(1462, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_MOD_DAMAGE_DONE_NEG(mut self, v: i32) -> Self {
+    pub fn set_player_MOD_DAMAGE_DONE_NEG(mut self, v: i32) -> Self {
         self.header_set(1469);
         self.values.insert(1469, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_MOD_DAMAGE_DONE_PCT(mut self, v: i32) -> Self {
+    pub fn set_player_MOD_DAMAGE_DONE_PCT(mut self, v: i32) -> Self {
         self.header_set(1476);
         self.values.insert(1476, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_MOD_HEALING_DONE_POS(mut self, v: i32) -> Self {
+    pub fn set_player_MOD_HEALING_DONE_POS(mut self, v: i32) -> Self {
         self.header_set(1483);
         self.values.insert(1483, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_MOD_TARGET_RESISTANCE(mut self, v: i32) -> Self {
+    pub fn set_player_MOD_TARGET_RESISTANCE(mut self, v: i32) -> Self {
         self.header_set(1484);
         self.values.insert(1484, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_MOD_TARGET_PHYSICAL_RESISTANCE(mut self, v: i32) -> Self {
+    pub fn set_player_MOD_TARGET_PHYSICAL_RESISTANCE(mut self, v: i32) -> Self {
         self.header_set(1485);
         self.values.insert(1485, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_player_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(1486);
         self.values.insert(1486, u32::from_le_bytes([a, b, c, d]));
         self
@@ -2669,109 +2669,109 @@ impl UpdatePlayer {
         self
     }
 
-    pub fn set_player_FIELD_PVP_MEDALS(mut self, v: i32) -> Self {
+    pub fn set_player_PVP_MEDALS(mut self, v: i32) -> Self {
         self.header_set(1489);
         self.values.insert(1489, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_BUYBACK_PRICE_1(mut self, v: i32) -> Self {
+    pub fn set_player_BUYBACK_PRICE_1(mut self, v: i32) -> Self {
         self.header_set(1490);
         self.values.insert(1490, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_BUYBACK_TIMESTAMP_1(mut self, v: i32) -> Self {
+    pub fn set_player_BUYBACK_TIMESTAMP_1(mut self, v: i32) -> Self {
         self.header_set(1502);
         self.values.insert(1502, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_KILLS(mut self, v: u32) -> Self {
+    pub fn set_player_KILLS(mut self, v: u32) -> Self {
         self.header_set(1514);
         self.values.insert(1514, v);
         self
     }
 
-    pub fn set_player_FIELD_TODAY_CONTRIBUTION(mut self, v: i32) -> Self {
+    pub fn set_player_TODAY_CONTRIBUTION(mut self, v: i32) -> Self {
         self.header_set(1515);
         self.values.insert(1515, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_YESTERDAY_CONTRIBUTION(mut self, v: i32) -> Self {
+    pub fn set_player_YESTERDAY_CONTRIBUTION(mut self, v: i32) -> Self {
         self.header_set(1516);
         self.values.insert(1516, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_LIFETIME_HONORABLE_KILLS(mut self, v: i32) -> Self {
+    pub fn set_player_LIFETIME_HONORABLE_KILLS(mut self, v: i32) -> Self {
         self.header_set(1517);
         self.values.insert(1517, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_BYTES2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_player_BYTES2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(1518);
         self.values.insert(1518, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_player_FIELD_WATCHED_FACTION_INDEX(mut self, v: i32) -> Self {
+    pub fn set_player_WATCHED_FACTION_INDEX(mut self, v: i32) -> Self {
         self.header_set(1519);
         self.values.insert(1519, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_COMBAT_RATING_1(mut self, v: i32) -> Self {
+    pub fn set_player_COMBAT_RATING_1(mut self, v: i32) -> Self {
         self.header_set(1520);
         self.values.insert(1520, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_ARENA_TEAM_INFO_1_1(mut self, v: i32) -> Self {
+    pub fn set_player_ARENA_TEAM_INFO_1_1(mut self, v: i32) -> Self {
         self.header_set(1544);
         self.values.insert(1544, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_HONOR_CURRENCY(mut self, v: i32) -> Self {
+    pub fn set_player_HONOR_CURRENCY(mut self, v: i32) -> Self {
         self.header_set(1562);
         self.values.insert(1562, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_ARENA_CURRENCY(mut self, v: i32) -> Self {
+    pub fn set_player_ARENA_CURRENCY(mut self, v: i32) -> Self {
         self.header_set(1563);
         self.values.insert(1563, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_MOD_MANA_REGEN(mut self, v: f32) -> Self {
+    pub fn set_player_MOD_MANA_REGEN(mut self, v: f32) -> Self {
         self.header_set(1564);
         self.values.insert(1564, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_player_FIELD_MOD_MANA_REGEN_INTERRUPT(mut self, v: f32) -> Self {
+    pub fn set_player_MOD_MANA_REGEN_INTERRUPT(mut self, v: f32) -> Self {
         self.header_set(1565);
         self.values.insert(1565, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_player_FIELD_MAX_LEVEL(mut self, v: i32) -> Self {
+    pub fn set_player_MAX_LEVEL(mut self, v: i32) -> Self {
         self.header_set(1566);
         self.values.insert(1566, v as u32);
         self
     }
 
-    pub fn set_player_FIELD_DAILY_QUESTS_1(mut self, v: i32) -> Self {
+    pub fn set_player_DAILY_QUESTS_1(mut self, v: i32) -> Self {
         self.header_set(1567);
         self.values.insert(1567, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_CREATED_BY(mut self, v: Guid) -> Self {
+    pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -2782,7 +2782,7 @@ impl UpdatePlayer {
 }
 
 impl UpdateGameObject {
-    pub fn set_object_FIELD_GUID(mut self, v: Guid) -> Self {
+    pub fn set_object_GUID(mut self, v: Guid) -> Self {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
@@ -2790,25 +2790,25 @@ impl UpdateGameObject {
         self
     }
 
-    pub fn set_object_FIELD_TYPE(mut self, v: i32) -> Self {
+    pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_ENTRY(mut self, v: i32) -> Self {
+    pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_SCALE_X(mut self, v: f32) -> Self {
+    pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_object_FIELD_CREATED_BY(mut self, v: Guid) -> Self {
+    pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -2903,7 +2903,7 @@ impl UpdateGameObject {
 }
 
 impl UpdateDynamicObject {
-    pub fn set_object_FIELD_GUID(mut self, v: Guid) -> Self {
+    pub fn set_object_GUID(mut self, v: Guid) -> Self {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
@@ -2911,25 +2911,25 @@ impl UpdateDynamicObject {
         self
     }
 
-    pub fn set_object_FIELD_TYPE(mut self, v: i32) -> Self {
+    pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_ENTRY(mut self, v: i32) -> Self {
+    pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_SCALE_X(mut self, v: f32) -> Self {
+    pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_object_FIELD_CREATED_BY(mut self, v: Guid) -> Self {
+    pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -2996,7 +2996,7 @@ impl UpdateDynamicObject {
 }
 
 impl UpdateCorpse {
-    pub fn set_object_FIELD_GUID(mut self, v: Guid) -> Self {
+    pub fn set_object_GUID(mut self, v: Guid) -> Self {
         self.header_set(0);
         self.header_set(1);
         self.values.insert(0, v.guid() as u32);
@@ -3004,25 +3004,25 @@ impl UpdateCorpse {
         self
     }
 
-    pub fn set_object_FIELD_TYPE(mut self, v: i32) -> Self {
+    pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_ENTRY(mut self, v: i32) -> Self {
+    pub fn set_object_ENTRY(mut self, v: i32) -> Self {
         self.header_set(3);
         self.values.insert(3, v as u32);
         self
     }
 
-    pub fn set_object_FIELD_SCALE_X(mut self, v: f32) -> Self {
+    pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_object_FIELD_CREATED_BY(mut self, v: Guid) -> Self {
+    pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -3030,7 +3030,7 @@ impl UpdateCorpse {
         self
     }
 
-    pub fn set_corpse_FIELD_OWNER(mut self, v: Guid) -> Self {
+    pub fn set_corpse_OWNER(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
@@ -3038,7 +3038,7 @@ impl UpdateCorpse {
         self
     }
 
-    pub fn set_corpse_FIELD_PARTY(mut self, v: Guid) -> Self {
+    pub fn set_corpse_PARTY(mut self, v: Guid) -> Self {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
@@ -3046,67 +3046,67 @@ impl UpdateCorpse {
         self
     }
 
-    pub fn set_corpse_FIELD_FACING(mut self, v: f32) -> Self {
+    pub fn set_corpse_FACING(mut self, v: f32) -> Self {
         self.header_set(10);
         self.values.insert(10, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_corpse_FIELD_POS_X(mut self, v: f32) -> Self {
+    pub fn set_corpse_POS_X(mut self, v: f32) -> Self {
         self.header_set(11);
         self.values.insert(11, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_corpse_FIELD_POS_Y(mut self, v: f32) -> Self {
+    pub fn set_corpse_POS_Y(mut self, v: f32) -> Self {
         self.header_set(12);
         self.values.insert(12, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_corpse_FIELD_POS_Z(mut self, v: f32) -> Self {
+    pub fn set_corpse_POS_Z(mut self, v: f32) -> Self {
         self.header_set(13);
         self.values.insert(13, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
-    pub fn set_corpse_FIELD_DISPLAY_ID(mut self, v: i32) -> Self {
+    pub fn set_corpse_DISPLAY_ID(mut self, v: i32) -> Self {
         self.header_set(14);
         self.values.insert(14, v as u32);
         self
     }
 
-    pub fn set_corpse_FIELD_ITEM(mut self, v: i32) -> Self {
+    pub fn set_corpse_ITEM(mut self, v: i32) -> Self {
         self.header_set(15);
         self.values.insert(15, v as u32);
         self
     }
 
-    pub fn set_corpse_FIELD_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_corpse_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(34);
         self.values.insert(34, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_corpse_FIELD_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_corpse_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(35);
         self.values.insert(35, u32::from_le_bytes([a, b, c, d]));
         self
     }
 
-    pub fn set_corpse_FIELD_GUILD(mut self, v: i32) -> Self {
+    pub fn set_corpse_GUILD(mut self, v: i32) -> Self {
         self.header_set(36);
         self.values.insert(36, v as u32);
         self
     }
 
-    pub fn set_corpse_FIELD_FLAGS(mut self, v: i32) -> Self {
+    pub fn set_corpse_FLAGS(mut self, v: i32) -> Self {
         self.header_set(37);
         self.values.insert(37, v as u32);
         self
     }
 
-    pub fn set_corpse_FIELD_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
+    pub fn set_corpse_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
         self.header_set(38);
         self.values.insert(38, v as u32);
         self
