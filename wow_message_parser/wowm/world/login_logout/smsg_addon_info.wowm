@@ -1,8 +1,12 @@
 struct Addon
 {
 	/* TODO: addon_type requires more research and turn into a proper enum */
-	u8 addon_type = 2;
-	u8 uses_crc = 1;
+	u8 addon_type {
+		comment = "Other emus hardcode this to 2. More research is required";
+	}
+	u8 uses_crc {
+		comment = "Other emus hardcode this to 1.";
+	}
 	Bool uses_diffent_public_key;
 	u32 unknown1 {
 		comment = "Other emus hardcode this to 0";
