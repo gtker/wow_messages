@@ -1,0 +1,202 @@
+#tag_all versions "3.3.5";
+
+enum UpdateType : u8 {
+    VALUES = 0;
+    MOVEMENT = 1;
+    CREATE_OBJECT = 2;
+    CREATE_OBJECT2 = 3;
+    OUT_OF_RANGE_OBJECTS = 4;
+    NEAR_OBJECTS = 5;
+}
+
+flag UpdateFlag : u16 {
+    NONE = 0x0000;
+    SELF = 0x0001;
+    TRANSPORT = 0x0002;
+    HAS_ATTACKING_TARGET = 0x0004;
+    LOW_GUID = 0x0008;
+    HIGH_GUID = 0x0010;
+    LIVING = 0x0020;
+    HAS_POSITION = 0x0040;
+    VEHICLE = 0x0080;
+    POSITION = 0x0100;
+    ROTATION = 0x0200;
+}
+
+flag SplineFlag : u32 {
+    NONE = 0x00000000;
+    DONE = 0x00000001;
+    FALLING = 0x00000002 {
+        comment = "vmangos: Affects elevation computation";
+    }
+    UNKNOWN3 = 0x00000004;
+    UNKNOWN4 = 0x00000008;
+    UNKNOWN5 = 0x00000010;
+    UNKNOWN6 = 0x00000020;
+    UNKNOWN7 = 0x00000040;
+    UNKNOWN8 = 0x00000080;
+    RUNMODE = 0x00000100;
+    FLYING = 0x00000200 {
+        comment = "vmangos: Smooth movement(Catmullrom interpolation mode), flying animation";
+    }
+    NO_SPLINE = 0x00000400;
+    UNKNOWN12 = 0x00000800;
+    UNKNOWN13 = 0x00001000;
+    UNKNOWN14 = 0x00002000;
+    UNKNOWN15 = 0x00004000;
+    UNKNOWN16 = 0x00008000;
+    FINAL_POINT = 0x00010000;
+    FINAL_TARGET = 0x00020000;
+    FINAL_ANGLE = 0x00040000;
+    UNKNOWN19 = 0x00080000 {
+        comment = "vmangos: exists, but unknown what it does";
+    }
+    CYCLIC = 0x00100000 {
+        comment = "vmangos: Movement by cycled spline";
+    }
+    ENTER_CYCLE = 0x00200000 {
+        comment = "vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done";
+    }
+    FROZEN = 0x00400000 {
+        comment = "vmangos: Will never arrive";
+    }
+    UNKNOWN23 = 0x00800000;
+    UNKNOWN24 = 0x01000000;
+    UNKNOWN25 = 0x02000000 {
+        comment = "vmangos: exists, but unknown what it does";
+    }
+    UNKNOWN26 = 0x04000000;
+    UNKNOWN27 = 0x08000000;
+    UNKNOWN28 = 0x10000000;
+    UNKNOWN29 = 0x20000000;
+    UNKNOWN30 = 0x40000000;
+    UNKNOWN31 = 0x80000000;
+}
+
+enum ObjectType : u8 {
+    OBJECT = 0;
+    ITEM = 1;
+    CONTAINER = 2;
+    UNIT = 3;
+    PLAYER = 4;
+    GAME_OBJECT = 5;
+    DYNAMIC_OBJECT = 6;
+    CORPSE = 7;
+}
+
+struct MovementBlock {
+    UpdateFlag update_flag;
+    if (update_flag & LIVING) {
+        MovementFlags flags;
+        u32 timestamp;
+        Vector3d living_position;
+        f32 living_orientation;
+        if (flags & ON_TRANSPORT) {
+            TransportInfo transport;
+        }
+        if (flags & SWIMMING) {
+            f32 pitch;
+        }
+        f32 fall_time;
+        if (flags & FALLING) {
+            f32 z_speed;
+            f32 cos_angle;
+            f32 sin_angle;
+            f32 xy_speed;
+        }
+        if (flags & SPLINE_ELEVATION) {
+            f32 spline_elevation;
+        }
+
+        f32 walking_speed;
+        f32 running_speed;
+        f32 backwards_running_speed;
+        f32 swimming_speed;
+        f32 backwards_swimming_speed;
+        f32 flight_speed;
+        f32 backwards_flight_speed;
+        f32 turn_rate;
+        f32 pitch_rate;
+        if (flags & SPLINE_ENABLED) {
+            SplineFlag spline_flags;
+            if (spline_flags & FINAL_ANGLE) {
+                f32 angle;
+            }
+            else if (spline_flags & FINAL_TARGET) {
+                u64 target;
+            }
+            else if (spline_flags & FINAL_POINT) {
+                Vector3d spline_final_point;
+            }
+            u32 time_passed;
+            u32 duration;
+            u32 id;
+            u32 amount_of_nodes;
+            Vector3d[amount_of_nodes] nodes;
+            Vector3d final_node;
+        }
+    }
+    else if (update_flag & POSITION) {
+        PackedGuid transport_guid;
+        Vector3d position1;
+        f32 orientation1;
+        f32 corpse_orientation;
+    }
+    else if (update_flag & HAS_POSITION) {
+        Vector3d position2;
+        f32 orientation2;
+    }
+    if (update_flag & HIGH_GUID) {
+        u32 unknown0 {
+            comment = "vmangos statically sets to 0";
+        }
+    }
+    if (update_flag & LOW_GUID) {
+        u32 unknown1;
+    }
+    if (update_flag & HAS_ATTACKING_TARGET) {
+        PackedGuid guid;
+    }
+    if (update_flag & TRANSPORT) {
+        u32 transport_progress_in_ms;
+    }
+    if (update_flag & VEHICLE) {
+        u32 vehicle_id;
+        f32 vehicle_orientation;
+    }
+    if (update_flag & ROTATION) {
+        u64 packed_local_rotation {
+            comment = "AzerothCore deliberately casts to i64";
+        }
+    }
+}
+
+struct Object {
+    UpdateType update_type;
+    if (update_type == VALUES) {
+        PackedGuid guid1;   
+        UpdateMask mask1;
+    }
+    else if (update_type == MOVEMENT) {
+        PackedGuid guid2;
+        MovementBlock movement1;
+    }
+    else if (update_type == CREATE_OBJECT || update_type == CREATE_OBJECT2) {
+        PackedGuid guid3;
+        ObjectType object_type;
+        MovementBlock movement2;
+        UpdateMask mask2;
+    }
+    else if (update_type == OUT_OF_RANGE_OBJECTS
+          || update_type == NEAR_OBJECTS) {      /* Complete */
+        u32 count;
+        PackedGuid[count] guids;
+    }
+}
+
+smsg SMSG_UPDATE_OBJECT = 0x0A9 {
+    u32 amount_of_objects;
+    u8 has_transport;
+    Object[amount_of_objects] objects;
+}
+

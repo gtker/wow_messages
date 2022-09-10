@@ -60,6 +60,7 @@
 - [EnvironmentalDamageType](docs/environmentaldamagetype.md)
 - [Expansion](docs/expansion.md)
 - [ExperienceAwardType](docs/experienceawardtype.md)
+- [ExtraMovementFlags](docs/extramovementflags.md)
 - [FactionFlag](docs/factionflag.md)
 - [FarSightOperation](docs/farsightoperation.md)
 - [FriendResult](docs/friendresult.md)

@@ -126,13 +126,18 @@ impl RustMember {
     }
 
     fn set_main_enumerators(&mut self, enumerator_names: &[&String]) {
+        let ty = self.ty.clone();
+
         let enums = match &mut self.ty {
             RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => enumerators,
             _ => unreachable!(),
         };
 
         for &name in enumerator_names {
-            let e = enums.iter_mut().find(|a| a.name() == name).unwrap();
+            let e = enums.iter_mut().find(|a| a.name() == name).expect(&format!(
+                "unable to find enumerator with name '{}' in variable '{}' with type '{}'",
+                name, self.name, ty
+            ));
             e.is_main_enumerator = true;
         }
     }

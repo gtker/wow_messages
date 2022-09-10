@@ -406,6 +406,184 @@
       ]
     },
     {
+      "name": "ExtraMovementFlags",
+      "definer_ty": "flag",
+      "enumerators": [
+        {
+          "name": "NONE",
+          "value": {
+            "int": 0,
+            "original": "0x00000000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "NO_STRAFE",
+          "value": {
+            "int": 1,
+            "original": "0x00000001"
+          },
+          "tags": {}
+        },
+        {
+          "name": "NO_JUMPING",
+          "value": {
+            "int": 2,
+            "original": "0x00000002"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNK3",
+          "value": {
+            "int": 4,
+            "original": "0x00000004"
+          },
+          "tags": {
+            "comment": "AzerothCore: Overrides various clientside checks"
+          }
+        },
+        {
+          "name": "FULL_SPEED_TURNING",
+          "value": {
+            "int": 8,
+            "original": "0x00000008"
+          },
+          "tags": {}
+        },
+        {
+          "name": "FULL_SPEED_PITCHING",
+          "value": {
+            "int": 16,
+            "original": "0x00000010"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ALWAYS_ALLOW_PITCHING",
+          "value": {
+            "int": 32,
+            "original": "0x00000020"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNK7",
+          "value": {
+            "int": 64,
+            "original": "0x00000040"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNK8",
+          "value": {
+            "int": 128,
+            "original": "0x00000080"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNK9",
+          "value": {
+            "int": 256,
+            "original": "0x00000100"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNK10",
+          "value": {
+            "int": 512,
+            "original": "0x00000200"
+          },
+          "tags": {}
+        },
+        {
+          "name": "INTERPOLATED_MOVEMENT",
+          "value": {
+            "int": 1024,
+            "original": "0x00000400"
+          },
+          "tags": {}
+        },
+        {
+          "name": "INTERPOLATED_TURNING",
+          "value": {
+            "int": 2048,
+            "original": "0x00000800"
+          },
+          "tags": {}
+        },
+        {
+          "name": "INTERPOLATED_PITCHING",
+          "value": {
+            "int": 4096,
+            "original": "0x00001000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNK14",
+          "value": {
+            "int": 8192,
+            "original": "0x00002000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNK15",
+          "value": {
+            "int": 16384,
+            "original": "0x00004000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNK16",
+          "value": {
+            "int": 32768,
+            "original": "0x00008000"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u16",
+        "endianness": "little"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "MovementInfo",
+          "usage": "used_but_not_in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm",
+        "start_position": 74
+      },
+      "features": [
+        "Flag",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "FactionFlag",
       "definer_ty": "flag",
       "enumerators": [
@@ -1151,6 +1329,334 @@
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/common_movement.wowm",
         "start_position": 10
+      },
+      "features": [
+        "Flag",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MovementFlags",
+      "definer_ty": "flag",
+      "enumerators": [
+        {
+          "name": "NONE",
+          "value": {
+            "int": 0,
+            "original": "0x00000000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "FORWARD",
+          "value": {
+            "int": 1,
+            "original": "0x00000001"
+          },
+          "tags": {}
+        },
+        {
+          "name": "BACKWARD",
+          "value": {
+            "int": 2,
+            "original": "0x00000002"
+          },
+          "tags": {}
+        },
+        {
+          "name": "STRAFE_LEFT",
+          "value": {
+            "int": 4,
+            "original": "0x00000004"
+          },
+          "tags": {}
+        },
+        {
+          "name": "STRAFE_RIGHT",
+          "value": {
+            "int": 8,
+            "original": "0x00000008"
+          },
+          "tags": {}
+        },
+        {
+          "name": "LEFT",
+          "value": {
+            "int": 16,
+            "original": "0x00000010"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RIGHT",
+          "value": {
+            "int": 32,
+            "original": "0x00000020"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PITCH_UP",
+          "value": {
+            "int": 64,
+            "original": "0x00000040"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PITCH_DOWN",
+          "value": {
+            "int": 128,
+            "original": "0x00000080"
+          },
+          "tags": {}
+        },
+        {
+          "name": "WALKING",
+          "value": {
+            "int": 256,
+            "original": "0x00000100"
+          },
+          "tags": {
+            "comment": "Walking"
+          }
+        },
+        {
+          "name": "ON_TRANSPORT",
+          "value": {
+            "int": 512,
+            "original": "0x00000200"
+          },
+          "tags": {
+            "comment": "AzerothCore: Used for flying on some creatures"
+          }
+        },
+        {
+          "name": "DISABLE_GRAVITY",
+          "value": {
+            "int": 1024,
+            "original": "0x00000400"
+          },
+          "tags": {
+            "comment": "AzerothCore: Former MOVEMENTFLAG_LEVITATING. This is used when walking is not possible."
+          }
+        },
+        {
+          "name": "ROOT",
+          "value": {
+            "int": 2048,
+            "original": "0x00000800"
+          },
+          "tags": {
+            "comment": "AzerothCore: Must not be set along with MOVEMENTFLAG_MASK_MOVING"
+          }
+        },
+        {
+          "name": "FALLING",
+          "value": {
+            "int": 4096,
+            "original": "0x00001000"
+          },
+          "tags": {
+            "comment": "AzerothCore: damage dealt on that type of falling"
+          }
+        },
+        {
+          "name": "FALLING_FAR",
+          "value": {
+            "int": 8192,
+            "original": "0x00002000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PENDING_STOP",
+          "value": {
+            "int": 16384,
+            "original": "0x00004000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PENDING_STRAFE_STOP",
+          "value": {
+            "int": 32768,
+            "original": "0x00008000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PENDING_FORWARD",
+          "value": {
+            "int": 65536,
+            "original": "0x00010000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PENDING_BACKWARD",
+          "value": {
+            "int": 131072,
+            "original": "0x00020000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PENDING_STRAFE_LEFT",
+          "value": {
+            "int": 262144,
+            "original": "0x00040000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PENDING_STRAFE_RIGHT",
+          "value": {
+            "int": 524288,
+            "original": "0x00080000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PENDING_ROOT",
+          "value": {
+            "int": 1048576,
+            "original": "0x00100000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "SWIMMING",
+          "value": {
+            "int": 2097152,
+            "original": "0x00200000"
+          },
+          "tags": {
+            "comment": "AzerothCore: appears with fly flag also"
+          }
+        },
+        {
+          "name": "ASCENDING",
+          "value": {
+            "int": 4194304,
+            "original": "0x00400000"
+          },
+          "tags": {
+            "comment": "AzerothCore: press 'space' when flying"
+          }
+        },
+        {
+          "name": "DESCENDING",
+          "value": {
+            "int": 8388608,
+            "original": "0x00800000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CAN_FLY",
+          "value": {
+            "int": 16777216,
+            "original": "0x01000000"
+          },
+          "tags": {
+            "comment": "AzerothCore: Appears when unit can fly AND also walk"
+          }
+        },
+        {
+          "name": "FLYING",
+          "value": {
+            "int": 33554432,
+            "original": "0x02000000"
+          },
+          "tags": {
+            "comment": "AzerothCore: unit is actually flying. pretty sure this is only used for players. creatures use disable_gravity"
+          }
+        },
+        {
+          "name": "SPLINE_ELEVATION",
+          "value": {
+            "int": 67108864,
+            "original": "0x04000000"
+          },
+          "tags": {
+            "comment": "AzerothCore: used for flight paths"
+          }
+        },
+        {
+          "name": "SPLINE_ENABLED",
+          "value": {
+            "int": 134217728,
+            "original": "0x08000000"
+          },
+          "tags": {
+            "comment": "AzerothCore: used for flight paths"
+          }
+        },
+        {
+          "name": "WATERWALKING",
+          "value": {
+            "int": 268435456,
+            "original": "0x10000000"
+          },
+          "tags": {
+            "comment": "AzerothCore: prevent unit from falling through water"
+          }
+        },
+        {
+          "name": "FALLING_SLOW",
+          "value": {
+            "int": 536870912,
+            "original": "0x20000000"
+          },
+          "tags": {
+            "comment": "AzerothCore: active rogue safe fall spell (passive)"
+          }
+        },
+        {
+          "name": "HOVER",
+          "value": {
+            "int": 1073741824,
+            "original": "0x40000000"
+          },
+          "tags": {
+            "comment": "AzerothCore: hover, cannot jump"
+          }
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u32",
+        "endianness": "little"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "MovementBlock",
+          "usage": "in_if"
+        },
+        {
+          "name": "MovementInfo",
+          "usage": "in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm",
+        "start_position": 11
       },
       "features": [
         "Flag",
@@ -1932,6 +2438,324 @@
       ]
     },
     {
+      "name": "SplineFlag",
+      "definer_ty": "flag",
+      "enumerators": [
+        {
+          "name": "NONE",
+          "value": {
+            "int": 0,
+            "original": "0x00000000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "DONE",
+          "value": {
+            "int": 1,
+            "original": "0x00000001"
+          },
+          "tags": {}
+        },
+        {
+          "name": "FALLING",
+          "value": {
+            "int": 2,
+            "original": "0x00000002"
+          },
+          "tags": {
+            "comment": "vmangos: Affects elevation computation"
+          }
+        },
+        {
+          "name": "UNKNOWN3",
+          "value": {
+            "int": 4,
+            "original": "0x00000004"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN4",
+          "value": {
+            "int": 8,
+            "original": "0x00000008"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN5",
+          "value": {
+            "int": 16,
+            "original": "0x00000010"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN6",
+          "value": {
+            "int": 32,
+            "original": "0x00000020"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN7",
+          "value": {
+            "int": 64,
+            "original": "0x00000040"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN8",
+          "value": {
+            "int": 128,
+            "original": "0x00000080"
+          },
+          "tags": {}
+        },
+        {
+          "name": "RUNMODE",
+          "value": {
+            "int": 256,
+            "original": "0x00000100"
+          },
+          "tags": {}
+        },
+        {
+          "name": "FLYING",
+          "value": {
+            "int": 512,
+            "original": "0x00000200"
+          },
+          "tags": {
+            "comment": "vmangos: Smooth movement(Catmullrom interpolation mode), flying animation"
+          }
+        },
+        {
+          "name": "NO_SPLINE",
+          "value": {
+            "int": 1024,
+            "original": "0x00000400"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN12",
+          "value": {
+            "int": 2048,
+            "original": "0x00000800"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN13",
+          "value": {
+            "int": 4096,
+            "original": "0x00001000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN14",
+          "value": {
+            "int": 8192,
+            "original": "0x00002000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN15",
+          "value": {
+            "int": 16384,
+            "original": "0x00004000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN16",
+          "value": {
+            "int": 32768,
+            "original": "0x00008000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "FINAL_POINT",
+          "value": {
+            "int": 65536,
+            "original": "0x00010000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "FINAL_TARGET",
+          "value": {
+            "int": 131072,
+            "original": "0x00020000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "FINAL_ANGLE",
+          "value": {
+            "int": 262144,
+            "original": "0x00040000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN19",
+          "value": {
+            "int": 524288,
+            "original": "0x00080000"
+          },
+          "tags": {
+            "comment": "vmangos: exists, but unknown what it does"
+          }
+        },
+        {
+          "name": "CYCLIC",
+          "value": {
+            "int": 1048576,
+            "original": "0x00100000"
+          },
+          "tags": {
+            "comment": "vmangos: Movement by cycled spline"
+          }
+        },
+        {
+          "name": "ENTER_CYCLE",
+          "value": {
+            "int": 2097152,
+            "original": "0x00200000"
+          },
+          "tags": {
+            "comment": "vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done"
+          }
+        },
+        {
+          "name": "FROZEN",
+          "value": {
+            "int": 4194304,
+            "original": "0x00400000"
+          },
+          "tags": {
+            "comment": "vmangos: Will never arrive"
+          }
+        },
+        {
+          "name": "UNKNOWN23",
+          "value": {
+            "int": 8388608,
+            "original": "0x00800000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN24",
+          "value": {
+            "int": 16777216,
+            "original": "0x01000000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN25",
+          "value": {
+            "int": 33554432,
+            "original": "0x02000000"
+          },
+          "tags": {
+            "comment": "vmangos: exists, but unknown what it does"
+          }
+        },
+        {
+          "name": "UNKNOWN26",
+          "value": {
+            "int": 67108864,
+            "original": "0x04000000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN27",
+          "value": {
+            "int": 134217728,
+            "original": "0x08000000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN28",
+          "value": {
+            "int": 268435456,
+            "original": "0x10000000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN29",
+          "value": {
+            "int": 536870912,
+            "original": "0x20000000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN30",
+          "value": {
+            "int": 1073741824,
+            "original": "0x40000000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNKNOWN31",
+          "value": {
+            "int": 2147483648,
+            "original": "0x80000000"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u32",
+        "endianness": "little"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "MovementBlock",
+          "usage": "in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm",
+        "start_position": 26
+      },
+      "features": [
+        "Flag",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "UpdateFlag",
       "definer_ty": "flag",
       "enumerators": [
@@ -2026,6 +2850,134 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
+        "start_position": 12
+      },
+      "features": [
+        "Flag",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "UpdateFlag",
+      "definer_ty": "flag",
+      "enumerators": [
+        {
+          "name": "NONE",
+          "value": {
+            "int": 0,
+            "original": "0x0000"
+          },
+          "tags": {}
+        },
+        {
+          "name": "SELF",
+          "value": {
+            "int": 1,
+            "original": "0x0001"
+          },
+          "tags": {}
+        },
+        {
+          "name": "TRANSPORT",
+          "value": {
+            "int": 2,
+            "original": "0x0002"
+          },
+          "tags": {}
+        },
+        {
+          "name": "HAS_ATTACKING_TARGET",
+          "value": {
+            "int": 4,
+            "original": "0x0004"
+          },
+          "tags": {}
+        },
+        {
+          "name": "LOW_GUID",
+          "value": {
+            "int": 8,
+            "original": "0x0008"
+          },
+          "tags": {}
+        },
+        {
+          "name": "HIGH_GUID",
+          "value": {
+            "int": 16,
+            "original": "0x0010"
+          },
+          "tags": {}
+        },
+        {
+          "name": "LIVING",
+          "value": {
+            "int": 32,
+            "original": "0x0020"
+          },
+          "tags": {}
+        },
+        {
+          "name": "HAS_POSITION",
+          "value": {
+            "int": 64,
+            "original": "0x0040"
+          },
+          "tags": {}
+        },
+        {
+          "name": "VEHICLE",
+          "value": {
+            "int": 128,
+            "original": "0x0080"
+          },
+          "tags": {}
+        },
+        {
+          "name": "POSITION",
+          "value": {
+            "int": 256,
+            "original": "0x0100"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ROTATION",
+          "value": {
+            "int": 512,
+            "original": "0x0200"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u16",
+        "endianness": "little"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "MovementBlock",
+          "usage": "in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm",
         "start_position": 12
       },
       "features": [
@@ -66167,6 +67119,109 @@
       ]
     },
     {
+      "name": "ObjectType",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "OBJECT",
+          "value": {
+            "int": 0,
+            "original": "0"
+          },
+          "tags": {}
+        },
+        {
+          "name": "ITEM",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CONTAINER",
+          "value": {
+            "int": 2,
+            "original": "2"
+          },
+          "tags": {}
+        },
+        {
+          "name": "UNIT",
+          "value": {
+            "int": 3,
+            "original": "3"
+          },
+          "tags": {}
+        },
+        {
+          "name": "PLAYER",
+          "value": {
+            "int": 4,
+            "original": "4"
+          },
+          "tags": {}
+        },
+        {
+          "name": "GAME_OBJECT",
+          "value": {
+            "int": 5,
+            "original": "5"
+          },
+          "tags": {}
+        },
+        {
+          "name": "DYNAMIC_OBJECT",
+          "value": {
+            "int": 6,
+            "original": "6"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CORPSE",
+          "value": {
+            "int": 7,
+            "original": "7"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u8"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "Object",
+          "usage": "used_but_not_in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm",
+        "start_position": 76
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "Os",
       "definer_ty": "enum",
       "enumerators": [
@@ -73151,6 +74206,93 @@
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
+        "start_position": 3
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "UpdateType",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "VALUES",
+          "value": {
+            "int": 0,
+            "original": "0"
+          },
+          "tags": {}
+        },
+        {
+          "name": "MOVEMENT",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CREATE_OBJECT",
+          "value": {
+            "int": 2,
+            "original": "2"
+          },
+          "tags": {}
+        },
+        {
+          "name": "CREATE_OBJECT2",
+          "value": {
+            "int": 3,
+            "original": "3"
+          },
+          "tags": {}
+        },
+        {
+          "name": "OUT_OF_RANGE_OBJECTS",
+          "value": {
+            "int": 4,
+            "original": "4"
+          },
+          "tags": {}
+        },
+        {
+          "name": "NEAR_OBJECTS",
+          "value": {
+            "int": 5,
+            "original": "5"
+          },
+          "tags": {}
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u8"
+      },
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "Object",
+          "usage": "in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm",
         "start_position": 3
       },
       "features": [
@@ -127187,6 +128329,1237 @@
       ]
     },
     {
+      "name": "MovementBlock",
+      "object_type": {
+        "type": "struct"
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "update_flag",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateFlag"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": true,
+            "tags": {}
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "update_flag",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "LIVING"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "flags",
+                  "member_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "MovementFlags"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": true,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "timestamp",
+                  "member_type": {
+                    "type": "integer",
+                    "content": {
+                      "type": "u32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "living_position",
+                  "member_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "Vector3d"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "living_orientation",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "if_statement",
+                "content": {
+                  "conditional": {
+                    "variable_name": "flags",
+                    "equations": [
+                      {
+                        "type": "bitwise_and",
+                        "content": {
+                          "value": "ON_TRANSPORT"
+                        }
+                      }
+                    ]
+                  },
+                  "members": [
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "transport",
+                        "member_type": {
+                          "type": "identifier",
+                          "content": {
+                            "type_name": "TransportInfo"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    }
+                  ],
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "MovementFlags"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "if_statement",
+                "content": {
+                  "conditional": {
+                    "variable_name": "flags",
+                    "equations": [
+                      {
+                        "type": "bitwise_and",
+                        "content": {
+                          "value": "SWIMMING"
+                        }
+                      }
+                    ]
+                  },
+                  "members": [
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "pitch",
+                        "member_type": {
+                          "type": "floating_point",
+                          "content": {
+                            "type": "f32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    }
+                  ],
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "MovementFlags"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "fall_time",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "if_statement",
+                "content": {
+                  "conditional": {
+                    "variable_name": "flags",
+                    "equations": [
+                      {
+                        "type": "bitwise_and",
+                        "content": {
+                          "value": "FALLING"
+                        }
+                      }
+                    ]
+                  },
+                  "members": [
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "z_speed",
+                        "member_type": {
+                          "type": "floating_point",
+                          "content": {
+                            "type": "f32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    },
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "cos_angle",
+                        "member_type": {
+                          "type": "floating_point",
+                          "content": {
+                            "type": "f32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    },
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "sin_angle",
+                        "member_type": {
+                          "type": "floating_point",
+                          "content": {
+                            "type": "f32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    },
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "xy_speed",
+                        "member_type": {
+                          "type": "floating_point",
+                          "content": {
+                            "type": "f32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    }
+                  ],
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "MovementFlags"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "if_statement",
+                "content": {
+                  "conditional": {
+                    "variable_name": "flags",
+                    "equations": [
+                      {
+                        "type": "bitwise_and",
+                        "content": {
+                          "value": "SPLINE_ELEVATION"
+                        }
+                      }
+                    ]
+                  },
+                  "members": [
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "spline_elevation",
+                        "member_type": {
+                          "type": "floating_point",
+                          "content": {
+                            "type": "f32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    }
+                  ],
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "MovementFlags"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "walking_speed",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "running_speed",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "backwards_running_speed",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "swimming_speed",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "backwards_swimming_speed",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "flight_speed",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "backwards_flight_speed",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "turn_rate",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "pitch_rate",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "if_statement",
+                "content": {
+                  "conditional": {
+                    "variable_name": "flags",
+                    "equations": [
+                      {
+                        "type": "bitwise_and",
+                        "content": {
+                          "value": "SPLINE_ENABLED"
+                        }
+                      }
+                    ]
+                  },
+                  "members": [
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "spline_flags",
+                        "member_type": {
+                          "type": "identifier",
+                          "content": {
+                            "type_name": "SplineFlag"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": true,
+                        "tags": {}
+                      }
+                    },
+                    {
+                      "type": "if_statement",
+                      "content": {
+                        "conditional": {
+                          "variable_name": "spline_flags",
+                          "equations": [
+                            {
+                              "type": "bitwise_and",
+                              "content": {
+                                "value": "FINAL_ANGLE"
+                              }
+                            }
+                          ]
+                        },
+                        "members": [
+                          {
+                            "type": "definition",
+                            "content": {
+                              "name": "angle",
+                              "member_type": {
+                                "type": "floating_point",
+                                "content": {
+                                  "type": "f32",
+                                  "endianness": "little"
+                                }
+                              },
+                              "constant_value": null,
+                              "used_as_size_in": null,
+                              "used_in_if": false,
+                              "tags": {}
+                            }
+                          }
+                        ],
+                        "else_if_statements": [
+                          {
+                            "conditional": {
+                              "variable_name": "spline_flags",
+                              "equations": [
+                                {
+                                  "type": "bitwise_and",
+                                  "content": {
+                                    "value": "FINAL_TARGET"
+                                  }
+                                }
+                              ]
+                            },
+                            "members": [
+                              {
+                                "type": "definition",
+                                "content": {
+                                  "name": "target",
+                                  "member_type": {
+                                    "type": "integer",
+                                    "content": {
+                                      "type": "u64",
+                                      "endianness": "little"
+                                    }
+                                  },
+                                  "constant_value": null,
+                                  "used_as_size_in": null,
+                                  "used_in_if": false,
+                                  "tags": {}
+                                }
+                              }
+                            ],
+                            "else_if_statements": [],
+                            "else_members": [],
+                            "original_type": {
+                              "type": "identifier",
+                              "content": {
+                                "type_name": "SplineFlag"
+                              }
+                            }
+                          },
+                          {
+                            "conditional": {
+                              "variable_name": "spline_flags",
+                              "equations": [
+                                {
+                                  "type": "bitwise_and",
+                                  "content": {
+                                    "value": "FINAL_POINT"
+                                  }
+                                }
+                              ]
+                            },
+                            "members": [
+                              {
+                                "type": "definition",
+                                "content": {
+                                  "name": "spline_final_point",
+                                  "member_type": {
+                                    "type": "identifier",
+                                    "content": {
+                                      "type_name": "Vector3d"
+                                    }
+                                  },
+                                  "constant_value": null,
+                                  "used_as_size_in": null,
+                                  "used_in_if": false,
+                                  "tags": {}
+                                }
+                              }
+                            ],
+                            "else_if_statements": [],
+                            "else_members": [],
+                            "original_type": {
+                              "type": "identifier",
+                              "content": {
+                                "type_name": "SplineFlag"
+                              }
+                            }
+                          }
+                        ],
+                        "else_members": [],
+                        "original_type": {
+                          "type": "identifier",
+                          "content": {
+                            "type_name": "SplineFlag"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "time_passed",
+                        "member_type": {
+                          "type": "integer",
+                          "content": {
+                            "type": "u32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    },
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "duration",
+                        "member_type": {
+                          "type": "integer",
+                          "content": {
+                            "type": "u32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    },
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "id",
+                        "member_type": {
+                          "type": "integer",
+                          "content": {
+                            "type": "u32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    },
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "amount_of_nodes",
+                        "member_type": {
+                          "type": "integer",
+                          "content": {
+                            "type": "u32",
+                            "endianness": "little"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": "nodes",
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    },
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "nodes",
+                        "member_type": {
+                          "type": "array",
+                          "content": {
+                            "inner": {
+                              "type": "complex",
+                              "content": "Vector3d"
+                            },
+                            "size": {
+                              "type": "variable",
+                              "content": "amount_of_nodes"
+                            }
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    },
+                    {
+                      "type": "definition",
+                      "content": {
+                        "name": "final_node",
+                        "member_type": {
+                          "type": "identifier",
+                          "content": {
+                            "type_name": "Vector3d"
+                          }
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {}
+                      }
+                    }
+                  ],
+                  "else_if_statements": [],
+                  "else_members": [],
+                  "original_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "MovementFlags"
+                    }
+                  }
+                }
+              }
+            ],
+            "else_if_statements": [
+              {
+                "conditional": {
+                  "variable_name": "update_flag",
+                  "equations": [
+                    {
+                      "type": "bitwise_and",
+                      "content": {
+                        "value": "POSITION"
+                      }
+                    }
+                  ]
+                },
+                "members": [
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "transport_guid",
+                      "member_type": {
+                        "type": "packed_guid"
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  },
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "position1",
+                      "member_type": {
+                        "type": "identifier",
+                        "content": {
+                          "type_name": "Vector3d"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  },
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "orientation1",
+                      "member_type": {
+                        "type": "floating_point",
+                        "content": {
+                          "type": "f32",
+                          "endianness": "little"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  },
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "corpse_orientation",
+                      "member_type": {
+                        "type": "floating_point",
+                        "content": {
+                          "type": "f32",
+                          "endianness": "little"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  }
+                ],
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
+                  "type": "identifier",
+                  "content": {
+                    "type_name": "UpdateFlag"
+                  }
+                }
+              },
+              {
+                "conditional": {
+                  "variable_name": "update_flag",
+                  "equations": [
+                    {
+                      "type": "bitwise_and",
+                      "content": {
+                        "value": "HAS_POSITION"
+                      }
+                    }
+                  ]
+                },
+                "members": [
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "position2",
+                      "member_type": {
+                        "type": "identifier",
+                        "content": {
+                          "type_name": "Vector3d"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  },
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "orientation2",
+                      "member_type": {
+                        "type": "floating_point",
+                        "content": {
+                          "type": "f32",
+                          "endianness": "little"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  }
+                ],
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
+                  "type": "identifier",
+                  "content": {
+                    "type_name": "UpdateFlag"
+                  }
+                }
+              }
+            ],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateFlag"
+              }
+            }
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "update_flag",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "HIGH_GUID"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "unknown0",
+                  "member_type": {
+                    "type": "integer",
+                    "content": {
+                      "type": "u32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {
+                    "comment": "vmangos statically sets to 0"
+                  }
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateFlag"
+              }
+            }
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "update_flag",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "LOW_GUID"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "unknown1",
+                  "member_type": {
+                    "type": "integer",
+                    "content": {
+                      "type": "u32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateFlag"
+              }
+            }
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "update_flag",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "HAS_ATTACKING_TARGET"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "guid",
+                  "member_type": {
+                    "type": "packed_guid"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateFlag"
+              }
+            }
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "update_flag",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "TRANSPORT"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "transport_progress_in_ms",
+                  "member_type": {
+                    "type": "integer",
+                    "content": {
+                      "type": "u32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateFlag"
+              }
+            }
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "update_flag",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "VEHICLE"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "vehicle_id",
+                  "member_type": {
+                    "type": "integer",
+                    "content": {
+                      "type": "u32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "vehicle_orientation",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateFlag"
+              }
+            }
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "update_flag",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "ROTATION"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "packed_local_rotation",
+                  "member_type": {
+                    "type": "integer",
+                    "content": {
+                      "type": "u64",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {
+                    "comment": "AzerothCore deliberately casts to i64"
+                  }
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateFlag"
+              }
+            }
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm",
+        "start_position": 87
+      },
+      "only_has_io_error": true,
+      "features": [
+        "Struct",
+        "SubObjects",
+        "IfFlag",
+        "SimpleBuiltInTypes",
+        "IfElseFlag",
+        "VariableArrays",
+        "ComplexArrays",
+        "PackedGuidTypes",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "MovementInfo",
       "object_type": {
         "type": "struct"
@@ -127524,6 +129897,406 @@
         "SubObjects",
         "SimpleBuiltInTypes",
         "IfFlag",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "MovementInfo",
+      "object_type": {
+        "type": "struct"
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "flags",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementFlags"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": true,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "extra_flags",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "ExtraMovementFlags"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "timestamp",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "position",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "Vector3d"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "orientation",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "flags",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "ON_TRANSPORT"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "transport",
+                  "member_type": {
+                    "type": "identifier",
+                    "content": {
+                      "type_name": "TransportInfo"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementFlags"
+              }
+            }
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "flags",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "SWIMMING"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "pitch1",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [
+              {
+                "conditional": {
+                  "variable_name": "flags",
+                  "equations": [
+                    {
+                      "type": "bitwise_and",
+                      "content": {
+                        "value": "FLYING"
+                      }
+                    }
+                  ]
+                },
+                "members": [
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "pitch2",
+                      "member_type": {
+                        "type": "floating_point",
+                        "content": {
+                          "type": "f32",
+                          "endianness": "little"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  }
+                ],
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
+                  "type": "identifier",
+                  "content": {
+                    "type_name": "MovementFlags"
+                  }
+                }
+              }
+            ],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementFlags"
+              }
+            }
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "fall_time",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "flags",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "FALLING"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "z_speed",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "cos_angle",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "sin_angle",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "xy_speed",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementFlags"
+              }
+            }
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "flags",
+              "equations": [
+                {
+                  "type": "bitwise_and",
+                  "content": {
+                    "value": "SPLINE_ELEVATION"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "spline_elevation",
+                  "member_type": {
+                    "type": "floating_point",
+                    "content": {
+                      "type": "f32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementFlags"
+              }
+            }
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm",
+        "start_position": 97
+      },
+      "only_has_io_error": true,
+      "features": [
+        "Struct",
+        "SubObjects",
+        "SimpleBuiltInTypes",
+        "IfFlag",
+        "IfElseFlag",
         "WorldVersion"
       ]
     },
@@ -128012,6 +130785,324 @@
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm",
         "start_position": 157
+      },
+      "only_has_io_error": false,
+      "features": [
+        "Struct",
+        "SubObjects",
+        "IfEnum",
+        "PackedGuidTypes",
+        "UpdateMaskTypes",
+        "IfElseEnum",
+        "SimpleBuiltInTypes",
+        "VariableArrays",
+        "ComplexArrays",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "Object",
+      "object_type": {
+        "type": "struct"
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "update_type",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateType"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": true,
+            "tags": {}
+          }
+        },
+        {
+          "type": "if_statement",
+          "content": {
+            "conditional": {
+              "variable_name": "update_type",
+              "equations": [
+                {
+                  "type": "equals",
+                  "content": {
+                    "value": "VALUES"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "type": "definition",
+                "content": {
+                  "name": "guid1",
+                  "member_type": {
+                    "type": "packed_guid"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              },
+              {
+                "type": "definition",
+                "content": {
+                  "name": "mask1",
+                  "member_type": {
+                    "type": "update_mask"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_if_statements": [
+              {
+                "conditional": {
+                  "variable_name": "update_type",
+                  "equations": [
+                    {
+                      "type": "equals",
+                      "content": {
+                        "value": "MOVEMENT"
+                      }
+                    }
+                  ]
+                },
+                "members": [
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "guid2",
+                      "member_type": {
+                        "type": "packed_guid"
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  },
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "movement1",
+                      "member_type": {
+                        "type": "identifier",
+                        "content": {
+                          "type_name": "MovementBlock"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  }
+                ],
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
+                  "type": "identifier",
+                  "content": {
+                    "type_name": "UpdateType"
+                  }
+                }
+              },
+              {
+                "conditional": {
+                  "variable_name": "update_type",
+                  "equations": [
+                    {
+                      "type": "equals",
+                      "content": {
+                        "value": "CREATE_OBJECT"
+                      }
+                    },
+                    {
+                      "type": "equals",
+                      "content": {
+                        "value": "CREATE_OBJECT2"
+                      }
+                    }
+                  ]
+                },
+                "members": [
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "guid3",
+                      "member_type": {
+                        "type": "packed_guid"
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  },
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "object_type",
+                      "member_type": {
+                        "type": "identifier",
+                        "content": {
+                          "type_name": "ObjectType"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  },
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "movement2",
+                      "member_type": {
+                        "type": "identifier",
+                        "content": {
+                          "type_name": "MovementBlock"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  },
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "mask2",
+                      "member_type": {
+                        "type": "update_mask"
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  }
+                ],
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
+                  "type": "identifier",
+                  "content": {
+                    "type_name": "UpdateType"
+                  }
+                }
+              },
+              {
+                "conditional": {
+                  "variable_name": "update_type",
+                  "equations": [
+                    {
+                      "type": "equals",
+                      "content": {
+                        "value": "OUT_OF_RANGE_OBJECTS"
+                      }
+                    },
+                    {
+                      "type": "equals",
+                      "content": {
+                        "value": "NEAR_OBJECTS"
+                      }
+                    }
+                  ]
+                },
+                "members": [
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "count",
+                      "member_type": {
+                        "type": "integer",
+                        "content": {
+                          "type": "u32",
+                          "endianness": "little"
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  },
+                  {
+                    "type": "definition",
+                    "content": {
+                      "name": "guids",
+                      "member_type": {
+                        "type": "array",
+                        "content": {
+                          "inner": {
+                            "type": "packed_guid"
+                          },
+                          "size": {
+                            "type": "variable",
+                            "content": "count"
+                          }
+                        }
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {}
+                    }
+                  }
+                ],
+                "else_if_statements": [],
+                "else_members": [],
+                "original_type": {
+                  "type": "identifier",
+                  "content": {
+                    "type_name": "UpdateType"
+                  }
+                }
+              }
+            ],
+            "else_members": [],
+            "original_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "UpdateType"
+              }
+            }
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm",
+        "start_position": 174
       },
       "only_has_io_error": false,
       "features": [
@@ -161255,6 +164346,100 @@
       ]
     },
     {
+      "name": "SMSG_UPDATE_OBJECT",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 169
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "amount_of_objects",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": "objects",
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "has_transport",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "objects",
+            "member_type": {
+              "type": "array",
+              "content": {
+                "inner": {
+                  "type": "complex",
+                  "content": "Object"
+                },
+                "size": {
+                  "type": "variable",
+                  "content": "amount_of_objects"
+                }
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm",
+        "start_position": 197
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "VariableArrays",
+        "ComplexArrays",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "SMSG_UPDATE_WORLD_STATE",
       "object_type": {
         "type": "smsg",
@@ -163683,6 +166868,122 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/common_movement.wowm",
+        "start_position": 3
+      },
+      "only_has_io_error": true,
+      "features": [
+        "Struct",
+        "PackedGuidTypes",
+        "SubObjects",
+        "SimpleBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "TransportInfo",
+      "object_type": {
+        "type": "struct"
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
+              "type": "packed_guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "position",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "Vector3d"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "orientation",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "timestamp",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "seat",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm",
         "start_position": 3
       },
       "only_has_io_error": true,
