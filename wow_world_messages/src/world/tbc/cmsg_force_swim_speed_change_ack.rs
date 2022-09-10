@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_swim_speed_change_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_swim_speed_change_ack.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_swim_speed_change_ack.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_swim_speed_change_ack.wowm#L10):
 /// ```text
 /// cmsg CMSG_FORCE_SWIM_SPEED_CHANGE_ACK = 0x00E7 {
 ///     Guid guid;
@@ -63,8 +63,8 @@ impl crate::Message for CMSG_FORCE_SWIM_SPEED_CHANGE_ACK {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_FORCE_SWIM_SPEED_CHANGE_ACK {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_FORCE_SWIM_SPEED_CHANGE_ACK {}
 
 impl CMSG_FORCE_SWIM_SPEED_CHANGE_ACK {
     pub(crate) fn size(&self) -> usize {

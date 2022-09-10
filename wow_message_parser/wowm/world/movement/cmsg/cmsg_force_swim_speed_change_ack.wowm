@@ -1,9 +1,26 @@
-#tag_all versions "1.12";
+cmsg CMSG_FORCE_SWIM_SPEED_CHANGE_ACK = 0x00E7 {
+    Guid guid;
+    u32 counter;
+    MovementInfo info;
+    f32 new_speed;
+} {
+    versions = "1.12";
+}
 
 cmsg CMSG_FORCE_SWIM_SPEED_CHANGE_ACK = 0x00E7 {
     Guid guid;
     u32 counter;
     MovementInfo info;
     f32 new_speed;
+} {
+    versions = "2.4.3";
 }
 
+cmsg CMSG_FORCE_SWIM_SPEED_CHANGE_ACK = 0x00E7 {
+    Guid guid;
+    u32 counter;
+    MovementInfo info;
+    f32 new_speed;
+} {
+    versions = "3.3.5";
+}
