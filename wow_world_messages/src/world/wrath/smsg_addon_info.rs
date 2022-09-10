@@ -5,7 +5,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm#L17):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm#L21):
 /// ```text
 /// smsg SMSG_ADDON_INFO = 0x02EF {
 ///     u32 number_of_addons;
