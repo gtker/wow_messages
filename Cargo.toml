@@ -1,6 +1,7 @@
 [workspace]
 
 members = [
+    "tbc_server",
     "vanilla_client",
     "vanilla_server",
     "wow_message_parser",
