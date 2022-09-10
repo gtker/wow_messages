@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::Vector3d;
+use crate::world::shared::vector3d123::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]

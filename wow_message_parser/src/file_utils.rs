@@ -385,6 +385,13 @@ pub fn get_login_version_file_path(version: &LoginVersion) -> String {
     }
 }
 
+pub fn get_world_shared_path(ty_name: &str, versions: &[WorldVersion]) -> String {
+    format!(
+        "crate::world::shared::{}",
+        get_shared_module_name(ty_name, versions)
+    )
+}
+
 pub fn get_import_path(version: Version) -> String {
     match &version {
         Version::Login(f) => get_login_logon_version_path(f),

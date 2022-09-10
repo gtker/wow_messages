@@ -1,6 +1,7 @@
 use crate::container::{Container, ContainerType};
-use crate::file_utils::get_import_path;
+use crate::file_utils::{get_import_path, get_world_shared_path};
 use crate::parser::types::objects::Objects;
+use crate::parser::types::tags::WorldVersion;
 use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
@@ -59,7 +60,16 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects, version: Version) 
             version
         };
 
-        let module_name = get_import_path(version);
+        let module_name = if e.tags().has_world_version() && e.tags().shared() {
+            let versions: Vec<WorldVersion> = o
+                .get_tags_of_object(name, e.tags())
+                .main_versions()
+                .map(|a| a.as_world())
+                .collect();
+            get_world_shared_path(name, &versions)
+        } else {
+            get_import_path(version)
+        };
 
         s.wln(format!(
             "use {module_name}::{name};",
