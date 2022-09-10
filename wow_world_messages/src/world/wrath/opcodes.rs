@@ -262,6 +262,7 @@ use crate::world::wrath::SMSG_CHAR_DELETE;
 use crate::world::wrath::SMSG_CHARACTER_LOGIN_FAILED;
 use crate::world::wrath::SMSG_UPDATE_OBJECT;
 use crate::world::wrath::SMSG_TUTORIAL_FLAGS;
+use crate::world::wrath::SMSG_PONG;
 use crate::world::wrath::SMSG_AUTH_CHALLENGE;
 use crate::world::wrath::SMSG_AUTH_RESPONSE;
 use crate::world::wrath::SMSG_LOGIN_VERIFY_WORLD;
@@ -278,6 +279,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CHARACTER_LOGIN_FAILED(SMSG_CHARACTER_LOGIN_FAILED),
     SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
     SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS),
+    SMSG_PONG(SMSG_PONG),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
@@ -296,6 +298,7 @@ impl ServerOpcodeMessage {
             0x0041 => Ok(Self::SMSG_CHARACTER_LOGIN_FAILED(<SMSG_CHARACTER_LOGIN_FAILED as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(<SMSG_UPDATE_OBJECT as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(<SMSG_TUTORIAL_FLAGS as crate::Message>::read_body(&mut r, body_size)?)),
+            0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
@@ -463,6 +466,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
@@ -482,6 +486,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
@@ -501,6 +506,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -520,6 +526,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
@@ -539,6 +546,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
@@ -558,6 +566,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
@@ -579,6 +588,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHARACTER_LOGIN_FAILED(_) => "SMSG_CHARACTER_LOGIN_FAILED",
             ServerOpcodeMessage::SMSG_UPDATE_OBJECT(_) => "SMSG_UPDATE_OBJECT",
             ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(_) => "SMSG_TUTORIAL_FLAGS",
+            ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
             ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
@@ -623,6 +633,12 @@ impl From<SMSG_UPDATE_OBJECT> for ServerOpcodeMessage {
 impl From<SMSG_TUTORIAL_FLAGS> for ServerOpcodeMessage {
     fn from(c: SMSG_TUTORIAL_FLAGS) -> Self {
         Self::SMSG_TUTORIAL_FLAGS(c)
+    }
+}
+
+impl From<SMSG_PONG> for ServerOpcodeMessage {
+    fn from(c: SMSG_PONG) -> Self {
+        Self::SMSG_PONG(c)
     }
 }
 

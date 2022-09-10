@@ -154261,10 +154261,21 @@
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "major",
               "version": {
-                "major": 1,
-                "minor": 12
+                "major": 1
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 2
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 3
               }
             }
           ]
@@ -154312,13 +154323,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm",
-            "start_position": 7
+            "start_position": 8
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm",
-        "start_position": 3
+        "start_position": 2
       },
       "only_has_io_error": true,
       "features": [

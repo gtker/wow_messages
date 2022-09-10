@@ -74,6 +74,8 @@ pub(crate) mod smsg_clientcache_version;
 pub use smsg_clientcache_version::*;
 pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
+pub(crate) mod smsg_pong;
+pub use smsg_pong::*;
 pub(crate) mod smsg_realm_split;
 pub use smsg_realm_split::*;
 pub(crate) mod smsg_tutorial_flags;
