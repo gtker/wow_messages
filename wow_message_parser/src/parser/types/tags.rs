@@ -353,8 +353,7 @@ impl Tags {
     }
 
     pub fn shared(&self) -> bool {
-        let versions: Vec<Version> = self.main_versions().collect();
-        versions.len() != 1
+        self.main_versions().count() != 1
     }
 
     pub fn has_all_versions(&self, tags: &Tags) -> bool {
