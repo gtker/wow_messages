@@ -50,9 +50,9 @@ impl crate::Message for MSG_QUEST_PUSH_RESULT {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_QUEST_PUSH_RESULT {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_QUEST_PUSH_RESULT {}
 
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_QUEST_PUSH_RESULT {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for MSG_QUEST_PUSH_RESULT {}
 

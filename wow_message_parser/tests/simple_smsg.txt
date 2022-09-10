@@ -39,6 +39,6 @@ impl crate::Message for SimpleSmsg {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SimpleSmsg {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SimpleSmsg {}
 

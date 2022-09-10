@@ -39,6 +39,6 @@ impl crate::Message for CMSG_QUESTLOG_REMOVE_QUEST {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_QUESTLOG_REMOVE_QUEST {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_QUESTLOG_REMOVE_QUEST {}
 

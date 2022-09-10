@@ -67,8 +67,8 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPELLLOGEXECUTE {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_SPELLLOGEXECUTE {}
 
 impl SMSG_SPELLLOGEXECUTE {
     pub(crate) fn size(&self) -> usize {

@@ -50,8 +50,8 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 
 #[cfg(test)]
 mod test {

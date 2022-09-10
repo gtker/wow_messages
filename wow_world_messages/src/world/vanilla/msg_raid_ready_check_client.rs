@@ -53,8 +53,8 @@ impl crate::Message for MSG_RAID_READY_CHECK_Client {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_RAID_READY_CHECK_Client {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_RAID_READY_CHECK_Client {}
 
 impl MSG_RAID_READY_CHECK_Client {
     pub(crate) fn size(&self) -> usize {

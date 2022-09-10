@@ -67,8 +67,8 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Server {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_LIST_STABLED_PETS_Server {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for MSG_LIST_STABLED_PETS_Server {}
 
 impl MSG_LIST_STABLED_PETS_Server {
     pub(crate) fn size(&self) -> usize {

@@ -36,8 +36,8 @@ impl crate::Message for MSG_MOVE_STOP_SWIM_Client {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_MOVE_STOP_SWIM_Client {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_MOVE_STOP_SWIM_Client {}
 
 impl MSG_MOVE_STOP_SWIM_Client {
     pub(crate) fn size(&self) -> usize {

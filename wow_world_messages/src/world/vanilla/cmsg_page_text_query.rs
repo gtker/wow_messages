@@ -39,6 +39,6 @@ impl crate::Message for CMSG_PAGE_TEXT_QUERY {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PAGE_TEXT_QUERY {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_PAGE_TEXT_QUERY {}
 

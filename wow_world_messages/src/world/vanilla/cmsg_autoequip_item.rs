@@ -48,6 +48,6 @@ impl crate::Message for CMSG_AUTOEQUIP_ITEM {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_AUTOEQUIP_ITEM {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_AUTOEQUIP_ITEM {}
 

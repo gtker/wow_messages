@@ -51,6 +51,6 @@ impl crate::Message for SMSG_RAID_GROUP_ONLY {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_RAID_GROUP_ONLY {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_RAID_GROUP_ONLY {}
 

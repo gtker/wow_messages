@@ -44,8 +44,8 @@ impl crate::Message for CMSG_CHAR_DELETE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHAR_DELETE {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_CHAR_DELETE {}
 
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ClientMessage for CMSG_CHAR_DELETE {}

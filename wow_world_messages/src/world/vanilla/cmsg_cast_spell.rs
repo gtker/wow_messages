@@ -45,8 +45,8 @@ impl crate::Message for CMSG_CAST_SPELL {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CAST_SPELL {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_CAST_SPELL {}
 
 impl CMSG_CAST_SPELL {
     pub(crate) fn size(&self) -> usize {

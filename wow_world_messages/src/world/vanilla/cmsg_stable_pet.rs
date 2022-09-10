@@ -40,6 +40,6 @@ impl crate::Message for CMSG_STABLE_PET {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_STABLE_PET {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_STABLE_PET {}
 

@@ -44,8 +44,8 @@ impl crate::Message for SMSG_SPLINE_SET_TURN_RATE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
 
 impl SMSG_SPLINE_SET_TURN_RATE {
     pub(crate) fn size(&self) -> usize {

@@ -60,8 +60,8 @@ impl crate::Message for SMSG_DUEL_WINNER {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_DUEL_WINNER {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_DUEL_WINNER {}
 
 impl SMSG_DUEL_WINNER {
     pub(crate) fn size(&self) -> usize {

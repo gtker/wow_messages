@@ -215,16 +215,30 @@ impl Writer {
             _ => unreachable!(),
         };
 
-        self.wln(format!(
-            "#[cfg(feature = \"{}\")]",
-            version.as_major_world().feature_name()
-        ));
-        self.wln(format!(
-            "impl {}::{} for {} {{}}",
-            get_import_path(version),
-            trait_to_impl,
-            type_name.as_ref(),
-        ));
+        match version.as_major_world() {
+            MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {
+                self.wln(format!(
+                    "#[cfg(any(feature = \"vanilla\", feature = \"tbc\"))]",
+                ));
+                self.wln(format!(
+                    "impl crate::helper::shared::vanilla_tbc::{} for {} {{}}",
+                    trait_to_impl,
+                    type_name.as_ref(),
+                ));
+            }
+            MajorWorldVersion::Wrath => {
+                self.wln(format!(
+                    "#[cfg(feature = \"{}\")]",
+                    version.as_major_world().feature_name()
+                ));
+                self.wln(format!(
+                    "impl {}::{} for {} {{}}",
+                    get_import_path(version),
+                    trait_to_impl,
+                    type_name.as_ref(),
+                ));
+            }
+        }
         self.newline();
     }
 

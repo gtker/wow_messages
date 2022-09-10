@@ -56,6 +56,6 @@ impl crate::Message for MSG_MINIMAP_PING_Server {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_MINIMAP_PING_Server {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for MSG_MINIMAP_PING_Server {}
 

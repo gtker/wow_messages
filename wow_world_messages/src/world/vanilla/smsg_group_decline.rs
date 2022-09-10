@@ -38,8 +38,8 @@ impl crate::Message for SMSG_GROUP_DECLINE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GROUP_DECLINE {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_GROUP_DECLINE {}
 
 impl SMSG_GROUP_DECLINE {
     pub(crate) fn size(&self) -> usize {

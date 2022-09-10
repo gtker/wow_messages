@@ -44,8 +44,8 @@ impl crate::Message for SMSG_SPLINE_SET_SWIM_BACK_SPEED {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_SET_SWIM_BACK_SPEED {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_SPLINE_SET_SWIM_BACK_SPEED {}
 
 impl SMSG_SPLINE_SET_SWIM_BACK_SPEED {
     pub(crate) fn size(&self) -> usize {

@@ -38,8 +38,8 @@ impl crate::Message for CMSG_CHANNEL_OWNER {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHANNEL_OWNER {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_CHANNEL_OWNER {}
 
 impl CMSG_CHANNEL_OWNER {
     pub(crate) fn size(&self) -> usize {

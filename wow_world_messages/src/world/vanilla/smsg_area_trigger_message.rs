@@ -39,8 +39,8 @@ impl crate::Message for SMSG_AREA_TRIGGER_MESSAGE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
 
 impl SMSG_AREA_TRIGGER_MESSAGE {
     pub(crate) fn size(&self) -> usize {

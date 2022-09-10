@@ -50,8 +50,8 @@ impl crate::Message for CMSG_CHAR_RENAME {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHAR_RENAME {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_CHAR_RENAME {}
 
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ClientMessage for CMSG_CHAR_RENAME {}

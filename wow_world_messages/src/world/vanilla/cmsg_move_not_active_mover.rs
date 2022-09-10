@@ -46,8 +46,8 @@ impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {}
 
 impl CMSG_MOVE_NOT_ACTIVE_MOVER {
     pub(crate) fn size(&self) -> usize {

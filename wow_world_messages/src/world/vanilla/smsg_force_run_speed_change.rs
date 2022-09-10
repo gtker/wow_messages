@@ -60,8 +60,8 @@ impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {}
 
 impl SMSG_FORCE_RUN_SPEED_CHANGE {
     pub(crate) fn size(&self) -> usize {

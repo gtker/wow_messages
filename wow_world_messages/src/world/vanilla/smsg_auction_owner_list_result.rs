@@ -57,8 +57,8 @@ impl crate::Message for SMSG_AUCTION_OWNER_LIST_RESULT {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_AUCTION_OWNER_LIST_RESULT {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_AUCTION_OWNER_LIST_RESULT {}
 
 impl SMSG_AUCTION_OWNER_LIST_RESULT {
     pub(crate) fn size(&self) -> usize {

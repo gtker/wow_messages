@@ -87,6 +87,6 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOOT_START_ROLL {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_LOOT_START_ROLL {}
 

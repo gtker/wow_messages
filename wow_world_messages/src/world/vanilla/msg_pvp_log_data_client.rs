@@ -30,6 +30,6 @@ impl crate::Message for MSG_PVP_LOG_DATA_Client {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_PVP_LOG_DATA_Client {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_PVP_LOG_DATA_Client {}
 

@@ -50,8 +50,8 @@ impl crate::Message for CMSG_CHANNEL_UNMUTE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHANNEL_UNMUTE {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_CHANNEL_UNMUTE {}
 
 impl CMSG_CHANNEL_UNMUTE {
     pub(crate) fn size(&self) -> usize {

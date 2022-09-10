@@ -30,6 +30,6 @@ impl crate::Message for CMSG_ATTACKSTOP {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_ATTACKSTOP {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_ATTACKSTOP {}
 

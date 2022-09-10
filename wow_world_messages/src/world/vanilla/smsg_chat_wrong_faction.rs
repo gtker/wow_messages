@@ -30,6 +30,6 @@ impl crate::Message for SMSG_CHAT_WRONG_FACTION {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHAT_WRONG_FACTION {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_CHAT_WRONG_FACTION {}
 

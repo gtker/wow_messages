@@ -48,8 +48,8 @@ impl crate::Message for SMSG_SERVER_MESSAGE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SERVER_MESSAGE {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_SERVER_MESSAGE {}
 
 impl SMSG_SERVER_MESSAGE {
     pub(crate) fn size(&self) -> usize {

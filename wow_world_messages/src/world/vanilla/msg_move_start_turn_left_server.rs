@@ -46,8 +46,8 @@ impl crate::Message for MSG_MOVE_START_TURN_LEFT_Server {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_MOVE_START_TURN_LEFT_Server {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for MSG_MOVE_START_TURN_LEFT_Server {}
 
 impl MSG_MOVE_START_TURN_LEFT_Server {
     pub(crate) fn size(&self) -> usize {

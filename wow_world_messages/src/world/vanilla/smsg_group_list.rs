@@ -128,8 +128,8 @@ impl crate::Message for SMSG_GROUP_LIST {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GROUP_LIST {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_GROUP_LIST {}
 
 impl SMSG_GROUP_LIST {
     pub(crate) fn size(&self) -> usize {

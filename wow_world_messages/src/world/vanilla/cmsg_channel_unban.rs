@@ -50,8 +50,8 @@ impl crate::Message for CMSG_CHANNEL_UNBAN {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHANNEL_UNBAN {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_CHANNEL_UNBAN {}
 
 impl CMSG_CHANNEL_UNBAN {
     pub(crate) fn size(&self) -> usize {

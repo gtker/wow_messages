@@ -85,6 +85,6 @@ impl crate::Message for CMSG_AUCTION_SELL_ITEM {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_AUCTION_SELL_ITEM {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_AUCTION_SELL_ITEM {}
 

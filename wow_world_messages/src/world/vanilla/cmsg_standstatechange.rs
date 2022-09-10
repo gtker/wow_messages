@@ -40,6 +40,6 @@ impl crate::Message for CMSG_STANDSTATECHANGE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_STANDSTATECHANGE {}
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_STANDSTATECHANGE {}
 
