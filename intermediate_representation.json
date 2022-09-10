@@ -100561,12 +100561,214 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_swim_back_speed_change_ack.wowm",
-        "start_position": 3
+        "start_position": 1
       },
       "only_has_io_error": true,
       "features": [
         "CMsg",
         "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 733
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
+              "type": "guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "counter",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "new_speed",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_swim_back_speed_change_ack.wowm",
+        "start_position": 10
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 733
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
+              "type": "packed_guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "counter",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "new_speed",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_swim_back_speed_change_ack.wowm",
+        "start_position": 19
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "PackedGuidTypes",
         "SimpleBuiltInTypes",
         "SubObjects",
         "WorldVersion"
@@ -100963,12 +101165,214 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_turn_rate_change_ack.wowm",
-        "start_position": 3
+        "start_position": 1
       },
       "only_has_io_error": true,
       "features": [
         "CMsg",
         "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_FORCE_TURN_RATE_CHANGE_ACK",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 735
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
+              "type": "guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "counter",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "new_speed",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_turn_rate_change_ack.wowm",
+        "start_position": 10
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_FORCE_TURN_RATE_CHANGE_ACK",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 735
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
+              "type": "packed_guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "counter",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "new_speed",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_turn_rate_change_ack.wowm",
+        "start_position": 19
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "PackedGuidTypes",
         "SimpleBuiltInTypes",
         "SubObjects",
         "WorldVersion"
@@ -101063,12 +101467,214 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_walk_speed_change_ack.wowm",
-        "start_position": 3
+        "start_position": 1
       },
       "only_has_io_error": true,
       "features": [
         "CMsg",
         "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_FORCE_WALK_SPEED_CHANGE_ACK",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 731
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
+              "type": "guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "counter",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "new_speed",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_walk_speed_change_ack.wowm",
+        "start_position": 10
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_FORCE_WALK_SPEED_CHANGE_ACK",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 731
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
+              "type": "packed_guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "counter",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "new_speed",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_walk_speed_change_ack.wowm",
+        "start_position": 19
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "PackedGuidTypes",
         "SimpleBuiltInTypes",
         "SubObjects",
         "WorldVersion"
