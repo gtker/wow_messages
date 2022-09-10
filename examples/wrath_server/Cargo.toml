@@ -5,8 +5,8 @@ edition = "2018"
 
 [dependencies]
 tokio = { version = "1.18.2", features = ["full"] }
-wow_login_messages = { path = "../wow_login_messages", features = ["tokio"] }
-wow_world_messages = { path = "../wow_world_messages", features = ["tokio", "wrath"] }
+wow_login_messages = { path = "../../wow_login_messages", features = ["tokio"] }
+wow_world_messages = { path = "../../wow_world_messages", features = ["tokio", "wrath"] }
 
 [dependencies.wow_srp]
 version = "0.5.1"
