@@ -162342,7 +162342,7 @@
         {
           "type": "definition",
           "content": {
-            "name": "millisecond_counter",
+            "name": "time_sync",
             "member_type": {
               "type": "integer",
               "content": {

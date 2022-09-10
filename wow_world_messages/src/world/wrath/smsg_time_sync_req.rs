@@ -5,11 +5,11 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_time_sync_req.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_time_sync_req.wowm#L3):
 /// ```text
 /// smsg SMSG_TIME_SYNC_REQ = 0x0390 {
-///     u32 millisecond_counter;
+///     u32 time_sync;
 /// }
 /// ```
 pub struct SMSG_TIME_SYNC_REQ {
-    pub millisecond_counter: u32,
+    pub time_sync: u32,
 }
 
 impl crate::Message for SMSG_TIME_SYNC_REQ {
@@ -20,8 +20,8 @@ impl crate::Message for SMSG_TIME_SYNC_REQ {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // millisecond_counter: u32
-        w.write_all(&self.millisecond_counter.to_le_bytes())?;
+        // time_sync: u32
+        w.write_all(&self.time_sync.to_le_bytes())?;
 
         Ok(())
     }
@@ -30,11 +30,11 @@ impl crate::Message for SMSG_TIME_SYNC_REQ {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
-        // millisecond_counter: u32
-        let millisecond_counter = crate::util::read_u32_le(r)?;
+        // time_sync: u32
+        let time_sync = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            millisecond_counter,
+            time_sync,
         })
     }
 

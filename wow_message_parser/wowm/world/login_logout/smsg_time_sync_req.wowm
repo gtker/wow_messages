@@ -1,5 +1,5 @@
 #tag_all versions "3.3.5";
 
 smsg SMSG_TIME_SYNC_REQ = 0x390 {
-    u32 millisecond_counter;
+    u32 time_sync;
 }
