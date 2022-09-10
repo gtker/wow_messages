@@ -10,9 +10,10 @@ path = "../wow_world_base"
 features = ["vanilla", "tbc", "wrath"]
 
 [dependencies.wow_srp]
-path = "../../wow_srp"
-features = ["wrath-header"]
+version = "0.5.1"
+default-features = false
 optional = true
+features = ["wrath-header", "tbc-header"]
 
 [features]
 default = ["encryption"]

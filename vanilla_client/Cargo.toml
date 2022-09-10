@@ -8,4 +8,4 @@ wow_login_messages = { path = "../wow_login_messages", features = ["sync"] }
 wow_world_messages = { path = "../wow_world_messages", features = ["sync", "vanilla"] }
 
 [dependencies.wow_srp]
-path = "../../wow_srp"
+version = "0.5.1"
