@@ -440,7 +440,7 @@
             "original": "0x00000004"
           },
           "tags": {
-            "comment": "AzerothCore: Overrides various clientside checks"
+            "comment": "`AzerothCore`: Overrides various clientside checks"
           }
         },
         {
@@ -1428,7 +1428,7 @@
             "original": "0x00000200"
           },
           "tags": {
-            "comment": "AzerothCore: Used for flying on some creatures"
+            "comment": "`AzerothCore`: Used for flying on some creatures"
           }
         },
         {
@@ -1438,7 +1438,7 @@
             "original": "0x00000400"
           },
           "tags": {
-            "comment": "AzerothCore: Former MOVEMENTFLAG_LEVITATING. This is used when walking is not possible."
+            "comment": "`AzerothCore`: Former `MOVEMENTFLAG_LEVITATING`. This is used when walking is not possible."
           }
         },
         {
@@ -1448,7 +1448,7 @@
             "original": "0x00000800"
           },
           "tags": {
-            "comment": "AzerothCore: Must not be set along with MOVEMENTFLAG_MASK_MOVING"
+            "comment": "`AzerothCore`: Must not be set along with `MOVEMENTFLAG_MASK_MOVING`"
           }
         },
         {
@@ -1458,7 +1458,7 @@
             "original": "0x00001000"
           },
           "tags": {
-            "comment": "AzerothCore: damage dealt on that type of falling"
+            "comment": "`AzerothCore`: damage dealt on that type of falling"
           }
         },
         {
@@ -1532,7 +1532,7 @@
             "original": "0x00200000"
           },
           "tags": {
-            "comment": "AzerothCore: appears with fly flag also"
+            "comment": "`AzerothCore`: appears with fly flag also"
           }
         },
         {
@@ -1542,7 +1542,7 @@
             "original": "0x00400000"
           },
           "tags": {
-            "comment": "AzerothCore: press 'space' when flying"
+            "comment": "`AzerothCore`: press 'space' when flying"
           }
         },
         {
@@ -1560,7 +1560,7 @@
             "original": "0x01000000"
           },
           "tags": {
-            "comment": "AzerothCore: Appears when unit can fly AND also walk"
+            "comment": "`AzerothCore`: Appears when unit can fly AND also walk"
           }
         },
         {
@@ -1570,7 +1570,7 @@
             "original": "0x02000000"
           },
           "tags": {
-            "comment": "AzerothCore: unit is actually flying. pretty sure this is only used for players. creatures use disable_gravity"
+            "comment": "`AzerothCore`: unit is actually flying. pretty sure this is only used for players. creatures use `disable_gravity`"
           }
         },
         {
@@ -1580,7 +1580,7 @@
             "original": "0x04000000"
           },
           "tags": {
-            "comment": "AzerothCore: used for flight paths"
+            "comment": "`AzerothCore`: used for flight paths"
           }
         },
         {
@@ -1590,7 +1590,7 @@
             "original": "0x08000000"
           },
           "tags": {
-            "comment": "AzerothCore: used for flight paths"
+            "comment": "`AzerothCore`: used for flight paths"
           }
         },
         {
@@ -1600,7 +1600,7 @@
             "original": "0x10000000"
           },
           "tags": {
-            "comment": "AzerothCore: prevent unit from falling through water"
+            "comment": "`AzerothCore`: prevent unit from falling through water"
           }
         },
         {
@@ -1610,7 +1610,7 @@
             "original": "0x20000000"
           },
           "tags": {
-            "comment": "AzerothCore: active rogue safe fall spell (passive)"
+            "comment": "`AzerothCore`: active rogue safe fall spell (passive)"
           }
         },
         {
@@ -1620,7 +1620,7 @@
             "original": "0x40000000"
           },
           "tags": {
-            "comment": "AzerothCore: hover, cannot jump"
+            "comment": "`AzerothCore`: hover, cannot jump"
           }
         }
       ],

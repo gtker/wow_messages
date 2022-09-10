@@ -119,7 +119,7 @@ impl ExtraMovementFlags {
         (self.inner & Self::UNK3) != 0
     }
 
-    /// AzerothCore: Overrides various clientside checks
+    /// `AzerothCore`: Overrides various clientside checks
     ///
     pub const fn new_UNK3() -> Self {
         Self { inner: Self::UNK3 }

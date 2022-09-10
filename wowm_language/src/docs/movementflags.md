@@ -128,10 +128,10 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `PITCH_UP` | 64 (0x40) |  |  |
 | `PITCH_DOWN` | 128 (0x80) |  |  |
 | `WALKING` | 256 (0x100) |  | Walking |
-| `ON_TRANSPORT` | 512 (0x200) |  | AzerothCore: Used for flying on some creatures |
-| `DISABLE_GRAVITY` | 1024 (0x400) |  | AzerothCore: Former MOVEMENTFLAG_LEVITATING. This is used when walking is not possible. |
-| `ROOT` | 2048 (0x800) |  | AzerothCore: Must not be set along with MOVEMENTFLAG_MASK_MOVING |
-| `FALLING` | 4096 (0x1000) |  | AzerothCore: damage dealt on that type of falling |
+| `ON_TRANSPORT` | 512 (0x200) |  | `AzerothCore`: Used for flying on some creatures |
+| `DISABLE_GRAVITY` | 1024 (0x400) |  | `AzerothCore`: Former `MOVEMENTFLAG_LEVITATING`. This is used when walking is not possible. |
+| `ROOT` | 2048 (0x800) |  | `AzerothCore`: Must not be set along with `MOVEMENTFLAG_MASK_MOVING` |
+| `FALLING` | 4096 (0x1000) |  | `AzerothCore`: damage dealt on that type of falling |
 | `FALLING_FAR` | 8192 (0x2000) |  |  |
 | `PENDING_STOP` | 16384 (0x4000) |  |  |
 | `PENDING_STRAFE_STOP` | 32768 (0x8000) |  |  |
@@ -140,16 +140,16 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `PENDING_STRAFE_LEFT` | 262144 (0x40000) |  |  |
 | `PENDING_STRAFE_RIGHT` | 524288 (0x80000) |  |  |
 | `PENDING_ROOT` | 1048576 (0x100000) |  |  |
-| `SWIMMING` | 2097152 (0x200000) |  | AzerothCore: appears with fly flag also |
-| `ASCENDING` | 4194304 (0x400000) |  | AzerothCore: press 'space' when flying |
+| `SWIMMING` | 2097152 (0x200000) |  | `AzerothCore`: appears with fly flag also |
+| `ASCENDING` | 4194304 (0x400000) |  | `AzerothCore`: press 'space' when flying |
 | `DESCENDING` | 8388608 (0x800000) |  |  |
-| `CAN_FLY` | 16777216 (0x1000000) |  | AzerothCore: Appears when unit can fly AND also walk |
-| `FLYING` | 33554432 (0x2000000) |  | AzerothCore: unit is actually flying. pretty sure this is only used for players. creatures use disable_gravity |
-| `SPLINE_ELEVATION` | 67108864 (0x4000000) |  | AzerothCore: used for flight paths |
-| `SPLINE_ENABLED` | 134217728 (0x8000000) |  | AzerothCore: used for flight paths |
-| `WATERWALKING` | 268435456 (0x10000000) |  | AzerothCore: prevent unit from falling through water |
-| `FALLING_SLOW` | 536870912 (0x20000000) |  | AzerothCore: active rogue safe fall spell (passive) |
-| `HOVER` | 1073741824 (0x40000000) |  | AzerothCore: hover, cannot jump |
+| `CAN_FLY` | 16777216 (0x1000000) |  | `AzerothCore`: Appears when unit can fly AND also walk |
+| `FLYING` | 33554432 (0x2000000) |  | `AzerothCore`: unit is actually flying. pretty sure this is only used for players. creatures use `disable_gravity` |
+| `SPLINE_ELEVATION` | 67108864 (0x4000000) |  | `AzerothCore`: used for flight paths |
+| `SPLINE_ENABLED` | 134217728 (0x8000000) |  | `AzerothCore`: used for flight paths |
+| `WATERWALKING` | 268435456 (0x10000000) |  | `AzerothCore`: prevent unit from falling through water |
+| `FALLING_SLOW` | 536870912 (0x20000000) |  | `AzerothCore`: active rogue safe fall spell (passive) |
+| `HOVER` | 1073741824 (0x40000000) |  | `AzerothCore`: hover, cannot jump |
 
 Used in:
 * [MovementBlock](movementblock.md)

@@ -292,7 +292,7 @@ impl MovementFlags {
         (self.inner & Self::ON_TRANSPORT) != 0
     }
 
-    /// AzerothCore: Used for flying on some creatures
+    /// `AzerothCore`: Used for flying on some creatures
     ///
     pub const fn new_ON_TRANSPORT() -> Self {
         Self { inner: Self::ON_TRANSPORT }
@@ -312,7 +312,7 @@ impl MovementFlags {
         (self.inner & Self::DISABLE_GRAVITY) != 0
     }
 
-    /// AzerothCore: Former MOVEMENTFLAG_LEVITATING. This is used when walking is not possible.
+    /// `AzerothCore`: Former `MOVEMENTFLAG_LEVITATING`. This is used when walking is not possible.
     ///
     pub const fn new_DISABLE_GRAVITY() -> Self {
         Self { inner: Self::DISABLE_GRAVITY }
@@ -332,7 +332,7 @@ impl MovementFlags {
         (self.inner & Self::ROOT) != 0
     }
 
-    /// AzerothCore: Must not be set along with MOVEMENTFLAG_MASK_MOVING
+    /// `AzerothCore`: Must not be set along with `MOVEMENTFLAG_MASK_MOVING`
     ///
     pub const fn new_ROOT() -> Self {
         Self { inner: Self::ROOT }
@@ -352,7 +352,7 @@ impl MovementFlags {
         (self.inner & Self::FALLING) != 0
     }
 
-    /// AzerothCore: damage dealt on that type of falling
+    /// `AzerothCore`: damage dealt on that type of falling
     ///
     pub const fn new_FALLING() -> Self {
         Self { inner: Self::FALLING }
@@ -516,7 +516,7 @@ impl MovementFlags {
         (self.inner & Self::SWIMMING) != 0
     }
 
-    /// AzerothCore: appears with fly flag also
+    /// `AzerothCore`: appears with fly flag also
     ///
     pub const fn new_SWIMMING() -> Self {
         Self { inner: Self::SWIMMING }
@@ -536,7 +536,7 @@ impl MovementFlags {
         (self.inner & Self::ASCENDING) != 0
     }
 
-    /// AzerothCore: press 'space' when flying
+    /// `AzerothCore`: press 'space' when flying
     ///
     pub const fn new_ASCENDING() -> Self {
         Self { inner: Self::ASCENDING }
@@ -574,7 +574,7 @@ impl MovementFlags {
         (self.inner & Self::CAN_FLY) != 0
     }
 
-    /// AzerothCore: Appears when unit can fly AND also walk
+    /// `AzerothCore`: Appears when unit can fly AND also walk
     ///
     pub const fn new_CAN_FLY() -> Self {
         Self { inner: Self::CAN_FLY }
@@ -594,7 +594,7 @@ impl MovementFlags {
         (self.inner & Self::FLYING) != 0
     }
 
-    /// AzerothCore: unit is actually flying. pretty sure this is only used for players. creatures use disable_gravity
+    /// `AzerothCore`: unit is actually flying. pretty sure this is only used for players. creatures use `disable_gravity`
     ///
     pub const fn new_FLYING() -> Self {
         Self { inner: Self::FLYING }
@@ -614,7 +614,7 @@ impl MovementFlags {
         (self.inner & Self::SPLINE_ELEVATION) != 0
     }
 
-    /// AzerothCore: used for flight paths
+    /// `AzerothCore`: used for flight paths
     ///
     pub const fn new_SPLINE_ELEVATION() -> Self {
         Self { inner: Self::SPLINE_ELEVATION }
@@ -634,7 +634,7 @@ impl MovementFlags {
         (self.inner & Self::SPLINE_ENABLED) != 0
     }
 
-    /// AzerothCore: used for flight paths
+    /// `AzerothCore`: used for flight paths
     ///
     pub const fn new_SPLINE_ENABLED() -> Self {
         Self { inner: Self::SPLINE_ENABLED }
@@ -654,7 +654,7 @@ impl MovementFlags {
         (self.inner & Self::WATERWALKING) != 0
     }
 
-    /// AzerothCore: prevent unit from falling through water
+    /// `AzerothCore`: prevent unit from falling through water
     ///
     pub const fn new_WATERWALKING() -> Self {
         Self { inner: Self::WATERWALKING }
@@ -674,7 +674,7 @@ impl MovementFlags {
         (self.inner & Self::FALLING_SLOW) != 0
     }
 
-    /// AzerothCore: active rogue safe fall spell (passive)
+    /// `AzerothCore`: active rogue safe fall spell (passive)
     ///
     pub const fn new_FALLING_SLOW() -> Self {
         Self { inner: Self::FALLING_SLOW }
@@ -694,7 +694,7 @@ impl MovementFlags {
         (self.inner & Self::HOVER) != 0
     }
 
-    /// AzerothCore: hover, cannot jump
+    /// `AzerothCore`: hover, cannot jump
     ///
     pub const fn new_HOVER() -> Self {
         Self { inner: Self::HOVER }

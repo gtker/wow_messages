@@ -22,16 +22,16 @@ flag MovementFlags : u32 {
         comment = "Walking";
     }
     ON_TRANSPORT           = 0x00000200 {
-        comment = "AzerothCore: Used for flying on some creatures";
+        comment = "`AzerothCore`: Used for flying on some creatures";
     }
     DISABLE_GRAVITY       = 0x00000400 {
-        comment = "AzerothCore: Former MOVEMENTFLAG_LEVITATING. This is used when walking is not possible.";
+        comment = "`AzerothCore`: Former `MOVEMENTFLAG_LEVITATING`. This is used when walking is not possible.";
     }
     ROOT                  = 0x00000800 {
-        comment = "AzerothCore: Must not be set along with MOVEMENTFLAG_MASK_MOVING";
+        comment = "`AzerothCore`: Must not be set along with `MOVEMENTFLAG_MASK_MOVING`";
     }
     FALLING               = 0x00001000 {
-        comment = "AzerothCore: damage dealt on that type of falling";
+        comment = "`AzerothCore`: damage dealt on that type of falling";
     }
     FALLING_FAR           = 0x00002000;
     PENDING_STOP          = 0x00004000;
@@ -42,32 +42,32 @@ flag MovementFlags : u32 {
     PENDING_STRAFE_RIGHT  = 0x00080000;
     PENDING_ROOT          = 0x00100000;
     SWIMMING              = 0x00200000 {
-        comment = "AzerothCore: appears with fly flag also";
+        comment = "`AzerothCore`: appears with fly flag also";
     }
     ASCENDING             = 0x00400000 {
-        comment = "AzerothCore: press 'space' when flying";
+        comment = "`AzerothCore`: press 'space' when flying";
     }
     DESCENDING            = 0x00800000;
     CAN_FLY               = 0x01000000 {
-        comment = "AzerothCore: Appears when unit can fly AND also walk";
+        comment = "`AzerothCore`: Appears when unit can fly AND also walk";
     }
     FLYING                = 0x02000000 {
-        comment = "AzerothCore: unit is actually flying. pretty sure this is only used for players. creatures use disable_gravity";
+        comment = "`AzerothCore`: unit is actually flying. pretty sure this is only used for players. creatures use `disable_gravity`";
     }
     SPLINE_ELEVATION      = 0x04000000 {
-        comment = "AzerothCore: used for flight paths";
+        comment = "`AzerothCore`: used for flight paths";
     }
     SPLINE_ENABLED        = 0x08000000 {
-        comment = "AzerothCore: used for flight paths";
+        comment = "`AzerothCore`: used for flight paths";
     }
     WATERWALKING          = 0x10000000 {
-        comment = "AzerothCore: prevent unit from falling through water";
+        comment = "`AzerothCore`: prevent unit from falling through water";
     }
     FALLING_SLOW          = 0x20000000 {
-        comment = "AzerothCore: active rogue safe fall spell (passive)";
+        comment = "`AzerothCore`: active rogue safe fall spell (passive)";
     }
     HOVER                 = 0x40000000 {
-        comment = "AzerothCore: hover, cannot jump";
+        comment = "`AzerothCore`: hover, cannot jump";
     }
 }
 
@@ -77,7 +77,7 @@ flag ExtraMovementFlags : u16
     NO_STRAFE                = 0x00000001;
     NO_JUMPING               = 0x00000002;
     UNK3                     = 0x00000004 {
-        comment = "AzerothCore: Overrides various clientside checks";
+        comment = "`AzerothCore`: Overrides various clientside checks";
     }
     FULL_SPEED_TURNING       = 0x00000008;
     FULL_SPEED_PITCHING      = 0x00000010;

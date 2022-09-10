@@ -134,10 +134,15 @@ impl RustMember {
         };
 
         for &name in enumerator_names {
-            let e = enums.iter_mut().find(|a| a.name() == name).expect(&format!(
-                "unable to find enumerator with name '{}' in variable '{}' with type '{}'",
-                name, self.name, ty
-            ));
+            let e = enums
+                .iter_mut()
+                .find(|a| a.name() == name)
+                .unwrap_or_else(|| {
+                    panic!(
+                        "unable to find enumerator with name '{}' in variable '{}' with type '{}'",
+                        name, name, ty
+                    )
+                });
             e.is_main_enumerator = true;
         }
     }

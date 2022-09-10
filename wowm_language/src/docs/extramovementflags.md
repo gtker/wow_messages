@@ -35,7 +35,7 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 | `NONE` | 0 (0x00) |  |  |
 | `NO_STRAFE` | 1 (0x01) |  |  |
 | `NO_JUMPING` | 2 (0x02) |  |  |
-| `UNK3` | 4 (0x04) |  | AzerothCore: Overrides various clientside checks |
+| `UNK3` | 4 (0x04) |  | `AzerothCore`: Overrides various clientside checks |
 | `FULL_SPEED_TURNING` | 8 (0x08) |  |  |
 | `FULL_SPEED_PITCHING` | 16 (0x10) |  |  |
 | `ALWAYS_ALLOW_PITCHING` | 32 (0x20) |  |  |
