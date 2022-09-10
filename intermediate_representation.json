@@ -100383,7 +100383,7 @@
           "content": {
             "name": "guid",
             "member_type": {
-              "type": "guid"
+              "type": "packed_guid"
             },
             "constant_value": null,
             "used_as_size_in": null,
@@ -100466,7 +100466,7 @@
       "only_has_io_error": true,
       "features": [
         "CMsg",
-        "ComplexBuiltInTypes",
+        "PackedGuidTypes",
         "SimpleBuiltInTypes",
         "SubObjects",
         "WorldVersion"
@@ -100786,7 +100786,7 @@
           "content": {
             "name": "guid",
             "member_type": {
-              "type": "guid"
+              "type": "packed_guid"
             },
             "constant_value": null,
             "used_as_size_in": null,
@@ -100868,7 +100868,7 @@
       "only_has_io_error": true,
       "features": [
         "CMsg",
-        "ComplexBuiltInTypes",
+        "PackedGuidTypes",
         "SimpleBuiltInTypes",
         "SubObjects",
         "WorldVersion"

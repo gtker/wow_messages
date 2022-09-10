@@ -17,7 +17,7 @@ cmsg CMSG_FORCE_SWIM_SPEED_CHANGE_ACK = 0x00E7 {
 }
 
 cmsg CMSG_FORCE_SWIM_SPEED_CHANGE_ACK = 0x00E7 {
-    Guid guid;
+    PackedGuid guid;
     u32 counter;
     MovementInfo info;
     f32 new_speed;
