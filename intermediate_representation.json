@@ -146053,10 +146053,38 @@
           "type": "world",
           "versions": [
             {
+              "type": "major",
+              "version": {
+                "major": 1
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 2
+              }
+            },
+            {
               "type": "minor",
               "version": {
-                "major": 1,
-                "minor": 12
+                "major": 3,
+                "minor": 0
+              }
+            },
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 1,
+                "patch": 0
+              }
+            },
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 1,
+                "patch": 1
               }
             }
           ]
@@ -146120,13 +146148,122 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm",
-            "start_position": 20
+            "start_position": 19
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm",
-        "start_position": 3
+        "start_position": 1
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_LOGIN_SETTIMESPEED",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 66
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "datetime",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "description": "Current server datetime.",
+              "comment": "This is not just unix time but instead seems to be a custom bitfield.\nvmangos/cmangos/mangoszero uses the format `years_after_2000 << 24 | month << 20 | month_day << 14 | week_day << 11 | hours << 6 | minutes`. All values start at 0 and `week_day` starts on Sunday.\nRunning the client with `-console` verifies that this message in this format sets the correct datetime. [SMSG_QUERY_TIME_RESPONSE] will not set this."
+            }
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "timescale",
+            "member_type": {
+              "type": "floating_point",
+              "content": {
+                "type": "f32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "description": "How many minutes should pass by every second.",
+              "comment": "vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second."
+            }
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "unknown1",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "arcemu/azerothcore/mangostwo: Set to 0."
+            }
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 1,
+                "patch": 2
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 3,
+                "minor": 2
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 3,
+                "minor": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm",
+        "start_position": 32
       },
       "only_has_io_error": true,
       "features": [
