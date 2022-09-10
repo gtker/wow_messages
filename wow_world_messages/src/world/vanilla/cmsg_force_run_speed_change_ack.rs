@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, PartialEq, Default)]
 /// Sent to acknowledge the new speed. Reply to [`SMSG_FORCE_RUN_SPEED_CHANGE`](crate::world::vanilla::SMSG_FORCE_RUN_SPEED_CHANGE).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm#L1):
 /// ```text
 /// cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
 ///     Guid guid;
@@ -96,7 +96,7 @@ mod test {
          0xC2, 0x8E, 0xD1, 0xA5, 0x42, 0xED, 0x99, 0x7F, 0x40, 0x39, 0x03, 0x00,
          0x00, 0x00, 0x00, 0xE0, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_FORCE_RUN_SPEED_CHANGE_ACK0() {
@@ -138,7 +138,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 11.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_FORCE_RUN_SPEED_CHANGE_ACK0() {
@@ -180,7 +180,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 11.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_FORCE_RUN_SPEED_CHANGE_ACK0() {

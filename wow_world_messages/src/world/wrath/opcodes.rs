@@ -9,6 +9,7 @@ use crate::world::wrath::CMSG_CHAR_CREATE;
 use crate::world::wrath::CMSG_CHAR_ENUM;
 use crate::world::wrath::CMSG_CHAR_DELETE;
 use crate::world::wrath::CMSG_PLAYER_LOGIN;
+use crate::world::wrath::CMSG_FORCE_RUN_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_MOVE_ROOT_ACK;
 use crate::world::wrath::CMSG_FORCE_MOVE_UNROOT_ACK;
@@ -29,6 +30,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
     CMSG_PLAYER_LOGIN(CMSG_PLAYER_LOGIN),
+    CMSG_FORCE_RUN_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_SPEED_CHANGE_ACK),
     CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK),
     CMSG_FORCE_MOVE_ROOT_ACK(CMSG_FORCE_MOVE_ROOT_ACK),
     CMSG_FORCE_MOVE_UNROOT_ACK(CMSG_FORCE_MOVE_UNROOT_ACK),
@@ -51,6 +53,7 @@ impl ClientOpcodeMessage {
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003D => Ok(Self::CMSG_PLAYER_LOGIN(<CMSG_PLAYER_LOGIN as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00E3 => Ok(Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00E5 => Ok(Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00E9 => Ok(Self::CMSG_FORCE_MOVE_ROOT_ACK(<CMSG_FORCE_MOVE_ROOT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00EB => Ok(Self::CMSG_FORCE_MOVE_UNROOT_ACK(<CMSG_FORCE_MOVE_UNROOT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
@@ -141,6 +144,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_encrypted_client(w, e),
@@ -164,6 +168,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_unencrypted_client(w),
@@ -187,6 +192,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -210,6 +216,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -233,6 +240,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -256,6 +264,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_unencrypted_client(w).await,
@@ -281,6 +290,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
             ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => "CMSG_CHAR_DELETE",
             ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => "CMSG_PLAYER_LOGIN",
+            ClientOpcodeMessage::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_MOVE_ROOT_ACK(_) => "CMSG_FORCE_MOVE_ROOT_ACK",
             ClientOpcodeMessage::CMSG_FORCE_MOVE_UNROOT_ACK(_) => "CMSG_FORCE_MOVE_UNROOT_ACK",
@@ -319,6 +329,12 @@ impl From<CMSG_CHAR_DELETE> for ClientOpcodeMessage {
 impl From<CMSG_PLAYER_LOGIN> for ClientOpcodeMessage {
     fn from(c: CMSG_PLAYER_LOGIN) -> Self {
         Self::CMSG_PLAYER_LOGIN(c)
+    }
+}
+
+impl From<CMSG_FORCE_RUN_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_RUN_SPEED_CHANGE_ACK) -> Self {
+        Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c)
     }
 }
 
