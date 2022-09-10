@@ -10,8 +10,8 @@ struct Addon {
     u8 addon_type = 2;
     u8 uses_crc = 1;
     u8 uses_diffent_public_key;
-    u32 unknown1 = 0;
-    u8 unknown2 = 0;
+    u32 unknown1;
+    u8 unknown2;
 }
 ```
 ### Body
@@ -21,6 +21,6 @@ struct Addon {
 | 0x00 | 1 / - | u8 | addon_type |  |  |
 | 0x01 | 1 / - | u8 | uses_crc |  |  |
 | 0x02 | 1 / - | u8 | uses_diffent_public_key |  |  |
-| 0x03 | 4 / Little | u32 | unknown1 |  |  |
-| 0x07 | 1 / - | u8 | unknown2 |  |  |
+| 0x03 | 4 / Little | u32 | unknown1 |  | Other emus hardcode this to 0 |
+| 0x07 | 1 / - | u8 | unknown2 |  | Other emus hardcode this to 0 |
 

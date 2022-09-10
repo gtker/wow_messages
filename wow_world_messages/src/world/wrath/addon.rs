@@ -8,12 +8,18 @@ use std::io::{Write, Read};
 ///     u8 addon_type = 2;
 ///     u8 uses_crc = 1;
 ///     u8 uses_diffent_public_key;
-///     u32 unknown1 = 0;
-///     u8 unknown2 = 0;
+///     u32 unknown1;
+///     u8 unknown2;
 /// }
 /// ```
 pub struct Addon {
     pub uses_diffent_public_key: u8,
+    /// Other emus hardcode this to 0
+    ///
+    pub unknown1: u32,
+    /// Other emus hardcode this to 0
+    ///
+    pub unknown2: u8,
 }
 
 impl Addon {
@@ -39,28 +45,6 @@ impl Addon {
     /// **This field is not in the Rust struct, but is written as this constant value.**
     pub const USES_CRC_VALUE: u8 = 0x01;
 
-    /// The field `unknown1` is constantly specified to be:
-    ///
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `0` |
-    /// | Hex | `0x00` |
-    /// | Original | `0` |
-    ///
-    /// **This field is not in the Rust struct, but is written as this constant value.**
-    pub const UNKNOWN1_VALUE: u32 = 0x00;
-
-    /// The field `unknown2` is constantly specified to be:
-    ///
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `0` |
-    /// | Hex | `0x00` |
-    /// | Original | `0` |
-    ///
-    /// **This field is not in the Rust struct, but is written as this constant value.**
-    pub const UNKNOWN2_VALUE: u8 = 0x00;
-
 }
 
 impl Addon {
@@ -75,10 +59,10 @@ impl Addon {
         w.write_all(&self.uses_diffent_public_key.to_le_bytes())?;
 
         // unknown1: u32
-        w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes())?;
+        w.write_all(&self.unknown1.to_le_bytes())?;
 
         // unknown2: u8
-        w.write_all(&Self::UNKNOWN2_VALUE.to_le_bytes())?;
+        w.write_all(&self.unknown2.to_le_bytes())?;
 
         Ok(())
     }
@@ -98,15 +82,15 @@ impl Addon {
         let uses_diffent_public_key = crate::util::read_u8_le(r)?;
 
         // unknown1: u32
-        let _unknown1 = crate::util::read_u32_le(r)?;
-        // unknown1 is expected to always be 0 (0)
+        let unknown1 = crate::util::read_u32_le(r)?;
 
         // unknown2: u8
-        let _unknown2 = crate::util::read_u8_le(r)?;
-        // unknown2 is expected to always be 0 (0)
+        let unknown2 = crate::util::read_u8_le(r)?;
 
         Ok(Self {
             uses_diffent_public_key,
+            unknown1,
+            unknown2,
         })
     }
 
