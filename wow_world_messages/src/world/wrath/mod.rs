@@ -14,6 +14,8 @@ pub(crate) mod class;
 pub use class::*;
 pub(crate) mod cmsg_activatetaxi;
 pub use cmsg_activatetaxi::*;
+pub(crate) mod cmsg_activatetaxiexpress;
+pub use cmsg_activatetaxiexpress::*;
 pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
 pub(crate) mod cmsg_char_create;

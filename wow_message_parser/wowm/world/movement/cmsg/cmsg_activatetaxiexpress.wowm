@@ -1,8 +1,19 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_ACTIVATETAXIEXPRESS = 0x0312 {
     Guid guid;
-    u32 total_cost;
+    u32 total_cost {
+        comment = "vmangos/mangosone: Never used.";
+    }
     u32 node_count;
+    u32[node_count] nodes;
+} {
+    versions = "1 2";
+}
+
+cmsg CMSG_ACTIVATETAXIEXPRESS = 0x312 {
+    Guid guid;
+    u32 node_count;
+    u32[node_count] nodes;
+} {
+    versions = "3.3.5";
 }
 

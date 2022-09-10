@@ -92974,7 +92974,7 @@
         "type": "cmsg",
         "opcode": 786
       },
-      "constant": true,
+      "constant": false,
       "members": [
         {
           "type": "definition",
@@ -93003,6 +93003,107 @@
             "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
+            "tags": {
+              "comment": "vmangos/mangosone: Never used."
+            }
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "node_count",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": "nodes",
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "nodes",
+            "member_type": {
+              "type": "array",
+              "content": {
+                "inner": {
+                  "type": "integer",
+                  "content": {
+                    "type": "u32",
+                    "endianness": "little"
+                  }
+                },
+                "size": {
+                  "type": "variable",
+                  "content": "node_count"
+                }
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "major",
+              "version": {
+                "major": 1
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 2
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_activatetaxiexpress.wowm",
+        "start_position": 1
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "VariableArrays",
+        "SimpleArrays",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_ACTIVATETAXIEXPRESS",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 786
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
+              "type": "guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
             "tags": {}
           }
         },
@@ -93018,6 +93119,32 @@
               }
             },
             "constant_value": null,
+            "used_as_size_in": "nodes",
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "nodes",
+            "member_type": {
+              "type": "array",
+              "content": {
+                "inner": {
+                  "type": "integer",
+                  "content": {
+                    "type": "u32",
+                    "endianness": "little"
+                  }
+                },
+                "size": {
+                  "type": "variable",
+                  "content": "node_count"
+                }
+              }
+            },
+            "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {}
@@ -93029,10 +93156,11 @@
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "patch",
               "version": {
-                "major": 1,
-                "minor": 12
+                "major": 3,
+                "minor": 3,
+                "patch": 5
               }
             }
           ]
@@ -93041,13 +93169,15 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_activatetaxiexpress.wowm",
-        "start_position": 3
+        "start_position": 12
       },
       "only_has_io_error": true,
       "features": [
         "CMsg",
         "ComplexBuiltInTypes",
         "SimpleBuiltInTypes",
+        "VariableArrays",
+        "SimpleArrays",
         "WorldVersion"
       ]
     },
