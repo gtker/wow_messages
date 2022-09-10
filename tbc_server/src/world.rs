@@ -222,6 +222,11 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .await
     .unwrap();
 
+    SMSG_TIME_SYNC_REQ { time_sync: 0 }
+        .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
+        .await
+        .unwrap();
+
     loop {
         let opcode =
             ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter()).await;

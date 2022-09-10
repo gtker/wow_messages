@@ -13,6 +13,7 @@ pub mod smsg_auth_challenge12;
 pub mod smsg_login_settimespeed12;
 pub mod smsg_pong123;
 pub mod smsg_realm_split2_4_33;
+pub mod smsg_time_sync_req2_4_33;
 pub mod smsg_tutorial_flags123;
 pub mod transport_info1_122;
 pub mod update_flag1_122_4_3;
