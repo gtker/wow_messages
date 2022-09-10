@@ -169,6 +169,7 @@
 - [Version](docs/version.md)
 
 # Login Containers
+- [Addon](docs/addon.md)
 - [AuctionListItem](docs/auctionlistitem.md)
 - [AuraLog](docs/auralog.md)
 - [BattlegroundPlayer](docs/battlegroundplayer.md)
@@ -546,6 +547,7 @@
 - [SMSG_ACCOUNT_DATA_TIMES](docs/smsg_account_data_times.md)
 - [SMSG_ACTION_BUTTONS](docs/smsg_action_buttons.md)
 - [SMSG_ACTIVATETAXIREPLY](docs/smsg_activatetaxireply.md)
+- [SMSG_ADDON_INFO](docs/smsg_addon_info.md)
 - [SMSG_AI_REACTION](docs/smsg_ai_reaction.md)
 - [SMSG_AREA_SPIRIT_HEALER_TIME](docs/smsg_area_spirit_healer_time.md)
 - [SMSG_AREA_TRIGGER_MESSAGE](docs/smsg_area_trigger_message.md)
@@ -588,6 +590,7 @@
 - [SMSG_CHAT_RESTRICTED](docs/smsg_chat_restricted.md)
 - [SMSG_CHAT_WRONG_FACTION](docs/smsg_chat_wrong_faction.md)
 - [SMSG_CLEAR_COOLDOWN](docs/smsg_clear_cooldown.md)
+- [SMSG_CLIENTCACHE_VERSION](docs/smsg_clientcache_version.md)
 - [SMSG_CLIENT_CONTROL_UPDATE](docs/smsg_client_control_update.md)
 - [SMSG_COOLDOWN_EVENT](docs/smsg_cooldown_event.md)
 - [SMSG_CORPSE_RECLAIM_DELAY](docs/smsg_corpse_reclaim_delay.md)
