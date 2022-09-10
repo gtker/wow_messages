@@ -8,6 +8,7 @@ use wow_world_messages::wrath::opcodes::ClientOpcodeMessage;
 use wow_world_messages::wrath::tokio_expect_client_message;
 use wow_world_messages::wrath::ServerMessage;
 use wow_world_messages::wrath::*;
+use wow_world_messages::wrath::{UpdateMask, UpdatePlayer};
 use wow_world_messages::Guid;
 
 pub async fn world(users: Arc<Mutex<HashMap<String, SrpServer>>>) {
@@ -24,9 +25,9 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     let seed = ProofSeed::new();
 
     SMSG_AUTH_CHALLENGE {
-        unknown1: 1,
+        unknown1: 0,
         server_seed: seed.seed(),
-        seed: [0_u8; 32],
+        seed: [0; 32],
     }
     .tokio_write_unencrypted_server(&mut stream)
     .await
@@ -63,22 +64,14 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .unwrap();
 
     loop {
-        let opcode =
-            ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter()).await;
-        let opcode = match opcode {
-            Ok(o) => o,
-            Err(e) => {
-                dbg!(e);
-                continue;
-            }
-        };
+        let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter())
+            .await
+            .unwrap();
 
         match opcode {
-            ClientOpcodeMessage::CMSG_REALM_SPLIT(c) => {
-                SMSG_REALM_SPLIT {
-                    unknown: c.unknown1,
-                    state: RealmSplitState::Normal,
-                    split_date: "01/01/01".to_string(),
+            ClientOpcodeMessage::CMSG_PING(c) => {
+                SMSG_PONG {
+                    sequence_id: c.sequence_id,
                 }
                 .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
                 .await
@@ -97,13 +90,13 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         hair_style: 0,
                         hair_color: 0,
                         facial_hair: 0,
-                        level: 1,
-                        area: Area::NorthshireAbbey,
-                        map: Map::Kalimdor,
+                        level: 0,
+                        area: Area::NorthshireValley,
+                        map: Map::EasternKingdoms,
                         position: Vector3d {
-                            x: 1.0,
-                            y: 1.0,
-                            z: 1.0,
+                            x: 0.0,
+                            y: 0.0,
+                            z: 0.0,
                         },
                         guild_id: 0,
                         flags: Default::default(),
@@ -118,9 +111,117 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                 .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
                 .await
                 .unwrap();
-                println!("SMSG_CHAR_ENUM");
+            }
+            ClientOpcodeMessage::CMSG_CHAR_CREATE(c) => {
+                let result = match c.name.to_uppercase().as_str() {
+                    "SYSTEME" => WorldResult::AuthSystemError,
+                    "SERVERSH" => WorldResult::AuthServerShuttingDown,
+                    "WAITQU" => WorldResult::AuthWaitQueue,
+                    "ERROR" => WorldResult::CharCreateError,
+                    "SERVERL" => WorldResult::CharCreateServerLimit,
+                    // CCSUCC immediately returns to character screen
+                    "CCSUCC" => WorldResult::CharCreateSuccess,
+                    "SERVERQU" => WorldResult::CharCreateServerQueue,
+                    // Above fail
+                    _ => WorldResult::CharCreateError,
+                };
+
+                SMSG_CHAR_CREATE { result }
+                    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
+                    .await
+                    .unwrap();
+            }
+            ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => {
+                break;
             }
             e => {
+                dbg!(e);
+            }
+        }
+    }
+
+    SMSG_LOGIN_VERIFY_WORLD {
+        map: Map::EasternKingdoms,
+        position: Vector3d {
+            x: 200.0,
+            y: 200.0,
+            z: 200.0,
+        },
+        orientation: 0.0,
+    }
+    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
+    .await
+    .unwrap();
+
+    SMSG_TUTORIAL_FLAGS {
+        tutorial_data0: 0xFFFFFFFF,
+        tutorial_data1: 0xFFFFFFFF,
+        tutorial_data2: 0xFFFFFFFF,
+        tutorial_data3: 0xFFFFFFFF,
+        tutorial_data4: 0xFFFFFFFF,
+        tutorial_data5: 0xFFFFFFFF,
+        tutorial_data6: 0xFFFFFFFF,
+        tutorial_data7: 0xFFFFFFFF,
+    }
+    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
+    .await
+    .unwrap();
+
+    let update_mask = UpdatePlayer::new()
+        .set_object_GUID(Guid::new(4))
+        .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
+        .set_object_SCALE_X(1.0)
+        .set_unit_HEALTH(100)
+        .set_unit_MAXHEALTH(100)
+        .set_unit_LEVEL(1)
+        .set_unit_FACTIONTEMPLATE(1)
+        .set_unit_DISPLAYID(50)
+        .set_unit_NATIVEDISPLAYID(50);
+
+    let update_flag = MovementBlock_UpdateFlag::empty()
+        .set_LIVING(MovementBlock_UpdateFlag_Living::Living {
+            backwards_running_speed: 4.5,
+            backwards_swimming_speed: 0.0,
+            extra_flags: ExtraMovementFlags::empty(),
+            fall_time: 0.0,
+            flags: MovementBlock_MovementFlags::empty(),
+            flight_speed: 0.0,
+            backwards_flight_speed: 0.0,
+            living_orientation: 0.0,
+            living_position: Vector3d {
+                x: -8949.95,
+                y: -132.493,
+                z: 83.5312,
+            },
+            pitch_rate: 0.0,
+            running_speed: 7.0,
+            swimming_speed: 0.0,
+            timestamp: 0,
+            turn_rate: std::f32::consts::PI,
+            walking_speed: 1.0,
+        })
+        .set_SELF();
+
+    SMSG_UPDATE_OBJECT {
+        objects: vec![Object {
+            update_type: Object_UpdateType::CreateObject2 {
+                guid3: Guid::new(4),
+                mask2: UpdateMask::Player(update_mask),
+                movement2: MovementBlock { update_flag },
+                object_type: ObjectType::Player,
+            },
+        }],
+    }
+    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
+    .await
+    .unwrap();
+
+    loop {
+        match ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter()).await {
+            Ok(e) => {
+                dbg!(e);
+            }
+            Err(e) => {
                 dbg!(e);
             }
         }
