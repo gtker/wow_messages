@@ -94146,6 +94146,12 @@
               "version": {
                 "major": 1
               }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 2
+              }
             }
           ]
         }
@@ -94577,13 +94583,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm",
-            "start_position": 20
+            "start_position": 19
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm",
-        "start_position": 2
+        "start_position": 1
       },
       "only_has_io_error": false,
       "features": [
@@ -94823,6 +94829,8 @@
         }
       ],
       "tags": {
+        "description": "Sent after receiving [SMSG_AUTH_CHALLENGE].",
+        "comment": "This message is never encrypted.",
         "version": {
           "type": "world",
           "versions": [
@@ -94840,7 +94848,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm",
-        "start_position": 71
+        "start_position": 70
       },
       "only_has_io_error": false,
       "features": [

@@ -2,7 +2,11 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:71`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L71):
+/// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::world::wrath::SMSG_AUTH_CHALLENGE).
+///
+/// This message is never encrypted.
+///
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:70`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L70):
 /// ```text
 /// cmsg CMSG_AUTH_SESSION = 0x01ED {
 ///     u32 client_build;
