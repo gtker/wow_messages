@@ -1,7 +1,8 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_ACTIVATETAXI = 0x01AD {
     Guid guid;
-    u32[2] nodes;
+    u32 source_node;
+    u32 destination_node;
 }
 

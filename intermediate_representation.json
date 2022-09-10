@@ -92898,21 +92898,29 @@
         {
           "type": "definition",
           "content": {
-            "name": "nodes",
+            "name": "source_node",
             "member_type": {
-              "type": "array",
+              "type": "integer",
               "content": {
-                "inner": {
-                  "type": "integer",
-                  "content": {
-                    "type": "u32",
-                    "endianness": "little"
-                  }
-                },
-                "size": {
-                  "type": "fixed",
-                  "content": 2
-                }
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "destination_node",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
               }
             },
             "constant_value": null,
@@ -92927,10 +92935,21 @@
           "type": "world",
           "versions": [
             {
-              "type": "minor",
+              "type": "major",
               "version": {
-                "major": 1,
-                "minor": 12
+                "major": 1
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 2
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 3
               }
             }
           ]
@@ -92945,8 +92964,7 @@
       "features": [
         "CMsg",
         "ComplexBuiltInTypes",
-        "FixedArrays",
-        "SimpleArrays",
+        "SimpleBuiltInTypes",
         "WorldVersion"
       ]
     },
