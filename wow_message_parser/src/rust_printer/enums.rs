@@ -46,7 +46,8 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
     print_wowm_definition("enum", s, e);
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]");
-    let visibility = match e.only_used_in_if() && !common_visibility_override {
+    let visibility = match e.only_used_in_if() && !common_visibility_override && !e.tags().shared()
+    {
         true => "pub(crate)",
         false => "pub",
     };

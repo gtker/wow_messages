@@ -352,6 +352,11 @@ impl Tags {
         self.contains("unimplemented")
     }
 
+    pub fn shared(&self) -> bool {
+        let versions: Vec<Version> = self.main_versions().collect();
+        versions.len() != 1
+    }
+
     pub fn has_all_versions(&self, tags: &Tags) -> bool {
         // if self has all versions of tags
         if tags.contains(TEST_STR) && self.contains(TEST_STR) {

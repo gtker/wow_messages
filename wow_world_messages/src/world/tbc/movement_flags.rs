@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement.wowm#L12):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement_2_4_3.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement_2_4_3.wowm#L3):
 /// ```text
 /// flag MovementFlags : u32 {
 ///     NONE = 0x00000000;
@@ -18,11 +18,12 @@
 ///     JUMPING = 0x00002000;
 ///     FALLINGFAR = 0x00004000;
 ///     SWIMMING = 0x00200000;
-///     SPLINE_ENABLED = 0x00400000;
+///     ASCENDING = 0x00400000;
 ///     CAN_FLY = 0x00800000;
 ///     FLYING = 0x01000000;
 ///     ONTRANSPORT = 0x02000000;
 ///     SPLINE_ELEVATION = 0x04000000;
+///     SPLINE_ENABLED = 0x08000000;
 ///     WATERWALKING = 0x10000000;
 ///     SAFE_FALL = 0x20000000;
 ///     HOVER = 0x40000000;
@@ -56,11 +57,12 @@ impl MovementFlags {
     pub(crate) const JUMPING: u32 = 0x2000;
     pub(crate) const FALLINGFAR: u32 = 0x4000;
     pub(crate) const SWIMMING: u32 = 0x200000;
-    pub(crate) const SPLINE_ENABLED: u32 = 0x400000;
+    pub(crate) const ASCENDING: u32 = 0x400000;
     pub(crate) const CAN_FLY: u32 = 0x800000;
     pub(crate) const FLYING: u32 = 0x1000000;
     pub(crate) const ONTRANSPORT: u32 = 0x2000000;
     pub(crate) const SPLINE_ELEVATION: u32 = 0x4000000;
+    pub(crate) const SPLINE_ENABLED: u32 = 0x8000000;
     pub(crate) const WATERWALKING: u32 = 0x10000000;
     pub(crate) const SAFE_FALL: u32 = 0x20000000;
     pub(crate) const HOVER: u32 = 0x40000000;
@@ -92,11 +94,12 @@ impl MovementFlags {
                 | Self::JUMPING
                 | Self::FALLINGFAR
                 | Self::SWIMMING
-                | Self::SPLINE_ENABLED
+                | Self::ASCENDING
                 | Self::CAN_FLY
                 | Self::FLYING
                 | Self::ONTRANSPORT
                 | Self::SPLINE_ELEVATION
+                | Self::SPLINE_ENABLED
                 | Self::WATERWALKING
                 | Self::SAFE_FALL
                 | Self::HOVER
@@ -391,21 +394,21 @@ impl MovementFlags {
         *self
     }
 
-    pub const fn is_SPLINE_ENABLED(&self) -> bool {
-        (self.inner & Self::SPLINE_ENABLED) != 0
+    pub const fn is_ASCENDING(&self) -> bool {
+        (self.inner & Self::ASCENDING) != 0
     }
 
-    pub const fn new_SPLINE_ENABLED() -> Self {
-        Self { inner: Self::SPLINE_ENABLED }
+    pub const fn new_ASCENDING() -> Self {
+        Self { inner: Self::ASCENDING }
     }
 
-    pub fn set_SPLINE_ENABLED(&mut self) -> Self {
-        self.inner |= Self::SPLINE_ENABLED;
+    pub fn set_ASCENDING(&mut self) -> Self {
+        self.inner |= Self::ASCENDING;
         *self
     }
 
-    pub fn clear_SPLINE_ENABLED(&mut self) -> Self {
-        self.inner &= Self::SPLINE_ENABLED.reverse_bits();
+    pub fn clear_ASCENDING(&mut self) -> Self {
+        self.inner &= Self::ASCENDING.reverse_bits();
         *self
     }
 
@@ -478,6 +481,24 @@ impl MovementFlags {
 
     pub fn clear_SPLINE_ELEVATION(&mut self) -> Self {
         self.inner &= Self::SPLINE_ELEVATION.reverse_bits();
+        *self
+    }
+
+    pub const fn is_SPLINE_ENABLED(&self) -> bool {
+        (self.inner & Self::SPLINE_ENABLED) != 0
+    }
+
+    pub const fn new_SPLINE_ENABLED() -> Self {
+        Self { inner: Self::SPLINE_ENABLED }
+    }
+
+    pub fn set_SPLINE_ENABLED(&mut self) -> Self {
+        self.inner |= Self::SPLINE_ENABLED;
+        *self
+    }
+
+    pub fn clear_SPLINE_ENABLED(&mut self) -> Self {
+        self.inner &= Self::SPLINE_ENABLED.reverse_bits();
         *self
     }
 

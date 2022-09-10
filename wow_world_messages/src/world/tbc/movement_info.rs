@@ -1,14 +1,15 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::MovementFlags;
-use crate::world::vanilla::TransportInfo;
-use crate::world::vanilla::Vector3d;
+use crate::world::tbc::MovementFlags;
+use crate::world::tbc::TransportInfo;
+use crate::world::tbc::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement.wowm#L40):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement_2_4_3.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement_2_4_3.wowm#L32):
 /// ```text
 /// struct MovementInfo {
 ///     MovementFlags flags;
+///     u8 extra_flags;
 ///     u32 timestamp;
 ///     Vector3d position;
 ///     f32 orientation;
@@ -16,7 +17,10 @@ use std::io::{Write, Read};
 ///         TransportInfo transport;
 ///     }
 ///     if (flags & SWIMMING) {
-///         f32 pitch;
+///         f32 pitch1;
+///     }
+///     else if (flags & ONTRANSPORT) {
+///         f32 pitch2;
 ///     }
 ///     f32 fall_time;
 ///     if (flags & JUMPING) {
@@ -32,6 +36,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct MovementInfo {
     pub flags: MovementInfo_MovementFlags,
+    pub extra_flags: u8,
     pub timestamp: u32,
     pub position: Vector3d,
     pub orientation: f32,
@@ -42,6 +47,9 @@ impl MovementInfo {
     pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // flags: MovementFlags
         w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
+
+        // extra_flags: u8
+        w.write_all(&self.extra_flags.to_le_bytes())?;
 
         // timestamp: u32
         w.write_all(&self.timestamp.to_le_bytes())?;
@@ -59,9 +67,22 @@ impl MovementInfo {
         }
 
         if let Some(if_statement) = &self.flags.swimming {
-            // pitch: f32
-            w.write_all(&if_statement.pitch.to_le_bytes())?;
+            match if_statement {
+                MovementInfo_MovementFlags_Swimming::Swimming {
+                    pitch1,
+                } => {
+                    // pitch1: f32
+                    w.write_all(&pitch1.to_le_bytes())?;
 
+                }
+                MovementInfo_MovementFlags_Swimming::Ontransport {
+                    pitch2,
+                } => {
+                    // pitch2: f32
+                    w.write_all(&pitch2.to_le_bytes())?;
+
+                }
+            }
         }
 
         // fall_time: f32
@@ -97,6 +118,9 @@ impl MovementInfo {
         // flags: MovementFlags
         let flags = MovementFlags::new(crate::util::read_u32_le(r)?);
 
+        // extra_flags: u8
+        let extra_flags = crate::util::read_u8_le(r)?;
+
         // timestamp: u32
         let timestamp = crate::util::read_u32_le(r)?;
 
@@ -118,10 +142,17 @@ impl MovementInfo {
         };
 
         let flags_SWIMMING = if flags.is_SWIMMING() {
-            // pitch: f32
-            let pitch = crate::util::read_f32_le(r)?;
-            Some(MovementInfo_MovementFlags_Swimming {
-                pitch,
+            // pitch1: f32
+            let pitch1 = crate::util::read_f32_le(r)?;
+            Some(MovementInfo_MovementFlags_Swimming::Swimming {
+                pitch1,
+            })
+        }
+        else if flags.is_ONTRANSPORT() {
+            // pitch2: f32
+            let pitch2 = crate::util::read_f32_le(r)?;
+            Some(MovementInfo_MovementFlags_Swimming::Ontransport {
+                pitch2,
             })
         }
         else {
@@ -171,6 +202,7 @@ impl MovementInfo {
 
         Ok(Self {
             flags,
+            extra_flags,
             timestamp,
             position,
             orientation,
@@ -183,10 +215,50 @@ impl MovementInfo {
 impl MovementInfo {
     pub(crate) fn size(&self) -> usize {
         self.flags.size() // flags: MovementInfo_MovementFlags
+        + 1 // extra_flags: u8
         + 4 // timestamp: u32
         + 12 // position: Vector3d
         + 4 // orientation: f32
         + 4 // fall_time: f32
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum MovementInfo_MovementFlags_Swimming {
+    Swimming {
+        pitch1: f32,
+    },
+    Ontransport {
+        pitch2: f32,
+    },
+}
+
+impl MovementInfo_MovementFlags_Swimming {
+    pub(crate) const fn as_int(&self) -> u32 {
+        match self {
+            Self::Swimming { .. } => 2097152,
+            Self::Ontransport { .. } => 33554432,
+        }
+    }
+
+}
+
+impl MovementInfo_MovementFlags_Swimming {
+    pub(crate) fn size(&self) -> usize {
+        match self {
+            Self::Swimming {
+                pitch1,
+            } => {
+                // Not an actual enum sent over the wire
+                4 // pitch1: f32
+            }
+            Self::Ontransport {
+                pitch2,
+            } => {
+                // Not an actual enum sent over the wire
+                4 // pitch2: f32
+            }
+        }
     }
 }
 
@@ -584,7 +656,7 @@ impl MovementInfo_MovementFlags {
 
     pub const fn new_SWIMMING(swimming: MovementInfo_MovementFlags_Swimming) -> Self {
         Self {
-            inner: MovementFlags::SWIMMING,
+            inner: swimming.as_int(),
             on_transport: None,
             jumping: None,
             swimming: Some(swimming),
@@ -593,7 +665,7 @@ impl MovementInfo_MovementFlags {
     }
 
     pub fn set_SWIMMING(mut self, swimming: MovementInfo_MovementFlags_Swimming) -> Self {
-        self.inner |= MovementFlags::SWIMMING;
+        self.inner |= swimming.as_int();
         self.swimming = Some(swimming);
         self
     }
@@ -608,9 +680,9 @@ impl MovementInfo_MovementFlags {
         self
     }
 
-    pub const fn new_SPLINE_ENABLED() -> Self {
+    pub const fn new_ASCENDING() -> Self {
         Self {
-            inner: MovementFlags::SPLINE_ENABLED,
+            inner: MovementFlags::ASCENDING,
             on_transport: None,
             jumping: None,
             swimming: None,
@@ -618,17 +690,17 @@ impl MovementInfo_MovementFlags {
         }
     }
 
-    pub fn set_SPLINE_ENABLED(mut self) -> Self {
-        self.inner |= MovementFlags::SPLINE_ENABLED;
+    pub fn set_ASCENDING(mut self) -> Self {
+        self.inner |= MovementFlags::ASCENDING;
         self
     }
 
-    pub const fn get_SPLINE_ENABLED(&self) -> bool {
-        (self.inner & MovementFlags::SPLINE_ENABLED) != 0
+    pub const fn get_ASCENDING(&self) -> bool {
+        (self.inner & MovementFlags::ASCENDING) != 0
     }
 
-    pub fn clear_SPLINE_ENABLED(mut self) -> Self {
-        self.inner &= MovementFlags::SPLINE_ENABLED.reverse_bits();
+    pub fn clear_ASCENDING(mut self) -> Self {
+        self.inner &= MovementFlags::ASCENDING.reverse_bits();
         self
     }
 
@@ -680,30 +752,6 @@ impl MovementInfo_MovementFlags {
         self
     }
 
-    pub const fn new_ONTRANSPORT() -> Self {
-        Self {
-            inner: MovementFlags::ONTRANSPORT,
-            on_transport: None,
-            jumping: None,
-            swimming: None,
-            spline_elevation: None,
-        }
-    }
-
-    pub fn set_ONTRANSPORT(mut self) -> Self {
-        self.inner |= MovementFlags::ONTRANSPORT;
-        self
-    }
-
-    pub const fn get_ONTRANSPORT(&self) -> bool {
-        (self.inner & MovementFlags::ONTRANSPORT) != 0
-    }
-
-    pub fn clear_ONTRANSPORT(mut self) -> Self {
-        self.inner &= MovementFlags::ONTRANSPORT.reverse_bits();
-        self
-    }
-
     pub const fn new_SPLINE_ELEVATION(spline_elevation: MovementInfo_MovementFlags_SplineElevation) -> Self {
         Self {
             inner: MovementFlags::SPLINE_ELEVATION,
@@ -727,6 +775,30 @@ impl MovementInfo_MovementFlags {
     pub fn clear_SPLINE_ELEVATION(mut self) -> Self {
         self.inner &= MovementFlags::SPLINE_ELEVATION.reverse_bits();
         self.spline_elevation = None;
+        self
+    }
+
+    pub const fn new_SPLINE_ENABLED() -> Self {
+        Self {
+            inner: MovementFlags::SPLINE_ENABLED,
+            on_transport: None,
+            jumping: None,
+            swimming: None,
+            spline_elevation: None,
+        }
+    }
+
+    pub fn set_SPLINE_ENABLED(mut self) -> Self {
+        self.inner |= MovementFlags::SPLINE_ENABLED;
+        self
+    }
+
+    pub const fn get_SPLINE_ENABLED(&self) -> bool {
+        (self.inner & MovementFlags::SPLINE_ENABLED) != 0
+    }
+
+    pub fn clear_SPLINE_ENABLED(mut self) -> Self {
+        self.inner &= MovementFlags::SPLINE_ENABLED.reverse_bits();
         self
     }
 
@@ -866,17 +938,6 @@ impl MovementInfo_MovementFlags_Jumping {
         + 4 // sin_angle: f32
         + 4 // xy_speed: f32
         + 4 // z_speed: f32
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
-pub struct MovementInfo_MovementFlags_Swimming {
-    pub pitch: f32,
-}
-
-impl MovementInfo_MovementFlags_Swimming {
-    pub(crate) fn size(&self) -> usize {
-        4 // pitch: f32
     }
 }
 

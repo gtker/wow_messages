@@ -7,6 +7,8 @@ enum UpdateType : u8 {
     CREATE_OBJECT2 = 3;
     OUT_OF_RANGE_OBJECTS = 4;
     NEAR_OBJECTS = 5;
+} {
+    versions = "2.4.3";
 }
 
 flag UpdateFlag : u8 {
@@ -18,8 +20,9 @@ flag UpdateFlag : u8 {
     ALL = 0x10;
     LIVING = 0x20;
     HAS_POSITION = 0x40;
+} {
+    versions = "2.4.3";
 }
-
 
 flag SplineFlag : u32 {
     NONE = 0x00000000;

@@ -1,19 +1,20 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementFlags;
-use crate::world::vanilla::SplineFlag;
-use crate::world::vanilla::TransportInfo;
-use crate::world::vanilla::UpdateFlag;
-use crate::world::vanilla::Vector3d;
+use crate::world::tbc::MovementFlags;
+use crate::world::tbc::SplineFlag;
+use crate::world::tbc::TransportInfo;
+use crate::world::tbc::UpdateFlag;
+use crate::world::tbc::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:88`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L88):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm:64`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm#L64):
 /// ```text
 /// struct MovementBlock {
 ///     UpdateFlag update_flag;
 ///     if (update_flag & LIVING) {
 ///         MovementFlags flags;
+///         u8 extra_flags;
 ///         u32 timestamp;
 ///         Vector3d living_position;
 ///         f32 living_orientation;
@@ -21,7 +22,10 @@ use std::io::{Write, Read};
 ///             TransportInfo transport;
 ///         }
 ///         if (flags & SWIMMING) {
-///             f32 pitch;
+///             f32 pitch1;
+///         }
+///         else if (flags & ONTRANSPORT) {
+///             f32 pitch2;
 ///         }
 ///         f32 fall_time;
 ///         if (flags & JUMPING) {
@@ -37,6 +41,8 @@ use std::io::{Write, Read};
 ///         f32 running_speed;
 ///         f32 backwards_running_speed;
 ///         f32 swimming_speed;
+///         f32 flying_speed;
+///         f32 backwards_flying_speed;
 ///         f32 backwards_swimming_speed;
 ///         f32 turn_rate;
 ///         if (flags & SPLINE_ENABLED) {
@@ -45,7 +51,7 @@ use std::io::{Write, Read};
 ///                 f32 angle;
 ///             }
 ///             else if (spline_flags & FINAL_TARGET) {
-///                 u64 target;
+///                 Guid target;
 ///             }
 ///             else if (spline_flags & FINAL_POINT) {
 ///                 Vector3d spline_final_point;
@@ -64,9 +70,10 @@ use std::io::{Write, Read};
 ///     }
 ///     if (update_flag & HIGH_GUID) {
 ///         u32 unknown0;
+///         u32 unknown1;
 ///     }
 ///     if (update_flag & ALL) {
-///         u32 unknown1;
+///         u32 unknown2;
 ///     }
 ///     if (update_flag & MELEE_ATTACKING) {
 ///         PackedGuid guid;
@@ -88,10 +95,13 @@ impl MovementBlock {
         if let Some(if_statement) = &self.update_flag.living {
             match if_statement {
                 MovementBlock_UpdateFlag_Living::Living {
+                    backwards_flying_speed,
                     backwards_running_speed,
                     backwards_swimming_speed,
+                    extra_flags,
                     fall_time,
                     flags,
+                    flying_speed,
                     living_orientation,
                     living_position,
                     running_speed,
@@ -102,6 +112,9 @@ impl MovementBlock {
                 } => {
                     // flags: MovementFlags
                     w.write_all(&(flags.as_int() as u32).to_le_bytes())?;
+
+                    // extra_flags: u8
+                    w.write_all(&extra_flags.to_le_bytes())?;
 
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes())?;
@@ -119,9 +132,22 @@ impl MovementBlock {
                     }
 
                     if let Some(if_statement) = &flags.swimming {
-                        // pitch: f32
-                        w.write_all(&if_statement.pitch.to_le_bytes())?;
+                        match if_statement {
+                            MovementBlock_MovementFlags_Swimming::Swimming {
+                                pitch1,
+                            } => {
+                                // pitch1: f32
+                                w.write_all(&pitch1.to_le_bytes())?;
 
+                            }
+                            MovementBlock_MovementFlags_Swimming::Ontransport {
+                                pitch2,
+                            } => {
+                                // pitch2: f32
+                                w.write_all(&pitch2.to_le_bytes())?;
+
+                            }
+                        }
                     }
 
                     // fall_time: f32
@@ -160,6 +186,12 @@ impl MovementBlock {
                     // swimming_speed: f32
                     w.write_all(&swimming_speed.to_le_bytes())?;
 
+                    // flying_speed: f32
+                    w.write_all(&flying_speed.to_le_bytes())?;
+
+                    // backwards_flying_speed: f32
+                    w.write_all(&backwards_flying_speed.to_le_bytes())?;
+
                     // backwards_swimming_speed: f32
                     w.write_all(&backwards_swimming_speed.to_le_bytes())?;
 
@@ -182,8 +214,8 @@ impl MovementBlock {
                                 MovementBlock_SplineFlag_FinalAngle::FinalTarget {
                                     target,
                                 } => {
-                                    // target: u64
-                                    w.write_all(&target.to_le_bytes())?;
+                                    // target: Guid
+                                    w.write_all(&target.guid().to_le_bytes())?;
 
                                 }
                                 MovementBlock_SplineFlag_FinalAngle::FinalPoint {
@@ -237,11 +269,14 @@ impl MovementBlock {
             // unknown0: u32
             w.write_all(&if_statement.unknown0.to_le_bytes())?;
 
+            // unknown1: u32
+            w.write_all(&if_statement.unknown1.to_le_bytes())?;
+
         }
 
         if let Some(if_statement) = &self.update_flag.all {
-            // unknown1: u32
-            w.write_all(&if_statement.unknown1.to_le_bytes())?;
+            // unknown2: u32
+            w.write_all(&if_statement.unknown2.to_le_bytes())?;
 
         }
 
@@ -270,6 +305,9 @@ impl MovementBlock {
             // flags: MovementFlags
             let flags = MovementFlags::new(crate::util::read_u32_le(r)?);
 
+            // extra_flags: u8
+            let extra_flags = crate::util::read_u8_le(r)?;
+
             // timestamp: u32
             let timestamp = crate::util::read_u32_le(r)?;
 
@@ -291,10 +329,17 @@ impl MovementBlock {
             };
 
             let flags_SWIMMING = if flags.is_SWIMMING() {
-                // pitch: f32
-                let pitch = crate::util::read_f32_le(r)?;
-                Some(MovementBlock_MovementFlags_Swimming {
-                    pitch,
+                // pitch1: f32
+                let pitch1 = crate::util::read_f32_le(r)?;
+                Some(MovementBlock_MovementFlags_Swimming::Swimming {
+                    pitch1,
+                })
+            }
+            else if flags.is_ONTRANSPORT() {
+                // pitch2: f32
+                let pitch2 = crate::util::read_f32_le(r)?;
+                Some(MovementBlock_MovementFlags_Swimming::Ontransport {
+                    pitch2,
                 })
             }
             else {
@@ -342,6 +387,10 @@ impl MovementBlock {
             let backwards_running_speed = crate::util::read_f32_le(r)?;
             // swimming_speed: f32
             let swimming_speed = crate::util::read_f32_le(r)?;
+            // flying_speed: f32
+            let flying_speed = crate::util::read_f32_le(r)?;
+            // backwards_flying_speed: f32
+            let backwards_flying_speed = crate::util::read_f32_le(r)?;
             // backwards_swimming_speed: f32
             let backwards_swimming_speed = crate::util::read_f32_le(r)?;
             // turn_rate: f32
@@ -358,8 +407,8 @@ impl MovementBlock {
                     })
                 }
                 else if spline_flags.is_FINAL_TARGET() {
-                    // target: u64
-                    let target = crate::util::read_u64_le(r)?;
+                    // target: Guid
+                    let target = Guid::read(r)?;
 
                     Some(MovementBlock_SplineFlag_FinalAngle::FinalTarget {
                         target,
@@ -421,15 +470,18 @@ impl MovementBlock {
                 on_transport: flags_ON_TRANSPORT,
                 jumping: flags_JUMPING,
                 swimming: flags_SWIMMING,
-                spline_enabled: flags_SPLINE_ENABLED,
                 spline_elevation: flags_SPLINE_ELEVATION,
+                spline_enabled: flags_SPLINE_ENABLED,
             };
 
             Some(MovementBlock_UpdateFlag_Living::Living {
+                backwards_flying_speed,
                 backwards_running_speed,
                 backwards_swimming_speed,
+                extra_flags,
                 fall_time,
                 flags,
+                flying_speed,
                 living_orientation,
                 living_position,
                 running_speed,
@@ -458,8 +510,12 @@ impl MovementBlock {
             // unknown0: u32
             let unknown0 = crate::util::read_u32_le(r)?;
 
+            // unknown1: u32
+            let unknown1 = crate::util::read_u32_le(r)?;
+
             Some(MovementBlock_UpdateFlag_HighGuid {
                 unknown0,
+                unknown1,
             })
         }
         else {
@@ -467,11 +523,11 @@ impl MovementBlock {
         };
 
         let update_flag_ALL = if update_flag.is_ALL() {
-            // unknown1: u32
-            let unknown1 = crate::util::read_u32_le(r)?;
+            // unknown2: u32
+            let unknown2 = crate::util::read_u32_le(r)?;
 
             Some(MovementBlock_UpdateFlag_All {
-                unknown1,
+                unknown2,
             })
         }
         else {
@@ -525,12 +581,51 @@ impl MovementBlock {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
+pub enum MovementBlock_MovementFlags_Swimming {
+    Swimming {
+        pitch1: f32,
+    },
+    Ontransport {
+        pitch2: f32,
+    },
+}
+
+impl MovementBlock_MovementFlags_Swimming {
+    pub(crate) const fn as_int(&self) -> u32 {
+        match self {
+            Self::Swimming { .. } => 2097152,
+            Self::Ontransport { .. } => 33554432,
+        }
+    }
+
+}
+
+impl MovementBlock_MovementFlags_Swimming {
+    pub(crate) fn size(&self) -> usize {
+        match self {
+            Self::Swimming {
+                pitch1,
+            } => {
+                // Not an actual enum sent over the wire
+                4 // pitch1: f32
+            }
+            Self::Ontransport {
+                pitch2,
+            } => {
+                // Not an actual enum sent over the wire
+                4 // pitch2: f32
+            }
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum MovementBlock_SplineFlag_FinalAngle {
     FinalAngle {
         angle: f32,
     },
     FinalTarget {
-        target: u64,
+        target: Guid,
     },
     FinalPoint {
         spline_final_point: Vector3d,
@@ -561,7 +656,7 @@ impl MovementBlock_SplineFlag_FinalAngle {
                 target,
             } => {
                 // Not an actual enum sent over the wire
-                8 // target: u64
+                8 // target: Guid
             }
             Self::FinalPoint {
                 spline_final_point,
@@ -1248,8 +1343,8 @@ pub struct MovementBlock_MovementFlags {
     on_transport: Option<MovementBlock_MovementFlags_OnTransport>,
     jumping: Option<MovementBlock_MovementFlags_Jumping>,
     swimming: Option<MovementBlock_MovementFlags_Swimming>,
-    spline_enabled: Option<MovementBlock_MovementFlags_SplineEnabled>,
     spline_elevation: Option<MovementBlock_MovementFlags_SplineElevation>,
+    spline_enabled: Option<MovementBlock_MovementFlags_SplineEnabled>,
 }
 
 impl MovementBlock_MovementFlags {
@@ -1259,8 +1354,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1269,8 +1364,8 @@ impl MovementBlock_MovementFlags {
         && self.on_transport.is_none()
         && self.jumping.is_none()
         && self.swimming.is_none()
-        && self.spline_enabled.is_none()
         && self.spline_elevation.is_none()
+        && self.spline_enabled.is_none()
     }
 
     pub const fn new_FORWARD() -> Self {
@@ -1279,8 +1374,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1304,8 +1399,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1329,8 +1424,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1354,8 +1449,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1379,8 +1474,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1404,8 +1499,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1429,8 +1524,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1454,8 +1549,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1479,8 +1574,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1504,8 +1599,8 @@ impl MovementBlock_MovementFlags {
             on_transport: Some(on_transport),
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1531,8 +1626,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1556,8 +1651,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1581,8 +1676,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1606,8 +1701,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: Some(jumping),
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1633,8 +1728,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1654,17 +1749,17 @@ impl MovementBlock_MovementFlags {
 
     pub const fn new_SWIMMING(swimming: MovementBlock_MovementFlags_Swimming) -> Self {
         Self {
-            inner: MovementFlags::SWIMMING,
+            inner: swimming.as_int(),
             on_transport: None,
             jumping: None,
             swimming: Some(swimming),
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
     pub fn set_SWIMMING(mut self, swimming: MovementBlock_MovementFlags_Swimming) -> Self {
-        self.inner |= MovementFlags::SWIMMING;
+        self.inner |= swimming.as_int();
         self.swimming = Some(swimming);
         self
     }
@@ -1679,30 +1774,28 @@ impl MovementBlock_MovementFlags {
         self
     }
 
-    pub const fn new_SPLINE_ENABLED(spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
+    pub const fn new_ASCENDING() -> Self {
         Self {
-            inner: MovementFlags::SPLINE_ENABLED,
+            inner: MovementFlags::ASCENDING,
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: Some(spline_enabled),
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
-    pub fn set_SPLINE_ENABLED(mut self, spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
-        self.inner |= MovementFlags::SPLINE_ENABLED;
-        self.spline_enabled = Some(spline_enabled);
+    pub fn set_ASCENDING(mut self) -> Self {
+        self.inner |= MovementFlags::ASCENDING;
         self
     }
 
-    pub const fn get_SPLINE_ENABLED(&self) -> Option<&MovementBlock_MovementFlags_SplineEnabled> {
-        self.spline_enabled.as_ref()
+    pub const fn get_ASCENDING(&self) -> bool {
+        (self.inner & MovementFlags::ASCENDING) != 0
     }
 
-    pub fn clear_SPLINE_ENABLED(mut self) -> Self {
-        self.inner &= MovementFlags::SPLINE_ENABLED.reverse_bits();
-        self.spline_enabled = None;
+    pub fn clear_ASCENDING(mut self) -> Self {
+        self.inner &= MovementFlags::ASCENDING.reverse_bits();
         self
     }
 
@@ -1712,8 +1805,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1737,8 +1830,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1756,39 +1849,14 @@ impl MovementBlock_MovementFlags {
         self
     }
 
-    pub const fn new_ONTRANSPORT() -> Self {
-        Self {
-            inner: MovementFlags::ONTRANSPORT,
-            on_transport: None,
-            jumping: None,
-            swimming: None,
-            spline_enabled: None,
-            spline_elevation: None,
-        }
-    }
-
-    pub fn set_ONTRANSPORT(mut self) -> Self {
-        self.inner |= MovementFlags::ONTRANSPORT;
-        self
-    }
-
-    pub const fn get_ONTRANSPORT(&self) -> bool {
-        (self.inner & MovementFlags::ONTRANSPORT) != 0
-    }
-
-    pub fn clear_ONTRANSPORT(mut self) -> Self {
-        self.inner &= MovementFlags::ONTRANSPORT.reverse_bits();
-        self
-    }
-
     pub const fn new_SPLINE_ELEVATION(spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
         Self {
             inner: MovementFlags::SPLINE_ELEVATION,
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: Some(spline_elevation),
+            spline_enabled: None,
         }
     }
 
@@ -1808,14 +1876,41 @@ impl MovementBlock_MovementFlags {
         self
     }
 
+    pub const fn new_SPLINE_ENABLED(spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
+        Self {
+            inner: MovementFlags::SPLINE_ENABLED,
+            on_transport: None,
+            jumping: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: Some(spline_enabled),
+        }
+    }
+
+    pub fn set_SPLINE_ENABLED(mut self, spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
+        self.inner |= MovementFlags::SPLINE_ENABLED;
+        self.spline_enabled = Some(spline_enabled);
+        self
+    }
+
+    pub const fn get_SPLINE_ENABLED(&self) -> Option<&MovementBlock_MovementFlags_SplineEnabled> {
+        self.spline_enabled.as_ref()
+    }
+
+    pub fn clear_SPLINE_ENABLED(mut self) -> Self {
+        self.inner &= MovementFlags::SPLINE_ENABLED.reverse_bits();
+        self.spline_enabled = None;
+        self
+    }
+
     pub const fn new_WATERWALKING() -> Self {
         Self {
             inner: MovementFlags::WATERWALKING,
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1839,8 +1934,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1864,8 +1959,8 @@ impl MovementBlock_MovementFlags {
             on_transport: None,
             jumping: None,
             swimming: None,
-            spline_enabled: None,
             spline_elevation: None,
+            spline_enabled: None,
         }
     }
 
@@ -1913,14 +2008,14 @@ impl MovementBlock_MovementFlags {
             }
         }
         + {
-            if let Some(s) = &self.spline_enabled {
+            if let Some(s) = &self.spline_elevation {
                 s.size()
             } else {
                 0
             }
         }
         + {
-            if let Some(s) = &self.spline_elevation {
+            if let Some(s) = &self.spline_enabled {
                 s.size()
             } else {
                 0
@@ -1958,13 +2053,13 @@ impl MovementBlock_MovementFlags_Jumping {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
-pub struct MovementBlock_MovementFlags_Swimming {
-    pub pitch: f32,
+pub struct MovementBlock_MovementFlags_SplineElevation {
+    pub spline_elevation: f32,
 }
 
-impl MovementBlock_MovementFlags_Swimming {
+impl MovementBlock_MovementFlags_SplineElevation {
     pub(crate) fn size(&self) -> usize {
-        4 // pitch: f32
+        4 // spline_elevation: f32
     }
 }
 
@@ -1990,24 +2085,16 @@ impl MovementBlock_MovementFlags_SplineEnabled {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
-pub struct MovementBlock_MovementFlags_SplineElevation {
-    pub spline_elevation: f32,
-}
-
-impl MovementBlock_MovementFlags_SplineElevation {
-    pub(crate) fn size(&self) -> usize {
-        4 // spline_elevation: f32
-    }
-}
-
 #[derive(Debug, Clone, PartialEq)]
 pub enum MovementBlock_UpdateFlag_Living {
     Living {
+        backwards_flying_speed: f32,
         backwards_running_speed: f32,
         backwards_swimming_speed: f32,
+        extra_flags: u8,
         fall_time: f32,
         flags: MovementBlock_MovementFlags,
+        flying_speed: f32,
         living_orientation: f32,
         living_position: Vector3d,
         running_speed: f32,
@@ -2036,10 +2123,13 @@ impl MovementBlock_UpdateFlag_Living {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Living {
+                backwards_flying_speed,
                 backwards_running_speed,
                 backwards_swimming_speed,
+                extra_flags,
                 fall_time,
                 flags,
+                flying_speed,
                 living_orientation,
                 living_position,
                 running_speed,
@@ -2049,10 +2139,13 @@ impl MovementBlock_UpdateFlag_Living {
                 walking_speed,
             } => {
                 // Not an actual enum sent over the wire
-                4 // backwards_running_speed: f32
+                4 // backwards_flying_speed: f32
+                + 4 // backwards_running_speed: f32
                 + 4 // backwards_swimming_speed: f32
+                + 1 // extra_flags: u8
                 + 4 // fall_time: f32
                 + flags.size() // flags: MovementBlock_MovementFlags
+                + 4 // flying_speed: f32
                 + 4 // living_orientation: f32
                 + 12 // living_position: Vector3d
                 + 4 // running_speed: f32
@@ -2335,22 +2428,24 @@ impl MovementBlock_UpdateFlag_MeleeAttacking {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct MovementBlock_UpdateFlag_HighGuid {
     pub unknown0: u32,
+    pub unknown1: u32,
 }
 
 impl MovementBlock_UpdateFlag_HighGuid {
     pub(crate) fn size(&self) -> usize {
         4 // unknown0: u32
+        + 4 // unknown1: u32
     }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct MovementBlock_UpdateFlag_All {
-    pub unknown1: u32,
+    pub unknown2: u32,
 }
 
 impl MovementBlock_UpdateFlag_All {
     pub(crate) fn size(&self) -> usize {
-        4 // unknown1: u32
+        4 // unknown2: u32
     }
 }
 

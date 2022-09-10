@@ -1,6 +1,6 @@
 # UpdateType
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 2.4.3
 
 ### Wowm Representation
 
@@ -29,6 +29,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `NEAR_OBJECTS` | 5 (0x05) |  |  |
 
 Used in:
+* [Object](object.md)
 * [Object](object.md)
 
 # UpdateType

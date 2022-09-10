@@ -1,13 +1,4 @@
-#tag_all versions "1.12";
-
-struct TransportInfo {
-    PackedGuid guid;
-    Vector3d position;
-    f32 orientation;
-    u32 timestamp;
-} {
-    versions = "2";
-}
+#tag_all versions "2.4.3";
 
 flag MovementFlags : u32 {
     NONE               = 0x00000000;
@@ -27,11 +18,12 @@ flag MovementFlags : u32 {
     JUMPING            = 0x00002000;
     FALLINGFAR         = 0x00004000;
     SWIMMING           = 0x00200000;
-    SPLINE_ENABLED     = 0x00400000;
+    ASCENDING          = 0x00400000;
     CAN_FLY            = 0x00800000;
     FLYING             = 0x01000000;
     ONTRANSPORT        = 0x02000000;
     SPLINE_ELEVATION   = 0x04000000;
+    SPLINE_ENABLED     = 0x08000000;
     WATERWALKING       = 0x10000000;
     SAFE_FALL          = 0x20000000;
     HOVER              = 0x40000000;
@@ -39,6 +31,7 @@ flag MovementFlags : u32 {
 
 struct MovementInfo {
     MovementFlags flags;
+    u8 extra_flags;
     u32 timestamp;
     Vector3d position;
     f32 orientation;
@@ -46,7 +39,10 @@ struct MovementInfo {
         TransportInfo transport;
     }
     if (flags & SWIMMING) {
-        f32 pitch;
+        f32 pitch1;
+    }
+    else if (flags & ONTRANSPORT) {
+        f32 pitch2;
     }
     f32 fall_time;
     if (flags & JUMPING) {

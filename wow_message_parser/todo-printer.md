@@ -8,6 +8,7 @@
 * Add flags if a || b (`MovementInfo` wrath)
 * Add support for a || b || c.d (`MovementInfo` wrath)
 * Add support for if a & A { if b & B } (`MovementInfo` wrath)
+* Add support for if on flags/enums inside structs in order to deduplicate SMSG_UPDATE_OBJECT MovementInfo nonsense
 
 # Low Priority
 
