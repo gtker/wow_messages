@@ -110,7 +110,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         pet_display_id: 0,
                         pet_level: 0,
                         pet_family: 0,
-                        equipment: [Default::default(); 19],
+                        equipment: [Default::default(); 20],
                     }],
                 }
                 .tokio_write_encrypted_server(&mut stream, encryption.encrypter())

@@ -89,7 +89,7 @@ struct Character {
     u32 pet_display_id;
     u32 pet_level;
     u32 pet_family;
-    CharacterGear[19] equipment;
+    CharacterGear[20] equipment;
 }
 ```
 ### Body
@@ -116,7 +116,7 @@ struct Character {
 | - | 4 / Little | u32 | pet_display_id |  |  |
 | - | 4 / Little | u32 | pet_level |  |  |
 | - | 4 / Little | u32 | pet_family |  |  |
-| - | ? / - | [CharacterGear](charactergear.md)[19] | equipment |  |  |
+| - | ? / - | [CharacterGear](charactergear.md)[20] | equipment |  |  |
 
 # Character
 
