@@ -164750,22 +164750,6 @@
         {
           "type": "definition",
           "content": {
-            "name": "has_transport",
-            "member_type": {
-              "type": "integer",
-              "content": {
-                "type": "u8"
-              }
-            },
-            "constant_value": null,
-            "used_as_size_in": null,
-            "used_in_if": false,
-            "tags": {}
-          }
-        },
-        {
-          "type": "definition",
-          "content": {
             "name": "objects",
             "member_type": {
               "type": "array",

@@ -196,7 +196,6 @@ struct Object {
 
 smsg SMSG_UPDATE_OBJECT = 0x0A9 {
     u32 amount_of_objects;
-    u8 has_transport;
     Object[amount_of_objects] objects;
 }
 
