@@ -1,0 +1,6 @@
+#tag_all versions "3.3.5";
+
+cmsg CMSG_SET_ACTIVE_VOICE_CHANNEL = 0x3D3 {
+    u32 unknown1;
+    CString unknown2;
+}

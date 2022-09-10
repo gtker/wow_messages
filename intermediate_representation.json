@@ -108488,6 +108488,73 @@
       ]
     },
     {
+      "name": "CMSG_SET_ACTIVE_VOICE_CHANNEL",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 979
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "unknown1",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "unknown2",
+            "member_type": {
+              "type": "cstring"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/chat/cmsg_set_active_voice_channel.wowm",
+        "start_position": 3
+      },
+      "only_has_io_error": false,
+      "features": [
+        "CMsg",
+        "SimpleBuiltInTypes",
+        "ComplexBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "CMSG_SET_AMMO",
       "object_type": {
         "type": "cmsg",

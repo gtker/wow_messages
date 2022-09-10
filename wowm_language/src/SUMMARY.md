@@ -399,6 +399,7 @@
 - [CMSG_SET_ACTIONBAR_TOGGLES](docs/cmsg_set_actionbar_toggles.md)
 - [CMSG_SET_ACTION_BUTTON](docs/cmsg_set_action_button.md)
 - [CMSG_SET_ACTIVE_MOVER](docs/cmsg_set_active_mover.md)
+- [CMSG_SET_ACTIVE_VOICE_CHANNEL](docs/cmsg_set_active_voice_channel.md)
 - [CMSG_SET_AMMO](docs/cmsg_set_ammo.md)
 - [CMSG_SET_FACTION_ATWAR](docs/cmsg_set_faction_atwar.md)
 - [CMSG_SET_FACTION_INACTIVE](docs/cmsg_set_faction_inactive.md)

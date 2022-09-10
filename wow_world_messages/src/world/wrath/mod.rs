@@ -28,6 +28,8 @@ pub(crate) mod cmsg_ready_for_account_data_times;
 pub use cmsg_ready_for_account_data_times::*;
 pub(crate) mod cmsg_realm_split;
 pub use cmsg_realm_split::*;
+pub(crate) mod cmsg_set_active_voice_channel;
+pub use cmsg_set_active_voice_channel::*;
 pub use crate::helper::wrath::*;
 pub(crate) mod expansion;
 pub use expansion::*;
