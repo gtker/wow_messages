@@ -380,6 +380,7 @@
 - [CMSG_QUESTLOG_SWAP_QUEST](docs/cmsg_questlog_swap_quest.md)
 - [CMSG_QUEST_CONFIRM_ACCEPT](docs/cmsg_quest_confirm_accept.md)
 - [CMSG_QUEST_QUERY](docs/cmsg_quest_query.md)
+- [CMSG_READY_FOR_ACCOUNT_DATA_TIMES](docs/cmsg_ready_for_account_data_times.md)
 - [CMSG_READ_ITEM](docs/cmsg_read_item.md)
 - [CMSG_REALM_SPLIT](docs/cmsg_realm_split.md)
 - [CMSG_RECLAIM_CORPSE](docs/cmsg_reclaim_corpse.md)

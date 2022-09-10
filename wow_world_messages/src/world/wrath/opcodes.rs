@@ -13,6 +13,7 @@ use crate::world::wrath::CMSG_PING;
 use crate::world::wrath::CMSG_AUTH_SESSION;
 use crate::world::wrath::CMSG_CHAR_RENAME;
 use crate::world::wrath::CMSG_REALM_SPLIT;
+use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -24,6 +25,7 @@ pub enum ClientOpcodeMessage {
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
+    CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
 
 impl ClientOpcodeMessage {
@@ -37,6 +39,7 @@ impl ClientOpcodeMessage {
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
         }
     }
@@ -118,6 +121,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -132,6 +136,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -146,6 +151,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -160,6 +166,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -174,6 +181,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -188,6 +196,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -204,6 +213,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
+            ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
     }
 }
@@ -253,6 +263,12 @@ impl From<CMSG_CHAR_RENAME> for ClientOpcodeMessage {
 impl From<CMSG_REALM_SPLIT> for ClientOpcodeMessage {
     fn from(c: CMSG_REALM_SPLIT) -> Self {
         Self::CMSG_REALM_SPLIT(c)
+    }
+}
+
+impl From<CMSG_READY_FOR_ACCOUNT_DATA_TIMES> for ClientOpcodeMessage {
+    fn from(c: CMSG_READY_FOR_ACCOUNT_DATA_TIMES) -> Self {
+        Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c)
     }
 }
 

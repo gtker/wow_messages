@@ -24,6 +24,8 @@ pub(crate) mod cmsg_ping;
 pub use cmsg_ping::*;
 pub(crate) mod cmsg_player_login;
 pub use cmsg_player_login::*;
+pub(crate) mod cmsg_ready_for_account_data_times;
+pub use cmsg_ready_for_account_data_times::*;
 pub(crate) mod cmsg_realm_split;
 pub use cmsg_realm_split::*;
 pub use crate::helper::wrath::*;

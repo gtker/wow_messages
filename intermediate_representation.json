@@ -107274,6 +107274,41 @@
       ]
     },
     {
+      "name": "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 1279
+      },
+      "constant": true,
+      "members": [],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/character_screen/cmsg_ready_for_account_data_times.wowm",
+        "start_position": 3
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "EmptyContainer",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "CMSG_READ_ITEM",
       "object_type": {
         "type": "cmsg",
