@@ -162332,6 +162332,59 @@
       ]
     },
     {
+      "name": "SMSG_TIME_SYNC_REQ",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 912
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "millisecond_counter",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/login_logout/smsg_time_sync_req.wowm",
+        "start_position": 3
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "SMSG_TRADE_STATUS",
       "object_type": {
         "type": "smsg",

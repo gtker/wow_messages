@@ -829,6 +829,7 @@
 - [SMSG_SUPERCEDED_SPELL](docs/smsg_superceded_spell.md)
 - [SMSG_TAXINODE_STATUS](docs/smsg_taxinode_status.md)
 - [SMSG_TEXT_EMOTE](docs/smsg_text_emote.md)
+- [SMSG_TIME_SYNC_REQ](docs/smsg_time_sync_req.md)
 - [SMSG_TRADE_STATUS](docs/smsg_trade_status.md)
 - [SMSG_TRADE_STATUS_EXTENDED](docs/smsg_trade_status_extended.md)
 - [SMSG_TRAINER_BUY_FAILED](docs/smsg_trainer_buy_failed.md)

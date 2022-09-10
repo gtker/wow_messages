@@ -216,6 +216,13 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .await
     .unwrap();
 
+    SMSG_TIME_SYNC_REQ {
+        millisecond_counter: 0,
+    }
+    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
+    .await
+    .unwrap();
+
     loop {
         match ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter()).await {
             Ok(e) => {

@@ -84,6 +84,8 @@ pub(crate) mod smsg_pong;
 pub use smsg_pong::*;
 pub(crate) mod smsg_realm_split;
 pub use smsg_realm_split::*;
+pub(crate) mod smsg_time_sync_req;
+pub use smsg_time_sync_req::*;
 pub(crate) mod smsg_tutorial_flags;
 pub use smsg_tutorial_flags::*;
 pub(crate) mod smsg_update_object;
