@@ -30,6 +30,8 @@ pub(crate) mod cmsg_force_move_root_ack;
 pub use cmsg_force_move_root_ack::*;
 pub(crate) mod cmsg_force_move_unroot_ack;
 pub use cmsg_force_move_unroot_ack::*;
+pub(crate) mod cmsg_force_run_back_speed_change_ack;
+pub use cmsg_force_run_back_speed_change_ack::*;
 pub(crate) mod cmsg_ping;
 pub use cmsg_ping::*;
 pub(crate) mod cmsg_player_login;
