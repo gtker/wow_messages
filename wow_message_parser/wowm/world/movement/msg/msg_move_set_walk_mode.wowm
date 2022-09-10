@@ -1,7 +1,19 @@
-#tag_all versions "1.12";
+cmsg MSG_MOVE_SET_WALK_MODE_Client = 0x00C3 {
+    MovementInfo info;
+} {
+    versions = "1.12";
+}
 
 cmsg MSG_MOVE_SET_WALK_MODE_Client = 0x00C3 {
     MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_MOVE_SET_WALK_MODE_Client = 0x00C3 {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
 }
 
 test MSG_MOVE_SET_WALK_MODE_Client {
@@ -26,11 +38,29 @@ test MSG_MOVE_SET_WALK_MODE_Client {
   0x26, 0x29, 0xa7, 0x42, /* position.z */
   0x2e, 0x0e, 0xc3, 0x40, /* orientation */
   0x00, 0x00, 0x00, 0x00, /* fall_time */
-]
+] {
+    versions = "1.12";
+}
 
 smsg MSG_MOVE_SET_WALK_MODE_Server = 0x00C3 {
     PackedGuid guid;
     MovementInfo info;
+} {
+    versions = "1.12";
+}
+
+smsg MSG_MOVE_SET_WALK_MODE_Server = 0x00C3 {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_MOVE_SET_WALK_MODE_Server = 0x00C3 {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "3.3.5";
 }
 
 test MSG_MOVE_SET_WALK_MODE_Server {
@@ -57,5 +87,7 @@ test MSG_MOVE_SET_WALK_MODE_Server {
   0x26, 0x29, 0xa7, 0x42, /* position.z */
   0x2e, 0x0e, 0xc3, 0x40, /* orientation */
   0x00, 0x00, 0x00, 0x00, /* fall_time */
-]
+] {
+    versions = "1.12";
+}
 

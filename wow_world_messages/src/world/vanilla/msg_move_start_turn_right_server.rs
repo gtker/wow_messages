@@ -4,7 +4,7 @@ use crate::world::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm#L31):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm#L45):
 /// ```text
 /// smsg MSG_MOVE_START_TURN_RIGHT_Server = 0x00BD {
 ///     PackedGuid guid;
@@ -74,7 +74,7 @@ mod test {
          0xC3, 0xF9, 0x0F, 0xA7, 0x42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 36.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 52.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_MOVE_START_TURN_RIGHT_Server0() {
@@ -113,7 +113,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 36.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 52.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_START_TURN_RIGHT_Server0() {
@@ -152,7 +152,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 36.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 52.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_START_TURN_RIGHT_Server0() {

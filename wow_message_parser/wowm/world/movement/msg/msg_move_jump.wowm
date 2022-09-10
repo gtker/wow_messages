@@ -1,7 +1,7 @@
-#tag_all versions "1.12";
-
 cmsg MSG_MOVE_JUMP_Client = 0x00BB {
     MovementInfo info;
+} {
+    versions = "1.12";
 }
 
 test MSG_MOVE_JUMP_Client {
@@ -34,11 +34,27 @@ test MSG_MOVE_JUMP_Client {
   0x4d, 0xba, 0x6d, 0x3f, /* cos_angle */
   0x9f, 0xf6, 0xbd, 0x3e, /* sin_angle */
   0x00, 0x00, 0xe0, 0x40, /* xy_speed */
-]
+] {
+    versions = "1.12";
+}
+
+cmsg MSG_MOVE_JUMP_Client = 0x00BB {
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_MOVE_JUMP_Client = 0x00BB {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}
 
 smsg MSG_MOVE_JUMP_Server = 0x00BB {
     PackedGuid guid;
     MovementInfo info;
+} {
+    versions = "1.12";
 }
 
 test MSG_MOVE_JUMP_Server {
@@ -73,5 +89,20 @@ test MSG_MOVE_JUMP_Server {
   0x4d, 0xba, 0x6d, 0x3f, /* cos_angle */
   0x9f, 0xf6, 0xbd, 0x3e, /* sin_angle */
   0x00, 0x00, 0xe0, 0x40, /* xy_speed */
-]
+] {
+    versions = "1.12";
+}
 
+smsg MSG_MOVE_JUMP_Server = 0x00BB {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_MOVE_JUMP_Server = 0x00BB {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}

@@ -1,0 +1,39 @@
+cmsg MSG_MOVE_STOP_ASCEND_Client = 0x35A {
+    MovementInfo info;
+} {
+    versions = "1.12";
+}
+
+cmsg MSG_MOVE_STOP_ASCEND_Client = 0x35A {
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_MOVE_STOP_ASCEND_Client = 0x35A {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}
+
+smsg MSG_MOVE_STOP_ASCEND_Server = 0x35A {
+    PackedGuid guid; 
+    MovementInfo info;
+} {
+    versions = "1.12";
+}
+
+smsg MSG_MOVE_STOP_ASCEND_Server = 0x35A {
+    PackedGuid guid; 
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_MOVE_STOP_ASCEND_Server = 0x35A {
+    PackedGuid guid; 
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}
+

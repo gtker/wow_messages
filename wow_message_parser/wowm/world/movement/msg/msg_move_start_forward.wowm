@@ -1,7 +1,19 @@
-#tag_all versions "1.12";
+cmsg MSG_MOVE_START_FORWARD_Client = 0x00B5 {
+    MovementInfo info;
+} {
+    versions = "1.12";
+}
 
 cmsg MSG_MOVE_START_FORWARD_Client = 0x00B5 {
     MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_MOVE_START_FORWARD_Client = 0x00B5 {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
 }
 
 test MSG_MOVE_START_FORWARD_Client {
@@ -26,11 +38,29 @@ test MSG_MOVE_START_FORWARD_Client {
   0x94, 0xa8, 0xa5, 0x42, /* position.z */
   0x2c, 0xe7, 0xf8, 0x3e, /* orientation */
   0x85, 0x03, 0x00, 0x00,  /* fall_time */
-]
+] {
+    versions = "1.12";
+}
 
 smsg MSG_MOVE_START_FORWARD_Server = 0x00B5 {
     PackedGuid guid;
     MovementInfo info;
+} {
+    versions = "1.12";
+}
+
+smsg MSG_MOVE_START_FORWARD_Server = 0x00B5 {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_MOVE_START_FORWARD_Server = 0x00B5 {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "3.3.5";
 }
 
 test MSG_MOVE_START_FORWARD_Server {
@@ -57,4 +87,6 @@ test MSG_MOVE_START_FORWARD_Server {
   0x94, 0xa8, 0xa5, 0x42, /* position.z */
   0x2c, 0xe7, 0xf8, 0x3e, /* orientation */
   0x85, 0x03, 0x00, 0x00,  /* fall_time */
-]
+] {
+    versions = "1.12";
+}

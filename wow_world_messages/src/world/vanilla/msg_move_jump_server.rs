@@ -4,7 +4,7 @@ use crate::world::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm:39`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm#L39):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm:53`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm#L53):
 /// ```text
 /// smsg MSG_MOVE_JUMP_Server = 0x00BB {
 ///     PackedGuid guid;
@@ -75,7 +75,7 @@ mod test {
          0x00, 0xD8, 0x93, 0xFE, 0xC0, 0x4D, 0xBA, 0x6D, 0x3F, 0x9F, 0xF6, 0xBD,
          0x3E, 0x00, 0x00, 0xE0, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm` line 44.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm` line 60.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_MOVE_JUMP_Server0() {
@@ -120,7 +120,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm` line 44.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm` line 60.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_JUMP_Server0() {
@@ -165,7 +165,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm` line 44.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm` line 60.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_JUMP_Server0() {

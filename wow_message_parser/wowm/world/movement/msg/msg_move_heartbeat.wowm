@@ -1,7 +1,7 @@
-#tag_all versions "1.12";
-
 cmsg MSG_MOVE_HEARTBEAT_Client = 0x00EE {
     MovementInfo info;
+} {
+    versions = "1.12";
 }
 
 test MSG_MOVE_HEARTBEAT_Client {
@@ -26,11 +26,27 @@ test MSG_MOVE_HEARTBEAT_Client {
   0x1a, 0xf5, 0xa5, 0x42, /* position.z */
   0x03, 0x51, 0x24, 0x40, /* orientation */
   0x85, 0x03, 0x00, 0x00, /* fall_time */
-]
+] {
+    versions = "1.12";
+}
+
+cmsg MSG_MOVE_HEARTBEAT_Client = 0x00EE {
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_MOVE_HEARTBEAT_Client = 0x00EE {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}
 
 smsg MSG_MOVE_HEARTBEAT_Server = 0x00EE {
     PackedGuid guid;
     MovementInfo info;
+} {
+    versions = "1.12";
 }
 
 test MSG_MOVE_HEARTBEAT_Server {
@@ -57,5 +73,20 @@ test MSG_MOVE_HEARTBEAT_Server {
   0x1a, 0xf5, 0xa5, 0x42, /* position.z */
   0x03, 0x51, 0x24, 0x40, /* orientation */
   0x85, 0x03, 0x00, 0x00, /* fall_time */
-]
+] {
+    versions = "1.12";
+}
 
+smsg MSG_MOVE_HEARTBEAT_Server = 0x00EE {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_MOVE_HEARTBEAT_Server = 0x00EE {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}

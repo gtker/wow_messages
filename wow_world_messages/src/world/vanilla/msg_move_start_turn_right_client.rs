@@ -3,7 +3,7 @@ use crate::world::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm#L1):
 /// ```text
 /// cmsg MSG_MOVE_START_TURN_RIGHT_Client = 0x00BD {
 ///     MovementInfo info;
@@ -63,7 +63,7 @@ mod test {
          0xC3, 0xF9, 0x0F, 0xA7, 0x42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 19.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_MOVE_START_TURN_RIGHT_Client0() {
@@ -100,7 +100,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 19.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_START_TURN_RIGHT_Client0() {
@@ -137,7 +137,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_right.wowm` line 19.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_START_TURN_RIGHT_Client0() {

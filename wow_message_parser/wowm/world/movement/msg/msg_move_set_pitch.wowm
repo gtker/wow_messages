@@ -1,11 +1,39 @@
-#tag_all versions "1.12";
+cmsg MSG_MOVE_SET_PITCH_Client = 0x00DB {
+    MovementInfo info;
+} {
+    versions = "1.12";
+}
 
 cmsg MSG_MOVE_SET_PITCH_Client = 0x00DB {
     MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_MOVE_SET_PITCH_Client = 0x00DB {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
 }
 
 smsg MSG_MOVE_SET_PITCH_Server = 0x00DB {
     PackedGuid guid;
     MovementInfo info;
+} {
+    versions = "1.12";
+}
+
+smsg MSG_MOVE_SET_PITCH_Server = 0x00DB {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_MOVE_SET_PITCH_Server = 0x00DB {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "3.3.5";
 }
 

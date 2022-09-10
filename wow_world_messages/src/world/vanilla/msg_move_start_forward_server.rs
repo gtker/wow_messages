@@ -4,7 +4,7 @@ use crate::world::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm#L31):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm#L45):
 /// ```text
 /// smsg MSG_MOVE_START_FORWARD_Server = 0x00B5 {
 ///     PackedGuid guid;
@@ -74,7 +74,7 @@ mod test {
          0xC2, 0x94, 0xA8, 0xA5, 0x42, 0x2C, 0xE7, 0xF8, 0x3E, 0x85, 0x03, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm` line 36.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm` line 66.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_MOVE_START_FORWARD_Server0() {
@@ -113,7 +113,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm` line 36.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm` line 66.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_START_FORWARD_Server0() {
@@ -152,7 +152,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm` line 36.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_forward.wowm` line 66.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_START_FORWARD_Server0() {

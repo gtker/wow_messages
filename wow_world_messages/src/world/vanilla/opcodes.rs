@@ -308,6 +308,9 @@ use crate::world::vanilla::CMSG_RESET_INSTANCES;
 use crate::world::vanilla::MSG_RAID_TARGET_UPDATE_Client;
 use crate::world::vanilla::MSG_RAID_READY_CHECK_Client;
 use crate::world::vanilla::CMSG_GMSURVEY_SUBMIT;
+use crate::world::vanilla::MSG_MOVE_START_ASCEND_Client;
+use crate::world::vanilla::MSG_MOVE_STOP_ASCEND_Client;
+use crate::world::vanilla::MSG_MOVE_START_DESCEND_Client;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -613,6 +616,9 @@ pub enum ClientOpcodeMessage {
     MSG_RAID_TARGET_UPDATE(MSG_RAID_TARGET_UPDATE_Client),
     MSG_RAID_READY_CHECK(MSG_RAID_READY_CHECK_Client),
     CMSG_GMSURVEY_SUBMIT(CMSG_GMSURVEY_SUBMIT),
+    MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Client),
+    MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Client),
+    MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Client),
 }
 
 impl ClientOpcodeMessage {
@@ -920,6 +926,9 @@ impl ClientOpcodeMessage {
             0x0321 => Ok(Self::MSG_RAID_TARGET_UPDATE(<MSG_RAID_TARGET_UPDATE_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x032A => Ok(Self::CMSG_GMSURVEY_SUBMIT(<CMSG_GMSURVEY_SUBMIT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Client as crate::Message>::read_body(&mut r, body_size)?)),
+            0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Client as crate::Message>::read_body(&mut r, body_size)?)),
+            0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Client as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
         }
     }
@@ -1295,6 +1304,9 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_RAID_READY_CHECK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -1603,6 +1615,9 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.write_unencrypted_client(w),
             Self::MSG_RAID_READY_CHECK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -1911,6 +1926,9 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -2219,6 +2237,9 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -2527,6 +2548,9 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -2835,6 +2859,9 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -2862,6 +2889,9 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => Some(&c.info),
             Self::MSG_MOVE_HEARTBEAT(c) => Some(&c.info),
             Self::CMSG_MOVE_FALL_RESET(c) => Some(&c.info),
+            Self::MSG_MOVE_START_ASCEND(c) => Some(&c.info),
+            Self::MSG_MOVE_STOP_ASCEND(c) => Some(&c.info),
+            Self::MSG_MOVE_START_DESCEND(c) => Some(&c.info),
             _ => None,
         }
     }
@@ -3173,6 +3203,9 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_RAID_TARGET_UPDATE(_) => "MSG_RAID_TARGET_UPDATE_Client",
             ClientOpcodeMessage::MSG_RAID_READY_CHECK(_) => "MSG_RAID_READY_CHECK_Client",
             ClientOpcodeMessage::CMSG_GMSURVEY_SUBMIT(_) => "CMSG_GMSURVEY_SUBMIT",
+            ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Client",
+            ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Client",
+            ClientOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Client",
         })
     }
 }
@@ -4989,6 +5022,24 @@ impl From<CMSG_GMSURVEY_SUBMIT> for ClientOpcodeMessage {
     }
 }
 
+impl From<MSG_MOVE_START_ASCEND_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_ASCEND_Client) -> Self {
+        Self::MSG_MOVE_START_ASCEND(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_ASCEND_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_ASCEND_Client) -> Self {
+        Self::MSG_MOVE_STOP_ASCEND(c)
+    }
+}
+
+impl From<MSG_MOVE_START_DESCEND_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_DESCEND_Client) -> Self {
+        Self::MSG_MOVE_START_DESCEND(c)
+    }
+}
+
 use crate::world::vanilla::SMSG_CHAR_CREATE;
 use crate::world::vanilla::SMSG_CHAR_ENUM;
 use crate::world::vanilla::SMSG_CHAR_DELETE;
@@ -5323,6 +5374,9 @@ use crate::world::vanilla::SMSG_SPELLINSTAKILLLOG;
 use crate::world::vanilla::SMSG_SPELL_UPDATE_CHAIN_TARGETS;
 use crate::world::vanilla::SMSG_EXPECTED_SPAM_RECORDS;
 use crate::world::vanilla::SMSG_DEFENSE_MESSAGE;
+use crate::world::vanilla::MSG_MOVE_START_ASCEND_Server;
+use crate::world::vanilla::MSG_MOVE_STOP_ASCEND_Server;
+use crate::world::vanilla::MSG_MOVE_START_DESCEND_Server;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -5665,6 +5719,9 @@ pub enum ServerOpcodeMessage {
     SMSG_SPELL_UPDATE_CHAIN_TARGETS(SMSG_SPELL_UPDATE_CHAIN_TARGETS),
     SMSG_EXPECTED_SPAM_RECORDS(SMSG_EXPECTED_SPAM_RECORDS),
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
+    MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Server),
+    MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Server),
+    MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Server),
 }
 
 impl ServerOpcodeMessage {
@@ -6009,6 +6066,9 @@ impl ServerOpcodeMessage {
             0x0330 => Ok(Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(<SMSG_SPELL_UPDATE_CHAIN_TARGETS as crate::Message>::read_body(&mut r, body_size)?)),
             0x0332 => Ok(Self::SMSG_EXPECTED_SPAM_RECORDS(<SMSG_EXPECTED_SPAM_RECORDS as crate::Message>::read_body(&mut r, body_size)?)),
             0x033B => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Server as crate::Message>::read_body(&mut r, body_size)?)),
+            0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Server as crate::Message>::read_body(&mut r, body_size)?)),
+            0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Server as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
         }
     }
@@ -6421,6 +6481,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_EXPECTED_SPAM_RECORDS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -6766,6 +6829,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.write_unencrypted_server(w),
             Self::SMSG_EXPECTED_SPAM_RECORDS(c) => c.write_unencrypted_server(w),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -7111,6 +7177,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_EXPECTED_SPAM_RECORDS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -7456,6 +7525,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_EXPECTED_SPAM_RECORDS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -7801,6 +7873,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_EXPECTED_SPAM_RECORDS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -8146,6 +8221,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_EXPECTED_SPAM_RECORDS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -8493,6 +8571,9 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPELL_UPDATE_CHAIN_TARGETS(_) => "SMSG_SPELL_UPDATE_CHAIN_TARGETS",
             ServerOpcodeMessage::SMSG_EXPECTED_SPAM_RECORDS(_) => "SMSG_EXPECTED_SPAM_RECORDS",
             ServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => "SMSG_DEFENSE_MESSAGE",
+            ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Server",
+            ServerOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Server",
+            ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Server",
         })
     }
 }
@@ -10528,6 +10609,24 @@ impl From<SMSG_EXPECTED_SPAM_RECORDS> for ServerOpcodeMessage {
 impl From<SMSG_DEFENSE_MESSAGE> for ServerOpcodeMessage {
     fn from(c: SMSG_DEFENSE_MESSAGE) -> Self {
         Self::SMSG_DEFENSE_MESSAGE(c)
+    }
+}
+
+impl From<MSG_MOVE_START_ASCEND_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_ASCEND_Server) -> Self {
+        Self::MSG_MOVE_START_ASCEND(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_ASCEND_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_ASCEND_Server) -> Self {
+        Self::MSG_MOVE_STOP_ASCEND(c)
+    }
+}
+
+impl From<MSG_MOVE_START_DESCEND_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_DESCEND_Server) -> Self {
+        Self::MSG_MOVE_START_DESCEND(c)
     }
 }
 

@@ -1,7 +1,19 @@
-#tag_all versions "1.12";
+cmsg MSG_MOVE_STOP_TURN_Client = 0x00BE {
+    MovementInfo info;
+} {
+    versions = "1.12";
+}
 
 cmsg MSG_MOVE_STOP_TURN_Client = 0x00BE {
     MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_MOVE_STOP_TURN_Client = 0x00BE {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
 }
 
 test MSG_MOVE_STOP_TURN_Client {
@@ -26,12 +38,15 @@ test MSG_MOVE_STOP_TURN_Client {
   0xde, 0x48, 0xa5, 0x42, /* position.z */
   0x10, 0x13, 0x9c, 0x40, /* orientation */
   0x00, 0x00, 0x00, 0x00, /* fall_time */
-]
-
+] {
+    versions = "1.12";
+}
 
 smsg MSG_MOVE_STOP_TURN_Server = 0x00BE {
     PackedGuid guid;
     MovementInfo info;
+} {
+    versions = "1.12";
 }
 
 test MSG_MOVE_STOP_TURN_Server {
@@ -58,5 +73,20 @@ test MSG_MOVE_STOP_TURN_Server {
   0xde, 0x48, 0xa5, 0x42, /* position.z */
   0x10, 0x13, 0x9c, 0x40, /* orientation */
   0x00, 0x00, 0x00, 0x00, /* fall_time */
-]
+] {
+    versions = "1.12";
+}
 
+smsg MSG_MOVE_STOP_TURN_Server = 0x00BE {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_MOVE_STOP_TURN_Server = 0x00BE {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}

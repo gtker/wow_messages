@@ -1,7 +1,19 @@
-#tag_all versions "1.12";
+cmsg MSG_MOVE_STOP_STRAFE_Client = 0x00BA {
+    MovementInfo info;
+} {
+    versions = "1.12";
+}
 
 cmsg MSG_MOVE_STOP_STRAFE_Client = 0x00BA {
     MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_MOVE_STOP_STRAFE_Client = 0x00BA {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
 }
 
 test MSG_MOVE_STOP_STRAFE_Client {
@@ -26,11 +38,29 @@ test MSG_MOVE_STOP_STRAFE_Client {
   0x73, 0x7f, 0xa7, 0x42, /* position.z */
   0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
   0x7f, 0x03, 0x00, 0x00, /* fall_time */
-]
+] {
+    versions = "1.12";
+}
 
 smsg MSG_MOVE_STOP_STRAFE_Server = 0x00BA {
     PackedGuid guid;
     MovementInfo info;
+} {
+    versions = "1.12";
+}
+
+smsg MSG_MOVE_STOP_STRAFE_Server = 0x00BA {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_MOVE_STOP_STRAFE_Server = 0x00BA {
+    PackedGuid guid;
+    MovementInfo info;
+} {
+    versions = "3.3.5";
 }
 
 test MSG_MOVE_STOP_STRAFE_Server {
@@ -57,5 +87,7 @@ test MSG_MOVE_STOP_STRAFE_Server {
   0x73, 0x7f, 0xa7, 0x42, /* position.z */
   0xb8, 0x9d, 0xc2, 0x3e, /* orientation */
   0x7f, 0x03, 0x00, 0x00, /* fall_time */
-]
+] {
+    versions = "1.12";
+}
 

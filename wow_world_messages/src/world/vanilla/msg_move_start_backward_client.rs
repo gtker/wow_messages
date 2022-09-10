@@ -3,7 +3,7 @@ use crate::world::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm#L1):
 /// ```text
 /// cmsg MSG_MOVE_START_BACKWARD_Client = 0x00B6 {
 ///     MovementInfo info;
@@ -63,7 +63,7 @@ mod test {
          0xC2, 0xBD, 0x0D, 0xA5, 0x42, 0x6B, 0x6C, 0x92, 0x40, 0x00, 0x00, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm` line 19.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_MOVE_START_BACKWARD_Client0() {
@@ -100,7 +100,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm` line 19.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_START_BACKWARD_Client0() {
@@ -137,7 +137,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm` line 7.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm` line 19.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_START_BACKWARD_Client0() {
