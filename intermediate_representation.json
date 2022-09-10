@@ -75817,6 +75817,135 @@
   ],
   "containers": [
     {
+      "name": "Addon",
+      "object_type": {
+        "type": "struct"
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "addon_type",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": {
+              "value": 2,
+              "original_string": "2"
+            },
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "uses_crc",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": {
+              "value": 1,
+              "original_string": "1"
+            },
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "uses_diffent_public_key",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "unknown1",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": {
+              "value": 0,
+              "original_string": "0"
+            },
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "unknown2",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": {
+              "value": 0,
+              "original_string": "0"
+            },
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm",
+        "start_position": 1
+      },
+      "only_has_io_error": true,
+      "features": [
+        "Struct",
+        "SimpleBuiltInTypes",
+        "ConstantValue",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "AuctionListItem",
       "object_type": {
         "type": "struct"
@@ -129506,6 +129635,106 @@
       ]
     },
     {
+      "name": "SMSG_ADDON_INFO",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 751
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "number_of_addons",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": "addons",
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "addons",
+            "member_type": {
+              "type": "array",
+              "content": {
+                "inner": {
+                  "type": "complex",
+                  "content": "Addon"
+                },
+                "size": {
+                  "type": "variable",
+                  "content": "number_of_addons"
+                }
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "number_of_banned_addons",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": {
+              "value": 0,
+              "original_string": "0"
+            },
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "comment": "Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm",
+        "start_position": 12
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "VariableArrays",
+        "ComplexArrays",
+        "ConstantValue",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "SMSG_AI_REACTION",
       "object_type": {
         "type": "smsg",
@@ -134666,6 +134895,59 @@
         "SMsg",
         "SimpleBuiltInTypes",
         "ComplexBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_CLIENTCACHE_VERSION",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 1195
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "version",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/login_logout/smsg_clientcache_version.wowm",
+        "start_position": 1
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
         "WorldVersion"
       ]
     },

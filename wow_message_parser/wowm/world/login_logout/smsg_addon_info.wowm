@@ -1,0 +1,20 @@
+struct Addon
+{
+	u8 addon_type = 2;
+	u8 uses_crc = 1;
+	Bool uses_diffent_public_key;
+	u32 unknown1 = 0;
+	u8 unknown2 = 0;
+} {
+	versions = "3.3.5";
+}
+
+smsg SMSG_ADDON_INFO = 0x2EF {
+	u32 number_of_addons;
+	Addon[number_of_addons] addons;
+	u32 number_of_banned_addons = 0;
+} {
+	versions = "3.3.5";
+	comment = "Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid";
+}
+
