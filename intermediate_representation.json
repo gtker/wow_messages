@@ -105965,6 +105965,100 @@
             "used_in_if": false,
             "tags": {}
           }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
+                "minor": 2
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
+                "minor": 3
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
+                "minor": 4
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
+                "minor": 5
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
+                "minor": 6
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
+                "minor": 7
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
+                "minor": 8
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm",
+        "start_position": 1
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "SimpleBuiltInTypes",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_PING",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 476
+      },
+      "constant": true,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "sequence_id",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
         },
         {
           "type": "definition",
@@ -105992,7 +106086,40 @@
               "type": "minor",
               "version": {
                 "major": 1,
+                "minor": 9
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
+                "minor": 10
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
+                "minor": 11
+              }
+            },
+            {
+              "type": "minor",
+              "version": {
+                "major": 1,
                 "minor": 12
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 2
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 3
               }
             }
           ]
@@ -106057,13 +106184,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm",
-            "start_position": 8
+            "start_position": 14
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm",
-        "start_position": 3
+        "start_position": 7
       },
       "only_has_io_error": true,
       "features": [

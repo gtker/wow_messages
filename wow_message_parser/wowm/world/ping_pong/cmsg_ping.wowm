@@ -1,8 +1,14 @@
-#tag_all versions "1.12";
+cmsg CMSG_PING = 0x1DC {
+    u32 sequence_id;
+} {
+    versions = "1.2 1.3 1.4 1.5 1.6 1.7 1.8";
+}
 
 cmsg CMSG_PING = 0x1DC {
     u32 sequence_id;
     u32 round_time_in_ms;
+} {
+    versions = "1.9 1.10 1.11 1.12 2 3";
 }
 
 test CMSG_PING {
@@ -13,5 +19,7 @@ test CMSG_PING {
     0xDC, 0x01, 0x00, 0x00, /* opcode */
     0xEF, 0xBE, 0xAD, 0xDE, /* sequence_id */
     0xDE, 0xCA, 0xFA, 0x00, /* round_time_in_ms */
-]
+] {
+    versions = "1.12";
+}
 

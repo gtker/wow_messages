@@ -2,6 +2,7 @@ pub mod billing_plan_flags2_4_33;
 pub mod cmsg_char_delete123;
 pub mod cmsg_char_enum123;
 pub mod cmsg_char_rename123;
+pub mod cmsg_ping1_1223;
 pub mod cmsg_player_login123;
 pub mod inventory_type1_1223;
 pub mod smsg_account_data_times1_122;

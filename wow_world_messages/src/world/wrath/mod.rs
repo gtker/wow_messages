@@ -20,6 +20,8 @@ pub(crate) mod cmsg_char_enum;
 pub use cmsg_char_enum::*;
 pub(crate) mod cmsg_char_rename;
 pub use cmsg_char_rename::*;
+pub(crate) mod cmsg_ping;
+pub use cmsg_ping::*;
 pub(crate) mod cmsg_player_login;
 pub use cmsg_player_login::*;
 pub(crate) mod cmsg_realm_split;

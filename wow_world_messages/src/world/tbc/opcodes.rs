@@ -9,6 +9,7 @@ use crate::world::tbc::CMSG_CHAR_CREATE;
 use crate::world::tbc::CMSG_CHAR_ENUM;
 use crate::world::tbc::CMSG_CHAR_DELETE;
 use crate::world::tbc::CMSG_PLAYER_LOGIN;
+use crate::world::tbc::CMSG_PING;
 use crate::world::tbc::CMSG_CHAR_RENAME;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -17,6 +18,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
     CMSG_PLAYER_LOGIN(CMSG_PLAYER_LOGIN),
+    CMSG_PING(CMSG_PING),
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
 }
 
@@ -27,6 +29,7 @@ impl ClientOpcodeMessage {
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003D => Ok(Self::CMSG_PLAYER_LOGIN(<CMSG_PLAYER_LOGIN as crate::Message>::read_body(&mut r, body_size)?)),
+            0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
         }
@@ -105,6 +108,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
         }
     }
@@ -116,6 +120,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
         }
     }
@@ -127,6 +132,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
@@ -138,6 +144,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
@@ -149,6 +156,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
@@ -160,6 +168,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
@@ -173,6 +182,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
             ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => "CMSG_CHAR_DELETE",
             ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => "CMSG_PLAYER_LOGIN",
+            ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
         })
     }
@@ -199,6 +209,12 @@ impl From<CMSG_CHAR_DELETE> for ClientOpcodeMessage {
 impl From<CMSG_PLAYER_LOGIN> for ClientOpcodeMessage {
     fn from(c: CMSG_PLAYER_LOGIN) -> Self {
         Self::CMSG_PLAYER_LOGIN(c)
+    }
+}
+
+impl From<CMSG_PING> for ClientOpcodeMessage {
+    fn from(c: CMSG_PING) -> Self {
+        Self::CMSG_PING(c)
     }
 }
 
