@@ -75888,13 +75888,12 @@
                 "endianness": "little"
               }
             },
-            "constant_value": {
-              "value": 0,
-              "original_string": "0"
-            },
+            "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "Other emus hardcode this to 0"
+            }
           }
         },
         {
@@ -75907,13 +75906,12 @@
                 "type": "u8"
               }
             },
-            "constant_value": {
-              "value": 0,
-              "original_string": "0"
-            },
+            "constant_value": null,
             "used_as_size_in": null,
             "used_in_if": false,
-            "tags": {}
+            "tags": {
+              "comment": "Other emus hardcode this to 0"
+            }
           }
         }
       ],
@@ -129722,7 +129720,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm",
-        "start_position": 12
+        "start_position": 17
       },
       "only_has_io_error": true,
       "features": [
