@@ -66,8 +66,8 @@ impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_AUCTION_LIST_BIDDER_ITEMS {}
 
 impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
     pub(crate) fn size(&self) -> usize {

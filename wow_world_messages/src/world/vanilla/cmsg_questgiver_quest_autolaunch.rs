@@ -30,6 +30,6 @@ impl crate::Message for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {}
 

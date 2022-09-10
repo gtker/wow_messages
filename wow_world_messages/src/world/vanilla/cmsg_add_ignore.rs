@@ -38,8 +38,8 @@ impl crate::Message for CMSG_ADD_IGNORE {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_ADD_IGNORE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_ADD_IGNORE {}
 
 impl CMSG_ADD_IGNORE {
     pub(crate) fn size(&self) -> usize {

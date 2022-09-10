@@ -3,7 +3,8 @@ use std::sync::{Arc, Mutex};
 use tokio::net::{TcpListener, TcpStream};
 use wow_srp::normalized_string::NormalizedString;
 use wow_srp::server::SrpServer;
-use wow_srp::vanilla_header::ProofSeed;
+use wow_srp::tbc_header::ProofSeed;
+use wow_world_messages::errors::ExpectedOpcodeError;
 use wow_world_messages::tbc::opcodes::ClientOpcodeMessage;
 use wow_world_messages::tbc::tokio_expect_client_message;
 use wow_world_messages::tbc::ServerMessage;
@@ -62,9 +63,16 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .unwrap();
 
     loop {
-        let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter())
-            .await
-            .unwrap();
+        let opcode =
+            ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter()).await;
+
+        let opcode = match opcode {
+            Ok(e) => e,
+            Err(e) => {
+                dbg!(e);
+                continue;
+            }
+        };
 
         match opcode {
             ClientOpcodeMessage::CMSG_PING(c) => {
@@ -215,9 +223,8 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .unwrap();
 
     loop {
-        let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter())
-            .await
-            .unwrap();
+        let opcode =
+            ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter()).await;
         dbg!(opcode);
     }
 }

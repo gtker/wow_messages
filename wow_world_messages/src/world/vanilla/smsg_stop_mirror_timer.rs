@@ -40,6 +40,6 @@ impl crate::Message for SMSG_STOP_MIRROR_TIMER {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_STOP_MIRROR_TIMER {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_STOP_MIRROR_TIMER {}
 

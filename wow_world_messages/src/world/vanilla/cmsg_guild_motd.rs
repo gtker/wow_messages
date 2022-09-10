@@ -38,8 +38,8 @@ impl crate::Message for CMSG_GUILD_MOTD {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_GUILD_MOTD {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_GUILD_MOTD {}
 
 impl CMSG_GUILD_MOTD {
     pub(crate) fn size(&self) -> usize {

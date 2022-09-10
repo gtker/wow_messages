@@ -36,8 +36,8 @@ impl crate::Message for SMSG_SPLINE_MOVE_SET_HOVER {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_SPLINE_MOVE_SET_HOVER {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_MOVE_SET_HOVER {}
 
 impl SMSG_SPLINE_MOVE_SET_HOVER {
     pub(crate) fn size(&self) -> usize {

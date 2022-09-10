@@ -69,8 +69,8 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
 
 impl CMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {

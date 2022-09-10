@@ -30,6 +30,6 @@ impl crate::Message for CMSG_CANCEL_AUTO_REPEAT_SPELL {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_CANCEL_AUTO_REPEAT_SPELL {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_CANCEL_AUTO_REPEAT_SPELL {}
 

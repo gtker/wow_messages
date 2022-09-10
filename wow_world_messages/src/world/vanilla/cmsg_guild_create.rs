@@ -38,8 +38,8 @@ impl crate::Message for CMSG_GUILD_CREATE {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_GUILD_CREATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_GUILD_CREATE {}
 
 impl CMSG_GUILD_CREATE {
     pub(crate) fn size(&self) -> usize {

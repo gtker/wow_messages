@@ -76,8 +76,8 @@ impl crate::Message for SMSG_SHOWTAXINODES {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_SHOWTAXINODES {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SHOWTAXINODES {}
 
 impl SMSG_SHOWTAXINODES {
     pub(crate) fn size(&self) -> usize {

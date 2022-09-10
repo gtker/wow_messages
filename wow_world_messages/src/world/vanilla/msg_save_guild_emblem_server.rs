@@ -40,6 +40,6 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Server {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {}
 

@@ -36,8 +36,8 @@ impl crate::Message for CMSG_MOVE_FALL_RESET {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_MOVE_FALL_RESET {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_MOVE_FALL_RESET {}
 
 impl CMSG_MOVE_FALL_RESET {
     pub(crate) fn size(&self) -> usize {

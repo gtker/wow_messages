@@ -30,6 +30,6 @@ impl crate::Message for CMSG_BATTLEFIELD_STATUS {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_BATTLEFIELD_STATUS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_BATTLEFIELD_STATUS {}
 

@@ -36,8 +36,8 @@ impl crate::Message for SMSG_SPLINE_MOVE_UNROOT {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_SPLINE_MOVE_UNROOT {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_MOVE_UNROOT {}
 
 impl SMSG_SPLINE_MOVE_UNROOT {
     pub(crate) fn size(&self) -> usize {

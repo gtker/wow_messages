@@ -85,6 +85,6 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_SAVE_GUILD_EMBLEM_Client {}
 

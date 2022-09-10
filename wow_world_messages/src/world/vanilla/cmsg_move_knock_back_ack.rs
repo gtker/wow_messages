@@ -55,8 +55,8 @@ impl crate::Message for CMSG_MOVE_KNOCK_BACK_ACK {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_MOVE_KNOCK_BACK_ACK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_MOVE_KNOCK_BACK_ACK {}
 
 impl CMSG_MOVE_KNOCK_BACK_ACK {
     pub(crate) fn size(&self) -> usize {

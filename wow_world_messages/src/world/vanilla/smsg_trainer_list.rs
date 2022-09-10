@@ -79,8 +79,8 @@ impl crate::Message for SMSG_TRAINER_LIST {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_TRAINER_LIST {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_TRAINER_LIST {}
 
 impl SMSG_TRAINER_LIST {
     pub(crate) fn size(&self) -> usize {

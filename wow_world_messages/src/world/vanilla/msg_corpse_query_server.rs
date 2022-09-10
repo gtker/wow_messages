@@ -82,8 +82,8 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for MSG_CORPSE_QUERY_Server {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MSG_CORPSE_QUERY_Server {}
 
 impl MSG_CORPSE_QUERY_Server {
     pub(crate) fn size(&self) -> usize {

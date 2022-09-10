@@ -40,6 +40,6 @@ impl crate::Message for CMSG_GROUP_UNINVITE_GUID {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_GROUP_UNINVITE_GUID {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_GROUP_UNINVITE_GUID {}
 

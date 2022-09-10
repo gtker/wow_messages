@@ -172,8 +172,8 @@ impl crate::Message for SMSG_TRADE_STATUS {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_TRADE_STATUS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_TRADE_STATUS {}
 
 impl SMSG_TRADE_STATUS {
     pub(crate) fn size(&self) -> usize {

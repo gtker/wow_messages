@@ -91,8 +91,8 @@ impl crate::Message for CMSG_PET_SET_ACTION {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_PET_SET_ACTION {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_PET_SET_ACTION {}
 
 impl CMSG_PET_SET_ACTION {
     pub(crate) fn size(&self) -> usize {

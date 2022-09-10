@@ -45,8 +45,8 @@ impl crate::Message for SMSG_MOVE_WATER_WALK {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_MOVE_WATER_WALK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_MOVE_WATER_WALK {}
 
 impl SMSG_MOVE_WATER_WALK {
     pub(crate) fn size(&self) -> usize {

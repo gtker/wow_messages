@@ -107,8 +107,11 @@ impl crate::Message for SMSG_TUTORIAL_FLAGS {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_TUTORIAL_FLAGS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_TUTORIAL_FLAGS {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_TUTORIAL_FLAGS {}
 
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ServerMessage for SMSG_TUTORIAL_FLAGS {}

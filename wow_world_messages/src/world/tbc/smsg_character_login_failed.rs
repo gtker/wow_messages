@@ -44,6 +44,6 @@ impl crate::Message for SMSG_CHARACTER_LOGIN_FAILED {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {}
 

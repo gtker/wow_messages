@@ -172,8 +172,8 @@ impl crate::Message for CMSG_MESSAGECHAT {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_MESSAGECHAT {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_MESSAGECHAT {}
 
 impl CMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {

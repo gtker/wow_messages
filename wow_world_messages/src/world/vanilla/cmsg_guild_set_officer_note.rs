@@ -50,8 +50,8 @@ impl crate::Message for CMSG_GUILD_SET_OFFICER_NOTE {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {}
 
 impl CMSG_GUILD_SET_OFFICER_NOTE {
     pub(crate) fn size(&self) -> usize {

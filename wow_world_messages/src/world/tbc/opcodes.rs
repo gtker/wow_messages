@@ -1,5 +1,5 @@
 use crate::tbc::{ServerMessage, ClientMessage};
-use wow_srp::vanilla_header::{DecrypterHalf, EncrypterHalf};
+use wow_srp::tbc_header::{DecrypterHalf, EncrypterHalf};
 
 #[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};

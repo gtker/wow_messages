@@ -47,8 +47,8 @@ impl crate::Message for CMSG_GROUP_CHANGE_SUB_GROUP {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {}
 
 impl CMSG_GROUP_CHANGE_SUB_GROUP {
     pub(crate) fn size(&self) -> usize {

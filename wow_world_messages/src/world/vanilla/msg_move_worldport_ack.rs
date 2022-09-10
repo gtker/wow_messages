@@ -35,9 +35,9 @@ impl crate::Message for MSG_MOVE_WORLDPORT_ACK {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
 
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
 

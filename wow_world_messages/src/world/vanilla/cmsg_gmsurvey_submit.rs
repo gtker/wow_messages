@@ -67,8 +67,8 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
 
 impl CMSG_GMSURVEY_SUBMIT {
     pub(crate) fn size(&self) -> usize {

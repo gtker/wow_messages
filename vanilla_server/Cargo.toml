@@ -11,4 +11,4 @@ wow_login_messages = { path = "../wow_login_messages", features = ["tokio"] }
 wow_world_messages = { path = "../wow_world_messages", features = ["tokio", "vanilla"] }
 
 [dependencies.wow_srp]
-version = "0.5.0"
+path = "../../wow_srp"

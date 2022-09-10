@@ -38,8 +38,8 @@ impl crate::Message for CMSG_GROUP_UNINVITE {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_GROUP_UNINVITE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_GROUP_UNINVITE {}
 
 impl CMSG_GROUP_UNINVITE {
     pub(crate) fn size(&self) -> usize {

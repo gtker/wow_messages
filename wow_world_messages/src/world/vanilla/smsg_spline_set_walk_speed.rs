@@ -44,8 +44,8 @@ impl crate::Message for SMSG_SPLINE_SET_WALK_SPEED {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_SPLINE_SET_WALK_SPEED {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_SET_WALK_SPEED {}
 
 impl SMSG_SPLINE_SET_WALK_SPEED {
     pub(crate) fn size(&self) -> usize {

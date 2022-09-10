@@ -462,10 +462,13 @@ impl Tags {
 
         if self.fulfills_all(&Tags::new_with_version(Version::World(
             WorldVersion::Minor(1, 12),
-        ))) || self.fulfills_all(&Tags::new_with_version(Version::World(
-            WorldVersion::Patch(2, 4, 3),
         ))) {
             v.push(Version::World(WorldVersion::Minor(1, 12)));
+        }
+        if self.fulfills_all(&Tags::new_with_version(Version::World(
+            WorldVersion::Patch(2, 4, 3),
+        ))) {
+            v.push(Version::World(WorldVersion::Patch(2, 4, 3)))
         }
 
         if self.fulfills_all(&Tags::new_with_version(Version::World(

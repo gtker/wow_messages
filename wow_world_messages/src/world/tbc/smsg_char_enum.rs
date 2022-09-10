@@ -48,8 +48,8 @@ impl crate::Message for SMSG_CHAR_ENUM {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_CHAR_ENUM {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_CHAR_ENUM {}
 
 impl SMSG_CHAR_ENUM {
     pub(crate) fn size(&self) -> usize {

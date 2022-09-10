@@ -81,8 +81,8 @@ impl crate::Message for SMSG_GOSSIP_POI {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_GOSSIP_POI {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_GOSSIP_POI {}
 
 impl SMSG_GOSSIP_POI {
     pub(crate) fn size(&self) -> usize {

@@ -109,8 +109,8 @@ impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
 
 impl SMSG_GUILD_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

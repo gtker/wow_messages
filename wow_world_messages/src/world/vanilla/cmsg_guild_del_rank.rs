@@ -30,6 +30,6 @@ impl crate::Message for CMSG_GUILD_DEL_RANK {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_GUILD_DEL_RANK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_GUILD_DEL_RANK {}
 

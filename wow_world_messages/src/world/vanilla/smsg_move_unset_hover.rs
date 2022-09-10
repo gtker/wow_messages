@@ -45,8 +45,8 @@ impl crate::Message for SMSG_MOVE_UNSET_HOVER {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_MOVE_UNSET_HOVER {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_MOVE_UNSET_HOVER {}
 
 impl SMSG_MOVE_UNSET_HOVER {
     pub(crate) fn size(&self) -> usize {

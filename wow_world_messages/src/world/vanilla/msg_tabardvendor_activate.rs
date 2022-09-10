@@ -40,9 +40,9 @@ impl crate::Message for MSG_TABARDVENDOR_ACTIVATE {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_TABARDVENDOR_ACTIVATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_TABARDVENDOR_ACTIVATE {}
 
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for MSG_TABARDVENDOR_ACTIVATE {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MSG_TABARDVENDOR_ACTIVATE {}
 

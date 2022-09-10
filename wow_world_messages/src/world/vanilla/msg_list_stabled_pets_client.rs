@@ -40,6 +40,6 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Client {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_LIST_STABLED_PETS_Client {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_LIST_STABLED_PETS_Client {}
 

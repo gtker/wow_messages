@@ -48,8 +48,11 @@ impl crate::Message for CMSG_PING {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_PING {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_PING {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_PING {}
 
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ClientMessage for CMSG_PING {}

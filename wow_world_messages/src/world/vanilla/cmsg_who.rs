@@ -130,8 +130,8 @@ impl crate::Message for CMSG_WHO {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_WHO {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_WHO {}
 
 impl CMSG_WHO {
     pub(crate) fn size(&self) -> usize {

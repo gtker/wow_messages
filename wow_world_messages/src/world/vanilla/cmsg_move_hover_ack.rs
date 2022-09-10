@@ -64,8 +64,8 @@ impl crate::Message for CMSG_MOVE_HOVER_ACK {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_MOVE_HOVER_ACK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_MOVE_HOVER_ACK {}
 
 impl CMSG_MOVE_HOVER_ACK {
     pub(crate) fn size(&self) -> usize {

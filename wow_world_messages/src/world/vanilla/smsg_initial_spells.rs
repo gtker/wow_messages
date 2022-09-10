@@ -81,8 +81,8 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_INITIAL_SPELLS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_INITIAL_SPELLS {}
 
 impl SMSG_INITIAL_SPELLS {
     pub(crate) fn size(&self) -> usize {

@@ -237,8 +237,8 @@ impl crate::Message for SMSG_CHAR_RENAME {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_CHAR_RENAME {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_CHAR_RENAME {}
 
 impl SMSG_CHAR_RENAME {
     pub(crate) fn size(&self) -> usize {

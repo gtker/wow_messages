@@ -55,8 +55,8 @@ impl crate::Message for CMSG_FORCE_MOVE_ROOT_ACK {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_FORCE_MOVE_ROOT_ACK {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_FORCE_MOVE_ROOT_ACK {}
 
 impl CMSG_FORCE_MOVE_ROOT_ACK {
     pub(crate) fn size(&self) -> usize {

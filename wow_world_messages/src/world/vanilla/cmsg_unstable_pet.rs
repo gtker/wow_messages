@@ -49,6 +49,6 @@ impl crate::Message for CMSG_UNSTABLE_PET {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_UNSTABLE_PET {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_UNSTABLE_PET {}
 

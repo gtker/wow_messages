@@ -38,8 +38,8 @@ impl crate::Message for CMSG_WHOIS {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for CMSG_WHOIS {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for CMSG_WHOIS {}
 
 impl CMSG_WHOIS {
     pub(crate) fn size(&self) -> usize {

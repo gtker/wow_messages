@@ -32,6 +32,6 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Client {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_QUERY_NEXT_MAIL_TIME_Client {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_QUERY_NEXT_MAIL_TIME_Client {}
 

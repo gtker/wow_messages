@@ -41,6 +41,6 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 

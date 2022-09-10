@@ -215,30 +215,16 @@ impl Writer {
             _ => unreachable!(),
         };
 
-        match version.as_major_world() {
-            MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {
-                self.wln(format!(
-                    "#[cfg(any(feature = \"vanilla\", feature = \"tbc\"))]",
-                ));
-                self.wln(format!(
-                    "impl crate::helper::shared::vanilla_tbc::{} for {} {{}}",
-                    trait_to_impl,
-                    type_name.as_ref(),
-                ));
-            }
-            MajorWorldVersion::Wrath => {
-                self.wln(format!(
-                    "#[cfg(feature = \"{}\")]",
-                    version.as_major_world().feature_name()
-                ));
-                self.wln(format!(
-                    "impl {}::{} for {} {{}}",
-                    get_import_path(version),
-                    trait_to_impl,
-                    type_name.as_ref(),
-                ));
-            }
-        }
+        self.wln(format!(
+            "#[cfg(feature = \"{}\")]",
+            version.as_major_world().feature_name()
+        ));
+        self.wln(format!(
+            "impl {}::{} for {} {{}}",
+            get_import_path(version),
+            trait_to_impl,
+            type_name.as_ref(),
+        ));
         self.newline();
     }
 
@@ -890,9 +876,8 @@ pub enum MajorWorldVersion {
 impl MajorWorldVersion {
     pub fn encryption_path(&self) -> &'static str {
         match self {
-            MajorWorldVersion::BurningCrusade | MajorWorldVersion::Vanilla => {
-                "wow_srp::vanilla_header"
-            }
+            MajorWorldVersion::Vanilla => "wow_srp::vanilla_header",
+            MajorWorldVersion::BurningCrusade => "wow_srp::tbc_header",
             MajorWorldVersion::Wrath => "wow_srp::wrath_header",
         }
     }

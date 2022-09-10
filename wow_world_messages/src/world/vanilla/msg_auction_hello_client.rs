@@ -40,8 +40,8 @@ impl crate::Message for MSG_AUCTION_HELLO_Client {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for MSG_AUCTION_HELLO_Client {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MSG_AUCTION_HELLO_Client {}
 
 #[cfg(test)]
 mod test {
