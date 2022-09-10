@@ -56,11 +56,11 @@ impl crate::Message for MessageWithComplexTypes {
     }
 
 }
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ClientMessage for MessageWithComplexTypes {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ClientMessage for MessageWithComplexTypes {}
 
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-impl crate::helper::shared::vanilla_tbc::ServerMessage for MessageWithComplexTypes {}
+#[cfg(feature = "vanilla")]
+impl crate::world::vanilla::ServerMessage for MessageWithComplexTypes {}
 
 impl MessageWithComplexTypes {
     pub(crate) fn size(&self) -> usize {

@@ -71001,9 +71001,15 @@
             {
               "type": "patch",
               "version": {
-                "major": 3,
-                "minor": 3,
-                "patch": 5
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 3
               }
             }
           ]
@@ -108119,9 +108125,15 @@
             {
               "type": "patch",
               "version": {
-                "major": 3,
-                "minor": 3,
-                "patch": 5
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 3
               }
             }
           ]
@@ -160092,9 +160104,15 @@
             {
               "type": "patch",
               "version": {
-                "major": 3,
-                "minor": 3,
-                "patch": 5
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            },
+            {
+              "type": "major",
+              "version": {
+                "major": 3
               }
             }
           ]

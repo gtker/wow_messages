@@ -12,6 +12,7 @@ use crate::world::tbc::CMSG_PLAYER_LOGIN;
 use crate::world::tbc::CMSG_PING;
 use crate::world::tbc::CMSG_AUTH_SESSION;
 use crate::world::tbc::CMSG_CHAR_RENAME;
+use crate::world::tbc::CMSG_REALM_SPLIT;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -22,6 +23,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PING(CMSG_PING),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
+    CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
 }
 
 impl ClientOpcodeMessage {
@@ -34,6 +36,7 @@ impl ClientOpcodeMessage {
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size)?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
+            0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
         }
     }
@@ -114,6 +117,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -127,6 +131,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
+            Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -140,6 +145,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -153,6 +159,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -166,6 +173,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -179,6 +187,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -194,6 +203,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
+            ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
         })
     }
 }
@@ -240,6 +250,12 @@ impl From<CMSG_CHAR_RENAME> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_REALM_SPLIT> for ClientOpcodeMessage {
+    fn from(c: CMSG_REALM_SPLIT) -> Self {
+        Self::CMSG_REALM_SPLIT(c)
+    }
+}
+
 use crate::world::tbc::SMSG_CHAR_CREATE;
 use crate::world::tbc::SMSG_CHAR_ENUM;
 use crate::world::tbc::SMSG_CHAR_DELETE;
@@ -253,6 +269,7 @@ use crate::world::tbc::SMSG_AUTH_RESPONSE;
 use crate::world::tbc::SMSG_ACCOUNT_DATA_TIMES;
 use crate::world::tbc::SMSG_LOGIN_VERIFY_WORLD;
 use crate::world::tbc::SMSG_CHAR_RENAME;
+use crate::world::tbc::SMSG_REALM_SPLIT;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -269,6 +286,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
+    SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
 }
 
 impl ServerOpcodeMessage {
@@ -287,6 +305,7 @@ impl ServerOpcodeMessage {
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
+            0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
         }
     }
@@ -373,6 +392,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -392,6 +412,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
+            Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -411,6 +432,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -430,6 +452,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -449,6 +472,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -468,6 +492,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -489,6 +514,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
+            ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
         })
     }
 }
@@ -568,6 +594,12 @@ impl From<SMSG_LOGIN_VERIFY_WORLD> for ServerOpcodeMessage {
 impl From<SMSG_CHAR_RENAME> for ServerOpcodeMessage {
     fn from(c: SMSG_CHAR_RENAME) -> Self {
         Self::SMSG_CHAR_RENAME(c)
+    }
+}
+
+impl From<SMSG_REALM_SPLIT> for ServerOpcodeMessage {
+    fn from(c: SMSG_REALM_SPLIT) -> Self {
+        Self::SMSG_REALM_SPLIT(c)
     }
 }
 
