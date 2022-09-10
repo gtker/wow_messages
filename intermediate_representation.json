@@ -106052,6 +106052,110 @@
       ]
     },
     {
+      "name": "CMSG_MOVE_CHNG_TRANSPORT",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 909
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_move_chng_transport.wowm",
+        "start_position": 1
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_MOVE_CHNG_TRANSPORT",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 909
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_move_chng_transport.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "CMSG_MOVE_FALL_RESET",
       "object_type": {
         "type": "cmsg",
@@ -106093,7 +106197,111 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_move_fall_reset.wowm",
-        "start_position": 3
+        "start_position": 1
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_MOVE_FALL_RESET",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 714
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_move_fall_reset.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_MOVE_FALL_RESET",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 714
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_move_fall_reset.wowm",
+        "start_position": 13
       },
       "only_has_io_error": true,
       "features": [
@@ -106446,6 +106654,110 @@
       "features": [
         "CMsg",
         "ComplexBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_MOVE_SET_FLY",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 838
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_fly.wowm",
+        "start_position": 1
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_MOVE_SET_FLY",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 838
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_fly.wowm",
+        "start_position": 7
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
         "SubObjects",
         "WorldVersion"
       ]

@@ -1,20 +1,20 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::MovementInfo;
+use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_fall_reset.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_fall_reset.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_chng_transport.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_chng_transport.wowm#L1):
 /// ```text
-/// cmsg CMSG_MOVE_FALL_RESET = 0x02CA {
+/// cmsg CMSG_MOVE_CHNG_TRANSPORT = 0x038D {
 ///     MovementInfo info;
 /// }
 /// ```
-pub struct CMSG_MOVE_FALL_RESET {
+pub struct CMSG_MOVE_CHNG_TRANSPORT {
     pub info: MovementInfo,
 }
 
-impl crate::Message for CMSG_MOVE_FALL_RESET {
-    const OPCODE: u32 = 0x02ca;
+impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
+    const OPCODE: u32 = 0x038d;
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32
@@ -36,10 +36,10 @@ impl crate::Message for CMSG_MOVE_FALL_RESET {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MOVE_FALL_RESET {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_MOVE_CHNG_TRANSPORT {}
 
-impl CMSG_MOVE_FALL_RESET {
+impl CMSG_MOVE_CHNG_TRANSPORT {
     pub(crate) fn size(&self) -> usize {
         self.info.size() // info: MovementInfo
     }

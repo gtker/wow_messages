@@ -1,0 +1,11 @@
+cmsg CMSG_MOVE_CHNG_TRANSPORT = 0x38D {
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_MOVE_CHNG_TRANSPORT = 0x38D {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}

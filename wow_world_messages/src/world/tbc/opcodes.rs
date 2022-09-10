@@ -5,6 +5,7 @@ use wow_srp::tbc_header::{DecrypterHalf, EncrypterHalf};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
+use crate::world::tbc::MovementInfo;
 use crate::world::tbc::CMSG_CHAR_CREATE;
 use crate::world::tbc::CMSG_CHAR_ENUM;
 use crate::world::tbc::CMSG_CHAR_DELETE;
@@ -18,11 +19,14 @@ use crate::world::tbc::CMSG_ACTIVATETAXI;
 use crate::world::tbc::CMSG_PING;
 use crate::world::tbc::CMSG_AUTH_SESSION;
 use crate::world::tbc::CMSG_CHAR_RENAME;
+use crate::world::tbc::CMSG_MOVE_FALL_RESET;
 use crate::world::tbc::CMSG_FORCE_WALK_SPEED_CHANGE_ACK;
 use crate::world::tbc::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK;
 use crate::world::tbc::CMSG_FORCE_TURN_RATE_CHANGE_ACK;
 use crate::world::tbc::CMSG_ACTIVATETAXIEXPRESS;
+use crate::world::tbc::CMSG_MOVE_SET_FLY;
 use crate::world::tbc::CMSG_REALM_SPLIT;
+use crate::world::tbc::CMSG_MOVE_CHNG_TRANSPORT;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -39,11 +43,14 @@ pub enum ClientOpcodeMessage {
     CMSG_PING(CMSG_PING),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
+    CMSG_MOVE_FALL_RESET(CMSG_MOVE_FALL_RESET),
     CMSG_FORCE_WALK_SPEED_CHANGE_ACK(CMSG_FORCE_WALK_SPEED_CHANGE_ACK),
     CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK),
     CMSG_FORCE_TURN_RATE_CHANGE_ACK(CMSG_FORCE_TURN_RATE_CHANGE_ACK),
     CMSG_ACTIVATETAXIEXPRESS(CMSG_ACTIVATETAXIEXPRESS),
+    CMSG_MOVE_SET_FLY(CMSG_MOVE_SET_FLY),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
+    CMSG_MOVE_CHNG_TRANSPORT(CMSG_MOVE_CHNG_TRANSPORT),
 }
 
 impl ClientOpcodeMessage {
@@ -62,11 +69,14 @@ impl ClientOpcodeMessage {
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size)?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02CA => Ok(Self::CMSG_MOVE_FALL_RESET(<CMSG_MOVE_FALL_RESET as crate::Message>::read_body(&mut r, body_size)?)),
             0x02DB => Ok(Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(<CMSG_FORCE_WALK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x02DD => Ok(Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x02DF => Ok(Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(<CMSG_FORCE_TURN_RATE_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x0312 => Ok(Self::CMSG_ACTIVATETAXIEXPRESS(<CMSG_ACTIVATETAXIEXPRESS as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0346 => Ok(Self::CMSG_MOVE_SET_FLY(<CMSG_MOVE_SET_FLY as crate::Message>::read_body(&mut r, body_size)?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x038D => Ok(Self::CMSG_MOVE_CHNG_TRANSPORT(<CMSG_MOVE_CHNG_TRANSPORT as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
         }
     }
@@ -153,11 +163,14 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_FALL_RESET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_SET_FLY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -177,11 +190,14 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_FALL_RESET(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_SET_FLY(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -201,11 +217,14 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -225,11 +244,14 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -249,11 +271,14 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -273,11 +298,23 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_unencrypted_client(w).await,
+        }
+    }
+
+    pub fn movement_info(&self) -> Option<&MovementInfo> {
+        match self {
+            Self::CMSG_MOVE_FALL_RESET(c) => Some(&c.info),
+            Self::CMSG_MOVE_SET_FLY(c) => Some(&c.info),
+            Self::CMSG_MOVE_CHNG_TRANSPORT(c) => Some(&c.info),
+            _ => None,
         }
     }
 
@@ -299,11 +336,14 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
+            ClientOpcodeMessage::CMSG_MOVE_FALL_RESET(_) => "CMSG_MOVE_FALL_RESET",
             ClientOpcodeMessage::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_WALK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_TURN_RATE_CHANGE_ACK(_) => "CMSG_FORCE_TURN_RATE_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_ACTIVATETAXIEXPRESS(_) => "CMSG_ACTIVATETAXIEXPRESS",
+            ClientOpcodeMessage::CMSG_MOVE_SET_FLY(_) => "CMSG_MOVE_SET_FLY",
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
+            ClientOpcodeMessage::CMSG_MOVE_CHNG_TRANSPORT(_) => "CMSG_MOVE_CHNG_TRANSPORT",
         })
     }
 }
@@ -386,6 +426,12 @@ impl From<CMSG_CHAR_RENAME> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_MOVE_FALL_RESET> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_FALL_RESET) -> Self {
+        Self::CMSG_MOVE_FALL_RESET(c)
+    }
+}
+
 impl From<CMSG_FORCE_WALK_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
     fn from(c: CMSG_FORCE_WALK_SPEED_CHANGE_ACK) -> Self {
         Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c)
@@ -410,9 +456,21 @@ impl From<CMSG_ACTIVATETAXIEXPRESS> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_MOVE_SET_FLY> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_SET_FLY) -> Self {
+        Self::CMSG_MOVE_SET_FLY(c)
+    }
+}
+
 impl From<CMSG_REALM_SPLIT> for ClientOpcodeMessage {
     fn from(c: CMSG_REALM_SPLIT) -> Self {
         Self::CMSG_REALM_SPLIT(c)
+    }
+}
+
+impl From<CMSG_MOVE_CHNG_TRANSPORT> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_CHNG_TRANSPORT) -> Self {
+        Self::CMSG_MOVE_CHNG_TRANSPORT(c)
     }
 }
 

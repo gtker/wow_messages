@@ -1,0 +1,11 @@
+cmsg CMSG_MOVE_SET_FLY = 0x346 {
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_MOVE_SET_FLY = 0x346 {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}
