@@ -99417,6 +99417,90 @@
           "content": {
             "name": "guid",
             "member_type": {
+              "type": "guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "movement_counter",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_root_ack.wowm",
+        "start_position": 9
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_FORCE_MOVE_ROOT_ACK",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 233
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
               "type": "packed_guid"
             },
             "constant_value": null,
@@ -99477,7 +99561,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_root_ack.wowm",
-        "start_position": 9
+        "start_position": 17
       },
       "only_has_io_error": true,
       "features": [
@@ -99584,6 +99668,90 @@
           "content": {
             "name": "guid",
             "member_type": {
+              "type": "guid"
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "movement_counter",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "info",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "MovementInfo"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 2,
+                "minor": 4,
+                "patch": 3
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_unroot_ack.wowm",
+        "start_position": 9
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CMsg",
+        "ComplexBuiltInTypes",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "CMSG_FORCE_MOVE_UNROOT_ACK",
+      "object_type": {
+        "type": "cmsg",
+        "opcode": 235
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "guid",
+            "member_type": {
               "type": "packed_guid"
             },
             "constant_value": null,
@@ -99644,7 +99812,7 @@
       "tests": [],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/movement/cmsg/cmsg_force_move_unroot_ack.wowm",
-        "start_position": 9
+        "start_position": 17
       },
       "only_has_io_error": true,
       "features": [
