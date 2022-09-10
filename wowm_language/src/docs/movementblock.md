@@ -194,6 +194,7 @@ struct MovementBlock {
     UpdateFlag update_flag;
     if (update_flag & LIVING) {
         MovementFlags flags;
+        ExtraMovementFlags extra_flags;
         u32 timestamp;
         Vector3d living_position;
         f32 living_orientation;
@@ -283,6 +284,7 @@ If update_flag contains `LIVING`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
+| - | ? / - | [ExtraMovementFlags](extramovementflags.md) | extra_flags |  |  |
 | - | 4 / Little | u32 | timestamp |  |  |
 | - | ? / - | [Vector3d](vector3d.md) | living_position |  |  |
 | - | 4 / Little | f32 | living_orientation |  |  |

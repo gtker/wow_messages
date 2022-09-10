@@ -51,4 +51,5 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 | `UNK16` | 32768 (0x8000) |  |  |
 
 Used in:
+* [MovementBlock](movementblock.md)
 * [MovementInfo](movementinfo.md)

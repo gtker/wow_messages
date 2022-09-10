@@ -1,5 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::wrath::ExtraMovementFlags;
 use crate::world::wrath::MovementFlags;
 use crate::world::wrath::SplineFlag;
 use crate::world::wrath::TransportInfo;
@@ -14,6 +15,7 @@ use std::io::{Write, Read};
 ///     UpdateFlag update_flag;
 ///     if (update_flag & LIVING) {
 ///         MovementFlags flags;
+///         ExtraMovementFlags extra_flags;
 ///         u32 timestamp;
 ///         Vector3d living_position;
 ///         f32 living_orientation;
@@ -107,6 +109,7 @@ impl MovementBlock {
                     backwards_flight_speed,
                     backwards_running_speed,
                     backwards_swimming_speed,
+                    extra_flags,
                     fall_time,
                     flags,
                     flight_speed,
@@ -121,6 +124,9 @@ impl MovementBlock {
                 } => {
                     // flags: MovementFlags
                     w.write_all(&(flags.as_int() as u32).to_le_bytes())?;
+
+                    // extra_flags: ExtraMovementFlags
+                    w.write_all(&(extra_flags.as_int() as u16).to_le_bytes())?;
 
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes())?;
@@ -332,6 +338,9 @@ impl MovementBlock {
             // flags: MovementFlags
             let flags = MovementFlags::new(crate::util::read_u32_le(r)?);
 
+            // extra_flags: ExtraMovementFlags
+            let extra_flags = ExtraMovementFlags::new(crate::util::read_u16_le(r)?);
+
             // timestamp: u32
             let timestamp = crate::util::read_u32_le(r)?;
 
@@ -497,6 +506,7 @@ impl MovementBlock {
                 backwards_flight_speed,
                 backwards_running_speed,
                 backwards_swimming_speed,
+                extra_flags,
                 fall_time,
                 flags,
                 flight_speed,
@@ -2300,6 +2310,7 @@ pub enum MovementBlock_UpdateFlag_Living {
         backwards_flight_speed: f32,
         backwards_running_speed: f32,
         backwards_swimming_speed: f32,
+        extra_flags: ExtraMovementFlags,
         fall_time: f32,
         flags: MovementBlock_MovementFlags,
         flight_speed: f32,
@@ -2342,6 +2353,7 @@ impl MovementBlock_UpdateFlag_Living {
                 backwards_flight_speed,
                 backwards_running_speed,
                 backwards_swimming_speed,
+                extra_flags,
                 fall_time,
                 flags,
                 flight_speed,
@@ -2358,6 +2370,7 @@ impl MovementBlock_UpdateFlag_Living {
                 4 // backwards_flight_speed: f32
                 + 4 // backwards_running_speed: f32
                 + 4 // backwards_swimming_speed: f32
+                + 2 // extra_flags: ExtraMovementFlags
                 + 4 // fall_time: f32
                 + flags.size() // flags: MovementBlock_MovementFlags
                 + 4 // flight_speed: f32

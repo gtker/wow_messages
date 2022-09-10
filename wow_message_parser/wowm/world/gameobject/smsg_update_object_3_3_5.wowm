@@ -88,6 +88,7 @@ struct MovementBlock {
     UpdateFlag update_flag;
     if (update_flag & LIVING) {
         MovementFlags flags;
+        ExtraMovementFlags extra_flags;
         u32 timestamp;
         Vector3d living_position;
         f32 living_orientation;
