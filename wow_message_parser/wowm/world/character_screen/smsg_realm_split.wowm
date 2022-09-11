@@ -7,8 +7,8 @@ enum RealmSplitState : u32 {
 }
 
 smsg SMSG_REALM_SPLIT = 0x38B {
-    u32 unknown {
-        comment = "ArcEmu/TrinityCore/mangosthree send unknown from [CMSG_REALM_SPLIT] back.";
+    u32 realm_id {
+        comment = "ArcEmu/TrinityCore/mangosthree send realm_id from [CMSG_REALM_SPLIT] back.";
     }
     RealmSplitState state;
     CString split_date {

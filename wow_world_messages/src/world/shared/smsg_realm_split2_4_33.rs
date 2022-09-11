@@ -6,15 +6,15 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_realm_split.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_realm_split.wowm#L9):
 /// ```text
 /// smsg SMSG_REALM_SPLIT = 0x038B {
-///     u32 unknown;
+///     u32 realm_id;
 ///     RealmSplitState state;
 ///     CString split_date;
 /// }
 /// ```
 pub struct SMSG_REALM_SPLIT {
-    /// ArcEmu/TrinityCore/mangosthree send unknown from [`CMSG_REALM_SPLIT`](crate::world::tbc::CMSG_REALM_SPLIT) back.
+    /// ArcEmu/TrinityCore/mangosthree send realm_id from [`CMSG_REALM_SPLIT`](crate::world::tbc::CMSG_REALM_SPLIT) back.
     ///
-    pub unknown: u32,
+    pub realm_id: u32,
     pub state: RealmSplitState,
     /// Seems to be slash separated string, like '01/01/01'.
     ///
@@ -29,8 +29,8 @@ impl crate::Message for SMSG_REALM_SPLIT {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // unknown: u32
-        w.write_all(&self.unknown.to_le_bytes())?;
+        // realm_id: u32
+        w.write_all(&self.realm_id.to_le_bytes())?;
 
         // state: RealmSplitState
         w.write_all(&(self.state.as_int() as u32).to_le_bytes())?;
@@ -43,8 +43,8 @@ impl crate::Message for SMSG_REALM_SPLIT {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(r)?;
+        // realm_id: u32
+        let realm_id = crate::util::read_u32_le(r)?;
 
         // state: RealmSplitState
         let state: RealmSplitState = crate::util::read_u32_le(r)?.try_into()?;
@@ -54,7 +54,7 @@ impl crate::Message for SMSG_REALM_SPLIT {
         let split_date = String::from_utf8(split_date)?;
 
         Ok(Self {
-            unknown,
+            realm_id,
             state,
             split_date,
         })
@@ -69,7 +69,7 @@ impl crate::world::wrath::ServerMessage for SMSG_REALM_SPLIT {}
 
 impl SMSG_REALM_SPLIT {
     pub(crate) fn size(&self) -> usize {
-        4 // unknown: u32
+        4 // realm_id: u32
         + 4 // state: RealmSplitState
         + self.split_date.len() + 1 // split_date: CString
     }
