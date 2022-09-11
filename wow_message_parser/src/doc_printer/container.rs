@@ -25,7 +25,7 @@ pub fn print_docs_for_container(e: &Container, o: &Objects) -> DocWriter {
     s.wln("```");
 
     print_container_header(&mut s, e);
-    print_container_body(&mut s, e);
+    print_container_body(&mut s, e, o);
 
     print_container_examples(&mut s, e, o);
 
@@ -427,6 +427,8 @@ fn print_container_if_statement(
     s: &mut DocWriter,
     statement: &IfStatement,
     offset: &mut Option<usize>,
+    tags: &Tags,
+    o: &Objects,
 ) {
     s.w(format!("If {variable} ", variable = statement.name()));
     for (i, e) in statement.get_conditional().equations().iter().enumerate() {
@@ -445,14 +447,14 @@ fn print_container_if_statement(
     print_container_item_header(s);
 
     for m in statement.members() {
-        print_container_field(s, m, offset);
+        print_container_field(s, m, offset, tags, o);
     }
 
     if !statement.else_ifs().is_empty() {
         for elseif in statement.else_ifs() {
             s.newline();
             s.w("Else ");
-            print_container_if_statement(s, elseif, offset);
+            print_container_if_statement(s, elseif, offset, tags, o);
         }
     }
 
@@ -461,12 +463,18 @@ fn print_container_if_statement(
         s.wln("Else: ");
 
         for m in statement.else_members() {
-            print_container_field(s, m, offset);
+            print_container_field(s, m, offset, tags, o);
         }
     }
 }
 
-fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Option<usize>) {
+fn print_container_field(
+    s: &mut DocWriter,
+    m: &StructMember,
+    offset: &mut Option<usize>,
+    tags: &Tags,
+    o: &Objects,
+) {
     match m {
         StructMember::Definition(d) => {
             let ty = match d.ty() {
@@ -531,7 +539,7 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                 } else {
                     "-".to_string()
                 },
-                size = d.ty().doc_size_of(),
+                size = d.ty().doc_size_of(tags, o),
                 endian = d.ty().doc_endian_str(),
                 ty = ty,
                 name = d.name(),
@@ -544,22 +552,33 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                     Type::Integer(t) => Some(offset.unwrap() + t.size() as usize),
                     Type::Guid => Some(offset.unwrap() + 8),
                     Type::FloatingPoint(f) => Some(offset.unwrap() + f.size() as usize),
+                    Type::Bool => Some(offset.unwrap() + BOOL_SIZE as usize),
+                    Type::Identifier { s, upcast } => {
+                        if let Some(upcast) = upcast {
+                            Some(offset.unwrap() + upcast.size() as usize)
+                        } else {
+                            let sizes = o.get_object(s, tags).sizes();
+                            if sizes.is_constant() {
+                                Some(offset.unwrap() + sizes.maximum())
+                            } else {
+                                None
+                            }
+                        }
+                    }
                     Type::CString
                     | Type::SizedCString
                     | Type::String { .. }
-                    | Type::Identifier { .. }
                     | Type::Array(_)
                     | Type::PackedGuid
                     | Type::UpdateMask
                     | Type::AuraMask => None,
-                    Type::Bool => Some(offset.unwrap() + BOOL_SIZE as usize),
                 };
             }
         }
         StructMember::IfStatement(statement) => {
             s.newline();
 
-            print_container_if_statement(s, statement, offset);
+            print_container_if_statement(s, statement, offset, tags, o);
         }
         StructMember::OptionalStatement(_) => {}
     }
@@ -570,7 +589,7 @@ fn print_container_item_header(s: &mut DocWriter) {
     s.wln("| ------ | ----------------- | ---- | ---- | ----------- | ------- |");
 }
 
-fn print_container_body(s: &mut DocWriter, e: &Container) {
+fn print_container_body(s: &mut DocWriter, e: &Container, o: &Objects) {
     s.wln("### Body");
     s.newline();
 
@@ -599,7 +618,7 @@ fn print_container_body(s: &mut DocWriter, e: &Container) {
     }
 
     for m in e.fields() {
-        print_container_field(s, m, &mut offset);
+        print_container_field(s, m, &mut offset, e.tags(), o);
     }
 
     if e.rust_object().optional().is_some() {
@@ -615,7 +634,7 @@ fn print_container_body(s: &mut DocWriter, e: &Container) {
                 StructMember::IfStatement(_) => {}
                 StructMember::OptionalStatement(optional) => {
                     for m in optional.members() {
-                        print_container_field(s, m, &mut offset);
+                        print_container_field(s, m, &mut offset, e.tags(), o);
                     }
                 }
             }

@@ -1,4 +1,4 @@
-use crate::container::DefinerUsage;
+use crate::container::{DefinerUsage, Sizes};
 use crate::file_info::FileInfo;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::IntegerType;
@@ -230,6 +230,12 @@ impl Definer {
         }
 
         v
+    }
+
+    pub fn sizes(&self) -> Sizes {
+        let mut s = Sizes::new();
+        s.inc_both(self.basic_type.size().into());
+        s
     }
 
     pub fn self_check(&self) {

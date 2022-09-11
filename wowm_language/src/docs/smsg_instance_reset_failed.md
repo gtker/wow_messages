@@ -26,6 +26,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [InstanceResetFailedReason](instanceresetfailedreason.md) | reason |  |  |
-| - | ? / - | [Map](map.md) | map |  |  |
+| 0x04 | 1 / - | [InstanceResetFailedReason](instanceresetfailedreason.md) | reason |  |  |
+| 0x05 | 4 / - | [Map](map.md) | map |  |  |
 

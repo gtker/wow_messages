@@ -25,5 +25,5 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [Emote](emote.md) | emote |  |  |
+| 0x06 | 4 / - | [Emote](emote.md) | emote |  |  |
 

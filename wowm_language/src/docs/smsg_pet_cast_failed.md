@@ -29,5 +29,5 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | id |  |  |
 | 0x08 | 1 / - | u8 | unknown1 |  | vmangos sets to 2 and cmangos sets to 0. |
-| 0x09 | ? / - | [SpellCastResult](spellcastresult.md) | result |  |  |
+| 0x09 | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |
 

@@ -30,6 +30,6 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
+| 0x06 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x12 | 4 / Little | f32 | orientation |  |  |
 

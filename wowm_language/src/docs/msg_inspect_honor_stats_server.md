@@ -41,19 +41,19 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-| 0x0C | ? / - | [PvpRank](pvprank.md) | highest_rank |  |  |
-| - | 4 / Little | u32 | today_honorable_and_dishonorable |  |  |
-| - | 2 / Little | u16 | yesterday_honorable |  |  |
-| - | 2 / Little | u16 | unknown1 |  | vmangos: Unknown (deprecated, yesterday dishonourable?) |
-| - | 2 / Little | u16 | last_week_honorable |  |  |
-| - | 2 / Little | u16 | unknown2 |  | vmangos: Unknown (deprecated, last week dishonourable?) |
-| - | 2 / Little | u16 | this_week_honorable |  |  |
-| - | 2 / Little | u16 | unknown3 |  | vmangos: Unknown (deprecated, this week dishonourable?) |
-| - | 4 / Little | u32 | lifetime_honorable |  |  |
-| - | 4 / Little | u32 | lifetime_dishonorable |  |  |
-| - | 4 / Little | u32 | yesterday_honor |  |  |
-| - | 4 / Little | u32 | last_week_honor |  |  |
-| - | 4 / Little | u32 | this_week_honor |  |  |
-| - | ? / - | [PvpRank](pvprank.md) | last_week_standing |  |  |
-| - | 1 / - | u8 | rank_progress_bar |  |  |
+| 0x0C | 1 / - | [PvpRank](pvprank.md) | highest_rank |  |  |
+| 0x0D | 4 / Little | u32 | today_honorable_and_dishonorable |  |  |
+| 0x11 | 2 / Little | u16 | yesterday_honorable |  |  |
+| 0x13 | 2 / Little | u16 | unknown1 |  | vmangos: Unknown (deprecated, yesterday dishonourable?) |
+| 0x15 | 2 / Little | u16 | last_week_honorable |  |  |
+| 0x17 | 2 / Little | u16 | unknown2 |  | vmangos: Unknown (deprecated, last week dishonourable?) |
+| 0x19 | 2 / Little | u16 | this_week_honorable |  |  |
+| 0x1B | 2 / Little | u16 | unknown3 |  | vmangos: Unknown (deprecated, this week dishonourable?) |
+| 0x1D | 4 / Little | u32 | lifetime_honorable |  |  |
+| 0x21 | 4 / Little | u32 | lifetime_dishonorable |  |  |
+| 0x25 | 4 / Little | u32 | yesterday_honor |  |  |
+| 0x29 | 4 / Little | u32 | last_week_honor |  |  |
+| 0x2D | 4 / Little | u32 | this_week_honor |  |  |
+| 0x31 | 4 / - | [PvpRank](pvprank.md) | last_week_standing |  |  |
+| 0x35 | 1 / - | u8 | rank_progress_bar |  |  |
 

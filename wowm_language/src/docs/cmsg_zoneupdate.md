@@ -33,7 +33,7 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [Area](area.md) | area |  |  |
+| 0x06 | 4 / - | [Area](area.md) | area |  |  |
 
 ### Examples
 

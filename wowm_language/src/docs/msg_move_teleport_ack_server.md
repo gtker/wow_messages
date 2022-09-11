@@ -35,5 +35,5 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | movement_counter |  |  |
-| - | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

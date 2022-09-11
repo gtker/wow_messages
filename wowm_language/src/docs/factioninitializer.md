@@ -15,6 +15,6 @@ struct FactionInitializer {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [FactionFlag](factionflag.md) | flag |  |  |
-| - | 4 / Little | u32 | standing |  |  |
+| 0x00 | 1 / - | [FactionFlag](factionflag.md) | flag |  |  |
+| 0x01 | 4 / Little | u32 | standing |  |  |
 

@@ -25,5 +25,5 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [GuildEmblemResult](guildemblemresult.md) | result |  |  |
+| 0x04 | 4 / - | [GuildEmblemResult](guildemblemresult.md) | result |  |  |
 

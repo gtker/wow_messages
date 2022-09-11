@@ -25,5 +25,5 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [BgTypeId](bgtypeid.md) | id |  |  |
+| 0x04 | 4 / - | [BgTypeId](bgtypeid.md) | id |  |  |
 

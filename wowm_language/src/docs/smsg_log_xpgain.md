@@ -33,12 +33,12 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |  |
 | 0x0C | 4 / Little | u32 | total_exp |  |  |
-| 0x10 | ? / - | [ExperienceAwardType](experienceawardtype.md) | exp_type |  |  |
+| 0x10 | 1 / - | [ExperienceAwardType](experienceawardtype.md) | exp_type |  |  |
 
 If exp_type is equal to `NON_KILL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | experience_without_rested |  |  |
-| - | 4 / Little | f32 | exp_group_bonus |  | mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output |
+| 0x11 | 4 / Little | u32 | experience_without_rested |  |  |
+| 0x15 | 4 / Little | f32 | exp_group_bonus |  | mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output |
 

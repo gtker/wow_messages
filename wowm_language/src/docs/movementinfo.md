@@ -33,16 +33,16 @@ struct MovementInfo {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
-| - | 4 / Little | u32 | timestamp |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
+| 0x00 | 4 / - | [MovementFlags](movementflags.md) | flags |  |  |
+| 0x04 | 4 / Little | u32 | timestamp |  |  |
+| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x14 | 4 / Little | f32 | orientation |  |  |
 
 If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |  |
+| 0x18 | - / - | [TransportInfo](transportinfo.md) | transport |  |  |
 
 If flags contains `SWIMMING`:
 
@@ -105,17 +105,17 @@ struct MovementInfo {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
-| - | 1 / - | u8 | extra_flags |  |  |
-| - | 4 / Little | u32 | timestamp |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
+| 0x00 | 4 / - | [MovementFlags](movementflags.md) | flags |  |  |
+| 0x04 | 1 / - | u8 | extra_flags |  |  |
+| 0x05 | 4 / Little | u32 | timestamp |  |  |
+| 0x09 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x15 | 4 / Little | f32 | orientation |  |  |
 
 If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |  |
+| 0x19 | - / - | [TransportInfo](transportinfo.md) | transport |  |  |
 
 If flags contains `SWIMMING`:
 
@@ -184,17 +184,17 @@ struct MovementInfo {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
-| - | ? / - | [ExtraMovementFlags](extramovementflags.md) | extra_flags |  |  |
-| - | 4 / Little | u32 | timestamp |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
+| 0x00 | 4 / - | [MovementFlags](movementflags.md) | flags |  |  |
+| 0x04 | 2 / - | [ExtraMovementFlags](extramovementflags.md) | extra_flags |  |  |
+| 0x06 | 4 / Little | u32 | timestamp |  |  |
+| 0x0A | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x16 | 4 / Little | f32 | orientation |  |  |
 
 If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |  |
+| 0x1A | - / - | [TransportInfo](transportinfo.md) | transport |  |  |
 
 If flags contains `SWIMMING`:
 

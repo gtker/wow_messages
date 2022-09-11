@@ -26,6 +26,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [ServerMessageType](servermessagetype.md) | message_type |  |  |
-| - | - / - | CString | message |  |  |
+| 0x04 | 4 / - | [ServerMessageType](servermessagetype.md) | message_type |  |  |
+| 0x08 | - / - | CString | message |  |  |
 

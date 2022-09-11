@@ -28,11 +28,11 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [RaidTargetIndex](raidtargetindex.md) | index |  |  |
+| 0x06 | 1 / - | [RaidTargetIndex](raidtargetindex.md) | index |  |  |
 
 If index is not equal to `REQUEST_ICONS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
+| 0x07 | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
 

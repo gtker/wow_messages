@@ -40,12 +40,12 @@ SMSG have a header of 4 bytes.
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | cast_item |  | cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster. |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |  |
 | - | 4 / Little | u32 | spell |  |  |
-| - | ? / - | [CastFlags](castflags.md) | flags |  |  |
+| - | 2 / - | [CastFlags](castflags.md) | flags |  |  |
 | - | 1 / - | u8 | amount_of_hits |  |  |
 | - | ? / - | [Guid](../spec/packed-guid.md)[amount_of_hits] | hits |  |  |
 | - | 1 / - | u8 | amount_of_misses |  |  |
 | - | ? / - | [SpellMiss](spellmiss.md)[amount_of_misses] | misses |  |  |
-| - | ? / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| - | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
 
 If flags contains `AMMO`:
 

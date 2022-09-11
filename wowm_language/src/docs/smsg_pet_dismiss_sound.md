@@ -27,5 +27,5 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | sound_id |  |  |
-| 0x08 | ? / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 

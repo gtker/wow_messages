@@ -45,14 +45,14 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x01 | 1 / - | u8 | protocol_version |  | Determines which version of messages are used for further communication. |
 | 0x02 | 2 / Little | u16 | size |  |  |
 | 0x04 | 4 / Little | u32 | game_name |  |  |
-| 0x08 | ? / - | [Version](version.md) | version |  |  |
-| - | ? / - | [Platform](platform.md) | platform |  |  |
-| - | ? / - | [Os](os.md) | os |  |  |
-| - | ? / - | [Locale](locale.md) | locale |  |  |
-| - | 4 / Little | u32 | utc_timezone_offset | Offset in minutes from UTC time. 180 would be UTC+3 |  |
-| - | 4 / Big | u32_be | client_ip_address |  |  |
-| - | 1 / - | u8 | account_name_length |  | Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte. |
-| - | account_name_length / - | String[account_name_length] | account_name |  | Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.<br/>Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info. |
+| 0x08 | 5 / - | [Version](version.md) | version |  |  |
+| 0x0D | 4 / - | [Platform](platform.md) | platform |  |  |
+| 0x11 | 4 / - | [Os](os.md) | os |  |  |
+| 0x15 | 4 / - | [Locale](locale.md) | locale |  |  |
+| 0x19 | 4 / Little | u32 | utc_timezone_offset | Offset in minutes from UTC time. 180 would be UTC+3 |  |
+| 0x1D | 4 / Big | u32_be | client_ip_address |  |  |
+| 0x21 | 1 / - | u8 | account_name_length |  | Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte. |
+| 0x22 | account_name_length / - | String[account_name_length] | account_name |  | Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.<br/>Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info. |
 
 ### Examples
 

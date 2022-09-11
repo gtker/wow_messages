@@ -27,7 +27,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [DuelWinnerReason](duelwinnerreason.md) | reason |  |  |
-| - | - / - | CString | opponent_name |  |  |
+| 0x04 | 1 / - | [DuelWinnerReason](duelwinnerreason.md) | reason |  |  |
+| 0x05 | - / - | CString | opponent_name |  |  |
 | - | - / - | CString | initiator_name |  |  |
 

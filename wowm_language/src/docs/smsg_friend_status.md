@@ -26,6 +26,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [FriendResult](friendresult.md) | result |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 1 / - | [FriendResult](friendresult.md) | result |  |  |
+| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 

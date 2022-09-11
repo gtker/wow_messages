@@ -25,5 +25,5 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [Map](map.md) | map |  |  |
+| 0x04 | 4 / - | [Map](map.md) | map |  |  |
 

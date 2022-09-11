@@ -32,6 +32,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | victim_guid |  |  |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | caster_guid |  |  |
 | - | 4 / Little | u32 | spell |  |  |
-| - | ? / - | [PowerType](powertype.md) | power |  |  |
+| - | 4 / - | [PowerType](powertype.md) | power |  |  |
 | - | 4 / Little | u32 | damage |  |  |
 

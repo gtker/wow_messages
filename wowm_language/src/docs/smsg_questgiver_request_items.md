@@ -53,7 +53,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_required_items |  |  |
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |  |
 | - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: All set to 0x02 |
-| - | ? / - | [QuestCompletable](questcompletable.md) | completable |  | cmangos/vmangos/mangoszero: Called flags1. |
+| - | 4 / - | [QuestCompletable](questcompletable.md) | completable |  | cmangos/vmangos/mangoszero: Called flags1. |
 | - | 4 / Little | u32 | flags2 |  | cmangos/vmangos/mangoszero: set to 0x04 |
 | - | 4 / Little | u32 | flags3 |  | cmangos/vmangos/mangoszero: set to 0x08 |
 

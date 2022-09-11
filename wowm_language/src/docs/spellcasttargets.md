@@ -51,13 +51,13 @@ struct SpellCastTargets {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |  |
+| 0x00 | 2 / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |  |
 
 If target_flags contains `UNIT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | unit_target |  |  |
+| 0x02 | - / - | [PackedGuid](../spec/packed-guid.md) | unit_target |  |  |
 
 If target_flags contains `UNIT_ENEMY`:
 

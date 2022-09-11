@@ -34,7 +34,7 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0E | 4 / Little | u32 | counter |  |  |
-| 0x12 | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | f32 | new_speed |  |  |
 
 ### Examples
@@ -95,7 +95,7 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0E | 4 / Little | u32 | counter |  |  |
-| 0x12 | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | f32 | new_speed |  |  |
 
 # CMSG_FORCE_RUN_SPEED_CHANGE_ACK
@@ -134,6 +134,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | counter |  |  |
-| - | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | f32 | new_speed |  |  |
 

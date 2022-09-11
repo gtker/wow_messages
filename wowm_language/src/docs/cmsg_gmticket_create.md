@@ -34,10 +34,10 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [GmTicketType](gmtickettype.md) | category |  |  |
-| - | ? / - | [Map](map.md) | map |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | - / - | CString | message |  |  |
+| 0x06 | 1 / - | [GmTicketType](gmtickettype.md) | category |  |  |
+| 0x07 | 4 / - | [Map](map.md) | map |  |  |
+| 0x0B | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x17 | - / - | CString | message |  |  |
 | - | - / - | CString | reserved_for_future_use |  | cmangos/vmangos/mangoszero: Pre-TBC: 'Reserved for future use'<br/>cmangos/vmangos/mangoszero: Unused |
 
 If category is equal to `BEHAVIOR_HARASSMENT`:

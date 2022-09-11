@@ -82,13 +82,13 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
-| - | ? / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |  |
+| - | 4 / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |  |
 
 If mask contains `FLAG_STATUS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [GroupMemberOnlineStatus](groupmemberonlinestatus.md) | status |  |  |
+| - | 1 / - | [GroupMemberOnlineStatus](groupmemberonlinestatus.md) | status |  |  |
 
 If mask contains `FLAG_CUR_HP`:
 
@@ -106,7 +106,7 @@ If mask contains `FLAG_POWER_TYPE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Power](power.md) | power |  |  |
+| - | 1 / - | [Power](power.md) | power |  |  |
 
 If mask contains `FLAG_CUR_POWER`:
 
@@ -130,7 +130,7 @@ If mask contains `FLAG_ZONE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Area](area.md) | area |  |  |
+| - | 4 / - | [Area](area.md) | area |  |  |
 
 If mask contains `FLAG_POSITION`:
 
@@ -173,7 +173,7 @@ If mask contains `FLAG_PET_POWER_TYPE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Power](power.md) | pet_power_type |  |  |
+| - | 1 / - | [Power](power.md) | pet_power_type |  |  |
 
 If mask contains `FLAG_PET_CUR_POWER`:
 

@@ -40,7 +40,7 @@ SMSG have a header of 4 bytes.
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | attacker |  |  |
 | - | 4 / Little | u32 | spell |  |  |
 | - | 4 / Little | u32 | damage |  |  |
-| - | ? / - | [SpellSchool](spellschool.md) | school |  |  |
+| - | 1 / - | [SpellSchool](spellschool.md) | school |  |  |
 | - | 4 / Little | u32 | absorbed_damage |  |  |
 | - | 4 / Little | u32 | resisted |  | cmangos/mangoszero/vmangos: sent as int32 |
 | - | 1 / - | u8 | periodic_log |  | cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name |

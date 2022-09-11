@@ -25,5 +25,5 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [Map](map.md) | map |  |  |
+| 0x06 | 4 / - | [Map](map.md) | map |  |  |
 

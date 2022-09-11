@@ -21,13 +21,13 @@ struct Realm {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [RealmType](realmtype.md) | realm_type |  |  |
-| - | ? / - | [RealmFlag](realmflag.md) | flag |  |  |
-| - | - / - | CString | name |  |  |
+| 0x00 | 4 / - | [RealmType](realmtype.md) | realm_type |  |  |
+| 0x04 | 1 / - | [RealmFlag](realmflag.md) | flag |  |  |
+| 0x05 | - / - | CString | name |  |  |
 | - | - / - | CString | address |  |  |
-| - | ? / - | [Population](population.md) | population |  |  |
+| - | 4 / - | [Population](population.md) | population |  |  |
 | - | 1 / - | u8 | number_of_characters_on_realm |  |  |
-| - | ? / - | [RealmCategory](realmcategory.md) | category |  |  |
+| - | 1 / - | [RealmCategory](realmcategory.md) | category |  |  |
 | - | 1 / - | u8 | realm_id |  |  |
 
 # Realm
@@ -57,19 +57,19 @@ struct Realm {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [RealmType](realmtype.md) | realm_type |  | vmangos: this is the second column in Cfg_Configs.dbc |
-| - | 1 / - | u8 | locked |  |  |
-| - | ? / - | [RealmFlag](realmflag.md) | flag |  |  |
-| - | - / - | CString | name |  |  |
+| 0x00 | 1 / - | [RealmType](realmtype.md) | realm_type |  | vmangos: this is the second column in Cfg_Configs.dbc |
+| 0x01 | 1 / - | u8 | locked |  |  |
+| 0x02 | 1 / - | [RealmFlag](realmflag.md) | flag |  |  |
+| 0x03 | - / - | CString | name |  |  |
 | - | - / - | CString | address |  |  |
-| - | ? / - | [Population](population.md) | population |  |  |
+| - | 4 / - | [Population](population.md) | population |  |  |
 | - | 1 / - | u8 | number_of_characters_on_realm |  |  |
-| - | ? / - | [RealmCategory](realmcategory.md) | category |  |  |
+| - | 1 / - | [RealmCategory](realmcategory.md) | category |  |  |
 | - | 1 / - | u8 | realm_id |  |  |
 
 If flag contains `SPECIFY_BUILD`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Version](version.md) | version |  |  |
+| - | 5 / - | [Version](version.md) | version |  |  |
 

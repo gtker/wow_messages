@@ -33,19 +33,19 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [InventoryResult](inventoryresult.md) | result |  |  |
+| 0x04 | 1 / - | [InventoryResult](inventoryresult.md) | result |  |  |
 
 If result is equal to `CANT_EQUIP_LEVEL_I`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | required_level |  |  |
+| 0x05 | 4 / Little | u32 | required_level |  |  |
 
 If result is not equal to `OK`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | u64 | item1_guid |  |  |
-| - | 8 / Little | u64 | item2_guid |  |  |
-| - | 1 / - | u8 | bag_type_subclass |  | cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2<br/>vmangos sets to 0 |
+| 0x09 | 8 / Little | u64 | item1_guid |  |  |
+| 0x11 | 8 / Little | u64 | item2_guid |  |  |
+| 0x19 | 1 / - | u8 | bag_type_subclass |  | cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2<br/>vmangos sets to 0 |
 

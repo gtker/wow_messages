@@ -27,7 +27,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [GuildCommand](guildcommand.md) | command |  |  |
-| - | - / - | CString | string |  |  |
-| - | ? / - | [GuildCommandResult](guildcommandresult.md) | result |  |  |
+| 0x04 | 4 / - | [GuildCommand](guildcommand.md) | command |  |  |
+| 0x08 | - / - | CString | string |  |  |
+| - | 4 / - | [GuildCommandResult](guildcommandresult.md) | result |  |  |
 

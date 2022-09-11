@@ -34,17 +34,17 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [GmTicketStatus](gmticketstatus.md) | status |  |  |
+| 0x04 | 4 / - | [GmTicketStatus](gmticketstatus.md) | status |  |  |
 
 If status is equal to `HASTEXT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | text |  | cmangos: Ticket text: data, should never exceed 1999 bytes |
-| - | ? / - | [GmTicketType](gmtickettype.md) | ticket_type |  |  |
+| 0x08 | - / - | CString | text |  | cmangos: Ticket text: data, should never exceed 1999 bytes |
+| - | 1 / - | [GmTicketType](gmtickettype.md) | ticket_type |  |  |
 | - | 4 / Little | f32 | days_since_ticket_creation |  |  |
 | - | 4 / Little | f32 | days_since_oldest_ticket_creation |  |  |
 | - | 4 / Little | f32 | days_since_last_updated |  |  |
-| - | ? / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |  |
+| - | 1 / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |  |
 | - | 1 / - | Bool | read_by_gm |  |  |
 

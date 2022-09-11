@@ -7,7 +7,7 @@ use crate::parser::types::{
     Array, ArraySize, ArrayType, Endianness, FloatingPointType, IntegerType, ObjectType,
 };
 use crate::{
-    CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
+    Tags, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
     SIZED_CSTRING_SMALLEST_ALLOWED,
 };
 use std::convert::TryInto;
@@ -172,13 +172,25 @@ impl Type {
         }
     }
 
-    pub fn doc_size_of(&self) -> String {
+    pub fn doc_size_of(&self, tags: &Tags, o: &Objects) -> String {
         match self {
             Type::Integer(i) => i.size().to_string(),
             Type::Guid => 8.to_string(),
             Type::FloatingPoint(f) => f.size().to_string(),
             Type::String { length } => length.clone(),
-            Type::Identifier { .. } | Type::Array(_) => "?".to_string(),
+            Type::Identifier { s, upcast } => {
+                let sizes = o.get_object(s, tags).sizes();
+                if let Some(upcast) = upcast {
+                    upcast.size().to_string()
+                } else {
+                    if sizes.is_constant() {
+                        sizes.maximum().to_string()
+                    } else {
+                        "-".to_string()
+                    }
+                }
+            }
+            Type::Array(_) => "?".to_string(),
             Type::SizedCString
             | Type::CString
             | Type::UpdateMask

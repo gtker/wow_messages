@@ -26,6 +26,6 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [Map](map.md) | map |  |  |
-| - | ? / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |  |
+| 0x06 | 4 / - | [Map](map.md) | map |  |  |
+| 0x0A | 1 / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |  |
 

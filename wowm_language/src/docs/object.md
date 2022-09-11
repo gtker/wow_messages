@@ -34,13 +34,13 @@ struct Object {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [UpdateType](updatetype.md) | update_type |  |  |
+| 0x00 | 1 / - | [UpdateType](updatetype.md) | update_type |  |  |
 
 If update_type is equal to `VALUES`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid1 |  |  |
+| 0x01 | - / - | [PackedGuid](../spec/packed-guid.md) | guid1 |  |  |
 | - | - / - | [UpdateMask](../spec/update-mask.md) | mask1 |  |  |
 
 Else If update_type is equal to `MOVEMENT`:
@@ -48,7 +48,7 @@ Else If update_type is equal to `MOVEMENT`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | guid2 |  |  |
-| - | ? / - | [MovementBlock](movementblock.md) | movement1 |  |  |
+| - | - / - | [MovementBlock](movementblock.md) | movement1 |  |  |
 
 Else If update_type is equal to `CREATE_OBJECT` **or** 
 is equal to `CREATE_OBJECT2`:
@@ -56,8 +56,8 @@ is equal to `CREATE_OBJECT2`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | guid3 |  |  |
-| - | ? / - | [ObjectType](objecttype.md) | object_type |  |  |
-| - | ? / - | [MovementBlock](movementblock.md) | movement2 |  |  |
+| - | 1 / - | [ObjectType](objecttype.md) | object_type |  |  |
+| - | - / - | [MovementBlock](movementblock.md) | movement2 |  |  |
 | - | - / - | [UpdateMask](../spec/update-mask.md) | mask2 |  |  |
 
 Else If update_type is equal to `OUT_OF_RANGE_OBJECTS` **or** 
@@ -104,13 +104,13 @@ struct Object {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [UpdateType](updatetype.md) | update_type |  |  |
+| 0x00 | 1 / - | [UpdateType](updatetype.md) | update_type |  |  |
 
 If update_type is equal to `VALUES`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid1 |  |  |
+| 0x01 | - / - | [PackedGuid](../spec/packed-guid.md) | guid1 |  |  |
 | - | - / - | [UpdateMask](../spec/update-mask.md) | mask1 |  |  |
 
 Else If update_type is equal to `MOVEMENT`:
@@ -118,7 +118,7 @@ Else If update_type is equal to `MOVEMENT`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | guid2 |  |  |
-| - | ? / - | [MovementBlock](movementblock.md) | movement1 |  |  |
+| - | - / - | [MovementBlock](movementblock.md) | movement1 |  |  |
 
 Else If update_type is equal to `CREATE_OBJECT` **or** 
 is equal to `CREATE_OBJECT2`:
@@ -126,8 +126,8 @@ is equal to `CREATE_OBJECT2`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | guid3 |  |  |
-| - | ? / - | [ObjectType](objecttype.md) | object_type |  |  |
-| - | ? / - | [MovementBlock](movementblock.md) | movement2 |  |  |
+| - | 1 / - | [ObjectType](objecttype.md) | object_type |  |  |
+| - | - / - | [MovementBlock](movementblock.md) | movement2 |  |  |
 | - | - / - | [UpdateMask](../spec/update-mask.md) | mask2 |  |  |
 
 Else If update_type is equal to `OUT_OF_RANGE_OBJECTS` **or** 
@@ -174,13 +174,13 @@ struct Object {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [UpdateType](updatetype.md) | update_type |  |  |
+| 0x00 | 1 / - | [UpdateType](updatetype.md) | update_type |  |  |
 
 If update_type is equal to `VALUES`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid1 |  |  |
+| 0x01 | - / - | [PackedGuid](../spec/packed-guid.md) | guid1 |  |  |
 | - | - / - | [UpdateMask](../spec/update-mask.md) | mask1 |  |  |
 
 Else If update_type is equal to `MOVEMENT`:
@@ -188,7 +188,7 @@ Else If update_type is equal to `MOVEMENT`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | guid2 |  |  |
-| - | ? / - | [MovementBlock](movementblock.md) | movement1 |  |  |
+| - | - / - | [MovementBlock](movementblock.md) | movement1 |  |  |
 
 Else If update_type is equal to `CREATE_OBJECT` **or** 
 is equal to `CREATE_OBJECT2`:
@@ -196,8 +196,8 @@ is equal to `CREATE_OBJECT2`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | guid3 |  |  |
-| - | ? / - | [ObjectType](objecttype.md) | object_type |  |  |
-| - | ? / - | [MovementBlock](movementblock.md) | movement2 |  |  |
+| - | 1 / - | [ObjectType](objecttype.md) | object_type |  |  |
+| - | - / - | [MovementBlock](movementblock.md) | movement2 |  |  |
 | - | - / - | [UpdateMask](../spec/update-mask.md) | mask2 |  |  |
 
 Else If update_type is equal to `OUT_OF_RANGE_OBJECTS` **or** 

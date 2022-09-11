@@ -29,7 +29,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | transport |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | u32 | spline_id |  |  |
-| - | ? / - | [MonsterMoveType](monstermovetype.md) | move_type |  |  |
+| - | 1 / - | [MonsterMoveType](monstermovetype.md) | move_type |  |  |
 

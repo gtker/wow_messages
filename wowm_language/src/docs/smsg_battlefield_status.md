@@ -43,33 +43,33 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | queue_slot |  |  |
-| 0x08 | ? / - | [Map](map.md) | map |  |  |
+| 0x08 | 4 / - | [Map](map.md) | map |  |  |
 
 If map is not equal to `EASTERN_KINGDOMS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | unknown0 |  |  |
-| - | 4 / Little | u32 | client_instance_id |  |  |
-| - | ? / - | [StatusId](statusid.md) | status_id |  |  |
+| 0x0C | 1 / - | u8 | unknown0 |  |  |
+| 0x0D | 4 / Little | u32 | client_instance_id |  |  |
+| 0x11 | 1 / - | [StatusId](statusid.md) | status_id |  |  |
 
 If status_id is equal to `WAIT_QUEUE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | average_wait_time_in_ms |  |  |
-| - | 4 / Little | u32 | time_in_queue_in_ms |  |  |
+| 0x12 | 4 / Little | u32 | average_wait_time_in_ms |  |  |
+| 0x16 | 4 / Little | u32 | time_in_queue_in_ms |  |  |
 
 Else If status_id is equal to `WAIT_JOIN`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |  |
+| 0x1A | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |  |
 
 Else If status_id is equal to `IN_PROGRESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |  |
-| - | 4 / Little | u32 | time_to_bg_start_in_ms |  |  |
+| 0x1E | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |  |
+| 0x22 | 4 / Little | u32 | time_to_bg_start_in_ms |  |  |
 

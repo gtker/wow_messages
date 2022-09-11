@@ -25,7 +25,7 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| 0x06 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
 ### Examples
 
@@ -69,7 +69,7 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| 0x06 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
 # MSG_MOVE_START_TURN_RIGHT_Client
 
@@ -98,5 +98,5 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| 0x06 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

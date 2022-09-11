@@ -34,17 +34,17 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [GroupType](grouptype.md) | group_type |  |  |
-| - | 1 / - | u8 | own_flags |  | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
-| - | 4 / Little | u32 | amount_of_members |  |  |
-| - | ? / - | [GroupListMember](grouplistmember.md)[amount_of_members] | members |  |  |
+| 0x04 | 1 / - | [GroupType](grouptype.md) | group_type |  |  |
+| 0x05 | 1 / - | u8 | own_flags |  | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
+| 0x06 | 4 / Little | u32 | amount_of_members |  |  |
+| 0x0A | ? / - | [GroupListMember](grouplistmember.md)[amount_of_members] | members |  |  |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | leader |  |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
+| - | 1 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | master_loot |  | Zero if loot_setting is not MASTER_LOOT |
-| - | ? / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
+| - | 1 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
 

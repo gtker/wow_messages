@@ -30,13 +30,13 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |  |
+| 0x04 | 1 / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |  |
 
 If result is equal to `FOUND`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Map](map.md) | map |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | ? / - | [Map](map.md) | corpse_map |  |  |
+| 0x05 | 4 / - | [Map](map.md) | map |  |  |
+| 0x09 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x15 | 4 / - | [Map](map.md) | corpse_map |  |  |
 

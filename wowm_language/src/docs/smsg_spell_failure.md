@@ -29,5 +29,5 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0C | 4 / Little | u32 | id |  |  |
-| 0x10 | ? / - | [SpellCastResult](spellcastresult.md) | result |  |  |
+| 0x10 | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |
 

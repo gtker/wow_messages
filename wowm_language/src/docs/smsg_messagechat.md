@@ -54,8 +54,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [ChatType](chattype.md) | chat_type |  |  |
-| - | ? / - | [Language](language.md) | language |  |  |
+| 0x04 | 1 / - | [ChatType](chattype.md) | chat_type |  |  |
+| 0x05 | 4 / - | [Language](language.md) | language |  |  |
 
 If chat_type is equal to `MONSTER_WHISPER` **or** 
 is equal to `RAID_BOSS_EMOTE` **or** 
@@ -63,7 +63,7 @@ is equal to `MONSTER_EMOTE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | SizedCString | monster_name |  |  |
+| 0x09 | - / - | SizedCString | monster_name |  |  |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | monster |  |  |
 
 Else If chat_type is equal to `SAY` **or** 
@@ -95,7 +95,7 @@ Else If chat_type is equal to `CHANNEL`:
 Else: 
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | sender2 |  |  |
 | - | - / - | SizedCString | message |  |  |
-| - | ? / - | [PlayerChatTag](playerchattag.md) | tag |  |  |
+| - | 1 / - | [PlayerChatTag](playerchattag.md) | tag |  |  |
 
 ### Examples
 

@@ -88,18 +88,18 @@ Optionally the following fields can be present. This can only be detected by loo
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | ? / - | [ItemClass](itemclass.md) | item_class |  |  |
-| - | 4 / Little | u32 | item_sub_class |  | mangoszero/vmangos/cmangos: client known only 0 subclass (and 1-2 obsolute subclasses)<br/>mangoszero/vmangos/cmangos: id from ItemSubClass.dbc |
-| - | - / - | CString | name1 |  |  |
+| 0x08 | 4 / - | [ItemClass](itemclass.md) | item_class |  |  |
+| 0x0C | 4 / Little | u32 | item_sub_class |  | mangoszero/vmangos/cmangos: client known only 0 subclass (and 1-2 obsolute subclasses)<br/>mangoszero/vmangos/cmangos: id from ItemSubClass.dbc |
+| 0x10 | - / - | CString | name1 |  |  |
 | - | - / - | CString | name2 |  |  |
 | - | - / - | CString | name3 |  |  |
 | - | - / - | CString | name4 |  |  |
 | - | 4 / Little | u32 | item_display_info |  | mangoszero/vmangos/cmangos: id from ItemDisplayInfo.dbc |
-| - | ? / - | [ItemQuality](itemquality.md) | quality |  |  |
+| - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
 | - | 4 / Little | u32 | flags |  |  |
 | - | 4 / Little | u32 | buy_price |  |  |
 | - | 4 / Little | u32 | sell_price |  |  |
-| - | ? / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
+| - | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 | - | 4 / Little | u32 | allowed_class |  |  |
 | - | 4 / Little | u32 | allowed_race |  |  |
 | - | 4 / Little | u32 | item_level |  |  |
@@ -140,7 +140,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | block |  |  |
 | - | 4 / Little | u32 | item_set |  | cmangos/vmangos/mangoszero: id from ItemSet.dbc |
 | - | 4 / Little | u32 | max_durability |  |  |
-| - | ? / - | [Area](area.md) | area |  |  |
-| - | ? / - | [Map](map.md) | map |  |  |
+| - | 4 / - | [Area](area.md) | area |  |  |
+| - | 4 / - | [Map](map.md) | map |  |  |
 | - | 4 / Little | u32 | bag_family |  |  |
 

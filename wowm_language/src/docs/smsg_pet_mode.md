@@ -30,8 +30,8 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-| 0x0C | ? / - | [PetReactState](petreactstate.md) | react_state |  |  |
-| - | ? / - | [PetCommandState](petcommandstate.md) | command_state |  |  |
-| - | 1 / - | u8 | unknown1 |  | vmangos sets to 0. |
-| - | ? / - | [PetEnabled](petenabled.md) | pet_enabled |  |  |
+| 0x0C | 1 / - | [PetReactState](petreactstate.md) | react_state |  |  |
+| 0x0D | 1 / - | [PetCommandState](petcommandstate.md) | command_state |  |  |
+| 0x0E | 1 / - | u8 | unknown1 |  | vmangos sets to 0. |
+| 0x0F | 1 / - | [PetEnabled](petenabled.md) | pet_enabled |  |  |
 

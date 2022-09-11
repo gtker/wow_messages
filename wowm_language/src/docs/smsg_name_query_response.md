@@ -37,9 +37,9 @@ SMSG have a header of 4 bytes.
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0C | - / - | CString | character_name |  |  |
 | - | - / - | CString | realm_name | Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm. |  |
-| - | ? / - | [Race](race.md) | race |  |  |
-| - | ? / - | [Gender](gender.md) | gender |  |  |
-| - | ? / - | [Class](class.md) | class |  |  |
+| - | 4 / - | [Race](race.md) | race |  |  |
+| - | 4 / - | [Gender](gender.md) | gender |  |  |
+| - | 4 / - | [Class](class.md) | class |  |  |
 
 ### Examples
 

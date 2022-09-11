@@ -31,5 +31,5 @@ SMSG have a header of 4 bytes.
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0C | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |  |
 | 0x14 | 4 / Little | u32 | id |  |  |
-| 0x18 | ? / - | [LogFormat](logformat.md) | log_format |  |  |
+| 0x18 | 1 / - | [LogFormat](logformat.md) | log_format |  |  |
 

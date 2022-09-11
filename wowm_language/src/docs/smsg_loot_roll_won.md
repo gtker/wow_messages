@@ -39,5 +39,5 @@ SMSG have a header of 4 bytes.
 | 0x18 | 4 / Little | u32 | item_random_property_id |  |  |
 | 0x1C | 8 / Little | [Guid](../spec/packed-guid.md) | winning_player_guid |  |  |
 | 0x24 | 1 / - | u8 | winning_roll |  | rollnumber related to SMSG_LOOT_ROLL |
-| 0x25 | ? / - | [RollVote](rollvote.md) | vote |  | Rolltype related to SMSG_LOOT_ROLL |
+| 0x25 | 1 / - | [RollVote](rollvote.md) | vote |  | Rolltype related to SMSG_LOOT_ROLL |
 

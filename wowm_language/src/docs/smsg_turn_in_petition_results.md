@@ -25,5 +25,5 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [PetitionTurnInResult](petitionturninresult.md) | result |  |  |
+| 0x04 | 4 / - | [PetitionTurnInResult](petitionturninresult.md) | result |  |  |
 

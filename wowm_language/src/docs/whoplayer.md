@@ -23,8 +23,8 @@ struct WhoPlayer {
 | 0x00 | - / - | CString | name |  |  |
 | - | - / - | CString | guild |  |  |
 | - | 4 / Little | u32 | level |  |  |
-| - | ? / - | [Class](class.md) | class |  |  |
-| - | ? / - | [Race](race.md) | race |  |  |
+| - | 1 / - | [Class](class.md) | class |  |  |
+| - | 1 / - | [Race](race.md) | race |  |  |
 | - | 4 / Little | u32 | zone_id |  |  |
 | - | 4 / Little | u32 | party_status |  |  |
 

@@ -88,6 +88,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | unix_time |  | Seconds since Unix Epoch |
 | 0x08 | 1 / - | u8 | unknown1 |  | Both mangostwo and arcemu hardcode this to 1 |
-| 0x09 | ? / - | [CacheMask](cachemask.md) | mask |  |  |
-| - | ? / - | u32[-] | data |  | Maximum size is 32 4-bit integers. For every bit that is 1 in the mask, write one u32 with the time |
+| 0x09 | 4 / - | [CacheMask](cachemask.md) | mask |  |  |
+| 0x0D | ? / - | u32[-] | data |  | Maximum size is 32 4-bit integers. For every bit that is 1 in the mask, write one u32 with the time |
 

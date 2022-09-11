@@ -27,7 +27,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [PartyOperation](partyoperation.md) | operation |  |  |
-| - | - / - | CString | member |  |  |
-| - | ? / - | [PartyResult](partyresult.md) | result |  |  |
+| 0x04 | 4 / - | [PartyOperation](partyoperation.md) | operation |  |  |
+| 0x08 | - / - | CString | member |  |  |
+| - | 4 / - | [PartyResult](partyresult.md) | result |  |  |
 

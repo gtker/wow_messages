@@ -76,22 +76,22 @@ struct MovementBlock {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [UpdateFlag](updateflag.md) | update_flag |  |  |
+| 0x00 | 1 / - | [UpdateFlag](updateflag.md) | update_flag |  |  |
 
 If update_flag contains `LIVING`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
-| - | 4 / Little | u32 | timestamp |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | living_position |  |  |
-| - | 4 / Little | f32 | living_orientation |  |  |
+| 0x01 | 4 / - | [MovementFlags](movementflags.md) | flags |  |  |
+| 0x05 | 4 / Little | u32 | timestamp |  |  |
+| 0x09 | 12 / - | [Vector3d](vector3d.md) | living_position |  |  |
+| 0x15 | 4 / Little | f32 | living_orientation |  |  |
 
 If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |  |
+| 0x19 | - / - | [TransportInfo](transportinfo.md) | transport |  |  |
 
 If flags contains `SWIMMING`:
 
@@ -125,7 +125,7 @@ If flags contains `SPLINE_ENABLED`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
+| - | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
 
 If spline_flags contains `FINAL_ANGLE`:
 
@@ -143,19 +143,19 @@ Else If spline_flags contains `FINAL_POINT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Vector3d](vector3d.md) | spline_final_point |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | spline_final_point |  |  |
 | - | 4 / Little | u32 | time_passed |  |  |
 | - | 4 / Little | u32 | duration |  |  |
 | - | 4 / Little | u32 | id |  |  |
 | - | 4 / Little | u32 | amount_of_nodes |  |  |
 | - | ? / - | [Vector3d](vector3d.md)[amount_of_nodes] | nodes |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | final_node |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | final_node |  |  |
 
 Else If update_flag contains `HAS_POSITION`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | f32 | orientation |  |  |
 
 If update_flag contains `HIGH_GUID`:
@@ -267,23 +267,23 @@ struct MovementBlock {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [UpdateFlag](updateflag.md) | update_flag |  |  |
+| 0x00 | 1 / - | [UpdateFlag](updateflag.md) | update_flag |  |  |
 
 If update_flag contains `LIVING`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
-| - | 1 / - | u8 | extra_flags |  |  |
-| - | 4 / Little | u32 | timestamp |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | living_position |  |  |
-| - | 4 / Little | f32 | living_orientation |  |  |
+| 0x01 | 4 / - | [MovementFlags](movementflags.md) | flags |  |  |
+| 0x05 | 1 / - | u8 | extra_flags |  |  |
+| 0x06 | 4 / Little | u32 | timestamp |  |  |
+| 0x0A | 12 / - | [Vector3d](vector3d.md) | living_position |  |  |
+| 0x16 | 4 / Little | f32 | living_orientation |  |  |
 
 If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |  |
+| 0x1A | - / - | [TransportInfo](transportinfo.md) | transport |  |  |
 
 If flags contains `SWIMMING`:
 
@@ -325,7 +325,7 @@ If flags contains `SPLINE_ENABLED`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
+| - | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
 
 If spline_flags contains `FINAL_ANGLE`:
 
@@ -343,19 +343,19 @@ Else If spline_flags contains `FINAL_POINT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Vector3d](vector3d.md) | spline_final_point |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | spline_final_point |  |  |
 | - | 4 / Little | u32 | time_passed |  |  |
 | - | 4 / Little | u32 | duration |  |  |
 | - | 4 / Little | u32 | id |  |  |
 | - | 4 / Little | u32 | amount_of_nodes |  |  |
 | - | ? / - | [Vector3d](vector3d.md)[amount_of_nodes] | nodes |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | final_node |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | final_node |  |  |
 
 Else If update_flag contains `HAS_POSITION`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | f32 | orientation |  |  |
 
 If update_flag contains `HIGH_GUID`:
@@ -478,23 +478,23 @@ struct MovementBlock {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [UpdateFlag](updateflag.md) | update_flag |  |  |
+| 0x00 | 2 / - | [UpdateFlag](updateflag.md) | update_flag |  |  |
 
 If update_flag contains `LIVING`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
-| - | ? / - | [ExtraMovementFlags](extramovementflags.md) | extra_flags |  |  |
-| - | 4 / Little | u32 | timestamp |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | living_position |  |  |
-| - | 4 / Little | f32 | living_orientation |  |  |
+| 0x02 | 4 / - | [MovementFlags](movementflags.md) | flags |  |  |
+| 0x06 | 2 / - | [ExtraMovementFlags](extramovementflags.md) | extra_flags |  |  |
+| 0x08 | 4 / Little | u32 | timestamp |  |  |
+| 0x0C | 12 / - | [Vector3d](vector3d.md) | living_position |  |  |
+| 0x18 | 4 / Little | f32 | living_orientation |  |  |
 
 If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |  |
+| 0x1C | - / - | [TransportInfo](transportinfo.md) | transport |  |  |
 
 If flags contains `SWIMMING`:
 
@@ -531,7 +531,7 @@ If flags contains `SPLINE_ENABLED`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
+| - | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
 
 If spline_flags contains `FINAL_ANGLE`:
 
@@ -549,20 +549,20 @@ Else If spline_flags contains `FINAL_POINT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Vector3d](vector3d.md) | spline_final_point |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | spline_final_point |  |  |
 | - | 4 / Little | u32 | time_passed |  |  |
 | - | 4 / Little | u32 | duration |  |  |
 | - | 4 / Little | u32 | id |  |  |
 | - | 4 / Little | u32 | amount_of_nodes |  |  |
 | - | ? / - | [Vector3d](vector3d.md)[amount_of_nodes] | nodes |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | final_node |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | final_node |  |  |
 
 Else If update_flag contains `POSITION`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | transport_guid |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position1 |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | position1 |  |  |
 | - | 4 / Little | f32 | orientation1 |  |  |
 | - | 4 / Little | f32 | corpse_orientation |  |  |
 
@@ -570,7 +570,7 @@ Else If update_flag contains `HAS_POSITION`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Vector3d](vector3d.md) | position2 |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | position2 |  |  |
 | - | 4 / Little | f32 | orientation2 |  |  |
 
 If update_flag contains `HIGH_GUID`:

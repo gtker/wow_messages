@@ -26,6 +26,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [Emote](emote.md) | emote |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x04 | 4 / - | [Emote](emote.md) | emote |  |  |
+| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 

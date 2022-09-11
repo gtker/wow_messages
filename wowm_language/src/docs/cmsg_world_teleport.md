@@ -33,9 +33,9 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / Little | u32 | time_in_msec |  |  |
-| 0x0A | ? / - | [Map](map.md) | map |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
+| 0x0A | 4 / - | [Map](map.md) | map |  |  |
+| 0x0E | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x1A | 4 / Little | f32 | orientation |  |  |
 
 ### Examples
 

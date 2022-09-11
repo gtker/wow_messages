@@ -33,5 +33,5 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-| 0x08 | ? / - | [QuestPartyMessage](questpartymessage.md) | message |  |  |
+| 0x08 | 1 / - | [QuestPartyMessage](questpartymessage.md) | message |  |  |
 

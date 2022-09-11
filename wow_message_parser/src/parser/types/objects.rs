@@ -1,4 +1,4 @@
-use crate::container::{Container, DefinerUsage};
+use crate::container::{Container, DefinerUsage, Sizes};
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
@@ -602,6 +602,13 @@ impl Object {
             Object::Container(e) => e.name(),
             Object::Enum(e) => e.name(),
             Object::Flag(e) => e.name(),
+        }
+    }
+
+    pub fn sizes(&self) -> Sizes {
+        match self {
+            Object::Container(e) => e.sizes(),
+            Object::Enum(e) | Object::Flag(e) => e.sizes(),
         }
     }
 }

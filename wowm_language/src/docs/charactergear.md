@@ -16,7 +16,7 @@ struct CharacterGear {
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | equipment_display_id |  |  |
-| 0x04 | ? / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
+| 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 
 # CharacterGear
 
@@ -37,8 +37,8 @@ struct CharacterGear {
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | equipment_display_id |  |  |
-| 0x04 | ? / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
-| - | 4 / Little | u32 | enchantment |  |  |
+| 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
+| 0x05 | 4 / Little | u32 | enchantment |  |  |
 
 # CharacterGear
 
@@ -59,6 +59,6 @@ struct CharacterGear {
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | equipment_display_id |  |  |
-| 0x04 | ? / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
-| - | 4 / Little | u32 | enchantment |  |  |
+| 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
+| 0x05 | 4 / Little | u32 | enchantment |  |  |
 

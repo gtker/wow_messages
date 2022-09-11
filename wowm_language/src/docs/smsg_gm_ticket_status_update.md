@@ -25,5 +25,5 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [GmTicketStatusResponse](gmticketstatusresponse.md) | response |  |  |
+| 0x04 | 4 / - | [GmTicketStatusResponse](gmticketstatusresponse.md) | response |  |  |
 

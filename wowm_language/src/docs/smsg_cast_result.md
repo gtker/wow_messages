@@ -41,31 +41,31 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | spell |  |  |
-| 0x08 | ? / - | [SimpleSpellCastResult](simplespellcastresult.md) | result |  |  |
+| 0x08 | 1 / - | [SimpleSpellCastResult](simplespellcastresult.md) | result |  |  |
 
 If result is not equal to `FAILURE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [CastFailureReason](castfailurereason.md) | reason |  |  |
+| 0x09 | 1 / - | [CastFailureReason](castfailurereason.md) | reason |  |  |
 
 If reason is equal to `REQUIRES_SPELL_FOCUS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | required_spell_focus |  |  |
+| 0x0A | 4 / Little | u32 | required_spell_focus |  |  |
 
 Else If reason is equal to `REQUIRES_AREA`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | [Area](area.md) | area |  |  |
+| 0x0E | 4 / - | [Area](area.md) | area |  |  |
 
 Else If reason is equal to `EQUIPPED_ITEM_CLASS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | equipped_item_class |  |  |
-| - | 4 / Little | u32 | equipped_item_subclass_mask |  |  |
-| - | 4 / Little | u32 | equipped_item_inventory_type_mask |  |  |
+| 0x12 | 4 / Little | u32 | equipped_item_class |  |  |
+| 0x16 | 4 / Little | u32 | equipped_item_subclass_mask |  |  |
+| 0x1A | 4 / Little | u32 | equipped_item_inventory_type_mask |  |  |
 

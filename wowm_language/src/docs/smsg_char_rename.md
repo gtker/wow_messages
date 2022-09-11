@@ -33,14 +33,14 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |  |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
 
 If result is equal to `RESPONSE_SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
-| - | - / - | CString | new_name |  |  |
+| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
+| 0x0D | - / - | CString | new_name |  |  |
 
 ### Examples
 
@@ -95,14 +95,14 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |  |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
 
 If result is equal to `RESPONSE_SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
-| - | - / - | CString | new_name |  |  |
+| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
+| 0x0D | - / - | CString | new_name |  |  |
 
 # SMSG_CHAR_RENAME
 
@@ -139,12 +139,12 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |  |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
 
 If result is equal to `RESPONSE_SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
-| - | - / - | CString | new_name |  |  |
+| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
+| 0x0D | - / - | CString | new_name |  |  |
 

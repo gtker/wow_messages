@@ -32,13 +32,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | [LoginResult](loginresult.md) | result |  |  |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
 
 If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[20] | server_proof |  |  |
+| 0x02 | ? / - | u8[20] | server_proof |  |  |
 | - | 4 / Little | u32 | hardware_survey_id |  |  |
 
 ### Examples
@@ -86,14 +86,14 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | [LoginResult](loginresult.md) | result |  |  |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
 
 If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[20] | server_proof |  |  |
-| - | ? / - | [AccountFlag](accountflag.md) | account_flag |  |  |
+| 0x02 | ? / - | u8[20] | server_proof |  |  |
+| - | 4 / - | [AccountFlag](accountflag.md) | account_flag |  |  |
 | - | 4 / Little | u32 | hardware_survey_id |  |  |
 | - | 2 / Little | u16 | unknown_flags |  |  |
 

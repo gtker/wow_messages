@@ -32,13 +32,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | [LoginResult](loginresult.md) | result |  |  |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
 
 If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[16] | challenge_data |  |  |
+| 0x02 | ? / - | u8[16] | challenge_data |  |  |
 | - | ? / - | u8[16] | checksum_salt |  |  |
 
 ### Examples
@@ -91,13 +91,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | [LoginResult](loginresult.md) | result |  |  |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
 
 If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[16] | challenge_data |  |  |
+| 0x02 | ? / - | u8[16] | challenge_data |  |  |
 | - | ? / - | u8[16] | checksum_salt |  |  |
 
 ### Examples

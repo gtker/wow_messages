@@ -39,9 +39,9 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | - / - | CString | name |  |  |
-| - | ? / - | [Race](race.md) | race |  |  |
-| - | ? / - | [Class](class.md) | class |  |  |
-| - | ? / - | [Gender](gender.md) | gender |  |  |
+| - | 1 / - | [Race](race.md) | race |  |  |
+| - | 1 / - | [Class](class.md) | class |  |  |
+| - | 1 / - | [Gender](gender.md) | gender |  |  |
 | - | 1 / - | u8 | skin_color |  |  |
 | - | 1 / - | u8 | face |  |  |
 | - | 1 / - | u8 | hair_style |  |  |
@@ -108,9 +108,9 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | - / - | CString | name |  |  |
-| - | ? / - | [Race](race.md) | race |  |  |
-| - | ? / - | [Class](class.md) | class |  |  |
-| - | ? / - | [Gender](gender.md) | gender |  |  |
+| - | 1 / - | [Race](race.md) | race |  |  |
+| - | 1 / - | [Class](class.md) | class |  |  |
+| - | 1 / - | [Gender](gender.md) | gender |  |  |
 | - | 1 / - | u8 | skin_color |  |  |
 | - | 1 / - | u8 | face |  |  |
 | - | 1 / - | u8 | hair_style |  |  |
@@ -159,9 +159,9 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | - / - | CString | name |  |  |
-| - | ? / - | [Race](race.md) | race |  |  |
-| - | ? / - | [Class](class.md) | class |  |  |
-| - | ? / - | [Gender](gender.md) | gender |  |  |
+| - | 1 / - | [Race](race.md) | race |  |  |
+| - | 1 / - | [Class](class.md) | class |  |  |
+| - | 1 / - | [Gender](gender.md) | gender |  |  |
 | - | 1 / - | u8 | skin_color |  |  |
 | - | 1 / - | u8 | face |  |  |
 | - | 1 / - | u8 | hair_style |  |  |

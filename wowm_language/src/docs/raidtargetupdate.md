@@ -15,6 +15,6 @@ struct RaidTargetUpdate {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [RaidTargetIndex](raidtargetindex.md) | index |  |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| 0x00 | 1 / - | [RaidTargetIndex](raidtargetindex.md) | index |  |  |
+| 0x01 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 

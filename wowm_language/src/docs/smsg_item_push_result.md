@@ -35,13 +35,13 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-| 0x0C | ? / - | [NewItemSource](newitemsource.md) | source |  |  |
-| - | ? / - | [NewItemCreationType](newitemcreationtype.md) | creation_type |  |  |
-| - | ? / - | [NewItemChatAlert](newitemchatalert.md) | alert_chat |  |  |
-| - | 1 / - | u8 | bag_slot |  |  |
-| - | 4 / Little | u32 | item_slot |  | mangoszero: item slot, but when added to stack: 0xFFFFFFFF |
-| - | 4 / Little | u32 | item_id |  |  |
-| - | 4 / Little | u32 | item_suffix_factor |  | mangoszero: SuffixFactor |
-| - | 4 / Little | u32 | item_random_property_id |  | mangoszero: random item property id |
-| - | 4 / Little | u32 | item_count |  |  |
+| 0x0C | 4 / - | [NewItemSource](newitemsource.md) | source |  |  |
+| 0x10 | 4 / - | [NewItemCreationType](newitemcreationtype.md) | creation_type |  |  |
+| 0x14 | 4 / - | [NewItemChatAlert](newitemchatalert.md) | alert_chat |  |  |
+| 0x18 | 1 / - | u8 | bag_slot |  |  |
+| 0x19 | 4 / Little | u32 | item_slot |  | mangoszero: item slot, but when added to stack: 0xFFFFFFFF |
+| 0x1D | 4 / Little | u32 | item_id |  |  |
+| 0x21 | 4 / Little | u32 | item_suffix_factor |  | mangoszero: SuffixFactor |
+| 0x25 | 4 / Little | u32 | item_random_property_id |  | mangoszero: random item property id |
+| 0x29 | 4 / Little | u32 | item_count |  |  |
 

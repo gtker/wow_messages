@@ -39,13 +39,13 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 1 / - | u8 | protocol_version |  | Mangos statically sets this to 0. It is unkown exactly what it does. |
-| 0x02 | ? / - | [LoginResult](loginresult.md) | result |  |  |
+| 0x02 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
 
 If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[32] | server_public_key |  |  |
+| 0x03 | ? / - | u8[32] | server_public_key |  |  |
 | - | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
 | - | ? / - | u8[generator_length] | generator |  |  |
 | - | 1 / - | u8 | large_safe_prime_length |  | Client can not handle arrays greater than 32. |
@@ -122,20 +122,20 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 1 / - | u8 | protocol_version |  | Mangos statically sets this to 0. |
-| 0x02 | ? / - | [LoginResult](loginresult.md) | result |  |  |
+| 0x02 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
 
 If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[32] | server_public_key |  |  |
+| 0x03 | ? / - | u8[32] | server_public_key |  |  |
 | - | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
 | - | ? / - | u8[generator_length] | generator |  |  |
 | - | 1 / - | u8 | large_safe_prime_length |  | Client can not handle arrays greater than 32. |
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |  |
 | - | ? / - | u8[32] | salt |  |  |
 | - | ? / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |  |
-| - | ? / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
+| - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
 
 If security_flag is equal to `PIN`:
 
@@ -236,20 +236,20 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 1 / - | u8 | protocol_version |  |  |
-| 0x02 | ? / - | [LoginResult](loginresult.md) | result |  |  |
+| 0x02 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
 
 If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[32] | server_public_key |  |  |
+| 0x03 | ? / - | u8[32] | server_public_key |  |  |
 | - | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
 | - | ? / - | u8[generator_length] | generator |  |  |
 | - | 1 / - | u8 | large_safe_prime_length |  | Client can not handle arrays greater than 32. |
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |  |
 | - | ? / - | u8[32] | salt |  |  |
 | - | ? / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |  |
-| - | ? / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
+| - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
 
 If security_flag contains `PIN`:
 

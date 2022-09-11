@@ -26,6 +26,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [ChatNotify](chatnotify.md) | notify_type |  |  |
-| - | - / - | CString | channel_name |  |  |
+| 0x04 | 1 / - | [ChatNotify](chatnotify.md) | notify_type |  |  |
+| 0x05 | - / - | CString | channel_name |  |  |
 

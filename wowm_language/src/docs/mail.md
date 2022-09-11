@@ -43,27 +43,27 @@ struct Mail {
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | message_id |  |  |
-| 0x04 | ? / - | [MailType](mailtype.md) | message_type |  |  |
+| 0x04 | 1 / - | [MailType](mailtype.md) | message_type |  |  |
 
 If message_type is equal to `NORMAL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |  |
+| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |  |
 
 Else If message_type is equal to `CREATURE` **or** 
 is equal to `GAMEOBJECT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | sender_id |  |  |
+| 0x0D | 4 / Little | u32 | sender_id |  |  |
 
 Else If message_type is equal to `AUCTION`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | auction_id |  |  |
-| - | - / - | CString | subject |  |  |
+| 0x11 | 4 / Little | u32 | auction_id |  |  |
+| 0x15 | - / - | CString | subject |  |  |
 | - | 4 / Little | u32 | item_text_id |  |  |
 | - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: set to 0 |
 | - | 4 / Little | u32 | stationery |  | cmangos/vmangos/mangoszero: stationery (Stationery.dbc) |

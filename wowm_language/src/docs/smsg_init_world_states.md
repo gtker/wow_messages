@@ -28,8 +28,8 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [Map](map.md) | map |  |  |
-| - | ? / - | [Area](area.md) | area |  |  |
-| - | 2 / Little | u16 | amount_of_states |  |  |
-| - | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |  |
+| 0x04 | 4 / - | [Map](map.md) | map |  |  |
+| 0x08 | 4 / - | [Area](area.md) | area |  |  |
+| 0x0C | 2 / Little | u16 | amount_of_states |  |  |
+| 0x0E | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |  |
 

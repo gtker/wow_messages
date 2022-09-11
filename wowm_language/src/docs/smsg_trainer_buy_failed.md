@@ -29,5 +29,5 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0C | 4 / Little | u32 | id |  |  |
-| 0x10 | ? / - | [TrainingFailureReason](trainingfailurereason.md) | error |  |  |
+| 0x10 | 4 / - | [TrainingFailureReason](trainingfailurereason.md) | error |  |  |
 

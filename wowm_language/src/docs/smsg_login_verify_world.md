@@ -35,9 +35,9 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [Map](map.md) | map |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
+| 0x04 | 4 / - | [Map](map.md) | map |  |  |
+| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x14 | 4 / Little | f32 | orientation |  |  |
 
 ### Examples
 
@@ -89,9 +89,9 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [Map](map.md) | map |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
+| 0x04 | 4 / - | [Map](map.md) | map |  |  |
+| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x14 | 4 / Little | f32 | orientation |  |  |
 
 # SMSG_LOGIN_VERIFY_WORLD
 
@@ -130,7 +130,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [Map](map.md) | map |  |  |
-| - | ? / - | [Vector3d](vector3d.md) | position |  |  |
-| - | 4 / Little | f32 | orientation |  |  |
+| 0x04 | 4 / - | [Map](map.md) | map |  |  |
+| 0x08 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x14 | 4 / Little | f32 | orientation |  |  |
 

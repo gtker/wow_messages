@@ -32,10 +32,10 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | battlemaster |  |  |
-| 0x0C | ? / - | [Map](map.md) | map |  |  |
-| - | 1 / - | u8 | unknown1 |  |  |
-| - | 4 / Little | u32 | unknown2 |  | vmangos: number of bg instances, this is also present on the number_of_battlegrounds field |
-| - | 1 / - | u8 | unknown3 |  |  |
-| - | 4 / Little | u32 | number_of_battlegrounds |  | vmangos: number of bg instances, this is also present on the unknown2 field |
-| - | ? / - | u32[number_of_battlegrounds] | battlegrounds |  |  |
+| 0x0C | 4 / - | [Map](map.md) | map |  |  |
+| 0x10 | 1 / - | u8 | unknown1 |  |  |
+| 0x11 | 4 / Little | u32 | unknown2 |  | vmangos: number of bg instances, this is also present on the number_of_battlegrounds field |
+| 0x15 | 1 / - | u8 | unknown3 |  |  |
+| 0x16 | 4 / Little | u32 | number_of_battlegrounds |  | vmangos: number of bg instances, this is also present on the unknown2 field |
+| 0x1A | ? / - | u32[number_of_battlegrounds] | battlegrounds |  |  |
 

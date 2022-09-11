@@ -135,7 +135,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | ? / - | u8[20] | crc_hash |  |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |  |
 | - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
-| - | ? / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
+| - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
 
 If security_flag is equal to `PIN`:
 
@@ -270,7 +270,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | - | ? / - | u8[20] | crc_hash |  |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |  |
 | - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
-| - | ? / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
+| - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
 
 If security_flag contains `PIN`:
 

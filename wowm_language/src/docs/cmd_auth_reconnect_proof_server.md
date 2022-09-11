@@ -28,7 +28,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | [LoginResult](loginresult.md) | result |  |  |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
 
 ### Examples
 
@@ -81,8 +81,8 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | [LoginResult](loginresult.md) | result |  |  |
-| - | 2 / Little | u16 | padding |  |  |
+| 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
+| 0x02 | 2 / Little | u16 | padding |  |  |
 
 ### Examples
 

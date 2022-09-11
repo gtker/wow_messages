@@ -29,5 +29,5 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0C | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
-| 0x14 | ? / - | [SellItemResult](sellitemresult.md) | result |  |  |
+| 0x14 | 1 / - | [SellItemResult](sellitemresult.md) | result |  |  |
 

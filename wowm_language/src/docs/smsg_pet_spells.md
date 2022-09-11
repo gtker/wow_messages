@@ -36,10 +36,10 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
 | 0x0C | 4 / Little | u32 | unknown1 |  | mangoszero: set to 0 |
-| 0x10 | ? / - | [PetReactState](petreactstate.md) | react |  |  |
-| - | ? / - | [PetCommandState](petcommandstate.md) | command |  |  |
-| - | 2 / Little | u16 | unknown2 |  | mangoszero: set to 0 |
-| - | ? / - | u32[10] | action_bars |  |  |
+| 0x10 | 1 / - | [PetReactState](petreactstate.md) | react |  |  |
+| 0x11 | 1 / - | [PetCommandState](petcommandstate.md) | command |  |  |
+| 0x12 | 2 / Little | u16 | unknown2 |  | mangoszero: set to 0 |
+| 0x14 | ? / - | u32[10] | action_bars |  |  |
 | - | 1 / - | u8 | amount_of_spells |  |  |
 | - | ? / - | u32[amount_of_spells] | spells |  |  |
 | - | 1 / - | u8 | amount_of_cooldowns |  |  |

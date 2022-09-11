@@ -33,7 +33,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |  |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
 
 ### Examples
 
@@ -87,7 +87,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |  |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
 
 # SMSG_CHAR_CREATE
 
@@ -124,5 +124,5 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |  |
+| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
 

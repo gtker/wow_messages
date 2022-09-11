@@ -31,5 +31,5 @@ CMSG have a header of 6 bytes.
 | 0x06 | 1 / - | u8 | bag_index |  |  |
 | 0x07 | 1 / - | u8 | bag_slot |  |  |
 | 0x08 | 1 / - | u8 | spell_index |  |  |
-| 0x09 | ? / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
+| 0x09 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
 

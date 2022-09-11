@@ -29,12 +29,12 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [Map](map.md) | map |  |  |
+| 0x04 | 4 / - | [Map](map.md) | map |  |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | transport |  |  |
-| - | ? / - | [Map](map.md) | transport_map |  |  |
+| 0x08 | 4 / Little | u32 | transport |  |  |
+| 0x0C | 4 / - | [Map](map.md) | transport_map |  |  |
 

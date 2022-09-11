@@ -27,7 +27,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
-| - | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
 ### Examples
 
@@ -74,7 +74,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
-| - | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
 # MSG_MOVE_START_STRAFE_LEFT_Server
 
@@ -105,5 +105,5 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
-| - | ? / - | [MovementInfo](movementinfo.md) | info |  |  |
+| - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

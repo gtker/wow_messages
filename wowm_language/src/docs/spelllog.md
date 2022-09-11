@@ -58,51 +58,51 @@ struct SpellLog {
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x00 | ? / - | [SpellEffect](spelleffect.md) | effect |  |  |
-| - | 4 / Little | u32 | amount_of_logs |  | vmangos/cmangos/mangoszero: Can be variable but all use constant 1 |
+| 0x00 | 4 / - | [SpellEffect](spelleffect.md) | effect |  |  |
+| 0x04 | 4 / Little | u32 | amount_of_logs |  | vmangos/cmangos/mangoszero: Can be variable but all use constant 1 |
 
 If effect is equal to `POWER_DRAIN`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target1 |  |  |
-| - | 4 / Little | u32 | unknown1 |  |  |
-| - | 4 / Little | u32 | unknown2 |  |  |
-| - | 4 / Little | f32 | unknown3 |  |  |
+| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | target1 |  |  |
+| 0x10 | 4 / Little | u32 | unknown1 |  |  |
+| 0x14 | 4 / Little | u32 | unknown2 |  |  |
+| 0x18 | 4 / Little | f32 | unknown3 |  |  |
 
 Else If effect is equal to `ADD_EXTRA_ATTACKS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target2 |  |  |
-| - | 4 / Little | u32 | unknown4 |  |  |
+| 0x1C | 8 / Little | [Guid](../spec/packed-guid.md) | target2 |  |  |
+| 0x24 | 4 / Little | u32 | unknown4 |  |  |
 
 Else If effect is equal to `INTERRUPT_CAST`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target3 |  |  |
-| - | 4 / Little | u32 | interrupted_spell |  |  |
+| 0x28 | 8 / Little | [Guid](../spec/packed-guid.md) | target3 |  |  |
+| 0x30 | 4 / Little | u32 | interrupted_spell |  |  |
 
 Else If effect is equal to `DURABILITY_DAMAGE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target4 |  |  |
-| - | 4 / Little | u32 | unknown5 |  |  |
-| - | 4 / Little | u32 | unknown6 |  |  |
+| 0x34 | 8 / Little | [Guid](../spec/packed-guid.md) | target4 |  |  |
+| 0x3C | 4 / Little | u32 | unknown5 |  |  |
+| 0x40 | 4 / Little | u32 | unknown6 |  |  |
 
 Else If effect is equal to `CREATE_ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | spell_effect_item_type |  |  |
+| 0x44 | 4 / Little | u32 | spell_effect_item_type |  |  |
 
 Else If effect is equal to `FEED_PET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | item_target_entry |  |  |
+| 0x48 | 4 / Little | u32 | item_target_entry |  |  |
 
 Else If effect is equal to `RESURRECT` **or** 
 is equal to `DISPEL` **or** 
@@ -123,5 +123,5 @@ is equal to `INSTAKILL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |  |
+| 0x4C | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |  |
 

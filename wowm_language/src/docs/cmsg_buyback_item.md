@@ -27,5 +27,5 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-| 0x0E | ? / - | [BuybackSlot](buybackslot.md) | slot |  |  |
+| 0x0E | 4 / - | [BuybackSlot](buybackslot.md) | slot |  |  |
 

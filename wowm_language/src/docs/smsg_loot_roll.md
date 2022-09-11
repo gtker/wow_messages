@@ -39,5 +39,5 @@ SMSG have a header of 4 bytes.
 | 0x1C | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
 | 0x20 | 4 / Little | u32 | item_random_property_id |  |  |
 | 0x24 | 1 / - | u8 | roll_number |  | vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number |
-| 0x25 | ? / - | [RollVote](rollvote.md) | vote |  |  |
+| 0x25 | 1 / - | [RollVote](rollvote.md) | vote |  |  |
 
