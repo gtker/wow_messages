@@ -6,6 +6,7 @@ pub mod cmsg_char_rename123;
 pub mod cmsg_ping1_1223;
 pub mod cmsg_player_login123;
 pub mod cmsg_realm_split2_4_33;
+pub mod cmsg_request_account_data1_123_3_5;
 pub mod inventory_type1_1223;
 pub mod realm_split_state2_4_33;
 pub mod smsg_account_data_times1_122;
