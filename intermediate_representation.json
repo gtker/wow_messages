@@ -164018,6 +164018,104 @@
       ]
     },
     {
+      "name": "SMSG_UPDATE_ACCOUNT_DATA",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 524
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "data_type",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "decompressed_size",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "compressed_data",
+            "member_type": {
+              "type": "array",
+              "content": {
+                "inner": {
+                  "type": "integer",
+                  "content": {
+                    "type": "u32",
+                    "endianness": "little"
+                  }
+                },
+                "size": {
+                  "type": "endless"
+                }
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        }
+      ],
+      "tags": {
+        "comment": "Sent as response to CMSG_REQUEST_ACCOUNT_DATA",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/login_logout/smsg_update_account_data.wowm",
+        "start_position": 1
+      },
+      "only_has_io_error": true,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "EndlessArrays",
+        "SimpleArrays",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
       "object_type": {
         "type": "smsg",

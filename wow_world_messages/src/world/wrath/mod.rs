@@ -94,6 +94,8 @@ pub(crate) mod smsg_time_sync_req;
 pub use smsg_time_sync_req::*;
 pub(crate) mod smsg_tutorial_flags;
 pub use smsg_tutorial_flags::*;
+pub(crate) mod smsg_update_account_data;
+pub use smsg_update_account_data::*;
 pub(crate) mod smsg_update_account_data_complete;
 pub use smsg_update_account_data_complete::*;
 pub(crate) mod smsg_update_object;
