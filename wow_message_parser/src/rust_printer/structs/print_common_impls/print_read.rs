@@ -352,6 +352,15 @@ fn print_read_definition(
                 postfix = postfix,
             ));
         }
+        Type::DateTime => {
+            s.wln(format!(
+                "let {name} = crate::DateTime::from_int({module_name}::{prefix}read_u32_le(r){postfix}?);",
+                name = d.name(),
+                module_name = UTILITY_PATH,
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        }
         Type::Integer(integer) => {
             let value_set = if d.verified_value().is_some() {
                 "_"

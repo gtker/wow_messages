@@ -244,6 +244,14 @@ pub fn print_write_definition(
                 name = d.name(),
             ));
         }
+        Type::DateTime => {
+            s.wln(format!(
+                "w.write_all(&{variable_prefix}{name}.as_int().to_le_bytes()){postfix}?;",
+                variable_prefix = variable_prefix,
+                postfix = postfix,
+                name = d.name()
+            ));
+        }
         Type::Guid => {
             s.wln(format!(
                 "w.write_all(&{variable_prefix}{name}.guid().to_le_bytes()){postfix}?;",

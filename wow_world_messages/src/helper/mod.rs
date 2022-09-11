@@ -10,4 +10,5 @@ pub(crate) mod wrath;
 pub(crate) mod tbc;
 pub(crate) mod update_mask_common;
 
+pub(crate) mod datetime;
 pub(crate) mod shared;

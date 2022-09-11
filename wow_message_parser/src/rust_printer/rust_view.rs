@@ -404,6 +404,7 @@ impl RustEnumerator {
 pub enum RustType {
     Integer(IntegerType),
     Bool,
+    DateTime,
     Floating(FloatingPointType),
     UpdateMask,
     AuraMask,
@@ -455,6 +456,7 @@ impl RustType {
             RustType::PackedGuid | RustType::Guid => "Guid".to_string(),
             RustType::SizedCString => "SizedCString".to_string(),
             RustType::Bool => "Bool".to_string(),
+            RustType::DateTime => "DateTime".to_string(),
         }
     }
 
@@ -470,6 +472,7 @@ impl RustType {
             RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
             RustType::Struct { ty_name, .. } => ty_name.clone(),
             RustType::Bool => "bool".to_string(),
+            RustType::DateTime => "DateTime".to_string(),
         }
     }
 }
@@ -487,6 +490,7 @@ impl Display for RustType {
             RustType::AuraMask => f.write_str("AuraMask"),
             RustType::PackedGuid | RustType::Guid => f.write_str("Guid"),
             RustType::Bool => f.write_str("bool"),
+            RustType::DateTime => f.write_str("DateTime"),
         }
     }
 }
@@ -1237,6 +1241,7 @@ pub fn create_struct_member(
                     RustType::Integer(*i)
                 }
                 Type::Bool => RustType::Bool,
+                Type::DateTime => RustType::DateTime,
                 Type::Guid => RustType::Guid,
                 Type::PackedGuid => {
                     definition_constantly_sized = false;

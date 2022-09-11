@@ -229,6 +229,8 @@ pub enum IrType {
     Integer(IrIntegerType),
     #[serde(rename = "bool")]
     Bool,
+    #[serde(rename = "datetime")]
+    DateTime,
     #[serde(rename = "packed_guid")]
     PackedGuid,
     #[serde(rename = "guid")]
@@ -275,6 +277,7 @@ impl From<&Type> for IrType {
             },
             Type::SizedCString => Self::SizedCString,
             Type::Bool => Self::Bool,
+            Type::DateTime => Self::DateTime,
         }
     }
 }
@@ -478,6 +481,8 @@ pub enum IrTestValue {
     Number(IrIntegerEnumValue),
     #[serde(rename = "bool")]
     Bool(bool),
+    #[serde(rename = "datetime")]
+    DateTime(IrIntegerEnumValue),
     #[serde(rename = "guid")]
     Guid(IrIntegerEnumValue),
     #[serde(rename = "floating_point")]
@@ -512,6 +517,7 @@ impl From<&TestValue> for IrTestValue {
     fn from(v: &TestValue) -> Self {
         match v {
             TestValue::Number(i) => Self::Number(i.into()),
+            TestValue::DateTime(v) => Self::DateTime(v.into()),
             TestValue::Guid(i) => Self::Guid(i.into()),
             TestValue::Bool(b) => Self::Bool(*b),
             TestValue::FloatingNumber {

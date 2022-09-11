@@ -42,6 +42,10 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects, version: Version) 
         s.wln("use crate::Guid;");
     }
 
+    if e.contains_datetime() {
+        s.wln("use crate::DateTime;");
+    }
+
     let import_path = get_import_path(version);
 
     if e.contains_aura_mask() {

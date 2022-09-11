@@ -1,5 +1,5 @@
 use crate::container::{
-    Container, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, GUID_SIZE,
+    Container, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE, GUID_SIZE,
     PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MAX_SIZE, UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::objects::Objects;
@@ -18,6 +18,7 @@ pub enum Type {
     Bool,
     PackedGuid,
     Guid,
+    DateTime,
     FloatingPoint(FloatingPointType),
     CString,
     SizedCString,
@@ -48,6 +49,7 @@ impl Type {
             Type::AuraMask => "AuraMask".to_string(),
             Type::SizedCString => "SizedCString".to_string(),
             Type::Bool => "Bool".to_string(),
+            Type::DateTime => "DateTime".to_string(),
         }
     }
 
@@ -62,6 +64,7 @@ impl Type {
             Type::UpdateMask => "UpdateMask".to_string(),
             Type::AuraMask => "AuraMask".to_string(),
             Type::Bool => "bool".to_string(),
+            Type::DateTime => "DateTime".to_string(),
         };
 
         s
@@ -75,6 +78,7 @@ impl Type {
             Type::Integer(i) => sizes.inc_both(i.size() as usize),
             Type::Bool => sizes.inc_both(BOOL_SIZE.into()),
             Type::Guid => sizes.inc_both(GUID_SIZE as _),
+            Type::DateTime => sizes.inc_both(DATETIME_SIZE.into()),
             Type::FloatingPoint(i) => sizes.inc_both(i.size() as usize),
             Type::PackedGuid => sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _),
             Type::UpdateMask => {
@@ -197,6 +201,7 @@ impl Type {
             | Type::AuraMask
             | Type::PackedGuid => "-".to_string(),
             Type::Bool => BOOL_SIZE.to_string(),
+            Type::DateTime => DATETIME_SIZE.to_string(),
         }
     }
 
@@ -210,7 +215,7 @@ impl Type {
     pub fn doc_endian_str(&self) -> String {
         match self {
             Type::Integer(i) => i.doc_endian_str().to_string(),
-            Type::Guid => "Little".to_string(),
+            Type::DateTime | Type::Guid => "Little".to_string(),
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
             Type::SizedCString
             | Type::Bool
@@ -274,6 +279,7 @@ impl Type {
             "f64_be" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Big)),
             "CString" => Self::CString,
             "SizedCString" => Self::SizedCString,
+            "DateTime" => Self::DateTime,
             _ => Self::Identifier {
                 s: s.to_string(),
                 upcast: None,
@@ -318,13 +324,14 @@ impl Type {
                             inner: ArrayType::CString,
                             size,
                         }),
-                        Type::SizedCString => panic!("unsupported"),
-                        Type::String { .. } => panic!("unsupported"),
-                        Type::Array(_) => panic!("unsupported"),
-                        Type::FloatingPoint(_) => panic!("unsupported"),
-                        Type::UpdateMask => panic!("unsupported"),
-                        Type::AuraMask => panic!("unsupported"),
-                        Type::Bool => panic!("unsupported"),
+                        Type::SizedCString
+                        | Type::String { .. }
+                        | Type::Array(_)
+                        | Type::FloatingPoint(_)
+                        | Type::UpdateMask
+                        | Type::AuraMask
+                        | Type::DateTime
+                        | Type::Bool => panic!("unsupported"),
                         Type::PackedGuid => Self::Array(Array {
                             inner: ArrayType::PackedGuid,
                             size,

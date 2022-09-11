@@ -1,8 +1,6 @@
 smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
-    u32 datetime {
+    DateTime datetime {
         description = "Current server datetime.";
-        comment = "This is not just unix time but instead seems to be a custom bitfield.";
-        comment = "vmangos/cmangos/mangoszero uses the format `years_after_2000 << 24 | month << 20 | month_day << 14 | week_day << 11 | hours << 6 | minutes`. All values start at 0 and `week_day` starts on Sunday.";
         comment = "Running the client with `-console` verifies that this message in this format sets the correct datetime. [SMSG_QUERY_TIME_RESPONSE] will not set this.";
     }
     f32 timescale {
@@ -30,10 +28,8 @@ test SMSG_LOGIN_SETTIMESPEED {
 }
 
 smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
-    u32 datetime {
+    DateTime datetime {
         description = "Current server datetime.";
-        comment = "This is not just unix time but instead seems to be a custom bitfield.";
-        comment = "vmangos/cmangos/mangoszero uses the format `years_after_2000 << 24 | month << 20 | month_day << 14 | week_day << 11 | hours << 6 | minutes`. All values start at 0 and `week_day` starts on Sunday.";
         comment = "Running the client with `-console` verifies that this message in this format sets the correct datetime. [SMSG_QUERY_TIME_RESPONSE] will not set this.";
     }
     f32 timescale {

@@ -1,4 +1,6 @@
-use crate::container::{Equation, IfStatement, StructMember, StructMemberDefinition, BOOL_SIZE};
+use crate::container::{
+    Equation, IfStatement, StructMember, StructMemberDefinition, BOOL_SIZE, DATETIME_SIZE,
+};
 use crate::doc_printer::DocWriter;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, Endianness, IntegerType, ObjectType};
@@ -127,9 +129,11 @@ fn print_container_example_definition(
                 s.w(format!("{}, ", b));
             }
         }
+        Type::DateTime => {
+            s.bytes(bytes.take(core::mem::size_of::<u32>()).into_iter());
+        }
         Type::Bool => {
-            let b = bytes.take(BOOL_SIZE.into()).cloned().collect::<Vec<u8>>();
-            s.w(format!("{}, ", b[0]));
+            s.bytes(bytes.take(core::mem::size_of::<u8>()).into_iter());
         }
         Type::Guid => {
             s.bytes(bytes.take(core::mem::size_of::<u64>()).into_iter());
@@ -515,6 +519,7 @@ fn print_container_field(
                 },
                 Type::SizedCString
                 | Type::Bool
+                | Type::DateTime
                 | Type::CString
                 | Type::String { .. }
                 | Type::Integer(_)
@@ -552,6 +557,7 @@ fn print_container_field(
                     Type::Integer(t) => Some(offset.unwrap() + t.size() as usize),
                     Type::Guid => Some(offset.unwrap() + 8),
                     Type::FloatingPoint(f) => Some(offset.unwrap() + f.size() as usize),
+                    Type::DateTime => Some(offset.unwrap() + DATETIME_SIZE as usize),
                     Type::Bool => Some(offset.unwrap() + BOOL_SIZE as usize),
                     Type::Identifier { s, upcast } => {
                         if let Some(upcast) = upcast {

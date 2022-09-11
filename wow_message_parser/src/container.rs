@@ -424,6 +424,7 @@ impl Container {
                         Type::AuraMask => panic!(),
                         Type::SizedCString => panic!(),
                         Type::Bool => sum += BOOL_SIZE as u64,
+                        Type::DateTime => sum += DATETIME_SIZE as u64,
                     }
                     if let Some(v) = &d.verified_value {
                         if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
@@ -598,8 +599,7 @@ impl Container {
         for m in self.fields() {
             match m {
                 StructMember::Definition(d) => match d.ty() {
-                    Type::Integer(_) => {}
-                    Type::FloatingPoint(_) => {}
+                    Type::Integer(_) | Type::DateTime | Type::FloatingPoint(_) => {}
                     Type::CString => return false,
                     Type::String { length } => match length.parse::<u64>() {
                         Ok(_) => {}
@@ -820,6 +820,16 @@ impl Container {
         false
     }
 
+    pub fn contains_datetime(&self) -> bool {
+        for d in self.all_definitions() {
+            if d.ty() == &Type::DateTime {
+                return true;
+            }
+        }
+
+        false
+    }
+
     pub fn contains_guid_or_packed_guid(&self) -> bool {
         for d in self.all_definitions() {
             match d.ty() {
@@ -1003,9 +1013,7 @@ impl Container {
     fn set_value_used_as_sizes(&mut self, m: &StructMember) {
         match m {
             StructMember::Definition(d) => match d.ty() {
-                Type::Integer(_) => {}
-                Type::FloatingPoint(_) => {}
-                Type::CString => {}
+                Type::Integer(_) | Type::FloatingPoint(_) | Type::DateTime | Type::CString => {}
                 Type::String { length } => {
                     if length.parse::<u8>().is_ok() {
                         return;
@@ -1240,6 +1248,7 @@ pub const PACKED_GUID_MAX_SIZE: u8 = 9;
 pub const PACKED_GUID_MIN_SIZE: u8 = 2;
 pub const GUID_SIZE: u8 = core::mem::size_of::<u64>() as u8;
 pub const BOOL_SIZE: u8 = 1;
+pub const DATETIME_SIZE: u8 = 4;
 
 impl Sizes {
     pub fn new() -> Self {

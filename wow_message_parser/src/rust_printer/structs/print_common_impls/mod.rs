@@ -1,4 +1,4 @@
-use crate::container::{Container, ContainerType, BOOL_SIZE, GUID_SIZE};
+use crate::container::{Container, ContainerType, BOOL_SIZE, DATETIME_SIZE, GUID_SIZE};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
@@ -150,6 +150,7 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
         RustType::Integer(i) => i.size().to_string(),
         RustType::Floating(f) => f.size().to_string(),
         RustType::Guid => GUID_SIZE.to_string(),
+        RustType::DateTime => DATETIME_SIZE.to_string(),
         RustType::String => format!("{prefix}{name}.len()", name = m.name(), prefix = prefix),
         RustType::CString => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
         RustType::SizedCString => {

@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::DateTime;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
@@ -10,18 +11,16 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm#L1):
 /// ```text
 /// smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
-///     u32 datetime;
+///     DateTime datetime;
 ///     f32 timescale;
 /// }
 /// ```
 pub struct SMSG_LOGIN_SETTIMESPEED {
     /// Current server datetime.
     ///
-    /// This is not just unix time but instead seems to be a custom bitfield.
-    /// vmangos/cmangos/mangoszero uses the format `years_after_2000 << 24 | month << 20 | month_day << 14 | week_day << 11 | hours << 6 | minutes`. All values start at 0 and `week_day` starts on Sunday.
     /// Running the client with `-console` verifies that this message in this format sets the correct datetime. [`SMSG_QUERY_TIME_RESPONSE`](crate::world::vanilla::SMSG_QUERY_TIME_RESPONSE) will not set this.
     ///
-    pub datetime: u32,
+    pub datetime: DateTime,
     /// How many minutes should pass by every second.
     ///
     /// vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second.
@@ -37,8 +36,8 @@ impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // datetime: u32
-        w.write_all(&self.datetime.to_le_bytes())?;
+        // datetime: DateTime
+        w.write_all(&self.datetime.as_int().to_le_bytes())?;
 
         // timescale: f32
         w.write_all(&self.timescale.to_le_bytes())?;
@@ -50,9 +49,8 @@ impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
-        // datetime: u32
-        let datetime = crate::util::read_u32_le(r)?;
-
+        // datetime: DateTime
+        let datetime = crate::DateTime::from_int(crate::util::read_u32_le(r)?);
         // timescale: f32
         let timescale = crate::util::read_f32_le(r)?;
         Ok(Self {
@@ -79,12 +77,12 @@ mod test {
     const RAW0: [u8; 12] = [ 0x00, 0x0A, 0x42, 0x00, 0x0A, 0x1A, 0x73, 0x16, 0x89,
          0x88, 0x88, 0x3C, ];
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 19.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 17.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGIN_SETTIMESPEED0() {
         let expected = SMSG_LOGIN_SETTIMESPEED {
-            datetime: 0x16731A0A,
+            datetime: DateTime::from_int(0x16731A0A),
             timescale: 0.016666668_f32,
         };
 
@@ -106,12 +104,12 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 19.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 17.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGIN_SETTIMESPEED0() {
         let expected = SMSG_LOGIN_SETTIMESPEED {
-            datetime: 0x16731A0A,
+            datetime: DateTime::from_int(0x16731A0A),
             timescale: 0.016666668_f32,
         };
 
@@ -133,12 +131,12 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 19.
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm` line 17.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGIN_SETTIMESPEED0() {
         let expected = SMSG_LOGIN_SETTIMESPEED {
-            datetime: 0x16731A0A,
+            datetime: DateTime::from_int(0x16731A0A),
             timescale: 0.016666668_f32,
         };
 

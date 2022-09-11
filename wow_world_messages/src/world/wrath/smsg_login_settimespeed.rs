@@ -1,11 +1,12 @@
 use std::convert::{TryFrom, TryInto};
+use crate::DateTime;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm#L32):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm#L30):
 /// ```text
 /// smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
-///     u32 datetime;
+///     DateTime datetime;
 ///     f32 timescale;
 ///     u32 unknown1;
 /// }
@@ -13,11 +14,9 @@ use std::io::{Write, Read};
 pub struct SMSG_LOGIN_SETTIMESPEED {
     /// Current server datetime.
     ///
-    /// This is not just unix time but instead seems to be a custom bitfield.
-    /// vmangos/cmangos/mangoszero uses the format `years_after_2000 << 24 | month << 20 | month_day << 14 | week_day << 11 | hours << 6 | minutes`. All values start at 0 and `week_day` starts on Sunday.
     /// Running the client with `-console` verifies that this message in this format sets the correct datetime. `SMSG_QUERY_TIME_RESPONSE` will not set this.
     ///
-    pub datetime: u32,
+    pub datetime: DateTime,
     /// How many minutes should pass by every second.
     ///
     /// vmangos/cmangos/mangoszero set this to 0.01666667. This means that 1/60 minutes pass every second (one second passes every second). Setting this to 1.0 will make the client advance one minute every second.
@@ -36,8 +35,8 @@ impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // datetime: u32
-        w.write_all(&self.datetime.to_le_bytes())?;
+        // datetime: DateTime
+        w.write_all(&self.datetime.as_int().to_le_bytes())?;
 
         // timescale: f32
         w.write_all(&self.timescale.to_le_bytes())?;
@@ -52,9 +51,8 @@ impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
-        // datetime: u32
-        let datetime = crate::util::read_u32_le(r)?;
-
+        // datetime: DateTime
+        let datetime = crate::DateTime::from_int(crate::util::read_u32_le(r)?);
         // timescale: f32
         let timescale = crate::util::read_f32_le(r)?;
         // unknown1: u32

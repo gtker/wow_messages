@@ -474,7 +474,11 @@ version 2: {:#?} in {} line {}",
 
     pub fn type_has_constant_size(&self, ty: &Type) -> bool {
         let type_name = match ty {
-            Type::Bool | Type::Integer(_) | Type::FloatingPoint(_) | Type::Guid => return true,
+            Type::DateTime
+            | Type::Bool
+            | Type::Integer(_)
+            | Type::FloatingPoint(_)
+            | Type::Guid => return true,
             Type::PackedGuid
             | Type::UpdateMask
             | Type::AuraMask

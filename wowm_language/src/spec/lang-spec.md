@@ -48,6 +48,13 @@ The `SizedCString` is the same as a `u32` followed by a `CString`, but they are 
 | `UpdateMask` | Update values sent in a relatively complex format. See [UpdateMask](update-mask.md). | - |
 | `AuraMask` | Update values sent in a relatively complex format. See [AuraMask](aura-mask.md). | - |
 | `Bool` | `u8` where `0` is false and any other value is `true`. Can be substituted by a `u8`. | - |
+| `DateTime` | `u32` that represents a custom bitmask for date and time. See [the DateTime section](#datetime)| - |
+
+### DateTime
+
+`u32` in the format of `years_after_2000 << 24 | month << 20 | month_day << 14 | weekday << 11 | hours << 6 | minutes`.
+
+All values start on 0, and `weekday` starts on Sunday.
 
 ### Arrays
 

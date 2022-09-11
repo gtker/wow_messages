@@ -174,6 +174,10 @@ impl TestCase {
                     value: value.parse().unwrap(),
                     original_string: value.clone(),
                 },
+                Type::DateTime => TestValue::DateTime(VerifiedContainerValue::new(
+                    parse_value(&value).unwrap(),
+                    value.clone(),
+                )),
                 Type::Integer(_) => TestValue::Number(VerifiedContainerValue::new(
                     parse_value(&value).unwrap(),
                     value.clone(),
@@ -284,6 +288,7 @@ impl TestUpdateMaskValue {
 pub enum TestValue {
     Number(VerifiedContainerValue),
     Bool(bool),
+    DateTime(VerifiedContainerValue),
     Guid(VerifiedContainerValue),
     FloatingNumber {
         value: f64,

@@ -301,6 +301,9 @@ fn print_value(
         TestValue::Number(i) => {
             s.wln_no_indent(format!("{:#X},", i.value()));
         }
+        TestValue::DateTime(i) => {
+            s.wln_no_indent(format!("DateTime::from_int({:#X}),", i.value()));
+        }
         TestValue::Bool(b) => {
             s.wln_no_indent(format!("{}, ", b));
         }

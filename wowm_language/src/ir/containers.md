@@ -31,7 +31,7 @@ They contain:
 
 * `name`, the variable name of the definition.
 * `member_type`, the type of the definition, contains:
-    * `type`, either `integer`, `packed_guid`, `guid`, `floating_point`, `cstring`, `sized_cstring`, `string`, `array`, `identifier`, `update_mask`, or `aura_mask`.
+    * `type`, either `integer`, `packed_guid`, `guid`, `floating_point`, `cstring`, `sized_cstring`, `string`, `array`, `identifier`, `update_mask`, `bool`, `datetime` or `aura_mask`.
     * `content`, depends on the type.
 * `constant_value`, `null` if the field is not always supposed to have the same value. Otherwise it contains:
     * `value`, the constant value it should always be represented as.
@@ -52,6 +52,7 @@ The following types do not contain any `content`:
 * `update_mask`
 * `aura_mask`
 * `bool`
+* `datetime`
 
 
 ##### Integer
@@ -155,8 +156,10 @@ A specific value. It contains:
     * `sub_object`
     * `array_of_sub_object`
     * `update_mask`
+    * `bool`
+    * `datetime`
 * `content`, depending on `type`, if `type` is:
-    * `number`, `guid`, or `enum`:
+    * `number`, `guid`, `datetime`, or `enum`:
         * `value`, an integer of the value.
         * `original_string`, the original string from the Wowm file.
     * `floating_point`
