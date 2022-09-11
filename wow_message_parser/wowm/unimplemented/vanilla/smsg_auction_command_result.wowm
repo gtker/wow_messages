@@ -17,7 +17,7 @@ enum AuctionCommandResult : u32 {
         comment = "depends on enum AuctionAction";
     }
     ERR_INVENTORY = 1 {
-        comment = "depends on enum InventoryChangeResult";
+        comment = "depends on enum `InventoryChangeResult`";
     }
     ERR_DATABASE = 2 {
         comment = "ERR_AUCTION_DATABASE_ERROR (default)";

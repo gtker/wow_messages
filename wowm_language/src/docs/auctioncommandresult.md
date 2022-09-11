@@ -25,7 +25,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `OK` | 0 (0x00) |  | depends on enum AuctionAction |
-| `ERR_INVENTORY` | 1 (0x01) |  | depends on enum InventoryChangeResult |
+| `ERR_INVENTORY` | 1 (0x01) |  | depends on enum `InventoryChangeResult` |
 | `ERR_DATABASE` | 2 (0x02) |  | ERR_AUCTION_DATABASE_ERROR (default) |
 | `ERR_NOT_ENOUGH_MONEY` | 3 (0x03) |  | ERR_NOT_ENOUGH_MONEY |
 | `ERR_ITEM_NOT_FOUND` | 4 (0x04) |  | ERR_ITEM_NOT_FOUND |

@@ -20,7 +20,7 @@ pub(crate) enum AuctionCommandResult {
     /// depends on enum AuctionAction
     ///
     Ok,
-    /// depends on enum InventoryChangeResult
+    /// depends on enum `InventoryChangeResult`
     ///
     ErrInventory,
     /// ERR_AUCTION_DATABASE_ERROR (default)

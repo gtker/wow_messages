@@ -4,7 +4,7 @@
 
 ### Comment
 
-mangoszero: in SMSG_SEND_MAIL_RESULT, 7-13 and 16+: 'Mail database error'
+mangoszero: in [SMSG_SEND_MAIL_RESULT](./smsg_send_mail_result.md), 7-13 and 16+: 'Mail database error'
 
 ### Wowm Representation
 

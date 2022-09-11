@@ -15,7 +15,7 @@ enum MailResult : u32 {
     ERR_TOO_MANY_ATTACHMENTS = 18;
     ERR_MAIL_ATTACHMENT_INVALID = 19;
 } {
-    comment = "mangoszero: in SMSG_SEND_MAIL_RESULT, 7-13 and 16+: 'Mail database error'";
+    comment = "mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'";
 }
 
 enum MailAction : u32 {
