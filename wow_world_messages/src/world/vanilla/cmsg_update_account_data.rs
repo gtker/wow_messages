@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L1):
 /// ```text
 /// cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
-///     u32 block;
+///     u32 data_type;
 ///     u32 unknown1;
 ///     u8[-] unknown2;
 /// }
@@ -15,7 +15,7 @@ use std::io::{Write, Read};
 pub struct CMSG_UPDATE_ACCOUNT_DATA {
     /// Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder.
     ///
-    pub block: u32,
+    pub data_type: u32,
     /// Seems to be equal to size of unknown2 for smaller messages. Perhaps uncompressed size?
     ///
     pub unknown1: u32,
@@ -30,8 +30,8 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // block: u32
-        w.write_all(&self.block.to_le_bytes())?;
+        // data_type: u32
+        w.write_all(&self.data_type.to_le_bytes())?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -44,15 +44,15 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        // block: u32
-        let block = crate::util::read_u32_le(r)?;
+        // data_type: u32
+        let data_type = crate::util::read_u32_le(r)?;
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
 
         // unknown2: u8[-]
         let mut current_size = {
-            4 // block: u32
+            4 // data_type: u32
             + 4 // unknown1: u32
         };
         let mut unknown2 = Vec::with_capacity(body_size as usize - current_size);
@@ -62,7 +62,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         }
 
         Ok(Self {
-            block,
+            data_type,
             unknown1,
             unknown2,
         })
@@ -74,7 +74,7 @@ impl crate::world::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
 
 impl CMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {
-        4 // block: u32
+        4 // data_type: u32
         + 4 // unknown1: u32
         + self.unknown2.len() * core::mem::size_of::<u8>() // unknown2: u8[-]
     }
@@ -96,7 +96,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_UPDATE_ACCOUNT_DATA0() {
         let expected = CMSG_UPDATE_ACCOUNT_DATA {
-            block: 0x6,
+            data_type: 0x6,
             unknown1: 0x0,
             unknown2: vec![ ],
         };
@@ -108,7 +108,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.block, expected.block);
+        assert_eq!(t.data_type, expected.data_type);
         assert_eq!(t.unknown1, expected.unknown1);
         assert_eq!(t.unknown2, expected.unknown2);
 
@@ -125,7 +125,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_UPDATE_ACCOUNT_DATA0() {
         let expected = CMSG_UPDATE_ACCOUNT_DATA {
-            block: 0x6,
+            data_type: 0x6,
             unknown1: 0x0,
             unknown2: vec![ ],
         };
@@ -137,7 +137,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.block, expected.block);
+        assert_eq!(t.data_type, expected.data_type);
         assert_eq!(t.unknown1, expected.unknown1);
         assert_eq!(t.unknown2, expected.unknown2);
 
@@ -154,7 +154,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_UPDATE_ACCOUNT_DATA0() {
         let expected = CMSG_UPDATE_ACCOUNT_DATA {
-            block: 0x6,
+            data_type: 0x6,
             unknown1: 0x0,
             unknown2: vec![ ],
         };
@@ -166,7 +166,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.block, expected.block);
+        assert_eq!(t.data_type, expected.data_type);
         assert_eq!(t.unknown1, expected.unknown1);
         assert_eq!(t.unknown2, expected.unknown2);
 
@@ -284,7 +284,7 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_UPDATE_ACCOUNT_DATA1() {
         let expected = CMSG_UPDATE_ACCOUNT_DATA {
-            block: 0x7,
+            data_type: 0x7,
             unknown1: 0x1418,
             unknown2: vec![ 0x78, 0x01, 0xBD, 0x57, 0xDB, 0x96, 0xAB, 0x28, 0x10,
                  0x7D, 0xE7, 0x2B, 0xFC, 0x04, 0xB5, 0x93, 0xB6, 0xF3, 0x48, 0x14,
@@ -402,7 +402,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.block, expected.block);
+        assert_eq!(t.data_type, expected.data_type);
         assert_eq!(t.unknown1, expected.unknown1);
         assert_eq!(t.unknown2, expected.unknown2);
 
@@ -419,7 +419,7 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_UPDATE_ACCOUNT_DATA1() {
         let expected = CMSG_UPDATE_ACCOUNT_DATA {
-            block: 0x7,
+            data_type: 0x7,
             unknown1: 0x1418,
             unknown2: vec![ 0x78, 0x01, 0xBD, 0x57, 0xDB, 0x96, 0xAB, 0x28, 0x10,
                  0x7D, 0xE7, 0x2B, 0xFC, 0x04, 0xB5, 0x93, 0xB6, 0xF3, 0x48, 0x14,
@@ -537,7 +537,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.block, expected.block);
+        assert_eq!(t.data_type, expected.data_type);
         assert_eq!(t.unknown1, expected.unknown1);
         assert_eq!(t.unknown2, expected.unknown2);
 
@@ -554,7 +554,7 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_UPDATE_ACCOUNT_DATA1() {
         let expected = CMSG_UPDATE_ACCOUNT_DATA {
-            block: 0x7,
+            data_type: 0x7,
             unknown1: 0x1418,
             unknown2: vec![ 0x78, 0x01, 0xBD, 0x57, 0xDB, 0x96, 0xAB, 0x28, 0x10,
                  0x7D, 0xE7, 0x2B, 0xFC, 0x04, 0xB5, 0x93, 0xB6, 0xF3, 0x48, 0x14,
@@ -672,7 +672,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_UPDATE_ACCOUNT_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.block, expected.block);
+        assert_eq!(t.data_type, expected.data_type);
         assert_eq!(t.unknown1, expected.unknown1);
         assert_eq!(t.unknown2, expected.unknown2);
 

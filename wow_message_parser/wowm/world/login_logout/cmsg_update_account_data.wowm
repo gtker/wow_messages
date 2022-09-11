@@ -1,5 +1,5 @@
 cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
-    u32 block {
+    u32 data_type {
         comment = "Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder.";
     }
     u32 unknown1 {
@@ -13,7 +13,7 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 
 cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 	u32 data_type {
-		comment = "You can check this against the CacheMask to find out if this is character-specific data or account-wide data";
+		comment = "You can check this against the [CacheMask] to find out if this is character-specific data or account-wide data";
 	}
 	u32 unix_time {
 		comment = "Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES";
@@ -30,7 +30,7 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 }
 
 test CMSG_UPDATE_ACCOUNT_DATA {
-    block = 6;
+    data_type = 6;
     unknown1 = 0;
     unknown2 = [];
 } [
@@ -43,7 +43,7 @@ test CMSG_UPDATE_ACCOUNT_DATA {
 }
 
 test CMSG_UPDATE_ACCOUNT_DATA {
-    block = 7;
+    data_type = 7;
     unknown1 = 0x1418;
     unknown2 = [
         0x78, 0x01,
