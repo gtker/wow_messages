@@ -841,6 +841,7 @@
 - [SMSG_TRIGGER_CINEMATIC](docs/smsg_trigger_cinematic.md)
 - [SMSG_TURN_IN_PETITION_RESULTS](docs/smsg_turn_in_petition_results.md)
 - [SMSG_TUTORIAL_FLAGS](docs/smsg_tutorial_flags.md)
+- [SMSG_UPDATE_ACCOUNT_DATA](docs/smsg_update_account_data.md)
 - [SMSG_UPDATE_ACCOUNT_DATA_COMPLETE](docs/smsg_update_account_data_complete.md)
 - [SMSG_UPDATE_AURA_DURATION](docs/smsg_update_aura_duration.md)
 - [SMSG_UPDATE_INSTANCE_OWNERSHIP](docs/smsg_update_instance_ownership.md)
