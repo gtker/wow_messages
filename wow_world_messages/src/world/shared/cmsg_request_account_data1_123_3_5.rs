@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Respond with SMSG_UPDATE_ACCOUNT_DATA
+/// Respond with [`SMSG_UPDATE_ACCOUNT_DATA`](crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA)
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm#L1):
 /// ```text

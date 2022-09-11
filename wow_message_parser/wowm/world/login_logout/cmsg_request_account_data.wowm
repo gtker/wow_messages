@@ -3,7 +3,7 @@ cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {
 		comment = "The type of account data being requested. You can check this against the CacheMask to know if this is character-specific data or account-wide data.";
 	}
 } {
-	comment = "Respond with SMSG_UPDATE_ACCOUNT_DATA";
+	comment = "Respond with [SMSG_UPDATE_ACCOUNT_DATA]";
 	versions = "1.12 3.3.5";
 }
 

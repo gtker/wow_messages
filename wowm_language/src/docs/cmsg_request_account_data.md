@@ -4,7 +4,7 @@
 
 ### Comment
 
-Respond with SMSG_UPDATE_ACCOUNT_DATA
+Respond with [SMSG_UPDATE_ACCOUNT_DATA](./smsg_update_account_data.md)
 
 ### Wowm Representation
 

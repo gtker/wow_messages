@@ -125,7 +125,7 @@ CMSG have a header of 6 bytes.
 
 ### Comment
 
-Respond with SMSG_UPDATE_ACCOUNT_DATA_COMPLETE
+Respond with [SMSG_UPDATE_ACCOUNT_DATA_COMPLETE](./smsg_update_account_data_complete.md)
 
 ### Wowm Representation
 
