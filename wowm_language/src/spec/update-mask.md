@@ -1,7 +1,5 @@
 # UpdateMask
 
-**NOT VALID FOR ALL VERSIONS. ONLY KNOWN VALID FOR 1.12.**
-
 An UpdateMask is a variable length way of sending known fields to the client.
 It is represented by a byte mask that decides which fields are sent afterwards.
 
@@ -37,7 +35,11 @@ bit = 36 % 32 = 4
 
 We do this for every field.
 
-After the mask blocks we simply send the data in the order of their offsets.
+We then send, in order:
+
+1. A `u8` with the amount of mask bytes.
+2. The mask bytes as `u32`s.
+3. The data values as `u32`s.
 
 
 ## Lookup Table
