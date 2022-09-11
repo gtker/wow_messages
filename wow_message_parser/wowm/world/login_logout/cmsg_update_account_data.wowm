@@ -12,21 +12,21 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 }
 
 cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
-	u32 data_type {
-		comment = "You can check this against the [CacheMask] to find out if this is character-specific data or account-wide data";
-	}
-	u32 unix_time {
-		comment = "Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES";
-	}
-	u32 decompressed_size {
-		comment = "Size of the data block when it is uncompressed. (in bytes)";
-	}
-	u8[-] compressed_data {
-		comment = "Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage";
-	}
+    u32 data_type {
+        comment = "You can check this against the [CacheMask] to find out if this is character-specific data or account-wide data";
+    }
+    u32 unix_time {
+        comment = "Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES";
+    }
+    u32 decompressed_size {
+        comment = "Size of the data block when it is uncompressed. (in bytes)";
+    }
+    u8[-] compressed_data {
+        comment = "Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage";
+    }
 } {
-	comment = "Respond with [SMSG_UPDATE_ACCOUNT_DATA_COMPLETE]";
-	versions = "3.3.5";
+    comment = "Respond with [SMSG_UPDATE_ACCOUNT_DATA_COMPLETE]";
+    versions = "3.3.5";
 }
 
 test CMSG_UPDATE_ACCOUNT_DATA {
@@ -39,7 +39,7 @@ test CMSG_UPDATE_ACCOUNT_DATA {
   0x06, 0x00, 0x00, 0x00, /* block */
   0x00, 0x00, 0x00, 0x00 /* unknown1 */
 ] {
-	versions = "1.12";
+    versions = "1.12";
 }
 
 test CMSG_UPDATE_ACCOUNT_DATA {
@@ -349,5 +349,5 @@ test CMSG_UPDATE_ACCOUNT_DATA {
   0xcf, 0xff, 0x1e, 0xbe, 0x7f, 0x01, 0x34, 0x99,
   0x02, 0x24
 ] {
-	versions = "1.12";
+    versions = "1.12";
 } 

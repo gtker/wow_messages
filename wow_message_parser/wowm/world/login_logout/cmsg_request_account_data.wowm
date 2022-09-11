@@ -1,10 +1,10 @@
 cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {
-	u32 data_type {
-		comment = "The type of account data being requested. You can check this against the [CacheMask] to know if this is character-specific data or account-wide data.";
-	}
+    u32 data_type {
+        comment = "The type of account data being requested. You can check this against the [CacheMask] to know if this is character-specific data or account-wide data.";
+    }
 } {
-	comment = "Respond with [SMSG_UPDATE_ACCOUNT_DATA]";
-	versions = "1.12 3.3.5";
+    comment = "Respond with [SMSG_UPDATE_ACCOUNT_DATA]";
+    versions = "1.12 3.3.5";
 }
 
 test CMSG_REQUEST_ACCOUNT_DATA {
@@ -14,5 +14,5 @@ test CMSG_REQUEST_ACCOUNT_DATA {
   0x0a, 0x02, 0x00, 0x00, /* opcode */
   0x06, 0x00, 0x00, 0x00, /* block */
 ] {
-	versions = "1.12 3.3.5";
+    versions = "1.12 3.3.5";
 } 

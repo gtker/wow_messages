@@ -1,9 +1,9 @@
 smsg SMSG_UPDATE_ACCOUNT_DATA = 0x20C {
-	u32 data_type;
-	u32 decompressed_size;
-	u8[-] compressed_data;
+    u32 data_type;
+    u32 decompressed_size;
+    u8[-] compressed_data;
 } {
-	comment = "Sent as response to [CMSG_REQUEST_ACCOUNT_DATA]";
-	versions = "3.3.5";
+    comment = "Sent as response to [CMSG_REQUEST_ACCOUNT_DATA]";
+    versions = "3.3.5";
 }
 
