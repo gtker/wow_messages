@@ -9,6 +9,8 @@
 * Add support for a || b || c.d (`MovementInfo` wrath)
 * Add support for if a & A { if b & B } (`MovementInfo` wrath)
 * Add support for if on flags/enums inside structs in order to deduplicate SMSG_UPDATE_OBJECT MovementInfo nonsense
+* Add support for messages with compression (`SMSG_COMPRESSED_MOVES`, `SMSG_COMPRESSED_UPDATE_OBJECT`
+  , `SMSG_ADDON_INFO`)
 
 # Low Priority
 
