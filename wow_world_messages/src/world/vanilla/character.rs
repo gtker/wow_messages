@@ -30,7 +30,7 @@ use std::io::{Write, Read};
 ///     Vector3d position;
 ///     u32 guild_id;
 ///     CharacterFlags flags;
-///     u8 first_login;
+///     Bool first_login;
 ///     u32 pet_display_id;
 ///     u32 pet_level;
 ///     u32 pet_family;
@@ -56,7 +56,7 @@ pub struct Character {
     pub position: Vector3d,
     pub guild_id: u32,
     pub flags: CharacterFlags,
-    pub first_login: u8,
+    pub first_login: bool,
     pub pet_display_id: u32,
     pub pet_level: u32,
     pub pet_family: u32,
@@ -140,8 +140,8 @@ impl Character {
         // flags: CharacterFlags
         w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
 
-        // first_login: u8
-        w.write_all(&self.first_login.to_le_bytes())?;
+        // first_login: Bool
+        w.write_all(if self.first_login { &[1] } else { &[0] })?;
 
         // pet_display_id: u32
         w.write_all(&self.pet_display_id.to_le_bytes())?;
@@ -218,9 +218,8 @@ impl Character {
         // flags: CharacterFlags
         let flags = CharacterFlags::new(crate::util::read_u32_le(r)?);
 
-        // first_login: u8
-        let first_login = crate::util::read_u8_le(r)?;
-
+        // first_login: Bool
+        let first_login = crate::util::read_u8_le(r)? != 0;
         // pet_display_id: u32
         let pet_display_id = crate::util::read_u32_le(r)?;
 
@@ -289,7 +288,7 @@ impl Character {
         + 12 // position: Vector3d
         + 4 // guild_id: u32
         + 4 // flags: CharacterFlags
-        + 1 // first_login: u8
+        + 1 // first_login: Bool
         + 4 // pet_display_id: u32
         + 4 // pet_level: u32
         + 4 // pet_family: u32

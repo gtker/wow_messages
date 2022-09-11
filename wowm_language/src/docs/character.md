@@ -23,7 +23,7 @@ struct Character {
     Vector3d position;
     u32 guild_id;
     CharacterFlags flags;
-    u8 first_login;
+    Bool first_login;
     u32 pet_display_id;
     u32 pet_level;
     u32 pet_family;
@@ -52,7 +52,7 @@ struct Character {
 | - | ? / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | u32 | guild_id |  |  |
 | - | ? / - | [CharacterFlags](characterflags.md) | flags |  |  |
-| - | 1 / - | u8 | first_login |  |  |
+| - | 1 / - | Bool | first_login |  |  |
 | - | 4 / Little | u32 | pet_display_id |  |  |
 | - | 4 / Little | u32 | pet_level |  |  |
 | - | 4 / Little | u32 | pet_family |  |  |

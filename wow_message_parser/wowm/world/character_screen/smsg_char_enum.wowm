@@ -31,7 +31,7 @@ struct Character {
     Vector3d position;
     u32 guild_id;
     CharacterFlags flags;
-    u8 first_login;
+    Bool first_login;
     u32 pet_display_id;
     u32 pet_level;
     u32 pet_family;
