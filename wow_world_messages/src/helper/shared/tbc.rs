@@ -65,14 +65,14 @@ pub trait ServerMessage: Message {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_write_unencrypted_server<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
+    fn tokio_write_unencrypted_server<'s, 'w, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
+        's: 'async_trait,
+        'w: 'async_trait,
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
@@ -84,16 +84,16 @@ pub trait ServerMessage: Message {
     }
 
     #[cfg(all(feature = "tokio", feature = "encryption"))]
-    fn tokio_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-        e: &'life2 mut EncrypterHalf,
+    fn tokio_write_encrypted_server<'s, 'w, 'e, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+        e: &'e mut EncrypterHalf,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        'life2: 'async_trait,
+        's: 'async_trait,
+        'w: 'async_trait,
+        'e: 'async_trait,
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
@@ -105,14 +105,14 @@ pub trait ServerMessage: Message {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_write_unencrypted_server<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
+    fn astd_write_unencrypted_server<'s, 'w, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
+        's: 'async_trait,
+        'w: 'async_trait,
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
@@ -124,16 +124,16 @@ pub trait ServerMessage: Message {
     }
 
     #[cfg(all(feature = "async-std", feature = "encryption"))]
-    fn astd_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-        e: &'life2 mut EncrypterHalf,
+    fn astd_write_encrypted_server<'s, 'w, 'e, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+        e: &'e mut EncrypterHalf,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        'life2: 'async_trait,
+        's: 'async_trait,
+        'w: 'async_trait,
+        'e: 'async_trait,
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
@@ -174,14 +174,14 @@ pub trait ClientMessage: Message {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_write_unencrypted_client<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
+    fn tokio_write_unencrypted_client<'s, 'w, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
+        's: 'async_trait,
+        'w: 'async_trait,
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
@@ -193,16 +193,16 @@ pub trait ClientMessage: Message {
     }
 
     #[cfg(all(feature = "encryption", feature = "tokio"))]
-    fn tokio_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-        e: &'life2 mut EncrypterHalf,
+    fn tokio_write_encrypted_client<'s, 'w, 'e, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+        e: &'e mut EncrypterHalf,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        'life2: 'async_trait,
+        's: 'async_trait,
+        'w: 'async_trait,
+        'e: 'async_trait,
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
@@ -214,14 +214,14 @@ pub trait ClientMessage: Message {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_write_unencrypted_client<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
+    fn astd_write_unencrypted_client<'s, 'w, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
+        's: 'async_trait,
+        'w: 'async_trait,
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
@@ -233,16 +233,16 @@ pub trait ClientMessage: Message {
     }
 
     #[cfg(all(feature = "async-std", feature = "encryption"))]
-    fn astd_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-        e: &'life2 mut EncrypterHalf,
+    fn astd_write_encrypted_client<'s, 'w, 'e, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+        e: &'e mut EncrypterHalf,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        'life2: 'async_trait,
+        's: 'async_trait,
+        'w: 'async_trait,
+        'e: 'async_trait,
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
