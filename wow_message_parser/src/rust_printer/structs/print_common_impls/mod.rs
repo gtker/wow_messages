@@ -156,8 +156,8 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
             format!("{prefix}{name}.len() + 5", name = m.name(), prefix = prefix)
         }
         RustType::Struct { sizes, .. } => {
-            if sizes.is_constant() {
-                format!("{}", sizes.maximum())
+            if let Some(size) = sizes.is_constant() {
+                format!("{}", size)
             } else {
                 format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
             }
@@ -180,7 +180,7 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
         RustType::Array {
             array, inner_sizes, ..
         } => {
-            let inner_is_constant = inner_sizes.is_constant();
+            let inner_is_constant = inner_sizes.is_constant().is_some();
             match array.ty() {
                 ArrayType::Integer(integer_type) => match array.size() {
                     ArraySize::Fixed(fixed_value) => format!(

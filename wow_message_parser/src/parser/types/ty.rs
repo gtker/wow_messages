@@ -183,8 +183,8 @@ impl Type {
                 if let Some(upcast) = upcast {
                     upcast.size().to_string()
                 } else {
-                    if sizes.is_constant() {
-                        sizes.maximum().to_string()
+                    if let Some(size) = sizes.is_constant() {
+                        size.to_string()
                     } else {
                         "-".to_string()
                     }

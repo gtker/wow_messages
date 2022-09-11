@@ -181,7 +181,7 @@ impl Writer {
         self.newline();
 
         self.open_curly("fn size_without_header(&self) -> u32");
-        if sizes.is_some() && sizes.unwrap().is_constant() {
+        if sizes.is_some() && sizes.unwrap().is_constant().is_some() {
             self.wln(format!("{}", sizes.unwrap().maximum()));
         } else {
             self.wln("self.size() as u32");
@@ -318,8 +318,8 @@ impl Writer {
     }
 
     fn call_as_bytes(&mut self, it: ImplType, sizes: Sizes) {
-        let size = if sizes.is_constant() {
-            sizes.maximum().to_string()
+        let size = if let Some(size) = sizes.is_constant() {
+            size.to_string()
         } else {
             "self.size() + 1".to_string()
         };

@@ -558,8 +558,8 @@ fn print_container_field(
                             Some(offset.unwrap() + upcast.size() as usize)
                         } else {
                             let sizes = o.get_object(s, tags).sizes();
-                            if sizes.is_constant() {
-                                Some(offset.unwrap() + sizes.maximum())
+                            if let Some(size) = sizes.is_constant() {
+                                Some(offset.unwrap() + size)
                             } else {
                                 None
                             }

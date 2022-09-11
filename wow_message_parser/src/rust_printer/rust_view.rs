@@ -42,7 +42,7 @@ impl RustMember {
         &self.tags
     }
     pub fn constant_sized(&self) -> bool {
-        self.sizes.is_constant()
+        self.sizes.is_constant().is_some()
     }
     pub fn sizes(&self) -> Sizes {
         self.sizes
@@ -382,13 +382,13 @@ impl RustEnumerator {
                         return false;
                     }
                     _ => {
-                        if !inner_sizes.is_constant() {
+                        if !inner_sizes.is_constant().is_some() {
                             return false;
                         }
                     }
                 },
                 RustType::Struct { sizes, .. } => {
-                    if !sizes.is_constant() {
+                    if !sizes.is_constant().is_some() {
                         return false;
                     }
                 }
@@ -578,7 +578,7 @@ impl RustObject {
         &self.file_info
     }
     pub fn constant_sized(&self) -> bool {
-        self.sizes().is_constant()
+        self.sizes().is_constant().is_some()
     }
     pub fn sizes(&self) -> Sizes {
         self.sizes

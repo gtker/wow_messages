@@ -265,7 +265,7 @@ impl Container {
     }
 
     pub fn is_constant_sized(&self) -> bool {
-        self.sizes.unwrap().is_constant()
+        self.sizes.unwrap().is_constant().is_some()
     }
 
     pub fn only_has_io_errors(&self) -> bool {
@@ -1285,8 +1285,12 @@ impl Sizes {
         self.minimum = minimum;
     }
 
-    pub fn is_constant(&self) -> bool {
-        self.minimum == self.maximum
+    pub fn is_constant(&self) -> Option<usize> {
+        if self.minimum == self.maximum {
+            Some(self.maximum())
+        } else {
+            None
+        }
     }
 }
 
