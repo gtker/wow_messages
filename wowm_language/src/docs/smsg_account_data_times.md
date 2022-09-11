@@ -58,7 +58,7 @@ Zeroed out message needed for showing chat box.
 
 ### Comment
 
-Indicate when each piece of account data was last updated by a CMSG_UPDATE_ACCOUNT_DATA. The client can check this against its own times to detect that more recent account data was written from a different client.
+Indicate when each piece of account data was last updated by a [CMSG_UPDATE_ACCOUNT_DATA](./cmsg_update_account_data.md). The client can check this against its own times to detect that more recent account data was written from a different client.
 
 ### Wowm Representation
 
