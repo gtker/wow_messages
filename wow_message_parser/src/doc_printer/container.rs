@@ -568,6 +568,12 @@ fn print_container_body(s: &mut DocWriter, e: &Container) {
     s.wln("### Body");
     s.newline();
 
+    if e.tags().unimplemented() {
+        s.wln("The body for this message has not been implemented yet.");
+        s.newline();
+        return;
+    }
+
     if e.fields().is_empty() {
         s.wln("This message has no fields in the body.");
         s.newline();

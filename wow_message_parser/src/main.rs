@@ -141,12 +141,10 @@ fn main() {
             }
         }
 
-        if !e.tags().unimplemented() {
-            match &e {
-                Object::Container(e) => object_docs.push(print_docs_for_container(e, &o)),
-                Object::Enum(e) => definer_docs.push(print_docs_for_enum(e)),
-                Object::Flag(e) => definer_docs.push(print_docs_for_flag(e)),
-            }
+        match &e {
+            Object::Container(e) => object_docs.push(print_docs_for_container(e, &o)),
+            Object::Enum(e) => definer_docs.push(print_docs_for_enum(e)),
+            Object::Flag(e) => definer_docs.push(print_docs_for_flag(e)),
         }
     }
 

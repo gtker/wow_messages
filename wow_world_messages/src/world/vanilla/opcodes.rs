@@ -295,6 +295,7 @@ use crate::world::vanilla::MSG_PVP_LOG_DATA_Client;
 use crate::world::vanilla::CMSG_LEAVE_BATTLEFIELD;
 use crate::world::vanilla::CMSG_AREA_SPIRIT_HEALER_QUERY;
 use crate::world::vanilla::CMSG_AREA_SPIRIT_HEALER_QUEUE;
+use crate::world::vanilla::CMSG_WARDEN_DATA;
 use crate::world::vanilla::MSG_BATTLEGROUND_PLAYER_POSITIONS_Client;
 use crate::world::vanilla::CMSG_PET_STOP_ATTACK;
 use crate::world::vanilla::CMSG_BATTLEMASTER_JOIN;
@@ -603,6 +604,7 @@ pub enum ClientOpcodeMessage {
     CMSG_LEAVE_BATTLEFIELD(CMSG_LEAVE_BATTLEFIELD),
     CMSG_AREA_SPIRIT_HEALER_QUERY(CMSG_AREA_SPIRIT_HEALER_QUERY),
     CMSG_AREA_SPIRIT_HEALER_QUEUE(CMSG_AREA_SPIRIT_HEALER_QUEUE),
+    CMSG_WARDEN_DATA(CMSG_WARDEN_DATA),
     MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Client),
     CMSG_PET_STOP_ATTACK(CMSG_PET_STOP_ATTACK),
     CMSG_BATTLEMASTER_JOIN(CMSG_BATTLEMASTER_JOIN),
@@ -913,6 +915,7 @@ impl ClientOpcodeMessage {
             0x02E1 => Ok(Self::CMSG_LEAVE_BATTLEFIELD(<CMSG_LEAVE_BATTLEFIELD as crate::Message>::read_body(&mut r, body_size)?)),
             0x02E2 => Ok(Self::CMSG_AREA_SPIRIT_HEALER_QUERY(<CMSG_AREA_SPIRIT_HEALER_QUERY as crate::Message>::read_body(&mut r, body_size)?)),
             0x02E3 => Ok(Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(<CMSG_AREA_SPIRIT_HEALER_QUEUE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02E7 => Ok(Self::CMSG_WARDEN_DATA(<CMSG_WARDEN_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x02EA => Ok(Self::CMSG_PET_STOP_ATTACK(<CMSG_PET_STOP_ATTACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x02EE => Ok(Self::CMSG_BATTLEMASTER_JOIN(<CMSG_BATTLEMASTER_JOIN as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1291,6 +1294,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_WARDEN_DATA(c) => c.write_encrypted_client(w, e),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_STOP_ATTACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_encrypted_client(w, e),
@@ -1602,6 +1606,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.write_unencrypted_client(w),
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_WARDEN_DATA(c) => c.write_unencrypted_client(w),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_STOP_ATTACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_unencrypted_client(w),
@@ -1913,6 +1918,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_WARDEN_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2224,6 +2230,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_WARDEN_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2535,6 +2542,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_WARDEN_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2846,6 +2854,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_WARDEN_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_unencrypted_client(w).await,
@@ -3190,6 +3199,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_LEAVE_BATTLEFIELD(_) => "CMSG_LEAVE_BATTLEFIELD",
             ClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUERY(_) => "CMSG_AREA_SPIRIT_HEALER_QUERY",
             ClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUEUE(_) => "CMSG_AREA_SPIRIT_HEALER_QUEUE",
+            ClientOpcodeMessage::CMSG_WARDEN_DATA(_) => "CMSG_WARDEN_DATA",
             ClientOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Client",
             ClientOpcodeMessage::CMSG_PET_STOP_ATTACK(_) => "CMSG_PET_STOP_ATTACK",
             ClientOpcodeMessage::CMSG_BATTLEMASTER_JOIN(_) => "CMSG_BATTLEMASTER_JOIN",
@@ -4944,6 +4954,12 @@ impl From<CMSG_AREA_SPIRIT_HEALER_QUEUE> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_WARDEN_DATA> for ClientOpcodeMessage {
+    fn from(c: CMSG_WARDEN_DATA) -> Self {
+        Self::CMSG_WARDEN_DATA(c)
+    }
+}
+
 impl From<MSG_BATTLEGROUND_PLAYER_POSITIONS_Client> for ClientOpcodeMessage {
     fn from(c: MSG_BATTLEGROUND_PLAYER_POSITIONS_Client) -> Self {
         Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c)
@@ -5240,6 +5256,7 @@ use crate::world::vanilla::SMSG_AUTH_RESPONSE;
 use crate::world::vanilla::MSG_SAVE_GUILD_EMBLEM_Server;
 use crate::world::vanilla::SMSG_PLAY_SPELL_VISUAL;
 use crate::world::vanilla::SMSG_PARTYKILLLOG;
+use crate::world::vanilla::SMSG_COMPRESSED_UPDATE_OBJECT;
 use crate::world::vanilla::SMSG_PLAY_SPELL_IMPACT;
 use crate::world::vanilla::SMSG_EXPLORATION_EXPERIENCE;
 use crate::world::vanilla::MSG_RANDOM_ROLL_Server;
@@ -5332,15 +5349,18 @@ use crate::world::vanilla::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE;
 use crate::world::vanilla::SMSG_FORCE_TURN_RATE_CHANGE;
 use crate::world::vanilla::MSG_PVP_LOG_DATA_Server;
 use crate::world::vanilla::SMSG_AREA_SPIRIT_HEALER_TIME;
+use crate::world::vanilla::SMSG_WARDEN_DATA;
 use crate::world::vanilla::SMSG_GROUP_JOINED_BATTLEGROUND;
 use crate::world::vanilla::MSG_BATTLEGROUND_PLAYER_POSITIONS_Server;
 use crate::world::vanilla::SMSG_BINDER_CONFIRM;
 use crate::world::vanilla::SMSG_BATTLEGROUND_PLAYER_JOINED;
 use crate::world::vanilla::SMSG_BATTLEGROUND_PLAYER_LEFT;
+use crate::world::vanilla::SMSG_ADDON_INFO;
 use crate::world::vanilla::SMSG_PET_UNLEARN_CONFIRM;
 use crate::world::vanilla::SMSG_PARTY_MEMBER_STATS_FULL;
 use crate::world::vanilla::SMSG_WEATHER;
 use crate::world::vanilla::SMSG_RAID_INSTANCE_MESSAGE;
+use crate::world::vanilla::SMSG_COMPRESSED_MOVES;
 use crate::world::vanilla::SMSG_CHAT_RESTRICTED;
 use crate::world::vanilla::SMSG_SPLINE_SET_RUN_SPEED;
 use crate::world::vanilla::SMSG_SPLINE_SET_RUN_BACK_SPEED;
@@ -5585,6 +5605,7 @@ pub enum ServerOpcodeMessage {
     MSG_SAVE_GUILD_EMBLEM(MSG_SAVE_GUILD_EMBLEM_Server),
     SMSG_PLAY_SPELL_VISUAL(SMSG_PLAY_SPELL_VISUAL),
     SMSG_PARTYKILLLOG(SMSG_PARTYKILLLOG),
+    SMSG_COMPRESSED_UPDATE_OBJECT(SMSG_COMPRESSED_UPDATE_OBJECT),
     SMSG_PLAY_SPELL_IMPACT(SMSG_PLAY_SPELL_IMPACT),
     SMSG_EXPLORATION_EXPERIENCE(SMSG_EXPLORATION_EXPERIENCE),
     MSG_RANDOM_ROLL(MSG_RANDOM_ROLL_Server),
@@ -5677,15 +5698,18 @@ pub enum ServerOpcodeMessage {
     SMSG_FORCE_TURN_RATE_CHANGE(SMSG_FORCE_TURN_RATE_CHANGE),
     MSG_PVP_LOG_DATA(MSG_PVP_LOG_DATA_Server),
     SMSG_AREA_SPIRIT_HEALER_TIME(SMSG_AREA_SPIRIT_HEALER_TIME),
+    SMSG_WARDEN_DATA(SMSG_WARDEN_DATA),
     SMSG_GROUP_JOINED_BATTLEGROUND(SMSG_GROUP_JOINED_BATTLEGROUND),
     MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Server),
     SMSG_BINDER_CONFIRM(SMSG_BINDER_CONFIRM),
     SMSG_BATTLEGROUND_PLAYER_JOINED(SMSG_BATTLEGROUND_PLAYER_JOINED),
     SMSG_BATTLEGROUND_PLAYER_LEFT(SMSG_BATTLEGROUND_PLAYER_LEFT),
+    SMSG_ADDON_INFO(SMSG_ADDON_INFO),
     SMSG_PET_UNLEARN_CONFIRM(SMSG_PET_UNLEARN_CONFIRM),
     SMSG_PARTY_MEMBER_STATS_FULL(SMSG_PARTY_MEMBER_STATS_FULL),
     SMSG_WEATHER(SMSG_WEATHER),
     SMSG_RAID_INSTANCE_MESSAGE(SMSG_RAID_INSTANCE_MESSAGE),
+    SMSG_COMPRESSED_MOVES(SMSG_COMPRESSED_MOVES),
     SMSG_CHAT_RESTRICTED(SMSG_CHAT_RESTRICTED),
     SMSG_SPLINE_SET_RUN_SPEED(SMSG_SPLINE_SET_RUN_SPEED),
     SMSG_SPLINE_SET_RUN_BACK_SPEED(SMSG_SPLINE_SET_RUN_BACK_SPEED),
@@ -5932,6 +5956,7 @@ impl ServerOpcodeMessage {
             0x01F1 => Ok(Self::MSG_SAVE_GUILD_EMBLEM(<MSG_SAVE_GUILD_EMBLEM_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x01F3 => Ok(Self::SMSG_PLAY_SPELL_VISUAL(<SMSG_PLAY_SPELL_VISUAL as crate::Message>::read_body(&mut r, body_size)?)),
             0x01F5 => Ok(Self::SMSG_PARTYKILLLOG(<SMSG_PARTYKILLLOG as crate::Message>::read_body(&mut r, body_size)?)),
+            0x01F6 => Ok(Self::SMSG_COMPRESSED_UPDATE_OBJECT(<SMSG_COMPRESSED_UPDATE_OBJECT as crate::Message>::read_body(&mut r, body_size)?)),
             0x01F7 => Ok(Self::SMSG_PLAY_SPELL_IMPACT(<SMSG_PLAY_SPELL_IMPACT as crate::Message>::read_body(&mut r, body_size)?)),
             0x01F8 => Ok(Self::SMSG_EXPLORATION_EXPERIENCE(<SMSG_EXPLORATION_EXPERIENCE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01FB => Ok(Self::MSG_RANDOM_ROLL(<MSG_RANDOM_ROLL_Server as crate::Message>::read_body(&mut r, body_size)?)),
@@ -6024,15 +6049,18 @@ impl ServerOpcodeMessage {
             0x02DE => Ok(Self::SMSG_FORCE_TURN_RATE_CHANGE(<SMSG_FORCE_TURN_RATE_CHANGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x02E0 => Ok(Self::MSG_PVP_LOG_DATA(<MSG_PVP_LOG_DATA_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x02E4 => Ok(Self::SMSG_AREA_SPIRIT_HEALER_TIME(<SMSG_AREA_SPIRIT_HEALER_TIME as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02E6 => Ok(Self::SMSG_WARDEN_DATA(<SMSG_WARDEN_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x02E8 => Ok(Self::SMSG_GROUP_JOINED_BATTLEGROUND(<SMSG_GROUP_JOINED_BATTLEGROUND as crate::Message>::read_body(&mut r, body_size)?)),
             0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x02EB => Ok(Self::SMSG_BINDER_CONFIRM(<SMSG_BINDER_CONFIRM as crate::Message>::read_body(&mut r, body_size)?)),
             0x02EC => Ok(Self::SMSG_BATTLEGROUND_PLAYER_JOINED(<SMSG_BATTLEGROUND_PLAYER_JOINED as crate::Message>::read_body(&mut r, body_size)?)),
             0x02ED => Ok(Self::SMSG_BATTLEGROUND_PLAYER_LEFT(<SMSG_BATTLEGROUND_PLAYER_LEFT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02EF => Ok(Self::SMSG_ADDON_INFO(<SMSG_ADDON_INFO as crate::Message>::read_body(&mut r, body_size)?)),
             0x02F1 => Ok(Self::SMSG_PET_UNLEARN_CONFIRM(<SMSG_PET_UNLEARN_CONFIRM as crate::Message>::read_body(&mut r, body_size)?)),
             0x02F2 => Ok(Self::SMSG_PARTY_MEMBER_STATS_FULL(<SMSG_PARTY_MEMBER_STATS_FULL as crate::Message>::read_body(&mut r, body_size)?)),
             0x02F4 => Ok(Self::SMSG_WEATHER(<SMSG_WEATHER as crate::Message>::read_body(&mut r, body_size)?)),
             0x02FA => Ok(Self::SMSG_RAID_INSTANCE_MESSAGE(<SMSG_RAID_INSTANCE_MESSAGE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02FB => Ok(Self::SMSG_COMPRESSED_MOVES(<SMSG_COMPRESSED_MOVES as crate::Message>::read_body(&mut r, body_size)?)),
             0x02FD => Ok(Self::SMSG_CHAT_RESTRICTED(<SMSG_CHAT_RESTRICTED as crate::Message>::read_body(&mut r, body_size)?)),
             0x02FE => Ok(Self::SMSG_SPLINE_SET_RUN_SPEED(<SMSG_SPLINE_SET_RUN_SPEED as crate::Message>::read_body(&mut r, body_size)?)),
             0x02FF => Ok(Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(<SMSG_SPLINE_SET_RUN_BACK_SPEED as crate::Message>::read_body(&mut r, body_size)?)),
@@ -6347,6 +6375,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PARTYKILLLOG(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_encrypted_server(w, e),
             Self::MSG_RANDOM_ROLL(c) => c.write_encrypted_server(w, e),
@@ -6439,15 +6468,18 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::MSG_PVP_LOG_DATA(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_WARDEN_DATA(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.write_encrypted_server(w, e),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BINDER_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ADDON_INFO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WEATHER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_COMPRESSED_MOVES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.write_encrypted_server(w, e),
@@ -6695,6 +6727,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.write_unencrypted_server(w),
             Self::SMSG_PARTYKILLLOG(c) => c.write_unencrypted_server(w),
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.write_unencrypted_server(w),
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_unencrypted_server(w),
             Self::MSG_RANDOM_ROLL(c) => c.write_unencrypted_server(w),
@@ -6787,15 +6820,18 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.write_unencrypted_server(w),
             Self::MSG_PVP_LOG_DATA(c) => c.write_unencrypted_server(w),
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.write_unencrypted_server(w),
+            Self::SMSG_WARDEN_DATA(c) => c.write_unencrypted_server(w),
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.write_unencrypted_server(w),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_server(w),
             Self::SMSG_BINDER_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ADDON_INFO(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.write_unencrypted_server(w),
             Self::SMSG_WEATHER(c) => c.write_unencrypted_server(w),
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_COMPRESSED_MOVES(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.write_unencrypted_server(w),
@@ -7043,6 +7079,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PARTYKILLLOG(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7135,15 +7172,18 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_PVP_LOG_DATA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_WARDEN_DATA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ADDON_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WEATHER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_COMPRESSED_MOVES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7391,6 +7431,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PARTYKILLLOG(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7483,15 +7524,18 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_PVP_LOG_DATA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_WARDEN_DATA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ADDON_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WEATHER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_COMPRESSED_MOVES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7739,6 +7783,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PARTYKILLLOG(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7831,15 +7876,18 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_PVP_LOG_DATA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_WARDEN_DATA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ADDON_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WEATHER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_COMPRESSED_MOVES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8087,6 +8135,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PARTYKILLLOG(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_unencrypted_server(w).await,
@@ -8179,15 +8228,18 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_PVP_LOG_DATA(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_WARDEN_DATA(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ADDON_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WEATHER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_COMPRESSED_MOVES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.astd_write_unencrypted_server(w).await,
@@ -8437,6 +8489,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_SAVE_GUILD_EMBLEM(_) => "MSG_SAVE_GUILD_EMBLEM_Server",
             ServerOpcodeMessage::SMSG_PLAY_SPELL_VISUAL(_) => "SMSG_PLAY_SPELL_VISUAL",
             ServerOpcodeMessage::SMSG_PARTYKILLLOG(_) => "SMSG_PARTYKILLLOG",
+            ServerOpcodeMessage::SMSG_COMPRESSED_UPDATE_OBJECT(_) => "SMSG_COMPRESSED_UPDATE_OBJECT",
             ServerOpcodeMessage::SMSG_PLAY_SPELL_IMPACT(_) => "SMSG_PLAY_SPELL_IMPACT",
             ServerOpcodeMessage::SMSG_EXPLORATION_EXPERIENCE(_) => "SMSG_EXPLORATION_EXPERIENCE",
             ServerOpcodeMessage::MSG_RANDOM_ROLL(_) => "MSG_RANDOM_ROLL_Server",
@@ -8529,15 +8582,18 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_FORCE_TURN_RATE_CHANGE(_) => "SMSG_FORCE_TURN_RATE_CHANGE",
             ServerOpcodeMessage::MSG_PVP_LOG_DATA(_) => "MSG_PVP_LOG_DATA_Server",
             ServerOpcodeMessage::SMSG_AREA_SPIRIT_HEALER_TIME(_) => "SMSG_AREA_SPIRIT_HEALER_TIME",
+            ServerOpcodeMessage::SMSG_WARDEN_DATA(_) => "SMSG_WARDEN_DATA",
             ServerOpcodeMessage::SMSG_GROUP_JOINED_BATTLEGROUND(_) => "SMSG_GROUP_JOINED_BATTLEGROUND",
             ServerOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Server",
             ServerOpcodeMessage::SMSG_BINDER_CONFIRM(_) => "SMSG_BINDER_CONFIRM",
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_JOINED(_) => "SMSG_BATTLEGROUND_PLAYER_JOINED",
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_LEFT(_) => "SMSG_BATTLEGROUND_PLAYER_LEFT",
+            ServerOpcodeMessage::SMSG_ADDON_INFO(_) => "SMSG_ADDON_INFO",
             ServerOpcodeMessage::SMSG_PET_UNLEARN_CONFIRM(_) => "SMSG_PET_UNLEARN_CONFIRM",
             ServerOpcodeMessage::SMSG_PARTY_MEMBER_STATS_FULL(_) => "SMSG_PARTY_MEMBER_STATS_FULL",
             ServerOpcodeMessage::SMSG_WEATHER(_) => "SMSG_WEATHER",
             ServerOpcodeMessage::SMSG_RAID_INSTANCE_MESSAGE(_) => "SMSG_RAID_INSTANCE_MESSAGE",
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(_) => "SMSG_COMPRESSED_MOVES",
             ServerOpcodeMessage::SMSG_CHAT_RESTRICTED(_) => "SMSG_CHAT_RESTRICTED",
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(_) => "SMSG_SPLINE_SET_RUN_SPEED",
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_BACK_SPEED(_) => "SMSG_SPLINE_SET_RUN_BACK_SPEED",
@@ -9808,6 +9864,12 @@ impl From<SMSG_PARTYKILLLOG> for ServerOpcodeMessage {
     }
 }
 
+impl From<SMSG_COMPRESSED_UPDATE_OBJECT> for ServerOpcodeMessage {
+    fn from(c: SMSG_COMPRESSED_UPDATE_OBJECT) -> Self {
+        Self::SMSG_COMPRESSED_UPDATE_OBJECT(c)
+    }
+}
+
 impl From<SMSG_PLAY_SPELL_IMPACT> for ServerOpcodeMessage {
     fn from(c: SMSG_PLAY_SPELL_IMPACT) -> Self {
         Self::SMSG_PLAY_SPELL_IMPACT(c)
@@ -10360,6 +10422,12 @@ impl From<SMSG_AREA_SPIRIT_HEALER_TIME> for ServerOpcodeMessage {
     }
 }
 
+impl From<SMSG_WARDEN_DATA> for ServerOpcodeMessage {
+    fn from(c: SMSG_WARDEN_DATA) -> Self {
+        Self::SMSG_WARDEN_DATA(c)
+    }
+}
+
 impl From<SMSG_GROUP_JOINED_BATTLEGROUND> for ServerOpcodeMessage {
     fn from(c: SMSG_GROUP_JOINED_BATTLEGROUND) -> Self {
         Self::SMSG_GROUP_JOINED_BATTLEGROUND(c)
@@ -10390,6 +10458,12 @@ impl From<SMSG_BATTLEGROUND_PLAYER_LEFT> for ServerOpcodeMessage {
     }
 }
 
+impl From<SMSG_ADDON_INFO> for ServerOpcodeMessage {
+    fn from(c: SMSG_ADDON_INFO) -> Self {
+        Self::SMSG_ADDON_INFO(c)
+    }
+}
+
 impl From<SMSG_PET_UNLEARN_CONFIRM> for ServerOpcodeMessage {
     fn from(c: SMSG_PET_UNLEARN_CONFIRM) -> Self {
         Self::SMSG_PET_UNLEARN_CONFIRM(c)
@@ -10411,6 +10485,12 @@ impl From<SMSG_WEATHER> for ServerOpcodeMessage {
 impl From<SMSG_RAID_INSTANCE_MESSAGE> for ServerOpcodeMessage {
     fn from(c: SMSG_RAID_INSTANCE_MESSAGE) -> Self {
         Self::SMSG_RAID_INSTANCE_MESSAGE(c)
+    }
+}
+
+impl From<SMSG_COMPRESSED_MOVES> for ServerOpcodeMessage {
+    fn from(c: SMSG_COMPRESSED_MOVES) -> Self {
+        Self::SMSG_COMPRESSED_MOVES(c)
     }
 }
 

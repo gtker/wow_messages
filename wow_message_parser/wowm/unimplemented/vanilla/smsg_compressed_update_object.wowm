@@ -1,0 +1,5 @@
+smsg SMSG_COMPRESSED_UPDATE_OBJECT = 0x1F6 {
+    unimplemented
+} {
+    versions = "1.12";
+}

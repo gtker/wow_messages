@@ -662,7 +662,7 @@ pub fn stats_for_1_12(o: &Objects) {
                 _ => panic!("invalid for counting"),
             }
 
-            container.definition = true;
+            container.definition = !s.tags().unimplemented();
             container.tests = s.tests().len();
         }
     }

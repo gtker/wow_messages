@@ -105,8 +105,12 @@ pub fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String {
 
     s.inc();
 
-    for field in e.fields() {
-        print_members(&mut s, e, field);
+    if e.tags().unimplemented() {
+        s.wln("unimplemented");
+    } else {
+        for field in e.fields() {
+            print_members(&mut s, e, field);
+        }
     }
 
     s.dec();
