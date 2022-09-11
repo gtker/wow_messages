@@ -9,13 +9,13 @@ use std::io::{Write, Read};
 /// smsg SMSG_UPDATE_ACCOUNT_DATA = 0x020C {
 ///     u32 data_type;
 ///     u32 decompressed_size;
-///     u32[-] compressed_data;
+///     u8[-] compressed_data;
 /// }
 /// ```
 pub struct SMSG_UPDATE_ACCOUNT_DATA {
     pub data_type: u32,
     pub decompressed_size: u32,
-    pub compressed_data: Vec<u32>,
+    pub compressed_data: Vec<u8>,
 }
 
 impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
@@ -32,7 +32,7 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
         // decompressed_size: u32
         w.write_all(&self.decompressed_size.to_le_bytes())?;
 
-        // compressed_data: u32[-]
+        // compressed_data: u8[-]
         for i in self.compressed_data.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
@@ -46,14 +46,14 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
         // decompressed_size: u32
         let decompressed_size = crate::util::read_u32_le(r)?;
 
-        // compressed_data: u32[-]
+        // compressed_data: u8[-]
         let mut current_size = {
             4 // data_type: u32
             + 4 // decompressed_size: u32
         };
         let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
-            compressed_data.push(crate::util::read_u32_le(r)?);
+            compressed_data.push(crate::util::read_u8_le(r)?);
             current_size += 1;
         }
 
@@ -72,7 +72,7 @@ impl SMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {
         4 // data_type: u32
         + 4 // decompressed_size: u32
-        + self.compressed_data.len() * core::mem::size_of::<u32>() // compressed_data: u32[-]
+        + self.compressed_data.len() * core::mem::size_of::<u8>() // compressed_data: u8[-]
     }
 }
 

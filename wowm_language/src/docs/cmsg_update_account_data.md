@@ -51,7 +51,7 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
     u32 data_type;
     u32 unix_time;
     u32 decompressed_size;
-    u32[-] compressed_data;
+    u8[-] compressed_data;
 }
 ```
 ### Header
@@ -72,5 +72,5 @@ CMSG have a header of 6 bytes.
 | 0x06 | 4 / Little | u32 | data_type |  | You can check this against the CacheMask to find out if this is character-specific data or account-wide data |
 | 0x0A | 4 / Little | u32 | unix_time |  | Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES |
 | 0x0E | 4 / Little | u32 | decompressed_size |  | Size of the data block when it is uncompressed. (in bytes) |
-| 0x12 | ? / - | u32[-] | compressed_data |  | Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage |
+| 0x12 | ? / - | u8[-] | compressed_data |  | Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage |
 

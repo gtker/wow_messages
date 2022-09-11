@@ -10,7 +10,7 @@ use std::io::{Write, Read};
 ///     u32 data_type;
 ///     u32 unix_time;
 ///     u32 decompressed_size;
-///     u32[-] compressed_data;
+///     u8[-] compressed_data;
 /// }
 /// ```
 pub struct CMSG_UPDATE_ACCOUNT_DATA {
@@ -25,7 +25,7 @@ pub struct CMSG_UPDATE_ACCOUNT_DATA {
     pub decompressed_size: u32,
     /// Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage
     ///
-    pub compressed_data: Vec<u32>,
+    pub compressed_data: Vec<u8>,
 }
 
 impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
@@ -45,7 +45,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         // decompressed_size: u32
         w.write_all(&self.decompressed_size.to_le_bytes())?;
 
-        // compressed_data: u32[-]
+        // compressed_data: u8[-]
         for i in self.compressed_data.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
@@ -62,7 +62,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         // decompressed_size: u32
         let decompressed_size = crate::util::read_u32_le(r)?;
 
-        // compressed_data: u32[-]
+        // compressed_data: u8[-]
         let mut current_size = {
             4 // data_type: u32
             + 4 // unix_time: u32
@@ -70,7 +70,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         };
         let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
-            compressed_data.push(crate::util::read_u32_le(r)?);
+            compressed_data.push(crate::util::read_u8_le(r)?);
             current_size += 1;
         }
 
@@ -91,7 +91,7 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
         4 // data_type: u32
         + 4 // unix_time: u32
         + 4 // decompressed_size: u32
-        + self.compressed_data.len() * core::mem::size_of::<u32>() // compressed_data: u32[-]
+        + self.compressed_data.len() * core::mem::size_of::<u8>() // compressed_data: u8[-]
     }
 }
 
