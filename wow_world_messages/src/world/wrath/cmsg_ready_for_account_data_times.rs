@@ -2,6 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+/// Respond with SMSG_ACCOUNT_DATA_TIMES
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_ready_for_account_data_times.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_ready_for_account_data_times.wowm#L3):
 /// ```text
 /// cmsg CMSG_READY_FOR_ACCOUNT_DATA_TIMES = 0x04FF {

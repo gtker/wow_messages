@@ -47,6 +47,7 @@
 - [BuyBankSlotResult](docs/buybankslotresult.md)
 - [BuyResult](docs/buyresult.md)
 - [BuybackSlot](docs/buybackslot.md)
+- [CacheMask](docs/cachemask.md)
 - [CastFailureReason](docs/castfailurereason.md)
 - [CastFlags](docs/castflags.md)
 - [CharacterFlags](docs/characterflags.md)
