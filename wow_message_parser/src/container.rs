@@ -651,20 +651,6 @@ impl Container {
         true
     }
 
-    pub fn has_if_statements(&self) -> bool {
-        for m in &self.members {
-            match m {
-                StructMember::Definition(_) => {}
-                StructMember::IfStatement(_) => {
-                    return true;
-                }
-                StructMember::OptionalStatement(_) => {}
-            }
-        }
-
-        false
-    }
-
     pub fn get_types_needing_errors(&self, o: &Objects, tags: &Tags) -> Vec<&str> {
         self.get_types_needing_import()
             .into_iter()
