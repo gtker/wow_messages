@@ -108381,7 +108381,7 @@
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {
-              "comment": "The type of account data being requested. You can check this against the CacheMask to know if this is character-specific data or account-wide data."
+              "comment": "The type of account data being requested. You can check this against the [CacheMask] to know if this is character-specific data or account-wide data."
             }
           }
         }
@@ -111276,7 +111276,7 @@
         {
           "type": "definition",
           "content": {
-            "name": "block",
+            "name": "data_type",
             "member_type": {
               "type": "integer",
               "content": {
@@ -111356,7 +111356,7 @@
           "subject": "CMSG_UPDATE_ACCOUNT_DATA",
           "members": [
             {
-              "variable_name": "block",
+              "variable_name": "data_type",
               "value": {
                 "type": "number",
                 "content": {
@@ -111430,7 +111430,7 @@
           "subject": "CMSG_UPDATE_ACCOUNT_DATA",
           "members": [
             {
-              "variable_name": "block",
+              "variable_name": "data_type",
               "value": {
                 "type": "number",
                 "content": {
@@ -113882,7 +113882,7 @@
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {
-              "comment": "You can check this against the CacheMask to find out if this is character-specific data or account-wide data"
+              "comment": "You can check this against the [CacheMask] to find out if this is character-specific data or account-wide data"
             }
           }
         },
