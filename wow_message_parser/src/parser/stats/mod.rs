@@ -44,6 +44,20 @@ pub fn print_message_stats(o: &Objects) {
         vanilla_messages::DATA.to_vec(),
         o,
     );
+    println!();
+
+    stats_for(
+        WorldVersion::Patch(2, 4, 3).into(),
+        tbc_messages::DATA.to_vec(),
+        o,
+    );
+    println!();
+
+    stats_for(
+        WorldVersion::Patch(3, 3, 5).into(),
+        wrath_messages::DATA.to_vec(),
+        o,
+    );
 }
 
 fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
