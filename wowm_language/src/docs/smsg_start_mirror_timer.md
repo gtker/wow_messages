@@ -11,7 +11,7 @@ smsg SMSG_START_MIRROR_TIMER = 0x01D9 {
     u32 time_remaining;
     u32 duration;
     u32 scale;
-    u8 is_frozen;
+    Bool is_frozen;
     u32 id;
 }
 ```
@@ -34,6 +34,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | time_remaining |  |  |
 | - | 4 / Little | u32 | duration |  |  |
 | - | 4 / Little | u32 | scale |  |  |
-| - | 1 / - | u8 | is_frozen |  |  |
+| - | 1 / - | Bool | is_frozen |  |  |
 | - | 4 / Little | u32 | id |  |  |
 

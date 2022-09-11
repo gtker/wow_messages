@@ -108,6 +108,7 @@
 - [PartyOperation](docs/partyoperation.md)
 - [PartyResult](docs/partyresult.md)
 - [PetCommandState](docs/petcommandstate.md)
+- [PetEnabled](docs/petenabled.md)
 - [PetFeedback](docs/petfeedback.md)
 - [PetReactState](docs/petreactstate.md)
 - [PetTalkReason](docs/pettalkreason.md)

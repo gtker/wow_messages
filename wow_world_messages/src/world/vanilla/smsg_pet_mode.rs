@@ -1,18 +1,19 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::vanilla::PetCommandState;
+use crate::world::vanilla::PetEnabled;
 use crate::world::vanilla::PetReactState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm#L8):
 /// ```text
 /// smsg SMSG_PET_MODE = 0x017A {
 ///     Guid guid;
 ///     PetReactState react_state;
 ///     PetCommandState command_state;
 ///     u8 unknown1;
-///     u8 pet_enabled;
+///     PetEnabled pet_enabled;
 /// }
 /// ```
 pub struct SMSG_PET_MODE {
@@ -22,9 +23,7 @@ pub struct SMSG_PET_MODE {
     /// vmangos sets to 0.
     ///
     pub unknown1: u8,
-    /// vmangos sets 0 for not enabled and 0x8 for enabled.
-    ///
-    pub pet_enabled: u8,
+    pub pet_enabled: PetEnabled,
 }
 
 impl crate::Message for SMSG_PET_MODE {
@@ -47,8 +46,8 @@ impl crate::Message for SMSG_PET_MODE {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        // pet_enabled: u8
-        w.write_all(&self.pet_enabled.to_le_bytes())?;
+        // pet_enabled: PetEnabled
+        w.write_all(&(self.pet_enabled.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -69,8 +68,8 @@ impl crate::Message for SMSG_PET_MODE {
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
 
-        // pet_enabled: u8
-        let pet_enabled = crate::util::read_u8_le(r)?;
+        // pet_enabled: PetEnabled
+        let pet_enabled: PetEnabled = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             guid,

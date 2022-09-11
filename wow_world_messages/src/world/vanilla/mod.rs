@@ -880,6 +880,8 @@ pub(crate) mod party_result;
 pub use party_result::*;
 pub(crate) mod pet_command_state;
 pub use pet_command_state::*;
+pub(crate) mod pet_enabled;
+pub use pet_enabled::*;
 pub(crate) mod pet_feedback;
 pub use pet_feedback::*;
 pub(crate) mod pet_react_state;

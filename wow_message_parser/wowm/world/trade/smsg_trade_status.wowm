@@ -108,7 +108,6 @@ smsg SMSG_TRADE_STATUS = 0x0120 {
     }
     else if (status == CLOSE_WINDOW) {
         (u32)InventoryResult inventory_result;
-        /* TODO: Add bool? */
         Bool target_error {
             comment = "used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED";
         }

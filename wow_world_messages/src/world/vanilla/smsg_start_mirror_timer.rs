@@ -10,7 +10,7 @@ use std::io::{Write, Read};
 ///     u32 time_remaining;
 ///     u32 duration;
 ///     u32 scale;
-///     u8 is_frozen;
+///     Bool is_frozen;
 ///     u32 id;
 /// }
 /// ```
@@ -19,7 +19,7 @@ pub struct SMSG_START_MIRROR_TIMER {
     pub time_remaining: u32,
     pub duration: u32,
     pub scale: u32,
-    pub is_frozen: u8,
+    pub is_frozen: bool,
     pub id: u32,
 }
 
@@ -43,8 +43,8 @@ impl crate::Message for SMSG_START_MIRROR_TIMER {
         // scale: u32
         w.write_all(&self.scale.to_le_bytes())?;
 
-        // is_frozen: u8
-        w.write_all(&self.is_frozen.to_le_bytes())?;
+        // is_frozen: Bool
+        w.write_all(if self.is_frozen { &[1] } else { &[0] })?;
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
@@ -68,9 +68,8 @@ impl crate::Message for SMSG_START_MIRROR_TIMER {
         // scale: u32
         let scale = crate::util::read_u32_le(r)?;
 
-        // is_frozen: u8
-        let is_frozen = crate::util::read_u8_le(r)?;
-
+        // is_frozen: Bool
+        let is_frozen = crate::util::read_u8_le(r)? != 0;
         // id: u32
         let id = crate::util::read_u32_le(r)?;
 

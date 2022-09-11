@@ -5,6 +5,6 @@ smsg SMSG_SPELLHEALLOG = 0x0150 {
     PackedGuid caster_guid;
     Spell id;
     u32 damage;
-    Bool critical; /* TODO: Add bool */
+    Bool critical;
 }
 
