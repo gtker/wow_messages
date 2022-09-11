@@ -111424,8 +111424,7 @@
                 "inner": {
                   "type": "integer",
                   "content": {
-                    "type": "u32",
-                    "endianness": "little"
+                    "type": "u8"
                   }
                 },
                 "size": {
@@ -164069,8 +164068,7 @@
                 "inner": {
                   "type": "integer",
                   "content": {
-                    "type": "u32",
-                    "endianness": "little"
+                    "type": "u8"
                   }
                 },
                 "size": {
