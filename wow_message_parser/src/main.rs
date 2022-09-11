@@ -1,5 +1,6 @@
 #![allow(clippy::too_many_arguments)]
 
+use std::env;
 use std::path::Path;
 
 use doc_printer::container::print_docs_for_container;
@@ -33,6 +34,7 @@ mod ir_printer;
 pub mod parser;
 mod rust_printer;
 mod test_case;
+mod wireshark_printer;
 mod wowm_printer;
 
 #[cfg(test)]
@@ -70,6 +72,11 @@ fn main() {
     load_files(Path::new("wow_message_parser/wowm/world"), &mut o);
     load_files(Path::new("wow_message_parser/wowm/unimplemented"), &mut o);
     //load_files(Path::new("wow_message_parser/wowm/test"), &mut o);
+
+    if let Ok(path) = env::var("WOWM_WIRESHARK") {
+        wireshark_printer::print_wireshark(&o, &path);
+        return;
+    }
 
     let mut m = ModFiles::new();
 

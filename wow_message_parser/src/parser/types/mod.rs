@@ -15,13 +15,19 @@ pub enum ObjectType {
     Flag,
 }
 
-#[derive(Debug, Eq, PartialEq, Copy, Clone)]
+#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone)]
 pub enum Endianness {
     Little,
     Big,
 }
 
 impl Endianness {
+    pub fn wireshark_str(&self) -> &str {
+        match self {
+            Endianness::Little => "ENC_LITTLE_ENDIAN",
+            Endianness::Big => "ENC_BIG_ENDIAN",
+        }
+    }
     pub fn rust_str(&self) -> &str {
         match self {
             Endianness::Little => "le",
@@ -30,7 +36,7 @@ impl Endianness {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Copy, Clone)]
+#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone)]
 pub enum FloatingPointType {
     F32(Endianness),
     F64(Endianness),
@@ -70,6 +76,12 @@ impl FloatingPointType {
         }
     }
 
+    pub fn wireshark_endian_str(&self) -> &str {
+        match self {
+            FloatingPointType::F32(e) | FloatingPointType::F64(e) => e.wireshark_str(),
+        }
+    }
+
     pub fn doc_endian_str(&self) -> &str {
         match self {
             FloatingPointType::F32(e) | FloatingPointType::F64(e) => match e {
@@ -80,7 +92,7 @@ impl FloatingPointType {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Copy, Clone)]
+#[derive(Debug, Eq, Ord, PartialOrd, PartialEq, Copy, Clone)]
 pub enum IntegerType {
     U8,
     U16(Endianness),
@@ -146,6 +158,16 @@ impl IntegerType {
             | IntegerType::U32(i)
             | IntegerType::U64(i)
             | IntegerType::I32(i) => i.rust_str(),
+        }
+    }
+
+    pub fn wireshark_endian_str(&self) -> &str {
+        match self {
+            IntegerType::U8 => "ENC_LITTLE_ENDIAN",
+            IntegerType::U16(i)
+            | IntegerType::U32(i)
+            | IntegerType::U64(i)
+            | IntegerType::I32(i) => i.wireshark_str(),
         }
     }
 

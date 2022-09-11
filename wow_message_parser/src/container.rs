@@ -98,6 +98,10 @@ impl Container {
         None
     }
 
+    pub fn empty_body(&self) -> bool {
+        self.members.is_empty()
+    }
+
     pub fn is_pure_movement_info(&self) -> bool {
         let only_one_field = self.fields().len() == 1;
         if only_one_field {

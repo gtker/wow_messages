@@ -176,6 +176,13 @@ impl Definer {
         self.objects_used_in.as_ref().unwrap()
     }
 
+    pub fn used_in_if_in_object(&self, name: &str) -> bool {
+        self.objects_used_in()
+            .iter()
+            .find(|a| a.0 == name && a.1 == DefinerUsage::InIf)
+            .is_some()
+    }
+
     pub fn set_objects_used_in(&mut self, mut objects_used_in: Vec<(String, DefinerUsage)>) {
         objects_used_in.sort_by(|a, b| a.0.cmp(&b.0));
         self.objects_used_in = Some(objects_used_in);
@@ -216,6 +223,19 @@ impl Definer {
     pub fn get_field_with_value(&self, value: isize) -> Option<&DefinerField> {
         let value = value as u64;
         self.fields.iter().find(|a| a.value.int == value)
+    }
+
+    pub fn hex_digit_width(&self) -> usize {
+        let mut width = 0;
+
+        for enumerator in self.fields() {
+            let len = format!("{:#0X}", enumerator.value.int()).len();
+            if len > width {
+                width = len;
+            }
+        }
+
+        width
     }
 
     pub fn get_set_flag_fields(&self, value: isize) -> Vec<&DefinerField> {

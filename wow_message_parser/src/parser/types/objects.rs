@@ -313,6 +313,30 @@ impl Objects {
         &self.messages
     }
 
+    pub fn wireshark_messages(&self) -> Vec<&Container> {
+        let mut v: Vec<&Container> = self
+            .messages()
+            .iter()
+            .filter(|e| {
+                e.tags()
+                    .fulfills_all(&Tags::new_with_version(WorldVersion::Minor(1, 12).into()))
+            })
+            .collect();
+
+        v.sort_by(|a, b| a.name().cmp(b.name()));
+
+        v
+    }
+
+    pub fn wireshark_containers(&self) -> Vec<&Container> {
+        self.all_containers()
+            .filter(|e| {
+                e.tags()
+                    .fulfills_all(&Tags::new_with_version(WorldVersion::Minor(1, 12).into()))
+            })
+            .collect()
+    }
+
     pub fn messages_mut(&mut self) -> &mut [Container] {
         &mut self.messages
     }
