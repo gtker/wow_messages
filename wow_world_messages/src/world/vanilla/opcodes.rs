@@ -5277,6 +5277,7 @@ use crate::world::vanilla::SMSG_SET_REST_START;
 use crate::world::vanilla::SMSG_SPIRIT_HEALER_CONFIRM;
 use crate::world::vanilla::SMSG_GOSSIP_POI;
 use crate::world::vanilla::SMSG_LOGIN_VERIFY_WORLD;
+use crate::world::vanilla::SMSG_SEND_MAIL_RESULT;
 use crate::world::vanilla::SMSG_MAIL_LIST_RESULT;
 use crate::world::vanilla::SMSG_BATTLEFIELD_LIST;
 use crate::world::vanilla::SMSG_ITEM_TEXT_QUERY_RESPONSE;
@@ -5287,6 +5288,7 @@ use crate::world::vanilla::SMSG_SPELLDAMAGESHIELD;
 use crate::world::vanilla::SMSG_SPELLNONMELEEDAMAGELOG;
 use crate::world::vanilla::SMSG_ZONE_UNDER_ATTACK;
 use crate::world::vanilla::MSG_AUCTION_HELLO_Server;
+use crate::world::vanilla::SMSG_AUCTION_COMMAND_RESULT;
 use crate::world::vanilla::SMSG_AUCTION_LIST_RESULT;
 use crate::world::vanilla::SMSG_AUCTION_OWNER_LIST_RESULT;
 use crate::world::vanilla::SMSG_AUCTION_BIDDER_NOTIFICATION;
@@ -5626,6 +5628,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPIRIT_HEALER_CONFIRM(SMSG_SPIRIT_HEALER_CONFIRM),
     SMSG_GOSSIP_POI(SMSG_GOSSIP_POI),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
+    SMSG_SEND_MAIL_RESULT(SMSG_SEND_MAIL_RESULT),
     SMSG_MAIL_LIST_RESULT(SMSG_MAIL_LIST_RESULT),
     SMSG_BATTLEFIELD_LIST(SMSG_BATTLEFIELD_LIST),
     SMSG_ITEM_TEXT_QUERY_RESPONSE(SMSG_ITEM_TEXT_QUERY_RESPONSE),
@@ -5636,6 +5639,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPELLNONMELEEDAMAGELOG(SMSG_SPELLNONMELEEDAMAGELOG),
     SMSG_ZONE_UNDER_ATTACK(SMSG_ZONE_UNDER_ATTACK),
     MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Server),
+    SMSG_AUCTION_COMMAND_RESULT(SMSG_AUCTION_COMMAND_RESULT),
     SMSG_AUCTION_LIST_RESULT(SMSG_AUCTION_LIST_RESULT),
     SMSG_AUCTION_OWNER_LIST_RESULT(SMSG_AUCTION_OWNER_LIST_RESULT),
     SMSG_AUCTION_BIDDER_NOTIFICATION(SMSG_AUCTION_BIDDER_NOTIFICATION),
@@ -5977,6 +5981,7 @@ impl ServerOpcodeMessage {
             0x0222 => Ok(Self::SMSG_SPIRIT_HEALER_CONFIRM(<SMSG_SPIRIT_HEALER_CONFIRM as crate::Message>::read_body(&mut r, body_size)?)),
             0x0224 => Ok(Self::SMSG_GOSSIP_POI(<SMSG_GOSSIP_POI as crate::Message>::read_body(&mut r, body_size)?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0239 => Ok(Self::SMSG_SEND_MAIL_RESULT(<SMSG_SEND_MAIL_RESULT as crate::Message>::read_body(&mut r, body_size)?)),
             0x023B => Ok(Self::SMSG_MAIL_LIST_RESULT(<SMSG_MAIL_LIST_RESULT as crate::Message>::read_body(&mut r, body_size)?)),
             0x023D => Ok(Self::SMSG_BATTLEFIELD_LIST(<SMSG_BATTLEFIELD_LIST as crate::Message>::read_body(&mut r, body_size)?)),
             0x0244 => Ok(Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(<SMSG_ITEM_TEXT_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -5987,6 +5992,7 @@ impl ServerOpcodeMessage {
             0x0250 => Ok(Self::SMSG_SPELLNONMELEEDAMAGELOG(<SMSG_SPELLNONMELEEDAMAGELOG as crate::Message>::read_body(&mut r, body_size)?)),
             0x0254 => Ok(Self::SMSG_ZONE_UNDER_ATTACK(<SMSG_ZONE_UNDER_ATTACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Server as crate::Message>::read_body(&mut r, body_size)?)),
+            0x025B => Ok(Self::SMSG_AUCTION_COMMAND_RESULT(<SMSG_AUCTION_COMMAND_RESULT as crate::Message>::read_body(&mut r, body_size)?)),
             0x025C => Ok(Self::SMSG_AUCTION_LIST_RESULT(<SMSG_AUCTION_LIST_RESULT as crate::Message>::read_body(&mut r, body_size)?)),
             0x025D => Ok(Self::SMSG_AUCTION_OWNER_LIST_RESULT(<SMSG_AUCTION_OWNER_LIST_RESULT as crate::Message>::read_body(&mut r, body_size)?)),
             0x025E => Ok(Self::SMSG_AUCTION_BIDDER_NOTIFICATION(<SMSG_AUCTION_BIDDER_NOTIFICATION as crate::Message>::read_body(&mut r, body_size)?)),
@@ -6396,6 +6402,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GOSSIP_POI(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SEND_MAIL_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MAIL_LIST_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEFIELD_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -6406,6 +6413,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.write_encrypted_server(w, e),
@@ -6748,6 +6756,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_GOSSIP_POI(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SEND_MAIL_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_MAIL_LIST_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEFIELD_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -6758,6 +6767,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_unencrypted_server(w),
             Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_server(w),
+            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.write_unencrypted_server(w),
@@ -7100,6 +7110,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_POI(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SEND_MAIL_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MAIL_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7110,6 +7121,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7452,6 +7464,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_POI(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SEND_MAIL_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MAIL_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7462,6 +7475,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7804,6 +7818,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_POI(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SEND_MAIL_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MAIL_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7814,6 +7829,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8156,6 +8172,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_POI(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SEND_MAIL_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MAIL_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8166,6 +8183,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
@@ -8510,6 +8528,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPIRIT_HEALER_CONFIRM(_) => "SMSG_SPIRIT_HEALER_CONFIRM",
             ServerOpcodeMessage::SMSG_GOSSIP_POI(_) => "SMSG_GOSSIP_POI",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
+            ServerOpcodeMessage::SMSG_SEND_MAIL_RESULT(_) => "SMSG_SEND_MAIL_RESULT",
             ServerOpcodeMessage::SMSG_MAIL_LIST_RESULT(_) => "SMSG_MAIL_LIST_RESULT",
             ServerOpcodeMessage::SMSG_BATTLEFIELD_LIST(_) => "SMSG_BATTLEFIELD_LIST",
             ServerOpcodeMessage::SMSG_ITEM_TEXT_QUERY_RESPONSE(_) => "SMSG_ITEM_TEXT_QUERY_RESPONSE",
@@ -8520,6 +8539,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPELLNONMELEEDAMAGELOG(_) => "SMSG_SPELLNONMELEEDAMAGELOG",
             ServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => "SMSG_ZONE_UNDER_ATTACK",
             ServerOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Server",
+            ServerOpcodeMessage::SMSG_AUCTION_COMMAND_RESULT(_) => "SMSG_AUCTION_COMMAND_RESULT",
             ServerOpcodeMessage::SMSG_AUCTION_LIST_RESULT(_) => "SMSG_AUCTION_LIST_RESULT",
             ServerOpcodeMessage::SMSG_AUCTION_OWNER_LIST_RESULT(_) => "SMSG_AUCTION_OWNER_LIST_RESULT",
             ServerOpcodeMessage::SMSG_AUCTION_BIDDER_NOTIFICATION(_) => "SMSG_AUCTION_BIDDER_NOTIFICATION",
@@ -9990,6 +10010,12 @@ impl From<SMSG_LOGIN_VERIFY_WORLD> for ServerOpcodeMessage {
     }
 }
 
+impl From<SMSG_SEND_MAIL_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_SEND_MAIL_RESULT) -> Self {
+        Self::SMSG_SEND_MAIL_RESULT(c)
+    }
+}
+
 impl From<SMSG_MAIL_LIST_RESULT> for ServerOpcodeMessage {
     fn from(c: SMSG_MAIL_LIST_RESULT) -> Self {
         Self::SMSG_MAIL_LIST_RESULT(c)
@@ -10047,6 +10073,12 @@ impl From<SMSG_ZONE_UNDER_ATTACK> for ServerOpcodeMessage {
 impl From<MSG_AUCTION_HELLO_Server> for ServerOpcodeMessage {
     fn from(c: MSG_AUCTION_HELLO_Server) -> Self {
         Self::MSG_AUCTION_HELLO(c)
+    }
+}
+
+impl From<SMSG_AUCTION_COMMAND_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUCTION_COMMAND_RESULT) -> Self {
+        Self::SMSG_AUCTION_COMMAND_RESULT(c)
     }
 }
 
