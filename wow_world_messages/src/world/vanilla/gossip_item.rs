@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// struct GossipItem {
 ///     u32 id;
 ///     u8 item_icon;
-///     u8 coded;
+///     Bool coded;
 /// }
 /// ```
 pub struct GossipItem {
@@ -17,7 +17,7 @@ pub struct GossipItem {
     pub item_icon: u8,
     /// vmangos: makes pop up box password
     ///
-    pub coded: u8,
+    pub coded: bool,
 }
 
 impl GossipItem {
@@ -28,8 +28,8 @@ impl GossipItem {
         // item_icon: u8
         w.write_all(&self.item_icon.to_le_bytes())?;
 
-        // coded: u8
-        w.write_all(&self.coded.to_le_bytes())?;
+        // coded: Bool
+        w.write_all(if self.coded { &[1] } else { &[0] })?;
 
         Ok(())
     }
@@ -43,9 +43,8 @@ impl GossipItem {
         // item_icon: u8
         let item_icon = crate::util::read_u8_le(r)?;
 
-        // coded: u8
-        let coded = crate::util::read_u8_le(r)?;
-
+        // coded: Bool
+        let coded = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             id,
             item_icon,

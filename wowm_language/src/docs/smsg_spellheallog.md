@@ -11,7 +11,7 @@ smsg SMSG_SPELLHEALLOG = 0x0150 {
     PackedGuid caster_guid;
     u32 id;
     u32 damage;
-    u8 critical;
+    Bool critical;
 }
 ```
 ### Header
@@ -33,5 +33,5 @@ SMSG have a header of 4 bytes.
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | caster_guid |  |  |
 | - | 4 / Little | u32 | id |  |  |
 | - | 4 / Little | u32 | damage |  |  |
-| - | 1 / - | u8 | critical |  |  |
+| - | 1 / - | Bool | critical |  |  |
 

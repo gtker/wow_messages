@@ -47,6 +47,7 @@ The `SizedCString` is the same as a `u32` followed by a `CString`, but they are 
 | `PackedGuid` | GUID sent in the "packed" format. See [PackedGuid](packed-guid.md). | - |
 | `UpdateMask` | Update values sent in a relatively complex format. See [UpdateMask](update-mask.md). | - |
 | `AuraMask` | Update values sent in a relatively complex format. See [AuraMask](aura-mask.md). | - |
+| `Bool` | `u8` where `0` is false and any other value is `true`. Can be substituted by a `u8`. | - |
 
 ### Arrays
 

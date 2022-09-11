@@ -10,7 +10,7 @@ use std::io::{Write, Read};
 ///     PackedGuid caster_guid;
 ///     u32 id;
 ///     u32 damage;
-///     u8 critical;
+///     Bool critical;
 /// }
 /// ```
 pub struct SMSG_SPELLHEALLOG {
@@ -18,7 +18,7 @@ pub struct SMSG_SPELLHEALLOG {
     pub caster_guid: Guid,
     pub id: u32,
     pub damage: u32,
-    pub critical: u8,
+    pub critical: bool,
 }
 
 impl crate::Message for SMSG_SPELLHEALLOG {
@@ -41,8 +41,8 @@ impl crate::Message for SMSG_SPELLHEALLOG {
         // damage: u32
         w.write_all(&self.damage.to_le_bytes())?;
 
-        // critical: u8
-        w.write_all(&self.critical.to_le_bytes())?;
+        // critical: Bool
+        w.write_all(if self.critical { &[1] } else { &[0] })?;
 
         Ok(())
     }
@@ -59,9 +59,8 @@ impl crate::Message for SMSG_SPELLHEALLOG {
         // damage: u32
         let damage = crate::util::read_u32_le(r)?;
 
-        // critical: u8
-        let critical = crate::util::read_u8_le(r)?;
-
+        // critical: Bool
+        let critical = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             victim_guid,
             caster_guid,
@@ -81,7 +80,7 @@ impl SMSG_SPELLHEALLOG {
         + self.caster_guid.size() // caster_guid: Guid
         + 4 // id: u32
         + 4 // damage: u32
-        + 1 // critical: u8
+        + 1 // critical: Bool
     }
 }
 

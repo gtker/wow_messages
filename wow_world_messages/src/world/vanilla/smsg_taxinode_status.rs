@@ -7,12 +7,12 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_TAXINODE_STATUS = 0x01AB {
 ///     Guid guid;
-///     u8 taxi_mask_node_known;
+///     Bool taxi_mask_node_known;
 /// }
 /// ```
 pub struct SMSG_TAXINODE_STATUS {
     pub guid: Guid,
-    pub taxi_mask_node_known: u8,
+    pub taxi_mask_node_known: bool,
 }
 
 impl crate::Message for SMSG_TAXINODE_STATUS {
@@ -26,8 +26,8 @@ impl crate::Message for SMSG_TAXINODE_STATUS {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // taxi_mask_node_known: u8
-        w.write_all(&self.taxi_mask_node_known.to_le_bytes())?;
+        // taxi_mask_node_known: Bool
+        w.write_all(if self.taxi_mask_node_known { &[1] } else { &[0] })?;
 
         Ok(())
     }
@@ -39,9 +39,8 @@ impl crate::Message for SMSG_TAXINODE_STATUS {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // taxi_mask_node_known: u8
-        let taxi_mask_node_known = crate::util::read_u8_le(r)?;
-
+        // taxi_mask_node_known: Bool
+        let taxi_mask_node_known = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             guid,
             taxi_mask_node_known,

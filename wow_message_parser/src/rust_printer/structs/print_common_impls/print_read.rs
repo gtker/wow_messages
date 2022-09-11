@@ -343,6 +343,15 @@ fn print_read_definition(
     s.wln(format!("// {}: {}", d.name(), d.ty().str()));
 
     match &d.ty() {
+        Type::Bool => {
+            s.wln(format!(
+                "let {name} = {module_name}::{prefix}read_u8_le(r){postfix}? != 0;",
+                name = d.name(),
+                module_name = UTILITY_PATH,
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        }
         Type::Integer(integer) => {
             let value_set = if d.verified_value().is_some() {
                 "_"

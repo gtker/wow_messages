@@ -30,7 +30,7 @@ use std::io::{Write, Read};
 ///     u32 guild_id;
 ///     u32 flags;
 ///     u32 recustomization_flags;
-///     u8 first_login;
+///     Bool first_login;
 ///     u32 pet_display_id;
 ///     u32 pet_level;
 ///     u32 pet_family;
@@ -55,7 +55,7 @@ pub struct Character {
     pub guild_id: u32,
     pub flags: u32,
     pub recustomization_flags: u32,
-    pub first_login: u8,
+    pub first_login: bool,
     pub pet_display_id: u32,
     pub pet_level: u32,
     pub pet_family: u32,
@@ -117,8 +117,8 @@ impl Character {
         // recustomization_flags: u32
         w.write_all(&self.recustomization_flags.to_le_bytes())?;
 
-        // first_login: u8
-        w.write_all(&self.first_login.to_le_bytes())?;
+        // first_login: Bool
+        w.write_all(if self.first_login { &[1] } else { &[0] })?;
 
         // pet_display_id: u32
         w.write_all(&self.pet_display_id.to_le_bytes())?;
@@ -192,9 +192,8 @@ impl Character {
         // recustomization_flags: u32
         let recustomization_flags = crate::util::read_u32_le(r)?;
 
-        // first_login: u8
-        let first_login = crate::util::read_u8_le(r)?;
-
+        // first_login: Bool
+        let first_login = crate::util::read_u8_le(r)? != 0;
         // pet_display_id: u32
         let pet_display_id = crate::util::read_u32_le(r)?;
 
@@ -257,7 +256,7 @@ impl Character {
         + 4 // guild_id: u32
         + 4 // flags: u32
         + 4 // recustomization_flags: u32
-        + 1 // first_login: u8
+        + 1 // first_login: Bool
         + 4 // pet_display_id: u32
         + 4 // pet_level: u32
         + 4 // pet_family: u32

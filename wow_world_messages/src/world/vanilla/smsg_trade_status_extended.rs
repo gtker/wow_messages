@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm#L22):
 /// ```text
 /// smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
-///     u8 self_player;
+///     Bool self_player;
 ///     u32 trade_slot_count1;
 ///     u32 trade_slot_count2;
 ///     u32 money_in_trade;
@@ -17,7 +17,7 @@ use std::io::{Write, Read};
 pub struct SMSG_TRADE_STATUS_EXTENDED {
     /// cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)
     ///
-    pub self_player: u8,
+    pub self_player: bool,
     /// cmangos/vmangos/mangoszero: sets to 7
     /// cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases
     ///
@@ -41,8 +41,8 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // self_player: u8
-        w.write_all(&self.self_player.to_le_bytes())?;
+        // self_player: Bool
+        w.write_all(if self.self_player { &[1] } else { &[0] })?;
 
         // trade_slot_count1: u32
         w.write_all(&self.trade_slot_count1.to_le_bytes())?;
@@ -68,9 +68,8 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
-        // self_player: u8
-        let self_player = crate::util::read_u8_le(r)?;
-
+        // self_player: Bool
+        let self_player = crate::util::read_u8_le(r)? != 0;
         // trade_slot_count1: u32
         let trade_slot_count1 = crate::util::read_u32_le(r)?;
 

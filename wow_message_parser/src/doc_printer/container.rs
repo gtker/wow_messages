@@ -1,4 +1,4 @@
-use crate::container::{Equation, IfStatement, StructMember, StructMemberDefinition};
+use crate::container::{Equation, IfStatement, StructMember, StructMemberDefinition, BOOL_SIZE};
 use crate::doc_printer::DocWriter;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, Endianness, IntegerType, ObjectType};
@@ -126,6 +126,10 @@ fn print_container_example_definition(
             for b in bytes {
                 s.w(format!("{}, ", b));
             }
+        }
+        Type::Bool => {
+            let b = bytes.take(BOOL_SIZE.into()).cloned().collect::<Vec<u8>>();
+            s.w(format!("{}, ", b[0]));
         }
         Type::Guid => {
             s.bytes(bytes.take(core::mem::size_of::<u64>()).into_iter());
@@ -502,6 +506,7 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                     }
                 },
                 Type::SizedCString
+                | Type::Bool
                 | Type::CString
                 | Type::String { .. }
                 | Type::Integer(_)
@@ -547,6 +552,7 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                     | Type::PackedGuid
                     | Type::UpdateMask
                     | Type::AuraMask => None,
+                    Type::Bool => Some(offset.unwrap() + BOOL_SIZE as usize),
                 };
             }
         }

@@ -153,6 +153,15 @@ pub fn print_write_definition(
                 postfix,
             );
         }
+        Type::Bool => {
+            s.wln(format!(
+                "w.write_all(if {reference}{variable_prefix}{variable_name} {{ &[1] }} else {{ &[0] }}){postfix}?;",
+                reference = if variable_prefix.is_empty() {"*"} else {""}, // non-self variables are &bool
+                variable_prefix = variable_prefix,
+                variable_name = d.name(),
+                postfix = postfix,
+            ));
+        }
         Type::FloatingPoint(floating) => {
             s.wln(format!(
                 "w.write_all(&{variable_prefix}{variable_name}.to_{endian}_bytes()){postfix}?;",

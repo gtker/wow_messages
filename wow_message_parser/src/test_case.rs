@@ -145,6 +145,13 @@ impl TestCase {
                 Type::SizedCString | Type::CString | Type::String { .. } => {
                     TestValue::String(value.replace('\"', ""))
                 }
+                Type::Bool => TestValue::Bool(if value == "TRUE" {
+                    true
+                } else if value == "FALSE" {
+                    false
+                } else {
+                    panic!("incorrect boolean value: '{}'", value)
+                }),
                 Type::Array(array) => {
                     assert!(value.contains('['));
                     assert!(value.contains(']'));
@@ -276,6 +283,7 @@ impl TestUpdateMaskValue {
 #[derive(Debug, Clone)]
 pub enum TestValue {
     Number(VerifiedContainerValue),
+    Bool(bool),
     Guid(VerifiedContainerValue),
     FloatingNumber {
         value: f64,

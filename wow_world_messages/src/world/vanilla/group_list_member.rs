@@ -8,13 +8,13 @@ use std::io::{Write, Read};
 /// struct GroupListMember {
 ///     CString name;
 ///     Guid guid;
-///     u8 is_online;
+///     Bool is_online;
 /// }
 /// ```
 pub struct GroupListMember {
     pub name: String,
     pub guid: Guid,
-    pub is_online: u8,
+    pub is_online: bool,
 }
 
 impl GroupListMember {
@@ -27,8 +27,8 @@ impl GroupListMember {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // is_online: u8
-        w.write_all(&self.is_online.to_le_bytes())?;
+        // is_online: Bool
+        w.write_all(if self.is_online { &[1] } else { &[0] })?;
 
         Ok(())
     }
@@ -43,9 +43,8 @@ impl GroupListMember {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // is_online: u8
-        let is_online = crate::util::read_u8_le(r)?;
-
+        // is_online: Bool
+        let is_online = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             name,
             guid,
@@ -59,7 +58,7 @@ impl GroupListMember {
     pub(crate) fn size(&self) -> usize {
         self.name.len() + 1 // name: CString
         + 8 // guid: Guid
-        + 1 // is_online: u8
+        + 1 // is_online: Bool
     }
 }
 

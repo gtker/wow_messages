@@ -167,7 +167,7 @@ smsg SMSG_AUTH_RESPONSE = 0x01EE {
     }
     else if (result == AUTH_WAIT_QUEUE) {
         u32 queue_position;
-        u8 realm_has_free_character_migration;
+        Bool realm_has_free_character_migration;
     }
 }
 ```
@@ -202,5 +202,5 @@ Else If result is equal to `AUTH_WAIT_QUEUE`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | queue_position |  |  |
-| - | 1 / - | u8 | realm_has_free_character_migration |  |  |
+| - | 1 / - | Bool | realm_has_free_character_migration |  |  |
 

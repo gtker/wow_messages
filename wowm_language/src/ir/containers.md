@@ -51,6 +51,7 @@ The following types do not contain any `content`:
 * `sized_cstring`
 * `update_mask`
 * `aura_mask`
+* `bool`
 
 
 ##### Integer

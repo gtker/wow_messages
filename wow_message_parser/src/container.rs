@@ -423,6 +423,7 @@ impl Container {
                         Type::UpdateMask => panic!(),
                         Type::AuraMask => panic!(),
                         Type::SizedCString => panic!(),
+                        Type::Bool => sum += BOOL_SIZE as u64,
                     }
                     if let Some(v) = &d.verified_value {
                         if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
@@ -634,6 +635,7 @@ impl Container {
                     }
                     Type::PackedGuid => return false,
                     Type::Guid => {}
+                    Type::Bool => {}
                     Type::UpdateMask | Type::AuraMask => return false,
                     Type::SizedCString => return false,
                 },
@@ -1053,6 +1055,7 @@ impl Container {
                 Type::UpdateMask => {}
                 Type::AuraMask => {}
                 Type::SizedCString => {}
+                Type::Bool => {}
             },
             StructMember::IfStatement(statement) => {
                 for m in &statement.members {
@@ -1250,6 +1253,7 @@ pub const UPDATE_MASK_MIN_SIZE: u8 = 1;
 pub const PACKED_GUID_MAX_SIZE: u8 = 9;
 pub const PACKED_GUID_MIN_SIZE: u8 = 2;
 pub const GUID_SIZE: u8 = core::mem::size_of::<u64>() as u8;
+pub const BOOL_SIZE: u8 = 1;
 
 impl Sizes {
     pub fn new() -> Self {

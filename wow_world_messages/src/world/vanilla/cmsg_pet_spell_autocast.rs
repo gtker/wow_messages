@@ -8,13 +8,13 @@ use std::io::{Write, Read};
 /// cmsg CMSG_PET_SPELL_AUTOCAST = 0x02F3 {
 ///     Guid guid;
 ///     u32 id;
-///     u8 enabled;
+///     Bool enabled;
 /// }
 /// ```
 pub struct CMSG_PET_SPELL_AUTOCAST {
     pub guid: Guid,
     pub id: u32,
-    pub enabled: u8,
+    pub enabled: bool,
 }
 
 impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
@@ -31,8 +31,8 @@ impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
-        // enabled: u8
-        w.write_all(&self.enabled.to_le_bytes())?;
+        // enabled: Bool
+        w.write_all(if self.enabled { &[1] } else { &[0] })?;
 
         Ok(())
     }
@@ -47,9 +47,8 @@ impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
         // id: u32
         let id = crate::util::read_u32_le(r)?;
 
-        // enabled: u8
-        let enabled = crate::util::read_u8_le(r)?;
-
+        // enabled: Bool
+        let enabled = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             guid,
             id,

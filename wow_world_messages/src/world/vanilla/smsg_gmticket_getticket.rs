@@ -16,7 +16,7 @@ use std::io::{Write, Read};
 ///         f32 days_since_oldest_ticket_creation;
 ///         f32 days_since_last_updated;
 ///         GmTicketEscalationStatus escalation_status;
-///         u8 read_by_gm;
+///         Bool read_by_gm;
 ///     }
 /// }
 /// ```
@@ -66,8 +66,8 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
                 // escalation_status: GmTicketEscalationStatus
                 w.write_all(&(escalation_status.as_int() as u8).to_le_bytes())?;
 
-                // read_by_gm: u8
-                w.write_all(&read_by_gm.to_le_bytes())?;
+                // read_by_gm: Bool
+                w.write_all(if *read_by_gm { &[1] } else { &[0] })?;
 
             }
             SMSG_GMTICKET_GETTICKET_GmTicketStatus::Default => {}
@@ -98,9 +98,8 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
                 // escalation_status: GmTicketEscalationStatus
                 let escalation_status: GmTicketEscalationStatus = crate::util::read_u8_le(r)?.try_into()?;
 
-                // read_by_gm: u8
-                let read_by_gm = crate::util::read_u8_le(r)?;
-
+                // read_by_gm: Bool
+                let read_by_gm = crate::util::read_u8_le(r)? != 0;
                 SMSG_GMTICKET_GETTICKET_GmTicketStatus::Hastext {
                     days_since_last_updated,
                     days_since_oldest_ticket_creation,
@@ -137,7 +136,7 @@ pub enum SMSG_GMTICKET_GETTICKET_GmTicketStatus {
         days_since_oldest_ticket_creation: f32,
         days_since_ticket_creation: f32,
         escalation_status: GmTicketEscalationStatus,
-        read_by_gm: u8,
+        read_by_gm: bool,
         text: String,
         ticket_type: GmTicketType,
     },
@@ -182,7 +181,7 @@ impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
                 + 4 // days_since_oldest_ticket_creation: f32
                 + 4 // days_since_ticket_creation: f32
                 + 1 // escalation_status: GmTicketEscalationStatus
-                + 1 // read_by_gm: u8
+                + 1 // read_by_gm: Bool
                 + text.len() + 1 // text: CString
                 + 1 // ticket_type: GmTicketType
             }

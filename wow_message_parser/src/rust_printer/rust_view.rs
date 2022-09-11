@@ -403,6 +403,7 @@ impl RustEnumerator {
 #[derive(Debug, Clone)]
 pub enum RustType {
     Integer(IntegerType),
+    Bool,
     Floating(FloatingPointType),
     UpdateMask,
     AuraMask,
@@ -453,6 +454,7 @@ impl RustType {
             RustType::AuraMask => "AuraMask".to_string(),
             RustType::PackedGuid | RustType::Guid => "Guid".to_string(),
             RustType::SizedCString => "SizedCString".to_string(),
+            RustType::Bool => "Bool".to_string(),
         }
     }
 
@@ -467,6 +469,7 @@ impl RustType {
             RustType::Array { array, .. } => array.rust_str(),
             RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
             RustType::Struct { ty_name, .. } => ty_name.clone(),
+            RustType::Bool => "bool".to_string(),
         }
     }
 }
@@ -483,6 +486,7 @@ impl Display for RustType {
             RustType::UpdateMask => f.write_str("UpdateMask"),
             RustType::AuraMask => f.write_str("AuraMask"),
             RustType::PackedGuid | RustType::Guid => f.write_str("Guid"),
+            RustType::Bool => f.write_str("bool"),
         }
     }
 }
@@ -1232,6 +1236,7 @@ pub fn create_struct_member(
                     }
                     RustType::Integer(*i)
                 }
+                Type::Bool => RustType::Bool,
                 Type::Guid => RustType::Guid,
                 Type::PackedGuid => {
                     definition_constantly_sized = false;

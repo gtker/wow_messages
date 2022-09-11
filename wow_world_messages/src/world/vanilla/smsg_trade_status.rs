@@ -14,7 +14,7 @@ use std::io::{Write, Read};
 ///     }
 ///     else if (status == CLOSE_WINDOW) {
 ///         InventoryResult inventory_result;
-///         u8 target_error;
+///         Bool target_error;
 ///         u32 item_limit_category_id;
 ///     }
 ///     else if (status == ONLY_CONJURED
@@ -65,8 +65,8 @@ impl crate::Message for SMSG_TRADE_STATUS {
                 // inventory_result: InventoryResult
                 w.write_all(&(inventory_result.as_int() as u32).to_le_bytes())?;
 
-                // target_error: u8
-                w.write_all(&target_error.to_le_bytes())?;
+                // target_error: Bool
+                w.write_all(if *target_error { &[1] } else { &[0] })?;
 
                 // item_limit_category_id: u32
                 w.write_all(&item_limit_category_id.to_le_bytes())?;
@@ -127,9 +127,8 @@ impl crate::Message for SMSG_TRADE_STATUS {
                 // inventory_result: InventoryResult
                 let inventory_result: InventoryResult = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-                // target_error: u8
-                let target_error = crate::util::read_u8_le(r)?;
-
+                // target_error: Bool
+                let target_error = crate::util::read_u8_le(r)? != 0;
                 // item_limit_category_id: u32
                 let item_limit_category_id = crate::util::read_u32_le(r)?;
 
@@ -200,7 +199,7 @@ pub enum SMSG_TRADE_STATUS_TradeStatus {
     CloseWindow {
         inventory_result: InventoryResult,
         item_limit_category_id: u32,
-        target_error: u8,
+        target_error: bool,
     },
     Unknown13,
     IgnoreYou,
@@ -308,7 +307,7 @@ impl SMSG_TRADE_STATUS_TradeStatus {
                 4
                 + 4 // inventory_result: InventoryResult
                 + 4 // item_limit_category_id: u32
-                + 1 // target_error: u8
+                + 1 // target_error: Bool
             }
             Self::Unknown13 => {
                 4

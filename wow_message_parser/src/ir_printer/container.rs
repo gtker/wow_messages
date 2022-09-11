@@ -227,6 +227,8 @@ impl From<&StructMemberDefinition> for IrStructMemberDefinition {
 pub enum IrType {
     #[serde(rename = "integer")]
     Integer(IrIntegerType),
+    #[serde(rename = "bool")]
+    Bool,
     #[serde(rename = "packed_guid")]
     PackedGuid,
     #[serde(rename = "guid")]
@@ -238,9 +240,7 @@ pub enum IrType {
     #[serde(rename = "sized_cstring")]
     SizedCString,
     #[serde(rename = "string")]
-    String {
-        length: String,
-    },
+    String { length: String },
     #[serde(rename = "array")]
     Array(IrArray),
     #[serde(rename = "identifier")]
@@ -274,6 +274,7 @@ impl From<&Type> for IrType {
                 upcast: upcast.map(|a| (&a).into()),
             },
             Type::SizedCString => Self::SizedCString,
+            Type::Bool => Self::Bool,
         }
     }
 }
@@ -475,13 +476,12 @@ impl From<UpdateMaskType> for IrUpdateMaskType {
 pub enum IrTestValue {
     #[serde(rename = "number")]
     Number(IrIntegerEnumValue),
+    #[serde(rename = "bool")]
+    Bool(bool),
     #[serde(rename = "guid")]
     Guid(IrIntegerEnumValue),
     #[serde(rename = "floating_point")]
-    FloatingNumber {
-        value: f64,
-        original_string: String,
-    },
+    FloatingNumber { value: f64, original_string: String },
     #[serde(rename = "array")]
     Array {
         values: Vec<usize>,
@@ -500,7 +500,10 @@ pub enum IrTestValue {
         members: Vec<IrTestCaseMember>,
     },
     #[serde(rename = "array_of_sub_object")]
-    ArrayOfSubObject{type_name: String,  members: Vec<Vec<IrTestCaseMember>>},
+    ArrayOfSubObject {
+        type_name: String,
+        members: Vec<Vec<IrTestCaseMember>>,
+    },
     #[serde(rename = "update_mask")]
     UpdateMask(Vec<IrTestUpdateMaskValue>),
 }
@@ -510,6 +513,7 @@ impl From<&TestValue> for IrTestValue {
         match v {
             TestValue::Number(i) => Self::Number(i.into()),
             TestValue::Guid(i) => Self::Guid(i.into()),
+            TestValue::Bool(b) => Self::Bool(*b),
             TestValue::FloatingNumber {
                 value,
                 original_string,
@@ -528,9 +532,10 @@ impl From<&TestValue> for IrTestValue {
                 ty_name: ty_name.to_string(),
                 members: members.iter().map(|a| a.into()).collect(),
             },
-            TestValue::ArrayOfSubObject(s, t) => Self::ArrayOfSubObject{
+            TestValue::ArrayOfSubObject(s, t) => Self::ArrayOfSubObject {
                 type_name: s.to_string(),
-                members: t.iter()
+                members: t
+                    .iter()
                     .map(|a| a.iter().map(|a| a.into()).collect::<Vec<_>>())
                     .collect(),
             },

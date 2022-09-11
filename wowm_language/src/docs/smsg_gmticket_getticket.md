@@ -15,7 +15,7 @@ smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
         f32 days_since_oldest_ticket_creation;
         f32 days_since_last_updated;
         GmTicketEscalationStatus escalation_status;
-        u8 read_by_gm;
+        Bool read_by_gm;
     }
 }
 ```
@@ -46,5 +46,5 @@ If status is equal to `HASTEXT`:
 | - | 4 / Little | f32 | days_since_oldest_ticket_creation |  |  |
 | - | 4 / Little | f32 | days_since_last_updated |  |  |
 | - | ? / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |  |
-| - | 1 / - | u8 | read_by_gm |  |  |
+| - | 1 / - | Bool | read_by_gm |  |  |
 

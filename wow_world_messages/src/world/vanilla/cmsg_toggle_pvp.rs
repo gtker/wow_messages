@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_TOGGLE_PVP = 0x0253 {
 ///     optional set {
-///         u8 enable_pvp;
+///         Bool enable_pvp;
 ///     }
 /// }
 /// ```
@@ -26,8 +26,8 @@ impl crate::Message for CMSG_TOGGLE_PVP {
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // optional set
         if let Some(v) = &self.set {
-            // enable_pvp: u8
-            w.write_all(&v.enable_pvp.to_le_bytes())?;
+            // enable_pvp: Bool
+            w.write_all(if v.enable_pvp { &[1] } else { &[0] })?;
 
         }
 
@@ -39,9 +39,8 @@ impl crate::Message for CMSG_TOGGLE_PVP {
             0
         };
         let set = if current_size < body_size as usize {
-            // enable_pvp: u8
-            let enable_pvp = crate::util::read_u8_le(r)?;
-
+            // enable_pvp: Bool
+            let enable_pvp = crate::util::read_u8_le(r)? != 0;
             Some(CMSG_TOGGLE_PVP_set {
                 enable_pvp,
             })
@@ -61,7 +60,7 @@ impl crate::world::vanilla::ClientMessage for CMSG_TOGGLE_PVP {}
 impl CMSG_TOGGLE_PVP {
     pub(crate) fn size(&self) -> usize {
         if let Some(set) = &self.set {
-            1 // enable_pvp: u8
+            1 // enable_pvp: Bool
         } else {
             0
         }
@@ -70,12 +69,12 @@ impl CMSG_TOGGLE_PVP {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct CMSG_TOGGLE_PVP_set {
-    pub enable_pvp: u8,
+    pub enable_pvp: bool,
 }
 
 impl CMSG_TOGGLE_PVP_set {
     pub(crate) fn size(&self) -> usize {
-        1 // enable_pvp: u8
+        1 // enable_pvp: Bool
     }
 
 }

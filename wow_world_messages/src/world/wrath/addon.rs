@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// struct Addon {
 ///     u8 addon_type;
 ///     u8 uses_crc;
-///     u8 uses_diffent_public_key;
+///     Bool uses_diffent_public_key;
 ///     u32 unknown1;
 ///     u8 unknown2;
 /// }
@@ -19,7 +19,7 @@ pub struct Addon {
     /// Other emus hardcode this to 1.
     ///
     pub uses_crc: u8,
-    pub uses_diffent_public_key: u8,
+    pub uses_diffent_public_key: bool,
     /// Other emus hardcode this to 0
     ///
     pub unknown1: u32,
@@ -36,8 +36,8 @@ impl Addon {
         // uses_crc: u8
         w.write_all(&self.uses_crc.to_le_bytes())?;
 
-        // uses_diffent_public_key: u8
-        w.write_all(&self.uses_diffent_public_key.to_le_bytes())?;
+        // uses_diffent_public_key: Bool
+        w.write_all(if self.uses_diffent_public_key { &[1] } else { &[0] })?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -57,9 +57,8 @@ impl Addon {
         // uses_crc: u8
         let uses_crc = crate::util::read_u8_le(r)?;
 
-        // uses_diffent_public_key: u8
-        let uses_diffent_public_key = crate::util::read_u8_le(r)?;
-
+        // uses_diffent_public_key: Bool
+        let uses_diffent_public_key = crate::util::read_u8_le(r)? != 0;
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
 

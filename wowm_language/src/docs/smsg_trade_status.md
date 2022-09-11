@@ -13,7 +13,7 @@ smsg SMSG_TRADE_STATUS = 0x0120 {
     }
     else if (status == CLOSE_WINDOW) {
         InventoryResult inventory_result;
-        u8 target_error;
+        Bool target_error;
         u32 item_limit_category_id;
     }
     else if (status == ONLY_CONJURED
@@ -50,7 +50,7 @@ Else If status is equal to `CLOSE_WINDOW`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | ? / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
-| - | 1 / - | u8 | target_error |  | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
+| - | 1 / - | Bool | target_error |  | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
 | - | 4 / Little | u32 | item_limit_category_id |  | ItemLimitCategory.dbc entry |
 
 Else If status is equal to `ONLY_CONJURED` **or** 

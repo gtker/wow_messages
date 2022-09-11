@@ -4,7 +4,6 @@
         - if a == { if b == } (`SMSG_AUCTION_COMMAND_RESULT`)
 * UpdateMask docs
     * Improve Docs
-* Add Bool type
 * Add flags if a || b (`MovementInfo` wrath)
 * Add support for a || b || c.d (`MovementInfo` wrath)
 * Add support for if a & A { if b & B } (`MovementInfo` wrath)

@@ -101,7 +101,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         guild_id: 0,
                         flags: Default::default(),
                         recustomization_flags: 0,
-                        first_login: 0,
+                        first_login: false,
                         pet_display_id: 0,
                         pet_level: 0,
                         pet_family: 0,

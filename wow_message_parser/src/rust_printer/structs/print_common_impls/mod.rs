@@ -1,4 +1,4 @@
-use crate::container::{Container, ContainerType, GUID_SIZE};
+use crate::container::{Container, ContainerType, BOOL_SIZE, GUID_SIZE};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
@@ -146,6 +146,7 @@ pub fn print_constant_member(
 
 pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
     let str = match m.ty() {
+        RustType::Bool => format!("{}", BOOL_SIZE),
         RustType::Integer(i) => i.size().to_string(),
         RustType::Floating(f) => f.size().to_string(),
         RustType::Guid => GUID_SIZE.to_string(),

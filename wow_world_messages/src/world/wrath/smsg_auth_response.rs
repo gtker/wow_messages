@@ -17,7 +17,7 @@ use std::io::{Write, Read};
 ///     }
 ///     else if (result == AUTH_WAIT_QUEUE) {
 ///         u32 queue_position;
-///         u8 realm_has_free_character_migration;
+///         Bool realm_has_free_character_migration;
 ///     }
 /// }
 /// ```
@@ -89,8 +89,8 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
                 // queue_position: u32
                 w.write_all(&queue_position.to_le_bytes())?;
 
-                // realm_has_free_character_migration: u8
-                w.write_all(&realm_has_free_character_migration.to_le_bytes())?;
+                // realm_has_free_character_migration: Bool
+                w.write_all(if *realm_has_free_character_migration { &[1] } else { &[0] })?;
 
             }
             SMSG_AUTH_RESPONSE_WorldResult::AuthBanned => {}
@@ -228,9 +228,8 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
                 // queue_position: u32
                 let queue_position = crate::util::read_u32_le(r)?;
 
-                // realm_has_free_character_migration: u8
-                let realm_has_free_character_migration = crate::util::read_u8_le(r)?;
-
+                // realm_has_free_character_migration: Bool
+                let realm_has_free_character_migration = crate::util::read_u8_le(r)? != 0;
                 SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
                     queue_position,
                     realm_has_free_character_migration,
@@ -365,7 +364,7 @@ pub enum SMSG_AUTH_RESPONSE_WorldResult {
     AuthLoginServerNotFound,
     AuthWaitQueue {
         queue_position: u32,
-        realm_has_free_character_migration: u8,
+        realm_has_free_character_migration: bool,
     },
     AuthBanned,
     AuthAlreadyOnline,
@@ -663,7 +662,7 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
             } => {
                 1
                 + 4 // queue_position: u32
-                + 1 // realm_has_free_character_migration: u8
+                + 1 // realm_has_free_character_migration: Bool
             }
             Self::AuthBanned => {
                 1

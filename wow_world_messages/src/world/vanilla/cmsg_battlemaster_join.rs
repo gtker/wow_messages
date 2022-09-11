@@ -10,14 +10,14 @@ use std::io::{Write, Read};
 ///     Guid guid;
 ///     Map map;
 ///     u32 instance_id;
-///     u8 join_as_group;
+///     Bool join_as_group;
 /// }
 /// ```
 pub struct CMSG_BATTLEMASTER_JOIN {
     pub guid: Guid,
     pub map: Map,
     pub instance_id: u32,
-    pub join_as_group: u8,
+    pub join_as_group: bool,
 }
 
 impl crate::Message for CMSG_BATTLEMASTER_JOIN {
@@ -37,8 +37,8 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
         // instance_id: u32
         w.write_all(&self.instance_id.to_le_bytes())?;
 
-        // join_as_group: u8
-        w.write_all(&self.join_as_group.to_le_bytes())?;
+        // join_as_group: Bool
+        w.write_all(if self.join_as_group { &[1] } else { &[0] })?;
 
         Ok(())
     }
@@ -56,9 +56,8 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
         // instance_id: u32
         let instance_id = crate::util::read_u32_le(r)?;
 
-        // join_as_group: u8
-        let join_as_group = crate::util::read_u8_le(r)?;
-
+        // join_as_group: Bool
+        let join_as_group = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             guid,
             map,

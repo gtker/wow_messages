@@ -85,7 +85,7 @@ struct Character {
     Vector3d position;
     u32 guild_id;
     u32 flags;
-    u8 first_login;
+    Bool first_login;
     u32 pet_display_id;
     u32 pet_level;
     u32 pet_family;
@@ -112,7 +112,7 @@ struct Character {
 | - | ? / - | [Vector3d](vector3d.md) | position |  |  |
 | - | 4 / Little | u32 | guild_id |  |  |
 | - | 4 / Little | u32 | flags |  |  |
-| - | 1 / - | u8 | first_login |  |  |
+| - | 1 / - | Bool | first_login |  |  |
 | - | 4 / Little | u32 | pet_display_id |  |  |
 | - | 4 / Little | u32 | pet_level |  |  |
 | - | 4 / Little | u32 | pet_family |  |  |
@@ -144,7 +144,7 @@ struct Character {
     u32 guild_id;
     u32 flags;
     u32 recustomization_flags;
-    u8 first_login;
+    Bool first_login;
     u32 pet_display_id;
     u32 pet_level;
     u32 pet_family;
@@ -172,7 +172,7 @@ struct Character {
 | - | 4 / Little | u32 | guild_id |  |  |
 | - | 4 / Little | u32 | flags |  |  |
 | - | 4 / Little | u32 | recustomization_flags |  |  |
-| - | 1 / - | u8 | first_login |  |  |
+| - | 1 / - | Bool | first_login |  |  |
 | - | 4 / Little | u32 | pet_display_id |  |  |
 | - | 4 / Little | u32 | pet_level |  |  |
 | - | 4 / Little | u32 | pet_family |  |  |

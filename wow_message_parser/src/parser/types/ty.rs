@@ -1,6 +1,6 @@
 use crate::container::{
-    Container, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, GUID_SIZE, PACKED_GUID_MAX_SIZE,
-    PACKED_GUID_MIN_SIZE, UPDATE_MASK_MAX_SIZE, UPDATE_MASK_MIN_SIZE,
+    Container, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, GUID_SIZE,
+    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MAX_SIZE, UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::objects::Objects;
 use crate::parser::types::{
@@ -15,6 +15,7 @@ use std::convert::TryInto;
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub enum Type {
     Integer(IntegerType),
+    Bool,
     PackedGuid,
     Guid,
     FloatingPoint(FloatingPointType),
@@ -46,6 +47,7 @@ impl Type {
             Type::UpdateMask => "UpdateMask".to_string(),
             Type::AuraMask => "AuraMask".to_string(),
             Type::SizedCString => "SizedCString".to_string(),
+            Type::Bool => "Bool".to_string(),
         }
     }
 
@@ -59,6 +61,7 @@ impl Type {
             Type::PackedGuid | Type::Guid => "Guid".to_string(),
             Type::UpdateMask => "UpdateMask".to_string(),
             Type::AuraMask => "AuraMask".to_string(),
+            Type::Bool => "bool".to_string(),
         };
 
         s
@@ -70,6 +73,7 @@ impl Type {
 
         match self {
             Type::Integer(i) => sizes.inc_both(i.size() as usize),
+            Type::Bool => sizes.inc_both(BOOL_SIZE.into()),
             Type::Guid => sizes.inc_both(GUID_SIZE as _),
             Type::FloatingPoint(i) => sizes.inc_both(i.size() as usize),
             Type::PackedGuid => sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _),
@@ -180,6 +184,7 @@ impl Type {
             | Type::UpdateMask
             | Type::AuraMask
             | Type::PackedGuid => "-".to_string(),
+            Type::Bool => BOOL_SIZE.to_string(),
         }
     }
 
@@ -196,6 +201,7 @@ impl Type {
             Type::Guid => "Little".to_string(),
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
             Type::SizedCString
+            | Type::Bool
             | Type::String { .. }
             | Type::Array(_)
             | Type::Identifier { .. }
@@ -235,7 +241,7 @@ impl Type {
     pub fn from_str(s: &str) -> Self {
         let s = match s {
             "u8" => Self::Integer(IntegerType::U8),
-            "Bool" => Self::Integer(IntegerType::U8),
+            "Bool" => Self::Bool,
             "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
             "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
             "Spell" => Self::Integer(IntegerType::U32(Endianness::Little)),
@@ -306,6 +312,7 @@ impl Type {
                         Type::FloatingPoint(_) => panic!("unsupported"),
                         Type::UpdateMask => panic!("unsupported"),
                         Type::AuraMask => panic!("unsupported"),
+                        Type::Bool => panic!("unsupported"),
                         Type::PackedGuid => Self::Array(Array {
                             inner: ArrayType::PackedGuid,
                             size,
