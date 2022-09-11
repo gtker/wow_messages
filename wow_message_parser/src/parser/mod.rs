@@ -24,7 +24,7 @@ use crate::ENUM_SELF_VALUE_FIELD;
 use types::ty::Type;
 
 pub mod enumerator;
-mod stats;
+pub mod stats;
 pub mod types;
 pub mod utility;
 

@@ -1,7 +1,6 @@
 use crate::container::{Container, DefinerUsage};
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::Definer;
-use crate::parser::stats::stats_for_1_12;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType};
@@ -578,10 +577,6 @@ version 2: {:#?} in {} line {}",
         self.structs.append(&mut c.structs);
         self.messages.append(&mut c.messages);
         self.tests.append(&mut c.tests);
-    }
-
-    pub fn print_stats_for_1_12(&self) {
-        stats_for_1_12(self);
     }
 }
 

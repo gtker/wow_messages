@@ -16,6 +16,7 @@ use crate::file_utils::{
     write_string_to_file, ModFiles, LOGIN_DIR,
 };
 use crate::ir_printer::write_intermediate_representation;
+use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
 use crate::rust_printer::{
     get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
@@ -164,7 +165,7 @@ fn main() {
 
     print_update_mask();
 
-    o.print_stats_for_1_12();
+    print_message_stats(&o);
 }
 
 fn write_world_opcodes(o: &Objects) {

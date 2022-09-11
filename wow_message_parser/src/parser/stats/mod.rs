@@ -7,6 +7,7 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{Tags, WorldVersion};
 use crate::Version;
 
+#[derive(Debug, Clone)]
 pub struct Data {
     name: &'static str,
     opcode: usize,
@@ -37,10 +38,16 @@ impl Data {
     }
 }
 
-pub fn stats_for_1_12(o: &Objects) {
-    let mut data = vanilla_messages::DATA;
+pub fn print_message_stats(o: &Objects) {
+    stats_for(
+        WorldVersion::Minor(1, 12).into(),
+        vanilla_messages::DATA.to_vec(),
+        o,
+    );
+}
 
-    let tags = Tags::new_with_version(Version::World(WorldVersion::Minor(1, 12)));
+fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
+    let tags = Tags::new_with_version(version);
     for s in o.messages() {
         if !s.tags().fulfills_all(&tags) {
             continue;
@@ -74,24 +81,32 @@ pub fn stats_for_1_12(o: &Objects) {
         }
     }
 
-    println!("Messages without definition:");
-    for d in &data {
-        if !d.definition {
-            println!("\t{}: {}", d.name, d.reason);
+    let amount_of_missing_definitions =
+        data.iter()
+            .fold(0, |acc, o| if o.definition { acc } else { acc + 1 });
+
+    if amount_of_missing_definitions < 10 {
+        println!("{} Messages without definition:", version.as_world());
+        for d in &data {
+            if !d.definition {
+                println!("\t{}: {}", d.name, d.reason);
+            }
         }
+
+        println!();
     }
 
-    println!();
-
     println!(
-        "Messages with definition: {} / {} ({}%) ({} left)",
+        "{} Messages with definition: {} / {} ({}%) ({} left)",
+        version.as_world(),
         definition_sum,
         &data.len(),
         (definition_sum as f32 / data.len() as f32) * 100.0_f32,
         data.len() - definition_sum
     );
     println!(
-        "Total messages with tests: {} / {} ({}%)",
+        "{} Total messages with tests: {} / {} ({}%)",
+        version.as_world(),
         test_sum,
         &data.len(),
         (test_sum as f32 / data.len() as f32) * 100.0_f32
