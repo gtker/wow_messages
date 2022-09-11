@@ -108369,7 +108369,7 @@
         {
           "type": "definition",
           "content": {
-            "name": "block",
+            "name": "data_type",
             "member_type": {
               "type": "integer",
               "content": {
@@ -108381,13 +108381,13 @@
             "used_as_size_in": null,
             "used_in_if": false,
             "tags": {
-              "comment": "The exact purpose is unknown, but [CMSG_UPDATE_ACCOUNT_DATA] and [SMSG_ACCOUNT_DATA_TIMES] possibly also operate on these blocks."
+              "comment": "The type of account data being requested. You can check this against the CacheMask to know if this is character-specific data or account-wide data."
             }
           }
         }
       ],
       "tags": {
-        "comment": "cmangos/vmangos/mangoszero ignore the data in this.",
+        "comment": "Respond with SMSG_UPDATE_ACCOUNT_DATA",
         "version": {
           "type": "world",
           "versions": [
@@ -108396,6 +108396,14 @@
               "version": {
                 "major": 1,
                 "minor": 12
+              }
+            },
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
               }
             }
           ]
@@ -108406,7 +108414,7 @@
           "subject": "CMSG_REQUEST_ACCOUNT_DATA",
           "members": [
             {
-              "variable_name": "block",
+              "variable_name": "data_type",
               "value": {
                 "type": "number",
                 "content": {
@@ -108439,19 +108447,27 @@
                     "major": 1,
                     "minor": 12
                   }
+                },
+                {
+                  "type": "patch",
+                  "version": {
+                    "major": 3,
+                    "minor": 3,
+                    "patch": 5
+                  }
                 }
               ]
             }
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm",
-            "start_position": 11
+            "start_position": 10
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm",
-        "start_position": 3
+        "start_position": 1
       },
       "only_has_io_error": true,
       "features": [
