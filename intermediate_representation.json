@@ -56505,6 +56505,69 @@
       ]
     },
     {
+      "name": "CacheMask",
+      "definer_ty": "enum",
+      "enumerators": [
+        {
+          "name": "GlobalCache",
+          "value": {
+            "int": 21,
+            "original": "0x15"
+          },
+          "tags": {
+            "comment": "Values that are shared between all characters, such as account-wide macros",
+            "display": "Global Cache"
+          }
+        },
+        {
+          "name": "PerCharacterCache",
+          "value": {
+            "int": 234,
+            "original": "0xEA"
+          },
+          "tags": {
+            "comment": "Values that are stored per character",
+            "display": "Per-Character Cache"
+          }
+        }
+      ],
+      "self_value": null,
+      "integer_type": {
+        "type": "u32",
+        "endianness": "little"
+      },
+      "tags": {
+        "comment": "Mask to indicate the variant of the cache",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "objects_used_in": [
+        {
+          "name": "SMSG_ACCOUNT_DATA_TIMES",
+          "usage": "used_but_not_in_if"
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm",
+        "start_position": 61
+      },
+      "features": [
+        "Enum",
+        "WorldVersion"
+      ]
+    },
+    {
       "name": "CastFailureReason",
       "definer_ty": "enum",
       "enumerators": [
@@ -107997,6 +108060,7 @@
       "constant": true,
       "members": [],
       "tags": {
+        "comment": "Respond with SMSG_ACCOUNT_DATA_TIMES",
         "version": {
           "type": "world",
           "versions": [
@@ -135383,6 +135447,126 @@
       "features": [
         "SMsg",
         "FixedArrays",
+        "SimpleArrays",
+        "WorldVersion"
+      ]
+    },
+    {
+      "name": "SMSG_ACCOUNT_DATA_TIMES",
+      "object_type": {
+        "type": "smsg",
+        "opcode": 521
+      },
+      "constant": false,
+      "members": [
+        {
+          "type": "definition",
+          "content": {
+            "name": "unix_time",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u32",
+                "endianness": "little"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "Seconds since Unix Epoch"
+            }
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "unknown1",
+            "member_type": {
+              "type": "integer",
+              "content": {
+                "type": "u8"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "Both mangostwo and arcemu hardcode this to 1"
+            }
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "mask",
+            "member_type": {
+              "type": "identifier",
+              "content": {
+                "type_name": "CacheMask"
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {}
+          }
+        },
+        {
+          "type": "definition",
+          "content": {
+            "name": "data",
+            "member_type": {
+              "type": "array",
+              "content": {
+                "inner": {
+                  "type": "integer",
+                  "content": {
+                    "type": "u32",
+                    "endianness": "little"
+                  }
+                },
+                "size": {
+                  "type": "endless"
+                }
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": false,
+            "tags": {
+              "comment": "Maximum size is 32 4-bit integers. For every bit that is 1 in the mask, write one u32 with the time"
+            }
+          }
+        }
+      ],
+      "tags": {
+        "comment": "Indicate when each piece of account data was last updated by a CMSG_UPDATE_ACCOUNT_DATA. The client can check this against its own times to detect that more recent account data was written from a different client.",
+        "version": {
+          "type": "world",
+          "versions": [
+            {
+              "type": "patch",
+              "version": {
+                "major": 3,
+                "minor": 3,
+                "patch": 5
+              }
+            }
+          ]
+        }
+      },
+      "tests": [],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm",
+        "start_position": 45
+      },
+      "only_has_io_error": false,
+      "features": [
+        "SMsg",
+        "SimpleBuiltInTypes",
+        "SubObjects",
+        "EndlessArrays",
         "SimpleArrays",
         "WorldVersion"
       ]
