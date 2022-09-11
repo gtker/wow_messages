@@ -11,6 +11,7 @@ use crate::world::wrath::CMSG_CHAR_DELETE;
 use crate::world::wrath::CMSG_PLAYER_LOGIN;
 use crate::world::wrath::CMSG_PING;
 use crate::world::wrath::CMSG_AUTH_SESSION;
+use crate::world::wrath::CMSG_UPDATE_ACCOUNT_DATA;
 use crate::world::wrath::CMSG_CHAR_RENAME;
 use crate::world::wrath::CMSG_REALM_SPLIT;
 use crate::world::wrath::CMSG_SET_ACTIVE_VOICE_CHANNEL;
@@ -24,6 +25,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PLAYER_LOGIN(CMSG_PLAYER_LOGIN),
     CMSG_PING(CMSG_PING),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
+    CMSG_UPDATE_ACCOUNT_DATA(CMSG_UPDATE_ACCOUNT_DATA),
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
     CMSG_SET_ACTIVE_VOICE_CHANNEL(CMSG_SET_ACTIVE_VOICE_CHANNEL),
@@ -39,6 +41,7 @@ impl ClientOpcodeMessage {
             0x003D => Ok(Self::CMSG_PLAYER_LOGIN(<CMSG_PLAYER_LOGIN as crate::Message>::read_body(&mut r, body_size)?)),
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size)?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size)?)),
+            0x020B => Ok(Self::CMSG_UPDATE_ACCOUNT_DATA(<CMSG_UPDATE_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
             0x03D3 => Ok(Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(<CMSG_SET_ACTIVE_VOICE_CHANNEL as crate::Message>::read_body(&mut r, body_size)?)),
@@ -122,6 +125,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_encrypted_client(w, e),
@@ -138,6 +142,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
+            Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_unencrypted_client(w),
@@ -154,6 +159,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -170,6 +176,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
@@ -186,6 +193,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
@@ -202,6 +210,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
@@ -220,6 +229,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => "CMSG_PLAYER_LOGIN",
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
+            ClientOpcodeMessage::CMSG_UPDATE_ACCOUNT_DATA(_) => "CMSG_UPDATE_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
             ClientOpcodeMessage::CMSG_SET_ACTIVE_VOICE_CHANNEL(_) => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
@@ -264,6 +274,12 @@ impl From<CMSG_AUTH_SESSION> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_UPDATE_ACCOUNT_DATA> for ClientOpcodeMessage {
+    fn from(c: CMSG_UPDATE_ACCOUNT_DATA) -> Self {
+        Self::CMSG_UPDATE_ACCOUNT_DATA(c)
+    }
+}
+
 impl From<CMSG_CHAR_RENAME> for ClientOpcodeMessage {
     fn from(c: CMSG_CHAR_RENAME) -> Self {
         Self::CMSG_CHAR_RENAME(c)
@@ -304,6 +320,7 @@ use crate::world::wrath::SMSG_CHAR_RENAME;
 use crate::world::wrath::SMSG_ADDON_INFO;
 use crate::world::wrath::SMSG_REALM_SPLIT;
 use crate::world::wrath::SMSG_TIME_SYNC_REQ;
+use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -324,6 +341,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ADDON_INFO(SMSG_ADDON_INFO),
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
+    SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
 }
 
@@ -346,6 +364,7 @@ impl ServerOpcodeMessage {
             0x02EF => Ok(Self::SMSG_ADDON_INFO(<SMSG_ADDON_INFO as crate::Message>::read_body(&mut r, body_size)?)),
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
         }
@@ -517,6 +536,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
         }
     }
@@ -540,6 +560,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.write_unencrypted_server(w),
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
+            Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
         }
     }
@@ -563,6 +584,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
@@ -586,6 +608,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
@@ -609,6 +632,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
@@ -632,6 +656,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
@@ -657,6 +682,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ADDON_INFO(_) => "SMSG_ADDON_INFO",
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
+            ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
         })
     }
@@ -755,6 +781,12 @@ impl From<SMSG_REALM_SPLIT> for ServerOpcodeMessage {
 impl From<SMSG_TIME_SYNC_REQ> for ServerOpcodeMessage {
     fn from(c: SMSG_TIME_SYNC_REQ) -> Self {
         Self::SMSG_TIME_SYNC_REQ(c)
+    }
+}
+
+impl From<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE> for ServerOpcodeMessage {
+    fn from(c: SMSG_UPDATE_ACCOUNT_DATA_COMPLETE) -> Self {
+        Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c)
     }
 }
 
