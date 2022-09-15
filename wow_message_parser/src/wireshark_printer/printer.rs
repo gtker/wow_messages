@@ -9,11 +9,12 @@ use crate::wireshark_printer::{
 };
 use crate::{Container, Object, Objects, Tags};
 
-pub fn print_parser(o: &Objects, w: &WiresharkObject) -> Writer {
+pub fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
     let mut s = Writer::new("");
     s.inc_indent();
 
     let mut empty_bodies = Vec::new();
+    let mut variables = Vec::new();
 
     s.open_curly("switch (opcode)");
     for e in o.wireshark_messages() {
@@ -25,7 +26,7 @@ pub fn print_parser(o: &Objects, w: &WiresharkObject) -> Writer {
         s.wln(format!("case {}:{{", e.name()));
         s.inc_indent();
 
-        print_message(&mut s, e, w, o);
+        print_message(&mut s, e, w, o, &mut variables);
 
         s.wln("}break;");
         s.dec_indent();
@@ -38,12 +39,31 @@ pub fn print_parser(o: &Objects, w: &WiresharkObject) -> Writer {
     s.wln("break;");
     s.closing_curly();
 
+    (s, print_variables(variables))
+}
+
+fn print_variables(mut v: Vec<String>) -> Writer {
+    let mut s = Writer::new("");
+
+    v.sort();
+    v.dedup();
+
+    for name in v {
+        s.wln(format!("guint32 {} = 0;", name));
+    }
+
     s
 }
 
-fn print_message(s: &mut Writer, e: &Container, w: &WiresharkObject, o: &Objects) {
+fn print_message(
+    s: &mut Writer,
+    e: &Container,
+    w: &WiresharkObject,
+    o: &Objects,
+    variables: &mut Vec<String>,
+) {
     for m in e.fields() {
-        if !print_member(s, m, e, w, e.tags(), o) {
+        if !print_member(s, m, e, w, e.tags(), o, variables) {
             return;
         }
     }
@@ -56,16 +76,17 @@ fn print_member(
     wo: &WiresharkObject,
     tags: &Tags,
     o: &Objects,
+    variables: &mut Vec<String>,
 ) -> bool {
     match m {
         StructMember::Definition(d) => {
             let w = wo.get(&name_to_hf(d.name(), d.ty(), tags, o));
-            if !print_definition(s, e.name(), d, w, o, tags, wo) {
+            if !print_definition(s, e.name(), d, w, o, tags, wo, variables) {
                 return false;
             }
         }
         StructMember::IfStatement(statement) => {
-            print_if_statement(s, e, wo, tags, o, statement);
+            print_if_statement(s, e, wo, tags, o, statement, variables);
         }
         StructMember::OptionalStatement(_) => {}
     }
@@ -80,6 +101,7 @@ fn print_if_statement(
     tags: &Tags,
     o: &Objects,
     statement: &IfStatement,
+    variables: &mut Vec<String>,
 ) -> bool {
     let name = statement.name();
 
@@ -109,7 +131,7 @@ fn print_if_statement(
     s.inc_indent();
 
     for m in statement.members() {
-        print_member(s, m, e, wo, tags, o);
+        print_member(s, m, e, wo, tags, o, variables);
     }
 
     s.closing_curly();
@@ -125,6 +147,7 @@ fn print_definition(
     o: &Objects,
     tags: &Tags,
     wo: &WiresharkObject,
+    variables: &mut Vec<String>,
 ) -> bool {
     match d.ty() {
         Type::Integer(i) => {
@@ -133,7 +156,7 @@ fn print_definition(
             let enc = i.wireshark_endian_str();
 
             if d.used_as_size_in().is_some() {
-                s.wln(format!("guint32 {} = 0;", d.name()));
+                variables.push(d.name().to_string());
                 s.wln(format!(
                     "ptvcursor_add_ret_uint(ptv, {name}, {len}, {enc}, &{var_name});",
                     name = name,
@@ -209,6 +232,7 @@ fn print_definition(
                 tags,
                 container_name,
                 d.name(),
+                variables,
             ) {
                 return false;
             }
@@ -256,6 +280,7 @@ fn print_definition(
                         tags,
                         container_name,
                         d.name(),
+                        variables,
                     ) {
                         s.closing_curly();
                         return false;
@@ -298,12 +323,13 @@ fn print_identifier(
     tags: &Tags,
     container_name: &str,
     variable_name: &str,
+    variables: &mut Vec<String>,
 ) -> bool {
     let e = o.get_object(identifier, tags);
     match e {
         Object::Container(e) => {
             for m in e.fields() {
-                if !print_member(s, m, &e, wo, e.tags(), o) {
+                if !print_member(s, m, &e, wo, e.tags(), o, variables) {
                     return false;
                 }
             }
@@ -319,7 +345,7 @@ fn print_identifier(
             let name = w.unwrap().name();
 
             if e.used_in_if_in_object(container_name) {
-                s.wln(format!("guint32 {} = 0;", variable_name));
+                variables.push(variable_name.to_string());
                 s.wln(format!(
                     "ptvcursor_add_ret_uint(ptv, {name}, {len}, {enc}, &{var_name});",
                     name = name,
