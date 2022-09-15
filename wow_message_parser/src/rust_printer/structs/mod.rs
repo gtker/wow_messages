@@ -202,13 +202,13 @@ fn can_derive_copy(members: &[RustMember]) -> bool {
                     return false;
                 }
                 ArraySize::Fixed(_) => {
-                    if !inner_sizes.is_constant().is_some() {
+                    if inner_sizes.is_constant().is_none() {
                         return false;
                     }
                 }
             },
             RustType::Struct { sizes, .. } => {
-                if !sizes.is_constant().is_some() {
+                if sizes.is_constant().is_none() {
                     return false;
                 }
             }

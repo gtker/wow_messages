@@ -14,7 +14,7 @@ use std::fs::read_to_string;
 use std::path::Path;
 
 pub fn print_wireshark(o: &Objects, path: &str) {
-    let w = types::get_wireshark_object(&o);
+    let w = types::get_wireshark_object(o);
     let imports = print_int_declarations(&w);
     let enums = print_enums(&w);
     let register = print_register_info(&w);
@@ -61,7 +61,7 @@ fn insert_between(contents: &str, start: &str, end: &str, replace_with: &str) ->
 }
 
 fn ui_name(name: &str) -> String {
-    name.replace("_", ".")
+    name.replace('_', ".")
 }
 
 fn enum_name(name: &str) -> String {

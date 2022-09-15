@@ -186,12 +186,10 @@ impl Type {
                 let sizes = o.get_object(s, tags).sizes();
                 if let Some(upcast) = upcast {
                     upcast.size().to_string()
+                } else if let Some(size) = sizes.is_constant() {
+                    size.to_string()
                 } else {
-                    if let Some(size) = sizes.is_constant() {
-                        size.to_string()
-                    } else {
-                        "-".to_string()
-                    }
+                    "-".to_string()
                 }
             }
             Type::Array(_) => "?".to_string(),

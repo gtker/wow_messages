@@ -564,11 +564,7 @@ fn print_container_field(
                             Some(offset.unwrap() + upcast.size() as usize)
                         } else {
                             let sizes = o.get_object(s, tags).sizes();
-                            if let Some(size) = sizes.is_constant() {
-                                Some(offset.unwrap() + size)
-                            } else {
-                                None
-                            }
+                            sizes.is_constant().map(|size| offset.unwrap() + size)
                         }
                     }
                     Type::CString

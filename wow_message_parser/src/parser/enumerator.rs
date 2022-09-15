@@ -179,8 +179,7 @@ impl Definer {
     pub fn used_in_if_in_object(&self, name: &str) -> bool {
         self.objects_used_in()
             .iter()
-            .find(|a| a.0 == name && a.1 == DefinerUsage::InIf)
-            .is_some()
+            .any(|a| a.0 == name && a.1 == DefinerUsage::InIf)
     }
 
     pub fn set_objects_used_in(&mut self, mut objects_used_in: Vec<(String, DefinerUsage)>) {

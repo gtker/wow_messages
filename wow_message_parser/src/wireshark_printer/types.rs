@@ -20,7 +20,7 @@ pub fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                                 _ => panic!("variable: '{}' is int and {:#?}", name, new_ty),
                             };
 
-                            if v < &i {
+                            if v < i {
                                 *i = *v;
                             }
                         }
@@ -41,15 +41,13 @@ pub fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                         WiresharkType::Bytes | WiresharkType::String => assert_eq!(m.ty(), new_ty),
                     }
                 }
-            } else {
-                if let Some(ty) = WiresharkType::from_type(d.ty(), e.tags(), o) {
-                    match &ty {
-                        WiresharkType::Enum(e) => objects.add_enum(e.clone()),
-                        WiresharkType::Flag(e) => objects.add_flag(e.clone()),
-                        _ => {}
-                    }
-                    objects.push(WiresharkMember::new(name, ty));
+            } else if let Some(ty) = WiresharkType::from_type(d.ty(), e.tags(), o) {
+                match &ty {
+                    WiresharkType::Enum(e) => objects.add_enum(e.clone()),
+                    WiresharkType::Flag(e) => objects.add_flag(e.clone()),
+                    _ => {}
                 }
+                objects.push(WiresharkMember::new(name, ty));
             }
         }
     }
@@ -156,8 +154,8 @@ impl WiresharkType {
                 let e = o.get_object(s, tags);
                 match e {
                     Object::Container(_) => return None,
-                    Object::Enum(e) => Self::Enum(e.clone()),
-                    Object::Flag(e) => Self::Flag(e.clone()),
+                    Object::Enum(e) => Self::Enum(e),
+                    Object::Flag(e) => Self::Flag(e),
                 }
             }
             Type::Integer(v) => Self::Integer(*v),
@@ -171,8 +169,8 @@ impl WiresharkType {
                     let e = o.get_object(s, tags);
                     match e {
                         Object::Container(_) => return None,
-                        Object::Enum(e) => Self::Enum(e.clone()),
-                        Object::Flag(e) => Self::Flag(e.clone()),
+                        Object::Enum(e) => Self::Enum(e),
+                        Object::Flag(e) => Self::Flag(e),
                     }
                 }
                 ArrayType::Integer(v) => {

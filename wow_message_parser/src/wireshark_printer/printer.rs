@@ -265,7 +265,7 @@ fn print_definition(
                     print_cstring(s, w);
                 }
                 ArrayType::PackedGuid => {
-                    s.wln(format!("add_packed_guid(ptv, pinfo, tree);"));
+                    s.wln("add_packed_guid(ptv, pinfo, tree);");
                 }
             }
 
@@ -274,7 +274,7 @@ fn print_definition(
             false
         }
         Type::PackedGuid => {
-            s.wln(format!("add_packed_guid(ptv, pinfo, tree);"));
+            s.wln("add_packed_guid(ptv, pinfo, tree);");
             true
         }
         Type::UpdateMask | Type::AuraMask => false,

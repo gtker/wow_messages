@@ -382,13 +382,13 @@ impl RustEnumerator {
                         return false;
                     }
                     _ => {
-                        if !inner_sizes.is_constant().is_some() {
+                        if inner_sizes.is_constant().is_none() {
                             return false;
                         }
                     }
                 },
                 RustType::Struct { sizes, .. } => {
-                    if !sizes.is_constant().is_some() {
+                    if sizes.is_constant().is_none() {
                         return false;
                     }
                 }
