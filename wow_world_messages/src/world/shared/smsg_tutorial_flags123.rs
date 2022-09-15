@@ -10,25 +10,11 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm#L3):
 /// ```text
 /// smsg SMSG_TUTORIAL_FLAGS = 0x00FD {
-///     u32 tutorial_data0;
-///     u32 tutorial_data1;
-///     u32 tutorial_data2;
-///     u32 tutorial_data3;
-///     u32 tutorial_data4;
-///     u32 tutorial_data5;
-///     u32 tutorial_data6;
-///     u32 tutorial_data7;
+///     u32[8] tutorial_data;
 /// }
 /// ```
 pub struct SMSG_TUTORIAL_FLAGS {
-    pub tutorial_data0: u32,
-    pub tutorial_data1: u32,
-    pub tutorial_data2: u32,
-    pub tutorial_data3: u32,
-    pub tutorial_data4: u32,
-    pub tutorial_data5: u32,
-    pub tutorial_data6: u32,
-    pub tutorial_data7: u32,
+    pub tutorial_data: [u32; 8],
 }
 
 impl crate::Message for SMSG_TUTORIAL_FLAGS {
@@ -39,29 +25,10 @@ impl crate::Message for SMSG_TUTORIAL_FLAGS {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // tutorial_data0: u32
-        w.write_all(&self.tutorial_data0.to_le_bytes())?;
-
-        // tutorial_data1: u32
-        w.write_all(&self.tutorial_data1.to_le_bytes())?;
-
-        // tutorial_data2: u32
-        w.write_all(&self.tutorial_data2.to_le_bytes())?;
-
-        // tutorial_data3: u32
-        w.write_all(&self.tutorial_data3.to_le_bytes())?;
-
-        // tutorial_data4: u32
-        w.write_all(&self.tutorial_data4.to_le_bytes())?;
-
-        // tutorial_data5: u32
-        w.write_all(&self.tutorial_data5.to_le_bytes())?;
-
-        // tutorial_data6: u32
-        w.write_all(&self.tutorial_data6.to_le_bytes())?;
-
-        // tutorial_data7: u32
-        w.write_all(&self.tutorial_data7.to_le_bytes())?;
+        // tutorial_data: u32[8]
+        for i in self.tutorial_data.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
 
         Ok(())
     }
@@ -70,39 +37,14 @@ impl crate::Message for SMSG_TUTORIAL_FLAGS {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
-        // tutorial_data0: u32
-        let tutorial_data0 = crate::util::read_u32_le(r)?;
-
-        // tutorial_data1: u32
-        let tutorial_data1 = crate::util::read_u32_le(r)?;
-
-        // tutorial_data2: u32
-        let tutorial_data2 = crate::util::read_u32_le(r)?;
-
-        // tutorial_data3: u32
-        let tutorial_data3 = crate::util::read_u32_le(r)?;
-
-        // tutorial_data4: u32
-        let tutorial_data4 = crate::util::read_u32_le(r)?;
-
-        // tutorial_data5: u32
-        let tutorial_data5 = crate::util::read_u32_le(r)?;
-
-        // tutorial_data6: u32
-        let tutorial_data6 = crate::util::read_u32_le(r)?;
-
-        // tutorial_data7: u32
-        let tutorial_data7 = crate::util::read_u32_le(r)?;
+        // tutorial_data: u32[8]
+        let mut tutorial_data = [u32::default(); 8];
+        for i in tutorial_data.iter_mut() {
+            *i = crate::util::read_u32_le(r)?;
+        }
 
         Ok(Self {
-            tutorial_data0,
-            tutorial_data1,
-            tutorial_data2,
-            tutorial_data3,
-            tutorial_data4,
-            tutorial_data5,
-            tutorial_data6,
-            tutorial_data7,
+            tutorial_data,
         })
     }
 
@@ -129,19 +71,13 @@ mod test {
          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
          0xFF, 0xFF, 0xFF, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 18.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_TUTORIAL_FLAGS0() {
         let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data0: 0xFFFFFFFF,
-            tutorial_data1: 0xFFFFFFFF,
-            tutorial_data2: 0xFFFFFFFF,
-            tutorial_data3: 0xFFFFFFFF,
-            tutorial_data4: 0xFFFFFFFF,
-            tutorial_data5: 0xFFFFFFFF,
-            tutorial_data6: 0xFFFFFFFF,
-            tutorial_data7: 0xFFFFFFFF,
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
         };
 
         let header_size = 2 + 2;
@@ -151,14 +87,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.tutorial_data0, expected.tutorial_data0);
-        assert_eq!(t.tutorial_data1, expected.tutorial_data1);
-        assert_eq!(t.tutorial_data2, expected.tutorial_data2);
-        assert_eq!(t.tutorial_data3, expected.tutorial_data3);
-        assert_eq!(t.tutorial_data4, expected.tutorial_data4);
-        assert_eq!(t.tutorial_data5, expected.tutorial_data5);
-        assert_eq!(t.tutorial_data6, expected.tutorial_data6);
-        assert_eq!(t.tutorial_data7, expected.tutorial_data7);
+        assert_eq!(t.tutorial_data, expected.tutorial_data);
 
         assert_eq!(32 + header_size, RAW0.len());
 
@@ -168,19 +97,13 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 18.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_TUTORIAL_FLAGS0() {
         let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data0: 0xFFFFFFFF,
-            tutorial_data1: 0xFFFFFFFF,
-            tutorial_data2: 0xFFFFFFFF,
-            tutorial_data3: 0xFFFFFFFF,
-            tutorial_data4: 0xFFFFFFFF,
-            tutorial_data5: 0xFFFFFFFF,
-            tutorial_data6: 0xFFFFFFFF,
-            tutorial_data7: 0xFFFFFFFF,
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
         };
 
         let header_size = 2 + 2;
@@ -190,14 +113,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.tutorial_data0, expected.tutorial_data0);
-        assert_eq!(t.tutorial_data1, expected.tutorial_data1);
-        assert_eq!(t.tutorial_data2, expected.tutorial_data2);
-        assert_eq!(t.tutorial_data3, expected.tutorial_data3);
-        assert_eq!(t.tutorial_data4, expected.tutorial_data4);
-        assert_eq!(t.tutorial_data5, expected.tutorial_data5);
-        assert_eq!(t.tutorial_data6, expected.tutorial_data6);
-        assert_eq!(t.tutorial_data7, expected.tutorial_data7);
+        assert_eq!(t.tutorial_data, expected.tutorial_data);
 
         assert_eq!(32 + header_size, RAW0.len());
 
@@ -207,19 +123,13 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 18.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_TUTORIAL_FLAGS0() {
         let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data0: 0xFFFFFFFF,
-            tutorial_data1: 0xFFFFFFFF,
-            tutorial_data2: 0xFFFFFFFF,
-            tutorial_data3: 0xFFFFFFFF,
-            tutorial_data4: 0xFFFFFFFF,
-            tutorial_data5: 0xFFFFFFFF,
-            tutorial_data6: 0xFFFFFFFF,
-            tutorial_data7: 0xFFFFFFFF,
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
         };
 
         let header_size = 2 + 2;
@@ -229,14 +139,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.tutorial_data0, expected.tutorial_data0);
-        assert_eq!(t.tutorial_data1, expected.tutorial_data1);
-        assert_eq!(t.tutorial_data2, expected.tutorial_data2);
-        assert_eq!(t.tutorial_data3, expected.tutorial_data3);
-        assert_eq!(t.tutorial_data4, expected.tutorial_data4);
-        assert_eq!(t.tutorial_data5, expected.tutorial_data5);
-        assert_eq!(t.tutorial_data6, expected.tutorial_data6);
-        assert_eq!(t.tutorial_data7, expected.tutorial_data7);
+        assert_eq!(t.tutorial_data, expected.tutorial_data);
 
         assert_eq!(32 + header_size, RAW0.len());
 

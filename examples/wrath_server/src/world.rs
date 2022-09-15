@@ -154,14 +154,10 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .unwrap();
 
     SMSG_TUTORIAL_FLAGS {
-        tutorial_data0: 0xFFFFFFFF,
-        tutorial_data1: 0xFFFFFFFF,
-        tutorial_data2: 0xFFFFFFFF,
-        tutorial_data3: 0xFFFFFFFF,
-        tutorial_data4: 0xFFFFFFFF,
-        tutorial_data5: 0xFFFFFFFF,
-        tutorial_data6: 0xFFFFFFFF,
-        tutorial_data7: 0xFFFFFFFF,
+        tutorial_data: [
+            0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+            0xFFFFFFFF,
+        ],
     }
     .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
     .await

@@ -1,14 +1,7 @@
 #tag_all versions "1 2 3";
 
 smsg SMSG_TUTORIAL_FLAGS = 0xFD {
-    u32 tutorial_data0;
-    u32 tutorial_data1;
-    u32 tutorial_data2;
-    u32 tutorial_data3;
-    u32 tutorial_data4;
-    u32 tutorial_data5;
-    u32 tutorial_data6;
-    u32 tutorial_data7;
+    u32[8] tutorial_data;
 } {
     description = "Data for which tutorials the client has passed.";
     comment = "All bits set means that all tutorials have been passed.";
@@ -16,14 +9,7 @@ smsg SMSG_TUTORIAL_FLAGS = 0xFD {
 }
 
 test SMSG_TUTORIAL_FLAGS {
-    tutorial_data0 = 0xFFFFFFFF;
-    tutorial_data1 = 0xFFFFFFFF;
-    tutorial_data2 = 0xFFFFFFFF;
-    tutorial_data3 = 0xFFFFFFFF;
-    tutorial_data4 = 0xFFFFFFFF;
-    tutorial_data5 = 0xFFFFFFFF;
-    tutorial_data6 = 0xFFFFFFFF;
-    tutorial_data7 = 0xFFFFFFFF;
+    tutorial_data = [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ];
 } [
     0x00, 0x22, /* size */
     0xFD, 0x00, /* opcode */
