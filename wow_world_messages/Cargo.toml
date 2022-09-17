@@ -23,6 +23,10 @@ tbc = []
 wrath = []
 encryption = ["wow_srp"]
 
+[dependencies.chrono]
+version = "0.4"
+optional = true
+
 [dependencies.tokio]
 version = "1"
 default-features = false

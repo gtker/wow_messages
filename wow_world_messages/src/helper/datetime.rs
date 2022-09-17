@@ -38,3 +38,37 @@ impl DateTime {
         self.inner
     }
 }
+
+#[cfg(feature = "chrono")]
+impl<T: chrono::prelude::TimeZone> std::convert::TryFrom<chrono::prelude::DateTime<T>>
+    for DateTime
+{
+    type Error = &'static str;
+
+    fn try_from(dt: chrono::prelude::DateTime<T>) -> Result<Self, Self::Error> {
+        use chrono::prelude::*;
+        use std::convert::TryInto;
+        let date_time = Self::new(
+            (dt.year() - 2000)
+                .try_into()
+                .map_err(|_| "Year does not fit in byte")?,
+            dt.month0()
+                .try_into()
+                .map_err(|_| "Month does not fit in byte")?,
+            dt.day0()
+                .try_into()
+                .map_err(|_| "Day does not fit in byte")?,
+            dt.weekday()
+                .num_days_from_monday()
+                .try_into()
+                .map_err(|_| "Day of week does not fit in byte")?,
+            dt.hour()
+                .try_into()
+                .map_err(|_| "Hour does not fit in byte")?,
+            dt.minute()
+                .try_into()
+                .map_err(|_| "Minute does fit in byte")?,
+        );
+        Ok(date_time)
+    }
+}
