@@ -21,6 +21,8 @@ impl crate::Message for CMSG_GUILD_MOTD {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // message_of_the_day: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.message_of_the_day.as_bytes().iter().rev().next(), Some(&0u8), "String message_of_the_day must not be null-terminated.");
         w.write_all(self.message_of_the_day.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

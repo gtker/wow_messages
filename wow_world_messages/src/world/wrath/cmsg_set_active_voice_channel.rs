@@ -26,6 +26,8 @@ impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // unknown2: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.unknown2.as_bytes().iter().rev().next(), Some(&0u8), "String unknown2 must not be null-terminated.");
         w.write_all(self.unknown2.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

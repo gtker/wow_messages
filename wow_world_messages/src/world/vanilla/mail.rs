@@ -109,6 +109,8 @@ impl Mail {
         }
 
         // subject: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.subject.as_bytes().iter().rev().next(), Some(&0u8), "String subject must not be null-terminated.");
         w.write_all(self.subject.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

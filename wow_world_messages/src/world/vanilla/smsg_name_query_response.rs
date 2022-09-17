@@ -42,11 +42,15 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // character_name: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.character_name.as_bytes().iter().rev().next(), Some(&0u8), "String character_name must not be null-terminated.");
         w.write_all(self.character_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // realm_name: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.realm_name.as_bytes().iter().rev().next(), Some(&0u8), "String realm_name must not be null-terminated.");
         w.write_all(self.realm_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

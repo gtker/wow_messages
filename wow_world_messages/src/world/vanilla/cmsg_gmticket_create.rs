@@ -49,11 +49,15 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         self.position.write_into_vec(w)?;
 
         // message: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.message.as_bytes().iter().rev().next(), Some(&0u8), "String message must not be null-terminated.");
         w.write_all(self.message.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // reserved_for_future_use: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.reserved_for_future_use.as_bytes().iter().rev().next(), Some(&0u8), "String reserved_for_future_use must not be null-terminated.");
         w.write_all(self.reserved_for_future_use.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

@@ -44,6 +44,8 @@ impl crate::Message for SMSG_TRAINER_LIST {
         }
 
         // greeting: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.greeting.as_bytes().iter().rev().next(), Some(&0u8), "String greeting must not be null-terminated.");
         w.write_all(self.greeting.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
