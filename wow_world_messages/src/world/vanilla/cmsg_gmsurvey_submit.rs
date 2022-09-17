@@ -39,8 +39,8 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
         }
 
         // answer_comment: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.answer_comment.as_bytes().iter().rev().next(), Some(&0u8), "String answer_comment must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.answer_comment.as_bytes().iter().rev().next(), Some(&0_u8), "String `answer_comment` must not be null-terminated.");
         w.write_all(self.answer_comment.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

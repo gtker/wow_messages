@@ -29,8 +29,8 @@ impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
         w.write_all(&self.quest_id.to_le_bytes())?;
 
         // quest_title: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.quest_title.as_bytes().iter().rev().next(), Some(&0u8), "String quest_title must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.quest_title.as_bytes().iter().rev().next(), Some(&0_u8), "String `quest_title` must not be null-terminated.");
         w.write_all(self.quest_title.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

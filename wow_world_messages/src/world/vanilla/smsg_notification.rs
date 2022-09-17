@@ -21,8 +21,8 @@ impl crate::Message for SMSG_NOTIFICATION {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // notification: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.notification.as_bytes().iter().rev().next(), Some(&0u8), "String notification must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.notification.as_bytes().iter().rev().next(), Some(&0_u8), "String `notification` must not be null-terminated.");
         w.write_all(self.notification.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

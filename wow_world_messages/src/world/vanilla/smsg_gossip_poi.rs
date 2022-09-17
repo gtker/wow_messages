@@ -46,8 +46,8 @@ impl crate::Message for SMSG_GOSSIP_POI {
         w.write_all(&self.data.to_le_bytes())?;
 
         // location_name: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.location_name.as_bytes().iter().rev().next(), Some(&0u8), "String location_name must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.location_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `location_name` must not be null-terminated.");
         w.write_all(self.location_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

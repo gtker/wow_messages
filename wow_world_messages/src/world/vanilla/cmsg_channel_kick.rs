@@ -23,15 +23,15 @@ impl crate::Message for CMSG_CHANNEL_KICK {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // channel_name: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.channel_name.as_bytes().iter().rev().next(), Some(&0u8), "String channel_name must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.channel_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `channel_name` must not be null-terminated.");
         w.write_all(self.channel_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // player_name: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.player_name.as_bytes().iter().rev().next(), Some(&0u8), "String player_name must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.player_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `player_name` must not be null-terminated.");
         w.write_all(self.player_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

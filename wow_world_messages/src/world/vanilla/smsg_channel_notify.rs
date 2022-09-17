@@ -27,8 +27,8 @@ impl crate::Message for SMSG_CHANNEL_NOTIFY {
         w.write_all(&(self.notify_type.as_int() as u8).to_le_bytes())?;
 
         // channel_name: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.channel_name.as_bytes().iter().rev().next(), Some(&0u8), "String channel_name must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.channel_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `channel_name` must not be null-terminated.");
         w.write_all(self.channel_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

@@ -56,8 +56,8 @@ impl crate::Message for CMSG_AUTH_SESSION {
         w.write_all(&self.login_server_id.to_le_bytes())?;
 
         // username: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.username.as_bytes().iter().rev().next(), Some(&0u8), "String username must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.username.as_bytes().iter().rev().next(), Some(&0_u8), "String `username` must not be null-terminated.");
         w.write_all(self.username.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
