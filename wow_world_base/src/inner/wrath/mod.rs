@@ -1,3 +1,5 @@
+pub(crate) mod cache_mask;
+pub use cache_mask::*;
 pub(crate) mod class;
 pub use class::*;
 pub(crate) mod gender;
