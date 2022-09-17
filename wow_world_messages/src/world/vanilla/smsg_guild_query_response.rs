@@ -38,6 +38,8 @@ impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
         w.write_all(&self.id.to_le_bytes())?;
 
         // name: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.name.as_bytes().iter().rev().next(), Some(&0u8), "String name must not be null-terminated.");
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

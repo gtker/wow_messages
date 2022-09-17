@@ -21,6 +21,8 @@ impl crate::Message for CMSG_ADD_IGNORE {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // ignore_name: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.ignore_name.as_bytes().iter().rev().next(), Some(&0u8), "String ignore_name must not be null-terminated.");
         w.write_all(self.ignore_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

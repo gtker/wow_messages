@@ -29,11 +29,15 @@ pub struct WhoPlayer {
 impl WhoPlayer {
     pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // name: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.name.as_bytes().iter().rev().next(), Some(&0u8), "String name must not be null-terminated.");
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // guild: CString
+        // Guard against strings that are already null-terminated
+        assert_ne!(self.guild.as_bytes().iter().rev().next(), Some(&0u8), "String guild must not be null-terminated.");
         w.write_all(self.guild.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

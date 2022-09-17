@@ -208,6 +208,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 player_rank,
             } => {
                 // channel_name: CString
+                // Guard against strings that are already null-terminated
+                assert_ne!(channel_name.as_bytes().iter().rev().next(), Some(&0u8), "String channel_name must not be null-terminated.");
                 w.write_all(channel_name.as_bytes())?;
                 // Null terminator
                 w.write_all(&[0])?;
