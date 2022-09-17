@@ -187,10 +187,11 @@ pub fn print_write_definition(
             s.wln("// Null terminator");
             s.wln(format!("w.write_all(&[0]){postfix}?;", postfix = postfix,));
         }
+        //TODO: types that prevent null bytes in strings
         Type::CString => {
-            s.wln("// Guard against strings that are already null-terminated");
+            s.wln("// TODO: Guard against strings that are already null-terminated");
             s.wln(format!(
-                "assert_ne!({prefix}{name}.as_bytes().iter().rev().next(), Some(&0u8), \"String {name} must not be null-terminated.\");", 
+                "assert_ne!({prefix}{name}.as_bytes().iter().rev().next(), Some(&0_u8), \"String `{name}` must not be null-terminated.\");", 
                 name = d.name(),
                 prefix = variable_prefix,
             ));
