@@ -43,36 +43,36 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
         // optional found
         if let Some(v) = &self.found {
             // name1: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.name1.as_bytes().iter().rev().next(), Some(&0u8), "String name1 must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.name1.as_bytes().iter().rev().next(), Some(&0_u8), "String `name1` must not be null-terminated.");
             w.write_all(v.name1.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // name2: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.name2.as_bytes().iter().rev().next(), Some(&0u8), "String name2 must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.name2.as_bytes().iter().rev().next(), Some(&0_u8), "String `name2` must not be null-terminated.");
             w.write_all(v.name2.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // name3: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.name3.as_bytes().iter().rev().next(), Some(&0u8), "String name3 must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.name3.as_bytes().iter().rev().next(), Some(&0_u8), "String `name3` must not be null-terminated.");
             w.write_all(v.name3.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // name4: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.name4.as_bytes().iter().rev().next(), Some(&0u8), "String name4 must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.name4.as_bytes().iter().rev().next(), Some(&0_u8), "String `name4` must not be null-terminated.");
             w.write_all(v.name4.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // sub_name: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.sub_name.as_bytes().iter().rev().next(), Some(&0u8), "String sub_name must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.sub_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `sub_name` must not be null-terminated.");
             w.write_all(v.sub_name.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;

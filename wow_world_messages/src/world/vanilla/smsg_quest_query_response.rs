@@ -156,29 +156,29 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         w.write_all(&self.point_opt.to_le_bytes())?;
 
         // title: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.title.as_bytes().iter().rev().next(), Some(&0u8), "String title must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.title.as_bytes().iter().rev().next(), Some(&0_u8), "String `title` must not be null-terminated.");
         w.write_all(self.title.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // objective_text: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.objective_text.as_bytes().iter().rev().next(), Some(&0u8), "String objective_text must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.objective_text.as_bytes().iter().rev().next(), Some(&0_u8), "String `objective_text` must not be null-terminated.");
         w.write_all(self.objective_text.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // details: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.details.as_bytes().iter().rev().next(), Some(&0u8), "String details must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.details.as_bytes().iter().rev().next(), Some(&0_u8), "String `details` must not be null-terminated.");
         w.write_all(self.details.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // end_text: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.end_text.as_bytes().iter().rev().next(), Some(&0u8), "String end_text must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.end_text.as_bytes().iter().rev().next(), Some(&0_u8), "String `end_text` must not be null-terminated.");
         w.write_all(self.end_text.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

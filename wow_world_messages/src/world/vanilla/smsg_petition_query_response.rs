@@ -88,15 +88,15 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         w.write_all(&self.charter_owner.guid().to_le_bytes())?;
 
         // guild_name: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.guild_name.as_bytes().iter().rev().next(), Some(&0u8), "String guild_name must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.guild_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `guild_name` must not be null-terminated.");
         w.write_all(self.guild_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // body_text: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.body_text.as_bytes().iter().rev().next(), Some(&0u8), "String body_text must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.body_text.as_bytes().iter().rev().next(), Some(&0_u8), "String `body_text` must not be null-terminated.");
         w.write_all(self.body_text.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

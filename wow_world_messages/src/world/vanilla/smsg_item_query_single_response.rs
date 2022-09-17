@@ -98,29 +98,29 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.item_sub_class.to_le_bytes())?;
 
             // name1: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.name1.as_bytes().iter().rev().next(), Some(&0u8), "String name1 must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.name1.as_bytes().iter().rev().next(), Some(&0_u8), "String `name1` must not be null-terminated.");
             w.write_all(v.name1.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // name2: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.name2.as_bytes().iter().rev().next(), Some(&0u8), "String name2 must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.name2.as_bytes().iter().rev().next(), Some(&0_u8), "String `name2` must not be null-terminated.");
             w.write_all(v.name2.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // name3: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.name3.as_bytes().iter().rev().next(), Some(&0u8), "String name3 must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.name3.as_bytes().iter().rev().next(), Some(&0_u8), "String `name3` must not be null-terminated.");
             w.write_all(v.name3.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // name4: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.name4.as_bytes().iter().rev().next(), Some(&0u8), "String name4 must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.name4.as_bytes().iter().rev().next(), Some(&0_u8), "String `name4` must not be null-terminated.");
             w.write_all(v.name4.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
@@ -234,8 +234,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.bonding.to_le_bytes())?;
 
             // description: CString
-            // Guard against strings that are already null-terminated
-            assert_ne!(v.description.as_bytes().iter().rev().next(), Some(&0u8), "String description must not be null-terminated.");
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.description.as_bytes().iter().rev().next(), Some(&0_u8), "String `description` must not be null-terminated.");
             w.write_all(v.description.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;

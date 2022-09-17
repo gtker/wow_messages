@@ -27,8 +27,8 @@ impl crate::Message for MSG_PETITION_RENAME {
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
         // new_name: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.new_name.as_bytes().iter().rev().next(), Some(&0u8), "String new_name must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.new_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `new_name` must not be null-terminated.");
         w.write_all(self.new_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

@@ -29,15 +29,15 @@ impl crate::Message for SMSG_DUEL_WINNER {
         w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
 
         // opponent_name: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.opponent_name.as_bytes().iter().rev().next(), Some(&0u8), "String opponent_name must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.opponent_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `opponent_name` must not be null-terminated.");
         w.write_all(self.opponent_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
         // initiator_name: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.initiator_name.as_bytes().iter().rev().next(), Some(&0u8), "String initiator_name must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.initiator_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `initiator_name` must not be null-terminated.");
         w.write_all(self.initiator_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;

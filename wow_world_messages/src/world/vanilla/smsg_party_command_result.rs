@@ -30,8 +30,8 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
         w.write_all(&(self.operation.as_int() as u32).to_le_bytes())?;
 
         // member: CString
-        // Guard against strings that are already null-terminated
-        assert_ne!(self.member.as_bytes().iter().rev().next(), Some(&0u8), "String member must not be null-terminated.");
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.member.as_bytes().iter().rev().next(), Some(&0_u8), "String `member` must not be null-terminated.");
         w.write_all(self.member.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
