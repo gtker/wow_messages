@@ -19,11 +19,7 @@ impl UpdateItem {
         let lower = self.values.get(&0);
         let upper = self.values.get(&1);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
@@ -33,11 +29,7 @@ impl UpdateItem {
     }
 
     pub fn object_TYPE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&2) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&2).map(|v| *v as i32)
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -47,11 +39,7 @@ impl UpdateItem {
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&3) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&3).map(|v| *v as i32)
     }
 
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
@@ -61,11 +49,7 @@ impl UpdateItem {
     }
 
     pub fn object_SCALE_X(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&4) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&4).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_item_OWNER(mut self, v: Guid) -> Self {
@@ -80,11 +64,7 @@ impl UpdateItem {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_item_CONTAINED(mut self, v: Guid) -> Self {
@@ -99,11 +79,7 @@ impl UpdateItem {
         let lower = self.values.get(&8);
         let upper = self.values.get(&9);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_item_CREATOR(mut self, v: Guid) -> Self {
@@ -118,11 +94,7 @@ impl UpdateItem {
         let lower = self.values.get(&10);
         let upper = self.values.get(&11);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_item_GIFTCREATOR(mut self, v: Guid) -> Self {
@@ -137,11 +109,7 @@ impl UpdateItem {
         let lower = self.values.get(&12);
         let upper = self.values.get(&13);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_item_STACK_COUNT(mut self, v: i32) -> Self {
@@ -151,11 +119,7 @@ impl UpdateItem {
     }
 
     pub fn item_STACK_COUNT(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&14) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&14).map(|v| *v as i32)
     }
 
     pub fn set_item_DURATION(mut self, v: i32) -> Self {
@@ -165,11 +129,7 @@ impl UpdateItem {
     }
 
     pub fn item_DURATION(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&15) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&15).map(|v| *v as i32)
     }
 
     pub fn set_item_SPELL_CHARGES(mut self, v: i32) -> Self {
@@ -179,11 +139,7 @@ impl UpdateItem {
     }
 
     pub fn item_SPELL_CHARGES(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&16) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&16).map(|v| *v as i32)
     }
 
     pub fn set_item_FLAGS(mut self, v: i32) -> Self {
@@ -193,11 +149,7 @@ impl UpdateItem {
     }
 
     pub fn item_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&21) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&21).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_1_1(mut self, v: i32) -> Self {
@@ -207,11 +159,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_1_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&22) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&22).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_1_3(mut self, a: u16, b: u16) -> Self {
@@ -237,11 +185,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_2_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&25) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&25).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_2_3(mut self, a: u16, b: u16) -> Self {
@@ -267,11 +211,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_3_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&28) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&28).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_3_3(mut self, a: u16, b: u16) -> Self {
@@ -297,11 +237,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_4_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&31) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&31).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_4_3(mut self, a: u16, b: u16) -> Self {
@@ -327,11 +263,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_5_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&34) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&34).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_5_3(mut self, a: u16, b: u16) -> Self {
@@ -357,11 +289,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_6_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&37) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&37).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_6_3(mut self, a: u16, b: u16) -> Self {
@@ -387,11 +315,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_7_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&40) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&40).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_7_3(mut self, a: u16, b: u16) -> Self {
@@ -417,11 +341,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_8_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&43) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&43).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_8_3(mut self, a: u16, b: u16) -> Self {
@@ -447,11 +367,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_9_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&46) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&46).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_9_3(mut self, a: u16, b: u16) -> Self {
@@ -477,11 +393,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_10_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&49) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&49).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_10_3(mut self, a: u16, b: u16) -> Self {
@@ -507,11 +419,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_11_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&52) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&52).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_11_3(mut self, a: u16, b: u16) -> Self {
@@ -537,11 +445,7 @@ impl UpdateItem {
     }
 
     pub fn item_ENCHANTMENT_12_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&55) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&55).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_12_3(mut self, a: u16, b: u16) -> Self {
@@ -567,11 +471,7 @@ impl UpdateItem {
     }
 
     pub fn item_PROPERTY_SEED(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&58) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&58).map(|v| *v as i32)
     }
 
     pub fn set_item_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
@@ -581,11 +481,7 @@ impl UpdateItem {
     }
 
     pub fn item_RANDOM_PROPERTIES_ID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&59) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&59).map(|v| *v as i32)
     }
 
     pub fn set_item_DURABILITY(mut self, v: i32) -> Self {
@@ -595,11 +491,7 @@ impl UpdateItem {
     }
 
     pub fn item_DURABILITY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&60) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&60).map(|v| *v as i32)
     }
 
     pub fn set_item_MAXDURABILITY(mut self, v: i32) -> Self {
@@ -609,11 +501,7 @@ impl UpdateItem {
     }
 
     pub fn item_MAXDURABILITY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&61) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&61).map(|v| *v as i32)
     }
 
     pub fn set_item_CREATE_PLAYED_TIME(mut self, v: i32) -> Self {
@@ -623,11 +511,7 @@ impl UpdateItem {
     }
 
     pub fn item_CREATE_PLAYED_TIME(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&62) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&62).map(|v| *v as i32)
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -642,11 +526,7 @@ impl UpdateItem {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
 }
@@ -664,11 +544,7 @@ impl UpdateContainer {
         let lower = self.values.get(&0);
         let upper = self.values.get(&1);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
@@ -678,11 +554,7 @@ impl UpdateContainer {
     }
 
     pub fn object_TYPE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&2) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&2).map(|v| *v as i32)
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -692,11 +564,7 @@ impl UpdateContainer {
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&3) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&3).map(|v| *v as i32)
     }
 
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
@@ -706,11 +574,7 @@ impl UpdateContainer {
     }
 
     pub fn object_SCALE_X(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&4) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&4).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_item_OWNER(mut self, v: Guid) -> Self {
@@ -725,11 +589,7 @@ impl UpdateContainer {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_item_CONTAINED(mut self, v: Guid) -> Self {
@@ -744,11 +604,7 @@ impl UpdateContainer {
         let lower = self.values.get(&8);
         let upper = self.values.get(&9);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_item_CREATOR(mut self, v: Guid) -> Self {
@@ -763,11 +619,7 @@ impl UpdateContainer {
         let lower = self.values.get(&10);
         let upper = self.values.get(&11);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_item_GIFTCREATOR(mut self, v: Guid) -> Self {
@@ -782,11 +634,7 @@ impl UpdateContainer {
         let lower = self.values.get(&12);
         let upper = self.values.get(&13);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_item_STACK_COUNT(mut self, v: i32) -> Self {
@@ -796,11 +644,7 @@ impl UpdateContainer {
     }
 
     pub fn item_STACK_COUNT(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&14) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&14).map(|v| *v as i32)
     }
 
     pub fn set_item_DURATION(mut self, v: i32) -> Self {
@@ -810,11 +654,7 @@ impl UpdateContainer {
     }
 
     pub fn item_DURATION(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&15) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&15).map(|v| *v as i32)
     }
 
     pub fn set_item_SPELL_CHARGES(mut self, v: i32) -> Self {
@@ -824,11 +664,7 @@ impl UpdateContainer {
     }
 
     pub fn item_SPELL_CHARGES(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&16) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&16).map(|v| *v as i32)
     }
 
     pub fn set_item_FLAGS(mut self, v: i32) -> Self {
@@ -838,11 +674,7 @@ impl UpdateContainer {
     }
 
     pub fn item_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&21) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&21).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_1_1(mut self, v: i32) -> Self {
@@ -852,11 +684,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_1_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&22) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&22).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_1_3(mut self, a: u16, b: u16) -> Self {
@@ -882,11 +710,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_2_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&25) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&25).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_2_3(mut self, a: u16, b: u16) -> Self {
@@ -912,11 +736,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_3_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&28) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&28).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_3_3(mut self, a: u16, b: u16) -> Self {
@@ -942,11 +762,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_4_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&31) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&31).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_4_3(mut self, a: u16, b: u16) -> Self {
@@ -972,11 +788,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_5_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&34) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&34).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_5_3(mut self, a: u16, b: u16) -> Self {
@@ -1002,11 +814,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_6_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&37) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&37).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_6_3(mut self, a: u16, b: u16) -> Self {
@@ -1032,11 +840,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_7_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&40) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&40).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_7_3(mut self, a: u16, b: u16) -> Self {
@@ -1062,11 +866,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_8_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&43) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&43).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_8_3(mut self, a: u16, b: u16) -> Self {
@@ -1092,11 +892,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_9_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&46) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&46).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_9_3(mut self, a: u16, b: u16) -> Self {
@@ -1122,11 +918,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_10_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&49) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&49).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_10_3(mut self, a: u16, b: u16) -> Self {
@@ -1152,11 +944,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_11_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&52) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&52).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_11_3(mut self, a: u16, b: u16) -> Self {
@@ -1182,11 +970,7 @@ impl UpdateContainer {
     }
 
     pub fn item_ENCHANTMENT_12_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&55) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&55).map(|v| *v as i32)
     }
 
     pub fn set_item_ENCHANTMENT_12_3(mut self, a: u16, b: u16) -> Self {
@@ -1212,11 +996,7 @@ impl UpdateContainer {
     }
 
     pub fn item_PROPERTY_SEED(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&58) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&58).map(|v| *v as i32)
     }
 
     pub fn set_item_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
@@ -1226,11 +1006,7 @@ impl UpdateContainer {
     }
 
     pub fn item_RANDOM_PROPERTIES_ID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&59) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&59).map(|v| *v as i32)
     }
 
     pub fn set_item_DURABILITY(mut self, v: i32) -> Self {
@@ -1240,11 +1016,7 @@ impl UpdateContainer {
     }
 
     pub fn item_DURABILITY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&60) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&60).map(|v| *v as i32)
     }
 
     pub fn set_item_MAXDURABILITY(mut self, v: i32) -> Self {
@@ -1254,11 +1026,7 @@ impl UpdateContainer {
     }
 
     pub fn item_MAXDURABILITY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&61) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&61).map(|v| *v as i32)
     }
 
     pub fn set_item_CREATE_PLAYED_TIME(mut self, v: i32) -> Self {
@@ -1268,11 +1036,7 @@ impl UpdateContainer {
     }
 
     pub fn item_CREATE_PLAYED_TIME(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&62) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&62).map(|v| *v as i32)
     }
 
     pub fn set_container_NUM_SLOTS(mut self, v: i32) -> Self {
@@ -1282,11 +1046,7 @@ impl UpdateContainer {
     }
 
     pub fn container_NUM_SLOTS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&64) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&64).map(|v| *v as i32)
     }
 
     pub fn set_container_SLOT_1(mut self, v: Guid) -> Self {
@@ -1301,11 +1061,7 @@ impl UpdateContainer {
         let lower = self.values.get(&66);
         let upper = self.values.get(&67);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -1320,11 +1076,7 @@ impl UpdateContainer {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
 }
@@ -1342,11 +1094,7 @@ impl UpdateUnit {
         let lower = self.values.get(&0);
         let upper = self.values.get(&1);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
@@ -1356,11 +1104,7 @@ impl UpdateUnit {
     }
 
     pub fn object_TYPE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&2) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&2).map(|v| *v as i32)
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -1370,11 +1114,7 @@ impl UpdateUnit {
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&3) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&3).map(|v| *v as i32)
     }
 
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
@@ -1384,11 +1124,7 @@ impl UpdateUnit {
     }
 
     pub fn object_SCALE_X(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&4) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&4).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_CHARM(mut self, v: Guid) -> Self {
@@ -1403,11 +1139,7 @@ impl UpdateUnit {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_SUMMON(mut self, v: Guid) -> Self {
@@ -1422,11 +1154,7 @@ impl UpdateUnit {
         let lower = self.values.get(&8);
         let upper = self.values.get(&9);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CRITTER(mut self, v: Guid) -> Self {
@@ -1441,11 +1169,7 @@ impl UpdateUnit {
         let lower = self.values.get(&10);
         let upper = self.values.get(&11);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CHARMEDBY(mut self, v: Guid) -> Self {
@@ -1460,11 +1184,7 @@ impl UpdateUnit {
         let lower = self.values.get(&12);
         let upper = self.values.get(&13);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_SUMMONEDBY(mut self, v: Guid) -> Self {
@@ -1479,11 +1199,7 @@ impl UpdateUnit {
         let lower = self.values.get(&14);
         let upper = self.values.get(&15);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CREATEDBY(mut self, v: Guid) -> Self {
@@ -1498,11 +1214,7 @@ impl UpdateUnit {
         let lower = self.values.get(&16);
         let upper = self.values.get(&17);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_TARGET(mut self, v: Guid) -> Self {
@@ -1517,11 +1229,7 @@ impl UpdateUnit {
         let lower = self.values.get(&18);
         let upper = self.values.get(&19);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CHANNEL_OBJECT(mut self, v: Guid) -> Self {
@@ -1536,11 +1244,7 @@ impl UpdateUnit {
         let lower = self.values.get(&20);
         let upper = self.values.get(&21);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CHANNEL_SPELL(mut self, v: i32) -> Self {
@@ -1550,11 +1254,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_CHANNEL_SPELL(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&22) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&22).map(|v| *v as i32)
     }
 
     pub fn set_unit_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
@@ -1580,11 +1280,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_HEALTH(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&24) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&24).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER1(mut self, v: i32) -> Self {
@@ -1594,11 +1290,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&25) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&25).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER2(mut self, v: i32) -> Self {
@@ -1608,11 +1300,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&26) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&26).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER3(mut self, v: i32) -> Self {
@@ -1622,11 +1310,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER3(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&27) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&27).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER4(mut self, v: i32) -> Self {
@@ -1636,11 +1320,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER4(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&28) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&28).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER5(mut self, v: i32) -> Self {
@@ -1650,11 +1330,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&29) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&29).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER6(mut self, v: i32) -> Self {
@@ -1664,11 +1340,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER6(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&30) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&30).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER7(mut self, v: i32) -> Self {
@@ -1678,11 +1350,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER7(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&31) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&31).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXHEALTH(mut self, v: i32) -> Self {
@@ -1692,11 +1360,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXHEALTH(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&32) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&32).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER1(mut self, v: i32) -> Self {
@@ -1706,11 +1370,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXPOWER1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&33) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&33).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER2(mut self, v: i32) -> Self {
@@ -1720,11 +1380,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXPOWER2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&34) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&34).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER3(mut self, v: i32) -> Self {
@@ -1734,11 +1390,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXPOWER3(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&35) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&35).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER4(mut self, v: i32) -> Self {
@@ -1748,11 +1400,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXPOWER4(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&36) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&36).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER5(mut self, v: i32) -> Self {
@@ -1762,11 +1410,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXPOWER5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&37) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&37).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER6(mut self, v: i32) -> Self {
@@ -1776,11 +1420,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXPOWER6(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&38) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&38).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER7(mut self, v: i32) -> Self {
@@ -1790,11 +1430,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXPOWER7(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&39) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&39).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER_REGEN_FLAT_MODIFIER(mut self, v: f32) -> Self {
@@ -1804,11 +1440,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER_REGEN_FLAT_MODIFIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&40) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&40).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER(mut self, v: f32) -> Self {
@@ -1818,11 +1450,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&47) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&47).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_LEVEL(mut self, v: i32) -> Self {
@@ -1832,11 +1460,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_LEVEL(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&54) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&54).map(|v| *v as i32)
     }
 
     pub fn set_unit_FACTIONTEMPLATE(mut self, v: i32) -> Self {
@@ -1846,11 +1470,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_FACTIONTEMPLATE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&55) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&55).map(|v| *v as i32)
     }
 
     pub fn set_unit_VIRTUAL_ITEM_SLOT_ID(mut self, v: i32) -> Self {
@@ -1860,11 +1480,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_VIRTUAL_ITEM_SLOT_ID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&56) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&56).map(|v| *v as i32)
     }
 
     pub fn set_unit_FLAGS(mut self, v: i32) -> Self {
@@ -1874,11 +1490,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&59) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&59).map(|v| *v as i32)
     }
 
     pub fn set_unit_FLAGS_2(mut self, v: i32) -> Self {
@@ -1888,11 +1500,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_FLAGS_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&60) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&60).map(|v| *v as i32)
     }
 
     pub fn set_unit_AURASTATE(mut self, v: i32) -> Self {
@@ -1902,11 +1510,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_AURASTATE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&61) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&61).map(|v| *v as i32)
     }
 
     pub fn set_unit_BASEATTACKTIME(mut self, v: i32) -> Self {
@@ -1916,11 +1520,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_BASEATTACKTIME(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&62) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&62).map(|v| *v as i32)
     }
 
     pub fn set_unit_RANGEDATTACKTIME(mut self, v: i32) -> Self {
@@ -1930,11 +1530,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_RANGEDATTACKTIME(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&64) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&64).map(|v| *v as i32)
     }
 
     pub fn set_unit_BOUNDINGRADIUS(mut self, v: f32) -> Self {
@@ -1944,11 +1540,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_BOUNDINGRADIUS(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&65) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&65).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_COMBATREACH(mut self, v: f32) -> Self {
@@ -1958,11 +1550,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_COMBATREACH(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&66) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&66).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_DISPLAYID(mut self, v: i32) -> Self {
@@ -1972,11 +1560,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_DISPLAYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&67) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&67).map(|v| *v as i32)
     }
 
     pub fn set_unit_NATIVEDISPLAYID(mut self, v: i32) -> Self {
@@ -1986,11 +1570,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_NATIVEDISPLAYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&68) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&68).map(|v| *v as i32)
     }
 
     pub fn set_unit_MOUNTDISPLAYID(mut self, v: i32) -> Self {
@@ -2000,11 +1580,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MOUNTDISPLAYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&69) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&69).map(|v| *v as i32)
     }
 
     pub fn set_unit_MINDAMAGE(mut self, v: f32) -> Self {
@@ -2014,11 +1590,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MINDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&70) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&70).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MAXDAMAGE(mut self, v: f32) -> Self {
@@ -2028,11 +1600,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&71) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&71).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MINOFFHANDDAMAGE(mut self, v: f32) -> Self {
@@ -2042,11 +1610,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MINOFFHANDDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&72) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&72).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MAXOFFHANDDAMAGE(mut self, v: f32) -> Self {
@@ -2056,11 +1620,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXOFFHANDDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&73) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&73).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -2086,11 +1646,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_PETNUMBER(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&75) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&75).map(|v| *v as i32)
     }
 
     pub fn set_unit_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
@@ -2100,11 +1656,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_PET_NAME_TIMESTAMP(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&76) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&76).map(|v| *v as i32)
     }
 
     pub fn set_unit_PETEXPERIENCE(mut self, v: i32) -> Self {
@@ -2114,11 +1666,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_PETEXPERIENCE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&77) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&77).map(|v| *v as i32)
     }
 
     pub fn set_unit_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
@@ -2128,11 +1676,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_PETNEXTLEVELEXP(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&78) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&78).map(|v| *v as i32)
     }
 
     pub fn set_unit_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
@@ -2142,11 +1686,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_DYNAMIC_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&79) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&79).map(|v| *v as i32)
     }
 
     pub fn set_unit_MOD_CAST_SPEED(mut self, v: f32) -> Self {
@@ -2156,11 +1696,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MOD_CAST_SPEED(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&80) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&80).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_CREATED_BY_SPELL(mut self, v: i32) -> Self {
@@ -2170,11 +1706,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_CREATED_BY_SPELL(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&81) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&81).map(|v| *v as i32)
     }
 
     pub fn set_unit_NPC_FLAGS(mut self, v: i32) -> Self {
@@ -2184,11 +1716,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_NPC_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&82) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&82).map(|v| *v as i32)
     }
 
     pub fn set_unit_NPC_EMOTESTATE(mut self, v: i32) -> Self {
@@ -2198,11 +1726,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_NPC_EMOTESTATE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&83) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&83).map(|v| *v as i32)
     }
 
     pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
@@ -2212,11 +1736,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_STRENGTH(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&84) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&84).map(|v| *v as i32)
     }
 
     pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
@@ -2226,11 +1746,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_AGILITY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&85) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&85).map(|v| *v as i32)
     }
 
     pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
@@ -2240,11 +1756,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_STAMINA(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&86) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&86).map(|v| *v as i32)
     }
 
     pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
@@ -2254,11 +1766,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_INTELLECT(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&87) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&87).map(|v| *v as i32)
     }
 
     pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
@@ -2268,11 +1776,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_SPIRIT(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&88) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&88).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT0(mut self, v: i32) -> Self {
@@ -2282,11 +1786,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POSSTAT0(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&89) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&89).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT1(mut self, v: i32) -> Self {
@@ -2296,11 +1796,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POSSTAT1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&90) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&90).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT2(mut self, v: i32) -> Self {
@@ -2310,11 +1806,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POSSTAT2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&91) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&91).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT3(mut self, v: i32) -> Self {
@@ -2324,11 +1816,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POSSTAT3(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&92) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&92).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT4(mut self, v: i32) -> Self {
@@ -2338,11 +1826,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POSSTAT4(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&93) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&93).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT0(mut self, v: i32) -> Self {
@@ -2352,11 +1836,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_NEGSTAT0(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&94) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&94).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT1(mut self, v: i32) -> Self {
@@ -2366,11 +1846,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_NEGSTAT1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&95) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&95).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT2(mut self, v: i32) -> Self {
@@ -2380,11 +1856,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_NEGSTAT2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&96) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&96).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT3(mut self, v: i32) -> Self {
@@ -2394,11 +1866,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_NEGSTAT3(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&97) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&97).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT4(mut self, v: i32) -> Self {
@@ -2408,11 +1876,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_NEGSTAT4(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&98) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&98).map(|v| *v as i32)
     }
 
     pub fn set_unit_RESISTANCES(mut self, v: i32) -> Self {
@@ -2422,11 +1886,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_RESISTANCES(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&99) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&99).map(|v| *v as i32)
     }
 
     pub fn set_unit_RESISTANCEBUFFMODSPOSITIVE(mut self, v: i32) -> Self {
@@ -2436,11 +1896,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_RESISTANCEBUFFMODSPOSITIVE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&106) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&106).map(|v| *v as i32)
     }
 
     pub fn set_unit_RESISTANCEBUFFMODSNEGATIVE(mut self, v: i32) -> Self {
@@ -2450,11 +1906,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_RESISTANCEBUFFMODSNEGATIVE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&113) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&113).map(|v| *v as i32)
     }
 
     pub fn set_unit_BASE_MANA(mut self, v: i32) -> Self {
@@ -2464,11 +1916,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_BASE_MANA(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&120) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&120).map(|v| *v as i32)
     }
 
     pub fn set_unit_BASE_HEALTH(mut self, v: i32) -> Self {
@@ -2478,11 +1926,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_BASE_HEALTH(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&121) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&121).map(|v| *v as i32)
     }
 
     pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -2508,11 +1952,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_ATTACK_POWER(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&123) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&123).map(|v| *v as i32)
     }
 
     pub fn set_unit_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
@@ -2538,11 +1978,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_ATTACK_POWER_MULTIPLIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&125) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&125).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
@@ -2552,11 +1988,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_RANGED_ATTACK_POWER(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&126) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&126).map(|v| *v as i32)
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
@@ -2582,11 +2014,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_RANGED_ATTACK_POWER_MULTIPLIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&128) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&128).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MINRANGEDDAMAGE(mut self, v: f32) -> Self {
@@ -2596,11 +2024,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MINRANGEDDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&129) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&129).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MAXRANGEDDAMAGE(mut self, v: f32) -> Self {
@@ -2610,11 +2034,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXRANGEDDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&130) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&130).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
@@ -2624,11 +2044,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER_COST_MODIFIER(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&131) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&131).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER_COST_MULTIPLIER(mut self, v: f32) -> Self {
@@ -2638,11 +2054,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_POWER_COST_MULTIPLIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&138) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&138).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MAXHEALTHMODIFIER(mut self, v: f32) -> Self {
@@ -2652,11 +2064,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_MAXHEALTHMODIFIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&145) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&145).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_HOVERHEIGHT(mut self, v: f32) -> Self {
@@ -2666,11 +2074,7 @@ impl UpdateUnit {
     }
 
     pub fn unit_HOVERHEIGHT(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&146) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&146).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -2685,11 +2089,7 @@ impl UpdateUnit {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
 }
@@ -2707,11 +2107,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&0);
         let upper = self.values.get(&1);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
@@ -2721,11 +2117,7 @@ impl UpdatePlayer {
     }
 
     pub fn object_TYPE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&2) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&2).map(|v| *v as i32)
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -2735,11 +2127,7 @@ impl UpdatePlayer {
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&3) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&3).map(|v| *v as i32)
     }
 
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
@@ -2749,11 +2137,7 @@ impl UpdatePlayer {
     }
 
     pub fn object_SCALE_X(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&4) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&4).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_CHARM(mut self, v: Guid) -> Self {
@@ -2768,11 +2152,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_SUMMON(mut self, v: Guid) -> Self {
@@ -2787,11 +2167,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&8);
         let upper = self.values.get(&9);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CRITTER(mut self, v: Guid) -> Self {
@@ -2806,11 +2182,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&10);
         let upper = self.values.get(&11);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CHARMEDBY(mut self, v: Guid) -> Self {
@@ -2825,11 +2197,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&12);
         let upper = self.values.get(&13);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_SUMMONEDBY(mut self, v: Guid) -> Self {
@@ -2844,11 +2212,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&14);
         let upper = self.values.get(&15);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CREATEDBY(mut self, v: Guid) -> Self {
@@ -2863,11 +2227,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&16);
         let upper = self.values.get(&17);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_TARGET(mut self, v: Guid) -> Self {
@@ -2882,11 +2242,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&18);
         let upper = self.values.get(&19);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CHANNEL_OBJECT(mut self, v: Guid) -> Self {
@@ -2901,11 +2257,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&20);
         let upper = self.values.get(&21);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_unit_CHANNEL_SPELL(mut self, v: i32) -> Self {
@@ -2915,11 +2267,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_CHANNEL_SPELL(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&22) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&22).map(|v| *v as i32)
     }
 
     pub fn set_unit_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
@@ -2945,11 +2293,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_HEALTH(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&24) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&24).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER1(mut self, v: i32) -> Self {
@@ -2959,11 +2303,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&25) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&25).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER2(mut self, v: i32) -> Self {
@@ -2973,11 +2313,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&26) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&26).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER3(mut self, v: i32) -> Self {
@@ -2987,11 +2323,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER3(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&27) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&27).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER4(mut self, v: i32) -> Self {
@@ -3001,11 +2333,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER4(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&28) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&28).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER5(mut self, v: i32) -> Self {
@@ -3015,11 +2343,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&29) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&29).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER6(mut self, v: i32) -> Self {
@@ -3029,11 +2353,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER6(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&30) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&30).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER7(mut self, v: i32) -> Self {
@@ -3043,11 +2363,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER7(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&31) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&31).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXHEALTH(mut self, v: i32) -> Self {
@@ -3057,11 +2373,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXHEALTH(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&32) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&32).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER1(mut self, v: i32) -> Self {
@@ -3071,11 +2383,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXPOWER1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&33) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&33).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER2(mut self, v: i32) -> Self {
@@ -3085,11 +2393,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXPOWER2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&34) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&34).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER3(mut self, v: i32) -> Self {
@@ -3099,11 +2403,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXPOWER3(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&35) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&35).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER4(mut self, v: i32) -> Self {
@@ -3113,11 +2413,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXPOWER4(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&36) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&36).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER5(mut self, v: i32) -> Self {
@@ -3127,11 +2423,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXPOWER5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&37) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&37).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER6(mut self, v: i32) -> Self {
@@ -3141,11 +2433,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXPOWER6(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&38) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&38).map(|v| *v as i32)
     }
 
     pub fn set_unit_MAXPOWER7(mut self, v: i32) -> Self {
@@ -3155,11 +2443,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXPOWER7(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&39) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&39).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER_REGEN_FLAT_MODIFIER(mut self, v: f32) -> Self {
@@ -3169,11 +2453,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER_REGEN_FLAT_MODIFIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&40) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&40).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER(mut self, v: f32) -> Self {
@@ -3183,11 +2463,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&47) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&47).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_LEVEL(mut self, v: i32) -> Self {
@@ -3197,11 +2473,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_LEVEL(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&54) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&54).map(|v| *v as i32)
     }
 
     pub fn set_unit_FACTIONTEMPLATE(mut self, v: i32) -> Self {
@@ -3211,11 +2483,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_FACTIONTEMPLATE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&55) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&55).map(|v| *v as i32)
     }
 
     pub fn set_unit_VIRTUAL_ITEM_SLOT_ID(mut self, v: i32) -> Self {
@@ -3225,11 +2493,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_VIRTUAL_ITEM_SLOT_ID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&56) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&56).map(|v| *v as i32)
     }
 
     pub fn set_unit_FLAGS(mut self, v: i32) -> Self {
@@ -3239,11 +2503,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&59) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&59).map(|v| *v as i32)
     }
 
     pub fn set_unit_FLAGS_2(mut self, v: i32) -> Self {
@@ -3253,11 +2513,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_FLAGS_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&60) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&60).map(|v| *v as i32)
     }
 
     pub fn set_unit_AURASTATE(mut self, v: i32) -> Self {
@@ -3267,11 +2523,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_AURASTATE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&61) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&61).map(|v| *v as i32)
     }
 
     pub fn set_unit_BASEATTACKTIME(mut self, v: i32) -> Self {
@@ -3281,11 +2533,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_BASEATTACKTIME(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&62) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&62).map(|v| *v as i32)
     }
 
     pub fn set_unit_RANGEDATTACKTIME(mut self, v: i32) -> Self {
@@ -3295,11 +2543,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_RANGEDATTACKTIME(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&64) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&64).map(|v| *v as i32)
     }
 
     pub fn set_unit_BOUNDINGRADIUS(mut self, v: f32) -> Self {
@@ -3309,11 +2553,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_BOUNDINGRADIUS(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&65) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&65).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_COMBATREACH(mut self, v: f32) -> Self {
@@ -3323,11 +2563,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_COMBATREACH(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&66) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&66).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_DISPLAYID(mut self, v: i32) -> Self {
@@ -3337,11 +2573,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_DISPLAYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&67) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&67).map(|v| *v as i32)
     }
 
     pub fn set_unit_NATIVEDISPLAYID(mut self, v: i32) -> Self {
@@ -3351,11 +2583,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_NATIVEDISPLAYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&68) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&68).map(|v| *v as i32)
     }
 
     pub fn set_unit_MOUNTDISPLAYID(mut self, v: i32) -> Self {
@@ -3365,11 +2593,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MOUNTDISPLAYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&69) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&69).map(|v| *v as i32)
     }
 
     pub fn set_unit_MINDAMAGE(mut self, v: f32) -> Self {
@@ -3379,11 +2603,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MINDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&70) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&70).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MAXDAMAGE(mut self, v: f32) -> Self {
@@ -3393,11 +2613,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&71) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&71).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MINOFFHANDDAMAGE(mut self, v: f32) -> Self {
@@ -3407,11 +2623,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MINOFFHANDDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&72) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&72).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MAXOFFHANDDAMAGE(mut self, v: f32) -> Self {
@@ -3421,11 +2633,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXOFFHANDDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&73) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&73).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -3451,11 +2659,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_PETNUMBER(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&75) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&75).map(|v| *v as i32)
     }
 
     pub fn set_unit_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
@@ -3465,11 +2669,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_PET_NAME_TIMESTAMP(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&76) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&76).map(|v| *v as i32)
     }
 
     pub fn set_unit_PETEXPERIENCE(mut self, v: i32) -> Self {
@@ -3479,11 +2679,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_PETEXPERIENCE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&77) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&77).map(|v| *v as i32)
     }
 
     pub fn set_unit_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
@@ -3493,11 +2689,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_PETNEXTLEVELEXP(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&78) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&78).map(|v| *v as i32)
     }
 
     pub fn set_unit_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
@@ -3507,11 +2699,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_DYNAMIC_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&79) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&79).map(|v| *v as i32)
     }
 
     pub fn set_unit_MOD_CAST_SPEED(mut self, v: f32) -> Self {
@@ -3521,11 +2709,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MOD_CAST_SPEED(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&80) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&80).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_CREATED_BY_SPELL(mut self, v: i32) -> Self {
@@ -3535,11 +2719,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_CREATED_BY_SPELL(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&81) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&81).map(|v| *v as i32)
     }
 
     pub fn set_unit_NPC_FLAGS(mut self, v: i32) -> Self {
@@ -3549,11 +2729,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_NPC_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&82) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&82).map(|v| *v as i32)
     }
 
     pub fn set_unit_NPC_EMOTESTATE(mut self, v: i32) -> Self {
@@ -3563,11 +2739,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_NPC_EMOTESTATE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&83) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&83).map(|v| *v as i32)
     }
 
     pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
@@ -3577,11 +2749,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_STRENGTH(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&84) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&84).map(|v| *v as i32)
     }
 
     pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
@@ -3591,11 +2759,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_AGILITY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&85) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&85).map(|v| *v as i32)
     }
 
     pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
@@ -3605,11 +2769,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_STAMINA(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&86) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&86).map(|v| *v as i32)
     }
 
     pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
@@ -3619,11 +2779,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_INTELLECT(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&87) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&87).map(|v| *v as i32)
     }
 
     pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
@@ -3633,11 +2789,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_SPIRIT(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&88) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&88).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT0(mut self, v: i32) -> Self {
@@ -3647,11 +2799,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POSSTAT0(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&89) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&89).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT1(mut self, v: i32) -> Self {
@@ -3661,11 +2809,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POSSTAT1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&90) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&90).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT2(mut self, v: i32) -> Self {
@@ -3675,11 +2819,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POSSTAT2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&91) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&91).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT3(mut self, v: i32) -> Self {
@@ -3689,11 +2829,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POSSTAT3(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&92) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&92).map(|v| *v as i32)
     }
 
     pub fn set_unit_POSSTAT4(mut self, v: i32) -> Self {
@@ -3703,11 +2839,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POSSTAT4(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&93) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&93).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT0(mut self, v: i32) -> Self {
@@ -3717,11 +2849,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_NEGSTAT0(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&94) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&94).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT1(mut self, v: i32) -> Self {
@@ -3731,11 +2859,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_NEGSTAT1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&95) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&95).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT2(mut self, v: i32) -> Self {
@@ -3745,11 +2869,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_NEGSTAT2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&96) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&96).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT3(mut self, v: i32) -> Self {
@@ -3759,11 +2879,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_NEGSTAT3(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&97) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&97).map(|v| *v as i32)
     }
 
     pub fn set_unit_NEGSTAT4(mut self, v: i32) -> Self {
@@ -3773,11 +2889,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_NEGSTAT4(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&98) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&98).map(|v| *v as i32)
     }
 
     pub fn set_unit_RESISTANCES(mut self, v: i32) -> Self {
@@ -3787,11 +2899,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_RESISTANCES(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&99) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&99).map(|v| *v as i32)
     }
 
     pub fn set_unit_RESISTANCEBUFFMODSPOSITIVE(mut self, v: i32) -> Self {
@@ -3801,11 +2909,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_RESISTANCEBUFFMODSPOSITIVE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&106) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&106).map(|v| *v as i32)
     }
 
     pub fn set_unit_RESISTANCEBUFFMODSNEGATIVE(mut self, v: i32) -> Self {
@@ -3815,11 +2919,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_RESISTANCEBUFFMODSNEGATIVE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&113) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&113).map(|v| *v as i32)
     }
 
     pub fn set_unit_BASE_MANA(mut self, v: i32) -> Self {
@@ -3829,11 +2929,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_BASE_MANA(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&120) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&120).map(|v| *v as i32)
     }
 
     pub fn set_unit_BASE_HEALTH(mut self, v: i32) -> Self {
@@ -3843,11 +2939,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_BASE_HEALTH(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&121) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&121).map(|v| *v as i32)
     }
 
     pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -3873,11 +2965,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_ATTACK_POWER(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&123) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&123).map(|v| *v as i32)
     }
 
     pub fn set_unit_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
@@ -3903,11 +2991,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_ATTACK_POWER_MULTIPLIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&125) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&125).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
@@ -3917,11 +3001,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_RANGED_ATTACK_POWER(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&126) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&126).map(|v| *v as i32)
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
@@ -3947,11 +3027,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_RANGED_ATTACK_POWER_MULTIPLIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&128) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&128).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MINRANGEDDAMAGE(mut self, v: f32) -> Self {
@@ -3961,11 +3037,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MINRANGEDDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&129) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&129).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MAXRANGEDDAMAGE(mut self, v: f32) -> Self {
@@ -3975,11 +3047,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXRANGEDDAMAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&130) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&130).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
@@ -3989,11 +3057,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER_COST_MODIFIER(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&131) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&131).map(|v| *v as i32)
     }
 
     pub fn set_unit_POWER_COST_MULTIPLIER(mut self, v: f32) -> Self {
@@ -4003,11 +3067,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_POWER_COST_MULTIPLIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&138) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&138).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_MAXHEALTHMODIFIER(mut self, v: f32) -> Self {
@@ -4017,11 +3077,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_MAXHEALTHMODIFIER(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&145) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&145).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_unit_HOVERHEIGHT(mut self, v: f32) -> Self {
@@ -4031,11 +3087,7 @@ impl UpdatePlayer {
     }
 
     pub fn unit_HOVERHEIGHT(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&146) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&146).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_DUEL_ARBITER(mut self, v: Guid) -> Self {
@@ -4050,11 +3102,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&148);
         let upper = self.values.get(&149);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_FLAGS(mut self, v: i32) -> Self {
@@ -4064,11 +3112,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&150) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&150).map(|v| *v as i32)
     }
 
     pub fn set_player_GUILDID(mut self, v: i32) -> Self {
@@ -4078,11 +3122,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_GUILDID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&151) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&151).map(|v| *v as i32)
     }
 
     pub fn set_player_GUILDRANK(mut self, v: i32) -> Self {
@@ -4092,11 +3132,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_GUILDRANK(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&152) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&152).map(|v| *v as i32)
     }
 
     pub fn set_player_FIELD_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -4154,11 +3190,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_DUEL_TEAM(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&156) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&156).map(|v| *v as i32)
     }
 
     pub fn set_player_GUILD_TIMESTAMP(mut self, v: i32) -> Self {
@@ -4168,11 +3200,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_GUILD_TIMESTAMP(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&157) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&157).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_1_1(mut self, v: i32) -> Self {
@@ -4182,11 +3210,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_1_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&158) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&158).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_1_2(mut self, v: i32) -> Self {
@@ -4196,11 +3220,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_1_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&159) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&159).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_1_3(mut self, a: u16, b: u16) -> Self {
@@ -4226,11 +3246,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_1_4(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&162) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&162).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_2_1(mut self, v: i32) -> Self {
@@ -4240,11 +3256,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_2_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&163) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&163).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_2_2(mut self, v: i32) -> Self {
@@ -4254,11 +3266,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_2_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&164) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&164).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_2_3(mut self, a: u16, b: u16) -> Self {
@@ -4284,11 +3292,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_2_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&167) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&167).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_3_1(mut self, v: i32) -> Self {
@@ -4298,11 +3302,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_3_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&168) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&168).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_3_2(mut self, v: i32) -> Self {
@@ -4312,11 +3312,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_3_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&169) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&169).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_3_3(mut self, a: u16, b: u16) -> Self {
@@ -4342,11 +3338,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_3_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&172) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&172).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_4_1(mut self, v: i32) -> Self {
@@ -4356,11 +3348,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_4_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&173) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&173).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_4_2(mut self, v: i32) -> Self {
@@ -4370,11 +3358,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_4_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&174) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&174).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_4_3(mut self, a: u16, b: u16) -> Self {
@@ -4400,11 +3384,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_4_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&177) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&177).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_5_1(mut self, v: i32) -> Self {
@@ -4414,11 +3394,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_5_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&178) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&178).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_5_2(mut self, v: i32) -> Self {
@@ -4428,11 +3404,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_5_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&179) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&179).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_5_3(mut self, a: u16, b: u16) -> Self {
@@ -4458,11 +3430,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_5_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&182) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&182).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_6_1(mut self, v: i32) -> Self {
@@ -4472,11 +3440,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_6_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&183) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&183).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_6_2(mut self, v: i32) -> Self {
@@ -4486,11 +3450,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_6_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&184) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&184).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_6_3(mut self, a: u16, b: u16) -> Self {
@@ -4516,11 +3476,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_6_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&187) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&187).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_7_1(mut self, v: i32) -> Self {
@@ -4530,11 +3486,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_7_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&188) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&188).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_7_2(mut self, v: i32) -> Self {
@@ -4544,11 +3496,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_7_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&189) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&189).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_7_3(mut self, a: u16, b: u16) -> Self {
@@ -4574,11 +3522,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_7_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&192) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&192).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_8_1(mut self, v: i32) -> Self {
@@ -4588,11 +3532,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_8_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&193) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&193).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_8_2(mut self, v: i32) -> Self {
@@ -4602,11 +3542,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_8_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&194) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&194).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_8_3(mut self, a: u16, b: u16) -> Self {
@@ -4632,11 +3568,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_8_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&197) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&197).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_9_1(mut self, v: i32) -> Self {
@@ -4646,11 +3578,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_9_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&198) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&198).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_9_2(mut self, v: i32) -> Self {
@@ -4660,11 +3588,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_9_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&199) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&199).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_9_3(mut self, a: u16, b: u16) -> Self {
@@ -4690,11 +3614,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_9_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&202) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&202).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_10_1(mut self, v: i32) -> Self {
@@ -4704,11 +3624,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_10_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&203) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&203).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_10_2(mut self, v: i32) -> Self {
@@ -4718,11 +3634,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_10_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&204) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&204).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_10_3(mut self, a: u16, b: u16) -> Self {
@@ -4748,11 +3660,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_10_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&207) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&207).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_11_1(mut self, v: i32) -> Self {
@@ -4762,11 +3670,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_11_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&208) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&208).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_11_2(mut self, v: i32) -> Self {
@@ -4776,11 +3680,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_11_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&209) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&209).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_11_3(mut self, a: u16, b: u16) -> Self {
@@ -4806,11 +3706,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_11_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&212) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&212).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_12_1(mut self, v: i32) -> Self {
@@ -4820,11 +3716,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_12_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&213) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&213).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_12_2(mut self, v: i32) -> Self {
@@ -4834,11 +3726,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_12_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&214) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&214).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_12_3(mut self, a: u16, b: u16) -> Self {
@@ -4864,11 +3752,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_12_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&217) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&217).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_13_1(mut self, v: i32) -> Self {
@@ -4878,11 +3762,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_13_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&218) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&218).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_13_2(mut self, v: i32) -> Self {
@@ -4892,11 +3772,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_13_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&219) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&219).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_13_3(mut self, a: u16, b: u16) -> Self {
@@ -4922,11 +3798,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_13_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&222) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&222).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_14_1(mut self, v: i32) -> Self {
@@ -4936,11 +3808,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_14_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&223) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&223).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_14_2(mut self, v: i32) -> Self {
@@ -4950,11 +3818,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_14_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&224) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&224).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_14_3(mut self, a: u16, b: u16) -> Self {
@@ -4980,11 +3844,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_14_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&227) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&227).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_15_1(mut self, v: i32) -> Self {
@@ -4994,11 +3854,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_15_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&228) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&228).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_15_2(mut self, v: i32) -> Self {
@@ -5008,11 +3864,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_15_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&229) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&229).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_15_3(mut self, a: u16, b: u16) -> Self {
@@ -5038,11 +3890,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_15_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&232) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&232).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_16_1(mut self, v: i32) -> Self {
@@ -5052,11 +3900,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_16_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&233) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&233).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_16_2(mut self, v: i32) -> Self {
@@ -5066,11 +3910,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_16_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&234) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&234).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_16_3(mut self, a: u16, b: u16) -> Self {
@@ -5096,11 +3936,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_16_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&237) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&237).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_17_1(mut self, v: i32) -> Self {
@@ -5110,11 +3946,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_17_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&238) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&238).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_17_2(mut self, v: i32) -> Self {
@@ -5124,11 +3956,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_17_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&239) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&239).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_17_3(mut self, a: u16, b: u16) -> Self {
@@ -5154,11 +3982,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_17_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&242) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&242).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_18_1(mut self, v: i32) -> Self {
@@ -5168,11 +3992,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_18_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&243) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&243).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_18_2(mut self, v: i32) -> Self {
@@ -5182,11 +4002,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_18_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&244) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&244).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_18_3(mut self, a: u16, b: u16) -> Self {
@@ -5212,11 +4028,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_18_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&247) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&247).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_19_1(mut self, v: i32) -> Self {
@@ -5226,11 +4038,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_19_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&248) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&248).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_19_2(mut self, v: i32) -> Self {
@@ -5240,11 +4048,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_19_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&249) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&249).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_19_3(mut self, a: u16, b: u16) -> Self {
@@ -5270,11 +4074,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_19_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&252) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&252).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_20_1(mut self, v: i32) -> Self {
@@ -5284,11 +4084,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_20_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&253) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&253).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_20_2(mut self, v: i32) -> Self {
@@ -5298,11 +4094,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_20_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&254) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&254).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_20_3(mut self, a: u16, b: u16) -> Self {
@@ -5328,11 +4120,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_20_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&257) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&257).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_21_1(mut self, v: i32) -> Self {
@@ -5342,11 +4130,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_21_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&258) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&258).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_21_2(mut self, v: i32) -> Self {
@@ -5356,11 +4140,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_21_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&259) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&259).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_21_3(mut self, a: u16, b: u16) -> Self {
@@ -5386,11 +4166,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_21_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&262) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&262).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_22_1(mut self, v: i32) -> Self {
@@ -5400,11 +4176,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_22_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&263) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&263).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_22_2(mut self, v: i32) -> Self {
@@ -5414,11 +4186,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_22_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&264) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&264).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_22_3(mut self, a: u16, b: u16) -> Self {
@@ -5444,11 +4212,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_22_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&267) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&267).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_23_1(mut self, v: i32) -> Self {
@@ -5458,11 +4222,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_23_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&268) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&268).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_23_2(mut self, v: i32) -> Self {
@@ -5472,11 +4232,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_23_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&269) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&269).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_23_3(mut self, a: u16, b: u16) -> Self {
@@ -5502,11 +4258,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_23_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&272) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&272).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_24_1(mut self, v: i32) -> Self {
@@ -5516,11 +4268,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_24_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&273) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&273).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_24_2(mut self, v: i32) -> Self {
@@ -5530,11 +4278,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_24_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&274) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&274).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_24_3(mut self, a: u16, b: u16) -> Self {
@@ -5560,11 +4304,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_24_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&277) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&277).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_25_1(mut self, v: i32) -> Self {
@@ -5574,11 +4314,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_25_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&278) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&278).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_25_2(mut self, v: i32) -> Self {
@@ -5588,11 +4324,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_25_2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&279) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&279).map(|v| *v as i32)
     }
 
     pub fn set_player_QUEST_LOG_25_3(mut self, a: u16, b: u16) -> Self {
@@ -5618,11 +4350,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_QUEST_LOG_25_5(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&282) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&282).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_1_ENTRYID(mut self, v: i32) -> Self {
@@ -5632,11 +4360,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_1_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&283) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&283).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_1_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5662,11 +4386,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_2_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&285) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&285).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_2_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5692,11 +4412,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_3_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&287) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&287).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_3_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5722,11 +4438,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_4_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&289) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&289).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_4_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5752,11 +4464,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_5_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&291) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&291).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_5_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5782,11 +4490,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_6_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&293) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&293).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_6_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5812,11 +4516,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_7_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&295) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&295).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_7_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5842,11 +4542,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_8_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&297) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&297).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_8_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5872,11 +4568,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_9_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&299) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&299).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_9_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5902,11 +4594,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_10_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&301) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&301).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_10_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5932,11 +4620,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_11_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&303) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&303).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_11_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5962,11 +4646,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_12_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&305) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&305).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_12_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -5992,11 +4672,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_13_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&307) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&307).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_13_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -6022,11 +4698,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_14_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&309) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&309).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_14_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -6052,11 +4724,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_15_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&311) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&311).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_15_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -6082,11 +4750,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_16_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&313) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&313).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_16_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -6112,11 +4776,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_17_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&315) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&315).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_17_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -6142,11 +4802,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_18_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&317) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&317).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_18_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -6172,11 +4828,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_VISIBLE_ITEM_19_ENTRYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&319) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&319).map(|v| *v as i32)
     }
 
     pub fn set_player_VISIBLE_ITEM_19_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
@@ -6202,11 +4854,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_CHOSEN_TITLE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&321) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&321).map(|v| *v as i32)
     }
 
     pub fn set_player_FAKE_INEBRIATION(mut self, v: i32) -> Self {
@@ -6216,11 +4864,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_FAKE_INEBRIATION(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&322) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&322).map(|v| *v as i32)
     }
 
     pub fn set_player_INV_SLOT_HEAD(mut self, v: Guid) -> Self {
@@ -6235,11 +4879,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&324);
         let upper = self.values.get(&325);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_PACK_SLOT_1(mut self, v: Guid) -> Self {
@@ -6254,11 +4894,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&370);
         let upper = self.values.get(&371);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_BANK_SLOT_1(mut self, v: Guid) -> Self {
@@ -6273,11 +4909,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&402);
         let upper = self.values.get(&403);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_BANKBAG_SLOT_1(mut self, v: Guid) -> Self {
@@ -6292,11 +4924,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&458);
         let upper = self.values.get(&459);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_VENDORBUYBACK_SLOT_1(mut self, v: Guid) -> Self {
@@ -6311,11 +4939,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&472);
         let upper = self.values.get(&473);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_KEYRING_SLOT_1(mut self, v: Guid) -> Self {
@@ -6330,11 +4954,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&496);
         let upper = self.values.get(&497);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_CURRENCYTOKEN_SLOT_1(mut self, v: Guid) -> Self {
@@ -6349,11 +4969,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&560);
         let upper = self.values.get(&561);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_FARSIGHT(mut self, v: Guid) -> Self {
@@ -6368,11 +4984,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&624);
         let upper = self.values.get(&625);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_KNOWN_TITLES(mut self, v: Guid) -> Self {
@@ -6387,11 +4999,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&626);
         let upper = self.values.get(&627);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_KNOWN_TITLES1(mut self, v: Guid) -> Self {
@@ -6406,11 +5014,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&628);
         let upper = self.values.get(&629);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_KNOWN_TITLES2(mut self, v: Guid) -> Self {
@@ -6425,11 +5029,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&630);
         let upper = self.values.get(&631);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_KNOWN_CURRENCIES(mut self, v: Guid) -> Self {
@@ -6444,11 +5044,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&632);
         let upper = self.values.get(&633);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_player_XP(mut self, v: i32) -> Self {
@@ -6458,11 +5054,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_XP(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&634) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&634).map(|v| *v as i32)
     }
 
     pub fn set_player_NEXT_LEVEL_XP(mut self, v: i32) -> Self {
@@ -6472,11 +5064,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_NEXT_LEVEL_XP(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&635) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&635).map(|v| *v as i32)
     }
 
     pub fn set_player_SKILL_INFO_1_1(mut self, a: u16, b: u16) -> Self {
@@ -6502,11 +5090,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_CHARACTER_POINTS1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1020) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1020).map(|v| *v as i32)
     }
 
     pub fn set_player_CHARACTER_POINTS2(mut self, v: i32) -> Self {
@@ -6516,11 +5100,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_CHARACTER_POINTS2(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1021) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1021).map(|v| *v as i32)
     }
 
     pub fn set_player_TRACK_CREATURES(mut self, v: i32) -> Self {
@@ -6530,11 +5110,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_TRACK_CREATURES(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1022) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1022).map(|v| *v as i32)
     }
 
     pub fn set_player_TRACK_RESOURCES(mut self, v: i32) -> Self {
@@ -6544,11 +5120,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_TRACK_RESOURCES(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1023) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1023).map(|v| *v as i32)
     }
 
     pub fn set_player_BLOCK_PERCENTAGE(mut self, v: f32) -> Self {
@@ -6558,11 +5130,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_BLOCK_PERCENTAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1024) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1024).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_DODGE_PERCENTAGE(mut self, v: f32) -> Self {
@@ -6572,11 +5140,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_DODGE_PERCENTAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1025) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1025).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_PARRY_PERCENTAGE(mut self, v: f32) -> Self {
@@ -6586,11 +5150,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_PARRY_PERCENTAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1026) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1026).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_EXPERTISE(mut self, v: i32) -> Self {
@@ -6600,11 +5160,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_EXPERTISE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1027) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1027).map(|v| *v as i32)
     }
 
     pub fn set_player_OFFHAND_EXPERTISE(mut self, v: i32) -> Self {
@@ -6614,11 +5170,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_OFFHAND_EXPERTISE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1028) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1028).map(|v| *v as i32)
     }
 
     pub fn set_player_CRIT_PERCENTAGE(mut self, v: f32) -> Self {
@@ -6628,11 +5180,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_CRIT_PERCENTAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1029) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1029).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_RANGED_CRIT_PERCENTAGE(mut self, v: f32) -> Self {
@@ -6642,11 +5190,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_RANGED_CRIT_PERCENTAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1030) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1030).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_OFFHAND_CRIT_PERCENTAGE(mut self, v: f32) -> Self {
@@ -6656,11 +5200,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_OFFHAND_CRIT_PERCENTAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1031) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1031).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_SPELL_CRIT_PERCENTAGE1(mut self, v: f32) -> Self {
@@ -6670,11 +5210,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_SPELL_CRIT_PERCENTAGE1(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1032) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1032).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_SHIELD_BLOCK(mut self, v: i32) -> Self {
@@ -6684,11 +5220,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_SHIELD_BLOCK(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1039) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1039).map(|v| *v as i32)
     }
 
     pub fn set_player_SHIELD_BLOCK_CRIT_PERCENTAGE(mut self, v: f32) -> Self {
@@ -6698,11 +5230,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_SHIELD_BLOCK_CRIT_PERCENTAGE(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1040) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1040).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_EXPLORED_ZONES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -6728,11 +5256,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_REST_STATE_EXPERIENCE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1169) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1169).map(|v| *v as i32)
     }
 
     pub fn set_player_COINAGE(mut self, v: i32) -> Self {
@@ -6742,11 +5266,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_COINAGE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1170) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1170).map(|v| *v as i32)
     }
 
     pub fn set_player_MOD_DAMAGE_DONE_POS(mut self, v: i32) -> Self {
@@ -6756,11 +5276,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_MOD_DAMAGE_DONE_POS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1171) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1171).map(|v| *v as i32)
     }
 
     pub fn set_player_MOD_DAMAGE_DONE_NEG(mut self, v: i32) -> Self {
@@ -6770,11 +5286,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_MOD_DAMAGE_DONE_NEG(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1178) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1178).map(|v| *v as i32)
     }
 
     pub fn set_player_MOD_DAMAGE_DONE_PCT(mut self, v: i32) -> Self {
@@ -6784,11 +5296,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_MOD_DAMAGE_DONE_PCT(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1185) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1185).map(|v| *v as i32)
     }
 
     pub fn set_player_MOD_HEALING_DONE_POS(mut self, v: i32) -> Self {
@@ -6798,11 +5306,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_MOD_HEALING_DONE_POS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1192) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1192).map(|v| *v as i32)
     }
 
     pub fn set_player_MOD_HEALING_PCT(mut self, v: f32) -> Self {
@@ -6812,11 +5316,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_MOD_HEALING_PCT(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1193) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1193).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_MOD_HEALING_DONE_PCT(mut self, v: f32) -> Self {
@@ -6826,11 +5326,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_MOD_HEALING_DONE_PCT(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1194) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1194).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_MOD_TARGET_RESISTANCE(mut self, v: i32) -> Self {
@@ -6840,11 +5336,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_MOD_TARGET_RESISTANCE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1195) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1195).map(|v| *v as i32)
     }
 
     pub fn set_player_MOD_TARGET_PHYSICAL_RESISTANCE(mut self, v: i32) -> Self {
@@ -6854,11 +5346,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_MOD_TARGET_PHYSICAL_RESISTANCE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1196) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1196).map(|v| *v as i32)
     }
 
     pub fn set_player_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -6884,11 +5372,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_AMMO_ID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1198) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1198).map(|v| *v as i32)
     }
 
     pub fn set_player_SELF_RES_SPELL(mut self, v: i32) -> Self {
@@ -6898,11 +5382,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_SELF_RES_SPELL(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1199) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1199).map(|v| *v as i32)
     }
 
     pub fn set_player_PVP_MEDALS(mut self, v: i32) -> Self {
@@ -6912,11 +5392,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_PVP_MEDALS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1200) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1200).map(|v| *v as i32)
     }
 
     pub fn set_player_BUYBACK_PRICE_1(mut self, v: i32) -> Self {
@@ -6926,11 +5402,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_BUYBACK_PRICE_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1201) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1201).map(|v| *v as i32)
     }
 
     pub fn set_player_BUYBACK_TIMESTAMP_1(mut self, v: i32) -> Self {
@@ -6940,11 +5412,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_BUYBACK_TIMESTAMP_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1213) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1213).map(|v| *v as i32)
     }
 
     pub fn set_player_KILLS(mut self, a: u16, b: u16) -> Self {
@@ -6970,11 +5438,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_TODAY_CONTRIBUTION(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1226) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1226).map(|v| *v as i32)
     }
 
     pub fn set_player_YESTERDAY_CONTRIBUTION(mut self, v: i32) -> Self {
@@ -6984,11 +5448,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_YESTERDAY_CONTRIBUTION(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1227) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1227).map(|v| *v as i32)
     }
 
     pub fn set_player_LIFETIME_HONORBALE_KILLS(mut self, v: i32) -> Self {
@@ -6998,11 +5458,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_LIFETIME_HONORBALE_KILLS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1228) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1228).map(|v| *v as i32)
     }
 
     pub fn set_player_BYTES2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -7028,11 +5484,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_WATCHED_FACTION_INDEX(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1230) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1230).map(|v| *v as i32)
     }
 
     pub fn set_player_COMBAT_RATING_1(mut self, v: i32) -> Self {
@@ -7042,11 +5494,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_COMBAT_RATING_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1231) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1231).map(|v| *v as i32)
     }
 
     pub fn set_player_ARENA_TEAM_INFO_1_1(mut self, v: i32) -> Self {
@@ -7056,11 +5504,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_ARENA_TEAM_INFO_1_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1256) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1256).map(|v| *v as i32)
     }
 
     pub fn set_player_HONOR_CURRENCY(mut self, v: i32) -> Self {
@@ -7070,11 +5514,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_HONOR_CURRENCY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1277) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1277).map(|v| *v as i32)
     }
 
     pub fn set_player_ARENA_CURRENCY(mut self, v: i32) -> Self {
@@ -7084,11 +5524,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_ARENA_CURRENCY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1278) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1278).map(|v| *v as i32)
     }
 
     pub fn set_player_MAX_LEVEL(mut self, v: i32) -> Self {
@@ -7098,11 +5534,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_MAX_LEVEL(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1279) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1279).map(|v| *v as i32)
     }
 
     pub fn set_player_DAILY_QUESTS_1(mut self, v: i32) -> Self {
@@ -7112,11 +5544,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_DAILY_QUESTS_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1280) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1280).map(|v| *v as i32)
     }
 
     pub fn set_player_RUNE_REGEN_1(mut self, v: f32) -> Self {
@@ -7126,11 +5554,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_RUNE_REGEN_1(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&1305) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&1305).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_player_NO_REAGENT_COST_1(mut self, v: i32) -> Self {
@@ -7140,11 +5564,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_NO_REAGENT_COST_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1309) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1309).map(|v| *v as i32)
     }
 
     pub fn set_player_GLYPH_SLOTS_1(mut self, v: i32) -> Self {
@@ -7154,11 +5574,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_GLYPH_SLOTS_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1312) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1312).map(|v| *v as i32)
     }
 
     pub fn set_player_GLYPHS_1(mut self, v: i32) -> Self {
@@ -7168,11 +5584,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_GLYPHS_1(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1318) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1318).map(|v| *v as i32)
     }
 
     pub fn set_player_GLYPHS_ENABLED(mut self, v: i32) -> Self {
@@ -7182,11 +5594,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_GLYPHS_ENABLED(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1324) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1324).map(|v| *v as i32)
     }
 
     pub fn set_player_PET_SPELL_POWER(mut self, v: i32) -> Self {
@@ -7196,11 +5604,7 @@ impl UpdatePlayer {
     }
 
     pub fn player_PET_SPELL_POWER(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&1325) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&1325).map(|v| *v as i32)
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -7215,11 +5619,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
 }
@@ -7237,11 +5637,7 @@ impl UpdateGameObject {
         let lower = self.values.get(&0);
         let upper = self.values.get(&1);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
@@ -7251,11 +5647,7 @@ impl UpdateGameObject {
     }
 
     pub fn object_TYPE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&2) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&2).map(|v| *v as i32)
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -7265,11 +5657,7 @@ impl UpdateGameObject {
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&3) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&3).map(|v| *v as i32)
     }
 
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
@@ -7279,11 +5667,7 @@ impl UpdateGameObject {
     }
 
     pub fn object_SCALE_X(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&4) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&4).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -7298,11 +5682,7 @@ impl UpdateGameObject {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_gameobject_DISPLAYID(mut self, v: i32) -> Self {
@@ -7312,11 +5692,7 @@ impl UpdateGameObject {
     }
 
     pub fn gameobject_DISPLAYID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&8) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&8).map(|v| *v as i32)
     }
 
     pub fn set_gameobject_FLAGS(mut self, v: i32) -> Self {
@@ -7326,11 +5702,7 @@ impl UpdateGameObject {
     }
 
     pub fn gameobject_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&9) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&9).map(|v| *v as i32)
     }
 
     pub fn set_gameobject_PARENTROTATION(mut self, v: f32) -> Self {
@@ -7340,11 +5712,7 @@ impl UpdateGameObject {
     }
 
     pub fn gameobject_PARENTROTATION(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&10) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&10).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_gameobject_DYNAMIC(mut self, a: u16, b: u16) -> Self {
@@ -7370,11 +5738,7 @@ impl UpdateGameObject {
     }
 
     pub fn gameobject_FACTION(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&15) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&15).map(|v| *v as i32)
     }
 
     pub fn set_gameobject_LEVEL(mut self, v: i32) -> Self {
@@ -7384,11 +5748,7 @@ impl UpdateGameObject {
     }
 
     pub fn gameobject_LEVEL(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&16) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&16).map(|v| *v as i32)
     }
 
     pub fn set_gameobject_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -7422,11 +5782,7 @@ impl UpdateDynamicObject {
         let lower = self.values.get(&0);
         let upper = self.values.get(&1);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
@@ -7436,11 +5792,7 @@ impl UpdateDynamicObject {
     }
 
     pub fn object_TYPE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&2) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&2).map(|v| *v as i32)
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -7450,11 +5802,7 @@ impl UpdateDynamicObject {
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&3) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&3).map(|v| *v as i32)
     }
 
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
@@ -7464,11 +5812,7 @@ impl UpdateDynamicObject {
     }
 
     pub fn object_SCALE_X(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&4) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&4).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -7483,11 +5827,7 @@ impl UpdateDynamicObject {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_dynamicobject_CASTER(mut self, v: Guid) -> Self {
@@ -7502,11 +5842,7 @@ impl UpdateDynamicObject {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_dynamicobject_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -7532,11 +5868,7 @@ impl UpdateDynamicObject {
     }
 
     pub fn dynamicobject_SPELLID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&9) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&9).map(|v| *v as i32)
     }
 
     pub fn set_dynamicobject_RADIUS(mut self, v: f32) -> Self {
@@ -7546,11 +5878,7 @@ impl UpdateDynamicObject {
     }
 
     pub fn dynamicobject_RADIUS(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&10) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&10).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_dynamicobject_CASTTIME(mut self, v: i32) -> Self {
@@ -7560,11 +5888,7 @@ impl UpdateDynamicObject {
     }
 
     pub fn dynamicobject_CASTTIME(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&11) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&11).map(|v| *v as i32)
     }
 
 }
@@ -7582,11 +5906,7 @@ impl UpdateCorpse {
         let lower = self.values.get(&0);
         let upper = self.values.get(&1);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
@@ -7596,11 +5916,7 @@ impl UpdateCorpse {
     }
 
     pub fn object_TYPE(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&2) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&2).map(|v| *v as i32)
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -7610,11 +5926,7 @@ impl UpdateCorpse {
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&3) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&3).map(|v| *v as i32)
     }
 
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
@@ -7624,11 +5936,7 @@ impl UpdateCorpse {
     }
 
     pub fn object_SCALE_X(&self) -> Option<f32> {
-        if let Some(v) = self.values.get(&4) {
-            Some(f32::from_le_bytes(v.to_le_bytes()))
-        } else {
-            None
-        }
+        self.values.get(&4).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -7643,11 +5951,7 @@ impl UpdateCorpse {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_corpse_OWNER(mut self, v: Guid) -> Self {
@@ -7662,11 +5966,7 @@ impl UpdateCorpse {
         let lower = self.values.get(&6);
         let upper = self.values.get(&7);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_corpse_PARTY(mut self, v: Guid) -> Self {
@@ -7681,11 +5981,7 @@ impl UpdateCorpse {
         let lower = self.values.get(&8);
         let upper = self.values.get(&9);
 
-        if let Some(lower) = lower {
-            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
-        } else {
-            None
-        }
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
     pub fn set_corpse_DISPLAY_ID(mut self, v: i32) -> Self {
@@ -7695,11 +5991,7 @@ impl UpdateCorpse {
     }
 
     pub fn corpse_DISPLAY_ID(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&10) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&10).map(|v| *v as i32)
     }
 
     pub fn set_corpse_ITEM(mut self, v: i32) -> Self {
@@ -7709,11 +6001,7 @@ impl UpdateCorpse {
     }
 
     pub fn corpse_ITEM(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&11) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&11).map(|v| *v as i32)
     }
 
     pub fn set_corpse_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -7755,11 +6043,7 @@ impl UpdateCorpse {
     }
 
     pub fn corpse_GUILD(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&32) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&32).map(|v| *v as i32)
     }
 
     pub fn set_corpse_FLAGS(mut self, v: i32) -> Self {
@@ -7769,11 +6053,7 @@ impl UpdateCorpse {
     }
 
     pub fn corpse_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&33) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&33).map(|v| *v as i32)
     }
 
     pub fn set_corpse_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
@@ -7783,11 +6063,7 @@ impl UpdateCorpse {
     }
 
     pub fn corpse_DYNAMIC_FLAGS(&self) -> Option<i32> {
-        if let Some(v) = self.values.get(&34) {
-            Some(*v as i32)
-        } else {
-            None
-        }
+        self.values.get(&34).map(|v| *v as i32)
     }
 
 }
