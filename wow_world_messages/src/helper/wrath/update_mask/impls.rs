@@ -1,4 +1,5 @@
 use crate::Guid;
+use std::convert::TryInto;
 use crate::wrath::{Race};
 use crate::wrath::{Class};
 use crate::wrath::{Gender};
@@ -14,10 +15,29 @@ impl UpdateItem {
         self
     }
 
+    pub fn object_GUID(&self) -> Option<Guid> {
+        let lower = self.values.get(&0);
+        let upper = self.values.get(&1);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
+    }
+
+    pub fn object_TYPE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&2) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -26,10 +46,26 @@ impl UpdateItem {
         self
     }
 
+    pub fn object_ENTRY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&3) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn object_SCALE_X(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&4) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_OWNER(mut self, v: Guid) -> Self {
@@ -40,12 +76,34 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_OWNER(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_CONTAINED(mut self, v: Guid) -> Self {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
         self.values.insert(9, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn item_CONTAINED(&self) -> Option<Guid> {
+        let lower = self.values.get(&8);
+        let upper = self.values.get(&9);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_CREATOR(mut self, v: Guid) -> Self {
@@ -56,6 +114,17 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_CREATOR(&self) -> Option<Guid> {
+        let lower = self.values.get(&10);
+        let upper = self.values.get(&11);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_GIFTCREATOR(mut self, v: Guid) -> Self {
         self.header_set(12);
         self.header_set(13);
@@ -64,10 +133,29 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_GIFTCREATOR(&self) -> Option<Guid> {
+        let lower = self.values.get(&12);
+        let upper = self.values.get(&13);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_STACK_COUNT(mut self, v: i32) -> Self {
         self.header_set(14);
         self.values.insert(14, v as u32);
         self
+    }
+
+    pub fn item_STACK_COUNT(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&14) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_DURATION(mut self, v: i32) -> Self {
@@ -76,10 +164,26 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_DURATION(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&15) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_SPELL_CHARGES(mut self, v: i32) -> Self {
         self.header_set(16);
         self.values.insert(16, v as u32);
         self
+    }
+
+    pub fn item_SPELL_CHARGES(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&16) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_FLAGS(mut self, v: i32) -> Self {
@@ -88,10 +192,26 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&21) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_1_1(mut self, v: i32) -> Self {
         self.header_set(22);
         self.values.insert(22, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_1_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&22) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_1_3(mut self, v: u32) -> Self {
@@ -106,6 +226,14 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_ENCHANTMENT_2_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&25) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_2_3(mut self, v: u32) -> Self {
         self.header_set(27);
         self.values.insert(27, v);
@@ -116,6 +244,14 @@ impl UpdateItem {
         self.header_set(28);
         self.values.insert(28, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_3_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&28) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_3_3(mut self, v: u32) -> Self {
@@ -130,6 +266,14 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_ENCHANTMENT_4_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&31) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_4_3(mut self, v: u32) -> Self {
         self.header_set(33);
         self.values.insert(33, v);
@@ -140,6 +284,14 @@ impl UpdateItem {
         self.header_set(34);
         self.values.insert(34, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_5_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&34) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_5_3(mut self, v: u32) -> Self {
@@ -154,6 +306,14 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_ENCHANTMENT_6_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&37) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_6_3(mut self, v: u32) -> Self {
         self.header_set(39);
         self.values.insert(39, v);
@@ -164,6 +324,14 @@ impl UpdateItem {
         self.header_set(40);
         self.values.insert(40, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_7_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&40) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_7_3(mut self, v: u32) -> Self {
@@ -178,6 +346,14 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_ENCHANTMENT_8_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&43) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_8_3(mut self, v: u32) -> Self {
         self.header_set(45);
         self.values.insert(45, v);
@@ -188,6 +364,14 @@ impl UpdateItem {
         self.header_set(46);
         self.values.insert(46, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_9_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&46) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_9_3(mut self, v: u32) -> Self {
@@ -202,6 +386,14 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_ENCHANTMENT_10_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&49) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_10_3(mut self, v: u32) -> Self {
         self.header_set(51);
         self.values.insert(51, v);
@@ -212,6 +404,14 @@ impl UpdateItem {
         self.header_set(52);
         self.values.insert(52, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_11_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&52) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_11_3(mut self, v: u32) -> Self {
@@ -226,6 +426,14 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_ENCHANTMENT_12_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&55) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_12_3(mut self, v: u32) -> Self {
         self.header_set(57);
         self.values.insert(57, v);
@@ -238,10 +446,26 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_PROPERTY_SEED(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&58) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
         self.header_set(59);
         self.values.insert(59, v as u32);
         self
+    }
+
+    pub fn item_RANDOM_PROPERTIES_ID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&59) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_DURABILITY(mut self, v: i32) -> Self {
@@ -250,10 +474,26 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_DURABILITY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&60) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_MAXDURABILITY(mut self, v: i32) -> Self {
         self.header_set(61);
         self.values.insert(61, v as u32);
         self
+    }
+
+    pub fn item_MAXDURABILITY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&61) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_CREATE_PLAYED_TIME(mut self, v: i32) -> Self {
@@ -262,12 +502,31 @@ impl UpdateItem {
         self
     }
 
+    pub fn item_CREATE_PLAYED_TIME(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&62) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
         self.values.insert(7, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn object_CREATED_BY(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
 }
@@ -281,10 +540,29 @@ impl UpdateContainer {
         self
     }
 
+    pub fn object_GUID(&self) -> Option<Guid> {
+        let lower = self.values.get(&0);
+        let upper = self.values.get(&1);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
+    }
+
+    pub fn object_TYPE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&2) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -293,10 +571,26 @@ impl UpdateContainer {
         self
     }
 
+    pub fn object_ENTRY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&3) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn object_SCALE_X(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&4) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_OWNER(mut self, v: Guid) -> Self {
@@ -307,12 +601,34 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_OWNER(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_CONTAINED(mut self, v: Guid) -> Self {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
         self.values.insert(9, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn item_CONTAINED(&self) -> Option<Guid> {
+        let lower = self.values.get(&8);
+        let upper = self.values.get(&9);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_CREATOR(mut self, v: Guid) -> Self {
@@ -323,6 +639,17 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_CREATOR(&self) -> Option<Guid> {
+        let lower = self.values.get(&10);
+        let upper = self.values.get(&11);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_GIFTCREATOR(mut self, v: Guid) -> Self {
         self.header_set(12);
         self.header_set(13);
@@ -331,10 +658,29 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_GIFTCREATOR(&self) -> Option<Guid> {
+        let lower = self.values.get(&12);
+        let upper = self.values.get(&13);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_STACK_COUNT(mut self, v: i32) -> Self {
         self.header_set(14);
         self.values.insert(14, v as u32);
         self
+    }
+
+    pub fn item_STACK_COUNT(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&14) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_DURATION(mut self, v: i32) -> Self {
@@ -343,10 +689,26 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_DURATION(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&15) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_SPELL_CHARGES(mut self, v: i32) -> Self {
         self.header_set(16);
         self.values.insert(16, v as u32);
         self
+    }
+
+    pub fn item_SPELL_CHARGES(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&16) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_FLAGS(mut self, v: i32) -> Self {
@@ -355,10 +717,26 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&21) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_1_1(mut self, v: i32) -> Self {
         self.header_set(22);
         self.values.insert(22, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_1_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&22) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_1_3(mut self, v: u32) -> Self {
@@ -373,6 +751,14 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_ENCHANTMENT_2_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&25) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_2_3(mut self, v: u32) -> Self {
         self.header_set(27);
         self.values.insert(27, v);
@@ -383,6 +769,14 @@ impl UpdateContainer {
         self.header_set(28);
         self.values.insert(28, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_3_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&28) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_3_3(mut self, v: u32) -> Self {
@@ -397,6 +791,14 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_ENCHANTMENT_4_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&31) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_4_3(mut self, v: u32) -> Self {
         self.header_set(33);
         self.values.insert(33, v);
@@ -407,6 +809,14 @@ impl UpdateContainer {
         self.header_set(34);
         self.values.insert(34, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_5_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&34) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_5_3(mut self, v: u32) -> Self {
@@ -421,6 +831,14 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_ENCHANTMENT_6_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&37) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_6_3(mut self, v: u32) -> Self {
         self.header_set(39);
         self.values.insert(39, v);
@@ -431,6 +849,14 @@ impl UpdateContainer {
         self.header_set(40);
         self.values.insert(40, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_7_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&40) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_7_3(mut self, v: u32) -> Self {
@@ -445,6 +871,14 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_ENCHANTMENT_8_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&43) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_8_3(mut self, v: u32) -> Self {
         self.header_set(45);
         self.values.insert(45, v);
@@ -455,6 +889,14 @@ impl UpdateContainer {
         self.header_set(46);
         self.values.insert(46, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_9_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&46) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_9_3(mut self, v: u32) -> Self {
@@ -469,6 +911,14 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_ENCHANTMENT_10_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&49) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_10_3(mut self, v: u32) -> Self {
         self.header_set(51);
         self.values.insert(51, v);
@@ -479,6 +929,14 @@ impl UpdateContainer {
         self.header_set(52);
         self.values.insert(52, v as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_11_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&52) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_11_3(mut self, v: u32) -> Self {
@@ -493,6 +951,14 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_ENCHANTMENT_12_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&55) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_ENCHANTMENT_12_3(mut self, v: u32) -> Self {
         self.header_set(57);
         self.values.insert(57, v);
@@ -505,10 +971,26 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_PROPERTY_SEED(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&58) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
         self.header_set(59);
         self.values.insert(59, v as u32);
         self
+    }
+
+    pub fn item_RANDOM_PROPERTIES_ID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&59) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_DURABILITY(mut self, v: i32) -> Self {
@@ -517,10 +999,26 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_DURABILITY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&60) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_item_MAXDURABILITY(mut self, v: i32) -> Self {
         self.header_set(61);
         self.values.insert(61, v as u32);
         self
+    }
+
+    pub fn item_MAXDURABILITY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&61) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_item_CREATE_PLAYED_TIME(mut self, v: i32) -> Self {
@@ -529,10 +1027,26 @@ impl UpdateContainer {
         self
     }
 
+    pub fn item_CREATE_PLAYED_TIME(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&62) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_container_NUM_SLOTS(mut self, v: i32) -> Self {
         self.header_set(64);
         self.values.insert(64, v as u32);
         self
+    }
+
+    pub fn container_NUM_SLOTS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&64) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_container_SLOT_1(mut self, v: Guid) -> Self {
@@ -543,12 +1057,34 @@ impl UpdateContainer {
         self
     }
 
+    pub fn container_SLOT_1(&self) -> Option<Guid> {
+        let lower = self.values.get(&66);
+        let upper = self.values.get(&67);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
         self.values.insert(7, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn object_CREATED_BY(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
 }
@@ -562,10 +1098,29 @@ impl UpdateUnit {
         self
     }
 
+    pub fn object_GUID(&self) -> Option<Guid> {
+        let lower = self.values.get(&0);
+        let upper = self.values.get(&1);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
+    }
+
+    pub fn object_TYPE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&2) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -574,10 +1129,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn object_ENTRY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&3) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn object_SCALE_X(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&4) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_CHARM(mut self, v: Guid) -> Self {
@@ -588,12 +1159,34 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_CHARM(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_SUMMON(mut self, v: Guid) -> Self {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
         self.values.insert(9, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn unit_SUMMON(&self) -> Option<Guid> {
+        let lower = self.values.get(&8);
+        let upper = self.values.get(&9);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_CRITTER(mut self, v: Guid) -> Self {
@@ -604,12 +1197,34 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_CRITTER(&self) -> Option<Guid> {
+        let lower = self.values.get(&10);
+        let upper = self.values.get(&11);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CHARMEDBY(mut self, v: Guid) -> Self {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
         self.values.insert(13, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn unit_CHARMEDBY(&self) -> Option<Guid> {
+        let lower = self.values.get(&12);
+        let upper = self.values.get(&13);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_SUMMONEDBY(mut self, v: Guid) -> Self {
@@ -620,12 +1235,34 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_SUMMONEDBY(&self) -> Option<Guid> {
+        let lower = self.values.get(&14);
+        let upper = self.values.get(&15);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CREATEDBY(mut self, v: Guid) -> Self {
         self.header_set(16);
         self.header_set(17);
         self.values.insert(16, v.guid() as u32);
         self.values.insert(17, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn unit_CREATEDBY(&self) -> Option<Guid> {
+        let lower = self.values.get(&16);
+        let upper = self.values.get(&17);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_TARGET(mut self, v: Guid) -> Self {
@@ -636,6 +1273,17 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_TARGET(&self) -> Option<Guid> {
+        let lower = self.values.get(&18);
+        let upper = self.values.get(&19);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CHANNEL_OBJECT(mut self, v: Guid) -> Self {
         self.header_set(20);
         self.header_set(21);
@@ -644,10 +1292,29 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_CHANNEL_OBJECT(&self) -> Option<Guid> {
+        let lower = self.values.get(&20);
+        let upper = self.values.get(&21);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CHANNEL_SPELL(mut self, v: i32) -> Self {
         self.header_set(22);
         self.values.insert(22, v as u32);
         self
+    }
+
+    pub fn unit_CHANNEL_SPELL(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&22) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
@@ -656,10 +1323,28 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_BYTES_0(&self) -> Option<(Race, Class, Gender, Power)> {
+        if let Some(v) = self.values.get(&23) {
+            let v = v.to_le_bytes();
+            let (race, class, gender, power) = (v[0], v[1], v[2], v[3]);
+            Some((race.try_into().unwrap(), class.try_into().unwrap(), gender.try_into().unwrap(), power.try_into().unwrap()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_HEALTH(mut self, v: i32) -> Self {
         self.header_set(24);
         self.values.insert(24, v as u32);
         self
+    }
+
+    pub fn unit_HEALTH(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&24) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER1(mut self, v: i32) -> Self {
@@ -668,10 +1353,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_POWER1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&25) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER2(mut self, v: i32) -> Self {
         self.header_set(26);
         self.values.insert(26, v as u32);
         self
+    }
+
+    pub fn unit_POWER2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&26) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER3(mut self, v: i32) -> Self {
@@ -680,10 +1381,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_POWER3(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&27) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER4(mut self, v: i32) -> Self {
         self.header_set(28);
         self.values.insert(28, v as u32);
         self
+    }
+
+    pub fn unit_POWER4(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&28) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER5(mut self, v: i32) -> Self {
@@ -692,10 +1409,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_POWER5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&29) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER6(mut self, v: i32) -> Self {
         self.header_set(30);
         self.values.insert(30, v as u32);
         self
+    }
+
+    pub fn unit_POWER6(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&30) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER7(mut self, v: i32) -> Self {
@@ -704,10 +1437,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_POWER7(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&31) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXHEALTH(mut self, v: i32) -> Self {
         self.header_set(32);
         self.values.insert(32, v as u32);
         self
+    }
+
+    pub fn unit_MAXHEALTH(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&32) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXPOWER1(mut self, v: i32) -> Self {
@@ -716,10 +1465,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_MAXPOWER1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&33) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXPOWER2(mut self, v: i32) -> Self {
         self.header_set(34);
         self.values.insert(34, v as u32);
         self
+    }
+
+    pub fn unit_MAXPOWER2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&34) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXPOWER3(mut self, v: i32) -> Self {
@@ -728,10 +1493,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_MAXPOWER3(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&35) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXPOWER4(mut self, v: i32) -> Self {
         self.header_set(36);
         self.values.insert(36, v as u32);
         self
+    }
+
+    pub fn unit_MAXPOWER4(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&36) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXPOWER5(mut self, v: i32) -> Self {
@@ -740,10 +1521,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_MAXPOWER5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&37) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXPOWER6(mut self, v: i32) -> Self {
         self.header_set(38);
         self.values.insert(38, v as u32);
         self
+    }
+
+    pub fn unit_MAXPOWER6(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&38) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXPOWER7(mut self, v: i32) -> Self {
@@ -752,10 +1549,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_MAXPOWER7(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&39) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER_REGEN_FLAT_MODIFIER(mut self, v: f32) -> Self {
         self.header_set(40);
         self.values.insert(40, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_POWER_REGEN_FLAT_MODIFIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&40) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER(mut self, v: f32) -> Self {
@@ -764,10 +1577,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&47) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_LEVEL(mut self, v: i32) -> Self {
         self.header_set(54);
         self.values.insert(54, v as u32);
         self
+    }
+
+    pub fn unit_LEVEL(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&54) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_FACTIONTEMPLATE(mut self, v: i32) -> Self {
@@ -776,10 +1605,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_FACTIONTEMPLATE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&55) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_VIRTUAL_ITEM_SLOT_ID(mut self, v: i32) -> Self {
         self.header_set(56);
         self.values.insert(56, v as u32);
         self
+    }
+
+    pub fn unit_VIRTUAL_ITEM_SLOT_ID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&56) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_FLAGS(mut self, v: i32) -> Self {
@@ -788,10 +1633,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&59) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_FLAGS_2(mut self, v: i32) -> Self {
         self.header_set(60);
         self.values.insert(60, v as u32);
         self
+    }
+
+    pub fn unit_FLAGS_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&60) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_AURASTATE(mut self, v: i32) -> Self {
@@ -800,10 +1661,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_AURASTATE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&61) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_BASEATTACKTIME(mut self, v: i32) -> Self {
         self.header_set(62);
         self.values.insert(62, v as u32);
         self
+    }
+
+    pub fn unit_BASEATTACKTIME(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&62) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RANGEDATTACKTIME(mut self, v: i32) -> Self {
@@ -812,10 +1689,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_RANGEDATTACKTIME(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&64) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_BOUNDINGRADIUS(mut self, v: f32) -> Self {
         self.header_set(65);
         self.values.insert(65, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_BOUNDINGRADIUS(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&65) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_COMBATREACH(mut self, v: f32) -> Self {
@@ -824,10 +1717,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_COMBATREACH(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&66) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_DISPLAYID(mut self, v: i32) -> Self {
         self.header_set(67);
         self.values.insert(67, v as u32);
         self
+    }
+
+    pub fn unit_DISPLAYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&67) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NATIVEDISPLAYID(mut self, v: i32) -> Self {
@@ -836,10 +1745,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_NATIVEDISPLAYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&68) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MOUNTDISPLAYID(mut self, v: i32) -> Self {
         self.header_set(69);
         self.values.insert(69, v as u32);
         self
+    }
+
+    pub fn unit_MOUNTDISPLAYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&69) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MINDAMAGE(mut self, v: f32) -> Self {
@@ -848,10 +1773,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_MINDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&70) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXDAMAGE(mut self, v: f32) -> Self {
         self.header_set(71);
         self.values.insert(71, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_MAXDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&71) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MINOFFHANDDAMAGE(mut self, v: f32) -> Self {
@@ -860,10 +1801,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_MINOFFHANDDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&72) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXOFFHANDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(73);
         self.values.insert(73, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_MAXOFFHANDDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&73) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -872,10 +1829,28 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_BYTES_1(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&74) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_PETNUMBER(mut self, v: i32) -> Self {
         self.header_set(75);
         self.values.insert(75, v as u32);
         self
+    }
+
+    pub fn unit_PETNUMBER(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&75) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
@@ -884,10 +1859,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_PET_NAME_TIMESTAMP(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&76) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_PETEXPERIENCE(mut self, v: i32) -> Self {
         self.header_set(77);
         self.values.insert(77, v as u32);
         self
+    }
+
+    pub fn unit_PETEXPERIENCE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&77) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
@@ -896,10 +1887,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_PETNEXTLEVELEXP(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&78) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
         self.header_set(79);
         self.values.insert(79, v as u32);
         self
+    }
+
+    pub fn unit_DYNAMIC_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&79) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MOD_CAST_SPEED(mut self, v: f32) -> Self {
@@ -908,10 +1915,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_MOD_CAST_SPEED(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&80) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CREATED_BY_SPELL(mut self, v: i32) -> Self {
         self.header_set(81);
         self.values.insert(81, v as u32);
         self
+    }
+
+    pub fn unit_CREATED_BY_SPELL(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&81) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NPC_FLAGS(mut self, v: i32) -> Self {
@@ -920,10 +1943,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_NPC_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&82) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_NPC_EMOTESTATE(mut self, v: i32) -> Self {
         self.header_set(83);
         self.values.insert(83, v as u32);
         self
+    }
+
+    pub fn unit_NPC_EMOTESTATE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&83) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
@@ -932,10 +1971,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_STRENGTH(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&84) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
         self.header_set(85);
         self.values.insert(85, v as u32);
         self
+    }
+
+    pub fn unit_AGILITY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&85) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
@@ -944,10 +1999,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_STAMINA(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&86) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
         self.header_set(87);
         self.values.insert(87, v as u32);
         self
+    }
+
+    pub fn unit_INTELLECT(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&87) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
@@ -956,10 +2027,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_SPIRIT(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&88) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POSSTAT0(mut self, v: i32) -> Self {
         self.header_set(89);
         self.values.insert(89, v as u32);
         self
+    }
+
+    pub fn unit_POSSTAT0(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&89) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POSSTAT1(mut self, v: i32) -> Self {
@@ -968,10 +2055,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_POSSTAT1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&90) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POSSTAT2(mut self, v: i32) -> Self {
         self.header_set(91);
         self.values.insert(91, v as u32);
         self
+    }
+
+    pub fn unit_POSSTAT2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&91) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POSSTAT3(mut self, v: i32) -> Self {
@@ -980,10 +2083,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_POSSTAT3(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&92) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POSSTAT4(mut self, v: i32) -> Self {
         self.header_set(93);
         self.values.insert(93, v as u32);
         self
+    }
+
+    pub fn unit_POSSTAT4(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&93) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NEGSTAT0(mut self, v: i32) -> Self {
@@ -992,10 +2111,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_NEGSTAT0(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&94) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_NEGSTAT1(mut self, v: i32) -> Self {
         self.header_set(95);
         self.values.insert(95, v as u32);
         self
+    }
+
+    pub fn unit_NEGSTAT1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&95) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NEGSTAT2(mut self, v: i32) -> Self {
@@ -1004,10 +2139,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_NEGSTAT2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&96) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_NEGSTAT3(mut self, v: i32) -> Self {
         self.header_set(97);
         self.values.insert(97, v as u32);
         self
+    }
+
+    pub fn unit_NEGSTAT3(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&97) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NEGSTAT4(mut self, v: i32) -> Self {
@@ -1016,10 +2167,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_NEGSTAT4(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&98) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_RESISTANCES(mut self, v: i32) -> Self {
         self.header_set(99);
         self.values.insert(99, v as u32);
         self
+    }
+
+    pub fn unit_RESISTANCES(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&99) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RESISTANCEBUFFMODSPOSITIVE(mut self, v: i32) -> Self {
@@ -1028,10 +2195,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_RESISTANCEBUFFMODSPOSITIVE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&106) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_RESISTANCEBUFFMODSNEGATIVE(mut self, v: i32) -> Self {
         self.header_set(113);
         self.values.insert(113, v as u32);
         self
+    }
+
+    pub fn unit_RESISTANCEBUFFMODSNEGATIVE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&113) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_BASE_MANA(mut self, v: i32) -> Self {
@@ -1040,10 +2223,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_BASE_MANA(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&120) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_BASE_HEALTH(mut self, v: i32) -> Self {
         self.header_set(121);
         self.values.insert(121, v as u32);
         self
+    }
+
+    pub fn unit_BASE_HEALTH(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&121) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -1052,10 +2251,28 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_BYTES_2(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&122) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_ATTACK_POWER(mut self, v: i32) -> Self {
         self.header_set(123);
         self.values.insert(123, v as u32);
         self
+    }
+
+    pub fn unit_ATTACK_POWER(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&123) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
@@ -1070,10 +2287,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_ATTACK_POWER_MULTIPLIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&125) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
         self.header_set(126);
         self.values.insert(126, v as u32);
         self
+    }
+
+    pub fn unit_RANGED_ATTACK_POWER(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&126) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
@@ -1088,10 +2321,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_RANGED_ATTACK_POWER_MULTIPLIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&128) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MINRANGEDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(129);
         self.values.insert(129, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_MINRANGEDDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&129) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXRANGEDDAMAGE(mut self, v: f32) -> Self {
@@ -1100,10 +2349,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_MAXRANGEDDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&130) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
         self.header_set(131);
         self.values.insert(131, v as u32);
         self
+    }
+
+    pub fn unit_POWER_COST_MODIFIER(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&131) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER_COST_MULTIPLIER(mut self, v: f32) -> Self {
@@ -1112,10 +2377,26 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_POWER_COST_MULTIPLIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&138) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXHEALTHMODIFIER(mut self, v: f32) -> Self {
         self.header_set(145);
         self.values.insert(145, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_MAXHEALTHMODIFIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&145) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_HOVERHEIGHT(mut self, v: f32) -> Self {
@@ -1124,12 +2405,31 @@ impl UpdateUnit {
         self
     }
 
+    pub fn unit_HOVERHEIGHT(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&146) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
         self.values.insert(7, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn object_CREATED_BY(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
 }
@@ -1143,10 +2443,29 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn object_GUID(&self) -> Option<Guid> {
+        let lower = self.values.get(&0);
+        let upper = self.values.get(&1);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
+    }
+
+    pub fn object_TYPE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&2) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -1155,10 +2474,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn object_ENTRY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&3) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn object_SCALE_X(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&4) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_CHARM(mut self, v: Guid) -> Self {
@@ -1169,12 +2504,34 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_CHARM(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_SUMMON(mut self, v: Guid) -> Self {
         self.header_set(8);
         self.header_set(9);
         self.values.insert(8, v.guid() as u32);
         self.values.insert(9, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn unit_SUMMON(&self) -> Option<Guid> {
+        let lower = self.values.get(&8);
+        let upper = self.values.get(&9);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_CRITTER(mut self, v: Guid) -> Self {
@@ -1185,12 +2542,34 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_CRITTER(&self) -> Option<Guid> {
+        let lower = self.values.get(&10);
+        let upper = self.values.get(&11);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CHARMEDBY(mut self, v: Guid) -> Self {
         self.header_set(12);
         self.header_set(13);
         self.values.insert(12, v.guid() as u32);
         self.values.insert(13, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn unit_CHARMEDBY(&self) -> Option<Guid> {
+        let lower = self.values.get(&12);
+        let upper = self.values.get(&13);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_SUMMONEDBY(mut self, v: Guid) -> Self {
@@ -1201,12 +2580,34 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_SUMMONEDBY(&self) -> Option<Guid> {
+        let lower = self.values.get(&14);
+        let upper = self.values.get(&15);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CREATEDBY(mut self, v: Guid) -> Self {
         self.header_set(16);
         self.header_set(17);
         self.values.insert(16, v.guid() as u32);
         self.values.insert(17, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn unit_CREATEDBY(&self) -> Option<Guid> {
+        let lower = self.values.get(&16);
+        let upper = self.values.get(&17);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_TARGET(mut self, v: Guid) -> Self {
@@ -1217,6 +2618,17 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_TARGET(&self) -> Option<Guid> {
+        let lower = self.values.get(&18);
+        let upper = self.values.get(&19);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CHANNEL_OBJECT(mut self, v: Guid) -> Self {
         self.header_set(20);
         self.header_set(21);
@@ -1225,10 +2637,29 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_CHANNEL_OBJECT(&self) -> Option<Guid> {
+        let lower = self.values.get(&20);
+        let upper = self.values.get(&21);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CHANNEL_SPELL(mut self, v: i32) -> Self {
         self.header_set(22);
         self.values.insert(22, v as u32);
         self
+    }
+
+    pub fn unit_CHANNEL_SPELL(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&22) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_BYTES_0(mut self, race: Race, class: Class, gender: Gender, power: Power) -> Self {
@@ -1237,10 +2668,28 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_BYTES_0(&self) -> Option<(Race, Class, Gender, Power)> {
+        if let Some(v) = self.values.get(&23) {
+            let v = v.to_le_bytes();
+            let (race, class, gender, power) = (v[0], v[1], v[2], v[3]);
+            Some((race.try_into().unwrap(), class.try_into().unwrap(), gender.try_into().unwrap(), power.try_into().unwrap()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_HEALTH(mut self, v: i32) -> Self {
         self.header_set(24);
         self.values.insert(24, v as u32);
         self
+    }
+
+    pub fn unit_HEALTH(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&24) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER1(mut self, v: i32) -> Self {
@@ -1249,10 +2698,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_POWER1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&25) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER2(mut self, v: i32) -> Self {
         self.header_set(26);
         self.values.insert(26, v as u32);
         self
+    }
+
+    pub fn unit_POWER2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&26) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER3(mut self, v: i32) -> Self {
@@ -1261,10 +2726,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_POWER3(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&27) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER4(mut self, v: i32) -> Self {
         self.header_set(28);
         self.values.insert(28, v as u32);
         self
+    }
+
+    pub fn unit_POWER4(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&28) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER5(mut self, v: i32) -> Self {
@@ -1273,10 +2754,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_POWER5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&29) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER6(mut self, v: i32) -> Self {
         self.header_set(30);
         self.values.insert(30, v as u32);
         self
+    }
+
+    pub fn unit_POWER6(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&30) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER7(mut self, v: i32) -> Self {
@@ -1285,10 +2782,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_POWER7(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&31) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXHEALTH(mut self, v: i32) -> Self {
         self.header_set(32);
         self.values.insert(32, v as u32);
         self
+    }
+
+    pub fn unit_MAXHEALTH(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&32) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXPOWER1(mut self, v: i32) -> Self {
@@ -1297,10 +2810,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_MAXPOWER1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&33) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXPOWER2(mut self, v: i32) -> Self {
         self.header_set(34);
         self.values.insert(34, v as u32);
         self
+    }
+
+    pub fn unit_MAXPOWER2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&34) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXPOWER3(mut self, v: i32) -> Self {
@@ -1309,10 +2838,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_MAXPOWER3(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&35) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXPOWER4(mut self, v: i32) -> Self {
         self.header_set(36);
         self.values.insert(36, v as u32);
         self
+    }
+
+    pub fn unit_MAXPOWER4(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&36) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXPOWER5(mut self, v: i32) -> Self {
@@ -1321,10 +2866,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_MAXPOWER5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&37) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXPOWER6(mut self, v: i32) -> Self {
         self.header_set(38);
         self.values.insert(38, v as u32);
         self
+    }
+
+    pub fn unit_MAXPOWER6(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&38) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXPOWER7(mut self, v: i32) -> Self {
@@ -1333,10 +2894,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_MAXPOWER7(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&39) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER_REGEN_FLAT_MODIFIER(mut self, v: f32) -> Self {
         self.header_set(40);
         self.values.insert(40, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_POWER_REGEN_FLAT_MODIFIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&40) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER(mut self, v: f32) -> Self {
@@ -1345,10 +2922,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&47) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_LEVEL(mut self, v: i32) -> Self {
         self.header_set(54);
         self.values.insert(54, v as u32);
         self
+    }
+
+    pub fn unit_LEVEL(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&54) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_FACTIONTEMPLATE(mut self, v: i32) -> Self {
@@ -1357,10 +2950,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_FACTIONTEMPLATE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&55) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_VIRTUAL_ITEM_SLOT_ID(mut self, v: i32) -> Self {
         self.header_set(56);
         self.values.insert(56, v as u32);
         self
+    }
+
+    pub fn unit_VIRTUAL_ITEM_SLOT_ID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&56) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_FLAGS(mut self, v: i32) -> Self {
@@ -1369,10 +2978,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&59) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_FLAGS_2(mut self, v: i32) -> Self {
         self.header_set(60);
         self.values.insert(60, v as u32);
         self
+    }
+
+    pub fn unit_FLAGS_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&60) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_AURASTATE(mut self, v: i32) -> Self {
@@ -1381,10 +3006,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_AURASTATE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&61) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_BASEATTACKTIME(mut self, v: i32) -> Self {
         self.header_set(62);
         self.values.insert(62, v as u32);
         self
+    }
+
+    pub fn unit_BASEATTACKTIME(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&62) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RANGEDATTACKTIME(mut self, v: i32) -> Self {
@@ -1393,10 +3034,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_RANGEDATTACKTIME(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&64) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_BOUNDINGRADIUS(mut self, v: f32) -> Self {
         self.header_set(65);
         self.values.insert(65, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_BOUNDINGRADIUS(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&65) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_COMBATREACH(mut self, v: f32) -> Self {
@@ -1405,10 +3062,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_COMBATREACH(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&66) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_DISPLAYID(mut self, v: i32) -> Self {
         self.header_set(67);
         self.values.insert(67, v as u32);
         self
+    }
+
+    pub fn unit_DISPLAYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&67) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NATIVEDISPLAYID(mut self, v: i32) -> Self {
@@ -1417,10 +3090,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_NATIVEDISPLAYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&68) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MOUNTDISPLAYID(mut self, v: i32) -> Self {
         self.header_set(69);
         self.values.insert(69, v as u32);
         self
+    }
+
+    pub fn unit_MOUNTDISPLAYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&69) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MINDAMAGE(mut self, v: f32) -> Self {
@@ -1429,10 +3118,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_MINDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&70) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXDAMAGE(mut self, v: f32) -> Self {
         self.header_set(71);
         self.values.insert(71, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_MAXDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&71) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MINOFFHANDDAMAGE(mut self, v: f32) -> Self {
@@ -1441,10 +3146,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_MINOFFHANDDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&72) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXOFFHANDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(73);
         self.values.insert(73, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_MAXOFFHANDDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&73) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -1453,10 +3174,28 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_BYTES_1(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&74) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_PETNUMBER(mut self, v: i32) -> Self {
         self.header_set(75);
         self.values.insert(75, v as u32);
         self
+    }
+
+    pub fn unit_PETNUMBER(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&75) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
@@ -1465,10 +3204,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_PET_NAME_TIMESTAMP(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&76) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_PETEXPERIENCE(mut self, v: i32) -> Self {
         self.header_set(77);
         self.values.insert(77, v as u32);
         self
+    }
+
+    pub fn unit_PETEXPERIENCE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&77) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
@@ -1477,10 +3232,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_PETNEXTLEVELEXP(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&78) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
         self.header_set(79);
         self.values.insert(79, v as u32);
         self
+    }
+
+    pub fn unit_DYNAMIC_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&79) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MOD_CAST_SPEED(mut self, v: f32) -> Self {
@@ -1489,10 +3260,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_MOD_CAST_SPEED(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&80) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_CREATED_BY_SPELL(mut self, v: i32) -> Self {
         self.header_set(81);
         self.values.insert(81, v as u32);
         self
+    }
+
+    pub fn unit_CREATED_BY_SPELL(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&81) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NPC_FLAGS(mut self, v: i32) -> Self {
@@ -1501,10 +3288,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_NPC_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&82) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_NPC_EMOTESTATE(mut self, v: i32) -> Self {
         self.header_set(83);
         self.values.insert(83, v as u32);
         self
+    }
+
+    pub fn unit_NPC_EMOTESTATE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&83) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
@@ -1513,10 +3316,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_STRENGTH(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&84) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
         self.header_set(85);
         self.values.insert(85, v as u32);
         self
+    }
+
+    pub fn unit_AGILITY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&85) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
@@ -1525,10 +3344,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_STAMINA(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&86) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
         self.header_set(87);
         self.values.insert(87, v as u32);
         self
+    }
+
+    pub fn unit_INTELLECT(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&87) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
@@ -1537,10 +3372,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_SPIRIT(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&88) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POSSTAT0(mut self, v: i32) -> Self {
         self.header_set(89);
         self.values.insert(89, v as u32);
         self
+    }
+
+    pub fn unit_POSSTAT0(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&89) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POSSTAT1(mut self, v: i32) -> Self {
@@ -1549,10 +3400,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_POSSTAT1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&90) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POSSTAT2(mut self, v: i32) -> Self {
         self.header_set(91);
         self.values.insert(91, v as u32);
         self
+    }
+
+    pub fn unit_POSSTAT2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&91) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POSSTAT3(mut self, v: i32) -> Self {
@@ -1561,10 +3428,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_POSSTAT3(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&92) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POSSTAT4(mut self, v: i32) -> Self {
         self.header_set(93);
         self.values.insert(93, v as u32);
         self
+    }
+
+    pub fn unit_POSSTAT4(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&93) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NEGSTAT0(mut self, v: i32) -> Self {
@@ -1573,10 +3456,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_NEGSTAT0(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&94) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_NEGSTAT1(mut self, v: i32) -> Self {
         self.header_set(95);
         self.values.insert(95, v as u32);
         self
+    }
+
+    pub fn unit_NEGSTAT1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&95) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NEGSTAT2(mut self, v: i32) -> Self {
@@ -1585,10 +3484,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_NEGSTAT2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&96) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_NEGSTAT3(mut self, v: i32) -> Self {
         self.header_set(97);
         self.values.insert(97, v as u32);
         self
+    }
+
+    pub fn unit_NEGSTAT3(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&97) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_NEGSTAT4(mut self, v: i32) -> Self {
@@ -1597,10 +3512,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_NEGSTAT4(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&98) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_RESISTANCES(mut self, v: i32) -> Self {
         self.header_set(99);
         self.values.insert(99, v as u32);
         self
+    }
+
+    pub fn unit_RESISTANCES(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&99) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RESISTANCEBUFFMODSPOSITIVE(mut self, v: i32) -> Self {
@@ -1609,10 +3540,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_RESISTANCEBUFFMODSPOSITIVE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&106) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_RESISTANCEBUFFMODSNEGATIVE(mut self, v: i32) -> Self {
         self.header_set(113);
         self.values.insert(113, v as u32);
         self
+    }
+
+    pub fn unit_RESISTANCEBUFFMODSNEGATIVE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&113) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_BASE_MANA(mut self, v: i32) -> Self {
@@ -1621,10 +3568,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_BASE_MANA(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&120) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_BASE_HEALTH(mut self, v: i32) -> Self {
         self.header_set(121);
         self.values.insert(121, v as u32);
         self
+    }
+
+    pub fn unit_BASE_HEALTH(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&121) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -1633,10 +3596,28 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_BYTES_2(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&122) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_ATTACK_POWER(mut self, v: i32) -> Self {
         self.header_set(123);
         self.values.insert(123, v as u32);
         self
+    }
+
+    pub fn unit_ATTACK_POWER(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&123) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
@@ -1651,10 +3632,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_ATTACK_POWER_MULTIPLIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&125) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
         self.header_set(126);
         self.values.insert(126, v as u32);
         self
+    }
+
+    pub fn unit_RANGED_ATTACK_POWER(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&126) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
@@ -1669,10 +3666,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_RANGED_ATTACK_POWER_MULTIPLIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&128) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MINRANGEDDAMAGE(mut self, v: f32) -> Self {
         self.header_set(129);
         self.values.insert(129, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_MINRANGEDDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&129) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_MAXRANGEDDAMAGE(mut self, v: f32) -> Self {
@@ -1681,10 +3694,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_MAXRANGEDDAMAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&130) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
         self.header_set(131);
         self.values.insert(131, v as u32);
         self
+    }
+
+    pub fn unit_POWER_COST_MODIFIER(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&131) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_POWER_COST_MULTIPLIER(mut self, v: f32) -> Self {
@@ -1693,16 +3722,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn unit_POWER_COST_MULTIPLIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&138) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_MAXHEALTHMODIFIER(mut self, v: f32) -> Self {
         self.header_set(145);
         self.values.insert(145, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
+    pub fn unit_MAXHEALTHMODIFIER(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&145) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_unit_HOVERHEIGHT(mut self, v: f32) -> Self {
         self.header_set(146);
         self.values.insert(146, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn unit_HOVERHEIGHT(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&146) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_DUEL_ARBITER(mut self, v: Guid) -> Self {
@@ -1713,10 +3766,29 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_DUEL_ARBITER(&self) -> Option<Guid> {
+        let lower = self.values.get(&148);
+        let upper = self.values.get(&149);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_FLAGS(mut self, v: i32) -> Self {
         self.header_set(150);
         self.values.insert(150, v as u32);
         self
+    }
+
+    pub fn player_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&150) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_GUILDID(mut self, v: i32) -> Self {
@@ -1725,10 +3797,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_GUILDID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&151) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_GUILDRANK(mut self, v: i32) -> Self {
         self.header_set(152);
         self.values.insert(152, v as u32);
         self
+    }
+
+    pub fn player_GUILDRANK(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&152) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_FIELD_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -1737,10 +3825,30 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_FIELD_BYTES(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&153) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(154);
         self.values.insert(154, u32::from_le_bytes([a, b, c, d]));
         self
+    }
+
+    pub fn player_BYTES_2(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&154) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_BYTES_3(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -1749,10 +3857,28 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_BYTES_3(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&155) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_DUEL_TEAM(mut self, v: i32) -> Self {
         self.header_set(156);
         self.values.insert(156, v as u32);
         self
+    }
+
+    pub fn player_DUEL_TEAM(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&156) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_GUILD_TIMESTAMP(mut self, v: i32) -> Self {
@@ -1761,16 +3887,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_GUILD_TIMESTAMP(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&157) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_1_1(mut self, v: i32) -> Self {
         self.header_set(158);
         self.values.insert(158, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_1_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&158) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_1_2(mut self, v: i32) -> Self {
         self.header_set(159);
         self.values.insert(159, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_1_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&159) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_1_3(mut self, v: u32) -> Self {
@@ -1785,16 +3935,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_1_4(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&162) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_2_1(mut self, v: i32) -> Self {
         self.header_set(163);
         self.values.insert(163, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_2_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&163) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_2_2(mut self, v: i32) -> Self {
         self.header_set(164);
         self.values.insert(164, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_2_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&164) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_2_3(mut self, v: u32) -> Self {
@@ -1809,16 +3983,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_2_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&167) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_3_1(mut self, v: i32) -> Self {
         self.header_set(168);
         self.values.insert(168, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_3_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&168) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_3_2(mut self, v: i32) -> Self {
         self.header_set(169);
         self.values.insert(169, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_3_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&169) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_3_3(mut self, v: u32) -> Self {
@@ -1833,16 +4031,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_3_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&172) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_4_1(mut self, v: i32) -> Self {
         self.header_set(173);
         self.values.insert(173, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_4_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&173) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_4_2(mut self, v: i32) -> Self {
         self.header_set(174);
         self.values.insert(174, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_4_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&174) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_4_3(mut self, v: u32) -> Self {
@@ -1857,16 +4079,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_4_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&177) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_5_1(mut self, v: i32) -> Self {
         self.header_set(178);
         self.values.insert(178, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_5_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&178) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_5_2(mut self, v: i32) -> Self {
         self.header_set(179);
         self.values.insert(179, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_5_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&179) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_5_3(mut self, v: u32) -> Self {
@@ -1881,16 +4127,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_5_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&182) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_6_1(mut self, v: i32) -> Self {
         self.header_set(183);
         self.values.insert(183, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_6_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&183) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_6_2(mut self, v: i32) -> Self {
         self.header_set(184);
         self.values.insert(184, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_6_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&184) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_6_3(mut self, v: u32) -> Self {
@@ -1905,16 +4175,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_6_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&187) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_7_1(mut self, v: i32) -> Self {
         self.header_set(188);
         self.values.insert(188, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_7_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&188) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_7_2(mut self, v: i32) -> Self {
         self.header_set(189);
         self.values.insert(189, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_7_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&189) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_7_3(mut self, v: u32) -> Self {
@@ -1929,16 +4223,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_7_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&192) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_8_1(mut self, v: i32) -> Self {
         self.header_set(193);
         self.values.insert(193, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_8_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&193) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_8_2(mut self, v: i32) -> Self {
         self.header_set(194);
         self.values.insert(194, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_8_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&194) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_8_3(mut self, v: u32) -> Self {
@@ -1953,16 +4271,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_8_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&197) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_9_1(mut self, v: i32) -> Self {
         self.header_set(198);
         self.values.insert(198, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_9_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&198) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_9_2(mut self, v: i32) -> Self {
         self.header_set(199);
         self.values.insert(199, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_9_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&199) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_9_3(mut self, v: u32) -> Self {
@@ -1977,16 +4319,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_9_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&202) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_10_1(mut self, v: i32) -> Self {
         self.header_set(203);
         self.values.insert(203, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_10_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&203) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_10_2(mut self, v: i32) -> Self {
         self.header_set(204);
         self.values.insert(204, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_10_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&204) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_10_3(mut self, v: u32) -> Self {
@@ -2001,16 +4367,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_10_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&207) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_11_1(mut self, v: i32) -> Self {
         self.header_set(208);
         self.values.insert(208, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_11_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&208) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_11_2(mut self, v: i32) -> Self {
         self.header_set(209);
         self.values.insert(209, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_11_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&209) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_11_3(mut self, v: u32) -> Self {
@@ -2025,16 +4415,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_11_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&212) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_12_1(mut self, v: i32) -> Self {
         self.header_set(213);
         self.values.insert(213, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_12_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&213) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_12_2(mut self, v: i32) -> Self {
         self.header_set(214);
         self.values.insert(214, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_12_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&214) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_12_3(mut self, v: u32) -> Self {
@@ -2049,16 +4463,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_12_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&217) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_13_1(mut self, v: i32) -> Self {
         self.header_set(218);
         self.values.insert(218, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_13_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&218) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_13_2(mut self, v: i32) -> Self {
         self.header_set(219);
         self.values.insert(219, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_13_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&219) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_13_3(mut self, v: u32) -> Self {
@@ -2073,16 +4511,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_13_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&222) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_14_1(mut self, v: i32) -> Self {
         self.header_set(223);
         self.values.insert(223, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_14_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&223) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_14_2(mut self, v: i32) -> Self {
         self.header_set(224);
         self.values.insert(224, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_14_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&224) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_14_3(mut self, v: u32) -> Self {
@@ -2097,16 +4559,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_14_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&227) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_15_1(mut self, v: i32) -> Self {
         self.header_set(228);
         self.values.insert(228, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_15_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&228) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_15_2(mut self, v: i32) -> Self {
         self.header_set(229);
         self.values.insert(229, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_15_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&229) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_15_3(mut self, v: u32) -> Self {
@@ -2121,16 +4607,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_15_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&232) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_16_1(mut self, v: i32) -> Self {
         self.header_set(233);
         self.values.insert(233, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_16_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&233) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_16_2(mut self, v: i32) -> Self {
         self.header_set(234);
         self.values.insert(234, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_16_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&234) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_16_3(mut self, v: u32) -> Self {
@@ -2145,16 +4655,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_16_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&237) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_17_1(mut self, v: i32) -> Self {
         self.header_set(238);
         self.values.insert(238, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_17_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&238) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_17_2(mut self, v: i32) -> Self {
         self.header_set(239);
         self.values.insert(239, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_17_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&239) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_17_3(mut self, v: u32) -> Self {
@@ -2169,16 +4703,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_17_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&242) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_18_1(mut self, v: i32) -> Self {
         self.header_set(243);
         self.values.insert(243, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_18_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&243) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_18_2(mut self, v: i32) -> Self {
         self.header_set(244);
         self.values.insert(244, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_18_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&244) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_18_3(mut self, v: u32) -> Self {
@@ -2193,16 +4751,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_18_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&247) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_19_1(mut self, v: i32) -> Self {
         self.header_set(248);
         self.values.insert(248, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_19_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&248) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_19_2(mut self, v: i32) -> Self {
         self.header_set(249);
         self.values.insert(249, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_19_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&249) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_19_3(mut self, v: u32) -> Self {
@@ -2217,16 +4799,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_19_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&252) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_20_1(mut self, v: i32) -> Self {
         self.header_set(253);
         self.values.insert(253, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_20_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&253) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_20_2(mut self, v: i32) -> Self {
         self.header_set(254);
         self.values.insert(254, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_20_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&254) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_20_3(mut self, v: u32) -> Self {
@@ -2241,16 +4847,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_20_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&257) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_21_1(mut self, v: i32) -> Self {
         self.header_set(258);
         self.values.insert(258, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_21_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&258) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_21_2(mut self, v: i32) -> Self {
         self.header_set(259);
         self.values.insert(259, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_21_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&259) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_21_3(mut self, v: u32) -> Self {
@@ -2265,16 +4895,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_21_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&262) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_22_1(mut self, v: i32) -> Self {
         self.header_set(263);
         self.values.insert(263, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_22_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&263) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_22_2(mut self, v: i32) -> Self {
         self.header_set(264);
         self.values.insert(264, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_22_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&264) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_22_3(mut self, v: u32) -> Self {
@@ -2289,16 +4943,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_22_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&267) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_23_1(mut self, v: i32) -> Self {
         self.header_set(268);
         self.values.insert(268, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_23_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&268) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_23_2(mut self, v: i32) -> Self {
         self.header_set(269);
         self.values.insert(269, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_23_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&269) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_23_3(mut self, v: u32) -> Self {
@@ -2313,16 +4991,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_23_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&272) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_24_1(mut self, v: i32) -> Self {
         self.header_set(273);
         self.values.insert(273, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_24_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&273) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_24_2(mut self, v: i32) -> Self {
         self.header_set(274);
         self.values.insert(274, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_24_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&274) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_24_3(mut self, v: u32) -> Self {
@@ -2337,16 +5039,40 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_24_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&277) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_25_1(mut self, v: i32) -> Self {
         self.header_set(278);
         self.values.insert(278, v as u32);
         self
     }
 
+    pub fn player_QUEST_LOG_25_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&278) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_QUEST_LOG_25_2(mut self, v: i32) -> Self {
         self.header_set(279);
         self.values.insert(279, v as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_25_2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&279) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_25_3(mut self, v: u32) -> Self {
@@ -2361,10 +5087,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_QUEST_LOG_25_5(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&282) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_1_ENTRYID(mut self, v: i32) -> Self {
         self.header_set(283);
         self.values.insert(283, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_1_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&283) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_1_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2379,6 +5121,14 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VISIBLE_ITEM_2_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&285) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_2_ENCHANTMENT(mut self, v: u32) -> Self {
         self.header_set(286);
         self.values.insert(286, v);
@@ -2389,6 +5139,14 @@ impl UpdatePlayer {
         self.header_set(287);
         self.values.insert(287, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_3_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&287) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_3_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2403,6 +5161,14 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VISIBLE_ITEM_4_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&289) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_4_ENCHANTMENT(mut self, v: u32) -> Self {
         self.header_set(290);
         self.values.insert(290, v);
@@ -2413,6 +5179,14 @@ impl UpdatePlayer {
         self.header_set(291);
         self.values.insert(291, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_5_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&291) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_5_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2427,6 +5201,14 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VISIBLE_ITEM_6_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&293) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_6_ENCHANTMENT(mut self, v: u32) -> Self {
         self.header_set(294);
         self.values.insert(294, v);
@@ -2437,6 +5219,14 @@ impl UpdatePlayer {
         self.header_set(295);
         self.values.insert(295, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_7_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&295) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_7_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2451,6 +5241,14 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VISIBLE_ITEM_8_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&297) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_8_ENCHANTMENT(mut self, v: u32) -> Self {
         self.header_set(298);
         self.values.insert(298, v);
@@ -2461,6 +5259,14 @@ impl UpdatePlayer {
         self.header_set(299);
         self.values.insert(299, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_9_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&299) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_9_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2475,6 +5281,14 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VISIBLE_ITEM_10_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&301) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_10_ENCHANTMENT(mut self, v: u32) -> Self {
         self.header_set(302);
         self.values.insert(302, v);
@@ -2485,6 +5299,14 @@ impl UpdatePlayer {
         self.header_set(303);
         self.values.insert(303, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_11_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&303) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_11_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2499,6 +5321,14 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VISIBLE_ITEM_12_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&305) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_12_ENCHANTMENT(mut self, v: u32) -> Self {
         self.header_set(306);
         self.values.insert(306, v);
@@ -2509,6 +5339,14 @@ impl UpdatePlayer {
         self.header_set(307);
         self.values.insert(307, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_13_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&307) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_13_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2523,6 +5361,14 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VISIBLE_ITEM_14_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&309) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_14_ENCHANTMENT(mut self, v: u32) -> Self {
         self.header_set(310);
         self.values.insert(310, v);
@@ -2533,6 +5379,14 @@ impl UpdatePlayer {
         self.header_set(311);
         self.values.insert(311, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_15_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&311) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_15_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2547,6 +5401,14 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VISIBLE_ITEM_16_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&313) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_16_ENCHANTMENT(mut self, v: u32) -> Self {
         self.header_set(314);
         self.values.insert(314, v);
@@ -2557,6 +5419,14 @@ impl UpdatePlayer {
         self.header_set(315);
         self.values.insert(315, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_17_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&315) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_17_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2571,6 +5441,14 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VISIBLE_ITEM_18_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&317) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_VISIBLE_ITEM_18_ENCHANTMENT(mut self, v: u32) -> Self {
         self.header_set(318);
         self.values.insert(318, v);
@@ -2581,6 +5459,14 @@ impl UpdatePlayer {
         self.header_set(319);
         self.values.insert(319, v as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_19_ENTRYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&319) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_19_ENCHANTMENT(mut self, v: u32) -> Self {
@@ -2595,10 +5481,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_CHOSEN_TITLE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&321) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_FAKE_INEBRIATION(mut self, v: i32) -> Self {
         self.header_set(322);
         self.values.insert(322, v as u32);
         self
+    }
+
+    pub fn player_FAKE_INEBRIATION(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&322) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_INV_SLOT_HEAD(mut self, v: Guid) -> Self {
@@ -2609,12 +5511,34 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_INV_SLOT_HEAD(&self) -> Option<Guid> {
+        let lower = self.values.get(&324);
+        let upper = self.values.get(&325);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_PACK_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(370);
         self.header_set(371);
         self.values.insert(370, v.guid() as u32);
         self.values.insert(371, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn player_PACK_SLOT_1(&self) -> Option<Guid> {
+        let lower = self.values.get(&370);
+        let upper = self.values.get(&371);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_BANK_SLOT_1(mut self, v: Guid) -> Self {
@@ -2625,12 +5549,34 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_BANK_SLOT_1(&self) -> Option<Guid> {
+        let lower = self.values.get(&402);
+        let upper = self.values.get(&403);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_BANKBAG_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(458);
         self.header_set(459);
         self.values.insert(458, v.guid() as u32);
         self.values.insert(459, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn player_BANKBAG_SLOT_1(&self) -> Option<Guid> {
+        let lower = self.values.get(&458);
+        let upper = self.values.get(&459);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VENDORBUYBACK_SLOT_1(mut self, v: Guid) -> Self {
@@ -2641,12 +5587,34 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_VENDORBUYBACK_SLOT_1(&self) -> Option<Guid> {
+        let lower = self.values.get(&472);
+        let upper = self.values.get(&473);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_KEYRING_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(496);
         self.header_set(497);
         self.values.insert(496, v.guid() as u32);
         self.values.insert(497, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn player_KEYRING_SLOT_1(&self) -> Option<Guid> {
+        let lower = self.values.get(&496);
+        let upper = self.values.get(&497);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_CURRENCYTOKEN_SLOT_1(mut self, v: Guid) -> Self {
@@ -2657,12 +5625,34 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_CURRENCYTOKEN_SLOT_1(&self) -> Option<Guid> {
+        let lower = self.values.get(&560);
+        let upper = self.values.get(&561);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_FARSIGHT(mut self, v: Guid) -> Self {
         self.header_set(624);
         self.header_set(625);
         self.values.insert(624, v.guid() as u32);
         self.values.insert(625, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn player_FARSIGHT(&self) -> Option<Guid> {
+        let lower = self.values.get(&624);
+        let upper = self.values.get(&625);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_KNOWN_TITLES(mut self, v: Guid) -> Self {
@@ -2673,12 +5663,34 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_KNOWN_TITLES(&self) -> Option<Guid> {
+        let lower = self.values.get(&626);
+        let upper = self.values.get(&627);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_KNOWN_TITLES1(mut self, v: Guid) -> Self {
         self.header_set(628);
         self.header_set(629);
         self.values.insert(628, v.guid() as u32);
         self.values.insert(629, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn player_KNOWN_TITLES1(&self) -> Option<Guid> {
+        let lower = self.values.get(&628);
+        let upper = self.values.get(&629);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_KNOWN_TITLES2(mut self, v: Guid) -> Self {
@@ -2689,6 +5701,17 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_KNOWN_TITLES2(&self) -> Option<Guid> {
+        let lower = self.values.get(&630);
+        let upper = self.values.get(&631);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_KNOWN_CURRENCIES(mut self, v: Guid) -> Self {
         self.header_set(632);
         self.header_set(633);
@@ -2697,16 +5720,43 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_KNOWN_CURRENCIES(&self) -> Option<Guid> {
+        let lower = self.values.get(&632);
+        let upper = self.values.get(&633);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_XP(mut self, v: i32) -> Self {
         self.header_set(634);
         self.values.insert(634, v as u32);
         self
     }
 
+    pub fn player_XP(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&634) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_NEXT_LEVEL_XP(mut self, v: i32) -> Self {
         self.header_set(635);
         self.values.insert(635, v as u32);
         self
+    }
+
+    pub fn player_NEXT_LEVEL_XP(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&635) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_SKILL_INFO_1_1(mut self, v: u32) -> Self {
@@ -2721,10 +5771,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_CHARACTER_POINTS1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1020) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_CHARACTER_POINTS2(mut self, v: i32) -> Self {
         self.header_set(1021);
         self.values.insert(1021, v as u32);
         self
+    }
+
+    pub fn player_CHARACTER_POINTS2(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1021) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_TRACK_CREATURES(mut self, v: i32) -> Self {
@@ -2733,10 +5799,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_TRACK_CREATURES(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1022) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_TRACK_RESOURCES(mut self, v: i32) -> Self {
         self.header_set(1023);
         self.values.insert(1023, v as u32);
         self
+    }
+
+    pub fn player_TRACK_RESOURCES(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1023) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_BLOCK_PERCENTAGE(mut self, v: f32) -> Self {
@@ -2745,10 +5827,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_BLOCK_PERCENTAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1024) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_DODGE_PERCENTAGE(mut self, v: f32) -> Self {
         self.header_set(1025);
         self.values.insert(1025, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn player_DODGE_PERCENTAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1025) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_PARRY_PERCENTAGE(mut self, v: f32) -> Self {
@@ -2757,10 +5855,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_PARRY_PERCENTAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1026) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_EXPERTISE(mut self, v: i32) -> Self {
         self.header_set(1027);
         self.values.insert(1027, v as u32);
         self
+    }
+
+    pub fn player_EXPERTISE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1027) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_OFFHAND_EXPERTISE(mut self, v: i32) -> Self {
@@ -2769,10 +5883,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_OFFHAND_EXPERTISE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1028) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_CRIT_PERCENTAGE(mut self, v: f32) -> Self {
         self.header_set(1029);
         self.values.insert(1029, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn player_CRIT_PERCENTAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1029) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_RANGED_CRIT_PERCENTAGE(mut self, v: f32) -> Self {
@@ -2781,10 +5911,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_RANGED_CRIT_PERCENTAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1030) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_OFFHAND_CRIT_PERCENTAGE(mut self, v: f32) -> Self {
         self.header_set(1031);
         self.values.insert(1031, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn player_OFFHAND_CRIT_PERCENTAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1031) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_SPELL_CRIT_PERCENTAGE1(mut self, v: f32) -> Self {
@@ -2793,10 +5939,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_SPELL_CRIT_PERCENTAGE1(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1032) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_SHIELD_BLOCK(mut self, v: i32) -> Self {
         self.header_set(1039);
         self.values.insert(1039, v as u32);
         self
+    }
+
+    pub fn player_SHIELD_BLOCK(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1039) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_SHIELD_BLOCK_CRIT_PERCENTAGE(mut self, v: f32) -> Self {
@@ -2805,10 +5967,28 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_SHIELD_BLOCK_CRIT_PERCENTAGE(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1040) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_EXPLORED_ZONES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(1041);
         self.values.insert(1041, u32::from_le_bytes([a, b, c, d]));
         self
+    }
+
+    pub fn player_EXPLORED_ZONES_1(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&1041) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_REST_STATE_EXPERIENCE(mut self, v: i32) -> Self {
@@ -2817,10 +5997,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_REST_STATE_EXPERIENCE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1169) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_COINAGE(mut self, v: i32) -> Self {
         self.header_set(1170);
         self.values.insert(1170, v as u32);
         self
+    }
+
+    pub fn player_COINAGE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1170) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_MOD_DAMAGE_DONE_POS(mut self, v: i32) -> Self {
@@ -2829,10 +6025,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_MOD_DAMAGE_DONE_POS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1171) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_MOD_DAMAGE_DONE_NEG(mut self, v: i32) -> Self {
         self.header_set(1178);
         self.values.insert(1178, v as u32);
         self
+    }
+
+    pub fn player_MOD_DAMAGE_DONE_NEG(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1178) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_MOD_DAMAGE_DONE_PCT(mut self, v: i32) -> Self {
@@ -2841,10 +6053,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_MOD_DAMAGE_DONE_PCT(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1185) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_MOD_HEALING_DONE_POS(mut self, v: i32) -> Self {
         self.header_set(1192);
         self.values.insert(1192, v as u32);
         self
+    }
+
+    pub fn player_MOD_HEALING_DONE_POS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1192) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_MOD_HEALING_PCT(mut self, v: f32) -> Self {
@@ -2853,10 +6081,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_MOD_HEALING_PCT(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1193) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_MOD_HEALING_DONE_PCT(mut self, v: f32) -> Self {
         self.header_set(1194);
         self.values.insert(1194, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn player_MOD_HEALING_DONE_PCT(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1194) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_MOD_TARGET_RESISTANCE(mut self, v: i32) -> Self {
@@ -2865,10 +6109,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_MOD_TARGET_RESISTANCE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1195) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_MOD_TARGET_PHYSICAL_RESISTANCE(mut self, v: i32) -> Self {
         self.header_set(1196);
         self.values.insert(1196, v as u32);
         self
+    }
+
+    pub fn player_MOD_TARGET_PHYSICAL_RESISTANCE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1196) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -2877,10 +6137,28 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_BYTES(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&1197) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_AMMO_ID(mut self, v: i32) -> Self {
         self.header_set(1198);
         self.values.insert(1198, v as u32);
         self
+    }
+
+    pub fn player_AMMO_ID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1198) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_SELF_RES_SPELL(mut self, v: i32) -> Self {
@@ -2889,10 +6167,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_SELF_RES_SPELL(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1199) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_PVP_MEDALS(mut self, v: i32) -> Self {
         self.header_set(1200);
         self.values.insert(1200, v as u32);
         self
+    }
+
+    pub fn player_PVP_MEDALS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1200) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_BUYBACK_PRICE_1(mut self, v: i32) -> Self {
@@ -2901,10 +6195,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_BUYBACK_PRICE_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1201) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_BUYBACK_TIMESTAMP_1(mut self, v: i32) -> Self {
         self.header_set(1213);
         self.values.insert(1213, v as u32);
         self
+    }
+
+    pub fn player_BUYBACK_TIMESTAMP_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1213) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_KILLS(mut self, v: u32) -> Self {
@@ -2919,10 +6229,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_TODAY_CONTRIBUTION(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1226) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_YESTERDAY_CONTRIBUTION(mut self, v: i32) -> Self {
         self.header_set(1227);
         self.values.insert(1227, v as u32);
         self
+    }
+
+    pub fn player_YESTERDAY_CONTRIBUTION(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1227) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_LIFETIME_HONORBALE_KILLS(mut self, v: i32) -> Self {
@@ -2931,10 +6257,28 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_LIFETIME_HONORBALE_KILLS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1228) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_BYTES2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(1229);
         self.values.insert(1229, u32::from_le_bytes([a, b, c, d]));
         self
+    }
+
+    pub fn player_BYTES2(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&1229) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_WATCHED_FACTION_INDEX(mut self, v: i32) -> Self {
@@ -2943,10 +6287,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_WATCHED_FACTION_INDEX(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1230) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_COMBAT_RATING_1(mut self, v: i32) -> Self {
         self.header_set(1231);
         self.values.insert(1231, v as u32);
         self
+    }
+
+    pub fn player_COMBAT_RATING_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1231) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_ARENA_TEAM_INFO_1_1(mut self, v: i32) -> Self {
@@ -2955,10 +6315,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_ARENA_TEAM_INFO_1_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1256) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_HONOR_CURRENCY(mut self, v: i32) -> Self {
         self.header_set(1277);
         self.values.insert(1277, v as u32);
         self
+    }
+
+    pub fn player_HONOR_CURRENCY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1277) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_ARENA_CURRENCY(mut self, v: i32) -> Self {
@@ -2967,10 +6343,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_ARENA_CURRENCY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1278) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_MAX_LEVEL(mut self, v: i32) -> Self {
         self.header_set(1279);
         self.values.insert(1279, v as u32);
         self
+    }
+
+    pub fn player_MAX_LEVEL(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1279) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_DAILY_QUESTS_1(mut self, v: i32) -> Self {
@@ -2979,10 +6371,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_DAILY_QUESTS_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1280) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_RUNE_REGEN_1(mut self, v: f32) -> Self {
         self.header_set(1305);
         self.values.insert(1305, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn player_RUNE_REGEN_1(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&1305) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_NO_REAGENT_COST_1(mut self, v: i32) -> Self {
@@ -2991,10 +6399,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_NO_REAGENT_COST_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1309) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_GLYPH_SLOTS_1(mut self, v: i32) -> Self {
         self.header_set(1312);
         self.values.insert(1312, v as u32);
         self
+    }
+
+    pub fn player_GLYPH_SLOTS_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1312) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_GLYPHS_1(mut self, v: i32) -> Self {
@@ -3003,10 +6427,26 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_GLYPHS_1(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1318) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_player_GLYPHS_ENABLED(mut self, v: i32) -> Self {
         self.header_set(1324);
         self.values.insert(1324, v as u32);
         self
+    }
+
+    pub fn player_GLYPHS_ENABLED(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1324) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_player_PET_SPELL_POWER(mut self, v: i32) -> Self {
@@ -3015,12 +6455,31 @@ impl UpdatePlayer {
         self
     }
 
+    pub fn player_PET_SPELL_POWER(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&1325) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
         self.values.insert(7, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn object_CREATED_BY(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
 }
@@ -3034,10 +6493,29 @@ impl UpdateGameObject {
         self
     }
 
+    pub fn object_GUID(&self) -> Option<Guid> {
+        let lower = self.values.get(&0);
+        let upper = self.values.get(&1);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
+    }
+
+    pub fn object_TYPE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&2) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -3046,10 +6524,26 @@ impl UpdateGameObject {
         self
     }
 
+    pub fn object_ENTRY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&3) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn object_SCALE_X(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&4) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -3060,10 +6554,29 @@ impl UpdateGameObject {
         self
     }
 
+    pub fn object_CREATED_BY(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_gameobject_DISPLAYID(mut self, v: i32) -> Self {
         self.header_set(8);
         self.values.insert(8, v as u32);
         self
+    }
+
+    pub fn gameobject_DISPLAYID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&8) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_gameobject_FLAGS(mut self, v: i32) -> Self {
@@ -3072,10 +6585,26 @@ impl UpdateGameObject {
         self
     }
 
+    pub fn gameobject_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&9) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_gameobject_PARENTROTATION(mut self, v: f32) -> Self {
         self.header_set(10);
         self.values.insert(10, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn gameobject_PARENTROTATION(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&10) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_gameobject_DYNAMIC(mut self, v: u32) -> Self {
@@ -3090,16 +6619,42 @@ impl UpdateGameObject {
         self
     }
 
+    pub fn gameobject_FACTION(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&15) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_gameobject_LEVEL(mut self, v: i32) -> Self {
         self.header_set(16);
         self.values.insert(16, v as u32);
         self
     }
 
+    pub fn gameobject_LEVEL(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&16) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_gameobject_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(17);
         self.values.insert(17, u32::from_le_bytes([a, b, c, d]));
         self
+    }
+
+    pub fn gameobject_BYTES_1(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&17) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
     }
 
 }
@@ -3113,10 +6668,29 @@ impl UpdateDynamicObject {
         self
     }
 
+    pub fn object_GUID(&self) -> Option<Guid> {
+        let lower = self.values.get(&0);
+        let upper = self.values.get(&1);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
+    }
+
+    pub fn object_TYPE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&2) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -3125,10 +6699,26 @@ impl UpdateDynamicObject {
         self
     }
 
+    pub fn object_ENTRY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&3) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn object_SCALE_X(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&4) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -3139,6 +6729,17 @@ impl UpdateDynamicObject {
         self
     }
 
+    pub fn object_CREATED_BY(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_dynamicobject_CASTER(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
@@ -3147,10 +6748,31 @@ impl UpdateDynamicObject {
         self
     }
 
+    pub fn dynamicobject_CASTER(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_dynamicobject_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(8);
         self.values.insert(8, u32::from_le_bytes([a, b, c, d]));
         self
+    }
+
+    pub fn dynamicobject_BYTES(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&8) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
     }
 
     pub fn set_dynamicobject_SPELLID(mut self, v: i32) -> Self {
@@ -3159,16 +6781,40 @@ impl UpdateDynamicObject {
         self
     }
 
+    pub fn dynamicobject_SPELLID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&9) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_dynamicobject_RADIUS(mut self, v: f32) -> Self {
         self.header_set(10);
         self.values.insert(10, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
+    pub fn dynamicobject_RADIUS(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&10) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
+    }
+
     pub fn set_dynamicobject_CASTTIME(mut self, v: i32) -> Self {
         self.header_set(11);
         self.values.insert(11, v as u32);
         self
+    }
+
+    pub fn dynamicobject_CASTTIME(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&11) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
 }
@@ -3182,10 +6828,29 @@ impl UpdateCorpse {
         self
     }
 
+    pub fn object_GUID(&self) -> Option<Guid> {
+        let lower = self.values.get(&0);
+        let upper = self.values.get(&1);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_TYPE(mut self, v: i32) -> Self {
         self.header_set(2);
         self.values.insert(2, v as u32);
         self
+    }
+
+    pub fn object_TYPE(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&2) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
@@ -3194,10 +6859,26 @@ impl UpdateCorpse {
         self
     }
 
+    pub fn object_ENTRY(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&3) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_object_SCALE_X(mut self, v: f32) -> Self {
         self.header_set(4);
         self.values.insert(4, u32::from_le_bytes(v.to_le_bytes()));
         self
+    }
+
+    pub fn object_SCALE_X(&self) -> Option<f32> {
+        if let Some(v) = self.values.get(&4) {
+            Some(f32::from_le_bytes(v.to_le_bytes()))
+        } else {
+            None
+        }
     }
 
     pub fn set_object_CREATED_BY(mut self, v: Guid) -> Self {
@@ -3208,12 +6889,34 @@ impl UpdateCorpse {
         self
     }
 
+    pub fn object_CREATED_BY(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_corpse_OWNER(mut self, v: Guid) -> Self {
         self.header_set(6);
         self.header_set(7);
         self.values.insert(6, v.guid() as u32);
         self.values.insert(7, (v.guid() >> 32) as u32);
         self
+    }
+
+    pub fn corpse_OWNER(&self) -> Option<Guid> {
+        let lower = self.values.get(&6);
+        let upper = self.values.get(&7);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
     }
 
     pub fn set_corpse_PARTY(mut self, v: Guid) -> Self {
@@ -3224,10 +6927,29 @@ impl UpdateCorpse {
         self
     }
 
+    pub fn corpse_PARTY(&self) -> Option<Guid> {
+        let lower = self.values.get(&8);
+        let upper = self.values.get(&9);
+
+        if let Some(lower) = lower {
+            Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        } else {
+            None
+        }
+    }
+
     pub fn set_corpse_DISPLAY_ID(mut self, v: i32) -> Self {
         self.header_set(10);
         self.values.insert(10, v as u32);
         self
+    }
+
+    pub fn corpse_DISPLAY_ID(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&10) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_corpse_ITEM(mut self, v: i32) -> Self {
@@ -3236,10 +6958,28 @@ impl UpdateCorpse {
         self
     }
 
+    pub fn corpse_ITEM(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&11) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_corpse_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(30);
         self.values.insert(30, u32::from_le_bytes([a, b, c, d]));
         self
+    }
+
+    pub fn corpse_BYTES_1(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&30) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
     }
 
     pub fn set_corpse_BYTES_2(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
@@ -3248,10 +6988,28 @@ impl UpdateCorpse {
         self
     }
 
+    pub fn corpse_BYTES_2(&self) -> Option<(u8, u8, u8, u8)> {
+        if let Some(v) = self.values.get(&31) {
+            let v = v.to_le_bytes();
+            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+            Some((a, b, c, d))
+        } else {
+            None
+        }
+    }
+
     pub fn set_corpse_GUILD(mut self, v: i32) -> Self {
         self.header_set(32);
         self.values.insert(32, v as u32);
         self
+    }
+
+    pub fn corpse_GUILD(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&32) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
     pub fn set_corpse_FLAGS(mut self, v: i32) -> Self {
@@ -3260,10 +7018,26 @@ impl UpdateCorpse {
         self
     }
 
+    pub fn corpse_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&33) {
+            Some(*v as i32)
+        } else {
+            None
+        }
+    }
+
     pub fn set_corpse_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
         self.header_set(34);
         self.values.insert(34, v as u32);
         self
+    }
+
+    pub fn corpse_DYNAMIC_FLAGS(&self) -> Option<i32> {
+        if let Some(v) = self.values.get(&34) {
+            Some(*v as i32)
+        } else {
+            None
+        }
     }
 
 }

@@ -136,6 +136,7 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
 
     let mut s = Writer::new("");
     s.wln("use crate::Guid;");
+    s.wln("use std::convert::TryInto;");
     for m in fields {
         if let UfType::BytesWith(a, b, c, d) = m.ty() {
             for ty in [a, b, c, d] {
@@ -155,7 +156,8 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
     for (ty, types) in update_types {
         s.bodyn(format!("impl {}", ty), |s| {
             for m in fields.iter().filter(|a| types.contains(&a.object_ty)) {
-                print_functions(s, m);
+                print_setter(s, m);
+                print_getter(s, m);
             }
         });
     }
@@ -176,7 +178,97 @@ pub fn print_update_mask() {
     overwrite_if_not_same_contents(s.inner(), Path::new(WRATH_UPDATE_MASK_LOCATION));
 }
 
-fn print_functions(s: &mut Writer, m: &MemberType) {
+fn print_getter(s: &mut Writer, m: &MemberType) {
+    match m.ty() {
+        UfType::Bytes
+        | UfType::BytesWith(_, _, _, _)
+        | UfType::Int
+        | UfType::Float
+        | UfType::Guid => {}
+        UfType::TwoShort => return,
+    }
+
+    s.open_curly(format!(
+        "pub fn {}_{}(&self) -> Option<{}>",
+        m.object_ty,
+        m.name,
+        m.ty.ty_str(),
+    ));
+
+    match m.ty() {
+        UfType::Guid => {
+            s.wln(format!("let lower = self.values.get(&{});", m.offset));
+            s.wln(format!("let upper = self.values.get(&{});", m.offset + 1));
+            s.newline();
+
+            s.body_else(
+                "if let Some(lower) = lower",
+                |s| {
+                    s.wln("Some(Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))");
+                },
+                |s| {
+                    s.wln("None");
+                },
+            );
+        }
+        UfType::Int => {
+            s.body_else(
+                format!("if let Some(v) = self.values.get(&{})", m.offset),
+                |s| {
+                    s.wln("Some(*v as i32)");
+                },
+                |s| {
+                    s.wln("None");
+                },
+            );
+        }
+        UfType::Float => {
+            s.body_else(
+                format!("if let Some(v) = self.values.get(&{})", m.offset),
+                |s| {
+                    s.wln("Some(f32::from_le_bytes(v.to_le_bytes()))");
+                },
+                |s| {
+                    s.wln("None");
+                },
+            );
+        }
+        UfType::Bytes => {
+            s.body_else(
+                format!("if let Some(v) = self.values.get(&{})", m.offset),
+                |s| {
+                    s.wln("let v = v.to_le_bytes();");
+                    s.wln("let (a, b, c, d) = (v[0], v[1], v[2], v[3]);");
+                    s.wln("Some((a, b, c, d))");
+                },
+                |s| {
+                    s.wln("None");
+                },
+            );
+        }
+        UfType::BytesWith(a, b, c, d) => {
+            s.body_else(
+                format!("if let Some(v) = self.values.get(&{})", m.offset),
+                |s| {
+                    s.wln("let v = v.to_le_bytes();");
+                    s.wln(format!(
+                        "let ({}, {}, {}, {}) = (v[0], v[1], v[2], v[3]);",
+                        a.name, b.name, c.name, d.name
+                    ));
+                    s.wln(format!("Some(({}.try_into().unwrap(), {}.try_into().unwrap(), {}.try_into().unwrap(), {}.try_into().unwrap()))", a.name, b.name, c.name, d.name));
+                },
+                |s| {
+                    s.wln("None");
+                },
+            );
+        }
+        UfType::TwoShort => {}
+    }
+
+    s.closing_curly_newline(); // pub fn get_
+}
+
+fn print_setter(s: &mut Writer, m: &MemberType) {
     s.open_curly(format!(
         "pub fn set_{}_{}(mut self, {}) -> Self",
         m.object_ty,
@@ -345,6 +437,30 @@ const FLOAT_TYPE: &str = "f32";
 const TWO_SHORT_TYPE: &str = "u32";
 
 impl UfType {
+    pub fn ty_str(&self) -> String {
+        format!(
+            "{}",
+            match self {
+                UfType::Guid => GUID_TYPE,
+                UfType::Int => INT_TYPE,
+                UfType::Float => FLOAT_TYPE,
+                UfType::TwoShort => TWO_SHORT_TYPE,
+                UfType::Bytes => {
+                    return "(u8, u8, u8, u8)".to_string();
+                }
+                UfType::BytesWith(a, b, c, d) => {
+                    return format!(
+                        "({}, {}, {}, {})",
+                        a.ty_str(),
+                        b.ty_str(),
+                        c.ty_str(),
+                        d.ty_str(),
+                    );
+                }
+            }
+        )
+    }
+
     pub fn parameter_str(&self) -> String {
         format!(
             "v: {}",
