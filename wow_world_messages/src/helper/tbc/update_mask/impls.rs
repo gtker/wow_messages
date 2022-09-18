@@ -1507,10 +1507,20 @@ impl UpdateUnit {
         }
     }
 
-    pub fn set_unit_TRAINING_POINTS(mut self, v: u32) -> Self {
+    pub fn set_unit_TRAINING_POINTS(mut self, a: u16, b: u16) -> Self {
         self.header_set(170);
-        self.values.insert(170, v);
+        self.values.insert(170, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_TRAINING_POINTS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&170) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
@@ -1739,10 +1749,20 @@ impl UpdateUnit {
         }
     }
 
-    pub fn set_unit_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
         self.header_set(211);
-        self.values.insert(211, v);
+        self.values.insert(211, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&211) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
@@ -1773,10 +1793,20 @@ impl UpdateUnit {
         }
     }
 
-    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
         self.header_set(214);
-        self.values.insert(214, v);
+        self.values.insert(214, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_RANGED_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&214) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
@@ -2754,10 +2784,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_unit_TRAINING_POINTS(mut self, v: u32) -> Self {
+    pub fn set_unit_TRAINING_POINTS(mut self, a: u16, b: u16) -> Self {
         self.header_set(170);
-        self.values.insert(170, v);
+        self.values.insert(170, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_TRAINING_POINTS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&170) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
@@ -3070,10 +3110,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_unit_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
         self.header_set(211);
-        self.values.insert(211, v);
+        self.values.insert(211, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&211) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
@@ -3104,10 +3154,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
         self.header_set(214);
-        self.values.insert(214, v);
+        self.values.insert(214, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_RANGED_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&214) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
@@ -4814,10 +4874,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_1_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_1_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(358);
-        self.values.insert(358, v);
+        self.values.insert(358, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_1_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&358) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_2_CREATOR(mut self, v: Guid) -> Self {
@@ -4853,10 +4923,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_2_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_2_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(374);
-        self.values.insert(374, v);
+        self.values.insert(374, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_2_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&374) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_3_CREATOR(mut self, v: Guid) -> Self {
@@ -4892,10 +4972,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_3_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_3_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(390);
-        self.values.insert(390, v);
+        self.values.insert(390, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_3_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&390) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_4_CREATOR(mut self, v: Guid) -> Self {
@@ -4931,10 +5021,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_4_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_4_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(406);
-        self.values.insert(406, v);
+        self.values.insert(406, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_4_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&406) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_5_CREATOR(mut self, v: Guid) -> Self {
@@ -4970,10 +5070,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_5_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_5_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(422);
-        self.values.insert(422, v);
+        self.values.insert(422, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_5_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&422) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_6_CREATOR(mut self, v: Guid) -> Self {
@@ -5009,10 +5119,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_6_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_6_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(438);
-        self.values.insert(438, v);
+        self.values.insert(438, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_6_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&438) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_7_CREATOR(mut self, v: Guid) -> Self {
@@ -5048,10 +5168,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_7_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_7_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(454);
-        self.values.insert(454, v);
+        self.values.insert(454, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_7_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&454) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_8_CREATOR(mut self, v: Guid) -> Self {
@@ -5087,10 +5217,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_8_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_8_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(470);
-        self.values.insert(470, v);
+        self.values.insert(470, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_8_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&470) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_9_CREATOR(mut self, v: Guid) -> Self {
@@ -5126,10 +5266,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_9_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_9_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(486);
-        self.values.insert(486, v);
+        self.values.insert(486, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_9_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&486) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_10_CREATOR(mut self, v: Guid) -> Self {
@@ -5165,10 +5315,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_10_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_10_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(502);
-        self.values.insert(502, v);
+        self.values.insert(502, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_10_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&502) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_11_CREATOR(mut self, v: Guid) -> Self {
@@ -5204,10 +5364,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_11_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_11_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(518);
-        self.values.insert(518, v);
+        self.values.insert(518, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_11_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&518) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_12_CREATOR(mut self, v: Guid) -> Self {
@@ -5243,10 +5413,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_12_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_12_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(534);
-        self.values.insert(534, v);
+        self.values.insert(534, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_12_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&534) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_13_CREATOR(mut self, v: Guid) -> Self {
@@ -5282,10 +5462,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_13_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_13_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(550);
-        self.values.insert(550, v);
+        self.values.insert(550, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_13_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&550) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_14_CREATOR(mut self, v: Guid) -> Self {
@@ -5321,10 +5511,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_14_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_14_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(566);
-        self.values.insert(566, v);
+        self.values.insert(566, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_14_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&566) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_15_CREATOR(mut self, v: Guid) -> Self {
@@ -5360,10 +5560,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_15_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_15_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(582);
-        self.values.insert(582, v);
+        self.values.insert(582, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_15_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&582) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_16_CREATOR(mut self, v: Guid) -> Self {
@@ -5399,10 +5609,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_16_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_16_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(598);
-        self.values.insert(598, v);
+        self.values.insert(598, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_16_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&598) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_17_CREATOR(mut self, v: Guid) -> Self {
@@ -5438,10 +5658,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_17_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_17_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(614);
-        self.values.insert(614, v);
+        self.values.insert(614, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_17_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&614) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_18_CREATOR(mut self, v: Guid) -> Self {
@@ -5477,10 +5707,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_18_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_18_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(630);
-        self.values.insert(630, v);
+        self.values.insert(630, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_18_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&630) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_19_CREATOR(mut self, v: Guid) -> Self {
@@ -5516,10 +5756,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_19_PROPERTIES(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_19_PROPERTIES(mut self, a: u16, b: u16) -> Self {
         self.header_set(646);
-        self.values.insert(646, v);
+        self.values.insert(646, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_19_PROPERTIES(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&646) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_CHOSEN_TITLE(mut self, v: i32) -> Self {
@@ -5735,10 +5985,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_SKILL_INFO_1_1(mut self, v: u32) -> Self {
+    pub fn set_player_SKILL_INFO_1_1(mut self, a: u16, b: u16) -> Self {
         self.header_set(928);
-        self.values.insert(928, v);
+        self.values.insert(928, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_SKILL_INFO_1_1(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&928) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_CHARACTER_POINTS1(mut self, v: i32) -> Self {
@@ -6151,10 +6411,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_KILLS(mut self, v: u32) -> Self {
+    pub fn set_player_KILLS(mut self, a: u16, b: u16) -> Self {
         self.header_set(1514);
-        self.values.insert(1514, v);
+        self.values.insert(1514, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_KILLS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&1514) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_TODAY_CONTRIBUTION(mut self, v: i32) -> Self {

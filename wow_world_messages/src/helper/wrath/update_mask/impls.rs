@@ -214,10 +214,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_1_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_1_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(24);
-        self.values.insert(24, v);
+        self.values.insert(24, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_1_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&24) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_2_1(mut self, v: i32) -> Self {
@@ -234,10 +244,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_2_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_2_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(27);
-        self.values.insert(27, v);
+        self.values.insert(27, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_2_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&27) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_3_1(mut self, v: i32) -> Self {
@@ -254,10 +274,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_3_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_3_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(30);
-        self.values.insert(30, v);
+        self.values.insert(30, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_3_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&30) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_4_1(mut self, v: i32) -> Self {
@@ -274,10 +304,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_4_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_4_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(33);
-        self.values.insert(33, v);
+        self.values.insert(33, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_4_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&33) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_5_1(mut self, v: i32) -> Self {
@@ -294,10 +334,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_5_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_5_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(36);
-        self.values.insert(36, v);
+        self.values.insert(36, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_5_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&36) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_6_1(mut self, v: i32) -> Self {
@@ -314,10 +364,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_6_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_6_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(39);
-        self.values.insert(39, v);
+        self.values.insert(39, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_6_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&39) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_7_1(mut self, v: i32) -> Self {
@@ -334,10 +394,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_7_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_7_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(42);
-        self.values.insert(42, v);
+        self.values.insert(42, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_7_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&42) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_8_1(mut self, v: i32) -> Self {
@@ -354,10 +424,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_8_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_8_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(45);
-        self.values.insert(45, v);
+        self.values.insert(45, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_8_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&45) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_9_1(mut self, v: i32) -> Self {
@@ -374,10 +454,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_9_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_9_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(48);
-        self.values.insert(48, v);
+        self.values.insert(48, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_9_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&48) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_10_1(mut self, v: i32) -> Self {
@@ -394,10 +484,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_10_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_10_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(51);
-        self.values.insert(51, v);
+        self.values.insert(51, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_10_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&51) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_11_1(mut self, v: i32) -> Self {
@@ -414,10 +514,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_11_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_11_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(54);
-        self.values.insert(54, v);
+        self.values.insert(54, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_11_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&54) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_12_1(mut self, v: i32) -> Self {
@@ -434,10 +544,20 @@ impl UpdateItem {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_12_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_12_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(57);
-        self.values.insert(57, v);
+        self.values.insert(57, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_12_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&57) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_PROPERTY_SEED(mut self, v: i32) -> Self {
@@ -739,10 +859,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_1_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_1_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(24);
-        self.values.insert(24, v);
+        self.values.insert(24, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_1_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&24) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_2_1(mut self, v: i32) -> Self {
@@ -759,10 +889,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_2_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_2_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(27);
-        self.values.insert(27, v);
+        self.values.insert(27, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_2_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&27) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_3_1(mut self, v: i32) -> Self {
@@ -779,10 +919,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_3_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_3_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(30);
-        self.values.insert(30, v);
+        self.values.insert(30, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_3_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&30) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_4_1(mut self, v: i32) -> Self {
@@ -799,10 +949,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_4_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_4_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(33);
-        self.values.insert(33, v);
+        self.values.insert(33, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_4_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&33) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_5_1(mut self, v: i32) -> Self {
@@ -819,10 +979,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_5_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_5_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(36);
-        self.values.insert(36, v);
+        self.values.insert(36, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_5_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&36) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_6_1(mut self, v: i32) -> Self {
@@ -839,10 +1009,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_6_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_6_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(39);
-        self.values.insert(39, v);
+        self.values.insert(39, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_6_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&39) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_7_1(mut self, v: i32) -> Self {
@@ -859,10 +1039,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_7_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_7_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(42);
-        self.values.insert(42, v);
+        self.values.insert(42, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_7_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&42) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_8_1(mut self, v: i32) -> Self {
@@ -879,10 +1069,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_8_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_8_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(45);
-        self.values.insert(45, v);
+        self.values.insert(45, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_8_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&45) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_9_1(mut self, v: i32) -> Self {
@@ -899,10 +1099,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_9_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_9_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(48);
-        self.values.insert(48, v);
+        self.values.insert(48, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_9_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&48) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_10_1(mut self, v: i32) -> Self {
@@ -919,10 +1129,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_10_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_10_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(51);
-        self.values.insert(51, v);
+        self.values.insert(51, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_10_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&51) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_11_1(mut self, v: i32) -> Self {
@@ -939,10 +1159,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_11_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_11_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(54);
-        self.values.insert(54, v);
+        self.values.insert(54, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_11_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&54) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_ENCHANTMENT_12_1(mut self, v: i32) -> Self {
@@ -959,10 +1189,20 @@ impl UpdateContainer {
         }
     }
 
-    pub fn set_item_ENCHANTMENT_12_3(mut self, v: u32) -> Self {
+    pub fn set_item_ENCHANTMENT_12_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(57);
-        self.values.insert(57, v);
+        self.values.insert(57, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn item_ENCHANTMENT_12_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&57) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_item_PROPERTY_SEED(mut self, v: i32) -> Self {
@@ -2275,10 +2515,20 @@ impl UpdateUnit {
         }
     }
 
-    pub fn set_unit_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
         self.header_set(124);
-        self.values.insert(124, v);
+        self.values.insert(124, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&124) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
@@ -2309,10 +2559,20 @@ impl UpdateUnit {
         }
     }
 
-    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
         self.header_set(127);
-        self.values.insert(127, v);
+        self.values.insert(127, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_RANGED_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&127) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
@@ -3620,10 +3880,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_unit_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
         self.header_set(124);
-        self.values.insert(124, v);
+        self.values.insert(124, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&124) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
@@ -3654,10 +3924,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, v: u32) -> Self {
+    pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
         self.header_set(127);
-        self.values.insert(127, v);
+        self.values.insert(127, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn unit_RANGED_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&127) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MULTIPLIER(mut self, v: f32) -> Self {
@@ -3923,10 +4203,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_1_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_1_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(160);
-        self.values.insert(160, v);
+        self.values.insert(160, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_1_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&160) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_1_4(mut self, v: i32) -> Self {
@@ -3971,10 +4261,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_2_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_2_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(165);
-        self.values.insert(165, v);
+        self.values.insert(165, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_2_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&165) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_2_5(mut self, v: i32) -> Self {
@@ -4019,10 +4319,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_3_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_3_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(170);
-        self.values.insert(170, v);
+        self.values.insert(170, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_3_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&170) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_3_5(mut self, v: i32) -> Self {
@@ -4067,10 +4377,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_4_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_4_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(175);
-        self.values.insert(175, v);
+        self.values.insert(175, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_4_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&175) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_4_5(mut self, v: i32) -> Self {
@@ -4115,10 +4435,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_5_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_5_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(180);
-        self.values.insert(180, v);
+        self.values.insert(180, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_5_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&180) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_5_5(mut self, v: i32) -> Self {
@@ -4163,10 +4493,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_6_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_6_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(185);
-        self.values.insert(185, v);
+        self.values.insert(185, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_6_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&185) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_6_5(mut self, v: i32) -> Self {
@@ -4211,10 +4551,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_7_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_7_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(190);
-        self.values.insert(190, v);
+        self.values.insert(190, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_7_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&190) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_7_5(mut self, v: i32) -> Self {
@@ -4259,10 +4609,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_8_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_8_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(195);
-        self.values.insert(195, v);
+        self.values.insert(195, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_8_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&195) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_8_5(mut self, v: i32) -> Self {
@@ -4307,10 +4667,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_9_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_9_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(200);
-        self.values.insert(200, v);
+        self.values.insert(200, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_9_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&200) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_9_5(mut self, v: i32) -> Self {
@@ -4355,10 +4725,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_10_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_10_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(205);
-        self.values.insert(205, v);
+        self.values.insert(205, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_10_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&205) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_10_5(mut self, v: i32) -> Self {
@@ -4403,10 +4783,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_11_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_11_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(210);
-        self.values.insert(210, v);
+        self.values.insert(210, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_11_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&210) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_11_5(mut self, v: i32) -> Self {
@@ -4451,10 +4841,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_12_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_12_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(215);
-        self.values.insert(215, v);
+        self.values.insert(215, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_12_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&215) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_12_5(mut self, v: i32) -> Self {
@@ -4499,10 +4899,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_13_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_13_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(220);
-        self.values.insert(220, v);
+        self.values.insert(220, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_13_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&220) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_13_5(mut self, v: i32) -> Self {
@@ -4547,10 +4957,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_14_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_14_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(225);
-        self.values.insert(225, v);
+        self.values.insert(225, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_14_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&225) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_14_5(mut self, v: i32) -> Self {
@@ -4595,10 +5015,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_15_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_15_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(230);
-        self.values.insert(230, v);
+        self.values.insert(230, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_15_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&230) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_15_5(mut self, v: i32) -> Self {
@@ -4643,10 +5073,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_16_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_16_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(235);
-        self.values.insert(235, v);
+        self.values.insert(235, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_16_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&235) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_16_5(mut self, v: i32) -> Self {
@@ -4691,10 +5131,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_17_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_17_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(240);
-        self.values.insert(240, v);
+        self.values.insert(240, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_17_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&240) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_17_5(mut self, v: i32) -> Self {
@@ -4739,10 +5189,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_18_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_18_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(245);
-        self.values.insert(245, v);
+        self.values.insert(245, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_18_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&245) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_18_5(mut self, v: i32) -> Self {
@@ -4787,10 +5247,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_19_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_19_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(250);
-        self.values.insert(250, v);
+        self.values.insert(250, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_19_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&250) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_19_5(mut self, v: i32) -> Self {
@@ -4835,10 +5305,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_20_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_20_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(255);
-        self.values.insert(255, v);
+        self.values.insert(255, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_20_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&255) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_20_5(mut self, v: i32) -> Self {
@@ -4883,10 +5363,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_21_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_21_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(260);
-        self.values.insert(260, v);
+        self.values.insert(260, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_21_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&260) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_21_5(mut self, v: i32) -> Self {
@@ -4931,10 +5421,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_22_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_22_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(265);
-        self.values.insert(265, v);
+        self.values.insert(265, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_22_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&265) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_22_5(mut self, v: i32) -> Self {
@@ -4979,10 +5479,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_23_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_23_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(270);
-        self.values.insert(270, v);
+        self.values.insert(270, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_23_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&270) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_23_5(mut self, v: i32) -> Self {
@@ -5027,10 +5537,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_24_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_24_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(275);
-        self.values.insert(275, v);
+        self.values.insert(275, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_24_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&275) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_24_5(mut self, v: i32) -> Self {
@@ -5075,10 +5595,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_QUEST_LOG_25_3(mut self, v: u32) -> Self {
+    pub fn set_player_QUEST_LOG_25_3(mut self, a: u16, b: u16) -> Self {
         self.header_set(280);
-        self.values.insert(280, v);
+        self.values.insert(280, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_QUEST_LOG_25_3(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&280) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_QUEST_LOG_25_5(mut self, v: i32) -> Self {
@@ -5109,10 +5639,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_1_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_1_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(284);
-        self.values.insert(284, v);
+        self.values.insert(284, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_1_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&284) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_2_ENTRYID(mut self, v: i32) -> Self {
@@ -5129,10 +5669,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_2_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_2_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(286);
-        self.values.insert(286, v);
+        self.values.insert(286, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_2_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&286) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_3_ENTRYID(mut self, v: i32) -> Self {
@@ -5149,10 +5699,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_3_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_3_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(288);
-        self.values.insert(288, v);
+        self.values.insert(288, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_3_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&288) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_4_ENTRYID(mut self, v: i32) -> Self {
@@ -5169,10 +5729,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_4_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_4_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(290);
-        self.values.insert(290, v);
+        self.values.insert(290, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_4_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&290) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_5_ENTRYID(mut self, v: i32) -> Self {
@@ -5189,10 +5759,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_5_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_5_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(292);
-        self.values.insert(292, v);
+        self.values.insert(292, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_5_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&292) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_6_ENTRYID(mut self, v: i32) -> Self {
@@ -5209,10 +5789,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_6_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_6_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(294);
-        self.values.insert(294, v);
+        self.values.insert(294, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_6_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&294) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_7_ENTRYID(mut self, v: i32) -> Self {
@@ -5229,10 +5819,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_7_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_7_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(296);
-        self.values.insert(296, v);
+        self.values.insert(296, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_7_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&296) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_8_ENTRYID(mut self, v: i32) -> Self {
@@ -5249,10 +5849,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_8_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_8_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(298);
-        self.values.insert(298, v);
+        self.values.insert(298, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_8_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&298) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_9_ENTRYID(mut self, v: i32) -> Self {
@@ -5269,10 +5879,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_9_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_9_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(300);
-        self.values.insert(300, v);
+        self.values.insert(300, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_9_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&300) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_10_ENTRYID(mut self, v: i32) -> Self {
@@ -5289,10 +5909,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_10_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_10_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(302);
-        self.values.insert(302, v);
+        self.values.insert(302, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_10_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&302) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_11_ENTRYID(mut self, v: i32) -> Self {
@@ -5309,10 +5939,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_11_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_11_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(304);
-        self.values.insert(304, v);
+        self.values.insert(304, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_11_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&304) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_12_ENTRYID(mut self, v: i32) -> Self {
@@ -5329,10 +5969,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_12_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_12_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(306);
-        self.values.insert(306, v);
+        self.values.insert(306, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_12_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&306) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_13_ENTRYID(mut self, v: i32) -> Self {
@@ -5349,10 +5999,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_13_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_13_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(308);
-        self.values.insert(308, v);
+        self.values.insert(308, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_13_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&308) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_14_ENTRYID(mut self, v: i32) -> Self {
@@ -5369,10 +6029,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_14_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_14_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(310);
-        self.values.insert(310, v);
+        self.values.insert(310, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_14_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&310) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_15_ENTRYID(mut self, v: i32) -> Self {
@@ -5389,10 +6059,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_15_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_15_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(312);
-        self.values.insert(312, v);
+        self.values.insert(312, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_15_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&312) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_16_ENTRYID(mut self, v: i32) -> Self {
@@ -5409,10 +6089,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_16_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_16_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(314);
-        self.values.insert(314, v);
+        self.values.insert(314, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_16_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&314) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_17_ENTRYID(mut self, v: i32) -> Self {
@@ -5429,10 +6119,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_17_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_17_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(316);
-        self.values.insert(316, v);
+        self.values.insert(316, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_17_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&316) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_18_ENTRYID(mut self, v: i32) -> Self {
@@ -5449,10 +6149,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_18_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_18_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(318);
-        self.values.insert(318, v);
+        self.values.insert(318, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_18_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&318) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_VISIBLE_ITEM_19_ENTRYID(mut self, v: i32) -> Self {
@@ -5469,10 +6179,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_VISIBLE_ITEM_19_ENCHANTMENT(mut self, v: u32) -> Self {
+    pub fn set_player_VISIBLE_ITEM_19_ENCHANTMENT(mut self, a: u16, b: u16) -> Self {
         self.header_set(320);
-        self.values.insert(320, v);
+        self.values.insert(320, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_VISIBLE_ITEM_19_ENCHANTMENT(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&320) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_CHOSEN_TITLE(mut self, v: i32) -> Self {
@@ -5759,10 +6479,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_SKILL_INFO_1_1(mut self, v: u32) -> Self {
+    pub fn set_player_SKILL_INFO_1_1(mut self, a: u16, b: u16) -> Self {
         self.header_set(636);
-        self.values.insert(636, v);
+        self.values.insert(636, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_SKILL_INFO_1_1(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&636) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_CHARACTER_POINTS1(mut self, v: i32) -> Self {
@@ -6217,10 +6947,20 @@ impl UpdatePlayer {
         }
     }
 
-    pub fn set_player_KILLS(mut self, v: u32) -> Self {
+    pub fn set_player_KILLS(mut self, a: u16, b: u16) -> Self {
         self.header_set(1225);
-        self.values.insert(1225, v);
+        self.values.insert(1225, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn player_KILLS(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&1225) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_player_TODAY_CONTRIBUTION(mut self, v: i32) -> Self {
@@ -6607,10 +7347,20 @@ impl UpdateGameObject {
         }
     }
 
-    pub fn set_gameobject_DYNAMIC(mut self, v: u32) -> Self {
+    pub fn set_gameobject_DYNAMIC(mut self, a: u16, b: u16) -> Self {
         self.header_set(14);
-        self.values.insert(14, v);
+        self.values.insert(14, (a as u32) << 16 | b as u32);
         self
+    }
+
+    pub fn gameobject_DYNAMIC(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&14) {
+            let v = v.to_le_bytes();
+            let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
+            Some((a, b))
+        } else {
+            None
+        }
     }
 
     pub fn set_gameobject_FACTION(mut self, v: i32) -> Self {

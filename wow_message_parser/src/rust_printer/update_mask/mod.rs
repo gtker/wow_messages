@@ -179,15 +179,6 @@ pub fn print_update_mask() {
 }
 
 fn print_getter(s: &mut Writer, m: &MemberType) {
-    match m.ty() {
-        UfType::Bytes
-        | UfType::BytesWith(_, _, _, _)
-        | UfType::Int
-        | UfType::Float
-        | UfType::Guid => {}
-        UfType::TwoShort => return,
-    }
-
     s.open_curly(format!(
         "pub fn {}_{}(&self) -> Option<{}>",
         m.object_ty,
@@ -262,7 +253,17 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
                 },
             );
         }
-        UfType::TwoShort => {}
+        UfType::TwoShort => s.body_else(
+            format!("if let Some(v) = self.values.get(&{})", m.offset),
+            |s| {
+                s.wln("let v = v.to_le_bytes();");
+                s.wln("let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));");
+                s.wln("Some((a, b))");
+            },
+            |s| {
+                s.wln("None");
+            },
+        ),
     }
 
     s.closing_curly_newline(); // pub fn get_
@@ -295,7 +296,7 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
                 UfType::Int => "v as u32".to_string(),
                 UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
                 UfType::Bytes => "u32::from_le_bytes([a, b, c, d])".to_string(),
-                UfType::TwoShort => "v".to_string(),
+                UfType::TwoShort => "(a as u32) << 16 | b as u32".to_string(),
                 UfType::BytesWith(a, b, c, d) => {
                     let get_name = |byte_type: &ByteType| -> String {
                         match byte_type.ty {
@@ -434,7 +435,7 @@ pub enum UfType {
 const GUID_TYPE: &str = "Guid";
 const INT_TYPE: &str = "i32";
 const FLOAT_TYPE: &str = "f32";
-const TWO_SHORT_TYPE: &str = "u32";
+const TWO_SHORT_TYPE: &str = "u16";
 
 impl UfType {
     pub fn ty_str(&self) -> String {
@@ -444,7 +445,7 @@ impl UfType {
                 UfType::Guid => GUID_TYPE,
                 UfType::Int => INT_TYPE,
                 UfType::Float => FLOAT_TYPE,
-                UfType::TwoShort => TWO_SHORT_TYPE,
+                UfType::TwoShort => return format!("({}, {})", TWO_SHORT_TYPE, TWO_SHORT_TYPE),
                 UfType::Bytes => {
                     return "(u8, u8, u8, u8)".to_string();
                 }
@@ -468,7 +469,7 @@ impl UfType {
                 UfType::Guid => GUID_TYPE,
                 UfType::Int => INT_TYPE,
                 UfType::Float => FLOAT_TYPE,
-                UfType::TwoShort => TWO_SHORT_TYPE,
+                UfType::TwoShort => return format!("a: {}, b: {}", TWO_SHORT_TYPE, TWO_SHORT_TYPE),
                 UfType::Bytes => {
                     return "a: u8, b: u8, c: u8, d: u8".to_string();
                 }
