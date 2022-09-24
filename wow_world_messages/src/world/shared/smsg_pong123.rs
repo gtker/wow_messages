@@ -48,8 +48,8 @@ impl crate::world::tbc::ServerMessage for SMSG_PONG {}
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ServerMessage for SMSG_PONG {}
 
-#[cfg(test)]
-mod test {
+#[cfg(all(feature = "vanilla", test))]
+mod test1 {
     use super::SMSG_PONG;
     use super::*;
     use super::super::*;
@@ -134,3 +134,178 @@ mod test {
     }
 
 }
+
+#[cfg(all(feature = "tbc", test))]
+mod test2 {
+    use super::SMSG_PONG;
+    use super::*;
+    use super::super::*;
+    use crate::world::tbc::opcodes::ServerOpcodeMessage;
+    use crate::world::tbc::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 8] = [ 0x00, 0x06, 0xDD, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_PONG0() {
+        let expected = SMSG_PONG {
+            sequence_id: 0xDEADBEEF,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_PONG(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_PONG, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+
+        assert_eq!(4 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_PONG0() {
+        let expected = SMSG_PONG {
+            sequence_id: 0xDEADBEEF,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_PONG(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_PONG, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+
+        assert_eq!(4 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_PONG0() {
+        let expected = SMSG_PONG {
+            sequence_id: 0xDEADBEEF,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_PONG(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_PONG, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+
+        assert_eq!(4 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "wrath", test))]
+mod test3 {
+    use super::SMSG_PONG;
+    use super::*;
+    use super::super::*;
+    use crate::world::wrath::opcodes::ServerOpcodeMessage;
+    use crate::world::wrath::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 8] = [ 0x00, 0x06, 0xDD, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_PONG0() {
+        let expected = SMSG_PONG {
+            sequence_id: 0xDEADBEEF,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_PONG(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_PONG, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+
+        assert_eq!(4 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_PONG0() {
+        let expected = SMSG_PONG {
+            sequence_id: 0xDEADBEEF,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_PONG(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_PONG, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+
+        assert_eq!(4 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_PONG0() {
+        let expected = SMSG_PONG {
+            sequence_id: 0xDEADBEEF,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_PONG(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_PONG, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+
+        assert_eq!(4 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+

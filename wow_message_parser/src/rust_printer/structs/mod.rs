@@ -26,7 +26,7 @@ pub fn print_struct(e: &Container, o: &Objects, version: Version) -> Writer {
 
     print_new_types::print_new_types(&mut s, e);
 
-    print_tests::print_tests(&mut s, e, o, version);
+    print_tests::print_tests(&mut s, e, o);
 
     if let Some(optional) = e.rust_object().optional() {
         print_optional::print_optional(&mut s, optional);

@@ -57,8 +57,8 @@ impl crate::world::tbc::ClientMessage for CMSG_PING {}
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ClientMessage for CMSG_PING {}
 
-#[cfg(test)]
-mod test {
+#[cfg(all(feature = "vanilla", test))]
+mod test1_12 {
     use super::CMSG_PING;
     use super::*;
     use super::super::*;
@@ -150,3 +150,192 @@ mod test {
     }
 
 }
+
+#[cfg(all(feature = "tbc", test))]
+mod test2 {
+    use super::CMSG_PING;
+    use super::*;
+    use super::super::*;
+    use crate::world::tbc::opcodes::ClientOpcodeMessage;
+    use crate::world::tbc::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 14] = [ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
+         0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_PING0() {
+        let expected = CMSG_PING {
+            sequence_id: 0xDEADBEEF,
+            round_time_in_ms: 0xFACADE,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_PING(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+
+        assert_eq!(8 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_CMSG_PING0() {
+        let expected = CMSG_PING {
+            sequence_id: 0xDEADBEEF,
+            round_time_in_ms: 0xFACADE,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_PING(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+
+        assert_eq!(8 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_CMSG_PING0() {
+        let expected = CMSG_PING {
+            sequence_id: 0xDEADBEEF,
+            round_time_in_ms: 0xFACADE,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_PING(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+
+        assert_eq!(8 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "wrath", test))]
+mod test3 {
+    use super::CMSG_PING;
+    use super::*;
+    use super::super::*;
+    use crate::world::wrath::opcodes::ClientOpcodeMessage;
+    use crate::world::wrath::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 14] = [ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
+         0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_PING0() {
+        let expected = CMSG_PING {
+            sequence_id: 0xDEADBEEF,
+            round_time_in_ms: 0xFACADE,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_PING(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+
+        assert_eq!(8 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_CMSG_PING0() {
+        let expected = CMSG_PING {
+            sequence_id: 0xDEADBEEF,
+            round_time_in_ms: 0xFACADE,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_PING(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+
+        assert_eq!(8 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_CMSG_PING0() {
+        let expected = CMSG_PING {
+            sequence_id: 0xDEADBEEF,
+            round_time_in_ms: 0xFACADE,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_PING(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+
+        assert_eq!(8 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+

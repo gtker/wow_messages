@@ -56,8 +56,8 @@ impl crate::world::vanilla::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 #[cfg(feature = "tbc")]
 impl crate::world::tbc::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 
-#[cfg(test)]
-mod test {
+#[cfg(all(feature = "vanilla", test))]
+mod test1_12 {
     use super::SMSG_ACCOUNT_DATA_TIMES;
     use super::*;
     use super::super::*;
@@ -159,3 +159,108 @@ mod test {
     }
 
 }
+
+#[cfg(all(feature = "tbc", test))]
+mod test2 {
+    use super::SMSG_ACCOUNT_DATA_TIMES;
+    use super::*;
+    use super::super::*;
+    use crate::world::tbc::opcodes::ServerOpcodeMessage;
+    use crate::world::tbc::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 132] = [ 0x00, 0x82, 0x09, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, ];
+
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm` line 13.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_ACCOUNT_DATA_TIMES0() {
+        let expected = SMSG_ACCOUNT_DATA_TIMES {
+            data: [ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ACCOUNT_DATA_TIMES, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.data, expected.data);
+
+        assert_eq!(128 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm` line 13.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_ACCOUNT_DATA_TIMES0() {
+        let expected = SMSG_ACCOUNT_DATA_TIMES {
+            data: [ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ACCOUNT_DATA_TIMES, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.data, expected.data);
+
+        assert_eq!(128 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm` line 13.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_ACCOUNT_DATA_TIMES0() {
+        let expected = SMSG_ACCOUNT_DATA_TIMES {
+            data: [ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ACCOUNT_DATA_TIMES, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.data, expected.data);
+
+        assert_eq!(128 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+

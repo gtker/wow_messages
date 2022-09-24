@@ -49,8 +49,8 @@ impl crate::world::vanilla::ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
 
-#[cfg(test)]
-mod test {
+#[cfg(all(feature = "vanilla", test))]
+mod test1_12 {
     use super::CMSG_REQUEST_ACCOUNT_DATA;
     use super::*;
     use super::super::*;
@@ -136,3 +136,92 @@ mod test {
     }
 
 }
+
+#[cfg(all(feature = "wrath", test))]
+mod test3_3_5 {
+    use super::CMSG_REQUEST_ACCOUNT_DATA;
+    use super::*;
+    use super::super::*;
+    use crate::world::wrath::opcodes::ClientOpcodeMessage;
+    use crate::world::wrath::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 10] = [ 0x00, 0x08, 0x0A, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
+         0x00, ];
+
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_REQUEST_ACCOUNT_DATA0() {
+        let expected = CMSG_REQUEST_ACCOUNT_DATA {
+            data_type: 0x6,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_REQUEST_ACCOUNT_DATA, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.data_type, expected.data_type);
+
+        assert_eq!(4 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_CMSG_REQUEST_ACCOUNT_DATA0() {
+        let expected = CMSG_REQUEST_ACCOUNT_DATA {
+            data_type: 0x6,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_REQUEST_ACCOUNT_DATA, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.data_type, expected.data_type);
+
+        assert_eq!(4 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm` line 10.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_CMSG_REQUEST_ACCOUNT_DATA0() {
+        let expected = CMSG_REQUEST_ACCOUNT_DATA {
+            data_type: 0x6,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_REQUEST_ACCOUNT_DATA, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.data_type, expected.data_type);
+
+        assert_eq!(4 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+

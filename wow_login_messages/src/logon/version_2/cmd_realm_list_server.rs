@@ -237,7 +237,7 @@ impl CMD_REALM_LIST_Server {
 }
 
 #[cfg(test)]
-mod test {
+mod test2 {
     use super::CMD_REALM_LIST_Server;
     use crate::logon::version_2::Population;
     use crate::logon::version_2::Realm;
@@ -485,3 +485,254 @@ mod test {
     }
 
 }
+
+#[cfg(test)]
+mod test3 {
+    use super::CMD_REALM_LIST_Server;
+    use crate::logon::version_2::Population;
+    use crate::logon::version_2::Realm;
+    use crate::logon::version_2::RealmCategory;
+    use crate::logon::version_2::RealmFlag;
+    use crate::logon::version_2::RealmType;
+    use super::*;
+    use super::super::*;
+    use crate::logon::version_3::opcodes::ServerOpcodeMessage;
+
+    const RAW0: [u8; 26] = [ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8, 0x43,
+         0x01, 0x00, 0x02, 0x00, 0x00, ];
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_REALM_LIST_Server0() {
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PlayerVsEnvironment,
+                    flag: RealmFlag::empty()
+                        ,
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RedFull,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::Default,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_CMD_REALM_LIST_Server0() {
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PlayerVsEnvironment,
+                    flag: RealmFlag::empty()
+                        ,
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RedFull,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::Default,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_CMD_REALM_LIST_Server0() {
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PlayerVsEnvironment,
+                    flag: RealmFlag::empty()
+                        ,
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RedFull,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::Default,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    const RAW1: [u8; 26] = [ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00,
+         0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8, 0x43,
+         0x01, 0x00, 0x02, 0x00, 0x00, ];
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_REALM_LIST_Server1() {
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PlayerVsEnvironment,
+                    flag: RealmFlag::empty()
+                        .set_INVALID()
+                        .set_OFFLINE()
+                        ,
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RedFull,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::Default,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_CMD_REALM_LIST_Server1() {
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PlayerVsEnvironment,
+                    flag: RealmFlag::empty()
+                        .set_INVALID()
+                        .set_OFFLINE()
+                        ,
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RedFull,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::Default,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_CMD_REALM_LIST_Server1() {
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PlayerVsEnvironment,
+                    flag: RealmFlag::empty()
+                        .set_INVALID()
+                        .set_OFFLINE()
+                        ,
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RedFull,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::Default,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+}
+

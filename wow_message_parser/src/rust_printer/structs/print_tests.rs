@@ -1,5 +1,5 @@
 use crate::container::{Container, ContainerType};
-use crate::file_utils::get_import_path;
+use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ArraySize;
 use crate::parser::utility::parse_value;
@@ -14,49 +14,62 @@ use crate::rust_printer::{
 };
 use crate::test_case::{TestCase, TestCaseMember, TestValue};
 
-pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: Version) {
+pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
     if e.tests().is_empty() {
         return;
     }
 
-    s.wln("#[cfg(test)]");
-    s.open_curly("mod test");
-
-    print_includes(e, o, version, s);
-
-    for (i, t) in e.tests().iter().enumerate() {
-        s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
-        s.inc_indent();
-        for i in t.raw_bytes() {
-            s.w_break_at(format!(" {:#04X},", i), 80);
+    for version in e.tags().main_versions() {
+        if version.is_world() && e.tags().shared() {
+            let version = major_version_to_string(&version.as_world());
+            s.wln(format!("#[cfg(all(feature = \"{}\", test))]", version));
+        } else {
+            s.wln("#[cfg(test)]");
         }
-        s.dec_indent();
-        s.wln_no_indent(" ];\n");
-
-        for it in ImplType::types() {
-            s.metadata_comment(format!(
-                "Generated from `{filename}` line {line}.",
-                filename = t.file_info().name(),
-                line = t.file_info().start_line()
-            ));
-            s.wln(it.cfg());
-            s.wln(it.test_macro());
-            s.bodyn(
-                format!(
-                    "{func}fn {prefix}{subject}{number}()",
-                    func = it.func(),
-                    prefix = it.prefix(),
-                    subject = t.subject(),
-                    number = i,
-                ),
-                |s| {
-                    print_test_case(s, t, e, o, it, i, version);
-                },
-            );
+        if e.tags().shared() {
+            s.open_curly(format!("mod test{}", version.to_module_case()));
+        } else {
+            s.open_curly("mod test");
         }
+
+        print_includes(e, o, version, s);
+
+        for (i, t) in e.tests().iter().enumerate() {
+            s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
+            s.inc_indent();
+
+            for i in t.raw_bytes() {
+                s.w_break_at(format!(" {:#04X},", i), 80);
+            }
+
+            s.dec_indent();
+            s.wln_no_indent(" ];\n");
+
+            for it in ImplType::types() {
+                s.metadata_comment(format!(
+                    "Generated from `{filename}` line {line}.",
+                    filename = t.file_info().name(),
+                    line = t.file_info().start_line()
+                ));
+                s.wln(it.cfg());
+                s.wln(it.test_macro());
+                s.bodyn(
+                    format!(
+                        "{func}fn {prefix}{subject}{number}()",
+                        func = it.func(),
+                        prefix = it.prefix(),
+                        subject = t.subject(),
+                        number = i,
+                    ),
+                    |s| {
+                        print_test_case(s, t, e, o, it, i, version);
+                    },
+                );
+            }
+        }
+
+        s.closing_curly_newline(); // mod test
     }
-
-    s.closing_curly(); // mod test
 }
 
 fn print_includes(e: &Container, o: &Objects, version: Version, s: &mut Writer) {

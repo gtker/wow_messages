@@ -225,6 +225,15 @@ impl Display for LoginVersion {
     }
 }
 
+impl LoginVersion {
+    pub fn to_module_case(&self) -> String {
+        match self {
+            LoginVersion::Specific(_) => self.to_string(),
+            LoginVersion::All => "all".to_string(),
+        }
+    }
+}
+
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
 pub struct Tags {
     inner: Vec<Tag>,

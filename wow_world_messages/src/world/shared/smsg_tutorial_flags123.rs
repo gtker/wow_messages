@@ -58,8 +58,8 @@ impl crate::world::tbc::ServerMessage for SMSG_TUTORIAL_FLAGS {}
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ServerMessage for SMSG_TUTORIAL_FLAGS {}
 
-#[cfg(test)]
-mod test {
+#[cfg(all(feature = "vanilla", test))]
+mod test1 {
     use super::SMSG_TUTORIAL_FLAGS;
     use super::*;
     use super::super::*;
@@ -150,3 +150,190 @@ mod test {
     }
 
 }
+
+#[cfg(all(feature = "tbc", test))]
+mod test2 {
+    use super::SMSG_TUTORIAL_FLAGS;
+    use super::*;
+    use super::super::*;
+    use crate::world::tbc::opcodes::ServerOpcodeMessage;
+    use crate::world::tbc::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 36] = [ 0x00, 0x22, 0xFD, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+         0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+         0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+         0xFF, 0xFF, 0xFF, ];
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_TUTORIAL_FLAGS0() {
+        let expected = SMSG_TUTORIAL_FLAGS {
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.tutorial_data, expected.tutorial_data);
+
+        assert_eq!(32 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_TUTORIAL_FLAGS0() {
+        let expected = SMSG_TUTORIAL_FLAGS {
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.tutorial_data, expected.tutorial_data);
+
+        assert_eq!(32 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_TUTORIAL_FLAGS0() {
+        let expected = SMSG_TUTORIAL_FLAGS {
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.tutorial_data, expected.tutorial_data);
+
+        assert_eq!(32 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "wrath", test))]
+mod test3 {
+    use super::SMSG_TUTORIAL_FLAGS;
+    use super::*;
+    use super::super::*;
+    use crate::world::wrath::opcodes::ServerOpcodeMessage;
+    use crate::world::wrath::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 36] = [ 0x00, 0x22, 0xFD, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+         0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+         0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+         0xFF, 0xFF, 0xFF, ];
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_TUTORIAL_FLAGS0() {
+        let expected = SMSG_TUTORIAL_FLAGS {
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.tutorial_data, expected.tutorial_data);
+
+        assert_eq!(32 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_TUTORIAL_FLAGS0() {
+        let expected = SMSG_TUTORIAL_FLAGS {
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.tutorial_data, expected.tutorial_data);
+
+        assert_eq!(32 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_TUTORIAL_FLAGS0() {
+        let expected = SMSG_TUTORIAL_FLAGS {
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_TUTORIAL_FLAGS, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.tutorial_data, expected.tutorial_data);
+
+        assert_eq!(32 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
