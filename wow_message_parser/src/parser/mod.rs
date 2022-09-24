@@ -18,6 +18,7 @@ use crate::file_info::FileInfo;
 use crate::parser::enumerator::{Definer, SelfValueDefinerField};
 use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
+use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
 use crate::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
 use crate::ENUM_SELF_VALUE_FIELD;
@@ -94,8 +95,7 @@ pub fn parse_file(filename: &Path) -> Objects {
         .expect("unable to find statements")
         .into_inner();
 
-    use path_slash::PathExt as _;
-    let filename = filename.to_slash().unwrap();
+    let filename = path_to_fileinfo(filename);
 
     parse_statements(&mut statements, commands.tags(), &filename)
 }

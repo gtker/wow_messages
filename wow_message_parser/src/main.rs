@@ -19,6 +19,7 @@ use crate::file_utils::{
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
+use crate::path_utils::wowm_directory;
 use crate::rust_printer::{
     get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
     print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
@@ -36,6 +37,8 @@ mod rust_printer;
 mod test_case;
 mod wireshark_printer;
 mod wowm_printer;
+
+mod path_utils;
 
 #[cfg(test)]
 mod test;
@@ -68,10 +71,10 @@ const GITHUB_REPO_URL: &str = "https://github.com/gtker/wow_messages";
 fn main() {
     let mut o = Objects::empty();
 
-    load_files(Path::new("wow_message_parser/wowm/login"), &mut o);
-    load_files(Path::new("wow_message_parser/wowm/world"), &mut o);
-    load_files(Path::new("wow_message_parser/wowm/unimplemented"), &mut o);
-    //load_files(Path::new("wow_message_parser/wowm/test"), &mut o);
+    load_files(&wowm_directory("login"), &mut o);
+    load_files(&wowm_directory("world"), &mut o);
+    load_files(&wowm_directory("unimplemented"), &mut o);
+    //load_files(&wowm_directory("test"), &mut o);
 
     if let Ok(path) = env::var("WOWM_WIRESHARK") {
         wireshark_printer::print_wireshark(&o, &path);
