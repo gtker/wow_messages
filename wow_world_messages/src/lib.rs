@@ -33,6 +33,7 @@ pub use traits::*;
 pub use world::*;
 
 pub use helper::datetime::DateTime;
+pub use helper::datetime::Weekday;
 pub use helper::guid::Guid;
 
 pub const DEFAULT_PORT: u16 = 8085;
