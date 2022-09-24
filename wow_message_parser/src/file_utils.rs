@@ -2,23 +2,15 @@ use std::collections::BTreeMap;
 use std::fmt::Write as wfmt;
 use std::fs::{read_to_string, remove_file};
 use std::io::Write;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use heck::SnakeCase;
 use walkdir::WalkDir;
 
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::path_utils;
+use crate::path_utils::{base_directory, login_directory, world_directory};
 use crate::rust_printer::Version;
-
-pub const LOGIN_DIR: &str = "wow_login_messages/src/logon";
-pub const WORLD_DIR: &str = "wow_world_messages/src/world";
-pub const VANILLA_UPDATE_MASK_LOCATION: &str =
-    "wow_world_messages/src/helper/vanilla/update_mask/impls.rs";
-pub const TBC_UPDATE_MASK_LOCATION: &str = "wow_world_messages/src/helper/tbc/update_mask/impls.rs";
-pub const WRATH_UPDATE_MASK_LOCATION: &str =
-    "wow_world_messages/src/helper/wrath/update_mask/impls.rs";
-pub const BASE_DIR: &str = "wow_world_base/src/inner";
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
 #[allow(clippy::enum_variant_names)]
@@ -31,14 +23,14 @@ pub enum SubmoduleLocation {
 
 #[derive(Debug)]
 pub struct ModFile {
-    pub name: String,
+    pub name: PathBuf,
     pub submodules: Vec<(String, SubmoduleLocation)>,
 }
 
 #[derive(Debug)]
 pub struct ModFiles {
     v: Vec<ModFile>,
-    already_existing_files: BTreeMap<String, bool>,
+    already_existing_files: BTreeMap<PathBuf, bool>,
 }
 
 impl ModFiles {
@@ -78,26 +70,25 @@ impl ModFiles {
                     }
                 }
             }
-            let filename = m.name.to_string() + "mod.rs";
+            let filename = m.name.clone().join("mod.rs");
 
-            self.already_existing_files.insert(filename.clone(), true);
-
-            create_and_overwrite_if_not_same_contents(&s, Path::new(&filename));
+            create_and_overwrite_if_not_same_contents(&s, &filename);
+            self.already_existing_files.insert(filename, true);
         }
     }
 
     pub fn new() -> Self {
         let mut already_existing_files = BTreeMap::new();
 
-        for dir in [LOGIN_DIR, WORLD_DIR, BASE_DIR] {
+        for dir in [login_directory(), world_directory(), base_directory()] {
             for file in WalkDir::new(dir).into_iter().filter_map(|a| a.ok()) {
                 if !file.file_type().is_file() {
                     continue;
                 }
 
-                use path_slash::PathExt as _;
-                let filename = file.path().to_slash().unwrap();
-                already_existing_files.insert(filename.into(), false);
+                let filename = file.path().canonicalize().unwrap();
+
+                already_existing_files.insert(filename, false);
             }
         }
 
@@ -107,7 +98,7 @@ impl ModFiles {
         }
     }
 
-    fn add_or_append_file(&mut self, file_dir: String, e: (String, SubmoduleLocation)) {
+    fn add_or_append_file(&mut self, file_dir: PathBuf, e: (String, SubmoduleLocation)) {
         if let Some(v) = self.v.iter_mut().find(|a| a.name == file_dir) {
             v.submodules.push(e);
         } else {
@@ -120,18 +111,18 @@ impl ModFiles {
 
     pub fn add_world_shared_file(&mut self, name: &str, versions: &[WorldVersion], tags: &Tags) {
         let base_path = if tags.is_in_base() {
-            BASE_DIR
+            base_directory()
         } else {
-            WORLD_DIR
+            world_directory()
         };
 
         self.add_or_append_file(
-            format!("{}/", base_path),
+            base_path.clone(),
             ("shared".to_string(), SubmoduleLocation::PubCrateMod),
         );
 
         self.add_or_append_file(
-            format!("{}/shared/", base_path),
+            base_path.join("shared"),
             (
                 get_shared_module_name(name, versions),
                 SubmoduleLocation::PubMod,
@@ -144,7 +135,7 @@ impl ModFiles {
 
         if tags.is_in_base() {
             self.add_or_append_file(
-                format!("{}/", BASE_DIR),
+                base_directory(),
                 (
                     major_version_to_string(version).to_string(),
                     SubmoduleLocation::PubMod,
@@ -152,20 +143,20 @@ impl ModFiles {
             );
 
             self.add_or_append_file(
-                format!("{}/{}/", BASE_DIR, major_version_to_string(version)),
+                base_directory().join(major_version_to_string(version)),
                 (get_module_name(name), SubmoduleLocation::PubUseInternal),
             );
         }
 
         self.add_or_append_file(
-            format!("{}/", WORLD_DIR),
+            world_directory(),
             (
                 major_version_to_string(version).to_string(),
                 SubmoduleLocation::PubMod,
             ),
         );
 
-        let file_dir = format!("{}/{}/", WORLD_DIR, major_version_to_string(version));
+        let file_dir = world_directory().join(major_version_to_string(version));
         self.add_or_append_file(
             file_dir.clone(),
             (get_module_name(name), SubmoduleLocation::PubUseInternal),
@@ -193,7 +184,7 @@ impl ModFiles {
         };
         let e = (e, SubmoduleLocation::PubMod);
 
-        let top_level_dir = format!("{}/", LOGIN_DIR);
+        let top_level_dir = login_directory();
 
         if let Some(v) = self.v.iter_mut().find(|a| a.name == top_level_dir) {
             v.submodules.push(e);
@@ -241,10 +232,9 @@ impl ModFiles {
         };
 
         self.add_world_shared_file(name, &versions, tags);
-
-        self.already_existing_files.insert(path.clone(), true);
-
         create_and_overwrite_if_not_same_contents(base_s, Path::new(&path));
+
+        self.already_existing_files.insert(path, true);
     }
 
     pub fn write_shared_import_to_file(
@@ -260,10 +250,11 @@ impl ModFiles {
         let world_path = path_utils::get_world_filepath(name, version);
 
         self.add_world_file(name, version, tags);
-        self.already_existing_files.insert(base_path.clone(), true);
-        self.already_existing_files.insert(world_path.clone(), true);
-        create_and_overwrite_if_not_same_contents(world_s, Path::new(&world_path));
+        create_and_overwrite_if_not_same_contents(world_s, &world_path);
         create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
+
+        self.already_existing_files.insert(base_path, true);
+        self.already_existing_files.insert(world_path, true);
     }
 
     pub fn write_base_contents_to_file(
@@ -282,11 +273,11 @@ impl ModFiles {
 
                 self.add_world_file(name, version, tags);
 
-                self.already_existing_files.insert(world_path.clone(), true);
-                self.already_existing_files.insert(base_path.clone(), true);
-
-                create_and_overwrite_if_not_same_contents(world_s, Path::new(&world_path));
+                create_and_overwrite_if_not_same_contents(world_s, &world_path);
                 create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
+
+                self.already_existing_files.insert(world_path, true);
+                self.already_existing_files.insert(base_path, true);
             }
         }
     }
@@ -298,18 +289,18 @@ impl ModFiles {
 
                 self.add_login_file(name, v);
 
-                self.already_existing_files.insert(path.clone(), true);
-
                 create_and_overwrite_if_not_same_contents(s, Path::new(&path));
+
+                self.already_existing_files.insert(path, true);
             }
             Version::World(version) => {
                 let path = path_utils::get_world_filepath(name, version);
 
                 self.add_world_file(name, version, tags);
 
-                self.already_existing_files.insert(path.clone(), true);
+                create_and_overwrite_if_not_same_contents(s, &path);
 
-                create_and_overwrite_if_not_same_contents(s, Path::new(&path));
+                self.already_existing_files.insert(path, true);
             }
         }
     }

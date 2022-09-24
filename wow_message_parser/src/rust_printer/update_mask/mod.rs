@@ -1,6 +1,6 @@
-use crate::file_utils::{
-    overwrite_if_not_same_contents, TBC_UPDATE_MASK_LOCATION, VANILLA_UPDATE_MASK_LOCATION,
-    WRATH_UPDATE_MASK_LOCATION,
+use crate::file_utils::overwrite_if_not_same_contents;
+use crate::path_utils::{
+    tbc_update_mask_location, vanilla_update_mask_location, wrath_update_mask_location,
 };
 use crate::rust_printer::{MajorWorldVersion, Writer};
 use std::fmt::Write;
@@ -169,13 +169,13 @@ pub fn print_update_mask() {
     print_update_mask_docs();
 
     let s = print_specific_update_mask(&vanilla_fields::FIELDS, MajorWorldVersion::Vanilla);
-    overwrite_if_not_same_contents(s.inner(), Path::new(VANILLA_UPDATE_MASK_LOCATION));
+    overwrite_if_not_same_contents(s.inner(), &vanilla_update_mask_location());
 
     let s = print_specific_update_mask(&tbc_fields::FIELDS, MajorWorldVersion::BurningCrusade);
-    overwrite_if_not_same_contents(s.inner(), Path::new(TBC_UPDATE_MASK_LOCATION));
+    overwrite_if_not_same_contents(s.inner(), &tbc_update_mask_location());
 
     let s = print_specific_update_mask(&wrath_fields::FIELDS, MajorWorldVersion::Wrath);
-    overwrite_if_not_same_contents(s.inner(), Path::new(WRATH_UPDATE_MASK_LOCATION));
+    overwrite_if_not_same_contents(s.inner(), &wrath_update_mask_location());
 }
 
 fn print_getter(s: &mut Writer, m: &MemberType) {

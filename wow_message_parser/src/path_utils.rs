@@ -1,6 +1,6 @@
-use crate::file_utils::{BASE_DIR, WORLD_DIR};
+use crate::file_utils;
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
-use crate::{file_utils, LOGIN_DIR};
+use crate::rust_printer::MajorWorldVersion;
 use std::path::{Path, PathBuf};
 
 fn workspace_directory() -> PathBuf {
@@ -16,67 +16,94 @@ pub fn wowm_directory(directory: &str) -> PathBuf {
         .join(directory)
 }
 
+pub fn login_directory() -> PathBuf {
+    workspace_directory()
+        .join("wow_login_messages")
+        .join("src")
+        .join("logon")
+}
+
+pub fn world_directory() -> PathBuf {
+    workspace_directory()
+        .join("wow_world_messages")
+        .join("src")
+        .join("world")
+}
+
+pub fn base_directory() -> PathBuf {
+    workspace_directory()
+        .join("wow_world_base")
+        .join("src")
+        .join("inner")
+}
+
+fn update_mask_location(version: MajorWorldVersion) -> PathBuf {
+    workspace_directory()
+        .join("wow_world_messages")
+        .join("src")
+        .join("helper")
+        .join(version.module_name())
+        .join("update_mask")
+        .join("impls.rs")
+}
+
+pub fn vanilla_update_mask_location() -> PathBuf {
+    update_mask_location(MajorWorldVersion::Vanilla)
+}
+
+pub fn tbc_update_mask_location() -> PathBuf {
+    update_mask_location(MajorWorldVersion::BurningCrusade)
+}
+
+pub fn wrath_update_mask_location() -> PathBuf {
+    update_mask_location(MajorWorldVersion::Wrath)
+}
+
 pub fn path_to_fileinfo(path: &Path) -> String {
-    use path_slash::PathExt;
+    let ws = workspace_directory().canonicalize().unwrap();
+    let path = path.canonicalize().unwrap();
 
-    path.canonicalize()
-        .unwrap()
-        .to_slash()
-        .unwrap()
-        .rsplit_once("wow_messages/")
-        .unwrap()
-        .1
-        .to_string()
+    path.strip_prefix(ws).unwrap().to_str().unwrap().into()
 }
 
-pub fn get_world_version_file_path(version: &WorldVersion) -> String {
-    format!(
-        "{}/{}/",
-        WORLD_DIR,
-        file_utils::major_version_to_string(version)
-    )
+pub fn get_world_version_file_path(version: &WorldVersion) -> PathBuf {
+    world_directory().join(file_utils::major_version_to_string(version))
 }
 
-pub fn get_login_version_file_path(version: &LoginVersion) -> String {
+pub fn get_login_version_file_path(version: &LoginVersion) -> PathBuf {
+    let p = login_directory();
     match version {
-        LoginVersion::Specific(v) => {
-            format!(
-                "{login_dir}/version_{version}/",
-                login_dir = LOGIN_DIR,
-                version = v
-            )
-        }
-        LoginVersion::All => {
-            format!("{login_dir}/all/", login_dir = LOGIN_DIR,)
-        }
+        LoginVersion::Specific(v) => p.join(format!("version_{}", v)),
+        LoginVersion::All => p.join("all"),
     }
 }
 
-pub fn get_base_filepath(object_name: &str, version: &WorldVersion) -> String {
-    let s = format!(
-        "{}/{}/",
-        BASE_DIR,
-        file_utils::major_version_to_string(version)
-    );
-    s + &file_utils::get_module_name(object_name) + ".rs"
+pub fn get_base_filepath(object_name: &str, version: &WorldVersion) -> PathBuf {
+    base_directory()
+        .join(file_utils::major_version_to_string(version))
+        .join(format!("{}.rs", file_utils::get_module_name(object_name)))
 }
 
-pub fn get_base_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> String {
-    let s = format!("{}/shared/", BASE_DIR);
-    s + &file_utils::get_shared_module_name(object_name, versions) + ".rs"
+pub fn get_base_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> PathBuf {
+    base_directory().join("shared").join(format!(
+        "{}.rs",
+        file_utils::get_shared_module_name(object_name, versions)
+    ))
 }
 
-pub fn get_world_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> String {
-    let s = format!("{}/shared/", WORLD_DIR);
-    s + &file_utils::get_shared_module_name(object_name, versions) + ".rs"
+pub fn get_world_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> PathBuf {
+    world_directory().join("shared").join(format!(
+        "{}.rs",
+        file_utils::get_shared_module_name(object_name, versions)
+    ))
 }
 
-pub fn get_world_filepath(object_name: &str, version: &WorldVersion) -> String {
-    let s = get_world_version_file_path(version);
-    s + &file_utils::get_module_name(object_name) + ".rs"
+pub fn get_world_filepath(object_name: &str, version: &WorldVersion) -> PathBuf {
+    get_world_version_file_path(version)
+        .join(format!("{}.rs", file_utils::get_module_name(object_name)))
 }
 
-pub fn get_login_filepath(object_name: &str, version: &LoginVersion) -> String {
-    let s = get_login_version_file_path(version);
-    s + &file_utils::get_module_name(object_name) + ".rs"
+pub fn get_login_filepath(object_name: &str, version: &LoginVersion) -> PathBuf {
+    get_login_version_file_path(version)
+        .join(format!("{}.rs", file_utils::get_module_name(object_name)))
 }

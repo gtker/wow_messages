@@ -14,12 +14,12 @@ use crate::container::{Container, ContainerType};
 use crate::doc_printer::print_docs_summary_and_objects;
 use crate::file_utils::{
     append_string_to_file, create_and_overwrite_if_not_same_contents, write_string_to_file,
-    ModFiles, LOGIN_DIR,
+    ModFiles,
 };
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
-use crate::path_utils::wowm_directory;
+use crate::path_utils::{get_login_version_file_path, wowm_directory};
 use crate::rust_printer::{
     get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
     print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
@@ -195,8 +195,9 @@ fn write_world_opcodes(o: &Objects) {
             .collect();
         if !cmsg.is_empty() {
             let s = print_world_opcodes(&cmsg, &e, ContainerType::CMsg(0));
-            let filename = format!("{}/opcodes.rs", get_world_version_file_path(&e));
-            create_and_overwrite_if_not_same_contents(s.proper_as_str(), Path::new(&filename));
+            let filename = get_world_version_file_path(&e).join("opcodes.rs");
+
+            create_and_overwrite_if_not_same_contents(s.proper_as_str(), &filename);
         }
 
         let smsg: Vec<&Container> = v
@@ -210,8 +211,8 @@ fn write_world_opcodes(o: &Objects) {
             .collect();
         if !smsg.is_empty() {
             let s = print_world_opcodes(&smsg, &e, ContainerType::SMsg(0));
-            let filename = format!("{}/opcodes.rs", get_world_version_file_path(&e));
-            append_string_to_file(s.proper_as_str(), Path::new(&filename));
+            let filename = get_world_version_file_path(&e).join("opcodes.rs");
+            append_string_to_file(s.proper_as_str(), &filename);
         }
     }
 }
@@ -227,12 +228,8 @@ fn write_login_opcodes(o: &Objects) {
             .collect();
         if !slogin.is_empty() {
             let s = print_login_opcodes(&slogin, &e, ContainerType::SLogin(0));
-            let filename = format!(
-                "{login_dir}/version_{version}/opcodes.rs",
-                login_dir = LOGIN_DIR,
-                version = e
-            );
-            write_string_to_file(s.proper_as_str(), Path::new(&filename));
+            let filename = get_login_version_file_path(&e).join("opcodes.rs");
+            write_string_to_file(s.proper_as_str(), &filename);
         }
 
         let clogin: Vec<&Container> = v
@@ -241,12 +238,8 @@ fn write_login_opcodes(o: &Objects) {
             .collect();
         if !clogin.is_empty() {
             let s = print_login_opcodes(&clogin, &e, ContainerType::CLogin(0));
-            let filename = format!(
-                "{login_dir}/version_{version}/opcodes.rs",
-                login_dir = LOGIN_DIR,
-                version = e
-            );
-            append_string_to_file(s.proper_as_str(), Path::new(&filename));
+            let filename = get_login_version_file_path(&e).join("opcodes.rs");
+            append_string_to_file(s.proper_as_str(), &filename);
         }
     }
 }
