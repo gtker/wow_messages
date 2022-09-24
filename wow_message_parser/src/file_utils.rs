@@ -8,6 +8,7 @@ use heck::SnakeCase;
 use walkdir::WalkDir;
 
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::path_utils;
 use crate::rust_printer::Version;
 
 pub const LOGIN_DIR: &str = "wow_login_messages/src/logon";
@@ -203,7 +204,7 @@ impl ModFiles {
             })
         }
 
-        let module_level_dir = get_login_version_file_path(version);
+        let module_level_dir = path_utils::get_login_version_file_path(version);
 
         let e = (get_module_name(name), SubmoduleLocation::PubUseInternal);
 
@@ -234,9 +235,9 @@ impl ModFiles {
         let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
 
         let path = if tags.is_in_base() {
-            get_base_shared_filepath(name, &versions)
+            path_utils::get_base_shared_filepath(name, &versions)
         } else {
-            get_world_shared_filepath(name, &versions)
+            path_utils::get_world_shared_filepath(name, &versions)
         };
 
         self.add_world_shared_file(name, &versions, tags);
@@ -255,8 +256,8 @@ impl ModFiles {
         version: &Version,
     ) {
         let version = &version.as_world();
-        let base_path = get_base_filepath(name, version);
-        let world_path = get_world_filepath(name, version);
+        let base_path = path_utils::get_base_filepath(name, version);
+        let world_path = path_utils::get_world_filepath(name, version);
 
         self.add_world_file(name, version, tags);
         self.already_existing_files.insert(base_path.clone(), true);
@@ -276,8 +277,8 @@ impl ModFiles {
         match &version {
             Version::Login(_) => unimplemented!(),
             Version::World(version) => {
-                let world_path = get_world_filepath(name, version);
-                let base_path = get_base_filepath(name, version);
+                let world_path = path_utils::get_world_filepath(name, version);
+                let base_path = path_utils::get_base_filepath(name, version);
 
                 self.add_world_file(name, version, tags);
 
@@ -293,7 +294,7 @@ impl ModFiles {
     pub fn write_contents_to_file(&mut self, name: &str, tags: &Tags, s: &str, version: Version) {
         match &version {
             Version::Login(v) => {
-                let path = get_login_filepath(name, v);
+                let path = path_utils::get_login_filepath(name, v);
 
                 self.add_login_file(name, v);
 
@@ -302,7 +303,7 @@ impl ModFiles {
                 create_and_overwrite_if_not_same_contents(s, Path::new(&path));
             }
             Version::World(version) => {
-                let path = get_world_filepath(name, version);
+                let path = path_utils::get_world_filepath(name, version);
 
                 self.add_world_file(name, version, tags);
 
@@ -357,31 +358,12 @@ pub fn get_world_version_path(version: &WorldVersion) -> String {
     format!("crate::world::{}", major_version_to_string(version))
 }
 
-pub fn get_world_version_file_path(version: &WorldVersion) -> String {
-    format!("{}/{}/", WORLD_DIR, major_version_to_string(version))
-}
-
 pub fn get_login_logon_version_path(version: &LoginVersion) -> String {
     match version {
         LoginVersion::Specific(v) => {
             format!("crate::logon::version_{}", v)
         }
         LoginVersion::All => "crate::logon::all".to_string(),
-    }
-}
-
-pub fn get_login_version_file_path(version: &LoginVersion) -> String {
-    match version {
-        LoginVersion::Specific(v) => {
-            format!(
-                "{login_dir}/version_{version}/",
-                login_dir = LOGIN_DIR,
-                version = v
-            )
-        }
-        LoginVersion::All => {
-            format!("{login_dir}/all/", login_dir = LOGIN_DIR,)
-        }
     }
 }
 
@@ -397,31 +379,6 @@ pub fn get_import_path(version: Version) -> String {
         Version::Login(f) => get_login_logon_version_path(f),
         Version::World(f) => get_world_version_path(f),
     }
-}
-
-fn get_base_filepath(object_name: &str, version: &WorldVersion) -> String {
-    let s = format!("{}/{}/", BASE_DIR, major_version_to_string(version));
-    s + &get_module_name(object_name) + ".rs"
-}
-
-fn get_base_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> String {
-    let s = format!("{}/shared/", BASE_DIR);
-    s + &get_shared_module_name(object_name, versions) + ".rs"
-}
-
-fn get_world_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> String {
-    let s = format!("{}/shared/", WORLD_DIR);
-    s + &get_shared_module_name(object_name, versions) + ".rs"
-}
-
-fn get_world_filepath(object_name: &str, version: &WorldVersion) -> String {
-    let s = get_world_version_file_path(version);
-    s + &get_module_name(object_name) + ".rs"
-}
-
-fn get_login_filepath(object_name: &str, version: &LoginVersion) -> String {
-    let s = get_login_version_file_path(version);
-    s + &get_module_name(object_name) + ".rs"
 }
 
 pub fn append_string_to_file(s: &str, filename: &Path) {

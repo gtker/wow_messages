@@ -13,8 +13,8 @@ use rust_printer::print_struct;
 use crate::container::{Container, ContainerType};
 use crate::doc_printer::print_docs_summary_and_objects;
 use crate::file_utils::{
-    append_string_to_file, create_and_overwrite_if_not_same_contents, get_world_version_file_path,
-    write_string_to_file, ModFiles, LOGIN_DIR,
+    append_string_to_file, create_and_overwrite_if_not_same_contents, write_string_to_file,
+    ModFiles, LOGIN_DIR,
 };
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
@@ -25,6 +25,7 @@ use crate::rust_printer::{
     print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
 };
 use parser::types::tags::Tags;
+use path_utils::get_world_version_file_path;
 
 mod container;
 mod doc_printer;
