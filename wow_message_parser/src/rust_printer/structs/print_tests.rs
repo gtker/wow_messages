@@ -19,89 +19,96 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects, version: V
         return;
     }
 
+    s.wln("#[cfg(test)]");
+    s.open_curly("mod test");
+
+    print_includes(e, o, version, s);
+
+    for (i, t) in e.tests().iter().enumerate() {
+        s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
+        s.inc_indent();
+        for i in t.raw_bytes() {
+            s.w_break_at(format!(" {:#04X},", i), 80);
+        }
+        s.dec_indent();
+        s.wln_no_indent(" ];\n");
+
+        for it in ImplType::types() {
+            s.metadata_comment(format!(
+                "Generated from `{filename}` line {line}.",
+                filename = t.file_info().name(),
+                line = t.file_info().start_line()
+            ));
+            s.wln(it.cfg());
+            s.wln(it.test_macro());
+            s.bodyn(
+                format!(
+                    "{func}fn {prefix}{subject}{number}()",
+                    func = it.func(),
+                    prefix = it.prefix(),
+                    subject = t.subject(),
+                    number = i,
+                ),
+                |s| {
+                    print_test_case(s, t, e, o, it, i, version);
+                },
+            );
+        }
+    }
+
+    s.closing_curly(); // mod test
+}
+
+fn print_includes(e: &Container, o: &Objects, version: Version, s: &mut Writer) {
     let import_path = get_import_path(version);
 
-    s.wln("#[cfg(test)]");
-    s.body("mod test", |s| {
-        s.wln(format!("use super::{};", e.name()));
+    s.wln(format!("use super::{};", e.name()));
 
-        for name in e.get_types_needing_import_recursively(o) {
-            let version = if !version.is_world() {
-                o.get_tags_of_object(name, e.tags()).import_version()
-            } else {
-                version
-            };
+    for name in e.get_types_needing_import_recursively(o) {
+        let version = if !version.is_world() {
+            o.get_tags_of_object(name, e.tags()).import_version()
+        } else {
+            version
+        };
+
+        s.wln(format!(
+            "use {path}::{ty};",
+            path = get_import_path(version),
+            ty = name,
+        ));
+    }
+
+    s.wln("use super::*;");
+    s.wln("use super::super::*;");
+    s.wln(format!("use {};", e.get_opcode_import_path(version),));
+
+    match e.container_type() {
+        ContainerType::Msg(_) => {
+            panic!()
+        }
+        ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
+            if e.contains_guid_or_packed_guid_transitively(o)
+                || e.contains_update_mask_transitively(o)
+            {
+                s.wln("use crate::Guid;");
+            }
+
+            if e.contains_update_mask_transitively(o) {
+                s.wln(format!("use {import_path}::{{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer}};"));
+            }
+
+            if e.contains_aura_mask_transitively(o) {
+                s.wln(format!("use {import_path}::{{AuraMask}};"));
+            }
 
             s.wln(format!(
-                "use {path}::{ty};",
-                path = get_import_path(version),
-                ty = name,
+                "use {import_path}::{{{}, {}}};",
+                CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
             ));
         }
-
-        s.wln("use super::*;");
-        s.wln("use super::super::*;");
-        s.wln(format!("use {};", e.get_opcode_import_path(version), ));
-
-        match e.container_type() {
-            ContainerType::Msg(_) => {
-                panic!()
-            }
-            ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
-                if e.contains_guid_or_packed_guid_transitively(o) || e.contains_update_mask_transitively(o) {
-                    s.wln("use crate::Guid;");
-                }
-
-                if e.contains_update_mask_transitively(o) {
-                    s.wln(format!("use {import_path}::{{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer}};"));
-                }
-
-                if e.contains_aura_mask_transitively(o) {
-                    s.wln(format!("use {import_path}::{{AuraMask}};"));
-                }
-
-                s.wln(format!(
-                    "use {import_path}::{{{}, {}}};",
-                    CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
-                ));
-            }
-            _ => {}
-        }
-        s.newline();
-
-        for (i, t) in e.tests().iter().enumerate() {
-            s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
-            s.inc_indent();
-            for i in t.raw_bytes() {
-                s.w_break_at(format!(" {:#04X},", i), 80);
-            }
-            s.dec_indent();
-            s.wln_no_indent(" ];\n");
-
-
-            for it in ImplType::types() {
-                s.metadata_comment(format!(
-                    "Generated from `{filename}` line {line}.",
-                    filename = t.file_info().name(),
-                    line = t.file_info().start_line()
-                ));
-                s.wln(it.cfg());
-                s.wln(it.test_macro());
-                s.bodyn(
-                    format!(
-                        "{func}fn {prefix}{subject}{number}()",
-                        func = it.func(),
-                        prefix = it.prefix(),
-                        subject = t.subject(),
-                        number = i,
-                    ),
-                    |s| {
-                        print_test_case(s, t, e, o, it, i, version);
-                    },
-                );
-            }
-        }
-    });
+        _ => {}
+    }
+    s.newline();
 }
 
 fn print_test_case(
