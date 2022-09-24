@@ -655,19 +655,6 @@ impl Container {
         true
     }
 
-    pub fn get_types_needing_errors(&self, o: &Objects, tags: &Tags) -> Vec<&str> {
-        self.get_types_needing_import()
-            .into_iter()
-            .filter(|t| {
-                !o.object_has_only_io_errors(t, tags)
-                    && !matches!(
-                        o.get_object_type_of(t, tags),
-                        ObjectType::Flag | ObjectType::Enum
-                    )
-            })
-            .collect()
-    }
-
     pub fn contains_string_or_cstring(&self) -> bool {
         for d in self.all_definitions() {
             match d.ty() {
