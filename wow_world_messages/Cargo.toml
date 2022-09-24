@@ -7,20 +7,19 @@ edition = "2018"
 
 [dependencies.wow_world_base]
 path = "../wow_world_base"
-features = ["vanilla", "tbc", "wrath"]
+default-features = false
 
 [dependencies.wow_srp]
 version = "0.5.1"
 default-features = false
 optional = true
-features = ["wrath-header", "tbc-header"]
 
 [features]
 default = ["encryption"]
 sync = []
-vanilla = []
-tbc = []
-wrath = []
+vanilla = ["wow_world_base/vanilla"]
+tbc = ["wow_world_base/tbc", "wow_srp/tbc-header"]
+wrath = ["wow_world_base/wrath", "wow_srp/wrath-header"]
 encryption = ["wow_srp"]
 
 [dependencies.chrono]
