@@ -90,7 +90,7 @@ pub enum IrWorldVersion {
         major: u8,
         minor: u8,
         patch: u8,
-        exact: u8,
+        exact: u16,
     },
 }
 

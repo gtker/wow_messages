@@ -840,13 +840,28 @@ impl Version {
 
     pub fn as_major_world(&self) -> MajorWorldVersion {
         match self.as_world() {
-            WorldVersion::Major(m)
-            | WorldVersion::Minor(m, _)
-            | WorldVersion::Patch(m, _, _)
-            | WorldVersion::Exact(m, _, _, _) => match m {
+            WorldVersion::Major(m) => match m {
                 1 => MajorWorldVersion::Vanilla,
                 2 => MajorWorldVersion::BurningCrusade,
                 3 => MajorWorldVersion::Wrath,
+                _ => unreachable!(),
+            },
+            WorldVersion::Minor(m, i) => match (m, i) {
+                (1, 12) => MajorWorldVersion::Vanilla,
+                (2, 4) => MajorWorldVersion::BurningCrusade,
+                (3, 3) => MajorWorldVersion::Wrath,
+                _ => unreachable!(),
+            },
+            WorldVersion::Patch(m, i, p) => match (m, i, p) {
+                (1, 12, _) => MajorWorldVersion::Vanilla,
+                (2, 4, 3) => MajorWorldVersion::BurningCrusade,
+                (3, 3, 5) => MajorWorldVersion::Wrath,
+                _ => unreachable!(),
+            },
+            WorldVersion::Exact(m, i, p, e) => match (m, i, p, e) {
+                (1, 12, _, _) => MajorWorldVersion::Vanilla,
+                (2, 4, 3, 8606) => MajorWorldVersion::BurningCrusade,
+                (3, 3, 5, 12340) => MajorWorldVersion::Wrath,
                 _ => unreachable!(),
             },
             WorldVersion::All => unreachable!(),

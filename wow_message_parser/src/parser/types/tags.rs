@@ -12,7 +12,7 @@ pub enum WorldVersion {
     Major(u8),
     Minor(u8, u8),
     Patch(u8, u8, u8),
-    Exact(u8, u8, u8, u8),
+    Exact(u8, u8, u8, u16),
     All,
 }
 
@@ -306,7 +306,7 @@ impl Tags {
                 self.world_versions.push(match d.len() {
                     2 => WorldVersion::Minor(d[0], d[1]),
                     3 => WorldVersion::Patch(d[0], d[1], d[2]),
-                    4 => WorldVersion::Exact(d[0], d[1], d[2], d[3]),
+                    4 => WorldVersion::Exact(d[0], d[1], d[2], u16::from(d[3])),
                     _ => panic!("incorrect world version string"),
                 });
             }
