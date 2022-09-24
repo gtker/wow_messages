@@ -33,12 +33,37 @@ impl DateTime {
         Self { inner }
     }
 
-    pub(crate) const fn from_int(inner: u32) -> Self {
-        Self { inner }
-    }
-
     pub(crate) const fn as_int(&self) -> u32 {
         self.inner
+    }
+}
+
+impl TryFrom<u32> for DateTime {
+    type Error = EnumError;
+
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        let minute = value & 0b111111;
+
+        let hours = (value >> 6) & 0b11111;
+
+        let weekday = (value >> 11) & 0b111;
+        let weekday = Weekday::try_from(weekday)?;
+
+        let month_day = (value >> 14) & 0b111111;
+
+        let month = (value >> 20) & 0b1111;
+        let month = Month::try_from(month)?;
+
+        let years_after_2000 = (value >> 24) & 0b11111111;
+
+        Ok(Self::new(
+            years_after_2000 as u8,
+            month,
+            month_day as u8,
+            weekday,
+            hours as u8,
+            minute as u8,
+        ))
     }
 }
 

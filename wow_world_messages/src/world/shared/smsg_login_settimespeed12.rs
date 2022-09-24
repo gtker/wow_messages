@@ -50,7 +50,7 @@ impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
         }
 
         // datetime: DateTime
-        let datetime = crate::DateTime::from_int(crate::util::read_u32_le(r)?);
+        let datetime: DateTime = crate::util::read_u32_le(r)?.try_into()?;
         // timescale: f32
         let timescale = crate::util::read_f32_le(r)?;
         Ok(Self {
@@ -82,7 +82,7 @@ mod test1 {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGIN_SETTIMESPEED0() {
         let expected = SMSG_LOGIN_SETTIMESPEED {
-            datetime: DateTime::from_int(0x16731A0A),
+            datetime: DateTime::try_from(0x16731A0A).unwrap(),
             timescale: 0.016666668_f32,
         };
 
@@ -109,7 +109,7 @@ mod test1 {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGIN_SETTIMESPEED0() {
         let expected = SMSG_LOGIN_SETTIMESPEED {
-            datetime: DateTime::from_int(0x16731A0A),
+            datetime: DateTime::try_from(0x16731A0A).unwrap(),
             timescale: 0.016666668_f32,
         };
 
@@ -136,7 +136,7 @@ mod test1 {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGIN_SETTIMESPEED0() {
         let expected = SMSG_LOGIN_SETTIMESPEED {
-            datetime: DateTime::from_int(0x16731A0A),
+            datetime: DateTime::try_from(0x16731A0A).unwrap(),
             timescale: 0.016666668_f32,
         };
 
@@ -176,7 +176,7 @@ mod test2 {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGIN_SETTIMESPEED0() {
         let expected = SMSG_LOGIN_SETTIMESPEED {
-            datetime: DateTime::from_int(0x16731A0A),
+            datetime: DateTime::try_from(0x16731A0A).unwrap(),
             timescale: 0.016666668_f32,
         };
 
@@ -203,7 +203,7 @@ mod test2 {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGIN_SETTIMESPEED0() {
         let expected = SMSG_LOGIN_SETTIMESPEED {
-            datetime: DateTime::from_int(0x16731A0A),
+            datetime: DateTime::try_from(0x16731A0A).unwrap(),
             timescale: 0.016666668_f32,
         };
 
@@ -230,7 +230,7 @@ mod test2 {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGIN_SETTIMESPEED0() {
         let expected = SMSG_LOGIN_SETTIMESPEED {
-            datetime: DateTime::from_int(0x16731A0A),
+            datetime: DateTime::try_from(0x16731A0A).unwrap(),
             timescale: 0.016666668_f32,
         };
 

@@ -354,7 +354,7 @@ fn print_read_definition(
         }
         Type::DateTime => {
             s.wln(format!(
-                "let {name} = crate::DateTime::from_int({module_name}::{prefix}read_u32_le(r){postfix}?);",
+                "let {name}: DateTime = {module_name}::{prefix}read_u32_le(r){postfix}?.try_into()?;",
                 name = d.name(),
                 module_name = UTILITY_PATH,
                 prefix = prefix,
