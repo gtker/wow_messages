@@ -4,7 +4,7 @@ use std::fmt::{Display, Formatter, Write};
 use crate::file_utils::get_import_path;
 use crate::rust_printer::Version;
 use crate::{
-    Objects, COMMENT, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, RUST_BASE_TYPE, TEST_STR, VERSIONS,
+    Objects, COMMENT, DESCRIPTION, COMPRESSED, DISPLAY, LOGIN_VERSIONS, RUST_BASE_TYPE, TEST_STR, VERSIONS,
 };
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
@@ -240,6 +240,7 @@ pub(crate) struct Tags {
     login_logon_versions: Vec<LoginVersion>,
     world_versions: Vec<WorldVersion>,
     description: Option<TagString>,
+    compressed: bool,
     comment: Option<TagString>,
     display: String,
 }
@@ -323,6 +324,8 @@ impl Tags {
                 t.add(value);
                 self.description = Some(t);
             }
+        } else if key == COMPRESSED {
+            self.compressed = value == "true";
         } else if key == COMMENT {
             if let Some(comment) = &mut self.comment {
                 comment.add(value);
@@ -533,6 +536,10 @@ impl Tags {
 
     pub(crate) fn description(&self) -> Option<&TagString> {
         self.description.as_ref()
+    }
+
+    pub(crate) fn is_compressed(&self) -> bool {
+        self.compressed
     }
 
     pub(crate) fn comment(&self) -> Option<&TagString> {

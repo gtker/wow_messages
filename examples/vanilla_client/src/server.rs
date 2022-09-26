@@ -33,7 +33,7 @@ pub fn server(
         client_seed: seed_value,
         client_proof,
         decompressed_addon_info_size: 0,
-        compressed_addon_info: vec![],
+        decompressed_addon_info: vec![],
     }
     .write_unencrypted_client(stream)
     .unwrap();

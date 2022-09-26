@@ -15,7 +15,7 @@ use std::io::{Write, Read};
 ///     u32 client_seed;
 ///     u8[20] client_proof;
 ///     u32 decompressed_addon_info_size;
-///     u8[-] compressed_addon_info;
+///     u8[-] decompressed_addon_info;
 /// }
 /// ```
 pub struct CMSG_AUTH_SESSION {
@@ -27,7 +27,7 @@ pub struct CMSG_AUTH_SESSION {
     pub client_seed: u32,
     pub client_proof: [u8; 20],
     pub decompressed_addon_info_size: u32,
-    pub compressed_addon_info: Vec<u8>,
+    pub decompressed_addon_info: Vec<u8>,
 }
 
 impl crate::Message for CMSG_AUTH_SESSION {
@@ -62,8 +62,8 @@ impl crate::Message for CMSG_AUTH_SESSION {
         // decompressed_addon_info_size: u32
         w.write_all(&self.decompressed_addon_info_size.to_le_bytes())?;
 
-        // compressed_addon_info: u8[-]
-        for i in self.compressed_addon_info.iter() {
+        // decompressed_addon_info: u8[-]
+        for i in self.decompressed_addon_info.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
 
@@ -90,7 +90,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
         // decompressed_addon_info_size: u32
         let decompressed_addon_info_size = crate::util::read_u32_le(r)?;
 
-        // compressed_addon_info: u8[-]
+        // decompressed_addon_info: u8[-]
         let mut current_size = {
             4 // build: u32
             + 4 // server_id: u32
@@ -99,11 +99,20 @@ impl crate::Message for CMSG_AUTH_SESSION {
             + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
             + 4 // decompressed_addon_info_size: u32
         };
-        let mut compressed_addon_info = Vec::with_capacity(body_size as usize - current_size);
+        let mut decompressed_addon_info = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
-            compressed_addon_info.push(crate::util::read_u8_le(r)?);
+            decompressed_addon_info.push(crate::util::read_u8_le(r)?);
             current_size += 1;
         }
+
+        let mut decompressed_addon_info_temp = Vec::new();
+         {
+            use flate2::read::ZlibDecoder;
+            let mut decoder = ZlibDecoder::new(decompressed_addon_info.as_slice());
+            decoder.read_to_end(&mut decompressed_addon_info_temp)?;
+        }
+
+        let mut decompressed_addon_info = decompressed_addon_info_temp;
 
         Ok(Self {
             build,
@@ -112,7 +121,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
             client_seed,
             client_proof,
             decompressed_addon_info_size,
-            compressed_addon_info,
+            decompressed_addon_info,
         })
     }
 
@@ -131,7 +140,7 @@ impl CMSG_AUTH_SESSION {
         + 4 // client_seed: u32
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
         + 4 // decompressed_addon_info_size: u32
-        + self.compressed_addon_info.len() * core::mem::size_of::<u8>() // compressed_addon_info: u8[-]
+        + self.decompressed_addon_info.len() * core::mem::size_of::<u8>() // decompressed_addon_info: u8[-]
     }
 }
 
@@ -171,7 +180,7 @@ mod test1 {
             client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
                  0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
             decompressed_addon_info_size: 0x156,
-            compressed_addon_info: vec![ 0x78, 0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2,
+            decompressed_addon_info: vec![ 0x78, 0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2,
                  0x30, 0x0C, 0x04, 0xE0, 0xF2, 0x1E, 0xBC, 0x0C, 0x61, 0x40, 0x95,
                  0xC8, 0x42, 0xC3, 0x8C, 0x4C, 0xE2, 0x22, 0x0B, 0xC7, 0xA9, 0x8C,
                  0xCB, 0x4F, 0x9F, 0x1E, 0x16, 0x24, 0x06, 0x73, 0xEB, 0x77, 0x77,
@@ -199,7 +208,7 @@ mod test1 {
         assert_eq!(t.client_seed, expected.client_seed);
         assert_eq!(t.client_proof, expected.client_proof);
         assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
-        assert_eq!(t.compressed_addon_info, expected.compressed_addon_info);
+        assert_eq!(t.decompressed_addon_info, expected.decompressed_addon_info);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -221,7 +230,7 @@ mod test1 {
             client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
                  0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
             decompressed_addon_info_size: 0x156,
-            compressed_addon_info: vec![ 0x78, 0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2,
+            decompressed_addon_info: vec![ 0x78, 0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2,
                  0x30, 0x0C, 0x04, 0xE0, 0xF2, 0x1E, 0xBC, 0x0C, 0x61, 0x40, 0x95,
                  0xC8, 0x42, 0xC3, 0x8C, 0x4C, 0xE2, 0x22, 0x0B, 0xC7, 0xA9, 0x8C,
                  0xCB, 0x4F, 0x9F, 0x1E, 0x16, 0x24, 0x06, 0x73, 0xEB, 0x77, 0x77,
@@ -249,7 +258,7 @@ mod test1 {
         assert_eq!(t.client_seed, expected.client_seed);
         assert_eq!(t.client_proof, expected.client_proof);
         assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
-        assert_eq!(t.compressed_addon_info, expected.compressed_addon_info);
+        assert_eq!(t.decompressed_addon_info, expected.decompressed_addon_info);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
@@ -271,7 +280,7 @@ mod test1 {
             client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
                  0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
             decompressed_addon_info_size: 0x156,
-            compressed_addon_info: vec![ 0x78, 0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2,
+            decompressed_addon_info: vec![ 0x78, 0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2,
                  0x30, 0x0C, 0x04, 0xE0, 0xF2, 0x1E, 0xBC, 0x0C, 0x61, 0x40, 0x95,
                  0xC8, 0x42, 0xC3, 0x8C, 0x4C, 0xE2, 0x22, 0x0B, 0xC7, 0xA9, 0x8C,
                  0xCB, 0x4F, 0x9F, 0x1E, 0x16, 0x24, 0x06, 0x73, 0xEB, 0x77, 0x77,
@@ -299,7 +308,7 @@ mod test1 {
         assert_eq!(t.client_seed, expected.client_seed);
         assert_eq!(t.client_proof, expected.client_proof);
         assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
-        assert_eq!(t.compressed_addon_info, expected.compressed_addon_info);
+        assert_eq!(t.decompressed_addon_info, expected.decompressed_addon_info);
 
         assert_eq!(t.size() + header_size, RAW0.len());
 
