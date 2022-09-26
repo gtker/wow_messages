@@ -21,7 +21,7 @@ cmsg CMSG_AUTH_SESSION = 0x01ED {
     u32 client_seed;
     u8[20] client_proof;
     u32 decompressed_addon_info_size;
-    u8[-] compressed_addon_info;
+    u8[-] decompressed_addon_info;
 }
 ```
 ### Header
@@ -45,7 +45,7 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | client_seed |  |  |
 | - | ? / - | u8[20] | client_proof |  |  |
 | - | 4 / Little | u32 | decompressed_addon_info_size |  |  |
-| - | ? / - | u8[-] | compressed_addon_info |  |  |
+| - | ? / - | u8[-] | decompressed_addon_info |  |  |
 
 ### Examples
 
@@ -68,7 +68,7 @@ CMSG have a header of 6 bytes.
 10, 201, 197, 61, 216, 182, 122, 6, 75, 248, 52, 15, 21, 70, 115, 103, 187, 56, 204, 
 122, 199, 151, 139, 189, 220, 38, 204, 254, 48, 66, 214, 230, 202, 1, 168, 184, 144, 
 128, 81, 252, 183, 164, 80, 112, 184, 18, 243, 63, 38, 65, 253, 181, 55, 144, 25, 
-102, 143, // compressed_addon_info: u8[-]
+102, 143, // decompressed_addon_info: u8[-]
 ```
 # CMSG_AUTH_SESSION
 
@@ -98,7 +98,7 @@ cmsg CMSG_AUTH_SESSION = 0x01ED {
     u64 dos_response;
     u8[20] client_proof;
     u32 decompressed_addon_info_size;
-    u8[-] compressed_addon_info;
+    u8[-] decompressed_addon_info;
 }
 ```
 ### Header
@@ -127,5 +127,5 @@ CMSG have a header of 6 bytes.
 | - | 8 / Little | u64 | dos_response |  | Purpose and exact meaning of name unknown.<br/>TrinityCore has this name but never uses the variable afterwards. |
 | - | ? / - | u8[20] | client_proof |  |  |
 | - | 4 / Little | u32 | decompressed_addon_info_size |  |  |
-| - | ? / - | u8[-] | compressed_addon_info |  |  |
+| - | ? / - | u8[-] | decompressed_addon_info |  |  |
 

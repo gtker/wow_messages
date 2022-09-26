@@ -139,6 +139,7 @@ pub(crate) struct IrTags {
     version: Option<IrVersions>,
     #[serde(skip_serializing_if = "Option::is_none")]
     unimplemented: Option<String>,
+    compressed: bool,
 }
 
 impl IrTags {
@@ -146,6 +147,8 @@ impl IrTags {
         let description = tags.description().map(|d| d.as_ir_string());
 
         let comment = tags.comment().map(|d| d.as_ir_string());
+
+        let compressed = tags.is_compressed();
 
         let unimplemented = if tags.contains("unimplemented") {
             Some("true".to_string())
@@ -168,6 +171,7 @@ impl IrTags {
             } else {
                 None
             },
+            compressed,
             unimplemented,
         }
     }

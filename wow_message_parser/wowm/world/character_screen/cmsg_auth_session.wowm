@@ -7,7 +7,7 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
     u32 client_seed;
     u8[20] client_proof;
     u32 decompressed_addon_info_size;
-    u8[-] compressed_addon_info {
+    u8[-] decompressed_addon_info {
         compressed = "true";
     }
 } {
@@ -26,7 +26,7 @@ test CMSG_AUTH_SESSION {
         219, 164, 251, 163, 231, 126, 103, 172, 234, 198,
     ];
     decompressed_addon_info_size = 342;
-    compressed_addon_info = [
+    decompressed_addon_info = [
         120, 156, 117, 204, 189, 14, 194, 48, 12, 4, 224, 242, 30, 188, 12, 97, 64, 149, 200, 66, 195, 140, 76,
         226, 34, 11, 199, 169, 140, 203, 79, 159, 30, 22, 36, 6, 115, 235, 119, 119, 129, 105, 89, 64, 203,
         105, 51, 103, 163, 38, 199, 190, 91, 213, 199, 122, 223, 125, 18, 190, 22, 192, 140, 113, 36,
@@ -82,7 +82,9 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
     }
     u8[20] client_proof;
     u32 decompressed_addon_info_size;
-    u8[-] compressed_addon_info;
+    u8[-] decompressed_addon_info  {
+        compressed = "true";
+    }
 } {
     description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
     comment = "This message is never encrypted.";

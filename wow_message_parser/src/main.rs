@@ -46,6 +46,7 @@ const UTILITY_PATH: &str = "crate::util";
 
 const VERSIONS: &str = "versions";
 const DESCRIPTION: &str = "description";
+const COMPRESSED: &str = "compressed";
 const COMMENT: &str = "comment";
 const DISPLAY: &str = "display";
 const TEST_STR: &str = "test";

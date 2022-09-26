@@ -26,6 +26,10 @@ encryption = ["wow_srp"]
 version = "0.4"
 optional = true
 
+[dependencies.flate2]
+version = "1.0.24"
+optional = false
+
 [dependencies.tokio]
 version = "1"
 default-features = false

@@ -285,6 +285,17 @@ fn print_read_array(
                 s.wln("current_size += 1;");
             });
             s.newline();
+
+            if d.tags().is_compressed() {
+                let decompressed_name = format!("{}_temp", d.name());
+
+                s.wln(format!("let mut {} = Vec::new();", decompressed_name));
+                s.wln(format!("let mut decoder = flate2::read::ZlibDecoder::new({}.as_slice());", d.name()));
+                s.wln(format!("decoder.read_to_end(&mut {})?;", decompressed_name));
+                s.newline();
+                s.wln(format!("let mut {} = {};", d.name(), decompressed_name));
+                s.newline();
+            }
         }
     }
 }
