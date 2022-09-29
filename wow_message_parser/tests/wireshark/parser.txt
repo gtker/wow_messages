@@ -3666,7 +3666,7 @@
                     ptvcursor_add(ptv, hf_woww_sender, 8, ENC_LITTLE_ENDIAN);
                 }
                 else if (message_type == MAIL_TYPE_CREATURE
- || message_type == MAIL_TYPE_GAMEOBJECT) {
+                 || message_type == MAIL_TYPE_GAMEOBJECT) {
                     ptvcursor_add(ptv, hf_woww_sender_id, 4, ENC_LITTLE_ENDIAN);
                 }
                 else if (message_type == MAIL_TYPE_AUCTION) {
@@ -3711,13 +3711,13 @@
                 ptvcursor_add(ptv, hf_woww_monster, 8, ENC_LITTLE_ENDIAN);
             }
             else if (chat_type == CHAT_TYPE_SAY
- || chat_type == CHAT_TYPE_PARTY
- || chat_type == CHAT_TYPE_YELL) {
+             || chat_type == CHAT_TYPE_PARTY
+             || chat_type == CHAT_TYPE_YELL) {
                 ptvcursor_add(ptv, hf_woww_speech_bubble_credit, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_chat_credit, 8, ENC_LITTLE_ENDIAN);
             }
             else if (chat_type == CHAT_TYPE_MONSTER_SAY
- || chat_type == CHAT_TYPE_MONSTER_YELL) {
+             || chat_type == CHAT_TYPE_MONSTER_YELL) {
                 ptvcursor_add(ptv, hf_woww_sender, 8, ENC_LITTLE_ENDIAN);
                 add_sized_cstring(ptv, &hf_woww_sender_name);
                 ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
@@ -3965,11 +3965,11 @@
                     ptvcursor_add(ptv, hf_woww_resisted, 4, ENC_LITTLE_ENDIAN);
                 }
                 else if (aura_type == AURA_TYPE_PERIODIC_HEAL
- || aura_type == AURA_TYPE_OBS_MOD_HEALTH) {
+                 || aura_type == AURA_TYPE_OBS_MOD_HEALTH) {
                     ptvcursor_add(ptv, hf_woww_damage, 4, ENC_LITTLE_ENDIAN);
                 }
                 else if (aura_type == AURA_TYPE_OBS_MOD_MANA
- || aura_type == AURA_TYPE_PERIODIC_ENERGIZE) {
+                 || aura_type == AURA_TYPE_PERIODIC_ENERGIZE) {
                     ptvcursor_add(ptv, hf_woww_misc_value, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_damage, 4, ENC_LITTLE_ENDIAN);
                 }
@@ -4404,21 +4404,21 @@
                     ptvcursor_add(ptv, hf_woww_item_target_entry, 4, ENC_LITTLE_ENDIAN);
                 }
                 else if (effect == SPELL_EFFECT_RESURRECT
- || effect == SPELL_EFFECT_DISPEL
- || effect == SPELL_EFFECT_THREAT
- || effect == SPELL_EFFECT_DISTRACT
- || effect == SPELL_EFFECT_SANCTUARY
- || effect == SPELL_EFFECT_THREAT_ALL
- || effect == SPELL_EFFECT_DISPEL_MECHANIC
- || effect == SPELL_EFFECT_RESURRECT_NEW
- || effect == SPELL_EFFECT_ATTACK_ME
- || effect == SPELL_EFFECT_SKIN_PLAYER_CORPSE
- || effect == SPELL_EFFECT_MODIFY_THREAT_PERCENT
- || effect == SPELL_EFFECT_UNKNOWN126
- || effect == SPELL_EFFECT_DISMISS_PET
- || effect == SPELL_EFFECT_OPEN_LOCK
- || effect == SPELL_EFFECT_OPEN_LOCK_ITEM
- || effect == SPELL_EFFECT_INSTAKILL) {
+                 || effect == SPELL_EFFECT_DISPEL
+                 || effect == SPELL_EFFECT_THREAT
+                 || effect == SPELL_EFFECT_DISTRACT
+                 || effect == SPELL_EFFECT_SANCTUARY
+                 || effect == SPELL_EFFECT_THREAT_ALL
+                 || effect == SPELL_EFFECT_DISPEL_MECHANIC
+                 || effect == SPELL_EFFECT_RESURRECT_NEW
+                 || effect == SPELL_EFFECT_ATTACK_ME
+                 || effect == SPELL_EFFECT_SKIN_PLAYER_CORPSE
+                 || effect == SPELL_EFFECT_MODIFY_THREAT_PERCENT
+                 || effect == SPELL_EFFECT_UNKNOWN126
+                 || effect == SPELL_EFFECT_DISMISS_PET
+                 || effect == SPELL_EFFECT_OPEN_LOCK
+                 || effect == SPELL_EFFECT_OPEN_LOCK_ITEM
+                 || effect == SPELL_EFFECT_INSTAKILL) {
                     ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
                 }
             }
@@ -4651,7 +4651,7 @@
                 ptvcursor_add(ptv, hf_woww_item_limit_category_id, 4, ENC_LITTLE_ENDIAN);
             }
             else if (status == TRADE_STATUS_ONLY_CONJURED
- || status == TRADE_STATUS_NOT_ON_TAPLIST) {
+             || status == TRADE_STATUS_NOT_ON_TAPLIST) {
                 ptvcursor_add(ptv, hf_woww_slot, 1, ENC_LITTLE_ENDIAN);
             }
             }break;
@@ -4826,7 +4826,7 @@
                     }
                 }
                 else if (update_type == UPDATE_TYPE_CREATE_OBJECT
- || update_type == UPDATE_TYPE_CREATE_OBJECT2) {
+                 || update_type == UPDATE_TYPE_CREATE_OBJECT2) {
                     add_packed_guid(ptv, pinfo, tree);
                     ptvcursor_add(ptv, hf_woww_object_type, 1, ENC_LITTLE_ENDIAN);
                     ptvcursor_add_ret_uint(ptv, hf_woww_update_flag, 1, ENC_LITTLE_ENDIAN, &update_flag);
@@ -4911,7 +4911,7 @@
                     }
                 }
                 else if (update_type == UPDATE_TYPE_OUT_OF_RANGE_OBJECTS
- || update_type == UPDATE_TYPE_NEAR_OBJECTS) {
+                 || update_type == UPDATE_TYPE_NEAR_OBJECTS) {
                     ptvcursor_add(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN);
                     for (i = 0; i < count; ++i) {
                         add_packed_guid(ptv, pinfo, tree);

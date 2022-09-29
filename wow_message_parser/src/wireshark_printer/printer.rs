@@ -166,7 +166,7 @@ fn print_if_statement(
             let enumerator = enumerator_name(&elseif.original_ty().rust_str(), value);
             if i != 0 {
                 s.newline();
-                s.w_no_indent(" || ");
+                s.w(" || ");
             }
 
             s.w_no_indent(format!(
