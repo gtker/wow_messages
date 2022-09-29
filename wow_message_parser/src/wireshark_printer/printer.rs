@@ -14,7 +14,7 @@ pub fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
     let mut s = Writer::new("");
     s.inc_indent();
 
-    let mut variables = vec![String::from("i")];
+    let mut variables = Vec::new();
 
     s.open_curly("switch (opcode)");
     for e in o.wireshark_messages() {
@@ -264,7 +264,10 @@ fn print_definition(
                 ArraySize::Variable(v) => {
                     s.open_curly(format!("for (i = 0; i < {}; ++i)", v));
                 }
-                ArraySize::Endless => return false,
+                ArraySize::Endless => {
+                    s.wln("len = offset_packet_end - ptvcursor_current_offset(ptv);");
+                    s.open_curly(format!("for (i = 0; i < len; ++i)"));
+                }
             }
             match array.ty() {
                 ArrayType::Integer(i) => {

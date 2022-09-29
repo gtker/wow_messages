@@ -205,9 +205,12 @@ impl WiresharkType {
             WiresharkType::Float(_) | WiresharkType::Bytes | WiresharkType::String => {
                 "BASE_NONE".to_string()
             }
-            WiresharkType::Integer(_) | WiresharkType::Enum(_) | WiresharkType::Flag(_) => {
-                "BASE_HEX_DEC".to_string()
+            WiresharkType::Integer(i) => match i {
+                IntegerType::I32(_) => "BASE_DEC",
+                _ => "BASE_HEX_DEC",
             }
+            .to_string(),
+            WiresharkType::Enum(_) | WiresharkType::Flag(_) => "BASE_HEX_DEC".to_string(),
         }
     }
 }
