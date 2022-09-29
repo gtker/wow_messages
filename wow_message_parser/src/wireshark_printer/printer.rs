@@ -153,6 +153,50 @@ fn print_if_statement(
 
     s.closing_curly();
 
+    for elseif in statement.else_ifs() {
+        s.w("else if (");
+
+        for (i, eq) in elseif.get_conditional().equations().iter().enumerate() {
+            let (op, value) = match eq {
+                Equation::Equals { value } => ("==", value),
+                Equation::NotEquals { value } => ("!=", value),
+                Equation::BitwiseAnd { value } => ("&", value),
+            };
+
+            let enumerator = enumerator_name(&elseif.original_ty().rust_str(), value);
+            if i != 0 {
+                s.newline();
+                s.w_no_indent(" || ");
+            }
+
+            s.w_no_indent(format!(
+                "{name} {op} {enumerator}",
+                name = name,
+                op = op,
+                enumerator = enumerator
+            ));
+        }
+
+        s.wln_no_indent(") {");
+        s.inc_indent();
+
+        for m in elseif.members() {
+            print_member(s, m, e, wo, tags, o, variables);
+        }
+
+        s.closing_curly();
+    }
+
+    if !statement.else_members().is_empty() {
+        s.open_curly("else");
+
+        for m in statement.else_members() {
+            print_member(s, m, e, wo, tags, o, variables);
+        }
+
+        s.closing_curly(); // else
+    }
+
     false
 }
 

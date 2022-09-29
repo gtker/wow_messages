@@ -775,6 +775,9 @@
             if (chat_type == CHAT_TYPE_WHISPER) {
                 add_cstring(ptv, &hf_woww_target_player);
             }
+            else if (chat_type == CHAT_TYPE_CHANNEL) {
+                add_cstring(ptv, &hf_woww_channel);
+            }
             add_cstring(ptv, &hf_woww_message);
             }break;
         case CMSG_MOVE_FALL_RESET:{
@@ -2854,6 +2857,10 @@
                         ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
                     }
                 }
+                else if (update_type == RAID_TARGET_UPDATE_TYPE_PARTIAL) {
+                    ptvcursor_add(ptv, hf_woww_raid_target_index, 1, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
+                }
             }
             else {
                 ptvcursor_add_ret_uint(ptv, hf_woww_raid_target_index, 1, ENC_LITTLE_ENDIAN, &index);
@@ -3039,6 +3046,9 @@
                 ptvcursor_add(ptv, hf_woww_billing_flags, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_billing_rested, 4, ENC_LITTLE_ENDIAN);
             }
+            else if (result == WORLD_RESULT_AUTH_WAIT_QUEUE) {
+                ptvcursor_add(ptv, hf_woww_queue_position, 4, ENC_LITTLE_ENDIAN);
+            }
             }break;
         case SMSG_BATTLEFIELD_LIST:{
             ptvcursor_add(ptv, hf_woww_battlemaster, 8, ENC_LITTLE_ENDIAN);
@@ -3061,6 +3071,13 @@
                 if (status_id == STATUS_ID_WAIT_QUEUE) {
                     ptvcursor_add(ptv, hf_woww_average_wait_time_in_ms, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_time_in_queue_in_ms, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (status_id == STATUS_ID_WAIT_JOIN) {
+                    ptvcursor_add(ptv, hf_woww_time_to_remove_in_queue_in_ms, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (status_id == STATUS_ID_IN_PROGRESS) {
+                    ptvcursor_add(ptv, hf_woww_time_to_bg_autoleave_in_ms, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_time_to_bg_start_in_ms, 4, ENC_LITTLE_ENDIAN);
                 }
             }
             }break;
@@ -3101,6 +3118,14 @@
                 ptvcursor_add_ret_uint(ptv, hf_woww_cast_failure_reason, 1, ENC_LITTLE_ENDIAN, &reason);
                 if (reason == CAST_FAILURE_REASON_REQUIRES_SPELL_FOCUS) {
                     ptvcursor_add(ptv, hf_woww_required_spell_focus, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (reason == CAST_FAILURE_REASON_REQUIRES_AREA) {
+                    ptvcursor_add(ptv, hf_woww_area, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (reason == CAST_FAILURE_REASON_EQUIPPED_ITEM_CLASS) {
+                    ptvcursor_add(ptv, hf_woww_equipped_item_class, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_equipped_item_subclass_mask, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_equipped_item_inventory_type_mask, 4, ENC_LITTLE_ENDIAN);
                 }
             }
             }break;
@@ -3640,6 +3665,13 @@
                 if (message_type == MAIL_TYPE_NORMAL) {
                     ptvcursor_add(ptv, hf_woww_sender, 8, ENC_LITTLE_ENDIAN);
                 }
+                else if (message_type == MAIL_TYPE_CREATURE
+ || message_type == MAIL_TYPE_GAMEOBJECT) {
+                    ptvcursor_add(ptv, hf_woww_sender_id, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (message_type == MAIL_TYPE_AUCTION) {
+                    ptvcursor_add(ptv, hf_woww_auction_id, 4, ENC_LITTLE_ENDIAN);
+                }
                 add_cstring(ptv, &hf_woww_subject);
                 ptvcursor_add(ptv, hf_woww_item_text_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
@@ -3677,6 +3709,26 @@
  || chat_type == CHAT_TYPE_MONSTER_EMOTE) {
                 add_sized_cstring(ptv, &hf_woww_monster_name);
                 ptvcursor_add(ptv, hf_woww_monster, 8, ENC_LITTLE_ENDIAN);
+            }
+            else if (chat_type == CHAT_TYPE_SAY
+ || chat_type == CHAT_TYPE_PARTY
+ || chat_type == CHAT_TYPE_YELL) {
+                ptvcursor_add(ptv, hf_woww_speech_bubble_credit, 8, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_chat_credit, 8, ENC_LITTLE_ENDIAN);
+            }
+            else if (chat_type == CHAT_TYPE_MONSTER_SAY
+ || chat_type == CHAT_TYPE_MONSTER_YELL) {
+                ptvcursor_add(ptv, hf_woww_sender, 8, ENC_LITTLE_ENDIAN);
+                add_sized_cstring(ptv, &hf_woww_sender_name);
+                ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+            }
+            else if (chat_type == CHAT_TYPE_CHANNEL) {
+                add_cstring(ptv, &hf_woww_channel_name);
+                ptvcursor_add(ptv, hf_woww_player_rank, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_player, 8, ENC_LITTLE_ENDIAN);
+            }
+            else {
+                ptvcursor_add(ptv, hf_woww_sender, 8, ENC_LITTLE_ENDIAN);
             }
             add_sized_cstring(ptv, &hf_woww_message);
             ptvcursor_add(ptv, hf_woww_player_chat_tag, 1, ENC_LITTLE_ENDIAN);
@@ -3911,6 +3963,20 @@
                     ptvcursor_add(ptv, hf_woww_spell_school, 1, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_absorbed, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_resisted, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (aura_type == AURA_TYPE_PERIODIC_HEAL
+ || aura_type == AURA_TYPE_OBS_MOD_HEALTH) {
+                    ptvcursor_add(ptv, hf_woww_damage, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (aura_type == AURA_TYPE_OBS_MOD_MANA
+ || aura_type == AURA_TYPE_PERIODIC_ENERGIZE) {
+                    ptvcursor_add(ptv, hf_woww_misc_value, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_damage, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (aura_type == AURA_TYPE_PERIODIC_MANA_LEECH) {
+                    ptvcursor_add(ptv, hf_woww_misc_value, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_damage, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_gain_multiplier, 4, ENC_LITTLE_ENDIAN);
                 }
             }
             }break;
@@ -4318,6 +4384,43 @@
                     ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_unknown_float, 4, ENC_LITTLE_ENDIAN);
                 }
+                else if (effect == SPELL_EFFECT_ADD_EXTRA_ATTACKS) {
+                    ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (effect == SPELL_EFFECT_INTERRUPT_CAST) {
+                    ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_interrupted_spell, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (effect == SPELL_EFFECT_DURABILITY_DAMAGE) {
+                    ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (effect == SPELL_EFFECT_CREATE_ITEM) {
+                    ptvcursor_add(ptv, hf_woww_spell_effect_item_type, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (effect == SPELL_EFFECT_FEED_PET) {
+                    ptvcursor_add(ptv, hf_woww_item_target_entry, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (effect == SPELL_EFFECT_RESURRECT
+ || effect == SPELL_EFFECT_DISPEL
+ || effect == SPELL_EFFECT_THREAT
+ || effect == SPELL_EFFECT_DISTRACT
+ || effect == SPELL_EFFECT_SANCTUARY
+ || effect == SPELL_EFFECT_THREAT_ALL
+ || effect == SPELL_EFFECT_DISPEL_MECHANIC
+ || effect == SPELL_EFFECT_RESURRECT_NEW
+ || effect == SPELL_EFFECT_ATTACK_ME
+ || effect == SPELL_EFFECT_SKIN_PLAYER_CORPSE
+ || effect == SPELL_EFFECT_MODIFY_THREAT_PERCENT
+ || effect == SPELL_EFFECT_UNKNOWN126
+ || effect == SPELL_EFFECT_DISMISS_PET
+ || effect == SPELL_EFFECT_OPEN_LOCK
+ || effect == SPELL_EFFECT_OPEN_LOCK_ITEM
+ || effect == SPELL_EFFECT_INSTAKILL) {
+                    ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+                }
             }
             }break;
         case SMSG_SPELLLOGMISS:{
@@ -4542,6 +4645,15 @@
             if (status == TRADE_STATUS_BEGIN_TRADE) {
                 ptvcursor_add(ptv, hf_woww_unknown_guid, 8, ENC_LITTLE_ENDIAN);
             }
+            else if (status == TRADE_STATUS_CLOSE_WINDOW) {
+                ptvcursor_add(ptv, hf_woww_inventory_result, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_target_error, 1, ENC_NA);
+                ptvcursor_add(ptv, hf_woww_item_limit_category_id, 4, ENC_LITTLE_ENDIAN);
+            }
+            else if (status == TRADE_STATUS_ONLY_CONJURED
+ || status == TRADE_STATUS_NOT_ON_TAPLIST) {
+                ptvcursor_add(ptv, hf_woww_slot, 1, ENC_LITTLE_ENDIAN);
+            }
             }break;
         case SMSG_TRADE_STATUS_EXTENDED:{
             ptvcursor_add(ptv, hf_woww_self_player, 1, ENC_NA);
@@ -4629,6 +4741,181 @@
                 ptvcursor_add_ret_uint(ptv, hf_woww_update_type, 1, ENC_LITTLE_ENDIAN, &update_type);
                 if (update_type == UPDATE_TYPE_VALUES) {
                     add_packed_guid(ptv, pinfo, tree);
+                }
+                else if (update_type == UPDATE_TYPE_MOVEMENT) {
+                    add_packed_guid(ptv, pinfo, tree);
+                    ptvcursor_add_ret_uint(ptv, hf_woww_update_flag, 1, ENC_LITTLE_ENDIAN, &update_flag);
+                    if (update_flag & UPDATE_FLAG_LIVING) {
+                        ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
+                        ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_living_orientation, 4, ENC_LITTLE_ENDIAN);
+                        if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
+                            add_packed_guid(ptv, pinfo, tree);
+                            ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
+                        }
+                        if (flags & MOVEMENT_FLAGS_SWIMMING) {
+                            ptvcursor_add(ptv, hf_woww_pitch, 4, ENC_LITTLE_ENDIAN);
+                        }
+                        ptvcursor_add(ptv, hf_woww_fall_time, 4, ENC_LITTLE_ENDIAN);
+                        if (flags & MOVEMENT_FLAGS_JUMPING) {
+                            ptvcursor_add(ptv, hf_woww_z_speed, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_cos_angle, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_sin_angle, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_xy_speed, 4, ENC_LITTLE_ENDIAN);
+                        }
+                        if (flags & MOVEMENT_FLAGS_SPLINE_ELEVATION) {
+                            ptvcursor_add(ptv, hf_woww_spline_elevation, 4, ENC_LITTLE_ENDIAN);
+                        }
+                        ptvcursor_add(ptv, hf_woww_walking_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_running_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_backwards_running_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_swimming_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_backwards_swimming_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_turn_rate, 4, ENC_LITTLE_ENDIAN);
+                        if (flags & MOVEMENT_FLAGS_SPLINE_ENABLED) {
+                            ptvcursor_add_ret_uint(ptv, hf_woww_spline_flag, 4, ENC_LITTLE_ENDIAN, &spline_flags);
+                            if (spline_flags & SPLINE_FLAG_FINAL_ANGLE) {
+                                ptvcursor_add(ptv, hf_woww_angle, 4, ENC_LITTLE_ENDIAN);
+                            }
+                            else if (spline_flags & SPLINE_FLAG_FINAL_TARGET) {
+                                ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+                            }
+                            else if (spline_flags & SPLINE_FLAG_FINAL_POINT) {
+                                ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                                ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                                ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                            }
+                            ptvcursor_add(ptv, hf_woww_time_passed, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_duration, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_nodes, 4, ENC_LITTLE_ENDIAN, &amount_of_nodes);
+                            for (i = 0; i < amount_of_nodes; ++i) {
+                                ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                                ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                                ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                            }
+                            ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                        }
+                    }
+                    else if (update_flag & UPDATE_FLAG_HAS_POSITION) {
+                        ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
+                    }
+                    if (update_flag & UPDATE_FLAG_HIGH_GUID) {
+                        ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                    }
+                    if (update_flag & UPDATE_FLAG_ALL) {
+                        ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                    }
+                    if (update_flag & UPDATE_FLAG_MELEE_ATTACKING) {
+                        add_packed_guid(ptv, pinfo, tree);
+                    }
+                    if (update_flag & UPDATE_FLAG_TRANSPORT) {
+                        ptvcursor_add(ptv, hf_woww_transport_progress_in_ms, 4, ENC_LITTLE_ENDIAN);
+                    }
+                }
+                else if (update_type == UPDATE_TYPE_CREATE_OBJECT
+ || update_type == UPDATE_TYPE_CREATE_OBJECT2) {
+                    add_packed_guid(ptv, pinfo, tree);
+                    ptvcursor_add(ptv, hf_woww_object_type, 1, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add_ret_uint(ptv, hf_woww_update_flag, 1, ENC_LITTLE_ENDIAN, &update_flag);
+                    if (update_flag & UPDATE_FLAG_LIVING) {
+                        ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
+                        ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_living_orientation, 4, ENC_LITTLE_ENDIAN);
+                        if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
+                            add_packed_guid(ptv, pinfo, tree);
+                            ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
+                        }
+                        if (flags & MOVEMENT_FLAGS_SWIMMING) {
+                            ptvcursor_add(ptv, hf_woww_pitch, 4, ENC_LITTLE_ENDIAN);
+                        }
+                        ptvcursor_add(ptv, hf_woww_fall_time, 4, ENC_LITTLE_ENDIAN);
+                        if (flags & MOVEMENT_FLAGS_JUMPING) {
+                            ptvcursor_add(ptv, hf_woww_z_speed, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_cos_angle, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_sin_angle, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_xy_speed, 4, ENC_LITTLE_ENDIAN);
+                        }
+                        if (flags & MOVEMENT_FLAGS_SPLINE_ELEVATION) {
+                            ptvcursor_add(ptv, hf_woww_spline_elevation, 4, ENC_LITTLE_ENDIAN);
+                        }
+                        ptvcursor_add(ptv, hf_woww_walking_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_running_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_backwards_running_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_swimming_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_backwards_swimming_speed, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_turn_rate, 4, ENC_LITTLE_ENDIAN);
+                        if (flags & MOVEMENT_FLAGS_SPLINE_ENABLED) {
+                            ptvcursor_add_ret_uint(ptv, hf_woww_spline_flag, 4, ENC_LITTLE_ENDIAN, &spline_flags);
+                            if (spline_flags & SPLINE_FLAG_FINAL_ANGLE) {
+                                ptvcursor_add(ptv, hf_woww_angle, 4, ENC_LITTLE_ENDIAN);
+                            }
+                            else if (spline_flags & SPLINE_FLAG_FINAL_TARGET) {
+                                ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+                            }
+                            else if (spline_flags & SPLINE_FLAG_FINAL_POINT) {
+                                ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                                ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                                ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                            }
+                            ptvcursor_add(ptv, hf_woww_time_passed, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_duration, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_nodes, 4, ENC_LITTLE_ENDIAN, &amount_of_nodes);
+                            for (i = 0; i < amount_of_nodes; ++i) {
+                                ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                                ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                                ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                            }
+                            ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                            ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                        }
+                    }
+                    else if (update_flag & UPDATE_FLAG_HAS_POSITION) {
+                        ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
+                        ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
+                    }
+                    if (update_flag & UPDATE_FLAG_HIGH_GUID) {
+                        ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                    }
+                    if (update_flag & UPDATE_FLAG_ALL) {
+                        ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                    }
+                    if (update_flag & UPDATE_FLAG_MELEE_ATTACKING) {
+                        add_packed_guid(ptv, pinfo, tree);
+                    }
+                    if (update_flag & UPDATE_FLAG_TRANSPORT) {
+                        ptvcursor_add(ptv, hf_woww_transport_progress_in_ms, 4, ENC_LITTLE_ENDIAN);
+                    }
+                }
+                else if (update_type == UPDATE_TYPE_OUT_OF_RANGE_OBJECTS
+ || update_type == UPDATE_TYPE_NEAR_OBJECTS) {
+                    ptvcursor_add(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN);
+                    for (i = 0; i < count; ++i) {
+                        add_packed_guid(ptv, pinfo, tree);
+                    }
                 }
             }
             }break;
