@@ -13,13 +13,11 @@ pub fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
     let mut s = Writer::new("");
     s.inc_indent();
 
-    let mut empty_bodies = Vec::new();
     let mut variables = Vec::new();
 
     s.open_curly("switch (opcode)");
     for e in o.wireshark_messages() {
         if e.empty_body() {
-            empty_bodies.push(e.name().to_string());
             continue;
         }
 
