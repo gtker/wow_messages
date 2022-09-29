@@ -22,7 +22,7 @@ pub fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
             continue;
         }
 
-        s.wln(format!("case {}:{{", clean_opcode_name(e.name())));
+        s.wln(format!("case {}:", clean_opcode_name(e.name())));
         s.inc_indent();
         if is_server_name(e.name()) {
             s.open_curly("if (WOWW_SERVER_TO_CLIENT)");
@@ -45,7 +45,7 @@ pub fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
             print_message(&mut s, e, w, o, &mut variables);
         }
 
-        s.wln("}break;");
+        s.wln("break;");
         s.dec_indent();
     }
 
