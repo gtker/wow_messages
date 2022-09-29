@@ -5,7 +5,8 @@ use crate::parser::types::{ArraySize, ArrayType, IntegerType};
 use crate::rust_printer::Writer;
 use crate::wireshark_printer::types::{WiresharkMember, WiresharkObject};
 use crate::wireshark_printer::{
-    enum_name, enum_strings, enumerator_name, name_to_hf, pretty_name, ui_name,
+    clean_opcode_name, enum_name, enum_strings, enumerator_name, is_client_name, is_server_name,
+    name_to_hf, pretty_name, server_to_client_name, ui_name,
 };
 use crate::{Container, Object, Objects, Tags};
 
@@ -13,18 +14,36 @@ pub fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
     let mut s = Writer::new("");
     s.inc_indent();
 
-    let mut variables = Vec::new();
+    let mut variables = vec![String::from("i")];
 
     s.open_curly("switch (opcode)");
     for e in o.wireshark_messages() {
-        if e.empty_body() {
+        if e.empty_body() || is_client_name(e.name()) {
             continue;
         }
 
-        s.wln(format!("case {}:{{", e.name()));
+        s.wln(format!("case {}:{{", clean_opcode_name(e.name())));
         s.inc_indent();
+        if is_server_name(e.name()) {
+            s.open_curly("if (WOWW_SERVER_TO_CLIENT)");
 
-        print_message(&mut s, e, w, o, &mut variables);
+            print_message(&mut s, e, w, o, &mut variables);
+
+            s.closing_curly(); // if (WOWW_SERVER_TO_CLIENT)
+
+            s.open_curly("else");
+
+            let v = o.wireshark_messages();
+            let e = v
+                .iter()
+                .find(|a| a.name() == server_to_client_name(e.name()))
+                .unwrap();
+            print_message(&mut s, e, w, o, &mut variables);
+
+            s.closing_curly(); // else
+        } else {
+            print_message(&mut s, e, w, o, &mut variables);
+        }
 
         s.wln("}break;");
         s.dec_indent();
@@ -240,10 +259,10 @@ fn print_definition(
         Type::Array(array) => {
             match array.size() {
                 ArraySize::Fixed(f) => {
-                    s.open_curly(format!("for (guint32 i = 0; i < {}; ++i)", f));
+                    s.open_curly(format!("for (i = 0; i < {}; ++i)", f));
                 }
                 ArraySize::Variable(v) => {
-                    s.open_curly(format!("for (guint32 i = 0; i < {}; ++i)", v));
+                    s.open_curly(format!("for (i = 0; i < {}; ++i)", v));
                 }
                 ArraySize::Endless => return false,
             }

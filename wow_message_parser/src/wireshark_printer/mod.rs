@@ -71,6 +71,22 @@ fn insert_between(contents: &str, start: &str, end: &str, replace_with: &str) ->
     s
 }
 
+fn is_client_name(name: &str) -> bool {
+    name.contains("_Client")
+}
+
+fn is_server_name(name: &str) -> bool {
+    name.contains("_Server")
+}
+
+fn server_to_client_name(name: &str) -> String {
+    name.replace("_Server", "_Client")
+}
+
+fn clean_opcode_name(name: &str) -> String {
+    name.replace("_Server", "").replace("_Client", "")
+}
+
 fn ui_name(name: &str) -> String {
     name.replace('_', ".")
 }
