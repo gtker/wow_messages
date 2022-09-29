@@ -76,7 +76,7 @@ fn ui_name(name: &str) -> String {
 }
 
 fn enum_name(name: &str) -> String {
-    name.to_snake_case()
+    format!("e_{}", name.to_snake_case())
 }
 
 fn enumerator_name(enum_name: &str, name: &str) -> String {
