@@ -4,6 +4,7 @@ mod types;
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArrayType, Endianness, IntegerType};
+use crate::path_utils::wireshark_directory;
 use crate::rust_printer::Writer;
 use crate::wireshark_printer::printer::{
     print_enums, print_int_declarations, print_parser, print_register_info,
@@ -13,23 +14,46 @@ use heck::{ShoutySnakeCase, SnakeCase, TitleCase};
 use std::fs::read_to_string;
 use std::path::Path;
 
-pub fn print_wireshark(o: &Objects, path: &str) {
+pub fn print_wireshark(o: &Objects) {
     let w = types::get_wireshark_object(o);
     let imports = print_int_declarations(&w);
     let enums = print_enums(&w);
     let register = print_register_info(&w);
     let (parser, variables) = print_parser(o, &w);
 
-    apply_to_file(imports, enums, register, parser, path, variables);
+    if let Ok(path) = std::env::var("WOWM_WIRESHARK") {
+        apply_to_wireshark_file(&imports, &enums, &register, &parser, &path, &variables);
+    }
+    write_to_repo_files(&imports, &enums, &register, &parser, &variables);
 }
 
-fn apply_to_file(
-    imports: Writer,
-    enums: Writer,
-    register: Writer,
-    parser: Writer,
+fn write_to_repo_files(
+    imports: &Writer,
+    enums: &Writer,
+    register: &Writer,
+    parser: &Writer,
+    variables: &Writer,
+) {
+    overwrite_if_not_same_contents(imports.inner(), &wireshark_directory().join("imports.txt"));
+    overwrite_if_not_same_contents(enums.inner(), &wireshark_directory().join("enums.txt"));
+    overwrite_if_not_same_contents(
+        register.inner(),
+        &wireshark_directory().join("register.txt"),
+    );
+    overwrite_if_not_same_contents(parser.inner(), &wireshark_directory().join("parser.txt"));
+    overwrite_if_not_same_contents(
+        variables.inner(),
+        &wireshark_directory().join("variables.txt"),
+    );
+}
+
+fn apply_to_wireshark_file(
+    imports: &Writer,
+    enums: &Writer,
+    register: &Writer,
+    parser: &Writer,
     path: &str,
-    variables: Writer,
+    variables: &Writer,
 ) {
     let path = Path::new(path);
     let s = read_to_string(&path).unwrap();

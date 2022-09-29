@@ -9,6 +9,16 @@ fn workspace_directory() -> PathBuf {
     p
 }
 
+pub fn parser_test_directory() -> PathBuf {
+    workspace_directory()
+        .join("wow_message_parser")
+        .join("tests")
+}
+
+pub fn wireshark_directory() -> PathBuf {
+    parser_test_directory().join("wireshark")
+}
+
 pub fn wowm_directory(directory: &str) -> PathBuf {
     workspace_directory()
         .join("wow_message_parser")

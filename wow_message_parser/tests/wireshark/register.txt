@@ -1,0 +1,4764 @@
+        { &hf_woww_absorb,
+            { "Absorb", "woww.absorb",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_absorbed,
+            { "Absorbed", "woww.absorbed",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_absorbed_damage,
+            { "Absorbed Damage", "woww.absorbed.damage",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_action_bar,
+            { "Action Bar", "woww.action.bar",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_action_bars,
+            { "Action Bars", "woww.action.bars",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_action_type,
+            { "Action Type", "woww.action.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_activate_taxi_reply,
+            { "Activate Taxi Reply", "woww.activate.taxi.reply",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_activate_taxi_reply_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_actual_roll,
+            { "Actual Roll", "woww.actual.roll",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_agility,
+            { "Agility", "woww.agility",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_ai_reaction,
+            { "Ai Reaction", "woww.ai.reaction",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_ai_reaction_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_allow_movement,
+            { "Allow Movement", "woww.allow.movement",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_allowed_class,
+            { "Allowed Class", "woww.allowed.class",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_allowed_classes,
+            { "Allowed Classes", "woww.allowed.classes",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_allowed_genders,
+            { "Allowed Genders", "woww.allowed.genders",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_allowed_guild_id,
+            { "Allowed Guild Id", "woww.allowed.guild.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_allowed_maximum_level,
+            { "Allowed Maximum Level", "woww.allowed.maximum.level",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_allowed_minimum_level,
+            { "Allowed Minimum Level", "woww.allowed.minimum.level",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_allowed_race,
+            { "Allowed Race", "woww.allowed.race",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_allowed_races,
+            { "Allowed Races", "woww.allowed.races",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_ammo_display_id,
+            { "Ammo Display Id", "woww.ammo.display.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_ammo_inventory_type,
+            { "Ammo Inventory Type", "woww.ammo.inventory.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_ammo_type,
+            { "Ammo Type", "woww.ammo.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount,
+            { "Amount", "woww.amount",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_bought,
+            { "Amount Bought", "woww.amount.bought",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_for_sale,
+            { "Amount For Sale", "woww.amount.for.sale",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_accounts_in_guild,
+            { "Amount Of Accounts In Guild", "woww.amount.of.accounts.in.guild",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_auras,
+            { "Amount Of Auras", "woww.amount.of.auras",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_carriers,
+            { "Amount Of Carriers", "woww.amount.of.carriers",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_characters,
+            { "Amount Of Characters", "woww.amount.of.characters",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_characters_in_guild,
+            { "Amount Of Characters In Guild", "woww.amount.of.characters.in.guild",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_choice_item_rewards,
+            { "Amount Of Choice Item Rewards", "woww.amount.of.choice.item.rewards",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_cooldowns,
+            { "Amount Of Cooldowns", "woww.amount.of.cooldowns",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_effects,
+            { "Amount Of Effects", "woww.amount.of.effects",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_emotes,
+            { "Amount Of Emotes", "woww.amount.of.emotes",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_entries,
+            { "Amount Of Entries", "woww.amount.of.entries",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_events,
+            { "Amount Of Events", "woww.amount.of.events",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_extra_fields,
+            { "Amount Of Extra Fields", "woww.amount.of.extra.fields",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_factions,
+            { "Amount Of Factions", "woww.amount.of.factions",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_flag_carriers,
+            { "Amount Of Flag Carriers", "woww.amount.of.flag.carriers",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_friends,
+            { "Amount Of Friends", "woww.amount.of.friends",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_gossip_items,
+            { "Amount Of Gossip Items", "woww.amount.of.gossip.items",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_hits,
+            { "Amount Of Hits", "woww.amount.of.hits",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_ignored,
+            { "Amount Of Ignored", "woww.amount.of.ignored",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_item_rewards,
+            { "Amount Of Item Rewards", "woww.amount.of.item.rewards",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_items,
+            { "Amount Of Items", "woww.amount.of.items",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_logs,
+            { "Amount Of Logs", "woww.amount.of.logs",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_mails,
+            { "Amount Of Mails", "woww.amount.of.mails",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_members,
+            { "Amount Of Members", "woww.amount.of.members",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_misses,
+            { "Amount Of Misses", "woww.amount.of.misses",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_nodes,
+            { "Amount Of Nodes", "woww.amount.of.nodes",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_objects,
+            { "Amount Of Objects", "woww.amount.of.objects",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_outbidded_items,
+            { "Amount Of Outbidded Items", "woww.amount.of.outbidded.items",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_petitions,
+            { "Amount Of Petitions", "woww.amount.of.petitions",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_pets,
+            { "Amount Of Pets", "woww.amount.of.pets",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_players,
+            { "Amount Of Players", "woww.amount.of.players",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_quests,
+            { "Amount Of Quests", "woww.amount.of.quests",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_raid_infos,
+            { "Amount Of Raid Infos", "woww.amount.of.raid.infos",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_reactions,
+            { "Amount Of Reactions", "woww.amount.of.reactions",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_records,
+            { "Amount Of Records", "woww.amount.of.records",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_required_items,
+            { "Amount Of Required Items", "woww.amount.of.required.items",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_signatures,
+            { "Amount Of Signatures", "woww.amount.of.signatures",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_spells,
+            { "Amount Of Spells", "woww.amount.of.spells",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_states,
+            { "Amount Of States", "woww.amount.of.states",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_strings,
+            { "Amount Of Strings", "woww.amount.of.strings",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_targets,
+            { "Amount Of Targets", "woww.amount.of.targets",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_zones,
+            { "Amount Of Zones", "woww.amount.of.zones",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_angle,
+            { "Angle", "woww.angle",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_animation_id,
+            { "Animation Id", "woww.animation.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_answer,
+            { "Answer", "woww.answer",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_answer_comment,
+            { "Answer Comment", "woww.answer.comment",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_apply,
+            { "Apply", "woww.apply",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_arcane_resistance,
+            { "Arcane Resistance", "woww.arcane.resistance",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_area,
+            { "Area", "woww.area",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_area_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_armor,
+            { "Armor", "woww.armor",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_attacker,
+            { "Attacker", "woww.attacker",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_attacker_guid,
+            { "Attacker Guid", "woww.attacker.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_duration_in_minutes,
+            { "Auction Duration In Minutes", "woww.auction.duration.in.minutes",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_house_id,
+            { "Auction House Id", "woww.auction.house.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_id,
+            { "Auction Id", "woww.auction.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_main_category,
+            { "Auction Main Category", "woww.auction.main.category",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_out_bid,
+            { "Auction Out Bid", "woww.auction.out.bid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_quality,
+            { "Auction Quality", "woww.auction.quality",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_slot_id,
+            { "Auction Slot Id", "woww.auction.slot.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_sub_category,
+            { "Auction Sub Category", "woww.auction.sub.category",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auctioneer,
+            { "Auctioneer", "woww.auctioneer",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auctioneer_guid,
+            { "Auctioneer Guid", "woww.auctioneer.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_aura_duration,
+            { "Aura Duration", "woww.aura.duration",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_aura_slot,
+            { "Aura Slot", "woww.aura.slot",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_aura_type,
+            { "Aura Type", "woww.aura.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_aura_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auto_decline_time_in_msecs,
+            { "Auto Decline Time In Msecs", "woww.auto.decline.time.in.msecs",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auto_finish,
+            { "Auto Finish", "woww.auto.finish",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_average_wait_time_in_ms,
+            { "Average Wait Time In Ms", "woww.average.wait.time.in.ms",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_background_color,
+            { "Background Color", "woww.background.color",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_backwards_running_speed,
+            { "Backwards Running Speed", "woww.backwards.running.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_backwards_swimming_speed,
+            { "Backwards Swimming Speed", "woww.backwards.swimming.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bag,
+            { "Bag", "woww.bag",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bag_family,
+            { "Bag Family", "woww.bag.family",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bag_guid,
+            { "Bag Guid", "woww.bag.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bag_index,
+            { "Bag Index", "woww.bag.index",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bag_slot,
+            { "Bag Slot", "woww.bag.slot",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bag_type_subclass,
+            { "Bag Type Subclass", "woww.bag.type.subclass",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_battle_ground_type_id,
+            { "Battle Ground Type Id", "woww.battle.ground.type.id",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_battlefield_port_action,
+            { "Battlefield Port Action", "woww.battlefield.port.action",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_battlefield_port_action_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_battleground_end_status,
+            { "Battleground End Status", "woww.battleground.end.status",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_battleground_end_status_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_battleground_winner,
+            { "Battleground Winner", "woww.battleground.winner",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_battleground_winner_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_battlegrounds,
+            { "Battlegrounds", "woww.battlegrounds",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_battlemaster,
+            { "Battlemaster", "woww.battlemaster",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bg_type_id,
+            { "Bg Type Id", "woww.bg.type.id",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_bg_type_id_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bid,
+            { "Bid", "woww.bid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bidder,
+            { "Bidder", "woww.bidder",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_billing_flags,
+            { "Billing Flags", "woww.billing.flags",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_billing_rested,
+            { "Billing Rested", "woww.billing.rested",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_billing_time,
+            { "Billing Time", "woww.billing.time",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_block,
+            { "Block", "woww.block",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_blocked,
+            { "Blocked", "woww.blocked",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_body,
+            { "Body", "woww.body",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_body_text,
+            { "Body Text", "woww.body.text",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bonding,
+            { "Bonding", "woww.bonding",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bonus_honor,
+            { "Bonus Honor", "woww.bonus.honor",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_border_color,
+            { "Border Color", "woww.border.color",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_border_style,
+            { "Border Style", "woww.border.style",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_bug_type,
+            { "Bug Type", "woww.bug.type",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_build,
+            { "Build", "woww.build",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_button,
+            { "Button", "woww.button",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_buy_bank_slot_result,
+            { "Buy Bank Slot Result", "woww.buy.bank.slot.result",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_buy_bank_slot_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_buy_price,
+            { "Buy Price", "woww.buy.price",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_buy_result,
+            { "Buy Result", "woww.buy.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_buy_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_buyback_slot,
+            { "Buyback Slot", "woww.buyback.slot",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_buyback_slot_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_buyout,
+            { "Buyout", "woww.buyout",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_buyout_amount,
+            { "Buyout Amount", "woww.buyout.amount",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cash_on_delivery_amount,
+            { "Cash On Delivery Amount", "woww.cash.on.delivery.amount",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cast_failure_reason,
+            { "Cast Failure Reason", "woww.cast.failure.reason",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_cast_failure_reason_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cast_flags,
+            { "Cast Flags", "woww.cast.flags",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cast_item,
+            { "Cast Item", "woww.cast.item",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_caster,
+            { "Caster", "woww.caster",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_caster_guid,
+            { "Caster Guid", "woww.caster.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_caster_is_spirit_healer,
+            { "Caster Is Spirit Healer", "woww.caster.is.spirit.healer",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_category_cooldown_in_msecs,
+            { "Category Cooldown In Msecs", "woww.category.cooldown.in.msecs",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_channel,
+            { "Channel", "woww.channel",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_channel_flags,
+            { "Channel Flags", "woww.channel.flags",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_channel_name,
+            { "Channel Name", "woww.channel.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_channel_password,
+            { "Channel Password", "woww.channel.password",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_character_flags,
+            { "Character Flags", "woww.character.flags",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_character_guid,
+            { "Character Guid", "woww.character.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_character_name,
+            { "Character Name", "woww.character.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_charter_display_id,
+            { "Charter Display Id", "woww.charter.display.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_charter_entry,
+            { "Charter Entry", "woww.charter.entry",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_charter_owner,
+            { "Charter Owner", "woww.charter.owner",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_chat_credit,
+            { "Chat Credit", "woww.chat.credit",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_chat_data_line_count,
+            { "Chat Data Line Count", "woww.chat.data.line.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_chat_data_size_uncompressed,
+            { "Chat Data Size Uncompressed", "woww.chat.data.size.uncompressed",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_chat_notify,
+            { "Chat Notify", "woww.chat.notify",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_chat_notify_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_chat_type,
+            { "Chat Type", "woww.chat.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_chat_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_checked_timestamp,
+            { "Checked Timestamp", "woww.checked.timestamp",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cinematic_sequence_id,
+            { "Cinematic Sequence Id", "woww.cinematic.sequence.id",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_cinematic_sequence_id_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_civilian,
+            { "Civilian", "woww.civilian",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_class,
+            { "Class", "woww.class",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_class_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_class_mask,
+            { "Class Mask", "woww.class.mask",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_client_instance_id,
+            { "Client Instance Id", "woww.client.instance.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_client_proof,
+            { "Client Proof", "woww.client.proof",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_client_seed,
+            { "Client Seed", "woww.client.seed",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_code,
+            { "Code", "woww.code",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_coded,
+            { "Coded", "woww.coded",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_compressed_addon_info,
+            { "Compressed Addon Info", "woww.compressed.addon.info",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_compressed_chat_data,
+            { "Compressed Chat Data", "woww.compressed.chat.data",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_container_slots,
+            { "Container Slots", "woww.container.slots",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_content,
+            { "Content", "woww.content",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cooldown_count,
+            { "Cooldown Count", "woww.cooldown.count",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cooldown_in_msecs,
+            { "Cooldown In Msecs", "woww.cooldown.in.msecs",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cooldown_time_in_msecs,
+            { "Cooldown Time In Msecs", "woww.cooldown.time.in.msecs",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_corpse_query_result,
+            { "Corpse Query Result", "woww.corpse.query.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_corpse_query_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_corpse_target_ally,
+            { "Corpse Target Ally", "woww.corpse.target.ally",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_corpse_target_enemy,
+            { "Corpse Target Enemy", "woww.corpse.target.enemy",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cos_angle,
+            { "Cos Angle", "woww.cos.angle",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_cost_in_copper,
+            { "Cost In Copper", "woww.cost.in.copper",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_count,
+            { "Count", "woww.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_countdown_time,
+            { "Countdown Time", "woww.countdown.time",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_counter,
+            { "Counter", "woww.counter",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_create_id,
+            { "Create Id", "woww.create.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_created_day,
+            { "Created Day", "woww.created.day",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_created_month,
+            { "Created Month", "woww.created.month",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_created_year,
+            { "Created Year", "woww.created.year",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_creature,
+            { "Creature", "woww.creature",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_creature_entry,
+            { "Creature Entry", "woww.creature.entry",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_creature_family,
+            { "Creature Family", "woww.creature.family",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_creature_guid,
+            { "Creature Guid", "woww.creature.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_creature_id,
+            { "Creature Id", "woww.creature.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_creature_rank,
+            { "Creature Rank", "woww.creature.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_creature_type,
+            { "Creature Type", "woww.creature.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_critical,
+            { "Critical", "woww.critical",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_current_health,
+            { "Current Health", "woww.current.health",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_current_power,
+            { "Current Power", "woww.current.power",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_damage,
+            { "Damage", "woww.damage",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_damage_maximum,
+            { "Damage Maximum", "woww.damage.maximum",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_damage_minimum,
+            { "Damage Minimum", "woww.damage.minimum",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_damage_type,
+            { "Damage Type", "woww.damage.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_data,
+            { "Data", "woww.data",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_data_type,
+            { "Data Type", "woww.data.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_datetime,
+            { "Datetime", "woww.datetime",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_days_since_last_updated,
+            { "Days Since Last Updated", "woww.days.since.last.updated",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_days_since_oldest_ticket_creation,
+            { "Days Since Oldest Ticket Creation", "woww.days.since.oldest.ticket.creation",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_days_since_ticket_creation,
+            { "Days Since Ticket Creation", "woww.days.since.ticket.creation",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_deadline,
+            { "Deadline", "woww.deadline",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_deaths,
+            { "Deaths", "woww.deaths",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_decompressed_addon_info_size,
+            { "Decompressed Addon Info Size", "woww.decompressed.addon.info.size",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_delay,
+            { "Delay", "woww.delay",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_delay_in_seconds,
+            { "Delay In Seconds", "woww.delay.in.seconds",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_delay_time,
+            { "Delay Time", "woww.delay.time",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_description,
+            { "Description", "woww.description",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_destination_bag,
+            { "Destination Bag", "woww.destination.bag",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_destination_node,
+            { "Destination Node", "woww.destination.node",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_destination_position_x,
+            { "Destination Position X", "woww.destination.position.x",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_destination_position_y,
+            { "Destination Position Y", "woww.destination.position.y",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_destination_position_z,
+            { "Destination Position Z", "woww.destination.position.z",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_destination_slot,
+            { "Destination Slot", "woww.destination.slot",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_destionation_slot,
+            { "Destionation Slot", "woww.destionation.slot",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_details,
+            { "Details", "woww.details",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_display_id,
+            { "Display Id", "woww.display.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_duel_winner_reason,
+            { "Duel Winner Reason", "woww.duel.winner.reason",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_duel_winner_reason_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_durability,
+            { "Durability", "woww.durability",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_duration,
+            { "Duration", "woww.duration",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_eff,
+            { "Eff", "woww.eff",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_emblem_color,
+            { "Emblem Color", "woww.emblem.color",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_emblem_style,
+            { "Emblem Style", "woww.emblem.style",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_emote_delay,
+            { "Emote Delay", "woww.emote.delay",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_emote_delay_in_msecs,
+            { "Emote Delay In Msecs", "woww.emote.delay.in.msecs",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_emote_enum,
+            { "Emote Enum", "woww.emote.enum",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_emote_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_emote_int,
+            { "Emote Int", "woww.emote.int",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_enable_next,
+            { "Enable Next", "woww.enable.next",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_enable_pvp,
+            { "Enable Pvp", "woww.enable.pvp",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_enabled,
+            { "Enabled", "woww.enabled",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_enchantment,
+            { "Enchantment", "woww.enchantment",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_end_text,
+            { "End Text", "woww.end.text",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_ended_without_interruption,
+            { "Ended Without Interruption", "woww.ended.without.interruption",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_enemy,
+            { "Enemy", "woww.enemy",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_energy,
+            { "Energy", "woww.energy",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_entry,
+            { "Entry", "woww.entry",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_entry_id,
+            { "Entry Id", "woww.entry.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_environmental_damage_type,
+            { "Environmental Damage Type", "woww.environmental.damage.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_environmental_damage_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_equipment_display_id,
+            { "Equipment Display Id", "woww.equipment.display.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_equipped_item_class,
+            { "Equipped Item Class", "woww.equipped.item.class",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_equipped_item_inventory_type_mask,
+            { "Equipped Item Inventory Type Mask", "woww.equipped.item.inventory.type.mask",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_equipped_item_subclass_mask,
+            { "Equipped Item Subclass Mask", "woww.equipped.item.subclass.mask",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_event_descriptions,
+            { "Event Descriptions", "woww.event.descriptions",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_exp_group_bonus,
+            { "Exp Group Bonus", "woww.exp.group.bonus",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_experience,
+            { "Experience", "woww.experience",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_experience_award_type,
+            { "Experience Award Type", "woww.experience.award.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_experience_award_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_experience_reward,
+            { "Experience Reward", "woww.experience.reward",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_experience_without_rested,
+            { "Experience Without Rested", "woww.experience.without.rested",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_expiration_time,
+            { "Expiration Time", "woww.expiration.time",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_extend_flag,
+            { "Extend Flag", "woww.extend.flag",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_face,
+            { "Face", "woww.face",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_facial_hair,
+            { "Facial Hair", "woww.facial.hair",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_faction_flag,
+            { "Faction Flag", "woww.faction.flag",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_faction_id,
+            { "Faction Id", "woww.faction.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_fall_time,
+            { "Fall Time", "woww.fall.time",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_far_sight_operation,
+            { "Far Sight Operation", "woww.far.sight.operation",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_far_sight_operation_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_fields,
+            { "Fields", "woww.fields",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_fire_resistance,
+            { "Fire Resistance", "woww.fire.resistance",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_first_bag_display_id,
+            { "First Bag Display Id", "woww.first.bag.display.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_first_bag_inventory_id,
+            { "First Bag Inventory Id", "woww.first.bag.inventory.id",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_first_login,
+            { "First Login", "woww.first.login",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_first_rank,
+            { "First Rank", "woww.first.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_flags,
+            { "Flags", "woww.flags",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_focus,
+            { "Focus", "woww.focus",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_friend_name,
+            { "Friend Name", "woww.friend.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_friend_result,
+            { "Friend Result", "woww.friend.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_friend_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_friend_status,
+            { "Friend Status", "woww.friend.status",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_friend_status_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_frost_resistance,
+            { "Frost Resistance", "woww.frost.resistance",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gain_multiplier,
+            { "Gain Multiplier", "woww.gain.multiplier",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gender,
+            { "Gender", "woww.gender",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_gender_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gift_bag_index,
+            { "Gift Bag Index", "woww.gift.bag.index",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gift_slot,
+            { "Gift Slot", "woww.gift.slot",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gift_wrapper,
+            { "Gift Wrapper", "woww.gift.wrapper",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gm_ticket_escalation_status,
+            { "Gm Ticket Escalation Status", "woww.gm.ticket.escalation.status",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_gm_ticket_escalation_status_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gm_ticket_response,
+            { "Gm Ticket Response", "woww.gm.ticket.response",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_gm_ticket_response_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gm_ticket_status,
+            { "Gm Ticket Status", "woww.gm.ticket.status",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_gm_ticket_status_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gm_ticket_status_response,
+            { "Gm Ticket Status Response", "woww.gm.ticket.status.response",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_gm_ticket_status_response_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gm_ticket_type,
+            { "Gm Ticket Type", "woww.gm.ticket.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_gm_ticket_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gold,
+            { "Gold", "woww.gold",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_gossip_list_id,
+            { "Gossip List Id", "woww.gossip.list.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_grade,
+            { "Grade", "woww.grade",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_greeting,
+            { "Greeting", "woww.greeting",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_group_loot_setting,
+            { "Group Loot Setting", "woww.group.loot.setting",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_group_loot_setting_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_group_member_online_status,
+            { "Group Member Online Status", "woww.group.member.online.status",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_group_number,
+            { "Group Number", "woww.group.number",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_group_type,
+            { "Group Type", "woww.group.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_group_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_group_update_flags,
+            { "Group Update Flags", "woww.group.update.flags",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guid,
+            { "Guid", "woww.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guids,
+            { "Guids", "woww.guids",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild,
+            { "Guild", "woww.guild",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild_charter_cost,
+            { "Guild Charter Cost", "woww.guild.charter.cost",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild_command,
+            { "Guild Command", "woww.guild.command",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_guild_command_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild_command_result,
+            { "Guild Command Result", "woww.guild.command.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_guild_command_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild_emblem_result,
+            { "Guild Emblem Result", "woww.guild.emblem.result",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_guild_emblem_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild_event,
+            { "Guild Event", "woww.guild.event",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_guild_event_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild_guid,
+            { "Guild Guid", "woww.guild.guid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild_id,
+            { "Guild Id", "woww.guild.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild_info,
+            { "Guild Info", "woww.guild.info",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_guild_name,
+            { "Guild Name", "woww.guild.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_hair_color,
+            { "Hair Color", "woww.hair.color",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_hair_style,
+            { "Hair Style", "woww.hair.style",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_happiness,
+            { "Happiness", "woww.happiness",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_has_been_saved,
+            { "Has Been Saved", "woww.has.been.saved",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_has_transport,
+            { "Has Transport", "woww.has.transport",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_health,
+            { "Health", "woww.health",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_highest_bid,
+            { "Highest Bid", "woww.highest.bid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_highest_bidder,
+            { "Highest Bidder", "woww.highest.bidder",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_hit_info,
+            { "Hit Info", "woww.hit.info",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_hits,
+            { "Hits", "woww.hits",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_holy_resistance,
+            { "Holy Resistance", "woww.holy.resistance",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_homebind_timer,
+            { "Homebind Timer", "woww.homebind.timer",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_honor_points,
+            { "Honor Points", "woww.honor.points",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_honorable_kills,
+            { "Honorable Kills", "woww.honorable.kills",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_horizontal_speed,
+            { "Horizontal Speed", "woww.horizontal.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_icon,
+            { "Icon", "woww.icon",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_id,
+            { "Id", "woww.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_ignore_name,
+            { "Ignore Name", "woww.ignore.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_ignored,
+            { "Ignored", "woww.ignored",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_inactive,
+            { "Inactive", "woww.inactive",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_index,
+            { "Index", "woww.index",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_info_type,
+            { "Info Type", "woww.info.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_initiator_guid,
+            { "Initiator Guid", "woww.initiator.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_initiator_name,
+            { "Initiator Name", "woww.initiator.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_instance_id,
+            { "Instance Id", "woww.instance.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_instance_reset_failed_reason,
+            { "Instance Reset Failed Reason", "woww.instance.reset.failed.reason",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_instance_reset_failed_reason_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_intellect,
+            { "Intellect", "woww.intellect",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_interrupted_spell,
+            { "Interrupted Spell", "woww.interrupted.spell",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_inventory_result,
+            { "Inventory Result", "woww.inventory.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_inventory_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_inventory_type,
+            { "Inventory Type", "woww.inventory.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_inventory_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_invited_player,
+            { "Invited Player", "woww.invited.player",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_is_applied,
+            { "Is Applied", "woww.is.applied",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_is_frozen,
+            { "Is Frozen", "woww.is.frozen",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_is_online,
+            { "Is Online", "woww.is.online",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_is_wrapped,
+            { "Is Wrapped", "woww.is.wrapped",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_issue_date,
+            { "Issue Date", "woww.issue.date",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item,
+            { "Item", "woww.item",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_bag_index,
+            { "Item Bag Index", "woww.item.bag.index",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_charges,
+            { "Item Charges", "woww.item.charges",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_class,
+            { "Item Class", "woww.item.class",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_item_class_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_count,
+            { "Item Count", "woww.item.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_creator,
+            { "Item Creator", "woww.item.creator",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_display_id,
+            { "Item Display Id", "woww.item.display.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_display_info,
+            { "Item Display Info", "woww.item.display.info",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_enchant_id,
+            { "Item Enchant Id", "woww.item.enchant.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_enchantment,
+            { "Item Enchantment", "woww.item.enchantment",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_entry,
+            { "Item Entry", "woww.item.entry",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_guid,
+            { "Item Guid", "woww.item.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_icon,
+            { "Item Icon", "woww.item.icon",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_id,
+            { "Item Id", "woww.item.id",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_level,
+            { "Item Level", "woww.item.level",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_limit_category_id,
+            { "Item Limit Category Id", "woww.item.limit.category.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_name,
+            { "Item Name", "woww.item.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_owner,
+            { "Item Owner", "woww.item.owner",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_quality,
+            { "Item Quality", "woww.item.quality",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_item_quality_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_random_properties_id,
+            { "Item Random Properties Id", "woww.item.random.properties.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_random_property_id,
+            { "Item Random Property Id", "woww.item.random.property.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_random_suffix,
+            { "Item Random Suffix", "woww.item.random.suffix",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_random_suffix_id,
+            { "Item Random Suffix Id", "woww.item.random.suffix.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_set,
+            { "Item Set", "woww.item.set",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_slot,
+            { "Item Slot", "woww.item.slot",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_spell_charges,
+            { "Item Spell Charges", "woww.item.spell.charges",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_stack_count,
+            { "Item Stack Count", "woww.item.stack.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_stack_size,
+            { "Item Stack Size", "woww.item.stack.size",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_stat_type,
+            { "Item Stat Type", "woww.item.stat.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_stat_value,
+            { "Item Stat Value", "woww.item.stat.value",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_sub_class,
+            { "Item Sub Class", "woww.item.sub.class",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_sub_class_mask,
+            { "Item Sub Class Mask", "woww.item.sub.class.mask",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_suffix_factor,
+            { "Item Suffix Factor", "woww.item.suffix.factor",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_target,
+            { "Item Target", "woww.item.target",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_target_entry,
+            { "Item Target Entry", "woww.item.target.entry",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_template,
+            { "Item Template", "woww.item.template",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_text_id,
+            { "Item Text Id", "woww.item.text.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_trade_target,
+            { "Item Trade Target", "woww.item.trade.target",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_items_required,
+            { "Items Required", "woww.items.required",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_join_as_group,
+            { "Join As Group", "woww.join.as.group",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_kill_count,
+            { "Kill Count", "woww.kill.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_killing_blows,
+            { "Killing Blows", "woww.killing.blows",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_lag,
+            { "Lag", "woww.lag",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_language,
+            { "Language", "woww.language",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_language_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_language_id,
+            { "Language Id", "woww.language.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_last_week_honor,
+            { "Last Week Honor", "woww.last.week.honor",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_last_week_honorable,
+            { "Last Week Honorable", "woww.last.week.honorable",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_leader,
+            { "Leader", "woww.leader",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_level,
+            { "Level", "woww.level",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_level_played_time,
+            { "Level Played Time", "woww.level.played.time",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_lifetime_dishonorable,
+            { "Lifetime Dishonorable", "woww.lifetime.dishonorable",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_lifetime_honorable,
+            { "Lifetime Honorable", "woww.lifetime.honorable",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_list_from,
+            { "List From", "woww.list.from",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_list_start_item,
+            { "List Start Item", "woww.list.start.item",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_listed_players,
+            { "Listed Players", "woww.listed.players",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_living_orientation,
+            { "Living Orientation", "woww.living.orientation",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_location_name,
+            { "Location Name", "woww.location.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_lock_id,
+            { "Lock Id", "woww.lock.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_log_format,
+            { "Log Format", "woww.log.format",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_log_format_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_logout_result,
+            { "Logout Result", "woww.logout.result",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_logout_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_logout_speed,
+            { "Logout Speed", "woww.logout.speed",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_logout_speed_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_loot_guid,
+            { "Loot Guid", "woww.loot.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_loot_master,
+            { "Loot Master", "woww.loot.master",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_loot_method,
+            { "Loot Method", "woww.loot.method",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_loot_method_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_loot_slot,
+            { "Loot Slot", "woww.loot.slot",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_looted_target_guid,
+            { "Looted Target Guid", "woww.looted.target.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_loyalty,
+            { "Loyalty", "woww.loyalty",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mail_id,
+            { "Mail Id", "woww.mail.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mail_template_id,
+            { "Mail Template Id", "woww.mail.template.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mail_type,
+            { "Mail Type", "woww.mail.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_mail_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mailbox,
+            { "Mailbox", "woww.mailbox",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mailbox_guid,
+            { "Mailbox Guid", "woww.mailbox.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mailbox_id,
+            { "Mailbox Id", "woww.mailbox.id",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mana,
+            { "Mana", "woww.mana",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_map,
+            { "Map", "woww.map",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_map_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_master_loot,
+            { "Master Loot", "woww.master.loot",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_material,
+            { "Material", "woww.material",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_max_count,
+            { "Max Count", "woww.max.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_max_durability,
+            { "Max Durability", "woww.max.durability",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_max_health,
+            { "Max Health", "woww.max.health",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_max_items,
+            { "Max Items", "woww.max.items",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_max_level_money_reward,
+            { "Max Level Money Reward", "woww.max.level.money.reward",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_max_power,
+            { "Max Power", "woww.max.power",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_maximum,
+            { "Maximum", "woww.maximum",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_maximum_level,
+            { "Maximum Level", "woww.maximum.level",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_maximum_signatures,
+            { "Maximum Signatures", "woww.maximum.signatures",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_meeting_stone_failure,
+            { "Meeting Stone Failure", "woww.meeting.stone.failure",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_meeting_stone_failure_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_meeting_stone_status,
+            { "Meeting Stone Status", "woww.meeting.stone.status",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_meeting_stone_status_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_member,
+            { "Member", "woww.member",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_member_flags,
+            { "Member Flags", "woww.member.flags",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_message,
+            { "Message", "woww.message",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_message_id,
+            { "Message Id", "woww.message.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_message_of_the_day,
+            { "Message Of The Day", "woww.message.of.the.day",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_minimum,
+            { "Minimum", "woww.minimum",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_minimum_bid,
+            { "Minimum Bid", "woww.minimum.bid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_minimum_level,
+            { "Minimum Level", "woww.minimum.level",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_minimum_signatures,
+            { "Minimum Signatures", "woww.minimum.signatures",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_misc_value,
+            { "Misc Value", "woww.misc.value",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_money,
+            { "Money", "woww.money",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_money_in_trade,
+            { "Money In Trade", "woww.money.in.trade",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_money_reward,
+            { "Money Reward", "woww.money.reward",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_monster,
+            { "Monster", "woww.monster",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_monster_move_type,
+            { "Monster Move Type", "woww.monster.move.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_monster_move_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_monster_name,
+            { "Monster Name", "woww.monster.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mount_result,
+            { "Mount Result", "woww.mount.result",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_mount_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_move_event,
+            { "Move Event", "woww.move.event",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_movement_counter,
+            { "Movement Counter", "woww.movement.counter",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_movement_flags,
+            { "Movement Flags", "woww.movement.flags",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_name,
+            { "Name", "woww.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_nature_resistance,
+            { "Nature Resistance", "woww.nature.resistance",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_nearest_node,
+            { "Nearest Node", "woww.nearest.node",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_guild_leader_name,
+            { "New Guild Leader Name", "woww.new.guild.leader.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_item_chat_alert,
+            { "New Item Chat Alert", "woww.new.item.chat.alert",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_new_item_chat_alert_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_item_creation_type,
+            { "New Item Creation Type", "woww.new.item.creation.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_new_item_creation_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_item_source,
+            { "New Item Source", "woww.new.item.source",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_new_item_source_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_level,
+            { "New Level", "woww.new.level",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_name,
+            { "New Name", "woww.new.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_owner,
+            { "New Owner", "woww.new.owner",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_speed,
+            { "New Speed", "woww.new.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_spell_id,
+            { "New Spell Id", "woww.new.spell.id",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_next_page_id,
+            { "Next Page Id", "woww.next.page.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_next_quest_in_chain,
+            { "Next Quest In Chain", "woww.next.quest.in.chain",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_next_resurrect_time,
+            { "Next Resurrect Time", "woww.next.resurrect.time",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_node_count,
+            { "Node Count", "woww.node.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_nodes,
+            { "Nodes", "woww.nodes",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_note,
+            { "Note", "woww.note",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_notification,
+            { "Notification", "woww.notification",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_npc,
+            { "Npc", "woww.npc",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_npc_guid,
+            { "Npc Guid", "woww.npc.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_number_of_battlegrounds,
+            { "Number Of Battlegrounds", "woww.number.of.battlegrounds",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_number_of_choices,
+            { "Number Of Choices", "woww.number.of.choices",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_object_guid,
+            { "Object Guid", "woww.object.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_object_target,
+            { "Object Target", "woww.object.target",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_object_target_locked,
+            { "Object Target Locked", "woww.object.target.locked",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_object_type,
+            { "Object Type", "woww.object.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_object_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_objective_text,
+            { "Objective Text", "woww.objective.text",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_objective_texts,
+            { "Objective Texts", "woww.objective.texts",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_objectives,
+            { "Objectives", "woww.objectives",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_offer_reward_text,
+            { "Offer Reward Text", "woww.offer.reward.text",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_old_mover,
+            { "Old Mover", "woww.old.mover",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_old_spell_id,
+            { "Old Spell Id", "woww.old.spell.id",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_online_players,
+            { "Online Players", "woww.online.players",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_op,
+            { "Op", "woww.op",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_opponent_name,
+            { "Opponent Name", "woww.opponent.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_orientation,
+            { "Orientation", "woww.orientation",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_out_bid,
+            { "Out Bid", "woww.out.bid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_outbid_item_ids,
+            { "Outbid Item Ids", "woww.outbid.item.ids",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_outfit_id,
+            { "Outfit Id", "woww.outfit.id",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_own_flags,
+            { "Own Flags", "woww.own.flags",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_owner_guid,
+            { "Owner Guid", "woww.owner.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_padding,
+            { "Padding", "woww.padding",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_page_id,
+            { "Page Id", "woww.page.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_page_material,
+            { "Page Material", "woww.page.material",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_page_text,
+            { "Page Text", "woww.page.text",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_party_operation,
+            { "Party Operation", "woww.party.operation",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_party_operation_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_party_result,
+            { "Party Result", "woww.party.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_party_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_party_status,
+            { "Party Status", "woww.party.status",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_periodic_log,
+            { "Periodic Log", "woww.periodic.log",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet,
+            { "Pet", "woww.pet",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_command_state,
+            { "Pet Command State", "woww.pet.command.state",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_pet_command_state_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_current_health,
+            { "Pet Current Health", "woww.pet.current.health",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_current_power,
+            { "Pet Current Power", "woww.pet.current.power",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_display_id,
+            { "Pet Display Id", "woww.pet.display.id",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_enabled,
+            { "Pet Enabled", "woww.pet.enabled",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_pet_enabled_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_family,
+            { "Pet Family", "woww.pet.family",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_feedback,
+            { "Pet Feedback", "woww.pet.feedback",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_pet_feedback_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_guid,
+            { "Pet Guid", "woww.pet.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_level,
+            { "Pet Level", "woww.pet.level",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_max_health,
+            { "Pet Max Health", "woww.pet.max.health",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_max_power,
+            { "Pet Max Power", "woww.pet.max.power",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_name,
+            { "Pet Name", "woww.pet.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_name_timestamp,
+            { "Pet Name Timestamp", "woww.pet.name.timestamp",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_number,
+            { "Pet Number", "woww.pet.number",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_react_state,
+            { "Pet React State", "woww.pet.react.state",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_pet_react_state_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_slot,
+            { "Pet Slot", "woww.pet.slot",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_talk_reason,
+            { "Pet Talk Reason", "woww.pet.talk.reason",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_pet_talk_reason_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pet_tame_failure_reason,
+            { "Pet Tame Failure Reason", "woww.pet.tame.failure.reason",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_pet_tame_failure_reason_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_petition,
+            { "Petition", "woww.petition",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_petition_guid,
+            { "Petition Guid", "woww.petition.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_petition_result,
+            { "Petition Result", "woww.petition.result",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_petition_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_petition_turn_in_result,
+            { "Petition Turn In Result", "woww.petition.turn.in.result",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_petition_turn_in_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pitch,
+            { "Pitch", "woww.pitch",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_player,
+            { "Player", "woww.player",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_player_chat_tag,
+            { "Player Chat Tag", "woww.player.chat.tag",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_player_chat_tag_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_player_guid,
+            { "Player Guid", "woww.player.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_player_name,
+            { "Player Name", "woww.player.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_player_rank,
+            { "Player Rank", "woww.player.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_player_with_killing_blow,
+            { "Player With Killing Blow", "woww.player.with.killing.blow",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_point_map_id,
+            { "Point Map Id", "woww.point.map.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_point_opt,
+            { "Point Opt", "woww.point.opt",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_position,
+            { "Position", "woww.position",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_position_x,
+            { "Position X", "woww.position.x",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_position_x_int,
+            { "Position X Int", "woww.position.x.int",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_position_y,
+            { "Position Y", "woww.position.y",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_position_y_int,
+            { "Position Y Int", "woww.position.y.int",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_power,
+            { "Power", "woww.power",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_power_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_power_type,
+            { "Power Type", "woww.power.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_power_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_price,
+            { "Price", "woww.price",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_probability,
+            { "Probability", "woww.probability",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_pvp_rank,
+            { "Pvp Rank", "woww.pvp.rank",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_pvp_rank_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_completable,
+            { "Quest Completable", "woww.quest.completable",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_quest_completable_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_failed_reason,
+            { "Quest Failed Reason", "woww.quest.failed.reason",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_quest_failed_reason_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_flags,
+            { "Quest Flags", "woww.quest.flags",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_giver_status,
+            { "Quest Giver Status", "woww.quest.giver.status",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_quest_giver_status_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_icon,
+            { "Quest Icon", "woww.quest.icon",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_id,
+            { "Quest Id", "woww.quest.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_level,
+            { "Quest Level", "woww.quest.level",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_method,
+            { "Quest Method", "woww.quest.method",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_party_message,
+            { "Quest Party Message", "woww.quest.party.message",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_quest_party_message_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_title,
+            { "Quest Title", "woww.quest.title",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_quest_type,
+            { "Quest Type", "woww.quest.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_question_id,
+            { "Question Id", "woww.question.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_queue_position,
+            { "Queue Position", "woww.queue.position",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_queue_slot,
+            { "Queue Slot", "woww.queue.slot",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_race,
+            { "Race", "woww.race",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_race_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_race_mask,
+            { "Race Mask", "woww.race.mask",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_racial_leader,
+            { "Racial Leader", "woww.racial.leader",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_rage,
+            { "Rage", "woww.rage",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_raid_group_error,
+            { "Raid Group Error", "woww.raid.group.error",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_raid_group_error_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_raid_instance_message,
+            { "Raid Instance Message", "woww.raid.instance.message",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_raid_instance_message_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_raid_target_index,
+            { "Raid Target Index", "woww.raid.target.index",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_raid_target_index_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_raid_target_update_type,
+            { "Raid Target Update Type", "woww.raid.target.update.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_raid_target_update_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_random_property,
+            { "Random Property", "woww.random.property",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_random_property_id,
+            { "Random Property Id", "woww.random.property.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_ranged_range_modification,
+            { "Ranged Range Modification", "woww.ranged.range.modification",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_rank_id,
+            { "Rank Id", "woww.rank.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_rank_name,
+            { "Rank Name", "woww.rank.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_rank_names,
+            { "Rank Names", "woww.rank.names",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_rank_progress_bar,
+            { "Rank Progress Bar", "woww.rank.progress.bar",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_raw_data,
+            { "Raw Data", "woww.raw.data",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_read_by_gm,
+            { "Read By Gm", "woww.read.by.gm",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_realm_name,
+            { "Realm Name", "woww.realm.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_receiver,
+            { "Receiver", "woww.receiver",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_records,
+            { "Records", "woww.records",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reputation_id,
+            { "Reputation Id", "woww.reputation.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reputation_list_id,
+            { "Reputation List Id", "woww.reputation.list.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reputation_objective_faction,
+            { "Reputation Objective Faction", "woww.reputation.objective.faction",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reputation_objective_value,
+            { "Reputation Objective Value", "woww.reputation.objective.value",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reputation_rank,
+            { "Reputation Rank", "woww.reputation.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_request_items_text,
+            { "Request Items Text", "woww.request.items.text",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_requested_rank,
+            { "Requested Rank", "woww.requested.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_city_rank,
+            { "Required City Rank", "woww.required.city.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_honor_rank,
+            { "Required Honor Rank", "woww.required.honor.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_item_count,
+            { "Required Item Count", "woww.required.item.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_item_id,
+            { "Required Item Id", "woww.required.item.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_kill_count,
+            { "Required Kill Count", "woww.required.kill.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_level,
+            { "Required Level", "woww.required.level",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_money,
+            { "Required Money", "woww.required.money",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_opposite_faction,
+            { "Required Opposite Faction", "woww.required.opposite.faction",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_opposite_reputation_value,
+            { "Required Opposite Reputation Value", "woww.required.opposite.reputation.value",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_reputation_faction,
+            { "Required Reputation Faction", "woww.required.reputation.faction",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_reputation_rank,
+            { "Required Reputation Rank", "woww.required.reputation.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_skill,
+            { "Required Skill", "woww.required.skill",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_skill_rank,
+            { "Required Skill Rank", "woww.required.skill.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_skill_value,
+            { "Required Skill Value", "woww.required.skill.value",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_spell,
+            { "Required Spell", "woww.required.spell",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_required_spell_focus,
+            { "Required Spell Focus", "woww.required.spell.focus",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reserved_for_future_use,
+            { "Reserved For Future Use", "woww.reserved.for.future.use",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reset_time,
+            { "Reset Time", "woww.reset.time",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_resist,
+            { "Resist", "woww.resist",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_resisted,
+            { "Resisted", "woww.resisted",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_respect_resurrection_timer,
+            { "Respect Resurrection Timer", "woww.respect.resurrection.timer",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reward,
+            { "Reward", "woww.reward",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reward_spell,
+            { "Reward Spell", "woww.reward.spell",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_reward_spell_cast,
+            { "Reward Spell Cast", "woww.reward.spell.cast",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_rights,
+            { "Rights", "woww.rights",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_roll_number,
+            { "Roll Number", "woww.roll.number",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_roll_vote,
+            { "Roll Vote", "woww.roll.vote",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_roll_vote_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_round_time_in_ms,
+            { "Round Time In Ms", "woww.round.time.in.ms",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_running_speed,
+            { "Running Speed", "woww.running.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_scale,
+            { "Scale", "woww.scale",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_search_strings,
+            { "Search Strings", "woww.search.strings",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_searched_name,
+            { "Searched Name", "woww.searched.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_self_player,
+            { "Self Player", "woww.self.player",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sell_item_result,
+            { "Sell Item Result", "woww.sell.item.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_sell_item_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sell_price,
+            { "Sell Price", "woww.sell.price",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sender,
+            { "Sender", "woww.sender",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sender_id,
+            { "Sender Id", "woww.sender.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sender_name,
+            { "Sender Name", "woww.sender.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sequence_id,
+            { "Sequence Id", "woww.sequence.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_server_id,
+            { "Server Id", "woww.server.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_server_message_type,
+            { "Server Message Type", "woww.server.message.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_server_message_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_server_seed,
+            { "Server Seed", "woww.server.seed",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_set_assistant,
+            { "Set Assistant", "woww.set.assistant",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_shadow_resistance,
+            { "Shadow Resistance", "woww.shadow.resistance",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sheath,
+            { "Sheath", "woww.sheath",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sheath_state,
+            { "Sheath State", "woww.sheath.state",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_sheath_state_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_simple_spell_cast_result,
+            { "Simple Spell Cast Result", "woww.simple.spell.cast.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_simple_spell_cast_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sin_angle,
+            { "Sin Angle", "woww.sin.angle",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_skill_id,
+            { "Skill Id", "woww.skill.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_skin,
+            { "Skin", "woww.skin",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_skin_color,
+            { "Skin Color", "woww.skin.color",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_skip,
+            { "Skip", "woww.skip",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_slot,
+            { "Slot", "woww.slot",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_slot_id,
+            { "Slot Id", "woww.slot.id",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_slot_index,
+            { "Slot Index", "woww.slot.index",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sound_id,
+            { "Sound Id", "woww.sound.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_source_bag,
+            { "Source Bag", "woww.source.bag",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_source_item_id,
+            { "Source Item Id", "woww.source.item.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_source_node,
+            { "Source Node", "woww.source.node",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_source_position_x,
+            { "Source Position X", "woww.source.position.x",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_source_position_y,
+            { "Source Position Y", "woww.source.position.y",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_source_position_z,
+            { "Source Position Z", "woww.source.position.z",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_source_slot,
+            { "Source Slot", "woww.source.slot",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_speech_bubble_credit,
+            { "Speech Bubble Credit", "woww.speech.bubble.credit",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_speed,
+            { "Speed", "woww.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell,
+            { "Spell", "woww.spell",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_art_kit,
+            { "Spell Art Kit", "woww.spell.art.kit",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_cast_result,
+            { "Spell Cast Result", "woww.spell.cast.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_spell_cast_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_cast_target_flags,
+            { "Spell Cast Target Flags", "woww.spell.cast.target.flags",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_category,
+            { "Spell Category", "woww.spell.category",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_category_cooldown,
+            { "Spell Category Cooldown", "woww.spell.category.cooldown",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_chain_previous,
+            { "Spell Chain Previous", "woww.spell.chain.previous",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_chain_required,
+            { "Spell Chain Required", "woww.spell.chain.required",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_charges,
+            { "Spell Charges", "woww.spell.charges",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_cooldown,
+            { "Spell Cooldown", "woww.spell.cooldown",
+                FT_INT32, BASE_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_cost,
+            { "Spell Cost", "woww.spell.cost",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_count,
+            { "Spell Count", "woww.spell.count",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_data_id,
+            { "Spell Data Id", "woww.spell.data.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_effect,
+            { "Spell Effect", "woww.spell.effect",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_spell_effect_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_effect_item_type,
+            { "Spell Effect Item Type", "woww.spell.effect.item.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_id,
+            { "Spell Id", "woww.spell.id",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_index,
+            { "Spell Index", "woww.spell.index",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_miss_info,
+            { "Spell Miss Info", "woww.spell.miss.info",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_spell_miss_info_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_on_lowest_slot,
+            { "Spell On Lowest Slot", "woww.spell.on.lowest.slot",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_ppm_rate,
+            { "Spell Ppm Rate", "woww.spell.ppm.rate",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_school,
+            { "Spell School", "woww.spell.school",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_spell_school_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_trigger,
+            { "Spell Trigger", "woww.spell.trigger",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_visual_kit,
+            { "Spell Visual Kit", "woww.spell.visual.kit",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spells,
+            { "Spells", "woww.spells",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spirit,
+            { "Spirit", "woww.spirit",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spline_elevation,
+            { "Spline Elevation", "woww.spline.elevation",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spline_flag,
+            { "Spline Flag", "woww.spline.flag",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spline_id,
+            { "Spline Id", "woww.spline.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_stable_result,
+            { "Stable Result", "woww.stable.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_stable_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_stable_slots,
+            { "Stable Slots", "woww.stable.slots",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_stack_count,
+            { "Stack Count", "woww.stack.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_stack_size,
+            { "Stack Size", "woww.stack.size",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_stackable,
+            { "Stackable", "woww.stackable",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_stamina,
+            { "Stamina", "woww.stamina",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_standing,
+            { "Standing", "woww.standing",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_start_bid,
+            { "Start Bid", "woww.start.bid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_start_from_page,
+            { "Start From Page", "woww.start.from.page",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_start_quest,
+            { "Start Quest", "woww.start.quest",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_starting_bid,
+            { "Starting Bid", "woww.starting.bid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_state,
+            { "State", "woww.state",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_stationery,
+            { "Stationery", "woww.stationery",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_status,
+            { "Status", "woww.status",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_status_id,
+            { "Status Id", "woww.status.id",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_status_id_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_strength,
+            { "Strength", "woww.strength",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_string,
+            { "String", "woww.string",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sub_name,
+            { "Sub Name", "woww.sub.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_subject,
+            { "Subject", "woww.subject",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_suggestion,
+            { "Suggestion", "woww.suggestion",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_summoner_guid,
+            { "Summoner Guid", "woww.summoner.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_survey_id,
+            { "Survey Id", "woww.survey.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_swap_with_name,
+            { "Swap With Name", "woww.swap.with.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_swimming_speed,
+            { "Swimming Speed", "woww.swimming.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_talent_id,
+            { "Talent Id", "woww.talent.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_talent_point_cost,
+            { "Talent Point Cost", "woww.talent.point.cost",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_talent_reset_cost,
+            { "Talent Reset Cost", "woww.talent.reset.cost",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_target,
+            { "Target", "woww.target",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_target_error,
+            { "Target Error", "woww.target.error",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_target_guid,
+            { "Target Guid", "woww.target.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_target_player,
+            { "Target Player", "woww.target.player",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_target_player_guid,
+            { "Target Player Guid", "woww.target.player.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_target_string,
+            { "Target String", "woww.target.string",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_targets,
+            { "Targets", "woww.targets",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_taxi_mask_node_known,
+            { "Taxi Mask Node Known", "woww.taxi.mask.node.known",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_text,
+            { "Text", "woww.text",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_text_emote,
+            { "Text Emote", "woww.text.emote",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_text_id,
+            { "Text Id", "woww.text.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_texts,
+            { "Texts", "woww.texts",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_this_week_honor,
+            { "This Week Honor", "woww.this.week.honor",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_this_week_honorable,
+            { "This Week Honorable", "woww.this.week.honorable",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time,
+            { "Time", "woww.time",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_in_msec,
+            { "Time In Msec", "woww.time.in.msec",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_in_msecs,
+            { "Time In Msecs", "woww.time.in.msecs",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_in_queue_in_ms,
+            { "Time In Queue In Ms", "woww.time.in.queue.in.ms",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_in_seconds,
+            { "Time In Seconds", "woww.time.in.seconds",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_left,
+            { "Time Left", "woww.time.left",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_left_in_msecs,
+            { "Time Left In Msecs", "woww.time.left.in.msecs",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_passed,
+            { "Time Passed", "woww.time.passed",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_remaining,
+            { "Time Remaining", "woww.time.remaining",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_to_bg_autoleave_in_ms,
+            { "Time To Bg Autoleave In Ms", "woww.time.to.bg.autoleave.in.ms",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_to_bg_start_in_ms,
+            { "Time To Bg Start In Ms", "woww.time.to.bg.start.in.ms",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_to_remove_in_queue_in_ms,
+            { "Time To Remove In Queue In Ms", "woww.time.to.remove.in.queue.in.ms",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_timer,
+            { "Timer", "woww.timer",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_timer_type,
+            { "Timer Type", "woww.timer.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_timer_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_timescale,
+            { "Timescale", "woww.timescale",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_timestamp,
+            { "Timestamp", "woww.timestamp",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_title,
+            { "Title", "woww.title",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_title_text_id,
+            { "Title Text Id", "woww.title.text.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_today_honorable_and_dishonorable,
+            { "Today Honorable And Dishonorable", "woww.today.honorable.and.dishonorable",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_todo_amount_of_signers,
+            { "Todo Amount Of Signers", "woww.todo.amount.of.signers",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_total_amount_of_auctions,
+            { "Total Amount Of Auctions", "woww.total.amount.of.auctions",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_total_cost,
+            { "Total Cost", "woww.total.cost",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_total_damage,
+            { "Total Damage", "woww.total.damage",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_total_exp,
+            { "Total Exp", "woww.total.exp",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_total_played_time,
+            { "Total Played Time", "woww.total.played.time",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_trade_slot,
+            { "Trade Slot", "woww.trade.slot",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_trade_slot_count,
+            { "Trade Slot Count", "woww.trade.slot.count",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_trade_slot_number,
+            { "Trade Slot Number", "woww.trade.slot.number",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_trade_status,
+            { "Trade Status", "woww.trade.status",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_trade_status_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_trainer_spell_state,
+            { "Trainer Spell State", "woww.trainer.spell.state",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_trainer_spell_state_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_trainer_type,
+            { "Trainer Type", "woww.trainer.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_training_failure_reason,
+            { "Training Failure Reason", "woww.training.failure.reason",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_training_failure_reason_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_transfer_abort_reason,
+            { "Transfer Abort Reason", "woww.transfer.abort.reason",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_transfer_abort_reason_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_transport,
+            { "Transport", "woww.transport",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_transport_progress_in_ms,
+            { "Transport Progress In Ms", "woww.transport.progress.in.ms",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_trigger_id,
+            { "Trigger Id", "woww.trigger.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_turn_rate,
+            { "Turn Rate", "woww.turn.rate",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_tutorial_data,
+            { "Tutorial Data", "woww.tutorial.data",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_tutorial_flag,
+            { "Tutorial Flag", "woww.tutorial.flag",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_type_flags,
+            { "Type Flags", "woww.type.flags",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unimplemented,
+            { "Unimplemented", "woww.unimplemented",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unit_enemy_target,
+            { "Unit Enemy Target", "woww.unit.enemy.target",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unit_stand_state,
+            { "Unit Stand State", "woww.unit.stand.state",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_unit_stand_state_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unit_target,
+            { "Unit Target", "woww.unit.target",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unknown_bytes,
+            { "Unknown Bytes", "woww.unknown.bytes",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unknown_flags,
+            { "Unknown Flags", "woww.unknown.flags",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unknown_float,
+            { "Unknown Float", "woww.unknown.float",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unknown_guid,
+            { "Unknown Guid", "woww.unknown.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unknown_int,
+            { "Unknown Int", "woww.unknown.int",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unread_mails,
+            { "Unread Mails", "woww.unread.mails",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_unused,
+            { "Unused", "woww.unused",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_update_flag,
+            { "Update Flag", "woww.update.flag",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_update_type,
+            { "Update Type", "woww.update.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_update_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_usable,
+            { "Usable", "woww.usable",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_username,
+            { "Username", "woww.username",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_v_cos,
+            { "V Cos", "woww.v.cos",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_v_sin,
+            { "V Sin", "woww.v.sin",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_value,
+            { "Value", "woww.value",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_vendor,
+            { "Vendor", "woww.vendor",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_vendor_guid,
+            { "Vendor Guid", "woww.vendor.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_vendor_slot,
+            { "Vendor Slot", "woww.vendor.slot",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_vertical_speed,
+            { "Vertical Speed", "woww.vertical.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_victim,
+            { "Victim", "woww.victim",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_victim_guid,
+            { "Victim Guid", "woww.victim.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_walking_speed,
+            { "Walking Speed", "woww.walking.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_weather_change_type,
+            { "Weather Change Type", "woww.weather.change.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_weather_change_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_weather_type,
+            { "Weather Type", "woww.weather.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_weather_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_will_accept_tickets,
+            { "Will Accept Tickets", "woww.will.accept.tickets",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_winning_player_guid,
+            { "Winning Player Guid", "woww.winning.player.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_winning_roll,
+            { "Winning Roll", "woww.winning.roll",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_wiping_npc,
+            { "Wiping Npc", "woww.wiping.npc",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_won,
+            { "Won", "woww.won",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_world_result,
+            { "World Result", "woww.world.result",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_world_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_x,
+            { "X", "woww.x",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_xy_speed,
+            { "Xy Speed", "woww.xy.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_y,
+            { "Y", "woww.y",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_yesterday_honor,
+            { "Yesterday Honor", "woww.yesterday.honor",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_yesterday_honorable,
+            { "Yesterday Honorable", "woww.yesterday.honorable",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_z,
+            { "Z", "woww.z",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_z_speed,
+            { "Z Speed", "woww.z.speed",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_zone_id,
+            { "Zone Id", "woww.zone.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_zone_or_sort,
+            { "Zone Or Sort", "woww.zone.or.sort",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_zones,
+            { "Zones", "woww.zones",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },

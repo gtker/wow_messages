@@ -1,6 +1,5 @@
 #![allow(clippy::too_many_arguments)]
 
-use std::env;
 use std::path::Path;
 
 use doc_printer::container::print_docs_for_container;
@@ -77,10 +76,7 @@ fn main() {
     load_files(&wowm_directory("unimplemented"), &mut o);
     //load_files(&wowm_directory("test"), &mut o);
 
-    if let Ok(path) = env::var("WOWM_WIRESHARK") {
-        wireshark_printer::print_wireshark(&o, &path);
-        return;
-    }
+    wireshark_printer::print_wireshark(&o);
 
     let mut m = ModFiles::new();
 
