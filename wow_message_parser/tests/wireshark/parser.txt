@@ -175,22 +175,22 @@
             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellCastTargets");
             ptvcursor_add_ret_uint(ptv, hf_woww_spell_cast_target_flags, 2, ENC_LITTLE_ENDIAN, &target_flags);
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT_ENEMY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_GAMEOBJECT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_LOCKED) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_ITEM) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_SOURCE_LOCATION) {
                 ptvcursor_add(ptv, hf_woww_source_position_x, 4, ENC_LITTLE_ENDIAN);
@@ -206,10 +206,10 @@
                 add_cstring(ptv, &hf_woww_target_string);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ALLY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ENEMY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             ptvcursor_pop_subtree(ptv);
             break;
@@ -334,7 +334,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -373,7 +373,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -412,7 +412,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -452,7 +452,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -492,7 +492,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -532,7 +532,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -572,7 +572,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -612,7 +612,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -866,7 +866,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -905,7 +905,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -945,7 +945,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -985,7 +985,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1023,7 +1023,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1068,7 +1068,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1113,7 +1113,7 @@
             ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
             if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1452,22 +1452,22 @@
             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellCastTargets");
             ptvcursor_add_ret_uint(ptv, hf_woww_spell_cast_target_flags, 2, ENC_LITTLE_ENDIAN, &target_flags);
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT_ENEMY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_GAMEOBJECT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_LOCKED) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_ITEM) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_SOURCE_LOCATION) {
                 ptvcursor_add(ptv, hf_woww_source_position_x, 4, ENC_LITTLE_ENDIAN);
@@ -1483,10 +1483,10 @@
                 add_cstring(ptv, &hf_woww_target_string);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ALLY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ENEMY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             ptvcursor_pop_subtree(ptv);
             break;
@@ -1635,7 +1635,7 @@
             break;
         case MSG_MOVE_FALL_LAND:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -1647,7 +1647,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1684,7 +1684,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1712,7 +1712,7 @@
             break;
         case MSG_MOVE_HEARTBEAT:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -1724,7 +1724,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1761,7 +1761,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1789,7 +1789,7 @@
             break;
         case MSG_MOVE_JUMP:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -1801,7 +1801,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1838,7 +1838,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1866,7 +1866,7 @@
             break;
         case MSG_MOVE_SET_FACING:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -1878,7 +1878,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1915,7 +1915,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1943,7 +1943,7 @@
             break;
         case MSG_MOVE_SET_PITCH:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -1955,7 +1955,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -1992,7 +1992,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2020,7 +2020,7 @@
             break;
         case MSG_MOVE_SET_RUN_MODE:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2032,7 +2032,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2069,7 +2069,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2097,7 +2097,7 @@
             break;
         case MSG_MOVE_SET_WALK_MODE:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2109,7 +2109,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2146,7 +2146,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2174,7 +2174,7 @@
             break;
         case MSG_MOVE_START_BACKWARD:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2186,7 +2186,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2223,7 +2223,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2251,7 +2251,7 @@
             break;
         case MSG_MOVE_START_FORWARD:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2263,7 +2263,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2300,7 +2300,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2328,7 +2328,7 @@
             break;
         case MSG_MOVE_START_PITCH_DOWN:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2340,7 +2340,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2377,7 +2377,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2405,7 +2405,7 @@
             break;
         case MSG_MOVE_START_PITCH_UP:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2417,7 +2417,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2454,7 +2454,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2482,7 +2482,7 @@
             break;
         case MSG_MOVE_START_STRAFE_LEFT:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2494,7 +2494,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2531,7 +2531,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2559,7 +2559,7 @@
             break;
         case MSG_MOVE_START_STRAFE_RIGHT:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2571,7 +2571,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2608,7 +2608,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2636,7 +2636,7 @@
             break;
         case MSG_MOVE_START_SWIM:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2648,7 +2648,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2685,7 +2685,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2713,7 +2713,7 @@
             break;
         case MSG_MOVE_START_TURN_LEFT:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2725,7 +2725,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2762,7 +2762,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2790,7 +2790,7 @@
             break;
         case MSG_MOVE_START_TURN_RIGHT:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2802,7 +2802,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2839,7 +2839,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2867,7 +2867,7 @@
             break;
         case MSG_MOVE_STOP_PITCH:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2879,7 +2879,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2916,7 +2916,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2944,7 +2944,7 @@
             break;
         case MSG_MOVE_STOP_STRAFE:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -2956,7 +2956,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -2993,7 +2993,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -3021,7 +3021,7 @@
             break;
         case MSG_MOVE_STOP_SWIM:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -3033,7 +3033,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -3070,7 +3070,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -3098,7 +3098,7 @@
             break;
         case MSG_MOVE_STOP:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -3110,7 +3110,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -3147,7 +3147,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -3175,7 +3175,7 @@
             break;
         case MSG_MOVE_STOP_TURN:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
                 ptvcursor_add(ptv, hf_woww_timestamp, 4, ENC_LITTLE_ENDIAN);
@@ -3187,7 +3187,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -3224,7 +3224,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -3252,7 +3252,7 @@
             break;
         case MSG_MOVE_TELEPORT_ACK:
             if (WOWW_SERVER_TO_CLIENT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
                 ptvcursor_add(ptv, hf_woww_movement_counter, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");
                 ptvcursor_add_ret_uint(ptv, hf_woww_movement_flags, 4, ENC_LITTLE_ENDIAN, &flags);
@@ -3265,7 +3265,7 @@
                 ptvcursor_add(ptv, hf_woww_orientation, 4, ENC_LITTLE_ENDIAN);
                 if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -3446,8 +3446,8 @@
             break;
         case SMSG_ATTACKERSTATEUPDATE:
             ptvcursor_add(ptv, hf_woww_hit_info, 4, ENC_LITTLE_ENDIAN);
-            add_packed_guid(ptv, pinfo, tree);
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_total_damage, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_ATTACKSTART:
@@ -3455,8 +3455,8 @@
             ptvcursor_add(ptv, hf_woww_victim_guid, 8, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_ATTACKSTOP:
-            add_packed_guid(ptv, pinfo, tree);
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_AUCTION_BIDDER_LIST_RESULT:
@@ -3724,7 +3724,7 @@
             ptvcursor_add(ptv, hf_woww_target_guid, 8, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_CLIENT_CONTROL_UPDATE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_allow_movement, 1, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_COMPRESSED_MOVES:
@@ -3832,32 +3832,32 @@
             ptvcursor_add(ptv, hf_woww_counter, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_FORCE_RUN_BACK_SPEED_CHANGE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_move_event, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_FORCE_RUN_SPEED_CHANGE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_move_event, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_FORCE_SWIM_BACK_SPEED_CHANGE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_move_event, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_FORCE_SWIM_SPEED_CHANGE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_move_event, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_FORCE_TURN_RATE_CHANGE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_move_event, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_FORCE_WALK_SPEED_CHANGE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_move_event, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
@@ -4415,7 +4415,7 @@
             ptvcursor_add(ptv, hf_woww_player_chat_tag, 1, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MONSTER_MOVE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
             ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -4425,7 +4425,7 @@
             ptvcursor_add(ptv, hf_woww_monster_move_type, 1, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MONSTER_MOVE_TRANSPORT:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
             ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -4441,11 +4441,11 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MOVE_FEATHER_FALL:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_counter, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MOVE_KNOCK_BACK:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_movement_counter, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_v_cos, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_v_sin, 4, ENC_LITTLE_ENDIAN);
@@ -4453,23 +4453,23 @@
             ptvcursor_add(ptv, hf_woww_vertical_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MOVE_LAND_WALK:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_counter, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MOVE_NORMAL_FALL:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_counter, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MOVE_SET_HOVER:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_counter, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MOVE_UNSET_HOVER:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_counter, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MOVE_WATER_WALK:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_counter, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_NAME_QUERY_RESPONSE:
@@ -4529,7 +4529,7 @@
             ptvcursor_add(ptv, hf_woww_party_result, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_PARTY_MEMBER_STATS:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add_ret_uint(ptv, hf_woww_group_update_flags, 4, ENC_LITTLE_ENDIAN, &mask);
             if (mask & GROUP_UPDATE_FLAGS_FLAG_STATUS) {
                 ptvcursor_add(ptv, hf_woww_group_member_online_status, 1, ENC_LITTLE_ENDIAN);
@@ -4586,7 +4586,7 @@
             }
             break;
         case SMSG_PARTY_MEMBER_STATS_FULL:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add_ret_uint(ptv, hf_woww_group_update_flags, 4, ENC_LITTLE_ENDIAN, &mask);
             if (mask & GROUP_UPDATE_FLAGS_FLAG_STATUS) {
                 ptvcursor_add(ptv, hf_woww_group_member_online_status, 1, ENC_LITTLE_ENDIAN);
@@ -4647,8 +4647,8 @@
             ptvcursor_add(ptv, hf_woww_is_frozen, 1, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_PERIODICAURALOG:
-            add_packed_guid(ptv, pinfo, tree);
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_auras, 4, ENC_LITTLE_ENDIAN, &amount_of_auras);
             for (i = 0; i < amount_of_auras; ++i) {
@@ -5147,15 +5147,15 @@
             }
             break;
         case SMSG_SPELLENERGIZELOG:
-            add_packed_guid(ptv, pinfo, tree);
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_power_type, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_damage, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPELLHEALLOG:
-            add_packed_guid(ptv, pinfo, tree);
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_damage, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_critical, 1, ENC_NA);
@@ -5165,7 +5165,7 @@
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPELLLOGEXECUTE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_effects, 4, ENC_LITTLE_ENDIAN, &amount_of_effects);
             for (i = 0; i < amount_of_effects; ++i) {
@@ -5231,8 +5231,8 @@
             }
             break;
         case SMSG_SPELLNONMELEEDAMAGELOG:
-            add_packed_guid(ptv, pinfo, tree);
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_damage, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_spell_school, 1, ENC_LITTLE_ENDIAN);
@@ -5274,8 +5274,8 @@
             ptvcursor_add(ptv, hf_woww_spell_cast_result, 1, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPELL_GO:
-            add_packed_guid(ptv, pinfo, tree);
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_cast_flags, 2, ENC_LITTLE_ENDIAN, &flags);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_hits, 1, ENC_LITTLE_ENDIAN, &amount_of_hits);
@@ -5292,22 +5292,22 @@
             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellCastTargets");
             ptvcursor_add_ret_uint(ptv, hf_woww_spell_cast_target_flags, 2, ENC_LITTLE_ENDIAN, &target_flags);
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT_ENEMY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_GAMEOBJECT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_LOCKED) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_ITEM) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_SOURCE_LOCATION) {
                 ptvcursor_add(ptv, hf_woww_source_position_x, 4, ENC_LITTLE_ENDIAN);
@@ -5323,10 +5323,10 @@
                 add_cstring(ptv, &hf_woww_target_string);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ALLY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ENEMY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             ptvcursor_pop_subtree(ptv);
             if (flags & CAST_FLAGS_AMMO) {
@@ -5335,30 +5335,30 @@
             }
             break;
         case SMSG_SPELL_START:
-            add_packed_guid(ptv, pinfo, tree);
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_cast_flags, 2, ENC_LITTLE_ENDIAN, &flags);
             ptvcursor_add(ptv, hf_woww_timer, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellCastTargets");
             ptvcursor_add_ret_uint(ptv, hf_woww_spell_cast_target_flags, 2, ENC_LITTLE_ENDIAN, &target_flags);
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT_ENEMY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_GAMEOBJECT) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_LOCKED) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_ITEM) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_SOURCE_LOCATION) {
                 ptvcursor_add(ptv, hf_woww_source_position_x, 4, ENC_LITTLE_ENDIAN);
@@ -5374,10 +5374,10 @@
                 add_cstring(ptv, &hf_woww_target_string);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ALLY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ENEMY) {
-                add_packed_guid(ptv, pinfo, tree);
+                add_packed_guid(ptv, pinfo);
             }
             ptvcursor_pop_subtree(ptv);
             if (flags & CAST_FLAGS_AMMO) {
@@ -5397,63 +5397,63 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPLINE_MOVE_FEATHER_FALL:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_LAND_WALK:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_NORMAL_FALL:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_ROOT:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPLINE_MOVE_SET_HOVER:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_SET_RUN_MODE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_SET_WALK_MODE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_START_SWIM:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_STOP_SWIM:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_UNROOT:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_UNSET_HOVER:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_MOVE_WATER_WALK:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             break;
         case SMSG_SPLINE_SET_RUN_BACK_SPEED:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPLINE_SET_RUN_SPEED:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPLINE_SET_SWIM_BACK_SPEED:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPLINE_SET_SWIM_SPEED:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPLINE_SET_TURN_RATE:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPLINE_SET_WALK_SPEED:
-            add_packed_guid(ptv, pinfo, tree);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_speed, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_STABLE_RESULT:
@@ -5603,10 +5603,10 @@
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Object");
                 ptvcursor_add_ret_uint(ptv, hf_woww_update_type, 1, ENC_LITTLE_ENDIAN, &update_type);
                 if (update_type == UPDATE_TYPE_VALUES) {
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                 }
                 else if (update_type == UPDATE_TYPE_MOVEMENT) {
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementBlock");
                     ptvcursor_add_ret_uint(ptv, hf_woww_update_flag, 1, ENC_LITTLE_ENDIAN, &update_flag);
                     if (update_flag & UPDATE_FLAG_LIVING) {
@@ -5620,7 +5620,7 @@
                         ptvcursor_add(ptv, hf_woww_living_orientation, 4, ENC_LITTLE_ENDIAN);
                         if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                            add_packed_guid(ptv, pinfo, tree);
+                            add_packed_guid(ptv, pinfo);
                             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                             ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                             ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -5697,7 +5697,7 @@
                         ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
                     }
                     if (update_flag & UPDATE_FLAG_MELEE_ATTACKING) {
-                        add_packed_guid(ptv, pinfo, tree);
+                        add_packed_guid(ptv, pinfo);
                     }
                     if (update_flag & UPDATE_FLAG_TRANSPORT) {
                         ptvcursor_add(ptv, hf_woww_transport_progress_in_ms, 4, ENC_LITTLE_ENDIAN);
@@ -5706,7 +5706,7 @@
                 }
                 else if (update_type == UPDATE_TYPE_CREATE_OBJECT
                  || update_type == UPDATE_TYPE_CREATE_OBJECT2) {
-                    add_packed_guid(ptv, pinfo, tree);
+                    add_packed_guid(ptv, pinfo);
                     ptvcursor_add(ptv, hf_woww_object_type, 1, ENC_LITTLE_ENDIAN);
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementBlock");
                     ptvcursor_add_ret_uint(ptv, hf_woww_update_flag, 1, ENC_LITTLE_ENDIAN, &update_flag);
@@ -5721,7 +5721,7 @@
                         ptvcursor_add(ptv, hf_woww_living_orientation, 4, ENC_LITTLE_ENDIAN);
                         if (flags & MOVEMENT_FLAGS_ON_TRANSPORT) {
                             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TransportInfo");
-                            add_packed_guid(ptv, pinfo, tree);
+                            add_packed_guid(ptv, pinfo);
                             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d");
                             ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                             ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
@@ -5798,7 +5798,7 @@
                         ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
                     }
                     if (update_flag & UPDATE_FLAG_MELEE_ATTACKING) {
-                        add_packed_guid(ptv, pinfo, tree);
+                        add_packed_guid(ptv, pinfo);
                     }
                     if (update_flag & UPDATE_FLAG_TRANSPORT) {
                         ptvcursor_add(ptv, hf_woww_transport_progress_in_ms, 4, ENC_LITTLE_ENDIAN);
@@ -5809,7 +5809,7 @@
                  || update_type == UPDATE_TYPE_NEAR_OBJECTS) {
                     ptvcursor_add_ret_uint(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN, &count);
                     for (i = 0; i < count; ++i) {
-                        add_packed_guid(ptv, pinfo, tree);
+                        add_packed_guid(ptv, pinfo);
                     }
                 }
                 ptvcursor_pop_subtree(ptv);

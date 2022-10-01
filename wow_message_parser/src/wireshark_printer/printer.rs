@@ -373,7 +373,7 @@ fn print_definition(
                     print_cstring(s, w);
                 }
                 ArrayType::PackedGuid => {
-                    s.wln("add_packed_guid(ptv, pinfo, tree);");
+                    s.wln("add_packed_guid(ptv, pinfo);");
                 }
             }
 
@@ -382,7 +382,7 @@ fn print_definition(
             true
         }
         Type::PackedGuid => {
-            s.wln("add_packed_guid(ptv, pinfo, tree);");
+            s.wln("add_packed_guid(ptv, pinfo);");
             true
         }
         Type::UpdateMask | Type::AuraMask => false,
