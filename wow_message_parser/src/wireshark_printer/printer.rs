@@ -301,6 +301,24 @@ fn print_definition(
             true
         }
         Type::Array(array) => {
+            if array.is_byte_array() {
+                let len = match array.size() {
+                    ArraySize::Fixed(v) => v.to_string(),
+                    ArraySize::Variable(v) => v,
+                    ArraySize::Endless => {
+                        s.wln("len = offset_packet_end - ptvcursor_current_offset(ptv);");
+                        "len".to_string()
+                    }
+                };
+
+                s.wln(format!(
+                    "ptvcursor_add(ptv, {hf}, {len}, ENC_NA);",
+                    hf = w.unwrap().name()
+                ));
+
+                return true;
+            }
+
             match array.size() {
                 ArraySize::Fixed(f) => {
                     s.open_curly(format!("for (i = 0; i < {}; ++i)", f));

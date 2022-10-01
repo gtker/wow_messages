@@ -79,9 +79,10 @@
             ptvcursor_add(ptv, hf_woww_server_id, 4, ENC_LITTLE_ENDIAN);
             add_cstring(ptv, &hf_woww_username);
             ptvcursor_add(ptv, hf_woww_client_seed, 4, ENC_LITTLE_ENDIAN);
-            for (i = 0; i < 20; ++i) {
-                ptvcursor_add(ptv, hf_woww_client_proof, 1, ENC_LITTLE_ENDIAN);
-            }
+            ptvcursor_add(ptv, hf_woww_client_proof, 20, ENC_NA);
+            ptvcursor_add(ptv, hf_woww_decompressed_addon_info_size, 4, ENC_LITTLE_ENDIAN);
+            len = offset_packet_end - ptvcursor_current_offset(ptv);
+            ptvcursor_add(ptv, hf_woww_compressed_addon_info, len, ENC_NA);
             break;
         case CMSG_AUTOBANK_ITEM:
             ptvcursor_add(ptv, hf_woww_bag_index, 1, ENC_LITTLE_ENDIAN);
@@ -670,9 +671,7 @@
                 ptvcursor_add(ptv, hf_woww_chat_data_line_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_chat_data_size_uncompressed, 4, ENC_LITTLE_ENDIAN);
                 len = offset_packet_end - ptvcursor_current_offset(ptv);
-                for (i = 0; i < len; ++i) {
-                    ptvcursor_add(ptv, hf_woww_compressed_chat_data, 1, ENC_LITTLE_ENDIAN);
-                }
+                ptvcursor_add(ptv, hf_woww_compressed_chat_data, len, ENC_NA);
             }
             break;
         case CMSG_GMTICKET_UPDATETEXT:
@@ -1430,9 +1429,7 @@
             ptvcursor_add(ptv, hf_woww_data_type, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
-                ptvcursor_add(ptv, hf_woww_unknown_bytes, 1, ENC_LITTLE_ENDIAN);
-            }
+            ptvcursor_add(ptv, hf_woww_unknown_bytes, len, ENC_NA);
             break;
         case CMSG_USE_ITEM:
             ptvcursor_add(ptv, hf_woww_bag_index, 1, ENC_LITTLE_ENDIAN);
@@ -1481,9 +1478,7 @@
             break;
         case CMSG_WARDEN_DATA:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
-                ptvcursor_add(ptv, hf_woww_unimplemented, 1, ENC_LITTLE_ENDIAN);
-            }
+            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
             break;
         case CMSG_WHO:
             ptvcursor_add(ptv, hf_woww_minimum_level, 4, ENC_LITTLE_ENDIAN);
@@ -3408,9 +3403,7 @@
             break;
         case SMSG_ADDON_INFO:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
-                ptvcursor_add(ptv, hf_woww_unimplemented, 1, ENC_LITTLE_ENDIAN);
-            }
+            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
             break;
         case SMSG_AI_REACTION:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
@@ -3470,9 +3463,7 @@
             break;
         case SMSG_AUCTION_COMMAND_RESULT:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
-                ptvcursor_add(ptv, hf_woww_unimplemented, 1, ENC_LITTLE_ENDIAN);
-            }
+            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
             break;
         case SMSG_AUCTION_LIST_RESULT:
             ptvcursor_add_ret_uint(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN, &count);
@@ -3704,15 +3695,11 @@
             break;
         case SMSG_COMPRESSED_MOVES:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
-                ptvcursor_add(ptv, hf_woww_unimplemented, 1, ENC_LITTLE_ENDIAN);
-            }
+            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
             break;
         case SMSG_COMPRESSED_UPDATE_OBJECT:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
-                ptvcursor_add(ptv, hf_woww_unimplemented, 1, ENC_LITTLE_ENDIAN);
-            }
+            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
             break;
         case SMSG_COOLDOWN_EVENT:
             ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
@@ -4832,9 +4819,7 @@
             break;
         case SMSG_SEND_MAIL_RESULT:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
-                ptvcursor_add(ptv, hf_woww_unimplemented, 1, ENC_LITTLE_ENDIAN);
-            }
+            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
             break;
         case SMSG_SERVER_MESSAGE:
             ptvcursor_add(ptv, hf_woww_server_message_type, 4, ENC_LITTLE_ENDIAN);
@@ -5524,9 +5509,7 @@
             break;
         case SMSG_WARDEN_DATA:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
-                ptvcursor_add(ptv, hf_woww_unimplemented, 1, ENC_LITTLE_ENDIAN);
-            }
+            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
             break;
         case SMSG_WEATHER:
             ptvcursor_add(ptv, hf_woww_weather_type, 4, ENC_LITTLE_ENDIAN);

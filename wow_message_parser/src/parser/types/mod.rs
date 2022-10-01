@@ -296,6 +296,10 @@ impl Array {
         }
     }
 
+    pub fn is_byte_array(&self) -> bool {
+        matches!(self.ty(), ArrayType::Integer(IntegerType::U8))
+    }
+
     pub fn is_constant_sized_u8_array(&self) -> bool {
         match &self.size() {
             ArraySize::Fixed(_) => matches!(&self.ty(), ArrayType::Integer(IntegerType::U8)),
