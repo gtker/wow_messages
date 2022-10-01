@@ -368,7 +368,7 @@ fn print_definition(
 
             s.closing_curly();
 
-            false
+            true
         }
         Type::PackedGuid => {
             s.wln("add_packed_guid(ptv, pinfo, tree);");
