@@ -392,11 +392,13 @@ fn print_identifier(
     let e = o.get_object(identifier, tags);
     match e {
         Object::Container(e) => {
+            s.wln(format!("ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, \"{}\");", e.name()));
             for m in e.fields() {
                 if !print_member(s, m, &e, wo, e.tags(), o, variables) {
                     return false;
                 }
             }
+            s.wln("ptvcursor_pop_subtree(ptv);");
 
             true
         }
