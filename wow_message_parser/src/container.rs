@@ -1069,10 +1069,7 @@ impl Container {
                 Type::Bool => {}
             },
             StructMember::IfStatement(statement) => {
-                for m in &statement.members {
-                    self.set_value_used_as_sizes(m);
-                }
-                for m in &statement.else_statement_members {
+                for m in statement.all_members() {
                     self.set_value_used_as_sizes(m);
                 }
             }

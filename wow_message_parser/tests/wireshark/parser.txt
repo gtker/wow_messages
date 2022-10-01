@@ -5807,7 +5807,7 @@
                 }
                 else if (update_type == UPDATE_TYPE_OUT_OF_RANGE_OBJECTS
                  || update_type == UPDATE_TYPE_NEAR_OBJECTS) {
-                    ptvcursor_add(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add_ret_uint(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN, &count);
                     for (i = 0; i < count; ++i) {
                         add_packed_guid(ptv, pinfo, tree);
                     }

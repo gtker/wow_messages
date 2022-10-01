@@ -104,11 +104,10 @@ impl Object {
 
             }
             Object_UpdateType::OutOfRangeObjects {
-                count,
                 guids,
             } => {
                 // count: u32
-                w.write_all(&count.to_le_bytes())?;
+                w.write_all(&(guids.len() as u32).to_le_bytes())?;
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
@@ -117,11 +116,10 @@ impl Object {
 
             }
             Object_UpdateType::NearObjects {
-                count,
                 guids,
             } => {
                 // count: u32
-                w.write_all(&count.to_le_bytes())?;
+                w.write_all(&(guids.len() as u32).to_le_bytes())?;
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
@@ -216,7 +214,6 @@ impl Object {
                 }
 
                 Object_UpdateType::OutOfRangeObjects {
-                    count,
                     guids,
                 }
             }
@@ -231,7 +228,6 @@ impl Object {
                 }
 
                 Object_UpdateType::NearObjects {
-                    count,
                     guids,
                 }
             }
@@ -273,11 +269,9 @@ pub enum Object_UpdateType {
         object_type: ObjectType,
     },
     OutOfRangeObjects {
-        count: u32,
         guids: Vec<Guid>,
     },
     NearObjects {
-        count: u32,
         guids: Vec<Guid>,
     },
 }
@@ -350,7 +344,6 @@ impl Object_UpdateType {
                 + 1 // object_type: ObjectType
             }
             Self::OutOfRangeObjects {
-                count,
                 guids,
             } => {
                 1
@@ -358,7 +351,6 @@ impl Object_UpdateType {
                 + guids.iter().fold(0, |acc, x| acc + x.size()) // guids: PackedGuid[count]
             }
             Self::NearObjects {
-                count,
                 guids,
             } => {
                 1
