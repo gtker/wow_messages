@@ -301,16 +301,16 @@ fn print_definition(
             true
         }
         Type::Array(array) => {
-            if array.is_byte_array() {
-                let len = match array.size() {
-                    ArraySize::Fixed(v) => v.to_string(),
-                    ArraySize::Variable(v) => v,
-                    ArraySize::Endless => {
-                        s.wln("len = offset_packet_end - ptvcursor_current_offset(ptv);");
-                        "len".to_string()
-                    }
-                };
+            let len = match array.size() {
+                ArraySize::Fixed(v) => v.to_string(),
+                ArraySize::Variable(v) => v,
+                ArraySize::Endless => {
+                    s.wln("len = offset_packet_end - ptvcursor_current_offset(ptv);");
+                    "len".to_string()
+                }
+            };
 
+            if array.is_byte_array() {
                 s.wln(format!(
                     "ptvcursor_add(ptv, {hf}, {len}, ENC_NA);",
                     hf = w.unwrap().name()
@@ -319,18 +319,8 @@ fn print_definition(
                 return true;
             }
 
-            match array.size() {
-                ArraySize::Fixed(f) => {
-                    s.open_curly(format!("for (i = 0; i < {}; ++i)", f));
-                }
-                ArraySize::Variable(v) => {
-                    s.open_curly(format!("for (i = 0; i < {}; ++i)", v));
-                }
-                ArraySize::Endless => {
-                    s.wln("len = offset_packet_end - ptvcursor_current_offset(ptv);");
-                    s.open_curly(format!("for (i = 0; i < len; ++i)"));
-                }
-            }
+            s.open_curly(format!("for (i = 0; i < {len}; ++i)"));
+
             match array.ty() {
                 ArrayType::Integer(i) => {
                     let name = w.unwrap().name();
