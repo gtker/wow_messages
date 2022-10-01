@@ -718,6 +718,32 @@ impl Container {
         v
     }
 
+    pub fn all_definitions_mut(&mut self) -> Vec<&mut StructMemberDefinition> {
+        fn inner<'a>(m: &'a mut StructMember, v: &mut Vec<&'a mut StructMemberDefinition>) {
+            match m {
+                StructMember::Definition(d) => v.push(d),
+                StructMember::IfStatement(statement) => {
+                    for m in statement.all_members_mut() {
+                        inner(m, v);
+                    }
+                }
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members_mut() {
+                        inner(m, v);
+                    }
+                }
+            }
+        }
+
+        let mut v = Vec::new();
+
+        for m in self.fields_mut() {
+            inner(m, &mut v);
+        }
+
+        v
+    }
+
     pub fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
         fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
             match m {
@@ -1088,76 +1114,32 @@ impl Container {
     }
 
     pub fn set_used_in_if(&mut self) {
-        fn inner(m: &mut StructMember) -> Option<&str> {
+        let mut variables_used_in_if = Vec::new();
+
+        fn find_used_in_if(m: &StructMember, variables_used_in_if: &mut Vec<String>) {
             match m {
-                StructMember::Definition(_) => None,
+                StructMember::Definition(_) => {}
                 StructMember::IfStatement(statement) => {
-                    let mut used_in_if = Vec::new();
-                    for m in &mut statement.members {
-                        if let Some(name) = inner(m) {
-                            used_in_if.push(name.to_string());
-                        }
-                    }
-                    for m in &mut statement.members {
-                        set(m, &used_in_if);
-                    }
+                    variables_used_in_if.push(statement.name().to_string());
 
-                    let mut used_in_if = Vec::new();
-                    for ifs in &mut statement.else_ifs {
-                        for m in &mut ifs.members {
-                            if let Some(name) = inner(m) {
-                                used_in_if.push(name.to_string());
-                            }
-                        }
-                        for m in &mut ifs.members {
-                            set(m, &used_in_if);
-                        }
+                    for m in statement.all_members() {
+                        find_used_in_if(m, variables_used_in_if);
                     }
-
-                    let mut used_in_if = Vec::new();
-                    for m in &mut statement.else_statement_members {
-                        if let Some(name) = inner(m) {
-                            used_in_if.push(name.to_string());
-                        }
-                    }
-                    for m in &mut statement.else_statement_members {
-                        set(m, &used_in_if);
-                    }
-
-                    Some(statement.name())
                 }
                 StructMember::OptionalStatement(optional) => {
-                    let mut used_in_if = Vec::new();
-                    for m in &mut optional.members {
-                        if let Some(name) = inner(m) {
-                            used_in_if.push(name.to_string());
-                        }
+                    for m in optional.members() {
+                        find_used_in_if(m, variables_used_in_if);
                     }
-                    for m in &mut optional.members {
-                        set(m, &used_in_if);
-                    }
-                    None
                 }
             }
         }
-        let mut used_in_if = Vec::new();
 
-        for m in self.fields_mut() {
-            if let Some(name) = inner(m) {
-                used_in_if.push(name.to_string());
-            }
+        for m in self.fields() {
+            find_used_in_if(m, &mut variables_used_in_if);
         }
-        fn set(m: &mut StructMember, used_in_if: &[String]) {
-            match m {
-                StructMember::Definition(d) => {
-                    d.set_used_in_if(used_in_if.contains(&d.name().to_string()));
-                }
-                StructMember::IfStatement(_) => {}
-                StructMember::OptionalStatement(_) => {}
-            }
-        }
-        for m in self.fields_mut() {
-            set(m, &used_in_if);
+
+        for d in self.all_definitions_mut() {
+            d.set_used_in_if(variables_used_in_if.contains(&d.name().to_string()));
         }
     }
 
@@ -1314,6 +1296,10 @@ impl OptionalStatement {
 
     pub fn members(&self) -> &[StructMember] {
         &self.members
+    }
+
+    pub fn members_mut(&mut self) -> &mut [StructMember] {
+        &mut self.members
     }
 
     pub fn tags(&self) -> &Tags {
