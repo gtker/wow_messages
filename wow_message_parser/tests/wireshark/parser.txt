@@ -684,6 +684,10 @@
         case CMSG_GOSSIP_SELECT_OPTION:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_gossip_list_id, 4, ENC_LITTLE_ENDIAN);
+            len = offset_packet_end - ptvcursor_current_offset(ptv);
+            if (len > 0) {
+                add_cstring(ptv, &hf_woww_code);
+            }
             break;
         case CMSG_GROUP_ASSISTANT_LEADER:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
@@ -1215,6 +1219,11 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_position, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_data, 4, ENC_LITTLE_ENDIAN);
+            len = offset_packet_end - ptvcursor_current_offset(ptv);
+            if (len > 0) {
+                ptvcursor_add(ptv, hf_woww_position, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_data, 4, ENC_LITTLE_ENDIAN);
+            }
             break;
         case CMSG_PET_SPELL_AUTOCAST:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
@@ -1405,6 +1414,10 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_TOGGLE_PVP:
+            len = offset_packet_end - ptvcursor_current_offset(ptv);
+            if (len > 0) {
+                ptvcursor_add(ptv, hf_woww_enable_pvp, 1, ENC_NA);
+            }
             break;
         case CMSG_TRAINER_BUY_SPELL:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
@@ -3328,8 +3341,17 @@
             break;
         case MSG_RAID_READY_CHECK:
             if (WOWW_SERVER_TO_CLIENT) {
+                len = offset_packet_end - ptvcursor_current_offset(ptv);
+                if (len > 0) {
+                    ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_state, 1, ENC_LITTLE_ENDIAN);
+                }
             }
             else {
+                len = offset_packet_end - ptvcursor_current_offset(ptv);
+                if (len > 0) {
+                    ptvcursor_add(ptv, hf_woww_state, 1, ENC_LITTLE_ENDIAN);
+                }
             }
             break;
         case MSG_RAID_TARGET_UPDATE:
@@ -3722,6 +3744,23 @@
             break;
         case SMSG_CREATURE_QUERY_RESPONSE:
             ptvcursor_add(ptv, hf_woww_creature_entry, 4, ENC_LITTLE_ENDIAN);
+            len = offset_packet_end - ptvcursor_current_offset(ptv);
+            if (len > 0) {
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_sub_name);
+                ptvcursor_add(ptv, hf_woww_type_flags, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_creature_type, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_creature_family, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_creature_rank, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_spell_data_id, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_display_id, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_civilian, 1, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_racial_leader, 1, ENC_LITTLE_ENDIAN);
+            }
             break;
         case SMSG_DEFENSE_MESSAGE:
             ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);
@@ -3852,6 +3891,19 @@
             break;
         case SMSG_GAMEOBJECT_QUERY_RESPONSE:
             ptvcursor_add(ptv, hf_woww_entry_id, 4, ENC_LITTLE_ENDIAN);
+            len = offset_packet_end - ptvcursor_current_offset(ptv);
+            if (len > 0) {
+                ptvcursor_add(ptv, hf_woww_info_type, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_display_id, 4, ENC_LITTLE_ENDIAN);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                for (i = 0; i < 6; ++i) {
+                    ptvcursor_add(ptv, hf_woww_raw_data, 4, ENC_LITTLE_ENDIAN);
+                }
+            }
             break;
         case SMSG_GAMEOBJECT_RESET_STATE:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
@@ -3936,6 +3988,12 @@
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add(ptv, hf_woww_leader, 8, ENC_LITTLE_ENDIAN);
+            len = offset_packet_end - ptvcursor_current_offset(ptv);
+            if (len > 0) {
+                ptvcursor_add(ptv, hf_woww_group_loot_setting, 1, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_master_loot, 8, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_item_quality, 1, ENC_LITTLE_ENDIAN);
+            }
             break;
         case SMSG_GROUP_SET_LEADER:
             add_cstring(ptv, &hf_woww_name);
@@ -4077,6 +4135,85 @@
             break;
         case SMSG_ITEM_QUERY_SINGLE_RESPONSE:
             ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
+            len = offset_packet_end - ptvcursor_current_offset(ptv);
+            if (len > 0) {
+                ptvcursor_add(ptv, hf_woww_item_class, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_item_sub_class, 4, ENC_LITTLE_ENDIAN);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                add_cstring(ptv, &hf_woww_name);
+                ptvcursor_add(ptv, hf_woww_item_display_info, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_item_quality, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_flags, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_buy_price, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_sell_price, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_inventory_type, 1, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_allowed_class, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_allowed_race, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_item_level, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_required_level, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_required_skill, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_required_skill_rank, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_required_spell, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_required_honor_rank, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_required_city_rank, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_required_reputation_faction, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_required_reputation_rank, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_max_count, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_stackable, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_container_slots, 4, ENC_LITTLE_ENDIAN);
+                for (i = 0; i < 10; ++i) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemStat");
+                    ptvcursor_add(ptv, hf_woww_item_stat_type, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_item_stat_value, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_pop_subtree(ptv);
+                }
+                for (i = 0; i < 5; ++i) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemDamageType");
+                    ptvcursor_add(ptv, hf_woww_damage_minimum, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_damage_maximum, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_damage_type, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_pop_subtree(ptv);
+                }
+                ptvcursor_add(ptv, hf_woww_armor, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_holy_resistance, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_fire_resistance, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_nature_resistance, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_frost_resistance, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_shadow_resistance, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_arcane_resistance, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_delay, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_ammo_type, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_ranged_range_modification, 4, ENC_LITTLE_ENDIAN);
+                for (i = 0; i < 5; ++i) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemSpells");
+                    ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_spell_trigger, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_spell_charges, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_spell_ppm_rate, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_spell_cooldown, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_spell_category, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_spell_category_cooldown, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_pop_subtree(ptv);
+                }
+                ptvcursor_add(ptv, hf_woww_bonding, 4, ENC_LITTLE_ENDIAN);
+                add_cstring(ptv, &hf_woww_description);
+                ptvcursor_add(ptv, hf_woww_page_text, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_language_id, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_page_material, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_start_quest, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_lock_id, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_material, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_sheath, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_random_property, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_block, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_item_set, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_max_durability, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_area, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_bag_family, 4, ENC_LITTLE_ENDIAN);
+            }
             break;
         case SMSG_ITEM_TEXT_QUERY_RESPONSE:
             ptvcursor_add(ptv, hf_woww_item_text_id, 4, ENC_LITTLE_ENDIAN);
@@ -5432,6 +5569,11 @@
             break;
         case SMSG_TRANSFER_PENDING:
             ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);
+            len = offset_packet_end - ptvcursor_current_offset(ptv);
+            if (len > 0) {
+                ptvcursor_add(ptv, hf_woww_transport, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);
+            }
             break;
         case SMSG_TRIGGER_CINEMATIC:
             ptvcursor_add(ptv, hf_woww_cinematic_sequence_id, 4, ENC_LITTLE_ENDIAN);
