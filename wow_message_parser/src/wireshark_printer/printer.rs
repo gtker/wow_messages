@@ -66,7 +66,7 @@ fn print_variables(mut v: Vec<String>) -> Writer {
     v.dedup();
 
     for name in v {
-        s.wln(format!("guint32 {} = 0;", name));
+        s.wln(format!("    guint32 {} = 0;", name));
     }
 
     s
