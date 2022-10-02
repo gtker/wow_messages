@@ -141,7 +141,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.sell_price.to_le_bytes())?;
 
             // inventory_type: InventoryType
-            w.write_all(&(v.inventory_type.as_int() as u8).to_le_bytes())?;
+            w.write_all(&(v.inventory_type.as_int() as u32).to_le_bytes())?;
 
             // allowed_class: u32
             w.write_all(&v.allowed_class.to_le_bytes())?;
@@ -333,7 +333,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let sell_price = crate::util::read_u32_le(r)?;
 
             // inventory_type: InventoryType
-            let inventory_type: InventoryType = crate::util::read_u8_le(r)?.try_into()?;
+            let inventory_type: InventoryType = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             // allowed_class: u32
             let allowed_class = crate::util::read_u32_le(r)?;
@@ -559,7 +559,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // flags: u32
             + 4 // buy_price: u32
             + 4 // sell_price: u32
-            + 1 // inventory_type: InventoryType
+            + 4 // inventory_type: InventoryType
             + 4 // allowed_class: u32
             + 4 // allowed_race: u32
             + 4 // item_level: u32
@@ -681,7 +681,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // flags: u32
         + 4 // buy_price: u32
         + 4 // sell_price: u32
-        + 1 // inventory_type: InventoryType
+        + 4 // inventory_type: InventoryType
         + 4 // allowed_class: u32
         + 4 // allowed_race: u32
         + 4 // item_level: u32

@@ -99,7 +99,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | flags |  |  |
 | - | 4 / Little | u32 | buy_price |  |  |
 | - | 4 / Little | u32 | sell_price |  |  |
-| - | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
+| - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 | - | 4 / Little | u32 | allowed_class |  |  |
 | - | 4 / Little | u32 | allowed_race |  |  |
 | - | 4 / Little | u32 | item_level |  |  |

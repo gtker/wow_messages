@@ -44,7 +44,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 flags;
         u32 buy_price;
         u32 sell_price;
-        InventoryType inventory_type;
+        (u32)InventoryType inventory_type;
         /* TODO more typed */
         u32 allowed_class;
         u32 allowed_race;
