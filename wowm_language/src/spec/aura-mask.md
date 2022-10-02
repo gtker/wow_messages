@@ -1,40 +1,51 @@
 # AuraMask
 
 ```rust,ignore
-struct AuraMask {
-    pub auras: [Option<u8>; 32],
+pub struct AuraMask {
+    auras: [Option<u16>; Self::MAX_CAPACITY],
 }
 
 impl AuraMask {
-    pub fn read(r: &mut impl Read) -> Result<Self, std::io::Error> {
-        let mask = r.read_u8()?;
-        let auras = [None; 32];
+    const MAX_CAPACITY: usize = 32;
 
-        for i in 0..32 {
-            if mask & (1 << i) () {
-                auras[i] = Some(r.read_u32_le()?);   
+    pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
+        let mut auras = [None; Self::MAX_CAPACITY];
+        let bit_pattern: u32 = crate::util::read_u32_le(r)?;
+
+        for (i, aura) in auras.iter_mut().enumerate() {
+            if (bit_pattern & (1 << i)) != 0 {
+                *aura = Some(crate::util::read_u16_le(r)?);
             }
         }
 
-        Self {
-            auras,
-        }
+        Ok(Self { auras })
     }
 
-    pub fn write(w: &mut impl Write) -> Result<()> {
-        let mut mask: u32 = 0;
-
-        for (i, aura) in auras.iter().enumerate() {
-            if let Some(_) = aura {
-                mask |= (1 << i)
+    pub(crate) fn write_into_vec(&self, mut v: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        let mut bit_pattern: u32 = 0;
+        for (i, &b) in self.auras().iter().enumerate() {
+            if b.is_some() {
+                bit_pattern |= 1 << i;
             }
         }
 
-        w.write_all(&mask)?;
+        std::io::Write::write_all(&mut v, bit_pattern.to_le_bytes().as_slice())?;
 
-        for aura in auras {
-            w.write_all(&aura)?;
+        for &i in self.auras() {
+            if let Some(b) = i {
+                std::io::Write::write_all(&mut v, b.to_le_bytes().as_slice())?;
+            }
         }
+
+        Ok(())
+    }
+
+    pub const fn auras(&self) -> &[Option<u16>] {
+        self.auras.as_slice()
+    }
+
+    pub const fn size(&self) -> usize {
+        std::mem::size_of::<u32>() + std::mem::size_of::<u16>() * self.auras.len()
     }
 }
 ```
