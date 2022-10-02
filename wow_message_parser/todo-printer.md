@@ -1,4 +1,3 @@
-* Wireshark elseif/else
 * Correct codegen
     * Else Ifs:
         - if a ==, else { if b == } (`SMSG_SEND_MAIL_RESULT`)
@@ -17,7 +16,6 @@
 * Max size of vanilla message (10240) mangoszero/server/WorldSocket.cpp:367
 
 * Do not allocate for statically sized messages
-* Special type for `SMSG_LOGIN_SETTIMESPEED.datetime`
 * More tests/definitions
 * MSRV test
     * Login
