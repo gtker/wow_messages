@@ -389,7 +389,10 @@ fn print_definition(
             s.wln("add_aura_mask(ptv);");
             true
         }
-        Type::UpdateMask => false,
+        Type::UpdateMask => {
+            s.wln("add_update_mask(ptv);");
+            true
+        }
         Type::String { .. } => unreachable!(),
     }
 }
