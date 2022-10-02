@@ -7,6 +7,7 @@ pub struct DateTime {
 }
 
 impl DateTime {
+    // TODO: Make fallible?
     pub const fn new(
         years_after_2000: u8,
         month: Month,
@@ -36,25 +37,49 @@ impl DateTime {
     pub(crate) const fn as_int(&self) -> u32 {
         self.inner
     }
+
+    fn minutes(&self) -> u8 {
+        minutes(self.inner) as u8
+    }
+
+    fn hours(&self) -> u8 {
+        hours(self.inner) as u8
+    }
+
+    fn weekday(&self) -> Weekday {
+        Weekday::try_from(weekday(self.inner)).unwrap()
+    }
+
+    fn month_day(&self) -> u8 {
+        month_day(self.inner) as u8
+    }
+
+    fn month(&self) -> Month {
+        Month::try_from(month(self.inner)).unwrap()
+    }
+
+    fn years_after_2000(&self) -> u8 {
+        years_after_2000(self.inner) as u8
+    }
 }
 
 impl TryFrom<u32> for DateTime {
     type Error = EnumError;
 
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        let minute = value & 0b111111;
+        let minutes = minutes(value);
 
-        let hours = (value >> 6) & 0b11111;
+        let hours = hours(value);
 
-        let weekday = (value >> 11) & 0b111;
+        let weekday = weekday(value);
         let weekday = Weekday::try_from(weekday)?;
 
-        let month_day = (value >> 14) & 0b111111;
+        let month_day = month_day(value);
 
-        let month = (value >> 20) & 0b1111;
+        let month = month(value);
         let month = Month::try_from(month)?;
 
-        let years_after_2000 = (value >> 24) & 0b11111111;
+        let years_after_2000 = years_after_2000(value);
 
         Ok(Self::new(
             years_after_2000 as u8,
@@ -62,9 +87,33 @@ impl TryFrom<u32> for DateTime {
             month_day as u8,
             weekday,
             hours as u8,
-            minute as u8,
+            minutes as u8,
         ))
     }
+}
+
+fn minutes(v: u32) -> u32 {
+    v & 0b111111
+}
+
+fn hours(v: u32) -> u32 {
+    (v >> 6) & 0b11111
+}
+
+fn weekday(v: u32) -> u32 {
+    (value >> 11) & 0b111
+}
+
+fn month_day(v: u32) -> u32 {
+    (v >> 14) & 0b111111
+}
+
+fn month(v: u32) -> u32 {
+    (v >> 20) & 0b1111
+}
+
+fn years_after_2000(v: u32) -> u32 {
+    (v >> 24) & 0b11111111
 }
 
 #[cfg(feature = "chrono")]
