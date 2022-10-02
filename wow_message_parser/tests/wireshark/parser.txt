@@ -4560,6 +4560,7 @@
                 ptvcursor_add(ptv, hf_woww_position_y_int, 2, ENC_LITTLE_ENDIAN);
             }
             if (mask & GROUP_UPDATE_FLAGS_FLAG_AURAS) {
+                add_aura_mask(ptv);
             }
             if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_NAME) {
                 add_cstring(ptv, &hf_woww_pet_name);
@@ -4583,6 +4584,7 @@
                 ptvcursor_add(ptv, hf_woww_pet_max_power, 2, ENC_LITTLE_ENDIAN);
             }
             if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_AURAS) {
+                add_aura_mask(ptv);
             }
             break;
         case SMSG_PARTY_MEMBER_STATS_FULL:
@@ -4617,6 +4619,7 @@
                 ptvcursor_add(ptv, hf_woww_position_y_int, 2, ENC_LITTLE_ENDIAN);
             }
             if (mask & GROUP_UPDATE_FLAGS_FLAG_AURAS) {
+                add_aura_mask(ptv);
             }
             if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_NAME) {
                 add_cstring(ptv, &hf_woww_pet_name);
@@ -4640,6 +4643,7 @@
                 ptvcursor_add(ptv, hf_woww_pet_max_power, 2, ENC_LITTLE_ENDIAN);
             }
             if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_AURAS) {
+                add_aura_mask(ptv);
             }
             break;
         case SMSG_PAUSE_MIRROR_TIMER:

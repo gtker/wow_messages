@@ -385,7 +385,11 @@ fn print_definition(
             s.wln("add_packed_guid(ptv, pinfo);");
             true
         }
-        Type::UpdateMask | Type::AuraMask => false,
+        Type::AuraMask => {
+            s.wln("add_aura_mask(ptv);");
+            true
+        }
+        Type::UpdateMask => false,
         Type::String { .. } => unreachable!(),
     }
 }
