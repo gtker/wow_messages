@@ -928,8 +928,8 @@ impl Container {
         }
     }
 
-    fn set_if_statements(&mut self, o: &Objects) {
-        fn inner(m: &mut StructMember, c: &Container, o: &Objects) {
+    fn set_if_statements(&mut self) {
+        fn inner(m: &mut StructMember, c: &Container) {
             match m {
                 StructMember::Definition(_) => {}
                 StructMember::IfStatement(statement) => {
@@ -940,12 +940,12 @@ impl Container {
                     }
 
                     for m in statement.all_members_mut() {
-                        inner(m, c, o);
+                        inner(m, c);
                     }
                 }
                 StructMember::OptionalStatement(optional) => {
                     for m in optional.members_mut() {
-                        inner(m, c, o);
+                        inner(m, c);
                     }
                 }
             }
@@ -953,7 +953,7 @@ impl Container {
 
         let c = self.clone();
         for m in &mut self.members {
-            inner(m, &c, o);
+            inner(m, &c);
         }
     }
 
@@ -990,7 +990,7 @@ impl Container {
     pub fn set_internals(&mut self, o: &Objects) {
         self.check_values(o);
 
-        self.set_if_statements(o);
+        self.set_if_statements();
 
         self.set_all_values_to_verified(o);
 
