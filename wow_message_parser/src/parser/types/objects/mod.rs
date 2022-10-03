@@ -447,44 +447,6 @@ version 2: {:#?} in {} line {}",
         }
     }
 
-    pub fn type_has_constant_size(&self, ty: &Type) -> bool {
-        let type_name = match ty {
-            Type::DateTime
-            | Type::Bool
-            | Type::Integer(_)
-            | Type::FloatingPoint(_)
-            | Type::Guid => return true,
-            Type::PackedGuid
-            | Type::UpdateMask
-            | Type::AuraMask
-            | Type::SizedCString
-            | Type::CString
-            | Type::String { .. } => return false,
-            Type::Array(array) => match array.size() {
-                ArraySize::Fixed(_) => match array.ty() {
-                    ArrayType::Guid | ArrayType::Integer(_) => return true,
-                    ArrayType::Complex(ident) => ident,
-                    ArrayType::CString | ArrayType::PackedGuid => return false,
-                },
-                ArraySize::Variable(_) | ArraySize::Endless => return false,
-            },
-            Type::Identifier { s, .. } => s,
-        };
-
-        if self.all_definers().any(|a| a.name() == type_name) {
-            return true;
-        }
-
-        if let Some(s) = self.all_containers().find(|a| a.name() == type_name) {
-            return s.is_constant_sized();
-        }
-
-        panic!(
-            "Type name: '{type_name}' was not found.",
-            type_name = type_name
-        );
-    }
-
     pub fn contains_value_in_type(&self, variable_name: &str, value_name: &str) {
         let enums = self.all_definers().find(|a| a.name() == variable_name);
         match enums {
