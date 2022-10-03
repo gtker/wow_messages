@@ -25,6 +25,8 @@ pub fn parsed_container_to_container(
 
         let sizes = p.create_sizes(containers, definers);
 
+        let only_has_io_error = p.recursive_only_has_io_errors(containers, definers);
+
         v.push(Container::new(
             p.name,
             p.members,
@@ -33,6 +35,7 @@ pub fn parsed_container_to_container(
             p.file_info,
             tests,
             sizes,
+            only_has_io_error,
         ));
     }
 

@@ -81,20 +81,6 @@ impl Objects {
             .unwrap_or_else(|| panic!("unable to find definer: '{}'", ty_name))
     }
 
-    pub fn object_has_only_io_errors(&self, variable_name: &str, finder_tags: &Tags) -> bool {
-        match self.get_object_type_of(variable_name, finder_tags) {
-            ObjectType::Struct | ObjectType::CLogin | ObjectType::SLogin => {
-                let c = self.get_container(variable_name, finder_tags);
-                c.recursive_only_has_io_errors(self)
-            }
-            ObjectType::Enum => self
-                .get_definer(variable_name, finder_tags)
-                .self_value()
-                .is_some(),
-            ObjectType::Flag => true,
-        }
-    }
-
     pub fn get_object_type_of(&self, type_name: &str, finder_tags: &Tags) -> ObjectType {
         if self
             .enums

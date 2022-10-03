@@ -48,7 +48,7 @@ pub struct Container {
     tags: Tags,
     tests: Vec<TestCase>,
     file_info: FileInfo,
-    only_has_io_error: Option<bool>,
+    only_has_io_error: bool,
     rust_object_view: Option<RustObject>,
 }
 
@@ -190,10 +190,6 @@ impl Container {
         DefinerUsage::Unused
     }
 
-    pub fn append_tests(&mut self, mut t: Vec<TestCase>) {
-        self.tests.append(&mut t);
-    }
-
     pub fn set_rust_object(&mut self, object: RustObject) {
         self.rust_object_view = Some(object);
     }
@@ -273,32 +269,7 @@ impl Container {
     }
 
     pub fn only_has_io_errors(&self) -> bool {
-        self.only_has_io_error.unwrap()
-    }
-
-    pub fn recursive_only_has_io_errors(&self, o: &Objects) -> bool {
-        if self.contains_string_or_cstring() {
-            return false;
-        }
-
-        for t in &self.get_types_needing_import() {
-            match o.get_object_type_of(t, self.tags()) {
-                ObjectType::Flag => {}
-                ObjectType::Struct => {
-                    if !o.object_has_only_io_errors(t, self.tags()) {
-                        return false;
-                    }
-                }
-                _ => {
-                    return false;
-                }
-            }
-        }
-        true
-    }
-
-    fn set_io_errors(&mut self, o: &Objects) {
-        self.only_has_io_error = Some(self.recursive_only_has_io_errors(o));
+        self.only_has_io_error
     }
 
     pub fn get_opcode_import_path(&self, version: Version) -> String {
@@ -655,22 +626,6 @@ impl Container {
         true
     }
 
-    pub fn contains_string_or_cstring(&self) -> bool {
-        for d in self.all_definitions() {
-            match d.ty() {
-                Type::CString | Type::String { .. } => return true,
-                Type::Array(array) => {
-                    if matches!(array.ty(), ArrayType::CString) {
-                        return true;
-                    }
-                }
-                _ => {}
-            }
-        }
-
-        false
-    }
-
     pub fn all_definitions_transitively(&self, o: &Objects) -> Vec<StructMemberDefinition> {
         fn inner(m: &StructMember, v: &mut Vec<StructMemberDefinition>, o: &Objects, tags: &Tags) {
             match m {
@@ -768,21 +723,6 @@ impl Container {
         }
 
         v
-    }
-
-    pub fn needs_enum_error(&self, o: &Objects, tags: &Tags) -> bool {
-        for d in self.all_definitions() {
-            if let Type::Identifier { s, .. } = d.ty() {
-                if o.get_object_type_of(s, tags) == ObjectType::Enum {
-                    match o.get_definer(s, tags).self_value().is_none() {
-                        true => return true,
-                        false => {}
-                    }
-                }
-            }
-        }
-
-        false
     }
 
     pub fn contains_enum(&self, o: &Objects, tags: &Tags) -> bool {
@@ -952,6 +892,7 @@ impl Container {
         file_info: FileInfo,
         tests: Vec<TestCase>,
         sizes: Sizes,
+        only_has_io_error: bool,
     ) -> Self {
         Self {
             name: name.to_string(),
@@ -961,7 +902,7 @@ impl Container {
             tags,
             tests,
             file_info,
-            only_has_io_error: None,
+            only_has_io_error,
             rust_object_view: None,
         }
     }
@@ -1176,8 +1117,6 @@ impl Container {
         self.set_used_in_if();
 
         self.set_if_statements(o);
-
-        self.set_io_errors(o);
 
         self.set_all_values_to_verified(o);
 

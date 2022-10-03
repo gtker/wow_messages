@@ -3,9 +3,11 @@ use crate::parser::types::container::{
     DefinerUsage, IfStatement, Sizes, StructMember, StructMemberDefinition,
 };
 use crate::parser::types::definer::Definer;
+use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
-use crate::ContainerType;
+use crate::parser::types::ArrayType;
+use crate::{ContainerType, DefinerType};
 
 #[derive(Debug, Clone)]
 pub struct ParsedContainer {
@@ -17,6 +19,22 @@ pub struct ParsedContainer {
 }
 
 impl ParsedContainer {
+    pub fn new(
+        name: &str,
+        members: Vec<StructMember>,
+        tags: Tags,
+        object_type: ContainerType,
+        file_info: FileInfo,
+    ) -> Self {
+        Self {
+            name: name.to_string(),
+            object_type,
+            members,
+            tags,
+            file_info,
+        }
+    }
+
     pub fn contains_definer(&self, ty_name: &str) -> DefinerUsage {
         fn inner(m: &StructMember, ty_name: &str, variable_name: &str) -> DefinerUsage {
             match m {
@@ -242,19 +260,68 @@ impl ParsedContainer {
         self.members.as_slice()
     }
 
-    pub fn new(
-        name: &str,
-        members: Vec<StructMember>,
-        tags: Tags,
-        object_type: ContainerType,
-        file_info: FileInfo,
-    ) -> Self {
-        Self {
-            name: name.to_string(),
-            object_type,
-            members,
-            tags,
-            file_info,
+    pub fn recursive_only_has_io_errors(&self, containers: &[Self], definers: &[Definer]) -> bool {
+        if self.contains_string_or_cstring() {
+            return false;
         }
+
+        for t in self.get_types_needing_import() {
+            if let Some(d) = get_definer(definers, t.as_str(), self.tags()) {
+                if d.definer_ty() == DefinerType::Enum {
+                    return false;
+                }
+            } else if let Some(c) = get_container(containers, t.as_str(), self.tags()) {
+                if !c.recursive_only_has_io_errors(containers, definers) {
+                    return false;
+                }
+            } else {
+                unreachable!()
+            }
+        }
+
+        true
+    }
+
+    pub fn contains_string_or_cstring(&self) -> bool {
+        for d in self.all_definitions() {
+            match d.ty() {
+                Type::CString | Type::String { .. } | Type::SizedCString => return true,
+                Type::Array(array) => {
+                    if matches!(array.ty(), ArrayType::CString) {
+                        return true;
+                    }
+                }
+                _ => {}
+            }
+        }
+
+        false
+    }
+
+    pub fn get_types_needing_import(&self) -> Vec<String> {
+        self.get_complex_types()
+    }
+
+    fn get_complex_types(&self) -> Vec<String> {
+        let mut v = Vec::new();
+
+        for d in self.all_definitions() {
+            match &d.struct_type() {
+                Type::Array(a) => {
+                    if let ArrayType::Complex(i) = a.ty() {
+                        v.push(i.clone());
+                    }
+                }
+                Type::Identifier { s, .. } => {
+                    v.push(s.clone());
+                }
+                _ => {}
+            }
+        }
+
+        v.sort_unstable();
+        v.dedup();
+
+        v
     }
 }
