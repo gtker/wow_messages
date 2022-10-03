@@ -67,6 +67,30 @@ pub fn parsed_definer_to_definer(
     v
 }
 
+pub fn contains_complex_type(
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    ty_name: &str,
+    tags: &Tags,
+    struct_name: &str,
+) {
+    if let Some(_) = get_container(containers, ty_name, tags) {
+        return;
+    }
+
+    if let Some(_) = get_definer(definers, ty_name, tags) {
+        return;
+    }
+
+    panic!(
+        "Complex type not found: '{}' for object: '{}' for versions logon: '{:?}', versions: '{:?}'",
+        ty_name,
+        struct_name,
+        tags.logon_versions(),
+        tags.versions()
+    );
+}
+
 pub fn get_container<'a>(
     containers: &'a [ParsedContainer],
     name: &str,
