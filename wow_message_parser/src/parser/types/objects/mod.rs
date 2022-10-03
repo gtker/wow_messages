@@ -3,6 +3,7 @@ pub mod conversion;
 use crate::file_info::FileInfo;
 use crate::parser::types::container::Container;
 use crate::parser::types::definer::Definer;
+use crate::parser::types::objects::conversion::object_new;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
@@ -29,31 +30,7 @@ impl Objects {
         messages: Vec<ParsedContainer>,
         tests: Vec<ParsedTestCase>,
     ) -> Self {
-        let enums = conversion::parsed_definer_to_definer(enums, &structs, &messages);
-        let flags = conversion::parsed_definer_to_definer(flags, &structs, &messages);
-
-        let containers = [structs.as_slice(), messages.as_slice()].concat();
-        let definers = [enums.as_slice(), flags.as_slice()].concat();
-
-        let mut tests =
-            conversion::parsed_test_case_to_test_case(tests, &containers, &enums, &flags);
-
-        let structs =
-            conversion::parsed_container_to_container(structs, &mut tests, &containers, &definers);
-        let messages =
-            conversion::parsed_container_to_container(messages, &mut tests, &containers, &definers);
-
-        let mut o = Self {
-            enums,
-            flags,
-            structs,
-            messages,
-        };
-
-        o.check_values();
-        o.sort_members();
-
-        o
+        object_new(enums, flags, structs, messages, tests)
     }
 
     pub fn try_get_definer(&self, ty_name: &str, tags: &Tags) -> Option<&Definer> {

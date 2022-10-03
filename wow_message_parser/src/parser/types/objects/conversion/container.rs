@@ -1,7 +1,6 @@
 use crate::parser::types::definer::Definer;
+use crate::parser::types::objects::conversion;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
-use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
-use crate::parser::types::parsed::parsed_object::get_definer_objects_used_in;
 use crate::parser::types::parsed::parsed_test_case::{
     ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial,
 };
@@ -11,9 +10,8 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{ArrayType, VerifiedContainerValue};
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
-use crate::{Container, Objects, Tags};
 
-fn parsed_members_to_members(
+pub fn parsed_members_to_members(
     mut members: Vec<StructMember>,
     definers: &[Definer],
 ) -> Vec<StructMember> {
@@ -38,103 +36,6 @@ fn parsed_members_to_members(
     }
 
     members
-}
-
-pub fn parsed_container_to_container(
-    parsed: Vec<ParsedContainer>,
-    tests: &mut Vec<TestCase>,
-    containers: &[ParsedContainer],
-    definers: &[Definer],
-) -> Vec<Container> {
-    let mut v = Vec::with_capacity(parsed.len());
-
-    for p in parsed {
-        let tests = Objects::get_tests_for_object(tests, p.name(), p.tags());
-
-        let sizes = p.create_sizes(containers, definers);
-
-        let only_has_io_error = p.recursive_only_has_io_errors(containers, definers);
-
-        let members = parsed_members_to_members(p.members, definers);
-
-        v.push(Container::new(
-            p.name,
-            members,
-            p.tags,
-            p.object_type,
-            p.file_info,
-            tests,
-            sizes,
-            only_has_io_error,
-        ));
-    }
-
-    v
-}
-
-pub fn parsed_definer_to_definer(
-    parsed: Vec<ParsedDefiner>,
-    structs: &[ParsedContainer],
-    messages: &[ParsedContainer],
-) -> Vec<Definer> {
-    let mut v = Vec::with_capacity(parsed.len());
-
-    for p in parsed {
-        let objects_used_in = get_definer_objects_used_in(messages, structs, &p);
-
-        v.push(Definer::new(
-            p.name,
-            p.definer_ty,
-            p.fields,
-            p.basic_type,
-            p.self_value,
-            p.tags,
-            objects_used_in,
-            p.file_info,
-        ));
-    }
-
-    v
-}
-
-pub fn contains_complex_type(
-    containers: &[ParsedContainer],
-    definers: &[Definer],
-    ty_name: &str,
-    tags: &Tags,
-    struct_name: &str,
-) {
-    if let Some(_) = get_container(containers, ty_name, tags) {
-        return;
-    }
-
-    if let Some(_) = get_definer(definers, ty_name, tags) {
-        return;
-    }
-
-    panic!(
-        "Complex type not found: '{}' for object: '{}' for versions logon: '{:?}', versions: '{:?}'",
-        ty_name,
-        struct_name,
-        tags.logon_versions(),
-        tags.versions()
-    );
-}
-
-pub fn get_container<'a>(
-    containers: &'a [ParsedContainer],
-    name: &str,
-    tags: &Tags,
-) -> Option<&'a ParsedContainer> {
-    containers
-        .iter()
-        .find(|a| a.name() == name && a.tags().fulfills_all(tags))
-}
-
-pub fn get_definer<'a>(definers: &'a [Definer], name: &str, tags: &Tags) -> Option<&'a Definer> {
-    definers
-        .iter()
-        .find(|a| a.name() == name && a.tags().fulfills_all(tags))
 }
 
 pub fn convert_parsed_test_case_value_to_test_case_value(
@@ -178,7 +79,8 @@ pub fn convert_parsed_test_case_value_to_test_case_value(
             }
 
             let mut members = Vec::with_capacity(multiple.len());
-            let inner_c = get_container(containers, ty.rust_str().as_str(), c.tags()).unwrap();
+            let inner_c =
+                conversion::get_container(containers, ty.rust_str().as_str(), c.tags()).unwrap();
             for m_inner in multiple {
                 members.push(convert_test_case_member_to_test_case(
                     m_inner, inner_c, containers, enums, flags,
@@ -206,7 +108,7 @@ pub fn convert_parsed_test_case_value_to_test_case_value(
 
             for multiple in array {
                 let mut members = Vec::new();
-                let inner_c = get_container(containers, ty_name, c.tags()).unwrap();
+                let inner_c = conversion::get_container(containers, ty_name, c.tags()).unwrap();
 
                 for m_inner in multiple {
                     members.push(convert_test_case_member_to_test_case(
@@ -267,13 +169,14 @@ pub fn convert_parsed_test_case_value_to_test_case_value(
             value.clone(),
         )),
         Type::Identifier { .. } => {
-            if let Some(_) = get_definer(flags, ty.rust_str().as_str(), c.tags()) {
+            if let Some(_) = conversion::get_definer(flags, ty.rust_str().as_str(), c.tags()) {
                 let mut v = Vec::new();
                 for flag in value.split('|') {
                     v.push(flag.trim().to_owned());
                 }
                 TestValue::Flag(v)
-            } else if let Some(e) = get_definer(enums, ty.rust_str().as_str(), c.tags()) {
+            } else if let Some(e) = conversion::get_definer(enums, ty.rust_str().as_str(), c.tags())
+            {
                 let v = e.get_field_with_name(&value).unwrap().value().int();
                 TestValue::Enum(VerifiedContainerValue::new(v, value))
             } else {
@@ -339,7 +242,7 @@ pub fn parsed_test_case_to_test_case(
     let mut v = Vec::with_capacity(parsed.len());
 
     for p in parsed {
-        let c = get_container(containers, p.subject(), p.tags()).unwrap();
+        let c = conversion::get_container(containers, p.subject(), p.tags()).unwrap();
 
         v.push(convert_parsed_test_case_to_test_case(
             p, c, containers, enums, flags,
