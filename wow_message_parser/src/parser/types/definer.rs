@@ -149,7 +149,7 @@ impl Definer {
         file_info: FileInfo,
     ) -> Self {
         let s = Self {
-            name: name.to_string(),
+            name,
             definer_ty,
             fields,
             self_value,

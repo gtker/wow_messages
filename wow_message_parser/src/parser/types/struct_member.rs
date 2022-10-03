@@ -85,9 +85,9 @@ impl StructMemberDefinition {
                     ))
                 } else {
                     let value = if v.identifier() != CONTAINER_SELF_SIZE_FIELD {
-                        get_definer(definers, &self.ty().rust_str(), &self.tags())
+                        get_definer(definers, &self.ty().rust_str(), self.tags())
                             .unwrap()
-                            .get_field_with_name(&v.identifier())
+                            .get_field_with_name(v.identifier())
                             .unwrap()
                             .value()
                             .int()

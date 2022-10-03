@@ -110,7 +110,7 @@ impl Type {
                 }
             }
             Type::Identifier { s, upcast } => {
-                if let Some(_) = get_definer(definers, s, e.tags()) {
+                if get_definer(definers, s, e.tags()).is_some() {
                     let s = if let Some(upcast) = upcast {
                         upcast.size()
                     } else {

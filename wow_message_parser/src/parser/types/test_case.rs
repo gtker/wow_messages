@@ -21,7 +21,7 @@ impl TestCase {
         file_info: FileInfo,
     ) -> Self {
         Self {
-            subject: subject.to_string(),
+            subject,
             members,
             raw_bytes,
             tags,
@@ -87,7 +87,7 @@ impl TestCaseMember {
 
     pub fn new(name: String, value: TestValue, tags: Tags) -> Self {
         Self {
-            variable_name: name.to_string(),
+            variable_name: name,
             value,
             tags,
         }

@@ -103,11 +103,11 @@ pub fn contains_complex_type(
     tags: &Tags,
     struct_name: &str,
 ) {
-    if let Some(_) = get_container(containers, ty_name, tags) {
+    if get_container(containers, ty_name, tags).is_some() {
         return;
     }
 
-    if let Some(_) = get_definer(definers, ty_name, tags) {
+    if get_definer(definers, ty_name, tags).is_some() {
         return;
     }
 

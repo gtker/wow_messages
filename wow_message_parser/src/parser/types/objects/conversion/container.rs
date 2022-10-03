@@ -23,7 +23,7 @@ pub fn parsed_members_to_members(
     members
 }
 
-fn set_used_as_size_in(members: &mut Vec<StructMember>) {
+fn set_used_as_size_in(members: &mut [StructMember]) {
     let mut variables_used_as_size_in = Vec::new();
 
     for d in all_definitions(members) {
@@ -33,14 +33,13 @@ fn set_used_as_size_in(members: &mut Vec<StructMember>) {
                     variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
                 }
             }
-            Type::Array(array) => match array.size() {
-                ArraySize::Variable(length) => {
+            Type::Array(array) => {
+                if let ArraySize::Variable(length) = array.size() {
                     if length.parse::<u8>().is_err() {
                         variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
                     }
                 }
-                _ => {}
-            },
+            }
             _ => {}
         }
     }
@@ -56,7 +55,7 @@ fn set_used_as_size_in(members: &mut Vec<StructMember>) {
     }
 }
 
-fn set_verified_values(members: &mut Vec<StructMember>, definers: &[Definer]) {
+fn set_verified_values(members: &mut [StructMember], definers: &[Definer]) {
     for d in all_definitions_mut(members) {
         d.set_verified_value(definers);
     }
@@ -73,7 +72,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
     let ty = c.get_field_ty(variable_name);
 
     let value = match test {
-        TestCaseValueInitial::Single(s) => s.clone(),
+        TestCaseValueInitial::Single(s) => s,
         TestCaseValueInitial::Multiple(mut multiple) => {
             if ty == &Type::UpdateMask {
                 let mut v = Vec::new();
@@ -193,7 +192,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
             value.clone(),
         )),
         Type::Identifier { .. } => {
-            if let Some(_) = conversion::get_definer(flags, ty.rust_str().as_str(), c.tags()) {
+            if conversion::get_definer(flags, ty.rust_str().as_str(), c.tags()).is_some() {
                 let mut v = Vec::new();
                 for flag in value.split('|') {
                     v.push(flag.trim().to_owned());
