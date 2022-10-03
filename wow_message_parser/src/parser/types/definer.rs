@@ -149,7 +149,7 @@ impl Definer {
         objects_used_in: Vec<(String, DefinerUsage)>,
         file_info: FileInfo,
     ) -> Self {
-        Self {
+        let s = Self {
             name: name.to_string(),
             definer_ty,
             fields,
@@ -158,7 +158,11 @@ impl Definer {
             tags,
             objects_used_in,
             file_info,
-        }
+        };
+
+        s.self_check();
+
+        s
     }
 
     pub fn only_used_in_if(&self) -> bool {
@@ -257,7 +261,7 @@ impl Definer {
         s
     }
 
-    pub fn self_check(&self) {
+    fn self_check(&self) {
         let mut h = HashMap::new();
 
         for field in &self.fields {

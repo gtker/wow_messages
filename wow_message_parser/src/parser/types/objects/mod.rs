@@ -389,10 +389,6 @@ impl Objects {
     pub fn check_values(&mut self) {
         let c = self.clone();
 
-        for e in self.all_definers() {
-            e.self_check();
-        }
-
         for s in self.all_containers_mut() {
             s.set_internals(&c);
         }
