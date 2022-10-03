@@ -1,9 +1,10 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::container::{
-    DefinerUsage, IfStatement, Sizes, StructMember, StructMemberDefinition,
+    DefinerUsage, IfStatement, StructMember, StructMemberDefinition,
 };
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
+use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
 use crate::parser::types::ArrayType;

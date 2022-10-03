@@ -1,7 +1,8 @@
 use crate::doc_printer::DocWriter;
 use crate::parser::types::container::{
-    Equation, IfStatement, StructMember, StructMemberDefinition, BOOL_SIZE, DATETIME_SIZE,
+    Equation, IfStatement, StructMember, StructMemberDefinition,
 };
+use crate::parser::types::sizes::{BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, Endianness, IntegerType, ObjectType};
 use crate::wowm_printer::get_struct_wowm_definition;

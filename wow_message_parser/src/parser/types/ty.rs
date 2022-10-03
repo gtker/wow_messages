@@ -1,11 +1,12 @@
-use crate::parser::types::container::{
-    Container, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE, GUID_SIZE,
-    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MAX_SIZE, UPDATE_MASK_MIN_SIZE,
-};
+use crate::parser::types::container::Container;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::parsed_container::ParsedContainer;
+use crate::parser::types::sizes::{
+    Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE, GUID_SIZE,
+    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MAX_SIZE, UPDATE_MASK_MIN_SIZE,
+};
 use crate::parser::types::{
     Array, ArraySize, ArrayType, Endianness, FloatingPointType, IntegerType, ObjectType,
 };

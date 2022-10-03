@@ -1,11 +1,12 @@
 pub mod conversion;
 
 use crate::file_info::FileInfo;
-use crate::parser::types::container::{Container, Sizes};
+use crate::parser::types::container::Container;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed_container::ParsedContainer;
 use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed_test_case::ParsedTestCase;
+use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;

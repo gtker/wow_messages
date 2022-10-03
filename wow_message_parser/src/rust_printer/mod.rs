@@ -18,7 +18,7 @@ mod structs;
 mod update_mask;
 
 use crate::file_utils::{get_import_path, get_shared_module_name, major_version_to_string};
-use crate::parser::types::container::Sizes;
+use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::{ContainerType, Objects, Tags};
 pub use update_mask::*;

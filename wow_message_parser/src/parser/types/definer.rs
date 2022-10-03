@@ -1,5 +1,6 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::container::{DefinerUsage, Sizes};
+use crate::parser::types::container::DefinerUsage;
+use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::IntegerType;
 use crate::parser::utility;
