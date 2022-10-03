@@ -54,7 +54,8 @@ pub(crate) fn parsed_container_to_container(
 
         let only_has_io_error = p.recursive_only_has_io_errors(containers, definers);
 
-        let members = container::parsed_members_to_members(p.members, definers);
+        let members =
+            container::parsed_members_to_members(p.members, &p.tags, containers, definers);
 
         v.push(Container::new(
             p.name,

@@ -343,10 +343,6 @@ impl Objects {
     pub(crate) fn check_values(&mut self) {
         let c = self.clone();
 
-        for s in self.all_containers_mut() {
-            s.set_internals(&c);
-        }
-
         for e in self.all_containers() {
             e.check_if_statement_operators(self);
         }
@@ -405,52 +401,6 @@ version 2: {:#?} in {} line {}",
                 }
             }
         }
-    }
-
-    pub(crate) fn contains_value_in_type(&self, variable_name: &str, value_name: &str) {
-        let enums = self.all_definers().find(|a| a.name() == variable_name);
-        match enums {
-            None => {}
-            Some(v) => {
-                for a in v.fields() {
-                    if a.name() == value_name {
-                        return;
-                    }
-                }
-            }
-        }
-
-        panic!(
-            "value: '{}' not found in variable: '{}'",
-            value_name, variable_name
-        );
-    }
-
-    pub(crate) fn contains_complex_type(
-        &self,
-        variable_name: &str,
-        tags: &Tags,
-        struct_name: &str,
-    ) {
-        for e in self.all_definers() {
-            if e.name() == variable_name && e.tags().fulfills_all(tags) {
-                return;
-            }
-        }
-
-        for e in self.all_containers() {
-            if e.name() == variable_name && e.tags().fulfills_all(tags) {
-                return;
-            }
-        }
-
-        panic!(
-            "Complex type not found: '{}' for object: '{}' for versions logon: '{:?}', versions: '{:?}'",
-            variable_name,
-            struct_name,
-            tags.logon_versions(),
-            tags.versions()
-        );
     }
 }
 

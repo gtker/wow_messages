@@ -1,6 +1,8 @@
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion;
-use crate::parser::types::objects::conversion::{all_definitions, all_definitions_mut};
+use crate::parser::types::objects::conversion::{
+    all_definitions, all_definitions_mut, get_definer,
+};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_test_case::{
     ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial,
@@ -11,14 +13,19 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, VerifiedContainerValue};
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
+use crate::Tags;
 
 pub(crate) fn parsed_members_to_members(
     mut members: Vec<StructMember>,
+    tags: &Tags,
+    containers: &[ParsedContainer],
     definers: &[Definer],
 ) -> Vec<StructMember> {
     set_used_as_size_in(&mut members);
 
     set_verified_values(&mut members, definers);
+
+    check_complex_types_exist(&members, containers, definers, tags);
 
     members
 }
@@ -58,6 +65,66 @@ fn set_used_as_size_in(members: &mut [StructMember]) {
 fn set_verified_values(members: &mut [StructMember], definers: &[Definer]) {
     for d in all_definitions_mut(members) {
         d.set_verified_value(definers);
+    }
+}
+
+fn contains_complex_type(
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    ty_name: &str,
+    tags: &Tags,
+    struct_name: &str,
+) {
+    for e in definers {
+        if e.name() == ty_name && e.tags().fulfills_all(tags) {
+            return;
+        }
+    }
+
+    for e in containers {
+        if e.name() == ty_name && e.tags().fulfills_all(tags) {
+            return;
+        }
+    }
+
+    panic!(
+        "Complex type not found: '{}' for object: '{}' for versions logon: '{:?}', versions: '{:?}'",
+        ty_name,
+        struct_name,
+        tags.logon_versions(),
+        tags.versions()
+    );
+}
+
+fn check_complex_types_exist(
+    members: &[StructMember],
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    tags: &Tags,
+) {
+    for d in all_definitions(members) {
+        match &d.ty() {
+            Type::Array(a) => {
+                if let ArrayType::Complex(c) = &a.ty() {
+                    contains_complex_type(containers, definers, c, tags, d.name())
+                }
+            }
+            Type::Identifier { s: i, .. } => {
+                contains_complex_type(containers, definers, i, tags, d.name());
+
+                match d.value() {
+                    None => {}
+                    Some(v) => match v.identifier().parse::<usize>() {
+                        Ok(_) => {}
+                        Err(_) => {
+                            let e = get_definer(definers, &i, tags).unwrap();
+                            e.get_field_with_name(v.identifier()).unwrap();
+                        }
+                    },
+                }
+            }
+            _ => {}
+        }
     }
 }
 

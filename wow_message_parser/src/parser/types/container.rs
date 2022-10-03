@@ -671,34 +671,4 @@ impl Container {
     pub(crate) fn fields(&self) -> &[StructMember] {
         self.members.as_slice()
     }
-
-    fn check_values(&self, o: &Objects) {
-        for d in self.all_definitions() {
-            match &d.ty() {
-                Type::Array(a) => {
-                    if let ArrayType::Complex(c) = &a.ty() {
-                        o.contains_complex_type(c, self.tags(), d.name())
-                    }
-                }
-                Type::Identifier { s: i, .. } => {
-                    o.contains_complex_type(i, self.tags(), d.name());
-
-                    match d.value() {
-                        None => {}
-                        Some(v) => match v.identifier().parse::<usize>() {
-                            Ok(_) => {}
-                            Err(_) => {
-                                o.contains_value_in_type(i, v.identifier());
-                            }
-                        },
-                    }
-                }
-                _ => {}
-            }
-        }
-    }
-
-    pub(crate) fn set_internals(&mut self, o: &Objects) {
-        self.check_values(o);
-    }
 }
