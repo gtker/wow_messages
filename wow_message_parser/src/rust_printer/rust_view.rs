@@ -1,8 +1,8 @@
-use crate::container::{
+use crate::file_info::FileInfo;
+use crate::parser::types::container::{
     Container, Equation, IfStatement, Sizes, StructMember, GUID_SIZE, PACKED_GUID_MAX_SIZE,
     PACKED_GUID_MIN_SIZE,
 };
-use crate::file_info::FileInfo;
 use crate::parser::types::definer::DefinerValue;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::Tags;

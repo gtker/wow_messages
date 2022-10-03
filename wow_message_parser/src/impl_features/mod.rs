@@ -1,4 +1,6 @@
-use crate::container::{Container, ContainerType, StructMember, StructMemberDefinition};
+use crate::parser::types::container::{
+    Container, ContainerType, StructMember, StructMemberDefinition,
+};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;

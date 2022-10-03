@@ -2,7 +2,7 @@ pub(crate) mod tbc_messages;
 pub(crate) mod vanilla_messages;
 pub(crate) mod wrath_messages;
 
-use crate::container::ContainerType;
+use crate::parser::types::container::ContainerType;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{Tags, WorldVersion};
 use crate::Version;

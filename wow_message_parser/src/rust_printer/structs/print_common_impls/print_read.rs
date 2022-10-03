@@ -1,4 +1,6 @@
-use crate::container::{Container, Equation, IfStatement, StructMember, StructMemberDefinition};
+use crate::parser::types::container::{
+    Container, Equation, IfStatement, StructMember, StructMemberDefinition,
+};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, ObjectType};

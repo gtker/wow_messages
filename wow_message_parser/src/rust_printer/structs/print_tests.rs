@@ -1,5 +1,5 @@
-use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, major_version_to_string};
+use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ArraySize;
 use crate::parser::utility::parse_value;

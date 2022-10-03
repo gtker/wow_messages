@@ -2,6 +2,7 @@ use crate::rust_printer::field_name_to_rust_name;
 use crate::{Objects, Tags};
 use std::fmt::{Display, Formatter};
 
+pub mod container;
 pub mod definer;
 pub mod objects;
 pub mod tags;

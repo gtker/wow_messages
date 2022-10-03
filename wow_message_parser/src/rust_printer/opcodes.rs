@@ -1,7 +1,7 @@
-use crate::container::{Container, ContainerType};
 use crate::file_utils::{
     get_import_path, get_login_logon_version_path, get_world_version_path, major_version_to_string,
 };
+use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
     ImplType, MajorWorldVersion, Version, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD,

@@ -1,4 +1,6 @@
-use crate::container::{Container, ContainerType, Equation, IfStatement, StructMember};
+use crate::parser::types::container::{
+    Container, ContainerType, Equation, IfStatement, StructMember,
+};
 use crate::parser::types::definer::Definer;
 use crate::rust_printer::Writer;
 use crate::ENUM_SELF_VALUE_FIELD;

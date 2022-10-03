@@ -1,6 +1,6 @@
-use crate::container::DefinerUsage;
 use crate::impl_features::{get_impl_features_for_definer, Feature};
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
+use crate::parser::types::container::DefinerUsage;
 use crate::parser::types::definer::{Definer, DefinerField, SelfValueDefinerField};
 use crate::rust_printer::DefinerType;
 use core::convert::From;

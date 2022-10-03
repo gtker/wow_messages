@@ -9,7 +9,6 @@ use walkdir::WalkDir;
 use parser::types::objects::Objects;
 use rust_printer::print_struct;
 
-use crate::container::{Container, ContainerType};
 use crate::doc_printer::print_docs_summary_and_objects;
 use crate::file_utils::{
     append_string_to_file, create_and_overwrite_if_not_same_contents, write_string_to_file,
@@ -23,10 +22,10 @@ use crate::rust_printer::{
     get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
     print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
 };
+use parser::types::container::{Container, ContainerType};
 use parser::types::tags::Tags;
 use path_utils::get_world_version_file_path;
 
-mod container;
 mod doc_printer;
 pub(crate) mod file_info;
 mod file_utils;

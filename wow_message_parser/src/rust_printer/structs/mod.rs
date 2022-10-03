@@ -1,5 +1,5 @@
-use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, get_world_shared_path};
+use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::WorldVersion;
 use crate::parser::types::{ArraySize, ArrayType};

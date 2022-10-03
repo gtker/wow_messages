@@ -1,4 +1,6 @@
-use crate::container::{Container, ContainerType, BOOL_SIZE, DATETIME_SIZE, GUID_SIZE};
+use crate::parser::types::container::{
+    Container, ContainerType, BOOL_SIZE, DATETIME_SIZE, GUID_SIZE,
+};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};

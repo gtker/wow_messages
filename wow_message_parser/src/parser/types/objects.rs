@@ -1,5 +1,5 @@
-use crate::container::{Container, DefinerUsage, Sizes};
 use crate::file_info::FileInfo;
+use crate::parser::types::container::{Container, DefinerUsage, Sizes};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ty::Type;

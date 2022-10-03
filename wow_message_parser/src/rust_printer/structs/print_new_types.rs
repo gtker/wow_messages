@@ -1,4 +1,4 @@
-use crate::container::Container;
+use crate::parser::types::container::Container;
 use crate::rust_printer::rust_view::RustDefiner;
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
 use crate::rust_printer::structs::print_derives;
