@@ -829,8 +829,8 @@ impl Container {
         sizes: Sizes,
         only_has_io_error: bool,
     ) -> Self {
-        Self {
-            name: name.to_string(),
+        let s = Self {
+            name,
             object_type,
             sizes,
             members,
@@ -839,7 +839,11 @@ impl Container {
             file_info,
             only_has_io_error,
             rust_object_view: None,
-        }
+        };
+
+        s.self_check();
+
+        s
     }
 
     fn set_all_values_to_verified(&mut self, o: &Objects) {
@@ -1044,9 +1048,11 @@ impl Container {
         }
     }
 
-    pub fn set_internals(&mut self, o: &Objects) {
+    pub fn self_check(&self) {
         self.panic_on_duplicate_field_names();
+    }
 
+    pub fn set_internals(&mut self, o: &Objects) {
         self.check_values(o);
 
         self.set_used_in_if();
