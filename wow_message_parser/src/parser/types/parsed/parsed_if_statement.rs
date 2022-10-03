@@ -1,6 +1,6 @@
 use crate::parser::types::if_statement::Conditional;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
-use crate::parser::types::ty::Type;
+use crate::parser::types::parsed::parsed_ty::ParsedType;
 
 #[derive(Debug, Clone)]
 pub(crate) struct ParsedIfStatement {
@@ -8,7 +8,7 @@ pub(crate) struct ParsedIfStatement {
     pub members: Vec<ParsedStructMember>,
     pub else_ifs: Vec<ParsedIfStatement>,
     pub else_statement_members: Vec<ParsedStructMember>,
-    pub original_ty: Option<Type>,
+    pub original_ty: Option<ParsedType>,
 }
 
 impl Eq for ParsedIfStatement {}
@@ -47,7 +47,7 @@ impl ParsedIfStatement {
         self.conditional.variable_name()
     }
 
-    pub(crate) fn set_original_ty(&mut self, original_ty: Type) {
+    pub(crate) fn set_original_ty(&mut self, original_ty: ParsedType) {
         self.original_ty = Some(original_ty)
     }
 

@@ -2,7 +2,7 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::get_definer;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
-use crate::parser::types::ty::Type;
+use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::{ContainerValue, ParsedContainerValue};
 use crate::{Tags, CONTAINER_SELF_SIZE_FIELD};
 
@@ -16,7 +16,7 @@ pub(crate) enum ParsedStructMember {
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub(crate) struct ParsedStructMemberDefinition {
     pub name: String,
-    pub(crate) struct_type: Type,
+    pub(crate) struct_type: ParsedType,
     pub value: Option<ParsedContainerValue>,
     pub verified_value: Option<ContainerValue>,
     pub used_as_size_in: Option<String>,
@@ -25,7 +25,7 @@ pub(crate) struct ParsedStructMemberDefinition {
 }
 
 impl ParsedStructMemberDefinition {
-    pub(crate) fn struct_type(&self) -> Type {
+    pub(crate) fn struct_type(&self) -> ParsedType {
         self.struct_type.clone()
     }
 
@@ -39,7 +39,7 @@ impl ParsedStructMemberDefinition {
 
     pub(crate) fn new(
         name: &str,
-        struct_type: Type,
+        struct_type: ParsedType,
         value: Option<ParsedContainerValue>,
         tags: Tags,
     ) -> Self {
@@ -58,7 +58,7 @@ impl ParsedStructMemberDefinition {
         &self.name
     }
 
-    pub(crate) fn ty(&self) -> &Type {
+    pub(crate) fn ty(&self) -> &ParsedType {
         &self.struct_type
     }
 

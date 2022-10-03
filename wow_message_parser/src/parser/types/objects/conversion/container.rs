@@ -11,6 +11,7 @@ use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::parsed::parsed_test_case::{
     ParsedTestCase, ParsedTestCaseMember, ParsedTestValue,
 };
+use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
@@ -55,6 +56,24 @@ pub(crate) fn verify_and_set_members(
     check_complex_types_exist(members, containers, definers, tags);
 }
 
+fn parsed_type_to_type(t: ParsedType) -> Type {
+    match t {
+        ParsedType::Integer(i) => Type::Integer(i),
+        ParsedType::Bool => Type::Bool,
+        ParsedType::PackedGuid => Type::PackedGuid,
+        ParsedType::Guid => Type::Guid,
+        ParsedType::DateTime => Type::DateTime,
+        ParsedType::FloatingPoint(f) => Type::FloatingPoint(f),
+        ParsedType::CString => Type::CString,
+        ParsedType::SizedCString => Type::SizedCString,
+        ParsedType::String { length } => Type::String { length },
+        ParsedType::Array(a) => Type::Array(a),
+        ParsedType::Identifier { s, upcast } => Type::Identifier { s, upcast },
+        ParsedType::UpdateMask => Type::UpdateMask,
+        ParsedType::AuraMask => Type::AuraMask,
+    }
+}
+
 pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec<StructMember> {
     let mut v = Vec::with_capacity(members.len());
 
@@ -63,7 +82,7 @@ pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec
             ParsedStructMember::Definition(d) => {
                 StructMember::Definition(StructMemberDefinition::new(
                     d.name,
-                    d.struct_type,
+                    parsed_type_to_type(d.struct_type),
                     d.verified_value,
                     d.used_as_size_in,
                     d.used_in_if.unwrap(),
@@ -75,7 +94,7 @@ pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec
                 parsed_members_to_members(s.members),
                 parsed_if_statement_to_if_statement(s.else_ifs),
                 parsed_members_to_members(s.else_statement_members),
-                s.original_ty.unwrap(),
+                parsed_type_to_type(s.original_ty.unwrap()),
             )),
             ParsedStructMember::OptionalStatement(o) => StructMember::OptionalStatement(
                 OptionalStatement::new(o.name, parsed_members_to_members(o.members), o.tags),
@@ -95,7 +114,7 @@ fn parsed_if_statement_to_if_statement(parsed: Vec<ParsedIfStatement>) -> Vec<If
             parsed_members_to_members(p.members),
             parsed_if_statement_to_if_statement(p.else_ifs),
             parsed_members_to_members(p.else_statement_members),
-            p.original_ty.unwrap(),
+            parsed_type_to_type(p.original_ty.unwrap()),
         ))
     }
 
@@ -107,12 +126,12 @@ fn set_used_as_size_in(members: &mut [ParsedStructMember]) {
 
     for d in all_definitions(members) {
         match d.ty() {
-            Type::String { length } => {
+            ParsedType::String { length } => {
                 if length.parse::<u8>().is_err() {
                     variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
                 }
             }
-            Type::Array(array) => {
+            ParsedType::Array(array) => {
                 if let ArraySize::Variable(length) = array.size() {
                     if length.parse::<u8>().is_err() {
                         variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
@@ -176,12 +195,12 @@ fn check_complex_types_exist(
 ) {
     for d in all_definitions(members) {
         match &d.ty() {
-            Type::Array(a) => {
+            ParsedType::Array(a) => {
                 if let ArrayType::Complex(c) = &a.ty() {
                     contains_complex_type(containers, definers, c, tags, d.name())
                 }
             }
-            Type::Identifier { s: i, .. } => {
+            ParsedType::Identifier { s: i, .. } => {
                 contains_complex_type(containers, definers, i, tags, d.name());
 
                 match d.value() {
@@ -205,7 +224,7 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
         match m {
             ParsedStructMember::IfStatement(statement) => {
                 let ty = match e.get_field_ty(statement.name()) {
-                    Type::Identifier { s, .. } => s,
+                    ParsedType::Identifier { s, .. } => s,
                     _ => unreachable!(),
                 };
 
@@ -264,7 +283,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
     let value = match test {
         ParsedTestValue::Single(s) => s,
         ParsedTestValue::Multiple(mut multiple) => {
-            if ty == &Type::UpdateMask {
+            if ty == &ParsedType::UpdateMask {
                 let mut v = Vec::new();
                 for m_inner in multiple.iter_mut() {
                     let (ty, name) = &m_inner.variable_name.split_once('_').unwrap();
@@ -309,7 +328,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
             let mut v = Vec::new();
 
             let ty_name = match ty {
-                Type::Array(array) => match array.ty() {
+                ParsedType::Array(array) => match array.ty() {
                     ArrayType::Integer(_) => panic!(),
                     ArrayType::Complex(c) => c.as_str(),
                     ArrayType::CString => unimplemented!(),
@@ -337,17 +356,17 @@ fn convert_parsed_test_case_value_to_test_case_value(
     };
 
     let tv = match ty {
-        Type::SizedCString | Type::CString | Type::String { .. } => {
+        ParsedType::SizedCString | ParsedType::CString | ParsedType::String { .. } => {
             TestValue::String(value.replace('\"', ""))
         }
-        Type::Bool => TestValue::Bool(if value == "TRUE" {
+        ParsedType::Bool => TestValue::Bool(if value == "TRUE" {
             true
         } else if value == "FALSE" {
             false
         } else {
             panic!("incorrect boolean value: '{}'", value)
         }),
-        Type::Array(array) => {
+        ParsedType::Array(array) => {
             assert!(value.contains('['));
             assert!(value.contains(']'));
             let val = &value.replace('[', "").replace(']', "");
@@ -365,23 +384,23 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 size: array.size(),
             }
         }
-        Type::FloatingPoint(_) => TestValue::FloatingNumber {
+        ParsedType::FloatingPoint(_) => TestValue::FloatingNumber {
             value: value.parse().unwrap(),
             original_string: value.clone(),
         },
-        Type::DateTime => TestValue::DateTime(ContainerValue::new(
+        ParsedType::DateTime => TestValue::DateTime(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
         )),
-        Type::Integer(_) => TestValue::Number(ContainerValue::new(
+        ParsedType::Integer(_) => TestValue::Number(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
         )),
-        Type::Guid | Type::PackedGuid => TestValue::Guid(ContainerValue::new(
+        ParsedType::Guid | ParsedType::PackedGuid => TestValue::Guid(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
         )),
-        Type::Identifier { .. } => {
+        ParsedType::Identifier { .. } => {
             if conversion::get_definer(flags, ty.rust_str().as_str(), c.tags()).is_some() {
                 let mut v = Vec::new();
                 for flag in value.split('|') {
@@ -396,7 +415,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 unreachable!()
             }
         }
-        Type::UpdateMask | Type::AuraMask => {
+        ParsedType::UpdateMask | ParsedType::AuraMask => {
             panic!("unimplemented")
         }
     };

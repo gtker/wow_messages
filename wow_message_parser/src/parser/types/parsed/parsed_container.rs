@@ -6,9 +6,9 @@ use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
 };
+use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::Tags;
-use crate::parser::types::ty::Type;
 use crate::parser::types::ArrayType;
 use crate::{ContainerType, DefinerType};
 
@@ -48,7 +48,7 @@ impl ParsedContainer {
         fn inner(m: &ParsedStructMember, ty_name: &str, variable_name: &str) -> DefinerUsage {
             match m {
                 ParsedStructMember::Definition(d) => {
-                    if let Type::Identifier { s, .. } = d.ty() {
+                    if let ParsedType::Identifier { s, .. } = d.ty() {
                         if s == ty_name {
                             return DefinerUsage::NotInIf;
                         }
@@ -115,7 +115,7 @@ impl ParsedContainer {
 
     pub(crate) fn get_variable_name_of_definer_ty(&self, ty_name: &str) -> Option<String> {
         for d in self.all_definitions() {
-            if let Type::Identifier { s, .. } = d.ty() {
+            if let ParsedType::Identifier { s, .. } = d.ty() {
                 if s == ty_name {
                     return Some(d.name().to_string());
                 }
@@ -125,7 +125,7 @@ impl ParsedContainer {
         None
     }
 
-    pub(crate) fn get_field_ty(&self, field_name: &str) -> &Type {
+    pub(crate) fn get_field_ty(&self, field_name: &str) -> &ParsedType {
         for d in self.all_definitions() {
             if d.name() == field_name {
                 return d.ty();
@@ -257,7 +257,7 @@ impl ParsedContainer {
         sizes
     }
 
-    pub(crate) fn get_type_of_variable(&self, variable_name: &str) -> Type {
+    pub(crate) fn get_type_of_variable(&self, variable_name: &str) -> ParsedType {
         for d in self.all_definitions() {
             if d.name() == variable_name {
                 return d.ty().clone();
@@ -304,8 +304,10 @@ impl ParsedContainer {
     pub(crate) fn contains_string_or_cstring(&self) -> bool {
         for d in self.all_definitions() {
             match d.ty() {
-                Type::CString | Type::String { .. } | Type::SizedCString => return true,
-                Type::Array(array) => {
+                ParsedType::CString | ParsedType::String { .. } | ParsedType::SizedCString => {
+                    return true
+                }
+                ParsedType::Array(array) => {
                     if matches!(array.ty(), ArrayType::CString) {
                         return true;
                     }
@@ -326,12 +328,12 @@ impl ParsedContainer {
 
         for d in self.all_definitions() {
             match &d.struct_type() {
-                Type::Array(a) => {
+                ParsedType::Array(a) => {
                     if let ArrayType::Complex(i) = a.ty() {
                         v.push(i.clone());
                     }
                 }
-                Type::Identifier { s, .. } => {
+                ParsedType::Identifier { s, .. } => {
                     v.push(s.clone());
                 }
                 _ => {}

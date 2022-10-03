@@ -2,13 +2,12 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
+use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE,
     GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
-use crate::parser::types::{
-    Array, ArraySize, ArrayType, Endianness, FloatingPointType, IntegerType,
-};
+use crate::parser::types::{Array, ArraySize, ArrayType, FloatingPointType, IntegerType};
 use crate::{
     Tags, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
     SIZED_CSTRING_SMALLEST_ALLOWED,
@@ -104,7 +103,7 @@ impl Type {
                     sizes.inc(length, length);
                 } else {
                     match &e.get_type_of_variable(length) {
-                        Type::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
+                        ParsedType::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
                         _ => unreachable!("string lengths can only be int"),
                     }
                 }
@@ -136,7 +135,7 @@ impl Type {
                         (f, f)
                     }
                     ArraySize::Variable(f) => match e.get_field_ty(&f) {
-                        Type::Integer(i) => (i.smallest_value(), i.largest_value()),
+                        ParsedType::Integer(i) => (i.smallest_value(), i.largest_value()),
                         _ => unreachable!("only ints can be string lengths"),
                     },
                     ArraySize::Endless => unreachable!(),
@@ -218,126 +217,6 @@ impl Type {
             | Type::AuraMask
             | Type::CString
             | Type::PackedGuid => "-".to_string(),
-        }
-    }
-
-    pub(crate) fn with_upcast(s: &str, upcasted: &str) -> Self {
-        let t = Self::from_str(s);
-        match t {
-            Type::Identifier { .. } => {}
-            _ => panic!("upcast for type that does not support it"),
-        }
-
-        let int = match upcasted {
-            "u16" => IntegerType::U16(Endianness::Little),
-            "u32" => IntegerType::U32(Endianness::Little),
-            "u64" => IntegerType::U64(Endianness::Little),
-            "u16_be" => IntegerType::U16(Endianness::Big),
-            "u32_be" => IntegerType::U32(Endianness::Big),
-            "u64_be" => IntegerType::U64(Endianness::Big),
-            "i32" => IntegerType::U64(Endianness::Little),
-            "i32_be" => IntegerType::U64(Endianness::Big),
-            _ => panic!("unsupported upcast: {}", upcasted),
-        };
-
-        Self::Identifier {
-            s: s.to_string(),
-            upcast: Some(int),
-        }
-    }
-
-    #[allow(clippy::should_implement_trait)]
-    pub(crate) fn from_str(s: &str) -> Self {
-        let s = match s {
-            "u8" => Self::Integer(IntegerType::U8),
-            "Bool" => Self::Bool,
-            "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
-            "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
-            "Spell" => Self::Integer(IntegerType::U32(Endianness::Little)),
-            "Item" => Self::Integer(IntegerType::U32(Endianness::Little)),
-            "u64" => Self::Integer(IntegerType::U64(Endianness::Little)),
-            "Guid" => Self::Guid,
-            "PackedGuid" => Self::PackedGuid,
-            "AuraMask" => Self::AuraMask,
-            "UpdateMask" => Self::UpdateMask,
-            "u16_be" => Self::Integer(IntegerType::U16(Endianness::Big)),
-            "u32_be" => Self::Integer(IntegerType::U32(Endianness::Big)),
-            "u64_be" => Self::Integer(IntegerType::U64(Endianness::Big)),
-            "i32" => Self::Integer(IntegerType::I32(Endianness::Little)),
-            "i32_be" => Self::Integer(IntegerType::I32(Endianness::Big)),
-            "f32" => Self::FloatingPoint(FloatingPointType::F32(Endianness::Little)),
-            "f32_be" => Self::FloatingPoint(FloatingPointType::F32(Endianness::Big)),
-            "f64" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Little)),
-            "f64_be" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Big)),
-            "CString" => Self::CString,
-            "SizedCString" => Self::SizedCString,
-            "DateTime" => Self::DateTime,
-            _ => Self::Identifier {
-                s: s.to_string(),
-                upcast: None,
-            },
-        };
-        match s {
-            Type::Identifier { s: i, .. } => {
-                if i.contains('[') {
-                    let mut i = i.split('[');
-                    let array_type = i.next().unwrap();
-                    let array_type: Type = Type::from_str(array_type);
-
-                    let amount = i.next().unwrap().strip_suffix(']').unwrap();
-                    let parsed = str::parse::<i64>(amount);
-
-                    let size = if let Ok(parsed) = parsed {
-                        ArraySize::Fixed(parsed)
-                    } else if amount == "-" {
-                        ArraySize::Endless
-                    } else {
-                        ArraySize::Variable(amount.to_string())
-                    };
-
-                    match array_type {
-                        Type::Integer(i) => Self::Array(Array {
-                            inner: ArrayType::Integer(i),
-                            size,
-                        }),
-                        Type::Identifier { s: i, .. } => {
-                            if i == "String" {
-                                return Self::String {
-                                    length: amount.to_string(),
-                                };
-                            }
-
-                            Self::Array(Array {
-                                inner: ArrayType::Complex(i),
-                                size,
-                            })
-                        }
-                        Type::CString => Self::Array(Array {
-                            inner: ArrayType::CString,
-                            size,
-                        }),
-                        Type::SizedCString
-                        | Type::String { .. }
-                        | Type::Array(_)
-                        | Type::FloatingPoint(_)
-                        | Type::UpdateMask
-                        | Type::AuraMask
-                        | Type::DateTime
-                        | Type::Bool => panic!("unsupported"),
-                        Type::PackedGuid => Self::Array(Array {
-                            inner: ArrayType::PackedGuid,
-                            size,
-                        }),
-                        Type::Guid => Self::Array(Array {
-                            inner: ArrayType::Guid,
-                            size,
-                        }),
-                    }
-                } else {
-                    Self::Identifier { s: i, upcast: None }
-                }
-            }
-            s => s,
         }
     }
 }

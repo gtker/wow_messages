@@ -15,6 +15,7 @@ use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
 use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
 };
+use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
@@ -26,7 +27,6 @@ use types::if_statement::{Condition, Conditional};
 use types::parsed::parsed_container::ParsedContainer;
 use types::parsed::parsed_definer::ParsedDefiner;
 use types::parsed::parsed_test_case::{ParsedTestCase, ParsedTestCaseMember, ParsedTestValue};
-use types::ty::Type;
 
 pub mod stats;
 pub mod types;
@@ -318,7 +318,7 @@ fn parse_struct(
 fn unimplemented_member() -> ParsedStructMember {
     ParsedStructMember::Definition(ParsedStructMemberDefinition::new(
         "unimplemented",
-        Type::Array(Array::new_unimplemented()),
+        ParsedType::Array(Array::new_unimplemented()),
         None,
         Tags::new(),
     ))
@@ -372,9 +372,9 @@ fn parse_struct_member(mut t: Pair<Rule>) -> ParsedStructMember {
             };
 
             let container_type = if let Some(ty) = upcasted_type {
-                Type::with_upcast(container_type, ty)
+                ParsedType::with_upcast(container_type, ty)
             } else {
-                Type::from_str(container_type)
+                ParsedType::from_str(container_type)
             };
 
             let identifier = identifier_and_value
