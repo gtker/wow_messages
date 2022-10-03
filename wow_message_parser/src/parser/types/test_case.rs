@@ -1,6 +1,6 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::tags::Tags;
-use crate::parser::types::{ArraySize, VerifiedContainerValue};
+use crate::parser::types::{ArraySize, ContainerValue};
 use crate::rust_printer::UpdateMaskType;
 
 #[derive(Debug, Clone)]
@@ -112,10 +112,10 @@ impl TestUpdateMaskValue {
 
 #[derive(Debug, Clone)]
 pub enum TestValue {
-    Number(VerifiedContainerValue),
+    Number(ContainerValue),
     Bool(bool),
-    DateTime(VerifiedContainerValue),
-    Guid(VerifiedContainerValue),
+    DateTime(ContainerValue),
+    Guid(ContainerValue),
     FloatingNumber {
         value: f64,
         original_string: String,
@@ -126,7 +126,7 @@ pub enum TestValue {
     },
     String(String),
     Flag(Vec<String>),
-    Enum(VerifiedContainerValue),
+    Enum(ContainerValue),
     SubObject {
         ty_name: String,
         members: Vec<TestCaseMember>,

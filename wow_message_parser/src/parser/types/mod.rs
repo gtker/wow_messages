@@ -332,12 +332,12 @@ impl Array {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct VerifiedContainerValue {
+pub struct ContainerValue {
     value: u64,
     original_string: String,
 }
 
-impl Display for VerifiedContainerValue {
+impl Display for ContainerValue {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
@@ -348,7 +348,7 @@ impl Display for VerifiedContainerValue {
     }
 }
 
-impl VerifiedContainerValue {
+impl ContainerValue {
     pub(crate) fn value(&self) -> u64 {
         self.value
     }
@@ -370,23 +370,23 @@ impl VerifiedContainerValue {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct ContainerValue {
+pub struct ParsedContainerValue {
     identifier: String,
 }
 
-impl ContainerValue {
+impl ParsedContainerValue {
     pub(crate) fn identifier(&self) -> &str {
         &self.identifier
     }
 }
 
-impl Display for ContainerValue {
+impl Display for ParsedContainerValue {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.identifier)
     }
 }
 
-impl From<&str> for ContainerValue {
+impl From<&str> for ParsedContainerValue {
     fn from(s: &str) -> Self {
         Self {
             identifier: s.to_string(),

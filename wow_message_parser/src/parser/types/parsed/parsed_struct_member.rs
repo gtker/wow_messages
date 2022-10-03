@@ -3,7 +3,7 @@ use crate::parser::types::objects::conversion::get_definer;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ContainerValue, VerifiedContainerValue};
+use crate::parser::types::{ContainerValue, ParsedContainerValue};
 use crate::{Tags, CONTAINER_SELF_SIZE_FIELD};
 
 #[derive(Debug, Clone, Eq, PartialEq)]
@@ -17,8 +17,8 @@ pub enum ParsedStructMember {
 pub struct ParsedStructMemberDefinition {
     pub name: String,
     pub struct_type: Type,
-    pub value: Option<ContainerValue>,
-    pub verified_value: Option<VerifiedContainerValue>,
+    pub value: Option<ParsedContainerValue>,
+    pub verified_value: Option<ContainerValue>,
     pub used_as_size_in: Option<String>,
     pub used_in_if: Option<bool>,
     pub tags: Tags,
@@ -40,7 +40,7 @@ impl ParsedStructMemberDefinition {
     pub(crate) fn new(
         name: &str,
         struct_type: Type,
-        value: Option<ContainerValue>,
+        value: Option<ParsedContainerValue>,
         tags: Tags,
     ) -> Self {
         Self {
@@ -62,7 +62,7 @@ impl ParsedStructMemberDefinition {
         &self.struct_type
     }
 
-    pub(crate) fn value(&self) -> &Option<ContainerValue> {
+    pub(crate) fn value(&self) -> &Option<ParsedContainerValue> {
         &self.value
     }
 
@@ -72,10 +72,8 @@ impl ParsedStructMemberDefinition {
             Some(v) => {
                 let parsed_val = crate::parser::utility::parse_value(v.identifier());
                 if let Some(int_val) = parsed_val {
-                    self.verified_value = Some(VerifiedContainerValue::new(
-                        int_val,
-                        v.identifier().to_string(),
-                    ))
+                    self.verified_value =
+                        Some(ContainerValue::new(int_val, v.identifier().to_string()))
                 } else {
                     let value = if v.identifier() != CONTAINER_SELF_SIZE_FIELD {
                         get_definer(definers, &self.ty().rust_str(), self.tags())
@@ -87,10 +85,8 @@ impl ParsedStructMemberDefinition {
                     } else {
                         0
                     };
-                    self.verified_value = Some(VerifiedContainerValue::new(
-                        value,
-                        v.identifier().to_string(),
-                    ));
+                    self.verified_value =
+                        Some(ContainerValue::new(value, v.identifier().to_string()));
                 }
             }
         }

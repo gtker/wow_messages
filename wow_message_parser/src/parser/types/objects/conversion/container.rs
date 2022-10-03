@@ -14,7 +14,7 @@ use crate::parser::types::parsed::parsed_test_case::{
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArraySize, ArrayType, VerifiedContainerValue};
+use crate::parser::types::{ArraySize, ArrayType, ContainerValue};
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
 use crate::{DefinerType, Tags};
@@ -369,15 +369,15 @@ fn convert_parsed_test_case_value_to_test_case_value(
             value: value.parse().unwrap(),
             original_string: value.clone(),
         },
-        Type::DateTime => TestValue::DateTime(VerifiedContainerValue::new(
+        Type::DateTime => TestValue::DateTime(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
         )),
-        Type::Integer(_) => TestValue::Number(VerifiedContainerValue::new(
+        Type::Integer(_) => TestValue::Number(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
         )),
-        Type::Guid | Type::PackedGuid => TestValue::Guid(VerifiedContainerValue::new(
+        Type::Guid | Type::PackedGuid => TestValue::Guid(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
         )),
@@ -391,7 +391,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
             } else if let Some(e) = conversion::get_definer(enums, ty.rust_str().as_str(), c.tags())
             {
                 let v = e.get_field_with_name(&value).unwrap().value().int();
-                TestValue::Enum(VerifiedContainerValue::new(v, value))
+                TestValue::Enum(ContainerValue::new(v, value))
             } else {
                 unreachable!()
             }

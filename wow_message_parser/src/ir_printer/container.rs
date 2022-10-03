@@ -6,9 +6,7 @@ use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{
-    Array, ArraySize, ArrayType, FloatingPointType, VerifiedContainerValue,
-};
+use crate::parser::types::{Array, ArraySize, ArrayType, ContainerValue, FloatingPointType};
 use crate::rust_printer::UpdateMaskType;
 use serde::Serialize;
 
@@ -369,8 +367,8 @@ pub struct IrIntegerEnumValue {
     original_string: String,
 }
 
-impl From<&VerifiedContainerValue> for IrIntegerEnumValue {
-    fn from(v: &VerifiedContainerValue) -> Self {
+impl From<&ContainerValue> for IrIntegerEnumValue {
+    fn from(v: &ContainerValue) -> Self {
         Self {
             value: v.value(),
             original_string: v.original_string().to_string(),

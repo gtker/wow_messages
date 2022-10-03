@@ -1,7 +1,7 @@
 use crate::parser::types::if_statement::IfStatement;
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::ty::Type;
-use crate::parser::types::VerifiedContainerValue;
+use crate::parser::types::ContainerValue;
 use crate::Tags;
 
 #[derive(Debug, Clone, Eq, PartialEq)]
@@ -15,7 +15,7 @@ pub enum StructMember {
 pub struct StructMemberDefinition {
     name: String,
     struct_type: Type,
-    value: Option<VerifiedContainerValue>,
+    value: Option<ContainerValue>,
     used_as_size_in: Option<String>,
     used_in_if: bool,
     tags: Tags,
@@ -37,7 +37,7 @@ impl StructMemberDefinition {
     pub(crate) fn new(
         name: String,
         struct_type: Type,
-        verified_value: Option<VerifiedContainerValue>,
+        verified_value: Option<ContainerValue>,
         used_as_size_in: Option<String>,
         used_in_if: bool,
 
@@ -61,7 +61,7 @@ impl StructMemberDefinition {
         &self.struct_type
     }
 
-    pub(crate) fn value(&self) -> &Option<VerifiedContainerValue> {
+    pub(crate) fn value(&self) -> &Option<ContainerValue> {
         &self.value
     }
 

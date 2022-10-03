@@ -3,7 +3,7 @@ use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Array, ArrayType, IntegerType, ObjectType, VerifiedContainerValue};
+use crate::parser::types::{Array, ArrayType, ContainerValue, IntegerType, ObjectType};
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
@@ -62,7 +62,7 @@ pub(crate) fn print_write_field_integer(
     variable_prefix: &str,
     int_type: &IntegerType,
     used_as_size_in: &Option<String>,
-    verified_value: &Option<VerifiedContainerValue>,
+    verified_value: &Option<ContainerValue>,
     size_of_fields_before_size: u64,
     postfix: &str,
 ) {
