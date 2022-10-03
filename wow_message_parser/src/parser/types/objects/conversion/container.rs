@@ -312,7 +312,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
 
             let mut members = Vec::with_capacity(multiple.len());
             let inner_c =
-                conversion::get_container(containers, ty.rust_str().as_str(), c.tags()).unwrap();
+                conversion::get_container(containers, ty.str().as_str(), c.tags()).unwrap();
             for m_inner in multiple {
                 members.push(convert_test_case_member_to_test_case(
                     m_inner, inner_c, containers, enums, flags,
@@ -320,7 +320,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
             }
 
             return TestValue::SubObject {
-                ty_name: ty.rust_str(),
+                ty_name: ty.str(),
                 members,
             };
         }
@@ -400,15 +400,14 @@ fn convert_parsed_test_case_value_to_test_case_value(
             parse_value(&value).unwrap(),
             value.clone(),
         )),
-        ParsedType::Identifier { .. } => {
-            if conversion::get_definer(flags, ty.rust_str().as_str(), c.tags()).is_some() {
+        ParsedType::Identifier { s, .. } => {
+            if get_definer(flags, s, c.tags()).is_some() {
                 let mut v = Vec::new();
                 for flag in value.split('|') {
                     v.push(flag.trim().to_owned());
                 }
                 TestValue::Flag(v)
-            } else if let Some(e) = conversion::get_definer(enums, ty.rust_str().as_str(), c.tags())
-            {
+            } else if let Some(e) = get_definer(enums, s, c.tags()) {
                 let v = e.get_field_with_name(&value).unwrap().value().int();
                 TestValue::Enum(ContainerValue::new(v, value))
             } else {

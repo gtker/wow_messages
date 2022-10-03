@@ -37,23 +37,22 @@ pub(crate) enum ParsedType {
 }
 
 impl ParsedType {
-    pub(crate) fn rust_str(&self) -> String {
-        let s = match self {
-            ParsedType::Integer(i) => i.rust_str().to_string(),
-            ParsedType::FloatingPoint(i) => i.rust_str().to_string(),
+    pub(crate) fn str(&self) -> String {
+        match self {
+            ParsedType::Integer(i) => i.str().to_string(),
+            ParsedType::CString => "CString".to_string(),
+            ParsedType::String { length } => format!("String[{}]", length),
+            ParsedType::Array(a) => a.str(),
             ParsedType::Identifier { s, .. } => s.clone(),
-            ParsedType::CString | ParsedType::SizedCString | ParsedType::String { .. } => {
-                "String".to_string()
-            }
-            ParsedType::Array(a) => a.rust_str(),
-            ParsedType::PackedGuid | ParsedType::Guid => "Guid".to_string(),
+            ParsedType::FloatingPoint(i) => i.str().to_string(),
+            ParsedType::PackedGuid => "PackedGuid".to_string(),
+            ParsedType::Guid => "Guid".to_string(),
             ParsedType::UpdateMask => "UpdateMask".to_string(),
             ParsedType::AuraMask => "AuraMask".to_string(),
-            ParsedType::Bool => "bool".to_string(),
+            ParsedType::SizedCString => "SizedCString".to_string(),
+            ParsedType::Bool => "Bool".to_string(),
             ParsedType::DateTime => "DateTime".to_string(),
-        };
-
-        s
+        }
     }
 
     // NOTE: Definers used in if statements count if statement contents
