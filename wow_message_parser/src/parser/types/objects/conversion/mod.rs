@@ -1,4 +1,5 @@
 use crate::parser::types::definer::Definer;
+use crate::parser::types::objects::conversion::container::check_if_statement_operators;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_object::get_definer_objects_used_in;
@@ -53,6 +54,8 @@ pub(crate) fn parsed_container_to_container(
         let sizes = p.create_sizes(containers, definers);
 
         let only_has_io_error = p.recursive_only_has_io_errors(containers, definers);
+
+        check_if_statement_operators(&p, definers);
 
         let members =
             container::parsed_members_to_members(p.members, &p.tags, containers, definers);

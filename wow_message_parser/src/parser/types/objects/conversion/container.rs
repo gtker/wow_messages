@@ -1,4 +1,5 @@
 use crate::parser::types::definer::Definer;
+use crate::parser::types::if_statement::Equation;
 use crate::parser::types::objects::conversion;
 use crate::parser::types::objects::conversion::{
     all_definitions, all_definitions_mut, get_definer,
@@ -13,7 +14,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, VerifiedContainerValue};
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
-use crate::Tags;
+use crate::{DefinerType, Tags};
 
 pub(crate) fn parsed_members_to_members(
     mut members: Vec<StructMember>,
@@ -125,6 +126,57 @@ fn check_complex_types_exist(
             }
             _ => {}
         }
+    }
+}
+
+pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Definer]) {
+    fn inner(m: &StructMember, e: &ParsedContainer, definers: &[Definer]) {
+        match m {
+            StructMember::IfStatement(statement) => {
+                let ty = match e.get_field_ty(statement.name()) {
+                    Type::Identifier { s, .. } => s,
+                    _ => unreachable!(),
+                };
+
+                let definer = get_definer(definers, ty, e.tags()).unwrap();
+                match definer.definer_ty() {
+                    DefinerType::Enum => {
+                        for c in statement.get_conditional().equations() {
+                            match c {
+                                Equation::Equals { .. } | Equation::NotEquals { .. } => {}
+                                Equation::BitwiseAnd { .. } => {
+                                    panic!("enum has bitwise and")
+                                }
+                            }
+                        }
+                    }
+                    DefinerType::Flag => {
+                        for c in statement.get_conditional().equations() {
+                            match c {
+                                Equation::Equals { .. } | Equation::NotEquals { .. } => {
+                                    panic!("flag has equals or not equals")
+                                }
+                                Equation::BitwiseAnd { .. } => {}
+                            }
+                        }
+                    }
+                }
+
+                for m in statement.all_members() {
+                    inner(m, e, definers);
+                }
+            }
+            StructMember::OptionalStatement(optional) => {
+                for m in optional.members() {
+                    inner(m, e, definers);
+                }
+            }
+            StructMember::Definition(_) => {}
+        }
+    }
+
+    for m in e.fields() {
+        inner(m, e, definers);
     }
 }
 

@@ -1,6 +1,6 @@
 use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
-use crate::parser::types::if_statement::{Equation, IfStatement};
+use crate::parser::types::if_statement::IfStatement;
 use crate::parser::types::objects::{Object, Objects};
 use crate::parser::types::sizes::{Sizes, BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
@@ -10,7 +10,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{compare_name_and_tags, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
-    DefinerType, Version, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
+    Version, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
     WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
@@ -322,57 +322,6 @@ impl Container {
         }
 
         sum
-    }
-
-    pub(crate) fn check_if_statement_operators(&self, o: &Objects) {
-        fn inner(m: &StructMember, e: &Container, o: &Objects) {
-            match m {
-                StructMember::IfStatement(statement) => {
-                    let ty = match e.get_field_ty(statement.name()) {
-                        Type::Identifier { s, .. } => s,
-                        _ => unreachable!(),
-                    };
-
-                    let definer = o.get_definer(ty, e.tags());
-                    match definer.definer_ty() {
-                        DefinerType::Enum => {
-                            for c in statement.get_conditional().equations() {
-                                match c {
-                                    Equation::Equals { .. } | Equation::NotEquals { .. } => {}
-                                    Equation::BitwiseAnd { .. } => {
-                                        panic!("enum has bitwise and")
-                                    }
-                                }
-                            }
-                        }
-                        DefinerType::Flag => {
-                            for c in statement.get_conditional().equations() {
-                                match c {
-                                    Equation::Equals { .. } | Equation::NotEquals { .. } => {
-                                        panic!("flag has equals or not equals")
-                                    }
-                                    Equation::BitwiseAnd { .. } => {}
-                                }
-                            }
-                        }
-                    }
-
-                    for m in statement.all_members() {
-                        inner(m, e, o);
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in optional.members() {
-                        inner(m, e, o);
-                    }
-                }
-                StructMember::Definition(_) => {}
-            }
-        }
-
-        for m in self.fields() {
-            inner(m, self, o);
-        }
     }
 
     pub(crate) fn tags(&self) -> &Tags {

@@ -341,14 +341,9 @@ impl Objects {
     }
 
     pub(crate) fn check_values(&mut self) {
-        let c = self.clone();
-
-        for e in self.all_containers() {
-            e.check_if_statement_operators(self);
-        }
-
         Self::check_versions(self.all_containers(), self.all_definers());
 
+        let c = self.clone();
         for e in self.all_containers_mut() {
             e.set_rust_object(create_rust_object(e, &c));
         }
