@@ -6,7 +6,7 @@ use pest::iterators::{Pair, Pairs};
 use pest::Parser;
 use pest_derive::Parser;
 
-use enumerator::DefinerField;
+use types::definer::DefinerField;
 use types::objects::Objects;
 use types::tags::{Tag, Tags};
 
@@ -15,16 +15,15 @@ use crate::container::{
     StructMemberDefinition,
 };
 use crate::file_info::FileInfo;
-use crate::parser::enumerator::{Definer, SelfValueDefinerField};
 use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
 use crate::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
 use crate::ENUM_SELF_VALUE_FIELD;
+use types::definer::{Definer, SelfValueDefinerField};
 use types::ty::Type;
 
-pub mod enumerator;
 pub mod stats;
 pub mod types;
 pub mod utility;

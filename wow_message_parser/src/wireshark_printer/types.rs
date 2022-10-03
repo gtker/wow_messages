@@ -1,4 +1,4 @@
-use crate::parser::enumerator::Definer;
+use crate::parser::types::definer::Definer;
 use crate::parser::types::ty::Type;
 use crate::parser::types::Endianness::Little;
 use crate::parser::types::{ArrayType, Endianness, FloatingPointType, IntegerType};

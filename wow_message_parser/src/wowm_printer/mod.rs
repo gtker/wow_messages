@@ -1,5 +1,5 @@
 use crate::container::{Container, ContainerType, Equation, IfStatement, StructMember};
-use crate::parser::enumerator::Definer;
+use crate::parser::types::definer::Definer;
 use crate::rust_printer::Writer;
 use crate::ENUM_SELF_VALUE_FIELD;
 use std::fmt::Write;

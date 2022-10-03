@@ -3,7 +3,7 @@ use crate::container::{
     PACKED_GUID_MIN_SIZE,
 };
 use crate::file_info::FileInfo;
-use crate::parser::enumerator::DefinerValue;
+use crate::parser::types::definer::DefinerValue;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;

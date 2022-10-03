@@ -1,5 +1,5 @@
 use crate::container::{Container, ContainerType, StructMember, StructMemberDefinition};
-use crate::parser::enumerator::Definer;
+use crate::parser::types::definer::Definer;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};

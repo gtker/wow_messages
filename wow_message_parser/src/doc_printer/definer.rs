@@ -1,6 +1,6 @@
 use crate::doc_printer::DocWriter;
 use crate::file_info::FileInfo;
-use crate::parser::enumerator::Definer;
+use crate::parser::types::definer::Definer;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{doc_printer, Tags};
