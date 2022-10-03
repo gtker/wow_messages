@@ -17,6 +17,7 @@ use crate::file_utils::{
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
+use crate::parser::types::parsed_object::ParsedObjects;
 use crate::path_utils::{get_login_version_file_path, wowm_directory};
 use crate::rust_printer::{
     get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
@@ -67,12 +68,14 @@ const CONTAINER_SELF_SIZE_FIELD: &str = "self.size";
 const GITHUB_REPO_URL: &str = "https://github.com/gtker/wow_messages";
 
 fn main() {
-    let mut o = Objects::empty();
+    let mut o = ParsedObjects::empty();
 
     load_files(&wowm_directory("login"), &mut o);
     load_files(&wowm_directory("world"), &mut o);
     load_files(&wowm_directory("unimplemented"), &mut o);
     //load_files(&wowm_directory("test"), &mut o);
+
+    let o = o.to_objects();
 
     wireshark_printer::print_wireshark(&o);
 
@@ -238,7 +241,7 @@ fn write_login_opcodes(o: &Objects) {
     }
 }
 
-fn load_files(dir: &Path, components: &mut Objects) {
+fn load_files(dir: &Path, components: &mut ParsedObjects) {
     for file in WalkDir::new(dir).into_iter().filter_map(|a| a.ok()) {
         if !file.file_type().is_file() {
             continue;
@@ -246,8 +249,6 @@ fn load_files(dir: &Path, components: &mut Objects) {
         let c = parser::parse_file(file.path());
         components.add_vecs(c);
     }
-    components.check_values();
-    components.sort_members();
 }
 
 fn should_not_write_object(t: &Tags) -> bool {

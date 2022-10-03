@@ -6,7 +6,6 @@ use pest::iterators::{Pair, Pairs};
 use pest::Parser;
 use pest_derive::Parser;
 
-use types::objects::Objects;
 use types::parsed_definer::DefinerField;
 use types::tags::{Tag, Tags};
 
@@ -16,7 +15,7 @@ use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
-use crate::ENUM_SELF_VALUE_FIELD;
+use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD};
 use types::container::{
     Condition, Conditional, Container, ContainerType, IfStatement, OptionalStatement, StructMember,
     StructMemberDefinition,
@@ -71,7 +70,7 @@ pub fn parse_commands(t: Pair<Rule>) -> Commands {
     Commands::new(tags)
 }
 
-pub fn parse_file(filename: &Path) -> Objects {
+pub fn parse_file(filename: &Path) -> ParsedObjects {
     let contents = read_to_string(filename).expect("unable to read file");
     let file = AuthParser::parse(Rule::file, &contents);
     let file = match file {
@@ -99,7 +98,7 @@ pub fn parse_file(filename: &Path) -> Objects {
     parse_statements(&mut statements, commands.tags(), &filename)
 }
 
-fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, filename: &str) -> Objects {
+fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, filename: &str) -> ParsedObjects {
     let mut enums = Vec::new();
     let mut flags = Vec::new();
     let mut structs = Vec::new();
@@ -189,7 +188,7 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, filename: &str) -
         }
     }
 
-    Objects::new(enums, flags, structs, messages, tests)
+    ParsedObjects::new(enums, flags, structs, messages, tests)
 }
 
 fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<TestCaseMember>) {

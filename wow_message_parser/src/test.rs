@@ -1,20 +1,19 @@
 use crate::file_utils::write_string_to_file;
-use crate::load_files;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::WorldVersion;
 use crate::rust_printer::{print_enum, print_flag, print_struct, Version, Writer};
+use crate::{load_files, ParsedObjects};
 use std::fs::read_to_string;
 use std::path::Path;
 
 const OVERWRITE_ALL_TESTS: bool = false;
 
 fn get_all_impl_items() -> Objects {
-    let mut o = Objects::empty();
+    let mut o = ParsedObjects::empty();
 
     load_files(Path::new("tests/impl_levels.wowm"), &mut o);
-    o.check_values();
 
-    o
+    o.to_objects()
 }
 
 fn tcheck(s: &Writer, name: &str) {
@@ -40,19 +39,17 @@ const VERSION: Version = Version::World(WorldVersion::Minor(1, 12));
 #[test]
 #[should_panic]
 fn flag_equals_must_err() {
-    let mut o = Objects::empty();
+    let mut o = ParsedObjects::empty();
     load_files(Path::new("tests/error_flag.wowm"), &mut o);
-
-    o.check_values();
+    o.to_objects();
 }
 
 #[test]
 #[should_panic]
 fn enum_equals_must_err() {
-    let mut o = Objects::empty();
+    let mut o = ParsedObjects::empty();
     load_files(Path::new("tests/error_enum.wowm"), &mut o);
-
-    o.check_values();
+    o.to_objects();
 }
 
 #[test]
