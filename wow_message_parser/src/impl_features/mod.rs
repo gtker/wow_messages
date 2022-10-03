@@ -17,6 +17,7 @@ pub(crate) enum Feature {
     CMsg,
     Msg,
 
+    #[allow(unused)]
     NestedStructTypes,
 
     ConstantValue,
@@ -45,6 +46,7 @@ pub(crate) enum Feature {
     NotElseEnum,
     ElseEnum,
 
+    #[allow(unused)]
     IfInDifferentScope,
 
     IfFlag,
@@ -59,6 +61,7 @@ pub(crate) enum Feature {
     EnumSelf,
     EnumUpcast,
     Flag,
+    #[allow(unused)]
     SimpleDefinerTypes,
 
     WorldVersion,

@@ -15,6 +15,8 @@
 
 * Max size of vanilla message (10240) mangoszero/server/WorldSocket.cpp:367
 
+* Feature has variants that are never constructed
+
 * Do not allocate for statically sized messages
 * More tests/definitions
 * MSRV test
