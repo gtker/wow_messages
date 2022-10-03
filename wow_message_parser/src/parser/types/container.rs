@@ -335,26 +335,6 @@ impl Container {
         panic!("unable to find field: '{}'", field_name)
     }
 
-    pub fn has_overlapping_version(&self, tags: &Tags) -> bool {
-        for o in self.tags().logon_versions() {
-            for i in tags.logon_versions() {
-                if i == o || *i == LoginVersion::All || *o == LoginVersion::All {
-                    return true;
-                }
-            }
-        }
-
-        for o in self.tags().versions() {
-            for i in tags.versions() {
-                if i == o || *i == WorldVersion::All || *o == WorldVersion::All {
-                    return true;
-                }
-            }
-        }
-
-        false
-    }
-
     pub fn any_fields_have_constant_value(&self) -> bool {
         for d in self.all_definitions() {
             if d.verified_value().is_some() {
