@@ -6,6 +6,7 @@ use crate::parser::types::container::{
 use crate::parser::types::definer::DefinerValue;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::Tags;
+use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, IntegerType, ObjectType,
@@ -14,7 +15,6 @@ use crate::rust_printer::{
     field_name_to_rust_name, get_new_flag_type_name, get_new_type_name, get_optional_type_name,
     DefinerType,
 };
-use crate::test_case::TestCase;
 use crate::{CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 use std::fmt::{Display, Formatter};
 

@@ -2,10 +2,10 @@ use crate::file_info::FileInfo;
 use crate::parser::types::container::{Container, DefinerUsage, Sizes};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::create_rust_object;
-use crate::test_case::TestCase;
 use crate::{DefinerType, Version};
 
 #[derive(Debug, Clone)]

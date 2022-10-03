@@ -33,7 +33,6 @@ pub mod impl_features;
 mod ir_printer;
 pub mod parser;
 mod rust_printer;
-mod test_case;
 mod wireshark_printer;
 mod wowm_printer;
 

@@ -2,6 +2,7 @@ use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::{Object, Objects};
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
     ArraySize, ArrayType, ContainerValue, ObjectType, VerifiedContainerValue,
@@ -11,7 +12,6 @@ use crate::rust_printer::{
     field_name_to_rust_name, DefinerType, Version, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
     LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
-use crate::test_case::TestCase;
 use crate::CONTAINER_SELF_SIZE_FIELD;
 use std::cmp::Ordering;
 use std::ops::AddAssign;

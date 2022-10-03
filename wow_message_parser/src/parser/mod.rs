@@ -11,11 +11,11 @@ use types::objects::Objects;
 use types::tags::{Tag, Tags};
 
 use crate::file_info::FileInfo;
+use crate::parser::types::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
 use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
-use crate::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
 use crate::ENUM_SELF_VALUE_FIELD;
 use types::container::{
     Condition, Conditional, Container, ContainerType, IfStatement, OptionalStatement, StructMember,

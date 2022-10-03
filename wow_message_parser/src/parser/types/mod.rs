@@ -6,6 +6,7 @@ pub mod container;
 pub mod definer;
 pub mod objects;
 pub mod tags;
+pub mod test_case;
 pub mod ty;
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]

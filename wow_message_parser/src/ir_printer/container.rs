@@ -4,12 +4,12 @@ use crate::parser::types::container::{
     Conditional, Container, ContainerType, Equation, IfStatement, OptionalStatement, StructMember,
     StructMemberDefinition,
 };
+use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, VerifiedContainerValue,
 };
 use crate::rust_printer::UpdateMaskType;
-use crate::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use serde::Serialize;
 
 pub fn containers_to_ir(containers: &[&Container]) -> Vec<IrContainer> {

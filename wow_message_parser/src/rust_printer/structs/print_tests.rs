@@ -1,6 +1,7 @@
 use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
+use crate::parser::types::test_case::{TestCase, TestCaseMember, TestValue};
 use crate::parser::types::ArraySize;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
@@ -12,7 +13,6 @@ use crate::rust_printer::{
     LOGIN_SERVER_MESSAGE_ENUM_NAME, SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
     WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
-use crate::test_case::{TestCase, TestCaseMember, TestValue};
 
 pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
     if e.tests().is_empty() {
