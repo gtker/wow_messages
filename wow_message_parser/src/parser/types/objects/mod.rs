@@ -380,13 +380,6 @@ impl Objects {
         v
     }
 
-    pub fn add_rust_views(&mut self) {
-        let temp = self.clone();
-        for e in self.all_containers_mut() {
-            e.set_rust_object(create_rust_object(e, &temp));
-        }
-    }
-
     pub fn check_values(&mut self) {
         let c = self.clone();
 
@@ -400,7 +393,9 @@ impl Objects {
 
         Self::check_versions(self.all_containers(), self.all_definers());
 
-        self.add_rust_views();
+        for e in self.all_containers_mut() {
+            e.set_rust_object(create_rust_object(e, &c));
+        }
     }
 
     fn check_versions<'a>(
