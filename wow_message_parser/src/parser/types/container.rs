@@ -43,7 +43,7 @@ impl ContainerType {
 pub struct Container {
     name: String,
     object_type: ContainerType,
-    sizes: Option<Sizes>,
+    sizes: Sizes,
     members: Vec<StructMember>,
     tags: Tags,
     tests: Vec<TestCase>,
@@ -269,7 +269,7 @@ impl Container {
     }
 
     pub fn is_constant_sized(&self) -> bool {
-        self.sizes.unwrap().is_constant().is_some()
+        self.sizes.is_constant().is_some()
     }
 
     pub fn only_has_io_errors(&self) -> bool {
@@ -596,7 +596,7 @@ impl Container {
     }
 
     pub fn sizes(&self) -> Sizes {
-        self.sizes.unwrap()
+        self.sizes
     }
 
     pub fn has_constant_size(&self, o: &Objects) -> bool {
@@ -951,11 +951,12 @@ impl Container {
         object_type: ContainerType,
         file_info: FileInfo,
         tests: Vec<TestCase>,
+        sizes: Sizes,
     ) -> Self {
         Self {
             name: name.to_string(),
             object_type,
-            sizes: None,
+            sizes,
             members,
             tags,
             tests,
@@ -1183,8 +1184,6 @@ impl Container {
         for m in &self.members.clone() {
             self.set_value_used_as_sizes(m);
         }
-
-        self.sizes = Some(self.create_sizes(o));
     }
 
     pub fn fields_mut(&mut self) -> &mut [StructMember] {

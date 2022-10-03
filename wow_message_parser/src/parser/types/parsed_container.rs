@@ -1,5 +1,8 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::container::{DefinerUsage, StructMember, StructMemberDefinition};
+use crate::parser::types::container::{
+    DefinerUsage, IfStatement, Sizes, StructMember, StructMemberDefinition,
+};
+use crate::parser::types::definer::Definer;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
 use crate::ContainerType;
@@ -137,6 +140,102 @@ impl ParsedContainer {
         }
 
         v
+    }
+
+    fn add_sizes_values(
+        e: &Self,
+        m: &StructMember,
+        containers: &[Self],
+        definers: &[Definer],
+        sizes: &mut Sizes,
+    ) {
+        match m {
+            StructMember::Definition(d) => *sizes += d.ty().sizes_parsed(e, containers, definers),
+            StructMember::OptionalStatement(optional) => {
+                let minimum = sizes.minimum();
+
+                for m in optional.members() {
+                    Self::add_sizes_values(e, m, containers, definers, sizes);
+                }
+
+                // The optional statement doesn't have be be here, so the minimum doesn't get incremented
+                sizes.set_minimum(minimum);
+            }
+            StructMember::IfStatement(statement) => {
+                let statement_sizes = Self::get_complex_sizes(statement, e, containers, definers);
+
+                *sizes += statement_sizes;
+            }
+        }
+    }
+
+    pub fn create_sizes(&self, containers: &[Self], definers: &[Definer]) -> Sizes {
+        let mut sizes = Sizes::new();
+        for m in self.fields() {
+            Self::add_sizes_values(self, m, containers, definers, &mut sizes);
+        }
+
+        sizes
+    }
+
+    pub fn get_complex_sizes(
+        statement: &IfStatement,
+        e: &Self,
+        containers: &[Self],
+        definers: &[Definer],
+    ) -> Sizes {
+        let mut if_sizes = Sizes::new();
+
+        for m in statement.members() {
+            Self::add_sizes_values(e, m, containers, definers, &mut if_sizes);
+        }
+
+        let mut smallest_sizes = if_sizes;
+        let mut largest_sizes = if_sizes;
+
+        let mut else_if_sizes;
+
+        for elseif in statement.else_ifs() {
+            else_if_sizes = Sizes::new();
+
+            for m in elseif.members() {
+                Self::add_sizes_values(e, m, containers, definers, &mut else_if_sizes);
+            }
+
+            if else_if_sizes.minimum() < smallest_sizes.minimum() {
+                smallest_sizes = else_if_sizes;
+            }
+            if else_if_sizes.maximum() > largest_sizes.maximum() {
+                largest_sizes = else_if_sizes;
+            }
+        }
+
+        else_if_sizes = Sizes::new();
+        for m in statement.else_members() {
+            Self::add_sizes_values(e, m, containers, definers, &mut else_if_sizes);
+        }
+
+        if else_if_sizes.minimum() < smallest_sizes.minimum() {
+            smallest_sizes = else_if_sizes;
+        }
+        if else_if_sizes.maximum() > largest_sizes.maximum() {
+            largest_sizes = else_if_sizes;
+        }
+
+        let mut sizes = Sizes::new();
+        sizes.set_minimum(smallest_sizes.minimum());
+        sizes.set_maximum(largest_sizes.maximum());
+        sizes
+    }
+
+    pub fn get_type_of_variable(&self, variable_name: &str) -> Type {
+        for d in self.all_definitions() {
+            if d.name() == variable_name {
+                return d.ty().clone();
+            }
+        }
+
+        panic!("unable to find type {}", variable_name)
     }
 
     pub fn fields(&self) -> &[StructMember] {

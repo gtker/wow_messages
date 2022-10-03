@@ -33,12 +33,15 @@ impl Objects {
         let flags = conversion::parsed_definer_to_definer(flags, &structs, &messages);
 
         let containers = [structs.as_slice(), messages.as_slice()].concat();
+        let definers = [enums.as_slice(), flags.as_slice()].concat();
 
         let mut tests =
             conversion::parsed_test_case_to_test_case(tests, &containers, &enums, &flags);
 
-        let structs = conversion::parsed_container_to_container(structs, &mut tests);
-        let messages = conversion::parsed_container_to_container(messages, &mut tests);
+        let structs =
+            conversion::parsed_container_to_container(structs, &mut tests, &containers, &definers);
+        let messages =
+            conversion::parsed_container_to_container(messages, &mut tests, &containers, &definers);
 
         let mut o = Self {
             enums,

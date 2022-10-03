@@ -15,11 +15,15 @@ use crate::{Container, Objects, Tags};
 pub fn parsed_container_to_container(
     parsed: Vec<ParsedContainer>,
     tests: &mut Vec<TestCase>,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
 ) -> Vec<Container> {
     let mut v = Vec::with_capacity(parsed.len());
 
     for p in parsed {
         let tests = Objects::get_tests_for_object(tests, p.name(), p.tags());
+
+        let sizes = p.create_sizes(containers, definers);
 
         v.push(Container::new(
             p.name,
@@ -28,6 +32,7 @@ pub fn parsed_container_to_container(
             p.object_type,
             p.file_info,
             tests,
+            sizes,
         ));
     }
 
@@ -59,18 +64,17 @@ pub fn parsed_definer_to_definer(
     v
 }
 
-fn get_container<'a>(
+pub fn get_container<'a>(
     containers: &'a [ParsedContainer],
     name: &str,
     tags: &Tags,
-) -> &'a ParsedContainer {
+) -> Option<&'a ParsedContainer> {
     containers
         .iter()
         .find(|a| a.name() == name && a.tags().fulfills_all(tags))
-        .unwrap()
 }
 
-fn get_definer<'a>(definers: &'a [Definer], name: &str, tags: &Tags) -> Option<&'a Definer> {
+pub fn get_definer<'a>(definers: &'a [Definer], name: &str, tags: &Tags) -> Option<&'a Definer> {
     definers
         .iter()
         .find(|a| a.name() == name && a.tags().fulfills_all(tags))
@@ -117,7 +121,7 @@ pub fn convert_parsed_test_case_value_to_test_case_value(
             }
 
             let mut members = Vec::with_capacity(multiple.len());
-            let inner_c = get_container(containers, ty.rust_str().as_str(), c.tags());
+            let inner_c = get_container(containers, ty.rust_str().as_str(), c.tags()).unwrap();
             for m_inner in multiple {
                 members.push(convert_test_case_member_to_test_case(
                     m_inner, inner_c, containers, enums, flags,
@@ -145,7 +149,7 @@ pub fn convert_parsed_test_case_value_to_test_case_value(
 
             for multiple in array {
                 let mut members = Vec::new();
-                let inner_c = get_container(containers, ty_name, c.tags());
+                let inner_c = get_container(containers, ty_name, c.tags()).unwrap();
 
                 for m_inner in multiple {
                     members.push(convert_test_case_member_to_test_case(
@@ -278,7 +282,7 @@ pub fn parsed_test_case_to_test_case(
     let mut v = Vec::with_capacity(parsed.len());
 
     for p in parsed {
-        let c = get_container(containers, p.subject(), p.tags());
+        let c = get_container(containers, p.subject(), p.tags()).unwrap();
 
         v.push(convert_parsed_test_case_to_test_case(
             p, c, containers, enums, flags,
