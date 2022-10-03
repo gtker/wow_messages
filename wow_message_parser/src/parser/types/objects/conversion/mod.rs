@@ -3,6 +3,7 @@ use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_object::get_definer_objects_used_in;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::TestCase;
 use crate::{Container, Objects, Tags};
 
@@ -133,4 +134,56 @@ pub fn get_definer<'a>(definers: &'a [Definer], name: &str, tags: &Tags) -> Opti
     definers
         .iter()
         .find(|a| a.name() == name && a.tags().fulfills_all(tags))
+}
+
+pub fn all_definitions_mut(members: &mut [StructMember]) -> Vec<&mut StructMemberDefinition> {
+    let mut v = Vec::new();
+
+    fn inner<'a>(m: &'a mut StructMember, v: &mut Vec<&'a mut StructMemberDefinition>) {
+        match m {
+            StructMember::Definition(d) => v.push(d),
+            StructMember::IfStatement(statement) => {
+                for m in statement.all_members_mut() {
+                    inner(m, v);
+                }
+            }
+            StructMember::OptionalStatement(optional) => {
+                for m in optional.members_mut() {
+                    inner(m, v);
+                }
+            }
+        }
+    }
+
+    for m in members {
+        inner(m, &mut v);
+    }
+
+    v
+}
+
+pub fn all_definitions(members: &[StructMember]) -> Vec<&StructMemberDefinition> {
+    let mut v = Vec::new();
+
+    fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
+        match m {
+            StructMember::Definition(d) => v.push(d),
+            StructMember::IfStatement(statement) => {
+                for m in statement.all_members() {
+                    inner(m, v);
+                }
+            }
+            StructMember::OptionalStatement(optional) => {
+                for m in optional.members() {
+                    inner(m, v);
+                }
+            }
+        }
+    }
+
+    for m in members {
+        inner(m, &mut v);
+    }
+
+    v
 }

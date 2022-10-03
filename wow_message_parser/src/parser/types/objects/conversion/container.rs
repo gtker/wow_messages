@@ -1,5 +1,6 @@
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion;
+use crate::parser::types::objects::conversion::{all_definitions, all_definitions_mut};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_test_case::{
     ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial,
@@ -23,92 +24,41 @@ pub fn parsed_members_to_members(
 }
 
 fn set_used_as_size_in(members: &mut Vec<StructMember>) {
-    fn used_as_size(m: &StructMember, variables_used_as_size_in: &mut Vec<(String, String)>) {
-        match m {
-            StructMember::Definition(d) => match d.ty() {
-                Type::String { length } => {
+    let mut variables_used_as_size_in = Vec::new();
+
+    for d in all_definitions(members) {
+        match d.ty() {
+            Type::String { length } => {
+                if length.parse::<u8>().is_err() {
+                    variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
+                }
+            }
+            Type::Array(array) => match array.size() {
+                ArraySize::Variable(length) => {
                     if length.parse::<u8>().is_err() {
                         variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
                     }
                 }
-                Type::Array(array) => match array.size() {
-                    ArraySize::Variable(length) => {
-                        if length.parse::<u8>().is_err() {
-                            variables_used_as_size_in
-                                .push((d.name().to_string(), length.to_string()));
-                        }
-                    }
-                    _ => {}
-                },
                 _ => {}
             },
-            StructMember::IfStatement(statement) => {
-                for m in statement.all_members() {
-                    used_as_size(m, variables_used_as_size_in);
-                }
-            }
-            StructMember::OptionalStatement(optional) => {
-                for m in optional.members() {
-                    used_as_size(m, variables_used_as_size_in);
-                }
-            }
+            _ => {}
         }
     }
 
-    let mut variables_used_as_size_in = Vec::new();
-
-    for m in members.iter_mut() {
-        used_as_size(m, &mut variables_used_as_size_in);
+    fn contains<'a>(v: &'a [(String, String)], name: &str) -> Option<&'a (String, String)> {
+        v.iter().find(|a| a.1 == name)
     }
 
-    fn set_used_as_size(m: &mut StructMember, variables_used_as_size_in: &[(String, String)]) {
-        fn contains<'a>(v: &'a [(String, String)], name: &str) -> Option<&'a (String, String)> {
-            v.iter().find(|a| a.1 == name)
+    for d in all_definitions_mut(members) {
+        if let Some((var, _)) = contains(&variables_used_as_size_in, d.name()) {
+            d.set_used_as_size_in(var.clone());
         }
-
-        match m {
-            StructMember::Definition(d) => {
-                if let Some((var, _)) = contains(variables_used_as_size_in, d.name()) {
-                    d.set_used_as_size_in(var.clone());
-                }
-            }
-            StructMember::IfStatement(statement) => {
-                for m in statement.all_members_mut() {
-                    set_used_as_size(m, variables_used_as_size_in);
-                }
-            }
-            StructMember::OptionalStatement(optional) => {
-                for m in optional.members_mut() {
-                    set_used_as_size(m, variables_used_as_size_in);
-                }
-            }
-        }
-    }
-
-    for m in members {
-        set_used_as_size(m, &variables_used_as_size_in);
     }
 }
 
 fn set_verified_values(members: &mut Vec<StructMember>, definers: &[Definer]) {
-    fn set_verified_values(m: &mut StructMember, definers: &[Definer]) {
-        match m {
-            StructMember::Definition(d) => d.set_verified_value(definers),
-            StructMember::IfStatement(statement) => {
-                for m in statement.all_members_mut() {
-                    set_verified_values(m, definers);
-                }
-            }
-            StructMember::OptionalStatement(optional) => {
-                for m in optional.members_mut() {
-                    set_verified_values(m, definers);
-                }
-            }
-        }
-    }
-
-    for m in members {
-        set_verified_values(m, definers);
+    for d in all_definitions_mut(members) {
+        d.set_verified_value(definers);
     }
 }
 
