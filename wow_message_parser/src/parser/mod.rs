@@ -12,7 +12,9 @@ use types::tags::{Tag, Tags};
 use crate::file_info::FileInfo;
 use crate::parser::types::parsed_container::ParsedContainer;
 use crate::parser::types::parsed_definer::ParsedDefiner;
-use crate::parser::types::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
+use crate::parser::types::parsed_test_case::{
+    ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial,
+};
 use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
@@ -193,7 +195,7 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, filename: &str) -
     ParsedObjects::new(enums, flags, structs, messages, tests)
 }
 
-fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<TestCaseMember>) {
+fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>) {
     let mut m = m.into_inner();
     let member_name = m.next().unwrap().as_str();
     let member_value = m.next().unwrap();
@@ -230,10 +232,10 @@ fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<TestCaseMember>) {
     let mut extra_kvs = m.find(|a| a.as_rule() == Rule::object_key_values);
     let kvs = parse_object_key_values(&mut extra_kvs, &Tags::new());
 
-    test_members.push(TestCaseMember::new(member_name, member_value, kvs));
+    test_members.push(ParsedTestCaseMember::new(member_name, member_value, kvs));
 }
 
-fn parse_test(t: &mut Pairs<Rule>, tags: &Tags, file_info: FileInfo) -> TestCase {
+fn parse_test(t: &mut Pairs<Rule>, tags: &Tags, file_info: FileInfo) -> ParsedTestCase {
     let name = t.next().unwrap().as_str();
     let members = t.next().unwrap().into_inner();
 
@@ -251,7 +253,7 @@ fn parse_test(t: &mut Pairs<Rule>, tags: &Tags, file_info: FileInfo) -> TestCase
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
     let kvs = parse_object_key_values(&mut extra_kvs, tags);
 
-    TestCase::new(name, test_members, raw_bytes, kvs, file_info)
+    ParsedTestCase::new(name, test_members, raw_bytes, kvs, file_info)
 }
 
 fn parse_struct(

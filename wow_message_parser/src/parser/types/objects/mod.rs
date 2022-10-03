@@ -5,6 +5,7 @@ use crate::parser::types::container::{Container, Sizes};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed_container::ParsedContainer;
 use crate::parser::types::parsed_definer::ParsedDefiner;
+use crate::parser::types::parsed_test_case::ParsedTestCase;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
@@ -27,10 +28,14 @@ impl Objects {
         flags: Vec<ParsedDefiner>,
         structs: Vec<ParsedContainer>,
         messages: Vec<ParsedContainer>,
-        tests: Vec<TestCase>,
+        tests: Vec<ParsedTestCase>,
     ) -> Self {
         let enums = conversion::parsed_definer_to_definer(enums, &structs, &messages);
         let flags = conversion::parsed_definer_to_definer(flags, &structs, &messages);
+
+        let containers = [structs.as_slice(), messages.as_slice()].concat();
+
+        let tests = conversion::parsed_test_case_to_test_case(tests, &containers, &enums, &flags);
 
         let structs = conversion::parsed_container_to_container(structs);
         let messages = conversion::parsed_container_to_container(messages);
@@ -405,9 +410,6 @@ impl Objects {
 
     pub fn check_values(&mut self) {
         let c = self.clone();
-        for s in &mut self.tests {
-            s.verify(&c);
-        }
 
         for e in self.all_definers() {
             e.self_check();

@@ -1,7 +1,7 @@
 use crate::parser::types::container::DefinerUsage;
 use crate::parser::types::parsed_container::ParsedContainer;
 use crate::parser::types::parsed_definer::ParsedDefiner;
-use crate::parser::types::test_case::TestCase;
+use crate::parser::types::parsed_test_case::ParsedTestCase;
 use crate::Objects;
 
 #[derive(Debug, Clone)]
@@ -10,7 +10,7 @@ pub struct ParsedObjects {
     flags: Vec<ParsedDefiner>,
     structs: Vec<ParsedContainer>,
     messages: Vec<ParsedContainer>,
-    tests: Vec<TestCase>,
+    tests: Vec<ParsedTestCase>,
 }
 
 impl ParsedObjects {
@@ -29,7 +29,7 @@ impl ParsedObjects {
         flags: Vec<ParsedDefiner>,
         structs: Vec<ParsedContainer>,
         messages: Vec<ParsedContainer>,
-        tests: Vec<TestCase>,
+        tests: Vec<ParsedTestCase>,
     ) -> Self {
         Self {
             enums,

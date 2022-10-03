@@ -95,6 +95,16 @@ impl ParsedContainer {
         None
     }
 
+    pub fn get_field_ty(&self, field_name: &str) -> &Type {
+        for d in self.all_definitions() {
+            if d.name() == field_name {
+                return d.ty();
+            }
+        }
+
+        panic!("unable to find field: '{}'", field_name)
+    }
+
     pub fn name(&self) -> &str {
         &self.name
     }

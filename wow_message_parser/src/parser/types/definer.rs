@@ -215,6 +215,10 @@ impl Definer {
         self.tags().contains(tag)
     }
 
+    pub fn get_field_with_name(&self, name: &str) -> Option<&DefinerField> {
+        self.fields.iter().find(|a| a.name() == name)
+    }
+
     pub fn get_field_with_value(&self, value: isize) -> Option<&DefinerField> {
         let value = value as u64;
         self.fields.iter().find(|a| a.value.int == value)
