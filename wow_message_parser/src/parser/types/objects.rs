@@ -1,6 +1,8 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::container::{Container, DefinerUsage, Sizes};
+use crate::parser::types::container::{Container, Sizes};
+use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed_definer::ParsedDefiner;
+use crate::parser::types::parsed_object::get_definer_objects_used_in;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
@@ -8,10 +10,35 @@ use crate::parser::types::{ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::create_rust_object;
 use crate::{DefinerType, Version};
 
+fn parsed_definer_to_definer(
+    parsed: Vec<ParsedDefiner>,
+    structs: &[Container],
+    messages: &[Container],
+) -> Vec<Definer> {
+    let mut v = Vec::with_capacity(parsed.len());
+
+    for p in parsed {
+        let objects_used_in = get_definer_objects_used_in(messages, structs, &p);
+
+        v.push(Definer::new(
+            p.name,
+            p.definer_ty,
+            p.fields,
+            p.basic_type,
+            p.self_value,
+            p.tags,
+            objects_used_in,
+            p.file_info,
+        ));
+    }
+
+    v
+}
+
 #[derive(Debug, Clone)]
 pub struct Objects {
-    enums: Vec<ParsedDefiner>,
-    flags: Vec<ParsedDefiner>,
+    enums: Vec<Definer>,
+    flags: Vec<Definer>,
     structs: Vec<Container>,
     messages: Vec<Container>,
     tests: Vec<TestCase>,
@@ -25,6 +52,9 @@ impl Objects {
         messages: Vec<Container>,
         tests: Vec<TestCase>,
     ) -> Self {
+        let enums = parsed_definer_to_definer(enums, &structs, &messages);
+        let flags = parsed_definer_to_definer(flags, &structs, &messages);
+
         Self {
             enums,
             flags,
@@ -34,7 +64,7 @@ impl Objects {
         }
     }
 
-    pub fn try_get_definer(&self, ty_name: &str, tags: &Tags) -> Option<&ParsedDefiner> {
+    pub fn try_get_definer(&self, ty_name: &str, tags: &Tags) -> Option<&Definer> {
         if let Some(d) = self
             .enums
             .iter()
@@ -54,7 +84,7 @@ impl Objects {
         None
     }
 
-    pub fn get_definer(&self, ty_name: &str, tags: &Tags) -> &ParsedDefiner {
+    pub fn get_definer(&self, ty_name: &str, tags: &Tags) -> &Definer {
         self.try_get_definer(ty_name, tags)
             .unwrap_or_else(|| panic!("unable to find definer: '{}'", ty_name))
     }
@@ -269,11 +299,11 @@ impl Objects {
         )
     }
 
-    pub fn enums(&self) -> &[ParsedDefiner] {
+    pub fn enums(&self) -> &[Definer] {
         &self.enums
     }
 
-    pub fn flags(&self) -> &[ParsedDefiner] {
+    pub fn flags(&self) -> &[Definer] {
         &self.flags
     }
 
@@ -285,11 +315,11 @@ impl Objects {
             .chain(self.all_containers().map(|a| Object::Container(a.clone())))
     }
 
-    pub fn all_definers(&self) -> impl Iterator<Item = &ParsedDefiner> {
+    pub fn all_definers(&self) -> impl Iterator<Item = &Definer> {
         self.enums.iter().chain(&self.flags)
     }
 
-    pub fn all_definers_mut(&mut self) -> impl Iterator<Item = &mut ParsedDefiner> {
+    pub fn all_definers_mut(&mut self) -> impl Iterator<Item = &mut Definer> {
         self.enums.iter_mut().chain(&mut self.flags)
     }
 
@@ -388,29 +418,6 @@ impl Objects {
         }
     }
 
-    fn get_definer_objects_used_in(
-        containers: &[Container],
-        e: &ParsedDefiner,
-    ) -> Vec<(String, DefinerUsage)> {
-        let mut v = Vec::new();
-
-        for c in containers {
-            if !e.tags().has_version_intersections(c.tags()) {
-                continue;
-            }
-
-            let ty = match c.contains_definer(e.name()) {
-                DefinerUsage::Unused => continue,
-                DefinerUsage::NotInIf => DefinerUsage::NotInIf,
-                DefinerUsage::InIf => DefinerUsage::InIf,
-            };
-
-            v.push((c.name().to_string(), ty));
-        }
-
-        v
-    }
-
     pub fn check_values(&mut self) {
         let c = self.clone();
         for s in &mut self.tests {
@@ -430,12 +437,6 @@ impl Objects {
             s.append_tests(t);
         }
 
-        let containers = self.all_containers().cloned().collect::<Vec<_>>();
-        for e in self.all_definers_mut() {
-            let objects_used_in = Self::get_definer_objects_used_in(&containers, e);
-            e.set_objects_used_in(objects_used_in);
-        }
-
         for e in self.all_containers() {
             e.check_if_statement_operators(self);
         }
@@ -449,7 +450,7 @@ impl Objects {
 
     fn check_versions<'a>(
         containers: impl Iterator<Item = &'a Container>,
-        definers: impl Iterator<Item = &'a ParsedDefiner>,
+        definers: impl Iterator<Item = &'a Definer>,
     ) {
         struct Obj<'a> {
             name: &'a str,
@@ -612,8 +613,8 @@ version 2: {:#?} in {} line {}",
 #[allow(clippy::large_enum_variant)]
 pub enum Object {
     Container(Container),
-    Enum(ParsedDefiner),
-    Flag(ParsedDefiner),
+    Enum(Definer),
+    Flag(Definer),
 }
 
 impl Object {

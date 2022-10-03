@@ -6,10 +6,11 @@ use pest::iterators::{Pair, Pairs};
 use pest::Parser;
 use pest_derive::Parser;
 
-use types::parsed_definer::DefinerField;
+use types::definer::DefinerField;
 use types::tags::{Tag, Tags};
 
 use crate::file_info::FileInfo;
+use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
 use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
@@ -20,7 +21,7 @@ use types::container::{
     Condition, Conditional, Container, ContainerType, IfStatement, OptionalStatement, StructMember,
     StructMemberDefinition,
 };
-use types::parsed_definer::{ParsedDefiner, SelfValueDefinerField};
+use types::definer::SelfValueDefinerField;
 use types::ty::Type;
 
 pub mod stats;

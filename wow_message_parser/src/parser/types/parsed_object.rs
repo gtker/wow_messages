@@ -1,4 +1,4 @@
-use crate::parser::types::container::Container;
+use crate::parser::types::container::{Container, DefinerUsage};
 use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::parser::types::test_case::TestCase;
 use crate::Objects;
@@ -60,4 +60,30 @@ impl ParsedObjects {
 
         o
     }
+}
+
+pub fn get_definer_objects_used_in(
+    messages: &[Container],
+    structs: &[Container],
+    e: &ParsedDefiner,
+) -> Vec<(String, DefinerUsage)> {
+    let mut v = Vec::new();
+
+    for c in [messages, structs].concat() {
+        if !e.tags().has_version_intersections(c.tags()) {
+            continue;
+        }
+
+        let ty = match c.contains_definer(e.name()) {
+            DefinerUsage::Unused => continue,
+            DefinerUsage::NotInIf => DefinerUsage::NotInIf,
+            DefinerUsage::InIf => DefinerUsage::InIf,
+        };
+
+        v.push((c.name().to_string(), ty));
+    }
+
+    v.sort_by(|a, b| a.0.cmp(&b.0));
+
+    v
 }

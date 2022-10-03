@@ -1,17 +1,11 @@
 use crate::doc_printer::DocWriter;
 use crate::file_info::FileInfo;
-use crate::parser::types::parsed_definer::ParsedDefiner;
+use crate::parser::types::definer::Definer;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{doc_printer, Tags};
 
-fn definer_common(
-    s: &mut DocWriter,
-    tags: &Tags,
-    fileinfo: &FileInfo,
-    ty: &str,
-    e: &ParsedDefiner,
-) {
+fn definer_common(s: &mut DocWriter, tags: &Tags, fileinfo: &FileInfo, ty: &str, e: &Definer) {
     doc_printer::common(s, tags);
 
     s.wln("### Wowm Representation");
@@ -27,7 +21,7 @@ fn definer_common(
     s.wln("```");
 }
 
-pub fn print_docs_for_enum(e: &ParsedDefiner) -> DocWriter {
+pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
     let mut s = DocWriter::new(e.name(), e.tags());
 
     definer_common(&mut s, e.tags(), e.file_info(), "enum", e);
@@ -47,7 +41,7 @@ pub fn print_docs_for_enum(e: &ParsedDefiner) -> DocWriter {
     s
 }
 
-pub fn print_docs_for_flag(e: &ParsedDefiner) -> DocWriter {
+pub fn print_docs_for_flag(e: &Definer) -> DocWriter {
     let mut s = DocWriter::new(e.name(), e.tags());
 
     definer_common(&mut s, e.tags(), e.file_info(), "flag", e);
@@ -66,7 +60,7 @@ pub fn print_docs_for_flag(e: &ParsedDefiner) -> DocWriter {
     s
 }
 
-fn print_definer_table(s: &mut DocWriter, e: &ParsedDefiner) {
+fn print_definer_table(s: &mut DocWriter, e: &Definer) {
     s.wln("### Type");
     s.wln(format!(
         "The basic type is `{ty_str}`, a {byte} byte ({bit} bit){endian} integer.",

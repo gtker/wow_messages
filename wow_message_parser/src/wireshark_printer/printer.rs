@@ -1,7 +1,7 @@
 use crate::parser::types::container::{
     Equation, IfStatement, StructMember, StructMemberDefinition,
 };
-use crate::parser::types::parsed_definer::ParsedDefiner;
+use crate::parser::types::definer::Definer;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, IntegerType};
 use crate::rust_printer::Writer;
@@ -522,7 +522,7 @@ pub fn print_enums(w: &WiresharkObject) -> Writer {
     s
 }
 
-fn print_typedef(s: &mut Writer, e: &ParsedDefiner) {
+fn print_typedef(s: &mut Writer, e: &Definer) {
     let hex_width = e.hex_digit_width();
 
     s.body_closing_with(
@@ -541,7 +541,7 @@ fn print_typedef(s: &mut Writer, e: &ParsedDefiner) {
     );
 }
 
-fn print_enum(s: &mut Writer, e: &ParsedDefiner) {
+fn print_enum(s: &mut Writer, e: &Definer) {
     print_typedef(s, e);
 
     s.body_closing_with(
@@ -562,7 +562,7 @@ fn print_enum(s: &mut Writer, e: &ParsedDefiner) {
     s.newline();
 }
 
-fn print_flag(s: &mut Writer, e: &ParsedDefiner) {
+fn print_flag(s: &mut Writer, e: &Definer) {
     print_typedef(s, e);
     s.newline();
 }
