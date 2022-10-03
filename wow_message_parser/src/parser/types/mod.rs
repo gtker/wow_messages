@@ -27,8 +27,6 @@ pub(crate) fn compare_name_and_tags(
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub(crate) enum ObjectType {
     Struct,
-    CLogin,
-    SLogin,
     Enum,
     Flag,
 }
@@ -325,7 +323,6 @@ impl Array {
             ArrayType::Complex(ident) => match o.get_object_type_of(ident, tags) {
                 ObjectType::Struct => o.get_container(ident, tags).is_constant_sized(),
                 ObjectType::Enum | ObjectType::Flag => true,
-                _ => unreachable!(),
             },
         }
     }

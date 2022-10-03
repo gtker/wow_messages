@@ -480,7 +480,7 @@ impl Container {
         let mut v2 = Vec::new();
         for t in &v {
             match o.get_object_type_of(t, self.tags()) {
-                ObjectType::Struct | ObjectType::CLogin | ObjectType::SLogin => {
+                ObjectType::Struct => {
                     let mut types = o
                         .get_container(t, self.tags())
                         .get_types_needing_import_recursively(o);

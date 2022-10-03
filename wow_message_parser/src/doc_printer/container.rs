@@ -225,7 +225,6 @@ fn print_container_example_definition(
                     s.wln(c);
                     return;
                 }
-                _ => panic!("unsupported"),
             }
         }
         Type::UpdateMask => {
