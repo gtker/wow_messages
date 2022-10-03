@@ -492,13 +492,19 @@ impl MemberType {
             ty: uf,
         }
     }
-    pub(crate) fn object_ty(&self) -> UpdateMaskType {
+    pub(crate) const fn object_ty(&self) -> UpdateMaskType {
         self.object_ty
     }
-    pub(crate) fn name(&self) -> &'static str {
+    pub(crate) const fn name(&self) -> &'static str {
         self.name
     }
     pub(crate) fn ty(&self) -> UfType {
         self.ty.clone()
+    }
+    pub(crate) const fn size(&self) -> i32 {
+        self.size
+    }
+    pub(crate) const fn offset(&self) -> i32 {
+        self.offset
     }
 }

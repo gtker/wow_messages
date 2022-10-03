@@ -1,3 +1,4 @@
+use crate::rust_printer::{tbc_fields, vanilla_fields, wrath_fields, MajorWorldVersion};
 use std::ops::AddAssign;
 
 #[derive(Debug, Copy, Clone, Default, Ord, PartialOrd, Eq, PartialEq)]
@@ -9,8 +10,23 @@ pub struct Sizes {
 pub const AURA_MASK_MAX_SIZE: u8 = 4 + 32 * 4;
 pub const AURA_MASK_MIN_SIZE: u8 = 4;
 
-const fn update_mask_max() -> u16 {
-    let amount_of_bytes_for_data = 0x501; // PLAYER_END
+pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> u16 {
+    let data = match version {
+        MajorWorldVersion::Vanilla => vanilla_fields::FIELDS.as_slice(),
+        MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS.as_slice(),
+        MajorWorldVersion::Wrath => wrath_fields::FIELDS.as_slice(),
+    };
+
+    let mut i = 0;
+    let mut biggest = &data[i];
+    while i < data.len() {
+        if (biggest.offset() + biggest.size()) > data[i].offset() + data[i].size() {
+            biggest = &data[i];
+        }
+        i += 1;
+    }
+
+    let amount_of_bytes_for_data = biggest.offset() + biggest.size();
     let amount_of_mask_blocks_size = core::mem::size_of::<u32>() as i32;
 
     let mut max_mask_blocks = amount_of_bytes_for_data / 8;
@@ -21,7 +37,6 @@ const fn update_mask_max() -> u16 {
     (amount_of_mask_blocks_size + max_mask_blocks + amount_of_bytes_for_data) as u16
 }
 
-pub const UPDATE_MASK_MAX_SIZE: u16 = update_mask_max();
 pub const UPDATE_MASK_MIN_SIZE: u8 = 1;
 pub const PACKED_GUID_MAX_SIZE: u8 = 9;
 pub const PACKED_GUID_MIN_SIZE: u8 = 2;

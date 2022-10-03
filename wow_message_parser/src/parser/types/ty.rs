@@ -3,8 +3,8 @@ use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
-    Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE, GUID_SIZE,
-    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MAX_SIZE, UPDATE_MASK_MIN_SIZE,
+    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE,
+    GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::{
     Array, ArraySize, ArrayType, Endianness, FloatingPointType, IntegerType,
@@ -89,9 +89,10 @@ impl Type {
             Type::DateTime => sizes.inc_both(DATETIME_SIZE.into()),
             Type::FloatingPoint(i) => sizes.inc_both(i.size() as usize),
             Type::PackedGuid => sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _),
-            Type::UpdateMask => {
-                sizes.inc(UPDATE_MASK_MIN_SIZE as usize, UPDATE_MASK_MAX_SIZE as usize)
-            }
+            Type::UpdateMask => sizes.inc(
+                UPDATE_MASK_MIN_SIZE as usize,
+                update_mask_max(e.tags().first_version().as_major_world()) as usize,
+            ),
             Type::AuraMask => sizes.inc(AURA_MASK_MIN_SIZE as usize, AURA_MASK_MAX_SIZE as usize),
             Type::CString => sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED),
             Type::SizedCString => sizes.inc(
