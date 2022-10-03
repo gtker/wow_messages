@@ -1,56 +1,16 @@
+pub mod conversion;
+
 use crate::file_info::FileInfo;
 use crate::parser::types::container::{Container, Sizes};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed_container::ParsedContainer;
 use crate::parser::types::parsed_definer::ParsedDefiner;
-use crate::parser::types::parsed_object::get_definer_objects_used_in;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::create_rust_object;
 use crate::{DefinerType, Version};
-
-fn parsed_container_to_container(parsed: Vec<ParsedContainer>) -> Vec<Container> {
-    let mut v = Vec::with_capacity(parsed.len());
-
-    for p in parsed {
-        v.push(Container::new(
-            p.name,
-            p.members,
-            p.tags,
-            p.object_type,
-            p.file_info,
-        ));
-    }
-
-    v
-}
-
-fn parsed_definer_to_definer(
-    parsed: Vec<ParsedDefiner>,
-    structs: &[ParsedContainer],
-    messages: &[ParsedContainer],
-) -> Vec<Definer> {
-    let mut v = Vec::with_capacity(parsed.len());
-
-    for p in parsed {
-        let objects_used_in = get_definer_objects_used_in(messages, structs, &p);
-
-        v.push(Definer::new(
-            p.name,
-            p.definer_ty,
-            p.fields,
-            p.basic_type,
-            p.self_value,
-            p.tags,
-            objects_used_in,
-            p.file_info,
-        ));
-    }
-
-    v
-}
 
 #[derive(Debug, Clone)]
 pub struct Objects {
@@ -69,11 +29,11 @@ impl Objects {
         messages: Vec<ParsedContainer>,
         tests: Vec<TestCase>,
     ) -> Self {
-        let enums = parsed_definer_to_definer(enums, &structs, &messages);
-        let flags = parsed_definer_to_definer(flags, &structs, &messages);
+        let enums = conversion::parsed_definer_to_definer(enums, &structs, &messages);
+        let flags = conversion::parsed_definer_to_definer(flags, &structs, &messages);
 
-        let structs = parsed_container_to_container(structs);
-        let messages = parsed_container_to_container(messages);
+        let structs = conversion::parsed_container_to_container(structs);
+        let messages = conversion::parsed_container_to_container(messages);
 
         let mut o = Self {
             enums,
