@@ -217,8 +217,8 @@ impl Type {
                     sizes.inc_both(s);
                 }
                 ObjectType::Struct => {
-                    let c = o.get_container(s, e.tags());
-                    sizes += c.create_sizes(o);
+                    let s = o.get_container(s, e.tags()).sizes();
+                    sizes += s;
                 }
                 _ => unreachable!(),
             },
@@ -261,10 +261,10 @@ impl Type {
                             sizes.inc(s as usize * min, s as usize * max);
                         }
                         ObjectType::Struct => {
-                            let c = o.get_container(s, e.tags()).create_sizes(o);
+                            let s = o.get_container(s, e.tags()).sizes();
 
-                            sizes.inc(min * c.minimum(), 0);
-                            sizes.inc(0, max.saturating_mul(c.maximum()));
+                            sizes.inc(min * s.minimum(), 0);
+                            sizes.inc(0, max.saturating_mul(s.maximum()));
                         }
                         _ => unreachable!(),
                     },

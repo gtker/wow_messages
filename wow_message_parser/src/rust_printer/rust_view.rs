@@ -1276,7 +1276,7 @@ pub fn create_struct_member(
                         }
                         ArrayType::Complex(complex) => {
                             let c = o.get_container(complex, tags);
-                            if !c.has_constant_size(o) {
+                            if !c.is_constant_sized() {
                                 definition_constantly_sized = false;
                             }
                             inner_sizes += c.sizes();
@@ -1353,7 +1353,7 @@ pub fn create_struct_member(
                         }
                         ObjectType::Struct => {
                             let c = o.get_container(s, tags);
-                            if !c.has_constant_size(o) {
+                            if !c.is_constant_sized() {
                                 definition_constantly_sized = false;
                             }
 

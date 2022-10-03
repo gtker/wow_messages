@@ -557,73 +557,8 @@ impl Container {
         }
     }
 
-    pub fn create_sizes(&self, o: &Objects) -> Sizes {
-        let mut sizes = Sizes::new();
-        for m in self.fields() {
-            Container::add_sizes_values(self, m, o, &mut sizes);
-        }
-
-        sizes
-    }
-
     pub fn sizes(&self) -> Sizes {
         self.sizes
-    }
-
-    pub fn has_constant_size(&self, o: &Objects) -> bool {
-        for m in self.fields() {
-            match m {
-                StructMember::Definition(d) => match d.ty() {
-                    Type::Integer(_) | Type::DateTime | Type::FloatingPoint(_) => {}
-                    Type::CString => return false,
-                    Type::String { length } => match length.parse::<u64>() {
-                        Ok(_) => {}
-                        Err(_) => return false,
-                    },
-                    Type::Array(array) => match array.size() {
-                        ArraySize::Fixed(_) => match array.ty() {
-                            ArrayType::Integer(_) => {}
-                            ArrayType::Complex(identifier) => {
-                                match o.type_has_constant_size(&Type::Identifier {
-                                    s: identifier.clone(),
-                                    upcast: None,
-                                }) {
-                                    true => {}
-                                    false => return false,
-                                }
-                            }
-                            ArrayType::CString => return false,
-                            ArrayType::Guid => {}
-                            ArrayType::PackedGuid => return false,
-                        },
-                        ArraySize::Variable(_) => return false,
-                        ArraySize::Endless => return false,
-                    },
-                    Type::Identifier { s: identifier, .. } => {
-                        match o.type_has_constant_size(&Type::Identifier {
-                            s: identifier.clone(),
-                            upcast: None,
-                        }) {
-                            true => {}
-                            false => return false,
-                        }
-                    }
-                    Type::PackedGuid => return false,
-                    Type::Guid => {}
-                    Type::Bool => {}
-                    Type::UpdateMask | Type::AuraMask => return false,
-                    Type::SizedCString => return false,
-                },
-                StructMember::IfStatement(_) => {
-                    return false;
-                }
-                StructMember::OptionalStatement(_) => {
-                    return false;
-                }
-            }
-        }
-
-        true
     }
 
     pub fn all_definitions_transitively(&self, o: &Objects) -> Vec<StructMemberDefinition> {

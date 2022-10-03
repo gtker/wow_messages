@@ -484,7 +484,7 @@ version 2: {:#?} in {} line {}",
         }
 
         if let Some(s) = self.all_containers().find(|a| a.name() == type_name) {
-            return s.has_constant_size(self);
+            return s.is_constant_sized();
         }
 
         panic!(
