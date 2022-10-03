@@ -33,21 +33,6 @@ impl IfStatement {
         members: Vec<StructMember>,
         else_ifs: Vec<IfStatement>,
         else_statement_members: Vec<StructMember>,
-    ) -> Self {
-        Self {
-            conditional,
-            members,
-            else_ifs,
-            else_statement_members,
-            original_ty: None,
-        }
-    }
-
-    pub(crate) fn all_fields(
-        conditional: Conditional,
-        members: Vec<StructMember>,
-        else_ifs: Vec<IfStatement>,
-        else_statement_members: Vec<StructMember>,
         original_ty: Option<Type>,
     ) -> Self {
         Self {
@@ -99,10 +84,6 @@ impl IfStatement {
         &self.conditional.variable_name
     }
 
-    pub(crate) fn set_original_ty(&mut self, original_ty: Type) {
-        self.original_ty = Some(original_ty)
-    }
-
     pub(crate) fn definer_type(&self) -> DefinerType {
         match self.conditional.equations[0] {
             Equation::Equals { .. } => DefinerType::Enum,
@@ -111,19 +92,8 @@ impl IfStatement {
         }
     }
 
-    pub(crate) fn else_ifs_mut(&mut self) -> &mut [IfStatement] {
-        &mut self.else_ifs
-    }
-
     pub(crate) fn else_ifs(&self) -> &[IfStatement] {
         &self.else_ifs
-    }
-
-    pub(crate) fn all_members_mut(&mut self) -> impl Iterator<Item = &mut StructMember> + '_ {
-        self.members
-            .iter_mut()
-            .chain(self.else_ifs.iter_mut().flat_map(|a| a.members.iter_mut()))
-            .chain(self.else_statement_members.iter_mut())
     }
 
     pub(crate) fn all_members(&self) -> impl Iterator<Item = &StructMember> {

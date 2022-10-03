@@ -1,5 +1,4 @@
 use crate::parser::types::definer::Definer;
-use crate::parser::types::if_statement::IfStatement;
 use crate::parser::types::objects::conversion::get_definer;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
@@ -30,16 +29,8 @@ impl ParsedStructMemberDefinition {
         self.struct_type.clone()
     }
 
-    pub(crate) fn used_as_size_in(&self) -> &Option<String> {
-        &self.used_as_size_in
-    }
-
     pub(crate) fn set_used_as_size_in(&mut self, var: String) {
         self.used_as_size_in = Some(var);
-    }
-
-    pub(crate) fn used_in_if(&self) -> bool {
-        self.used_in_if.unwrap()
     }
 
     pub(crate) fn set_used_in_if(&mut self, used: bool) {
@@ -73,10 +64,6 @@ impl ParsedStructMemberDefinition {
 
     pub(crate) fn value(&self) -> &Option<ContainerValue> {
         &self.value
-    }
-
-    pub(crate) fn verified_value(&self) -> &Option<VerifiedContainerValue> {
-        &self.verified_value
     }
 
     pub(crate) fn set_verified_value(&mut self, definers: &[Definer]) {

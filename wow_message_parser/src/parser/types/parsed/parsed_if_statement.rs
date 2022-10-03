@@ -1,8 +1,6 @@
-use crate::parser::types::if_statement::{Conditional, Equation};
+use crate::parser::types::if_statement::Conditional;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::ty::Type;
-use crate::rust_printer::field_name_to_rust_name;
-use crate::DefinerType;
 
 #[derive(Debug, Clone)]
 pub struct ParsedIfStatement {
@@ -37,30 +35,6 @@ impl ParsedIfStatement {
         }
     }
 
-    pub(crate) fn is_not_enum(&self) -> bool {
-        matches!(self.conditional.equations()[0], Equation::NotEquals { .. })
-    }
-
-    pub(crate) fn flag_get_enumerator(&self) -> String {
-        assert_eq!(self.get_conditional().equations().len(), 1);
-
-        match &self.get_conditional().equations()[0] {
-            Equation::BitwiseAnd { value } => value.to_string(),
-            _ => unreachable!(),
-        }
-    }
-
-    pub(crate) fn flag_get_enumerator_rust_name(&self) -> String {
-        field_name_to_rust_name(&self.flag_get_enumerator())
-    }
-
-    pub(crate) fn is_elseif_flag(&self) -> bool {
-        match self.conditional.equations()[0] {
-            Equation::BitwiseAnd { .. } => !self.else_ifs().is_empty(),
-            _ => false,
-        }
-    }
-
     pub(crate) fn members(&self) -> &[ParsedStructMember] {
         &self.members
     }
@@ -69,24 +43,12 @@ impl ParsedIfStatement {
         &self.else_statement_members
     }
 
-    pub(crate) fn original_ty(&self) -> &Type {
-        self.original_ty.as_ref().unwrap()
-    }
-
     pub(crate) fn name(&self) -> &str {
         &self.conditional.variable_name()
     }
 
     pub(crate) fn set_original_ty(&mut self, original_ty: Type) {
         self.original_ty = Some(original_ty)
-    }
-
-    pub(crate) fn definer_type(&self) -> DefinerType {
-        match self.conditional.equations()[0] {
-            Equation::Equals { .. } => DefinerType::Enum,
-            Equation::BitwiseAnd { .. } => DefinerType::Flag,
-            Equation::NotEquals { .. } => DefinerType::Enum,
-        }
     }
 
     pub(crate) fn else_ifs_mut(&mut self) -> &mut [ParsedIfStatement] {

@@ -10,7 +10,6 @@ use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
 };
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
-use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::TestCase;
 use crate::rust_printer::rust_view::create_rust_object;
 use crate::{Container, Objects, Tags};
@@ -90,7 +89,7 @@ pub(crate) fn parsed_containers_to_container(
 ) -> Vec<Container> {
     let mut v = Vec::with_capacity(parsed.len());
 
-    for mut p in parsed {
+    for p in parsed {
         v.push(parsed_container_to_container(
             p, tests, containers, definers,
         ));

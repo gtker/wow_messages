@@ -55,13 +55,13 @@ pub(crate) fn verify_and_set_members(
     check_complex_types_exist(&members, containers, definers, tags);
 }
 
-pub(crate) fn parsed_members_to_members(mut members: Vec<ParsedStructMember>) -> Vec<StructMember> {
+pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec<StructMember> {
     let mut v = Vec::with_capacity(members.len());
 
     for m in members {
         v.push(match m {
             ParsedStructMember::Definition(d) => {
-                StructMember::Definition(StructMemberDefinition::all_fields(
+                StructMember::Definition(StructMemberDefinition::new(
                     d.name,
                     d.struct_type,
                     d.value,
@@ -71,17 +71,15 @@ pub(crate) fn parsed_members_to_members(mut members: Vec<ParsedStructMember>) ->
                     d.tags,
                 ))
             }
-            ParsedStructMember::IfStatement(s) => {
-                StructMember::IfStatement(IfStatement::all_fields(
-                    s.conditional,
-                    parsed_members_to_members(s.members),
-                    parsed_if_statement_to_if_statement(s.else_ifs),
-                    parsed_members_to_members(s.else_statement_members),
-                    s.original_ty,
-                ))
-            }
+            ParsedStructMember::IfStatement(s) => StructMember::IfStatement(IfStatement::new(
+                s.conditional,
+                parsed_members_to_members(s.members),
+                parsed_if_statement_to_if_statement(s.else_ifs),
+                parsed_members_to_members(s.else_statement_members),
+                s.original_ty,
+            )),
             ParsedStructMember::OptionalStatement(o) => StructMember::OptionalStatement(
-                OptionalStatement::all_fields(o.name, parsed_members_to_members(o.members), o.tags),
+                OptionalStatement::new(o.name, parsed_members_to_members(o.members), o.tags),
             ),
         });
     }
@@ -93,7 +91,7 @@ fn parsed_if_statement_to_if_statement(parsed: Vec<ParsedIfStatement>) -> Vec<If
     let mut v = Vec::with_capacity(parsed.len());
 
     for p in parsed {
-        v.push(IfStatement::all_fields(
+        v.push(IfStatement::new(
             p.conditional,
             parsed_members_to_members(p.members),
             parsed_if_statement_to_if_statement(p.else_ifs),

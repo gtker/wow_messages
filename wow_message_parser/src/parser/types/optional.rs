@@ -15,15 +15,7 @@ impl PartialEq for OptionalStatement {
 }
 
 impl OptionalStatement {
-    pub(crate) fn new(name: &str, members: Vec<StructMember>) -> Self {
-        Self {
-            name: name.to_string(),
-            members,
-            tags: Tags::new(),
-        }
-    }
-
-    pub(crate) fn all_fields(name: String, members: Vec<StructMember>, tags: Tags) -> Self {
+    pub(crate) fn new(name: String, members: Vec<StructMember>, tags: Tags) -> Self {
         Self {
             name,
             members,
@@ -37,10 +29,6 @@ impl OptionalStatement {
 
     pub(crate) fn members(&self) -> &[StructMember] {
         &self.members
-    }
-
-    pub(crate) fn members_mut(&mut self) -> &mut [StructMember] {
-        &mut self.members
     }
 
     pub(crate) fn tags(&self) -> &Tags {
