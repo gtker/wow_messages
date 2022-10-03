@@ -21,10 +21,10 @@ use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
 use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD};
 use types::container::{
-    Condition, Conditional, ContainerType, IfStatement, OptionalStatement, StructMember,
-    StructMemberDefinition,
+    Condition, Conditional, ContainerType, IfStatement, StructMember, StructMemberDefinition,
 };
 use types::definer::SelfValueDefinerField;
+use types::optional::OptionalStatement;
 use types::ty::Type;
 
 pub mod stats;

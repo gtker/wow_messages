@@ -1,9 +1,10 @@
 use crate::impl_features::{get_impl_features_for_container, Feature};
 use crate::ir_printer::{IrEndianness, IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::container::{
-    Conditional, Container, ContainerType, Equation, IfStatement, OptionalStatement, StructMember,
+    Conditional, Container, ContainerType, Equation, IfStatement, StructMember,
     StructMemberDefinition,
 };
+use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
