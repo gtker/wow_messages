@@ -15,6 +15,8 @@
 
 * Max size of vanilla message (10240) mangoszero/server/WorldSocket.cpp:367
 
+* Update mask max size is only for Vanilla
+
 * Do not allocate for statically sized messages
 * More tests/definitions
 * MSRV test
