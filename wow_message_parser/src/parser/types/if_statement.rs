@@ -4,14 +4,14 @@ use crate::rust_printer::field_name_to_rust_name;
 use crate::DefinerType;
 
 #[derive(Debug, Eq, PartialEq, Clone, Copy)]
-pub enum DefinerUsage {
+pub(crate) enum DefinerUsage {
     Unused,
     NotInIf,
     InIf,
 }
 
 #[derive(Debug, Clone)]
-pub struct IfStatement {
+pub(crate) struct IfStatement {
     conditional: Conditional,
     members: Vec<StructMember>,
     else_ifs: Vec<IfStatement>,
@@ -110,7 +110,7 @@ impl IfStatement {
 }
 
 #[derive(Debug, Clone)]
-pub enum Operator {
+pub(crate) enum Operator {
     Equals,
     NotEquals,
     BitwiseAnd,
@@ -128,7 +128,7 @@ impl From<&str> for Operator {
 }
 
 #[derive(Debug, Clone)]
-pub struct Conditional {
+pub(crate) struct Conditional {
     variable_name: String,
     equations: Vec<Equation>,
 }
@@ -176,14 +176,14 @@ impl Conditional {
 }
 
 #[derive(Debug, Clone)]
-pub enum Equation {
+pub(crate) enum Equation {
     Equals { value: String },
     NotEquals { value: String },
     BitwiseAnd { value: String },
 }
 
 #[derive(Debug, Clone)]
-pub struct Condition {
+pub(crate) struct Condition {
     pub value: String,
     pub operator: Operator,
     pub equals_value: String,

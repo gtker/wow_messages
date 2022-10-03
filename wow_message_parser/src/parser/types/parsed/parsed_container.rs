@@ -13,7 +13,7 @@ use crate::parser::types::ArrayType;
 use crate::{ContainerType, DefinerType};
 
 #[derive(Debug, Clone)]
-pub struct ParsedContainer {
+pub(crate) struct ParsedContainer {
     pub name: String,
     pub object_type: ContainerType,
     pub members: Vec<ParsedStructMember>,

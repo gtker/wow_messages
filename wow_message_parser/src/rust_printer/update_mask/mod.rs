@@ -321,7 +321,7 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
 }
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
-pub enum UpdateMaskType {
+pub(crate) enum UpdateMaskType {
     Object,
     Item,
     Unit,
@@ -348,33 +348,33 @@ impl Display for UpdateMaskType {
 }
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
-pub enum ByteInnerTy {
+pub(crate) enum ByteInnerTy {
     Byte,
     Ty(&'static str),
 }
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
-pub struct ByteType {
+pub(crate) struct ByteType {
     pub name: &'static str,
     pub ty: ByteInnerTy,
 }
 
 impl ByteType {
-    pub const fn new(name: &'static str, ty: &'static str) -> Self {
+    pub(crate) const fn new(name: &'static str, ty: &'static str) -> Self {
         Self {
             name,
             ty: ByteInnerTy::Ty(ty),
         }
     }
 
-    pub const fn byte(name: &'static str) -> Self {
+    pub(crate) const fn byte(name: &'static str) -> Self {
         Self {
             name,
             ty: ByteInnerTy::Byte,
         }
     }
 
-    pub const fn ty_str(&self) -> &'static str {
+    pub(crate) const fn ty_str(&self) -> &'static str {
         match self.ty {
             ByteInnerTy::Byte => "u8",
             ByteInnerTy::Ty(s) => s,
@@ -382,28 +382,28 @@ impl ByteType {
     }
 
     #[allow(unused)]
-    pub const fn a() -> Self {
+    pub(crate) const fn a() -> Self {
         Self {
             name: "a",
             ty: ByteInnerTy::Byte,
         }
     }
     #[allow(unused)]
-    pub const fn b() -> Self {
+    pub(crate) const fn b() -> Self {
         Self {
             name: "b",
             ty: ByteInnerTy::Byte,
         }
     }
     #[allow(unused)]
-    pub const fn c() -> Self {
+    pub(crate) const fn c() -> Self {
         Self {
             name: "c",
             ty: ByteInnerTy::Byte,
         }
     }
     #[allow(unused)]
-    pub const fn d() -> Self {
+    pub(crate) const fn d() -> Self {
         Self {
             name: "d",
             ty: ByteInnerTy::Byte,
@@ -412,7 +412,7 @@ impl ByteType {
 }
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
-pub enum UfType {
+pub(crate) enum UfType {
     Guid,
     Int,
     Float,
@@ -474,7 +474,7 @@ impl UfType {
 }
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
-pub struct MemberType {
+pub(crate) struct MemberType {
     object_ty: UpdateMaskType,
     name: &'static str,
     offset: i32,

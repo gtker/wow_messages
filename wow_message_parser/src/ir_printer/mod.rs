@@ -19,7 +19,7 @@ struct IrFileInfo {
 
 #[derive(Debug, Serialize)]
 #[allow(non_camel_case_types)]
-pub enum IrEndianness {
+pub(crate) enum IrEndianness {
     little,
     big,
 }
@@ -36,7 +36,7 @@ impl From<&Endianness> for IrEndianness {
 #[derive(Debug, Serialize)]
 #[allow(non_camel_case_types)]
 #[serde(tag = "type", content = "endianness")]
-pub enum IrIntegerType {
+pub(crate) enum IrIntegerType {
     u8,
     u16(IrEndianness),
     u32(IrEndianness),
@@ -58,7 +58,7 @@ impl From<&IntegerType> for IrIntegerType {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "version")]
-pub enum IrLoginVersion {
+pub(crate) enum IrLoginVersion {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "specific")]
@@ -76,7 +76,7 @@ impl From<&LoginVersion> for IrLoginVersion {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "version")]
-pub enum IrWorldVersion {
+pub(crate) enum IrWorldVersion {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "major")]
@@ -96,7 +96,7 @@ pub enum IrWorldVersion {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "versions")]
-pub enum IrVersions {
+pub(crate) enum IrVersions {
     #[serde(rename = "login")]
     Login(Vec<IrLoginVersion>),
     #[serde(rename = "world")]
@@ -128,7 +128,7 @@ impl From<&WorldVersion> for IrWorldVersion {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrTags {
+pub(crate) struct IrTags {
     #[serde(skip_serializing_if = "Option::is_none")]
     description: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]

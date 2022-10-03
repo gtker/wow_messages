@@ -1,7 +1,7 @@
 use crate::GITHUB_REPO_URL;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct FileInfo {
+pub(crate) struct FileInfo {
     file_name: String,
     start_position: (usize, usize),
 }

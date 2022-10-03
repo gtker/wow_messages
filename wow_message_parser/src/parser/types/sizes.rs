@@ -2,13 +2,13 @@ use crate::rust_printer::{tbc_fields, vanilla_fields, wrath_fields, MajorWorldVe
 use std::ops::AddAssign;
 
 #[derive(Debug, Copy, Clone, Default, Ord, PartialOrd, Eq, PartialEq)]
-pub struct Sizes {
+pub(crate) struct Sizes {
     minimum: usize,
     maximum: usize,
 }
 
-pub const AURA_MASK_MAX_SIZE: u8 = 4 + 32 * 4;
-pub const AURA_MASK_MIN_SIZE: u8 = 4;
+pub(crate) const AURA_MASK_MAX_SIZE: u8 = 4 + 32 * 4;
+pub(crate) const AURA_MASK_MIN_SIZE: u8 = 4;
 
 pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> u16 {
     let data = match version {
@@ -37,12 +37,12 @@ pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> u16 {
     (amount_of_mask_blocks_size + max_mask_blocks + amount_of_bytes_for_data) as u16
 }
 
-pub const UPDATE_MASK_MIN_SIZE: u8 = 1;
-pub const PACKED_GUID_MAX_SIZE: u8 = 9;
-pub const PACKED_GUID_MIN_SIZE: u8 = 2;
-pub const GUID_SIZE: u8 = core::mem::size_of::<u64>() as u8;
-pub const BOOL_SIZE: u8 = 1;
-pub const DATETIME_SIZE: u8 = 4;
+pub(crate) const UPDATE_MASK_MIN_SIZE: u8 = 1;
+pub(crate) const PACKED_GUID_MAX_SIZE: u8 = 9;
+pub(crate) const PACKED_GUID_MIN_SIZE: u8 = 2;
+pub(crate) const GUID_SIZE: u8 = core::mem::size_of::<u64>() as u8;
+pub(crate) const BOOL_SIZE: u8 = 1;
+pub(crate) const DATETIME_SIZE: u8 = 4;
 
 impl Sizes {
     pub(crate) fn new() -> Self {

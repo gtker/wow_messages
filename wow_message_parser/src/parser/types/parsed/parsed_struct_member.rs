@@ -7,16 +7,16 @@ use crate::parser::types::{ContainerValue, ParsedContainerValue};
 use crate::{Tags, CONTAINER_SELF_SIZE_FIELD};
 
 #[derive(Debug, Clone, Eq, PartialEq)]
-pub enum ParsedStructMember {
+pub(crate) enum ParsedStructMember {
     Definition(ParsedStructMemberDefinition),
     IfStatement(ParsedIfStatement),
     OptionalStatement(ParsedOptionalStatement),
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]
-pub struct ParsedStructMemberDefinition {
+pub(crate) struct ParsedStructMemberDefinition {
     pub name: String,
-    pub struct_type: Type,
+    pub(crate) struct_type: Type,
     pub value: Option<ParsedContainerValue>,
     pub verified_value: Option<ContainerValue>,
     pub used_as_size_in: Option<String>,

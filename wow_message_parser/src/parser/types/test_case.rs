@@ -4,7 +4,7 @@ use crate::parser::types::{ArraySize, ContainerValue};
 use crate::rust_printer::UpdateMaskType;
 
 #[derive(Debug, Clone)]
-pub struct TestCase {
+pub(crate) struct TestCase {
     subject: String,
     members: Vec<TestCaseMember>,
     raw_bytes: Vec<u8>,
@@ -59,7 +59,7 @@ impl TestCase {
 }
 
 #[derive(Debug, Clone)]
-pub struct TestCaseMember {
+pub(crate) struct TestCaseMember {
     variable_name: String,
     value: TestValue,
     tags: Tags,
@@ -88,7 +88,7 @@ impl TestCaseMember {
 }
 
 #[derive(Debug, Clone)]
-pub struct TestUpdateMaskValue {
+pub(crate) struct TestUpdateMaskValue {
     ty: UpdateMaskType,
     name: String,
     value: String,
@@ -111,7 +111,7 @@ impl TestUpdateMaskValue {
 }
 
 #[derive(Debug, Clone)]
-pub enum TestValue {
+pub(crate) enum TestValue {
     Number(ContainerValue),
     Bool(bool),
     DateTime(ContainerValue),

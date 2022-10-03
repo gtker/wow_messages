@@ -8,7 +8,7 @@ use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::Path;
 
-pub struct DocWriter {
+pub(crate) struct DocWriter {
     name: String,
     inner: String,
     column: usize,

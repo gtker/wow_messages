@@ -37,7 +37,7 @@ fn container_to_ir(e: &Container) -> IrContainer {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "opcode")]
-pub enum IrContainerType {
+pub(crate) enum IrContainerType {
     #[serde(rename = "struct")]
     Struct,
     #[serde(rename = "clogin")]
@@ -66,7 +66,7 @@ impl From<ContainerType> for IrContainerType {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrContainer {
+pub(crate) struct IrContainer {
     name: String,
     object_type: IrContainerType,
     constant: bool,
@@ -85,7 +85,7 @@ impl IrContainer {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrOptionalStatement {
+pub(crate) struct IrOptionalStatement {
     name: String,
     members: Vec<IrStructMember>,
     tags: IrTags,
@@ -105,7 +105,7 @@ impl From<&OptionalStatement> for IrOptionalStatement {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
-pub enum IrStructMember {
+pub(crate) enum IrStructMember {
     #[serde(rename = "definition")]
     Definition(IrStructMemberDefinition),
     #[serde(rename = "if_statement")]
@@ -126,7 +126,7 @@ impl From<&StructMember> for IrStructMember {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
-pub enum IrEquation {
+pub(crate) enum IrEquation {
     #[serde(rename = "equals")]
     Equals { value: String },
     #[serde(rename = "not_equals")]
@@ -152,7 +152,7 @@ impl From<&Equation> for IrEquation {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrConditional {
+pub(crate) struct IrConditional {
     variable_name: String,
     equations: Vec<IrEquation>,
 }
@@ -169,7 +169,7 @@ impl From<Conditional> for IrConditional {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrIfStatement {
+pub(crate) struct IrIfStatement {
     pub conditional: IrConditional,
     members: Vec<IrStructMember>,
     #[serde(rename = "else_if_statements")]
@@ -198,7 +198,7 @@ impl From<&IfStatement> for IrIfStatement {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrStructMemberDefinition {
+pub(crate) struct IrStructMemberDefinition {
     name: String,
     member_type: IrType,
     constant_value: Option<IrIntegerEnumValue>,
@@ -222,7 +222,7 @@ impl From<&StructMemberDefinition> for IrStructMemberDefinition {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
-pub enum IrType {
+pub(crate) enum IrType {
     #[serde(rename = "integer")]
     Integer(IrIntegerType),
     #[serde(rename = "bool")]
@@ -281,7 +281,7 @@ impl From<&Type> for IrType {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrArray {
+pub(crate) struct IrArray {
     inner: IrArrayType,
     size: IrArraySize,
 }
@@ -297,7 +297,7 @@ impl From<&Array> for IrArray {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
-pub enum IrArrayType {
+pub(crate) enum IrArrayType {
     #[serde(rename = "integer")]
     Integer(IrIntegerType),
     #[serde(rename = "complex")]
@@ -324,7 +324,7 @@ impl From<&ArrayType> for IrArrayType {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
-pub enum IrArraySize {
+pub(crate) enum IrArraySize {
     #[serde(rename = "fixed")]
     Fixed(i64),
     #[serde(rename = "variable")]
@@ -345,7 +345,7 @@ impl From<ArraySize> for IrArraySize {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "endianness")]
-pub enum IrFloatingPointType {
+pub(crate) enum IrFloatingPointType {
     #[serde(rename = "f32")]
     F32(IrEndianness),
     #[serde(rename = "f64")]
@@ -362,7 +362,7 @@ impl From<&FloatingPointType> for IrFloatingPointType {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrIntegerEnumValue {
+pub(crate) struct IrIntegerEnumValue {
     value: u64,
     original_string: String,
 }
@@ -377,7 +377,7 @@ impl From<&ContainerValue> for IrIntegerEnumValue {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrTestCase {
+pub(crate) struct IrTestCase {
     subject: String,
     members: Vec<IrTestCaseMember>,
     raw_bytes: Vec<u8>,
@@ -403,7 +403,7 @@ impl From<&TestCase> for IrTestCase {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrTestCaseMember {
+pub(crate) struct IrTestCaseMember {
     variable_name: String,
     value: IrTestValue,
     tags: IrTags,
@@ -420,7 +420,7 @@ impl From<&TestCaseMember> for IrTestCaseMember {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrTestUpdateMaskValue {
+pub(crate) struct IrTestUpdateMaskValue {
     #[serde(rename = "type")]
     ty: IrUpdateMaskType,
     name: String,
@@ -438,7 +438,7 @@ impl From<&TestUpdateMaskValue> for IrTestUpdateMaskValue {
 }
 
 #[derive(Debug, Serialize)]
-pub enum IrUpdateMaskType {
+pub(crate) enum IrUpdateMaskType {
     #[serde(rename = "OBJECT")]
     Object,
     #[serde(rename = "ITEM")]
@@ -474,7 +474,7 @@ impl From<UpdateMaskType> for IrUpdateMaskType {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
-pub enum IrTestValue {
+pub(crate) enum IrTestValue {
     #[serde(rename = "number")]
     Number(IrIntegerEnumValue),
     #[serde(rename = "bool")]

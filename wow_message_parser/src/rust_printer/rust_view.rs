@@ -19,7 +19,7 @@ use crate::{CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 use std::fmt::{Display, Formatter};
 
 #[derive(Debug, Clone)]
-pub struct RustMember {
+pub(crate) struct RustMember {
     name: String,
     ty: RustType,
     original_ty: String,
@@ -296,7 +296,7 @@ impl RustMember {
 }
 
 #[derive(Debug, Clone)]
-pub struct RustEnumerator {
+pub(crate) struct RustEnumerator {
     name: String,
     rust_name: String,
     value: DefinerValue,
@@ -352,7 +352,7 @@ impl RustEnumerator {
 }
 
 #[derive(Debug, Clone)]
-pub enum RustType {
+pub(crate) enum RustType {
     Integer(IntegerType),
     Bool,
     DateTime,
@@ -447,7 +447,7 @@ impl Display for RustType {
 }
 
 #[derive(Debug, Clone)]
-pub struct RustOptional {
+pub(crate) struct RustOptional {
     name: String,
     ty: String,
     members: Vec<RustMember>,
@@ -482,7 +482,7 @@ impl RustOptional {
 }
 
 #[derive(Debug, Clone)]
-pub struct RustObject {
+pub(crate) struct RustObject {
     name: String,
     members: Vec<RustMember>,
     optional: Option<RustOptional>,
@@ -785,7 +785,7 @@ impl RustObject {
 }
 
 #[derive(Debug, Clone)]
-pub struct RustDefiner {
+pub(crate) struct RustDefiner {
     inner: RustMember,
     definer_type: DefinerType,
     enumerators: Vec<RustEnumerator>,

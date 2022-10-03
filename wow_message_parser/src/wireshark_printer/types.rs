@@ -58,7 +58,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
 }
 
 #[derive(Debug, Eq, PartialEq)]
-pub struct WiresharkObject {
+pub(crate) struct WiresharkObject {
     members: Vec<WiresharkMember>,
     enums: Vec<Definer>,
     flags: Vec<Definer>,
@@ -107,7 +107,7 @@ impl WiresharkObject {
 }
 
 #[derive(Debug, Eq, PartialEq)]
-pub struct WiresharkMember {
+pub(crate) struct WiresharkMember {
     name: String,
     ty: WiresharkType,
 }
@@ -138,7 +138,7 @@ impl WiresharkMember {
 }
 
 #[derive(Debug, Eq, PartialEq)]
-pub enum WiresharkType {
+pub(crate) enum WiresharkType {
     Integer(IntegerType),
     String,
     Float(FloatingPointType),

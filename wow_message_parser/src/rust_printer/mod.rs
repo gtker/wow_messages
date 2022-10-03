@@ -24,7 +24,7 @@ use crate::{ContainerType, Objects, Tags};
 pub use update_mask::*;
 
 #[derive(Debug)]
-pub struct Writer {
+pub(crate) struct Writer {
     inner: String,
     imports: String,
     indentation_level: u8,
@@ -32,19 +32,19 @@ pub struct Writer {
     import_path: String,
 }
 
-pub const EXPECTED_OPCODE_ERROR: &str = "crate::errors::ExpectedOpcodeError";
-pub const PARSE_ERROR: &str = "crate::errors::ParseError";
+pub(crate) const EXPECTED_OPCODE_ERROR: &str = "crate::errors::ExpectedOpcodeError";
+pub(crate) const PARSE_ERROR: &str = "crate::errors::ParseError";
 
-pub const CLIENT_MESSAGE_TRAIT_NAME: &str = "ClientMessage";
-pub const SERVER_MESSAGE_TRAIT_NAME: &str = "ServerMessage";
+pub(crate) const CLIENT_MESSAGE_TRAIT_NAME: &str = "ClientMessage";
+pub(crate) const SERVER_MESSAGE_TRAIT_NAME: &str = "ServerMessage";
 
-pub const LOGIN_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
-pub const LOGIN_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
-pub const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
-pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
+pub(crate) const LOGIN_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
+pub(crate) const LOGIN_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
+pub(crate) const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
+pub(crate) const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 
-pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
-pub const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
+pub(crate) const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
+pub(crate) const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
 
 const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
@@ -735,7 +735,7 @@ impl Writer {
 }
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
-pub enum ImplType {
+pub(crate) enum ImplType {
     Std,
     Tokio,
     AsyncStd,
@@ -806,7 +806,7 @@ impl ImplType {
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
-pub enum Version {
+pub(crate) enum Version {
     Login(LoginVersion),
     World(WorldVersion),
 }
@@ -898,7 +898,7 @@ impl From<WorldVersion> for Version {
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
-pub enum MajorWorldVersion {
+pub(crate) enum MajorWorldVersion {
     Vanilla,
     BurningCrusade,
     Wrath,
@@ -934,7 +934,7 @@ impl MajorWorldVersion {
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
-pub enum DefinerType {
+pub(crate) enum DefinerType {
     Enum,
     Flag,
 }

@@ -9,7 +9,7 @@ use crate::CONTAINER_SELF_SIZE_FIELD;
 use serde::Serialize;
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize)]
-pub enum Feature {
+pub(crate) enum Feature {
     Struct,
     CLogin,
     SLogin,
@@ -65,7 +65,7 @@ pub enum Feature {
     LoginVersion,
 }
 
-pub struct ImplFeatures {
+pub(crate) struct ImplFeatures {
     inner: Vec<Feature>,
 }
 

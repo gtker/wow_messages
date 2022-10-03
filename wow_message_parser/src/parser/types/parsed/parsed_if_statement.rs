@@ -3,7 +3,7 @@ use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::ty::Type;
 
 #[derive(Debug, Clone)]
-pub struct ParsedIfStatement {
+pub(crate) struct ParsedIfStatement {
     pub conditional: Conditional,
     pub members: Vec<ParsedStructMember>,
     pub else_ifs: Vec<ParsedIfStatement>,

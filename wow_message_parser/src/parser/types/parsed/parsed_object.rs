@@ -5,7 +5,7 @@ use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::Objects;
 
 #[derive(Debug, Clone)]
-pub struct ParsedObjects {
+pub(crate) struct ParsedObjects {
     enums: Vec<ParsedDefiner>,
     flags: Vec<ParsedDefiner>,
     structs: Vec<ParsedContainer>,

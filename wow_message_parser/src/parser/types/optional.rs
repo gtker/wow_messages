@@ -2,7 +2,7 @@ use crate::parser::types::struct_member::StructMember;
 use crate::Tags;
 
 #[derive(Debug, Clone, Eq)]
-pub struct OptionalStatement {
+pub(crate) struct OptionalStatement {
     name: String,
     members: Vec<StructMember>,
     tags: Tags,

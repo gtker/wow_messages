@@ -12,7 +12,7 @@ use crate::parser::types::ObjectType;
 use crate::{DefinerType, Version};
 
 #[derive(Debug, Clone)]
-pub struct Objects {
+pub(crate) struct Objects {
     enums: Vec<Definer>,
     flags: Vec<Definer>,
     structs: Vec<Container>,
@@ -313,7 +313,7 @@ impl Objects {
 
 #[derive(Debug, Clone)]
 #[allow(clippy::large_enum_variant)]
-pub enum Object {
+pub(crate) enum Object {
     Container(Container),
     Enum(Definer),
     Flag(Definer),

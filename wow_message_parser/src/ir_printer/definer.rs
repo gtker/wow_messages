@@ -61,7 +61,7 @@ impl From<DefinerType> for IrDefinerType {
 }
 
 #[derive(Debug, Serialize)]
-pub enum IrDefinerUsage {
+pub(crate) enum IrDefinerUsage {
     #[serde(rename = "used_but_not_in_if")]
     UsedButNotInIf,
     #[serde(rename = "in_if")]
@@ -94,7 +94,7 @@ impl From<&SelfValueDefinerField> for IrSelfValueDefinerField {
 }
 
 #[derive(Debug, Serialize)]
-pub struct IrDefinerField {
+pub(crate) struct IrDefinerField {
     name: String,
     value: IrDefinerValue,
     tags: IrTags,
@@ -126,7 +126,7 @@ struct ObjectUsedIn {
 }
 
 #[derive(Serialize, Debug)]
-pub struct IrDefiner {
+pub(crate) struct IrDefiner {
     name: String,
     definer_ty: IrDefinerType,
     enumerators: Vec<IrDefinerField>,

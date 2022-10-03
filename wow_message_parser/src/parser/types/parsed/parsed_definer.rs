@@ -4,7 +4,7 @@ use crate::parser::types::IntegerType;
 use crate::{DefinerType, Tags};
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct ParsedDefiner {
+pub(crate) struct ParsedDefiner {
     pub name: String,
     pub definer_ty: DefinerType,
     pub fields: Vec<DefinerField>,

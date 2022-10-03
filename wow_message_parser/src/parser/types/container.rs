@@ -16,7 +16,7 @@ use crate::CONTAINER_SELF_SIZE_FIELD;
 use std::cmp::Ordering;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
-pub enum ContainerType {
+pub(crate) enum ContainerType {
     Struct,
     CLogin(u16),
     SLogin(u16),
@@ -39,7 +39,7 @@ impl ContainerType {
 }
 
 #[derive(Debug, Clone)]
-pub struct Container {
+pub(crate) struct Container {
     name: String,
     object_type: ContainerType,
     sizes: Sizes,

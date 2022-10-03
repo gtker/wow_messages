@@ -8,7 +8,7 @@ use crate::{
 };
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
-pub enum WorldVersion {
+pub(crate) enum WorldVersion {
     Major(u8),
     Minor(u8, u8),
     Patch(u8, u8, u8),
@@ -211,7 +211,7 @@ impl Display for WorldVersion {
 }
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Copy, Clone)]
-pub enum LoginVersion {
+pub(crate) enum LoginVersion {
     Specific(u8),
     All,
 }
@@ -235,7 +235,7 @@ impl LoginVersion {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
-pub struct Tags {
+pub(crate) struct Tags {
     inner: Vec<Tag>,
     login_logon_versions: Vec<LoginVersion>,
     world_versions: Vec<WorldVersion>,
@@ -553,7 +553,7 @@ impl Tags {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct Tag {
+pub(crate) struct Tag {
     key: String,
     value: String,
 }
@@ -607,7 +607,7 @@ impl TagStringSymbol {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
-pub struct TagString {
+pub(crate) struct TagString {
     inner: Vec<TagStringSymbol>,
 }
 

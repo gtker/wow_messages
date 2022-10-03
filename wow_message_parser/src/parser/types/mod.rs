@@ -25,7 +25,7 @@ pub(crate) fn compare_name_and_tags(
 }
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
-pub enum ObjectType {
+pub(crate) enum ObjectType {
     Struct,
     CLogin,
     SLogin,
@@ -34,7 +34,7 @@ pub enum ObjectType {
 }
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone)]
-pub enum Endianness {
+pub(crate) enum Endianness {
     Little,
     Big,
 }
@@ -55,7 +55,7 @@ impl Endianness {
 }
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone)]
-pub enum FloatingPointType {
+pub(crate) enum FloatingPointType {
     F32(Endianness),
     F64(Endianness),
 }
@@ -111,7 +111,7 @@ impl FloatingPointType {
 }
 
 #[derive(Debug, Eq, Ord, PartialOrd, PartialEq, Copy, Clone)]
-pub enum IntegerType {
+pub(crate) enum IntegerType {
     U8,
     U16(Endianness),
     U32(Endianness),
@@ -224,7 +224,7 @@ impl From<&str> for IntegerType {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub enum ArrayType {
+pub(crate) enum ArrayType {
     Integer(IntegerType),
     Complex(String),
     CString,
@@ -255,7 +255,7 @@ impl ArrayType {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub enum ArraySize {
+pub(crate) enum ArraySize {
     Fixed(i64),
     Variable(String),
     Endless,
@@ -272,7 +272,7 @@ impl ArraySize {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct Array {
+pub(crate) struct Array {
     inner: ArrayType,
     size: ArraySize,
 }
@@ -332,7 +332,7 @@ impl Array {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct ContainerValue {
+pub(crate) struct ContainerValue {
     value: u64,
     original_string: String,
 }
@@ -370,7 +370,7 @@ impl ContainerValue {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct ParsedContainerValue {
+pub(crate) struct ParsedContainerValue {
     identifier: String,
 }
 

@@ -260,7 +260,7 @@ fn print_test_case(
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]
-pub enum EnumeratorType {
+pub(crate) enum EnumeratorType {
     Regular,
     Elseif {
         parent_name: String,

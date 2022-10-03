@@ -34,10 +34,10 @@ pub mod utility;
 
 #[derive(Parser)]
 #[grammar = "auth.pest"]
-pub struct AuthParser;
+pub(crate) struct AuthParser;
 
 #[derive(Debug)]
-pub struct Commands {
+pub(crate) struct Commands {
     tags: Tags,
 }
 

@@ -8,7 +8,7 @@ use crate::parser::types::tags::{Tags, WorldVersion};
 use crate::Version;
 
 #[derive(Debug, Clone)]
-pub struct Data {
+pub(crate) struct Data {
     name: &'static str,
     opcode: usize,
     definition: bool,
@@ -17,7 +17,7 @@ pub struct Data {
 }
 
 impl Data {
-    pub const fn new(name: &'static str, opcode: usize) -> Self {
+    pub(crate) const fn new(name: &'static str, opcode: usize) -> Self {
         Self {
             name,
             opcode,
@@ -27,7 +27,11 @@ impl Data {
         }
     }
 
-    pub const fn with_reason(name: &'static str, opcode: usize, reason: &'static str) -> Self {
+    pub(crate) const fn with_reason(
+        name: &'static str,
+        opcode: usize,
+        reason: &'static str,
+    ) -> Self {
         Self {
             name,
             opcode,

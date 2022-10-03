@@ -10,7 +10,7 @@ use std::cmp::Ordering;
 use std::collections::HashMap;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct DefinerField {
+pub(crate) struct DefinerField {
     name: String,
     rust_name: String,
     value: DefinerValue,
@@ -45,7 +45,7 @@ impl DefinerField {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct DefinerValue {
+pub(crate) struct DefinerValue {
     int: u64,
     original: String,
 }
@@ -78,7 +78,7 @@ impl From<&str> for DefinerValue {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct SelfValueDefinerField {
+pub(crate) struct SelfValueDefinerField {
     name: String,
     rust_name: String,
     tags: Tags,
@@ -107,7 +107,7 @@ impl SelfValueDefinerField {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct Definer {
+pub(crate) struct Definer {
     name: String,
     definer_ty: DefinerType,
     fields: Vec<DefinerField>,

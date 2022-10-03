@@ -16,7 +16,7 @@ use crate::{
 use std::convert::TryInto;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub enum Type {
+pub(crate) enum Type {
     Integer(IntegerType),
     Bool,
     PackedGuid,

@@ -14,7 +14,7 @@ use crate::rust_printer::Version;
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
 #[allow(clippy::enum_variant_names)]
-pub enum SubmoduleLocation {
+pub(crate) enum SubmoduleLocation {
     PubUseInternal,
     PubMod,
     PubCrateMod,
@@ -22,13 +22,13 @@ pub enum SubmoduleLocation {
 }
 
 #[derive(Debug)]
-pub struct ModFile {
+pub(crate) struct ModFile {
     pub name: PathBuf,
     pub submodules: Vec<(String, SubmoduleLocation)>,
 }
 
 #[derive(Debug)]
-pub struct ModFiles {
+pub(crate) struct ModFiles {
     v: Vec<ModFile>,
     already_existing_files: BTreeMap<PathBuf, bool>,
 }

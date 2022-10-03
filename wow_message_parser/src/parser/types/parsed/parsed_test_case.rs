@@ -3,7 +3,7 @@ use crate::parser::types::test_case::TestValue;
 use crate::Tags;
 
 #[derive(Debug, Clone)]
-pub struct ParsedTestCase {
+pub(crate) struct ParsedTestCase {
     pub subject: String,
     pub members: Vec<ParsedTestCaseMember>,
     pub raw_bytes: Vec<u8>,
@@ -37,14 +37,14 @@ impl ParsedTestCase {
 }
 
 #[derive(Debug, Clone)]
-pub enum TestCaseValueInitial {
+pub(crate) enum TestCaseValueInitial {
     Single(String),
     Multiple(Vec<ParsedTestCaseMember>),
     ArrayOfMultiple(Vec<Vec<ParsedTestCaseMember>>),
 }
 
 #[derive(Debug, Clone)]
-pub struct ParsedTestCaseMember {
+pub(crate) struct ParsedTestCaseMember {
     pub variable_name: String,
     pub value: TestCaseValueInitial,
     pub verified_value: Option<TestValue>,

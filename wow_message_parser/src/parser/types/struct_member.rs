@@ -5,14 +5,14 @@ use crate::parser::types::ContainerValue;
 use crate::Tags;
 
 #[derive(Debug, Clone, Eq, PartialEq)]
-pub enum StructMember {
+pub(crate) enum StructMember {
     Definition(StructMemberDefinition),
     IfStatement(IfStatement),
     OptionalStatement(OptionalStatement),
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]
-pub struct StructMemberDefinition {
+pub(crate) struct StructMemberDefinition {
     name: String,
     struct_type: Type,
     value: Option<ContainerValue>,
