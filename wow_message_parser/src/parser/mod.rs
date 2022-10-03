@@ -10,11 +10,6 @@ use types::definer::DefinerField;
 use types::tags::{Tag, Tags};
 
 use crate::file_info::FileInfo;
-use crate::parser::types::parsed_container::ParsedContainer;
-use crate::parser::types::parsed_definer::ParsedDefiner;
-use crate::parser::types::parsed_test_case::{
-    ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial,
-};
 use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
@@ -24,6 +19,9 @@ use types::container::ContainerType;
 use types::definer::SelfValueDefinerField;
 use types::if_statement::{Condition, Conditional, IfStatement};
 use types::optional::OptionalStatement;
+use types::parsed::parsed_container::ParsedContainer;
+use types::parsed::parsed_definer::ParsedDefiner;
+use types::parsed::parsed_test_case::{ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial};
 use types::struct_member::{StructMember, StructMemberDefinition};
 use types::ty::Type;
 

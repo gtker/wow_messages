@@ -1,8 +1,7 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::{DefinerField, SelfValueDefinerField};
-use crate::parser::types::tags::Tags;
 use crate::parser::types::IntegerType;
-use crate::rust_printer::DefinerType;
+use crate::{DefinerType, Tags};
 use std::collections::HashMap;
 
 #[derive(Debug, Eq, PartialEq, Clone)]

@@ -1,7 +1,7 @@
 use crate::parser::types::if_statement::DefinerUsage;
-use crate::parser::types::parsed_container::ParsedContainer;
-use crate::parser::types::parsed_definer::ParsedDefiner;
-use crate::parser::types::parsed_test_case::ParsedTestCase;
+use crate::parser::types::parsed::parsed_container::ParsedContainer;
+use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
+use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::Objects;
 
 #[derive(Debug, Clone)]

@@ -17,13 +17,13 @@ use crate::file_utils::{
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
-use crate::parser::types::parsed_object::ParsedObjects;
 use crate::path_utils::{get_login_version_file_path, wowm_directory};
 use crate::rust_printer::{
     get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
     print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType, Version,
 };
 use parser::types::container::{Container, ContainerType};
+use parser::types::parsed::parsed_object::ParsedObjects;
 use parser::types::tags::Tags;
 use path_utils::get_world_version_file_path;
 

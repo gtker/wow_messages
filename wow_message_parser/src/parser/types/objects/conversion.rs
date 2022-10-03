@@ -1,8 +1,8 @@
 use crate::parser::types::definer::Definer;
-use crate::parser::types::parsed_container::ParsedContainer;
-use crate::parser::types::parsed_definer::ParsedDefiner;
-use crate::parser::types::parsed_object::get_definer_objects_used_in;
-use crate::parser::types::parsed_test_case::{
+use crate::parser::types::parsed::parsed_container::ParsedContainer;
+use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
+use crate::parser::types::parsed::parsed_object::get_definer_objects_used_in;
+use crate::parser::types::parsed::parsed_test_case::{
     ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial,
 };
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};

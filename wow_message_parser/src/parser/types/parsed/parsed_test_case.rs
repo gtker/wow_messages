@@ -1,6 +1,6 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::tags::Tags;
 use crate::parser::types::test_case::TestValue;
+use crate::Tags;
 
 #[derive(Debug, Clone)]
 pub struct ParsedTestCase {
