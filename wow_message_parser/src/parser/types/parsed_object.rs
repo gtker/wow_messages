@@ -1,4 +1,4 @@
-use crate::parser::types::container::DefinerUsage;
+use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::parsed_container::ParsedContainer;
 use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed_test_case::ParsedTestCase;

@@ -1,7 +1,6 @@
 use crate::doc_printer::DocWriter;
-use crate::parser::types::container::{
-    Equation, IfStatement, StructMember, StructMemberDefinition,
-};
+use crate::parser::types::container::{StructMember, StructMemberDefinition};
+use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::sizes::{BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, Endianness, IntegerType, ObjectType};

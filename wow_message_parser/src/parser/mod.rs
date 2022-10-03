@@ -20,10 +20,9 @@ use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
 use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD};
-use types::container::{
-    Condition, Conditional, ContainerType, IfStatement, StructMember, StructMemberDefinition,
-};
+use types::container::{ContainerType, StructMember, StructMemberDefinition};
 use types::definer::SelfValueDefinerField;
+use types::if_statement::{Condition, Conditional, IfStatement};
 use types::optional::OptionalStatement;
 use types::ty::Type;
 
