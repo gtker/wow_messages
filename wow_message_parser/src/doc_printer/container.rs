@@ -295,7 +295,7 @@ fn print_container_example_member(
 
             let statement_set = |statement: &IfStatement, enum_value: isize| {
                 let mut set = false;
-                for eq in statement.get_conditional().equations() {
+                for eq in statement.conditional().equations() {
                     match eq {
                         Equation::Equals { value } => {
                             let eq_value = definer_ty
@@ -435,7 +435,7 @@ fn print_container_if_statement(
     o: &Objects,
 ) {
     s.w(format!("If {variable} ", variable = statement.name()));
-    for (i, e) in statement.get_conditional().equations().iter().enumerate() {
+    for (i, e) in statement.conditional().equations().iter().enumerate() {
         if i != 0 {
             s.wln(" **or** ");
         }

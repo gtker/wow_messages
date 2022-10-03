@@ -686,7 +686,7 @@ fn print_read_if_statement_enum(
         name = statement.name()
     ));
 
-    let enumerator_name = match &statement.get_conditional().equations()[0] {
+    let enumerator_name = match &statement.conditional().equations()[0] {
         Equation::Equals { value, .. } | Equation::NotEquals { value, .. } => value,
         _ => unreachable!(),
     };

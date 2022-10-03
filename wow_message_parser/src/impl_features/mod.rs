@@ -155,7 +155,7 @@ fn features_for_struct_member(
                 DefinerType::Flag => Feature::IfFlag,
             });
 
-            if statement.conditional.equations().len() > 1 {
+            if statement.conditional().equations().len() > 1 {
                 f.add(Feature::IfMultiCondition);
             }
 

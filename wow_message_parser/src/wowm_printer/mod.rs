@@ -184,9 +184,9 @@ fn print_members(s: &mut WowmWriter, e: &Container, field: &StructMember) {
 }
 
 fn print_wowm_if_statement(s: &mut WowmWriter, statement: &IfStatement, condition: &str) {
-    let equations = statement.conditional.equations();
+    let equations = statement.conditional().equations();
     for (i, eq) in equations.iter().enumerate() {
-        let name = statement.conditional.variable_name();
+        let name = statement.conditional().variable_name();
         let (op, cond) = match eq {
             Equation::Equals { value } => ("==", value),
             Equation::NotEquals { value } => ("!=", value),

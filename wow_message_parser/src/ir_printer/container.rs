@@ -188,7 +188,7 @@ impl From<&IfStatement> for IrIfStatement {
         let else_statement_members = v.else_members().iter().map(|a| a.into()).collect();
 
         Self {
-            conditional: v.conditional.clone().into(),
+            conditional: v.conditional().clone().into(),
             members,
             else_ifs,
             else_statement_members,

@@ -12,7 +12,7 @@ pub enum DefinerUsage {
 
 #[derive(Debug, Clone)]
 pub struct IfStatement {
-    pub conditional: Conditional,
+    conditional: Conditional,
     members: Vec<StructMember>,
     else_ifs: Vec<IfStatement>,
     else_statement_members: Vec<StructMember>,
@@ -49,9 +49,9 @@ impl IfStatement {
     }
 
     pub(crate) fn flag_get_enumerator(&self) -> String {
-        assert_eq!(self.get_conditional().equations.len(), 1);
+        assert_eq!(self.conditional().equations.len(), 1);
 
-        match &self.get_conditional().equations[0] {
+        match &self.conditional().equations[0] {
             Equation::BitwiseAnd { value } => value.to_string(),
             _ => unreachable!(),
         }
@@ -104,7 +104,7 @@ impl IfStatement {
             .chain(&self.else_statement_members)
     }
 
-    pub(crate) fn get_conditional(&self) -> &Conditional {
+    pub(crate) fn conditional(&self) -> &Conditional {
         &self.conditional
     }
 }

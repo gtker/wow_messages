@@ -892,10 +892,10 @@ fn create_else_if_flag(
     current_scope: &mut [RustMember],
     parent_scope: &mut [RustMember],
 ) {
-    assert_eq!(statement.get_conditional().equations().len(), 1);
+    assert_eq!(statement.conditional().equations().len(), 1);
     assert!(statement.else_members().is_empty());
 
-    let enumerator = match &statement.get_conditional().equations()[0] {
+    let enumerator = match &statement.conditional().equations()[0] {
         Equation::BitwiseAnd { value } => value.as_str(),
         _ => unreachable!(),
     };
@@ -911,7 +911,7 @@ fn create_else_if_flag(
 
     // Append elseifs
     for elseif in statement.else_ifs() {
-        let name = match &elseif.get_conditional().equations()[0] {
+        let name = match &elseif.conditional().equations()[0] {
             Equation::BitwiseAnd { value } => value.to_string(),
             _ => unreachable!(),
         };
@@ -985,7 +985,7 @@ pub(crate) fn create_if_statement(
     let mut reversed = false;
     let mut main_enumerators = Vec::new();
 
-    for i in statement.get_conditional().equations() {
+    for i in statement.conditional().equations() {
         match i {
             Equation::BitwiseAnd { value } | Equation::Equals { value } => {
                 main_enumerators.push(value)
@@ -1070,7 +1070,7 @@ pub(crate) fn create_if_statement(
         // Apply else_if to else_if, ..
         for else_if in statement.else_ifs() {
             let mut else_if_enumerators = Vec::new();
-            for i in else_if.get_conditional().equations() {
+            for i in else_if.conditional().equations() {
                 match i {
                     Equation::BitwiseAnd { value } | Equation::Equals { value } => {
                         main_enumerators.push(value);

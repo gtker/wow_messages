@@ -134,7 +134,7 @@ fn print_if_statement(
 
     s.w("if (");
 
-    for (i, eq) in statement.get_conditional().equations().iter().enumerate() {
+    for (i, eq) in statement.conditional().equations().iter().enumerate() {
         let (op, value) = match eq {
             Equation::Equals { value } => ("==", value),
             Equation::NotEquals { value } => ("!=", value),
@@ -166,7 +166,7 @@ fn print_if_statement(
     for elseif in statement.else_ifs() {
         s.w("else if (");
 
-        for (i, eq) in elseif.get_conditional().equations().iter().enumerate() {
+        for (i, eq) in elseif.conditional().equations().iter().enumerate() {
             let (op, value) = match eq {
                 Equation::Equals { value } => ("==", value),
                 Equation::NotEquals { value } => ("!=", value),
