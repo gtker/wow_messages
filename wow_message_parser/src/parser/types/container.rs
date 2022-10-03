@@ -87,7 +87,7 @@ impl Container {
         sizes: Sizes,
         only_has_io_error: bool,
     ) -> Self {
-        let s = Self {
+        Self {
             name,
             object_type,
             sizes,
@@ -97,11 +97,7 @@ impl Container {
             file_info,
             only_has_io_error,
             rust_object_view: None,
-        };
-
-        s.self_check();
-
-        s
+        }
     }
 
     pub fn get_variable_name_of_definer_ty(&self, ty_name: &str) -> Option<String> {
@@ -431,27 +427,6 @@ impl Container {
         }
 
         sum
-    }
-
-    pub fn panic_on_duplicate_field_names(&self) {
-        let mut v = Vec::new();
-
-        for d in self.all_definitions() {
-            v.push(d.name());
-        }
-        v.sort_unstable();
-
-        let mut previous_name = "";
-        for e in v {
-            if e == previous_name {
-                panic!(
-                    "struct '{struct_name}' contains duplicate fields '{field_name}'",
-                    struct_name = self.name(),
-                    field_name = e
-                );
-            }
-            previous_name = e;
-        }
     }
 
     pub fn check_if_statement_operators(&self, o: &Objects) {
@@ -928,35 +903,6 @@ impl Container {
         }
     }
 
-    fn set_if_statements(&mut self) {
-        fn inner(m: &mut StructMember, c: &Container) {
-            match m {
-                StructMember::Definition(_) => {}
-                StructMember::IfStatement(statement) => {
-                    statement.set_original_ty(c.get_type_of_variable(statement.name()));
-
-                    for else_if in statement.else_ifs_mut() {
-                        else_if.set_original_ty(c.get_type_of_variable(else_if.name()));
-                    }
-
-                    for m in statement.all_members_mut() {
-                        inner(m, c);
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in optional.members_mut() {
-                        inner(m, c);
-                    }
-                }
-            }
-        }
-
-        let c = self.clone();
-        for m in &mut self.members {
-            inner(m, &c);
-        }
-    }
-
     fn check_values(&self, o: &Objects) {
         for d in self.all_definitions() {
             match &d.ty() {
@@ -983,14 +929,8 @@ impl Container {
         }
     }
 
-    pub fn self_check(&self) {
-        self.panic_on_duplicate_field_names();
-    }
-
     pub fn set_internals(&mut self, o: &Objects) {
         self.check_values(o);
-
-        self.set_if_statements();
 
         self.set_all_values_to_verified(o);
 
