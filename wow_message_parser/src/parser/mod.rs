@@ -25,7 +25,7 @@ use types::definer::SelfValueDefinerField;
 use types::if_statement::{Condition, Conditional};
 use types::parsed::parsed_container::ParsedContainer;
 use types::parsed::parsed_definer::ParsedDefiner;
-use types::parsed::parsed_test_case::{ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial};
+use types::parsed::parsed_test_case::{ParsedTestCase, ParsedTestCaseMember, ParsedTestValue};
 use types::ty::Type;
 
 pub mod stats;
@@ -209,7 +209,7 @@ fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>
                 parse_test_values(m_inner, &mut v);
             }
 
-            TestCaseValueInitial::Multiple(v)
+            ParsedTestValue::Multiple(v)
         }
         Rule::array_of_sub_objects => {
             let mut multiples = Vec::new();
@@ -225,9 +225,9 @@ fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>
                 multiples.push(v);
             }
 
-            TestCaseValueInitial::ArrayOfMultiple(multiples)
+            ParsedTestValue::ArrayOfMultiple(multiples)
         }
-        _ => TestCaseValueInitial::Single(member_value.as_str().to_owned()),
+        _ => ParsedTestValue::Single(member_value.as_str().to_owned()),
     };
 
     let mut extra_kvs = m.find(|a| a.as_rule() == Rule::object_key_values);

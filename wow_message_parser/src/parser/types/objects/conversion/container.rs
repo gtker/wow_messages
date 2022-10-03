@@ -9,7 +9,7 @@ use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::parsed::parsed_test_case::{
-    ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial,
+    ParsedTestCase, ParsedTestCaseMember, ParsedTestValue,
 };
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
@@ -253,7 +253,7 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
 
 fn convert_parsed_test_case_value_to_test_case_value(
     variable_name: &str,
-    test: TestCaseValueInitial,
+    test: ParsedTestValue,
     c: &ParsedContainer,
     containers: &[ParsedContainer],
     enums: &[Definer],
@@ -262,8 +262,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
     let ty = c.get_field_ty(variable_name);
 
     let value = match test {
-        TestCaseValueInitial::Single(s) => s,
-        TestCaseValueInitial::Multiple(mut multiple) => {
+        ParsedTestValue::Single(s) => s,
+        ParsedTestValue::Multiple(mut multiple) => {
             if ty == &Type::UpdateMask {
                 let mut v = Vec::new();
                 for m_inner in multiple.iter_mut() {
@@ -281,7 +281,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                     };
 
                     let value = match &m_inner.value {
-                        TestCaseValueInitial::Single(v) => v.clone(),
+                        ParsedTestValue::Single(v) => v.clone(),
                         _ => unreachable!(),
                     };
 
@@ -305,7 +305,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 members,
             };
         }
-        TestCaseValueInitial::ArrayOfMultiple(array) => {
+        ParsedTestValue::ArrayOfMultiple(array) => {
             let mut v = Vec::new();
 
             let ty_name = match ty {

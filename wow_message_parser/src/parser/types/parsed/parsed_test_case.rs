@@ -1,5 +1,4 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::test_case::TestValue;
 use crate::Tags;
 
 #[derive(Debug, Clone)]
@@ -37,7 +36,7 @@ impl ParsedTestCase {
 }
 
 #[derive(Debug, Clone)]
-pub(crate) enum TestCaseValueInitial {
+pub(crate) enum ParsedTestValue {
     Single(String),
     Multiple(Vec<ParsedTestCaseMember>),
     ArrayOfMultiple(Vec<Vec<ParsedTestCaseMember>>),
@@ -46,17 +45,15 @@ pub(crate) enum TestCaseValueInitial {
 #[derive(Debug, Clone)]
 pub(crate) struct ParsedTestCaseMember {
     pub variable_name: String,
-    pub value: TestCaseValueInitial,
-    pub verified_value: Option<TestValue>,
+    pub value: ParsedTestValue,
     pub tags: Tags,
 }
 
 impl ParsedTestCaseMember {
-    pub(crate) fn new(name: &str, value: TestCaseValueInitial, tags: Tags) -> Self {
+    pub(crate) fn new(name: &str, value: ParsedTestValue, tags: Tags) -> Self {
         Self {
             variable_name: name.to_string(),
             value,
-            verified_value: None,
             tags,
         }
     }
