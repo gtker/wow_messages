@@ -1,6 +1,5 @@
 pub mod conversion;
 
-use crate::file_info::FileInfo;
 use crate::parser::types::container::Container;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::object_new;
@@ -341,60 +340,9 @@ impl Objects {
     }
 
     pub(crate) fn check_values(&mut self) {
-        Self::check_versions(self.all_containers(), self.all_definers());
-
         let c = self.clone();
         for e in self.all_containers_mut() {
             e.set_rust_object(create_rust_object(e, &c));
-        }
-    }
-
-    fn check_versions<'a>(
-        containers: impl Iterator<Item = &'a Container>,
-        definers: impl Iterator<Item = &'a Definer>,
-    ) {
-        struct Obj<'a> {
-            name: &'a str,
-            tags: &'a Tags,
-            file_info: &'a FileInfo,
-        }
-
-        let mut v: Vec<Obj> = Vec::new();
-        for e in containers {
-            v.push(Obj {
-                name: e.name(),
-                tags: e.tags(),
-                file_info: e.file_info(),
-            });
-        }
-        for e in definers {
-            v.push(Obj {
-                name: e.name(),
-                tags: e.tags(),
-                file_info: e.file_info(),
-            });
-        }
-
-        for outer in &v {
-            for inner in &v {
-                if outer.name == inner.name
-                    && outer.tags.has_version_intersections(inner.tags)
-                    && outer.name as *const _ != inner.name as *const _
-                {
-                    panic!(
-                        "Objects with same name and overlapping versions: {}
-version 1: {:#?} in {} line {},
-version 2: {:#?} in {} line {}",
-                        inner.name,
-                        inner.tags,
-                        inner.file_info.name(),
-                        inner.file_info.start_line(),
-                        outer.tags,
-                        outer.file_info.name(),
-                        outer.file_info.start_line(),
-                    );
-                }
-            }
         }
     }
 }

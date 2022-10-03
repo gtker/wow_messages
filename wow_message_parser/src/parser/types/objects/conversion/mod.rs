@@ -1,3 +1,4 @@
+use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::container::check_if_statement_operators;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
@@ -22,6 +23,8 @@ pub(crate) fn object_new(
 
     let containers = [structs.as_slice(), messages.as_slice()].concat();
     let definers = [enums.as_slice(), flags.as_slice()].concat();
+
+    check_versions(&containers, &definers);
 
     let mut tests = container::parsed_test_case_to_test_case(tests, &containers, &enums, &flags);
 
@@ -172,4 +175,50 @@ pub(crate) fn all_definitions(members: &[StructMember]) -> Vec<&StructMemberDefi
     }
 
     v
+}
+
+fn check_versions<'a>(containers: &[ParsedContainer], definers: &[Definer]) {
+    struct Obj<'a> {
+        name: &'a str,
+        tags: &'a Tags,
+        file_info: &'a FileInfo,
+    }
+
+    let mut v: Vec<Obj> = Vec::new();
+    for e in containers {
+        v.push(Obj {
+            name: e.name(),
+            tags: e.tags(),
+            file_info: &e.file_info,
+        });
+    }
+    for e in definers {
+        v.push(Obj {
+            name: e.name(),
+            tags: e.tags(),
+            file_info: e.file_info(),
+        });
+    }
+
+    for outer in &v {
+        for inner in &v {
+            if outer.name == inner.name
+                && outer.tags.has_version_intersections(inner.tags)
+                && outer.name as *const _ != inner.name as *const _
+            {
+                panic!(
+                    "Objects with same name and overlapping versions: {}
+version 1: {:#?} in {} line {},
+version 2: {:#?} in {} line {}",
+                    inner.name,
+                    inner.tags,
+                    inner.file_info.name(),
+                    inner.file_info.start_line(),
+                    outer.tags,
+                    outer.file_info.name(),
+                    outer.file_info.start_line(),
+                );
+            }
+        }
+    }
 }
