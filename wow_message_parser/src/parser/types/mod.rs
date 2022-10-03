@@ -5,6 +5,7 @@ use std::fmt::{Display, Formatter};
 pub mod container;
 pub mod definer;
 pub mod objects;
+pub mod parsed_container;
 pub mod parsed_definer;
 pub mod parsed_object;
 pub mod tags;

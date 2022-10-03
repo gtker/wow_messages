@@ -1,4 +1,5 @@
-use crate::parser::types::container::{Container, DefinerUsage};
+use crate::parser::types::container::DefinerUsage;
+use crate::parser::types::parsed_container::ParsedContainer;
 use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::parser::types::test_case::TestCase;
 use crate::Objects;
@@ -7,8 +8,8 @@ use crate::Objects;
 pub struct ParsedObjects {
     enums: Vec<ParsedDefiner>,
     flags: Vec<ParsedDefiner>,
-    structs: Vec<Container>,
-    messages: Vec<Container>,
+    structs: Vec<ParsedContainer>,
+    messages: Vec<ParsedContainer>,
     tests: Vec<TestCase>,
 }
 
@@ -26,8 +27,8 @@ impl ParsedObjects {
     pub fn new(
         enums: Vec<ParsedDefiner>,
         flags: Vec<ParsedDefiner>,
-        structs: Vec<Container>,
-        messages: Vec<Container>,
+        structs: Vec<ParsedContainer>,
+        messages: Vec<ParsedContainer>,
         tests: Vec<TestCase>,
     ) -> Self {
         Self {
@@ -59,8 +60,8 @@ impl ParsedObjects {
 }
 
 pub fn get_definer_objects_used_in(
-    messages: &[Container],
-    structs: &[Container],
+    messages: &[ParsedContainer],
+    structs: &[ParsedContainer],
     e: &ParsedDefiner,
 ) -> Vec<(String, DefinerUsage)> {
     let mut v = Vec::new();

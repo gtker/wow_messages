@@ -945,7 +945,7 @@ impl Container {
     }
 
     pub fn new(
-        name: &str,
+        name: String,
         members: Vec<StructMember>,
         tags: Tags,
         object_type: ContainerType,
@@ -1470,12 +1470,16 @@ pub struct StructMemberDefinition {
     struct_type: Type,
     value: Option<ContainerValue>,
     verified_value: Option<VerifiedContainerValue>,
-    used_as_size_in: Option<String>,
+    pub used_as_size_in: Option<String>,
     used_in_if: Option<bool>,
     tags: Tags,
 }
 
 impl StructMemberDefinition {
+    pub fn struct_type(&self) -> Type {
+        self.struct_type.clone()
+    }
+
     pub fn used_as_size_in(&self) -> &Option<String> {
         &self.used_as_size_in
     }

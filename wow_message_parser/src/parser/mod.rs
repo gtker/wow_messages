@@ -10,6 +10,7 @@ use types::definer::DefinerField;
 use types::tags::{Tag, Tags};
 
 use crate::file_info::FileInfo;
+use crate::parser::types::parsed_container::ParsedContainer;
 use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
 use crate::parser::types::Array;
@@ -18,7 +19,7 @@ use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
 use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD};
 use types::container::{
-    Condition, Conditional, Container, ContainerType, IfStatement, OptionalStatement, StructMember,
+    Condition, Conditional, ContainerType, IfStatement, OptionalStatement, StructMember,
     StructMemberDefinition,
 };
 use types::definer::SelfValueDefinerField;
@@ -258,7 +259,7 @@ fn parse_struct(
     tags: &Tags,
     container_type: ContainerType,
     file_info: FileInfo,
-) -> Container {
+) -> ParsedContainer {
     let identifier = t.next().unwrap().as_str();
 
     let opcode = t.clone().find(|a| a.as_rule() == Rule::value);
@@ -300,7 +301,7 @@ fn parse_struct(
             kvs.push(Tag::new("unimplemented", "true"));
             let v = vec![unimplemented_member()];
 
-            return Container::new(identifier, v, kvs, container_type, file_info);
+            return ParsedContainer::new(identifier, v, kvs, container_type, file_info);
         }
         members.push(parse_struct_member(member));
     }
@@ -308,7 +309,7 @@ fn parse_struct(
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
     let kvs = parse_object_key_values(&mut extra_kvs, tags);
 
-    Container::new(identifier, members, kvs, container_type, file_info)
+    ParsedContainer::new(identifier, members, kvs, container_type, file_info)
 }
 
 fn unimplemented_member() -> StructMember {
