@@ -1,17 +1,17 @@
 use crate::impl_features::{get_impl_features_for_definer, Feature};
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::container::DefinerUsage;
-use crate::parser::types::definer::{Definer, DefinerField, SelfValueDefinerField};
+use crate::parser::types::parsed_definer::{DefinerField, ParsedDefiner, SelfValueDefinerField};
 use crate::rust_printer::DefinerType;
 use core::convert::From;
 use core::option::Option;
 use serde::Serialize;
 
-pub fn definers_to_ir(definers: &[Definer]) -> Vec<IrDefiner> {
+pub fn definers_to_ir(definers: &[ParsedDefiner]) -> Vec<IrDefiner> {
     definers.iter().map(definer_to_ir).collect()
 }
 
-fn definer_to_ir(e: &Definer) -> IrDefiner {
+fn definer_to_ir(e: &ParsedDefiner) -> IrDefiner {
     let fields = e
         .fields()
         .iter()

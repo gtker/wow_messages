@@ -1,4 +1,4 @@
-use crate::parser::types::definer::Definer;
+use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::parser::types::ty::Type;
 use crate::parser::types::Endianness::Little;
 use crate::parser::types::{ArrayType, Endianness, FloatingPointType, IntegerType};
@@ -60,8 +60,8 @@ pub fn get_wireshark_object(o: &Objects) -> WiresharkObject {
 #[derive(Debug, Eq, PartialEq)]
 pub struct WiresharkObject {
     members: Vec<WiresharkMember>,
-    enums: Vec<Definer>,
-    flags: Vec<Definer>,
+    enums: Vec<ParsedDefiner>,
+    flags: Vec<ParsedDefiner>,
 }
 
 impl WiresharkObject {
@@ -85,11 +85,11 @@ impl WiresharkObject {
         self.members.push(m);
     }
 
-    pub fn add_enum(&mut self, e: Definer) {
+    pub fn add_enum(&mut self, e: ParsedDefiner) {
         self.enums.push(e);
     }
 
-    pub fn add_flag(&mut self, e: Definer) {
+    pub fn add_flag(&mut self, e: ParsedDefiner) {
         self.flags.push(e);
     }
 
@@ -97,11 +97,11 @@ impl WiresharkObject {
         &self.members
     }
 
-    pub fn enums(&self) -> &[Definer] {
+    pub fn enums(&self) -> &[ParsedDefiner] {
         &self.enums
     }
 
-    pub fn flags(&self) -> &[Definer] {
+    pub fn flags(&self) -> &[ParsedDefiner] {
         &self.flags
     }
 }
@@ -129,7 +129,7 @@ impl WiresharkMember {
         &mut self.ty
     }
 
-    pub fn has_enum_strings(&self) -> Option<&Definer> {
+    pub fn has_enum_strings(&self) -> Option<&ParsedDefiner> {
         match self.ty() {
             WiresharkType::Enum(e) => Some(e),
             _ => None,
@@ -143,8 +143,8 @@ pub enum WiresharkType {
     String,
     Float(FloatingPointType),
     Bytes,
-    Enum(Definer),
-    Flag(Definer),
+    Enum(ParsedDefiner),
+    Flag(ParsedDefiner),
 }
 
 impl WiresharkType {

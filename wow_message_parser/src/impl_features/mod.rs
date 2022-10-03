@@ -1,7 +1,7 @@
 use crate::parser::types::container::{
     Container, ContainerType, StructMember, StructMemberDefinition,
 };
-use crate::parser::types::definer::Definer;
+use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
@@ -98,7 +98,7 @@ impl Default for ImplFeatures {
     }
 }
 
-pub fn get_impl_features_for_definer(e: &Definer) -> ImplFeatures {
+pub fn get_impl_features_for_definer(e: &ParsedDefiner) -> ImplFeatures {
     let mut f = ImplFeatures::new();
     match e.definer_ty() {
         DefinerType::Enum => f.add(Feature::Enum),

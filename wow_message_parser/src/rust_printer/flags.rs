@@ -1,10 +1,10 @@
 use crate::file_utils::get_import_path;
-use crate::parser::types::definer::Definer;
+use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::rust_printer::enums::print_wowm_definition;
 use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
 use crate::Objects;
 
-pub fn print_flag(e: &Definer, o: &Objects, version: Version) -> Writer {
+pub fn print_flag(e: &ParsedDefiner, o: &Objects, version: Version) -> Writer {
     let mut s = Writer::new(&get_import_path(version));
 
     declaration(&mut s, e, o);
@@ -14,7 +14,7 @@ pub fn print_flag(e: &Definer, o: &Objects, version: Version) -> Writer {
     s
 }
 
-fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
+fn declaration(s: &mut Writer, e: &ParsedDefiner, o: &Objects) {
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
 
     print_wowm_definition("flag", s, e);
@@ -23,7 +23,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
     s.new_flag(e.name(), e.ty().rust_str(), |_| {});
 }
 
-fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
+fn common_impls(s: &mut Writer, e: &ParsedDefiner, o: &Objects) {
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
         s.funcn_pub_const(
             format!("new(inner: {ty})", ty = e.ty().rust_str()),
@@ -41,7 +41,7 @@ fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
     });
 }
 
-fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {
+fn print_fields(s: &mut Writer, e: &ParsedDefiner, o: &Objects) {
     for f in e.fields() {
         s.wln(format!(
             "pub(crate) const {name}: {ty} = {value:#04x};",

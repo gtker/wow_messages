@@ -1,7 +1,7 @@
 use crate::parser::types::container::{
     Container, ContainerType, Equation, IfStatement, StructMember,
 };
-use crate::parser::types::definer::Definer;
+use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::rust_printer::Writer;
 use crate::ENUM_SELF_VALUE_FIELD;
 use std::fmt::Write;
@@ -58,7 +58,7 @@ impl WowmWriter {
     }
 }
 
-pub fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str) -> String {
+pub fn get_definer_wowm_definition(kind: &str, e: &ParsedDefiner, prefix: &str) -> String {
     let mut s = WowmWriter::new(prefix);
     s.wln(&format!(
         "{kind} {name} : {ty} {{",

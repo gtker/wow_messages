@@ -1,19 +1,19 @@
 use crate::file_utils::get_import_path;
-use crate::parser::types::definer::Definer;
+use crate::parser::types::parsed_definer::ParsedDefiner;
 use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{Objects, DISPLAY_STR};
 
-pub fn print_enum_for_base(e: &Definer, o: &Objects, version: Version) -> Writer {
+pub fn print_enum_for_base(e: &ParsedDefiner, o: &Objects, version: Version) -> Writer {
     print_enum_inner(e, o, version, true)
 }
 
-pub fn print_enum(e: &Definer, o: &Objects, version: Version) -> Writer {
+pub fn print_enum(e: &ParsedDefiner, o: &Objects, version: Version) -> Writer {
     print_enum_inner(e, o, version, false)
 }
 
 fn print_enum_inner(
-    e: &Definer,
+    e: &ParsedDefiner,
     o: &Objects,
     version: Version,
     visibility_override: bool,
@@ -41,7 +41,7 @@ fn includes(s: &mut Writer) {
     s.newline();
 }
 
-fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_override: bool) {
+fn declaration(s: &mut Writer, e: &ParsedDefiner, o: &Objects, common_visibility_override: bool) {
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
     print_wowm_definition("enum", s, e);
 
@@ -71,7 +71,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
     });
 }
 
-pub fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
+pub fn print_wowm_definition(kind: &str, s: &mut Writer, e: &ParsedDefiner) {
     s.docc_wowm(
         |s| {
             s.wln(get_definer_wowm_definition(kind, e, "/// "));
@@ -80,13 +80,13 @@ pub fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
     );
 }
 
-fn common_impls(s: &mut Writer, e: &Definer, visibility_override: bool) {
+fn common_impls(s: &mut Writer, e: &ParsedDefiner, visibility_override: bool) {
     s.bodyn(format!("impl {}", e.name()), |s| {
         as_type(s, e, visibility_override);
     });
 }
 
-fn as_type(s: &mut Writer, e: &Definer, visibility_override: bool) {
+fn as_type(s: &mut Writer, e: &ParsedDefiner, visibility_override: bool) {
     let f = if visibility_override {
         Writer::funcn_pub_const
     } else {
@@ -112,7 +112,7 @@ fn as_type(s: &mut Writer, e: &Definer, visibility_override: bool) {
     });
 }
 
-fn print_default(s: &mut Writer, e: &Definer) {
+fn print_default(s: &mut Writer, e: &ParsedDefiner) {
     s.impl_for("Default", e.name(), |s| {
         s.body("fn default() -> Self", |s| {
             s.wln(format!("Self::{}", e.fields()[0].rust_name()));
@@ -120,7 +120,7 @@ fn print_default(s: &mut Writer, e: &Definer) {
     });
 }
 
-fn print_display(s: &mut Writer, e: &Definer) {
+fn print_display(s: &mut Writer, e: &ParsedDefiner) {
     s.impl_for("std::fmt::Display", e.name(), |s| {
         s.body(
             "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
@@ -153,7 +153,7 @@ fn print_display(s: &mut Writer, e: &Definer) {
     });
 }
 
-fn print_from_or_try_from(s: &mut Writer, e: &Definer) {
+fn print_from_or_try_from(s: &mut Writer, e: &ParsedDefiner) {
     if e.self_value().is_none() {
         print_try_from(s, e);
     } else {
@@ -161,7 +161,7 @@ fn print_from_or_try_from(s: &mut Writer, e: &Definer) {
     }
 }
 
-fn print_try_from(s: &mut Writer, e: &Definer) {
+fn print_try_from(s: &mut Writer, e: &ParsedDefiner) {
     s.impl_for(format!("TryFrom<{}>", e.ty().rust_str()), e.name(), |s| {
         s.wln("type Error = crate::errors::EnumError;");
 
@@ -190,7 +190,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
     });
 }
 
-fn print_from(s: &mut Writer, e: &Definer) {
+fn print_from(s: &mut Writer, e: &ParsedDefiner) {
     s.impl_for(format!("From<{}>", e.ty().rust_str()), e.name(), |s| {
         s.body(
             format!("fn from(value: {}) -> Self", e.ty().rust_str()),

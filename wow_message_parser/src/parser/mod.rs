@@ -6,8 +6,8 @@ use pest::iterators::{Pair, Pairs};
 use pest::Parser;
 use pest_derive::Parser;
 
-use types::definer::DefinerField;
 use types::objects::Objects;
+use types::parsed_definer::DefinerField;
 use types::tags::{Tag, Tags};
 
 use crate::file_info::FileInfo;
@@ -21,7 +21,7 @@ use types::container::{
     Condition, Conditional, Container, ContainerType, IfStatement, OptionalStatement, StructMember,
     StructMemberDefinition,
 };
-use types::definer::{Definer, SelfValueDefinerField};
+use types::parsed_definer::{ParsedDefiner, SelfValueDefinerField};
 use types::ty::Type;
 
 pub mod stats;
@@ -486,7 +486,7 @@ pub fn parse_enum(
     tags: &Tags,
     file_info: FileInfo,
     definer_ty: DefinerType,
-) -> Definer {
+) -> ParsedDefiner {
     let ident = t.next().unwrap();
     assert_eq!(ident.as_rule(), Rule::identifier);
 
@@ -537,7 +537,7 @@ pub fn parse_enum(
     let mut extras = parse_object_key_values(&mut extra_key_values, tags);
     extras.append(tags);
 
-    Definer::new(
+    ParsedDefiner::new(
         ident.as_str(),
         definer_ty,
         fields,

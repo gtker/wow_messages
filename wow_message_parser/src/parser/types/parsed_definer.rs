@@ -110,7 +110,7 @@ impl SelfValueDefinerField {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub struct Definer {
+pub struct ParsedDefiner {
     name: String,
     definer_ty: DefinerType,
     fields: Vec<DefinerField>,
@@ -121,7 +121,7 @@ pub struct Definer {
     file_info: FileInfo,
 }
 
-impl Ord for Definer {
+impl Ord for ParsedDefiner {
     fn cmp(&self, other: &Self) -> Ordering {
         let self_first = self.tags().first_version();
         let other_first = other.tags().first_version();
@@ -132,13 +132,13 @@ impl Ord for Definer {
     }
 }
 
-impl PartialOrd for Definer {
+impl PartialOrd for ParsedDefiner {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Definer {
+impl ParsedDefiner {
     pub fn new(
         name: &str,
         definer_ty: DefinerType,
