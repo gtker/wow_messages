@@ -79,6 +79,33 @@ impl Ord for Container {
 }
 
 impl Container {
+    pub fn new(
+        name: String,
+        members: Vec<StructMember>,
+        tags: Tags,
+        object_type: ContainerType,
+        file_info: FileInfo,
+        tests: Vec<TestCase>,
+        sizes: Sizes,
+        only_has_io_error: bool,
+    ) -> Self {
+        let s = Self {
+            name,
+            object_type,
+            sizes,
+            members,
+            tags,
+            tests,
+            file_info,
+            only_has_io_error,
+            rust_object_view: None,
+        };
+
+        s.self_check();
+
+        s
+    }
+
     pub fn get_variable_name_of_definer_ty(&self, ty_name: &str) -> Option<String> {
         for d in self.all_definitions() {
             if let Type::Identifier { s, .. } = d.ty() {
@@ -810,33 +837,6 @@ impl Container {
 
     pub fn fields(&self) -> &[StructMember] {
         self.members.as_slice()
-    }
-
-    pub fn new(
-        name: String,
-        members: Vec<StructMember>,
-        tags: Tags,
-        object_type: ContainerType,
-        file_info: FileInfo,
-        tests: Vec<TestCase>,
-        sizes: Sizes,
-        only_has_io_error: bool,
-    ) -> Self {
-        let s = Self {
-            name,
-            object_type,
-            sizes,
-            members,
-            tags,
-            tests,
-            file_info,
-            only_has_io_error,
-            rust_object_view: None,
-        };
-
-        s.self_check();
-
-        s
     }
 
     fn set_all_values_to_verified(&mut self, o: &Objects) {
