@@ -1,6 +1,8 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
-use crate::parser::types::objects::conversion::container::check_if_statement_operators;
+use crate::parser::types::objects::conversion::container::{
+    check_if_statement_operators, get_tests_for_object,
+};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_object::get_definer_objects_used_in;
@@ -52,7 +54,7 @@ pub(crate) fn parsed_container_to_container(
     let mut v = Vec::with_capacity(parsed.len());
 
     for mut p in parsed {
-        let tests = Objects::get_tests_for_object(tests, p.name(), p.tags());
+        let tests = get_tests_for_object(tests, p.name(), p.tags());
 
         let sizes = p.create_sizes(containers, definers);
 

@@ -16,6 +16,29 @@ use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
 use crate::{DefinerType, Tags};
 
+pub(crate) fn get_tests_for_object(
+    tests: &mut Vec<TestCase>,
+    name: &str,
+    tags: &Tags,
+) -> Vec<TestCase> {
+    let mut v = Vec::new();
+    let mut indices = Vec::new();
+
+    for (i, t) in tests.iter().enumerate() {
+        if t.subject() == name && t.tags().has_version_intersections(tags) {
+            indices.push(i);
+            v.push(t.clone());
+        }
+    }
+    indices.reverse();
+
+    for i in indices {
+        tests.remove(i);
+    }
+
+    v
+}
+
 pub(crate) fn parsed_members_to_members(
     mut members: Vec<StructMember>,
     tags: &Tags,

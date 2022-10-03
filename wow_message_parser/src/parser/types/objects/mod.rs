@@ -8,7 +8,6 @@ use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
-use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ObjectType;
 use crate::{DefinerType, Version};
 
@@ -309,29 +308,6 @@ impl Objects {
         self.messages.sort();
         self.enums.sort();
         self.flags.sort();
-    }
-
-    pub(crate) fn get_tests_for_object(
-        tests: &mut Vec<TestCase>,
-        name: &str,
-        tags: &Tags,
-    ) -> Vec<TestCase> {
-        let mut v = Vec::new();
-        let mut indices = Vec::new();
-
-        for (i, t) in tests.iter().enumerate() {
-            if t.subject() == name && t.tags().has_version_intersections(tags) {
-                indices.push(i);
-                v.push(t.clone());
-            }
-        }
-        indices.reverse();
-
-        for i in indices {
-            tests.remove(i);
-        }
-
-        v
     }
 }
 
