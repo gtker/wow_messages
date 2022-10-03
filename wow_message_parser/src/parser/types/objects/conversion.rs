@@ -10,18 +10,24 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{ArrayType, VerifiedContainerValue};
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
-use crate::{Container, Tags};
+use crate::{Container, Objects, Tags};
 
-pub fn parsed_container_to_container(parsed: Vec<ParsedContainer>) -> Vec<Container> {
+pub fn parsed_container_to_container(
+    parsed: Vec<ParsedContainer>,
+    tests: &mut Vec<TestCase>,
+) -> Vec<Container> {
     let mut v = Vec::with_capacity(parsed.len());
 
     for p in parsed {
+        let tests = Objects::get_tests_for_object(tests, p.name(), p.tags());
+
         v.push(Container::new(
             p.name,
             p.members,
             p.tags,
             p.object_type,
             p.file_info,
+            tests,
         ));
     }
 

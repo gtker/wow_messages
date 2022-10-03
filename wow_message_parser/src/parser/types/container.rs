@@ -950,6 +950,7 @@ impl Container {
         tags: Tags,
         object_type: ContainerType,
         file_info: FileInfo,
+        tests: Vec<TestCase>,
     ) -> Self {
         Self {
             name: name.to_string(),
@@ -957,7 +958,7 @@ impl Container {
             sizes: None,
             members,
             tags,
-            tests: vec![],
+            tests,
             file_info,
             only_has_io_error: None,
             rust_object_view: None,

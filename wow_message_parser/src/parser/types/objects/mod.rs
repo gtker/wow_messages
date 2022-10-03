@@ -19,7 +19,6 @@ pub struct Objects {
     flags: Vec<Definer>,
     structs: Vec<Container>,
     messages: Vec<Container>,
-    tests: Vec<TestCase>,
 }
 
 impl Objects {
@@ -35,17 +34,17 @@ impl Objects {
 
         let containers = [structs.as_slice(), messages.as_slice()].concat();
 
-        let tests = conversion::parsed_test_case_to_test_case(tests, &containers, &enums, &flags);
+        let mut tests =
+            conversion::parsed_test_case_to_test_case(tests, &containers, &enums, &flags);
 
-        let structs = conversion::parsed_container_to_container(structs);
-        let messages = conversion::parsed_container_to_container(messages);
+        let structs = conversion::parsed_container_to_container(structs, &mut tests);
+        let messages = conversion::parsed_container_to_container(messages, &mut tests);
 
         let mut o = Self {
             enums,
             flags,
             structs,
             messages,
-            tests,
         };
 
         o.check_values();
@@ -361,16 +360,6 @@ impl Objects {
         &mut self.messages
     }
 
-    pub fn empty() -> Self {
-        Self {
-            enums: vec![],
-            flags: vec![],
-            structs: vec![],
-            messages: vec![],
-            tests: vec![],
-        }
-    }
-
     pub fn sort_members(&mut self) {
         self.structs.sort();
         self.messages.sort();
@@ -415,13 +404,8 @@ impl Objects {
             e.self_check();
         }
 
-        let mut tests = self.tests.clone();
-
         for s in self.all_containers_mut() {
             s.set_internals(&c);
-
-            let t = Self::get_tests_for_object(&mut tests, s.name(), s.tags());
-            s.append_tests(t);
         }
 
         for e in self.all_containers() {
@@ -431,8 +415,6 @@ impl Objects {
         Self::check_versions(self.all_containers(), self.all_definers());
 
         self.add_rust_views();
-
-        self.tests = tests;
     }
 
     fn check_versions<'a>(
@@ -585,14 +567,6 @@ version 2: {:#?} in {} line {}",
             field_name = field_name,
             definer_name = definer_name
         )
-    }
-
-    pub fn add_vecs(&mut self, mut c: Objects) {
-        self.enums.append(&mut c.enums);
-        self.flags.append(&mut c.flags);
-        self.structs.append(&mut c.structs);
-        self.messages.append(&mut c.messages);
-        self.tests.append(&mut c.tests);
     }
 }
 
