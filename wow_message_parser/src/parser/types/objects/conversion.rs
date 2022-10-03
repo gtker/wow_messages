@@ -5,12 +5,40 @@ use crate::parser::types::parsed::parsed_object::get_definer_objects_used_in;
 use crate::parser::types::parsed::parsed_test_case::{
     ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial,
 };
+use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArrayType, VerifiedContainerValue};
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
 use crate::{Container, Objects, Tags};
+
+fn parsed_members_to_members(
+    mut members: Vec<StructMember>,
+    definers: &[Definer],
+) -> Vec<StructMember> {
+    fn set_verified_values(m: &mut StructMember, definers: &[Definer]) {
+        match m {
+            StructMember::Definition(d) => d.set_verified_value(definers),
+            StructMember::IfStatement(statement) => {
+                for m in statement.all_members_mut() {
+                    set_verified_values(m, definers);
+                }
+            }
+            StructMember::OptionalStatement(optional) => {
+                for m in optional.members_mut() {
+                    set_verified_values(m, definers);
+                }
+            }
+        }
+    }
+
+    for m in &mut members {
+        set_verified_values(m, definers);
+    }
+
+    members
+}
 
 pub fn parsed_container_to_container(
     parsed: Vec<ParsedContainer>,
@@ -27,9 +55,11 @@ pub fn parsed_container_to_container(
 
         let only_has_io_error = p.recursive_only_has_io_errors(containers, definers);
 
+        let members = parsed_members_to_members(p.members, definers);
+
         v.push(Container::new(
             p.name,
-            p.members,
+            members,
             p.tags,
             p.object_type,
             p.file_info,

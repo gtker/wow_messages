@@ -786,28 +786,6 @@ impl Container {
         self.members.as_slice()
     }
 
-    fn set_all_values_to_verified(&mut self, o: &Objects) {
-        fn set_values_to_verified(m: &mut StructMember, o: &Objects) {
-            match m {
-                StructMember::Definition(d) => d.set_verified_value(o),
-                StructMember::IfStatement(statement) => {
-                    for m in statement.all_members_mut() {
-                        set_values_to_verified(m, o);
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in optional.members_mut() {
-                        set_values_to_verified(m, o);
-                    }
-                }
-            }
-        }
-
-        for m in self.fields_mut() {
-            set_values_to_verified(m, o);
-        }
-    }
-
     fn find_definition_internal<'a>(
         m: &'a mut StructMember,
         name: &str,
@@ -931,8 +909,6 @@ impl Container {
 
     pub fn set_internals(&mut self, o: &Objects) {
         self.check_values(o);
-
-        self.set_all_values_to_verified(o);
 
         for m in &self.members.clone() {
             self.set_value_used_as_sizes(m);

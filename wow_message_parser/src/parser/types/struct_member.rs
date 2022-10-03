@@ -1,8 +1,10 @@
+use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::IfStatement;
+use crate::parser::types::objects::conversion::get_definer;
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ContainerValue, VerifiedContainerValue};
-use crate::{Objects, Tags, CONTAINER_SELF_SIZE_FIELD};
+use crate::{Tags, CONTAINER_SELF_SIZE_FIELD};
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub enum StructMember {
@@ -67,7 +69,7 @@ impl StructMemberDefinition {
         &self.verified_value
     }
 
-    pub fn set_verified_value(&mut self, o: &Objects) {
+    pub fn set_verified_value(&mut self, definers: &[Definer]) {
         match &self.value() {
             None => {}
             Some(v) => {
@@ -79,7 +81,12 @@ impl StructMemberDefinition {
                     ))
                 } else {
                     let value = if v.identifier() != CONTAINER_SELF_SIZE_FIELD {
-                        o.get_definer_field_value(&self.ty().rust_str(), v.identifier(), &self.tags)
+                        get_definer(definers, &self.ty().rust_str(), &self.tags())
+                            .unwrap()
+                            .get_field_with_name(&v.identifier())
+                            .unwrap()
+                            .value()
+                            .int()
                     } else {
                         0
                     };
