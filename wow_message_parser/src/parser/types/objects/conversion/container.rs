@@ -66,7 +66,7 @@ pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec
                     d.struct_type,
                     d.verified_value,
                     d.used_as_size_in,
-                    d.used_in_if,
+                    d.used_in_if.unwrap(),
                     d.tags,
                 ))
             }

@@ -17,7 +17,7 @@ pub struct StructMemberDefinition {
     struct_type: Type,
     value: Option<VerifiedContainerValue>,
     pub used_as_size_in: Option<String>,
-    used_in_if: Option<bool>,
+    used_in_if: bool,
     tags: Tags,
 }
 
@@ -31,7 +31,7 @@ impl StructMemberDefinition {
     }
 
     pub(crate) fn used_in_if(&self) -> bool {
-        self.used_in_if.unwrap()
+        self.used_in_if
     }
 
     pub(crate) fn new(
@@ -39,7 +39,7 @@ impl StructMemberDefinition {
         struct_type: Type,
         verified_value: Option<VerifiedContainerValue>,
         used_as_size_in: Option<String>,
-        used_in_if: Option<bool>,
+        used_in_if: bool,
 
         tags: Tags,
     ) -> Self {
