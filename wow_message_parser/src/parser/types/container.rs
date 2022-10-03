@@ -2,14 +2,12 @@ use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
 use crate::parser::types::if_statement::{DefinerUsage, Equation, IfStatement};
 use crate::parser::types::objects::{Object, Objects};
-use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::sizes::{Sizes, BOOL_SIZE, DATETIME_SIZE};
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{
-    ArraySize, ArrayType, ContainerValue, ObjectType, VerifiedContainerValue,
-};
+use crate::parser::types::{ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
     DefinerType, Version, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
@@ -396,7 +394,7 @@ impl Container {
                         Type::Bool => sum += BOOL_SIZE as u64,
                         Type::DateTime => sum += DATETIME_SIZE as u64,
                     }
-                    if let Some(v) = &d.verified_value {
+                    if let Some(v) = d.verified_value() {
                         if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
                             return sum;
                         }
@@ -747,7 +745,7 @@ impl Container {
         false
     }
 
-    pub fn get_types_needing_import_recursively<'a>(&'a self, o: &'a Objects) -> Vec<&'a str> {
+    pub fn get_types_needing_import_recursively<'a>(&'a self, o: &'a Objects) -> Vec<String> {
         let mut v = self.get_complex_types();
 
         let mut v2 = Vec::new();
@@ -770,22 +768,22 @@ impl Container {
         v
     }
 
-    pub fn get_types_needing_import(&self) -> Vec<&str> {
+    pub fn get_types_needing_import(&self) -> Vec<String> {
         self.get_complex_types()
     }
 
-    fn get_complex_types(&self) -> Vec<&str> {
+    fn get_complex_types(&self) -> Vec<String> {
         let mut v = Vec::new();
 
         for d in self.all_definitions() {
-            match &d.struct_type {
+            match d.struct_type() {
                 Type::Array(a) => {
                     if let ArrayType::Complex(i) = a.ty() {
-                        v.push(i.as_str());
+                        v.push(i.clone());
                     }
                 }
                 Type::Identifier { s, .. } => {
-                    v.push(s.as_str());
+                    v.push(s.clone());
                 }
                 _ => {}
             }
@@ -1063,98 +1061,5 @@ impl Container {
 
     pub fn fields_mut(&mut self) -> &mut [StructMember] {
         &mut self.members
-    }
-}
-
-#[derive(Debug, Clone, Eq, PartialEq)]
-pub enum StructMember {
-    Definition(StructMemberDefinition),
-    IfStatement(IfStatement),
-    OptionalStatement(OptionalStatement),
-}
-
-#[derive(Debug, Clone, Eq, PartialEq)]
-pub struct StructMemberDefinition {
-    name: String,
-    struct_type: Type,
-    value: Option<ContainerValue>,
-    verified_value: Option<VerifiedContainerValue>,
-    pub used_as_size_in: Option<String>,
-    used_in_if: Option<bool>,
-    tags: Tags,
-}
-
-impl StructMemberDefinition {
-    pub fn struct_type(&self) -> Type {
-        self.struct_type.clone()
-    }
-
-    pub fn used_as_size_in(&self) -> &Option<String> {
-        &self.used_as_size_in
-    }
-
-    pub fn used_in_if(&self) -> bool {
-        self.used_in_if.unwrap()
-    }
-
-    pub fn set_used_in_if(&mut self, used: bool) {
-        self.used_in_if = Some(used);
-    }
-
-    pub fn new(name: &str, struct_type: Type, value: Option<ContainerValue>, tags: Tags) -> Self {
-        Self {
-            name: name.to_string(),
-            struct_type,
-            value,
-            verified_value: None,
-            used_as_size_in: None,
-            used_in_if: None,
-            tags,
-        }
-    }
-
-    pub fn name(&self) -> &str {
-        &self.name
-    }
-
-    pub fn ty(&self) -> &Type {
-        &self.struct_type
-    }
-
-    pub fn value(&self) -> &Option<ContainerValue> {
-        &self.value
-    }
-
-    pub fn verified_value(&self) -> &Option<VerifiedContainerValue> {
-        &self.verified_value
-    }
-
-    pub fn set_verified_value(&mut self, o: &Objects) {
-        match &self.value() {
-            None => {}
-            Some(v) => {
-                let parsed_val = crate::parser::utility::parse_value(v.identifier());
-                if let Some(int_val) = parsed_val {
-                    self.verified_value = Some(VerifiedContainerValue::new(
-                        int_val,
-                        v.identifier().to_string(),
-                    ))
-                } else {
-                    let value = if v.identifier() != CONTAINER_SELF_SIZE_FIELD {
-                        o.get_definer_field_value(&self.ty().rust_str(), v.identifier(), &self.tags)
-                    } else {
-                        0
-                    };
-                    self.verified_value = Some(VerifiedContainerValue::new(
-                        value,
-                        v.identifier().to_string(),
-                    ));
-                }
-            }
-        }
-    }
-
-    pub fn tags(&self) -> &Tags {
-        &self.tags
     }
 }

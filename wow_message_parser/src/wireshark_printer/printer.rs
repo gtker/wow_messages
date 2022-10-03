@@ -1,6 +1,6 @@
-use crate::parser::types::container::{StructMember, StructMemberDefinition};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, IntegerType};
 use crate::rust_printer::Writer;

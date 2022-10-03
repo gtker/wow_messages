@@ -59,18 +59,19 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects, version: Version) 
     for name in e.get_types_needing_import() {
         let version = if !version.is_world() {
             // Login messages need to lookup the real object and not the reexports
-            o.get_tags_of_object(name, e.tags()).import_version()
+            o.get_tags_of_object(name.as_str(), e.tags())
+                .import_version()
         } else {
             version
         };
 
         let module_name = if e.tags().has_world_version() && e.tags().shared() {
             let versions: Vec<WorldVersion> = o
-                .get_tags_of_object(name, e.tags())
+                .get_tags_of_object(name.as_str(), e.tags())
                 .main_versions()
                 .map(|a| a.as_world())
                 .collect();
-            get_world_shared_path(name, &versions)
+            get_world_shared_path(name.as_str(), &versions)
         } else {
             get_import_path(version)
         };

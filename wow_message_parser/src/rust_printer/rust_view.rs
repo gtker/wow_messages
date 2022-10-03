@@ -1,9 +1,10 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::container::{Container, StructMember};
+use crate::parser::types::container::Container;
 use crate::parser::types::definer::DefinerValue;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
+use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;

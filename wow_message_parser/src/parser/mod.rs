@@ -20,10 +20,11 @@ use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
 use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD};
-use types::container::{ContainerType, StructMember, StructMemberDefinition};
+use types::container::ContainerType;
 use types::definer::SelfValueDefinerField;
 use types::if_statement::{Condition, Conditional, IfStatement};
 use types::optional::OptionalStatement;
+use types::struct_member::{StructMember, StructMemberDefinition};
 use types::ty::Type;
 
 pub mod stats;

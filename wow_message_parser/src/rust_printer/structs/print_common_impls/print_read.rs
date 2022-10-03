@@ -1,6 +1,7 @@
-use crate::parser::types::container::{Container, StructMember, StructMemberDefinition};
+use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::{RustDefiner, RustType};

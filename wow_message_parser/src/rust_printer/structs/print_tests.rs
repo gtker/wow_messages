@@ -79,7 +79,8 @@ fn print_includes(e: &Container, o: &Objects, version: Version, s: &mut Writer) 
 
     for name in e.get_types_needing_import_recursively(o) {
         let version = if !version.is_world() {
-            o.get_tags_of_object(name, e.tags()).import_version()
+            o.get_tags_of_object(name.as_str(), e.tags())
+                .import_version()
         } else {
             version
         };

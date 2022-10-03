@@ -1,8 +1,7 @@
-use crate::parser::types::container::{
-    Container, ContainerType, StructMember, StructMemberDefinition,
-};
+use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArrayType, IntegerType, ObjectType, VerifiedContainerValue};
 use crate::rust_printer::DefinerType;

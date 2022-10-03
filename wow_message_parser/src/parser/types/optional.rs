@@ -1,4 +1,4 @@
-use crate::parser::types::container::StructMember;
+use crate::parser::types::struct_member::StructMember;
 use crate::Tags;
 
 #[derive(Debug, Clone, Eq)]

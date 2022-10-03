@@ -1,6 +1,7 @@
-use crate::parser::types::container::{Container, ContainerType, StructMember};
+use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
+use crate::parser::types::struct_member::StructMember;
 use crate::rust_printer::Writer;
 use crate::ENUM_SELF_VALUE_FIELD;
 use std::fmt::Write;

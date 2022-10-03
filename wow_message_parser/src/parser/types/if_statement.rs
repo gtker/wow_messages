@@ -1,4 +1,4 @@
-use crate::parser::types::container::{StructMember, StructMemberDefinition};
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::rust_printer::field_name_to_rust_name;
 use crate::DefinerType;
