@@ -15,7 +15,7 @@ mod print_new_types;
 mod print_optional;
 mod print_tests;
 
-pub fn print_struct(e: &Container, o: &Objects, version: Version) -> Writer {
+pub(crate) fn print_struct(e: &Container, o: &Objects, version: Version) -> Writer {
     let mut s = Writer::new(&get_import_path(version));
 
     print_includes(&mut s, e, o, version);
@@ -144,7 +144,7 @@ fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
     );
 }
 
-pub fn print_derives(s: &mut Writer, members: &[RustMember], is_enum_type: bool) {
+pub(crate) fn print_derives(s: &mut Writer, members: &[RustMember], is_enum_type: bool) {
     s.w("#[derive(Debug, Clone");
 
     if can_derive_copy(members) {

@@ -30,36 +30,36 @@ pub const BOOL_SIZE: u8 = 1;
 pub const DATETIME_SIZE: u8 = 4;
 
 impl Sizes {
-    pub fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Self::default()
     }
 
-    pub fn inc(&mut self, minimum: usize, maximum: usize) {
+    pub(crate) fn inc(&mut self, minimum: usize, maximum: usize) {
         self.minimum = self.minimum.saturating_add(minimum);
         self.maximum = self.maximum.saturating_add(maximum);
     }
 
-    pub fn inc_both(&mut self, v: usize) {
+    pub(crate) fn inc_both(&mut self, v: usize) {
         self.inc(v, v);
     }
 
-    pub fn minimum(&self) -> usize {
+    pub(crate) fn minimum(&self) -> usize {
         self.minimum
     }
 
-    pub fn maximum(&self) -> usize {
+    pub(crate) fn maximum(&self) -> usize {
         self.maximum
     }
 
-    pub fn set_maximum(&mut self, maximum: usize) {
+    pub(crate) fn set_maximum(&mut self, maximum: usize) {
         self.maximum = maximum;
     }
 
-    pub fn set_minimum(&mut self, minimum: usize) {
+    pub(crate) fn set_minimum(&mut self, minimum: usize) {
         self.minimum = minimum;
     }
 
-    pub fn is_constant(&self) -> Option<usize> {
+    pub(crate) fn is_constant(&self) -> Option<usize> {
         if self.minimum == self.maximum {
             Some(self.maximum())
         } else {

@@ -34,7 +34,7 @@ pub struct ModFiles {
 }
 
 impl ModFiles {
-    pub fn remove_unwritten_files(&self) {
+    pub(crate) fn remove_unwritten_files(&self) {
         for (filename, written) in self.already_existing_files.iter() {
             if !written {
                 remove_file(Path::new(filename)).unwrap();
@@ -42,7 +42,7 @@ impl ModFiles {
         }
     }
 
-    pub fn write_mod_files(&mut self) {
+    pub(crate) fn write_mod_files(&mut self) {
         for m in &mut self.v {
             m.submodules.sort();
             m.submodules.dedup();
@@ -77,7 +77,7 @@ impl ModFiles {
         }
     }
 
-    pub fn new() -> Self {
+    pub(crate) fn new() -> Self {
         let mut already_existing_files = BTreeMap::new();
 
         for dir in [login_directory(), world_directory(), base_directory()] {
@@ -109,7 +109,12 @@ impl ModFiles {
         }
     }
 
-    pub fn add_world_shared_file(&mut self, name: &str, versions: &[WorldVersion], tags: &Tags) {
+    pub(crate) fn add_world_shared_file(
+        &mut self,
+        name: &str,
+        versions: &[WorldVersion],
+        tags: &Tags,
+    ) {
         let base_path = if tags.is_in_base() {
             base_directory()
         } else {
@@ -130,7 +135,7 @@ impl ModFiles {
         );
     }
 
-    pub fn add_world_file(&mut self, name: &str, version: &WorldVersion, tags: &Tags) {
+    pub(crate) fn add_world_file(&mut self, name: &str, version: &WorldVersion, tags: &Tags) {
         assert!(version.is_main_version());
 
         if tags.is_in_base() {
@@ -175,7 +180,7 @@ impl ModFiles {
         );
     }
 
-    pub fn add_login_file(&mut self, name: &str, version: &LoginVersion) {
+    pub(crate) fn add_login_file(&mut self, name: &str, version: &LoginVersion) {
         let e = match version {
             LoginVersion::Specific(v) => {
                 format!("version_{}", v)
@@ -216,7 +221,7 @@ impl ModFiles {
         }
     }
 
-    pub fn write_shared_contents_to_file(
+    pub(crate) fn write_shared_contents_to_file(
         &mut self,
         name: &str,
         tags: &Tags,
@@ -237,7 +242,7 @@ impl ModFiles {
         self.already_existing_files.insert(path, true);
     }
 
-    pub fn write_shared_import_to_file(
+    pub(crate) fn write_shared_import_to_file(
         &mut self,
         name: &str,
         tags: &Tags,
@@ -257,7 +262,7 @@ impl ModFiles {
         self.already_existing_files.insert(world_path, true);
     }
 
-    pub fn write_base_contents_to_file(
+    pub(crate) fn write_base_contents_to_file(
         &mut self,
         name: &str,
         tags: &Tags,
@@ -282,7 +287,13 @@ impl ModFiles {
         }
     }
 
-    pub fn write_contents_to_file(&mut self, name: &str, tags: &Tags, s: &str, version: Version) {
+    pub(crate) fn write_contents_to_file(
+        &mut self,
+        name: &str,
+        tags: &Tags,
+        s: &str,
+        version: Version,
+    ) {
         match &version {
             Version::Login(v) => {
                 let path = path_utils::get_login_filepath(name, v);
@@ -306,7 +317,7 @@ impl ModFiles {
     }
 }
 
-pub fn major_version_to_string(v: &WorldVersion) -> &'static str {
+pub(crate) fn major_version_to_string(v: &WorldVersion) -> &'static str {
     fn version(m: u8) -> &'static str {
         if m == 1 {
             "vanilla"
@@ -345,11 +356,11 @@ pub fn major_version_to_string(v: &WorldVersion) -> &'static str {
     }
 }
 
-pub fn get_world_version_path(version: &WorldVersion) -> String {
+pub(crate) fn get_world_version_path(version: &WorldVersion) -> String {
     format!("crate::world::{}", major_version_to_string(version))
 }
 
-pub fn get_login_logon_version_path(version: &LoginVersion) -> String {
+pub(crate) fn get_login_logon_version_path(version: &LoginVersion) -> String {
     match version {
         LoginVersion::Specific(v) => {
             format!("crate::logon::version_{}", v)
@@ -358,21 +369,21 @@ pub fn get_login_logon_version_path(version: &LoginVersion) -> String {
     }
 }
 
-pub fn get_world_shared_path(ty_name: &str, versions: &[WorldVersion]) -> String {
+pub(crate) fn get_world_shared_path(ty_name: &str, versions: &[WorldVersion]) -> String {
     format!(
         "crate::world::shared::{}",
         get_shared_module_name(ty_name, versions)
     )
 }
 
-pub fn get_import_path(version: Version) -> String {
+pub(crate) fn get_import_path(version: Version) -> String {
     match &version {
         Version::Login(f) => get_login_logon_version_path(f),
         Version::World(f) => get_world_version_path(f),
     }
 }
 
-pub fn append_string_to_file(s: &str, filename: &Path) {
+pub(crate) fn append_string_to_file(s: &str, filename: &Path) {
     let f = std::fs::OpenOptions::new().append(true).open(filename);
     let mut f = match f {
         Ok(f) => f,
@@ -385,7 +396,7 @@ pub fn append_string_to_file(s: &str, filename: &Path) {
     f.write_all(s.as_bytes()).unwrap();
 }
 
-pub fn write_string_to_file(s: &str, filename: &Path) {
+pub(crate) fn write_string_to_file(s: &str, filename: &Path) {
     let f = std::fs::OpenOptions::new()
         .write(true)
         .truncate(true)
@@ -403,14 +414,14 @@ pub fn write_string_to_file(s: &str, filename: &Path) {
     f.write_all(s.as_bytes()).unwrap();
 }
 
-pub fn overwrite_if_not_same_contents(s: &str, filename: &Path) {
+pub(crate) fn overwrite_if_not_same_contents(s: &str, filename: &Path) {
     let f = read_to_string(filename).unwrap();
     if f != s {
         write_string_to_file(s, filename);
     }
 }
 
-pub fn create_and_overwrite_if_not_same_contents(s: &str, filename: &Path) {
+pub(crate) fn create_and_overwrite_if_not_same_contents(s: &str, filename: &Path) {
     let f = std::fs::OpenOptions::new().open(filename);
     if f.is_ok() {
         let f = read_to_string(filename).unwrap();
@@ -422,11 +433,11 @@ pub fn create_and_overwrite_if_not_same_contents(s: &str, filename: &Path) {
     }
 }
 
-pub fn get_module_name(e: &str) -> String {
+pub(crate) fn get_module_name(e: &str) -> String {
     e.to_snake_case()
 }
 
-pub fn get_shared_module_name(e: &str, versions: &[WorldVersion]) -> String {
+pub(crate) fn get_shared_module_name(e: &str, versions: &[WorldVersion]) -> String {
     let mut s = e.to_snake_case();
 
     let mut versions = versions.to_vec();

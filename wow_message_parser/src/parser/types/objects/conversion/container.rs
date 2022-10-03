@@ -12,7 +12,7 @@ use crate::parser::types::{ArraySize, ArrayType, VerifiedContainerValue};
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
 
-pub fn parsed_members_to_members(
+pub(crate) fn parsed_members_to_members(
     mut members: Vec<StructMember>,
     definers: &[Definer],
 ) -> Vec<StructMember> {
@@ -256,7 +256,7 @@ fn convert_parsed_test_case_to_test_case(
     )
 }
 
-pub fn parsed_test_case_to_test_case(
+pub(crate) fn parsed_test_case_to_test_case(
     parsed: Vec<ParsedTestCase>,
     containers: &[ParsedContainer],
     enums: &[Definer],

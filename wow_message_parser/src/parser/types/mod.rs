@@ -15,7 +15,12 @@ pub mod tags;
 pub mod test_case;
 pub mod ty;
 
-pub fn compare_name_and_tags(name1: &str, v1: &[Version], name2: &str, v2: &[Version]) -> Ordering {
+pub(crate) fn compare_name_and_tags(
+    name1: &str,
+    v1: &[Version],
+    name2: &str,
+    v2: &[Version],
+) -> Ordering {
     name1.cmp(name2).then_with(|| v1[0].cmp(&v2[0]))
 }
 
@@ -35,13 +40,13 @@ pub enum Endianness {
 }
 
 impl Endianness {
-    pub fn wireshark_str(&self) -> &str {
+    pub(crate) fn wireshark_str(&self) -> &str {
         match self {
             Endianness::Little => "ENC_LITTLE_ENDIAN",
             Endianness::Big => "ENC_BIG_ENDIAN",
         }
     }
-    pub fn rust_str(&self) -> &str {
+    pub(crate) fn rust_str(&self) -> &str {
         match self {
             Endianness::Little => "le",
             Endianness::Big => "be",
@@ -56,14 +61,14 @@ pub enum FloatingPointType {
 }
 
 impl FloatingPointType {
-    pub fn size(&self) -> u8 {
+    pub(crate) fn size(&self) -> u8 {
         match self {
             FloatingPointType::F32(_) => 4,
             FloatingPointType::F64(_) => 8,
         }
     }
 
-    pub fn str(&self) -> &str {
+    pub(crate) fn str(&self) -> &str {
         match self {
             FloatingPointType::F32(e) => match e {
                 Endianness::Little => "f32",
@@ -76,26 +81,26 @@ impl FloatingPointType {
         }
     }
 
-    pub fn rust_str(&self) -> &str {
+    pub(crate) fn rust_str(&self) -> &str {
         match self {
             FloatingPointType::F32(_) => "f32",
             FloatingPointType::F64(_) => "f64",
         }
     }
 
-    pub fn rust_endian_str(&self) -> &str {
+    pub(crate) fn rust_endian_str(&self) -> &str {
         match self {
             FloatingPointType::F32(e) | FloatingPointType::F64(e) => e.rust_str(),
         }
     }
 
-    pub fn wireshark_endian_str(&self) -> &str {
+    pub(crate) fn wireshark_endian_str(&self) -> &str {
         match self {
             FloatingPointType::F32(e) | FloatingPointType::F64(e) => e.wireshark_str(),
         }
     }
 
-    pub fn doc_endian_str(&self) -> &str {
+    pub(crate) fn doc_endian_str(&self) -> &str {
         match self {
             FloatingPointType::F32(e) | FloatingPointType::F64(e) => match e {
                 Endianness::Little => "Little",
@@ -115,7 +120,7 @@ pub enum IntegerType {
 }
 
 impl IntegerType {
-    pub fn size(&self) -> u8 {
+    pub(crate) fn size(&self) -> u8 {
         match self {
             IntegerType::U8 => 1,
             IntegerType::U16(_) => 2,
@@ -124,15 +129,15 @@ impl IntegerType {
         }
     }
 
-    pub fn smallest_value(&self) -> usize {
+    pub(crate) fn smallest_value(&self) -> usize {
         0
     }
 
-    pub fn largest_value(&self) -> usize {
+    pub(crate) fn largest_value(&self) -> usize {
         2_usize.pow(8 * self.size() as u32)
     }
 
-    pub fn str(&self) -> &str {
+    pub(crate) fn str(&self) -> &str {
         match self {
             IntegerType::U8 => "u8",
             IntegerType::U16(e) => match e {
@@ -154,7 +159,7 @@ impl IntegerType {
         }
     }
 
-    pub fn rust_str(&self) -> &str {
+    pub(crate) fn rust_str(&self) -> &str {
         match self {
             IntegerType::U8 => "u8",
             IntegerType::U16(_) => "u16",
@@ -164,7 +169,7 @@ impl IntegerType {
         }
     }
 
-    pub fn rust_endian_str(&self) -> &str {
+    pub(crate) fn rust_endian_str(&self) -> &str {
         match self {
             IntegerType::U8 => "le",
             IntegerType::U16(i)
@@ -174,7 +179,7 @@ impl IntegerType {
         }
     }
 
-    pub fn wireshark_endian_str(&self) -> &str {
+    pub(crate) fn wireshark_endian_str(&self) -> &str {
         match self {
             IntegerType::U8 => "ENC_LITTLE_ENDIAN",
             IntegerType::U16(i)
@@ -184,7 +189,7 @@ impl IntegerType {
         }
     }
 
-    pub fn doc_endian_str(&self) -> &str {
+    pub(crate) fn doc_endian_str(&self) -> &str {
         match self {
             IntegerType::U8 => "-",
             IntegerType::U16(e)
@@ -228,7 +233,7 @@ pub enum ArrayType {
 }
 
 impl ArrayType {
-    pub fn rust_str(&self) -> String {
+    pub(crate) fn rust_str(&self) -> String {
         match &self {
             ArrayType::Integer(i) => i.rust_str().to_string(),
             ArrayType::Complex(i) => i.clone(),
@@ -238,7 +243,7 @@ impl ArrayType {
         }
     }
 
-    pub fn str(&self) -> String {
+    pub(crate) fn str(&self) -> String {
         match self {
             ArrayType::Integer(i) => i.str().to_string(),
             ArrayType::Complex(i) => i.clone(),
@@ -257,7 +262,7 @@ pub enum ArraySize {
 }
 
 impl ArraySize {
-    pub fn str(&self) -> String {
+    pub(crate) fn str(&self) -> String {
         match self {
             ArraySize::Fixed(i) => i.to_string(),
             ArraySize::Variable(i) => i.clone(),
@@ -273,26 +278,26 @@ pub struct Array {
 }
 
 impl Array {
-    pub fn new_unimplemented() -> Self {
+    pub(crate) fn new_unimplemented() -> Self {
         Self {
             inner: ArrayType::Integer(IntegerType::U8),
             size: ArraySize::Endless,
         }
     }
 
-    pub fn ty(&self) -> &ArrayType {
+    pub(crate) fn ty(&self) -> &ArrayType {
         &self.inner
     }
 
-    pub fn size(&self) -> ArraySize {
+    pub(crate) fn size(&self) -> ArraySize {
         self.size.clone()
     }
 
-    pub fn str(&self) -> String {
+    pub(crate) fn str(&self) -> String {
         format!("{}[{}]", self.inner.str(), self.size.str())
     }
 
-    pub fn rust_str(&self) -> String {
+    pub(crate) fn rust_str(&self) -> String {
         match &self.size {
             ArraySize::Fixed(i) => format!("[{}; {}]", self.inner.rust_str(), i),
             ArraySize::Variable(_) | ArraySize::Endless => {
@@ -301,19 +306,11 @@ impl Array {
         }
     }
 
-    pub fn rust_size_str(&self) -> String {
-        match &self.size {
-            ArraySize::Fixed(i) => i.to_string(),
-            ArraySize::Variable(s) => s.clone(),
-            ArraySize::Endless => panic!(),
-        }
-    }
-
-    pub fn is_byte_array(&self) -> bool {
+    pub(crate) fn is_byte_array(&self) -> bool {
         matches!(self.ty(), ArrayType::Integer(IntegerType::U8))
     }
 
-    pub fn is_constant_sized_u8_array(&self) -> bool {
+    pub(crate) fn is_constant_sized_u8_array(&self) -> bool {
         match &self.size() {
             ArraySize::Fixed(_) => matches!(&self.ty(), ArrayType::Integer(IntegerType::U8)),
             ArraySize::Variable(_) => false,
@@ -321,7 +318,7 @@ impl Array {
         }
     }
 
-    pub fn inner_type_is_constant_sized(&self, tags: &Tags, o: &Objects) -> bool {
+    pub(crate) fn inner_type_is_constant_sized(&self, tags: &Tags, o: &Objects) -> bool {
         match self.ty() {
             ArrayType::Integer(_) | ArrayType::Guid => true,
             ArrayType::CString | ArrayType::PackedGuid => false,
@@ -330,22 +327,6 @@ impl Array {
                 ObjectType::Enum | ObjectType::Flag => true,
                 _ => unreachable!(),
             },
-        }
-    }
-
-    pub fn rust_kind_str(&self) -> String {
-        match &self.inner {
-            ArrayType::Integer(i) => i.rust_str().to_string(),
-            ArrayType::Complex(i) => i.clone(),
-            ArrayType::CString => "String".to_string(),
-            ArrayType::Guid | ArrayType::PackedGuid => "Guid".to_string(),
-        }
-    }
-
-    pub fn rust_endian_str(&self) -> String {
-        match self.inner {
-            ArrayType::Integer(i) => i.rust_endian_str().to_string(),
-            _ => panic!("endianness only supported for integer types"),
         }
     }
 }
@@ -368,19 +349,19 @@ impl Display for VerifiedContainerValue {
 }
 
 impl VerifiedContainerValue {
-    pub fn value(&self) -> u64 {
+    pub(crate) fn value(&self) -> u64 {
         self.value
     }
 
-    pub fn original_string(&self) -> &str {
+    pub(crate) fn original_string(&self) -> &str {
         &self.original_string
     }
 
-    pub fn rust_name(&self) -> String {
+    pub(crate) fn rust_name(&self) -> String {
         field_name_to_rust_name(self.original_string())
     }
 
-    pub fn new(value: u64, original_string: String) -> Self {
+    pub(crate) fn new(value: u64, original_string: String) -> Self {
         Self {
             value,
             original_string,
@@ -394,7 +375,7 @@ pub struct ContainerValue {
 }
 
 impl ContainerValue {
-    pub fn identifier(&self) -> &str {
+    pub(crate) fn identifier(&self) -> &str {
         &self.identifier
     }
 }

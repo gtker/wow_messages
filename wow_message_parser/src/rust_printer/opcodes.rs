@@ -14,7 +14,7 @@ const SLOGIN_NAME: &str = "Server";
 const CMSG_NAME: &str = "Client";
 const SMSG_NAME: &str = "Server";
 
-pub fn print_world_opcodes(
+pub(crate) fn print_world_opcodes(
     v: &[&Container],
     version: &WorldVersion,
     container_type: ContainerType,
@@ -35,7 +35,7 @@ pub fn print_world_opcodes(
     s
 }
 
-pub fn print_login_opcodes(
+pub(crate) fn print_login_opcodes(
     v: &[&Container],
     version: &LoginVersion,
     container_type: ContainerType,
@@ -60,7 +60,12 @@ fn any_container_is_pure_movement_info(v: &[&Container]) -> bool {
     v.iter().any(|a| a.is_pure_movement_info())
 }
 
-pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType, version: Version) {
+pub(crate) fn includes(
+    s: &mut Writer,
+    v: &[&Container],
+    container_type: ContainerType,
+    version: Version,
+) {
     match container_type {
         ContainerType::SLogin(_) => {
             s.wln(format!(
@@ -134,7 +139,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType,
     s.newline();
 }
 
-pub fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Version) {
+pub(crate) fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Version) {
     // Login does not have any floats guaranteed while World does.
     // We could also dynamically check, but then adding a message with floats
     // would be a breaking change.
@@ -338,7 +343,7 @@ fn world_common_impls_read_write(
     s.closing_curly_newline();
 }
 
-pub fn common_impls_world(
+pub(crate) fn common_impls_world(
     s: &mut Writer,
     v: &[&Container],
     ty: &str,
@@ -497,7 +502,7 @@ fn world_movement_info(s: &mut Writer, v: &[&Container]) {
     });
 }
 
-pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
+pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
     s.impl_read_write_opcode(
         format!("{t}OpcodeMessage", t = ty),
         EXPECTED_OPCODE_ERROR,
@@ -553,6 +558,6 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
     }
 }
 
-pub fn get_enumerator_name(name: &str) -> String {
+pub(crate) fn get_enumerator_name(name: &str) -> String {
     name.replace("_Client", "").replace("_Server", "")
 }

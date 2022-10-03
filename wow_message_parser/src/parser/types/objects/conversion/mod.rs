@@ -9,7 +9,7 @@ use crate::{Container, Objects, Tags};
 
 mod container;
 
-pub fn object_new(
+pub(crate) fn object_new(
     enums: Vec<ParsedDefiner>,
     flags: Vec<ParsedDefiner>,
     structs: Vec<ParsedContainer>,
@@ -39,7 +39,7 @@ pub fn object_new(
 
     o
 }
-pub fn parsed_container_to_container(
+pub(crate) fn parsed_container_to_container(
     parsed: Vec<ParsedContainer>,
     tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
@@ -71,7 +71,7 @@ pub fn parsed_container_to_container(
     v
 }
 
-pub fn parsed_definer_to_definer(
+pub(crate) fn parsed_definer_to_definer(
     parsed: Vec<ParsedDefiner>,
     structs: &[ParsedContainer],
     messages: &[ParsedContainer],
@@ -96,31 +96,7 @@ pub fn parsed_definer_to_definer(
     v
 }
 
-pub fn contains_complex_type(
-    containers: &[ParsedContainer],
-    definers: &[Definer],
-    ty_name: &str,
-    tags: &Tags,
-    struct_name: &str,
-) {
-    if get_container(containers, ty_name, tags).is_some() {
-        return;
-    }
-
-    if get_definer(definers, ty_name, tags).is_some() {
-        return;
-    }
-
-    panic!(
-        "Complex type not found: '{}' for object: '{}' for versions logon: '{:?}', versions: '{:?}'",
-        ty_name,
-        struct_name,
-        tags.logon_versions(),
-        tags.versions()
-    );
-}
-
-pub fn get_container<'a>(
+pub(crate) fn get_container<'a>(
     containers: &'a [ParsedContainer],
     name: &str,
     tags: &Tags,
@@ -130,13 +106,19 @@ pub fn get_container<'a>(
         .find(|a| a.name() == name && a.tags().fulfills_all(tags))
 }
 
-pub fn get_definer<'a>(definers: &'a [Definer], name: &str, tags: &Tags) -> Option<&'a Definer> {
+pub(crate) fn get_definer<'a>(
+    definers: &'a [Definer],
+    name: &str,
+    tags: &Tags,
+) -> Option<&'a Definer> {
     definers
         .iter()
         .find(|a| a.name() == name && a.tags().fulfills_all(tags))
 }
 
-pub fn all_definitions_mut(members: &mut [StructMember]) -> Vec<&mut StructMemberDefinition> {
+pub(crate) fn all_definitions_mut(
+    members: &mut [StructMember],
+) -> Vec<&mut StructMemberDefinition> {
     let mut v = Vec::new();
 
     fn inner<'a>(m: &'a mut StructMember, v: &mut Vec<&'a mut StructMemberDefinition>) {
@@ -162,7 +144,7 @@ pub fn all_definitions_mut(members: &mut [StructMember]) -> Vec<&mut StructMembe
     v
 }
 
-pub fn all_definitions(members: &[StructMember]) -> Vec<&StructMemberDefinition> {
+pub(crate) fn all_definitions(members: &[StructMember]) -> Vec<&StructMemberDefinition> {
     let mut v = Vec::new();
 
     fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {

@@ -4,7 +4,7 @@ use crate::rust_printer::enums::print_wowm_definition;
 use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
 use crate::Objects;
 
-pub fn print_flag(e: &Definer, o: &Objects, version: Version) -> Writer {
+pub(crate) fn print_flag(e: &Definer, o: &Objects, version: Version) -> Writer {
     let mut s = Writer::new(&get_import_path(version));
 
     declaration(&mut s, e, o);

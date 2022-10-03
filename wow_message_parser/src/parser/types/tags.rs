@@ -108,7 +108,7 @@ fn world_version_ordering() {
 
 impl WorldVersion {
     /// self has some overlap with other
-    pub fn overlaps(&self, other: &Self) -> bool {
+    pub(crate) fn overlaps(&self, other: &Self) -> bool {
         match self {
             WorldVersion::Major(m) => match other {
                 WorldVersion::Major(om)
@@ -143,7 +143,7 @@ impl WorldVersion {
     }
 
     /// self completely fulfills other
-    pub fn covers(&self, other: &Self) -> bool {
+    pub(crate) fn covers(&self, other: &Self) -> bool {
         match other {
             WorldVersion::Major(om) => match self {
                 WorldVersion::Major(m) => m == om,
@@ -177,7 +177,7 @@ impl WorldVersion {
         }
     }
 
-    pub fn is_main_version(&self) -> bool {
+    pub(crate) fn is_main_version(&self) -> bool {
         let mains = [
             WorldVersion::Minor(1, 12),
             WorldVersion::Patch(2, 4, 3),
@@ -193,7 +193,7 @@ impl WorldVersion {
         false
     }
 
-    pub fn to_module_case(&self) -> String {
+    pub(crate) fn to_module_case(&self) -> String {
         self.to_string().replace('.', "_")
     }
 }
@@ -226,7 +226,7 @@ impl Display for LoginVersion {
 }
 
 impl LoginVersion {
-    pub fn to_module_case(&self) -> String {
+    pub(crate) fn to_module_case(&self) -> String {
         match self {
             LoginVersion::Specific(_) => self.to_string(),
             LoginVersion::All => "all".to_string(),
@@ -245,17 +245,17 @@ pub struct Tags {
 }
 
 impl Tags {
-    pub fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Self::default()
     }
 
-    pub fn new_with_tag(t: Tag) -> Self {
+    pub(crate) fn new_with_tag(t: Tag) -> Self {
         let mut s = Self::new();
         s.push(t);
         s
     }
 
-    pub fn new_with_version(version: Version) -> Self {
+    pub(crate) fn new_with_version(version: Version) -> Self {
         let mut s = Self::new();
         match version {
             Version::Login(l) => s.login_logon_versions.push(l),
@@ -264,17 +264,17 @@ impl Tags {
         s
     }
 
-    pub fn push(&mut self, t: Tag) {
+    pub(crate) fn push(&mut self, t: Tag) {
         self.append_or_insert(t.key(), t.value());
     }
 
-    pub fn append(&mut self, t: &Tags) {
+    pub(crate) fn append(&mut self, t: &Tags) {
         for tag in &t.inner {
             self.append_or_insert(tag.key(), tag.value());
         }
     }
 
-    pub fn append_or_insert(&mut self, key: &str, value: &str) {
+    pub(crate) fn append_or_insert(&mut self, key: &str, value: &str) {
         if key == LOGIN_VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
@@ -346,56 +346,27 @@ impl Tags {
         self.inner.push(Tag::new(key, value));
     }
 
-    pub fn contains(&self, name: &str) -> bool {
+    pub(crate) fn contains(&self, name: &str) -> bool {
         self.inner.iter().any(|a| a.key == name)
     }
 
-    pub fn get_ref(&self, name: &str) -> Option<&str> {
+    pub(crate) fn get_ref(&self, name: &str) -> Option<&str> {
         match self.inner.iter().find(|a| a.key == name) {
             None => None,
             Some(v) => Some(v.value()),
         }
     }
 
-    pub fn unimplemented(&self) -> bool {
+    pub(crate) fn unimplemented(&self) -> bool {
         self.contains("unimplemented")
     }
 
-    pub fn shared(&self) -> bool {
+    pub(crate) fn shared(&self) -> bool {
         self.main_versions().count() != 1
     }
 
-    pub fn has_all_versions(&self, tags: &Tags) -> bool {
-        // if self has all versions of tags
-        if tags.contains(TEST_STR) && self.contains(TEST_STR) {
-            return true;
-        }
-
-        for t in tags.logon_versions() {
-            match self.logon_versions().contains(t)
-                || self.logon_versions().contains(&LoginVersion::All)
-            {
-                true => {}
-                false => {
-                    return false;
-                }
-            }
-        }
-
-        for t in tags.versions() {
-            match self.versions().contains(t) || self.versions().contains(&WorldVersion::All) {
-                true => {}
-                false => {
-                    return false;
-                }
-            }
-        }
-
-        true
-    }
-
     /// self and tags have any version in common at all
-    pub fn has_version_intersections(&self, tags: &Tags) -> bool {
+    pub(crate) fn has_version_intersections(&self, tags: &Tags) -> bool {
         if tags.contains(TEST_STR) && self.contains(TEST_STR) {
             return true;
         }
@@ -425,34 +396,30 @@ impl Tags {
         false
     }
 
-    pub fn is_main_version(&self) -> bool {
+    pub(crate) fn is_main_version(&self) -> bool {
         let versions = Tags::new_with_tag(Tag::new(VERSIONS, "1.12 2.4.3 3.3.5"));
         let logon = Tags::new_with_tag(Tag::new(LOGIN_VERSIONS, "*"));
 
         self.has_version_intersections(&versions) || self.has_version_intersections(&logon)
     }
 
-    pub fn has_version_all(&self) -> bool {
-        self.has_wildcard_logon_version() || self.has_wildcard_world_version()
-    }
-
-    pub fn has_wildcard_logon_version(&self) -> bool {
+    pub(crate) fn has_wildcard_logon_version(&self) -> bool {
         self.logon_versions().contains(&LoginVersion::All)
     }
 
-    pub fn has_wildcard_world_version(&self) -> bool {
+    pub(crate) fn has_wildcard_world_version(&self) -> bool {
         self.versions().contains(&WorldVersion::All)
     }
 
-    pub fn logon_versions(&self) -> &[LoginVersion] {
+    pub(crate) fn logon_versions(&self) -> &[LoginVersion] {
         &self.login_logon_versions
     }
 
-    pub fn versions(&self) -> &[WorldVersion] {
+    pub(crate) fn versions(&self) -> &[WorldVersion] {
         &self.world_versions
     }
 
-    pub fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
+    pub(crate) fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
         let world = self
             .versions()
             .iter()
@@ -465,7 +432,7 @@ impl Tags {
             .chain(world)
     }
 
-    pub fn main_trait_versions(&self) -> Vec<Version> {
+    pub(crate) fn main_trait_versions(&self) -> Vec<Version> {
         let mut v = Vec::new();
 
         if self.fulfills_all(&Tags::new_with_version(Version::World(
@@ -488,7 +455,7 @@ impl Tags {
         v
     }
 
-    pub fn first_version(&self) -> Version {
+    pub(crate) fn first_version(&self) -> Version {
         if let Some(v) = self.logon_versions().first() {
             Version::Login(*v)
         } else if let Some(v) = self.versions().first() {
@@ -498,7 +465,7 @@ impl Tags {
         }
     }
 
-    pub fn first_and_main_versions(&self) -> (Version, Vec<Version>) {
+    pub(crate) fn first_and_main_versions(&self) -> (Version, Vec<Version>) {
         let mut v = self.main_versions();
         let first = v.next().unwrap();
 
@@ -507,13 +474,13 @@ impl Tags {
         (first, rest)
     }
 
-    pub fn import_version(&self) -> Version {
+    pub(crate) fn import_version(&self) -> Version {
         let (first, _) = self.first_and_main_versions();
 
         first
     }
 
-    pub fn has_world_version(&self) -> bool {
+    pub(crate) fn has_world_version(&self) -> bool {
         if !self.versions().is_empty() {
             assert!(self.logon_versions().is_empty());
             return true;
@@ -526,7 +493,7 @@ impl Tags {
     }
 
     /// self is able to fulfill all version obligations for tags
-    pub fn fulfills_all(&self, tags: &Self) -> bool {
+    pub(crate) fn fulfills_all(&self, tags: &Self) -> bool {
         for version in tags.logon_versions() {
             if !self.logon_versions().contains(version)
                 && !self.logon_versions().contains(&LoginVersion::All)
@@ -552,7 +519,7 @@ impl Tags {
         true
     }
 
-    pub fn has_login_version(&self) -> bool {
+    pub(crate) fn has_login_version(&self) -> bool {
         if !self.login_logon_versions.is_empty() {
             assert!(self.world_versions.is_empty());
             return true;
@@ -564,15 +531,15 @@ impl Tags {
         false
     }
 
-    pub fn description(&self) -> Option<&TagString> {
+    pub(crate) fn description(&self) -> Option<&TagString> {
         self.description.as_ref()
     }
 
-    pub fn comment(&self) -> Option<&TagString> {
+    pub(crate) fn comment(&self) -> Option<&TagString> {
         self.comment.as_ref()
     }
 
-    pub fn display(&self) -> Option<&str> {
+    pub(crate) fn display(&self) -> Option<&str> {
         if self.display.is_empty() {
             None
         } else {
@@ -580,11 +547,7 @@ impl Tags {
         }
     }
 
-    pub fn has_display(&self) -> bool {
-        !self.display.is_empty()
-    }
-
-    pub fn is_in_base(&self) -> bool {
+    pub(crate) fn is_in_base(&self) -> bool {
         self.contains(RUST_BASE_TYPE)
     }
 }
@@ -596,18 +559,18 @@ pub struct Tag {
 }
 
 impl Tag {
-    pub fn new(key: &str, value: &str) -> Self {
+    pub(crate) fn new(key: &str, value: &str) -> Self {
         Self {
             key: key.to_owned(),
             value: value.to_owned(),
         }
     }
 
-    pub fn key(&self) -> &str {
+    pub(crate) fn key(&self) -> &str {
         &self.key
     }
 
-    pub fn value(&self) -> &str {
+    pub(crate) fn value(&self) -> &str {
         &self.value
     }
 }
@@ -649,11 +612,11 @@ pub struct TagString {
 }
 
 impl TagString {
-    pub fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Self::default()
     }
 
-    pub fn add(&mut self, s: &str) {
+    pub(crate) fn add(&mut self, s: &str) {
         if !self.inner.is_empty() {
             self.inner.push(TagStringSymbol::Newline);
         }
@@ -661,7 +624,7 @@ impl TagString {
         self.inner.append(&mut TagStringSymbol::from_str(s));
     }
 
-    pub fn as_doc_lines(&self) -> Vec<String> {
+    pub(crate) fn as_doc_lines(&self) -> Vec<String> {
         let mut v = Vec::new();
 
         let mut current = String::new();
@@ -687,7 +650,7 @@ impl TagString {
         v
     }
 
-    pub fn as_rust_doc_lines(&self, o: &Objects, object_tags: &Tags) -> Vec<String> {
+    pub(crate) fn as_rust_doc_lines(&self, o: &Objects, object_tags: &Tags) -> Vec<String> {
         let mut v = Vec::new();
 
         let mut current = String::new();
@@ -715,7 +678,7 @@ impl TagString {
         v
     }
 
-    pub fn as_doc_table_string(&self) -> String {
+    pub(crate) fn as_doc_table_string(&self) -> String {
         let mut s = String::new();
 
         for i in &self.inner {
@@ -731,7 +694,7 @@ impl TagString {
         s
     }
 
-    pub fn as_ir_string(&self) -> String {
+    pub(crate) fn as_ir_string(&self) -> String {
         let mut s = String::new();
 
         for i in &self.inner {

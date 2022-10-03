@@ -70,21 +70,17 @@ pub struct ImplFeatures {
 }
 
 impl ImplFeatures {
-    pub fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Self::default()
     }
 
-    pub fn add(&mut self, f: Feature) {
+    pub(crate) fn add(&mut self, f: Feature) {
         if !self.inner.contains(&f) {
             self.inner.push(f);
         }
     }
 
-    pub fn contains(&self, f: Feature) -> bool {
-        self.inner.contains(&f)
-    }
-
-    pub fn to_array(&self) -> Vec<Feature> {
+    pub(crate) fn to_array(&self) -> Vec<Feature> {
         self.inner.clone()
     }
 }
@@ -97,7 +93,7 @@ impl Default for ImplFeatures {
     }
 }
 
-pub fn get_impl_features_for_definer(e: &Definer) -> ImplFeatures {
+pub(crate) fn get_impl_features_for_definer(e: &Definer) -> ImplFeatures {
     let mut f = ImplFeatures::new();
     match e.definer_ty() {
         DefinerType::Enum => f.add(Feature::Enum),
@@ -113,7 +109,7 @@ pub fn get_impl_features_for_definer(e: &Definer) -> ImplFeatures {
     f
 }
 
-pub fn get_impl_features_for_container(e: &Container) -> ImplFeatures {
+pub(crate) fn get_impl_features_for_container(e: &Container) -> ImplFeatures {
     let mut f = ImplFeatures::new();
 
     match e.container_type() {

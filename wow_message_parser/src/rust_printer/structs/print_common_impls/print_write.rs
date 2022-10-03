@@ -8,7 +8,7 @@ use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
-pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container, postfix: &str) {
+pub(crate) fn print_unencrypted_write_header(s: &mut Writer, e: &Container, postfix: &str) {
     match e.container_type() {
         ContainerType::Struct => {}
         ContainerType::SLogin(_) | ContainerType::CLogin(_) => {
@@ -23,7 +23,7 @@ pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container, postfix: &s
     }
 }
 
-pub fn print_write_field_array(
+pub(crate) fn print_write_field_array(
     s: &mut Writer,
     variable_name: &str,
     variable_prefix: &str,
@@ -56,7 +56,7 @@ pub fn print_write_field_array(
     s.closing_curly();
 }
 
-pub fn print_write_field_integer(
+pub(crate) fn print_write_field_integer(
     s: &mut Writer,
     variable_name: &str,
     variable_prefix: &str,
@@ -102,7 +102,11 @@ pub fn print_write_field_integer(
     }
 }
 
-pub fn print_write_field_identifier(s: &mut Writer, variable_name: &str, variable_prefix: &str) {
+pub(crate) fn print_write_field_identifier(
+    s: &mut Writer,
+    variable_name: &str,
+    variable_prefix: &str,
+) {
     s.wln(format!(
         "{variable_prefix}{name}.write_into_vec(w)?;",
         name = variable_name,
@@ -110,13 +114,13 @@ pub fn print_write_field_identifier(s: &mut Writer, variable_name: &str, variabl
     ));
 }
 
-pub fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
+pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
     for field in e.fields() {
         print_write_field(s, e, o, field, "self.", prefix, postfix);
     }
 }
 
-pub fn print_write_definition(
+pub(crate) fn print_write_definition(
     s: &mut Writer,
     e: &Container,
     o: &Objects,
@@ -334,7 +338,7 @@ fn print_write_flag_if_statement(
     s.closing_curly_newline(); // if let Some(s)
 }
 
-pub fn print_write_field(
+pub(crate) fn print_write_field(
     s: &mut Writer,
     e: &Container,
     o: &Objects,

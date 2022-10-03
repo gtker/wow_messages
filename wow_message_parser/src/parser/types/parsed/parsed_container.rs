@@ -19,7 +19,7 @@ pub struct ParsedContainer {
 }
 
 impl ParsedContainer {
-    pub fn new(
+    pub(crate) fn new(
         name: &str,
         members: Vec<StructMember>,
         tags: Tags,
@@ -41,7 +41,7 @@ impl ParsedContainer {
         s
     }
 
-    pub fn contains_definer(&self, ty_name: &str) -> DefinerUsage {
+    pub(crate) fn contains_definer(&self, ty_name: &str) -> DefinerUsage {
         fn inner(m: &StructMember, ty_name: &str, variable_name: &str) -> DefinerUsage {
             match m {
                 StructMember::Definition(d) => {
@@ -110,7 +110,7 @@ impl ParsedContainer {
         DefinerUsage::Unused
     }
 
-    pub fn get_variable_name_of_definer_ty(&self, ty_name: &str) -> Option<String> {
+    pub(crate) fn get_variable_name_of_definer_ty(&self, ty_name: &str) -> Option<String> {
         for d in self.all_definitions() {
             if let Type::Identifier { s, .. } = d.ty() {
                 if s == ty_name {
@@ -122,7 +122,7 @@ impl ParsedContainer {
         None
     }
 
-    pub fn get_field_ty(&self, field_name: &str) -> &Type {
+    pub(crate) fn get_field_ty(&self, field_name: &str) -> &Type {
         for d in self.all_definitions() {
             if d.name() == field_name {
                 return d.ty();
@@ -132,15 +132,15 @@ impl ParsedContainer {
         panic!("unable to find field: '{}'", field_name)
     }
 
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
 
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 
-    pub fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
+    pub(crate) fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
         fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
             match m {
                 StructMember::Definition(d) => v.push(d),
@@ -193,7 +193,7 @@ impl ParsedContainer {
         }
     }
 
-    pub fn create_sizes(&self, containers: &[Self], definers: &[Definer]) -> Sizes {
+    pub(crate) fn create_sizes(&self, containers: &[Self], definers: &[Definer]) -> Sizes {
         let mut sizes = Sizes::new();
         for m in self.fields() {
             Self::add_sizes_values(self, m, containers, definers, &mut sizes);
@@ -202,7 +202,7 @@ impl ParsedContainer {
         sizes
     }
 
-    pub fn get_complex_sizes(
+    pub(crate) fn get_complex_sizes(
         statement: &IfStatement,
         e: &Self,
         containers: &[Self],
@@ -252,7 +252,7 @@ impl ParsedContainer {
         sizes
     }
 
-    pub fn get_type_of_variable(&self, variable_name: &str) -> Type {
+    pub(crate) fn get_type_of_variable(&self, variable_name: &str) -> Type {
         for d in self.all_definitions() {
             if d.name() == variable_name {
                 return d.ty().clone();
@@ -262,15 +262,19 @@ impl ParsedContainer {
         panic!("unable to find type {}", variable_name)
     }
 
-    pub fn fields(&self) -> &[StructMember] {
+    pub(crate) fn fields(&self) -> &[StructMember] {
         self.members.as_slice()
     }
 
-    pub fn fields_mut(&mut self) -> &mut [StructMember] {
+    pub(crate) fn fields_mut(&mut self) -> &mut [StructMember] {
         self.members.as_mut_slice()
     }
 
-    pub fn recursive_only_has_io_errors(&self, containers: &[Self], definers: &[Definer]) -> bool {
+    pub(crate) fn recursive_only_has_io_errors(
+        &self,
+        containers: &[Self],
+        definers: &[Definer],
+    ) -> bool {
         if self.contains_string_or_cstring() {
             return false;
         }
@@ -292,7 +296,7 @@ impl ParsedContainer {
         true
     }
 
-    pub fn contains_string_or_cstring(&self) -> bool {
+    pub(crate) fn contains_string_or_cstring(&self) -> bool {
         for d in self.all_definitions() {
             match d.ty() {
                 Type::CString | Type::String { .. } | Type::SizedCString => return true,
@@ -308,7 +312,7 @@ impl ParsedContainer {
         false
     }
 
-    pub fn get_types_needing_import(&self) -> Vec<String> {
+    pub(crate) fn get_types_needing_import(&self) -> Vec<String> {
         self.get_complex_types()
     }
 
@@ -335,7 +339,7 @@ impl ParsedContainer {
         v
     }
 
-    pub fn set_used_in_if(&mut self) {
+    pub(crate) fn set_used_in_if(&mut self) {
         let mut variables_used_in_if = Vec::new();
 
         fn find_used_in_if(m: &StructMember, variables_used_in_if: &mut Vec<String>) {
@@ -365,7 +369,7 @@ impl ParsedContainer {
         }
     }
 
-    pub fn all_definitions_mut(&mut self) -> Vec<&mut StructMemberDefinition> {
+    pub(crate) fn all_definitions_mut(&mut self) -> Vec<&mut StructMemberDefinition> {
         fn inner<'a>(m: &'a mut StructMember, v: &mut Vec<&'a mut StructMemberDefinition>) {
             match m {
                 StructMember::Definition(d) => v.push(d),
@@ -420,11 +424,11 @@ impl ParsedContainer {
         }
     }
 
-    pub fn self_check(&self) {
+    pub(crate) fn self_check(&self) {
         self.panic_on_duplicate_field_names();
     }
 
-    pub fn panic_on_duplicate_field_names(&self) {
+    pub(crate) fn panic_on_duplicate_field_names(&self) {
         let mut v = Vec::new();
 
         for d in self.all_definitions() {

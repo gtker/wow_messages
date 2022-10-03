@@ -4,11 +4,11 @@ use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{Objects, DISPLAY_STR};
 
-pub fn print_enum_for_base(e: &Definer, o: &Objects, version: Version) -> Writer {
+pub(crate) fn print_enum_for_base(e: &Definer, o: &Objects, version: Version) -> Writer {
     print_enum_inner(e, o, version, true)
 }
 
-pub fn print_enum(e: &Definer, o: &Objects, version: Version) -> Writer {
+pub(crate) fn print_enum(e: &Definer, o: &Objects, version: Version) -> Writer {
     print_enum_inner(e, o, version, false)
 }
 
@@ -71,7 +71,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
     });
 }
 
-pub fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
+pub(crate) fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
     s.docc_wowm(
         |s| {
             s.wln(get_definer_wowm_definition(kind, e, "/// "));

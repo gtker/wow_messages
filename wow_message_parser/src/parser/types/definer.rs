@@ -18,11 +18,7 @@ pub struct DefinerField {
 }
 
 impl DefinerField {
-    pub fn new(name: &str, value: DefinerValue) -> Self {
-        Self::key_value(name, value, Tags::new())
-    }
-
-    pub fn key_value(name: &str, value: DefinerValue, tags: Tags) -> Self {
+    pub(crate) fn new(name: &str, value: DefinerValue, tags: Tags) -> Self {
         Self {
             name: name.to_string(),
             rust_name: field_name_to_rust_name(name),
@@ -31,19 +27,19 @@ impl DefinerField {
         }
     }
 
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
 
-    pub fn rust_name(&self) -> &str {
+    pub(crate) fn rust_name(&self) -> &str {
         &self.rust_name
     }
 
-    pub fn value(&self) -> &DefinerValue {
+    pub(crate) fn value(&self) -> &DefinerValue {
         &self.value
     }
 
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 }
@@ -55,11 +51,11 @@ pub struct DefinerValue {
 }
 
 impl DefinerValue {
-    pub fn int(&self) -> u64 {
+    pub(crate) fn int(&self) -> u64 {
         self.int
     }
 
-    pub fn original(&self) -> &str {
+    pub(crate) fn original(&self) -> &str {
         &self.original
     }
 }
@@ -89,7 +85,7 @@ pub struct SelfValueDefinerField {
 }
 
 impl SelfValueDefinerField {
-    pub fn new(name: &str, tags: Tags) -> Self {
+    pub(crate) fn new(name: &str, tags: Tags) -> Self {
         Self {
             name: name.to_string(),
             rust_name: field_name_to_rust_name(name),
@@ -97,15 +93,15 @@ impl SelfValueDefinerField {
         }
     }
 
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
 
-    pub fn rust_name(&self) -> &str {
+    pub(crate) fn rust_name(&self) -> &str {
         &self.rust_name
     }
 
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 }
@@ -138,7 +134,7 @@ impl PartialOrd for Definer {
 }
 
 impl Definer {
-    pub fn new(
+    pub(crate) fn new(
         name: String,
         definer_ty: DefinerType,
         fields: Vec<DefinerField>,
@@ -164,7 +160,7 @@ impl Definer {
         s
     }
 
-    pub fn only_used_in_if(&self) -> bool {
+    pub(crate) fn only_used_in_if(&self) -> bool {
         for v in self.objects_used_in() {
             match v.1 {
                 DefinerUsage::NotInIf => return false,
@@ -176,58 +172,54 @@ impl Definer {
         true
     }
 
-    pub fn objects_used_in(&self) -> &[(String, DefinerUsage)] {
+    pub(crate) fn objects_used_in(&self) -> &[(String, DefinerUsage)] {
         &self.objects_used_in
     }
 
-    pub fn used_in_if_in_object(&self, name: &str) -> bool {
+    pub(crate) fn used_in_if_in_object(&self, name: &str) -> bool {
         self.objects_used_in()
             .iter()
             .any(|a| a.0 == name && a.1 == DefinerUsage::InIf)
     }
 
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
 
-    pub fn definer_ty(&self) -> DefinerType {
+    pub(crate) fn definer_ty(&self) -> DefinerType {
         self.definer_ty
     }
 
-    pub fn ty(&self) -> &IntegerType {
+    pub(crate) fn ty(&self) -> &IntegerType {
         &self.basic_type
     }
 
-    pub fn self_value(&self) -> &Option<SelfValueDefinerField> {
+    pub(crate) fn self_value(&self) -> &Option<SelfValueDefinerField> {
         &self.self_value
     }
 
-    pub fn fields(&self) -> &[DefinerField] {
+    pub(crate) fn fields(&self) -> &[DefinerField] {
         &self.fields
     }
 
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 
-    pub fn file_info(&self) -> &FileInfo {
+    pub(crate) fn file_info(&self) -> &FileInfo {
         &self.file_info
     }
 
-    pub fn has_tag(&self, tag: &str) -> bool {
-        self.tags().contains(tag)
-    }
-
-    pub fn get_field_with_name(&self, name: &str) -> Option<&DefinerField> {
+    pub(crate) fn get_field_with_name(&self, name: &str) -> Option<&DefinerField> {
         self.fields.iter().find(|a| a.name() == name)
     }
 
-    pub fn get_field_with_value(&self, value: isize) -> Option<&DefinerField> {
+    pub(crate) fn get_field_with_value(&self, value: isize) -> Option<&DefinerField> {
         let value = value as u64;
         self.fields.iter().find(|a| a.value.int == value)
     }
 
-    pub fn hex_digit_width(&self) -> usize {
+    pub(crate) fn hex_digit_width(&self) -> usize {
         let mut width = 0;
 
         for enumerator in self.fields() {
@@ -240,7 +232,7 @@ impl Definer {
         width
     }
 
-    pub fn get_set_flag_fields(&self, value: isize) -> Vec<&DefinerField> {
+    pub(crate) fn get_set_flag_fields(&self, value: isize) -> Vec<&DefinerField> {
         let mut v = Vec::new();
         let value = value as u64;
 
@@ -254,7 +246,7 @@ impl Definer {
         v
     }
 
-    pub fn sizes(&self) -> Sizes {
+    pub(crate) fn sizes(&self) -> Sizes {
         let mut s = Sizes::new();
         s.inc_both(self.basic_type.size().into());
         s

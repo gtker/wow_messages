@@ -4,7 +4,7 @@ use crate::parser::types::Endianness::Little;
 use crate::parser::types::{ArrayType, Endianness, FloatingPointType, IntegerType};
 use crate::{wireshark_printer, Object, Objects, Tags};
 
-pub fn get_wireshark_object(o: &Objects) -> WiresharkObject {
+pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
     let mut objects = WiresharkObject::new();
 
     for e in o.wireshark_containers() {
@@ -65,7 +65,7 @@ pub struct WiresharkObject {
 }
 
 impl WiresharkObject {
-    pub fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Self {
             members: vec![],
             enums: vec![],
@@ -73,35 +73,35 @@ impl WiresharkObject {
         }
     }
 
-    pub fn get(&self, name: &str) -> Option<&WiresharkMember> {
+    pub(crate) fn get(&self, name: &str) -> Option<&WiresharkMember> {
         self.members.iter().find(|a| a.name == name)
     }
 
-    pub fn get_mut(&mut self, name: &str) -> Option<&mut WiresharkMember> {
+    pub(crate) fn get_mut(&mut self, name: &str) -> Option<&mut WiresharkMember> {
         self.members.iter_mut().find(|a| a.name == name)
     }
 
-    pub fn push(&mut self, m: WiresharkMember) {
+    pub(crate) fn push(&mut self, m: WiresharkMember) {
         self.members.push(m);
     }
 
-    pub fn add_enum(&mut self, e: Definer) {
+    pub(crate) fn add_enum(&mut self, e: Definer) {
         self.enums.push(e);
     }
 
-    pub fn add_flag(&mut self, e: Definer) {
+    pub(crate) fn add_flag(&mut self, e: Definer) {
         self.flags.push(e);
     }
 
-    pub fn members(&self) -> &[WiresharkMember] {
+    pub(crate) fn members(&self) -> &[WiresharkMember] {
         &self.members
     }
 
-    pub fn enums(&self) -> &[Definer] {
+    pub(crate) fn enums(&self) -> &[Definer] {
         &self.enums
     }
 
-    pub fn flags(&self) -> &[Definer] {
+    pub(crate) fn flags(&self) -> &[Definer] {
         &self.flags
     }
 }
@@ -113,23 +113,23 @@ pub struct WiresharkMember {
 }
 
 impl WiresharkMember {
-    pub fn new(name: String, ty: WiresharkType) -> Self {
+    pub(crate) fn new(name: String, ty: WiresharkType) -> Self {
         Self { name, ty }
     }
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
-    pub fn name_without_hf_woww(&self) -> &str {
+    pub(crate) fn name_without_hf_woww(&self) -> &str {
         self.name.strip_prefix("hf_woww_").unwrap()
     }
-    pub fn ty(&self) -> &WiresharkType {
+    pub(crate) fn ty(&self) -> &WiresharkType {
         &self.ty
     }
-    pub fn ty_mut(&mut self) -> &mut WiresharkType {
+    pub(crate) fn ty_mut(&mut self) -> &mut WiresharkType {
         &mut self.ty
     }
 
-    pub fn has_enum_strings(&self) -> Option<&Definer> {
+    pub(crate) fn has_enum_strings(&self) -> Option<&Definer> {
         match self.ty() {
             WiresharkType::Enum(e) => Some(e),
             _ => None,
@@ -148,7 +148,7 @@ pub enum WiresharkType {
 }
 
 impl WiresharkType {
-    pub fn from_type(ty: &Type, tags: &Tags, o: &Objects) -> Option<Self> {
+    pub(crate) fn from_type(ty: &Type, tags: &Tags, o: &Objects) -> Option<Self> {
         Some(match ty {
             Type::Identifier { s, .. } => {
                 let e = o.get_object(s, tags);
@@ -187,7 +187,7 @@ impl WiresharkType {
         })
     }
 
-    pub fn wireshark_str(&self) -> String {
+    pub(crate) fn wireshark_str(&self) -> String {
         match self {
             WiresharkType::Integer(i) => int_type_to_wireshark_string(i),
             WiresharkType::Enum(e) | WiresharkType::Flag(e) => {
@@ -200,7 +200,7 @@ impl WiresharkType {
         }
     }
 
-    pub fn wireshark_base(&self) -> String {
+    pub(crate) fn wireshark_base(&self) -> String {
         match self {
             WiresharkType::Float(_) | WiresharkType::Bytes | WiresharkType::String => {
                 "BASE_NONE".to_string()

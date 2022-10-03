@@ -1,4 +1,4 @@
-use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
+use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::ty::Type;
 use crate::rust_printer::field_name_to_rust_name;
 use crate::DefinerType;
@@ -28,7 +28,7 @@ impl PartialEq for IfStatement {
 }
 
 impl IfStatement {
-    pub fn new(
+    pub(crate) fn new(
         conditional: Conditional,
         members: Vec<StructMember>,
         else_ifs: Vec<IfStatement>,
@@ -43,11 +43,11 @@ impl IfStatement {
         }
     }
 
-    pub fn is_not_enum(&self) -> bool {
+    pub(crate) fn is_not_enum(&self) -> bool {
         matches!(self.conditional.equations[0], Equation::NotEquals { .. })
     }
 
-    pub fn flag_get_enumerator(&self) -> String {
+    pub(crate) fn flag_get_enumerator(&self) -> String {
         assert_eq!(self.get_conditional().equations.len(), 1);
 
         match &self.get_conditional().equations[0] {
@@ -56,62 +56,38 @@ impl IfStatement {
         }
     }
 
-    pub fn flag_get_enumerator_rust_name(&self) -> String {
+    pub(crate) fn flag_get_enumerator_rust_name(&self) -> String {
         field_name_to_rust_name(&self.flag_get_enumerator())
     }
 
-    pub fn is_elseif_flag(&self) -> bool {
+    pub(crate) fn is_elseif_flag(&self) -> bool {
         match self.conditional.equations[0] {
             Equation::BitwiseAnd { .. } => !self.else_ifs().is_empty(),
             _ => false,
         }
     }
 
-    pub fn members(&self) -> &[StructMember] {
+    pub(crate) fn members(&self) -> &[StructMember] {
         &self.members
     }
 
-    pub fn members_mut(&mut self) -> &mut [StructMember] {
-        &mut self.members
-    }
-
-    pub fn member_enumerators(&self) -> Vec<&str> {
-        let mut v = Vec::new();
-
-        for eq in &self.conditional.equations {
-            match eq {
-                Equation::BitwiseAnd { value }
-                | Equation::Equals { value }
-                | Equation::NotEquals { value } => {
-                    v.push(value.as_str());
-                }
-            }
-        }
-
-        v
-    }
-
-    pub fn else_members(&self) -> &[StructMember] {
+    pub(crate) fn else_members(&self) -> &[StructMember] {
         &self.else_statement_members
     }
 
-    pub fn else_members_mut(&mut self) -> &mut [StructMember] {
-        &mut self.else_statement_members
-    }
-
-    pub fn original_ty(&self) -> &Type {
+    pub(crate) fn original_ty(&self) -> &Type {
         self.original_ty.as_ref().unwrap()
     }
 
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.conditional.variable_name
     }
 
-    pub fn set_original_ty(&mut self, original_ty: Type) {
+    pub(crate) fn set_original_ty(&mut self, original_ty: Type) {
         self.original_ty = Some(original_ty)
     }
 
-    pub fn definer_type(&self) -> DefinerType {
+    pub(crate) fn definer_type(&self) -> DefinerType {
         match self.conditional.equations[0] {
             Equation::Equals { .. } => DefinerType::Enum,
             Equation::BitwiseAnd { .. } => DefinerType::Flag,
@@ -119,22 +95,22 @@ impl IfStatement {
         }
     }
 
-    pub fn else_ifs_mut(&mut self) -> &mut [IfStatement] {
+    pub(crate) fn else_ifs_mut(&mut self) -> &mut [IfStatement] {
         &mut self.else_ifs
     }
 
-    pub fn else_ifs(&self) -> &[IfStatement] {
+    pub(crate) fn else_ifs(&self) -> &[IfStatement] {
         &self.else_ifs
     }
 
-    pub fn all_members_mut(&mut self) -> impl Iterator<Item = &mut StructMember> + '_ {
+    pub(crate) fn all_members_mut(&mut self) -> impl Iterator<Item = &mut StructMember> + '_ {
         self.members
             .iter_mut()
             .chain(self.else_ifs.iter_mut().flat_map(|a| a.members.iter_mut()))
             .chain(self.else_statement_members.iter_mut())
     }
 
-    pub fn all_members(&self) -> impl Iterator<Item = &StructMember> {
+    pub(crate) fn all_members(&self) -> impl Iterator<Item = &StructMember> {
         let else_ifs = self.else_ifs.iter().flat_map(|a| a.members());
         self.members()
             .iter()
@@ -142,24 +118,8 @@ impl IfStatement {
             .chain(&self.else_statement_members)
     }
 
-    pub fn get_conditional(&self) -> &Conditional {
+    pub(crate) fn get_conditional(&self) -> &Conditional {
         &self.conditional
-    }
-
-    pub fn get_variable_names_for_members(&self) -> Vec<&StructMemberDefinition> {
-        let mut v = Vec::new();
-
-        for m in &self.members {
-            match m {
-                StructMember::Definition(d) => {
-                    v.push(d);
-                }
-                StructMember::IfStatement(_) => {}
-                StructMember::OptionalStatement(_) => {}
-            }
-        }
-
-        v
     }
 }
 
@@ -188,15 +148,15 @@ pub struct Conditional {
 }
 
 impl Conditional {
-    pub fn variable_name(&self) -> &str {
+    pub(crate) fn variable_name(&self) -> &str {
         &self.variable_name
     }
 
-    pub fn equations(&self) -> &[Equation] {
+    pub(crate) fn equations(&self) -> &[Equation] {
         &self.equations
     }
 
-    pub fn new(conditions: &[Condition]) -> Self {
+    pub(crate) fn new(conditions: &[Condition]) -> Self {
         let variable_name = conditions[0].value.to_string();
 
         let mut equations = Vec::new();
@@ -244,7 +204,7 @@ pub struct Condition {
 }
 
 impl Condition {
-    pub fn new(value: &str, equals_value: &str, operator: Operator) -> Self {
+    pub(crate) fn new(value: &str, equals_value: &str, operator: Operator) -> Self {
         Self {
             value: value.to_string(),
             operator,

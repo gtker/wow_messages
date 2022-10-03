@@ -25,27 +25,32 @@ pub struct StructMemberDefinition {
 }
 
 impl StructMemberDefinition {
-    pub fn struct_type(&self) -> Type {
+    pub(crate) fn struct_type(&self) -> Type {
         self.struct_type.clone()
     }
 
-    pub fn used_as_size_in(&self) -> &Option<String> {
+    pub(crate) fn used_as_size_in(&self) -> &Option<String> {
         &self.used_as_size_in
     }
 
-    pub fn set_used_as_size_in(&mut self, var: String) {
+    pub(crate) fn set_used_as_size_in(&mut self, var: String) {
         self.used_as_size_in = Some(var);
     }
 
-    pub fn used_in_if(&self) -> bool {
+    pub(crate) fn used_in_if(&self) -> bool {
         self.used_in_if.unwrap()
     }
 
-    pub fn set_used_in_if(&mut self, used: bool) {
+    pub(crate) fn set_used_in_if(&mut self, used: bool) {
         self.used_in_if = Some(used);
     }
 
-    pub fn new(name: &str, struct_type: Type, value: Option<ContainerValue>, tags: Tags) -> Self {
+    pub(crate) fn new(
+        name: &str,
+        struct_type: Type,
+        value: Option<ContainerValue>,
+        tags: Tags,
+    ) -> Self {
         Self {
             name: name.to_string(),
             struct_type,
@@ -57,23 +62,23 @@ impl StructMemberDefinition {
         }
     }
 
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
 
-    pub fn ty(&self) -> &Type {
+    pub(crate) fn ty(&self) -> &Type {
         &self.struct_type
     }
 
-    pub fn value(&self) -> &Option<ContainerValue> {
+    pub(crate) fn value(&self) -> &Option<ContainerValue> {
         &self.value
     }
 
-    pub fn verified_value(&self) -> &Option<VerifiedContainerValue> {
+    pub(crate) fn verified_value(&self) -> &Option<VerifiedContainerValue> {
         &self.verified_value
     }
 
-    pub fn set_verified_value(&mut self, definers: &[Definer]) {
+    pub(crate) fn set_verified_value(&mut self, definers: &[Definer]) {
         match &self.value() {
             None => {}
             Some(v) => {
@@ -103,7 +108,7 @@ impl StructMemberDefinition {
         }
     }
 
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 }

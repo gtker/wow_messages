@@ -11,7 +11,7 @@ use std::convert::TryInto;
 use std::fmt::Write;
 use std::slice::Iter;
 
-pub fn print_docs_for_container(e: &Container, o: &Objects) -> DocWriter {
+pub(crate) fn print_docs_for_container(e: &Container, o: &Objects) -> DocWriter {
     let mut s = DocWriter::new(e.name(), e.tags());
 
     doc_printer::common(&mut s, e.tags());

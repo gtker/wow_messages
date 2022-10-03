@@ -39,7 +39,7 @@ pub enum Type {
 }
 
 impl Type {
-    pub fn str(&self) -> String {
+    pub(crate) fn str(&self) -> String {
         match self {
             Type::Integer(i) => i.str().to_string(),
             Type::CString => "CString".to_string(),
@@ -57,7 +57,7 @@ impl Type {
         }
     }
 
-    pub fn rust_str(&self) -> String {
+    pub(crate) fn rust_str(&self) -> String {
         let s = match self {
             Type::Integer(i) => i.rust_str().to_string(),
             Type::FloatingPoint(i) => i.rust_str().to_string(),
@@ -75,7 +75,7 @@ impl Type {
     }
 
     // NOTE: Definers used in if statements count if statement contents
-    pub fn sizes_parsed(
+    pub(crate) fn sizes_parsed(
         &self,
         e: &ParsedContainer,
         containers: &[ParsedContainer],
@@ -178,7 +178,7 @@ impl Type {
     }
 
     // NOTE: Definers used in if statements count if statement contents
-    pub fn sizes(&self, e: &Container, o: &Objects) -> Sizes {
+    pub(crate) fn sizes(&self, e: &Container, o: &Objects) -> Sizes {
         let mut sizes = Sizes::new();
 
         match self {
@@ -276,14 +276,7 @@ impl Type {
         sizes
     }
 
-    pub fn rust_size_of(&self) -> u8 {
-        match self {
-            Type::Integer(i) => i.size(),
-            _ => panic!("attempting to get size of complex type: '{}'", self.str()),
-        }
-    }
-
-    pub fn doc_size_of(&self, tags: &Tags, o: &Objects) -> String {
+    pub(crate) fn doc_size_of(&self, tags: &Tags, o: &Objects) -> String {
         match self {
             Type::Integer(i) => i.size().to_string(),
             Type::Guid => 8.to_string(),
@@ -310,14 +303,7 @@ impl Type {
         }
     }
 
-    pub fn rust_endian_str(&self) -> &str {
-        match self {
-            Type::Integer(i) => i.rust_endian_str(),
-            _ => panic!("endianness attempted for complex type"),
-        }
-    }
-
-    pub fn doc_endian_str(&self) -> String {
+    pub(crate) fn doc_endian_str(&self) -> String {
         match self {
             Type::Integer(i) => i.doc_endian_str().to_string(),
             Type::DateTime | Type::Guid => "Little".to_string(),
@@ -334,7 +320,7 @@ impl Type {
         }
     }
 
-    pub fn with_upcast(s: &str, upcasted: &str) -> Self {
+    pub(crate) fn with_upcast(s: &str, upcasted: &str) -> Self {
         let t = Self::from_str(s);
         match t {
             Type::Identifier { .. } => {}
@@ -360,7 +346,7 @@ impl Type {
     }
 
     #[allow(clippy::should_implement_trait)]
-    pub fn from_str(s: &str) -> Self {
+    pub(crate) fn from_str(s: &str) -> Self {
         let s = match s {
             "u8" => Self::Integer(IntegerType::U8),
             "Bool" => Self::Bool,

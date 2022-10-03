@@ -16,19 +16,19 @@ pub struct DocWriter {
 }
 
 impl DocWriter {
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
 
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 
-    pub fn inner(&self) -> &str {
+    pub(crate) fn inner(&self) -> &str {
         &self.inner
     }
 
-    pub fn new(name: &str, tags: &Tags) -> Self {
+    pub(crate) fn new(name: &str, tags: &Tags) -> Self {
         Self {
             name: name.to_string(),
             inner: String::with_capacity(8000),
@@ -37,34 +37,34 @@ impl DocWriter {
         }
     }
 
-    pub fn w(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn w(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
         self.column += s.as_ref().len();
     }
 
-    pub fn w_break_at(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn w_break_at(&mut self, s: impl AsRef<str>) {
         self.w(s);
         if self.column > 80 {
             self.newline();
         }
     }
 
-    pub fn newline(&mut self) {
+    pub(crate) fn newline(&mut self) {
         self.w("\n");
         self.column = 0;
     }
 
-    pub fn wln(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn wln(&mut self, s: impl AsRef<str>) {
         self.w(s);
         self.newline();
     }
 
-    pub fn wln_no_indent(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn wln_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
         self.newline();
     }
 
-    pub fn bytes<'a>(&mut self, bytes: impl Iterator<Item = &'a u8>) {
+    pub(crate) fn bytes<'a>(&mut self, bytes: impl Iterator<Item = &'a u8>) {
         for b in bytes {
             let text = format!("{}, ", b);
             self.w(&text);
@@ -81,7 +81,7 @@ fn create_or_append_hashmap(s: &str, path: String, files: &mut HashMap<String, S
     }
 }
 
-pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocWriter]) {
+pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocWriter]) {
     const LOGIN_DEFINER_HEADER: &str = "# Login Definers";
     const LOGIN_CONTAINER_HEADER: &str = "# Login Containers\n";
     const WORLD_DEFINER_HEADER: &str = "# World Definers\n";

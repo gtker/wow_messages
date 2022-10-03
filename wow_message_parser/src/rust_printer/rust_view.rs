@@ -1,4 +1,3 @@
-use crate::file_info::FileInfo;
 use crate::parser::types::container::Container;
 use crate::parser::types::definer::DefinerValue;
 use crate::parser::types::if_statement::{Equation, IfStatement};
@@ -6,7 +5,6 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::Tags;
-use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, IntegerType, ObjectType,
@@ -32,26 +30,20 @@ pub struct RustMember {
 }
 
 impl RustMember {
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
-    pub fn ty(&self) -> &RustType {
+    pub(crate) fn ty(&self) -> &RustType {
         &self.ty
     }
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
-    pub fn constant_sized(&self) -> bool {
+    pub(crate) fn constant_sized(&self) -> bool {
         self.sizes.is_constant().is_some()
     }
-    pub fn sizes(&self) -> Sizes {
-        self.sizes
-    }
-    pub fn original_ty(&self) -> &str {
-        &self.original_ty
-    }
 
-    pub fn all_members(&self) -> Vec<&RustMember> {
+    pub(crate) fn all_members(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
 
         v.push(self);
@@ -76,14 +68,7 @@ impl RustMember {
         v
     }
 
-    pub fn is_elseif_flag(&self) -> bool {
-        match self.ty() {
-            RustType::Flag { is_elseif, .. } | RustType::Enum { is_elseif, .. } => *is_elseif,
-            _ => false,
-        }
-    }
-
-    pub fn clear_flag_enumerator(&mut self, enumerator: &str) {
+    pub(crate) fn clear_flag_enumerator(&mut self, enumerator: &str) {
         match &mut self.ty {
             RustType::Flag { enumerators, .. } => enumerators
                 .iter_mut()
@@ -95,7 +80,7 @@ impl RustMember {
         }
     }
 
-    pub fn get_flag_enumerator(&self, enumerator: &str) -> RustEnumerator {
+    pub(crate) fn get_flag_enumerator(&self, enumerator: &str) -> RustEnumerator {
         match self.ty() {
             RustType::Flag { enumerators, .. } => {
                 let enumerator = enumerators.iter().find(|a| a.name() == enumerator).unwrap();
@@ -105,7 +90,7 @@ impl RustMember {
         }
     }
 
-    pub fn pop_flag_enumerator(&mut self, enumerator: &str) -> RustEnumerator {
+    pub(crate) fn pop_flag_enumerator(&mut self, enumerator: &str) -> RustEnumerator {
         match &mut self.ty {
             RustType::Flag { enumerators, .. } => {
                 let (index, _) = enumerators
@@ -121,7 +106,7 @@ impl RustMember {
         }
     }
 
-    pub fn size_comment(&self) -> String {
+    pub(crate) fn size_comment(&self) -> String {
         format!(" // {}: {}", self.name(), self.ty().str())
     }
 
@@ -320,7 +305,7 @@ pub struct RustEnumerator {
 }
 
 impl RustEnumerator {
-    pub fn all_members(&self) -> Vec<&RustMember> {
+    pub(crate) fn all_members(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
 
         for m in self.members() {
@@ -329,74 +314,38 @@ impl RustEnumerator {
 
         v
     }
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
-    pub fn rust_name(&self) -> &str {
+    pub(crate) fn rust_name(&self) -> &str {
         &self.rust_name
     }
-    pub fn value(&self) -> &DefinerValue {
+    pub(crate) fn value(&self) -> &DefinerValue {
         &self.value
     }
-    pub fn members(&self) -> &[RustMember] {
+    pub(crate) fn members(&self) -> &[RustMember] {
         &self.members
     }
-    pub fn members_in_struct(&self) -> Vec<&RustMember> {
+    pub(crate) fn members_in_struct(&self) -> Vec<&RustMember> {
         self.members.iter().filter(|m| m.in_rust_type).collect()
     }
-    pub fn contains_elseif(&self) -> bool {
+    pub(crate) fn contains_elseif(&self) -> bool {
         self.contains_elseif
     }
 
-    pub fn should_not_be_in_flag_types(&self) -> bool {
+    pub(crate) fn should_not_be_in_flag_types(&self) -> bool {
         self.members.is_empty() || !self.is_main_enumerator
     }
 
-    pub fn is_main_enumerator(&self) -> bool {
-        self.is_main_enumerator
-    }
-
-    pub fn has_members(&self) -> bool {
+    pub(crate) fn has_members(&self) -> bool {
         !self.members().is_empty()
     }
 
-    pub fn has_members_in_struct(&self) -> bool {
+    pub(crate) fn has_members_in_struct(&self) -> bool {
         !self.members_in_struct().is_empty()
     }
-    pub fn original_fields(&self) -> &[StructMember] {
+    pub(crate) fn original_fields(&self) -> &[StructMember] {
         &self.original_fields
-    }
-    pub fn is_constant_sized(&self) -> bool {
-        for m in &self.members {
-            match m.ty() {
-                RustType::UpdateMask
-                | RustType::AuraMask
-                | RustType::PackedGuid
-                | RustType::String
-                | RustType::CString
-                | RustType::SizedCString => return false,
-                RustType::Array {
-                    array, inner_sizes, ..
-                } => match array.size() {
-                    ArraySize::Variable(_) | ArraySize::Endless => {
-                        return false;
-                    }
-                    _ => {
-                        if inner_sizes.is_constant().is_none() {
-                            return false;
-                        }
-                    }
-                },
-                RustType::Struct { sizes, .. } => {
-                    if sizes.is_constant().is_none() {
-                        return false;
-                    }
-                }
-                _ => {}
-            }
-        }
-
-        true
     }
 }
 
@@ -442,7 +391,7 @@ pub enum RustType {
 }
 
 impl RustType {
-    pub fn str(&self) -> String {
+    pub(crate) fn str(&self) -> String {
         match self {
             RustType::Integer(i) => i.str().to_string(),
             RustType::Floating(f) => f.str().to_string(),
@@ -460,7 +409,7 @@ impl RustType {
         }
     }
 
-    pub fn rust_str(&self) -> String {
+    pub(crate) fn rust_str(&self) -> String {
         match self {
             RustType::Integer(i) => i.rust_str().to_string(),
             RustType::Floating(f) => f.rust_str().to_string(),
@@ -504,19 +453,19 @@ pub struct RustOptional {
 }
 
 impl RustOptional {
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
-    pub fn ty(&self) -> &str {
+    pub(crate) fn ty(&self) -> &str {
         &self.ty
     }
-    pub fn members(&self) -> &[RustMember] {
+    pub(crate) fn members(&self) -> &[RustMember] {
         &self.members
     }
-    pub fn members_in_struct(&self) -> Vec<&RustMember> {
+    pub(crate) fn members_in_struct(&self) -> Vec<&RustMember> {
         self.members.iter().filter(|a| a.in_rust_type).collect()
     }
-    pub fn all_members(&self) -> Vec<&RustMember> {
+    pub(crate) fn all_members(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
 
         for m in self.members() {
@@ -525,10 +474,7 @@ impl RustOptional {
 
         v
     }
-    pub fn constant_sized(&self) -> bool {
-        self.members().iter().all(|a| a.constant_sized())
-    }
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 }
@@ -539,15 +485,10 @@ pub struct RustObject {
     members: Vec<RustMember>,
     optional: Option<RustOptional>,
     sizes: Sizes,
-
-    tests: Vec<TestCase>,
-
-    tags: Tags,
-    file_info: FileInfo,
 }
 
 impl RustObject {
-    pub fn all_members(&self) -> Vec<&RustMember> {
+    pub(crate) fn all_members(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
 
         for m in self.members() {
@@ -560,31 +501,22 @@ impl RustObject {
 
         v
     }
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
-    pub fn members(&self) -> &[RustMember] {
+    pub(crate) fn members(&self) -> &[RustMember] {
         &self.members
     }
-    pub fn members_in_struct(&self) -> impl Iterator<Item = &RustMember> {
+    pub(crate) fn members_in_struct(&self) -> impl Iterator<Item = &RustMember> {
         self.members.iter().filter(|a| a.in_rust_type)
     }
-    pub fn optional(&self) -> Option<&RustOptional> {
+    pub(crate) fn optional(&self) -> Option<&RustOptional> {
         self.optional.as_ref()
     }
-    pub fn tests(&self) -> &[TestCase] {
-        &self.tests
-    }
-    pub fn tags(&self) -> &Tags {
-        &self.tags
-    }
-    pub fn file_info(&self) -> &FileInfo {
-        &self.file_info
-    }
-    pub fn constant_sized(&self) -> bool {
+    pub(crate) fn constant_sized(&self) -> bool {
         self.sizes().is_constant().is_some()
     }
-    pub fn sizes(&self) -> Sizes {
+    pub(crate) fn sizes(&self) -> Sizes {
         self.sizes
     }
 
@@ -638,37 +570,7 @@ impl RustObject {
         })
     }
 
-    pub fn get_rust_member_with_variable_name(&self, variable_name: &str) -> &RustMember {
-        fn inner<'a>(m: &'a RustMember, variable_name: &str) -> Option<&'a RustMember> {
-            match m.ty() {
-                RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
-                    for enumerator in enumerators {
-                        for member in enumerator.members() {
-                            if let Some(member) = inner(member, variable_name) {
-                                return Some(member);
-                            }
-                        }
-                    }
-                }
-                _ => {
-                    if variable_name == m.name() {
-                        return Some(m);
-                    }
-                }
-            }
-
-            None
-        }
-        for m in self.members() {
-            if let Some(m) = inner(m, variable_name) {
-                return m;
-            }
-        }
-
-        unreachable!()
-    }
-
-    pub fn rust_definers_in_global_scope(&self) -> Vec<RustDefiner> {
+    pub(crate) fn rust_definers_in_global_scope(&self) -> Vec<RustDefiner> {
         let mut v = Vec::new();
 
         for m in self.members_in_struct() {
@@ -680,7 +582,7 @@ impl RustObject {
         v
     }
 
-    pub fn rust_definers_in_enumerator(&self, enumerator_name: &str) -> Vec<RustDefiner> {
+    pub(crate) fn rust_definers_in_enumerator(&self, enumerator_name: &str) -> Vec<RustDefiner> {
         let mut v = Vec::new();
 
         fn inner(
@@ -738,7 +640,7 @@ impl RustObject {
         v
     }
 
-    pub fn rust_definers_in_namespace(&self, ty_name: &str) -> Vec<RustDefiner> {
+    pub(crate) fn rust_definers_in_namespace(&self, ty_name: &str) -> Vec<RustDefiner> {
         let rd = self.get_rust_definer(ty_name);
 
         let mut v = Vec::new();
@@ -754,7 +656,7 @@ impl RustObject {
         v
     }
 
-    pub fn get_rust_definers(&self) -> Vec<RustDefiner> {
+    pub(crate) fn get_rust_definers(&self) -> Vec<RustDefiner> {
         fn inner(m: &RustMember, v: &mut Vec<RustDefiner>, container_name: &str) {
             let rd = RustObject::get_rust_definer_from_ty(m);
 
@@ -780,7 +682,7 @@ impl RustObject {
         v
     }
 
-    pub fn rust_definer_with_variable_name_and_enumerator(
+    pub(crate) fn rust_definer_with_variable_name_and_enumerator(
         &self,
         variable_name: &str,
         enumerator_name: &str,
@@ -833,13 +735,13 @@ impl RustObject {
         unreachable!()
     }
 
-    pub fn get_rust_definer(&self, name: &str) -> RustDefiner {
+    pub(crate) fn get_rust_definer(&self, name: &str) -> RustDefiner {
         let member = self.get_complex_definer_ty(name);
 
         Self::get_rust_definer_from_ty(member).unwrap()
     }
 
-    pub fn get_complex_definer_ty(&self, name: &str) -> &RustMember {
+    pub(crate) fn get_complex_definer_ty(&self, name: &str) -> &RustMember {
         fn inner<'a>(m: &'a RustMember, name: &str) -> Option<&'a RustMember> {
             match m.ty() {
                 RustType::Enum {
@@ -893,7 +795,7 @@ pub struct RustDefiner {
 }
 
 impl RustDefiner {
-    pub fn all_members(&self) -> Vec<&RustMember> {
+    pub(crate) fn all_members(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
 
         for enumerator in self.enumerators() {
@@ -902,49 +804,40 @@ impl RustDefiner {
 
         v
     }
-    pub fn variable_name(&self) -> &str {
+    pub(crate) fn variable_name(&self) -> &str {
         self.inner().name()
     }
-    pub fn inner(&self) -> &RustMember {
+    pub(crate) fn inner(&self) -> &RustMember {
         &self.inner
     }
-    pub fn enumerators(&self) -> &[RustEnumerator] {
+    pub(crate) fn enumerators(&self) -> &[RustEnumerator] {
         &self.enumerators
     }
-    pub fn complex_flag_enumerators(&self) -> Vec<&RustEnumerator> {
+    pub(crate) fn complex_flag_enumerators(&self) -> Vec<&RustEnumerator> {
         self.enumerators
             .iter()
             .filter(|a| !a.should_not_be_in_flag_types())
             .collect()
     }
-    pub fn ty_name(&self) -> &str {
+    pub(crate) fn ty_name(&self) -> &str {
         &self.ty_name
     }
-    pub fn int_ty(&self) -> IntegerType {
+    pub(crate) fn int_ty(&self) -> IntegerType {
         self.int_ty
     }
-    pub fn is_simple(&self) -> bool {
+    pub(crate) fn is_simple(&self) -> bool {
         self.is_simple && !self.is_elseif
     }
-    pub fn is_constant_sized(&self) -> bool {
-        for enumerator in self.enumerators() {
-            if !enumerator.is_constant_sized() {
-                return false;
-            }
-        }
-
-        true
-    }
-    pub fn is_elseif(&self) -> bool {
+    pub(crate) fn is_elseif(&self) -> bool {
         self.is_elseif
     }
-    pub fn original_ty_name(&self) -> &str {
+    pub(crate) fn original_ty_name(&self) -> &str {
         &self.original_ty_name
     }
-    pub fn definer_type(&self) -> DefinerType {
+    pub(crate) fn definer_type(&self) -> DefinerType {
         self.definer_type
     }
-    pub fn get_enumerator(&self, enumerator_name: &str) -> &RustEnumerator {
+    pub(crate) fn get_enumerator(&self, enumerator_name: &str) -> &RustEnumerator {
         for enumerator in self.enumerators() {
             if enumerator.contains_elseif() {
                 match enumerator.members()[0].ty() {
@@ -967,7 +860,7 @@ impl RustDefiner {
         unreachable!()
     }
 
-    pub fn contains_enumerator(&self, enumerator_name: &str) -> bool {
+    pub(crate) fn contains_enumerator(&self, enumerator_name: &str) -> bool {
         for enumerator in self.enumerators() {
             if enumerator.contains_elseif() {
                 match enumerator.members()[0].ty() {
@@ -1076,7 +969,7 @@ fn find_subject<'a>(
     subject
 }
 
-pub fn create_if_statement(
+pub(crate) fn create_if_statement(
     statement: &IfStatement,
     struct_ty_name: &str,
     tags: &Tags,
@@ -1219,7 +1112,7 @@ pub fn create_if_statement(
     }
 }
 
-pub fn create_struct_member(
+pub(crate) fn create_struct_member(
     m: &StructMember,
     struct_ty_name: &str,
     tags: &Tags,
@@ -1449,7 +1342,7 @@ pub fn create_struct_member(
     }
 }
 
-pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
+pub(crate) fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
     let mut v = Vec::new();
     let mut optional = None;
 
@@ -1475,9 +1368,6 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
         members: v,
         optional,
         sizes: e.sizes(),
-        tests: e.tests().to_vec(),
-        tags: e.tags().clone(),
-        file_info: e.file_info().clone(),
     }
 }
 

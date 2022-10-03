@@ -39,20 +39,20 @@ pub struct Commands {
 }
 
 impl Commands {
-    pub fn new(tags: Tags) -> Self {
+    pub(crate) fn new(tags: Tags) -> Self {
         Self { tags }
     }
 
-    pub fn empty() -> Self {
+    pub(crate) fn empty() -> Self {
         Self { tags: Tags::new() }
     }
 
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 }
 
-pub fn parse_commands(t: Pair<Rule>) -> Commands {
+pub(crate) fn parse_commands(t: Pair<Rule>) -> Commands {
     let t = t.into_inner();
     let mut tags = Tags::new();
 
@@ -72,7 +72,7 @@ pub fn parse_commands(t: Pair<Rule>) -> Commands {
     Commands::new(tags)
 }
 
-pub fn parse_file(filename: &Path) -> ParsedObjects {
+pub(crate) fn parse_file(filename: &Path) -> ParsedObjects {
     let contents = read_to_string(filename).expect("unable to read file");
     let file = AuthParser::parse(Rule::file, &contents);
     let file = match file {
@@ -482,7 +482,7 @@ fn parse_if_statement(f: &mut Pairs<Rule>) -> (Vec<Condition>, Vec<StructMember>
     (conditions, members)
 }
 
-pub fn parse_enum(
+pub(crate) fn parse_enum(
     t: &mut Pairs<Rule>,
     tags: &Tags,
     file_info: FileInfo,
@@ -526,7 +526,7 @@ pub fn parse_enum(
             }
             self_value = Some(SelfValueDefinerField::new(identifier.as_str(), kvs));
         } else {
-            fields.push(DefinerField::key_value(
+            fields.push(DefinerField::new(
                 identifier.as_str(),
                 value.as_str().into(),
                 kvs,

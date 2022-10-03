@@ -13,7 +13,7 @@ pub struct TestCase {
 }
 
 impl TestCase {
-    pub fn new(
+    pub(crate) fn new(
         subject: String,
         members: Vec<TestCaseMember>,
         raw_bytes: Vec<u8>,
@@ -29,26 +29,26 @@ impl TestCase {
         }
     }
 
-    pub fn subject(&self) -> &str {
+    pub(crate) fn subject(&self) -> &str {
         &self.subject
     }
-    pub fn raw_bytes(&self) -> &[u8] {
+    pub(crate) fn raw_bytes(&self) -> &[u8] {
         &self.raw_bytes
     }
 
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 
-    pub fn file_info(&self) -> &FileInfo {
+    pub(crate) fn file_info(&self) -> &FileInfo {
         &self.file_info
     }
 
-    pub fn members(&self) -> &[TestCaseMember] {
+    pub(crate) fn members(&self) -> &[TestCaseMember] {
         &self.members
     }
 
-    pub fn get_member<'a>(t: &'a [TestCaseMember], member: &str) -> &'a TestCaseMember {
+    pub(crate) fn get_member<'a>(t: &'a [TestCaseMember], member: &str) -> &'a TestCaseMember {
         t.iter().find(|a| a.name() == member).unwrap_or_else(|| {
             panic!(
                 "variable '{}' not found in list of variables with values",
@@ -66,26 +66,19 @@ pub struct TestCaseMember {
 }
 
 impl TestCaseMember {
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.variable_name
     }
 
-    pub fn value(&self) -> &TestValue {
+    pub(crate) fn value(&self) -> &TestValue {
         &self.value
     }
 
-    pub fn float_value(&self) -> f64 {
-        match self.value() {
-            TestValue::FloatingNumber { value, .. } => *value,
-            _ => panic!(),
-        }
-    }
-
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
     }
 
-    pub fn new(name: String, value: TestValue, tags: Tags) -> Self {
+    pub(crate) fn new(name: String, value: TestValue, tags: Tags) -> Self {
         Self {
             variable_name: name,
             value,
@@ -102,17 +95,17 @@ pub struct TestUpdateMaskValue {
 }
 
 impl TestUpdateMaskValue {
-    pub fn ty(&self) -> UpdateMaskType {
+    pub(crate) fn ty(&self) -> UpdateMaskType {
         self.ty
     }
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
-    pub fn value(&self) -> &str {
+    pub(crate) fn value(&self) -> &str {
         &self.value
     }
 
-    pub fn new(ty: UpdateMaskType, name: String, value: String) -> Self {
+    pub(crate) fn new(ty: UpdateMaskType, name: String, value: String) -> Self {
         Self { ty, name, value }
     }
 }
@@ -140,25 +133,4 @@ pub enum TestValue {
     },
     ArrayOfSubObject(String, Vec<Vec<TestCaseMember>>),
     UpdateMask(Vec<TestUpdateMaskValue>),
-}
-
-impl TestValue {
-    pub fn value(&self) -> &VerifiedContainerValue {
-        match self {
-            TestValue::Number(i) => i,
-            _ => panic!(),
-        }
-    }
-
-    pub fn original_string(&self) -> &str {
-        match self {
-            TestValue::Number(i) => i.original_string(),
-            TestValue::Enum(i) => i.original_string(),
-            TestValue::FloatingNumber {
-                original_string, ..
-            } => original_string.as_str(),
-            TestValue::String(s) => s,
-            _ => panic!(),
-        }
-    }
 }

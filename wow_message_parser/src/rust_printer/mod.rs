@@ -2,11 +2,11 @@ use heck::CamelCase;
 use std::cmp::Ordering;
 use std::fmt::Write;
 
-pub use enums::{print_enum, print_enum_for_base};
-pub use flags::print_flag;
-pub use opcodes::print_login_opcodes;
-pub use opcodes::print_world_opcodes;
-pub use structs::print_struct;
+pub(crate) use enums::{print_enum, print_enum_for_base};
+pub(crate) use flags::print_flag;
+pub(crate) use opcodes::print_login_opcodes;
+pub(crate) use opcodes::print_world_opcodes;
+pub(crate) use structs::print_struct;
 
 use crate::file_info::FileInfo;
 
@@ -50,7 +50,7 @@ const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async-std\")]";
 
-pub fn get_import_from_shared(name: &str, versions: &[Version]) -> String {
+pub(crate) fn get_import_from_shared(name: &str, versions: &[Version]) -> String {
     let mut s = Writer::new(&get_import_path(versions[0]));
 
     let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
@@ -65,7 +65,7 @@ pub fn get_import_from_shared(name: &str, versions: &[Version]) -> String {
     s.inner
 }
 
-pub fn get_import_from_base(name: &str, version: Version) -> String {
+pub(crate) fn get_import_from_base(name: &str, version: Version) -> String {
     let mut s = Writer::new(&get_import_path(version));
 
     s.wln(format!(
@@ -82,7 +82,7 @@ impl Writer {
     pub(crate) const INDENTATION: &'static str = "    ";
     const METADATA: bool = true;
 
-    pub fn new(import_path: &str) -> Self {
+    pub(crate) fn new(import_path: &str) -> Self {
         Self {
             inner: String::with_capacity(4000),
             imports: String::with_capacity(4000),
@@ -92,11 +92,11 @@ impl Writer {
         }
     }
 
-    pub fn inner(&self) -> &str {
+    pub(crate) fn inner(&self) -> &str {
         &self.inner
     }
 
-    pub fn open_curly(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn open_curly(&mut self, s: impl AsRef<str>) {
         self.w(s);
         self.inner.write_str(" {").unwrap();
         self.newline();
@@ -113,7 +113,7 @@ impl Writer {
             .unwrap();
     }
 
-    pub fn new_struct(&mut self, name: impl AsRef<str>, f: impl Fn(&mut Self)) {
+    pub(crate) fn new_struct(&mut self, name: impl AsRef<str>, f: impl Fn(&mut Self)) {
         self.add_import(&name);
 
         self.open_curly(format!("pub struct {}", name.as_ref()));
@@ -123,7 +123,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn new_flag(
+    pub(crate) fn new_flag(
         &mut self,
         name: impl AsRef<str>,
         ty: impl AsRef<str>,
@@ -139,7 +139,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn new_enum(
+    pub(crate) fn new_enum(
         &mut self,
         visibility: impl AsRef<str>,
         name: impl AsRef<str>,
@@ -158,7 +158,11 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn variable_size(&mut self, name: impl AsRef<str>, variable_sized: impl Fn(&mut Self)) {
+    pub(crate) fn variable_size(
+        &mut self,
+        name: impl AsRef<str>,
+        variable_sized: impl Fn(&mut Self),
+    ) {
         self.open_curly(format!("impl {}", name.as_ref()));
         self.open_curly("pub(crate) fn size(&self) -> usize");
 
@@ -168,7 +172,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn impl_world_message(
+    pub(crate) fn impl_world_message(
         &mut self,
         type_name: impl AsRef<str>,
         opcode: u16,
@@ -203,7 +207,7 @@ impl Writer {
         self.closing_curly(); // impl Message
     }
 
-    pub fn impl_world_server_or_client_message(
+    pub(crate) fn impl_world_server_or_client_message(
         &mut self,
         type_name: impl AsRef<str>,
         container_type: ContainerType,
@@ -329,7 +333,7 @@ impl Writer {
         self.wln(format!("w.write_all(&v){postfix}", postfix = it.postfix()));
     }
 
-    pub fn write_into_vec_trait(&mut self, write_function: impl Fn(&mut Self, ImplType)) {
+    pub(crate) fn write_into_vec_trait(&mut self, write_function: impl Fn(&mut Self, ImplType)) {
         self.open_curly("fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>");
 
         write_function(self, ImplType::Std);
@@ -339,7 +343,7 @@ impl Writer {
         self.closing_curly();
     }
 
-    pub fn write_into_vec(
+    pub(crate) fn write_into_vec(
         &mut self,
         type_name: impl AsRef<str>,
         write_function: impl Fn(&mut Self, ImplType),
@@ -358,7 +362,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn impl_read_write_non_trait(
+    pub(crate) fn impl_read_write_non_trait(
         &mut self,
         type_name: impl AsRef<str>,
         error_name: impl AsRef<str>,
@@ -394,7 +398,7 @@ impl Writer {
         self.closing_curly_newline(); // impl
     }
 
-    pub fn impl_read_write_opcode(
+    pub(crate) fn impl_read_write_opcode(
         &mut self,
         type_name: impl AsRef<str>,
         error_name: impl AsRef<str>,
@@ -412,7 +416,7 @@ impl Writer {
         )
     }
 
-    pub fn impl_read_write_struct(
+    pub(crate) fn impl_read_write_struct(
         &mut self,
         type_name: impl AsRef<str>,
         read_function: impl Fn(&mut Self, ImplType),
@@ -429,7 +433,7 @@ impl Writer {
         )
     }
 
-    pub fn impl_read_and_writable_login(
+    pub(crate) fn impl_read_and_writable_login(
         &mut self,
         type_name: impl AsRef<str>,
         opcode: u16,
@@ -471,7 +475,7 @@ impl Writer {
         self.closing_curly_newline(); // impl
     }
 
-    pub fn funcn_const(
+    pub(crate) fn funcn_const(
         &mut self,
         name_and_args: impl AsRef<str>,
         return_type: impl AsRef<str>,
@@ -488,7 +492,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn funcn_pub_const(
+    pub(crate) fn funcn_pub_const(
         &mut self,
         name_and_args: impl AsRef<str>,
         return_type: impl AsRef<str>,
@@ -505,7 +509,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn funcn(
+    pub(crate) fn funcn(
         &mut self,
         name_and_args: impl AsRef<str>,
         return_type: impl AsRef<str>,
@@ -522,7 +526,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn funcn_pub(
+    pub(crate) fn funcn_pub(
         &mut self,
         name_and_args: impl AsRef<str>,
         return_type: impl AsRef<str>,
@@ -539,7 +543,12 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn impl_for(&mut self, s: impl AsRef<str>, s2: impl AsRef<str>, f: impl Fn(&mut Self)) {
+    pub(crate) fn impl_for(
+        &mut self,
+        s: impl AsRef<str>,
+        s2: impl AsRef<str>,
+        f: impl Fn(&mut Self),
+    ) {
         self.open_curly(format!("impl {} for {}", s.as_ref(), s2.as_ref()));
 
         f(self);
@@ -547,7 +556,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn bodyn(&mut self, s: impl AsRef<str>, f: impl Fn(&mut Self)) {
+    pub(crate) fn bodyn(&mut self, s: impl AsRef<str>, f: impl Fn(&mut Self)) {
         self.open_curly(s);
 
         f(self);
@@ -555,7 +564,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn body_else_with_closing(
+    pub(crate) fn body_else_with_closing(
         &mut self,
         curly_text: impl AsRef<str>,
         closing: impl AsRef<str>,
@@ -570,7 +579,7 @@ impl Writer {
         self.closing_curly_with(closing.as_ref());
     }
 
-    pub fn body_else(
+    pub(crate) fn body_else(
         &mut self,
         s: impl AsRef<str>,
         if_statement: impl Fn(&mut Self),
@@ -584,7 +593,7 @@ impl Writer {
         self.closing_curly();
     }
 
-    pub fn body(&mut self, s: impl AsRef<str>, f: impl Fn(&mut Self)) {
+    pub(crate) fn body(&mut self, s: impl AsRef<str>, f: impl Fn(&mut Self)) {
         self.open_curly(s);
 
         f(self);
@@ -592,7 +601,7 @@ impl Writer {
         self.closing_curly();
     }
 
-    pub fn body_closing_with(
+    pub(crate) fn body_closing_with(
         &mut self,
         s: impl AsRef<str>,
         f: impl Fn(&mut Self),
@@ -605,42 +614,42 @@ impl Writer {
         self.closing_curly_with(ending.as_ref());
     }
 
-    pub fn closing_curly(&mut self) {
+    pub(crate) fn closing_curly(&mut self) {
         self.dec_indent();
         self.wln("}");
     }
 
-    pub fn closing_curly_with(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn closing_curly_with(&mut self, s: impl AsRef<str>) {
         self.dec_indent();
         self.wln(format!("}}{}", s.as_ref()));
     }
 
-    pub fn closing_curly_newline(&mut self) {
+    pub(crate) fn closing_curly_newline(&mut self) {
         self.dec_indent();
         self.wln("}");
         self.newline();
     }
 
-    pub fn dec_indent(&mut self) {
+    pub(crate) fn dec_indent(&mut self) {
         if self.indentation_level == 0 {
             panic!("attempted to underflow identation level");
         }
         self.indentation_level -= 1;
     }
 
-    pub fn inc_indent(&mut self) {
+    pub(crate) fn inc_indent(&mut self) {
         if self.indentation_level == 0xff {
             panic!("attempted to overflow identation level");
         }
         self.indentation_level += 1;
     }
 
-    pub fn wln<S: AsRef<str>>(&mut self, s: S) {
+    pub(crate) fn wln<S: AsRef<str>>(&mut self, s: S) {
         self.w(s);
         self.newline();
     }
 
-    pub fn metadata_comment(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn metadata_comment(&mut self, s: impl AsRef<str>) {
         if !Self::METADATA {
             return;
         }
@@ -649,7 +658,7 @@ impl Writer {
         self.newline();
     }
 
-    pub fn docc_newline(&mut self) {
+    pub(crate) fn docc_newline(&mut self) {
         if !Self::METADATA {
             return;
         }
@@ -657,7 +666,7 @@ impl Writer {
         self.newline();
     }
 
-    pub fn docc(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn docc(&mut self, s: impl AsRef<str>) {
         if !Self::METADATA {
             return;
         }
@@ -669,7 +678,7 @@ impl Writer {
         self.newline();
     }
 
-    pub fn docc_wowm(&mut self, f: impl Fn(&mut Self), fileinfo: &FileInfo) {
+    pub(crate) fn docc_wowm(&mut self, f: impl Fn(&mut Self), fileinfo: &FileInfo) {
         if !Self::METADATA {
             return;
         }
@@ -683,10 +692,10 @@ impl Writer {
     }
 
     #[allow(unused)]
-    pub fn w_no_indent(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn w_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
     }
-    pub fn w_break_at(&mut self, s: impl AsRef<str>, break_at: usize) {
+    pub(crate) fn w_break_at(&mut self, s: impl AsRef<str>, break_at: usize) {
         if self.get_column() >= break_at {
             self.newline();
             self.w(s.as_ref());
@@ -695,16 +704,16 @@ impl Writer {
         }
     }
 
-    pub fn wln_no_indent(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn wln_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
         self.newline();
     }
 
-    pub fn newline(&mut self) {
+    pub(crate) fn newline(&mut self) {
         self.inner.write_str("\n").unwrap();
     }
 
-    pub fn w(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn w(&mut self, s: impl AsRef<str>) {
         for _ in 0..self.indentation_level {
             self.inner.write_str(Self::INDENTATION).unwrap();
         }
@@ -716,11 +725,11 @@ impl Writer {
         self.inner.len() - self.inner.rfind(|a| a == '\n').unwrap()
     }
 
-    pub fn proper_as_str(&self) -> &str {
+    pub(crate) fn proper_as_str(&self) -> &str {
         self.inner.as_str()
     }
 
-    pub fn imports(&self) -> &str {
+    pub(crate) fn imports(&self) -> &str {
         self.imports.as_str()
     }
 }
@@ -733,14 +742,14 @@ pub enum ImplType {
 }
 
 impl ImplType {
-    pub fn postfix(&self) -> &str {
+    pub(crate) fn postfix(&self) -> &str {
         match self {
             ImplType::Std => "",
             _ => ".await",
         }
     }
 
-    pub fn prefix(&self) -> &str {
+    pub(crate) fn prefix(&self) -> &str {
         match self {
             ImplType::Std => "",
             ImplType::Tokio => "tokio_",
@@ -748,14 +757,14 @@ impl ImplType {
         }
     }
 
-    pub fn func(&self) -> &str {
+    pub(crate) fn func(&self) -> &str {
         match self {
             ImplType::Std => "",
             ImplType::Tokio | ImplType::AsyncStd => "async ",
         }
     }
 
-    pub fn write(&self) -> &str {
+    pub(crate) fn write(&self) -> &str {
         match self {
             ImplType::Std => "std::io::Write",
             ImplType::Tokio => "tokio::io::AsyncWriteExt + Unpin + Send",
@@ -763,7 +772,7 @@ impl ImplType {
         }
     }
 
-    pub fn read(&self) -> &str {
+    pub(crate) fn read(&self) -> &str {
         match self {
             ImplType::Std => "std::io::Read",
             ImplType::Tokio => "tokio::io::AsyncReadExt + Unpin + Send",
@@ -771,7 +780,7 @@ impl ImplType {
         }
     }
 
-    pub fn cfg(&self) -> &str {
+    pub(crate) fn cfg(&self) -> &str {
         match self {
             ImplType::Std => CFG_SYNC,
             ImplType::Tokio => CFG_ASYNC_TOKIO,
@@ -779,7 +788,7 @@ impl ImplType {
         }
     }
 
-    pub fn test_macro(&self) -> &str {
+    pub(crate) fn test_macro(&self) -> &str {
         match self {
             ImplType::Std => "#[cfg_attr(feature = \"sync\", test)]",
             ImplType::Tokio => "#[cfg_attr(feature = \"tokio\", tokio::test)]",
@@ -787,11 +796,11 @@ impl ImplType {
         }
     }
 
-    pub fn is_async(&self) -> bool {
+    pub(crate) fn is_async(&self) -> bool {
         !matches!(self, ImplType::Std)
     }
 
-    pub fn types() -> Vec<Self> {
+    pub(crate) fn types() -> Vec<Self> {
         vec![ImplType::Std, ImplType::Tokio, ImplType::AsyncStd]
     }
 }
@@ -824,21 +833,21 @@ impl PartialOrd for Version {
 }
 
 impl Version {
-    pub fn is_world(&self) -> bool {
+    pub(crate) fn is_world(&self) -> bool {
         match self {
             Version::Login(_) => false,
             Version::World(_) => true,
         }
     }
 
-    pub fn as_world(&self) -> WorldVersion {
+    pub(crate) fn as_world(&self) -> WorldVersion {
         match self {
             Version::Login(_) => unreachable!(),
             Version::World(w) => *w,
         }
     }
 
-    pub fn as_major_world(&self) -> MajorWorldVersion {
+    pub(crate) fn as_major_world(&self) -> MajorWorldVersion {
         match self.as_world() {
             WorldVersion::Major(m) => match m {
                 1 => MajorWorldVersion::Vanilla,
@@ -868,7 +877,7 @@ impl Version {
         }
     }
 
-    pub fn to_module_case(self) -> String {
+    pub(crate) fn to_module_case(self) -> String {
         match self {
             Version::Login(l) => l.to_module_case(),
             Version::World(l) => l.to_module_case(),
@@ -896,7 +905,7 @@ pub enum MajorWorldVersion {
 }
 
 impl MajorWorldVersion {
-    pub fn encryption_path(&self) -> &'static str {
+    pub(crate) fn encryption_path(&self) -> &'static str {
         match self {
             MajorWorldVersion::Vanilla => "wow_srp::vanilla_header",
             MajorWorldVersion::BurningCrusade => "wow_srp::tbc_header",
@@ -904,11 +913,11 @@ impl MajorWorldVersion {
         }
     }
 
-    pub fn module_name(&self) -> &'static str {
+    pub(crate) fn module_name(&self) -> &'static str {
         self.feature_name()
     }
 
-    pub fn feature_name(&self) -> &'static str {
+    pub(crate) fn feature_name(&self) -> &'static str {
         match self {
             MajorWorldVersion::Vanilla => "vanilla",
             MajorWorldVersion::BurningCrusade => "tbc",
@@ -916,7 +925,7 @@ impl MajorWorldVersion {
         }
     }
 
-    pub fn wrath_or_greater(&self) -> bool {
+    pub(crate) fn wrath_or_greater(&self) -> bool {
         match self {
             MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => false,
             MajorWorldVersion::Wrath => true,
@@ -965,7 +974,7 @@ fn print_docc_description_and_comment(
     }
 }
 
-pub fn field_name_to_rust_name(s: &str) -> String {
+pub(crate) fn field_name_to_rust_name(s: &str) -> String {
     let name = s.to_camel_case();
     if name == "Self" {
         "SelfX".to_string() // Self is a reserved keyword

@@ -5,7 +5,7 @@ use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::Writer;
 use crate::rust_printer::{get_new_flag_type_name, DefinerType};
 
-pub fn print_new_types(s: &mut Writer, e: &Container) {
+pub(crate) fn print_new_types(s: &mut Writer, e: &Container) {
     for rd in e.rust_object().get_rust_definers() {
         match rd.definer_type() {
             DefinerType::Enum => {

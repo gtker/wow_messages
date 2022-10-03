@@ -67,7 +67,7 @@ fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut String) {
     }
 }
 
-pub fn print_update_mask_docs() {
+pub(crate) fn print_update_mask_docs() {
     const UPDATE_MASK_FILE: &str = "wowm_language/src/spec/update-mask.md";
     const LOOKUP_TABLE: &str = "## Lookup Table";
     let contents = read_to_string(UPDATE_MASK_FILE).unwrap();
@@ -165,7 +165,7 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
     s
 }
 
-pub fn print_update_mask() {
+pub(crate) fn print_update_mask() {
     print_update_mask_docs();
 
     let s = print_specific_update_mask(&vanilla_fields::FIELDS, MajorWorldVersion::Vanilla);
@@ -255,7 +255,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
         ),
     }
 
-    s.closing_curly_newline(); // pub fn get_
+    s.closing_curly_newline(); // pub(crate) fn get_
 }
 
 fn print_setter(s: &mut Writer, m: &MemberType) {
@@ -317,7 +317,7 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
     }
 
     s.wln("self");
-    s.closing_curly_newline(); // pub fn set_
+    s.closing_curly_newline(); // pub(crate) fn set_
 }
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
@@ -427,7 +427,7 @@ const FLOAT_TYPE: &str = "f32";
 const TWO_SHORT_TYPE: &str = "u16";
 
 impl UfType {
-    pub fn ty_str(&self) -> String {
+    pub(crate) fn ty_str(&self) -> String {
         match self {
             UfType::Guid => GUID_TYPE.to_string(),
             UfType::Int => INT_TYPE.to_string(),
@@ -444,7 +444,7 @@ impl UfType {
         }
     }
 
-    pub fn parameter_str(&self) -> String {
+    pub(crate) fn parameter_str(&self) -> String {
         format!(
             "v: {}",
             match self {
@@ -492,13 +492,13 @@ impl MemberType {
             ty: uf,
         }
     }
-    pub fn object_ty(&self) -> UpdateMaskType {
+    pub(crate) fn object_ty(&self) -> UpdateMaskType {
         self.object_ty
     }
-    pub fn name(&self) -> &'static str {
+    pub(crate) fn name(&self) -> &'static str {
         self.name
     }
-    pub fn ty(&self) -> UfType {
+    pub(crate) fn ty(&self) -> UfType {
         self.ty.clone()
     }
 }

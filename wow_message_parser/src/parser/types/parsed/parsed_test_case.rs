@@ -12,7 +12,7 @@ pub struct ParsedTestCase {
 }
 
 impl ParsedTestCase {
-    pub fn new(
+    pub(crate) fn new(
         subject: &str,
         members: Vec<ParsedTestCaseMember>,
         raw_bytes: Vec<u8>,
@@ -28,32 +28,11 @@ impl ParsedTestCase {
         }
     }
 
-    pub fn subject(&self) -> &str {
+    pub(crate) fn subject(&self) -> &str {
         &self.subject
     }
-    pub fn raw_bytes(&self) -> &[u8] {
-        &self.raw_bytes
-    }
-
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
-    }
-
-    pub fn file_info(&self) -> &FileInfo {
-        &self.file_info
-    }
-
-    pub fn members(&self) -> &[ParsedTestCaseMember] {
-        &self.members
-    }
-
-    pub fn get_member<'a>(t: &'a [ParsedTestCaseMember], member: &str) -> &'a ParsedTestCaseMember {
-        t.iter().find(|a| a.name() == member).unwrap_or_else(|| {
-            panic!(
-                "variable '{}' not found in list of variables with values",
-                member
-            )
-        })
     }
 }
 
@@ -73,26 +52,7 @@ pub struct ParsedTestCaseMember {
 }
 
 impl ParsedTestCaseMember {
-    pub fn name(&self) -> &str {
-        &self.variable_name
-    }
-
-    pub fn value(&self) -> &TestValue {
-        self.verified_value.as_ref().unwrap()
-    }
-
-    pub fn float_value(&self) -> f64 {
-        match self.value() {
-            TestValue::FloatingNumber { value, .. } => *value,
-            _ => panic!(),
-        }
-    }
-
-    pub fn tags(&self) -> &Tags {
-        &self.tags
-    }
-
-    pub fn new(name: &str, value: TestCaseValueInitial, tags: Tags) -> Self {
+    pub(crate) fn new(name: &str, value: TestCaseValueInitial, tags: Tags) -> Self {
         Self {
             variable_name: name.to_string(),
             value,

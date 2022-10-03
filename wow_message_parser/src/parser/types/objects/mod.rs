@@ -23,7 +23,7 @@ pub struct Objects {
 }
 
 impl Objects {
-    pub fn new(
+    pub(crate) fn new(
         enums: Vec<ParsedDefiner>,
         flags: Vec<ParsedDefiner>,
         structs: Vec<ParsedContainer>,
@@ -33,7 +33,7 @@ impl Objects {
         object_new(enums, flags, structs, messages, tests)
     }
 
-    pub fn try_get_definer(&self, ty_name: &str, tags: &Tags) -> Option<&Definer> {
+    pub(crate) fn try_get_definer(&self, ty_name: &str, tags: &Tags) -> Option<&Definer> {
         if let Some(d) = self
             .enums
             .iter()
@@ -53,12 +53,12 @@ impl Objects {
         None
     }
 
-    pub fn get_definer(&self, ty_name: &str, tags: &Tags) -> &Definer {
+    pub(crate) fn get_definer(&self, ty_name: &str, tags: &Tags) -> &Definer {
         self.try_get_definer(ty_name, tags)
             .unwrap_or_else(|| panic!("unable to find definer: '{}'", ty_name))
     }
 
-    pub fn get_object_type_of(&self, type_name: &str, finder_tags: &Tags) -> ObjectType {
+    pub(crate) fn get_object_type_of(&self, type_name: &str, finder_tags: &Tags) -> ObjectType {
         if self
             .enums
             .iter()
@@ -89,7 +89,7 @@ impl Objects {
         );
     }
 
-    pub fn get_object(&self, name: &str, finder_tags: &Tags) -> Object {
+    pub(crate) fn get_object(&self, name: &str, finder_tags: &Tags) -> Object {
         if let Some(e) = self
             .all_containers()
             .find(|a| a.name() == name && a.tags().fulfills_all(finder_tags))
@@ -113,7 +113,7 @@ impl Objects {
         );
     }
 
-    pub fn get_container(&self, name: &str, finder_tags: &Tags) -> &Container {
+    pub(crate) fn get_container(&self, name: &str, finder_tags: &Tags) -> &Container {
         if let Some(e) = self
             .all_containers()
             .find(|a| a.name() == name && a.tags().has_version_intersections(finder_tags))
@@ -127,7 +127,7 @@ impl Objects {
         );
     }
 
-    pub fn get_tags_of_object_fallible(
+    pub(crate) fn get_tags_of_object_fallible(
         &self,
         type_name: &str,
         finder_tags: &Tags,
@@ -158,7 +158,7 @@ impl Objects {
         None
     }
 
-    pub fn get_tags_of_object(&self, type_name: &str, finder_tags: &Tags) -> &Tags {
+    pub(crate) fn get_tags_of_object(&self, type_name: &str, finder_tags: &Tags) -> &Tags {
         if let Some(tags) = self.get_tags_of_object_fallible(type_name, finder_tags) {
             return tags;
         }
@@ -169,7 +169,7 @@ impl Objects {
         );
     }
 
-    pub fn get_main_world_versions_with_objects(&self) -> Vec<WorldVersion> {
+    pub(crate) fn get_main_world_versions_with_objects(&self) -> Vec<WorldVersion> {
         let mut v = Vec::new();
 
         for s in self.all_containers() {
@@ -191,7 +191,7 @@ impl Objects {
         v
     }
 
-    pub fn get_world_messages_with_versions_and_all(
+    pub(crate) fn get_world_messages_with_versions_and_all(
         &self,
         version_number: &WorldVersion,
     ) -> Vec<&Container> {
@@ -207,7 +207,7 @@ impl Objects {
         v
     }
 
-    pub fn get_login_versions_with_objects(&self) -> Vec<LoginVersion> {
+    pub(crate) fn get_login_versions_with_objects(&self) -> Vec<LoginVersion> {
         let mut v = Vec::new();
 
         for s in self.all_containers() {
@@ -227,7 +227,7 @@ impl Objects {
         v
     }
 
-    pub fn get_login_messages_with_versions_and_all(
+    pub(crate) fn get_login_messages_with_versions_and_all(
         &self,
         version_number: &LoginVersion,
     ) -> Vec<&Container> {
@@ -243,7 +243,7 @@ impl Objects {
         v
     }
 
-    pub fn get_size_of_complex(&self, type_name: &str) -> u64 {
+    pub(crate) fn get_size_of_complex(&self, type_name: &str) -> u64 {
         if let Some(e) = self.all_definers().find(|a| a.name() == type_name) {
             return e.ty().size() as u64;
         }
@@ -254,15 +254,15 @@ impl Objects {
         )
     }
 
-    pub fn enums(&self) -> &[Definer] {
+    pub(crate) fn enums(&self) -> &[Definer] {
         &self.enums
     }
 
-    pub fn flags(&self) -> &[Definer] {
+    pub(crate) fn flags(&self) -> &[Definer] {
         &self.flags
     }
 
-    pub fn all_objects(&self) -> impl Iterator<Item = Object> + '_ {
+    pub(crate) fn all_objects(&self) -> impl Iterator<Item = Object> + '_ {
         self.enums
             .iter()
             .map(|a| Object::Enum(a.clone()))
@@ -270,35 +270,23 @@ impl Objects {
             .chain(self.all_containers().map(|a| Object::Container(a.clone())))
     }
 
-    pub fn all_definers(&self) -> impl Iterator<Item = &Definer> {
+    pub(crate) fn all_definers(&self) -> impl Iterator<Item = &Definer> {
         self.enums.iter().chain(&self.flags)
     }
 
-    pub fn all_definers_mut(&mut self) -> impl Iterator<Item = &mut Definer> {
-        self.enums.iter_mut().chain(&mut self.flags)
-    }
-
-    pub fn all_containers(&self) -> impl Iterator<Item = &Container> {
+    pub(crate) fn all_containers(&self) -> impl Iterator<Item = &Container> {
         self.structs.iter().chain(&self.messages)
     }
 
-    pub fn all_containers_mut(&mut self) -> impl Iterator<Item = &mut Container> {
+    pub(crate) fn all_containers_mut(&mut self) -> impl Iterator<Item = &mut Container> {
         self.structs.iter_mut().chain(&mut self.messages)
     }
 
-    pub fn structs(&self) -> &[Container] {
-        &self.structs
-    }
-
-    pub fn structs_mut(&mut self) -> &mut [Container] {
-        &mut self.structs
-    }
-
-    pub fn messages(&self) -> &[Container] {
+    pub(crate) fn messages(&self) -> &[Container] {
         &self.messages
     }
 
-    pub fn wireshark_messages(&self) -> Vec<&Container> {
+    pub(crate) fn wireshark_messages(&self) -> Vec<&Container> {
         let mut v: Vec<&Container> = self
             .messages()
             .iter()
@@ -313,7 +301,7 @@ impl Objects {
         v
     }
 
-    pub fn wireshark_containers(&self) -> Vec<&Container> {
+    pub(crate) fn wireshark_containers(&self) -> Vec<&Container> {
         self.all_containers()
             .filter(|e| {
                 e.tags()
@@ -322,18 +310,14 @@ impl Objects {
             .collect()
     }
 
-    pub fn messages_mut(&mut self) -> &mut [Container] {
-        &mut self.messages
-    }
-
-    pub fn sort_members(&mut self) {
+    pub(crate) fn sort_members(&mut self) {
         self.structs.sort();
         self.messages.sort();
         self.enums.sort();
         self.flags.sort();
     }
 
-    pub fn get_tests_for_object(
+    pub(crate) fn get_tests_for_object(
         tests: &mut Vec<TestCase>,
         name: &str,
         tags: &Tags,
@@ -356,7 +340,7 @@ impl Objects {
         v
     }
 
-    pub fn check_values(&mut self) {
+    pub(crate) fn check_values(&mut self) {
         let c = self.clone();
 
         for s in self.all_containers_mut() {
@@ -423,7 +407,7 @@ version 2: {:#?} in {} line {}",
         }
     }
 
-    pub fn contains_value_in_type(&self, variable_name: &str, value_name: &str) {
+    pub(crate) fn contains_value_in_type(&self, variable_name: &str, value_name: &str) {
         let enums = self.all_definers().find(|a| a.name() == variable_name);
         match enums {
             None => {}
@@ -442,7 +426,12 @@ version 2: {:#?} in {} line {}",
         );
     }
 
-    pub fn contains_complex_type(&self, variable_name: &str, tags: &Tags, struct_name: &str) {
+    pub(crate) fn contains_complex_type(
+        &self,
+        variable_name: &str,
+        tags: &Tags,
+        struct_name: &str,
+    ) {
         for e in self.all_definers() {
             if e.name() == variable_name && e.tags().fulfills_all(tags) {
                 return;
@@ -463,30 +452,6 @@ version 2: {:#?} in {} line {}",
             tags.versions()
         );
     }
-
-    pub fn get_definer_field_value(
-        &self,
-        definer_name: &str,
-        field_name: &str,
-        tags: &Tags,
-    ) -> u64 {
-        if let Some(e) = self
-            .all_definers()
-            .find(|a| a.name() == definer_name && a.tags().has_version_intersections(tags))
-        {
-            for field in e.fields() {
-                if field.name() == field_name {
-                    return field.value().int();
-                }
-            }
-        }
-
-        panic!(
-            "field not found: '{field_name}' in definer: '{definer_name}'",
-            field_name = field_name,
-            definer_name = definer_name
-        )
-    }
 }
 
 #[derive(Debug, Clone)]
@@ -498,7 +463,7 @@ pub enum Object {
 }
 
 impl Object {
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         match self {
             Object::Container(e) => e.tags(),
             Object::Enum(e) => e.tags(),
@@ -506,7 +471,7 @@ impl Object {
         }
     }
 
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         match self {
             Object::Container(e) => e.name(),
             Object::Enum(e) => e.name(),
@@ -514,7 +479,7 @@ impl Object {
         }
     }
 
-    pub fn sizes(&self) -> Sizes {
+    pub(crate) fn sizes(&self) -> Sizes {
         match self {
             Object::Container(e) => e.sizes(),
             Object::Enum(e) | Object::Flag(e) => e.sizes(),

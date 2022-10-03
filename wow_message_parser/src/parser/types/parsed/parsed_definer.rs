@@ -2,7 +2,6 @@ use crate::file_info::FileInfo;
 use crate::parser::types::definer::{DefinerField, SelfValueDefinerField};
 use crate::parser::types::IntegerType;
 use crate::{DefinerType, Tags};
-use std::collections::HashMap;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct ParsedDefiner {
@@ -15,7 +14,7 @@ pub struct ParsedDefiner {
     pub file_info: FileInfo,
 }
 impl ParsedDefiner {
-    pub fn new(
+    pub(crate) fn new(
         name: &str,
         definer_ty: DefinerType,
         fields: Vec<DefinerField>,
@@ -35,34 +34,11 @@ impl ParsedDefiner {
         }
     }
 
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
 
-    pub fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &Tags {
         &self.tags
-    }
-
-    pub fn file_info(&self) -> &FileInfo {
-        &self.file_info
-    }
-
-    pub fn self_check(&self) {
-        let mut h = HashMap::new();
-
-        for field in &self.fields {
-            if let Some(other) = h.get(&field.value().int()) {
-                panic!(
-                    "Definer '{}' already has field with value '{}' ('{}'), '{}' must not overlap. {:?}",
-                    self.name(),
-                    field.value().int(),
-                    other,
-                    field.name(),
-                    self.file_info()
-                )
-            }
-
-            h.insert(field.value().int(), field.name().to_string());
-        }
     }
 }

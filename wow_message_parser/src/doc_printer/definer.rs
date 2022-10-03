@@ -21,7 +21,7 @@ fn definer_common(s: &mut DocWriter, tags: &Tags, fileinfo: &FileInfo, ty: &str,
     s.wln("```");
 }
 
-pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
+pub(crate) fn print_docs_for_enum(e: &Definer) -> DocWriter {
     let mut s = DocWriter::new(e.name(), e.tags());
 
     definer_common(&mut s, e.tags(), e.file_info(), "enum", e);
@@ -41,7 +41,7 @@ pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
     s
 }
 
-pub fn print_docs_for_flag(e: &Definer) -> DocWriter {
+pub(crate) fn print_docs_for_flag(e: &Definer) -> DocWriter {
     let mut s = DocWriter::new(e.name(), e.tags());
 
     definer_common(&mut s, e.tags(), e.file_info(), "flag", e);

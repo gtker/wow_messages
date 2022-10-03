@@ -12,7 +12,7 @@ use crate::CONTAINER_SELF_SIZE_FIELD;
 pub mod print_read;
 pub mod print_write;
 
-pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
+pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_world_message_headers_and_constants(s, e);
 
     match e.container_type() {
@@ -117,7 +117,7 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
     }
 }
 
-pub fn print_constant_member(
+pub(crate) fn print_constant_member(
     s: &mut Writer,
     name: &str,
     ty: &Type,
@@ -145,7 +145,7 @@ pub fn print_constant_member(
     ));
 }
 
-pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
+pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
     let str = match m.ty() {
         RustType::Bool => format!("{}", BOOL_SIZE),
         RustType::Integer(i) => i.size().to_string(),
@@ -258,7 +258,7 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
     s.wln_no_indent(m.size_comment());
 }
 
-pub fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
+pub(crate) fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
     if !r.constant_sized() {
         s.variable_size(r.name(), |s| {
             for (i, m) in r.members().iter().enumerate() {

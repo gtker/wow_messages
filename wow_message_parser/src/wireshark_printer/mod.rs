@@ -14,7 +14,7 @@ use heck::{ShoutySnakeCase, SnakeCase, TitleCase};
 use std::fs::read_to_string;
 use std::path::Path;
 
-pub fn print_wireshark(o: &Objects) {
+pub(crate) fn print_wireshark(o: &Objects) {
     let w = types::get_wireshark_object(o);
     let imports = print_int_declarations(&w);
     let enums = print_enums(&w);

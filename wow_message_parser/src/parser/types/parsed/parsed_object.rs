@@ -14,7 +14,7 @@ pub struct ParsedObjects {
 }
 
 impl ParsedObjects {
-    pub fn empty() -> Self {
+    pub(crate) fn empty() -> Self {
         Self {
             enums: vec![],
             flags: vec![],
@@ -24,7 +24,7 @@ impl ParsedObjects {
         }
     }
 
-    pub fn new(
+    pub(crate) fn new(
         enums: Vec<ParsedDefiner>,
         flags: Vec<ParsedDefiner>,
         structs: Vec<ParsedContainer>,
@@ -40,7 +40,7 @@ impl ParsedObjects {
         }
     }
 
-    pub fn add_vecs(&mut self, mut c: Self) {
+    pub(crate) fn add_vecs(&mut self, mut c: Self) {
         self.enums.append(&mut c.enums);
         self.flags.append(&mut c.flags);
         self.structs.append(&mut c.structs);
@@ -48,7 +48,7 @@ impl ParsedObjects {
         self.tests.append(&mut c.tests);
     }
 
-    pub fn to_objects(self) -> Objects {
+    pub(crate) fn to_objects(self) -> Objects {
         Objects::new(
             self.enums,
             self.flags,
@@ -59,7 +59,7 @@ impl ParsedObjects {
     }
 }
 
-pub fn get_definer_objects_used_in(
+pub(crate) fn get_definer_objects_used_in(
     messages: &[ParsedContainer],
     structs: &[ParsedContainer],
     e: &ParsedDefiner,

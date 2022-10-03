@@ -3,7 +3,7 @@ use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view
 use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::Writer;
 
-pub fn print_optional(s: &mut Writer, optional: &RustOptional) {
+pub(crate) fn print_optional(s: &mut Writer, optional: &RustOptional) {
     print_declaration(s, optional);
 
     print_impls(s, optional);

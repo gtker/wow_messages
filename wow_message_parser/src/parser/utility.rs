@@ -1,4 +1,4 @@
-pub fn parse_value(s: &str) -> Option<u64> {
+pub(crate) fn parse_value(s: &str) -> Option<u64> {
     if s.starts_with("0x") {
         let stripped = s.strip_prefix("0x").unwrap();
         return Some(u64::from_str_radix(stripped, 16).unwrap());

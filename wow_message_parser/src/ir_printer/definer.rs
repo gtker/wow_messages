@@ -7,7 +7,7 @@ use core::convert::From;
 use core::option::Option;
 use serde::Serialize;
 
-pub fn definers_to_ir(definers: &[Definer]) -> Vec<IrDefiner> {
+pub(crate) fn definers_to_ir(definers: &[Definer]) -> Vec<IrDefiner> {
     definers.iter().map(definer_to_ir).collect()
 }
 
@@ -139,7 +139,7 @@ pub struct IrDefiner {
 }
 
 impl IrDefiner {
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
 }

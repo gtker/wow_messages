@@ -38,7 +38,7 @@ impl Data {
     }
 }
 
-pub fn print_message_stats(o: &Objects) {
+pub(crate) fn print_message_stats(o: &Objects) {
     stats_for(
         WorldVersion::Minor(1, 12).into(),
         vanilla_messages::DATA.to_vec(),

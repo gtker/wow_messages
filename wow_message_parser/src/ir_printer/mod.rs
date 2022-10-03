@@ -210,7 +210,7 @@ impl IrObjects {
     }
 }
 
-pub fn write_intermediate_representation(o: &Objects) {
+pub(crate) fn write_intermediate_representation(o: &Objects) {
     const IR_PATH: &str = "intermediate_representation.json";
 
     let o = IrObjects::from_regular_objects(o);

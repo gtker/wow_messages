@@ -12,7 +12,7 @@ use crate::parser::types::{
 use crate::rust_printer::UpdateMaskType;
 use serde::Serialize;
 
-pub fn containers_to_ir(containers: &[&Container]) -> Vec<IrContainer> {
+pub(crate) fn containers_to_ir(containers: &[&Container]) -> Vec<IrContainer> {
     containers.iter().map(|a| container_to_ir(a)).collect()
 }
 
@@ -81,7 +81,7 @@ pub struct IrContainer {
 }
 
 impl IrContainer {
-    pub fn name(&self) -> &str {
+    pub(crate) fn name(&self) -> &str {
         &self.name
     }
 }

@@ -77,8 +77,7 @@ fn struct_with_all_built_in_types() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "StructWithAllBuiltInTypes")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -91,8 +90,7 @@ fn simple_clogin() {
     let o = get_all_impl_items();
 
     let d = o
-        .messages()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleClogin")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -105,8 +103,7 @@ fn simple_slogin() {
     let o = get_all_impl_items();
 
     let d = o
-        .messages()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleSlogin")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -119,8 +116,7 @@ fn simple_smsg() {
     let o = get_all_impl_items();
 
     let d = o
-        .messages()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleSmsg")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -133,8 +129,7 @@ fn simple_cmsg() {
     let o = get_all_impl_items();
 
     let d = o
-        .messages()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleCmsg")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -147,8 +142,7 @@ fn simple_msg() {
     let o = get_all_impl_items();
 
     let d = o
-        .messages()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleMsg")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -161,8 +155,7 @@ fn message_with_complex_types() {
     let o = get_all_impl_items();
 
     let d = o
-        .messages()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "MessageWithComplexTypes")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -174,7 +167,7 @@ fn message_with_complex_types() {
 fn arrays() {
     let o = get_all_impl_items();
 
-    let d = o.structs().iter().find(|a| a.name() == "Arrays").unwrap();
+    let d = o.all_containers().find(|a| a.name() == "Arrays").unwrap();
     let s = print_struct(d, &o, VERSION);
 
     tcheck(&s, "arrays");
@@ -185,8 +178,7 @@ fn simple_if_enum() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleIfEnum")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -199,8 +191,7 @@ fn double_variant_enum() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "DoubleVariantEnum")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -213,8 +204,7 @@ fn simple_if_flag() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleIfFlag")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -227,8 +217,7 @@ fn simple_if_enum_else() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleIfEnumElse")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -241,8 +230,7 @@ fn simple_if_enum_if_else() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleIfEnumIfElse")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -255,8 +243,7 @@ fn packed_guid_and_guid() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "PackedGuidAndGuid")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -269,8 +256,7 @@ fn custom_masks() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "CustomMasks")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -283,8 +269,7 @@ fn if_edge_cases() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "IfEdgeCases")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -296,7 +281,7 @@ fn if_edge_cases() {
 fn optional() {
     let o = get_all_impl_items();
 
-    let d = o.structs().iter().find(|a| a.name() == "Optional").unwrap();
+    let d = o.all_containers().find(|a| a.name() == "Optional").unwrap();
     let s = print_struct(d, &o, VERSION);
 
     tcheck(&s, "optional");
@@ -307,8 +292,7 @@ fn simple_not_if() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleIfEnumNot")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -321,8 +305,7 @@ fn not_if_else() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SimpleIfNotEnumElse")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -335,8 +318,7 @@ fn nested_not_if() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "NestedNotIf")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -349,8 +331,7 @@ fn enum_outside_of_if() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "EnumOutsideOfIf")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -363,8 +344,7 @@ fn cmsg_test_endless_u8() {
     let o = get_all_impl_items();
 
     let d = o
-        .messages()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "CMSG_TEST_ENDLESS_U8")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -377,8 +357,7 @@ fn cmsg_test_optional() {
     let o = get_all_impl_items();
 
     let d = o
-        .messages()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "CMSG_TEST_OPTIONAL")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -391,8 +370,7 @@ fn flag_if_else_if() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "FlagIfElseIf")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -405,8 +383,7 @@ fn enum_if_else_if_nested() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "EnumIfElseIfNested")
         .unwrap();
     let s = print_struct(d, &o, VERSION);
@@ -419,8 +396,7 @@ fn sized_cstring() {
     let o = get_all_impl_items();
 
     let d = o
-        .structs()
-        .iter()
+        .all_containers()
         .find(|a| a.name() == "SizedCString")
         .unwrap();
     let s = print_struct(d, &o, VERSION);

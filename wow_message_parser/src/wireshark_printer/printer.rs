@@ -11,7 +11,7 @@ use crate::wireshark_printer::{
 };
 use crate::{Container, Object, Objects, Tags};
 
-pub fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
+pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
     let mut s = Writer::new("");
     s.inc_indent();
 
@@ -458,7 +458,7 @@ fn print_identifier(
     }
 }
 
-pub fn print_register_info(w: &WiresharkObject) -> Writer {
+pub(crate) fn print_register_info(w: &WiresharkObject) -> Writer {
     let mut s = Writer::new("");
     s.inc_indent();
 
@@ -496,7 +496,7 @@ pub fn print_register_info(w: &WiresharkObject) -> Writer {
     s
 }
 
-pub fn print_int_declarations(w: &WiresharkObject) -> Writer {
+pub(crate) fn print_int_declarations(w: &WiresharkObject) -> Writer {
     let mut s = Writer::new("");
 
     for m in w.members() {
@@ -506,7 +506,7 @@ pub fn print_int_declarations(w: &WiresharkObject) -> Writer {
     s
 }
 
-pub fn print_enums(w: &WiresharkObject) -> Writer {
+pub(crate) fn print_enums(w: &WiresharkObject) -> Writer {
     let mut s = Writer::new("");
 
     for e in w.enums() {

@@ -13,7 +13,7 @@ struct WowmWriter {
 }
 
 impl WowmWriter {
-    pub fn new(prefix: &str) -> Self {
+    pub(crate) fn new(prefix: &str) -> Self {
         Self {
             inner: String::with_capacity(4000),
             prefix: prefix.to_string(),
@@ -21,7 +21,7 @@ impl WowmWriter {
         }
     }
 
-    pub fn w(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn w(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(self.prefix.as_str()).unwrap();
 
         for _ in 0..self.indentation {
@@ -31,34 +31,34 @@ impl WowmWriter {
         self.inner.write_str(s.as_ref()).unwrap();
     }
 
-    pub fn newline(&mut self) {
+    pub(crate) fn newline(&mut self) {
         self.inner.write_str("\n").unwrap();
     }
 
-    pub fn wln(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn wln(&mut self, s: impl AsRef<str>) {
         self.w(s);
         self.newline();
     }
 
-    pub fn inc(&mut self) {
+    pub(crate) fn inc(&mut self) {
         assert_ne!(self.indentation, 0xFF);
 
         self.indentation += 1;
     }
 
-    pub fn dec(&mut self) {
+    pub(crate) fn dec(&mut self) {
         assert_ne!(self.indentation, 0);
 
         self.indentation -= 1;
     }
 
-    pub fn wln_no_indent(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn wln_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
         self.newline();
     }
 }
 
-pub fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str) -> String {
+pub(crate) fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str) -> String {
     let mut s = WowmWriter::new(prefix);
     s.wln(&format!(
         "{kind} {name} : {ty} {{",
@@ -89,7 +89,7 @@ pub fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str) -> Str
     s.inner
 }
 
-pub fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String {
+pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String {
     let mut s = WowmWriter::new(prefix);
 
     s.wln(format!(
