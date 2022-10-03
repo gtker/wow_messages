@@ -43,6 +43,22 @@ impl IfStatement {
         }
     }
 
+    pub(crate) fn all_fields(
+        conditional: Conditional,
+        members: Vec<StructMember>,
+        else_ifs: Vec<IfStatement>,
+        else_statement_members: Vec<StructMember>,
+        original_ty: Option<Type>,
+    ) -> Self {
+        Self {
+            conditional,
+            members,
+            else_ifs,
+            else_statement_members,
+            original_ty,
+        }
+    }
+
     pub(crate) fn is_not_enum(&self) -> bool {
         matches!(self.conditional.equations[0], Equation::NotEquals { .. })
     }

@@ -1,30 +1,31 @@
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::IfStatement;
 use crate::parser::types::objects::conversion::get_definer;
-use crate::parser::types::optional::OptionalStatement;
+use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
+use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ContainerValue, VerifiedContainerValue};
 use crate::{Tags, CONTAINER_SELF_SIZE_FIELD};
 
 #[derive(Debug, Clone, Eq, PartialEq)]
-pub enum StructMember {
-    Definition(StructMemberDefinition),
-    IfStatement(IfStatement),
-    OptionalStatement(OptionalStatement),
+pub enum ParsedStructMember {
+    Definition(ParsedStructMemberDefinition),
+    IfStatement(ParsedIfStatement),
+    OptionalStatement(ParsedOptionalStatement),
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]
-pub struct StructMemberDefinition {
-    name: String,
-    struct_type: Type,
-    value: Option<ContainerValue>,
-    verified_value: Option<VerifiedContainerValue>,
+pub struct ParsedStructMemberDefinition {
+    pub name: String,
+    pub struct_type: Type,
+    pub value: Option<ContainerValue>,
+    pub verified_value: Option<VerifiedContainerValue>,
     pub used_as_size_in: Option<String>,
-    used_in_if: Option<bool>,
-    tags: Tags,
+    pub used_in_if: Option<bool>,
+    pub tags: Tags,
 }
 
-impl StructMemberDefinition {
+impl ParsedStructMemberDefinition {
     pub(crate) fn struct_type(&self) -> Type {
         self.struct_type.clone()
     }
@@ -58,27 +59,6 @@ impl StructMemberDefinition {
             verified_value: None,
             used_as_size_in: None,
             used_in_if: None,
-            tags,
-        }
-    }
-
-    pub(crate) fn all_fields(
-        name: String,
-        struct_type: Type,
-        value: Option<ContainerValue>,
-        verified_value: Option<VerifiedContainerValue>,
-        used_as_size_in: Option<String>,
-        used_in_if: Option<bool>,
-
-        tags: Tags,
-    ) -> Self {
-        Self {
-            name,
-            struct_type,
-            value,
-            verified_value,
-            used_as_size_in,
-            used_in_if,
             tags,
         }
     }

@@ -10,6 +10,11 @@ use types::definer::DefinerField;
 use types::tags::{Tag, Tags};
 
 use crate::file_info::FileInfo;
+use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
+use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
+use crate::parser::types::parsed::parsed_struct_member::{
+    ParsedStructMember, ParsedStructMemberDefinition,
+};
 use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
@@ -17,12 +22,10 @@ use crate::rust_printer::DefinerType;
 use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD};
 use types::container::ContainerType;
 use types::definer::SelfValueDefinerField;
-use types::if_statement::{Condition, Conditional, IfStatement};
-use types::optional::OptionalStatement;
+use types::if_statement::{Condition, Conditional};
 use types::parsed::parsed_container::ParsedContainer;
 use types::parsed::parsed_definer::ParsedDefiner;
 use types::parsed::parsed_test_case::{ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial};
-use types::struct_member::{StructMember, StructMemberDefinition};
 use types::ty::Type;
 
 pub mod stats;
@@ -312,8 +315,8 @@ fn parse_struct(
     ParsedContainer::new(identifier, members, kvs, container_type, file_info)
 }
 
-fn unimplemented_member() -> StructMember {
-    StructMember::Definition(StructMemberDefinition::new(
+fn unimplemented_member() -> ParsedStructMember {
+    ParsedStructMember::Definition(ParsedStructMemberDefinition::new(
         "unimplemented",
         Type::Array(Array::new_unimplemented()),
         None,
@@ -321,7 +324,7 @@ fn unimplemented_member() -> StructMember {
     ))
 }
 
-fn parse_struct_member(mut t: Pair<Rule>) -> StructMember {
+fn parse_struct_member(mut t: Pair<Rule>) -> ParsedStructMember {
     if t.as_rule() == Rule::container_member {
         t = t.into_inner().next().unwrap();
     }
@@ -378,9 +381,10 @@ fn parse_struct_member(mut t: Pair<Rule>) -> StructMember {
                 .find(|a| a.as_rule() == Rule::identifier)
                 .unwrap();
 
-            let s = StructMemberDefinition::new(identifier.as_str(), container_type, value, kvs);
+            let s =
+                ParsedStructMemberDefinition::new(identifier.as_str(), container_type, value, kvs);
 
-            StructMember::Definition(s)
+            ParsedStructMember::Definition(s)
         }
         Rule::if_statement => {
             let mut f = t.into_inner();
@@ -391,7 +395,7 @@ fn parse_struct_member(mut t: Pair<Rule>) -> StructMember {
             let mut else_ifs = Vec::new();
             for statement in else_if_statement {
                 let (conditions, members) = parse_if_statement(&mut statement.into_inner());
-                else_ifs.push(IfStatement::new(
+                else_ifs.push(ParsedIfStatement::new(
                     Conditional::new(&conditions),
                     members,
                     vec![],
@@ -415,7 +419,7 @@ fn parse_struct_member(mut t: Pair<Rule>) -> StructMember {
             };
 
             let conditional = Conditional::new(&conditions);
-            StructMember::IfStatement(IfStatement::new(
+            ParsedStructMember::IfStatement(ParsedIfStatement::new(
                 conditional,
                 members,
                 else_ifs,
@@ -433,7 +437,7 @@ fn parse_struct_member(mut t: Pair<Rule>) -> StructMember {
                 v.push(parse_struct_member(member));
             }
 
-            StructMember::OptionalStatement(OptionalStatement::new(name, v))
+            ParsedStructMember::OptionalStatement(ParsedOptionalStatement::new(name, v))
         }
         p => {
             unreachable!("invalid member for struct: {:#?}", p)
@@ -441,7 +445,7 @@ fn parse_struct_member(mut t: Pair<Rule>) -> StructMember {
     }
 }
 
-fn parse_if_statement(f: &mut Pairs<Rule>) -> (Vec<Condition>, Vec<StructMember>) {
+fn parse_if_statement(f: &mut Pairs<Rule>) -> (Vec<Condition>, Vec<ParsedStructMember>) {
     let conditionals: Vec<Pair<Rule>> = f
         .clone()
         .filter(|a| a.as_rule() == Rule::if_statement_conditional)

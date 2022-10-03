@@ -1,11 +1,14 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::container::{
-    check_if_statement_operators, get_tests_for_object,
+    check_if_statement_operators, get_tests_for_object, verify_and_set_members,
 };
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_object::get_definer_objects_used_in;
+use crate::parser::types::parsed::parsed_struct_member::{
+    ParsedStructMember, ParsedStructMemberDefinition,
+};
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::TestCase;
@@ -31,8 +34,8 @@ pub(crate) fn object_new(
 
     let mut tests = container::parsed_test_case_to_test_case(tests, &containers, &enums, &flags);
 
-    let structs = parsed_container_to_container(structs, &mut tests, &containers, &definers);
-    let messages = parsed_container_to_container(messages, &mut tests, &containers, &definers);
+    let structs = parsed_containers_to_container(structs, &mut tests, &containers, &definers);
+    let messages = parsed_containers_to_container(messages, &mut tests, &containers, &definers);
 
     let mut o = Objects {
         enums,
@@ -45,7 +48,41 @@ pub(crate) fn object_new(
 
     o
 }
+
 pub(crate) fn parsed_container_to_container(
+    mut p: ParsedContainer,
+    tests: &mut Vec<TestCase>,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+) -> Container {
+    let t = get_tests_for_object(tests, p.name(), p.tags());
+
+    let sizes = p.create_sizes(containers, definers);
+
+    let only_has_io_error = p.recursive_only_has_io_errors(containers, definers);
+
+    check_if_statement_operators(&p, definers);
+
+    verify_and_set_members(&mut p.members, &p.tags, containers, definers);
+
+    let members = container::parsed_members_to_members(p.members.clone());
+
+    let rust_object_view = create_rust_object(&p, &members, tests, containers, definers);
+
+    Container::new(
+        p.name,
+        members,
+        p.tags,
+        p.object_type,
+        p.file_info,
+        t,
+        sizes,
+        only_has_io_error,
+        rust_object_view,
+    )
+}
+
+pub(crate) fn parsed_containers_to_container(
     parsed: Vec<ParsedContainer>,
     tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
@@ -54,28 +91,8 @@ pub(crate) fn parsed_container_to_container(
     let mut v = Vec::with_capacity(parsed.len());
 
     for mut p in parsed {
-        let tests = get_tests_for_object(tests, p.name(), p.tags());
-
-        let sizes = p.create_sizes(containers, definers);
-
-        let only_has_io_error = p.recursive_only_has_io_errors(containers, definers);
-
-        check_if_statement_operators(&p, definers);
-
-        p.members = container::parsed_members_to_members(p.members, &p.tags, containers, definers);
-
-        let rust_object_view = create_rust_object(&p, containers, definers);
-
-        v.push(Container::new(
-            p.name,
-            p.members,
-            p.tags,
-            p.object_type,
-            p.file_info,
-            tests,
-            sizes,
-            only_has_io_error,
-            rust_object_view,
+        v.push(parsed_container_to_container(
+            p, tests, containers, definers,
         ));
     }
 
@@ -128,19 +145,19 @@ pub(crate) fn get_definer<'a>(
 }
 
 pub(crate) fn all_definitions_mut(
-    members: &mut [StructMember],
-) -> Vec<&mut StructMemberDefinition> {
+    members: &mut [ParsedStructMember],
+) -> Vec<&mut ParsedStructMemberDefinition> {
     let mut v = Vec::new();
 
-    fn inner<'a>(m: &'a mut StructMember, v: &mut Vec<&'a mut StructMemberDefinition>) {
+    fn inner<'a>(m: &'a mut ParsedStructMember, v: &mut Vec<&'a mut ParsedStructMemberDefinition>) {
         match m {
-            StructMember::Definition(d) => v.push(d),
-            StructMember::IfStatement(statement) => {
+            ParsedStructMember::Definition(d) => v.push(d),
+            ParsedStructMember::IfStatement(statement) => {
                 for m in statement.all_members_mut() {
                     inner(m, v);
                 }
             }
-            StructMember::OptionalStatement(optional) => {
+            ParsedStructMember::OptionalStatement(optional) => {
                 for m in optional.members_mut() {
                     inner(m, v);
                 }
@@ -155,18 +172,20 @@ pub(crate) fn all_definitions_mut(
     v
 }
 
-pub(crate) fn all_definitions(members: &[StructMember]) -> Vec<&StructMemberDefinition> {
+pub(crate) fn all_definitions(
+    members: &[ParsedStructMember],
+) -> Vec<&ParsedStructMemberDefinition> {
     let mut v = Vec::new();
 
-    fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
+    fn inner<'a>(m: &'a ParsedStructMember, v: &mut Vec<&'a ParsedStructMemberDefinition>) {
         match m {
-            StructMember::Definition(d) => v.push(d),
-            StructMember::IfStatement(statement) => {
+            ParsedStructMember::Definition(d) => v.push(d),
+            ParsedStructMember::IfStatement(statement) => {
                 for m in statement.all_members() {
                     inner(m, v);
                 }
             }
-            StructMember::OptionalStatement(optional) => {
+            ParsedStructMember::OptionalStatement(optional) => {
                 for m in optional.members() {
                     inner(m, v);
                 }

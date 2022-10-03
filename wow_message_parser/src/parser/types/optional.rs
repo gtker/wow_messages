@@ -23,6 +23,14 @@ impl OptionalStatement {
         }
     }
 
+    pub(crate) fn all_fields(name: String, members: Vec<StructMember>, tags: Tags) -> Self {
+        Self {
+            name,
+            members,
+            tags,
+        }
+    }
+
     pub(crate) fn name(&self) -> &str {
         &self.name
     }

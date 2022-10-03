@@ -1,10 +1,14 @@
 use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
-use crate::parser::types::objects::conversion::{get_container, get_definer};
+use crate::parser::types::objects::conversion::{
+    get_container, get_definer, parsed_container_to_container,
+};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
+use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::Tags;
+use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, FloatingPointType, IntegerType};
 use crate::rust_printer::{
@@ -971,6 +975,7 @@ pub(crate) fn create_if_statement(
     statement: &IfStatement,
     struct_ty_name: &str,
     tags: &Tags,
+    tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
     definers: &[Definer],
     e: &ParsedContainer,
@@ -1000,6 +1005,7 @@ pub(crate) fn create_if_statement(
             struct_ty_name,
             tags,
             e,
+            tests,
             containers,
             definers,
             &mut main_enumerator_members,
@@ -1018,6 +1024,7 @@ pub(crate) fn create_if_statement(
             struct_ty_name,
             tags,
             e,
+            tests,
             containers,
             definers,
             &mut else_enumerator_members,
@@ -1081,6 +1088,7 @@ pub(crate) fn create_if_statement(
                     struct_ty_name,
                     tags,
                     e,
+                    tests,
                     containers,
                     definers,
                     &mut else_if_enumerator_members,
@@ -1119,6 +1127,7 @@ pub(crate) fn create_struct_member(
     struct_ty_name: &str,
     tags: &Tags,
     e: &ParsedContainer,
+    tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
     definers: &[Definer],
     current_scope: &mut Vec<RustMember>,
@@ -1191,7 +1200,11 @@ pub(crate) fn create_struct_member(
                         }
                     };
 
-                    let inner_object = complex.map(|c| create_rust_object(c, containers, definers));
+                    let inner_object = complex.map(|c| {
+                        let inner =
+                            parsed_container_to_container(c.clone(), tests, containers, definers);
+                        create_rust_object(c, inner.fields(), tests, containers, definers)
+                    });
 
                     RustType::Array {
                         array: array.clone(),
@@ -1253,7 +1266,10 @@ pub(crate) fn create_struct_member(
                             definition_constantly_sized = false;
                         }
 
-                        let object = create_rust_object(c, containers, definers);
+                        let inner =
+                            parsed_container_to_container(c.clone(), tests, containers, definers);
+                        let object =
+                            create_rust_object(c, inner.fields(), tests, containers, definers);
 
                         RustType::Struct {
                             ty_name: c.name().to_string(),
@@ -1283,17 +1299,17 @@ pub(crate) fn create_struct_member(
 
             for m in e.fields() {
                 match m {
-                    StructMember::Definition(_) => {}
-                    StructMember::IfStatement(statement) => {
+                    ParsedStructMember::Definition(_) => {}
+                    ParsedStructMember::IfStatement(statement) => {
                         if statement.name() != name {
                             continue;
                         }
 
                         let complex_sizes =
-                            ParsedContainer::get_complex_sizes(&statement, e, containers, definers);
+                            ParsedContainer::get_complex_sizes(statement, e, containers, definers);
                         sizes += complex_sizes;
                     }
-                    StructMember::OptionalStatement(_) => {}
+                    ParsedStructMember::OptionalStatement(_) => {}
                 }
             }
 
@@ -1312,6 +1328,7 @@ pub(crate) fn create_struct_member(
                 statement,
                 struct_ty_name,
                 tags,
+                tests,
                 containers,
                 definers,
                 e,
@@ -1328,6 +1345,7 @@ pub(crate) fn create_struct_member(
                     struct_ty_name,
                     tags,
                     e,
+                    tests,
                     containers,
                     definers,
                     &mut members,
@@ -1348,18 +1366,21 @@ pub(crate) fn create_struct_member(
 
 pub(crate) fn create_rust_object(
     e: &ParsedContainer,
+    members: &[StructMember],
+    tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
     definers: &[Definer],
 ) -> RustObject {
     let mut v = Vec::new();
     let mut optional = None;
 
-    for m in e.fields() {
+    for m in members {
         create_struct_member(
             m,
             e.name(),
             e.tags(),
             e,
+            tests,
             containers,
             definers,
             &mut v,

@@ -1,9 +1,12 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
-use crate::parser::types::if_statement::{DefinerUsage, IfStatement};
+use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
+use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
+use crate::parser::types::parsed::parsed_struct_member::{
+    ParsedStructMember, ParsedStructMemberDefinition,
+};
 use crate::parser::types::sizes::Sizes;
-use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
 use crate::parser::types::ArrayType;
@@ -13,7 +16,7 @@ use crate::{ContainerType, DefinerType};
 pub struct ParsedContainer {
     pub name: String,
     pub object_type: ContainerType,
-    pub members: Vec<StructMember>,
+    pub members: Vec<ParsedStructMember>,
     pub tags: Tags,
     pub file_info: FileInfo,
 }
@@ -21,7 +24,7 @@ pub struct ParsedContainer {
 impl ParsedContainer {
     pub(crate) fn new(
         name: &str,
-        members: Vec<StructMember>,
+        members: Vec<ParsedStructMember>,
         tags: Tags,
         object_type: ContainerType,
         file_info: FileInfo,
@@ -42,16 +45,16 @@ impl ParsedContainer {
     }
 
     pub(crate) fn contains_definer(&self, ty_name: &str) -> DefinerUsage {
-        fn inner(m: &StructMember, ty_name: &str, variable_name: &str) -> DefinerUsage {
+        fn inner(m: &ParsedStructMember, ty_name: &str, variable_name: &str) -> DefinerUsage {
             match m {
-                StructMember::Definition(d) => {
+                ParsedStructMember::Definition(d) => {
                     if let Type::Identifier { s, .. } = d.ty() {
                         if s == ty_name {
                             return DefinerUsage::NotInIf;
                         }
                     }
                 }
-                StructMember::IfStatement(statement) => {
+                ParsedStructMember::IfStatement(statement) => {
                     if statement.name() == variable_name {
                         return DefinerUsage::InIf;
                     }
@@ -69,7 +72,7 @@ impl ParsedContainer {
                         return DefinerUsage::NotInIf;
                     }
                 }
-                StructMember::OptionalStatement(optional) => {
+                ParsedStructMember::OptionalStatement(optional) => {
                     let mut not_in_if = false;
 
                     for m in optional.members() {
@@ -140,16 +143,16 @@ impl ParsedContainer {
         &self.tags
     }
 
-    pub(crate) fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
-        fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
+    pub(crate) fn all_definitions(&self) -> Vec<&ParsedStructMemberDefinition> {
+        fn inner<'a>(m: &'a ParsedStructMember, v: &mut Vec<&'a ParsedStructMemberDefinition>) {
             match m {
-                StructMember::Definition(d) => v.push(d),
-                StructMember::IfStatement(statement) => {
+                ParsedStructMember::Definition(d) => v.push(d),
+                ParsedStructMember::IfStatement(statement) => {
                     for m in statement.all_members() {
                         inner(m, v);
                     }
                 }
-                StructMember::OptionalStatement(optional) => {
+                ParsedStructMember::OptionalStatement(optional) => {
                     for m in optional.members() {
                         inner(m, v);
                     }
@@ -168,14 +171,16 @@ impl ParsedContainer {
 
     fn add_sizes_values(
         e: &Self,
-        m: &StructMember,
+        m: &ParsedStructMember,
         containers: &[Self],
         definers: &[Definer],
         sizes: &mut Sizes,
     ) {
         match m {
-            StructMember::Definition(d) => *sizes += d.ty().sizes_parsed(e, containers, definers),
-            StructMember::OptionalStatement(optional) => {
+            ParsedStructMember::Definition(d) => {
+                *sizes += d.ty().sizes_parsed(e, containers, definers)
+            }
+            ParsedStructMember::OptionalStatement(optional) => {
                 let minimum = sizes.minimum();
 
                 for m in optional.members() {
@@ -185,7 +190,7 @@ impl ParsedContainer {
                 // The optional statement doesn't have be be here, so the minimum doesn't get incremented
                 sizes.set_minimum(minimum);
             }
-            StructMember::IfStatement(statement) => {
+            ParsedStructMember::IfStatement(statement) => {
                 let statement_sizes = Self::get_complex_sizes(statement, e, containers, definers);
 
                 *sizes += statement_sizes;
@@ -203,7 +208,7 @@ impl ParsedContainer {
     }
 
     pub(crate) fn get_complex_sizes(
-        statement: &IfStatement,
+        statement: &ParsedIfStatement,
         e: &Self,
         containers: &[Self],
         definers: &[Definer],
@@ -262,11 +267,11 @@ impl ParsedContainer {
         panic!("unable to find type {}", variable_name)
     }
 
-    pub(crate) fn fields(&self) -> &[StructMember] {
+    pub(crate) fn fields(&self) -> &[ParsedStructMember] {
         self.members.as_slice()
     }
 
-    pub(crate) fn fields_mut(&mut self) -> &mut [StructMember] {
+    pub(crate) fn fields_mut(&mut self) -> &mut [ParsedStructMember] {
         self.members.as_mut_slice()
     }
 
@@ -342,17 +347,17 @@ impl ParsedContainer {
     pub(crate) fn set_used_in_if(&mut self) {
         let mut variables_used_in_if = Vec::new();
 
-        fn find_used_in_if(m: &StructMember, variables_used_in_if: &mut Vec<String>) {
+        fn find_used_in_if(m: &ParsedStructMember, variables_used_in_if: &mut Vec<String>) {
             match m {
-                StructMember::Definition(_) => {}
-                StructMember::IfStatement(statement) => {
+                ParsedStructMember::Definition(_) => {}
+                ParsedStructMember::IfStatement(statement) => {
                     variables_used_in_if.push(statement.name().to_string());
 
                     for m in statement.all_members() {
                         find_used_in_if(m, variables_used_in_if);
                     }
                 }
-                StructMember::OptionalStatement(optional) => {
+                ParsedStructMember::OptionalStatement(optional) => {
                     for m in optional.members() {
                         find_used_in_if(m, variables_used_in_if);
                     }
@@ -369,16 +374,19 @@ impl ParsedContainer {
         }
     }
 
-    pub(crate) fn all_definitions_mut(&mut self) -> Vec<&mut StructMemberDefinition> {
-        fn inner<'a>(m: &'a mut StructMember, v: &mut Vec<&'a mut StructMemberDefinition>) {
+    pub(crate) fn all_definitions_mut(&mut self) -> Vec<&mut ParsedStructMemberDefinition> {
+        fn inner<'a>(
+            m: &'a mut ParsedStructMember,
+            v: &mut Vec<&'a mut ParsedStructMemberDefinition>,
+        ) {
             match m {
-                StructMember::Definition(d) => v.push(d),
-                StructMember::IfStatement(statement) => {
+                ParsedStructMember::Definition(d) => v.push(d),
+                ParsedStructMember::IfStatement(statement) => {
                     for m in statement.all_members_mut() {
                         inner(m, v);
                     }
                 }
-                StructMember::OptionalStatement(optional) => {
+                ParsedStructMember::OptionalStatement(optional) => {
                     for m in optional.members_mut() {
                         inner(m, v);
                     }
@@ -396,10 +404,10 @@ impl ParsedContainer {
     }
 
     fn set_if_statements(&mut self) {
-        fn inner(m: &mut StructMember, c: &ParsedContainer) {
+        fn inner(m: &mut ParsedStructMember, c: &ParsedContainer) {
             match m {
-                StructMember::Definition(_) => {}
-                StructMember::IfStatement(statement) => {
+                ParsedStructMember::Definition(_) => {}
+                ParsedStructMember::IfStatement(statement) => {
                     statement.set_original_ty(c.get_type_of_variable(statement.name()));
 
                     for else_if in statement.else_ifs_mut() {
@@ -410,7 +418,7 @@ impl ParsedContainer {
                         inner(m, c);
                     }
                 }
-                StructMember::OptionalStatement(optional) => {
+                ParsedStructMember::OptionalStatement(optional) => {
                     for m in optional.members_mut() {
                         inner(m, c);
                     }

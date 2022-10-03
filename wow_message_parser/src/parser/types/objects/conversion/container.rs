@@ -1,14 +1,17 @@
 use crate::parser::types::definer::Definer;
-use crate::parser::types::if_statement::Equation;
+use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::conversion;
 use crate::parser::types::objects::conversion::{
     all_definitions, all_definitions_mut, get_definer,
 };
+use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
+use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
+use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::parsed::parsed_test_case::{
     ParsedTestCase, ParsedTestCaseMember, TestCaseValueInitial,
 };
-use crate::parser::types::struct_member::StructMember;
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, VerifiedContainerValue};
@@ -39,22 +42,70 @@ pub(crate) fn get_tests_for_object(
     v
 }
 
-pub(crate) fn parsed_members_to_members(
-    mut members: Vec<StructMember>,
+pub(crate) fn verify_and_set_members(
+    members: &mut [ParsedStructMember],
     tags: &Tags,
     containers: &[ParsedContainer],
     definers: &[Definer],
-) -> Vec<StructMember> {
-    set_used_as_size_in(&mut members);
+) {
+    set_used_as_size_in(members);
 
-    set_verified_values(&mut members, definers);
+    set_verified_values(members, definers);
 
     check_complex_types_exist(&members, containers, definers, tags);
-
-    members
 }
 
-fn set_used_as_size_in(members: &mut [StructMember]) {
+pub(crate) fn parsed_members_to_members(mut members: Vec<ParsedStructMember>) -> Vec<StructMember> {
+    let mut v = Vec::with_capacity(members.len());
+
+    for m in members {
+        v.push(match m {
+            ParsedStructMember::Definition(d) => {
+                StructMember::Definition(StructMemberDefinition::all_fields(
+                    d.name,
+                    d.struct_type,
+                    d.value,
+                    d.verified_value,
+                    d.used_as_size_in,
+                    d.used_in_if,
+                    d.tags,
+                ))
+            }
+            ParsedStructMember::IfStatement(s) => {
+                StructMember::IfStatement(IfStatement::all_fields(
+                    s.conditional,
+                    parsed_members_to_members(s.members),
+                    parsed_if_statement_to_if_statement(s.else_ifs),
+                    parsed_members_to_members(s.else_statement_members),
+                    s.original_ty,
+                ))
+            }
+            ParsedStructMember::OptionalStatement(o) => StructMember::OptionalStatement(
+                OptionalStatement::all_fields(o.name, parsed_members_to_members(o.members), o.tags),
+            ),
+        });
+    }
+
+    v
+}
+
+fn parsed_if_statement_to_if_statement(parsed: Vec<ParsedIfStatement>) -> Vec<IfStatement> {
+    let mut v = Vec::with_capacity(parsed.len());
+
+    for p in parsed {
+        v.push(IfStatement::all_fields(
+            p.conditional,
+            parsed_members_to_members(p.members),
+            parsed_if_statement_to_if_statement(p.else_ifs),
+            parsed_members_to_members(p.else_statement_members),
+            p.original_ty,
+        ))
+    }
+
+    v
+}
+
+fn set_used_as_size_in(members: &mut [ParsedStructMember]) {
     let mut variables_used_as_size_in = Vec::new();
 
     for d in all_definitions(members) {
@@ -86,7 +137,7 @@ fn set_used_as_size_in(members: &mut [StructMember]) {
     }
 }
 
-fn set_verified_values(members: &mut [StructMember], definers: &[Definer]) {
+fn set_verified_values(members: &mut [ParsedStructMember], definers: &[Definer]) {
     for d in all_definitions_mut(members) {
         d.set_verified_value(definers);
     }
@@ -121,7 +172,7 @@ fn contains_complex_type(
 }
 
 fn check_complex_types_exist(
-    members: &[StructMember],
+    members: &[ParsedStructMember],
     containers: &[ParsedContainer],
     definers: &[Definer],
     tags: &Tags,
@@ -153,9 +204,9 @@ fn check_complex_types_exist(
 }
 
 pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Definer]) {
-    fn inner(m: &StructMember, e: &ParsedContainer, definers: &[Definer]) {
+    fn inner(m: &ParsedStructMember, e: &ParsedContainer, definers: &[Definer]) {
         match m {
-            StructMember::IfStatement(statement) => {
+            ParsedStructMember::IfStatement(statement) => {
                 let ty = match e.get_field_ty(statement.name()) {
                     Type::Identifier { s, .. } => s,
                     _ => unreachable!(),
@@ -189,12 +240,12 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
                     inner(m, e, definers);
                 }
             }
-            StructMember::OptionalStatement(optional) => {
+            ParsedStructMember::OptionalStatement(optional) => {
                 for m in optional.members() {
                     inner(m, e, definers);
                 }
             }
-            StructMember::Definition(_) => {}
+            ParsedStructMember::Definition(_) => {}
         }
     }
 
