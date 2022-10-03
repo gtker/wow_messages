@@ -44,7 +44,7 @@ impl ParsedIfStatement {
     }
 
     pub(crate) fn name(&self) -> &str {
-        &self.conditional.variable_name()
+        self.conditional.variable_name()
     }
 
     pub(crate) fn set_original_ty(&mut self, original_ty: Type) {

@@ -75,7 +75,7 @@ fn main() {
     load_files(&wowm_directory("unimplemented"), &mut o);
     //load_files(&wowm_directory("test"), &mut o);
 
-    let o = o.to_objects();
+    let o = o.into_objects();
 
     wireshark_printer::print_wireshark(&o);
 

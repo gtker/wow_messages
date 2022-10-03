@@ -52,7 +52,7 @@ pub(crate) fn verify_and_set_members(
 
     set_verified_values(members, definers);
 
-    check_complex_types_exist(&members, containers, definers, tags);
+    check_complex_types_exist(members, containers, definers, tags);
 }
 
 pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec<StructMember> {
@@ -190,7 +190,7 @@ fn check_complex_types_exist(
                     Some(v) => match v.identifier().parse::<usize>() {
                         Ok(_) => {}
                         Err(_) => {
-                            let e = get_definer(definers, &i, tags).unwrap();
+                            let e = get_definer(definers, i, tags).unwrap();
                             e.get_field_with_name(v.identifier()).unwrap();
                         }
                     },

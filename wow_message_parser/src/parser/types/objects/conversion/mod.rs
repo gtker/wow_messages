@@ -199,7 +199,7 @@ pub(crate) fn all_definitions(
     v
 }
 
-fn check_versions<'a>(containers: &[ParsedContainer], definers: &[Definer]) {
+fn check_versions(containers: &[ParsedContainer], definers: &[Definer]) {
     struct Obj<'a> {
         name: &'a str,
         tags: &'a Tags,

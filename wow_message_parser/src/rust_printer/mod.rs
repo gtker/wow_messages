@@ -879,8 +879,8 @@ impl Version {
 
     pub(crate) fn to_module_case(self) -> String {
         match self {
-            Version::Login(l) => l.to_module_case(),
-            Version::World(l) => l.to_module_case(),
+            Version::Login(l) => l.as_module_case(),
+            Version::World(l) => l.as_module_case(),
         }
     }
 }

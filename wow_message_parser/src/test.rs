@@ -13,7 +13,7 @@ fn get_all_impl_items() -> Objects {
 
     load_files(Path::new("tests/impl_levels.wowm"), &mut o);
 
-    o.to_objects()
+    o.into_objects()
 }
 
 fn tcheck(s: &Writer, name: &str) {
@@ -41,7 +41,7 @@ const VERSION: Version = Version::World(WorldVersion::Minor(1, 12));
 fn flag_equals_must_err() {
     let mut o = ParsedObjects::empty();
     load_files(Path::new("tests/error_flag.wowm"), &mut o);
-    o.to_objects();
+    o.into_objects();
 }
 
 #[test]
@@ -49,7 +49,7 @@ fn flag_equals_must_err() {
 fn enum_equals_must_err() {
     let mut o = ParsedObjects::empty();
     load_files(Path::new("tests/error_enum.wowm"), &mut o);
-    o.to_objects();
+    o.into_objects();
 }
 
 #[test]

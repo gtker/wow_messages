@@ -193,7 +193,7 @@ impl WorldVersion {
         false
     }
 
-    pub(crate) fn to_module_case(&self) -> String {
+    pub(crate) fn as_module_case(&self) -> String {
         self.to_string().replace('.', "_")
     }
 }
@@ -226,7 +226,7 @@ impl Display for LoginVersion {
 }
 
 impl LoginVersion {
-    pub(crate) fn to_module_case(&self) -> String {
+    pub(crate) fn as_module_case(&self) -> String {
         match self {
             LoginVersion::Specific(_) => self.to_string(),
             LoginVersion::All => "all".to_string(),

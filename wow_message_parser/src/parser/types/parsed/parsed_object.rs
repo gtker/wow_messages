@@ -48,7 +48,7 @@ impl ParsedObjects {
         self.tests.append(&mut c.tests);
     }
 
-    pub(crate) fn to_objects(self) -> Objects {
+    pub(crate) fn into_objects(self) -> Objects {
         Objects::new(
             self.enums,
             self.flags,

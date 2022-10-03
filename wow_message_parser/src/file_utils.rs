@@ -444,7 +444,7 @@ pub(crate) fn get_shared_module_name(e: &str, versions: &[WorldVersion]) -> Stri
     versions.sort();
 
     for v in versions {
-        s += &v.to_module_case();
+        s += &v.as_module_case();
     }
 
     s
