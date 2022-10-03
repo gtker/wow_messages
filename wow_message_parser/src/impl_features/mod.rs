@@ -206,7 +206,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
         Type::DateTime | Type::Bool | Type::Integer(_) | Type::FloatingPoint(_) => {
             f.add(Feature::SimpleBuiltInTypes);
 
-            if let Some(v) = d.verified_value() {
+            if let Some(v) = d.value() {
                 if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
                     f.add(Feature::ManualSizeField);
                 }

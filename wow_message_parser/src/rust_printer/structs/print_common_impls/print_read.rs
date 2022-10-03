@@ -364,11 +364,7 @@ fn print_read_definition(
             ));
         }
         Type::Integer(integer) => {
-            let value_set = if d.verified_value().is_some() {
-                "_"
-            } else {
-                ""
-            };
+            let value_set = if d.value().is_some() { "_" } else { "" };
             s.wln(format!(
                 "let {value_set}{name} = {module_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",
                 value_set = value_set,
@@ -379,11 +375,11 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            if d.verified_value().is_some() {
+            if d.value().is_some() {
                 s.wln(format!(
                     "// {name} is expected to always be {value}",
                     name = d.name(),
-                    value = d.verified_value().as_ref().unwrap(),
+                    value = d.value().as_ref().unwrap(),
                 ))
             }
 
@@ -452,7 +448,7 @@ fn print_read_definition(
                 if let Some(integer) = upcast {
                     let definer = o.get_definer(ty, e.tags());
 
-                    if let Some(value) = d.verified_value() {
+                    if let Some(value) = d.value() {
                         s.wln(format!(
                             "let _{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).into();",
                             name = d.name(),
@@ -504,18 +500,18 @@ fn print_read_definition(
                 ObjectType::Enum => {
                     let definer = o.get_definer(ty, e.tags());
                     s.wln(format!(
-                            "let {value_set}{name}: {type_name} = crate::util::{prefix}read_{ty}_{endian}(r){postfix}?.{into};",
-                            name = d.name(),
-                            type_name = d.ty().rust_str(),
-                            value_set = if d.value().is_some() { "_" } else { "" },
-                            endian = definer.ty().rust_endian_str(),
-                            ty = definer.ty().rust_str(),
-                            into = match definer.self_value().is_some() {
+                        "let {value_set}{name}: {type_name} = crate::util::{prefix}read_{ty}_{endian}(r){postfix}?.{into};",
+                        name = d.name(),
+                        type_name = d.ty().rust_str(),
+                        value_set = if d.value().is_some() { "_" } else { "" },
+                        endian = definer.ty().rust_endian_str(),
+                        ty = definer.ty().rust_str(),
+                        into = match definer.self_value().is_some() {
                                 true => "into()",
                                 false => "try_into()?",
                             },
-                            prefix = prefix,
-                            postfix = postfix,
+                        prefix = prefix,
+                        postfix = postfix,
                     ));
                 }
                 _ => {
@@ -530,12 +526,12 @@ fn print_read_definition(
                 }
             }
 
-            if d.verified_value().is_some() {
+            if d.value().is_some() {
                 s.wln(format!(
                     "// {name} is expected to always be {constant_string} ({constant_value})",
                     name = d.name(),
-                    constant_string = d.verified_value().as_ref().unwrap().original_string(),
-                    constant_value = d.verified_value().as_ref().unwrap().value(),
+                    constant_string = d.value().as_ref().unwrap().original_string(),
+                    constant_value = d.value().as_ref().unwrap().value(),
                 ));
             }
 

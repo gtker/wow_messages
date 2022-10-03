@@ -1140,7 +1140,7 @@ pub(crate) fn create_struct_member(
             let mut definition_constantly_sized = true;
             let ty = match d.ty() {
                 Type::Integer(i) => {
-                    if d.used_as_size_in().is_some() || d.verified_value().is_some() {
+                    if d.used_as_size_in().is_some() || d.value().is_some() {
                         in_rust_type = false;
                     }
                     RustType::Integer(*i)

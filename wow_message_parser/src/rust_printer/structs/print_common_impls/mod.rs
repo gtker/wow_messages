@@ -106,7 +106,7 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
     if e.any_fields_have_constant_value() {
         s.bodyn(format!("impl {name}", name = e.name()), |s| {
             for d in e.all_definitions() {
-                if let Some(v) = d.verified_value() {
+                if let Some(v) = d.value() {
                     if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
                         continue;
                     }

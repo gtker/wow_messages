@@ -242,7 +242,7 @@ impl Container {
 
     pub(crate) fn any_fields_have_constant_value(&self) -> bool {
         for d in self.all_definitions() {
-            if d.verified_value().is_some() {
+            if d.value().is_some() {
                 return true;
             }
         }
@@ -296,7 +296,7 @@ impl Container {
                         Type::Bool => sum += BOOL_SIZE as u64,
                         Type::DateTime => sum += DATETIME_SIZE as u64,
                     }
-                    if let Some(v) = d.verified_value() {
+                    if let Some(v) = d.value() {
                         if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
                             return sum;
                         }

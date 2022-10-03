@@ -128,7 +128,7 @@ fn print_members(s: &mut WowmWriter, e: &Container, field: &StructMember) {
                 "{ty} {name}{constant};",
                 ty = d.ty().str(),
                 name = d.name(),
-                constant = match d.verified_value() {
+                constant = match d.value() {
                     None => "".to_string(),
                     Some(c) => format!(" = {val}", val = c.original_string()),
                 }

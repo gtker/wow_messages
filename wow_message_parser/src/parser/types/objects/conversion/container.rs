@@ -64,7 +64,6 @@ pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec
                 StructMember::Definition(StructMemberDefinition::new(
                     d.name,
                     d.struct_type,
-                    d.value,
                     d.verified_value,
                     d.used_as_size_in,
                     d.used_in_if,

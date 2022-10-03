@@ -136,7 +136,7 @@ pub(crate) fn print_write_definition(
 
     match d.ty() {
         Type::Integer(int_type) => {
-            let size = if let Some(v) = d.verified_value() {
+            let size = if let Some(v) = d.value() {
                 if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
                     e.size_of_fields_before_size(o)
                 } else {
@@ -152,7 +152,7 @@ pub(crate) fn print_write_definition(
                 variable_prefix,
                 int_type,
                 d.used_as_size_in(),
-                d.verified_value(),
+                d.value(),
                 size,
                 postfix,
             );
