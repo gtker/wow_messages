@@ -2,7 +2,7 @@ use crate::file_info::FileInfo;
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::Tags;
-use crate::parser::types::IntegerType;
+use crate::parser::types::{compare_name_and_tags, IntegerType};
 use crate::parser::utility;
 use crate::rust_printer::{field_name_to_rust_name, DefinerType};
 use crate::ENUM_SELF_VALUE_FIELD;
@@ -127,9 +127,7 @@ impl Ord for Definer {
         let self_first = self.tags().first_version();
         let other_first = other.tags().first_version();
 
-        self.name
-            .cmp(&other.name)
-            .then_with(|| self_first.cmp(&other_first))
+        compare_name_and_tags(&self.name, &[self_first], &other.name, &[other_first])
     }
 }
 

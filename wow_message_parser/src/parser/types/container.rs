@@ -7,7 +7,7 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArraySize, ArrayType, ObjectType};
+use crate::parser::types::{compare_name_and_tags, ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
     DefinerType, Version, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
@@ -72,9 +72,7 @@ impl Ord for Container {
         let self_first = self.tags().first_version();
         let other_first = other.tags().first_version();
 
-        self.name
-            .cmp(&other.name)
-            .then_with(|| self_first.cmp(&other_first))
+        compare_name_and_tags(&self.name, &[self_first], &other.name, &[other_first])
     }
 }
 

@@ -1,5 +1,6 @@
 use crate::rust_printer::field_name_to_rust_name;
-use crate::{Objects, Tags};
+use crate::{Objects, Tags, Version};
+use std::cmp::Ordering;
 use std::fmt::{Display, Formatter};
 
 pub mod container;
@@ -16,6 +17,10 @@ pub mod struct_member;
 pub mod tags;
 pub mod test_case;
 pub mod ty;
+
+pub fn compare_name_and_tags(name1: &str, v1: &[Version], name2: &str, v2: &[Version]) -> Ordering {
+    name1.cmp(name2).then_with(|| v1[0].cmp(&v2[0]))
+}
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub enum ObjectType {
