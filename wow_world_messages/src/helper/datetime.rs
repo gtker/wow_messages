@@ -101,7 +101,7 @@ fn hours(v: u32) -> u32 {
 }
 
 fn weekday(v: u32) -> u32 {
-    (value >> 11) & 0b111
+    (v >> 11) & 0b111
 }
 
 fn month_day(v: u32) -> u32 {

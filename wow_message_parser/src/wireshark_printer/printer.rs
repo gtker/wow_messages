@@ -106,9 +106,7 @@ fn print_member(
             print_if_statement(s, e, wo, tags, o, statement, variables);
         }
         StructMember::OptionalStatement(optional) => {
-            s.wln(format!(
-                "len = offset_packet_end - ptvcursor_current_offset(ptv);"
-            ));
+            s.wln("len = offset_packet_end - ptvcursor_current_offset(ptv);");
             s.open_curly("if (len > 0)");
 
             for m in optional.members() {
