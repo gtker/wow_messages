@@ -626,32 +626,6 @@ impl Container {
         v
     }
 
-    pub fn all_definitions_mut(&mut self) -> Vec<&mut StructMemberDefinition> {
-        fn inner<'a>(m: &'a mut StructMember, v: &mut Vec<&'a mut StructMemberDefinition>) {
-            match m {
-                StructMember::Definition(d) => v.push(d),
-                StructMember::IfStatement(statement) => {
-                    for m in statement.all_members_mut() {
-                        inner(m, v);
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in optional.members_mut() {
-                        inner(m, v);
-                    }
-                }
-            }
-        }
-
-        let mut v = Vec::new();
-
-        for m in self.fields_mut() {
-            inner(m, &mut v);
-        }
-
-        v
-    }
-
     pub fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
         fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
             match m {
@@ -983,36 +957,6 @@ impl Container {
         }
     }
 
-    pub fn set_used_in_if(&mut self) {
-        let mut variables_used_in_if = Vec::new();
-
-        fn find_used_in_if(m: &StructMember, variables_used_in_if: &mut Vec<String>) {
-            match m {
-                StructMember::Definition(_) => {}
-                StructMember::IfStatement(statement) => {
-                    variables_used_in_if.push(statement.name().to_string());
-
-                    for m in statement.all_members() {
-                        find_used_in_if(m, variables_used_in_if);
-                    }
-                }
-                StructMember::OptionalStatement(optional) => {
-                    for m in optional.members() {
-                        find_used_in_if(m, variables_used_in_if);
-                    }
-                }
-            }
-        }
-
-        for m in self.fields() {
-            find_used_in_if(m, &mut variables_used_in_if);
-        }
-
-        for d in self.all_definitions_mut() {
-            d.set_used_in_if(variables_used_in_if.contains(&d.name().to_string()));
-        }
-    }
-
     fn check_values(&self, o: &Objects) {
         for d in self.all_definitions() {
             match &d.ty() {
@@ -1045,8 +989,6 @@ impl Container {
 
     pub fn set_internals(&mut self, o: &Objects) {
         self.check_values(o);
-
-        self.set_used_in_if();
 
         self.set_if_statements(o);
 
