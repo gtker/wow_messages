@@ -48,17 +48,13 @@ impl ParsedObjects {
     }
 
     pub fn to_objects(self) -> Objects {
-        let mut o = Objects::new(
+        Objects::new(
             self.enums,
             self.flags,
             self.structs,
             self.messages,
             self.tests,
-        );
-        o.check_values();
-        o.sort_members();
-
-        o
+        )
     }
 }
 

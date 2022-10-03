@@ -55,13 +55,18 @@ impl Objects {
         let enums = parsed_definer_to_definer(enums, &structs, &messages);
         let flags = parsed_definer_to_definer(flags, &structs, &messages);
 
-        Self {
+        let mut o = Self {
             enums,
             flags,
             structs,
             messages,
             tests,
-        }
+        };
+
+        o.check_values();
+        o.sort_members();
+
+        o
     }
 
     pub fn try_get_definer(&self, ty_name: &str, tags: &Tags) -> Option<&Definer> {
