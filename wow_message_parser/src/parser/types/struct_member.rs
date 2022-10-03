@@ -16,7 +16,7 @@ pub struct StructMemberDefinition {
     name: String,
     struct_type: Type,
     value: Option<VerifiedContainerValue>,
-    pub used_as_size_in: Option<String>,
+    used_as_size_in: Option<String>,
     used_in_if: bool,
     tags: Tags,
 }
