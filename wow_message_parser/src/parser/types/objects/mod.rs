@@ -10,7 +10,6 @@ use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ObjectType;
-use crate::rust_printer::rust_view::create_rust_object;
 use crate::{DefinerType, Version};
 
 #[derive(Debug, Clone)]
@@ -277,10 +276,6 @@ impl Objects {
         self.structs.iter().chain(&self.messages)
     }
 
-    pub(crate) fn all_containers_mut(&mut self) -> impl Iterator<Item = &mut Container> {
-        self.structs.iter_mut().chain(&mut self.messages)
-    }
-
     pub(crate) fn messages(&self) -> &[Container] {
         &self.messages
     }
@@ -337,13 +332,6 @@ impl Objects {
         }
 
         v
-    }
-
-    pub(crate) fn check_values(&mut self) {
-        let c = self.clone();
-        for e in self.all_containers_mut() {
-            e.set_rust_object(create_rust_object(e, &c));
-        }
     }
 }
 

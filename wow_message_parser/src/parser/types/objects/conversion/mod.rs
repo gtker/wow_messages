@@ -7,6 +7,7 @@ use crate::parser::types::parsed::parsed_object::get_definer_objects_used_in;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::TestCase;
+use crate::rust_printer::rust_view::create_rust_object;
 use crate::{Container, Objects, Tags};
 
 mod container;
@@ -38,7 +39,6 @@ pub(crate) fn object_new(
         messages,
     };
 
-    o.check_values();
     o.sort_members();
 
     o
@@ -51,7 +51,7 @@ pub(crate) fn parsed_container_to_container(
 ) -> Vec<Container> {
     let mut v = Vec::with_capacity(parsed.len());
 
-    for p in parsed {
+    for mut p in parsed {
         let tests = Objects::get_tests_for_object(tests, p.name(), p.tags());
 
         let sizes = p.create_sizes(containers, definers);
@@ -60,18 +60,20 @@ pub(crate) fn parsed_container_to_container(
 
         check_if_statement_operators(&p, definers);
 
-        let members =
-            container::parsed_members_to_members(p.members, &p.tags, containers, definers);
+        p.members = container::parsed_members_to_members(p.members, &p.tags, containers, definers);
+
+        let rust_object_view = create_rust_object(&p, containers, definers);
 
         v.push(Container::new(
             p.name,
-            members,
+            p.members,
             p.tags,
             p.object_type,
             p.file_info,
             tests,
             sizes,
             only_has_io_error,
+            rust_object_view,
         ));
     }
 

@@ -1,14 +1,12 @@
-use crate::parser::types::container::Container;
-use crate::parser::types::definer::DefinerValue;
+use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
-use crate::parser::types::objects::Objects;
+use crate::parser::types::objects::conversion::{get_container, get_definer};
+use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{
-    Array, ArraySize, ArrayType, FloatingPointType, IntegerType, ObjectType,
-};
+use crate::parser::types::{Array, ArraySize, ArrayType, FloatingPointType, IntegerType};
 use crate::rust_printer::{
     field_name_to_rust_name, get_new_flag_type_name, get_new_type_name, get_optional_type_name,
     DefinerType,
@@ -973,8 +971,9 @@ pub(crate) fn create_if_statement(
     statement: &IfStatement,
     struct_ty_name: &str,
     tags: &Tags,
-    o: &Objects,
-    e: &Container,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    e: &ParsedContainer,
     current_scope: &mut [RustMember],
     parent_scope: &mut [RustMember],
 ) {
@@ -1000,8 +999,9 @@ pub(crate) fn create_if_statement(
             m,
             struct_ty_name,
             tags,
-            o,
             e,
+            containers,
+            definers,
             &mut main_enumerator_members,
             current_scope,
             &mut None,
@@ -1017,8 +1017,9 @@ pub(crate) fn create_if_statement(
             m,
             struct_ty_name,
             tags,
-            o,
             e,
+            containers,
+            definers,
             &mut else_enumerator_members,
             current_scope,
             &mut None,
@@ -1079,8 +1080,9 @@ pub(crate) fn create_if_statement(
                     m,
                     struct_ty_name,
                     tags,
-                    o,
                     e,
+                    containers,
+                    definers,
                     &mut else_if_enumerator_members,
                     current_scope,
                     &mut None,
@@ -1116,8 +1118,9 @@ pub(crate) fn create_struct_member(
     m: &StructMember,
     struct_ty_name: &str,
     tags: &Tags,
-    o: &Objects,
-    e: &Container,
+    e: &ParsedContainer,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
     current_scope: &mut Vec<RustMember>,
     parent_scope: &mut [RustMember],
     optional: &mut Option<RustOptional>,
@@ -1168,11 +1171,12 @@ pub(crate) fn create_struct_member(
                             None
                         }
                         ArrayType::Complex(complex) => {
-                            let c = o.get_container(complex, tags);
-                            if !c.is_constant_sized() {
+                            let c = get_container(containers, complex, tags).unwrap();
+                            let s = c.create_sizes(containers, definers);
+                            if s.is_constant().is_none() {
                                 definition_constantly_sized = false;
                             }
-                            inner_sizes += c.sizes();
+                            inner_sizes += s;
                             Some(c)
                         }
                         ArrayType::PackedGuid => {
@@ -1187,7 +1191,7 @@ pub(crate) fn create_struct_member(
                         }
                     };
 
-                    let inner_object = complex.map(|c| create_rust_object(c, o));
+                    let inner_object = complex.map(|c| create_rust_object(c, containers, definers));
 
                     RustType::Array {
                         array: array.clone(),
@@ -1198,7 +1202,7 @@ pub(crate) fn create_struct_member(
                 Type::Identifier { s, upcast } => {
                     let add_types = || -> Vec<RustEnumerator> {
                         let mut enumerators = Vec::new();
-                        let definer = o.get_definer(s, tags);
+                        let definer = get_definer(definers, s, tags).unwrap();
 
                         for field in definer.fields() {
                             enumerators.push(RustEnumerator {
@@ -1214,13 +1218,13 @@ pub(crate) fn create_struct_member(
                         enumerators
                     };
 
-                    match o.get_object_type_of(s, tags) {
-                        ObjectType::Enum => {
+                    if let Some(e) = get_definer(definers, s, tags) {
+                        if e.definer_ty() == DefinerType::Enum {
                             let enumerators = add_types();
                             let int_ty = if let Some(upcast) = upcast {
                                 *upcast
                             } else {
-                                *o.get_definer(s, tags).ty()
+                                *get_definer(definers, s, tags).unwrap().ty()
                             };
 
                             RustType::Enum {
@@ -1231,36 +1235,33 @@ pub(crate) fn create_struct_member(
                                 is_simple: true,
                                 is_elseif: false,
                             }
-                        }
-                        ObjectType::Flag => {
+                        } else {
                             let enumerators = add_types();
 
                             RustType::Flag {
                                 ty_name: s.clone(),
                                 original_ty_name: s.to_string(),
-                                int_ty: *o.get_definer(s, tags).ty(),
+                                int_ty: *get_definer(definers, s, tags).unwrap().ty(),
                                 enumerators,
                                 is_simple: true,
                                 is_elseif: false,
                             }
                         }
-                        ObjectType::Struct => {
-                            let c = o.get_container(s, tags);
-                            if !c.is_constant_sized() {
-                                definition_constantly_sized = false;
-                            }
-
-                            let object = create_rust_object(c, o);
-
-                            RustType::Struct {
-                                ty_name: s.clone(),
-                                sizes: c.sizes(),
-                                object,
-                            }
+                    } else if let Some(c) = get_container(containers, s, tags) {
+                        let s = c.create_sizes(containers, definers);
+                        if s.is_constant().is_none() {
+                            definition_constantly_sized = false;
                         }
-                        ObjectType::CLogin | ObjectType::SLogin => {
-                            panic!("object contains message type")
+
+                        let object = create_rust_object(c, containers, definers);
+
+                        RustType::Struct {
+                            ty_name: c.name().to_string(),
+                            sizes: s,
+                            object,
                         }
+                    } else {
+                        panic!("object contains message type")
                     }
                 }
                 Type::UpdateMask => {
@@ -1278,7 +1279,7 @@ pub(crate) fn create_struct_member(
             };
 
             let name = d.name().to_string();
-            let mut sizes = d.ty().sizes(e, o);
+            let mut sizes = d.ty().sizes_parsed(e, containers, definers);
 
             for m in e.fields() {
                 match m {
@@ -1288,7 +1289,8 @@ pub(crate) fn create_struct_member(
                             continue;
                         }
 
-                        let complex_sizes = Container::get_complex_sizes(statement, e, o);
+                        let complex_sizes =
+                            ParsedContainer::get_complex_sizes(&statement, e, containers, definers);
                         sizes += complex_sizes;
                     }
                     StructMember::OptionalStatement(_) => {}
@@ -1310,7 +1312,8 @@ pub(crate) fn create_struct_member(
                 statement,
                 struct_ty_name,
                 tags,
-                o,
+                containers,
+                definers,
                 e,
                 current_scope,
                 parent_scope,
@@ -1324,8 +1327,9 @@ pub(crate) fn create_struct_member(
                     i,
                     struct_ty_name,
                     tags,
-                    o,
                     e,
+                    containers,
+                    definers,
                     &mut members,
                     current_scope,
                     &mut None,
@@ -1342,7 +1346,11 @@ pub(crate) fn create_struct_member(
     }
 }
 
-pub(crate) fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
+pub(crate) fn create_rust_object(
+    e: &ParsedContainer,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+) -> RustObject {
     let mut v = Vec::new();
     let mut optional = None;
 
@@ -1351,8 +1359,9 @@ pub(crate) fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
             m,
             e.name(),
             e.tags(),
-            o,
             e,
+            containers,
+            definers,
             &mut v,
             &mut Vec::new(),
             &mut optional,
@@ -1367,7 +1376,7 @@ pub(crate) fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
         name: e.name().to_string(),
         members: v,
         optional,
-        sizes: e.sizes(),
+        sizes: e.create_sizes(containers, definers),
     }
 }
 

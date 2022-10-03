@@ -1,6 +1,5 @@
 use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
-use crate::parser::types::if_statement::IfStatement;
 use crate::parser::types::objects::{Object, Objects};
 use crate::parser::types::sizes::{Sizes, BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
@@ -49,7 +48,7 @@ pub struct Container {
     tests: Vec<TestCase>,
     file_info: FileInfo,
     only_has_io_error: bool,
-    rust_object_view: Option<RustObject>,
+    rust_object_view: RustObject,
 }
 
 impl PartialEq<Self> for Container {
@@ -86,6 +85,7 @@ impl Container {
         tests: Vec<TestCase>,
         sizes: Sizes,
         only_has_io_error: bool,
+        rust_object_view: RustObject,
     ) -> Self {
         Self {
             name,
@@ -96,7 +96,7 @@ impl Container {
             tests,
             file_info,
             only_has_io_error,
-            rust_object_view: None,
+            rust_object_view,
         }
     }
 
@@ -121,10 +121,6 @@ impl Container {
         } else {
             false
         }
-    }
-
-    pub(crate) fn set_rust_object(&mut self, object: RustObject) {
-        self.rust_object_view = Some(object);
     }
 
     pub(crate) fn type_definition_in_same_scope(&self, variable_name: &str) -> bool {
@@ -244,16 +240,6 @@ impl Container {
         }
     }
 
-    pub(crate) fn get_field_ty(&self, field_name: &str) -> &Type {
-        for d in self.all_definitions() {
-            if d.name() == field_name {
-                return d.ty();
-            }
-        }
-
-        panic!("unable to find field: '{}'", field_name)
-    }
-
     pub(crate) fn any_fields_have_constant_value(&self) -> bool {
         for d in self.all_definitions() {
             if d.verified_value().is_some() {
@@ -277,7 +263,7 @@ impl Container {
     }
 
     pub(crate) fn rust_object(&self) -> &RustObject {
-        self.rust_object_view.as_ref().unwrap()
+        &self.rust_object_view
     }
 
     pub(crate) fn size_of_fields_before_size(&self, o: &Objects) -> u64 {
@@ -326,72 +312,6 @@ impl Container {
 
     pub(crate) fn tags(&self) -> &Tags {
         &self.tags
-    }
-
-    pub(crate) fn get_complex_sizes(statement: &IfStatement, e: &Container, o: &Objects) -> Sizes {
-        let mut if_sizes = Sizes::new();
-
-        for m in statement.members() {
-            Container::add_sizes_values(e, m, o, &mut if_sizes);
-        }
-
-        let mut smallest_sizes = if_sizes;
-        let mut largest_sizes = if_sizes;
-
-        let mut else_if_sizes;
-
-        for elseif in statement.else_ifs() {
-            else_if_sizes = Sizes::new();
-
-            for m in elseif.members() {
-                Container::add_sizes_values(e, m, o, &mut else_if_sizes);
-            }
-
-            if else_if_sizes.minimum() < smallest_sizes.minimum() {
-                smallest_sizes = else_if_sizes;
-            }
-            if else_if_sizes.maximum() > largest_sizes.maximum() {
-                largest_sizes = else_if_sizes;
-            }
-        }
-
-        else_if_sizes = Sizes::new();
-        for m in statement.else_members() {
-            Container::add_sizes_values(e, m, o, &mut else_if_sizes);
-        }
-
-        if else_if_sizes.minimum() < smallest_sizes.minimum() {
-            smallest_sizes = else_if_sizes;
-        }
-        if else_if_sizes.maximum() > largest_sizes.maximum() {
-            largest_sizes = else_if_sizes;
-        }
-
-        let mut sizes = Sizes::new();
-        sizes.set_minimum(smallest_sizes.minimum());
-        sizes.set_maximum(largest_sizes.maximum());
-        sizes
-    }
-
-    fn add_sizes_values(e: &Container, m: &StructMember, o: &Objects, sizes: &mut Sizes) {
-        match m {
-            StructMember::Definition(d) => *sizes += d.ty().sizes(e, o),
-            StructMember::OptionalStatement(optional) => {
-                let minimum = sizes.minimum();
-
-                for m in optional.members() {
-                    Container::add_sizes_values(e, m, o, sizes);
-                }
-
-                // The optional statement doesn't have be be here, so the minimum doesn't get incremented
-                sizes.set_minimum(minimum);
-            }
-            StructMember::IfStatement(statement) => {
-                let statement_sizes = Container::get_complex_sizes(statement, e, o);
-
-                *sizes += statement_sizes;
-            }
-        }
     }
 
     pub(crate) fn sizes(&self) -> Sizes {
