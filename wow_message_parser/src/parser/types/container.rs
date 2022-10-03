@@ -7,7 +7,7 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{compare_name_and_tags, ArraySize, ArrayType, ObjectType};
+use crate::parser::types::{compare_name_and_tags, ArrayType, ObjectType};
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
     DefinerType, Version, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
@@ -827,60 +827,6 @@ impl Container {
         None
     }
 
-    fn set_value_used_as_sizes(&mut self, m: &StructMember) {
-        match m {
-            StructMember::Definition(d) => match d.ty() {
-                Type::Integer(_) | Type::FloatingPoint(_) | Type::DateTime | Type::CString => {}
-                Type::String { length } => {
-                    if length.parse::<u8>().is_ok() {
-                        return;
-                    }
-                    if let Some(n) = self.find_definition_with_name_mut(length) {
-                        n.used_as_size_in = Some(d.name().to_string());
-                    } else {
-                        panic!(
-                            "name used as array length that doesn't exist: '{}', in member: '{}'",
-                            length,
-                            d.name(),
-                        )
-                    }
-                }
-                Type::Array(array) => match array.size() {
-                    ArraySize::Fixed(_) => {}
-                    ArraySize::Variable(variable) => {
-                        if let Some(n) = self.find_definition_with_name_mut(&variable) {
-                            n.used_as_size_in = Some(d.name().to_string());
-                        } else {
-                            panic!(
-                                "name used as array length that doesn't exist: '{}', in member: '{}'",
-                                variable,
-                                d.name(),
-                            )
-                        }
-                    }
-                    ArraySize::Endless => {}
-                },
-                Type::Identifier { .. } => {}
-                Type::PackedGuid => {}
-                Type::Guid => {}
-                Type::UpdateMask => {}
-                Type::AuraMask => {}
-                Type::SizedCString => {}
-                Type::Bool => {}
-            },
-            StructMember::IfStatement(statement) => {
-                for m in statement.all_members() {
-                    self.set_value_used_as_sizes(m);
-                }
-            }
-            StructMember::OptionalStatement(optional) => {
-                for m in optional.members() {
-                    self.set_value_used_as_sizes(m);
-                }
-            }
-        }
-    }
-
     fn check_values(&self, o: &Objects) {
         for d in self.all_definitions() {
             match &d.ty() {
@@ -909,10 +855,6 @@ impl Container {
 
     pub fn set_internals(&mut self, o: &Objects) {
         self.check_values(o);
-
-        for m in &self.members.clone() {
-            self.set_value_used_as_sizes(m);
-        }
     }
 
     pub fn fields_mut(&mut self) -> &mut [StructMember] {

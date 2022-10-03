@@ -33,6 +33,10 @@ impl StructMemberDefinition {
         &self.used_as_size_in
     }
 
+    pub fn set_used_as_size_in(&mut self, var: String) {
+        self.used_as_size_in = Some(var);
+    }
+
     pub fn used_in_if(&self) -> bool {
         self.used_in_if.unwrap()
     }

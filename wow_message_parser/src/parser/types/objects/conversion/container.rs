@@ -7,7 +7,7 @@ use crate::parser::types::parsed::parsed_test_case::{
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArrayType, VerifiedContainerValue};
+use crate::parser::types::{ArraySize, ArrayType, VerifiedContainerValue};
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
 
@@ -15,6 +15,82 @@ pub fn parsed_members_to_members(
     mut members: Vec<StructMember>,
     definers: &[Definer],
 ) -> Vec<StructMember> {
+    set_used_as_size_in(&mut members);
+
+    set_verified_values(&mut members, definers);
+
+    members
+}
+
+fn set_used_as_size_in(members: &mut Vec<StructMember>) {
+    fn used_as_size(m: &StructMember, variables_used_as_size_in: &mut Vec<(String, String)>) {
+        match m {
+            StructMember::Definition(d) => match d.ty() {
+                Type::String { length } => {
+                    if length.parse::<u8>().is_err() {
+                        variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
+                    }
+                }
+                Type::Array(array) => match array.size() {
+                    ArraySize::Variable(length) => {
+                        if length.parse::<u8>().is_err() {
+                            variables_used_as_size_in
+                                .push((d.name().to_string(), length.to_string()));
+                        }
+                    }
+                    _ => {}
+                },
+                _ => {}
+            },
+            StructMember::IfStatement(statement) => {
+                for m in statement.all_members() {
+                    used_as_size(m, variables_used_as_size_in);
+                }
+            }
+            StructMember::OptionalStatement(optional) => {
+                for m in optional.members() {
+                    used_as_size(m, variables_used_as_size_in);
+                }
+            }
+        }
+    }
+
+    let mut variables_used_as_size_in = Vec::new();
+
+    for m in members.iter_mut() {
+        used_as_size(m, &mut variables_used_as_size_in);
+    }
+
+    fn set_used_as_size(m: &mut StructMember, variables_used_as_size_in: &[(String, String)]) {
+        fn contains<'a>(v: &'a [(String, String)], name: &str) -> Option<&'a (String, String)> {
+            v.iter().find(|a| a.1 == name)
+        }
+
+        match m {
+            StructMember::Definition(d) => {
+                if let Some((var, _)) = contains(variables_used_as_size_in, d.name()) {
+                    d.set_used_as_size_in(var.clone());
+                }
+            }
+            StructMember::IfStatement(statement) => {
+                for m in statement.all_members_mut() {
+                    set_used_as_size(m, variables_used_as_size_in);
+                }
+            }
+            StructMember::OptionalStatement(optional) => {
+                for m in optional.members_mut() {
+                    set_used_as_size(m, variables_used_as_size_in);
+                }
+            }
+        }
+    }
+
+    for m in members {
+        set_used_as_size(m, &variables_used_as_size_in);
+    }
+}
+
+fn set_verified_values(members: &mut Vec<StructMember>, definers: &[Definer]) {
     fn set_verified_values(m: &mut StructMember, definers: &[Definer]) {
         match m {
             StructMember::Definition(d) => d.set_verified_value(definers),
@@ -31,14 +107,12 @@ pub fn parsed_members_to_members(
         }
     }
 
-    for m in &mut members {
+    for m in members {
         set_verified_values(m, definers);
     }
-
-    members
 }
 
-pub fn convert_parsed_test_case_value_to_test_case_value(
+fn convert_parsed_test_case_value_to_test_case_value(
     variable_name: &str,
     test: TestCaseValueInitial,
     c: &ParsedContainer,
