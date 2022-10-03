@@ -75,7 +75,7 @@ pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec
                 parsed_members_to_members(s.members),
                 parsed_if_statement_to_if_statement(s.else_ifs),
                 parsed_members_to_members(s.else_statement_members),
-                s.original_ty,
+                s.original_ty.unwrap(),
             )),
             ParsedStructMember::OptionalStatement(o) => StructMember::OptionalStatement(
                 OptionalStatement::new(o.name, parsed_members_to_members(o.members), o.tags),
@@ -95,7 +95,7 @@ fn parsed_if_statement_to_if_statement(parsed: Vec<ParsedIfStatement>) -> Vec<If
             parsed_members_to_members(p.members),
             parsed_if_statement_to_if_statement(p.else_ifs),
             parsed_members_to_members(p.else_statement_members),
-            p.original_ty,
+            p.original_ty.unwrap(),
         ))
     }
 

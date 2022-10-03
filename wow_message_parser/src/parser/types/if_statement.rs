@@ -16,7 +16,7 @@ pub struct IfStatement {
     members: Vec<StructMember>,
     else_ifs: Vec<IfStatement>,
     else_statement_members: Vec<StructMember>,
-    original_ty: Option<Type>,
+    original_ty: Type,
 }
 
 impl Eq for IfStatement {}
@@ -33,7 +33,7 @@ impl IfStatement {
         members: Vec<StructMember>,
         else_ifs: Vec<IfStatement>,
         else_statement_members: Vec<StructMember>,
-        original_ty: Option<Type>,
+        original_ty: Type,
     ) -> Self {
         Self {
             conditional,
@@ -77,7 +77,7 @@ impl IfStatement {
     }
 
     pub(crate) fn original_ty(&self) -> &Type {
-        self.original_ty.as_ref().unwrap()
+        &self.original_ty
     }
 
     pub(crate) fn name(&self) -> &str {
