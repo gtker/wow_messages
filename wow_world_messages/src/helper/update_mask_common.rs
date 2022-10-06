@@ -24,6 +24,16 @@ pub(crate) fn header_set(header: &mut Vec<u32>, bit: u16) {
     header[index as usize] |= 1 << offset;
 }
 
+pub(crate) fn header_reset(header: &mut [u32]) {
+    for header_item in header {
+        *header_item = 0;
+    }
+}
+
+pub(crate) fn has_any_header_set(header: &[u32]) -> bool {
+    header.iter().any(|h| *h != 0)
+}
+
 pub(crate) fn write_into_vec(
     v: &mut Vec<u8>,
     header: &[u32],
@@ -94,6 +104,14 @@ macro_rules! update_item {
 
             pub(crate) fn header_set(&mut self, bit: u16) {
                 $crate::helper::update_mask_common::header_set(&mut self.header, bit);
+            }
+
+            pub fn header_reset(&mut self) {
+                $crate::helper::update_mask_common::header_reset(&mut self.header);
+            }
+
+            pub fn has_any_header_set(&mut self) -> bool {
+                $crate::helper::update_mask_common::has_any_header_set(&self.header)
             }
 
             pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), std::io::Error> {
