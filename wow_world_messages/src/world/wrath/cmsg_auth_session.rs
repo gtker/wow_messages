@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 ///
 /// This message is never encrypted.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:70`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L70):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:101`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L101):
 /// ```text
 /// cmsg CMSG_AUTH_SESSION = 0x01ED {
 ///     u32 client_build;
@@ -89,8 +89,9 @@ impl crate::Message for CMSG_AUTH_SESSION {
         w.write_all(&self.decompressed_addon_info_size.to_le_bytes())?;
 
         // decompressed_addon_info: u8[-]
+        let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
         for i in self.decompressed_addon_info.iter() {
-            w.write_all(&i.to_le_bytes())?;
+            encoder.write_all(&i.to_le_bytes())?;
         }
 
         Ok(())
@@ -152,11 +153,8 @@ impl crate::Message for CMSG_AUTH_SESSION {
         }
 
         let mut decompressed_addon_info_temp = Vec::new();
-         {
-            use flate2::read::ZlibDecoder;
-            let mut decoder = ZlibDecoder::new(decompressed_addon_info.as_slice());
-            decoder.read_to_end(&mut decompressed_addon_info_temp)?;
-        }
+        let mut decoder = flate2::read::ZlibDecoder::new(decompressed_addon_info.as_slice());
+        decoder.read_to_end(&mut decompressed_addon_info_temp)?;
 
         let mut decompressed_addon_info = decompressed_addon_info_temp;
 
@@ -193,7 +191,7 @@ impl CMSG_AUTH_SESSION {
         + 8 // dos_response: u64
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
         + 4 // decompressed_addon_info_size: u32
-        + self.decompressed_addon_info.len() * core::mem::size_of::<u8>() // decompressed_addon_info: u8[-]
+        + crate::util::zlib_compressed_size(&self.decompressed_addon_info) // decompressed_addon_info: u8[-]
     }
 }
 

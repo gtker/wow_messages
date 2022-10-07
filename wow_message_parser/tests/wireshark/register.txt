@@ -976,12 +976,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_compressed_addon_info,
-            { "Compressed Addon Info", "woww.compressed.addon.info",
-                FT_BYTES, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_compressed_chat_data,
             { "Compressed Chat Data", "woww.compressed.chat.data",
                 FT_BYTES, BASE_NONE, NULL, 0,
@@ -1219,6 +1213,12 @@
         { &hf_woww_deaths,
             { "Deaths", "woww.deaths",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_decompressed_addon_info,
+            { "Decompressed Addon Info", "woww.decompressed.addon.info",
+                FT_BYTES, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },

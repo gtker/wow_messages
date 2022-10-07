@@ -191,12 +191,17 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                         ty = integer_type.rust_str(),
                     ),
                     ArraySize::Variable(_) | ArraySize::Endless => {
-                        format!(
-                            "{prefix}{name}.len() * core::mem::size_of::<{ty}>()",
-                            name = m.name(),
-                            prefix = prefix,
-                            ty = integer_type.rust_str(),
-                        )
+                        // ZLib compression is not predictable, so we compress the data and count the bytes.
+                        if m.tags().is_compressed() {
+                            format!("crate::util::zlib_compressed_size(&self.{name})", name = m.name())
+                        } else {
+                            format!(
+                                "{prefix}{name}.len() * core::mem::size_of::<{ty}>()",
+                                name = m.name(),
+                                prefix = prefix,
+                                ty = integer_type.rust_str(),
+                            )
+                        }
                     }
                 },
                 ArrayType::Complex(_) => match array.size() {

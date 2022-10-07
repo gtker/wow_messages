@@ -174,3 +174,10 @@ pub fn read_f64_be<R: Read>(r: &mut R) -> Result<f64, std::io::Error> {
     r.read_exact(&mut v)?;
     Ok(f64::from_be_bytes(v))
 }
+
+pub fn zlib_compressed_size(data: &[u8]) -> usize {
+    let mut encoder = flate2::write::ZlibEncoder::new(Vec::new(), flate2::Compression::default());
+    encoder.write_all(data).expect("Failed to compress data when calculating message size.");
+    let compressed_data = encoder.finish().expect("Failed to flush compressed data when calculating message size.");
+    compressed_data.len()
+}
