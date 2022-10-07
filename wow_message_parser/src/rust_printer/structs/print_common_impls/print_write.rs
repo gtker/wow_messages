@@ -25,23 +25,30 @@ pub(crate) fn print_unencrypted_write_header(s: &mut Writer, e: &Container, post
 
 pub(crate) fn print_write_field_array(
     s: &mut Writer,
-    variable_name: &str,
+    d: &StructMemberDefinition,
     variable_prefix: &str,
     array: &Array,
     postfix: &str,
 ) {
+    if d.tags().is_compressed() {
+        s.wln("let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());"); 
+    }
+
     s.open_curly(format!(
         "for i in {prefix}{name}.iter()",
-        name = variable_name,
+        name = d.name(),
         prefix = variable_prefix
     ));
 
     match array.ty() {
-        ArrayType::Integer(integer_type) => s.wln(format!(
-            "w.write_all(&i.to_{endian}_bytes()){postfix}?;",
-            endian = integer_type.rust_endian_str(),
-            postfix = postfix,
-        )),
+        ArrayType::Integer(integer_type) => {
+            s.wln(format!(
+                "{writer}.write_all(&i.to_{endian}_bytes()){postfix}?;",
+                writer = if d.tags().is_compressed() {"encoder"} else {"w"},
+                endian = integer_type.rust_endian_str(),
+                postfix = postfix,
+            ))
+        },
         ArrayType::Complex(_) => s.wln("i.write_into_vec(w)?;"),
         ArrayType::CString => {
             s.wln(format!("w.write_all(i.as_bytes()){}?;", postfix));
@@ -216,7 +223,7 @@ pub(crate) fn print_write_definition(
             ));
         }
         Type::Array(array) => {
-            print_write_field_array(s, d.name(), variable_prefix, array, postfix);
+            print_write_field_array(s, d, variable_prefix, array, postfix);
         }
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
             let integer = match upcast {
