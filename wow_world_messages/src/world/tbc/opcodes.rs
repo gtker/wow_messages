@@ -1303,6 +1303,7 @@ use crate::world::tbc::SMSG_CHAR_ENUM;
 use crate::world::tbc::SMSG_CHAR_DELETE;
 use crate::world::tbc::SMSG_CHARACTER_LOGIN_FAILED;
 use crate::world::tbc::SMSG_LOGIN_SETTIMESPEED;
+use crate::world::tbc::SMSG_CHANNEL_NOTIFY;
 use crate::world::tbc::SMSG_CHANNEL_LIST;
 use crate::world::tbc::SMSG_UPDATE_OBJECT;
 use crate::world::tbc::MSG_MOVE_START_FORWARD_Server;
@@ -1360,6 +1361,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CHAR_DELETE(SMSG_CHAR_DELETE),
     SMSG_CHARACTER_LOGIN_FAILED(SMSG_CHARACTER_LOGIN_FAILED),
     SMSG_LOGIN_SETTIMESPEED(SMSG_LOGIN_SETTIMESPEED),
+    SMSG_CHANNEL_NOTIFY(SMSG_CHANNEL_NOTIFY),
     SMSG_CHANNEL_LIST(SMSG_CHANNEL_LIST),
     SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
     MSG_MOVE_START_FORWARD(MSG_MOVE_START_FORWARD_Server),
@@ -1419,6 +1421,7 @@ impl ServerOpcodeMessage {
             0x003C => Ok(Self::SMSG_CHAR_DELETE(<SMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0041 => Ok(Self::SMSG_CHARACTER_LOGIN_FAILED(<SMSG_CHARACTER_LOGIN_FAILED as crate::Message>::read_body(&mut r, body_size)?)),
             0x0042 => Ok(Self::SMSG_LOGIN_SETTIMESPEED(<SMSG_LOGIN_SETTIMESPEED as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0099 => Ok(Self::SMSG_CHANNEL_NOTIFY(<SMSG_CHANNEL_NOTIFY as crate::Message>::read_body(&mut r, body_size)?)),
             0x009B => Ok(Self::SMSG_CHANNEL_LIST(<SMSG_CHANNEL_LIST as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(<SMSG_UPDATE_OBJECT as crate::Message>::read_body(&mut r, body_size)?)),
             0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD_Server as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1546,6 +1549,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_FORWARD(c) => c.write_encrypted_server(w, e),
@@ -1606,6 +1610,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_FORWARD(c) => c.write_unencrypted_server(w),
@@ -1666,6 +1671,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -1726,6 +1732,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_unencrypted_server(w).await,
@@ -1786,6 +1793,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_encrypted_server(w, e).await,
@@ -1846,6 +1854,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_unencrypted_server(w).await,
@@ -1908,6 +1917,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHAR_DELETE(_) => "SMSG_CHAR_DELETE",
             ServerOpcodeMessage::SMSG_CHARACTER_LOGIN_FAILED(_) => "SMSG_CHARACTER_LOGIN_FAILED",
             ServerOpcodeMessage::SMSG_LOGIN_SETTIMESPEED(_) => "SMSG_LOGIN_SETTIMESPEED",
+            ServerOpcodeMessage::SMSG_CHANNEL_NOTIFY(_) => "SMSG_CHANNEL_NOTIFY",
             ServerOpcodeMessage::SMSG_CHANNEL_LIST(_) => "SMSG_CHANNEL_LIST",
             ServerOpcodeMessage::SMSG_UPDATE_OBJECT(_) => "SMSG_UPDATE_OBJECT",
             ServerOpcodeMessage::MSG_MOVE_START_FORWARD(_) => "MSG_MOVE_START_FORWARD_Server",
@@ -1988,6 +1998,12 @@ impl From<SMSG_CHARACTER_LOGIN_FAILED> for ServerOpcodeMessage {
 impl From<SMSG_LOGIN_SETTIMESPEED> for ServerOpcodeMessage {
     fn from(c: SMSG_LOGIN_SETTIMESPEED) -> Self {
         Self::SMSG_LOGIN_SETTIMESPEED(c)
+    }
+}
+
+impl From<SMSG_CHANNEL_NOTIFY> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHANNEL_NOTIFY) -> Self {
+        Self::SMSG_CHANNEL_NOTIFY(c)
     }
 }
 
