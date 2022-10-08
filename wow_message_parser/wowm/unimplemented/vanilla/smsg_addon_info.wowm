@@ -1,5 +1,0 @@
-smsg SMSG_ADDON_INFO = 0x2EF {
-    unimplemented
-} {
-    versions = "1.12";
-}

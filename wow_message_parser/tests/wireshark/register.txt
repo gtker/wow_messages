@@ -52,6 +52,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_addon_type,
+            { "Addon Type", "woww.addon.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_addon_type_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_agility,
             { "Agility", "woww.agility",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -1924,6 +1930,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_info_block,
+            { "Info Block", "woww.info.block",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_info_block_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_info_type,
             { "Info Type", "woww.info.type",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -2251,6 +2263,12 @@
         { &hf_woww_join_as_group,
             { "Join As Group", "woww.join.as.group",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_key_version,
+            { "Key Version", "woww.key.version",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_key_version_strings), 0,
                 NULL, HFILL
             }
         },
@@ -3205,6 +3223,12 @@
         { &hf_woww_probability,
             { "Probability", "woww.probability",
                 FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_public_key,
+            { "Public Key", "woww.public.key",
+                FT_BYTES, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -4570,6 +4594,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_update_available_flag,
+            { "Update Available Flag", "woww.update.available.flag",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_update_flag,
             { "Update Flag", "woww.update.flag",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
@@ -4579,6 +4609,18 @@
         { &hf_woww_update_type,
             { "Update Type", "woww.update.type",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_update_type_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_url,
+            { "Url", "woww.url",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_url_info,
+            { "Url Info", "woww.url.info",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_url_info_strings), 0,
                 NULL, HFILL
             }
         },

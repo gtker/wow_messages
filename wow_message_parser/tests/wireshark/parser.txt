@@ -3431,7 +3431,23 @@
             break;
         case SMSG_ADDON_INFO:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
+            while (ptvcursor_current_offset(ptv) < offset_packet_end) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Addon");
+                ptvcursor_add(ptv, hf_woww_addon_type, 1, ENC_LITTLE_ENDIAN);
+                ptvcursor_add_ret_uint(ptv, hf_woww_info_block, 1, ENC_LITTLE_ENDIAN, &info_block);
+                if (info_block == INFO_BLOCK_AVAILABLE) {
+                    ptvcursor_add_ret_uint(ptv, hf_woww_key_version, 1, ENC_LITTLE_ENDIAN, &key_version);
+                    if (key_version != KEY_VERSION_ZERO) {
+                        ptvcursor_add(ptv, hf_woww_public_key, 256, ENC_NA);
+                    }
+                    ptvcursor_add(ptv, hf_woww_update_available_flag, 4, ENC_LITTLE_ENDIAN);
+                }
+                ptvcursor_add_ret_uint(ptv, hf_woww_url_info, 1, ENC_LITTLE_ENDIAN, &url_info);
+                if (url_info == URL_INFO_AVAILABLE) {
+                    add_cstring(ptv, &hf_woww_url);
+                }
+                ptvcursor_pop_subtree(ptv);
+            }
             break;
         case SMSG_AI_REACTION:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
@@ -3776,7 +3792,7 @@
             ptvcursor_add(ptv, hf_woww_caster_guid, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_target_guid, 8, ENC_LITTLE_ENDIAN);
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
+            while (ptvcursor_current_offset(ptv) < offset_packet_end) {
                 ptvcursor_add(ptv, hf_woww_spells, 4, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -5129,7 +5145,7 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_nearest_node, 4, ENC_LITTLE_ENDIAN);
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
+            while (ptvcursor_current_offset(ptv) < offset_packet_end) {
                 ptvcursor_add(ptv, hf_woww_nodes, 4, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -5257,7 +5273,7 @@
         case SMSG_SPELL_COOLDOWN:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            for (i = 0; i < len; ++i) {
+            while (ptvcursor_current_offset(ptv) < offset_packet_end) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellCooldownStatus");
                 ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_cooldown_time_in_msecs, 4, ENC_LITTLE_ENDIAN);

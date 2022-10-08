@@ -344,7 +344,14 @@ fn print_definition(
                 return true;
             }
 
-            s.open_curly(format!("for (i = 0; i < {len}; ++i)"));
+            match array.size() {
+                ArraySize::Fixed(_) | ArraySize::Variable(_) => {
+                    s.open_curly(format!("for (i = 0; i < {len}; ++i)"));
+                }
+                ArraySize::Endless => {
+                    s.open_curly("while (ptvcursor_current_offset(ptv) < offset_packet_end)")
+                }
+            }
 
             match array.ty() {
                 ArrayType::Integer(i) => {

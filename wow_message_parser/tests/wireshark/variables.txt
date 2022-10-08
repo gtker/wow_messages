@@ -43,6 +43,8 @@
     guint32 exp_type = 0;
     guint32 flags = 0;
     guint32 index = 0;
+    guint32 info_block = 0;
+    guint32 key_version = 0;
     guint32 listed_players = 0;
     guint32 map = 0;
     guint32 mask = 0;
@@ -58,3 +60,4 @@
     guint32 target_flags = 0;
     guint32 update_flag = 0;
     guint32 update_type = 0;
+    guint32 url_info = 0;

@@ -107,7 +107,11 @@ impl ParsedType {
                 } else if let Some(c) = get_container(containers, s, e.tags()) {
                     sizes += c.create_sizes(containers, definers);
                 } else {
-                    unreachable!()
+                    panic!(
+                        "unable to find identifier: '{}' with tags: '{:?}'",
+                        s,
+                        e.tags()
+                    );
                 }
             }
             ParsedType::Array(array) => {

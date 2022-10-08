@@ -1,3 +1,68 @@
+enum AddonType : u8 {
+    BANNED = 0;
+    ENABLED = 1 {
+        comment = "Shows addon in list. Probably intended for player-created addons.";
+    }
+    BLIZZARD = 2 {
+        comment = "Hides addon from list.";
+    }
+} {
+    versions = "1.12";
+}
+
+enum InfoBlock : u8 {
+    UNAVAILABLE = 0;
+    AVAILABLE = 1;
+} {
+    versions = "1.12";
+}
+
+enum UrlInfo : u8 {
+    UNAVAILABLE = 0;
+    AVAILABLE = 1;
+} {
+    versions = "1.12";
+}
+
+enum KeyVersion : u8 {
+    ZERO = 0;
+    ONE = 1;
+    TWO = 2;
+    THREE = 3;
+    FOUR = 4;
+    FIVE = 5;
+    SIX = 6;
+    SEVEN = 7;
+    EIGHT = 8;
+    NINE = 9;
+} {
+    versions = "1.12";
+}
+
+struct Addon {
+    AddonType addon_type;
+    InfoBlock info_block;
+    if (info_block == AVAILABLE) {
+        KeyVersion key_version;
+        if (key_version != ZERO) {
+            u8[256] public_key;
+        }
+        u32 update_available_flag;
+    }
+    UrlInfo url_info;
+    if (url_info == AVAILABLE) {
+        CString url;
+    }
+} {
+    versions = "1.12";
+}
+
+smsg SMSG_ADDON_INFO = 0x2EF {
+    Addon[-] addons;
+} {
+    versions = "1.12";
+}
+
 struct Addon
 {
     /* TODO: addon_type requires more research and turn into a proper enum */

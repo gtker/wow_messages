@@ -1,4 +1,62 @@
 typedef enum {
+    ADDON_TYPE_BANNED = 0x0,
+    ADDON_TYPE_ENABLED = 0x1,
+    ADDON_TYPE_BLIZZARD = 0x2,
+} e_addon_type;
+static const value_string e_addon_type_strings[] =  {
+    { ADDON_TYPE_BANNED, "Banned" },
+    { ADDON_TYPE_ENABLED, "Enabled" },
+    { ADDON_TYPE_BLIZZARD, "Blizzard" },
+    { 0, NULL }
+};
+
+typedef enum {
+    INFO_BLOCK_UNAVAILABLE = 0x0,
+    INFO_BLOCK_AVAILABLE = 0x1,
+} e_info_block;
+static const value_string e_info_block_strings[] =  {
+    { INFO_BLOCK_UNAVAILABLE, "Unavailable" },
+    { INFO_BLOCK_AVAILABLE, "Available" },
+    { 0, NULL }
+};
+
+typedef enum {
+    KEY_VERSION_ZERO = 0x0,
+    KEY_VERSION_ONE = 0x1,
+    KEY_VERSION_TWO = 0x2,
+    KEY_VERSION_THREE = 0x3,
+    KEY_VERSION_FOUR = 0x4,
+    KEY_VERSION_FIVE = 0x5,
+    KEY_VERSION_SIX = 0x6,
+    KEY_VERSION_SEVEN = 0x7,
+    KEY_VERSION_EIGHT = 0x8,
+    KEY_VERSION_NINE = 0x9,
+} e_key_version;
+static const value_string e_key_version_strings[] =  {
+    { KEY_VERSION_ZERO, "Zero" },
+    { KEY_VERSION_ONE, "One" },
+    { KEY_VERSION_TWO, "Two" },
+    { KEY_VERSION_THREE, "Three" },
+    { KEY_VERSION_FOUR, "Four" },
+    { KEY_VERSION_FIVE, "Five" },
+    { KEY_VERSION_SIX, "Six" },
+    { KEY_VERSION_SEVEN, "Seven" },
+    { KEY_VERSION_EIGHT, "Eight" },
+    { KEY_VERSION_NINE, "Nine" },
+    { 0, NULL }
+};
+
+typedef enum {
+    URL_INFO_UNAVAILABLE = 0x0,
+    URL_INFO_AVAILABLE = 0x1,
+} e_url_info;
+static const value_string e_url_info_strings[] =  {
+    { URL_INFO_UNAVAILABLE, "Unavailable" },
+    { URL_INFO_AVAILABLE, "Available" },
+    { 0, NULL }
+};
+
+typedef enum {
     AURA_TYPE_NONE = 0x00,
     AURA_TYPE_BIND_SIGHT = 0x01,
     AURA_TYPE_MOD_POSSESS = 0x02,
