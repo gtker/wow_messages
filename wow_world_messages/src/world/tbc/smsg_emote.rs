@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::Emote;
+use crate::world::tbc::Emote;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_emote.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_emote.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_emote.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_emote.wowm#L8):
 /// ```text
 /// smsg SMSG_EMOTE = 0x0103 {
 ///     Emote emote;
@@ -50,6 +50,6 @@ impl crate::Message for SMSG_EMOTE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_EMOTE {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_EMOTE {}
 

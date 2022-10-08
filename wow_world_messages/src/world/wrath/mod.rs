@@ -314,6 +314,8 @@ pub(crate) mod smsg_defense_message;
 pub use smsg_defense_message::*;
 pub(crate) mod smsg_durability_damage_death;
 pub use smsg_durability_damage_death::*;
+pub(crate) mod smsg_emote;
+pub use smsg_emote::*;
 pub(crate) mod smsg_environmentaldamagelog;
 pub use smsg_environmentaldamagelog::*;
 pub(crate) mod smsg_login_settimespeed;
