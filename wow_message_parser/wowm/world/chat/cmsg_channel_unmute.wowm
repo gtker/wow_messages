@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_CHANNEL_UNMUTE = 0x00A2 {
     CString channel_name;

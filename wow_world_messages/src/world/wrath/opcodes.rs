@@ -11,10 +11,19 @@ use crate::world::wrath::CMSG_CHAR_ENUM;
 use crate::world::wrath::CMSG_CHAR_DELETE;
 use crate::world::wrath::CMSG_PLAYER_LOGIN;
 use crate::world::wrath::CMSG_CHANNEL_LIST;
+use crate::world::wrath::CMSG_CHANNEL_PASSWORD;
+use crate::world::wrath::CMSG_CHANNEL_SET_OWNER;
+use crate::world::wrath::CMSG_CHANNEL_OWNER;
+use crate::world::wrath::CMSG_CHANNEL_MODERATOR;
+use crate::world::wrath::CMSG_CHANNEL_UNMODERATOR;
+use crate::world::wrath::CMSG_CHANNEL_MUTE;
+use crate::world::wrath::CMSG_CHANNEL_UNMUTE;
 use crate::world::wrath::CMSG_CHANNEL_INVITE;
 use crate::world::wrath::CMSG_CHANNEL_KICK;
 use crate::world::wrath::CMSG_CHANNEL_BAN;
+use crate::world::wrath::CMSG_CHANNEL_UNBAN;
 use crate::world::wrath::CMSG_CHANNEL_ANNOUNCEMENTS;
+use crate::world::wrath::CMSG_CHANNEL_MODERATE;
 use crate::world::wrath::MSG_MOVE_START_FORWARD_Client;
 use crate::world::wrath::MSG_MOVE_START_BACKWARD_Client;
 use crate::world::wrath::MSG_MOVE_STOP_Client;
@@ -73,10 +82,19 @@ pub enum ClientOpcodeMessage {
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
     CMSG_PLAYER_LOGIN(CMSG_PLAYER_LOGIN),
     CMSG_CHANNEL_LIST(CMSG_CHANNEL_LIST),
+    CMSG_CHANNEL_PASSWORD(CMSG_CHANNEL_PASSWORD),
+    CMSG_CHANNEL_SET_OWNER(CMSG_CHANNEL_SET_OWNER),
+    CMSG_CHANNEL_OWNER(CMSG_CHANNEL_OWNER),
+    CMSG_CHANNEL_MODERATOR(CMSG_CHANNEL_MODERATOR),
+    CMSG_CHANNEL_UNMODERATOR(CMSG_CHANNEL_UNMODERATOR),
+    CMSG_CHANNEL_MUTE(CMSG_CHANNEL_MUTE),
+    CMSG_CHANNEL_UNMUTE(CMSG_CHANNEL_UNMUTE),
     CMSG_CHANNEL_INVITE(CMSG_CHANNEL_INVITE),
     CMSG_CHANNEL_KICK(CMSG_CHANNEL_KICK),
     CMSG_CHANNEL_BAN(CMSG_CHANNEL_BAN),
+    CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN),
     CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS),
+    CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE),
     MSG_MOVE_START_FORWARD(MSG_MOVE_START_FORWARD_Client),
     MSG_MOVE_START_BACKWARD(MSG_MOVE_START_BACKWARD_Client),
     MSG_MOVE_STOP(MSG_MOVE_STOP_Client),
@@ -137,10 +155,19 @@ impl ClientOpcodeMessage {
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003D => Ok(Self::CMSG_PLAYER_LOGIN(<CMSG_PLAYER_LOGIN as crate::Message>::read_body(&mut r, body_size)?)),
             0x009A => Ok(Self::CMSG_CHANNEL_LIST(<CMSG_CHANNEL_LIST as crate::Message>::read_body(&mut r, body_size)?)),
+            0x009C => Ok(Self::CMSG_CHANNEL_PASSWORD(<CMSG_CHANNEL_PASSWORD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x009D => Ok(Self::CMSG_CHANNEL_SET_OWNER(<CMSG_CHANNEL_SET_OWNER as crate::Message>::read_body(&mut r, body_size)?)),
+            0x009E => Ok(Self::CMSG_CHANNEL_OWNER(<CMSG_CHANNEL_OWNER as crate::Message>::read_body(&mut r, body_size)?)),
+            0x009F => Ok(Self::CMSG_CHANNEL_MODERATOR(<CMSG_CHANNEL_MODERATOR as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00A0 => Ok(Self::CMSG_CHANNEL_UNMODERATOR(<CMSG_CHANNEL_UNMODERATOR as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00A1 => Ok(Self::CMSG_CHANNEL_MUTE(<CMSG_CHANNEL_MUTE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00A2 => Ok(Self::CMSG_CHANNEL_UNMUTE(<CMSG_CHANNEL_UNMUTE as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A3 => Ok(Self::CMSG_CHANNEL_INVITE(<CMSG_CHANNEL_INVITE as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A4 => Ok(Self::CMSG_CHANNEL_KICK(<CMSG_CHANNEL_KICK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A5 => Ok(Self::CMSG_CHANNEL_BAN(<CMSG_CHANNEL_BAN as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(<CMSG_CHANNEL_UNBAN as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(<CMSG_CHANNEL_ANNOUNCEMENTS as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(<CMSG_CHANNEL_MODERATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00B7 => Ok(Self::MSG_MOVE_STOP(<MSG_MOVE_STOP_Client as crate::Message>::read_body(&mut r, body_size)?)),
@@ -269,10 +296,19 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_LIST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_PASSWORD(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_SET_OWNER(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_OWNER(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_MODERATOR(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_UNMODERATOR(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_MUTE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_UNMUTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_INVITE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_KICK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_BAN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_UNBAN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_MODERATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_FORWARD(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP(c) => c.write_encrypted_client(w, e),
@@ -334,10 +370,19 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_LIST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_PASSWORD(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_SET_OWNER(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_OWNER(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_MODERATOR(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_UNMODERATOR(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_MUTE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_UNMUTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_INVITE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_KICK(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_BAN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_UNBAN(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_MODERATE(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_FORWARD(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP(c) => c.write_unencrypted_client(w),
@@ -399,10 +444,19 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_PASSWORD(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_SET_OWNER(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_OWNER(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_MODERATOR(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_UNMODERATOR(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_MUTE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_UNMUTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_KICK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_BAN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_UNBAN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_MODERATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -464,10 +518,19 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_PASSWORD(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_SET_OWNER(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_OWNER(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_MODERATOR(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_UNMODERATOR(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_MUTE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_UNMUTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_KICK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_BAN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_UNBAN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_MODERATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP(c) => c.tokio_write_unencrypted_client(w).await,
@@ -529,10 +592,19 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_PASSWORD(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_SET_OWNER(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_OWNER(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_MODERATOR(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_UNMODERATOR(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_MUTE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_UNMUTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_KICK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_BAN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_UNBAN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_MODERATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP(c) => c.astd_write_encrypted_client(w, e).await,
@@ -594,10 +666,19 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_PASSWORD(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_SET_OWNER(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_OWNER(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_MODERATOR(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_UNMODERATOR(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_MUTE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_UNMUTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_INVITE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_KICK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_BAN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_UNBAN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_MODERATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP(c) => c.astd_write_unencrypted_client(w).await,
@@ -694,10 +775,19 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => "CMSG_CHAR_DELETE",
             ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => "CMSG_PLAYER_LOGIN",
             ClientOpcodeMessage::CMSG_CHANNEL_LIST(_) => "CMSG_CHANNEL_LIST",
+            ClientOpcodeMessage::CMSG_CHANNEL_PASSWORD(_) => "CMSG_CHANNEL_PASSWORD",
+            ClientOpcodeMessage::CMSG_CHANNEL_SET_OWNER(_) => "CMSG_CHANNEL_SET_OWNER",
+            ClientOpcodeMessage::CMSG_CHANNEL_OWNER(_) => "CMSG_CHANNEL_OWNER",
+            ClientOpcodeMessage::CMSG_CHANNEL_MODERATOR(_) => "CMSG_CHANNEL_MODERATOR",
+            ClientOpcodeMessage::CMSG_CHANNEL_UNMODERATOR(_) => "CMSG_CHANNEL_UNMODERATOR",
+            ClientOpcodeMessage::CMSG_CHANNEL_MUTE(_) => "CMSG_CHANNEL_MUTE",
+            ClientOpcodeMessage::CMSG_CHANNEL_UNMUTE(_) => "CMSG_CHANNEL_UNMUTE",
             ClientOpcodeMessage::CMSG_CHANNEL_INVITE(_) => "CMSG_CHANNEL_INVITE",
             ClientOpcodeMessage::CMSG_CHANNEL_KICK(_) => "CMSG_CHANNEL_KICK",
             ClientOpcodeMessage::CMSG_CHANNEL_BAN(_) => "CMSG_CHANNEL_BAN",
+            ClientOpcodeMessage::CMSG_CHANNEL_UNBAN(_) => "CMSG_CHANNEL_UNBAN",
             ClientOpcodeMessage::CMSG_CHANNEL_ANNOUNCEMENTS(_) => "CMSG_CHANNEL_ANNOUNCEMENTS",
+            ClientOpcodeMessage::CMSG_CHANNEL_MODERATE(_) => "CMSG_CHANNEL_MODERATE",
             ClientOpcodeMessage::MSG_MOVE_START_FORWARD(_) => "MSG_MOVE_START_FORWARD_Client",
             ClientOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => "MSG_MOVE_START_BACKWARD_Client",
             ClientOpcodeMessage::MSG_MOVE_STOP(_) => "MSG_MOVE_STOP_Client",
@@ -782,6 +872,48 @@ impl From<CMSG_CHANNEL_LIST> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_CHANNEL_PASSWORD> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_PASSWORD) -> Self {
+        Self::CMSG_CHANNEL_PASSWORD(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_SET_OWNER> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_SET_OWNER) -> Self {
+        Self::CMSG_CHANNEL_SET_OWNER(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_OWNER> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_OWNER) -> Self {
+        Self::CMSG_CHANNEL_OWNER(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_MODERATOR> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_MODERATOR) -> Self {
+        Self::CMSG_CHANNEL_MODERATOR(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_UNMODERATOR> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_UNMODERATOR) -> Self {
+        Self::CMSG_CHANNEL_UNMODERATOR(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_MUTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_MUTE) -> Self {
+        Self::CMSG_CHANNEL_MUTE(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_UNMUTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_UNMUTE) -> Self {
+        Self::CMSG_CHANNEL_UNMUTE(c)
+    }
+}
+
 impl From<CMSG_CHANNEL_INVITE> for ClientOpcodeMessage {
     fn from(c: CMSG_CHANNEL_INVITE) -> Self {
         Self::CMSG_CHANNEL_INVITE(c)
@@ -800,9 +932,21 @@ impl From<CMSG_CHANNEL_BAN> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_CHANNEL_UNBAN> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_UNBAN) -> Self {
+        Self::CMSG_CHANNEL_UNBAN(c)
+    }
+}
+
 impl From<CMSG_CHANNEL_ANNOUNCEMENTS> for ClientOpcodeMessage {
     fn from(c: CMSG_CHANNEL_ANNOUNCEMENTS) -> Self {
         Self::CMSG_CHANNEL_ANNOUNCEMENTS(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_MODERATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_MODERATE) -> Self {
+        Self::CMSG_CHANNEL_MODERATE(c)
     }
 }
 
