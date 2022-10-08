@@ -1,0 +1,96 @@
+#tag_all versions "3.3.5";
+
+flag HitInfo : u32 {
+    NORMALSWING         = 0x00000000;
+    UNK1                = 0x00000001 {
+        comment = "req correct packet structure";
+    }
+    AFFECTS_VICTIM      = 0x00000002;
+    OFFHAND             = 0x00000004;
+    UNK2                = 0x00000008;
+    MISS                = 0x00000010;
+    FULL_ABSORB         = 0x00000020;
+    PARTIAL_ABSORB      = 0x00000040;
+    ALL_ABSORB          = 0x00000060;
+    FULL_RESIST         = 0x00000080;
+    PARTIAL_RESIST      = 0x00000100;
+    ALL_RESIST          = 0x00000180;
+    CRITICALHIT         = 0x00000200 {
+        comment = "critical hit";
+    }
+    UNK10               = 0x00000400;
+    UNK11               = 0x00000800;
+    UNK12               = 0x00001000;
+    BLOCK               = 0x00002000 {
+        comment = "blocked damage";
+    }
+    UNK14               = 0x00004000 {
+        comment = "set only if meleespellid is present. no world text when victim is hit for 0 dmg(HideWorldTextForNoDamage?)";
+    }
+    UNK15               = 0x00008000 {
+        comment = "player victim? something related to blod sprut visual (BloodSpurtInBack?)";
+    }
+    GLANCING            = 0x00010000;
+    CRUSHING            = 0x00020000;
+    NO_ANIMATION        = 0x00040000;
+    UNK19               = 0x00080000;
+    UNK20               = 0x00100000;
+    SWINGNOHITSOUND     = 0x00200000 {
+        comment = "unused?";
+    }
+    UNK22               = 0x00400000;
+    RAGE_GAIN           = 0x00800000;
+    FAKE_DAMAGE         = 0x01000000 {
+        comment = "enables damage animation even if no damage done. set only if no damage";
+    }
+}
+
+smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
+    HitInfo hit_info;
+    PackedGuid attacker;
+    PackedGuid target;
+    u32 total_damage;
+    u32 overkill;
+    u8 amount_of_damages = 1 {
+        comment = "Forced to be one in order to correctly handle struct depending on `hit_info`.";
+    }
+    u32 spell_school_mask;
+    f32 damage_float {
+        comment = "arcemu sends the same data in `damage_uint`.";
+    }
+    u32 damage_uint {
+        comment = "arcemu sends the same data in `damage_float`.";
+    }
+    if (hit_info & ALL_ABSORB) {
+        u32 absorb;
+    }
+    if (hit_info & ALL_RESIST) {
+        u32 resist;
+    }
+    u8 v_state;
+    u32 unknown1 {
+        comment = "arcemu: can be 0,1000 or -1";
+    }
+    u32 unknown2;
+    if (hit_info & BLOCK) {
+        u32 blocked_amount;
+    }
+    if (hit_info & UNK19) {
+        u32 unknown3;
+    }
+    if (hit_info & UNK1) {
+        u32 unknown4;
+        f32 unknown5;
+        f32 unknown6;
+        f32 unknown7;
+        f32 unknown8;
+        f32 unknown9;
+        f32 unknown10;
+        f32 unknown11;
+        f32 unknown12;
+        f32 unknown13;
+        f32 unknown14;
+        u32 unknown15;
+    }
+}
+
