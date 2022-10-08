@@ -152,7 +152,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
             current_size += 1;
         }
 
-        let mut addon_info_temp = Vec::new();
+        let mut addon_info_temp = Vec::with_capacity(decompressed_addon_info_size as usize);
         let mut decoder = flate2::read::ZlibDecoder::new(addon_info.as_slice());
         decoder.read_to_end(&mut addon_info_temp)?;
 
