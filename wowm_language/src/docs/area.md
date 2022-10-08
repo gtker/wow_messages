@@ -2191,6 +2191,7 @@ Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
 * [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
 * [SMSG_PLAYERBOUND](smsg_playerbound.md)
+* [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 
 # Area
 
@@ -5498,6 +5499,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [Character](character.md)
+* [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 
 # Area
 
@@ -10133,4 +10135,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [Character](character.md)
+* [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 

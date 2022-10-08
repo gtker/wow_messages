@@ -260,6 +260,8 @@ pub(crate) mod smsg_update_account_data_complete;
 pub use smsg_update_account_data_complete::*;
 pub(crate) mod smsg_update_object;
 pub use smsg_update_object::*;
+pub(crate) mod smsg_zone_under_attack;
+pub use smsg_zone_under_attack::*;
 pub(crate) mod spline_flag;
 pub use spline_flag::*;
 pub(crate) mod transport_info;

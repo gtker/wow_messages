@@ -1,7 +1,17 @@
-#tag_all versions "1.12";
-
 smsg SMSG_ZONE_UNDER_ATTACK = 0x0254 {
-    /* Zone or area? */
-    u32 zone_id;
+    Area zone_id;
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_ZONE_UNDER_ATTACK = 0x0254 {
+    Area zone_id;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_ZONE_UNDER_ATTACK = 0x0254 {
+    Area zone_id;
+} {
+    versions = "3.3.5";
+}
