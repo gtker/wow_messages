@@ -232,6 +232,8 @@ pub(crate) mod smsg_character_login_failed;
 pub use smsg_character_login_failed::*;
 pub(crate) mod smsg_clientcache_version;
 pub use smsg_clientcache_version::*;
+pub(crate) mod smsg_durability_damage_death;
+pub use smsg_durability_damage_death::*;
 pub(crate) mod smsg_login_settimespeed;
 pub use smsg_login_settimespeed::*;
 pub(crate) mod smsg_login_verify_world;

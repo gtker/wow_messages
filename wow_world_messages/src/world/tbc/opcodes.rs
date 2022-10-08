@@ -956,6 +956,7 @@ use crate::world::tbc::SMSG_AUTH_CHALLENGE;
 use crate::world::tbc::SMSG_AUTH_RESPONSE;
 use crate::world::tbc::SMSG_ACCOUNT_DATA_TIMES;
 use crate::world::tbc::SMSG_LOGIN_VERIFY_WORLD;
+use crate::world::tbc::SMSG_DURABILITY_DAMAGE_DEATH;
 use crate::world::tbc::SMSG_CHAR_RENAME;
 use crate::world::tbc::MSG_MOVE_START_ASCEND_Server;
 use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Server;
@@ -1007,6 +1008,7 @@ pub enum ServerOpcodeMessage {
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
+    SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Server),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Server),
@@ -1060,6 +1062,7 @@ impl ServerOpcodeMessage {
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Server as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1181,6 +1184,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_server(w, e),
@@ -1235,6 +1239,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
+            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_server(w),
@@ -1289,6 +1294,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -1343,6 +1349,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
@@ -1397,6 +1404,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
@@ -1451,6 +1459,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
@@ -1507,6 +1516,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
+            ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
             ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Server",
             ServerOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Server",
@@ -1766,6 +1776,12 @@ impl From<SMSG_ACCOUNT_DATA_TIMES> for ServerOpcodeMessage {
 impl From<SMSG_LOGIN_VERIFY_WORLD> for ServerOpcodeMessage {
     fn from(c: SMSG_LOGIN_VERIFY_WORLD) -> Self {
         Self::SMSG_LOGIN_VERIFY_WORLD(c)
+    }
+}
+
+impl From<SMSG_DURABILITY_DAMAGE_DEATH> for ServerOpcodeMessage {
+    fn from(c: SMSG_DURABILITY_DAMAGE_DEATH) -> Self {
+        Self::SMSG_DURABILITY_DAMAGE_DEATH(c)
     }
 }
 

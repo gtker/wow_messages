@@ -1,4 +1,6 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
-smsg SMSG_DURABILITY_DAMAGE_DEATH = 0x02BD {}
+smsg SMSG_DURABILITY_DAMAGE_DEATH = 0x02BD {} {
+    description = "Signals to the client that the death caused 10% durability loss.";
+}
 
