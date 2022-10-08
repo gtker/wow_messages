@@ -113,7 +113,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `UNK12` | 4096 (0x1000) |  |  |
 | `BLOCK` | 8192 (0x2000) |  | blocked damage |
 | `UNK14` | 16384 (0x4000) |  | set only if meleespellid is present. no world text when victim is hit for 0 dmg(HideWorldTextForNoDamage?) |
-| `UNK15` | 32768 (0x8000) |  | player victim? something related to blod sprut visual (BloodSpurtInBack?) |
+| `UNK15` | 32768 (0x8000) |  | player victim? something related to blod sprut visual (`BloodSpurtInBack`?) |
 | `GLANCING` | 65536 (0x10000) |  |  |
 | `CRUSHING` | 131072 (0x20000) |  |  |
 | `NO_ANIMATION` | 262144 (0x40000) |  |  |

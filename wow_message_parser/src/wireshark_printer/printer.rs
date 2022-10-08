@@ -333,12 +333,10 @@ fn print_definition(
             };
 
             if array.is_byte_array() {
-                match array.size() {
-                    ArraySize::Endless => {
-                        s.wln("len = offset_packet_end - ptvcursor_current_offset(ptv);");
-                    }
-                    _ => {}
+                if matches!(array.size(), ArraySize::Endless) {
+                    s.wln("len = offset_packet_end - ptvcursor_current_offset(ptv);");
                 }
+
                 s.wln(format!(
                     "ptvcursor_add(ptv, {hf}, {len}, ENC_NA);",
                     hf = w.unwrap().name()

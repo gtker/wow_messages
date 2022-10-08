@@ -430,7 +430,7 @@ impl HitInfo {
         (self.inner & Self::UNK15) != 0
     }
 
-    /// player victim? something related to blod sprut visual (BloodSpurtInBack?)
+    /// player victim? something related to blod sprut visual (`BloodSpurtInBack`?)
     ///
     pub const fn new_UNK15() -> Self {
         Self { inner: Self::UNK15 }

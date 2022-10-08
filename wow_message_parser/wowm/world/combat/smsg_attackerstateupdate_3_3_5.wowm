@@ -28,7 +28,7 @@ flag HitInfo : u32 {
         comment = "set only if meleespellid is present. no world text when victim is hit for 0 dmg(HideWorldTextForNoDamage?)";
     }
     UNK15               = 0x00008000 {
-        comment = "player victim? something related to blod sprut visual (BloodSpurtInBack?)";
+        comment = "player victim? something related to blod sprut visual (`BloodSpurtInBack`?)";
     }
     GLANCING            = 0x00010000;
     CRUSHING            = 0x00020000;
