@@ -1,6 +1,14 @@
-#tag_all versions "3.3.5";
+cmsg CMSG_SET_ACTIVE_VOICE_CHANNEL = 0x3D2 { /* Note that opcode numbers are different. */
+    u32 unknown1;
+    CString unknown2;
+} {
+    versions = "2.4.3";
+}
 
 cmsg CMSG_SET_ACTIVE_VOICE_CHANNEL = 0x3D3 {
     u32 unknown1;
     CString unknown2;
+} {
+    versions = "3";
 }
+

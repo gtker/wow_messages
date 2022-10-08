@@ -104,6 +104,8 @@ pub(crate) mod cmsg_player_login;
 pub use cmsg_player_login::*;
 pub(crate) mod cmsg_realm_split;
 pub use cmsg_realm_split::*;
+pub(crate) mod cmsg_set_active_voice_channel;
+pub use cmsg_set_active_voice_channel::*;
 pub use crate::helper::tbc::*;
 pub(crate) mod emote;
 pub use emote::*;
