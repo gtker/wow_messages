@@ -1,6 +1,12 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_LEAVE_CHANNEL = 0x0098 {
     CString channel_name;
+} {
+    versions = "1.12";
 }
 
+cmsg CMSG_LEAVE_CHANNEL = 0x0098 {
+    u32 channel_id;
+    CString channel_name;
+} {
+    versions = "2.4.3 3";
+}
