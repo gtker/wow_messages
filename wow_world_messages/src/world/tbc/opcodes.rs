@@ -36,6 +36,7 @@ use crate::world::tbc::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK;
 use crate::world::tbc::CMSG_FORCE_MOVE_ROOT_ACK;
 use crate::world::tbc::CMSG_FORCE_MOVE_UNROOT_ACK;
 use crate::world::tbc::MSG_MOVE_HEARTBEAT_Client;
+use crate::world::tbc::CMSG_COMPLETE_CINEMATIC;
 use crate::world::tbc::CMSG_ATTACKSWING;
 use crate::world::tbc::CMSG_ATTACKSTOP;
 use crate::world::tbc::CMSG_ACTIVATETAXI;
@@ -86,6 +87,7 @@ pub enum ClientOpcodeMessage {
     CMSG_FORCE_MOVE_ROOT_ACK(CMSG_FORCE_MOVE_ROOT_ACK),
     CMSG_FORCE_MOVE_UNROOT_ACK(CMSG_FORCE_MOVE_UNROOT_ACK),
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT_Client),
+    CMSG_COMPLETE_CINEMATIC(CMSG_COMPLETE_CINEMATIC),
     CMSG_ATTACKSWING(CMSG_ATTACKSWING),
     CMSG_ATTACKSTOP(CMSG_ATTACKSTOP),
     CMSG_ACTIVATETAXI(CMSG_ACTIVATETAXI),
@@ -138,6 +140,7 @@ impl ClientOpcodeMessage {
             0x00E9 => Ok(Self::CMSG_FORCE_MOVE_ROOT_ACK(<CMSG_FORCE_MOVE_ROOT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00EB => Ok(Self::CMSG_FORCE_MOVE_UNROOT_ACK(<CMSG_FORCE_MOVE_UNROOT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT_Client as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00FC => Ok(Self::CMSG_COMPLETE_CINEMATIC(<CMSG_COMPLETE_CINEMATIC as crate::Message>::read_body(&mut r, body_size)?)),
             0x0141 => Ok(Self::CMSG_ATTACKSWING(<CMSG_ATTACKSWING as crate::Message>::read_body(&mut r, body_size)?)),
             0x0142 => Ok(Self::CMSG_ATTACKSTOP(<CMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size)?)),
             0x01AD => Ok(Self::CMSG_ACTIVATETAXI(<CMSG_ACTIVATETAXI as crate::Message>::read_body(&mut r, body_size)?)),
@@ -258,6 +261,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSWING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSTOP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXI(c) => c.write_encrypted_client(w, e),
@@ -311,6 +315,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSWING(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSTOP(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXI(c) => c.write_unencrypted_client(w),
@@ -364,6 +369,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -417,6 +423,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_unencrypted_client(w).await,
@@ -470,6 +477,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_encrypted_client(w, e).await,
@@ -523,6 +531,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_unencrypted_client(w).await,
@@ -611,6 +620,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_FORCE_MOVE_ROOT_ACK(_) => "CMSG_FORCE_MOVE_ROOT_ACK",
             ClientOpcodeMessage::CMSG_FORCE_MOVE_UNROOT_ACK(_) => "CMSG_FORCE_MOVE_UNROOT_ACK",
             ClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT_Client",
+            ClientOpcodeMessage::CMSG_COMPLETE_CINEMATIC(_) => "CMSG_COMPLETE_CINEMATIC",
             ClientOpcodeMessage::CMSG_ATTACKSWING(_) => "CMSG_ATTACKSWING",
             ClientOpcodeMessage::CMSG_ATTACKSTOP(_) => "CMSG_ATTACKSTOP",
             ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => "CMSG_ACTIVATETAXI",
@@ -809,6 +819,12 @@ impl From<CMSG_FORCE_MOVE_UNROOT_ACK> for ClientOpcodeMessage {
 impl From<MSG_MOVE_HEARTBEAT_Client> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_HEARTBEAT_Client) -> Self {
         Self::MSG_MOVE_HEARTBEAT(c)
+    }
+}
+
+impl From<CMSG_COMPLETE_CINEMATIC> for ClientOpcodeMessage {
+    fn from(c: CMSG_COMPLETE_CINEMATIC) -> Self {
+        Self::CMSG_COMPLETE_CINEMATIC(c)
     }
 }
 

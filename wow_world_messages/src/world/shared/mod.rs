@@ -8,6 +8,7 @@ pub mod cmsg_auth_session12;
 pub mod cmsg_char_delete123;
 pub mod cmsg_char_enum123;
 pub mod cmsg_char_rename123;
+pub mod cmsg_complete_cinematic123;
 pub mod cmsg_ping1_1223;
 pub mod cmsg_player_login123;
 pub mod cmsg_realm_split2_4_33;
