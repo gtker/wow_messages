@@ -54,6 +54,8 @@ pub mod smsg_auth_challenge12;
 pub mod smsg_cancel_combat123;
 pub mod smsg_channel_list123;
 pub mod smsg_channel_notify2_4_33;
+pub mod smsg_chat_player_not_found123;
+pub mod smsg_chat_wrong_faction123;
 pub mod smsg_durability_damage_death123;
 pub mod smsg_environmentaldamagelog123;
 pub mod smsg_login_settimespeed12;

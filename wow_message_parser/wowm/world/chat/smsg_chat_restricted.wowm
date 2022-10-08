@@ -1,4 +1,32 @@
-#tag_all versions "1.12";
+smsg SMSG_CHAT_RESTRICTED = 0x02FD {} {
+    versions = "1.12";
+}
 
-smsg SMSG_CHAT_RESTRICTED = 0x02FD {}
+enum ChatRestrictionType : u8 {
+    CHAT_RESTRICTED = 0;
+    CHAT_THROTTLED  = 1;
+    USER_SQUELCHED  = 2;
+} {
+    versions = "2.4.3";
+}
 
+smsg SMSG_CHAT_RESTRICTED = 0x02FD {
+    ChatRestrictionType restriction;
+} {
+    versions = "2.4.3";
+}
+
+enum ChatRestrictionType : u8 {
+    CHAT_RESTRICTED = 0;
+    CHAT_THROTTLED  = 1;
+    USER_SQUELCHED  = 2;
+    YELL_RESTRICTED = 3;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_CHAT_RESTRICTED = 0x02FD {
+    ChatRestrictionType restriction;
+} {
+    versions = "3.3.5";
+}

@@ -57,6 +57,7 @@
 - [ChannelMemberFlags](docs/channelmemberflags.md)
 - [CharacterFlags](docs/characterflags.md)
 - [ChatNotify](docs/chatnotify.md)
+- [ChatRestrictionType](docs/chatrestrictiontype.md)
 - [ChatType](docs/chattype.md)
 - [CinematicSequenceId](docs/cinematicsequenceid.md)
 - [Class](docs/class.md)
