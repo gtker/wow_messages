@@ -202,6 +202,8 @@ pub(crate) mod smsg_ai_reaction;
 pub use smsg_ai_reaction::*;
 pub(crate) mod smsg_attackerstateupdate;
 pub use smsg_attackerstateupdate::*;
+pub(crate) mod smsg_attackstart;
+pub use smsg_attackstart::*;
 pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;

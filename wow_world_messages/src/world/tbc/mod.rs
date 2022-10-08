@@ -182,6 +182,8 @@ pub(crate) mod smsg_account_data_times;
 pub use smsg_account_data_times::*;
 pub(crate) mod smsg_ai_reaction;
 pub use smsg_ai_reaction::*;
+pub(crate) mod smsg_attackstart;
+pub use smsg_attackstart::*;
 pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;

@@ -16,6 +16,7 @@ pub mod inventory_type1_1223;
 pub mod realm_split_state2_4_33;
 pub mod smsg_account_data_times1_122;
 pub mod smsg_ai_reaction123;
+pub mod smsg_attackstart123;
 pub mod smsg_auth_challenge12;
 pub mod smsg_login_settimespeed12;
 pub mod smsg_pong123;
