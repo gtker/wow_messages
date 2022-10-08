@@ -954,6 +954,7 @@ use crate::world::tbc::SMSG_CANCEL_COMBAT;
 use crate::world::tbc::SMSG_PONG;
 use crate::world::tbc::SMSG_AUTH_CHALLENGE;
 use crate::world::tbc::SMSG_AUTH_RESPONSE;
+use crate::world::tbc::SMSG_ENVIRONMENTALDAMAGELOG;
 use crate::world::tbc::SMSG_ACCOUNT_DATA_TIMES;
 use crate::world::tbc::SMSG_LOGIN_VERIFY_WORLD;
 use crate::world::tbc::SMSG_DURABILITY_DAMAGE_DEATH;
@@ -1006,6 +1007,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PONG(SMSG_PONG),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
+    SMSG_ENVIRONMENTALDAMAGELOG(SMSG_ENVIRONMENTALDAMAGELOG),
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
     SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
@@ -1060,6 +1062,7 @@ impl ServerOpcodeMessage {
             0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x01FC => Ok(Self::SMSG_ENVIRONMENTALDAMAGELOG(<SMSG_ENVIRONMENTALDAMAGELOG as crate::Message>::read_body(&mut r, body_size)?)),
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
             0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1182,6 +1185,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
@@ -1237,6 +1241,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
@@ -1292,6 +1297,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -1347,6 +1353,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
@@ -1402,6 +1409,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
@@ -1457,6 +1465,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
@@ -1514,6 +1523,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
             ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
+            ServerOpcodeMessage::SMSG_ENVIRONMENTALDAMAGELOG(_) => "SMSG_ENVIRONMENTALDAMAGELOG",
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
             ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
@@ -1764,6 +1774,12 @@ impl From<SMSG_AUTH_CHALLENGE> for ServerOpcodeMessage {
 impl From<SMSG_AUTH_RESPONSE> for ServerOpcodeMessage {
     fn from(c: SMSG_AUTH_RESPONSE) -> Self {
         Self::SMSG_AUTH_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_ENVIRONMENTALDAMAGELOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_ENVIRONMENTALDAMAGELOG) -> Self {
+        Self::SMSG_ENVIRONMENTALDAMAGELOG(c)
     }
 }
 
