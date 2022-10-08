@@ -10,6 +10,7 @@ use crate::world::tbc::CMSG_CHAR_CREATE;
 use crate::world::tbc::CMSG_CHAR_ENUM;
 use crate::world::tbc::CMSG_CHAR_DELETE;
 use crate::world::tbc::CMSG_PLAYER_LOGIN;
+use crate::world::tbc::CMSG_MESSAGECHAT;
 use crate::world::tbc::CMSG_JOIN_CHANNEL;
 use crate::world::tbc::CMSG_LEAVE_CHANNEL;
 use crate::world::tbc::CMSG_CHANNEL_LIST;
@@ -81,6 +82,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
     CMSG_PLAYER_LOGIN(CMSG_PLAYER_LOGIN),
+    CMSG_MESSAGECHAT(CMSG_MESSAGECHAT),
     CMSG_JOIN_CHANNEL(CMSG_JOIN_CHANNEL),
     CMSG_LEAVE_CHANNEL(CMSG_LEAVE_CHANNEL),
     CMSG_CHANNEL_LIST(CMSG_CHANNEL_LIST),
@@ -154,6 +156,7 @@ impl ClientOpcodeMessage {
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003D => Ok(Self::CMSG_PLAYER_LOGIN(<CMSG_PLAYER_LOGIN as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0095 => Ok(Self::CMSG_MESSAGECHAT(<CMSG_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0097 => Ok(Self::CMSG_JOIN_CHANNEL(<CMSG_JOIN_CHANNEL as crate::Message>::read_body(&mut r, body_size)?)),
             0x0098 => Ok(Self::CMSG_LEAVE_CHANNEL(<CMSG_LEAVE_CHANNEL as crate::Message>::read_body(&mut r, body_size)?)),
             0x009A => Ok(Self::CMSG_CHANNEL_LIST(<CMSG_CHANNEL_LIST as crate::Message>::read_body(&mut r, body_size)?)),
@@ -295,6 +298,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MESSAGECHAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_JOIN_CHANNEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LEAVE_CHANNEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_LIST(c) => c.write_encrypted_client(w, e),
@@ -369,6 +373,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MESSAGECHAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_JOIN_CHANNEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_LEAVE_CHANNEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_LIST(c) => c.write_unencrypted_client(w),
@@ -443,6 +448,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MESSAGECHAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LEAVE_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -517,6 +523,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MESSAGECHAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LEAVE_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_client(w).await,
@@ -591,6 +598,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MESSAGECHAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LEAVE_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_client(w, e).await,
@@ -665,6 +673,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MESSAGECHAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LEAVE_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_client(w).await,
@@ -774,6 +783,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
             ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => "CMSG_CHAR_DELETE",
             ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => "CMSG_PLAYER_LOGIN",
+            ClientOpcodeMessage::CMSG_MESSAGECHAT(_) => "CMSG_MESSAGECHAT",
             ClientOpcodeMessage::CMSG_JOIN_CHANNEL(_) => "CMSG_JOIN_CHANNEL",
             ClientOpcodeMessage::CMSG_LEAVE_CHANNEL(_) => "CMSG_LEAVE_CHANNEL",
             ClientOpcodeMessage::CMSG_CHANNEL_LIST(_) => "CMSG_CHANNEL_LIST",
@@ -863,6 +873,12 @@ impl From<CMSG_CHAR_DELETE> for ClientOpcodeMessage {
 impl From<CMSG_PLAYER_LOGIN> for ClientOpcodeMessage {
     fn from(c: CMSG_PLAYER_LOGIN) -> Self {
         Self::CMSG_PLAYER_LOGIN(c)
+    }
+}
+
+impl From<CMSG_MESSAGECHAT> for ClientOpcodeMessage {
+    fn from(c: CMSG_MESSAGECHAT) -> Self {
+        Self::CMSG_MESSAGECHAT(c)
     }
 }
 

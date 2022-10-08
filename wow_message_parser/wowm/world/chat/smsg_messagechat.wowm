@@ -1,5 +1,12 @@
 #tag_all versions "1.12";
 
+enum PlayerChatTag : u8 {
+    NONE = 0;
+    AFK = 1;
+    DND = 2;
+    GM = 3;
+}
+
 smsg SMSG_MESSAGECHAT = 0x0096 {
     ChatType chat_type;
     Language language;

@@ -4,7 +4,7 @@ use crate::world::vanilla::Language;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm#L10):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm#L1):
 /// ```text
 /// cmsg CMSG_MESSAGECHAT = 0x0095 {
 ///     ChatType chat_type;
@@ -415,7 +415,7 @@ mod test {
          0x20, 0x61, 0x20, 0x73, 0x61, 0x79, 0x20, 0x6D, 0x65, 0x73, 0x73, 0x61,
          0x67, 0x65, 0x2E, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm` line 21.
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm` line 14.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_MESSAGECHAT0() {
@@ -444,7 +444,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm` line 21.
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm` line 14.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_MESSAGECHAT0() {
@@ -473,7 +473,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm` line 21.
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm` line 14.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_MESSAGECHAT0() {
