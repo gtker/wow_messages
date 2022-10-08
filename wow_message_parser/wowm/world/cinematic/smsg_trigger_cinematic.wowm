@@ -1,18 +1,70 @@
-#tag_all versions "1.12";
-
 enum CinematicSequenceId : u32 {
-    HUMAN = 81;
+    GOBLIN = 0;
+    UNDEAD = 2;
     ORC = 21;
     DWARF = 41;
     NIGHT_ELF = 61;
-    UNDEAD = 2;
-    TAUREN = 141;
+    HUMAN = 81;
     GNOME = 101;
     TROLL = 121;
-    GOBLIN = 0;
+    TAUREN = 141;
+} {
+    versions = "1.12";
 }
 
 smsg SMSG_TRIGGER_CINEMATIC = 0x00FA {
     CinematicSequenceId cinematic_sequence_id;
+} {
+    versions = "1.12";
 }
 
+enum CinematicSequenceId : u32 {
+    GOBLIN = 0;
+    PALANTIR_OF_AZORA = 1;
+    UNDEAD = 2;
+    ORC = 21;
+    DWARF = 41;
+    NIGHT_ELF = 61;
+    HUMAN = 81;
+    GNOME = 101;
+    TROLL = 121;
+    TAUREN = 141;
+    SCRY_CAM = 161;
+    BLOOD_ELF = 162;
+    DRAENEI = 163;
+    SUNWELL_FIVE_MAN = 164;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_TRIGGER_CINEMATIC = 0x00FA {
+    CinematicSequenceId cinematic_sequence_id;
+} {
+    versions = "2.4.3";
+}
+
+enum CinematicSequenceId : u32 {
+    GOBLIN = 0;
+    PALANTIR_OF_AZORA = 1;
+    UNDEAD = 2;
+    ORC = 21;
+    DWARF = 41;
+    NIGHT_ELF = 61;
+    HUMAN = 81;
+    GNOME = 101;
+    TROLL = 121;
+    TAUREN = 141;
+    SCRY_CAM = 161;
+    BLOOD_ELF = 162;
+    DRAENEI = 163;
+    SUNWELL_FIVE_MAN = 164;
+    DEATH_KNIGHT = 165;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_TRIGGER_CINEMATIC = 0x00FA {
+    CinematicSequenceId cinematic_sequence_id;
+} {
+    versions = "3.3.5";
+}

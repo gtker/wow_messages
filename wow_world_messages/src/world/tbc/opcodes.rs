@@ -973,6 +973,7 @@ use crate::world::tbc::MSG_MOVE_STOP_SWIM_Server;
 use crate::world::tbc::MSG_MOVE_SET_FACING_Server;
 use crate::world::tbc::MSG_MOVE_SET_PITCH_Server;
 use crate::world::tbc::MSG_MOVE_HEARTBEAT_Server;
+use crate::world::tbc::SMSG_TRIGGER_CINEMATIC;
 use crate::world::tbc::SMSG_TUTORIAL_FLAGS;
 use crate::world::tbc::SMSG_AI_REACTION;
 use crate::world::tbc::SMSG_ATTACKSTART;
@@ -1028,6 +1029,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_SET_FACING(MSG_MOVE_SET_FACING_Server),
     MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH_Server),
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT_Server),
+    SMSG_TRIGGER_CINEMATIC(SMSG_TRIGGER_CINEMATIC),
     SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS),
     SMSG_AI_REACTION(SMSG_AI_REACTION),
     SMSG_ATTACKSTART(SMSG_ATTACKSTART),
@@ -1085,6 +1087,7 @@ impl ServerOpcodeMessage {
             0x00DA => Ok(Self::MSG_MOVE_SET_FACING(<MSG_MOVE_SET_FACING_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT_Server as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00FA => Ok(Self::SMSG_TRIGGER_CINEMATIC(<SMSG_TRIGGER_CINEMATIC as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(<SMSG_TUTORIAL_FLAGS as crate::Message>::read_body(&mut r, body_size)?)),
             0x013C => Ok(Self::SMSG_AI_REACTION(<SMSG_AI_REACTION as crate::Message>::read_body(&mut r, body_size)?)),
             0x0143 => Ok(Self::SMSG_ATTACKSTART(<SMSG_ATTACKSTART as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1210,6 +1213,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FACING(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_TRIGGER_CINEMATIC(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AI_REACTION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSTART(c) => c.write_encrypted_server(w, e),
@@ -1268,6 +1272,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FACING(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_TRIGGER_CINEMATIC(c) => c.write_unencrypted_server(w),
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_unencrypted_server(w),
             Self::SMSG_AI_REACTION(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSTART(c) => c.write_unencrypted_server(w),
@@ -1326,6 +1331,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_TRIGGER_CINEMATIC(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AI_REACTION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -1384,6 +1390,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_TRIGGER_CINEMATIC(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AI_REACTION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_unencrypted_server(w).await,
@@ -1442,6 +1449,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_TRIGGER_CINEMATIC(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AI_REACTION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTART(c) => c.astd_write_encrypted_server(w, e).await,
@@ -1500,6 +1508,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_TRIGGER_CINEMATIC(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AI_REACTION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTART(c) => c.astd_write_unencrypted_server(w).await,
@@ -1560,6 +1569,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_SET_FACING(_) => "MSG_MOVE_SET_FACING_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH_Server",
             ServerOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT_Server",
+            ServerOpcodeMessage::SMSG_TRIGGER_CINEMATIC(_) => "SMSG_TRIGGER_CINEMATIC",
             ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(_) => "SMSG_TUTORIAL_FLAGS",
             ServerOpcodeMessage::SMSG_AI_REACTION(_) => "SMSG_AI_REACTION",
             ServerOpcodeMessage::SMSG_ATTACKSTART(_) => "SMSG_ATTACKSTART",
@@ -1748,6 +1758,12 @@ impl From<MSG_MOVE_SET_PITCH_Server> for ServerOpcodeMessage {
 impl From<MSG_MOVE_HEARTBEAT_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_HEARTBEAT_Server) -> Self {
         Self::MSG_MOVE_HEARTBEAT(c)
+    }
+}
+
+impl From<SMSG_TRIGGER_CINEMATIC> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRIGGER_CINEMATIC) -> Self {
+        Self::SMSG_TRIGGER_CINEMATIC(c)
     }
 }
 
