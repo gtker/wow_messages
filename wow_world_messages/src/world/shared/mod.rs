@@ -1,6 +1,7 @@
 pub mod billing_plan_flags2_4_33;
 pub mod cmsg_activatetaxi123;
 pub mod cmsg_activatetaxiexpress12;
+pub mod cmsg_attackstop123;
 pub mod cmsg_auth_session12;
 pub mod cmsg_char_delete123;
 pub mod cmsg_char_enum123;
