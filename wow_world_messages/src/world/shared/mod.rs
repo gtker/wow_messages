@@ -5,6 +5,7 @@ pub mod cmsg_activatetaxiexpress12;
 pub mod cmsg_attackstop123;
 pub mod cmsg_attackswing123;
 pub mod cmsg_auth_session12;
+pub mod cmsg_cancel_channelling123;
 pub mod cmsg_char_delete123;
 pub mod cmsg_char_enum123;
 pub mod cmsg_char_rename123;

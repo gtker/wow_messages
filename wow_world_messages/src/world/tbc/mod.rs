@@ -22,6 +22,8 @@ pub(crate) mod cmsg_attackswing;
 pub use cmsg_attackswing::*;
 pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
+pub(crate) mod cmsg_cancel_channelling;
+pub use cmsg_cancel_channelling::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
 pub(crate) mod cmsg_char_delete;
