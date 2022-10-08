@@ -28,6 +28,8 @@ pub(crate) mod cmsg_channel_announcements;
 pub use cmsg_channel_announcements::*;
 pub(crate) mod cmsg_channel_ban;
 pub use cmsg_channel_ban::*;
+pub(crate) mod cmsg_channel_invite;
+pub use cmsg_channel_invite::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
 pub(crate) mod cmsg_char_delete;
