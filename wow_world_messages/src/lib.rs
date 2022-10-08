@@ -27,6 +27,7 @@ pub mod helper;
 mod traits;
 pub(crate) mod util;
 #[allow(unused)]
+#[allow(clippy::large_enum_variant)]
 mod world;
 
 pub use traits::*;
