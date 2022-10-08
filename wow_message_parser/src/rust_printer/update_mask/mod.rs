@@ -153,7 +153,15 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
     s.wln(format!("use crate::{}::{{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdatePlayer, UpdateUnit}};", version.module_name()));
     s.newline();
 
-    for (ty, types) in update_types {
+    for (ty, types) in &update_types {
+        s.bodyn(format!("impl {}Builder", ty), |s| {
+            for m in fields.iter().filter(|a| types.contains(&a.object_ty)) {
+                print_builder_setter(s, m);
+            }
+        });
+    }
+
+    for (ty, types) in &update_types {
         s.bodyn(format!("impl {}", ty), |s| {
             for m in fields.iter().filter(|a| types.contains(&a.object_ty)) {
                 print_setter(s, m);
@@ -259,6 +267,67 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
 }
 
 fn print_setter(s: &mut Writer, m: &MemberType) {
+    s.open_curly(format!(
+        "pub fn set_{}_{}(&mut self, {})",
+        m.object_ty,
+        m.name,
+        m.ty.parameter_str(),
+    ));
+
+    s.wln(format!("self.header_set({});", m.offset));
+    match m.ty {
+        UfType::Guid => {
+            s.wln(format!("self.header_set({});", m.offset + 1));
+
+            s.wln(format!(
+                "self.values.insert({}, v.guid() as u32);",
+                m.offset
+            ));
+            s.wln(format!(
+                "self.values.insert({}, (v.guid() >> 32) as u32);",
+                m.offset + 1
+            ));
+        }
+        _ => {
+            let value = match &m.ty {
+                UfType::Int => "v as u32".to_string(),
+                UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
+                UfType::Bytes => "u32::from_le_bytes([a, b, c, d])".to_string(),
+                UfType::TwoShort => "(a as u32) << 16 | b as u32".to_string(),
+                UfType::BytesWith(a, b, c, d) => {
+                    let get_name = |byte_type: &ByteType| -> String {
+                        match byte_type.ty {
+                            ByteInnerTy::Byte => byte_type.name.to_string(),
+                            ByteInnerTy::Ty(_) => {
+                                format!("{name}.as_int()", name = byte_type.name)
+                            }
+                        }
+                    };
+
+                    let a = get_name(a);
+                    let b = get_name(b);
+                    let c = get_name(c);
+                    let d = get_name(d);
+
+                    format!(
+                        "u32::from_le_bytes([{a}, {b}, {c}, {d}])",
+                        a = a,
+                        b = b,
+                        c = c,
+                        d = d
+                    )
+                }
+                _ => unreachable!(),
+            };
+
+            s.wln(format!("self.values.insert({}, {});", m.offset, value));
+        }
+    }
+
+    s.closing_curly_newline(); // pub(crate) fn set_
+}
+
+fn print_builder_setter(s: &mut Writer, m: &MemberType) {
     s.open_curly(format!(
         "pub fn set_{}_{}(mut self, {}) -> Self",
         m.object_ty,
