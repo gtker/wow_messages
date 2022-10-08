@@ -2,6 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+/// Not implemented in Wrath or TBC emus. Only implemented in cmangos.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_expected_spam_records.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_expected_spam_records.wowm#L3):
 /// ```text
 /// smsg SMSG_EXPECTED_SPAM_RECORDS = 0x0332 {

@@ -817,7 +817,11 @@ pub(crate) const DATA: [Data; 1310] = [
     Data::new("SMSG_SPELLINSTAKILLLOG", 0x32F),
     Data::new("SMSG_SPELL_UPDATE_CHAIN_TARGETS", 0x330),
     Data::new("CMSG_CHAT_FILTERED", 0x331),
-    Data::new("SMSG_EXPECTED_SPAM_RECORDS", 0x332),
+    Data::with_reason(
+        "SMSG_EXPECTED_SPAM_RECORDS",
+        0x332,
+        "No emulator implements it, maybe same as 1.12",
+    ),
     Data::new("SMSG_SPELLSTEALLOG", 0x333),
     Data::new("CMSG_LOTTERY_QUERY_OBSOLETE", 0x334),
     Data::new("SMSG_LOTTERY_QUERY_RESULT_OBSOLETE", 0x335),
