@@ -98,7 +98,7 @@ fn print_member(
 ) -> bool {
     match m {
         StructMember::Definition(d) => {
-            let w = wo.get(&name_to_hf(d.name(), d.ty(), tags, o));
+            let w = wo.get(&name_to_hf(d.name(), d.ty()));
             if !print_definition(s, e.name(), d, w, o, tags, wo, variables) {
                 return false;
             }
@@ -289,15 +289,30 @@ fn print_definition(
             s.wln(format!("add_sized_cstring(ptv, &{hf});", hf = name));
             true
         }
-        Type::Identifier {
-            s: identifier,
-            upcast,
-        } => {
+        Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
             if !print_identifier(
                 s,
-                identifier,
+                e.name(),
                 w,
                 upcast,
+                o,
+                wo,
+                tags,
+                container_name,
+                d.name(),
+                variables,
+            ) {
+                return false;
+            }
+
+            true
+        }
+        Type::Struct { e } => {
+            if !print_identifier(
+                s,
+                e.name(),
+                w,
+                &None,
                 o,
                 wo,
                 tags,

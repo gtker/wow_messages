@@ -112,7 +112,7 @@ impl Container {
                 StructMember::Definition(d) => {
                     d.name() == "info"
                         && match d.ty() {
-                            Type::Identifier { s, .. } => s == "MovementInfo",
+                            Type::Struct { e } => e.name() == "MovementInfo",
                             _ => false,
                         }
                 }
@@ -266,7 +266,7 @@ impl Container {
         &self.rust_object_view
     }
 
-    pub(crate) fn size_of_fields_before_size(&self, o: &Objects) -> u64 {
+    pub(crate) fn size_of_fields_before_size(&self) -> u64 {
         let mut sum = match self.object_type {
             ContainerType::Struct => 0,
             ContainerType::CLogin(_) | ContainerType::SLogin(_) => 0,
@@ -285,8 +285,16 @@ impl Container {
                         Type::CString => panic!("string before size"),
                         Type::String { .. } => panic!("string before size"),
                         Type::Array(_) => panic!("array before size"),
-                        Type::Identifier { s: identifier, .. } => {
-                            sum += o.get_size_of_complex(identifier);
+                        Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
+                            let i = if let Some(upcast) = upcast {
+                                upcast.size()
+                            } else {
+                                e.ty().size()
+                            } as u64;
+                            sum += i;
+                        }
+                        Type::Struct { .. } => {
+                            panic!("struct before size");
                         }
                         Type::PackedGuid => panic!("packed guid before size"),
                         Type::Guid => sum += 8_u64,
@@ -324,11 +332,9 @@ impl Container {
                 StructMember::Definition(d) => {
                     v.push(d.clone());
                     match d.ty() {
-                        Type::Identifier { s, .. } => {
-                            if let Object::Container(e) = o.get_object(s, tags) {
-                                for m in e.fields() {
-                                    inner(m, v, o, tags);
-                                }
+                        Type::Struct { e } => {
+                            for m in e.fields() {
+                                inner(m, v, o, tags);
                             }
                         }
                         Type::Array(array) => {
@@ -511,8 +517,11 @@ impl Container {
                         v.push(i.clone());
                     }
                 }
-                Type::Identifier { s, .. } => {
-                    v.push(s.clone());
+                Type::Enum { e, .. } | Type::Flag { e, .. } => {
+                    v.push(e.name().to_string());
+                }
+                Type::Struct { e } => {
+                    v.push(e.name().to_string());
                 }
                 _ => {}
             }

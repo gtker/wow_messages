@@ -3,7 +3,7 @@ use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Array, ArrayType, ContainerValue, IntegerType, ObjectType};
+use crate::parser::types::{Array, ArrayType, ContainerValue, IntegerType};
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
@@ -72,7 +72,7 @@ pub(crate) fn print_write_field_integer(
                           minus_value = size_of_fields_before_size,
                           endian = int_type.rust_endian_str(),
                           basic_type = int_type.rust_str(),
-                postfix = postfix,
+                          postfix = postfix,
             ));
         } else {
             s.wln(format!(
@@ -89,7 +89,7 @@ pub(crate) fn print_write_field_integer(
             basic_type = int_type.rust_str(),
             endian = int_type.rust_endian_str(),
             variable_prefix = variable_prefix,
-                postfix = postfix,
+            postfix = postfix,
         ));
     } else {
         s.wln(format!(
@@ -123,7 +123,6 @@ pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &s
 pub(crate) fn print_write_definition(
     s: &mut Writer,
     e: &Container,
-    o: &Objects,
     variable_prefix: &str,
     d: &StructMemberDefinition,
     postfix: &str,
@@ -138,7 +137,7 @@ pub(crate) fn print_write_definition(
         Type::Integer(int_type) => {
             let size = if let Some(v) = d.value() {
                 if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
-                    e.size_of_fields_before_size(o)
+                    e.size_of_fields_before_size()
                 } else {
                     0
                 }
@@ -160,7 +159,7 @@ pub(crate) fn print_write_definition(
         Type::Bool => {
             s.wln(format!(
                 "w.write_all(if {reference}{variable_prefix}{variable_name} {{ &[1] }} else {{ &[0] }}){postfix}?;",
-                reference = if variable_prefix.is_empty() {"*"} else {""}, // non-self variables are &bool
+                reference = if variable_prefix.is_empty() { "*" } else { "" }, // non-self variables are &bool
                 variable_prefix = variable_prefix,
                 variable_name = d.name(),
                 postfix = postfix,
@@ -195,7 +194,7 @@ pub(crate) fn print_write_definition(
         Type::CString => {
             s.wln("// TODO: Guard against strings that are already null-terminated");
             s.wln(format!(
-                "assert_ne!({prefix}{name}.as_bytes().iter().rev().next(), Some(&0_u8), \"String `{name}` must not be null-terminated.\");", 
+                "assert_ne!({prefix}{name}.as_bytes().iter().rev().next(), Some(&0_u8), \"String `{name}` must not be null-terminated.\");",
                 name = d.name(),
                 prefix = variable_prefix,
             ));
@@ -219,33 +218,25 @@ pub(crate) fn print_write_definition(
         Type::Array(array) => {
             print_write_field_array(s, d.name(), variable_prefix, array, postfix);
         }
-        Type::Identifier {
-            s: identifier,
-            upcast,
-        } => {
-            match o.get_object_type_of(identifier, e.tags()) {
-                ObjectType::Enum | ObjectType::Flag => {
-                    let definer = o.get_definer(identifier, e.tags());
-                    let integer = match upcast {
-                        None => definer.ty(),
-                        Some(integer) => integer,
-                    };
+        Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
+            let integer = match upcast {
+                None => e.ty(),
+                Some(integer) => integer,
+            };
 
-                    s.wln(format!(
-                            "w.write_all(&({variable_prefix}{name}.as_int() as {ty}).to_{endian}_bytes()){postfix}?;",
-                            variable_prefix = variable_prefix,
-                            postfix = postfix,
-                            name = d.name(),
-                            ty = integer.rust_str(),
-                            endian = integer.rust_endian_str()
-                    ));
+            s.wln(format!(
+                "w.write_all(&({variable_prefix}{name}.as_int() as {ty}).to_{endian}_bytes()){postfix}?;",
+                variable_prefix = variable_prefix,
+                postfix = postfix,
+                name = d.name(),
+                ty = integer.rust_str(),
+                endian = integer.rust_endian_str()
+            ));
 
-                    s.newline();
-                    return;
-                }
-                _ => {}
-            }
-
+            s.newline();
+            return;
+        }
+        Type::Struct { .. } => {
             print_write_field_identifier(s, d.name(), variable_prefix);
         }
         Type::PackedGuid => {
@@ -349,7 +340,7 @@ pub(crate) fn print_write_field(
 ) {
     match field {
         StructMember::Definition(d) => {
-            print_write_definition(s, e, o, variable_prefix, d, postfix);
+            print_write_definition(s, e, variable_prefix, d, postfix);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {

@@ -5,7 +5,7 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, Endianness, IntegerType, ObjectType};
 use crate::wowm_printer::get_struct_wowm_definition;
-use crate::{doc_printer, Container, ContainerType, Objects, Tags};
+use crate::{doc_printer, Container, ContainerType, DefinerType, Objects, Tags};
 use std::collections::HashMap;
 use std::convert::TryInto;
 use std::fmt::Write;
@@ -166,66 +166,55 @@ fn print_container_example_definition(
         Type::Array(array) => {
             print_container_example_array(s, array, bytes, values, o, tags, prefix);
         }
-        Type::Identifier {
-            s: identifier,
-            upcast,
-        } => {
-            let type_of = o.get_object_type_of(identifier, tags);
-            match type_of {
-                ObjectType::Struct => {
-                    let c = o.get_container(identifier, tags);
+        Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
+            let ty = if let Some(ty) = upcast { ty } else { e.ty() };
 
-                    for m in c.fields() {
-                        print_container_example_member(s, c, m, bytes, values, o, tags, c.name());
-                    }
+            let bytes = bytes.take(ty.size() as usize).cloned().collect::<Vec<u8>>();
 
-                    return;
-                }
-                ObjectType::Enum | ObjectType::Flag => {
-                    let e = o.get_definer(identifier, tags);
-                    let ty = if let Some(ty) = upcast { ty } else { e.ty() };
-
-                    let bytes = bytes.take(ty.size() as usize).cloned().collect::<Vec<u8>>();
-
-                    let value = get_integer_value(ty, bytes.as_slice());
-                    values.insert(d.name().to_string(), value);
-                    for b in bytes {
-                        s.w(format!("{}, ", b));
-                    }
-
-                    let c = if type_of == ObjectType::Enum {
-                        if let Some(value) = e.get_field_with_value(value) {
-                            let name = value.name();
-                            let value = value.value().original();
-                            format!("{} {} ({})", comment, name, value)
-                        } else {
-                            "UNABLE TO FIND DEFINER VALUE PROBABLY FROM OTHER MISSING IMPLS"
-                                .to_string()
-                        }
-                    } else if type_of == ObjectType::Flag {
-                        let values = e.get_set_flag_fields(value);
-                        let mut t = comment;
-                        t.push(' ');
-
-                        for (i, v) in values.iter().enumerate() {
-                            if i != 0 {
-                                t.push_str("| ");
-                            } else {
-                                t.push(' ');
-                            }
-                            t.push_str(v.name());
-                        }
-
-                        write!(t, " ({})", value).unwrap();
-                        t
-                    } else {
-                        panic!()
-                    };
-
-                    s.wln(c);
-                    return;
-                }
+            let value = get_integer_value(ty, bytes.as_slice());
+            values.insert(d.name().to_string(), value);
+            for b in bytes {
+                s.w(format!("{}, ", b));
             }
+
+            let c = match e.definer_ty() {
+                DefinerType::Enum => {
+                    if let Some(value) = e.get_field_with_value(value) {
+                        let name = value.name();
+                        let value = value.value().original();
+                        format!("{} {} ({})", comment, name, value)
+                    } else {
+                        "UNABLE TO FIND DEFINER VALUE PROBABLY FROM OTHER MISSING IMPLS".to_string()
+                    }
+                }
+                DefinerType::Flag => {
+                    let values = e.get_set_flag_fields(value);
+                    let mut t = comment;
+                    t.push(' ');
+
+                    for (i, v) in values.iter().enumerate() {
+                        if i != 0 {
+                            t.push_str("| ");
+                        } else {
+                            t.push(' ');
+                        }
+                        t.push_str(v.name());
+                    }
+
+                    write!(t, " ({})", value).unwrap();
+                    t
+                }
+            };
+
+            s.wln(c);
+            return;
+        }
+        Type::Struct { e } => {
+            for m in e.fields() {
+                print_container_example_member(s, e, m, bytes, values, o, tags, e.name());
+            }
+
+            return;
         }
         Type::UpdateMask => {
             s.wln("// UpdateMask");
@@ -288,7 +277,7 @@ fn print_container_example_member(
             let enum_value = *values.get(statement.name()).unwrap();
 
             let definer_ty = match e.get_type_of_variable(statement.name()) {
-                Type::Identifier { s: identifier, .. } => o.get_definer(&identifier, tags),
+                Type::Enum { e, .. } | Type::Flag { e, .. } => e,
                 _ => panic!(),
             };
 
@@ -481,8 +470,11 @@ fn print_container_field(
     match m {
         StructMember::Definition(d) => {
             let ty = match d.ty() {
-                Type::Identifier { s, .. } => {
-                    format!("[{}]({}.md)", d.ty().str(), s.to_lowercase())
+                Type::Enum { e, .. } | Type::Flag { e, .. } => {
+                    format!("[{}]({}.md)", d.ty().str(), e.name().to_lowercase())
+                }
+                Type::Struct { e, .. } => {
+                    format!("[{}]({}.md)", d.ty().str(), e.name().to_lowercase())
                 }
                 Type::PackedGuid | Type::Guid => {
                     format!("[{}](../spec/packed-guid.md)", d.ty().str())
@@ -543,7 +535,7 @@ fn print_container_field(
                 } else {
                     "-".to_string()
                 },
-                size = d.ty().doc_size_of(tags, o),
+                size = d.ty().doc_size_of(),
                 endian = d.ty().doc_endian_str(),
                 ty = ty,
                 name = d.name(),
@@ -558,13 +550,17 @@ fn print_container_field(
                     Type::FloatingPoint(f) => Some(offset.unwrap() + f.size() as usize),
                     Type::DateTime => Some(offset.unwrap() + DATETIME_SIZE as usize),
                     Type::Bool => Some(offset.unwrap() + BOOL_SIZE as usize),
-                    Type::Identifier { s, upcast } => {
+                    Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                         if let Some(upcast) = upcast {
                             Some(offset.unwrap() + upcast.size() as usize)
                         } else {
-                            let sizes = o.get_object(s, tags).sizes();
+                            let sizes = e.sizes();
                             sizes.is_constant().map(|size| offset.unwrap() + size)
                         }
+                    }
+                    Type::Struct { e } => {
+                        let sizes = e.sizes();
+                        sizes.is_constant().map(|size| offset.unwrap() + size)
                     }
                     Type::CString
                     | Type::SizedCString

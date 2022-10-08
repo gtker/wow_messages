@@ -9,7 +9,7 @@ use crate::rust_printer::Writer;
 use crate::wireshark_printer::printer::{
     print_enums, print_int_declarations, print_parser, print_register_info,
 };
-use crate::{Object, Objects, Tags};
+use crate::Objects;
 use heck::{ShoutySnakeCase, SnakeCase, TitleCase};
 use std::fs::read_to_string;
 use std::path::Path;
@@ -135,16 +135,10 @@ fn pretty_name(name: &str) -> String {
     name.to_title_case()
 }
 
-fn name_to_hf(name: &str, ty: &Type, tags: &Tags, o: &Objects) -> String {
+fn name_to_hf(name: &str, ty: &Type) -> String {
     let mut name = match ty {
-        Type::Identifier { s, .. } => {
-            let e = o.get_object(s, tags);
-
-            match e {
-                Object::Container(_) => name.to_string(),
-                Object::Enum(e) | Object::Flag(e) => e.name().to_snake_case(),
-            }
-        }
+        Type::Flag { e, .. } | Type::Enum { e, .. } => e.name().to_snake_case(),
+        Type::Struct { e } => e.name().to_string(),
         _ => name.to_string(),
     };
 
@@ -186,15 +180,7 @@ fn name_to_hf(name: &str, ty: &Type, tags: &Tags, o: &Objects) -> String {
             Type::Integer(_) => {
                 name += "_int";
             }
-            Type::Identifier { s, .. } => {
-                let e = o.get_object(s, tags);
-                match e {
-                    Object::Flag(_) | Object::Container(_) => unreachable!(),
-                    Object::Enum(_) => {
-                        name += "_enum";
-                    }
-                }
-            }
+            Type::Enum { .. } => name += "_enum",
             _ => unreachable!(),
         }
     } else if name.starts_with("position")

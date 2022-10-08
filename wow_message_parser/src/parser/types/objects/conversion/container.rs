@@ -2,7 +2,7 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::conversion;
 use crate::parser::types::objects::conversion::{
-    all_definitions, all_definitions_mut, get_definer,
+    all_definitions, all_definitions_mut, get_container, get_definer, parsed_container_to_container,
 };
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
@@ -56,7 +56,13 @@ pub(crate) fn verify_and_set_members(
     check_complex_types_exist(members, containers, definers, tags);
 }
 
-fn parsed_type_to_type(t: ParsedType) -> Type {
+fn parsed_type_to_type(
+    tests: &mut Vec<TestCase>,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    t: ParsedType,
+    tags: &Tags,
+) -> Type {
     match t {
         ParsedType::Integer(i) => Type::Integer(i),
         ParsedType::Bool => Type::Bool,
@@ -68,13 +74,38 @@ fn parsed_type_to_type(t: ParsedType) -> Type {
         ParsedType::SizedCString => Type::SizedCString,
         ParsedType::String { length } => Type::String { length },
         ParsedType::Array(a) => Type::Array(a),
-        ParsedType::Identifier { s, upcast } => Type::Identifier { s, upcast },
+        ParsedType::Identifier { s, upcast } => {
+            if let Some(e) = get_definer(definers, &s, tags) {
+                match e.definer_ty() {
+                    DefinerType::Enum => Type::Enum {
+                        e: e.clone(),
+                        upcast,
+                    },
+                    DefinerType::Flag => Type::Flag {
+                        e: e.clone(),
+                        upcast,
+                    },
+                }
+            } else if let Some(e) = get_container(containers, &s, tags) {
+                Type::Struct {
+                    e: parsed_container_to_container(e.clone(), tests, containers, definers),
+                }
+            } else {
+                unreachable!()
+            }
+        }
         ParsedType::UpdateMask => Type::UpdateMask,
         ParsedType::AuraMask => Type::AuraMask,
     }
 }
 
-pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec<StructMember> {
+pub(crate) fn parsed_members_to_members(
+    members: Vec<ParsedStructMember>,
+    tests: &mut Vec<TestCase>,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    tags: &Tags,
+) -> Vec<StructMember> {
     let mut v = Vec::with_capacity(members.len());
 
     for m in members {
@@ -82,7 +113,7 @@ pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec
             ParsedStructMember::Definition(d) => {
                 StructMember::Definition(StructMemberDefinition::new(
                     d.name,
-                    parsed_type_to_type(d.struct_type),
+                    parsed_type_to_type(tests, containers, definers, d.struct_type, tags),
                     d.verified_value,
                     d.used_as_size_in,
                     d.used_in_if.unwrap(),
@@ -91,30 +122,46 @@ pub(crate) fn parsed_members_to_members(members: Vec<ParsedStructMember>) -> Vec
             }
             ParsedStructMember::IfStatement(s) => StructMember::IfStatement(IfStatement::new(
                 s.conditional,
-                parsed_members_to_members(s.members),
-                parsed_if_statement_to_if_statement(s.else_ifs),
-                parsed_members_to_members(s.else_statement_members),
-                parsed_type_to_type(s.original_ty.unwrap()),
+                parsed_members_to_members(s.members, tests, containers, definers, tags),
+                parsed_if_statement_to_if_statement(s.else_ifs, tests, containers, definers, tags),
+                parsed_members_to_members(
+                    s.else_statement_members,
+                    tests,
+                    containers,
+                    definers,
+                    tags,
+                ),
+                parsed_type_to_type(tests, containers, definers, s.original_ty.unwrap(), tags),
             )),
-            ParsedStructMember::OptionalStatement(o) => StructMember::OptionalStatement(
-                OptionalStatement::new(o.name, parsed_members_to_members(o.members), o.tags),
-            ),
+            ParsedStructMember::OptionalStatement(o) => {
+                StructMember::OptionalStatement(OptionalStatement::new(
+                    o.name,
+                    parsed_members_to_members(o.members, tests, containers, definers, tags),
+                    o.tags,
+                ))
+            }
         });
     }
 
     v
 }
 
-fn parsed_if_statement_to_if_statement(parsed: Vec<ParsedIfStatement>) -> Vec<IfStatement> {
+fn parsed_if_statement_to_if_statement(
+    parsed: Vec<ParsedIfStatement>,
+    tests: &mut Vec<TestCase>,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    tags: &Tags,
+) -> Vec<IfStatement> {
     let mut v = Vec::with_capacity(parsed.len());
 
     for p in parsed {
         v.push(IfStatement::new(
             p.conditional,
-            parsed_members_to_members(p.members),
-            parsed_if_statement_to_if_statement(p.else_ifs),
-            parsed_members_to_members(p.else_statement_members),
-            parsed_type_to_type(p.original_ty.unwrap()),
+            parsed_members_to_members(p.members, tests, containers, definers, tags),
+            parsed_if_statement_to_if_statement(p.else_ifs, tests, containers, definers, tags),
+            parsed_members_to_members(p.else_statement_members, tests, containers, definers, tags),
+            parsed_type_to_type(tests, containers, definers, p.original_ty.unwrap(), tags),
         ))
     }
 

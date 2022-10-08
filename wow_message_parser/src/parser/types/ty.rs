@@ -1,6 +1,5 @@
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
-use crate::parser::types::objects::Objects;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
@@ -9,7 +8,7 @@ use crate::parser::types::sizes::{
 };
 use crate::parser::types::{Array, ArraySize, ArrayType, FloatingPointType, IntegerType};
 use crate::{
-    Tags, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
+    Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
     SIZED_CSTRING_SMALLEST_ALLOWED,
 };
 use std::convert::TryInto;
@@ -28,9 +27,16 @@ pub(crate) enum Type {
         length: String,
     },
     Array(Array),
-    Identifier {
-        s: String,
+    Enum {
+        e: Definer,
         upcast: Option<IntegerType>,
+    },
+    Flag {
+        e: Definer,
+        upcast: Option<IntegerType>,
+    },
+    Struct {
+        e: Container,
     },
     UpdateMask,
     AuraMask,
@@ -43,7 +49,8 @@ impl Type {
             Type::CString => "CString".to_string(),
             Type::String { length } => format!("String[{}]", length),
             Type::Array(a) => a.str(),
-            Type::Identifier { s, .. } => s.clone(),
+            Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
+            Type::Struct { e, .. } => e.name().to_string(),
             Type::FloatingPoint(i) => i.str().to_string(),
             Type::PackedGuid => "PackedGuid".to_string(),
             Type::Guid => "Guid".to_string(),
@@ -59,7 +66,8 @@ impl Type {
         let s = match self {
             Type::Integer(i) => i.rust_str().to_string(),
             Type::FloatingPoint(i) => i.rust_str().to_string(),
-            Type::Identifier { s, .. } => s.clone(),
+            Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
+            Type::Struct { e, .. } => e.name().to_string(),
             Type::CString | Type::SizedCString | Type::String { .. } => "String".to_string(),
             Type::Array(a) => a.rust_str(),
             Type::PackedGuid | Type::Guid => "Guid".to_string(),
@@ -108,20 +116,17 @@ impl Type {
                     }
                 }
             }
-            Type::Identifier { s, upcast } => {
-                if get_definer(definers, s, e.tags()).is_some() {
-                    let s = if let Some(upcast) = upcast {
-                        upcast.size()
-                    } else {
-                        get_definer(definers, s, e.tags()).unwrap().ty().size()
-                    } as usize;
-
-                    sizes.inc_both(s);
-                } else if let Some(c) = get_container(containers, s, e.tags()) {
-                    sizes += c.create_sizes(containers, definers);
+            Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
+                let s = if let Some(upcast) = upcast {
+                    upcast.size()
                 } else {
-                    unreachable!()
-                }
+                    e.ty().size()
+                } as usize;
+
+                sizes.inc_both(s);
+            }
+            Type::Struct { e } => {
+                sizes += e.sizes();
             }
             Type::Array(array) => {
                 if matches!(array.size(), ArraySize::Endless) {
@@ -176,17 +181,24 @@ impl Type {
         sizes
     }
 
-    pub(crate) fn doc_size_of(&self, tags: &Tags, o: &Objects) -> String {
+    pub(crate) fn doc_size_of(&self) -> String {
         match self {
             Type::Integer(i) => i.size().to_string(),
             Type::Guid => 8.to_string(),
             Type::FloatingPoint(f) => f.size().to_string(),
             Type::String { length } => length.clone(),
-            Type::Identifier { s, upcast } => {
-                let sizes = o.get_object(s, tags).sizes();
+            Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                 if let Some(upcast) = upcast {
                     upcast.size().to_string()
-                } else if let Some(size) = sizes.is_constant() {
+                } else if let Some(size) = e.sizes().is_constant() {
+                    size.to_string()
+                } else {
+                    "-".to_string()
+                }
+            }
+            Type::Struct { e } => {
+                let sizes = e.sizes();
+                if let Some(size) = sizes.is_constant() {
                     size.to_string()
                 } else {
                     "-".to_string()
@@ -212,7 +224,9 @@ impl Type {
             | Type::Bool
             | Type::String { .. }
             | Type::Array(_)
-            | Type::Identifier { .. }
+            | Type::Enum { .. }
+            | Type::Flag { .. }
+            | Type::Struct { .. }
             | Type::UpdateMask
             | Type::AuraMask
             | Type::CString

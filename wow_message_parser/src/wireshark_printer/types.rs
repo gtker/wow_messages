@@ -9,7 +9,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
 
     for e in o.wireshark_containers() {
         for d in e.all_definitions() {
-            let name = wireshark_printer::name_to_hf(d.name(), d.ty(), e.tags(), o);
+            let name = wireshark_printer::name_to_hf(d.name(), d.ty());
 
             if let Some(m) = objects.get_mut(&name) {
                 if let Some(new_ty) = &WiresharkType::from_type(d.ty(), e.tags(), o) {
@@ -150,14 +150,9 @@ pub(crate) enum WiresharkType {
 impl WiresharkType {
     pub(crate) fn from_type(ty: &Type, tags: &Tags, o: &Objects) -> Option<Self> {
         Some(match ty {
-            Type::Identifier { s, .. } => {
-                let e = o.get_object(s, tags);
-                match e {
-                    Object::Container(_) => return None,
-                    Object::Enum(e) => Self::Enum(e),
-                    Object::Flag(e) => Self::Flag(e),
-                }
-            }
+            Type::Enum { e, .. } => Self::Enum(e.clone()),
+            Type::Flag { e, .. } => Self::Flag(e.clone()),
+            Type::Struct { .. } => return None,
             Type::Integer(v) => Self::Integer(*v),
             Type::Bool => Self::Integer(IntegerType::U8),
             Type::Guid | Type::PackedGuid => Self::Integer(IntegerType::U64(Endianness::Little)),

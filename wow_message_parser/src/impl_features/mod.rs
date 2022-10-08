@@ -236,11 +236,14 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
                 | ArrayType::PackedGuid => f.add(Feature::ComplexArrays),
             }
         }
-        Type::Identifier { upcast, .. } => {
+        Type::Enum { upcast, .. } | Type::Flag { upcast, .. } => {
             if upcast.is_some() {
                 f.add(Feature::EnumUpcast);
             }
 
+            f.add(Feature::SubObjects);
+        }
+        Type::Struct { .. } => {
             f.add(Feature::SubObjects);
         }
     }

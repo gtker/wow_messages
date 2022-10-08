@@ -6,7 +6,6 @@ use crate::parser::types::objects::conversion::object_new;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
-use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ObjectType;
 use crate::{DefinerType, Version};
@@ -28,31 +27,6 @@ impl Objects {
         tests: Vec<ParsedTestCase>,
     ) -> Self {
         object_new(enums, flags, structs, messages, tests)
-    }
-
-    pub(crate) fn try_get_definer(&self, ty_name: &str, tags: &Tags) -> Option<&Definer> {
-        if let Some(d) = self
-            .enums
-            .iter()
-            .find(|a| a.name() == ty_name && a.tags().has_version_intersections(tags))
-        {
-            return Some(d);
-        }
-
-        if let Some(d) = self
-            .flags
-            .iter()
-            .find(|a| a.name() == ty_name && a.tags().has_version_intersections(tags))
-        {
-            return Some(d);
-        }
-
-        None
-    }
-
-    pub(crate) fn get_definer(&self, ty_name: &str, tags: &Tags) -> &Definer {
-        self.try_get_definer(ty_name, tags)
-            .unwrap_or_else(|| panic!("unable to find definer: '{}'", ty_name))
     }
 
     pub(crate) fn get_object_type_of(&self, type_name: &str, finder_tags: &Tags) -> ObjectType {
@@ -240,17 +214,6 @@ impl Objects {
         v
     }
 
-    pub(crate) fn get_size_of_complex(&self, type_name: &str) -> u64 {
-        if let Some(e) = self.all_definers().find(|a| a.name() == type_name) {
-            return e.ty().size() as u64;
-        }
-
-        panic!(
-            "complex types that are not enum/flag before size: '{type_name}'",
-            type_name = type_name
-        )
-    }
-
     pub(crate) fn enums(&self) -> &[Definer] {
         &self.enums
     }
@@ -333,13 +296,6 @@ impl Object {
             Object::Container(e) => e.name(),
             Object::Enum(e) => e.name(),
             Object::Flag(e) => e.name(),
-        }
-    }
-
-    pub(crate) fn sizes(&self) -> Sizes {
-        match self {
-            Object::Container(e) => e.sizes(),
-            Object::Enum(e) | Object::Flag(e) => e.sizes(),
         }
     }
 }

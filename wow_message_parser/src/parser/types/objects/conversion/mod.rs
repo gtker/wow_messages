@@ -64,7 +64,13 @@ pub(crate) fn parsed_container_to_container(
 
     verify_and_set_members(&mut p.members, &p.tags, containers, definers);
 
-    let members = container::parsed_members_to_members(p.members.clone());
+    let members = container::parsed_members_to_members(
+        p.members.clone(),
+        tests,
+        containers,
+        definers,
+        p.tags(),
+    );
 
     let rust_object_view = create_rust_object(&p, &members, tests, containers, definers);
 

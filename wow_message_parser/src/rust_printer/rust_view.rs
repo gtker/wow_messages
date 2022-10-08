@@ -1,8 +1,6 @@
 use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
-use crate::parser::types::objects::conversion::{
-    get_container, get_definer, parsed_container_to_container,
-};
+use crate::parser::types::objects::conversion::{get_container, parsed_container_to_container};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
@@ -1212,12 +1210,11 @@ pub(crate) fn create_struct_member(
                         inner_object,
                     }
                 }
-                Type::Identifier { s, upcast } => {
+                Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                     let add_types = || -> Vec<RustEnumerator> {
                         let mut enumerators = Vec::new();
-                        let definer = get_definer(definers, s, tags).unwrap();
 
-                        for field in definer.fields() {
+                        for field in e.fields() {
                             enumerators.push(RustEnumerator {
                                 name: field.name().to_string(),
                                 rust_name: field.rust_name().to_string(),
@@ -1230,54 +1227,48 @@ pub(crate) fn create_struct_member(
                         }
                         enumerators
                     };
+                    let int_ty = if let Some(upcast) = upcast {
+                        *upcast
+                    } else {
+                        *e.ty()
+                    };
 
-                    if let Some(e) = get_definer(definers, s, tags) {
-                        if e.definer_ty() == DefinerType::Enum {
-                            let enumerators = add_types();
-                            let int_ty = if let Some(upcast) = upcast {
-                                *upcast
-                            } else {
-                                *get_definer(definers, s, tags).unwrap().ty()
-                            };
+                    if e.definer_ty() == DefinerType::Enum {
+                        let enumerators = add_types();
 
-                            RustType::Enum {
-                                ty_name: s.clone(),
-                                original_ty_name: s.clone(),
-                                enumerators,
-                                int_ty,
-                                is_simple: true,
-                                is_elseif: false,
-                            }
-                        } else {
-                            let enumerators = add_types();
-
-                            RustType::Flag {
-                                ty_name: s.clone(),
-                                original_ty_name: s.to_string(),
-                                int_ty: *get_definer(definers, s, tags).unwrap().ty(),
-                                enumerators,
-                                is_simple: true,
-                                is_elseif: false,
-                            }
-                        }
-                    } else if let Some(c) = get_container(containers, s, tags) {
-                        let s = c.create_sizes(containers, definers);
-                        if s.is_constant().is_none() {
-                            definition_constantly_sized = false;
-                        }
-
-                        let inner =
-                            parsed_container_to_container(c.clone(), tests, containers, definers);
-                        let object =
-                            create_rust_object(c, inner.fields(), tests, containers, definers);
-
-                        RustType::Struct {
-                            ty_name: c.name().to_string(),
-                            sizes: s,
-                            object,
+                        RustType::Enum {
+                            ty_name: e.name().to_string(),
+                            original_ty_name: e.name().to_string(),
+                            enumerators,
+                            int_ty,
+                            is_simple: true,
+                            is_elseif: false,
                         }
                     } else {
-                        panic!("object contains message type")
+                        let enumerators = add_types();
+
+                        RustType::Flag {
+                            ty_name: e.name().to_string(),
+                            original_ty_name: e.name().to_string(),
+                            int_ty,
+                            enumerators,
+                            is_simple: true,
+                            is_elseif: false,
+                        }
+                    }
+                }
+                Type::Struct { e } => {
+                    let s = e.sizes();
+                    if s.is_constant().is_none() {
+                        definition_constantly_sized = false;
+                    }
+
+                    let object = e.rust_object().clone();
+
+                    RustType::Struct {
+                        ty_name: e.name().to_string(),
+                        sizes: s,
+                        object,
                     }
                 }
                 Type::UpdateMask => {

@@ -269,9 +269,13 @@ impl From<&Type> for IrType {
             Type::UpdateMask => Self::UpdateMask,
             Type::AuraMask => Self::AuraMask,
             Type::Array(array) => Self::Array(array.into()),
-            Type::Identifier { s, upcast } => Self::Identifier {
-                type_name: s.to_string(),
+            Type::Enum { e, upcast } | Type::Flag { e, upcast } => Self::Identifier {
+                type_name: e.name().to_string(),
                 upcast: upcast.map(|a| (&a).into()),
+            },
+            Type::Struct { e } => Self::Identifier {
+                type_name: e.name().to_string(),
+                upcast: None,
             },
             Type::SizedCString => Self::SizedCString,
             Type::Bool => Self::Bool,
