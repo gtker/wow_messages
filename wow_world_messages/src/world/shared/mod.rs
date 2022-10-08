@@ -9,6 +9,7 @@ pub mod cmsg_cancel_channelling123;
 pub mod cmsg_channel_announcements123;
 pub mod cmsg_channel_ban123;
 pub mod cmsg_channel_invite123;
+pub mod cmsg_channel_kick123;
 pub mod cmsg_char_delete123;
 pub mod cmsg_char_enum123;
 pub mod cmsg_char_rename123;
