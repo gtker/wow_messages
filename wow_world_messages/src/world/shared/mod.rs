@@ -23,6 +23,7 @@ pub mod cmsg_channel_unmute123;
 pub mod cmsg_char_delete123;
 pub mod cmsg_char_enum123;
 pub mod cmsg_char_rename123;
+pub mod cmsg_chat_ignored2_4_33;
 pub mod cmsg_complete_cinematic123;
 pub mod cmsg_next_cinematic_camera123;
 pub mod cmsg_ping1_1223;

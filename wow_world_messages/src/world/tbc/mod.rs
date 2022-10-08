@@ -60,6 +60,8 @@ pub(crate) mod cmsg_char_enum;
 pub use cmsg_char_enum::*;
 pub(crate) mod cmsg_char_rename;
 pub use cmsg_char_rename::*;
+pub(crate) mod cmsg_chat_ignored;
+pub use cmsg_chat_ignored::*;
 pub(crate) mod cmsg_complete_cinematic;
 pub use cmsg_complete_cinematic::*;
 pub(crate) mod cmsg_force_move_root_ack;
