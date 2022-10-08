@@ -36,7 +36,12 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                         }
                         WiresharkType::Enum(e) | WiresharkType::Flag(e) => match new_ty {
                             WiresharkType::Enum(v) | WiresharkType::Flag(v) => assert_eq!(e, v),
-                            _ => panic!(),
+                            _ => panic!(
+                                "name '{}' m.ty() is '{:?}' and new_ty is '{:?}'",
+                                name,
+                                m.ty(),
+                                new_ty
+                            ),
                         },
                         WiresharkType::Bytes | WiresharkType::String => assert_eq!(m.ty(), new_ty),
                     }

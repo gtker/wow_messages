@@ -17,7 +17,7 @@ smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     u8 periodic_log;
     u8 unused;
     u32 blocked;
-    u32 hit_info;
+    HitInfo hit_info;
     u8 extend_flag;
 }
 ```
@@ -46,6 +46,6 @@ SMSG have a header of 4 bytes.
 | - | 1 / - | u8 | periodic_log |  | cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name |
 | - | 1 / - | u8 | unused |  |  |
 | - | 4 / Little | u32 | blocked |  |  |
-| - | 4 / Little | u32 | hit_info |  |  |
+| - | 4 / - | [HitInfo](hitinfo.md) | hit_info |  |  |
 | - | 1 / - | u8 | extend_flag |  | cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`. |
 

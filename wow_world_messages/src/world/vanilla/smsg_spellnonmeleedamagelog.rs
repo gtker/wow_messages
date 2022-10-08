@@ -1,5 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::vanilla::HitInfo;
 use crate::world::vanilla::SpellSchool;
 use std::io::{Write, Read};
 
@@ -17,7 +18,7 @@ use std::io::{Write, Read};
 ///     u8 periodic_log;
 ///     u8 unused;
 ///     u32 blocked;
-///     u32 hit_info;
+///     HitInfo hit_info;
 ///     u8 extend_flag;
 /// }
 /// ```
@@ -36,7 +37,7 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub periodic_log: u8,
     pub unused: u8,
     pub blocked: u32,
-    pub hit_info: u32,
+    pub hit_info: HitInfo,
     /// cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.
     ///
     pub extend_flag: u8,
@@ -80,8 +81,8 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         // blocked: u32
         w.write_all(&self.blocked.to_le_bytes())?;
 
-        // hit_info: u32
-        w.write_all(&self.hit_info.to_le_bytes())?;
+        // hit_info: HitInfo
+        w.write_all(&(self.hit_info.as_int() as u32).to_le_bytes())?;
 
         // extend_flag: u8
         w.write_all(&self.extend_flag.to_le_bytes())?;
@@ -119,8 +120,8 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         // blocked: u32
         let blocked = crate::util::read_u32_le(r)?;
 
-        // hit_info: u32
-        let hit_info = crate::util::read_u32_le(r)?;
+        // hit_info: HitInfo
+        let hit_info: HitInfo = crate::util::read_u32_le(r)?.try_into()?;
 
         // extend_flag: u8
         let extend_flag = crate::util::read_u8_le(r)?;
@@ -157,7 +158,7 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
         + 1 // periodic_log: u8
         + 1 // unused: u8
         + 4 // blocked: u32
-        + 4 // hit_info: u32
+        + 4 // hit_info: HitInfo
         + 1 // extend_flag: u8
     }
 }

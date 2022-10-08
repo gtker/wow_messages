@@ -1,10 +1,61 @@
 #tag_all versions "1.12";
 
+enum HitInfo : u32 {
+    NORMAL_SWING        = 0x00000000;
+    UNK1                = 0x00000001 {
+        comment = "req correct packet structure";
+    }
+    AFFECTS_VICTIM      = 0x00000002 {
+        comment = "no being hit animation on victim without it";
+    }
+    LEFT_SWING          = 0x00000004;
+    EARLY_CRITICAL_HIT  = 0x00000008 {
+        comment = "According to vmangos used as crit prior to 1.9.";
+    }
+    MISS                = 0x00000010;
+    ABSORB              = 0x00000020 {
+        comment = "plays absorb sound";
+    }
+    RESIST              = 0x00000040 {
+        comment = "resisted atleast some damage";
+    }
+    CRITICAL_HIT        = 0x00000080;
+    UNK9                = 0x00000100 {
+        comment = "wotlk?";
+    }
+    UNK10               = 0x00002000 {
+        comment = "wotlk?";
+    }
+    GLANCING            = 0x00004000;
+    CRUSHING            = 0x00008000;
+    NO_ACTION           = 0x00010000;
+    SWING_NO_HIT_SOUND  = 0x00080000;
+}
+
+struct DamageInfo {
+    u32 spell_school_mask;
+    f32 damage_float {
+        comment = "vmangos sends the same data in `damage_uint`.";
+    }
+    u32 damage_uint {
+        comment = "vmangos sends the same data in `damage_float`.";
+    }
+    u32 absorb;
+    u32 resist;
+}
+
 smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
-    /* TODO Possible enum? */
-    u32 hit_info;
+    HitInfo hit_info;
     PackedGuid attacker;
     PackedGuid target;
     u32 total_damage;
+    u8 amount_of_damages;
+    DamageInfo[amount_of_damages] damages;
+    u32 damage_state;
+    u32 unknown1;
+    u32 spell_id {
+        comment = "vmangos: spell id, seen with heroic strike and disarm as examples";
+    }
+    u32 blocked_amount;
 }
 

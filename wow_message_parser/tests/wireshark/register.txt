@@ -202,6 +202,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_amount_of_damages,
+            { "Amount Of Damages", "woww.amount.of.damages",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_amount_of_effects,
             { "Amount Of Effects", "woww.amount.of.effects",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -700,6 +706,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_blocked_amount,
+            { "Blocked Amount", "woww.blocked.amount",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_body,
             { "Body", "woww.body",
                 FT_STRINGZ, BASE_NONE, NULL, 0,
@@ -1162,6 +1174,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_damage_float,
+            { "Damage Float", "woww.damage.float",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_damage_maximum,
             { "Damage Maximum", "woww.damage.maximum",
                 FT_FLOAT, BASE_NONE, NULL, 0,
@@ -1174,8 +1192,20 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_damage_state,
+            { "Damage State", "woww.damage.state",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_damage_type,
             { "Damage Type", "woww.damage.type",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_damage_uint,
+            { "Damage Uint", "woww.damage.uint",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -1854,7 +1884,7 @@
         },
         { &hf_woww_hit_info,
             { "Hit Info", "woww.hit.info",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_hit_info_strings), 0,
                 NULL, HFILL
             }
         },
@@ -3997,6 +4027,12 @@
         { &hf_woww_spell_school,
             { "Spell School", "woww.spell.school",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_spell_school_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_spell_school_mask,
+            { "Spell School Mask", "woww.spell.school.mask",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

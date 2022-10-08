@@ -2,6 +2,7 @@
     guint32 amount_of_characters = 0;
     guint32 amount_of_choice_item_rewards = 0;
     guint32 amount_of_cooldowns = 0;
+    guint32 amount_of_damages = 0;
     guint32 amount_of_effects = 0;
     guint32 amount_of_emotes = 0;
     guint32 amount_of_entries = 0;
