@@ -1,6 +1,6 @@
 use crate::parser::stats::Data;
 
-pub(crate) const DATA: [Data; 1060] = [
+pub(crate) const DATA: [Data; 1059] = [
     Data::new("MSG_NULL_ACTION", 0x000),
     Data::new("CMSG_BOOTME", 0x001),
     Data::new("CMSG_DBLOOKUP", 0x002),
@@ -471,7 +471,6 @@ pub(crate) const DATA: [Data; 1060] = [
     Data::new("CMSG_WRAP_ITEM", 0x1D3),
     Data::new("SMSG_LEVELUP_INFO", 0x1D4),
     Data::new("MSG_MINIMAP_PING", 0x1D5),
-    Data::new("SMSG_RESISTLOG", 0x1D6),
     Data::new("SMSG_ENCHANTMENTLOG", 0x1D7),
     Data::new("CMSG_SET_SKILL_CHEAT", 0x1D8),
     Data::new("SMSG_START_MIRROR_TIMER", 0x1D9),
