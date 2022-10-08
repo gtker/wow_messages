@@ -32,6 +32,8 @@ pub(crate) mod cmsg_channel_invite;
 pub use cmsg_channel_invite::*;
 pub(crate) mod cmsg_channel_kick;
 pub use cmsg_channel_kick::*;
+pub(crate) mod cmsg_channel_list;
+pub use cmsg_channel_list::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
 pub(crate) mod cmsg_char_delete;
