@@ -46,6 +46,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_addon_info,
+            { "Addon Info", "woww.addon.info",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_agility,
             { "Agility", "woww.agility",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -1213,12 +1219,6 @@
         { &hf_woww_deaths,
             { "Deaths", "woww.deaths",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_decompressed_addon_info,
-            { "Decompressed Addon Info", "woww.decompressed.addon.info",
-                FT_BYTES, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },

@@ -20,7 +20,7 @@ use std::io::{Write, Read};
 ///     u64 dos_response;
 ///     u8[20] client_proof;
 ///     u32 decompressed_addon_info_size;
-///     u8[-] decompressed_addon_info;
+///     u8[-] addon_info;
 /// }
 /// ```
 pub struct CMSG_AUTH_SESSION {
@@ -38,7 +38,7 @@ pub struct CMSG_AUTH_SESSION {
     pub dos_response: u64,
     pub client_proof: [u8; 20],
     pub decompressed_addon_info_size: u32,
-    pub decompressed_addon_info: Vec<u8>,
+    pub addon_info: Vec<u8>,
 }
 
 impl crate::Message for CMSG_AUTH_SESSION {
@@ -88,9 +88,9 @@ impl crate::Message for CMSG_AUTH_SESSION {
         // decompressed_addon_info_size: u32
         w.write_all(&self.decompressed_addon_info_size.to_le_bytes())?;
 
-        // decompressed_addon_info: u8[-]
+        // addon_info: u8[-]
         let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
-        for i in self.decompressed_addon_info.iter() {
+        for i in self.addon_info.iter() {
             encoder.write_all(&i.to_le_bytes())?;
         }
 
@@ -132,7 +132,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
         // decompressed_addon_info_size: u32
         let decompressed_addon_info_size = crate::util::read_u32_le(r)?;
 
-        // decompressed_addon_info: u8[-]
+        // addon_info: u8[-]
         let mut current_size = {
             4 // client_build: u32
             + 4 // login_server_id: u32
@@ -146,17 +146,17 @@ impl crate::Message for CMSG_AUTH_SESSION {
             + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
             + 4 // decompressed_addon_info_size: u32
         };
-        let mut decompressed_addon_info = Vec::with_capacity(body_size as usize - current_size);
+        let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
-            decompressed_addon_info.push(crate::util::read_u8_le(r)?);
+            addon_info.push(crate::util::read_u8_le(r)?);
             current_size += 1;
         }
 
-        let mut decompressed_addon_info_temp = Vec::new();
-        let mut decoder = flate2::read::ZlibDecoder::new(decompressed_addon_info.as_slice());
-        decoder.read_to_end(&mut decompressed_addon_info_temp)?;
+        let mut addon_info_temp = Vec::new();
+        let mut decoder = flate2::read::ZlibDecoder::new(addon_info.as_slice());
+        decoder.read_to_end(&mut addon_info_temp)?;
 
-        let mut decompressed_addon_info = decompressed_addon_info_temp;
+        let mut addon_info = addon_info_temp;
 
         Ok(Self {
             client_build,
@@ -170,7 +170,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
             dos_response,
             client_proof,
             decompressed_addon_info_size,
-            decompressed_addon_info,
+            addon_info,
         })
     }
 
@@ -191,7 +191,7 @@ impl CMSG_AUTH_SESSION {
         + 8 // dos_response: u64
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
         + 4 // decompressed_addon_info_size: u32
-        + crate::util::zlib_compressed_size(&self.decompressed_addon_info) // decompressed_addon_info: u8[-]
+        + crate::util::zlib_compressed_size(&self.addon_info) // addon_info: u8[-]
     }
 }
 
