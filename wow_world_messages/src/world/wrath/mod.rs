@@ -310,6 +310,8 @@ pub(crate) mod smsg_chat_wrong_faction;
 pub use smsg_chat_wrong_faction::*;
 pub(crate) mod smsg_clientcache_version;
 pub use smsg_clientcache_version::*;
+pub(crate) mod smsg_defense_message;
+pub use smsg_defense_message::*;
 pub(crate) mod smsg_durability_damage_death;
 pub use smsg_durability_damage_death::*;
 pub(crate) mod smsg_environmentaldamagelog;

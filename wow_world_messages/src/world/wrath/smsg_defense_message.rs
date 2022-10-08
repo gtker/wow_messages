@@ -1,11 +1,11 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Area;
+use crate::world::wrath::Area;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_defense_message.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_defense_message.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_defense_message.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_defense_message.wowm#L15):
 /// ```text
-/// smsg SMSG_DEFENSE_MESSAGE = 0x033B {
+/// smsg SMSG_DEFENSE_MESSAGE = 0x033A {
 ///     Area area;
 ///     SizedCString message;
 /// }
@@ -16,7 +16,7 @@ pub struct SMSG_DEFENSE_MESSAGE {
 }
 
 impl crate::Message for SMSG_DEFENSE_MESSAGE {
-    const OPCODE: u32 = 0x033b;
+    const OPCODE: u32 = 0x033a;
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32
@@ -49,8 +49,8 @@ impl crate::Message for SMSG_DEFENSE_MESSAGE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_DEFENSE_MESSAGE {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_DEFENSE_MESSAGE {}
 
 impl SMSG_DEFENSE_MESSAGE {
     pub(crate) fn size(&self) -> usize {

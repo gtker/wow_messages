@@ -117,7 +117,6 @@ Used in:
 * [SMSG_BATTLEFIELD_LIST](smsg_battlefield_list.md)
 * [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
-* [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_INIT_WORLD_STATES](smsg_init_world_states.md)
 * [SMSG_INSTANCE_RESET](smsg_instance_reset.md)
 * [SMSG_INSTANCE_RESET_FAILED](smsg_instance_reset_failed.md)

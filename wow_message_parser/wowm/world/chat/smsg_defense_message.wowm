@@ -1,7 +1,20 @@
-#tag_all versions "1.12";
-
-smsg SMSG_DEFENSE_MESSAGE = 0x033B {
-    Map map;
+smsg SMSG_DEFENSE_MESSAGE = 0x033B { /* Opcode different from the rest */
+    Area area;
     SizedCString message;
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_DEFENSE_MESSAGE = 0x033A {
+    Area area;
+    SizedCString message;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_DEFENSE_MESSAGE = 0x033A {
+    Area area;
+    SizedCString message;
+} {
+    versions = "3.3.5";
+}
