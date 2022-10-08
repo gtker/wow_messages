@@ -45,7 +45,7 @@ impl UpdateMask {
                 return Err(std::io::Error::new(
                     std::io::ErrorKind::Other,
                     "Missing object TYPE",
-                ))
+                ));
             }
             Some(ty) => *ty,
         };
@@ -139,6 +139,66 @@ mod test {
             .set_object_GUID(Guid::new(4))
             .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
             .set_unit_HEALTH(100);
+        let update_mask = UpdateMask::Player(update_mask);
+
+        let mut v = Vec::with_capacity(update_mask.size());
+        update_mask.write_into_vec(&mut v).unwrap();
+        assert_eq!(b.as_slice(), v.as_slice());
+    }
+
+    #[test]
+    fn reset_header_add_one() {
+        let b = [
+            5_u8, // Amount of u32 mask blocks that will follow
+            // Mask blocks
+            3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            // End of mask blocks
+            4, 0, 0, 0, 0, 0, 0, 0, // OBJECT_FIELD_GUID (4) (notice unpacked u64)
+        ];
+
+        let mut update_mask = UpdatePlayer::new()
+            .set_object_GUID(Guid::new(4))
+            .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
+            .set_object_SCALE_X(1.0)
+            .set_unit_HEALTH(100)
+            .set_unit_MAXHEALTH(100)
+            .set_unit_LEVEL(1)
+            .set_unit_FACTIONTEMPLATE(1)
+            .set_unit_DISPLAYID(50)
+            .set_unit_NATIVEDISPLAYID(50);
+        update_mask.header_reset();
+
+        let update_mask = update_mask.set_object_GUID(4.into());
+
+        let update_mask = UpdateMask::Player(update_mask);
+
+        let mut v = Vec::with_capacity(update_mask.size());
+        update_mask.write_into_vec(&mut v).unwrap();
+        assert_eq!(b.as_slice(), v.as_slice());
+    }
+
+    #[test]
+    fn reset_header() {
+        let b = [
+            5_u8, // Amount of u32 mask blocks that will follow
+            // Mask blocks
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0,
+            // End of mask blocks
+            // No value blocks
+        ];
+
+        let mut update_mask = UpdatePlayer::new()
+            .set_object_GUID(Guid::new(4))
+            .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
+            .set_object_SCALE_X(1.0)
+            .set_unit_HEALTH(100)
+            .set_unit_MAXHEALTH(100)
+            .set_unit_LEVEL(1)
+            .set_unit_FACTIONTEMPLATE(1)
+            .set_unit_DISPLAYID(50)
+            .set_unit_NATIVEDISPLAYID(50);
+        update_mask.header_reset();
         let update_mask = UpdateMask::Player(update_mask);
 
         let mut v = Vec::with_capacity(update_mask.size());
