@@ -53,6 +53,8 @@
 - [CacheMask](docs/cachemask.md)
 - [CastFailureReason](docs/castfailurereason.md)
 - [CastFlags](docs/castflags.md)
+- [ChannelFlags](docs/channelflags.md)
+- [ChannelMemberFlags](docs/channelmemberflags.md)
 - [CharacterFlags](docs/characterflags.md)
 - [ChatNotify](docs/chatnotify.md)
 - [ChatType](docs/chattype.md)

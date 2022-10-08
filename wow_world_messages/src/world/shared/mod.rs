@@ -1,5 +1,8 @@
 pub mod ai_reaction123;
 pub mod billing_plan_flags2_4_33;
+pub mod channel_flags123;
+pub mod channel_member123;
+pub mod channel_member_flags123;
 pub mod cmsg_activatetaxi123;
 pub mod cmsg_activatetaxiexpress12;
 pub mod cmsg_attackstop123;
@@ -48,6 +51,7 @@ pub mod smsg_attackswing_notinrange123;
 pub mod smsg_attackswing_notstanding12;
 pub mod smsg_auth_challenge12;
 pub mod smsg_cancel_combat123;
+pub mod smsg_channel_list123;
 pub mod smsg_durability_damage_death123;
 pub mod smsg_environmentaldamagelog123;
 pub mod smsg_login_settimespeed12;

@@ -862,6 +862,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_channel_member_flags,
+            { "Channel Member Flags", "woww.channel.member.flags",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_channel_name,
             { "Channel Name", "woww.channel.name",
                 FT_STRINGZ, BASE_NONE, NULL, 0,
@@ -2593,12 +2599,6 @@
         { &hf_woww_member,
             { "Member", "woww.member",
                 FT_STRINGZ, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_member_flags,
-            { "Member Flags", "woww.member.flags",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

@@ -1,15 +1,34 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
+
+flag ChannelFlags : u8 {
+    NONE       = 0x00;
+    CUSTOM     = 0x01;
+    TRADE      = 0x04;
+    NOT_LFG    = 0x08;
+    GENERAL    = 0x10;
+    CITY       = 0x20;
+    LFG        = 0x40;
+    VOICE      = 0x80;
+}
+
+flag ChannelMemberFlags : u8 {
+    NONE            = 0x00;
+    OWNER           = 0x01;
+    MODERATOR       = 0x04;
+    VOICED          = 0x08;
+    MUTED           = 0x10;
+    CUSTOM          = 0x20;
+    MICROPHONE_MUTE = 0x40;
+}
 
 struct ChannelMember {
     Guid guid;
-    /* TODO: unknown flags */
-    u8 member_flags;
+    ChannelMemberFlags member_flags;
 }
 
 smsg SMSG_CHANNEL_LIST = 0x009B {
     CString channel_name;
-    /* TODO: unknown flags */
-    u8 channel_flags;
+    ChannelFlags channel_flags;
     u32 amount_of_members;
     ChannelMember[amount_of_members] members;
 }
