@@ -18,6 +18,8 @@ pub(crate) mod cmsg_activatetaxiexpress;
 pub use cmsg_activatetaxiexpress::*;
 pub(crate) mod cmsg_attackstop;
 pub use cmsg_attackstop::*;
+pub(crate) mod cmsg_attackswing;
+pub use cmsg_attackswing::*;
 pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
 pub(crate) mod cmsg_char_create;
