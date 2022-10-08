@@ -1,5 +1,7 @@
 pub(crate) mod addon;
 pub use addon::*;
+pub(crate) mod ai_reaction;
+pub use ai_reaction::*;
 pub(crate) mod area;
 pub use area::*;
 pub(crate) mod billing_plan_flags;
@@ -194,6 +196,8 @@ pub(crate) mod smsg_account_data_times;
 pub use smsg_account_data_times::*;
 pub(crate) mod smsg_addon_info;
 pub use smsg_addon_info::*;
+pub(crate) mod smsg_ai_reaction;
+pub use smsg_ai_reaction::*;
 pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;

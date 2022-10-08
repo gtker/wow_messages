@@ -1,3 +1,4 @@
+pub mod ai_reaction123;
 pub mod billing_plan_flags2_4_33;
 pub mod cmsg_activatetaxi123;
 pub mod cmsg_activatetaxiexpress12;
@@ -14,6 +15,7 @@ pub mod cmsg_request_account_data1_123_3_5;
 pub mod inventory_type1_1223;
 pub mod realm_split_state2_4_33;
 pub mod smsg_account_data_times1_122;
+pub mod smsg_ai_reaction123;
 pub mod smsg_auth_challenge12;
 pub mod smsg_login_settimespeed12;
 pub mod smsg_pong123;

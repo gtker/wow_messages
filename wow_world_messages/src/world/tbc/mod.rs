@@ -1,3 +1,5 @@
+pub(crate) mod ai_reaction;
+pub use ai_reaction::*;
 pub(crate) mod area;
 pub use area::*;
 pub(crate) mod billing_plan_flags;
@@ -178,6 +180,8 @@ pub(crate) mod realm_split_state;
 pub use realm_split_state::*;
 pub(crate) mod smsg_account_data_times;
 pub use smsg_account_data_times::*;
+pub(crate) mod smsg_ai_reaction;
+pub use smsg_ai_reaction::*;
 pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;
