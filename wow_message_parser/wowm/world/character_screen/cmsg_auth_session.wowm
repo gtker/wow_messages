@@ -8,7 +8,7 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
     u8[20] client_proof;
     u32 decompressed_addon_info_size;
     u8[-] addon_info {
-        compressed = "true";
+        compressed = "decompressed_addon_info_size";
     }
 } {
     description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
@@ -114,7 +114,7 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
     u8[20] client_proof;
     u32 decompressed_addon_info_size;
     u8[-] addon_info  {
-        compressed = "true";
+        compressed = "decompressed_addon_info_size";
     }
 } {
     description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";

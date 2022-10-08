@@ -240,7 +240,7 @@ pub(crate) struct Tags {
     login_logon_versions: Vec<LoginVersion>,
     world_versions: Vec<WorldVersion>,
     description: Option<TagString>,
-    compressed: bool,
+    compressed: Option<String>,
     comment: Option<TagString>,
     display: String,
 }
@@ -325,7 +325,7 @@ impl Tags {
                 self.description = Some(t);
             }
         } else if key == COMPRESSED {
-            self.compressed = value == "true";
+            self.compressed = Some(value.to_owned());
         } else if key == COMMENT {
             if let Some(comment) = &mut self.comment {
                 comment.add(value);
@@ -538,8 +538,12 @@ impl Tags {
         self.description.as_ref()
     }
 
+    pub(crate) fn compressed(&self) -> Option<&String> {
+        self.compressed.as_ref()
+    }
+
     pub(crate) fn is_compressed(&self) -> bool {
-        self.compressed
+        self.compressed.is_some()
     }
 
     pub(crate) fn comment(&self) -> Option<&TagString> {
