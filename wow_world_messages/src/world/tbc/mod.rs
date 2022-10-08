@@ -188,6 +188,8 @@ pub(crate) mod smsg_attackstop;
 pub use smsg_attackstop::*;
 pub(crate) mod smsg_attackswing_badfacing;
 pub use smsg_attackswing_badfacing::*;
+pub(crate) mod smsg_attackswing_cant_attack;
+pub use smsg_attackswing_cant_attack::*;
 pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;

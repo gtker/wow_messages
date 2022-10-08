@@ -946,6 +946,7 @@ use crate::world::tbc::SMSG_AI_REACTION;
 use crate::world::tbc::SMSG_ATTACKSTART;
 use crate::world::tbc::SMSG_ATTACKSTOP;
 use crate::world::tbc::SMSG_ATTACKSWING_BADFACING;
+use crate::world::tbc::SMSG_ATTACKSWING_CANT_ATTACK;
 use crate::world::tbc::SMSG_PONG;
 use crate::world::tbc::SMSG_AUTH_CHALLENGE;
 use crate::world::tbc::SMSG_AUTH_RESPONSE;
@@ -992,6 +993,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ATTACKSTART(SMSG_ATTACKSTART),
     SMSG_ATTACKSTOP(SMSG_ATTACKSTOP),
     SMSG_ATTACKSWING_BADFACING(SMSG_ATTACKSWING_BADFACING),
+    SMSG_ATTACKSWING_CANT_ATTACK(SMSG_ATTACKSWING_CANT_ATTACK),
     SMSG_PONG(SMSG_PONG),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
@@ -1040,6 +1042,7 @@ impl ServerOpcodeMessage {
             0x0143 => Ok(Self::SMSG_ATTACKSTART(<SMSG_ATTACKSTART as crate::Message>::read_body(&mut r, body_size)?)),
             0x0144 => Ok(Self::SMSG_ATTACKSTOP(<SMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size)?)),
             0x0146 => Ok(Self::SMSG_ATTACKSWING_BADFACING(<SMSG_ATTACKSWING_BADFACING as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0149 => Ok(Self::SMSG_ATTACKSWING_CANT_ATTACK(<SMSG_ATTACKSWING_CANT_ATTACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1156,6 +1159,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTART(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSTOP(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -1205,6 +1209,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTART(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSTOP(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -1254,6 +1259,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -1303,6 +1309,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -1352,6 +1359,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTART(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTOP(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -1401,6 +1409,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTART(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -1452,6 +1461,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ATTACKSTART(_) => "SMSG_ATTACKSTART",
             ServerOpcodeMessage::SMSG_ATTACKSTOP(_) => "SMSG_ATTACKSTOP",
             ServerOpcodeMessage::SMSG_ATTACKSWING_BADFACING(_) => "SMSG_ATTACKSWING_BADFACING",
+            ServerOpcodeMessage::SMSG_ATTACKSWING_CANT_ATTACK(_) => "SMSG_ATTACKSWING_CANT_ATTACK",
             ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
             ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
@@ -1656,6 +1666,12 @@ impl From<SMSG_ATTACKSTOP> for ServerOpcodeMessage {
 impl From<SMSG_ATTACKSWING_BADFACING> for ServerOpcodeMessage {
     fn from(c: SMSG_ATTACKSWING_BADFACING) -> Self {
         Self::SMSG_ATTACKSWING_BADFACING(c)
+    }
+}
+
+impl From<SMSG_ATTACKSWING_CANT_ATTACK> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKSWING_CANT_ATTACK) -> Self {
+        Self::SMSG_ATTACKSWING_CANT_ATTACK(c)
     }
 }
 
