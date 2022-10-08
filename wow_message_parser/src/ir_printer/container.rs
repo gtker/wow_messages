@@ -243,12 +243,20 @@ pub(crate) enum IrType {
     String { length: String },
     #[serde(rename = "array")]
     Array(IrArray),
-    #[serde(rename = "identifier")]
-    Identifier {
+    #[serde(rename = "enum")]
+    Enum {
         type_name: String,
         #[serde(skip_serializing_if = "Option::is_none")]
         upcast: Option<IrIntegerType>,
     },
+    #[serde(rename = "flag")]
+    Flag {
+        type_name: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        upcast: Option<IrIntegerType>,
+    },
+    #[serde(rename = "struct")]
+    Struct { type_name: String },
     #[serde(rename = "update_mask")]
     UpdateMask,
     #[serde(rename = "aura_mask")]
@@ -269,13 +277,16 @@ impl From<&Type> for IrType {
             Type::UpdateMask => Self::UpdateMask,
             Type::AuraMask => Self::AuraMask,
             Type::Array(array) => Self::Array(array.into()),
-            Type::Enum { e, upcast } | Type::Flag { e, upcast } => Self::Identifier {
+            Type::Enum { e, upcast } => Self::Enum {
                 type_name: e.name().to_string(),
                 upcast: upcast.map(|a| (&a).into()),
             },
-            Type::Struct { e } => Self::Identifier {
+            Type::Flag { e, upcast } => Self::Flag {
                 type_name: e.name().to_string(),
-                upcast: None,
+                upcast: upcast.map(|a| (&a).into()),
+            },
+            Type::Struct { e } => Self::Struct {
+                type_name: e.name().to_string(),
             },
             Type::SizedCString => Self::SizedCString,
             Type::Bool => Self::Bool,
