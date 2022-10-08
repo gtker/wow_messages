@@ -1,7 +1,16 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_JOIN_CHANNEL = 0x0097 {
     CString channel_name;
     CString channel_password;
+} {
+    versions = "1.12";
 }
 
+cmsg CMSG_JOIN_CHANNEL = 0x0097 {
+    u32 channel_id;
+    u8 unknown1;
+    u8 unknown2;
+    CString channel_name;
+    CString channel_password;
+} {
+    versions = "2.4.3 3";
+}

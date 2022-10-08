@@ -82,6 +82,8 @@ pub(crate) mod cmsg_force_turn_rate_change_ack;
 pub use cmsg_force_turn_rate_change_ack::*;
 pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
+pub(crate) mod cmsg_join_channel;
+pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_move_chng_transport;
 pub use cmsg_move_chng_transport::*;
 pub(crate) mod cmsg_move_fall_reset;
