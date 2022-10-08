@@ -114,6 +114,8 @@ pub(crate) mod cmsg_request_account_data;
 pub use cmsg_request_account_data::*;
 pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
+pub(crate) mod cmsg_text_emote;
+pub use cmsg_text_emote::*;
 pub(crate) mod cmsg_update_account_data;
 pub use cmsg_update_account_data::*;
 pub use crate::helper::wrath::*;

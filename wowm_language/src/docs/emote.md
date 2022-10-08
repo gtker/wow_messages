@@ -510,6 +510,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [CMSG_EMOTE](cmsg_emote.md)
+* [CMSG_TEXT_EMOTE](cmsg_text_emote.md)
 
 # Emote
 
@@ -881,4 +882,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [CMSG_EMOTE](cmsg_emote.md)
+* [CMSG_TEXT_EMOTE](cmsg_text_emote.md)
 

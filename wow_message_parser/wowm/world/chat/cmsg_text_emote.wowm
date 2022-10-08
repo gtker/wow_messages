@@ -1,9 +1,26 @@
-#tag_all versions "1.12";
+cmsg CMSG_TEXT_EMOTE = 0x0104 {
+    /* TODO: text_emote could be an enum */
+    u32 text_emote;
+    Emote emote;
+    Guid guid;
+} {
+    versions = "1.12";
+}
 
 cmsg CMSG_TEXT_EMOTE = 0x0104 {
     /* TODO: text_emote could be an enum */
     u32 text_emote;
     Emote emote;
     Guid guid;
+} {
+    versions = "2.4.3";
 }
 
+cmsg CMSG_TEXT_EMOTE = 0x0104 {
+    /* TODO: text_emote could be an enum */
+    u32 text_emote;
+    Emote emote;
+    Guid guid;
+} {
+    versions = "3.3.5";
+}
