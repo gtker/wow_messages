@@ -52,6 +52,7 @@ use crate::world::tbc::CMSG_FORCE_MOVE_UNROOT_ACK;
 use crate::world::tbc::MSG_MOVE_HEARTBEAT_Client;
 use crate::world::tbc::CMSG_NEXT_CINEMATIC_CAMERA;
 use crate::world::tbc::CMSG_COMPLETE_CINEMATIC;
+use crate::world::tbc::CMSG_EMOTE;
 use crate::world::tbc::CMSG_CANCEL_CHANNELLING;
 use crate::world::tbc::CMSG_ATTACKSWING;
 use crate::world::tbc::CMSG_ATTACKSTOP;
@@ -120,6 +121,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT_Client),
     CMSG_NEXT_CINEMATIC_CAMERA(CMSG_NEXT_CINEMATIC_CAMERA),
     CMSG_COMPLETE_CINEMATIC(CMSG_COMPLETE_CINEMATIC),
+    CMSG_EMOTE(CMSG_EMOTE),
     CMSG_CANCEL_CHANNELLING(CMSG_CANCEL_CHANNELLING),
     CMSG_ATTACKSWING(CMSG_ATTACKSWING),
     CMSG_ATTACKSTOP(CMSG_ATTACKSTOP),
@@ -190,6 +192,7 @@ impl ClientOpcodeMessage {
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FB => Ok(Self::CMSG_NEXT_CINEMATIC_CAMERA(<CMSG_NEXT_CINEMATIC_CAMERA as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FC => Ok(Self::CMSG_COMPLETE_CINEMATIC(<CMSG_COMPLETE_CINEMATIC as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0102 => Ok(Self::CMSG_EMOTE(<CMSG_EMOTE as crate::Message>::read_body(&mut r, body_size)?)),
             0x013B => Ok(Self::CMSG_CANCEL_CHANNELLING(<CMSG_CANCEL_CHANNELLING as crate::Message>::read_body(&mut r, body_size)?)),
             0x0141 => Ok(Self::CMSG_ATTACKSWING(<CMSG_ATTACKSWING as crate::Message>::read_body(&mut r, body_size)?)),
             0x0142 => Ok(Self::CMSG_ATTACKSTOP(<CMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size)?)),
@@ -328,6 +331,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_EMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSWING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSTOP(c) => c.write_encrypted_client(w, e),
@@ -399,6 +403,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_unencrypted_client(w),
+            Self::CMSG_EMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSWING(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSTOP(c) => c.write_unencrypted_client(w),
@@ -470,6 +475,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -541,6 +547,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_client(w).await,
@@ -612,6 +619,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_encrypted_client(w, e).await,
@@ -683,6 +691,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_client(w).await,
@@ -789,6 +798,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT_Client",
             ClientOpcodeMessage::CMSG_NEXT_CINEMATIC_CAMERA(_) => "CMSG_NEXT_CINEMATIC_CAMERA",
             ClientOpcodeMessage::CMSG_COMPLETE_CINEMATIC(_) => "CMSG_COMPLETE_CINEMATIC",
+            ClientOpcodeMessage::CMSG_EMOTE(_) => "CMSG_EMOTE",
             ClientOpcodeMessage::CMSG_CANCEL_CHANNELLING(_) => "CMSG_CANCEL_CHANNELLING",
             ClientOpcodeMessage::CMSG_ATTACKSWING(_) => "CMSG_ATTACKSWING",
             ClientOpcodeMessage::CMSG_ATTACKSTOP(_) => "CMSG_ATTACKSTOP",
@@ -1085,6 +1095,12 @@ impl From<CMSG_NEXT_CINEMATIC_CAMERA> for ClientOpcodeMessage {
 impl From<CMSG_COMPLETE_CINEMATIC> for ClientOpcodeMessage {
     fn from(c: CMSG_COMPLETE_CINEMATIC) -> Self {
         Self::CMSG_COMPLETE_CINEMATIC(c)
+    }
+}
+
+impl From<CMSG_EMOTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_EMOTE) -> Self {
+        Self::CMSG_EMOTE(c)
     }
 }
 

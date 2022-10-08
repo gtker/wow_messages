@@ -1,6 +1,18 @@
-#tag_all versions "1.12";
+cmsg CMSG_EMOTE = 0x0102 {
+    Emote emote;
+} {
+    versions = "1.12";
+}
 
 cmsg CMSG_EMOTE = 0x0102 {
     Emote emote;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_EMOTE = 0x0102 {
+    Emote emote;
+} {
+    versions = "3.3.5";
 }
 
