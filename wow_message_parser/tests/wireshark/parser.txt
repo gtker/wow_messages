@@ -4846,8 +4846,8 @@
             ptvcursor_add(ptv, hf_woww_sequence_id, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_PROCRESIST:
-            ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_target_guid, 8, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_caster, 8, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_log_format, 1, ENC_LITTLE_ENDIAN);
             break;

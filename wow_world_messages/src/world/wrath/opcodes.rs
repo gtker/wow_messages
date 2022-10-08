@@ -1022,6 +1022,7 @@ use crate::world::wrath::SMSG_ENVIRONMENTALDAMAGELOG;
 use crate::world::wrath::SMSG_ACCOUNT_DATA_TIMES;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA;
 use crate::world::wrath::SMSG_LOGIN_VERIFY_WORLD;
+use crate::world::wrath::SMSG_PROCRESIST;
 use crate::world::wrath::SMSG_DURABILITY_DAMAGE_DEATH;
 use crate::world::wrath::SMSG_CHAR_RENAME;
 use crate::world::wrath::SMSG_ADDON_INFO;
@@ -1079,6 +1080,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
     SMSG_UPDATE_ACCOUNT_DATA(SMSG_UPDATE_ACCOUNT_DATA),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
+    SMSG_PROCRESIST(SMSG_PROCRESIST),
     SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
     SMSG_ADDON_INFO(SMSG_ADDON_INFO),
@@ -1138,6 +1140,7 @@ impl ServerOpcodeMessage {
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             0x020C => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA(<SMSG_UPDATE_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0260 => Ok(Self::SMSG_PROCRESIST(<SMSG_PROCRESIST as crate::Message>::read_body(&mut r, body_size)?)),
             0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
             0x02EF => Ok(Self::SMSG_ADDON_INFO(<SMSG_ADDON_INFO as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1346,6 +1349,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PROCRESIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ADDON_INFO(c) => c.write_encrypted_server(w, e),
@@ -1406,6 +1410,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PROCRESIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
             Self::SMSG_ADDON_INFO(c) => c.write_unencrypted_server(w),
@@ -1466,6 +1471,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PROCRESIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ADDON_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -1526,6 +1532,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PROCRESIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ADDON_INFO(c) => c.tokio_write_unencrypted_server(w).await,
@@ -1586,6 +1593,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PROCRESIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ADDON_INFO(c) => c.astd_write_encrypted_server(w, e).await,
@@ -1646,6 +1654,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PROCRESIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ADDON_INFO(c) => c.astd_write_unencrypted_server(w).await,
@@ -1708,6 +1717,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA(_) => "SMSG_UPDATE_ACCOUNT_DATA",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
+            ServerOpcodeMessage::SMSG_PROCRESIST(_) => "SMSG_PROCRESIST",
             ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
             ServerOpcodeMessage::SMSG_ADDON_INFO(_) => "SMSG_ADDON_INFO",
@@ -1983,6 +1993,12 @@ impl From<SMSG_UPDATE_ACCOUNT_DATA> for ServerOpcodeMessage {
 impl From<SMSG_LOGIN_VERIFY_WORLD> for ServerOpcodeMessage {
     fn from(c: SMSG_LOGIN_VERIFY_WORLD) -> Self {
         Self::SMSG_LOGIN_VERIFY_WORLD(c)
+    }
+}
+
+impl From<SMSG_PROCRESIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_PROCRESIST) -> Self {
+        Self::SMSG_PROCRESIST(c)
     }
 }
 
