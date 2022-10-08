@@ -22,6 +22,7 @@ pub mod smsg_attackswing_badfacing123;
 pub mod smsg_attackswing_cant_attack123;
 pub mod smsg_attackswing_deadtarget123;
 pub mod smsg_attackswing_notinrange123;
+pub mod smsg_attackswing_notstanding12;
 pub mod smsg_auth_challenge12;
 pub mod smsg_login_settimespeed12;
 pub mod smsg_pong123;
