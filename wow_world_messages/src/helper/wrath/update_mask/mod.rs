@@ -10,13 +10,17 @@ use std::collections::BTreeMap;
 use std::io;
 use std::io::Read;
 
-update_item!(UpdateItem, ITEM);
-update_item!(UpdateContainer, ITEM | CONTAINER);
-update_item!(UpdateUnit, UNIT);
-update_item!(UpdatePlayer, UNIT | PLAYER);
-update_item!(UpdateGameObject, GAMEOBJECT);
-update_item!(UpdateDynamicObject, DYNAMICOBJECT);
-update_item!(UpdateCorpse, CORPSE);
+update_item!(UpdateItem, UpdateItemBuilder, ITEM);
+update_item!(UpdateContainer, UpdateContainerBuilder, ITEM | CONTAINER);
+update_item!(UpdateUnit, UpdateUnitBuilder, UNIT);
+update_item!(UpdatePlayer, UpdatePlayerBuilder, UNIT | PLAYER);
+update_item!(UpdateGameObject, UpdateGameObjectBuilder, GAMEOBJECT);
+update_item!(
+    UpdateDynamicObject,
+    UpdateDynamicObjectBuilder,
+    DYNAMICOBJECT
+);
+update_item!(UpdateCorpse, UpdateCorpseBuilder, CORPSE);
 
 #[derive(Debug, Hash, Clone, PartialEq, Eq)]
 pub enum UpdateMask {
