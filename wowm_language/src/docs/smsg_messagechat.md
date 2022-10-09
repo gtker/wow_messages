@@ -72,8 +72,8 @@ is equal to `YELL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | speech_bubble_credit | This character will have the speech bubble above their head. | 0 value credits same as `chat_credit`. Invalid value credits no one.<br/>cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | chat_credit | This character will be appear to say this in the chat box. | 0 value credits no name.<br/>cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | speech_bubble_credit | This character will have the speech bubble above their head. | 0 value credits same as `chat_credit`. Invalid value credits no one.<br/>cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | chat_credit | This character will be appear to say this in the chat box. | 0 value credits no name.<br/>cmangos/vmangos/mangoszero: `chat_credit` and `speech_bubble_credit` are the same |
 
 Else If chat_type is equal to `MONSTER_SAY` **or** 
 is equal to `MONSTER_YELL`:
