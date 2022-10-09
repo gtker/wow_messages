@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 ///
 /// The result of this message will update the client character screen without them sending another [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm#L19):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm#L1):
 /// ```text
 /// smsg SMSG_CHAR_DELETE = 0x003C {
 ///     WorldResult result;

@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::world::vanilla::SMSG_CHAR_CREATE).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L2):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L1):
 /// ```text
 /// cmsg CMSG_CHAR_CREATE = 0x0036 {
 ///     CString name;
@@ -172,7 +172,7 @@ mod test {
          0x64, 0x62, 0x65, 0x65, 0x66, 0x00, 0x01, 0x01, 0x01, 0x08, 0x00, 0x0E,
          0x02, 0x04, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 18.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 17.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_CREATE0() {
@@ -213,7 +213,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 18.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 17.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_CREATE0() {
@@ -254,7 +254,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 18.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 17.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_CREATE0() {

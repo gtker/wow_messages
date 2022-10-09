@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 ///
 /// Client seems to always send a `CMSG_CANCEL_TRADE` after receiving this message, for unknown reasons.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L27):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L1):
 /// ```text
 /// smsg SMSG_CHARACTER_LOGIN_FAILED = 0x0041 {
 ///     WorldResult result;

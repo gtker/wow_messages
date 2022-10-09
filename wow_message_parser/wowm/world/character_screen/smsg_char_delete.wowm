@@ -3,7 +3,7 @@ smsg SMSG_CHAR_DELETE = 0x3C {
 } {
     description = "Response to [CMSG_CHAR_DELETE].";
     comment = "The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM].";
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
 
 test SMSG_CHAR_DELETE {
@@ -14,20 +14,4 @@ test SMSG_CHAR_DELETE {
     0x39, /* result */
 ] {
     versions = "1.12";
-}
-
-smsg SMSG_CHAR_DELETE = 0x3C {
-    WorldResult result;
-} {
-    description = "Response to [CMSG_CHAR_DELETE].";
-    comment = "The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM].";
-    versions = "2.4.3";
-}
-
-smsg SMSG_CHAR_DELETE = 0x3C {
-    WorldResult result;
-} {
-    description = "Response to [CMSG_CHAR_DELETE].";
-    comment = "The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM].";
-    versions = "3.3.5";
 }

@@ -6,7 +6,7 @@ smsg SMSG_CHAR_RENAME = 0x2C8 {
     }
 } {
     description = "Response to [CMSG_CHAR_RENAME].";
-    versions = "1";
+    paste_versions = "1 2.4.3 3.3.5";
 }
 
 test SMSG_CHAR_RENAME {
@@ -31,26 +31,4 @@ test SMSG_CHAR_RENAME {
     0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65, 0x66, 0x00, /* new_name */
 ] {
     versions = "1.12";
-}
-
-smsg SMSG_CHAR_RENAME = 0x2C8 {
-    WorldResult result;
-    if (result == RESPONSE_SUCCESS) {
-        Guid character;
-        CString new_name;
-    }
-} {
-    description = "Response to [CMSG_CHAR_RENAME].";
-    versions = "2.4.3";
-}
-
-smsg SMSG_CHAR_RENAME = 0x2C8 {
-    WorldResult result;
-    if (result == RESPONSE_SUCCESS) {
-        Guid character;
-        CString new_name;
-    }
-} {
-    description = "Response to [CMSG_CHAR_RENAME].";
-    versions = "3.3.5";
 }

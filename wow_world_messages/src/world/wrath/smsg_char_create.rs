@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 ///
 /// Every [`WorldResult`](crate::world::wrath::WorldResult) except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm#L26):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm#L1):
 /// ```text
 /// smsg SMSG_CHAR_CREATE = 0x003A {
 ///     WorldResult result;

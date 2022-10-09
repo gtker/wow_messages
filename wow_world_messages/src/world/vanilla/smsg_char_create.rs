@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 ///
 /// Every [`WorldResult`](crate::world::vanilla::WorldResult) except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm#L4):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm#L1):
 /// ```text
 /// smsg SMSG_CHAR_CREATE = 0x003A {
 ///     WorldResult result;
@@ -58,7 +58,7 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x3A, 0x00, 0x2F, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHAR_CREATE0() {
@@ -83,7 +83,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHAR_CREATE0() {
@@ -108,7 +108,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHAR_CREATE0() {

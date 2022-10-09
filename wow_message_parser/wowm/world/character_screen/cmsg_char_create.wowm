@@ -1,4 +1,3 @@
-
 cmsg CMSG_CHAR_CREATE = 0x36 {
     CString name;
     Race race;
@@ -12,7 +11,7 @@ cmsg CMSG_CHAR_CREATE = 0x36 {
     u8 outfit_id = 0;
 } {
     description = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
-    versions = "1";
+    paste_versions = "1 2.4.3";
 }
 
 test CMSG_CHAR_CREATE {
@@ -41,22 +40,6 @@ test CMSG_CHAR_CREATE {
     0x00, /* outfit_id */
 ] {
     versions = "1";
-}
-
-cmsg CMSG_CHAR_CREATE = 0x36 {
-    CString name;
-    Race race;
-    Class class;
-    Gender gender;
-    u8 skin_color;
-    u8 face;
-    u8 hair_style;
-    u8 hair_color;
-    u8 facial_hair;
-    u8 outfit_id = 0;
-} {
-    description = "Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE].";
-    versions = "2.4.3";
 }
 
 cmsg CMSG_CHAR_CREATE = 0x36 {
