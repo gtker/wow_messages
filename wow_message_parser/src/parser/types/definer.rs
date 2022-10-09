@@ -120,10 +120,10 @@ pub(crate) struct Definer {
 
 impl Ord for Definer {
     fn cmp(&self, other: &Self) -> Ordering {
-        let self_first = self.tags().first_version();
-        let other_first = other.tags().first_version();
+        let self_first = self.tags().main_versions().collect::<Vec<_>>();
+        let other_first = other.tags().main_versions().collect::<Vec<_>>();
 
-        compare_name_and_tags(&self.name, &[self_first], &other.name, &[other_first])
+        compare_name_and_tags(&self.name, &self_first, &other.name, &other_first)
     }
 }
 

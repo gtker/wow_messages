@@ -21,7 +21,7 @@ pub(crate) fn compare_name_and_tags(
     name2: &str,
     v2: &[Version],
 ) -> Ordering {
-    name1.cmp(name2).then_with(|| v1[0].cmp(&v2[0]))
+    name1.cmp(name2).then_with(|| v1.cmp(v2))
 }
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
