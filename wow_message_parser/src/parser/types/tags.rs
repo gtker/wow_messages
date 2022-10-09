@@ -1,10 +1,12 @@
 use std::cmp::Ordering;
+use std::collections::BTreeSet;
 use std::fmt::{Display, Formatter, Write};
 
 use crate::file_utils::get_import_path;
 use crate::rust_printer::Version;
 use crate::{
-    Objects, COMMENT, DESCRIPTION, COMPRESSED, DISPLAY, LOGIN_VERSIONS, RUST_BASE_TYPE, TEST_STR, VERSIONS,
+    Objects, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
+    RUST_BASE_TYPE, TEST_STR, VERSIONS,
 };
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
@@ -243,6 +245,7 @@ pub(crate) struct Tags {
     compressed: Option<String>,
     comment: Option<TagString>,
     display: String,
+    paste_versions: BTreeSet<WorldVersion>,
 }
 
 impl Tags {
@@ -263,6 +266,10 @@ impl Tags {
             Version::World(l) => s.world_versions.push(l),
         }
         s
+    }
+
+    pub(crate) fn push_version(&mut self, v: WorldVersion) {
+        self.world_versions.push(v);
     }
 
     pub(crate) fn push(&mut self, t: Tag) {
@@ -316,6 +323,27 @@ impl Tags {
             if self.world_versions.contains(&WorldVersion::All) {
                 self.world_versions = vec![WorldVersion::All];
             }
+        } else if key == PASTE_VERSIONS {
+            for w in value.split_whitespace() {
+                if let Ok(v) = w.parse::<u8>() {
+                    self.paste_versions.insert(WorldVersion::Major(v));
+                    continue;
+                } else if w == "*" {
+                    self.paste_versions.insert(WorldVersion::All);
+                    continue;
+                }
+
+                let d: Vec<u8> = w.split('.').map(|a| a.parse::<u8>().unwrap()).collect();
+                self.paste_versions.insert(match d.len() {
+                    2 => WorldVersion::Minor(d[0], d[1]),
+                    3 => WorldVersion::Patch(d[0], d[1], d[2]),
+                    4 => WorldVersion::Exact(d[0], d[1], d[2], u16::from(d[3])),
+                    _ => panic!("incorrect world version string"),
+                });
+            }
+            if self.paste_versions.contains(&WorldVersion::All) {
+                self.paste_versions.insert(WorldVersion::All);
+            }
         } else if key == DESCRIPTION {
             if let Some(desc) = &mut self.description {
                 desc.add(value);
@@ -351,6 +379,10 @@ impl Tags {
 
     pub(crate) fn contains(&self, name: &str) -> bool {
         self.inner.iter().any(|a| a.key == name)
+    }
+
+    pub(crate) fn paste_versions(&self) -> Vec<WorldVersion> {
+        self.paste_versions.clone().into_iter().collect()
     }
 
     pub(crate) fn get_ref(&self, name: &str) -> Option<&str> {
@@ -464,7 +496,7 @@ impl Tags {
         } else if let Some(v) = self.versions().first() {
             Version::World(*v)
         } else {
-            unreachable!()
+            panic!("{:#?}", &self);
         }
     }
 

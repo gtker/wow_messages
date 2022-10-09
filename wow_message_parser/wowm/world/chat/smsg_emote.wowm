@@ -2,19 +2,5 @@ smsg SMSG_EMOTE = 0x0103 {
     Emote emote;
     Guid guid;
 } {
-    versions = "1.12";
-}
-
-smsg SMSG_EMOTE = 0x0103 {
-    Emote emote;
-    Guid guid;
-} {
-    versions = "2.4.3";
-}
-
-smsg SMSG_EMOTE = 0x0103 {
-    Emote emote;
-    Guid guid;
-} {
-    versions = "3.3.5";
+    paste_versions = "1.12 2.4.3 3.3.5";
 }

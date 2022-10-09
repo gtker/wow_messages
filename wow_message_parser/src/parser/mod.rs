@@ -138,51 +138,31 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, filename: &str) -
                 let mut statement = statement.into_inner();
                 let keyword = statement.next().unwrap().as_str();
 
-                match keyword {
-                    "struct" => structs.push(parse_struct(
-                        &mut statement,
-                        tags,
-                        ContainerType::Struct,
-                        file_info,
-                    )),
-                    "clogin" => {
-                        messages.push(parse_struct(
-                            &mut statement,
-                            tags,
-                            ContainerType::CLogin(0),
-                            file_info,
-                        ));
-                    }
-                    "slogin" => {
-                        let s =
-                            parse_struct(&mut statement, tags, ContainerType::SLogin(0), file_info);
-                        messages.push(s);
-                    }
-                    "cmsg" => {
-                        messages.push(parse_struct(
-                            &mut statement,
-                            tags,
-                            ContainerType::CMsg(0),
-                            file_info,
-                        ));
-                    }
-                    "smsg" => {
-                        messages.push(parse_struct(
-                            &mut statement,
-                            tags,
-                            ContainerType::SMsg(0),
-                            file_info,
-                        ));
-                    }
-                    "msg" => {
-                        messages.push(parse_struct(
-                            &mut statement,
-                            tags,
-                            ContainerType::Msg(0),
-                            file_info,
-                        ));
-                    }
+                let ty = match keyword {
+                    "struct" => ContainerType::Struct,
+                    "clogin" => ContainerType::CLogin(0),
+                    "slogin" => ContainerType::SLogin(0),
+                    "cmsg" => ContainerType::CMsg(0),
+                    "smsg" => ContainerType::SMsg(0),
+                    "msg" => ContainerType::Msg(0),
                     keyword => panic!("invalid keyword for container: '{}'", keyword),
+                };
+                let s = parse_struct(&mut statement, tags, ty, file_info);
+                if s.tags.paste_versions().is_empty() {
+                    match ty {
+                        ContainerType::Struct => structs.push(s),
+                        _ => messages.push(s),
+                    }
+                } else {
+                    for v in s.tags.paste_versions() {
+                        let mut s = s.clone();
+                        s.tags.push_version(v);
+
+                        match ty {
+                            ContainerType::Struct => structs.push(s),
+                            _ => messages.push(s),
+                        }
+                    }
                 }
             }
             Rule::test => {
