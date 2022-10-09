@@ -78,6 +78,12 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
                 | ContainerType::Msg(i)
                 | ContainerType::CMsg(i)
                 | ContainerType::SMsg(i) => {
+                    if i as usize != container.opcode {
+                        panic!(
+                            "Found opcode '{}' for container '{:?}' '{}', but it has '{}'",
+                            i, version, container.name, container.opcode
+                        );
+                    }
                     assert_eq!(i as usize, container.opcode);
                 }
                 _ => panic!("invalid for counting"),

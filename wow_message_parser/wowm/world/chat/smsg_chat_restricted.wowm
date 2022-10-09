@@ -10,12 +10,6 @@ enum ChatRestrictionType : u8 {
     versions = "2.4.3";
 }
 
-smsg SMSG_CHAT_RESTRICTED = 0x02FD {
-    ChatRestrictionType restriction;
-} {
-    versions = "2.4.3";
-}
-
 enum ChatRestrictionType : u8 {
     CHAT_RESTRICTED = 0;
     CHAT_THROTTLED  = 1;
@@ -28,5 +22,6 @@ enum ChatRestrictionType : u8 {
 smsg SMSG_CHAT_RESTRICTED = 0x02FD {
     ChatRestrictionType restriction;
 } {
-    versions = "3.3.5";
+    paste_versions = "2.4.3 3.3.5";
 }
+

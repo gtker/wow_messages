@@ -1,18 +1,5 @@
 cmsg CMSG_EMOTE = 0x0102 {
     Emote emote;
 } {
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
-
-cmsg CMSG_EMOTE = 0x0102 {
-    Emote emote;
-} {
-    versions = "2.4.3";
-}
-
-cmsg CMSG_EMOTE = 0x0102 {
-    Emote emote;
-} {
-    versions = "3.3.5";
-}
-
