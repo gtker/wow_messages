@@ -173,24 +173,32 @@ impl WorldVersion {
         }
     }
 
-    pub fn is_main_version(&self) -> bool {
-        let mains = [
-            WorldVersion::Minor(1, 12),
-            WorldVersion::Patch(2, 4, 3),
-            WorldVersion::Patch(3, 3, 5),
-        ];
-
-        for v in mains {
-            if self.overlaps(&v) {
-                return true;
-            }
-        }
-
-        false
-    }
-
     pub fn as_module_case(&self) -> String {
         self.to_string().replace('.', "_")
+    }
+
+    pub fn is_main_version(&self) -> bool {
+        self.try_as_major_world().is_some()
+    }
+
+    pub(crate) fn try_as_major_world(&self) -> Option<MajorWorldVersion> {
+        const VANILLA: WorldVersion = WorldVersion::Minor(1, 12);
+        const TBC: WorldVersion = WorldVersion::Exact(2, 4, 3, 8606);
+        const WRATH: WorldVersion = WorldVersion::Exact(3, 3, 5, 12340);
+
+        if self.covers(&VANILLA) {
+            Some(MajorWorldVersion::Vanilla)
+        } else if self.covers(&TBC) {
+            Some(MajorWorldVersion::BurningCrusade)
+        } else if self.covers(&WRATH) {
+            Some(MajorWorldVersion::Wrath)
+        } else {
+            None
+        }
+    }
+
+    pub(crate) fn as_major_world(&self) -> MajorWorldVersion {
+        self.try_as_major_world().unwrap()
     }
 }
 
@@ -273,33 +281,7 @@ impl Version {
     }
 
     pub(crate) fn as_major_world(&self) -> MajorWorldVersion {
-        match self.as_world() {
-            WorldVersion::Major(m) => match m {
-                1 => MajorWorldVersion::Vanilla,
-                2 => MajorWorldVersion::BurningCrusade,
-                3 => MajorWorldVersion::Wrath,
-                _ => unreachable!(),
-            },
-            WorldVersion::Minor(m, i) => match (m, i) {
-                (1, 12) => MajorWorldVersion::Vanilla,
-                (2, 4) => MajorWorldVersion::BurningCrusade,
-                (3, 3) => MajorWorldVersion::Wrath,
-                _ => unreachable!(),
-            },
-            WorldVersion::Patch(m, i, p) => match (m, i, p) {
-                (1, 12, _) => MajorWorldVersion::Vanilla,
-                (2, 4, 3) => MajorWorldVersion::BurningCrusade,
-                (3, 3, 5) => MajorWorldVersion::Wrath,
-                _ => unreachable!(),
-            },
-            WorldVersion::Exact(m, i, p, e) => match (m, i, p, e) {
-                (1, 12, _, _) => MajorWorldVersion::Vanilla,
-                (2, 4, 3, 8606) => MajorWorldVersion::BurningCrusade,
-                (3, 3, 5, 12340) => MajorWorldVersion::Wrath,
-                _ => unreachable!(),
-            },
-            WorldVersion::All => unreachable!(),
-        }
+        self.as_world().as_major_world()
     }
 
     pub(crate) fn to_module_case(self) -> String {
