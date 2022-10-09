@@ -1333,7 +1333,9 @@
             break;
         case CMSG_SET_ACTION_BUTTON:
             ptvcursor_add(ptv, hf_woww_button, 1, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_action_type, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_action, 2, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_misc, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_action_type, 1, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_SET_ACTIVE_MOVER:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);

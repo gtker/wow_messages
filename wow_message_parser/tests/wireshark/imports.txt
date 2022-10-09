@@ -1,6 +1,7 @@
 static int hf_woww_absorb = -1;
 static int hf_woww_absorbed = -1;
 static int hf_woww_absorbed_damage = -1;
+static int hf_woww_action = -1;
 static int hf_woww_action_bar = -1;
 static int hf_woww_action_bars = -1;
 static int hf_woww_action_type = -1;
@@ -439,6 +440,7 @@ static int hf_woww_minimum = -1;
 static int hf_woww_minimum_bid = -1;
 static int hf_woww_minimum_level = -1;
 static int hf_woww_minimum_signatures = -1;
+static int hf_woww_misc = -1;
 static int hf_woww_misc_value = -1;
 static int hf_woww_money = -1;
 static int hf_woww_money_in_trade = -1;

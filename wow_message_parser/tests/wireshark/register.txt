@@ -16,6 +16,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_action,
+            { "Action", "woww.action",
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_action_bar,
             { "Action Bar", "woww.action.bar",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
@@ -30,7 +36,7 @@
         },
         { &hf_woww_action_type,
             { "Action Type", "woww.action.type",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -2641,6 +2647,12 @@
         { &hf_woww_minimum_signatures,
             { "Minimum Signatures", "woww.minimum.signatures",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_misc,
+            { "Misc", "woww.misc",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
