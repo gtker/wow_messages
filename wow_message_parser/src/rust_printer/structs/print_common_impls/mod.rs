@@ -208,7 +208,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                         }
                     }
                 },
-                ArrayType::Complex(_) => match array.size() {
+                ArrayType::Struct(_) => match array.size() {
                     ArraySize::Fixed(fixed_value) => match m.constant_sized() {
                         true => format!(
                             "{fixed_value} * {inner_type_size}",

@@ -1,6 +1,5 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
-use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
@@ -82,12 +81,7 @@ impl Type {
     }
 
     // NOTE: Definers used in if statements count if statement contents
-    pub(crate) fn sizes_parsed(
-        &self,
-        e: &ParsedContainer,
-        containers: &[ParsedContainer],
-        definers: &[Definer],
-    ) -> Sizes {
+    pub(crate) fn sizes_parsed(&self, e: &ParsedContainer) -> Sizes {
         let mut sizes = Sizes::new();
 
         match self {
@@ -162,18 +156,11 @@ impl Type {
                         CSTRING_SMALLEST_ALLOWED * min,
                         CSTRING_LARGEST_ALLOWED * max,
                     ),
-                    ArrayType::Complex(s) => {
-                        if let Some(e) = get_definer(definers, s, e.tags()) {
-                            let s = e.ty().size();
-                            sizes.inc(s as usize * min, s as usize * max);
-                        } else if let Some(c) = get_container(containers, s, e.tags()) {
-                            let c = c.create_sizes(containers, definers);
+                    ArrayType::Struct(c) => {
+                        let c = c.sizes();
 
-                            sizes.inc(min * c.minimum(), 0);
-                            sizes.inc(0, max.saturating_mul(c.maximum()));
-                        } else {
-                            unreachable!()
-                        }
+                        sizes.inc(min * c.minimum(), 0);
+                        sizes.inc(0, max.saturating_mul(c.maximum()));
                     }
                 }
             }

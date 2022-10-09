@@ -4,7 +4,7 @@ use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::sizes::{BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Endianness, IntegerType, ObjectType};
+use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{doc_printer, Container, ContainerType, DefinerType, Objects, Tags};
 use std::collections::HashMap;
@@ -85,15 +85,7 @@ fn print_container_example_array(
                     s.w_break_at(format!("{}, ", b));
                 }
             }
-            ArrayType::Complex(identifier) => {
-                let type_of = o.get_object_type_of(identifier, tags);
-                match type_of {
-                    ObjectType::Struct => {}
-                    _ => panic!(),
-                }
-
-                let c = o.get_container(identifier, tags);
-
+            ArrayType::Struct(c) => {
                 for m in c.fields() {
                     let prefix = format!("{}[{}].{}", prefix, i, c.name());
                     print_container_example_member(s, c, m, bytes, values, o, tags, &prefix);
@@ -488,11 +480,11 @@ fn print_container_field(
                 }
                 Type::Array(array) => match array.ty() {
                     ArrayType::CString | ArrayType::Integer(_) => d.ty().str(),
-                    ArrayType::Complex(identifier) => {
+                    ArrayType::Struct(c) => {
                         format!(
                             "[{ty}]({ty_path}.md)[{size}]",
-                            ty = identifier,
-                            ty_path = identifier.to_lowercase(),
+                            ty = c.name(),
+                            ty_path = c.name().to_lowercase(),
                             size = array.size().str(),
                         )
                     }

@@ -13,14 +13,12 @@ use crate::UTILITY_PATH;
 fn print_read_array_fixed(
     s: &mut Writer,
     array: &Array,
-    e: &Container,
-    o: &Objects,
     d: &StructMemberDefinition,
     prefix: &str,
     postfix: &str,
     size: i64,
 ) {
-    let inner_is_constant_sized = array.inner_type_is_constant_sized(e.tags(), o);
+    let inner_is_constant_sized = array.inner_type_is_constant_sized();
 
     if inner_is_constant_sized {
         s.wln(format!(
@@ -30,8 +28,8 @@ fn print_read_array_fixed(
                 ArrayType::Integer(i) => {
                     i.rust_str()
                 }
-                ArrayType::Complex(v) => {
-                    v
+                ArrayType::Struct(c) => {
+                    c.name()
                 }
                 ArrayType::CString => "String",
                 ArrayType::Guid | ArrayType::PackedGuid => "Guid",
@@ -75,7 +73,7 @@ fn print_read_array_fixed(
                 ));
             }
         }
-        ArrayType::Complex(_) => {
+        ArrayType::Struct(_) => {
             if inner_is_constant_sized {
                 s.wln(format!(
                     "*i = {type_name}::{prefix}read(r){postfix}?;",
@@ -141,7 +139,6 @@ fn print_read_array(
     s: &mut Writer,
     array: &Array,
     e: &Container,
-    o: &Objects,
     d: &StructMemberDefinition,
     prefix: &str,
     postfix: &str,
@@ -163,7 +160,7 @@ fn print_read_array(
 
     match array.size() {
         ArraySize::Fixed(size) => {
-            print_read_array_fixed(s, array, e, o, d, prefix, postfix, size);
+            print_read_array_fixed(s, array, d, prefix, postfix, size);
         }
         ArraySize::Variable(length) => {
             s.wln(format!(
@@ -185,7 +182,7 @@ fn print_read_array(
                         postfix = postfix,
                     ));
                 }
-                ArrayType::Complex(_) => {
+                ArrayType::Struct(_) => {
                     s.wln(format!(
                         "{name}.push({type_name}::{prefix}read(r){postfix}?);",
                         name = d.name(),
@@ -245,7 +242,7 @@ fn print_read_array(
                             postfix = postfix,
                         ));
                     }
-                    ArrayType::Complex(_) => {
+                    ArrayType::Struct(_) => {
                         s.wln(format!(
                             "{name}.push({type_name}::{prefix}read(r){postfix}?);",
                             name = d.name(),
@@ -362,7 +359,6 @@ fn print_size_before_variable(s: &mut Writer, e: &Container, variable_name: &str
 fn print_read_definition(
     s: &mut Writer,
     e: &Container,
-    o: &Objects,
     d: &StructMemberDefinition,
     prefix: &str,
     postfix: &str,
@@ -466,7 +462,7 @@ fn print_read_definition(
             s.newline();
         }
         Type::Array(array) => {
-            print_read_array(s, array, e, o, d, prefix, postfix);
+            print_read_array(s, array, e, d, prefix, postfix);
         }
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
             if e.definer_ty() == DefinerType::Enum {
@@ -778,7 +774,7 @@ fn print_read_field(
 ) {
     match field {
         StructMember::Definition(d) => {
-            print_read_definition(s, e, o, d, prefix, postfix);
+            print_read_definition(s, e, d, prefix, postfix);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {

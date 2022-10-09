@@ -1,7 +1,7 @@
 use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
 use crate::parser::types::array::ArrayType;
-use crate::parser::types::objects::{Object, Objects};
+use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::{Sizes, BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{LoginVersion, Tags};
@@ -336,11 +336,9 @@ impl Container {
                             }
                         }
                         Type::Array(array) => {
-                            if let ArrayType::Complex(s) = array.ty() {
-                                if let Object::Container(e) = o.get_object(s, tags) {
-                                    for m in e.fields() {
-                                        inner(m, v, o, tags);
-                                    }
+                            if let ArrayType::Struct(c) = array.ty() {
+                                for m in c.fields() {
+                                    inner(m, v, o, tags);
                                 }
                             }
                         }
@@ -511,8 +509,8 @@ impl Container {
         for d in self.all_definitions() {
             match d.struct_type() {
                 Type::Array(a) => {
-                    if let ArrayType::Complex(i) = a.ty() {
-                        v.push(i.clone());
+                    if let ArrayType::Struct(c) = a.ty() {
+                        v.push(c.name().to_string());
                     }
                 }
                 Type::Enum { e, .. } | Type::Flag { e, .. } => {

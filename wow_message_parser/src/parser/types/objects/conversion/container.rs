@@ -51,7 +51,7 @@ fn parsed_type_to_type(
         ParsedType::CString => Type::CString,
         ParsedType::SizedCString => Type::SizedCString,
         ParsedType::String { length } => Type::String { length },
-        ParsedType::Array(a) => Type::Array(parsed_array_to_array(a)),
+        ParsedType::Array(a) => Type::Array(parsed_array_to_array(a, containers, definers, tags)),
         ParsedType::Identifier { s, upcast } => {
             if let Some(e) = get_definer(definers, &s, tags) {
                 match e.definer_ty() {
@@ -77,7 +77,12 @@ fn parsed_type_to_type(
     }
 }
 
-fn parsed_array_to_array(p: ParsedArray) -> Array {
+fn parsed_array_to_array(
+    p: ParsedArray,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    tags: &Tags,
+) -> Array {
     let size = match p.size() {
         ParsedArraySize::Fixed(v) => ArraySize::Fixed(v),
         ParsedArraySize::Variable(v) => ArraySize::Variable(v),
@@ -86,7 +91,14 @@ fn parsed_array_to_array(p: ParsedArray) -> Array {
 
     let inner = match p.ty() {
         ParsedArrayType::Integer(i) => ArrayType::Integer(i.clone()),
-        ParsedArrayType::Complex(c) => ArrayType::Complex(c.clone()),
+        ParsedArrayType::Complex(c) => {
+            let c = parsed_container_to_container(
+                get_container(containers, c, tags).unwrap().clone(),
+                containers,
+                definers,
+            );
+            ArrayType::Struct(c)
+        }
         ParsedArrayType::CString => ArrayType::CString,
         ParsedArrayType::Guid => ArrayType::Guid,
         ParsedArrayType::PackedGuid => ArrayType::PackedGuid,
@@ -346,8 +358,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
             }
 
             let mut members = Vec::with_capacity(multiple.len());
-            let inner_c =
-                conversion::get_container(containers, ty.str().as_str(), c.tags()).unwrap();
+            let inner_c = get_container(containers, ty.str().as_str(), c.tags()).unwrap();
             for m_inner in multiple {
                 members.push(convert_test_case_member_to_test_case(
                     m_inner, inner_c, containers, enums, flags,
@@ -414,7 +425,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
 
                 v.push(parse_value(value).unwrap() as usize);
             }
-            let size = parsed_array_to_array(array.clone()).size();
+            let definers = [flags, enums].concat();
+            let size = parsed_array_to_array(array.clone(), containers, &definers, c.tags()).size();
             TestValue::Array { values: v, size }
         }
         ParsedType::FloatingPoint(_) => TestValue::FloatingNumber {

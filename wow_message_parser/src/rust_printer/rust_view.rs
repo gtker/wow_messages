@@ -1,7 +1,6 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
-use crate::parser::types::objects::conversion::{get_container, parsed_container_to_container};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
@@ -1172,9 +1171,8 @@ pub(crate) fn create_struct_member(
                             inner_sizes.inc_both(GUID_SIZE.into());
                             None
                         }
-                        ArrayType::Complex(complex) => {
-                            let c = get_container(containers, complex, tags).unwrap();
-                            let s = c.create_sizes(containers, definers);
+                        ArrayType::Struct(c) => {
+                            let s = c.sizes();
                             if s.is_constant().is_none() {
                                 definition_constantly_sized = false;
                             }
@@ -1193,10 +1191,7 @@ pub(crate) fn create_struct_member(
                         }
                     };
 
-                    let inner_object = complex.map(|c| {
-                        let inner = parsed_container_to_container(c.clone(), containers, definers);
-                        create_rust_object(c, inner.fields(), containers, definers)
-                    });
+                    let inner_object = complex.map(|c| c.rust_object().clone());
 
                     RustType::Array {
                         array: array.clone(),
@@ -1280,7 +1275,7 @@ pub(crate) fn create_struct_member(
             };
 
             let name = d.name().to_string();
-            let mut sizes = d.ty().sizes_parsed(e, containers, definers);
+            let mut sizes = d.ty().sizes_parsed(e);
 
             for m in e.fields() {
                 match m {

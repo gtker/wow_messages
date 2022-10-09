@@ -230,7 +230,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
             }
             match array.ty() {
                 ArrayType::Integer(_) => f.add(Feature::SimpleArrays),
-                ArrayType::Complex(_)
+                ArrayType::Struct(_)
                 | ArrayType::CString
                 | ArrayType::Guid
                 | ArrayType::PackedGuid => f.add(Feature::ComplexArrays),

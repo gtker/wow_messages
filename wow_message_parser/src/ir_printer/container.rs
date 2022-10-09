@@ -331,7 +331,7 @@ impl From<&ArrayType> for IrArrayType {
     fn from(v: &ArrayType) -> Self {
         match v {
             ArrayType::Integer(i) => Self::Integer(i.into()),
-            ArrayType::Complex(f) => Self::Complex(f.into()),
+            ArrayType::Struct(f) => Self::Complex(f.name().into()),
             ArrayType::CString => Self::CString,
             ArrayType::Guid => Self::Guid,
             ArrayType::PackedGuid => Self::PackedGuid,

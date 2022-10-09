@@ -1,10 +1,10 @@
-use crate::parser::types::{IntegerType, ObjectType};
-use crate::{Objects, Tags};
+use crate::parser::types::IntegerType;
+use crate::Container;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum ArrayType {
     Integer(IntegerType),
-    Complex(String),
+    Struct(Container),
     CString,
     Guid,
     PackedGuid,
@@ -14,7 +14,7 @@ impl ArrayType {
     pub(crate) fn rust_str(&self) -> String {
         match &self {
             ArrayType::Integer(i) => i.rust_str().to_string(),
-            ArrayType::Complex(i) => i.clone(),
+            ArrayType::Struct(c) => c.name().to_string(),
             ArrayType::CString => "String".to_string(),
             ArrayType::Guid => "Guid".to_string(),
             ArrayType::PackedGuid => "Guid".to_string(),
@@ -24,7 +24,7 @@ impl ArrayType {
     pub(crate) fn str(&self) -> String {
         match self {
             ArrayType::Integer(i) => i.str().to_string(),
-            ArrayType::Complex(i) => i.clone(),
+            ArrayType::Struct(i) => i.name().to_string(),
             ArrayType::CString => "CString".to_string(),
             ArrayType::Guid => "Guid".to_string(),
             ArrayType::PackedGuid => "PackedGuid".to_string(),
@@ -93,14 +93,11 @@ impl Array {
         }
     }
 
-    pub(crate) fn inner_type_is_constant_sized(&self, tags: &Tags, o: &Objects) -> bool {
+    pub(crate) fn inner_type_is_constant_sized(&self) -> bool {
         match self.ty() {
             ArrayType::Integer(_) | ArrayType::Guid => true,
             ArrayType::CString | ArrayType::PackedGuid => false,
-            ArrayType::Complex(ident) => match o.get_object_type_of(ident, tags) {
-                ObjectType::Struct => o.get_container(ident, tags).is_constant_sized(),
-                ObjectType::Enum | ObjectType::Flag => true,
-            },
+            ArrayType::Struct(c) => c.is_constant_sized(),
         }
     }
 }

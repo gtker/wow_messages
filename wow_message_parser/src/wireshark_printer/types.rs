@@ -3,7 +3,7 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::ty::Type;
 use crate::parser::types::Endianness::Little;
 use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
-use crate::{wireshark_printer, Object, Objects, Tags};
+use crate::{wireshark_printer, Objects};
 
 pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
     let mut objects = WiresharkObject::new();
@@ -13,7 +13,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
             let name = wireshark_printer::name_to_hf(d.name(), d.ty());
 
             if let Some(m) = objects.get_mut(&name) {
-                if let Some(new_ty) = &WiresharkType::from_type(d.ty(), e.tags(), o) {
+                if let Some(new_ty) = &WiresharkType::from_type(d.ty()) {
                     match m.ty_mut() {
                         WiresharkType::Integer(i) => {
                             let v = match new_ty {
@@ -47,7 +47,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                         WiresharkType::Bytes | WiresharkType::String => assert_eq!(m.ty(), new_ty),
                     }
                 }
-            } else if let Some(ty) = WiresharkType::from_type(d.ty(), e.tags(), o) {
+            } else if let Some(ty) = WiresharkType::from_type(d.ty()) {
                 match &ty {
                     WiresharkType::Enum(e) => objects.add_enum(e.clone()),
                     WiresharkType::Flag(e) => objects.add_flag(e.clone()),
@@ -154,7 +154,7 @@ pub(crate) enum WiresharkType {
 }
 
 impl WiresharkType {
-    pub(crate) fn from_type(ty: &Type, tags: &Tags, o: &Objects) -> Option<Self> {
+    pub(crate) fn from_type(ty: &Type) -> Option<Self> {
         Some(match ty {
             Type::Enum { e, .. } => Self::Enum(e.clone()),
             Type::Flag { e, .. } => Self::Flag(e.clone()),
@@ -166,13 +166,8 @@ impl WiresharkType {
             Type::FloatingPoint(v) => Self::Float(*v),
             Type::SizedCString | Type::String { .. } | Type::CString => Self::String,
             Type::Array(array) => match array.ty() {
-                ArrayType::Complex(s) => {
-                    let e = o.get_object(s, tags);
-                    match e {
-                        Object::Container(_) => return None,
-                        Object::Enum(e) => Self::Enum(e),
-                        Object::Flag(e) => Self::Flag(e),
-                    }
+                ArrayType::Struct(_) => {
+                    return None;
                 }
                 ArrayType::Integer(v) => {
                     if v == &IntegerType::U8 {

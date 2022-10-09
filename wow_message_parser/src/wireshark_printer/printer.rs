@@ -375,10 +375,10 @@ fn print_definition(
                         hf = name,
                     ));
                 }
-                ArrayType::Complex(identifier) => {
+                ArrayType::Struct(c) => {
                     if !print_identifier(
                         s,
-                        identifier,
+                        c.name(),
                         w,
                         &None,
                         o,
