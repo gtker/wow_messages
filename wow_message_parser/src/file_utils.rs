@@ -73,7 +73,8 @@ impl ModFiles {
             let filename = m.name.clone().join("mod.rs");
 
             create_and_overwrite_if_not_same_contents(&s, &filename);
-            self.already_existing_files.insert(filename, true);
+            self.already_existing_files
+                .insert(filename.canonicalize().unwrap(), true);
         }
     }
 
@@ -239,7 +240,8 @@ impl ModFiles {
         self.add_world_shared_file(name, &versions, tags);
         create_and_overwrite_if_not_same_contents(base_s, Path::new(&path));
 
-        self.already_existing_files.insert(path, true);
+        self.already_existing_files
+            .insert(path.canonicalize().unwrap(), true);
     }
 
     pub(crate) fn write_shared_import_to_file(
@@ -258,8 +260,10 @@ impl ModFiles {
         create_and_overwrite_if_not_same_contents(world_s, &world_path);
         create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
 
-        self.already_existing_files.insert(base_path, true);
-        self.already_existing_files.insert(world_path, true);
+        self.already_existing_files
+            .insert(base_path.canonicalize().unwrap(), true);
+        self.already_existing_files
+            .insert(world_path.canonicalize().unwrap(), true);
     }
 
     pub(crate) fn write_base_contents_to_file(
@@ -281,8 +285,10 @@ impl ModFiles {
                 create_and_overwrite_if_not_same_contents(world_s, &world_path);
                 create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
 
-                self.already_existing_files.insert(world_path, true);
-                self.already_existing_files.insert(base_path, true);
+                self.already_existing_files
+                    .insert(world_path.canonicalize().unwrap(), true);
+                self.already_existing_files
+                    .insert(base_path.canonicalize().unwrap(), true);
             }
         }
     }
@@ -302,7 +308,8 @@ impl ModFiles {
 
                 create_and_overwrite_if_not_same_contents(s, Path::new(&path));
 
-                self.already_existing_files.insert(path, true);
+                self.already_existing_files
+                    .insert(path.canonicalize().unwrap(), true);
             }
             Version::World(version) => {
                 let path = path_utils::get_world_filepath(name, version);
@@ -311,7 +318,8 @@ impl ModFiles {
 
                 create_and_overwrite_if_not_same_contents(s, &path);
 
-                self.already_existing_files.insert(path, true);
+                self.already_existing_files
+                    .insert(path.canonicalize().unwrap(), true);
             }
         }
     }
