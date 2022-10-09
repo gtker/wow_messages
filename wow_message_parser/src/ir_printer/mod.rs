@@ -65,10 +65,10 @@ pub(crate) enum IrLoginVersion {
     Specific(u8),
 }
 
-impl From<&LoginVersion> for IrLoginVersion {
-    fn from(v: &LoginVersion) -> Self {
+impl From<LoginVersion> for IrLoginVersion {
+    fn from(v: LoginVersion) -> Self {
         match v {
-            LoginVersion::Specific(s) => Self::Specific(*s),
+            LoginVersion::Specific(s) => Self::Specific(s),
             LoginVersion::All => Self::All,
         }
     }
@@ -163,7 +163,7 @@ impl IrTags {
             display: tags.display().map(|a| a.to_owned()),
             version: if tags.has_logon_versions() {
                 Some(IrVersions::Login(
-                    tags.logon_versions().iter().map(|a| a.into()).collect(),
+                    tags.logon_versions().map(|a| a.into()).collect(),
                 ))
             } else if tags.has_world_versions() {
                 Some(IrVersions::World(

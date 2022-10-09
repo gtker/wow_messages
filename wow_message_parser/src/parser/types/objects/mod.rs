@@ -183,7 +183,7 @@ impl Objects {
 
         for s in self.all_containers() {
             for l in s.tags().logon_versions() {
-                v.push(*l);
+                v.push(l);
             }
         }
 
@@ -205,8 +205,8 @@ impl Objects {
         let mut v = Vec::new();
 
         for s in self.all_containers() {
-            let logon = s.tags().logon_versions();
-            if logon.contains(version_number) || logon.contains(&LoginVersion::All) {
+            let mut logon = s.tags().logon_versions();
+            if logon.any(|a| a == *version_number || a == LoginVersion::All) {
                 v.push(s);
             }
         }

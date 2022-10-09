@@ -238,7 +238,7 @@ impl LoginVersion {
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
 pub(crate) struct Tags {
-    login_logon_versions: Vec<LoginVersion>,
+    login_logon_versions: BTreeSet<LoginVersion>,
     world_versions: Vec<WorldVersion>,
     description: Option<TagString>,
     compressed: Option<String>,
@@ -260,7 +260,9 @@ impl Tags {
     pub(crate) fn new_with_version(version: Version) -> Self {
         let mut s = Self::new();
         match version {
-            Version::Login(l) => s.login_logon_versions.push(l),
+            Version::Login(l) => {
+                s.login_logon_versions.insert(l);
+            }
             Version::World(l) => s.world_versions.push(l),
         }
         s
@@ -273,8 +275,6 @@ impl Tags {
     pub(crate) fn append(&mut self, mut t: Tags) {
         self.login_logon_versions
             .append(&mut t.login_logon_versions);
-        self.login_logon_versions.sort();
-        self.login_logon_versions.dedup();
 
         self.world_versions.append(&mut t.world_versions);
         self.world_versions.sort();
@@ -316,20 +316,14 @@ impl Tags {
         if key == LOGIN_VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
-                    self.login_logon_versions.push(LoginVersion::Specific(v));
+                    self.login_logon_versions.insert(LoginVersion::Specific(v));
                 } else if w == "*" {
-                    self.login_logon_versions.push(LoginVersion::All);
+                    self.login_logon_versions.clear();
+                    self.login_logon_versions.insert(LoginVersion::All);
                 } else {
                     panic!("invalid value passed as login_logon_versions: '{}'", w);
                 }
             }
-            self.login_logon_versions.sort();
-            self.login_logon_versions.dedup();
-            if self.login_logon_versions.contains(&LoginVersion::All) {
-                self.login_logon_versions = vec![LoginVersion::All];
-            }
-
-            //return;
         } else if key == VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
@@ -436,7 +430,7 @@ impl Tags {
         }
 
         for t in self.logon_versions() {
-            if tags.logon_versions().contains(t) {
+            if tags.logon_versions().any(|a| a == t) {
                 return true;
             }
         }
@@ -463,19 +457,19 @@ impl Tags {
     }
 
     pub(crate) fn has_wildcard_logon_version(&self) -> bool {
-        self.logon_versions().contains(&LoginVersion::All)
+        self.logon_versions().any(|a| a == LoginVersion::All)
     }
 
     pub(crate) fn has_wildcard_world_version(&self) -> bool {
         self.versions().contains(&WorldVersion::All)
     }
 
-    pub(crate) fn logon_versions(&self) -> &[LoginVersion] {
-        &self.login_logon_versions
+    pub(crate) fn logon_versions(&self) -> impl Iterator<Item = LoginVersion> {
+        self.login_logon_versions.clone().into_iter()
     }
 
     pub(crate) fn has_logon_versions(&self) -> bool {
-        !self.logon_versions().is_empty()
+        self.logon_versions().next().is_some()
     }
 
     pub(crate) fn versions(&self) -> &[WorldVersion] {
@@ -494,8 +488,7 @@ impl Tags {
             .map(|a| Version::World(*a));
 
         self.logon_versions()
-            .iter()
-            .map(|a| Version::Login(*a))
+            .map(|a| Version::Login(a))
             .chain(world)
     }
 
@@ -523,8 +516,8 @@ impl Tags {
     }
 
     pub(crate) fn first_version(&self) -> Version {
-        if let Some(v) = self.logon_versions().first() {
-            Version::Login(*v)
+        if let Some(v) = self.logon_versions().next() {
+            Version::Login(v)
         } else if let Some(v) = self.versions().first() {
             Version::World(*v)
         } else {
@@ -562,8 +555,8 @@ impl Tags {
     /// self is able to fulfill all version obligations for tags
     pub(crate) fn fulfills_all(&self, tags: &Self) -> bool {
         for version in tags.logon_versions() {
-            if !self.logon_versions().contains(version)
-                && !self.logon_versions().contains(&LoginVersion::All)
+            if !self.logon_versions().any(|a| a == version)
+                && !self.logon_versions().any(|a| a == LoginVersion::All)
             {
                 return false;
             }

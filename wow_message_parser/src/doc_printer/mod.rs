@@ -215,16 +215,16 @@ fn print_metadata(s: &mut DocWriter, tags: &Tags) {
 
 fn print_versions(
     s: &mut DocWriter,
-    login_versions: &[LoginVersion],
+    login_versions: impl Iterator<Item = LoginVersion>,
     world_versions: &[WorldVersion],
 ) {
     s.w("## ");
 
-    for (i, l) in login_versions.iter().enumerate() {
-        s.w(format!("Protocol Version {}", l));
-        if i != login_versions.len() - 1 {
+    for (i, l) in login_versions.enumerate() {
+        if i != 0 {
             s.w(", ");
         }
+        s.w(format!("Protocol Version {}", l));
     }
 
     for (i, l) in world_versions.iter().enumerate() {

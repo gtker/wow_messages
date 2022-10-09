@@ -229,7 +229,7 @@ fn contains_complex_type(
         "Complex type not found: '{}' for object: '{}' for versions logon: '{:?}', versions: '{:?}'",
         ty_name,
         struct_name,
-        tags.logon_versions(),
+        tags.logon_versions().collect::<Vec<_>>(),
         tags.versions()
     );
 }
