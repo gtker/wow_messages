@@ -31,6 +31,7 @@ pub mod cmsg_chat_ignored2_4_33;
 pub mod cmsg_complete_cinematic123;
 pub mod cmsg_join_channel2_4_33;
 pub mod cmsg_leave_channel2_4_33;
+pub mod cmsg_logout_cancel123;
 pub mod cmsg_next_cinematic_camera123;
 pub mod cmsg_ping1_1223;
 pub mod cmsg_player_login123;
