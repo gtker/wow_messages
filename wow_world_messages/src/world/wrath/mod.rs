@@ -322,6 +322,8 @@ pub(crate) mod smsg_login_settimespeed;
 pub use smsg_login_settimespeed::*;
 pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
+pub(crate) mod smsg_notification;
+pub use smsg_notification::*;
 pub(crate) mod smsg_pong;
 pub use smsg_pong::*;
 pub(crate) mod smsg_procresist;
