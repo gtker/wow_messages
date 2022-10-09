@@ -60,13 +60,6 @@ impl Array {
         Self { inner, size }
     }
 
-    pub(crate) fn new_unimplemented() -> Self {
-        Self {
-            inner: ArrayType::Integer(IntegerType::U8),
-            size: ArraySize::Endless,
-        }
-    }
-
     pub(crate) fn ty(&self) -> &ArrayType {
         &self.inner
     }

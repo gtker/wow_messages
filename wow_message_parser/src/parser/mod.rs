@@ -10,6 +10,7 @@ use types::definer::DefinerField;
 use types::tags::Tags;
 
 use crate::file_info::FileInfo;
+use crate::parser::types::parsed::parsed_array::ParsedArray;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
 use crate::parser::types::parsed::parsed_struct_member::{
@@ -20,7 +21,6 @@ use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
 use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD, UNIMPLEMENTED};
-use types::array::Array;
 use types::container::ContainerType;
 use types::definer::SelfValueDefinerField;
 use types::if_statement::{Condition, Conditional};
@@ -298,7 +298,7 @@ fn parse_struct(
 fn unimplemented_member() -> ParsedStructMember {
     ParsedStructMember::Definition(ParsedStructMemberDefinition::new(
         UNIMPLEMENTED,
-        ParsedType::Array(Array::new_unimplemented()),
+        ParsedType::Array(ParsedArray::new_unimplemented()),
         None,
         Tags::new(),
     ))

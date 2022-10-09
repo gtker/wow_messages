@@ -1,4 +1,4 @@
-use crate::parser::types::array::{ArraySize, ArrayType};
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::conversion;
@@ -6,6 +6,7 @@ use crate::parser::types::objects::conversion::{
     all_definitions, all_definitions_mut, get_container, get_definer, parsed_container_to_container,
 };
 use crate::parser::types::optional::OptionalStatement;
+use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
@@ -74,7 +75,7 @@ fn parsed_type_to_type(
         ParsedType::CString => Type::CString,
         ParsedType::SizedCString => Type::SizedCString,
         ParsedType::String { length } => Type::String { length },
-        ParsedType::Array(a) => Type::Array(a),
+        ParsedType::Array(a) => Type::Array(parsed_array_to_array(a)),
         ParsedType::Identifier { s, upcast } => {
             if let Some(e) = get_definer(definers, &s, tags) {
                 match e.definer_ty() {
@@ -98,6 +99,24 @@ fn parsed_type_to_type(
         ParsedType::UpdateMask => Type::UpdateMask,
         ParsedType::AuraMask => Type::AuraMask,
     }
+}
+
+fn parsed_array_to_array(p: ParsedArray) -> Array {
+    let size = match p.size() {
+        ParsedArraySize::Fixed(v) => ArraySize::Fixed(v),
+        ParsedArraySize::Variable(v) => ArraySize::Variable(v),
+        ParsedArraySize::Endless => ArraySize::Endless,
+    };
+
+    let inner = match p.ty() {
+        ParsedArrayType::Integer(i) => ArrayType::Integer(i.clone()),
+        ParsedArrayType::Complex(c) => ArrayType::Complex(c.clone()),
+        ParsedArrayType::CString => ArrayType::CString,
+        ParsedArrayType::Guid => ArrayType::Guid,
+        ParsedArrayType::PackedGuid => ArrayType::PackedGuid,
+    };
+
+    Array::new(inner, size)
 }
 
 pub(crate) fn parsed_members_to_members(
@@ -180,7 +199,7 @@ fn set_used_as_size_in(members: &mut [ParsedStructMember]) {
                 }
             }
             ParsedType::Array(array) => {
-                if let ArraySize::Variable(length) = array.size() {
+                if let ParsedArraySize::Variable(length) = array.size() {
                     if length.parse::<u8>().is_err() {
                         variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
                     }
@@ -244,7 +263,7 @@ fn check_complex_types_exist(
     for d in all_definitions(members) {
         match &d.ty() {
             ParsedType::Array(a) => {
-                if let ArrayType::Complex(c) = &a.ty() {
+                if let ParsedArrayType::Complex(c) = &a.ty() {
                     contains_complex_type(containers, definers, c, tags, d.name())
                 }
             }
@@ -377,11 +396,11 @@ fn convert_parsed_test_case_value_to_test_case_value(
 
             let ty_name = match ty {
                 ParsedType::Array(array) => match array.ty() {
-                    ArrayType::Integer(_) => panic!(),
-                    ArrayType::Complex(c) => c.as_str(),
-                    ArrayType::CString => unimplemented!(),
-                    ArrayType::Guid => "Guid",
-                    ArrayType::PackedGuid => "Guid",
+                    ParsedArrayType::Integer(_) => panic!(),
+                    ParsedArrayType::Complex(c) => c.as_str(),
+                    ParsedArrayType::CString => unimplemented!(),
+                    ParsedArrayType::Guid => "Guid",
+                    ParsedArrayType::PackedGuid => "Guid",
                 },
                 _ => panic!(),
             };
@@ -427,10 +446,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
 
                 v.push(parse_value(value).unwrap() as usize);
             }
-            TestValue::Array {
-                values: v,
-                size: array.size(),
-            }
+            let size = parsed_array_to_array(array.clone()).size();
+            TestValue::Array { values: v, size }
         }
         ParsedType::FloatingPoint(_) => TestValue::FloatingNumber {
             value: value.parse().unwrap(),

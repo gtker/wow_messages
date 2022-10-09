@@ -1,8 +1,8 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::array::ArrayType;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
+use crate::parser::types::parsed::parsed_array::ParsedArrayType;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
@@ -308,7 +308,7 @@ impl ParsedContainer {
                     return true
                 }
                 ParsedType::Array(array) => {
-                    if matches!(array.ty(), ArrayType::CString) {
+                    if matches!(array.ty(), ParsedArrayType::CString) {
                         return true;
                     }
                 }
@@ -329,7 +329,7 @@ impl ParsedContainer {
         for d in self.all_definitions() {
             match &d.struct_type() {
                 ParsedType::Array(a) => {
-                    if let ArrayType::Complex(i) = a.ty() {
+                    if let ParsedArrayType::Complex(i) = a.ty() {
                         v.push(i.clone());
                     }
                 }

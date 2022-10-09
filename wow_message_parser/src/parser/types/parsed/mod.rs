@@ -1,3 +1,4 @@
+pub(crate) mod parsed_array;
 pub(crate) mod parsed_container;
 pub(crate) mod parsed_definer;
 pub(crate) mod parsed_if_statement;

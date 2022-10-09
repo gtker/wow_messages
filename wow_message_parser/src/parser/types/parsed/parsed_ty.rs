@@ -1,6 +1,6 @@
-use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
+use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE,
@@ -26,7 +26,7 @@ pub(crate) enum ParsedType {
     String {
         length: String,
     },
-    Array(Array),
+    Array(ParsedArray),
     Identifier {
         s: String,
         upcast: Option<IntegerType>,
@@ -114,39 +114,39 @@ impl ParsedType {
                 }
             }
             ParsedType::Array(array) => {
-                if matches!(array.size(), ArraySize::Endless) {
+                if matches!(array.size(), ParsedArraySize::Endless) {
                     sizes.inc(0, u16::MAX as _);
                     return sizes;
                 }
 
                 let (min, max) = match array.size() {
-                    ArraySize::Fixed(f) => {
+                    ParsedArraySize::Fixed(f) => {
                         let f: usize = f.try_into().unwrap();
                         (f, f)
                     }
-                    ArraySize::Variable(f) => match e.get_field_ty(&f) {
+                    ParsedArraySize::Variable(f) => match e.get_field_ty(&f) {
                         ParsedType::Integer(i) => (i.smallest_value(), i.largest_value()),
                         _ => unreachable!("only ints can be string lengths"),
                     },
-                    ArraySize::Endless => unreachable!(),
+                    ParsedArraySize::Endless => unreachable!(),
                 };
 
                 match array.ty() {
-                    ArrayType::Integer(i) => {
+                    ParsedArrayType::Integer(i) => {
                         sizes.inc(i.size() as usize * min, i.size() as usize * max)
                     }
-                    ArrayType::Guid => {
+                    ParsedArrayType::Guid => {
                         sizes.inc(GUID_SIZE as usize * min, GUID_SIZE as usize * max)
                     }
-                    ArrayType::PackedGuid => sizes.inc(
+                    ParsedArrayType::PackedGuid => sizes.inc(
                         PACKED_GUID_MIN_SIZE as usize * min,
                         PACKED_GUID_MAX_SIZE as usize * max,
                     ),
-                    ArrayType::CString => sizes.inc(
+                    ParsedArrayType::CString => sizes.inc(
                         CSTRING_SMALLEST_ALLOWED * min,
                         CSTRING_LARGEST_ALLOWED * max,
                     ),
-                    ArrayType::Complex(s) => {
+                    ParsedArrayType::Complex(s) => {
                         if let Some(e) = get_definer(definers, s, e.tags()) {
                             let s = e.ty().size();
                             sizes.inc(s as usize * min, s as usize * max);
@@ -233,16 +233,16 @@ impl ParsedType {
                     let parsed = str::parse::<i64>(amount);
 
                     let size = if let Ok(parsed) = parsed {
-                        ArraySize::Fixed(parsed)
+                        ParsedArraySize::Fixed(parsed)
                     } else if amount == "-" {
-                        ArraySize::Endless
+                        ParsedArraySize::Endless
                     } else {
-                        ArraySize::Variable(amount.to_string())
+                        ParsedArraySize::Variable(amount.to_string())
                     };
 
                     match array_type {
                         ParsedType::Integer(i) => {
-                            Self::Array(Array::new(ArrayType::Integer(i), size))
+                            Self::Array(ParsedArray::new(ParsedArrayType::Integer(i), size))
                         }
                         ParsedType::Identifier { s: i, .. } => {
                             if i == "String" {
@@ -251,9 +251,11 @@ impl ParsedType {
                                 };
                             }
 
-                            Self::Array(Array::new(ArrayType::Complex(i), size))
+                            Self::Array(ParsedArray::new(ParsedArrayType::Complex(i), size))
                         }
-                        ParsedType::CString => Self::Array(Array::new(ArrayType::CString, size)),
+                        ParsedType::CString => {
+                            Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
+                        }
                         ParsedType::SizedCString
                         | ParsedType::String { .. }
                         | ParsedType::Array(_)
@@ -263,9 +265,11 @@ impl ParsedType {
                         | ParsedType::DateTime
                         | ParsedType::Bool => panic!("unsupported"),
                         ParsedType::PackedGuid => {
-                            Self::Array(Array::new(ArrayType::PackedGuid, size))
+                            Self::Array(ParsedArray::new(ParsedArrayType::PackedGuid, size))
                         }
-                        ParsedType::Guid => Self::Array(Array::new(ArrayType::Guid, size)),
+                        ParsedType::Guid => {
+                            Self::Array(ParsedArray::new(ParsedArrayType::Guid, size))
+                        }
                     }
                 } else {
                     Self::Identifier { s: i, upcast: None }
