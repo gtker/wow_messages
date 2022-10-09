@@ -5,7 +5,7 @@ use crate::Container;
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum ArrayType {
     Integer(IntegerType),
-    Struct(Container),
+    Struct(Box<Container>),
     CString,
     Guid,
     PackedGuid,

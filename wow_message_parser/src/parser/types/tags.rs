@@ -480,11 +480,9 @@ impl Tags {
         let world = self
             .versions()
             .filter(|a| a.is_main_version())
-            .map(|a| Version::World(a));
+            .map(Version::World);
 
-        self.logon_versions()
-            .map(|a| Version::Login(a))
-            .chain(world)
+        self.logon_versions().map(Version::Login).chain(world)
     }
 
     pub(crate) fn main_trait_versions(&self) -> Vec<Version> {
@@ -538,10 +536,10 @@ impl Tags {
     pub(crate) fn has_world_version(&self) -> bool {
         if self.has_world_versions() {
             assert!(!self.has_logon_versions());
-            return true;
+            true
         } else if self.has_logon_versions() {
             assert!(!self.has_world_versions());
-            return false;
+            false
         } else {
             panic!("Object doesn't have either login or world versions")
         }

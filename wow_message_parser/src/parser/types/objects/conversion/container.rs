@@ -108,14 +108,14 @@ fn parsed_array_to_array(
     };
 
     let inner = match array.ty() {
-        ParsedArrayType::Integer(i) => ArrayType::Integer(i.clone()),
+        ParsedArrayType::Integer(i) => ArrayType::Integer(*i),
         ParsedArrayType::Complex(c) => {
             let c = parsed_container_to_container(
                 get_container(containers, c, tags).unwrap().clone(),
                 containers,
                 definers,
             );
-            ArrayType::Struct(c)
+            ArrayType::Struct(Box::new(c))
         }
         ParsedArrayType::CString => ArrayType::CString,
         ParsedArrayType::Guid => ArrayType::Guid,
