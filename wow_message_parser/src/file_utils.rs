@@ -321,42 +321,7 @@ impl ModFiles {
 }
 
 pub(crate) fn major_version_to_string(v: &WorldVersion) -> &'static str {
-    fn version(m: u8) -> &'static str {
-        if m == 1 {
-            "vanilla"
-        } else if m == 2 {
-            "tbc"
-        } else if m == 3 {
-            "wrath"
-        } else {
-            unreachable!()
-        }
-    }
-
-    match *v {
-        WorldVersion::Major(m) => {
-            assert!((1..=3).contains(&m));
-
-            version(m)
-        }
-        WorldVersion::Minor(m, i) => {
-            match (m, i) {
-                (1, 12) | (2, 4) | (3, 3) => {}
-                _ => unreachable!(),
-            }
-
-            version(m)
-        }
-        WorldVersion::Patch(m, i, p) => {
-            match (m, i, p) {
-                (2, 4, 3) | (3, 3, 5) => {}
-                _ => unreachable!(),
-            }
-
-            version(m)
-        }
-        WorldVersion::Exact(_, _, _, _) | WorldVersion::All => unimplemented!(),
-    }
+    v.as_major_world().module_name()
 }
 
 pub(crate) fn get_world_version_path(version: &WorldVersion) -> String {
