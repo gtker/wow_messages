@@ -1,4 +1,19 @@
-#tag_all versions "1.12";
+enum ServerMessageType : u32 {
+    SHUTDOWN_TIME = 1;
+    RESTART_TIME = 2;
+    CUSTOM = 3;
+    SHUTDOWN_CANCELLED = 4;
+    RESTART_CANCELLED = 5;
+} {
+    versions = "1.12 2";
+}
+
+smsg SMSG_SERVER_MESSAGE = 0x0291 {
+    ServerMessageType message_type;
+    CString message;
+} {
+    versions = "1.12 2";
+}
 
 enum ServerMessageType : u32 {
     SHUTDOWN_TIME = 1;
@@ -6,10 +21,17 @@ enum ServerMessageType : u32 {
     CUSTOM = 3;
     SHUTDOWN_CANCELLED = 4;
     RESTART_CANCELLED = 5;
+    BATTLEGROUND_SHUTDOWN = 6;
+    BATTLEGROUND_RESTART = 7;
+    INSTANCE_SHUTDOWN = 8;
+    INSTANCE_RESTART = 9;
+} {
+    versions = "3.3.5";
 }
 
 smsg SMSG_SERVER_MESSAGE = 0x0291 {
     ServerMessageType message_type;
     CString message;
+} {
+    versions = "3.3.5";
 }
-

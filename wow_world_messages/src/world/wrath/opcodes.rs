@@ -1398,6 +1398,7 @@ use crate::world::wrath::SMSG_CHAT_WRONG_FACTION;
 use crate::world::wrath::SMSG_LOGIN_VERIFY_WORLD;
 use crate::world::wrath::SMSG_ZONE_UNDER_ATTACK;
 use crate::world::wrath::SMSG_PROCRESIST;
+use crate::world::wrath::SMSG_SERVER_MESSAGE;
 use crate::world::wrath::SMSG_CHAT_PLAYER_NOT_FOUND;
 use crate::world::wrath::SMSG_DURABILITY_DAMAGE_DEATH;
 use crate::world::wrath::SMSG_CHAR_RENAME;
@@ -1466,6 +1467,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
     SMSG_ZONE_UNDER_ATTACK(SMSG_ZONE_UNDER_ATTACK),
     SMSG_PROCRESIST(SMSG_PROCRESIST),
+    SMSG_SERVER_MESSAGE(SMSG_SERVER_MESSAGE),
     SMSG_CHAT_PLAYER_NOT_FOUND(SMSG_CHAT_PLAYER_NOT_FOUND),
     SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
@@ -1536,6 +1538,7 @@ impl ServerOpcodeMessage {
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
             0x0254 => Ok(Self::SMSG_ZONE_UNDER_ATTACK(<SMSG_ZONE_UNDER_ATTACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x0260 => Ok(Self::SMSG_PROCRESIST(<SMSG_PROCRESIST as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0291 => Ok(Self::SMSG_SERVER_MESSAGE(<SMSG_SERVER_MESSAGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x02A9 => Ok(Self::SMSG_CHAT_PLAYER_NOT_FOUND(<SMSG_CHAT_PLAYER_NOT_FOUND as crate::Message>::read_body(&mut r, body_size)?)),
             0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1755,6 +1758,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PROCRESIST(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SERVER_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
@@ -1826,6 +1830,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_PROCRESIST(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SERVER_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
@@ -1897,6 +1902,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PROCRESIST(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -1968,6 +1974,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PROCRESIST(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2039,6 +2046,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PROCRESIST(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2110,6 +2118,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PROCRESIST(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
@@ -2183,6 +2192,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
             ServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => "SMSG_ZONE_UNDER_ATTACK",
             ServerOpcodeMessage::SMSG_PROCRESIST(_) => "SMSG_PROCRESIST",
+            ServerOpcodeMessage::SMSG_SERVER_MESSAGE(_) => "SMSG_SERVER_MESSAGE",
             ServerOpcodeMessage::SMSG_CHAT_PLAYER_NOT_FOUND(_) => "SMSG_CHAT_PLAYER_NOT_FOUND",
             ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
@@ -2509,6 +2519,12 @@ impl From<SMSG_ZONE_UNDER_ATTACK> for ServerOpcodeMessage {
 impl From<SMSG_PROCRESIST> for ServerOpcodeMessage {
     fn from(c: SMSG_PROCRESIST) -> Self {
         Self::SMSG_PROCRESIST(c)
+    }
+}
+
+impl From<SMSG_SERVER_MESSAGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SERVER_MESSAGE) -> Self {
+        Self::SMSG_SERVER_MESSAGE(c)
     }
 }
 
