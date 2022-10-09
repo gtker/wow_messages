@@ -6,7 +6,7 @@ use crate::file_utils::get_import_path;
 use crate::rust_printer::Version;
 use crate::{
     Objects, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
-    RUST_BASE_TYPE, TEST_STR, VERSIONS,
+    RUST_BASE_TYPE, TEST_STR, UNIMPLEMENTED, VERSIONS,
 };
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
@@ -385,15 +385,8 @@ impl Tags {
         self.paste_versions.clone().into_iter().collect()
     }
 
-    pub(crate) fn get_ref(&self, name: &str) -> Option<&str> {
-        match self.inner.iter().find(|a| a.key == name) {
-            None => None,
-            Some(v) => Some(v.value()),
-        }
-    }
-
     pub(crate) fn unimplemented(&self) -> bool {
-        self.contains("unimplemented")
+        self.contains(UNIMPLEMENTED)
     }
 
     pub(crate) fn shared(&self) -> bool {

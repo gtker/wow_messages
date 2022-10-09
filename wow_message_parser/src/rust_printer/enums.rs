@@ -2,7 +2,7 @@ use crate::file_utils::get_import_path;
 use crate::parser::types::definer::Definer;
 use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
-use crate::{Objects, DISPLAY_STR};
+use crate::Objects;
 
 pub(crate) fn print_enum_for_base(e: &Definer, o: &Objects, version: Version) -> Writer {
     print_enum_inner(e, o, version, true)
@@ -127,7 +127,7 @@ fn print_display(s: &mut Writer, e: &Definer) {
             |s| {
                 s.body("match self", |s| {
                     for field in e.fields() {
-                        let display = match field.tags().get_ref(DISPLAY_STR) {
+                        let display = match field.tags().display() {
                             None => field.rust_name(),
                             Some(v) => v,
                         };

@@ -20,7 +20,7 @@ use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
-use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD};
+use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD, UNIMPLEMENTED};
 use types::container::ContainerType;
 use types::definer::SelfValueDefinerField;
 use types::if_statement::{Condition, Conditional};
@@ -281,7 +281,7 @@ fn parse_struct(
         if matches!(member.as_rule(), Rule::unimplemented) {
             let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
             let mut kvs = parse_object_key_values(&mut extra_kvs, tags);
-            kvs.push(Tag::new("unimplemented", "true"));
+            kvs.push(Tag::new(UNIMPLEMENTED, "true"));
             let v = vec![unimplemented_member()];
 
             return ParsedContainer::new(identifier, v, kvs, container_type, file_info);
@@ -297,7 +297,7 @@ fn parse_struct(
 
 fn unimplemented_member() -> ParsedStructMember {
     ParsedStructMember::Definition(ParsedStructMemberDefinition::new(
-        "unimplemented",
+        UNIMPLEMENTED,
         ParsedType::Array(Array::new_unimplemented()),
         None,
         Tags::new(),
