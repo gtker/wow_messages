@@ -6,10 +6,11 @@ use crate::parser::types::objects::conversion::object_new;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
-use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::tags::Tags;
 use crate::parser::types::test_case::TestCase;
+use crate::parser::types::version::{LoginVersion, Version, WorldVersion};
 use crate::parser::types::ObjectType;
-use crate::{DefinerType, Version};
+use crate::DefinerType;
 
 #[derive(Debug, Clone)]
 pub(crate) struct Objects {

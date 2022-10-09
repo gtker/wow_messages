@@ -4,14 +4,15 @@ use crate::parser::types::array::ArrayType;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::{Sizes, BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
-use crate::parser::types::tags::{LoginVersion, Tags};
+use crate::parser::types::tags::Tags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
+use crate::parser::types::version::{LoginVersion, Version};
 use crate::parser::types::{compare_name_and_tags, ObjectType};
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
-    Version, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
-    WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
+    LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
+    WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
 use std::cmp::Ordering;

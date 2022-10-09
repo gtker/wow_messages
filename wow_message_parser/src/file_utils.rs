@@ -7,10 +7,11 @@ use std::path::{Path, PathBuf};
 use heck::SnakeCase;
 use walkdir::WalkDir;
 
-use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::tags::Tags;
+use crate::parser::types::version::Version;
+use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::path_utils;
 use crate::path_utils::{base_directory, login_directory, world_directory};
-use crate::rust_printer::Version;
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
 #[allow(clippy::enum_variant_names)]

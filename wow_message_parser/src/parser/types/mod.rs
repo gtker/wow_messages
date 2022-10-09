@@ -1,7 +1,7 @@
 use crate::rust_printer::field_name_to_rust_name;
-use crate::Version;
 use std::cmp::Ordering;
 use std::fmt::{Display, Formatter};
+use version::Version;
 
 pub(crate) mod array;
 pub(crate) mod container;
@@ -15,6 +15,7 @@ pub(crate) mod struct_member;
 pub(crate) mod tags;
 pub(crate) mod test_case;
 pub(crate) mod ty;
+pub(crate) mod version;
 
 pub(crate) fn compare_name_and_tags(
     name1: &str,

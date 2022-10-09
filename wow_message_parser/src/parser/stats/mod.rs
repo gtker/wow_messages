@@ -4,8 +4,9 @@ pub(crate) mod wrath_messages;
 
 use crate::parser::types::container::ContainerType;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::{Tags, WorldVersion};
-use crate::Version;
+use crate::parser::types::tags::Tags;
+use crate::parser::types::version::Version;
+use crate::parser::types::version::WorldVersion;
 
 #[derive(Debug, Clone)]
 pub(crate) struct Data {

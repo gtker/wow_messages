@@ -1,7 +1,7 @@
 use crate::file_utils::write_string_to_file;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::WorldVersion;
-use crate::rust_printer::{print_enum, print_flag, print_struct, Version, Writer};
+use crate::parser::types::version::{Version, WorldVersion};
+use crate::rust_printer::{print_enum, print_flag, print_struct, Writer};
 use crate::{load_files, ParsedObjects};
 use std::fs::read_to_string;
 use std::path::Path;

@@ -1,5 +1,4 @@
 use heck::CamelCase;
-use std::cmp::Ordering;
 use std::fmt::Write;
 
 pub(crate) use enums::{print_enum, print_enum_for_base};
@@ -19,7 +18,7 @@ mod update_mask;
 
 use crate::file_utils::{get_import_path, get_shared_module_name, major_version_to_string};
 use crate::parser::types::sizes::Sizes;
-use crate::parser::types::tags::{LoginVersion, WorldVersion};
+use crate::parser::types::version::{Version, WorldVersion};
 use crate::{ContainerType, Objects, Tags};
 pub use update_mask::*;
 
@@ -802,134 +801,6 @@ impl ImplType {
 
     pub(crate) fn types() -> Vec<Self> {
         vec![ImplType::Std, ImplType::Tokio, ImplType::AsyncStd]
-    }
-}
-
-#[derive(Debug, Copy, Clone, Eq, PartialEq)]
-pub(crate) enum Version {
-    Login(LoginVersion),
-    World(WorldVersion),
-}
-
-impl Ord for Version {
-    fn cmp(&self, other: &Self) -> Ordering {
-        match self {
-            Version::Login(l) => match other {
-                Version::Login(ol) => l.cmp(ol),
-                Version::World(_) => Ordering::Less,
-            },
-            Version::World(w) => match other {
-                Version::Login(_) => Ordering::Greater,
-                Version::World(ow) => w.cmp(ow),
-            },
-        }
-    }
-}
-
-impl PartialOrd for Version {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
-}
-
-impl Version {
-    pub(crate) fn is_world(&self) -> bool {
-        match self {
-            Version::Login(_) => false,
-            Version::World(_) => true,
-        }
-    }
-
-    pub(crate) fn as_world(&self) -> WorldVersion {
-        match self {
-            Version::Login(_) => unreachable!(),
-            Version::World(w) => *w,
-        }
-    }
-
-    pub(crate) fn as_major_world(&self) -> MajorWorldVersion {
-        match self.as_world() {
-            WorldVersion::Major(m) => match m {
-                1 => MajorWorldVersion::Vanilla,
-                2 => MajorWorldVersion::BurningCrusade,
-                3 => MajorWorldVersion::Wrath,
-                _ => unreachable!(),
-            },
-            WorldVersion::Minor(m, i) => match (m, i) {
-                (1, 12) => MajorWorldVersion::Vanilla,
-                (2, 4) => MajorWorldVersion::BurningCrusade,
-                (3, 3) => MajorWorldVersion::Wrath,
-                _ => unreachable!(),
-            },
-            WorldVersion::Patch(m, i, p) => match (m, i, p) {
-                (1, 12, _) => MajorWorldVersion::Vanilla,
-                (2, 4, 3) => MajorWorldVersion::BurningCrusade,
-                (3, 3, 5) => MajorWorldVersion::Wrath,
-                _ => unreachable!(),
-            },
-            WorldVersion::Exact(m, i, p, e) => match (m, i, p, e) {
-                (1, 12, _, _) => MajorWorldVersion::Vanilla,
-                (2, 4, 3, 8606) => MajorWorldVersion::BurningCrusade,
-                (3, 3, 5, 12340) => MajorWorldVersion::Wrath,
-                _ => unreachable!(),
-            },
-            WorldVersion::All => unreachable!(),
-        }
-    }
-
-    pub(crate) fn to_module_case(self) -> String {
-        match self {
-            Version::Login(l) => l.as_module_case(),
-            Version::World(l) => l.as_module_case(),
-        }
-    }
-}
-
-impl From<LoginVersion> for Version {
-    fn from(l: LoginVersion) -> Self {
-        Self::Login(l)
-    }
-}
-
-impl From<WorldVersion> for Version {
-    fn from(l: WorldVersion) -> Self {
-        Self::World(l)
-    }
-}
-
-#[derive(Debug, Copy, Clone, Eq, PartialEq)]
-pub(crate) enum MajorWorldVersion {
-    Vanilla,
-    BurningCrusade,
-    Wrath,
-}
-
-impl MajorWorldVersion {
-    pub(crate) fn encryption_path(&self) -> &'static str {
-        match self {
-            MajorWorldVersion::Vanilla => "wow_srp::vanilla_header",
-            MajorWorldVersion::BurningCrusade => "wow_srp::tbc_header",
-            MajorWorldVersion::Wrath => "wow_srp::wrath_header",
-        }
-    }
-
-    pub(crate) fn module_name(&self) -> &'static str {
-        self.feature_name()
-    }
-
-    pub(crate) fn feature_name(&self) -> &'static str {
-        match self {
-            MajorWorldVersion::Vanilla => "vanilla",
-            MajorWorldVersion::BurningCrusade => "tbc",
-            MajorWorldVersion::Wrath => "wrath",
-        }
-    }
-
-    pub(crate) fn wrath_or_greater(&self) -> bool {
-        match self {
-            MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => false,
-            MajorWorldVersion::Wrath => true,
-        }
     }
 }
 

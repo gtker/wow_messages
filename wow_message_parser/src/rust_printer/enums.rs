@@ -1,6 +1,7 @@
 use crate::file_utils::get_import_path;
 use crate::parser::types::definer::Definer;
-use crate::rust_printer::{print_docc_description_and_comment, Version, Writer};
+use crate::parser::types::version::Version;
+use crate::rust_printer::{print_docc_description_and_comment, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::Objects;
 

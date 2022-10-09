@@ -2,7 +2,8 @@ pub mod container;
 pub mod definer;
 
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
-use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::tags::Tags;
+use crate::parser::types::version::{LoginVersion, WorldVersion};
 use std::collections::HashMap;
 use std::fmt::Write;
 use std::fs::read_to_string;

@@ -2,10 +2,10 @@ use crate::file_utils::{get_import_path, get_world_shared_path};
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::WorldVersion;
+use crate::parser::types::version::{Version, WorldVersion};
 use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
-    print_docc_description_and_comment, Version, Writer, CLIENT_MESSAGE_TRAIT_NAME,
+    print_docc_description_and_comment, Writer, CLIENT_MESSAGE_TRAIT_NAME,
     SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::wowm_printer::get_struct_wowm_definition;

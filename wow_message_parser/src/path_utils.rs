@@ -1,6 +1,6 @@
 use crate::file_utils;
-use crate::parser::types::tags::{LoginVersion, WorldVersion};
-use crate::rust_printer::MajorWorldVersion;
+use crate::parser::types::version::MajorWorldVersion;
+use crate::parser::types::version::{LoginVersion, WorldVersion};
 use std::path::{Path, PathBuf};
 
 fn workspace_directory() -> PathBuf {

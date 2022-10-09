@@ -1,8 +1,9 @@
 use crate::file_utils::overwrite_if_not_same_contents;
+use crate::parser::types::version::MajorWorldVersion;
 use crate::path_utils::{
     tbc_update_mask_location, vanilla_update_mask_location, wrath_update_mask_location,
 };
-use crate::rust_printer::{MajorWorldVersion, Writer};
+use crate::rust_printer::Writer;
 use std::fmt::Write;
 use std::fmt::{Display, Formatter};
 use std::fs::read_to_string;

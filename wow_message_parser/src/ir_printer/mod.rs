@@ -8,7 +8,8 @@ use std::path::Path;
 
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::tags::Tags;
+use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::parser::types::{Endianness, IntegerType};
 
 #[derive(Serialize, Debug)]
