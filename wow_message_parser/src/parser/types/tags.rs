@@ -247,10 +247,10 @@ pub(crate) struct Tags {
     display: String,
     paste_versions: BTreeSet<WorldVersion>,
 
-    is_test: bool,
-    skip: bool,
-    unimplemented: bool,
-    rust_base_ty: bool,
+    is_test: Option<bool>,
+    skip: Option<bool>,
+    unimplemented: Option<bool>,
+    rust_base_ty: Option<bool>,
 }
 
 impl Tags {
@@ -364,13 +364,13 @@ impl Tags {
         } else if key == DISPLAY {
             self.display = value.to_string();
         } else if key == TEST_STR {
-            self.is_test = value.eq("true");
+            self.is_test = Some(value.eq("true"));
         } else if key == SKIP_STR {
-            self.skip = value.eq("true");
+            self.skip = Some(value.eq("true"));
         } else if key == UNIMPLEMENTED {
-            self.unimplemented = value.eq("true");
+            self.unimplemented = Some(value.eq("true"));
         } else if key == RUST_BASE_TYPE {
-            self.rust_base_ty = value.eq("true");
+            self.rust_base_ty = Some(value.eq("true"));
         }
 
         for v in self.inner.iter_mut() {
@@ -389,7 +389,11 @@ impl Tags {
     }
 
     pub(crate) fn unimplemented(&self) -> bool {
-        self.unimplemented
+        if let Some(v) = self.unimplemented {
+            v
+        } else {
+            false
+        }
     }
 
     pub(crate) fn shared(&self) -> bool {
@@ -590,15 +594,27 @@ impl Tags {
     }
 
     pub(crate) fn is_in_base(&self) -> bool {
-        self.rust_base_ty
+        if let Some(v) = self.rust_base_ty {
+            v
+        } else {
+            false
+        }
     }
 
     pub(crate) fn skip(&self) -> bool {
-        self.skip
+        if let Some(v) = self.skip {
+            v
+        } else {
+            false
+        }
     }
 
     pub(crate) fn test(&self) -> bool {
-        self.is_test
+        if let Some(v) = self.is_test {
+            v
+        } else {
+            false
+        }
     }
 }
 
