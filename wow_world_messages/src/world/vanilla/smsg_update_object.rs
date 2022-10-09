@@ -3,7 +3,7 @@ use crate::world::vanilla::Object;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:183`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L183):
+/// Auto generated from the original `wowm` in file [`wow_message_parser\wowm\world\gameobject\smsg_update_object.wowm:183`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser\wowm\world\gameobject\smsg_update_object.wowm#L183):
 /// ```text
 /// smsg SMSG_UPDATE_OBJECT = 0x00A9 {
 ///     u32 amount_of_objects;
@@ -97,7 +97,7 @@ mod test {
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x00, 0x00, 0x00, 0x64, 0x00,
          0x00, 0x00, 0x01, 0x01, 0x01, 0x01, ];
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 189.
+    // Generated from `wow_message_parser\wowm\world\gameobject\smsg_update_object.wowm` line 189.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_UPDATE_OBJECT0() {
@@ -107,10 +107,11 @@ mod test {
                 Object {
                     update_type: Object_UpdateType::CreateObject2 {
                         guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::new()
+                        mask2: UpdateMask::Player(UpdatePlayer::builder()
                             .set_object_GUID(Guid::new(4))
                             .set_unit_HEALTH(100)
                             .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
+                            .finalize()
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
@@ -162,7 +163,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 189.
+    // Generated from `wow_message_parser\wowm\world\gameobject\smsg_update_object.wowm` line 189.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_UPDATE_OBJECT0() {
@@ -172,10 +173,11 @@ mod test {
                 Object {
                     update_type: Object_UpdateType::CreateObject2 {
                         guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::new()
+                        mask2: UpdateMask::Player(UpdatePlayer::builder()
                             .set_object_GUID(Guid::new(4))
                             .set_unit_HEALTH(100)
                             .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
+                            .finalize()
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
@@ -227,7 +229,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 189.
+    // Generated from `wow_message_parser\wowm\world\gameobject\smsg_update_object.wowm` line 189.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_UPDATE_OBJECT0() {
@@ -237,10 +239,11 @@ mod test {
                 Object {
                     update_type: Object_UpdateType::CreateObject2 {
                         guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::new()
+                        mask2: UpdateMask::Player(UpdatePlayer::builder()
                             .set_object_GUID(Guid::new(4))
                             .set_unit_HEALTH(100)
                             .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
+                            .finalize()
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
@@ -305,7 +308,7 @@ mod test {
          0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x32, 0x00,
          0x00, 0x00, 0x32, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 256.
+    // Generated from `wow_message_parser\wowm\world\gameobject\smsg_update_object.wowm` line 256.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_UPDATE_OBJECT1() {
@@ -315,7 +318,7 @@ mod test {
                 Object {
                     update_type: Object_UpdateType::CreateObject2 {
                         guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::new()
+                        mask2: UpdateMask::Player(UpdatePlayer::builder()
                             .set_object_GUID(Guid::new(4))
                             .set_object_SCALE_X(1.0)
                             .set_unit_HEALTH(100)
@@ -325,6 +328,7 @@ mod test {
                             .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                             .set_unit_DISPLAYID(50)
                             .set_unit_NATIVEDISPLAYID(50)
+                            .finalize()
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
@@ -376,7 +380,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 256.
+    // Generated from `wow_message_parser\wowm\world\gameobject\smsg_update_object.wowm` line 256.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_UPDATE_OBJECT1() {
@@ -386,7 +390,7 @@ mod test {
                 Object {
                     update_type: Object_UpdateType::CreateObject2 {
                         guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::new()
+                        mask2: UpdateMask::Player(UpdatePlayer::builder()
                             .set_object_GUID(Guid::new(4))
                             .set_object_SCALE_X(1.0)
                             .set_unit_HEALTH(100)
@@ -396,6 +400,7 @@ mod test {
                             .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                             .set_unit_DISPLAYID(50)
                             .set_unit_NATIVEDISPLAYID(50)
+                            .finalize()
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
@@ -447,7 +452,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 256.
+    // Generated from `wow_message_parser\wowm\world\gameobject\smsg_update_object.wowm` line 256.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_UPDATE_OBJECT1() {
@@ -457,7 +462,7 @@ mod test {
                 Object {
                     update_type: Object_UpdateType::CreateObject2 {
                         guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::new()
+                        mask2: UpdateMask::Player(UpdatePlayer::builder()
                             .set_object_GUID(Guid::new(4))
                             .set_object_SCALE_X(1.0)
                             .set_unit_HEALTH(100)
@@ -467,6 +472,7 @@ mod test {
                             .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                             .set_unit_DISPLAYID(50)
                             .set_unit_NATIVEDISPLAYID(50)
+                            .finalize()
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
