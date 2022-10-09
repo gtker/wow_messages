@@ -211,33 +211,15 @@ impl Container {
             Version::World(_) => get_import_path(version),
         };
 
-        match self.container_type() {
-            ContainerType::CLogin(_) => {
-                format!(
-                    "{}::opcodes::{}",
-                    import_path, LOGIN_CLIENT_MESSAGE_ENUM_NAME
-                )
-            }
-            ContainerType::SLogin(_) => {
-                format!(
-                    "{}::opcodes::{}",
-                    import_path, LOGIN_SERVER_MESSAGE_ENUM_NAME
-                )
-            }
-            ContainerType::SMsg(_) => {
-                format!(
-                    "{}::opcodes::{}",
-                    import_path, WORLD_SERVER_MESSAGE_ENUM_NAME
-                )
-            }
-            ContainerType::CMsg(_) => {
-                format!(
-                    "{}::opcodes::{}",
-                    import_path, WORLD_CLIENT_MESSAGE_ENUM_NAME
-                )
-            }
+        let enum_name = match self.container_type() {
+            ContainerType::CLogin(_) => LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+            ContainerType::SLogin(_) => LOGIN_SERVER_MESSAGE_ENUM_NAME,
+            ContainerType::SMsg(_) => WORLD_SERVER_MESSAGE_ENUM_NAME,
+            ContainerType::CMsg(_) => WORLD_CLIENT_MESSAGE_ENUM_NAME,
             _ => unimplemented!(),
-        }
+        };
+
+        format!("{}::opcodes::{}", import_path, enum_name,)
     }
 
     pub(crate) fn any_fields_have_constant_value(&self) -> bool {
