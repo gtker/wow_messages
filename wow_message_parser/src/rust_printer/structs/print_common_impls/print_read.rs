@@ -446,12 +446,12 @@ fn print_read_definition(
 
             s.newline();
         }
-        Type::String { length, .. } => {
+        Type::String(size) => {
             s.wln(format!(
                 "let {name} = {module}::{prefix}read_fixed_string_to_vec(r, {length} as usize){postfix}?;",
                 name = d.name(),
                 module = UTILITY_PATH,
-                length = length,
+                length = size,
                 prefix = prefix, postfix = postfix,
             ));
             s.wln(format!(

@@ -12,6 +12,22 @@ use crate::{
     SIZED_CSTRING_SMALLEST_ALLOWED,
 };
 use std::convert::TryInto;
+use std::fmt::{Display, Formatter};
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub(crate) enum StringSize {
+    Fixed(usize),
+    Variable(Box<StructMemberDefinition>),
+}
+
+impl Display for StringSize {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            StringSize::Fixed(v) => f.write_fmt(format_args!("{}", v)),
+            StringSize::Variable(m) => f.write_fmt(format_args!("{}", m.name())),
+        }
+    }
+}
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum Type {
@@ -23,10 +39,7 @@ pub(crate) enum Type {
     FloatingPoint(FloatingPointType),
     CString,
     SizedCString,
-    String {
-        length: String,
-        m: Box<StructMemberDefinition>,
-    },
+    String(StringSize),
     Array(Array),
     Enum {
         e: Definer,
@@ -48,7 +61,7 @@ impl Type {
         match self {
             Type::Integer(i) => i.str().to_string(),
             Type::CString => "CString".to_string(),
-            Type::String { length, .. } => format!("String[{}]", length),
+            Type::String(size) => format!("String[{}]", size),
             Type::Array(a) => a.str(),
             Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
             Type::Struct { e, .. } => e.name().to_string(),
@@ -102,16 +115,15 @@ impl Type {
                 SIZED_CSTRING_SMALLEST_ALLOWED,
                 SIZED_CSTRING_LARGEST_ALLOWED,
             ),
-            Type::String { length, m } => {
-                if let Ok(length) = length.parse::<usize>() {
-                    sizes.inc(length, length);
-                } else {
-                    match m.ty() {
-                        Type::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
-                        _ => unreachable!("string lengths can only be int"),
-                    }
+            Type::String(size) => match size {
+                StringSize::Fixed(length) => {
+                    sizes.inc(*length, *length);
                 }
-            }
+                StringSize::Variable(m) => match m.ty() {
+                    Type::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
+                    _ => unreachable!("string lengths can only be int"),
+                },
+            },
             Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                 let s = if let Some(upcast) = upcast {
                     upcast.size()
@@ -175,7 +187,7 @@ impl Type {
             Type::Integer(i) => i.size().to_string(),
             Type::Guid => 8.to_string(),
             Type::FloatingPoint(f) => f.size().to_string(),
-            Type::String { length, .. } => length.clone(),
+            Type::String(size) => size.to_string(),
             Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                 if let Some(upcast) = upcast {
                     upcast.size().to_string()

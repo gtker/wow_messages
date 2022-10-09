@@ -16,7 +16,7 @@ use crate::parser::types::parsed::parsed_test_case::{
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
-use crate::parser::types::ty::Type;
+use crate::parser::types::ty::{StringSize, Type};
 use crate::parser::types::ContainerValue;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
@@ -52,22 +52,23 @@ fn parsed_type_to_type(
         ParsedType::CString => Type::CString,
         ParsedType::SizedCString => Type::SizedCString,
         ParsedType::String { length } => {
-            let m = p.get_field(&length);
-            let m = parsed_member_to_member(
-                p,
-                ParsedStructMember::Definition(m),
-                containers,
-                definers,
-                tags,
-            );
-            let m = match m {
-                StructMember::Definition(d) => d,
-                _ => unreachable!(),
-            };
+            if let Ok(v) = length.parse::<usize>() {
+                Type::String(StringSize::Fixed(v))
+            } else {
+                let m = p.get_field(&length);
+                let m = parsed_member_to_member(
+                    p,
+                    ParsedStructMember::Definition(m),
+                    containers,
+                    definers,
+                    tags,
+                );
+                let m = match m {
+                    StructMember::Definition(d) => d,
+                    _ => unreachable!(),
+                };
 
-            Type::String {
-                length,
-                m: Box::new(m),
+                Type::String(StringSize::Variable(Box::new(m)))
             }
         }
         ParsedType::Array(a) => {
