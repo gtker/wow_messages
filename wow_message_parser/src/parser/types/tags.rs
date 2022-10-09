@@ -554,9 +554,9 @@ impl Tags {
         } else if self.has_logon_versions() {
             assert!(!self.has_world_versions());
             return false;
+        } else {
+            panic!("Object doesn't have either login or world versions")
         }
-
-        false
     }
 
     /// self is able to fulfill all version obligations for tags
