@@ -105,9 +105,9 @@ impl Container {
     }
 
     pub(crate) fn is_pure_movement_info(&self) -> bool {
-        let only_one_field = self.fields().len() == 1;
+        let only_one_field = self.members().len() == 1;
         if only_one_field {
-            let field = self.fields().first().unwrap();
+            let field = self.members().first().unwrap();
             match field {
                 StructMember::Definition(d) => {
                     d.name() == "info"
@@ -254,7 +254,7 @@ impl Container {
             ContainerType::CLogin(_) | ContainerType::SLogin(_) => 0,
             _ => panic!(),
         };
-        for field in self.fields() {
+        for field in self.members() {
             match field {
                 StructMember::Definition(d) => {
                     match d.ty() {
@@ -315,13 +315,13 @@ impl Container {
                     v.push(d.clone());
                     match d.ty() {
                         Type::Struct { e } => {
-                            for m in e.fields() {
+                            for m in e.members() {
                                 inner(m, v, tags);
                             }
                         }
                         Type::Array(array) => {
                             if let ArrayType::Struct(c) = array.ty() {
-                                for m in c.fields() {
+                                for m in c.members() {
                                     inner(m, v, tags);
                                 }
                             }
@@ -344,7 +344,7 @@ impl Container {
 
         let mut v = Vec::new();
 
-        for m in self.fields() {
+        for m in self.members() {
             inner(m, &mut v, self.tags());
         }
 
@@ -370,7 +370,7 @@ impl Container {
 
         let mut v = Vec::new();
 
-        for m in self.fields() {
+        for m in self.members() {
             inner(m, &mut v);
         }
 
@@ -501,7 +501,7 @@ impl Container {
             .collect()
     }
 
-    pub(crate) fn fields(&self) -> &[StructMember] {
+    pub(crate) fn members(&self) -> &[StructMember] {
         self.members.as_slice()
     }
 }

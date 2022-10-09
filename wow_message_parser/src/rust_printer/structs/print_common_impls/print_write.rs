@@ -127,7 +127,7 @@ pub(crate) fn print_write_field_identifier(
 }
 
 pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
-    for field in e.fields() {
+    for field in e.members() {
         print_write_field(s, e, o, field, "self.", prefix, postfix);
     }
 }

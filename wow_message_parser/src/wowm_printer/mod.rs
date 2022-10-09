@@ -110,7 +110,7 @@ pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String 
     if e.tags().unimplemented() {
         s.wln("unimplemented");
     } else {
-        for field in e.fields() {
+        for field in e.members() {
             print_members(&mut s, e, field);
         }
     }

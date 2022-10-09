@@ -124,12 +124,12 @@ pub(crate) fn get_impl_features_for_container(e: &Container) -> ImplFeatures {
         ContainerType::SMsg(_) => f.add(Feature::SMsg),
     };
 
-    if e.fields().is_empty() {
+    if e.members().is_empty() {
         f.add(Feature::EmptyContainer);
     }
 
     let mut current_scope = Vec::new();
-    for m in e.fields() {
+    for m in e.members() {
         features_for_struct_member(&mut f, m, &mut current_scope);
     }
 

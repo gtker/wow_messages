@@ -17,7 +17,7 @@ pub(crate) fn containers_to_ir(containers: &[&Container], o: &Objects) -> Vec<Ir
 }
 
 fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
-    let members = e.fields().iter().map(|a| a.into()).collect();
+    let members = e.members().iter().map(|a| a.into()).collect();
 
     let tests = e.tests(o).iter().map(|a| a.into()).collect();
 

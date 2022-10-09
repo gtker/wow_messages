@@ -86,7 +86,7 @@ fn print_container_example_array(
                 }
             }
             ArrayType::Struct(c) => {
-                for m in c.fields() {
+                for m in c.members() {
                     let prefix = format!("{}[{}].{}", prefix, i, c.name());
                     print_container_example_member(s, c, m, bytes, values, o, tags, &prefix);
                 }
@@ -202,7 +202,7 @@ fn print_container_example_definition(
             return;
         }
         Type::Struct { e } => {
-            for m in e.fields() {
+            for m in e.members() {
                 print_container_example_member(s, e, m, bytes, values, o, tags, e.name());
             }
 
@@ -403,7 +403,7 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
 
         let mut values = HashMap::new();
 
-        for m in e.fields() {
+        for m in e.members() {
             print_container_example_member(s, e, m, &mut bytes, &mut values, o, e.tags(), "");
         }
 
@@ -592,7 +592,7 @@ fn print_container_body(s: &mut DocWriter, e: &Container, o: &Objects) {
         return;
     }
 
-    if e.fields().is_empty() {
+    if e.members().is_empty() {
         s.wln("This message has no fields in the body.");
         s.newline();
         return;
@@ -606,11 +606,11 @@ fn print_container_body(s: &mut DocWriter, e: &Container, o: &Objects) {
         ContainerType::Struct => 0,
     });
 
-    if !(e.fields().len() == 1 && matches!(&e.fields()[0], &StructMember::OptionalStatement(_))) {
+    if !(e.members().len() == 1 && matches!(&e.members()[0], &StructMember::OptionalStatement(_))) {
         print_container_item_header(s);
     }
 
-    for m in e.fields() {
+    for m in e.members() {
         print_container_field(s, m, &mut offset, e.tags(), o);
     }
 
@@ -621,7 +621,7 @@ fn print_container_body(s: &mut DocWriter, e: &Container, o: &Objects) {
 
         print_container_item_header(s);
 
-        for m in e.fields() {
+        for m in e.members() {
             match m {
                 StructMember::Definition(_) => {}
                 StructMember::IfStatement(_) => {}

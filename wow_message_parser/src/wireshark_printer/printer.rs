@@ -81,7 +81,7 @@ fn print_message(
     o: &Objects,
     variables: &mut Vec<String>,
 ) {
-    for m in e.fields() {
+    for m in e.members() {
         if !print_member(s, m, e, w, e.tags(), o, variables) {
             return;
         }
@@ -442,7 +442,7 @@ fn print_identifier(
     match e {
         Object::Container(e) => {
             s.wln(format!("ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, \"{}\");", e.name()));
-            for m in e.fields() {
+            for m in e.members() {
                 if !print_member(s, m, &e, wo, e.tags(), o, variables) {
                     return false;
                 }

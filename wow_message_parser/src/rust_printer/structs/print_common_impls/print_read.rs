@@ -844,7 +844,7 @@ fn print_read_final_flag(s: &mut Writer, rds: &[RustDefiner]) {
 }
 
 pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
-    for field in e.fields() {
+    for field in e.members() {
         print_read_field(s, e, o, field, prefix, postfix);
     }
 
