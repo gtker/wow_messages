@@ -134,8 +134,8 @@ impl Type {
                         let f: usize = f.try_into().unwrap();
                         (f, f)
                     }
-                    ArraySize::Variable(f) => match e.get_field_ty(&f) {
-                        ParsedType::Integer(i) => (i.smallest_value(), i.largest_value()),
+                    ArraySize::Variable(f) => match f.ty() {
+                        Type::Integer(i) => (i.smallest_value(), i.largest_value()),
                         _ => unreachable!("only ints can be string lengths"),
                     },
                     ArraySize::Endless => unreachable!(),

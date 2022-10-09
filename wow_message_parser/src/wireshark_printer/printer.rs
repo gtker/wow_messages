@@ -329,7 +329,7 @@ fn print_definition(
         Type::Array(array) => {
             let len = match array.size() {
                 ArraySize::Fixed(v) => v.to_string(),
-                ArraySize::Variable(v) => v,
+                ArraySize::Variable(v) => v.name().to_string(),
                 ArraySize::Endless => "len".to_string(),
             };
 

@@ -46,7 +46,7 @@ fn print_container_example_array(
 ) {
     let size = match array.size() {
         ArraySize::Fixed(size) => size as usize,
-        ArraySize::Variable(length) => *values.get(&length).unwrap() as usize,
+        ArraySize::Variable(m) => *values.get(m.name()).unwrap() as usize,
         ArraySize::Endless => {
             let size = bytes.size_hint();
             assert_eq!(size.0, size.1.unwrap());

@@ -162,13 +162,13 @@ fn print_read_array(
         ArraySize::Fixed(size) => {
             print_read_array_fixed(s, array, d, prefix, postfix, size);
         }
-        ArraySize::Variable(length) => {
+        ArraySize::Variable(m) => {
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity({length} as usize);",
                 name = d.name(),
-                length = length
+                length = m.name()
             ));
-            s.open_curly(format!("for i in 0..{length}", length = length));
+            s.open_curly(format!("for i in 0..{length}", length = m.name()));
 
             match array.ty() {
                 ArrayType::Integer(integer_type) => {

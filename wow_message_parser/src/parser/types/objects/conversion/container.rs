@@ -36,6 +36,7 @@ pub(crate) fn verify_and_set_members(
 }
 
 fn parsed_type_to_type(
+    p: &ParsedContainer,
     containers: &[ParsedContainer],
     definers: &[Definer],
     t: ParsedType,
@@ -51,7 +52,9 @@ fn parsed_type_to_type(
         ParsedType::CString => Type::CString,
         ParsedType::SizedCString => Type::SizedCString,
         ParsedType::String { length } => Type::String { length },
-        ParsedType::Array(a) => Type::Array(parsed_array_to_array(a, containers, definers, tags)),
+        ParsedType::Array(a) => {
+            Type::Array(parsed_array_to_array(p, a, containers, definers, tags))
+        }
         ParsedType::Identifier { s, upcast } => {
             if let Some(e) = get_definer(definers, &s, tags) {
                 match e.definer_ty() {
@@ -78,18 +81,33 @@ fn parsed_type_to_type(
 }
 
 fn parsed_array_to_array(
-    p: ParsedArray,
+    p: &ParsedContainer,
+    array: ParsedArray,
     containers: &[ParsedContainer],
     definers: &[Definer],
     tags: &Tags,
 ) -> Array {
-    let size = match p.size() {
+    let size = match array.size() {
         ParsedArraySize::Fixed(v) => ArraySize::Fixed(v),
-        ParsedArraySize::Variable(v) => ArraySize::Variable(v),
+        ParsedArraySize::Variable(v) => {
+            let m = p.get_field(&v);
+            let m = parsed_member_to_member(
+                p,
+                ParsedStructMember::Definition(m),
+                containers,
+                definers,
+                tags,
+            );
+            let m = match m {
+                StructMember::Definition(d) => d,
+                _ => unreachable!(),
+            };
+            ArraySize::Variable(Box::new(m))
+        }
         ParsedArraySize::Endless => ArraySize::Endless,
     };
 
-    let inner = match p.ty() {
+    let inner = match array.ty() {
         ParsedArrayType::Integer(i) => ArrayType::Integer(i.clone()),
         ParsedArrayType::Complex(c) => {
             let c = parsed_container_to_container(
@@ -107,7 +125,41 @@ fn parsed_array_to_array(
     Array::new(inner, size)
 }
 
+fn parsed_member_to_member(
+    c: &ParsedContainer,
+    m: ParsedStructMember,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    tags: &Tags,
+) -> StructMember {
+    match m {
+        ParsedStructMember::Definition(d) => StructMember::Definition(StructMemberDefinition::new(
+            d.name,
+            parsed_type_to_type(c, containers, definers, d.struct_type, tags),
+            d.verified_value,
+            d.used_as_size_in,
+            d.used_in_if.unwrap(),
+            d.tags,
+        )),
+        ParsedStructMember::IfStatement(s) => StructMember::IfStatement(IfStatement::new(
+            s.conditional,
+            parsed_members_to_members(c, s.members, containers, definers, tags),
+            parsed_if_statement_to_if_statement(c, s.else_ifs, containers, definers, tags),
+            parsed_members_to_members(c, s.else_statement_members, containers, definers, tags),
+            parsed_type_to_type(c, containers, definers, s.original_ty.unwrap(), tags),
+        )),
+        ParsedStructMember::OptionalStatement(o) => {
+            StructMember::OptionalStatement(OptionalStatement::new(
+                o.name,
+                parsed_members_to_members(c, o.members, containers, definers, tags),
+                o.tags,
+            ))
+        }
+    }
+}
+
 pub(crate) fn parsed_members_to_members(
+    c: &ParsedContainer,
     members: Vec<ParsedStructMember>,
     containers: &[ParsedContainer],
     definers: &[Definer],
@@ -116,38 +168,14 @@ pub(crate) fn parsed_members_to_members(
     let mut v = Vec::with_capacity(members.len());
 
     for m in members {
-        v.push(match m {
-            ParsedStructMember::Definition(d) => {
-                StructMember::Definition(StructMemberDefinition::new(
-                    d.name,
-                    parsed_type_to_type(containers, definers, d.struct_type, tags),
-                    d.verified_value,
-                    d.used_as_size_in,
-                    d.used_in_if.unwrap(),
-                    d.tags,
-                ))
-            }
-            ParsedStructMember::IfStatement(s) => StructMember::IfStatement(IfStatement::new(
-                s.conditional,
-                parsed_members_to_members(s.members, containers, definers, tags),
-                parsed_if_statement_to_if_statement(s.else_ifs, containers, definers, tags),
-                parsed_members_to_members(s.else_statement_members, containers, definers, tags),
-                parsed_type_to_type(containers, definers, s.original_ty.unwrap(), tags),
-            )),
-            ParsedStructMember::OptionalStatement(o) => {
-                StructMember::OptionalStatement(OptionalStatement::new(
-                    o.name,
-                    parsed_members_to_members(o.members, containers, definers, tags),
-                    o.tags,
-                ))
-            }
-        });
+        v.push(parsed_member_to_member(c, m, containers, definers, tags));
     }
 
     v
 }
 
 fn parsed_if_statement_to_if_statement(
+    c: &ParsedContainer,
     parsed: Vec<ParsedIfStatement>,
     containers: &[ParsedContainer],
     definers: &[Definer],
@@ -158,10 +186,10 @@ fn parsed_if_statement_to_if_statement(
     for p in parsed {
         v.push(IfStatement::new(
             p.conditional,
-            parsed_members_to_members(p.members, containers, definers, tags),
-            parsed_if_statement_to_if_statement(p.else_ifs, containers, definers, tags),
-            parsed_members_to_members(p.else_statement_members, containers, definers, tags),
-            parsed_type_to_type(containers, definers, p.original_ty.unwrap(), tags),
+            parsed_members_to_members(c, p.members, containers, definers, tags),
+            parsed_if_statement_to_if_statement(c, p.else_ifs, containers, definers, tags),
+            parsed_members_to_members(c, p.else_statement_members, containers, definers, tags),
+            parsed_type_to_type(c, containers, definers, p.original_ty.unwrap(), tags),
         ))
     }
 
@@ -426,7 +454,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 v.push(parse_value(value).unwrap() as usize);
             }
             let definers = [flags, enums].concat();
-            let size = parsed_array_to_array(array.clone(), containers, &definers, c.tags()).size();
+            let size =
+                parsed_array_to_array(c, array.clone(), containers, &definers, c.tags()).size();
             TestValue::Array { values: v, size }
         }
         ParsedType::FloatingPoint(_) => TestValue::FloatingNumber {

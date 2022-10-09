@@ -1,3 +1,4 @@
+use crate::parser::types::struct_member::StructMemberDefinition;
 use crate::parser::types::IntegerType;
 use crate::Container;
 
@@ -33,9 +34,9 @@ impl ArrayType {
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
-pub enum ArraySize {
+pub(crate) enum ArraySize {
     Fixed(i64),
-    Variable(String),
+    Variable(Box<StructMemberDefinition>),
     Endless,
 }
 
@@ -43,7 +44,7 @@ impl ArraySize {
     pub(crate) fn str(&self) -> String {
         match self {
             ArraySize::Fixed(i) => i.to_string(),
-            ArraySize::Variable(i) => i.clone(),
+            ArraySize::Variable(m) => m.name().to_string(),
             ArraySize::Endless => "-".to_string(),
         }
     }

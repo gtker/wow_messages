@@ -125,6 +125,16 @@ impl ParsedContainer {
         None
     }
 
+    pub(crate) fn get_field(&self, field_name: &str) -> ParsedStructMemberDefinition {
+        for d in self.all_definitions() {
+            if d.name() == field_name {
+                return d.clone();
+            }
+        }
+
+        panic!("unable to find field: '{}'", field_name)
+    }
+
     pub(crate) fn get_field_ty(&self, field_name: &str) -> &ParsedType {
         for d in self.all_definitions() {
             if d.name() == field_name {
