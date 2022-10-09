@@ -270,10 +270,6 @@ impl Tags {
         self.world_versions.push(v);
     }
 
-    pub(crate) fn push(&mut self, t: Tag) {
-        self.insert(t.key(), t.value());
-    }
-
     pub(crate) fn append(&mut self, mut t: Tags) {
         self.login_logon_versions
             .append(&mut t.login_logon_versions);
@@ -640,29 +636,6 @@ impl Tags {
         } else {
             false
         }
-    }
-}
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-pub(crate) struct Tag {
-    key: String,
-    value: String,
-}
-
-impl Tag {
-    pub(crate) fn new(key: &str, value: &str) -> Self {
-        Self {
-            key: key.to_owned(),
-            value: value.to_owned(),
-        }
-    }
-
-    pub(crate) fn key(&self) -> &str {
-        &self.key
-    }
-
-    pub(crate) fn value(&self) -> &str {
-        &self.value
     }
 }
 

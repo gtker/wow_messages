@@ -7,7 +7,7 @@ use pest::Parser;
 use pest_derive::Parser;
 
 use types::definer::DefinerField;
-use types::tags::{Tag, Tags};
+use types::tags::Tags;
 
 use crate::file_info::FileInfo;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
@@ -66,7 +66,7 @@ pub(crate) fn parse_commands(t: Pair<Rule>) -> Commands {
             "tag_all" => {
                 let key = command.next().unwrap();
                 let value = command.next().unwrap();
-                tags.push(Tag::new(key.as_str(), value.as_str()));
+                tags.insert(key.as_str(), value.as_str());
             }
             _ => panic!("invalid command"),
         }
@@ -281,7 +281,7 @@ fn parse_struct(
         if matches!(member.as_rule(), Rule::unimplemented) {
             let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
             let mut kvs = parse_object_key_values(&mut extra_kvs, tags);
-            kvs.push(Tag::new(UNIMPLEMENTED, "true"));
+            kvs.insert(UNIMPLEMENTED, "true");
             let v = vec![unimplemented_member()];
 
             return ParsedContainer::new(identifier, v, kvs, container_type, file_info);
@@ -335,7 +335,7 @@ fn parse_struct_member(mut t: Pair<Rule>) -> ParsedStructMember {
                 let mut kv = kv.into_inner();
                 let identifier = kv.find(|a| a.as_rule() == Rule::identifier).unwrap();
                 let text = kv.find(|a| a.as_rule() == Rule::text).unwrap();
-                kvs.push(Tag::new(identifier.as_str(), text.as_str()));
+                kvs.insert(identifier.as_str(), text.as_str());
             }
 
             let mut container_type = identifier_and_value
@@ -500,7 +500,7 @@ pub(crate) fn parse_enum(
                 let ident = inner.next().unwrap().as_str();
                 let text = inner.next().unwrap().as_str();
 
-                kvs.push(Tag::new(ident, text));
+                kvs.insert(ident, text);
             }
         }
 
