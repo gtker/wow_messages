@@ -150,6 +150,8 @@ pub(crate) mod cmsg_tutorial_clear;
 pub use cmsg_tutorial_clear::*;
 pub(crate) mod cmsg_tutorial_flag;
 pub use cmsg_tutorial_flag::*;
+pub(crate) mod cmsg_tutorial_reset;
+pub use cmsg_tutorial_reset::*;
 pub(crate) mod cmsg_update_account_data;
 pub use cmsg_update_account_data::*;
 pub(crate) mod cmsg_zoneupdate;
