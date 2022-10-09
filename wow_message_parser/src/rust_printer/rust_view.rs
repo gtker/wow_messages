@@ -7,7 +7,6 @@ use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::Tags;
-use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::rust_printer::{
@@ -974,7 +973,6 @@ pub(crate) fn create_if_statement(
     statement: &IfStatement,
     struct_ty_name: &str,
     tags: &Tags,
-    tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
     definers: &[Definer],
     e: &ParsedContainer,
@@ -1004,7 +1002,6 @@ pub(crate) fn create_if_statement(
             struct_ty_name,
             tags,
             e,
-            tests,
             containers,
             definers,
             &mut main_enumerator_members,
@@ -1023,7 +1020,6 @@ pub(crate) fn create_if_statement(
             struct_ty_name,
             tags,
             e,
-            tests,
             containers,
             definers,
             &mut else_enumerator_members,
@@ -1087,7 +1083,6 @@ pub(crate) fn create_if_statement(
                     struct_ty_name,
                     tags,
                     e,
-                    tests,
                     containers,
                     definers,
                     &mut else_if_enumerator_members,
@@ -1126,7 +1121,6 @@ pub(crate) fn create_struct_member(
     struct_ty_name: &str,
     tags: &Tags,
     e: &ParsedContainer,
-    tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
     definers: &[Definer],
     current_scope: &mut Vec<RustMember>,
@@ -1200,9 +1194,8 @@ pub(crate) fn create_struct_member(
                     };
 
                     let inner_object = complex.map(|c| {
-                        let inner =
-                            parsed_container_to_container(c.clone(), tests, containers, definers);
-                        create_rust_object(c, inner.fields(), tests, containers, definers)
+                        let inner = parsed_container_to_container(c.clone(), containers, definers);
+                        create_rust_object(c, inner.fields(), containers, definers)
                     });
 
                     RustType::Array {
@@ -1320,7 +1313,6 @@ pub(crate) fn create_struct_member(
                 statement,
                 struct_ty_name,
                 tags,
-                tests,
                 containers,
                 definers,
                 e,
@@ -1337,7 +1329,6 @@ pub(crate) fn create_struct_member(
                     struct_ty_name,
                     tags,
                     e,
-                    tests,
                     containers,
                     definers,
                     &mut members,
@@ -1359,7 +1350,6 @@ pub(crate) fn create_struct_member(
 pub(crate) fn create_rust_object(
     e: &ParsedContainer,
     members: &[StructMember],
-    tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
     definers: &[Definer],
 ) -> RustObject {
@@ -1372,7 +1362,6 @@ pub(crate) fn create_rust_object(
             e.name(),
             e.tags(),
             e,
-            tests,
             containers,
             definers,
             &mut v,

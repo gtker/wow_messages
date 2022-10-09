@@ -90,7 +90,7 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
             }
 
             container.definition = !s.tags().unimplemented();
-            container.tests = s.tests().len();
+            container.tests = s.tests(o).len();
         }
     }
 

@@ -46,7 +46,6 @@ pub(crate) struct Container {
     sizes: Sizes,
     members: Vec<StructMember>,
     tags: Tags,
-    tests: Vec<TestCase>,
     file_info: FileInfo,
     only_has_io_error: bool,
     rust_object_view: RustObject,
@@ -83,7 +82,6 @@ impl Container {
         tags: Tags,
         object_type: ContainerType,
         file_info: FileInfo,
-        tests: Vec<TestCase>,
         sizes: Sizes,
         only_has_io_error: bool,
         rust_object_view: RustObject,
@@ -94,7 +92,6 @@ impl Container {
             sizes,
             members,
             tags,
-            tests,
             file_info,
             only_has_io_error,
             rust_object_view,
@@ -543,8 +540,12 @@ impl Container {
         panic!("unable to find type {}", variable_name)
     }
 
-    pub(crate) fn tests(&self) -> &[TestCase] {
-        &self.tests
+    pub(crate) fn tests(&self, o: &Objects) -> Vec<TestCase> {
+        o.tests()
+            .iter()
+            .filter(|a| a.subject() == self.name() && self.tags().fulfills_all(a.tags()))
+            .cloned()
+            .collect()
     }
 
     pub(crate) fn fields(&self) -> &[StructMember] {

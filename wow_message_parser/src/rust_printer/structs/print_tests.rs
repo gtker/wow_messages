@@ -15,7 +15,7 @@ use crate::rust_printer::{
 };
 
 pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
-    if e.tests().is_empty() {
+    if e.tests(o).is_empty() {
         return;
     }
 
@@ -34,7 +34,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
 
         print_includes(e, o, version, s);
 
-        for (i, t) in e.tests().iter().enumerate() {
+        for (i, t) in e.tests(o).iter().enumerate() {
             s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
             s.inc_indent();
 

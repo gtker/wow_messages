@@ -22,29 +22,6 @@ use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
 use crate::{DefinerType, Tags};
 
-pub(crate) fn get_tests_for_object(
-    tests: &mut Vec<TestCase>,
-    name: &str,
-    tags: &Tags,
-) -> Vec<TestCase> {
-    let mut v = Vec::new();
-    let mut indices = Vec::new();
-
-    for (i, t) in tests.iter().enumerate() {
-        if t.subject() == name && t.tags().has_version_intersections(tags) {
-            indices.push(i);
-            v.push(t.clone());
-        }
-    }
-    indices.reverse();
-
-    for i in indices {
-        tests.remove(i);
-    }
-
-    v
-}
-
 pub(crate) fn verify_and_set_members(
     members: &mut [ParsedStructMember],
     tags: &Tags,
@@ -59,7 +36,6 @@ pub(crate) fn verify_and_set_members(
 }
 
 fn parsed_type_to_type(
-    tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
     definers: &[Definer],
     t: ParsedType,
@@ -90,7 +66,7 @@ fn parsed_type_to_type(
                 }
             } else if let Some(e) = get_container(containers, &s, tags) {
                 Type::Struct {
-                    e: parsed_container_to_container(e.clone(), tests, containers, definers),
+                    e: parsed_container_to_container(e.clone(), containers, definers),
                 }
             } else {
                 unreachable!()
@@ -121,7 +97,6 @@ fn parsed_array_to_array(p: ParsedArray) -> Array {
 
 pub(crate) fn parsed_members_to_members(
     members: Vec<ParsedStructMember>,
-    tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
     definers: &[Definer],
     tags: &Tags,
@@ -133,7 +108,7 @@ pub(crate) fn parsed_members_to_members(
             ParsedStructMember::Definition(d) => {
                 StructMember::Definition(StructMemberDefinition::new(
                     d.name,
-                    parsed_type_to_type(tests, containers, definers, d.struct_type, tags),
+                    parsed_type_to_type(containers, definers, d.struct_type, tags),
                     d.verified_value,
                     d.used_as_size_in,
                     d.used_in_if.unwrap(),
@@ -142,21 +117,15 @@ pub(crate) fn parsed_members_to_members(
             }
             ParsedStructMember::IfStatement(s) => StructMember::IfStatement(IfStatement::new(
                 s.conditional,
-                parsed_members_to_members(s.members, tests, containers, definers, tags),
-                parsed_if_statement_to_if_statement(s.else_ifs, tests, containers, definers, tags),
-                parsed_members_to_members(
-                    s.else_statement_members,
-                    tests,
-                    containers,
-                    definers,
-                    tags,
-                ),
-                parsed_type_to_type(tests, containers, definers, s.original_ty.unwrap(), tags),
+                parsed_members_to_members(s.members, containers, definers, tags),
+                parsed_if_statement_to_if_statement(s.else_ifs, containers, definers, tags),
+                parsed_members_to_members(s.else_statement_members, containers, definers, tags),
+                parsed_type_to_type(containers, definers, s.original_ty.unwrap(), tags),
             )),
             ParsedStructMember::OptionalStatement(o) => {
                 StructMember::OptionalStatement(OptionalStatement::new(
                     o.name,
-                    parsed_members_to_members(o.members, tests, containers, definers, tags),
+                    parsed_members_to_members(o.members, containers, definers, tags),
                     o.tags,
                 ))
             }
@@ -168,7 +137,6 @@ pub(crate) fn parsed_members_to_members(
 
 fn parsed_if_statement_to_if_statement(
     parsed: Vec<ParsedIfStatement>,
-    tests: &mut Vec<TestCase>,
     containers: &[ParsedContainer],
     definers: &[Definer],
     tags: &Tags,
@@ -178,10 +146,10 @@ fn parsed_if_statement_to_if_statement(
     for p in parsed {
         v.push(IfStatement::new(
             p.conditional,
-            parsed_members_to_members(p.members, tests, containers, definers, tags),
-            parsed_if_statement_to_if_statement(p.else_ifs, tests, containers, definers, tags),
-            parsed_members_to_members(p.else_statement_members, tests, containers, definers, tags),
-            parsed_type_to_type(tests, containers, definers, p.original_ty.unwrap(), tags),
+            parsed_members_to_members(p.members, containers, definers, tags),
+            parsed_if_statement_to_if_statement(p.else_ifs, containers, definers, tags),
+            parsed_members_to_members(p.else_statement_members, containers, definers, tags),
+            parsed_type_to_type(containers, definers, p.original_ty.unwrap(), tags),
         ))
     }
 

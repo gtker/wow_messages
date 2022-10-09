@@ -9,16 +9,17 @@ use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskVa
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ContainerValue, FloatingPointType};
 use crate::rust_printer::UpdateMaskType;
+use crate::Objects;
 use serde::Serialize;
 
-pub(crate) fn containers_to_ir(containers: &[&Container]) -> Vec<IrContainer> {
-    containers.iter().map(|a| container_to_ir(a)).collect()
+pub(crate) fn containers_to_ir(containers: &[&Container], o: &Objects) -> Vec<IrContainer> {
+    containers.iter().map(|a| container_to_ir(a, o)).collect()
 }
 
-fn container_to_ir(e: &Container) -> IrContainer {
+fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
     let members = e.fields().iter().map(|a| a.into()).collect();
 
-    let tests = e.tests().iter().map(|a| a.into()).collect();
+    let tests = e.tests(o).iter().map(|a| a.into()).collect();
 
     IrContainer {
         name: e.name().to_string(),

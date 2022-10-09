@@ -196,7 +196,7 @@ impl IrObjects {
         flags.sort_by(|a, b| a.name().cmp(b.name()));
         let mut enums = definers_to_ir(o.enums());
         enums.sort_by(|a, b| a.name().cmp(b.name()));
-        let mut containers = containers_to_ir(&o.all_containers().collect::<Vec<_>>());
+        let mut containers = containers_to_ir(&o.all_containers().collect::<Vec<_>>(), o);
         containers.sort_by(|a, b| a.name().cmp(b.name()));
 
         Self {

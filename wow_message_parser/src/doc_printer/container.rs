@@ -372,14 +372,14 @@ fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut 
 }
 
 fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
-    if e.tests().is_empty() {
+    if e.tests(o).is_empty() {
         return;
     }
 
     s.wln("### Examples");
     s.newline();
 
-    for (i, t) in e.tests().iter().enumerate() {
+    for (i, t) in e.tests(o).iter().enumerate() {
         s.wln(format!("#### Example {}", i + 1));
         s.newline();
 
