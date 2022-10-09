@@ -1,4 +1,12 @@
-#tag_all versions "1.12";
+smsg SMSG_TEXT_EMOTE = 0x0105 {
+    Guid guid;
+    /* TODO: text_emote could be an enum */
+    u32 text_emote;
+    Emote emote;
+    SizedCString name;
+} {
+    versions = "1.12";
+}
 
 smsg SMSG_TEXT_EMOTE = 0x0105 {
     Guid guid;
@@ -6,5 +14,16 @@ smsg SMSG_TEXT_EMOTE = 0x0105 {
     u32 text_emote;
     Emote emote;
     SizedCString name;
+} {
+    versions = "2.4.3";
 }
 
+smsg SMSG_TEXT_EMOTE = 0x0105 {
+    Guid guid;
+    /* TODO: text_emote could be an enum */
+    u32 text_emote;
+    Emote emote;
+    SizedCString name;
+} {
+    versions = "3.3.5";
+}

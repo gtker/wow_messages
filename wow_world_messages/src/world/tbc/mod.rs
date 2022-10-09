@@ -316,6 +316,8 @@ pub(crate) mod smsg_realm_split;
 pub use smsg_realm_split::*;
 pub(crate) mod smsg_server_message;
 pub use smsg_server_message::*;
+pub(crate) mod smsg_text_emote;
+pub use smsg_text_emote::*;
 pub(crate) mod smsg_time_sync_req;
 pub use smsg_time_sync_req::*;
 pub(crate) mod smsg_trigger_cinematic;
