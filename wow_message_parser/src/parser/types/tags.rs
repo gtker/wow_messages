@@ -253,12 +253,6 @@ impl Tags {
         Self::default()
     }
 
-    pub(crate) fn new_with_tag(t: Tag) -> Self {
-        let mut s = Self::new();
-        s.push(t);
-        s
-    }
-
     pub(crate) fn new_with_version(version: Version) -> Self {
         let mut s = Self::new();
         match version {
@@ -425,8 +419,11 @@ impl Tags {
     }
 
     pub(crate) fn is_main_version(&self) -> bool {
-        let versions = Tags::new_with_tag(Tag::new(VERSIONS, "1.12 2.4.3 3.3.5"));
-        let logon = Tags::new_with_tag(Tag::new(LOGIN_VERSIONS, "*"));
+        let mut versions = Tags::new_with_version(Version::World(WorldVersion::Minor(1, 12)));
+        versions.push_version(WorldVersion::Patch(2, 4, 3));
+        versions.push_version(WorldVersion::Patch(3, 3, 5));
+
+        let logon = Tags::new_with_version(Version::Login(LoginVersion::All));
 
         self.has_version_intersections(&versions) || self.has_version_intersections(&logon)
     }
