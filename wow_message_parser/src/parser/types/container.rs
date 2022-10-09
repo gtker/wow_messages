@@ -325,21 +325,21 @@ impl Container {
         self.sizes
     }
 
-    pub(crate) fn all_definitions_transitively(&self, o: &Objects) -> Vec<StructMemberDefinition> {
-        fn inner(m: &StructMember, v: &mut Vec<StructMemberDefinition>, o: &Objects, tags: &Tags) {
+    pub(crate) fn all_definitions_transitively(&self) -> Vec<StructMemberDefinition> {
+        fn inner(m: &StructMember, v: &mut Vec<StructMemberDefinition>, tags: &Tags) {
             match m {
                 StructMember::Definition(d) => {
                     v.push(d.clone());
                     match d.ty() {
                         Type::Struct { e } => {
                             for m in e.fields() {
-                                inner(m, v, o, tags);
+                                inner(m, v, tags);
                             }
                         }
                         Type::Array(array) => {
                             if let ArrayType::Struct(c) = array.ty() {
                                 for m in c.fields() {
-                                    inner(m, v, o, tags);
+                                    inner(m, v, tags);
                                 }
                             }
                         }
@@ -348,12 +348,12 @@ impl Container {
                 }
                 StructMember::IfStatement(statement) => {
                     for m in statement.all_members() {
-                        inner(m, v, o, tags);
+                        inner(m, v, tags);
                     }
                 }
                 StructMember::OptionalStatement(optional) => {
                     for m in optional.members() {
-                        inner(m, v, o, tags);
+                        inner(m, v, tags);
                     }
                 }
             }
@@ -362,7 +362,7 @@ impl Container {
         let mut v = Vec::new();
 
         for m in self.fields() {
-            inner(m, &mut v, o, self.tags());
+            inner(m, &mut v, self.tags());
         }
 
         v
@@ -404,8 +404,8 @@ impl Container {
         false
     }
 
-    pub(crate) fn contains_update_mask_transitively(&self, o: &Objects) -> bool {
-        for d in self.all_definitions_transitively(o) {
+    pub(crate) fn contains_update_mask_transitively(&self) -> bool {
+        for d in self.all_definitions_transitively() {
             if d.ty() == &Type::UpdateMask {
                 return true;
             }
@@ -424,8 +424,8 @@ impl Container {
         false
     }
 
-    pub(crate) fn contains_aura_mask_transitively(&self, o: &Objects) -> bool {
-        for d in self.all_definitions_transitively(o) {
+    pub(crate) fn contains_aura_mask_transitively(&self) -> bool {
+        for d in self.all_definitions_transitively() {
             if d.ty() == &Type::AuraMask {
                 return true;
             }
@@ -459,8 +459,8 @@ impl Container {
         false
     }
 
-    pub(crate) fn contains_guid_or_packed_guid_transitively(&self, o: &Objects) -> bool {
-        for d in self.all_definitions_transitively(o) {
+    pub(crate) fn contains_guid_or_packed_guid_transitively(&self) -> bool {
+        for d in self.all_definitions_transitively() {
             match d.ty() {
                 Type::PackedGuid | Type::Guid => return true,
                 Type::Array(array) => match array.ty() {

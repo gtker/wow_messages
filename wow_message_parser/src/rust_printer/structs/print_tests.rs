@@ -101,17 +101,17 @@ fn print_includes(e: &Container, o: &Objects, version: Version, s: &mut Writer) 
             panic!()
         }
         ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
-            if e.contains_guid_or_packed_guid_transitively(o)
-                || e.contains_update_mask_transitively(o)
+            if e.contains_guid_or_packed_guid_transitively()
+                || e.contains_update_mask_transitively()
             {
                 s.wln("use crate::Guid;");
             }
 
-            if e.contains_update_mask_transitively(o) {
+            if e.contains_update_mask_transitively() {
                 s.wln(format!("use {import_path}::{{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer}};"));
             }
 
-            if e.contains_aura_mask_transitively(o) {
+            if e.contains_aura_mask_transitively() {
                 s.wln(format!("use {import_path}::{{AuraMask}};"));
             }
 
