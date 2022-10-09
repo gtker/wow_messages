@@ -268,7 +268,7 @@ fn print_container_example_member(
         StructMember::IfStatement(statement) => {
             let enum_value = *values.get(statement.name()).unwrap();
 
-            let definer_ty = match e.get_type_of_variable(statement.name()) {
+            let definer_ty = match statement.original_ty() {
                 Type::Enum { e, .. } | Type::Flag { e, .. } => e,
                 _ => panic!(),
             };
