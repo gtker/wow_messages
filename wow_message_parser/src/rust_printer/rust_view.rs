@@ -1,4 +1,4 @@
-use crate::parser::types::array::{Array, ArraySize, ArrayType};
+use crate::parser::types::array::{Array, ArrayType};
 use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
@@ -22,7 +22,6 @@ pub(crate) struct RustMember {
     original_ty: String,
 
     in_rust_type: bool,
-    constant_sized: bool,
     sizes: Sizes,
 
     tags: Tags,
@@ -156,7 +155,6 @@ impl RustMember {
                 ..
             } => {
                 *is_simple = false;
-                self.constant_sized = false;
                 enumerators
             }
             _ => unreachable!(),
@@ -202,7 +200,6 @@ impl RustMember {
                 ..
             } => {
                 *is_simple = false;
-                self.constant_sized = false;
                 enumerators
             }
             _ => unreachable!(),
@@ -241,7 +238,6 @@ impl RustMember {
                 ..
             } => {
                 *is_simple = false;
-                self.constant_sized = false;
                 enumerators
             }
             _ => unreachable!(),
@@ -272,7 +268,6 @@ impl RustMember {
                 ..
             } => {
                 *is_simple = false;
-                self.constant_sized = false;
                 enumerators
             }
             _ => unreachable!(),
@@ -936,7 +931,6 @@ fn create_else_if_flag(
         },
         original_ty: struct_ty_name.to_string(),
         in_rust_type: true,
-        constant_sized: false,
         sizes: Sizes::new(), // TODO Make real?
         tags: Tags::new(),   // TODO Which tags should go in here?
     };
@@ -1129,7 +1123,6 @@ pub(crate) fn create_struct_member(
     match m {
         StructMember::Definition(d) => {
             let mut in_rust_type = true;
-            let mut definition_constantly_sized = true;
             let ty = match d.ty() {
                 Type::Integer(i) => {
                     if d.used_as_size_in().is_some() || d.value().is_some() {
@@ -1140,27 +1133,11 @@ pub(crate) fn create_struct_member(
                 Type::Bool => RustType::Bool,
                 Type::DateTime => RustType::DateTime,
                 Type::Guid => RustType::Guid,
-                Type::PackedGuid => {
-                    definition_constantly_sized = false;
-                    RustType::PackedGuid
-                }
+                Type::PackedGuid => RustType::PackedGuid,
                 Type::FloatingPoint(f) => RustType::Floating(*f),
-                Type::CString => {
-                    definition_constantly_sized = false;
-                    RustType::CString
-                }
-                Type::String { .. } => {
-                    definition_constantly_sized = false;
-                    RustType::String
-                }
+                Type::CString => RustType::CString,
+                Type::String { .. } => RustType::String,
                 Type::Array(array) => {
-                    match array.size() {
-                        ArraySize::Fixed(_) => {}
-                        ArraySize::Variable(_) | ArraySize::Endless => {
-                            definition_constantly_sized = false;
-                        }
-                    }
-
                     let mut inner_sizes = Sizes::new();
                     let complex = match array.ty() {
                         ArrayType::Integer(i) => {
@@ -1172,11 +1149,7 @@ pub(crate) fn create_struct_member(
                             None
                         }
                         ArrayType::Struct(c) => {
-                            let s = c.sizes();
-                            if s.is_constant().is_none() {
-                                definition_constantly_sized = false;
-                            }
-                            inner_sizes += s;
+                            inner_sizes += c.sizes();
                             Some(c)
                         }
                         ArrayType::PackedGuid => {
@@ -1185,7 +1158,6 @@ pub(crate) fn create_struct_member(
                             None
                         }
                         ArrayType::CString => {
-                            definition_constantly_sized = false;
                             inner_sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED);
                             None
                         }
@@ -1247,31 +1219,17 @@ pub(crate) fn create_struct_member(
                     }
                 }
                 Type::Struct { e } => {
-                    let s = e.sizes();
-                    if s.is_constant().is_none() {
-                        definition_constantly_sized = false;
-                    }
-
                     let object = e.rust_object().clone();
 
                     RustType::Struct {
                         ty_name: e.name().to_string(),
-                        sizes: s,
+                        sizes: e.sizes(),
                         object,
                     }
                 }
-                Type::UpdateMask => {
-                    definition_constantly_sized = false;
-                    RustType::UpdateMask
-                }
-                Type::AuraMask => {
-                    definition_constantly_sized = false;
-                    RustType::AuraMask
-                }
-                Type::SizedCString => {
-                    definition_constantly_sized = false;
-                    RustType::SizedCString
-                }
+                Type::UpdateMask => RustType::UpdateMask,
+                Type::AuraMask => RustType::AuraMask,
+                Type::SizedCString => RustType::SizedCString,
             };
 
             let name = d.name().to_string();
@@ -1298,7 +1256,6 @@ pub(crate) fn create_struct_member(
                 ty,
                 original_ty: d.ty().str(),
                 in_rust_type,
-                constant_sized: definition_constantly_sized,
                 sizes,
                 tags: d.tags().clone(),
             });
