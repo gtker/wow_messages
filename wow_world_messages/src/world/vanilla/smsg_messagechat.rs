@@ -1193,7 +1193,7 @@ mod test {
          0x20, 0x69, 0x73, 0x20, 0x61, 0x20, 0x73, 0x61, 0x79, 0x20, 0x6D, 0x65,
          0x73, 0x73, 0x61, 0x67, 0x65, 0x2E, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/chat/smsg_messagechat.wowm` line 51.
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_messagechat.wowm` line 53.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_MESSAGECHAT0() {
@@ -1227,7 +1227,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/chat/smsg_messagechat.wowm` line 51.
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_messagechat.wowm` line 53.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_MESSAGECHAT0() {
@@ -1261,7 +1261,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/chat/smsg_messagechat.wowm` line 51.
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_messagechat.wowm` line 53.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_MESSAGECHAT0() {

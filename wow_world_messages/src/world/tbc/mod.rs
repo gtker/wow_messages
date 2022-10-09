@@ -242,6 +242,8 @@ pub use object::*;
 pub(crate) mod object_type;
 pub use object_type::*;
 pub mod opcodes;
+pub(crate) mod player_chat_tag;
+pub use player_chat_tag::*;
 pub(crate) mod power;
 pub use power::*;
 pub(crate) mod race;

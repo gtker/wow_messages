@@ -1,6 +1,6 @@
 # SMSG_MESSAGECHAT
 
-## Client Version 1.12
+## Client Version 1.7, Client Version 1.8, Client Version 1.9, Client Version 1.10, Client Version 1.11, Client Version 1.12
 
 ### Wowm Representation
 

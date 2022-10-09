@@ -1,10 +1,10 @@
-#tag_all versions "1.12";
-
 enum PlayerChatTag : u8 {
     NONE = 0;
     AFK = 1;
     DND = 2;
     GM = 3;
+} {
+    versions = "1 2";
 }
 
 smsg SMSG_MESSAGECHAT = 0x0096 {
@@ -46,6 +46,8 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     }
     SizedCString message;
     PlayerChatTag tag;
+} {
+    versions = "1.7 1.8 1.9 1.10 1.11 1.12";
 }
 
 test SMSG_MESSAGECHAT {
@@ -66,4 +68,18 @@ test SMSG_MESSAGECHAT {
   0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x61, 0x20, 0x73,
   0x61, 0x79, 0x20, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x00, /* message */
   0x00 /* tag */
-]
+] {
+    versions = "1.12";
+}
+
+enum PlayerChatTag : u8 {
+    NONE = 0;
+    AFK = 1;
+    DND = 2;
+    GM = 3;
+    COMMENTATOR = 4;
+    DEVELOPER = 5;
+} {
+    versions = "3";
+}
+
