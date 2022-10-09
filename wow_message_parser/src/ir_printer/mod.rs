@@ -10,7 +10,6 @@ use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::{Endianness, IntegerType};
-use crate::UNIMPLEMENTED;
 
 #[derive(Serialize, Debug)]
 struct IrFileInfo {
@@ -152,7 +151,7 @@ impl IrTags {
 
         let compressed = tags.compressed().map(|d| d.to_string());
 
-        let unimplemented = if tags.contains(UNIMPLEMENTED) {
+        let unimplemented = if tags.unimplemented() {
             Some("true".to_string())
         } else {
             None

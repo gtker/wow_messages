@@ -6,7 +6,7 @@ use crate::file_utils::get_import_path;
 use crate::rust_printer::Version;
 use crate::{
     Objects, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
-    RUST_BASE_TYPE, TEST_STR, UNIMPLEMENTED, VERSIONS,
+    RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
 };
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
@@ -246,6 +246,11 @@ pub(crate) struct Tags {
     comment: Option<TagString>,
     display: String,
     paste_versions: BTreeSet<WorldVersion>,
+
+    is_test: bool,
+    skip: bool,
+    unimplemented: bool,
+    rust_base_ty: bool,
 }
 
 impl Tags {
@@ -358,6 +363,14 @@ impl Tags {
             }
         } else if key == DISPLAY {
             self.display = value.to_string();
+        } else if key == TEST_STR {
+            self.is_test = value.eq("true");
+        } else if key == SKIP_STR {
+            self.skip = value.eq("true");
+        } else if key == UNIMPLEMENTED {
+            self.unimplemented = value.eq("true");
+        } else if key == RUST_BASE_TYPE {
+            self.rust_base_ty = value.eq("true");
         }
 
         for v in self.inner.iter_mut() {
@@ -371,16 +384,12 @@ impl Tags {
         self.inner.push(Tag::new(key, value));
     }
 
-    pub(crate) fn contains(&self, name: &str) -> bool {
-        self.inner.iter().any(|a| a.key == name)
-    }
-
     pub(crate) fn paste_versions(&self) -> Vec<WorldVersion> {
         self.paste_versions.clone().into_iter().collect()
     }
 
     pub(crate) fn unimplemented(&self) -> bool {
-        self.contains(UNIMPLEMENTED)
+        self.unimplemented
     }
 
     pub(crate) fn shared(&self) -> bool {
@@ -389,7 +398,7 @@ impl Tags {
 
     /// self and tags have any version in common at all
     pub(crate) fn has_version_intersections(&self, tags: &Tags) -> bool {
-        if tags.contains(TEST_STR) && self.contains(TEST_STR) {
+        if tags.test() && self.test() {
             return true;
         }
 
@@ -581,7 +590,15 @@ impl Tags {
     }
 
     pub(crate) fn is_in_base(&self) -> bool {
-        self.contains(RUST_BASE_TYPE)
+        self.rust_base_ty
+    }
+
+    pub(crate) fn skip(&self) -> bool {
+        self.skip
+    }
+
+    pub(crate) fn test(&self) -> bool {
+        self.is_test
     }
 }
 

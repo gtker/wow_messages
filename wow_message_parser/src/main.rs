@@ -254,5 +254,5 @@ fn load_files(dir: &Path, components: &mut ParsedObjects) {
 }
 
 fn should_not_write_object(t: &Tags) -> bool {
-    t.contains(TEST_STR) || t.contains(SKIP_STR) || !t.is_main_version()
+    t.test() || t.skip() || !t.is_main_version()
 }
