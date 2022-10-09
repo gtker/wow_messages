@@ -75,8 +75,6 @@ impl crate::world::vanilla::ClientMessage for CMSG_WORLD_TELEPORT {}
 #[cfg(test)]
 mod test {
     use super::CMSG_WORLD_TELEPORT;
-    use crate::world::vanilla::Map;
-    use crate::world::vanilla::Vector3d;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ClientOpcodeMessage;

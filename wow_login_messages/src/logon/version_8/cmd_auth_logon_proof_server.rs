@@ -548,8 +548,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_LOGON_PROOF_Server;
-    use crate::logon::version_8::AccountFlag;
-    use crate::logon::version_8::LoginResult;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;

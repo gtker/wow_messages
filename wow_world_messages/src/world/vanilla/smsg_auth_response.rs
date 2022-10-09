@@ -724,7 +724,6 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
 #[cfg(test)]
 mod test {
     use super::SMSG_AUTH_RESPONSE;
-    use crate::world::vanilla::WorldResult;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

@@ -239,12 +239,7 @@ impl CMD_REALM_LIST_Server {
 #[cfg(test)]
 mod test {
     use super::CMD_REALM_LIST_Server;
-    use crate::logon::version_2::Population;
-    use crate::logon::version_8::Realm;
-    use crate::logon::version_2::RealmCategory;
-    use crate::logon::version_8::RealmFlag;
-    use crate::logon::version_2::RealmType;
-    use crate::logon::all::Version;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;

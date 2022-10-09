@@ -114,6 +114,7 @@ impl ServerMessage for CMD_XFER_INITIATE {
 #[cfg(test)]
 mod test {
     use super::CMD_XFER_INITIATE;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;

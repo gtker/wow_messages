@@ -403,8 +403,6 @@ impl CMSG_MESSAGECHAT_ChatType {
 #[cfg(test)]
 mod test {
     use super::CMSG_MESSAGECHAT;
-    use crate::world::vanilla::ChatType;
-    use crate::world::vanilla::Language;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ClientOpcodeMessage;

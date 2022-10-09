@@ -63,16 +63,6 @@ impl SMSG_CHAR_ENUM {
 #[cfg(test)]
 mod test {
     use super::SMSG_CHAR_ENUM;
-    use crate::world::vanilla::Area;
-    use crate::world::vanilla::Character;
-    use crate::world::vanilla::CharacterFlags;
-    use crate::world::vanilla::CharacterGear;
-    use crate::world::vanilla::Class;
-    use crate::world::vanilla::Gender;
-    use crate::world::vanilla::InventoryType;
-    use crate::world::vanilla::Map;
-    use crate::world::vanilla::Race;
-    use crate::world::vanilla::Vector3d;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

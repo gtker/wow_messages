@@ -160,9 +160,6 @@ impl CMSG_CHAR_CREATE {
 #[cfg(test)]
 mod test {
     use super::CMSG_CHAR_CREATE;
-    use crate::world::vanilla::Class;
-    use crate::world::vanilla::Gender;
-    use crate::world::vanilla::Race;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ClientOpcodeMessage;

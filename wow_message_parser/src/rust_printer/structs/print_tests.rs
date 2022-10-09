@@ -32,7 +32,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             s.open_curly("mod test");
         }
 
-        print_includes(e, o, version, s);
+        print_includes(e, version, s);
 
         for (i, t) in e.tests(o).iter().enumerate() {
             s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
@@ -72,24 +72,16 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
     }
 }
 
-fn print_includes(e: &Container, o: &Objects, version: Version, s: &mut Writer) {
+fn print_includes(e: &Container, version: Version, s: &mut Writer) {
     let import_path = get_import_path(version);
 
     s.wln(format!("use super::{};", e.name()));
 
-    for name in e.get_types_needing_import_recursively(o) {
-        let version = if !version.is_world() {
-            o.get_tags_of_object(name.as_str(), e.tags())
-                .import_version()
-        } else {
-            version
-        };
-
-        s.wln(format!(
-            "use {path}::{ty};",
-            path = get_import_path(version),
-            ty = name,
-        ));
+    match version {
+        Version::Login(_) => {
+            s.wln("use crate::all::*;");
+        }
+        Version::World(_) => {}
     }
 
     s.wln("use super::*;");

@@ -114,6 +114,7 @@ impl ClientMessage for CMD_XFER_ACCEPT {
 #[cfg(test)]
 mod test {
     use super::CMD_XFER_ACCEPT;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;

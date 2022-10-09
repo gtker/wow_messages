@@ -164,7 +164,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_RECONNECT_PROOF_Server;
-    use crate::logon::version_8::LoginResult;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;

@@ -71,15 +71,6 @@ impl SMSG_UPDATE_OBJECT {
 #[cfg(test)]
 mod test {
     use super::SMSG_UPDATE_OBJECT;
-    use crate::world::vanilla::MovementBlock;
-    use crate::world::vanilla::MovementFlags;
-    use crate::world::vanilla::Object;
-    use crate::world::vanilla::ObjectType;
-    use crate::world::vanilla::SplineFlag;
-    use crate::world::vanilla::TransportInfo;
-    use crate::world::vanilla::UpdateFlag;
-    use crate::world::vanilla::UpdateType;
-    use crate::world::vanilla::Vector3d;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

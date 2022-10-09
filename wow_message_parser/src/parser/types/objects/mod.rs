@@ -9,7 +9,6 @@ use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::version::{LoginVersion, Version, WorldVersion};
-use crate::parser::types::ObjectType;
 use crate::DefinerType;
 
 #[derive(Debug, Clone)]
@@ -30,37 +29,6 @@ impl Objects {
         tests: Vec<ParsedTestCase>,
     ) -> Self {
         object_new(enums, flags, structs, messages, tests)
-    }
-
-    pub(crate) fn get_object_type_of(&self, type_name: &str, finder_tags: &Tags) -> ObjectType {
-        if self
-            .enums
-            .iter()
-            .any(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
-        {
-            return ObjectType::Enum;
-        }
-
-        if self
-            .flags
-            .iter()
-            .any(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
-        {
-            return ObjectType::Flag;
-        }
-
-        if self
-            .structs
-            .iter()
-            .any(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
-        {
-            return ObjectType::Struct;
-        }
-
-        panic!(
-            "unable to find variable name: '{}' with tags: '{:#?}'",
-            type_name, finder_tags
-        );
     }
 
     pub(crate) fn get_object(&self, name: &str, finder_tags: &Tags) -> Object {
@@ -130,17 +98,6 @@ impl Objects {
         }
 
         None
-    }
-
-    pub(crate) fn get_tags_of_object(&self, type_name: &str, finder_tags: &Tags) -> &Tags {
-        if let Some(tags) = self.get_tags_of_object_fallible(type_name, finder_tags) {
-            return tags;
-        }
-
-        panic!(
-            "unable to find type: '{}' with tags '{:?}'",
-            type_name, finder_tags
-        );
     }
 
     pub(crate) fn get_main_world_versions_with_objects(&self) -> Vec<WorldVersion> {

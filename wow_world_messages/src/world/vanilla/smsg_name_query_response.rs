@@ -115,9 +115,6 @@ impl SMSG_NAME_QUERY_RESPONSE {
 #[cfg(test)]
 mod test {
     use super::SMSG_NAME_QUERY_RESPONSE;
-    use crate::world::vanilla::Class;
-    use crate::world::vanilla::Gender;
-    use crate::world::vanilla::Race;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

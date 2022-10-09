@@ -343,10 +343,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_LOGON_CHALLENGE_Client;
-    use crate::logon::all::Locale;
-    use crate::logon::all::Os;
-    use crate::logon::all::Platform;
-    use crate::logon::all::Version;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;

@@ -80,10 +80,6 @@ impl CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
 #[cfg(test)]
 mod test {
     use super::CMSG_FORCE_RUN_SPEED_CHANGE_ACK;
-    use crate::world::vanilla::MovementFlags;
-    use crate::world::vanilla::MovementInfo;
-    use crate::world::vanilla::TransportInfo;
-    use crate::world::vanilla::Vector3d;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ClientOpcodeMessage;

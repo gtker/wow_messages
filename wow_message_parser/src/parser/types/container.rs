@@ -1,6 +1,7 @@
 use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
 use crate::parser::types::array::ArrayType;
+use crate::parser::types::compare_name_and_tags;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::{Sizes, BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
@@ -8,7 +9,6 @@ use crate::parser::types::tags::Tags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::version::{LoginVersion, Version};
-use crate::parser::types::{compare_name_and_tags, ObjectType};
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
     LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
@@ -475,32 +475,6 @@ impl Container {
         false
     }
 
-    pub(crate) fn get_types_needing_import_recursively<'a>(
-        &'a self,
-        o: &'a Objects,
-    ) -> Vec<String> {
-        let mut v = self.get_complex_types();
-
-        let mut v2 = Vec::new();
-        for t in &v {
-            match o.get_object_type_of(t, self.tags()) {
-                ObjectType::Struct => {
-                    let mut types = o
-                        .get_container(t, self.tags())
-                        .get_types_needing_import_recursively(o);
-                    v2.append(&mut types);
-                }
-                ObjectType::Enum | ObjectType::Flag => {}
-            }
-        }
-        v.append(&mut v2);
-
-        v.sort_unstable();
-        v.dedup();
-
-        v
-    }
-
     pub(crate) fn get_objects_needing_import(&self) -> BTreeSet<Object> {
         let mut v = BTreeSet::new();
 
@@ -524,31 +498,6 @@ impl Container {
             }
         }
 
-        v
-    }
-
-    fn get_complex_types(&self) -> Vec<String> {
-        let mut v = Vec::new();
-
-        for d in self.all_definitions() {
-            match d.struct_type() {
-                Type::Array(a) => {
-                    if let ArrayType::Struct(c) = a.ty() {
-                        v.push(c.name().to_string());
-                    }
-                }
-                Type::Enum { e, .. } | Type::Flag { e, .. } => {
-                    v.push(e.name().to_string());
-                }
-                Type::Struct { e } => {
-                    v.push(e.name().to_string());
-                }
-                _ => {}
-            }
-        }
-
-        v.sort_unstable();
-        v.dedup();
         v
     }
 

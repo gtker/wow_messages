@@ -1178,9 +1178,6 @@ impl SMSG_MESSAGECHAT_ChatType {
 #[cfg(test)]
 mod test {
     use super::SMSG_MESSAGECHAT;
-    use crate::world::vanilla::ChatType;
-    use crate::world::vanilla::Language;
-    use crate::world::vanilla::PlayerChatTag;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

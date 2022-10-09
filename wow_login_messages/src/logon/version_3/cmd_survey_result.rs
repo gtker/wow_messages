@@ -198,6 +198,7 @@ impl CMD_SURVEY_RESULT {
 #[cfg(test)]
 mod test {
     use super::CMD_SURVEY_RESULT;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;

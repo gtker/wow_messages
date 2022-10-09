@@ -50,7 +50,6 @@ impl crate::world::vanilla::ServerMessage for SMSG_CHAR_DELETE {}
 #[cfg(test)]
 mod test {
     use super::SMSG_CHAR_DELETE;
-    use crate::world::vanilla::WorldResult;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

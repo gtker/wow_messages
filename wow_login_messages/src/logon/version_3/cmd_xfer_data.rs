@@ -162,6 +162,7 @@ impl CMD_XFER_DATA {
 #[cfg(test)]
 mod test {
     use super::CMD_XFER_DATA;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;

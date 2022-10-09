@@ -60,8 +60,6 @@ impl crate::world::vanilla::ServerMessage for SMSG_LOGOUT_RESPONSE {}
 #[cfg(test)]
 mod test {
     use super::SMSG_LOGOUT_RESPONSE;
-    use crate::world::vanilla::LogoutResult;
-    use crate::world::vanilla::LogoutSpeed;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

@@ -131,6 +131,7 @@ impl ClientMessage for CMD_XFER_RESUME {
 #[cfg(test)]
 mod test {
     use super::CMD_XFER_RESUME;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;

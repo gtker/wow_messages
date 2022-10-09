@@ -390,7 +390,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_RECONNECT_CHALLENGE_Server;
-    use crate::logon::version_2::LoginResult;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;

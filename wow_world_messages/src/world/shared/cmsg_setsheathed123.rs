@@ -54,7 +54,6 @@ impl crate::world::wrath::ClientMessage for CMSG_SETSHEATHED {}
 #[cfg(all(feature = "vanilla", test))]
 mod test1 {
     use super::CMSG_SETSHEATHED;
-    use crate::world::vanilla::SheathState;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ClientOpcodeMessage;
@@ -143,7 +142,6 @@ mod test1 {
 #[cfg(all(feature = "tbc", test))]
 mod test2 {
     use super::CMSG_SETSHEATHED;
-    use crate::world::tbc::SheathState;
     use super::*;
     use super::super::*;
     use crate::world::tbc::opcodes::ClientOpcodeMessage;
@@ -232,7 +230,6 @@ mod test2 {
 #[cfg(all(feature = "wrath", test))]
 mod test3 {
     use super::CMSG_SETSHEATHED;
-    use crate::world::wrath::SheathState;
     use super::*;
     use super::super::*;
     use crate::world::wrath::opcodes::ClientOpcodeMessage;

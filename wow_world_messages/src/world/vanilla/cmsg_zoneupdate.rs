@@ -50,7 +50,6 @@ impl crate::world::vanilla::ClientMessage for CMSG_ZONEUPDATE {}
 #[cfg(test)]
 mod test {
     use super::CMSG_ZONEUPDATE;
-    use crate::world::vanilla::Area;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ClientOpcodeMessage;

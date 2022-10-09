@@ -114,6 +114,7 @@ impl ClientMessage for CMD_XFER_CANCEL {
 #[cfg(test)]
 mod test {
     use super::CMD_XFER_CANCEL;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;

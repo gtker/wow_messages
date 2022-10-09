@@ -59,10 +59,6 @@ impl MSG_MOVE_START_STRAFE_LEFT_Server {
 #[cfg(test)]
 mod test {
     use super::MSG_MOVE_START_STRAFE_LEFT_Server;
-    use crate::world::vanilla::MovementFlags;
-    use crate::world::vanilla::MovementInfo;
-    use crate::world::vanilla::TransportInfo;
-    use crate::world::vanilla::Vector3d;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

@@ -212,6 +212,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
 #[cfg(test)]
 mod testversion_2 {
     use super::CMD_AUTH_RECONNECT_PROOF_Client;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
@@ -324,6 +325,7 @@ mod testversion_2 {
 #[cfg(test)]
 mod testversion_8 {
     use super::CMD_AUTH_RECONNECT_PROOF_Client;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_8::opcodes::ClientOpcodeMessage;

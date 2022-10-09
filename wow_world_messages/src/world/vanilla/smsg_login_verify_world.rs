@@ -68,8 +68,6 @@ impl crate::world::vanilla::ServerMessage for SMSG_LOGIN_VERIFY_WORLD {}
 #[cfg(test)]
 mod test {
     use super::SMSG_LOGIN_VERIFY_WORLD;
-    use crate::world::vanilla::Map;
-    use crate::world::vanilla::Vector3d;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

@@ -26,13 +26,6 @@ pub(crate) fn compare_name_and_tags(
     name1.cmp(name2).then_with(|| v1.cmp(v2))
 }
 
-#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
-pub(crate) enum ObjectType {
-    Struct,
-    Enum,
-    Flag,
-}
-
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone)]
 pub(crate) enum Endianness {
     Little,

@@ -50,7 +50,6 @@ impl crate::world::vanilla::ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {}
 #[cfg(test)]
 mod test {
     use super::SMSG_CHARACTER_LOGIN_FAILED;
-    use crate::world::vanilla::WorldResult;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

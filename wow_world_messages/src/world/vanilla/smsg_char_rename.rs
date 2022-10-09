@@ -698,7 +698,6 @@ impl SMSG_CHAR_RENAME_WorldResult {
 #[cfg(test)]
 mod test {
     use super::SMSG_CHAR_RENAME;
-    use crate::world::vanilla::WorldResult;
     use super::*;
     use super::super::*;
     use crate::world::vanilla::opcodes::ServerOpcodeMessage;

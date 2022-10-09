@@ -374,8 +374,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_LOGON_PROOF_Client;
-    use crate::logon::version_3::SecurityFlag;
-    use crate::logon::version_2::TelemetryKey;
+    use crate::all::*;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
