@@ -120,6 +120,8 @@ pub(crate) mod cmsg_set_active_mover;
 pub use cmsg_set_active_mover::*;
 pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
+pub(crate) mod cmsg_set_selection;
+pub use cmsg_set_selection::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
 pub use crate::helper::tbc::*;

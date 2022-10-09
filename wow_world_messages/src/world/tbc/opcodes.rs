@@ -58,6 +58,7 @@ use crate::world::tbc::CMSG_COMPLETE_CINEMATIC;
 use crate::world::tbc::CMSG_EMOTE;
 use crate::world::tbc::CMSG_TEXT_EMOTE;
 use crate::world::tbc::CMSG_CANCEL_CHANNELLING;
+use crate::world::tbc::CMSG_SET_SELECTION;
 use crate::world::tbc::CMSG_ATTACKSWING;
 use crate::world::tbc::CMSG_ATTACKSTOP;
 use crate::world::tbc::CMSG_REPOP_REQUEST;
@@ -134,6 +135,7 @@ pub enum ClientOpcodeMessage {
     CMSG_EMOTE(CMSG_EMOTE),
     CMSG_TEXT_EMOTE(CMSG_TEXT_EMOTE),
     CMSG_CANCEL_CHANNELLING(CMSG_CANCEL_CHANNELLING),
+    CMSG_SET_SELECTION(CMSG_SET_SELECTION),
     CMSG_ATTACKSWING(CMSG_ATTACKSWING),
     CMSG_ATTACKSTOP(CMSG_ATTACKSTOP),
     CMSG_REPOP_REQUEST(CMSG_REPOP_REQUEST),
@@ -212,6 +214,7 @@ impl ClientOpcodeMessage {
             0x0102 => Ok(Self::CMSG_EMOTE(<CMSG_EMOTE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0104 => Ok(Self::CMSG_TEXT_EMOTE(<CMSG_TEXT_EMOTE as crate::Message>::read_body(&mut r, body_size)?)),
             0x013B => Ok(Self::CMSG_CANCEL_CHANNELLING(<CMSG_CANCEL_CHANNELLING as crate::Message>::read_body(&mut r, body_size)?)),
+            0x013D => Ok(Self::CMSG_SET_SELECTION(<CMSG_SET_SELECTION as crate::Message>::read_body(&mut r, body_size)?)),
             0x0141 => Ok(Self::CMSG_ATTACKSWING(<CMSG_ATTACKSWING as crate::Message>::read_body(&mut r, body_size)?)),
             0x0142 => Ok(Self::CMSG_ATTACKSTOP(<CMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size)?)),
             0x015A => Ok(Self::CMSG_REPOP_REQUEST(<CMSG_REPOP_REQUEST as crate::Message>::read_body(&mut r, body_size)?)),
@@ -358,6 +361,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_EMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TEXT_EMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SET_SELECTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSWING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSTOP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REPOP_REQUEST(c) => c.write_encrypted_client(w, e),
@@ -437,6 +441,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_EMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_TEXT_EMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SET_SELECTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSWING(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSTOP(c) => c.write_unencrypted_client(w),
             Self::CMSG_REPOP_REQUEST(c) => c.write_unencrypted_client(w),
@@ -516,6 +521,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_SELECTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -595,6 +601,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SET_SELECTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
@@ -674,6 +681,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_SELECTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REPOP_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
@@ -753,6 +761,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SET_SELECTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REPOP_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
@@ -867,6 +876,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_EMOTE(_) => "CMSG_EMOTE",
             ClientOpcodeMessage::CMSG_TEXT_EMOTE(_) => "CMSG_TEXT_EMOTE",
             ClientOpcodeMessage::CMSG_CANCEL_CHANNELLING(_) => "CMSG_CANCEL_CHANNELLING",
+            ClientOpcodeMessage::CMSG_SET_SELECTION(_) => "CMSG_SET_SELECTION",
             ClientOpcodeMessage::CMSG_ATTACKSWING(_) => "CMSG_ATTACKSWING",
             ClientOpcodeMessage::CMSG_ATTACKSTOP(_) => "CMSG_ATTACKSTOP",
             ClientOpcodeMessage::CMSG_REPOP_REQUEST(_) => "CMSG_REPOP_REQUEST",
@@ -1201,6 +1211,12 @@ impl From<CMSG_TEXT_EMOTE> for ClientOpcodeMessage {
 impl From<CMSG_CANCEL_CHANNELLING> for ClientOpcodeMessage {
     fn from(c: CMSG_CANCEL_CHANNELLING) -> Self {
         Self::CMSG_CANCEL_CHANNELLING(c)
+    }
+}
+
+impl From<CMSG_SET_SELECTION> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_SELECTION) -> Self {
+        Self::CMSG_SET_SELECTION(c)
     }
 }
 

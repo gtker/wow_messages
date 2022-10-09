@@ -1,10 +1,10 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_SET_SELECTION = 0x13D {
     Guid target;
 } {
     description = "Sets the current target.";
+    versions = "1 2 3";
 }
+
 
 test CMSG_SET_SELECTION {
     target = 6;
@@ -14,6 +14,6 @@ test CMSG_SET_SELECTION {
   0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 /* target */
 ] {
     description = "Client sets target to GUID 6.";
+    versions = "1.12";
 }
-
 
