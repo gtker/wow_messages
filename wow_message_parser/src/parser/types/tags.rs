@@ -485,29 +485,6 @@ impl Tags {
         self.logon_versions().map(Version::Login).chain(world)
     }
 
-    pub(crate) fn main_trait_versions(&self) -> Vec<Version> {
-        let mut v = Vec::new();
-
-        if self.fulfills_all(&Tags::new_with_version(Version::World(
-            WorldVersion::Minor(1, 12),
-        ))) {
-            v.push(Version::World(WorldVersion::Minor(1, 12)));
-        }
-        if self.fulfills_all(&Tags::new_with_version(Version::World(
-            WorldVersion::Patch(2, 4, 3),
-        ))) {
-            v.push(Version::World(WorldVersion::Patch(2, 4, 3)))
-        }
-
-        if self.fulfills_all(&Tags::new_with_version(Version::World(
-            WorldVersion::Patch(3, 3, 5),
-        ))) {
-            v.push(Version::World(WorldVersion::Patch(3, 3, 5)));
-        }
-
-        v
-    }
-
     pub(crate) fn first_and_main_versions(&self) -> (Version, Vec<Version>) {
         let mut v = self.main_versions();
         let first = v.next().unwrap();

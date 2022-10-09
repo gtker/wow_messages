@@ -73,7 +73,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 Some(e.sizes()),
             );
 
-            for version in e.tags().main_trait_versions() {
+            for version in e.tags().main_versions() {
                 match e.container_type() {
                     ContainerType::CMsg(_) => bind(s, ContainerType::CMsg(0), version),
                     ContainerType::SMsg(_) => bind(s, ContainerType::SMsg(0), version),
