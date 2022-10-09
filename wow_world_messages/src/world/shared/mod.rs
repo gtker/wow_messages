@@ -39,7 +39,7 @@ pub mod cmsg_player_login123;
 pub mod cmsg_player_logout123;
 pub mod cmsg_realm_split2_4_33;
 pub mod cmsg_repop_request123;
-pub mod cmsg_request_account_data1_123_3_5;
+pub mod cmsg_request_account_data123;
 pub mod cmsg_set_active_mover123;
 pub mod cmsg_set_selection123;
 pub mod cmsg_set_target_obsolete1_1223;

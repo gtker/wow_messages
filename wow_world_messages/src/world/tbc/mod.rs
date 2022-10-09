@@ -122,6 +122,8 @@ pub(crate) mod cmsg_realm_split;
 pub use cmsg_realm_split::*;
 pub(crate) mod cmsg_repop_request;
 pub use cmsg_repop_request::*;
+pub(crate) mod cmsg_request_account_data;
+pub use cmsg_request_account_data::*;
 pub(crate) mod cmsg_set_active_mover;
 pub use cmsg_set_active_mover::*;
 pub(crate) mod cmsg_set_active_voice_channel;
