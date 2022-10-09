@@ -230,7 +230,7 @@ fn contains_complex_type(
         ty_name,
         struct_name,
         tags.logon_versions().collect::<Vec<_>>(),
-        tags.versions()
+        tags.versions().collect::<Vec<_>>()
     );
 }
 

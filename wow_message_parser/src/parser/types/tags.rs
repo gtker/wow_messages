@@ -239,7 +239,7 @@ impl LoginVersion {
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
 pub(crate) struct Tags {
     login_logon_versions: BTreeSet<LoginVersion>,
-    world_versions: Vec<WorldVersion>,
+    world_versions: BTreeSet<WorldVersion>,
     description: Option<TagString>,
     compressed: Option<String>,
     comment: Option<TagString>,
@@ -260,16 +260,14 @@ impl Tags {
     pub(crate) fn new_with_version(version: Version) -> Self {
         let mut s = Self::new();
         match version {
-            Version::Login(l) => {
-                s.login_logon_versions.insert(l);
-            }
-            Version::World(l) => s.world_versions.push(l),
-        }
+            Version::Login(l) => s.login_logon_versions.insert(l),
+            Version::World(l) => s.world_versions.insert(l),
+        };
         s
     }
 
     pub(crate) fn push_version(&mut self, v: WorldVersion) {
-        self.world_versions.push(v);
+        self.world_versions.insert(v);
     }
 
     pub(crate) fn append(&mut self, mut t: Tags) {
@@ -277,8 +275,6 @@ impl Tags {
             .append(&mut t.login_logon_versions);
 
         self.world_versions.append(&mut t.world_versions);
-        self.world_versions.sort();
-        self.world_versions.dedup();
 
         if let Some(v) = t.description {
             self.description = Some(v);
@@ -327,25 +323,21 @@ impl Tags {
         } else if key == VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
-                    self.world_versions.push(WorldVersion::Major(v));
+                    self.world_versions.insert(WorldVersion::Major(v));
                     continue;
                 } else if w == "*" {
-                    self.world_versions.push(WorldVersion::All);
+                    self.world_versions.clear();
+                    self.world_versions.insert(WorldVersion::All);
                     continue;
                 }
 
                 let d: Vec<u8> = w.split('.').map(|a| a.parse::<u8>().unwrap()).collect();
-                self.world_versions.push(match d.len() {
+                self.world_versions.insert(match d.len() {
                     2 => WorldVersion::Minor(d[0], d[1]),
                     3 => WorldVersion::Patch(d[0], d[1], d[2]),
                     4 => WorldVersion::Exact(d[0], d[1], d[2], u16::from(d[3])),
                     _ => panic!("incorrect world version string"),
                 });
-            }
-            self.world_versions.sort();
-            self.world_versions.dedup();
-            if self.world_versions.contains(&WorldVersion::All) {
-                self.world_versions = vec![WorldVersion::All];
             }
         } else if key == PASTE_VERSIONS {
             for w in value.split_whitespace() {
@@ -437,7 +429,7 @@ impl Tags {
 
         for outer in self.versions() {
             for inner in tags.versions() {
-                if outer.overlaps(inner) {
+                if outer.overlaps(&inner) {
                     return true;
                 }
             }
@@ -461,7 +453,7 @@ impl Tags {
     }
 
     pub(crate) fn has_wildcard_world_version(&self) -> bool {
-        self.versions().contains(&WorldVersion::All)
+        self.versions().any(|a| a == WorldVersion::All)
     }
 
     pub(crate) fn logon_versions(&self) -> impl Iterator<Item = LoginVersion> {
@@ -472,20 +464,19 @@ impl Tags {
         self.logon_versions().next().is_some()
     }
 
-    pub(crate) fn versions(&self) -> &[WorldVersion] {
-        &self.world_versions
+    pub(crate) fn versions(&self) -> impl Iterator<Item = WorldVersion> {
+        self.world_versions.clone().into_iter()
     }
 
     pub(crate) fn has_world_versions(&self) -> bool {
-        !self.versions().is_empty()
+        self.versions().next().is_some()
     }
 
     pub(crate) fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
         let world = self
             .versions()
-            .iter()
             .filter(|a| a.is_main_version())
-            .map(|a| Version::World(*a));
+            .map(|a| Version::World(a));
 
         self.logon_versions()
             .map(|a| Version::Login(a))
@@ -518,8 +509,8 @@ impl Tags {
     pub(crate) fn first_version(&self) -> Version {
         if let Some(v) = self.logon_versions().next() {
             Version::Login(v)
-        } else if let Some(v) = self.versions().first() {
-            Version::World(*v)
+        } else if let Some(v) = self.versions().next() {
+            Version::World(v)
         } else {
             panic!("{:#?}", &self);
         }
@@ -566,7 +557,7 @@ impl Tags {
             let mut covered = false;
 
             for self_version in self.versions() {
-                if self_version.covers(version) {
+                if self_version.covers(&version) {
                     covered = true;
                 }
             }

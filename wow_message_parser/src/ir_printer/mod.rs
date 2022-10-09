@@ -103,24 +103,21 @@ pub(crate) enum IrVersions {
     World(Vec<IrWorldVersion>),
 }
 
-impl From<&WorldVersion> for IrWorldVersion {
-    fn from(v: &WorldVersion) -> Self {
+impl From<WorldVersion> for IrWorldVersion {
+    fn from(v: WorldVersion) -> Self {
         match v {
-            WorldVersion::Major(m) => Self::Major { major: *m },
-            WorldVersion::Minor(m, i) => Self::Minor {
-                major: *m,
-                minor: *i,
-            },
+            WorldVersion::Major(m) => Self::Major { major: m },
+            WorldVersion::Minor(m, i) => Self::Minor { major: m, minor: i },
             WorldVersion::Patch(m, i, p) => Self::Patch {
-                major: *m,
-                minor: *i,
-                patch: *p,
+                major: m,
+                minor: i,
+                patch: p,
             },
             WorldVersion::Exact(m, i, p, e) => Self::Exact {
-                major: *m,
-                minor: *i,
-                patch: *p,
-                exact: *e,
+                major: m,
+                minor: i,
+                patch: p,
+                exact: e,
             },
             WorldVersion::All => Self::All,
         }
@@ -167,7 +164,7 @@ impl IrTags {
                 ))
             } else if tags.has_world_versions() {
                 Some(IrVersions::World(
-                    tags.versions().iter().map(|a| a.into()).collect(),
+                    tags.versions().map(|a| a.into()).collect(),
                 ))
             } else {
                 None

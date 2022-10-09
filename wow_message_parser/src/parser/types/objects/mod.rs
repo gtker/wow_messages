@@ -146,7 +146,7 @@ impl Objects {
         for s in self.all_containers() {
             for l in s.tags().versions() {
                 if l.is_main_version() {
-                    v.push(*l);
+                    v.push(l);
                 }
             }
         }
