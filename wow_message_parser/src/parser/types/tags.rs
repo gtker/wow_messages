@@ -474,8 +474,16 @@ impl Tags {
         &self.login_logon_versions
     }
 
+    pub(crate) fn has_logon_versions(&self) -> bool {
+        !self.logon_versions().is_empty()
+    }
+
     pub(crate) fn versions(&self) -> &[WorldVersion] {
         &self.world_versions
+    }
+
+    pub(crate) fn has_world_versions(&self) -> bool {
+        !self.versions().is_empty()
     }
 
     pub(crate) fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
@@ -540,11 +548,11 @@ impl Tags {
     }
 
     pub(crate) fn has_world_version(&self) -> bool {
-        if !self.versions().is_empty() {
-            assert!(self.logon_versions().is_empty());
+        if self.has_world_versions() {
+            assert!(!self.has_logon_versions());
             return true;
-        } else if !self.logon_versions().is_empty() {
-            assert!(self.versions().is_empty());
+        } else if self.has_logon_versions() {
+            assert!(!self.has_world_versions());
             return false;
         }
 

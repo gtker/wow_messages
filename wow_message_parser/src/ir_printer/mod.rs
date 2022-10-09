@@ -161,11 +161,11 @@ impl IrTags {
             description,
             comment,
             display: tags.display().map(|a| a.to_owned()),
-            version: if !tags.logon_versions().is_empty() {
+            version: if tags.has_logon_versions() {
                 Some(IrVersions::Login(
                     tags.logon_versions().iter().map(|a| a.into()).collect(),
                 ))
-            } else if !tags.versions().is_empty() {
+            } else if tags.has_world_versions() {
                 Some(IrVersions::World(
                     tags.versions().iter().map(|a| a.into()).collect(),
                 ))
