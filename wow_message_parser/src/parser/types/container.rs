@@ -56,7 +56,8 @@ pub(crate) struct Container {
 impl PartialEq<Self> for Container {
     fn eq(&self, other: &Self) -> bool {
         self.name == other.name
-            && self.tags().first_and_main_versions() == other.tags().first_and_main_versions()
+            && self.tags().main_versions().collect::<Vec<_>>()
+                == other.tags().main_versions().collect::<Vec<_>>()
     }
 }
 
