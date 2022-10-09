@@ -10,6 +10,8 @@ use crate::world::wrath::CMSG_CHAR_CREATE;
 use crate::world::wrath::CMSG_CHAR_ENUM;
 use crate::world::wrath::CMSG_CHAR_DELETE;
 use crate::world::wrath::CMSG_PLAYER_LOGIN;
+use crate::world::wrath::CMSG_PLAYER_LOGOUT;
+use crate::world::wrath::CMSG_LOGOUT_REQUEST;
 use crate::world::wrath::CMSG_LOGOUT_CANCEL;
 use crate::world::wrath::CMSG_MESSAGECHAT;
 use crate::world::wrath::CMSG_JOIN_CHANNEL;
@@ -94,6 +96,8 @@ pub enum ClientOpcodeMessage {
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
     CMSG_PLAYER_LOGIN(CMSG_PLAYER_LOGIN),
+    CMSG_PLAYER_LOGOUT(CMSG_PLAYER_LOGOUT),
+    CMSG_LOGOUT_REQUEST(CMSG_LOGOUT_REQUEST),
     CMSG_LOGOUT_CANCEL(CMSG_LOGOUT_CANCEL),
     CMSG_MESSAGECHAT(CMSG_MESSAGECHAT),
     CMSG_JOIN_CHANNEL(CMSG_JOIN_CHANNEL),
@@ -180,6 +184,8 @@ impl ClientOpcodeMessage {
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003D => Ok(Self::CMSG_PLAYER_LOGIN(<CMSG_PLAYER_LOGIN as crate::Message>::read_body(&mut r, body_size)?)),
+            0x004A => Ok(Self::CMSG_PLAYER_LOGOUT(<CMSG_PLAYER_LOGOUT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x004B => Ok(Self::CMSG_LOGOUT_REQUEST(<CMSG_LOGOUT_REQUEST as crate::Message>::read_body(&mut r, body_size)?)),
             0x004E => Ok(Self::CMSG_LOGOUT_CANCEL(<CMSG_LOGOUT_CANCEL as crate::Message>::read_body(&mut r, body_size)?)),
             0x0095 => Ok(Self::CMSG_MESSAGECHAT(<CMSG_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0097 => Ok(Self::CMSG_JOIN_CHANNEL(<CMSG_JOIN_CHANNEL as crate::Message>::read_body(&mut r, body_size)?)),
@@ -334,6 +340,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PLAYER_LOGOUT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LOGOUT_REQUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOGOUT_CANCEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MESSAGECHAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_JOIN_CHANNEL(c) => c.write_encrypted_client(w, e),
@@ -421,6 +429,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PLAYER_LOGOUT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LOGOUT_REQUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOGOUT_CANCEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_MESSAGECHAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_JOIN_CHANNEL(c) => c.write_unencrypted_client(w),
@@ -508,6 +518,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PLAYER_LOGOUT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MESSAGECHAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -595,6 +607,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PLAYER_LOGOUT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MESSAGECHAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
@@ -682,6 +696,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PLAYER_LOGOUT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MESSAGECHAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
@@ -769,6 +785,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PLAYER_LOGOUT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MESSAGECHAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
@@ -891,6 +909,8 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
             ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => "CMSG_CHAR_DELETE",
             ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => "CMSG_PLAYER_LOGIN",
+            ClientOpcodeMessage::CMSG_PLAYER_LOGOUT(_) => "CMSG_PLAYER_LOGOUT",
+            ClientOpcodeMessage::CMSG_LOGOUT_REQUEST(_) => "CMSG_LOGOUT_REQUEST",
             ClientOpcodeMessage::CMSG_LOGOUT_CANCEL(_) => "CMSG_LOGOUT_CANCEL",
             ClientOpcodeMessage::CMSG_MESSAGECHAT(_) => "CMSG_MESSAGECHAT",
             ClientOpcodeMessage::CMSG_JOIN_CHANNEL(_) => "CMSG_JOIN_CHANNEL",
@@ -993,6 +1013,18 @@ impl From<CMSG_CHAR_DELETE> for ClientOpcodeMessage {
 impl From<CMSG_PLAYER_LOGIN> for ClientOpcodeMessage {
     fn from(c: CMSG_PLAYER_LOGIN) -> Self {
         Self::CMSG_PLAYER_LOGIN(c)
+    }
+}
+
+impl From<CMSG_PLAYER_LOGOUT> for ClientOpcodeMessage {
+    fn from(c: CMSG_PLAYER_LOGOUT) -> Self {
+        Self::CMSG_PLAYER_LOGOUT(c)
+    }
+}
+
+impl From<CMSG_LOGOUT_REQUEST> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOGOUT_REQUEST) -> Self {
+        Self::CMSG_LOGOUT_REQUEST(c)
     }
 }
 
