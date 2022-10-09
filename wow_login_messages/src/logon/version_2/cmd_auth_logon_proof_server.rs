@@ -293,7 +293,7 @@ impl Default for CMD_AUTH_LOGON_PROOF_Server_LoginResult {
         // First enumerator without any fields
         Self::Success {
             hardware_survey_id: Default::default(),
-            server_proof: Default::default(),
+            server_proof: [Default::default(); 20],
         }
     }
 }

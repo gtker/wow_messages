@@ -302,8 +302,8 @@ impl Default for CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::Success {
-            challenge_data: Default::default(),
-            checksum_salt: Default::default(),
+            challenge_data: [Default::default(); 16],
+            checksum_salt: [Default::default(); 16],
         }
     }
 }

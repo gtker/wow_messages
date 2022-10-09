@@ -435,11 +435,11 @@ impl Default for CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::Success {
-            crc_salt: Default::default(),
+            crc_salt: [Default::default(); 16],
             generator: Default::default(),
             large_safe_prime: Default::default(),
-            salt: Default::default(),
-            server_public_key: Default::default(),
+            salt: [Default::default(); 32],
+            server_public_key: [Default::default(); 32],
         }
     }
 }

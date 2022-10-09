@@ -1,5 +1,6 @@
 use crate::parser::types::container::Container;
-use crate::rust_printer::rust_view::RustDefiner;
+use crate::parser::types::ArraySize;
+use crate::rust_printer::rust_view::{RustDefiner, RustType};
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
 use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::Writer;
@@ -343,7 +344,19 @@ fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
                     s.open_curly(format!("Self::{}", enumerator.rust_name()));
 
                     for m in enumerator.members_in_struct() {
-                        s.wln(format!("{name}: Default::default(),", name = m.name()));
+                        match m.ty() {
+                            RustType::Array { array, .. } => match array.size() {
+                                ArraySize::Fixed(v) => {
+                                    s.wln(format!(
+                                        "{name}: [Default::default(); {size}],",
+                                        name = m.name(),
+                                        size = v
+                                    ));
+                                }
+                                _ => s.wln(format!("{name}: Default::default(),", name = m.name())),
+                            },
+                            _ => s.wln(format!("{name}: Default::default(),", name = m.name())),
+                        }
                     }
 
                     s.closing_curly();

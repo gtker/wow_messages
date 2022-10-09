@@ -431,7 +431,7 @@ impl Default for CMD_AUTH_LOGON_PROOF_Server_LoginResult {
         Self::Success {
             account_flag: Default::default(),
             hardware_survey_id: Default::default(),
-            server_proof: Default::default(),
+            server_proof: [Default::default(); 20],
             unknown_flags: Default::default(),
         }
     }
