@@ -1,12 +1,13 @@
 use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
+use crate::parser::types::array::ArrayType;
 use crate::parser::types::objects::{Object, Objects};
 use crate::parser::types::sizes::{Sizes, BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{LoginVersion, Tags};
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{compare_name_and_tags, ArrayType, ObjectType};
+use crate::parser::types::{compare_name_and_tags, ObjectType};
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
     Version, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,

@@ -1,9 +1,9 @@
+use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::DefinerType;
 use crate::CONTAINER_SELF_SIZE_FIELD;
 use serde::Serialize;

@@ -1,8 +1,8 @@
+use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::{BOOL_SIZE, DATETIME_SIZE, GUID_SIZE};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
 use crate::rust_printer::{
     Writer, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
@@ -193,7 +193,11 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                     ArraySize::Variable(_) | ArraySize::Endless => {
                         // ZLib compression is not predictable, so we compress the data and count the bytes.
                         if m.tags().is_compressed() {
-                            format!("crate::util::zlib_compressed_size(&{prefix}{name})", prefix = prefix, name = m.name())
+                            format!(
+                                "crate::util::zlib_compressed_size(&{prefix}{name})",
+                                prefix = prefix,
+                                name = m.name()
+                            )
                         } else {
                             format!(
                                 "{prefix}{name}.len() * core::mem::size_of::<{ty}>()",

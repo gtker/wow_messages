@@ -1,3 +1,4 @@
+use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::conversion;
@@ -15,7 +16,7 @@ use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArraySize, ArrayType, ContainerValue};
+use crate::parser::types::ContainerValue;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
 use crate::{DefinerType, Tags};

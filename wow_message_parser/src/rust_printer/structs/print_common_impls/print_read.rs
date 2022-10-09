@@ -1,9 +1,9 @@
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Array, ArraySize, ArrayType};
 use crate::rust_printer::rust_view::{RustDefiner, RustType};
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
 use crate::rust_printer::{get_new_flag_type_name, get_new_type_name, DefinerType};
@@ -291,7 +291,8 @@ fn print_read_array(
 
                 s.wln(format!(
                     "let mut {temp_field} = Vec::with_capacity({decompressed_size} as usize);",
-                    temp_field = decompressed_name, decompressed_size = decompresssed_size_field
+                    temp_field = decompressed_name,
+                    decompressed_size = decompresssed_size_field
                 ));
                 s.wln(format!(
                     "let mut decoder = flate2::read::ZlibDecoder::new({field}.as_slice());",
@@ -304,7 +305,8 @@ fn print_read_array(
                 s.newline();
                 s.wln(format!(
                     "let mut {field} = {temp_field};",
-                    field = d.name(), temp_field = decompressed_name
+                    field = d.name(),
+                    temp_field = decompressed_name
                 ));
                 s.newline();
             }

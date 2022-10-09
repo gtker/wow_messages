@@ -1,3 +1,4 @@
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::conversion::{get_container, parsed_container_to_container};
@@ -8,7 +9,7 @@ use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Array, ArraySize, ArrayType, FloatingPointType, IntegerType};
+use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::rust_printer::{
     field_name_to_rust_name, get_new_flag_type_name, get_new_type_name, get_optional_type_name,
     DefinerType,

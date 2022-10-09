@@ -1,3 +1,4 @@
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
@@ -6,7 +7,7 @@ use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE,
     GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
-use crate::parser::types::{Array, ArraySize, ArrayType, FloatingPointType, IntegerType};
+use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::{
     Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
     SIZED_CSTRING_SMALLEST_ALLOWED,

@@ -1,3 +1,4 @@
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
@@ -5,9 +6,7 @@ use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE,
     GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
-use crate::parser::types::{
-    Array, ArraySize, ArrayType, Endianness, FloatingPointType, IntegerType,
-};
+use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
 use crate::{
     CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
     SIZED_CSTRING_SMALLEST_ALLOWED,
@@ -242,10 +241,9 @@ impl ParsedType {
                     };
 
                     match array_type {
-                        ParsedType::Integer(i) => Self::Array(Array {
-                            inner: ArrayType::Integer(i),
-                            size,
-                        }),
+                        ParsedType::Integer(i) => {
+                            Self::Array(Array::new(ArrayType::Integer(i), size))
+                        }
                         ParsedType::Identifier { s: i, .. } => {
                             if i == "String" {
                                 return Self::String {
@@ -253,15 +251,9 @@ impl ParsedType {
                                 };
                             }
 
-                            Self::Array(Array {
-                                inner: ArrayType::Complex(i),
-                                size,
-                            })
+                            Self::Array(Array::new(ArrayType::Complex(i), size))
                         }
-                        ParsedType::CString => Self::Array(Array {
-                            inner: ArrayType::CString,
-                            size,
-                        }),
+                        ParsedType::CString => Self::Array(Array::new(ArrayType::CString, size)),
                         ParsedType::SizedCString
                         | ParsedType::String { .. }
                         | ParsedType::Array(_)
@@ -270,14 +262,10 @@ impl ParsedType {
                         | ParsedType::AuraMask
                         | ParsedType::DateTime
                         | ParsedType::Bool => panic!("unsupported"),
-                        ParsedType::PackedGuid => Self::Array(Array {
-                            inner: ArrayType::PackedGuid,
-                            size,
-                        }),
-                        ParsedType::Guid => Self::Array(Array {
-                            inner: ArrayType::Guid,
-                            size,
-                        }),
+                        ParsedType::PackedGuid => {
+                            Self::Array(Array::new(ArrayType::PackedGuid, size))
+                        }
+                        ParsedType::Guid => Self::Array(Array::new(ArrayType::Guid, size)),
                     }
                 } else {
                     Self::Identifier { s: i, upcast: None }

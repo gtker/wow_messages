@@ -1,8 +1,9 @@
+use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArraySize, ArrayType, IntegerType};
+use crate::parser::types::IntegerType;
 use crate::rust_printer::Writer;
 use crate::wireshark_printer::types::{WiresharkMember, WiresharkObject};
 use crate::wireshark_printer::{

@@ -16,11 +16,11 @@ use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
 };
 use crate::parser::types::parsed::parsed_ty::ParsedType;
-use crate::parser::types::Array;
 use crate::parser::utility::parse_value;
 use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
 use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD, UNIMPLEMENTED};
+use types::array::Array;
 use types::container::ContainerType;
 use types::definer::SelfValueDefinerField;
 use types::if_statement::{Condition, Conditional};

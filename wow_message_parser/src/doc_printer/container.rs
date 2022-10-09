@@ -1,9 +1,10 @@
 use crate::doc_printer::DocWriter;
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::sizes::{BOOL_SIZE, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Array, ArraySize, ArrayType, Endianness, IntegerType, ObjectType};
+use crate::parser::types::{Endianness, IntegerType, ObjectType};
 use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{doc_printer, Container, ContainerType, DefinerType, Objects, Tags};
 use std::collections::HashMap;

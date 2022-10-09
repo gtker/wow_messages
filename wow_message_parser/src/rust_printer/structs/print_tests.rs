@@ -1,8 +1,8 @@
 use crate::file_utils::{get_import_path, major_version_to_string};
+use crate::parser::types::array::ArraySize;
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestValue};
-use crate::parser::types::ArraySize;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::rust_view::{RustEnumerator, RustMember, RustType};

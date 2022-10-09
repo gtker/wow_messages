@@ -1,5 +1,5 @@
+use crate::parser::types::array::ArraySize;
 use crate::parser::types::container::Container;
-use crate::parser::types::ArraySize;
 use crate::rust_printer::rust_view::{RustDefiner, RustType};
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
 use crate::rust_printer::structs::print_derives;

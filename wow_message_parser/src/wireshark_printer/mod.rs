@@ -2,8 +2,9 @@ mod printer;
 mod types;
 
 use crate::file_utils::overwrite_if_not_same_contents;
+use crate::parser::types::array::ArrayType;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArrayType, Endianness, IntegerType};
+use crate::parser::types::{Endianness, IntegerType};
 use crate::path_utils::wireshark_directory;
 use crate::rust_printer::Writer;
 use crate::wireshark_printer::printer::{

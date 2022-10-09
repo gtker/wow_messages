@@ -1,12 +1,13 @@
 use crate::impl_features::{get_impl_features_for_container, Feature};
 use crate::ir_printer::{IrEndianness, IrFileInfo, IrIntegerType, IrTags};
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::if_statement::{Conditional, Equation, IfStatement};
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Array, ArraySize, ArrayType, ContainerValue, FloatingPointType};
+use crate::parser::types::{ContainerValue, FloatingPointType};
 use crate::rust_printer::UpdateMaskType;
 use serde::Serialize;
 

@@ -1,9 +1,10 @@
+use crate::parser::types::array::{Array, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Array, ArrayType, ContainerValue, IntegerType};
+use crate::parser::types::{ContainerValue, IntegerType};
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
@@ -31,7 +32,9 @@ pub(crate) fn print_write_field_array(
     postfix: &str,
 ) {
     if d.tags().is_compressed() {
-        s.wln("let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());"); 
+        s.wln(
+            "let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());",
+        );
     }
 
     s.open_curly(format!(
@@ -41,14 +44,16 @@ pub(crate) fn print_write_field_array(
     ));
 
     match array.ty() {
-        ArrayType::Integer(integer_type) => {
-            s.wln(format!(
-                "{writer}.write_all(&i.to_{endian}_bytes()){postfix}?;",
-                writer = if d.tags().is_compressed() {"encoder"} else {"w"},
-                endian = integer_type.rust_endian_str(),
-                postfix = postfix,
-            ))
-        },
+        ArrayType::Integer(integer_type) => s.wln(format!(
+            "{writer}.write_all(&i.to_{endian}_bytes()){postfix}?;",
+            writer = if d.tags().is_compressed() {
+                "encoder"
+            } else {
+                "w"
+            },
+            endian = integer_type.rust_endian_str(),
+            postfix = postfix,
+        )),
         ArrayType::Complex(_) => s.wln("i.write_into_vec(w)?;"),
         ArrayType::CString => {
             s.wln(format!("w.write_all(i.as_bytes()){}?;", postfix));

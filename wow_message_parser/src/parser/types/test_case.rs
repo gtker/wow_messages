@@ -1,6 +1,7 @@
 use crate::file_info::FileInfo;
+use crate::parser::types::array::ArraySize;
 use crate::parser::types::tags::Tags;
-use crate::parser::types::{ArraySize, ContainerValue};
+use crate::parser::types::ContainerValue;
 use crate::rust_printer::UpdateMaskType;
 
 #[derive(Debug, Clone)]
