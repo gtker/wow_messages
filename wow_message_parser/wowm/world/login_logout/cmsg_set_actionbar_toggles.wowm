@@ -1,7 +1,8 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
-    /* TODO enum for this */
-    u8 action_bar;
+    u8 action_bar {
+        comment = "Emulators set PLAYER_FIELD_BYTES[2] to this unless it's 0.";
+    }
 }
 

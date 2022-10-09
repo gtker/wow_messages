@@ -1,6 +1,6 @@
 # CMSG_SET_ACTIONBAR_TOGGLES
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -25,5 +25,5 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | action_bar |  |  |
+| 0x06 | 1 / - | u8 | action_bar |  | Emulators set PLAYER_FIELD_BYTES[2](./2.md) to this unless it's 0. |
 
