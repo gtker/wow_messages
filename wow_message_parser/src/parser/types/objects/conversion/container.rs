@@ -51,7 +51,25 @@ fn parsed_type_to_type(
         ParsedType::FloatingPoint(f) => Type::FloatingPoint(f),
         ParsedType::CString => Type::CString,
         ParsedType::SizedCString => Type::SizedCString,
-        ParsedType::String { length } => Type::String { length },
+        ParsedType::String { length } => {
+            let m = p.get_field(&length);
+            let m = parsed_member_to_member(
+                p,
+                ParsedStructMember::Definition(m),
+                containers,
+                definers,
+                tags,
+            );
+            let m = match m {
+                StructMember::Definition(d) => d,
+                _ => unreachable!(),
+            };
+
+            Type::String {
+                length,
+                m: Box::new(m),
+            }
+        }
         ParsedType::Array(a) => {
             Type::Array(parsed_array_to_array(p, a, containers, definers, tags))
         }

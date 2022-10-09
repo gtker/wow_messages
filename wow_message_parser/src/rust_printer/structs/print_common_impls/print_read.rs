@@ -446,7 +446,7 @@ fn print_read_definition(
 
             s.newline();
         }
-        Type::String { length } => {
+        Type::String { length, .. } => {
             s.wln(format!(
                 "let {name} = {module}::{prefix}read_fixed_string_to_vec(r, {length} as usize){postfix}?;",
                 name = d.name(),

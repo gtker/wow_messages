@@ -273,7 +273,7 @@ impl From<&Type> for IrType {
             Type::Guid => Self::Guid,
             Type::FloatingPoint(f) => Self::FloatingPoint(f.into()),
             Type::CString => Self::CString,
-            Type::String { length } => Self::String {
+            Type::String { length, .. } => Self::String {
                 length: length.to_string(),
             },
             Type::UpdateMask => Self::UpdateMask,

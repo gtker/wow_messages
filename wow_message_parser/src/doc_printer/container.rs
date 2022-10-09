@@ -148,7 +148,7 @@ fn print_container_example_definition(
             }
             s.w(format!("{}, ", b));
         }
-        Type::String { length } => {
+        Type::String { length, .. } => {
             let length = if let Ok(length) = length.parse::<usize>() {
                 length
             } else {

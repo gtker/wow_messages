@@ -1,11 +1,11 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
-use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE,
     GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
+use crate::parser::types::struct_member::StructMemberDefinition;
 use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::{
     Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
@@ -25,6 +25,7 @@ pub(crate) enum Type {
     SizedCString,
     String {
         length: String,
+        m: Box<StructMemberDefinition>,
     },
     Array(Array),
     Enum {
@@ -47,7 +48,7 @@ impl Type {
         match self {
             Type::Integer(i) => i.str().to_string(),
             Type::CString => "CString".to_string(),
-            Type::String { length } => format!("String[{}]", length),
+            Type::String { length, .. } => format!("String[{}]", length),
             Type::Array(a) => a.str(),
             Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
             Type::Struct { e, .. } => e.name().to_string(),
@@ -101,12 +102,12 @@ impl Type {
                 SIZED_CSTRING_SMALLEST_ALLOWED,
                 SIZED_CSTRING_LARGEST_ALLOWED,
             ),
-            Type::String { length } => {
+            Type::String { length, m } => {
                 if let Ok(length) = length.parse::<usize>() {
                     sizes.inc(length, length);
                 } else {
-                    match &e.get_type_of_variable(length) {
-                        ParsedType::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
+                    match m.ty() {
+                        Type::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
                         _ => unreachable!("string lengths can only be int"),
                     }
                 }
@@ -174,7 +175,7 @@ impl Type {
             Type::Integer(i) => i.size().to_string(),
             Type::Guid => 8.to_string(),
             Type::FloatingPoint(f) => f.size().to_string(),
-            Type::String { length } => length.clone(),
+            Type::String { length, .. } => length.clone(),
             Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                 if let Some(upcast) = upcast {
                     upcast.size().to_string()
