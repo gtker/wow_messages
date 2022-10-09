@@ -120,6 +120,8 @@ pub(crate) mod cmsg_ready_for_account_data_times;
 pub use cmsg_ready_for_account_data_times::*;
 pub(crate) mod cmsg_realm_split;
 pub use cmsg_realm_split::*;
+pub(crate) mod cmsg_repop_request;
+pub use cmsg_repop_request::*;
 pub(crate) mod cmsg_request_account_data;
 pub use cmsg_request_account_data::*;
 pub(crate) mod cmsg_set_active_mover;

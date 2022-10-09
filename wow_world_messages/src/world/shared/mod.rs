@@ -35,6 +35,7 @@ pub mod cmsg_next_cinematic_camera123;
 pub mod cmsg_ping1_1223;
 pub mod cmsg_player_login123;
 pub mod cmsg_realm_split2_4_33;
+pub mod cmsg_repop_request123;
 pub mod cmsg_request_account_data1_123_3_5;
 pub mod cmsg_set_active_mover123;
 pub mod environmental_damage_type123;
