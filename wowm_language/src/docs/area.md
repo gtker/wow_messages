@@ -5499,6 +5499,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `THE_DEAD_SCAR3` | 4140 (0x102C) |  |  | The Dead Scar |
 
 Used in:
+* [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
 * [Character](character.md)
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
@@ -10136,6 +10137,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `THE_RUBY_SANCTUM` | 4987 (0x137B) |  |  | The Ruby Sanctum |
 
 Used in:
+* [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
 * [Character](character.md)
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)

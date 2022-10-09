@@ -67,6 +67,7 @@ use crate::world::wrath::CMSG_ACTIVATETAXI;
 use crate::world::wrath::CMSG_PING;
 use crate::world::wrath::CMSG_SETSHEATHED;
 use crate::world::wrath::CMSG_AUTH_SESSION;
+use crate::world::wrath::CMSG_ZONEUPDATE;
 use crate::world::wrath::CMSG_REQUEST_ACCOUNT_DATA;
 use crate::world::wrath::CMSG_UPDATE_ACCOUNT_DATA;
 use crate::world::wrath::CMSG_CHAT_IGNORED;
@@ -149,6 +150,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PING(CMSG_PING),
     CMSG_SETSHEATHED(CMSG_SETSHEATHED),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
+    CMSG_ZONEUPDATE(CMSG_ZONEUPDATE),
     CMSG_REQUEST_ACCOUNT_DATA(CMSG_REQUEST_ACCOUNT_DATA),
     CMSG_UPDATE_ACCOUNT_DATA(CMSG_UPDATE_ACCOUNT_DATA),
     CMSG_CHAT_IGNORED(CMSG_CHAT_IGNORED),
@@ -233,6 +235,7 @@ impl ClientOpcodeMessage {
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size)?)),
             0x01E0 => Ok(Self::CMSG_SETSHEATHED(<CMSG_SETSHEATHED as crate::Message>::read_body(&mut r, body_size)?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size)?)),
+            0x01F4 => Ok(Self::CMSG_ZONEUPDATE(<CMSG_ZONEUPDATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x020A => Ok(Self::CMSG_REQUEST_ACCOUNT_DATA(<CMSG_REQUEST_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x020B => Ok(Self::CMSG_UPDATE_ACCOUNT_DATA(<CMSG_UPDATE_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x0225 => Ok(Self::CMSG_CHAT_IGNORED(<CMSG_CHAT_IGNORED as crate::Message>::read_body(&mut r, body_size)?)),
@@ -385,6 +388,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SETSHEATHED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_ZONEUPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAT_IGNORED(c) => c.write_encrypted_client(w, e),
@@ -470,6 +474,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_SETSHEATHED(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
+            Self::CMSG_ZONEUPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAT_IGNORED(c) => c.write_unencrypted_client(w),
@@ -555,6 +560,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_ZONEUPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -640,6 +646,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_ZONEUPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_unencrypted_client(w).await,
@@ -725,6 +732,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_ZONEUPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_encrypted_client(w, e).await,
@@ -810,6 +818,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_ZONEUPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_unencrypted_client(w).await,
@@ -930,6 +939,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_SETSHEATHED(_) => "CMSG_SETSHEATHED",
             ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
+            ClientOpcodeMessage::CMSG_ZONEUPDATE(_) => "CMSG_ZONEUPDATE",
             ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(_) => "CMSG_REQUEST_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_UPDATE_ACCOUNT_DATA(_) => "CMSG_UPDATE_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_CHAT_IGNORED(_) => "CMSG_CHAT_IGNORED",
@@ -1315,6 +1325,12 @@ impl From<CMSG_SETSHEATHED> for ClientOpcodeMessage {
 impl From<CMSG_AUTH_SESSION> for ClientOpcodeMessage {
     fn from(c: CMSG_AUTH_SESSION) -> Self {
         Self::CMSG_AUTH_SESSION(c)
+    }
+}
+
+impl From<CMSG_ZONEUPDATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_ZONEUPDATE) -> Self {
+        Self::CMSG_ZONEUPDATE(c)
     }
 }
 

@@ -138,6 +138,8 @@ pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
 pub(crate) mod cmsg_update_account_data;
 pub use cmsg_update_account_data::*;
+pub(crate) mod cmsg_zoneupdate;
+pub use cmsg_zoneupdate::*;
 pub use crate::helper::wrath::*;
 pub(crate) mod emote;
 pub use emote::*;

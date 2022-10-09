@@ -128,6 +128,8 @@ pub(crate) mod cmsg_setsheathed;
 pub use cmsg_setsheathed::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
+pub(crate) mod cmsg_zoneupdate;
+pub use cmsg_zoneupdate::*;
 pub use crate::helper::tbc::*;
 pub(crate) mod emote;
 pub use emote::*;

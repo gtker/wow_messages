@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 ///
 /// The client does not send an accurate area. For example when going to Sen'jin Village, the client will send `DUROTAR` (0x0E) and not `SENJIN_VILLAGE` (0x16F).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm#L1):
 /// ```text
 /// cmsg CMSG_ZONEUPDATE = 0x01F4 {
 ///     Area area;
@@ -59,7 +59,7 @@ mod test {
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xF4, 0x01, 0x00, 0x00, 0x65, 0x06, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_ZONEUPDATE0() {
@@ -84,7 +84,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 9.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_ZONEUPDATE0() {
@@ -109,7 +109,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 10.
+    // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 9.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_ZONEUPDATE0() {
