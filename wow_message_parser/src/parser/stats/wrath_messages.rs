@@ -150,7 +150,7 @@ pub(crate) const DATA: [Data; 1310] = [
     Data::new("SMSG_GUILD_COMMAND_RESULT", 0x093),
     Data::new("UMSG_UPDATE_GUILD", 0x094),
     Data::new("CMSG_MESSAGECHAT", 0x095),
-    Data::new("SMSG_MESSAGECHAT", 0x096),
+    Data::with_reason("SMSG_MESSAGECHAT", 0x096, "Might depend on if Guid == 0"),
     Data::new("CMSG_JOIN_CHANNEL", 0x097),
     Data::new("CMSG_LEAVE_CHANNEL", 0x098),
     Data::new("SMSG_CHANNEL_NOTIFY", 0x099),
