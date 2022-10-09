@@ -271,7 +271,7 @@ impl Tags {
     }
 
     pub(crate) fn push(&mut self, t: Tag) {
-        self.append_or_insert(t.key(), t.value());
+        self.insert(t.key(), t.value());
     }
 
     pub(crate) fn append(&mut self, mut t: Tags) {
@@ -316,7 +316,7 @@ impl Tags {
         }
     }
 
-    pub(crate) fn append_or_insert(&mut self, key: &str, value: &str) {
+    pub(crate) fn insert(&mut self, key: &str, value: &str) {
         if key == LOGIN_VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {

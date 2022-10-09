@@ -545,7 +545,7 @@ fn parse_object_key_values(t: &mut Option<Pair<Rule>>, tags: &Tags) -> Tags {
                 let key = kv.next().unwrap().as_str();
                 let value = kv.next().unwrap().as_str();
 
-                v.append_or_insert(key, value);
+                v.insert(key, value);
             }
             v.append(tags.clone());
             v
