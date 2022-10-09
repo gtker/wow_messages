@@ -268,12 +268,6 @@ impl ParsedContainerValue {
     }
 }
 
-impl Display for ParsedContainerValue {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.identifier)
-    }
-}
-
 impl From<&str> for ParsedContainerValue {
     fn from(s: &str) -> Self {
         Self {
