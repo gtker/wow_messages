@@ -238,7 +238,7 @@ impl LoginVersion {
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
 pub(crate) struct Tags {
-    login_logon_versions: BTreeSet<LoginVersion>,
+    login_versions: BTreeSet<LoginVersion>,
     world_versions: BTreeSet<WorldVersion>,
     description: Option<TagString>,
     compressed: Option<String>,
@@ -260,7 +260,7 @@ impl Tags {
     pub(crate) fn new_with_version(version: Version) -> Self {
         let mut s = Self::new();
         match version {
-            Version::Login(l) => s.login_logon_versions.insert(l),
+            Version::Login(l) => s.login_versions.insert(l),
             Version::World(l) => s.world_versions.insert(l),
         };
         s
@@ -271,8 +271,7 @@ impl Tags {
     }
 
     pub(crate) fn append(&mut self, mut t: Tags) {
-        self.login_logon_versions
-            .append(&mut t.login_logon_versions);
+        self.login_versions.append(&mut t.login_versions);
 
         self.world_versions.append(&mut t.world_versions);
 
@@ -313,11 +312,11 @@ impl Tags {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
                     if self.world_versions.get(&WorldVersion::All).is_none() {
-                        self.login_logon_versions.insert(LoginVersion::Specific(v));
+                        self.login_versions.insert(LoginVersion::Specific(v));
                     }
                 } else if w == "*" {
-                    self.login_logon_versions.clear();
-                    self.login_logon_versions.insert(LoginVersion::All);
+                    self.login_versions.clear();
+                    self.login_versions.insert(LoginVersion::All);
                 } else {
                     panic!("invalid value passed as login_logon_versions: '{}'", w);
                 }
@@ -462,7 +461,7 @@ impl Tags {
     }
 
     pub(crate) fn logon_versions(&self) -> impl Iterator<Item = LoginVersion> {
-        self.login_logon_versions.clone().into_iter()
+        self.login_versions.clone().into_iter()
     }
 
     pub(crate) fn has_logon_versions(&self) -> bool {
@@ -576,11 +575,11 @@ impl Tags {
     }
 
     pub(crate) fn has_login_version(&self) -> bool {
-        if !self.login_logon_versions.is_empty() {
+        if !self.login_versions.is_empty() {
             assert!(self.world_versions.is_empty());
             return true;
         } else if !self.world_versions.is_empty() {
-            assert!(self.login_logon_versions.is_empty());
+            assert!(self.login_versions.is_empty());
             return false;
         }
 
