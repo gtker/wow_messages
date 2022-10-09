@@ -72,10 +72,9 @@ impl ParsedType {
             ParsedType::PackedGuid => {
                 sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _)
             }
-            ParsedType::UpdateMask => sizes.inc(
-                UPDATE_MASK_MIN_SIZE as usize,
-                update_mask_max(e.tags().first_version().as_major_world()) as usize,
-            ),
+            ParsedType::UpdateMask => {
+                sizes.inc(UPDATE_MASK_MIN_SIZE as usize, update_mask_max() as usize)
+            }
             ParsedType::AuraMask => {
                 sizes.inc(AURA_MASK_MIN_SIZE as usize, AURA_MASK_MAX_SIZE as usize)
             }

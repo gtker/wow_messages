@@ -1,6 +1,5 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
-use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE,
     GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
@@ -95,7 +94,7 @@ impl Type {
     }
 
     // NOTE: Definers used in if statements count if statement contents
-    pub(crate) fn sizes_parsed(&self, e: &ParsedContainer) -> Sizes {
+    pub(crate) fn sizes_parsed(&self) -> Sizes {
         let mut sizes = Sizes::new();
 
         match self {
@@ -105,10 +104,9 @@ impl Type {
             Type::DateTime => sizes.inc_both(DATETIME_SIZE.into()),
             Type::FloatingPoint(i) => sizes.inc_both(i.size() as usize),
             Type::PackedGuid => sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _),
-            Type::UpdateMask => sizes.inc(
-                UPDATE_MASK_MIN_SIZE as usize,
-                update_mask_max(e.tags().first_version().as_major_world()) as usize,
-            ),
+            Type::UpdateMask => {
+                sizes.inc(UPDATE_MASK_MIN_SIZE as usize, update_mask_max() as usize)
+            }
             Type::AuraMask => sizes.inc(AURA_MASK_MIN_SIZE as usize, AURA_MASK_MAX_SIZE as usize),
             Type::CString => sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED),
             Type::SizedCString => sizes.inc(

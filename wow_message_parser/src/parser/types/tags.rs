@@ -508,16 +508,6 @@ impl Tags {
         v
     }
 
-    pub(crate) fn first_version(&self) -> Version {
-        if let Some(v) = self.logon_versions().next() {
-            Version::Login(v)
-        } else if let Some(v) = self.versions().next() {
-            Version::World(v)
-        } else {
-            panic!("{:#?}", &self);
-        }
-    }
-
     pub(crate) fn first_and_main_versions(&self) -> (Version, Vec<Version>) {
         let mut v = self.main_versions();
         let first = v.next().unwrap();

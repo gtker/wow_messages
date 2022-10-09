@@ -1,4 +1,4 @@
-use crate::rust_printer::{tbc_fields, vanilla_fields, wrath_fields, MajorWorldVersion};
+use crate::rust_printer::wrath_fields;
 use std::ops::AddAssign;
 
 #[derive(Debug, Copy, Clone, Default, Ord, PartialOrd, Eq, PartialEq)]
@@ -10,12 +10,8 @@ pub(crate) struct Sizes {
 pub(crate) const AURA_MASK_MAX_SIZE: u8 = 4 + 32 * 4;
 pub(crate) const AURA_MASK_MIN_SIZE: u8 = 4;
 
-pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> u16 {
-    let data = match version {
-        MajorWorldVersion::Vanilla => vanilla_fields::FIELDS.as_slice(),
-        MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS.as_slice(),
-        MajorWorldVersion::Wrath => wrath_fields::FIELDS.as_slice(),
-    };
+pub(crate) const fn update_mask_max() -> u16 {
+    let data = wrath_fields::FIELDS.as_slice();
 
     let mut i = 0;
     let mut biggest = &data[i];
