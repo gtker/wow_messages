@@ -520,7 +520,7 @@ pub(crate) fn parse_enum(
 
     let mut extra_key_values = t.next();
     let mut extras = parse_object_key_values(&mut extra_key_values, tags);
-    extras.append(tags);
+    extras.append(tags.clone());
 
     ParsedDefiner::new(
         ident.as_str(),
@@ -547,7 +547,7 @@ fn parse_object_key_values(t: &mut Option<Pair<Rule>>, tags: &Tags) -> Tags {
 
                 v.append_or_insert(key, value);
             }
-            v.append(tags);
+            v.append(tags.clone());
             v
         }
     }

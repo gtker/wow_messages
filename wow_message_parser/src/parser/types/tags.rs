@@ -238,13 +238,12 @@ impl LoginVersion {
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
 pub(crate) struct Tags {
-    inner: Vec<Tag>,
     login_logon_versions: Vec<LoginVersion>,
     world_versions: Vec<WorldVersion>,
     description: Option<TagString>,
     compressed: Option<String>,
     comment: Option<TagString>,
-    display: String,
+    display: Option<String>,
     paste_versions: BTreeSet<WorldVersion>,
 
     is_test: Option<bool>,
@@ -275,9 +274,45 @@ impl Tags {
         self.append_or_insert(t.key(), t.value());
     }
 
-    pub(crate) fn append(&mut self, t: &Tags) {
-        for tag in &t.inner {
-            self.append_or_insert(tag.key(), tag.value());
+    pub(crate) fn append(&mut self, mut t: Tags) {
+        self.login_logon_versions
+            .append(&mut t.login_logon_versions);
+        self.login_logon_versions.sort();
+        self.login_logon_versions.dedup();
+
+        self.world_versions.append(&mut t.world_versions);
+        self.world_versions.sort();
+        self.world_versions.dedup();
+
+        if let Some(v) = t.description {
+            self.description = Some(v);
+        }
+
+        if let Some(v) = t.compressed {
+            self.compressed = Some(v);
+        }
+
+        if let Some(v) = t.comment {
+            self.comment = Some(v);
+        }
+
+        if let Some(v) = t.display {
+            self.display = Some(v);
+        }
+
+        self.paste_versions.append(&mut t.paste_versions);
+
+        if let Some(v) = t.is_test {
+            self.is_test = Some(v)
+        }
+        if let Some(v) = t.skip {
+            self.skip = Some(v)
+        }
+        if let Some(v) = t.unimplemented {
+            self.unimplemented = Some(v)
+        }
+        if let Some(v) = t.rust_base_ty {
+            self.rust_base_ty = Some(v)
         }
     }
 
@@ -362,7 +397,7 @@ impl Tags {
                 self.comment = Some(t);
             }
         } else if key == DISPLAY {
-            self.display = value.to_string();
+            self.display = Some(value.to_string());
         } else if key == TEST_STR {
             self.is_test = Some(value.eq("true"));
         } else if key == SKIP_STR {
@@ -372,16 +407,6 @@ impl Tags {
         } else if key == RUST_BASE_TYPE {
             self.rust_base_ty = Some(value.eq("true"));
         }
-
-        for v in self.inner.iter_mut() {
-            if v.key == key {
-                v.value += " ";
-                v.value += value;
-                return;
-            }
-        }
-
-        self.inner.push(Tag::new(key, value));
     }
 
     pub(crate) fn paste_versions(&self) -> Vec<WorldVersion> {
@@ -586,10 +611,10 @@ impl Tags {
     }
 
     pub(crate) fn display(&self) -> Option<&str> {
-        if self.display.is_empty() {
-            None
+        if let Some(v) = &self.display {
+            Some(v.as_str())
         } else {
-            Some(&self.display)
+            None
         }
     }
 
