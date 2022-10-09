@@ -205,13 +205,10 @@ impl IntegerType {
 impl From<&str> for IntegerType {
     fn from(s: &str) -> Self {
         match s {
-            "u8" => IntegerType::U8,
-            "Bool" => IntegerType::U8,
+            "u8" | "Bool" => IntegerType::U8,
             "u16" => IntegerType::U16(Endianness::Little),
             "u16_be" => IntegerType::U16(Endianness::Big),
-            "u32" => IntegerType::U32(Endianness::Little),
-            "Spell" => IntegerType::U32(Endianness::Little),
-            "Item" => IntegerType::U32(Endianness::Little),
+            "u32" | "Spell" | "Item" => IntegerType::U32(Endianness::Little),
             "u32_be" => IntegerType::U32(Endianness::Big),
             "u64" => IntegerType::U64(Endianness::Little),
             "u64_be" => IntegerType::U64(Endianness::Big),
