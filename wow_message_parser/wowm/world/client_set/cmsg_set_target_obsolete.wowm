@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 cmsg CMSG_SET_TARGET_OBSOLETE = 0x013E {
     Guid guid;

@@ -130,6 +130,8 @@ pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
 pub(crate) mod cmsg_set_selection;
 pub use cmsg_set_selection::*;
+pub(crate) mod cmsg_set_target_obsolete;
+pub use cmsg_set_target_obsolete::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
 pub(crate) mod cmsg_update_account_data;
