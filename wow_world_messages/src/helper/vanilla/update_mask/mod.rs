@@ -139,10 +139,11 @@ mod test {
             1, // UNIT_FIELD_BYTES[3] // Power (Rage)
         ];
 
-        let update_mask = UpdatePlayer::new()
+        let update_mask = UpdatePlayer::builder()
             .set_object_GUID(Guid::new(4))
             .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
-            .set_unit_HEALTH(100);
+            .set_unit_HEALTH(100)
+            .finalize();
         let update_mask = UpdateMask::Player(update_mask);
 
         let mut v = Vec::with_capacity(update_mask.size());
@@ -160,7 +161,7 @@ mod test {
             4, 0, 0, 0, 0, 0, 0, 0, // OBJECT_FIELD_GUID (4) (notice unpacked u64)
         ];
 
-        let mut update_mask = UpdatePlayer::new()
+        let mut update_mask = UpdatePlayer::builder()
             .set_object_GUID(Guid::new(4))
             .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
             .set_object_SCALE_X(1.0)
@@ -169,10 +170,11 @@ mod test {
             .set_unit_LEVEL(1)
             .set_unit_FACTIONTEMPLATE(1)
             .set_unit_DISPLAYID(50)
-            .set_unit_NATIVEDISPLAYID(50);
+            .set_unit_NATIVEDISPLAYID(50)
+            .finalize();
         update_mask.header_reset();
 
-        let update_mask = update_mask.set_object_GUID(4.into());
+        update_mask.set_object_GUID(4.into());
 
         let update_mask = UpdateMask::Player(update_mask);
 
@@ -192,7 +194,7 @@ mod test {
             // No value blocks
         ];
 
-        let mut update_mask = UpdatePlayer::new()
+        let mut update_mask = UpdatePlayer::builder()
             .set_object_GUID(Guid::new(4))
             .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
             .set_object_SCALE_X(1.0)
@@ -201,7 +203,9 @@ mod test {
             .set_unit_LEVEL(1)
             .set_unit_FACTIONTEMPLATE(1)
             .set_unit_DISPLAYID(50)
-            .set_unit_NATIVEDISPLAYID(50);
+            .set_unit_NATIVEDISPLAYID(50)
+            .finalize();
+
         update_mask.header_reset();
         let update_mask = UpdateMask::Player(update_mask);
 
@@ -233,7 +237,7 @@ mod test {
             50, 0, 0, 0, // UNIT_FIELD_NATIVEDISPLAYID (50, Human Female)
         ];
 
-        let update_mask = UpdatePlayer::new()
+        let update_mask = UpdatePlayer::builder()
             .set_object_GUID(Guid::new(4))
             .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
             .set_object_SCALE_X(1.0)
@@ -242,7 +246,8 @@ mod test {
             .set_unit_LEVEL(1)
             .set_unit_FACTIONTEMPLATE(1)
             .set_unit_DISPLAYID(50)
-            .set_unit_NATIVEDISPLAYID(50);
+            .set_unit_NATIVEDISPLAYID(50)
+            .finalize();
         let update_mask = UpdateMask::Player(update_mask);
 
         let mut v = Vec::with_capacity(update_mask.size());

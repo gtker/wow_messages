@@ -488,19 +488,19 @@ fn print_value(
             const DYNAMICOBJECT: u64 = 0x0040;
             const CORPSE: u64 = 0x0080;
             if (ty & CONTAINER) != 0 {
-                s.wln_no_indent("UpdateMask::Container(UpdateContainer::new()");
+                s.wln_no_indent("UpdateMask::Container(UpdateContainer::builder()");
             } else if (ty & ITEM) != 0 {
-                s.wln_no_indent("UpdateMask::Item(UpdateItem::new()");
+                s.wln_no_indent("UpdateMask::Item(UpdateItem::builder()");
             } else if (ty & PLAYER) != 0 {
-                s.wln_no_indent("UpdateMask::Player(UpdatePlayer::new()");
+                s.wln_no_indent("UpdateMask::Player(UpdatePlayer::builder()");
             } else if (ty & UNIT) != 0 {
-                s.wln_no_indent("UpdateMask::Unit(UpdateUnit::new()");
+                s.wln_no_indent("UpdateMask::Unit(UpdateUnit::builder()");
             } else if (ty & GAMEOBJECT) != 0 {
-                s.wln_no_indent("UpdateMask::GameObject(UpdateGameObject::new()");
+                s.wln_no_indent("UpdateMask::GameObject(UpdateGameObject::builder()");
             } else if (ty & DYNAMICOBJECT) != 0 {
-                s.wln_no_indent("UpdateMask::DynamicObject(UpdateDynamicObject::new()");
+                s.wln_no_indent("UpdateMask::DynamicObject(UpdateDynamicObject::builder()");
             } else if (ty & CORPSE) != 0 {
-                s.wln_no_indent("UpdateMask::Corpse(UpdateCorpse::new()");
+                s.wln_no_indent("UpdateMask::Corpse(UpdateCorpse::builder()");
             } else {
                 unreachable!()
             }
@@ -579,6 +579,8 @@ fn print_value(
                     )),
                 }
             }
+
+            s.wln(".finalize()");
 
             s.dec_indent();
             s.wln("),")
