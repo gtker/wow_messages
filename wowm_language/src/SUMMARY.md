@@ -35,6 +35,7 @@
 - [SecurityFlag](docs/securityflag.md)
 
 # World Definers
+- [ActionBarBehavior](docs/actionbarbehavior.md)
 - [ActivateTaxiReply](docs/activatetaxireply.md)
 - [AddonType](docs/addontype.md)
 - [AiReaction](docs/aireaction.md)
@@ -184,6 +185,7 @@
 - [Version](docs/version.md)
 
 # Login Containers
+- [ActionButton](docs/actionbutton.md)
 - [Addon](docs/addon.md)
 - [AuctionListItem](docs/auctionlistitem.md)
 - [AuraLog](docs/auralog.md)

@@ -286,6 +286,8 @@ pub(crate) mod sheath_state;
 pub use sheath_state::*;
 pub(crate) mod smsg_account_data_times;
 pub use smsg_account_data_times::*;
+pub(crate) mod smsg_action_buttons;
+pub use smsg_action_buttons::*;
 pub(crate) mod smsg_ai_reaction;
 pub use smsg_ai_reaction::*;
 pub(crate) mod smsg_attackstart;

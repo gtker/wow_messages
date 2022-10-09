@@ -1,6 +1,37 @@
-#tag_all versions "1.12";
-
 smsg SMSG_ACTION_BUTTONS = 0x0129 {
     u32[120] data;
+} {
+    versions = "1";
+}
+
+smsg SMSG_ACTION_BUTTONS = 0x0129 {
+    u32[132] data;
+} {
+    versions = "2.3 2.4";
+}
+
+struct ActionButton {
+    u16 action;
+    u8 action_type;
+    u8 misc;
+} {
+    versions = "3.3.5";
+}
+
+enum ActionBarBehavior : u8 {
+    INITIAL = 0;
+    SET = 1;
+    CLEAR = 2;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_ACTION_BUTTONS = 0x0129 {
+    ActionBarBehavior behavior;
+    if (behavior != CLEAR) {
+        ActionButton[136] data;
+    }
+} {
+    versions = "3.3.5";
 }
 
