@@ -73,7 +73,11 @@ pub(crate) fn path_to_fileinfo(path: &Path) -> String {
     let ws = workspace_directory().canonicalize().unwrap();
     let path = path.canonicalize().unwrap();
 
-    path.strip_prefix(ws).unwrap().to_str().unwrap().into()
+    path.strip_prefix(ws)
+        .unwrap()
+        .to_str()
+        .unwrap()
+        .replace('\\', "/")
 }
 
 pub(crate) fn get_world_version_file_path(version: &WorldVersion) -> PathBuf {
