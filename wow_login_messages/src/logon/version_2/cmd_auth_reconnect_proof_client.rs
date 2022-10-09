@@ -210,7 +210,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
 }
 
 #[cfg(test)]
-mod test2 {
+mod testversion_2 {
     use super::CMD_AUTH_RECONNECT_PROOF_Client;
     use super::*;
     use super::super::*;
@@ -322,7 +322,7 @@ mod test2 {
 }
 
 #[cfg(test)]
-mod test8 {
+mod testversion_8 {
     use super::CMD_AUTH_RECONNECT_PROOF_Client;
     use super::*;
     use super::super::*;

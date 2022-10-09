@@ -182,13 +182,7 @@ impl ModFiles {
     }
 
     pub(crate) fn add_login_file(&mut self, name: &str, version: &LoginVersion) {
-        let e = match version {
-            LoginVersion::Specific(v) => {
-                format!("version_{}", v)
-            }
-            LoginVersion::All => "all".to_string(),
-        };
-        let e = (e, SubmoduleLocation::PubMod);
+        let e = (version.as_module_case(), SubmoduleLocation::PubMod);
 
         let top_level_dir = login_directory();
 
@@ -369,12 +363,7 @@ pub(crate) fn get_world_version_path(version: &WorldVersion) -> String {
 }
 
 pub(crate) fn get_login_logon_version_path(version: &LoginVersion) -> String {
-    match version {
-        LoginVersion::Specific(v) => {
-            format!("crate::logon::version_{}", v)
-        }
-        LoginVersion::All => "crate::logon::all".to_string(),
-    }
+    format!("crate::logon::{}", version.as_module_case())
 }
 
 pub(crate) fn get_world_shared_path(ty_name: &str, versions: &[WorldVersion]) -> String {

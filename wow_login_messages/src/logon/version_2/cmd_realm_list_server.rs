@@ -237,7 +237,7 @@ impl CMD_REALM_LIST_Server {
 }
 
 #[cfg(test)]
-mod test2 {
+mod testversion_2 {
     use super::CMD_REALM_LIST_Server;
     use crate::logon::version_2::Population;
     use crate::logon::version_2::Realm;
@@ -487,7 +487,7 @@ mod test2 {
 }
 
 #[cfg(test)]
-mod test3 {
+mod testversion_3 {
     use super::CMD_REALM_LIST_Server;
     use crate::logon::version_2::Population;
     use crate::logon::version_2::Realm;

@@ -383,7 +383,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
 }
 
 #[cfg(test)]
-mod test2 {
+mod testversion_2 {
     use super::CMD_AUTH_LOGON_PROOF_Server;
     use crate::logon::version_2::LoginResult;
     use super::*;
@@ -487,7 +487,7 @@ mod test2 {
 }
 
 #[cfg(test)]
-mod test3 {
+mod testversion_3 {
     use super::CMD_AUTH_LOGON_PROOF_Server;
     use crate::logon::version_2::LoginResult;
     use super::*;

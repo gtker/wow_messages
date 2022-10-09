@@ -230,7 +230,7 @@ impl Display for LoginVersion {
 impl LoginVersion {
     pub(crate) fn as_module_case(&self) -> String {
         match self {
-            LoginVersion::Specific(_) => self.to_string(),
+            LoginVersion::Specific(v) => format!("version_{}", v),
             LoginVersion::All => "all".to_string(),
         }
     }

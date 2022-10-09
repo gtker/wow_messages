@@ -85,11 +85,7 @@ pub(crate) fn get_world_version_file_path(version: &WorldVersion) -> PathBuf {
 }
 
 pub(crate) fn get_login_version_file_path(version: &LoginVersion) -> PathBuf {
-    let p = login_directory();
-    match version {
-        LoginVersion::Specific(v) => p.join(format!("version_{}", v)),
-        LoginVersion::All => p.join("all"),
-    }
+    login_directory().join(version.as_module_case())
 }
 
 pub(crate) fn get_base_filepath(object_name: &str, version: &WorldVersion) -> PathBuf {
