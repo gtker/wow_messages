@@ -184,7 +184,7 @@ fn print_container_example_definition(
                         let value = value.value().original();
                         format!("{} {} ({})", comment, name, value)
                     } else {
-                        "UNABLE TO FIND DEFINER VALUE PROBABLY FROM OTHER MISSING IMPLS".to_string()
+                        panic!()
                     }
                 }
                 DefinerType::Flag => {
