@@ -312,7 +312,9 @@ impl Tags {
         if key == LOGIN_VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
-                    self.login_logon_versions.insert(LoginVersion::Specific(v));
+                    if self.world_versions.get(&WorldVersion::All).is_none() {
+                        self.login_logon_versions.insert(LoginVersion::Specific(v));
+                    }
                 } else if w == "*" {
                     self.login_logon_versions.clear();
                     self.login_logon_versions.insert(LoginVersion::All);
@@ -323,8 +325,10 @@ impl Tags {
         } else if key == VERSIONS {
             for w in value.split_whitespace() {
                 if let Ok(v) = w.parse::<u8>() {
-                    self.world_versions.insert(WorldVersion::Major(v));
-                    continue;
+                    if self.world_versions.get(&WorldVersion::All).is_none() {
+                        self.world_versions.insert(WorldVersion::Major(v));
+                        continue;
+                    }
                 } else if w == "*" {
                     self.world_versions.clear();
                     self.world_versions.insert(WorldVersion::All);
@@ -332,12 +336,14 @@ impl Tags {
                 }
 
                 let d: Vec<u8> = w.split('.').map(|a| a.parse::<u8>().unwrap()).collect();
-                self.world_versions.insert(match d.len() {
-                    2 => WorldVersion::Minor(d[0], d[1]),
-                    3 => WorldVersion::Patch(d[0], d[1], d[2]),
-                    4 => WorldVersion::Exact(d[0], d[1], d[2], u16::from(d[3])),
-                    _ => panic!("incorrect world version string"),
-                });
+                if self.world_versions.get(&WorldVersion::All).is_none() {
+                    self.world_versions.insert(match d.len() {
+                        2 => WorldVersion::Minor(d[0], d[1]),
+                        3 => WorldVersion::Patch(d[0], d[1], d[2]),
+                        4 => WorldVersion::Exact(d[0], d[1], d[2], u16::from(d[3])),
+                        _ => panic!("incorrect world version string"),
+                    });
+                }
             }
         } else if key == PASTE_VERSIONS {
             for w in value.split_whitespace() {
@@ -345,8 +351,10 @@ impl Tags {
                     self.paste_versions.insert(WorldVersion::Major(v));
                     continue;
                 } else if w == "*" {
-                    self.paste_versions.insert(WorldVersion::All);
-                    continue;
+                    panic!(
+                        "Got all version for paste_versions, this is not valid, {:#?}",
+                        self
+                    );
                 }
 
                 let d: Vec<u8> = w.split('.').map(|a| a.parse::<u8>().unwrap()).collect();
@@ -356,9 +364,6 @@ impl Tags {
                     4 => WorldVersion::Exact(d[0], d[1], d[2], u16::from(d[3])),
                     _ => panic!("incorrect world version string"),
                 });
-            }
-            if self.paste_versions.contains(&WorldVersion::All) {
-                self.paste_versions.insert(WorldVersion::All);
             }
         } else if key == DESCRIPTION {
             if let Some(desc) = &mut self.description {
