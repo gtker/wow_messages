@@ -332,8 +332,12 @@ fn print_container_example_member(
                 }
             }
         }
-        StructMember::OptionalStatement(_) => {
-            unimplemented!("UNIMPLEMENTED_DOC_OPTIONAL");
+        StructMember::OptionalStatement(optional) => {
+            s.wln(format!("// Optional {}", optional.name()));
+
+            for m in optional.members() {
+                print_container_example_member(s, e, m, bytes, values, o, tags, prefix);
+            }
         }
     }
 }
