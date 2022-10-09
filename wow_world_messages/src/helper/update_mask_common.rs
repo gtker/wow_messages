@@ -85,7 +85,38 @@ pub(crate) fn read_inner(
 }
 
 macro_rules! update_item {
-    ($name:ident, $type_value:expr) => {
+    ($name:ident, $builder_name:ident, $type_value:expr) => {
+        #[derive(Debug, Hash, Clone, Default, PartialEq, Eq)]
+        pub struct $builder_name {
+            header: Vec<u32>,
+            values: BTreeMap<u16, u32>,
+        }
+
+        impl $builder_name {
+            pub fn finalize(self) -> $name {
+                $name::from_inners(self.header, self.values)
+            }
+
+            pub(crate) fn header_set(&mut self, bit: u16) {
+                $crate::helper::update_mask_common::header_set(&mut self.header, bit);
+            }
+
+            pub fn new() -> Self {
+                const OBJECT_FIELD_TYPE: u16 = 2;
+
+                let mut header = vec![];
+                let mut values = BTreeMap::new();
+
+                $crate::helper::update_mask_common::header_set(&mut header, OBJECT_FIELD_TYPE);
+                values.insert(
+                    OBJECT_FIELD_TYPE,
+                    $crate::helper::update_mask_common::OBJECT | $type_value,
+                );
+
+                Self { header, values }
+            }
+        }
+
         #[derive(Debug, Hash, Clone, Default, PartialEq, Eq)]
         pub struct $name {
             header: Vec<u32>,
@@ -106,6 +137,10 @@ macro_rules! update_item {
                 );
 
                 Self { header, values }
+            }
+
+            pub fn builder() -> $builder_name {
+                $builder_name::new()
             }
 
             fn from_inners(header: Vec<u32>, values: BTreeMap<u16, u32>) -> Self {
