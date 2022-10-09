@@ -1,6 +1,6 @@
 # CMSG_TUTORIAL_FLAG
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -25,5 +25,5 @@ CMSG have a header of 6 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 4 / Little | u32 | tutorial_flag |  |  |
+| 0x06 | 4 / Little | u32 | tutorial_flag |  | arcemu indexes into the tutorials by dividing by 32 and modulo 32. |
 

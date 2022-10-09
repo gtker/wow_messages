@@ -46,6 +46,8 @@ pub mod cmsg_set_active_mover123;
 pub mod cmsg_set_selection123;
 pub mod cmsg_set_target_obsolete1_1223;
 pub mod cmsg_setsheathed123;
+pub mod cmsg_tutorial_clear123;
+pub mod cmsg_tutorial_flag123;
 pub mod environmental_damage_type123;
 pub mod inventory_type1_1223;
 pub mod language11_12;

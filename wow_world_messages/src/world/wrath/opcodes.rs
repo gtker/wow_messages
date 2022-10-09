@@ -58,6 +58,8 @@ use crate::world::wrath::CMSG_FORCE_MOVE_UNROOT_ACK;
 use crate::world::wrath::MSG_MOVE_HEARTBEAT_Client;
 use crate::world::wrath::CMSG_NEXT_CINEMATIC_CAMERA;
 use crate::world::wrath::CMSG_COMPLETE_CINEMATIC;
+use crate::world::wrath::CMSG_TUTORIAL_FLAG;
+use crate::world::wrath::CMSG_TUTORIAL_CLEAR;
 use crate::world::wrath::CMSG_EMOTE;
 use crate::world::wrath::CMSG_TEXT_EMOTE;
 use crate::world::wrath::CMSG_SET_ACTION_BUTTON;
@@ -146,6 +148,8 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT_Client),
     CMSG_NEXT_CINEMATIC_CAMERA(CMSG_NEXT_CINEMATIC_CAMERA),
     CMSG_COMPLETE_CINEMATIC(CMSG_COMPLETE_CINEMATIC),
+    CMSG_TUTORIAL_FLAG(CMSG_TUTORIAL_FLAG),
+    CMSG_TUTORIAL_CLEAR(CMSG_TUTORIAL_CLEAR),
     CMSG_EMOTE(CMSG_EMOTE),
     CMSG_TEXT_EMOTE(CMSG_TEXT_EMOTE),
     CMSG_SET_ACTION_BUTTON(CMSG_SET_ACTION_BUTTON),
@@ -236,6 +240,8 @@ impl ClientOpcodeMessage {
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FB => Ok(Self::CMSG_NEXT_CINEMATIC_CAMERA(<CMSG_NEXT_CINEMATIC_CAMERA as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FC => Ok(Self::CMSG_COMPLETE_CINEMATIC(<CMSG_COMPLETE_CINEMATIC as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00FE => Ok(Self::CMSG_TUTORIAL_FLAG(<CMSG_TUTORIAL_FLAG as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00FF => Ok(Self::CMSG_TUTORIAL_CLEAR(<CMSG_TUTORIAL_CLEAR as crate::Message>::read_body(&mut r, body_size)?)),
             0x0102 => Ok(Self::CMSG_EMOTE(<CMSG_EMOTE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0104 => Ok(Self::CMSG_TEXT_EMOTE(<CMSG_TEXT_EMOTE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0128 => Ok(Self::CMSG_SET_ACTION_BUTTON(<CMSG_SET_ACTION_BUTTON as crate::Message>::read_body(&mut r, body_size)?)),
@@ -394,6 +400,8 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_TUTORIAL_FLAG(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_TUTORIAL_CLEAR(c) => c.write_encrypted_client(w, e),
             Self::CMSG_EMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TEXT_EMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTION_BUTTON(c) => c.write_encrypted_client(w, e),
@@ -485,6 +493,8 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_unencrypted_client(w),
+            Self::CMSG_TUTORIAL_FLAG(c) => c.write_unencrypted_client(w),
+            Self::CMSG_TUTORIAL_CLEAR(c) => c.write_unencrypted_client(w),
             Self::CMSG_EMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_TEXT_EMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTION_BUTTON(c) => c.write_unencrypted_client(w),
@@ -576,6 +586,8 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TUTORIAL_FLAG(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TUTORIAL_CLEAR(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -667,6 +679,8 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TUTORIAL_FLAG(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TUTORIAL_CLEAR(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.tokio_write_unencrypted_client(w).await,
@@ -758,6 +772,8 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TUTORIAL_FLAG(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TUTORIAL_CLEAR(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.astd_write_encrypted_client(w, e).await,
@@ -849,6 +865,8 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TUTORIAL_FLAG(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TUTORIAL_CLEAR(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.astd_write_unencrypted_client(w).await,
@@ -975,6 +993,8 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT_Client",
             ClientOpcodeMessage::CMSG_NEXT_CINEMATIC_CAMERA(_) => "CMSG_NEXT_CINEMATIC_CAMERA",
             ClientOpcodeMessage::CMSG_COMPLETE_CINEMATIC(_) => "CMSG_COMPLETE_CINEMATIC",
+            ClientOpcodeMessage::CMSG_TUTORIAL_FLAG(_) => "CMSG_TUTORIAL_FLAG",
+            ClientOpcodeMessage::CMSG_TUTORIAL_CLEAR(_) => "CMSG_TUTORIAL_CLEAR",
             ClientOpcodeMessage::CMSG_EMOTE(_) => "CMSG_EMOTE",
             ClientOpcodeMessage::CMSG_TEXT_EMOTE(_) => "CMSG_TEXT_EMOTE",
             ClientOpcodeMessage::CMSG_SET_ACTION_BUTTON(_) => "CMSG_SET_ACTION_BUTTON",
@@ -1321,6 +1341,18 @@ impl From<CMSG_NEXT_CINEMATIC_CAMERA> for ClientOpcodeMessage {
 impl From<CMSG_COMPLETE_CINEMATIC> for ClientOpcodeMessage {
     fn from(c: CMSG_COMPLETE_CINEMATIC) -> Self {
         Self::CMSG_COMPLETE_CINEMATIC(c)
+    }
+}
+
+impl From<CMSG_TUTORIAL_FLAG> for ClientOpcodeMessage {
+    fn from(c: CMSG_TUTORIAL_FLAG) -> Self {
+        Self::CMSG_TUTORIAL_FLAG(c)
+    }
+}
+
+impl From<CMSG_TUTORIAL_CLEAR> for ClientOpcodeMessage {
+    fn from(c: CMSG_TUTORIAL_CLEAR) -> Self {
+        Self::CMSG_TUTORIAL_CLEAR(c)
     }
 }
 
