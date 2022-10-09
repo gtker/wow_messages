@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::tbc::TransportInfo;
+use crate::world::tbc::Vector3d;
 use crate::world::tbc::MovementFlags;
 use crate::world::tbc::SplineFlag;
-use crate::world::tbc::TransportInfo;
 use crate::world::tbc::UpdateFlag;
-use crate::world::tbc::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]

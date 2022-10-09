@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::MovementFlags;
 use crate::world::tbc::TransportInfo;
 use crate::world::tbc::Vector3d;
+use crate::world::tbc::MovementFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]

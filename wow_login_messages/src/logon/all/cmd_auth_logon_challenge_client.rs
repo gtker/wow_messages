@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
+use crate::logon::all::Version;
 use crate::logon::all::Locale;
 use crate::logon::all::Os;
 use crate::logon::all::Platform;
-use crate::logon::all::Version;
 use crate::ClientMessage;
 use std::io::{Write, Read};
 

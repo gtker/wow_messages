@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::BillingPlanFlags;
 use crate::world::wrath::Expansion;
 use crate::world::wrath::WorldResult;
+use crate::world::wrath::BillingPlanFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

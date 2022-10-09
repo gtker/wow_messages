@@ -1,13 +1,13 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::Area;
-use crate::world::vanilla::CharacterFlags;
 use crate::world::vanilla::CharacterGear;
+use crate::world::vanilla::Vector3d;
+use crate::world::vanilla::Area;
 use crate::world::vanilla::Class;
 use crate::world::vanilla::Gender;
 use crate::world::vanilla::Map;
 use crate::world::vanilla::Race;
-use crate::world::vanilla::Vector3d;
+use crate::world::vanilla::CharacterFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]

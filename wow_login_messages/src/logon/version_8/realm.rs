@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
+use crate::logon::all::Version;
 use crate::logon::version_2::Population;
 use crate::logon::version_2::RealmCategory;
-use crate::logon::version_8::RealmFlag;
 use crate::logon::version_2::RealmType;
-use crate::logon::all::Version;
+use crate::logon::version_8::RealmFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

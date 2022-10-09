@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Map;
 use crate::world::wrath::Vector3d;
+use crate::world::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]

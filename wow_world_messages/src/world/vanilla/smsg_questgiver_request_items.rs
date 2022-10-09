@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::QuestCompletable;
 use crate::world::vanilla::QuestItemRequirement;
+use crate::world::vanilla::QuestCompletable;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

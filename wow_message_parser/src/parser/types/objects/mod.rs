@@ -281,7 +281,7 @@ impl Objects {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Ord, PartialOrd, PartialEq, Eq)]
 #[allow(clippy::large_enum_variant)]
 pub(crate) enum Object {
     Container(Container),

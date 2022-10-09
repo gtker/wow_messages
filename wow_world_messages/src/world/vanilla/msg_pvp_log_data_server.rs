@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::BattlegroundEndStatus;
 use crate::world::vanilla::BattlegroundPlayer;
+use crate::world::vanilla::BattlegroundEndStatus;
 use crate::world::vanilla::BattlegroundWinner;
 use std::io::{Write, Read};
 

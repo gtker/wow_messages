@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::CastFlags;
 use crate::world::vanilla::SpellCastTargets;
 use crate::world::vanilla::SpellMiss;
+use crate::world::vanilla::CastFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]

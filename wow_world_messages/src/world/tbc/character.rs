@@ -1,12 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::Area;
 use crate::world::tbc::CharacterGear;
+use crate::world::tbc::Vector3d;
+use crate::world::tbc::Area;
 use crate::world::tbc::Class;
 use crate::world::tbc::Gender;
 use crate::world::tbc::Map;
 use crate::world::tbc::Race;
-use crate::world::tbc::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]

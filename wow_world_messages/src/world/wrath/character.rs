@@ -1,12 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Area;
 use crate::world::wrath::CharacterGear;
+use crate::world::wrath::Vector3d;
+use crate::world::wrath::Area;
 use crate::world::wrath::Class;
 use crate::world::wrath::Gender;
 use crate::world::wrath::Map;
 use crate::world::wrath::Race;
-use crate::world::wrath::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]

@@ -18,7 +18,7 @@ mod print_tests;
 pub(crate) fn print_struct(e: &Container, o: &Objects, version: Version) -> Writer {
     let mut s = Writer::new(&get_import_path(version));
 
-    print_includes(&mut s, e, o, version);
+    print_includes(&mut s, e, version);
 
     print_declaration(&mut s, e, o);
 
@@ -35,7 +35,7 @@ pub(crate) fn print_struct(e: &Container, o: &Objects, version: Version) -> Writ
     s
 }
 
-fn print_includes(s: &mut Writer, e: &Container, o: &Objects, version: Version) {
+fn print_includes(s: &mut Writer, e: &Container, version: Version) {
     s.wln("use std::convert::{TryFrom, TryInto};");
 
     if e.contains_guid_or_packed_guid() {
@@ -56,22 +56,18 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects, version: Version) 
         s.wln(format!("use {}::UpdateMask;", import_path));
     }
 
-    for name in e.get_types_needing_import() {
+    for c in e.get_objects_needing_import() {
         let version = if !version.is_world() {
-            // Login messages need to lookup the real object and not the reexports
-            o.get_tags_of_object(name.as_str(), e.tags())
-                .import_version()
+            // Login messages need to use the real object and not the reexports
+            c.tags().import_version()
         } else {
             version
         };
 
         let module_name = if e.tags().has_world_version() && e.tags().shared() {
-            let versions: Vec<WorldVersion> = o
-                .get_tags_of_object(name.as_str(), e.tags())
-                .main_versions()
-                .map(|a| a.as_world())
-                .collect();
-            get_world_shared_path(name.as_str(), &versions)
+            let versions: Vec<WorldVersion> =
+                c.tags().main_versions().map(|a| a.as_world()).collect();
+            get_world_shared_path(c.name(), &versions)
         } else {
             get_import_path(version)
         };
@@ -79,7 +75,7 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects, version: Version) 
         s.wln(format!(
             "use {module_name}::{name};",
             module_name = module_name,
-            name = name,
+            name = c.name(),
         ));
     }
 

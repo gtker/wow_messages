@@ -1,11 +1,11 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::vanilla::ItemDamageType;
+use crate::world::vanilla::ItemSpells;
+use crate::world::vanilla::ItemStat;
 use crate::world::vanilla::Area;
 use crate::world::vanilla::InventoryType;
 use crate::world::vanilla::ItemClass;
-use crate::world::vanilla::ItemDamageType;
 use crate::world::vanilla::ItemQuality;
-use crate::world::vanilla::ItemSpells;
-use crate::world::vanilla::ItemStat;
 use crate::world::vanilla::Map;
 use std::io::{Write, Read};
 

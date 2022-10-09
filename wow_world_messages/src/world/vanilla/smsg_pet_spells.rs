@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::vanilla::PetSpellCooldown;
 use crate::world::vanilla::PetCommandState;
 use crate::world::vanilla::PetReactState;
-use crate::world::vanilla::PetSpellCooldown;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

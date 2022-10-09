@@ -14,8 +14,9 @@ use crate::rust_printer::{
     LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
     WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
-use crate::CONTAINER_SELF_SIZE_FIELD;
+use crate::{Object, CONTAINER_SELF_SIZE_FIELD};
 use std::cmp::Ordering;
+use std::collections::BTreeSet;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
 pub(crate) enum ContainerType {
@@ -500,8 +501,30 @@ impl Container {
         v
     }
 
-    pub(crate) fn get_types_needing_import(&self) -> Vec<String> {
-        self.get_complex_types()
+    pub(crate) fn get_objects_needing_import(&self) -> BTreeSet<Object> {
+        let mut v = BTreeSet::new();
+
+        for d in self.all_definitions() {
+            match d.struct_type() {
+                Type::Array(a) => {
+                    if let ArrayType::Struct(c) = a.ty() {
+                        v.insert(Object::Container(*c.clone()));
+                    }
+                }
+                Type::Enum { e, .. } => {
+                    v.insert(Object::Enum(e.clone()));
+                }
+                Type::Flag { e, .. } => {
+                    v.insert(Object::Flag(e.clone()));
+                }
+                Type::Struct { e } => {
+                    v.insert(Object::Container(e.clone()));
+                }
+                _ => {}
+            }
+        }
+
+        v
     }
 
     fn get_complex_types(&self) -> Vec<String> {

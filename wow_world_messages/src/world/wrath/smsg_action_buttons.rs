@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ActionBarBehavior;
 use crate::world::wrath::ActionButton;
+use crate::world::wrath::ActionBarBehavior;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

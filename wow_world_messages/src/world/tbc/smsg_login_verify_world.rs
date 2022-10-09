@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Map;
 use crate::world::tbc::Vector3d;
+use crate::world::tbc::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]

@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::vanilla::TransportInfo;
+use crate::world::vanilla::Vector3d;
 use crate::world::vanilla::MovementFlags;
 use crate::world::vanilla::SplineFlag;
-use crate::world::vanilla::TransportInfo;
 use crate::world::vanilla::UpdateFlag;
-use crate::world::vanilla::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]

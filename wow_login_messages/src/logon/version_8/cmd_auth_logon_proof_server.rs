@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::logon::version_8::AccountFlag;
 use crate::logon::version_8::LoginResult;
+use crate::logon::version_8::AccountFlag;
 use crate::ServerMessage;
 use std::io::{Write, Read};
 

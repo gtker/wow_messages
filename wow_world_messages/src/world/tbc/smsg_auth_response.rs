@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::BillingPlanFlags;
 use crate::world::tbc::Expansion;
 use crate::world::tbc::WorldResult;
+use crate::world::tbc::BillingPlanFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

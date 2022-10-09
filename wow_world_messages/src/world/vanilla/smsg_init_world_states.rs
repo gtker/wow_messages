@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::vanilla::WorldState;
 use crate::world::vanilla::Area;
 use crate::world::vanilla::Map;
-use crate::world::vanilla::WorldState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

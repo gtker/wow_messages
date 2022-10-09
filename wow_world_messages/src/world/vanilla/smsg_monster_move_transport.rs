@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MonsterMoveType;
 use crate::world::vanilla::Vector3d;
+use crate::world::vanilla::MonsterMoveType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
