@@ -61,7 +61,8 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
         // initial_spells: InitialSpell[spell_count]
         let mut initial_spells = Vec::with_capacity(spell_count as usize);
         for i in 0..spell_count {
-            initial_spells.push(InitialSpell::read(r)?);
+            let o = InitialSpell::read(r)?;
+            initial_spells.push(o);
         }
 
         // cooldown_count: u16
@@ -70,7 +71,8 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
         // cooldowns: CooldownSpell[cooldown_count]
         let mut cooldowns = Vec::with_capacity(cooldown_count as usize);
         for i in 0..cooldown_count {
-            cooldowns.push(CooldownSpell::read(r)?);
+            let o = CooldownSpell::read(r)?;
+            cooldowns.push(o);
         }
 
         Ok(Self {

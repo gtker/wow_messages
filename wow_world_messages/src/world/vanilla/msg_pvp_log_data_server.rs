@@ -75,7 +75,8 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
         // players: BattlegroundPlayer[amount_of_players]
         let mut players = Vec::with_capacity(amount_of_players as usize);
         for i in 0..amount_of_players {
-            players.push(BattlegroundPlayer::read(r)?);
+            let o = BattlegroundPlayer::read(r)?;
+            players.push(o);
         }
 
         Ok(Self {

@@ -47,7 +47,8 @@ impl crate::Message for SMSG_WHO {
         // players: WhoPlayer[listed_players]
         let mut players = Vec::with_capacity(listed_players as usize);
         for i in 0..listed_players {
-            players.push(WhoPlayer::read(r)?);
+            let o = WhoPlayer::read(r)?;
+            players.push(o);
         }
 
         Ok(Self {

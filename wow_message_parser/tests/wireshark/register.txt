@@ -52,9 +52,27 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_addon_info,
-            { "Addon Info", "woww.addon.info",
-                FT_BYTES, BASE_NONE, NULL, 0,
+        { &hf_woww_addon_crc,
+            { "Addon Crc", "woww.addon.crc",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_addon_extra_crc,
+            { "Addon Extra Crc", "woww.addon.extra.crc",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_addon_has_signature,
+            { "Addon Has Signature", "woww.addon.has.signature",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_addon_name,
+            { "Addon Name", "woww.addon.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },

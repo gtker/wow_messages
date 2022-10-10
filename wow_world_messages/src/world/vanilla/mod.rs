@@ -2,6 +2,8 @@ pub(crate) mod activate_taxi_reply;
 pub use activate_taxi_reply::*;
 pub(crate) mod addon;
 pub use addon::*;
+pub(crate) mod addon_info;
+pub use addon_info::*;
 pub(crate) mod addon_type;
 pub use addon_type::*;
 pub(crate) mod ai_reaction;

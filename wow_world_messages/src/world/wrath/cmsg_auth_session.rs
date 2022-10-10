@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 ///
 /// This message is never encrypted.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:101`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L101):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:104`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L104):
 /// ```text
 /// cmsg CMSG_AUTH_SESSION = 0x01ED {
 ///     u32 client_build;
@@ -133,6 +133,8 @@ impl crate::Message for CMSG_AUTH_SESSION {
         let decompressed_addon_info_size = crate::util::read_u32_le(r)?;
 
         // addon_info: u8[-]
+        let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
+
         let mut current_size = {
             4 // client_build: u32
             + 4 // login_server_id: u32
@@ -148,15 +150,9 @@ impl crate::Message for CMSG_AUTH_SESSION {
         };
         let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
-            addon_info.push(crate::util::read_u8_le(r)?);
+            addon_info.push(crate::util::read_u8_le(decoder)?);
             current_size += 1;
         }
-
-        let mut addon_info_temp = Vec::with_capacity(decompressed_addon_info_size as usize);
-        let mut decoder = flate2::read::ZlibDecoder::new(addon_info.as_slice());
-        decoder.read_to_end(&mut addon_info_temp)?;
-
-        let mut addon_info = addon_info_temp;
 
         Ok(Self {
             client_build,

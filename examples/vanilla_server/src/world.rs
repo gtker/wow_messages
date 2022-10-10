@@ -60,6 +60,22 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .await
     .unwrap();
 
+    let mut addons = Vec::new();
+    for addon in c.addon_info {
+        addons.push(Addon {
+            addon_type: AddonType::Blizzard,
+            info_block: Addon_InfoBlock::Unavailable,
+            url_info: Addon_UrlInfo::Unavailable,
+        })
+    }
+
+    SMSG_ADDON_INFO {
+        addons
+    }
+    .tokio_write_encrypted_server(&mut stream, encryption.encrypter())
+    .await
+    .unwrap();
+
     loop {
         let opcode = ClientOpcodeMessage::tokio_read_encrypted(&mut stream, encryption.decrypter())
             .await

@@ -187,6 +187,7 @@
 # Login Containers
 - [ActionButton](docs/actionbutton.md)
 - [Addon](docs/addon.md)
+- [AddonInfo](docs/addoninfo.md)
 - [AuctionListItem](docs/auctionlistitem.md)
 - [AuraLog](docs/auralog.md)
 - [BattlegroundPlayer](docs/battlegroundplayer.md)

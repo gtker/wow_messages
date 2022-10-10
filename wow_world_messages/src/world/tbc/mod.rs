@@ -1,3 +1,5 @@
+pub(crate) mod addon_info;
+pub use addon_info::*;
 pub(crate) mod ai_reaction;
 pub use ai_reaction::*;
 pub(crate) mod area;

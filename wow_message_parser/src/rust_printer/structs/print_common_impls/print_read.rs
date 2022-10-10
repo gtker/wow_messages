@@ -170,47 +170,30 @@ fn print_read_array(
             ));
             s.open_curly(format!("for i in 0..{length}", length = m.name()));
 
-            print_array_ty(s, array, d, prefix, postfix);
+            print_array_ty(s, array, d, prefix, "r", postfix);
 
             s.closing_curly_newline()
         }
         ArraySize::Endless => {
+            if d.tags().is_compressed() {
+                s.wln(format!(
+                    "let mut decoder = &mut flate2::read::ZlibDecoder::new(r);"
+                ));
+                s.newline();
+            }
+
             print_size_before_variable(s, e, d.name());
+
+            let reader = if d.tags().is_compressed() {"decoder"} else {"r"};
 
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity(body_size as usize - current_size);",
                 name = d.name()
             ));
             s.body("while current_size < (body_size as usize)", |s| {
-                print_array_ty(s, array, d, prefix, postfix);
-                s.wln("current_size += 1;");
+                print_array_ty(s, array, d, prefix, reader, postfix);
             });
             s.newline();
-
-            if let Some(decompresssed_size_field) = d.tags().compressed() {
-                let decompressed_name = format!("{}_temp", d.name());
-
-                s.wln(format!(
-                    "let mut {temp_field} = Vec::with_capacity({decompressed_size} as usize);",
-                    temp_field = decompressed_name,
-                    decompressed_size = decompresssed_size_field
-                ));
-                s.wln(format!(
-                    "let mut decoder = flate2::read::ZlibDecoder::new({field}.as_slice());",
-                    field = d.name()
-                ));
-                s.wln(format!(
-                    "decoder.read_to_end(&mut {temp_field})?;",
-                    temp_field = decompressed_name
-                ));
-                s.newline();
-                s.wln(format!(
-                    "let mut {field} = {temp_field};",
-                    field = d.name(),
-                    temp_field = decompressed_name
-                ));
-                s.newline();
-            }
         }
     }
 }
@@ -220,27 +203,49 @@ fn print_array_ty(
     array: &Array,
     d: &StructMemberDefinition,
     prefix: &str,
+    reader: &str,
     postfix: &str,
 ) {
     match array.ty() {
         ArrayType::Integer(integer_type) => {
             s.wln(format!(
-                "{name}.push({module}::{prefix}read_{int_type}_{endian}(r){postfix}?);",
+                "{name}.push({module}::{prefix}read_{int_type}_{endian}({reader}){postfix}?);",
                 name = d.name(),
                 module = UTILITY_PATH,
                 int_type = integer_type.rust_str(),
                 endian = integer_type.rust_endian_str(),
                 prefix = prefix,
+                reader = reader,
                 postfix = postfix,
             ));
+
+            if array.size() == ArraySize::Endless {
+                s.wln("current_size += 1;")
+            }
         }
         ArrayType::Struct(c) => {
             s.wln(format!(
-                "{name}.push({type_name}::{prefix}read(r){postfix}?);",
-                name = d.name(),
+                "let o = {type_name}::{prefix}read({reader}){postfix}?;",
                 type_name = c.name(),
                 prefix = prefix,
+                reader = reader,
                 postfix = postfix,
+            ));
+
+            if array.size() == ArraySize::Endless {
+                if c.is_constant_sized() {
+                    s.wln(format!(
+                        "current_size += std::mem::size_of::<{type_name}>();",
+                        type_name = c.name()
+                    ));
+                } else {
+                    s.wln("current_size += o.size();");
+                }
+            }
+
+            s.wln(format!(
+                "{name}.push(o);",
+                name = d.name(),
             ));
         }
         ArrayType::CString => {
@@ -253,6 +258,9 @@ fn print_array_ty(
                 "{name}.push(String::from_utf8(s)?);",
                 name = d.name()
             ));
+            if array.size() == ArraySize::Endless {
+                s.wln("current_size += 1;")
+            }
         }
         ArrayType::Guid => {
             s.wln(format!(
@@ -261,6 +269,9 @@ fn print_array_ty(
                 prefix = prefix,
                 postfix = postfix,
             ));
+            if array.size() == ArraySize::Endless {
+                s.wln("current_size += 1;")
+            }
         }
         ArrayType::PackedGuid => {
             s.wln(format!(
@@ -269,6 +280,9 @@ fn print_array_ty(
                 prefix = prefix,
                 postfix = postfix,
             ));
+            if array.size() == ArraySize::Endless {
+                s.wln("current_size += 1;")
+            }
         }
     }
 }
