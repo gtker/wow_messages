@@ -61,8 +61,7 @@ impl crate::Message for SMSG_CHANNEL_LIST {
         // members: ChannelMember[amount_of_members]
         let mut members = Vec::with_capacity(amount_of_members as usize);
         for i in 0..amount_of_members {
-            let o = ChannelMember::read(r)?;
-            members.push(o);
+            members.push(ChannelMember::read(r)?);
         }
 
         Ok(Self {

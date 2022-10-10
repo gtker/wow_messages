@@ -59,8 +59,7 @@ impl crate::Message for SMSG_ADDON_INFO {
         // addons: Addon[number_of_addons]
         let mut addons = Vec::with_capacity(number_of_addons as usize);
         for i in 0..number_of_addons {
-            let o = Addon::read(r)?;
-            addons.push(o);
+            addons.push(Addon::read(r)?);
         }
 
         // number_of_banned_addons: u32

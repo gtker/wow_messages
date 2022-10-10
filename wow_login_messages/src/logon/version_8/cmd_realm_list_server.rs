@@ -87,8 +87,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
         // realms: Realm[number_of_realms]
         let mut realms = Vec::with_capacity(number_of_realms as usize);
         for i in 0..number_of_realms {
-            let o = Realm::read(r)?;
-            realms.push(o);
+            realms.push(Realm::read(r)?);
         }
 
         // footer_padding: u16
@@ -133,8 +132,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
             // realms: Realm[number_of_realms]
             let mut realms = Vec::with_capacity(number_of_realms as usize);
             for i in 0..number_of_realms {
-                let o = Realm::tokio_read(r).await?;
-                realms.push(o);
+                realms.push(Realm::tokio_read(r).await?);
             }
 
             // footer_padding: u16
@@ -193,8 +191,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
             // realms: Realm[number_of_realms]
             let mut realms = Vec::with_capacity(number_of_realms as usize);
             for i in 0..number_of_realms {
-                let o = Realm::astd_read(r).await?;
-                realms.push(o);
+                realms.push(Realm::astd_read(r).await?);
             }
 
             // footer_padding: u16

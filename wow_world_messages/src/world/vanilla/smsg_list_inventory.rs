@@ -48,8 +48,7 @@ impl crate::Message for SMSG_LIST_INVENTORY {
         // items: ListInventoryItem[amount_of_items]
         let mut items = Vec::with_capacity(amount_of_items as usize);
         for i in 0..amount_of_items {
-            let o = ListInventoryItem::read(r)?;
-            items.push(o);
+            items.push(ListInventoryItem::read(r)?);
         }
 
         Ok(Self {

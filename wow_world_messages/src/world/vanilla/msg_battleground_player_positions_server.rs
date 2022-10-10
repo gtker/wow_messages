@@ -64,8 +64,7 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
         let mut flag_carriers = Vec::with_capacity(amount_of_flag_carriers as usize);
         for i in 0..amount_of_flag_carriers {
-            let o = BattlegroundPlayerPosition::read(r)?;
-            flag_carriers.push(o);
+            flag_carriers.push(BattlegroundPlayerPosition::read(r)?);
         }
 
         Ok(Self {

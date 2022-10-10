@@ -56,8 +56,7 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Server {
         // pets: StabledPet[amount_of_pets]
         let mut pets = Vec::with_capacity(amount_of_pets as usize);
         for i in 0..amount_of_pets {
-            let o = StabledPet::read(r)?;
-            pets.push(o);
+            pets.push(StabledPet::read(r)?);
         }
 
         Ok(Self {

@@ -469,8 +469,7 @@ impl MovementBlock {
                 // nodes: Vector3d[amount_of_nodes]
                 let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
                 for i in 0..amount_of_nodes {
-                    let o = Vector3d::read(r)?;
-                    nodes.push(o);
+                    nodes.push(Vector3d::read(r)?);
                 }
 
                 // final_node: Vector3d

@@ -35,9 +35,8 @@ impl crate::Message for SMSG_ADDON_INFO {
         };
         let mut addons = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
-            let o = Addon::read(r)?;
-            current_size += o.size();
-            addons.push(o);
+            addons.push(Addon::read(r)?);
+            current_size += 1;
         }
 
         Ok(Self {
