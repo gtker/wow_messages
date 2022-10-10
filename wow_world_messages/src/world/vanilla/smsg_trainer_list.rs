@@ -65,7 +65,8 @@ impl crate::Message for SMSG_TRAINER_LIST {
         // spells: TrainerSpell[amount_of_spells]
         let mut spells = Vec::with_capacity(amount_of_spells as usize);
         for i in 0..amount_of_spells {
-            spells.push(TrainerSpell::read(r)?);
+            let o = TrainerSpell::read(r)?;
+            spells.push(o);
         }
 
         // greeting: CString

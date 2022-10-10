@@ -10,6 +10,7 @@ use crate::{doc_printer, Container, ContainerType, DefinerType, Objects, Tags};
 use std::collections::HashMap;
 use std::convert::TryInto;
 use std::fmt::Write;
+use std::io::Read;
 use std::slice::Iter;
 
 pub(crate) fn print_docs_for_container(e: &Container, o: &Objects) -> DocWriter {
@@ -53,6 +54,23 @@ fn print_container_example_array(
             size.0
         }
     };
+
+    // Edge case: Endless arrays of complex types do not have always have a fixed type, so we just loop until we run out of bytes to read instead.
+    match array.ty() {
+        ArrayType::Struct(c) if array.size() == ArraySize::Endless => {
+            let mut i = 0;
+            while bytes.len() > 0 {
+                for m in c.members() {
+                    let prefix = format!("{}[{}].{}", prefix, i, c.name());
+                    print_container_example_member(s, c, m, bytes, values, o, tags, &prefix);
+                }
+                i = i + 1;
+            }
+
+            return
+        }
+        _ => {}
+    }
 
     for i in 0..size {
         match array.ty() {
@@ -263,7 +281,15 @@ fn print_container_example_member(
 ) {
     match m {
         StructMember::Definition(d) => {
-            print_container_example_definition(s, d, bytes, values, o, tags, prefix);
+            if d.tags().is_compressed() {
+                let mut decoded_bytes = Vec::new();
+                let mut decoder = flate2::read::ZlibDecoder::new(bytes.as_slice());
+                decoder.read_to_end(&mut decoded_bytes).expect("Failed to decode ZLib compressed field.");
+
+                print_container_example_definition(s, d, &mut decoded_bytes.iter(), values, o, tags, prefix);
+            } else {
+                print_container_example_definition(s, d, bytes, values, o, tags, prefix);
+            }
         }
         StructMember::IfStatement(statement) => {
             let enum_value = *values.get(statement.name()).unwrap();

@@ -95,7 +95,8 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         // damages: DamageInfo[amount_of_damages]
         let mut damages = Vec::with_capacity(amount_of_damages as usize);
         for i in 0..amount_of_damages {
-            damages.push(DamageInfo::read(r)?);
+            let o = DamageInfo::read(r)?;
+            damages.push(o);
         }
 
         // damage_state: u32

@@ -43,18 +43,33 @@ pub(crate) fn print_write_field_array(
         prefix = variable_prefix
     ));
 
+    let writer = if d.tags().is_compressed() {
+        "encoder"
+    } else {
+        "w"
+    };
+
     match array.ty() {
         ArrayType::Integer(integer_type) => s.wln(format!(
             "{writer}.write_all(&i.to_{endian}_bytes()){postfix}?;",
-            writer = if d.tags().is_compressed() {
-                "encoder"
-            } else {
-                "w"
-            },
+            writer = writer,
             endian = integer_type.rust_endian_str(),
             postfix = postfix,
         )),
-        ArrayType::Struct(_) => s.wln("i.write_into_vec(w)?;"),
+        ArrayType::Struct(_) => {
+            // Complex types use "write_into_vec", which means we can't write directly
+            // into our ZLibEncoder. Instead, we write to an intermediary Vec first.
+            if d.tags().is_compressed() {
+                s.wln("let mut vec = Vec::new();");
+                s.wln("i.write_into_vec(&mut vec)?;");
+                s.wln(format!(
+                    "{writer}.write_all(vec.as_slice());",
+                    writer = writer
+                ));
+            } else {
+                s.wln("i.write_into_vec(w)?;");
+            }
+        }
         ArrayType::CString => {
             s.wln(format!("w.write_all(i.as_bytes()){}?;", postfix));
             s.wln(format!("w.write_all(&[0]){}?;", postfix));

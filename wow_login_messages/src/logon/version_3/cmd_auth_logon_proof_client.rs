@@ -106,7 +106,8 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
         // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
         for i in 0..number_of_telemetry_keys {
-            telemetry_keys.push(TelemetryKey::read(r)?);
+            let o = TelemetryKey::read(r)?;
+            telemetry_keys.push(o);
         }
 
         // security_flag: SecurityFlag
@@ -176,7 +177,8 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
             let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
             for i in 0..number_of_telemetry_keys {
-                telemetry_keys.push(TelemetryKey::tokio_read(r).await?);
+                let o = TelemetryKey::tokio_read(r).await?;
+                telemetry_keys.push(o);
             }
 
             // security_flag: SecurityFlag
@@ -260,7 +262,8 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
             let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
             for i in 0..number_of_telemetry_keys {
-                telemetry_keys.push(TelemetryKey::astd_read(r).await?);
+                let o = TelemetryKey::astd_read(r).await?;
+                telemetry_keys.push(o);
             }
 
             // security_flag: SecurityFlag

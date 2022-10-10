@@ -114,7 +114,8 @@ impl crate::Message for SMSG_SPELL_GO {
         // misses: SpellMiss[amount_of_misses]
         let mut misses = Vec::with_capacity(amount_of_misses as usize);
         for i in 0..amount_of_misses {
-            misses.push(SpellMiss::read(r)?);
+            let o = SpellMiss::read(r)?;
+            misses.push(o);
         }
 
         // targets: SpellCastTargets

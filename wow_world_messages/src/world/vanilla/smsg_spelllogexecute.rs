@@ -56,7 +56,8 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
         // logs: SpellLog[amount_of_effects]
         let mut logs = Vec::with_capacity(amount_of_effects as usize);
         for i in 0..amount_of_effects {
-            logs.push(SpellLog::read(r)?);
+            let o = SpellLog::read(r)?;
+            logs.push(o);
         }
 
         Ok(Self {

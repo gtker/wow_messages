@@ -39,7 +39,8 @@ impl crate::Message for SMSG_FRIEND_LIST {
         // friends: Friend[amount_of_friends]
         let mut friends = Vec::with_capacity(amount_of_friends as usize);
         for i in 0..amount_of_friends {
-            friends.push(Friend::read(r)?);
+            let o = Friend::read(r)?;
+            friends.push(o);
         }
 
         Ok(Self {

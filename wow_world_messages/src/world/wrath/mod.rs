@@ -4,6 +4,8 @@ pub(crate) mod action_button;
 pub use action_button::*;
 pub(crate) mod addon;
 pub use addon::*;
+pub(crate) mod addon_info;
+pub use addon_info::*;
 pub(crate) mod ai_reaction;
 pub use ai_reaction::*;
 pub(crate) mod area;

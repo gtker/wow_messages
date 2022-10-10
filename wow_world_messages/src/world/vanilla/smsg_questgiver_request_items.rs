@@ -145,7 +145,8 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         // required_items: QuestItemRequirement[amount_of_required_items]
         let mut required_items = Vec::with_capacity(amount_of_required_items as usize);
         for i in 0..amount_of_required_items {
-            required_items.push(QuestItemRequirement::read(r)?);
+            let o = QuestItemRequirement::read(r)?;
+            required_items.push(o);
         }
 
         // unknown1: u32
