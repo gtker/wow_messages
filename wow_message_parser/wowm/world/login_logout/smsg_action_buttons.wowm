@@ -29,7 +29,7 @@ enum ActionBarBehavior : u8 {
 smsg SMSG_ACTION_BUTTONS = 0x0129 {
     ActionBarBehavior behavior;
     if (behavior != CLEAR) {
-        ActionButton[136] data;
+        ActionButton[144] data;
     }
 } {
     versions = "3.3.5";

@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 /// smsg SMSG_ACTION_BUTTONS = 0x0129 {
 ///     ActionBarBehavior behavior;
 ///     if (behavior != CLEAR) {
-///         ActionButton[136] data;
+///         ActionButton[144] data;
 ///     }
 /// }
 /// ```
@@ -32,7 +32,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
             SMSG_ACTION_BUTTONS_ActionBarBehavior::Initial {
                 data,
             } => {
-                // data: ActionButton[136]
+                // data: ActionButton[144]
                 for i in data.iter() {
                     i.write_into_vec(w)?;
                 }
@@ -41,7 +41,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
             SMSG_ACTION_BUTTONS_ActionBarBehavior::Set {
                 data,
             } => {
-                // data: ActionButton[136]
+                // data: ActionButton[144]
                 for i in data.iter() {
                     i.write_into_vec(w)?;
                 }
@@ -58,8 +58,8 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 
         let behavior_if = match behavior {
             ActionBarBehavior::Initial => {
-                // data: ActionButton[136]
-                let mut data = [ActionButton::default(); 136];
+                // data: ActionButton[144]
+                let mut data = [ActionButton::default(); 144];
                 for i in data.iter_mut() {
                     *i = ActionButton::read(r)?;
                 }
@@ -69,8 +69,8 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
                 }
             }
             ActionBarBehavior::Set => {
-                // data: ActionButton[136]
-                let mut data = [ActionButton::default(); 136];
+                // data: ActionButton[144]
+                let mut data = [ActionButton::default(); 144];
                 for i in data.iter_mut() {
                     *i = ActionButton::read(r)?;
                 }
@@ -100,10 +100,10 @@ impl SMSG_ACTION_BUTTONS {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum SMSG_ACTION_BUTTONS_ActionBarBehavior {
     Initial {
-        data: [ActionButton; 136],
+        data: [ActionButton; 144],
     },
     Set {
-        data: [ActionButton; 136],
+        data: [ActionButton; 144],
     },
     Clear,
 }
@@ -112,7 +112,7 @@ impl Default for SMSG_ACTION_BUTTONS_ActionBarBehavior {
     fn default() -> Self {
         // First enumerator without any fields
         Self::Initial {
-            data: [Default::default(); 136],
+            data: [Default::default(); 144],
         }
     }
 }
@@ -135,13 +135,13 @@ impl SMSG_ACTION_BUTTONS_ActionBarBehavior {
                 data,
             } => {
                 1
-                + 136 * 4 // data: ActionButton[136]
+                + 144 * 4 // data: ActionButton[144]
             }
             Self::Set {
                 data,
             } => {
                 1
-                + 136 * 4 // data: ActionButton[136]
+                + 144 * 4 // data: ActionButton[144]
             }
             Self::Clear => {
                 1
