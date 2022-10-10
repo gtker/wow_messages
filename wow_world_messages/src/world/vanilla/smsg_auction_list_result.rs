@@ -44,8 +44,7 @@ impl crate::Message for SMSG_AUCTION_LIST_RESULT {
         // auctions: AuctionListItem[count]
         let mut auctions = Vec::with_capacity(count as usize);
         for i in 0..count {
-            let o = AuctionListItem::read(r)?;
-            auctions.push(o);
+            auctions.push(AuctionListItem::read(r)?);
         }
 
         // total_amount_of_auctions: u32

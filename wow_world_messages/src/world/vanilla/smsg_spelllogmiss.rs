@@ -66,8 +66,7 @@ impl crate::Message for SMSG_SPELLLOGMISS {
         // targets: SpellMiss[amount_of_targets]
         let mut targets = Vec::with_capacity(amount_of_targets as usize);
         for i in 0..amount_of_targets {
-            let o = SpellMiss::read(r)?;
-            targets.push(o);
+            targets.push(SpellMiss::read(r)?);
         }
 
         Ok(Self {

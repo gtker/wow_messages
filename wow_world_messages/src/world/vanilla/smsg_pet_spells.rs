@@ -119,8 +119,7 @@ impl crate::Message for SMSG_PET_SPELLS {
         // cooldowns: PetSpellCooldown[amount_of_cooldowns]
         let mut cooldowns = Vec::with_capacity(amount_of_cooldowns as usize);
         for i in 0..amount_of_cooldowns {
-            let o = PetSpellCooldown::read(r)?;
-            cooldowns.push(o);
+            cooldowns.push(PetSpellCooldown::read(r)?);
         }
 
         Ok(Self {

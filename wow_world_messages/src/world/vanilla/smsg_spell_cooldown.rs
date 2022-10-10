@@ -44,9 +44,8 @@ impl crate::Message for SMSG_SPELL_COOLDOWN {
         };
         let mut cooldowns = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
-            let o = SpellCooldownStatus::read(r)?;
-            current_size += std::mem::size_of::<SpellCooldownStatus>();
-            cooldowns.push(o);
+            cooldowns.push(SpellCooldownStatus::read(r)?);
+            current_size += 1;
         }
 
         Ok(Self {

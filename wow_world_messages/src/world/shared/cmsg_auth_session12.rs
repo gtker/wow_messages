@@ -106,10 +106,9 @@ impl crate::Message for CMSG_AUTH_SESSION {
             + 4 // decompressed_addon_info_size: u32
         };
         let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            let o = AddonInfo::read(decoder)?;
-            current_size += o.size();
-            addon_info.push(o);
+        while decoder.total_out() < (decompressed_addon_info_size as u64) {
+            addon_info.push(AddonInfo::read(decoder)?);
+            current_size += 1;
         }
 
         Ok(Self {
@@ -150,23 +149,21 @@ mod test1 {
     use crate::world::vanilla::opcodes::ClientOpcodeMessage;
     use crate::world::vanilla::{ClientMessage, ServerMessage};
 
-    const RAW0: [u8; 190] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
+    const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,
          0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB,
          0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, 0x56, 0x01, 0x00, 0x00, 0x78,
-         0x9C, 0x6D, 0xCC, 0x4D, 0x0A, 0xC2, 0x40, 0x0C, 0x05, 0xE0, 0xBA, 0xF0,
-         0x14, 0x7A, 0x19, 0xA7, 0x0B, 0x29, 0x38, 0x1B, 0x3B, 0xAE, 0x25, 0xCE,
-         0xA4, 0x12, 0x9C, 0xA6, 0x25, 0xA6, 0xFE, 0xF4, 0x3E, 0x9E, 0xCB, 0xAB,
-         0x28, 0x48, 0x51, 0x21, 0x6F, 0xFB, 0xDE, 0xF7, 0x5C, 0xA6, 0x71, 0x04,
-         0x49, 0xFB, 0xD5, 0x10, 0x95, 0x3A, 0xDE, 0x55, 0xC5, 0xAC, 0xBD, 0x2E,
-         0x37, 0xC5, 0x3B, 0x6E, 0xEA, 0x1C, 0xA8, 0x66, 0x6C, 0x08, 0x73, 0xF2,
-         0xC4, 0xD4, 0x42, 0xFF, 0x19, 0x2D, 0x9E, 0xF3, 0xC7, 0x77, 0x44, 0x9C,
-         0x88, 0x8F, 0xE6, 0x41, 0xD9, 0xB5, 0x07, 0xD0, 0x80, 0x37, 0x35, 0x60,
-         0x29, 0xD0, 0xA8, 0xC9, 0xD6, 0xBE, 0x1E, 0xE4, 0x82, 0xF7, 0xA9, 0xFC,
-         0x63, 0x15, 0x9F, 0x7B, 0x8C, 0x36, 0xF4, 0x10, 0xA5, 0x33, 0xD5, 0x16,
-         0x28, 0x99, 0x24, 0x40, 0x46, 0x56, 0xD3, 0x04, 0x81, 0x84, 0xF5, 0x89,
-         0x72, 0xB6, 0xA5, 0x00, 0x31, 0xCA, 0x2F, 0x7D, 0x01, 0xFB, 0xB4, 0x70,
-         0x67, ];
+         0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2, 0x30, 0x0C, 0x04, 0xE0, 0xF2, 0x1E,
+         0xBC, 0x0C, 0x61, 0x40, 0x95, 0xC8, 0x42, 0xC3, 0x8C, 0x4C, 0xE2, 0x22,
+         0x0B, 0xC7, 0xA9, 0x8C, 0xCB, 0x4F, 0x9F, 0x1E, 0x16, 0x24, 0x06, 0x73,
+         0xEB, 0x77, 0x77, 0x81, 0x69, 0x59, 0x40, 0xCB, 0x69, 0x33, 0x67, 0xA3,
+         0x26, 0xC7, 0xBE, 0x5B, 0xD5, 0xC7, 0x7A, 0xDF, 0x7D, 0x12, 0xBE, 0x16,
+         0xC0, 0x8C, 0x71, 0x24, 0xE4, 0x12, 0x49, 0xA8, 0xC2, 0xE4, 0x95, 0x48,
+         0x0A, 0xC9, 0xC5, 0x3D, 0xD8, 0xB6, 0x7A, 0x06, 0x4B, 0xF8, 0x34, 0x0F,
+         0x15, 0x46, 0x73, 0x67, 0xBB, 0x38, 0xCC, 0x7A, 0xC7, 0x97, 0x8B, 0xBD,
+         0xDC, 0x26, 0xCC, 0xFE, 0x30, 0x42, 0xD6, 0xE6, 0xCA, 0x01, 0xA8, 0xB8,
+         0x90, 0x80, 0x51, 0xFC, 0xB7, 0xA4, 0x50, 0x70, 0xB8, 0x12, 0xF3, 0x3F,
+         0x26, 0x41, 0xFD, 0xB5, 0x37, 0x90, 0x19, 0x66, 0x8F, ];
 
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
     #[cfg(feature = "sync")]
@@ -191,7 +188,7 @@ mod test1 {
                     addon_name: String::from("Blizzard_BattlefieldMinimap"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_BindingUI"),
@@ -203,10 +200,52 @@ mod test1 {
                     addon_name: String::from("Blizzard_CombatText"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_CraftUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_GMSurveyUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_InspectUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_MacroUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_RaidUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TalentUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TradeSkillUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TrainerUI"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
                     addon_extra_crc: 0x0,
@@ -260,7 +299,7 @@ mod test1 {
                     addon_name: String::from("Blizzard_BattlefieldMinimap"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_BindingUI"),
@@ -272,10 +311,52 @@ mod test1 {
                     addon_name: String::from("Blizzard_CombatText"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_CraftUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_GMSurveyUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_InspectUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_MacroUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_RaidUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TalentUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TradeSkillUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TrainerUI"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
                     addon_extra_crc: 0x0,
@@ -329,7 +410,7 @@ mod test1 {
                     addon_name: String::from("Blizzard_BattlefieldMinimap"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_BindingUI"),
@@ -341,10 +422,52 @@ mod test1 {
                     addon_name: String::from("Blizzard_CombatText"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_CraftUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_GMSurveyUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_InspectUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_MacroUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_RaidUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TalentUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TradeSkillUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TrainerUI"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
                     addon_extra_crc: 0x0,
@@ -385,23 +508,21 @@ mod test2 {
     use crate::world::tbc::opcodes::ClientOpcodeMessage;
     use crate::world::tbc::{ClientMessage, ServerMessage};
 
-    const RAW0: [u8; 190] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
+    const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,
          0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB,
          0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, 0x56, 0x01, 0x00, 0x00, 0x78,
-         0x9C, 0x6D, 0xCC, 0x4D, 0x0A, 0xC2, 0x40, 0x0C, 0x05, 0xE0, 0xBA, 0xF0,
-         0x14, 0x7A, 0x19, 0xA7, 0x0B, 0x29, 0x38, 0x1B, 0x3B, 0xAE, 0x25, 0xCE,
-         0xA4, 0x12, 0x9C, 0xA6, 0x25, 0xA6, 0xFE, 0xF4, 0x3E, 0x9E, 0xCB, 0xAB,
-         0x28, 0x48, 0x51, 0x21, 0x6F, 0xFB, 0xDE, 0xF7, 0x5C, 0xA6, 0x71, 0x04,
-         0x49, 0xFB, 0xD5, 0x10, 0x95, 0x3A, 0xDE, 0x55, 0xC5, 0xAC, 0xBD, 0x2E,
-         0x37, 0xC5, 0x3B, 0x6E, 0xEA, 0x1C, 0xA8, 0x66, 0x6C, 0x08, 0x73, 0xF2,
-         0xC4, 0xD4, 0x42, 0xFF, 0x19, 0x2D, 0x9E, 0xF3, 0xC7, 0x77, 0x44, 0x9C,
-         0x88, 0x8F, 0xE6, 0x41, 0xD9, 0xB5, 0x07, 0xD0, 0x80, 0x37, 0x35, 0x60,
-         0x29, 0xD0, 0xA8, 0xC9, 0xD6, 0xBE, 0x1E, 0xE4, 0x82, 0xF7, 0xA9, 0xFC,
-         0x63, 0x15, 0x9F, 0x7B, 0x8C, 0x36, 0xF4, 0x10, 0xA5, 0x33, 0xD5, 0x16,
-         0x28, 0x99, 0x24, 0x40, 0x46, 0x56, 0xD3, 0x04, 0x81, 0x84, 0xF5, 0x89,
-         0x72, 0xB6, 0xA5, 0x00, 0x31, 0xCA, 0x2F, 0x7D, 0x01, 0xFB, 0xB4, 0x70,
-         0x67, ];
+         0x9C, 0x75, 0xCC, 0xBD, 0x0E, 0xC2, 0x30, 0x0C, 0x04, 0xE0, 0xF2, 0x1E,
+         0xBC, 0x0C, 0x61, 0x40, 0x95, 0xC8, 0x42, 0xC3, 0x8C, 0x4C, 0xE2, 0x22,
+         0x0B, 0xC7, 0xA9, 0x8C, 0xCB, 0x4F, 0x9F, 0x1E, 0x16, 0x24, 0x06, 0x73,
+         0xEB, 0x77, 0x77, 0x81, 0x69, 0x59, 0x40, 0xCB, 0x69, 0x33, 0x67, 0xA3,
+         0x26, 0xC7, 0xBE, 0x5B, 0xD5, 0xC7, 0x7A, 0xDF, 0x7D, 0x12, 0xBE, 0x16,
+         0xC0, 0x8C, 0x71, 0x24, 0xE4, 0x12, 0x49, 0xA8, 0xC2, 0xE4, 0x95, 0x48,
+         0x0A, 0xC9, 0xC5, 0x3D, 0xD8, 0xB6, 0x7A, 0x06, 0x4B, 0xF8, 0x34, 0x0F,
+         0x15, 0x46, 0x73, 0x67, 0xBB, 0x38, 0xCC, 0x7A, 0xC7, 0x97, 0x8B, 0xBD,
+         0xDC, 0x26, 0xCC, 0xFE, 0x30, 0x42, 0xD6, 0xE6, 0xCA, 0x01, 0xA8, 0xB8,
+         0x90, 0x80, 0x51, 0xFC, 0xB7, 0xA4, 0x50, 0x70, 0xB8, 0x12, 0xF3, 0x3F,
+         0x26, 0x41, 0xFD, 0xB5, 0x37, 0x90, 0x19, 0x66, 0x8F, ];
 
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
     #[cfg(feature = "sync")]
@@ -426,7 +547,7 @@ mod test2 {
                     addon_name: String::from("Blizzard_BattlefieldMinimap"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_BindingUI"),
@@ -438,10 +559,52 @@ mod test2 {
                     addon_name: String::from("Blizzard_CombatText"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_CraftUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_GMSurveyUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_InspectUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_MacroUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_RaidUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TalentUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TradeSkillUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TrainerUI"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
                     addon_extra_crc: 0x0,
@@ -495,7 +658,7 @@ mod test2 {
                     addon_name: String::from("Blizzard_BattlefieldMinimap"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_BindingUI"),
@@ -507,10 +670,52 @@ mod test2 {
                     addon_name: String::from("Blizzard_CombatText"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_CraftUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_GMSurveyUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_InspectUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_MacroUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_RaidUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TalentUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TradeSkillUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TrainerUI"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
                     addon_extra_crc: 0x0,
@@ -564,7 +769,7 @@ mod test2 {
                     addon_name: String::from("Blizzard_BattlefieldMinimap"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_BindingUI"),
@@ -576,10 +781,52 @@ mod test2 {
                     addon_name: String::from("Blizzard_CombatText"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0xA505DF1B,
+                    addon_extra_crc: 0x0,
                 },
                 AddonInfo {
                     addon_name: String::from("Blizzard_CraftUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_GMSurveyUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_InspectUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_MacroUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_RaidUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TalentUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TradeSkillUI"),
+                    addon_has_signature: 0x1,
+                    addon_crc: 0x4C1C776D,
+                    addon_extra_crc: 0x0,
+                },
+                AddonInfo {
+                    addon_name: String::from("Blizzard_TrainerUI"),
                     addon_has_signature: 0x1,
                     addon_crc: 0x4C1C776D,
                     addon_extra_crc: 0x0,

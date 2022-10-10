@@ -68,8 +68,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
         // gossips: GossipItem[amount_of_gossip_items]
         let mut gossips = Vec::with_capacity(amount_of_gossip_items as usize);
         for i in 0..amount_of_gossip_items {
-            let o = GossipItem::read(r)?;
-            gossips.push(o);
+            gossips.push(GossipItem::read(r)?);
         }
 
         // amount_of_quests: u32
@@ -78,8 +77,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
         // quests: QuestItem[amount_of_quests]
         let mut quests = Vec::with_capacity(amount_of_quests as usize);
         for i in 0..amount_of_quests {
-            let o = QuestItem::read(r)?;
-            quests.push(o);
+            quests.push(QuestItem::read(r)?);
         }
 
         Ok(Self {

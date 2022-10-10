@@ -47,8 +47,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
         // objects: Object[amount_of_objects]
         let mut objects = Vec::with_capacity(amount_of_objects as usize);
         for i in 0..amount_of_objects {
-            let o = Object::read(r)?;
-            objects.push(o);
+            objects.push(Object::read(r)?);
         }
 
         Ok(Self {

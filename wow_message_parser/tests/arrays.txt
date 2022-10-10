@@ -168,8 +168,7 @@ impl Arrays {
         // complex_variable_array: StructWithAllBuiltInTypes[index]
         let mut complex_variable_array = Vec::with_capacity(index as usize);
         for i in 0..index {
-            let o = StructWithAllBuiltInTypes::read(r)?;
-            complex_variable_array.push(o);
+            complex_variable_array.push(StructWithAllBuiltInTypes::read(r)?);
         }
 
         // fixed_cstring_array: CString[10]
