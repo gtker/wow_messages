@@ -155,7 +155,7 @@ macro_rules! update_item {
                 $crate::helper::update_mask_common::header_reset(&mut self.header);
             }
 
-            pub fn has_any_header_set(&mut self) -> bool {
+            pub fn has_any_header_set(&self) -> bool {
                 $crate::helper::update_mask_common::has_any_header_set(&self.header)
             }
 
