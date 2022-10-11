@@ -5,8 +5,9 @@ pub(crate) mod wrath_messages;
 use crate::parser::types::container::ContainerType;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::Tags;
-use crate::parser::types::version::Version;
 use crate::parser::types::version::WorldVersion;
+use crate::parser::types::version::{MajorWorldVersion, Version};
+use crate::UNIMPLEMENTED;
 
 #[derive(Debug, Clone)]
 pub(crate) struct Data {
@@ -106,13 +107,36 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
         }
     }
 
+    let print_missing_as_wowm = version.as_major_world() != MajorWorldVersion::Vanilla;
+
     println!("{} Messages without definition:", version.as_world());
     for d in &data {
         if !d.definition {
-            if let Some(reason) = d.reason {
-                println!("    {}: {}", d.name, reason);
+            if print_missing_as_wowm {
+                if d.reason.is_none() {
+                    let i = d.name.find("_").unwrap();
+                    let prefix = &d.name[..i];
+                    let ty = match prefix {
+                        "SMSG" => "smsg",
+                        "CMSG" => "cmsg",
+                        "MSG" => "msg",
+                        "UMSG" | "OBSOLETE" => continue,
+                        _ => unreachable!("{} in {}", prefix, d.name),
+                    };
+                    println!(
+                        "{ty} {name} = {opcode:#06X} {{ {unimplemented} }} {{ versions = \"{version}\"; }}",
+                        name = &d.name,
+                        opcode = d.opcode,
+                        unimplemented = UNIMPLEMENTED,
+                        version = version.as_world(),
+                    );
+                }
             } else {
-                println!("    {}", d.name);
+                if let Some(reason) = d.reason {
+                    println!("    {}: {}", d.name, reason);
+                } else {
+                    println!("    {}", d.name);
+                }
             }
         }
     }

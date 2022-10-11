@@ -19,6 +19,10 @@ The project is split into the subdirectories:
 
 Run `cargo run -p wow_message_parser && cargo test` to "compile" all libraries and ensure that there are no issues.
 
+The following environment variables can be used with the parser:
+
+* `WOWM_WIRESHARK`: must point to a valid `packet-woww.c` in a wireshark repo. This file will then be modified with the auto generated Wireshark messages.
+
 ## License
 
 Licensed under either of
