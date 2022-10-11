@@ -1,6 +1,6 @@
 use crate::parser::stats::Data;
 
-pub(crate) const DATA: [Data; 607] = [
+pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_WORLD_TELEPORT", 0x008),
     Data::new("CMSG_TELEPORT_TO_UNIT", 0x009),
     Data::new("CMSG_CHAR_CREATE", 0x036),

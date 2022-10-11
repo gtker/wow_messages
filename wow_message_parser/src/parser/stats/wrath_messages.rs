@@ -1,6 +1,6 @@
 use crate::parser::stats::Data;
 
-pub(crate) const DATA: [Data; 1305] = [
+pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_BOOTME", 0x001),
     Data::new("CMSG_DBLOOKUP", 0x002),
     Data::new("SMSG_DBLOOKUP", 0x003),
