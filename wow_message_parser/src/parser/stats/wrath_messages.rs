@@ -1,6 +1,6 @@
 use crate::parser::stats::Data;
 
-pub(crate) const DATA: [Data; 1309] = [
+pub(crate) const DATA: [Data; 1305] = [
     Data::new("CMSG_BOOTME", 0x001),
     Data::new("CMSG_DBLOOKUP", 0x002),
     Data::new("SMSG_DBLOOKUP", 0x003),
@@ -128,7 +128,6 @@ pub(crate) const DATA: [Data; 1309] = [
     Data::new("SMSG_GROUP_LIST", 0x07D),
     Data::new("SMSG_PARTY_MEMBER_STATS", 0x07E),
     Data::new("SMSG_PARTY_COMMAND_RESULT", 0x07F),
-    Data::new("UMSG_UPDATE_GROUP_MEMBERS", 0x080),
     Data::new("CMSG_GUILD_CREATE", 0x081),
     Data::new("CMSG_GUILD_INVITE", 0x082),
     Data::new("SMSG_GUILD_INVITE", 0x083),
@@ -148,7 +147,6 @@ pub(crate) const DATA: [Data; 1309] = [
     Data::new("CMSG_GUILD_MOTD", 0x091),
     Data::new("SMSG_GUILD_EVENT", 0x092),
     Data::new("SMSG_GUILD_COMMAND_RESULT", 0x093),
-    Data::new("UMSG_UPDATE_GUILD", 0x094),
     Data::new("CMSG_MESSAGECHAT", 0x095),
     Data::with_reason("SMSG_MESSAGECHAT", 0x096, "Might depend on if Guid == 0"),
     Data::new("CMSG_JOIN_CHANNEL", 0x097),
@@ -703,7 +701,6 @@ pub(crate) const DATA: [Data; 1309] = [
     Data::new("SMSG_DURABILITY_DAMAGE_DEATH", 0x2BD),
     Data::new("CMSG_SET_EXPLORATION", 0x2BE),
     Data::new("CMSG_SET_ACTIONBAR_TOGGLES", 0x2BF),
-    Data::new("UMSG_DELETE_GUILD_CHARTER", 0x2C0),
     Data::new("MSG_PETITION_RENAME", 0x2C1),
     Data::new("SMSG_INIT_WORLD_STATES", 0x2C2),
     Data::new("SMSG_UPDATE_WORLD_STATE", 0x2C3),
@@ -1287,7 +1284,6 @@ pub(crate) const DATA: [Data; 1309] = [
     Data::new("CMSG_DEBUG_SERVER_GEO", 0x4FB),
     Data::new("SMSG_DEBUG_SERVER_GEO", 0x4FC),
     Data::new("SMSG_LOOT_SLOT_CHANGED", 0x4FD),
-    Data::new("UMSG_UPDATE_GROUP_INFO", 0x4FE),
     Data::new("CMSG_READY_FOR_ACCOUNT_DATA_TIMES", 0x4FF),
     Data::new("CMSG_QUERY_QUESTS_COMPLETED", 0x500),
     Data::new("SMSG_QUERY_QUESTS_COMPLETED_RESPONSE", 0x501),

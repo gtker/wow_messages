@@ -120,7 +120,6 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
                         "SMSG" => "smsg",
                         "CMSG" => "cmsg",
                         "MSG" => "msg",
-                        "UMSG" | "OBSOLETE" => continue,
                         _ => unreachable!("{} in {}", prefix, d.name),
                     };
                     println!(

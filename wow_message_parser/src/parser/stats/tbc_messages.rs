@@ -1,6 +1,6 @@
 use crate::parser::stats::Data;
 
-pub(crate) const DATA: [Data; 1058] = [
+pub(crate) const DATA: [Data; 1053] = [
     Data::new("CMSG_BOOTME", 0x001),
     Data::new("CMSG_DBLOOKUP", 0x002),
     Data::new("SMSG_DBLOOKUP", 0x003),
@@ -128,7 +128,6 @@ pub(crate) const DATA: [Data; 1058] = [
     Data::new("SMSG_GROUP_LIST", 0x07D),
     Data::new("SMSG_PARTY_MEMBER_STATS", 0x07E),
     Data::new("SMSG_PARTY_COMMAND_RESULT", 0x07F),
-    Data::new("UMSG_UPDATE_GROUP_MEMBERS", 0x080),
     Data::new("CMSG_GUILD_CREATE", 0x081),
     Data::new("CMSG_GUILD_INVITE", 0x082),
     Data::new("SMSG_GUILD_INVITE", 0x083),
@@ -148,7 +147,6 @@ pub(crate) const DATA: [Data; 1058] = [
     Data::new("CMSG_GUILD_MOTD", 0x091),
     Data::new("SMSG_GUILD_EVENT", 0x092),
     Data::new("SMSG_GUILD_COMMAND_RESULT", 0x093),
-    Data::new("UMSG_UPDATE_GUILD", 0x094),
     Data::new("CMSG_MESSAGECHAT", 0x095),
     Data::with_reason("SMSG_MESSAGECHAT", 0x096, "Might depend on if Guid == 0"),
     Data::new("CMSG_JOIN_CHANNEL", 0x097),
@@ -272,7 +270,6 @@ pub(crate) const DATA: [Data; 1058] = [
     Data::new("CMSG_SWAP_INV_ITEM", 0x10D),
     Data::new("CMSG_SPLIT_ITEM", 0x10E),
     Data::new("CMSG_AUTOEQUIP_ITEM_SLOT", 0x10F),
-    Data::new("OBSOLETE_DROP_ITEM", 0x110),
     Data::new("CMSG_DESTROYITEM", 0x111),
     Data::new("SMSG_INVENTORY_CHANGE_FAILURE", 0x112),
     Data::new("SMSG_OPEN_CONTAINER", 0x113),
@@ -703,7 +700,6 @@ pub(crate) const DATA: [Data; 1058] = [
     Data::new("SMSG_DURABILITY_DAMAGE_DEATH", 0x2BD),
     Data::new("CMSG_SET_EXPLORATION", 0x2BE),
     Data::new("CMSG_SET_ACTIONBAR_TOGGLES", 0x2BF),
-    Data::new("UMSG_DELETE_GUILD_CHARTER", 0x2C0),
     Data::new("MSG_PETITION_RENAME", 0x2C1),
     Data::new("SMSG_INIT_WORLD_STATES", 0x2C2),
     Data::new("SMSG_UPDATE_WORLD_STATE", 0x2C3),
@@ -845,7 +841,6 @@ pub(crate) const DATA: [Data; 1058] = [
     Data::new("CMSG_SOCKET_GEMS", 0x347),
     Data::new("CMSG_ARENA_TEAM_CREATE", 0x348),
     Data::new("SMSG_ARENA_TEAM_COMMAND_RESULT", 0x349),
-    Data::new("UMSG_UPDATE_ARENA_TEAM_OBSOLETE", 0x34A),
     Data::new("CMSG_ARENA_TEAM_QUERY", 0x34B),
     Data::new("SMSG_ARENA_TEAM_QUERY_RESPONSE", 0x34C),
     Data::new("CMSG_ARENA_TEAM_ROSTER", 0x34D),
