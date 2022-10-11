@@ -1,0 +1,40 @@
+#tag_all versions "3.3.5";
+
+flag RelationType : u32 {
+    NONE = 0x00;
+    FRIEND = 0x01;
+    IGNORED = 0x02;
+    MUTED = 0x04;
+    RECRUITAFRIEND = 0x08;
+}
+
+enum FriendStatus : u8 {
+    OFFLINE = 0;
+    ONLINE = 1;
+    AFK = 2;
+    UNKNOWN3 = 3;
+    DND = 4;
+}
+
+struct Relation {
+    Guid guid;
+    RelationType relation_mask;
+    CString note;
+    if (relation_mask & FRIEND) {
+        FriendStatus status;
+        if (status == ONLINE)
+        {
+            Area area;
+            u32 level;
+            (u32)Class class;
+        }
+    }
+}
+
+smsg SMSG_CONTACT_LIST = 0x0067 {
+    RelationType list_mask {
+        comment = "Indicates which kinds of relations are being sent in this list";
+    }
+    u32 amount_of_relations;
+    Relation[amount_of_relations] relations;
+}

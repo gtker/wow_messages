@@ -10139,6 +10139,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 Used in:
 * [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
 * [Character](character.md)
+* [Relation](relation.md)
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 
