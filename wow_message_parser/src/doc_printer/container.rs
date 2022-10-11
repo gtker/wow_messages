@@ -55,24 +55,14 @@ fn print_container_example_array(
         }
     };
 
-    // Edge case: Endless arrays of complex types do not have always have a fixed type, so we just loop until we run out of bytes to read instead.
-    match array.ty() {
-        ArrayType::Struct(c) if array.size() == ArraySize::Endless => {
-            let mut i = 0;
-            while bytes.len() > 0 {
-                for m in c.members() {
-                    let prefix = format!("{}[{}].{}", prefix, i, c.name());
-                    print_container_example_member(s, c, m, bytes, values, o, tags, &prefix);
-                }
-                i = i + 1;
-            }
-
-            return
-        }
-        _ => {}
-    }
-
     for i in 0..size {
+        // Edge case: Endless arrays of complex types do not have always have a fixed type, so we just loop until we run out of bytes to read instead.
+        if let ArrayType::Struct(_) = array.ty() {
+            if ArraySize::Endless == array.size() && bytes.len() == 0 {
+                return
+            }
+        }
+
         match array.ty() {
             ArrayType::Integer(t) => {
                 let bytes = bytes.take(t.size() as usize);
