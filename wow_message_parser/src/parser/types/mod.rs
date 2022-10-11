@@ -202,7 +202,9 @@ impl From<&str> for IntegerType {
             "u8" | "Bool" => IntegerType::U8,
             "u16" => IntegerType::U16(Endianness::Little),
             "u16_be" => IntegerType::U16(Endianness::Big),
-            "u32" | "Spell" | "Item" => IntegerType::U32(Endianness::Little),
+            "u32" | "Spell" | "Item" | "Copper" | "Seconds" | "Milliseconds" => {
+                IntegerType::U32(Endianness::Little)
+            }
             "u32_be" => IntegerType::U32(Endianness::Big),
             "u64" => IntegerType::U64(Endianness::Little),
             "u64_be" => IntegerType::U64(Endianness::Big),
