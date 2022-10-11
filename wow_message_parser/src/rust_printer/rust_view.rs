@@ -108,6 +108,18 @@ impl RustMember {
         format!(" // {}: {}", self.name(), self.ty().str())
     }
 
+    pub(crate) fn struct_initialization_string(&self) -> String {
+        let is_if = match self.ty() {
+            RustType::Enum { is_simple, .. } => *is_simple,
+            _ => true,
+        };
+        if is_if {
+            format!("{},", self.name())
+        } else {
+            format!("{name}: {name}_if,", name = self.name())
+        }
+    }
+
     fn set_main_enumerators(&mut self, enumerator_names: &[&String]) {
         let ty = self.ty.clone();
 

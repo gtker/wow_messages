@@ -184,9 +184,16 @@ fn print_read_array(
 
             print_size_before_variable(s, e, d.name());
 
-            let reader = if d.tags().is_compressed() {"decoder"} else {"r"};
+            let reader = if d.tags().is_compressed() {
+                "decoder"
+            } else {
+                "r"
+            };
             let loop_condition = if let Some(decompressed_size_field) = d.tags().compressed() {
-                format!("while decoder.total_out() < ({} as u64)", decompressed_size_field)
+                format!(
+                    "while decoder.total_out() < ({} as u64)",
+                    decompressed_size_field
+                )
             } else {
                 "while current_size < (body_size as usize)".to_string()
             };
@@ -595,7 +602,7 @@ fn print_read_if_statement_flag(
         );
     let enumerator = rd.get_enumerator(&statement.flag_get_enumerator());
     for m in enumerator.members_in_struct() {
-        s.wln(format!("{},", m.name()));
+        s.wln(m.struct_initialization_string());
     }
 
     s.closing_curly_with(")"); // Some(
@@ -632,7 +639,7 @@ fn print_read_if_statement_flag(
         let enumerator = rd.get_enumerator(&elseif.flag_get_enumerator());
 
         for m in enumerator.members_in_struct() {
-            s.wln(format!("{},", m.name()));
+            s.wln(m.struct_initialization_string());
         }
 
         s.closing_curly_with(")"); // Some(
@@ -698,16 +705,7 @@ fn print_read_if_statement_enum(
         ));
 
         for m in enumerator.members_in_struct() {
-            match m.ty() {
-                RustType::Enum { is_simple, .. } => {
-                    if *is_simple {
-                        s.wln(format!("{name},", name = m.name()))
-                    } else {
-                        s.wln(format!("{name}: {name}_if,", name = m.name()))
-                    }
-                }
-                _ => s.wln(format!("{name},", name = m.name())),
-            }
+            s.wln(m.struct_initialization_string());
         }
 
         s.closing_curly(); // enum
