@@ -1,7 +1,6 @@
 use crate::parser::stats::Data;
 
-pub(crate) const DATA: [Data; 1059] = [
-    Data::new("MSG_NULL_ACTION", 0x000),
+pub(crate) const DATA: [Data; 1058] = [
     Data::new("CMSG_BOOTME", 0x001),
     Data::new("CMSG_DBLOOKUP", 0x002),
     Data::new("SMSG_DBLOOKUP", 0x003),

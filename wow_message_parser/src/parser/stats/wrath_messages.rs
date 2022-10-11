@@ -1,6 +1,6 @@
 use crate::parser::stats::Data;
 
-pub(crate) const DATA: [Data; 1310] = [
+pub(crate) const DATA: [Data; 1309] = [
     Data::new("CMSG_BOOTME", 0x001),
     Data::new("CMSG_DBLOOKUP", 0x002),
     Data::new("SMSG_DBLOOKUP", 0x003),
@@ -1320,5 +1320,4 @@ pub(crate) const DATA: [Data; 1310] = [
     Data::new("SMSG_COMMENTATOR_SKIRMISH_QUEUE_RESULT1", 0x51C),
     Data::new("SMSG_COMMENTATOR_SKIRMISH_QUEUE_RESULT2", 0x51D),
     Data::new("SMSG_MULTIPLE_MOVES", 0x51E),
-    Data::new("NUM_MSG_TYPES", 0x51F),
 ];
