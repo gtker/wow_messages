@@ -39,6 +39,20 @@ smsg SMSG_TEST = 0x00 {
 }
 ```
 
+#### Linking
+
+Text in comments and descriptions can hyperlink to other objects by surrounding them in square brackets (`[` and `]`).
+
+For example
+
+```rust,ignore
+smsg SMSG_TEST = 0x00 {
+    u8 basic;
+} {
+    description = "Reponse to [CMSG_TEST].";
+}
+```
+
 ### `comment`
 
 Used to describe quirks or non-obvious information regarding something.
@@ -69,6 +83,20 @@ smsg SMSG_TEST = 0x00 {
         comment = "This is one thing to say.";
         comment = "This is something else.";
     }
+}
+```
+
+#### Linking
+
+Text in comments and descriptions can hyperlink to other objects by surrounding them in square brackets (`[` and `]`).
+
+For example
+
+```rust,ignore
+smsg SMSG_TEST = 0x00 {
+    u8 basic;
+} {
+    description = "Reponse to [CMSG_TEST].";
 }
 ```
 

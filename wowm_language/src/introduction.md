@@ -1,6 +1,6 @@
 # Introduction
 
-Wowm is a language for describing the layout of messages used in the Client/Server communication for World of Warcraft with the intention of auto generating documentation and usable programming libraries.
+Wowm is a domain specific language for describing the layout of messages used in the Client/Server communication for World of Warcraft with the intention of auto generating documentation and usable programming libraries.
 
 The language leans heavily on syntax from C/C++ for declaring _definers_, _built-in types_, and _containers_.
 Definers are simple wrappers over regular numbers that name valid values.
@@ -25,7 +25,7 @@ flag TestFlag : u8 {
     TEST_TWO = 2;
     TEST_FOUR = 4;
 }
-/* TestFlags can be either 1, 2, 4 or any combination thereof. */
+/* TestFlags can be either 1, 2, 4 or any combination thereof like 0, 3, 7, or 5. */
 ```
 The `u8` after the `:` specifies the basic type of the definers.
 This is the type that is actually sent over the network.

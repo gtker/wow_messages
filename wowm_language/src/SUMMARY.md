@@ -2,6 +2,7 @@
 
 [Introduction](./introduction.md)
 - [Versioning](./versioning-with-tags.md)
+- [Contribution Quick Start Guide](./contribution-quick-start.md)
 
 # Wowm Language
 - [Specification](./spec/lang-spec.md)
