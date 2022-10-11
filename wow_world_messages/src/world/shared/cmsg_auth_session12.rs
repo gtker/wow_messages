@@ -137,7 +137,7 @@ impl CMSG_AUTH_SESSION {
         + 4 // client_seed: u32
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
         + 4 // decompressed_addon_info_size: u32
-        + self.addon_info.iter().fold(0, |acc, x| acc + x.size()) // addon_info: AddonInfo[-]
+        + crate::util::zlib_compressed_size(self.addon_info.iter().fold(Vec::new(), |mut acc, x| { x.write_into_vec(&mut acc).unwrap(); acc } ).as_slice()) // addon_info: AddonInfo[-]
     }
 }
 
