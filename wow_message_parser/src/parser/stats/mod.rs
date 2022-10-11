@@ -106,20 +106,14 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
         }
     }
 
-    let amount_of_missing_definitions =
-        data.iter()
-            .fold(0, |acc, o| if o.definition { acc } else { acc + 1 });
-
-    if amount_of_missing_definitions < 10 {
-        println!("{} Messages without definition:", version.as_world());
-        for d in &data {
-            if !d.definition {
-                println!("\t{}: {}", d.name, d.reason);
-            }
+    println!("{} Messages without definition:", version.as_world());
+    for d in &data {
+        if !d.definition {
+            println!("\t{}: {}", d.name, d.reason);
         }
-
-        println!();
     }
+
+    println!();
 
     println!(
         "{} Messages with definition: {} / {} ({}%) ({} left)",
