@@ -14,7 +14,7 @@ pub(crate) struct Data {
     opcode: usize,
     definition: bool,
     tests: usize,
-    reason: &'static str,
+    reason: Option<&'static str>,
 }
 
 impl Data {
@@ -24,7 +24,7 @@ impl Data {
             opcode,
             definition: false,
             tests: 0,
-            reason: "",
+            reason: None,
         }
     }
 
@@ -38,7 +38,7 @@ impl Data {
             opcode,
             definition: false,
             tests: 0,
-            reason,
+            reason: Some(reason),
         }
     }
 }
@@ -109,7 +109,11 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
     println!("{} Messages without definition:", version.as_world());
     for d in &data {
         if !d.definition {
-            println!("\t{}: {}", d.name, d.reason);
+            if let Some(reason) = d.reason {
+                println!("    {}: {}", d.name, reason);
+            } else {
+                println!("    {}", d.name);
+            }
         }
     }
 
