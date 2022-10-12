@@ -1,14 +1,26 @@
-#tag_all versions "1.12";
-
 smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
     u32 auction_house_id;
     u32 auction_id;
     Guid bidder;
     u32 won {
-        comment = "cmangos: if 0, client shows ERR_AUCTION_WON_S, else ERR_AUCTION_OUTBID_S";
+        comment = "vmangos/cmangos: if 0, client shows ERR_AUCTION_WON_S, else ERR_AUCTION_OUTBID_S";
     }
     u32 out_bid;
     u32 item_template;
     u32 item_random_property_id;
+} {
+    versions = "1 2";
 }
 
+smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
+    u32 auction_house_id;
+    u32 auction_id;
+    Guid bidder;
+    u32 bid_sum;
+    u32 new_highest_bid;
+    u32 out_bid_amount;
+    u32 item_template;
+    u32 item_random_property_id;
+} {
+    versions = "3.3.5";
+}

@@ -332,6 +332,8 @@ pub(crate) mod smsg_attackswing_notstanding;
 pub use smsg_attackswing_notstanding::*;
 pub(crate) mod smsg_auction_bidder_list_result;
 pub use smsg_auction_bidder_list_result::*;
+pub(crate) mod smsg_auction_bidder_notification;
+pub use smsg_auction_bidder_notification::*;
 pub(crate) mod smsg_auction_removed_notification;
 pub use smsg_auction_removed_notification::*;
 pub(crate) mod smsg_auth_challenge;

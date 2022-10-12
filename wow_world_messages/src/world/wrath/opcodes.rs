@@ -1737,6 +1737,7 @@ use crate::world::wrath::SMSG_CHAT_WRONG_FACTION;
 use crate::world::wrath::SMSG_LOGIN_VERIFY_WORLD;
 use crate::world::wrath::SMSG_ZONE_UNDER_ATTACK;
 use crate::world::wrath::MSG_AUCTION_HELLO_Server;
+use crate::world::wrath::SMSG_AUCTION_BIDDER_NOTIFICATION;
 use crate::world::wrath::SMSG_PROCRESIST;
 use crate::world::wrath::SMSG_AUCTION_BIDDER_LIST_RESULT;
 use crate::world::wrath::SMSG_AUCTION_REMOVED_NOTIFICATION;
@@ -1812,6 +1813,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
     SMSG_ZONE_UNDER_ATTACK(SMSG_ZONE_UNDER_ATTACK),
     MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Server),
+    SMSG_AUCTION_BIDDER_NOTIFICATION(SMSG_AUCTION_BIDDER_NOTIFICATION),
     SMSG_PROCRESIST(SMSG_PROCRESIST),
     SMSG_AUCTION_BIDDER_LIST_RESULT(SMSG_AUCTION_BIDDER_LIST_RESULT),
     SMSG_AUCTION_REMOVED_NOTIFICATION(SMSG_AUCTION_REMOVED_NOTIFICATION),
@@ -1889,6 +1891,7 @@ impl ServerOpcodeMessage {
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
             0x0254 => Ok(Self::SMSG_ZONE_UNDER_ATTACK(<SMSG_ZONE_UNDER_ATTACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Server as crate::Message>::read_body(&mut r, body_size)?)),
+            0x025E => Ok(Self::SMSG_AUCTION_BIDDER_NOTIFICATION(<SMSG_AUCTION_BIDDER_NOTIFICATION as crate::Message>::read_body(&mut r, body_size)?)),
             0x0260 => Ok(Self::SMSG_PROCRESIST(<SMSG_PROCRESIST as crate::Message>::read_body(&mut r, body_size)?)),
             0x0265 => Ok(Self::SMSG_AUCTION_BIDDER_LIST_RESULT(<SMSG_AUCTION_BIDDER_LIST_RESULT as crate::Message>::read_body(&mut r, body_size)?)),
             0x028D => Ok(Self::SMSG_AUCTION_REMOVED_NOTIFICATION(<SMSG_AUCTION_REMOVED_NOTIFICATION as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2115,6 +2118,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PROCRESIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_encrypted_server(w, e),
@@ -2193,6 +2197,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_unencrypted_server(w),
             Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_server(w),
+            Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_PROCRESIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_unencrypted_server(w),
@@ -2271,6 +2276,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PROCRESIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2349,6 +2355,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PROCRESIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2427,6 +2434,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PROCRESIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2505,6 +2513,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PROCRESIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
@@ -2585,6 +2594,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
             ServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => "SMSG_ZONE_UNDER_ATTACK",
             ServerOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Server",
+            ServerOpcodeMessage::SMSG_AUCTION_BIDDER_NOTIFICATION(_) => "SMSG_AUCTION_BIDDER_NOTIFICATION",
             ServerOpcodeMessage::SMSG_PROCRESIST(_) => "SMSG_PROCRESIST",
             ServerOpcodeMessage::SMSG_AUCTION_BIDDER_LIST_RESULT(_) => "SMSG_AUCTION_BIDDER_LIST_RESULT",
             ServerOpcodeMessage::SMSG_AUCTION_REMOVED_NOTIFICATION(_) => "SMSG_AUCTION_REMOVED_NOTIFICATION",
@@ -2933,6 +2943,12 @@ impl From<SMSG_ZONE_UNDER_ATTACK> for ServerOpcodeMessage {
 impl From<MSG_AUCTION_HELLO_Server> for ServerOpcodeMessage {
     fn from(c: MSG_AUCTION_HELLO_Server) -> Self {
         Self::MSG_AUCTION_HELLO(c)
+    }
+}
+
+impl From<SMSG_AUCTION_BIDDER_NOTIFICATION> for ServerOpcodeMessage {
+    fn from(c: SMSG_AUCTION_BIDDER_NOTIFICATION) -> Self {
+        Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c)
     }
 }
 
