@@ -16,7 +16,7 @@ The header JSON file without any objects in it would look like:
     "patch": 0
   },
   "flags": [],
-  "enums: [],
-  "containers: []
+  "enums": [],
+  "containers": []
 }
 ```
