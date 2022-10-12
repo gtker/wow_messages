@@ -374,6 +374,8 @@ pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;
 pub use smsg_auth_response::*;
+pub(crate) mod smsg_bindpointupdate;
+pub use smsg_bindpointupdate::*;
 pub(crate) mod smsg_cancel_combat;
 pub use smsg_cancel_combat::*;
 pub(crate) mod smsg_channel_list;

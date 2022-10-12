@@ -1,12 +1,9 @@
-#tag_all versions "1.12";
-
-#tag_all versions "1.12";
-
 smsg SMSG_BINDPOINTUPDATE = 0x0155 {
     Vector3d position;
     Map map;
     Area area;
 } {
-    description = "Set new hearthstone location.";
+    description = "Inform the client of a their hearthstone location.";
+    paste_versions = "1.12 3.3.5";
 }
 

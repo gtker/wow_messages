@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Vector3d;
-use crate::world::vanilla::Area;
-use crate::world::vanilla::Map;
+use crate::world::wrath::Vector3d;
+use crate::world::wrath::Area;
+use crate::world::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
@@ -62,6 +62,6 @@ impl crate::Message for SMSG_BINDPOINTUPDATE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_BINDPOINTUPDATE {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_BINDPOINTUPDATE {}
 
