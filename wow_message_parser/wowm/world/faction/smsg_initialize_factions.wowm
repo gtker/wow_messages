@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 3.3.5";
 
 flag FactionFlag : u8 {
     VISIBLE = 0x01 {
@@ -33,6 +33,7 @@ struct FactionInitializer {
 smsg SMSG_INITIALIZE_FACTIONS = 0x0122 {
     u32 amount_of_factions {
         comment = "vmangos/cmangos/mangoszero: sets to 0x00000040 (64)";
+        comment = "mangostwo (wrath) sets this to 0x00000080 (128)";
     }
     FactionInitializer[amount_of_factions] factions;
 }
