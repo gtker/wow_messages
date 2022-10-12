@@ -190,6 +190,7 @@
 - [ActionButton](docs/actionbutton.md)
 - [Addon](docs/addon.md)
 - [AddonInfo](docs/addoninfo.md)
+- [AuctionEnchantment](docs/auctionenchantment.md)
 - [AuctionListItem](docs/auctionlistitem.md)
 - [AuctionSort](docs/auctionsort.md)
 - [AuraLog](docs/auralog.md)

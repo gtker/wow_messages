@@ -1,8 +1,19 @@
-#tag_all versions "1.12";
+smsg SMSG_AUCTION_BIDDER_LIST_RESULT = 0x0265 {
+    u32 count;
+    AuctionListItem[count] auctions;
+    u32 total_amount_of_auctions;
+} {
+    versions = "1";
+}
 
 smsg SMSG_AUCTION_BIDDER_LIST_RESULT = 0x0265 {
     u32 count;
     AuctionListItem[count] auctions;
     u32 total_amount_of_auctions;
+    u32 unknown1 {
+        comment = "mangosone sets to 300.";
+        comment = "mangosone: unk 2.3.0 delay for next isFull request?";
+    }
+} {
+    paste_versions = "2.4.3 3.3.5";
 }
-

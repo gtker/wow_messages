@@ -1,5 +1,6 @@
 pub mod addon_info123_3_5;
 pub mod ai_reaction123;
+pub mod auction_enchantment2_4_33;
 pub mod auction_sort2_4_33;
 pub mod billing_plan_flags2_4_33;
 pub mod channel_flags123;

@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 struct AuctionListItem {
     u32 id;
     u32 item_entry;
@@ -15,5 +13,58 @@ struct AuctionListItem {
     u32 time_left_in_msecs;
     Guid highest_bidder;
     u32 highest_bid;
+} {
+    versions = "1";
 }
 
+struct AuctionEnchantment {
+    u32 enchant_id;
+    u32 enchant_duration;
+    u32 enchant_charges;
+} {
+    versions = "2.4.3 3";
+}
+
+struct AuctionListItem {
+    u32 id;
+    u32 item_entry;
+    AuctionEnchantment[6] enchantments;
+    u32 item_random_property_id;
+    u32 item_suffix_factor;
+    u32 item_count;
+    u32 item_charges;
+    u32 item_flags {
+        comment = "mangosone: item flags (dynamic?) (0x04 no lockId?)";
+    }
+    Guid item_owner;
+    u32 start_bid;
+    u32 minimum_bid;
+    u32 buyout_amount;
+    u32 time_left_in_msecs;
+    Guid highest_bidder;
+    u32 highest_bid;
+} {
+    versions = "2.4.3";
+}
+
+struct AuctionListItem {
+    u32 id;
+    u32 item_entry;
+    AuctionEnchantment[7] enchantments;
+    u32 item_random_property_id;
+    u32 item_suffix_factor;
+    u32 item_count;
+    u32 item_charges;
+    u32 item_flags {
+        comment = "mangosone: item flags (dynamic?) (0x04 no lockId?)";
+    }
+    Guid item_owner;
+    u32 start_bid;
+    u32 minimum_bid;
+    u32 buyout_amount;
+    u32 time_left_in_msecs;
+    Guid highest_bidder;
+    u32 highest_bid;
+} {
+    versions = "3.3.5";
+}
