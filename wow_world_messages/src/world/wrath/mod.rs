@@ -350,6 +350,8 @@ pub(crate) mod smsg_attackswing_deadtarget;
 pub use smsg_attackswing_deadtarget::*;
 pub(crate) mod smsg_attackswing_notinrange;
 pub use smsg_attackswing_notinrange::*;
+pub(crate) mod smsg_auction_removed_notification;
+pub use smsg_auction_removed_notification::*;
 pub(crate) mod smsg_auth_challenge;
 pub use smsg_auth_challenge::*;
 pub(crate) mod smsg_auth_response;

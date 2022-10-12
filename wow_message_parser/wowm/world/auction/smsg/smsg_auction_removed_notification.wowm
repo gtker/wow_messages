@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_AUCTION_REMOVED_NOTIFICATION = 0x028D {
     u32 item_id;

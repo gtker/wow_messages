@@ -77,6 +77,7 @@ pub mod smsg_attackswing_cant_attack123;
 pub mod smsg_attackswing_deadtarget123;
 pub mod smsg_attackswing_notinrange123;
 pub mod smsg_attackswing_notstanding12;
+pub mod smsg_auction_removed_notification123;
 pub mod smsg_auth_challenge12;
 pub mod smsg_cancel_combat123;
 pub mod smsg_channel_list123;
