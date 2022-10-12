@@ -1,6 +1,26 @@
-#tag_all versions "1.12";
+cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
+    Map map;
+} {
+    paste_versions = "1.12 2.4.3";
+}
+
+enum BattlefieldListLocation : u8 {
+    BATTLEMASTER = 0 {
+        comment = "lua: ShowBattlefieldList";
+    }
+    UI = 1 {
+        comment = "lua: RequestBattlegroundInstanceInfo";
+    }
+} {
+    versions = "3.3.5";
+}
 
 cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
     Map map;
+    BattlefieldListLocation location;
+    Bool can_gain_exp {
+        comment = "azerothcore: players with locked xp have their own bg queue on retail";
+    }
+} {
+    versions = "3.3.5";
 }
-

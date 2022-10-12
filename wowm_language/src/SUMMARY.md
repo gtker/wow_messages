@@ -44,6 +44,7 @@
 - [AuctionCommandAction](docs/auctioncommandaction.md)
 - [AuctionCommandResult](docs/auctioncommandresult.md)
 - [AuraType](docs/auratype.md)
+- [BattlefieldListLocation](docs/battlefieldlistlocation.md)
 - [BattlefieldPortAction](docs/battlefieldportaction.md)
 - [BattlegroundEndStatus](docs/battlegroundendstatus.md)
 - [BattlegroundWinner](docs/battlegroundwinner.md)
