@@ -46,6 +46,8 @@ pub(crate) mod cmsg_auction_place_bid;
 pub use cmsg_auction_place_bid::*;
 pub(crate) mod cmsg_auction_remove_item;
 pub use cmsg_auction_remove_item::*;
+pub(crate) mod cmsg_auction_sell_item;
+pub use cmsg_auction_sell_item::*;
 pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
 pub(crate) mod cmsg_cancel_channelling;

@@ -2872,12 +2872,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_object_guid,
-            { "Object Guid", "woww.object.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_object_target,
             { "Object Target", "woww.object.target",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
@@ -4116,12 +4110,6 @@
         },
         { &hf_woww_stack_count,
             { "Stack Count", "woww.stack.count",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_stack_size,
-            { "Stack Size", "woww.stack.size",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }

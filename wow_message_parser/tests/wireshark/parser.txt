@@ -67,9 +67,8 @@
             ptvcursor_add(ptv, hf_woww_auction_id, 4, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_AUCTION_SELL_ITEM:
-            ptvcursor_add(ptv, hf_woww_auctioneer_guid, 8, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_object_guid, 8, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_stack_size, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_auctioneer, 8, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_item, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_starting_bid, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_buyout, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_auction_duration_in_minutes, 4, ENC_LITTLE_ENDIAN);

@@ -1,11 +1,23 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_AUCTION_SELL_ITEM = 0x0256 {
-    Guid auctioneer_guid;
-    Guid object_guid;
-    u32 stack_size;
+    Guid auctioneer;
+    Guid item;
     u32 starting_bid;
     u32 buyout;
     u32 auction_duration_in_minutes;
+} {
+    versions = "1 2";
 }
+
+cmsg CMSG_AUCTION_SELL_ITEM = 0x0256 {
+    Guid auctioneer;
+    u32 unknown1;
+    Guid item;
+    u32 unknown2;
+    u32 starting_bid;
+    u32 buyout;
+    u32 auction_duration_in_minutes;
+} {
+    versions = "3.3.5";
+}
+
 
