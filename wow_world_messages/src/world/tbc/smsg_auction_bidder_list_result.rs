@@ -9,16 +9,13 @@ use std::io::{Write, Read};
 ///     u32 count;
 ///     AuctionListItem[count] auctions;
 ///     u32 total_amount_of_auctions;
-///     u32 unknown1;
+///     u32 auction_search_delay;
 /// }
 /// ```
 pub struct SMSG_AUCTION_BIDDER_LIST_RESULT {
     pub auctions: Vec<AuctionListItem>,
     pub total_amount_of_auctions: u32,
-    /// mangosone sets to 300.
-    /// mangosone: unk 2.3.0 delay for next isFull request?
-    ///
-    pub unknown1: u32,
+    pub auction_search_delay: u32,
 }
 
 impl crate::Message for SMSG_AUCTION_BIDDER_LIST_RESULT {
@@ -40,8 +37,8 @@ impl crate::Message for SMSG_AUCTION_BIDDER_LIST_RESULT {
         // total_amount_of_auctions: u32
         w.write_all(&self.total_amount_of_auctions.to_le_bytes())?;
 
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
+        // auction_search_delay: u32
+        w.write_all(&self.auction_search_delay.to_le_bytes())?;
 
         Ok(())
     }
@@ -58,13 +55,13 @@ impl crate::Message for SMSG_AUCTION_BIDDER_LIST_RESULT {
         // total_amount_of_auctions: u32
         let total_amount_of_auctions = crate::util::read_u32_le(r)?;
 
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        // auction_search_delay: u32
+        let auction_search_delay = crate::util::read_u32_le(r)?;
 
         Ok(Self {
             auctions,
             total_amount_of_auctions,
-            unknown1,
+            auction_search_delay,
         })
     }
 
@@ -77,7 +74,7 @@ impl SMSG_AUCTION_BIDDER_LIST_RESULT {
         4 // count: u32
         + self.auctions.len() * 136 // auctions: AuctionListItem[count]
         + 4 // total_amount_of_auctions: u32
-        + 4 // unknown1: u32
+        + 4 // auction_search_delay: u32
     }
 }
 

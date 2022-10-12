@@ -360,6 +360,8 @@ pub(crate) mod smsg_auction_bidder_notification;
 pub use smsg_auction_bidder_notification::*;
 pub(crate) mod smsg_auction_list_result;
 pub use smsg_auction_list_result::*;
+pub(crate) mod smsg_auction_owner_list_result;
+pub use smsg_auction_owner_list_result::*;
 pub(crate) mod smsg_auction_removed_notification;
 pub use smsg_auction_removed_notification::*;
 pub(crate) mod smsg_auth_challenge;

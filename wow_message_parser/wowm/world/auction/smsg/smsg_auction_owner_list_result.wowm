@@ -1,8 +1,16 @@
-#tag_all versions "1.12";
+smsg SMSG_AUCTION_OWNER_LIST_RESULT = 0x025D {
+    u32 count;
+    AuctionListItem[count] auctions;
+    u32 total_amount_of_auctions;
+} {
+    versions = "1.12";
+}
 
 smsg SMSG_AUCTION_OWNER_LIST_RESULT = 0x025D {
     u32 count;
     AuctionListItem[count] auctions;
     u32 total_amount_of_auctions;
+    Milliseconds auction_search_delay;
+} {
+    paste_versions = "2.4.3 3.3.5";
 }
-
