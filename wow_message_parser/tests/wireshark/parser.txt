@@ -36,8 +36,8 @@
         case CMSG_AUCTION_LIST_BIDDER_ITEMS:
             ptvcursor_add(ptv, hf_woww_auctioneer, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_start_from_page, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_outbidded_items, 4, ENC_LITTLE_ENDIAN, &amount_of_outbidded_items);
-            for (i = 0; i < amount_of_outbidded_items; ++i) {
+            ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_outbid_items, 4, ENC_LITTLE_ENDIAN, &amount_of_outbid_items);
+            for (i = 0; i < amount_of_outbid_items; ++i) {
                 ptvcursor_add(ptv, hf_woww_outbid_item_ids, 4, ENC_LITTLE_ENDIAN);
             }
             break;

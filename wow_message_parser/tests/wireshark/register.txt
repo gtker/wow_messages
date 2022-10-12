@@ -346,8 +346,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_amount_of_outbidded_items,
-            { "Amount Of Outbidded Items", "woww.amount.of.outbidded.items",
+        { &hf_woww_amount_of_outbid_items,
+            { "Amount Of Outbid Items", "woww.amount.of.outbid.items",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }

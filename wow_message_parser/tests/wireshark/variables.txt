@@ -21,7 +21,7 @@
     guint32 amount_of_misses = 0;
     guint32 amount_of_nodes = 0;
     guint32 amount_of_objects = 0;
-    guint32 amount_of_outbidded_items = 0;
+    guint32 amount_of_outbid_items = 0;
     guint32 amount_of_petitions = 0;
     guint32 amount_of_pets = 0;
     guint32 amount_of_players = 0;

@@ -42,6 +42,8 @@ pub(crate) mod cmsg_attackstop;
 pub use cmsg_attackstop::*;
 pub(crate) mod cmsg_attackswing;
 pub use cmsg_attackswing::*;
+pub(crate) mod cmsg_auction_list_bidder_items;
+pub use cmsg_auction_list_bidder_items::*;
 pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
 pub(crate) mod cmsg_cancel_channelling;
