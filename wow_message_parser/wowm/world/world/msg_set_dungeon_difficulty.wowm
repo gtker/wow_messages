@@ -1,0 +1,17 @@
+#tag_all versions "3.3.5";
+
+enum DungeonDifficulty : u32
+{
+    NORMAL = 0;
+    HEROIC = 1;
+}
+
+msg MSG_SET_DUNGEON_DIFFICULTY = 0x329 {
+    DungeonDifficulty difficulty;
+    u32 unknown1
+    {
+        comment = "ArcEmu hardcodes this to 1";
+    }
+    Bool32 is_in_group;
+}
+
