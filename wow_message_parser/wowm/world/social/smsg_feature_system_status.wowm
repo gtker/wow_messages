@@ -1,0 +1,13 @@
+#tag_all versions "3.3.5";
+
+enum ComplaintStatus : u8 {
+    DISABLED = 0;
+    ENABLED_WITHOUT_AUTO_IGNORE = 1;
+    ENABLED_WITH_AUTO_IGNORE = 2;
+}
+
+smsg SMSG_FEATURE_SYSTEM_STATUS = 0x3C9 {
+    ComplaintStatus complaint_status;
+    Bool voice_chat_enabled;
+}
+
