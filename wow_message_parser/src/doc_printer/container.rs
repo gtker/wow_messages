@@ -565,24 +565,24 @@ fn print_container_field(
                 comment = comment,
             ));
 
-            if offset.is_some() {
+            if let Some(off) = offset {
                 *offset = match d.ty() {
-                    Type::Integer(t) => Some(offset.unwrap() + t.size() as usize),
-                    Type::Guid => Some(offset.unwrap() + 8),
-                    Type::FloatingPoint(f) => Some(offset.unwrap() + f.size() as usize),
-                    Type::DateTime => Some(offset.unwrap() + DATETIME_SIZE as usize),
-                    Type::Bool(i) => Some(offset.unwrap() + i.size() as usize),
+                    Type::Integer(t) => Some(*off + t.size() as usize),
+                    Type::Guid => Some(*off + 8),
+                    Type::FloatingPoint(f) => Some(*off + f.size() as usize),
+                    Type::DateTime => Some(*off + DATETIME_SIZE as usize),
+                    Type::Bool(i) => Some(*off + i.size() as usize),
                     Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                         if let Some(upcast) = upcast {
-                            Some(offset.unwrap() + upcast.size() as usize)
+                            Some(*off + upcast.size() as usize)
                         } else {
                             let sizes = e.sizes();
-                            sizes.is_constant().map(|size| offset.unwrap() + size)
+                            sizes.is_constant().map(|size| *off + size)
                         }
                     }
                     Type::Struct { e } => {
                         let sizes = e.sizes();
-                        sizes.is_constant().map(|size| offset.unwrap() + size)
+                        sizes.is_constant().map(|size| *off + size)
                     }
                     Type::Array(array) => {
                         let size = match array.ty() {
@@ -602,7 +602,7 @@ fn print_container_field(
                             ArrayType::Guid => 8,
                         };
                         match array.size() {
-                            ArraySize::Fixed(v) => Some(offset.unwrap() + (v as usize * size)),
+                            ArraySize::Fixed(v) => Some(*off + (v as usize * size)),
                             ArraySize::Variable(_) | ArraySize::Endless => None,
                         }
                     }
