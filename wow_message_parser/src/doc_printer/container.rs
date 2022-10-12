@@ -584,10 +584,31 @@ fn print_container_field(
                         let sizes = e.sizes();
                         sizes.is_constant().map(|size| offset.unwrap() + size)
                     }
+                    Type::Array(array) => {
+                        let size = match array.ty() {
+                            ArrayType::Integer(i) => i.size() as usize,
+                            ArrayType::Struct(e) => {
+                                if let Some(s) = e.sizes().is_constant() {
+                                    s
+                                } else {
+                                    *offset = None;
+                                    return;
+                                }
+                            }
+                            ArrayType::PackedGuid | ArrayType::CString => {
+                                *offset = None;
+                                return;
+                            }
+                            ArrayType::Guid => 8,
+                        };
+                        match array.size() {
+                            ArraySize::Fixed(v) => Some(offset.unwrap() + (v as usize * size)),
+                            ArraySize::Variable(_) | ArraySize::Endless => None,
+                        }
+                    }
                     Type::CString
                     | Type::SizedCString
                     | Type::String { .. }
-                    | Type::Array(_)
                     | Type::PackedGuid
                     | Type::UpdateMask
                     | Type::AuraMask => None,

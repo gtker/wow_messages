@@ -29,5 +29,5 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / Little | u32 | survey_id |  | cmangos: Survey ID: found in GMSurveySurveys.dbc |
 | 0x0A | ? / - | [GmSurveyQuestion](gmsurveyquestion.md)[10] | questions |  |  |
-| - | - / - | CString | answer_comment |  | cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function<br/>cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586 |
+| 0x3C | - / - | CString | answer_comment |  | cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function<br/>cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586 |
 

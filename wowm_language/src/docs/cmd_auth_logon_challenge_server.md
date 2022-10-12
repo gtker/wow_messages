@@ -46,8 +46,8 @@ If result is equal to `SUCCESS`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x03 | ? / - | u8[32] | server_public_key |  |  |
-| - | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
-| - | ? / - | u8[generator_length] | generator |  |  |
+| 0x23 | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
+| 0x24 | ? / - | u8[generator_length] | generator |  |  |
 | - | 1 / - | u8 | large_safe_prime_length |  | Client can not handle arrays greater than 32. |
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |  |
 | - | ? / - | u8[32] | salt |  |  |
@@ -129,8 +129,8 @@ If result is equal to `SUCCESS`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x03 | ? / - | u8[32] | server_public_key |  |  |
-| - | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
-| - | ? / - | u8[generator_length] | generator |  |  |
+| 0x23 | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
+| 0x24 | ? / - | u8[generator_length] | generator |  |  |
 | - | 1 / - | u8 | large_safe_prime_length |  | Client can not handle arrays greater than 32. |
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |  |
 | - | ? / - | u8[32] | salt |  |  |
@@ -243,8 +243,8 @@ If result is equal to `SUCCESS`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x03 | ? / - | u8[32] | server_public_key |  |  |
-| - | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
-| - | ? / - | u8[generator_length] | generator |  |  |
+| 0x23 | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
+| 0x24 | ? / - | u8[generator_length] | generator |  |  |
 | - | 1 / - | u8 | large_safe_prime_length |  | Client can not handle arrays greater than 32. |
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |  |
 | - | ? / - | u8[32] | salt |  |  |

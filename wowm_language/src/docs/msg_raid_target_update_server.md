@@ -43,5 +43,5 @@ Else If update_type is equal to `PARTIAL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 9 / - | [RaidTargetUpdate](raidtargetupdate.md) | raid_target |  |  |
+| 0x4D | 9 / - | [RaidTargetUpdate](raidtargetupdate.md) | raid_target |  |  |
 

@@ -40,8 +40,8 @@ SMSG have a header of 4 bytes.
 | 0x11 | 1 / - | [PetCommandState](petcommandstate.md) | command |  |  |
 | 0x12 | 2 / Little | u16 | unknown2 |  | mangoszero: set to 0 |
 | 0x14 | ? / - | u32[10] | action_bars |  |  |
-| - | 1 / - | u8 | amount_of_spells |  |  |
-| - | ? / - | u32[amount_of_spells] | spells |  |  |
+| 0x3C | 1 / - | u8 | amount_of_spells |  |  |
+| 0x3D | ? / - | u32[amount_of_spells] | spells |  |  |
 | - | 1 / - | u8 | amount_of_cooldowns |  |  |
 | - | ? / - | [PetSpellCooldown](petspellcooldown.md)[amount_of_cooldowns] | cooldowns |  |  |
 

@@ -40,14 +40,14 @@ If key_version is not equal to `ZERO`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x03 | ? / - | u8[256] | public_key |  |  |
-| - | 4 / Little | u32 | update_available_flag |  |  |
-| - | 1 / - | [UrlInfo](urlinfo.md) | url_info |  |  |
+| 0x103 | 4 / Little | u32 | update_available_flag |  |  |
+| 0x107 | 1 / - | [UrlInfo](urlinfo.md) | url_info |  |  |
 
 If url_info is equal to `AVAILABLE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | - / - | CString | url |  |  |
+| 0x108 | - / - | CString | url |  |  |
 
 # Addon
 

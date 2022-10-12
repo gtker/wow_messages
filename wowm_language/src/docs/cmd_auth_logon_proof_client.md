@@ -33,10 +33,10 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | ? / - | u8[32] | client_public_key |  |  |
-| - | ? / - | u8[20] | client_proof |  |  |
-| - | ? / - | u8[20] | crc_hash |  |  |
-| - | 1 / - | u8 | number_of_telemetry_keys |  |  |
-| - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
+| 0x21 | ? / - | u8[20] | client_proof |  |  |
+| 0x35 | ? / - | u8[20] | crc_hash |  |  |
+| 0x49 | 1 / - | u8 | number_of_telemetry_keys |  |  |
+| 0x4A | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
 
 ### Examples
 
@@ -131,10 +131,10 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | ? / - | u8[32] | client_public_key |  |  |
-| - | ? / - | u8[20] | client_proof |  |  |
-| - | ? / - | u8[20] | crc_hash |  |  |
-| - | 1 / - | u8 | number_of_telemetry_keys |  |  |
-| - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
+| 0x21 | ? / - | u8[20] | client_proof |  |  |
+| 0x35 | ? / - | u8[20] | crc_hash |  |  |
+| 0x49 | 1 / - | u8 | number_of_telemetry_keys |  |  |
+| 0x4A | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
 | - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
 
 If security_flag is equal to `PIN`:
@@ -266,10 +266,10 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | ? / - | u8[32] | client_public_key |  |  |
-| - | ? / - | u8[20] | client_proof |  |  |
-| - | ? / - | u8[20] | crc_hash |  |  |
-| - | 1 / - | u8 | number_of_telemetry_keys |  |  |
-| - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
+| 0x21 | ? / - | u8[20] | client_proof |  |  |
+| 0x35 | ? / - | u8[20] | crc_hash |  |  |
+| 0x49 | 1 / - | u8 | number_of_telemetry_keys |  |  |
+| 0x4A | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
 | - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
 
 If security_flag contains `PIN`:
