@@ -48,6 +48,8 @@ pub(crate) mod cmsg_auction_list_bidder_items;
 pub use cmsg_auction_list_bidder_items::*;
 pub(crate) mod cmsg_auction_list_items;
 pub use cmsg_auction_list_items::*;
+pub(crate) mod cmsg_auction_list_owner_items;
+pub use cmsg_auction_list_owner_items::*;
 pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
 pub(crate) mod cmsg_cancel_channelling;
