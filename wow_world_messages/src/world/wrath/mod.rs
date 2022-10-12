@@ -209,6 +209,8 @@ pub(crate) mod movement_info;
 pub use movement_info::*;
 pub(crate) mod msg_auction_hello_client;
 pub use msg_auction_hello_client::*;
+pub(crate) mod msg_auction_hello_server;
+pub use msg_auction_hello_server::*;
 pub(crate) mod msg_move_fall_land_client;
 pub use msg_move_fall_land_client::*;
 pub(crate) mod msg_move_fall_land_server;
