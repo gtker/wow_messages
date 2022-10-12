@@ -13,6 +13,7 @@ pub mod cmsg_attackswing123;
 pub mod cmsg_auction_list_bidder_items123;
 pub mod cmsg_auction_list_owner_items123;
 pub mod cmsg_auction_place_bid123;
+pub mod cmsg_auction_remove_item123;
 pub mod cmsg_auth_session12;
 pub mod cmsg_cancel_channelling123;
 pub mod cmsg_channel_announcements123;

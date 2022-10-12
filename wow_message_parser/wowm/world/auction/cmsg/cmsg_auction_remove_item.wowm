@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_AUCTION_REMOVE_ITEM = 0x0257 {
     Guid auctioneer_guid;
