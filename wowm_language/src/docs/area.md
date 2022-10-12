@@ -10140,6 +10140,7 @@ Used in:
 * [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
 * [Character](character.md)
 * [Relation](relation.md)
+* [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 

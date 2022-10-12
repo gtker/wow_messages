@@ -606,5 +606,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [Character](character.md)
+* [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
 
