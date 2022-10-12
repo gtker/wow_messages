@@ -553,7 +553,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_MAIL_LIST_RESULT", 0x23B),
     Data::new("CMSG_BATTLEFIELD_LIST", 0x23C),
     Data::new("SMSG_BATTLEFIELD_LIST", 0x23D),
-    Data::new("CMSG_BATTLEFIELD_JOIN", 0x23E),
     Data::new("CMSG_TAXICLEARNODE", 0x241),
     Data::new("CMSG_TAXIENABLENODE", 0x242),
     Data::new("CMSG_ITEM_TEXT_QUERY", 0x243),
