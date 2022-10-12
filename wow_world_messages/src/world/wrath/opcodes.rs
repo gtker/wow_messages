@@ -78,6 +78,7 @@ use crate::world::wrath::CMSG_ZONEUPDATE;
 use crate::world::wrath::CMSG_REQUEST_ACCOUNT_DATA;
 use crate::world::wrath::CMSG_UPDATE_ACCOUNT_DATA;
 use crate::world::wrath::CMSG_CHAT_IGNORED;
+use crate::world::wrath::MSG_AUCTION_HELLO_Client;
 use crate::world::wrath::CMSG_AUCTION_SELL_ITEM;
 use crate::world::wrath::CMSG_AUCTION_REMOVE_ITEM;
 use crate::world::wrath::CMSG_AUCTION_LIST_ITEMS;
@@ -175,6 +176,7 @@ pub enum ClientOpcodeMessage {
     CMSG_REQUEST_ACCOUNT_DATA(CMSG_REQUEST_ACCOUNT_DATA),
     CMSG_UPDATE_ACCOUNT_DATA(CMSG_UPDATE_ACCOUNT_DATA),
     CMSG_CHAT_IGNORED(CMSG_CHAT_IGNORED),
+    MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Client),
     CMSG_AUCTION_SELL_ITEM(CMSG_AUCTION_SELL_ITEM),
     CMSG_AUCTION_REMOVE_ITEM(CMSG_AUCTION_REMOVE_ITEM),
     CMSG_AUCTION_LIST_ITEMS(CMSG_AUCTION_LIST_ITEMS),
@@ -274,6 +276,7 @@ impl ClientOpcodeMessage {
             0x020A => Ok(Self::CMSG_REQUEST_ACCOUNT_DATA(<CMSG_REQUEST_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x020B => Ok(Self::CMSG_UPDATE_ACCOUNT_DATA(<CMSG_UPDATE_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x0225 => Ok(Self::CMSG_CHAT_IGNORED(<CMSG_CHAT_IGNORED as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x0256 => Ok(Self::CMSG_AUCTION_SELL_ITEM(<CMSG_AUCTION_SELL_ITEM as crate::Message>::read_body(&mut r, body_size)?)),
             0x0257 => Ok(Self::CMSG_AUCTION_REMOVE_ITEM(<CMSG_AUCTION_REMOVE_ITEM as crate::Message>::read_body(&mut r, body_size)?)),
             0x0258 => Ok(Self::CMSG_AUCTION_LIST_ITEMS(<CMSG_AUCTION_LIST_ITEMS as crate::Message>::read_body(&mut r, body_size)?)),
@@ -441,6 +444,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAT_IGNORED(c) => c.write_encrypted_client(w, e),
+            Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUCTION_LIST_ITEMS(c) => c.write_encrypted_client(w, e),
@@ -541,6 +545,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAT_IGNORED(c) => c.write_unencrypted_client(w),
+            Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUCTION_LIST_ITEMS(c) => c.write_unencrypted_client(w),
@@ -641,6 +646,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_LIST_ITEMS(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -741,6 +747,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_LIST_ITEMS(c) => c.tokio_write_unencrypted_client(w).await,
@@ -841,6 +848,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_LIST_ITEMS(c) => c.astd_write_encrypted_client(w, e).await,
@@ -941,6 +949,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_LIST_ITEMS(c) => c.astd_write_unencrypted_client(w).await,
@@ -1076,6 +1085,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(_) => "CMSG_REQUEST_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_UPDATE_ACCOUNT_DATA(_) => "CMSG_UPDATE_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_CHAT_IGNORED(_) => "CMSG_CHAT_IGNORED",
+            ClientOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Client",
             ClientOpcodeMessage::CMSG_AUCTION_SELL_ITEM(_) => "CMSG_AUCTION_SELL_ITEM",
             ClientOpcodeMessage::CMSG_AUCTION_REMOVE_ITEM(_) => "CMSG_AUCTION_REMOVE_ITEM",
             ClientOpcodeMessage::CMSG_AUCTION_LIST_ITEMS(_) => "CMSG_AUCTION_LIST_ITEMS",
@@ -1531,6 +1541,12 @@ impl From<CMSG_UPDATE_ACCOUNT_DATA> for ClientOpcodeMessage {
 impl From<CMSG_CHAT_IGNORED> for ClientOpcodeMessage {
     fn from(c: CMSG_CHAT_IGNORED) -> Self {
         Self::CMSG_CHAT_IGNORED(c)
+    }
+}
+
+impl From<MSG_AUCTION_HELLO_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_AUCTION_HELLO_Client) -> Self {
+        Self::MSG_AUCTION_HELLO(c)
     }
 }
 

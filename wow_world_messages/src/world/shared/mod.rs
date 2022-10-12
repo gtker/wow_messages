@@ -62,6 +62,7 @@ pub mod item_quality1_122;
 pub mod language11_12;
 pub mod language2_4_33;
 pub mod log_format1_1223;
+pub mod msg_auction_hello_client123;
 pub mod player_chat_tag12;
 pub mod realm_split_state2_4_33;
 pub mod server_message_type1_122;
