@@ -1,6 +1,6 @@
 # SMSG_INITIALIZE_FACTIONS
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 3.3.5
 
 ### Wowm Representation
 
@@ -26,6 +26,6 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | amount_of_factions |  | vmangos/cmangos/mangoszero: sets to 0x00000040 (64) |
+| 0x04 | 4 / Little | u32 | amount_of_factions |  | vmangos/cmangos/mangoszero: sets to 0x00000040 (64)<br/>mangostwo (wrath) sets this to 0x00000080 (128) |
 | 0x08 | ? / - | [FactionInitializer](factioninitializer.md)[amount_of_factions] | factions |  |  |
 
