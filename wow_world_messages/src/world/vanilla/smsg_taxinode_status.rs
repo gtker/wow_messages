@@ -27,7 +27,7 @@ impl crate::Message for SMSG_TAXINODE_STATUS {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // taxi_mask_node_known: Bool
-        w.write_all(if self.taxi_mask_node_known { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.taxi_mask_node_known).to_le_bytes().as_slice())?;
 
         Ok(())
     }

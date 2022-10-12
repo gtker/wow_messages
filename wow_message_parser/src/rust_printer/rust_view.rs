@@ -3,6 +3,7 @@ use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
+use crate::parser::types::parsed::parsed_ty::bool_ty_to_string;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::Tags;
@@ -358,7 +359,7 @@ impl RustEnumerator {
 #[derive(Debug, Clone)]
 pub(crate) enum RustType {
     Integer(IntegerType),
-    Bool,
+    Bool(IntegerType),
     DateTime,
     Floating(FloatingPointType),
     UpdateMask,
@@ -410,25 +411,13 @@ impl RustType {
             RustType::AuraMask => "AuraMask".to_string(),
             RustType::PackedGuid | RustType::Guid => "Guid".to_string(),
             RustType::SizedCString => "SizedCString".to_string(),
-            RustType::Bool => "Bool".to_string(),
+            RustType::Bool(i) => bool_ty_to_string(i),
             RustType::DateTime => "DateTime".to_string(),
         }
     }
 
     pub(crate) fn rust_str(&self) -> String {
-        match self {
-            RustType::Integer(i) => i.rust_str().to_string(),
-            RustType::Floating(f) => f.rust_str().to_string(),
-            RustType::UpdateMask => "UpdateMask".to_string(),
-            RustType::AuraMask => "AuraMask".to_string(),
-            RustType::Guid | RustType::PackedGuid => "Guid".to_string(),
-            RustType::SizedCString | RustType::CString | RustType::String => "String".to_string(),
-            RustType::Array { array, .. } => array.rust_str(),
-            RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
-            RustType::Struct { ty_name, .. } => ty_name.clone(),
-            RustType::Bool => "bool".to_string(),
-            RustType::DateTime => "DateTime".to_string(),
-        }
+        self.to_string()
     }
 }
 
@@ -444,7 +433,7 @@ impl Display for RustType {
             RustType::UpdateMask => f.write_str("UpdateMask"),
             RustType::AuraMask => f.write_str("AuraMask"),
             RustType::PackedGuid | RustType::Guid => f.write_str("Guid"),
-            RustType::Bool => f.write_str("bool"),
+            RustType::Bool(_) => f.write_str("bool"),
             RustType::DateTime => f.write_str("DateTime"),
         }
     }
@@ -1142,7 +1131,7 @@ pub(crate) fn create_struct_member(
                     }
                     RustType::Integer(*i)
                 }
-                Type::Bool => RustType::Bool,
+                Type::Bool(i) => RustType::Bool(*i),
                 Type::DateTime => RustType::DateTime,
                 Type::Guid => RustType::Guid,
                 Type::PackedGuid => RustType::PackedGuid,

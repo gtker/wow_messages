@@ -30,7 +30,7 @@ impl GroupListMember {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // is_online: Bool
-        w.write_all(if self.is_online { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.is_online).to_le_bytes().as_slice())?;
 
         Ok(())
     }

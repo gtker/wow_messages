@@ -27,7 +27,7 @@ impl crate::Message for CMSG_TOGGLE_PVP {
         // optional set
         if let Some(v) = &self.set {
             // enable_pvp: Bool
-            w.write_all(if v.enable_pvp { &[1] } else { &[0] })?;
+            w.write_all(u8::from(v.enable_pvp).to_le_bytes().as_slice())?;
 
         }
 

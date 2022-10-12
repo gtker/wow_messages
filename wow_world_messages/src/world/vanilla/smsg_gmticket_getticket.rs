@@ -69,7 +69,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
                 w.write_all(&(escalation_status.as_int() as u8).to_le_bytes())?;
 
                 // read_by_gm: Bool
-                w.write_all(if *read_by_gm { &[1] } else { &[0] })?;
+                w.write_all(u8::from(*read_by_gm).to_le_bytes().as_slice())?;
 
             }
             SMSG_GMTICKET_GETTICKET_GmTicketStatus::Default => {}

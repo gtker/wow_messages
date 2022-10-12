@@ -37,7 +37,7 @@ impl Addon {
         w.write_all(&self.uses_crc.to_le_bytes())?;
 
         // uses_diffent_public_key: Bool
-        w.write_all(if self.uses_diffent_public_key { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.uses_diffent_public_key).to_le_bytes().as_slice())?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;

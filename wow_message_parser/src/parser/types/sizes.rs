@@ -37,7 +37,6 @@ pub(crate) const UPDATE_MASK_MIN_SIZE: u8 = 1;
 pub(crate) const PACKED_GUID_MAX_SIZE: u8 = 9;
 pub(crate) const PACKED_GUID_MIN_SIZE: u8 = 2;
 pub(crate) const GUID_SIZE: u8 = core::mem::size_of::<u64>() as u8;
-pub(crate) const BOOL_SIZE: u8 = 1;
 pub(crate) const DATETIME_SIZE: u8 = 4;
 
 impl Sizes {

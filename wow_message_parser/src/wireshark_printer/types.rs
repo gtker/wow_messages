@@ -160,7 +160,7 @@ impl WiresharkType {
             Type::Flag { e, .. } => Self::Flag(e.clone()),
             Type::Struct { .. } => return None,
             Type::Integer(v) => Self::Integer(*v),
-            Type::Bool => Self::Integer(IntegerType::U8),
+            Type::Bool(i) => Self::Integer(*i),
             Type::Guid | Type::PackedGuid => Self::Integer(IntegerType::U64(Endianness::Little)),
             Type::DateTime => Self::Integer(IntegerType::U32(Endianness::Little)),
             Type::FloatingPoint(v) => Self::Float(*v),

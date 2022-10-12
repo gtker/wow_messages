@@ -3,7 +3,7 @@ use crate::file_utils::get_import_path;
 use crate::parser::types::array::ArrayType;
 use crate::parser::types::compare_name_and_tags;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::sizes::{Sizes, BOOL_SIZE, DATETIME_SIZE};
+use crate::parser::types::sizes::{Sizes, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::Tags;
 use crate::parser::types::test_case::TestCase;
@@ -284,7 +284,7 @@ impl Container {
                         Type::UpdateMask => panic!(),
                         Type::AuraMask => panic!(),
                         Type::SizedCString => panic!(),
-                        Type::Bool => sum += BOOL_SIZE as u64,
+                        Type::Bool(i) => sum += i.size() as u64,
                         Type::DateTime => sum += DATETIME_SIZE as u64,
                     }
                     if let Some(v) = d.value() {

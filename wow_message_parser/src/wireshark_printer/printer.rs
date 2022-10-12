@@ -254,9 +254,13 @@ fn print_definition(
             ));
             true
         }
-        Type::Bool => {
+        Type::Bool(i) => {
             let name = w.unwrap().name();
-            s.wln(format!("ptvcursor_add(ptv, {hf}, 1, ENC_NA);", hf = name,));
+            s.wln(format!(
+                "ptvcursor_add(ptv, {hf}, {len}, ENC_NA);",
+                hf = name,
+                len = i.size()
+            ));
             true
         }
         Type::DateTime => {

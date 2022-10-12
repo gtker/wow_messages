@@ -29,7 +29,7 @@ impl GossipItem {
         w.write_all(&self.item_icon.to_le_bytes())?;
 
         // coded: Bool
-        w.write_all(if self.coded { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.coded).to_le_bytes().as_slice())?;
 
         Ok(())
     }

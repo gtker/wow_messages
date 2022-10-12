@@ -1,8 +1,9 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
+use crate::parser::types::parsed::parsed_ty::bool_ty_to_string;
 use crate::parser::types::sizes::{
-    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE,
-    GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
+    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GUID_SIZE,
+    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::struct_member::StructMemberDefinition;
 use crate::parser::types::{FloatingPointType, IntegerType};
@@ -31,7 +32,7 @@ impl Display for StringSize {
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum Type {
     Integer(IntegerType),
-    Bool,
+    Bool(IntegerType),
     PackedGuid,
     Guid,
     DateTime,
@@ -70,7 +71,7 @@ impl Type {
             Type::UpdateMask => "UpdateMask".to_string(),
             Type::AuraMask => "AuraMask".to_string(),
             Type::SizedCString => "SizedCString".to_string(),
-            Type::Bool => "Bool".to_string(),
+            Type::Bool(i) => bool_ty_to_string(i),
             Type::DateTime => "DateTime".to_string(),
         }
     }
@@ -86,7 +87,7 @@ impl Type {
             Type::PackedGuid | Type::Guid => "Guid".to_string(),
             Type::UpdateMask => "UpdateMask".to_string(),
             Type::AuraMask => "AuraMask".to_string(),
-            Type::Bool => "bool".to_string(),
+            Type::Bool(_) => "bool".to_string(),
             Type::DateTime => "DateTime".to_string(),
         };
 
@@ -99,7 +100,7 @@ impl Type {
 
         match self {
             Type::Integer(i) => sizes.inc_both(i.size() as usize),
-            Type::Bool => sizes.inc_both(BOOL_SIZE.into()),
+            Type::Bool(i) => sizes.inc_both(i.size().into()),
             Type::Guid => sizes.inc_both(GUID_SIZE as _),
             Type::DateTime => sizes.inc_both(DATETIME_SIZE.into()),
             Type::FloatingPoint(i) => sizes.inc_both(i.size() as usize),
@@ -209,18 +210,17 @@ impl Type {
             | Type::UpdateMask
             | Type::AuraMask
             | Type::PackedGuid => "-".to_string(),
-            Type::Bool => BOOL_SIZE.to_string(),
+            Type::Bool(i) => i.size().to_string(),
             Type::DateTime => DATETIME_SIZE.to_string(),
         }
     }
 
     pub(crate) fn doc_endian_str(&self) -> String {
         match self {
-            Type::Integer(i) => i.doc_endian_str().to_string(),
+            Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
             Type::DateTime | Type::Guid => "Little".to_string(),
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
             Type::SizedCString
-            | Type::Bool
             | Type::String { .. }
             | Type::Array(_)
             | Type::Enum { .. }

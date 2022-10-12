@@ -3,8 +3,8 @@ use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
-    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, BOOL_SIZE, DATETIME_SIZE,
-    GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
+    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GUID_SIZE,
+    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
 use crate::{
@@ -16,7 +16,7 @@ use std::convert::TryInto;
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum ParsedType {
     Integer(IntegerType),
-    Bool,
+    Bool(IntegerType),
     PackedGuid,
     Guid,
     DateTime,
@@ -49,7 +49,7 @@ impl ParsedType {
             ParsedType::UpdateMask => "UpdateMask".to_string(),
             ParsedType::AuraMask => "AuraMask".to_string(),
             ParsedType::SizedCString => "SizedCString".to_string(),
-            ParsedType::Bool => "Bool".to_string(),
+            ParsedType::Bool(i) => bool_ty_to_string(i),
             ParsedType::DateTime => "DateTime".to_string(),
         }
     }
@@ -65,7 +65,7 @@ impl ParsedType {
 
         match self {
             ParsedType::Integer(i) => sizes.inc_both(i.size() as usize),
-            ParsedType::Bool => sizes.inc_both(BOOL_SIZE.into()),
+            ParsedType::Bool(i) => sizes.inc_both(i.size() as usize),
             ParsedType::Guid => sizes.inc_both(GUID_SIZE as _),
             ParsedType::DateTime => sizes.inc_both(DATETIME_SIZE.into()),
             ParsedType::FloatingPoint(i) => sizes.inc_both(i.size() as usize),
@@ -194,8 +194,10 @@ impl ParsedType {
     pub(crate) fn from_str(s: &str) -> Self {
         let s = match s {
             "u8" => Self::Integer(IntegerType::U8),
-            "Bool" => Self::Bool,
-            "Bool32" => Self::Integer(IntegerType::U32(Endianness::Little)),
+            "Bool" => Self::Bool(IntegerType::U8),
+            "Bool16" => Self::Bool(IntegerType::U16(Endianness::Little)),
+            "Bool32" => Self::Bool(IntegerType::U32(Endianness::Little)),
+            "Bool64" => Self::Bool(IntegerType::U64(Endianness::Little)),
             "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
             "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
             "Spell" | "Milliseconds" | "Seconds" | "Copper" | "Item" => {
@@ -264,7 +266,7 @@ impl ParsedType {
                         | ParsedType::UpdateMask
                         | ParsedType::AuraMask
                         | ParsedType::DateTime
-                        | ParsedType::Bool => panic!("unsupported"),
+                        | ParsedType::Bool(_) => panic!("unsupported"),
                         ParsedType::PackedGuid => {
                             Self::Array(ParsedArray::new(ParsedArrayType::PackedGuid, size))
                         }
@@ -278,5 +280,14 @@ impl ParsedType {
             }
             s => s,
         }
+    }
+}
+
+pub(crate) fn bool_ty_to_string(i: &IntegerType) -> String {
+    match i {
+        IntegerType::U8 => "Bool".to_string(),
+        IntegerType::U16(_) => "Bool16".to_string(),
+        IntegerType::I32(_) | IntegerType::U32(_) => "Bool32".to_string(),
+        IntegerType::U64(_) => "Bool64".to_string(),
     }
 }

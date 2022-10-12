@@ -1,7 +1,7 @@
 use crate::doc_printer::DocWriter;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
-use crate::parser::types::sizes::{BOOL_SIZE, DATETIME_SIZE};
+use crate::parser::types::sizes::DATETIME_SIZE;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::{StringSize, Type};
 use crate::parser::types::{Endianness, IntegerType};
@@ -59,7 +59,7 @@ fn print_container_example_array(
         // Edge case: Endless arrays of complex types do not have always have a fixed type, so we just loop until we run out of bytes to read instead.
         if let ArrayType::Struct(_) = array.ty() {
             if ArraySize::Endless == array.size() && bytes.len() == 0 {
-                return
+                return;
             }
         }
 
@@ -133,8 +133,8 @@ fn print_container_example_definition(
         Type::DateTime => {
             s.bytes(bytes.take(core::mem::size_of::<u32>()).into_iter());
         }
-        Type::Bool => {
-            s.bytes(bytes.take(core::mem::size_of::<u8>()).into_iter());
+        Type::Bool(i) => {
+            s.bytes(bytes.take(i.size() as usize).into_iter());
         }
         Type::Guid => {
             s.bytes(bytes.take(core::mem::size_of::<u64>()).into_iter());
@@ -274,9 +274,19 @@ fn print_container_example_member(
             if d.tags().is_compressed() {
                 let mut decoded_bytes = Vec::new();
                 let mut decoder = flate2::read::ZlibDecoder::new(bytes.as_slice());
-                decoder.read_to_end(&mut decoded_bytes).expect("Failed to decode ZLib compressed field.");
+                decoder
+                    .read_to_end(&mut decoded_bytes)
+                    .expect("Failed to decode ZLib compressed field.");
 
-                print_container_example_definition(s, d, &mut decoded_bytes.iter(), values, o, tags, prefix);
+                print_container_example_definition(
+                    s,
+                    d,
+                    &mut decoded_bytes.iter(),
+                    values,
+                    o,
+                    tags,
+                    prefix,
+                );
             } else {
                 print_container_example_definition(s, d, bytes, values, o, tags, prefix);
             }
@@ -521,7 +531,7 @@ fn print_container_field(
                     }
                 },
                 Type::SizedCString
-                | Type::Bool
+                | Type::Bool(_)
                 | Type::DateTime
                 | Type::CString
                 | Type::String { .. }
@@ -561,7 +571,7 @@ fn print_container_field(
                     Type::Guid => Some(offset.unwrap() + 8),
                     Type::FloatingPoint(f) => Some(offset.unwrap() + f.size() as usize),
                     Type::DateTime => Some(offset.unwrap() + DATETIME_SIZE as usize),
-                    Type::Bool => Some(offset.unwrap() + BOOL_SIZE as usize),
+                    Type::Bool(i) => Some(offset.unwrap() + i.size() as usize),
                     Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                         if let Some(upcast) = upcast {
                             Some(offset.unwrap() + upcast.size() as usize)

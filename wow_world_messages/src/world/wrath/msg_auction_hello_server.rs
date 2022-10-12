@@ -32,7 +32,7 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
         w.write_all(&self.auction_house_id.to_le_bytes())?;
 
         // auction_house_enabled: Bool
-        w.write_all(if self.auction_house_enabled { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.auction_house_enabled).to_le_bytes().as_slice())?;
 
         Ok(())
     }

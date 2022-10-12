@@ -44,7 +44,7 @@ fn parsed_type_to_type(
 ) -> Type {
     match t {
         ParsedType::Integer(i) => Type::Integer(i),
-        ParsedType::Bool => Type::Bool,
+        ParsedType::Bool(i) => Type::Bool(i),
         ParsedType::PackedGuid => Type::PackedGuid,
         ParsedType::Guid => Type::Guid,
         ParsedType::DateTime => Type::DateTime,
@@ -452,7 +452,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
         ParsedType::SizedCString | ParsedType::CString | ParsedType::String { .. } => {
             TestValue::String(value.replace('\"', ""))
         }
-        ParsedType::Bool => TestValue::Bool(if value == "TRUE" {
+        ParsedType::Bool(_) => TestValue::Bool(if value == "TRUE" {
             true
         } else if value == "FALSE" {
             false

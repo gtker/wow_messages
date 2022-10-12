@@ -35,7 +35,7 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
         w.write_all(&(self.location.as_int() as u8).to_le_bytes())?;
 
         // can_gain_exp: Bool
-        w.write_all(if self.can_gain_exp { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.can_gain_exp).to_le_bytes().as_slice())?;
 
         Ok(())
     }

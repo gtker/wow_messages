@@ -327,13 +327,14 @@ fn print_read_definition(
     s.wln(format!("// {}: {}", d.name(), d.ty().str()));
 
     match &d.ty() {
-        Type::Bool => {
+        Type::Bool(i) => {
             s.wln(format!(
-                "let {name} = {module_name}::{prefix}read_u8_le(r){postfix}? != 0;",
+                "let {name} = {module_name}::{prefix}read_{ty}_le(r){postfix}? != 0;",
                 name = d.name(),
                 module_name = UTILITY_PATH,
                 prefix = prefix,
                 postfix = postfix,
+                ty = i.rust_str(),
             ));
         }
         Type::DateTime => {

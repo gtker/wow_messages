@@ -90,7 +90,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
                 w.write_all(&queue_position.to_le_bytes())?;
 
                 // realm_has_free_character_migration: Bool
-                w.write_all(if *realm_has_free_character_migration { &[1] } else { &[0] })?;
+                w.write_all(u8::from(*realm_has_free_character_migration).to_le_bytes().as_slice())?;
 
             }
             SMSG_AUTH_RESPONSE_WorldResult::AuthBanned => {}

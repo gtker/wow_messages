@@ -42,7 +42,7 @@ impl crate::Message for SMSG_SPELLHEALLOG {
         w.write_all(&self.damage.to_le_bytes())?;
 
         // critical: Bool
-        w.write_all(if self.critical { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.critical).to_le_bytes().as_slice())?;
 
         Ok(())
     }

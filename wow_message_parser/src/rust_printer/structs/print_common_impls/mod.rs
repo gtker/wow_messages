@@ -1,7 +1,7 @@
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::sizes::{BOOL_SIZE, DATETIME_SIZE, GUID_SIZE};
+use crate::parser::types::sizes::{DATETIME_SIZE, GUID_SIZE};
 use crate::parser::types::ty::Type;
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
 use crate::rust_printer::{
@@ -147,7 +147,7 @@ pub(crate) fn print_constant_member(
 
 pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
     let str = match m.ty() {
-        RustType::Bool => format!("{}", BOOL_SIZE),
+        RustType::Bool(i) => format!("{}", i.size()),
         RustType::Integer(i) => i.size().to_string(),
         RustType::Floating(f) => f.size().to_string(),
         RustType::Guid => GUID_SIZE.to_string(),
@@ -232,24 +232,24 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                             )
                         } else {
                             match inner_is_constant {
-                        true => {
-                            format!(
-                                "{prefix}{name}.len() * {size}",
-                                name = m.name(),
-                                prefix = prefix,
-                                size = inner_sizes.maximum(),
-                            )
-                        }
-                        false => {
-                            format!(
-                                "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
-                                name = m.name(),
-                                prefix = prefix,
-                            )
+                                true => {
+                                    format!(
+                                        "{prefix}{name}.len() * {size}",
+                                        name = m.name(),
+                                        prefix = prefix,
+                                        size = inner_sizes.maximum(),
+                                    )
+                                }
+                                false => {
+                                    format!(
+                                        "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
+                                        name = m.name(),
+                                        prefix = prefix,
+                                    )
                                 }
                             }
                         }
-                    },
+                    }
                 },
                 ArrayType::CString => {
                     format!(

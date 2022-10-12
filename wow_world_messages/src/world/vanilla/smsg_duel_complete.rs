@@ -21,7 +21,7 @@ impl crate::Message for SMSG_DUEL_COMPLETE {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // ended_without_interruption: Bool
-        w.write_all(if self.ended_without_interruption { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.ended_without_interruption).to_le_bytes().as_slice())?;
 
         Ok(())
     }

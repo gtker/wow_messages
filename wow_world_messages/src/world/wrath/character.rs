@@ -120,7 +120,7 @@ impl Character {
         w.write_all(&self.recustomization_flags.to_le_bytes())?;
 
         // first_login: Bool
-        w.write_all(if self.first_login { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.first_login).to_le_bytes().as_slice())?;
 
         // pet_display_id: u32
         w.write_all(&self.pet_display_id.to_le_bytes())?;

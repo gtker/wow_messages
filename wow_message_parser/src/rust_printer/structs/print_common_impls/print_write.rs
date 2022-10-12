@@ -183,13 +183,14 @@ pub(crate) fn print_write_definition(
                 postfix,
             );
         }
-        Type::Bool => {
+        Type::Bool(i) => {
             s.wln(format!(
-                "w.write_all(if {reference}{variable_prefix}{variable_name} {{ &[1] }} else {{ &[0] }}){postfix}?;",
+                "w.write_all({ty}::from({reference}{variable_prefix}{variable_name}).to_le_bytes().as_slice()){postfix}?;",
                 reference = if variable_prefix.is_empty() { "*" } else { "" }, // non-self variables are &bool
                 variable_prefix = variable_prefix,
                 variable_name = d.name(),
                 postfix = postfix,
+                ty = i.rust_str(),
             ));
         }
         Type::FloatingPoint(floating) => {

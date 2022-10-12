@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 /// msg MSG_SET_DUNGEON_DIFFICULTY = 0x0329 {
 ///     DungeonDifficulty difficulty;
 ///     u32 unknown1;
-///     u32 is_in_group;
+///     Bool32 is_in_group;
 /// }
 /// ```
 pub struct MSG_SET_DUNGEON_DIFFICULTY {
@@ -16,7 +16,7 @@ pub struct MSG_SET_DUNGEON_DIFFICULTY {
     /// ArcEmu hardcodes this to 1
     ///
     pub unknown1: u32,
-    pub is_in_group: u32,
+    pub is_in_group: bool,
 }
 
 impl crate::Message for MSG_SET_DUNGEON_DIFFICULTY {
@@ -33,8 +33,8 @@ impl crate::Message for MSG_SET_DUNGEON_DIFFICULTY {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        // is_in_group: u32
-        w.write_all(&self.is_in_group.to_le_bytes())?;
+        // is_in_group: Bool32
+        w.write_all(u32::from(self.is_in_group).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -49,9 +49,8 @@ impl crate::Message for MSG_SET_DUNGEON_DIFFICULTY {
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
 
-        // is_in_group: u32
-        let is_in_group = crate::util::read_u32_le(r)?;
-
+        // is_in_group: Bool32
+        let is_in_group = crate::util::read_u32_le(r)? != 0;
         Ok(Self {
             difficulty,
             unknown1,

@@ -66,7 +66,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
                 w.write_all(&(inventory_result.as_int() as u32).to_le_bytes())?;
 
                 // target_error: Bool
-                w.write_all(if *target_error { &[1] } else { &[0] })?;
+                w.write_all(u8::from(*target_error).to_le_bytes().as_slice())?;
 
                 // item_limit_category_id: u32
                 w.write_all(&item_limit_category_id.to_le_bytes())?;

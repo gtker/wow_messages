@@ -32,7 +32,7 @@ impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
         w.write_all(&self.id.to_le_bytes())?;
 
         // enabled: Bool
-        w.write_all(if self.enabled { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.enabled).to_le_bytes().as_slice())?;
 
         Ok(())
     }

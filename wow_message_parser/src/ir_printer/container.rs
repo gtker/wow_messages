@@ -228,7 +228,7 @@ pub(crate) enum IrType {
     #[serde(rename = "integer")]
     Integer(IrIntegerType),
     #[serde(rename = "bool")]
-    Bool,
+    Bool(IrIntegerType),
     #[serde(rename = "datetime")]
     DateTime,
     #[serde(rename = "packed_guid")]
@@ -291,7 +291,7 @@ impl From<&Type> for IrType {
                 type_name: e.name().to_string(),
             },
             Type::SizedCString => Self::SizedCString,
-            Type::Bool => Self::Bool,
+            Type::Bool(i) => Self::Bool(i.into()),
             Type::DateTime => Self::DateTime,
         }
     }

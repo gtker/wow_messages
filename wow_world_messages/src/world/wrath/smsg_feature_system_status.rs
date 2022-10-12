@@ -27,7 +27,7 @@ impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
         w.write_all(&(self.complaint_status.as_int() as u8).to_le_bytes())?;
 
         // voice_chat_enabled: Bool
-        w.write_all(if self.voice_chat_enabled { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.voice_chat_enabled).to_le_bytes().as_slice())?;
 
         Ok(())
     }

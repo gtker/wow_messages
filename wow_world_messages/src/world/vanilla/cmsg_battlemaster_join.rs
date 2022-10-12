@@ -38,7 +38,7 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
         w.write_all(&self.instance_id.to_le_bytes())?;
 
         // join_as_group: Bool
-        w.write_all(if self.join_as_group { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.join_as_group).to_le_bytes().as_slice())?;
 
         Ok(())
     }

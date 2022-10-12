@@ -44,7 +44,7 @@ impl crate::Message for SMSG_START_MIRROR_TIMER {
         w.write_all(&self.scale.to_le_bytes())?;
 
         // is_frozen: Bool
-        w.write_all(if self.is_frozen { &[1] } else { &[0] })?;
+        w.write_all(u8::from(self.is_frozen).to_le_bytes().as_slice())?;
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
