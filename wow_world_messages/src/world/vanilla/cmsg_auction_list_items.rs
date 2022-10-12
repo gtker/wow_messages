@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::vanilla::ItemQuality;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm#L1):
 /// ```text
 /// cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
 ///     Guid auctioneer_guid;
@@ -14,7 +15,7 @@ use std::io::{Write, Read};
 ///     u32 auction_slot_id;
 ///     u32 auction_main_category;
 ///     u32 auction_sub_category;
-///     u32 auction_quality;
+///     ItemQuality auction_quality;
 ///     u8 usable;
 /// }
 /// ```
@@ -27,7 +28,7 @@ pub struct CMSG_AUCTION_LIST_ITEMS {
     pub auction_slot_id: u32,
     pub auction_main_category: u32,
     pub auction_sub_category: u32,
-    pub auction_quality: u32,
+    pub auction_quality: ItemQuality,
     pub usable: u8,
 }
 
@@ -67,8 +68,8 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         // auction_sub_category: u32
         w.write_all(&self.auction_sub_category.to_le_bytes())?;
 
-        // auction_quality: u32
-        w.write_all(&self.auction_quality.to_le_bytes())?;
+        // auction_quality: ItemQuality
+        w.write_all(&(self.auction_quality.as_int() as u32).to_le_bytes())?;
 
         // usable: u8
         w.write_all(&self.usable.to_le_bytes())?;
@@ -101,8 +102,8 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         // auction_sub_category: u32
         let auction_sub_category = crate::util::read_u32_le(r)?;
 
-        // auction_quality: u32
-        let auction_quality = crate::util::read_u32_le(r)?;
+        // auction_quality: ItemQuality
+        let auction_quality: ItemQuality = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // usable: u8
         let usable = crate::util::read_u8_le(r)?;
@@ -135,7 +136,7 @@ impl CMSG_AUCTION_LIST_ITEMS {
         + 4 // auction_slot_id: u32
         + 4 // auction_main_category: u32
         + 4 // auction_sub_category: u32
-        + 4 // auction_quality: u32
+        + 4 // auction_quality: ItemQuality
         + 1 // usable: u8
     }
 }

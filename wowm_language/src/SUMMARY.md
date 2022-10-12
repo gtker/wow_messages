@@ -191,6 +191,7 @@
 - [Addon](docs/addon.md)
 - [AddonInfo](docs/addoninfo.md)
 - [AuctionListItem](docs/auctionlistitem.md)
+- [AuctionSort](docs/auctionsort.md)
 - [AuraLog](docs/auralog.md)
 - [BattlegroundPlayer](docs/battlegroundplayer.md)
 - [BattlegroundPlayerPosition](docs/battlegroundplayerposition.md)

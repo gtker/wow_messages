@@ -86,7 +86,6 @@ static int hf_woww_auction_house_id = -1;
 static int hf_woww_auction_id = -1;
 static int hf_woww_auction_main_category = -1;
 static int hf_woww_auction_out_bid = -1;
-static int hf_woww_auction_quality = -1;
 static int hf_woww_auction_slot_id = -1;
 static int hf_woww_auction_sub_category = -1;
 static int hf_woww_auctioneer = -1;

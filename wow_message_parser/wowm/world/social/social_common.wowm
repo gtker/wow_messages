@@ -16,6 +16,8 @@ enum ItemQuality : u8 {
     EPIC = 4;
     LEGENDARY = 5;
     ARTIFACT = 6;
+} {
+    versions = "2";
 }
 
 enum ChatType : u8 {

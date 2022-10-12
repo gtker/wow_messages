@@ -3335,6 +3335,26 @@ static const value_string e_trainer_spell_state_strings[] =  {
 };
 
 typedef enum {
+    ITEM_QUALITY_POOR = 0x0,
+    ITEM_QUALITY_NORMAL = 0x1,
+    ITEM_QUALITY_UNCOMMON = 0x2,
+    ITEM_QUALITY_RARE = 0x3,
+    ITEM_QUALITY_EPIC = 0x4,
+    ITEM_QUALITY_LEGENDARY = 0x5,
+    ITEM_QUALITY_ARTIFACT = 0x6,
+} e_item_quality;
+static const value_string e_item_quality_strings[] =  {
+    { ITEM_QUALITY_POOR, "Poor" },
+    { ITEM_QUALITY_NORMAL, "Normal" },
+    { ITEM_QUALITY_UNCOMMON, "Uncommon" },
+    { ITEM_QUALITY_RARE, "Rare" },
+    { ITEM_QUALITY_EPIC, "Epic" },
+    { ITEM_QUALITY_LEGENDARY, "Legendary" },
+    { ITEM_QUALITY_ARTIFACT, "Artifact" },
+    { 0, NULL }
+};
+
+typedef enum {
     BATTLEFIELD_PORT_ACTION_LEAVE_QUEUE = 0x0,
     BATTLEFIELD_PORT_ACTION_ENTER_BATTLE = 0x1,
 } e_battlefield_port_action;
@@ -3665,26 +3685,6 @@ static const value_string e_group_loot_setting_strings[] =  {
     { GROUP_LOOT_SETTING_MASTER_LOOT, "Master Loot" },
     { GROUP_LOOT_SETTING_GROUP_LOOT, "Group Loot" },
     { GROUP_LOOT_SETTING_NEED_BEFORE_GREED, "Need Before Greed" },
-    { 0, NULL }
-};
-
-typedef enum {
-    ITEM_QUALITY_POOR = 0x0,
-    ITEM_QUALITY_NORMAL = 0x1,
-    ITEM_QUALITY_UNCOMMON = 0x2,
-    ITEM_QUALITY_RARE = 0x3,
-    ITEM_QUALITY_EPIC = 0x4,
-    ITEM_QUALITY_LEGENDARY = 0x5,
-    ITEM_QUALITY_ARTIFACT = 0x6,
-} e_item_quality;
-static const value_string e_item_quality_strings[] =  {
-    { ITEM_QUALITY_POOR, "Poor" },
-    { ITEM_QUALITY_NORMAL, "Normal" },
-    { ITEM_QUALITY_UNCOMMON, "Uncommon" },
-    { ITEM_QUALITY_RARE, "Rare" },
-    { ITEM_QUALITY_EPIC, "Epic" },
-    { ITEM_QUALITY_LEGENDARY, "Legendary" },
-    { ITEM_QUALITY_ARTIFACT, "Artifact" },
     { 0, NULL }
 };
 

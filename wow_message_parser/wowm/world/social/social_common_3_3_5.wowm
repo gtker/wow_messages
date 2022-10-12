@@ -232,3 +232,16 @@ enum ChatType : u8 {
     ARENA_POINTS           = 0x32;
     PARTY_LEADER           = 0x33;
 }
+
+enum ItemQuality : u8 {
+    POOR = 0 ;
+    NORMAL = 1;
+    UNCOMMON = 2;
+    RARE = 3;
+    EPIC = 4;
+    LEGENDARY = 5;
+    ARTIFACT = 6;
+    HEIRLOOM = 7;
+}
+
+

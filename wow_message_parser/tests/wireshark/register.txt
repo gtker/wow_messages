@@ -526,12 +526,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_auction_quality,
-            { "Auction Quality", "woww.auction.quality",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_auction_slot_id,
             { "Auction Slot Id", "woww.auction.slot.id",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,

@@ -1,5 +1,6 @@
 pub mod addon_info123_3_5;
 pub mod ai_reaction123;
+pub mod auction_sort2_4_33;
 pub mod billing_plan_flags2_4_33;
 pub mod channel_flags123;
 pub mod channel_member123;
@@ -53,6 +54,7 @@ pub mod cmsg_tutorial_flag123;
 pub mod cmsg_tutorial_reset123;
 pub mod environmental_damage_type123;
 pub mod inventory_type1_1223;
+pub mod item_quality1_122;
 pub mod language11_12;
 pub mod language2_4_33;
 pub mod log_format1_1223;

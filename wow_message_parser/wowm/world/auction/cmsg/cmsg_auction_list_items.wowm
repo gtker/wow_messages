@@ -1,4 +1,24 @@
-#tag_all versions "1.12";
+cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
+    Guid auctioneer_guid;
+    u32 list_start_item;
+    CString searched_name;
+    u8 minimum_level;
+    u8 maximum_level;
+    u32 auction_slot_id;
+    u32 auction_main_category;
+    u32 auction_sub_category;
+    (u32)ItemQuality auction_quality;
+    u8 usable;
+} {
+    versions = "1.12";
+}
+
+struct AuctionSort {
+    u8 column;
+    u8 reversed;
+} {
+    versions = "2.4.3 3";
+}
 
 cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
     Guid auctioneer_guid;
@@ -6,11 +26,16 @@ cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
     CString searched_name;
     u8 minimum_level;
     u8 maximum_level;
-    /* TODO: Maybe more enums? */
     u32 auction_slot_id;
     u32 auction_main_category;
     u32 auction_sub_category;
-    u32 auction_quality;
+    (u32)ItemQuality auction_quality;
     u8 usable;
+    u8 is_full;
+    u8 amount_of_sorted_auctions {
+        valid_range = "0 12";
+    }
+    AuctionSort[amount_of_sorted_auctions] sorted_auctions;
+} {
+    paste_versions = "2.4.3 3.3.5"; /* Wrath restricted by ItemQuality */
 }
-
