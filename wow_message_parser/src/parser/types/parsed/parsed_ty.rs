@@ -195,6 +195,7 @@ impl ParsedType {
         let s = match s {
             "u8" => Self::Integer(IntegerType::U8),
             "Bool" => Self::Bool,
+            "Bool32" => Self::Integer(IntegerType::U32(Endianness::Little)),
             "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
             "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
             "Spell" | "Milliseconds" | "Seconds" | "Copper" | "Item" => {
