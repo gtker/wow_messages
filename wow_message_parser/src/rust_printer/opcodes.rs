@@ -171,7 +171,7 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
                 ContainerType::CMsg(i) => i,
                 ContainerType::SMsg(i) => i,
                 ContainerType::Msg(i) => i,
-                _ => panic!(),
+                _ => unreachable!()
             };
             s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body(&mut r, body_size)?)),",
                           opcode = opcode,
@@ -370,7 +370,7 @@ pub(crate) fn common_impls_world(
             "u16",
             2,
         ),
-        _ => panic!(),
+        _ => unreachable!("not a world type: '{:#?}'", container_type),
     };
     s.bodyn(format!("impl {t}OpcodeMessage", t = ty), |s| {
         world_common_impls_read_opcodes(s, v, size, EXPECTED_OPCODE_ERROR);

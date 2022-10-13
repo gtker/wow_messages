@@ -508,7 +508,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
             }
         }
         ParsedType::UpdateMask | ParsedType::AuraMask => {
-            panic!("unimplemented")
+            unimplemented!()
         }
     };
 

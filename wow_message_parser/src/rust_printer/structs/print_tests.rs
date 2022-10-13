@@ -90,7 +90,7 @@ fn print_includes(e: &Container, version: Version, s: &mut Writer) {
 
     match e.container_type() {
         ContainerType::Msg(_) => {
-            panic!()
+            unimplemented!("test for MSG type")
         }
         ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
             if e.contains_guid_or_packed_guid_transitively()

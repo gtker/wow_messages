@@ -102,8 +102,8 @@ fn print_read_array_fixed(
                     "{name}.push(String::from_utf8(s)?);",
                     name = d.name()
                 )),
-                ArraySize::Variable(_) => unreachable!(),
-                ArraySize::Endless => panic!(),
+                ArraySize::Variable(_) => unimplemented!(),
+                ArraySize::Endless => unimplemented!(),
             }
         }
         ArrayType::Guid => {

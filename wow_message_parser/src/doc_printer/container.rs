@@ -184,7 +184,7 @@ fn print_container_example_definition(
                         let value = value.value().original();
                         format!("{} {} ({})", comment, name, value)
                     } else {
-                        panic!()
+                        unreachable!()
                     }
                 }
                 DefinerType::Flag => {
@@ -239,7 +239,7 @@ fn print_container_example_definition(
                 }
             }
         }
-        Type::AuraMask => panic!("AuraMask example"),
+        Type::AuraMask => unimplemented!("AuraMask example"),
         Type::SizedCString => {
             let b = bytes.take(4).cloned().collect::<Vec<u8>>();
 
@@ -296,7 +296,7 @@ fn print_container_example_member(
 
             let definer_ty = match statement.original_ty() {
                 Type::Enum { e, .. } | Type::Flag { e, .. } => e,
-                _ => panic!(),
+                _ => unreachable!(),
             };
 
             let statement_set = |statement: &IfStatement, enum_value: isize| {
@@ -386,7 +386,7 @@ fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut 
     let (opcode, o) = match e.container_type() {
         ContainerType::CMsg(o) => (bytes.take(core::mem::size_of::<u32>()), o),
         ContainerType::SMsg(o) => (bytes.take(core::mem::size_of::<u16>()), o),
-        _ => panic!(),
+        _ => unimplemented!("msg in container examples"),
     };
     s.bytes(opcode.into_iter());
     s.wln(format!("// opcode ({})", o));
@@ -703,7 +703,7 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
         ContainerType::SLogin(_) | ContainerType::CLogin(_) => {
             s.wln("Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.")
         }
-        _ => panic!("unexpected container type"),
+        _ => unreachable!("unexpected container type"),
     };
 
     s.newline();
