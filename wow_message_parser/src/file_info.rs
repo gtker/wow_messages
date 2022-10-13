@@ -1,6 +1,6 @@
 use crate::path_utils::path_to_fileinfo;
 use crate::GITHUB_REPO_URL;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) struct FileInfo {
@@ -26,8 +26,16 @@ impl FileInfo {
         &self.file_name
     }
 
+    pub(crate) fn path(&self) -> &Path {
+        &self.path
+    }
+
     pub(crate) fn start_line(&self) -> usize {
         self.start_position
+    }
+
+    pub(crate) fn end_line(&self) -> usize {
+        self.end_position
     }
 
     pub(crate) fn original_file_github_link(&self) -> String {

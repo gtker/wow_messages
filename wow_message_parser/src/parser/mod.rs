@@ -112,8 +112,9 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, path: &Path) -> P
     let mut tests = Vec::new();
 
     for statement in statements {
-        let pos = statement.as_span().start_pos().line_col();
-        let file_info = FileInfo::new(path.to_owned(), pos.0, pos.1);
+        let start_pos = statement.as_span().start_pos().line_col();
+        let end_pos = statement.as_span().end_pos().line_col().0;
+        let file_info = FileInfo::new(path.to_owned(), start_pos.0, end_pos);
         match statement.as_rule() {
             Rule::definer => {
                 let mut statement = statement.into_inner();
