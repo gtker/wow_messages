@@ -46,6 +46,7 @@ use crate::world::wrath::MSG_MOVE_START_PITCH_DOWN_Client;
 use crate::world::wrath::MSG_MOVE_STOP_PITCH_Client;
 use crate::world::wrath::MSG_MOVE_SET_RUN_MODE_Client;
 use crate::world::wrath::MSG_MOVE_SET_WALK_MODE_Client;
+use crate::world::wrath::MSG_MOVE_TELEPORT_ACK_Client;
 use crate::world::wrath::MSG_MOVE_FALL_LAND_Client;
 use crate::world::wrath::MSG_MOVE_START_SWIM_Client;
 use crate::world::wrath::MSG_MOVE_STOP_SWIM_Client;
@@ -146,6 +147,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH_Client),
     MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE_Client),
     MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE_Client),
+    MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Client),
     MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND_Client),
     MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM_Client),
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Client),
@@ -248,6 +250,7 @@ impl ClientOpcodeMessage {
             0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE_Client as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Client as crate::Message>::read_body(&mut r, body_size)?)),
@@ -418,6 +421,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_client(w, e),
@@ -521,6 +525,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_client(w),
@@ -624,6 +629,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -727,6 +733,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -830,6 +837,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -933,6 +941,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_client(w).await,
@@ -1047,6 +1056,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => "MSG_MOVE_STOP_PITCH_Client",
             ClientOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => "MSG_MOVE_SET_RUN_MODE_Client",
             ClientOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => "MSG_MOVE_SET_WALK_MODE_Client",
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Client",
             ClientOpcodeMessage::MSG_MOVE_FALL_LAND(_) => "MSG_MOVE_FALL_LAND_Client",
             ClientOpcodeMessage::MSG_MOVE_START_SWIM(_) => "MSG_MOVE_START_SWIM_Client",
             ClientOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM_Client",
@@ -1345,6 +1355,12 @@ impl From<MSG_MOVE_SET_RUN_MODE_Client> for ClientOpcodeMessage {
 impl From<MSG_MOVE_SET_WALK_MODE_Client> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_SET_WALK_MODE_Client) -> Self {
         Self::MSG_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_TELEPORT_ACK_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_TELEPORT_ACK_Client) -> Self {
+        Self::MSG_MOVE_TELEPORT_ACK(c)
     }
 }
 
@@ -1714,6 +1730,7 @@ use crate::world::wrath::MSG_MOVE_START_PITCH_DOWN_Server;
 use crate::world::wrath::MSG_MOVE_STOP_PITCH_Server;
 use crate::world::wrath::MSG_MOVE_SET_RUN_MODE_Server;
 use crate::world::wrath::MSG_MOVE_SET_WALK_MODE_Server;
+use crate::world::wrath::MSG_MOVE_TELEPORT_ACK_Server;
 use crate::world::wrath::MSG_MOVE_FALL_LAND_Server;
 use crate::world::wrath::MSG_MOVE_START_SWIM_Server;
 use crate::world::wrath::MSG_MOVE_STOP_SWIM_Server;
@@ -1797,6 +1814,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH_Server),
     MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE_Server),
     MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE_Server),
+    MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Server),
     MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND_Server),
     MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM_Server),
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Server),
@@ -1882,6 +1900,7 @@ impl ServerOpcodeMessage {
             0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE_Server as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Server as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2116,6 +2135,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_server(w, e),
@@ -2202,6 +2222,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_server(w),
@@ -2288,6 +2309,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2374,6 +2396,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2460,6 +2483,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2546,6 +2570,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_server(w).await,
@@ -2634,6 +2659,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => "MSG_MOVE_STOP_PITCH_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => "MSG_MOVE_SET_RUN_MODE_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => "MSG_MOVE_SET_WALK_MODE_Server",
+            ServerOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Server",
             ServerOpcodeMessage::MSG_MOVE_FALL_LAND(_) => "MSG_MOVE_FALL_LAND_Server",
             ServerOpcodeMessage::MSG_MOVE_START_SWIM(_) => "MSG_MOVE_START_SWIM_Server",
             ServerOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM_Server",
@@ -2840,6 +2866,12 @@ impl From<MSG_MOVE_SET_RUN_MODE_Server> for ServerOpcodeMessage {
 impl From<MSG_MOVE_SET_WALK_MODE_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_SET_WALK_MODE_Server) -> Self {
         Self::MSG_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_TELEPORT_ACK_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_TELEPORT_ACK_Server) -> Self {
+        Self::MSG_MOVE_TELEPORT_ACK(c)
     }
 }
 
