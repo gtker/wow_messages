@@ -2,11 +2,25 @@ use crate::file_utils::write_string_to_file;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{Version, WorldVersion};
 use crate::rust_printer::{print_enum, print_flag, print_struct, Writer};
-use crate::{load_files, ParsedObjects};
+use crate::{load_files, parser, wowm_directory, ParsedObjects};
 use std::fs::read_to_string;
+use std::panic;
 use std::path::Path;
 
 const OVERWRITE_ALL_TESTS: bool = false;
+
+fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F) {
+    let prev_hook = panic::take_hook();
+    panic::set_hook(Box::new(|_| {}));
+
+    let result = panic::catch_unwind(f);
+    panic::set_hook(prev_hook);
+
+    match result {
+        Ok(_) => panic!(),
+        Err(_) => {}
+    };
+}
 
 fn get_all_impl_items() -> Objects {
     let mut o = ParsedObjects::empty();
@@ -37,19 +51,21 @@ fn overwrite(s: &Writer, name: &str) {
 const VERSION: Version = Version::World(WorldVersion::Minor(1, 12));
 
 #[test]
-#[should_panic]
 fn flag_equals_must_err() {
-    let mut o = ParsedObjects::empty();
-    load_files(Path::new("tests/error_flag.wowm"), &mut o);
-    o.into_objects();
+    should_panic(|| {
+        let mut o = ParsedObjects::empty();
+        load_files(Path::new("tests/error_flag.wowm"), &mut o);
+        o.into_objects();
+    });
 }
 
 #[test]
-#[should_panic]
 fn enum_equals_must_err() {
-    let mut o = ParsedObjects::empty();
-    load_files(Path::new("tests/error_enum.wowm"), &mut o);
-    o.into_objects();
+    should_panic(|| {
+        let mut o = ParsedObjects::empty();
+        load_files(Path::new("tests/error_enum.wowm"), &mut o);
+        o.into_objects();
+    });
 }
 
 #[test]
@@ -402,4 +418,14 @@ fn sized_cstring() {
     let s = print_struct(d, &o, VERSION);
 
     tcheck(&s, "sized_cstring");
+}
+
+#[test]
+fn missing_ty_errors() {
+    let s = "\
+struct MissingInfo {
+    MissingTy m;
+} { versions = \"1.12\"; }";
+
+    should_panic(|| parser::parse_contents(s, &wowm_directory("test")).into_objects());
 }
