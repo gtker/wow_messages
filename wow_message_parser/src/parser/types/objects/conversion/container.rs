@@ -174,8 +174,9 @@ fn parsed_member_to_member(
                     | Equation::BitwiseAnd { value } => {
                         if definer.get_field_with_name(value).is_none() {
                             variable_in_if_not_found(
-                                value,
                                 s.conditional.variable_name(),
+                                value,
+                                &c.file_info,
                                 definer.name(),
                             );
                         }

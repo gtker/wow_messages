@@ -1,4 +1,3 @@
-use crate::error_printer::variable_in_if_not_found;
 use crate::parser::types::array::{Array, ArrayType};
 use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
@@ -123,21 +122,19 @@ impl RustMember {
     }
 
     fn set_main_enumerators(&mut self, enumerator_names: &[&String]) {
-        let ty = self.ty.clone();
-
         let enums = match &mut self.ty {
             RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => enumerators,
             _ => unreachable!(),
         };
-
-        let variable_name = self.name.clone();
 
         for &name in enumerator_names {
             let e = enums
                 .iter_mut()
                 .find(|a| a.name() == name)
                 .unwrap_or_else(|| {
-                    variable_in_if_not_found(&variable_name, name, &ty.to_string());
+                    unreachable!(
+                        "Should be caught when turning ParsedIfStatements into IfStatements"
+                    )
                 });
             e.is_main_enumerator = true;
         }

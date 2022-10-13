@@ -51,24 +51,6 @@ fn overwrite(s: &Writer, name: &str) {
 const VERSION: Version = Version::World(WorldVersion::Minor(1, 12));
 
 #[test]
-fn flag_equals_must_err() {
-    should_panic(|| {
-        let mut o = ParsedObjects::empty();
-        load_files(Path::new("tests/error_flag.wowm"), &mut o);
-        o.into_objects();
-    });
-}
-
-#[test]
-fn enum_equals_must_err() {
-    should_panic(|| {
-        let mut o = ParsedObjects::empty();
-        load_files(Path::new("tests/error_enum.wowm"), &mut o);
-        o.into_objects();
-    });
-}
-
-#[test]
 fn simple_enum() {
     let o = get_all_impl_items();
 
@@ -431,6 +413,23 @@ struct MissingInfo {
 }
 
 #[test]
+fn missing_enumerator_errors() {
+    let s = "\
+enum MissingEnumerator : u8 {
+    EXISTS = 0;
+} { versions = \"1.12\"; }
+
+struct MissingInfo {
+    MissingEnumerator m;
+    if (m == DOES_NOT_EXIST) {
+        u8 basic;
+    }
+} { versions = \"1.12\"; }";
+
+    should_panic(|| parser::parse_contents(s, &wowm_directory("test")).into_objects());
+}
+
+#[test]
 fn recursive_types_errors() {
     let s = "\
 struct Recursive {
@@ -438,4 +437,22 @@ struct Recursive {
 } { versions = \"1.12\"; }";
 
     should_panic(|| parser::parse_contents(s, &wowm_directory("test")).into_objects());
+}
+
+#[test]
+fn flag_equals_must_err() {
+    should_panic(|| {
+        let mut o = ParsedObjects::empty();
+        load_files(Path::new("tests/error_flag.wowm"), &mut o);
+        o.into_objects();
+    });
+}
+
+#[test]
+fn enum_equals_must_err() {
+    should_panic(|| {
+        let mut o = ParsedObjects::empty();
+        load_files(Path::new("tests/error_enum.wowm"), &mut o);
+        o.into_objects();
+    });
 }

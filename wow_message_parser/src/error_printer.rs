@@ -5,6 +5,7 @@ use std::process::exit;
 
 const COMPLEX_NOT_FOUND: i32 = 1;
 const RECURSIVE_TYPE: i32 = 2;
+const MISSING_ENUMERATOR: i32 = 3;
 
 pub struct ErrorWriter {
     inner: String,
@@ -94,15 +95,23 @@ pub(crate) fn complex_not_found(
     wowm_exit(s, COMPLEX_NOT_FOUND);
 }
 
-pub(crate) fn variable_in_if_not_found(variable_name: &str, name: &str, ty_name: &str) -> ! {
-    let s = ErrorWriter::new("Container uses enumerator in if statement that does not exist.");
+pub(crate) fn variable_in_if_not_found(
+    variable_name: &str,
+    name: &str,
+    fileinfo: &FileInfo,
+    ty_name: &str,
+) -> ! {
+    let mut s = ErrorWriter::new("Container uses enumerator in if statement that does not exist.");
 
-    s.print();
+    s.fileinfo(
+        fileinfo,
+        format!(
+            "Unable to find enumerator with name '{}' in variable '{}' with type '{}'",
+            name, variable_name, ty_name
+        ),
+    );
 
-    panic!(
-        "unable to find enumerator with name '{}' in variable '{}' with type '{}'",
-        name, variable_name, ty_name
-    )
+    wowm_exit(s, MISSING_ENUMERATOR);
 }
 
 pub(crate) fn recursive_type(name: &str, file_info: &FileInfo) {
