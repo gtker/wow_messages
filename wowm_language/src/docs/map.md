@@ -610,4 +610,6 @@ Used in:
 * [Character](character.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
+* [SMSG_NEW_WORLD](smsg_new_world.md)
+* [SMSG_TRANSFER_PENDING](smsg_transfer_pending.md)
 

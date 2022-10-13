@@ -1,8 +1,8 @@
-#tag_all versions "1.12";
-
 smsg SMSG_NEW_WORLD = 0x003E {
     Map map;
     Vector3d position;
     f32 orientation;
+} {
+    paste_versions = "1.12 3.3.5";
 }
 
