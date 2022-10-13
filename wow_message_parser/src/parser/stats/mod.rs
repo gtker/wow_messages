@@ -114,7 +114,7 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
         if !d.definition {
             if print_missing_as_wowm {
                 if d.reason.is_none() {
-                    let i = d.name.find("_").unwrap();
+                    let i = d.name.find('_').unwrap();
                     let prefix = &d.name[..i];
                     let ty = match prefix {
                         "SMSG" => "smsg",
@@ -130,12 +130,10 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
                         version = version.as_world(),
                     );
                 }
+            } else if let Some(reason) = d.reason {
+                println!("    {}: {}", d.name, reason);
             } else {
-                if let Some(reason) = d.reason {
-                    println!("    {}: {}", d.name, reason);
-                } else {
-                    println!("    {}", d.name);
-                }
+                println!("    {}", d.name);
             }
         }
     }

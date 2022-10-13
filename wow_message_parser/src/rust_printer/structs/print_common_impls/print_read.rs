@@ -176,9 +176,7 @@ fn print_read_array(
         }
         ArraySize::Endless => {
             if d.tags().is_compressed() {
-                s.wln(format!(
-                    "let mut decoder = &mut flate2::read::ZlibDecoder::new(r);"
-                ));
+                s.wln("let mut decoder = &mut flate2::read::ZlibDecoder::new(r);");
                 s.newline();
             }
 
