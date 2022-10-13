@@ -74,8 +74,7 @@ pub(crate) fn parse_commands(t: Pair<Rule>) -> Commands {
     Commands::new(tags)
 }
 
-pub(crate) fn parse_file(filename: &Path) -> ParsedObjects {
-    let contents = read_to_string(filename).expect("unable to read file");
+pub(crate) fn parse_contents(contents: &str, filename: &Path) -> ParsedObjects {
     let file = AuthParser::parse(Rule::file, &contents);
     let file = match file {
         Ok(mut f) => f.next().unwrap(),
@@ -98,6 +97,11 @@ pub(crate) fn parse_file(filename: &Path) -> ParsedObjects {
         .into_inner();
 
     parse_statements(&mut statements, commands.tags(), &filename)
+}
+
+pub(crate) fn parse_file(filename: &Path) -> ParsedObjects {
+    let contents = read_to_string(filename).expect("unable to read file");
+    parse_contents(&contents, filename)
 }
 
 fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, path: &Path) -> ParsedObjects {
