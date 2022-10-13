@@ -10,7 +10,7 @@ cmsg MSG_MOVE_START_TURN_RIGHT_Client = 0x00BD {
     versions = "2.4.3";
 }
 
-cmsg MSG_MOVE_START_TURN_RIGHT_Client = 0x00BD {
+msg MSG_MOVE_START_TURN_RIGHT = 0x00BD {
     PackedGuid guid;
     MovementInfo info;
 } {
@@ -83,11 +83,4 @@ smsg MSG_MOVE_START_TURN_RIGHT_Server = 0x00BD {
     MovementInfo info;
 } {
     versions = "2.4.3";
-}
-
-smsg MSG_MOVE_START_TURN_RIGHT_Server = 0x00BD {
-    PackedGuid guid;
-    MovementInfo info;
-} {
-    versions = "3.3.5";
 }

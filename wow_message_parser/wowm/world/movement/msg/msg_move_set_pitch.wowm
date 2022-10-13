@@ -10,7 +10,7 @@ cmsg MSG_MOVE_SET_PITCH_Client = 0x00DB {
     versions = "2.4.3";
 }
 
-cmsg MSG_MOVE_SET_PITCH_Client = 0x00DB {
+msg MSG_MOVE_SET_PITCH = 0x00DB {
     PackedGuid guid;
     MovementInfo info;
 } {
@@ -30,11 +30,3 @@ smsg MSG_MOVE_SET_PITCH_Server = 0x00DB {
 } {
     versions = "2.4.3";
 }
-
-smsg MSG_MOVE_SET_PITCH_Server = 0x00DB {
-    PackedGuid guid;
-    MovementInfo info;
-} {
-    versions = "3.3.5";
-}
-

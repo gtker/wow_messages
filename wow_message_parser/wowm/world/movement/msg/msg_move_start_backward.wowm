@@ -10,7 +10,7 @@ cmsg MSG_MOVE_START_BACKWARD_Client = 0x00B6 {
     versions = "2.4.3";
 }
 
-cmsg MSG_MOVE_START_BACKWARD_Client = 0x00B6 {
+msg MSG_MOVE_START_BACKWARD = 0x00B6 {
     PackedGuid guid;
     MovementInfo info;
 } {
@@ -55,13 +55,6 @@ smsg MSG_MOVE_START_BACKWARD_Server = 0x00B6 {
     MovementInfo info;
 } {
     versions = "2.4.3";
-}
-
-smsg MSG_MOVE_START_BACKWARD_Server = 0x00B6 {
-    PackedGuid guid;
-    MovementInfo info;
-} {
-    versions = "3.3.5";
 }
 
 test MSG_MOVE_START_BACKWARD_Server {

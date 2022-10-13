@@ -10,7 +10,7 @@ cmsg MSG_MOVE_START_PITCH_DOWN_Client = 0x00C0 {
     versions = "2.4.3";
 }
 
-cmsg MSG_MOVE_START_PITCH_DOWN_Client = 0x00C0 {
+msg MSG_MOVE_START_PITCH_DOWN = 0x00C0 {
     PackedGuid guid;
     MovementInfo info;
 } {
@@ -30,11 +30,3 @@ smsg MSG_MOVE_START_PITCH_DOWN_Server = 0x00C0 {
 } {
     versions = "2.4.3";
 }
-
-smsg MSG_MOVE_START_PITCH_DOWN_Server = 0x00C0 {
-    PackedGuid guid;
-    MovementInfo info;
-} {
-    versions = "3.3.5";
-}
-

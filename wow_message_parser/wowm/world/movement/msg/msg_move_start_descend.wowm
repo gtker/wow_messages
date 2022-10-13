@@ -4,7 +4,7 @@ cmsg MSG_MOVE_START_DESCEND_Client = 0x3A7 {
     versions = "2.4.3";
 }
 
-cmsg MSG_MOVE_START_DESCEND_Client = 0x3A7 {
+msg MSG_MOVE_START_DESCEND = 0x3A7 {
     PackedGuid guid;
     MovementInfo info;
 } {
@@ -17,11 +17,3 @@ smsg MSG_MOVE_START_DESCEND_Server = 0x3A7 {
 } {
     versions = "2.4.3";
 }
-
-smsg MSG_MOVE_START_DESCEND_Server = 0x3A7 {
-    PackedGuid guid; 
-    MovementInfo info;
-} {
-    versions = "3.3.5";
-}
-

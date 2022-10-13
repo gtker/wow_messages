@@ -10,7 +10,7 @@ cmsg MSG_MOVE_START_TURN_LEFT_Client = 0x00BC {
     versions = "2.4.3";
 }
 
-cmsg MSG_MOVE_START_TURN_LEFT_Client = 0x00BC {
+msg MSG_MOVE_START_TURN_LEFT = 0x00BC {
     PackedGuid guid;
     MovementInfo info;
 } {
@@ -84,11 +84,3 @@ smsg MSG_MOVE_START_TURN_LEFT_Server = 0x00BC {
 } {
     versions = "2.4.3";
 }
-
-smsg MSG_MOVE_START_TURN_LEFT_Server = 0x00BC {
-    PackedGuid guid;
-    MovementInfo info;
-} {
-    versions = "3.3.5";
-}
-

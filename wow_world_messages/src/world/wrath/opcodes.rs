@@ -6,8 +6,32 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::wrath::MovementInfo;
+use crate::world::wrath::MSG_MOVE_START_FORWARD;
+use crate::world::wrath::MSG_MOVE_START_BACKWARD;
+use crate::world::wrath::MSG_MOVE_STOP;
+use crate::world::wrath::MSG_MOVE_START_STRAFE_LEFT;
+use crate::world::wrath::MSG_MOVE_START_STRAFE_RIGHT;
+use crate::world::wrath::MSG_MOVE_STOP_STRAFE;
+use crate::world::wrath::MSG_MOVE_JUMP;
+use crate::world::wrath::MSG_MOVE_START_TURN_LEFT;
+use crate::world::wrath::MSG_MOVE_START_TURN_RIGHT;
+use crate::world::wrath::MSG_MOVE_STOP_TURN;
+use crate::world::wrath::MSG_MOVE_START_PITCH_UP;
+use crate::world::wrath::MSG_MOVE_START_PITCH_DOWN;
+use crate::world::wrath::MSG_MOVE_STOP_PITCH;
+use crate::world::wrath::MSG_MOVE_SET_RUN_MODE;
+use crate::world::wrath::MSG_MOVE_SET_WALK_MODE;
+use crate::world::wrath::MSG_MOVE_FALL_LAND;
+use crate::world::wrath::MSG_MOVE_START_SWIM;
+use crate::world::wrath::MSG_MOVE_STOP_SWIM;
+use crate::world::wrath::MSG_MOVE_SET_FACING;
+use crate::world::wrath::MSG_MOVE_SET_PITCH;
 use crate::world::wrath::MSG_MOVE_WORLDPORT_ACK;
+use crate::world::wrath::MSG_MOVE_HEARTBEAT;
 use crate::world::wrath::MSG_SET_DUNGEON_DIFFICULTY;
+use crate::world::wrath::MSG_MOVE_START_ASCEND;
+use crate::world::wrath::MSG_MOVE_STOP_ASCEND;
+use crate::world::wrath::MSG_MOVE_START_DESCEND;
 use crate::world::wrath::CMSG_CHAR_CREATE;
 use crate::world::wrath::CMSG_CHAR_ENUM;
 use crate::world::wrath::CMSG_CHAR_DELETE;
@@ -32,33 +56,12 @@ use crate::world::wrath::CMSG_CHANNEL_BAN;
 use crate::world::wrath::CMSG_CHANNEL_UNBAN;
 use crate::world::wrath::CMSG_CHANNEL_ANNOUNCEMENTS;
 use crate::world::wrath::CMSG_CHANNEL_MODERATE;
-use crate::world::wrath::MSG_MOVE_START_FORWARD_Client;
-use crate::world::wrath::MSG_MOVE_START_BACKWARD_Client;
-use crate::world::wrath::MSG_MOVE_STOP_Client;
-use crate::world::wrath::MSG_MOVE_START_STRAFE_LEFT_Client;
-use crate::world::wrath::MSG_MOVE_START_STRAFE_RIGHT_Client;
-use crate::world::wrath::MSG_MOVE_STOP_STRAFE_Client;
-use crate::world::wrath::MSG_MOVE_JUMP_Client;
-use crate::world::wrath::MSG_MOVE_START_TURN_LEFT_Client;
-use crate::world::wrath::MSG_MOVE_START_TURN_RIGHT_Client;
-use crate::world::wrath::MSG_MOVE_STOP_TURN_Client;
-use crate::world::wrath::MSG_MOVE_START_PITCH_UP_Client;
-use crate::world::wrath::MSG_MOVE_START_PITCH_DOWN_Client;
-use crate::world::wrath::MSG_MOVE_STOP_PITCH_Client;
-use crate::world::wrath::MSG_MOVE_SET_RUN_MODE_Client;
-use crate::world::wrath::MSG_MOVE_SET_WALK_MODE_Client;
 use crate::world::wrath::MSG_MOVE_TELEPORT_ACK_Client;
-use crate::world::wrath::MSG_MOVE_FALL_LAND_Client;
-use crate::world::wrath::MSG_MOVE_START_SWIM_Client;
-use crate::world::wrath::MSG_MOVE_STOP_SWIM_Client;
-use crate::world::wrath::MSG_MOVE_SET_FACING_Client;
-use crate::world::wrath::MSG_MOVE_SET_PITCH_Client;
 use crate::world::wrath::CMSG_FORCE_RUN_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_MOVE_ROOT_ACK;
 use crate::world::wrath::CMSG_FORCE_MOVE_UNROOT_ACK;
-use crate::world::wrath::MSG_MOVE_HEARTBEAT_Client;
 use crate::world::wrath::CMSG_NEXT_CINEMATIC_CAMERA;
 use crate::world::wrath::CMSG_COMPLETE_CINEMATIC;
 use crate::world::wrath::CMSG_TUTORIAL_FLAG;
@@ -98,18 +101,39 @@ use crate::world::wrath::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_TURN_RATE_CHANGE_ACK;
 use crate::world::wrath::CMSG_ACTIVATETAXIEXPRESS;
 use crate::world::wrath::CMSG_MOVE_SET_FLY;
-use crate::world::wrath::MSG_MOVE_START_ASCEND_Client;
-use crate::world::wrath::MSG_MOVE_STOP_ASCEND_Client;
 use crate::world::wrath::CMSG_REALM_SPLIT;
 use crate::world::wrath::CMSG_MOVE_CHNG_TRANSPORT;
-use crate::world::wrath::MSG_MOVE_START_DESCEND_Client;
 use crate::world::wrath::CMSG_SET_ACTIVE_VOICE_CHANNEL;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
+    MSG_MOVE_START_FORWARD(MSG_MOVE_START_FORWARD),
+    MSG_MOVE_START_BACKWARD(MSG_MOVE_START_BACKWARD),
+    MSG_MOVE_STOP(MSG_MOVE_STOP),
+    MSG_MOVE_START_STRAFE_LEFT(MSG_MOVE_START_STRAFE_LEFT),
+    MSG_MOVE_START_STRAFE_RIGHT(MSG_MOVE_START_STRAFE_RIGHT),
+    MSG_MOVE_STOP_STRAFE(MSG_MOVE_STOP_STRAFE),
+    MSG_MOVE_JUMP(MSG_MOVE_JUMP),
+    MSG_MOVE_START_TURN_LEFT(MSG_MOVE_START_TURN_LEFT),
+    MSG_MOVE_START_TURN_RIGHT(MSG_MOVE_START_TURN_RIGHT),
+    MSG_MOVE_STOP_TURN(MSG_MOVE_STOP_TURN),
+    MSG_MOVE_START_PITCH_UP(MSG_MOVE_START_PITCH_UP),
+    MSG_MOVE_START_PITCH_DOWN(MSG_MOVE_START_PITCH_DOWN),
+    MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH),
+    MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE),
+    MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE),
+    MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND),
+    MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM),
+    MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM),
+    MSG_MOVE_SET_FACING(MSG_MOVE_SET_FACING),
+    MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH),
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
+    MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT),
     MSG_SET_DUNGEON_DIFFICULTY(MSG_SET_DUNGEON_DIFFICULTY),
+    MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND),
+    MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND),
+    MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND),
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
@@ -134,33 +158,12 @@ pub enum ClientOpcodeMessage {
     CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN),
     CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS),
     CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE),
-    MSG_MOVE_START_FORWARD(MSG_MOVE_START_FORWARD_Client),
-    MSG_MOVE_START_BACKWARD(MSG_MOVE_START_BACKWARD_Client),
-    MSG_MOVE_STOP(MSG_MOVE_STOP_Client),
-    MSG_MOVE_START_STRAFE_LEFT(MSG_MOVE_START_STRAFE_LEFT_Client),
-    MSG_MOVE_START_STRAFE_RIGHT(MSG_MOVE_START_STRAFE_RIGHT_Client),
-    MSG_MOVE_STOP_STRAFE(MSG_MOVE_STOP_STRAFE_Client),
-    MSG_MOVE_JUMP(MSG_MOVE_JUMP_Client),
-    MSG_MOVE_START_TURN_LEFT(MSG_MOVE_START_TURN_LEFT_Client),
-    MSG_MOVE_START_TURN_RIGHT(MSG_MOVE_START_TURN_RIGHT_Client),
-    MSG_MOVE_STOP_TURN(MSG_MOVE_STOP_TURN_Client),
-    MSG_MOVE_START_PITCH_UP(MSG_MOVE_START_PITCH_UP_Client),
-    MSG_MOVE_START_PITCH_DOWN(MSG_MOVE_START_PITCH_DOWN_Client),
-    MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH_Client),
-    MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE_Client),
-    MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE_Client),
     MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Client),
-    MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND_Client),
-    MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM_Client),
-    MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Client),
-    MSG_MOVE_SET_FACING(MSG_MOVE_SET_FACING_Client),
-    MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH_Client),
     CMSG_FORCE_RUN_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_SPEED_CHANGE_ACK),
     CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK),
     CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(CMSG_FORCE_SWIM_SPEED_CHANGE_ACK),
     CMSG_FORCE_MOVE_ROOT_ACK(CMSG_FORCE_MOVE_ROOT_ACK),
     CMSG_FORCE_MOVE_UNROOT_ACK(CMSG_FORCE_MOVE_UNROOT_ACK),
-    MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT_Client),
     CMSG_NEXT_CINEMATIC_CAMERA(CMSG_NEXT_CINEMATIC_CAMERA),
     CMSG_COMPLETE_CINEMATIC(CMSG_COMPLETE_CINEMATIC),
     CMSG_TUTORIAL_FLAG(CMSG_TUTORIAL_FLAG),
@@ -200,11 +203,8 @@ pub enum ClientOpcodeMessage {
     CMSG_FORCE_TURN_RATE_CHANGE_ACK(CMSG_FORCE_TURN_RATE_CHANGE_ACK),
     CMSG_ACTIVATETAXIEXPRESS(CMSG_ACTIVATETAXIEXPRESS),
     CMSG_MOVE_SET_FLY(CMSG_MOVE_SET_FLY),
-    MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Client),
-    MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Client),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
     CMSG_MOVE_CHNG_TRANSPORT(CMSG_MOVE_CHNG_TRANSPORT),
-    MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Client),
     CMSG_SET_ACTIVE_VOICE_CHANNEL(CMSG_SET_ACTIVE_VOICE_CHANNEL),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -212,8 +212,32 @@ pub enum ClientOpcodeMessage {
 impl ClientOpcodeMessage {
     fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
+            0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00B7 => Ok(Self::MSG_MOVE_STOP(<MSG_MOVE_STOP as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00B8 => Ok(Self::MSG_MOVE_START_STRAFE_LEFT(<MSG_MOVE_START_STRAFE_LEFT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00B9 => Ok(Self::MSG_MOVE_START_STRAFE_RIGHT(<MSG_MOVE_START_STRAFE_RIGHT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BA => Ok(Self::MSG_MOVE_STOP_STRAFE(<MSG_MOVE_STOP_STRAFE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BB => Ok(Self::MSG_MOVE_JUMP(<MSG_MOVE_JUMP as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BC => Ok(Self::MSG_MOVE_START_TURN_LEFT(<MSG_MOVE_START_TURN_LEFT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BD => Ok(Self::MSG_MOVE_START_TURN_RIGHT(<MSG_MOVE_START_TURN_RIGHT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BE => Ok(Self::MSG_MOVE_STOP_TURN(<MSG_MOVE_STOP_TURN as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BF => Ok(Self::MSG_MOVE_START_PITCH_UP(<MSG_MOVE_START_PITCH_UP as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C0 => Ok(Self::MSG_MOVE_START_PITCH_DOWN(<MSG_MOVE_START_PITCH_DOWN as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00DA => Ok(Self::MSG_MOVE_SET_FACING(<MSG_MOVE_SET_FACING as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH as crate::Message>::read_body(&mut r, body_size)?)),
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0329 => Ok(Self::MSG_SET_DUNGEON_DIFFICULTY(<MSG_SET_DUNGEON_DIFFICULTY as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND as crate::Message>::read_body(&mut r, body_size)?)),
+            0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND as crate::Message>::read_body(&mut r, body_size)?)),
+            0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND as crate::Message>::read_body(&mut r, body_size)?)),
             0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -238,33 +262,12 @@ impl ClientOpcodeMessage {
             0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(<CMSG_CHANNEL_UNBAN as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(<CMSG_CHANNEL_ANNOUNCEMENTS as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(<CMSG_CHANNEL_MODERATE as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B7 => Ok(Self::MSG_MOVE_STOP(<MSG_MOVE_STOP_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B8 => Ok(Self::MSG_MOVE_START_STRAFE_LEFT(<MSG_MOVE_START_STRAFE_LEFT_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B9 => Ok(Self::MSG_MOVE_START_STRAFE_RIGHT(<MSG_MOVE_START_STRAFE_RIGHT_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BA => Ok(Self::MSG_MOVE_STOP_STRAFE(<MSG_MOVE_STOP_STRAFE_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BB => Ok(Self::MSG_MOVE_JUMP(<MSG_MOVE_JUMP_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BC => Ok(Self::MSG_MOVE_START_TURN_LEFT(<MSG_MOVE_START_TURN_LEFT_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BD => Ok(Self::MSG_MOVE_START_TURN_RIGHT(<MSG_MOVE_START_TURN_RIGHT_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BE => Ok(Self::MSG_MOVE_STOP_TURN(<MSG_MOVE_STOP_TURN_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BF => Ok(Self::MSG_MOVE_START_PITCH_UP(<MSG_MOVE_START_PITCH_UP_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C0 => Ok(Self::MSG_MOVE_START_PITCH_DOWN(<MSG_MOVE_START_PITCH_DOWN_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00DA => Ok(Self::MSG_MOVE_SET_FACING(<MSG_MOVE_SET_FACING_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00E3 => Ok(Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00E5 => Ok(Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00E7 => Ok(Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(<CMSG_FORCE_SWIM_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00E9 => Ok(Self::CMSG_FORCE_MOVE_ROOT_ACK(<CMSG_FORCE_MOVE_ROOT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00EB => Ok(Self::CMSG_FORCE_MOVE_UNROOT_ACK(<CMSG_FORCE_MOVE_UNROOT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FB => Ok(Self::CMSG_NEXT_CINEMATIC_CAMERA(<CMSG_NEXT_CINEMATIC_CAMERA as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FC => Ok(Self::CMSG_COMPLETE_CINEMATIC(<CMSG_COMPLETE_CINEMATIC as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FE => Ok(Self::CMSG_TUTORIAL_FLAG(<CMSG_TUTORIAL_FLAG as crate::Message>::read_body(&mut r, body_size)?)),
@@ -304,11 +307,8 @@ impl ClientOpcodeMessage {
             0x02DF => Ok(Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(<CMSG_FORCE_TURN_RATE_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x0312 => Ok(Self::CMSG_ACTIVATETAXIEXPRESS(<CMSG_ACTIVATETAXIEXPRESS as crate::Message>::read_body(&mut r, body_size)?)),
             0x0346 => Ok(Self::CMSG_MOVE_SET_FLY(<CMSG_MOVE_SET_FLY as crate::Message>::read_body(&mut r, body_size)?)),
-            0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Client as crate::Message>::read_body(&mut r, body_size)?)),
-            0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
             0x038D => Ok(Self::CMSG_MOVE_CHNG_TRANSPORT(<CMSG_MOVE_CHNG_TRANSPORT as crate::Message>::read_body(&mut r, body_size)?)),
-            0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x03D3 => Ok(Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(<CMSG_SET_ACTIVE_VOICE_CHANNEL as crate::Message>::read_body(&mut r, body_size)?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
@@ -384,8 +384,32 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_client<W: std::io::Write>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_START_FORWARD(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_BACKWARD(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_STOP(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_STOP_STRAFE(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_JUMP(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_TURN_LEFT(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_STOP_TURN(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_PITCH_UP(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_SET_FACING(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_client(w, e),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
@@ -410,33 +434,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_MODERATE(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_FORWARD(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_BACKWARD(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_STOP(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_STOP_STRAFE(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_JUMP(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_TURN_LEFT(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_STOP_TURN(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_PITCH_UP(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_SET_FACING(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TUTORIAL_FLAG(c) => c.write_encrypted_client(w, e),
@@ -476,11 +479,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -489,8 +489,32 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_START_FORWARD(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_BACKWARD(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_STOP(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_STOP_STRAFE(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_JUMP(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_TURN_LEFT(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_STOP_TURN(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_PITCH_UP(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_SET_FACING(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_client(w),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
@@ -515,33 +539,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_MODERATE(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_FORWARD(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_BACKWARD(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_STOP(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_STOP_STRAFE(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_JUMP(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_TURN_LEFT(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_STOP_TURN(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_PITCH_UP(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_SET_FACING(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_unencrypted_client(w),
             Self::CMSG_TUTORIAL_FLAG(c) => c.write_unencrypted_client(w),
@@ -581,11 +584,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -594,8 +594,32 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_STRAFE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_JUMP(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_TURN_LEFT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_TURN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_PITCH_UP(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -620,33 +644,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_STRAFE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_JUMP(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_TURN_LEFT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_TURN(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_PITCH_UP(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TUTORIAL_FLAG(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -686,11 +689,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -699,8 +699,32 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_STRAFE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_JUMP(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_TURN_LEFT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_TURN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_PITCH_UP(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -725,33 +749,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_STRAFE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_JUMP(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_TURN_LEFT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_TURN(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_PITCH_UP(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TUTORIAL_FLAG(c) => c.tokio_write_unencrypted_client(w).await,
@@ -791,11 +794,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -804,8 +804,32 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_STRAFE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_JUMP(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_TURN_LEFT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_TURN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_PITCH_UP(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_FACING(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -830,33 +854,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_STRAFE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_JUMP(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_TURN_LEFT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_TURN(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_PITCH_UP(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_SET_FACING(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TUTORIAL_FLAG(c) => c.astd_write_encrypted_client(w, e).await,
@@ -896,11 +899,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -909,8 +909,32 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_STRAFE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_JUMP(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_TURN_LEFT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_TURN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_PITCH_UP(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_FACING(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
@@ -935,33 +959,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_STRAFE_LEFT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_STRAFE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_JUMP(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_TURN_LEFT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_TURN_RIGHT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_TURN(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_PITCH_UP(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_PITCH_DOWN(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_SET_FACING(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TUTORIAL_FLAG(c) => c.astd_write_unencrypted_client(w).await,
@@ -1001,11 +1004,8 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -1025,8 +1025,32 @@ impl ClientOpcodeMessage {
 impl std::fmt::Display for ClientOpcodeMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
+            ClientOpcodeMessage::MSG_MOVE_START_FORWARD(_) => "MSG_MOVE_START_FORWARD",
+            ClientOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => "MSG_MOVE_START_BACKWARD",
+            ClientOpcodeMessage::MSG_MOVE_STOP(_) => "MSG_MOVE_STOP",
+            ClientOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(_) => "MSG_MOVE_START_STRAFE_LEFT",
+            ClientOpcodeMessage::MSG_MOVE_START_STRAFE_RIGHT(_) => "MSG_MOVE_START_STRAFE_RIGHT",
+            ClientOpcodeMessage::MSG_MOVE_STOP_STRAFE(_) => "MSG_MOVE_STOP_STRAFE",
+            ClientOpcodeMessage::MSG_MOVE_JUMP(_) => "MSG_MOVE_JUMP",
+            ClientOpcodeMessage::MSG_MOVE_START_TURN_LEFT(_) => "MSG_MOVE_START_TURN_LEFT",
+            ClientOpcodeMessage::MSG_MOVE_START_TURN_RIGHT(_) => "MSG_MOVE_START_TURN_RIGHT",
+            ClientOpcodeMessage::MSG_MOVE_STOP_TURN(_) => "MSG_MOVE_STOP_TURN",
+            ClientOpcodeMessage::MSG_MOVE_START_PITCH_UP(_) => "MSG_MOVE_START_PITCH_UP",
+            ClientOpcodeMessage::MSG_MOVE_START_PITCH_DOWN(_) => "MSG_MOVE_START_PITCH_DOWN",
+            ClientOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => "MSG_MOVE_STOP_PITCH",
+            ClientOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => "MSG_MOVE_SET_RUN_MODE",
+            ClientOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => "MSG_MOVE_SET_WALK_MODE",
+            ClientOpcodeMessage::MSG_MOVE_FALL_LAND(_) => "MSG_MOVE_FALL_LAND",
+            ClientOpcodeMessage::MSG_MOVE_START_SWIM(_) => "MSG_MOVE_START_SWIM",
+            ClientOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM",
+            ClientOpcodeMessage::MSG_MOVE_SET_FACING(_) => "MSG_MOVE_SET_FACING",
+            ClientOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH",
             ClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
+            ClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT",
             ClientOpcodeMessage::MSG_SET_DUNGEON_DIFFICULTY(_) => "MSG_SET_DUNGEON_DIFFICULTY",
+            ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND",
+            ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND",
+            ClientOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND",
             ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => "CMSG_CHAR_CREATE",
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
             ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => "CMSG_CHAR_DELETE",
@@ -1051,33 +1075,12 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHANNEL_UNBAN(_) => "CMSG_CHANNEL_UNBAN",
             ClientOpcodeMessage::CMSG_CHANNEL_ANNOUNCEMENTS(_) => "CMSG_CHANNEL_ANNOUNCEMENTS",
             ClientOpcodeMessage::CMSG_CHANNEL_MODERATE(_) => "CMSG_CHANNEL_MODERATE",
-            ClientOpcodeMessage::MSG_MOVE_START_FORWARD(_) => "MSG_MOVE_START_FORWARD_Client",
-            ClientOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => "MSG_MOVE_START_BACKWARD_Client",
-            ClientOpcodeMessage::MSG_MOVE_STOP(_) => "MSG_MOVE_STOP_Client",
-            ClientOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(_) => "MSG_MOVE_START_STRAFE_LEFT_Client",
-            ClientOpcodeMessage::MSG_MOVE_START_STRAFE_RIGHT(_) => "MSG_MOVE_START_STRAFE_RIGHT_Client",
-            ClientOpcodeMessage::MSG_MOVE_STOP_STRAFE(_) => "MSG_MOVE_STOP_STRAFE_Client",
-            ClientOpcodeMessage::MSG_MOVE_JUMP(_) => "MSG_MOVE_JUMP_Client",
-            ClientOpcodeMessage::MSG_MOVE_START_TURN_LEFT(_) => "MSG_MOVE_START_TURN_LEFT_Client",
-            ClientOpcodeMessage::MSG_MOVE_START_TURN_RIGHT(_) => "MSG_MOVE_START_TURN_RIGHT_Client",
-            ClientOpcodeMessage::MSG_MOVE_STOP_TURN(_) => "MSG_MOVE_STOP_TURN_Client",
-            ClientOpcodeMessage::MSG_MOVE_START_PITCH_UP(_) => "MSG_MOVE_START_PITCH_UP_Client",
-            ClientOpcodeMessage::MSG_MOVE_START_PITCH_DOWN(_) => "MSG_MOVE_START_PITCH_DOWN_Client",
-            ClientOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => "MSG_MOVE_STOP_PITCH_Client",
-            ClientOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => "MSG_MOVE_SET_RUN_MODE_Client",
-            ClientOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => "MSG_MOVE_SET_WALK_MODE_Client",
             ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Client",
-            ClientOpcodeMessage::MSG_MOVE_FALL_LAND(_) => "MSG_MOVE_FALL_LAND_Client",
-            ClientOpcodeMessage::MSG_MOVE_START_SWIM(_) => "MSG_MOVE_START_SWIM_Client",
-            ClientOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM_Client",
-            ClientOpcodeMessage::MSG_MOVE_SET_FACING(_) => "MSG_MOVE_SET_FACING_Client",
-            ClientOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH_Client",
             ClientOpcodeMessage::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_SWIM_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_MOVE_ROOT_ACK(_) => "CMSG_FORCE_MOVE_ROOT_ACK",
             ClientOpcodeMessage::CMSG_FORCE_MOVE_UNROOT_ACK(_) => "CMSG_FORCE_MOVE_UNROOT_ACK",
-            ClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT_Client",
             ClientOpcodeMessage::CMSG_NEXT_CINEMATIC_CAMERA(_) => "CMSG_NEXT_CINEMATIC_CAMERA",
             ClientOpcodeMessage::CMSG_COMPLETE_CINEMATIC(_) => "CMSG_COMPLETE_CINEMATIC",
             ClientOpcodeMessage::CMSG_TUTORIAL_FLAG(_) => "CMSG_TUTORIAL_FLAG",
@@ -1117,14 +1120,131 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_FORCE_TURN_RATE_CHANGE_ACK(_) => "CMSG_FORCE_TURN_RATE_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_ACTIVATETAXIEXPRESS(_) => "CMSG_ACTIVATETAXIEXPRESS",
             ClientOpcodeMessage::CMSG_MOVE_SET_FLY(_) => "CMSG_MOVE_SET_FLY",
-            ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Client",
-            ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Client",
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
             ClientOpcodeMessage::CMSG_MOVE_CHNG_TRANSPORT(_) => "CMSG_MOVE_CHNG_TRANSPORT",
-            ClientOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Client",
             ClientOpcodeMessage::CMSG_SET_ACTIVE_VOICE_CHANNEL(_) => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
+    }
+}
+
+impl From<MSG_MOVE_START_FORWARD> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_FORWARD) -> Self {
+        Self::MSG_MOVE_START_FORWARD(c)
+    }
+}
+
+impl From<MSG_MOVE_START_BACKWARD> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_BACKWARD) -> Self {
+        Self::MSG_MOVE_START_BACKWARD(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP) -> Self {
+        Self::MSG_MOVE_STOP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_STRAFE_LEFT> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_STRAFE_LEFT) -> Self {
+        Self::MSG_MOVE_START_STRAFE_LEFT(c)
+    }
+}
+
+impl From<MSG_MOVE_START_STRAFE_RIGHT> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_STRAFE_RIGHT) -> Self {
+        Self::MSG_MOVE_START_STRAFE_RIGHT(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_STRAFE> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_STRAFE) -> Self {
+        Self::MSG_MOVE_STOP_STRAFE(c)
+    }
+}
+
+impl From<MSG_MOVE_JUMP> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_JUMP) -> Self {
+        Self::MSG_MOVE_JUMP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_TURN_LEFT> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_TURN_LEFT) -> Self {
+        Self::MSG_MOVE_START_TURN_LEFT(c)
+    }
+}
+
+impl From<MSG_MOVE_START_TURN_RIGHT> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_TURN_RIGHT) -> Self {
+        Self::MSG_MOVE_START_TURN_RIGHT(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_TURN> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_TURN) -> Self {
+        Self::MSG_MOVE_STOP_TURN(c)
+    }
+}
+
+impl From<MSG_MOVE_START_PITCH_UP> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_PITCH_UP) -> Self {
+        Self::MSG_MOVE_START_PITCH_UP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_PITCH_DOWN> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_PITCH_DOWN) -> Self {
+        Self::MSG_MOVE_START_PITCH_DOWN(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_PITCH> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_PITCH) -> Self {
+        Self::MSG_MOVE_STOP_PITCH(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_RUN_MODE> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_RUN_MODE) -> Self {
+        Self::MSG_MOVE_SET_RUN_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_WALK_MODE> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_WALK_MODE) -> Self {
+        Self::MSG_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_FALL_LAND> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_FALL_LAND) -> Self {
+        Self::MSG_MOVE_FALL_LAND(c)
+    }
+}
+
+impl From<MSG_MOVE_START_SWIM> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_SWIM) -> Self {
+        Self::MSG_MOVE_START_SWIM(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_SWIM> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_SWIM) -> Self {
+        Self::MSG_MOVE_STOP_SWIM(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_FACING> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_FACING) -> Self {
+        Self::MSG_MOVE_SET_FACING(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_PITCH> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_PITCH) -> Self {
+        Self::MSG_MOVE_SET_PITCH(c)
     }
 }
 
@@ -1134,9 +1254,33 @@ impl From<MSG_MOVE_WORLDPORT_ACK> for ClientOpcodeMessage {
     }
 }
 
+impl From<MSG_MOVE_HEARTBEAT> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_HEARTBEAT) -> Self {
+        Self::MSG_MOVE_HEARTBEAT(c)
+    }
+}
+
 impl From<MSG_SET_DUNGEON_DIFFICULTY> for ClientOpcodeMessage {
     fn from(c: MSG_SET_DUNGEON_DIFFICULTY) -> Self {
         Self::MSG_SET_DUNGEON_DIFFICULTY(c)
+    }
+}
+
+impl From<MSG_MOVE_START_ASCEND> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_ASCEND) -> Self {
+        Self::MSG_MOVE_START_ASCEND(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_ASCEND> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_ASCEND) -> Self {
+        Self::MSG_MOVE_STOP_ASCEND(c)
+    }
+}
+
+impl From<MSG_MOVE_START_DESCEND> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_START_DESCEND) -> Self {
+        Self::MSG_MOVE_START_DESCEND(c)
     }
 }
 
@@ -1284,129 +1428,9 @@ impl From<CMSG_CHANNEL_MODERATE> for ClientOpcodeMessage {
     }
 }
 
-impl From<MSG_MOVE_START_FORWARD_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_FORWARD_Client) -> Self {
-        Self::MSG_MOVE_START_FORWARD(c)
-    }
-}
-
-impl From<MSG_MOVE_START_BACKWARD_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_BACKWARD_Client) -> Self {
-        Self::MSG_MOVE_START_BACKWARD(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_Client) -> Self {
-        Self::MSG_MOVE_STOP(c)
-    }
-}
-
-impl From<MSG_MOVE_START_STRAFE_LEFT_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_STRAFE_LEFT_Client) -> Self {
-        Self::MSG_MOVE_START_STRAFE_LEFT(c)
-    }
-}
-
-impl From<MSG_MOVE_START_STRAFE_RIGHT_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_STRAFE_RIGHT_Client) -> Self {
-        Self::MSG_MOVE_START_STRAFE_RIGHT(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_STRAFE_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_STRAFE_Client) -> Self {
-        Self::MSG_MOVE_STOP_STRAFE(c)
-    }
-}
-
-impl From<MSG_MOVE_JUMP_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_JUMP_Client) -> Self {
-        Self::MSG_MOVE_JUMP(c)
-    }
-}
-
-impl From<MSG_MOVE_START_TURN_LEFT_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_TURN_LEFT_Client) -> Self {
-        Self::MSG_MOVE_START_TURN_LEFT(c)
-    }
-}
-
-impl From<MSG_MOVE_START_TURN_RIGHT_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_TURN_RIGHT_Client) -> Self {
-        Self::MSG_MOVE_START_TURN_RIGHT(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_TURN_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_TURN_Client) -> Self {
-        Self::MSG_MOVE_STOP_TURN(c)
-    }
-}
-
-impl From<MSG_MOVE_START_PITCH_UP_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_PITCH_UP_Client) -> Self {
-        Self::MSG_MOVE_START_PITCH_UP(c)
-    }
-}
-
-impl From<MSG_MOVE_START_PITCH_DOWN_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_PITCH_DOWN_Client) -> Self {
-        Self::MSG_MOVE_START_PITCH_DOWN(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_PITCH_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_PITCH_Client) -> Self {
-        Self::MSG_MOVE_STOP_PITCH(c)
-    }
-}
-
-impl From<MSG_MOVE_SET_RUN_MODE_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_SET_RUN_MODE_Client) -> Self {
-        Self::MSG_MOVE_SET_RUN_MODE(c)
-    }
-}
-
-impl From<MSG_MOVE_SET_WALK_MODE_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_SET_WALK_MODE_Client) -> Self {
-        Self::MSG_MOVE_SET_WALK_MODE(c)
-    }
-}
-
 impl From<MSG_MOVE_TELEPORT_ACK_Client> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_TELEPORT_ACK_Client) -> Self {
         Self::MSG_MOVE_TELEPORT_ACK(c)
-    }
-}
-
-impl From<MSG_MOVE_FALL_LAND_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_FALL_LAND_Client) -> Self {
-        Self::MSG_MOVE_FALL_LAND(c)
-    }
-}
-
-impl From<MSG_MOVE_START_SWIM_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_SWIM_Client) -> Self {
-        Self::MSG_MOVE_START_SWIM(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_SWIM_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_SWIM_Client) -> Self {
-        Self::MSG_MOVE_STOP_SWIM(c)
-    }
-}
-
-impl From<MSG_MOVE_SET_FACING_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_SET_FACING_Client) -> Self {
-        Self::MSG_MOVE_SET_FACING(c)
-    }
-}
-
-impl From<MSG_MOVE_SET_PITCH_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_SET_PITCH_Client) -> Self {
-        Self::MSG_MOVE_SET_PITCH(c)
     }
 }
 
@@ -1437,12 +1461,6 @@ impl From<CMSG_FORCE_MOVE_ROOT_ACK> for ClientOpcodeMessage {
 impl From<CMSG_FORCE_MOVE_UNROOT_ACK> for ClientOpcodeMessage {
     fn from(c: CMSG_FORCE_MOVE_UNROOT_ACK) -> Self {
         Self::CMSG_FORCE_MOVE_UNROOT_ACK(c)
-    }
-}
-
-impl From<MSG_MOVE_HEARTBEAT_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_HEARTBEAT_Client) -> Self {
-        Self::MSG_MOVE_HEARTBEAT(c)
     }
 }
 
@@ -1680,18 +1698,6 @@ impl From<CMSG_MOVE_SET_FLY> for ClientOpcodeMessage {
     }
 }
 
-impl From<MSG_MOVE_START_ASCEND_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_ASCEND_Client) -> Self {
-        Self::MSG_MOVE_START_ASCEND(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_ASCEND_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_ASCEND_Client) -> Self {
-        Self::MSG_MOVE_STOP_ASCEND(c)
-    }
-}
-
 impl From<CMSG_REALM_SPLIT> for ClientOpcodeMessage {
     fn from(c: CMSG_REALM_SPLIT) -> Self {
         Self::CMSG_REALM_SPLIT(c)
@@ -1701,12 +1707,6 @@ impl From<CMSG_REALM_SPLIT> for ClientOpcodeMessage {
 impl From<CMSG_MOVE_CHNG_TRANSPORT> for ClientOpcodeMessage {
     fn from(c: CMSG_MOVE_CHNG_TRANSPORT) -> Self {
         Self::CMSG_MOVE_CHNG_TRANSPORT(c)
-    }
-}
-
-impl From<MSG_MOVE_START_DESCEND_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_START_DESCEND_Client) -> Self {
-        Self::MSG_MOVE_START_DESCEND(c)
     }
 }
 
@@ -1733,30 +1733,9 @@ use crate::world::wrath::SMSG_CONTACT_LIST;
 use crate::world::wrath::SMSG_CHANNEL_NOTIFY;
 use crate::world::wrath::SMSG_CHANNEL_LIST;
 use crate::world::wrath::SMSG_UPDATE_OBJECT;
-use crate::world::wrath::MSG_MOVE_START_FORWARD_Server;
-use crate::world::wrath::MSG_MOVE_START_BACKWARD_Server;
-use crate::world::wrath::MSG_MOVE_STOP_Server;
-use crate::world::wrath::MSG_MOVE_START_STRAFE_LEFT_Server;
-use crate::world::wrath::MSG_MOVE_START_STRAFE_RIGHT_Server;
-use crate::world::wrath::MSG_MOVE_STOP_STRAFE_Server;
-use crate::world::wrath::MSG_MOVE_JUMP_Server;
-use crate::world::wrath::MSG_MOVE_START_TURN_LEFT_Server;
-use crate::world::wrath::MSG_MOVE_START_TURN_RIGHT_Server;
-use crate::world::wrath::MSG_MOVE_STOP_TURN_Server;
-use crate::world::wrath::MSG_MOVE_START_PITCH_UP_Server;
-use crate::world::wrath::MSG_MOVE_START_PITCH_DOWN_Server;
-use crate::world::wrath::MSG_MOVE_STOP_PITCH_Server;
-use crate::world::wrath::MSG_MOVE_SET_RUN_MODE_Server;
-use crate::world::wrath::MSG_MOVE_SET_WALK_MODE_Server;
 use crate::world::wrath::MSG_MOVE_TELEPORT_ACK_Server;
-use crate::world::wrath::MSG_MOVE_FALL_LAND_Server;
-use crate::world::wrath::MSG_MOVE_START_SWIM_Server;
-use crate::world::wrath::MSG_MOVE_STOP_SWIM_Server;
-use crate::world::wrath::MSG_MOVE_SET_FACING_Server;
-use crate::world::wrath::MSG_MOVE_SET_PITCH_Server;
 use crate::world::wrath::SMSG_FORCE_MOVE_ROOT;
 use crate::world::wrath::SMSG_FORCE_MOVE_UNROOT;
-use crate::world::wrath::MSG_MOVE_HEARTBEAT_Server;
 use crate::world::wrath::SMSG_TRIGGER_CINEMATIC;
 use crate::world::wrath::SMSG_TUTORIAL_FLAGS;
 use crate::world::wrath::SMSG_EMOTE;
@@ -1799,19 +1778,40 @@ use crate::world::wrath::SMSG_CHAR_RENAME;
 use crate::world::wrath::SMSG_ADDON_INFO;
 use crate::world::wrath::SMSG_CHAT_RESTRICTED;
 use crate::world::wrath::SMSG_DEFENSE_MESSAGE;
-use crate::world::wrath::MSG_MOVE_START_ASCEND_Server;
-use crate::world::wrath::MSG_MOVE_STOP_ASCEND_Server;
 use crate::world::wrath::SMSG_REALM_SPLIT;
 use crate::world::wrath::SMSG_TIME_SYNC_REQ;
-use crate::world::wrath::MSG_MOVE_START_DESCEND_Server;
 use crate::world::wrath::SMSG_FEATURE_SYSTEM_STATUS;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
+    MSG_MOVE_START_FORWARD(MSG_MOVE_START_FORWARD),
+    MSG_MOVE_START_BACKWARD(MSG_MOVE_START_BACKWARD),
+    MSG_MOVE_STOP(MSG_MOVE_STOP),
+    MSG_MOVE_START_STRAFE_LEFT(MSG_MOVE_START_STRAFE_LEFT),
+    MSG_MOVE_START_STRAFE_RIGHT(MSG_MOVE_START_STRAFE_RIGHT),
+    MSG_MOVE_STOP_STRAFE(MSG_MOVE_STOP_STRAFE),
+    MSG_MOVE_JUMP(MSG_MOVE_JUMP),
+    MSG_MOVE_START_TURN_LEFT(MSG_MOVE_START_TURN_LEFT),
+    MSG_MOVE_START_TURN_RIGHT(MSG_MOVE_START_TURN_RIGHT),
+    MSG_MOVE_STOP_TURN(MSG_MOVE_STOP_TURN),
+    MSG_MOVE_START_PITCH_UP(MSG_MOVE_START_PITCH_UP),
+    MSG_MOVE_START_PITCH_DOWN(MSG_MOVE_START_PITCH_DOWN),
+    MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH),
+    MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE),
+    MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE),
+    MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND),
+    MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM),
+    MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM),
+    MSG_MOVE_SET_FACING(MSG_MOVE_SET_FACING),
+    MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH),
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
+    MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT),
     MSG_SET_DUNGEON_DIFFICULTY(MSG_SET_DUNGEON_DIFFICULTY),
+    MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND),
+    MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND),
+    MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND),
     SMSG_CHAR_CREATE(SMSG_CHAR_CREATE),
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
     SMSG_CHAR_DELETE(SMSG_CHAR_DELETE),
@@ -1823,30 +1823,9 @@ pub enum ServerOpcodeMessage {
     SMSG_CHANNEL_NOTIFY(SMSG_CHANNEL_NOTIFY),
     SMSG_CHANNEL_LIST(SMSG_CHANNEL_LIST),
     SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
-    MSG_MOVE_START_FORWARD(MSG_MOVE_START_FORWARD_Server),
-    MSG_MOVE_START_BACKWARD(MSG_MOVE_START_BACKWARD_Server),
-    MSG_MOVE_STOP(MSG_MOVE_STOP_Server),
-    MSG_MOVE_START_STRAFE_LEFT(MSG_MOVE_START_STRAFE_LEFT_Server),
-    MSG_MOVE_START_STRAFE_RIGHT(MSG_MOVE_START_STRAFE_RIGHT_Server),
-    MSG_MOVE_STOP_STRAFE(MSG_MOVE_STOP_STRAFE_Server),
-    MSG_MOVE_JUMP(MSG_MOVE_JUMP_Server),
-    MSG_MOVE_START_TURN_LEFT(MSG_MOVE_START_TURN_LEFT_Server),
-    MSG_MOVE_START_TURN_RIGHT(MSG_MOVE_START_TURN_RIGHT_Server),
-    MSG_MOVE_STOP_TURN(MSG_MOVE_STOP_TURN_Server),
-    MSG_MOVE_START_PITCH_UP(MSG_MOVE_START_PITCH_UP_Server),
-    MSG_MOVE_START_PITCH_DOWN(MSG_MOVE_START_PITCH_DOWN_Server),
-    MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH_Server),
-    MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE_Server),
-    MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE_Server),
     MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Server),
-    MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND_Server),
-    MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM_Server),
-    MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Server),
-    MSG_MOVE_SET_FACING(MSG_MOVE_SET_FACING_Server),
-    MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH_Server),
     SMSG_FORCE_MOVE_ROOT(SMSG_FORCE_MOVE_ROOT),
     SMSG_FORCE_MOVE_UNROOT(SMSG_FORCE_MOVE_UNROOT),
-    MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT_Server),
     SMSG_TRIGGER_CINEMATIC(SMSG_TRIGGER_CINEMATIC),
     SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS),
     SMSG_EMOTE(SMSG_EMOTE),
@@ -1889,11 +1868,8 @@ pub enum ServerOpcodeMessage {
     SMSG_ADDON_INFO(SMSG_ADDON_INFO),
     SMSG_CHAT_RESTRICTED(SMSG_CHAT_RESTRICTED),
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
-    MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Server),
-    MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Server),
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
-    MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Server),
     SMSG_FEATURE_SYSTEM_STATUS(SMSG_FEATURE_SYSTEM_STATUS),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
@@ -1902,8 +1878,32 @@ pub enum ServerOpcodeMessage {
 impl ServerOpcodeMessage {
     fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
+            0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00B7 => Ok(Self::MSG_MOVE_STOP(<MSG_MOVE_STOP as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00B8 => Ok(Self::MSG_MOVE_START_STRAFE_LEFT(<MSG_MOVE_START_STRAFE_LEFT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00B9 => Ok(Self::MSG_MOVE_START_STRAFE_RIGHT(<MSG_MOVE_START_STRAFE_RIGHT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BA => Ok(Self::MSG_MOVE_STOP_STRAFE(<MSG_MOVE_STOP_STRAFE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BB => Ok(Self::MSG_MOVE_JUMP(<MSG_MOVE_JUMP as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BC => Ok(Self::MSG_MOVE_START_TURN_LEFT(<MSG_MOVE_START_TURN_LEFT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BD => Ok(Self::MSG_MOVE_START_TURN_RIGHT(<MSG_MOVE_START_TURN_RIGHT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BE => Ok(Self::MSG_MOVE_STOP_TURN(<MSG_MOVE_STOP_TURN as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00BF => Ok(Self::MSG_MOVE_START_PITCH_UP(<MSG_MOVE_START_PITCH_UP as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C0 => Ok(Self::MSG_MOVE_START_PITCH_DOWN(<MSG_MOVE_START_PITCH_DOWN as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00DA => Ok(Self::MSG_MOVE_SET_FACING(<MSG_MOVE_SET_FACING as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH as crate::Message>::read_body(&mut r, body_size)?)),
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0329 => Ok(Self::MSG_SET_DUNGEON_DIFFICULTY(<MSG_SET_DUNGEON_DIFFICULTY as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND as crate::Message>::read_body(&mut r, body_size)?)),
+            0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND as crate::Message>::read_body(&mut r, body_size)?)),
+            0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND as crate::Message>::read_body(&mut r, body_size)?)),
             0x003A => Ok(Self::SMSG_CHAR_CREATE(<SMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x003C => Ok(Self::SMSG_CHAR_DELETE(<SMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1915,30 +1915,9 @@ impl ServerOpcodeMessage {
             0x0099 => Ok(Self::SMSG_CHANNEL_NOTIFY(<SMSG_CHANNEL_NOTIFY as crate::Message>::read_body(&mut r, body_size)?)),
             0x009B => Ok(Self::SMSG_CHANNEL_LIST(<SMSG_CHANNEL_LIST as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(<SMSG_UPDATE_OBJECT as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B7 => Ok(Self::MSG_MOVE_STOP(<MSG_MOVE_STOP_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B8 => Ok(Self::MSG_MOVE_START_STRAFE_LEFT(<MSG_MOVE_START_STRAFE_LEFT_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00B9 => Ok(Self::MSG_MOVE_START_STRAFE_RIGHT(<MSG_MOVE_START_STRAFE_RIGHT_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BA => Ok(Self::MSG_MOVE_STOP_STRAFE(<MSG_MOVE_STOP_STRAFE_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BB => Ok(Self::MSG_MOVE_JUMP(<MSG_MOVE_JUMP_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BC => Ok(Self::MSG_MOVE_START_TURN_LEFT(<MSG_MOVE_START_TURN_LEFT_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BD => Ok(Self::MSG_MOVE_START_TURN_RIGHT(<MSG_MOVE_START_TURN_RIGHT_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BE => Ok(Self::MSG_MOVE_STOP_TURN(<MSG_MOVE_STOP_TURN_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00BF => Ok(Self::MSG_MOVE_START_PITCH_UP(<MSG_MOVE_START_PITCH_UP_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C0 => Ok(Self::MSG_MOVE_START_PITCH_DOWN(<MSG_MOVE_START_PITCH_DOWN_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00DA => Ok(Self::MSG_MOVE_SET_FACING(<MSG_MOVE_SET_FACING_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00E8 => Ok(Self::SMSG_FORCE_MOVE_ROOT(<SMSG_FORCE_MOVE_ROOT as crate::Message>::read_body(&mut r, body_size)?)),
             0x00EA => Ok(Self::SMSG_FORCE_MOVE_UNROOT(<SMSG_FORCE_MOVE_UNROOT as crate::Message>::read_body(&mut r, body_size)?)),
-            0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FA => Ok(Self::SMSG_TRIGGER_CINEMATIC(<SMSG_TRIGGER_CINEMATIC as crate::Message>::read_body(&mut r, body_size)?)),
             0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(<SMSG_TUTORIAL_FLAGS as crate::Message>::read_body(&mut r, body_size)?)),
             0x0103 => Ok(Self::SMSG_EMOTE(<SMSG_EMOTE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1981,11 +1960,8 @@ impl ServerOpcodeMessage {
             0x02EF => Ok(Self::SMSG_ADDON_INFO(<SMSG_ADDON_INFO as crate::Message>::read_body(&mut r, body_size)?)),
             0x02FD => Ok(Self::SMSG_CHAT_RESTRICTED(<SMSG_CHAT_RESTRICTED as crate::Message>::read_body(&mut r, body_size)?)),
             0x033A => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as crate::Message>::read_body(&mut r, body_size)?)),
-            0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Server as crate::Message>::read_body(&mut r, body_size)?)),
-            0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size)?)),
-            0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x03C9 => Ok(Self::SMSG_FEATURE_SYSTEM_STATUS(<SMSG_FEATURE_SYSTEM_STATUS as crate::Message>::read_body(&mut r, body_size)?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2143,19 +2119,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_server<W: std::io::Write>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
-            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CHAR_CREATE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CHAR_DELETE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_NEW_WORLD(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_TRANSFER_PENDING(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CONTACT_LIST(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CHANNEL_NOTIFY(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CHANNEL_LIST(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_FORWARD(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP(c) => c.write_encrypted_server(w, e),
@@ -2171,15 +2134,31 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_server(w, e),
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_FACING(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_server(w, e),
+            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHAR_CREATE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHAR_DELETE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_NEW_WORLD(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_TRANSFER_PENDING(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CONTACT_LIST(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHANNEL_LIST(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.write_encrypted_server(w, e),
-            Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_EMOTE(c) => c.write_encrypted_server(w, e),
@@ -2222,11 +2201,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_encrypted_server(w, e),
-            Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
-            Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
@@ -2236,19 +2212,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_server(w),
-            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CHAR_CREATE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CHAR_DELETE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_NEW_WORLD(c) => c.write_unencrypted_server(w),
-            Self::SMSG_TRANSFER_PENDING(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_unencrypted_server(w),
-            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CONTACT_LIST(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CHANNEL_NOTIFY(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CHANNEL_LIST(c) => c.write_unencrypted_server(w),
-            Self::SMSG_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_FORWARD(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP(c) => c.write_unencrypted_server(w),
@@ -2264,15 +2227,31 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_server(w),
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_FACING(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_server(w),
+            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHAR_CREATE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHAR_DELETE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_NEW_WORLD(c) => c.write_unencrypted_server(w),
+            Self::SMSG_TRANSFER_PENDING(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CONTACT_LIST(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHANNEL_LIST(c) => c.write_unencrypted_server(w),
+            Self::SMSG_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.write_unencrypted_server(w),
-            Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.write_unencrypted_server(w),
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_unencrypted_server(w),
             Self::SMSG_EMOTE(c) => c.write_unencrypted_server(w),
@@ -2315,11 +2294,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_unencrypted_server(w),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_unencrypted_server(w),
-            Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_server(w),
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
-            Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
@@ -2329,19 +2305,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_NEW_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CONTACT_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2357,15 +2320,31 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_NEW_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CONTACT_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_EMOTE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2408,11 +2387,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2422,19 +2398,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_NEW_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CONTACT_LIST(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2450,15 +2413,31 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_NEW_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CONTACT_LIST(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_EMOTE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2501,11 +2480,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2515,19 +2491,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CHAR_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CHAR_DELETE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_NEW_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CONTACT_LIST(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2543,15 +2506,31 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAR_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAR_DELETE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_NEW_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CONTACT_LIST(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_EMOTE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2594,11 +2573,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2608,19 +2584,6 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
-            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_NEW_WORLD(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CONTACT_LIST(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP(c) => c.astd_write_unencrypted_server(w).await,
@@ -2636,15 +2599,31 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_NEW_WORLD(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CONTACT_LIST(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.astd_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_EMOTE(c) => c.astd_write_unencrypted_server(w).await,
@@ -2687,11 +2666,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADDON_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
@@ -2703,8 +2679,32 @@ impl ServerOpcodeMessage {
 impl std::fmt::Display for ServerOpcodeMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
+            ServerOpcodeMessage::MSG_MOVE_START_FORWARD(_) => "MSG_MOVE_START_FORWARD",
+            ServerOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => "MSG_MOVE_START_BACKWARD",
+            ServerOpcodeMessage::MSG_MOVE_STOP(_) => "MSG_MOVE_STOP",
+            ServerOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(_) => "MSG_MOVE_START_STRAFE_LEFT",
+            ServerOpcodeMessage::MSG_MOVE_START_STRAFE_RIGHT(_) => "MSG_MOVE_START_STRAFE_RIGHT",
+            ServerOpcodeMessage::MSG_MOVE_STOP_STRAFE(_) => "MSG_MOVE_STOP_STRAFE",
+            ServerOpcodeMessage::MSG_MOVE_JUMP(_) => "MSG_MOVE_JUMP",
+            ServerOpcodeMessage::MSG_MOVE_START_TURN_LEFT(_) => "MSG_MOVE_START_TURN_LEFT",
+            ServerOpcodeMessage::MSG_MOVE_START_TURN_RIGHT(_) => "MSG_MOVE_START_TURN_RIGHT",
+            ServerOpcodeMessage::MSG_MOVE_STOP_TURN(_) => "MSG_MOVE_STOP_TURN",
+            ServerOpcodeMessage::MSG_MOVE_START_PITCH_UP(_) => "MSG_MOVE_START_PITCH_UP",
+            ServerOpcodeMessage::MSG_MOVE_START_PITCH_DOWN(_) => "MSG_MOVE_START_PITCH_DOWN",
+            ServerOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => "MSG_MOVE_STOP_PITCH",
+            ServerOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => "MSG_MOVE_SET_RUN_MODE",
+            ServerOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => "MSG_MOVE_SET_WALK_MODE",
+            ServerOpcodeMessage::MSG_MOVE_FALL_LAND(_) => "MSG_MOVE_FALL_LAND",
+            ServerOpcodeMessage::MSG_MOVE_START_SWIM(_) => "MSG_MOVE_START_SWIM",
+            ServerOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM",
+            ServerOpcodeMessage::MSG_MOVE_SET_FACING(_) => "MSG_MOVE_SET_FACING",
+            ServerOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH",
             ServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
+            ServerOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT",
             ServerOpcodeMessage::MSG_SET_DUNGEON_DIFFICULTY(_) => "MSG_SET_DUNGEON_DIFFICULTY",
+            ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND",
+            ServerOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND",
+            ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND",
             ServerOpcodeMessage::SMSG_CHAR_CREATE(_) => "SMSG_CHAR_CREATE",
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
             ServerOpcodeMessage::SMSG_CHAR_DELETE(_) => "SMSG_CHAR_DELETE",
@@ -2716,30 +2716,9 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHANNEL_NOTIFY(_) => "SMSG_CHANNEL_NOTIFY",
             ServerOpcodeMessage::SMSG_CHANNEL_LIST(_) => "SMSG_CHANNEL_LIST",
             ServerOpcodeMessage::SMSG_UPDATE_OBJECT(_) => "SMSG_UPDATE_OBJECT",
-            ServerOpcodeMessage::MSG_MOVE_START_FORWARD(_) => "MSG_MOVE_START_FORWARD_Server",
-            ServerOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => "MSG_MOVE_START_BACKWARD_Server",
-            ServerOpcodeMessage::MSG_MOVE_STOP(_) => "MSG_MOVE_STOP_Server",
-            ServerOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(_) => "MSG_MOVE_START_STRAFE_LEFT_Server",
-            ServerOpcodeMessage::MSG_MOVE_START_STRAFE_RIGHT(_) => "MSG_MOVE_START_STRAFE_RIGHT_Server",
-            ServerOpcodeMessage::MSG_MOVE_STOP_STRAFE(_) => "MSG_MOVE_STOP_STRAFE_Server",
-            ServerOpcodeMessage::MSG_MOVE_JUMP(_) => "MSG_MOVE_JUMP_Server",
-            ServerOpcodeMessage::MSG_MOVE_START_TURN_LEFT(_) => "MSG_MOVE_START_TURN_LEFT_Server",
-            ServerOpcodeMessage::MSG_MOVE_START_TURN_RIGHT(_) => "MSG_MOVE_START_TURN_RIGHT_Server",
-            ServerOpcodeMessage::MSG_MOVE_STOP_TURN(_) => "MSG_MOVE_STOP_TURN_Server",
-            ServerOpcodeMessage::MSG_MOVE_START_PITCH_UP(_) => "MSG_MOVE_START_PITCH_UP_Server",
-            ServerOpcodeMessage::MSG_MOVE_START_PITCH_DOWN(_) => "MSG_MOVE_START_PITCH_DOWN_Server",
-            ServerOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => "MSG_MOVE_STOP_PITCH_Server",
-            ServerOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => "MSG_MOVE_SET_RUN_MODE_Server",
-            ServerOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => "MSG_MOVE_SET_WALK_MODE_Server",
             ServerOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Server",
-            ServerOpcodeMessage::MSG_MOVE_FALL_LAND(_) => "MSG_MOVE_FALL_LAND_Server",
-            ServerOpcodeMessage::MSG_MOVE_START_SWIM(_) => "MSG_MOVE_START_SWIM_Server",
-            ServerOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM_Server",
-            ServerOpcodeMessage::MSG_MOVE_SET_FACING(_) => "MSG_MOVE_SET_FACING_Server",
-            ServerOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH_Server",
             ServerOpcodeMessage::SMSG_FORCE_MOVE_ROOT(_) => "SMSG_FORCE_MOVE_ROOT",
             ServerOpcodeMessage::SMSG_FORCE_MOVE_UNROOT(_) => "SMSG_FORCE_MOVE_UNROOT",
-            ServerOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT_Server",
             ServerOpcodeMessage::SMSG_TRIGGER_CINEMATIC(_) => "SMSG_TRIGGER_CINEMATIC",
             ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(_) => "SMSG_TUTORIAL_FLAGS",
             ServerOpcodeMessage::SMSG_EMOTE(_) => "SMSG_EMOTE",
@@ -2782,15 +2761,132 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ADDON_INFO(_) => "SMSG_ADDON_INFO",
             ServerOpcodeMessage::SMSG_CHAT_RESTRICTED(_) => "SMSG_CHAT_RESTRICTED",
             ServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => "SMSG_DEFENSE_MESSAGE",
-            ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Server",
-            ServerOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Server",
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
-            ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Server",
             ServerOpcodeMessage::SMSG_FEATURE_SYSTEM_STATUS(_) => "SMSG_FEATURE_SYSTEM_STATUS",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
         })
+    }
+}
+
+impl From<MSG_MOVE_START_FORWARD> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_FORWARD) -> Self {
+        Self::MSG_MOVE_START_FORWARD(c)
+    }
+}
+
+impl From<MSG_MOVE_START_BACKWARD> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_BACKWARD) -> Self {
+        Self::MSG_MOVE_START_BACKWARD(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP) -> Self {
+        Self::MSG_MOVE_STOP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_STRAFE_LEFT> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_STRAFE_LEFT) -> Self {
+        Self::MSG_MOVE_START_STRAFE_LEFT(c)
+    }
+}
+
+impl From<MSG_MOVE_START_STRAFE_RIGHT> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_STRAFE_RIGHT) -> Self {
+        Self::MSG_MOVE_START_STRAFE_RIGHT(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_STRAFE> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_STRAFE) -> Self {
+        Self::MSG_MOVE_STOP_STRAFE(c)
+    }
+}
+
+impl From<MSG_MOVE_JUMP> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_JUMP) -> Self {
+        Self::MSG_MOVE_JUMP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_TURN_LEFT> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_TURN_LEFT) -> Self {
+        Self::MSG_MOVE_START_TURN_LEFT(c)
+    }
+}
+
+impl From<MSG_MOVE_START_TURN_RIGHT> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_TURN_RIGHT) -> Self {
+        Self::MSG_MOVE_START_TURN_RIGHT(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_TURN> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_TURN) -> Self {
+        Self::MSG_MOVE_STOP_TURN(c)
+    }
+}
+
+impl From<MSG_MOVE_START_PITCH_UP> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_PITCH_UP) -> Self {
+        Self::MSG_MOVE_START_PITCH_UP(c)
+    }
+}
+
+impl From<MSG_MOVE_START_PITCH_DOWN> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_PITCH_DOWN) -> Self {
+        Self::MSG_MOVE_START_PITCH_DOWN(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_PITCH> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_PITCH) -> Self {
+        Self::MSG_MOVE_STOP_PITCH(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_RUN_MODE> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_RUN_MODE) -> Self {
+        Self::MSG_MOVE_SET_RUN_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_WALK_MODE> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_WALK_MODE) -> Self {
+        Self::MSG_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_FALL_LAND> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_FALL_LAND) -> Self {
+        Self::MSG_MOVE_FALL_LAND(c)
+    }
+}
+
+impl From<MSG_MOVE_START_SWIM> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_SWIM) -> Self {
+        Self::MSG_MOVE_START_SWIM(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_SWIM> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_SWIM) -> Self {
+        Self::MSG_MOVE_STOP_SWIM(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_FACING> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_FACING) -> Self {
+        Self::MSG_MOVE_SET_FACING(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_PITCH> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_PITCH) -> Self {
+        Self::MSG_MOVE_SET_PITCH(c)
     }
 }
 
@@ -2800,9 +2896,33 @@ impl From<MSG_MOVE_WORLDPORT_ACK> for ServerOpcodeMessage {
     }
 }
 
+impl From<MSG_MOVE_HEARTBEAT> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_HEARTBEAT) -> Self {
+        Self::MSG_MOVE_HEARTBEAT(c)
+    }
+}
+
 impl From<MSG_SET_DUNGEON_DIFFICULTY> for ServerOpcodeMessage {
     fn from(c: MSG_SET_DUNGEON_DIFFICULTY) -> Self {
         Self::MSG_SET_DUNGEON_DIFFICULTY(c)
+    }
+}
+
+impl From<MSG_MOVE_START_ASCEND> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_ASCEND) -> Self {
+        Self::MSG_MOVE_START_ASCEND(c)
+    }
+}
+
+impl From<MSG_MOVE_STOP_ASCEND> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_STOP_ASCEND) -> Self {
+        Self::MSG_MOVE_STOP_ASCEND(c)
+    }
+}
+
+impl From<MSG_MOVE_START_DESCEND> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_START_DESCEND) -> Self {
+        Self::MSG_MOVE_START_DESCEND(c)
     }
 }
 
@@ -2872,129 +2992,9 @@ impl From<SMSG_UPDATE_OBJECT> for ServerOpcodeMessage {
     }
 }
 
-impl From<MSG_MOVE_START_FORWARD_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_FORWARD_Server) -> Self {
-        Self::MSG_MOVE_START_FORWARD(c)
-    }
-}
-
-impl From<MSG_MOVE_START_BACKWARD_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_BACKWARD_Server) -> Self {
-        Self::MSG_MOVE_START_BACKWARD(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_Server) -> Self {
-        Self::MSG_MOVE_STOP(c)
-    }
-}
-
-impl From<MSG_MOVE_START_STRAFE_LEFT_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_STRAFE_LEFT_Server) -> Self {
-        Self::MSG_MOVE_START_STRAFE_LEFT(c)
-    }
-}
-
-impl From<MSG_MOVE_START_STRAFE_RIGHT_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_STRAFE_RIGHT_Server) -> Self {
-        Self::MSG_MOVE_START_STRAFE_RIGHT(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_STRAFE_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_STRAFE_Server) -> Self {
-        Self::MSG_MOVE_STOP_STRAFE(c)
-    }
-}
-
-impl From<MSG_MOVE_JUMP_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_JUMP_Server) -> Self {
-        Self::MSG_MOVE_JUMP(c)
-    }
-}
-
-impl From<MSG_MOVE_START_TURN_LEFT_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_TURN_LEFT_Server) -> Self {
-        Self::MSG_MOVE_START_TURN_LEFT(c)
-    }
-}
-
-impl From<MSG_MOVE_START_TURN_RIGHT_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_TURN_RIGHT_Server) -> Self {
-        Self::MSG_MOVE_START_TURN_RIGHT(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_TURN_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_TURN_Server) -> Self {
-        Self::MSG_MOVE_STOP_TURN(c)
-    }
-}
-
-impl From<MSG_MOVE_START_PITCH_UP_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_PITCH_UP_Server) -> Self {
-        Self::MSG_MOVE_START_PITCH_UP(c)
-    }
-}
-
-impl From<MSG_MOVE_START_PITCH_DOWN_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_PITCH_DOWN_Server) -> Self {
-        Self::MSG_MOVE_START_PITCH_DOWN(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_PITCH_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_PITCH_Server) -> Self {
-        Self::MSG_MOVE_STOP_PITCH(c)
-    }
-}
-
-impl From<MSG_MOVE_SET_RUN_MODE_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_SET_RUN_MODE_Server) -> Self {
-        Self::MSG_MOVE_SET_RUN_MODE(c)
-    }
-}
-
-impl From<MSG_MOVE_SET_WALK_MODE_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_SET_WALK_MODE_Server) -> Self {
-        Self::MSG_MOVE_SET_WALK_MODE(c)
-    }
-}
-
 impl From<MSG_MOVE_TELEPORT_ACK_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_TELEPORT_ACK_Server) -> Self {
         Self::MSG_MOVE_TELEPORT_ACK(c)
-    }
-}
-
-impl From<MSG_MOVE_FALL_LAND_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_FALL_LAND_Server) -> Self {
-        Self::MSG_MOVE_FALL_LAND(c)
-    }
-}
-
-impl From<MSG_MOVE_START_SWIM_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_SWIM_Server) -> Self {
-        Self::MSG_MOVE_START_SWIM(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_SWIM_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_SWIM_Server) -> Self {
-        Self::MSG_MOVE_STOP_SWIM(c)
-    }
-}
-
-impl From<MSG_MOVE_SET_FACING_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_SET_FACING_Server) -> Self {
-        Self::MSG_MOVE_SET_FACING(c)
-    }
-}
-
-impl From<MSG_MOVE_SET_PITCH_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_SET_PITCH_Server) -> Self {
-        Self::MSG_MOVE_SET_PITCH(c)
     }
 }
 
@@ -3007,12 +3007,6 @@ impl From<SMSG_FORCE_MOVE_ROOT> for ServerOpcodeMessage {
 impl From<SMSG_FORCE_MOVE_UNROOT> for ServerOpcodeMessage {
     fn from(c: SMSG_FORCE_MOVE_UNROOT) -> Self {
         Self::SMSG_FORCE_MOVE_UNROOT(c)
-    }
-}
-
-impl From<MSG_MOVE_HEARTBEAT_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_HEARTBEAT_Server) -> Self {
-        Self::MSG_MOVE_HEARTBEAT(c)
     }
 }
 
@@ -3268,18 +3262,6 @@ impl From<SMSG_DEFENSE_MESSAGE> for ServerOpcodeMessage {
     }
 }
 
-impl From<MSG_MOVE_START_ASCEND_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_ASCEND_Server) -> Self {
-        Self::MSG_MOVE_START_ASCEND(c)
-    }
-}
-
-impl From<MSG_MOVE_STOP_ASCEND_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_STOP_ASCEND_Server) -> Self {
-        Self::MSG_MOVE_STOP_ASCEND(c)
-    }
-}
-
 impl From<SMSG_REALM_SPLIT> for ServerOpcodeMessage {
     fn from(c: SMSG_REALM_SPLIT) -> Self {
         Self::SMSG_REALM_SPLIT(c)
@@ -3289,12 +3271,6 @@ impl From<SMSG_REALM_SPLIT> for ServerOpcodeMessage {
 impl From<SMSG_TIME_SYNC_REQ> for ServerOpcodeMessage {
     fn from(c: SMSG_TIME_SYNC_REQ) -> Self {
         Self::SMSG_TIME_SYNC_REQ(c)
-    }
-}
-
-impl From<MSG_MOVE_START_DESCEND_Server> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_START_DESCEND_Server) -> Self {
-        Self::MSG_MOVE_START_DESCEND(c)
     }
 }
 

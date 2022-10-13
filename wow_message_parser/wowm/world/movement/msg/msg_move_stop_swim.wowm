@@ -10,7 +10,7 @@ cmsg MSG_MOVE_STOP_SWIM_Client = 0x00CB {
     versions = "2.4.3";
 }
 
-cmsg MSG_MOVE_STOP_SWIM_Client = 0x00CB {
+msg MSG_MOVE_STOP_SWIM = 0x00CB {
     PackedGuid guid;
     MovementInfo info;
 } {
@@ -29,11 +29,4 @@ smsg MSG_MOVE_STOP_SWIM_Server = 0x00CB {
     MovementInfo info;
 } {
     versions = "2.4.3";
-}
-
-smsg MSG_MOVE_STOP_SWIM_Server = 0x00CB {
-    PackedGuid guid;
-    MovementInfo info;
-} {
-    versions = "3.3.5";
 }

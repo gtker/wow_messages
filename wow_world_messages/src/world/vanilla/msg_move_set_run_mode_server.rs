@@ -70,7 +70,7 @@ mod test {
          0xC3, 0xAD, 0x31, 0xA7, 0x42, 0x2E, 0x0E, 0xC3, 0x40, 0x00, 0x00, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_run_mode.wowm` line 67.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_run_mode.wowm` line 60.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_MOVE_SET_RUN_MODE_Server0() {
@@ -109,7 +109,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_run_mode.wowm` line 67.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_run_mode.wowm` line 60.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_SET_RUN_MODE_Server0() {
@@ -148,7 +148,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_run_mode.wowm` line 67.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_run_mode.wowm` line 60.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_SET_RUN_MODE_Server0() {

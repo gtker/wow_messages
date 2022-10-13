@@ -44,7 +44,7 @@ cmsg MSG_MOVE_JUMP_Client = 0x00BB {
     versions = "2.4.3";
 }
 
-cmsg MSG_MOVE_JUMP_Client = 0x00BB {
+msg MSG_MOVE_JUMP = 0x00BB {
     PackedGuid guid;
     MovementInfo info;
 } {
@@ -99,11 +99,4 @@ smsg MSG_MOVE_JUMP_Server = 0x00BB {
     MovementInfo info;
 } {
     versions = "2.4.3";
-}
-
-smsg MSG_MOVE_JUMP_Server = 0x00BB {
-    PackedGuid guid;
-    MovementInfo info;
-} {
-    versions = "3.3.5";
 }
