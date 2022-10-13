@@ -1,5 +1,12 @@
 #tag_all versions "1 2 3";
 
+enum Ty : u8 {
+    ONE = 1;
+}
+
 struct MissingTest {
-    Missing missing;
+    Ty t;
+    if (t == TWO) {
+        u8 basic;
+    }
 }

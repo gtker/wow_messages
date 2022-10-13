@@ -4,14 +4,23 @@ use std::process::exit;
 
 const COMPLEX_NOT_FOUND: i32 = 1;
 
+fn wowm_error(msg: &str) {
+    eprintln!("WOWM ERROR: {}", msg);
+    eprintln!();
+}
+
+fn wowm_exit(code: i32) -> ! {
+    exit(code);
+}
+
 pub(crate) fn complex_not_found(
     struct_name: &str,
     struct_tags: &Tags,
     struct_fileinfo: &FileInfo,
     ty_name: &str,
 ) -> ! {
-    eprintln!("WOWM ERROR: Container has complex type that can not be found.");
-    eprintln!();
+    wowm_error("Container has complex type that can not be found.");
+
     eprintln!(
         "{}:{}:",
         struct_fileinfo.name(),
@@ -36,5 +45,14 @@ pub(crate) fn complex_not_found(
         }
     }
 
-    exit(COMPLEX_NOT_FOUND);
+    wowm_exit(COMPLEX_NOT_FOUND);
+}
+
+pub(crate) fn variable_in_if_not_found(variable_name: &str, name: &str, ty_name: &str) -> ! {
+    wowm_error("Container uses enumerator in if statement that does not exist.");
+
+    panic!(
+        "unable to find enumerator with name '{}' in variable '{}' with type '{}'",
+        name, variable_name, ty_name
+    )
 }

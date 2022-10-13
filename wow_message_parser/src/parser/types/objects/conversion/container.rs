@@ -1,4 +1,4 @@
-use crate::error_printer::complex_not_found;
+use crate::error_printer::{complex_not_found, variable_in_if_not_found};
 use crate::file_info::FileInfo;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
@@ -163,13 +163,34 @@ fn parsed_member_to_member(
             d.used_in_if.unwrap(),
             d.tags,
         )),
-        ParsedStructMember::IfStatement(s) => StructMember::IfStatement(IfStatement::new(
-            s.conditional,
-            parsed_members_to_members(c, s.members, containers, definers, tags),
-            parsed_if_statement_to_if_statement(c, s.else_ifs, containers, definers, tags),
-            parsed_members_to_members(c, s.else_statement_members, containers, definers, tags),
-            parsed_type_to_type(c, containers, definers, s.original_ty.unwrap(), tags),
-        )),
+        ParsedStructMember::IfStatement(s) => {
+            let member = c.get_field_ty(s.conditional.variable_name()).str();
+            let definer = get_definer(definers, &member, c.tags()).unwrap();
+
+            for eq in s.conditional.equations() {
+                match eq {
+                    Equation::Equals { value }
+                    | Equation::NotEquals { value }
+                    | Equation::BitwiseAnd { value } => {
+                        if definer.get_field_with_name(value).is_none() {
+                            variable_in_if_not_found(
+                                value,
+                                s.conditional.variable_name(),
+                                definer.name(),
+                            );
+                        }
+                    }
+                }
+            }
+
+            StructMember::IfStatement(IfStatement::new(
+                s.conditional,
+                parsed_members_to_members(c, s.members, containers, definers, tags),
+                parsed_if_statement_to_if_statement(c, s.else_ifs, containers, definers, tags),
+                parsed_members_to_members(c, s.else_statement_members, containers, definers, tags),
+                parsed_type_to_type(c, containers, definers, s.original_ty.unwrap(), tags),
+            ))
+        }
         ParsedStructMember::OptionalStatement(o) => {
             StructMember::OptionalStatement(OptionalStatement::new(
                 o.name,
