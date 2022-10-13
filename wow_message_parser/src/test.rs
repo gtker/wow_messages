@@ -3,8 +3,10 @@ use crate::error_printer::{
     MISSING_ENUMERATOR, NO_VERSIONS, RECURSIVE_TYPE,
 };
 use crate::file_utils::write_string_to_file;
+use crate::parser::parse_file;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{Version, WorldVersion};
+use crate::path_utils::parser_test_directory;
 use crate::rust_printer::{print_enum, print_flag, print_struct, Writer};
 use crate::{load_files, parser, print_message_stats, wowm_directory, ParsedObjects};
 use std::fs::read_to_string;
@@ -29,6 +31,11 @@ fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F, error_code: i32) 
             );
         }
     };
+}
+
+fn must_err_load(file_name: &str) -> Objects {
+    let p = parser_test_directory().join("must_err").join(file_name);
+    parse_file(&p).into_objects()
 }
 
 fn get_all_impl_items() -> Objects {
@@ -475,9 +482,7 @@ struct NoVersion {
 fn flag_equals_must_err() {
     should_panic(
         || {
-            let mut o = ParsedObjects::empty();
-            load_files(Path::new("tests/error_flag.wowm"), &mut o);
-            o.into_objects();
+            must_err_load("error_flag.wowm");
         },
         FLAG_HAS_EQUALS,
     );
@@ -487,9 +492,7 @@ fn flag_equals_must_err() {
 fn enum_equals_must_err() {
     should_panic(
         || {
-            let mut o = ParsedObjects::empty();
-            load_files(Path::new("tests/error_enum.wowm"), &mut o);
-            o.into_objects();
+            must_err_load("error_enum.wowm");
         },
         ENUM_HAS_BITWISE_AND,
     );
@@ -499,9 +502,7 @@ fn enum_equals_must_err() {
 fn incorrect_opcode_errors() {
     should_panic(
         || {
-            let mut o = ParsedObjects::empty();
-            load_files(Path::new("tests/must_err/incorrect_opcode.wowm"), &mut o);
-            let o = o.into_objects();
+            let o = must_err_load("incorrect_opcode.wowm");
             print_message_stats(&o);
         },
         INCORRECT_OPCODE_FOR_MESSAGE,
