@@ -28,7 +28,7 @@ impl ErrorWriter {
 
     pub(crate) fn fileinfo(&mut self, fileinfo: &FileInfo, reason: impl AsRef<str>) {
         self.wln(format!("{}:{}:", fileinfo.name(), fileinfo.start_line()));
-        self.wln(reason);
+        self.wln(format!("    {}", reason.as_ref()));
         self.newline();
     }
 
@@ -79,7 +79,7 @@ pub(crate) fn complex_not_found(
 
     s.fileinfo(
         struct_fileinfo,
-        format!("    Type '{}' needs type '{}'", struct_name, ty_name),
+        format!("Type '{}' needs type '{}'", struct_name, ty_name),
     );
 
     s.wln(format!("    '{}' needs to cover versions:", ty_name));
@@ -124,7 +124,7 @@ pub(crate) fn variable_in_if_not_found(
 pub(crate) fn recursive_type(name: &str, file_info: &FileInfo) {
     let mut s = ErrorWriter::new("Type contains itself which leads to infinite recursion.");
 
-    s.fileinfo(file_info, format!("    {} contains itself.", name));
+    s.fileinfo(file_info, format!("{} contains itself.", name));
 
     wowm_exit(s, RECURSIVE_TYPE);
 }
