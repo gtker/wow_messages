@@ -3,9 +3,9 @@ use crate::Tags;
 use std::fmt::Write;
 use std::process::exit;
 
-const COMPLEX_NOT_FOUND: i32 = 1;
-const RECURSIVE_TYPE: i32 = 2;
-const MISSING_ENUMERATOR: i32 = 3;
+pub(crate) const COMPLEX_NOT_FOUND: i32 = 1;
+pub(crate) const RECURSIVE_TYPE: i32 = 2;
+pub(crate) const MISSING_ENUMERATOR: i32 = 3;
 
 pub struct ErrorWriter {
     inner: String,

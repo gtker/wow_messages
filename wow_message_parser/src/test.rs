@@ -1,3 +1,4 @@
+use crate::error_printer::{COMPLEX_NOT_FOUND, MISSING_ENUMERATOR, RECURSIVE_TYPE};
 use crate::file_utils::write_string_to_file;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{Version, WorldVersion};
@@ -9,7 +10,7 @@ use std::path::Path;
 
 const OVERWRITE_ALL_TESTS: bool = false;
 
-fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F) {
+fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F, error_code: i32) {
     let prev_hook = panic::take_hook();
     panic::set_hook(Box::new(|_| {}));
 
@@ -18,7 +19,12 @@ fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F) {
 
     match result {
         Ok(_) => panic!(),
-        Err(_) => {}
+        Err(e) => {
+            assert_eq!(
+                e.downcast::<String>().unwrap(),
+                Box::new(error_code.to_string())
+            );
+        }
     };
 }
 
@@ -409,7 +415,10 @@ struct MissingInfo {
     MissingTy m;
 } { versions = \"1.12\"; }";
 
-    should_panic(|| parser::parse_contents(s, &wowm_directory("test")).into_objects());
+    should_panic(
+        || parser::parse_contents(s, &wowm_directory("test")).into_objects(),
+        COMPLEX_NOT_FOUND,
+    );
 }
 
 #[test]
@@ -426,7 +435,10 @@ struct MissingInfo {
     }
 } { versions = \"1.12\"; }";
 
-    should_panic(|| parser::parse_contents(s, &wowm_directory("test")).into_objects());
+    should_panic(
+        || parser::parse_contents(s, &wowm_directory("test")).into_objects(),
+        MISSING_ENUMERATOR,
+    );
 }
 
 #[test]
@@ -436,23 +448,24 @@ struct Recursive {
     Recursive m;
 } { versions = \"1.12\"; }";
 
-    should_panic(|| parser::parse_contents(s, &wowm_directory("test")).into_objects());
+    should_panic(
+        || parser::parse_contents(s, &wowm_directory("test")).into_objects(),
+        RECURSIVE_TYPE,
+    );
 }
 
 #[test]
+#[should_panic]
 fn flag_equals_must_err() {
-    should_panic(|| {
-        let mut o = ParsedObjects::empty();
-        load_files(Path::new("tests/error_flag.wowm"), &mut o);
-        o.into_objects();
-    });
+    let mut o = ParsedObjects::empty();
+    load_files(Path::new("tests/error_flag.wowm"), &mut o);
+    o.into_objects();
 }
 
 #[test]
+#[should_panic]
 fn enum_equals_must_err() {
-    should_panic(|| {
-        let mut o = ParsedObjects::empty();
-        load_files(Path::new("tests/error_enum.wowm"), &mut o);
-        o.into_objects();
-    });
+    let mut o = ParsedObjects::empty();
+    load_files(Path::new("tests/error_enum.wowm"), &mut o);
+    o.into_objects();
 }
