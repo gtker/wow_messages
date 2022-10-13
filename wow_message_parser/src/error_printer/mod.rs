@@ -11,6 +11,7 @@ pub(crate) const MISSING_ENUMERATOR: i32 = 3;
 pub(crate) const ENUM_HAS_BITWISE_AND: i32 = 4;
 pub(crate) const FLAG_HAS_EQUALS: i32 = 5;
 pub(crate) const NO_VERSIONS: i32 = 6;
+pub(crate) const INCORRECT_OPCODE_FOR_MESSAGE: i32 = 6;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -83,7 +84,7 @@ pub(crate) fn variable_in_if_not_found(
     wowm_exit(s, MISSING_ENUMERATOR);
 }
 
-pub(crate) fn recursive_type(name: &str, file_info: &FileInfo) {
+pub(crate) fn recursive_type(name: &str, file_info: &FileInfo) -> ! {
     let mut s = ErrorWriter::new("Type contains itself which leads to infinite recursion.");
 
     s.fileinfo(file_info, format!("{} contains itself.", name));
@@ -96,7 +97,7 @@ pub(crate) fn enum_has_bitwise_and(
     variable_name: &str,
     enum_ty_name: &str,
     file_info: &FileInfo,
-) {
+) -> ! {
     let mut s = ErrorWriter::new("Enum is used with bitwise and (&) in if statement instead of equals (==) or not equals (!=).");
 
     s.fileinfo(file_info, format!("Enum '{enum_ty_name}' is used in if statement as bitwise and (&) as variable '{variable_name}' in type '{ty_name}'", ));
@@ -109,7 +110,7 @@ pub(crate) fn flag_used_as_equals_or_not_equals(
     variable_name: &str,
     enum_ty_name: &str,
     file_info: &FileInfo,
-) {
+) -> ! {
     let mut s = ErrorWriter::new("Flag is used as either equals (==) or not equals (!=) in if statement instead of bitwise and (&).");
 
     s.fileinfo(file_info, format!("Flag '{enum_ty_name}' is used in if statement as eqauals (==) or not equals (!=) as variable '{variable_name}' in type '{ty_name}'", ));
@@ -117,7 +118,7 @@ pub(crate) fn flag_used_as_equals_or_not_equals(
     wowm_exit(s, FLAG_HAS_EQUALS);
 }
 
-pub(crate) fn object_has_no_versions(ty_name: &str, file_info: &FileInfo) {
+pub(crate) fn object_has_no_versions(ty_name: &str, file_info: &FileInfo) -> ! {
     let mut s = ErrorWriter::new("Object has no versions.");
 
     s.fileinfo(
@@ -126,4 +127,17 @@ pub(crate) fn object_has_no_versions(ty_name: &str, file_info: &FileInfo) {
     );
 
     wowm_exit(s, NO_VERSIONS)
+}
+
+pub(crate) fn incorrect_opcode_for_message(
+    ty_name: &str,
+    file_info: &FileInfo,
+    expected_opcode: usize,
+    actual: u16,
+) -> ! {
+    let mut s = ErrorWriter::new("Invalid opcode for message.");
+
+    s.fileinfo(file_info, format!("Message '{ty_name}' is expected to have opcode '{expected_opcode}' but it has '{actual}'", ));
+
+    wowm_exit(s, INCORRECT_OPCODE_FOR_MESSAGE)
 }

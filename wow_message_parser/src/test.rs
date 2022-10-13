@@ -1,12 +1,12 @@
 use crate::error_printer::{
-    COMPLEX_NOT_FOUND, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, MISSING_ENUMERATOR, NO_VERSIONS,
-    RECURSIVE_TYPE,
+    COMPLEX_NOT_FOUND, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, INCORRECT_OPCODE_FOR_MESSAGE,
+    MISSING_ENUMERATOR, NO_VERSIONS, RECURSIVE_TYPE,
 };
 use crate::file_utils::write_string_to_file;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{Version, WorldVersion};
 use crate::rust_printer::{print_enum, print_flag, print_struct, Writer};
-use crate::{load_files, parser, wowm_directory, ParsedObjects};
+use crate::{load_files, parser, print_message_stats, wowm_directory, ParsedObjects};
 use std::fs::read_to_string;
 use std::panic;
 use std::path::Path;
@@ -21,7 +21,7 @@ fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F, error_code: i32) 
     panic::set_hook(prev_hook);
 
     match result {
-        Ok(_) => panic!(),
+        Ok(_) => panic!("test should have panicked and gotten caught but did not"),
         Err(e) => {
             assert_eq!(
                 e.downcast::<String>().unwrap(),
@@ -492,5 +492,18 @@ fn enum_equals_must_err() {
             o.into_objects();
         },
         ENUM_HAS_BITWISE_AND,
+    );
+}
+
+#[test]
+fn incorrect_opcode_errors() {
+    should_panic(
+        || {
+            let mut o = ParsedObjects::empty();
+            load_files(Path::new("tests/must_err/incorrect_opcode.wowm"), &mut o);
+            let o = o.into_objects();
+            print_message_stats(&o);
+        },
+        INCORRECT_OPCODE_FOR_MESSAGE,
     );
 }

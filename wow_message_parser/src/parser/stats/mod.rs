@@ -2,6 +2,7 @@ pub(crate) mod tbc_messages;
 pub(crate) mod vanilla_messages;
 pub(crate) mod wrath_messages;
 
+use crate::error_printer::incorrect_opcode_for_message;
 use crate::parser::types::container::ContainerType;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::Tags;
@@ -81,14 +82,16 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
                 | ContainerType::CMsg(i)
                 | ContainerType::SMsg(i) => {
                     if i as usize != container.opcode {
-                        panic!(
-                            "Found opcode '{}' for container '{:?}' '{}', but it has '{}'",
-                            i, version, container.name, container.opcode
+                        incorrect_opcode_for_message(
+                            container.name,
+                            s.file_info(),
+                            container.opcode,
+                            i,
                         );
                     }
                     assert_eq!(i as usize, container.opcode);
                 }
-                _ => panic!("invalid for counting"),
+                _ => unreachable!("not a message"),
             }
 
             container.definition = !s.tags().unimplemented();

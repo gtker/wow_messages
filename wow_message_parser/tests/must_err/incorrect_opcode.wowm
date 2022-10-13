@@ -1,0 +1,5 @@
+cmsg CMSG_AUTH_SESSION = 0x1337 {
+    u8 basic;
+} {
+    versions = "1.12";
+}
