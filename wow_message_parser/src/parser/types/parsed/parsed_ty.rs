@@ -156,7 +156,7 @@ impl ParsedType {
                             sizes.inc(min * c.minimum(), 0);
                             sizes.inc(0, max.saturating_mul(c.maximum()));
                         } else {
-                            panic!("unable to find ty: '{}' for tags: '{:#?}'", s, e.tags())
+                            complex_not_found(e.name(), e.tags(), &e.file_info, s);
                         }
                     }
                 }
