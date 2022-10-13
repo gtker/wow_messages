@@ -22,6 +22,7 @@ Run `cargo run -p wow_message_parser && cargo test` to "compile" all libraries a
 The following environment variables can be used with the parser:
 
 * `WOWM_WIRESHARK`: must point to a valid `packet-woww.c` in a wireshark repo. This file will then be modified with the auto generated Wireshark messages.
+* `WOWM_PRINT_TEST_ERRORS`: when set errors testing that the application exists with a message will print error messages.
 
 ## License
 

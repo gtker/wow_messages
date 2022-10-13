@@ -56,6 +56,10 @@ fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     const TEST: bool = true;
 
     if TEST {
+        if std::env::var("WOWM_PRINT_TEST_ERRORS").is_ok() {
+            s.print();
+        }
+
         panic!("{}", code);
     } else {
         s.print();
