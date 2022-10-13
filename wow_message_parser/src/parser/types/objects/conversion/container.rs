@@ -1,4 +1,4 @@
-use crate::error_printer::{complex_not_found, variable_in_if_not_found};
+use crate::error_printer::{complex_not_found, enum_has_bitwise_and, variable_in_if_not_found};
 use crate::file_info::FileInfo;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
@@ -350,7 +350,12 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
                             match c {
                                 Equation::Equals { .. } | Equation::NotEquals { .. } => {}
                                 Equation::BitwiseAnd { .. } => {
-                                    panic!("enum has bitwise and")
+                                    enum_has_bitwise_and(
+                                        e.name(),
+                                        statement.name(),
+                                        definer.name(),
+                                        &e.file_info,
+                                    );
                                 }
                             }
                         }

@@ -1,4 +1,6 @@
-use crate::error_printer::{COMPLEX_NOT_FOUND, MISSING_ENUMERATOR, RECURSIVE_TYPE};
+use crate::error_printer::{
+    COMPLEX_NOT_FOUND, ENUM_HAS_BITWISE_AND, MISSING_ENUMERATOR, RECURSIVE_TYPE,
+};
 use crate::file_utils::write_string_to_file;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{Version, WorldVersion};
@@ -463,9 +465,13 @@ fn flag_equals_must_err() {
 }
 
 #[test]
-#[should_panic]
 fn enum_equals_must_err() {
-    let mut o = ParsedObjects::empty();
-    load_files(Path::new("tests/error_enum.wowm"), &mut o);
-    o.into_objects();
+    should_panic(
+        || {
+            let mut o = ParsedObjects::empty();
+            load_files(Path::new("tests/error_enum.wowm"), &mut o);
+            o.into_objects();
+        },
+        ENUM_HAS_BITWISE_AND,
+    );
 }
