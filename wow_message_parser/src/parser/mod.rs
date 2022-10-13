@@ -18,7 +18,6 @@ use crate::parser::types::parsed::parsed_struct_member::{
 };
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::utility::parse_value;
-use crate::path_utils::path_to_fileinfo;
 use crate::rust_printer::DefinerType;
 use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD, UNIMPLEMENTED};
 use types::container::ContainerType;
@@ -98,12 +97,10 @@ pub(crate) fn parse_file(filename: &Path) -> ParsedObjects {
         .expect("unable to find statements")
         .into_inner();
 
-    let filename = path_to_fileinfo(filename);
-
     parse_statements(&mut statements, commands.tags(), &filename)
 }
 
-fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, filename: &str) -> ParsedObjects {
+fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, path: &Path) -> ParsedObjects {
     let mut enums = Vec::new();
     let mut flags = Vec::new();
     let mut structs = Vec::new();
@@ -111,8 +108,8 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, filename: &str) -
     let mut tests = Vec::new();
 
     for statement in statements {
-        let start_pos = statement.as_span().start_pos().line_col();
-        let file_info = FileInfo::new(filename, start_pos);
+        let pos = statement.as_span().start_pos().line_col();
+        let file_info = FileInfo::new(path.to_owned(), pos.0, pos.1);
         match statement.as_rule() {
             Rule::definer => {
                 let mut statement = statement.into_inner();
