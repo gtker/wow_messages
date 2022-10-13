@@ -1,0 +1,10 @@
+enum MissingEnumerator : u8 {
+    EXISTS = 0;
+} { versions = "1.12"; }
+
+struct MissingInfo {
+    MissingEnumerator m;
+    if (m == DOES_NOT_EXIST) {
+        u8 basic;
+    }
+} { versions = "1.12"; }

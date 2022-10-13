@@ -1,0 +1,3 @@
+struct NoVersion {
+    u8 basic;
+}

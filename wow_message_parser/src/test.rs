@@ -8,7 +8,7 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{Version, WorldVersion};
 use crate::path_utils::parser_test_directory;
 use crate::rust_printer::{print_enum, print_flag, print_struct, Writer};
-use crate::{load_files, parser, print_message_stats, wowm_directory, ParsedObjects};
+use crate::{load_files, print_message_stats, ParsedObjects};
 use std::fs::read_to_string;
 use std::panic;
 use std::path::Path;
@@ -420,59 +420,27 @@ fn sized_cstring() {
 
 #[test]
 fn missing_ty_errors() {
-    let s = "\
-struct MissingInfo {
-    MissingTy m;
-} { versions = \"1.12\"; }";
-
-    should_panic(
-        || parser::parse_contents(s, &wowm_directory("test")).into_objects(),
-        COMPLEX_NOT_FOUND,
-    );
+    should_panic(|| must_err_load("missing_type.wowm"), COMPLEX_NOT_FOUND);
 }
 
 #[test]
 fn missing_enumerator_errors() {
-    let s = "\
-enum MissingEnumerator : u8 {
-    EXISTS = 0;
-} { versions = \"1.12\"; }
-
-struct MissingInfo {
-    MissingEnumerator m;
-    if (m == DOES_NOT_EXIST) {
-        u8 basic;
-    }
-} { versions = \"1.12\"; }";
-
     should_panic(
-        || parser::parse_contents(s, &wowm_directory("test")).into_objects(),
+        || must_err_load("missing_enumerator.wowm"),
         MISSING_ENUMERATOR,
     );
 }
 
 #[test]
 fn recursive_types_errors() {
-    let s = "\
-struct Recursive {
-    Recursive m;
-} { versions = \"1.12\"; }";
-
-    should_panic(
-        || parser::parse_contents(s, &wowm_directory("test")).into_objects(),
-        RECURSIVE_TYPE,
-    );
+    should_panic(|| must_err_load("recursive_types.wowm"), RECURSIVE_TYPE);
 }
 
 #[test]
 fn missing_versions() {
-    let s = "\
-struct NoVersion {
-    u8 basic;
-}";
     should_panic(
         || {
-            parser::parse_contents(s, &wowm_directory("test")).into_objects();
+            must_err_load("no_version.wowm");
         },
         NO_VERSIONS,
     );

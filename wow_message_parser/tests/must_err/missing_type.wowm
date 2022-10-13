@@ -1,0 +1,3 @@
+struct MissingInfo {
+    MissingTy m;
+} { versions = "1.12"; }

@@ -1,0 +1,3 @@
+struct Recursive {
+    Recursive m;
+} { versions = "1.12"; }
