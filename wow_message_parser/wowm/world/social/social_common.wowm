@@ -311,5 +311,7 @@ enum UnitStandState : u8 {
     CUSTOM = 9 {
         comment = "Used for Cthun according to cmangos.";
     }
+} {
+    versions = "3.3.5";
 }
 
