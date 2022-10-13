@@ -1,3 +1,5 @@
+use crate::error_printer::complex_not_found;
+use crate::file_info::FileInfo;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
@@ -27,12 +29,13 @@ pub(crate) fn verify_and_set_members(
     tags: &Tags,
     containers: &[ParsedContainer],
     definers: &[Definer],
+    fileinfo: &FileInfo,
 ) {
     set_used_as_size_in(members);
 
     set_verified_values(members, definers);
 
-    check_complex_types_exist(members, containers, definers, tags);
+    check_complex_types_exist(members, containers, definers, tags, fileinfo);
 }
 
 fn parsed_type_to_type(
@@ -259,6 +262,7 @@ fn contains_complex_type(
     ty_name: &str,
     tags: &Tags,
     struct_name: &str,
+    struct_fileinfo: &FileInfo,
 ) {
     for e in definers {
         if e.name() == ty_name && e.tags().fulfills_all(tags) {
@@ -272,13 +276,7 @@ fn contains_complex_type(
         }
     }
 
-    panic!(
-        "Complex type not found: '{}' for object: '{}' for versions logon: '{:?}', versions: '{:?}'",
-        ty_name,
-        struct_name,
-        tags.logon_versions().collect::<Vec<_>>(),
-        tags.versions().collect::<Vec<_>>()
-    );
+    complex_not_found(struct_name, tags, struct_fileinfo, ty_name);
 }
 
 fn check_complex_types_exist(
@@ -286,16 +284,17 @@ fn check_complex_types_exist(
     containers: &[ParsedContainer],
     definers: &[Definer],
     tags: &Tags,
+    fileinfo: &FileInfo,
 ) {
     for d in all_definitions(members) {
         match &d.ty() {
             ParsedType::Array(a) => {
                 if let ParsedArrayType::Complex(c) = &a.ty() {
-                    contains_complex_type(containers, definers, c, tags, d.name())
+                    contains_complex_type(containers, definers, c, tags, d.name(), fileinfo)
                 }
             }
             ParsedType::Identifier { s: i, .. } => {
-                contains_complex_type(containers, definers, i, tags, d.name());
+                contains_complex_type(containers, definers, i, tags, d.name(), fileinfo);
 
                 match d.value() {
                     None => {}

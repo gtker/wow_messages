@@ -39,6 +39,7 @@ mod wowm_printer;
 
 mod path_utils;
 
+pub mod error_printer;
 #[cfg(test)]
 mod test;
 

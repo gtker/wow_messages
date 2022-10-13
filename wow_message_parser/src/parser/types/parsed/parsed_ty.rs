@@ -1,3 +1,4 @@
+use crate::error_printer::complex_not_found;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
@@ -105,11 +106,7 @@ impl ParsedType {
                 } else if let Some(c) = get_container(containers, s, e.tags()) {
                     sizes += c.create_sizes(containers, definers);
                 } else {
-                    panic!(
-                        "unable to find identifier: '{}' with tags: '{:?}'",
-                        s,
-                        e.tags()
-                    );
+                    complex_not_found(e.name(), e.tags(), &e.file_info, s);
                 }
             }
             ParsedType::Array(array) => {

@@ -59,7 +59,7 @@ pub(crate) fn parsed_container_to_container(
 
     check_if_statement_operators(&p, definers);
 
-    verify_and_set_members(&mut p.members, &p.tags, containers, definers);
+    verify_and_set_members(&mut p.members, &p.tags, containers, definers, &p.file_info);
 
     let members =
         container::parsed_members_to_members(&p, p.members.clone(), containers, definers, p.tags());
