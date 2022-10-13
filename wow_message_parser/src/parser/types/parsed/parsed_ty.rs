@@ -1,4 +1,4 @@
-use crate::error_printer::complex_not_found;
+use crate::error_printer::{complex_not_found, recursive_type};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
@@ -95,6 +95,10 @@ impl ParsedType {
                 }
             }
             ParsedType::Identifier { s, upcast } => {
+                if s == e.name() {
+                    recursive_type(e.name(), &e.file_info);
+                }
+
                 if get_definer(definers, s, e.tags()).is_some() {
                     let s = if let Some(upcast) = upcast {
                         upcast.size()

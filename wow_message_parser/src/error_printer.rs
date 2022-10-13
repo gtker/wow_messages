@@ -4,36 +4,44 @@ use std::fmt::Write;
 use std::process::exit;
 
 const COMPLEX_NOT_FOUND: i32 = 1;
+const RECURSIVE_TYPE: i32 = 2;
 
 pub struct ErrorWriter {
     inner: String,
 }
 
 impl ErrorWriter {
-    pub fn new(msg: &str) -> Self {
+    pub(crate) fn new(msg: &str) -> Self {
         let mut s = Self {
             inner: String::with_capacity(8000),
         };
 
         s.wln(format!("WOWM ERROR: {}", msg));
+        s.newline();
 
         s
     }
 
-    pub fn w(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn fileinfo(&mut self, fileinfo: &FileInfo, reason: impl AsRef<str>) {
+        self.wln(format!("{}:{}:", fileinfo.name(), fileinfo.start_line()));
+        self.wln(reason);
+        self.newline();
+    }
+
+    pub(crate) fn w(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
     }
 
-    pub fn newline(&mut self) {
+    pub(crate) fn newline(&mut self) {
         self.inner.write_char('\n').unwrap();
     }
 
-    pub fn wln(&mut self, s: impl AsRef<str>) {
+    pub(crate) fn wln(&mut self, s: impl AsRef<str>) {
         self.w(s);
         self.newline();
     }
 
-    pub fn print(&self) {
+    pub(crate) fn print(&self) {
         eprintln!("{}", self.inner)
     }
 }
@@ -61,16 +69,11 @@ pub(crate) fn complex_not_found(
 ) -> ! {
     let mut s = ErrorWriter::new("Container has complex type that can not be found.");
 
-    s.wln(format!(
-        "{}:{}:",
-        struct_fileinfo.name(),
-        struct_fileinfo.start_line()
-    ));
-    s.wln(format!(
-        "    Type '{}' needs type '{}'",
-        struct_name, ty_name
-    ));
-    s.newline();
+    s.fileinfo(
+        struct_fileinfo,
+        format!("    Type '{}' needs type '{}'", struct_name, ty_name),
+    );
+
     s.wln(format!("    '{}' needs to cover versions:", ty_name));
     if !struct_tags.logon_versions().collect::<Vec<_>>().is_empty() {
         s.wln("    Login:");
@@ -100,4 +103,12 @@ pub(crate) fn variable_in_if_not_found(variable_name: &str, name: &str, ty_name:
         "unable to find enumerator with name '{}' in variable '{}' with type '{}'",
         name, variable_name, ty_name
     )
+}
+
+pub(crate) fn recursive_type(name: &str, file_info: &FileInfo) {
+    let mut s = ErrorWriter::new("Type contains itself which leads to infinite recursion.");
+
+    s.fileinfo(file_info, format!("    {} contains itself.", name));
+
+    wowm_exit(s, RECURSIVE_TYPE);
 }

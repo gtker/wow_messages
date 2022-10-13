@@ -429,3 +429,13 @@ struct MissingInfo {
 
     should_panic(|| parser::parse_contents(s, &wowm_directory("test")).into_objects());
 }
+
+#[test]
+fn recursive_types_errors() {
+    let s = "\
+struct Recursive {
+    Recursive m;
+} { versions = \"1.12\"; }";
+
+    should_panic(|| parser::parse_contents(s, &wowm_directory("test")).into_objects());
+}
