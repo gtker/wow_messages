@@ -1,5 +1,5 @@
 use crate::error_printer::{
-    COMPLEX_NOT_FOUND, ENUM_HAS_BITWISE_AND, MISSING_ENUMERATOR, RECURSIVE_TYPE,
+    COMPLEX_NOT_FOUND, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, MISSING_ENUMERATOR, RECURSIVE_TYPE,
 };
 use crate::file_utils::write_string_to_file;
 use crate::parser::types::objects::Objects;
@@ -457,11 +457,15 @@ struct Recursive {
 }
 
 #[test]
-#[should_panic]
 fn flag_equals_must_err() {
-    let mut o = ParsedObjects::empty();
-    load_files(Path::new("tests/error_flag.wowm"), &mut o);
-    o.into_objects();
+    should_panic(
+        || {
+            let mut o = ParsedObjects::empty();
+            load_files(Path::new("tests/error_flag.wowm"), &mut o);
+            o.into_objects();
+        },
+        FLAG_HAS_EQUALS,
+    );
 }
 
 #[test]

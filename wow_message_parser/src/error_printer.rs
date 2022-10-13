@@ -7,6 +7,7 @@ pub(crate) const COMPLEX_NOT_FOUND: i32 = 1;
 pub(crate) const RECURSIVE_TYPE: i32 = 2;
 pub(crate) const MISSING_ENUMERATOR: i32 = 3;
 pub(crate) const ENUM_HAS_BITWISE_AND: i32 = 4;
+pub(crate) const FLAG_HAS_EQUALS: i32 = 5;
 
 pub struct ErrorWriter {
     inner: String,
@@ -129,9 +130,22 @@ pub(crate) fn enum_has_bitwise_and(
     enum_ty_name: &str,
     file_info: &FileInfo,
 ) {
-    let mut s = ErrorWriter::new("Enum is used with bitwise and (&) in if statement.");
+    let mut s = ErrorWriter::new("Enum is used with bitwise and (&) in if statement instead of equals (==) or not equals (!=).");
 
     s.fileinfo(file_info, format!("Enum '{enum_ty_name}' is used in if statement as bitwise and (&) as variable '{variable_name}' in type '{ty_name}'", ));
 
     wowm_exit(s, ENUM_HAS_BITWISE_AND);
+}
+
+pub(crate) fn flag_used_as_equals_or_not_equals(
+    ty_name: &str,
+    variable_name: &str,
+    enum_ty_name: &str,
+    file_info: &FileInfo,
+) {
+    let mut s = ErrorWriter::new("Flag is used as either equals (==) or not equals (!=) in if statement instead of bitwise and (&).");
+
+    s.fileinfo(file_info, format!("Flag '{enum_ty_name}' is used in if statement as eqauals (==) or not equals (!=) as variable '{variable_name}' in type '{ty_name}'", ));
+
+    wowm_exit(s, FLAG_HAS_EQUALS);
 }

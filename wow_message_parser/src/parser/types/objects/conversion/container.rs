@@ -1,4 +1,7 @@
-use crate::error_printer::{complex_not_found, enum_has_bitwise_and, variable_in_if_not_found};
+use crate::error_printer::{
+    complex_not_found, enum_has_bitwise_and, flag_used_as_equals_or_not_equals,
+    variable_in_if_not_found,
+};
 use crate::file_info::FileInfo;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
@@ -364,7 +367,12 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
                         for c in statement.get_conditional().equations() {
                             match c {
                                 Equation::Equals { .. } | Equation::NotEquals { .. } => {
-                                    panic!("flag has equals or not equals")
+                                    flag_used_as_equals_or_not_equals(
+                                        e.name(),
+                                        statement.name(),
+                                        definer.name(),
+                                        &e.file_info,
+                                    );
                                 }
                                 Equation::BitwiseAnd { .. } => {}
                             }
