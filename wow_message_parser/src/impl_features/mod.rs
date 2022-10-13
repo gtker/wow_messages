@@ -250,7 +250,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
 }
 
 fn add_version(tags: &Tags, f: &mut ImplFeatures) {
-    if tags.has_world_versions() {
+    if tags.has_world_version() {
         f.add(Feature::WorldVersion);
     } else {
         f.add(Feature::LoginVersion);

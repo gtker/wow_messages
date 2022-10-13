@@ -1,5 +1,6 @@
 use crate::error_printer::{
-    COMPLEX_NOT_FOUND, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, MISSING_ENUMERATOR, RECURSIVE_TYPE,
+    COMPLEX_NOT_FOUND, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, MISSING_ENUMERATOR, NO_VERSIONS,
+    RECURSIVE_TYPE,
 };
 use crate::file_utils::write_string_to_file;
 use crate::parser::types::objects::Objects;
@@ -453,6 +454,20 @@ struct Recursive {
     should_panic(
         || parser::parse_contents(s, &wowm_directory("test")).into_objects(),
         RECURSIVE_TYPE,
+    );
+}
+
+#[test]
+fn missing_versions() {
+    let s = "\
+struct NoVersion {
+    u8 basic;
+}";
+    should_panic(
+        || {
+            parser::parse_contents(s, &wowm_directory("test")).into_objects();
+        },
+        NO_VERSIONS,
     );
 }
 

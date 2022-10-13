@@ -1,3 +1,4 @@
+use crate::error_printer::object_has_no_versions;
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::container::{
@@ -55,6 +56,8 @@ pub(crate) fn parsed_container_to_container(
 ) -> Container {
     let sizes = p.create_sizes(containers, definers);
 
+    let tags = parsed_tags_to_tags(&p.tags, p.name(), &p.file_info);
+
     let only_has_io_error = p.recursive_only_has_io_errors(containers, definers);
 
     check_if_statement_operators(&p, definers);
@@ -69,13 +72,21 @@ pub(crate) fn parsed_container_to_container(
     Container::new(
         p.name,
         members,
-        p.tags,
+        tags,
         p.object_type,
         p.file_info,
         sizes,
         only_has_io_error,
         rust_object_view,
     )
+}
+
+pub(crate) fn parsed_tags_to_tags(tags: &Tags, ty_name: &str, file_info: &FileInfo) -> Tags {
+    if !tags.has_login_version() && !tags.has_world_version() {
+        object_has_no_versions(ty_name, file_info)
+    }
+
+    tags.clone()
 }
 
 pub(crate) fn parsed_containers_to_container(

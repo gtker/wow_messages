@@ -8,6 +8,7 @@ pub(crate) const RECURSIVE_TYPE: i32 = 2;
 pub(crate) const MISSING_ENUMERATOR: i32 = 3;
 pub(crate) const ENUM_HAS_BITWISE_AND: i32 = 4;
 pub(crate) const FLAG_HAS_EQUALS: i32 = 5;
+pub(crate) const NO_VERSIONS: i32 = 6;
 
 pub struct ErrorWriter {
     inner: String,
@@ -152,4 +153,15 @@ pub(crate) fn flag_used_as_equals_or_not_equals(
     s.fileinfo(file_info, format!("Flag '{enum_ty_name}' is used in if statement as eqauals (==) or not equals (!=) as variable '{variable_name}' in type '{ty_name}'", ));
 
     wowm_exit(s, FLAG_HAS_EQUALS);
+}
+
+pub(crate) fn object_has_no_versions(ty_name: &str, file_info: &FileInfo) {
+    let mut s = ErrorWriter::new("Object has no versions.");
+
+    s.fileinfo(
+        file_info,
+        format!("Object '{ty_name}' does not have either a login version or a world version."),
+    );
+
+    wowm_exit(s, NO_VERSIONS)
 }

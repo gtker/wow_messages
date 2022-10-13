@@ -163,7 +163,7 @@ impl IrTags {
                 Some(IrVersions::Login(
                     tags.logon_versions().map(|a| a.into()).collect(),
                 ))
-            } else if tags.has_world_versions() {
+            } else if tags.has_world_version() {
                 Some(IrVersions::World(
                     tags.versions().map(|a| a.into()).collect(),
                 ))

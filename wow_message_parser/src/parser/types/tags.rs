@@ -245,7 +245,7 @@ impl Tags {
         self.world_versions.clone().into_iter()
     }
 
-    pub(crate) fn has_world_versions(&self) -> bool {
+    pub(crate) fn has_world_version(&self) -> bool {
         self.versions().next().is_some()
     }
 
@@ -271,18 +271,6 @@ impl Tags {
         let (first, _) = self.first_and_main_versions();
 
         first
-    }
-
-    pub(crate) fn has_world_version(&self) -> bool {
-        if self.has_world_versions() {
-            assert!(!self.has_logon_versions());
-            true
-        } else if self.has_logon_versions() {
-            assert!(!self.has_world_versions());
-            false
-        } else {
-            panic!("Object doesn't have either login or world versions")
-        }
     }
 
     /// self is able to fulfill all version obligations for tags
