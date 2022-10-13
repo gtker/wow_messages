@@ -995,33 +995,9 @@ impl ClientOpcodeMessage {
 
     pub fn movement_info(&self) -> Option<&MovementInfo> {
         match self {
-            Self::MSG_MOVE_START_FORWARD(c) => Some(&c.info),
-            Self::MSG_MOVE_START_BACKWARD(c) => Some(&c.info),
-            Self::MSG_MOVE_STOP(c) => Some(&c.info),
-            Self::MSG_MOVE_START_STRAFE_LEFT(c) => Some(&c.info),
-            Self::MSG_MOVE_START_STRAFE_RIGHT(c) => Some(&c.info),
-            Self::MSG_MOVE_STOP_STRAFE(c) => Some(&c.info),
-            Self::MSG_MOVE_JUMP(c) => Some(&c.info),
-            Self::MSG_MOVE_START_TURN_LEFT(c) => Some(&c.info),
-            Self::MSG_MOVE_START_TURN_RIGHT(c) => Some(&c.info),
-            Self::MSG_MOVE_STOP_TURN(c) => Some(&c.info),
-            Self::MSG_MOVE_START_PITCH_UP(c) => Some(&c.info),
-            Self::MSG_MOVE_START_PITCH_DOWN(c) => Some(&c.info),
-            Self::MSG_MOVE_STOP_PITCH(c) => Some(&c.info),
-            Self::MSG_MOVE_SET_RUN_MODE(c) => Some(&c.info),
-            Self::MSG_MOVE_SET_WALK_MODE(c) => Some(&c.info),
-            Self::MSG_MOVE_FALL_LAND(c) => Some(&c.info),
-            Self::MSG_MOVE_START_SWIM(c) => Some(&c.info),
-            Self::MSG_MOVE_STOP_SWIM(c) => Some(&c.info),
-            Self::MSG_MOVE_SET_FACING(c) => Some(&c.info),
-            Self::MSG_MOVE_SET_PITCH(c) => Some(&c.info),
-            Self::MSG_MOVE_HEARTBEAT(c) => Some(&c.info),
             Self::CMSG_MOVE_FALL_RESET(c) => Some(&c.info),
             Self::CMSG_MOVE_SET_FLY(c) => Some(&c.info),
-            Self::MSG_MOVE_START_ASCEND(c) => Some(&c.info),
-            Self::MSG_MOVE_STOP_ASCEND(c) => Some(&c.info),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => Some(&c.info),
-            Self::MSG_MOVE_START_DESCEND(c) => Some(&c.info),
             _ => None,
         }
     }

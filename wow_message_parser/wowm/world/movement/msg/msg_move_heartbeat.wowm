@@ -37,6 +37,7 @@ cmsg MSG_MOVE_HEARTBEAT_Client = 0x00EE {
 }
 
 cmsg MSG_MOVE_HEARTBEAT_Client = 0x00EE {
+    PackedGuid guid;
     MovementInfo info;
 } {
     versions = "3.3.5";

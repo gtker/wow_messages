@@ -59,7 +59,7 @@ mod test {
          0xC3, 0xF9, 0x0F, 0xA7, 0x42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_left.wowm` line 19.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_left.wowm` line 20.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_MOVE_START_TURN_LEFT_Client0() {
@@ -96,7 +96,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_left.wowm` line 19.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_left.wowm` line 20.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_START_TURN_LEFT_Client0() {
@@ -133,7 +133,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_left.wowm` line 19.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_turn_left.wowm` line 20.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_START_TURN_LEFT_Client0() {

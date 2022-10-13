@@ -5,6 +5,7 @@ cmsg MSG_MOVE_START_DESCEND_Client = 0x3A7 {
 }
 
 cmsg MSG_MOVE_START_DESCEND_Client = 0x3A7 {
+    PackedGuid guid;
     MovementInfo info;
 } {
     versions = "3.3.5";

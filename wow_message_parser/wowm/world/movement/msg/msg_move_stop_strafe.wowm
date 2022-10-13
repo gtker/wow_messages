@@ -11,6 +11,7 @@ cmsg MSG_MOVE_STOP_STRAFE_Client = 0x00BA {
 }
 
 cmsg MSG_MOVE_STOP_STRAFE_Client = 0x00BA {
+    PackedGuid guid;
     MovementInfo info;
 } {
     versions = "3.3.5";

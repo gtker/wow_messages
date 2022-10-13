@@ -11,6 +11,7 @@ cmsg MSG_MOVE_STOP_TURN_Client = 0x00BE {
 }
 
 cmsg MSG_MOVE_STOP_TURN_Client = 0x00BE {
+    PackedGuid guid;
     MovementInfo info;
 } {
     versions = "3.3.5";
