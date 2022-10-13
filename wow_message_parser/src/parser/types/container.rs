@@ -491,7 +491,7 @@ impl Container {
             }
         }
 
-        panic!("unable to find type {}", variable_name)
+        panic!("unable to find variable name {}", variable_name)
     }
 
     pub(crate) fn tests(&self, o: &Objects) -> Vec<TestCase> {
